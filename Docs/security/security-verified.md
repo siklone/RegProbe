@@ -443,6 +443,6 @@ Do not edit manually.
 
 | ID | Name | Changes | Risk | Source |
 | --- | --- | --- | --- | --- |
-| <a id="security.disable-system-mitigations"></a> `security.disable-system-mitigations` | Disable System Mitigations | Imports the documented Exploit Protection XML baseline that disables the researched system-wide mitigation bundle. | Risky | `engine/Tweaks/Commands/Security/DisableSystemMitigationsTweak.cs#L33` |
+| <a id="security.disable-system-mitigations"></a> `security.disable-system-mitigations` | Disable System Mitigations | Imports the documented Exploit Protection XML baseline that disables the researched system-wide mitigation bundle. | Risky | `engine/Tweaks/Commands/Security/DisableSystemMitigationsTweak.cs#L34` |
 | <a id="security.disable-uac"></a> `security.disable-uac` | Disable UAC (Full) | Disables User Account Control entirely. Requires a reboot and severely lowers system security. | Risky | `engine/Tweaks/Commands/Security/DisableUacFullTweak.cs#L18` |
 <!-- TWEAK INDEX END -->

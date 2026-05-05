@@ -29,7 +29,7 @@ public static class CPUPowerTweaks
         return new RegistryValueBatchTweak(
             id: "power.disable-cpu-parking",
             name: "Disable CPU Core Parking",
-            description: "Prevents Windows from parking CPU cores, keeping all cores active. Reduces latency and improves responsiveness for gaming and real-time applications.",
+            description: "Writes the core-parking-related Control\\Power registry values used by this tweak, including LatencyToleranceParked, LatencyToleranceSoftParked, Class1InitialUnparkCount, and MultiparkGranularity.",
             risk: TweakRiskLevel.Safe,
             entries: entries,
             registryAccessor: registryAccessor,
@@ -56,7 +56,7 @@ public static class CPUPowerTweaks
         return new RegistryValueBatchTweak(
             id: "power.disable-cpu-idle-states",
             name: "Disable CPU Idle States (C-States)",
-            description: "Disables CPU idle states and C-States for minimum latency. Increases power consumption but improves responsiveness. Recommended for gaming/audio production.",
+            description: "Writes the idle-state-related Control\\Power registry values used by this tweak. This changes power behavior and can increase power draw.",
             risk: TweakRiskLevel.Advanced,
             entries: entries,
             registryAccessor: registryAccessor,
@@ -85,8 +85,8 @@ public static class CPUPowerTweaks
 
         return new RegistryValueBatchTweak(
             id: "power.optimize-cpu-boost",
-            name: "Optimize CPU Performance Boost",
-            description: "Sets the active power plan to a more aggressive documented CPU boost profile.",
+            name: "Apply Processor Performance Registry Bundle",
+            description: "Writes the PerfBoostAtGuaranteed, HighPerfDurationBoot, LatencyToleranceDefault, and PerfCalculateActualUtilization values under Control\\Power.",
             risk: TweakRiskLevel.Safe,
             entries: entries,
             registryAccessor: registryAccessor,

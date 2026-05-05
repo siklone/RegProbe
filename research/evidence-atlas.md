@@ -87,22 +87,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config, decompiled-pseudocode |
-| Matched tokens | beep, start |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / peripheral/desc.md | [https://github.com/nohuto/win-config/blob/main/peripheral/desc.md](https://github.com/nohuto/win-config/blob/main/peripheral/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / system/assets/disable-services-drivers-suboption-audit.md | [https://github.com/nohuto/win-config/blob/main/system/assets/disable-services-drivers-suboption-audit.md](https://github.com/nohuto/win-config/blob/main/system/assets/disable-services-drivers-suboption-audit.md) | Matched 2 audit token(s) in win-config. |
-| decompiled-pseudocode / USBHUB3 | [https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3](https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3) | USB hub pseudocode relevant to USB and peripheral registry behavior. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -142,8 +133,8 @@ Nohuto lineage references:
 | `runtime-beep-registry-diff` | `runtime-diff` | `VM runtime diff` | Guest reversible probe - Beep driver start mode | [evidence/files/vm/beep_start_toggle_out.txt](../evidence/files/vm-tooling-staging/beep_start_toggle_out.txt) | `high` | value, behavior, version-scope |
 | `app-audio-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-audio-disable-beep` | `repo-doc` | `Current repo docs` | Repo source note for audio.disable-beep | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | path, value, ui-mapping |
-| `vm-audio.disable-beep-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for Start | [evidence/records/captures/audio-disable-beep-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/audio-disable-beep-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/audio-disable-beep-etw-20260424-batch2/audio-disable-beep-etw-20260424-batch2-summary.json](../evidence/records/raw/etw-stackwalk/audio-disable-beep-etw-20260424-batch2/audio-disable-beep-etw-20260424-batch2-summary.json) and [evidence/records/raw/etw-stackwalk/audio-disable-beep-etw-20260424-batch2/audio-disable-beep-etw-20260424-batch2-stage.json](../evidence/records/raw/etw-stackwalk/audio-disable-beep-etw-20260424-batch2/audio-disable-beep-etw-20260424-batch2-stage.json) | `low` | behavior, version-scope |
-| `vm-audio.disable-beep-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for Beep | [evidence/records/raw/ghidra/ghidra-audio-disable-beep-20260424-batch2/summary.json](../evidence/records/raw/ghidra/ghidra-audio-disable-beep-20260424-batch2/summary.json) | `low` | version-scope |
+| `vm-audio.disable-beep-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for Start | [evidence/captures/audio-disable-beep-etw-stackwalk-attempt-20260424.json](../evidence/captures/audio-disable-beep-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/audio-disable-beep-etw-20260424-batch2/audio-disable-beep-etw-20260424-batch2-summary.json](../evidence/raw/etw-stackwalk/audio-disable-beep-etw-20260424-batch2/audio-disable-beep-etw-20260424-batch2-summary.json) and [evidence/raw/etw-stackwalk/audio-disable-beep-etw-20260424-batch2/audio-disable-beep-etw-20260424-batch2-stage.json](../evidence/raw/etw-stackwalk/audio-disable-beep-etw-20260424-batch2/audio-disable-beep-etw-20260424-batch2-stage.json) | `low` | behavior, version-scope |
+| `vm-audio.disable-beep-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for Beep | [evidence/raw/ghidra/ghidra-audio-disable-beep-20260424-batch2/summary.json](../evidence/raw/ghidra/ghidra-audio-disable-beep-20260424-batch2/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -211,22 +202,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config, decompiled-pseudocode |
-| Matched tokens | multimedia, audio, devicecpl, showdisconnecteddevices |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / visibility/desc.md | [https://github.com/nohuto/win-config/blob/main/visibility/desc.md](https://github.com/nohuto/win-config/blob/main/visibility/desc.md) | Matched 4 audit token(s) in win-config. |
-| win-config / peripheral/desc.md | [https://github.com/nohuto/win-config/blob/main/peripheral/desc.md](https://github.com/nohuto/win-config/blob/main/peripheral/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / power/desc.md | [https://github.com/nohuto/win-config/blob/main/power/desc.md](https://github.com/nohuto/win-config/blob/main/power/desc.md) | Matched 2 audit token(s) in win-config. |
-| decompiled-pseudocode / USBHUB3 | [https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3](https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3) | USB hub pseudocode relevant to USB and peripheral registry behavior. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -261,11 +243,11 @@ Nohuto lineage references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `procmon-audio-show-disconnected-devices` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Sound control panel ShowDisconnectedDevices runtime reads | [evidence/records/raw/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md](../evidence/records/raw/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md) and [evidence/records/raw/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md](../evidence/records/raw/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md) | `high` | path, value, behavior, ui-mapping |
-| `ghidra-mmsys-devicecpl-flags` | `ghidra-headless` | `unspecified` | Our Ghidra decompilation - mmsys.cpl DeviceCpl flag handlers | [evidence/records/raw/ghidra/audio.show-disconnected-devices/audio-devicecpl-ghidra.md](../evidence/records/raw/ghidra/audio.show-disconnected-devices/audio-devicecpl-ghidra.md) | `high` | path, behavior, ui-mapping |
+| `procmon-audio-show-disconnected-devices` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Sound control panel ShowDisconnectedDevices runtime reads | [evidence/raw/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md](../evidence/raw/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md) and [evidence/raw/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md](../evidence/raw/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md) | `high` | path, value, behavior, ui-mapping |
+| `ghidra-mmsys-devicecpl-flags` | `ghidra-headless` | `unspecified` | Our Ghidra decompilation - mmsys.cpl DeviceCpl flag handlers | [evidence/raw/ghidra/audio.show-disconnected-devices/audio-devicecpl-ghidra.md](../evidence/raw/ghidra/audio.show-disconnected-devices/audio-devicecpl-ghidra.md) | `high` | path, behavior, ui-mapping |
 | `runtime-audio-show-disconnected-devices-v31` | `wpr-trace` | `unspecified` | Win25H2Clean v3.1 runtime lane - Audio DeviceCpl ShowDisconnectedDevices | [evidence/files/vm/audio-devicecpl-runtime-showdisconnecteddevices-20260327-104736/summary.json](../evidence/files/vm-tooling-staging/audio-devicecpl-runtime-showdisconnecteddevices-20260327-104736/summary.json) and [evidence/files/vm/audio-devicecpl-runtime-showdisconnecteddevices-20260327-104736/audio-devicecpl.etl.md](../evidence/files/vm-tooling-staging/audio-devicecpl-runtime-showdisconnecteddevices-20260327-104736/audio-devicecpl.etl.md) | `medium` | path, value, behavior, rollback |
 | `app-audio-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
-| `vm-audio.show-disconnected-devices-etw-stackwalk-attempt-20260424h` | `etw-trace` | `unspecified` | Bounded ETW stackwalk timeout receipt | [evidence/records/raw/etw-stackwalk/audio.show-disconnected-devices-etw-20260424h/audio.show-disconnected-devices-etw-20260424h-summary.json](../evidence/records/raw/etw-stackwalk/audio.show-disconnected-devices-etw-20260424h/audio.show-disconnected-devices-etw-20260424h-summary.json) and [evidence/records/raw/etw-stackwalk/audio.show-disconnected-devices-etw-20260424h/audio.show-disconnected-devices-etw-20260424h-stage.json](../evidence/records/raw/etw-stackwalk/audio.show-disconnected-devices-etw-20260424h/audio.show-disconnected-devices-etw-20260424h-stage.json) and [evidence/records/captures/audio-show-disconnected-devices-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/audio-show-disconnected-devices-etw-stackwalk-attempt-20260424.json) | `medium` | runtime-lane-review, transport-blocker |
+| `vm-audio.show-disconnected-devices-etw-stackwalk-attempt-20260424h` | `etw-trace` | `unspecified` | Bounded ETW stackwalk timeout receipt | [evidence/raw/etw-stackwalk/audio.show-disconnected-devices-etw-20260424h/audio.show-disconnected-devices-etw-20260424h-summary.json](../evidence/raw/etw-stackwalk/audio.show-disconnected-devices-etw-20260424h/audio.show-disconnected-devices-etw-20260424h-summary.json) and [evidence/raw/etw-stackwalk/audio.show-disconnected-devices-etw-20260424h/audio.show-disconnected-devices-etw-20260424h-stage.json](../evidence/raw/etw-stackwalk/audio.show-disconnected-devices-etw-20260424h/audio.show-disconnected-devices-etw-20260424h-stage.json) and [evidence/captures/audio-show-disconnected-devices-etw-stackwalk-attempt-20260424.json](../evidence/captures/audio-show-disconnected-devices-etw-stackwalk-attempt-20260424.json) | `medium` | runtime-lane-review, transport-blocker |
 
 **Artifact refs**
 
@@ -344,22 +326,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config, decompiled-pseudocode |
-| Matched tokens | multimedia, audio, devicecpl, showhiddendevices |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / visibility/desc.md | [https://github.com/nohuto/win-config/blob/main/visibility/desc.md](https://github.com/nohuto/win-config/blob/main/visibility/desc.md) | Matched 4 audit token(s) in win-config. |
-| win-config / peripheral/desc.md | [https://github.com/nohuto/win-config/blob/main/peripheral/desc.md](https://github.com/nohuto/win-config/blob/main/peripheral/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / power/desc.md | [https://github.com/nohuto/win-config/blob/main/power/desc.md](https://github.com/nohuto/win-config/blob/main/power/desc.md) | Matched 2 audit token(s) in win-config. |
-| decompiled-pseudocode / USBHUB3 | [https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3](https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3) | USB hub pseudocode relevant to USB and peripheral registry behavior. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -394,10 +367,10 @@ Nohuto lineage references:
 
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
-| `procmon-audio-show-hidden-devices` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Sound control panel ShowHiddenDevices runtime reads | [research/notes/audio.show-hidden-devices-v31-reaudit-20260327.md](notes/audio.show-hidden-devices-v31-reaudit-20260327.md); [evidence/records/raw/procmon/audio.show-hidden-devices/audio-devicecpl-query-20260314-pml.md](../evidence/records/raw/procmon/audio.show-hidden-devices/audio-devicecpl-query-20260314-pml.md); [evidence/records/raw/procmon/audio.show-hidden-devices/audio-devicecpl-query-zero-20260314-pml.md](../evidence/records/raw/procmon/audio.show-hidden-devices/audio-devicecpl-query-zero-20260314-pml.md) | `high` | path, value, behavior, ui-mapping |
-| `ghidra-mmsys-devicecpl-flags` | `ghidra-headless` | `unspecified` | Our Ghidra decompilation - mmsys.cpl DeviceCpl flag handlers | [evidence/records/raw/ghidra/audio.show-hidden-devices/audio-devicecpl-ghidra.md](../evidence/records/raw/ghidra/audio.show-hidden-devices/audio-devicecpl-ghidra.md) | `high` | path, behavior, ui-mapping |
+| `procmon-audio-show-hidden-devices` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Sound control panel ShowHiddenDevices runtime reads | [research/notes/audio.show-hidden-devices-v31-reaudit-20260327.md](notes/audio.show-hidden-devices-v31-reaudit-20260327.md); [evidence/raw/procmon/audio.show-hidden-devices/audio-devicecpl-query-20260314-pml.md](../evidence/raw/procmon/audio.show-hidden-devices/audio-devicecpl-query-20260314-pml.md); [evidence/raw/procmon/audio.show-hidden-devices/audio-devicecpl-query-zero-20260314-pml.md](../evidence/raw/procmon/audio.show-hidden-devices/audio-devicecpl-query-zero-20260314-pml.md) | `high` | path, value, behavior, ui-mapping |
+| `ghidra-mmsys-devicecpl-flags` | `ghidra-headless` | `unspecified` | Our Ghidra decompilation - mmsys.cpl DeviceCpl flag handlers | [evidence/raw/ghidra/audio.show-hidden-devices/audio-devicecpl-ghidra.md](../evidence/raw/ghidra/audio.show-hidden-devices/audio-devicecpl-ghidra.md) | `high` | path, behavior, ui-mapping |
 | `app-audio-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
-| `vm-audio.show-hidden-devices-etw-stackwalk-20260424e` | `etw-trace` | `unspecified` | Bounded KVM ETW stackwalk review for ShowHiddenDevices retained no exact target hit | [evidence/records/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/audio.show-hidden-devices-etw-20260424e-summary.json](../evidence/records/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/audio.show-hidden-devices-etw-20260424e-summary.json) and [evidence/records/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/audio.show-hidden-devices-etw-20260424e-stage.json](../evidence/records/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/audio.show-hidden-devices-etw-20260424e-stage.json) and [evidence/records/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/audio.show-hidden-devices-etw-20260424e.etl](../evidence/records/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/audio.show-hidden-devices-etw-20260424e.etl) and [evidence/records/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/normalized-registry-bundle.json](../evidence/records/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/normalized-registry-bundle.json) and [evidence/records/captures/audio-show-hidden-devices-etw-stackwalk-20260424.json](../evidence/records/captures/audio-show-hidden-devices-etw-stackwalk-20260424.json) | `medium` | runtime-review-artifact, version-scope, investigation-open-question |
+| `vm-audio.show-hidden-devices-etw-stackwalk-20260424e` | `etw-trace` | `unspecified` | Bounded KVM ETW stackwalk review for ShowHiddenDevices retained no exact target hit | [evidence/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/audio.show-hidden-devices-etw-20260424e-summary.json](../evidence/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/audio.show-hidden-devices-etw-20260424e-summary.json) and [evidence/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/audio.show-hidden-devices-etw-20260424e-stage.json](../evidence/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/audio.show-hidden-devices-etw-20260424e-stage.json) and [evidence/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/audio.show-hidden-devices-etw-20260424e.etl](../evidence/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/audio.show-hidden-devices-etw-20260424e.etl) and [evidence/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/normalized-registry-bundle.json) and [evidence/captures/audio-show-hidden-devices-etw-stackwalk-20260424.json](../evidence/captures/audio-show-hidden-devices-etw-stackwalk-20260424.json) | `medium` | runtime-review-artifact, version-scope, investigation-open-question |
 
 **Validation proof**
 
@@ -702,21 +675,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | environment |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / misc/desc.md | [https://github.com/nohuto/win-config/blob/main/misc/desc.md](https://github.com/nohuto/win-config/blob/main/misc/desc.md) | Matched 1 audit token(s) in win-config. |
-| win-config / network/desc.md | [https://github.com/nohuto/win-config/blob/main/network/desc.md](https://github.com/nohuto/win-config/blob/main/network/desc.md) | Matched 1 audit token(s) in win-config. |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 1 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -755,8 +720,8 @@ Nohuto lineage references:
 | `ms-dotnet-cli-telemetry` | `official-doc` | `Microsoft official doc` | Microsoft Learn: .NET SDK and .NET CLI telemetry | [https://learn.microsoft.com/en-us/dotnet/core/tools/telemetry](https://learn.microsoft.com/en-us/dotnet/core/tools/telemetry) | `high` | value, allowed-values, behavior |
 | `ms-win32-environment` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Win32_Environment class | [https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-environment](https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-environment) | `high` | path, behavior |
 | `app-developer-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
-| `vm-developer.dotnet-telemetry-disable-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for DOTNET_CLI_TELEMETRY_OPTOUT | [evidence/records/captures/developer-dotnet-telemetry-disable-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/developer-dotnet-telemetry-disable-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/developer-dotnet-telemetry-disable-etw-20260424-batch6/developer-dotnet-telemetry-disable-etw-20260424-batch6-summary.json](../evidence/records/raw/etw-stackwalk/developer-dotnet-telemetry-disable-etw-20260424-batch6/developer-dotnet-telemetry-disable-etw-20260424-batch6-summary.json) and [evidence/records/raw/etw-stackwalk/developer-dotnet-telemetry-disable-etw-20260424-batch6/developer-dotnet-telemetry-disable-etw-20260424-batch6-stage.json](../evidence/records/raw/etw-stackwalk/developer-dotnet-telemetry-disable-etw-20260424-batch6/developer-dotnet-telemetry-disable-etw-20260424-batch6-stage.json) | `low` | behavior, version-scope |
-| `vm-developer.dotnet-telemetry-disable-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for DOTNET_CLI_TELEMETRY_OPTOUT | [evidence/records/raw/ghidra/ghidra-developer-dotnet-telemetry-disable-20260424-batch6/summary.json](../evidence/records/raw/ghidra/ghidra-developer-dotnet-telemetry-disable-20260424-batch6/summary.json) | `low` | version-scope |
+| `vm-developer.dotnet-telemetry-disable-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for DOTNET_CLI_TELEMETRY_OPTOUT | [evidence/captures/developer-dotnet-telemetry-disable-etw-stackwalk-attempt-20260424.json](../evidence/captures/developer-dotnet-telemetry-disable-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/developer-dotnet-telemetry-disable-etw-20260424-batch6/developer-dotnet-telemetry-disable-etw-20260424-batch6-summary.json](../evidence/raw/etw-stackwalk/developer-dotnet-telemetry-disable-etw-20260424-batch6/developer-dotnet-telemetry-disable-etw-20260424-batch6-summary.json) and [evidence/raw/etw-stackwalk/developer-dotnet-telemetry-disable-etw-20260424-batch6/developer-dotnet-telemetry-disable-etw-20260424-batch6-stage.json](../evidence/raw/etw-stackwalk/developer-dotnet-telemetry-disable-etw-20260424-batch6/developer-dotnet-telemetry-disable-etw-20260424-batch6-stage.json) | `low` | behavior, version-scope |
+| `vm-developer.dotnet-telemetry-disable-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for DOTNET_CLI_TELEMETRY_OPTOUT | [evidence/raw/ghidra/ghidra-developer-dotnet-telemetry-disable-20260424-batch6/summary.json](../evidence/raw/ghidra/ghidra-developer-dotnet-telemetry-disable-20260424-batch6/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -824,21 +789,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config, win-registry |
-| Matched tokens | filesystem, longpathsenabled |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-registry / records/FileSystem.txt | [https://github.com/nohuto/win-registry/blob/main/records/FileSystem.txt](https://github.com/nohuto/win-registry/blob/main/records/FileSystem.txt) | Matched 2 audit token(s) in win-registry. |
-| win-config / misc/desc.md | [https://github.com/nohuto/win-config/blob/main/misc/desc.md](https://github.com/nohuto/win-config/blob/main/misc/desc.md) | Matched 1 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -874,10 +831,10 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-maximum-path-limitation` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Maximum Path Length Limitation | [https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation](https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation) | `high` | path, value, behavior |
-| `procmon-developer-long-paths` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Developer settings page reads LongPathsEnabled | [evidence/records/raw/procmon/developer.enable-windows-long-paths/devmode_longpaths_probe.csv](../evidence/records/raw/procmon/developer.enable-windows-long-paths/devmode_longpaths_probe.csv) and [evidence/records/raw/procmon/developer.enable-windows-long-paths/devmode-longpaths-probe-pml.md](../evidence/records/raw/procmon/developer.enable-windows-long-paths/devmode-longpaths-probe-pml.md) | `medium` | path, value, behavior, ui-mapping |
+| `procmon-developer-long-paths` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Developer settings page reads LongPathsEnabled | [evidence/raw/procmon/developer.enable-windows-long-paths/devmode_longpaths_probe.csv](../evidence/raw/procmon/developer.enable-windows-long-paths/devmode_longpaths_probe.csv) and [evidence/raw/procmon/developer.enable-windows-long-paths/devmode-longpaths-probe-pml.md](../evidence/raw/procmon/developer.enable-windows-long-paths/devmode-longpaths-probe-pml.md) | `medium` | path, value, behavior, ui-mapping |
 | `app-developer-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
-| `vm-developer.enable-windows-long-paths-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for LongPathsEnabled | [evidence/records/captures/developer-enable-windows-long-paths-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/developer-enable-windows-long-paths-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/developer-enable-windows-long-paths-etw-20260424-batch2/developer-enable-windows-long-paths-etw-20260424-batch2-summary.json](../evidence/records/raw/etw-stackwalk/developer-enable-windows-long-paths-etw-20260424-batch2/developer-enable-windows-long-paths-etw-20260424-batch2-summary.json) and [evidence/records/raw/etw-stackwalk/developer-enable-windows-long-paths-etw-20260424-batch2/developer-enable-windows-long-paths-etw-20260424-batch2-stage.json](../evidence/records/raw/etw-stackwalk/developer-enable-windows-long-paths-etw-20260424-batch2/developer-enable-windows-long-paths-etw-20260424-batch2-stage.json) | `low` | behavior, version-scope |
-| `vm-developer.enable-windows-long-paths-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for LongPathsEnabled | [evidence/records/raw/ghidra/ghidra-developer-enable-windows-long-paths-20260424-batch2/summary.json](../evidence/records/raw/ghidra/ghidra-developer-enable-windows-long-paths-20260424-batch2/summary.json) | `low` | version-scope |
+| `vm-developer.enable-windows-long-paths-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for LongPathsEnabled | [evidence/captures/developer-enable-windows-long-paths-etw-stackwalk-attempt-20260424.json](../evidence/captures/developer-enable-windows-long-paths-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/developer-enable-windows-long-paths-etw-20260424-batch2/developer-enable-windows-long-paths-etw-20260424-batch2-summary.json](../evidence/raw/etw-stackwalk/developer-enable-windows-long-paths-etw-20260424-batch2/developer-enable-windows-long-paths-etw-20260424-batch2-summary.json) and [evidence/raw/etw-stackwalk/developer-enable-windows-long-paths-etw-20260424-batch2/developer-enable-windows-long-paths-etw-20260424-batch2-stage.json](../evidence/raw/etw-stackwalk/developer-enable-windows-long-paths-etw-20260424-batch2/developer-enable-windows-long-paths-etw-20260424-batch2-stage.json) | `low` | behavior, version-scope |
+| `vm-developer.enable-windows-long-paths-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for LongPathsEnabled | [evidence/raw/ghidra/ghidra-developer-enable-windows-long-paths-20260424-batch2/summary.json](../evidence/raw/ghidra/ghidra-developer-enable-windows-long-paths-20260424-batch2/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -945,22 +902,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config, decompiled-pseudocode |
-| Matched tokens | session, manager, environment |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / misc/desc.md | [https://github.com/nohuto/win-config/blob/main/misc/desc.md](https://github.com/nohuto/win-config/blob/main/misc/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / network/desc.md | [https://github.com/nohuto/win-config/blob/main/network/desc.md](https://github.com/nohuto/win-config/blob/main/network/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 3 audit token(s) in win-config. |
-| decompiled-pseudocode / ntoskrnl | [https://github.com/nohuto/decompiled-pseudocode/tree/main/ntoskrnl](https://github.com/nohuto/decompiled-pseudocode/tree/main/ntoskrnl) | Kernel pseudocode relevant to Session Manager / PriorityControl / DPC paths. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -999,8 +947,8 @@ Nohuto lineage references:
 | `node-cli-max-old-space-size` | `official-doc` | `Microsoft official doc` | Node.js CLI documentation: --max-old-space-size | [https://nodejs.org/api/cli.html](https://nodejs.org/api/cli.html) | `high` | value, allowed-values, behavior |
 | `ms-win32-environment` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Win32_Environment class | [https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-environment](https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-environment) | `high` | path, behavior |
 | `app-developer-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
-| `vm-developer.nodejs-performance-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for NODE_OPTIONS | [evidence/records/captures/developer-nodejs-performance-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/developer-nodejs-performance-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/developer-nodejs-performance-etw-20260424-batch6/developer-nodejs-performance-etw-20260424-batch6-summary.json](../evidence/records/raw/etw-stackwalk/developer-nodejs-performance-etw-20260424-batch6/developer-nodejs-performance-etw-20260424-batch6-summary.json) and [evidence/records/raw/etw-stackwalk/developer-nodejs-performance-etw-20260424-batch6/developer-nodejs-performance-etw-20260424-batch6-stage.json](../evidence/records/raw/etw-stackwalk/developer-nodejs-performance-etw-20260424-batch6/developer-nodejs-performance-etw-20260424-batch6-stage.json) | `low` | behavior, version-scope |
-| `vm-developer.nodejs-performance-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for NODE_OPTIONS | [evidence/records/raw/ghidra/ghidra-developer-nodejs-performance-20260424-batch6/summary.json](../evidence/records/raw/ghidra/ghidra-developer-nodejs-performance-20260424-batch6/summary.json) | `low` | version-scope |
+| `vm-developer.nodejs-performance-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for NODE_OPTIONS | [evidence/captures/developer-nodejs-performance-etw-stackwalk-attempt-20260424.json](../evidence/captures/developer-nodejs-performance-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/developer-nodejs-performance-etw-20260424-batch6/developer-nodejs-performance-etw-20260424-batch6-summary.json](../evidence/raw/etw-stackwalk/developer-nodejs-performance-etw-20260424-batch6/developer-nodejs-performance-etw-20260424-batch6-summary.json) and [evidence/raw/etw-stackwalk/developer-nodejs-performance-etw-20260424-batch6/developer-nodejs-performance-etw-20260424-batch6-stage.json](../evidence/raw/etw-stackwalk/developer-nodejs-performance-etw-20260424-batch6/developer-nodejs-performance-etw-20260424-batch6-stage.json) | `low` | behavior, version-scope |
+| `vm-developer.nodejs-performance-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for NODE_OPTIONS | [evidence/raw/ghidra/ghidra-developer-nodejs-performance-20260424-batch6/summary.json](../evidence/raw/ghidra/ghidra-developer-nodejs-performance-20260424-batch6/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -1068,21 +1016,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, powershell, executionpolicy |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / security/desc.md | [https://github.com/nohuto/win-config/blob/main/security/desc.md](https://github.com/nohuto/win-config/blob/main/security/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / affinities/desc.md | [https://github.com/nohuto/win-config/blob/main/affinities/desc.md](https://github.com/nohuto/win-config/blob/main/affinities/desc.md) | Matched 2 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -1122,8 +1062,8 @@ Nohuto lineage references:
 | `local-powershell-executionpolicy-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft PowerShellExecutionPolicy.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/PowerShellExecutionPolicy.admx](../evidence/files/external/c/Windows/PolicyDefinitions/PowerShellExecutionPolicy.admx) | `high` | path, value, allowed-values |
 | `local-powershell-executionpolicy-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft PowerShellExecutionPolicy.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/PowerShellExecutionPolicy.adml](../evidence/files/external/c/PolicyDefinitions/en-US/PowerShellExecutionPolicy.adml) | `high` | behavior, side-effects |
 | `app-developer-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
-| `vm-developer.powershell-execution-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for ExecutionPolicy | [evidence/records/captures/developer-powershell-execution-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/developer-powershell-execution-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/developer-powershell-execution-etw-20260424-batch3/developer-powershell-execution-etw-20260424-batch3-summary.json](../evidence/records/raw/etw-stackwalk/developer-powershell-execution-etw-20260424-batch3/developer-powershell-execution-etw-20260424-batch3-summary.json) and [evidence/records/raw/etw-stackwalk/developer-powershell-execution-etw-20260424-batch3/developer-powershell-execution-etw-20260424-batch3-stage.json](../evidence/records/raw/etw-stackwalk/developer-powershell-execution-etw-20260424-batch3/developer-powershell-execution-etw-20260424-batch3-stage.json) | `low` | behavior, version-scope |
-| `vm-developer.powershell-execution-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for ExecutionPolicy | [evidence/records/raw/ghidra/ghidra-developer-powershell-execution-20260424-batch3/summary.json](../evidence/records/raw/ghidra/ghidra-developer-powershell-execution-20260424-batch3/summary.json) | `low` | version-scope |
+| `vm-developer.powershell-execution-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for ExecutionPolicy | [evidence/captures/developer-powershell-execution-etw-stackwalk-attempt-20260424.json](../evidence/captures/developer-powershell-execution-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/developer-powershell-execution-etw-20260424-batch3/developer-powershell-execution-etw-20260424-batch3-summary.json](../evidence/raw/etw-stackwalk/developer-powershell-execution-etw-20260424-batch3/developer-powershell-execution-etw-20260424-batch3-summary.json) and [evidence/raw/etw-stackwalk/developer-powershell-execution-etw-20260424-batch3/developer-powershell-execution-etw-20260424-batch3-stage.json](../evidence/raw/etw-stackwalk/developer-powershell-execution-etw-20260424-batch3/developer-powershell-execution-etw-20260424-batch3-stage.json) | `low` | behavior, version-scope |
+| `vm-developer.powershell-execution-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for ExecutionPolicy | [evidence/raw/ghidra/ghidra-developer-powershell-execution-20260424-batch3/summary.json](../evidence/raw/ghidra/ghidra-developer-powershell-execution-20260424-batch3/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -1191,21 +1131,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config, win-registry |
-| Matched tokens | filesystem, longpathsenabled |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-registry / records/FileSystem.txt | [https://github.com/nohuto/win-registry/blob/main/records/FileSystem.txt](https://github.com/nohuto/win-registry/blob/main/records/FileSystem.txt) | Matched 2 audit token(s) in win-registry. |
-| win-config / misc/desc.md | [https://github.com/nohuto/win-config/blob/main/misc/desc.md](https://github.com/nohuto/win-config/blob/main/misc/desc.md) | Matched 1 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -1247,8 +1179,8 @@ Nohuto lineage references:
 | `local-filesys-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft FileSys.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/FileSys.admx](../evidence/files/external/c/Windows/PolicyDefinitions/FileSys.admx) | `high` | path, value, allowed-values, version-scope |
 | `local-filesys-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft FileSys.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/FileSys.adml](../evidence/files/external/c/PolicyDefinitions/en-US/FileSys.adml) | `high` | behavior, default, side-effects |
 | `app-developer-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
-| `vm-developer.python-path-fix-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for LongPathsEnabled | [evidence/records/captures/developer-python-path-fix-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/developer-python-path-fix-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/developer-python-path-fix-etw-20260424-batch3/developer-python-path-fix-etw-20260424-batch3-summary.json](../evidence/records/raw/etw-stackwalk/developer-python-path-fix-etw-20260424-batch3/developer-python-path-fix-etw-20260424-batch3-summary.json) and [evidence/records/raw/etw-stackwalk/developer-python-path-fix-etw-20260424-batch3/developer-python-path-fix-etw-20260424-batch3-stage.json](../evidence/records/raw/etw-stackwalk/developer-python-path-fix-etw-20260424-batch3/developer-python-path-fix-etw-20260424-batch3-stage.json) | `low` | behavior, version-scope |
-| `vm-developer.python-path-fix-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for LongPathsEnabled | [evidence/records/raw/ghidra/ghidra-developer-python-path-fix-20260424-batch3/summary.json](../evidence/records/raw/ghidra/ghidra-developer-python-path-fix-20260424-batch3/summary.json) | `low` | version-scope |
+| `vm-developer.python-path-fix-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for LongPathsEnabled | [evidence/captures/developer-python-path-fix-etw-stackwalk-attempt-20260424.json](../evidence/captures/developer-python-path-fix-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/developer-python-path-fix-etw-20260424-batch3/developer-python-path-fix-etw-20260424-batch3-summary.json](../evidence/raw/etw-stackwalk/developer-python-path-fix-etw-20260424-batch3/developer-python-path-fix-etw-20260424-batch3-summary.json) and [evidence/raw/etw-stackwalk/developer-python-path-fix-etw-20260424-batch3/developer-python-path-fix-etw-20260424-batch3-stage.json](../evidence/raw/etw-stackwalk/developer-python-path-fix-etw-20260424-batch3/developer-python-path-fix-etw-20260424-batch3-stage.json) | `low` | behavior, version-scope |
+| `vm-developer.python-path-fix-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for LongPathsEnabled | [evidence/raw/ghidra/ghidra-developer-python-path-fix-20260424-batch3/summary.json](../evidence/raw/ghidra/ghidra-developer-python-path-fix-20260424-batch3/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -1316,13 +1248,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `unmapped` |
-| Has nohuto lineage | `False` |
-| Has Windows Internals notes | `False` |
-| Needs review | `True` |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
 | Source repositories |  |
 | Matched tokens |  |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
+| Lineage note |  |
 
 **Targets**
 
@@ -1360,8 +1292,8 @@ Current writes
 | `ms-run-registry-keys` | `official-doc` | `Microsoft official doc` | Run and RunOnce Registry Keys | [https://learn.microsoft.com/en-us/windows/win32/setupapi/run-and-runonce-registry-keys](https://learn.microsoft.com/en-us/windows/win32/setupapi/run-and-runonce-registry-keys) | `high` | path, behavior, version-scope |
 | `openssh-ssh-agent-doc` | `official-doc` | `Microsoft official doc` | OpenSSH manual: ssh-agent | [https://man.openbsd.org/ssh-agent](https://man.openbsd.org/ssh-agent) | `medium` | behavior, side-effects |
 | `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping |
-| `vm-developer.ssh-agent-autostart-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for SSH Agent | [evidence/records/captures/developer-ssh-agent-autostart-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/developer-ssh-agent-autostart-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/developer-ssh-agent-autostart-etw-20260424-batch3/developer-ssh-agent-autostart-etw-20260424-batch3-summary.json](../evidence/records/raw/etw-stackwalk/developer-ssh-agent-autostart-etw-20260424-batch3/developer-ssh-agent-autostart-etw-20260424-batch3-summary.json) and [evidence/records/raw/etw-stackwalk/developer-ssh-agent-autostart-etw-20260424-batch3/developer-ssh-agent-autostart-etw-20260424-batch3-stage.json](../evidence/records/raw/etw-stackwalk/developer-ssh-agent-autostart-etw-20260424-batch3/developer-ssh-agent-autostart-etw-20260424-batch3-stage.json) | `low` | behavior, version-scope |
-| `vm-developer.ssh-agent-autostart-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for SSH Agent | [evidence/records/raw/ghidra/ghidra-developer-ssh-agent-autostart-20260424-batch3/summary.json](../evidence/records/raw/ghidra/ghidra-developer-ssh-agent-autostart-20260424-batch3/summary.json) | `low` | version-scope |
+| `vm-developer.ssh-agent-autostart-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for SSH Agent | [evidence/captures/developer-ssh-agent-autostart-etw-stackwalk-attempt-20260424.json](../evidence/captures/developer-ssh-agent-autostart-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/developer-ssh-agent-autostart-etw-20260424-batch3/developer-ssh-agent-autostart-etw-20260424-batch3-summary.json](../evidence/raw/etw-stackwalk/developer-ssh-agent-autostart-etw-20260424-batch3/developer-ssh-agent-autostart-etw-20260424-batch3-summary.json) and [evidence/raw/etw-stackwalk/developer-ssh-agent-autostart-etw-20260424-batch3/developer-ssh-agent-autostart-etw-20260424-batch3-stage.json](../evidence/raw/etw-stackwalk/developer-ssh-agent-autostart-etw-20260424-batch3/developer-ssh-agent-autostart-etw-20260424-batch3-stage.json) | `low` | behavior, version-scope |
+| `vm-developer.ssh-agent-autostart-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for SSH Agent | [evidence/raw/ghidra/ghidra-developer-ssh-agent-autostart-20260424-batch3/summary.json](../evidence/raw/ghidra/ghidra-developer-ssh-agent-autostart-20260424-batch3/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -1429,13 +1361,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `unmapped` |
-| Has nohuto lineage | `False` |
-| Has Windows Internals notes | `False` |
-| Needs review | `True` |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
 | Source repositories |  |
 | Matched tokens |  |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
+| Lineage note |  |
 
 **Targets**
 
@@ -1472,12 +1404,12 @@ Current writes
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-enable-device-for-development` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Enable your device for development | [https://learn.microsoft.com/en-us/windows/advanced-settings/developer-mode](https://learn.microsoft.com/en-us/windows/advanced-settings/developer-mode) | `high` | path, value, behavior |
-| `procmon-developer-mode-baseline` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Developer settings search reads AppModelUnlock baseline | [evidence/records/raw/procmon/developer.windows-dev-mode/devmode_probe2.csv](../evidence/records/raw/procmon/developer.windows-dev-mode/devmode_probe2.csv) and [evidence/records/raw/procmon/developer.windows-dev-mode/devmode_probe2.txt](../evidence/records/raw/procmon/developer.windows-dev-mode/devmode_probe2.txt) | `medium` | path, behavior, default, ui-mapping |
+| `procmon-developer-mode-baseline` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Developer settings search reads AppModelUnlock baseline | [evidence/raw/procmon/developer.windows-dev-mode/devmode_probe2.csv](../evidence/raw/procmon/developer.windows-dev-mode/devmode_probe2.csv) and [evidence/raw/procmon/developer.windows-dev-mode/devmode_probe2.txt](../evidence/raw/procmon/developer.windows-dev-mode/devmode_probe2.txt) | `medium` | path, behavior, default, ui-mapping |
 | `local-appxpackagemanager-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft AppxPackageManager.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/AppxPackageManager.admx](../evidence/files/external/c/Windows/PolicyDefinitions/AppxPackageManager.admx) | `high` | path, value, allowed-values, version-scope |
 | `local-appxpackagemanager-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft AppxPackageManager.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/AppxPackageManager.adml](../evidence/files/external/c/PolicyDefinitions/en-US/AppxPackageManager.adml) | `high` | behavior, default, side-effects |
 | `app-developer-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
-| `vm-developer-windows-dev-mode-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW stage receipt for AllowDevelopmentWithoutDevLicense | [evidence/records/captures/developer-windows-dev-mode-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/developer-windows-dev-mode-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/developer-windows-dev-mode-etw-20260424-batch1/developer-windows-dev-mode-etw-20260424-batch1-stage.json](../evidence/records/raw/etw-stackwalk/developer-windows-dev-mode-etw-20260424-batch1/developer-windows-dev-mode-etw-20260424-batch1-stage.json) | `low` | behavior, version-scope |
-| `vm-developer-windows-dev-mode-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for AllowDevelopmentWithoutDevLicense | [evidence/records/raw/ghidra/ghidra-developer-windows-dev-mode-20260424-batch1/summary.json](../evidence/records/raw/ghidra/ghidra-developer-windows-dev-mode-20260424-batch1/summary.json) | `low` | version-scope |
+| `vm-developer-windows-dev-mode-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW stage receipt for AllowDevelopmentWithoutDevLicense | [evidence/captures/developer-windows-dev-mode-etw-stackwalk-attempt-20260424.json](../evidence/captures/developer-windows-dev-mode-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/developer-windows-dev-mode-etw-20260424-batch1/developer-windows-dev-mode-etw-20260424-batch1-stage.json](../evidence/raw/etw-stackwalk/developer-windows-dev-mode-etw-20260424-batch1/developer-windows-dev-mode-etw-20260424-batch1-stage.json) | `low` | behavior, version-scope |
+| `vm-developer-windows-dev-mode-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for AllowDevelopmentWithoutDevLicense | [evidence/raw/ghidra/ghidra-developer-windows-dev-mode-20260424-batch1/summary.json](../evidence/raw/ghidra/ghidra-developer-windows-dev-mode-20260424-batch1/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -1656,21 +1588,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | explorer, advanced |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / cleanup/desc.md | [https://github.com/nohuto/win-config/blob/main/cleanup/desc.md](https://github.com/nohuto/win-config/blob/main/cleanup/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / peripheral/desc.md | [https://github.com/nohuto/win-config/blob/main/peripheral/desc.md](https://github.com/nohuto/win-config/blob/main/peripheral/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / power/desc.md | [https://github.com/nohuto/win-config/blob/main/power/desc.md](https://github.com/nohuto/win-config/blob/main/power/desc.md) | Matched 2 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -1708,9 +1632,9 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-gppref-global-folder-options-vista-alwaysshowicons` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: GlobalFolderOptionsVista alwaysShowIcons | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca) | `high` | path, value, behavior |
 | `dump-25h2-explorer-advanced-iconsonly` | `raw-registry-dump` | `unspecified` | 25H2 raw registry and default-hive corroboration for IconsOnly | [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt); [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg) | `medium` | path, value, version-scope |
-| `procmon-iconsonly-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer IconsOnly runtime surface | [evidence/records/raw/procmon/explorer.always-show-icons-never-thumbnails/iconsonly-result.txt](../evidence/records/raw/procmon/explorer.always-show-icons-never-thumbnails/iconsonly-result.txt) | `high` | path, value, behavior, version-scope |
-| `vm-explorer.always-show-icons-never-thumbnails-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for IconsOnly | [evidence/records/captures/explorer-always-show-icons-never-thumbnails-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/explorer-always-show-icons-never-thumbnails-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/explorer-always-show-icons-never-thumbnails-etw-20260424-batch4/explorer-always-show-icons-never-thumbnails-etw-20260424-batch4-summary.json](../evidence/records/raw/etw-stackwalk/explorer-always-show-icons-never-thumbnails-etw-20260424-batch4/explorer-always-show-icons-never-thumbnails-etw-20260424-batch4-summary.json) and [evidence/records/raw/etw-stackwalk/explorer-always-show-icons-never-thumbnails-etw-20260424-batch4/explorer-always-show-icons-never-thumbnails-etw-20260424-batch4-stage.json](../evidence/records/raw/etw-stackwalk/explorer-always-show-icons-never-thumbnails-etw-20260424-batch4/explorer-always-show-icons-never-thumbnails-etw-20260424-batch4-stage.json) | `low` | behavior, version-scope |
-| `vm-explorer.always-show-icons-never-thumbnails-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for IconsOnly | [evidence/records/raw/ghidra/ghidra-explorer-always-show-icons-never-thumbnails-20260424-batch4/summary.json](../evidence/records/raw/ghidra/ghidra-explorer-always-show-icons-never-thumbnails-20260424-batch4/summary.json) | `low` | version-scope |
+| `procmon-iconsonly-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer IconsOnly runtime surface | [evidence/raw/procmon/explorer.always-show-icons-never-thumbnails/iconsonly-result.txt](../evidence/raw/procmon/explorer.always-show-icons-never-thumbnails/iconsonly-result.txt) | `high` | path, value, behavior, version-scope |
+| `vm-explorer.always-show-icons-never-thumbnails-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for IconsOnly | [evidence/captures/explorer-always-show-icons-never-thumbnails-etw-stackwalk-attempt-20260424.json](../evidence/captures/explorer-always-show-icons-never-thumbnails-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/explorer-always-show-icons-never-thumbnails-etw-20260424-batch4/explorer-always-show-icons-never-thumbnails-etw-20260424-batch4-summary.json](../evidence/raw/etw-stackwalk/explorer-always-show-icons-never-thumbnails-etw-20260424-batch4/explorer-always-show-icons-never-thumbnails-etw-20260424-batch4-summary.json) and [evidence/raw/etw-stackwalk/explorer-always-show-icons-never-thumbnails-etw-20260424-batch4/explorer-always-show-icons-never-thumbnails-etw-20260424-batch4-stage.json](../evidence/raw/etw-stackwalk/explorer-always-show-icons-never-thumbnails-etw-20260424-batch4/explorer-always-show-icons-never-thumbnails-etw-20260424-batch4-stage.json) | `low` | behavior, version-scope |
+| `vm-explorer.always-show-icons-never-thumbnails-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for IconsOnly | [evidence/raw/ghidra/ghidra-explorer-always-show-icons-never-thumbnails-20260424-batch4/summary.json](../evidence/raw/ghidra/ghidra-explorer-always-show-icons-never-thumbnails-20260424-batch4/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -1778,21 +1702,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-registry, win-config |
-| Matched tokens | policies, explorer, nolowdiskspacechecks |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-registry / records/CV-Policies.txt | [https://github.com/nohuto/win-registry/blob/main/records/CV-Policies.txt](https://github.com/nohuto/win-registry/blob/main/records/CV-Policies.txt) | Matched 3 audit token(s) in win-registry. |
-| win-config / misc/desc.md | [https://github.com/nohuto/win-config/blob/main/misc/desc.md](https://github.com/nohuto/win-config/blob/main/misc/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / peripheral/desc.md | [https://github.com/nohuto/win-config/blob/main/peripheral/desc.md](https://github.com/nohuto/win-config/blob/main/peripheral/desc.md) | Matched 2 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -1831,8 +1747,8 @@ Nohuto lineage references:
 | `ms-low-disk-warning-article` | `official-doc` | `Microsoft official doc` | Microsoft Learn troubleshooting article for low disk space warnings | [https://learn.microsoft.com/fr-fr/troubleshoot/windows-server/shell-experience/temp-folder-with-logon-session-id-deleted](https://learn.microsoft.com/fr-fr/troubleshoot/windows-server/shell-experience/temp-folder-with-logon-session-id-deleted) | `high` | path, value, behavior |
 | `dump-25h2-policies-explorer-nolowdiskspacechecks` | `raw-registry-dump` | `unspecified` | 25H2 raw registry corroboration for NoLowDiskSpaceChecks | [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) | `medium` | path, version-scope |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
-| `vm-explorer-disable-low-disk-space-warning-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW stage receipt for NoLowDiskSpaceChecks | [evidence/records/captures/explorer-disable-low-disk-space-warning-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/explorer-disable-low-disk-space-warning-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/explorer-disable-low-disk-space-warning-etw-20260424-batch1/explorer-disable-low-disk-space-warning-etw-20260424-batch1-stage.json](../evidence/records/raw/etw-stackwalk/explorer-disable-low-disk-space-warning-etw-20260424-batch1/explorer-disable-low-disk-space-warning-etw-20260424-batch1-stage.json) | `low` | behavior, version-scope |
-| `vm-explorer-disable-low-disk-space-warning-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for NoLowDiskSpaceChecks | [evidence/records/raw/ghidra/ghidra-explorer-disable-low-disk-space-warning-20260424-batch1/summary.json](../evidence/records/raw/ghidra/ghidra-explorer-disable-low-disk-space-warning-20260424-batch1/summary.json) | `low` | version-scope |
+| `vm-explorer-disable-low-disk-space-warning-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW stage receipt for NoLowDiskSpaceChecks | [evidence/captures/explorer-disable-low-disk-space-warning-etw-stackwalk-attempt-20260424.json](../evidence/captures/explorer-disable-low-disk-space-warning-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/explorer-disable-low-disk-space-warning-etw-20260424-batch1/explorer-disable-low-disk-space-warning-etw-20260424-batch1-stage.json](../evidence/raw/etw-stackwalk/explorer-disable-low-disk-space-warning-etw-20260424-batch1/explorer-disable-low-disk-space-warning-etw-20260424-batch1-stage.json) | `low` | behavior, version-scope |
+| `vm-explorer-disable-low-disk-space-warning-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for NoLowDiskSpaceChecks | [evidence/raw/ghidra/ghidra-explorer-disable-low-disk-space-warning-20260424-batch1/summary.json](../evidence/raw/ghidra/ghidra-explorer-disable-low-disk-space-warning-20260424-batch1/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -1900,21 +1816,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, chat |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / network/desc.md | [https://github.com/nohuto/win-config/blob/main/network/desc.md](https://github.com/nohuto/win-config/blob/main/network/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / affinities/desc.md | [https://github.com/nohuto/win-config/blob/main/affinities/desc.md](https://github.com/nohuto/win-config/blob/main/affinities/desc.md) | Matched 1 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -1956,8 +1864,8 @@ Nohuto lineage references:
 | `local-taskbar-admx-chat` | `official-doc` | `Microsoft official doc` | Local Microsoft Taskbar.admx ConfigureChatIcon mapping | [evidence/files/external/c/Windows/PolicyDefinitions/Taskbar.admx](../evidence/files/external/c/Windows/PolicyDefinitions/Taskbar.admx) | `high` | path, value, allowed-values, version-scope |
 | `local-taskbar-adml-chat` | `official-doc` | `Microsoft official doc` | Local Microsoft Taskbar.adml ConfigureChatIcon help text | [evidence/files/external/c/PolicyDefinitions/en-US/Taskbar.adml](../evidence/files/external/c/PolicyDefinitions/en-US/Taskbar.adml) | `high` | behavior, default, side-effects |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
-| `vm-explorer.disable-taskbar-chat-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for ChatIcon | [evidence/records/captures/explorer-disable-taskbar-chat-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/explorer-disable-taskbar-chat-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/explorer-disable-taskbar-chat-etw-20260424-batch2/explorer-disable-taskbar-chat-etw-20260424-batch2-summary.json](../evidence/records/raw/etw-stackwalk/explorer-disable-taskbar-chat-etw-20260424-batch2/explorer-disable-taskbar-chat-etw-20260424-batch2-summary.json) and [evidence/records/raw/etw-stackwalk/explorer-disable-taskbar-chat-etw-20260424-batch2/explorer-disable-taskbar-chat-etw-20260424-batch2-stage.json](../evidence/records/raw/etw-stackwalk/explorer-disable-taskbar-chat-etw-20260424-batch2/explorer-disable-taskbar-chat-etw-20260424-batch2-stage.json) | `low` | behavior, version-scope |
-| `vm-explorer.disable-taskbar-chat-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for ChatIcon | [evidence/records/raw/ghidra/ghidra-explorer-disable-taskbar-chat-20260424-batch2/summary.json](../evidence/records/raw/ghidra/ghidra-explorer-disable-taskbar-chat-20260424-batch2/summary.json) | `low` | version-scope |
+| `vm-explorer.disable-taskbar-chat-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for ChatIcon | [evidence/captures/explorer-disable-taskbar-chat-etw-stackwalk-attempt-20260424.json](../evidence/captures/explorer-disable-taskbar-chat-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/explorer-disable-taskbar-chat-etw-20260424-batch2/explorer-disable-taskbar-chat-etw-20260424-batch2-summary.json](../evidence/raw/etw-stackwalk/explorer-disable-taskbar-chat-etw-20260424-batch2/explorer-disable-taskbar-chat-etw-20260424-batch2-summary.json) and [evidence/raw/etw-stackwalk/explorer-disable-taskbar-chat-etw-20260424-batch2/explorer-disable-taskbar-chat-etw-20260424-batch2-stage.json](../evidence/raw/etw-stackwalk/explorer-disable-taskbar-chat-etw-20260424-batch2/explorer-disable-taskbar-chat-etw-20260424-batch2-stage.json) | `low` | behavior, version-scope |
+| `vm-explorer.disable-taskbar-chat-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for ChatIcon | [evidence/raw/ghidra/ghidra-explorer-disable-taskbar-chat-20260424-batch2/summary.json](../evidence/raw/ghidra/ghidra-explorer-disable-taskbar-chat-20260424-batch2/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -2025,21 +1933,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-registry, win-config |
-| Matched tokens | explorer, advanced, usecompactmode |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-registry / records/CV-Explorer.txt | [https://github.com/nohuto/win-registry/blob/main/records/CV-Explorer.txt](https://github.com/nohuto/win-registry/blob/main/records/CV-Explorer.txt) | Matched 3 audit token(s) in win-registry. |
-| win-config / cleanup/desc.md | [https://github.com/nohuto/win-config/blob/main/cleanup/desc.md](https://github.com/nohuto/win-config/blob/main/cleanup/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / peripheral/desc.md | [https://github.com/nohuto/win-config/blob/main/peripheral/desc.md](https://github.com/nohuto/win-config/blob/main/peripheral/desc.md) | Matched 2 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -2075,17 +1975,17 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `dump-25h2-explorer-advanced-usecompactmode` | `raw-registry-dump` | `unspecified` | 25H2 raw registry corroboration for UseCompactMode | [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) | `medium` | path, version-scope |
-| `procmon-explorer-compact-mode` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer UseCompactMode runtime reads | [evidence/records/raw/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md](../evidence/records/raw/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md) and [evidence/records/raw/procmon/explorer.enable-explorer-compact-mode/explorer-compact-zero-20260314-pml.md](../evidence/records/raw/procmon/explorer.enable-explorer-compact-mode/explorer-compact-zero-20260314-pml.md) | `high` | path, value, behavior, ui-mapping |
-| `ghidra-explorerframe-usecompactmode` | `ghidra-headless` | `unspecified` | Our Ghidra decompilation - ExplorerFrame UseCompactMode handlers | [evidence/records/raw/ghidra/explorer.enable-explorer-compact-mode/explorerframe-usecompactmode-ghidra.md](../evidence/records/raw/ghidra/explorer.enable-explorer-compact-mode/explorerframe-usecompactmode-ghidra.md) | `high` | path, behavior, ui-mapping |
+| `procmon-explorer-compact-mode` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer UseCompactMode runtime reads | [evidence/raw/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md](../evidence/raw/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md) and [evidence/raw/procmon/explorer.enable-explorer-compact-mode/explorer-compact-zero-20260314-pml.md](../evidence/raw/procmon/explorer.enable-explorer-compact-mode/explorer-compact-zero-20260314-pml.md) | `high` | path, value, behavior, ui-mapping |
+| `ghidra-explorerframe-usecompactmode` | `ghidra-headless` | `unspecified` | Our Ghidra decompilation - ExplorerFrame UseCompactMode handlers | [evidence/raw/ghidra/explorer.enable-explorer-compact-mode/explorerframe-usecompactmode-ghidra.md](../evidence/raw/ghidra/explorer.enable-explorer-compact-mode/explorerframe-usecompactmode-ghidra.md) | `high` | path, behavior, ui-mapping |
 | `runtime-explorer-compact-incident-review-20260327` | `vm-incident` | `unspecified` | Incident reviewed - Explorer compact mode runtime rerun on visible-shell baseline | [research/notes/explorer-compact-runtime-incident-review-20260327.md](notes/explorer-compact-runtime-incident-review-20260327.md) and [evidence/files/vm/explorer-compact-runtime-20260327-223536/summary.json](../evidence/files/vm-tooling-staging/explorer-compact-runtime-20260327-223536/summary.json) | `high` | behavior, version-scope |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
-| `vm-explorer.enable-explorer-compact-mode-etw-stackwalk-attempt-20260424h` | `etw-trace` | `unspecified` | Bounded ETW stackwalk timeout receipt | [evidence/records/raw/etw-stackwalk/explorer.enable-explorer-compact-mode-etw-20260424h/explorer.enable-explorer-compact-mode-etw-20260424h-summary.json](../evidence/records/raw/etw-stackwalk/explorer.enable-explorer-compact-mode-etw-20260424h/explorer.enable-explorer-compact-mode-etw-20260424h-summary.json) and [evidence/records/raw/etw-stackwalk/explorer.enable-explorer-compact-mode-etw-20260424h/explorer.enable-explorer-compact-mode-etw-20260424h-stage.json](../evidence/records/raw/etw-stackwalk/explorer.enable-explorer-compact-mode-etw-20260424h/explorer.enable-explorer-compact-mode-etw-20260424h-stage.json) and [evidence/records/captures/explorer-enable-explorer-compact-mode-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/explorer-enable-explorer-compact-mode-etw-stackwalk-attempt-20260424.json) | `medium` | runtime-lane-review, transport-blocker |
+| `vm-explorer.enable-explorer-compact-mode-etw-stackwalk-attempt-20260424h` | `etw-trace` | `unspecified` | Bounded ETW stackwalk timeout receipt | [evidence/raw/etw-stackwalk/explorer.enable-explorer-compact-mode-etw-20260424h/explorer.enable-explorer-compact-mode-etw-20260424h-summary.json](../evidence/raw/etw-stackwalk/explorer.enable-explorer-compact-mode-etw-20260424h/explorer.enable-explorer-compact-mode-etw-20260424h-summary.json) and [evidence/raw/etw-stackwalk/explorer.enable-explorer-compact-mode-etw-20260424h/explorer.enable-explorer-compact-mode-etw-20260424h-stage.json](../evidence/raw/etw-stackwalk/explorer.enable-explorer-compact-mode-etw-20260424h/explorer.enable-explorer-compact-mode-etw-20260424h-stage.json) and [evidence/captures/explorer-enable-explorer-compact-mode-etw-stackwalk-attempt-20260424.json](../evidence/captures/explorer-enable-explorer-compact-mode-etw-stackwalk-attempt-20260424.json) | `medium` | runtime-lane-review, transport-blocker |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [evidence/records/raw/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md](../evidence/records/raw/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md) |
+| Source | [evidence/raw/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md](../evidence/raw/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md) |
 | Exact quote / path | explorer_batch_applied_20260314.pml: Explorer.EXE RegQueryValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/UseCompactMode Data:1. explorer_compact_zero_20260314.pml: Explorer.EXE RegQueryValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/UseCompactMode Data:0. |
 | Key found on page | `True` |
 | Notes | The value was toggled from 1 to 0 and the original absent state was then restored. Both observed states were queried by Explorer.EXE on restart. |
@@ -2147,21 +2047,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | explorer, advanced |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / cleanup/desc.md | [https://github.com/nohuto/win-config/blob/main/cleanup/desc.md](https://github.com/nohuto/win-config/blob/main/cleanup/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / peripheral/desc.md | [https://github.com/nohuto/win-config/blob/main/peripheral/desc.md](https://github.com/nohuto/win-config/blob/main/peripheral/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / power/desc.md | [https://github.com/nohuto/win-config/blob/main/power/desc.md](https://github.com/nohuto/win-config/blob/main/power/desc.md) | Matched 2 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -2199,10 +2091,10 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-settings-common-fileexplorer-hide-empty-drives` | `official-doc` | `Microsoft official doc` | Microsoft Learn: settings-common File Explorer Classic advanced settings | [https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-common](https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-common) | `medium` | behavior, version-scope |
 | `dump-25h2-explorer-advanced-hidedriveswithnomedia` | `raw-registry-dump` | `unspecified` | 25H2 raw registry corroboration for HideDrivesWithNoMedia | [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) | `medium` | path, version-scope |
-| `procmon-hidedriveswithnomedia-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer HideDrivesWithNoMedia runtime surface | [evidence/records/raw/procmon/explorer.hide-empty-drives/hideemptydrives-result.txt](../evidence/records/raw/procmon/explorer.hide-empty-drives/hideemptydrives-result.txt) | `high` | path, value, behavior, version-scope |
+| `procmon-hidedriveswithnomedia-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer HideDrivesWithNoMedia runtime surface | [evidence/raw/procmon/explorer.hide-empty-drives/hideemptydrives-result.txt](../evidence/raw/procmon/explorer.hide-empty-drives/hideemptydrives-result.txt) | `high` | path, value, behavior, version-scope |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation for HideDrivesWithNoMedia | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
-| `vm-explorer.hide-empty-drives-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for HideDrivesWithNoMedia | [evidence/records/captures/explorer-hide-empty-drives-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/explorer-hide-empty-drives-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/explorer-hide-empty-drives-etw-20260424-batch4/explorer-hide-empty-drives-etw-20260424-batch4-summary.json](../evidence/records/raw/etw-stackwalk/explorer-hide-empty-drives-etw-20260424-batch4/explorer-hide-empty-drives-etw-20260424-batch4-summary.json) and [evidence/records/raw/etw-stackwalk/explorer-hide-empty-drives-etw-20260424-batch4/explorer-hide-empty-drives-etw-20260424-batch4-stage.json](../evidence/records/raw/etw-stackwalk/explorer-hide-empty-drives-etw-20260424-batch4/explorer-hide-empty-drives-etw-20260424-batch4-stage.json) | `low` | behavior, version-scope |
-| `vm-explorer.hide-empty-drives-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for HideDrivesWithNoMedia | [evidence/records/raw/ghidra/ghidra-explorer-hide-empty-drives-20260424-batch4/summary.json](../evidence/records/raw/ghidra/ghidra-explorer-hide-empty-drives-20260424-batch4/summary.json) | `low` | version-scope |
+| `vm-explorer.hide-empty-drives-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for HideDrivesWithNoMedia | [evidence/captures/explorer-hide-empty-drives-etw-stackwalk-attempt-20260424.json](../evidence/captures/explorer-hide-empty-drives-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/explorer-hide-empty-drives-etw-20260424-batch4/explorer-hide-empty-drives-etw-20260424-batch4-summary.json](../evidence/raw/etw-stackwalk/explorer-hide-empty-drives-etw-20260424-batch4/explorer-hide-empty-drives-etw-20260424-batch4-summary.json) and [evidence/raw/etw-stackwalk/explorer-hide-empty-drives-etw-20260424-batch4/explorer-hide-empty-drives-etw-20260424-batch4-stage.json](../evidence/raw/etw-stackwalk/explorer-hide-empty-drives-etw-20260424-batch4/explorer-hide-empty-drives-etw-20260424-batch4-stage.json) | `low` | behavior, version-scope |
+| `vm-explorer.hide-empty-drives-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for HideDrivesWithNoMedia | [evidence/raw/ghidra/ghidra-explorer-hide-empty-drives-20260424-batch4/summary.json](../evidence/raw/ghidra/ghidra-explorer-hide-empty-drives-20260424-batch4/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -2270,21 +2162,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | explorer, advanced |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / cleanup/desc.md | [https://github.com/nohuto/win-config/blob/main/cleanup/desc.md](https://github.com/nohuto/win-config/blob/main/cleanup/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / peripheral/desc.md | [https://github.com/nohuto/win-config/blob/main/peripheral/desc.md](https://github.com/nohuto/win-config/blob/main/peripheral/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / power/desc.md | [https://github.com/nohuto/win-config/blob/main/power/desc.md](https://github.com/nohuto/win-config/blob/main/power/desc.md) | Matched 2 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -2322,10 +2206,10 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-gppref-global-folder-options-vista-separateprocess` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: GlobalFolderOptionsVista separateProcess | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca) | `high` | path, value, behavior |
 | `dump-hkcu25h2-explorer-advanced-separateprocess` | `raw-registry-dump` | `unspecified` | 25H2 default hive corroboration for SeparateProcess | [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg) | `medium` | path, value, version-scope |
-| `procmon-separateprocess-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer SeparateProcess runtime surface | [evidence/records/raw/procmon/explorer.launch-folder-windows-in-a-separate-process/separateprocess-result.txt](../evidence/records/raw/procmon/explorer.launch-folder-windows-in-a-separate-process/separateprocess-result.txt) | `high` | path, value, behavior, version-scope |
+| `procmon-separateprocess-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer SeparateProcess runtime surface | [evidence/raw/procmon/explorer.launch-folder-windows-in-a-separate-process/separateprocess-result.txt](../evidence/raw/procmon/explorer.launch-folder-windows-in-a-separate-process/separateprocess-result.txt) | `high` | path, value, behavior, version-scope |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
-| `vm-explorer.launch-folder-windows-in-a-separate-process-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for SeparateProcess | [evidence/records/captures/explorer-launch-folder-windows-in-a-separate-process-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/explorer-launch-folder-windows-in-a-separate-process-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/explorer-launch-folder-windows-separate-process-etw-20260424-batch4/explorer-launch-folder-windows-separate-process-etw-20260424-batch4-summary.json](../evidence/records/raw/etw-stackwalk/explorer-launch-folder-windows-separate-process-etw-20260424-batch4/explorer-launch-folder-windows-separate-process-etw-20260424-batch4-summary.json) and [evidence/records/raw/etw-stackwalk/explorer-launch-folder-windows-separate-process-etw-20260424-batch4/explorer-launch-folder-windows-separate-process-etw-20260424-batch4-stage.json](../evidence/records/raw/etw-stackwalk/explorer-launch-folder-windows-separate-process-etw-20260424-batch4/explorer-launch-folder-windows-separate-process-etw-20260424-batch4-stage.json) | `low` | behavior, version-scope |
-| `vm-explorer.launch-folder-windows-in-a-separate-process-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for SeparateProcess | [evidence/records/raw/ghidra/ghidra-explorer-launch-folder-windows-separate-process-20260424-batch4/summary.json](../evidence/records/raw/ghidra/ghidra-explorer-launch-folder-windows-separate-process-20260424-batch4/summary.json) | `low` | version-scope |
+| `vm-explorer.launch-folder-windows-in-a-separate-process-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for SeparateProcess | [evidence/captures/explorer-launch-folder-windows-in-a-separate-process-etw-stackwalk-attempt-20260424.json](../evidence/captures/explorer-launch-folder-windows-in-a-separate-process-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/explorer-launch-folder-windows-separate-process-etw-20260424-batch4/explorer-launch-folder-windows-separate-process-etw-20260424-batch4-summary.json](../evidence/raw/etw-stackwalk/explorer-launch-folder-windows-separate-process-etw-20260424-batch4/explorer-launch-folder-windows-separate-process-etw-20260424-batch4-summary.json) and [evidence/raw/etw-stackwalk/explorer-launch-folder-windows-separate-process-etw-20260424-batch4/explorer-launch-folder-windows-separate-process-etw-20260424-batch4-stage.json](../evidence/raw/etw-stackwalk/explorer-launch-folder-windows-separate-process-etw-20260424-batch4/explorer-launch-folder-windows-separate-process-etw-20260424-batch4-stage.json) | `low` | behavior, version-scope |
+| `vm-explorer.launch-folder-windows-in-a-separate-process-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for SeparateProcess | [evidence/raw/ghidra/ghidra-explorer-launch-folder-windows-separate-process-20260424-batch4/summary.json](../evidence/raw/ghidra/ghidra-explorer-launch-folder-windows-separate-process-20260424-batch4/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -2393,21 +2277,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | explorer, advanced |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / cleanup/desc.md | [https://github.com/nohuto/win-config/blob/main/cleanup/desc.md](https://github.com/nohuto/win-config/blob/main/cleanup/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / peripheral/desc.md | [https://github.com/nohuto/win-config/blob/main/peripheral/desc.md](https://github.com/nohuto/win-config/blob/main/peripheral/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / power/desc.md | [https://github.com/nohuto/win-config/blob/main/power/desc.md](https://github.com/nohuto/win-config/blob/main/power/desc.md) | Matched 2 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -2445,10 +2321,10 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-gppref-global-folder-options-vista-showcompcolor` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: GlobalFolderOptionsVista showCompColor | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca) | `high` | path, value, behavior |
 | `dump-hkcu25h2-explorer-advanced-showcompcolor` | `raw-registry-dump` | `unspecified` | 25H2 default hive corroboration for ShowCompColor | [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg) | `medium` | path, value, version-scope |
-| `procmon-showcompcolor-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowCompColor runtime surface | [evidence/records/raw/procmon/explorer.show-compressed-and-encrypted-files-in-color/showcompcolor-result-txt.md](../evidence/records/raw/procmon/explorer.show-compressed-and-encrypted-files-in-color/showcompcolor-result-txt.md) | `high` | path, value, behavior, version-scope |
+| `procmon-showcompcolor-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowCompColor runtime surface | [evidence/raw/procmon/explorer.show-compressed-and-encrypted-files-in-color/showcompcolor-result-txt.md](../evidence/raw/procmon/explorer.show-compressed-and-encrypted-files-in-color/showcompcolor-result-txt.md) | `high` | path, value, behavior, version-scope |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
-| `vm-explorer.show-compressed-and-encrypted-files-in-color-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for ShowCompColor | [evidence/records/captures/explorer-show-compressed-and-encrypted-files-in-color-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/explorer-show-compressed-and-encrypted-files-in-color-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/explorer-show-compressed-and-encrypted-files-in-color-etw-20260424-batch5/explorer-show-compressed-and-encrypted-files-in-color-etw-20260424-batch5-summary.json](../evidence/records/raw/etw-stackwalk/explorer-show-compressed-and-encrypted-files-in-color-etw-20260424-batch5/explorer-show-compressed-and-encrypted-files-in-color-etw-20260424-batch5-summary.json) and [evidence/records/raw/etw-stackwalk/explorer-show-compressed-and-encrypted-files-in-color-etw-20260424-batch5/explorer-show-compressed-and-encrypted-files-in-color-etw-20260424-batch5-stage.json](../evidence/records/raw/etw-stackwalk/explorer-show-compressed-and-encrypted-files-in-color-etw-20260424-batch5/explorer-show-compressed-and-encrypted-files-in-color-etw-20260424-batch5-stage.json) | `low` | behavior, version-scope |
-| `vm-explorer.show-compressed-and-encrypted-files-in-color-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for ShowCompColor | [evidence/records/raw/ghidra/ghidra-explorer-show-compressed-and-encrypted-files-in-color-20260424-batch5/summary.json](../evidence/records/raw/ghidra/ghidra-explorer-show-compressed-and-encrypted-files-in-color-20260424-batch5/summary.json) | `low` | version-scope |
+| `vm-explorer.show-compressed-and-encrypted-files-in-color-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for ShowCompColor | [evidence/captures/explorer-show-compressed-and-encrypted-files-in-color-etw-stackwalk-attempt-20260424.json](../evidence/captures/explorer-show-compressed-and-encrypted-files-in-color-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/explorer-show-compressed-and-encrypted-files-in-color-etw-20260424-batch5/explorer-show-compressed-and-encrypted-files-in-color-etw-20260424-batch5-summary.json](../evidence/raw/etw-stackwalk/explorer-show-compressed-and-encrypted-files-in-color-etw-20260424-batch5/explorer-show-compressed-and-encrypted-files-in-color-etw-20260424-batch5-summary.json) and [evidence/raw/etw-stackwalk/explorer-show-compressed-and-encrypted-files-in-color-etw-20260424-batch5/explorer-show-compressed-and-encrypted-files-in-color-etw-20260424-batch5-stage.json](../evidence/raw/etw-stackwalk/explorer-show-compressed-and-encrypted-files-in-color-etw-20260424-batch5/explorer-show-compressed-and-encrypted-files-in-color-etw-20260424-batch5-stage.json) | `low` | behavior, version-scope |
+| `vm-explorer.show-compressed-and-encrypted-files-in-color-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for ShowCompColor | [evidence/raw/ghidra/ghidra-explorer-show-compressed-and-encrypted-files-in-color-20260424-batch5/summary.json](../evidence/raw/ghidra/ghidra-explorer-show-compressed-and-encrypted-files-in-color-20260424-batch5/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -2516,21 +2392,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | explorer |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / cleanup/desc.md | [https://github.com/nohuto/win-config/blob/main/cleanup/desc.md](https://github.com/nohuto/win-config/blob/main/cleanup/desc.md) | Matched 1 audit token(s) in win-config. |
-| win-config / misc/desc.md | [https://github.com/nohuto/win-config/blob/main/misc/desc.md](https://github.com/nohuto/win-config/blob/main/misc/desc.md) | Matched 1 audit token(s) in win-config. |
-| win-config / peripheral/desc.md | [https://github.com/nohuto/win-config/blob/main/peripheral/desc.md](https://github.com/nohuto/win-config/blob/main/peripheral/desc.md) | Matched 1 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -2568,10 +2436,10 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-gppref-global-folder-options-vista-showdriveletter` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: GlobalFolderOptionsVista showDriveLetter | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca) | `high` | path, value, behavior |
 | `dump-25h2-explorer-showdrivelettersfirst` | `raw-registry-dump` | `unspecified` | 25H2 raw registry corroboration for ShowDriveLettersFirst | [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) | `medium` | path, version-scope |
-| `procmon-showdrivelettersfirst-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowDriveLettersFirst runtime surface | [evidence/records/raw/procmon/explorer.show-drive-letters-first/showdrivelettersfirst-result.txt](../evidence/records/raw/procmon/explorer.show-drive-letters-first/showdrivelettersfirst-result.txt) | `high` | path, value, behavior, version-scope |
+| `procmon-showdrivelettersfirst-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowDriveLettersFirst runtime surface | [evidence/raw/procmon/explorer.show-drive-letters-first/showdrivelettersfirst-result.txt](../evidence/raw/procmon/explorer.show-drive-letters-first/showdrivelettersfirst-result.txt) | `high` | path, value, behavior, version-scope |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
-| `vm-explorer.show-drive-letters-first-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for ShowDriveLettersFirst | [evidence/records/captures/explorer-show-drive-letters-first-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/explorer-show-drive-letters-first-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/explorer-show-drive-letters-first-etw-20260424-batch5/explorer-show-drive-letters-first-etw-20260424-batch5-summary.json](../evidence/records/raw/etw-stackwalk/explorer-show-drive-letters-first-etw-20260424-batch5/explorer-show-drive-letters-first-etw-20260424-batch5-summary.json) and [evidence/records/raw/etw-stackwalk/explorer-show-drive-letters-first-etw-20260424-batch5/explorer-show-drive-letters-first-etw-20260424-batch5-stage.json](../evidence/records/raw/etw-stackwalk/explorer-show-drive-letters-first-etw-20260424-batch5/explorer-show-drive-letters-first-etw-20260424-batch5-stage.json) | `low` | behavior, version-scope |
-| `vm-explorer.show-drive-letters-first-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for ShowDriveLettersFirst | [evidence/records/raw/ghidra/ghidra-explorer-show-drive-letters-first-20260424-batch5/summary.json](../evidence/records/raw/ghidra/ghidra-explorer-show-drive-letters-first-20260424-batch5/summary.json) | `low` | version-scope |
+| `vm-explorer.show-drive-letters-first-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for ShowDriveLettersFirst | [evidence/captures/explorer-show-drive-letters-first-etw-stackwalk-attempt-20260424.json](../evidence/captures/explorer-show-drive-letters-first-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/explorer-show-drive-letters-first-etw-20260424-batch5/explorer-show-drive-letters-first-etw-20260424-batch5-summary.json](../evidence/raw/etw-stackwalk/explorer-show-drive-letters-first-etw-20260424-batch5/explorer-show-drive-letters-first-etw-20260424-batch5-summary.json) and [evidence/raw/etw-stackwalk/explorer-show-drive-letters-first-etw-20260424-batch5/explorer-show-drive-letters-first-etw-20260424-batch5-stage.json](../evidence/raw/etw-stackwalk/explorer-show-drive-letters-first-etw-20260424-batch5/explorer-show-drive-letters-first-etw-20260424-batch5-stage.json) | `low` | behavior, version-scope |
+| `vm-explorer.show-drive-letters-first-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for ShowDriveLettersFirst | [evidence/raw/ghidra/ghidra-explorer-show-drive-letters-first-20260424-batch5/summary.json](../evidence/raw/ghidra/ghidra-explorer-show-drive-letters-first-20260424-batch5/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -2639,21 +2507,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | explorer, advanced |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / cleanup/desc.md | [https://github.com/nohuto/win-config/blob/main/cleanup/desc.md](https://github.com/nohuto/win-config/blob/main/cleanup/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / peripheral/desc.md | [https://github.com/nohuto/win-config/blob/main/peripheral/desc.md](https://github.com/nohuto/win-config/blob/main/peripheral/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / power/desc.md | [https://github.com/nohuto/win-config/blob/main/power/desc.md](https://github.com/nohuto/win-config/blob/main/power/desc.md) | Matched 2 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -2691,10 +2551,10 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-gppref-global-folder-options-vista` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: GlobalFolderOptionsVista element | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca) | `high` | path, value, behavior |
 | `dump-hkcu25h2-explorer-advanced-hidefileext` | `raw-registry-dump` | `unspecified` | 25H2 default hive and raw dump corroboration for HideFileExt | [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg); [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) | `medium` | path, value, version-scope |
-| `procmon-hidefileext-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer file-extension visibility runtime surface | [evidence/records/raw/procmon/explorer.show-file-extensions/hidefileext-capture-20260313-pml.md](../evidence/records/raw/procmon/explorer.show-file-extensions/hidefileext-capture-20260313-pml.md) | `high` | path, value, behavior, version-scope |
+| `procmon-hidefileext-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer file-extension visibility runtime surface | [evidence/raw/procmon/explorer.show-file-extensions/hidefileext-capture-20260313-pml.md](../evidence/raw/procmon/explorer.show-file-extensions/hidefileext-capture-20260313-pml.md) | `high` | path, value, behavior, version-scope |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
-| `vm-explorer.show-file-extensions-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for HideFileExt | [evidence/records/captures/explorer-show-file-extensions-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/explorer-show-file-extensions-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/explorer-show-file-extensions-etw-20260424-batch5/explorer-show-file-extensions-etw-20260424-batch5-summary.json](../evidence/records/raw/etw-stackwalk/explorer-show-file-extensions-etw-20260424-batch5/explorer-show-file-extensions-etw-20260424-batch5-summary.json) and [evidence/records/raw/etw-stackwalk/explorer-show-file-extensions-etw-20260424-batch5/explorer-show-file-extensions-etw-20260424-batch5-stage.json](../evidence/records/raw/etw-stackwalk/explorer-show-file-extensions-etw-20260424-batch5/explorer-show-file-extensions-etw-20260424-batch5-stage.json) | `low` | behavior, version-scope |
-| `vm-explorer.show-file-extensions-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for HideFileExt | [evidence/records/raw/ghidra/ghidra-explorer-show-file-extensions-20260424-batch5/summary.json](../evidence/records/raw/ghidra/ghidra-explorer-show-file-extensions-20260424-batch5/summary.json) | `low` | version-scope |
+| `vm-explorer.show-file-extensions-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for HideFileExt | [evidence/captures/explorer-show-file-extensions-etw-stackwalk-attempt-20260424.json](../evidence/captures/explorer-show-file-extensions-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/explorer-show-file-extensions-etw-20260424-batch5/explorer-show-file-extensions-etw-20260424-batch5-summary.json](../evidence/raw/etw-stackwalk/explorer-show-file-extensions-etw-20260424-batch5/explorer-show-file-extensions-etw-20260424-batch5-summary.json) and [evidence/raw/etw-stackwalk/explorer-show-file-extensions-etw-20260424-batch5/explorer-show-file-extensions-etw-20260424-batch5-stage.json](../evidence/raw/etw-stackwalk/explorer-show-file-extensions-etw-20260424-batch5/explorer-show-file-extensions-etw-20260424-batch5-stage.json) | `low` | behavior, version-scope |
+| `vm-explorer.show-file-extensions-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for HideFileExt | [evidence/raw/ghidra/ghidra-explorer-show-file-extensions-20260424-batch5/summary.json](../evidence/raw/ghidra/ghidra-explorer-show-file-extensions-20260424-batch5/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -2762,21 +2622,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | explorer, cabinetstate |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / visibility/desc.md | [https://github.com/nohuto/win-config/blob/main/visibility/desc.md](https://github.com/nohuto/win-config/blob/main/visibility/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / cleanup/desc.md | [https://github.com/nohuto/win-config/blob/main/cleanup/desc.md](https://github.com/nohuto/win-config/blob/main/cleanup/desc.md) | Matched 1 audit token(s) in win-config. |
-| win-config / misc/desc.md | [https://github.com/nohuto/win-config/blob/main/misc/desc.md](https://github.com/nohuto/win-config/blob/main/misc/desc.md) | Matched 1 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -2816,8 +2668,8 @@ Nohuto lineage references:
 | `dump-hkcu25h2-explorer-cabinetstate-fullpath` | `raw-registry-dump` | `unspecified` | 25H2 default hive corroboration for FullPath | [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg) | `medium` | path, value, version-scope |
 | `repo-provenance-explorer-show-full-path` | `repo-doc` | `Current repo docs` | Repo source note for explorer.show-full-path | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | path, value, ui-mapping |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
-| `vm-explorer.show-full-path-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for FullPath | [evidence/records/captures/explorer-show-full-path-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/explorer-show-full-path-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/explorer-show-full-path-etw-20260424-batch5/explorer-show-full-path-etw-20260424-batch5-summary.json](../evidence/records/raw/etw-stackwalk/explorer-show-full-path-etw-20260424-batch5/explorer-show-full-path-etw-20260424-batch5-summary.json) and [evidence/records/raw/etw-stackwalk/explorer-show-full-path-etw-20260424-batch5/explorer-show-full-path-etw-20260424-batch5-stage.json](../evidence/records/raw/etw-stackwalk/explorer-show-full-path-etw-20260424-batch5/explorer-show-full-path-etw-20260424-batch5-stage.json) | `low` | behavior, version-scope |
-| `vm-explorer.show-full-path-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for FullPath | [evidence/records/raw/ghidra/ghidra-explorer-show-full-path-20260424-batch5/summary.json](../evidence/records/raw/ghidra/ghidra-explorer-show-full-path-20260424-batch5/summary.json) | `low` | version-scope |
+| `vm-explorer.show-full-path-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for FullPath | [evidence/captures/explorer-show-full-path-etw-stackwalk-attempt-20260424.json](../evidence/captures/explorer-show-full-path-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/explorer-show-full-path-etw-20260424-batch5/explorer-show-full-path-etw-20260424-batch5-summary.json](../evidence/raw/etw-stackwalk/explorer-show-full-path-etw-20260424-batch5/explorer-show-full-path-etw-20260424-batch5-summary.json) and [evidence/raw/etw-stackwalk/explorer-show-full-path-etw-20260424-batch5/explorer-show-full-path-etw-20260424-batch5-stage.json](../evidence/raw/etw-stackwalk/explorer-show-full-path-etw-20260424-batch5/explorer-show-full-path-etw-20260424-batch5-stage.json) | `low` | behavior, version-scope |
+| `vm-explorer.show-full-path-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for FullPath | [evidence/raw/ghidra/ghidra-explorer-show-full-path-20260424-batch5/summary.json](../evidence/raw/ghidra/ghidra-explorer-show-full-path-20260424-batch5/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -2885,21 +2737,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | explorer, advanced, hidden |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / security/desc.md | [https://github.com/nohuto/win-config/blob/main/security/desc.md](https://github.com/nohuto/win-config/blob/main/security/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / visibility/desc.md | [https://github.com/nohuto/win-config/blob/main/visibility/desc.md](https://github.com/nohuto/win-config/blob/main/visibility/desc.md) | Matched 3 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -2937,10 +2781,10 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-gppref-global-folder-options-vista-hidden` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: GlobalFolderOptionsVista element | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca) | `high` | path, value, behavior |
 | `dump-hkcu25h2-explorer-advanced-hidden` | `raw-registry-dump` | `unspecified` | 25H2 default hive and raw dump corroboration for Hidden | [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg); [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) | `medium` | path, value, version-scope |
-| `procmon-hidden-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer hidden-file visibility runtime surface | [evidence/records/raw/procmon/explorer.show-hidden-files/hidden-capture-20260313-pml.md](../evidence/records/raw/procmon/explorer.show-hidden-files/hidden-capture-20260313-pml.md) | `high` | path, value, behavior, version-scope |
+| `procmon-hidden-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer hidden-file visibility runtime surface | [evidence/raw/procmon/explorer.show-hidden-files/hidden-capture-20260313-pml.md](../evidence/raw/procmon/explorer.show-hidden-files/hidden-capture-20260313-pml.md) | `high` | path, value, behavior, version-scope |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
-| `vm-explorer.show-hidden-files-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for Hidden | [evidence/records/captures/explorer-show-hidden-files-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/explorer-show-hidden-files-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/explorer-show-hidden-files-etw-20260424-batch5/explorer-show-hidden-files-etw-20260424-batch5-summary.json](../evidence/records/raw/etw-stackwalk/explorer-show-hidden-files-etw-20260424-batch5/explorer-show-hidden-files-etw-20260424-batch5-summary.json) and [evidence/records/raw/etw-stackwalk/explorer-show-hidden-files-etw-20260424-batch5/explorer-show-hidden-files-etw-20260424-batch5-stage.json](../evidence/records/raw/etw-stackwalk/explorer-show-hidden-files-etw-20260424-batch5/explorer-show-hidden-files-etw-20260424-batch5-stage.json) | `low` | behavior, version-scope |
-| `vm-explorer.show-hidden-files-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for Hidden | [evidence/records/raw/ghidra/ghidra-explorer-show-hidden-files-20260424-batch5/summary.json](../evidence/records/raw/ghidra/ghidra-explorer-show-hidden-files-20260424-batch5/summary.json) | `low` | version-scope |
+| `vm-explorer.show-hidden-files-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for Hidden | [evidence/captures/explorer-show-hidden-files-etw-stackwalk-attempt-20260424.json](../evidence/captures/explorer-show-hidden-files-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/explorer-show-hidden-files-etw-20260424-batch5/explorer-show-hidden-files-etw-20260424-batch5-summary.json](../evidence/raw/etw-stackwalk/explorer-show-hidden-files-etw-20260424-batch5/explorer-show-hidden-files-etw-20260424-batch5-summary.json) and [evidence/raw/etw-stackwalk/explorer-show-hidden-files-etw-20260424-batch5/explorer-show-hidden-files-etw-20260424-batch5-stage.json](../evidence/raw/etw-stackwalk/explorer-show-hidden-files-etw-20260424-batch5/explorer-show-hidden-files-etw-20260424-batch5-stage.json) | `low` | behavior, version-scope |
+| `vm-explorer.show-hidden-files-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for Hidden | [evidence/raw/ghidra/ghidra-explorer-show-hidden-files-20260424-batch5/summary.json](../evidence/raw/ghidra/ghidra-explorer-show-hidden-files-20260424-batch5/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -3008,21 +2852,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | explorer, advanced |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / cleanup/desc.md | [https://github.com/nohuto/win-config/blob/main/cleanup/desc.md](https://github.com/nohuto/win-config/blob/main/cleanup/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / peripheral/desc.md | [https://github.com/nohuto/win-config/blob/main/peripheral/desc.md](https://github.com/nohuto/win-config/blob/main/peripheral/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / power/desc.md | [https://github.com/nohuto/win-config/blob/main/power/desc.md](https://github.com/nohuto/win-config/blob/main/power/desc.md) | Matched 2 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -3060,10 +2896,10 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-gppref-global-folder-options-vista-showinfotip` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: GlobalFolderOptionsVista showInfoTip | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca) | `high` | path, value, behavior |
 | `dump-hkcu25h2-explorer-advanced-showinfotip` | `raw-registry-dump` | `unspecified` | 25H2 default hive corroboration for ShowInfoTip | [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg) | `medium` | path, value, version-scope |
-| `procmon-showinfotip-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowInfoTip runtime surface | [evidence/records/raw/procmon/explorer.show-info-tips/showinfotip-result.txt](../evidence/records/raw/procmon/explorer.show-info-tips/showinfotip-result.txt) | `high` | path, value, behavior, version-scope |
+| `procmon-showinfotip-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowInfoTip runtime surface | [evidence/raw/procmon/explorer.show-info-tips/showinfotip-result.txt](../evidence/raw/procmon/explorer.show-info-tips/showinfotip-result.txt) | `high` | path, value, behavior, version-scope |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
-| `vm-explorer.show-info-tips-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for ShowInfoTip | [evidence/records/captures/explorer-show-info-tips-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/explorer-show-info-tips-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/explorer-show-info-tips-etw-20260424-batch4/explorer-show-info-tips-etw-20260424-batch4-summary.json](../evidence/records/raw/etw-stackwalk/explorer-show-info-tips-etw-20260424-batch4/explorer-show-info-tips-etw-20260424-batch4-summary.json) and [evidence/records/raw/etw-stackwalk/explorer-show-info-tips-etw-20260424-batch4/explorer-show-info-tips-etw-20260424-batch4-stage.json](../evidence/records/raw/etw-stackwalk/explorer-show-info-tips-etw-20260424-batch4/explorer-show-info-tips-etw-20260424-batch4-stage.json) | `low` | behavior, version-scope |
-| `vm-explorer.show-info-tips-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for ShowInfoTip | [evidence/records/raw/ghidra/ghidra-explorer-show-info-tips-20260424-batch4/summary.json](../evidence/records/raw/ghidra/ghidra-explorer-show-info-tips-20260424-batch4/summary.json) | `low` | version-scope |
+| `vm-explorer.show-info-tips-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for ShowInfoTip | [evidence/captures/explorer-show-info-tips-etw-stackwalk-attempt-20260424.json](../evidence/captures/explorer-show-info-tips-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/explorer-show-info-tips-etw-20260424-batch4/explorer-show-info-tips-etw-20260424-batch4-summary.json](../evidence/raw/etw-stackwalk/explorer-show-info-tips-etw-20260424-batch4/explorer-show-info-tips-etw-20260424-batch4-summary.json) and [evidence/raw/etw-stackwalk/explorer-show-info-tips-etw-20260424-batch4/explorer-show-info-tips-etw-20260424-batch4-stage.json](../evidence/raw/etw-stackwalk/explorer-show-info-tips-etw-20260424-batch4/explorer-show-info-tips-etw-20260424-batch4-stage.json) | `low` | behavior, version-scope |
+| `vm-explorer.show-info-tips-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for ShowInfoTip | [evidence/raw/ghidra/ghidra-explorer-show-info-tips-20260424-batch4/summary.json](../evidence/raw/ghidra/ghidra-explorer-show-info-tips-20260424-batch4/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -3131,21 +2967,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | explorer, advanced |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / cleanup/desc.md | [https://github.com/nohuto/win-config/blob/main/cleanup/desc.md](https://github.com/nohuto/win-config/blob/main/cleanup/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / peripheral/desc.md | [https://github.com/nohuto/win-config/blob/main/peripheral/desc.md](https://github.com/nohuto/win-config/blob/main/peripheral/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / power/desc.md | [https://github.com/nohuto/win-config/blob/main/power/desc.md](https://github.com/nohuto/win-config/blob/main/power/desc.md) | Matched 2 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -3183,10 +3011,10 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-gppref-global-folder-options-vista-showsuperhidden` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: GlobalFolderOptionsVista showSuperHidden | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca) | `high` | path, value, behavior |
 | `dump-25h2-explorer-advanced-showsuperhidden` | `raw-registry-dump` | `unspecified` | 25H2 dump and default hive corroboration for ShowSuperHidden | [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg) | `medium` | path, value, version-scope |
-| `procmon-showsuperhidden-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowSuperHidden runtime surface | [evidence/records/raw/procmon/explorer.show-protected-operating-system-files/showsuperhidden-result.txt](../evidence/records/raw/procmon/explorer.show-protected-operating-system-files/showsuperhidden-result.txt) | `high` | path, value, behavior, version-scope |
+| `procmon-showsuperhidden-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowSuperHidden runtime surface | [evidence/raw/procmon/explorer.show-protected-operating-system-files/showsuperhidden-result.txt](../evidence/raw/procmon/explorer.show-protected-operating-system-files/showsuperhidden-result.txt) | `high` | path, value, behavior, version-scope |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
-| `vm-explorer.show-protected-operating-system-files-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for ShowSuperHidden | [evidence/records/captures/explorer-show-protected-operating-system-files-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/explorer-show-protected-operating-system-files-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/explorer-show-protected-operating-system-files-etw-20260424-batch4/explorer-show-protected-operating-system-files-etw-20260424-batch4-summary.json](../evidence/records/raw/etw-stackwalk/explorer-show-protected-operating-system-files-etw-20260424-batch4/explorer-show-protected-operating-system-files-etw-20260424-batch4-summary.json) and [evidence/records/raw/etw-stackwalk/explorer-show-protected-operating-system-files-etw-20260424-batch4/explorer-show-protected-operating-system-files-etw-20260424-batch4-stage.json](../evidence/records/raw/etw-stackwalk/explorer-show-protected-operating-system-files-etw-20260424-batch4/explorer-show-protected-operating-system-files-etw-20260424-batch4-stage.json) | `low` | behavior, version-scope |
-| `vm-explorer.show-protected-operating-system-files-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for ShowSuperHidden | [evidence/records/raw/ghidra/ghidra-explorer-show-protected-operating-system-files-20260424-batch4/summary.json](../evidence/records/raw/ghidra/ghidra-explorer-show-protected-operating-system-files-20260424-batch4/summary.json) | `low` | version-scope |
+| `vm-explorer.show-protected-operating-system-files-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for ShowSuperHidden | [evidence/captures/explorer-show-protected-operating-system-files-etw-stackwalk-attempt-20260424.json](../evidence/captures/explorer-show-protected-operating-system-files-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/explorer-show-protected-operating-system-files-etw-20260424-batch4/explorer-show-protected-operating-system-files-etw-20260424-batch4-summary.json](../evidence/raw/etw-stackwalk/explorer-show-protected-operating-system-files-etw-20260424-batch4/explorer-show-protected-operating-system-files-etw-20260424-batch4-summary.json) and [evidence/raw/etw-stackwalk/explorer-show-protected-operating-system-files-etw-20260424-batch4/explorer-show-protected-operating-system-files-etw-20260424-batch4-stage.json](../evidence/raw/etw-stackwalk/explorer-show-protected-operating-system-files-etw-20260424-batch4/explorer-show-protected-operating-system-files-etw-20260424-batch4-stage.json) | `low` | behavior, version-scope |
+| `vm-explorer.show-protected-operating-system-files-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for ShowSuperHidden | [evidence/raw/ghidra/ghidra-explorer-show-protected-operating-system-files-20260424-batch4/summary.json](../evidence/raw/ghidra/ghidra-explorer-show-protected-operating-system-files-20260424-batch4/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -3254,21 +3082,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | explorer, showrecent |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / misc/desc.md | [https://github.com/nohuto/win-config/blob/main/misc/desc.md](https://github.com/nohuto/win-config/blob/main/misc/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / cleanup/desc.md | [https://github.com/nohuto/win-config/blob/main/cleanup/desc.md](https://github.com/nohuto/win-config/blob/main/cleanup/desc.md) | Matched 1 audit token(s) in win-config. |
-| win-config / peripheral/desc.md | [https://github.com/nohuto/win-config/blob/main/peripheral/desc.md](https://github.com/nohuto/win-config/blob/main/peripheral/desc.md) | Matched 1 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -3306,10 +3126,10 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-settings-common-fileexplorer-showrecentlyusedfiles` | `official-doc` | `Microsoft official doc` | Microsoft Learn: settings-common File Explorer general settings | [https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-common](https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-common) | `medium` | behavior, version-scope |
 | `dump-25h2-explorer-showrecent` | `raw-registry-dump` | `unspecified` | 25H2 raw registry corroboration for ShowRecent | [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) | `medium` | path, version-scope |
-| `procmon-showrecent-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowRecent runtime surface | [evidence/records/raw/procmon/explorer.show-recent-items/showrecent-result.txt](../evidence/records/raw/procmon/explorer.show-recent-items/showrecent-result.txt) | `high` | path, value, behavior, version-scope |
+| `procmon-showrecent-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowRecent runtime surface | [evidence/raw/procmon/explorer.show-recent-items/showrecent-result.txt](../evidence/raw/procmon/explorer.show-recent-items/showrecent-result.txt) | `high` | path, value, behavior, version-scope |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation for ShowRecent | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
-| `vm-explorer.show-recent-items-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for ShowRecent | [evidence/records/captures/explorer-show-recent-items-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/explorer-show-recent-items-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/explorer-show-recent-items-etw-20260424-batch6/explorer-show-recent-items-etw-20260424-batch6-summary.json](../evidence/records/raw/etw-stackwalk/explorer-show-recent-items-etw-20260424-batch6/explorer-show-recent-items-etw-20260424-batch6-summary.json) and [evidence/records/raw/etw-stackwalk/explorer-show-recent-items-etw-20260424-batch6/explorer-show-recent-items-etw-20260424-batch6-stage.json](../evidence/records/raw/etw-stackwalk/explorer-show-recent-items-etw-20260424-batch6/explorer-show-recent-items-etw-20260424-batch6-stage.json) | `low` | behavior, version-scope |
-| `vm-explorer.show-recent-items-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for ShowRecent | [evidence/records/raw/ghidra/ghidra-explorer-show-recent-items-20260424-batch6/summary.json](../evidence/records/raw/ghidra/ghidra-explorer-show-recent-items-20260424-batch6/summary.json) | `low` | version-scope |
+| `vm-explorer.show-recent-items-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for ShowRecent | [evidence/captures/explorer-show-recent-items-etw-stackwalk-attempt-20260424.json](../evidence/captures/explorer-show-recent-items-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/explorer-show-recent-items-etw-20260424-batch6/explorer-show-recent-items-etw-20260424-batch6-summary.json](../evidence/raw/etw-stackwalk/explorer-show-recent-items-etw-20260424-batch6/explorer-show-recent-items-etw-20260424-batch6-summary.json) and [evidence/raw/etw-stackwalk/explorer-show-recent-items-etw-20260424-batch6/explorer-show-recent-items-etw-20260424-batch6-stage.json](../evidence/raw/etw-stackwalk/explorer-show-recent-items-etw-20260424-batch6/explorer-show-recent-items-etw-20260424-batch6-stage.json) | `low` | behavior, version-scope |
+| `vm-explorer.show-recent-items-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for ShowRecent | [evidence/raw/ghidra/ghidra-explorer-show-recent-items-20260424-batch6/summary.json](../evidence/raw/ghidra/ghidra-explorer-show-recent-items-20260424-batch6/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -3377,22 +3197,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config, decompiled-pseudocode |
-| Matched tokens | explorer, advanced |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / cleanup/desc.md | [https://github.com/nohuto/win-config/blob/main/cleanup/desc.md](https://github.com/nohuto/win-config/blob/main/cleanup/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / peripheral/desc.md | [https://github.com/nohuto/win-config/blob/main/peripheral/desc.md](https://github.com/nohuto/win-config/blob/main/peripheral/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / power/desc.md | [https://github.com/nohuto/win-config/blob/main/power/desc.md](https://github.com/nohuto/win-config/blob/main/power/desc.md) | Matched 2 audit token(s) in win-config. |
-| decompiled-pseudocode / USBHUB3 | [https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3](https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3) | USB hub pseudocode relevant to USB and peripheral registry behavior. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -3430,10 +3241,10 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-settings-common-fileexplorer-showstatusbar` | `official-doc` | `Microsoft official doc` | Microsoft Learn: settings-common File Explorer Classic advanced settings | [https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-common](https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-common) | `medium` | behavior, version-scope |
 | `dump-25h2-explorer-advanced-showstatusbar` | `raw-registry-dump` | `unspecified` | 25H2 raw registry and default-hive corroboration for ShowStatusBar | [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt); [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg) | `medium` | path, value, version-scope |
-| `procmon-showstatusbar-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowStatusBar runtime surface | [evidence/records/raw/procmon/explorer.show-status-bar/showstatusbar-result.txt](../evidence/records/raw/procmon/explorer.show-status-bar/showstatusbar-result.txt) | `high` | path, value, behavior, version-scope |
+| `procmon-showstatusbar-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowStatusBar runtime surface | [evidence/raw/procmon/explorer.show-status-bar/showstatusbar-result.txt](../evidence/raw/procmon/explorer.show-status-bar/showstatusbar-result.txt) | `high` | path, value, behavior, version-scope |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
-| `vm-explorer.show-status-bar-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for ShowStatusBar | [evidence/records/captures/explorer-show-status-bar-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/explorer-show-status-bar-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/explorer-show-status-bar-etw-20260424-batch6/explorer-show-status-bar-etw-20260424-batch6-summary.json](../evidence/records/raw/etw-stackwalk/explorer-show-status-bar-etw-20260424-batch6/explorer-show-status-bar-etw-20260424-batch6-summary.json) and [evidence/records/raw/etw-stackwalk/explorer-show-status-bar-etw-20260424-batch6/explorer-show-status-bar-etw-20260424-batch6-stage.json](../evidence/records/raw/etw-stackwalk/explorer-show-status-bar-etw-20260424-batch6/explorer-show-status-bar-etw-20260424-batch6-stage.json) | `low` | behavior, version-scope |
-| `vm-explorer.show-status-bar-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for ShowStatusBar | [evidence/records/raw/ghidra/ghidra-explorer-show-status-bar-20260424-batch6/summary.json](../evidence/records/raw/ghidra/ghidra-explorer-show-status-bar-20260424-batch6/summary.json) | `low` | version-scope |
+| `vm-explorer.show-status-bar-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for ShowStatusBar | [evidence/captures/explorer-show-status-bar-etw-stackwalk-attempt-20260424.json](../evidence/captures/explorer-show-status-bar-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/explorer-show-status-bar-etw-20260424-batch6/explorer-show-status-bar-etw-20260424-batch6-summary.json](../evidence/raw/etw-stackwalk/explorer-show-status-bar-etw-20260424-batch6/explorer-show-status-bar-etw-20260424-batch6-summary.json) and [evidence/raw/etw-stackwalk/explorer-show-status-bar-etw-20260424-batch6/explorer-show-status-bar-etw-20260424-batch6-stage.json](../evidence/raw/etw-stackwalk/explorer-show-status-bar-etw-20260424-batch6/explorer-show-status-bar-etw-20260424-batch6-stage.json) | `low` | behavior, version-scope |
+| `vm-explorer.show-status-bar-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for ShowStatusBar | [evidence/raw/ghidra/ghidra-explorer-show-status-bar-20260424-batch6/summary.json](../evidence/raw/ghidra/ghidra-explorer-show-status-bar-20260424-batch6/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -3501,21 +3312,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | explorer, advanced |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / cleanup/desc.md | [https://github.com/nohuto/win-config/blob/main/cleanup/desc.md](https://github.com/nohuto/win-config/blob/main/cleanup/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / peripheral/desc.md | [https://github.com/nohuto/win-config/blob/main/peripheral/desc.md](https://github.com/nohuto/win-config/blob/main/peripheral/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / power/desc.md | [https://github.com/nohuto/win-config/blob/main/power/desc.md](https://github.com/nohuto/win-config/blob/main/power/desc.md) | Matched 2 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -3553,7 +3356,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-gppref-global-folder-options-vista-displayiconthumb` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: GlobalFolderOptionsVista displayIconThumb | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/a6ca3a17-1971-4b22-bf3b-e1a5d5c50fca) | `high` | path, value, behavior |
 | `dump-25h2-explorer-advanced-showtypeoverlay` | `raw-registry-dump` | `unspecified` | 25H2 raw registry and default-hive corroboration for ShowTypeOverlay | [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt); [research/_source-mirrors/regkit/assets/defaults/HKCU25H2.reg](_source-mirrors/regkit/assets/defaults/HKCU25H2.reg) | `medium` | path, value, version-scope |
-| `procmon-showtypeoverlay-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowTypeOverlay runtime surface | [evidence/records/raw/procmon/explorer.show-type-overlay/showtypeoverlay-result.txt](../evidence/records/raw/procmon/explorer.show-type-overlay/showtypeoverlay-result.txt) | `high` | path, value, behavior, version-scope |
+| `procmon-showtypeoverlay-runtime` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer ShowTypeOverlay runtime surface | [evidence/raw/procmon/explorer.show-type-overlay/showtypeoverlay-result.txt](../evidence/raw/procmon/explorer.show-type-overlay/showtypeoverlay-result.txt) | `high` | path, value, behavior, version-scope |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
@@ -3622,21 +3425,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | explorer, advanced, taskbaral |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / cleanup/desc.md | [https://github.com/nohuto/win-config/blob/main/cleanup/desc.md](https://github.com/nohuto/win-config/blob/main/cleanup/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / misc/desc.md | [https://github.com/nohuto/win-config/blob/main/misc/desc.md](https://github.com/nohuto/win-config/blob/main/misc/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / peripheral/desc.md | [https://github.com/nohuto/win-config/blob/main/peripheral/desc.md](https://github.com/nohuto/win-config/blob/main/peripheral/desc.md) | Matched 2 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -3674,7 +3469,7 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-windows11-settings-taskbar-alignment` | `official-doc` | `Microsoft official doc` | Microsoft Windows 11 settings reference for taskbar alignment | [https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-windows-11](https://learn.microsoft.com/en-us/windows/apps/develop/settings/settings-windows-11) | `high` | behavior, version-scope |
 | `dump-25h2-explorer-advanced-taskbaral` | `raw-registry-dump` | `unspecified` | 25H2 raw registry corroboration for TaskbarAl | [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) | `medium` | path, version-scope |
-| `procmon-taskbar-alignment` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer taskbar alignment runtime surface | [evidence/records/raw/procmon/explorer.taskbar-alignment-left/taskbar-alignment-capture-20260313-pml.md](../evidence/records/raw/procmon/explorer.taskbar-alignment-left/taskbar-alignment-capture-20260313-pml.md) | `high` | path, value, behavior, version-scope |
+| `procmon-taskbar-alignment` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer taskbar alignment runtime surface | [evidence/raw/procmon/explorer.taskbar-alignment-left/taskbar-alignment-capture-20260313-pml.md](../evidence/raw/procmon/explorer.taskbar-alignment-left/taskbar-alignment-capture-20260313-pml.md) | `high` | path, value, behavior, version-scope |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
@@ -3745,27 +3540,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, networkconnectivitystatusindicator, noactiveprobe |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / network/desc.md | [https://github.com/nohuto/win-config/blob/main/network/desc.md](https://github.com/nohuto/win-config/blob/main/network/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / network/assets/QoS-Policy.ps1 | [https://github.com/nohuto/win-config/blob/main/network/assets/QoS-Policy.ps1](https://github.com/nohuto/win-config/blob/main/network/assets/QoS-Policy.ps1) | Matched 1 audit token(s) in win-config. |
-| win-config / affinities/desc.md | [https://github.com/nohuto/win-config/blob/main/affinities/desc.md](https://github.com/nohuto/win-config/blob/main/affinities/desc.md) | Matched 1 audit token(s) in win-config. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -3805,8 +3586,8 @@ Windows Internals references:
 | `ms-ncsi-icm-adml` | `official-doc` | `Microsoft official doc` | Microsoft help text for NCSI active probing policy | [evidence/files/external/c/PolicyDefinitions/en-US/ICM.adml](../evidence/files/external/c/PolicyDefinitions/en-US/ICM.adml) | `high` | behavior, risk, default |
 | `app-network-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | ui-mapping, value, path |
 | `nohuto-ncsi-mirror` | `registry-observation` | `VM registry observation` | nohuto mirror - NCSI NoActiveProbe registry evidence | [research/_source-mirrors/win-config/network/desc.md](_source-mirrors/win-config/network/desc.md) and [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) | `medium` | path, value, behavior |
-| `vm-network.disable-active-probing-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for NoActiveProbe | [evidence/records/captures/network-disable-active-probing-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/network-disable-active-probing-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/network-disable-active-probing-etw-20260424-batch2/network-disable-active-probing-etw-20260424-batch2-summary.json](../evidence/records/raw/etw-stackwalk/network-disable-active-probing-etw-20260424-batch2/network-disable-active-probing-etw-20260424-batch2-summary.json) and [evidence/records/raw/etw-stackwalk/network-disable-active-probing-etw-20260424-batch2/network-disable-active-probing-etw-20260424-batch2-stage.json](../evidence/records/raw/etw-stackwalk/network-disable-active-probing-etw-20260424-batch2/network-disable-active-probing-etw-20260424-batch2-stage.json) | `low` | behavior, version-scope |
-| `vm-network.disable-active-probing-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for NoActiveProbe | [evidence/records/raw/ghidra/ghidra-network-disable-active-probing-20260424-batch2/summary.json](../evidence/records/raw/ghidra/ghidra-network-disable-active-probing-20260424-batch2/summary.json) | `low` | version-scope |
+| `vm-network.disable-active-probing-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for NoActiveProbe | [evidence/captures/network-disable-active-probing-etw-stackwalk-attempt-20260424.json](../evidence/captures/network-disable-active-probing-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/network-disable-active-probing-etw-20260424-batch2/network-disable-active-probing-etw-20260424-batch2-summary.json](../evidence/raw/etw-stackwalk/network-disable-active-probing-etw-20260424-batch2/network-disable-active-probing-etw-20260424-batch2-summary.json) and [evidence/raw/etw-stackwalk/network-disable-active-probing-etw-20260424-batch2/network-disable-active-probing-etw-20260424-batch2-stage.json](../evidence/raw/etw-stackwalk/network-disable-active-probing-etw-20260424-batch2/network-disable-active-probing-etw-20260424-batch2-stage.json) | `low` | behavior, version-scope |
+| `vm-network.disable-active-probing-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for NoActiveProbe | [evidence/raw/ghidra/ghidra-network-disable-active-probing-20260424-batch2/summary.json](../evidence/raw/ghidra/ghidra-network-disable-active-probing-20260424-batch2/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -3875,28 +3656,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | lanmanserver, autoshareserver, autosharewks |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / network/desc.md | [https://github.com/nohuto/win-config/blob/main/network/desc.md](https://github.com/nohuto/win-config/blob/main/network/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / security/desc.md | [https://github.com/nohuto/win-config/blob/main/security/desc.md](https://github.com/nohuto/win-config/blob/main/security/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 1 audit token(s) in win-config. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
-| Local asset: Windows Internals E7 Part 2 | [Docs/affinities/assets/E7-P2.pdf](../Docs/affinities/assets/E7-P2.pdf) | Local Windows Internals Part 2 asset used in the SMB / Remote FSD documentation chain. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -4018,27 +3784,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | disabledcomponents, tcpip6 |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / network/desc.md | [https://github.com/nohuto/win-config/blob/main/network/desc.md](https://github.com/nohuto/win-config/blob/main/network/desc.md) | Matched 1 audit token(s) in win-config. |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 1 audit token(s) in win-config. |
-| win-config / system/assets/drivers.txt | [https://github.com/nohuto/win-config/blob/main/system/assets/drivers.txt](https://github.com/nohuto/win-config/blob/main/system/assets/drivers.txt) | Matched 1 audit token(s) in win-config. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -4077,8 +3829,8 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-ipv6-config` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Configure IPv6 in Windows | [https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/configure-ipv6-in-windows](https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/configure-ipv6-in-windows) | `high` | path, value, allowed-values, behavior, risk |
 | `app-network-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | ui-mapping, value |
-| `vm-network.disable-ipv6-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for DisabledComponents | [evidence/records/captures/network-disable-ipv6-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/network-disable-ipv6-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/network-disable-ipv6-etw-20260424-batch6/network-disable-ipv6-etw-20260424-batch6-summary.json](../evidence/records/raw/etw-stackwalk/network-disable-ipv6-etw-20260424-batch6/network-disable-ipv6-etw-20260424-batch6-summary.json) and [evidence/records/raw/etw-stackwalk/network-disable-ipv6-etw-20260424-batch6/network-disable-ipv6-etw-20260424-batch6-stage.json](../evidence/records/raw/etw-stackwalk/network-disable-ipv6-etw-20260424-batch6/network-disable-ipv6-etw-20260424-batch6-stage.json) | `low` | behavior, version-scope |
-| `vm-network.disable-ipv6-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for DisabledComponents | [evidence/records/raw/ghidra/ghidra-network-disable-ipv6-20260424-batch6/summary.json](../evidence/records/raw/ghidra/ghidra-network-disable-ipv6-20260424-batch6/summary.json) | `low` | version-scope |
+| `vm-network.disable-ipv6-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for DisabledComponents | [evidence/captures/network-disable-ipv6-etw-stackwalk-attempt-20260424.json](../evidence/captures/network-disable-ipv6-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/network-disable-ipv6-etw-20260424-batch6/network-disable-ipv6-etw-20260424-batch6-summary.json](../evidence/raw/etw-stackwalk/network-disable-ipv6-etw-20260424-batch6/network-disable-ipv6-etw-20260424-batch6-summary.json) and [evidence/raw/etw-stackwalk/network-disable-ipv6-etw-20260424-batch6/network-disable-ipv6-etw-20260424-batch6-stage.json](../evidence/raw/etw-stackwalk/network-disable-ipv6-etw-20260424-batch6/network-disable-ipv6-etw-20260424-batch6-stage.json) | `low` | behavior, version-scope |
+| `vm-network.disable-ipv6-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for DisabledComponents | [evidence/raw/ghidra/ghidra-network-disable-ipv6-20260424-batch6/summary.json](../evidence/raw/ghidra/ghidra-network-disable-ipv6-20260424-batch6/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -4146,27 +3898,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, dnsclient, enablemulticast |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / network/desc.md | [https://github.com/nohuto/win-config/blob/main/network/desc.md](https://github.com/nohuto/win-config/blob/main/network/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / network/assets/QoS-Policy.ps1 | [https://github.com/nohuto/win-config/blob/main/network/assets/QoS-Policy.ps1](https://github.com/nohuto/win-config/blob/main/network/assets/QoS-Policy.ps1) | Matched 1 audit token(s) in win-config. |
-| win-config / affinities/desc.md | [https://github.com/nohuto/win-config/blob/main/affinities/desc.md](https://github.com/nohuto/win-config/blob/main/affinities/desc.md) | Matched 1 audit token(s) in win-config. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -4206,8 +3944,8 @@ Windows Internals references:
 | `local-dnsclient-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DnsClient.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/DnsClient.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/DnsClient.admx) | `high` | path, value, allowed-values |
 | `app-network-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-llmnr` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
-| `vm-network.disable-llmnr-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for EnableMulticast | [evidence/records/captures/network-disable-llmnr-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/network-disable-llmnr-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/network-disable-llmnr-etw-20260424-batch3/network-disable-llmnr-etw-20260424-batch3-summary.json](../evidence/records/raw/etw-stackwalk/network-disable-llmnr-etw-20260424-batch3/network-disable-llmnr-etw-20260424-batch3-summary.json) and [evidence/records/raw/etw-stackwalk/network-disable-llmnr-etw-20260424-batch3/network-disable-llmnr-etw-20260424-batch3-stage.json](../evidence/records/raw/etw-stackwalk/network-disable-llmnr-etw-20260424-batch3/network-disable-llmnr-etw-20260424-batch3-stage.json) | `low` | behavior, version-scope |
-| `vm-network.disable-llmnr-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for EnableMulticast | [evidence/records/raw/ghidra/ghidra-network-disable-llmnr-20260424-batch3/summary.json](../evidence/records/raw/ghidra/ghidra-network-disable-llmnr-20260424-batch3/summary.json) | `low` | version-scope |
+| `vm-network.disable-llmnr-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for EnableMulticast | [evidence/captures/network-disable-llmnr-etw-stackwalk-attempt-20260424.json](../evidence/captures/network-disable-llmnr-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/network-disable-llmnr-etw-20260424-batch3/network-disable-llmnr-etw-20260424-batch3-summary.json](../evidence/raw/etw-stackwalk/network-disable-llmnr-etw-20260424-batch3/network-disable-llmnr-etw-20260424-batch3-summary.json) and [evidence/raw/etw-stackwalk/network-disable-llmnr-etw-20260424-batch3/network-disable-llmnr-etw-20260424-batch3-stage.json](../evidence/raw/etw-stackwalk/network-disable-llmnr-etw-20260424-batch3/network-disable-llmnr-etw-20260424-batch3-stage.json) | `low` | behavior, version-scope |
+| `vm-network.disable-llmnr-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for EnableMulticast | [evidence/raw/ghidra/ghidra-network-disable-llmnr-20260424-batch3/summary.json](../evidence/raw/ghidra/ghidra-network-disable-llmnr-20260424-batch3/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -4276,27 +4014,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, lltd |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / network/desc.md | [https://github.com/nohuto/win-config/blob/main/network/desc.md](https://github.com/nohuto/win-config/blob/main/network/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / network/assets/QoS-Policy.ps1 | [https://github.com/nohuto/win-config/blob/main/network/assets/QoS-Policy.ps1](https://github.com/nohuto/win-config/blob/main/network/assets/QoS-Policy.ps1) | Matched 1 audit token(s) in win-config. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -4421,27 +4145,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, dnsclient, enablemdns |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / network/desc.md | [https://github.com/nohuto/win-config/blob/main/network/desc.md](https://github.com/nohuto/win-config/blob/main/network/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / network/assets/QoS-Policy.ps1 | [https://github.com/nohuto/win-config/blob/main/network/assets/QoS-Policy.ps1](https://github.com/nohuto/win-config/blob/main/network/assets/QoS-Policy.ps1) | Matched 1 audit token(s) in win-config. |
-| win-config / affinities/desc.md | [https://github.com/nohuto/win-config/blob/main/affinities/desc.md](https://github.com/nohuto/win-config/blob/main/affinities/desc.md) | Matched 1 audit token(s) in win-config. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -4480,8 +4190,8 @@ Windows Internals references:
 | `ms-dnsclient-mdns-admx` | `official-doc` | `Microsoft official doc` | Microsoft administrative template for mDNS | [evidence/files/external/c/Windows/PolicyDefinitions/DnsClient.admx](../evidence/files/external/c/Windows/PolicyDefinitions/DnsClient.admx) | `high` | path, value, allowed-values |
 | `ms-dnsclient-mdns-adml` | `official-doc` | `Microsoft official doc` | Microsoft help text for mDNS policy | [evidence/files/external/c/PolicyDefinitions/en-US/DnsClient.adml](../evidence/files/external/c/PolicyDefinitions/en-US/DnsClient.adml) | `high` | behavior, default |
 | `app-network-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | ui-mapping, value |
-| `vm-network.disable-mdns-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for EnableMDNS | [evidence/records/captures/network-disable-mdns-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/network-disable-mdns-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/network-disable-mdns-etw-20260424-batch3/network-disable-mdns-etw-20260424-batch3-summary.json](../evidence/records/raw/etw-stackwalk/network-disable-mdns-etw-20260424-batch3/network-disable-mdns-etw-20260424-batch3-summary.json) and [evidence/records/raw/etw-stackwalk/network-disable-mdns-etw-20260424-batch3/network-disable-mdns-etw-20260424-batch3-stage.json](../evidence/records/raw/etw-stackwalk/network-disable-mdns-etw-20260424-batch3/network-disable-mdns-etw-20260424-batch3-stage.json) | `low` | behavior, version-scope |
-| `vm-network.disable-mdns-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for EnableMDNS | [evidence/records/raw/ghidra/ghidra-network-disable-mdns-20260424-batch3/summary.json](../evidence/records/raw/ghidra/ghidra-network-disable-mdns-20260424-batch3/summary.json) | `low` | version-scope |
+| `vm-network.disable-mdns-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for EnableMDNS | [evidence/captures/network-disable-mdns-etw-stackwalk-attempt-20260424.json](../evidence/captures/network-disable-mdns-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/network-disable-mdns-etw-20260424-batch3/network-disable-mdns-etw-20260424-batch3-summary.json](../evidence/raw/etw-stackwalk/network-disable-mdns-etw-20260424-batch3/network-disable-mdns-etw-20260424-batch3-summary.json) and [evidence/raw/etw-stackwalk/network-disable-mdns-etw-20260424-batch3/network-disable-mdns-etw-20260424-batch3-stage.json](../evidence/raw/etw-stackwalk/network-disable-mdns-etw-20260424-batch3/network-disable-mdns-etw-20260424-batch3-stage.json) | `low` | behavior, version-scope |
+| `vm-network.disable-mdns-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for EnableMDNS | [evidence/raw/ghidra/ghidra-network-disable-mdns-20260424-batch3/summary.json](../evidence/raw/ghidra/ghidra-network-disable-mdns-20260424-batch3/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -4553,7 +4263,7 @@ Current writes
 | Has nohuto lineage | `True` |
 | Has Windows Internals notes | `True` |
 | Needs review | `False` |
-| Source repositories | win-config, win-registry |
+| Source repositories | win-config |
 | Matched tokens | disable, netbios, over, disables, enabled, adapters, using, interface, surface, documented |
 | Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
 
@@ -4563,7 +4273,7 @@ Nohuto lineage references:
 | --- | --- | --- |
 | win-config / network/desc.md | [https://github.com/nohuto/win-config/blob/main/network/desc.md](https://github.com/nohuto/win-config/blob/main/network/desc.md) | Matched 9 audit token(s) in win-config. |
 | win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 10 audit token(s) in win-config. |
-| win-registry / README.md | [https://github.com/nohuto/win-registry/blob/main/README.md](https://github.com/nohuto/win-registry/blob/main/README.md) | Matched 8 audit token(s) in win-registry. |
+| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 8 audit token(s) in win-config. |
 
 Windows Internals references:
 
@@ -4680,27 +4390,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, dnsclient, enablenetbios |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / network/desc.md | [https://github.com/nohuto/win-config/blob/main/network/desc.md](https://github.com/nohuto/win-config/blob/main/network/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / network/assets/QoS-Policy.ps1 | [https://github.com/nohuto/win-config/blob/main/network/assets/QoS-Policy.ps1](https://github.com/nohuto/win-config/blob/main/network/assets/QoS-Policy.ps1) | Matched 1 audit token(s) in win-config. |
-| win-config / affinities/desc.md | [https://github.com/nohuto/win-config/blob/main/affinities/desc.md](https://github.com/nohuto/win-config/blob/main/affinities/desc.md) | Matched 1 audit token(s) in win-config. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -4743,8 +4439,8 @@ Windows Internals references:
 | `local-dnsclient-netbios-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DnsClient.admx NetBIOS enum mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/DnsClient.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/DnsClient.admx) | `high` | path, value, allowed-values, behavior |
 | `app-network-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-netbios-resolution` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
-| `vm-network.disable-netbios-resolution-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for EnableNetbios | [evidence/records/captures/network-disable-netbios-resolution-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/network-disable-netbios-resolution-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/network-disable-netbios-resolution-etw-20260427a/network-disable-netbios-resolution-etw-20260427a-summary.json](../evidence/records/raw/etw-stackwalk/network-disable-netbios-resolution-etw-20260427a/network-disable-netbios-resolution-etw-20260427a-summary.json) and [evidence/records/raw/etw-stackwalk/network-disable-netbios-resolution-etw-20260427a/network-disable-netbios-resolution-etw-20260427a-stage.json](../evidence/records/raw/etw-stackwalk/network-disable-netbios-resolution-etw-20260427a/network-disable-netbios-resolution-etw-20260427a-stage.json) | `low` | behavior, version-scope |
-| `vm-network.disable-netbios-resolution-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for EnableNetbios | [evidence/records/raw/ghidra/ghidra-network-disable-netbios-resolution-20260427a/summary.json](../evidence/records/raw/ghidra/ghidra-network-disable-netbios-resolution-20260427a/summary.json) | `low` | version-scope |
+| `vm-network.disable-netbios-resolution-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for EnableNetbios | [evidence/captures/network-disable-netbios-resolution-etw-stackwalk-attempt-20260427.json](../evidence/captures/network-disable-netbios-resolution-etw-stackwalk-attempt-20260427.json) and [evidence/raw/etw-stackwalk/network-disable-netbios-resolution-etw-20260427a/network-disable-netbios-resolution-etw-20260427a-summary.json](../evidence/raw/etw-stackwalk/network-disable-netbios-resolution-etw-20260427a/network-disable-netbios-resolution-etw-20260427a-summary.json) and [evidence/raw/etw-stackwalk/network-disable-netbios-resolution-etw-20260427a/network-disable-netbios-resolution-etw-20260427a-stage.json](../evidence/raw/etw-stackwalk/network-disable-netbios-resolution-etw-20260427a/network-disable-netbios-resolution-etw-20260427a-stage.json) | `low` | behavior, version-scope |
+| `vm-network.disable-netbios-resolution-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for EnableNetbios | [evidence/raw/ghidra/ghidra-network-disable-netbios-resolution-20260427a/summary.json](../evidence/raw/ghidra/ghidra-network-disable-netbios-resolution-20260427a/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -4812,28 +4508,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | lanmanworkstation, enableplaintextpassword |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / network/desc.md | [https://github.com/nohuto/win-config/blob/main/network/desc.md](https://github.com/nohuto/win-config/blob/main/network/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 1 audit token(s) in win-config. |
-| win-config / system/assets/services.txt | [https://github.com/nohuto/win-config/blob/main/system/assets/services.txt](https://github.com/nohuto/win-config/blob/main/system/assets/services.txt) | Matched 1 audit token(s) in win-config. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
-| Local asset: Windows Internals E7 Part 2 | [Docs/affinities/assets/E7-P2.pdf](../Docs/affinities/assets/E7-P2.pdf) | Local Windows Internals Part 2 asset used in the SMB / Remote FSD documentation chain. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -4873,8 +4554,8 @@ Windows Internals references:
 | `ms-plaintext-smb-password-policy` | `policy-csp` | `Microsoft policy CSP` | Microsoft Policy CSP: LocalPoliciesSecurityOptions / plaintext SMB passwords | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-localpoliciessecurityoptions#microsoft-network-client-send-unencrypted-password-to-third-party-smb-servers](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-localpoliciessecurityoptions#microsoft-network-client-send-unencrypted-password-to-third-party-smb-servers) | `high` | path, value, allowed-values, behavior, risk |
 | `ms-sceregvl-plaintext-smb-password` | `official-doc` | `Microsoft official doc` | Local Microsoft security metadata: sceregvl.inf | [evidence/files/external/c/Windows/inf/sceregvl.inf.md](../evidence/files/external/c/Windows/inf/sceregvl.inf.md) | `high` | path, value |
 | `app-network-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
-| `vm-network.disable-plaintext-smb-passwords-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for EnablePlainTextPassword | [evidence/records/captures/network-disable-plaintext-smb-passwords-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/network-disable-plaintext-smb-passwords-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/network-disable-plaintext-smb-passwords-etw-20260427a/network-disable-plaintext-smb-passwords-etw-20260427a-summary.json](../evidence/records/raw/etw-stackwalk/network-disable-plaintext-smb-passwords-etw-20260427a/network-disable-plaintext-smb-passwords-etw-20260427a-summary.json) and [evidence/records/raw/etw-stackwalk/network-disable-plaintext-smb-passwords-etw-20260427a/network-disable-plaintext-smb-passwords-etw-20260427a-stage.json](../evidence/records/raw/etw-stackwalk/network-disable-plaintext-smb-passwords-etw-20260427a/network-disable-plaintext-smb-passwords-etw-20260427a-stage.json) | `low` | behavior, version-scope |
-| `vm-network.disable-plaintext-smb-passwords-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for EnablePlainTextPassword | [evidence/records/raw/ghidra/ghidra-network-disable-plaintext-smb-passwords-20260427b/summary.json](../evidence/records/raw/ghidra/ghidra-network-disable-plaintext-smb-passwords-20260427b/summary.json) | `low` | version-scope |
+| `vm-network.disable-plaintext-smb-passwords-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for EnablePlainTextPassword | [evidence/captures/network-disable-plaintext-smb-passwords-etw-stackwalk-attempt-20260427.json](../evidence/captures/network-disable-plaintext-smb-passwords-etw-stackwalk-attempt-20260427.json) and [evidence/raw/etw-stackwalk/network-disable-plaintext-smb-passwords-etw-20260427a/network-disable-plaintext-smb-passwords-etw-20260427a-summary.json](../evidence/raw/etw-stackwalk/network-disable-plaintext-smb-passwords-etw-20260427a/network-disable-plaintext-smb-passwords-etw-20260427a-summary.json) and [evidence/raw/etw-stackwalk/network-disable-plaintext-smb-passwords-etw-20260427a/network-disable-plaintext-smb-passwords-etw-20260427a-stage.json](../evidence/raw/etw-stackwalk/network-disable-plaintext-smb-passwords-etw-20260427a/network-disable-plaintext-smb-passwords-etw-20260427a-stage.json) | `low` | behavior, version-scope |
+| `vm-network.disable-plaintext-smb-passwords-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for EnablePlainTextPassword | [evidence/raw/ghidra/ghidra-network-disable-plaintext-smb-passwords-20260427b/summary.json](../evidence/raw/ghidra/ghidra-network-disable-plaintext-smb-passwords-20260427b/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -4942,27 +4623,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, dnsclient, disablesmartnameresolution |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / network/desc.md | [https://github.com/nohuto/win-config/blob/main/network/desc.md](https://github.com/nohuto/win-config/blob/main/network/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / network/assets/QoS-Policy.ps1 | [https://github.com/nohuto/win-config/blob/main/network/assets/QoS-Policy.ps1](https://github.com/nohuto/win-config/blob/main/network/assets/QoS-Policy.ps1) | Matched 1 audit token(s) in win-config. |
-| win-config / affinities/desc.md | [https://github.com/nohuto/win-config/blob/main/affinities/desc.md](https://github.com/nohuto/win-config/blob/main/affinities/desc.md) | Matched 1 audit token(s) in win-config. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -5002,8 +4669,8 @@ Windows Internals references:
 | `local-dnsclient-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DnsClient.admx mapping | [evidence/files/external/c/WINDOWS/PolicyDefinitions/DnsClient.admx](../evidence/files/external/c/WINDOWS/PolicyDefinitions/DnsClient.admx) | `high` | path, value, allowed-values |
 | `app-network-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-smart-name-resolution` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
-| `vm-network.disable-smart-name-resolution-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for DisableSmartNameResolution | [evidence/records/captures/network-disable-smart-name-resolution-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/network-disable-smart-name-resolution-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/network-disable-smart-name-resolution-etw-20260427a/network-disable-smart-name-resolution-etw-20260427a-summary.json](../evidence/records/raw/etw-stackwalk/network-disable-smart-name-resolution-etw-20260427a/network-disable-smart-name-resolution-etw-20260427a-summary.json) and [evidence/records/raw/etw-stackwalk/network-disable-smart-name-resolution-etw-20260427a/network-disable-smart-name-resolution-etw-20260427a-stage.json](../evidence/records/raw/etw-stackwalk/network-disable-smart-name-resolution-etw-20260427a/network-disable-smart-name-resolution-etw-20260427a-stage.json) | `low` | behavior, version-scope |
-| `vm-network.disable-smart-name-resolution-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for DisableSmartNameResolution | [evidence/records/raw/ghidra/ghidra-network-disable-smart-name-resolution-20260427b/summary.json](../evidence/records/raw/ghidra/ghidra-network-disable-smart-name-resolution-20260427b/summary.json) | `low` | version-scope |
+| `vm-network.disable-smart-name-resolution-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for DisableSmartNameResolution | [evidence/captures/network-disable-smart-name-resolution-etw-stackwalk-attempt-20260427.json](../evidence/captures/network-disable-smart-name-resolution-etw-stackwalk-attempt-20260427.json) and [evidence/raw/etw-stackwalk/network-disable-smart-name-resolution-etw-20260427a/network-disable-smart-name-resolution-etw-20260427a-summary.json](../evidence/raw/etw-stackwalk/network-disable-smart-name-resolution-etw-20260427a/network-disable-smart-name-resolution-etw-20260427a-summary.json) and [evidence/raw/etw-stackwalk/network-disable-smart-name-resolution-etw-20260427a/network-disable-smart-name-resolution-etw-20260427a-stage.json](../evidence/raw/etw-stackwalk/network-disable-smart-name-resolution-etw-20260427a/network-disable-smart-name-resolution-etw-20260427a-stage.json) | `low` | behavior, version-scope |
+| `vm-network.disable-smart-name-resolution-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for DisableSmartNameResolution | [evidence/raw/ghidra/ghidra-network-disable-smart-name-resolution-20260427b/summary.json](../evidence/raw/ghidra/ghidra-network-disable-smart-name-resolution-20260427b/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -5071,27 +4738,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config, win-registry |
-| Matched tokens | lanmanserver, smb1 |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / network/desc.md | [https://github.com/nohuto/win-config/blob/main/network/desc.md](https://github.com/nohuto/win-config/blob/main/network/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-registry / records/LanmanServer.txt | [https://github.com/nohuto/win-registry/blob/main/records/LanmanServer.txt](https://github.com/nohuto/win-registry/blob/main/records/LanmanServer.txt) | Matched 2 audit token(s) in win-registry. |
-| win-config / security/desc.md | [https://github.com/nohuto/win-config/blob/main/security/desc.md](https://github.com/nohuto/win-config/blob/main/security/desc.md) | Matched 1 audit token(s) in win-config. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -5132,8 +4785,8 @@ Windows Internals references:
 | `ms-smb-disable-enable` | `official-doc` | `Microsoft official doc` | Microsoft SMBv1/v2/v3 detection and enable or disable guidance | [https://learn.microsoft.com/en-us/windows-server/storage/file-server/troubleshoot/detect-enable-and-disable-smbv1-v2-v3#disable-smbv1](https://learn.microsoft.com/en-us/windows-server/storage/file-server/troubleshoot/detect-enable-and-disable-smbv1-v2-v3#disable-smbv1) | `high` | path, value, allowed-values, behavior, version-scope, risk |
 | `app-network-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-smb1` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk, version-scope |
-| `vm-network.disable-smb1-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for SMB1 | [evidence/records/captures/network-disable-smb1-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/network-disable-smb1-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/network-disable-smb1-etw-20260427a/network-disable-smb1-etw-20260427a-summary.json](../evidence/records/raw/etw-stackwalk/network-disable-smb1-etw-20260427a/network-disable-smb1-etw-20260427a-summary.json) and [evidence/records/raw/etw-stackwalk/network-disable-smb1-etw-20260427a/network-disable-smb1-etw-20260427a-stage.json](../evidence/records/raw/etw-stackwalk/network-disable-smb1-etw-20260427a/network-disable-smb1-etw-20260427a-stage.json) | `low` | behavior, version-scope |
-| `vm-network.disable-smb1-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for SMB1 | [evidence/records/raw/ghidra/ghidra-network-disable-smb1-20260427b/summary.json](../evidence/records/raw/ghidra/ghidra-network-disable-smb1-20260427b/summary.json) | `low` | version-scope |
+| `vm-network.disable-smb1-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for SMB1 | [evidence/captures/network-disable-smb1-etw-stackwalk-attempt-20260427.json](../evidence/captures/network-disable-smb1-etw-stackwalk-attempt-20260427.json) and [evidence/raw/etw-stackwalk/network-disable-smb1-etw-20260427a/network-disable-smb1-etw-20260427a-summary.json](../evidence/raw/etw-stackwalk/network-disable-smb1-etw-20260427a/network-disable-smb1-etw-20260427a-summary.json) and [evidence/raw/etw-stackwalk/network-disable-smb1-etw-20260427a/network-disable-smb1-etw-20260427a-stage.json](../evidence/raw/etw-stackwalk/network-disable-smb1-etw-20260427a/network-disable-smb1-etw-20260427a-stage.json) | `low` | behavior, version-scope |
+| `vm-network.disable-smb1-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for SMB1 | [evidence/raw/ghidra/ghidra-network-disable-smb1-20260427b/summary.json](../evidence/raw/ghidra/ghidra-network-disable-smb1-20260427b/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -5201,27 +4854,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | lanmanserver, smb2 |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / network/desc.md | [https://github.com/nohuto/win-config/blob/main/network/desc.md](https://github.com/nohuto/win-config/blob/main/network/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / system/assets/services.txt | [https://github.com/nohuto/win-config/blob/main/system/assets/services.txt](https://github.com/nohuto/win-config/blob/main/system/assets/services.txt) | Matched 2 audit token(s) in win-config. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -5326,27 +4965,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | wcmsvc, wifinetworkmanager, config, autoconnectallowedoem |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / network/desc.md | [https://github.com/nohuto/win-config/blob/main/network/desc.md](https://github.com/nohuto/win-config/blob/main/network/desc.md) | Matched 4 audit token(s) in win-config. |
-| win-config / power/desc.md | [https://github.com/nohuto/win-config/blob/main/power/desc.md](https://github.com/nohuto/win-config/blob/main/power/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 2 audit token(s) in win-config. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -5385,8 +5010,8 @@ Windows Internals references:
 | `ms-wifisense-admx` | `official-doc` | `Microsoft official doc` | Microsoft administrative template for Wi-Fi Sense policy | [evidence/files/external/c/Windows/PolicyDefinitions/wlansvc.admx](../evidence/files/external/c/Windows/PolicyDefinitions/wlansvc.admx) | `high` | path, value, allowed-values |
 | `ms-wifisense-adml` | `official-doc` | `Microsoft official doc` | Microsoft help text for Wi-Fi Sense policy | [evidence/files/external/c/PolicyDefinitions/en-US/wlansvc.adml](../evidence/files/external/c/PolicyDefinitions/en-US/wlansvc.adml) | `high` | behavior, default, risk |
 | `app-network-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
-| `vm-network.disable-wifi-sense-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for AutoConnectAllowedOEM | [evidence/records/captures/network-disable-wifi-sense-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/network-disable-wifi-sense-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/network-disable-wifi-sense-etw-20260427a/network-disable-wifi-sense-etw-20260427a-summary.json](../evidence/records/raw/etw-stackwalk/network-disable-wifi-sense-etw-20260427a/network-disable-wifi-sense-etw-20260427a-summary.json) and [evidence/records/raw/etw-stackwalk/network-disable-wifi-sense-etw-20260427a/network-disable-wifi-sense-etw-20260427a-stage.json](../evidence/records/raw/etw-stackwalk/network-disable-wifi-sense-etw-20260427a/network-disable-wifi-sense-etw-20260427a-stage.json) | `low` | behavior, version-scope |
-| `vm-network.disable-wifi-sense-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for AutoConnectAllowedOEM | [evidence/records/raw/ghidra/ghidra-network-disable-wifi-sense-20260427b/summary.json](../evidence/records/raw/ghidra/ghidra-network-disable-wifi-sense-20260427b/summary.json) | `low` | version-scope |
+| `vm-network.disable-wifi-sense-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for AutoConnectAllowedOEM | [evidence/captures/network-disable-wifi-sense-etw-stackwalk-attempt-20260427.json](../evidence/captures/network-disable-wifi-sense-etw-stackwalk-attempt-20260427.json) and [evidence/raw/etw-stackwalk/network-disable-wifi-sense-etw-20260427a/network-disable-wifi-sense-etw-20260427a-summary.json](../evidence/raw/etw-stackwalk/network-disable-wifi-sense-etw-20260427a/network-disable-wifi-sense-etw-20260427a-summary.json) and [evidence/raw/etw-stackwalk/network-disable-wifi-sense-etw-20260427a/network-disable-wifi-sense-etw-20260427a-stage.json](../evidence/raw/etw-stackwalk/network-disable-wifi-sense-etw-20260427a/network-disable-wifi-sense-etw-20260427a-stage.json) | `low` | behavior, version-scope |
+| `vm-network.disable-wifi-sense-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for AutoConnectAllowedOEM | [evidence/raw/ghidra/ghidra-network-disable-wifi-sense-20260427b/summary.json](../evidence/raw/ghidra/ghidra-network-disable-wifi-sense-20260427b/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -5454,27 +5079,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, lltd, enablerspndr |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / network/desc.md | [https://github.com/nohuto/win-config/blob/main/network/desc.md](https://github.com/nohuto/win-config/blob/main/network/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / network/assets/QoS-Policy.ps1 | [https://github.com/nohuto/win-config/blob/main/network/assets/QoS-Policy.ps1](https://github.com/nohuto/win-config/blob/main/network/assets/QoS-Policy.ps1) | Matched 1 audit token(s) in win-config. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -5581,27 +5192,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, lltd, enablelltdio |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / network/desc.md | [https://github.com/nohuto/win-config/blob/main/network/desc.md](https://github.com/nohuto/win-config/blob/main/network/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / network/assets/QoS-Policy.ps1 | [https://github.com/nohuto/win-config/blob/main/network/assets/QoS-Policy.ps1](https://github.com/nohuto/win-config/blob/main/network/assets/QoS-Policy.ps1) | Matched 1 audit token(s) in win-config. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -5708,27 +5305,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | disabledcomponents, tcpip6 |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / network/desc.md | [https://github.com/nohuto/win-config/blob/main/network/desc.md](https://github.com/nohuto/win-config/blob/main/network/desc.md) | Matched 1 audit token(s) in win-config. |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 1 audit token(s) in win-config. |
-| win-config / system/assets/drivers.txt | [https://github.com/nohuto/win-config/blob/main/system/assets/drivers.txt](https://github.com/nohuto/win-config/blob/main/system/assets/drivers.txt) | Matched 1 audit token(s) in win-config. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -5834,26 +5417,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config, win-registry |
-| Matched tokens | ntlmminclientsec |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / network/desc.md | [https://github.com/nohuto/win-config/blob/main/network/desc.md](https://github.com/nohuto/win-config/blob/main/network/desc.md) | Matched 1 audit token(s) in win-config. |
-| win-registry / records/Lsa.txt | [https://github.com/nohuto/win-registry/blob/main/records/Lsa.txt](https://github.com/nohuto/win-registry/blob/main/records/Lsa.txt) | Matched 1 audit token(s) in win-registry. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -6088,28 +5658,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | lanmanworkstation, disablelargemtu |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / network/desc.md | [https://github.com/nohuto/win-config/blob/main/network/desc.md](https://github.com/nohuto/win-config/blob/main/network/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 1 audit token(s) in win-config. |
-| win-config / system/assets/services.txt | [https://github.com/nohuto/win-config/blob/main/system/assets/services.txt](https://github.com/nohuto/win-config/blob/main/system/assets/services.txt) | Matched 1 audit token(s) in win-config. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
-| Local asset: Windows Internals E7 Part 2 | [Docs/affinities/assets/E7-P2.pdf](../Docs/affinities/assets/E7-P2.pdf) | Local Windows Internals Part 2 asset used in the SMB / Remote FSD documentation chain. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -6358,28 +5913,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, lanmanworkstation, enablesmbquic, lanmanserver |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / network/desc.md | [https://github.com/nohuto/win-config/blob/main/network/desc.md](https://github.com/nohuto/win-config/blob/main/network/desc.md) | Matched 4 audit token(s) in win-config. |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / system/assets/services.txt | [https://github.com/nohuto/win-config/blob/main/system/assets/services.txt](https://github.com/nohuto/win-config/blob/main/system/assets/services.txt) | Matched 3 audit token(s) in win-config. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
-| Local asset: Windows Internals E7 Part 2 | [Docs/affinities/assets/E7-P2.pdf](../Docs/affinities/assets/E7-P2.pdf) | Local Windows Internals Part 2 asset used in the SMB / Remote FSD documentation chain. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -6502,28 +6042,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config, win-registry |
-| Matched tokens | lanmanserver, encryptdata |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / network/desc.md | [https://github.com/nohuto/win-config/blob/main/network/desc.md](https://github.com/nohuto/win-config/blob/main/network/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-registry / records/LanmanServer.txt | [https://github.com/nohuto/win-registry/blob/main/records/LanmanServer.txt](https://github.com/nohuto/win-registry/blob/main/records/LanmanServer.txt) | Matched 2 audit token(s) in win-registry. |
-| win-config / security/desc.md | [https://github.com/nohuto/win-config/blob/main/security/desc.md](https://github.com/nohuto/win-config/blob/main/security/desc.md) | Matched 1 audit token(s) in win-config. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
-| Local asset: Windows Internals E7 Part 2 | [Docs/affinities/assets/E7-P2.pdf](../Docs/affinities/assets/E7-P2.pdf) | Local Windows Internals Part 2 asset used in the SMB / Remote FSD documentation chain. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -6562,8 +6087,8 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-smb-security-troubleshooting` | `official-doc` | `Microsoft official doc` | Microsoft SMB security enhancements troubleshooting | [https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/overview-server-message-block-signing](https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/overview-server-message-block-signing) | `high` | path, value, allowed-values, behavior, risk |
 | `app-network-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
-| `vm-network.smb-encrypt-data-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for EncryptData | [evidence/records/captures/network-smb-encrypt-data-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/network-smb-encrypt-data-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/network-smb-encrypt-data-etw-20260427a/network-smb-encrypt-data-etw-20260427a-summary.json](../evidence/records/raw/etw-stackwalk/network-smb-encrypt-data-etw-20260427a/network-smb-encrypt-data-etw-20260427a-summary.json) | `low` | behavior, version-scope |
-| `vm-network.smb-encrypt-data-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for EncryptData | [evidence/records/raw/ghidra/ghidra-network-smb-encrypt-data-20260427a/summary.json](../evidence/records/raw/ghidra/ghidra-network-smb-encrypt-data-20260427a/summary.json) | `low` | version-scope |
+| `vm-network.smb-encrypt-data-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for EncryptData | [evidence/captures/network-smb-encrypt-data-etw-stackwalk-attempt-20260427.json](../evidence/captures/network-smb-encrypt-data-etw-stackwalk-attempt-20260427.json) and [evidence/raw/etw-stackwalk/network-smb-encrypt-data-etw-20260427a/network-smb-encrypt-data-etw-20260427a-summary.json](../evidence/raw/etw-stackwalk/network-smb-encrypt-data-etw-20260427a/network-smb-encrypt-data-etw-20260427a-summary.json) | `low` | behavior, version-scope |
+| `vm-network.smb-encrypt-data-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for EncryptData | [evidence/raw/ghidra/ghidra-network-smb-encrypt-data-20260427a/summary.json](../evidence/raw/ghidra/ghidra-network-smb-encrypt-data-20260427a/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -6789,28 +6314,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config, win-registry |
-| Matched tokens | lanmanserver, rejectunencryptedaccess |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / network/desc.md | [https://github.com/nohuto/win-config/blob/main/network/desc.md](https://github.com/nohuto/win-config/blob/main/network/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-registry / records/LanmanServer.txt | [https://github.com/nohuto/win-registry/blob/main/records/LanmanServer.txt](https://github.com/nohuto/win-registry/blob/main/records/LanmanServer.txt) | Matched 2 audit token(s) in win-registry. |
-| win-config / security/desc.md | [https://github.com/nohuto/win-config/blob/main/security/desc.md](https://github.com/nohuto/win-config/blob/main/security/desc.md) | Matched 1 audit token(s) in win-config. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
-| Local asset: Windows Internals E7 Part 2 | [Docs/affinities/assets/E7-P2.pdf](../Docs/affinities/assets/E7-P2.pdf) | Local Windows Internals Part 2 asset used in the SMB / Remote FSD documentation chain. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -6918,28 +6428,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, lanmanworkstation, minsmb2dialect, maxsmb2dialect, lanmanserver |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / network/desc.md | [https://github.com/nohuto/win-config/blob/main/network/desc.md](https://github.com/nohuto/win-config/blob/main/network/desc.md) | Matched 5 audit token(s) in win-config. |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / system/assets/services.txt | [https://github.com/nohuto/win-config/blob/main/system/assets/services.txt](https://github.com/nohuto/win-config/blob/main/system/assets/services.txt) | Matched 3 audit token(s) in win-config. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
-| Local asset: Windows Internals E7 Part 2 | [Docs/affinities/assets/E7-P2.pdf](../Docs/affinities/assets/E7-P2.pdf) | Local Windows Internals Part 2 asset used in the SMB / Remote FSD documentation chain. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -7105,28 +6600,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | lanmanworkstation |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / network/desc.md | [https://github.com/nohuto/win-config/blob/main/network/desc.md](https://github.com/nohuto/win-config/blob/main/network/desc.md) | Matched 1 audit token(s) in win-config. |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 1 audit token(s) in win-config. |
-| win-config / system/assets/services.txt | [https://github.com/nohuto/win-config/blob/main/system/assets/services.txt](https://github.com/nohuto/win-config/blob/main/system/assets/services.txt) | Matched 1 audit token(s) in win-config. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
-| Local asset: Windows Internals E7 Part 2 | [Docs/affinities/assets/E7-P2.pdf](../Docs/affinities/assets/E7-P2.pdf) | Local Windows Internals Part 2 asset used in the SMB / Remote FSD documentation chain. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -7248,28 +6728,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | lanmanserver |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / network/desc.md | [https://github.com/nohuto/win-config/blob/main/network/desc.md](https://github.com/nohuto/win-config/blob/main/network/desc.md) | Matched 1 audit token(s) in win-config. |
-| win-config / security/desc.md | [https://github.com/nohuto/win-config/blob/main/security/desc.md](https://github.com/nohuto/win-config/blob/main/security/desc.md) | Matched 1 audit token(s) in win-config. |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 1 audit token(s) in win-config. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
-| Local asset: Windows Internals E7 Part 2 | [Docs/affinities/assets/E7-P2.pdf](../Docs/affinities/assets/E7-P2.pdf) | Local Windows Internals Part 2 asset used in the SMB / Remote FSD documentation chain. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -7391,28 +6856,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, lanmanworkstation, ciphersuiteorder, lanmanserver |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / network/desc.md | [https://github.com/nohuto/win-config/blob/main/network/desc.md](https://github.com/nohuto/win-config/blob/main/network/desc.md) | Matched 4 audit token(s) in win-config. |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / system/assets/services.txt | [https://github.com/nohuto/win-config/blob/main/system/assets/services.txt](https://github.com/nohuto/win-config/blob/main/system/assets/services.txt) | Matched 3 audit token(s) in win-config. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
-| Local asset: Windows Internals E7 Part 2 | [Docs/affinities/assets/E7-P2.pdf](../Docs/affinities/assets/E7-P2.pdf) | Local Windows Internals Part 2 asset used in the SMB / Remote FSD documentation chain. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -7537,21 +6987,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | siuf, numberofsiufinperiod, rules |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / affinities/desc.md | [https://github.com/nohuto/win-config/blob/main/affinities/desc.md](https://github.com/nohuto/win-config/blob/main/affinities/desc.md) | Matched 1 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -7655,21 +7097,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, pushnotifications, notoastapplicationnotificationonlockscreen |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / affinities/desc.md | [https://github.com/nohuto/win-config/blob/main/affinities/desc.md](https://github.com/nohuto/win-config/blob/main/affinities/desc.md) | Matched 1 audit token(s) in win-config. |
-| win-config / misc/desc.md | [https://github.com/nohuto/win-config/blob/main/misc/desc.md](https://github.com/nohuto/win-config/blob/main/misc/desc.md) | Matched 1 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -7776,21 +7210,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, pushnotifications, disallownotificationmirroring |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / affinities/desc.md | [https://github.com/nohuto/win-config/blob/main/affinities/desc.md](https://github.com/nohuto/win-config/blob/main/affinities/desc.md) | Matched 1 audit token(s) in win-config. |
-| win-config / misc/desc.md | [https://github.com/nohuto/win-config/blob/main/misc/desc.md](https://github.com/nohuto/win-config/blob/main/misc/desc.md) | Matched 1 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -7897,21 +7323,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, pushnotifications, notileapplicationnotification |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / affinities/desc.md | [https://github.com/nohuto/win-config/blob/main/affinities/desc.md](https://github.com/nohuto/win-config/blob/main/affinities/desc.md) | Matched 1 audit token(s) in win-config. |
-| win-config / misc/desc.md | [https://github.com/nohuto/win-config/blob/main/misc/desc.md](https://github.com/nohuto/win-config/blob/main/misc/desc.md) | Matched 1 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -8018,21 +7436,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, pushnotifications, notoastapplicationnotification |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / affinities/desc.md | [https://github.com/nohuto/win-config/blob/main/affinities/desc.md](https://github.com/nohuto/win-config/blob/main/affinities/desc.md) | Matched 1 audit token(s) in win-config. |
-| win-config / misc/desc.md | [https://github.com/nohuto/win-config/blob/main/misc/desc.md](https://github.com/nohuto/win-config/blob/main/misc/desc.md) | Matched 1 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -8141,28 +7551,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config, win-registry, decompiled-pseudocode |
-| Matched tokens | panel, desktop, windowmetrics, minanimate |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / visibility/desc.md | [https://github.com/nohuto/win-config/blob/main/visibility/desc.md](https://github.com/nohuto/win-config/blob/main/visibility/desc.md) | Matched 4 audit token(s) in win-config. |
-| win-registry / records/ControlPanel-Desktop.txt | [https://github.com/nohuto/win-registry/blob/main/records/ControlPanel-Desktop.txt](https://github.com/nohuto/win-registry/blob/main/records/ControlPanel-Desktop.txt) | Matched 4 audit token(s) in win-registry. |
-| win-config / visibility/assets/Icon-Spacing.ps1 | [https://github.com/nohuto/win-config/blob/main/visibility/assets/Icon-Spacing.ps1](https://github.com/nohuto/win-config/blob/main/visibility/assets/Icon-Spacing.ps1) | Matched 3 audit token(s) in win-config. |
-| decompiled-pseudocode / ntoskrnl | [https://github.com/nohuto/decompiled-pseudocode/tree/main/ntoskrnl](https://github.com/nohuto/decompiled-pseudocode/tree/main/ntoskrnl) | Kernel pseudocode relevant to Session Manager / PriorityControl / DPC paths. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -8268,28 +7663,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config, win-registry, decompiled-pseudocode |
-| Matched tokens | panel, desktop, menushowdelay |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / visibility/desc.md | [https://github.com/nohuto/win-config/blob/main/visibility/desc.md](https://github.com/nohuto/win-config/blob/main/visibility/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-registry / records/ControlPanel-Desktop.txt | [https://github.com/nohuto/win-registry/blob/main/records/ControlPanel-Desktop.txt](https://github.com/nohuto/win-registry/blob/main/records/ControlPanel-Desktop.txt) | Matched 3 audit token(s) in win-registry. |
-| win-config / affinities/desc.md | [https://github.com/nohuto/win-config/blob/main/affinities/desc.md](https://github.com/nohuto/win-config/blob/main/affinities/desc.md) | Matched 2 audit token(s) in win-config. |
-| decompiled-pseudocode / ntoskrnl | [https://github.com/nohuto/decompiled-pseudocode/tree/main/ntoskrnl](https://github.com/nohuto/decompiled-pseudocode/tree/main/ntoskrnl) | Kernel pseudocode relevant to Session Manager / PriorityControl / DPC paths. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -8394,28 +7774,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config, decompiled-pseudocode |
-| Matched tokens | explorer, advanced |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / cleanup/desc.md | [https://github.com/nohuto/win-config/blob/main/cleanup/desc.md](https://github.com/nohuto/win-config/blob/main/cleanup/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / peripheral/desc.md | [https://github.com/nohuto/win-config/blob/main/peripheral/desc.md](https://github.com/nohuto/win-config/blob/main/peripheral/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / power/desc.md | [https://github.com/nohuto/win-config/blob/main/power/desc.md](https://github.com/nohuto/win-config/blob/main/power/desc.md) | Matched 2 audit token(s) in win-config. |
-| decompiled-pseudocode / ntoskrnl | [https://github.com/nohuto/decompiled-pseudocode/tree/main/ntoskrnl](https://github.com/nohuto/decompiled-pseudocode/tree/main/ntoskrnl) | Kernel pseudocode relevant to Session Manager / PriorityControl / DPC paths. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -8451,12 +7816,12 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `runtime-taskbar-animations-registry-diff` | `runtime-diff` | `VM runtime diff` | Guest reversible probe - TaskbarAnimations registry mapping | [evidence/files/vm/taskbar_animations_probe_out.txt](../evidence/files/vm-tooling-staging/taskbar_animations_probe_out.txt) | `high` | value, behavior, version-scope |
-| `procmon-taskbar-animations-registry-read` | `procmon-trace` | `VM Procmon trace` | Procmon capture - explorer.exe TaskbarAnimations runtime reads | [evidence/records/raw/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.txt](../evidence/records/raw/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.txt) and [evidence/records/raw/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.hits.csv](../evidence/records/raw/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.hits.csv) and [evidence/records/raw/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.txt](../evidence/records/raw/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.txt) and [evidence/records/raw/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.hits.csv](../evidence/records/raw/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.hits.csv) | `high` | path, value, behavior, ui-mapping |
-| `ghidra-taskbar-taskbaranimations` | `ghidra-headless` | `unspecified` | Our Ghidra decompilation - Taskbar.dll TaskbarAnimations read path | [evidence/records/raw/ghidra/performance.disable-taskbar-animations/taskbar-taskbaranimations-ghidra.md](../evidence/records/raw/ghidra/performance.disable-taskbar-animations/taskbar-taskbaranimations-ghidra.md) | `high` | path, behavior, ui-mapping |
+| `procmon-taskbar-animations-registry-read` | `procmon-trace` | `VM Procmon trace` | Procmon capture - explorer.exe TaskbarAnimations runtime reads | [evidence/raw/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.txt](../evidence/raw/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.txt) and [evidence/raw/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.hits.csv](../evidence/raw/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.hits.csv) and [evidence/raw/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.txt](../evidence/raw/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.txt) and [evidence/raw/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.hits.csv](../evidence/raw/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.hits.csv) | `high` | path, value, behavior, ui-mapping |
+| `ghidra-taskbar-taskbaranimations` | `ghidra-headless` | `unspecified` | Our Ghidra decompilation - Taskbar.dll TaskbarAnimations read path | [evidence/raw/ghidra/performance.disable-taskbar-animations/taskbar-taskbaranimations-ghidra.md](../evidence/raw/ghidra/performance.disable-taskbar-animations/taskbar-taskbaranimations-ghidra.md) | `high` | path, behavior, ui-mapping |
 | `runtime-taskbar-animations-incident-review-20260327` | `vm-incident` | `unspecified` | Incident reviewed - Taskbar animations runtime rerun on visible-shell baseline | [research/notes/taskbar-animations-runtime-incident-review-20260327.md](notes/taskbar-animations-runtime-incident-review-20260327.md) and [evidence/files/vm/taskbar-animations-runtime-20260327-224704/summary.json](../evidence/files/vm-tooling-staging/taskbar-animations-runtime-20260327-224704/summary.json) | `high` | behavior, version-scope |
 | `app-performance-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PerformanceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-performance-disable-taskbar-animations` | `repo-doc` | `Current repo docs` | Repo source note for performance.disable-taskbar-animations | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | path, value, ui-mapping |
-| `vm-performance.disable-taskbar-animations-etw-stackwalk-attempt-20260424h` | `etw-trace` | `unspecified` | Bounded ETW stackwalk timeout receipt | [evidence/records/raw/etw-stackwalk/performance.disable-taskbar-animations-etw-20260424h/performance.disable-taskbar-animations-etw-20260424h-summary.json](../evidence/records/raw/etw-stackwalk/performance.disable-taskbar-animations-etw-20260424h/performance.disable-taskbar-animations-etw-20260424h-summary.json) and [evidence/records/raw/etw-stackwalk/performance.disable-taskbar-animations-etw-20260424h/performance.disable-taskbar-animations-etw-20260424h-stage.json](../evidence/records/raw/etw-stackwalk/performance.disable-taskbar-animations-etw-20260424h/performance.disable-taskbar-animations-etw-20260424h-stage.json) and [evidence/records/captures/performance-disable-taskbar-animations-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/performance-disable-taskbar-animations-etw-stackwalk-attempt-20260424.json) | `medium` | runtime-lane-review, transport-blocker |
+| `vm-performance.disable-taskbar-animations-etw-stackwalk-attempt-20260424h` | `etw-trace` | `unspecified` | Bounded ETW stackwalk timeout receipt | [evidence/raw/etw-stackwalk/performance.disable-taskbar-animations-etw-20260424h/performance.disable-taskbar-animations-etw-20260424h-summary.json](../evidence/raw/etw-stackwalk/performance.disable-taskbar-animations-etw-20260424h/performance.disable-taskbar-animations-etw-20260424h-summary.json) and [evidence/raw/etw-stackwalk/performance.disable-taskbar-animations-etw-20260424h/performance.disable-taskbar-animations-etw-20260424h-stage.json](../evidence/raw/etw-stackwalk/performance.disable-taskbar-animations-etw-20260424h/performance.disable-taskbar-animations-etw-20260424h-stage.json) and [evidence/captures/performance-disable-taskbar-animations-etw-stackwalk-attempt-20260424.json](../evidence/captures/performance-disable-taskbar-animations-etw-stackwalk-attempt-20260424.json) | `medium` | runtime-lane-review, transport-blocker |
 
 **Validation proof**
 
@@ -8553,28 +7918,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config, decompiled-pseudocode |
-| Matched tokens | explorer, autoplayhandlers, userchosenexecutehandlers, storageonarrival, mstakenoaction, eventhandlersdefaultselection, cameraalternate, showpicturesonarrival, playdvdmovieonarrival, playenhanceddvdonarrival, handledvdburningonarrival, playdvdaudioonarrival, playblurayonarrival, handlebdburningonarrival, playcdaudioonarrival, playenhancedcdonarrival, handlecdburningonarrival, playvideocdmovieonarrival, playsupervideocdmovieonarrival, autoruninflegacyarrival |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / peripheral/desc.md | [https://github.com/nohuto/win-config/blob/main/peripheral/desc.md](https://github.com/nohuto/win-config/blob/main/peripheral/desc.md) | Matched 20 audit token(s) in win-config. |
-| win-config / peripheral/assets/touch-twinui.c | [https://github.com/nohuto/win-config/blob/main/peripheral/assets/touch-twinui.c](https://github.com/nohuto/win-config/blob/main/peripheral/assets/touch-twinui.c) | Matched 1 audit token(s) in win-config. |
-| win-config / cleanup/desc.md | [https://github.com/nohuto/win-config/blob/main/cleanup/desc.md](https://github.com/nohuto/win-config/blob/main/cleanup/desc.md) | Matched 1 audit token(s) in win-config. |
-| decompiled-pseudocode / USBHUB3 | [https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3](https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3) | USB hub pseudocode relevant to USB and peripheral registry behavior. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -8681,28 +8031,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config, decompiled-pseudocode |
-| Matched tokens | policies, explorer |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / peripheral/desc.md | [https://github.com/nohuto/win-config/blob/main/peripheral/desc.md](https://github.com/nohuto/win-config/blob/main/peripheral/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / misc/desc.md | [https://github.com/nohuto/win-config/blob/main/misc/desc.md](https://github.com/nohuto/win-config/blob/main/misc/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / power/desc.md | [https://github.com/nohuto/win-config/blob/main/power/desc.md](https://github.com/nohuto/win-config/blob/main/power/desc.md) | Matched 2 audit token(s) in win-config. |
-| decompiled-pseudocode / USBHUB3 | [https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3](https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3) | USB hub pseudocode relevant to USB and peripheral registry behavior. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -8827,28 +8162,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-registry, win-config, decompiled-pseudocode |
-| Matched tokens | panel, accessibility, stickykeys, flags |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-registry / records/Accessibility.txt | [https://github.com/nohuto/win-registry/blob/main/records/Accessibility.txt](https://github.com/nohuto/win-registry/blob/main/records/Accessibility.txt) | Matched 4 audit token(s) in win-registry. |
-| win-config / peripheral/desc.md | [https://github.com/nohuto/win-config/blob/main/peripheral/desc.md](https://github.com/nohuto/win-config/blob/main/peripheral/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / security/desc.md | [https://github.com/nohuto/win-config/blob/main/security/desc.md](https://github.com/nohuto/win-config/blob/main/security/desc.md) | Matched 3 audit token(s) in win-config. |
-| decompiled-pseudocode / USBHUB3 | [https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3](https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3) | USB hub pseudocode relevant to USB and peripheral registry behavior. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -8999,11 +8319,11 @@ Current writes
 | `repo-power-doc` | `repo-doc` | `Current repo docs` | Repo power notes for docs-first power-control values | [Docs/power/power.md](../Docs/power/power.md) | `high` | path, value, behavior, version-scope |
 | `vm-power-control-phase0-20260329` | `registry-observation` | `VM registry observation` | Win25H2Clean 96-key phase-0 existence batch | [evidence/files/vm/registry-batch-existence-96-live-20260329-100629/results.json](../evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json) | `high` | path, value, default, version-scope |
 | `static-power-control-string-20260329` | `repo-doc` | `Current repo docs` | Shared docs-first string triage for current-build ntoskrnl | [evidence/files/vm/power-control-docs-first-string-20260329-102348/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-string-20260329-102348/results.json) and [research/notes/power-control-docs-first-value-exists-static-triage-20260329.md](notes/power-control-docs-first-value-exists-static-triage-20260329.md) | `high` | path, value, version-scope |
-| `ghidra-power-control-docs-first-20260329` | `decompilation` | `Our Ghidra decompilation` | Shared Ghidra xref batch for docs-first power-control values | [evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md](../evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md) and [evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json](../evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json) and [research/notes/power-control-docs-first-ghidra-review-20260329.md](notes/power-control-docs-first-ghidra-review-20260329.md) | `high` | path, value, behavior, version-scope |
+| `ghidra-power-control-docs-first-20260329` | `decompilation` | `Our Ghidra decompilation` | Shared Ghidra xref batch for docs-first power-control values | [evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md](../evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md) and [evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json](../evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json) and [research/notes/power-control-docs-first-ghidra-review-20260329.md](notes/power-control-docs-first-ghidra-review-20260329.md) | `high` | path, value, behavior, version-scope |
 | `vm-power-control-runtime-batch-20260329` | `procmon-trace` | `VM Procmon trace` | Shared clean-baseline guest-processed stepwise Procmon boot log for docs-first power-control values | [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/results.json) and [research/notes/power-control-docs-first-stepwise-runtime-capture-20260329.md](notes/power-control-docs-first-stepwise-runtime-capture-20260329.md) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv) | `medium` | behavior, risk, version-scope |
 | `vm-power-control-postboot-trigger-20260329` | `procmon-trace` | `VM Procmon trace` | Guest-processed post-boot Procmon trigger batch for remaining docs-first power-control values | [evidence/files/vm/power-control-docs-first-postboot-trigger-20260329-161427/power-control-class1-initial-unpark-count/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-class1-initial-unpark-count/summary.json) and [evidence/files/vm/power-control-docs-first-postboot-trigger-20260329-161427/power-control-class1-initial-unpark-count/power-control-class1-initial-unpark-count-postboot-trigger.hits.csv](../evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-class1-initial-unpark-count/power-control-class1-initial-unpark-count-postboot-trigger.hits.csv) and [research/notes/power-control-docs-first-postboot-trigger-capture-20260329.md](notes/power-control-docs-first-postboot-trigger-capture-20260329.md) | `medium` | behavior, risk, version-scope |
 | `vm-power-control-lightweight-runtime-20260330` | `etw-trace` | `unspecified` | Tools-hardened lightweight ETW follow-up for remaining docs-first power-control values | [evidence/files/vm/power-control-lightweight-runtime-20260330-024603/summary.json](../evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-024603/summary.json) and [evidence/files/vm/power-control-lightweight-runtime-20260330-024603/results.json](../evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-024603/results.json) and [research/notes/power-control-lightweight-runtime-follow-up-20260330.md](notes/power-control-lightweight-runtime-follow-up-20260330.md) | `high` | behavior, risk, version-scope |
-| `vm-power.control.class1-initial-unpark-count-etw-stackwalk-attempt-20260424i` | `etw-trace` | `unspecified` | Bounded ETW stackwalk timeout receipt | [evidence/records/raw/etw-stackwalk/power.control.class1-initial-unpark-count-etw-20260424i/power.control.class1-initial-unpark-count-etw-20260424i-summary.json](../evidence/records/raw/etw-stackwalk/power.control.class1-initial-unpark-count-etw-20260424i/power.control.class1-initial-unpark-count-etw-20260424i-summary.json) and [evidence/records/raw/etw-stackwalk/power.control.class1-initial-unpark-count-etw-20260424i/power.control.class1-initial-unpark-count-etw-20260424i-stage.json](../evidence/records/raw/etw-stackwalk/power.control.class1-initial-unpark-count-etw-20260424i/power.control.class1-initial-unpark-count-etw-20260424i-stage.json) and [evidence/records/captures/power-control-class1-initial-unpark-count-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/power-control-class1-initial-unpark-count-etw-stackwalk-attempt-20260424.json) | `medium` | runtime-lane-review, transport-blocker |
+| `vm-power.control.class1-initial-unpark-count-etw-stackwalk-attempt-20260424i` | `etw-trace` | `unspecified` | Bounded ETW stackwalk timeout receipt | [evidence/raw/etw-stackwalk/power.control.class1-initial-unpark-count-etw-20260424i/power.control.class1-initial-unpark-count-etw-20260424i-summary.json](../evidence/raw/etw-stackwalk/power.control.class1-initial-unpark-count-etw-20260424i/power.control.class1-initial-unpark-count-etw-20260424i-summary.json) and [evidence/raw/etw-stackwalk/power.control.class1-initial-unpark-count-etw-20260424i/power.control.class1-initial-unpark-count-etw-20260424i-stage.json](../evidence/raw/etw-stackwalk/power.control.class1-initial-unpark-count-etw-20260424i/power.control.class1-initial-unpark-count-etw-20260424i-stage.json) and [evidence/captures/power-control-class1-initial-unpark-count-etw-stackwalk-attempt-20260424.json](../evidence/captures/power-control-class1-initial-unpark-count-etw-stackwalk-attempt-20260424.json) | `medium` | runtime-lane-review, transport-blocker |
 
 **Validation proof**
 
@@ -9120,7 +8440,7 @@ Current writes
 | `vm-power-control-hiber-kvm-procmon-recovery-20260407` | `vm-test` | `VM test / probe` | Linux KVM recovery-backed Procmon replay for HiberFileSizePercent | [evidence/files/vm/hiberfilesizepercent-procmon-kvm-recovery-20260407a/hiberfilesizepercent-procmon-kvm-recovery-20260407a-summary.json](../evidence/files/vm-tooling-staging/hiberfilesizepercent-procmon-kvm-recovery-20260407a/hiberfilesizepercent-procmon-kvm-recovery-20260407a-summary.json) and [evidence/files/vm/hiberfilesizepercent-procmon-kvm-recovery-20260407a/hiberfilesizepercent-procmon-kvm-recovery-20260407a.txt](../evidence/files/vm-tooling-staging/hiberfilesizepercent-procmon-kvm-recovery-20260407a/hiberfilesizepercent-procmon-kvm-recovery-20260407a.txt) and [evidence/files/vm/hiberfilesizepercent-procmon-kvm-recovery-20260407a/hiberfilesizepercent-procmon-kvm-recovery-20260407a.hits.csv](../evidence/files/vm-tooling-staging/hiberfilesizepercent-procmon-kvm-recovery-20260407a/hiberfilesizepercent-procmon-kvm-recovery-20260407a.hits.csv) and [evidence/files/vm/hiberfilesizepercent-procmon-kvm-recovery-20260407a/host-review.json](../evidence/files/vm-tooling-staging/hiberfilesizepercent-procmon-kvm-recovery-20260407a/host-review.json) and [research/notes/power-control-hiber-file-size-percent-kvm-procmon-recovery-20260407.md](notes/power-control-hiber-file-size-percent-kvm-procmon-recovery-20260407.md) | `medium` | behavior, risk, version-scope |
 | `vm-power-control-hiber-kvm-reboot-observation-20260407` | `vm-test` | `VM test / probe` | Linux KVM reboot-backed observation for HiberFileSizePercent | [evidence/files/vm/hiberfilesizepercent-reboot-kvm-20260407b/hiberfilesizepercent-reboot-kvm-20260407b-summary.json](../evidence/files/vm-tooling-staging/hiberfilesizepercent-reboot-kvm-20260407b/hiberfilesizepercent-reboot-kvm-20260407b-summary.json) and [evidence/files/vm/hiberfilesizepercent-reboot-kvm-20260407b/hiberfilesizepercent-reboot-kvm-20260407b-before.json](../evidence/files/vm-tooling-staging/hiberfilesizepercent-reboot-kvm-20260407b/hiberfilesizepercent-reboot-kvm-20260407b-before.json) and [evidence/files/vm/hiberfilesizepercent-reboot-kvm-20260407b/hiberfilesizepercent-reboot-kvm-20260407b-after.json](../evidence/files/vm-tooling-staging/hiberfilesizepercent-reboot-kvm-20260407b/hiberfilesizepercent-reboot-kvm-20260407b-after.json) and [evidence/files/vm/hiberfilesizepercent-reboot-kvm-20260407b/hiberfilesizepercent-reboot-kvm-20260407b-powercfg-a-before.txt](../evidence/files/vm-tooling-staging/hiberfilesizepercent-reboot-kvm-20260407b/hiberfilesizepercent-reboot-kvm-20260407b-powercfg-a-before.txt) and [evidence/files/vm/hiberfilesizepercent-reboot-kvm-20260407b/hiberfilesizepercent-reboot-kvm-20260407b-powercfg-a-after.txt](../evidence/files/vm-tooling-staging/hiberfilesizepercent-reboot-kvm-20260407b/hiberfilesizepercent-reboot-kvm-20260407b-powercfg-a-after.txt) and [evidence/files/vm/hiberfilesizepercent-reboot-kvm-20260407b/host-review.json](../evidence/files/vm-tooling-staging/hiberfilesizepercent-reboot-kvm-20260407b/host-review.json) and [research/notes/power-control-hiber-file-size-percent-kvm-reboot-follow-up-20260407.md](notes/power-control-hiber-file-size-percent-kvm-reboot-follow-up-20260407.md) | `medium` | path, value, behavior, version-scope |
 | `vm-power-control-hiber-wpr-qga-runtime-read-20260412` | `etw-trace` | `unspecified` | QGA-launched WPR boot trace captures HiberFileSizePercent QueryValue | [evidence/files/vm/hiberfilesizepercent-wpr-qga-runtime-read-20260412/hiberfilesizepercent-wpr-qga-smoke-20260412f-summary.json](../evidence/files/vm-tooling-staging/hiberfilesizepercent-wpr-qga-runtime-read-20260412/hiberfilesizepercent-wpr-qga-smoke-20260412f-summary.json) and [evidence/files/vm/hiberfilesizepercent-wpr-qga-runtime-read-20260412/hiberfilesizepercent-wpr-qga-smoke-20260412f.normalized.json](../evidence/files/vm-tooling-staging/hiberfilesizepercent-wpr-qga-runtime-read-20260412/hiberfilesizepercent-wpr-qga-smoke-20260412f.normalized.json) and [research/notes/power-control-hiber-file-size-percent-wpr-qga-runtime-read-20260412.md](notes/power-control-hiber-file-size-percent-wpr-qga-runtime-read-20260412.md) | `high` | path, value, behavior, version-scope |
-| `vm-power-control-hiber-file-size-percent-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for HiberFileSizePercent | [evidence/records/raw/ghidra/ghidra-power-control-hiber-file-size-percent-20260424-batch1/summary.json](../evidence/records/raw/ghidra/ghidra-power-control-hiber-file-size-percent-20260424-batch1/summary.json) | `low` | version-scope |
+| `vm-power-control-hiber-file-size-percent-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for HiberFileSizePercent | [evidence/raw/ghidra/ghidra-power-control-hiber-file-size-percent-20260424-batch1/summary.json](../evidence/raw/ghidra/ghidra-power-control-hiber-file-size-percent-20260424-batch1/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -9170,7 +8490,7 @@ Blocking issues:
 | --- | --- |
 | Status | `not-mapped` |
 | Provider source | app/Services/TweakProviders/PowerTweakProvider.cs; engine/Tweaks/Commands/Power/DisableHibernationTweak.cs |
-| Notes | The current app uses the documented powercfg hibernation command surface instead of shipping the raw HibernateEnabled registry value. |
+| Notes | The checked-in app uses the documented powercfg hibernation command surface instead of shipping the raw HibernateEnabled registry value. |
 
 **Evidence class**
 
@@ -9228,7 +8548,7 @@ Blocking issues:
 | `repo-power-doc` | `repo-doc` | `Current repo docs` | Repo power notes for docs-first power-control values | [Docs/power/power.md](../Docs/power/power.md) | `high` | path, value, behavior, version-scope |
 | `vm-power-control-phase0-20260329` | `registry-observation` | `VM registry observation` | Win25H2Clean 96-key phase-0 existence batch | [evidence/files/vm/registry-batch-existence-96-live-20260329-100629/results.json](../evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json) | `high` | path, value, default, version-scope |
 | `static-power-control-string-20260329` | `repo-doc` | `Current repo docs` | Shared docs-first string triage for current-build ntoskrnl | [evidence/files/vm/power-control-docs-first-string-20260329-102348/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-string-20260329-102348/results.json) and [research/notes/power-control-docs-first-value-exists-static-triage-20260329.md](notes/power-control-docs-first-value-exists-static-triage-20260329.md) | `high` | path, value, version-scope |
-| `ghidra-power-control-docs-first-20260329` | `decompilation` | `Our Ghidra decompilation` | Shared Ghidra xref batch for docs-first power-control values | [evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md](../evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md) and [evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json](../evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json) and [research/notes/power-control-docs-first-ghidra-review-20260329.md](notes/power-control-docs-first-ghidra-review-20260329.md) | `high` | path, value, behavior, version-scope |
+| `ghidra-power-control-docs-first-20260329` | `decompilation` | `Our Ghidra decompilation` | Shared Ghidra xref batch for docs-first power-control values | [evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md](../evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md) and [evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json](../evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json) and [research/notes/power-control-docs-first-ghidra-review-20260329.md](notes/power-control-docs-first-ghidra-review-20260329.md) | `high` | path, value, behavior, version-scope |
 | `vm-power-control-runtime-batch-20260329` | `procmon-trace` | `VM Procmon trace` | Shared clean-baseline guest-processed stepwise Procmon boot log for docs-first power-control values | [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/results.json) and [research/notes/power-control-docs-first-stepwise-runtime-capture-20260329.md](notes/power-control-docs-first-stepwise-runtime-capture-20260329.md) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv) | `high` | behavior, risk, version-scope |
 
 **Validation proof**
@@ -9276,7 +8596,7 @@ Blocking issues:
 | --- | --- |
 | Status | `not-mapped` |
 | Provider source | not currently shipped in the app |
-| Notes | The current app does not expose HibernateEnabledDefault as a direct tweak or supported UI surface. |
+| Notes | The checked-in app does not expose HibernateEnabledDefault as a direct tweak or supported UI surface. |
 
 **Evidence class**
 
@@ -9334,7 +8654,7 @@ Blocking issues:
 | `repo-power-doc` | `repo-doc` | `Current repo docs` | Repo power notes for docs-first power-control values | [Docs/power/power.md](../Docs/power/power.md) | `high` | path, value, behavior, version-scope |
 | `vm-power-control-phase0-20260329` | `registry-observation` | `VM registry observation` | Win25H2Clean 96-key phase-0 existence batch | [evidence/files/vm/registry-batch-existence-96-live-20260329-100629/results.json](../evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json) | `high` | path, value, default, version-scope |
 | `static-power-control-string-20260329` | `repo-doc` | `Current repo docs` | Shared docs-first string triage for current-build ntoskrnl | [evidence/files/vm/power-control-docs-first-string-20260329-102348/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-string-20260329-102348/results.json) and [research/notes/power-control-docs-first-value-exists-static-triage-20260329.md](notes/power-control-docs-first-value-exists-static-triage-20260329.md) | `high` | path, value, version-scope |
-| `ghidra-power-control-docs-first-20260329` | `decompilation` | `Our Ghidra decompilation` | Shared Ghidra xref batch for docs-first power-control values | [evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md](../evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md) and [evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json](../evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json) and [research/notes/power-control-docs-first-ghidra-review-20260329.md](notes/power-control-docs-first-ghidra-review-20260329.md) | `high` | path, value, behavior, version-scope |
+| `ghidra-power-control-docs-first-20260329` | `decompilation` | `Our Ghidra decompilation` | Shared Ghidra xref batch for docs-first power-control values | [evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md](../evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md) and [evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json](../evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json) and [research/notes/power-control-docs-first-ghidra-review-20260329.md](notes/power-control-docs-first-ghidra-review-20260329.md) | `high` | path, value, behavior, version-scope |
 | `vm-power-control-runtime-batch-20260329` | `procmon-trace` | `VM Procmon trace` | Shared clean-baseline guest-processed stepwise Procmon boot log for docs-first power-control values | [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/results.json) and [research/notes/power-control-docs-first-stepwise-runtime-capture-20260329.md](notes/power-control-docs-first-stepwise-runtime-capture-20260329.md) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv) | `medium` | behavior, risk, version-scope |
 | `vm-power-control-postboot-trigger-20260329` | `procmon-trace` | `VM Procmon trace` | Guest-processed post-boot Procmon trigger batch for remaining docs-first power-control values | [evidence/files/vm/power-control-docs-first-postboot-trigger-20260329-161427/power-control-hibernate-enabled-default/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-hibernate-enabled-default/summary.json) and [evidence/files/vm/power-control-docs-first-postboot-trigger-20260329-161427/power-control-hibernate-enabled-default/power-control-hibernate-enabled-default-postboot-trigger.hits.csv](../evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-hibernate-enabled-default/power-control-hibernate-enabled-default-postboot-trigger.hits.csv) and [research/notes/power-control-docs-first-postboot-trigger-capture-20260329.md](notes/power-control-docs-first-postboot-trigger-capture-20260329.md) | `medium` | behavior, risk, version-scope |
 | `vm-power-control-trigger-etw-followup-20260329` | `etw-trace` | `unspecified` | Trigger-based ETW follow-up for HibernateEnabledDefault | [evidence/files/vm/power-control-docs-first-trigger-etw-20260329-184522/power-control-hibernate-enabled-default/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-trigger-etw-20260329-184522/power-control-hibernate-enabled-default/summary.json) and [evidence/files/vm/power-control-docs-first-trigger-etw-20260329-184522/power-control-hibernate-enabled-default/power-control-hibernate-enabled-default-trigger-etw-trigger.log](../evidence/files/vm-tooling-staging/power-control-docs-first-trigger-etw-20260329-184522/power-control-hibernate-enabled-default/power-control-hibernate-enabled-default-trigger-etw-trigger.log) and [research/notes/power-control-docs-first-trigger-etw-follow-up-20260329.md](notes/power-control-docs-first-trigger-etw-follow-up-20260329.md) | `medium` | behavior, risk, version-scope |
@@ -9453,9 +8773,9 @@ Current writes
 | `repo-power-doc` | `repo-doc` | `Current repo docs` | Repo power notes for docs-first power-control values | [Docs/power/power.md](../Docs/power/power.md) | `high` | path, value, behavior, version-scope |
 | `vm-power-control-phase0-20260329` | `registry-observation` | `VM registry observation` | Win25H2Clean 96-key phase-0 existence batch | [evidence/files/vm/registry-batch-existence-96-live-20260329-100629/results.json](../evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json) | `high` | path, value, default, version-scope |
 | `static-power-control-string-20260329` | `repo-doc` | `Current repo docs` | Shared docs-first string triage for current-build ntoskrnl | [evidence/files/vm/power-control-docs-first-string-20260329-102348/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-string-20260329-102348/results.json) and [research/notes/power-control-docs-first-value-exists-static-triage-20260329.md](notes/power-control-docs-first-value-exists-static-triage-20260329.md) | `high` | path, value, version-scope |
-| `ghidra-power-control-docs-first-20260329` | `decompilation` | `Our Ghidra decompilation` | Shared Ghidra xref batch for docs-first power-control values | [evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md](../evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md) and [evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json](../evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json) and [research/notes/power-control-docs-first-ghidra-review-20260329.md](notes/power-control-docs-first-ghidra-review-20260329.md) | `high` | path, value, behavior, version-scope |
+| `ghidra-power-control-docs-first-20260329` | `decompilation` | `Our Ghidra decompilation` | Shared Ghidra xref batch for docs-first power-control values | [evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md](../evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md) and [evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json](../evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json) and [research/notes/power-control-docs-first-ghidra-review-20260329.md](notes/power-control-docs-first-ghidra-review-20260329.md) | `high` | path, value, behavior, version-scope |
 | `vm-power-control-runtime-batch-20260329` | `procmon-trace` | `VM Procmon trace` | Shared clean-baseline guest-processed stepwise Procmon boot log for docs-first power-control values | [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/results.json) and [research/notes/power-control-docs-first-stepwise-runtime-capture-20260329.md](notes/power-control-docs-first-stepwise-runtime-capture-20260329.md) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv) | `high` | behavior, risk, version-scope |
-| `vm-power.control.lid-reliability-state-etw-stackwalk-attempt-20260424i` | `etw-trace` | `unspecified` | Bounded ETW stackwalk timeout receipt | [evidence/records/raw/etw-stackwalk/power.control.lid-reliability-state-etw-20260424i/power.control.lid-reliability-state-etw-20260424i-summary.json](../evidence/records/raw/etw-stackwalk/power.control.lid-reliability-state-etw-20260424i/power.control.lid-reliability-state-etw-20260424i-summary.json) and [evidence/records/raw/etw-stackwalk/power.control.lid-reliability-state-etw-20260424i/power.control.lid-reliability-state-etw-20260424i-stage.json](../evidence/records/raw/etw-stackwalk/power.control.lid-reliability-state-etw-20260424i/power.control.lid-reliability-state-etw-20260424i-stage.json) and [evidence/records/captures/power-control-lid-reliability-state-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/power-control-lid-reliability-state-etw-stackwalk-attempt-20260424.json) | `medium` | runtime-lane-review, transport-blocker |
+| `vm-power.control.lid-reliability-state-etw-stackwalk-attempt-20260424i` | `etw-trace` | `unspecified` | Bounded ETW stackwalk timeout receipt | [evidence/raw/etw-stackwalk/power.control.lid-reliability-state-etw-20260424i/power.control.lid-reliability-state-etw-20260424i-summary.json](../evidence/raw/etw-stackwalk/power.control.lid-reliability-state-etw-20260424i/power.control.lid-reliability-state-etw-20260424i-summary.json) and [evidence/raw/etw-stackwalk/power.control.lid-reliability-state-etw-20260424i/power.control.lid-reliability-state-etw-20260424i-stage.json](../evidence/raw/etw-stackwalk/power.control.lid-reliability-state-etw-20260424i/power.control.lid-reliability-state-etw-20260424i-stage.json) and [evidence/captures/power-control-lid-reliability-state-etw-stackwalk-attempt-20260424.json](../evidence/captures/power-control-lid-reliability-state-etw-stackwalk-attempt-20260424.json) | `medium` | runtime-lane-review, transport-blocker |
 
 **Validation proof**
 
@@ -9566,11 +8886,11 @@ Current writes
 | `repo-power-doc` | `repo-doc` | `Current repo docs` | Repo power notes for docs-first power-control values | [Docs/power/power.md](../Docs/power/power.md) | `high` | path, value, behavior, version-scope |
 | `vm-power-control-phase0-20260329` | `registry-observation` | `VM registry observation` | Win25H2Clean 96-key phase-0 existence batch | [evidence/files/vm/registry-batch-existence-96-live-20260329-100629/results.json](../evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json) | `high` | path, value, default, version-scope |
 | `static-power-control-string-20260329` | `repo-doc` | `Current repo docs` | Shared docs-first string triage for current-build ntoskrnl | [evidence/files/vm/power-control-docs-first-string-20260329-102348/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-string-20260329-102348/results.json) and [research/notes/power-control-docs-first-value-exists-static-triage-20260329.md](notes/power-control-docs-first-value-exists-static-triage-20260329.md) | `high` | path, value, version-scope |
-| `ghidra-power-control-docs-first-20260329` | `decompilation` | `Our Ghidra decompilation` | Shared Ghidra xref batch for docs-first power-control values | [evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md](../evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md) and [evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json](../evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json) and [research/notes/power-control-docs-first-ghidra-review-20260329.md](notes/power-control-docs-first-ghidra-review-20260329.md) | `high` | path, value, behavior, version-scope |
+| `ghidra-power-control-docs-first-20260329` | `decompilation` | `Our Ghidra decompilation` | Shared Ghidra xref batch for docs-first power-control values | [evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md](../evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md) and [evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json](../evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json) and [research/notes/power-control-docs-first-ghidra-review-20260329.md](notes/power-control-docs-first-ghidra-review-20260329.md) | `high` | path, value, behavior, version-scope |
 | `vm-power-control-runtime-batch-20260329` | `procmon-trace` | `VM Procmon trace` | Shared clean-baseline guest-processed stepwise Procmon boot log for docs-first power-control values | [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/results.json) and [research/notes/power-control-docs-first-stepwise-runtime-capture-20260329.md](notes/power-control-docs-first-stepwise-runtime-capture-20260329.md) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv) | `medium` | behavior, risk, version-scope |
 | `vm-power-control-postboot-trigger-20260329` | `procmon-trace` | `VM Procmon trace` | Guest-processed post-boot Procmon trigger batch for remaining docs-first power-control values | [evidence/files/vm/power-control-docs-first-postboot-trigger-20260329-161427/power-control-mf-buffering-threshold/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-mf-buffering-threshold/summary.json) and [evidence/files/vm/power-control-docs-first-postboot-trigger-20260329-161427/power-control-mf-buffering-threshold/power-control-mf-buffering-threshold-postboot-trigger.hits.csv](../evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-mf-buffering-threshold/power-control-mf-buffering-threshold-postboot-trigger.hits.csv) and [research/notes/power-control-docs-first-postboot-trigger-capture-20260329.md](notes/power-control-docs-first-postboot-trigger-capture-20260329.md) | `medium` | behavior, risk, version-scope |
 | `vm-power-control-lightweight-runtime-remaining-20260330` | `etw-trace` | `unspecified` | Tools-hardened lightweight ETW I/O burst follow-up for remaining power-control values | [evidence/files/vm/power-control-lightweight-runtime-20260330-033416/summary.json](../evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-033416/summary.json) and [evidence/files/vm/power-control-lightweight-runtime-20260330-033416/results.json](../evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-033416/results.json) and [research/notes/power-control-lightweight-runtime-remaining-two-20260330.md](notes/power-control-lightweight-runtime-remaining-two-20260330.md) | `high` | behavior, risk, version-scope |
-| `vm-power.control.mf-buffering-threshold-etw-stackwalk-attempt-20260424i` | `etw-trace` | `unspecified` | Bounded ETW stackwalk timeout receipt | [evidence/records/raw/etw-stackwalk/power.control.mf-buffering-threshold-etw-20260424i/power.control.mf-buffering-threshold-etw-20260424i-summary.json](../evidence/records/raw/etw-stackwalk/power.control.mf-buffering-threshold-etw-20260424i/power.control.mf-buffering-threshold-etw-20260424i-summary.json) and [evidence/records/raw/etw-stackwalk/power.control.mf-buffering-threshold-etw-20260424i/power.control.mf-buffering-threshold-etw-20260424i-stage.json](../evidence/records/raw/etw-stackwalk/power.control.mf-buffering-threshold-etw-20260424i/power.control.mf-buffering-threshold-etw-20260424i-stage.json) and [evidence/records/captures/power-control-mf-buffering-threshold-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/power-control-mf-buffering-threshold-etw-stackwalk-attempt-20260424.json) | `medium` | runtime-lane-review, transport-blocker |
+| `vm-power.control.mf-buffering-threshold-etw-stackwalk-attempt-20260424i` | `etw-trace` | `unspecified` | Bounded ETW stackwalk timeout receipt | [evidence/raw/etw-stackwalk/power.control.mf-buffering-threshold-etw-20260424i/power.control.mf-buffering-threshold-etw-20260424i-summary.json](../evidence/raw/etw-stackwalk/power.control.mf-buffering-threshold-etw-20260424i/power.control.mf-buffering-threshold-etw-20260424i-summary.json) and [evidence/raw/etw-stackwalk/power.control.mf-buffering-threshold-etw-20260424i/power.control.mf-buffering-threshold-etw-20260424i-stage.json](../evidence/raw/etw-stackwalk/power.control.mf-buffering-threshold-etw-20260424i/power.control.mf-buffering-threshold-etw-20260424i-stage.json) and [evidence/captures/power-control-mf-buffering-threshold-etw-stackwalk-attempt-20260424.json](../evidence/captures/power-control-mf-buffering-threshold-etw-stackwalk-attempt-20260424.json) | `medium` | runtime-lane-review, transport-blocker |
 
 **Validation proof**
 
@@ -9681,11 +9001,11 @@ Current writes
 | `repo-power-doc` | `repo-doc` | `Current repo docs` | Repo power notes for docs-first power-control values | [Docs/power/power.md](../Docs/power/power.md) | `high` | path, value, behavior, version-scope |
 | `vm-power-control-phase0-20260329` | `registry-observation` | `VM registry observation` | Win25H2Clean 96-key phase-0 existence batch | [evidence/files/vm/registry-batch-existence-96-live-20260329-100629/results.json](../evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json) | `high` | path, value, default, version-scope |
 | `static-power-control-string-20260329` | `repo-doc` | `Current repo docs` | Shared docs-first string triage for current-build ntoskrnl | [evidence/files/vm/power-control-docs-first-string-20260329-102348/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-string-20260329-102348/results.json) and [research/notes/power-control-docs-first-value-exists-static-triage-20260329.md](notes/power-control-docs-first-value-exists-static-triage-20260329.md) | `high` | path, value, version-scope |
-| `ghidra-power-control-docs-first-20260329` | `decompilation` | `Our Ghidra decompilation` | Shared Ghidra xref batch for docs-first power-control values | [evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md](../evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md) and [evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json](../evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json) and [research/notes/power-control-docs-first-ghidra-review-20260329.md](notes/power-control-docs-first-ghidra-review-20260329.md) | `high` | path, value, behavior, version-scope |
+| `ghidra-power-control-docs-first-20260329` | `decompilation` | `Our Ghidra decompilation` | Shared Ghidra xref batch for docs-first power-control values | [evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md](../evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md) and [evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json](../evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json) and [research/notes/power-control-docs-first-ghidra-review-20260329.md](notes/power-control-docs-first-ghidra-review-20260329.md) | `high` | path, value, behavior, version-scope |
 | `vm-power-control-runtime-batch-20260329` | `procmon-trace` | `VM Procmon trace` | Shared clean-baseline guest-processed stepwise Procmon boot log for docs-first power-control values | [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/results.json) and [research/notes/power-control-docs-first-stepwise-runtime-capture-20260329.md](notes/power-control-docs-first-stepwise-runtime-capture-20260329.md) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv) | `medium` | behavior, risk, version-scope |
 | `vm-power-control-postboot-trigger-20260329` | `procmon-trace` | `VM Procmon trace` | Guest-processed post-boot Procmon trigger batch for remaining docs-first power-control values | [evidence/files/vm/power-control-docs-first-postboot-trigger-20260329-161427/power-control-perf-calculate-actual-utilization/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-perf-calculate-actual-utilization/summary.json) and [evidence/files/vm/power-control-docs-first-postboot-trigger-20260329-161427/power-control-perf-calculate-actual-utilization/power-control-perf-calculate-actual-utilization-postboot-trigger.hits.csv](../evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-perf-calculate-actual-utilization/power-control-perf-calculate-actual-utilization-postboot-trigger.hits.csv) and [research/notes/power-control-docs-first-postboot-trigger-capture-20260329.md](notes/power-control-docs-first-postboot-trigger-capture-20260329.md) | `medium` | behavior, risk, version-scope |
 | `vm-power-control-lightweight-runtime-20260330` | `etw-trace` | `unspecified` | Tools-hardened lightweight ETW follow-up for remaining docs-first power-control values | [evidence/files/vm/power-control-lightweight-runtime-20260330-024603/summary.json](../evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-024603/summary.json) and [evidence/files/vm/power-control-lightweight-runtime-20260330-024603/results.json](../evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-024603/results.json) and [research/notes/power-control-lightweight-runtime-follow-up-20260330.md](notes/power-control-lightweight-runtime-follow-up-20260330.md) | `high` | behavior, risk, version-scope |
-| `vm-power.control.perf-calculate-actual-utilization-etw-stackwalk-attempt-20260424i` | `etw-trace` | `unspecified` | Bounded ETW stackwalk timeout receipt | [evidence/records/raw/etw-stackwalk/power.control.perf-calculate-actual-utilization-etw-20260424i/power.control.perf-calculate-actual-utilization-etw-20260424i-summary.json](../evidence/records/raw/etw-stackwalk/power.control.perf-calculate-actual-utilization-etw-20260424i/power.control.perf-calculate-actual-utilization-etw-20260424i-summary.json) and [evidence/records/raw/etw-stackwalk/power.control.perf-calculate-actual-utilization-etw-20260424i/power.control.perf-calculate-actual-utilization-etw-20260424i-stage.json](../evidence/records/raw/etw-stackwalk/power.control.perf-calculate-actual-utilization-etw-20260424i/power.control.perf-calculate-actual-utilization-etw-20260424i-stage.json) and [evidence/records/captures/power-control-perf-calculate-actual-utilization-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/power-control-perf-calculate-actual-utilization-etw-stackwalk-attempt-20260424.json) | `medium` | runtime-lane-review, transport-blocker |
+| `vm-power.control.perf-calculate-actual-utilization-etw-stackwalk-attempt-20260424i` | `etw-trace` | `unspecified` | Bounded ETW stackwalk timeout receipt | [evidence/raw/etw-stackwalk/power.control.perf-calculate-actual-utilization-etw-20260424i/power.control.perf-calculate-actual-utilization-etw-20260424i-summary.json](../evidence/raw/etw-stackwalk/power.control.perf-calculate-actual-utilization-etw-20260424i/power.control.perf-calculate-actual-utilization-etw-20260424i-summary.json) and [evidence/raw/etw-stackwalk/power.control.perf-calculate-actual-utilization-etw-20260424i/power.control.perf-calculate-actual-utilization-etw-20260424i-stage.json](../evidence/raw/etw-stackwalk/power.control.perf-calculate-actual-utilization-etw-20260424i/power.control.perf-calculate-actual-utilization-etw-20260424i-stage.json) and [evidence/captures/power-control-perf-calculate-actual-utilization-etw-stackwalk-attempt-20260424.json](../evidence/captures/power-control-perf-calculate-actual-utilization-etw-stackwalk-attempt-20260424.json) | `medium` | runtime-lane-review, transport-blocker |
 
 **Validation proof**
 
@@ -9796,12 +9116,12 @@ Current writes
 | `repo-power-doc` | `repo-doc` | `Current repo docs` | Repo power notes for docs-first power-control values | [Docs/power/power.md](../Docs/power/power.md) | `high` | path, value, behavior, version-scope |
 | `vm-power-control-phase0-20260329` | `registry-observation` | `VM registry observation` | Win25H2Clean 96-key phase-0 existence batch | [evidence/files/vm/registry-batch-existence-96-live-20260329-100629/results.json](../evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json) | `high` | path, value, default, version-scope |
 | `static-power-control-string-20260329` | `repo-doc` | `Current repo docs` | Shared docs-first string triage for current-build ntoskrnl | [evidence/files/vm/power-control-docs-first-string-20260329-102348/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-string-20260329-102348/results.json) and [research/notes/power-control-docs-first-value-exists-static-triage-20260329.md](notes/power-control-docs-first-value-exists-static-triage-20260329.md) | `high` | path, value, version-scope |
-| `ghidra-power-control-docs-first-20260329` | `decompilation` | `Our Ghidra decompilation` | Shared Ghidra xref batch for docs-first power-control values | [evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md](../evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md) and [evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json](../evidence/records/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json) and [research/notes/power-control-docs-first-ghidra-review-20260329.md](notes/power-control-docs-first-ghidra-review-20260329.md) | `high` | path, value, behavior, version-scope |
+| `ghidra-power-control-docs-first-20260329` | `decompilation` | `Our Ghidra decompilation` | Shared Ghidra xref batch for docs-first power-control values | [evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md](../evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md) and [evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json](../evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json) and [research/notes/power-control-docs-first-ghidra-review-20260329.md](notes/power-control-docs-first-ghidra-review-20260329.md) | `high` | path, value, behavior, version-scope |
 | `vm-power-control-runtime-batch-20260329` | `procmon-trace` | `VM Procmon trace` | Shared clean-baseline guest-processed stepwise Procmon boot log for docs-first power-control values | [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/results.json) and [research/notes/power-control-docs-first-stepwise-runtime-capture-20260329.md](notes/power-control-docs-first-stepwise-runtime-capture-20260329.md) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv) | `medium` | behavior, risk, version-scope |
 | `vm-power-control-postboot-trigger-20260329` | `procmon-trace` | `VM Procmon trace` | Guest-processed post-boot Procmon trigger batch for remaining docs-first power-control values | [evidence/files/vm/power-control-docs-first-postboot-trigger-20260329-161427/power-control-timer-rebase-threshold-on-drips-exit/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-timer-rebase-threshold-on-drips-exit/summary.json) and [evidence/files/vm/power-control-docs-first-postboot-trigger-20260329-161427/power-control-timer-rebase-threshold-on-drips-exit/power-control-timer-rebase-threshold-on-drips-exit-postboot-trigger.hits.csv](../evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-timer-rebase-threshold-on-drips-exit/power-control-timer-rebase-threshold-on-drips-exit-postboot-trigger.hits.csv) and [research/notes/power-control-docs-first-postboot-trigger-capture-20260329.md](notes/power-control-docs-first-postboot-trigger-capture-20260329.md) | `medium` | behavior, risk, version-scope |
 | `vm-power-control-drips-capability-20260330` | `etw-trace` | `unspecified` | Tools-hardened lightweight DRIPS capability gate for TimerRebaseThresholdOnDripsExit | [evidence/files/vm/power-control-lightweight-runtime-20260330-033416/summary.json](../evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-033416/summary.json) and [evidence/files/vm/power-control-lightweight-runtime-20260330-033416/results.json](../evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-033416/results.json) and [research/notes/power-control-lightweight-runtime-remaining-two-20260330.md](notes/power-control-lightweight-runtime-remaining-two-20260330.md) | `high` | behavior, risk, version-scope |
 | `vm-power-control-drips-kvm-reboot-20260407` | `vm-test` | `VM test / probe` | Linux KVM reboot-backed observation for TimerRebaseThresholdOnDripsExit | [evidence/files/vm/timerrebasethresholdondripsexit-reboot-kvm-20260407a/timerrebasethresholdondripsexit-reboot-kvm-20260407a-summary.json](../evidence/files/vm-tooling-staging/timerrebasethresholdondripsexit-reboot-kvm-20260407a/timerrebasethresholdondripsexit-reboot-kvm-20260407a-summary.json) and [evidence/files/vm/timerrebasethresholdondripsexit-reboot-kvm-20260407a/timerrebasethresholdondripsexit-reboot-kvm-20260407a-before.json](../evidence/files/vm-tooling-staging/timerrebasethresholdondripsexit-reboot-kvm-20260407a/timerrebasethresholdondripsexit-reboot-kvm-20260407a-before.json) and [evidence/files/vm/timerrebasethresholdondripsexit-reboot-kvm-20260407a/timerrebasethresholdondripsexit-reboot-kvm-20260407a-after.json](../evidence/files/vm-tooling-staging/timerrebasethresholdondripsexit-reboot-kvm-20260407a/timerrebasethresholdondripsexit-reboot-kvm-20260407a-after.json) and [evidence/files/vm/timerrebasethresholdondripsexit-reboot-kvm-20260407a/timerrebasethresholdondripsexit-reboot-kvm-20260407a-powercfg-a-before.txt](../evidence/files/vm-tooling-staging/timerrebasethresholdondripsexit-reboot-kvm-20260407a/timerrebasethresholdondripsexit-reboot-kvm-20260407a-powercfg-a-before.txt) and [evidence/files/vm/timerrebasethresholdondripsexit-reboot-kvm-20260407a/timerrebasethresholdondripsexit-reboot-kvm-20260407a-powercfg-a-after.txt](../evidence/files/vm-tooling-staging/timerrebasethresholdondripsexit-reboot-kvm-20260407a/timerrebasethresholdondripsexit-reboot-kvm-20260407a-powercfg-a-after.txt) and [evidence/files/vm/timerrebasethresholdondripsexit-reboot-kvm-20260407a/host-review.json](../evidence/files/vm-tooling-staging/timerrebasethresholdondripsexit-reboot-kvm-20260407a/host-review.json) and [research/notes/power-control-timer-rebase-threshold-on-drips-exit-kvm-reboot-follow-up-20260407.md](notes/power-control-timer-rebase-threshold-on-drips-exit-kvm-reboot-follow-up-20260407.md) | `medium` | path, value, behavior, version-scope |
-| `vm-power.control.timer-rebase-threshold-on-drips-exit-etw-stackwalk-attempt-20260424h` | `etw-trace` | `unspecified` | Bounded ETW stackwalk timeout receipt | [evidence/records/raw/etw-stackwalk/power.control.timer-rebase-threshold-on-drips-exit-etw-20260424h/power.control.timer-rebase-threshold-on-drips-exit-etw-20260424h-summary.json](../evidence/records/raw/etw-stackwalk/power.control.timer-rebase-threshold-on-drips-exit-etw-20260424h/power.control.timer-rebase-threshold-on-drips-exit-etw-20260424h-summary.json) and [evidence/records/raw/etw-stackwalk/power.control.timer-rebase-threshold-on-drips-exit-etw-20260424h/power.control.timer-rebase-threshold-on-drips-exit-etw-20260424h-stage.json](../evidence/records/raw/etw-stackwalk/power.control.timer-rebase-threshold-on-drips-exit-etw-20260424h/power.control.timer-rebase-threshold-on-drips-exit-etw-20260424h-stage.json) and [evidence/records/captures/power-control-timer-rebase-threshold-on-drips-exit-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/power-control-timer-rebase-threshold-on-drips-exit-etw-stackwalk-attempt-20260424.json) | `medium` | runtime-lane-review, transport-blocker |
+| `vm-power.control.timer-rebase-threshold-on-drips-exit-etw-stackwalk-attempt-20260424h` | `etw-trace` | `unspecified` | Bounded ETW stackwalk timeout receipt | [evidence/raw/etw-stackwalk/power.control.timer-rebase-threshold-on-drips-exit-etw-20260424h/power.control.timer-rebase-threshold-on-drips-exit-etw-20260424h-summary.json](../evidence/raw/etw-stackwalk/power.control.timer-rebase-threshold-on-drips-exit-etw-20260424h/power.control.timer-rebase-threshold-on-drips-exit-etw-20260424h-summary.json) and [evidence/raw/etw-stackwalk/power.control.timer-rebase-threshold-on-drips-exit-etw-20260424h/power.control.timer-rebase-threshold-on-drips-exit-etw-20260424h-stage.json](../evidence/raw/etw-stackwalk/power.control.timer-rebase-threshold-on-drips-exit-etw-20260424h/power.control.timer-rebase-threshold-on-drips-exit-etw-20260424h-stage.json) and [evidence/captures/power-control-timer-rebase-threshold-on-drips-exit-etw-stackwalk-attempt-20260424.json](../evidence/captures/power-control-timer-rebase-threshold-on-drips-exit-etw-stackwalk-attempt-20260424.json) | `medium` | runtime-lane-review, transport-blocker |
 
 **Validation proof**
 
@@ -9876,17 +9196,17 @@ Current writes
 | Has nohuto lineage | `True` |
 | Has Windows Internals notes | `True` |
 | Needs review | `False` |
-| Source repositories | win-config, win-registry, decompiled-pseudocode |
-| Matched tokens | power, disableidlestatesatboot, idlestatetimeout, exitlatencycheckenabled |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens | writes, idle, state, related, power, registry, values, used, this, tweak, changes, behavior, increase, draw |
 | Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
 
 Nohuto lineage references:
 
 | Title | Location | Summary |
 | --- | --- | --- |
-| win-config / power/desc.md | [https://github.com/nohuto/win-config/blob/main/power/desc.md](https://github.com/nohuto/win-config/blob/main/power/desc.md) | Matched 4 audit token(s) in win-config. |
-| win-registry / README.md | [https://github.com/nohuto/win-registry/blob/main/README.md](https://github.com/nohuto/win-registry/blob/main/README.md) | Matched 4 audit token(s) in win-registry. |
-| win-registry / assets/power/power-symbols.txt | [https://github.com/nohuto/win-registry/blob/main/assets/power/power-symbols.txt](https://github.com/nohuto/win-registry/blob/main/assets/power/power-symbols.txt) | Matched 3 audit token(s) in win-registry. |
+| win-config / nvidia/desc.md | [https://github.com/nohuto/win-config/blob/main/nvidia/desc.md](https://github.com/nohuto/win-config/blob/main/nvidia/desc.md) | Matched 14 audit token(s) in win-config. |
+| win-config / power/desc.md | [https://github.com/nohuto/win-config/blob/main/power/desc.md](https://github.com/nohuto/win-config/blob/main/power/desc.md) | Matched 12 audit token(s) in win-config. |
+| win-config / peripheral/desc.md | [https://github.com/nohuto/win-config/blob/main/peripheral/desc.md](https://github.com/nohuto/win-config/blob/main/peripheral/desc.md) | Matched 13 audit token(s) in win-config. |
 | decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
 
 Windows Internals references:
@@ -9933,7 +9253,7 @@ Windows Internals references:
 | `nohuto-power-disable-idle-states-trace` | `registry-observation` | `VM registry observation` | nohuto power trace for DisableIdleStatesAtBoot | [research/_source-mirrors/win-registry/records/Power.txt](_source-mirrors/win-registry/records/Power.txt) | `medium` | path, value, behavior |
 | `vm-cpu-idle-bundle-probe` | `vm-test` | `VM test / probe` | Win25H2Clean reversible probe for the CPU idle-state bundle | [evidence/files/vm/cpu_idle_probe.json](../evidence/files/vm-tooling-staging/cpu_idle_probe.json) | `high` | path, value, behavior, rollback |
 | `repo-power-doc` | `repo-doc` | `Current repo docs` | Repo power notes | [Docs/power/power.md](../Docs/power/power.md) | `medium` | ui-mapping, app-mismatch |
-| `ghidra-cpu-idle-no-match-20260327` | `ghidra-trace` | `unspecified` | Our Ghidra follow-up - ntoskrnl CPU idle string/xref probes | [evidence/records/raw/ghidra/power.disable-cpu-idle-states/cpu-idle-registry-name-ghidra.md](../evidence/records/raw/ghidra/power.disable-cpu-idle-states/cpu-idle-registry-name-ghidra.md) and [evidence/records/raw/ghidra/power.disable-cpu-idle-states/cpu-idle-internal-name-ghidra.md](../evidence/records/raw/ghidra/power.disable-cpu-idle-states/cpu-idle-internal-name-ghidra.md) | `medium` | version-scope, open-question |
+| `ghidra-cpu-idle-no-match-20260327` | `ghidra-trace` | `unspecified` | Our Ghidra follow-up - ntoskrnl CPU idle string/xref probes | [evidence/raw/ghidra/power.disable-cpu-idle-states/cpu-idle-registry-name-ghidra.md](../evidence/raw/ghidra/power.disable-cpu-idle-states/cpu-idle-registry-name-ghidra.md) and [evidence/raw/ghidra/power.disable-cpu-idle-states/cpu-idle-internal-name-ghidra.md](../evidence/raw/ghidra/power.disable-cpu-idle-states/cpu-idle-internal-name-ghidra.md) | `medium` | version-scope, open-question |
 | `vm-cpu-idle-benchmark-incident-20260327` | `vm-incident` | `unspecified` | Win25H2Clean rebooted CPU idle benchmark incident | [research/vm-incidents.json](vm-incidents.json) and [research/notes/cpu-idle-states-follow-up-20260327.md](notes/cpu-idle-states-follow-up-20260327.md) and [evidence/records/power.disable-cpu-idle-states/behavior-lane.log](../evidence/records/power.disable-cpu-idle-states/behavior-lane.log) | `high` | incident-review, version-scope, side-effects |
 | `vm-cpu-idle-runtime-lane-20260327` | `vm-test` | `VM test / probe` | Win25H2Clean v3.1 runtime lane for the CPU idle-state bundle | [evidence/files/vm/cpu-idle-runtime-20260327-072057/summary.json](../evidence/files/vm-tooling-staging/cpu-idle-runtime-20260327-072057/summary.json) and [evidence/files/vm/cpu-idle-runtime-20260327-072057/cpu-idle-runtime.etl.md](../evidence/files/vm-tooling-staging/cpu-idle-runtime-20260327-072057/cpu-idle-runtime.etl.md) and [evidence/files/vm/cpu-idle-runtime-20260327-232151/summary.json](../evidence/files/vm-tooling-staging/cpu-idle-runtime-20260327-232151/summary.json) and [evidence/files/vm/cpu-idle-runtime-20260327-232151/cpu-idle-runtime.etl.md](../evidence/files/vm-tooling-staging/cpu-idle-runtime-20260327-232151/cpu-idle-runtime.etl.md) | `high` | version-scope, incident-review, side-effects |
 | `vm-cpu-idle-write-diagnostics-20260328` | `vm-test` | `VM test / probe` | Win25H2Clean write diagnostics for the CPU idle-state bundle | [evidence/files/vm/cpu-idle-write-diagnostics-20260328-191358/summary.json](../evidence/files/vm-tooling-staging/cpu-idle-write-diagnostics-20260328-191358/summary.json) and [evidence/files/vm/cpu-idle-write-diagnostics-20260328-193355/summary.json](../evidence/files/vm-tooling-staging/cpu-idle-write-diagnostics-20260328-193355/summary.json) and [evidence/files/vm/cpu-idle-write-diagnostics-20260328-194225/summary.json](../evidence/files/vm-tooling-staging/cpu-idle-write-diagnostics-20260328-194225/summary.json) and [evidence/files/vm/cpu-idle-write-diagnostics-20260328-194947/summary.json](../evidence/files/vm-tooling-staging/cpu-idle-write-diagnostics-20260328-194947/summary.json) and [research/notes/power-disable-cpu-idle-states-write-diagnostics-20260328.md](notes/power-disable-cpu-idle-states-write-diagnostics-20260328.md) | `medium` | version-scope, incident-review, open-question |
@@ -9941,7 +9261,7 @@ Windows Internals references:
 | `vm-cpu-idle-minimal-regwrite-20260328` | `vm-test` | `VM test / probe` | Win25H2Clean minimal direct registry write diagnostic for the CPU idle-state bundle | [evidence/files/vm/cpu-idle-minimal-regwrite-20260328-201526/summary.json](../evidence/files/vm-tooling-staging/cpu-idle-minimal-regwrite-20260328-201526/summary.json) and [evidence/files/vm/cpu-idle-minimal-regwrite-20260328-201526/cpu-idle-minimal-regwrite-result.json](../evidence/files/vm-tooling-staging/cpu-idle-minimal-regwrite-20260328-201526/cpu-idle-minimal-regwrite-result.json) and [research/notes/power-disable-cpu-idle-states-tooling-chain-review-20260328.md](notes/power-disable-cpu-idle-states-tooling-chain-review-20260328.md) | `high` | path, value, rollback, open-question |
 | `vm-cpu-idle-stepwise-orchestration-20260329` | `vm-test` | `VM test / probe` | Win25H2Clean excluded-baseline stepwise CPU idle orchestration package | [evidence/files/vm/cpu-idle-runtime-20260329-015521/summary.json](../evidence/files/vm-tooling-staging/cpu-idle-runtime-20260329-015521/summary.json) and [evidence/files/vm/cpu-idle-stepwise-20260329-015521/session.json](../evidence/files/vm-tooling-staging/cpu-idle-stepwise-20260329-015521/session.json) and [evidence/files/vm/cpu-idle-stepwise-20260329-015521/step-a-summary.json](../evidence/files/vm-tooling-staging/cpu-idle-stepwise-20260329-015521/step-a-summary.json) and [evidence/files/vm/cpu-idle-stepwise-20260329-015521/step-b-summary.json](../evidence/files/vm-tooling-staging/cpu-idle-stepwise-20260329-015521/step-b-summary.json) and [evidence/files/vm/cpu-idle-stepwise-20260329-015521/step-c1-summary.json](../evidence/files/vm-tooling-staging/cpu-idle-stepwise-20260329-015521/step-c1-summary.json) and [evidence/files/vm/cpu-idle-stepwise-20260329-015521/step-c2-summary.json](../evidence/files/vm-tooling-staging/cpu-idle-stepwise-20260329-015521/step-c2-summary.json) and [evidence/files/vm/cpu-idle-stepwise-20260329-015521/step-c3-summary.json](../evidence/files/vm-tooling-staging/cpu-idle-stepwise-20260329-015521/step-c3-summary.json) and [evidence/files/vm/cpu-idle-stepwise-20260329-015521/step-c4-summary.json](../evidence/files/vm-tooling-staging/cpu-idle-stepwise-20260329-015521/step-c4-summary.json) and [evidence/files/vm/cpu-idle-stepwise-20260329-015521/step-d-summary.json](../evidence/files/vm-tooling-staging/cpu-idle-stepwise-20260329-015521/step-d-summary.json) and [research/notes/power-disable-cpu-idle-states-stepwise-orchestration-20260329.md](notes/power-disable-cpu-idle-states-stepwise-orchestration-20260329.md) | `high` | path, value, rollback, version-scope, open-question |
 | `analysis-power-disable-cpu-idle-states-decision-gate-review-20260412` | `analysis-output` | `unspecified` | Decision gate review promotes the advanced CPU idle-state app profile | [research/notes/power-disable-cpu-idle-states-decision-gate-review-20260412.md](notes/power-disable-cpu-idle-states-decision-gate-review-20260412.md) | `medium` | risk, rollback, version-scope, ui-mapping |
-| `vm-cpu-idle-bundle-etw-stackwalk-review-20260424` | `etw-trace` | `unspecified` | Bounded KVM ETW stackwalk review for the CPU idle-states power key | [evidence/records/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.etl](../evidence/records/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.etl) and [evidence/records/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main-summary.json](../evidence/records/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main-summary.json) and [evidence/records/captures/power-disable-cpu-idle-states-etw-events-20260424.json](../evidence/records/captures/power-disable-cpu-idle-states-etw-events-20260424.json) and [evidence/records/captures/power-disable-cpu-idle-states-etw-stackwalk-20260424.json](../evidence/records/captures/power-disable-cpu-idle-states-etw-stackwalk-20260424.json) | `medium` | path, behavior, version-scope |
+| `vm-cpu-idle-bundle-etw-stackwalk-review-20260424` | `etw-trace` | `unspecified` | Bounded KVM ETW stackwalk review for the CPU idle-states power key | [evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.etl](../evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main.etl) and [evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main-summary.json](../evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main-summary.json) and [evidence/captures/power-disable-cpu-idle-states-etw-events-20260424.json](../evidence/captures/power-disable-cpu-idle-states-etw-events-20260424.json) and [evidence/captures/power-disable-cpu-idle-states-etw-stackwalk-20260424.json](../evidence/captures/power-disable-cpu-idle-states-etw-stackwalk-20260424.json) | `medium` | path, behavior, version-scope |
 
 **Validation proof**
 
@@ -10009,21 +9329,19 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
+| Coverage state | `category-fallback` |
 | Has nohuto lineage | `True` |
 | Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config, win-registry, decompiled-pseudocode |
-| Matched tokens | session, manager, power, hiberbootenabled |
+| Needs review | `True` |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens |  |
 | Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
 
 Nohuto lineage references:
 
 | Title | Location | Summary |
 | --- | --- | --- |
-| win-config / power/desc.md | [https://github.com/nohuto/win-config/blob/main/power/desc.md](https://github.com/nohuto/win-config/blob/main/power/desc.md) | Matched 4 audit token(s) in win-config. |
-| win-config / power/assets/hiberboot-PopReadHiberbootGroupPolicy.c | [https://github.com/nohuto/win-config/blob/main/power/assets/hiberboot-PopReadHiberbootGroupPolicy.c](https://github.com/nohuto/win-config/blob/main/power/assets/hiberboot-PopReadHiberbootGroupPolicy.c) | Matched 4 audit token(s) in win-config. |
-| win-registry / README.md | [https://github.com/nohuto/win-registry/blob/main/README.md](https://github.com/nohuto/win-registry/blob/main/README.md) | Matched 4 audit token(s) in win-registry. |
+| win-config / power/desc.md | [https://github.com/nohuto/win-config/blob/main/power/desc.md](https://github.com/nohuto/win-config/blob/main/power/desc.md) | Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics. |
 | decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
 
 Windows Internals references:
@@ -10268,17 +9586,14 @@ Current writes
 | Has nohuto lineage | `True` |
 | Has Windows Internals notes | `True` |
 | Needs review | `False` |
-| Source repositories | win-config, win-registry, decompiled-pseudocode |
-| Matched tokens | power, powerthrottling, powerthrottlingoff, power throttling |
+| Source repositories | win-config, decompiled-pseudocode, win-registry |
+| Matched tokens | powerthrottlingoff, power throttling |
 | Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
 
 Nohuto lineage references:
 
 | Title | Location | Summary |
 | --- | --- | --- |
-| win-config / power/desc.md | [https://github.com/nohuto/win-config/blob/main/power/desc.md](https://github.com/nohuto/win-config/blob/main/power/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-registry / README.md | [https://github.com/nohuto/win-registry/blob/main/README.md](https://github.com/nohuto/win-registry/blob/main/README.md) | Matched 3 audit token(s) in win-registry. |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 2 audit token(s) in win-config. |
 | decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
 | win-config / power/desc.md#power-values | [https://github.com/nohuto/win-config/blob/main/power/desc.md#power-values](https://github.com/nohuto/win-config/blob/main/power/desc.md#power-values) | Documents the PowerThrottling registry path and behavior. |
 | win-registry / Power Values | [https://github.com/nohuto/win-registry?tab=readme-ov-file#power-values](https://github.com/nohuto/win-registry?tab=readme-ov-file#power-values) | Provides reverse-engineered notes for PowerThrottlingOff and related values. |
@@ -10398,16 +9713,15 @@ Current writes
 | Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, decompiled-pseudocode |
-| Matched tokens | wsearch |
+| Matched tokens | disable windows search |
 | Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
 
 Nohuto lineage references:
 
 | Title | Location | Summary |
 | --- | --- | --- |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 1 audit token(s) in win-config. |
+| win-config / misc/desc.md | [https://github.com/nohuto/win-config/blob/main/misc/desc.md](https://github.com/nohuto/win-config/blob/main/misc/desc.md) | Matched 1 audit token(s) in win-config. |
 | win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 1 audit token(s) in win-config. |
-| win-config / system/assets/services.txt | [https://github.com/nohuto/win-config/blob/main/system/assets/services.txt](https://github.com/nohuto/win-config/blob/main/system/assets/services.txt) | Matched 1 audit token(s) in win-config. |
 | decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
 
 Windows Internals references:
@@ -10452,8 +9766,8 @@ Windows Internals references:
 | `ms-iot-services-wsearch` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Guidance on configuring system services - Windows Search | [https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services](https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services) | `high` | path, value, default, behavior, side-effects, version-scope |
 | `ms-search-indexing-overview` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Search indexing process overview | [https://learn.microsoft.com/en-us/windows/win32/search/-search-indexing-process-overview](https://learn.microsoft.com/en-us/windows/win32/search/-search-indexing-process-overview) | `high` | behavior, side-effects, version-scope |
 | `app-performance-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PerformanceTweakProvider.cs | `high` | path, value, ui-mapping |
-| `vm-power-disable-windows-search-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW stage receipt for WSearch backing registry key | [evidence/records/captures/power-disable-windows-search-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/power-disable-windows-search-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/power-disable-windows-search-etw-20260424-batch1/power-disable-windows-search-etw-20260424-batch1-stage.json](../evidence/records/raw/etw-stackwalk/power-disable-windows-search-etw-20260424-batch1/power-disable-windows-search-etw-20260424-batch1-stage.json) | `low` | behavior, version-scope |
-| `vm-power-disable-windows-search-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for WSearch | [evidence/records/raw/ghidra/ghidra-power-disable-windows-search-20260424-batch1/summary.json](../evidence/records/raw/ghidra/ghidra-power-disable-windows-search-20260424-batch1/summary.json) | `low` | version-scope |
+| `vm-power-disable-windows-search-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW stage receipt for WSearch backing registry key | [evidence/captures/power-disable-windows-search-etw-stackwalk-attempt-20260424.json](../evidence/captures/power-disable-windows-search-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/power-disable-windows-search-etw-20260424-batch1/power-disable-windows-search-etw-20260424-batch1-stage.json](../evidence/raw/etw-stackwalk/power-disable-windows-search-etw-20260424-batch1/power-disable-windows-search-etw-20260424-batch1-stage.json) | `low` | behavior, version-scope |
+| `vm-power-disable-windows-search-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for WSearch | [evidence/raw/ghidra/ghidra-power-disable-windows-search-20260424-batch1/summary.json](../evidence/raw/ghidra/ghidra-power-disable-windows-search-20260424-batch1/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -10521,28 +9835,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config, decompiled-pseudocode |
-| Matched tokens | policies, explorer, showhibernateoption |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / power/desc.md | [https://github.com/nohuto/win-config/blob/main/power/desc.md](https://github.com/nohuto/win-config/blob/main/power/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / misc/desc.md | [https://github.com/nohuto/win-config/blob/main/misc/desc.md](https://github.com/nohuto/win-config/blob/main/misc/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / peripheral/desc.md | [https://github.com/nohuto/win-config/blob/main/peripheral/desc.md](https://github.com/nohuto/win-config/blob/main/peripheral/desc.md) | Matched 2 audit token(s) in win-config. |
-| decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -10583,7 +9882,7 @@ Windows Internals references:
 | `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping |
 | `nohuto-power-hibernate-support-trace` | `registry-observation` | `VM registry observation` | nohuto power trace for hibernation support | [research/_source-mirrors/win-registry/records/Power.txt](_source-mirrors/win-registry/records/Power.txt) | `medium` | path, behavior, dependency |
 | `nohuto-showhibernateoption-admx` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - ShowHibernateOption policy | [research/_source-mirrors/win-config/power/desc.md](_source-mirrors/win-config/power/desc.md) | `high` | path, value, behavior, allowed-values |
-| `procmon-power-hide-hibernate-option` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean reversible probe - ShowHibernateOption 0/1 toggle | [evidence/records/raw/procmon/power.hide-hibernate-option/power_hide_hibernate_option_probe.txt](../evidence/records/raw/procmon/power.hide-hibernate-option/power_hide_hibernate_option_probe.txt) | `medium` | runtime writes, value semantics, rollback |
+| `procmon-power-hide-hibernate-option` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean reversible probe - ShowHibernateOption 0/1 toggle | [evidence/raw/procmon/power.hide-hibernate-option/power_hide_hibernate_option_probe.txt](../evidence/raw/procmon/power.hide-hibernate-option/power_hide_hibernate_option_probe.txt) | `medium` | runtime writes, value semantics, rollback |
 
 **Validation proof**
 
@@ -10651,28 +9950,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config, decompiled-pseudocode |
-| Matched tokens | policies, explorer, showlockoption |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / power/desc.md | [https://github.com/nohuto/win-config/blob/main/power/desc.md](https://github.com/nohuto/win-config/blob/main/power/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / misc/desc.md | [https://github.com/nohuto/win-config/blob/main/misc/desc.md](https://github.com/nohuto/win-config/blob/main/misc/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / peripheral/desc.md | [https://github.com/nohuto/win-config/blob/main/peripheral/desc.md](https://github.com/nohuto/win-config/blob/main/peripheral/desc.md) | Matched 2 audit token(s) in win-config. |
-| decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -10712,7 +9996,7 @@ Windows Internals references:
 | `local-windowsexplorer-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsExplorer.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/WindowsExplorer.adml](../evidence/files/external/c/PolicyDefinitions/en-US/WindowsExplorer.adml) | `high` | behavior, default, side-effects |
 | `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping |
 | `nohuto-showlockoption-admx` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - ShowLockOption policy | [research/_source-mirrors/win-config/power/desc.md](_source-mirrors/win-config/power/desc.md) | `high` | path, value, behavior, allowed-values |
-| `procmon-power-hide-lock-option` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean reversible probe - ShowLockOption 0/1 toggle | [evidence/records/raw/procmon/power.hide-lock-option/power_hide_lock_option_probe.txt](../evidence/records/raw/procmon/power.hide-lock-option/power_hide_lock_option_probe.txt) | `low` | runtime writes, rollback, trigger attempt |
+| `procmon-power-hide-lock-option` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean reversible probe - ShowLockOption 0/1 toggle | [evidence/raw/procmon/power.hide-lock-option/power_hide_lock_option_probe.txt](../evidence/raw/procmon/power.hide-lock-option/power_hide_lock_option_probe.txt) | `low` | runtime writes, rollback, trigger attempt |
 
 **Validation proof**
 
@@ -10780,28 +10064,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config, decompiled-pseudocode |
-| Matched tokens | policies, explorer, showsleepoption |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / power/desc.md | [https://github.com/nohuto/win-config/blob/main/power/desc.md](https://github.com/nohuto/win-config/blob/main/power/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / misc/desc.md | [https://github.com/nohuto/win-config/blob/main/misc/desc.md](https://github.com/nohuto/win-config/blob/main/misc/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / peripheral/desc.md | [https://github.com/nohuto/win-config/blob/main/peripheral/desc.md](https://github.com/nohuto/win-config/blob/main/peripheral/desc.md) | Matched 2 audit token(s) in win-config. |
-| decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -10841,7 +10110,7 @@ Windows Internals references:
 | `local-windowsexplorer-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsExplorer.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/WindowsExplorer.adml](../evidence/files/external/c/PolicyDefinitions/en-US/WindowsExplorer.adml) | `high` | behavior, default, side-effects |
 | `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping |
 | `nohuto-showsleepoption-admx` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - ShowSleepOption policy | [research/_source-mirrors/win-config/power/desc.md](_source-mirrors/win-config/power/desc.md) | `high` | path, value, behavior, allowed-values |
-| `procmon-power-hide-sleep-option` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean reversible probe - ShowSleepOption 0/1 toggle | [evidence/records/raw/procmon/power.hide-sleep-option/power_hide_sleep_option_probe.txt](../evidence/records/raw/procmon/power.hide-sleep-option/power_hide_sleep_option_probe.txt) | `medium` | runtime writes, value semantics, rollback |
+| `procmon-power-hide-sleep-option` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean reversible probe - ShowSleepOption 0/1 toggle | [evidence/raw/procmon/power.hide-sleep-option/power_hide_sleep_option_probe.txt](../evidence/raw/procmon/power.hide-sleep-option/power_hide_sleep_option_probe.txt) | `medium` | runtime writes, value semantics, rollback |
 
 **Validation proof**
 
@@ -10914,13 +10183,16 @@ Current writes
 | Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, decompiled-pseudocode, win-registry |
-| Matched tokens | perfboostatguaranteed, highperfdurationboot, latencytolerancedefault, perfcalculateactualutilization |
+| Matched tokens | writes, perfboostatguaranteed, highperfdurationboot, latencytolerancedefault, perfcalculateactualutilization, values, under, power |
 | Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
 
 Nohuto lineage references:
 
 | Title | Location | Summary |
 | --- | --- | --- |
+| win-config / power/desc.md | [https://github.com/nohuto/win-config/blob/main/power/desc.md](https://github.com/nohuto/win-config/blob/main/power/desc.md) | Matched 8 audit token(s) in win-config. |
+| win-config / network/desc.md | [https://github.com/nohuto/win-config/blob/main/network/desc.md](https://github.com/nohuto/win-config/blob/main/network/desc.md) | Matched 4 audit token(s) in win-config. |
+| win-config / nvidia/desc.md | [https://github.com/nohuto/win-config/blob/main/nvidia/desc.md](https://github.com/nohuto/win-config/blob/main/nvidia/desc.md) | Matched 4 audit token(s) in win-config. |
 | decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
 | win-config / power/desc.md#power-values | [https://github.com/nohuto/win-config/blob/main/power/desc.md#power-values](https://github.com/nohuto/win-config/blob/main/power/desc.md#power-values) | Documents CPU performance boost related power-manager fields. |
 | win-registry / Power Values | [https://github.com/nohuto/win-registry?tab=readme-ov-file#power-values](https://github.com/nohuto/win-registry?tab=readme-ov-file#power-values) | Provides nohuto's registry analysis for performance boost values. |
@@ -11041,21 +10313,19 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
+| Coverage state | `category-fallback` |
 | Has nohuto lineage | `True` |
 | Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config, win-registry, decompiled-pseudocode |
-| Matched tokens | multimedia, systemprofile, tasks, games, priority, scheduling category, high, sfio priority, gpu priority, affinity |
+| Needs review | `True` |
+| Source repositories | win-config, decompiled-pseudocode |
+| Matched tokens |  |
 | Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
 
 Nohuto lineage references:
 
 | Title | Location | Summary |
 | --- | --- | --- |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 10 audit token(s) in win-config. |
-| win-registry / records/MultiMedia.txt | [https://github.com/nohuto/win-registry/blob/main/records/MultiMedia.txt](https://github.com/nohuto/win-registry/blob/main/records/MultiMedia.txt) | Matched 7 audit token(s) in win-registry. |
-| win-registry / README.md | [https://github.com/nohuto/win-registry/blob/main/README.md](https://github.com/nohuto/win-registry/blob/main/README.md) | Matched 6 audit token(s) in win-registry. |
+| win-config / power/desc.md | [https://github.com/nohuto/win-config/blob/main/power/desc.md](https://github.com/nohuto/win-config/blob/main/power/desc.md) | Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics. |
 | decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
 
 Windows Internals references:
@@ -11267,7 +10537,7 @@ Current writes
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `vm-session-manager-power-baseline-20260328` | `registry-observation` | `VM registry observation` | Win25H2Clean Session Manager Power baseline export | [evidence/files/vm/session-manager-power-baseline-20260328-080010/session-manager-power-baseline.reg](../evidence/files/vm-tooling-staging/session-manager-power-baseline-20260328-080010/session-manager-power-baseline.reg) and [evidence/files/vm/session-manager-power-baseline-20260328-080010/session-manager-power-baseline.txt](../evidence/files/vm-tooling-staging/session-manager-power-baseline-20260328-080010/session-manager-power-baseline.txt) | `high` | path, value, default, version-scope |
-| `ghidra-watchdog-nextgate-ntoskrnl-20260328` | `decompilation` | `Our Ghidra decompilation` | Current-build ntoskrnl Ghidra fallback for the watchdog timeout pair | [evidence/records/raw/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md](../evidence/records/raw/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md) and [evidence/records/raw/ghidra/kernel-power-nextgate-ntoskrnl/evidence.json](../evidence/records/raw/ghidra/kernel-power-nextgate-ntoskrnl/evidence.json) | `high` | path, value, behavior, version-scope |
+| `ghidra-watchdog-nextgate-ntoskrnl-20260328` | `decompilation` | `Our Ghidra decompilation` | Current-build ntoskrnl Ghidra fallback for the watchdog timeout pair | [evidence/raw/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md](../evidence/raw/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md) and [evidence/raw/ghidra/kernel-power-nextgate-ntoskrnl/evidence.json](../evidence/raw/ghidra/kernel-power-nextgate-ntoskrnl/evidence.json) | `high` | path, value, behavior, version-scope |
 | `repo-pofx-pseudocode-watchdog` | `repo-doc` | `Current repo docs` | Repo PoFxInitPowerManagement pseudocode lead | [Docs/privacy/assets/sleepstudy-PoFxInitPowerManagement.c](../Docs/privacy/assets/sleepstudy-PoFxInitPowerManagement.c) and [research/notes/power-session-watchdog-timeouts-runtime-prep-20260328.md](notes/power-session-watchdog-timeouts-runtime-prep-20260328.md) | `medium` | behavior, side-effects, version-scope |
 | `vm-watchdog-boot-trace-20260328` | `etw-trace` | `unspecified` | Win25H2Clean reboot-verified watchdog timeout boot trace | [evidence/files/vm/watchdog-timeouts-boottrace-20260328-090631/summary.json](../evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/summary.json) and [evidence/files/vm/watchdog-timeouts-boottrace-20260328-090631/watchdog-timeouts-boot.etl.md](../evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/watchdog-timeouts-boot.etl.md) and [research/notes/power-session-watchdog-timeouts-boot-trace-20260328.md](notes/power-session-watchdog-timeouts-boot-trace-20260328.md) | `high` | value, behavior, version-scope |
 | `vm-watchdog-etl-registry-review-20260328` | `etw-trace` | `unspecified` | Host-side ETL registry review for Session Manager Power | [evidence/files/vm/watchdog-timeouts-boottrace-20260328-090631/registry-dump-watchdog-session-manager-power.txt](../evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/registry-dump-watchdog-session-manager-power.txt) and [research/notes/power-session-watchdog-timeouts-etl-registry-review-20260328.md](notes/power-session-watchdog-timeouts-etl-registry-review-20260328.md) | `high` | path, behavior, version-scope |
@@ -11284,7 +10554,7 @@ Current writes
 | `vm-watchdog-kvm-local-kd-reg-helper-20260407` | `vm-test` | `VM test / probe` | Linux KVM local-KD registry-helper follow-up for the watchdog timeout pair | [evidence/files/vm/local-kd-watchdog-reg-helpers-20260407abc/watchdog-symbol-sweep-20260407a-summary.json](../evidence/files/vm-tooling-staging/local-kd-watchdog-reg-helpers-20260407abc/watchdog-symbol-sweep-20260407a-summary.json) and [evidence/files/vm/local-kd-watchdog-reg-helpers-20260407abc/watchdog-symbol-sweep-20260407a.log](../evidence/files/vm-tooling-staging/local-kd-watchdog-reg-helpers-20260407abc/watchdog-symbol-sweep-20260407a.log) and [evidence/files/vm/local-kd-watchdog-reg-helpers-20260407abc/watchdog-reader-disasm-20260407b-summary.json](../evidence/files/vm-tooling-staging/local-kd-watchdog-reg-helpers-20260407abc/watchdog-reader-disasm-20260407b-summary.json) and [evidence/files/vm/local-kd-watchdog-reg-helpers-20260407abc/watchdog-reader-disasm-20260407b.log](../evidence/files/vm-tooling-staging/local-kd-watchdog-reg-helpers-20260407abc/watchdog-reader-disasm-20260407b.log) and [evidence/files/vm/local-kd-watchdog-reg-helpers-20260407abc/watchdog-xref-remap-20260407c-summary.json](../evidence/files/vm-tooling-staging/local-kd-watchdog-reg-helpers-20260407abc/watchdog-xref-remap-20260407c-summary.json) and [evidence/files/vm/local-kd-watchdog-reg-helpers-20260407abc/watchdog-xref-remap-20260407c.log](../evidence/files/vm-tooling-staging/local-kd-watchdog-reg-helpers-20260407abc/watchdog-xref-remap-20260407c.log) and [research/notes/power-session-watchdog-timeouts-kvm-local-kd-reg-helper-follow-up-20260407.md](notes/power-session-watchdog-timeouts-kvm-local-kd-reg-helper-follow-up-20260407.md) | `medium` | path, behavior, risk, version-scope |
 | `vm-watchdog-session-timeouts-incident-review-20260412` | `vm-incident` | `unspecified` | Incident review for S1 watchdog timeout runtime attempts | [research/notes/power-session-watchdog-timeouts-incident-review-20260412.md](notes/power-session-watchdog-timeouts-incident-review-20260412.md) and [evidence/files/vm/watchdog-session-timeouts-incident-review-20260412/host-review.json](../evidence/files/vm-tooling-staging/watchdog-session-timeouts-incident-review-20260412/host-review.json) | `medium` | risk, version-scope, investigation-open-question |
 | `kernel-power-existing-next-gate-20260328` | `inference` | `unspecified` | Kernel power next-gate intake summary | [registry-research-framework/audit/kernel-power-existing-next-gate-20260328.json](../registry-research-framework/audit/kernel-power-existing-next-gate-20260328.json) and [research/notes/kernel-power-next-gate-ghidra-review-20260328.md](notes/kernel-power-next-gate-ghidra-review-20260328.md) | `medium` | version-scope, risk |
-| `vm-power-session-watchdog-resume-timeout-etw-stackwalk-exact-query-20260423` | `vm-test` | `VM test / probe` | KVM ETW stackwalk captures exact WatchdogResumeTimeout RegQueryValue | [evidence/records/captures/watchdog-resume-timeout-etw-stackwalk-20260423.json](../evidence/records/captures/watchdog-resume-timeout-etw-stackwalk-20260423.json) and [evidence/records/raw/etw-stackwalk/watchdog-resume-timeout-etw-stackwalk-skiptracerpt-20260423/watchdog-resume-timeout-etw-stackwalk-skiptracerpt-20260423-summary.json](../evidence/records/raw/etw-stackwalk/watchdog-resume-timeout-etw-stackwalk-skiptracerpt-20260423/watchdog-resume-timeout-etw-stackwalk-skiptracerpt-20260423-summary.json) and [evidence/records/raw/etw-stackwalk/watchdog-resume-timeout-etw-stackwalk-skiptracerpt-20260423/normalized-registry-bundle.json](../evidence/records/raw/etw-stackwalk/watchdog-resume-timeout-etw-stackwalk-skiptracerpt-20260423/normalized-registry-bundle.json) and [evidence/records/raw/etw-stackwalk/watchdog-resume-timeout-etw-stackwalk-skiptracerpt-20260423/watchdog-resume-timeout-etw-stackwalk-skiptracerpt-20260423.etl](../evidence/records/raw/etw-stackwalk/watchdog-resume-timeout-etw-stackwalk-skiptracerpt-20260423/watchdog-resume-timeout-etw-stackwalk-skiptracerpt-20260423.etl) | `high` | runtime-observation, tooling-fix, version-scope, behavior |
+| `vm-power-session-watchdog-resume-timeout-etw-stackwalk-exact-query-20260423` | `vm-test` | `VM test / probe` | KVM ETW stackwalk captures exact WatchdogResumeTimeout RegQueryValue | [evidence/captures/watchdog-resume-timeout-etw-stackwalk-20260423.json](../evidence/captures/watchdog-resume-timeout-etw-stackwalk-20260423.json) and [evidence/raw/etw-stackwalk/watchdog-resume-timeout-etw-stackwalk-skiptracerpt-20260423/watchdog-resume-timeout-etw-stackwalk-skiptracerpt-20260423-summary.json](../evidence/raw/etw-stackwalk/watchdog-resume-timeout-etw-stackwalk-skiptracerpt-20260423/watchdog-resume-timeout-etw-stackwalk-skiptracerpt-20260423-summary.json) and [evidence/raw/etw-stackwalk/watchdog-resume-timeout-etw-stackwalk-skiptracerpt-20260423/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/watchdog-resume-timeout-etw-stackwalk-skiptracerpt-20260423/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/watchdog-resume-timeout-etw-stackwalk-skiptracerpt-20260423/watchdog-resume-timeout-etw-stackwalk-skiptracerpt-20260423.etl](../evidence/raw/etw-stackwalk/watchdog-resume-timeout-etw-stackwalk-skiptracerpt-20260423/watchdog-resume-timeout-etw-stackwalk-skiptracerpt-20260423.etl) | `high` | runtime-observation, tooling-fix, version-scope, behavior |
 
 **Validation proof**
 
@@ -11359,21 +10629,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, noconnecteduser |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / privacy/assets/locationaccess-LocationApi.c | [https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c) | Matched 1 audit token(s) in win-config. |
-| win-config / privacy/assets/maps.c | [https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c) | Matched 1 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -11594,21 +10856,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 1 audit token(s) in win-config. |
-| win-config / privacy/assets/locationaccess-LocationApi.c | [https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c) | Matched 1 audit token(s) in win-config. |
-| win-config / privacy/assets/maps.c | [https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c) | Matched 1 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -11745,21 +10999,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 1 audit token(s) in win-config. |
-| win-config / privacy/assets/locationaccess-LocationApi.c | [https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c) | Matched 1 audit token(s) in win-config. |
-| win-config / privacy/assets/maps.c | [https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c) | Matched 1 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -11865,19 +11111,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `category-fallback` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `True` |
-| Source repositories | win-config |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
 | Matched tokens |  |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics. |
+| Lineage note |  |
 
 **Targets**
 
@@ -11984,21 +11224,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | explorer, advanced |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / cleanup/desc.md | [https://github.com/nohuto/win-config/blob/main/cleanup/desc.md](https://github.com/nohuto/win-config/blob/main/cleanup/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / peripheral/desc.md | [https://github.com/nohuto/win-config/blob/main/peripheral/desc.md](https://github.com/nohuto/win-config/blob/main/peripheral/desc.md) | Matched 2 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -12038,7 +11270,7 @@ Nohuto lineage references:
 | `ms-gppref-start-trackprogs` | `official-doc` | `Microsoft official doc` | Microsoft Open Specifications: Start_TrackProgs registry preference item | [https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/1d9120b4-aa9d-4ea8-89b7-cb64f79b83d5](https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/1d9120b4-aa9d-4ea8-89b7-cb64f79b83d5) | `high` | path, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
 | `nohuto-start-track-progs-trace` | `registry-observation` | `VM registry observation` | nohuto win-config mirror - Start_TrackProgs trace | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) and [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) | `high` | path, value, behavior, ui-mapping |
-| `procmon-start-track-progs-settings` | `procmon-trace` | `VM Procmon trace` | VM Procmon trace - Start_TrackProgs settings page reads | [evidence/records/raw/procmon/privacy.disable-app-launch-tracking/procmon-start-track-progs-1.pml.md](../evidence/records/raw/procmon/privacy.disable-app-launch-tracking/procmon-start-track-progs-1.pml.md) and [evidence/records/raw/procmon/privacy.disable-app-launch-tracking/procmon-start-track-progs-0.pml.md](../evidence/records/raw/procmon/privacy.disable-app-launch-tracking/procmon-start-track-progs-0.pml.md) | `medium` | path, value, behavior, ui-mapping |
+| `procmon-start-track-progs-settings` | `procmon-trace` | `VM Procmon trace` | VM Procmon trace - Start_TrackProgs settings page reads | [evidence/raw/procmon/privacy.disable-app-launch-tracking/procmon-start-track-progs-1.pml.md](../evidence/raw/procmon/privacy.disable-app-launch-tracking/procmon-start-track-progs-1.pml.md) and [evidence/raw/procmon/privacy.disable-app-launch-tracking/procmon-start-track-progs-0.pml.md](../evidence/raw/procmon/privacy.disable-app-launch-tracking/procmon-start-track-progs-0.pml.md) | `medium` | path, value, behavior, ui-mapping |
 
 **Validation proof**
 
@@ -12106,20 +11338,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | contentdeliverymanager |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 1 audit token(s) in win-config. |
-| win-config / visibility/desc.md | [https://github.com/nohuto/win-config/blob/main/visibility/desc.md](https://github.com/nohuto/win-config/blob/main/visibility/desc.md) | Matched 1 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -12305,7 +11530,7 @@ Current writes
 | `local-appcompat-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft AppCompat.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/AppCompat.adml](../evidence/files/external/c/PolicyDefinitions/en-US/AppCompat.adml) | `high` | behavior, side-effects, risk |
 | `admx-appcompat-csp` | `policy-csp` | `Microsoft policy CSP` | Policy CSP - ADMX_AppCompat | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat) | `high` | path, behavior, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `procmon-appcompat-engine` | `procmon-trace` | `VM Procmon trace` | VM Procmon capture - AppCompat policy path bundle | [evidence/records/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml](../evidence/records/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml) and [evidence/records/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-filtered.hits.csv](../evidence/records/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-filtered.hits.csv) | `high` | value, behavior, version-scope |
+| `procmon-appcompat-engine` | `procmon-trace` | `VM Procmon trace` | VM Procmon capture - AppCompat policy path bundle | [evidence/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml](../evidence/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml) and [evidence/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-filtered.hits.csv](../evidence/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-filtered.hits.csv) | `high` | value, behavior, version-scope |
 
 **Validation proof**
 
@@ -12470,7 +11695,7 @@ Current writes
 | `local-appdeviceinventory-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft AppDeviceInventory.admx mappings | [evidence/files/external/c/Windows/PolicyDefinitions/AppDeviceInventory.admx](../evidence/files/external/c/Windows/PolicyDefinitions/AppDeviceInventory.admx) | `high` | path, value, allowed-values, version-scope |
 | `csp-appdeviceinventory` | `policy-csp` | `Microsoft policy CSP` | Policy CSP - AppDeviceInventory | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-appdeviceinventory](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-appdeviceinventory) | `high` | path, behavior, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping |
-| `procmon-appdeviceinventory` | `procmon-trace` | `VM Procmon trace` | VM Procmon capture - four AppDeviceInventory policies | [evidence/records/raw/procmon/privacy.disable-appdeviceinventory.policy/appdeviceinventory-policy-procmon.pml](../evidence/records/raw/procmon/privacy.disable-appdeviceinventory.policy/appdeviceinventory-policy-procmon.pml) and [evidence/records/raw/procmon/privacy.disable-appdeviceinventory.policy/appdeviceinventory-policy-procmon.filtered.hits.csv](../evidence/records/raw/procmon/privacy.disable-appdeviceinventory.policy/appdeviceinventory-policy-procmon.filtered.hits.csv) | `high` | value, behavior, version-scope |
+| `procmon-appdeviceinventory` | `procmon-trace` | `VM Procmon trace` | VM Procmon capture - four AppDeviceInventory policies | [evidence/raw/procmon/privacy.disable-appdeviceinventory.policy/appdeviceinventory-policy-procmon.pml](../evidence/raw/procmon/privacy.disable-appdeviceinventory.policy/appdeviceinventory-policy-procmon.pml) and [evidence/raw/procmon/privacy.disable-appdeviceinventory.policy/appdeviceinventory-policy-procmon.filtered.hits.csv](../evidence/raw/procmon/privacy.disable-appdeviceinventory.policy/appdeviceinventory-policy-procmon.filtered.hits.csv) | `high` | value, behavior, version-scope |
 
 **Validation proof**
 
@@ -12538,21 +11763,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, appcompat, aitenable |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / privacy/assets/locationaccess-LocationApi.c | [https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c) | Matched 1 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -12660,21 +11877,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, appprivacy, letappsruninbackground |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / privacy/assets/locationaccess-LocationApi.c | [https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c) | Matched 1 audit token(s) in win-config. |
-| win-config / privacy/assets/maps.c | [https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c) | Matched 1 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -12781,21 +11990,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, biometrics, enabled |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / misc/desc.md | [https://github.com/nohuto/win-config/blob/main/misc/desc.md](https://github.com/nohuto/win-config/blob/main/misc/desc.md) | Matched 2 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -12901,21 +12102,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, biometrics, credential, provider, domain accounts |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 5 audit token(s) in win-config. |
-| win-config / security/desc.md | [https://github.com/nohuto/win-config/blob/main/security/desc.md](https://github.com/nohuto/win-config/blob/main/security/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 3 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -13021,21 +12214,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, biometrics, credential, provider, enabled |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 5 audit token(s) in win-config. |
-| win-config / security/desc.md | [https://github.com/nohuto/win-config/blob/main/security/desc.md](https://github.com/nohuto/win-config/blob/main/security/desc.md) | Matched 4 audit token(s) in win-config. |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 4 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -13141,21 +12326,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, camera, allowcamera |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / misc/desc.md | [https://github.com/nohuto/win-config/blob/main/misc/desc.md](https://github.com/nohuto/win-config/blob/main/misc/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / peripheral/desc.md | [https://github.com/nohuto/win-config/blob/main/peripheral/desc.md](https://github.com/nohuto/win-config/blob/main/peripheral/desc.md) | Matched 2 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -13263,21 +12440,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | environment |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 1 audit token(s) in win-config. |
-| win-config / misc/desc.md | [https://github.com/nohuto/win-config/blob/main/misc/desc.md](https://github.com/nohuto/win-config/blob/main/misc/desc.md) | Matched 1 audit token(s) in win-config. |
-| win-config / network/desc.md | [https://github.com/nohuto/win-config/blob/main/network/desc.md](https://github.com/nohuto/win-config/blob/main/network/desc.md) | Matched 1 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -13402,19 +12571,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `category-fallback` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `True` |
-| Source repositories | win-config |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
 | Matched tokens |  |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics. |
+| Lineage note |  |
 
 **Targets**
 
@@ -13521,21 +12684,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, windowscopilot, turnoffwindowscopilot |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / privacy/assets/locationaccess-LocationApi.c | [https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c) | Matched 1 audit token(s) in win-config. |
-| win-config / privacy/assets/maps.c | [https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c) | Matched 1 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -13576,8 +12731,8 @@ Nohuto lineage references:
 | `local-windowscopilot-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft WindowsCopilot.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/WindowsCopilot.adml](../evidence/files/external/c/PolicyDefinitions/en-US/WindowsCopilot.adml) | `high` | behavior, default, side-effects |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-copilot` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
-| `vm-privacy.disable-copilot-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for TurnOffWindowsCopilot | [evidence/records/captures/privacy-disable-copilot-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/privacy-disable-copilot-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/privacy-disable-copilot-etw-20260427b/privacy-disable-copilot-etw-20260427b-summary.json](../evidence/records/raw/etw-stackwalk/privacy-disable-copilot-etw-20260427b/privacy-disable-copilot-etw-20260427b-summary.json) | `low` | behavior, version-scope |
-| `vm-privacy.disable-copilot-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for TurnOffWindowsCopilot | [evidence/records/raw/ghidra/ghidra-privacy-disable-copilot-20260427b/summary.json](../evidence/records/raw/ghidra/ghidra-privacy-disable-copilot-20260427b/summary.json) | `low` | version-scope |
+| `vm-privacy.disable-copilot-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for TurnOffWindowsCopilot | [evidence/captures/privacy-disable-copilot-etw-stackwalk-attempt-20260427.json](../evidence/captures/privacy-disable-copilot-etw-stackwalk-attempt-20260427.json) and [evidence/raw/etw-stackwalk/privacy-disable-copilot-etw-20260427b/privacy-disable-copilot-etw-20260427b-summary.json](../evidence/raw/etw-stackwalk/privacy-disable-copilot-etw-20260427b/privacy-disable-copilot-etw-20260427b-summary.json) | `low` | behavior, version-scope |
+| `vm-privacy.disable-copilot-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for TurnOffWindowsCopilot | [evidence/raw/ghidra/ghidra-privacy-disable-copilot-20260427b/summary.json](../evidence/raw/ghidra/ghidra-privacy-disable-copilot-20260427b/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -13759,21 +12914,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, datacollection, allowdevicenameintelemetry |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / privacy/assets/locationaccess-LocationApi.c | [https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c) | Matched 1 audit token(s) in win-config. |
-| win-config / privacy/assets/maps.c | [https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c) | Matched 1 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -13881,21 +13028,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, datacollection, disabledevicedelete |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / privacy/assets/locationaccess-LocationApi.c | [https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c) | Matched 1 audit token(s) in win-config. |
-| win-config / privacy/assets/maps.c | [https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c) | Matched 1 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -14003,21 +13142,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, datacollection, disablediagnosticdataviewer |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / privacy/assets/locationaccess-LocationApi.c | [https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c) | Matched 1 audit token(s) in win-config. |
-| win-config / privacy/assets/maps.c | [https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c) | Matched 1 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -14127,19 +13258,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `category-fallback` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `True` |
-| Source repositories | win-config |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
 | Matched tokens |  |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics. |
+| Lineage note |  |
 
 **Targets**
 
@@ -14277,21 +13402,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, datacollection, donotshowfeedbacknotifications |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / privacy/assets/locationaccess-LocationApi.c | [https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c) | Matched 1 audit token(s) in win-config. |
-| win-config / privacy/assets/maps.c | [https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c) | Matched 1 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -14332,7 +13449,7 @@ Nohuto lineage references:
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-feedback-notifications` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 | `nohuto-donotshowfeedbacknotifications-admx` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - DoNotShowFeedbackNotifications policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) | `high` | path, value, behavior |
-| `procmon-feedback-notifications` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean reversible probe - DoNotShowFeedbackNotifications 0/1 toggle | [evidence/records/raw/procmon/privacy.disable-feedback-notifications/feedback_notifications_probe.txt](../evidence/records/raw/procmon/privacy.disable-feedback-notifications/feedback_notifications_probe.txt) | `medium` | runtime writes, value semantics, rollback |
+| `procmon-feedback-notifications` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean reversible probe - DoNotShowFeedbackNotifications 0/1 toggle | [evidence/raw/procmon/privacy.disable-feedback-notifications/feedback_notifications_probe.txt](../evidence/raw/procmon/privacy.disable-feedback-notifications/feedback_notifications_probe.txt) | `medium` | runtime writes, value semantics, rollback |
 
 **Validation proof**
 
@@ -14400,21 +13517,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, filehistory, disabled |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / privacy/assets/locationaccess-LocationApi.c | [https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c) | Matched 2 audit token(s) in win-config. |
-| win-config / privacy/assets/maps.c | [https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c) | Matched 2 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -14526,16 +13635,14 @@ Current writes
 | Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
-| Matched tokens | policies, findmydevice, allowfindmydevice |
+| Matched tokens | disable find my device |
 | Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
 
 Nohuto lineage references:
 
 | Title | Location | Summary |
 | --- | --- | --- |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / visibility/desc.md | [https://github.com/nohuto/win-config/blob/main/visibility/desc.md](https://github.com/nohuto/win-config/blob/main/visibility/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / privacy/assets/locationaccess-LocationApi.c | [https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c) | Matched 1 audit token(s) in win-config. |
+| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 1 audit token(s) in win-config. |
 
 **Targets**
 
@@ -14576,8 +13683,8 @@ Nohuto lineage references:
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-find-my-device` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 | `nohuto-findmydevice-admx` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - Find My Device policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) | `high` | path, value, behavior, allowed-values |
-| `vm-privacy.disable-find-my-device-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for AllowFindMyDevice | [evidence/records/captures/privacy-disable-find-my-device-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/privacy-disable-find-my-device-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/privacy-disable-find-my-device-etw-20260427a/privacy-disable-find-my-device-etw-20260427a-summary.json](../evidence/records/raw/etw-stackwalk/privacy-disable-find-my-device-etw-20260427a/privacy-disable-find-my-device-etw-20260427a-summary.json) | `low` | behavior, version-scope |
-| `vm-privacy.disable-find-my-device-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for AllowFindMyDevice | [evidence/records/raw/ghidra/ghidra-privacy-disable-find-my-device-20260427a/summary.json](../evidence/records/raw/ghidra/ghidra-privacy-disable-find-my-device-20260427a/summary.json) | `low` | version-scope |
+| `vm-privacy.disable-find-my-device-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for AllowFindMyDevice | [evidence/captures/privacy-disable-find-my-device-etw-stackwalk-attempt-20260427.json](../evidence/captures/privacy-disable-find-my-device-etw-stackwalk-attempt-20260427.json) and [evidence/raw/etw-stackwalk/privacy-disable-find-my-device-etw-20260427a/privacy-disable-find-my-device-etw-20260427a-summary.json](../evidence/raw/etw-stackwalk/privacy-disable-find-my-device-etw-20260427a/privacy-disable-find-my-device-etw-20260427a-summary.json) | `low` | behavior, version-scope |
+| `vm-privacy.disable-find-my-device-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for AllowFindMyDevice | [evidence/raw/ghidra/ghidra-privacy-disable-find-my-device-20260427a/summary.json](../evidence/raw/ghidra/ghidra-privacy-disable-find-my-device-20260427a/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -14645,21 +13752,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, enablefontproviders |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / privacy/assets/locationaccess-LocationApi.c | [https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c) | Matched 1 audit token(s) in win-config. |
-| win-config / privacy/assets/maps.c | [https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c) | Matched 1 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -14767,21 +13866,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, protection, platform, nogenticket |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 4 audit token(s) in win-config. |
-| win-config / security/desc.md | [https://github.com/nohuto/win-config/blob/main/security/desc.md](https://github.com/nohuto/win-config/blob/main/security/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 3 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -14890,21 +13981,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | panel, international, user, profile, httpacceptlanguageoptout |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 5 audit token(s) in win-config. |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 4 audit token(s) in win-config. |
-| win-config / affinities/desc.md | [https://github.com/nohuto/win-config/blob/main/affinities/desc.md](https://github.com/nohuto/win-config/blob/main/affinities/desc.md) | Matched 3 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -15008,21 +14091,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, nolocalpasswordresetquestions |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / privacy/assets/locationaccess-LocationApi.c | [https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c) | Matched 1 audit token(s) in win-config. |
-| win-config / privacy/assets/maps.c | [https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c) | Matched 1 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -15132,21 +14207,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | capabilityaccessmanager, consentstore, location, value, deny, nonpackaged |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 6 audit token(s) in win-config. |
-| win-config / security/desc.md | [https://github.com/nohuto/win-config/blob/main/security/desc.md](https://github.com/nohuto/win-config/blob/main/security/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 3 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -15266,21 +14333,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | capabilityaccessmanager, consentstore, location, value |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 4 audit token(s) in win-config. |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / privacy/assets/locationaccess-LocationApi.c | [https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c) | Matched 2 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -15385,21 +14444,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, locationandsensors, disablelocationscripting |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / privacy/assets/locationaccess-LocationApi.c | [https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c) | Matched 3 audit token(s) in win-config. |
-| win-config / privacy/assets/maps.c | [https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c) | Matched 1 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -15506,21 +14557,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, locationandsensors, disablelocation |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / privacy/assets/locationaccess-LocationApi.c | [https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c) | Matched 3 audit token(s) in win-config. |
-| win-config / privacy/assets/maps.c | [https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c) | Matched 1 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -15626,21 +14669,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, disableregistration |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / privacy/assets/locationaccess-LocationApi.c | [https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c) | Matched 1 audit token(s) in win-config. |
-| win-config / privacy/assets/maps.c | [https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c) | Matched 1 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -15748,21 +14783,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, messaging, allowmessagesync |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / privacy/assets/locationaccess-LocationApi.c | [https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c) | Matched 1 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -15983,21 +15010,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, datacollection, disableonesettingsdownloads |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / privacy/assets/locationaccess-LocationApi.c | [https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c) | Matched 1 audit token(s) in win-config. |
-| win-config / privacy/assets/maps.c | [https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c) | Matched 1 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -16105,21 +15124,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, explorer, allowonlinetips |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / misc/desc.md | [https://github.com/nohuto/win-config/blob/main/misc/desc.md](https://github.com/nohuto/win-config/blob/main/misc/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / peripheral/desc.md | [https://github.com/nohuto/win-config/blob/main/peripheral/desc.md](https://github.com/nohuto/win-config/blob/main/peripheral/desc.md) | Matched 2 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -16227,21 +15238,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, appcompat, disablepcaui |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / privacy/assets/locationaccess-LocationApi.c | [https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c) | Matched 1 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -16350,21 +15353,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, enablemmx |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / privacy/assets/locationaccess-LocationApi.c | [https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c) | Matched 1 audit token(s) in win-config. |
-| win-config / privacy/assets/maps.c | [https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c) | Matched 1 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -16517,7 +15512,7 @@ Current writes
 | `local-appcompat-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft AppCompat.admx mapping for Turn off Program Compatibility Assistant | [evidence/files/external/c/Windows/PolicyDefinitions/AppCompat.admx](../evidence/files/external/c/Windows/PolicyDefinitions/AppCompat.admx) | `high` | path, value, allowed-values |
 | `local-appcompat-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft AppCompat.adml help text for Turn off Program Compatibility Assistant | [evidence/files/external/c/PolicyDefinitions/en-US/AppCompat.adml](../evidence/files/external/c/PolicyDefinitions/en-US/AppCompat.adml) | `high` | behavior, side-effects |
 | `admx-appcompat-turn-off-pca-csp` | `policy-csp` | `Microsoft policy CSP` | Policy CSP - ADMX_AppCompat (Turn off Program Compatibility Assistant) | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat) | `high` | path, behavior, version-scope |
-| `procmon-disable-pca` | `procmon-trace` | `VM Procmon trace` | VM Procmon capture - Turn off Program Compatibility Assistant | [evidence/records/raw/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.pml](../evidence/records/raw/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.pml) and [evidence/records/raw/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.filtered.hits.csv](../evidence/records/raw/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.filtered.hits.csv) | `high` | value, behavior, version-scope |
+| `procmon-disable-pca` | `procmon-trace` | `VM Procmon trace` | VM Procmon capture - Turn off Program Compatibility Assistant | [evidence/raw/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.pml](../evidence/raw/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.pml) and [evidence/raw/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.filtered.hits.csv](../evidence/raw/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.filtered.hits.csv) | `high` | value, behavior, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
@@ -16586,21 +15581,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, windowsai, disableaidataanalysis |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / privacy/assets/locationaccess-LocationApi.c | [https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c) | Matched 1 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -16710,21 +15697,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | crossdeviceresume, configuration, isresumeallowed |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / cleanup/desc.md | [https://github.com/nohuto/win-config/blob/main/cleanup/desc.md](https://github.com/nohuto/win-config/blob/main/cleanup/desc.md) | Matched 1 audit token(s) in win-config. |
-| win-config / misc/desc.md | [https://github.com/nohuto/win-config/blob/main/misc/desc.md](https://github.com/nohuto/win-config/blob/main/misc/desc.md) | Matched 1 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -16762,12 +15741,12 @@ Nohuto lineage references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `repo-resume-procmon-notes` | `repo-doc` | `Current repo docs` | Repo Procmon notes for Resume settings | [Docs/privacy/privacy.md](../Docs/privacy/privacy.md) | `medium` | path, value, behavior |
 | `local-resume-registry-observation` | `registry-observation` | `VM registry observation` | Local CrossDeviceResume registry observation | HKCU/Software/Microsoft/Windows/CurrentVersion/CrossDeviceResume/Configuration | `medium` | path, value, version-scope |
-| `vm-resume-policymanager-probe` | `procmon-trace` | `VM Procmon trace` | Guest Procmon and PolicyManager probe for CrossDeviceResume | [evidence/records/raw/procmon/privacy.disable-resume/crossdevice_resume_probe.csv](../evidence/records/raw/procmon/privacy.disable-resume/crossdevice_resume_probe.csv) and [evidence/records/raw/procmon/privacy.disable-resume/resume-policymanager-probe.txt](../evidence/records/raw/procmon/privacy.disable-resume/resume-policymanager-probe.txt) | `medium` | path, behavior, version-scope |
+| `vm-resume-policymanager-probe` | `procmon-trace` | `VM Procmon trace` | Guest Procmon and PolicyManager probe for CrossDeviceResume | [evidence/raw/procmon/privacy.disable-resume/crossdevice_resume_probe.csv](../evidence/raw/procmon/privacy.disable-resume/crossdevice_resume_probe.csv) and [evidence/raw/procmon/privacy.disable-resume/resume-policymanager-probe.txt](../evidence/raw/procmon/privacy.disable-resume/resume-policymanager-probe.txt) | `medium` | path, behavior, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
-| `procmon-crossdevice-resume-probe` | `procmon-trace` | `VM Procmon trace` | Guest Procmon probe for CrossDeviceResume resume toggle | [evidence/records/raw/procmon/privacy.disable-resume/privacy_disable_resume_probe.txt](../evidence/records/raw/procmon/privacy.disable-resume/privacy_disable_resume_probe.txt) and [evidence/records/raw/procmon/privacy.disable-resume/privacy-disable-resume-probe-csv.md](../evidence/records/raw/procmon/privacy.disable-resume/privacy-disable-resume-probe-csv.md) | `medium` | path, behavior, version-scope |
+| `procmon-crossdevice-resume-probe` | `procmon-trace` | `VM Procmon trace` | Guest Procmon probe for CrossDeviceResume resume toggle | [evidence/raw/procmon/privacy.disable-resume/privacy_disable_resume_probe.txt](../evidence/raw/procmon/privacy.disable-resume/privacy_disable_resume_probe.txt) and [evidence/raw/procmon/privacy.disable-resume/privacy-disable-resume-probe-csv.md](../evidence/raw/procmon/privacy.disable-resume/privacy-disable-resume-probe-csv.md) | `medium` | path, behavior, version-scope |
 | `ms-connectivity-disable-cross-device-resume` | `policy-csp` | `Microsoft policy CSP` | Microsoft Learn: Policy CSP - Connectivity / DisableCrossDeviceResume | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-connectivity#disablecrossdeviceresume](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-connectivity#disablecrossdeviceresume) | `high` | behavior, version-scope |
-| `vm-privacy.disable-resume-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for IsResumeAllowed | [evidence/records/captures/privacy-disable-resume-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/privacy-disable-resume-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/privacy-disable-resume-etw-20260427a/privacy-disable-resume-etw-20260427a-summary.json](../evidence/records/raw/etw-stackwalk/privacy-disable-resume-etw-20260427a/privacy-disable-resume-etw-20260427a-summary.json) | `low` | behavior, version-scope |
-| `vm-privacy.disable-resume-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for IsResumeAllowed | [evidence/records/raw/ghidra/ghidra-privacy-disable-resume-20260427a/summary.json](../evidence/records/raw/ghidra/ghidra-privacy-disable-resume-20260427a/summary.json) | `low` | version-scope |
+| `vm-privacy.disable-resume-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for IsResumeAllowed | [evidence/captures/privacy-disable-resume-etw-stackwalk-attempt-20260427.json](../evidence/captures/privacy-disable-resume-etw-stackwalk-attempt-20260427.json) and [evidence/raw/etw-stackwalk/privacy-disable-resume-etw-20260427a/privacy-disable-resume-etw-20260427a-summary.json](../evidence/raw/etw-stackwalk/privacy-disable-resume-etw-20260427a/privacy-disable-resume-etw-20260427a-summary.json) | `low` | behavior, version-scope |
+| `vm-privacy.disable-resume-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for IsResumeAllowed | [evidence/raw/ghidra/ghidra-privacy-disable-resume-20260427a/summary.json](../evidence/raw/ghidra/ghidra-privacy-disable-resume-20260427a/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -16835,21 +15814,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, rsoplogging |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / privacy/assets/locationaccess-LocationApi.c | [https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c) | Matched 1 audit token(s) in win-config. |
-| win-config / privacy/assets/maps.c | [https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c) | Matched 1 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -16956,21 +15927,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, explorer, disablesearchboxsuggestions |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / misc/desc.md | [https://github.com/nohuto/win-config/blob/main/misc/desc.md](https://github.com/nohuto/win-config/blob/main/misc/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / peripheral/desc.md | [https://github.com/nohuto/win-config/blob/main/peripheral/desc.md](https://github.com/nohuto/win-config/blob/main/peripheral/desc.md) | Matched 2 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -17078,21 +16041,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, explorer, disablesearchhistory |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / misc/desc.md | [https://github.com/nohuto/win-config/blob/main/misc/desc.md](https://github.com/nohuto/win-config/blob/main/misc/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / peripheral/desc.md | [https://github.com/nohuto/win-config/blob/main/peripheral/desc.md](https://github.com/nohuto/win-config/blob/main/peripheral/desc.md) | Matched 2 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -17133,7 +16088,7 @@ Nohuto lineage references:
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-search-history` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 | `nohuto-disablesearchhistory-admx` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - DisableSearchHistory policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) | `high` | path, value, behavior, allowed-values |
-| `procmon-disable-search-history` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean reversible probe - DisableSearchHistory 0/1 toggle | [evidence/records/raw/procmon/privacy.disable-search-history/search_history_probe.txt](../evidence/records/raw/procmon/privacy.disable-search-history/search_history_probe.txt) | `low` | runtime writes, rollback, trigger attempt |
+| `procmon-disable-search-history` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean reversible probe - DisableSearchHistory 0/1 toggle | [evidence/raw/procmon/privacy.disable-search-history/search_history_probe.txt](../evidence/raw/procmon/privacy.disable-search-history/search_history_probe.txt) | `low` | runtime writes, rollback, trigger attempt |
 
 **Validation proof**
 
@@ -17201,21 +16156,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, locationandsensors, disablesensors |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / privacy/assets/locationaccess-LocationApi.c | [https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c) | Matched 2 audit token(s) in win-config. |
-| win-config / privacy/assets/maps.c | [https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c) | Matched 1 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -17323,28 +16270,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, appcompat, disableuar, steps recorder, psr.exe |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / privacy/assets/locationaccess-LocationApi.c | [https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c) | Matched 1 audit token(s) in win-config. |
-| win-config / privacy/desc.md#disable-psr | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md#disable-psr](https://github.com/nohuto/win-config/blob/main/privacy/desc.md#disable-psr) | Documents PSR deprecation, the DisableUAR policy, and renaming psr.exe. |
-
-Other source references:
-
-| Kind | Title | Location | Summary |
-| --- | --- | --- | --- |
-| microsoft | Steps Recorder deprecation | [https://support.microsoft.com/en-gb/windows/steps-recorder-deprecation-a64888d7-8482-4965-8ce3-25fb004e975f](https://support.microsoft.com/en-gb/windows/steps-recorder-deprecation-a64888d7-8482-4965-8ce3-25fb004e975f) | Official Microsoft notice that Steps Recorder is deprecated. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -17385,8 +16317,8 @@ Other source references:
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-steps-recorder` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 | `nohuto-uar-admx` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - DisableUAR policy | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) | `high` | path, value, behavior, allowed-values |
-| `vm-privacy.disable-steps-recorder-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for DisableUAR | [evidence/records/captures/privacy-disable-steps-recorder-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/privacy-disable-steps-recorder-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/privacy-disable-steps-recorder-etw-20260427a/privacy-disable-steps-recorder-etw-20260427a-summary.json](../evidence/records/raw/etw-stackwalk/privacy-disable-steps-recorder-etw-20260427a/privacy-disable-steps-recorder-etw-20260427a-summary.json) | `low` | behavior, version-scope |
-| `vm-privacy.disable-steps-recorder-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for DisableUAR | [evidence/records/raw/ghidra/ghidra-privacy-disable-steps-recorder-20260427a/summary.json](../evidence/records/raw/ghidra/ghidra-privacy-disable-steps-recorder-20260427a/summary.json) | `low` | version-scope |
+| `vm-privacy.disable-steps-recorder-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for DisableUAR | [evidence/captures/privacy-disable-steps-recorder-etw-stackwalk-attempt-20260427.json](../evidence/captures/privacy-disable-steps-recorder-etw-stackwalk-attempt-20260427.json) and [evidence/raw/etw-stackwalk/privacy-disable-steps-recorder-etw-20260427a/privacy-disable-steps-recorder-etw-20260427a-summary.json](../evidence/raw/etw-stackwalk/privacy-disable-steps-recorder-etw-20260427a/privacy-disable-steps-recorder-etw-20260427a-summary.json) | `low` | behavior, version-scope |
+| `vm-privacy.disable-steps-recorder-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for DisableUAR | [evidence/raw/ghidra/ghidra-privacy-disable-steps-recorder-20260427a/summary.json](../evidence/raw/ghidra/ghidra-privacy-disable-steps-recorder-20260427a/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -17456,21 +16388,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, cloudcontent |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / visibility/desc.md | [https://github.com/nohuto/win-config/blob/main/visibility/desc.md](https://github.com/nohuto/win-config/blob/main/visibility/desc.md) | Matched 2 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -17655,7 +16579,7 @@ Current writes
 | `local-appcompat-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft AppCompat.admx mappings | [evidence/files/external/c/Windows/PolicyDefinitions/AppCompat.admx](../evidence/files/external/c/Windows/PolicyDefinitions/AppCompat.admx) | `high` | path, value, allowed-values |
 | `local-appcompat-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft AppCompat.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/AppCompat.adml](../evidence/files/external/c/PolicyDefinitions/en-US/AppCompat.adml) | `high` | behavior, side-effects, risk |
 | `admx-appcompat-csp` | `policy-csp` | `Microsoft policy CSP` | Policy CSP - ADMX_AppCompat | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat) | `high` | path, behavior, version-scope |
-| `procmon-switchback` | `procmon-trace` | `VM Procmon trace` | VM Procmon capture - AppCompatTurnOffSwitchBack | [evidence/records/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml](../evidence/records/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml) and [evidence/records/raw/procmon/privacy.disable-switchback.policy/switchback-only.hits.csv](../evidence/records/raw/procmon/privacy.disable-switchback.policy/switchback-only.hits.csv) | `high` | value, behavior, version-scope |
+| `procmon-switchback` | `procmon-trace` | `VM Procmon trace` | VM Procmon capture - AppCompatTurnOffSwitchBack | [evidence/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml](../evidence/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml) and [evidence/raw/procmon/privacy.disable-switchback.policy/switchback-only.hits.csv](../evidence/raw/procmon/privacy.disable-switchback.policy/switchback-only.hits.csv) | `high` | value, behavior, version-scope |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
@@ -17724,21 +16648,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, datacollection, disabletelemetryoptinchangenotification |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / privacy/assets/locationaccess-LocationApi.c | [https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c) | Matched 1 audit token(s) in win-config. |
-| win-config / privacy/assets/maps.c | [https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c) | Matched 1 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -17845,21 +16761,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, datacollection, disabletelemetryoptinsettingsux |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / privacy/assets/locationaccess-LocationApi.c | [https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c) | Matched 1 audit token(s) in win-config. |
-| win-config / privacy/assets/maps.c | [https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c) | Matched 1 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -17967,21 +16875,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, error, reporting, disabled |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 4 audit token(s) in win-config. |
-| win-config / misc/desc.md | [https://github.com/nohuto/win-config/blob/main/misc/desc.md](https://github.com/nohuto/win-config/blob/main/misc/desc.md) | Matched 4 audit token(s) in win-config. |
-| win-config / security/desc.md | [https://github.com/nohuto/win-config/blob/main/security/desc.md](https://github.com/nohuto/win-config/blob/main/security/desc.md) | Matched 4 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -18090,21 +16990,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, locationandsensors, disablewindowslocationprovider |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / privacy/assets/locationaccess-LocationApi.c | [https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c) | Matched 2 audit token(s) in win-config. |
-| win-config / privacy/assets/maps.c | [https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c) | Matched 1 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -18212,21 +17104,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, cloudcontent |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / visibility/desc.md | [https://github.com/nohuto/win-config/blob/main/visibility/desc.md](https://github.com/nohuto/win-config/blob/main/visibility/desc.md) | Matched 2 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -18348,21 +17232,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, dontdisplaylastusername |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / privacy/assets/locationaccess-LocationApi.c | [https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c) | Matched 1 audit token(s) in win-config. |
-| win-config / privacy/assets/maps.c | [https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c) | Matched 1 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -18469,19 +17345,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `category-fallback` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `True` |
-| Source repositories | win-config |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
 | Matched tokens |  |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics. |
+| Lineage note |  |
 
 **Targets**
 
@@ -18588,21 +17458,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, explorer, hiderecommendedpersonalizedsites |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / misc/desc.md | [https://github.com/nohuto/win-config/blob/main/misc/desc.md](https://github.com/nohuto/win-config/blob/main/misc/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / peripheral/desc.md | [https://github.com/nohuto/win-config/blob/main/peripheral/desc.md](https://github.com/nohuto/win-config/blob/main/peripheral/desc.md) | Matched 2 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -18709,19 +17571,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `category-fallback` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `True` |
-| Source repositories | win-config |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
 | Matched tokens |  |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics. |
+| Lineage note |  |
 
 **Targets**
 
@@ -18828,21 +17684,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, explorer, hiderecommendedsection |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / misc/desc.md | [https://github.com/nohuto/win-config/blob/main/misc/desc.md](https://github.com/nohuto/win-config/blob/main/misc/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / peripheral/desc.md | [https://github.com/nohuto/win-config/blob/main/peripheral/desc.md](https://github.com/nohuto/win-config/blob/main/peripheral/desc.md) | Matched 2 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -18949,21 +17797,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, dontdisplayusername |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / privacy/assets/locationaccess-LocationApi.c | [https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c) | Matched 1 audit token(s) in win-config. |
-| win-config / privacy/assets/maps.c | [https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c) | Matched 1 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -19003,8 +17843,8 @@ Nohuto lineage references:
 | `local-security-defaults-hide-username` | `official-doc` | `Microsoft official doc` | Local Windows default security baseline entry | [evidence/files/external/c/Windows/inf/defltbase.inf.md](../evidence/files/external/c/Windows/inf/defltbase.inf.md) | `high` | default, value |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-hide-username-at-signin` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
-| `vm-privacy.hide-username-at-signin-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for DontDisplayUserName | [evidence/records/captures/privacy-hide-username-at-signin-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/privacy-hide-username-at-signin-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/privacy-hide-username-at-signin-etw-20260427a/privacy-hide-username-at-signin-etw-20260427a-summary.json](../evidence/records/raw/etw-stackwalk/privacy-hide-username-at-signin-etw-20260427a/privacy-hide-username-at-signin-etw-20260427a-summary.json) | `low` | behavior, version-scope |
-| `vm-privacy.hide-username-at-signin-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for DontDisplayUserName | [evidence/records/raw/ghidra/ghidra-privacy-hide-username-at-signin-20260427a/summary.json](../evidence/records/raw/ghidra/ghidra-privacy-hide-username-at-signin-20260427a/summary.json) | `low` | version-scope |
+| `vm-privacy.hide-username-at-signin-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for DontDisplayUserName | [evidence/captures/privacy-hide-username-at-signin-etw-stackwalk-attempt-20260427.json](../evidence/captures/privacy-hide-username-at-signin-etw-stackwalk-attempt-20260427.json) and [evidence/raw/etw-stackwalk/privacy-hide-username-at-signin-etw-20260427a/privacy-hide-username-at-signin-etw-20260427a-summary.json](../evidence/raw/etw-stackwalk/privacy-hide-username-at-signin-etw-20260427a/privacy-hide-username-at-signin-etw-20260427a-summary.json) | `low` | behavior, version-scope |
+| `vm-privacy.hide-username-at-signin-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for DontDisplayUserName | [evidence/raw/ghidra/ghidra-privacy-hide-username-at-signin-20260427a/summary.json](../evidence/raw/ghidra/ghidra-privacy-hide-username-at-signin-20260427a/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -19072,21 +17912,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, datacollection, limitdiagnosticlogcollection |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / privacy/assets/locationaccess-LocationApi.c | [https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c) | Matched 1 audit token(s) in win-config. |
-| win-config / privacy/assets/maps.c | [https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c) | Matched 1 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -19193,21 +18025,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, datacollection, limitdumpcollection |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / privacy/assets/locationaccess-LocationApi.c | [https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/locationaccess-LocationApi.c) | Matched 1 audit token(s) in win-config. |
-| win-config / privacy/assets/maps.c | [https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/maps.c) | Matched 1 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -19248,8 +18072,8 @@ Nohuto lineage references:
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-limit-dump-collection` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 | `nohuto-crashdump-gate` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto crash-dump gate trace | [research/_source-mirrors/decompiled-pseudocode/ntoskrnl/IopInitializeDumpPolicySettings.c](_source-mirrors/decompiled-pseudocode/ntoskrnl/IopInitializeDumpPolicySettings.c); [Docs/privacy/assets/crashdmp.c](../Docs/privacy/assets/crashdmp.c) | `medium` | path, behavior, dependency |
-| `vm-privacy.limit-dump-collection-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for LimitDumpCollection | [evidence/records/captures/privacy-limit-dump-collection-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/privacy-limit-dump-collection-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/privacy-limit-dump-collection-etw-20260427a/privacy-limit-dump-collection-etw-20260427a-summary.json](../evidence/records/raw/etw-stackwalk/privacy-limit-dump-collection-etw-20260427a/privacy-limit-dump-collection-etw-20260427a-summary.json) | `low` | behavior, version-scope |
-| `vm-privacy.limit-dump-collection-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for LimitDumpCollection | [evidence/records/raw/ghidra/ghidra-privacy-limit-dump-collection-20260427a/summary.json](../evidence/records/raw/ghidra/ghidra-privacy-limit-dump-collection-20260427a/summary.json) | `low` | version-scope |
+| `vm-privacy.limit-dump-collection-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for LimitDumpCollection | [evidence/captures/privacy-limit-dump-collection-etw-stackwalk-attempt-20260427.json](../evidence/captures/privacy-limit-dump-collection-etw-stackwalk-attempt-20260427.json) and [evidence/raw/etw-stackwalk/privacy-limit-dump-collection-etw-20260427a/privacy-limit-dump-collection-etw-20260427a-summary.json](../evidence/raw/etw-stackwalk/privacy-limit-dump-collection-etw-20260427a/privacy-limit-dump-collection-etw-20260427a-summary.json) | `low` | behavior, version-scope |
+| `vm-privacy.limit-dump-collection-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for LimitDumpCollection | [evidence/raw/ghidra/ghidra-privacy-limit-dump-collection-20260427a/summary.json](../evidence/raw/ghidra/ghidra-privacy-limit-dump-collection-20260427a/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -19432,21 +18256,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, troubleshooting, allowrecommendations, troubleshootingallowrecommendations |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 4 audit token(s) in win-config. |
-| win-config / network/desc.md | [https://github.com/nohuto/win-config/blob/main/network/desc.md](https://github.com/nohuto/win-config/blob/main/network/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 2 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -19751,7 +18567,7 @@ Current writes
 | `repo-security-doc` | `repo-doc` | `Current repo docs` | Repo security notes for EnableVirtualization | [Docs/security/security.md](../Docs/security/security.md) | `high` | path, value, allowed-values, behavior |
 | `vm-policy-system-phase0-20260329` | `registry-observation` | `VM registry observation` | Win25H2Clean 96-key phase-0 existence batch | [evidence/files/vm/registry-batch-existence-96-live-20260329-100629/results.json](../evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json) | `high` | path, value, default, version-scope |
 | `nohuto-uac-bootphase` | `decompilation` | `Our Ghidra decompilation` | Boot-phase UAC policy cluster lead | [research/_source-mirrors/decompiled-pseudocode/ntoskrnl/PsBootPhaseComplete.c](_source-mirrors/decompiled-pseudocode/ntoskrnl/PsBootPhaseComplete.c) | `medium` | path, behavior, dependency |
-| `static-policy-system-enable-virtualization-20260330` | `decompilation` | `Our Ghidra decompilation` | Path-aware static probe for EnableVirtualization | [evidence/files/path-aware/path-aware-static-20260330-222908/policy-system-enable-virtualization/summary.json](../evidence/files/path-aware/path-aware-static-20260330-222908/policy-system-enable-virtualization/summary.json) and [evidence/records/raw/ghidra/policy-system-enable-virtualization-ntoskrnl-exe-path-aware-20260330-222908/ghidra-matches.md](../evidence/records/raw/ghidra/policy-system-enable-virtualization-ntoskrnl-exe-path-aware-20260330-222908/ghidra-matches.md) | `high` | path, value, behavior, version-scope |
+| `static-policy-system-enable-virtualization-20260330` | `decompilation` | `Our Ghidra decompilation` | Path-aware static probe for EnableVirtualization | [evidence/files/path-aware/path-aware-static-20260330-222908/policy-system-enable-virtualization/summary.json](../evidence/files/path-aware/path-aware-static-20260330-222908/policy-system-enable-virtualization/summary.json) and [evidence/raw/ghidra/policy-system-enable-virtualization-ntoskrnl-exe-path-aware-20260330-222908/ghidra-matches.md](../evidence/raw/ghidra/policy-system-enable-virtualization-ntoskrnl-exe-path-aware-20260330-222908/ghidra-matches.md) | `high` | path, value, behavior, version-scope |
 | `vm-policy-system-enable-virtualization-runtime-20260330` | `etw-trace` | `unspecified` | Path-aware lightweight ETW follow-up for EnableVirtualization | [evidence/files/path-aware/path-aware-runtime-20260330-221529/summary.json](../evidence/files/path-aware/path-aware-runtime-20260330-221529/summary.json) and [evidence/files/path-aware/path-aware-runtime-20260330-221529/policy-system-enable-virtualization/summary.json](../evidence/files/path-aware/path-aware-runtime-20260330-221529/policy-system-enable-virtualization/summary.json) | `medium` | behavior, risk, version-scope |
 | `vm-policy-system-enable-virtualization-runtime-secondary-20260331` | `etw-trace` | `unspecified` | Secondary-profile path-aware ETW replay for EnableVirtualization | [evidence/files/path-aware/secondary/path-aware-runtime-secondary-20260331-110610/summary.json](../evidence/files/path-aware/secondary/path-aware-runtime-secondary-20260331-110610/summary.json) and [evidence/files/path-aware/secondary/path-aware-runtime-secondary-20260331-110610/policy-system-enable-virtualization/summary.json](../evidence/files/path-aware/secondary/path-aware-runtime-secondary-20260331-110610/policy-system-enable-virtualization/summary.json) | `medium` | behavior, risk, version-scope |
 | `vm-policy-system-enable-virtualization-kvm-procmon-20260406` | `procmon-trace` | `VM Procmon trace` | Linux KVM Procmon replay for EnableVirtualization | [evidence/files/vm/enablevirtualization-procmon-kvm-20260406b/enablevirtualization-procmon-kvm-20260406b-summary.json](../evidence/files/vm-tooling-staging/enablevirtualization-procmon-kvm-20260406b/enablevirtualization-procmon-kvm-20260406b-summary.json) and [evidence/files/vm/enablevirtualization-procmon-kvm-20260406b/host-review.json](../evidence/files/vm-tooling-staging/enablevirtualization-procmon-kvm-20260406b/host-review.json) | `medium` | behavior, risk, version-scope |
@@ -19759,7 +18575,7 @@ Current writes
 | `vm-policy-system-enable-virtualization-kvm-procmon-recovery-20260407` | `procmon-trace` | `VM Procmon trace` | Linux KVM recovery-backed Procmon replay for EnableVirtualization | [evidence/files/vm/enablevirtualization-procmon-kvm-recovery-20260407a/enablevirtualization-procmon-kvm-recovery-20260407a-summary.json](../evidence/files/vm-tooling-staging/enablevirtualization-procmon-kvm-recovery-20260407a/enablevirtualization-procmon-kvm-recovery-20260407a-summary.json) and [evidence/files/vm/enablevirtualization-procmon-kvm-recovery-20260407a/enablevirtualization-procmon-kvm-recovery-20260407a.txt](../evidence/files/vm-tooling-staging/enablevirtualization-procmon-kvm-recovery-20260407a/enablevirtualization-procmon-kvm-recovery-20260407a.txt) and [evidence/files/vm/enablevirtualization-procmon-kvm-recovery-20260407a/host-review.json](../evidence/files/vm-tooling-staging/enablevirtualization-procmon-kvm-recovery-20260407a/host-review.json) and [research/notes/policy-system-enable-virtualization-kvm-procmon-recovery-20260407.md](notes/policy-system-enable-virtualization-kvm-procmon-recovery-20260407.md) | `medium` | behavior, risk, version-scope |
 | `vm-policy-system-enable-virtualization-kvm-procmon-bootlog-20260407` | `vm-test` | `VM test / probe` | Linux KVM Procmon bootlog probe for EnableVirtualization | [evidence/files/vm/enablevirtualization-procmon-kvm-bootlog-20260407h/summary-arm.json](../evidence/files/vm-tooling-staging/enablevirtualization-procmon-kvm-bootlog-20260407h/summary-arm.json) and [evidence/files/vm/enablevirtualization-procmon-kvm-bootlog-20260407h/summary-collect.json](../evidence/files/vm-tooling-staging/enablevirtualization-procmon-kvm-bootlog-20260407h/summary-collect.json) and [evidence/files/vm/enablevirtualization-procmon-kvm-bootlog-20260407h/host-review.json](../evidence/files/vm-tooling-staging/enablevirtualization-procmon-kvm-bootlog-20260407h/host-review.json) and [research/notes/policy-system-enable-virtualization-kvm-procmon-bootlog-20260407.md](notes/policy-system-enable-virtualization-kvm-procmon-bootlog-20260407.md) | `medium` | behavior, risk, version-scope |
 | `vm-policy-system-enable-virtualization-wpr-qga-runtime-read-20260413` | `etw-trace` | `unspecified` | QGA-launched WPR boot trace captures exact EnableVirtualization QueryValue hits | [evidence/files/vm/enablevirtualization-wpr-qga-runtime-read-20260413/enable-virtualization-wpr-qga-20260413b-summary.json](../evidence/files/vm-tooling-staging/enablevirtualization-wpr-qga-runtime-read-20260413/enable-virtualization-wpr-qga-20260413b-summary.json) and [evidence/files/vm/enablevirtualization-wpr-qga-runtime-read-20260413/enable-virtualization-wpr-qga-20260413b.normalized.json](../evidence/files/vm-tooling-staging/enablevirtualization-wpr-qga-runtime-read-20260413/enable-virtualization-wpr-qga-20260413b.normalized.json) and [research/notes/policy-system-enable-virtualization-wpr-qga-runtime-read-20260413.md](notes/policy-system-enable-virtualization-wpr-qga-runtime-read-20260413.md) | `high` | path, value, behavior, version-scope |
-| `vm-policy.system.enable-virtualization-etw-stackwalk-attempt-20260424i` | `etw-trace` | `unspecified` | Bounded ETW stackwalk timeout receipt | [evidence/records/raw/etw-stackwalk/policy.system.enable-virtualization-etw-20260424i/policy.system.enable-virtualization-etw-20260424i-summary.json](../evidence/records/raw/etw-stackwalk/policy.system.enable-virtualization-etw-20260424i/policy.system.enable-virtualization-etw-20260424i-summary.json) and [evidence/records/raw/etw-stackwalk/policy.system.enable-virtualization-etw-20260424i/policy.system.enable-virtualization-etw-20260424i-stage.json](../evidence/records/raw/etw-stackwalk/policy.system.enable-virtualization-etw-20260424i/policy.system.enable-virtualization-etw-20260424i-stage.json) and [evidence/records/captures/policy-system-enable-virtualization-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/policy-system-enable-virtualization-etw-stackwalk-attempt-20260424.json) | `medium` | runtime-lane-review, transport-blocker |
+| `vm-policy.system.enable-virtualization-etw-stackwalk-attempt-20260424i` | `etw-trace` | `unspecified` | Bounded ETW stackwalk timeout receipt | [evidence/raw/etw-stackwalk/policy.system.enable-virtualization-etw-20260424i/policy.system.enable-virtualization-etw-20260424i-summary.json](../evidence/raw/etw-stackwalk/policy.system.enable-virtualization-etw-20260424i/policy.system.enable-virtualization-etw-20260424i-summary.json) and [evidence/raw/etw-stackwalk/policy.system.enable-virtualization-etw-20260424i/policy.system.enable-virtualization-etw-20260424i-stage.json](../evidence/raw/etw-stackwalk/policy.system.enable-virtualization-etw-20260424i/policy.system.enable-virtualization-etw-20260424i-stage.json) and [evidence/captures/policy-system-enable-virtualization-etw-stackwalk-attempt-20260424.json](../evidence/captures/policy-system-enable-virtualization-etw-stackwalk-attempt-20260424.json) | `medium` | runtime-lane-review, transport-blocker |
 
 **Validation proof**
 
@@ -19830,27 +18646,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config, win-registry |
-| Matched tokens | policies, defender, submitsamplesconsent |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / security/assets/Windows-Defender.txt | [https://github.com/nohuto/win-config/blob/main/security/assets/Windows-Defender.txt](https://github.com/nohuto/win-config/blob/main/security/assets/Windows-Defender.txt) | Matched 3 audit token(s) in win-config. |
-| win-config / security/desc.md | [https://github.com/nohuto/win-config/blob/main/security/desc.md](https://github.com/nohuto/win-config/blob/main/security/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-registry / records/Windows-Defender.txt | [https://github.com/nohuto/win-registry/blob/main/records/Windows-Defender.txt](https://github.com/nohuto/win-registry/blob/main/records/Windows-Defender.txt) | Matched 3 audit token(s) in win-registry. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -19893,8 +18695,8 @@ Windows Internals references:
 | `ms-defender-block-at-first-sight-dependency` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Block at First Sight dependency on sample submission | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-microsoftdefenderantivirus](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-microsoftdefenderantivirus) | `high` | behavior, tradeoff |
 | `repo-defender-submit-samples-lead` | `repo-doc` | `Current repo docs` | Local Defender sample-submission lead note | [research/notes/windows-11-settings-and-privacy-leads.md](notes/windows-11-settings-and-privacy-leads.md) | `medium` | path, value, allowed-values |
 | `repo-defender-submit-samples-dump` | `repo-doc` | `Current repo docs` | Windows Defender dump list includes SubmitSamplesConsent | [Docs/security/assets/Windows-Defender.txt](../Docs/security/assets/Windows-Defender.txt) | `medium` | path |
-| `vm-defender-submit-samples-baseline` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean absent-value check for Defender sample submission | [evidence/records/raw/procmon/security.disable-defender-sample-submission/spynet-ui-state2.txt](../evidence/records/raw/procmon/security.disable-defender-sample-submission/spynet-ui-state2.txt) | `medium` | path, runtime-read, default |
-| `vm-defender-submit-samples-state2` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon read for SubmitSamplesConsent = 2 | [evidence/records/raw/procmon/security.disable-defender-sample-submission/submitsamples-ui-state2.txt](../evidence/records/raw/procmon/security.disable-defender-sample-submission/submitsamples-ui-state2.txt) | `high` | path, value, runtime-read, behavior |
+| `vm-defender-submit-samples-baseline` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean absent-value check for Defender sample submission | [evidence/raw/procmon/security.disable-defender-sample-submission/spynet-ui-state2.txt](../evidence/raw/procmon/security.disable-defender-sample-submission/spynet-ui-state2.txt) | `medium` | path, runtime-read, default |
+| `vm-defender-submit-samples-state2` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon read for SubmitSamplesConsent = 2 | [evidence/raw/procmon/security.disable-defender-sample-submission/submitsamples-ui-state2.txt](../evidence/raw/procmon/security.disable-defender-sample-submission/submitsamples-ui-state2.txt) | `high` | path, value, runtime-read, behavior |
 | `app-security-provider-disable-defender-sample-submission` | `repo-code` | `Current repo code` | Current security provider sample-submission write | app/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
@@ -19963,27 +18765,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, attachments, savezoneinformation |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / security/desc.md | [https://github.com/nohuto/win-config/blob/main/security/desc.md](https://github.com/nohuto/win-config/blob/main/security/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / nvidia/desc.md | [https://github.com/nohuto/win-config/blob/main/nvidia/desc.md](https://github.com/nohuto/win-config/blob/main/nvidia/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / security/assets/Windows-Defender.txt | [https://github.com/nohuto/win-config/blob/main/security/assets/Windows-Defender.txt](https://github.com/nohuto/win-config/blob/main/security/assets/Windows-Defender.txt) | Matched 1 audit token(s) in win-config. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -20089,27 +18877,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, defender, security, center, notifications, disableenhancednotifications |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 6 audit token(s) in win-config. |
-| win-config / security/desc.md | [https://github.com/nohuto/win-config/blob/main/security/desc.md](https://github.com/nohuto/win-config/blob/main/security/desc.md) | Matched 4 audit token(s) in win-config. |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 5 audit token(s) in win-config. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -20148,9 +18922,9 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-defender-security-center-disable-enhanced-notifications` | `official-doc` | `Microsoft official doc` | WindowsDefenderSecurityCenter.admx enhanced notifications policy | [Docs/system/system.md](../Docs/system/system.md) | `high` | path, value, allowed-values, behavior |
 | `ms-defender-reporting-disable-enhanced-notifications` | `official-doc` | `Microsoft official doc` | WindowsDefender.admx reporting enhanced notifications policy | [Docs/system/system.md](../Docs/system/system.md) | `medium` | path, value, allowed-values |
-| `vm-defender-enhanced-notifications-baseline` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon baseline for Security Center notifications policy | [evidence/records/raw/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-baseline-1.txt](../evidence/records/raw/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-baseline-1.txt) | `high` | path, runtime-read, default |
-| `vm-defender-enhanced-notifications-enabled` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon enabled-state read for Security Center notifications policy | [evidence/records/raw/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-securitycenter-1.txt](../evidence/records/raw/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-securitycenter-1.txt) | `high` | path, value, runtime-read, behavior |
-| `vm-defender-enhanced-notifications-reporting-alias-check` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon reporting-path alias check | [evidence/records/raw/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-reporting-1.txt](../evidence/records/raw/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-reporting-1.txt) | `medium` | path, runtime-read |
+| `vm-defender-enhanced-notifications-baseline` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon baseline for Security Center notifications policy | [evidence/raw/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-baseline-1.txt](../evidence/raw/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-baseline-1.txt) | `high` | path, runtime-read, default |
+| `vm-defender-enhanced-notifications-enabled` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon enabled-state read for Security Center notifications policy | [evidence/raw/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-securitycenter-1.txt](../evidence/raw/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-securitycenter-1.txt) | `high` | path, value, runtime-read, behavior |
+| `vm-defender-enhanced-notifications-reporting-alias-check` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon reporting-path alias check | [evidence/raw/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-reporting-1.txt](../evidence/raw/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-reporting-1.txt) | `medium` | path, runtime-read |
 | `app-security-provider-disable-enhanced-notifications` | `repo-code` | `Current repo code` | Current security provider enhanced notifications write | app/Services/TweakProviders/SecurityTweakProvider.cs | `high` | ui-mapping, path, value |
 
 **Validation proof**
@@ -20219,27 +18993,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, ntfsdisableencryption |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / security/desc.md | [https://github.com/nohuto/win-config/blob/main/security/desc.md](https://github.com/nohuto/win-config/blob/main/security/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / security/assets/Windows-Defender.txt | [https://github.com/nohuto/win-config/blob/main/security/assets/Windows-Defender.txt](https://github.com/nohuto/win-config/blob/main/security/assets/Windows-Defender.txt) | Matched 1 audit token(s) in win-config. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -20344,27 +19104,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, deliveryoptimization, dodownloadmode |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / security/desc.md | [https://github.com/nohuto/win-config/blob/main/security/desc.md](https://github.com/nohuto/win-config/blob/main/security/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / security/assets/Windows-Defender.txt | [https://github.com/nohuto/win-config/blob/main/security/assets/Windows-Defender.txt](https://github.com/nohuto/win-config/blob/main/security/assets/Windows-Defender.txt) | Matched 1 audit token(s) in win-config. |
-| win-config / affinities/desc.md | [https://github.com/nohuto/win-config/blob/main/affinities/desc.md](https://github.com/nohuto/win-config/blob/main/affinities/desc.md) | Matched 1 audit token(s) in win-config. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -20474,27 +19220,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, credui, disablepasswordreveal |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / security/desc.md | [https://github.com/nohuto/win-config/blob/main/security/desc.md](https://github.com/nohuto/win-config/blob/main/security/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / security/assets/Windows-Defender.txt | [https://github.com/nohuto/win-config/blob/main/security/assets/Windows-Defender.txt](https://github.com/nohuto/win-config/blob/main/security/assets/Windows-Defender.txt) | Matched 1 audit token(s) in win-config. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -20600,27 +19332,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config, win-registry |
-| Matched tokens | policies, blockdomainpicturepassword |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / security/desc.md | [https://github.com/nohuto/win-config/blob/main/security/desc.md](https://github.com/nohuto/win-config/blob/main/security/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / security/assets/Windows-Defender.txt | [https://github.com/nohuto/win-config/blob/main/security/assets/Windows-Defender.txt](https://github.com/nohuto/win-config/blob/main/security/assets/Windows-Defender.txt) | Matched 1 audit token(s) in win-config. |
-| win-registry / records/Policies-System.txt | [https://github.com/nohuto/win-registry/blob/main/records/Policies-System.txt](https://github.com/nohuto/win-registry/blob/main/records/Policies-System.txt) | Matched 2 audit token(s) in win-registry. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -20726,27 +19444,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, terminal, fallowtogethelp |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / security/desc.md | [https://github.com/nohuto/win-config/blob/main/security/desc.md](https://github.com/nohuto/win-config/blob/main/security/desc.md) | Matched 1 audit token(s) in win-config. |
-| win-config / misc/desc.md | [https://github.com/nohuto/win-config/blob/main/misc/desc.md](https://github.com/nohuto/win-config/blob/main/misc/desc.md) | Matched 2 audit token(s) in win-config. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -20853,19 +19557,19 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
+| Coverage state | `category-fallback` |
 | Has nohuto lineage | `True` |
 | Has Windows Internals notes | `True` |
-| Needs review | `False` |
+| Needs review | `True` |
 | Source repositories | win-config |
-| Matched tokens | disable system mitigations |
+| Matched tokens |  |
 | Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
 
 Nohuto lineage references:
 
 | Title | Location | Summary |
 | --- | --- | --- |
-| win-config / security/desc.md | [https://github.com/nohuto/win-config/blob/main/security/desc.md](https://github.com/nohuto/win-config/blob/main/security/desc.md) | Matched 1 audit token(s) in win-config. |
+| win-config / security/desc.md | [https://github.com/nohuto/win-config/blob/main/security/desc.md](https://github.com/nohuto/win-config/blob/main/security/desc.md) | Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics. |
 
 Windows Internals references:
 
@@ -20977,27 +19681,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, systemrestore |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / security/desc.md | [https://github.com/nohuto/win-config/blob/main/security/desc.md](https://github.com/nohuto/win-config/blob/main/security/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / security/assets/Windows-Defender.txt | [https://github.com/nohuto/win-config/blob/main/security/assets/Windows-Defender.txt](https://github.com/nohuto/win-config/blob/main/security/assets/Windows-Defender.txt) | Matched 1 audit token(s) in win-config. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -21105,27 +19795,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, windowsfirewall, domainprofile, enablefirewall, standardprofile |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / security/desc.md | [https://github.com/nohuto/win-config/blob/main/security/desc.md](https://github.com/nohuto/win-config/blob/main/security/desc.md) | Matched 5 audit token(s) in win-config. |
-| win-config / security/assets/Windows-Defender.txt | [https://github.com/nohuto/win-config/blob/main/security/assets/Windows-Defender.txt](https://github.com/nohuto/win-config/blob/main/security/assets/Windows-Defender.txt) | Matched 1 audit token(s) in win-config. |
-| win-config / affinities/desc.md | [https://github.com/nohuto/win-config/blob/main/affinities/desc.md](https://github.com/nohuto/win-config/blob/main/affinities/desc.md) | Matched 1 audit token(s) in win-config. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -21377,27 +20053,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, windowsupdate, excludewudriversinqualityupdate, driversearching, searchorderconfig, dontsearchwindowsupdate |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / security/desc.md | [https://github.com/nohuto/win-config/blob/main/security/desc.md](https://github.com/nohuto/win-config/blob/main/security/desc.md) | Matched 6 audit token(s) in win-config. |
-| win-config / policies/desc.md | [https://github.com/nohuto/win-config/blob/main/policies/desc.md](https://github.com/nohuto/win-config/blob/main/policies/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 2 audit token(s) in win-config. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -21538,27 +20200,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, defender |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / security/desc.md | [https://github.com/nohuto/win-config/blob/main/security/desc.md](https://github.com/nohuto/win-config/blob/main/security/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / security/assets/Windows-Defender.txt | [https://github.com/nohuto/win-config/blob/main/security/assets/Windows-Defender.txt](https://github.com/nohuto/win-config/blob/main/security/assets/Windows-Defender.txt) | Matched 2 audit token(s) in win-config. |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 2 audit token(s) in win-config. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -21598,8 +20246,8 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-defender-spynet-reporting` | `official-doc` | `Microsoft official doc` | Microsoft Learn: ADMX_MicrosoftDefenderAntivirus SpynetReporting | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-microsoftdefenderantivirus](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-microsoftdefenderantivirus) | `high` | path, value, allowed-values, behavior |
 | `repo-defender-spynet-lead` | `repo-doc` | `Current repo docs` | Local Defender MAPS lead note | [research/notes/windows-11-settings-and-privacy-leads.md](notes/windows-11-settings-and-privacy-leads.md) | `medium` | path, value, allowed-values |
-| `vm-defender-spynet-baseline` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon baseline for Defender MAPS policy path | [evidence/records/raw/procmon/security.enable-defender-maps-advanced-membership/spynet-ui-baseline.txt](../evidence/records/raw/procmon/security.enable-defender-maps-advanced-membership/spynet-ui-baseline.txt) | `high` | path, runtime-read, default |
-| `vm-defender-spynet-state2` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon read for SpyNetReporting = 2 | [evidence/records/raw/procmon/security.disable-defender-sample-submission/spynet-ui-state2.txt](../evidence/records/raw/procmon/security.disable-defender-sample-submission/spynet-ui-state2.txt) | `high` | path, value, runtime-read, behavior |
+| `vm-defender-spynet-baseline` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon baseline for Defender MAPS policy path | [evidence/raw/procmon/security.enable-defender-maps-advanced-membership/spynet-ui-baseline.txt](../evidence/raw/procmon/security.enable-defender-maps-advanced-membership/spynet-ui-baseline.txt) | `high` | path, runtime-read, default |
+| `vm-defender-spynet-state2` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon read for SpyNetReporting = 2 | [evidence/raw/procmon/security.disable-defender-sample-submission/spynet-ui-state2.txt](../evidence/raw/procmon/security.disable-defender-sample-submission/spynet-ui-state2.txt) | `high` | path, value, runtime-read, behavior |
 | `app-security-provider-enable-defender-maps-advanced-membership` | `repo-code` | `Current repo code` | Current security provider MAPS membership write | app/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
@@ -21668,27 +20316,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, passportforwork, dynamiclock |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / security/desc.md | [https://github.com/nohuto/win-config/blob/main/security/desc.md](https://github.com/nohuto/win-config/blob/main/security/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / security/assets/Windows-Defender.txt | [https://github.com/nohuto/win-config/blob/main/security/assets/Windows-Defender.txt](https://github.com/nohuto/win-config/blob/main/security/assets/Windows-Defender.txt) | Matched 1 audit token(s) in win-config. |
-| win-config / affinities/desc.md | [https://github.com/nohuto/win-config/blob/main/affinities/desc.md](https://github.com/nohuto/win-config/blob/main/affinities/desc.md) | Matched 1 audit token(s) in win-config. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -21793,27 +20427,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, sudo, enabled |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / security/desc.md | [https://github.com/nohuto/win-config/blob/main/security/desc.md](https://github.com/nohuto/win-config/blob/main/security/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / security/assets/Windows-Defender.txt | [https://github.com/nohuto/win-config/blob/main/security/assets/Windows-Defender.txt](https://github.com/nohuto/win-config/blob/main/security/assets/Windows-Defender.txt) | Matched 2 audit token(s) in win-config. |
-| win-config / misc/desc.md | [https://github.com/nohuto/win-config/blob/main/misc/desc.md](https://github.com/nohuto/win-config/blob/main/misc/desc.md) | Matched 2 audit token(s) in win-config. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -21921,27 +20541,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config, win-registry |
-| Matched tokens | policies, defender, hideexclusionsfromlocaladmins |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / security/assets/Windows-Defender.txt | [https://github.com/nohuto/win-config/blob/main/security/assets/Windows-Defender.txt](https://github.com/nohuto/win-config/blob/main/security/assets/Windows-Defender.txt) | Matched 3 audit token(s) in win-config. |
-| win-config / security/desc.md | [https://github.com/nohuto/win-config/blob/main/security/desc.md](https://github.com/nohuto/win-config/blob/main/security/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-registry / records/Windows-Defender.txt | [https://github.com/nohuto/win-registry/blob/main/records/Windows-Defender.txt](https://github.com/nohuto/win-registry/blob/main/records/Windows-Defender.txt) | Matched 3 audit token(s) in win-registry. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -21982,9 +20588,9 @@ Windows Internals references:
 | `ms-defender-exclusions-visibility-note` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Configure exclusions in Defender Antivirus | [https://learn.microsoft.com/en-us/defender-endpoint/configure-exclusions-microsoft-defender-antivirus](https://learn.microsoft.com/en-us/defender-endpoint/configure-exclusions-microsoft-defender-antivirus) | `high` | behavior, tradeoff |
 | `repo-defender-hide-exclusions-dump` | `repo-doc` | `Current repo docs` | Windows Defender dump list includes root and Policy Manager HideExclusionsFromLocalAdmins | [Docs/security/assets/Windows-Defender.txt](../Docs/security/assets/Windows-Defender.txt) | `medium` | path |
 | `vm-defender-hide-exclusions-baseline-visibility` | `vm-test` | `VM test / probe` | Win25H2Clean baseline visibility with managed exclusion present | [evidence/files/vm/hideexclusions-admins-baseline-1-20260325-001524/hideexclusions-admins-baseline-visibility.json](../evidence/files/vm-tooling-staging/hideexclusions-admins-baseline-1-20260325-001524/hideexclusions-admins-baseline-visibility.json) | `high` | default, behavior |
-| `vm-defender-hide-exclusions-root-state1` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean root-path read for HideExclusionsFromLocalAdmins = 1 | [evidence/records/raw/procmon/security.hide-defender-exclusions-from-local-admins/hideexclusions-admins-root-1.txt](../evidence/records/raw/procmon/security.hide-defender-exclusions-from-local-admins/hideexclusions-admins-root-1.txt) | `high` | path, value, runtime-read, behavior |
+| `vm-defender-hide-exclusions-root-state1` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean root-path read for HideExclusionsFromLocalAdmins = 1 | [evidence/raw/procmon/security.hide-defender-exclusions-from-local-admins/hideexclusions-admins-root-1.txt](../evidence/raw/procmon/security.hide-defender-exclusions-from-local-admins/hideexclusions-admins-root-1.txt) | `high` | path, value, runtime-read, behavior |
 | `vm-defender-hide-exclusions-root-visibility` | `vm-test` | `VM test / probe` | Win25H2Clean visibility change with root-path HideExclusionsFromLocalAdmins = 1 | [evidence/files/vm/hideexclusions-admins-root-1-20260325-002348/hideexclusions-admins-root-1-visibility.json](../evidence/files/vm-tooling-staging/hideexclusions-admins-root-1-20260325-002348/hideexclusions-admins-root-1-visibility.json) | `high` | value, behavior |
-| `vm-defender-hide-exclusions-policymanager-alias` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Policy Manager alias for HideExclusionsFromLocalAdmins = 1 | [evidence/records/raw/procmon/security.hide-defender-exclusions-from-local-admins/hideexclusions-admins-policymanager-1.txt](../evidence/records/raw/procmon/security.hide-defender-exclusions-from-local-admins/hideexclusions-admins-policymanager-1.txt) | `high` | path, value, runtime-read, behavior |
+| `vm-defender-hide-exclusions-policymanager-alias` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Policy Manager alias for HideExclusionsFromLocalAdmins = 1 | [evidence/raw/procmon/security.hide-defender-exclusions-from-local-admins/hideexclusions-admins-policymanager-1.txt](../evidence/raw/procmon/security.hide-defender-exclusions-from-local-admins/hideexclusions-admins-policymanager-1.txt) | `high` | path, value, runtime-read, behavior |
 | `app-security-provider-hide-defender-exclusions-from-local-admins` | `repo-code` | `Current repo code` | Current security provider HideExclusionsFromLocalAdmins write | app/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
 
 **Validation proof**
@@ -22054,27 +20660,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, powershell, enablescripts, executionpolicy, unrestricted |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / security/desc.md | [https://github.com/nohuto/win-config/blob/main/security/desc.md](https://github.com/nohuto/win-config/blob/main/security/desc.md) | Matched 5 audit token(s) in win-config. |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / nvidia/assets/nvcpl.ps1 | [https://github.com/nohuto/win-config/blob/main/nvidia/assets/nvcpl.ps1](https://github.com/nohuto/win-config/blob/main/nvidia/assets/nvcpl.ps1) | Matched 3 audit token(s) in win-config. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -22278,8 +20870,8 @@ Current writes
 | `vm-defender-runtime-disabled-baseline` | `vm-test` | `VM test / probe` | Original high-risk snapshot had Defender disabled | [evidence/files/vm/defender-runtime-repair.json](../evidence/files/vm-tooling-staging/defender-runtime-repair.json) | `high` | default, behavior |
 | `vm-defender-runtime-enabled-baseline` | `vm-test` | `VM test / probe` | Defender-on 25H2 snapshot baseline | [evidence/files/vm/defender-runtime-repair.json](../evidence/files/vm-tooling-staging/defender-runtime-repair.json) | `high` | default, behavior |
 | `vm-defender-threat-file-hash-baseline` | `vm-test` | `VM test / probe` | Defender-on baseline EICAR probe | [evidence/files/vm/defender-threat-file-hash-baseline-1-20260325-011024/defender-threat-file-hash-baseline-events.json](../evidence/files/vm-tooling-staging/defender-threat-file-hash-baseline-1-20260325-011024/defender-threat-file-hash-baseline-events.json) | `high` | default, behavior |
-| `vm-defender-threat-file-hash-root-read` | `procmon-trace` | `VM Procmon trace` | MsMpEng.exe direct read of ThreatFileHashLogging = 1 | [evidence/records/raw/procmon/security.threat-file-hash-logging/defender-threat-file-hash-legacyroot-1.txt](../evidence/records/raw/procmon/security.threat-file-hash-logging/defender-threat-file-hash-legacyroot-1.txt) | `high` | path, value, runtime-read |
-| `vm-defender-threat-file-hash-policymanager-read` | `procmon-trace` | `VM Procmon trace` | MsMpEng.exe direct read of Policy Manager EnableFileHashComputation = 1 | [evidence/records/raw/procmon/security.threat-file-hash-logging/defender-threat-file-hash-policymanager-1.txt](../evidence/records/raw/procmon/security.threat-file-hash-logging/defender-threat-file-hash-policymanager-1.txt) | `high` | path, value, runtime-read |
+| `vm-defender-threat-file-hash-root-read` | `procmon-trace` | `VM Procmon trace` | MsMpEng.exe direct read of ThreatFileHashLogging = 1 | [evidence/raw/procmon/security.threat-file-hash-logging/defender-threat-file-hash-legacyroot-1.txt](../evidence/raw/procmon/security.threat-file-hash-logging/defender-threat-file-hash-legacyroot-1.txt) | `high` | path, value, runtime-read |
+| `vm-defender-threat-file-hash-policymanager-read` | `procmon-trace` | `VM Procmon trace` | MsMpEng.exe direct read of Policy Manager EnableFileHashComputation = 1 | [evidence/raw/procmon/security.threat-file-hash-logging/defender-threat-file-hash-policymanager-1.txt](../evidence/raw/procmon/security.threat-file-hash-logging/defender-threat-file-hash-policymanager-1.txt) | `high` | path, value, runtime-read |
 | `vm-defender-threat-file-hash-mpengine-no-read` | `vm-test` | `VM test / probe` | Non-rebooted MpEngine pass did not show a live read | [evidence/files/vm/defender-threat-file-hash-mpengine-1-20260325-011519/defender-threat-file-hash-mpengine-1-events.json](../evidence/files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-20260325-011519/defender-threat-file-hash-mpengine-1-events.json) | `medium` | path, behavior |
 | `vm-defender-threat-file-hash-mpengine-restart-blocked` | `vm-test` | `VM test / probe` | WinDefend service restart follow-up was blocked | [evidence/files/vm/defender-threat-file-hash-mpengine-1-20260325-095038/defender-threat-file-hash-mpengine-1-events.json](../evidence/files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-20260325-095038/defender-threat-file-hash-mpengine-1-events.json) | `medium` | behavior, runtime-read |
 | `vm-defender-threat-file-hash-mpengine-reboot-no-read` | `vm-test` | `VM test / probe` | Rebooted MpEngine pass still did not show a direct policy-path read | [evidence/files/vm/defender-threat-file-hash-mpengine-1-20260325-100039/defender-threat-file-hash-mpengine-1.txt](../evidence/files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-20260325-100039/defender-threat-file-hash-mpengine-1.txt) | `high` | path, behavior, runtime-read |
@@ -22354,27 +20946,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, credui, enablesecurecredentialprompting |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / security/desc.md | [https://github.com/nohuto/win-config/blob/main/security/desc.md](https://github.com/nohuto/win-config/blob/main/security/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / security/assets/Windows-Defender.txt | [https://github.com/nohuto/win-config/blob/main/security/assets/Windows-Defender.txt](https://github.com/nohuto/win-config/blob/main/security/assets/Windows-Defender.txt) | Matched 1 audit token(s) in win-config. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -22483,27 +21061,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / security/desc.md | [https://github.com/nohuto/win-config/blob/main/security/desc.md](https://github.com/nohuto/win-config/blob/main/security/desc.md) | Matched 1 audit token(s) in win-config. |
-| win-config / security/assets/Windows-Defender.txt | [https://github.com/nohuto/win-config/blob/main/security/assets/Windows-Defender.txt](https://github.com/nohuto/win-config/blob/main/security/assets/Windows-Defender.txt) | Matched 1 audit token(s) in win-config. |
-| win-config / affinities/desc.md | [https://github.com/nohuto/win-config/blob/main/affinities/desc.md](https://github.com/nohuto/win-config/blob/main/affinities/desc.md) | Matched 1 audit token(s) in win-config. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -22573,7 +21137,7 @@ Windows Internals references:
 | `ms-uac-registry` | `official-doc` | `Microsoft official doc` | Microsoft Learn: User Account Control registry key entries | [https://learn.microsoft.com/en-us/windows/security/application-security/application-control/user-account-control/settings-and-configuration#registry-key-settings](https://learn.microsoft.com/en-us/windows/security/application-security/application-control/user-account-control/settings-and-configuration#registry-key-settings) | `high` | path, value, allowed-values, default, behavior |
 | `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
 | `nohuto-uac-bootphase` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - nohuto boot-phase UAC value read | [research/_source-mirrors/decompiled-pseudocode/ntoskrnl/PsBootPhaseComplete.c](_source-mirrors/decompiled-pseudocode/ntoskrnl/PsBootPhaseComplete.c) | `medium` | path, behavior, dependency |
-| `procmon-uac-never-notify` | `procmon-trace` | `VM Procmon trace` | Procmon capture - UAC policy value reads | [evidence/records/raw/procmon/security.uac-never-notify/uac-never-notify-capture-pml.md](../evidence/records/raw/procmon/security.uac-never-notify/uac-never-notify-capture-pml.md) and [evidence/records/raw/procmon/security.uac-never-notify/uac-never-notify-capture-csv.md](../evidence/records/raw/procmon/security.uac-never-notify/uac-never-notify-capture-csv.md) | `high` | path, value, behavior, ui-mapping |
+| `procmon-uac-never-notify` | `procmon-trace` | `VM Procmon trace` | Procmon capture - UAC policy value reads | [evidence/raw/procmon/security.uac-never-notify/uac-never-notify-capture-pml.md](../evidence/raw/procmon/security.uac-never-notify/uac-never-notify-capture-pml.md) and [evidence/raw/procmon/security.uac-never-notify/uac-never-notify-capture-csv.md](../evidence/raw/procmon/security.uac-never-notify/uac-never-notify-capture-csv.md) | `high` | path, value, behavior, ui-mapping |
 
 **Validation proof**
 
@@ -22643,28 +21207,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config, decompiled-pseudocode |
-| Matched tokens | policies, explorer, nowindowminimizingshortcuts |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / system/assets/noti-CLowDiskSpaceUI_CanShowStorageSenseToast.c | [https://github.com/nohuto/win-config/blob/main/system/assets/noti-CLowDiskSpaceUI_CanShowStorageSenseToast.c](https://github.com/nohuto/win-config/blob/main/system/assets/noti-CLowDiskSpaceUI_CanShowStorageSenseToast.c) | Matched 2 audit token(s) in win-config. |
-| win-config / system/assets/services.txt | [https://github.com/nohuto/win-config/blob/main/system/assets/services.txt](https://github.com/nohuto/win-config/blob/main/system/assets/services.txt) | Matched 2 audit token(s) in win-config. |
-| decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -22771,28 +21320,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config, win-registry, decompiled-pseudocode |
-| Matched tokens | autoreboot, crashcontrol |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 1 audit token(s) in win-config. |
-| win-registry / README.md | [https://github.com/nohuto/win-registry/blob/main/README.md](https://github.com/nohuto/win-registry/blob/main/README.md) | Matched 2 audit token(s) in win-registry. |
-| win-registry / records/CrashControl.txt | [https://github.com/nohuto/win-registry/blob/main/records/CrashControl.txt](https://github.com/nohuto/win-registry/blob/main/records/CrashControl.txt) | Matched 2 audit token(s) in win-registry. |
-| decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -22898,28 +21432,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config, win-registry, decompiled-pseudocode |
-| Matched tokens | crashcontrol |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 1 audit token(s) in win-config. |
-| win-registry / README.md | [https://github.com/nohuto/win-registry/blob/main/README.md](https://github.com/nohuto/win-registry/blob/main/README.md) | Matched 1 audit token(s) in win-registry. |
-| win-config / privacy/assets/crashdmp-SecureDump_PrepareForInit.c | [https://github.com/nohuto/win-config/blob/main/privacy/assets/crashdmp-SecureDump_PrepareForInit.c](https://github.com/nohuto/win-config/blob/main/privacy/assets/crashdmp-SecureDump_PrepareForInit.c) | Matched 1 audit token(s) in win-config. |
-| decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -22956,8 +21475,8 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `microsoft-support-display-parameters` | `official-doc` | `Microsoft official doc` | Microsoft Support: Stop error information isn't displayed on the blue screen in Windows | [https://support.microsoft.com/en-us/topic/stop-error-information-isn-t-displayed-on-the-blue-screen-in-windows-216528fb-94fd-11a2-2675-398ecf5cc237](https://support.microsoft.com/en-us/topic/stop-error-information-isn-t-displayed-on-the-blue-screen-in-windows-216528fb-94fd-11a2-2675-398ecf5cc237) | `high` | path, value, allowed-values, behavior |
 | `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
-| `vm-system.bsod-display-parameters-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for DisplayParameters | [evidence/records/captures/system-bsod-display-parameters-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/system-bsod-display-parameters-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/system-bsod-display-parameters-etw-20260427a/system-bsod-display-parameters-etw-20260427a-summary.json](../evidence/records/raw/etw-stackwalk/system-bsod-display-parameters-etw-20260427a/system-bsod-display-parameters-etw-20260427a-summary.json) | `low` | behavior, version-scope |
-| `vm-system.bsod-display-parameters-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for DisplayParameters | [evidence/records/raw/ghidra/ghidra-system-bsod-display-parameters-20260427a/summary.json](../evidence/records/raw/ghidra/ghidra-system-bsod-display-parameters-20260427a/summary.json) | `low` | version-scope |
+| `vm-system.bsod-display-parameters-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for DisplayParameters | [evidence/captures/system-bsod-display-parameters-etw-stackwalk-attempt-20260427.json](../evidence/captures/system-bsod-display-parameters-etw-stackwalk-attempt-20260427.json) and [evidence/raw/etw-stackwalk/system-bsod-display-parameters-etw-20260427a/system-bsod-display-parameters-etw-20260427a-summary.json](../evidence/raw/etw-stackwalk/system-bsod-display-parameters-etw-20260427a/system-bsod-display-parameters-etw-20260427a-summary.json) | `low` | behavior, version-scope |
+| `vm-system.bsod-display-parameters-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for DisplayParameters | [evidence/raw/ghidra/ghidra-system-bsod-display-parameters-20260427a/summary.json](../evidence/raw/ghidra/ghidra-system-bsod-display-parameters-20260427a/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -23025,28 +21544,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config, decompiled-pseudocode |
-| Matched tokens | policies, appx, allowautomaticapparchiving |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / system/assets/services.txt | [https://github.com/nohuto/win-config/blob/main/system/assets/services.txt](https://github.com/nohuto/win-config/blob/main/system/assets/services.txt) | Matched 2 audit token(s) in win-config. |
-| win-config / peripheral/desc.md | [https://github.com/nohuto/win-config/blob/main/peripheral/desc.md](https://github.com/nohuto/win-config/blob/main/peripheral/desc.md) | Matched 2 audit token(s) in win-config. |
-| decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -23153,28 +21657,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config, decompiled-pseudocode |
-| Matched tokens | schedule, maintenance, maintenancedisabled |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / system/assets/ScheduledTasksList.ps1 | [https://github.com/nohuto/win-config/blob/main/system/assets/ScheduledTasksList.ps1](https://github.com/nohuto/win-config/blob/main/system/assets/ScheduledTasksList.ps1) | Matched 2 audit token(s) in win-config. |
-| decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -23282,28 +21771,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config, decompiled-pseudocode |
-| Matched tokens | policies, disablebkgndgrouppolicy |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / system/assets/drivers.txt | [https://github.com/nohuto/win-config/blob/main/system/assets/drivers.txt](https://github.com/nohuto/win-config/blob/main/system/assets/drivers.txt) | Matched 1 audit token(s) in win-config. |
-| win-config / system/assets/noti-CLowDiskSpaceUI_CanShowStorageSenseToast.c | [https://github.com/nohuto/win-config/blob/main/system/assets/noti-CLowDiskSpaceUI_CanShowStorageSenseToast.c](https://github.com/nohuto/win-config/blob/main/system/assets/noti-CLowDiskSpaceUI_CanShowStorageSenseToast.c) | Matched 1 audit token(s) in win-config. |
-| decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -23411,28 +21885,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config, decompiled-pseudocode |
-| Matched tokens | policies |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 1 audit token(s) in win-config. |
-| win-config / system/assets/drivers.txt | [https://github.com/nohuto/win-config/blob/main/system/assets/drivers.txt](https://github.com/nohuto/win-config/blob/main/system/assets/drivers.txt) | Matched 1 audit token(s) in win-config. |
-| win-config / system/assets/noti-CLowDiskSpaceUI_CanShowStorageSenseToast.c | [https://github.com/nohuto/win-config/blob/main/system/assets/noti-CLowDiskSpaceUI_CanShowStorageSenseToast.c](https://github.com/nohuto/win-config/blob/main/system/assets/noti-CLowDiskSpaceUI_CanShowStorageSenseToast.c) | Matched 1 audit token(s) in win-config. |
-| decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -23556,28 +22015,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config, decompiled-pseudocode |
-| Matched tokens | policies, terminal, fdisableclip |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / system/assets/drivers.txt | [https://github.com/nohuto/win-config/blob/main/system/assets/drivers.txt](https://github.com/nohuto/win-config/blob/main/system/assets/drivers.txt) | Matched 2 audit token(s) in win-config. |
-| win-config / misc/desc.md | [https://github.com/nohuto/win-config/blob/main/misc/desc.md](https://github.com/nohuto/win-config/blob/main/misc/desc.md) | Matched 2 audit token(s) in win-config. |
-| decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -23688,27 +22132,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config, decompiled-pseudocode |
-| Matched tokens | gameconfigstore |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 1 audit token(s) in win-config. |
-| win-config / system/assets/gamemode-GamingHandlers.c | [https://github.com/nohuto/win-config/blob/main/system/assets/gamemode-GamingHandlers.c](https://github.com/nohuto/win-config/blob/main/system/assets/gamemode-GamingHandlers.c) | Matched 1 audit token(s) in win-config. |
-| decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -23746,11 +22176,11 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-windowed-games-optimizations` | `official-doc` | `Microsoft official doc` | Microsoft Support: Optimizations for windowed games in Windows | [https://support.microsoft.com/en-us/windows/optimizations-for-windowed-games-in-windows-11-3f006843-2c7e-4ed0-9a5e-f9389e535952](https://support.microsoft.com/en-us/windows/optimizations-for-windowed-games-in-windows-11-3f006843-2c7e-4ed0-9a5e-f9389e535952) | `medium` | behavior, side-effects, version-scope |
 | `repo-system-doc-fso` | `repo-doc` | `Current repo docs` | Repo system research notes for Fullscreen Optimizations | [Docs/system/system.md](../Docs/system/system.md) | `medium` | value, ui-mapping, app-mismatch |
-| `procmon-fullscreen-gameconfigstore-read` | `procmon-trace` | `VM Procmon trace` | Procmon capture - svchost.exe GameConfigStore fullscreen tuple read | [evidence/records/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-diag.txt](../evidence/records/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-diag.txt) and [evidence/records/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-diag.hits.csv](../evidence/records/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-diag.hits.csv) | `high` | path, value, behavior |
-| `ghidra-resourcepolicysrv-fullscreen` | `ghidra-headless` | `unspecified` | Our Ghidra decompilation - ResourcePolicyServer GameConfigStore path | [evidence/records/raw/ghidra/system.disable-fullscreen-optimizations/ghidra-matches.md](../evidence/records/raw/ghidra/system.disable-fullscreen-optimizations/ghidra-matches.md) and [evidence/records/raw/ghidra/system.disable-fullscreen-optimizations/evidence.json](../evidence/records/raw/ghidra/system.disable-fullscreen-optimizations/evidence.json) | `high` | path, value, behavior |
+| `procmon-fullscreen-gameconfigstore-read` | `procmon-trace` | `VM Procmon trace` | Procmon capture - svchost.exe GameConfigStore fullscreen tuple read | [evidence/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-diag.txt](../evidence/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-diag.txt) and [evidence/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-diag.hits.csv](../evidence/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-diag.hits.csv) | `high` | path, value, behavior |
+| `ghidra-resourcepolicysrv-fullscreen` | `ghidra-headless` | `unspecified` | Our Ghidra decompilation - ResourcePolicyServer GameConfigStore path | [evidence/raw/ghidra/system.disable-fullscreen-optimizations/ghidra-matches.md](../evidence/raw/ghidra/system.disable-fullscreen-optimizations/ghidra-matches.md) and [evidence/raw/ghidra/system.disable-fullscreen-optimizations/evidence.json](../evidence/raw/ghidra/system.disable-fullscreen-optimizations/evidence.json) | `high` | path, value, behavior |
 | `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `vm-batch-probe-20260320-disable-fullscreen-optimizations` | `runtime-diff` | `VM runtime diff` | Win25H2Clean reversible probe - Fullscreen optimizations override bundle | [evidence/files/vm/vm-batch-probe-20260320.json](../evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json) | `medium` | path, value, behavior, rollback |
-| `vm-fullscreen-automated-probe-20260326` | `vm-test` | `VM test / probe` | Win25H2Clean automated fullscreen follow-up | [evidence/records/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.txt](../evidence/records/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.txt) and [evidence/records/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.json](../evidence/records/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.json) and [evidence/records/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.hits.csv](../evidence/records/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.hits.csv) | `medium` | version-scope, rollback, open-question |
+| `vm-fullscreen-automated-probe-20260326` | `vm-test` | `VM test / probe` | Win25H2Clean automated fullscreen follow-up | [evidence/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.txt](../evidence/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.txt) and [evidence/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.json](../evidence/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.json) and [evidence/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.hits.csv](../evidence/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.hits.csv) | `medium` | version-scope, rollback, open-question |
 
 **Validation proof**
 
@@ -23931,28 +22361,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config, decompiled-pseudocode |
-| Matched tokens | panel, desktop, jpegimportquality |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / system/assets/jpeg-TranscodeImage.c | [https://github.com/nohuto/win-config/blob/main/system/assets/jpeg-TranscodeImage.c](https://github.com/nohuto/win-config/blob/main/system/assets/jpeg-TranscodeImage.c) | Matched 3 audit token(s) in win-config. |
-| win-config / system/assets/services.txt | [https://github.com/nohuto/win-config/blob/main/system/assets/services.txt](https://github.com/nohuto/win-config/blob/main/system/assets/services.txt) | Matched 2 audit token(s) in win-config. |
-| decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -23989,9 +22404,9 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `repo-system-doc-jpeg` | `repo-doc` | `Current repo docs` | Repo system research notes for wallpaper JPEG import quality | [Docs/system/system.md](../Docs/system/system.md) | `medium` | path, value, behavior, ui-mapping, app-mismatch |
-| `repo-system-decomp-jpegtranscode` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - Decompiled wallpaper transcode path for JPEGImportQuality | [Docs/system/assets/jpeg-TranscodeImage.c](../Docs/system/assets/jpeg-TranscodeImage.c) | `high` | path, value, behavior |
-| `procmon-jpegimportquality-explorer-read` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer JPEGImportQuality runtime read | [evidence/records/raw/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.txt](../evidence/records/raw/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.txt) and [evidence/records/raw/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.hits.csv](../evidence/records/raw/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.hits.csv) | `high` | path, value, behavior |
-| `ghidra-shell32-jpegimportquality` | `ghidra-headless` | `unspecified` | Our Ghidra decompilation - shell32 JPEGImportQuality transcode path | [evidence/records/raw/ghidra/system.disable-jpeg-reduction/shell32-jpegimportquality-ghidra.md](../evidence/records/raw/ghidra/system.disable-jpeg-reduction/shell32-jpegimportquality-ghidra.md) | `high` | path, value, behavior |
+| `repo-system-decomp-jpegtranscode` | `decompilation` | `Our Ghidra decompilation` | Decompiled wallpaper transcode path for JPEGImportQuality | [Docs/system/assets/jpeg-TranscodeImage.c](../Docs/system/assets/jpeg-TranscodeImage.c) | `high` | path, value, behavior |
+| `procmon-jpegimportquality-explorer-read` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Explorer JPEGImportQuality runtime read | [evidence/raw/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.txt](../evidence/raw/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.txt) and [evidence/raw/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.hits.csv](../evidence/raw/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.hits.csv) | `high` | path, value, behavior |
+| `ghidra-shell32-jpegimportquality` | `ghidra-headless` | `unspecified` | Our Ghidra decompilation - shell32 JPEGImportQuality transcode path | [evidence/raw/ghidra/system.disable-jpeg-reduction/shell32-jpegimportquality-ghidra.md](../evidence/raw/ghidra/system.disable-jpeg-reduction/shell32-jpegimportquality-ghidra.md) | `high` | path, value, behavior |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 | `vm-batch-probe-20260320-disable-jpeg-reduction` | `runtime-diff` | `VM runtime diff` | Win25H2Clean reversible probe - Wallpaper JPEG import quality | [evidence/files/vm/vm-batch-probe-20260320.json](../evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json) | `medium` | path, value, behavior, rollback |
 | `runtime-jpegimportquality-v31-20260327` | `etw-trace` | `unspecified` | Win25H2Clean v3.1 runtime lane - JPEG wallpaper apply | [evidence/files/vm/jpeg-import-quality-runtime-20260327-124349/summary.json](../evidence/files/vm-tooling-staging/jpeg-import-quality-runtime-20260327-124349/summary.json) and [evidence/files/vm/jpeg-import-quality-runtime-20260327-124349/jpeg-import-quality-runtime.etl.md](../evidence/files/vm-tooling-staging/jpeg-import-quality-runtime-20260327-124349/jpeg-import-quality-runtime.etl.md) | `medium` | path, value, behavior, rollback |
@@ -24062,28 +22477,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config, decompiled-pseudocode |
-| Matched tokens | winlogon, restartapps |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / visibility/desc.md | [https://github.com/nohuto/win-config/blob/main/visibility/desc.md](https://github.com/nohuto/win-config/blob/main/visibility/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 1 audit token(s) in win-config. |
-| win-config / security/desc.md | [https://github.com/nohuto/win-config/blob/main/security/desc.md](https://github.com/nohuto/win-config/blob/main/security/desc.md) | Matched 1 audit token(s) in win-config. |
-| decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -24123,8 +22523,8 @@ Windows Internals references:
 | `ms-support-restart-apps` | `official-doc` | `Microsoft official doc` | Microsoft support article for the Restart apps sign-in feature | [https://support.microsoft.com/en-us/windows/sign-in-options-in-windows-8ae09c04-c5da-41c9-972f-b126a13d18a8](https://support.microsoft.com/en-us/windows/sign-in-options-in-windows-8ae09c04-c5da-41c9-972f-b126a13d18a8) | `medium` | behavior, default, side-effects, version-scope |
 | `runtime-restartapps-registry-diff` | `runtime-diff` | `VM runtime diff` | Guest reversible probe - RestartApps registry mapping | [evidence/files/vm/restartapps_toggle_out.txt](../evidence/files/vm-tooling-staging/restartapps_toggle_out.txt) | `high` | value, behavior, version-scope |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
-| `vm-system.disable-restartable-apps-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for RestartApps | [evidence/records/captures/system-disable-restartable-apps-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/system-disable-restartable-apps-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/system-disable-restartable-apps-etw-20260427b/system-disable-restartable-apps-etw-20260427b-summary.json](../evidence/records/raw/etw-stackwalk/system-disable-restartable-apps-etw-20260427b/system-disable-restartable-apps-etw-20260427b-summary.json) | `low` | behavior, version-scope |
-| `vm-system.disable-restartable-apps-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for RestartApps | [evidence/records/raw/ghidra/ghidra-system-disable-restartable-apps-20260427b/summary.json](../evidence/records/raw/ghidra/ghidra-system-disable-restartable-apps-20260427b/summary.json) | `low` | version-scope |
+| `vm-system.disable-restartable-apps-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for RestartApps | [evidence/captures/system-disable-restartable-apps-etw-stackwalk-attempt-20260427.json](../evidence/captures/system-disable-restartable-apps-etw-stackwalk-attempt-20260427.json) and [evidence/raw/etw-stackwalk/system-disable-restartable-apps-etw-20260427b/system-disable-restartable-apps-etw-20260427b-summary.json](../evidence/raw/etw-stackwalk/system-disable-restartable-apps-etw-20260427b/system-disable-restartable-apps-etw-20260427b-summary.json) | `low` | behavior, version-scope |
+| `vm-system.disable-restartable-apps-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for RestartApps | [evidence/raw/ghidra/ghidra-system-disable-restartable-apps-20260427b/summary.json](../evidence/raw/ghidra/ghidra-system-disable-restartable-apps-20260427b/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -24192,28 +22592,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config, decompiled-pseudocode |
-| Matched tokens | policies, search, enabledynamiccontentinwsb |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / system/assets/services.txt | [https://github.com/nohuto/win-config/blob/main/system/assets/services.txt](https://github.com/nohuto/win-config/blob/main/system/assets/services.txt) | Matched 2 audit token(s) in win-config. |
-| win-config / misc/desc.md | [https://github.com/nohuto/win-config/blob/main/misc/desc.md](https://github.com/nohuto/win-config/blob/main/misc/desc.md) | Matched 2 audit token(s) in win-config. |
-| decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -24320,28 +22705,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config, decompiled-pseudocode |
-| Matched tokens | policies, search, preventremotequeries |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / system/assets/services.txt | [https://github.com/nohuto/win-config/blob/main/system/assets/services.txt](https://github.com/nohuto/win-config/blob/main/system/assets/services.txt) | Matched 2 audit token(s) in win-config. |
-| win-config / misc/desc.md | [https://github.com/nohuto/win-config/blob/main/misc/desc.md](https://github.com/nohuto/win-config/blob/main/misc/desc.md) | Matched 2 audit token(s) in win-config. |
-| decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -24447,26 +22817,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `category-fallback` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `True` |
-| Source repositories | win-config, decompiled-pseudocode |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
 | Matched tokens |  |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics. |
-| decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Lineage note |  |
 
 **Targets**
 
@@ -24572,28 +22929,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config, decompiled-pseudocode |
-| Matched tokens | explorer, shell, icons, 29 |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 4 audit token(s) in win-config. |
-| win-config / misc/desc.md | [https://github.com/nohuto/win-config/blob/main/misc/desc.md](https://github.com/nohuto/win-config/blob/main/misc/desc.md) | Matched 4 audit token(s) in win-config. |
-| win-config / power/desc.md | [https://github.com/nohuto/win-config/blob/main/power/desc.md](https://github.com/nohuto/win-config/blob/main/power/desc.md) | Matched 4 audit token(s) in win-config. |
-| decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -24698,28 +23040,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config, win-registry, decompiled-pseudocode |
-| Matched tokens | explorer, serialize |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-registry / README.md | [https://github.com/nohuto/win-registry/blob/main/README.md](https://github.com/nohuto/win-registry/blob/main/README.md) | Matched 2 audit token(s) in win-registry. |
-| win-config / system/assets/drivers.txt | [https://github.com/nohuto/win-config/blob/main/system/assets/drivers.txt](https://github.com/nohuto/win-config/blob/main/system/assets/drivers.txt) | Matched 1 audit token(s) in win-config. |
-| decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -24756,9 +23083,9 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `repo-system-doc-startup-delay` | `repo-doc` | `Current repo docs` | Repo system research notes for startup delay | [Docs/system/system.md](../Docs/system/system.md) | `medium` | path, value, ui-mapping, app-mismatch |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
-| `ghidra-explorer-serialize-search` | `ghidra-headless` | `unspecified` | Our Ghidra headless string search on explorer.exe for Serialize | [evidence/records/raw/ghidra/system.disable-startup-delay/ghidra_explorer_serialize.txt](../evidence/records/raw/ghidra/system.disable-startup-delay/ghidra_explorer_serialize.txt) | `medium` | path, string-reference, behavior |
+| `ghidra-explorer-serialize-search` | `ghidra-headless` | `unspecified` | Our Ghidra headless string search on explorer.exe for Serialize | [evidence/raw/ghidra/system.disable-startup-delay/ghidra_explorer_serialize.txt](../evidence/raw/ghidra/system.disable-startup-delay/ghidra_explorer_serialize.txt) | `medium` | path, string-reference, behavior |
 | `vm-batch-probe-20260320-disable-startup-delay` | `runtime-diff` | `VM runtime diff` | Win25H2Clean reversible probe - Explorer startup delay | [evidence/files/vm/vm-batch-probe-20260320.json](../evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json) | `medium` | path, value, behavior, rollback |
-| `procmon-startup-delay-shell-restart` | `procmon-trace` | `VM Procmon trace` | VM Procmon trace - Explorer shell restart reads StartupDelayInMSec | [evidence/records/raw/procmon/system.disable-startup-delay/procmon-startup-delay.pml.md](../evidence/records/raw/procmon/system.disable-startup-delay/procmon-startup-delay.pml.md) | `medium` | path, value, behavior, ui-mapping |
+| `procmon-startup-delay-shell-restart` | `procmon-trace` | `VM Procmon trace` | VM Procmon trace - Explorer shell restart reads StartupDelayInMSec | [evidence/raw/procmon/system.disable-startup-delay/procmon-startup-delay.pml.md](../evidence/raw/procmon/system.disable-startup-delay/procmon-startup-delay.pml.md) | `medium` | path, value, behavior, ui-mapping |
 | `wpr-startup-delay-shell-restart` | `wpr-trace` | `unspecified` | Win25H2Clean WPR trace - Explorer shell restart with StartupDelayInMSec missing and 0 | [research/notes/startup-delay-wpr-trace-20260326.md](notes/startup-delay-wpr-trace-20260326.md) | `medium` | behavior, runtime-trace, shell-health |
 
 **Artifact refs**
@@ -24838,28 +23165,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config, decompiled-pseudocode |
-| Matched tokens | policies, storagesense, allowstoragesenseglobal |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / system/assets/noti-CLowDiskSpaceUI_CanShowStorageSenseToast.c | [https://github.com/nohuto/win-config/blob/main/system/assets/noti-CLowDiskSpaceUI_CanShowStorageSenseToast.c](https://github.com/nohuto/win-config/blob/main/system/assets/noti-CLowDiskSpaceUI_CanShowStorageSenseToast.c) | Matched 3 audit token(s) in win-config. |
-| win-config / peripheral/desc.md | [https://github.com/nohuto/win-config/blob/main/peripheral/desc.md](https://github.com/nohuto/win-config/blob/main/peripheral/desc.md) | Matched 2 audit token(s) in win-config. |
-| decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -24966,28 +23278,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config, decompiled-pseudocode |
-| Matched tokens | policies, storagesense, allowstoragesensetemporaryfilescleanup |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / system/assets/noti-CLowDiskSpaceUI_CanShowStorageSenseToast.c | [https://github.com/nohuto/win-config/blob/main/system/assets/noti-CLowDiskSpaceUI_CanShowStorageSenseToast.c](https://github.com/nohuto/win-config/blob/main/system/assets/noti-CLowDiskSpaceUI_CanShowStorageSenseToast.c) | Matched 2 audit token(s) in win-config. |
-| win-config / peripheral/desc.md | [https://github.com/nohuto/win-config/blob/main/peripheral/desc.md](https://github.com/nohuto/win-config/blob/main/peripheral/desc.md) | Matched 2 audit token(s) in win-config. |
-| decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -25095,28 +23392,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config, decompiled-pseudocode |
-| Matched tokens | policies, explorer, nousestoreopenwith |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / system/assets/noti-CLowDiskSpaceUI_CanShowStorageSenseToast.c | [https://github.com/nohuto/win-config/blob/main/system/assets/noti-CLowDiskSpaceUI_CanShowStorageSenseToast.c](https://github.com/nohuto/win-config/blob/main/system/assets/noti-CLowDiskSpaceUI_CanShowStorageSenseToast.c) | Matched 2 audit token(s) in win-config. |
-| win-config / system/assets/services.txt | [https://github.com/nohuto/win-config/blob/main/system/assets/services.txt](https://github.com/nohuto/win-config/blob/main/system/assets/services.txt) | Matched 2 audit token(s) in win-config. |
-| decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -25223,28 +23505,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config, win-registry, decompiled-pseudocode |
-| Matched tokens | overlayminfps |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 1 audit token(s) in win-config. |
-| win-registry / README.md | [https://github.com/nohuto/win-registry/blob/main/README.md](https://github.com/nohuto/win-registry/blob/main/README.md) | Matched 1 audit token(s) in win-registry. |
-| win-registry / assets/dwm/OverlayMinFPS.c | [https://github.com/nohuto/win-registry/blob/main/assets/dwm/OverlayMinFPS.c](https://github.com/nohuto/win-registry/blob/main/assets/dwm/OverlayMinFPS.c) | Matched 1 audit token(s) in win-registry. |
-| decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -25348,28 +23615,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config, decompiled-pseudocode |
-| Matched tokens | gamebar, autogamemodeenabled |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / system/assets/gamemode-GamingHandlers.c | [https://github.com/nohuto/win-config/blob/main/system/assets/gamemode-GamingHandlers.c](https://github.com/nohuto/win-config/blob/main/system/assets/gamemode-GamingHandlers.c) | Matched 1 audit token(s) in win-config. |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 1 audit token(s) in win-config. |
-| decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -25405,8 +23657,8 @@ Windows Internals references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-game-mode-feature` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Game Mode | [https://learn.microsoft.com/en-us/windows/win32/api/_gamemode/](https://learn.microsoft.com/en-us/windows/win32/api/_gamemode/) | `high` | behavior, side-effects, version-scope |
-| `procmon-gamemode-admin` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Game Mode AutoGameModeEnabled reads on Administrator profile | [evidence/records/raw/procmon/system.enable-game-mode/gamemode_admin_probe.txt](../evidence/records/raw/procmon/system.enable-game-mode/gamemode_admin_probe.txt) and [evidence/records/raw/procmon/system.enable-game-mode/gamemode_admin_zero_probe.txt](../evidence/records/raw/procmon/system.enable-game-mode/gamemode_admin_zero_probe.txt) | `high` | path, value, behavior, ui-mapping, version-scope |
-| `repo-system-decomp-game-mode` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - Decompiled Game Mode handler string reference | [Docs/system/assets/gamemode-GamingHandlers.c](../Docs/system/assets/gamemode-GamingHandlers.c) | `medium` | path, value, behavior, ui-mapping |
+| `procmon-gamemode-admin` | `procmon-trace` | `VM Procmon trace` | Procmon capture - Game Mode AutoGameModeEnabled reads on Administrator profile | [evidence/raw/procmon/system.enable-game-mode/gamemode_admin_probe.txt](../evidence/raw/procmon/system.enable-game-mode/gamemode_admin_probe.txt) and [evidence/raw/procmon/system.enable-game-mode/gamemode_admin_zero_probe.txt](../evidence/raw/procmon/system.enable-game-mode/gamemode_admin_zero_probe.txt) | `high` | path, value, behavior, ui-mapping, version-scope |
+| `repo-system-decomp-game-mode` | `decompilation` | `Our Ghidra decompilation` | Decompiled Game Mode handler string reference | [Docs/system/assets/gamemode-GamingHandlers.c](../Docs/system/assets/gamemode-GamingHandlers.c) | `medium` | path, value, behavior, ui-mapping |
 | `repo-system-doc-game-mode` | `repo-doc` | `Current repo docs` | Repo system research notes for Game Mode | [Docs/system/system.md](../Docs/system/system.md) | `medium` | path, value, ui-mapping, app-mismatch |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 
@@ -25476,28 +23728,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config, win-registry, decompiled-pseudocode |
-| Matched tokens | graphicsdrivers, hwschmode |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-registry / README.md | [https://github.com/nohuto/win-registry/blob/main/README.md](https://github.com/nohuto/win-registry/blob/main/README.md) | Matched 2 audit token(s) in win-registry. |
-| win-registry / records/Graphics-Drivers.txt | [https://github.com/nohuto/win-registry/blob/main/records/Graphics-Drivers.txt](https://github.com/nohuto/win-registry/blob/main/records/Graphics-Drivers.txt) | Matched 2 audit token(s) in win-registry. |
-| decompiled-pseudocode / dxgkrnl | [https://github.com/nohuto/decompiled-pseudocode/tree/main/dxgkrnl](https://github.com/nohuto/decompiled-pseudocode/tree/main/dxgkrnl) | Graphics kernel pseudocode relevant to GraphicsDrivers / TDR / HAGS style registry work. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -25537,8 +23774,8 @@ Windows Internals references:
 | `repo-system-doc-hags` | `repo-doc` | `Current repo docs` | Repo system research notes for HAGS | [Docs/system/system.md](../Docs/system/system.md) | `medium` | path, value, ui-mapping, app-mismatch |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
 | `runtime-hags-registry-diff` | `runtime-diff` | `VM runtime diff` | Guest reversible probe for HwSchMode | [evidence/files/vm/hags_toggle_out.txt](../evidence/files/vm-tooling-staging/hags_toggle_out.txt) | `high` | path, value, behavior, version-scope |
-| `vm-system.enable-hags-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for HwSchMode | [evidence/records/captures/system-enable-hags-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/system-enable-hags-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/system-enable-hags-etw-20260427b/system-enable-hags-etw-20260427b-summary.json](../evidence/records/raw/etw-stackwalk/system-enable-hags-etw-20260427b/system-enable-hags-etw-20260427b-summary.json) | `low` | behavior, version-scope |
-| `vm-system.enable-hags-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for HwSchMode | [evidence/records/raw/ghidra/ghidra-system-enable-hags-20260427b/summary.json](../evidence/records/raw/ghidra/ghidra-system-enable-hags-20260427b/summary.json) | `low` | version-scope |
+| `vm-system.enable-hags-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for HwSchMode | [evidence/captures/system-enable-hags-etw-stackwalk-attempt-20260427.json](../evidence/captures/system-enable-hags-etw-stackwalk-attempt-20260427.json) and [evidence/raw/etw-stackwalk/system-enable-hags-etw-20260427b/system-enable-hags-etw-20260427b-summary.json](../evidence/raw/etw-stackwalk/system-enable-hags-etw-20260427b/system-enable-hags-etw-20260427b-summary.json) | `low` | behavior, version-scope |
+| `vm-system.enable-hags-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for HwSchMode | [evidence/raw/ghidra/ghidra-system-enable-hags-20260427b/summary.json](../evidence/raw/ghidra/ghidra-system-enable-hags-20260427b/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -25606,28 +23843,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config, decompiled-pseudocode |
-| Matched tokens | policies, search, allowindexingencryptedstoresoritems |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / system/assets/services.txt | [https://github.com/nohuto/win-config/blob/main/system/assets/services.txt](https://github.com/nohuto/win-config/blob/main/system/assets/services.txt) | Matched 2 audit token(s) in win-config. |
-| win-config / misc/desc.md | [https://github.com/nohuto/win-config/blob/main/misc/desc.md](https://github.com/nohuto/win-config/blob/main/misc/desc.md) | Matched 2 audit token(s) in win-config. |
-| decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -25778,7 +24000,7 @@ Current writes
 | --- | --- | --- | --- | --- | --- | --- |
 | `vm-executive-lightweight-runtime-20260330` | `etw-trace` | `unspecified` | Tools-hardened lightweight ETW runtime follow-up for the Executive worker-thread pair | [evidence/files/vm/executive-worker-threads-lightweight-runtime-20260330-122422/summary.json](../evidence/files/vm-tooling-staging/executive-worker-threads-lightweight-runtime-20260330-122422/summary.json) and [evidence/files/vm/executive-worker-threads-lightweight-runtime-20260330-122422/system-executive-additional-worker-threads/summary.json](../evidence/files/vm-tooling-staging/executive-worker-threads-lightweight-runtime-20260330-122422/system-executive-additional-worker-threads/summary.json) and [research/notes/system-executive-additional-worker-threads-lightweight-runtime-20260330.md](notes/system-executive-additional-worker-threads-lightweight-runtime-20260330.md) | `high` | path, value, behavior, runtime-proof, version-scope |
 | `vm-session-manager-executive-baseline-20260328` | `registry-observation` | `VM registry observation` | Win25H2Clean Session Manager Executive baseline export | [evidence/files/vm/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.reg](../evidence/files/vm-tooling-staging/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.reg) and [evidence/files/vm/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.txt](../evidence/files/vm-tooling-staging/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.txt) | `high` | path, value, default, version-scope |
-| `ghidra-executive-worker-threads-nextgate-ntoskrnl-20260328` | `decompilation` | `Our Ghidra decompilation` | Current-build ntoskrnl Ghidra fallback for the Executive worker-thread pair | [evidence/records/raw/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md](../evidence/records/raw/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md) and [evidence/records/raw/ghidra/kernel-power-nextgate-ntoskrnl/evidence.json](../evidence/records/raw/ghidra/kernel-power-nextgate-ntoskrnl/evidence.json) | `high` | path, value, behavior, version-scope |
+| `ghidra-executive-worker-threads-nextgate-ntoskrnl-20260328` | `decompilation` | `Our Ghidra decompilation` | Current-build ntoskrnl Ghidra fallback for the Executive worker-thread pair | [evidence/raw/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md](../evidence/raw/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md) and [evidence/raw/ghidra/kernel-power-nextgate-ntoskrnl/evidence.json](../evidence/raw/ghidra/kernel-power-nextgate-ntoskrnl/evidence.json) | `high` | path, value, behavior, version-scope |
 | `kernel-power-existing-static-probe-20260328` | `inference` | `unspecified` | Kernel power static probe summary for existing Session Manager candidates | [registry-research-framework/audit/kernel-power-existing-static-probe-20260328.json](../registry-research-framework/audit/kernel-power-existing-static-probe-20260328.json) and [research/notes/kernel-power-existing-static-triage-20260328.md](notes/kernel-power-existing-static-triage-20260328.md) | `medium` | path, version-scope |
 | `kernel-power-existing-next-gate-20260328` | `inference` | `unspecified` | Kernel power next-gate intake summary | [registry-research-framework/audit/kernel-power-existing-next-gate-20260328.json](../registry-research-framework/audit/kernel-power-existing-next-gate-20260328.json) and [research/notes/kernel-power-next-gate-ghidra-review-20260328.md](notes/kernel-power-next-gate-ghidra-review-20260328.md) | `medium` | risk, version-scope |
 | `vm-executive-etl-registry-review-20260328` | `etw-trace` | `unspecified` | Bounded host-side ETL review for Session Manager Executive | [evidence/files/vm/watchdog-timeouts-boottrace-20260328-090631/watchdog-timeouts-boot.etl.md](../evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/watchdog-timeouts-boot.etl.md) and [evidence/files/vm/watchdog-timeouts-boottrace-20260328-090631/registry-dump-session-manager-executive.txt](../evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/registry-dump-session-manager-executive.txt) and [research/notes/system-executive-additional-worker-threads-etl-registry-review-20260328.md](notes/system-executive-additional-worker-threads-etl-registry-review-20260328.md) | `medium` | path, behavior, version-scope |
@@ -25836,7 +24058,7 @@ Current writes
 | --- | --- |
 | Status | `not-mapped` |
 | Provider source | not currently shipped in the app |
-| Notes | The current app does not expose UuidSequenceNumber as a direct tweak or UI surface. |
+| Notes | The checked-in app does not expose UuidSequenceNumber as a direct tweak or UI surface. |
 
 **Evidence class**
 
@@ -25894,7 +24116,7 @@ Current writes
 | `vm-session-manager-executive-baseline-20260328` | `registry-observation` | `VM registry observation` | Win25H2Clean Session Manager Executive baseline export | [evidence/files/vm/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.reg](../evidence/files/vm-tooling-staging/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.reg) and [evidence/files/vm/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.txt](../evidence/files/vm-tooling-staging/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.txt) | `high` | path, value, default, version-scope |
 | `vm-session-manager-executive-phase0-20260329` | `registry-observation` | `VM registry observation` | Win25H2Clean 96-key phase-0 existence batch | [evidence/files/vm/registry-batch-existence-96-live-20260329-100629/results.json](../evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json) | `high` | path, value, default, version-scope |
 | `static-executive-uuid-sequence-number-20260330` | `decompilation` | `Our Ghidra decompilation` | Residual static triage for UuidSequenceNumber | [evidence/files/vm/registry-batch-string-20260330-141213/results.json](../evidence/files/vm-tooling-staging/registry-batch-string-20260330-141213/results.json) and [research/notes/kernel-power-96-residual-value-exists-static-triage-20260330.md](notes/kernel-power-96-residual-value-exists-static-triage-20260330.md) | `high` | path, value, version-scope |
-| `kvm-static-executive-uuid-string-20260406` | `decompilation` | `Our Ghidra decompilation` | KVM PDB-backed string replay for UuidSequenceNumber | [evidence/records/raw/ghidra/uuidsequence-string-kvm-20260406d/uuidsequence-string-kvm-20260406d-evidence.json](../evidence/records/raw/ghidra/uuidsequence-string-kvm-20260406d/uuidsequence-string-kvm-20260406d-evidence.json) and [evidence/records/raw/ghidra/uuidsequence-string-kvm-20260406h/uuidsequence-string-kvm-20260406h-evidence.json](../evidence/records/raw/ghidra/uuidsequence-string-kvm-20260406h/uuidsequence-string-kvm-20260406h-evidence.json) and [research/notes/system-executive-uuid-sequence-number-kvm-string-follow-up-20260406.md](notes/system-executive-uuid-sequence-number-kvm-string-follow-up-20260406.md) | `medium` | path, value, version-scope |
+| `kvm-static-executive-uuid-string-20260406` | `decompilation` | `Our Ghidra decompilation` | KVM PDB-backed string replay for UuidSequenceNumber | [evidence/raw/ghidra/uuidsequence-string-kvm-20260406d/uuidsequence-string-kvm-20260406d-evidence.json](../evidence/raw/ghidra/uuidsequence-string-kvm-20260406d/uuidsequence-string-kvm-20260406d-evidence.json) and [evidence/raw/ghidra/uuidsequence-string-kvm-20260406h/uuidsequence-string-kvm-20260406h-evidence.json](../evidence/raw/ghidra/uuidsequence-string-kvm-20260406h/uuidsequence-string-kvm-20260406h-evidence.json) and [research/notes/system-executive-uuid-sequence-number-kvm-string-follow-up-20260406.md](notes/system-executive-uuid-sequence-number-kvm-string-follow-up-20260406.md) | `medium` | path, value, version-scope |
 | `vm-session-manager-executive-etl-adjacent-20260328` | `etw-trace` | `unspecified` | Bounded Executive ETL review with adjacent UuidSequenceNumber activity | [evidence/files/vm/watchdog-timeouts-boottrace-20260328-090631/watchdog-timeouts-boot.etl.md](../evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/watchdog-timeouts-boot.etl.md) and [evidence/files/vm/watchdog-timeouts-boottrace-20260328-090631/registry-dump-session-manager-executive.txt](../evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/registry-dump-session-manager-executive.txt) and [research/notes/system-executive-additional-worker-threads-etl-registry-review-20260328.md](notes/system-executive-additional-worker-threads-etl-registry-review-20260328.md) | `medium` | path, behavior, runtime-proof, version-scope |
 | `vm-executive-uuid-lightweight-runtime-20260330` | `etw-trace` | `unspecified` | Tools-hardened lightweight ETW follow-up for UuidSequenceNumber | [evidence/files/vm/executive-uuid-sequence-number-lightweight-runtime-20260330-150344/summary.json](../evidence/files/vm-tooling-staging/executive-uuid-sequence-number-lightweight-runtime-20260330-150344/summary.json) and [evidence/files/vm/executive-uuid-sequence-number-lightweight-runtime-20260330-150344/system-executive-uuid-sequence-number/summary.json](../evidence/files/vm-tooling-staging/executive-uuid-sequence-number-lightweight-runtime-20260330-150344/system-executive-uuid-sequence-number/summary.json) and [research/notes/system-executive-uuid-sequence-number-lightweight-runtime-20260330.md](notes/system-executive-uuid-sequence-number-lightweight-runtime-20260330.md) | `medium` | behavior, risk, version-scope |
 | `vm-executive-uuid-kvm-procmon-runtime-20260406` | `procmon-trace` | `VM Procmon trace` | KVM Procmon UUID / RPC / COM replay for UuidSequenceNumber | [evidence/files/vm/uuidsequence-procmon-kvm-20260406a/uuidsequence-procmon-kvm-20260406a.txt](../evidence/files/vm-tooling-staging/uuidsequence-procmon-kvm-20260406a/uuidsequence-procmon-kvm-20260406a.txt) and [evidence/files/vm/uuidsequence-procmon-kvm-20260406a/uuidsequence-procmon-kvm-20260406a-summary.json](../evidence/files/vm-tooling-staging/uuidsequence-procmon-kvm-20260406a/uuidsequence-procmon-kvm-20260406a-summary.json) and [research/notes/system-executive-uuid-sequence-number-kvm-procmon-runtime-20260406.md](notes/system-executive-uuid-sequence-number-kvm-procmon-runtime-20260406.md) | `medium` | behavior, risk, version-scope |
@@ -25914,7 +24136,7 @@ Current writes
 | `reactos-executive-uuid-adjacent-20260328` | `open-source-reference` | `unspecified` | ReactOS adjacent context for UuidSequenceNumber | [evidence/files/external/reactos/system.executive-additional-worker-threads/summary.json](../evidence/files/external/reactos/system.executive-additional-worker-threads/summary.json) and [research/notes/system-executive-additional-worker-threads-reactos-hypothesis-20260328.md](notes/system-executive-additional-worker-threads-reactos-hypothesis-20260328.md) | `medium` | behavior, dependency, version-scope |
 | `vm-executive-uuid-kvm-wpr-addboot-20260407` | `wpr` | `unspecified` | Linux KVM boot-registry WPR addboot follow-up for UuidSequenceNumber | [evidence/files/vm/uuidsequence-wpr-addboot-kvm-20260407cd/c-summary-arm.json](../evidence/files/vm-tooling-staging/uuidsequence-wpr-addboot-kvm-20260407cd/c-summary-arm.json) and [evidence/files/vm/uuidsequence-wpr-addboot-kvm-20260407cd/c-stage.json](../evidence/files/vm-tooling-staging/uuidsequence-wpr-addboot-kvm-20260407cd/c-stage.json) and [evidence/files/vm/uuidsequence-wpr-addboot-kvm-20260407cd/d-summary-arm.json](../evidence/files/vm-tooling-staging/uuidsequence-wpr-addboot-kvm-20260407cd/d-summary-arm.json) and [evidence/files/vm/uuidsequence-wpr-addboot-kvm-20260407cd/d-stage.json](../evidence/files/vm-tooling-staging/uuidsequence-wpr-addboot-kvm-20260407cd/d-stage.json) and [evidence/files/vm/uuidsequence-wpr-addboot-kvm-20260407cd/host-review.json](../evidence/files/vm-tooling-staging/uuidsequence-wpr-addboot-kvm-20260407cd/host-review.json) and [research/notes/system-executive-uuid-sequence-number-kvm-wpr-addboot-follow-up-20260407.md](notes/system-executive-uuid-sequence-number-kvm-wpr-addboot-follow-up-20260407.md) | `medium` | behavior, risk, version-scope |
 | `vm-executive-uuid-kvm-wpr-qga-runtime-read-20260413` | `wpr` | `unspecified` | Linux KVM QGA-launched WPR boot-registry runtime read for UuidSequenceNumber | [evidence/files/vm/uuidsequence-wpr-qga-runtime-read-20260413/uuid-sequence-number-wpr-qga-20260413a-summary.json](../evidence/files/vm-tooling-staging/uuidsequence-wpr-qga-runtime-read-20260413/uuid-sequence-number-wpr-qga-20260413a-summary.json) and [evidence/files/vm/uuidsequence-wpr-qga-runtime-read-20260413/uuid-sequence-number-wpr-qga-20260413a.normalized.json](../evidence/files/vm-tooling-staging/uuidsequence-wpr-qga-runtime-read-20260413/uuid-sequence-number-wpr-qga-20260413a.normalized.json) and [research/notes/system-executive-uuid-sequence-number-wpr-qga-runtime-read-20260413.md](notes/system-executive-uuid-sequence-number-wpr-qga-runtime-read-20260413.md) | `high` | path, value, behavior, runtime-proof, version-scope |
-| `vm-system.executive-uuid-sequence-number-etw-stackwalk-20260424e` | `etw-trace` | `unspecified` | Bounded KVM ETW stackwalk captures exact UuidSequenceNumber helper query | [evidence/records/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/system.executive-uuid-sequence-number-etw-20260424e-summary.json](../evidence/records/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/system.executive-uuid-sequence-number-etw-20260424e-summary.json) and [evidence/records/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/system.executive-uuid-sequence-number-etw-20260424e-stage.json](../evidence/records/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/system.executive-uuid-sequence-number-etw-20260424e-stage.json) and [evidence/records/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/system.executive-uuid-sequence-number-etw-20260424e.etl](../evidence/records/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/system.executive-uuid-sequence-number-etw-20260424e.etl) and [evidence/records/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/normalized-registry-bundle.json](../evidence/records/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/normalized-registry-bundle.json) and [evidence/records/captures/system-executive-uuid-sequence-number-etw-stackwalk-20260424.json](../evidence/records/captures/system-executive-uuid-sequence-number-etw-stackwalk-20260424.json) | `medium` | runtime-observation, version-scope |
+| `vm-system.executive-uuid-sequence-number-etw-stackwalk-20260424e` | `etw-trace` | `unspecified` | Bounded KVM ETW stackwalk captures exact UuidSequenceNumber helper query | [evidence/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/system.executive-uuid-sequence-number-etw-20260424e-summary.json](../evidence/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/system.executive-uuid-sequence-number-etw-20260424e-summary.json) and [evidence/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/system.executive-uuid-sequence-number-etw-20260424e-stage.json](../evidence/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/system.executive-uuid-sequence-number-etw-20260424e-stage.json) and [evidence/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/system.executive-uuid-sequence-number-etw-20260424e.etl](../evidence/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/system.executive-uuid-sequence-number-etw-20260424e.etl) and [evidence/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/normalized-registry-bundle.json) and [evidence/captures/system-executive-uuid-sequence-number-etw-stackwalk-20260424.json](../evidence/captures/system-executive-uuid-sequence-number-etw-stackwalk-20260424.json) | `medium` | runtime-observation, version-scope |
 
 **Validation proof**
 
@@ -25982,28 +24204,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config, win-registry, decompiled-pseudocode |
-| Matched tokens | graphicsdrivers, tdrddidelay |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-registry / README.md | [https://github.com/nohuto/win-registry/blob/main/README.md](https://github.com/nohuto/win-registry/blob/main/README.md) | Matched 2 audit token(s) in win-registry. |
-| win-config / security/assets/TdrInit.c | [https://github.com/nohuto/win-config/blob/main/security/assets/TdrInit.c](https://github.com/nohuto/win-config/blob/main/security/assets/TdrInit.c) | Matched 2 audit token(s) in win-config. |
-| decompiled-pseudocode / dxgkrnl | [https://github.com/nohuto/decompiled-pseudocode/tree/main/dxgkrnl](https://github.com/nohuto/decompiled-pseudocode/tree/main/dxgkrnl) | Graphics kernel pseudocode relevant to GraphicsDrivers / TDR / HAGS style registry work. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -26105,28 +24312,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config, win-registry, decompiled-pseudocode |
-| Matched tokens | graphicsdrivers, tdrdelay |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-registry / README.md | [https://github.com/nohuto/win-registry/blob/main/README.md](https://github.com/nohuto/win-registry/blob/main/README.md) | Matched 2 audit token(s) in win-registry. |
-| win-config / security/assets/TdrInit.c | [https://github.com/nohuto/win-config/blob/main/security/assets/TdrInit.c](https://github.com/nohuto/win-config/blob/main/security/assets/TdrInit.c) | Matched 2 audit token(s) in win-config. |
-| decompiled-pseudocode / dxgkrnl | [https://github.com/nohuto/decompiled-pseudocode/tree/main/dxgkrnl](https://github.com/nohuto/decompiled-pseudocode/tree/main/dxgkrnl) | Graphics kernel pseudocode relevant to GraphicsDrivers / TDR / HAGS style registry work. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -26228,28 +24420,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config, win-registry, decompiled-pseudocode |
-| Matched tokens | graphicsdrivers, tdrlevel |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-registry / README.md | [https://github.com/nohuto/win-registry/blob/main/README.md](https://github.com/nohuto/win-registry/blob/main/README.md) | Matched 2 audit token(s) in win-registry. |
-| win-config / security/assets/TdrInit.c | [https://github.com/nohuto/win-config/blob/main/security/assets/TdrInit.c](https://github.com/nohuto/win-config/blob/main/security/assets/TdrInit.c) | Matched 2 audit token(s) in win-config. |
-| decompiled-pseudocode / dxgkrnl | [https://github.com/nohuto/decompiled-pseudocode/tree/main/dxgkrnl](https://github.com/nohuto/decompiled-pseudocode/tree/main/dxgkrnl) | Graphics kernel pseudocode relevant to GraphicsDrivers / TDR / HAGS style registry work. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -26354,28 +24531,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config, win-registry, decompiled-pseudocode |
-| Matched tokens | graphicsdrivers, tdrlimitcount |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-registry / README.md | [https://github.com/nohuto/win-registry/blob/main/README.md](https://github.com/nohuto/win-registry/blob/main/README.md) | Matched 2 audit token(s) in win-registry. |
-| win-config / security/assets/TdrInit.c | [https://github.com/nohuto/win-config/blob/main/security/assets/TdrInit.c](https://github.com/nohuto/win-config/blob/main/security/assets/TdrInit.c) | Matched 2 audit token(s) in win-config. |
-| decompiled-pseudocode / dxgkrnl | [https://github.com/nohuto/decompiled-pseudocode/tree/main/dxgkrnl](https://github.com/nohuto/decompiled-pseudocode/tree/main/dxgkrnl) | Graphics kernel pseudocode relevant to GraphicsDrivers / TDR / HAGS style registry work. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -26477,28 +24639,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config, win-registry, decompiled-pseudocode |
-| Matched tokens | graphicsdrivers, tdrlimittime |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-registry / README.md | [https://github.com/nohuto/win-registry/blob/main/README.md](https://github.com/nohuto/win-registry/blob/main/README.md) | Matched 2 audit token(s) in win-registry. |
-| win-config / security/assets/TdrInit.c | [https://github.com/nohuto/win-config/blob/main/security/assets/TdrInit.c](https://github.com/nohuto/win-config/blob/main/security/assets/TdrInit.c) | Matched 2 audit token(s) in win-config. |
-| decompiled-pseudocode / dxgkrnl | [https://github.com/nohuto/decompiled-pseudocode/tree/main/dxgkrnl](https://github.com/nohuto/decompiled-pseudocode/tree/main/dxgkrnl) | Graphics kernel pseudocode relevant to GraphicsDrivers / TDR / HAGS style registry work. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -26600,28 +24747,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config, win-registry, decompiled-pseudocode |
-| Matched tokens | session, manager, kernel, threaddpcenable |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 4 audit token(s) in win-config. |
-| win-config / network/desc.md | [https://github.com/nohuto/win-config/blob/main/network/desc.md](https://github.com/nohuto/win-config/blob/main/network/desc.md) | Matched 4 audit token(s) in win-config. |
-| win-registry / README.md | [https://github.com/nohuto/win-registry/blob/main/README.md](https://github.com/nohuto/win-registry/blob/main/README.md) | Matched 4 audit token(s) in win-registry. |
-| decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -26842,28 +24974,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config, decompiled-pseudocode |
-| Matched tokens | session, manager, memory, management |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 4 audit token(s) in win-config. |
-| win-config / network/desc.md | [https://github.com/nohuto/win-config/blob/main/network/desc.md](https://github.com/nohuto/win-config/blob/main/network/desc.md) | Matched 4 audit token(s) in win-config. |
-| win-config / peripheral/desc.md | [https://github.com/nohuto/win-config/blob/main/peripheral/desc.md](https://github.com/nohuto/win-config/blob/main/peripheral/desc.md) | Matched 4 audit token(s) in win-config. |
-| decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -26969,28 +25086,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config, win-registry, decompiled-pseudocode |
-| Matched tokens | session, manager, memory, management, disablepagingexecutive |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 4 audit token(s) in win-config. |
-| win-registry / README.md | [https://github.com/nohuto/win-registry/blob/main/README.md](https://github.com/nohuto/win-registry/blob/main/README.md) | Matched 5 audit token(s) in win-registry. |
-| win-config / network/desc.md | [https://github.com/nohuto/win-config/blob/main/network/desc.md](https://github.com/nohuto/win-config/blob/main/network/desc.md) | Matched 4 audit token(s) in win-config. |
-| decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -27096,28 +25198,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config, decompiled-pseudocode |
-| Matched tokens | session, manager, memory, management |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 4 audit token(s) in win-config. |
-| win-config / network/desc.md | [https://github.com/nohuto/win-config/blob/main/network/desc.md](https://github.com/nohuto/win-config/blob/main/network/desc.md) | Matched 4 audit token(s) in win-config. |
-| win-config / peripheral/desc.md | [https://github.com/nohuto/win-config/blob/main/peripheral/desc.md](https://github.com/nohuto/win-config/blob/main/peripheral/desc.md) | Matched 4 audit token(s) in win-config. |
-| decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -27222,28 +25309,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config, decompiled-pseudocode |
-| Matched tokens | session, manager, memory, management |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 4 audit token(s) in win-config. |
-| win-config / network/desc.md | [https://github.com/nohuto/win-config/blob/main/network/desc.md](https://github.com/nohuto/win-config/blob/main/network/desc.md) | Matched 4 audit token(s) in win-config. |
-| win-config / peripheral/desc.md | [https://github.com/nohuto/win-config/blob/main/peripheral/desc.md](https://github.com/nohuto/win-config/blob/main/peripheral/desc.md) | Matched 4 audit token(s) in win-config. |
-| decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -27279,8 +25351,8 @@ Windows Internals references:
 | `ms-memory-management-qna-nonpaged` | `official-doc` | `Microsoft official doc` | Microsoft Q&A: default registry value for Memory Management | [https://learn.microsoft.com/en-us/answers/questions/4238560/can-i-have-the-default-registry-value-for-memory-m](https://learn.microsoft.com/en-us/answers/questions/4238560/can-i-have-the-default-registry-value-for-memory-m) | `medium` | path, value, default, behavior |
 | `ms-memory-limits` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Memory Limits for Windows Releases | [https://learn.microsoft.com/en-us/windows/win32/memory/memory-limits-for-windows-releases](https://learn.microsoft.com/en-us/windows/win32/memory/memory-limits-for-windows-releases) | `high` | behavior, version-scope |
 | `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
-| `vm-system.memory-nonpaged-pool-dynamic-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for NonPagedPoolSize | [evidence/records/captures/system-memory-nonpaged-pool-dynamic-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/system-memory-nonpaged-pool-dynamic-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/system-memory-nonpaged-pool-dynamic-etw-20260427b/system-memory-nonpaged-pool-dynamic-etw-20260427b-summary.json](../evidence/records/raw/etw-stackwalk/system-memory-nonpaged-pool-dynamic-etw-20260427b/system-memory-nonpaged-pool-dynamic-etw-20260427b-summary.json) | `low` | behavior, version-scope |
-| `vm-system.memory-nonpaged-pool-dynamic-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for NonPagedPoolSize | [evidence/records/raw/ghidra/ghidra-system-memory-nonpaged-pool-dynamic-20260427b/summary.json](../evidence/records/raw/ghidra/ghidra-system-memory-nonpaged-pool-dynamic-20260427b/summary.json) | `low` | version-scope |
+| `vm-system.memory-nonpaged-pool-dynamic-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for NonPagedPoolSize | [evidence/captures/system-memory-nonpaged-pool-dynamic-etw-stackwalk-attempt-20260427.json](../evidence/captures/system-memory-nonpaged-pool-dynamic-etw-stackwalk-attempt-20260427.json) and [evidence/raw/etw-stackwalk/system-memory-nonpaged-pool-dynamic-etw-20260427b/system-memory-nonpaged-pool-dynamic-etw-20260427b-summary.json](../evidence/raw/etw-stackwalk/system-memory-nonpaged-pool-dynamic-etw-20260427b/system-memory-nonpaged-pool-dynamic-etw-20260427b-summary.json) | `low` | behavior, version-scope |
+| `vm-system.memory-nonpaged-pool-dynamic-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for NonPagedPoolSize | [evidence/raw/ghidra/ghidra-system-memory-nonpaged-pool-dynamic-20260427b/summary.json](../evidence/raw/ghidra/ghidra-system-memory-nonpaged-pool-dynamic-20260427b/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -27348,28 +25420,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config, decompiled-pseudocode |
-| Matched tokens | session, manager, memory, management |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 4 audit token(s) in win-config. |
-| win-config / network/desc.md | [https://github.com/nohuto/win-config/blob/main/network/desc.md](https://github.com/nohuto/win-config/blob/main/network/desc.md) | Matched 4 audit token(s) in win-config. |
-| win-config / peripheral/desc.md | [https://github.com/nohuto/win-config/blob/main/peripheral/desc.md](https://github.com/nohuto/win-config/blob/main/peripheral/desc.md) | Matched 4 audit token(s) in win-config. |
-| decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -27406,8 +25463,8 @@ Windows Internals references:
 | `ms-memory-management-qna-paged` | `official-doc` | `Microsoft official doc` | Microsoft Q&A: default registry value for Memory Management | [https://learn.microsoft.com/en-us/answers/questions/4238560/can-i-have-the-default-registry-value-for-memory-m](https://learn.microsoft.com/en-us/answers/questions/4238560/can-i-have-the-default-registry-value-for-memory-m) | `medium` | path, value, default, behavior |
 | `ms-unable-allocate-paged-pool` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Unable to allocate memory from the system paged pool | [https://learn.microsoft.com/en-us/troubleshoot/windows-server/performance/unable-allocate-memory-system-paged-pool](https://learn.microsoft.com/en-us/troubleshoot/windows-server/performance/unable-allocate-memory-system-paged-pool) | `high` | path, value, behavior, risk, version-scope |
 | `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
-| `vm-system.memory-paged-pool-dynamic-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for PagedPoolSize | [evidence/records/captures/system-memory-paged-pool-dynamic-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/system-memory-paged-pool-dynamic-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/system-memory-paged-pool-dynamic-etw-20260427b/system-memory-paged-pool-dynamic-etw-20260427b-summary.json](../evidence/records/raw/etw-stackwalk/system-memory-paged-pool-dynamic-etw-20260427b/system-memory-paged-pool-dynamic-etw-20260427b-summary.json) | `low` | behavior, version-scope |
-| `vm-system.memory-paged-pool-dynamic-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for PagedPoolSize | [evidence/records/raw/ghidra/ghidra-system-memory-paged-pool-dynamic-20260427b/summary.json](../evidence/records/raw/ghidra/ghidra-system-memory-paged-pool-dynamic-20260427b/summary.json) | `low` | version-scope |
+| `vm-system.memory-paged-pool-dynamic-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for PagedPoolSize | [evidence/captures/system-memory-paged-pool-dynamic-etw-stackwalk-attempt-20260427.json](../evidence/captures/system-memory-paged-pool-dynamic-etw-stackwalk-attempt-20260427.json) and [evidence/raw/etw-stackwalk/system-memory-paged-pool-dynamic-etw-20260427b/system-memory-paged-pool-dynamic-etw-20260427b-summary.json](../evidence/raw/etw-stackwalk/system-memory-paged-pool-dynamic-etw-20260427b/system-memory-paged-pool-dynamic-etw-20260427b-summary.json) | `low` | behavior, version-scope |
+| `vm-system.memory-paged-pool-dynamic-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for PagedPoolSize | [evidence/raw/ghidra/ghidra-system-memory-paged-pool-dynamic-20260427b/summary.json](../evidence/raw/ghidra/ghidra-system-memory-paged-pool-dynamic-20260427b/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -27475,26 +25532,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `category-fallback` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `True` |
-| Source repositories | win-config, decompiled-pseudocode |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
 | Matched tokens |  |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics. |
-| decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Lineage note |  |
 
 **Targets**
 
@@ -27601,28 +25645,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config, decompiled-pseudocode |
-| Matched tokens | filesystem, ntfsdisable8dot3namecreation |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / system/assets/drivers.txt | [https://github.com/nohuto/win-config/blob/main/system/assets/drivers.txt](https://github.com/nohuto/win-config/blob/main/system/assets/drivers.txt) | Matched 1 audit token(s) in win-config. |
-| win-config / system/assets/filesystem-NtfsUpdateDynamicRegistrySettings.c | [https://github.com/nohuto/win-config/blob/main/system/assets/filesystem-NtfsUpdateDynamicRegistrySettings.c](https://github.com/nohuto/win-config/blob/main/system/assets/filesystem-NtfsUpdateDynamicRegistrySettings.c) | Matched 1 audit token(s) in win-config. |
-| decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -27730,28 +25759,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config, decompiled-pseudocode |
-| Matched tokens | filesystem, ntfsdisablelastaccessupdate |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / system/assets/drivers.txt | [https://github.com/nohuto/win-config/blob/main/system/assets/drivers.txt](https://github.com/nohuto/win-config/blob/main/system/assets/drivers.txt) | Matched 1 audit token(s) in win-config. |
-| win-config / system/assets/filesystem-NtfsUpdateDynamicRegistrySettings.c | [https://github.com/nohuto/win-config/blob/main/system/assets/filesystem-NtfsUpdateDynamicRegistrySettings.c](https://github.com/nohuto/win-config/blob/main/system/assets/filesystem-NtfsUpdateDynamicRegistrySettings.c) | Matched 1 audit token(s) in win-config. |
-| decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -27790,8 +25804,8 @@ Windows Internals references:
 | `ms-performance-tuning-web-servers` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Performance Tuning Web Servers | [https://learn.microsoft.com/en-us/windows-server/administration/performance-tuning/role/web-server/](https://learn.microsoft.com/en-us/windows-server/administration/performance-tuning/role/web-server/) | `high` | path, default, behavior, side-effects, version-scope |
 | `ms-using-agestore` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Using AgeStore | [https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/using-agestore](https://learn.microsoft.com/en-us/windows-hardware/drivers/debugger/using-agestore) | `high` | default, value, behavior, side-effects |
 | `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
-| `vm-system.ntfs-disable-last-access-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for NtfsDisableLastAccessUpdate | [evidence/records/captures/system-ntfs-disable-last-access-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/system-ntfs-disable-last-access-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/system-ntfs-disable-last-access-etw-20260427a/system-ntfs-disable-last-access-etw-20260427a-summary.json](../evidence/records/raw/etw-stackwalk/system-ntfs-disable-last-access-etw-20260427a/system-ntfs-disable-last-access-etw-20260427a-summary.json) | `low` | behavior, version-scope |
-| `vm-system.ntfs-disable-last-access-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for NtfsDisableLastAccessUpdate | [evidence/records/raw/ghidra/ghidra-system-ntfs-disable-last-access-20260427a/summary.json](../evidence/records/raw/ghidra/ghidra-system-ntfs-disable-last-access-20260427a/summary.json) | `low` | version-scope |
+| `vm-system.ntfs-disable-last-access-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for NtfsDisableLastAccessUpdate | [evidence/captures/system-ntfs-disable-last-access-etw-stackwalk-attempt-20260427.json](../evidence/captures/system-ntfs-disable-last-access-etw-stackwalk-attempt-20260427.json) and [evidence/raw/etw-stackwalk/system-ntfs-disable-last-access-etw-20260427a/system-ntfs-disable-last-access-etw-20260427a-summary.json](../evidence/raw/etw-stackwalk/system-ntfs-disable-last-access-etw-20260427a/system-ntfs-disable-last-access-etw-20260427a-summary.json) | `low` | behavior, version-scope |
+| `vm-system.ntfs-disable-last-access-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for NtfsDisableLastAccessUpdate | [evidence/raw/ghidra/ghidra-system-ntfs-disable-last-access-20260427a/summary.json](../evidence/raw/ghidra/ghidra-system-ntfs-disable-last-access-20260427a/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -27859,28 +25873,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config, win-registry, decompiled-pseudocode |
-| Matched tokens | filesystem, longpathsenabled |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / system/assets/drivers.txt | [https://github.com/nohuto/win-config/blob/main/system/assets/drivers.txt](https://github.com/nohuto/win-config/blob/main/system/assets/drivers.txt) | Matched 1 audit token(s) in win-config. |
-| win-registry / records/FileSystem.txt | [https://github.com/nohuto/win-registry/blob/main/records/FileSystem.txt](https://github.com/nohuto/win-registry/blob/main/records/FileSystem.txt) | Matched 2 audit token(s) in win-registry. |
-| decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -27987,28 +25986,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config, win-registry, decompiled-pseudocode |
-| Matched tokens | filesystem, ntfsmemoryusage |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / system/assets/drivers.txt | [https://github.com/nohuto/win-config/blob/main/system/assets/drivers.txt](https://github.com/nohuto/win-config/blob/main/system/assets/drivers.txt) | Matched 1 audit token(s) in win-config. |
-| win-registry / records/FileSystem.txt | [https://github.com/nohuto/win-registry/blob/main/records/FileSystem.txt](https://github.com/nohuto/win-registry/blob/main/records/FileSystem.txt) | Matched 2 audit token(s) in win-registry. |
-| decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -28111,28 +26095,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config, win-registry, decompiled-pseudocode |
-| Matched tokens | filesystem, ntfsmftzonereservation |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / system/assets/drivers.txt | [https://github.com/nohuto/win-config/blob/main/system/assets/drivers.txt](https://github.com/nohuto/win-config/blob/main/system/assets/drivers.txt) | Matched 1 audit token(s) in win-config. |
-| win-registry / records/FileSystem.txt | [https://github.com/nohuto/win-registry/blob/main/records/FileSystem.txt](https://github.com/nohuto/win-registry/blob/main/records/FileSystem.txt) | Matched 2 audit token(s) in win-registry. |
-| decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -28240,28 +26209,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config, decompiled-pseudocode |
-| Matched tokens | prioritycontrol, win32priorityseparation |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / system/assets/lsc-cimwin32.c | [https://github.com/nohuto/win-config/blob/main/system/assets/lsc-cimwin32.c](https://github.com/nohuto/win-config/blob/main/system/assets/lsc-cimwin32.c) | Matched 2 audit token(s) in win-config. |
-| decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
-| Local asset: Win32PrioritySeparation | [Docs/system/assets/Win32PrioritySeparation.pdf](../Docs/system/assets/Win32PrioritySeparation.pdf) | Local research asset for Win32PrioritySeparation and scheduler-related registry behavior. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -28299,9 +26253,9 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-win32-operatingsystem-priority` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Win32_OperatingSystem class | [https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-operatingsystem](https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-operatingsystem) | `high` | path, behavior, version-scope, risk |
 | `repo-system-doc-priority` | `repo-doc` | `Current repo docs` | Repo system research notes for Win32PrioritySeparation | [Docs/system/system.md](../Docs/system/system.md) | `medium` | value, ui-mapping, app-mismatch |
-| `repo-system-decomp-prioritycontrol` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - Historical repo decompilation for PriorityControl read/write path | [Docs/system/assets/lsc-cimwin32.c](../Docs/system/assets/lsc-cimwin32.c) | `medium` | path, behavior |
-| `ghidra-symbolized-prioritycontrol-20260401` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - PDB-backed bounded Ghidra branch audit - cimwin32.dll | [evidence/records/raw/ghidra-v32/system-priority-control-ghidra-v32-20260401-112136](../evidence/records/raw/ghidra-v32/system-priority-control-ghidra-v32-20260401-112136) | `high` | path, behavior |
-| `procmon-priority-control-wmi-read` | `procmon-trace` | `VM Procmon trace` | Procmon capture - wmiprvse.exe Win32PrioritySeparation reads | [evidence/records/raw/procmon/system.priority-control/prioritycontrol-state-2.txt](../evidence/records/raw/procmon/system.priority-control/prioritycontrol-state-2.txt) and [evidence/records/raw/procmon/system.priority-control/prioritycontrol-state-2.hits.csv](../evidence/records/raw/procmon/system.priority-control/prioritycontrol-state-2.hits.csv) and [evidence/records/raw/procmon/system.priority-control/prioritycontrol-state-38.txt](../evidence/records/raw/procmon/system.priority-control/prioritycontrol-state-38.txt) and [evidence/records/raw/procmon/system.priority-control/prioritycontrol-state-38.hits.csv](../evidence/records/raw/procmon/system.priority-control/prioritycontrol-state-38.hits.csv) | `high` | path, value, behavior |
+| `repo-system-decomp-prioritycontrol` | `decompilation` | `Our Ghidra decompilation` | Historical repo decompilation for PriorityControl read/write path | [Docs/system/assets/lsc-cimwin32.c](../Docs/system/assets/lsc-cimwin32.c) | `medium` | path, behavior |
+| `ghidra-symbolized-prioritycontrol-20260401` | `decompilation` | `Our Ghidra decompilation` | PDB-backed bounded Ghidra branch audit - cimwin32.dll | [evidence/raw/ghidra-v32/system-priority-control-ghidra-v32-20260401-112136](../evidence/raw/ghidra-v32/system-priority-control-ghidra-v32-20260401-112136) | `high` | path, behavior |
+| `procmon-priority-control-wmi-read` | `procmon-trace` | `VM Procmon trace` | Procmon capture - wmiprvse.exe Win32PrioritySeparation reads | [evidence/raw/procmon/system.priority-control/prioritycontrol-state-2.txt](../evidence/raw/procmon/system.priority-control/prioritycontrol-state-2.txt) and [evidence/raw/procmon/system.priority-control/prioritycontrol-state-2.hits.csv](../evidence/raw/procmon/system.priority-control/prioritycontrol-state-2.hits.csv) and [evidence/raw/procmon/system.priority-control/prioritycontrol-state-38.txt](../evidence/raw/procmon/system.priority-control/prioritycontrol-state-38.txt) and [evidence/raw/procmon/system.priority-control/prioritycontrol-state-38.hits.csv](../evidence/raw/procmon/system.priority-control/prioritycontrol-state-38.hits.csv) | `high` | path, value, behavior |
 | `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
 | `vm-batch-probe-20260320-priority-control` | `runtime-diff` | `VM runtime diff` | Win25H2Clean reversible probe - Win32PrioritySeparation tuning | [evidence/files/vm/vm-batch-probe-20260320.json](../evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json) | `medium` | path, value, behavior, rollback |
 | `vm-manual-benchmark-20260324-priority-control` | `vm-test` | `VM test / probe` | Win25H2Clean manual benchmark pass - Win32PrioritySeparation | [evidence/files/vm/priority-control-20260324-201011/summary.json](../evidence/files/vm-tooling-staging/priority-control-20260324-201011/summary.json) | `medium` | value, behavior, rollback, performance |
@@ -28373,28 +26327,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config, decompiled-pseudocode |
-| Matched tokens | policies, reliability |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / system/assets/services.txt | [https://github.com/nohuto/win-config/blob/main/system/assets/services.txt](https://github.com/nohuto/win-config/blob/main/system/assets/services.txt) | Matched 2 audit token(s) in win-config. |
-| win-config / system/assets/timestamp-OsEventsTimestampInterval.c | [https://github.com/nohuto/win-config/blob/main/system/assets/timestamp-OsEventsTimestampInterval.c](https://github.com/nohuto/win-config/blob/main/system/assets/timestamp-OsEventsTimestampInterval.c) | Matched 2 audit token(s) in win-config. |
-| decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -28447,11 +26386,11 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-admx-reliability-persistent-timestamp` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Policy CSP - ADMX_Reliability / EE_EnablePersistentTimeStamp | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-reliability](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-reliability) | `high` | path, value, behavior, version-scope |
 | `repo-system-doc-reliability-timestamp` | `repo-doc` | `Current repo docs` | Repo system research notes for reliability timestamping | [Docs/system/system.md](../Docs/system/system.md) | `medium` | path, value, behavior |
-| `repo-system-decomp-reliability-timestamp` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - Decompiled OsEventsTimestampInterval read path | [Docs/system/assets/timestamp-OsEventsTimestampInterval.c](../Docs/system/assets/timestamp-OsEventsTimestampInterval.c) | `high` | path, value, behavior |
-| `ghidra-diagtrack-reliability-20260326` | `ghidra-trace` | `unspecified` | Our Ghidra decompilation - diagtrack.dll reliability string/xref export | [evidence/records/raw/ghidra/system.reliability-timestamp-enabled/ghidra-matches.md](../evidence/records/raw/ghidra/system.reliability-timestamp-enabled/ghidra-matches.md) and [evidence/records/raw/ghidra/system.reliability-timestamp-enabled/evidence.json](../evidence/records/raw/ghidra/system.reliability-timestamp-enabled/evidence.json) | `medium` | version-scope, string-reference, open-question |
+| `repo-system-decomp-reliability-timestamp` | `decompilation` | `Our Ghidra decompilation` | Decompiled OsEventsTimestampInterval read path | [Docs/system/assets/timestamp-OsEventsTimestampInterval.c](../Docs/system/assets/timestamp-OsEventsTimestampInterval.c) | `high` | path, value, behavior |
+| `ghidra-diagtrack-reliability-20260326` | `ghidra-trace` | `unspecified` | Our Ghidra decompilation - diagtrack.dll reliability string/xref export | [evidence/raw/ghidra/system.reliability-timestamp-enabled/ghidra-matches.md](../evidence/raw/ghidra/system.reliability-timestamp-enabled/ghidra-matches.md) and [evidence/raw/ghidra/system.reliability-timestamp-enabled/evidence.json](../evidence/raw/ghidra/system.reliability-timestamp-enabled/evidence.json) | `medium` | version-scope, string-reference, open-question |
 | `vm-reliability-procmon-attempts-20260326` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Procmon trigger attempts for Reliability timestamp reads | [research/notes/reliability-timestamp-probe-attempts-20260326.md](notes/reliability-timestamp-probe-attempts-20260326.md) | `medium` | version-scope, open-question |
-| `vm-reliability-follow-up-20260326` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Reliability follow-up - DiagTrack and WER queue probes | [research/notes/reliability-timestamp-follow-up-20260326.md](notes/reliability-timestamp-follow-up-20260326.md) and [evidence/records/raw/procmon/system.reliability-timestamp-enabled/reliability-timestamp-probe.txt](../evidence/records/raw/procmon/system.reliability-timestamp-enabled/reliability-timestamp-probe.txt) and [evidence/records/raw/procmon/system.reliability-timestamp-enabled/reliability-timestamp-probe.runtime.hits.csv](../evidence/records/raw/procmon/system.reliability-timestamp-enabled/reliability-timestamp-probe.runtime.hits.csv) | `medium` | version-scope, open-question |
-| `vm-system.reliability-timestamp-enabled-etw-stackwalk-20260424e` | `etw-trace` | `unspecified` | Bounded KVM ETW stackwalk review for TimeStampEnabled retained no exact target hit | [evidence/records/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/system.reliability-timestamp-enabled-etw-20260424e-summary.json](../evidence/records/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/system.reliability-timestamp-enabled-etw-20260424e-summary.json) and [evidence/records/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/system.reliability-timestamp-enabled-etw-20260424e-stage.json](../evidence/records/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/system.reliability-timestamp-enabled-etw-20260424e-stage.json) and [evidence/records/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/system.reliability-timestamp-enabled-etw-20260424e.etl](../evidence/records/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/system.reliability-timestamp-enabled-etw-20260424e.etl) and [evidence/records/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/normalized-registry-bundle.json](../evidence/records/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/normalized-registry-bundle.json) and [evidence/records/captures/system-reliability-timestamp-enabled-etw-stackwalk-20260424.json](../evidence/records/captures/system-reliability-timestamp-enabled-etw-stackwalk-20260424.json) | `medium` | runtime-open-question, version-scope, investigation-open-question |
+| `vm-reliability-follow-up-20260326` | `procmon-trace` | `VM Procmon trace` | Win25H2Clean Reliability follow-up - DiagTrack and WER queue probes | [research/notes/reliability-timestamp-follow-up-20260326.md](notes/reliability-timestamp-follow-up-20260326.md) and [evidence/raw/procmon/system.reliability-timestamp-enabled/reliability-timestamp-probe.txt](../evidence/raw/procmon/system.reliability-timestamp-enabled/reliability-timestamp-probe.txt) and [evidence/raw/procmon/system.reliability-timestamp-enabled/reliability-timestamp-probe.runtime.hits.csv](../evidence/raw/procmon/system.reliability-timestamp-enabled/reliability-timestamp-probe.runtime.hits.csv) | `medium` | version-scope, open-question |
+| `vm-system.reliability-timestamp-enabled-etw-stackwalk-20260424e` | `etw-trace` | `unspecified` | Bounded KVM ETW stackwalk review for TimeStampEnabled retained no exact target hit | [evidence/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/system.reliability-timestamp-enabled-etw-20260424e-summary.json](../evidence/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/system.reliability-timestamp-enabled-etw-20260424e-summary.json) and [evidence/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/system.reliability-timestamp-enabled-etw-20260424e-stage.json](../evidence/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/system.reliability-timestamp-enabled-etw-20260424e-stage.json) and [evidence/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/system.reliability-timestamp-enabled-etw-20260424e.etl](../evidence/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/system.reliability-timestamp-enabled-etw-20260424e.etl) and [evidence/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/normalized-registry-bundle.json) and [evidence/captures/system-reliability-timestamp-enabled-etw-stackwalk-20260424.json](../evidence/captures/system-reliability-timestamp-enabled-etw-stackwalk-20260424.json) | `medium` | runtime-open-question, version-scope, investigation-open-question |
 
 **Validation proof**
 
@@ -28519,26 +26458,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `category-fallback` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `True` |
-| Source repositories | win-config, decompiled-pseudocode |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
 | Matched tokens |  |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics. |
-| decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Lineage note |  |
 
 **Targets**
 
@@ -28642,26 +26568,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `category-fallback` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `True` |
-| Source repositories | win-config, decompiled-pseudocode |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
 | Matched tokens |  |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics. |
-| decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Lineage note |  |
 
 **Targets**
 
@@ -28765,26 +26678,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `category-fallback` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `True` |
-| Source repositories | win-config, decompiled-pseudocode |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
 | Matched tokens |  |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics. |
-| decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Lineage note |  |
 
 **Targets**
 
@@ -28889,26 +26789,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `category-fallback` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `True` |
-| Source repositories | win-config, decompiled-pseudocode |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
 | Matched tokens |  |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics. |
-| decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Lineage note |  |
 
 **Targets**
 
@@ -29012,26 +26899,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `category-fallback` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `True` |
-| Source repositories | win-config, decompiled-pseudocode |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
 | Matched tokens |  |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics. |
-| decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Lineage note |  |
 
 **Targets**
 
@@ -29135,26 +27009,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `category-fallback` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `True` |
-| Source repositories | win-config, decompiled-pseudocode |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
 | Matched tokens |  |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics. |
-| decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Lineage note |  |
 
 **Targets**
 
@@ -29258,26 +27119,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config, decompiled-pseudocode |
-| Matched tokens | disable windows search service |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / system/assets/disable-services-drivers-suboption-audit.md | [https://github.com/nohuto/win-config/blob/main/system/assets/disable-services-drivers-suboption-audit.md](https://github.com/nohuto/win-config/blob/main/system/assets/disable-services-drivers-suboption-audit.md) | Matched 1 audit token(s) in win-config. |
-| decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -29316,8 +27164,8 @@ Windows Internals references:
 | `local-scm-wsearch-2026-03-14` | `repo-doc` | `Current repo docs` | Local SCM snapshot - WSearch | [research/notes/service-snapshots/wsearch-sc-qc-2026-03-14.txt](notes/service-snapshots/wsearch-sc-qc-2026-03-14.txt) | `high` | path, value, version-scope |
 | `ms-search-indexing-overview` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Search indexing process overview | [https://learn.microsoft.com/en-us/windows/win32/search/-search-indexing-process-overview](https://learn.microsoft.com/en-us/windows/win32/search/-search-indexing-process-overview) | `high` | behavior, side-effects, version-scope |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
-| `vm-wsearch-etw-stackwalk-20260424` | `etw-trace` | `unspecified` | Bounded KVM ETW stackwalk receipt for the Windows Search service key | [evidence/records/raw/etw-stackwalk/system-services-disable-windows-search-etw-20260424-main/system-services-disable-windows-search-etw-20260424-main-summary.json](../evidence/records/raw/etw-stackwalk/system-services-disable-windows-search-etw-20260424-main/system-services-disable-windows-search-etw-20260424-main-summary.json) and [evidence/records/raw/etw-stackwalk/system-services-disable-windows-search-etw-20260424-main/system-services-disable-windows-search-etw-20260424-main-stage.json](../evidence/records/raw/etw-stackwalk/system-services-disable-windows-search-etw-20260424-main/system-services-disable-windows-search-etw-20260424-main-stage.json) and [evidence/records/captures/system-services-disable-windows-search-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/system-services-disable-windows-search-etw-stackwalk-attempt-20260424.json) | `medium` | behavior, risk, version-scope |
-| `vm-wsearch-ghidra-launch-receipt-20260424` | `ghidra-trace` | `unspecified` | Guest Ghidra string-xref launcher receipt for WSearch | [evidence/records/raw/ghidra/ghidra-system-services-disable-windows-search-20260424-main/summary.json](../evidence/records/raw/ghidra/ghidra-system-services-disable-windows-search-20260424-main/summary.json) | `low` | open-question, version-scope |
+| `vm-wsearch-etw-stackwalk-20260424` | `etw-trace` | `unspecified` | Bounded KVM ETW stackwalk receipt for the Windows Search service key | [evidence/raw/etw-stackwalk/system-services-disable-windows-search-etw-20260424-main/system-services-disable-windows-search-etw-20260424-main-summary.json](../evidence/raw/etw-stackwalk/system-services-disable-windows-search-etw-20260424-main/system-services-disable-windows-search-etw-20260424-main-summary.json) and [evidence/raw/etw-stackwalk/system-services-disable-windows-search-etw-20260424-main/system-services-disable-windows-search-etw-20260424-main-stage.json](../evidence/raw/etw-stackwalk/system-services-disable-windows-search-etw-20260424-main/system-services-disable-windows-search-etw-20260424-main-stage.json) and [evidence/captures/system-services-disable-windows-search-etw-stackwalk-attempt-20260424.json](../evidence/captures/system-services-disable-windows-search-etw-stackwalk-attempt-20260424.json) | `medium` | behavior, risk, version-scope |
+| `vm-wsearch-ghidra-launch-receipt-20260424` | `ghidra-trace` | `unspecified` | Guest Ghidra string-xref launcher receipt for WSearch | [evidence/raw/ghidra/ghidra-system-services-disable-windows-search-20260424-main/summary.json](../evidence/raw/ghidra/ghidra-system-services-disable-windows-search-20260424-main/summary.json) | `low` | open-question, version-scope |
 
 **Validation proof**
 
@@ -29385,28 +27233,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config, decompiled-pseudocode |
-| Matched tokens | policies, verbosestatus |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / system/assets/drivers.txt | [https://github.com/nohuto/win-config/blob/main/system/assets/drivers.txt](https://github.com/nohuto/win-config/blob/main/system/assets/drivers.txt) | Matched 1 audit token(s) in win-config. |
-| win-config / system/assets/noti-CLowDiskSpaceUI_CanShowStorageSenseToast.c | [https://github.com/nohuto/win-config/blob/main/system/assets/noti-CLowDiskSpaceUI_CanShowStorageSenseToast.c](https://github.com/nohuto/win-config/blob/main/system/assets/noti-CLowDiskSpaceUI_CanShowStorageSenseToast.c) | Matched 1 audit token(s) in win-config. |
-| decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -29511,26 +27344,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config, decompiled-pseudocode |
-| Matched tokens | waittokillservicetimeout |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 1 audit token(s) in win-config. |
-| decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -29639,21 +27459,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config, win-registry |
-| Matched tokens | policies, explorer, usedefaulttile |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / visibility/desc.md | [https://github.com/nohuto/win-config/blob/main/visibility/desc.md](https://github.com/nohuto/win-config/blob/main/visibility/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-registry / records/CV-Policies.txt | [https://github.com/nohuto/win-registry/blob/main/records/CV-Policies.txt](https://github.com/nohuto/win-registry/blob/main/records/CV-Policies.txt) | Matched 3 audit token(s) in win-registry. |
-| win-config / misc/desc.md | [https://github.com/nohuto/win-config/blob/main/misc/desc.md](https://github.com/nohuto/win-config/blob/main/misc/desc.md) | Matched 2 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -29758,21 +27570,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config, win-registry |
-| Matched tokens | policies, disableacrylicbackgroundonlogon |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / visibility/desc.md | [https://github.com/nohuto/win-config/blob/main/visibility/desc.md](https://github.com/nohuto/win-config/blob/main/visibility/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / visibility/assets/animation-WinMain.c | [https://github.com/nohuto/win-config/blob/main/visibility/assets/animation-WinMain.c](https://github.com/nohuto/win-config/blob/main/visibility/assets/animation-WinMain.c) | Matched 1 audit token(s) in win-config. |
-| win-registry / records/Policies-System.txt | [https://github.com/nohuto/win-registry/blob/main/records/Policies-System.txt](https://github.com/nohuto/win-registry/blob/main/records/Policies-System.txt) | Matched 2 audit token(s) in win-registry. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -29812,8 +27616,8 @@ Nohuto lineage references:
 | `local-logon-adml-acrylic` | `official-doc` | `Microsoft official doc` | Local Microsoft Logon.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/Logon.adml](../evidence/files/external/c/PolicyDefinitions/en-US/Logon.adml) | `high` | behavior, default, side-effects |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-acrylic-logon` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
-| `vm-visibility.disable-acrylic-logon-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for DisableAcrylicBackgroundOnLogon | [evidence/records/captures/visibility-disable-acrylic-logon-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/visibility-disable-acrylic-logon-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/visibility-disable-acrylic-logon-etw-20260427a/visibility-disable-acrylic-logon-etw-20260427a-summary.json](../evidence/records/raw/etw-stackwalk/visibility-disable-acrylic-logon-etw-20260427a/visibility-disable-acrylic-logon-etw-20260427a-summary.json) | `low` | behavior, version-scope |
-| `vm-visibility.disable-acrylic-logon-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for DisableAcrylicBackgroundOnLogon | [evidence/records/raw/ghidra/ghidra-visibility-disable-acrylic-logon-20260427a/summary.json](../evidence/records/raw/ghidra/ghidra-visibility-disable-acrylic-logon-20260427a/summary.json) | `low` | version-scope |
+| `vm-visibility.disable-acrylic-logon-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for DisableAcrylicBackgroundOnLogon | [evidence/captures/visibility-disable-acrylic-logon-etw-stackwalk-attempt-20260427.json](../evidence/captures/visibility-disable-acrylic-logon-etw-stackwalk-attempt-20260427.json) and [evidence/raw/etw-stackwalk/visibility-disable-acrylic-logon-etw-20260427a/visibility-disable-acrylic-logon-etw-20260427a-summary.json](../evidence/raw/etw-stackwalk/visibility-disable-acrylic-logon-etw-20260427a/visibility-disable-acrylic-logon-etw-20260427a-summary.json) | `low` | behavior, version-scope |
+| `vm-visibility.disable-acrylic-logon-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for DisableAcrylicBackgroundOnLogon | [evidence/raw/ghidra/ghidra-visibility-disable-acrylic-logon-20260427a/summary.json](../evidence/raw/ghidra/ghidra-visibility-disable-acrylic-logon-20260427a/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -29881,21 +27685,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config, win-registry |
-| Matched tokens | policies, explorer, turnoffspianimations |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / visibility/desc.md | [https://github.com/nohuto/win-config/blob/main/visibility/desc.md](https://github.com/nohuto/win-config/blob/main/visibility/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-registry / records/CV-Policies.txt | [https://github.com/nohuto/win-registry/blob/main/records/CV-Policies.txt](https://github.com/nohuto/win-registry/blob/main/records/CV-Policies.txt) | Matched 3 audit token(s) in win-registry. |
-| win-config / misc/desc.md | [https://github.com/nohuto/win-config/blob/main/misc/desc.md](https://github.com/nohuto/win-config/blob/main/misc/desc.md) | Matched 2 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -30002,21 +27798,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, enablefirstlogonanimation |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / visibility/desc.md | [https://github.com/nohuto/win-config/blob/main/visibility/desc.md](https://github.com/nohuto/win-config/blob/main/visibility/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / visibility/assets/animation-WinMain.c | [https://github.com/nohuto/win-config/blob/main/visibility/assets/animation-WinMain.c](https://github.com/nohuto/win-config/blob/main/visibility/assets/animation-WinMain.c) | Matched 2 audit token(s) in win-config. |
-| win-config / affinities/desc.md | [https://github.com/nohuto/win-config/blob/main/affinities/desc.md](https://github.com/nohuto/win-config/blob/main/affinities/desc.md) | Matched 1 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -30123,21 +27911,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, personalization, nolockscreen |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / visibility/desc.md | [https://github.com/nohuto/win-config/blob/main/visibility/desc.md](https://github.com/nohuto/win-config/blob/main/visibility/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / misc/desc.md | [https://github.com/nohuto/win-config/blob/main/misc/desc.md](https://github.com/nohuto/win-config/blob/main/misc/desc.md) | Matched 2 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -30242,21 +28022,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, personalization, nolockscreencamera |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / visibility/desc.md | [https://github.com/nohuto/win-config/blob/main/visibility/desc.md](https://github.com/nohuto/win-config/blob/main/visibility/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / misc/desc.md | [https://github.com/nohuto/win-config/blob/main/misc/desc.md](https://github.com/nohuto/win-config/blob/main/misc/desc.md) | Matched 2 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -30362,21 +28134,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, personalization, nochanginglockscreen |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / visibility/desc.md | [https://github.com/nohuto/win-config/blob/main/visibility/desc.md](https://github.com/nohuto/win-config/blob/main/visibility/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / misc/desc.md | [https://github.com/nohuto/win-config/blob/main/misc/desc.md](https://github.com/nohuto/win-config/blob/main/misc/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 2 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -30483,21 +28247,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, personalization, animatelockscreenbackground |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / visibility/desc.md | [https://github.com/nohuto/win-config/blob/main/visibility/desc.md](https://github.com/nohuto/win-config/blob/main/visibility/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / misc/desc.md | [https://github.com/nohuto/win-config/blob/main/misc/desc.md](https://github.com/nohuto/win-config/blob/main/misc/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 2 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -30604,21 +28360,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, personalization, nolockscreenslideshow |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / visibility/desc.md | [https://github.com/nohuto/win-config/blob/main/visibility/desc.md](https://github.com/nohuto/win-config/blob/main/visibility/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / misc/desc.md | [https://github.com/nohuto/win-config/blob/main/misc/desc.md](https://github.com/nohuto/win-config/blob/main/misc/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 2 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -30725,21 +28473,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, cloudcontent, disablewindowsspotlightonactioncenter |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / visibility/desc.md | [https://github.com/nohuto/win-config/blob/main/visibility/desc.md](https://github.com/nohuto/win-config/blob/main/visibility/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 2 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -30846,21 +28586,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, cloudcontent, disablespotlightcollectionondesktop |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / visibility/desc.md | [https://github.com/nohuto/win-config/blob/main/visibility/desc.md](https://github.com/nohuto/win-config/blob/main/visibility/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 2 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -30967,21 +28699,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, cloudcontent, disablewindowsspotlightfeatures |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / visibility/desc.md | [https://github.com/nohuto/win-config/blob/main/visibility/desc.md](https://github.com/nohuto/win-config/blob/main/visibility/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 2 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -31088,21 +28812,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, cloudcontent, disablewindowsspotlightonsettings |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / visibility/desc.md | [https://github.com/nohuto/win-config/blob/main/visibility/desc.md](https://github.com/nohuto/win-config/blob/main/visibility/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 2 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -31209,21 +28925,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, cloudcontent, disablethirdpartysuggestions |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / visibility/desc.md | [https://github.com/nohuto/win-config/blob/main/visibility/desc.md](https://github.com/nohuto/win-config/blob/main/visibility/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 2 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -31330,21 +29038,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, cloudcontent, disablewindowsspotlightwindowswelcomeexperience |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / visibility/desc.md | [https://github.com/nohuto/win-config/blob/main/visibility/desc.md](https://github.com/nohuto/win-config/blob/main/visibility/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 2 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -31451,21 +29151,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, disablewcnui |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / visibility/desc.md | [https://github.com/nohuto/win-config/blob/main/visibility/desc.md](https://github.com/nohuto/win-config/blob/main/visibility/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / visibility/assets/animation-WinMain.c | [https://github.com/nohuto/win-config/blob/main/visibility/assets/animation-WinMain.c](https://github.com/nohuto/win-config/blob/main/visibility/assets/animation-WinMain.c) | Matched 1 audit token(s) in win-config. |
-| win-config / affinities/desc.md | [https://github.com/nohuto/win-config/blob/main/affinities/desc.md](https://github.com/nohuto/win-config/blob/main/affinities/desc.md) | Matched 1 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -31572,21 +29264,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, allownewsandinterests |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / visibility/desc.md | [https://github.com/nohuto/win-config/blob/main/visibility/desc.md](https://github.com/nohuto/win-config/blob/main/visibility/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / visibility/assets/animation-WinMain.c | [https://github.com/nohuto/win-config/blob/main/visibility/assets/animation-WinMain.c](https://github.com/nohuto/win-config/blob/main/visibility/assets/animation-WinMain.c) | Matched 1 audit token(s) in win-config. |
-| win-config / affinities/desc.md | [https://github.com/nohuto/win-config/blob/main/affinities/desc.md](https://github.com/nohuto/win-config/blob/main/affinities/desc.md) | Matched 1 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -31694,21 +29378,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config, win-registry |
-| Matched tokens | policies, disallowanimations |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / visibility/desc.md | [https://github.com/nohuto/win-config/blob/main/visibility/desc.md](https://github.com/nohuto/win-config/blob/main/visibility/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-registry / README.md | [https://github.com/nohuto/win-registry/blob/main/README.md](https://github.com/nohuto/win-registry/blob/main/README.md) | Matched 2 audit token(s) in win-registry. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -31815,21 +29491,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, explorer, forceclassiccontrolpanel |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / visibility/desc.md | [https://github.com/nohuto/win-config/blob/main/visibility/desc.md](https://github.com/nohuto/win-config/blob/main/visibility/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / misc/desc.md | [https://github.com/nohuto/win-config/blob/main/misc/desc.md](https://github.com/nohuto/win-config/blob/main/misc/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / peripheral/desc.md | [https://github.com/nohuto/win-config/blob/main/peripheral/desc.md](https://github.com/nohuto/win-config/blob/main/peripheral/desc.md) | Matched 2 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -31935,19 +29603,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | langbar, showstatus |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / visibility/desc.md | [https://github.com/nohuto/win-config/blob/main/visibility/desc.md](https://github.com/nohuto/win-config/blob/main/visibility/desc.md) | Matched 2 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -31986,7 +29648,7 @@ Nohuto lineage references:
 | `microsoft-qna-language-bar-showstatus` | `official-doc` | `Microsoft official doc` | Microsoft Q&A: language bar ShowStatus hidden-state example | [https://learn.microsoft.com/nl-nl/answers/questions/2678097/toetsenbord-icoon-taalbalk-komt-na-elke-reboot-ter](https://learn.microsoft.com/nl-nl/answers/questions/2678097/toetsenbord-icoon-taalbalk-komt-na-elke-reboot-ter) | `medium` | path, value, behavior |
 | `repo-visibility-language-bar` | `repo-doc` | `Current repo docs` | Repo visibility notes for language bar | [Docs/visibility/visibility.md](../Docs/visibility/visibility.md) | `medium` | path, value, allowed-values, behavior |
 | `app-visibility-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/VisibilityTweakProvider.cs | `high` | path, value, ui-mapping |
-| `procmon-language-bar-showstatus` | `procmon-trace` | `VM Procmon trace` | VM Procmon trace - ShowStatus language bar restart read | [evidence/records/raw/procmon/visibility.hide-language-bar/procmon-hide-language-bar-3.pml.md](../evidence/records/raw/procmon/visibility.hide-language-bar/procmon-hide-language-bar-3.pml.md) | `medium` | path, value, behavior, ui-mapping |
+| `procmon-language-bar-showstatus` | `procmon-trace` | `VM Procmon trace` | VM Procmon trace - ShowStatus language bar restart read | [evidence/raw/procmon/visibility.hide-language-bar/procmon-hide-language-bar-3.pml.md](../evidence/raw/procmon/visibility.hide-language-bar/procmon-hide-language-bar-3.pml.md) | `medium` | path, value, behavior, ui-mapping |
 
 **Validation proof**
 
@@ -32054,21 +29716,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, explorer, showorhidemostusedapps |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / visibility/desc.md | [https://github.com/nohuto/win-config/blob/main/visibility/desc.md](https://github.com/nohuto/win-config/blob/main/visibility/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / misc/desc.md | [https://github.com/nohuto/win-config/blob/main/misc/desc.md](https://github.com/nohuto/win-config/blob/main/misc/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / peripheral/desc.md | [https://github.com/nohuto/win-config/blob/main/peripheral/desc.md](https://github.com/nohuto/win-config/blob/main/peripheral/desc.md) | Matched 2 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -32176,21 +29830,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, explorer, hidepeoplebar |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / visibility/desc.md | [https://github.com/nohuto/win-config/blob/main/visibility/desc.md](https://github.com/nohuto/win-config/blob/main/visibility/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / misc/desc.md | [https://github.com/nohuto/win-config/blob/main/misc/desc.md](https://github.com/nohuto/win-config/blob/main/misc/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / peripheral/desc.md | [https://github.com/nohuto/win-config/blob/main/peripheral/desc.md](https://github.com/nohuto/win-config/blob/main/peripheral/desc.md) | Matched 2 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -32296,21 +29942,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `False` |
-| Needs review | `False` |
-| Source repositories | win-config, win-registry |
-| Matched tokens | classes, clsid, inprocserver32 |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / visibility/assets/animation-WinMain.c | [https://github.com/nohuto/win-config/blob/main/visibility/assets/animation-WinMain.c](https://github.com/nohuto/win-config/blob/main/visibility/assets/animation-WinMain.c) | Matched 2 audit token(s) in win-config. |
-| win-registry / records/Intel-00XX.txt | [https://github.com/nohuto/win-registry/blob/main/records/Intel-00XX.txt](https://github.com/nohuto/win-registry/blob/main/records/Intel-00XX.txt) | Matched 3 audit token(s) in win-registry. |
-| win-config / cleanup/desc.md | [https://github.com/nohuto/win-config/blob/main/cleanup/desc.md](https://github.com/nohuto/win-config/blob/main/cleanup/desc.md) | Matched 1 audit token(s) in win-config. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -32471,8 +30109,8 @@ Nohuto lineage references:
 | `repo-provenance-audio-disable-spatial-audio` | `repo-doc` | `Current repo docs` | Repo source note for audio.disable-spatial-audio | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | path, value, ui-mapping |
 | `app-audio-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/AudioTweakProvider.cs | `high` | path, value, ui-mapping |
 | `guest-audio-string-scan` | `vm-test` | `VM test / probe` | Guest string scan for spatial-audio registry contract | [evidence/files/vm/spatial_audio_string_search.txt](../evidence/files/vm-tooling-staging/spatial_audio_string_search.txt) | `low` | behavior, app-mismatch |
-| `vm-audio-disable-spatial-audio-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW stage receipt for DisableSpatialOnLowLatency | [evidence/records/captures/audio-disable-spatial-audio-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/audio-disable-spatial-audio-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/audio-disable-spatial-audio-etw-20260424-batch1/audio-disable-spatial-audio-etw-20260424-batch1-stage.json](../evidence/records/raw/etw-stackwalk/audio-disable-spatial-audio-etw-20260424-batch1/audio-disable-spatial-audio-etw-20260424-batch1-stage.json) | `low` | behavior, version-scope |
-| `vm-audio-disable-spatial-audio-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for DisableSpatialOnLowLatency | [evidence/records/raw/ghidra/ghidra-audio-disable-spatial-audio-20260424-batch1/summary.json](../evidence/records/raw/ghidra/ghidra-audio-disable-spatial-audio-20260424-batch1/summary.json) | `low` | version-scope |
+| `vm-audio-disable-spatial-audio-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW stage receipt for DisableSpatialOnLowLatency | [evidence/captures/audio-disable-spatial-audio-etw-stackwalk-attempt-20260424.json](../evidence/captures/audio-disable-spatial-audio-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/audio-disable-spatial-audio-etw-20260424-batch1/audio-disable-spatial-audio-etw-20260424-batch1-stage.json](../evidence/raw/etw-stackwalk/audio-disable-spatial-audio-etw-20260424-batch1/audio-disable-spatial-audio-etw-20260424-batch1-stage.json) | `low` | behavior, version-scope |
+| `vm-audio-disable-spatial-audio-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for DisableSpatialOnLowLatency | [evidence/raw/ghidra/ghidra-audio-disable-spatial-audio-20260424-batch1/summary.json](../evidence/raw/ghidra/ghidra-audio-disable-spatial-audio-20260424-batch1/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -32547,7 +30185,7 @@ Current writes
 | Has nohuto lineage | `True` |
 | Has Windows Internals notes | `False` |
 | Needs review | `False` |
-| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Source repositories | win-config, decompiled-pseudocode |
 | Matched tokens | appevents, schemes, apps, systemasterisk, current, notification, reminder, close, criticalbatteryalarm, systemhand, mailbeep, deviceconnect, devicedisconnect, devicefail, systemexclamation, lowbatteryalarm, maximize, menucommand, menupopup, messagenudge, minimize, faxbeep, mail, proximity, proximityconnection, open, printcomplete, appgpfault, systemquestion, restoredown, restoreup, ccselect, showband, systemnotification, changetheme, windowsuac, explorer, blockedpopup, activatingdocument, emptyrecyclebin, feeddiscovered, movemenuitem, securityband, navigating, sapisvr, disnumberssound, panelsound, misrecosound, huboffsound, hubonsound, hubsleepsound |
 | Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
 
@@ -32556,8 +30194,8 @@ Nohuto lineage references:
 | Title | Location | Summary |
 | --- | --- | --- |
 | win-config / peripheral/desc.md | [https://github.com/nohuto/win-config/blob/main/peripheral/desc.md](https://github.com/nohuto/win-config/blob/main/peripheral/desc.md) | Matched 51 audit token(s) in win-config. |
-| win-registry / README.md | [https://github.com/nohuto/win-registry/blob/main/README.md](https://github.com/nohuto/win-registry/blob/main/README.md) | Matched 10 audit token(s) in win-registry. |
-| win-config / power/desc.md | [https://github.com/nohuto/win-config/blob/main/power/desc.md](https://github.com/nohuto/win-config/blob/main/power/desc.md) | Matched 9 audit token(s) in win-config. |
+| win-config / power/desc.md | [https://github.com/nohuto/win-config/blob/main/power/desc.md](https://github.com/nohuto/win-config/blob/main/power/desc.md) | Matched 10 audit token(s) in win-config. |
+| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 10 audit token(s) in win-config. |
 | decompiled-pseudocode / USBHUB3 | [https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3](https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3) | USB hub pseudocode relevant to USB and peripheral registry behavior. |
 
 **Targets**
@@ -32680,9 +30318,9 @@ Nohuto lineage references:
 
 | Title | Location | Summary |
 | --- | --- | --- |
+| win-config / cleanup/desc.md | [https://github.com/nohuto/win-config/blob/main/cleanup/desc.md](https://github.com/nohuto/win-config/blob/main/cleanup/desc.md) | Matched 1 audit token(s) in win-config. |
 | win-config / misc/desc.md | [https://github.com/nohuto/win-config/blob/main/misc/desc.md](https://github.com/nohuto/win-config/blob/main/misc/desc.md) | Matched 1 audit token(s) in win-config. |
 | win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 1 audit token(s) in win-config. |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 1 audit token(s) in win-config. |
 
 **Targets**
 
@@ -32732,10 +30370,10 @@ Nohuto lineage references:
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `windows-terminal-settings-doc` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Windows Terminal settings | [https://learn.microsoft.com/en-us/windows/terminal/customize-settings/startup](https://learn.microsoft.com/en-us/windows/terminal/customize-settings/startup) | `medium` | behavior, app-mismatch |
-| `ghidra-terminalapp-memory-scan` | `ghidra-headless` | `unspecified` | Ghidra headless raw-memory scan of TerminalApp.dll | [evidence/records/raw/ghidra/developer.terminal-dev-mode/terminal-ghidra.txt](../evidence/records/raw/ghidra/developer.terminal-dev-mode/terminal-ghidra.txt); [evidence/records/raw/ghidra/developer.terminal-dev-mode/terminal-ghidra-enabledebugtap.txt](../evidence/records/raw/ghidra/developer.terminal-dev-mode/terminal-ghidra-enabledebugtap.txt) | `medium` | negative-evidence, binary-scan |
+| `ghidra-terminalapp-memory-scan` | `ghidra-headless` | `unspecified` | Ghidra headless raw-memory scan of TerminalApp.dll | [evidence/raw/ghidra/developer.terminal-dev-mode/terminal-ghidra.txt](../evidence/raw/ghidra/developer.terminal-dev-mode/terminal-ghidra.txt); [evidence/raw/ghidra/developer.terminal-dev-mode/terminal-ghidra-enabledebugtap.txt](../evidence/raw/ghidra/developer.terminal-dev-mode/terminal-ghidra-enabledebugtap.txt) | `medium` | negative-evidence, binary-scan |
 | `wpr-terminal-launch-trace` | `wpr-trace` | `unspecified` | WPR capture of Windows Terminal launch | [evidence/files/host/terminal-launch.etl.md](../evidence/files/host-temp/terminal-launch.etl.md) | `low` | behavior, process-tree, startup-context |
 | `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping |
-| `vm-developer.terminal-dev-mode-etw-stackwalk-attempt-20260424h` | `etw-trace` | `unspecified` | Bounded ETW stackwalk timeout receipt | [evidence/records/raw/etw-stackwalk/developer.terminal-dev-mode-etw-20260424h/developer.terminal-dev-mode-etw-20260424h-summary.json](../evidence/records/raw/etw-stackwalk/developer.terminal-dev-mode-etw-20260424h/developer.terminal-dev-mode-etw-20260424h-summary.json) and [evidence/records/raw/etw-stackwalk/developer.terminal-dev-mode-etw-20260424h/developer.terminal-dev-mode-etw-20260424h-stage.json](../evidence/records/raw/etw-stackwalk/developer.terminal-dev-mode-etw-20260424h/developer.terminal-dev-mode-etw-20260424h-stage.json) and [evidence/records/captures/developer-terminal-dev-mode-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/developer-terminal-dev-mode-etw-stackwalk-attempt-20260424.json) | `medium` | runtime-lane-review, transport-blocker |
+| `vm-developer.terminal-dev-mode-etw-stackwalk-attempt-20260424h` | `etw-trace` | `unspecified` | Bounded ETW stackwalk timeout receipt | [evidence/raw/etw-stackwalk/developer.terminal-dev-mode-etw-20260424h/developer.terminal-dev-mode-etw-20260424h-summary.json](../evidence/raw/etw-stackwalk/developer.terminal-dev-mode-etw-20260424h/developer.terminal-dev-mode-etw-20260424h-summary.json) and [evidence/raw/etw-stackwalk/developer.terminal-dev-mode-etw-20260424h/developer.terminal-dev-mode-etw-20260424h-stage.json](../evidence/raw/etw-stackwalk/developer.terminal-dev-mode-etw-20260424h/developer.terminal-dev-mode-etw-20260424h-stage.json) and [evidence/captures/developer-terminal-dev-mode-etw-stackwalk-attempt-20260424.json](../evidence/captures/developer-terminal-dev-mode-etw-stackwalk-attempt-20260424.json) | `medium` | runtime-lane-review, transport-blocker |
 
 **Validation proof**
 
@@ -33063,8 +30701,8 @@ Nohuto lineage references:
 | Title | Location | Summary |
 | --- | --- | --- |
 | win-config / cleanup/desc.md | [https://github.com/nohuto/win-config/blob/main/cleanup/desc.md](https://github.com/nohuto/win-config/blob/main/cleanup/desc.md) | Matched 2 audit token(s) in win-config. |
+| win-config / network/desc.md | [https://github.com/nohuto/win-config/blob/main/network/desc.md](https://github.com/nohuto/win-config/blob/main/network/desc.md) | Matched 2 audit token(s) in win-config. |
 | win-config / peripheral/desc.md | [https://github.com/nohuto/win-config/blob/main/peripheral/desc.md](https://github.com/nohuto/win-config/blob/main/peripheral/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / power/desc.md | [https://github.com/nohuto/win-config/blob/main/power/desc.md](https://github.com/nohuto/win-config/blob/main/power/desc.md) | Matched 2 audit token(s) in win-config. |
 
 **Targets**
 
@@ -33118,8 +30756,8 @@ Nohuto lineage references:
 | `vscode-settings-reference` | `official-doc` | `Microsoft official doc` | VS Code documentation: Default settings reference | [https://code.visualstudio.com/docs/reference/default-settings](https://code.visualstudio.com/docs/reference/default-settings) | `high` | value, allowed-values, behavior |
 | `vscode-source-control-faq` | `official-doc` | `Microsoft official doc` | VS Code documentation: Source Control FAQ | [https://code.visualstudio.com/docs/sourcecontrol/faq](https://code.visualstudio.com/docs/sourcecontrol/faq) | `high` | value, behavior |
 | `app-developer-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/DeveloperTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
-| `vm-developer.vscode-git-autofetch-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for DisableGitAutofetch | [evidence/records/captures/developer-vscode-git-autofetch-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/developer-vscode-git-autofetch-etw-stackwalk-attempt-20260424.json) and [evidence/records/raw/etw-stackwalk/developer-vscode-git-autofetch-etw-20260424-batch2/developer-vscode-git-autofetch-etw-20260424-batch2-summary.json](../evidence/records/raw/etw-stackwalk/developer-vscode-git-autofetch-etw-20260424-batch2/developer-vscode-git-autofetch-etw-20260424-batch2-summary.json) and [evidence/records/raw/etw-stackwalk/developer-vscode-git-autofetch-etw-20260424-batch2/developer-vscode-git-autofetch-etw-20260424-batch2-stage.json](../evidence/records/raw/etw-stackwalk/developer-vscode-git-autofetch-etw-20260424-batch2/developer-vscode-git-autofetch-etw-20260424-batch2-stage.json) | `low` | behavior, version-scope |
-| `vm-developer.vscode-git-autofetch-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for DisableGitAutofetch | [evidence/records/raw/ghidra/ghidra-developer-vscode-git-autofetch-20260424-batch2/summary.json](../evidence/records/raw/ghidra/ghidra-developer-vscode-git-autofetch-20260424-batch2/summary.json) | `low` | version-scope |
+| `vm-developer.vscode-git-autofetch-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW summary receipt for DisableGitAutofetch | [evidence/captures/developer-vscode-git-autofetch-etw-stackwalk-attempt-20260424.json](../evidence/captures/developer-vscode-git-autofetch-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/developer-vscode-git-autofetch-etw-20260424-batch2/developer-vscode-git-autofetch-etw-20260424-batch2-summary.json](../evidence/raw/etw-stackwalk/developer-vscode-git-autofetch-etw-20260424-batch2/developer-vscode-git-autofetch-etw-20260424-batch2-summary.json) and [evidence/raw/etw-stackwalk/developer-vscode-git-autofetch-etw-20260424-batch2/developer-vscode-git-autofetch-etw-20260424-batch2-stage.json](../evidence/raw/etw-stackwalk/developer-vscode-git-autofetch-etw-20260424-batch2/developer-vscode-git-autofetch-etw-20260424-batch2-stage.json) | `low` | behavior, version-scope |
+| `vm-developer.vscode-git-autofetch-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for DisableGitAutofetch | [evidence/raw/ghidra/ghidra-developer-vscode-git-autofetch-20260424-batch2/summary.json](../evidence/raw/ghidra/ghidra-developer-vscode-git-autofetch-20260424-batch2/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -33578,7 +31216,7 @@ Nohuto lineage references:
 | Title | Location | Summary |
 | --- | --- | --- |
 | win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 5 audit token(s) in win-config. |
-| win-registry / README.md | [https://github.com/nohuto/win-registry/blob/main/README.md](https://github.com/nohuto/win-registry/blob/main/README.md) | Matched 5 audit token(s) in win-registry. |
+| win-config / system/assets/mmcss-CiConfigInitialize.c | [https://github.com/nohuto/win-config/blob/main/system/assets/mmcss-CiConfigInitialize.c](https://github.com/nohuto/win-config/blob/main/system/assets/mmcss-CiConfigInitialize.c) | Matched 4 audit token(s) in win-config. |
 | win-registry / records/MultiMedia.txt | [https://github.com/nohuto/win-registry/blob/main/records/MultiMedia.txt](https://github.com/nohuto/win-registry/blob/main/records/MultiMedia.txt) | Matched 4 audit token(s) in win-registry. |
 | decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
 
@@ -33725,7 +31363,7 @@ Current writes
 | Has nohuto lineage | `True` |
 | Has Windows Internals notes | `True` |
 | Needs review | `False` |
-| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Source repositories | win-config, decompiled-pseudocode, win-registry |
 | Matched tokens | power, coalescingtimerinterval, deepiocoalescingenabled, eventprocessorenabled, latencytoleranceparked, latencytolerancesoftparked, energyestimationenabled |
 | Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
 
@@ -33734,8 +31372,8 @@ Nohuto lineage references:
 | Title | Location | Summary |
 | --- | --- | --- |
 | win-config / power/desc.md | [https://github.com/nohuto/win-config/blob/main/power/desc.md](https://github.com/nohuto/win-config/blob/main/power/desc.md) | Matched 7 audit token(s) in win-config. |
-| win-registry / README.md | [https://github.com/nohuto/win-registry/blob/main/README.md](https://github.com/nohuto/win-registry/blob/main/README.md) | Matched 7 audit token(s) in win-registry. |
-| win-registry / assets/power/power-symbols.txt | [https://github.com/nohuto/win-registry/blob/main/assets/power/power-symbols.txt](https://github.com/nohuto/win-registry/blob/main/assets/power/power-symbols.txt) | Matched 5 audit token(s) in win-registry. |
+| win-config / power/assets/power/power-symbols.txt | [https://github.com/nohuto/win-config/blob/main/power/assets/power/power-symbols.txt](https://github.com/nohuto/win-config/blob/main/power/assets/power/power-symbols.txt) | Matched 5 audit token(s) in win-config. |
+| win-config / power/assets/NV-IMOD.py | [https://github.com/nohuto/win-config/blob/main/power/assets/NV-IMOD.py](https://github.com/nohuto/win-config/blob/main/power/assets/NV-IMOD.py) | Matched 1 audit token(s) in win-config. |
 | decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
 | win-config / power/desc.md#power-values | [https://github.com/nohuto/win-config/blob/main/power/desc.md#power-values](https://github.com/nohuto/win-config/blob/main/power/desc.md#power-values) | Documents the base power-manager values used by this tweak. |
 | win-config / power/desc.md#disable-timer-coalescing | [https://github.com/nohuto/win-config/blob/main/power/desc.md#disable-timer-coalescing](https://github.com/nohuto/win-config/blob/main/power/desc.md#disable-timer-coalescing) | Documents timer coalescing and deep IO coalescing behavior. |
@@ -35374,7 +33012,7 @@ Current writes
 | Has nohuto lineage | `True` |
 | Has Windows Internals notes | `False` |
 | Needs review | `False` |
-| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Source repositories | win-config, decompiled-pseudocode |
 | Matched tokens | winevt, channels, sleepstudy, diagnostic, enabled, kernel, processor, power, usermodepowerservice |
 | Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
 
@@ -35383,8 +33021,8 @@ Nohuto lineage references:
 | Title | Location | Summary |
 | --- | --- | --- |
 | win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 9 audit token(s) in win-config. |
+| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 7 audit token(s) in win-config. |
 | win-config / network/desc.md | [https://github.com/nohuto/win-config/blob/main/network/desc.md](https://github.com/nohuto/win-config/blob/main/network/desc.md) | Matched 6 audit token(s) in win-config. |
-| win-registry / README.md | [https://github.com/nohuto/win-registry/blob/main/README.md](https://github.com/nohuto/win-registry/blob/main/README.md) | Matched 6 audit token(s) in win-registry. |
 | decompiled-pseudocode / ntoskrnl | [https://github.com/nohuto/decompiled-pseudocode/tree/main/ntoskrnl](https://github.com/nohuto/decompiled-pseudocode/tree/main/ntoskrnl) | Kernel pseudocode relevant to Session Manager / PriorityControl / DPC paths. |
 
 **Targets**
@@ -35790,7 +33428,7 @@ Current writes
 | Has nohuto lineage | `True` |
 | Has Windows Internals notes | `False` |
 | Needs review | `False` |
-| Source repositories | win-config, regkit |
+| Source repositories | win-config, win-registry |
 | Matched tokens | mediaplayer, preferences |
 | Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
 
@@ -35800,7 +33438,7 @@ Nohuto lineage references:
 | --- | --- | --- |
 | win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 2 audit token(s) in win-config. |
 | win-config / visibility/desc.md | [https://github.com/nohuto/win-config/blob/main/visibility/desc.md](https://github.com/nohuto/win-config/blob/main/visibility/desc.md) | Matched 1 audit token(s) in win-config. |
-| regkit / README.md | [https://github.com/nohuto/regkit/blob/main/README.md](https://github.com/nohuto/regkit/blob/main/README.md) | Matched 1 audit token(s) in regkit. |
+| win-registry / README.md | [https://github.com/nohuto/win-registry/blob/main/README.md](https://github.com/nohuto/win-registry/blob/main/README.md) | Matched 1 audit token(s) in win-registry. |
 
 **Targets**
 
@@ -35910,27 +33548,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | policies, deviceguard |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / security/desc.md | [https://github.com/nohuto/win-config/blob/main/security/desc.md](https://github.com/nohuto/win-config/blob/main/security/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-config / security/assets/Windows-Defender.txt | [https://github.com/nohuto/win-config/blob/main/security/assets/Windows-Defender.txt](https://github.com/nohuto/win-config/blob/main/security/assets/Windows-Defender.txt) | Matched 1 audit token(s) in win-config. |
-| win-config / affinities/desc.md | [https://github.com/nohuto/win-config/blob/main/affinities/desc.md](https://github.com/nohuto/win-config/blob/main/affinities/desc.md) | Matched 1 audit token(s) in win-config. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -36003,8 +33627,8 @@ Windows Internals references:
 | `local-deviceguard-admx` | `official-doc` | `Microsoft official doc` | Local Microsoft DeviceGuard.admx mapping | [evidence/files/external/c/Windows/PolicyDefinitions/DeviceGuard.admx](../evidence/files/external/c/Windows/PolicyDefinitions/DeviceGuard.admx) | `high` | path, value, allowed-values, version-scope |
 | `local-deviceguard-adml` | `official-doc` | `Microsoft official doc` | Local Microsoft DeviceGuard.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/DeviceGuard.adml](../evidence/files/external/c/PolicyDefinitions/en-US/DeviceGuard.adml) | `high` | behavior, default, side-effects |
 | `app-security-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SecurityTweakProvider.cs | `high` | path, value, ui-mapping |
-| `vm-security.disable-vbs-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for EnableVirtualizationBasedSecurity | [evidence/records/captures/security-disable-vbs-etw-stackwalk-attempt-20260427.json](../evidence/records/captures/security-disable-vbs-etw-stackwalk-attempt-20260427.json) and [evidence/records/raw/etw-stackwalk/security-disable-vbs-etw-20260427a/security-disable-vbs-etw-20260427a-summary.json](../evidence/records/raw/etw-stackwalk/security-disable-vbs-etw-20260427a/security-disable-vbs-etw-20260427a-summary.json) | `low` | behavior, version-scope |
-| `vm-security.disable-vbs-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for EnableVirtualizationBasedSecurity | [evidence/records/raw/ghidra/ghidra-security-disable-vbs-20260427a/summary.json](../evidence/records/raw/ghidra/ghidra-security-disable-vbs-20260427a/summary.json) | `low` | version-scope |
+| `vm-security.disable-vbs-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for EnableVirtualizationBasedSecurity | [evidence/captures/security-disable-vbs-etw-stackwalk-attempt-20260427.json](../evidence/captures/security-disable-vbs-etw-stackwalk-attempt-20260427.json) and [evidence/raw/etw-stackwalk/security-disable-vbs-etw-20260427a/security-disable-vbs-etw-20260427a-summary.json](../evidence/raw/etw-stackwalk/security-disable-vbs-etw-20260427a/security-disable-vbs-etw-20260427a-summary.json) | `low` | behavior, version-scope |
+| `vm-security.disable-vbs-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for EnableVirtualizationBasedSecurity | [evidence/raw/ghidra/ghidra-security-disable-vbs-20260427a/summary.json](../evidence/raw/ghidra/ghidra-security-disable-vbs-20260427a/summary.json) | `low` | version-scope |
 
 **Validation proof**
 
@@ -36078,27 +33702,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config |
-| Matched tokens | windowsupdate, settings, pausefeatureupdatesendtime, 2030-01-01t00:00:00z, pausequalityupdatesendtime, pauseupdatesexpirytime, policies, disablewindowsupdateaccess, noautoupdate |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / security/desc.md | [https://github.com/nohuto/win-config/blob/main/security/desc.md](https://github.com/nohuto/win-config/blob/main/security/desc.md) | Matched 9 audit token(s) in win-config. |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-config / misc/desc.md | [https://github.com/nohuto/win-config/blob/main/misc/desc.md](https://github.com/nohuto/win-config/blob/main/misc/desc.md) | Matched 2 audit token(s) in win-config. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -36221,28 +33831,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config, win-registry, decompiled-pseudocode |
-| Matched tokens | session, manager, disablewpbtexecution |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / security/desc.md | [https://github.com/nohuto/win-config/blob/main/security/desc.md](https://github.com/nohuto/win-config/blob/main/security/desc.md) | Matched 3 audit token(s) in win-config. |
-| win-registry / README.md | [https://github.com/nohuto/win-registry/blob/main/README.md](https://github.com/nohuto/win-registry/blob/main/README.md) | Matched 3 audit token(s) in win-registry. |
-| win-registry / records/Session-Manager.txt | [https://github.com/nohuto/win-registry/blob/main/records/Session-Manager.txt](https://github.com/nohuto/win-registry/blob/main/records/Session-Manager.txt) | Matched 3 audit token(s) in win-registry. |
-| decompiled-pseudocode / ntoskrnl | [https://github.com/nohuto/decompiled-pseudocode/tree/main/ntoskrnl](https://github.com/nohuto/decompiled-pseudocode/tree/main/ntoskrnl) | Kernel pseudocode relevant to Session Manager / PriorityControl / DPC paths. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -36436,28 +34031,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config, decompiled-pseudocode |
-| Matched tokens | application, experience, marebackup, compatibility, appraiser, customer, improvement, program, consolidator, usbceip, diskcleanup, silentcleanup, feedback, siuf, dmclient, error, reporting, queuereporting |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 18 audit token(s) in win-config. |
-| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 13 audit token(s) in win-config. |
-| win-config / system/assets/services.txt | [https://github.com/nohuto/win-config/blob/main/system/assets/services.txt](https://github.com/nohuto/win-config/blob/main/system/assets/services.txt) | Matched 7 audit token(s) in win-config. |
-| decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 
@@ -36862,7 +34442,7 @@ Current writes
 | Has nohuto lineage | `True` |
 | Has Windows Internals notes | `True` |
 | Needs review | `False` |
-| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Source repositories | win-config, decompiled-pseudocode |
 | Matched tokens | overlaytestmode |
 | Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
 
@@ -36871,8 +34451,8 @@ Nohuto lineage references:
 | Title | Location | Summary |
 | --- | --- | --- |
 | win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 1 audit token(s) in win-config. |
+| win-config / system/assets/dwm/CCommonRegistryData_InitializeDWMKeysFromRegistry.c | [https://github.com/nohuto/win-config/blob/main/system/assets/dwm/CCommonRegistryData_InitializeDWMKeysFromRegistry.c](https://github.com/nohuto/win-config/blob/main/system/assets/dwm/CCommonRegistryData_InitializeDWMKeysFromRegistry.c) | Matched 1 audit token(s) in win-config. |
 | win-config / nvidia/desc.md | [https://github.com/nohuto/win-config/blob/main/nvidia/desc.md](https://github.com/nohuto/win-config/blob/main/nvidia/desc.md) | Matched 1 audit token(s) in win-config. |
-| win-registry / README.md | [https://github.com/nohuto/win-registry/blob/main/README.md](https://github.com/nohuto/win-registry/blob/main/README.md) | Matched 1 audit token(s) in win-registry. |
 | decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
 
 Windows Internals references:
@@ -36991,7 +34571,7 @@ Current writes
 | Has nohuto lineage | `True` |
 | Has Windows Internals notes | `True` |
 | Needs review | `False` |
-| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Source repositories | win-config, decompiled-pseudocode |
 | Matched tokens | graphicsdrivers, disableoverlays |
 | Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
 
@@ -37000,8 +34580,8 @@ Nohuto lineage references:
 | Title | Location | Summary |
 | --- | --- | --- |
 | win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-registry / README.md | [https://github.com/nohuto/win-registry/blob/main/README.md](https://github.com/nohuto/win-registry/blob/main/README.md) | Matched 2 audit token(s) in win-registry. |
-| win-registry / assets/dxg-values/DXGADAPTER_ReadConfig.c | [https://github.com/nohuto/win-registry/blob/main/assets/dxg-values/DXGADAPTER_ReadConfig.c](https://github.com/nohuto/win-registry/blob/main/assets/dxg-values/DXGADAPTER_ReadConfig.c) | Matched 2 audit token(s) in win-registry. |
+| win-config / system/assets/dxg-values/DXGADAPTER_ReadConfig.c | [https://github.com/nohuto/win-config/blob/main/system/assets/dxg-values/DXGADAPTER_ReadConfig.c](https://github.com/nohuto/win-config/blob/main/system/assets/dxg-values/DXGADAPTER_ReadConfig.c) | Matched 2 audit token(s) in win-config. |
+| win-config / system/assets/dxg-values/ADAPTER_DISPLAY_Initialize.c | [https://github.com/nohuto/win-config/blob/main/system/assets/dxg-values/ADAPTER_DISPLAY_Initialize.c](https://github.com/nohuto/win-config/blob/main/system/assets/dxg-values/ADAPTER_DISPLAY_Initialize.c) | Matched 1 audit token(s) in win-config. |
 | decompiled-pseudocode / dxgkrnl | [https://github.com/nohuto/decompiled-pseudocode/tree/main/dxgkrnl](https://github.com/nohuto/decompiled-pseudocode/tree/main/dxgkrnl) | Graphics kernel pseudocode relevant to GraphicsDrivers / TDR / HAGS style registry work. |
 
 Windows Internals references:
@@ -37120,7 +34700,7 @@ Current writes
 | Has nohuto lineage | `True` |
 | Has Windows Internals notes | `True` |
 | Needs review | `False` |
-| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Source repositories | win-config, decompiled-pseudocode |
 | Matched tokens | graphicsdrivers, pagefaultdebugmode |
 | Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
 
@@ -37129,8 +34709,8 @@ Nohuto lineage references:
 | Title | Location | Summary |
 | --- | --- | --- |
 | win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 2 audit token(s) in win-config. |
-| win-registry / README.md | [https://github.com/nohuto/win-registry/blob/main/README.md](https://github.com/nohuto/win-registry/blob/main/README.md) | Matched 2 audit token(s) in win-registry. |
-| win-registry / assets/dxg-values/dxgmms2/VidSchInitializeAdapter.c | [https://github.com/nohuto/win-registry/blob/main/assets/dxg-values/dxgmms2/VidSchInitializeAdapter.c](https://github.com/nohuto/win-registry/blob/main/assets/dxg-values/dxgmms2/VidSchInitializeAdapter.c) | Matched 2 audit token(s) in win-registry. |
+| win-config / system/assets/dxg-values/dxgmms2/VidSchInitializeAdapter.c | [https://github.com/nohuto/win-config/blob/main/system/assets/dxg-values/dxgmms2/VidSchInitializeAdapter.c](https://github.com/nohuto/win-config/blob/main/system/assets/dxg-values/dxgmms2/VidSchInitializeAdapter.c) | Matched 2 audit token(s) in win-config. |
+| win-config / system/assets/dxg-values/ADAPTER_DISPLAY_Initialize.c | [https://github.com/nohuto/win-config/blob/main/system/assets/dxg-values/ADAPTER_DISPLAY_Initialize.c](https://github.com/nohuto/win-config/blob/main/system/assets/dxg-values/ADAPTER_DISPLAY_Initialize.c) | Matched 1 audit token(s) in win-config. |
 | decompiled-pseudocode / dxgkrnl | [https://github.com/nohuto/decompiled-pseudocode/tree/main/dxgkrnl](https://github.com/nohuto/decompiled-pseudocode/tree/main/dxgkrnl) | Graphics kernel pseudocode relevant to GraphicsDrivers / TDR / HAGS style registry work. |
 
 Windows Internals references:
@@ -37224,7 +34804,7 @@ Blocking issues:
 | --- | --- |
 | Status | `not-mapped` |
 | Provider source | not currently shipped in the app |
-| Notes | The current app does not expose AllowRemoteDASD as a direct tweak or UI surface. |
+| Notes | The checked-in app does not expose AllowRemoteDASD as a direct tweak or UI surface. |
 
 **Evidence class**
 
@@ -37281,14 +34861,14 @@ Blocking issues:
 | --- | --- | --- | --- | --- | --- | --- |
 | `vm-session-manager-io-phase0-20260329` | `registry-observation` | `VM registry observation` | Win25H2Clean 96-key phase-0 existence batch | [evidence/files/vm/registry-batch-existence-96-live-20260329-100629/results.json](../evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json) | `high` | path, value, default, version-scope |
 | `ms-removable-storage-allow-remote-dasd-20260407` | `official-doc` | `Microsoft official doc` | Microsoft Learn ADMX_RemovableStorage mapping for AllowRemoteDASD | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-removablestorage](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-removablestorage) and [research/notes/system-io-allow-remote-dasd-official-policy-follow-up-20260407.md](notes/system-io-allow-remote-dasd-official-policy-follow-up-20260407.md) | `high` | path, value, behavior, version-scope |
-| `static-session-manager-io-allow-remote-dasd-20260330` | `decompilation` | `Our Ghidra decompilation` | Path-aware static probe for AllowRemoteDASD | [evidence/files/path-aware/path-aware-static-20260330-194412/system-io-allow-remote-dasd/summary.json](../evidence/files/path-aware/path-aware-static-20260330-194412/system-io-allow-remote-dasd/summary.json) and [evidence/records/raw/ghidra/system-io-allow-remote-dasd-ntoskrnl-exe-path-aware-20260330-194412/ghidra-matches.md](../evidence/records/raw/ghidra/system-io-allow-remote-dasd-ntoskrnl-exe-path-aware-20260330-194412/ghidra-matches.md) | `high` | path, value, behavior, version-scope |
+| `static-session-manager-io-allow-remote-dasd-20260330` | `decompilation` | `Our Ghidra decompilation` | Path-aware static probe for AllowRemoteDASD | [evidence/files/path-aware/path-aware-static-20260330-194412/system-io-allow-remote-dasd/summary.json](../evidence/files/path-aware/path-aware-static-20260330-194412/system-io-allow-remote-dasd/summary.json) and [evidence/raw/ghidra/system-io-allow-remote-dasd-ntoskrnl-exe-path-aware-20260330-194412/ghidra-matches.md](../evidence/raw/ghidra/system-io-allow-remote-dasd-ntoskrnl-exe-path-aware-20260330-194412/ghidra-matches.md) | `high` | path, value, behavior, version-scope |
 | `vm-session-manager-io-allow-remote-dasd-runtime-20260330` | `etw-trace` | `unspecified` | Path-aware lightweight ETW follow-up for AllowRemoteDASD | [evidence/files/path-aware/path-aware-runtime-20260330-220218/summary.json](../evidence/files/path-aware/path-aware-runtime-20260330-220218/summary.json) and [evidence/files/path-aware/path-aware-runtime-20260330-220218/system-io-allow-remote-dasd/summary.json](../evidence/files/path-aware/path-aware-runtime-20260330-220218/system-io-allow-remote-dasd/summary.json) | `medium` | behavior, risk, version-scope |
 | `historical-collision-note-20260328` | `repo-doc` | `Current repo docs` | Historical collision review for AllowRemoteDASD | [research/notes/kernel-power-existing-static-triage-20260328.md](notes/kernel-power-existing-static-triage-20260328.md) | `medium` | behavior, risk |
 | `vm-session-manager-io-allow-remote-dasd-kvm-procmon-20260406` | `procmon-trace` | `VM Procmon trace` | Linux KVM Procmon replay for AllowRemoteDASD | [evidence/files/vm/allowremotedasd-procmon-kvm-20260406b/allowremotedasd-procmon-kvm-20260406b-summary.json](../evidence/files/vm-tooling-staging/allowremotedasd-procmon-kvm-20260406b/allowremotedasd-procmon-kvm-20260406b-summary.json) and [evidence/files/vm/allowremotedasd-procmon-kvm-20260406b/host-review.json](../evidence/files/vm-tooling-staging/allowremotedasd-procmon-kvm-20260406b/host-review.json) | `medium` | behavior, risk, version-scope |
 | `vm-session-manager-io-allow-remote-dasd-kvm-local-kd-20260406` | `vm-test` | `VM test / probe` | Linux KVM local-KD live symbol query for AllowRemoteDASD | [evidence/files/vm/local-kd-allowremotedasd-20260406h/local-kd-allowremotedasd-20260406h-summary.json](../evidence/files/vm-tooling-staging/local-kd-allowremotedasd-20260406h/local-kd-allowremotedasd-20260406h-summary.json) and [evidence/files/vm/local-kd-allowremotedasd-20260406h/local-kd-allowremotedasd-20260406h.log](../evidence/files/vm-tooling-staging/local-kd-allowremotedasd-20260406h/local-kd-allowremotedasd-20260406h.log) | `medium` | behavior, version-scope |
 | `vm-session-manager-io-allow-remote-dasd-kvm-local-kd-disasm-20260406` | `vm-test` | `VM test / probe` | Linux KVM local-KD disassembly for AllowRemoteDASD | [evidence/files/vm/local-kd-allowremotedasd-disasm-20260406a/local-kd-allowremotedasd-disasm-20260406a-summary.json](../evidence/files/vm-tooling-staging/local-kd-allowremotedasd-disasm-20260406a/local-kd-allowremotedasd-disasm-20260406a-summary.json) and [evidence/files/vm/local-kd-allowremotedasd-disasm-20260406a/local-kd-allowremotedasd-disasm-20260406a.log](../evidence/files/vm-tooling-staging/local-kd-allowremotedasd-disasm-20260406a/local-kd-allowremotedasd-disasm-20260406a.log) and [evidence/files/vm/local-kd-allowremotedasd-strings-20260406a/local-kd-allowremotedasd-strings-20260406a-summary.json](../evidence/files/vm-tooling-staging/local-kd-allowremotedasd-strings-20260406a/local-kd-allowremotedasd-strings-20260406a-summary.json) and [evidence/files/vm/local-kd-allowremotedasd-strings-20260406a/local-kd-allowremotedasd-strings-20260406a.log](../evidence/files/vm-tooling-staging/local-kd-allowremotedasd-strings-20260406a/local-kd-allowremotedasd-strings-20260406a.log) and [research/notes/system-io-allow-remote-dasd-kvm-local-kd-disasm-follow-up-20260406.md](notes/system-io-allow-remote-dasd-kvm-local-kd-disasm-follow-up-20260406.md) | `medium` | path, behavior, version-scope |
 | `vm-session-manager-io-allow-remote-dasd-kvm-procmon-recovery-20260407` | `procmon-trace` | `VM Procmon trace` | Linux KVM recovery-backed Procmon replay for AllowRemoteDASD | [evidence/files/vm/allowremotedasd-procmon-kvm-recovery-20260407a/allowremotedasd-procmon-kvm-recovery-20260407a-summary.json](../evidence/files/vm-tooling-staging/allowremotedasd-procmon-kvm-recovery-20260407a/allowremotedasd-procmon-kvm-recovery-20260407a-summary.json) and [evidence/files/vm/allowremotedasd-procmon-kvm-recovery-20260407a/allowremotedasd-procmon-kvm-recovery-20260407a.txt](../evidence/files/vm-tooling-staging/allowremotedasd-procmon-kvm-recovery-20260407a/allowremotedasd-procmon-kvm-recovery-20260407a.txt) and [evidence/files/vm/allowremotedasd-procmon-kvm-recovery-20260407a/host-review.json](../evidence/files/vm-tooling-staging/allowremotedasd-procmon-kvm-recovery-20260407a/host-review.json) and [research/notes/system-io-allow-remote-dasd-kvm-procmon-recovery-20260407.md](notes/system-io-allow-remote-dasd-kvm-procmon-recovery-20260407.md) | `medium` | behavior, risk, version-scope |
-| `vm-session-manager-io-allow-remote-dasd-etw-stackwalk-20260424` | `etw-trace` | `unspecified` | Bounded KVM ETW stackwalk review for deprecated AllowRemoteDASD path | [evidence/records/raw/etw-stackwalk/system-io-allow-remote-dasd-etw-20260424/system-io-allow-remote-dasd-etw-20260424.etl](../evidence/records/raw/etw-stackwalk/system-io-allow-remote-dasd-etw-20260424/system-io-allow-remote-dasd-etw-20260424.etl) and [evidence/records/raw/etw-stackwalk/system-io-allow-remote-dasd-etw-20260424/system-io-allow-remote-dasd-etw-20260424-summary.json](../evidence/records/raw/etw-stackwalk/system-io-allow-remote-dasd-etw-20260424/system-io-allow-remote-dasd-etw-20260424-summary.json) and [evidence/records/raw/etw-stackwalk/system-io-allow-remote-dasd-etw-20260424/normalized-registry-bundle.json](../evidence/records/raw/etw-stackwalk/system-io-allow-remote-dasd-etw-20260424/normalized-registry-bundle.json) and [evidence/records/captures/system-io-allow-remote-dasd-etw-stackwalk-20260424.json](../evidence/records/captures/system-io-allow-remote-dasd-etw-stackwalk-20260424.json) | `medium` | behavior, risk, version-scope |
+| `vm-session-manager-io-allow-remote-dasd-etw-stackwalk-20260424` | `etw-trace` | `unspecified` | Bounded KVM ETW stackwalk review for deprecated AllowRemoteDASD path | [evidence/raw/etw-stackwalk/system-io-allow-remote-dasd-etw-20260424/system-io-allow-remote-dasd-etw-20260424.etl](../evidence/raw/etw-stackwalk/system-io-allow-remote-dasd-etw-20260424/system-io-allow-remote-dasd-etw-20260424.etl) and [evidence/raw/etw-stackwalk/system-io-allow-remote-dasd-etw-20260424/system-io-allow-remote-dasd-etw-20260424-summary.json](../evidence/raw/etw-stackwalk/system-io-allow-remote-dasd-etw-20260424/system-io-allow-remote-dasd-etw-20260424-summary.json) and [evidence/raw/etw-stackwalk/system-io-allow-remote-dasd-etw-20260424/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/system-io-allow-remote-dasd-etw-20260424/normalized-registry-bundle.json) and [evidence/captures/system-io-allow-remote-dasd-etw-stackwalk-20260424.json](../evidence/captures/system-io-allow-remote-dasd-etw-stackwalk-20260424.json) | `medium` | behavior, risk, version-scope |
 
 **Validation proof**
 
@@ -37360,7 +34940,7 @@ Current writes
 | Has nohuto lineage | `True` |
 | Has Windows Internals notes | `True` |
 | Needs review | `False` |
-| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Source repositories | win-config, decompiled-pseudocode |
 | Matched tokens | session, manager, kernel, adjustdpcthreshold |
 | Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
 
@@ -37369,8 +34949,8 @@ Nohuto lineage references:
 | Title | Location | Summary |
 | --- | --- | --- |
 | win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 4 audit token(s) in win-config. |
-| win-registry / README.md | [https://github.com/nohuto/win-registry/blob/main/README.md](https://github.com/nohuto/win-registry/blob/main/README.md) | Matched 4 audit token(s) in win-registry. |
-| win-config / system/assets/disable-services-drivers-suboption-audit.md | [https://github.com/nohuto/win-config/blob/main/system/assets/disable-services-drivers-suboption-audit.md](https://github.com/nohuto/win-config/blob/main/system/assets/disable-services-drivers-suboption-audit.md) | Matched 3 audit token(s) in win-config. |
+| win-config / system/assets/services.txt | [https://github.com/nohuto/win-config/blob/main/system/assets/services.txt](https://github.com/nohuto/win-config/blob/main/system/assets/services.txt) | Matched 3 audit token(s) in win-config. |
+| win-config / system/assets/session-manager/ProcLibGlobalInit.c | [https://github.com/nohuto/win-config/blob/main/system/assets/session-manager/ProcLibGlobalInit.c](https://github.com/nohuto/win-config/blob/main/system/assets/session-manager/ProcLibGlobalInit.c) | Matched 3 audit token(s) in win-config. |
 | decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
 
 Windows Internals references:
@@ -37491,7 +35071,7 @@ Current writes
 | Has nohuto lineage | `True` |
 | Has Windows Internals notes | `True` |
 | Needs review | `False` |
-| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Source repositories | win-config, decompiled-pseudocode |
 | Matched tokens | session, manager, kernel, cacheawarescheduling |
 | Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
 
@@ -37500,8 +35080,8 @@ Nohuto lineage references:
 | Title | Location | Summary |
 | --- | --- | --- |
 | win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 4 audit token(s) in win-config. |
-| win-registry / README.md | [https://github.com/nohuto/win-registry/blob/main/README.md](https://github.com/nohuto/win-registry/blob/main/README.md) | Matched 4 audit token(s) in win-registry. |
-| win-config / system/assets/disable-services-drivers-suboption-audit.md | [https://github.com/nohuto/win-config/blob/main/system/assets/disable-services-drivers-suboption-audit.md](https://github.com/nohuto/win-config/blob/main/system/assets/disable-services-drivers-suboption-audit.md) | Matched 3 audit token(s) in win-config. |
+| win-config / system/assets/services.txt | [https://github.com/nohuto/win-config/blob/main/system/assets/services.txt](https://github.com/nohuto/win-config/blob/main/system/assets/services.txt) | Matched 3 audit token(s) in win-config. |
+| win-config / system/assets/session-manager/ProcLibGlobalInit.c | [https://github.com/nohuto/win-config/blob/main/system/assets/session-manager/ProcLibGlobalInit.c](https://github.com/nohuto/win-config/blob/main/system/assets/session-manager/ProcLibGlobalInit.c) | Matched 3 audit token(s) in win-config. |
 | decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
 
 Windows Internals references:
@@ -37622,7 +35202,7 @@ Current writes
 | Has nohuto lineage | `True` |
 | Has Windows Internals notes | `True` |
 | Needs review | `False` |
-| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Source repositories | win-config, decompiled-pseudocode |
 | Matched tokens | session, manager, kernel, defaultdynamicheterocpupolicy |
 | Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
 
@@ -37631,8 +35211,8 @@ Nohuto lineage references:
 | Title | Location | Summary |
 | --- | --- | --- |
 | win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 4 audit token(s) in win-config. |
-| win-registry / README.md | [https://github.com/nohuto/win-registry/blob/main/README.md](https://github.com/nohuto/win-registry/blob/main/README.md) | Matched 4 audit token(s) in win-registry. |
-| win-config / system/assets/disable-services-drivers-suboption-audit.md | [https://github.com/nohuto/win-config/blob/main/system/assets/disable-services-drivers-suboption-audit.md](https://github.com/nohuto/win-config/blob/main/system/assets/disable-services-drivers-suboption-audit.md) | Matched 3 audit token(s) in win-config. |
+| win-config / system/assets/services.txt | [https://github.com/nohuto/win-config/blob/main/system/assets/services.txt](https://github.com/nohuto/win-config/blob/main/system/assets/services.txt) | Matched 3 audit token(s) in win-config. |
+| win-config / system/assets/session-manager/ProcLibGlobalInit.c | [https://github.com/nohuto/win-config/blob/main/system/assets/session-manager/ProcLibGlobalInit.c](https://github.com/nohuto/win-config/blob/main/system/assets/session-manager/ProcLibGlobalInit.c) | Matched 3 audit token(s) in win-config. |
 | decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
 
 Windows Internals references:
@@ -37757,7 +35337,7 @@ Current writes
 | Has nohuto lineage | `True` |
 | Has Windows Internals notes | `True` |
 | Needs review | `False` |
-| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Source repositories | win-config, decompiled-pseudocode |
 | Matched tokens | session, manager, kernel, disablelowqostimerresolution |
 | Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
 
@@ -37766,8 +35346,8 @@ Nohuto lineage references:
 | Title | Location | Summary |
 | --- | --- | --- |
 | win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 4 audit token(s) in win-config. |
-| win-registry / README.md | [https://github.com/nohuto/win-registry/blob/main/README.md](https://github.com/nohuto/win-registry/blob/main/README.md) | Matched 4 audit token(s) in win-registry. |
-| win-config / system/assets/disable-services-drivers-suboption-audit.md | [https://github.com/nohuto/win-config/blob/main/system/assets/disable-services-drivers-suboption-audit.md](https://github.com/nohuto/win-config/blob/main/system/assets/disable-services-drivers-suboption-audit.md) | Matched 3 audit token(s) in win-config. |
+| win-config / system/assets/services.txt | [https://github.com/nohuto/win-config/blob/main/system/assets/services.txt](https://github.com/nohuto/win-config/blob/main/system/assets/services.txt) | Matched 3 audit token(s) in win-config. |
+| win-config / system/assets/session-manager/ProcLibGlobalInit.c | [https://github.com/nohuto/win-config/blob/main/system/assets/session-manager/ProcLibGlobalInit.c](https://github.com/nohuto/win-config/blob/main/system/assets/session-manager/ProcLibGlobalInit.c) | Matched 3 audit token(s) in win-config. |
 | decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
 
 Windows Internals references:
@@ -37890,7 +35470,7 @@ Current writes
 | Has nohuto lineage | `True` |
 | Has Windows Internals notes | `True` |
 | Needs review | `False` |
-| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Source repositories | win-config, decompiled-pseudocode |
 | Matched tokens | session, manager, kernel, dpcqueuedepth |
 | Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
 
@@ -37899,8 +35479,8 @@ Nohuto lineage references:
 | Title | Location | Summary |
 | --- | --- | --- |
 | win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 4 audit token(s) in win-config. |
-| win-registry / README.md | [https://github.com/nohuto/win-registry/blob/main/README.md](https://github.com/nohuto/win-registry/blob/main/README.md) | Matched 4 audit token(s) in win-registry. |
-| win-config / system/assets/disable-services-drivers-suboption-audit.md | [https://github.com/nohuto/win-config/blob/main/system/assets/disable-services-drivers-suboption-audit.md](https://github.com/nohuto/win-config/blob/main/system/assets/disable-services-drivers-suboption-audit.md) | Matched 3 audit token(s) in win-config. |
+| win-config / system/assets/services.txt | [https://github.com/nohuto/win-config/blob/main/system/assets/services.txt](https://github.com/nohuto/win-config/blob/main/system/assets/services.txt) | Matched 3 audit token(s) in win-config. |
+| win-config / system/assets/session-manager/ProcLibGlobalInit.c | [https://github.com/nohuto/win-config/blob/main/system/assets/session-manager/ProcLibGlobalInit.c](https://github.com/nohuto/win-config/blob/main/system/assets/session-manager/ProcLibGlobalInit.c) | Matched 3 audit token(s) in win-config. |
 | decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
 
 Windows Internals references:
@@ -38021,7 +35601,7 @@ Current writes
 | Has nohuto lineage | `True` |
 | Has Windows Internals notes | `True` |
 | Needs review | `False` |
-| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Source repositories | win-config, decompiled-pseudocode |
 | Matched tokens | session, manager, kernel, dpcwatchdogperiod |
 | Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
 
@@ -38030,8 +35610,8 @@ Nohuto lineage references:
 | Title | Location | Summary |
 | --- | --- | --- |
 | win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 4 audit token(s) in win-config. |
-| win-registry / README.md | [https://github.com/nohuto/win-registry/blob/main/README.md](https://github.com/nohuto/win-registry/blob/main/README.md) | Matched 4 audit token(s) in win-registry. |
-| win-config / system/assets/disable-services-drivers-suboption-audit.md | [https://github.com/nohuto/win-config/blob/main/system/assets/disable-services-drivers-suboption-audit.md](https://github.com/nohuto/win-config/blob/main/system/assets/disable-services-drivers-suboption-audit.md) | Matched 3 audit token(s) in win-config. |
+| win-config / system/assets/services.txt | [https://github.com/nohuto/win-config/blob/main/system/assets/services.txt](https://github.com/nohuto/win-config/blob/main/system/assets/services.txt) | Matched 3 audit token(s) in win-config. |
+| win-config / system/assets/session-manager/ProcLibGlobalInit.c | [https://github.com/nohuto/win-config/blob/main/system/assets/session-manager/ProcLibGlobalInit.c](https://github.com/nohuto/win-config/blob/main/system/assets/session-manager/ProcLibGlobalInit.c) | Matched 3 audit token(s) in win-config. |
 | decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
 
 Windows Internals references:
@@ -38085,7 +35665,7 @@ Windows Internals references:
 | `vm-dpc-watchdog-period-ntsetsysinfo-kd-20260408` | `vm-test` | `VM test / probe` | Current-build KVM local-KD ties DPC watchdog writer to a privileged NtSetSystemInformation arm | [evidence/files/vm/dpc-watchdog-ntsetsysteminfo-class-kd-20260408a/summary.json](../evidence/files/vm-tooling-staging/dpc-watchdog-ntsetsysteminfo-class-kd-20260408a/summary.json) and [evidence/files/vm/dpc-watchdog-ntsetsysteminfo-class-kd-20260408a/dpc-watchdog-ntsetsysteminfo-class-kd-20260408a.log](../evidence/files/vm-tooling-staging/dpc-watchdog-ntsetsysteminfo-class-kd-20260408a/dpc-watchdog-ntsetsysteminfo-class-kd-20260408a.log) | `high` | behavior, runtime-gate, version-scope |
 | `vm-dpc-watchdog-period-init-ghidra-20260408` | `vm-test` | `VM test / probe` | PDB-backed KVM Ghidra shows current-build init semantics preserve zero watchdog globals | [evidence/files/vm/dpc-watchdog-profile-xref-20260407a/summary.json](../evidence/files/vm-tooling-staging/dpc-watchdog-profile-xref-20260407a/summary.json) and [evidence/files/vm/dpc-watchdog-profile-xref-20260407a/ghidra-matches.md](../evidence/files/vm-tooling-staging/dpc-watchdog-profile-xref-20260407a/ghidra-matches.md) | `high` | behavior, default, version-scope |
 | `vm-dpc-watchdog-period-query-lineage-kd-20260408` | `vm-test` | `VM test / probe` | Current-build KVM local-KD confirms outer DPC watchdog query wrapper | [evidence/files/vm/dpc-watchdog-query-config-kd-20260408a/summary.json](../evidence/files/vm-tooling-staging/dpc-watchdog-query-config-kd-20260408a/summary.json) and [evidence/files/vm/dpc-watchdog-query-config-kd-20260408a/dpc-watchdog-query-config-kd-20260408a.log](../evidence/files/vm-tooling-staging/dpc-watchdog-query-config-kd-20260408a/dpc-watchdog-query-config-kd-20260408a.log) | `high` | behavior, runtime-gate, version-scope |
-| `vm-dpc-watchdog-period-etw-stackwalk-attempt-20260424` | `vm-test` | `VM test / probe` | Bounded KVM ETW stackwalk retry for DpcWatchdogPeriod | [evidence/records/raw/etw-stackwalk/system-kernel-dpc-watchdog-period-etw-20260424/system-kernel-dpc-watchdog-period-etw-20260424-summary.json](../evidence/records/raw/etw-stackwalk/system-kernel-dpc-watchdog-period-etw-20260424/system-kernel-dpc-watchdog-period-etw-20260424-summary.json) and [evidence/records/raw/etw-stackwalk/system-kernel-dpc-watchdog-period-etw-20260424/system-kernel-dpc-watchdog-period-etw-20260424-stage.json](../evidence/records/raw/etw-stackwalk/system-kernel-dpc-watchdog-period-etw-20260424/system-kernel-dpc-watchdog-period-etw-20260424-stage.json) and [evidence/records/captures/system-kernel-dpc-watchdog-period-etw-stackwalk-attempt-20260424.json](../evidence/records/captures/system-kernel-dpc-watchdog-period-etw-stackwalk-attempt-20260424.json) | `low` | behavior, risk, version-scope |
+| `vm-dpc-watchdog-period-etw-stackwalk-attempt-20260424` | `vm-test` | `VM test / probe` | Bounded KVM ETW stackwalk retry for DpcWatchdogPeriod | [evidence/raw/etw-stackwalk/system-kernel-dpc-watchdog-period-etw-20260424/system-kernel-dpc-watchdog-period-etw-20260424-summary.json](../evidence/raw/etw-stackwalk/system-kernel-dpc-watchdog-period-etw-20260424/system-kernel-dpc-watchdog-period-etw-20260424-summary.json) and [evidence/raw/etw-stackwalk/system-kernel-dpc-watchdog-period-etw-20260424/system-kernel-dpc-watchdog-period-etw-20260424-stage.json](../evidence/raw/etw-stackwalk/system-kernel-dpc-watchdog-period-etw-20260424/system-kernel-dpc-watchdog-period-etw-20260424-stage.json) and [evidence/captures/system-kernel-dpc-watchdog-period-etw-stackwalk-attempt-20260424.json](../evidence/captures/system-kernel-dpc-watchdog-period-etw-stackwalk-attempt-20260424.json) | `low` | behavior, risk, version-scope |
 
 **Validation proof**
 
@@ -38164,7 +35744,7 @@ Current writes
 | Has nohuto lineage | `True` |
 | Has Windows Internals notes | `True` |
 | Needs review | `False` |
-| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Source repositories | win-config, decompiled-pseudocode |
 | Matched tokens | session, manager, kernel, idealdpcrate |
 | Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
 
@@ -38173,8 +35753,8 @@ Nohuto lineage references:
 | Title | Location | Summary |
 | --- | --- | --- |
 | win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 4 audit token(s) in win-config. |
-| win-registry / README.md | [https://github.com/nohuto/win-registry/blob/main/README.md](https://github.com/nohuto/win-registry/blob/main/README.md) | Matched 4 audit token(s) in win-registry. |
-| win-config / system/assets/disable-services-drivers-suboption-audit.md | [https://github.com/nohuto/win-config/blob/main/system/assets/disable-services-drivers-suboption-audit.md](https://github.com/nohuto/win-config/blob/main/system/assets/disable-services-drivers-suboption-audit.md) | Matched 3 audit token(s) in win-config. |
+| win-config / system/assets/services.txt | [https://github.com/nohuto/win-config/blob/main/system/assets/services.txt](https://github.com/nohuto/win-config/blob/main/system/assets/services.txt) | Matched 3 audit token(s) in win-config. |
+| win-config / system/assets/session-manager/ProcLibGlobalInit.c | [https://github.com/nohuto/win-config/blob/main/system/assets/session-manager/ProcLibGlobalInit.c](https://github.com/nohuto/win-config/blob/main/system/assets/session-manager/ProcLibGlobalInit.c) | Matched 3 audit token(s) in win-config. |
 | decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
 
 Windows Internals references:
@@ -38295,7 +35875,7 @@ Current writes
 | Has nohuto lineage | `True` |
 | Has Windows Internals notes | `True` |
 | Needs review | `False` |
-| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Source repositories | win-config, decompiled-pseudocode |
 | Matched tokens | session, manager, kernel, minimumdpcrate |
 | Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
 
@@ -38304,8 +35884,8 @@ Nohuto lineage references:
 | Title | Location | Summary |
 | --- | --- | --- |
 | win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 4 audit token(s) in win-config. |
-| win-registry / README.md | [https://github.com/nohuto/win-registry/blob/main/README.md](https://github.com/nohuto/win-registry/blob/main/README.md) | Matched 4 audit token(s) in win-registry. |
-| win-config / system/assets/disable-services-drivers-suboption-audit.md | [https://github.com/nohuto/win-config/blob/main/system/assets/disable-services-drivers-suboption-audit.md](https://github.com/nohuto/win-config/blob/main/system/assets/disable-services-drivers-suboption-audit.md) | Matched 3 audit token(s) in win-config. |
+| win-config / system/assets/services.txt | [https://github.com/nohuto/win-config/blob/main/system/assets/services.txt](https://github.com/nohuto/win-config/blob/main/system/assets/services.txt) | Matched 3 audit token(s) in win-config. |
+| win-config / system/assets/session-manager/ProcLibGlobalInit.c | [https://github.com/nohuto/win-config/blob/main/system/assets/session-manager/ProcLibGlobalInit.c](https://github.com/nohuto/win-config/blob/main/system/assets/session-manager/ProcLibGlobalInit.c) | Matched 3 audit token(s) in win-config. |
 | decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
 
 Windows Internals references:
@@ -38426,7 +36006,7 @@ Current writes
 | Has nohuto lineage | `True` |
 | Has Windows Internals notes | `True` |
 | Needs review | `False` |
-| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Source repositories | win-config, decompiled-pseudocode |
 | Matched tokens | session, manager, kernel, serializetimerexpiration |
 | Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
 
@@ -38435,8 +36015,8 @@ Nohuto lineage references:
 | Title | Location | Summary |
 | --- | --- | --- |
 | win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 4 audit token(s) in win-config. |
-| win-registry / README.md | [https://github.com/nohuto/win-registry/blob/main/README.md](https://github.com/nohuto/win-registry/blob/main/README.md) | Matched 4 audit token(s) in win-registry. |
-| win-config / system/assets/disable-services-drivers-suboption-audit.md | [https://github.com/nohuto/win-config/blob/main/system/assets/disable-services-drivers-suboption-audit.md](https://github.com/nohuto/win-config/blob/main/system/assets/disable-services-drivers-suboption-audit.md) | Matched 3 audit token(s) in win-config. |
+| win-config / system/assets/services.txt | [https://github.com/nohuto/win-config/blob/main/system/assets/services.txt](https://github.com/nohuto/win-config/blob/main/system/assets/services.txt) | Matched 3 audit token(s) in win-config. |
+| win-config / system/assets/session-manager/ProcLibGlobalInit.c | [https://github.com/nohuto/win-config/blob/main/system/assets/session-manager/ProcLibGlobalInit.c](https://github.com/nohuto/win-config/blob/main/system/assets/session-manager/ProcLibGlobalInit.c) | Matched 3 audit token(s) in win-config. |
 | decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
 
 Windows Internals references:
@@ -38481,8 +36061,8 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `repo-system-doc-kernel` | `repo-doc` | `Current repo docs` | Repo system research notes for kernel registry values | [Docs/system/system.md](../Docs/system/system.md) | `medium` | path, value, behavior, ui-mapping, app-mismatch |
 | `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs | `high` | path, value, ui-mapping |
-| `ghidra-serialize-timer-expiration-gate` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - Decompiled timer-serialization gate | [research/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeInitializeTimerTable.c](_source-mirrors/decompiled-pseudocode/ntoskrnl/KeInitializeTimerTable.c) and [evidence/records/raw/ghidra/system.kernel-serialize-timer-expiration/ghidra-matches.md](../evidence/records/raw/ghidra/system.kernel-serialize-timer-expiration/ghidra-matches.md) and [evidence/records/raw/ghidra/system.kernel-serialize-timer-expiration/evidence.json](../evidence/records/raw/ghidra/system.kernel-serialize-timer-expiration/evidence.json) | `high` | path, value, behavior, runtime-gate |
-| `vm-system.kernel-serialize-timer-expiration-etw-stackwalk-20260424e` | `etw-trace` | `unspecified` | Bounded KVM ETW stackwalk captures exact SerializeTimerExpiration helper query | [evidence/records/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e-summary.json](../evidence/records/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e-summary.json) and [evidence/records/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e-stage.json](../evidence/records/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e-stage.json) and [evidence/records/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e.etl](../evidence/records/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e.etl) and [evidence/records/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/normalized-registry-bundle.json](../evidence/records/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/normalized-registry-bundle.json) and [evidence/records/captures/system-kernel-serialize-timer-expiration-etw-stackwalk-20260424.json](../evidence/records/captures/system-kernel-serialize-timer-expiration-etw-stackwalk-20260424.json) | `medium` | runtime-observation, version-scope |
+| `ghidra-serialize-timer-expiration-gate` | `decompilation` | `Nohuto's and our Ghidra decompilation` | Nohuto's and our Ghidra decompilation - Decompiled timer-serialization gate | [research/_source-mirrors/decompiled-pseudocode/ntoskrnl/KeInitializeTimerTable.c](_source-mirrors/decompiled-pseudocode/ntoskrnl/KeInitializeTimerTable.c) and [evidence/raw/ghidra/system.kernel-serialize-timer-expiration/ghidra-matches.md](../evidence/raw/ghidra/system.kernel-serialize-timer-expiration/ghidra-matches.md) and [evidence/raw/ghidra/system.kernel-serialize-timer-expiration/evidence.json](../evidence/raw/ghidra/system.kernel-serialize-timer-expiration/evidence.json) | `high` | path, value, behavior, runtime-gate |
+| `vm-system.kernel-serialize-timer-expiration-etw-stackwalk-20260424e` | `etw-trace` | `unspecified` | Bounded KVM ETW stackwalk captures exact SerializeTimerExpiration helper query | [evidence/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e-summary.json](../evidence/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e-summary.json) and [evidence/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e-stage.json](../evidence/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e-stage.json) and [evidence/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e.etl](../evidence/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e.etl) and [evidence/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/normalized-registry-bundle.json) and [evidence/captures/system-kernel-serialize-timer-expiration-etw-stackwalk-20260424.json](../evidence/captures/system-kernel-serialize-timer-expiration-etw-stackwalk-20260424.json) | `medium` | runtime-observation, version-scope |
 
 **Validation proof**
 
@@ -38706,26 +36286,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `category-fallback` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `True` |
-| Source repositories | win-config, decompiled-pseudocode |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
 | Matched tokens |  |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics. |
-| decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Lineage note |  |
 
 **Targets**
 
@@ -38834,26 +36401,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `category-fallback` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `True` |
-| Source repositories | win-config, decompiled-pseudocode |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
 | Matched tokens |  |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics. |
-| decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Lineage note |  |
 
 **Targets**
 
@@ -38962,26 +36516,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `category-fallback` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `True` |
-| Source repositories | win-config, decompiled-pseudocode |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
 | Matched tokens |  |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics. |
-| decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Lineage note |  |
 
 **Targets**
 
@@ -39090,26 +36631,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `category-fallback` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `True` |
-| Source repositories | win-config, decompiled-pseudocode |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
 | Matched tokens |  |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics. |
-| decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Lineage note |  |
 
 **Targets**
 
@@ -39217,26 +36745,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `category-fallback` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `True` |
-| Source repositories | win-config, decompiled-pseudocode |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
 | Matched tokens |  |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics. |
-| decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Lineage note |  |
 
 **Targets**
 
@@ -39344,26 +36859,13 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `category-fallback` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `True` |
-| Source repositories | win-config, decompiled-pseudocode |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
 | Matched tokens |  |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics. |
-| decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Lineage note |  |
 
 **Targets**
 
@@ -39600,13 +37102,16 @@ Current writes
 | Has Windows Internals notes | `False` |
 | Needs review | `False` |
 | Source repositories | win-config |
-| Matched tokens | product key, cpky, slmgr |
+| Matched tokens | slmgr, cpky, remove, product, from, registry, does, automatically, runs, restore, product key |
 | Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
 
 Nohuto lineage references:
 
 | Title | Location | Summary |
 | --- | --- | --- |
+| win-config / cleanup/desc.md | [https://github.com/nohuto/win-config/blob/main/cleanup/desc.md](https://github.com/nohuto/win-config/blob/main/cleanup/desc.md) | Matched 8 audit token(s) in win-config. |
+| win-config / misc/desc.md | [https://github.com/nohuto/win-config/blob/main/misc/desc.md](https://github.com/nohuto/win-config/blob/main/misc/desc.md) | Matched 8 audit token(s) in win-config. |
+| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 8 audit token(s) in win-config. |
 | win-config / cleanup/desc.md#product-key | [https://github.com/nohuto/win-config/blob/main/cleanup/desc.md#product-key](https://github.com/nohuto/win-config/blob/main/cleanup/desc.md#product-key) | Documents the /cpky behavior and implementation notes from slmgr.vbs. |
 
 Other source references:
@@ -40217,13 +37722,16 @@ Current writes
 | Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, decompiled-pseudocode, win-registry |
-| Matched tokens | power values, class1initialunparkcount, multiparkgranularity, latencytoleranceparked |
+| Matched tokens | writes, core, parking, related, power, registry, values, used, this, including, latencytoleranceparked, latencytolerancesoftparked, class1initialunparkcount, multiparkgranularity, tweak, power values |
 | Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
 
 Nohuto lineage references:
 
 | Title | Location | Summary |
 | --- | --- | --- |
+| win-config / power/desc.md | [https://github.com/nohuto/win-config/blob/main/power/desc.md](https://github.com/nohuto/win-config/blob/main/power/desc.md) | Matched 14 audit token(s) in win-config. |
+| win-config / nvidia/desc.md | [https://github.com/nohuto/win-config/blob/main/nvidia/desc.md](https://github.com/nohuto/win-config/blob/main/nvidia/desc.md) | Matched 10 audit token(s) in win-config. |
+| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 10 audit token(s) in win-config. |
 | decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
 | win-config / power/desc.md#power-values | [https://github.com/nohuto/win-config/blob/main/power/desc.md#power-values](https://github.com/nohuto/win-config/blob/main/power/desc.md#power-values) | Documents the power-manager registry values that influence core parking and latency tolerances. |
 | win-registry / Power Values | [https://github.com/nohuto/win-registry?tab=readme-ov-file#power-values](https://github.com/nohuto/win-registry?tab=readme-ov-file#power-values) | Provides nohuto's reverse-engineered registry notes for power-manager values. |
@@ -40339,14 +37847,16 @@ Current writes
 | Has Windows Internals notes | `True` |
 | Needs review | `False` |
 | Source repositories | win-config, decompiled-pseudocode |
-| Matched tokens | disable hibernation |
+| Matched tokens | disable hibernation, runs, powercfg, hibernate, this, disables, hibernation, removes, hiberfil |
 | Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
 
 Nohuto lineage references:
 
 | Title | Location | Summary |
 | --- | --- | --- |
-| win-config / power/desc.md | [https://github.com/nohuto/win-config/blob/main/power/desc.md](https://github.com/nohuto/win-config/blob/main/power/desc.md) | Matched 1 audit token(s) in win-config. |
+| win-config / power/desc.md | [https://github.com/nohuto/win-config/blob/main/power/desc.md](https://github.com/nohuto/win-config/blob/main/power/desc.md) | Matched 9 audit token(s) in win-config. |
+| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 7 audit token(s) in win-config. |
+| win-config / network/desc.md | [https://github.com/nohuto/win-config/blob/main/network/desc.md](https://github.com/nohuto/win-config/blob/main/network/desc.md) | Matched 6 audit token(s) in win-config. |
 | decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
 
 Windows Internals references:

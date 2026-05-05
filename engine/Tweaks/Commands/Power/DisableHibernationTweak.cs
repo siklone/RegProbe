@@ -13,7 +13,7 @@ public sealed class DisableHibernationTweak : CommandTweak
         : base(
             id: "power.disable-hibernation",
             name: "Disable Hibernation",
-            description: "Disables hibernation and deletes hiberfil.sys to save disk space. This prevents the system from entering hibernation mode but does not affect sleep mode.",
+            description: "Runs powercfg /hibernate off. This disables hibernation and removes hiberfil.sys.",
             risk: TweakRiskLevel.Safe,
             commandRunner: commandRunner)
     {

@@ -74,8 +74,8 @@ public static class PowerSettingsTweaks
 
         return new RegistryValueBatchTweak(
             id: "power.optimize-performance",
-            name: "Optimize Power Settings for Performance",
-            description: "Applies the current grouped power-control bundle for timer coalescing, deep I/O coalescing, parked-core latency, and energy estimation.",
+            name: "Apply Grouped Power-Control Registry Bundle",
+            description: "Writes the grouped power-control registry values used by this tweak for timer coalescing, deep I/O coalescing, event processing, parked-core tolerance, and energy estimation.",
             risk: TweakRiskLevel.Advanced,
             entries: entries,
             registryAccessor: registryAccessor,

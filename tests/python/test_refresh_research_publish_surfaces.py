@@ -37,6 +37,7 @@ class RefreshResearchPublishSurfacesTests(unittest.TestCase):
                 "evidence-index",
                 "evidence-audit",
                 "evidence-manifest",
+                "evidence-atlas",
             ],
         )
         self.assertEqual(
@@ -49,6 +50,7 @@ class RefreshResearchPublishSurfacesTests(unittest.TestCase):
                 "scripts/generate_evidence_index.py",
                 "scripts/generate_evidence_audit.py",
                 "scripts/generate_evidence_manifest.py",
+                "scripts/generate_evidence_atlas.py",
             ],
         )
 

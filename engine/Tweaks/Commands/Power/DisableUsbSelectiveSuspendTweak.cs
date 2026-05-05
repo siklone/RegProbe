@@ -29,7 +29,7 @@ public sealed class DisableUsbSelectiveSuspendTweak : ITweak
 
     public string Id => "power.disable-usb-selective-suspend";
     public string Name => "Disable USB Selective Suspend";
-    public string Description => "Disables USB Selective Suspend to prevent USB devices from powering down unexpectedly. This can resolve issues with USB devices disconnecting or becoming unresponsive.";
+    public string Description => "Sets the USB Selective Suspend power setting to Disabled for AC and DC on the active power plan.";
     public TweakRiskLevel Risk => TweakRiskLevel.Safe;
     public bool RequiresElevation => true;
 

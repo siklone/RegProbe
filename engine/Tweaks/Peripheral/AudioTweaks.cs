@@ -50,7 +50,7 @@ public static class AudioTweaks
         return new RegistryValueBatchTweak(
             id: "peripheral.audio-disable-enhancements",
             name: "Disable Audio Enhancements",
-            description: "Disables audio enhancements and exclusive mode for audio devices. Provides cleaner audio output without processing.",
+            description: "Disables the audio-enhancement flags and exclusive-mode setting touched by this tweak.",
             risk: TweakRiskLevel.Safe,
             entries: entries,
             registryAccessor: registryAccessor,

@@ -26,8 +26,8 @@ public sealed class DeveloperTweakProvider : BaseTweakProvider
         yield return CreateRegistryTweak(
             context,
             "developer.vs-intellisense-cache",
-            "Optimize VS IntelliSense Cache",
-            "Increases Visual Studio IntelliSense cache size for better code completion performance in large projects.",
+            "VS IntelliSense DisableAutoUpdating Setting",
+            "Writes the Visual Studio DisableAutoUpdating IntelliSense value used by this tweak.",
             TweakRiskLevel.Safe,
             RegistryHive.CurrentUser,
             @"Software\Microsoft\VisualStudio\IntelliSense",
@@ -70,8 +70,8 @@ public sealed class DeveloperTweakProvider : BaseTweakProvider
         yield return CreateRegistryTweak(
             context,
             "developer.vs-solution-load",
-            "Speed Up Visual Studio Solution Load",
-            "Disables background solution load analysis during Visual Studio solution open on large solutions.",
+            "VS Solution BackgroundAnalysis Setting",
+            "Writes the Visual Studio BackgroundAnalysis solution-loading value used by this tweak.",
             TweakRiskLevel.Safe,
             RegistryHive.CurrentUser,
             @"Software\Microsoft\VisualStudio\SolutionLoading",

@@ -11,7 +11,7 @@ public sealed class ClearMemoryDumpFilesTweak : FileCleanupTweak
         : base(
             id: "cleanup.memory-dumps",
             name: "Clear Memory Dump Files",
-            description: "Deletes BSoD memory dump files (MEMORY.DMP). These can be several GB in size.",
+            description: "Deletes %WINDIR%\\MEMORY.DMP and files under %WINDIR%\\Minidump.",
             risk: TweakRiskLevel.Safe,
             requiresElevation: true)
     {

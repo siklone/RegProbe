@@ -1,16 +1,10 @@
 # Tweak Source Audit (Generated)
 
-Total tweaks: 307
+Total tweaks: 80
 
-Missing documentation: 8
+Missing documentation: 2
 
 | ID | Name | Call | Missing Tokens | Source |
 | --- | --- | --- | --- | --- |
-| `explorer.disable-taskbar-chat` | Hide Taskbar Chat Icon | CreateRegistryTweak | Software\Policies\Microsoft\Windows\Windows Chat, ChatIcon | `app\Services\TweakProviders\VisibilityTweakProvider.cs#L214` |
-| `peripheral.disable-autoplay` | Disable AutoPlay | CreateRegistryValueBatchTweak | Software\Microsoft\Windows\CurrentVersion\Policies\Explorer, NoDriveTypeAutoRun, Software\Policies\Microsoft\Windows\Explorer, NoAutoplayfornonVolume | `app\Services\TweakProviders\PeripheralTweakProvider.cs#L40` |
-| `power.disable-windows-search` | Disable Windows Search | CreateServiceStartModeBatchTweak | WSearch | `app\Services\TweakProviders\PerformanceTweakProvider.cs#L68` |
-| `privacy.disable-advertising-id` | Disable Advertising ID | CreateRegistryTweak | Software\Policies\Microsoft\Windows\AdvertisingInfo, DisabledByGroupPolicy | `app\Services\TweakProviders\PrivacyTweakProvider.cs#L34` |
-| `privacy.disable-find-my-device` | Disable Find My Device | CreateRegistryTweak | SOFTWARE\Policies\Microsoft\FindMyDevice, AllowFindMyDevice | `app\Services\TweakProviders\PrivacyTweakProvider.cs#L663` |
-| `security.disable-enhanced-defender-notifications` | Hide Non-Critical Windows Security Notifications | CreateRegistryTweak | Software\Policies\Microsoft\Windows Defender Security Center\Notifications, DisableEnhancedNotifications | `app\Services\TweakProviders\SecurityTweakProvider.cs#L94` |
-| `security.disable-system-restore` | Disable System Restore | CreateRegistryTweak | SOFTWARE\Policies\Microsoft\Windows NT\SystemRestore, DisableSR | `app\Services\TweakProviders\SecurityTweakProvider.cs#L277` |
-| `security.enable-defender-maps-advanced-membership` | Join Microsoft MAPS (Advanced) | CreateRegistryTweak | Software\Policies\Microsoft\Windows Defender\Spynet, SpyNetReporting | `app\Services\TweakProviders\SecurityTweakProvider.cs#L106` |
+| `developer.terminal-dev-mode` | Enable Windows Terminal Developer Features | CreateRegistryValueSetTweak | Software\Microsoft\Windows Terminal | `app/Services/TweakProviders/DeveloperTweakProvider.cs#L40` |
+| `developer.vscode-git-autofetch` | Disable VS Code Git Autofetch | CreateRegistryTweak | Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced, DisableGitAutofetch | `app/Services/TweakProviders/DeveloperTweakProvider.cs#L56` |

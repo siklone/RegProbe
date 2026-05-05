@@ -29,7 +29,7 @@ public sealed class DisableCpuCoreParkingTweak : ITweak
 
     public string Id => "power.disable-cpu-parking";
     public string Name => "Disable CPU Core Parking";
-    public string Description => "Prevents Windows from parking CPU cores by setting the active power plan core parking limits to 100% for AC and DC power.";
+    public string Description => "Sets the active power plan core-parking minimum and maximum values to 100% for AC and DC power.";
     public TweakRiskLevel Risk => TweakRiskLevel.Safe;
     public bool RequiresElevation => true;
 

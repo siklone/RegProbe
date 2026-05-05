@@ -48,6 +48,11 @@ def build_refresh_steps(repo_root: Path = REPO_ROOT) -> list[dict[str, object]]:
             "script": str((scripts_root / "generate_evidence_manifest.py").relative_to(repo_root)).replace("\\", "/"),
             "command": [sys.executable, str(scripts_root / "generate_evidence_manifest.py")],
         },
+        {
+            "name": "evidence-atlas",
+            "script": str((scripts_root / "generate_evidence_atlas.py").relative_to(repo_root)).replace("\\", "/"),
+            "command": [sys.executable, str(scripts_root / "generate_evidence_atlas.py")],
+        },
     ]
 
 

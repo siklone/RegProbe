@@ -63,6 +63,17 @@ class TweakEntry:
     docs: str
 
 
+def normalize_known_template_metadata(path: Path, tweak_id: str, name: str, description: str) -> Tuple[str, str, str]:
+    if path.name == "ClearEventLogsTweak.cs" and "{logName.ToLowerInvariant()}" in tweak_id:
+        return (
+            "cleanup.eventlog-system",
+            "Clear System Event Log",
+            "Clears the Windows System event log. WARNING: Logs cannot be recovered after clearing.",
+        )
+
+    return tweak_id, name, description
+
+
 def shorten_description(text: str, limit: int = 140) -> str:
     cleaned = " ".join(text.split())
     if len(cleaned) <= limit:
@@ -191,6 +202,7 @@ def extract_entries_from_file(path: Path, pattern: re.Pattern) -> Iterable[Tuple
         tweak_id, name, description, risk = extract_metadata(chunk)
         if not tweak_id or not name:
             continue
+        tweak_id, name, description = normalize_known_template_metadata(path, tweak_id, name, description or "")
         line = text.count("\n", 0, match.start()) + 1
         source = f"{path.relative_to(REPO_ROOT)}#L{line}"
         area = infer_area(call_name, path)
@@ -210,6 +222,7 @@ def extract_entries_from_base_call(path: Path) -> Iterable[Tuple[str, str, str, 
         tweak_id, name, description, risk = extract_metadata(chunk)
         if not tweak_id or not name:
             continue
+        tweak_id, name, description = normalize_known_template_metadata(path, tweak_id, name, description or "")
         line = text.count("\n", 0, match.start()) + 1
         source = f"{path.relative_to(REPO_ROOT)}#L{line}"
         area = infer_area("base", path)

@@ -14,7 +14,7 @@ public sealed class RemoveProductKeyTweak : CommandTweak
         : base(
             id: "cleanup.product-key",
             name: "Remove Product Key from Registry",
-            description: "Removes the Windows product key from the registry to prevent theft by malicious code. The key can be reactivated if needed.",
+            description: "Runs slmgr.vbs /cpky to remove the Windows product key from the registry. Rollback does not restore the key automatically.",
             risk: TweakRiskLevel.Advanced,
             commandRunner: commandRunner)
     {

@@ -23,7 +23,7 @@ public sealed class AudioTweakProvider : BaseTweakProvider
             context,
             "audio.disable-spatial-audio",
             "Disable Spatial Audio",
-            "Disables the low-latency spatial-audio policy flag for supported audio configurations.",
+            "Sets the DisableSpatialOnLowLatency audio policy value to disable spatial audio on the low-latency path.",
             TweakRiskLevel.Advanced,
             RegistryHive.LocalMachine,
             @"SOFTWARE\Microsoft\Windows\CurrentVersion\Audio",

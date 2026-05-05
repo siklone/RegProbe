@@ -85,7 +85,7 @@ public sealed class DisableVSCodeTelemetryTweak : IChoiceTweak, ITweakWithGuidan
         _settingsPathOverride = settingsPath;
         Id = "misc.disable-vscode-telemetry";
         Name = "VS Code Telemetry & Online Features";
-        Description = "Choose how aggressively VS Code should reduce telemetry, experiments, auto-updates, and other online convenience features.";
+        Description = "Choose which VS Code user-settings keys this tweak writes for telemetry, experiments, updates, recommendations, autofetch, and npm package lookups.";
         Risk = TweakRiskLevel.Safe;
         RequiresElevation = false;
     }

@@ -24,8 +24,8 @@ public sealed class PowerTweakProvider : BaseTweakProvider
         yield return CreateRegistryValueBatchTweak(
             context,
             "power.optimize-performance",
-            "Optimize Power Settings for Performance",
-            "Applies the current grouped power-control bundle for timer coalescing, deep I/O coalescing, parked-core latency, and energy estimation.",
+            "Apply Grouped Power-Control Registry Bundle",
+            "Writes the grouped power-control registry values used by this tweak for timer coalescing, deep I/O coalescing, event processing, parked-core tolerance, and energy estimation.",
             TweakRiskLevel.Advanced,
             new[]
             {

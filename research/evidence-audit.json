@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-03T06:21:25.334961Z",
+  "generated_utc": "2026-05-05T10:22:24.961062Z",
   "summary": {
     "total_active_records": 278,
     "class_counts": {
@@ -21,15 +21,15 @@
       "intentional-hold": 18
     },
     "promotion_state_counts": {
-      "promoted": 217,
+      "promoted": 216,
       "blocked": 28,
-      "revalidation-pending": 33
+      "revalidation-pending": 34
     },
     "re_audit_required_count": 23,
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-05-03T06:21:24.536531Z",
+      "generated_utc": "2026-05-05T10:22:23.744627Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -7090,8 +7090,10 @@
       "apply_allowed": false,
       "confidence": "high",
       "tweak_origin": "research-derived",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
+      "promotion_state": "revalidation-pending",
+      "promotion_blockers": [
+        "stale-evidence"
+      ],
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": false,
       "score_breakdown": {
@@ -7109,9 +7111,9 @@
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
-      "stale_reason": null,
+      "stale_reason": "verification-age-threshold",
       "last_known_good_build": "26100.1.amd64fre.ge_release.240331-1435",
-      "revalidation_need": "none",
+      "revalidation_need": "required",
       "rollback_verification_status": "verified",
       "bench_status": "executed",
       "conflict_reason": null,

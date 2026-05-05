@@ -54,6 +54,34 @@ def run_qga_exec(
     return run_json_command(cmd, cwd=repo_root)
 
 
+def prepare_guest_paths(
+    repo_root: Path,
+    *,
+    guest_publish_zip_path: str,
+    guest_app_root: str,
+) -> tuple[int, dict[str, Any]]:
+    ps = (
+        f"$zipPath={quote_ps(guest_publish_zip_path)}; "
+        f"$appRoot={quote_ps(guest_app_root)}; "
+        "$zipDir=Split-Path -Parent $zipPath; "
+        "if(-not [string]::IsNullOrWhiteSpace($zipDir)){ New-Item -ItemType Directory -Path $zipDir -Force | Out-Null }; "
+        "New-Item -ItemType Directory -Path $appRoot -Force | Out-Null; "
+        "[pscustomobject]@{"
+        "ZipPath=$zipPath; "
+        "ZipDirectory=$zipDir; "
+        "ZipDirectoryExists=[bool](Test-Path -LiteralPath $zipDir); "
+        "AppRoot=$appRoot; "
+        "AppRootExists=[bool](Test-Path -LiteralPath $appRoot)"
+        "} | ConvertTo-Json -Compress"
+    )
+    return run_qga_exec(
+        repo_root,
+        path="powershell.exe",
+        args=["-NoProfile", "-Command", ps],
+        wait_timeout=60,
+    )
+
+
 def run_app_launch_smoke(
     repo_root: Path,
     *,
@@ -132,6 +160,31 @@ def main() -> int:
         "launch_wait_timeout": args.launch_wait_timeout,
         "linger_seconds": args.linger_seconds,
     }
+
+    prepare_returncode, prepare_payload = prepare_guest_paths(
+        repo_root,
+        guest_publish_zip_path=args.guest_publish_zip_path,
+        guest_app_root=args.guest_app_root,
+    )
+    summary["prepare_returncode"] = prepare_returncode
+    summary["prepare_payload"] = prepare_payload
+    if prepare_returncode != 0 or prepare_payload.get("status") == "error":
+        summary.update(
+            {
+                "status": "error",
+                "error_kind": "guest-path-preparation-failed",
+                "error": "Failed to create the guest inbound or app-root directories before upload.",
+            }
+        )
+        payload = apply_summary_contract(
+            summary,
+            default_error_kind="guest-path-preparation-failed",
+            default_recovery_action="inspect-guest-path-preparation",
+            default_transport_blocker="qga-exec",
+            default_guest_health="unknown",
+        )
+        print(json.dumps(payload, indent=2))
+        return 1
 
     if not publish_zip.is_file():
         summary.update(

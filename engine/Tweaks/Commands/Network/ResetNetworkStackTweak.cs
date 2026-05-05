@@ -13,7 +13,7 @@ public sealed class ResetNetworkStackTweak : CommandTweak
         : base(
             id: "network.reset-winsock",
             name: "Reset Winsock Catalog",
-            description: "Resets the Winsock catalog to default settings. Useful for fixing network connectivity issues. Requires system restart to take effect.",
+            description: "Resets the Winsock catalog to default settings. Requires a system restart to fully apply.",
             risk: TweakRiskLevel.Advanced,
             commandRunner: commandRunner)
     {
