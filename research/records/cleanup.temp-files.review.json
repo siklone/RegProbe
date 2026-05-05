@@ -1,0 +1,217 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "cleanup.temp-files",
+  "tweak_id": "cleanup.temp-files",
+  "record_status": "review-required",
+  "summary": "Review-required audit trail for the live temporary-file cleanup card. The app already ships this file-backed cleanup action and the repo cleanup docs describe the same temp directories, but the card has not yet been promoted into the validated research-provider surface.",
+  "setting": {
+    "name": "Clear Temporary Files",
+    "category": "Cleanup",
+    "area": "Temporary File Cleanup",
+    "scope": "device",
+    "casual_explanation": "This deletes files from the user temp folder and the Windows temp folder.",
+    "why_people_change_it": "People clear temporary files when they want to reclaim disk space from leftover installer and application temp files.",
+    "tradeoffs_overview": "Clearing temp files can reclaim space, but files currently in use will be skipped and some apps may rebuild temp content later.",
+    "professional_notes": "The current app deletes Path.GetTempPath() and %WINDIR%\\Temp through FileCleanupTweak. Repo cleanup docs identify the same temporary-file cleanup surface.",
+    "targets": [
+      {
+        "target_id": "temporary-files",
+        "location_kind": "file",
+        "path": "%TEMP%; %WINDIR%\\Temp",
+        "value_name": "CleanupAction",
+        "value_type": "file cleanup action",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "No cleanup action",
+            "meaning": "Temporary files remain until the operator or Windows removes them.",
+            "evidence_ids": [
+              "repo-cleanup-doc",
+              "engine-temp-files-cleanup"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": "Cleared",
+            "label": "Clear temporary files",
+            "meaning": "Deletes files under the user temp and Windows temp directories, skipping files in use.",
+            "evidence_ids": [
+              "repo-cleanup-doc",
+              "repo-cleanup-provenance",
+              "app-misc-provider",
+              "engine-temp-files-cleanup"
+            ]
+          }
+        ],
+        "notes": "This is a one-shot cleanup action rather than a persistent temp-file policy setting."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "unknown",
+    "provider_source": "app/Services/TweakProviders/MiscTweakProvider.cs",
+    "notes": "The live app still ships this as a first-party cleanup card instead of through the research-provider surface.",
+    "writes": [
+      {
+        "target_id": "temporary-files",
+        "path": "%TEMP%; %WINDIR%\\Temp",
+        "value_name": "CleanupAction",
+        "value_type": "file cleanup action",
+        "state_kind": "value",
+        "value": "Cleared"
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows-managed temporary-file baseline",
+      "applies_to": "Systems where temporary files remain until an operator or Windows cleanup flow removes them",
+      "states": [
+        {
+          "target_id": "temporary-files",
+          "state_kind": "unknown",
+          "value": null,
+          "rationale": "This card represents an operator-triggered cleanup action, not a persistent default state."
+        }
+      ],
+      "notes": "Use detection and operator intent rather than assuming a fixed baseline.",
+      "evidence_ids": [
+        "repo-cleanup-doc",
+        "engine-temp-files-cleanup"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "hold-for-research",
+      "label": "Hold for research",
+      "intended_for": [
+        "Research tracking only",
+        "Cleanup command backlog reduction"
+      ],
+      "avoid_for": [
+        "Published presets",
+        "General users"
+      ],
+      "states": [
+        {
+          "target_id": "temporary-files",
+          "state_kind": "unknown",
+          "value": null,
+          "rationale": "Keep the live cleanup card documented without publishing it as a validated research-provider preset yet."
+        }
+      ],
+      "good_when": "You want the shipped cleanup action represented honestly in the corpus.",
+      "bad_when": "You need a validated research-provider cleanup card.",
+      "tradeoffs": [
+        "The live app behavior is documented.",
+        "The card remains outside the validated research-provider surface."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "repo-cleanup-doc",
+        "repo-cleanup-provenance"
+      ]
+    },
+    {
+      "profile_id": "current-app-action",
+      "label": "Current app action",
+      "intended_for": [
+        "Research comparison only"
+      ],
+      "avoid_for": [
+        "Published presets",
+        "General users"
+      ],
+      "states": [
+        {
+          "target_id": "temporary-files",
+          "state_kind": "value",
+          "value": "Cleared",
+          "rationale": "Capture the exact temporary-file cleanup action that the live app currently performs."
+        }
+      ],
+      "good_when": "You are auditing the current temporary-file cleanup card as shipped by the app.",
+      "bad_when": "You need a validated research-provider cleanup preset.",
+      "tradeoffs": [
+        "The current app behavior is explicit.",
+        "The card is still held outside the validated research-provider surface."
+      ],
+      "apply_allowed": false,
+      "notes": "Blocked until this cleanup surface completes the normal validation path.",
+      "evidence_ids": [
+        "repo-cleanup-doc",
+        "app-misc-provider",
+        "engine-temp-files-cleanup"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "repo-cleanup-doc",
+      "kind": "repo-doc",
+      "title": "Repo cleanup catalog entry",
+      "location": "Docs/cleanup/cleanup.md",
+      "summary": "The cleanup documentation identifies %TEMP% and %WINDIR%\\Temp as the current temporary-file cleanup surface.",
+      "supports": [
+        "path",
+        "behavior",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "repo-cleanup-provenance",
+      "kind": "repo-doc",
+      "title": "Repo tweak provenance for cleanup.temp-files",
+      "location": "Docs/tweaks/tweak-provenance.md",
+      "summary": "The tweak provenance table keeps cleanup.temp-files tied to the checked-in cleanup source set.",
+      "supports": [
+        "behavior",
+        "risk"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "app-misc-provider",
+      "kind": "repo-code",
+      "title": "Live cleanup provider mapping",
+      "location": "app/Services/TweakProviders/MiscTweakProvider.cs",
+      "summary": "The live app yields ClearTemporaryFilesTweak directly from the first-party cleanup provider.",
+      "supports": [
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "engine-temp-files-cleanup",
+      "kind": "repo-code",
+      "title": "Current temporary-file cleanup implementation",
+      "location": "engine/Tweaks/Commands/Cleanup/ClearTemporaryFilesTweak.cs",
+      "summary": "The engine tweak deletes files from Path.GetTempPath() and %WINDIR%\\Temp as a one-shot cleanup action.",
+      "supports": [
+        "path",
+        "value",
+        "behavior"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "medium",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": false,
+    "restore_previous_supported": false,
+    "needs_vm_validation": true,
+    "why": "The live cleanup behavior and repo-backed file targets are clear, but this one-shot cleanup card still lives only in the first-party provider.",
+    "manual_review_required": true,
+    "blocking_issues": [
+      "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
+      "This is a maintenance action with no rollback support."
+    ]
+  },
+  "last_reviewed_utc": "2026-05-05T10:40:00Z"
+}

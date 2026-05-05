@@ -7,18 +7,18 @@ Nohuto references only show upstream dump or naming links. Value semantics come 
 
 | Field | Value |
 | --- | --- |
-| Total records | 333 |
+| Total records | 343 |
 | Validated | 255 |
 | Deprecated | 55 |
 | Review required | 0 |
-| Records with evidence | 333 |
+| Records with evidence | 343 |
 | Records without evidence | 0 |
-| Records missing validation proof | 10 |
+| Records missing validation proof | 20 |
 | Deprecated missing validation proof | 0 |
 | Class A | 245 |
 | Class B | 21 |
 | Class C | 2 |
-| Class D | 10 |
+| Class D | 20 |
 | Class E | 55 |
 
 ## Category coverage
@@ -26,7 +26,7 @@ Nohuto references only show upstream dump or naming links. Value semantics come 
 | Category | Records |
 | --- | --- |
 | Audio | 5 |
-| Cleanup | 5 |
+| Cleanup | 15 |
 | Developer | 13 |
 | Explorer | 18 |
 | Network | 31 |
@@ -37053,6 +37053,588 @@ Blocking issues:
 
 ---
 
+### `cleanup.directx-shader-cache`
+
+| Field | Value |
+| --- | --- |
+| Status | `review-required` |
+| Evidence class | `Class D` |
+| Category | `Cleanup` |
+| Area | `Shader Cache Cleanup` |
+| Scope | `user` |
+| Source file | [research/records/cleanup.directx-shader-cache.review.json](records/cleanup.directx-shader-cache.review.json) |
+| V3.1 evidence root | - |
+| Apply allowed | `False` |
+| Confidence | `medium` |
+| Needs VM validation | `True` |
+
+**Summary:** Review-required audit trail for the live DirectX shader-cache cleanup card. The app already ships this file-backed cleanup action from the first-party provider and the repo cleanup docs describe the same cache directories, but the card has not yet been promoted into the validated research-provider surface.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `unknown` |
+| Provider source | app/Services/TweakProviders/MiscTweakProvider.cs |
+| Notes | The live app still ships this as a first-party cleanup card instead of through the research-provider surface. |
+
+Current writes
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `shader-cache-files` | `%LOCALAPPDATA%\D3DSCache; %LOCALAPPDATA%\NVIDIA\DXCache; %LOCALAPPDATA%\NVIDIA\GLCache; %LOCALAPPDATA%\NVIDIA Corporation\NV_Cache; %LOCALAPPDATA%\AMD\DXCache; %LOCALAPPDATA%\Intel\DXCache` | `CleanupAction` | `Cleared` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class D` |
+| Title | Key Known, Value Semantics Unknown |
+| Action state | `research-gated` |
+| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto lineage | `True` |
+| Has Windows Internals notes | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | directx shader cache, d3dscache, nvidia cache |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
+
+Nohuto lineage references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| win-config / cleanup/desc.md#directx-shader-cache | [https://github.com/nohuto/win-config/blob/main/cleanup/desc.md#directx-shader-cache](https://github.com/nohuto/win-config/blob/main/cleanup/desc.md#directx-shader-cache) | Lists the DirectX, NVIDIA, and related shader cache directories cleared by this tweak. |
+
+**Targets**
+
+#### `shader-cache-files`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `file` |
+| Path | `%LOCALAPPDATA%\D3DSCache; %LOCALAPPDATA%\NVIDIA\DXCache; %LOCALAPPDATA%\NVIDIA\GLCache; %LOCALAPPDATA%\NVIDIA Corporation\NV_Cache; %LOCALAPPDATA%\AMD\DXCache; %LOCALAPPDATA%\Intel\DXCache` |
+| Value name | `CleanupAction` |
+| Value type | `file cleanup action` |
+| Notes | This is a one-shot file cleanup action rather than a persistent setting. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `missing` | - | No cleanup action | Shader-cache files remain until the operator or Windows removes them. | repo-cleanup-doc, engine-shader-cache-cleanup |
+| `value` | `Cleared` | Clear shader caches | Deletes the DirectX and vendor shader-cache directories that the current app enumerates. | repo-cleanup-doc, repo-cleanup-provenance, app-misc-provider, engine-shader-cache-cleanup |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Windows-managed shader-cache baseline | Systems where shader-cache files are created and rebuilt by Windows and GPU drivers as needed | shader-cache-files: unknown None - This card represents an operator-triggered cleanup action, not a persistent default state. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `hold-for-research` | Hold for research | ['Research tracking only', 'Cleanup command backlog reduction'] | ['Published presets', 'General users'] | `False` |
+| `current-app-action` | Current app action | ['Research comparison only'] | ['Published presets', 'General users'] | `False` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-cleanup-doc` | `repo-doc` | `Current repo docs` | Repo cleanup catalog entry | [Docs/cleanup/cleanup.md](../Docs/cleanup/cleanup.md) | `high` | path, behavior, ui-mapping |
+| `repo-cleanup-provenance` | `repo-doc` | `Current repo docs` | Repo tweak provenance for cleanup.directx-shader-cache | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) | `medium` | behavior, risk |
+| `app-misc-provider` | `repo-code` | `Current repo code` | Live cleanup provider mapping | app/Services/TweakProviders/MiscTweakProvider.cs | `high` | ui-mapping |
+| `engine-shader-cache-cleanup` | `repo-code` | `Current repo code` | Current shader-cache cleanup implementation | engine/Tweaks/Commands/Cleanup/ClearDirectXShaderCacheTweak.cs | `high` | path, value, behavior |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `False` |
+| Recommended for general users | `False` |
+| Restore default supported | `False` |
+| Restore previous supported | `False` |
+| Needs VM validation | `True` |
+| Why | The live cleanup behavior and repo-backed file targets are clear, but this one-shot cleanup card still lives only in the first-party provider. |
+
+Blocking issues:
+- The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.
+- This is a maintenance action with no rollback support.
+
+---
+
+### `cleanup.eventlog-system`
+
+| Field | Value |
+| --- | --- |
+| Status | `review-required` |
+| Evidence class | `Class D` |
+| Category | `Cleanup` |
+| Area | `System Event Log Cleanup` |
+| Scope | `device` |
+| Source file | [research/records/cleanup.eventlog-system.review.json](records/cleanup.eventlog-system.review.json) |
+| V3.1 evidence root | - |
+| Apply allowed | `False` |
+| Confidence | `medium` |
+| Needs VM validation | `True` |
+
+**Summary:** Review-required audit trail for the live System event-log cleanup card. The app already ships the wevtutil-backed action and the repo cleanup docs describe the same log-clear flow, but the card has not yet been promoted into the validated research-provider surface.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `unknown` |
+| Provider source | app/Services/TweakProviders/SystemTweakProvider.cs |
+| Notes | The live app still ships this as a first-party system cleanup card instead of through the research-provider surface. |
+
+Current writes
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `system-event-log-command` | `%SystemRoot%\System32\wevtutil.exe` | `SystemLogAction` | `Cleared` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class D` |
+| Title | Key Known, Value Semantics Unknown |
+| Action state | `research-gated` |
+| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `category-fallback` |
+| Has nohuto lineage | `True` |
+| Has Windows Internals notes | `False` |
+| Needs review | `True` |
+| Source repositories | win-config |
+| Matched tokens |  |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
+
+Nohuto lineage references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| win-config / cleanup/desc.md | [https://github.com/nohuto/win-config/blob/main/cleanup/desc.md](https://github.com/nohuto/win-config/blob/main/cleanup/desc.md) | Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics. |
+
+**Targets**
+
+#### `system-event-log-command`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `command` |
+| Path | `%SystemRoot%\System32\wevtutil.exe` |
+| Value name | `SystemLogAction` |
+| Value type | `enum` |
+| Notes | There is no rollback command for a cleared event log. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `value` | `Analyzed` | Analyze System log | Reads current System log metadata without clearing the log. | repo-cleanup-doc, engine-system-event-log-command |
+| `value` | `Cleared` | Clear System log | Runs wevtutil cl System to remove System log entries. | repo-cleanup-doc, repo-cleanup-provenance, app-system-provider, engine-system-event-log-command |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Windows event-log baseline | Systems where the System event log remains available until an operator clears it | system-event-log-command: unknown None - This card represents an operator-triggered maintenance action, not a persistent default state. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `hold-for-research` | Hold for research | ['Research tracking only', 'Cleanup command backlog reduction'] | ['Published presets', 'General users'] | `False` |
+| `current-app-action` | Current app action | ['Research comparison only'] | ['Published presets', 'General users'] | `False` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-cleanup-doc` | `repo-doc` | `Current repo docs` | Repo cleanup catalog entry | [Docs/cleanup/cleanup.md](../Docs/cleanup/cleanup.md) | `high` | path, behavior, ui-mapping |
+| `repo-cleanup-provenance` | `repo-doc` | `Current repo docs` | Repo tweak provenance for cleanup.eventlog-system | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) | `medium` | behavior, risk |
+| `app-system-provider` | `repo-code` | `Current repo code` | Live system provider mapping | app/Services/TweakProviders/SystemTweakProvider.cs | `high` | ui-mapping |
+| `engine-system-event-log-command` | `repo-code` | `Current repo code` | Current System event-log cleanup implementation | engine/Tweaks/Commands/Cleanup/ClearEventLogsTweak.cs | `high` | path, value, behavior |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `False` |
+| Recommended for general users | `False` |
+| Restore default supported | `False` |
+| Restore previous supported | `False` |
+| Needs VM validation | `True` |
+| Why | The live event-log clear behavior is clear and repo-backed, but this one-shot cleanup card still lives only in the first-party provider. |
+
+Blocking issues:
+- The card has not yet been promoted from the first-party system provider into the research-provider surface.
+- Clearing the event log has no rollback path.
+
+---
+
+### `cleanup.font-cache`
+
+| Field | Value |
+| --- | --- |
+| Status | `review-required` |
+| Evidence class | `Class D` |
+| Category | `Cleanup` |
+| Area | `Font Cache Cleanup` |
+| Scope | `device` |
+| Source file | [research/records/cleanup.font-cache.review.json](records/cleanup.font-cache.review.json) |
+| V3.1 evidence root | - |
+| Apply allowed | `False` |
+| Confidence | `medium` |
+| Needs VM validation | `True` |
+
+**Summary:** Review-required audit trail for the live font-cache cleanup card. The app already ships this file-backed cleanup action and repo cleanup docs describe the same cache files and service handling, but the card has not yet been promoted into the validated research-provider surface.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `unknown` |
+| Provider source | app/Services/TweakProviders/MiscTweakProvider.cs |
+| Notes | The live app still ships this as a first-party cleanup card instead of through the research-provider surface. |
+
+Current writes
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `font-cache-files` | `%WINDIR%\ServiceProfiles\LocalService\AppData\Local\FontCache; %WINDIR%\System32\FNTCACHE.DAT` | `CleanupAction` | `Cleared` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class D` |
+| Title | Key Known, Value Semantics Unknown |
+| Action state | `research-gated` |
+| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto lineage | `True` |
+| Has Windows Internals notes | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | font cache, fontcache, fntcache.dat |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
+
+Nohuto lineage references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| win-config / cleanup/desc.md#font-cache | [https://github.com/nohuto/win-config/blob/main/cleanup/desc.md#font-cache](https://github.com/nohuto/win-config/blob/main/cleanup/desc.md#font-cache) | Explains the font cache files and the FontCache service stop/start flow. |
+
+**Targets**
+
+#### `font-cache-files`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `file` |
+| Path | `%WINDIR%\ServiceProfiles\LocalService\AppData\Local\FontCache; %WINDIR%\System32\FNTCACHE.DAT` |
+| Value name | `CleanupAction` |
+| Value type | `file cleanup action` |
+| Notes | This is a one-shot cleanup action rather than a persistent font configuration setting. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `missing` | - | No cleanup action | Font-cache files remain until Windows or an operator removes them. | repo-cleanup-doc, engine-font-cache-cleanup |
+| `value` | `Cleared` | Clear font cache | Stops the FontCache service, removes the tracked cache files, and restarts the service. | repo-cleanup-doc, repo-cleanup-provenance, app-misc-provider, engine-font-cache-cleanup |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Windows-managed font-cache baseline | Systems where Windows maintains font-cache files until a troubleshooting action clears them | font-cache-files: unknown None - This card represents an operator-triggered cleanup action, not a persistent default state. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `hold-for-research` | Hold for research | ['Research tracking only', 'Cleanup command backlog reduction'] | ['Published presets', 'General users'] | `False` |
+| `current-app-action` | Current app action | ['Research comparison only'] | ['Published presets', 'General users'] | `False` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-cleanup-doc` | `repo-doc` | `Current repo docs` | Repo cleanup catalog entry | [Docs/cleanup/cleanup.md](../Docs/cleanup/cleanup.md) | `high` | path, behavior, ui-mapping |
+| `repo-cleanup-provenance` | `repo-doc` | `Current repo docs` | Repo tweak provenance for cleanup.font-cache | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) | `medium` | behavior, risk |
+| `app-misc-provider` | `repo-code` | `Current repo code` | Live cleanup provider mapping | app/Services/TweakProviders/MiscTweakProvider.cs | `high` | ui-mapping |
+| `engine-font-cache-cleanup` | `repo-code` | `Current repo code` | Current font-cache cleanup implementation | engine/Tweaks/Commands/Cleanup/ClearFontCacheTweak.cs | `high` | path, value, behavior |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `False` |
+| Recommended for general users | `False` |
+| Restore default supported | `False` |
+| Restore previous supported | `False` |
+| Needs VM validation | `True` |
+| Why | The live cleanup behavior and repo-backed file targets are clear, but this one-shot cleanup card still lives only in the first-party provider. |
+
+Blocking issues:
+- The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.
+- This is a maintenance action with no rollback support.
+
+---
+
+### `cleanup.memory-dumps`
+
+| Field | Value |
+| --- | --- |
+| Status | `review-required` |
+| Evidence class | `Class D` |
+| Category | `Cleanup` |
+| Area | `Crash Dump Cleanup` |
+| Scope | `device` |
+| Source file | [research/records/cleanup.memory-dumps.review.json](records/cleanup.memory-dumps.review.json) |
+| V3.1 evidence root | - |
+| Apply allowed | `False` |
+| Confidence | `medium` |
+| Needs VM validation | `True` |
+
+**Summary:** Review-required audit trail for the live memory-dump cleanup card. The app already ships this file-backed cleanup action and the repo cleanup docs describe the same dump paths, but the card has not yet been promoted into the validated research-provider surface.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `unknown` |
+| Provider source | app/Services/TweakProviders/MiscTweakProvider.cs |
+| Notes | The live app still ships this as a first-party cleanup card instead of through the research-provider surface. |
+
+Current writes
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `memory-dump-files` | `%WINDIR%\MEMORY.DMP; %WINDIR%\Minidump` | `CleanupAction` | `Cleared` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class D` |
+| Title | Key Known, Value Semantics Unknown |
+| Action state | `research-gated` |
+| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto lineage | `True` |
+| Has Windows Internals notes | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | deletes, %windir%, memory, files, under, minidump, memory dump, livekernelreports, memory.dmp |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
+
+Nohuto lineage references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| win-config / cleanup/desc.md | [https://github.com/nohuto/win-config/blob/main/cleanup/desc.md](https://github.com/nohuto/win-config/blob/main/cleanup/desc.md) | Matched 6 audit token(s) in win-config. |
+| win-config / privacy/desc.md | [https://github.com/nohuto/win-config/blob/main/privacy/desc.md](https://github.com/nohuto/win-config/blob/main/privacy/desc.md) | Matched 5 audit token(s) in win-config. |
+| win-config / security/desc.md | [https://github.com/nohuto/win-config/blob/main/security/desc.md](https://github.com/nohuto/win-config/blob/main/security/desc.md) | Matched 5 audit token(s) in win-config. |
+| win-config / cleanup/desc.md#bsod-memory-dump-files | [https://github.com/nohuto/win-config/blob/main/cleanup/desc.md#bsod-memory-dump-files](https://github.com/nohuto/win-config/blob/main/cleanup/desc.md#bsod-memory-dump-files) | Documents the crash dump paths removed by this cleanup option. |
+
+**Targets**
+
+#### `memory-dump-files`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `file` |
+| Path | `%WINDIR%\MEMORY.DMP; %WINDIR%\Minidump` |
+| Value name | `CleanupAction` |
+| Value type | `file cleanup action` |
+| Notes | This is a one-shot cleanup action rather than a persistent dump-policy setting. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `missing` | - | No cleanup action | Crash-dump files remain until the operator or Windows removes them. | repo-cleanup-doc, engine-memory-dump-cleanup |
+| `value` | `Cleared` | Clear memory dump files | Deletes MEMORY.DMP and the Minidump directory tracked by the current app. | repo-cleanup-doc, repo-cleanup-provenance, app-misc-provider, engine-memory-dump-cleanup |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Windows-managed crash-dump baseline | Systems where crash-dump files remain available until they are manually removed or overwritten | memory-dump-files: unknown None - This card represents an operator-triggered cleanup action, not a persistent default state. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `hold-for-research` | Hold for research | ['Research tracking only', 'Cleanup command backlog reduction'] | ['Published presets', 'General users'] | `False` |
+| `current-app-action` | Current app action | ['Research comparison only'] | ['Published presets', 'General users'] | `False` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-cleanup-doc` | `repo-doc` | `Current repo docs` | Repo cleanup catalog entry | [Docs/cleanup/cleanup.md](../Docs/cleanup/cleanup.md) | `high` | path, behavior, ui-mapping |
+| `repo-cleanup-provenance` | `repo-doc` | `Current repo docs` | Repo tweak provenance for cleanup.memory-dumps | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) | `medium` | behavior, risk |
+| `app-misc-provider` | `repo-code` | `Current repo code` | Live cleanup provider mapping | app/Services/TweakProviders/MiscTweakProvider.cs | `high` | ui-mapping |
+| `engine-memory-dump-cleanup` | `repo-code` | `Current repo code` | Current memory-dump cleanup implementation | engine/Tweaks/Commands/Cleanup/ClearMemoryDumpFilesTweak.cs | `high` | path, value, behavior |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `False` |
+| Recommended for general users | `False` |
+| Restore default supported | `False` |
+| Restore previous supported | `False` |
+| Needs VM validation | `True` |
+| Why | The live cleanup behavior and repo-backed file targets are clear, but this one-shot cleanup card still lives only in the first-party provider. |
+
+Blocking issues:
+- The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.
+- This is a maintenance action with no rollback support.
+
+---
+
+### `cleanup.prefetch-files`
+
+| Field | Value |
+| --- | --- |
+| Status | `review-required` |
+| Evidence class | `Class D` |
+| Category | `Cleanup` |
+| Area | `Prefetch Cleanup` |
+| Scope | `device` |
+| Source file | [research/records/cleanup.prefetch-files.review.json](records/cleanup.prefetch-files.review.json) |
+| V3.1 evidence root | - |
+| Apply allowed | `False` |
+| Confidence | `medium` |
+| Needs VM validation | `True` |
+
+**Summary:** Review-required audit trail for the live Prefetch cleanup card. The app already ships this file-backed cleanup action and the repo cleanup docs describe the same Prefetch directory, but the card has not yet been promoted into the validated research-provider surface.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `unknown` |
+| Provider source | app/Services/TweakProviders/MiscTweakProvider.cs |
+| Notes | The live app still ships this as a first-party cleanup card instead of through the research-provider surface. |
+
+Current writes
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `prefetch-files` | `%WINDIR%\Prefetch` | `CleanupAction` | `Cleared` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class D` |
+| Title | Key Known, Value Semantics Unknown |
+| Action state | `research-gated` |
+| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto lineage | `True` |
+| Has Windows Internals notes | `True` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | clears, prefetch, files, from, %windir%, over, time, sysmain, enableprefetcher |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
+
+Nohuto lineage references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| win-config / cleanup/desc.md | [https://github.com/nohuto/win-config/blob/main/cleanup/desc.md](https://github.com/nohuto/win-config/blob/main/cleanup/desc.md) | Matched 7 audit token(s) in win-config. |
+| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 6 audit token(s) in win-config. |
+| win-config / network/desc.md | [https://github.com/nohuto/win-config/blob/main/network/desc.md](https://github.com/nohuto/win-config/blob/main/network/desc.md) | Matched 5 audit token(s) in win-config. |
+| win-config / cleanup/desc.md#prefetch-files | [https://github.com/nohuto/win-config/blob/main/cleanup/desc.md#prefetch-files](https://github.com/nohuto/win-config/blob/main/cleanup/desc.md#prefetch-files) | Documents the Prefetch folder and the rebuild behavior after cleanup. |
+
+Windows Internals references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Subsystem context for SysMain, prefetch, and related Windows internals. |
+
+**Targets**
+
+#### `prefetch-files`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `file` |
+| Path | `%WINDIR%\Prefetch` |
+| Value name | `CleanupAction` |
+| Value type | `file cleanup action` |
+| Notes | This is a one-shot cleanup action rather than a persistent Prefetch policy setting. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `missing` | - | No cleanup action | Prefetch files remain until the operator or Windows removes them. | repo-cleanup-doc, engine-prefetch-cleanup |
+| `value` | `Cleared` | Clear Prefetch files | Deletes the Prefetch directory contents tracked by the current app. | repo-cleanup-doc, repo-cleanup-provenance, app-misc-provider, engine-prefetch-cleanup |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Windows-managed Prefetch baseline | Systems where Prefetch files remain available until they are manually cleared or regenerated by Windows | prefetch-files: unknown None - This card represents an operator-triggered cleanup action, not a persistent default state. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `hold-for-research` | Hold for research | ['Research tracking only', 'Cleanup command backlog reduction'] | ['Published presets', 'General users'] | `False` |
+| `current-app-action` | Current app action | ['Research comparison only'] | ['Published presets', 'General users'] | `False` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-cleanup-doc` | `repo-doc` | `Current repo docs` | Repo cleanup catalog entry | [Docs/cleanup/cleanup.md](../Docs/cleanup/cleanup.md) | `high` | path, behavior, ui-mapping |
+| `repo-cleanup-provenance` | `repo-doc` | `Current repo docs` | Repo tweak provenance for cleanup.prefetch-files | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) | `medium` | behavior, risk |
+| `app-misc-provider` | `repo-code` | `Current repo code` | Live cleanup provider mapping | app/Services/TweakProviders/MiscTweakProvider.cs | `high` | ui-mapping |
+| `engine-prefetch-cleanup` | `repo-code` | `Current repo code` | Current Prefetch cleanup implementation | engine/Tweaks/Commands/Cleanup/ClearPrefetchFilesTweak.cs | `high` | path, value, behavior |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `False` |
+| Recommended for general users | `False` |
+| Restore default supported | `False` |
+| Restore previous supported | `False` |
+| Needs VM validation | `True` |
+| Why | The live cleanup behavior and repo-backed file targets are clear, but this one-shot cleanup card still lives only in the first-party provider. |
+
+Blocking issues:
+- The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.
+- This is a maintenance action with no rollback support.
+
+---
+
 ### `cleanup.product-key`
 
 | Field | Value |
@@ -37413,6 +37995,588 @@ Other source references:
 Blocking issues:
 - The card has not yet been promoted into the research-provider surface.
 - This is a destructive cleanup action without rollback.
+
+---
+
+### `cleanup.temp-files`
+
+| Field | Value |
+| --- | --- |
+| Status | `review-required` |
+| Evidence class | `Class D` |
+| Category | `Cleanup` |
+| Area | `Temporary File Cleanup` |
+| Scope | `device` |
+| Source file | [research/records/cleanup.temp-files.review.json](records/cleanup.temp-files.review.json) |
+| V3.1 evidence root | - |
+| Apply allowed | `False` |
+| Confidence | `medium` |
+| Needs VM validation | `True` |
+
+**Summary:** Review-required audit trail for the live temporary-file cleanup card. The app already ships this file-backed cleanup action and the repo cleanup docs describe the same temp directories, but the card has not yet been promoted into the validated research-provider surface.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `unknown` |
+| Provider source | app/Services/TweakProviders/MiscTweakProvider.cs |
+| Notes | The live app still ships this as a first-party cleanup card instead of through the research-provider surface. |
+
+Current writes
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `temporary-files` | `%TEMP%; %WINDIR%\Temp` | `CleanupAction` | `Cleared` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class D` |
+| Title | Key Known, Value Semantics Unknown |
+| Action state | `research-gated` |
+| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto lineage | `True` |
+| Has Windows Internals notes | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | temporary files, %temp%, windows temp |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
+
+Nohuto lineage references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| win-config / cleanup/desc.md#temporary-files | [https://github.com/nohuto/win-config/blob/main/cleanup/desc.md#temporary-files](https://github.com/nohuto/win-config/blob/main/cleanup/desc.md#temporary-files) | Documents the user and Windows temp directories cleared by this tweak. |
+
+**Targets**
+
+#### `temporary-files`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `file` |
+| Path | `%TEMP%; %WINDIR%\Temp` |
+| Value name | `CleanupAction` |
+| Value type | `file cleanup action` |
+| Notes | This is a one-shot cleanup action rather than a persistent temp-file policy setting. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `missing` | - | No cleanup action | Temporary files remain until the operator or Windows removes them. | repo-cleanup-doc, engine-temp-files-cleanup |
+| `value` | `Cleared` | Clear temporary files | Deletes files under the user temp and Windows temp directories, skipping files in use. | repo-cleanup-doc, repo-cleanup-provenance, app-misc-provider, engine-temp-files-cleanup |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Windows-managed temporary-file baseline | Systems where temporary files remain until an operator or Windows cleanup flow removes them | temporary-files: unknown None - This card represents an operator-triggered cleanup action, not a persistent default state. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `hold-for-research` | Hold for research | ['Research tracking only', 'Cleanup command backlog reduction'] | ['Published presets', 'General users'] | `False` |
+| `current-app-action` | Current app action | ['Research comparison only'] | ['Published presets', 'General users'] | `False` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-cleanup-doc` | `repo-doc` | `Current repo docs` | Repo cleanup catalog entry | [Docs/cleanup/cleanup.md](../Docs/cleanup/cleanup.md) | `high` | path, behavior, ui-mapping |
+| `repo-cleanup-provenance` | `repo-doc` | `Current repo docs` | Repo tweak provenance for cleanup.temp-files | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) | `medium` | behavior, risk |
+| `app-misc-provider` | `repo-code` | `Current repo code` | Live cleanup provider mapping | app/Services/TweakProviders/MiscTweakProvider.cs | `high` | ui-mapping |
+| `engine-temp-files-cleanup` | `repo-code` | `Current repo code` | Current temporary-file cleanup implementation | engine/Tweaks/Commands/Cleanup/ClearTemporaryFilesTweak.cs | `high` | path, value, behavior |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `False` |
+| Recommended for general users | `False` |
+| Restore default supported | `False` |
+| Restore previous supported | `False` |
+| Needs VM validation | `True` |
+| Why | The live cleanup behavior and repo-backed file targets are clear, but this one-shot cleanup card still lives only in the first-party provider. |
+
+Blocking issues:
+- The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.
+- This is a maintenance action with no rollback support.
+
+---
+
+### `cleanup.thumbnail-cache`
+
+| Field | Value |
+| --- | --- |
+| Status | `review-required` |
+| Evidence class | `Class D` |
+| Category | `Cleanup` |
+| Area | `Explorer Thumbnail Cache Cleanup` |
+| Scope | `user` |
+| Source file | [research/records/cleanup.thumbnail-cache.review.json](records/cleanup.thumbnail-cache.review.json) |
+| V3.1 evidence root | - |
+| Apply allowed | `False` |
+| Confidence | `medium` |
+| Needs VM validation | `True` |
+
+**Summary:** Review-required audit trail for the live thumbnail-cache cleanup card. The app already ships this file-backed cleanup action and the repo cleanup docs describe the Explorer thumbnail-cache files, but the card has not yet been promoted into the validated research-provider surface.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `unknown` |
+| Provider source | app/Services/TweakProviders/MiscTweakProvider.cs |
+| Notes | The live app still ships this as a first-party cleanup card instead of through the research-provider surface. |
+
+Current writes
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `thumbnail-cache-files` | `%LOCALAPPDATA%\Microsoft\Windows\Explorer\thumbcache_*.db` | `CleanupAction` | `Cleared` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class D` |
+| Title | Key Known, Value Semantics Unknown |
+| Action state | `research-gated` |
+| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto lineage | `True` |
+| Has Windows Internals notes | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | thumbnail cache, explorer, *.db |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
+
+Nohuto lineage references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| win-config / cleanup/desc.md#thumbnail-cache | [https://github.com/nohuto/win-config/blob/main/cleanup/desc.md#thumbnail-cache](https://github.com/nohuto/win-config/blob/main/cleanup/desc.md#thumbnail-cache) | Documents the Explorer thumbnail cache files that are rebuilt automatically. |
+
+**Targets**
+
+#### `thumbnail-cache-files`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `file` |
+| Path | `%LOCALAPPDATA%\Microsoft\Windows\Explorer\thumbcache_*.db` |
+| Value name | `CleanupAction` |
+| Value type | `file cleanup action` |
+| Notes | This is a one-shot cleanup action rather than a persistent Explorer setting. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `missing` | - | No cleanup action | Thumbnail-cache files remain until the operator or Windows removes them. | repo-cleanup-doc, engine-thumbnail-cache-cleanup |
+| `value` | `Cleared` | Clear thumbnail cache | Deletes the thumbnail-cache files enumerated by the current app. | repo-cleanup-doc, repo-cleanup-provenance, app-misc-provider, engine-thumbnail-cache-cleanup |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Windows-managed thumbnail-cache baseline | Systems where Explorer rebuilds thumbnail-cache files after they are cleared | thumbnail-cache-files: unknown None - This card represents an operator-triggered cleanup action, not a persistent default state. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `hold-for-research` | Hold for research | ['Research tracking only', 'Cleanup command backlog reduction'] | ['Published presets', 'General users'] | `False` |
+| `current-app-action` | Current app action | ['Research comparison only'] | ['Published presets', 'General users'] | `False` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-cleanup-doc` | `repo-doc` | `Current repo docs` | Repo cleanup catalog entry | [Docs/cleanup/cleanup.md](../Docs/cleanup/cleanup.md) | `high` | path, behavior, ui-mapping |
+| `repo-cleanup-provenance` | `repo-doc` | `Current repo docs` | Repo tweak provenance for cleanup.thumbnail-cache | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) | `medium` | behavior, risk |
+| `app-misc-provider` | `repo-code` | `Current repo code` | Live cleanup provider mapping | app/Services/TweakProviders/MiscTweakProvider.cs | `high` | ui-mapping |
+| `engine-thumbnail-cache-cleanup` | `repo-code` | `Current repo code` | Current thumbnail-cache cleanup implementation | engine/Tweaks/Commands/Cleanup/ClearThumbnailCacheTweak.cs | `high` | path, value, behavior |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `False` |
+| Recommended for general users | `False` |
+| Restore default supported | `False` |
+| Restore previous supported | `False` |
+| Needs VM validation | `True` |
+| Why | The live cleanup behavior and repo-backed file targets are clear, but this one-shot cleanup card still lives only in the first-party provider. |
+
+Blocking issues:
+- The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.
+- This is a maintenance action with no rollback support.
+
+---
+
+### `cleanup.wer-files`
+
+| Field | Value |
+| --- | --- |
+| Status | `review-required` |
+| Evidence class | `Class D` |
+| Category | `Cleanup` |
+| Area | `Windows Error Reporting Cleanup` |
+| Scope | `device` |
+| Source file | [research/records/cleanup.wer-files.review.json](records/cleanup.wer-files.review.json) |
+| V3.1 evidence root | - |
+| Apply allowed | `False` |
+| Confidence | `medium` |
+| Needs VM validation | `True` |
+
+**Summary:** Review-required audit trail for the live Windows Error Reporting cleanup card. The app already ships this file-backed cleanup action and the repo cleanup docs describe the same WER directories, but the card has not yet been promoted into the validated research-provider surface.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `unknown` |
+| Provider source | app/Services/TweakProviders/MiscTweakProvider.cs |
+| Notes | The live app still ships this as a first-party cleanup card instead of through the research-provider surface. |
+
+Current writes
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `wer-files` | `%PROGRAMDATA%\Microsoft\Windows\WER; %LOCALAPPDATA%\Microsoft\Windows\WER; %TEMP%\WER` | `CleanupAction` | `Cleared` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class D` |
+| Title | Key Known, Value Semantics Unknown |
+| Action state | `research-gated` |
+| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto lineage | `True` |
+| Has Windows Internals notes | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | wer, windows error reporting, programdata microsoft windows wer |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
+
+Nohuto lineage references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| win-config / cleanup/desc.md#wer-files | [https://github.com/nohuto/win-config/blob/main/cleanup/desc.md#wer-files](https://github.com/nohuto/win-config/blob/main/cleanup/desc.md#wer-files) | Documents the WER system and per-user report queues cleared by this tweak. |
+
+Other source references:
+
+| Kind | Title | Location | Summary |
+| --- | --- | --- | --- |
+| microsoft | Windows Error Reporting | [https://learn.microsoft.com/en-us/windows/win32/wer/windows-error-reporting](https://learn.microsoft.com/en-us/windows/win32/wer/windows-error-reporting) | Official Microsoft overview of WER data and report handling. |
+
+**Targets**
+
+#### `wer-files`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `file` |
+| Path | `%PROGRAMDATA%\Microsoft\Windows\WER; %LOCALAPPDATA%\Microsoft\Windows\WER; %TEMP%\WER` |
+| Value name | `CleanupAction` |
+| Value type | `file cleanup action` |
+| Notes | This is a one-shot cleanup action rather than a persistent WER policy setting. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `missing` | - | No cleanup action | WER files remain until the operator or Windows removes them. | repo-cleanup-doc, engine-wer-cleanup |
+| `value` | `Cleared` | Clear WER files | Deletes the WER crash dumps and report metadata tracked by the current app. | repo-cleanup-doc, repo-cleanup-provenance, app-misc-provider, engine-wer-cleanup |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Windows-managed WER baseline | Systems where WER files remain available until they are manually cleared or rotated away | wer-files: unknown None - This card represents an operator-triggered cleanup action, not a persistent default state. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `hold-for-research` | Hold for research | ['Research tracking only', 'Cleanup command backlog reduction'] | ['Published presets', 'General users'] | `False` |
+| `current-app-action` | Current app action | ['Research comparison only'] | ['Published presets', 'General users'] | `False` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-cleanup-doc` | `repo-doc` | `Current repo docs` | Repo cleanup catalog entry | [Docs/cleanup/cleanup.md](../Docs/cleanup/cleanup.md) | `high` | path, behavior, ui-mapping |
+| `repo-cleanup-provenance` | `repo-doc` | `Current repo docs` | Repo tweak provenance for cleanup.wer-files | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) | `medium` | behavior, risk |
+| `app-misc-provider` | `repo-code` | `Current repo code` | Live cleanup provider mapping | app/Services/TweakProviders/MiscTweakProvider.cs | `high` | ui-mapping |
+| `engine-wer-cleanup` | `repo-code` | `Current repo code` | Current WER cleanup implementation | engine/Tweaks/Commands/Cleanup/ClearWERFilesTweak.cs | `high` | path, value, behavior |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `False` |
+| Recommended for general users | `False` |
+| Restore default supported | `False` |
+| Restore previous supported | `False` |
+| Needs VM validation | `True` |
+| Why | The live cleanup behavior and repo-backed file targets are clear, but this one-shot cleanup card still lives only in the first-party provider. |
+
+Blocking issues:
+- The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.
+- This is a maintenance action with no rollback support.
+
+---
+
+### `cleanup.windows-old`
+
+| Field | Value |
+| --- | --- |
+| Status | `review-required` |
+| Evidence class | `Class D` |
+| Category | `Cleanup` |
+| Area | `Windows.old Cleanup` |
+| Scope | `device` |
+| Source file | [research/records/cleanup.windows-old.review.json](records/cleanup.windows-old.review.json) |
+| V3.1 evidence root | - |
+| Apply allowed | `False` |
+| Confidence | `medium` |
+| Needs VM validation | `True` |
+
+**Summary:** Review-required audit trail for the live Windows.old cleanup card. The app already ships this file-backed cleanup action and the repo cleanup docs describe the same rollback-sensitive folder, but the card has not yet been promoted into the validated research-provider surface.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `unknown` |
+| Provider source | app/Services/TweakProviders/MiscTweakProvider.cs |
+| Notes | The live app still ships this as a first-party cleanup card instead of through the research-provider surface. |
+
+Current writes
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `windows-old-folder` | `%SystemDrive%\Windows.old` | `CleanupAction` | `Cleared` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class D` |
+| Title | Key Known, Value Semantics Unknown |
+| Action state | `research-gated` |
+| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto lineage | `True` |
+| Has Windows Internals notes | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | windows.old, previous version of windows |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
+
+Nohuto lineage references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| win-config / cleanup/desc.md#windowsold | [https://github.com/nohuto/win-config/blob/main/cleanup/desc.md#windowsold](https://github.com/nohuto/win-config/blob/main/cleanup/desc.md#windowsold) | Documents removing the previous Windows installation under Windows.old. |
+
+Other source references:
+
+| Kind | Title | Location | Summary |
+| --- | --- | --- | --- |
+| microsoft | Delete your previous version of Windows | [https://support.microsoft.com/en-us/windows/delete-your-previous-version-of-windows-f8b26680-e083-c710-b757-7567d69dbb74](https://support.microsoft.com/en-us/windows/delete-your-previous-version-of-windows-f8b26680-e083-c710-b757-7567d69dbb74) | Official Microsoft guidance explaining the rollback impact of deleting Windows.old. |
+
+**Targets**
+
+#### `windows-old-folder`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `file` |
+| Path | `%SystemDrive%\Windows.old` |
+| Value name | `CleanupAction` |
+| Value type | `file cleanup action` |
+| Notes | This is a one-shot cleanup action rather than a persistent rollback policy setting. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `missing` | - | No cleanup action | Windows.old remains available until the operator or Windows removes it. | repo-cleanup-doc, engine-windows-old-cleanup |
+| `value` | `Cleared` | Delete Windows.old | Deletes Windows.old folders on fixed drives, removing that rollback folder from the system. | repo-cleanup-doc, repo-cleanup-provenance, app-misc-provider, engine-windows-old-cleanup |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Windows-managed Windows.old baseline | Systems where Windows.old remains available until cleanup or retention rules remove it | windows-old-folder: unknown None - This card represents an operator-triggered cleanup action, not a persistent default state. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `hold-for-research` | Hold for research | ['Research tracking only', 'Cleanup command backlog reduction'] | ['Published presets', 'General users'] | `False` |
+| `current-app-action` | Current app action | ['Research comparison only'] | ['Published presets', 'General users'] | `False` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-cleanup-doc` | `repo-doc` | `Current repo docs` | Repo cleanup catalog entry | [Docs/cleanup/cleanup.md](../Docs/cleanup/cleanup.md) | `high` | path, behavior, ui-mapping |
+| `repo-cleanup-provenance` | `repo-doc` | `Current repo docs` | Repo tweak provenance for cleanup.windows-old | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) | `medium` | behavior, risk |
+| `app-misc-provider` | `repo-code` | `Current repo code` | Live cleanup provider mapping | app/Services/TweakProviders/MiscTweakProvider.cs | `high` | ui-mapping |
+| `engine-windows-old-cleanup` | `repo-code` | `Current repo code` | Current Windows.old cleanup implementation | engine/Tweaks/Commands/Cleanup/ClearWindowsOldTweak.cs | `high` | path, value, behavior |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `False` |
+| Recommended for general users | `False` |
+| Restore default supported | `False` |
+| Restore previous supported | `False` |
+| Needs VM validation | `True` |
+| Why | The live cleanup behavior and repo-backed folder target are clear, but this one-shot cleanup card still lives only in the first-party provider. |
+
+Blocking issues:
+- The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.
+- Deleting Windows.old has no rollback path through the app.
+
+---
+
+### `cleanup.windows-update-cache`
+
+| Field | Value |
+| --- | --- |
+| Status | `review-required` |
+| Evidence class | `Class D` |
+| Category | `Cleanup` |
+| Area | `Windows Update Cache Cleanup` |
+| Scope | `device` |
+| Source file | [research/records/cleanup.windows-update-cache.review.json](records/cleanup.windows-update-cache.review.json) |
+| V3.1 evidence root | - |
+| Apply allowed | `False` |
+| Confidence | `medium` |
+| Needs VM validation | `True` |
+
+**Summary:** Review-required audit trail for the live Windows Update cache cleanup card. The app already ships this file-backed cleanup action and the repo cleanup docs describe the same update-cache directories, but the card has not yet been promoted into the validated research-provider surface.
+
+**Current implementation**
+
+| Field | Value |
+| --- | --- |
+| Status | `unknown` |
+| Provider source | app/Services/TweakProviders/MiscTweakProvider.cs |
+| Notes | The live app still ships this as a first-party cleanup card instead of through the research-provider surface. |
+
+Current writes
+
+| Target | Path | Value | State | Kind | Notes |
+| --- | --- | --- | --- | --- | --- |
+| `windows-update-cache-files` | `%WINDIR%\SoftwareDistribution; %WINDIR%\System32\catroot2` | `CleanupAction` | `Cleared` | `value` |  |
+
+**Evidence class**
+
+| Field | Value |
+| --- | --- |
+| Label | `Class D` |
+| Title | Key Known, Value Semantics Unknown |
+| Action state | `research-gated` |
+| Gating reason | The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface. |
+
+**Sources**
+
+| Field | Value |
+| --- | --- |
+| Coverage state | `repo-backed` |
+| Has nohuto lineage | `True` |
+| Has Windows Internals notes | `False` |
+| Needs review | `False` |
+| Source repositories | win-config |
+| Matched tokens | windows update cache, softwaredistribution, catroot2 |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
+
+Nohuto lineage references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| win-config / cleanup/desc.md#windows-update-cache | [https://github.com/nohuto/win-config/blob/main/cleanup/desc.md#windows-update-cache](https://github.com/nohuto/win-config/blob/main/cleanup/desc.md#windows-update-cache) | Documents the Windows Update cache paths and service stop sequence used for reset. |
+
+**Targets**
+
+#### `windows-update-cache-files`
+
+| Field | Value |
+| --- | --- |
+| Location kind | `file` |
+| Path | `%WINDIR%\SoftwareDistribution; %WINDIR%\System32\catroot2` |
+| Value name | `CleanupAction` |
+| Value type | `file cleanup action` |
+| Notes | This is a one-shot cleanup action rather than a persistent Windows Update policy setting. |
+
+| State | Value | Label | Meaning | Evidence IDs |
+| --- | --- | --- | --- | --- |
+| `missing` | - | No cleanup action | Windows Update cache directories remain until the operator or Windows cleanup flow removes them. | repo-cleanup-doc, engine-windows-update-cache-cleanup |
+| `value` | `Cleared` | Clear Windows Update cache | Deletes the Windows Update cache directories tracked by the current app. | repo-cleanup-doc, repo-cleanup-provenance, app-misc-provider, engine-windows-update-cache-cleanup |
+
+**Windows defaults**
+
+| Label | Applies to | States |
+| --- | --- | --- |
+| Windows-managed update-cache baseline | Systems where Windows Update maintains its cache directories until troubleshooting or service activity resets them | windows-update-cache-files: unknown None - This card represents an operator-triggered cleanup action, not a persistent default state. |
+
+**Recommended profiles**
+
+| Profile | Label | Intended for | Avoid for | Apply allowed |
+| --- | --- | --- | --- | --- |
+| `hold-for-research` | Hold for research | ['Research tracking only', 'Cleanup command backlog reduction'] | ['Published presets', 'General users'] | `False` |
+| `current-app-action` | Current app action | ['Research comparison only'] | ['Published presets', 'General users'] | `False` |
+
+**Evidence**
+
+| Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
+| --- | --- | --- | --- | --- | --- | --- |
+| `repo-cleanup-doc` | `repo-doc` | `Current repo docs` | Repo cleanup catalog entry | [Docs/cleanup/cleanup.md](../Docs/cleanup/cleanup.md) | `high` | path, behavior, ui-mapping |
+| `repo-cleanup-provenance` | `repo-doc` | `Current repo docs` | Repo tweak provenance for cleanup.windows-update-cache | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) | `medium` | behavior, risk |
+| `app-misc-provider` | `repo-code` | `Current repo code` | Live cleanup provider mapping | app/Services/TweakProviders/MiscTweakProvider.cs | `high` | ui-mapping |
+| `engine-windows-update-cache-cleanup` | `repo-code` | `Current repo code` | Current Windows Update cache cleanup implementation | engine/Tweaks/Commands/Cleanup/ClearWindowsUpdateCacheTweak.cs | `high` | path, value, behavior |
+
+**Decision**
+
+| Field | Value |
+| --- | --- |
+| Apply allowed | `False` |
+| Recommended for general users | `False` |
+| Restore default supported | `False` |
+| Restore previous supported | `False` |
+| Needs VM validation | `True` |
+| Why | The live cleanup behavior and repo-backed file targets are clear, but this one-shot cleanup card still lives only in the first-party provider. |
+
+Blocking issues:
+- The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.
+- This is a maintenance action with no rollback support.
 
 ---
 

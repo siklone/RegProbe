@@ -6,19 +6,19 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 
 | Field | Value |
 | --- | --- |
-| Total records | 333 |
+| Total records | 343 |
 | Validated | 255 |
 | Deprecated | 55 |
 | Review required | 0 |
 | Records with evidence roots | 24 |
-| Records with evidence | 333 |
+| Records with evidence | 343 |
 | Records without evidence | 0 |
-| Records missing validation proof | 10 |
+| Records missing validation proof | 20 |
 | Deprecated missing validation proof | 0 |
 | Class A | 245 |
 | Class B | 21 |
 | Class C | 2 |
-| Class D | 10 |
+| Class D | 20 |
 | Class E | 55 |
 | Imported candidate backlog | [research/imported-candidate-backlog.json](imported-candidate-backlog.json) |
 | Imported candidate count | 0 |
@@ -99,9 +99,19 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `system.kernel.global-timer-resolution-requests` | draft | Class B | `research/records/system.kernel.global-timer-resolution-requests.json` | - | `6e31847d8973826b81458ba351cbc3c44e0ef75625e76664985f0652b0fc16e9` | `ac764730842591e0546b06383c5461c2f08d233e8b34f7d8e0b18702a7f87e79` | 16 |
 | `system.kernel.timer-check-flags` | draft | Class B | `research/records/system.kernel.timer-check-flags.json` | - | `0464051faf97130e4093ff9380155fc40b267ffe8469db124daf6149fc9df36c` | `20e854cf8e22f4bac21dced117d33d93453092c5e679bfb7e33559f7411132e3` | 14 |
 | `cleanup.component-store` | review-required | Class D | `research/records/cleanup.component-store.review.json` | - | `63969da0843f1125fdf55375bd06c3b54a7cc013fbd843de0bf951b2e6b2ffaa` |  | 4 |
+| `cleanup.directx-shader-cache` | review-required | Class D | `research/records/cleanup.directx-shader-cache.review.json` | - | `04d7f5e55e87bbec0027f977401fb1efc16417d8fcf968d12f3a5f7609dad091` |  | 4 |
+| `cleanup.eventlog-system` | review-required | Class D | `research/records/cleanup.eventlog-system.review.json` | - | `2e7ebae4014247e22b196fae28d663447a22e9ffa688894a49329d65dae2937c` |  | 4 |
+| `cleanup.font-cache` | review-required | Class D | `research/records/cleanup.font-cache.review.json` | - | `e8be7acf6e5b79280ee31fa409c4882900fb7455168f13a0c12795b54c71252a` |  | 4 |
+| `cleanup.memory-dumps` | review-required | Class D | `research/records/cleanup.memory-dumps.review.json` | - | `fe502bdae3750870c0d4c4fb4c3b8d4c8c6b3abd165da7b00c09d8db3cd763e5` |  | 4 |
+| `cleanup.prefetch-files` | review-required | Class D | `research/records/cleanup.prefetch-files.review.json` | - | `9bd37d854142babf00e73c47c9e5f799661d60b05130ca55aaba3a010bbf2102` |  | 4 |
 | `cleanup.product-key` | review-required | Class D | `research/records/cleanup.product-key.review.json` | - | `d9f6ff1391f31b99245dc5c91489ddc255e41f902fd1485609a8ad3332fd0416` |  | 4 |
 | `cleanup.recycle-bin` | review-required | Class D | `research/records/cleanup.recycle-bin.review.json` | - | `67d5fd6d622366c8f92af27707d2ecac59f89e21f5782a2033609c004e08a333` |  | 4 |
 | `cleanup.shadow-copies` | review-required | Class D | `research/records/cleanup.shadow-copies.review.json` | - | `e42fc4cda1468fb1af009a4a04cd1deb7a3f57abf5e5e848b337904b054544ef` |  | 4 |
+| `cleanup.temp-files` | review-required | Class D | `research/records/cleanup.temp-files.review.json` | - | `c91ccdcc7c90ec2f15b884fcd99aba2b44ade20dcb8b8b4a76e5b792f844f70d` |  | 4 |
+| `cleanup.thumbnail-cache` | review-required | Class D | `research/records/cleanup.thumbnail-cache.review.json` | - | `da9a65251af8f4173273b3696aa1b82a89f1a9adb9a3af859d1aa14a1a2764f9` |  | 4 |
+| `cleanup.wer-files` | review-required | Class D | `research/records/cleanup.wer-files.review.json` | - | `51909b0fe747f9f94bbf567f6184f018abd86ed4b0dddfa9e537a124837872a8` |  | 4 |
+| `cleanup.windows-old` | review-required | Class D | `research/records/cleanup.windows-old.review.json` | - | `8aa03022b131c34ebf9b29fe245932435d8f813364b083a4f8d1047befed4399` |  | 4 |
+| `cleanup.windows-update-cache` | review-required | Class D | `research/records/cleanup.windows-update-cache.review.json` | - | `93bb09e926c562a2afccd1ce2cb520858a88620eac28d2ba854c0ebf46baf865` |  | 4 |
 | `network.flush-dns-cache` | review-required | Class D | `research/records/network.flush-dns-cache.review.json` | - | `5e0d288f7b0f4796491f4d3ef37ff087f59ba82c42cfdf1892eb58471ecf76f7` |  | 4 |
 | `network.reset-winsock` | review-required | Class D | `research/records/network.reset-winsock.review.json` | - | `4ae49d0f2dfafc117f7065c9d3052b0590496983a203c0e456339c36c6aa3cfa` |  | 5 |
 | `power.disable-cpu-parking` | review-required | Class D | `research/records/power.disable-cpu-parking.review.json` | - | `4f981dcb5285a38d01f0a24354218681ba7f4f598b64fe10fcb7ff8896eac36c` |  | 4 |
@@ -2451,6 +2461,111 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 
 ---
 
+### `cleanup.directx-shader-cache`
+
+- Status: `review-required`
+- Evidence class: `Class D`
+- Source file: `research/records/cleanup.directx-shader-cache.review.json`
+- Source SHA256: `04d7f5e55e87bbec0027f977401fb1efc16417d8fcf968d12f3a5f7609dad091`
+- Proof SHA256: ``
+
+**Summary:** Review-required audit trail for the live DirectX shader-cache cleanup card. The app already ships this file-backed cleanup action from the first-party provider and the repo cleanup docs describe the same cache directories, but the card has not yet been promoted into the validated research-provider surface.
+
+**Evidence**
+
+| Evidence ID | Kind | Title | Location |
+| --- | --- | --- | --- |
+| `repo-cleanup-doc` | `repo-doc` | Repo cleanup catalog entry | [Docs/cleanup/cleanup.md](../Docs/cleanup/cleanup.md) |
+| `repo-cleanup-provenance` | `repo-doc` | Repo tweak provenance for cleanup.directx-shader-cache | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) |
+| `app-misc-provider` | `repo-code` | Live cleanup provider mapping | app/Services/TweakProviders/MiscTweakProvider.cs |
+| `engine-shader-cache-cleanup` | `repo-code` | Current shader-cache cleanup implementation | engine/Tweaks/Commands/Cleanup/ClearDirectXShaderCacheTweak.cs |
+
+---
+
+### `cleanup.eventlog-system`
+
+- Status: `review-required`
+- Evidence class: `Class D`
+- Source file: `research/records/cleanup.eventlog-system.review.json`
+- Source SHA256: `2e7ebae4014247e22b196fae28d663447a22e9ffa688894a49329d65dae2937c`
+- Proof SHA256: ``
+
+**Summary:** Review-required audit trail for the live System event-log cleanup card. The app already ships the wevtutil-backed action and the repo cleanup docs describe the same log-clear flow, but the card has not yet been promoted into the validated research-provider surface.
+
+**Evidence**
+
+| Evidence ID | Kind | Title | Location |
+| --- | --- | --- | --- |
+| `repo-cleanup-doc` | `repo-doc` | Repo cleanup catalog entry | [Docs/cleanup/cleanup.md](../Docs/cleanup/cleanup.md) |
+| `repo-cleanup-provenance` | `repo-doc` | Repo tweak provenance for cleanup.eventlog-system | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) |
+| `app-system-provider` | `repo-code` | Live system provider mapping | app/Services/TweakProviders/SystemTweakProvider.cs |
+| `engine-system-event-log-command` | `repo-code` | Current System event-log cleanup implementation | engine/Tweaks/Commands/Cleanup/ClearEventLogsTweak.cs |
+
+---
+
+### `cleanup.font-cache`
+
+- Status: `review-required`
+- Evidence class: `Class D`
+- Source file: `research/records/cleanup.font-cache.review.json`
+- Source SHA256: `e8be7acf6e5b79280ee31fa409c4882900fb7455168f13a0c12795b54c71252a`
+- Proof SHA256: ``
+
+**Summary:** Review-required audit trail for the live font-cache cleanup card. The app already ships this file-backed cleanup action and repo cleanup docs describe the same cache files and service handling, but the card has not yet been promoted into the validated research-provider surface.
+
+**Evidence**
+
+| Evidence ID | Kind | Title | Location |
+| --- | --- | --- | --- |
+| `repo-cleanup-doc` | `repo-doc` | Repo cleanup catalog entry | [Docs/cleanup/cleanup.md](../Docs/cleanup/cleanup.md) |
+| `repo-cleanup-provenance` | `repo-doc` | Repo tweak provenance for cleanup.font-cache | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) |
+| `app-misc-provider` | `repo-code` | Live cleanup provider mapping | app/Services/TweakProviders/MiscTweakProvider.cs |
+| `engine-font-cache-cleanup` | `repo-code` | Current font-cache cleanup implementation | engine/Tweaks/Commands/Cleanup/ClearFontCacheTweak.cs |
+
+---
+
+### `cleanup.memory-dumps`
+
+- Status: `review-required`
+- Evidence class: `Class D`
+- Source file: `research/records/cleanup.memory-dumps.review.json`
+- Source SHA256: `fe502bdae3750870c0d4c4fb4c3b8d4c8c6b3abd165da7b00c09d8db3cd763e5`
+- Proof SHA256: ``
+
+**Summary:** Review-required audit trail for the live memory-dump cleanup card. The app already ships this file-backed cleanup action and the repo cleanup docs describe the same dump paths, but the card has not yet been promoted into the validated research-provider surface.
+
+**Evidence**
+
+| Evidence ID | Kind | Title | Location |
+| --- | --- | --- | --- |
+| `repo-cleanup-doc` | `repo-doc` | Repo cleanup catalog entry | [Docs/cleanup/cleanup.md](../Docs/cleanup/cleanup.md) |
+| `repo-cleanup-provenance` | `repo-doc` | Repo tweak provenance for cleanup.memory-dumps | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) |
+| `app-misc-provider` | `repo-code` | Live cleanup provider mapping | app/Services/TweakProviders/MiscTweakProvider.cs |
+| `engine-memory-dump-cleanup` | `repo-code` | Current memory-dump cleanup implementation | engine/Tweaks/Commands/Cleanup/ClearMemoryDumpFilesTweak.cs |
+
+---
+
+### `cleanup.prefetch-files`
+
+- Status: `review-required`
+- Evidence class: `Class D`
+- Source file: `research/records/cleanup.prefetch-files.review.json`
+- Source SHA256: `9bd37d854142babf00e73c47c9e5f799661d60b05130ca55aaba3a010bbf2102`
+- Proof SHA256: ``
+
+**Summary:** Review-required audit trail for the live Prefetch cleanup card. The app already ships this file-backed cleanup action and the repo cleanup docs describe the same Prefetch directory, but the card has not yet been promoted into the validated research-provider surface.
+
+**Evidence**
+
+| Evidence ID | Kind | Title | Location |
+| --- | --- | --- | --- |
+| `repo-cleanup-doc` | `repo-doc` | Repo cleanup catalog entry | [Docs/cleanup/cleanup.md](../Docs/cleanup/cleanup.md) |
+| `repo-cleanup-provenance` | `repo-doc` | Repo tweak provenance for cleanup.prefetch-files | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) |
+| `app-misc-provider` | `repo-code` | Live cleanup provider mapping | app/Services/TweakProviders/MiscTweakProvider.cs |
+| `engine-prefetch-cleanup` | `repo-code` | Current Prefetch cleanup implementation | engine/Tweaks/Commands/Cleanup/ClearPrefetchFilesTweak.cs |
+
+---
+
 ### `cleanup.product-key`
 
 - Status: `review-required`
@@ -2511,6 +2626,111 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `repo-cleanup-provenance` | `repo-doc` | Repo tweak provenance for cleanup.shadow-copies | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) |
 | `app-misc-provider` | `repo-code` | Live cleanup provider mapping | app/Services/TweakProviders/MiscTweakProvider.cs |
 | `engine-shadow-copy-command` | `repo-code` | Current shadow-copy cleanup implementation | engine/Tweaks/Commands/Cleanup/ClearShadowCopiesTweak.cs |
+
+---
+
+### `cleanup.temp-files`
+
+- Status: `review-required`
+- Evidence class: `Class D`
+- Source file: `research/records/cleanup.temp-files.review.json`
+- Source SHA256: `c91ccdcc7c90ec2f15b884fcd99aba2b44ade20dcb8b8b4a76e5b792f844f70d`
+- Proof SHA256: ``
+
+**Summary:** Review-required audit trail for the live temporary-file cleanup card. The app already ships this file-backed cleanup action and the repo cleanup docs describe the same temp directories, but the card has not yet been promoted into the validated research-provider surface.
+
+**Evidence**
+
+| Evidence ID | Kind | Title | Location |
+| --- | --- | --- | --- |
+| `repo-cleanup-doc` | `repo-doc` | Repo cleanup catalog entry | [Docs/cleanup/cleanup.md](../Docs/cleanup/cleanup.md) |
+| `repo-cleanup-provenance` | `repo-doc` | Repo tweak provenance for cleanup.temp-files | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) |
+| `app-misc-provider` | `repo-code` | Live cleanup provider mapping | app/Services/TweakProviders/MiscTweakProvider.cs |
+| `engine-temp-files-cleanup` | `repo-code` | Current temporary-file cleanup implementation | engine/Tweaks/Commands/Cleanup/ClearTemporaryFilesTweak.cs |
+
+---
+
+### `cleanup.thumbnail-cache`
+
+- Status: `review-required`
+- Evidence class: `Class D`
+- Source file: `research/records/cleanup.thumbnail-cache.review.json`
+- Source SHA256: `da9a65251af8f4173273b3696aa1b82a89f1a9adb9a3af859d1aa14a1a2764f9`
+- Proof SHA256: ``
+
+**Summary:** Review-required audit trail for the live thumbnail-cache cleanup card. The app already ships this file-backed cleanup action and the repo cleanup docs describe the Explorer thumbnail-cache files, but the card has not yet been promoted into the validated research-provider surface.
+
+**Evidence**
+
+| Evidence ID | Kind | Title | Location |
+| --- | --- | --- | --- |
+| `repo-cleanup-doc` | `repo-doc` | Repo cleanup catalog entry | [Docs/cleanup/cleanup.md](../Docs/cleanup/cleanup.md) |
+| `repo-cleanup-provenance` | `repo-doc` | Repo tweak provenance for cleanup.thumbnail-cache | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) |
+| `app-misc-provider` | `repo-code` | Live cleanup provider mapping | app/Services/TweakProviders/MiscTweakProvider.cs |
+| `engine-thumbnail-cache-cleanup` | `repo-code` | Current thumbnail-cache cleanup implementation | engine/Tweaks/Commands/Cleanup/ClearThumbnailCacheTweak.cs |
+
+---
+
+### `cleanup.wer-files`
+
+- Status: `review-required`
+- Evidence class: `Class D`
+- Source file: `research/records/cleanup.wer-files.review.json`
+- Source SHA256: `51909b0fe747f9f94bbf567f6184f018abd86ed4b0dddfa9e537a124837872a8`
+- Proof SHA256: ``
+
+**Summary:** Review-required audit trail for the live Windows Error Reporting cleanup card. The app already ships this file-backed cleanup action and the repo cleanup docs describe the same WER directories, but the card has not yet been promoted into the validated research-provider surface.
+
+**Evidence**
+
+| Evidence ID | Kind | Title | Location |
+| --- | --- | --- | --- |
+| `repo-cleanup-doc` | `repo-doc` | Repo cleanup catalog entry | [Docs/cleanup/cleanup.md](../Docs/cleanup/cleanup.md) |
+| `repo-cleanup-provenance` | `repo-doc` | Repo tweak provenance for cleanup.wer-files | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) |
+| `app-misc-provider` | `repo-code` | Live cleanup provider mapping | app/Services/TweakProviders/MiscTweakProvider.cs |
+| `engine-wer-cleanup` | `repo-code` | Current WER cleanup implementation | engine/Tweaks/Commands/Cleanup/ClearWERFilesTweak.cs |
+
+---
+
+### `cleanup.windows-old`
+
+- Status: `review-required`
+- Evidence class: `Class D`
+- Source file: `research/records/cleanup.windows-old.review.json`
+- Source SHA256: `8aa03022b131c34ebf9b29fe245932435d8f813364b083a4f8d1047befed4399`
+- Proof SHA256: ``
+
+**Summary:** Review-required audit trail for the live Windows.old cleanup card. The app already ships this file-backed cleanup action and the repo cleanup docs describe the same rollback-sensitive folder, but the card has not yet been promoted into the validated research-provider surface.
+
+**Evidence**
+
+| Evidence ID | Kind | Title | Location |
+| --- | --- | --- | --- |
+| `repo-cleanup-doc` | `repo-doc` | Repo cleanup catalog entry | [Docs/cleanup/cleanup.md](../Docs/cleanup/cleanup.md) |
+| `repo-cleanup-provenance` | `repo-doc` | Repo tweak provenance for cleanup.windows-old | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) |
+| `app-misc-provider` | `repo-code` | Live cleanup provider mapping | app/Services/TweakProviders/MiscTweakProvider.cs |
+| `engine-windows-old-cleanup` | `repo-code` | Current Windows.old cleanup implementation | engine/Tweaks/Commands/Cleanup/ClearWindowsOldTweak.cs |
+
+---
+
+### `cleanup.windows-update-cache`
+
+- Status: `review-required`
+- Evidence class: `Class D`
+- Source file: `research/records/cleanup.windows-update-cache.review.json`
+- Source SHA256: `93bb09e926c562a2afccd1ce2cb520858a88620eac28d2ba854c0ebf46baf865`
+- Proof SHA256: ``
+
+**Summary:** Review-required audit trail for the live Windows Update cache cleanup card. The app already ships this file-backed cleanup action and the repo cleanup docs describe the same update-cache directories, but the card has not yet been promoted into the validated research-provider surface.
+
+**Evidence**
+
+| Evidence ID | Kind | Title | Location |
+| --- | --- | --- | --- |
+| `repo-cleanup-doc` | `repo-doc` | Repo cleanup catalog entry | [Docs/cleanup/cleanup.md](../Docs/cleanup/cleanup.md) |
+| `repo-cleanup-provenance` | `repo-doc` | Repo tweak provenance for cleanup.windows-update-cache | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) |
+| `app-misc-provider` | `repo-code` | Live cleanup provider mapping | app/Services/TweakProviders/MiscTweakProvider.cs |
+| `engine-windows-update-cache-cleanup` | `repo-code` | Current Windows Update cache cleanup implementation | engine/Tweaks/Commands/Cleanup/ClearWindowsUpdateCacheTweak.cs |
 
 ---
 

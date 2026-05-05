@@ -1,0 +1,217 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "cleanup.directx-shader-cache",
+  "tweak_id": "cleanup.directx-shader-cache",
+  "record_status": "review-required",
+  "summary": "Review-required audit trail for the live DirectX shader-cache cleanup card. The app already ships this file-backed cleanup action from the first-party provider and the repo cleanup docs describe the same cache directories, but the card has not yet been promoted into the validated research-provider surface.",
+  "setting": {
+    "name": "Clear DirectX Shader Cache",
+    "category": "Cleanup",
+    "area": "Shader Cache Cleanup",
+    "scope": "user",
+    "casual_explanation": "This deletes DirectX and GPU vendor shader-cache files so Windows and GPU drivers rebuild them later.",
+    "why_people_change_it": "People clear shader caches when they are troubleshooting corrupted cache state or reclaiming disk space from stale GPU cache files.",
+    "tradeoffs_overview": "Clearing the cache can reclaim space and remove stale files, but the next launch of affected apps can spend time rebuilding shader caches.",
+    "professional_notes": "The current app uses FileCleanupTweak to delete %LOCALAPPDATA%\\D3DSCache plus NVIDIA, AMD, and Intel shader-cache directories. Repo cleanup docs describe the same cache family and note that the files are regenerated later.",
+    "targets": [
+      {
+        "target_id": "shader-cache-files",
+        "location_kind": "file",
+        "path": "%LOCALAPPDATA%\\D3DSCache; %LOCALAPPDATA%\\NVIDIA\\DXCache; %LOCALAPPDATA%\\NVIDIA\\GLCache; %LOCALAPPDATA%\\NVIDIA Corporation\\NV_Cache; %LOCALAPPDATA%\\AMD\\DXCache; %LOCALAPPDATA%\\Intel\\DXCache",
+        "value_name": "CleanupAction",
+        "value_type": "file cleanup action",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "No cleanup action",
+            "meaning": "Shader-cache files remain until the operator or Windows removes them.",
+            "evidence_ids": [
+              "repo-cleanup-doc",
+              "engine-shader-cache-cleanup"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": "Cleared",
+            "label": "Clear shader caches",
+            "meaning": "Deletes the DirectX and vendor shader-cache directories that the current app enumerates.",
+            "evidence_ids": [
+              "repo-cleanup-doc",
+              "repo-cleanup-provenance",
+              "app-misc-provider",
+              "engine-shader-cache-cleanup"
+            ]
+          }
+        ],
+        "notes": "This is a one-shot file cleanup action rather than a persistent setting."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "unknown",
+    "provider_source": "app/Services/TweakProviders/MiscTweakProvider.cs",
+    "notes": "The live app still ships this as a first-party cleanup card instead of through the research-provider surface.",
+    "writes": [
+      {
+        "target_id": "shader-cache-files",
+        "path": "%LOCALAPPDATA%\\D3DSCache; %LOCALAPPDATA%\\NVIDIA\\DXCache; %LOCALAPPDATA%\\NVIDIA\\GLCache; %LOCALAPPDATA%\\NVIDIA Corporation\\NV_Cache; %LOCALAPPDATA%\\AMD\\DXCache; %LOCALAPPDATA%\\Intel\\DXCache",
+        "value_name": "CleanupAction",
+        "value_type": "file cleanup action",
+        "state_kind": "value",
+        "value": "Cleared"
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows-managed shader-cache baseline",
+      "applies_to": "Systems where shader-cache files are created and rebuilt by Windows and GPU drivers as needed",
+      "states": [
+        {
+          "target_id": "shader-cache-files",
+          "state_kind": "unknown",
+          "value": null,
+          "rationale": "This card represents an operator-triggered cleanup action, not a persistent default state."
+        }
+      ],
+      "notes": "Use detection and operator intent rather than assuming a fixed baseline.",
+      "evidence_ids": [
+        "repo-cleanup-doc",
+        "engine-shader-cache-cleanup"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "hold-for-research",
+      "label": "Hold for research",
+      "intended_for": [
+        "Research tracking only",
+        "Cleanup command backlog reduction"
+      ],
+      "avoid_for": [
+        "Published presets",
+        "General users"
+      ],
+      "states": [
+        {
+          "target_id": "shader-cache-files",
+          "state_kind": "unknown",
+          "value": null,
+          "rationale": "Keep the live cleanup card documented without publishing it as a validated research-provider preset yet."
+        }
+      ],
+      "good_when": "You want the shipped cleanup action represented honestly in the corpus.",
+      "bad_when": "You need a validated research-provider cleanup card.",
+      "tradeoffs": [
+        "The live app behavior is documented.",
+        "The card remains outside the validated research-provider surface."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "repo-cleanup-doc",
+        "repo-cleanup-provenance"
+      ]
+    },
+    {
+      "profile_id": "current-app-action",
+      "label": "Current app action",
+      "intended_for": [
+        "Research comparison only"
+      ],
+      "avoid_for": [
+        "Published presets",
+        "General users"
+      ],
+      "states": [
+        {
+          "target_id": "shader-cache-files",
+          "state_kind": "value",
+          "value": "Cleared",
+          "rationale": "Capture the exact file cleanup action that the live app currently performs."
+        }
+      ],
+      "good_when": "You are auditing the current shader-cache cleanup card as shipped by the app.",
+      "bad_when": "You need a validated research-provider cleanup preset.",
+      "tradeoffs": [
+        "The current app behavior is explicit.",
+        "The card is still held outside the validated research-provider surface."
+      ],
+      "apply_allowed": false,
+      "notes": "Blocked until this cleanup surface completes the normal validation path.",
+      "evidence_ids": [
+        "repo-cleanup-doc",
+        "app-misc-provider",
+        "engine-shader-cache-cleanup"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "repo-cleanup-doc",
+      "kind": "repo-doc",
+      "title": "Repo cleanup catalog entry",
+      "location": "Docs/cleanup/cleanup.md",
+      "summary": "The cleanup documentation lists the DirectX and vendor shader-cache directories and describes the rebuild behavior after cleanup.",
+      "supports": [
+        "path",
+        "behavior",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "repo-cleanup-provenance",
+      "kind": "repo-doc",
+      "title": "Repo tweak provenance for cleanup.directx-shader-cache",
+      "location": "Docs/tweaks/tweak-provenance.md",
+      "summary": "The tweak provenance table keeps the cleanup.directx-shader-cache card tied to the checked-in cleanup source set.",
+      "supports": [
+        "behavior",
+        "risk"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "app-misc-provider",
+      "kind": "repo-code",
+      "title": "Live cleanup provider mapping",
+      "location": "app/Services/TweakProviders/MiscTweakProvider.cs",
+      "summary": "The live app yields ClearDirectXShaderCacheTweak directly from the first-party cleanup provider.",
+      "supports": [
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "engine-shader-cache-cleanup",
+      "kind": "repo-code",
+      "title": "Current shader-cache cleanup implementation",
+      "location": "engine/Tweaks/Commands/Cleanup/ClearDirectXShaderCacheTweak.cs",
+      "summary": "The engine tweak deletes the per-user DirectX cache plus NVIDIA, AMD, and Intel shader-cache directories.",
+      "supports": [
+        "path",
+        "value",
+        "behavior"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "medium",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": false,
+    "restore_previous_supported": false,
+    "needs_vm_validation": true,
+    "why": "The live cleanup behavior and repo-backed file targets are clear, but this one-shot cleanup card still lives only in the first-party provider.",
+    "manual_review_required": true,
+    "blocking_issues": [
+      "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
+      "This is a maintenance action with no rollback support."
+    ]
+  },
+  "last_reviewed_utc": "2026-05-05T10:40:00Z"
+}

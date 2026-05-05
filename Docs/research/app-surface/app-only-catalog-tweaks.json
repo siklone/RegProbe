@@ -1,66 +1,6 @@
 {
   "tweaks": [
     {
-      "tweak_id": "cleanup.directx-shader-cache",
-      "reason": "app-only-cleanup-command",
-      "provider_source": "app/Services/TweakProviders/MiscTweakProvider.cs",
-      "notes": "Live cleanup card shipped directly from the first-party cleanup provider; no research record exists yet for this file-system cache purge."
-    },
-    {
-      "tweak_id": "cleanup.eventlog-system",
-      "reason": "app-only-cleanup-command",
-      "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
-      "notes": "Live cleanup card shipped directly from the first-party system provider; no research record exists yet for this event-log clear action."
-    },
-    {
-      "tweak_id": "cleanup.font-cache",
-      "reason": "app-only-cleanup-command",
-      "provider_source": "app/Services/TweakProviders/MiscTweakProvider.cs",
-      "notes": "Live cleanup card shipped directly from the first-party cleanup provider; no research record exists yet for this file-system cache purge."
-    },
-    {
-      "tweak_id": "cleanup.memory-dumps",
-      "reason": "app-only-cleanup-command",
-      "provider_source": "app/Services/TweakProviders/MiscTweakProvider.cs",
-      "notes": "Live cleanup card shipped directly from the first-party cleanup provider; no research record exists yet for this file-system dump purge."
-    },
-    {
-      "tweak_id": "cleanup.prefetch-files",
-      "reason": "app-only-cleanup-command",
-      "provider_source": "app/Services/TweakProviders/MiscTweakProvider.cs",
-      "notes": "Live cleanup card shipped directly from the first-party cleanup provider; no research record exists yet for this file-system cache purge."
-    },
-    {
-      "tweak_id": "cleanup.temp-files",
-      "reason": "app-only-cleanup-command",
-      "provider_source": "app/Services/TweakProviders/MiscTweakProvider.cs",
-      "notes": "Live cleanup card shipped directly from the first-party cleanup provider; no research record exists yet for this temporary-file purge."
-    },
-    {
-      "tweak_id": "cleanup.thumbnail-cache",
-      "reason": "app-only-cleanup-command",
-      "provider_source": "app/Services/TweakProviders/MiscTweakProvider.cs",
-      "notes": "Live cleanup card shipped directly from the first-party cleanup provider; no research record exists yet for this file-system cache purge."
-    },
-    {
-      "tweak_id": "cleanup.wer-files",
-      "reason": "app-only-cleanup-command",
-      "provider_source": "app/Services/TweakProviders/MiscTweakProvider.cs",
-      "notes": "Live cleanup card shipped directly from the first-party cleanup provider; no research record exists yet for this Windows Error Reporting purge."
-    },
-    {
-      "tweak_id": "cleanup.windows-old",
-      "reason": "app-only-cleanup-command",
-      "provider_source": "app/Services/TweakProviders/MiscTweakProvider.cs",
-      "notes": "Live cleanup card shipped directly from the first-party cleanup provider; no research record exists yet for this Windows.old purge."
-    },
-    {
-      "tweak_id": "cleanup.windows-update-cache",
-      "reason": "app-only-cleanup-command",
-      "provider_source": "app/Services/TweakProviders/MiscTweakProvider.cs",
-      "notes": "Live cleanup card shipped directly from the first-party cleanup provider; no research record exists yet for this Windows Update cache purge."
-    },
-    {
       "tweak_id": "misc.disable-edge-features",
       "reason": "app-only-app-telemetry-bundle",
       "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",

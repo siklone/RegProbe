@@ -1,19 +1,19 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-05T10:22:23.635300Z",
+  "generated_utc": "2026-05-05T10:50:23.530506Z",
   "summary": {
-    "total_records": 333,
+    "total_records": 343,
     "class_counts": {
       "A": 245,
       "B": 21,
       "C": 2,
-      "D": 10,
+      "D": 20,
       "E": 55
     },
     "action_state_counts": {
       "actionable": 241,
       "archived": 55,
-      "research-gated": 37
+      "research-gated": 47
     }
   },
   "classes": {
@@ -603,6 +603,92 @@
       }
     },
     {
+      "record_id": "cleanup.directx-shader-cache",
+      "tweak_id": "cleanup.directx-shader-cache",
+      "record_status": "review-required",
+      "evidence_class": "D",
+      "class_label": "Class D",
+      "class_title": "Key Known, Value Semantics Unknown",
+      "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+      "show_in_app": true,
+      "is_actionable": false,
+      "is_archived": false,
+      "action_state": "research-gated",
+      "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
+      "confidence": "medium",
+      "app_mapping_status": "unknown",
+      "restore_story_known": true,
+      "tested_build": "26100",
+      "anticheat_risk": {
+        "anticheat_risk": "unknown",
+        "anticheat_details": null,
+        "gaming_safe": null
+      },
+      "validated_semantics": {
+        "summary": "The cleanup documentation lists the DirectX and vendor shader-cache directories and describes the rebuild behavior after cleanup.",
+        "has_validation_proof": false,
+        "has_semantics_evidence": true,
+        "links": [
+          {
+            "title": "Repo cleanup catalog entry",
+            "url": "Docs/cleanup/cleanup.md",
+            "kind": "repo-doc",
+            "summary": "The cleanup documentation lists the DirectX and vendor shader-cache directories and describes the rebuild behavior after cleanup."
+          },
+          {
+            "title": "Repo tweak provenance for cleanup.directx-shader-cache",
+            "url": "Docs/tweaks/tweak-provenance.md",
+            "kind": "repo-doc",
+            "summary": "The tweak provenance table keeps the cleanup.directx-shader-cache card tied to the checked-in cleanup source set."
+          }
+        ]
+      },
+      "runtime_proof": {
+        "summary": "No runtime proof is attached yet. This record still needs VM validation.",
+        "needs_vm_validation": true,
+        "has_runtime_evidence": false,
+        "links": []
+      },
+      "upstream_lineage": {
+        "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+        "has_nohuto_lineage": true,
+        "source_repositories": [
+          "win-config"
+        ],
+        "links": [
+          {
+            "title": "win-config / cleanup/desc.md#directx-shader-cache",
+            "url": "https://github.com/nohuto/win-config/blob/main/cleanup/desc.md#directx-shader-cache",
+            "kind": "nohuto",
+            "summary": "Lists the DirectX, NVIDIA, and related shader cache directories cleared by this tweak."
+          }
+        ]
+      },
+      "tweak_origin": "research-derived",
+      "promotion_state": "blocked",
+      "promotion_blockers": [
+        "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
+        "This is a maintenance action with no rollback support.",
+        "validation-proof"
+      ],
+      "record_promotion_allowed": false,
+      "tweak_ingest_allowed": false,
+      "debug_override_allowed": true,
+      "score_breakdown": {
+        "static_evidence_strength": 3,
+        "runtime_evidence_strength": 1,
+        "rollback_clarity": 5,
+        "blast_radius": 5,
+        "tweak_suitability": 2,
+        "privilege_complexity": 2,
+        "build_specificity": 5,
+        "sibling_expansion_value": 2,
+        "bench_priority": 3,
+        "overall_score": 3.11,
+        "next_missing_layer": "validation-proof"
+      }
+    },
+    {
       "record_id": "cleanup.disable-reserved-storage",
       "tweak_id": "cleanup.disable-reserved-storage",
       "record_status": "validated",
@@ -695,6 +781,374 @@
         "bench_priority": 3,
         "overall_score": 3.89,
         "next_missing_layer": "none"
+      }
+    },
+    {
+      "record_id": "cleanup.eventlog-system",
+      "tweak_id": "cleanup.eventlog-system",
+      "record_status": "review-required",
+      "evidence_class": "D",
+      "class_label": "Class D",
+      "class_title": "Key Known, Value Semantics Unknown",
+      "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+      "show_in_app": true,
+      "is_actionable": false,
+      "is_archived": false,
+      "action_state": "research-gated",
+      "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
+      "confidence": "medium",
+      "app_mapping_status": "unknown",
+      "restore_story_known": true,
+      "tested_build": "26100",
+      "anticheat_risk": {
+        "anticheat_risk": "unknown",
+        "anticheat_details": null,
+        "gaming_safe": null
+      },
+      "validated_semantics": {
+        "summary": "The cleanup documentation describes the event-log clear flow and links the operator to wevtutil-based inspection and clearing.",
+        "has_validation_proof": false,
+        "has_semantics_evidence": true,
+        "links": [
+          {
+            "title": "Repo cleanup catalog entry",
+            "url": "Docs/cleanup/cleanup.md",
+            "kind": "repo-doc",
+            "summary": "The cleanup documentation describes the event-log clear flow and links the operator to wevtutil-based inspection and clearing."
+          },
+          {
+            "title": "Repo tweak provenance for cleanup.eventlog-system",
+            "url": "Docs/tweaks/tweak-provenance.md",
+            "kind": "repo-doc",
+            "summary": "The tweak provenance table keeps cleanup.eventlog-system tied to the checked-in cleanup source set."
+          }
+        ]
+      },
+      "runtime_proof": {
+        "summary": "No runtime proof is attached yet. This record still needs VM validation.",
+        "needs_vm_validation": true,
+        "has_runtime_evidence": false,
+        "links": []
+      },
+      "upstream_lineage": {
+        "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+        "has_nohuto_lineage": true,
+        "source_repositories": [
+          "win-config"
+        ],
+        "links": [
+          {
+            "title": "win-config / cleanup/desc.md",
+            "url": "https://github.com/nohuto/win-config/blob/main/cleanup/desc.md",
+            "kind": "nohuto",
+            "summary": "Category-level upstream win-config lineage fallback. Still needs a stronger tweak-specific match before it can speak for value semantics."
+          }
+        ]
+      },
+      "tweak_origin": "research-derived",
+      "promotion_state": "blocked",
+      "promotion_blockers": [
+        "Clearing the event log has no rollback path.",
+        "The card has not yet been promoted from the first-party system provider into the research-provider surface.",
+        "validation-proof"
+      ],
+      "record_promotion_allowed": false,
+      "tweak_ingest_allowed": false,
+      "debug_override_allowed": true,
+      "score_breakdown": {
+        "static_evidence_strength": 3,
+        "runtime_evidence_strength": 1,
+        "rollback_clarity": 5,
+        "blast_radius": 5,
+        "tweak_suitability": 2,
+        "privilege_complexity": 2,
+        "build_specificity": 5,
+        "sibling_expansion_value": 2,
+        "bench_priority": 3,
+        "overall_score": 3.11,
+        "next_missing_layer": "validation-proof"
+      }
+    },
+    {
+      "record_id": "cleanup.font-cache",
+      "tweak_id": "cleanup.font-cache",
+      "record_status": "review-required",
+      "evidence_class": "D",
+      "class_label": "Class D",
+      "class_title": "Key Known, Value Semantics Unknown",
+      "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+      "show_in_app": true,
+      "is_actionable": false,
+      "is_archived": false,
+      "action_state": "research-gated",
+      "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
+      "confidence": "medium",
+      "app_mapping_status": "unknown",
+      "restore_story_known": true,
+      "tested_build": "26100",
+      "anticheat_risk": {
+        "anticheat_risk": "unknown",
+        "anticheat_details": null,
+        "gaming_safe": null
+      },
+      "validated_semantics": {
+        "summary": "The cleanup documentation describes the Windows font-cache files and the troubleshooting context for clearing them.",
+        "has_validation_proof": false,
+        "has_semantics_evidence": true,
+        "links": [
+          {
+            "title": "Repo cleanup catalog entry",
+            "url": "Docs/cleanup/cleanup.md",
+            "kind": "repo-doc",
+            "summary": "The cleanup documentation describes the Windows font-cache files and the troubleshooting context for clearing them."
+          },
+          {
+            "title": "Repo tweak provenance for cleanup.font-cache",
+            "url": "Docs/tweaks/tweak-provenance.md",
+            "kind": "repo-doc",
+            "summary": "The tweak provenance table keeps cleanup.font-cache tied to the checked-in cleanup source set."
+          }
+        ]
+      },
+      "runtime_proof": {
+        "summary": "No runtime proof is attached yet. This record still needs VM validation.",
+        "needs_vm_validation": true,
+        "has_runtime_evidence": false,
+        "links": []
+      },
+      "upstream_lineage": {
+        "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+        "has_nohuto_lineage": true,
+        "source_repositories": [
+          "win-config"
+        ],
+        "links": [
+          {
+            "title": "win-config / cleanup/desc.md#font-cache",
+            "url": "https://github.com/nohuto/win-config/blob/main/cleanup/desc.md#font-cache",
+            "kind": "nohuto",
+            "summary": "Explains the font cache files and the FontCache service stop/start flow."
+          }
+        ]
+      },
+      "tweak_origin": "research-derived",
+      "promotion_state": "blocked",
+      "promotion_blockers": [
+        "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
+        "This is a maintenance action with no rollback support.",
+        "validation-proof"
+      ],
+      "record_promotion_allowed": false,
+      "tweak_ingest_allowed": false,
+      "debug_override_allowed": true,
+      "score_breakdown": {
+        "static_evidence_strength": 3,
+        "runtime_evidence_strength": 2,
+        "rollback_clarity": 5,
+        "blast_radius": 5,
+        "tweak_suitability": 2,
+        "privilege_complexity": 2,
+        "build_specificity": 5,
+        "sibling_expansion_value": 2,
+        "bench_priority": 3,
+        "overall_score": 3.22,
+        "next_missing_layer": "validation-proof"
+      }
+    },
+    {
+      "record_id": "cleanup.memory-dumps",
+      "tweak_id": "cleanup.memory-dumps",
+      "record_status": "review-required",
+      "evidence_class": "D",
+      "class_label": "Class D",
+      "class_title": "Key Known, Value Semantics Unknown",
+      "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+      "show_in_app": true,
+      "is_actionable": false,
+      "is_archived": false,
+      "action_state": "research-gated",
+      "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
+      "confidence": "medium",
+      "app_mapping_status": "unknown",
+      "restore_story_known": true,
+      "tested_build": "26100",
+      "anticheat_risk": {
+        "anticheat_risk": "unknown",
+        "anticheat_details": null,
+        "gaming_safe": null
+      },
+      "validated_semantics": {
+        "summary": "The cleanup documentation identifies memory-dump files as a cleanup surface and points at the Windows dump paths.",
+        "has_validation_proof": false,
+        "has_semantics_evidence": true,
+        "links": [
+          {
+            "title": "Repo cleanup catalog entry",
+            "url": "Docs/cleanup/cleanup.md",
+            "kind": "repo-doc",
+            "summary": "The cleanup documentation identifies memory-dump files as a cleanup surface and points at the Windows dump paths."
+          },
+          {
+            "title": "Repo tweak provenance for cleanup.memory-dumps",
+            "url": "Docs/tweaks/tweak-provenance.md",
+            "kind": "repo-doc",
+            "summary": "The tweak provenance table keeps cleanup.memory-dumps tied to the checked-in cleanup source set."
+          }
+        ]
+      },
+      "runtime_proof": {
+        "summary": "No runtime proof is attached yet. This record still needs VM validation.",
+        "needs_vm_validation": true,
+        "has_runtime_evidence": false,
+        "links": []
+      },
+      "upstream_lineage": {
+        "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+        "has_nohuto_lineage": true,
+        "source_repositories": [
+          "win-config"
+        ],
+        "links": [
+          {
+            "title": "win-config / cleanup/desc.md",
+            "url": "https://github.com/nohuto/win-config/blob/main/cleanup/desc.md",
+            "kind": "nohuto",
+            "summary": "Matched 6 audit token(s) in win-config."
+          },
+          {
+            "title": "win-config / privacy/desc.md",
+            "url": "https://github.com/nohuto/win-config/blob/main/privacy/desc.md",
+            "kind": "nohuto",
+            "summary": "Matched 5 audit token(s) in win-config."
+          },
+          {
+            "title": "win-config / security/desc.md",
+            "url": "https://github.com/nohuto/win-config/blob/main/security/desc.md",
+            "kind": "nohuto",
+            "summary": "Matched 5 audit token(s) in win-config."
+          }
+        ]
+      },
+      "tweak_origin": "research-derived",
+      "promotion_state": "blocked",
+      "promotion_blockers": [
+        "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
+        "This is a maintenance action with no rollback support.",
+        "validation-proof"
+      ],
+      "record_promotion_allowed": false,
+      "tweak_ingest_allowed": false,
+      "debug_override_allowed": true,
+      "score_breakdown": {
+        "static_evidence_strength": 3,
+        "runtime_evidence_strength": 1,
+        "rollback_clarity": 5,
+        "blast_radius": 5,
+        "tweak_suitability": 2,
+        "privilege_complexity": 2,
+        "build_specificity": 5,
+        "sibling_expansion_value": 2,
+        "bench_priority": 3,
+        "overall_score": 3.11,
+        "next_missing_layer": "validation-proof"
+      }
+    },
+    {
+      "record_id": "cleanup.prefetch-files",
+      "tweak_id": "cleanup.prefetch-files",
+      "record_status": "review-required",
+      "evidence_class": "D",
+      "class_label": "Class D",
+      "class_title": "Key Known, Value Semantics Unknown",
+      "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+      "show_in_app": true,
+      "is_actionable": false,
+      "is_archived": false,
+      "action_state": "research-gated",
+      "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
+      "confidence": "medium",
+      "app_mapping_status": "unknown",
+      "restore_story_known": true,
+      "tested_build": "26100",
+      "anticheat_risk": {
+        "anticheat_risk": "unknown",
+        "anticheat_details": null,
+        "gaming_safe": null
+      },
+      "validated_semantics": {
+        "summary": "The cleanup documentation identifies %WINDIR%\\Prefetch as the current Prefetch cleanup surface.",
+        "has_validation_proof": false,
+        "has_semantics_evidence": true,
+        "links": [
+          {
+            "title": "Repo cleanup catalog entry",
+            "url": "Docs/cleanup/cleanup.md",
+            "kind": "repo-doc",
+            "summary": "The cleanup documentation identifies %WINDIR%\\Prefetch as the current Prefetch cleanup surface."
+          },
+          {
+            "title": "Repo tweak provenance for cleanup.prefetch-files",
+            "url": "Docs/tweaks/tweak-provenance.md",
+            "kind": "repo-doc",
+            "summary": "The tweak provenance table keeps cleanup.prefetch-files tied to the checked-in cleanup source set."
+          }
+        ]
+      },
+      "runtime_proof": {
+        "summary": "No runtime proof is attached yet. This record still needs VM validation.",
+        "needs_vm_validation": true,
+        "has_runtime_evidence": false,
+        "links": []
+      },
+      "upstream_lineage": {
+        "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+        "has_nohuto_lineage": true,
+        "source_repositories": [
+          "win-config"
+        ],
+        "links": [
+          {
+            "title": "win-config / cleanup/desc.md",
+            "url": "https://github.com/nohuto/win-config/blob/main/cleanup/desc.md",
+            "kind": "nohuto",
+            "summary": "Matched 7 audit token(s) in win-config."
+          },
+          {
+            "title": "win-config / system/desc.md",
+            "url": "https://github.com/nohuto/win-config/blob/main/system/desc.md",
+            "kind": "nohuto",
+            "summary": "Matched 6 audit token(s) in win-config."
+          },
+          {
+            "title": "win-config / network/desc.md",
+            "url": "https://github.com/nohuto/win-config/blob/main/network/desc.md",
+            "kind": "nohuto",
+            "summary": "Matched 5 audit token(s) in win-config."
+          }
+        ]
+      },
+      "tweak_origin": "research-derived",
+      "promotion_state": "blocked",
+      "promotion_blockers": [
+        "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
+        "This is a maintenance action with no rollback support.",
+        "validation-proof"
+      ],
+      "record_promotion_allowed": false,
+      "tweak_ingest_allowed": false,
+      "debug_override_allowed": true,
+      "score_breakdown": {
+        "static_evidence_strength": 3,
+        "runtime_evidence_strength": 1,
+        "rollback_clarity": 5,
+        "blast_radius": 5,
+        "tweak_suitability": 2,
+        "privilege_complexity": 2,
+        "build_specificity": 5,
+        "sibling_expansion_value": 2,
+        "bench_priority": 3,
+        "overall_score": 3.11,
+        "next_missing_layer": "validation-proof"
       }
     },
     {
@@ -948,6 +1402,436 @@
       "promotion_blockers": [
         "The card has not yet been promoted into the research-provider surface.",
         "This is a destructive cleanup action without rollback.",
+        "validation-proof"
+      ],
+      "record_promotion_allowed": false,
+      "tweak_ingest_allowed": false,
+      "debug_override_allowed": true,
+      "score_breakdown": {
+        "static_evidence_strength": 3,
+        "runtime_evidence_strength": 1,
+        "rollback_clarity": 5,
+        "blast_radius": 5,
+        "tweak_suitability": 2,
+        "privilege_complexity": 2,
+        "build_specificity": 5,
+        "sibling_expansion_value": 2,
+        "bench_priority": 3,
+        "overall_score": 3.11,
+        "next_missing_layer": "validation-proof"
+      }
+    },
+    {
+      "record_id": "cleanup.temp-files",
+      "tweak_id": "cleanup.temp-files",
+      "record_status": "review-required",
+      "evidence_class": "D",
+      "class_label": "Class D",
+      "class_title": "Key Known, Value Semantics Unknown",
+      "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+      "show_in_app": true,
+      "is_actionable": false,
+      "is_archived": false,
+      "action_state": "research-gated",
+      "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
+      "confidence": "medium",
+      "app_mapping_status": "unknown",
+      "restore_story_known": true,
+      "tested_build": "26100",
+      "anticheat_risk": {
+        "anticheat_risk": "unknown",
+        "anticheat_details": null,
+        "gaming_safe": null
+      },
+      "validated_semantics": {
+        "summary": "The cleanup documentation identifies %TEMP% and %WINDIR%\\Temp as the current temporary-file cleanup surface.",
+        "has_validation_proof": false,
+        "has_semantics_evidence": true,
+        "links": [
+          {
+            "title": "Repo cleanup catalog entry",
+            "url": "Docs/cleanup/cleanup.md",
+            "kind": "repo-doc",
+            "summary": "The cleanup documentation identifies %TEMP% and %WINDIR%\\Temp as the current temporary-file cleanup surface."
+          },
+          {
+            "title": "Repo tweak provenance for cleanup.temp-files",
+            "url": "Docs/tweaks/tweak-provenance.md",
+            "kind": "repo-doc",
+            "summary": "The tweak provenance table keeps cleanup.temp-files tied to the checked-in cleanup source set."
+          }
+        ]
+      },
+      "runtime_proof": {
+        "summary": "No runtime proof is attached yet. This record still needs VM validation.",
+        "needs_vm_validation": true,
+        "has_runtime_evidence": false,
+        "links": []
+      },
+      "upstream_lineage": {
+        "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+        "has_nohuto_lineage": true,
+        "source_repositories": [
+          "win-config"
+        ],
+        "links": [
+          {
+            "title": "win-config / cleanup/desc.md#temporary-files",
+            "url": "https://github.com/nohuto/win-config/blob/main/cleanup/desc.md#temporary-files",
+            "kind": "nohuto",
+            "summary": "Documents the user and Windows temp directories cleared by this tweak."
+          }
+        ]
+      },
+      "tweak_origin": "research-derived",
+      "promotion_state": "blocked",
+      "promotion_blockers": [
+        "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
+        "This is a maintenance action with no rollback support.",
+        "validation-proof"
+      ],
+      "record_promotion_allowed": false,
+      "tweak_ingest_allowed": false,
+      "debug_override_allowed": true,
+      "score_breakdown": {
+        "static_evidence_strength": 3,
+        "runtime_evidence_strength": 1,
+        "rollback_clarity": 5,
+        "blast_radius": 5,
+        "tweak_suitability": 2,
+        "privilege_complexity": 2,
+        "build_specificity": 5,
+        "sibling_expansion_value": 2,
+        "bench_priority": 3,
+        "overall_score": 3.11,
+        "next_missing_layer": "validation-proof"
+      }
+    },
+    {
+      "record_id": "cleanup.thumbnail-cache",
+      "tweak_id": "cleanup.thumbnail-cache",
+      "record_status": "review-required",
+      "evidence_class": "D",
+      "class_label": "Class D",
+      "class_title": "Key Known, Value Semantics Unknown",
+      "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+      "show_in_app": true,
+      "is_actionable": false,
+      "is_archived": false,
+      "action_state": "research-gated",
+      "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
+      "confidence": "medium",
+      "app_mapping_status": "unknown",
+      "restore_story_known": true,
+      "tested_build": "26100",
+      "anticheat_risk": {
+        "anticheat_risk": "unknown",
+        "anticheat_details": null,
+        "gaming_safe": null
+      },
+      "validated_semantics": {
+        "summary": "The cleanup documentation identifies the Explorer thumbnail-cache files as a cleanup surface that is rebuilt later.",
+        "has_validation_proof": false,
+        "has_semantics_evidence": true,
+        "links": [
+          {
+            "title": "Repo cleanup catalog entry",
+            "url": "Docs/cleanup/cleanup.md",
+            "kind": "repo-doc",
+            "summary": "The cleanup documentation identifies the Explorer thumbnail-cache files as a cleanup surface that is rebuilt later."
+          },
+          {
+            "title": "Repo tweak provenance for cleanup.thumbnail-cache",
+            "url": "Docs/tweaks/tweak-provenance.md",
+            "kind": "repo-doc",
+            "summary": "The tweak provenance table keeps cleanup.thumbnail-cache tied to the checked-in cleanup source set."
+          }
+        ]
+      },
+      "runtime_proof": {
+        "summary": "No runtime proof is attached yet. This record still needs VM validation.",
+        "needs_vm_validation": true,
+        "has_runtime_evidence": false,
+        "links": []
+      },
+      "upstream_lineage": {
+        "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+        "has_nohuto_lineage": true,
+        "source_repositories": [
+          "win-config"
+        ],
+        "links": [
+          {
+            "title": "win-config / cleanup/desc.md#thumbnail-cache",
+            "url": "https://github.com/nohuto/win-config/blob/main/cleanup/desc.md#thumbnail-cache",
+            "kind": "nohuto",
+            "summary": "Documents the Explorer thumbnail cache files that are rebuilt automatically."
+          }
+        ]
+      },
+      "tweak_origin": "research-derived",
+      "promotion_state": "blocked",
+      "promotion_blockers": [
+        "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
+        "This is a maintenance action with no rollback support.",
+        "validation-proof"
+      ],
+      "record_promotion_allowed": false,
+      "tweak_ingest_allowed": false,
+      "debug_override_allowed": true,
+      "score_breakdown": {
+        "static_evidence_strength": 3,
+        "runtime_evidence_strength": 1,
+        "rollback_clarity": 5,
+        "blast_radius": 5,
+        "tweak_suitability": 2,
+        "privilege_complexity": 2,
+        "build_specificity": 5,
+        "sibling_expansion_value": 2,
+        "bench_priority": 3,
+        "overall_score": 3.11,
+        "next_missing_layer": "validation-proof"
+      }
+    },
+    {
+      "record_id": "cleanup.wer-files",
+      "tweak_id": "cleanup.wer-files",
+      "record_status": "review-required",
+      "evidence_class": "D",
+      "class_label": "Class D",
+      "class_title": "Key Known, Value Semantics Unknown",
+      "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+      "show_in_app": true,
+      "is_actionable": false,
+      "is_archived": false,
+      "action_state": "research-gated",
+      "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
+      "confidence": "medium",
+      "app_mapping_status": "unknown",
+      "restore_story_known": true,
+      "tested_build": "26100",
+      "anticheat_risk": {
+        "anticheat_risk": "unknown",
+        "anticheat_details": null,
+        "gaming_safe": null
+      },
+      "validated_semantics": {
+        "summary": "The cleanup documentation identifies the system and user WER directories as the current Windows Error Reporting cleanup surface.",
+        "has_validation_proof": false,
+        "has_semantics_evidence": true,
+        "links": [
+          {
+            "title": "Repo cleanup catalog entry",
+            "url": "Docs/cleanup/cleanup.md",
+            "kind": "repo-doc",
+            "summary": "The cleanup documentation identifies the system and user WER directories as the current Windows Error Reporting cleanup surface."
+          },
+          {
+            "title": "Repo tweak provenance for cleanup.wer-files",
+            "url": "Docs/tweaks/tweak-provenance.md",
+            "kind": "repo-doc",
+            "summary": "The tweak provenance table keeps cleanup.wer-files tied to the checked-in cleanup source set."
+          }
+        ]
+      },
+      "runtime_proof": {
+        "summary": "No runtime proof is attached yet. This record still needs VM validation.",
+        "needs_vm_validation": true,
+        "has_runtime_evidence": false,
+        "links": []
+      },
+      "upstream_lineage": {
+        "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+        "has_nohuto_lineage": true,
+        "source_repositories": [
+          "win-config"
+        ],
+        "links": [
+          {
+            "title": "win-config / cleanup/desc.md#wer-files",
+            "url": "https://github.com/nohuto/win-config/blob/main/cleanup/desc.md#wer-files",
+            "kind": "nohuto",
+            "summary": "Documents the WER system and per-user report queues cleared by this tweak."
+          }
+        ]
+      },
+      "tweak_origin": "research-derived",
+      "promotion_state": "blocked",
+      "promotion_blockers": [
+        "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
+        "This is a maintenance action with no rollback support.",
+        "validation-proof"
+      ],
+      "record_promotion_allowed": false,
+      "tweak_ingest_allowed": false,
+      "debug_override_allowed": true,
+      "score_breakdown": {
+        "static_evidence_strength": 3,
+        "runtime_evidence_strength": 1,
+        "rollback_clarity": 5,
+        "blast_radius": 5,
+        "tweak_suitability": 2,
+        "privilege_complexity": 2,
+        "build_specificity": 5,
+        "sibling_expansion_value": 2,
+        "bench_priority": 3,
+        "overall_score": 3.11,
+        "next_missing_layer": "validation-proof"
+      }
+    },
+    {
+      "record_id": "cleanup.windows-old",
+      "tweak_id": "cleanup.windows-old",
+      "record_status": "review-required",
+      "evidence_class": "D",
+      "class_label": "Class D",
+      "class_title": "Key Known, Value Semantics Unknown",
+      "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+      "show_in_app": true,
+      "is_actionable": false,
+      "is_archived": false,
+      "action_state": "research-gated",
+      "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
+      "confidence": "medium",
+      "app_mapping_status": "unknown",
+      "restore_story_known": true,
+      "tested_build": "26100",
+      "anticheat_risk": {
+        "anticheat_risk": "unknown",
+        "anticheat_details": null,
+        "gaming_safe": null
+      },
+      "validated_semantics": {
+        "summary": "The cleanup documentation identifies Windows.old as a rollback-sensitive folder that can be deleted to reclaim space.",
+        "has_validation_proof": false,
+        "has_semantics_evidence": true,
+        "links": [
+          {
+            "title": "Repo cleanup catalog entry",
+            "url": "Docs/cleanup/cleanup.md",
+            "kind": "repo-doc",
+            "summary": "The cleanup documentation identifies Windows.old as a rollback-sensitive folder that can be deleted to reclaim space."
+          },
+          {
+            "title": "Repo tweak provenance for cleanup.windows-old",
+            "url": "Docs/tweaks/tweak-provenance.md",
+            "kind": "repo-doc",
+            "summary": "The tweak provenance table keeps cleanup.windows-old tied to the checked-in cleanup source set."
+          }
+        ]
+      },
+      "runtime_proof": {
+        "summary": "No runtime proof is attached yet. This record still needs VM validation.",
+        "needs_vm_validation": true,
+        "has_runtime_evidence": false,
+        "links": []
+      },
+      "upstream_lineage": {
+        "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+        "has_nohuto_lineage": true,
+        "source_repositories": [
+          "win-config"
+        ],
+        "links": [
+          {
+            "title": "win-config / cleanup/desc.md#windowsold",
+            "url": "https://github.com/nohuto/win-config/blob/main/cleanup/desc.md#windowsold",
+            "kind": "nohuto",
+            "summary": "Documents removing the previous Windows installation under Windows.old."
+          }
+        ]
+      },
+      "tweak_origin": "research-derived",
+      "promotion_state": "blocked",
+      "promotion_blockers": [
+        "Deleting Windows.old has no rollback path through the app.",
+        "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
+        "validation-proof"
+      ],
+      "record_promotion_allowed": false,
+      "tweak_ingest_allowed": false,
+      "debug_override_allowed": true,
+      "score_breakdown": {
+        "static_evidence_strength": 3,
+        "runtime_evidence_strength": 1,
+        "rollback_clarity": 5,
+        "blast_radius": 5,
+        "tweak_suitability": 2,
+        "privilege_complexity": 2,
+        "build_specificity": 5,
+        "sibling_expansion_value": 2,
+        "bench_priority": 3,
+        "overall_score": 3.11,
+        "next_missing_layer": "validation-proof"
+      }
+    },
+    {
+      "record_id": "cleanup.windows-update-cache",
+      "tweak_id": "cleanup.windows-update-cache",
+      "record_status": "review-required",
+      "evidence_class": "D",
+      "class_label": "Class D",
+      "class_title": "Key Known, Value Semantics Unknown",
+      "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+      "show_in_app": true,
+      "is_actionable": false,
+      "is_archived": false,
+      "action_state": "research-gated",
+      "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
+      "confidence": "medium",
+      "app_mapping_status": "unknown",
+      "restore_story_known": true,
+      "tested_build": "26100",
+      "anticheat_risk": {
+        "anticheat_risk": "unknown",
+        "anticheat_details": null,
+        "gaming_safe": null
+      },
+      "validated_semantics": {
+        "summary": "The cleanup documentation identifies SoftwareDistribution and catroot2 as the current Windows Update cache-reset surface.",
+        "has_validation_proof": false,
+        "has_semantics_evidence": true,
+        "links": [
+          {
+            "title": "Repo cleanup catalog entry",
+            "url": "Docs/cleanup/cleanup.md",
+            "kind": "repo-doc",
+            "summary": "The cleanup documentation identifies SoftwareDistribution and catroot2 as the current Windows Update cache-reset surface."
+          },
+          {
+            "title": "Repo tweak provenance for cleanup.windows-update-cache",
+            "url": "Docs/tweaks/tweak-provenance.md",
+            "kind": "repo-doc",
+            "summary": "The tweak provenance table keeps cleanup.windows-update-cache tied to the checked-in cleanup source set."
+          }
+        ]
+      },
+      "runtime_proof": {
+        "summary": "No runtime proof is attached yet. This record still needs VM validation.",
+        "needs_vm_validation": true,
+        "has_runtime_evidence": false,
+        "links": []
+      },
+      "upstream_lineage": {
+        "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+        "has_nohuto_lineage": true,
+        "source_repositories": [
+          "win-config"
+        ],
+        "links": [
+          {
+            "title": "win-config / cleanup/desc.md#windows-update-cache",
+            "url": "https://github.com/nohuto/win-config/blob/main/cleanup/desc.md#windows-update-cache",
+            "kind": "nohuto",
+            "summary": "Documents the Windows Update cache paths and service stop sequence used for reset."
+          }
+        ]
+      },
+      "tweak_origin": "research-derived",
+      "promotion_state": "blocked",
+      "promotion_blockers": [
+        "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
+        "This is a maintenance action with no rollback support.",
         "validation-proof"
       ],
       "record_promotion_allowed": false,
