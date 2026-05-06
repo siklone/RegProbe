@@ -355,6 +355,9 @@ def render_markdown(report: dict[str, Any]) -> str:
         tweak_label = f"`{item.get('tweak_id')}`"
         if qa_tweak_id and qa_tweak_id != item.get("tweak_id"):
             tweak_label = f"`{item.get('tweak_id')}` -> `{qa_tweak_id}`"
+        card_snapshot = (item.get("expected_report") or {}).get("required_card_snapshot") or {}
+        required_card_fields = card_snapshot.get("required_fields") or []
+        required_proof_lanes = card_snapshot.get("required_proof_lanes") or []
         lines.extend(
             [
                 f"- {tweak_label} | {item.get('name')} | {item.get('category')}",
@@ -362,6 +365,10 @@ def render_markdown(report: dict[str, Any]) -> str:
                 "  rollback: "
                 + f"default={str(bool(item.get('restore_default_supported'))).lower()} | "
                 + f"previous={str(bool(item.get('restore_previous_supported'))).lower()}",
+                "  card snapshot: "
+                + f"claim_boundary={str(bool(card_snapshot.get('claim_boundary_required'))).lower()} | "
+                + f"fields={', '.join(required_card_fields) if required_card_fields else 'n/a'} | "
+                + f"lanes={', '.join(required_proof_lanes) if required_proof_lanes else 'n/a'}",
             ]
         )
 

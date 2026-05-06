@@ -58,6 +58,7 @@ internal static class StartupQaRunner
         DateTimeOffset startedAt)
     {
         var stages = new List<QaRunStageReport>();
+        var card = QaRunCardSnapshot.Create(tweak);
 
         await tweak.RunDetectAsync(CancellationToken.None);
         stages.Add(QaRunStageReport.Create("detect-before", tweak));
@@ -71,6 +72,7 @@ internal static class StartupQaRunner
                 "mutation-blocked",
                 "The app loaded the tweak, but the current evidence/promotion gate still blocks mutation.",
                 request.RollbackAfterApply,
+                card,
                 stages,
                 startedAt,
                 DateTimeOffset.UtcNow);
@@ -99,6 +101,7 @@ internal static class StartupQaRunner
                 "not-applicable",
                 notApplicableSummary,
                 request.RollbackAfterApply,
+                card,
                 stages,
                 startedAt,
                 DateTimeOffset.UtcNow);
@@ -118,6 +121,7 @@ internal static class StartupQaRunner
             success ? "ok" : "check-failed",
             summary,
             request.RollbackAfterApply,
+            card,
             stages,
             startedAt,
             DateTimeOffset.UtcNow);
@@ -187,6 +191,7 @@ internal static class StartupQaRunner
         string Status,
         string Summary,
         bool RollbackRequested,
+        QaRunCardSnapshot Card,
         IReadOnlyList<QaRunStageReport> Stages,
         DateTimeOffset StartedAtUtc,
         DateTimeOffset CompletedAtUtc)
@@ -199,10 +204,96 @@ internal static class StartupQaRunner
                 "error",
                 message,
                 RollbackRequested: false,
+                Card: QaRunCardSnapshot.CreateMissing(tweakId),
                 Stages: Array.Empty<QaRunStageReport>(),
                 startedAt,
                 DateTimeOffset.UtcNow);
     }
+
+    internal sealed record QaRunCardSnapshot(
+        string TweakId,
+        string Name,
+        string Category,
+        string Description,
+        string FriendlyDescription,
+        string RegistryPath,
+        string EvidenceClass,
+        string EvidenceClassTitle,
+        string ResearchStatus,
+        bool IsMutationAllowed,
+        string RollbackSnapshotState,
+        string RollbackStoryText,
+        bool HasClaimBoundary,
+        string WhatWeKnowSummary,
+        string WhatWeDoNotClaimSummary,
+        IReadOnlyList<QaRunProofLaneReport> ProofLanes,
+        IReadOnlyList<QaRunReferenceLinkReport> ReferenceLinks)
+    {
+        public static QaRunCardSnapshot Create(TweakItemViewModel tweak)
+            => new(
+                tweak.Id,
+                tweak.Name,
+                tweak.Category,
+                tweak.Description,
+                tweak.FriendlyDescription,
+                tweak.RegistryPath,
+                tweak.EvidenceClassBadgeText,
+                tweak.EvidenceClassTitle,
+                tweak.ResearchStatusBadgeText,
+                tweak.IsMutationAllowed,
+                tweak.RollbackSnapshotState,
+                tweak.RollbackStoryText,
+                tweak.HasClaimBoundary,
+                tweak.WhatWeKnowSummary,
+                tweak.WhatWeDoNotClaimSummary,
+                tweak.ProofLanes
+                    .Select(lane => new QaRunProofLaneReport(
+                        lane.Key,
+                        lane.Label,
+                        lane.State,
+                        lane.Summary,
+                        lane.PrimarySourceText))
+                    .ToArray(),
+                tweak.UserReferenceLinks
+                    .Take(10)
+                    .Select(link => new QaRunReferenceLinkReport(
+                        link.Title,
+                        link.Url,
+                        link.Kind.ToString()))
+                    .ToArray());
+
+        public static QaRunCardSnapshot CreateMissing(string tweakId)
+            => new(
+                tweakId,
+                tweakId,
+                string.Empty,
+                string.Empty,
+                string.Empty,
+                string.Empty,
+                string.Empty,
+                string.Empty,
+                "missing",
+                false,
+                string.Empty,
+                string.Empty,
+                false,
+                string.Empty,
+                string.Empty,
+                Array.Empty<QaRunProofLaneReport>(),
+                Array.Empty<QaRunReferenceLinkReport>());
+    }
+
+    internal sealed record QaRunProofLaneReport(
+        string Key,
+        string Label,
+        string State,
+        string Summary,
+        string Source);
+
+    internal sealed record QaRunReferenceLinkReport(
+        string Title,
+        string Url,
+        string Kind);
 
     internal sealed record QaRunStageReport(
         string Stage,

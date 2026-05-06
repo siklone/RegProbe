@@ -44,7 +44,11 @@ class SingleTweakAppQaTests(unittest.TestCase):
         self.assertIn("--qa-skip-rollback", candidate["commands"]["direct_app_skip_rollback"])
         self.assertIn("research readiness", candidate["commands"]["readiness"])
         self.assertTrue(candidate["card_expectations"]["documentation"].endswith(".json"))
-        self.assertIn("Success=", single_tweak_app_qa.render_single_tweak_app_qa_report(report))
+        self.assertIn("HasClaimBoundary", candidate["expected_report"]["required_card_snapshot"]["required_fields"])
+        self.assertIn("ProofLanes", candidate["expected_report"]["required_card_snapshot"]["required_fields"])
+        rendered = single_tweak_app_qa.render_single_tweak_app_qa_report(report)
+        self.assertIn("Success=", rendered)
+        self.assertIn("card_snapshot:", rendered)
 
     def test_real_repo_uses_runnable_app_card_id_for_legacy_sync_plan(self) -> None:
         report = single_tweak_app_qa.build_single_tweak_app_qa_report(
@@ -201,6 +205,7 @@ class SingleTweakAppQaTests(unittest.TestCase):
             self.assertEqual(candidate["expected_report"]["status"], "mutation-blocked")
             self.assertFalse(candidate["expected_report"]["success"])
             self.assertEqual(candidate["expected_report"]["required_stages"], ["detect-before"])
+            self.assertTrue(candidate["expected_report"]["required_card_snapshot"]["claim_boundary_required"])
 
 
 if __name__ == "__main__":

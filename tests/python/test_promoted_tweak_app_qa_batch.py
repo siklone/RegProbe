@@ -216,6 +216,9 @@ class PromotedTweakAppQaBatchTests(unittest.TestCase):
             self.assertEqual(report["status"], "PASS")
             self.assertEqual(report["selected_candidate_count"], 1)
             self.assertEqual(report["candidates"][0]["tweak_id"], "privacy.beta")
+            rendered = promoted_app_qa_batch.render_markdown(report)
+            self.assertIn("card snapshot:", rendered)
+            self.assertIn("claim_boundary=true", rendered)
 
     def test_write_artifacts_creates_history_and_coverage(self) -> None:
         with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:

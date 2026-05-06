@@ -113,12 +113,30 @@ def allows_truthful_not_applicable(match: dict[str, Any]) -> bool:
 
 
 def build_expected_report_contract(match: dict[str, Any], *, skip_rollback: bool) -> dict[str, Any]:
+    card_snapshot = {
+        "required_fields": [
+            "TweakId",
+            "Name",
+            "Category",
+            "EvidenceClass",
+            "ResearchStatus",
+            "RollbackSnapshotState",
+            "HasClaimBoundary",
+            "WhatWeKnowSummary",
+            "WhatWeDoNotClaimSummary",
+            "ProofLanes",
+        ],
+        "required_proof_lanes": ["docs", "runtime", "source", "rollback"],
+        "claim_boundary_required": True,
+    }
+
     if not bool(match.get("apply_allowed")):
         return {
             "success": False,
             "status": "mutation-blocked",
             "rollback_requested": False,
             "required_stages": ["detect-before"],
+            "required_card_snapshot": card_snapshot,
             "required_stage_assertions": [
                 "detect-before is present",
                 "apply is not expected while mutation stays blocked",
@@ -143,6 +161,7 @@ def build_expected_report_contract(match: dict[str, Any], *, skip_rollback: bool
             "allowed_statuses": ["ok", "not-applicable"],
             "rollback_requested": not skip_rollback,
             "required_stages": stages,
+            "required_card_snapshot": card_snapshot,
             "required_stage_assertions": required_assertions,
         }
 
@@ -160,6 +179,7 @@ def build_expected_report_contract(match: dict[str, Any], *, skip_rollback: bool
         "status": "ok",
         "rollback_requested": not skip_rollback,
         "required_stages": stages,
+        "required_card_snapshot": card_snapshot,
         "required_stage_assertions": required_assertions,
     }
 
@@ -268,6 +288,7 @@ def build_candidate_plan(
             f"Open the app card '{card_name}' and verify the title, category, and linked research record ({documentation}) match this plan.",
             "Run the direct app or guest VM QA command and keep the JSON report it writes.",
             "Check the report fields Success, Status, RollbackRequested, and the stage list before trusting the result.",
+            "Check the report Card snapshot: title/category, evidence tier, proof lanes, rollback state, and claim-boundary text should match the visible card.",
             "If the normal run fails only because you need to observe the post-apply state manually, rerun the skip-rollback variant and record that fact in your notes.",
         ],
     }
@@ -456,6 +477,8 @@ def render_single_tweak_app_qa_report(report: dict[str, Any]) -> str:
                 + f"Status={expected_report.get('status')} | "
                 + f"RollbackRequested={str(bool(expected_report.get('rollback_requested'))).lower()}",
                 "    - required_stages: " + ", ".join(expected_report.get("required_stages") or []),
+                "    - card_snapshot: "
+                + ", ".join(((expected_report.get("required_card_snapshot") or {}).get("required_fields") or [])),
                 "  expected_report_skip_rollback:",
                 "    - "
                 + f"Success={str(bool(expected_report_skip.get('success'))).lower()} | "

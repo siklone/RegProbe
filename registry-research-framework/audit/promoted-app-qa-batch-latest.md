@@ -13,18 +13,23 @@
 - `privacy.disable-app-launch-tracking` | App Launch Tracking | Privacy
   docs: `research/records/privacy.disable-app-launch-tracking.review.json`
   rollback: default=true | previous=true
+  card snapshot: claim_boundary=true | fields=TweakId, Name, Category, EvidenceClass, ResearchStatus, RollbackSnapshotState, HasClaimBoundary, WhatWeKnowSummary, WhatWeDoNotClaimSummary, ProofLanes | lanes=docs, runtime, source, rollback
 - `privacy.disable-search-history` | Search History Storage and Display | Privacy
   docs: `research/records/privacy.disable-search-history.json`
   rollback: default=true | previous=true
+  card snapshot: claim_boundary=true | fields=TweakId, Name, Category, EvidenceClass, ResearchStatus, RollbackSnapshotState, HasClaimBoundary, WhatWeKnowSummary, WhatWeDoNotClaimSummary, ProofLanes | lanes=docs, runtime, source, rollback
 - `visibility.force-classic-control-panel` | Control Panel Default View | Visibility
   docs: `research/records/visibility.force-classic-control-panel.json`
   rollback: default=true | previous=true
+  card snapshot: claim_boundary=true | fields=TweakId, Name, Category, EvidenceClass, ResearchStatus, RollbackSnapshotState, HasClaimBoundary, WhatWeKnowSummary, WhatWeDoNotClaimSummary, ProofLanes | lanes=docs, runtime, source, rollback
 - `visibility.restore-classic-context-menu` | Classic Context Menu on Windows 11 | Visibility
   docs: `research/records/visibility.restore-classic-context-menu.review.json`
   rollback: default=true | previous=true
+  card snapshot: claim_boundary=true | fields=TweakId, Name, Category, EvidenceClass, ResearchStatus, RollbackSnapshotState, HasClaimBoundary, WhatWeKnowSummary, WhatWeDoNotClaimSummary, ProofLanes | lanes=docs, runtime, source, rollback
 - `system.disable-app-archiving` | Automatic App Archiving | System
   docs: `research/records/system.disable-app-archiving.json`
   rollback: default=true | previous=true
+  card snapshot: claim_boundary=true | fields=TweakId, Name, Category, EvidenceClass, ResearchStatus, RollbackSnapshotState, HasClaimBoundary, WhatWeKnowSummary, WhatWeDoNotClaimSummary, ProofLanes | lanes=docs, runtime, source, rollback
 
 ## Live Results
 

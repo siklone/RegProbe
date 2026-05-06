@@ -56,6 +56,27 @@
           "rollback",
           "detect-after"
         ],
+        "required_card_snapshot": {
+          "required_fields": [
+            "TweakId",
+            "Name",
+            "Category",
+            "EvidenceClass",
+            "ResearchStatus",
+            "RollbackSnapshotState",
+            "HasClaimBoundary",
+            "WhatWeKnowSummary",
+            "WhatWeDoNotClaimSummary",
+            "ProofLanes"
+          ],
+          "required_proof_lanes": [
+            "docs",
+            "runtime",
+            "source",
+            "rollback"
+          ],
+          "claim_boundary_required": true
+        },
         "required_stage_assertions": [
           "apply stage reports a successful apply story",
           "rollback stage reports a successful rollback story",
@@ -94,6 +115,27 @@
           "rollback",
           "detect-after"
         ],
+        "required_card_snapshot": {
+          "required_fields": [
+            "TweakId",
+            "Name",
+            "Category",
+            "EvidenceClass",
+            "ResearchStatus",
+            "RollbackSnapshotState",
+            "HasClaimBoundary",
+            "WhatWeKnowSummary",
+            "WhatWeDoNotClaimSummary",
+            "ProofLanes"
+          ],
+          "required_proof_lanes": [
+            "docs",
+            "runtime",
+            "source",
+            "rollback"
+          ],
+          "claim_boundary_required": true
+        },
         "required_stage_assertions": [
           "apply stage reports a successful apply story",
           "rollback stage reports a successful rollback story",
@@ -132,6 +174,27 @@
           "rollback",
           "detect-after"
         ],
+        "required_card_snapshot": {
+          "required_fields": [
+            "TweakId",
+            "Name",
+            "Category",
+            "EvidenceClass",
+            "ResearchStatus",
+            "RollbackSnapshotState",
+            "HasClaimBoundary",
+            "WhatWeKnowSummary",
+            "WhatWeDoNotClaimSummary",
+            "ProofLanes"
+          ],
+          "required_proof_lanes": [
+            "docs",
+            "runtime",
+            "source",
+            "rollback"
+          ],
+          "claim_boundary_required": true
+        },
         "required_stage_assertions": [
           "apply stage reports a successful apply story",
           "rollback stage reports a successful rollback story",
@@ -170,6 +233,27 @@
           "rollback",
           "detect-after"
         ],
+        "required_card_snapshot": {
+          "required_fields": [
+            "TweakId",
+            "Name",
+            "Category",
+            "EvidenceClass",
+            "ResearchStatus",
+            "RollbackSnapshotState",
+            "HasClaimBoundary",
+            "WhatWeKnowSummary",
+            "WhatWeDoNotClaimSummary",
+            "ProofLanes"
+          ],
+          "required_proof_lanes": [
+            "docs",
+            "runtime",
+            "source",
+            "rollback"
+          ],
+          "claim_boundary_required": true
+        },
         "required_stage_assertions": [
           "apply stage reports a successful apply story",
           "rollback stage reports a successful rollback story",
@@ -208,6 +292,27 @@
           "rollback",
           "detect-after"
         ],
+        "required_card_snapshot": {
+          "required_fields": [
+            "TweakId",
+            "Name",
+            "Category",
+            "EvidenceClass",
+            "ResearchStatus",
+            "RollbackSnapshotState",
+            "HasClaimBoundary",
+            "WhatWeKnowSummary",
+            "WhatWeDoNotClaimSummary",
+            "ProofLanes"
+          ],
+          "required_proof_lanes": [
+            "docs",
+            "runtime",
+            "source",
+            "rollback"
+          ],
+          "claim_boundary_required": true
+        },
         "required_stage_assertions": [
           "apply stage reports a successful apply story",
           "rollback stage reports a successful rollback story",
