@@ -100,9 +100,12 @@ public sealed class CommandAllowlist
         AddRegDwordRule(regAllowlist, @"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock", "AllowDevelopmentWithoutDevLicense", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\System", "AllowClipboardHistory", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\System", "AllowCrossDeviceClipboard", "0", "1", "2");
+        AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\System", "EnableActivityFeed", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\System", "EnableFontProviders", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\System", "EnableMmx", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\System", "NoLocalPasswordResetQuestions", "0", "1", "2");
+        AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\System", "PublishUserActivities", "0", "1", "2");
+        AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\System", "UploadUserActivities", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\NetCache", "Enabled", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\DWM", "DisallowAnimations", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\Appx", "AllowAutomaticAppArchiving", "0", "1", "2");

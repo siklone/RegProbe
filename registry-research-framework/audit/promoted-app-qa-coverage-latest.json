@@ -1,11 +1,11 @@
 {
-  "generated_utc": "2026-05-06T21:28:55Z",
-  "history_entry_count": 21,
+  "generated_utc": "2026-05-06T21:36:02Z",
+  "history_entry_count": 23,
   "catalog_candidate_count": 242,
-  "covered_count": 64,
-  "uncovered_count": 178,
+  "covered_count": 69,
+  "uncovered_count": 173,
   "summary": {
-    "coverage_percent": 26.45,
+    "coverage_percent": 28.51,
     "covered_categories": {
       "Audio": 2,
       "Cleanup": 1,
@@ -16,7 +16,7 @@
       "Performance": 3,
       "Peripheral": 2,
       "Power": 7,
-      "Privacy": 8,
+      "Privacy": 13,
       "Security": 7,
       "System": 11,
       "Visibility": 6
@@ -29,66 +29,13 @@
       "Notifications": 2,
       "Peripheral": 1,
       "Power": 3,
-      "Privacy": 59,
+      "Privacy": 54,
       "Security": 14,
       "System": 41,
       "Visibility": 17
     }
   },
   "recommended_next_batches": [
-    {
-      "category": "Privacy",
-      "covered_count": 8,
-      "uncovered_count": 59,
-      "coverage_percent": 11.94,
-      "batch_size": 5,
-      "tweak_ids": [
-        "privacy.deny-app-access.policy",
-        "privacy.disable-activity-history",
-        "privacy.disable-app-diagnostics",
-        "privacy.disable-app-suggestions",
-        "privacy.disable-appcompat-engine.policy"
-      ],
-      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.deny-app-access.policy --id privacy.disable-activity-history --id privacy.disable-app-diagnostics --id privacy.disable-app-suggestions --id privacy.disable-appcompat-engine.policy",
-      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.deny-app-access.policy --id privacy.disable-activity-history --id privacy.disable-app-diagnostics --id privacy.disable-app-suggestions --id privacy.disable-appcompat-engine.policy --run-kvm --json",
-      "candidates": [
-        {
-          "tweak_id": "privacy.deny-app-access.policy",
-          "record_id": "privacy.deny-app-access.policy",
-          "category": "Privacy",
-          "name": "App capability access policies",
-          "documentation": "research/records/privacy.deny-app-access.policy.review.json"
-        },
-        {
-          "tweak_id": "privacy.disable-activity-history",
-          "record_id": "privacy.disable-activity-history",
-          "category": "Privacy",
-          "name": "Windows Activity History",
-          "documentation": "research/records/privacy.disable-activity-history.json"
-        },
-        {
-          "tweak_id": "privacy.disable-app-diagnostics",
-          "record_id": "privacy.disable-app-diagnostics",
-          "category": "Privacy",
-          "name": "App Diagnostic Information Access",
-          "documentation": "research/records/privacy.disable-app-diagnostics.json"
-        },
-        {
-          "tweak_id": "privacy.disable-app-suggestions",
-          "record_id": "privacy.disable-app-suggestions",
-          "category": "Privacy",
-          "name": "App Suggestions in Start",
-          "documentation": "research/records/privacy.disable-app-suggestions.review.json"
-        },
-        {
-          "tweak_id": "privacy.disable-appcompat-engine.policy",
-          "record_id": "privacy.disable-appcompat-engine.policy",
-          "category": "Privacy",
-          "name": "Disable Application Compatibility Engine and SwitchBack",
-          "documentation": "research/records/privacy.disable-appcompat-engine.policy.review.json"
-        }
-      ]
-    },
     {
       "category": "Network",
       "covered_count": 4,
@@ -139,6 +86,59 @@
           "category": "Network",
           "name": "Plaintext SMB Passwords",
           "documentation": "research/records/network.disable-plaintext-smb-passwords.json"
+        }
+      ]
+    },
+    {
+      "category": "Privacy",
+      "covered_count": 13,
+      "uncovered_count": 54,
+      "coverage_percent": 19.4,
+      "batch_size": 5,
+      "tweak_ids": [
+        "privacy.disable-appdeviceinventory.policy",
+        "privacy.disable-application-telemetry",
+        "privacy.disable-background-apps",
+        "privacy.disable-biometrics",
+        "privacy.disable-biometrics-domain-logon"
+      ],
+      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-appdeviceinventory.policy --id privacy.disable-application-telemetry --id privacy.disable-background-apps --id privacy.disable-biometrics --id privacy.disable-biometrics-domain-logon",
+      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-appdeviceinventory.policy --id privacy.disable-application-telemetry --id privacy.disable-background-apps --id privacy.disable-biometrics --id privacy.disable-biometrics-domain-logon --run-kvm --json",
+      "candidates": [
+        {
+          "tweak_id": "privacy.disable-appdeviceinventory.policy",
+          "record_id": "privacy.disable-appdeviceinventory.policy",
+          "category": "Privacy",
+          "name": "Disable App Device Inventory Policies",
+          "documentation": "research/records/privacy.disable-appdeviceinventory.policy.review.json"
+        },
+        {
+          "tweak_id": "privacy.disable-application-telemetry",
+          "record_id": "privacy.disable-application-telemetry",
+          "category": "Privacy",
+          "name": "Application Compatibility Telemetry",
+          "documentation": "research/records/privacy.disable-application-telemetry.json"
+        },
+        {
+          "tweak_id": "privacy.disable-background-apps",
+          "record_id": "privacy.disable-background-apps",
+          "category": "Privacy",
+          "name": "Background App Execution",
+          "documentation": "research/records/privacy.disable-background-apps.json"
+        },
+        {
+          "tweak_id": "privacy.disable-biometrics",
+          "record_id": "privacy.disable-biometrics",
+          "category": "Privacy",
+          "name": "Windows Biometrics",
+          "documentation": "research/records/privacy.disable-biometrics.json"
+        },
+        {
+          "tweak_id": "privacy.disable-biometrics-domain-logon",
+          "record_id": "privacy.disable-biometrics-domain-logon",
+          "category": "Privacy",
+          "name": "Biometric Sign-in for Domain Accounts",
+          "documentation": "research/records/privacy.disable-biometrics-domain-logon.json"
         }
       ]
     },
@@ -601,6 +601,24 @@
       "latest_report_status": "ok"
     },
     {
+      "tweak_id": "privacy.deny-app-access.policy",
+      "qa_tweak_id": "privacy.deny-app-access.policy",
+      "candidate_id": "privacy.deny-app-access.policy",
+      "category": "Privacy",
+      "name": "App capability access policies",
+      "documentation": "research/records/privacy.deny-app-access.policy.review.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "privacy.disable-activity-history",
+      "qa_tweak_id": "privacy.disable-activity-history",
+      "candidate_id": "privacy.disable-activity-history",
+      "category": "Privacy",
+      "name": "Windows Activity History",
+      "documentation": "research/records/privacy.disable-activity-history.json",
+      "latest_report_status": "ok"
+    },
+    {
       "tweak_id": "privacy.disable-advertising-id",
       "qa_tweak_id": "privacy.disable-advertising-id",
       "candidate_id": "privacy.disable-advertising-id",
@@ -610,12 +628,39 @@
       "latest_report_status": "ok"
     },
     {
+      "tweak_id": "privacy.disable-app-diagnostics",
+      "qa_tweak_id": "privacy.disable-app-diagnostics",
+      "candidate_id": "privacy.disable-app-diagnostics",
+      "category": "Privacy",
+      "name": "App Diagnostic Information Access",
+      "documentation": "research/records/privacy.disable-app-diagnostics.json",
+      "latest_report_status": "ok"
+    },
+    {
       "tweak_id": "privacy.disable-app-launch-tracking",
       "qa_tweak_id": "privacy.disable-app-launch-tracking",
       "candidate_id": "privacy.disable-app-launch-tracking",
       "category": "Privacy",
       "name": "App Launch Tracking",
       "documentation": "research/records/privacy.disable-app-launch-tracking.review.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "privacy.disable-app-suggestions",
+      "qa_tweak_id": "privacy.disable-app-suggestions",
+      "candidate_id": "privacy.disable-app-suggestions",
+      "category": "Privacy",
+      "name": "App Suggestions in Start",
+      "documentation": "research/records/privacy.disable-app-suggestions.review.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "privacy.disable-appcompat-engine.policy",
+      "qa_tweak_id": "privacy.disable-appcompat-engine.policy",
+      "candidate_id": "privacy.disable-appcompat-engine.policy",
+      "category": "Privacy",
+      "name": "Disable Application Compatibility Engine and SwitchBack",
+      "documentation": "research/records/privacy.disable-appcompat-engine.policy.review.json",
       "latest_report_status": "ok"
     },
     {
@@ -1209,41 +1254,6 @@
       "category": "Power",
       "name": "Games MMCSS Task Profile",
       "documentation": "research/records/power.optimize-gaming-network.json"
-    },
-    {
-      "tweak_id": "privacy.deny-app-access.policy",
-      "record_id": "privacy.deny-app-access.policy",
-      "category": "Privacy",
-      "name": "App capability access policies",
-      "documentation": "research/records/privacy.deny-app-access.policy.review.json"
-    },
-    {
-      "tweak_id": "privacy.disable-activity-history",
-      "record_id": "privacy.disable-activity-history",
-      "category": "Privacy",
-      "name": "Windows Activity History",
-      "documentation": "research/records/privacy.disable-activity-history.json"
-    },
-    {
-      "tweak_id": "privacy.disable-app-diagnostics",
-      "record_id": "privacy.disable-app-diagnostics",
-      "category": "Privacy",
-      "name": "App Diagnostic Information Access",
-      "documentation": "research/records/privacy.disable-app-diagnostics.json"
-    },
-    {
-      "tweak_id": "privacy.disable-app-suggestions",
-      "record_id": "privacy.disable-app-suggestions",
-      "category": "Privacy",
-      "name": "App Suggestions in Start",
-      "documentation": "research/records/privacy.disable-app-suggestions.review.json"
-    },
-    {
-      "tweak_id": "privacy.disable-appcompat-engine.policy",
-      "record_id": "privacy.disable-appcompat-engine.policy",
-      "category": "Privacy",
-      "name": "Disable Application Compatibility Engine and SwitchBack",
-      "documentation": "research/records/privacy.disable-appcompat-engine.policy.review.json"
     },
     {
       "tweak_id": "privacy.disable-appdeviceinventory.policy",

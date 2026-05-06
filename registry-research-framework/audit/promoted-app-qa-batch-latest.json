@@ -1,13 +1,13 @@
 {
-  "generated_utc": "2026-05-06T21:28:55Z",
+  "generated_utc": "2026-05-06T21:36:02Z",
   "status": "PASS",
   "selection": {
     "requested_ids": [
-      "system.bsod-display-parameters",
-      "system.disable-auto-maintenance",
-      "system.disable-background-gp-updates",
-      "system.disable-clipboard-redirection",
-      "system.disable-fullscreen-optimizations"
+      "privacy.deny-app-access.policy",
+      "privacy.disable-activity-history",
+      "privacy.disable-app-diagnostics",
+      "privacy.disable-app-suggestions",
+      "privacy.disable-appcompat-engine.policy"
     ],
     "requested_categories": [],
     "limit_per_category": 1,
@@ -26,25 +26,25 @@
   "errors": [],
   "candidates": [
     {
-      "tweak_id": "system.bsod-display-parameters",
-      "qa_tweak_id": "system.bsod-display-parameters",
-      "candidate_id": "system.bsod-display-parameters",
-      "record_id": "system.bsod-display-parameters",
-      "category": "System",
-      "name": "Display Blue Screen Parameters",
-      "documentation": "research/records/system.bsod-display-parameters.review.json",
+      "tweak_id": "privacy.deny-app-access.policy",
+      "qa_tweak_id": "privacy.deny-app-access.policy",
+      "candidate_id": "privacy.deny-app-access.policy",
+      "record_id": "privacy.deny-app-access.policy",
+      "category": "Privacy",
+      "name": "App capability access policies",
+      "documentation": "research/records/privacy.deny-app-access.policy.review.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect system.bsod-display-parameters",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.deny-app-access.policy",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.bsod-display-parameters' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.bsod-display-parameters.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.bsod-display-parameters' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.bsod-display-parameters.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.bsod-display-parameters' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.bsod-display-parameters.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.bsod-display-parameters' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.bsod-display-parameters.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'system.bsod-display-parameters'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.deny-app-access.policy' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.deny-app-access.policy.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.deny-app-access.policy' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.deny-app-access.policy.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.deny-app-access.policy' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.deny-app-access.policy.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.deny-app-access.policy' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.deny-app-access.policy.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.deny-app-access.policy'"
       },
       "expected_report": {
         "success": true,
@@ -85,25 +85,25 @@
       }
     },
     {
-      "tweak_id": "system.disable-auto-maintenance",
-      "qa_tweak_id": "system.disable-auto-maintenance",
-      "candidate_id": "system.disable-auto-maintenance",
-      "record_id": "system.disable-auto-maintenance",
-      "category": "System",
-      "name": "Automatic Maintenance",
-      "documentation": "research/records/system.disable-auto-maintenance.review.json",
+      "tweak_id": "privacy.disable-activity-history",
+      "qa_tweak_id": "privacy.disable-activity-history",
+      "candidate_id": "privacy.disable-activity-history",
+      "record_id": "privacy.disable-activity-history",
+      "category": "Privacy",
+      "name": "Windows Activity History",
+      "documentation": "research/records/privacy.disable-activity-history.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect system.disable-auto-maintenance",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.disable-activity-history",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.disable-auto-maintenance' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.disable-auto-maintenance.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.disable-auto-maintenance' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.disable-auto-maintenance.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.disable-auto-maintenance' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.disable-auto-maintenance.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.disable-auto-maintenance' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.disable-auto-maintenance.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'system.disable-auto-maintenance'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-activity-history' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-activity-history.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-activity-history' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-activity-history.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-activity-history' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-activity-history.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-activity-history' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-activity-history.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.disable-activity-history'"
       },
       "expected_report": {
         "success": true,
@@ -144,25 +144,25 @@
       }
     },
     {
-      "tweak_id": "system.disable-background-gp-updates",
-      "qa_tweak_id": "system.disable-background-gp-updates",
-      "candidate_id": "system.disable-background-gp-updates",
-      "record_id": "system.disable-background-gp-updates",
-      "category": "System",
-      "name": "Background Group Policy Refresh",
-      "documentation": "research/records/system.disable-background-gp-updates.json",
+      "tweak_id": "privacy.disable-app-diagnostics",
+      "qa_tweak_id": "privacy.disable-app-diagnostics",
+      "candidate_id": "privacy.disable-app-diagnostics",
+      "record_id": "privacy.disable-app-diagnostics",
+      "category": "Privacy",
+      "name": "App Diagnostic Information Access",
+      "documentation": "research/records/privacy.disable-app-diagnostics.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect system.disable-background-gp-updates",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.disable-app-diagnostics",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.disable-background-gp-updates' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.disable-background-gp-updates.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.disable-background-gp-updates' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.disable-background-gp-updates.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.disable-background-gp-updates' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.disable-background-gp-updates.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.disable-background-gp-updates' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.disable-background-gp-updates.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'system.disable-background-gp-updates'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-app-diagnostics' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-app-diagnostics.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-app-diagnostics' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-app-diagnostics.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-app-diagnostics' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-app-diagnostics.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-app-diagnostics' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-app-diagnostics.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.disable-app-diagnostics'"
       },
       "expected_report": {
         "success": true,
@@ -203,25 +203,25 @@
       }
     },
     {
-      "tweak_id": "system.disable-clipboard-redirection",
-      "qa_tweak_id": "system.disable-clipboard-redirection",
-      "candidate_id": "system.disable-clipboard-redirection",
-      "record_id": "system.disable-clipboard-redirection",
-      "category": "System",
-      "name": "RDP Clipboard Redirection",
-      "documentation": "research/records/system.disable-clipboard-redirection.json",
+      "tweak_id": "privacy.disable-app-suggestions",
+      "qa_tweak_id": "privacy.disable-app-suggestions",
+      "candidate_id": "privacy.disable-app-suggestions",
+      "record_id": "privacy.disable-app-suggestions",
+      "category": "Privacy",
+      "name": "App Suggestions in Start",
+      "documentation": "research/records/privacy.disable-app-suggestions.review.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect system.disable-clipboard-redirection",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.disable-app-suggestions",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.disable-clipboard-redirection' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.disable-clipboard-redirection.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.disable-clipboard-redirection' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.disable-clipboard-redirection.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.disable-clipboard-redirection' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.disable-clipboard-redirection.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.disable-clipboard-redirection' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.disable-clipboard-redirection.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'system.disable-clipboard-redirection'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-app-suggestions' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-app-suggestions.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-app-suggestions' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-app-suggestions.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-app-suggestions' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-app-suggestions.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-app-suggestions' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-app-suggestions.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.disable-app-suggestions'"
       },
       "expected_report": {
         "success": true,
@@ -262,25 +262,25 @@
       }
     },
     {
-      "tweak_id": "system.disable-fullscreen-optimizations",
-      "qa_tweak_id": "system.disable-fullscreen-optimizations",
-      "candidate_id": "system.disable-fullscreen-optimizations",
-      "record_id": "system.disable-fullscreen-optimizations",
-      "category": "System",
-      "name": "Fullscreen Optimizations",
-      "documentation": "research/records/system.disable-fullscreen-optimizations.review.json",
+      "tweak_id": "privacy.disable-appcompat-engine.policy",
+      "qa_tweak_id": "privacy.disable-appcompat-engine.policy",
+      "candidate_id": "privacy.disable-appcompat-engine.policy",
+      "record_id": "privacy.disable-appcompat-engine.policy",
+      "category": "Privacy",
+      "name": "Disable Application Compatibility Engine and SwitchBack",
+      "documentation": "research/records/privacy.disable-appcompat-engine.policy.review.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect system.disable-fullscreen-optimizations",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.disable-appcompat-engine.policy",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.disable-fullscreen-optimizations' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.disable-fullscreen-optimizations.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.disable-fullscreen-optimizations' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.disable-fullscreen-optimizations.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.disable-fullscreen-optimizations' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.disable-fullscreen-optimizations.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.disable-fullscreen-optimizations' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.disable-fullscreen-optimizations.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'system.disable-fullscreen-optimizations'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-appcompat-engine.policy' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-appcompat-engine.policy.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-appcompat-engine.policy' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-appcompat-engine.policy.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-appcompat-engine.policy' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-appcompat-engine.policy.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-appcompat-engine.policy' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-appcompat-engine.policy.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.disable-appcompat-engine.policy'"
       },
       "expected_report": {
         "success": true,
@@ -323,7 +323,7 @@
   ],
   "run_results": [
     {
-      "tweak_id": "system.bsod-display-parameters",
+      "tweak_id": "privacy.deny-app-access.policy",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -357,19 +357,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "system.bsod-display-parameters",
-        "TweakName": "Display Blue Screen Parameters",
+        "TweakId": "privacy.deny-app-access.policy",
+        "TweakName": "App capability access policies",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "system.bsod-display-parameters",
-          "Name": "Display Blue Screen Parameters",
-          "Category": "System",
-          "Description": "This tweak tries to show extra technical parameters on a blue screen. That can help advanced debugging, but most users will not benefit from the extra numbers.",
-          "FriendlyDescription": "This tweak tries to show extra technical parameters on a blue screen. That can help advanced debugging, but most users will not benefit from the extra numbers.",
-          "RegistryPath": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\CrashControl\\DisplayParameters",
+          "TweakId": "privacy.deny-app-access.policy",
+          "Name": "App capability access policies",
+          "Category": "Privacy",
+          "Description": "These policies stop Windows apps from accessing sensitive capabilities like camera, contacts, location, and background activity.",
+          "FriendlyDescription": "These policies stop Windows apps from accessing sensitive capabilities like camera, contacts, location, and background activity.",
+          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessAccountInfo",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -377,544 +377,15 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: This tweak tries to show extra technical parameters on a blue screen. That can help advanced debugging, but most users will not benefit from the extra numbers. Evidence: Validated against Microsoft Support documentation for the CrashControl DisplayParameters value. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: These policies stop Windows apps from accessing sensitive capabilities like camera, contacts, location, and background activity. Evidence: The local AppPrivacy.admx template documents the LetAppsAccess* policy family and its ForceDeny value semantics. The parent audit trail keeps the extra System policy write separate from this child record. Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "Validated against Microsoft Support documentation for the CrashControl DisplayParameters value.",
-              "Source": "Validation proof source: https://support.microsoft.com/en-us/topic/stop-error-information-isn-t-displayed-on-the-blue-screen-in-windows-216528fb-94fd-11a2-2675-398ecf5cc237"
-            },
-            {
-              "Key": "runtime",
-              "Label": "RUNTIME",
-              "State": "ready",
-              "Summary": "A same-day fast guest Ghidra retry for `DisplayParameters` failed in `ensure-admin-shell` with a bounded timeout, so no xref bundle reached the host.",
-              "Source": "Guest Ghidra launch receipt for DisplayParameters: evidence/raw/ghidra/ghidra-system-bsod-display-parameters-20260427a/summary.json"
-            },
-            {
-              "Key": "source",
-              "Label": "SOURCE",
-              "State": "ready",
-              "Summary": "No upstream nohuto source link is attached to this record.",
-              "Source": ""
-            },
-            {
-              "Key": "rollback",
-              "Label": "ROLLBACK",
-              "State": "ready",
-              "Summary": "Rollback: Verified via record-restore-story.",
-              "Source": "record-restore-story"
-            }
-          ],
-          "ReferenceLinks": [
-            {
-              "Title": "Docs: Details (missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
-              "Kind": "Details"
-            },
-            {
-              "Title": "Docs: Win-Config",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\win-config\\batch-01.md#system.bsod-display-parameters",
-              "Kind": "Docs"
-            },
-            {
-              "Title": "Docs: System (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\system\\system.md",
-              "Kind": "Docs"
-            }
-          ]
-        },
-        "Stages": [
-          {
-            "Stage": "detect-before",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Display stop error information'.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Display stop error information",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": false,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Display stop error information'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\CrashControl\\DisplayParameters: missing -> 1",
-                "TimestampText": "00:28:59"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "apply",
-            "AppliedStatus": "Applied",
-            "StatusMessage": "Run completed.",
-            "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Display stop error information",
-            "TargetValue": "Display stop error information",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Display stop error information'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\CrashControl\\DisplayParameters: missing -> 1",
-                "TimestampText": "00:28:59"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Applied preset 'Display stop error information'.",
-                "TimestampText": "00:29:03"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified preset 'Display stop error information'.",
-                "TimestampText": "00:29:03"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Not required",
-                "Message": "Step not executed.",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "rollback",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Rolled back registry values.",
-            "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Display stop error information",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Display stop error information'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\CrashControl\\DisplayParameters: missing -> 1",
-                "TimestampText": "00:28:59"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Applied preset 'Display stop error information'.",
-                "TimestampText": "00:29:03"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified preset 'Display stop error information'.",
-                "TimestampText": "00:29:03"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "00:29:03"
-              }
-            ]
-          },
-          {
-            "Stage": "detect-after",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Display stop error information'.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Display stop error information",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Display stop error information'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\CrashControl\\DisplayParameters: missing -> 1",
-                "TimestampText": "00:29:03"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Applied preset 'Display stop error information'.",
-                "TimestampText": "00:29:03"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified preset 'Display stop error information'.",
-                "TimestampText": "00:29:03"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "00:29:03"
-              }
-            ]
-          }
-        ],
-        "StartedAtUtc": "2026-05-07T07:28:59.327198+00:00",
-        "CompletedAtUtc": "2026-05-07T07:29:03.560159+00:00"
-      },
-      "qa_tweak_id": "system.bsod-display-parameters",
-      "candidate_id": "system.bsod-display-parameters",
-      "card_name": "Display Blue Screen Parameters",
-      "documentation": "research/records/system.bsod-display-parameters.review.json"
-    },
-    {
-      "tweak_id": "system.disable-auto-maintenance",
-      "host_exit": 0,
-      "execution_exit": 0,
-      "payload_status": "completed",
-      "report_app_success": true,
-      "report_success": true,
-      "report_status": "ok",
-      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
-      "report_contract_status": "ok",
-      "report_contract_summary": "QA card snapshot contract passed.",
-      "report_contract_failures": [],
-      "report_card_present": true,
-      "report_card_has_claim_boundary": true,
-      "report_card_present_fields": [
-        "TweakId",
-        "Name",
-        "Category",
-        "EvidenceClass",
-        "ResearchStatus",
-        "RollbackSnapshotState",
-        "HasClaimBoundary",
-        "WhatWeKnowSummary",
-        "WhatWeDoNotClaimSummary",
-        "ProofLanes"
-      ],
-      "report_card_missing_fields": [],
-      "report_card_proof_lanes": [
-        "docs",
-        "runtime",
-        "source",
-        "rollback"
-      ],
-      "report_card_missing_proof_lanes": [],
-      "report": {
-        "TweakId": "system.disable-auto-maintenance",
-        "TweakName": "Automatic Maintenance",
-        "Success": true,
-        "Status": "ok",
-        "Summary": "Apply/verify path completed and rollback restored the tweak.",
-        "RollbackRequested": true,
-        "Card": {
-          "TweakId": "system.disable-auto-maintenance",
-          "Name": "Automatic Maintenance",
-          "Category": "System",
-          "Description": "Automatic Maintenance runs maintenance work like updates, scans, and housekeeping when Windows thinks the PC is idle. People disable it when they want tighter control over when maintenance runs.",
-          "FriendlyDescription": "Automatic Maintenance runs maintenance work like updates, scans, and housekeeping when Windows thinks the PC is idle. People disable it when they want tighter control over when maintenance runs.",
-          "RegistryPath": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Schedule\\Maintenance\\MaintenanceDisabled",
-          "EvidenceClass": "A",
-          "EvidenceClassTitle": "Cross-Layer Verified",
-          "ResearchStatus": "PROMOTED",
-          "IsMutationAllowed": true,
-          "RollbackSnapshotState": "ready",
-          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
-          "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Automatic Maintenance runs maintenance work like updates, scans, and housekeeping when Windows thinks the PC is idle. People disable it when they want tighter control over when maintenance runs. Evidence: Guest-side reversible probe on Win25H2Clean; see the batch probe output in evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json..md The local nohuto mirror also shows the same MaintenanceDisabled registry path. Rollback: Rollback: Verified via record-restore-story.",
-          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
-          "ProofLanes": [
-            {
-              "Key": "docs",
-              "Label": "DOCS",
-              "State": "ready",
-              "Summary": "Guest-side reversible probe on Win25H2Clean; see the batch probe output in evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json..md The local nohuto mirror also shows the same MaintenanceDisabled registry path.",
-              "Source": "Validation proof source: evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json"
-            },
-            {
-              "Key": "runtime",
-              "Label": "RUNTIME",
-              "State": "ready",
-              "Summary": "Guest reversible probe toggled MaintenanceDisabled through 1 and back to missing under the maintenance schedule policy path, matching the app behavior captured in the batch probe.",
-              "Source": "Win25H2Clean reversible probe - Automatic maintenance override: evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json"
-            },
-            {
-              "Key": "source",
-              "Label": "SOURCE",
-              "State": "ready",
-              "Summary": "No upstream nohuto source link is attached to this record.",
-              "Source": ""
-            },
-            {
-              "Key": "rollback",
-              "Label": "ROLLBACK",
-              "State": "ready",
-              "Summary": "Rollback: Verified via record-restore-story.",
-              "Source": "record-restore-story"
-            }
-          ],
-          "ReferenceLinks": [
-            {
-              "Title": "Docs: Details (missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
-              "Kind": "Details"
-            },
-            {
-              "Title": "Docs: System (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\system\\system.md",
-              "Kind": "Docs"
-            }
-          ]
-        },
-        "Stages": [
-          {
-            "Stage": "detect-before",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Value not set.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Not set",
-            "TargetValue": "1 (0x1)",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": false,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Value not set.",
-                "TimestampText": "00:29:09"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "apply",
-            "AppliedStatus": "Applied",
-            "StatusMessage": "Run completed.",
-            "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "1 (0x1)",
-            "TargetValue": "1 (0x1)",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Value not set.",
-                "TimestampText": "00:29:09"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Set value to 1.",
-                "TimestampText": "00:29:12"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified desired value.",
-                "TimestampText": "00:29:12"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Not required",
-                "Message": "Step not executed.",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "rollback",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Removed value to restore default.",
-            "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "1 (0x1)",
-            "TargetValue": "1 (0x1)",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Value not set.",
-                "TimestampText": "00:29:09"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Set value to 1.",
-                "TimestampText": "00:29:12"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified desired value.",
-                "TimestampText": "00:29:12"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Removed value to restore default.",
-                "TimestampText": "00:29:12"
-              }
-            ]
-          },
-          {
-            "Stage": "detect-after",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Value not set.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Not set",
-            "TargetValue": "1 (0x1)",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Value not set.",
-                "TimestampText": "00:29:12"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Set value to 1.",
-                "TimestampText": "00:29:12"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified desired value.",
-                "TimestampText": "00:29:12"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Removed value to restore default.",
-                "TimestampText": "00:29:12"
-              }
-            ]
-          }
-        ],
-        "StartedAtUtc": "2026-05-07T07:29:09.5964591+00:00",
-        "CompletedAtUtc": "2026-05-07T07:29:12.6795901+00:00"
-      },
-      "qa_tweak_id": "system.disable-auto-maintenance",
-      "candidate_id": "system.disable-auto-maintenance",
-      "card_name": "Automatic Maintenance",
-      "documentation": "research/records/system.disable-auto-maintenance.review.json"
-    },
-    {
-      "tweak_id": "system.disable-background-gp-updates",
-      "host_exit": 0,
-      "execution_exit": 0,
-      "payload_status": "completed",
-      "report_app_success": true,
-      "report_success": true,
-      "report_status": "ok",
-      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
-      "report_contract_status": "ok",
-      "report_contract_summary": "QA card snapshot contract passed.",
-      "report_contract_failures": [],
-      "report_card_present": true,
-      "report_card_has_claim_boundary": true,
-      "report_card_present_fields": [
-        "TweakId",
-        "Name",
-        "Category",
-        "EvidenceClass",
-        "ResearchStatus",
-        "RollbackSnapshotState",
-        "HasClaimBoundary",
-        "WhatWeKnowSummary",
-        "WhatWeDoNotClaimSummary",
-        "ProofLanes"
-      ],
-      "report_card_missing_fields": [],
-      "report_card_proof_lanes": [
-        "docs",
-        "runtime",
-        "source",
-        "rollback"
-      ],
-      "report_card_missing_proof_lanes": [],
-      "report": {
-        "TweakId": "system.disable-background-gp-updates",
-        "TweakName": "Background Group Policy Refresh",
-        "Success": true,
-        "Status": "ok",
-        "Summary": "Apply/verify path completed and rollback restored the tweak.",
-        "RollbackRequested": true,
-        "Card": {
-          "TweakId": "system.disable-background-gp-updates",
-          "Name": "Background Group Policy Refresh",
-          "Category": "System",
-          "Description": "Windows normally refreshes Group Policy in the background while the system is being used. This policy lets the device wait until logoff before applying those updates.",
-          "FriendlyDescription": "Windows normally refreshes Group Policy in the background while the system is being used. This policy lets the device wait until logoff before applying those updates.",
-          "RegistryPath": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\DisableBkGndGroupPolicy",
-          "EvidenceClass": "A",
-          "EvidenceClassTitle": "Cross-Layer Verified",
-          "ResearchStatus": "PROMOTED",
-          "IsMutationAllowed": true,
-          "RollbackSnapshotState": "ready",
-          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
-          "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Windows normally refreshes Group Policy in the background while the system is being used. This policy lets the device wait until logoff before applying those updates. Evidence: The local official Microsoft ADMX file names the same policy key and DisableBkGndGroupPolicy value used by the app. The paired GroupPolicy.adml help text states that enabling the policy prevents Group Policy from being updated while the computer is in use. Rollback: Rollback: Verified via record-restore-story.",
-          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
-          "ProofLanes": [
-            {
-              "Key": "docs",
-              "Label": "DOCS",
-              "State": "ready",
-              "Summary": "The local official Microsoft ADMX file names the same policy key and DisableBkGndGroupPolicy value used by the app. The paired GroupPolicy.adml help text states that enabling the policy prevents Group Policy from being updated while the computer is in use.",
-              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/GroupPolicy.admx"
+              "Summary": "The local AppPrivacy.admx template documents the LetAppsAccess* policy family and its ForceDeny value semantics. The parent audit trail keeps the extra System policy write separate from this child record.",
+              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/AppPrivacy.admx"
             },
             {
               "Key": "runtime",
@@ -945,8 +416,8 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: System (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\system\\system.md",
+              "Title": "Docs: Privacy (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\privacy\\privacy-verified.md",
               "Kind": "Docs"
             }
           ]
@@ -955,272 +426,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Value not set.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Not set",
-            "TargetValue": "1 (0x1)",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": false,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Value not set.",
-                "TimestampText": "00:29:19"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "apply",
-            "AppliedStatus": "Applied",
-            "StatusMessage": "Run completed.",
-            "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "1 (0x1)",
-            "TargetValue": "1 (0x1)",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Value not set.",
-                "TimestampText": "00:29:19"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Set value to 1.",
-                "TimestampText": "00:29:21"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified desired value.",
-                "TimestampText": "00:29:21"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Not required",
-                "Message": "Step not executed.",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "rollback",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Removed value to restore default.",
-            "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "1 (0x1)",
-            "TargetValue": "1 (0x1)",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Value not set.",
-                "TimestampText": "00:29:19"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Set value to 1.",
-                "TimestampText": "00:29:21"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified desired value.",
-                "TimestampText": "00:29:21"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Removed value to restore default.",
-                "TimestampText": "00:29:22"
-              }
-            ]
-          },
-          {
-            "Stage": "detect-after",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Value not set.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Not set",
-            "TargetValue": "1 (0x1)",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Value not set.",
-                "TimestampText": "00:29:22"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Set value to 1.",
-                "TimestampText": "00:29:21"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified desired value.",
-                "TimestampText": "00:29:21"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Removed value to restore default.",
-                "TimestampText": "00:29:22"
-              }
-            ]
-          }
-        ],
-        "StartedAtUtc": "2026-05-07T07:29:19.1183289+00:00",
-        "CompletedAtUtc": "2026-05-07T07:29:22.2033616+00:00"
-      },
-      "qa_tweak_id": "system.disable-background-gp-updates",
-      "candidate_id": "system.disable-background-gp-updates",
-      "card_name": "Background Group Policy Refresh",
-      "documentation": "research/records/system.disable-background-gp-updates.json"
-    },
-    {
-      "tweak_id": "system.disable-clipboard-redirection",
-      "host_exit": 0,
-      "execution_exit": 0,
-      "payload_status": "completed",
-      "report_app_success": true,
-      "report_success": true,
-      "report_status": "ok",
-      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
-      "report_contract_status": "ok",
-      "report_contract_summary": "QA card snapshot contract passed.",
-      "report_contract_failures": [],
-      "report_card_present": true,
-      "report_card_has_claim_boundary": true,
-      "report_card_present_fields": [
-        "TweakId",
-        "Name",
-        "Category",
-        "EvidenceClass",
-        "ResearchStatus",
-        "RollbackSnapshotState",
-        "HasClaimBoundary",
-        "WhatWeKnowSummary",
-        "WhatWeDoNotClaimSummary",
-        "ProofLanes"
-      ],
-      "report_card_missing_fields": [],
-      "report_card_proof_lanes": [
-        "docs",
-        "runtime",
-        "source",
-        "rollback"
-      ],
-      "report_card_missing_proof_lanes": [],
-      "report": {
-        "TweakId": "system.disable-clipboard-redirection",
-        "TweakName": "RDP Clipboard Redirection",
-        "Success": true,
-        "Status": "ok",
-        "Summary": "Apply/verify path completed and rollback restored the tweak.",
-        "RollbackRequested": true,
-        "Card": {
-          "TweakId": "system.disable-clipboard-redirection",
-          "Name": "RDP Clipboard Redirection",
-          "Category": "System",
-          "Description": "Remote Desktop can let text and files move between your local clipboard and the remote machine. This policy controls whether that copy and paste bridge is allowed.",
-          "FriendlyDescription": "Remote Desktop can let text and files move between your local clipboard and the remote machine. This policy controls whether that copy and paste bridge is allowed.",
-          "RegistryPath": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Terminal Services\\fDisableClip",
-          "EvidenceClass": "A",
-          "EvidenceClassTitle": "Cross-Layer Verified",
-          "ResearchStatus": "PROMOTED",
-          "IsMutationAllowed": true,
-          "RollbackSnapshotState": "ready",
-          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
-          "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Remote Desktop can let text and files move between your local clipboard and the remote machine. This policy controls whether that copy and paste bridge is allowed. Evidence: The local official Microsoft ADMX file names the same policy key and fDisableClip value used by the app, and it confirms the 1/0 mapping. Rollback: Rollback: Verified via record-restore-story.",
-          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
-          "ProofLanes": [
-            {
-              "Key": "docs",
-              "Label": "DOCS",
-              "State": "ready",
-              "Summary": "The local official Microsoft ADMX file names the same policy key and fDisableClip value used by the app, and it confirms the 1/0 mapping.",
-              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/TerminalServer.admx"
-            },
-            {
-              "Key": "runtime",
-              "Label": "RUNTIME",
-              "State": "ready",
-              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
-              "Source": ""
-            },
-            {
-              "Key": "source",
-              "Label": "SOURCE",
-              "State": "ready",
-              "Summary": "No upstream nohuto source link is attached to this record.",
-              "Source": ""
-            },
-            {
-              "Key": "rollback",
-              "Label": "ROLLBACK",
-              "State": "ready",
-              "Summary": "Rollback: Verified via record-restore-story.",
-              "Source": "record-restore-story"
-            }
-          ],
-          "ReferenceLinks": [
-            {
-              "Title": "Docs: Details (missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
-              "Kind": "Details"
-            },
-            {
-              "Title": "Docs: System (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\system\\system.md",
-              "Kind": "Docs"
-            }
-          ]
-        },
-        "Stages": [
-          {
-            "Stage": "detect-before",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Clipboard redirection blocked'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Current broad deny bundle'.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Clipboard redirection blocked",
+            "TargetValue": "Current broad deny bundle",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -1229,8 +438,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Clipboard redirection blocked'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Terminal Services\\fDisableClip: missing -> 1",
-                "TimestampText": "00:29:28"
+                "Message": "Current values do not match a named option. Selected option is 'Current broad deny bundle'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessAccountInfo: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessCalendar: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessCallHistory: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessCamera: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessContacts: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessEmail: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessGraphicsCaptureProgrammatic: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessGraphicsCaptureWithoutBorder: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessHumanPresence: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessLocation: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessMessaging: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessMicrophone: missing -> 0\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessMotion: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessNotifications: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessPhone: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessRadios: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsSyncWithDevices: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessTasks: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessTrustedDevices: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsRunInBackground: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsGetDiagnosticInfo: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessGazeInput: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsActivateWithVoice: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsActivateWithVoiceAboveLock: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessBackgroundSpatialPerception: missing -> 2",
+                "TimestampText": "00:36:06"
               },
               {
                 "Action": "Apply",
@@ -1257,8 +466,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Clipboard redirection blocked",
-            "TargetValue": "Clipboard redirection blocked",
+            "CurrentValue": "Current broad deny bundle",
+            "TargetValue": "Current broad deny bundle",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1267,20 +476,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Clipboard redirection blocked'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Terminal Services\\fDisableClip: missing -> 1",
-                "TimestampText": "00:29:28"
+                "Message": "Current values do not match a named option. Selected option is 'Current broad deny bundle'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessAccountInfo: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessCalendar: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessCallHistory: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessCamera: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessContacts: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessEmail: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessGraphicsCaptureProgrammatic: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessGraphicsCaptureWithoutBorder: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessHumanPresence: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessLocation: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessMessaging: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessMicrophone: missing -> 0\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessMotion: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessNotifications: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessPhone: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessRadios: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsSyncWithDevices: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessTasks: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessTrustedDevices: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsRunInBackground: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsGetDiagnosticInfo: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessGazeInput: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsActivateWithVoice: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsActivateWithVoiceAboveLock: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessBackgroundSpatialPerception: missing -> 2",
+                "TimestampText": "00:36:06"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Clipboard redirection blocked'.",
-                "TimestampText": "00:29:31"
+                "Message": "Applied preset 'Current broad deny bundle'.",
+                "TimestampText": "00:36:10"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Clipboard redirection blocked'.",
-                "TimestampText": "00:29:31"
+                "Message": "Verified preset 'Current broad deny bundle'.",
+                "TimestampText": "00:36:10"
               },
               {
                 "Action": "Rollback",
@@ -1296,7 +505,7 @@
             "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Clipboard redirection blocked",
+            "TargetValue": "Current broad deny bundle",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1305,36 +514,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Clipboard redirection blocked'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Terminal Services\\fDisableClip: missing -> 1",
-                "TimestampText": "00:29:28"
+                "Message": "Current values do not match a named option. Selected option is 'Current broad deny bundle'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessAccountInfo: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessCalendar: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessCallHistory: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessCamera: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessContacts: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessEmail: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessGraphicsCaptureProgrammatic: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessGraphicsCaptureWithoutBorder: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessHumanPresence: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessLocation: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessMessaging: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessMicrophone: missing -> 0\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessMotion: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessNotifications: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessPhone: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessRadios: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsSyncWithDevices: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessTasks: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessTrustedDevices: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsRunInBackground: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsGetDiagnosticInfo: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessGazeInput: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsActivateWithVoice: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsActivateWithVoiceAboveLock: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessBackgroundSpatialPerception: missing -> 2",
+                "TimestampText": "00:36:06"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Clipboard redirection blocked'.",
-                "TimestampText": "00:29:31"
+                "Message": "Applied preset 'Current broad deny bundle'.",
+                "TimestampText": "00:36:10"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Clipboard redirection blocked'.",
-                "TimestampText": "00:29:31"
+                "Message": "Verified preset 'Current broad deny bundle'.",
+                "TimestampText": "00:36:10"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "00:29:31"
+                "TimestampText": "00:36:11"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Clipboard redirection blocked'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Current broad deny bundle'.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Clipboard redirection blocked",
+            "TargetValue": "Current broad deny bundle",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1343,40 +552,40 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Clipboard redirection blocked'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Terminal Services\\fDisableClip: missing -> 1",
-                "TimestampText": "00:29:31"
+                "Message": "Current values do not match a named option. Selected option is 'Current broad deny bundle'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessAccountInfo: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessCalendar: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessCallHistory: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessCamera: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessContacts: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessEmail: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessGraphicsCaptureProgrammatic: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessGraphicsCaptureWithoutBorder: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessHumanPresence: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessLocation: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessMessaging: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessMicrophone: missing -> 0\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessMotion: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessNotifications: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessPhone: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessRadios: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsSyncWithDevices: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessTasks: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessTrustedDevices: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsRunInBackground: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsGetDiagnosticInfo: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessGazeInput: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsActivateWithVoice: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsActivateWithVoiceAboveLock: missing -> 2\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsAccessBackgroundSpatialPerception: missing -> 2",
+                "TimestampText": "00:36:11"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Clipboard redirection blocked'.",
-                "TimestampText": "00:29:31"
+                "Message": "Applied preset 'Current broad deny bundle'.",
+                "TimestampText": "00:36:10"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Clipboard redirection blocked'.",
-                "TimestampText": "00:29:31"
+                "Message": "Verified preset 'Current broad deny bundle'.",
+                "TimestampText": "00:36:10"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "00:29:31"
+                "TimestampText": "00:36:11"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T07:29:28.4697462+00:00",
-        "CompletedAtUtc": "2026-05-07T07:29:31.6349553+00:00"
+        "StartedAtUtc": "2026-05-07T07:36:06.3540894+00:00",
+        "CompletedAtUtc": "2026-05-07T07:36:11.2237915+00:00"
       },
-      "qa_tweak_id": "system.disable-clipboard-redirection",
-      "candidate_id": "system.disable-clipboard-redirection",
-      "card_name": "RDP Clipboard Redirection",
-      "documentation": "research/records/system.disable-clipboard-redirection.json"
+      "qa_tweak_id": "privacy.deny-app-access.policy",
+      "candidate_id": "privacy.deny-app-access.policy",
+      "card_name": "App capability access policies",
+      "documentation": "research/records/privacy.deny-app-access.policy.review.json"
     },
     {
-      "tweak_id": "system.disable-fullscreen-optimizations",
+      "tweak_id": "privacy.disable-activity-history",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -1410,18 +619,18 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "system.disable-fullscreen-optimizations",
-        "TweakName": "Fullscreen Optimizations",
+        "TweakId": "privacy.disable-activity-history",
+        "TweakName": "Windows Activity History",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "system.disable-fullscreen-optimizations",
-          "Name": "Fullscreen Optimizations",
-          "Category": "System",
-          "Description": "Fullscreen Optimizations is a Windows feature that tries to blend fullscreen-style game performance with some modern desktop and presentation behavior. People usually turn it off only when a specific game behaves badly with it.",
-          "FriendlyDescription": "Fullscreen Optimizations is a Windows feature that tries to blend fullscreen-style game performance with some modern desktop and presentation behavior. People usually turn it off only when a specific game behaves badly with it.",
+          "TweakId": "privacy.disable-activity-history",
+          "Name": "Windows Activity History",
+          "Category": "Privacy",
+          "Description": "Windows can keep track of what you did on the device and can upload some of that activity so it can appear across devices. These policy values decide whether that activity feed can exist, be published, and be uploaded.",
+          "FriendlyDescription": "Windows can keep track of what you did on the device and can upload some of that activity so it can appear across devices. These policy values decide whether that activity feed can exist, be published, and be uploaded.",
           "RegistryPath": "",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
@@ -1430,22 +639,22 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Fullscreen Optimizations is a Windows feature that tries to blend fullscreen-style game performance with some modern desktop and presentation behavior. People usually turn it off only when a specific game behaves badly with it. Evidence: The older reversible VM probe still covers missing -> 2/2/1/1 -> missing. The 2026-03-26 targeted Procmon and canonical Ghidra passes add a current-build svchost.exe read plus direct ResourcePolicyServer code-side proof, and the later automated follow-up no... Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: Windows can keep track of what you did on the device and can upload some of that activity so it can appear across devices. These policy values decide whether that activity feed can exist, be published, and be uploaded. Evidence: The local official Microsoft ADMX file names the same policy key and all three value names used by the app, and it confirms the shared 1/0 mapping. Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "The older reversible VM probe still covers missing -> 2/2/1/1 -> missing. The 2026-03-26 targeted Procmon and canonical Ghidra passes add a current-build svchost.exe read plus direct ResourcePolicyServer code-side proof, and the later automated follow-up no...",
-              "Source": "Validation proof source: research/notes/fullscreen-optimizations-procmon-validation-20260326.md"
+              "Summary": "The local official Microsoft ADMX file names the same policy key and all three value names used by the app, and it confirms the shared 1/0 mapping.",
+              "Source": "Validation proof source: evidence/files/external/c/WINDOWS/PolicyDefinitions/OSPolicy.admx"
             },
             {
               "Key": "runtime",
               "Label": "RUNTIME",
               "State": "ready",
-              "Summary": "A Win25H2Clean Procmon pass around Gaming and Advanced Graphics triggers captured svchost.exe querying HKCU\\System\\GameConfigStore\\GameDVR_DXGIHonorFSEWindowsCompatible with Data: 1 while the current tuple was applied.",
-              "Source": "Procmon capture - svchost.exe GameConfigStore fullscreen tuple read: evidence/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-diag.txt and evidence/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-diag.hits.csv"
+              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+              "Source": ""
             },
             {
               "Key": "source",
@@ -1469,13 +678,8 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Win-Config",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\win-config\\batch-01.md#system.disable-fullscreen-optimizations",
-              "Kind": "Docs"
-            },
-            {
-              "Title": "Docs: System (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\system\\system.md",
+              "Title": "Docs: Privacy (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\privacy\\privacy-verified.md",
               "Kind": "Docs"
             }
           ]
@@ -1484,7 +688,7 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Detected 3 of 4 values (matches: 0, missing: 1).",
+            "StatusMessage": "Detected 0 of 3 values (matches: 0, missing: 3).",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Unknown",
             "TargetValue": "Multiple values",
@@ -1496,8 +700,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 3 of 4 values (matches: 0, missing: 1).\nEntries:\n- HKCU\\System\\GameConfigStore\\GameDVR_DXGIHonorFSEWindowsCompatible: 0 -> 1\n- HKCU\\System\\GameConfigStore\\GameDVR_FSEBehavior: missing\n- HKCU\\System\\GameConfigStore\\GameDVR_FSEBehaviorMode: 0 -> 2\n- HKCU\\System\\GameConfigStore\\GameDVR_HonorUserFSEBehaviorMode: 0 -> 1",
-                "TimestampText": "00:29:37"
+                "Message": "Detected 0 of 3 values (matches: 0, missing: 3).\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\EnableActivityFeed: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\PublishUserActivities: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\UploadUserActivities: missing",
+                "TimestampText": "00:36:17"
               },
               {
                 "Action": "Apply",
@@ -1534,20 +738,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 3 of 4 values (matches: 0, missing: 1).\nEntries:\n- HKCU\\System\\GameConfigStore\\GameDVR_DXGIHonorFSEWindowsCompatible: 0 -> 1\n- HKCU\\System\\GameConfigStore\\GameDVR_FSEBehavior: missing\n- HKCU\\System\\GameConfigStore\\GameDVR_FSEBehaviorMode: 0 -> 2\n- HKCU\\System\\GameConfigStore\\GameDVR_HonorUserFSEBehaviorMode: 0 -> 1",
-                "TimestampText": "00:29:37"
+                "Message": "Detected 0 of 3 values (matches: 0, missing: 3).\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\EnableActivityFeed: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\PublishUserActivities: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\UploadUserActivities: missing",
+                "TimestampText": "00:36:17"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Updated 4 values.",
-                "TimestampText": "00:29:37"
+                "Message": "Updated 3 values.",
+                "TimestampText": "00:36:20"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
                 "Message": "Verified desired values.",
-                "TimestampText": "00:29:37"
+                "TimestampText": "00:36:20"
               },
               {
                 "Action": "Rollback",
@@ -1572,33 +776,33 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 3 of 4 values (matches: 0, missing: 1).\nEntries:\n- HKCU\\System\\GameConfigStore\\GameDVR_DXGIHonorFSEWindowsCompatible: 0 -> 1\n- HKCU\\System\\GameConfigStore\\GameDVR_FSEBehavior: missing\n- HKCU\\System\\GameConfigStore\\GameDVR_FSEBehaviorMode: 0 -> 2\n- HKCU\\System\\GameConfigStore\\GameDVR_HonorUserFSEBehaviorMode: 0 -> 1",
-                "TimestampText": "00:29:37"
+                "Message": "Detected 0 of 3 values (matches: 0, missing: 3).\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\EnableActivityFeed: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\PublishUserActivities: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\UploadUserActivities: missing",
+                "TimestampText": "00:36:17"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Updated 4 values.",
-                "TimestampText": "00:29:37"
+                "Message": "Updated 3 values.",
+                "TimestampText": "00:36:20"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
                 "Message": "Verified desired values.",
-                "TimestampText": "00:29:37"
+                "TimestampText": "00:36:20"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "00:29:38"
+                "TimestampText": "00:36:20"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Detected 3 of 4 values (matches: 0, missing: 1).",
+            "StatusMessage": "Detected 0 of 3 values (matches: 0, missing: 3).",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Multiple values",
             "TargetValue": "Multiple values",
@@ -1610,37 +814,823 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 3 of 4 values (matches: 0, missing: 1).\nEntries:\n- HKCU\\System\\GameConfigStore\\GameDVR_DXGIHonorFSEWindowsCompatible: 0 -> 1\n- HKCU\\System\\GameConfigStore\\GameDVR_FSEBehavior: missing\n- HKCU\\System\\GameConfigStore\\GameDVR_FSEBehaviorMode: 0 -> 2\n- HKCU\\System\\GameConfigStore\\GameDVR_HonorUserFSEBehaviorMode: 0 -> 1",
-                "TimestampText": "00:29:38"
+                "Message": "Detected 0 of 3 values (matches: 0, missing: 3).\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\EnableActivityFeed: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\PublishUserActivities: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\UploadUserActivities: missing",
+                "TimestampText": "00:36:20"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Updated 4 values.",
-                "TimestampText": "00:29:37"
+                "Message": "Updated 3 values.",
+                "TimestampText": "00:36:20"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
                 "Message": "Verified desired values.",
-                "TimestampText": "00:29:37"
+                "TimestampText": "00:36:20"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "00:29:38"
+                "TimestampText": "00:36:20"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T07:29:37.8826163+00:00",
-        "CompletedAtUtc": "2026-05-07T07:29:38.148381+00:00"
+        "StartedAtUtc": "2026-05-07T07:36:17.6072297+00:00",
+        "CompletedAtUtc": "2026-05-07T07:36:20.7655061+00:00"
       },
-      "qa_tweak_id": "system.disable-fullscreen-optimizations",
-      "candidate_id": "system.disable-fullscreen-optimizations",
-      "card_name": "Fullscreen Optimizations",
-      "documentation": "research/records/system.disable-fullscreen-optimizations.review.json"
+      "qa_tweak_id": "privacy.disable-activity-history",
+      "candidate_id": "privacy.disable-activity-history",
+      "card_name": "Windows Activity History",
+      "documentation": "research/records/privacy.disable-activity-history.json"
+    },
+    {
+      "tweak_id": "privacy.disable-app-diagnostics",
+      "host_exit": 0,
+      "execution_exit": 0,
+      "payload_status": "completed",
+      "report_app_success": true,
+      "report_success": true,
+      "report_status": "ok",
+      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
+      "report_contract_status": "ok",
+      "report_contract_summary": "QA card snapshot contract passed.",
+      "report_contract_failures": [],
+      "report_card_present": true,
+      "report_card_has_claim_boundary": true,
+      "report_card_present_fields": [
+        "TweakId",
+        "Name",
+        "Category",
+        "EvidenceClass",
+        "ResearchStatus",
+        "RollbackSnapshotState",
+        "HasClaimBoundary",
+        "WhatWeKnowSummary",
+        "WhatWeDoNotClaimSummary",
+        "ProofLanes"
+      ],
+      "report_card_missing_fields": [],
+      "report_card_proof_lanes": [
+        "docs",
+        "runtime",
+        "source",
+        "rollback"
+      ],
+      "report_card_missing_proof_lanes": [],
+      "report": {
+        "TweakId": "privacy.disable-app-diagnostics",
+        "TweakName": "App Diagnostic Information Access",
+        "Success": true,
+        "Status": "ok",
+        "Summary": "Apply/verify path completed and rollback restored the tweak.",
+        "RollbackRequested": true,
+        "Card": {
+          "TweakId": "privacy.disable-app-diagnostics",
+          "Name": "App Diagnostic Information Access",
+          "Category": "Privacy",
+          "Description": "Some Windows apps can request diagnostic information about other apps. This policy decides whether apps are user-controlled, always allowed, or always denied.",
+          "FriendlyDescription": "Some Windows apps can request diagnostic information about other apps. This policy decides whether apps are user-controlled, always allowed, or always denied.",
+          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsGetDiagnosticInfo",
+          "EvidenceClass": "A",
+          "EvidenceClassTitle": "Cross-Layer Verified",
+          "ResearchStatus": "PROMOTED",
+          "IsMutationAllowed": true,
+          "RollbackSnapshotState": "ready",
+          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
+          "HasClaimBoundary": true,
+          "WhatWeKnowSummary": "Claim: Some Windows apps can request diagnostic information about other apps. This policy decides whether apps are user-controlled, always allowed, or always denied. Evidence: The local official Microsoft ADMX file names the same AppPrivacy machine policy surface used by the app. The paired ADML help text documents the User in control, Force Allow, and Force Deny states for this enum, and the app uses Force Deny (2). Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
+          "ProofLanes": [
+            {
+              "Key": "docs",
+              "Label": "DOCS",
+              "State": "ready",
+              "Summary": "The local official Microsoft ADMX file names the same AppPrivacy machine policy surface used by the app. The paired ADML help text documents the User in control, Force Allow, and Force Deny states for this enum, and the app uses Force Deny (2).",
+              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/AppPrivacy.admx"
+            },
+            {
+              "Key": "runtime",
+              "Label": "RUNTIME",
+              "State": "ready",
+              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+              "Source": ""
+            },
+            {
+              "Key": "source",
+              "Label": "SOURCE",
+              "State": "ready",
+              "Summary": "No upstream nohuto source link is attached to this record.",
+              "Source": ""
+            },
+            {
+              "Key": "rollback",
+              "Label": "ROLLBACK",
+              "State": "ready",
+              "Summary": "Rollback: Verified via record-restore-story.",
+              "Source": "record-restore-story"
+            }
+          ],
+          "ReferenceLinks": [
+            {
+              "Title": "Docs: Details (missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
+              "Kind": "Details"
+            },
+            {
+              "Title": "Docs: Privacy (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\privacy\\privacy-verified.md",
+              "Kind": "Docs"
+            }
+          ]
+        },
+        "Stages": [
+          {
+            "Stage": "detect-before",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Force deny'.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Force deny",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": false,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Force deny'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsGetDiagnosticInfo: missing -> 2",
+                "TimestampText": "00:36:26"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "apply",
+            "AppliedStatus": "Applied",
+            "StatusMessage": "Run completed.",
+            "OutcomeSummary": "Apply - Success",
+            "CurrentValue": "Force deny",
+            "TargetValue": "Force deny",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Force deny'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsGetDiagnosticInfo: missing -> 2",
+                "TimestampText": "00:36:27"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Force deny'.",
+                "TimestampText": "00:36:29"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Force deny'.",
+                "TimestampText": "00:36:29"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Not required",
+                "Message": "Step not executed.",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "rollback",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Rolled back registry values.",
+            "OutcomeSummary": "Rollback - Rolled Back",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Force deny",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Force deny'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsGetDiagnosticInfo: missing -> 2",
+                "TimestampText": "00:36:27"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Force deny'.",
+                "TimestampText": "00:36:29"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Force deny'.",
+                "TimestampText": "00:36:29"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "00:36:29"
+              }
+            ]
+          },
+          {
+            "Stage": "detect-after",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Force deny'.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Force deny",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Force deny'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsGetDiagnosticInfo: missing -> 2",
+                "TimestampText": "00:36:30"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Force deny'.",
+                "TimestampText": "00:36:29"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Force deny'.",
+                "TimestampText": "00:36:29"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "00:36:29"
+              }
+            ]
+          }
+        ],
+        "StartedAtUtc": "2026-05-07T07:36:26.9817975+00:00",
+        "CompletedAtUtc": "2026-05-07T07:36:30.0883628+00:00"
+      },
+      "qa_tweak_id": "privacy.disable-app-diagnostics",
+      "candidate_id": "privacy.disable-app-diagnostics",
+      "card_name": "App Diagnostic Information Access",
+      "documentation": "research/records/privacy.disable-app-diagnostics.json"
+    },
+    {
+      "tweak_id": "privacy.disable-app-suggestions",
+      "host_exit": 0,
+      "execution_exit": 0,
+      "payload_status": "completed",
+      "report_app_success": true,
+      "report_success": true,
+      "report_status": "ok",
+      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
+      "report_contract_status": "ok",
+      "report_contract_summary": "QA card snapshot contract passed.",
+      "report_contract_failures": [],
+      "report_card_present": true,
+      "report_card_has_claim_boundary": true,
+      "report_card_present_fields": [
+        "TweakId",
+        "Name",
+        "Category",
+        "EvidenceClass",
+        "ResearchStatus",
+        "RollbackSnapshotState",
+        "HasClaimBoundary",
+        "WhatWeKnowSummary",
+        "WhatWeDoNotClaimSummary",
+        "ProofLanes"
+      ],
+      "report_card_missing_fields": [],
+      "report_card_proof_lanes": [
+        "docs",
+        "runtime",
+        "source",
+        "rollback"
+      ],
+      "report_card_missing_proof_lanes": [],
+      "report": {
+        "TweakId": "privacy.disable-app-suggestions",
+        "TweakName": "App Suggestions in Start",
+        "Success": true,
+        "Status": "ok",
+        "Summary": "Apply/verify path completed and rollback restored the tweak.",
+        "RollbackRequested": true,
+        "Card": {
+          "TweakId": "privacy.disable-app-suggestions",
+          "Name": "App Suggestions in Start",
+          "Category": "Privacy",
+          "Description": "Windows can suggest promoted apps and related content in places like the Start menu. People often turn this off when they want a cleaner Start experience.",
+          "FriendlyDescription": "Windows can suggest promoted apps and related content in places like the Start menu. People often turn this off when they want a cleaner Start experience.",
+          "RegistryPath": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\ContentDeliveryManager\\SystemPaneSuggestionsEnabled",
+          "EvidenceClass": "A",
+          "EvidenceClassTitle": "Cross-Layer Verified",
+          "ResearchStatus": "PROMOTED",
+          "IsMutationAllowed": true,
+          "RollbackSnapshotState": "ready",
+          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
+          "HasClaimBoundary": true,
+          "WhatWeKnowSummary": "Claim: Windows can suggest promoted apps and related content in places like the Start menu. People often turn this off when they want a cleaner Start experience. Evidence: Validated against Microsoft Learn VDI optimization guidance that documents the same user-side ContentDeliveryManager suggestion value. The local nohuto mirror also captures the related CloudContent policy name and the observed registry setting in the source... Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
+          "ProofLanes": [
+            {
+              "Key": "docs",
+              "Label": "DOCS",
+              "State": "ready",
+              "Summary": "Validated against Microsoft Learn VDI optimization guidance that documents the same user-side ContentDeliveryManager suggestion value. The local nohuto mirror also captures the related CloudContent policy name and the observed registry setting in the source...",
+              "Source": "Validation proof source: https://learn.microsoft.com/ga-ie/windows-server/remote/remote-desktop-services/remote-desktop-services-vdi-optimize-configuration"
+            },
+            {
+              "Key": "runtime",
+              "Label": "RUNTIME",
+              "State": "ready",
+              "Summary": "The local nohuto mirror records the CloudContent policy name DisableThirdPartySuggestions and also shows the observed user-side ContentDeliveryManager setting SystemPaneSuggestionsEnabled in the registry dumps.",
+              "Source": "nohuto mirror - app suggestions registry evidence: research/_source-mirrors/win-config/privacy/desc.md and research/_source-mirrors/win-registry/records/23H2.txt and research/_source-mirrors/win-registry/records/24H2.txt"
+            },
+            {
+              "Key": "source",
+              "Label": "SOURCE",
+              "State": "ready",
+              "Summary": "No upstream nohuto source link is attached to this record.",
+              "Source": ""
+            },
+            {
+              "Key": "rollback",
+              "Label": "ROLLBACK",
+              "State": "ready",
+              "Summary": "Rollback: Verified via record-restore-story.",
+              "Source": "record-restore-story"
+            }
+          ],
+          "ReferenceLinks": [
+            {
+              "Title": "Docs: Details (missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
+              "Kind": "Details"
+            },
+            {
+              "Title": "Docs: Privacy (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\privacy\\privacy-verified.md",
+              "Kind": "Docs"
+            }
+          ]
+        },
+        "Stages": [
+          {
+            "Stage": "detect-before",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Current value is 1.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "1",
+            "TargetValue": "0 (0x0)",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": false,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current value is 1.",
+                "TimestampText": "00:36:36"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "apply",
+            "AppliedStatus": "Applied",
+            "StatusMessage": "Run completed.",
+            "OutcomeSummary": "Apply - Success",
+            "CurrentValue": "0 (0x0)",
+            "TargetValue": "0 (0x0)",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current value is 1.",
+                "TimestampText": "00:36:36"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Set value to 0.",
+                "TimestampText": "00:36:36"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified desired value.",
+                "TimestampText": "00:36:36"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Not required",
+                "Message": "Step not executed.",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "rollback",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Rolled back to 1.",
+            "OutcomeSummary": "Rollback - Rolled Back",
+            "CurrentValue": "0 (0x0)",
+            "TargetValue": "0 (0x0)",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current value is 1.",
+                "TimestampText": "00:36:36"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Set value to 0.",
+                "TimestampText": "00:36:36"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified desired value.",
+                "TimestampText": "00:36:36"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back to 1.",
+                "TimestampText": "00:36:36"
+              }
+            ]
+          },
+          {
+            "Stage": "detect-after",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Current value is 1.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "1",
+            "TargetValue": "0 (0x0)",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current value is 1.",
+                "TimestampText": "00:36:36"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Set value to 0.",
+                "TimestampText": "00:36:36"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified desired value.",
+                "TimestampText": "00:36:36"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back to 1.",
+                "TimestampText": "00:36:36"
+              }
+            ]
+          }
+        ],
+        "StartedAtUtc": "2026-05-07T07:36:36.346436+00:00",
+        "CompletedAtUtc": "2026-05-07T07:36:36.6412769+00:00"
+      },
+      "qa_tweak_id": "privacy.disable-app-suggestions",
+      "candidate_id": "privacy.disable-app-suggestions",
+      "card_name": "App Suggestions in Start",
+      "documentation": "research/records/privacy.disable-app-suggestions.review.json"
+    },
+    {
+      "tweak_id": "privacy.disable-appcompat-engine.policy",
+      "host_exit": 0,
+      "execution_exit": 0,
+      "payload_status": "completed",
+      "report_app_success": true,
+      "report_success": true,
+      "report_status": "ok",
+      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
+      "report_contract_status": "ok",
+      "report_contract_summary": "QA card snapshot contract passed.",
+      "report_contract_failures": [],
+      "report_card_present": true,
+      "report_card_has_claim_boundary": true,
+      "report_card_present_fields": [
+        "TweakId",
+        "Name",
+        "Category",
+        "EvidenceClass",
+        "ResearchStatus",
+        "RollbackSnapshotState",
+        "HasClaimBoundary",
+        "WhatWeKnowSummary",
+        "WhatWeDoNotClaimSummary",
+        "ProofLanes"
+      ],
+      "report_card_missing_fields": [],
+      "report_card_proof_lanes": [
+        "docs",
+        "runtime",
+        "source",
+        "rollback"
+      ],
+      "report_card_missing_proof_lanes": [],
+      "report": {
+        "TweakId": "privacy.disable-appcompat-engine.policy",
+        "TweakName": "Disable Application Compatibility Engine and SwitchBack",
+        "Success": true,
+        "Status": "ok",
+        "Summary": "Apply/verify path completed and rollback restored the tweak.",
+        "RollbackRequested": true,
+        "Card": {
+          "TweakId": "privacy.disable-appcompat-engine.policy",
+          "Name": "Disable Application Compatibility Engine and SwitchBack",
+          "Category": "Privacy",
+          "Description": "Windows includes an Application Compatibility Engine that checks a database every time an app starts and may apply compatibility fixes. SwitchBack allows apps that detect Windows Vista or later to also receive fixes designed for older OS versions. These two policies let you disable both behaviors.",
+          "FriendlyDescription": "Windows includes an Application Compatibility Engine that checks a database every time an app starts and may apply compatibility fixes. SwitchBack allows apps that detect Windows Vista or later to also receive fixes designed for older OS versions. These two policies let you disable both behaviors.",
+          "RegistryPath": "",
+          "EvidenceClass": "A",
+          "EvidenceClassTitle": "Cross-Layer Verified",
+          "ResearchStatus": "PROMOTED",
+          "IsMutationAllowed": true,
+          "RollbackSnapshotState": "ready",
+          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
+          "HasClaimBoundary": true,
+          "WhatWeKnowSummary": "Claim: Windows includes an Application Compatibility Engine that checks a database every time an app starts and may apply compatibility fixes. SwitchBack allows apps that detect Windows Vista or later to also receive fixes designed for older OS versions. These two policies let you disable both behaviors. Evidence: Local official AppCompat.admx and AppCompat.adml files document the exact SbEnable and DisableEngine policy surfaces. VM Procmon capture on 2026-03-26 in Win25H2Clean then confirmed direct writes and read-backs for SbEnable=REG_DWORD 0x0 and DisableEngine=R... Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
+          "ProofLanes": [
+            {
+              "Key": "docs",
+              "Label": "DOCS",
+              "State": "ready",
+              "Summary": "Local official AppCompat.admx and AppCompat.adml files document the exact SbEnable and DisableEngine policy surfaces. VM Procmon capture on 2026-03-26 in Win25H2Clean then confirmed direct writes and read-backs for SbEnable=REG_DWORD 0x0 and DisableEngine=R...",
+              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/AppCompat.admx"
+            },
+            {
+              "Key": "runtime",
+              "Label": "RUNTIME",
+              "State": "ready",
+              "Summary": "VM reversible Procmon capture on 2026-03-26 in Win25H2Clean. powershell.exe created HKLM/Software/Policies/Microsoft/Windows/AppCompat, wrote DisableEngine=REG_DWORD 0x1 and SbEnable=REG_DWORD 0x0, and reg.exe queried both values successfully. The probe res...",
+              "Source": "VM Procmon capture - AppCompat policy path bundle: evidence/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml and evidence/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-filtered.hits.csv"
+            },
+            {
+              "Key": "source",
+              "Label": "SOURCE",
+              "State": "ready",
+              "Summary": "No upstream nohuto source link is attached to this record.",
+              "Source": ""
+            },
+            {
+              "Key": "rollback",
+              "Label": "ROLLBACK",
+              "State": "ready",
+              "Summary": "Rollback: Verified via record-restore-story.",
+              "Source": "record-restore-story"
+            }
+          ],
+          "ReferenceLinks": [
+            {
+              "Title": "Docs: Details (missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
+              "Kind": "Details"
+            },
+            {
+              "Title": "Docs: Privacy (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\privacy\\privacy-verified.md",
+              "Kind": "Docs"
+            }
+          ]
+        },
+        "Stages": [
+          {
+            "Stage": "detect-before",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Detected 0 of 2 values (matches: 0, missing: 2).",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Unknown",
+            "TargetValue": "Multiple values",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": false,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Detected 0 of 2 values (matches: 0, missing: 2).\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat\\DisableEngine: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat\\SbEnable: missing",
+                "TimestampText": "00:36:42"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "apply",
+            "AppliedStatus": "Applied",
+            "StatusMessage": "Run completed.",
+            "OutcomeSummary": "Apply - Success",
+            "CurrentValue": "Multiple values",
+            "TargetValue": "Multiple values",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Detected 0 of 2 values (matches: 0, missing: 2).\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat\\DisableEngine: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat\\SbEnable: missing",
+                "TimestampText": "00:36:42"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Updated 2 values.",
+                "TimestampText": "00:36:45"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified desired values.",
+                "TimestampText": "00:36:45"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Not required",
+                "Message": "Step not executed.",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "rollback",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Rolled back registry values.",
+            "OutcomeSummary": "Rollback - Rolled Back",
+            "CurrentValue": "Multiple values",
+            "TargetValue": "Multiple values",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Detected 0 of 2 values (matches: 0, missing: 2).\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat\\DisableEngine: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat\\SbEnable: missing",
+                "TimestampText": "00:36:42"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Updated 2 values.",
+                "TimestampText": "00:36:45"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified desired values.",
+                "TimestampText": "00:36:45"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "00:36:45"
+              }
+            ]
+          },
+          {
+            "Stage": "detect-after",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Detected 0 of 2 values (matches: 0, missing: 2).",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Multiple values",
+            "TargetValue": "Multiple values",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Detected 0 of 2 values (matches: 0, missing: 2).\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat\\DisableEngine: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat\\SbEnable: missing",
+                "TimestampText": "00:36:45"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Updated 2 values.",
+                "TimestampText": "00:36:45"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified desired values.",
+                "TimestampText": "00:36:45"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "00:36:45"
+              }
+            ]
+          }
+        ],
+        "StartedAtUtc": "2026-05-07T07:36:42.7713571+00:00",
+        "CompletedAtUtc": "2026-05-07T07:36:45.8619619+00:00"
+      },
+      "qa_tweak_id": "privacy.disable-appcompat-engine.policy",
+      "candidate_id": "privacy.disable-appcompat-engine.policy",
+      "card_name": "Disable Application Compatibility Engine and SwitchBack",
+      "documentation": "research/records/privacy.disable-appcompat-engine.policy.review.json"
     }
   ],
   "summary": {
@@ -1649,7 +1639,7 @@
     "live_success_count": 5,
     "live_failure_count": 0,
     "categories": [
-      "System"
+      "Privacy"
     ]
   }
 }

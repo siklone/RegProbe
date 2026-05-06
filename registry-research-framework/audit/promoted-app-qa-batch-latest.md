@@ -1,7 +1,7 @@
 # Promoted App QA Batch
 
 - Status: PASS
-- Generated UTC: 2026-05-06T21:28:55Z
+- Generated UTC: 2026-05-06T21:36:02Z
 - Catalog candidates: 242
 - Selected candidates: 5
 - Planned apply-allowed candidates: 5
@@ -10,41 +10,41 @@
 
 ## Selected Candidates
 
-- `system.bsod-display-parameters` | Display Blue Screen Parameters | System
-  docs: `research/records/system.bsod-display-parameters.review.json`
+- `privacy.deny-app-access.policy` | App capability access policies | Privacy
+  docs: `research/records/privacy.deny-app-access.policy.review.json`
   rollback: default=true | previous=true
   card snapshot: claim_boundary=true | fields=TweakId, Name, Category, EvidenceClass, ResearchStatus, RollbackSnapshotState, HasClaimBoundary, WhatWeKnowSummary, WhatWeDoNotClaimSummary, ProofLanes | lanes=docs, runtime, source, rollback
-- `system.disable-auto-maintenance` | Automatic Maintenance | System
-  docs: `research/records/system.disable-auto-maintenance.review.json`
+- `privacy.disable-activity-history` | Windows Activity History | Privacy
+  docs: `research/records/privacy.disable-activity-history.json`
   rollback: default=true | previous=true
   card snapshot: claim_boundary=true | fields=TweakId, Name, Category, EvidenceClass, ResearchStatus, RollbackSnapshotState, HasClaimBoundary, WhatWeKnowSummary, WhatWeDoNotClaimSummary, ProofLanes | lanes=docs, runtime, source, rollback
-- `system.disable-background-gp-updates` | Background Group Policy Refresh | System
-  docs: `research/records/system.disable-background-gp-updates.json`
+- `privacy.disable-app-diagnostics` | App Diagnostic Information Access | Privacy
+  docs: `research/records/privacy.disable-app-diagnostics.json`
   rollback: default=true | previous=true
   card snapshot: claim_boundary=true | fields=TweakId, Name, Category, EvidenceClass, ResearchStatus, RollbackSnapshotState, HasClaimBoundary, WhatWeKnowSummary, WhatWeDoNotClaimSummary, ProofLanes | lanes=docs, runtime, source, rollback
-- `system.disable-clipboard-redirection` | RDP Clipboard Redirection | System
-  docs: `research/records/system.disable-clipboard-redirection.json`
+- `privacy.disable-app-suggestions` | App Suggestions in Start | Privacy
+  docs: `research/records/privacy.disable-app-suggestions.review.json`
   rollback: default=true | previous=true
   card snapshot: claim_boundary=true | fields=TweakId, Name, Category, EvidenceClass, ResearchStatus, RollbackSnapshotState, HasClaimBoundary, WhatWeKnowSummary, WhatWeDoNotClaimSummary, ProofLanes | lanes=docs, runtime, source, rollback
-- `system.disable-fullscreen-optimizations` | Fullscreen Optimizations | System
-  docs: `research/records/system.disable-fullscreen-optimizations.review.json`
+- `privacy.disable-appcompat-engine.policy` | Disable Application Compatibility Engine and SwitchBack | Privacy
+  docs: `research/records/privacy.disable-appcompat-engine.policy.review.json`
   rollback: default=true | previous=true
   card snapshot: claim_boundary=true | fields=TweakId, Name, Category, EvidenceClass, ResearchStatus, RollbackSnapshotState, HasClaimBoundary, WhatWeKnowSummary, WhatWeDoNotClaimSummary, ProofLanes | lanes=docs, runtime, source, rollback
 
 ## Live Results
 
-- `system.bsod-display-parameters` | success=true | status=ok
+- `privacy.deny-app-access.policy` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
   card contract: ok | claim_boundary=true | lanes=docs, runtime, source, rollback
-- `system.disable-auto-maintenance` | success=true | status=ok
+- `privacy.disable-activity-history` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
   card contract: ok | claim_boundary=true | lanes=docs, runtime, source, rollback
-- `system.disable-background-gp-updates` | success=true | status=ok
+- `privacy.disable-app-diagnostics` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
   card contract: ok | claim_boundary=true | lanes=docs, runtime, source, rollback
-- `system.disable-clipboard-redirection` | success=true | status=ok
+- `privacy.disable-app-suggestions` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
   card contract: ok | claim_boundary=true | lanes=docs, runtime, source, rollback
-- `system.disable-fullscreen-optimizations` | success=true | status=ok
+- `privacy.disable-appcompat-engine.policy` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
   card contract: ok | claim_boundary=true | lanes=docs, runtime, source, rollback
