@@ -1,11 +1,11 @@
 {
-  "generated_utc": "2026-05-06T22:00:04Z",
-  "history_entry_count": 30,
+  "generated_utc": "2026-05-06T22:05:12Z",
+  "history_entry_count": 32,
   "catalog_candidate_count": 242,
-  "covered_count": 94,
-  "uncovered_count": 148,
+  "covered_count": 99,
+  "uncovered_count": 143,
   "summary": {
-    "coverage_percent": 38.84,
+    "coverage_percent": 40.91,
     "covered_categories": {
       "Audio": 2,
       "Cleanup": 1,
@@ -16,7 +16,7 @@
       "Performance": 3,
       "Peripheral": 2,
       "Power": 7,
-      "Privacy": 18,
+      "Privacy": 23,
       "Security": 7,
       "System": 16,
       "Visibility": 11
@@ -29,66 +29,13 @@
       "Notifications": 2,
       "Peripheral": 1,
       "Power": 3,
-      "Privacy": 49,
+      "Privacy": 44,
       "Security": 14,
       "System": 36,
       "Visibility": 12
     }
   },
   "recommended_next_batches": [
-    {
-      "category": "Privacy",
-      "covered_count": 18,
-      "uncovered_count": 49,
-      "coverage_percent": 26.87,
-      "batch_size": 5,
-      "tweak_ids": [
-        "privacy.disable-biometrics-logon",
-        "privacy.disable-camera",
-        "privacy.disable-cli-telemetry",
-        "privacy.disable-consumer-account-content",
-        "privacy.disable-copilot"
-      ],
-      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-biometrics-logon --id privacy.disable-camera --id privacy.disable-cli-telemetry --id privacy.disable-consumer-account-content --id privacy.disable-copilot",
-      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-biometrics-logon --id privacy.disable-camera --id privacy.disable-cli-telemetry --id privacy.disable-consumer-account-content --id privacy.disable-copilot --run-kvm --json",
-      "candidates": [
-        {
-          "tweak_id": "privacy.disable-biometrics-logon",
-          "record_id": "privacy.disable-biometrics-logon",
-          "category": "Privacy",
-          "name": "Biometric Sign-in",
-          "documentation": "research/records/privacy.disable-biometrics-logon.json"
-        },
-        {
-          "tweak_id": "privacy.disable-camera",
-          "record_id": "privacy.disable-camera",
-          "category": "Privacy",
-          "name": "Camera Device Use",
-          "documentation": "research/records/privacy.disable-camera.json"
-        },
-        {
-          "tweak_id": "privacy.disable-cli-telemetry",
-          "record_id": "privacy.disable-cli-telemetry",
-          "category": "Privacy",
-          "name": "PowerShell and .NET CLI Telemetry Opt-Out",
-          "documentation": "research/records/privacy.disable-cli-telemetry.json"
-        },
-        {
-          "tweak_id": "privacy.disable-consumer-account-content",
-          "record_id": "privacy.disable-consumer-account-content",
-          "category": "Privacy",
-          "name": "Cloud Consumer Account State Content",
-          "documentation": "research/records/privacy.disable-consumer-account-content.json"
-        },
-        {
-          "tweak_id": "privacy.disable-copilot",
-          "record_id": "privacy.disable-copilot",
-          "category": "Privacy",
-          "name": "Windows Copilot",
-          "documentation": "research/records/privacy.disable-copilot.json"
-        }
-      ]
-    },
     {
       "category": "System",
       "covered_count": 16,
@@ -245,6 +192,59 @@
           "category": "Security",
           "name": "Windows Update Policy Control",
           "documentation": "research/records/security.disable-windows-update.policy.review.json"
+        }
+      ]
+    },
+    {
+      "category": "Privacy",
+      "covered_count": 23,
+      "uncovered_count": 44,
+      "coverage_percent": 34.33,
+      "batch_size": 5,
+      "tweak_ids": [
+        "privacy.disable-cross-device-experiences.policy",
+        "privacy.disable-device-name-telemetry",
+        "privacy.disable-diagnostic-data-delete",
+        "privacy.disable-diagnostic-data-viewer",
+        "privacy.disable-edge-search-suggestions"
+      ],
+      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-cross-device-experiences.policy --id privacy.disable-device-name-telemetry --id privacy.disable-diagnostic-data-delete --id privacy.disable-diagnostic-data-viewer --id privacy.disable-edge-search-suggestions",
+      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-cross-device-experiences.policy --id privacy.disable-device-name-telemetry --id privacy.disable-diagnostic-data-delete --id privacy.disable-diagnostic-data-viewer --id privacy.disable-edge-search-suggestions --run-kvm --json",
+      "candidates": [
+        {
+          "tweak_id": "privacy.disable-cross-device-experiences.policy",
+          "record_id": "privacy.disable-cross-device-experiences.policy",
+          "category": "Privacy",
+          "name": "Cross-Device Experiences Machine Policy",
+          "documentation": "research/records/privacy.disable-cross-device-experiences.policy.review.json"
+        },
+        {
+          "tweak_id": "privacy.disable-device-name-telemetry",
+          "record_id": "privacy.disable-device-name-telemetry",
+          "category": "Privacy",
+          "name": "Device Name in Diagnostic Data",
+          "documentation": "research/records/privacy.disable-device-name-telemetry.json"
+        },
+        {
+          "tweak_id": "privacy.disable-diagnostic-data-delete",
+          "record_id": "privacy.disable-diagnostic-data-delete",
+          "category": "Privacy",
+          "name": "Diagnostic Data Deletion",
+          "documentation": "research/records/privacy.disable-diagnostic-data-delete.json"
+        },
+        {
+          "tweak_id": "privacy.disable-diagnostic-data-viewer",
+          "record_id": "privacy.disable-diagnostic-data-viewer",
+          "category": "Privacy",
+          "name": "Diagnostic Data Viewer",
+          "documentation": "research/records/privacy.disable-diagnostic-data-viewer.json"
+        },
+        {
+          "tweak_id": "privacy.disable-edge-search-suggestions",
+          "record_id": "privacy.disable-edge-search-suggestions",
+          "category": "Privacy",
+          "name": "Edge Address Bar Suggestions",
+          "documentation": "research/records/privacy.disable-edge-search-suggestions.json"
         }
       ]
     },
@@ -796,6 +796,51 @@
       "category": "Privacy",
       "name": "Biometric Sign-in for Domain Accounts",
       "documentation": "research/records/privacy.disable-biometrics-domain-logon.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "privacy.disable-biometrics-logon",
+      "qa_tweak_id": "privacy.disable-biometrics-logon",
+      "candidate_id": "privacy.disable-biometrics-logon",
+      "category": "Privacy",
+      "name": "Biometric Sign-in",
+      "documentation": "research/records/privacy.disable-biometrics-logon.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "privacy.disable-camera",
+      "qa_tweak_id": "privacy.disable-camera",
+      "candidate_id": "privacy.disable-camera",
+      "category": "Privacy",
+      "name": "Camera Device Use",
+      "documentation": "research/records/privacy.disable-camera.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "privacy.disable-cli-telemetry",
+      "qa_tweak_id": "privacy.disable-cli-telemetry",
+      "candidate_id": "privacy.disable-cli-telemetry",
+      "category": "Privacy",
+      "name": "PowerShell and .NET CLI Telemetry Opt-Out",
+      "documentation": "research/records/privacy.disable-cli-telemetry.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "privacy.disable-consumer-account-content",
+      "qa_tweak_id": "privacy.disable-consumer-account-content",
+      "candidate_id": "privacy.disable-consumer-account-content",
+      "category": "Privacy",
+      "name": "Cloud Consumer Account State Content",
+      "documentation": "research/records/privacy.disable-consumer-account-content.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "privacy.disable-copilot",
+      "qa_tweak_id": "privacy.disable-copilot",
+      "candidate_id": "privacy.disable-copilot",
+      "category": "Privacy",
+      "name": "Windows Copilot",
+      "documentation": "research/records/privacy.disable-copilot.json",
       "latest_report_status": "ok"
     },
     {
@@ -1409,41 +1454,6 @@
       "category": "Power",
       "name": "Games MMCSS Task Profile",
       "documentation": "research/records/power.optimize-gaming-network.json"
-    },
-    {
-      "tweak_id": "privacy.disable-biometrics-logon",
-      "record_id": "privacy.disable-biometrics-logon",
-      "category": "Privacy",
-      "name": "Biometric Sign-in",
-      "documentation": "research/records/privacy.disable-biometrics-logon.json"
-    },
-    {
-      "tweak_id": "privacy.disable-camera",
-      "record_id": "privacy.disable-camera",
-      "category": "Privacy",
-      "name": "Camera Device Use",
-      "documentation": "research/records/privacy.disable-camera.json"
-    },
-    {
-      "tweak_id": "privacy.disable-cli-telemetry",
-      "record_id": "privacy.disable-cli-telemetry",
-      "category": "Privacy",
-      "name": "PowerShell and .NET CLI Telemetry Opt-Out",
-      "documentation": "research/records/privacy.disable-cli-telemetry.json"
-    },
-    {
-      "tweak_id": "privacy.disable-consumer-account-content",
-      "record_id": "privacy.disable-consumer-account-content",
-      "category": "Privacy",
-      "name": "Cloud Consumer Account State Content",
-      "documentation": "research/records/privacy.disable-consumer-account-content.json"
-    },
-    {
-      "tweak_id": "privacy.disable-copilot",
-      "record_id": "privacy.disable-copilot",
-      "category": "Privacy",
-      "name": "Windows Copilot",
-      "documentation": "research/records/privacy.disable-copilot.json"
     },
     {
       "tweak_id": "privacy.disable-cross-device-experiences.policy",

@@ -170,6 +170,7 @@ public sealed class CommandAllowlistSecurityTests
             CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\StorageSense", "/v", "AllowStorageSenseGlobal", "/t", "REG_DWORD", "/d", "0", "/f"),
             CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\StorageSense", "/v", "AllowStorageSenseTemporaryFilesCleanup", "/t", "REG_DWORD", "/d", "0", "/f"),
             CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\CredUI", "/v", "DisablePasswordReveal", "/t", "REG_DWORD", "/d", "1", "/f"),
+            CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Camera", "/v", "AllowCamera", "/t", "REG_DWORD", "/d", "0", "/f"),
             CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy", "/v", "LetAppsAccessAccountInfo", "/t", "REG_DWORD", "/d", "2", "/f"),
             CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy", "/v", "LetAppsAccessBackgroundSpatialPerception", "/t", "REG_DWORD", "/d", "2", "/f"),
             CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy", "/v", "LetAppsAccessCalendar", "/t", "REG_DWORD", "/d", "2", "/f"),

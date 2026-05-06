@@ -151,6 +151,7 @@ public sealed class CommandAllowlist
         {
             AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\SettingSync", valueName, "0", "1", "2");
         }
+        AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Camera", "AllowCamera", "0", "1");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\AppPrivacy", "LetAppsAccessAccountInfo", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\AppPrivacy", "LetAppsAccessBackgroundSpatialPerception", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\AppPrivacy", "LetAppsAccessCalendar", "0", "1", "2");
