@@ -1,11 +1,11 @@
 {
-  "generated_utc": "2026-05-06T21:46:40Z",
-  "history_entry_count": 27,
+  "generated_utc": "2026-05-06T21:49:01Z",
+  "history_entry_count": 28,
   "catalog_candidate_count": 242,
-  "covered_count": 79,
-  "uncovered_count": 163,
+  "covered_count": 84,
+  "uncovered_count": 158,
   "summary": {
-    "coverage_percent": 32.64,
+    "coverage_percent": 34.71,
     "covered_categories": {
       "Audio": 2,
       "Cleanup": 1,
@@ -18,7 +18,7 @@
       "Power": 7,
       "Privacy": 18,
       "Security": 7,
-      "System": 11,
+      "System": 16,
       "Visibility": 6
     },
     "uncovered_categories": {
@@ -31,64 +31,11 @@
       "Power": 3,
       "Privacy": 49,
       "Security": 14,
-      "System": 41,
+      "System": 36,
       "Visibility": 17
     }
   },
   "recommended_next_batches": [
-    {
-      "category": "System",
-      "covered_count": 11,
-      "uncovered_count": 41,
-      "coverage_percent": 21.15,
-      "batch_size": 5,
-      "tweak_ids": [
-        "system.disable-game-recording-broadcasting",
-        "system.disable-jpeg-reduction",
-        "system.disable-restartable-apps",
-        "system.disable-search-highlights-policy",
-        "system.disable-search-remote-queries"
-      ],
-      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id system.disable-game-recording-broadcasting --id system.disable-jpeg-reduction --id system.disable-restartable-apps --id system.disable-search-highlights-policy --id system.disable-search-remote-queries",
-      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id system.disable-game-recording-broadcasting --id system.disable-jpeg-reduction --id system.disable-restartable-apps --id system.disable-search-highlights-policy --id system.disable-search-remote-queries --run-kvm --json",
-      "candidates": [
-        {
-          "tweak_id": "system.disable-game-recording-broadcasting",
-          "record_id": "system.disable-game-recording-broadcasting",
-          "category": "System",
-          "name": "Windows Game Recording and Broadcasting",
-          "documentation": "research/records/system.disable-game-recording-broadcasting.json"
-        },
-        {
-          "tweak_id": "system.disable-jpeg-reduction",
-          "record_id": "system.disable-jpeg-reduction",
-          "category": "System",
-          "name": "Wallpaper JPEG Import Quality",
-          "documentation": "research/records/system.disable-jpeg-reduction.review.json"
-        },
-        {
-          "tweak_id": "system.disable-restartable-apps",
-          "record_id": "system.disable-restartable-apps",
-          "category": "System",
-          "name": "Restart Apps After Sign-In",
-          "documentation": "research/records/system.disable-restartable-apps.review.json"
-        },
-        {
-          "tweak_id": "system.disable-search-highlights-policy",
-          "record_id": "system.disable-search-highlights-policy",
-          "category": "System",
-          "name": "Search Highlights",
-          "documentation": "research/records/system.disable-search-highlights-policy.json"
-        },
-        {
-          "tweak_id": "system.disable-search-remote-queries",
-          "record_id": "system.disable-search-remote-queries",
-          "category": "System",
-          "name": "Remote Windows Search Queries",
-          "documentation": "research/records/system.disable-search-remote-queries.json"
-        }
-      ]
-    },
     {
       "category": "Developer",
       "covered_count": 2,
@@ -245,6 +192,59 @@
           "category": "Privacy",
           "name": "Windows Copilot",
           "documentation": "research/records/privacy.disable-copilot.json"
+        }
+      ]
+    },
+    {
+      "category": "System",
+      "covered_count": 16,
+      "uncovered_count": 36,
+      "coverage_percent": 30.77,
+      "batch_size": 5,
+      "tweak_ids": [
+        "system.disable-search-web-results",
+        "system.disable-storage-sense",
+        "system.disable-storage-sense-temp-cleanup",
+        "system.disable-store-open-with",
+        "system.dwm-disable-overlay-min-fps"
+      ],
+      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id system.disable-search-web-results --id system.disable-storage-sense --id system.disable-storage-sense-temp-cleanup --id system.disable-store-open-with --id system.dwm-disable-overlay-min-fps",
+      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id system.disable-search-web-results --id system.disable-storage-sense --id system.disable-storage-sense-temp-cleanup --id system.disable-store-open-with --id system.dwm-disable-overlay-min-fps --run-kvm --json",
+      "candidates": [
+        {
+          "tweak_id": "system.disable-search-web-results",
+          "record_id": "system.disable-search-web-results",
+          "category": "System",
+          "name": "Web Results in Windows Search",
+          "documentation": "research/records/system.disable-search-web-results.review.json"
+        },
+        {
+          "tweak_id": "system.disable-storage-sense",
+          "record_id": "system.disable-storage-sense",
+          "category": "System",
+          "name": "Storage Sense Automatic Cleanup",
+          "documentation": "research/records/system.disable-storage-sense.json"
+        },
+        {
+          "tweak_id": "system.disable-storage-sense-temp-cleanup",
+          "record_id": "system.disable-storage-sense-temp-cleanup",
+          "category": "System",
+          "name": "Storage Sense Temporary Files Cleanup",
+          "documentation": "research/records/system.disable-storage-sense-temp-cleanup.json"
+        },
+        {
+          "tweak_id": "system.disable-store-open-with",
+          "record_id": "system.disable-store-open-with",
+          "category": "System",
+          "name": "Store in Open With",
+          "documentation": "research/records/system.disable-store-open-with.json"
+        },
+        {
+          "tweak_id": "system.dwm-disable-overlay-min-fps",
+          "record_id": "system.dwm-disable-overlay-min-fps",
+          "category": "System",
+          "name": "DWM Overlay Minimum FPS Check",
+          "documentation": "research/records/system.dwm-disable-overlay-min-fps.json"
         }
       ]
     },
@@ -940,6 +940,51 @@
       "category": "System",
       "name": "Fullscreen Optimizations",
       "documentation": "research/records/system.disable-fullscreen-optimizations.review.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "system.disable-game-recording-broadcasting",
+      "qa_tweak_id": "system.disable-game-recording-broadcasting",
+      "candidate_id": "system.disable-game-recording-broadcasting",
+      "category": "System",
+      "name": "Windows Game Recording and Broadcasting",
+      "documentation": "research/records/system.disable-game-recording-broadcasting.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "system.disable-jpeg-reduction",
+      "qa_tweak_id": "system.disable-jpeg-reduction",
+      "candidate_id": "system.disable-jpeg-reduction",
+      "category": "System",
+      "name": "Wallpaper JPEG Import Quality",
+      "documentation": "research/records/system.disable-jpeg-reduction.review.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "system.disable-restartable-apps",
+      "qa_tweak_id": "system.disable-restartable-apps",
+      "candidate_id": "system.disable-restartable-apps",
+      "category": "System",
+      "name": "Restart Apps After Sign-In",
+      "documentation": "research/records/system.disable-restartable-apps.review.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "system.disable-search-highlights-policy",
+      "qa_tweak_id": "system.disable-search-highlights-policy",
+      "candidate_id": "system.disable-search-highlights-policy",
+      "category": "System",
+      "name": "Search Highlights",
+      "documentation": "research/records/system.disable-search-highlights-policy.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "system.disable-search-remote-queries",
+      "qa_tweak_id": "system.disable-search-remote-queries",
+      "candidate_id": "system.disable-search-remote-queries",
+      "category": "System",
+      "name": "Remote Windows Search Queries",
+      "documentation": "research/records/system.disable-search-remote-queries.json",
       "latest_report_status": "ok"
     },
     {
@@ -1750,41 +1795,6 @@
       "category": "Security",
       "name": "User Account Control Prompting Profile",
       "documentation": "research/records/security.uac-never-notify.json"
-    },
-    {
-      "tweak_id": "system.disable-game-recording-broadcasting",
-      "record_id": "system.disable-game-recording-broadcasting",
-      "category": "System",
-      "name": "Windows Game Recording and Broadcasting",
-      "documentation": "research/records/system.disable-game-recording-broadcasting.json"
-    },
-    {
-      "tweak_id": "system.disable-jpeg-reduction",
-      "record_id": "system.disable-jpeg-reduction",
-      "category": "System",
-      "name": "Wallpaper JPEG Import Quality",
-      "documentation": "research/records/system.disable-jpeg-reduction.review.json"
-    },
-    {
-      "tweak_id": "system.disable-restartable-apps",
-      "record_id": "system.disable-restartable-apps",
-      "category": "System",
-      "name": "Restart Apps After Sign-In",
-      "documentation": "research/records/system.disable-restartable-apps.review.json"
-    },
-    {
-      "tweak_id": "system.disable-search-highlights-policy",
-      "record_id": "system.disable-search-highlights-policy",
-      "category": "System",
-      "name": "Search Highlights",
-      "documentation": "research/records/system.disable-search-highlights-policy.json"
-    },
-    {
-      "tweak_id": "system.disable-search-remote-queries",
-      "record_id": "system.disable-search-remote-queries",
-      "category": "System",
-      "name": "Remote Windows Search Queries",
-      "documentation": "research/records/system.disable-search-remote-queries.json"
     },
     {
       "tweak_id": "system.disable-search-web-results",

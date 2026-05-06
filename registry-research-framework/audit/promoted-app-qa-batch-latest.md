@@ -1,7 +1,7 @@
 # Promoted App QA Batch
 
 - Status: PASS
-- Generated UTC: 2026-05-06T21:46:40Z
+- Generated UTC: 2026-05-06T21:49:01Z
 - Catalog candidates: 242
 - Selected candidates: 5
 - Planned apply-allowed candidates: 5
@@ -10,41 +10,41 @@
 
 ## Selected Candidates
 
-- `privacy.disable-appdeviceinventory.policy` | Disable App Device Inventory Policies | Privacy
-  docs: `research/records/privacy.disable-appdeviceinventory.policy.review.json`
+- `system.disable-game-recording-broadcasting` | Windows Game Recording and Broadcasting | System
+  docs: `research/records/system.disable-game-recording-broadcasting.json`
   rollback: default=true | previous=true
   card snapshot: claim_boundary=true | fields=TweakId, Name, Category, EvidenceClass, ResearchStatus, RollbackSnapshotState, HasClaimBoundary, WhatWeKnowSummary, WhatWeDoNotClaimSummary, ProofLanes | lanes=docs, runtime, source, rollback
-- `privacy.disable-application-telemetry` | Application Compatibility Telemetry | Privacy
-  docs: `research/records/privacy.disable-application-telemetry.json`
+- `system.disable-jpeg-reduction` | Wallpaper JPEG Import Quality | System
+  docs: `research/records/system.disable-jpeg-reduction.review.json`
   rollback: default=true | previous=true
   card snapshot: claim_boundary=true | fields=TweakId, Name, Category, EvidenceClass, ResearchStatus, RollbackSnapshotState, HasClaimBoundary, WhatWeKnowSummary, WhatWeDoNotClaimSummary, ProofLanes | lanes=docs, runtime, source, rollback
-- `privacy.disable-background-apps` | Background App Execution | Privacy
-  docs: `research/records/privacy.disable-background-apps.json`
+- `system.disable-restartable-apps` | Restart Apps After Sign-In | System
+  docs: `research/records/system.disable-restartable-apps.review.json`
   rollback: default=true | previous=true
   card snapshot: claim_boundary=true | fields=TweakId, Name, Category, EvidenceClass, ResearchStatus, RollbackSnapshotState, HasClaimBoundary, WhatWeKnowSummary, WhatWeDoNotClaimSummary, ProofLanes | lanes=docs, runtime, source, rollback
-- `privacy.disable-biometrics` | Windows Biometrics | Privacy
-  docs: `research/records/privacy.disable-biometrics.json`
+- `system.disable-search-highlights-policy` | Search Highlights | System
+  docs: `research/records/system.disable-search-highlights-policy.json`
   rollback: default=true | previous=true
   card snapshot: claim_boundary=true | fields=TweakId, Name, Category, EvidenceClass, ResearchStatus, RollbackSnapshotState, HasClaimBoundary, WhatWeKnowSummary, WhatWeDoNotClaimSummary, ProofLanes | lanes=docs, runtime, source, rollback
-- `privacy.disable-biometrics-domain-logon` | Biometric Sign-in for Domain Accounts | Privacy
-  docs: `research/records/privacy.disable-biometrics-domain-logon.json`
+- `system.disable-search-remote-queries` | Remote Windows Search Queries | System
+  docs: `research/records/system.disable-search-remote-queries.json`
   rollback: default=true | previous=true
   card snapshot: claim_boundary=true | fields=TweakId, Name, Category, EvidenceClass, ResearchStatus, RollbackSnapshotState, HasClaimBoundary, WhatWeKnowSummary, WhatWeDoNotClaimSummary, ProofLanes | lanes=docs, runtime, source, rollback
 
 ## Live Results
 
-- `privacy.disable-appdeviceinventory.policy` | success=true | status=ok
+- `system.disable-game-recording-broadcasting` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
   card contract: ok | claim_boundary=true | lanes=docs, runtime, source, rollback
-- `privacy.disable-application-telemetry` | success=true | status=ok
+- `system.disable-jpeg-reduction` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
   card contract: ok | claim_boundary=true | lanes=docs, runtime, source, rollback
-- `privacy.disable-background-apps` | success=true | status=ok
+- `system.disable-restartable-apps` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
   card contract: ok | claim_boundary=true | lanes=docs, runtime, source, rollback
-- `privacy.disable-biometrics` | success=true | status=ok
+- `system.disable-search-highlights-policy` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
   card contract: ok | claim_boundary=true | lanes=docs, runtime, source, rollback
-- `privacy.disable-biometrics-domain-logon` | success=true | status=ok
+- `system.disable-search-remote-queries` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
   card contract: ok | claim_boundary=true | lanes=docs, runtime, source, rollback
