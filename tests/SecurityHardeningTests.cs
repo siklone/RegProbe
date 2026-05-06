@@ -336,6 +336,32 @@ public sealed class CommandAllowlistSecurityTests
     }
 
     [Fact]
+    public void SecurityPolicyMutations_AreAllowlisted()
+    {
+        var allowlist = CommandAllowlist.CreateDefault();
+        var requests = new[]
+        {
+            CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Notifications", "/v", "DisableEnhancedNotifications", "/t", "REG_DWORD", "/d", "1", "/f"),
+            CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Notifications", "/v", "DisableEnhancedNotifications", "/t", "REG_DWORD", "/d", "0", "/f"),
+            CreateRegRequest("delete", @"HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Notifications", "/v", "DisableEnhancedNotifications", "/f"),
+            CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Policies", "/v", "NtfsDisableEncryption", "/t", "REG_DWORD", "/d", "1", "/f"),
+            CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Policies", "/v", "NtfsDisableEncryption", "/t", "REG_DWORD", "/d", "0", "/f"),
+            CreateRegRequest("delete", @"HKLM\SYSTEM\CurrentControlSet\Policies", "/v", "NtfsDisableEncryption", "/f"),
+            CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization", "/v", "DODownloadMode", "/t", "REG_DWORD", "/d", "0", "/f"),
+            CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization", "/v", "DODownloadMode", "/t", "REG_DWORD", "/d", "100", "/f"),
+            CreateRegRequest("delete", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization", "/v", "DODownloadMode", "/f")
+        };
+
+        foreach (var request in requests)
+        {
+            var allowed = allowlist.IsAllowed(request, out var reason);
+
+            Assert.True(allowed);
+            Assert.Null(reason);
+        }
+    }
+
+    [Fact]
     public void CpuIdleStatesRegistryMutations_AreAllowlisted()
     {
         var allowlist = CommandAllowlist.CreateDefault();

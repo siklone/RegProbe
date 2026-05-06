@@ -1,11 +1,11 @@
 # Promoted App QA Coverage
 
-- Generated UTC: 2026-05-06T19:22:42Z
-- History entries: 17
+- Generated UTC: 2026-05-06T21:17:59Z
+- History entries: 19
 - Promoted app-QA candidates: 242
-- Covered: 54
-- Uncovered: 188
-- Coverage: 22.31%
+- Covered: 59
+- Uncovered: 183
+- Coverage: 24.38%
 
 ## Covered Categories
 
@@ -19,7 +19,7 @@
 - Peripheral: 2
 - Power: 7
 - Privacy: 8
-- Security: 2
+- Security: 7
 - System: 6
 - Visibility: 6
 
@@ -33,15 +33,12 @@
 - Peripheral: 1
 - Power: 3
 - Privacy: 59
-- Security: 19
+- Security: 14
 - System: 46
 - Visibility: 17
 
 ## Recommended Next Batches
 
-- Security: 5 uncovered cards | coverage 9.52%
-  command: `dotnet run --project cli/cli.csproj -- research qa-batch --id security.disable-downloads-blocking --id security.disable-enhanced-defender-notifications --id security.disable-ntfs-encryption --id security.disable-p2p-updates --id security.disable-picture-password`
-  live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id security.disable-downloads-blocking --id security.disable-enhanced-defender-notifications --id security.disable-ntfs-encryption --id security.disable-p2p-updates --id security.disable-picture-password --run-kvm --json`
 - System: 5 uncovered cards | coverage 11.54%
   command: `dotnet run --project cli/cli.csproj -- research qa-batch --id system.bsod-display-parameters --id system.disable-auto-maintenance --id system.disable-background-gp-updates --id system.disable-clipboard-redirection --id system.disable-fullscreen-optimizations`
   live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id system.bsod-display-parameters --id system.disable-auto-maintenance --id system.disable-background-gp-updates --id system.disable-clipboard-redirection --id system.disable-fullscreen-optimizations --run-kvm --json`
@@ -54,6 +51,9 @@
 - Developer: 5 uncovered cards | coverage 22.22%
   command: `dotnet run --project cli/cli.csproj -- research qa-batch --id developer.enable-windows-long-paths --id developer.nodejs-performance --id developer.powershell-execution --id developer.python-path-fix --id developer.ssh-agent-autostart`
   live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id developer.enable-windows-long-paths --id developer.nodejs-performance --id developer.powershell-execution --id developer.python-path-fix --id developer.ssh-agent-autostart --run-kvm --json`
+- Visibility: 5 uncovered cards | coverage 26.09%
+  command: `dotnet run --project cli/cli.csproj -- research qa-batch --id visibility.disable-acrylic-logon --id visibility.disable-common-control-animations --id visibility.disable-first-signin-animation --id visibility.disable-lock-screen-camera --id visibility.disable-lock-screen-changes`
+  live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id visibility.disable-acrylic-logon --id visibility.disable-common-control-animations --id visibility.disable-first-signin-animation --id visibility.disable-lock-screen-camera --id visibility.disable-lock-screen-changes --run-kvm --json`
 
 ## Remaining Uncovered Sample
 

@@ -94,6 +94,7 @@ public sealed class CommandAllowlist
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\DataCollection", "LimitDumpCollection", "0", "1");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\DataCollection", "AllowTelemetry", "0", "1", "3");
         AddRegDwordRule(regAllowlist, @"HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet", "SubmitSamplesConsent", "0", "1", "2", "3");
+        AddRegDwordRule(regAllowlist, @"HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Notifications", "DisableEnhancedNotifications", "0", "1");
         AddRegDwordRule(regAllowlist, @"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "VerboseStatus", "0", "1", "2");
         AddRegSzRule(regAllowlist, @"HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location", "Value", "Allow", "Deny");
         AddRegDwordRule(regAllowlist, @"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock", "AllowDevelopmentWithoutDevLicense", "0", "1", "2");
@@ -237,6 +238,7 @@ public sealed class CommandAllowlist
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\LanmanServer", "MaxSmb2Dialect", "514", "528", "768", "770", "785");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\System", "BlockDomainPicturePassword", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\System", "EnableCdp", "0", "1");
+        AddRegDwordRule(regAllowlist, @"HKLM\SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization", "DODownloadMode", "0", "1", "2", "3", "99", "100");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows NT\CurrentVersion\Software Protection Platform", "NoGenTicket", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\SYSTEM\CurrentControlSet\Services\Beep", "Start", "1", "4");
         AddRegSzRule(regAllowlist, @"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Icons", "29", @"%windir%\System32\shell32.dll,-50");
@@ -265,6 +267,7 @@ public sealed class CommandAllowlist
         AddRegDwordRule(regAllowlist, @"HKLM\System\CurrentControlSet\Control", "RegistrySizeLimit", "0");
         AddRegDwordRule(regAllowlist, @"HKLM\SYSTEM\CurrentControlSet\Control\FileSystem", "NtfsDisable8dot3NameCreation", "0", "1", "2", "3");
         AddRegDwordRule(regAllowlist, @"HKLM\SYSTEM\CurrentControlSet\Control\FileSystem", "NtfsDisableLastAccessUpdate", "0", "1", "2", "3", "-2147483646", "2147483650");
+        AddRegDwordRule(regAllowlist, @"HKLM\SYSTEM\CurrentControlSet\Policies", "NtfsDisableEncryption", "0", "1");
         AddRegDwordRule(regAllowlist, @"HKLM\SYSTEM\CurrentControlSet\Control\FileSystem", "NtfsMftZoneReservation", "0", "1", "2", "3", "4");
         AddRegDwordRule(regAllowlist, @"HKLM\SYSTEM\CurrentControlSet\Control\FileSystem", "NtfsMemoryUsage", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management", "ClearPageFileAtShutdown", "0", "1", "2");

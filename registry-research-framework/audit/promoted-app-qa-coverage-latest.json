@@ -1,11 +1,11 @@
 {
-  "generated_utc": "2026-05-06T19:22:42Z",
-  "history_entry_count": 17,
+  "generated_utc": "2026-05-06T21:17:59Z",
+  "history_entry_count": 19,
   "catalog_candidate_count": 242,
-  "covered_count": 54,
-  "uncovered_count": 188,
+  "covered_count": 59,
+  "uncovered_count": 183,
   "summary": {
-    "coverage_percent": 22.31,
+    "coverage_percent": 24.38,
     "covered_categories": {
       "Audio": 2,
       "Cleanup": 1,
@@ -17,7 +17,7 @@
       "Peripheral": 2,
       "Power": 7,
       "Privacy": 8,
-      "Security": 2,
+      "Security": 7,
       "System": 6,
       "Visibility": 6
     },
@@ -30,65 +30,12 @@
       "Peripheral": 1,
       "Power": 3,
       "Privacy": 59,
-      "Security": 19,
+      "Security": 14,
       "System": 46,
       "Visibility": 17
     }
   },
   "recommended_next_batches": [
-    {
-      "category": "Security",
-      "covered_count": 2,
-      "uncovered_count": 19,
-      "coverage_percent": 9.52,
-      "batch_size": 5,
-      "tweak_ids": [
-        "security.disable-downloads-blocking",
-        "security.disable-enhanced-defender-notifications",
-        "security.disable-ntfs-encryption",
-        "security.disable-p2p-updates",
-        "security.disable-picture-password"
-      ],
-      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id security.disable-downloads-blocking --id security.disable-enhanced-defender-notifications --id security.disable-ntfs-encryption --id security.disable-p2p-updates --id security.disable-picture-password",
-      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id security.disable-downloads-blocking --id security.disable-enhanced-defender-notifications --id security.disable-ntfs-encryption --id security.disable-p2p-updates --id security.disable-picture-password --run-kvm --json",
-      "candidates": [
-        {
-          "tweak_id": "security.disable-downloads-blocking",
-          "record_id": "security.disable-downloads-blocking",
-          "category": "Security",
-          "name": "Preserve Zone Information on Attachments",
-          "documentation": "research/records/security.disable-downloads-blocking.json"
-        },
-        {
-          "tweak_id": "security.disable-enhanced-defender-notifications",
-          "record_id": "security.disable-enhanced-defender-notifications",
-          "category": "Security",
-          "name": "Windows Security Enhanced Notifications",
-          "documentation": "research/records/security.disable-enhanced-defender-notifications.review.json"
-        },
-        {
-          "tweak_id": "security.disable-ntfs-encryption",
-          "record_id": "security.disable-ntfs-encryption",
-          "category": "Security",
-          "name": "Disable NTFS Encryption (EFS)",
-          "documentation": "research/records/security.disable-ntfs-encryption.json"
-        },
-        {
-          "tweak_id": "security.disable-p2p-updates",
-          "record_id": "security.disable-p2p-updates",
-          "category": "Security",
-          "name": "Delivery Optimization Download Mode",
-          "documentation": "research/records/security.disable-p2p-updates.review.json"
-        },
-        {
-          "tweak_id": "security.disable-picture-password",
-          "record_id": "security.disable-picture-password",
-          "category": "Security",
-          "name": "Picture Password Sign-In for Domain Users",
-          "documentation": "research/records/security.disable-picture-password.json"
-        }
-      ]
-    },
     {
       "category": "System",
       "covered_count": 6,
@@ -298,6 +245,59 @@
           "category": "Developer",
           "name": "SSH Agent Auto-start",
           "documentation": "research/records/developer.ssh-agent-autostart.review.json"
+        }
+      ]
+    },
+    {
+      "category": "Visibility",
+      "covered_count": 6,
+      "uncovered_count": 17,
+      "coverage_percent": 26.09,
+      "batch_size": 5,
+      "tweak_ids": [
+        "visibility.disable-acrylic-logon",
+        "visibility.disable-common-control-animations",
+        "visibility.disable-first-signin-animation",
+        "visibility.disable-lock-screen-camera",
+        "visibility.disable-lock-screen-changes"
+      ],
+      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id visibility.disable-acrylic-logon --id visibility.disable-common-control-animations --id visibility.disable-first-signin-animation --id visibility.disable-lock-screen-camera --id visibility.disable-lock-screen-changes",
+      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id visibility.disable-acrylic-logon --id visibility.disable-common-control-animations --id visibility.disable-first-signin-animation --id visibility.disable-lock-screen-camera --id visibility.disable-lock-screen-changes --run-kvm --json",
+      "candidates": [
+        {
+          "tweak_id": "visibility.disable-acrylic-logon",
+          "record_id": "visibility.disable-acrylic-logon",
+          "category": "Visibility",
+          "name": "Acrylic Blur on the Logon Background",
+          "documentation": "research/records/visibility.disable-acrylic-logon.json"
+        },
+        {
+          "tweak_id": "visibility.disable-common-control-animations",
+          "record_id": "visibility.disable-common-control-animations",
+          "category": "Visibility",
+          "name": "Common Control and Window Animations",
+          "documentation": "research/records/visibility.disable-common-control-animations.json"
+        },
+        {
+          "tweak_id": "visibility.disable-first-signin-animation",
+          "record_id": "visibility.disable-first-signin-animation",
+          "category": "Visibility",
+          "name": "First Sign-In Animation",
+          "documentation": "research/records/visibility.disable-first-signin-animation.json"
+        },
+        {
+          "tweak_id": "visibility.disable-lock-screen-camera",
+          "record_id": "visibility.disable-lock-screen-camera",
+          "category": "Visibility",
+          "name": "Lock Screen Camera Access",
+          "documentation": "research/records/visibility.disable-lock-screen-camera.json"
+        },
+        {
+          "tweak_id": "visibility.disable-lock-screen-changes",
+          "record_id": "visibility.disable-lock-screen-changes",
+          "category": "Visibility",
+          "name": "Changing the Lock Screen and Logon Image",
+          "documentation": "research/records/visibility.disable-lock-screen-changes.json"
         }
       ]
     }
@@ -673,12 +673,57 @@
       "latest_report_status": "ok"
     },
     {
+      "tweak_id": "security.disable-downloads-blocking",
+      "qa_tweak_id": "security.disable-downloads-blocking",
+      "candidate_id": "security.disable-downloads-blocking",
+      "category": "Security",
+      "name": "Preserve Zone Information on Attachments",
+      "documentation": "research/records/security.disable-downloads-blocking.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "security.disable-enhanced-defender-notifications",
+      "qa_tweak_id": "security.disable-enhanced-defender-notifications",
+      "candidate_id": "security.disable-enhanced-defender-notifications",
+      "category": "Security",
+      "name": "Windows Security Enhanced Notifications",
+      "documentation": "research/records/security.disable-enhanced-defender-notifications.review.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "security.disable-ntfs-encryption",
+      "qa_tweak_id": "security.disable-ntfs-encryption",
+      "candidate_id": "security.disable-ntfs-encryption",
+      "category": "Security",
+      "name": "Disable NTFS Encryption (EFS)",
+      "documentation": "research/records/security.disable-ntfs-encryption.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "security.disable-p2p-updates",
+      "qa_tweak_id": "security.disable-p2p-updates",
+      "candidate_id": "security.disable-p2p-updates",
+      "category": "Security",
+      "name": "Delivery Optimization Download Mode",
+      "documentation": "research/records/security.disable-p2p-updates.review.json",
+      "latest_report_status": "ok"
+    },
+    {
       "tweak_id": "security.disable-password-reveal",
       "qa_tweak_id": "security.disable-password-reveal",
       "candidate_id": "security.disable-password-reveal",
       "category": "Security",
       "name": "Password Reveal Button",
       "documentation": "research/records/security.disable-password-reveal.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "security.disable-picture-password",
+      "qa_tweak_id": "security.disable-picture-password",
+      "candidate_id": "security.disable-picture-password",
+      "category": "Security",
+      "name": "Picture Password Sign-In for Domain Users",
+      "documentation": "research/records/security.disable-picture-password.json",
       "latest_report_status": "ok"
     },
     {
@@ -1532,41 +1577,6 @@
       "category": "Privacy",
       "name": "Recommended Troubleshooting for Known Problems",
       "documentation": "research/records/privacy.troubleshooter-dont-run.review.json"
-    },
-    {
-      "tweak_id": "security.disable-downloads-blocking",
-      "record_id": "security.disable-downloads-blocking",
-      "category": "Security",
-      "name": "Preserve Zone Information on Attachments",
-      "documentation": "research/records/security.disable-downloads-blocking.json"
-    },
-    {
-      "tweak_id": "security.disable-enhanced-defender-notifications",
-      "record_id": "security.disable-enhanced-defender-notifications",
-      "category": "Security",
-      "name": "Windows Security Enhanced Notifications",
-      "documentation": "research/records/security.disable-enhanced-defender-notifications.review.json"
-    },
-    {
-      "tweak_id": "security.disable-ntfs-encryption",
-      "record_id": "security.disable-ntfs-encryption",
-      "category": "Security",
-      "name": "Disable NTFS Encryption (EFS)",
-      "documentation": "research/records/security.disable-ntfs-encryption.json"
-    },
-    {
-      "tweak_id": "security.disable-p2p-updates",
-      "record_id": "security.disable-p2p-updates",
-      "category": "Security",
-      "name": "Delivery Optimization Download Mode",
-      "documentation": "research/records/security.disable-p2p-updates.review.json"
-    },
-    {
-      "tweak_id": "security.disable-picture-password",
-      "record_id": "security.disable-picture-password",
-      "category": "Security",
-      "name": "Picture Password Sign-In for Domain Users",
-      "documentation": "research/records/security.disable-picture-password.json"
     },
     {
       "tweak_id": "security.disable-remote-assistance",

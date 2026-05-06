@@ -1,13 +1,13 @@
 {
-  "generated_utc": "2026-05-06T19:22:42Z",
+  "generated_utc": "2026-05-06T21:17:59Z",
   "status": "PASS",
   "selection": {
     "requested_ids": [
-      "power.disable-cpu-idle-states",
-      "power.disable-network-power-saving.policy",
-      "power.disable-power-throttling",
-      "power.hide-hibernate-option",
-      "power.hide-lock-option"
+      "security.disable-downloads-blocking",
+      "security.disable-enhanced-defender-notifications",
+      "security.disable-ntfs-encryption",
+      "security.disable-p2p-updates",
+      "security.disable-picture-password"
     ],
     "requested_categories": [],
     "limit_per_category": 1,
@@ -26,25 +26,143 @@
   "errors": [],
   "candidates": [
     {
-      "tweak_id": "power.disable-cpu-idle-states",
-      "qa_tweak_id": "power.disable-cpu-idle-states",
-      "candidate_id": "power.disable-cpu-idle-states",
-      "record_id": "power.disable-cpu-idle-states",
-      "category": "Power",
-      "name": "CPU Idle States Bundle",
-      "documentation": "research/records/power.disable-cpu-idle-states.json",
+      "tweak_id": "security.disable-downloads-blocking",
+      "qa_tweak_id": "security.disable-downloads-blocking",
+      "candidate_id": "security.disable-downloads-blocking",
+      "record_id": "security.disable-downloads-blocking",
+      "category": "Security",
+      "name": "Preserve Zone Information on Attachments",
+      "documentation": "research/records/security.disable-downloads-blocking.json",
+      "promotion_state": "promoted",
+      "apply_allowed": true,
+      "restore_default_supported": true,
+      "restore_previous_supported": true,
+      "commands": {
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect security.disable-downloads-blocking",
+        "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'security.disable-downloads-blocking' --qa-output 'C:\\Tools\\ValidationController\\smoke\\security.disable-downloads-blocking.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'security.disable-downloads-blocking' --qa-output 'C:\\Tools\\ValidationController\\smoke\\security.disable-downloads-blocking.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'security.disable-downloads-blocking' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\security.disable-downloads-blocking.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'security.disable-downloads-blocking' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\security.disable-downloads-blocking.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'security.disable-downloads-blocking'"
+      },
+      "expected_report": {
+        "success": true,
+        "status": "ok",
+        "rollback_requested": true,
+        "required_stages": [
+          "detect-before",
+          "apply",
+          "rollback",
+          "detect-after"
+        ],
+        "required_card_snapshot": {
+          "required_fields": [
+            "TweakId",
+            "Name",
+            "Category",
+            "EvidenceClass",
+            "ResearchStatus",
+            "RollbackSnapshotState",
+            "HasClaimBoundary",
+            "WhatWeKnowSummary",
+            "WhatWeDoNotClaimSummary",
+            "ProofLanes"
+          ],
+          "required_proof_lanes": [
+            "docs",
+            "runtime",
+            "source",
+            "rollback"
+          ],
+          "claim_boundary_required": true
+        },
+        "required_stage_assertions": [
+          "apply stage reports a successful apply story",
+          "rollback stage reports a successful rollback story",
+          "detect-after is present"
+        ]
+      }
+    },
+    {
+      "tweak_id": "security.disable-enhanced-defender-notifications",
+      "qa_tweak_id": "security.disable-enhanced-defender-notifications",
+      "candidate_id": "security.disable-enhanced-defender-notifications",
+      "record_id": "security.disable-enhanced-defender-notifications",
+      "category": "Security",
+      "name": "Windows Security Enhanced Notifications",
+      "documentation": "research/records/security.disable-enhanced-defender-notifications.review.json",
+      "promotion_state": "promoted",
+      "apply_allowed": true,
+      "restore_default_supported": true,
+      "restore_previous_supported": true,
+      "commands": {
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect security.disable-enhanced-defender-notifications",
+        "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'security.disable-enhanced-defender-notifications' --qa-output 'C:\\Tools\\ValidationController\\smoke\\security.disable-enhanced-defender-notifications.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'security.disable-enhanced-defender-notifications' --qa-output 'C:\\Tools\\ValidationController\\smoke\\security.disable-enhanced-defender-notifications.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'security.disable-enhanced-defender-notifications' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\security.disable-enhanced-defender-notifications.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'security.disable-enhanced-defender-notifications' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\security.disable-enhanced-defender-notifications.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'security.disable-enhanced-defender-notifications'"
+      },
+      "expected_report": {
+        "success": true,
+        "status": "ok",
+        "rollback_requested": true,
+        "required_stages": [
+          "detect-before",
+          "apply",
+          "rollback",
+          "detect-after"
+        ],
+        "required_card_snapshot": {
+          "required_fields": [
+            "TweakId",
+            "Name",
+            "Category",
+            "EvidenceClass",
+            "ResearchStatus",
+            "RollbackSnapshotState",
+            "HasClaimBoundary",
+            "WhatWeKnowSummary",
+            "WhatWeDoNotClaimSummary",
+            "ProofLanes"
+          ],
+          "required_proof_lanes": [
+            "docs",
+            "runtime",
+            "source",
+            "rollback"
+          ],
+          "claim_boundary_required": true
+        },
+        "required_stage_assertions": [
+          "apply stage reports a successful apply story",
+          "rollback stage reports a successful rollback story",
+          "detect-after is present"
+        ]
+      }
+    },
+    {
+      "tweak_id": "security.disable-ntfs-encryption",
+      "qa_tweak_id": "security.disable-ntfs-encryption",
+      "candidate_id": "security.disable-ntfs-encryption",
+      "record_id": "security.disable-ntfs-encryption",
+      "category": "Security",
+      "name": "Disable NTFS Encryption (EFS)",
+      "documentation": "research/records/security.disable-ntfs-encryption.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": false,
-      "restore_previous_supported": true,
+      "restore_previous_supported": false,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect power.disable-cpu-idle-states",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect security.disable-ntfs-encryption",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'power.disable-cpu-idle-states' --qa-output 'C:\\Tools\\ValidationController\\smoke\\power.disable-cpu-idle-states.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'power.disable-cpu-idle-states' --qa-output 'C:\\Tools\\ValidationController\\smoke\\power.disable-cpu-idle-states.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'power.disable-cpu-idle-states' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\power.disable-cpu-idle-states.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'power.disable-cpu-idle-states' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\power.disable-cpu-idle-states.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'power.disable-cpu-idle-states'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'security.disable-ntfs-encryption' --qa-output 'C:\\Tools\\ValidationController\\smoke\\security.disable-ntfs-encryption.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'security.disable-ntfs-encryption' --qa-output 'C:\\Tools\\ValidationController\\smoke\\security.disable-ntfs-encryption.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'security.disable-ntfs-encryption' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\security.disable-ntfs-encryption.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'security.disable-ntfs-encryption' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\security.disable-ntfs-encryption.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'security.disable-ntfs-encryption'"
       },
       "expected_report": {
         "success": true,
@@ -85,25 +203,25 @@
       }
     },
     {
-      "tweak_id": "power.disable-network-power-saving.policy",
-      "qa_tweak_id": "power.disable-network-power-saving.policy",
-      "candidate_id": "power.disable-network-power-saving.policy",
-      "record_id": "power.disable-network-power-saving.policy",
-      "category": "Power",
-      "name": "Network Power and Multimedia Responsiveness",
-      "documentation": "research/records/power.disable-network-power-saving.policy.review.json",
+      "tweak_id": "security.disable-p2p-updates",
+      "qa_tweak_id": "security.disable-p2p-updates",
+      "candidate_id": "security.disable-p2p-updates",
+      "record_id": "security.disable-p2p-updates",
+      "category": "Security",
+      "name": "Delivery Optimization Download Mode",
+      "documentation": "research/records/security.disable-p2p-updates.review.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect power.disable-network-power-saving.policy",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect security.disable-p2p-updates",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'power.disable-network-power-saving.policy' --qa-output 'C:\\Tools\\ValidationController\\smoke\\power.disable-network-power-saving.policy.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'power.disable-network-power-saving.policy' --qa-output 'C:\\Tools\\ValidationController\\smoke\\power.disable-network-power-saving.policy.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'power.disable-network-power-saving.policy' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\power.disable-network-power-saving.policy.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'power.disable-network-power-saving.policy' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\power.disable-network-power-saving.policy.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'power.disable-network-power-saving.policy'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'security.disable-p2p-updates' --qa-output 'C:\\Tools\\ValidationController\\smoke\\security.disable-p2p-updates.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'security.disable-p2p-updates' --qa-output 'C:\\Tools\\ValidationController\\smoke\\security.disable-p2p-updates.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'security.disable-p2p-updates' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\security.disable-p2p-updates.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'security.disable-p2p-updates' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\security.disable-p2p-updates.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'security.disable-p2p-updates'"
       },
       "expected_report": {
         "success": true,
@@ -144,143 +262,25 @@
       }
     },
     {
-      "tweak_id": "power.disable-power-throttling",
-      "qa_tweak_id": "power.disable-power-throttling",
-      "candidate_id": "power.disable-power-throttling",
-      "record_id": "power.disable-power-throttling",
-      "category": "Power",
-      "name": "Power Throttling",
-      "documentation": "research/records/power.disable-power-throttling.json",
+      "tweak_id": "security.disable-picture-password",
+      "qa_tweak_id": "security.disable-picture-password",
+      "candidate_id": "security.disable-picture-password",
+      "record_id": "security.disable-picture-password",
+      "category": "Security",
+      "name": "Picture Password Sign-In for Domain Users",
+      "documentation": "research/records/security.disable-picture-password.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect power.disable-power-throttling",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect security.disable-picture-password",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'power.disable-power-throttling' --qa-output 'C:\\Tools\\ValidationController\\smoke\\power.disable-power-throttling.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'power.disable-power-throttling' --qa-output 'C:\\Tools\\ValidationController\\smoke\\power.disable-power-throttling.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'power.disable-power-throttling' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\power.disable-power-throttling.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'power.disable-power-throttling' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\power.disable-power-throttling.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'power.disable-power-throttling'"
-      },
-      "expected_report": {
-        "success": true,
-        "status": "ok",
-        "rollback_requested": true,
-        "required_stages": [
-          "detect-before",
-          "apply",
-          "rollback",
-          "detect-after"
-        ],
-        "required_card_snapshot": {
-          "required_fields": [
-            "TweakId",
-            "Name",
-            "Category",
-            "EvidenceClass",
-            "ResearchStatus",
-            "RollbackSnapshotState",
-            "HasClaimBoundary",
-            "WhatWeKnowSummary",
-            "WhatWeDoNotClaimSummary",
-            "ProofLanes"
-          ],
-          "required_proof_lanes": [
-            "docs",
-            "runtime",
-            "source",
-            "rollback"
-          ],
-          "claim_boundary_required": true
-        },
-        "required_stage_assertions": [
-          "apply stage reports a successful apply story",
-          "rollback stage reports a successful rollback story",
-          "detect-after is present"
-        ]
-      }
-    },
-    {
-      "tweak_id": "power.hide-hibernate-option",
-      "qa_tweak_id": "power.hide-hibernate-option",
-      "candidate_id": "power.hide-hibernate-option",
-      "record_id": "power.hide-hibernate-option",
-      "category": "Power",
-      "name": "Show Hibernate Option",
-      "documentation": "research/records/power.hide-hibernate-option.json",
-      "promotion_state": "promoted",
-      "apply_allowed": true,
-      "restore_default_supported": true,
-      "restore_previous_supported": true,
-      "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect power.hide-hibernate-option",
-        "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'power.hide-hibernate-option' --qa-output 'C:\\Tools\\ValidationController\\smoke\\power.hide-hibernate-option.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'power.hide-hibernate-option' --qa-output 'C:\\Tools\\ValidationController\\smoke\\power.hide-hibernate-option.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'power.hide-hibernate-option' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\power.hide-hibernate-option.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'power.hide-hibernate-option' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\power.hide-hibernate-option.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'power.hide-hibernate-option'"
-      },
-      "expected_report": {
-        "success": true,
-        "status": "ok",
-        "rollback_requested": true,
-        "required_stages": [
-          "detect-before",
-          "apply",
-          "rollback",
-          "detect-after"
-        ],
-        "required_card_snapshot": {
-          "required_fields": [
-            "TweakId",
-            "Name",
-            "Category",
-            "EvidenceClass",
-            "ResearchStatus",
-            "RollbackSnapshotState",
-            "HasClaimBoundary",
-            "WhatWeKnowSummary",
-            "WhatWeDoNotClaimSummary",
-            "ProofLanes"
-          ],
-          "required_proof_lanes": [
-            "docs",
-            "runtime",
-            "source",
-            "rollback"
-          ],
-          "claim_boundary_required": true
-        },
-        "required_stage_assertions": [
-          "apply stage reports a successful apply story",
-          "rollback stage reports a successful rollback story",
-          "detect-after is present"
-        ]
-      }
-    },
-    {
-      "tweak_id": "power.hide-lock-option",
-      "qa_tweak_id": "power.hide-lock-option",
-      "candidate_id": "power.hide-lock-option",
-      "record_id": "power.hide-lock-option",
-      "category": "Power",
-      "name": "Show Lock Option",
-      "documentation": "research/records/power.hide-lock-option.json",
-      "promotion_state": "promoted",
-      "apply_allowed": true,
-      "restore_default_supported": true,
-      "restore_previous_supported": true,
-      "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect power.hide-lock-option",
-        "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'power.hide-lock-option' --qa-output 'C:\\Tools\\ValidationController\\smoke\\power.hide-lock-option.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'power.hide-lock-option' --qa-output 'C:\\Tools\\ValidationController\\smoke\\power.hide-lock-option.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'power.hide-lock-option' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\power.hide-lock-option.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'power.hide-lock-option' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\power.hide-lock-option.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'power.hide-lock-option'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'security.disable-picture-password' --qa-output 'C:\\Tools\\ValidationController\\smoke\\security.disable-picture-password.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'security.disable-picture-password' --qa-output 'C:\\Tools\\ValidationController\\smoke\\security.disable-picture-password.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'security.disable-picture-password' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\security.disable-picture-password.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'security.disable-picture-password' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\security.disable-picture-password.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'security.disable-picture-password'"
       },
       "expected_report": {
         "success": true,
@@ -323,7 +323,7 @@
   ],
   "run_results": [
     {
-      "tweak_id": "power.disable-cpu-idle-states",
+      "tweak_id": "security.disable-downloads-blocking",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -357,19 +357,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "power.disable-cpu-idle-states",
-        "TweakName": "CPU Idle States Bundle",
+        "TweakId": "security.disable-downloads-blocking",
+        "TweakName": "Preserve Zone Information on Attachments",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "power.disable-cpu-idle-states",
-          "Name": "CPU Idle States Bundle",
-          "Category": "Power",
-          "Description": "CPU idle states let Windows save power when the processor has little to do. This tweak tries to reduce or bypass that behavior for latency-focused systems.",
-          "FriendlyDescription": "CPU idle states let Windows save power when the processor has little to do. This tweak tries to reduce or bypass that behavior for latency-focused systems.",
-          "RegistryPath": "",
+          "TweakId": "security.disable-downloads-blocking",
+          "Name": "Preserve Zone Information on Attachments",
+          "Category": "Security",
+          "Description": "Windows normally tags downloaded files with where they came from, like the Internet or intranet. That information helps Windows decide when to warn or protect you. This policy controls whether that tagging happens.",
+          "FriendlyDescription": "Windows normally tags downloaded files with where they came from, like the Internet or intranet. That information helps Windows decide when to warn or protect you. This policy controls whether that tagging happens.",
+          "RegistryPath": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Attachments\\SaveZoneInformation",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -377,277 +377,15 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: CPU idle states let Windows save power when the processor has little to do. This tweak tries to reduce or bypass that behavior for latency-focused systems. Evidence: Guest VM probes captured the exact before, after, and restored registry bundle, and the excluded-baseline stepwise runtime package completed apply, reboot, WPR, ETL existence, host copy-back, and restore verification on RegProbe-Baseline-20260328. That remo... Rollback: Rollback: Verified via record-restore-story.",
-          "WhatWeDoNotClaimSummary": "Source boundary: Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
-          "ProofLanes": [
-            {
-              "Key": "docs",
-              "Label": "DOCS",
-              "State": "ready",
-              "Summary": "Guest VM probes captured the exact before, after, and restored registry bundle, and the excluded-baseline stepwise runtime package completed apply, reboot, WPR, ETL existence, host copy-back, and restore verification on RegProbe-Baseline-20260328. That remo...",
-              "Source": "Validation proof source: evidence/files/vm-tooling-staging/cpu_idle_probe.json"
-            },
-            {
-              "Key": "runtime",
-              "Label": "RUNTIME",
-              "State": "ready",
-              "Summary": "Power.txt lists DisableIdleStatesAtBoot in the power values block, matching the first element of the app's raw idle-states bundle.",
-              "Source": "nohuto power trace for DisableIdleStatesAtBoot: research/_source-mirrors/win-registry/records/Power.txt"
-            },
-            {
-              "Key": "source",
-              "Label": "SOURCE",
-              "State": "ready",
-              "Summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
-              "Source": "win-config / nvidia/desc.md: https://github.com/nohuto/win-config/blob/main/nvidia/desc.md"
-            },
-            {
-              "Key": "rollback",
-              "Label": "ROLLBACK",
-              "State": "ready",
-              "Summary": "Rollback: Verified via record-restore-story.",
-              "Source": "record-restore-story"
-            }
-          ],
-          "ReferenceLinks": [
-            {
-              "Title": "Docs: Details",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html#power.disable-cpu-idle-states",
-              "Kind": "Details"
-            },
-            {
-              "Title": "Docs: Power",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\power\\power.md#power.disable-cpu-idle-states",
-              "Kind": "Docs"
-            }
-          ]
-        },
-        "Stages": [
-          {
-            "Stage": "detect-before",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Detected 0 of 3 values (matches: 0, missing: 3).",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Unknown",
-            "TargetValue": "Multiple values",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": false,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Detected 0 of 3 values (matches: 0, missing: 3).\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\DisableIdleStatesAtBoot: missing\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ExitLatencyCheckEnabled: missing\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\IdleStateTimeout: missing",
-                "TimestampText": "22:22:46"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "apply",
-            "AppliedStatus": "Applied",
-            "StatusMessage": "Run completed.",
-            "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Multiple values",
-            "TargetValue": "Multiple values",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Detected 0 of 3 values (matches: 0, missing: 3).\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\DisableIdleStatesAtBoot: missing\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ExitLatencyCheckEnabled: missing\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\IdleStateTimeout: missing",
-                "TimestampText": "22:22:46"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Updated 3 values.",
-                "TimestampText": "22:22:49"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified desired values.",
-                "TimestampText": "22:22:49"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Not required",
-                "Message": "Step not executed.",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "rollback",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Rolled back registry values.",
-            "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Multiple values",
-            "TargetValue": "Multiple values",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Detected 0 of 3 values (matches: 0, missing: 3).\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\DisableIdleStatesAtBoot: missing\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ExitLatencyCheckEnabled: missing\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\IdleStateTimeout: missing",
-                "TimestampText": "22:22:46"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Updated 3 values.",
-                "TimestampText": "22:22:49"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified desired values.",
-                "TimestampText": "22:22:49"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "22:22:49"
-              }
-            ]
-          },
-          {
-            "Stage": "detect-after",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Detected 0 of 3 values (matches: 0, missing: 3).",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Multiple values",
-            "TargetValue": "Multiple values",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Detected 0 of 3 values (matches: 0, missing: 3).\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\DisableIdleStatesAtBoot: missing\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ExitLatencyCheckEnabled: missing\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\IdleStateTimeout: missing",
-                "TimestampText": "22:22:49"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Updated 3 values.",
-                "TimestampText": "22:22:49"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified desired values.",
-                "TimestampText": "22:22:49"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "22:22:49"
-              }
-            ]
-          }
-        ],
-        "StartedAtUtc": "2026-05-07T05:22:46.7604108+00:00",
-        "CompletedAtUtc": "2026-05-07T05:22:50.0298621+00:00"
-      },
-      "qa_tweak_id": "power.disable-cpu-idle-states",
-      "candidate_id": "power.disable-cpu-idle-states",
-      "card_name": "CPU Idle States Bundle",
-      "documentation": "research/records/power.disable-cpu-idle-states.json"
-    },
-    {
-      "tweak_id": "power.disable-network-power-saving.policy",
-      "host_exit": 0,
-      "execution_exit": 0,
-      "payload_status": "completed",
-      "report_app_success": true,
-      "report_success": true,
-      "report_status": "ok",
-      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
-      "report_contract_status": "ok",
-      "report_contract_summary": "QA card snapshot contract passed.",
-      "report_contract_failures": [],
-      "report_card_present": true,
-      "report_card_has_claim_boundary": true,
-      "report_card_present_fields": [
-        "TweakId",
-        "Name",
-        "Category",
-        "EvidenceClass",
-        "ResearchStatus",
-        "RollbackSnapshotState",
-        "HasClaimBoundary",
-        "WhatWeKnowSummary",
-        "WhatWeDoNotClaimSummary",
-        "ProofLanes"
-      ],
-      "report_card_missing_fields": [],
-      "report_card_proof_lanes": [
-        "docs",
-        "runtime",
-        "source",
-        "rollback"
-      ],
-      "report_card_missing_proof_lanes": [],
-      "report": {
-        "TweakId": "power.disable-network-power-saving.policy",
-        "TweakName": "Network Power and Multimedia Responsiveness",
-        "Success": true,
-        "Status": "ok",
-        "Summary": "Apply/verify path completed and rollback restored the tweak.",
-        "RollbackRequested": true,
-        "Card": {
-          "TweakId": "power.disable-network-power-saving.policy",
-          "Name": "Network Power and Multimedia Responsiveness",
-          "Category": "Power",
-          "Description": "These settings affect whether TCP/IP task offloads stay enabled and how MMCSS reserves CPU for multimedia work.",
-          "FriendlyDescription": "These settings affect whether TCP/IP task offloads stay enabled and how MMCSS reserves CPU for multimedia work.",
-          "RegistryPath": "",
-          "EvidenceClass": "A",
-          "EvidenceClassTitle": "Cross-Layer Verified",
-          "ResearchStatus": "PROMOTED",
-          "IsMutationAllowed": true,
-          "RollbackSnapshotState": "ready",
-          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
-          "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: These settings affect whether TCP/IP task offloads stay enabled and how MMCSS reserves CPU for multimedia work. Evidence: DisableTaskOffload remains covered by the separate Microsoft task-offload page. This validation proof focuses on the narrower MMCSS claim for SystemResponsiveness: path plus rounding/clamping behavior. The opaque NetworkThrottlingIndex write remains only in... Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: Windows normally tags downloaded files with where they came from, like the Internet or intranet. That information helps Windows decide when to warn or protect you. This policy controls whether that tagging happens. Evidence: The local official Microsoft ADMX file names the same Attachments policy key and SaveZoneInformation value used by the app, and it confirms the 1/2 mapping. The paired ADML help text states that enabling the policy stops Windows from marking attachments wit... Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "DisableTaskOffload remains covered by the separate Microsoft task-offload page. This validation proof focuses on the narrower MMCSS claim for SystemResponsiveness: path plus rounding/clamping behavior. The opaque NetworkThrottlingIndex write remains only in...",
-              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows/win32/procthread/multimedia-class-scheduler-service"
+              "Summary": "The local official Microsoft ADMX file names the same Attachments policy key and SaveZoneInformation value used by the app, and it confirms the 1/2 mapping. The paired ADML help text states that enabling the policy stops Windows from marking attachments wit...",
+              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/AttachmentManager.admx"
             },
             {
               "Key": "runtime",
@@ -673,13 +411,13 @@
           ],
           "ReferenceLinks": [
             {
-              "Title": "Docs: Details",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html#power.disable-network-power-saving.policy",
+              "Title": "Docs: Details (missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Power",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\power\\power.md#power.disable-network-power-saving.policy",
+              "Title": "Docs: Security (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\security\\security-verified.md",
               "Kind": "Docs"
             }
           ]
@@ -688,10 +426,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Detected 1 of 2 values (matches: 0, missing: 1).",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Do not preserve zone information'.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Multiple values",
-            "TargetValue": "Multiple values",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Do not preserve zone information",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -700,8 +438,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 1 of 2 values (matches: 0, missing: 1).\nEntries:\n- HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\SystemResponsiveness: 20 -> 10\n- HKLM\\System\\CurrentControlSet\\Services\\TCPIP\\Parameters\\DisableTaskOffload: missing",
-                "TimestampText": "22:22:56"
+                "Message": "Current values do not match a named option. Selected option is 'Do not preserve zone information'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Attachments\\SaveZoneInformation: missing -> 1",
+                "TimestampText": "00:18:02"
               },
               {
                 "Action": "Apply",
@@ -728,8 +466,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Multiple values",
-            "TargetValue": "Multiple values",
+            "CurrentValue": "Do not preserve zone information",
+            "TargetValue": "Do not preserve zone information",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -738,20 +476,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 1 of 2 values (matches: 0, missing: 1).\nEntries:\n- HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\SystemResponsiveness: 20 -> 10\n- HKLM\\System\\CurrentControlSet\\Services\\TCPIP\\Parameters\\DisableTaskOffload: missing",
-                "TimestampText": "22:22:56"
+                "Message": "Current values do not match a named option. Selected option is 'Do not preserve zone information'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Attachments\\SaveZoneInformation: missing -> 1",
+                "TimestampText": "00:18:02"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Updated 2 values.",
-                "TimestampText": "22:22:59"
+                "Message": "Applied preset 'Do not preserve zone information'.",
+                "TimestampText": "00:18:02"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified desired values.",
-                "TimestampText": "22:22:59"
+                "Message": "Verified preset 'Do not preserve zone information'.",
+                "TimestampText": "00:18:02"
               },
               {
                 "Action": "Rollback",
@@ -766,8 +504,8 @@
             "AppliedStatus": "NotApplied",
             "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Multiple values",
-            "TargetValue": "Multiple values",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Do not preserve zone information",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -776,36 +514,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 1 of 2 values (matches: 0, missing: 1).\nEntries:\n- HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\SystemResponsiveness: 20 -> 10\n- HKLM\\System\\CurrentControlSet\\Services\\TCPIP\\Parameters\\DisableTaskOffload: missing",
-                "TimestampText": "22:22:56"
+                "Message": "Current values do not match a named option. Selected option is 'Do not preserve zone information'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Attachments\\SaveZoneInformation: missing -> 1",
+                "TimestampText": "00:18:02"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Updated 2 values.",
-                "TimestampText": "22:22:59"
+                "Message": "Applied preset 'Do not preserve zone information'.",
+                "TimestampText": "00:18:02"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified desired values.",
-                "TimestampText": "22:22:59"
+                "Message": "Verified preset 'Do not preserve zone information'.",
+                "TimestampText": "00:18:02"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "22:22:59"
+                "TimestampText": "00:18:02"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Detected 1 of 2 values (matches: 0, missing: 1).",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Do not preserve zone information'.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Multiple values",
-            "TargetValue": "Multiple values",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Do not preserve zone information",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -814,40 +552,40 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 1 of 2 values (matches: 0, missing: 1).\nEntries:\n- HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\SystemResponsiveness: 20 -> 10\n- HKLM\\System\\CurrentControlSet\\Services\\TCPIP\\Parameters\\DisableTaskOffload: missing",
-                "TimestampText": "22:22:59"
+                "Message": "Current values do not match a named option. Selected option is 'Do not preserve zone information'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Attachments\\SaveZoneInformation: missing -> 1",
+                "TimestampText": "00:18:02"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Updated 2 values.",
-                "TimestampText": "22:22:59"
+                "Message": "Applied preset 'Do not preserve zone information'.",
+                "TimestampText": "00:18:02"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified desired values.",
-                "TimestampText": "22:22:59"
+                "Message": "Verified preset 'Do not preserve zone information'.",
+                "TimestampText": "00:18:02"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "22:22:59"
+                "TimestampText": "00:18:02"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T05:22:56.4877772+00:00",
-        "CompletedAtUtc": "2026-05-07T05:22:59.6829792+00:00"
+        "StartedAtUtc": "2026-05-07T07:18:01.9980439+00:00",
+        "CompletedAtUtc": "2026-05-07T07:18:02.3050328+00:00"
       },
-      "qa_tweak_id": "power.disable-network-power-saving.policy",
-      "candidate_id": "power.disable-network-power-saving.policy",
-      "card_name": "Network Power and Multimedia Responsiveness",
-      "documentation": "research/records/power.disable-network-power-saving.policy.review.json"
+      "qa_tweak_id": "security.disable-downloads-blocking",
+      "candidate_id": "security.disable-downloads-blocking",
+      "card_name": "Preserve Zone Information on Attachments",
+      "documentation": "research/records/security.disable-downloads-blocking.json"
     },
     {
-      "tweak_id": "power.disable-power-throttling",
+      "tweak_id": "security.disable-enhanced-defender-notifications",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -881,19 +619,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "power.disable-power-throttling",
-        "TweakName": "Power Throttling",
+        "TweakId": "security.disable-enhanced-defender-notifications",
+        "TweakName": "Windows Security Enhanced Notifications",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "power.disable-power-throttling",
-          "Name": "Power Throttling",
-          "Category": "Power",
-          "Description": "Windows can slow some background work to save power. This policy decides whether that throttling stays available.",
-          "FriendlyDescription": "Windows can slow some background work to save power. This policy decides whether that throttling stays available.",
-          "RegistryPath": "HKLM\\System\\CurrentControlSet\\Control\\Power\\PowerThrottling\\PowerThrottlingOff",
+          "TweakId": "security.disable-enhanced-defender-notifications",
+          "Name": "Windows Security Enhanced Notifications",
+          "Category": "Security",
+          "Description": "Windows Security can show non-critical notifications about device health and protection status. This policy hides those extra notifications so only critical ones remain.",
+          "FriendlyDescription": "Windows Security can show non-critical notifications about device health and protection status. This policy hides those extra notifications so only critical ones remain.",
+          "RegistryPath": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender Security Center\\Notifications\\DisableEnhancedNotifications",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -901,15 +639,277 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Windows can slow some background work to save power. This policy decides whether that throttling stays available. Evidence: Local Microsoft Power.admx defines the exact machine policy path and value name. The companion Power.adml help text explains that enabling the policy turns Power Throttling off, while disabled or not configured leaves it under user control. Rollback: Rollback: Verified via record-restore-story.",
-          "WhatWeDoNotClaimSummary": "Source boundary: Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+          "WhatWeKnowSummary": "Claim: Windows Security can show non-critical notifications about device health and protection status. This policy hides those extra notifications so only critical ones remain. Evidence: The clean snapshot baseline and the enabled-state VM probe both hit the same Security Center Notifications policy path. A separate alias check with only the Reporting path set still showed SecurityHealthService.exe reading the Security Center path. The base... Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "Local Microsoft Power.admx defines the exact machine policy path and value name. The companion Power.adml help text explains that enabling the policy turns Power Throttling off, while disabled or not configured leaves it under user control.",
-              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/Power.admx"
+              "Summary": "The clean snapshot baseline and the enabled-state VM probe both hit the same Security Center Notifications policy path. A separate alias check with only the Reporting path set still showed SecurityHealthService.exe reading the Security Center path. The base...",
+              "Source": "Validation proof source: evidence/files/vm-tooling-staging/defender-enhanced-notifications-securitycenter-1-20260324-213118/defender-disable-enhanced-securitycenter-1.txt"
+            },
+            {
+              "Key": "runtime",
+              "Label": "RUNTIME",
+              "State": "ready",
+              "Summary": "On a clean snapshot, SecurityHealthService.exe queried HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender Security Center\\Notifications\\DisableEnhancedNotifications and got NAME NOT FOUND. The same capture showed DisableNotifications = 1 already present on t...",
+              "Source": "Win25H2Clean Procmon baseline for Security Center notifications policy: evidence/raw/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-baseline-1.txt"
+            },
+            {
+              "Key": "source",
+              "Label": "SOURCE",
+              "State": "ready",
+              "Summary": "No upstream nohuto source link is attached to this record.",
+              "Source": ""
+            },
+            {
+              "Key": "rollback",
+              "Label": "ROLLBACK",
+              "State": "ready",
+              "Summary": "Rollback: Verified via record-restore-story.",
+              "Source": "record-restore-story"
+            }
+          ],
+          "ReferenceLinks": [
+            {
+              "Title": "Docs: Details (missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
+              "Kind": "Details"
+            },
+            {
+              "Title": "Docs: Security (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\security\\security-verified.md",
+              "Kind": "Docs"
+            }
+          ]
+        },
+        "Stages": [
+          {
+            "Stage": "detect-before",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Hide non-critical notifications'.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Hide non-critical notifications",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": false,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Hide non-critical notifications'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender Security Center\\Notifications\\DisableEnhancedNotifications: missing -> 1",
+                "TimestampText": "00:18:08"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "apply",
+            "AppliedStatus": "Applied",
+            "StatusMessage": "Run completed.",
+            "OutcomeSummary": "Apply - Success",
+            "CurrentValue": "Hide non-critical notifications",
+            "TargetValue": "Hide non-critical notifications",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Hide non-critical notifications'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender Security Center\\Notifications\\DisableEnhancedNotifications: missing -> 1",
+                "TimestampText": "00:18:08"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Hide non-critical notifications'.",
+                "TimestampText": "00:18:12"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Hide non-critical notifications'.",
+                "TimestampText": "00:18:12"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Not required",
+                "Message": "Step not executed.",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "rollback",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Rolled back registry values.",
+            "OutcomeSummary": "Rollback - Rolled Back",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Hide non-critical notifications",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Hide non-critical notifications'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender Security Center\\Notifications\\DisableEnhancedNotifications: missing -> 1",
+                "TimestampText": "00:18:08"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Hide non-critical notifications'.",
+                "TimestampText": "00:18:12"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Hide non-critical notifications'.",
+                "TimestampText": "00:18:12"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "00:18:12"
+              }
+            ]
+          },
+          {
+            "Stage": "detect-after",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Hide non-critical notifications'.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Hide non-critical notifications",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Hide non-critical notifications'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender Security Center\\Notifications\\DisableEnhancedNotifications: missing -> 1",
+                "TimestampText": "00:18:12"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Hide non-critical notifications'.",
+                "TimestampText": "00:18:12"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Hide non-critical notifications'.",
+                "TimestampText": "00:18:12"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "00:18:12"
+              }
+            ]
+          }
+        ],
+        "StartedAtUtc": "2026-05-07T07:18:08.6042875+00:00",
+        "CompletedAtUtc": "2026-05-07T07:18:12.3789781+00:00"
+      },
+      "qa_tweak_id": "security.disable-enhanced-defender-notifications",
+      "candidate_id": "security.disable-enhanced-defender-notifications",
+      "card_name": "Windows Security Enhanced Notifications",
+      "documentation": "research/records/security.disable-enhanced-defender-notifications.review.json"
+    },
+    {
+      "tweak_id": "security.disable-ntfs-encryption",
+      "host_exit": 0,
+      "execution_exit": 0,
+      "payload_status": "completed",
+      "report_app_success": true,
+      "report_success": true,
+      "report_status": "ok",
+      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
+      "report_contract_status": "ok",
+      "report_contract_summary": "QA card snapshot contract passed.",
+      "report_contract_failures": [],
+      "report_card_present": true,
+      "report_card_has_claim_boundary": true,
+      "report_card_present_fields": [
+        "TweakId",
+        "Name",
+        "Category",
+        "EvidenceClass",
+        "ResearchStatus",
+        "RollbackSnapshotState",
+        "HasClaimBoundary",
+        "WhatWeKnowSummary",
+        "WhatWeDoNotClaimSummary",
+        "ProofLanes"
+      ],
+      "report_card_missing_fields": [],
+      "report_card_proof_lanes": [
+        "docs",
+        "runtime",
+        "source",
+        "rollback"
+      ],
+      "report_card_missing_proof_lanes": [],
+      "report": {
+        "TweakId": "security.disable-ntfs-encryption",
+        "TweakName": "Disable NTFS Encryption (EFS)",
+        "Success": true,
+        "Status": "ok",
+        "Summary": "Apply/verify path completed and rollback restored the tweak.",
+        "RollbackRequested": true,
+        "Card": {
+          "TweakId": "security.disable-ntfs-encryption",
+          "Name": "Disable NTFS Encryption (EFS)",
+          "Category": "Security",
+          "Description": "Windows can encrypt files on NTFS volumes by using EFS. This policy decides whether that encryption feature is allowed on NTFS volumes.",
+          "FriendlyDescription": "Windows can encrypt files on NTFS volumes by using EFS. This policy decides whether that encryption feature is allowed on NTFS volumes.",
+          "RegistryPath": "HKLM\\System\\CurrentControlSet\\Policies\\NtfsDisableEncryption",
+          "EvidenceClass": "A",
+          "EvidenceClassTitle": "Cross-Layer Verified",
+          "ResearchStatus": "PROMOTED",
+          "IsMutationAllowed": true,
+          "RollbackSnapshotState": "ready",
+          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
+          "HasClaimBoundary": true,
+          "WhatWeKnowSummary": "Claim: Windows can encrypt files on NTFS volumes by using EFS. This policy decides whether that encryption feature is allowed on NTFS volumes. Evidence: Validated against the local Microsoft policy files for NTFS encryption. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
+          "ProofLanes": [
+            {
+              "Key": "docs",
+              "Label": "DOCS",
+              "State": "ready",
+              "Summary": "Validated against the local Microsoft policy files for NTFS encryption.",
+              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/FileSys.admx"
             },
             {
               "Key": "runtime",
@@ -922,8 +922,8 @@
               "Key": "source",
               "Label": "SOURCE",
               "State": "ready",
-              "Summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
-              "Source": "decompiled-pseudocode / mmcss: https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss"
+              "Summary": "No upstream nohuto source link is attached to this record.",
+              "Source": ""
             },
             {
               "Key": "rollback",
@@ -935,18 +935,13 @@
           ],
           "ReferenceLinks": [
             {
-              "Title": "Windows Internals resource page",
-              "Url": "https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals",
-              "Kind": "Docs"
-            },
-            {
-              "Title": "Docs: Details",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html#power.disable-power-throttling",
+              "Title": "Docs: Details (missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Power",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\power\\power.md#power.disable-power-throttling",
+              "Title": "Docs: Security (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\security\\security-verified.md",
               "Kind": "Docs"
             }
           ]
@@ -955,10 +950,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Power Throttling turned off'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'NTFS encryption disabled'.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Power Throttling turned off",
+            "TargetValue": "NTFS encryption disabled",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -967,8 +962,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Power Throttling turned off'.\nEntries:\n- HKLM\\System\\CurrentControlSet\\Control\\Power\\PowerThrottling\\PowerThrottlingOff: missing -> 1",
-                "TimestampText": "22:23:06"
+                "Message": "Current values do not match a named option. Selected option is 'NTFS encryption disabled'.\nEntries:\n- HKLM\\System\\CurrentControlSet\\Policies\\NtfsDisableEncryption: missing -> 1",
+                "TimestampText": "00:18:19"
               },
               {
                 "Action": "Apply",
@@ -995,8 +990,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Power Throttling turned off",
-            "TargetValue": "Power Throttling turned off",
+            "CurrentValue": "NTFS encryption disabled",
+            "TargetValue": "NTFS encryption disabled",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1005,20 +1000,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Power Throttling turned off'.\nEntries:\n- HKLM\\System\\CurrentControlSet\\Control\\Power\\PowerThrottling\\PowerThrottlingOff: missing -> 1",
-                "TimestampText": "22:23:06"
+                "Message": "Current values do not match a named option. Selected option is 'NTFS encryption disabled'.\nEntries:\n- HKLM\\System\\CurrentControlSet\\Policies\\NtfsDisableEncryption: missing -> 1",
+                "TimestampText": "00:18:19"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Power Throttling turned off'.",
-                "TimestampText": "22:23:09"
+                "Message": "Applied preset 'NTFS encryption disabled'.",
+                "TimestampText": "00:18:21"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Power Throttling turned off'.",
-                "TimestampText": "22:23:09"
+                "Message": "Verified preset 'NTFS encryption disabled'.",
+                "TimestampText": "00:18:21"
               },
               {
                 "Action": "Rollback",
@@ -1034,7 +1029,7 @@
             "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Power Throttling turned off",
+            "TargetValue": "NTFS encryption disabled",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1043,36 +1038,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Power Throttling turned off'.\nEntries:\n- HKLM\\System\\CurrentControlSet\\Control\\Power\\PowerThrottling\\PowerThrottlingOff: missing -> 1",
-                "TimestampText": "22:23:06"
+                "Message": "Current values do not match a named option. Selected option is 'NTFS encryption disabled'.\nEntries:\n- HKLM\\System\\CurrentControlSet\\Policies\\NtfsDisableEncryption: missing -> 1",
+                "TimestampText": "00:18:19"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Power Throttling turned off'.",
-                "TimestampText": "22:23:09"
+                "Message": "Applied preset 'NTFS encryption disabled'.",
+                "TimestampText": "00:18:21"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Power Throttling turned off'.",
-                "TimestampText": "22:23:09"
+                "Message": "Verified preset 'NTFS encryption disabled'.",
+                "TimestampText": "00:18:21"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "22:23:09"
+                "TimestampText": "00:18:22"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Power Throttling turned off'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'NTFS encryption disabled'.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Power Throttling turned off",
+            "TargetValue": "NTFS encryption disabled",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1081,40 +1076,40 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Power Throttling turned off'.\nEntries:\n- HKLM\\System\\CurrentControlSet\\Control\\Power\\PowerThrottling\\PowerThrottlingOff: missing -> 1",
-                "TimestampText": "22:23:09"
+                "Message": "Current values do not match a named option. Selected option is 'NTFS encryption disabled'.\nEntries:\n- HKLM\\System\\CurrentControlSet\\Policies\\NtfsDisableEncryption: missing -> 1",
+                "TimestampText": "00:18:22"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Power Throttling turned off'.",
-                "TimestampText": "22:23:09"
+                "Message": "Applied preset 'NTFS encryption disabled'.",
+                "TimestampText": "00:18:21"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Power Throttling turned off'.",
-                "TimestampText": "22:23:09"
+                "Message": "Verified preset 'NTFS encryption disabled'.",
+                "TimestampText": "00:18:21"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "22:23:09"
+                "TimestampText": "00:18:22"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T05:23:06.2959591+00:00",
-        "CompletedAtUtc": "2026-05-07T05:23:09.4544063+00:00"
+        "StartedAtUtc": "2026-05-07T07:18:19.1685726+00:00",
+        "CompletedAtUtc": "2026-05-07T07:18:22.2626196+00:00"
       },
-      "qa_tweak_id": "power.disable-power-throttling",
-      "candidate_id": "power.disable-power-throttling",
-      "card_name": "Power Throttling",
-      "documentation": "research/records/power.disable-power-throttling.json"
+      "qa_tweak_id": "security.disable-ntfs-encryption",
+      "candidate_id": "security.disable-ntfs-encryption",
+      "card_name": "Disable NTFS Encryption (EFS)",
+      "documentation": "research/records/security.disable-ntfs-encryption.json"
     },
     {
-      "tweak_id": "power.hide-hibernate-option",
+      "tweak_id": "security.disable-p2p-updates",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -1148,19 +1143,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "power.hide-hibernate-option",
-        "TweakName": "Show Hibernate Option",
+        "TweakId": "security.disable-p2p-updates",
+        "TweakName": "Delivery Optimization Download Mode",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "power.hide-hibernate-option",
-          "Name": "Show Hibernate Option",
-          "Category": "Power",
-          "Description": "Windows can show or hide Hibernate in the power menu. This policy decides whether that shortcut is visible.",
-          "FriendlyDescription": "Windows can show or hide Hibernate in the power menu. This policy decides whether that shortcut is visible.",
-          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer\\ShowHibernateOption",
+          "TweakId": "security.disable-p2p-updates",
+          "Name": "Delivery Optimization Download Mode",
+          "Category": "Security",
+          "Description": "Delivery Optimization controls whether Windows uses other PCs to help download updates and Microsoft content. This policy sets how much peer-to-peer sharing Delivery Optimization is allowed to use.",
+          "FriendlyDescription": "Delivery Optimization controls whether Windows uses other PCs to help download updates and Microsoft content. This policy sets how much peer-to-peer sharing Delivery Optimization is allowed to use.",
+          "RegistryPath": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DeliveryOptimization\\DODownloadMode",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -1168,22 +1163,22 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Windows can show or hide Hibernate in the power menu. This policy decides whether that shortcut is visible. Evidence: Local official ADMX defines the exact key and value name; local ADML confirms that disabling the policy hides Hibernate from the Power Options menu. Added nohuto mirror corroboration via nohuto-showhibernateoption-admx. Win25H2Clean reversible probe at evid... Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: Delivery Optimization controls whether Windows uses other PCs to help download updates and Microsoft content. This policy sets how much peer-to-peer sharing Delivery Optimization is allowed to use. Evidence: Local official ADMX and ADML files document the exact Delivery Optimization policy surface under HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DeliveryOptimization, and the app now writes that documented path. Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "Local official ADMX defines the exact key and value name; local ADML confirms that disabling the policy hides Hibernate from the Power Options menu. Added nohuto mirror corroboration via nohuto-showhibernateoption-admx. Win25H2Clean reversible probe at evid...",
-              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/WindowsExplorer.admx"
+              "Summary": "Local official ADMX and ADML files document the exact Delivery Optimization policy surface under HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DeliveryOptimization, and the app now writes that documented path.",
+              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/DeliveryOptimization.admx"
             },
             {
               "Key": "runtime",
               "Label": "RUNTIME",
               "State": "ready",
-              "Summary": "Power.txt lists AllowHibernate, HiberFileSizePercent, and HiberFileType in the power values block, which are adjacent to the Explorer ShowHibernateOption policy but govern hibernation support itself.",
-              "Source": "nohuto power trace for hibernation support: research/_source-mirrors/win-registry/records/Power.txt"
+              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+              "Source": ""
             },
             {
               "Key": "source",
@@ -1207,8 +1202,8 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Power (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\power\\power.md",
+              "Title": "Docs: Security (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\security\\security-verified.md",
               "Kind": "Docs"
             }
           ]
@@ -1217,10 +1212,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Hibernate option hidden'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'HTTP only'.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Hibernate option hidden",
+            "TargetValue": "HTTP only",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -1229,8 +1224,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Hibernate option hidden'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer\\ShowHibernateOption: missing -> 0",
-                "TimestampText": "22:23:16"
+                "Message": "Current values do not match a named option. Selected option is 'HTTP only'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DeliveryOptimization\\DODownloadMode: missing -> 0",
+                "TimestampText": "00:18:28"
               },
               {
                 "Action": "Apply",
@@ -1257,8 +1252,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Hibernate option hidden",
-            "TargetValue": "Hibernate option hidden",
+            "CurrentValue": "HTTP only",
+            "TargetValue": "HTTP only",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1267,20 +1262,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Hibernate option hidden'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer\\ShowHibernateOption: missing -> 0",
-                "TimestampText": "22:23:16"
+                "Message": "Current values do not match a named option. Selected option is 'HTTP only'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DeliveryOptimization\\DODownloadMode: missing -> 0",
+                "TimestampText": "00:18:28"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Hibernate option hidden'.",
-                "TimestampText": "22:23:18"
+                "Message": "Applied preset 'HTTP only'.",
+                "TimestampText": "00:18:31"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Hibernate option hidden'.",
-                "TimestampText": "22:23:18"
+                "Message": "Verified preset 'HTTP only'.",
+                "TimestampText": "00:18:31"
               },
               {
                 "Action": "Rollback",
@@ -1296,7 +1291,7 @@
             "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Hibernate option hidden",
+            "TargetValue": "HTTP only",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1305,36 +1300,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Hibernate option hidden'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer\\ShowHibernateOption: missing -> 0",
-                "TimestampText": "22:23:16"
+                "Message": "Current values do not match a named option. Selected option is 'HTTP only'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DeliveryOptimization\\DODownloadMode: missing -> 0",
+                "TimestampText": "00:18:28"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Hibernate option hidden'.",
-                "TimestampText": "22:23:18"
+                "Message": "Applied preset 'HTTP only'.",
+                "TimestampText": "00:18:31"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Hibernate option hidden'.",
-                "TimestampText": "22:23:18"
+                "Message": "Verified preset 'HTTP only'.",
+                "TimestampText": "00:18:31"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "22:23:19"
+                "TimestampText": "00:18:31"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Hibernate option hidden'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'HTTP only'.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Hibernate option hidden",
+            "TargetValue": "HTTP only",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1343,40 +1338,40 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Hibernate option hidden'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer\\ShowHibernateOption: missing -> 0",
-                "TimestampText": "22:23:19"
+                "Message": "Current values do not match a named option. Selected option is 'HTTP only'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DeliveryOptimization\\DODownloadMode: missing -> 0",
+                "TimestampText": "00:18:31"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Hibernate option hidden'.",
-                "TimestampText": "22:23:18"
+                "Message": "Applied preset 'HTTP only'.",
+                "TimestampText": "00:18:31"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Hibernate option hidden'.",
-                "TimestampText": "22:23:18"
+                "Message": "Verified preset 'HTTP only'.",
+                "TimestampText": "00:18:31"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "22:23:19"
+                "TimestampText": "00:18:31"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T05:23:16.0092923+00:00",
-        "CompletedAtUtc": "2026-05-07T05:23:19.1996628+00:00"
+        "StartedAtUtc": "2026-05-07T07:18:28.8168762+00:00",
+        "CompletedAtUtc": "2026-05-07T07:18:31.9051714+00:00"
       },
-      "qa_tweak_id": "power.hide-hibernate-option",
-      "candidate_id": "power.hide-hibernate-option",
-      "card_name": "Show Hibernate Option",
-      "documentation": "research/records/power.hide-hibernate-option.json"
+      "qa_tweak_id": "security.disable-p2p-updates",
+      "candidate_id": "security.disable-p2p-updates",
+      "card_name": "Delivery Optimization Download Mode",
+      "documentation": "research/records/security.disable-p2p-updates.review.json"
     },
     {
-      "tweak_id": "power.hide-lock-option",
+      "tweak_id": "security.disable-picture-password",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -1410,19 +1405,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "power.hide-lock-option",
-        "TweakName": "Show Lock Option",
+        "TweakId": "security.disable-picture-password",
+        "TweakName": "Picture Password Sign-In for Domain Users",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "power.hide-lock-option",
-          "Name": "Show Lock Option",
-          "Category": "Power",
-          "Description": "Windows can show or hide the Lock action in the user tile menu. This policy decides whether that shortcut is visible.",
-          "FriendlyDescription": "Windows can show or hide the Lock action in the user tile menu. This policy decides whether that shortcut is visible.",
-          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer\\ShowLockOption",
+          "TweakId": "security.disable-picture-password",
+          "Name": "Picture Password Sign-In for Domain Users",
+          "Category": "Security",
+          "Description": "Picture password lets someone sign in by tapping or drawing gestures on an image. This policy controls whether domain users are allowed to use that sign-in method.",
+          "FriendlyDescription": "Picture password lets someone sign in by tapping or drawing gestures on an image. This policy controls whether domain users are allowed to use that sign-in method.",
+          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\BlockDomainPicturePassword",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -1430,22 +1425,22 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Windows can show or hide the Lock action in the user tile menu. This policy decides whether that shortcut is visible. Evidence: Local official ADMX defines the exact key and value name; local ADML confirms that disabled policy hides Lock from the user tile menu. Added nohuto mirror corroboration via nohuto-showlockoption-admx. Win25H2Clean reversible probe at evidence/files/vm-tooli... Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: Picture password lets someone sign in by tapping or drawing gestures on an image. This policy controls whether domain users are allowed to use that sign-in method. Evidence: The local official Microsoft ADMX file defines the exact policy path and value name used by the app, with enabledValue 1 and disabledValue 0. The paired ADML help text explains that enabling the policy blocks picture password sign-in for domain users. Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "Local official ADMX defines the exact key and value name; local ADML confirms that disabled policy hides Lock from the user tile menu. Added nohuto mirror corroboration via nohuto-showlockoption-admx. Win25H2Clean reversible probe at evidence/files/vm-tooli...",
-              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/WindowsExplorer.admx"
+              "Summary": "The local official Microsoft ADMX file defines the exact policy path and value name used by the app, with enabledValue 1 and disabledValue 0. The paired ADML help text explains that enabling the policy blocks picture password sign-in for domain users.",
+              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/CredentialProviders.admx"
             },
             {
               "Key": "runtime",
               "Label": "RUNTIME",
               "State": "ready",
-              "Summary": "The guest probe wrote ShowLockOption=0 and ShowLockOption=1, queried the live registry after each write, opened the Start menu surface twice, and restored the original state; no direct registry read lines were captured in Procmon in this capture.",
-              "Source": "Win25H2Clean reversible probe - ShowLockOption 0/1 toggle: evidence/raw/procmon/power.hide-lock-option/power_hide_lock_option_probe.txt"
+              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+              "Source": ""
             },
             {
               "Key": "source",
@@ -1469,8 +1464,8 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Power (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\power\\power.md",
+              "Title": "Docs: Security (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\security\\security-verified.md",
               "Kind": "Docs"
             }
           ]
@@ -1479,10 +1474,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Lock option hidden'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Picture password blocked'.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Lock option hidden",
+            "TargetValue": "Picture password blocked",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -1491,8 +1486,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Lock option hidden'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer\\ShowLockOption: missing -> 0",
-                "TimestampText": "22:23:25"
+                "Message": "Current values do not match a named option. Selected option is 'Picture password blocked'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\BlockDomainPicturePassword: missing -> 1",
+                "TimestampText": "00:18:38"
               },
               {
                 "Action": "Apply",
@@ -1519,8 +1514,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Lock option hidden",
-            "TargetValue": "Lock option hidden",
+            "CurrentValue": "Picture password blocked",
+            "TargetValue": "Picture password blocked",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1529,20 +1524,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Lock option hidden'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer\\ShowLockOption: missing -> 0",
-                "TimestampText": "22:23:25"
+                "Message": "Current values do not match a named option. Selected option is 'Picture password blocked'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\BlockDomainPicturePassword: missing -> 1",
+                "TimestampText": "00:18:38"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Lock option hidden'.",
-                "TimestampText": "22:23:28"
+                "Message": "Applied preset 'Picture password blocked'.",
+                "TimestampText": "00:18:41"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Lock option hidden'.",
-                "TimestampText": "22:23:28"
+                "Message": "Verified preset 'Picture password blocked'.",
+                "TimestampText": "00:18:41"
               },
               {
                 "Action": "Rollback",
@@ -1558,7 +1553,7 @@
             "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Lock option hidden",
+            "TargetValue": "Picture password blocked",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1567,36 +1562,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Lock option hidden'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer\\ShowLockOption: missing -> 0",
-                "TimestampText": "22:23:25"
+                "Message": "Current values do not match a named option. Selected option is 'Picture password blocked'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\BlockDomainPicturePassword: missing -> 1",
+                "TimestampText": "00:18:38"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Lock option hidden'.",
-                "TimestampText": "22:23:28"
+                "Message": "Applied preset 'Picture password blocked'.",
+                "TimestampText": "00:18:41"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Lock option hidden'.",
-                "TimestampText": "22:23:28"
+                "Message": "Verified preset 'Picture password blocked'.",
+                "TimestampText": "00:18:41"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "22:23:28"
+                "TimestampText": "00:18:41"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Lock option hidden'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Picture password blocked'.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Lock option hidden",
+            "TargetValue": "Picture password blocked",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1605,37 +1600,37 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Lock option hidden'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer\\ShowLockOption: missing -> 0",
-                "TimestampText": "22:23:29"
+                "Message": "Current values do not match a named option. Selected option is 'Picture password blocked'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\BlockDomainPicturePassword: missing -> 1",
+                "TimestampText": "00:18:41"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Lock option hidden'.",
-                "TimestampText": "22:23:28"
+                "Message": "Applied preset 'Picture password blocked'.",
+                "TimestampText": "00:18:41"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Lock option hidden'.",
-                "TimestampText": "22:23:28"
+                "Message": "Verified preset 'Picture password blocked'.",
+                "TimestampText": "00:18:41"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "22:23:28"
+                "TimestampText": "00:18:41"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T05:23:25.823969+00:00",
-        "CompletedAtUtc": "2026-05-07T05:23:29.0612425+00:00"
+        "StartedAtUtc": "2026-05-07T07:18:38.5292062+00:00",
+        "CompletedAtUtc": "2026-05-07T07:18:41.619556+00:00"
       },
-      "qa_tweak_id": "power.hide-lock-option",
-      "candidate_id": "power.hide-lock-option",
-      "card_name": "Show Lock Option",
-      "documentation": "research/records/power.hide-lock-option.json"
+      "qa_tweak_id": "security.disable-picture-password",
+      "candidate_id": "security.disable-picture-password",
+      "card_name": "Picture Password Sign-In for Domain Users",
+      "documentation": "research/records/security.disable-picture-password.json"
     }
   ],
   "summary": {
@@ -1644,7 +1639,7 @@
     "live_success_count": 5,
     "live_failure_count": 0,
     "categories": [
-      "Power"
+      "Security"
     ]
   }
 }
