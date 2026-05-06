@@ -1,13 +1,13 @@
 {
-  "generated_utc": "2026-05-06T21:41:01Z",
+  "generated_utc": "2026-05-06T21:46:40Z",
   "status": "PASS",
   "selection": {
     "requested_ids": [
-      "network.disable-lltd",
-      "network.disable-mdns",
-      "network.disable-netbios",
-      "network.disable-netbios-resolution",
-      "network.disable-plaintext-smb-passwords"
+      "privacy.disable-appdeviceinventory.policy",
+      "privacy.disable-application-telemetry",
+      "privacy.disable-background-apps",
+      "privacy.disable-biometrics",
+      "privacy.disable-biometrics-domain-logon"
     ],
     "requested_categories": [],
     "limit_per_category": 1,
@@ -26,25 +26,25 @@
   "errors": [],
   "candidates": [
     {
-      "tweak_id": "network.disable-lltd",
-      "qa_tweak_id": "network.disable-lltd",
-      "candidate_id": "network.disable-lltd",
-      "record_id": "network.disable-lltd",
-      "category": "Network",
-      "name": "Set LLTD Policies to Default Behavior",
-      "documentation": "research/records/network.disable-lltd.review.json",
+      "tweak_id": "privacy.disable-appdeviceinventory.policy",
+      "qa_tweak_id": "privacy.disable-appdeviceinventory.policy",
+      "candidate_id": "privacy.disable-appdeviceinventory.policy",
+      "record_id": "privacy.disable-appdeviceinventory.policy",
+      "category": "Privacy",
+      "name": "Disable App Device Inventory Policies",
+      "documentation": "research/records/privacy.disable-appdeviceinventory.policy.review.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect network.disable-lltd",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.disable-appdeviceinventory.policy",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'network.disable-lltd' --qa-output 'C:\\Tools\\ValidationController\\smoke\\network.disable-lltd.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'network.disable-lltd' --qa-output 'C:\\Tools\\ValidationController\\smoke\\network.disable-lltd.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'network.disable-lltd' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\network.disable-lltd.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'network.disable-lltd' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\network.disable-lltd.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'network.disable-lltd'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-appdeviceinventory.policy' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-appdeviceinventory.policy.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-appdeviceinventory.policy' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-appdeviceinventory.policy.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-appdeviceinventory.policy' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-appdeviceinventory.policy.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-appdeviceinventory.policy' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-appdeviceinventory.policy.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.disable-appdeviceinventory.policy'"
       },
       "expected_report": {
         "success": true,
@@ -85,25 +85,25 @@
       }
     },
     {
-      "tweak_id": "network.disable-mdns",
-      "qa_tweak_id": "network.disable-mdns",
-      "candidate_id": "network.disable-mdns",
-      "record_id": "network.disable-mdns",
-      "category": "Network",
-      "name": "Set mDNS Policy to Local Settings",
-      "documentation": "research/records/network.disable-mdns.review.json",
+      "tweak_id": "privacy.disable-application-telemetry",
+      "qa_tweak_id": "privacy.disable-application-telemetry",
+      "candidate_id": "privacy.disable-application-telemetry",
+      "record_id": "privacy.disable-application-telemetry",
+      "category": "Privacy",
+      "name": "Application Compatibility Telemetry",
+      "documentation": "research/records/privacy.disable-application-telemetry.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect network.disable-mdns",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.disable-application-telemetry",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'network.disable-mdns' --qa-output 'C:\\Tools\\ValidationController\\smoke\\network.disable-mdns.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'network.disable-mdns' --qa-output 'C:\\Tools\\ValidationController\\smoke\\network.disable-mdns.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'network.disable-mdns' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\network.disable-mdns.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'network.disable-mdns' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\network.disable-mdns.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'network.disable-mdns'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-application-telemetry' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-application-telemetry.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-application-telemetry' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-application-telemetry.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-application-telemetry' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-application-telemetry.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-application-telemetry' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-application-telemetry.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.disable-application-telemetry'"
       },
       "expected_report": {
         "success": true,
@@ -144,25 +144,25 @@
       }
     },
     {
-      "tweak_id": "network.disable-netbios",
-      "qa_tweak_id": "network.disable-netbios",
-      "candidate_id": "network.disable-netbios",
-      "record_id": "network.disable-netbios",
-      "category": "Network",
-      "name": "NetBIOS over TCP/IP",
-      "documentation": "research/records/network.disable-netbios.review.json",
+      "tweak_id": "privacy.disable-background-apps",
+      "qa_tweak_id": "privacy.disable-background-apps",
+      "candidate_id": "privacy.disable-background-apps",
+      "record_id": "privacy.disable-background-apps",
+      "category": "Privacy",
+      "name": "Background App Execution",
+      "documentation": "research/records/privacy.disable-background-apps.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect network.disable-netbios",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.disable-background-apps",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'network.disable-netbios' --qa-output 'C:\\Tools\\ValidationController\\smoke\\network.disable-netbios.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'network.disable-netbios' --qa-output 'C:\\Tools\\ValidationController\\smoke\\network.disable-netbios.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'network.disable-netbios' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\network.disable-netbios.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'network.disable-netbios' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\network.disable-netbios.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'network.disable-netbios'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-background-apps' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-background-apps.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-background-apps' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-background-apps.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-background-apps' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-background-apps.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-background-apps' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-background-apps.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.disable-background-apps'"
       },
       "expected_report": {
         "success": true,
@@ -203,25 +203,25 @@
       }
     },
     {
-      "tweak_id": "network.disable-netbios-resolution",
-      "qa_tweak_id": "network.disable-netbios-resolution",
-      "candidate_id": "network.disable-netbios-resolution",
-      "record_id": "network.disable-netbios-resolution",
-      "category": "Network",
-      "name": "DNS Client NetBIOS Name Resolution",
-      "documentation": "research/records/network.disable-netbios-resolution.json",
+      "tweak_id": "privacy.disable-biometrics",
+      "qa_tweak_id": "privacy.disable-biometrics",
+      "candidate_id": "privacy.disable-biometrics",
+      "record_id": "privacy.disable-biometrics",
+      "category": "Privacy",
+      "name": "Windows Biometrics",
+      "documentation": "research/records/privacy.disable-biometrics.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect network.disable-netbios-resolution",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.disable-biometrics",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'network.disable-netbios-resolution' --qa-output 'C:\\Tools\\ValidationController\\smoke\\network.disable-netbios-resolution.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'network.disable-netbios-resolution' --qa-output 'C:\\Tools\\ValidationController\\smoke\\network.disable-netbios-resolution.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'network.disable-netbios-resolution' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\network.disable-netbios-resolution.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'network.disable-netbios-resolution' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\network.disable-netbios-resolution.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'network.disable-netbios-resolution'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-biometrics' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-biometrics.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-biometrics' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-biometrics.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-biometrics' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-biometrics.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-biometrics' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-biometrics.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.disable-biometrics'"
       },
       "expected_report": {
         "success": true,
@@ -262,25 +262,25 @@
       }
     },
     {
-      "tweak_id": "network.disable-plaintext-smb-passwords",
-      "qa_tweak_id": "network.disable-plaintext-smb-passwords",
-      "candidate_id": "network.disable-plaintext-smb-passwords",
-      "record_id": "network.disable-plaintext-smb-passwords",
-      "category": "Network",
-      "name": "Plaintext SMB Passwords",
-      "documentation": "research/records/network.disable-plaintext-smb-passwords.json",
+      "tweak_id": "privacy.disable-biometrics-domain-logon",
+      "qa_tweak_id": "privacy.disable-biometrics-domain-logon",
+      "candidate_id": "privacy.disable-biometrics-domain-logon",
+      "record_id": "privacy.disable-biometrics-domain-logon",
+      "category": "Privacy",
+      "name": "Biometric Sign-in for Domain Accounts",
+      "documentation": "research/records/privacy.disable-biometrics-domain-logon.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect network.disable-plaintext-smb-passwords",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.disable-biometrics-domain-logon",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'network.disable-plaintext-smb-passwords' --qa-output 'C:\\Tools\\ValidationController\\smoke\\network.disable-plaintext-smb-passwords.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'network.disable-plaintext-smb-passwords' --qa-output 'C:\\Tools\\ValidationController\\smoke\\network.disable-plaintext-smb-passwords.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'network.disable-plaintext-smb-passwords' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\network.disable-plaintext-smb-passwords.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'network.disable-plaintext-smb-passwords' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\network.disable-plaintext-smb-passwords.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'network.disable-plaintext-smb-passwords'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-biometrics-domain-logon' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-biometrics-domain-logon.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-biometrics-domain-logon' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-biometrics-domain-logon.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-biometrics-domain-logon' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-biometrics-domain-logon.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-biometrics-domain-logon' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-biometrics-domain-logon.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.disable-biometrics-domain-logon'"
       },
       "expected_report": {
         "success": true,
@@ -323,7 +323,7 @@
   ],
   "run_results": [
     {
-      "tweak_id": "network.disable-lltd",
+      "tweak_id": "privacy.disable-appdeviceinventory.policy",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -357,18 +357,18 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "network.disable-lltd",
-        "TweakName": "Set LLTD Policies to Default Behavior",
+        "TweakId": "privacy.disable-appdeviceinventory.policy",
+        "TweakName": "Disable App Device Inventory Policies",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "network.disable-lltd",
-          "Name": "Set LLTD Policies to Default Behavior",
-          "Category": "Network",
-          "Description": "LLTD is part of the older Windows network discovery stack. This tweak disables the explicit LLTD mapper and responder policies so Windows falls back to the documented default LLTD behavior.",
-          "FriendlyDescription": "LLTD is part of the older Windows network discovery stack. This tweak disables the explicit LLTD mapper and responder policies so Windows falls back to the documented default LLTD behavior.",
+          "TweakId": "privacy.disable-appdeviceinventory.policy",
+          "Name": "Disable App Device Inventory Policies",
+          "Category": "Privacy",
+          "Description": "Windows 11 24H2 added policies that track which APIs applications use, record install events, capture application footprints, and back up Win32 app data. These four policies let you turn those collection behaviors off.",
+          "FriendlyDescription": "Windows 11 24H2 added policies that track which APIs applications use, record install events, capture application footprints, and back up Win32 app data. These four policies let you turn those collection behaviors off.",
           "RegistryPath": "",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
@@ -377,15 +377,277 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: LLTD is part of the older Windows network discovery stack. This tweak disables the explicit LLTD mapper and responder policies so Windows falls back to the documented default LLTD behavior. Evidence: Microsoft Learn and the local official ADMX/ADML files agree on the exact LLTD policy path and value names. The key finding is semantic: value 0 is documented as policy-disabled/default-behavior handling, not as a guaranteed hard-disable state. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: Windows 11 24H2 added policies that track which APIs applications use, record install events, capture application footprints, and back up Win32 app data. These four policies let you turn those collection behaviors off. Evidence: Local official AppDeviceInventory.admx documents all four values under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat with explicit enabledValue=1 and disabledValue=0, and VM Procmon capture on 2026-03-26 in Win25H2Clean confirmed direct writes and read... Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "Microsoft Learn and the local official ADMX/ADML files agree on the exact LLTD policy path and value names. The key finding is semantic: value 0 is documented as policy-disabled/default-behavior handling, not as a guaranteed hard-disable state.",
-              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-linklayertopologydiscovery"
+              "Summary": "Local official AppDeviceInventory.admx documents all four values under HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat with explicit enabledValue=1 and disabledValue=0, and VM Procmon capture on 2026-03-26 in Win25H2Clean confirmed direct writes and read...",
+              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/AppDeviceInventory.admx"
+            },
+            {
+              "Key": "runtime",
+              "Label": "RUNTIME",
+              "State": "ready",
+              "Summary": "VM reversible Procmon capture on 2026-03-26 in Win25H2Clean. powershell.exe wrote DisableAPISamping=1, DisableApplicationFootprint=1, DisableInstallTracing=1, and DisableWin32AppBackup=1 under HKLM/Software/Policies/Microsoft/Windows/AppCompat, and reg.exe...",
+              "Source": "VM Procmon capture - four AppDeviceInventory policies: evidence/raw/procmon/privacy.disable-appdeviceinventory.policy/appdeviceinventory-policy-procmon.pml and evidence/raw/procmon/privacy.disable-appdeviceinventory.policy/appdeviceinventory-policy-procmon.filtered.hits.csv"
+            },
+            {
+              "Key": "source",
+              "Label": "SOURCE",
+              "State": "ready",
+              "Summary": "No upstream nohuto source link is attached to this record.",
+              "Source": ""
+            },
+            {
+              "Key": "rollback",
+              "Label": "ROLLBACK",
+              "State": "ready",
+              "Summary": "Rollback: Verified via record-restore-story.",
+              "Source": "record-restore-story"
+            }
+          ],
+          "ReferenceLinks": [
+            {
+              "Title": "Docs: Details (missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
+              "Kind": "Details"
+            },
+            {
+              "Title": "Docs: Privacy (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\privacy\\privacy-verified.md",
+              "Kind": "Docs"
+            }
+          ]
+        },
+        "Stages": [
+          {
+            "Stage": "detect-before",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Detected 0 of 4 values (matches: 0, missing: 4).",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Unknown",
+            "TargetValue": "Multiple values",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": false,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Detected 0 of 4 values (matches: 0, missing: 4).\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat\\DisableAPISamping: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat\\DisableApplicationFootprint: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat\\DisableInstallTracing: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat\\DisableWin32AppBackup: missing",
+                "TimestampText": "00:46:44"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "apply",
+            "AppliedStatus": "Applied",
+            "StatusMessage": "Run completed.",
+            "OutcomeSummary": "Apply - Success",
+            "CurrentValue": "Multiple values",
+            "TargetValue": "Multiple values",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Detected 0 of 4 values (matches: 0, missing: 4).\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat\\DisableAPISamping: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat\\DisableApplicationFootprint: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat\\DisableInstallTracing: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat\\DisableWin32AppBackup: missing",
+                "TimestampText": "00:46:44"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Updated 4 values.",
+                "TimestampText": "00:46:47"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified desired values.",
+                "TimestampText": "00:46:47"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Not required",
+                "Message": "Step not executed.",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "rollback",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Rolled back registry values.",
+            "OutcomeSummary": "Rollback - Rolled Back",
+            "CurrentValue": "Multiple values",
+            "TargetValue": "Multiple values",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Detected 0 of 4 values (matches: 0, missing: 4).\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat\\DisableAPISamping: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat\\DisableApplicationFootprint: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat\\DisableInstallTracing: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat\\DisableWin32AppBackup: missing",
+                "TimestampText": "00:46:44"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Updated 4 values.",
+                "TimestampText": "00:46:47"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified desired values.",
+                "TimestampText": "00:46:47"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "00:46:47"
+              }
+            ]
+          },
+          {
+            "Stage": "detect-after",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Detected 0 of 4 values (matches: 0, missing: 4).",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Multiple values",
+            "TargetValue": "Multiple values",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Detected 0 of 4 values (matches: 0, missing: 4).\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat\\DisableAPISamping: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat\\DisableApplicationFootprint: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat\\DisableInstallTracing: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat\\DisableWin32AppBackup: missing",
+                "TimestampText": "00:46:48"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Updated 4 values.",
+                "TimestampText": "00:46:47"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified desired values.",
+                "TimestampText": "00:46:47"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "00:46:47"
+              }
+            ]
+          }
+        ],
+        "StartedAtUtc": "2026-05-07T07:46:44.2326364+00:00",
+        "CompletedAtUtc": "2026-05-07T07:46:48.0962428+00:00"
+      },
+      "qa_tweak_id": "privacy.disable-appdeviceinventory.policy",
+      "candidate_id": "privacy.disable-appdeviceinventory.policy",
+      "card_name": "Disable App Device Inventory Policies",
+      "documentation": "research/records/privacy.disable-appdeviceinventory.policy.review.json"
+    },
+    {
+      "tweak_id": "privacy.disable-application-telemetry",
+      "host_exit": 0,
+      "execution_exit": 0,
+      "payload_status": "completed",
+      "report_app_success": true,
+      "report_success": true,
+      "report_status": "ok",
+      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
+      "report_contract_status": "ok",
+      "report_contract_summary": "QA card snapshot contract passed.",
+      "report_contract_failures": [],
+      "report_card_present": true,
+      "report_card_has_claim_boundary": true,
+      "report_card_present_fields": [
+        "TweakId",
+        "Name",
+        "Category",
+        "EvidenceClass",
+        "ResearchStatus",
+        "RollbackSnapshotState",
+        "HasClaimBoundary",
+        "WhatWeKnowSummary",
+        "WhatWeDoNotClaimSummary",
+        "ProofLanes"
+      ],
+      "report_card_missing_fields": [],
+      "report_card_proof_lanes": [
+        "docs",
+        "runtime",
+        "source",
+        "rollback"
+      ],
+      "report_card_missing_proof_lanes": [],
+      "report": {
+        "TweakId": "privacy.disable-application-telemetry",
+        "TweakName": "Application Compatibility Telemetry",
+        "Success": true,
+        "Status": "ok",
+        "Summary": "Apply/verify path completed and rollback restored the tweak.",
+        "RollbackRequested": true,
+        "Card": {
+          "TweakId": "privacy.disable-application-telemetry",
+          "Name": "Application Compatibility Telemetry",
+          "Category": "Privacy",
+          "Description": "Windows can collect anonymous telemetry about how applications use certain system components so compatibility systems can learn from it. This policy decides whether that telemetry engine runs.",
+          "FriendlyDescription": "Windows can collect anonymous telemetry about how applications use certain system components so compatibility systems can learn from it. This policy decides whether that telemetry engine runs.",
+          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat\\AITEnable",
+          "EvidenceClass": "A",
+          "EvidenceClassTitle": "Cross-Layer Verified",
+          "ResearchStatus": "PROMOTED",
+          "IsMutationAllowed": true,
+          "RollbackSnapshotState": "ready",
+          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
+          "HasClaimBoundary": true,
+          "WhatWeKnowSummary": "Claim: Windows can collect anonymous telemetry about how applications use certain system components so compatibility systems can learn from it. This policy decides whether that telemetry engine runs. Evidence: The local official Microsoft ADMX file names the same policy key and value name that the app writes and confirms the reversed 0/1 semantics for this policy. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
+          "ProofLanes": [
+            {
+              "Key": "docs",
+              "Label": "DOCS",
+              "State": "ready",
+              "Summary": "The local official Microsoft ADMX file names the same policy key and value name that the app writes and confirms the reversed 0/1 semantics for this policy.",
+              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/AppCompat.admx"
             },
             {
               "Key": "runtime",
@@ -416,8 +678,8 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Network (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\network\\network.md",
+              "Title": "Docs: Privacy (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\privacy\\privacy-verified.md",
               "Kind": "Docs"
             }
           ]
@@ -426,10 +688,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Detected 0 of 2 values (matches: 0, missing: 2).",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Application Telemetry turned off'.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Unknown",
-            "TargetValue": "Multiple values",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Application Telemetry turned off",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -438,8 +700,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 0 of 2 values (matches: 0, missing: 2).\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\LLTD\\EnableLLTDIO: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\LLTD\\EnableRspndr: missing",
-                "TimestampText": "00:41:05"
+                "Message": "Current values do not match a named option. Selected option is 'Application Telemetry turned off'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat\\AITEnable: missing -> 0",
+                "TimestampText": "00:46:54"
               },
               {
                 "Action": "Apply",
@@ -466,8 +728,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Multiple values",
-            "TargetValue": "Multiple values",
+            "CurrentValue": "Application Telemetry turned off",
+            "TargetValue": "Application Telemetry turned off",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -476,20 +738,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 0 of 2 values (matches: 0, missing: 2).\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\LLTD\\EnableLLTDIO: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\LLTD\\EnableRspndr: missing",
-                "TimestampText": "00:41:05"
+                "Message": "Current values do not match a named option. Selected option is 'Application Telemetry turned off'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat\\AITEnable: missing -> 0",
+                "TimestampText": "00:46:54"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Updated 2 values.",
-                "TimestampText": "00:41:08"
+                "Message": "Applied preset 'Application Telemetry turned off'.",
+                "TimestampText": "00:46:57"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified desired values.",
-                "TimestampText": "00:41:08"
+                "Message": "Verified preset 'Application Telemetry turned off'.",
+                "TimestampText": "00:46:57"
               },
               {
                 "Action": "Rollback",
@@ -504,8 +766,8 @@
             "AppliedStatus": "NotApplied",
             "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Multiple values",
-            "TargetValue": "Multiple values",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Application Telemetry turned off",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -514,36 +776,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 0 of 2 values (matches: 0, missing: 2).\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\LLTD\\EnableLLTDIO: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\LLTD\\EnableRspndr: missing",
-                "TimestampText": "00:41:05"
+                "Message": "Current values do not match a named option. Selected option is 'Application Telemetry turned off'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat\\AITEnable: missing -> 0",
+                "TimestampText": "00:46:54"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Updated 2 values.",
-                "TimestampText": "00:41:08"
+                "Message": "Applied preset 'Application Telemetry turned off'.",
+                "TimestampText": "00:46:57"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified desired values.",
-                "TimestampText": "00:41:08"
+                "Message": "Verified preset 'Application Telemetry turned off'.",
+                "TimestampText": "00:46:57"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "00:41:09"
+                "TimestampText": "00:46:57"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Detected 0 of 2 values (matches: 0, missing: 2).",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Application Telemetry turned off'.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Multiple values",
-            "TargetValue": "Multiple values",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Application Telemetry turned off",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -552,40 +814,40 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 0 of 2 values (matches: 0, missing: 2).\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\LLTD\\EnableLLTDIO: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\LLTD\\EnableRspndr: missing",
-                "TimestampText": "00:41:09"
+                "Message": "Current values do not match a named option. Selected option is 'Application Telemetry turned off'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat\\AITEnable: missing -> 0",
+                "TimestampText": "00:46:57"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Updated 2 values.",
-                "TimestampText": "00:41:08"
+                "Message": "Applied preset 'Application Telemetry turned off'.",
+                "TimestampText": "00:46:57"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified desired values.",
-                "TimestampText": "00:41:08"
+                "Message": "Verified preset 'Application Telemetry turned off'.",
+                "TimestampText": "00:46:57"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "00:41:09"
+                "TimestampText": "00:46:57"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T07:41:05.3815352+00:00",
-        "CompletedAtUtc": "2026-05-07T07:41:09.2374414+00:00"
+        "StartedAtUtc": "2026-05-07T07:46:54.4726322+00:00",
+        "CompletedAtUtc": "2026-05-07T07:46:57.5691954+00:00"
       },
-      "qa_tweak_id": "network.disable-lltd",
-      "candidate_id": "network.disable-lltd",
-      "card_name": "Set LLTD Policies to Default Behavior",
-      "documentation": "research/records/network.disable-lltd.review.json"
+      "qa_tweak_id": "privacy.disable-application-telemetry",
+      "candidate_id": "privacy.disable-application-telemetry",
+      "card_name": "Application Compatibility Telemetry",
+      "documentation": "research/records/privacy.disable-application-telemetry.json"
     },
     {
-      "tweak_id": "network.disable-mdns",
+      "tweak_id": "privacy.disable-background-apps",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -619,19 +881,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "network.disable-mdns",
-        "TweakName": "Set mDNS Policy to Local Settings",
+        "TweakId": "privacy.disable-background-apps",
+        "TweakName": "Background App Execution",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "network.disable-mdns",
-          "Name": "Set mDNS Policy to Local Settings",
-          "Category": "Network",
-          "Description": "mDNS is a local-network name resolution protocol used by some discovery and service-advertising workflows. This policy setting disables the explicit mDNS policy so Windows falls back to its locally configured mDNS behavior.",
-          "FriendlyDescription": "mDNS is a local-network name resolution protocol used by some discovery and service-advertising workflows. This policy setting disables the explicit mDNS policy so Windows falls back to its locally configured mDNS behavior.",
-          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient\\EnableMDNS",
+          "TweakId": "privacy.disable-background-apps",
+          "Name": "Background App Execution",
+          "Category": "Privacy",
+          "Description": "Windows apps can keep running in the background to sync, refresh notifications, or finish work. This policy decides whether users control that, all apps are allowed, or all apps are denied.",
+          "FriendlyDescription": "Windows apps can keep running in the background to sync, refresh notifications, or finish work. This policy decides whether users control that, all apps are allowed, or all apps are denied.",
+          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsRunInBackground",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -639,22 +901,22 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: mDNS is a local-network name resolution protocol used by some discovery and service-advertising workflows. This policy setting disables the explicit mDNS policy so Windows falls back to its locally configured mDNS behavior. Evidence: Local official ADMX and ADML files document the exact EnableMDNS policy surface. The key finding is semantic: value 0 is documented as policy-disabled/local-settings behavior, not as a guaranteed hard-disable state. In the same pass, the app was also confir... Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: Windows apps can keep running in the background to sync, refresh notifications, or finish work. This policy decides whether users control that, all apps are allowed, or all apps are denied. Evidence: The local official Microsoft ADMX file names the same AppPrivacy machine policy surface used by the app. The paired ADML help text documents the User in control, Force Allow, and Force Deny states for this enum, and the app uses Force Deny (2). Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "Local official ADMX and ADML files document the exact EnableMDNS policy surface. The key finding is semantic: value 0 is documented as policy-disabled/local-settings behavior, not as a guaranteed hard-disable state. In the same pass, the app was also confir...",
-              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/DnsClient.admx"
+              "Summary": "The local official Microsoft ADMX file names the same AppPrivacy machine policy surface used by the app. The paired ADML help text documents the User in control, Force Allow, and Force Deny states for this enum, and the app uses Force Deny (2).",
+              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/AppPrivacy.admx"
             },
             {
               "Key": "runtime",
               "Label": "RUNTIME",
               "State": "ready",
-              "Summary": "A same-day guest Ghidra retry for `EnableMDNS` failed in `ensure-admin-shell` before any xref bundle reached the host.",
-              "Source": "Guest Ghidra launch receipt for EnableMDNS: evidence/raw/ghidra/ghidra-network-disable-mdns-20260424-batch3/summary.json"
+              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+              "Source": ""
             },
             {
               "Key": "source",
@@ -678,8 +940,8 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Network (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\network\\network.md",
+              "Title": "Docs: Privacy (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\privacy\\privacy-verified.md",
               "Kind": "Docs"
             }
           ]
@@ -688,10 +950,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Policy disabled'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Force deny'.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Policy disabled",
+            "TargetValue": "Force deny",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -700,8 +962,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Policy disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient\\EnableMDNS: missing -> 0",
-                "TimestampText": "00:41:15"
+                "Message": "Current values do not match a named option. Selected option is 'Force deny'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsRunInBackground: missing -> 2",
+                "TimestampText": "00:47:03"
               },
               {
                 "Action": "Apply",
@@ -728,8 +990,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Policy disabled",
-            "TargetValue": "Policy disabled",
+            "CurrentValue": "Force deny",
+            "TargetValue": "Force deny",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -738,20 +1000,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Policy disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient\\EnableMDNS: missing -> 0",
-                "TimestampText": "00:41:15"
+                "Message": "Current values do not match a named option. Selected option is 'Force deny'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsRunInBackground: missing -> 2",
+                "TimestampText": "00:47:03"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Policy disabled'.",
-                "TimestampText": "00:41:18"
+                "Message": "Applied preset 'Force deny'.",
+                "TimestampText": "00:47:06"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Policy disabled'.",
-                "TimestampText": "00:41:18"
+                "Message": "Verified preset 'Force deny'.",
+                "TimestampText": "00:47:06"
               },
               {
                 "Action": "Rollback",
@@ -767,7 +1029,7 @@
             "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Policy disabled",
+            "TargetValue": "Force deny",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -776,36 +1038,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Policy disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient\\EnableMDNS: missing -> 0",
-                "TimestampText": "00:41:15"
+                "Message": "Current values do not match a named option. Selected option is 'Force deny'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsRunInBackground: missing -> 2",
+                "TimestampText": "00:47:03"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Policy disabled'.",
-                "TimestampText": "00:41:18"
+                "Message": "Applied preset 'Force deny'.",
+                "TimestampText": "00:47:06"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Policy disabled'.",
-                "TimestampText": "00:41:18"
+                "Message": "Verified preset 'Force deny'.",
+                "TimestampText": "00:47:06"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "00:41:18"
+                "TimestampText": "00:47:06"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Policy disabled'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Force deny'.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Policy disabled",
+            "TargetValue": "Force deny",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -814,40 +1076,40 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Policy disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient\\EnableMDNS: missing -> 0",
-                "TimestampText": "00:41:18"
+                "Message": "Current values do not match a named option. Selected option is 'Force deny'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy\\LetAppsRunInBackground: missing -> 2",
+                "TimestampText": "00:47:06"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Policy disabled'.",
-                "TimestampText": "00:41:18"
+                "Message": "Applied preset 'Force deny'.",
+                "TimestampText": "00:47:06"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Policy disabled'.",
-                "TimestampText": "00:41:18"
+                "Message": "Verified preset 'Force deny'.",
+                "TimestampText": "00:47:06"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "00:41:18"
+                "TimestampText": "00:47:06"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T07:41:15.6364861+00:00",
-        "CompletedAtUtc": "2026-05-07T07:41:18.7140222+00:00"
+        "StartedAtUtc": "2026-05-07T07:47:03.8380477+00:00",
+        "CompletedAtUtc": "2026-05-07T07:47:06.9215226+00:00"
       },
-      "qa_tweak_id": "network.disable-mdns",
-      "candidate_id": "network.disable-mdns",
-      "card_name": "Set mDNS Policy to Local Settings",
-      "documentation": "research/records/network.disable-mdns.review.json"
+      "qa_tweak_id": "privacy.disable-background-apps",
+      "candidate_id": "privacy.disable-background-apps",
+      "card_name": "Background App Execution",
+      "documentation": "research/records/privacy.disable-background-apps.json"
     },
     {
-      "tweak_id": "network.disable-netbios",
+      "tweak_id": "privacy.disable-biometrics",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -881,19 +1143,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "network.disable-netbios",
-        "TweakName": "NetBIOS over TCP/IP",
+        "TweakId": "privacy.disable-biometrics",
+        "TweakName": "Windows Biometrics",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "network.disable-netbios",
-          "Name": "NetBIOS over TCP/IP",
-          "Category": "Network",
-          "Description": "NetBIOS over TCP/IP is an older naming and networking layer that some legacy Windows networks still use. Most modern home users never notice it unless they have very old devices or legacy enterprise naming dependencies.",
-          "FriendlyDescription": "NetBIOS over TCP/IP is an older naming and networking layer that some legacy Windows networks still use. Most modern home users never notice it unless they have very old devices or legacy enterprise naming dependencies.",
-          "RegistryPath": "",
+          "TweakId": "privacy.disable-biometrics",
+          "Name": "Windows Biometrics",
+          "Category": "Privacy",
+          "Description": "Windows can use fingerprint, face, or other biometric features for sign-in and related capabilities. This device policy controls whether biometrics are allowed at all.",
+          "FriendlyDescription": "Windows can use fingerprint, face, or other biometric features for sign-in and related capabilities. This device policy controls whether biometrics are allowed at all.",
+          "RegistryPath": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Biometrics\\Enabled",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -901,289 +1163,22 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: NetBIOS over TCP/IP is an older naming and networking layer that some legacy Windows networks still use. Most modern home users never notice it unless they have very old devices or legacy enterprise naming dependencies. Evidence: Microsoft's official WMI page and unattended setup page both document the same per-interface 0/1/2 NetBIOS control. The app now matches that model with a command-backed SetTcpipNetbios(2) implementation rather than the old global NoNameReleaseOnDemand write. Rollback: Rollback: Verified via record-restore-story.",
-          "WhatWeDoNotClaimSummary": "Source boundary: Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
-          "ProofLanes": [
-            {
-              "Key": "docs",
-              "Label": "DOCS",
-              "State": "ready",
-              "Summary": "Microsoft's official WMI page and unattended setup page both document the same per-interface 0/1/2 NetBIOS control. The app now matches that model with a command-backed SetTcpipNetbios(2) implementation rather than the old global NoNameReleaseOnDemand write.",
-              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/settcpipnetbios-method-in-class-win32-networkadapterconfiguration"
-            },
-            {
-              "Key": "runtime",
-              "Label": "RUNTIME",
-              "State": "ready",
-              "Summary": "Read-only Get-CimInstance Win32_NetworkAdapterConfiguration run on the current machine returned four IP-enabled adapters and exposed TcpipNetbiosOptions for each, confirming that the documented detect surface is live on this build.",
-              "Source": "Local read-only CIM detect run for NetBIOS over TCP/IP: Local run - 2026-03-14, Windows 11 Pro 10.0.26200.8037"
-            },
-            {
-              "Key": "source",
-              "Label": "SOURCE",
-              "State": "ready",
-              "Summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
-              "Source": "win-config / network/desc.md: https://github.com/nohuto/win-config/blob/main/network/desc.md"
-            },
-            {
-              "Key": "rollback",
-              "Label": "ROLLBACK",
-              "State": "ready",
-              "Summary": "Rollback: Verified via record-restore-story.",
-              "Source": "record-restore-story"
-            }
-          ],
-          "ReferenceLinks": [
-            {
-              "Title": "Windows Internals resource page",
-              "Url": "https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals",
-              "Kind": "Docs"
-            },
-            {
-              "Title": "Docs: Details",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html#network.disable-netbios",
-              "Kind": "Details"
-            },
-            {
-              "Title": "Docs: Network",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\network\\network.md#network.disable-netbios",
-              "Kind": "Docs"
-            }
-          ]
-        },
-        "Stages": [
-          {
-            "Stage": "detect-before",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current state: [{\"Index\":0,\"SettingID\":\"{5D97F677-D846-4EE7-983F-B1391F03C692}\",\"Description\":\"Intel(R) 82574L Gigabit Network Connection\",\"TcpipNetbiosOptions\":0}]",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "[{\"Index\":0,\"SettingID\":\"{5D97F677-D846-4EE7-983F-B1391F03C692}\",\"Description\":\"Intel(R) 82574L Gigabit Network Connection\",\"TcpipNetbiosOptions\":0}]",
-            "TargetValue": "Optimized",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": false,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current state: [{\"Index\":0,\"SettingID\":\"{5D97F677-D846-4EE7-983F-B1391F03C692}\",\"Description\":\"Intel(R) 82574L Gigabit Network Connection\",\"TcpipNetbiosOptions\":0}]",
-                "TimestampText": "00:41:28"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "apply",
-            "AppliedStatus": "Applied",
-            "StatusMessage": "Run completed.",
-            "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Optimized",
-            "TargetValue": "Optimized",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current state: [{\"Index\":0,\"SettingID\":\"{5D97F677-D846-4EE7-983F-B1391F03C692}\",\"Description\":\"Intel(R) 82574L Gigabit Network Connection\",\"TcpipNetbiosOptions\":0}]",
-                "TimestampText": "00:41:28"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Successfully applied changes.",
-                "TimestampText": "00:41:28"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Changes verified successfully.",
-                "TimestampText": "00:41:28"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Not required",
-                "Message": "Step not executed.",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "rollback",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Successfully restored original state.",
-            "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Optimized",
-            "TargetValue": "Optimized",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current state: [{\"Index\":0,\"SettingID\":\"{5D97F677-D846-4EE7-983F-B1391F03C692}\",\"Description\":\"Intel(R) 82574L Gigabit Network Connection\",\"TcpipNetbiosOptions\":0}]",
-                "TimestampText": "00:41:28"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Successfully applied changes.",
-                "TimestampText": "00:41:28"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Changes verified successfully.",
-                "TimestampText": "00:41:28"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Successfully restored original state.",
-                "TimestampText": "00:41:29"
-              }
-            ]
-          },
-          {
-            "Stage": "detect-after",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current state: [{\"Index\":0,\"SettingID\":\"{5D97F677-D846-4EE7-983F-B1391F03C692}\",\"Description\":\"Intel(R) 82574L Gigabit Network Connection\",\"TcpipNetbiosOptions\":0}]",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "[{\"Index\":0,\"SettingID\":\"{5D97F677-D846-4EE7-983F-B1391F03C692}\",\"Description\":\"Intel(R) 82574L Gigabit Network Connection\",\"TcpipNetbiosOptions\":0}]",
-            "TargetValue": "Optimized",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current state: [{\"Index\":0,\"SettingID\":\"{5D97F677-D846-4EE7-983F-B1391F03C692}\",\"Description\":\"Intel(R) 82574L Gigabit Network Connection\",\"TcpipNetbiosOptions\":0}]",
-                "TimestampText": "00:41:29"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Successfully applied changes.",
-                "TimestampText": "00:41:28"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Changes verified successfully.",
-                "TimestampText": "00:41:28"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Successfully restored original state.",
-                "TimestampText": "00:41:29"
-              }
-            ]
-          }
-        ],
-        "StartedAtUtc": "2026-05-07T07:41:25.0302373+00:00",
-        "CompletedAtUtc": "2026-05-07T07:41:29.907432+00:00"
-      },
-      "qa_tweak_id": "network.disable-netbios",
-      "candidate_id": "network.disable-netbios",
-      "card_name": "NetBIOS over TCP/IP",
-      "documentation": "research/records/network.disable-netbios.review.json"
-    },
-    {
-      "tweak_id": "network.disable-netbios-resolution",
-      "host_exit": 0,
-      "execution_exit": 0,
-      "payload_status": "completed",
-      "report_app_success": true,
-      "report_success": true,
-      "report_status": "ok",
-      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
-      "report_contract_status": "ok",
-      "report_contract_summary": "QA card snapshot contract passed.",
-      "report_contract_failures": [],
-      "report_card_present": true,
-      "report_card_has_claim_boundary": true,
-      "report_card_present_fields": [
-        "TweakId",
-        "Name",
-        "Category",
-        "EvidenceClass",
-        "ResearchStatus",
-        "RollbackSnapshotState",
-        "HasClaimBoundary",
-        "WhatWeKnowSummary",
-        "WhatWeDoNotClaimSummary",
-        "ProofLanes"
-      ],
-      "report_card_missing_fields": [],
-      "report_card_proof_lanes": [
-        "docs",
-        "runtime",
-        "source",
-        "rollback"
-      ],
-      "report_card_missing_proof_lanes": [],
-      "report": {
-        "TweakId": "network.disable-netbios-resolution",
-        "TweakName": "DNS Client NetBIOS Name Resolution",
-        "Success": true,
-        "Status": "ok",
-        "Summary": "Apply/verify path completed and rollback restored the tweak.",
-        "RollbackRequested": true,
-        "Card": {
-          "TweakId": "network.disable-netbios-resolution",
-          "Name": "DNS Client NetBIOS Name Resolution",
-          "Category": "Network",
-          "Description": "Windows can use NetBIOS-style name resolution through the DNS client policy layer. This policy lets you fully disable it, allow it, or choose more limited modes.",
-          "FriendlyDescription": "Windows can use NetBIOS-style name resolution through the DNS client policy layer. This policy lets you fully disable it, allow it, or choose more limited modes.",
-          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient\\EnableNetbios",
-          "EvidenceClass": "A",
-          "EvidenceClassTitle": "Cross-Layer Verified",
-          "ResearchStatus": "PROMOTED",
-          "IsMutationAllowed": true,
-          "RollbackSnapshotState": "ready",
-          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
-          "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Windows can use NetBIOS-style name resolution through the DNS client policy layer. This policy lets you fully disable it, allow it, or choose more limited modes. Evidence: The local official Microsoft ADMX file names the same registry key and value name that the app writes, and it exposes the enum values 0, 1, 2, and 3. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: Windows can use fingerprint, face, or other biometric features for sign-in and related capabilities. This device policy controls whether biometrics are allowed at all. Evidence: Local official ADMX defines the exact key and value name; local ADML confirms that disabling the policy prevents Windows biometric features from being used. Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "The local official Microsoft ADMX file names the same registry key and value name that the app writes, and it exposes the enum values 0, 1, 2, and 3.",
-              "Source": "Validation proof source: evidence/files/external/c/WINDOWS/PolicyDefinitions/DnsClient.admx"
+              "Summary": "Local official ADMX defines the exact key and value name; local ADML confirms that disabling the policy prevents Windows biometric features from being used.",
+              "Source": "Validation proof source: evidence/files/external/c/WINDOWS/PolicyDefinitions/Biometrics.admx"
             },
             {
               "Key": "runtime",
               "Label": "RUNTIME",
               "State": "ready",
-              "Summary": "A same-day guest Ghidra retry for `EnableNetbios` progressed beyond the earlier admin-shell failure mode, but still stopped with `launcher-exception` before any evidence.json xref bundle was produced.",
-              "Source": "Guest Ghidra launch receipt for EnableNetbios: evidence/raw/ghidra/ghidra-network-disable-netbios-resolution-20260427a/summary.json"
+              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+              "Source": ""
             },
             {
               "Key": "source",
@@ -1207,8 +1202,8 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Network (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\network\\network.md",
+              "Title": "Docs: Privacy (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\privacy\\privacy-verified.md",
               "Kind": "Docs"
             }
           ]
@@ -1217,10 +1212,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Disable'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Biometrics disabled'.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Disable",
+            "TargetValue": "Biometrics disabled",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -1229,8 +1224,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Disable'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient\\EnableNetbios: missing -> 0",
-                "TimestampText": "00:41:36"
+                "Message": "Current values do not match a named option. Selected option is 'Biometrics disabled'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Biometrics\\Enabled: missing -> 0",
+                "TimestampText": "00:47:13"
               },
               {
                 "Action": "Apply",
@@ -1257,8 +1252,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Disable",
-            "TargetValue": "Disable",
+            "CurrentValue": "Biometrics disabled",
+            "TargetValue": "Biometrics disabled",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1267,20 +1262,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Disable'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient\\EnableNetbios: missing -> 0",
-                "TimestampText": "00:41:36"
+                "Message": "Current values do not match a named option. Selected option is 'Biometrics disabled'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Biometrics\\Enabled: missing -> 0",
+                "TimestampText": "00:47:13"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Disable'.",
-                "TimestampText": "00:41:39"
+                "Message": "Applied preset 'Biometrics disabled'.",
+                "TimestampText": "00:47:16"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Disable'.",
-                "TimestampText": "00:41:39"
+                "Message": "Verified preset 'Biometrics disabled'.",
+                "TimestampText": "00:47:16"
               },
               {
                 "Action": "Rollback",
@@ -1296,7 +1291,7 @@
             "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Disable",
+            "TargetValue": "Biometrics disabled",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1305,36 +1300,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Disable'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient\\EnableNetbios: missing -> 0",
-                "TimestampText": "00:41:36"
+                "Message": "Current values do not match a named option. Selected option is 'Biometrics disabled'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Biometrics\\Enabled: missing -> 0",
+                "TimestampText": "00:47:13"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Disable'.",
-                "TimestampText": "00:41:39"
+                "Message": "Applied preset 'Biometrics disabled'.",
+                "TimestampText": "00:47:16"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Disable'.",
-                "TimestampText": "00:41:39"
+                "Message": "Verified preset 'Biometrics disabled'.",
+                "TimestampText": "00:47:16"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "00:41:39"
+                "TimestampText": "00:47:16"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Disable'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Biometrics disabled'.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Disable",
+            "TargetValue": "Biometrics disabled",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1343,40 +1338,40 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Disable'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient\\EnableNetbios: missing -> 0",
-                "TimestampText": "00:41:39"
+                "Message": "Current values do not match a named option. Selected option is 'Biometrics disabled'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Biometrics\\Enabled: missing -> 0",
+                "TimestampText": "00:47:16"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Disable'.",
-                "TimestampText": "00:41:39"
+                "Message": "Applied preset 'Biometrics disabled'.",
+                "TimestampText": "00:47:16"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Disable'.",
-                "TimestampText": "00:41:39"
+                "Message": "Verified preset 'Biometrics disabled'.",
+                "TimestampText": "00:47:16"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "00:41:39"
+                "TimestampText": "00:47:16"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T07:41:36.4412562+00:00",
-        "CompletedAtUtc": "2026-05-07T07:41:39.5485282+00:00"
+        "StartedAtUtc": "2026-05-07T07:47:13.2230444+00:00",
+        "CompletedAtUtc": "2026-05-07T07:47:16.310178+00:00"
       },
-      "qa_tweak_id": "network.disable-netbios-resolution",
-      "candidate_id": "network.disable-netbios-resolution",
-      "card_name": "DNS Client NetBIOS Name Resolution",
-      "documentation": "research/records/network.disable-netbios-resolution.json"
+      "qa_tweak_id": "privacy.disable-biometrics",
+      "candidate_id": "privacy.disable-biometrics",
+      "card_name": "Windows Biometrics",
+      "documentation": "research/records/privacy.disable-biometrics.json"
     },
     {
-      "tweak_id": "network.disable-plaintext-smb-passwords",
+      "tweak_id": "privacy.disable-biometrics-domain-logon",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -1410,19 +1405,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "network.disable-plaintext-smb-passwords",
-        "TweakName": "Plaintext SMB Passwords",
+        "TweakId": "privacy.disable-biometrics-domain-logon",
+        "TweakName": "Biometric Sign-in for Domain Accounts",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "network.disable-plaintext-smb-passwords",
-          "Name": "Plaintext SMB Passwords",
-          "Category": "Network",
-          "Description": "This setting decides whether Windows is willing to send an unencrypted password to certain old SMB servers. Modern systems should almost never need that behavior.",
-          "FriendlyDescription": "This setting decides whether Windows is willing to send an unencrypted password to certain old SMB servers. Modern systems should almost never need that behavior.",
-          "RegistryPath": "HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters\\EnablePlainTextPassword",
+          "TweakId": "privacy.disable-biometrics-domain-logon",
+          "Name": "Biometric Sign-in for Domain Accounts",
+          "Category": "Privacy",
+          "Description": "Windows can let domain users sign in with biometrics when the device and domain setup support it. This policy controls whether domain accounts are allowed to use that biometric sign-in path.",
+          "FriendlyDescription": "Windows can let domain users sign in with biometrics when the device and domain setup support it. This policy controls whether domain accounts are allowed to use that biometric sign-in path.",
+          "RegistryPath": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Biometrics\\Credential Provider\\Domain Accounts",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -1430,22 +1425,22 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: This setting decides whether Windows is willing to send an unencrypted password to certain old SMB servers. Modern systems should almost never need that behavior. Evidence: Local official Microsoft security metadata confirms the exact registry path and value name. The Microsoft Policy CSP page for 'Microsoft network client: Send unencrypted password to connect to third-party SMB servers' provides the numeric semantics: Default... Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: Windows can let domain users sign in with biometrics when the device and domain setup support it. This policy controls whether domain accounts are allowed to use that biometric sign-in path. Evidence: Local official ADMX defines the exact key and value name; local ADML confirms that disabling the policy blocks biometric sign-in for domain users. Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "Local official Microsoft security metadata confirms the exact registry path and value name. The Microsoft Policy CSP page for 'Microsoft network client: Send unencrypted password to connect to third-party SMB servers' provides the numeric semantics: Default...",
-              "Source": "Validation proof source: evidence/files/external/c/Windows/inf/sceregvl.inf.md"
+              "Summary": "Local official ADMX defines the exact key and value name; local ADML confirms that disabling the policy blocks biometric sign-in for domain users.",
+              "Source": "Validation proof source: evidence/files/external/c/WINDOWS/PolicyDefinitions/Biometrics.admx"
             },
             {
               "Key": "runtime",
               "Label": "RUNTIME",
               "State": "ready",
-              "Summary": "A same-day guest Ghidra retry for `EnablePlainTextPassword` failed in `ensure-admin-shell` after the bounded 90 second wrapper timeout, so no xref bundle reached the host.",
-              "Source": "Guest Ghidra launch receipt for EnablePlainTextPassword: evidence/raw/ghidra/ghidra-network-disable-plaintext-smb-passwords-20260427b/summary.json"
+              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+              "Source": ""
             },
             {
               "Key": "source",
@@ -1469,8 +1464,8 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Network (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\network\\network.md",
+              "Title": "Docs: Privacy (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\privacy\\privacy-verified.md",
               "Kind": "Docs"
             }
           ]
@@ -1478,11 +1473,11 @@
         "Stages": [
           {
             "Stage": "detect-before",
-            "AppliedStatus": "Applied",
-            "StatusMessage": "Current option is 'Do not send plaintext passwords'.",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Domain biometric sign-in disabled'.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Do not send plaintext passwords",
-            "TargetValue": "Do not send plaintext passwords",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Domain biometric sign-in disabled",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -1490,9 +1485,9 @@
             "Steps": [
               {
                 "Action": "Detect",
-                "StatusText": "Applied",
-                "Message": "Current option is 'Do not send plaintext passwords'.\nEntries:\n- HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters\\EnablePlainTextPassword: 0 -> 0",
-                "TimestampText": "00:41:45"
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Domain biometric sign-in disabled'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Biometrics\\Credential Provider\\Domain Accounts: missing -> 0",
+                "TimestampText": "00:47:22"
               },
               {
                 "Action": "Apply",
@@ -1519,8 +1514,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Do not send plaintext passwords",
-            "TargetValue": "Do not send plaintext passwords",
+            "CurrentValue": "Domain biometric sign-in disabled",
+            "TargetValue": "Domain biometric sign-in disabled",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1528,37 +1523,37 @@
             "Steps": [
               {
                 "Action": "Detect",
-                "StatusText": "Applied",
-                "Message": "Current option is 'Do not send plaintext passwords'.\nEntries:\n- HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters\\EnablePlainTextPassword: 0 -> 0",
-                "TimestampText": "00:41:45"
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Domain biometric sign-in disabled'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Biometrics\\Credential Provider\\Domain Accounts: missing -> 0",
+                "TimestampText": "00:47:22"
               },
               {
                 "Action": "Apply",
-                "StatusText": "Skipped",
-                "Message": "Already in the desired state.",
-                "TimestampText": "00:41:45"
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Domain biometric sign-in disabled'.",
+                "TimestampText": "00:47:25"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Do not send plaintext passwords'.",
-                "TimestampText": "00:41:45"
+                "Message": "Verified preset 'Domain biometric sign-in disabled'.",
+                "TimestampText": "00:47:25"
               },
               {
                 "Action": "Rollback",
-                "StatusText": "Skipped",
-                "Message": "No changes were made.",
-                "TimestampText": "00:41:45"
+                "StatusText": "Not required",
+                "Message": "Step not executed.",
+                "TimestampText": "-"
               }
             ]
           },
           {
             "Stage": "rollback",
-            "AppliedStatus": "Applied",
+            "AppliedStatus": "NotApplied",
             "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Do not send plaintext passwords",
-            "TargetValue": "Do not send plaintext passwords",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Domain biometric sign-in disabled",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1566,37 +1561,37 @@
             "Steps": [
               {
                 "Action": "Detect",
-                "StatusText": "Applied",
-                "Message": "Current option is 'Do not send plaintext passwords'.\nEntries:\n- HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters\\EnablePlainTextPassword: 0 -> 0",
-                "TimestampText": "00:41:45"
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Domain biometric sign-in disabled'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Biometrics\\Credential Provider\\Domain Accounts: missing -> 0",
+                "TimestampText": "00:47:22"
               },
               {
                 "Action": "Apply",
-                "StatusText": "Skipped",
-                "Message": "Already in the desired state.",
-                "TimestampText": "00:41:45"
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Domain biometric sign-in disabled'.",
+                "TimestampText": "00:47:25"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Do not send plaintext passwords'.",
-                "TimestampText": "00:41:45"
+                "Message": "Verified preset 'Domain biometric sign-in disabled'.",
+                "TimestampText": "00:47:25"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "00:41:48"
+                "TimestampText": "00:47:25"
               }
             ]
           },
           {
             "Stage": "detect-after",
-            "AppliedStatus": "Applied",
-            "StatusMessage": "Current option is 'Do not send plaintext passwords'.",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Domain biometric sign-in disabled'.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Do not send plaintext passwords",
-            "TargetValue": "Do not send plaintext passwords",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Domain biometric sign-in disabled",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1604,38 +1599,38 @@
             "Steps": [
               {
                 "Action": "Detect",
-                "StatusText": "Applied",
-                "Message": "Current option is 'Do not send plaintext passwords'.\nEntries:\n- HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters\\EnablePlainTextPassword: 0 -> 0",
-                "TimestampText": "00:41:48"
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Domain biometric sign-in disabled'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Biometrics\\Credential Provider\\Domain Accounts: missing -> 0",
+                "TimestampText": "00:47:25"
               },
               {
                 "Action": "Apply",
-                "StatusText": "Skipped",
-                "Message": "Already in the desired state.",
-                "TimestampText": "00:41:45"
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Domain biometric sign-in disabled'.",
+                "TimestampText": "00:47:25"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Do not send plaintext passwords'.",
-                "TimestampText": "00:41:45"
+                "Message": "Verified preset 'Domain biometric sign-in disabled'.",
+                "TimestampText": "00:47:25"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "00:41:48"
+                "TimestampText": "00:47:25"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T07:41:45.8414103+00:00",
-        "CompletedAtUtc": "2026-05-07T07:41:48.8062797+00:00"
+        "StartedAtUtc": "2026-05-07T07:47:22.6151766+00:00",
+        "CompletedAtUtc": "2026-05-07T07:47:25.707473+00:00"
       },
-      "qa_tweak_id": "network.disable-plaintext-smb-passwords",
-      "candidate_id": "network.disable-plaintext-smb-passwords",
-      "card_name": "Plaintext SMB Passwords",
-      "documentation": "research/records/network.disable-plaintext-smb-passwords.json"
+      "qa_tweak_id": "privacy.disable-biometrics-domain-logon",
+      "candidate_id": "privacy.disable-biometrics-domain-logon",
+      "card_name": "Biometric Sign-in for Domain Accounts",
+      "documentation": "research/records/privacy.disable-biometrics-domain-logon.json"
     }
   ],
   "summary": {
@@ -1644,7 +1639,7 @@
     "live_success_count": 5,
     "live_failure_count": 0,
     "categories": [
-      "Network"
+      "Privacy"
     ]
   }
 }

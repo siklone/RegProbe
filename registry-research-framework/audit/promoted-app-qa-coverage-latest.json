@@ -1,11 +1,11 @@
 {
-  "generated_utc": "2026-05-06T21:41:01Z",
-  "history_entry_count": 25,
+  "generated_utc": "2026-05-06T21:46:40Z",
+  "history_entry_count": 27,
   "catalog_candidate_count": 242,
-  "covered_count": 74,
-  "uncovered_count": 168,
+  "covered_count": 79,
+  "uncovered_count": 163,
   "summary": {
-    "coverage_percent": 30.58,
+    "coverage_percent": 32.64,
     "covered_categories": {
       "Audio": 2,
       "Cleanup": 1,
@@ -16,7 +16,7 @@
       "Performance": 3,
       "Peripheral": 2,
       "Power": 7,
-      "Privacy": 13,
+      "Privacy": 18,
       "Security": 7,
       "System": 11,
       "Visibility": 6
@@ -29,66 +29,13 @@
       "Notifications": 2,
       "Peripheral": 1,
       "Power": 3,
-      "Privacy": 54,
+      "Privacy": 49,
       "Security": 14,
       "System": 41,
       "Visibility": 17
     }
   },
   "recommended_next_batches": [
-    {
-      "category": "Privacy",
-      "covered_count": 13,
-      "uncovered_count": 54,
-      "coverage_percent": 19.4,
-      "batch_size": 5,
-      "tweak_ids": [
-        "privacy.disable-appdeviceinventory.policy",
-        "privacy.disable-application-telemetry",
-        "privacy.disable-background-apps",
-        "privacy.disable-biometrics",
-        "privacy.disable-biometrics-domain-logon"
-      ],
-      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-appdeviceinventory.policy --id privacy.disable-application-telemetry --id privacy.disable-background-apps --id privacy.disable-biometrics --id privacy.disable-biometrics-domain-logon",
-      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-appdeviceinventory.policy --id privacy.disable-application-telemetry --id privacy.disable-background-apps --id privacy.disable-biometrics --id privacy.disable-biometrics-domain-logon --run-kvm --json",
-      "candidates": [
-        {
-          "tweak_id": "privacy.disable-appdeviceinventory.policy",
-          "record_id": "privacy.disable-appdeviceinventory.policy",
-          "category": "Privacy",
-          "name": "Disable App Device Inventory Policies",
-          "documentation": "research/records/privacy.disable-appdeviceinventory.policy.review.json"
-        },
-        {
-          "tweak_id": "privacy.disable-application-telemetry",
-          "record_id": "privacy.disable-application-telemetry",
-          "category": "Privacy",
-          "name": "Application Compatibility Telemetry",
-          "documentation": "research/records/privacy.disable-application-telemetry.json"
-        },
-        {
-          "tweak_id": "privacy.disable-background-apps",
-          "record_id": "privacy.disable-background-apps",
-          "category": "Privacy",
-          "name": "Background App Execution",
-          "documentation": "research/records/privacy.disable-background-apps.json"
-        },
-        {
-          "tweak_id": "privacy.disable-biometrics",
-          "record_id": "privacy.disable-biometrics",
-          "category": "Privacy",
-          "name": "Windows Biometrics",
-          "documentation": "research/records/privacy.disable-biometrics.json"
-        },
-        {
-          "tweak_id": "privacy.disable-biometrics-domain-logon",
-          "record_id": "privacy.disable-biometrics-domain-logon",
-          "category": "Privacy",
-          "name": "Biometric Sign-in for Domain Accounts",
-          "documentation": "research/records/privacy.disable-biometrics-domain-logon.json"
-        }
-      ]
-    },
     {
       "category": "System",
       "covered_count": 11,
@@ -245,6 +192,59 @@
           "category": "Visibility",
           "name": "Changing the Lock Screen and Logon Image",
           "documentation": "research/records/visibility.disable-lock-screen-changes.json"
+        }
+      ]
+    },
+    {
+      "category": "Privacy",
+      "covered_count": 18,
+      "uncovered_count": 49,
+      "coverage_percent": 26.87,
+      "batch_size": 5,
+      "tweak_ids": [
+        "privacy.disable-biometrics-logon",
+        "privacy.disable-camera",
+        "privacy.disable-cli-telemetry",
+        "privacy.disable-consumer-account-content",
+        "privacy.disable-copilot"
+      ],
+      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-biometrics-logon --id privacy.disable-camera --id privacy.disable-cli-telemetry --id privacy.disable-consumer-account-content --id privacy.disable-copilot",
+      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-biometrics-logon --id privacy.disable-camera --id privacy.disable-cli-telemetry --id privacy.disable-consumer-account-content --id privacy.disable-copilot --run-kvm --json",
+      "candidates": [
+        {
+          "tweak_id": "privacy.disable-biometrics-logon",
+          "record_id": "privacy.disable-biometrics-logon",
+          "category": "Privacy",
+          "name": "Biometric Sign-in",
+          "documentation": "research/records/privacy.disable-biometrics-logon.json"
+        },
+        {
+          "tweak_id": "privacy.disable-camera",
+          "record_id": "privacy.disable-camera",
+          "category": "Privacy",
+          "name": "Camera Device Use",
+          "documentation": "research/records/privacy.disable-camera.json"
+        },
+        {
+          "tweak_id": "privacy.disable-cli-telemetry",
+          "record_id": "privacy.disable-cli-telemetry",
+          "category": "Privacy",
+          "name": "PowerShell and .NET CLI Telemetry Opt-Out",
+          "documentation": "research/records/privacy.disable-cli-telemetry.json"
+        },
+        {
+          "tweak_id": "privacy.disable-consumer-account-content",
+          "record_id": "privacy.disable-consumer-account-content",
+          "category": "Privacy",
+          "name": "Cloud Consumer Account State Content",
+          "documentation": "research/records/privacy.disable-consumer-account-content.json"
+        },
+        {
+          "tweak_id": "privacy.disable-copilot",
+          "record_id": "privacy.disable-copilot",
+          "category": "Privacy",
+          "name": "Windows Copilot",
+          "documentation": "research/records/privacy.disable-copilot.json"
         }
       ]
     },
@@ -706,6 +706,51 @@
       "category": "Privacy",
       "name": "Disable Application Compatibility Engine and SwitchBack",
       "documentation": "research/records/privacy.disable-appcompat-engine.policy.review.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "privacy.disable-appdeviceinventory.policy",
+      "qa_tweak_id": "privacy.disable-appdeviceinventory.policy",
+      "candidate_id": "privacy.disable-appdeviceinventory.policy",
+      "category": "Privacy",
+      "name": "Disable App Device Inventory Policies",
+      "documentation": "research/records/privacy.disable-appdeviceinventory.policy.review.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "privacy.disable-application-telemetry",
+      "qa_tweak_id": "privacy.disable-application-telemetry",
+      "candidate_id": "privacy.disable-application-telemetry",
+      "category": "Privacy",
+      "name": "Application Compatibility Telemetry",
+      "documentation": "research/records/privacy.disable-application-telemetry.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "privacy.disable-background-apps",
+      "qa_tweak_id": "privacy.disable-background-apps",
+      "candidate_id": "privacy.disable-background-apps",
+      "category": "Privacy",
+      "name": "Background App Execution",
+      "documentation": "research/records/privacy.disable-background-apps.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "privacy.disable-biometrics",
+      "qa_tweak_id": "privacy.disable-biometrics",
+      "candidate_id": "privacy.disable-biometrics",
+      "category": "Privacy",
+      "name": "Windows Biometrics",
+      "documentation": "research/records/privacy.disable-biometrics.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "privacy.disable-biometrics-domain-logon",
+      "qa_tweak_id": "privacy.disable-biometrics-domain-logon",
+      "candidate_id": "privacy.disable-biometrics-domain-logon",
+      "category": "Privacy",
+      "name": "Biometric Sign-in for Domain Accounts",
+      "documentation": "research/records/privacy.disable-biometrics-domain-logon.json",
       "latest_report_status": "ok"
     },
     {
@@ -1264,41 +1309,6 @@
       "category": "Power",
       "name": "Games MMCSS Task Profile",
       "documentation": "research/records/power.optimize-gaming-network.json"
-    },
-    {
-      "tweak_id": "privacy.disable-appdeviceinventory.policy",
-      "record_id": "privacy.disable-appdeviceinventory.policy",
-      "category": "Privacy",
-      "name": "Disable App Device Inventory Policies",
-      "documentation": "research/records/privacy.disable-appdeviceinventory.policy.review.json"
-    },
-    {
-      "tweak_id": "privacy.disable-application-telemetry",
-      "record_id": "privacy.disable-application-telemetry",
-      "category": "Privacy",
-      "name": "Application Compatibility Telemetry",
-      "documentation": "research/records/privacy.disable-application-telemetry.json"
-    },
-    {
-      "tweak_id": "privacy.disable-background-apps",
-      "record_id": "privacy.disable-background-apps",
-      "category": "Privacy",
-      "name": "Background App Execution",
-      "documentation": "research/records/privacy.disable-background-apps.json"
-    },
-    {
-      "tweak_id": "privacy.disable-biometrics",
-      "record_id": "privacy.disable-biometrics",
-      "category": "Privacy",
-      "name": "Windows Biometrics",
-      "documentation": "research/records/privacy.disable-biometrics.json"
-    },
-    {
-      "tweak_id": "privacy.disable-biometrics-domain-logon",
-      "record_id": "privacy.disable-biometrics-domain-logon",
-      "category": "Privacy",
-      "name": "Biometric Sign-in for Domain Accounts",
-      "documentation": "research/records/privacy.disable-biometrics-domain-logon.json"
     },
     {
       "tweak_id": "privacy.disable-biometrics-logon",

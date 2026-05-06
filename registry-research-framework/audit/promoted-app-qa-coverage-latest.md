@@ -1,11 +1,11 @@
 # Promoted App QA Coverage
 
-- Generated UTC: 2026-05-06T21:41:01Z
-- History entries: 25
+- Generated UTC: 2026-05-06T21:46:40Z
+- History entries: 27
 - Promoted app-QA candidates: 242
-- Covered: 74
-- Uncovered: 168
-- Coverage: 30.58%
+- Covered: 79
+- Uncovered: 163
+- Coverage: 32.64%
 
 ## Covered Categories
 
@@ -18,7 +18,7 @@
 - Performance: 3
 - Peripheral: 2
 - Power: 7
-- Privacy: 13
+- Privacy: 18
 - Security: 7
 - System: 11
 - Visibility: 6
@@ -32,16 +32,13 @@
 - Notifications: 2
 - Peripheral: 1
 - Power: 3
-- Privacy: 54
+- Privacy: 49
 - Security: 14
 - System: 41
 - Visibility: 17
 
 ## Recommended Next Batches
 
-- Privacy: 5 uncovered cards | coverage 19.4%
-  command: `dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-appdeviceinventory.policy --id privacy.disable-application-telemetry --id privacy.disable-background-apps --id privacy.disable-biometrics --id privacy.disable-biometrics-domain-logon`
-  live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-appdeviceinventory.policy --id privacy.disable-application-telemetry --id privacy.disable-background-apps --id privacy.disable-biometrics --id privacy.disable-biometrics-domain-logon --run-kvm --json`
 - System: 5 uncovered cards | coverage 21.15%
   command: `dotnet run --project cli/cli.csproj -- research qa-batch --id system.disable-game-recording-broadcasting --id system.disable-jpeg-reduction --id system.disable-restartable-apps --id system.disable-search-highlights-policy --id system.disable-search-remote-queries`
   live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id system.disable-game-recording-broadcasting --id system.disable-jpeg-reduction --id system.disable-restartable-apps --id system.disable-search-highlights-policy --id system.disable-search-remote-queries --run-kvm --json`
@@ -51,6 +48,9 @@
 - Visibility: 5 uncovered cards | coverage 26.09%
   command: `dotnet run --project cli/cli.csproj -- research qa-batch --id visibility.disable-acrylic-logon --id visibility.disable-common-control-animations --id visibility.disable-first-signin-animation --id visibility.disable-lock-screen-camera --id visibility.disable-lock-screen-changes`
   live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id visibility.disable-acrylic-logon --id visibility.disable-common-control-animations --id visibility.disable-first-signin-animation --id visibility.disable-lock-screen-camera --id visibility.disable-lock-screen-changes --run-kvm --json`
+- Privacy: 5 uncovered cards | coverage 26.87%
+  command: `dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-biometrics-logon --id privacy.disable-camera --id privacy.disable-cli-telemetry --id privacy.disable-consumer-account-content --id privacy.disable-copilot`
+  live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-biometrics-logon --id privacy.disable-camera --id privacy.disable-cli-telemetry --id privacy.disable-consumer-account-content --id privacy.disable-copilot --run-kvm --json`
 - Network: 5 uncovered cards | coverage 32.14%
   command: `dotnet run --project cli/cli.csproj -- research qa-batch --id network.disable-smart-name-resolution --id network.disable-smb1 --id network.disable-smb2 --id network.disable-wifi-sense --id network.enable-lltd-responder`
   live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id network.disable-smart-name-resolution --id network.disable-smb1 --id network.disable-smb2 --id network.disable-wifi-sense --id network.enable-lltd-responder --run-kvm --json`

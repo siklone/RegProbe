@@ -1,7 +1,7 @@
 # Promoted App QA Batch
 
 - Status: PASS
-- Generated UTC: 2026-05-06T21:41:01Z
+- Generated UTC: 2026-05-06T21:46:40Z
 - Catalog candidates: 242
 - Selected candidates: 5
 - Planned apply-allowed candidates: 5
@@ -10,41 +10,41 @@
 
 ## Selected Candidates
 
-- `network.disable-lltd` | Set LLTD Policies to Default Behavior | Network
-  docs: `research/records/network.disable-lltd.review.json`
+- `privacy.disable-appdeviceinventory.policy` | Disable App Device Inventory Policies | Privacy
+  docs: `research/records/privacy.disable-appdeviceinventory.policy.review.json`
   rollback: default=true | previous=true
   card snapshot: claim_boundary=true | fields=TweakId, Name, Category, EvidenceClass, ResearchStatus, RollbackSnapshotState, HasClaimBoundary, WhatWeKnowSummary, WhatWeDoNotClaimSummary, ProofLanes | lanes=docs, runtime, source, rollback
-- `network.disable-mdns` | Set mDNS Policy to Local Settings | Network
-  docs: `research/records/network.disable-mdns.review.json`
+- `privacy.disable-application-telemetry` | Application Compatibility Telemetry | Privacy
+  docs: `research/records/privacy.disable-application-telemetry.json`
   rollback: default=true | previous=true
   card snapshot: claim_boundary=true | fields=TweakId, Name, Category, EvidenceClass, ResearchStatus, RollbackSnapshotState, HasClaimBoundary, WhatWeKnowSummary, WhatWeDoNotClaimSummary, ProofLanes | lanes=docs, runtime, source, rollback
-- `network.disable-netbios` | NetBIOS over TCP/IP | Network
-  docs: `research/records/network.disable-netbios.review.json`
+- `privacy.disable-background-apps` | Background App Execution | Privacy
+  docs: `research/records/privacy.disable-background-apps.json`
   rollback: default=true | previous=true
   card snapshot: claim_boundary=true | fields=TweakId, Name, Category, EvidenceClass, ResearchStatus, RollbackSnapshotState, HasClaimBoundary, WhatWeKnowSummary, WhatWeDoNotClaimSummary, ProofLanes | lanes=docs, runtime, source, rollback
-- `network.disable-netbios-resolution` | DNS Client NetBIOS Name Resolution | Network
-  docs: `research/records/network.disable-netbios-resolution.json`
+- `privacy.disable-biometrics` | Windows Biometrics | Privacy
+  docs: `research/records/privacy.disable-biometrics.json`
   rollback: default=true | previous=true
   card snapshot: claim_boundary=true | fields=TweakId, Name, Category, EvidenceClass, ResearchStatus, RollbackSnapshotState, HasClaimBoundary, WhatWeKnowSummary, WhatWeDoNotClaimSummary, ProofLanes | lanes=docs, runtime, source, rollback
-- `network.disable-plaintext-smb-passwords` | Plaintext SMB Passwords | Network
-  docs: `research/records/network.disable-plaintext-smb-passwords.json`
+- `privacy.disable-biometrics-domain-logon` | Biometric Sign-in for Domain Accounts | Privacy
+  docs: `research/records/privacy.disable-biometrics-domain-logon.json`
   rollback: default=true | previous=true
   card snapshot: claim_boundary=true | fields=TweakId, Name, Category, EvidenceClass, ResearchStatus, RollbackSnapshotState, HasClaimBoundary, WhatWeKnowSummary, WhatWeDoNotClaimSummary, ProofLanes | lanes=docs, runtime, source, rollback
 
 ## Live Results
 
-- `network.disable-lltd` | success=true | status=ok
+- `privacy.disable-appdeviceinventory.policy` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
   card contract: ok | claim_boundary=true | lanes=docs, runtime, source, rollback
-- `network.disable-mdns` | success=true | status=ok
+- `privacy.disable-application-telemetry` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
   card contract: ok | claim_boundary=true | lanes=docs, runtime, source, rollback
-- `network.disable-netbios` | success=true | status=ok
+- `privacy.disable-background-apps` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
   card contract: ok | claim_boundary=true | lanes=docs, runtime, source, rollback
-- `network.disable-netbios-resolution` | success=true | status=ok
+- `privacy.disable-biometrics` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
   card contract: ok | claim_boundary=true | lanes=docs, runtime, source, rollback
-- `network.disable-plaintext-smb-passwords` | success=true | status=ok
+- `privacy.disable-biometrics-domain-logon` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
   card contract: ok | claim_boundary=true | lanes=docs, runtime, source, rollback
