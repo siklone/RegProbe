@@ -1,13 +1,13 @@
 {
-  "generated_utc": "2026-05-06T21:57:33Z",
+  "generated_utc": "2026-05-06T22:00:04Z",
   "status": "PASS",
   "selection": {
     "requested_ids": [
-      "developer.enable-windows-long-paths",
-      "developer.nodejs-performance",
-      "developer.powershell-execution",
-      "developer.python-path-fix",
-      "developer.ssh-agent-autostart"
+      "visibility.disable-acrylic-logon",
+      "visibility.disable-common-control-animations",
+      "visibility.disable-first-signin-animation",
+      "visibility.disable-lock-screen-camera",
+      "visibility.disable-lock-screen-changes"
     ],
     "requested_categories": [],
     "limit_per_category": 1,
@@ -26,25 +26,25 @@
   "errors": [],
   "candidates": [
     {
-      "tweak_id": "developer.enable-windows-long-paths",
-      "qa_tweak_id": "developer.enable-windows-long-paths",
-      "candidate_id": "developer.enable-windows-long-paths",
-      "record_id": "developer.enable-windows-long-paths",
-      "category": "Developer",
-      "name": "Windows Long Paths",
-      "documentation": "research/records/developer.enable-windows-long-paths.review.json",
+      "tweak_id": "visibility.disable-acrylic-logon",
+      "qa_tweak_id": "visibility.disable-acrylic-logon",
+      "candidate_id": "visibility.disable-acrylic-logon",
+      "record_id": "visibility.disable-acrylic-logon",
+      "category": "Visibility",
+      "name": "Acrylic Blur on the Logon Background",
+      "documentation": "research/records/visibility.disable-acrylic-logon.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
-      "restore_default_supported": false,
-      "restore_previous_supported": false,
+      "restore_default_supported": true,
+      "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect developer.enable-windows-long-paths",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect visibility.disable-acrylic-logon",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'developer.enable-windows-long-paths' --qa-output 'C:\\Tools\\ValidationController\\smoke\\developer.enable-windows-long-paths.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'developer.enable-windows-long-paths' --qa-output 'C:\\Tools\\ValidationController\\smoke\\developer.enable-windows-long-paths.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'developer.enable-windows-long-paths' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\developer.enable-windows-long-paths.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'developer.enable-windows-long-paths' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\developer.enable-windows-long-paths.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'developer.enable-windows-long-paths'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'visibility.disable-acrylic-logon' --qa-output 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-acrylic-logon.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'visibility.disable-acrylic-logon' --qa-output 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-acrylic-logon.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'visibility.disable-acrylic-logon' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-acrylic-logon.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'visibility.disable-acrylic-logon' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-acrylic-logon.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'visibility.disable-acrylic-logon'"
       },
       "expected_report": {
         "success": true,
@@ -85,25 +85,25 @@
       }
     },
     {
-      "tweak_id": "developer.nodejs-performance",
-      "qa_tweak_id": "developer.nodejs-performance",
-      "candidate_id": "developer.nodejs-performance",
-      "record_id": "developer.nodejs-performance",
-      "category": "Developer",
-      "name": "Global Node.js Memory Limit Override",
-      "documentation": "research/records/developer.nodejs-performance.json",
+      "tweak_id": "visibility.disable-common-control-animations",
+      "qa_tweak_id": "visibility.disable-common-control-animations",
+      "candidate_id": "visibility.disable-common-control-animations",
+      "record_id": "visibility.disable-common-control-animations",
+      "category": "Visibility",
+      "name": "Common Control and Window Animations",
+      "documentation": "research/records/visibility.disable-common-control-animations.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect developer.nodejs-performance",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect visibility.disable-common-control-animations",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'developer.nodejs-performance' --qa-output 'C:\\Tools\\ValidationController\\smoke\\developer.nodejs-performance.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'developer.nodejs-performance' --qa-output 'C:\\Tools\\ValidationController\\smoke\\developer.nodejs-performance.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'developer.nodejs-performance' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\developer.nodejs-performance.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'developer.nodejs-performance' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\developer.nodejs-performance.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'developer.nodejs-performance'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'visibility.disable-common-control-animations' --qa-output 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-common-control-animations.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'visibility.disable-common-control-animations' --qa-output 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-common-control-animations.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'visibility.disable-common-control-animations' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-common-control-animations.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'visibility.disable-common-control-animations' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-common-control-animations.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'visibility.disable-common-control-animations'"
       },
       "expected_report": {
         "success": true,
@@ -144,25 +144,25 @@
       }
     },
     {
-      "tweak_id": "developer.powershell-execution",
-      "qa_tweak_id": "developer.powershell-execution",
-      "candidate_id": "developer.powershell-execution",
-      "record_id": "developer.powershell-execution",
-      "category": "Developer",
-      "name": "PowerShell Script Execution Policy",
-      "documentation": "research/records/developer.powershell-execution.json",
+      "tweak_id": "visibility.disable-first-signin-animation",
+      "qa_tweak_id": "visibility.disable-first-signin-animation",
+      "candidate_id": "visibility.disable-first-signin-animation",
+      "record_id": "visibility.disable-first-signin-animation",
+      "category": "Visibility",
+      "name": "First Sign-In Animation",
+      "documentation": "research/records/visibility.disable-first-signin-animation.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect developer.powershell-execution",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect visibility.disable-first-signin-animation",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'developer.powershell-execution' --qa-output 'C:\\Tools\\ValidationController\\smoke\\developer.powershell-execution.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'developer.powershell-execution' --qa-output 'C:\\Tools\\ValidationController\\smoke\\developer.powershell-execution.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'developer.powershell-execution' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\developer.powershell-execution.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'developer.powershell-execution' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\developer.powershell-execution.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'developer.powershell-execution'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'visibility.disable-first-signin-animation' --qa-output 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-first-signin-animation.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'visibility.disable-first-signin-animation' --qa-output 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-first-signin-animation.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'visibility.disable-first-signin-animation' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-first-signin-animation.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'visibility.disable-first-signin-animation' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-first-signin-animation.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'visibility.disable-first-signin-animation'"
       },
       "expected_report": {
         "success": true,
@@ -203,25 +203,25 @@
       }
     },
     {
-      "tweak_id": "developer.python-path-fix",
-      "qa_tweak_id": "developer.python-path-fix",
-      "candidate_id": "developer.python-path-fix",
-      "record_id": "developer.python-path-fix",
-      "category": "Developer",
-      "name": "Enable Windows Long Paths for Python Workflows",
-      "documentation": "research/records/developer.python-path-fix.review.json",
+      "tweak_id": "visibility.disable-lock-screen-camera",
+      "qa_tweak_id": "visibility.disable-lock-screen-camera",
+      "candidate_id": "visibility.disable-lock-screen-camera",
+      "record_id": "visibility.disable-lock-screen-camera",
+      "category": "Visibility",
+      "name": "Lock Screen Camera Access",
+      "documentation": "research/records/visibility.disable-lock-screen-camera.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect developer.python-path-fix",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect visibility.disable-lock-screen-camera",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'developer.python-path-fix' --qa-output 'C:\\Tools\\ValidationController\\smoke\\developer.python-path-fix.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'developer.python-path-fix' --qa-output 'C:\\Tools\\ValidationController\\smoke\\developer.python-path-fix.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'developer.python-path-fix' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\developer.python-path-fix.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'developer.python-path-fix' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\developer.python-path-fix.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'developer.python-path-fix'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'visibility.disable-lock-screen-camera' --qa-output 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-lock-screen-camera.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'visibility.disable-lock-screen-camera' --qa-output 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-lock-screen-camera.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'visibility.disable-lock-screen-camera' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-lock-screen-camera.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'visibility.disable-lock-screen-camera' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-lock-screen-camera.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'visibility.disable-lock-screen-camera'"
       },
       "expected_report": {
         "success": true,
@@ -262,25 +262,25 @@
       }
     },
     {
-      "tweak_id": "developer.ssh-agent-autostart",
-      "qa_tweak_id": "developer.ssh-agent-autostart",
-      "candidate_id": "developer.ssh-agent-autostart",
-      "record_id": "developer.ssh-agent-autostart",
-      "category": "Developer",
-      "name": "SSH Agent Auto-start",
-      "documentation": "research/records/developer.ssh-agent-autostart.review.json",
+      "tweak_id": "visibility.disable-lock-screen-changes",
+      "qa_tweak_id": "visibility.disable-lock-screen-changes",
+      "candidate_id": "visibility.disable-lock-screen-changes",
+      "record_id": "visibility.disable-lock-screen-changes",
+      "category": "Visibility",
+      "name": "Changing the Lock Screen and Logon Image",
+      "documentation": "research/records/visibility.disable-lock-screen-changes.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect developer.ssh-agent-autostart",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect visibility.disable-lock-screen-changes",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'developer.ssh-agent-autostart' --qa-output 'C:\\Tools\\ValidationController\\smoke\\developer.ssh-agent-autostart.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'developer.ssh-agent-autostart' --qa-output 'C:\\Tools\\ValidationController\\smoke\\developer.ssh-agent-autostart.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'developer.ssh-agent-autostart' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\developer.ssh-agent-autostart.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'developer.ssh-agent-autostart' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\developer.ssh-agent-autostart.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'developer.ssh-agent-autostart'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'visibility.disable-lock-screen-changes' --qa-output 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-lock-screen-changes.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'visibility.disable-lock-screen-changes' --qa-output 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-lock-screen-changes.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'visibility.disable-lock-screen-changes' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-lock-screen-changes.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'visibility.disable-lock-screen-changes' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-lock-screen-changes.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'visibility.disable-lock-screen-changes'"
       },
       "expected_report": {
         "success": true,
@@ -323,7 +323,7 @@
   ],
   "run_results": [
     {
-      "tweak_id": "developer.enable-windows-long-paths",
+      "tweak_id": "visibility.disable-acrylic-logon",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -357,19 +357,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "developer.enable-windows-long-paths",
-        "TweakName": "Windows Long Paths",
+        "TweakId": "visibility.disable-acrylic-logon",
+        "TweakName": "Acrylic Blur on the Logon Background",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "developer.enable-windows-long-paths",
-          "Name": "Windows Long Paths",
-          "Category": "Developer",
-          "Description": "Windows can remove the old 260-character path limit. That helps many compatible applications, especially developer tools and projects with very deep folder trees.",
-          "FriendlyDescription": "Windows can remove the old 260-character path limit. That helps many compatible applications, especially developer tools and projects with very deep folder trees.",
-          "RegistryPath": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem\\LongPathsEnabled",
+          "TweakId": "visibility.disable-acrylic-logon",
+          "Name": "Acrylic Blur on the Logon Background",
+          "Category": "Visibility",
+          "Description": "Windows can blur the logon background with an acrylic effect. This policy decides whether that blur is turned off so the background stays clear.",
+          "FriendlyDescription": "Windows can blur the logon background with an acrylic effect. This policy decides whether that blur is turned off so the background stays clear.",
+          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\DisableAcrylicBackgroundOnLogon",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -377,22 +377,22 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Windows can remove the old 260-character path limit. That helps many compatible applications, especially developer tools and projects with very deep folder trees. Evidence: Microsoft directly documents LongPathsEnabled as the Windows long-path switch and the app writes that exact documented value. Guest-side Procmon also captured SystemSettings.exe querying LongPathsEnabled when the developer settings page was opened, which co... Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: Windows can blur the logon background with an acrylic effect. This policy decides whether that blur is turned off so the background stays clear. Evidence: The local official Microsoft ADMX file names the same machine policy surface used by the app. The paired ADML help text states that enabling the policy shows the logon background image without blur, while disabling or not configuring it keeps the acrylic bl... Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "Microsoft directly documents LongPathsEnabled as the Windows long-path switch and the app writes that exact documented value. Guest-side Procmon also captured SystemSettings.exe querying LongPathsEnabled when the developer settings page was opened, which co...",
-              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation"
+              "Summary": "The local official Microsoft ADMX file names the same machine policy surface used by the app. The paired ADML help text states that enabling the policy shows the logon background image without blur, while disabling or not configuring it keeps the acrylic bl...",
+              "Source": "Validation proof source: evidence/files/external/c/WINDOWS/PolicyDefinitions/Logon.admx"
             },
             {
               "Key": "runtime",
               "Label": "RUNTIME",
               "State": "ready",
-              "Summary": "Guest-side Procmon capture confirmed SystemSettings.exe queried HKLM\\System\\CurrentControlSet\\Control\\FileSystem\\LongPathsEnabled while the developer settings page was opened. The probe observed the live value on this build and restored the original state a...",
-              "Source": "Procmon capture - Developer settings page reads LongPathsEnabled: evidence/raw/procmon/developer.enable-windows-long-paths/devmode_longpaths_probe.csv and evidence/raw/procmon/developer.enable-windows-long-paths/devmode-longpaths-probe-pml.md"
+              "Summary": "A same-day fast guest Ghidra retry for `DisableAcrylicBackgroundOnLogon` failed in `ensure-admin-shell` with a bounded timeout, so no xref bundle reached the host.",
+              "Source": "Guest Ghidra launch receipt for DisableAcrylicBackgroundOnLogon: evidence/raw/ghidra/ghidra-visibility-disable-acrylic-logon-20260427a/summary.json"
             },
             {
               "Key": "source",
@@ -416,8 +416,8 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Developer (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweaks.md",
+              "Title": "Docs: Visibility",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\visibility\\visibility.md#visibility.disable-acrylic-logon",
               "Kind": "Docs"
             }
           ]
@@ -426,9 +426,9 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current value is 0.",
+            "StatusMessage": "Value not set.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "0",
+            "CurrentValue": "Not set",
             "TargetValue": "1 (0x1)",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
@@ -438,8 +438,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current value is 0.",
-                "TimestampText": "00:57:46"
+                "Message": "Value not set.",
+                "TimestampText": "01:00:07"
               },
               {
                 "Action": "Apply",
@@ -476,20 +476,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current value is 0.",
-                "TimestampText": "00:57:46"
+                "Message": "Value not set.",
+                "TimestampText": "01:00:07"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
                 "Message": "Set value to 1.",
-                "TimestampText": "00:57:49"
+                "TimestampText": "01:00:10"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
                 "Message": "Verified desired value.",
-                "TimestampText": "00:57:49"
+                "TimestampText": "01:00:10"
               },
               {
                 "Action": "Rollback",
@@ -502,7 +502,7 @@
           {
             "Stage": "rollback",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Rolled back to 0.",
+            "StatusMessage": "Removed value to restore default.",
             "OutcomeSummary": "Rollback - Rolled Back",
             "CurrentValue": "1 (0x1)",
             "TargetValue": "1 (0x1)",
@@ -514,35 +514,35 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current value is 0.",
-                "TimestampText": "00:57:46"
+                "Message": "Value not set.",
+                "TimestampText": "01:00:07"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
                 "Message": "Set value to 1.",
-                "TimestampText": "00:57:49"
+                "TimestampText": "01:00:10"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
                 "Message": "Verified desired value.",
-                "TimestampText": "00:57:49"
+                "TimestampText": "01:00:10"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
-                "Message": "Rolled back to 0.",
-                "TimestampText": "00:57:49"
+                "Message": "Removed value to restore default.",
+                "TimestampText": "01:00:10"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current value is 0.",
+            "StatusMessage": "Value not set.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "0",
+            "CurrentValue": "Not set",
             "TargetValue": "1 (0x1)",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
@@ -552,40 +552,40 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current value is 0.",
-                "TimestampText": "00:57:49"
+                "Message": "Value not set.",
+                "TimestampText": "01:00:10"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
                 "Message": "Set value to 1.",
-                "TimestampText": "00:57:49"
+                "TimestampText": "01:00:10"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
                 "Message": "Verified desired value.",
-                "TimestampText": "00:57:49"
+                "TimestampText": "01:00:10"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
-                "Message": "Rolled back to 0.",
-                "TimestampText": "00:57:49"
+                "Message": "Removed value to restore default.",
+                "TimestampText": "01:00:10"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T07:57:46.5337262+00:00",
-        "CompletedAtUtc": "2026-05-07T07:57:49.8439093+00:00"
+        "StartedAtUtc": "2026-05-07T08:00:07.271971+00:00",
+        "CompletedAtUtc": "2026-05-07T08:00:10.4026226+00:00"
       },
-      "qa_tweak_id": "developer.enable-windows-long-paths",
-      "candidate_id": "developer.enable-windows-long-paths",
-      "card_name": "Windows Long Paths",
-      "documentation": "research/records/developer.enable-windows-long-paths.review.json"
+      "qa_tweak_id": "visibility.disable-acrylic-logon",
+      "candidate_id": "visibility.disable-acrylic-logon",
+      "card_name": "Acrylic Blur on the Logon Background",
+      "documentation": "research/records/visibility.disable-acrylic-logon.json"
     },
     {
-      "tweak_id": "developer.nodejs-performance",
+      "tweak_id": "visibility.disable-common-control-animations",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -619,19 +619,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "developer.nodejs-performance",
-        "TweakName": "Global Node.js Memory Limit Override",
+        "TweakId": "visibility.disable-common-control-animations",
+        "TweakName": "Common Control and Window Animations",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "developer.nodejs-performance",
-          "Name": "Global Node.js Memory Limit Override",
-          "Category": "Developer",
-          "Description": "This tweak makes Node.js start with a larger memory limit by default. It can help very large builds or monorepos, but it also makes Node processes use more memory budget.",
-          "FriendlyDescription": "This tweak makes Node.js start with a larger memory limit by default. It can help very large builds or monorepos, but it also makes Node processes use more memory budget.",
-          "RegistryPath": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Environment\\NODE_OPTIONS",
+          "TweakId": "visibility.disable-common-control-animations",
+          "Name": "Common Control and Window Animations",
+          "Category": "Visibility",
+          "Description": "Windows can animate common controls and some window transitions. This policy decides whether those animations are turned off for the current user.",
+          "FriendlyDescription": "Windows can animate common controls and some window transitions. This policy decides whether those animations are turned off for the current user.",
+          "RegistryPath": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\TurnOffSPIAnimations",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -639,22 +639,22 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: This tweak makes Node.js start with a larger memory limit by default. It can help very large builds or monorepos, but it also makes Node processes use more memory budget. Evidence: Node.js directly documents NODE_OPTIONS and the --max-old-space-size flag. Microsoft documents that persistent machine environment variables are stored under HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\SessionManager\\Environment. The app writes NODE... Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: Windows can animate common controls and some window transitions. This policy decides whether those animations are turned off for the current user. Evidence: Local official ADMX defines the exact user-policy key and value name, and local ADML confirms the reduced-motion, accessibility, and performance/battery tradeoffs. The app writes the documented enabled state under the same user-policy surface. Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "Node.js directly documents NODE_OPTIONS and the --max-old-space-size flag. Microsoft documents that persistent machine environment variables are stored under HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\SessionManager\\Environment. The app writes NODE...",
-              "Source": "Validation proof source: https://nodejs.org/api/cli.html"
+              "Summary": "Local official ADMX defines the exact user-policy key and value name, and local ADML confirms the reduced-motion, accessibility, and performance/battery tradeoffs. The app writes the documented enabled state under the same user-policy surface.",
+              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/Explorer.admx"
             },
             {
               "Key": "runtime",
               "Label": "RUNTIME",
               "State": "ready",
-              "Summary": "A same-day guest Ghidra retry for `NODE_OPTIONS` failed in `ensure-admin-shell` before any xref bundle reached the host.",
-              "Source": "Guest Ghidra launch receipt for NODE_OPTIONS: evidence/raw/ghidra/ghidra-developer-nodejs-performance-20260424-batch6/summary.json"
+              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+              "Source": ""
             },
             {
               "Key": "source",
@@ -678,8 +678,8 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Developer (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweaks.md",
+              "Title": "Docs: Visibility",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\visibility\\visibility.md#visibility.disable-common-control-animations",
               "Kind": "Docs"
             }
           ]
@@ -688,272 +688,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Value not set.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Not set",
-            "TargetValue": "--max-old-space-size=8192",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": false,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Value not set.",
-                "TimestampText": "00:57:57"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "apply",
-            "AppliedStatus": "Applied",
-            "StatusMessage": "Run completed.",
-            "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "--max-old-space-size=8192",
-            "TargetValue": "--max-old-space-size=8192",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Value not set.",
-                "TimestampText": "00:57:57"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Set value to --max-old-space-size=8192.",
-                "TimestampText": "00:58:00"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified desired value.",
-                "TimestampText": "00:58:00"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Not required",
-                "Message": "Step not executed.",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "rollback",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Removed value to restore default.",
-            "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "--max-old-space-size=8192",
-            "TargetValue": "--max-old-space-size=8192",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Value not set.",
-                "TimestampText": "00:57:57"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Set value to --max-old-space-size=8192.",
-                "TimestampText": "00:58:00"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified desired value.",
-                "TimestampText": "00:58:00"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Removed value to restore default.",
-                "TimestampText": "00:58:00"
-              }
-            ]
-          },
-          {
-            "Stage": "detect-after",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Value not set.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Not set",
-            "TargetValue": "--max-old-space-size=8192",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Value not set.",
-                "TimestampText": "00:58:00"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Set value to --max-old-space-size=8192.",
-                "TimestampText": "00:58:00"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified desired value.",
-                "TimestampText": "00:58:00"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Removed value to restore default.",
-                "TimestampText": "00:58:00"
-              }
-            ]
-          }
-        ],
-        "StartedAtUtc": "2026-05-07T07:57:57.2770714+00:00",
-        "CompletedAtUtc": "2026-05-07T07:58:00.4019319+00:00"
-      },
-      "qa_tweak_id": "developer.nodejs-performance",
-      "candidate_id": "developer.nodejs-performance",
-      "card_name": "Global Node.js Memory Limit Override",
-      "documentation": "research/records/developer.nodejs-performance.json"
-    },
-    {
-      "tweak_id": "developer.powershell-execution",
-      "host_exit": 0,
-      "execution_exit": 0,
-      "payload_status": "completed",
-      "report_app_success": true,
-      "report_success": true,
-      "report_status": "ok",
-      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
-      "report_contract_status": "ok",
-      "report_contract_summary": "QA card snapshot contract passed.",
-      "report_contract_failures": [],
-      "report_card_present": true,
-      "report_card_has_claim_boundary": true,
-      "report_card_present_fields": [
-        "TweakId",
-        "Name",
-        "Category",
-        "EvidenceClass",
-        "ResearchStatus",
-        "RollbackSnapshotState",
-        "HasClaimBoundary",
-        "WhatWeKnowSummary",
-        "WhatWeDoNotClaimSummary",
-        "ProofLanes"
-      ],
-      "report_card_missing_fields": [],
-      "report_card_proof_lanes": [
-        "docs",
-        "runtime",
-        "source",
-        "rollback"
-      ],
-      "report_card_missing_proof_lanes": [],
-      "report": {
-        "TweakId": "developer.powershell-execution",
-        "TweakName": "PowerShell Script Execution Policy",
-        "Success": true,
-        "Status": "ok",
-        "Summary": "Apply/verify path completed and rollback restored the tweak.",
-        "RollbackRequested": true,
-        "Card": {
-          "TweakId": "developer.powershell-execution",
-          "Name": "PowerShell Script Execution Policy",
-          "Category": "Developer",
-          "Description": "PowerShell execution policy controls which scripts are allowed to run. RemoteSigned allows local scripts and requires downloaded scripts to be signed.",
-          "FriendlyDescription": "PowerShell execution policy controls which scripts are allowed to run. RemoteSigned allows local scripts and requires downloaded scripts to be signed.",
-          "RegistryPath": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\PowerShell\\ExecutionPolicy",
-          "EvidenceClass": "A",
-          "EvidenceClassTitle": "Cross-Layer Verified",
-          "ResearchStatus": "PROMOTED",
-          "IsMutationAllowed": true,
-          "RollbackSnapshotState": "ready",
-          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
-          "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: PowerShell execution policy controls which scripts are allowed to run. RemoteSigned allows local scripts and requires downloaded scripts to be signed. Evidence: Local official Microsoft ADMX/ADML files document the PowerShell policy path and the ExecutionPolicy enum, including RemoteSigned. The app writes ExecutionPolicy = RemoteSigned on the documented policy path, so this record is re-validated under schema 1.1. Rollback: Rollback: Verified via record-restore-story.",
-          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
-          "ProofLanes": [
-            {
-              "Key": "docs",
-              "Label": "DOCS",
-              "State": "ready",
-              "Summary": "Local official Microsoft ADMX/ADML files document the PowerShell policy path and the ExecutionPolicy enum, including RemoteSigned. The app writes ExecutionPolicy = RemoteSigned on the documented policy path, so this record is re-validated under schema 1.1.",
-              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/PowerShellExecutionPolicy.admx"
-            },
-            {
-              "Key": "runtime",
-              "Label": "RUNTIME",
-              "State": "ready",
-              "Summary": "A same-day guest Ghidra retry for `ExecutionPolicy` failed in `ensure-admin-shell` before any xref bundle reached the host.",
-              "Source": "Guest Ghidra launch receipt for ExecutionPolicy: evidence/raw/ghidra/ghidra-developer-powershell-execution-20260424-batch3/summary.json"
-            },
-            {
-              "Key": "source",
-              "Label": "SOURCE",
-              "State": "ready",
-              "Summary": "No upstream nohuto source link is attached to this record.",
-              "Source": ""
-            },
-            {
-              "Key": "rollback",
-              "Label": "ROLLBACK",
-              "State": "ready",
-              "Summary": "Rollback: Verified via record-restore-story.",
-              "Source": "record-restore-story"
-            }
-          ],
-          "ReferenceLinks": [
-            {
-              "Title": "Docs: Details (missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
-              "Kind": "Details"
-            },
-            {
-              "Title": "Docs: Developer (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweaks.md",
-              "Kind": "Docs"
-            }
-          ]
-        },
-        "Stages": [
-          {
-            "Stage": "detect-before",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Allow local scripts and remote signed scripts'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Animations turned off'.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Allow local scripts and remote signed scripts",
+            "TargetValue": "Animations turned off",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -962,8 +700,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Allow local scripts and remote signed scripts'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\PowerShell\\ExecutionPolicy: missing -> RemoteSigned",
-                "TimestampText": "00:58:06"
+                "Message": "Current values do not match a named option. Selected option is 'Animations turned off'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\TurnOffSPIAnimations: missing -> 1",
+                "TimestampText": "01:00:16"
               },
               {
                 "Action": "Apply",
@@ -990,8 +728,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Allow local scripts and remote signed scripts",
-            "TargetValue": "Allow local scripts and remote signed scripts",
+            "CurrentValue": "Animations turned off",
+            "TargetValue": "Animations turned off",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1000,20 +738,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Allow local scripts and remote signed scripts'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\PowerShell\\ExecutionPolicy: missing -> RemoteSigned",
-                "TimestampText": "00:58:06"
+                "Message": "Current values do not match a named option. Selected option is 'Animations turned off'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\TurnOffSPIAnimations: missing -> 1",
+                "TimestampText": "01:00:16"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Allow local scripts and remote signed scripts'.",
-                "TimestampText": "00:58:09"
+                "Message": "Applied preset 'Animations turned off'.",
+                "TimestampText": "01:00:16"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Allow local scripts and remote signed scripts'.",
-                "TimestampText": "00:58:09"
+                "Message": "Verified preset 'Animations turned off'.",
+                "TimestampText": "01:00:16"
               },
               {
                 "Action": "Rollback",
@@ -1029,7 +767,7 @@
             "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Allow local scripts and remote signed scripts",
+            "TargetValue": "Animations turned off",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1038,36 +776,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Allow local scripts and remote signed scripts'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\PowerShell\\ExecutionPolicy: missing -> RemoteSigned",
-                "TimestampText": "00:58:06"
+                "Message": "Current values do not match a named option. Selected option is 'Animations turned off'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\TurnOffSPIAnimations: missing -> 1",
+                "TimestampText": "01:00:16"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Allow local scripts and remote signed scripts'.",
-                "TimestampText": "00:58:09"
+                "Message": "Applied preset 'Animations turned off'.",
+                "TimestampText": "01:00:16"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Allow local scripts and remote signed scripts'.",
-                "TimestampText": "00:58:09"
+                "Message": "Verified preset 'Animations turned off'.",
+                "TimestampText": "01:00:16"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "00:58:09"
+                "TimestampText": "01:00:16"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Allow local scripts and remote signed scripts'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Animations turned off'.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Allow local scripts and remote signed scripts",
+            "TargetValue": "Animations turned off",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1076,40 +814,40 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Allow local scripts and remote signed scripts'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\PowerShell\\ExecutionPolicy: missing -> RemoteSigned",
-                "TimestampText": "00:58:09"
+                "Message": "Current values do not match a named option. Selected option is 'Animations turned off'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\TurnOffSPIAnimations: missing -> 1",
+                "TimestampText": "01:00:16"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Allow local scripts and remote signed scripts'.",
-                "TimestampText": "00:58:09"
+                "Message": "Applied preset 'Animations turned off'.",
+                "TimestampText": "01:00:16"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Allow local scripts and remote signed scripts'.",
-                "TimestampText": "00:58:09"
+                "Message": "Verified preset 'Animations turned off'.",
+                "TimestampText": "01:00:16"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "00:58:09"
+                "TimestampText": "01:00:16"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T07:58:06.4386771+00:00",
-        "CompletedAtUtc": "2026-05-07T07:58:09.5954953+00:00"
+        "StartedAtUtc": "2026-05-07T08:00:16.6001188+00:00",
+        "CompletedAtUtc": "2026-05-07T08:00:16.8983631+00:00"
       },
-      "qa_tweak_id": "developer.powershell-execution",
-      "candidate_id": "developer.powershell-execution",
-      "card_name": "PowerShell Script Execution Policy",
-      "documentation": "research/records/developer.powershell-execution.json"
+      "qa_tweak_id": "visibility.disable-common-control-animations",
+      "candidate_id": "visibility.disable-common-control-animations",
+      "card_name": "Common Control and Window Animations",
+      "documentation": "research/records/visibility.disable-common-control-animations.json"
     },
     {
-      "tweak_id": "developer.python-path-fix",
+      "tweak_id": "visibility.disable-first-signin-animation",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -1143,19 +881,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "developer.python-path-fix",
-        "TweakName": "Enable Windows Long Paths for Python Workflows",
+        "TweakId": "visibility.disable-first-signin-animation",
+        "TweakName": "First Sign-In Animation",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "developer.python-path-fix",
-          "Name": "Enable Windows Long Paths for Python Workflows",
-          "Category": "Developer",
-          "Description": "Some Python environments fail on Windows when project folders get very deep. Enabling Windows long paths removes the old 260-character path limit for compatible applications, including Python workflows that rely on the operating system long-path setting.",
-          "FriendlyDescription": "Some Python environments fail on Windows when project folders get very deep. Enabling Windows long paths removes the old 260-character path limit for compatible applications, including Python workflows that rely on the operating system long-path setting.",
-          "RegistryPath": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem\\LongPathsEnabled",
+          "TweakId": "visibility.disable-first-signin-animation",
+          "Name": "First Sign-In Animation",
+          "Category": "Visibility",
+          "Description": "Windows can show a first sign-in animation and, for Microsoft-account users, an opt-in prompt for services the first time someone signs in. This policy decides whether that first-run experience is shown.",
+          "FriendlyDescription": "Windows can show a first sign-in animation and, for Microsoft-account users, an opt-in prompt for services the first time someone signs in. This policy decides whether that first-run experience is shown.",
+          "RegistryPath": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\EnableFirstLogonAnimation",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -1163,22 +901,22 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Some Python environments fail on Windows when project folders get very deep. Enabling Windows long paths removes the old 260-character path limit for compatible applications, including Python workflows that rely on the operating system long-path setting. Evidence: Python's official Windows documentation directly names LongPathsEnabled under the FileSystem key as the control to enable when long path limits are the problem. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: Windows can show a first sign-in animation and, for Microsoft-account users, an opt-in prompt for services the first time someone signs in. This policy decides whether that first-run experience is shown. Evidence: The local official Microsoft ADMX file names the same policy key and EnableFirstLogonAnimation value used by the app. The paired ADML help text documents the first sign-in animation and Microsoft-account opt-in prompt behavior. Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "Python's official Windows documentation directly names LongPathsEnabled under the FileSystem key as the control to enable when long path limits are the problem.",
-              "Source": "Validation proof source: https://docs.python.org/3/using/windows.html"
+              "Summary": "The local official Microsoft ADMX file names the same policy key and EnableFirstLogonAnimation value used by the app. The paired ADML help text documents the first sign-in animation and Microsoft-account opt-in prompt behavior.",
+              "Source": "Validation proof source: evidence/files/external/c/WINDOWS/PolicyDefinitions/Logon.admx"
             },
             {
               "Key": "runtime",
               "Label": "RUNTIME",
               "State": "ready",
-              "Summary": "A same-day guest Ghidra retry for `LongPathsEnabled` failed in `ensure-admin-shell` before any xref bundle reached the host.",
-              "Source": "Guest Ghidra launch receipt for LongPathsEnabled: evidence/raw/ghidra/ghidra-developer-python-path-fix-20260424-batch3/summary.json"
+              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+              "Source": ""
             },
             {
               "Key": "source",
@@ -1202,8 +940,8 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Developer (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweaks.md",
+              "Title": "Docs: Visibility",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\visibility\\visibility.md#visibility.disable-first-signin-animation",
               "Kind": "Docs"
             }
           ]
@@ -1212,10 +950,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current option is 'Long paths disabled'. Selected option is 'Long paths enabled'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Skip the first sign-in animation'.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Long paths disabled",
-            "TargetValue": "Long paths enabled",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Skip the first sign-in animation",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -1224,8 +962,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current option is 'Long paths disabled'. Selected option is 'Long paths enabled'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem\\LongPathsEnabled: 0 -> 1",
-                "TimestampText": "00:58:15"
+                "Message": "Current values do not match a named option. Selected option is 'Skip the first sign-in animation'.\nEntries:\n- HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\EnableFirstLogonAnimation: missing -> 0",
+                "TimestampText": "01:00:22"
               },
               {
                 "Action": "Apply",
@@ -1252,8 +990,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Long paths enabled",
-            "TargetValue": "Long paths enabled",
+            "CurrentValue": "Skip the first sign-in animation",
+            "TargetValue": "Skip the first sign-in animation",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1262,20 +1000,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current option is 'Long paths disabled'. Selected option is 'Long paths enabled'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem\\LongPathsEnabled: 0 -> 1",
-                "TimestampText": "00:58:15"
+                "Message": "Current values do not match a named option. Selected option is 'Skip the first sign-in animation'.\nEntries:\n- HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\EnableFirstLogonAnimation: missing -> 0",
+                "TimestampText": "01:00:22"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Long paths enabled'.",
-                "TimestampText": "00:58:18"
+                "Message": "Applied preset 'Skip the first sign-in animation'.",
+                "TimestampText": "01:00:25"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Long paths enabled'.",
-                "TimestampText": "00:58:18"
+                "Message": "Verified preset 'Skip the first sign-in animation'.",
+                "TimestampText": "01:00:25"
               },
               {
                 "Action": "Rollback",
@@ -1290,8 +1028,8 @@
             "AppliedStatus": "NotApplied",
             "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Long paths disabled",
-            "TargetValue": "Long paths enabled",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Skip the first sign-in animation",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1300,36 +1038,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current option is 'Long paths disabled'. Selected option is 'Long paths enabled'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem\\LongPathsEnabled: 0 -> 1",
-                "TimestampText": "00:58:15"
+                "Message": "Current values do not match a named option. Selected option is 'Skip the first sign-in animation'.\nEntries:\n- HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\EnableFirstLogonAnimation: missing -> 0",
+                "TimestampText": "01:00:22"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Long paths enabled'.",
-                "TimestampText": "00:58:18"
+                "Message": "Applied preset 'Skip the first sign-in animation'.",
+                "TimestampText": "01:00:25"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Long paths enabled'.",
-                "TimestampText": "00:58:18"
+                "Message": "Verified preset 'Skip the first sign-in animation'.",
+                "TimestampText": "01:00:25"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "00:58:18"
+                "TimestampText": "01:00:25"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current option is 'Long paths disabled'. Selected option is 'Long paths enabled'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Skip the first sign-in animation'.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Long paths disabled",
-            "TargetValue": "Long paths enabled",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Skip the first sign-in animation",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1338,40 +1076,40 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current option is 'Long paths disabled'. Selected option is 'Long paths enabled'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem\\LongPathsEnabled: 0 -> 1",
-                "TimestampText": "00:58:18"
+                "Message": "Current values do not match a named option. Selected option is 'Skip the first sign-in animation'.\nEntries:\n- HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\EnableFirstLogonAnimation: missing -> 0",
+                "TimestampText": "01:00:25"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Long paths enabled'.",
-                "TimestampText": "00:58:18"
+                "Message": "Applied preset 'Skip the first sign-in animation'.",
+                "TimestampText": "01:00:25"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Long paths enabled'.",
-                "TimestampText": "00:58:18"
+                "Message": "Verified preset 'Skip the first sign-in animation'.",
+                "TimestampText": "01:00:25"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "00:58:18"
+                "TimestampText": "01:00:25"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T07:58:15.7235089+00:00",
-        "CompletedAtUtc": "2026-05-07T07:58:18.8102509+00:00"
+        "StartedAtUtc": "2026-05-07T08:00:22.872766+00:00",
+        "CompletedAtUtc": "2026-05-07T08:00:25.971505+00:00"
       },
-      "qa_tweak_id": "developer.python-path-fix",
-      "candidate_id": "developer.python-path-fix",
-      "card_name": "Enable Windows Long Paths for Python Workflows",
-      "documentation": "research/records/developer.python-path-fix.review.json"
+      "qa_tweak_id": "visibility.disable-first-signin-animation",
+      "candidate_id": "visibility.disable-first-signin-animation",
+      "card_name": "First Sign-In Animation",
+      "documentation": "research/records/visibility.disable-first-signin-animation.json"
     },
     {
-      "tweak_id": "developer.ssh-agent-autostart",
+      "tweak_id": "visibility.disable-lock-screen-camera",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -1405,19 +1143,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "developer.ssh-agent-autostart",
-        "TweakName": "SSH Agent Auto-start",
+        "TweakId": "visibility.disable-lock-screen-camera",
+        "TweakName": "Lock Screen Camera Access",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "developer.ssh-agent-autostart",
-          "Name": "SSH Agent Auto-start",
-          "Category": "Developer",
-          "Description": "ssh-agent keeps SSH keys loaded so Git and terminal sessions can use them more easily. Auto-starting it can make developer login sessions more convenient.",
-          "FriendlyDescription": "ssh-agent keeps SSH keys loaded so Git and terminal sessions can use them more easily. Auto-starting it can make developer login sessions more convenient.",
-          "RegistryPath": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\SSH Agent",
+          "TweakId": "visibility.disable-lock-screen-camera",
+          "Name": "Lock Screen Camera Access",
+          "Category": "Visibility",
+          "Description": "Windows can allow a camera to be used directly from the lock screen. This policy decides whether that lock-screen camera access can be enabled.",
+          "FriendlyDescription": "Windows can allow a camera to be used directly from the lock screen. This policy decides whether that lock-screen camera access can be enabled.",
+          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Personalization\\NoLockScreenCamera",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -1425,22 +1163,22 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: ssh-agent keeps SSH keys loaded so Git and terminal sessions can use them more easily. Auto-starting it can make developer login sessions more convenient. Evidence: The Windows Run key documentation establishes the supported autostart surface used by the current app implementation. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: Windows can allow a camera to be used directly from the lock screen. This policy decides whether that lock-screen camera access can be enabled. Evidence: The local official Microsoft ADMX file names the same machine policy surface used by the app. The paired ADML help text states that enabling the setting prevents a camera from being invoked on the lock screen. Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "The Windows Run key documentation establishes the supported autostart surface used by the current app implementation.",
-              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows/win32/setupapi/run-and-runonce-registry-keys"
+              "Summary": "The local official Microsoft ADMX file names the same machine policy surface used by the app. The paired ADML help text states that enabling the setting prevents a camera from being invoked on the lock screen.",
+              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/ControlPanelDisplay.admx"
             },
             {
               "Key": "runtime",
               "Label": "RUNTIME",
               "State": "ready",
-              "Summary": "A same-day guest Ghidra retry for `SSH Agent` failed in `ensure-admin-shell` before any xref bundle reached the host.",
-              "Source": "Guest Ghidra launch receipt for SSH Agent: evidence/raw/ghidra/ghidra-developer-ssh-agent-autostart-20260424-batch3/summary.json"
+              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+              "Source": ""
             },
             {
               "Key": "source",
@@ -1464,8 +1202,8 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Developer (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweaks.md",
+              "Title": "Docs: Visibility",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\visibility\\visibility.md#visibility.disable-lock-screen-camera",
               "Kind": "Docs"
             }
           ]
@@ -1477,7 +1215,7 @@
             "StatusMessage": "Value not set.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Not set",
-            "TargetValue": "C:\\Windows\\System32\\OpenSSH\\ssh-agent.exe",
+            "TargetValue": "1 (0x1)",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -1487,7 +1225,7 @@
                 "Action": "Detect",
                 "StatusText": "Detected",
                 "Message": "Value not set.",
-                "TimestampText": "00:58:25"
+                "TimestampText": "01:00:32"
               },
               {
                 "Action": "Apply",
@@ -1514,8 +1252,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "C:\\Windows\\System32\\OpenSSH\\ssh-agent.exe",
-            "TargetValue": "C:\\Windows\\System32\\OpenSSH\\ssh-agent.exe",
+            "CurrentValue": "1 (0x1)",
+            "TargetValue": "1 (0x1)",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1525,19 +1263,19 @@
                 "Action": "Detect",
                 "StatusText": "Detected",
                 "Message": "Value not set.",
-                "TimestampText": "00:58:25"
+                "TimestampText": "01:00:32"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Set value to C:\\Windows\\System32\\OpenSSH\\ssh-agent.exe.",
-                "TimestampText": "00:58:25"
+                "Message": "Set value to 1.",
+                "TimestampText": "01:00:35"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
                 "Message": "Verified desired value.",
-                "TimestampText": "00:58:25"
+                "TimestampText": "01:00:35"
               },
               {
                 "Action": "Rollback",
@@ -1552,8 +1290,8 @@
             "AppliedStatus": "NotApplied",
             "StatusMessage": "Removed value to restore default.",
             "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "C:\\Windows\\System32\\OpenSSH\\ssh-agent.exe",
-            "TargetValue": "C:\\Windows\\System32\\OpenSSH\\ssh-agent.exe",
+            "CurrentValue": "1 (0x1)",
+            "TargetValue": "1 (0x1)",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1563,25 +1301,25 @@
                 "Action": "Detect",
                 "StatusText": "Detected",
                 "Message": "Value not set.",
-                "TimestampText": "00:58:25"
+                "TimestampText": "01:00:32"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Set value to C:\\Windows\\System32\\OpenSSH\\ssh-agent.exe.",
-                "TimestampText": "00:58:25"
+                "Message": "Set value to 1.",
+                "TimestampText": "01:00:35"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
                 "Message": "Verified desired value.",
-                "TimestampText": "00:58:25"
+                "TimestampText": "01:00:35"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Removed value to restore default.",
-                "TimestampText": "00:58:25"
+                "TimestampText": "01:00:35"
               }
             ]
           },
@@ -1591,7 +1329,7 @@
             "StatusMessage": "Value not set.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Not set",
-            "TargetValue": "C:\\Windows\\System32\\OpenSSH\\ssh-agent.exe",
+            "TargetValue": "1 (0x1)",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1601,36 +1339,298 @@
                 "Action": "Detect",
                 "StatusText": "Detected",
                 "Message": "Value not set.",
-                "TimestampText": "00:58:25"
+                "TimestampText": "01:00:35"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Set value to C:\\Windows\\System32\\OpenSSH\\ssh-agent.exe.",
-                "TimestampText": "00:58:25"
+                "Message": "Set value to 1.",
+                "TimestampText": "01:00:35"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
                 "Message": "Verified desired value.",
-                "TimestampText": "00:58:25"
+                "TimestampText": "01:00:35"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Removed value to restore default.",
-                "TimestampText": "00:58:25"
+                "TimestampText": "01:00:35"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T07:58:25.2183671+00:00",
-        "CompletedAtUtc": "2026-05-07T07:58:25.5560745+00:00"
+        "StartedAtUtc": "2026-05-07T08:00:32.2714685+00:00",
+        "CompletedAtUtc": "2026-05-07T08:00:35.4278747+00:00"
       },
-      "qa_tweak_id": "developer.ssh-agent-autostart",
-      "candidate_id": "developer.ssh-agent-autostart",
-      "card_name": "SSH Agent Auto-start",
-      "documentation": "research/records/developer.ssh-agent-autostart.review.json"
+      "qa_tweak_id": "visibility.disable-lock-screen-camera",
+      "candidate_id": "visibility.disable-lock-screen-camera",
+      "card_name": "Lock Screen Camera Access",
+      "documentation": "research/records/visibility.disable-lock-screen-camera.json"
+    },
+    {
+      "tweak_id": "visibility.disable-lock-screen-changes",
+      "host_exit": 0,
+      "execution_exit": 0,
+      "payload_status": "completed",
+      "report_app_success": true,
+      "report_success": true,
+      "report_status": "ok",
+      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
+      "report_contract_status": "ok",
+      "report_contract_summary": "QA card snapshot contract passed.",
+      "report_contract_failures": [],
+      "report_card_present": true,
+      "report_card_has_claim_boundary": true,
+      "report_card_present_fields": [
+        "TweakId",
+        "Name",
+        "Category",
+        "EvidenceClass",
+        "ResearchStatus",
+        "RollbackSnapshotState",
+        "HasClaimBoundary",
+        "WhatWeKnowSummary",
+        "WhatWeDoNotClaimSummary",
+        "ProofLanes"
+      ],
+      "report_card_missing_fields": [],
+      "report_card_proof_lanes": [
+        "docs",
+        "runtime",
+        "source",
+        "rollback"
+      ],
+      "report_card_missing_proof_lanes": [],
+      "report": {
+        "TweakId": "visibility.disable-lock-screen-changes",
+        "TweakName": "Changing the Lock Screen and Logon Image",
+        "Success": true,
+        "Status": "ok",
+        "Summary": "Apply/verify path completed and rollback restored the tweak.",
+        "RollbackRequested": true,
+        "Card": {
+          "TweakId": "visibility.disable-lock-screen-changes",
+          "Name": "Changing the Lock Screen and Logon Image",
+          "Category": "Visibility",
+          "Description": "Windows normally lets users change the lock-screen and logon background image. This policy decides whether users are allowed to change those images.",
+          "FriendlyDescription": "Windows normally lets users change the lock-screen and logon background image. This policy decides whether users are allowed to change those images.",
+          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Personalization\\NoChangingLockScreen",
+          "EvidenceClass": "A",
+          "EvidenceClassTitle": "Cross-Layer Verified",
+          "ResearchStatus": "PROMOTED",
+          "IsMutationAllowed": true,
+          "RollbackSnapshotState": "ready",
+          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
+          "HasClaimBoundary": true,
+          "WhatWeKnowSummary": "Claim: Windows normally lets users change the lock-screen and logon background image. This policy decides whether users are allowed to change those images. Evidence: The local official Microsoft ADMX file names the same machine policy surface used by the app. The paired ADML help text states that enabling the setting prevents users from changing the lock-screen and logon image and forces the default image. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
+          "ProofLanes": [
+            {
+              "Key": "docs",
+              "Label": "DOCS",
+              "State": "ready",
+              "Summary": "The local official Microsoft ADMX file names the same machine policy surface used by the app. The paired ADML help text states that enabling the setting prevents users from changing the lock-screen and logon image and forces the default image.",
+              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/ControlPanelDisplay.admx"
+            },
+            {
+              "Key": "runtime",
+              "Label": "RUNTIME",
+              "State": "ready",
+              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+              "Source": ""
+            },
+            {
+              "Key": "source",
+              "Label": "SOURCE",
+              "State": "ready",
+              "Summary": "No upstream nohuto source link is attached to this record.",
+              "Source": ""
+            },
+            {
+              "Key": "rollback",
+              "Label": "ROLLBACK",
+              "State": "ready",
+              "Summary": "Rollback: Verified via record-restore-story.",
+              "Source": "record-restore-story"
+            }
+          ],
+          "ReferenceLinks": [
+            {
+              "Title": "Docs: Details (missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
+              "Kind": "Details"
+            },
+            {
+              "Title": "Docs: Visibility",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\visibility\\visibility.md#visibility.disable-lock-screen-changes",
+              "Kind": "Docs"
+            }
+          ]
+        },
+        "Stages": [
+          {
+            "Stage": "detect-before",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Value not set.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Not set",
+            "TargetValue": "1 (0x1)",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": false,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Value not set.",
+                "TimestampText": "01:00:41"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "apply",
+            "AppliedStatus": "Applied",
+            "StatusMessage": "Run completed.",
+            "OutcomeSummary": "Apply - Success",
+            "CurrentValue": "1 (0x1)",
+            "TargetValue": "1 (0x1)",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Value not set.",
+                "TimestampText": "01:00:42"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Set value to 1.",
+                "TimestampText": "01:00:44"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified desired value.",
+                "TimestampText": "01:00:44"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Not required",
+                "Message": "Step not executed.",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "rollback",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Removed value to restore default.",
+            "OutcomeSummary": "Rollback - Rolled Back",
+            "CurrentValue": "1 (0x1)",
+            "TargetValue": "1 (0x1)",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Value not set.",
+                "TimestampText": "01:00:42"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Set value to 1.",
+                "TimestampText": "01:00:44"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified desired value.",
+                "TimestampText": "01:00:44"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Removed value to restore default.",
+                "TimestampText": "01:00:44"
+              }
+            ]
+          },
+          {
+            "Stage": "detect-after",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Value not set.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Not set",
+            "TargetValue": "1 (0x1)",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Value not set.",
+                "TimestampText": "01:00:45"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Set value to 1.",
+                "TimestampText": "01:00:44"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified desired value.",
+                "TimestampText": "01:00:44"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Removed value to restore default.",
+                "TimestampText": "01:00:44"
+              }
+            ]
+          }
+        ],
+        "StartedAtUtc": "2026-05-07T08:00:41.964008+00:00",
+        "CompletedAtUtc": "2026-05-07T08:00:45.1034059+00:00"
+      },
+      "qa_tweak_id": "visibility.disable-lock-screen-changes",
+      "candidate_id": "visibility.disable-lock-screen-changes",
+      "card_name": "Changing the Lock Screen and Logon Image",
+      "documentation": "research/records/visibility.disable-lock-screen-changes.json"
     }
   ],
   "summary": {
@@ -1639,7 +1639,7 @@
     "live_success_count": 5,
     "live_failure_count": 0,
     "categories": [
-      "Developer"
+      "Visibility"
     ]
   }
 }

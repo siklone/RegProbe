@@ -1,11 +1,11 @@
 {
-  "generated_utc": "2026-05-06T21:57:33Z",
-  "history_entry_count": 29,
+  "generated_utc": "2026-05-06T22:00:04Z",
+  "history_entry_count": 30,
   "catalog_candidate_count": 242,
-  "covered_count": 89,
-  "uncovered_count": 153,
+  "covered_count": 94,
+  "uncovered_count": 148,
   "summary": {
-    "coverage_percent": 36.78,
+    "coverage_percent": 38.84,
     "covered_categories": {
       "Audio": 2,
       "Cleanup": 1,
@@ -19,7 +19,7 @@
       "Privacy": 18,
       "Security": 7,
       "System": 16,
-      "Visibility": 6
+      "Visibility": 11
     },
     "uncovered_categories": {
       "Audio": 1,
@@ -32,63 +32,10 @@
       "Privacy": 49,
       "Security": 14,
       "System": 36,
-      "Visibility": 17
+      "Visibility": 12
     }
   },
   "recommended_next_batches": [
-    {
-      "category": "Visibility",
-      "covered_count": 6,
-      "uncovered_count": 17,
-      "coverage_percent": 26.09,
-      "batch_size": 5,
-      "tweak_ids": [
-        "visibility.disable-acrylic-logon",
-        "visibility.disable-common-control-animations",
-        "visibility.disable-first-signin-animation",
-        "visibility.disable-lock-screen-camera",
-        "visibility.disable-lock-screen-changes"
-      ],
-      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id visibility.disable-acrylic-logon --id visibility.disable-common-control-animations --id visibility.disable-first-signin-animation --id visibility.disable-lock-screen-camera --id visibility.disable-lock-screen-changes",
-      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id visibility.disable-acrylic-logon --id visibility.disable-common-control-animations --id visibility.disable-first-signin-animation --id visibility.disable-lock-screen-camera --id visibility.disable-lock-screen-changes --run-kvm --json",
-      "candidates": [
-        {
-          "tweak_id": "visibility.disable-acrylic-logon",
-          "record_id": "visibility.disable-acrylic-logon",
-          "category": "Visibility",
-          "name": "Acrylic Blur on the Logon Background",
-          "documentation": "research/records/visibility.disable-acrylic-logon.json"
-        },
-        {
-          "tweak_id": "visibility.disable-common-control-animations",
-          "record_id": "visibility.disable-common-control-animations",
-          "category": "Visibility",
-          "name": "Common Control and Window Animations",
-          "documentation": "research/records/visibility.disable-common-control-animations.json"
-        },
-        {
-          "tweak_id": "visibility.disable-first-signin-animation",
-          "record_id": "visibility.disable-first-signin-animation",
-          "category": "Visibility",
-          "name": "First Sign-In Animation",
-          "documentation": "research/records/visibility.disable-first-signin-animation.json"
-        },
-        {
-          "tweak_id": "visibility.disable-lock-screen-camera",
-          "record_id": "visibility.disable-lock-screen-camera",
-          "category": "Visibility",
-          "name": "Lock Screen Camera Access",
-          "documentation": "research/records/visibility.disable-lock-screen-camera.json"
-        },
-        {
-          "tweak_id": "visibility.disable-lock-screen-changes",
-          "record_id": "visibility.disable-lock-screen-changes",
-          "category": "Visibility",
-          "name": "Changing the Lock Screen and Logon Image",
-          "documentation": "research/records/visibility.disable-lock-screen-changes.json"
-        }
-      ]
-    },
     {
       "category": "Privacy",
       "covered_count": 18,
@@ -298,6 +245,59 @@
           "category": "Security",
           "name": "Windows Update Policy Control",
           "documentation": "research/records/security.disable-windows-update.policy.review.json"
+        }
+      ]
+    },
+    {
+      "category": "Explorer",
+      "covered_count": 8,
+      "uncovered_count": 9,
+      "coverage_percent": 47.06,
+      "batch_size": 5,
+      "tweak_ids": [
+        "explorer.enable-explorer-compact-mode",
+        "explorer.launch-folder-windows-in-a-separate-process",
+        "explorer.show-compressed-and-encrypted-files-in-color",
+        "explorer.show-drive-letters-first",
+        "explorer.show-full-path"
+      ],
+      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id explorer.enable-explorer-compact-mode --id explorer.launch-folder-windows-in-a-separate-process --id explorer.show-compressed-and-encrypted-files-in-color --id explorer.show-drive-letters-first --id explorer.show-full-path",
+      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id explorer.enable-explorer-compact-mode --id explorer.launch-folder-windows-in-a-separate-process --id explorer.show-compressed-and-encrypted-files-in-color --id explorer.show-drive-letters-first --id explorer.show-full-path --run-kvm --json",
+      "candidates": [
+        {
+          "tweak_id": "explorer.enable-explorer-compact-mode",
+          "record_id": "explorer.enable-explorer-compact-mode",
+          "category": "Explorer",
+          "name": "Enable Explorer Compact View",
+          "documentation": "research/records/explorer.enable-explorer-compact-mode.review.json"
+        },
+        {
+          "tweak_id": "explorer.launch-folder-windows-in-a-separate-process",
+          "record_id": "explorer.launch-folder-windows-in-a-separate-process",
+          "category": "Explorer",
+          "name": "Launch Folder Windows in a Separate Process",
+          "documentation": "research/records/explorer.launch-folder-windows-in-a-separate-process.review.json"
+        },
+        {
+          "tweak_id": "explorer.show-compressed-and-encrypted-files-in-color",
+          "record_id": "explorer.show-compressed-and-encrypted-files-in-color",
+          "category": "Explorer",
+          "name": "Show Compressed and Encrypted Files in Color",
+          "documentation": "research/records/explorer.show-compressed-and-encrypted-files-in-color.review.json"
+        },
+        {
+          "tweak_id": "explorer.show-drive-letters-first",
+          "record_id": "explorer.show-drive-letters-first",
+          "category": "Explorer",
+          "name": "Show Drive Letters First",
+          "documentation": "research/records/explorer.show-drive-letters-first.review.json"
+        },
+        {
+          "tweak_id": "explorer.show-full-path",
+          "record_id": "explorer.show-full-path",
+          "category": "Explorer",
+          "name": "Show Full Path in Explorer",
+          "documentation": "research/records/explorer.show-full-path.review.json"
         }
       ]
     }
@@ -1060,12 +1060,57 @@
       "latest_report_status": "ok"
     },
     {
+      "tweak_id": "visibility.disable-acrylic-logon",
+      "qa_tweak_id": "visibility.disable-acrylic-logon",
+      "candidate_id": "visibility.disable-acrylic-logon",
+      "category": "Visibility",
+      "name": "Acrylic Blur on the Logon Background",
+      "documentation": "research/records/visibility.disable-acrylic-logon.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "visibility.disable-common-control-animations",
+      "qa_tweak_id": "visibility.disable-common-control-animations",
+      "candidate_id": "visibility.disable-common-control-animations",
+      "category": "Visibility",
+      "name": "Common Control and Window Animations",
+      "documentation": "research/records/visibility.disable-common-control-animations.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "visibility.disable-first-signin-animation",
+      "qa_tweak_id": "visibility.disable-first-signin-animation",
+      "candidate_id": "visibility.disable-first-signin-animation",
+      "category": "Visibility",
+      "name": "First Sign-In Animation",
+      "documentation": "research/records/visibility.disable-first-signin-animation.json",
+      "latest_report_status": "ok"
+    },
+    {
       "tweak_id": "visibility.disable-lock-screen",
       "qa_tweak_id": "visibility.disable-lock-screen",
       "candidate_id": "visibility.disable-lock-screen",
       "category": "Visibility",
       "name": "Lock Screen",
       "documentation": "research/records/visibility.disable-lock-screen.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "visibility.disable-lock-screen-camera",
+      "qa_tweak_id": "visibility.disable-lock-screen-camera",
+      "candidate_id": "visibility.disable-lock-screen-camera",
+      "category": "Visibility",
+      "name": "Lock Screen Camera Access",
+      "documentation": "research/records/visibility.disable-lock-screen-camera.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "visibility.disable-lock-screen-changes",
+      "qa_tweak_id": "visibility.disable-lock-screen-changes",
+      "candidate_id": "visibility.disable-lock-screen-changes",
+      "category": "Visibility",
+      "name": "Changing the Lock Screen and Logon Image",
+      "documentation": "research/records/visibility.disable-lock-screen-changes.json",
       "latest_report_status": "ok"
     },
     {
@@ -2057,41 +2102,6 @@
       "category": "System",
       "name": "Service Shutdown Timeout",
       "documentation": "research/records/system.wait-to-kill-service-timeout.review.json"
-    },
-    {
-      "tweak_id": "visibility.disable-acrylic-logon",
-      "record_id": "visibility.disable-acrylic-logon",
-      "category": "Visibility",
-      "name": "Acrylic Blur on the Logon Background",
-      "documentation": "research/records/visibility.disable-acrylic-logon.json"
-    },
-    {
-      "tweak_id": "visibility.disable-common-control-animations",
-      "record_id": "visibility.disable-common-control-animations",
-      "category": "Visibility",
-      "name": "Common Control and Window Animations",
-      "documentation": "research/records/visibility.disable-common-control-animations.json"
-    },
-    {
-      "tweak_id": "visibility.disable-first-signin-animation",
-      "record_id": "visibility.disable-first-signin-animation",
-      "category": "Visibility",
-      "name": "First Sign-In Animation",
-      "documentation": "research/records/visibility.disable-first-signin-animation.json"
-    },
-    {
-      "tweak_id": "visibility.disable-lock-screen-camera",
-      "record_id": "visibility.disable-lock-screen-camera",
-      "category": "Visibility",
-      "name": "Lock Screen Camera Access",
-      "documentation": "research/records/visibility.disable-lock-screen-camera.json"
-    },
-    {
-      "tweak_id": "visibility.disable-lock-screen-changes",
-      "record_id": "visibility.disable-lock-screen-changes",
-      "category": "Visibility",
-      "name": "Changing the Lock Screen and Logon Image",
-      "documentation": "research/records/visibility.disable-lock-screen-changes.json"
     },
     {
       "tweak_id": "visibility.disable-lock-screen-motion",

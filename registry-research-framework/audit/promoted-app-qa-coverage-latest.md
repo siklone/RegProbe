@@ -1,11 +1,11 @@
 # Promoted App QA Coverage
 
-- Generated UTC: 2026-05-06T21:57:33Z
-- History entries: 29
+- Generated UTC: 2026-05-06T22:00:04Z
+- History entries: 30
 - Promoted app-QA candidates: 242
-- Covered: 89
-- Uncovered: 153
-- Coverage: 36.78%
+- Covered: 94
+- Uncovered: 148
+- Coverage: 38.84%
 
 ## Covered Categories
 
@@ -21,7 +21,7 @@
 - Privacy: 18
 - Security: 7
 - System: 16
-- Visibility: 6
+- Visibility: 11
 
 ## Uncovered Categories
 
@@ -35,13 +35,10 @@
 - Privacy: 49
 - Security: 14
 - System: 36
-- Visibility: 17
+- Visibility: 12
 
 ## Recommended Next Batches
 
-- Visibility: 5 uncovered cards | coverage 26.09%
-  command: `dotnet run --project cli/cli.csproj -- research qa-batch --id visibility.disable-acrylic-logon --id visibility.disable-common-control-animations --id visibility.disable-first-signin-animation --id visibility.disable-lock-screen-camera --id visibility.disable-lock-screen-changes`
-  live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id visibility.disable-acrylic-logon --id visibility.disable-common-control-animations --id visibility.disable-first-signin-animation --id visibility.disable-lock-screen-camera --id visibility.disable-lock-screen-changes --run-kvm --json`
 - Privacy: 5 uncovered cards | coverage 26.87%
   command: `dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-biometrics-logon --id privacy.disable-camera --id privacy.disable-cli-telemetry --id privacy.disable-consumer-account-content --id privacy.disable-copilot`
   live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-biometrics-logon --id privacy.disable-camera --id privacy.disable-cli-telemetry --id privacy.disable-consumer-account-content --id privacy.disable-copilot --run-kvm --json`
@@ -54,6 +51,9 @@
 - Security: 5 uncovered cards | coverage 33.33%
   command: `dotnet run --project cli/cli.csproj -- research qa-batch --id security.disable-remote-assistance --id security.disable-system-mitigations --id security.disable-system-restore --id security.disable-windows-firewall --id security.disable-windows-update.policy`
   live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id security.disable-remote-assistance --id security.disable-system-mitigations --id security.disable-system-restore --id security.disable-windows-firewall --id security.disable-windows-update.policy --run-kvm --json`
+- Explorer: 5 uncovered cards | coverage 47.06%
+  command: `dotnet run --project cli/cli.csproj -- research qa-batch --id explorer.enable-explorer-compact-mode --id explorer.launch-folder-windows-in-a-separate-process --id explorer.show-compressed-and-encrypted-files-in-color --id explorer.show-drive-letters-first --id explorer.show-full-path`
+  live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id explorer.enable-explorer-compact-mode --id explorer.launch-folder-windows-in-a-separate-process --id explorer.show-compressed-and-encrypted-files-in-color --id explorer.show-drive-letters-first --id explorer.show-full-path --run-kvm --json`
 
 ## Remaining Uncovered Sample
 
