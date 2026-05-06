@@ -430,6 +430,18 @@ On hosts using the repo-local SDK:
 ./dotnetw test tests/tests.csproj -c Release --no-build -v minimal -p:EnableWindowsTargeting=true
 ```
 
+If a Linux host can build `net8.0-windows` but cannot execute the WPF testhost because `Microsoft.WindowsDesktop.App` is unavailable, run the tests in the KVM Windows guest instead:
+
+```bash
+# Build the test output on the host first if needed
+./dotnetw build tests/tests.csproj -c Release -p:EnableWindowsTargeting=true
+
+# Stage test output plus repo data into the VM and run the WindowsDesktop suite there
+python3 scripts/vm-kvm/run-guest-dotnet-tests.py --wait-timeout 1800
+```
+
+That VM runner stages `tests/bin/Release/net8.0-windows`, `Docs`, `research/records`, and `research/promotion-gates.json` under `C:\RegProbe` before calling the guest SDK. Use `--filter <expression>` for a single C# test.
+
 ### Package
 
 ```powershell

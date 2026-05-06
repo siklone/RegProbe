@@ -528,6 +528,15 @@ dotnet build RegProbe.sln -c Release
 dotnet test tests/tests.csproj -c Release --no-build -v minimal
 ```
 
+If the host can build but cannot execute `net8.0-windows` tests because the WindowsDesktop runtime is missing, use the KVM guest test lane:
+
+```bash
+dotnet build tests/tests.csproj -c Release -p:EnableWindowsTargeting=true
+python3 scripts/vm-kvm/run-guest-dotnet-tests.py --wait-timeout 1800
+```
+
+The guest runner preserves the repo layout expected by C# tests by staging `Docs`, `research/records`, `research/promotion-gates.json`, and `tests/bin/Release/net8.0-windows` under `C:\RegProbe`.
+
 For research changes:
 
 - VM lane executed in `Win25H2Clean`
