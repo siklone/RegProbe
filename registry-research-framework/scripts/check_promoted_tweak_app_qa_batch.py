@@ -317,8 +317,16 @@ def build_report(
             normalized_results.append(normalized_result)
             if not bool(normalized_result.get("report_success")):
                 report["status"] = "FAIL"
+                contract_failures = normalized_result.get("report_contract_failures") or []
+                if contract_failures:
+                    failure_reason = normalized_result.get("report_contract_summary") or "; ".join(contract_failures)
+                else:
+                    failure_reason = (
+                        f"{normalized_result.get('report_status') or 'unknown status'}: "
+                        f"{normalized_result.get('report_summary') or 'no summary'}"
+                    )
                 report["errors"].append(
-                    f"{normalized_result.get('tweak_id')}: live app QA returned {normalized_result.get('report_status') or 'unknown status'}."
+                    f"{normalized_result.get('tweak_id')}: live app QA returned {failure_reason}."
                 )
         report["run_results"] = normalized_results
 
@@ -383,6 +391,10 @@ def render_markdown(report: dict[str, Any]) -> str:
                 [
                     f"- {tweak_label} | success={str(bool(result.get('report_success'))).lower()} | status={result.get('report_status')}",
                     f"  summary: {result.get('report_summary')}",
+                    "  card contract: "
+                    + f"{result.get('report_contract_status') or 'n/a'} | "
+                    + f"claim_boundary={str(bool(result.get('report_card_has_claim_boundary'))).lower()} | "
+                    + f"lanes={', '.join(result.get('report_card_proof_lanes') or []) or 'n/a'}",
                 ]
             )
 

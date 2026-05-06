@@ -336,6 +336,30 @@ public sealed class CommandAllowlistSecurityTests
     }
 
     [Fact]
+    public void CpuIdleStatesRegistryMutations_AreAllowlisted()
+    {
+        var allowlist = CommandAllowlist.CreateDefault();
+        var requests = new[]
+        {
+            CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Control\Power", "/v", "DisableIdleStatesAtBoot", "/t", "REG_DWORD", "/d", "1", "/f"),
+            CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Control\Power", "/v", "ExitLatencyCheckEnabled", "/t", "REG_DWORD", "/d", "1", "/f"),
+            CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Control\Power", "/v", "IdleStateTimeout", "/t", "REG_DWORD", "/d", "0", "/f"),
+            CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Control\Power", "/v", "IdleStateTimeout", "/t", "REG_DWORD", "/d", "500", "/f"),
+            CreateRegRequest("delete", @"HKLM\SYSTEM\CurrentControlSet\Control\Power", "/v", "DisableIdleStatesAtBoot", "/f"),
+            CreateRegRequest("delete", @"HKLM\SYSTEM\CurrentControlSet\Control\Power", "/v", "ExitLatencyCheckEnabled", "/f"),
+            CreateRegRequest("delete", @"HKLM\SYSTEM\CurrentControlSet\Control\Power", "/v", "IdleStateTimeout", "/f")
+        };
+
+        foreach (var request in requests)
+        {
+            var allowed = allowlist.IsAllowed(request, out var reason);
+
+            Assert.True(allowed);
+            Assert.Null(reason);
+        }
+    }
+
+    [Fact]
     public void DnsClientEnableMulticastMutation_IsAllowlisted()
     {
         var allowlist = CommandAllowlist.CreateDefault();

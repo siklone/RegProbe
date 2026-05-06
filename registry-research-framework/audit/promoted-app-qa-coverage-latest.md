@@ -1,11 +1,11 @@
 # Promoted App QA Coverage
 
-- Generated UTC: 2026-05-06T18:51:02Z
-- History entries: 14
+- Generated UTC: 2026-05-06T19:22:42Z
+- History entries: 17
 - Promoted app-QA candidates: 242
-- Covered: 49
-- Uncovered: 193
-- Coverage: 20.25%
+- Covered: 54
+- Uncovered: 188
+- Coverage: 22.31%
 
 ## Covered Categories
 
@@ -17,7 +17,7 @@
 - Notifications: 3
 - Performance: 3
 - Peripheral: 2
-- Power: 2
+- Power: 7
 - Privacy: 8
 - Security: 2
 - System: 6
@@ -31,7 +31,7 @@
 - Network: 24
 - Notifications: 2
 - Peripheral: 1
-- Power: 8
+- Power: 3
 - Privacy: 59
 - Security: 19
 - System: 46
@@ -51,9 +51,9 @@
 - Network: 5 uncovered cards | coverage 14.29%
   command: `dotnet run --project cli/cli.csproj -- research qa-batch --id network.disable-lltd --id network.disable-mdns --id network.disable-netbios --id network.disable-netbios-resolution --id network.disable-plaintext-smb-passwords`
   live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id network.disable-lltd --id network.disable-mdns --id network.disable-netbios --id network.disable-netbios-resolution --id network.disable-plaintext-smb-passwords --run-kvm --json`
-- Power: 5 uncovered cards | coverage 20.0%
-  command: `dotnet run --project cli/cli.csproj -- research qa-batch --id power.disable-cpu-idle-states --id power.disable-network-power-saving.policy --id power.disable-power-throttling --id power.hide-hibernate-option --id power.hide-lock-option`
-  live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id power.disable-cpu-idle-states --id power.disable-network-power-saving.policy --id power.disable-power-throttling --id power.hide-hibernate-option --id power.hide-lock-option --run-kvm --json`
+- Developer: 5 uncovered cards | coverage 22.22%
+  command: `dotnet run --project cli/cli.csproj -- research qa-batch --id developer.enable-windows-long-paths --id developer.nodejs-performance --id developer.powershell-execution --id developer.python-path-fix --id developer.ssh-agent-autostart`
+  live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id developer.enable-windows-long-paths --id developer.nodejs-performance --id developer.powershell-execution --id developer.python-path-fix --id developer.ssh-agent-autostart --run-kvm --json`
 
 ## Remaining Uncovered Sample
 
