@@ -132,6 +132,19 @@ export REGPROBE_VM_BACKEND=kvm
 export REGPROBE_VM_DOMAIN=your-vm-name
 ```
 
+Before running ETW, WPR, or Ghidra KVM lanes, verify QGA without mutating the guest:
+
+```bash
+python3 scripts/vm-kvm/vm-health-check.py --domain regprobe-win11-25h2-session --connect qemu:///session --json
+```
+
+Recovery decision tree:
+
+- `domstate` is not `running`: start, restore, or replace the VM before collecting evidence.
+- `guest_ping`, `guest_info`, or `guest_exec` fails: repair QGA in the guest and rerun the health check; do not continue from a masked `ensure-admin-shell` timeout.
+- Health is `ok`: use the default QGA-first runner path, `--launch-transport auto --preflight require`.
+- You intentionally need keyboard injection: pass `--launch-transport send-key`; this bypasses QGA preflight and the summary must record `launch_transport=send-key`.
+
 ### VMware Workstation
 
 ```bash

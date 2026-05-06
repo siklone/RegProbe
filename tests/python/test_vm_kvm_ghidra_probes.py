@@ -50,6 +50,8 @@ class VmKvmGhidraProbeTests(unittest.TestCase):
                 r"C:\Windows\System32\ntoskrnl.exe",
                 "--pattern",
                 "AllowSystemRequiredPowerRequests",
+                "--launch-transport",
+                "send-key",
             ]
             with mock.patch.object(sys, "argv", argv), mock.patch.object(
                 ghidra_string_xref,
@@ -91,6 +93,8 @@ class VmKvmGhidraProbeTests(unittest.TestCase):
                 r"C:\Windows\System32\ntoskrnl.exe",
                 "--pattern",
                 "AllowSystemRequiredPowerRequests",
+                "--launch-transport",
+                "send-key",
             ]
             with mock.patch.object(sys, "argv", argv), mock.patch.object(
                 ghidra_symbolized,
@@ -140,6 +144,8 @@ class VmKvmGhidraProbeTests(unittest.TestCase):
                 r"C:\Windows\System32\ntoskrnl.exe",
                 "--pattern",
                 "AllowSystemRequiredPowerRequests",
+                "--launch-transport",
+                "send-key",
             ]
             with mock.patch.object(sys, "argv", argv), mock.patch.object(
                 ghidra_string_xref,
@@ -185,6 +191,8 @@ class VmKvmGhidraProbeTests(unittest.TestCase):
                 r"C:\Windows\System32\ntoskrnl.exe",
                 "--pattern",
                 "AllowSystemRequiredPowerRequests",
+                "--launch-transport",
+                "send-key",
             ]
             with mock.patch.object(sys, "argv", argv), mock.patch.object(
                 ghidra_string_xref,
@@ -219,6 +227,8 @@ class VmKvmGhidraProbeTests(unittest.TestCase):
                 r"C:\Windows\System32\ntoskrnl.exe",
                 "--pattern",
                 "AllowSystemRequiredPowerRequests",
+                "--launch-transport",
+                "send-key",
             ]
             failure = subprocess.CalledProcessError(5, ["type-to-guest.py"], output="typed", stderr="focus-lost")
             with mock.patch.object(sys, "argv", argv), mock.patch.object(
@@ -264,6 +274,8 @@ class VmKvmGhidraProbeTests(unittest.TestCase):
                 r"C:\Windows\System32\ntoskrnl.exe",
                 "--pattern",
                 "AllowSystemRequiredPowerRequests",
+                "--launch-transport",
+                "send-key",
             ]
             with mock.patch.object(sys, "argv", argv), mock.patch.object(
                 ghidra_string_xref,
@@ -319,6 +331,8 @@ class VmKvmGhidraProbeTests(unittest.TestCase):
                 r"C:\Windows\System32\ntoskrnl.exe",
                 "--pattern",
                 "AllowSystemRequiredPowerRequests",
+                "--launch-transport",
+                "send-key",
                 "--launcher-stall-seconds",
                 "60",
             ]
@@ -368,6 +382,8 @@ class VmKvmGhidraProbeTests(unittest.TestCase):
                 r"C:\Windows\System32\ntoskrnl.exe",
                 "--pattern",
                 "AllowSystemRequiredPowerRequests",
+                "--launch-transport",
+                "send-key",
             ]
             with mock.patch.object(sys, "argv", argv), mock.patch.object(
                 ghidra_string_xref,
@@ -410,6 +426,8 @@ class VmKvmGhidraProbeTests(unittest.TestCase):
                 r"C:\Windows\System32\ntoskrnl.exe",
                 "--pattern",
                 "AllowSystemRequiredPowerRequests",
+                "--launch-transport",
+                "send-key",
             ]
             with mock.patch.object(sys, "argv", argv), mock.patch.object(
                 ghidra_symbolized,
@@ -447,6 +465,8 @@ class VmKvmGhidraProbeTests(unittest.TestCase):
                 r"C:\Windows\System32\ntoskrnl.exe",
                 "--pattern",
                 "AllowSystemRequiredPowerRequests",
+                "--launch-transport",
+                "send-key",
             ]
             failure = subprocess.CalledProcessError(4, ["ensure-guest-admin-shell.py"], output="stdout", stderr="stderr")
             with mock.patch.object(sys, "argv", argv), mock.patch.object(
@@ -492,6 +512,8 @@ class VmKvmGhidraProbeTests(unittest.TestCase):
                 r"C:\Windows\System32\ntoskrnl.exe",
                 "--pattern",
                 "AllowSystemRequiredPowerRequests",
+                "--launch-transport",
+                "send-key",
             ]
             with mock.patch.object(sys, "argv", argv), mock.patch.object(
                 ghidra_symbolized,
@@ -547,6 +569,8 @@ class VmKvmGhidraProbeTests(unittest.TestCase):
                 r"C:\Windows\System32\ntoskrnl.exe",
                 "--pattern",
                 "AllowSystemRequiredPowerRequests",
+                "--launch-transport",
+                "send-key",
                 "--launcher-stall-seconds",
                 "60",
             ]
@@ -574,6 +598,106 @@ class VmKvmGhidraProbeTests(unittest.TestCase):
         self.assertEqual(payload["guest_health"], "degraded")
         self.assertEqual(payload["summary_source"], "launcher-stage-timeout")
         self.assertEqual(payload["launcher_stage"]["stage"], "invoke-wrapper")
+
+    def test_string_xref_auto_launch_uses_qga_after_preflight(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
+            upload_dir = Path(temp_root) / "upload"
+            summary_path = upload_dir / "ghidra-string-qga-summary.json"
+
+            def fake_qga_run(cmd, **kwargs):  # noqa: ANN001
+                self.assertTrue(any("qga-run-powershell.py" in str(part) for part in cmd))
+                upload_dir.mkdir(parents=True, exist_ok=True)
+                summary_path.write_text('{"status":"ok","ghidra_exit_code":0}\n', encoding="utf-8")
+                return subprocess.CompletedProcess(cmd, 0, "", "")
+
+            argv = [
+                "run-guest-ghidra-string-xref-probe.py",
+                "--upload-dir",
+                str(upload_dir),
+                "--output-name",
+                "ghidra-string-qga",
+                "--binary-path",
+                r"C:\Windows\System32\ntoskrnl.exe",
+                "--pattern",
+                "AllowSystemRequiredPowerRequests",
+            ]
+            with mock.patch.object(sys, "argv", argv), mock.patch.object(
+                ghidra_string_xref,
+                "ensure_guest_bridge",
+                return_value=None,
+            ), mock.patch.object(
+                ghidra_string_xref,
+                "require_qga_preflight",
+                return_value={"status": "ok", "summary_source": "qga-preflight"},
+            ), mock.patch.object(
+                ghidra_string_xref.subprocess,
+                "run",
+                side_effect=fake_qga_run,
+            ), mock.patch.object(
+                ghidra_string_xref,
+                "run",
+            ) as send_key_run, mock.patch.object(
+                ghidra_string_xref.time,
+                "time",
+                return_value=0.0,
+            ), mock.patch("sys.stdout", new_callable=io.StringIO) as stdout:
+                exit_code = ghidra_string_xref.main()
+
+        payload = json.loads(stdout.getvalue())
+        self.assertEqual(exit_code, 0)
+        self.assertEqual(payload["status"], "ok")
+        self.assertEqual(payload["launch_transport"], "qga")
+        send_key_run.assert_not_called()
+
+    def test_symbolized_auto_launch_uses_qga_after_preflight(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
+            upload_dir = Path(temp_root) / "upload"
+            summary_path = upload_dir / "ghidra-symbolized-qga-summary.json"
+
+            def fake_qga_run(cmd, **kwargs):  # noqa: ANN001
+                self.assertTrue(any("qga-run-powershell.py" in str(part) for part in cmd))
+                upload_dir.mkdir(parents=True, exist_ok=True)
+                summary_path.write_text('{"status":"ok","ghidra_exit_code":0}\n', encoding="utf-8")
+                return subprocess.CompletedProcess(cmd, 0, "", "")
+
+            argv = [
+                "run-guest-ghidra-symbolized-probe.py",
+                "--upload-dir",
+                str(upload_dir),
+                "--output-name",
+                "ghidra-symbolized-qga",
+                "--binary-path",
+                r"C:\Windows\System32\ntoskrnl.exe",
+                "--pattern",
+                "AllowSystemRequiredPowerRequests",
+            ]
+            with mock.patch.object(sys, "argv", argv), mock.patch.object(
+                ghidra_symbolized,
+                "ensure_guest_bridge",
+                return_value=None,
+            ), mock.patch.object(
+                ghidra_symbolized,
+                "require_qga_preflight",
+                return_value={"status": "ok", "summary_source": "qga-preflight"},
+            ), mock.patch.object(
+                ghidra_symbolized.subprocess,
+                "run",
+                side_effect=fake_qga_run,
+            ), mock.patch.object(
+                ghidra_symbolized,
+                "run",
+            ) as send_key_run, mock.patch.object(
+                ghidra_symbolized.time,
+                "time",
+                return_value=0.0,
+            ), mock.patch("sys.stdout", new_callable=io.StringIO) as stdout:
+                exit_code = ghidra_symbolized.main()
+
+        payload = json.loads(stdout.getvalue())
+        self.assertEqual(exit_code, 0)
+        self.assertEqual(payload["status"], "ok")
+        self.assertEqual(payload["launch_transport"], "qga")
+        send_key_run.assert_not_called()
 
 
 if __name__ == "__main__":

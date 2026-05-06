@@ -150,7 +150,11 @@ class VmKvmAppDeploySmokeTests(unittest.TestCase):
             missing_zip = Path(temp_root) / "missing.zip"
             argv = ["run-guest-app-deploy-smoke.py", "--publish-zip", str(missing_zip)]
 
-            with mock.patch.object(sys, "argv", argv), mock.patch("sys.stdout", new_callable=io.StringIO) as stdout:
+            with mock.patch.object(sys, "argv", argv), mock.patch.object(
+                app_deploy_smoke,
+                "prepare_guest_paths",
+                return_value=(0, {"status": "exited"}),
+            ), mock.patch("sys.stdout", new_callable=io.StringIO) as stdout:
                 exit_code = app_deploy_smoke.main()
 
         payload = json.loads(stdout.getvalue())

@@ -48,6 +48,7 @@ from generate_etw_stackwalk_capture_plan import load_config as load_profile_conf
 from generate_etw_stackwalk_capture_plan import load_runner_config  # noqa: E402
 from generate_etw_stackwalk_capture_plan import profile_id_for_candidate  # noqa: E402
 from generate_etw_stackwalk_capture_plan import profile_by_id  # noqa: E402
+from qga_preflight_lib import QgaPreflightError, require_qga_preflight, write_qga_preflight_summary
 from vm_env import bridge_base_url, upload_dir as default_upload_dir, vm_connect, vm_domain
 
 
@@ -295,6 +296,7 @@ def try_guest_xml_backfill(
     target_xml: Path,
     upload_dir: Path,
     guest_launch_context: dict[str, object] | None,
+    artifact_upload_timeout_seconds: int,
 ) -> dict[str, object]:
     if target_xml.exists():
         return {
@@ -387,9 +389,10 @@ def try_guest_xml_backfill(
     if result.returncode != 0:
         payload["reason"] = "guest-xml-export-failed"
         return payload
-    if not wait_for_file(upload_xml, timeout_seconds=120):
+    if not wait_for_file(upload_xml, timeout_seconds=max(1, artifact_upload_timeout_seconds)):
         payload["status"] = "error"
         payload["reason"] = "uploaded-xml-missing"
+        payload["artifact_upload_timeout_seconds"] = max(1, artifact_upload_timeout_seconds)
         payload["uploaded_xml"] = str(upload_xml)
         return payload
 
@@ -432,6 +435,7 @@ def ingest_capture_artifacts(
     ingest_root: Path,
     refresh_ghidra: bool,
     guest_launch_context: dict[str, object] | None = None,
+    artifact_upload_timeout_seconds: int = 300,
 ) -> dict[str, object]:
     if etl_path is None or not etl_path.exists():
         return apply_summary_contract(
@@ -481,6 +485,7 @@ def ingest_capture_artifacts(
                 target_xml=target_xml,
                 upload_dir=Path(str((guest_launch_context or {}).get("upload_dir") or "")),
                 guest_launch_context=guest_launch_context,
+                artifact_upload_timeout_seconds=artifact_upload_timeout_seconds,
             )
             payload["xml_backfill"] = xml_backfill
             if xml_backfill.get("status") == "ok":
@@ -547,6 +552,13 @@ def launch_generated_script(
     args: argparse.Namespace,
 ) -> str:
     if args.launch_transport in {"auto", "qga"}:
+        preflight = require_qga_preflight(
+            domain=args.domain,
+            connect=args.connect,
+            preflight_mode=args.preflight,
+        )
+        if preflight is not None and preflight.get("status") != "ok":
+            sys.stderr.write("[run-guest-etw-stackwalk-capture] qga preflight warning; attempting qga transport anyway.\n")
         qga_cmd = [
             sys.executable,
             str(repo_root / "scripts" / "vm-kvm" / "qga-run-powershell.py"),
@@ -572,21 +584,15 @@ def launch_generated_script(
 
         if qga_result.returncode == 0:
             return "qga"
-        if args.launch_transport == "qga":
-            raise annotate_process_error(
-                subprocess.CalledProcessError(
-                    qga_result.returncode,
-                    qga_cmd,
-                    output=qga_result.stdout,
-                    stderr=qga_result.stderr,
-                ),
-                stage="qga-launch",
-            )
-        sys.stderr.write("[run-guest-etw-stackwalk-capture] qga launch failed, falling back to send-key transport.\n")
-        if qga_result.stdout:
-            sys.stderr.write(qga_result.stdout)
-        if qga_result.stderr:
-            sys.stderr.write(qga_result.stderr)
+        raise annotate_process_error(
+            subprocess.CalledProcessError(
+                qga_result.returncode,
+                qga_cmd,
+                output=qga_result.stdout,
+                stderr=qga_result.stderr,
+            ),
+            stage="qga-launch",
+        )
 
     try:
         run(
@@ -781,11 +787,13 @@ def main() -> int:
     parser.add_argument("--guest-scripts-root", default=r"C:\RegProbe-Diag\bootstrap")
     parser.add_argument("--delay-ms", default="18")
     parser.add_argument("--wake-key", default="KEY_ENTER")
-    parser.add_argument("--timeout-seconds", type=int, default=180)
+    parser.add_argument("--timeout-seconds", type=int, default=300)
     parser.add_argument("--first-artifact-timeout-seconds", type=int, default=120)
+    parser.add_argument("--artifact-upload-timeout-seconds", type=int, default=300)
     parser.add_argument("--qga-retry-seconds", type=int, default=30)
     parser.add_argument("--qga-retry-interval-seconds", type=int, default=5)
     parser.add_argument("--launch-transport", choices=["auto", "qga", "send-key"], default="auto")
+    parser.add_argument("--preflight", choices=["require", "warn", "off"], default="require")
     parser.add_argument("--profile-config", default=str(DEFAULT_PROFILE_CONFIG))
     parser.add_argument("--runner-config", default=str(DEFAULT_RUNNER_CONFIG))
     parser.add_argument("--candidate-id", default=None, help="Resolve the ETW stackwalk profile from tweak-vm-runners.json.")
@@ -906,6 +914,25 @@ def main() -> int:
             marker_name=f"{safe_run_id}-etw-stackwalk-ready",
             args=args,
         )
+    except QgaPreflightError as exc:
+        print(
+            json.dumps(
+                write_qga_preflight_summary(
+                    summary_path,
+                    domain=args.domain,
+                    connect=args.connect,
+                    launch_transport=args.launch_transport,
+                    preflight=exc.preflight,
+                    extra={
+                        "summary_path": str(summary_path),
+                        "run_id": safe_run_id,
+                        "profile_id": args.profile_id,
+                    },
+                ),
+                indent=2,
+            )
+        )
+        return 1
     except subprocess.CalledProcessError as exc:
         print(
             json.dumps(
@@ -1044,6 +1071,7 @@ def main() -> int:
             etl_path=etl_path if etl_path.exists() else None,
             ingest_root=(Path(args.ingest_root) if Path(args.ingest_root).is_absolute() else (repo_root / args.ingest_root)).resolve(),
             refresh_ghidra=args.refresh_ghidra,
+            artifact_upload_timeout_seconds=args.artifact_upload_timeout_seconds,
             guest_launch_context={
                 "domain": args.domain,
                 "connect": args.connect,

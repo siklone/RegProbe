@@ -341,6 +341,16 @@ The baseline is tooling-first. Defender stays enabled, exclusions are bounded to
 
 Start with the [VM workflow](Docs/research/vm-workflow.md) when you need the whole flow, and use [Runtime escalation](Docs/research/runtime-escalation.md) when a value needs more than a simple before/after check.
 
+### VM Health And QGA Launch
+
+KVM runners that rely on QEMU Guest Agent now fail fast before launching guest work. Run the non-mutating health check first when ETW, WPR, or Ghidra produces a transport-looking failure:
+
+```bash
+python3 scripts/vm-kvm/vm-health-check.py --domain regprobe-win11-25h2-session --connect qemu:///session --json
+```
+
+Decision tree: if `domstate` is not `running`, start or restore the VM before collecting evidence. If `guest_ping`, `guest_info`, or `guest_exec` fails, repair QGA in the guest or rerun the health check; do not treat a downstream `ensure-admin-shell` timeout as evidence. If QGA is healthy, keep the default `--launch-transport auto --preflight require` path for ETW/Ghidra. Use `--launch-transport send-key` only when you intentionally want the interactive fallback, and expect summaries to record `launch_transport=send-key`.
+
 ## Scripts
 
 The repo has a lot of PowerShell, but not every script has the same job. Some scripts are everyday build, package, clean, baseline maintenance, shell-health, and app-smoke helpers. Some are active research runners for checked-in escalation lanes. Others are historical reproducibility scripts kept because old notes, audits, and evidence bundles still depend on them.
