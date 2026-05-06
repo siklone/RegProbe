@@ -98,14 +98,18 @@ public sealed class CommandAllowlistSecurityTests
         var allowlist = CommandAllowlist.CreateDefault();
         var historyRequest = CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\System", "/v", "AllowClipboardHistory", "/t", "REG_DWORD", "/d", "0", "/f");
         var crossDeviceRequest = CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\System", "/v", "AllowCrossDeviceClipboard", "/t", "REG_DWORD", "/d", "0", "/f");
+        var rdpClipboardRequest = CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services", "/v", "fDisableClip", "/t", "REG_DWORD", "/d", "1", "/f");
 
         var historyAllowed = allowlist.IsAllowed(historyRequest, out var historyReason);
         var crossDeviceAllowed = allowlist.IsAllowed(crossDeviceRequest, out var crossDeviceReason);
+        var rdpClipboardAllowed = allowlist.IsAllowed(rdpClipboardRequest, out var rdpClipboardReason);
 
         Assert.True(historyAllowed);
         Assert.Null(historyReason);
         Assert.True(crossDeviceAllowed);
         Assert.Null(crossDeviceReason);
+        Assert.True(rdpClipboardAllowed);
+        Assert.Null(rdpClipboardReason);
     }
 
     [Fact]
@@ -222,6 +226,7 @@ public sealed class CommandAllowlistSecurityTests
             CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power", "/v", "HiberbootEnabled", "/t", "REG_DWORD", "/d", "0", "/f"),
             CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters", "/v", "DisableTaskOffload", "/t", "REG_DWORD", "/d", "0", "/f"),
             CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services", "/v", "fAllowToGetHelp", "/t", "REG_DWORD", "/d", "0", "/f"),
+            CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services", "/v", "fDisableClip", "/t", "REG_DWORD", "/d", "1", "/f"),
             CreateRegRequest("add", @"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "/v", "DisableBkGndGroupPolicy", "/t", "REG_DWORD", "/d", "1", "/f"),
             CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search", "/v", "ConnectedSearchUseWeb", "/t", "REG_DWORD", "/d", "0", "/f"),
             CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search", "/v", "AllowIndexingEncryptedStoresOrItems", "/t", "REG_DWORD", "/d", "1", "/f"),

@@ -1,7 +1,7 @@
 # Promoted App QA Batch
 
 - Status: PASS
-- Generated UTC: 2026-05-06T21:17:59Z
+- Generated UTC: 2026-05-06T21:28:55Z
 - Catalog candidates: 242
 - Selected candidates: 5
 - Planned apply-allowed candidates: 5
@@ -10,41 +10,41 @@
 
 ## Selected Candidates
 
-- `security.disable-downloads-blocking` | Preserve Zone Information on Attachments | Security
-  docs: `research/records/security.disable-downloads-blocking.json`
+- `system.bsod-display-parameters` | Display Blue Screen Parameters | System
+  docs: `research/records/system.bsod-display-parameters.review.json`
   rollback: default=true | previous=true
   card snapshot: claim_boundary=true | fields=TweakId, Name, Category, EvidenceClass, ResearchStatus, RollbackSnapshotState, HasClaimBoundary, WhatWeKnowSummary, WhatWeDoNotClaimSummary, ProofLanes | lanes=docs, runtime, source, rollback
-- `security.disable-enhanced-defender-notifications` | Windows Security Enhanced Notifications | Security
-  docs: `research/records/security.disable-enhanced-defender-notifications.review.json`
+- `system.disable-auto-maintenance` | Automatic Maintenance | System
+  docs: `research/records/system.disable-auto-maintenance.review.json`
   rollback: default=true | previous=true
   card snapshot: claim_boundary=true | fields=TweakId, Name, Category, EvidenceClass, ResearchStatus, RollbackSnapshotState, HasClaimBoundary, WhatWeKnowSummary, WhatWeDoNotClaimSummary, ProofLanes | lanes=docs, runtime, source, rollback
-- `security.disable-ntfs-encryption` | Disable NTFS Encryption (EFS) | Security
-  docs: `research/records/security.disable-ntfs-encryption.json`
-  rollback: default=false | previous=false
-  card snapshot: claim_boundary=true | fields=TweakId, Name, Category, EvidenceClass, ResearchStatus, RollbackSnapshotState, HasClaimBoundary, WhatWeKnowSummary, WhatWeDoNotClaimSummary, ProofLanes | lanes=docs, runtime, source, rollback
-- `security.disable-p2p-updates` | Delivery Optimization Download Mode | Security
-  docs: `research/records/security.disable-p2p-updates.review.json`
+- `system.disable-background-gp-updates` | Background Group Policy Refresh | System
+  docs: `research/records/system.disable-background-gp-updates.json`
   rollback: default=true | previous=true
   card snapshot: claim_boundary=true | fields=TweakId, Name, Category, EvidenceClass, ResearchStatus, RollbackSnapshotState, HasClaimBoundary, WhatWeKnowSummary, WhatWeDoNotClaimSummary, ProofLanes | lanes=docs, runtime, source, rollback
-- `security.disable-picture-password` | Picture Password Sign-In for Domain Users | Security
-  docs: `research/records/security.disable-picture-password.json`
+- `system.disable-clipboard-redirection` | RDP Clipboard Redirection | System
+  docs: `research/records/system.disable-clipboard-redirection.json`
+  rollback: default=true | previous=true
+  card snapshot: claim_boundary=true | fields=TweakId, Name, Category, EvidenceClass, ResearchStatus, RollbackSnapshotState, HasClaimBoundary, WhatWeKnowSummary, WhatWeDoNotClaimSummary, ProofLanes | lanes=docs, runtime, source, rollback
+- `system.disable-fullscreen-optimizations` | Fullscreen Optimizations | System
+  docs: `research/records/system.disable-fullscreen-optimizations.review.json`
   rollback: default=true | previous=true
   card snapshot: claim_boundary=true | fields=TweakId, Name, Category, EvidenceClass, ResearchStatus, RollbackSnapshotState, HasClaimBoundary, WhatWeKnowSummary, WhatWeDoNotClaimSummary, ProofLanes | lanes=docs, runtime, source, rollback
 
 ## Live Results
 
-- `security.disable-downloads-blocking` | success=true | status=ok
+- `system.bsod-display-parameters` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
   card contract: ok | claim_boundary=true | lanes=docs, runtime, source, rollback
-- `security.disable-enhanced-defender-notifications` | success=true | status=ok
+- `system.disable-auto-maintenance` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
   card contract: ok | claim_boundary=true | lanes=docs, runtime, source, rollback
-- `security.disable-ntfs-encryption` | success=true | status=ok
+- `system.disable-background-gp-updates` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
   card contract: ok | claim_boundary=true | lanes=docs, runtime, source, rollback
-- `security.disable-p2p-updates` | success=true | status=ok
+- `system.disable-clipboard-redirection` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
   card contract: ok | claim_boundary=true | lanes=docs, runtime, source, rollback
-- `security.disable-picture-password` | success=true | status=ok
+- `system.disable-fullscreen-optimizations` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
   card contract: ok | claim_boundary=true | lanes=docs, runtime, source, rollback

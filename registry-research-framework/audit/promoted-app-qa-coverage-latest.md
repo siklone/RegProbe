@@ -1,11 +1,11 @@
 # Promoted App QA Coverage
 
-- Generated UTC: 2026-05-06T21:17:59Z
-- History entries: 19
+- Generated UTC: 2026-05-06T21:28:55Z
+- History entries: 21
 - Promoted app-QA candidates: 242
-- Covered: 59
-- Uncovered: 183
-- Coverage: 24.38%
+- Covered: 64
+- Uncovered: 178
+- Coverage: 26.45%
 
 ## Covered Categories
 
@@ -20,7 +20,7 @@
 - Power: 7
 - Privacy: 8
 - Security: 7
-- System: 6
+- System: 11
 - Visibility: 6
 
 ## Uncovered Categories
@@ -34,20 +34,20 @@
 - Power: 3
 - Privacy: 59
 - Security: 14
-- System: 46
+- System: 41
 - Visibility: 17
 
 ## Recommended Next Batches
 
-- System: 5 uncovered cards | coverage 11.54%
-  command: `dotnet run --project cli/cli.csproj -- research qa-batch --id system.bsod-display-parameters --id system.disable-auto-maintenance --id system.disable-background-gp-updates --id system.disable-clipboard-redirection --id system.disable-fullscreen-optimizations`
-  live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id system.bsod-display-parameters --id system.disable-auto-maintenance --id system.disable-background-gp-updates --id system.disable-clipboard-redirection --id system.disable-fullscreen-optimizations --run-kvm --json`
 - Privacy: 5 uncovered cards | coverage 11.94%
   command: `dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.deny-app-access.policy --id privacy.disable-activity-history --id privacy.disable-app-diagnostics --id privacy.disable-app-suggestions --id privacy.disable-appcompat-engine.policy`
   live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.deny-app-access.policy --id privacy.disable-activity-history --id privacy.disable-app-diagnostics --id privacy.disable-app-suggestions --id privacy.disable-appcompat-engine.policy --run-kvm --json`
 - Network: 5 uncovered cards | coverage 14.29%
   command: `dotnet run --project cli/cli.csproj -- research qa-batch --id network.disable-lltd --id network.disable-mdns --id network.disable-netbios --id network.disable-netbios-resolution --id network.disable-plaintext-smb-passwords`
   live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id network.disable-lltd --id network.disable-mdns --id network.disable-netbios --id network.disable-netbios-resolution --id network.disable-plaintext-smb-passwords --run-kvm --json`
+- System: 5 uncovered cards | coverage 21.15%
+  command: `dotnet run --project cli/cli.csproj -- research qa-batch --id system.disable-game-recording-broadcasting --id system.disable-jpeg-reduction --id system.disable-restartable-apps --id system.disable-search-highlights-policy --id system.disable-search-remote-queries`
+  live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id system.disable-game-recording-broadcasting --id system.disable-jpeg-reduction --id system.disable-restartable-apps --id system.disable-search-highlights-policy --id system.disable-search-remote-queries --run-kvm --json`
 - Developer: 5 uncovered cards | coverage 22.22%
   command: `dotnet run --project cli/cli.csproj -- research qa-batch --id developer.enable-windows-long-paths --id developer.nodejs-performance --id developer.powershell-execution --id developer.python-path-fix --id developer.ssh-agent-autostart`
   live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id developer.enable-windows-long-paths --id developer.nodejs-performance --id developer.powershell-execution --id developer.python-path-fix --id developer.ssh-agent-autostart --run-kvm --json`

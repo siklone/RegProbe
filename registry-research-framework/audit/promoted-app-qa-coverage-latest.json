@@ -1,11 +1,11 @@
 {
-  "generated_utc": "2026-05-06T21:17:59Z",
-  "history_entry_count": 19,
+  "generated_utc": "2026-05-06T21:28:55Z",
+  "history_entry_count": 21,
   "catalog_candidate_count": 242,
-  "covered_count": 59,
-  "uncovered_count": 183,
+  "covered_count": 64,
+  "uncovered_count": 178,
   "summary": {
-    "coverage_percent": 24.38,
+    "coverage_percent": 26.45,
     "covered_categories": {
       "Audio": 2,
       "Cleanup": 1,
@@ -18,7 +18,7 @@
       "Power": 7,
       "Privacy": 8,
       "Security": 7,
-      "System": 6,
+      "System": 11,
       "Visibility": 6
     },
     "uncovered_categories": {
@@ -31,64 +31,11 @@
       "Power": 3,
       "Privacy": 59,
       "Security": 14,
-      "System": 46,
+      "System": 41,
       "Visibility": 17
     }
   },
   "recommended_next_batches": [
-    {
-      "category": "System",
-      "covered_count": 6,
-      "uncovered_count": 46,
-      "coverage_percent": 11.54,
-      "batch_size": 5,
-      "tweak_ids": [
-        "system.bsod-display-parameters",
-        "system.disable-auto-maintenance",
-        "system.disable-background-gp-updates",
-        "system.disable-clipboard-redirection",
-        "system.disable-fullscreen-optimizations"
-      ],
-      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id system.bsod-display-parameters --id system.disable-auto-maintenance --id system.disable-background-gp-updates --id system.disable-clipboard-redirection --id system.disable-fullscreen-optimizations",
-      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id system.bsod-display-parameters --id system.disable-auto-maintenance --id system.disable-background-gp-updates --id system.disable-clipboard-redirection --id system.disable-fullscreen-optimizations --run-kvm --json",
-      "candidates": [
-        {
-          "tweak_id": "system.bsod-display-parameters",
-          "record_id": "system.bsod-display-parameters",
-          "category": "System",
-          "name": "Display Blue Screen Parameters",
-          "documentation": "research/records/system.bsod-display-parameters.review.json"
-        },
-        {
-          "tweak_id": "system.disable-auto-maintenance",
-          "record_id": "system.disable-auto-maintenance",
-          "category": "System",
-          "name": "Automatic Maintenance",
-          "documentation": "research/records/system.disable-auto-maintenance.review.json"
-        },
-        {
-          "tweak_id": "system.disable-background-gp-updates",
-          "record_id": "system.disable-background-gp-updates",
-          "category": "System",
-          "name": "Background Group Policy Refresh",
-          "documentation": "research/records/system.disable-background-gp-updates.json"
-        },
-        {
-          "tweak_id": "system.disable-clipboard-redirection",
-          "record_id": "system.disable-clipboard-redirection",
-          "category": "System",
-          "name": "RDP Clipboard Redirection",
-          "documentation": "research/records/system.disable-clipboard-redirection.json"
-        },
-        {
-          "tweak_id": "system.disable-fullscreen-optimizations",
-          "record_id": "system.disable-fullscreen-optimizations",
-          "category": "System",
-          "name": "Fullscreen Optimizations",
-          "documentation": "research/records/system.disable-fullscreen-optimizations.review.json"
-        }
-      ]
-    },
     {
       "category": "Privacy",
       "covered_count": 8,
@@ -192,6 +139,59 @@
           "category": "Network",
           "name": "Plaintext SMB Passwords",
           "documentation": "research/records/network.disable-plaintext-smb-passwords.json"
+        }
+      ]
+    },
+    {
+      "category": "System",
+      "covered_count": 11,
+      "uncovered_count": 41,
+      "coverage_percent": 21.15,
+      "batch_size": 5,
+      "tweak_ids": [
+        "system.disable-game-recording-broadcasting",
+        "system.disable-jpeg-reduction",
+        "system.disable-restartable-apps",
+        "system.disable-search-highlights-policy",
+        "system.disable-search-remote-queries"
+      ],
+      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id system.disable-game-recording-broadcasting --id system.disable-jpeg-reduction --id system.disable-restartable-apps --id system.disable-search-highlights-policy --id system.disable-search-remote-queries",
+      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id system.disable-game-recording-broadcasting --id system.disable-jpeg-reduction --id system.disable-restartable-apps --id system.disable-search-highlights-policy --id system.disable-search-remote-queries --run-kvm --json",
+      "candidates": [
+        {
+          "tweak_id": "system.disable-game-recording-broadcasting",
+          "record_id": "system.disable-game-recording-broadcasting",
+          "category": "System",
+          "name": "Windows Game Recording and Broadcasting",
+          "documentation": "research/records/system.disable-game-recording-broadcasting.json"
+        },
+        {
+          "tweak_id": "system.disable-jpeg-reduction",
+          "record_id": "system.disable-jpeg-reduction",
+          "category": "System",
+          "name": "Wallpaper JPEG Import Quality",
+          "documentation": "research/records/system.disable-jpeg-reduction.review.json"
+        },
+        {
+          "tweak_id": "system.disable-restartable-apps",
+          "record_id": "system.disable-restartable-apps",
+          "category": "System",
+          "name": "Restart Apps After Sign-In",
+          "documentation": "research/records/system.disable-restartable-apps.review.json"
+        },
+        {
+          "tweak_id": "system.disable-search-highlights-policy",
+          "record_id": "system.disable-search-highlights-policy",
+          "category": "System",
+          "name": "Search Highlights",
+          "documentation": "research/records/system.disable-search-highlights-policy.json"
+        },
+        {
+          "tweak_id": "system.disable-search-remote-queries",
+          "record_id": "system.disable-search-remote-queries",
+          "category": "System",
+          "name": "Remote Windows Search Queries",
+          "documentation": "research/records/system.disable-search-remote-queries.json"
         }
       ]
     },
@@ -745,6 +745,15 @@
       "latest_report_status": "ok"
     },
     {
+      "tweak_id": "system.bsod-display-parameters",
+      "qa_tweak_id": "system.bsod-display-parameters",
+      "candidate_id": "system.bsod-display-parameters",
+      "category": "System",
+      "name": "Display Blue Screen Parameters",
+      "documentation": "research/records/system.bsod-display-parameters.review.json",
+      "latest_report_status": "ok"
+    },
+    {
       "tweak_id": "system.disable-app-archiving",
       "qa_tweak_id": "system.disable-app-archiving",
       "candidate_id": "system.disable-app-archiving",
@@ -754,12 +763,48 @@
       "latest_report_status": "ok"
     },
     {
+      "tweak_id": "system.disable-auto-maintenance",
+      "qa_tweak_id": "system.disable-auto-maintenance",
+      "candidate_id": "system.disable-auto-maintenance",
+      "category": "System",
+      "name": "Automatic Maintenance",
+      "documentation": "research/records/system.disable-auto-maintenance.review.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "system.disable-background-gp-updates",
+      "qa_tweak_id": "system.disable-background-gp-updates",
+      "candidate_id": "system.disable-background-gp-updates",
+      "category": "System",
+      "name": "Background Group Policy Refresh",
+      "documentation": "research/records/system.disable-background-gp-updates.json",
+      "latest_report_status": "ok"
+    },
+    {
       "tweak_id": "system.disable-clipboard-history",
       "qa_tweak_id": "system.disable-clipboard-history",
       "candidate_id": "system.disable-clipboard-history",
       "category": "System",
       "name": "Clipboard History and Cross-Device Clipboard Sync",
       "documentation": "research/records/system.disable-clipboard-history.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "system.disable-clipboard-redirection",
+      "qa_tweak_id": "system.disable-clipboard-redirection",
+      "candidate_id": "system.disable-clipboard-redirection",
+      "category": "System",
+      "name": "RDP Clipboard Redirection",
+      "documentation": "research/records/system.disable-clipboard-redirection.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "system.disable-fullscreen-optimizations",
+      "qa_tweak_id": "system.disable-fullscreen-optimizations",
+      "candidate_id": "system.disable-fullscreen-optimizations",
+      "category": "System",
+      "name": "Fullscreen Optimizations",
+      "documentation": "research/records/system.disable-fullscreen-optimizations.review.json",
       "latest_report_status": "ok"
     },
     {
@@ -1675,41 +1720,6 @@
       "category": "Security",
       "name": "User Account Control Prompting Profile",
       "documentation": "research/records/security.uac-never-notify.json"
-    },
-    {
-      "tweak_id": "system.bsod-display-parameters",
-      "record_id": "system.bsod-display-parameters",
-      "category": "System",
-      "name": "Display Blue Screen Parameters",
-      "documentation": "research/records/system.bsod-display-parameters.review.json"
-    },
-    {
-      "tweak_id": "system.disable-auto-maintenance",
-      "record_id": "system.disable-auto-maintenance",
-      "category": "System",
-      "name": "Automatic Maintenance",
-      "documentation": "research/records/system.disable-auto-maintenance.review.json"
-    },
-    {
-      "tweak_id": "system.disable-background-gp-updates",
-      "record_id": "system.disable-background-gp-updates",
-      "category": "System",
-      "name": "Background Group Policy Refresh",
-      "documentation": "research/records/system.disable-background-gp-updates.json"
-    },
-    {
-      "tweak_id": "system.disable-clipboard-redirection",
-      "record_id": "system.disable-clipboard-redirection",
-      "category": "System",
-      "name": "RDP Clipboard Redirection",
-      "documentation": "research/records/system.disable-clipboard-redirection.json"
-    },
-    {
-      "tweak_id": "system.disable-fullscreen-optimizations",
-      "record_id": "system.disable-fullscreen-optimizations",
-      "category": "System",
-      "name": "Fullscreen Optimizations",
-      "documentation": "research/records/system.disable-fullscreen-optimizations.review.json"
     },
     {
       "tweak_id": "system.disable-game-recording-broadcasting",

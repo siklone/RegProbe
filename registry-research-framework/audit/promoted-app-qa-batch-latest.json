@@ -1,13 +1,13 @@
 {
-  "generated_utc": "2026-05-06T21:17:59Z",
+  "generated_utc": "2026-05-06T21:28:55Z",
   "status": "PASS",
   "selection": {
     "requested_ids": [
-      "security.disable-downloads-blocking",
-      "security.disable-enhanced-defender-notifications",
-      "security.disable-ntfs-encryption",
-      "security.disable-p2p-updates",
-      "security.disable-picture-password"
+      "system.bsod-display-parameters",
+      "system.disable-auto-maintenance",
+      "system.disable-background-gp-updates",
+      "system.disable-clipboard-redirection",
+      "system.disable-fullscreen-optimizations"
     ],
     "requested_categories": [],
     "limit_per_category": 1,
@@ -26,25 +26,25 @@
   "errors": [],
   "candidates": [
     {
-      "tweak_id": "security.disable-downloads-blocking",
-      "qa_tweak_id": "security.disable-downloads-blocking",
-      "candidate_id": "security.disable-downloads-blocking",
-      "record_id": "security.disable-downloads-blocking",
-      "category": "Security",
-      "name": "Preserve Zone Information on Attachments",
-      "documentation": "research/records/security.disable-downloads-blocking.json",
+      "tweak_id": "system.bsod-display-parameters",
+      "qa_tweak_id": "system.bsod-display-parameters",
+      "candidate_id": "system.bsod-display-parameters",
+      "record_id": "system.bsod-display-parameters",
+      "category": "System",
+      "name": "Display Blue Screen Parameters",
+      "documentation": "research/records/system.bsod-display-parameters.review.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect security.disable-downloads-blocking",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect system.bsod-display-parameters",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'security.disable-downloads-blocking' --qa-output 'C:\\Tools\\ValidationController\\smoke\\security.disable-downloads-blocking.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'security.disable-downloads-blocking' --qa-output 'C:\\Tools\\ValidationController\\smoke\\security.disable-downloads-blocking.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'security.disable-downloads-blocking' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\security.disable-downloads-blocking.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'security.disable-downloads-blocking' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\security.disable-downloads-blocking.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'security.disable-downloads-blocking'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.bsod-display-parameters' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.bsod-display-parameters.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.bsod-display-parameters' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.bsod-display-parameters.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.bsod-display-parameters' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.bsod-display-parameters.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.bsod-display-parameters' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.bsod-display-parameters.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'system.bsod-display-parameters'"
       },
       "expected_report": {
         "success": true,
@@ -85,25 +85,25 @@
       }
     },
     {
-      "tweak_id": "security.disable-enhanced-defender-notifications",
-      "qa_tweak_id": "security.disable-enhanced-defender-notifications",
-      "candidate_id": "security.disable-enhanced-defender-notifications",
-      "record_id": "security.disable-enhanced-defender-notifications",
-      "category": "Security",
-      "name": "Windows Security Enhanced Notifications",
-      "documentation": "research/records/security.disable-enhanced-defender-notifications.review.json",
+      "tweak_id": "system.disable-auto-maintenance",
+      "qa_tweak_id": "system.disable-auto-maintenance",
+      "candidate_id": "system.disable-auto-maintenance",
+      "record_id": "system.disable-auto-maintenance",
+      "category": "System",
+      "name": "Automatic Maintenance",
+      "documentation": "research/records/system.disable-auto-maintenance.review.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect security.disable-enhanced-defender-notifications",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect system.disable-auto-maintenance",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'security.disable-enhanced-defender-notifications' --qa-output 'C:\\Tools\\ValidationController\\smoke\\security.disable-enhanced-defender-notifications.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'security.disable-enhanced-defender-notifications' --qa-output 'C:\\Tools\\ValidationController\\smoke\\security.disable-enhanced-defender-notifications.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'security.disable-enhanced-defender-notifications' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\security.disable-enhanced-defender-notifications.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'security.disable-enhanced-defender-notifications' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\security.disable-enhanced-defender-notifications.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'security.disable-enhanced-defender-notifications'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.disable-auto-maintenance' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.disable-auto-maintenance.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.disable-auto-maintenance' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.disable-auto-maintenance.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.disable-auto-maintenance' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.disable-auto-maintenance.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.disable-auto-maintenance' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.disable-auto-maintenance.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'system.disable-auto-maintenance'"
       },
       "expected_report": {
         "success": true,
@@ -144,25 +144,25 @@
       }
     },
     {
-      "tweak_id": "security.disable-ntfs-encryption",
-      "qa_tweak_id": "security.disable-ntfs-encryption",
-      "candidate_id": "security.disable-ntfs-encryption",
-      "record_id": "security.disable-ntfs-encryption",
-      "category": "Security",
-      "name": "Disable NTFS Encryption (EFS)",
-      "documentation": "research/records/security.disable-ntfs-encryption.json",
+      "tweak_id": "system.disable-background-gp-updates",
+      "qa_tweak_id": "system.disable-background-gp-updates",
+      "candidate_id": "system.disable-background-gp-updates",
+      "record_id": "system.disable-background-gp-updates",
+      "category": "System",
+      "name": "Background Group Policy Refresh",
+      "documentation": "research/records/system.disable-background-gp-updates.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
-      "restore_default_supported": false,
-      "restore_previous_supported": false,
+      "restore_default_supported": true,
+      "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect security.disable-ntfs-encryption",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect system.disable-background-gp-updates",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'security.disable-ntfs-encryption' --qa-output 'C:\\Tools\\ValidationController\\smoke\\security.disable-ntfs-encryption.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'security.disable-ntfs-encryption' --qa-output 'C:\\Tools\\ValidationController\\smoke\\security.disable-ntfs-encryption.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'security.disable-ntfs-encryption' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\security.disable-ntfs-encryption.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'security.disable-ntfs-encryption' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\security.disable-ntfs-encryption.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'security.disable-ntfs-encryption'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.disable-background-gp-updates' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.disable-background-gp-updates.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.disable-background-gp-updates' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.disable-background-gp-updates.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.disable-background-gp-updates' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.disable-background-gp-updates.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.disable-background-gp-updates' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.disable-background-gp-updates.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'system.disable-background-gp-updates'"
       },
       "expected_report": {
         "success": true,
@@ -203,25 +203,25 @@
       }
     },
     {
-      "tweak_id": "security.disable-p2p-updates",
-      "qa_tweak_id": "security.disable-p2p-updates",
-      "candidate_id": "security.disable-p2p-updates",
-      "record_id": "security.disable-p2p-updates",
-      "category": "Security",
-      "name": "Delivery Optimization Download Mode",
-      "documentation": "research/records/security.disable-p2p-updates.review.json",
+      "tweak_id": "system.disable-clipboard-redirection",
+      "qa_tweak_id": "system.disable-clipboard-redirection",
+      "candidate_id": "system.disable-clipboard-redirection",
+      "record_id": "system.disable-clipboard-redirection",
+      "category": "System",
+      "name": "RDP Clipboard Redirection",
+      "documentation": "research/records/system.disable-clipboard-redirection.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect security.disable-p2p-updates",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect system.disable-clipboard-redirection",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'security.disable-p2p-updates' --qa-output 'C:\\Tools\\ValidationController\\smoke\\security.disable-p2p-updates.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'security.disable-p2p-updates' --qa-output 'C:\\Tools\\ValidationController\\smoke\\security.disable-p2p-updates.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'security.disable-p2p-updates' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\security.disable-p2p-updates.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'security.disable-p2p-updates' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\security.disable-p2p-updates.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'security.disable-p2p-updates'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.disable-clipboard-redirection' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.disable-clipboard-redirection.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.disable-clipboard-redirection' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.disable-clipboard-redirection.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.disable-clipboard-redirection' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.disable-clipboard-redirection.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.disable-clipboard-redirection' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.disable-clipboard-redirection.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'system.disable-clipboard-redirection'"
       },
       "expected_report": {
         "success": true,
@@ -262,25 +262,25 @@
       }
     },
     {
-      "tweak_id": "security.disable-picture-password",
-      "qa_tweak_id": "security.disable-picture-password",
-      "candidate_id": "security.disable-picture-password",
-      "record_id": "security.disable-picture-password",
-      "category": "Security",
-      "name": "Picture Password Sign-In for Domain Users",
-      "documentation": "research/records/security.disable-picture-password.json",
+      "tweak_id": "system.disable-fullscreen-optimizations",
+      "qa_tweak_id": "system.disable-fullscreen-optimizations",
+      "candidate_id": "system.disable-fullscreen-optimizations",
+      "record_id": "system.disable-fullscreen-optimizations",
+      "category": "System",
+      "name": "Fullscreen Optimizations",
+      "documentation": "research/records/system.disable-fullscreen-optimizations.review.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect security.disable-picture-password",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect system.disable-fullscreen-optimizations",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'security.disable-picture-password' --qa-output 'C:\\Tools\\ValidationController\\smoke\\security.disable-picture-password.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'security.disable-picture-password' --qa-output 'C:\\Tools\\ValidationController\\smoke\\security.disable-picture-password.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'security.disable-picture-password' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\security.disable-picture-password.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'security.disable-picture-password' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\security.disable-picture-password.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'security.disable-picture-password'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.disable-fullscreen-optimizations' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.disable-fullscreen-optimizations.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.disable-fullscreen-optimizations' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.disable-fullscreen-optimizations.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.disable-fullscreen-optimizations' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.disable-fullscreen-optimizations.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.disable-fullscreen-optimizations' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.disable-fullscreen-optimizations.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'system.disable-fullscreen-optimizations'"
       },
       "expected_report": {
         "success": true,
@@ -323,7 +323,7 @@
   ],
   "run_results": [
     {
-      "tweak_id": "security.disable-downloads-blocking",
+      "tweak_id": "system.bsod-display-parameters",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -357,19 +357,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "security.disable-downloads-blocking",
-        "TweakName": "Preserve Zone Information on Attachments",
+        "TweakId": "system.bsod-display-parameters",
+        "TweakName": "Display Blue Screen Parameters",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "security.disable-downloads-blocking",
-          "Name": "Preserve Zone Information on Attachments",
-          "Category": "Security",
-          "Description": "Windows normally tags downloaded files with where they came from, like the Internet or intranet. That information helps Windows decide when to warn or protect you. This policy controls whether that tagging happens.",
-          "FriendlyDescription": "Windows normally tags downloaded files with where they came from, like the Internet or intranet. That information helps Windows decide when to warn or protect you. This policy controls whether that tagging happens.",
-          "RegistryPath": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Attachments\\SaveZoneInformation",
+          "TweakId": "system.bsod-display-parameters",
+          "Name": "Display Blue Screen Parameters",
+          "Category": "System",
+          "Description": "This tweak tries to show extra technical parameters on a blue screen. That can help advanced debugging, but most users will not benefit from the extra numbers.",
+          "FriendlyDescription": "This tweak tries to show extra technical parameters on a blue screen. That can help advanced debugging, but most users will not benefit from the extra numbers.",
+          "RegistryPath": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\CrashControl\\DisplayParameters",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -377,15 +377,544 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Windows normally tags downloaded files with where they came from, like the Internet or intranet. That information helps Windows decide when to warn or protect you. This policy controls whether that tagging happens. Evidence: The local official Microsoft ADMX file names the same Attachments policy key and SaveZoneInformation value used by the app, and it confirms the 1/2 mapping. The paired ADML help text states that enabling the policy stops Windows from marking attachments wit... Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: This tweak tries to show extra technical parameters on a blue screen. That can help advanced debugging, but most users will not benefit from the extra numbers. Evidence: Validated against Microsoft Support documentation for the CrashControl DisplayParameters value. Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "The local official Microsoft ADMX file names the same Attachments policy key and SaveZoneInformation value used by the app, and it confirms the 1/2 mapping. The paired ADML help text states that enabling the policy stops Windows from marking attachments wit...",
-              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/AttachmentManager.admx"
+              "Summary": "Validated against Microsoft Support documentation for the CrashControl DisplayParameters value.",
+              "Source": "Validation proof source: https://support.microsoft.com/en-us/topic/stop-error-information-isn-t-displayed-on-the-blue-screen-in-windows-216528fb-94fd-11a2-2675-398ecf5cc237"
+            },
+            {
+              "Key": "runtime",
+              "Label": "RUNTIME",
+              "State": "ready",
+              "Summary": "A same-day fast guest Ghidra retry for `DisplayParameters` failed in `ensure-admin-shell` with a bounded timeout, so no xref bundle reached the host.",
+              "Source": "Guest Ghidra launch receipt for DisplayParameters: evidence/raw/ghidra/ghidra-system-bsod-display-parameters-20260427a/summary.json"
+            },
+            {
+              "Key": "source",
+              "Label": "SOURCE",
+              "State": "ready",
+              "Summary": "No upstream nohuto source link is attached to this record.",
+              "Source": ""
+            },
+            {
+              "Key": "rollback",
+              "Label": "ROLLBACK",
+              "State": "ready",
+              "Summary": "Rollback: Verified via record-restore-story.",
+              "Source": "record-restore-story"
+            }
+          ],
+          "ReferenceLinks": [
+            {
+              "Title": "Docs: Details (missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
+              "Kind": "Details"
+            },
+            {
+              "Title": "Docs: Win-Config",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\win-config\\batch-01.md#system.bsod-display-parameters",
+              "Kind": "Docs"
+            },
+            {
+              "Title": "Docs: System (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\system\\system.md",
+              "Kind": "Docs"
+            }
+          ]
+        },
+        "Stages": [
+          {
+            "Stage": "detect-before",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Display stop error information'.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Display stop error information",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": false,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Display stop error information'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\CrashControl\\DisplayParameters: missing -> 1",
+                "TimestampText": "00:28:59"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "apply",
+            "AppliedStatus": "Applied",
+            "StatusMessage": "Run completed.",
+            "OutcomeSummary": "Apply - Success",
+            "CurrentValue": "Display stop error information",
+            "TargetValue": "Display stop error information",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Display stop error information'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\CrashControl\\DisplayParameters: missing -> 1",
+                "TimestampText": "00:28:59"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Display stop error information'.",
+                "TimestampText": "00:29:03"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Display stop error information'.",
+                "TimestampText": "00:29:03"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Not required",
+                "Message": "Step not executed.",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "rollback",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Rolled back registry values.",
+            "OutcomeSummary": "Rollback - Rolled Back",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Display stop error information",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Display stop error information'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\CrashControl\\DisplayParameters: missing -> 1",
+                "TimestampText": "00:28:59"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Display stop error information'.",
+                "TimestampText": "00:29:03"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Display stop error information'.",
+                "TimestampText": "00:29:03"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "00:29:03"
+              }
+            ]
+          },
+          {
+            "Stage": "detect-after",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Display stop error information'.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Display stop error information",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Display stop error information'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\CrashControl\\DisplayParameters: missing -> 1",
+                "TimestampText": "00:29:03"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Display stop error information'.",
+                "TimestampText": "00:29:03"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Display stop error information'.",
+                "TimestampText": "00:29:03"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "00:29:03"
+              }
+            ]
+          }
+        ],
+        "StartedAtUtc": "2026-05-07T07:28:59.327198+00:00",
+        "CompletedAtUtc": "2026-05-07T07:29:03.560159+00:00"
+      },
+      "qa_tweak_id": "system.bsod-display-parameters",
+      "candidate_id": "system.bsod-display-parameters",
+      "card_name": "Display Blue Screen Parameters",
+      "documentation": "research/records/system.bsod-display-parameters.review.json"
+    },
+    {
+      "tweak_id": "system.disable-auto-maintenance",
+      "host_exit": 0,
+      "execution_exit": 0,
+      "payload_status": "completed",
+      "report_app_success": true,
+      "report_success": true,
+      "report_status": "ok",
+      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
+      "report_contract_status": "ok",
+      "report_contract_summary": "QA card snapshot contract passed.",
+      "report_contract_failures": [],
+      "report_card_present": true,
+      "report_card_has_claim_boundary": true,
+      "report_card_present_fields": [
+        "TweakId",
+        "Name",
+        "Category",
+        "EvidenceClass",
+        "ResearchStatus",
+        "RollbackSnapshotState",
+        "HasClaimBoundary",
+        "WhatWeKnowSummary",
+        "WhatWeDoNotClaimSummary",
+        "ProofLanes"
+      ],
+      "report_card_missing_fields": [],
+      "report_card_proof_lanes": [
+        "docs",
+        "runtime",
+        "source",
+        "rollback"
+      ],
+      "report_card_missing_proof_lanes": [],
+      "report": {
+        "TweakId": "system.disable-auto-maintenance",
+        "TweakName": "Automatic Maintenance",
+        "Success": true,
+        "Status": "ok",
+        "Summary": "Apply/verify path completed and rollback restored the tweak.",
+        "RollbackRequested": true,
+        "Card": {
+          "TweakId": "system.disable-auto-maintenance",
+          "Name": "Automatic Maintenance",
+          "Category": "System",
+          "Description": "Automatic Maintenance runs maintenance work like updates, scans, and housekeeping when Windows thinks the PC is idle. People disable it when they want tighter control over when maintenance runs.",
+          "FriendlyDescription": "Automatic Maintenance runs maintenance work like updates, scans, and housekeeping when Windows thinks the PC is idle. People disable it when they want tighter control over when maintenance runs.",
+          "RegistryPath": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Schedule\\Maintenance\\MaintenanceDisabled",
+          "EvidenceClass": "A",
+          "EvidenceClassTitle": "Cross-Layer Verified",
+          "ResearchStatus": "PROMOTED",
+          "IsMutationAllowed": true,
+          "RollbackSnapshotState": "ready",
+          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
+          "HasClaimBoundary": true,
+          "WhatWeKnowSummary": "Claim: Automatic Maintenance runs maintenance work like updates, scans, and housekeeping when Windows thinks the PC is idle. People disable it when they want tighter control over when maintenance runs. Evidence: Guest-side reversible probe on Win25H2Clean; see the batch probe output in evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json..md The local nohuto mirror also shows the same MaintenanceDisabled registry path. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
+          "ProofLanes": [
+            {
+              "Key": "docs",
+              "Label": "DOCS",
+              "State": "ready",
+              "Summary": "Guest-side reversible probe on Win25H2Clean; see the batch probe output in evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json..md The local nohuto mirror also shows the same MaintenanceDisabled registry path.",
+              "Source": "Validation proof source: evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json"
+            },
+            {
+              "Key": "runtime",
+              "Label": "RUNTIME",
+              "State": "ready",
+              "Summary": "Guest reversible probe toggled MaintenanceDisabled through 1 and back to missing under the maintenance schedule policy path, matching the app behavior captured in the batch probe.",
+              "Source": "Win25H2Clean reversible probe - Automatic maintenance override: evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json"
+            },
+            {
+              "Key": "source",
+              "Label": "SOURCE",
+              "State": "ready",
+              "Summary": "No upstream nohuto source link is attached to this record.",
+              "Source": ""
+            },
+            {
+              "Key": "rollback",
+              "Label": "ROLLBACK",
+              "State": "ready",
+              "Summary": "Rollback: Verified via record-restore-story.",
+              "Source": "record-restore-story"
+            }
+          ],
+          "ReferenceLinks": [
+            {
+              "Title": "Docs: Details (missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
+              "Kind": "Details"
+            },
+            {
+              "Title": "Docs: System (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\system\\system.md",
+              "Kind": "Docs"
+            }
+          ]
+        },
+        "Stages": [
+          {
+            "Stage": "detect-before",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Value not set.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Not set",
+            "TargetValue": "1 (0x1)",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": false,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Value not set.",
+                "TimestampText": "00:29:09"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "apply",
+            "AppliedStatus": "Applied",
+            "StatusMessage": "Run completed.",
+            "OutcomeSummary": "Apply - Success",
+            "CurrentValue": "1 (0x1)",
+            "TargetValue": "1 (0x1)",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Value not set.",
+                "TimestampText": "00:29:09"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Set value to 1.",
+                "TimestampText": "00:29:12"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified desired value.",
+                "TimestampText": "00:29:12"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Not required",
+                "Message": "Step not executed.",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "rollback",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Removed value to restore default.",
+            "OutcomeSummary": "Rollback - Rolled Back",
+            "CurrentValue": "1 (0x1)",
+            "TargetValue": "1 (0x1)",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Value not set.",
+                "TimestampText": "00:29:09"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Set value to 1.",
+                "TimestampText": "00:29:12"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified desired value.",
+                "TimestampText": "00:29:12"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Removed value to restore default.",
+                "TimestampText": "00:29:12"
+              }
+            ]
+          },
+          {
+            "Stage": "detect-after",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Value not set.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Not set",
+            "TargetValue": "1 (0x1)",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Value not set.",
+                "TimestampText": "00:29:12"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Set value to 1.",
+                "TimestampText": "00:29:12"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified desired value.",
+                "TimestampText": "00:29:12"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Removed value to restore default.",
+                "TimestampText": "00:29:12"
+              }
+            ]
+          }
+        ],
+        "StartedAtUtc": "2026-05-07T07:29:09.5964591+00:00",
+        "CompletedAtUtc": "2026-05-07T07:29:12.6795901+00:00"
+      },
+      "qa_tweak_id": "system.disable-auto-maintenance",
+      "candidate_id": "system.disable-auto-maintenance",
+      "card_name": "Automatic Maintenance",
+      "documentation": "research/records/system.disable-auto-maintenance.review.json"
+    },
+    {
+      "tweak_id": "system.disable-background-gp-updates",
+      "host_exit": 0,
+      "execution_exit": 0,
+      "payload_status": "completed",
+      "report_app_success": true,
+      "report_success": true,
+      "report_status": "ok",
+      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
+      "report_contract_status": "ok",
+      "report_contract_summary": "QA card snapshot contract passed.",
+      "report_contract_failures": [],
+      "report_card_present": true,
+      "report_card_has_claim_boundary": true,
+      "report_card_present_fields": [
+        "TweakId",
+        "Name",
+        "Category",
+        "EvidenceClass",
+        "ResearchStatus",
+        "RollbackSnapshotState",
+        "HasClaimBoundary",
+        "WhatWeKnowSummary",
+        "WhatWeDoNotClaimSummary",
+        "ProofLanes"
+      ],
+      "report_card_missing_fields": [],
+      "report_card_proof_lanes": [
+        "docs",
+        "runtime",
+        "source",
+        "rollback"
+      ],
+      "report_card_missing_proof_lanes": [],
+      "report": {
+        "TweakId": "system.disable-background-gp-updates",
+        "TweakName": "Background Group Policy Refresh",
+        "Success": true,
+        "Status": "ok",
+        "Summary": "Apply/verify path completed and rollback restored the tweak.",
+        "RollbackRequested": true,
+        "Card": {
+          "TweakId": "system.disable-background-gp-updates",
+          "Name": "Background Group Policy Refresh",
+          "Category": "System",
+          "Description": "Windows normally refreshes Group Policy in the background while the system is being used. This policy lets the device wait until logoff before applying those updates.",
+          "FriendlyDescription": "Windows normally refreshes Group Policy in the background while the system is being used. This policy lets the device wait until logoff before applying those updates.",
+          "RegistryPath": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\DisableBkGndGroupPolicy",
+          "EvidenceClass": "A",
+          "EvidenceClassTitle": "Cross-Layer Verified",
+          "ResearchStatus": "PROMOTED",
+          "IsMutationAllowed": true,
+          "RollbackSnapshotState": "ready",
+          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
+          "HasClaimBoundary": true,
+          "WhatWeKnowSummary": "Claim: Windows normally refreshes Group Policy in the background while the system is being used. This policy lets the device wait until logoff before applying those updates. Evidence: The local official Microsoft ADMX file names the same policy key and DisableBkGndGroupPolicy value used by the app. The paired GroupPolicy.adml help text states that enabling the policy prevents Group Policy from being updated while the computer is in use. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
+          "ProofLanes": [
+            {
+              "Key": "docs",
+              "Label": "DOCS",
+              "State": "ready",
+              "Summary": "The local official Microsoft ADMX file names the same policy key and DisableBkGndGroupPolicy value used by the app. The paired GroupPolicy.adml help text states that enabling the policy prevents Group Policy from being updated while the computer is in use.",
+              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/GroupPolicy.admx"
             },
             {
               "Key": "runtime",
@@ -416,8 +945,8 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Security (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\security\\security-verified.md",
+              "Title": "Docs: System (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\system\\system.md",
               "Kind": "Docs"
             }
           ]
@@ -426,10 +955,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Do not preserve zone information'.",
+            "StatusMessage": "Value not set.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Do not preserve zone information",
+            "CurrentValue": "Not set",
+            "TargetValue": "1 (0x1)",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -438,8 +967,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Do not preserve zone information'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Attachments\\SaveZoneInformation: missing -> 1",
-                "TimestampText": "00:18:02"
+                "Message": "Value not set.",
+                "TimestampText": "00:29:19"
               },
               {
                 "Action": "Apply",
@@ -466,8 +995,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Do not preserve zone information",
-            "TargetValue": "Do not preserve zone information",
+            "CurrentValue": "1 (0x1)",
+            "TargetValue": "1 (0x1)",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -476,20 +1005,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Do not preserve zone information'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Attachments\\SaveZoneInformation: missing -> 1",
-                "TimestampText": "00:18:02"
+                "Message": "Value not set.",
+                "TimestampText": "00:29:19"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Do not preserve zone information'.",
-                "TimestampText": "00:18:02"
+                "Message": "Set value to 1.",
+                "TimestampText": "00:29:21"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Do not preserve zone information'.",
-                "TimestampText": "00:18:02"
+                "Message": "Verified desired value.",
+                "TimestampText": "00:29:21"
               },
               {
                 "Action": "Rollback",
@@ -502,10 +1031,10 @@
           {
             "Stage": "rollback",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Rolled back registry values.",
+            "StatusMessage": "Removed value to restore default.",
             "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Do not preserve zone information",
+            "CurrentValue": "1 (0x1)",
+            "TargetValue": "1 (0x1)",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -514,36 +1043,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Do not preserve zone information'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Attachments\\SaveZoneInformation: missing -> 1",
-                "TimestampText": "00:18:02"
+                "Message": "Value not set.",
+                "TimestampText": "00:29:19"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Do not preserve zone information'.",
-                "TimestampText": "00:18:02"
+                "Message": "Set value to 1.",
+                "TimestampText": "00:29:21"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Do not preserve zone information'.",
-                "TimestampText": "00:18:02"
+                "Message": "Verified desired value.",
+                "TimestampText": "00:29:21"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "00:18:02"
+                "Message": "Removed value to restore default.",
+                "TimestampText": "00:29:22"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Do not preserve zone information'.",
+            "StatusMessage": "Value not set.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Do not preserve zone information",
+            "CurrentValue": "Not set",
+            "TargetValue": "1 (0x1)",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -552,40 +1081,40 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Do not preserve zone information'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Attachments\\SaveZoneInformation: missing -> 1",
-                "TimestampText": "00:18:02"
+                "Message": "Value not set.",
+                "TimestampText": "00:29:22"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Do not preserve zone information'.",
-                "TimestampText": "00:18:02"
+                "Message": "Set value to 1.",
+                "TimestampText": "00:29:21"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Do not preserve zone information'.",
-                "TimestampText": "00:18:02"
+                "Message": "Verified desired value.",
+                "TimestampText": "00:29:21"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "00:18:02"
+                "Message": "Removed value to restore default.",
+                "TimestampText": "00:29:22"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T07:18:01.9980439+00:00",
-        "CompletedAtUtc": "2026-05-07T07:18:02.3050328+00:00"
+        "StartedAtUtc": "2026-05-07T07:29:19.1183289+00:00",
+        "CompletedAtUtc": "2026-05-07T07:29:22.2033616+00:00"
       },
-      "qa_tweak_id": "security.disable-downloads-blocking",
-      "candidate_id": "security.disable-downloads-blocking",
-      "card_name": "Preserve Zone Information on Attachments",
-      "documentation": "research/records/security.disable-downloads-blocking.json"
+      "qa_tweak_id": "system.disable-background-gp-updates",
+      "candidate_id": "system.disable-background-gp-updates",
+      "card_name": "Background Group Policy Refresh",
+      "documentation": "research/records/system.disable-background-gp-updates.json"
     },
     {
-      "tweak_id": "security.disable-enhanced-defender-notifications",
+      "tweak_id": "system.disable-clipboard-redirection",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -619,19 +1148,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "security.disable-enhanced-defender-notifications",
-        "TweakName": "Windows Security Enhanced Notifications",
+        "TweakId": "system.disable-clipboard-redirection",
+        "TweakName": "RDP Clipboard Redirection",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "security.disable-enhanced-defender-notifications",
-          "Name": "Windows Security Enhanced Notifications",
-          "Category": "Security",
-          "Description": "Windows Security can show non-critical notifications about device health and protection status. This policy hides those extra notifications so only critical ones remain.",
-          "FriendlyDescription": "Windows Security can show non-critical notifications about device health and protection status. This policy hides those extra notifications so only critical ones remain.",
-          "RegistryPath": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender Security Center\\Notifications\\DisableEnhancedNotifications",
+          "TweakId": "system.disable-clipboard-redirection",
+          "Name": "RDP Clipboard Redirection",
+          "Category": "System",
+          "Description": "Remote Desktop can let text and files move between your local clipboard and the remote machine. This policy controls whether that copy and paste bridge is allowed.",
+          "FriendlyDescription": "Remote Desktop can let text and files move between your local clipboard and the remote machine. This policy controls whether that copy and paste bridge is allowed.",
+          "RegistryPath": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Terminal Services\\fDisableClip",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -639,277 +1168,15 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Windows Security can show non-critical notifications about device health and protection status. This policy hides those extra notifications so only critical ones remain. Evidence: The clean snapshot baseline and the enabled-state VM probe both hit the same Security Center Notifications policy path. A separate alias check with only the Reporting path set still showed SecurityHealthService.exe reading the Security Center path. The base... Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: Remote Desktop can let text and files move between your local clipboard and the remote machine. This policy controls whether that copy and paste bridge is allowed. Evidence: The local official Microsoft ADMX file names the same policy key and fDisableClip value used by the app, and it confirms the 1/0 mapping. Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "The clean snapshot baseline and the enabled-state VM probe both hit the same Security Center Notifications policy path. A separate alias check with only the Reporting path set still showed SecurityHealthService.exe reading the Security Center path. The base...",
-              "Source": "Validation proof source: evidence/files/vm-tooling-staging/defender-enhanced-notifications-securitycenter-1-20260324-213118/defender-disable-enhanced-securitycenter-1.txt"
-            },
-            {
-              "Key": "runtime",
-              "Label": "RUNTIME",
-              "State": "ready",
-              "Summary": "On a clean snapshot, SecurityHealthService.exe queried HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender Security Center\\Notifications\\DisableEnhancedNotifications and got NAME NOT FOUND. The same capture showed DisableNotifications = 1 already present on t...",
-              "Source": "Win25H2Clean Procmon baseline for Security Center notifications policy: evidence/raw/procmon/security.disable-enhanced-defender-notifications/defender-disable-enhanced-baseline-1.txt"
-            },
-            {
-              "Key": "source",
-              "Label": "SOURCE",
-              "State": "ready",
-              "Summary": "No upstream nohuto source link is attached to this record.",
-              "Source": ""
-            },
-            {
-              "Key": "rollback",
-              "Label": "ROLLBACK",
-              "State": "ready",
-              "Summary": "Rollback: Verified via record-restore-story.",
-              "Source": "record-restore-story"
-            }
-          ],
-          "ReferenceLinks": [
-            {
-              "Title": "Docs: Details (missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
-              "Kind": "Details"
-            },
-            {
-              "Title": "Docs: Security (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\security\\security-verified.md",
-              "Kind": "Docs"
-            }
-          ]
-        },
-        "Stages": [
-          {
-            "Stage": "detect-before",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Hide non-critical notifications'.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Hide non-critical notifications",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": false,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Hide non-critical notifications'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender Security Center\\Notifications\\DisableEnhancedNotifications: missing -> 1",
-                "TimestampText": "00:18:08"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "apply",
-            "AppliedStatus": "Applied",
-            "StatusMessage": "Run completed.",
-            "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Hide non-critical notifications",
-            "TargetValue": "Hide non-critical notifications",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Hide non-critical notifications'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender Security Center\\Notifications\\DisableEnhancedNotifications: missing -> 1",
-                "TimestampText": "00:18:08"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Applied preset 'Hide non-critical notifications'.",
-                "TimestampText": "00:18:12"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified preset 'Hide non-critical notifications'.",
-                "TimestampText": "00:18:12"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Not required",
-                "Message": "Step not executed.",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "rollback",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Rolled back registry values.",
-            "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Hide non-critical notifications",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Hide non-critical notifications'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender Security Center\\Notifications\\DisableEnhancedNotifications: missing -> 1",
-                "TimestampText": "00:18:08"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Applied preset 'Hide non-critical notifications'.",
-                "TimestampText": "00:18:12"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified preset 'Hide non-critical notifications'.",
-                "TimestampText": "00:18:12"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "00:18:12"
-              }
-            ]
-          },
-          {
-            "Stage": "detect-after",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Hide non-critical notifications'.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Hide non-critical notifications",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Hide non-critical notifications'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender Security Center\\Notifications\\DisableEnhancedNotifications: missing -> 1",
-                "TimestampText": "00:18:12"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Applied preset 'Hide non-critical notifications'.",
-                "TimestampText": "00:18:12"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified preset 'Hide non-critical notifications'.",
-                "TimestampText": "00:18:12"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "00:18:12"
-              }
-            ]
-          }
-        ],
-        "StartedAtUtc": "2026-05-07T07:18:08.6042875+00:00",
-        "CompletedAtUtc": "2026-05-07T07:18:12.3789781+00:00"
-      },
-      "qa_tweak_id": "security.disable-enhanced-defender-notifications",
-      "candidate_id": "security.disable-enhanced-defender-notifications",
-      "card_name": "Windows Security Enhanced Notifications",
-      "documentation": "research/records/security.disable-enhanced-defender-notifications.review.json"
-    },
-    {
-      "tweak_id": "security.disable-ntfs-encryption",
-      "host_exit": 0,
-      "execution_exit": 0,
-      "payload_status": "completed",
-      "report_app_success": true,
-      "report_success": true,
-      "report_status": "ok",
-      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
-      "report_contract_status": "ok",
-      "report_contract_summary": "QA card snapshot contract passed.",
-      "report_contract_failures": [],
-      "report_card_present": true,
-      "report_card_has_claim_boundary": true,
-      "report_card_present_fields": [
-        "TweakId",
-        "Name",
-        "Category",
-        "EvidenceClass",
-        "ResearchStatus",
-        "RollbackSnapshotState",
-        "HasClaimBoundary",
-        "WhatWeKnowSummary",
-        "WhatWeDoNotClaimSummary",
-        "ProofLanes"
-      ],
-      "report_card_missing_fields": [],
-      "report_card_proof_lanes": [
-        "docs",
-        "runtime",
-        "source",
-        "rollback"
-      ],
-      "report_card_missing_proof_lanes": [],
-      "report": {
-        "TweakId": "security.disable-ntfs-encryption",
-        "TweakName": "Disable NTFS Encryption (EFS)",
-        "Success": true,
-        "Status": "ok",
-        "Summary": "Apply/verify path completed and rollback restored the tweak.",
-        "RollbackRequested": true,
-        "Card": {
-          "TweakId": "security.disable-ntfs-encryption",
-          "Name": "Disable NTFS Encryption (EFS)",
-          "Category": "Security",
-          "Description": "Windows can encrypt files on NTFS volumes by using EFS. This policy decides whether that encryption feature is allowed on NTFS volumes.",
-          "FriendlyDescription": "Windows can encrypt files on NTFS volumes by using EFS. This policy decides whether that encryption feature is allowed on NTFS volumes.",
-          "RegistryPath": "HKLM\\System\\CurrentControlSet\\Policies\\NtfsDisableEncryption",
-          "EvidenceClass": "A",
-          "EvidenceClassTitle": "Cross-Layer Verified",
-          "ResearchStatus": "PROMOTED",
-          "IsMutationAllowed": true,
-          "RollbackSnapshotState": "ready",
-          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
-          "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Windows can encrypt files on NTFS volumes by using EFS. This policy decides whether that encryption feature is allowed on NTFS volumes. Evidence: Validated against the local Microsoft policy files for NTFS encryption. Rollback: Rollback: Verified via record-restore-story.",
-          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
-          "ProofLanes": [
-            {
-              "Key": "docs",
-              "Label": "DOCS",
-              "State": "ready",
-              "Summary": "Validated against the local Microsoft policy files for NTFS encryption.",
-              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/FileSys.admx"
+              "Summary": "The local official Microsoft ADMX file names the same policy key and fDisableClip value used by the app, and it confirms the 1/0 mapping.",
+              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/TerminalServer.admx"
             },
             {
               "Key": "runtime",
@@ -940,8 +1207,8 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Security (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\security\\security-verified.md",
+              "Title": "Docs: System (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\system\\system.md",
               "Kind": "Docs"
             }
           ]
@@ -950,10 +1217,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'NTFS encryption disabled'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Clipboard redirection blocked'.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "NTFS encryption disabled",
+            "TargetValue": "Clipboard redirection blocked",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -962,8 +1229,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'NTFS encryption disabled'.\nEntries:\n- HKLM\\System\\CurrentControlSet\\Policies\\NtfsDisableEncryption: missing -> 1",
-                "TimestampText": "00:18:19"
+                "Message": "Current values do not match a named option. Selected option is 'Clipboard redirection blocked'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Terminal Services\\fDisableClip: missing -> 1",
+                "TimestampText": "00:29:28"
               },
               {
                 "Action": "Apply",
@@ -990,8 +1257,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "NTFS encryption disabled",
-            "TargetValue": "NTFS encryption disabled",
+            "CurrentValue": "Clipboard redirection blocked",
+            "TargetValue": "Clipboard redirection blocked",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1000,20 +1267,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'NTFS encryption disabled'.\nEntries:\n- HKLM\\System\\CurrentControlSet\\Policies\\NtfsDisableEncryption: missing -> 1",
-                "TimestampText": "00:18:19"
+                "Message": "Current values do not match a named option. Selected option is 'Clipboard redirection blocked'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Terminal Services\\fDisableClip: missing -> 1",
+                "TimestampText": "00:29:28"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'NTFS encryption disabled'.",
-                "TimestampText": "00:18:21"
+                "Message": "Applied preset 'Clipboard redirection blocked'.",
+                "TimestampText": "00:29:31"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'NTFS encryption disabled'.",
-                "TimestampText": "00:18:21"
+                "Message": "Verified preset 'Clipboard redirection blocked'.",
+                "TimestampText": "00:29:31"
               },
               {
                 "Action": "Rollback",
@@ -1029,7 +1296,7 @@
             "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "NTFS encryption disabled",
+            "TargetValue": "Clipboard redirection blocked",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1038,36 +1305,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'NTFS encryption disabled'.\nEntries:\n- HKLM\\System\\CurrentControlSet\\Policies\\NtfsDisableEncryption: missing -> 1",
-                "TimestampText": "00:18:19"
+                "Message": "Current values do not match a named option. Selected option is 'Clipboard redirection blocked'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Terminal Services\\fDisableClip: missing -> 1",
+                "TimestampText": "00:29:28"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'NTFS encryption disabled'.",
-                "TimestampText": "00:18:21"
+                "Message": "Applied preset 'Clipboard redirection blocked'.",
+                "TimestampText": "00:29:31"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'NTFS encryption disabled'.",
-                "TimestampText": "00:18:21"
+                "Message": "Verified preset 'Clipboard redirection blocked'.",
+                "TimestampText": "00:29:31"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "00:18:22"
+                "TimestampText": "00:29:31"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'NTFS encryption disabled'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Clipboard redirection blocked'.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "NTFS encryption disabled",
+            "TargetValue": "Clipboard redirection blocked",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1076,40 +1343,40 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'NTFS encryption disabled'.\nEntries:\n- HKLM\\System\\CurrentControlSet\\Policies\\NtfsDisableEncryption: missing -> 1",
-                "TimestampText": "00:18:22"
+                "Message": "Current values do not match a named option. Selected option is 'Clipboard redirection blocked'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Terminal Services\\fDisableClip: missing -> 1",
+                "TimestampText": "00:29:31"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'NTFS encryption disabled'.",
-                "TimestampText": "00:18:21"
+                "Message": "Applied preset 'Clipboard redirection blocked'.",
+                "TimestampText": "00:29:31"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'NTFS encryption disabled'.",
-                "TimestampText": "00:18:21"
+                "Message": "Verified preset 'Clipboard redirection blocked'.",
+                "TimestampText": "00:29:31"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "00:18:22"
+                "TimestampText": "00:29:31"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T07:18:19.1685726+00:00",
-        "CompletedAtUtc": "2026-05-07T07:18:22.2626196+00:00"
+        "StartedAtUtc": "2026-05-07T07:29:28.4697462+00:00",
+        "CompletedAtUtc": "2026-05-07T07:29:31.6349553+00:00"
       },
-      "qa_tweak_id": "security.disable-ntfs-encryption",
-      "candidate_id": "security.disable-ntfs-encryption",
-      "card_name": "Disable NTFS Encryption (EFS)",
-      "documentation": "research/records/security.disable-ntfs-encryption.json"
+      "qa_tweak_id": "system.disable-clipboard-redirection",
+      "candidate_id": "system.disable-clipboard-redirection",
+      "card_name": "RDP Clipboard Redirection",
+      "documentation": "research/records/system.disable-clipboard-redirection.json"
     },
     {
-      "tweak_id": "security.disable-p2p-updates",
+      "tweak_id": "system.disable-fullscreen-optimizations",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -1143,19 +1410,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "security.disable-p2p-updates",
-        "TweakName": "Delivery Optimization Download Mode",
+        "TweakId": "system.disable-fullscreen-optimizations",
+        "TweakName": "Fullscreen Optimizations",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "security.disable-p2p-updates",
-          "Name": "Delivery Optimization Download Mode",
-          "Category": "Security",
-          "Description": "Delivery Optimization controls whether Windows uses other PCs to help download updates and Microsoft content. This policy sets how much peer-to-peer sharing Delivery Optimization is allowed to use.",
-          "FriendlyDescription": "Delivery Optimization controls whether Windows uses other PCs to help download updates and Microsoft content. This policy sets how much peer-to-peer sharing Delivery Optimization is allowed to use.",
-          "RegistryPath": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DeliveryOptimization\\DODownloadMode",
+          "TweakId": "system.disable-fullscreen-optimizations",
+          "Name": "Fullscreen Optimizations",
+          "Category": "System",
+          "Description": "Fullscreen Optimizations is a Windows feature that tries to blend fullscreen-style game performance with some modern desktop and presentation behavior. People usually turn it off only when a specific game behaves badly with it.",
+          "FriendlyDescription": "Fullscreen Optimizations is a Windows feature that tries to blend fullscreen-style game performance with some modern desktop and presentation behavior. People usually turn it off only when a specific game behaves badly with it.",
+          "RegistryPath": "",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -1163,22 +1430,22 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Delivery Optimization controls whether Windows uses other PCs to help download updates and Microsoft content. This policy sets how much peer-to-peer sharing Delivery Optimization is allowed to use. Evidence: Local official ADMX and ADML files document the exact Delivery Optimization policy surface under HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DeliveryOptimization, and the app now writes that documented path. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: Fullscreen Optimizations is a Windows feature that tries to blend fullscreen-style game performance with some modern desktop and presentation behavior. People usually turn it off only when a specific game behaves badly with it. Evidence: The older reversible VM probe still covers missing -> 2/2/1/1 -> missing. The 2026-03-26 targeted Procmon and canonical Ghidra passes add a current-build svchost.exe read plus direct ResourcePolicyServer code-side proof, and the later automated follow-up no... Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "Local official ADMX and ADML files document the exact Delivery Optimization policy surface under HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DeliveryOptimization, and the app now writes that documented path.",
-              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/DeliveryOptimization.admx"
+              "Summary": "The older reversible VM probe still covers missing -> 2/2/1/1 -> missing. The 2026-03-26 targeted Procmon and canonical Ghidra passes add a current-build svchost.exe read plus direct ResourcePolicyServer code-side proof, and the later automated follow-up no...",
+              "Source": "Validation proof source: research/notes/fullscreen-optimizations-procmon-validation-20260326.md"
             },
             {
               "Key": "runtime",
               "Label": "RUNTIME",
               "State": "ready",
-              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
-              "Source": ""
+              "Summary": "A Win25H2Clean Procmon pass around Gaming and Advanced Graphics triggers captured svchost.exe querying HKCU\\System\\GameConfigStore\\GameDVR_DXGIHonorFSEWindowsCompatible with Data: 1 while the current tuple was applied.",
+              "Source": "Procmon capture - svchost.exe GameConfigStore fullscreen tuple read: evidence/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-diag.txt and evidence/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-diag.hits.csv"
             },
             {
               "Key": "source",
@@ -1202,8 +1469,13 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Security (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\security\\security-verified.md",
+              "Title": "Docs: Win-Config",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\win-config\\batch-01.md#system.disable-fullscreen-optimizations",
+              "Kind": "Docs"
+            },
+            {
+              "Title": "Docs: System (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\system\\system.md",
               "Kind": "Docs"
             }
           ]
@@ -1212,10 +1484,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'HTTP only'.",
+            "StatusMessage": "Detected 3 of 4 values (matches: 0, missing: 1).",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "HTTP only",
+            "CurrentValue": "Unknown",
+            "TargetValue": "Multiple values",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -1224,8 +1496,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'HTTP only'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DeliveryOptimization\\DODownloadMode: missing -> 0",
-                "TimestampText": "00:18:28"
+                "Message": "Detected 3 of 4 values (matches: 0, missing: 1).\nEntries:\n- HKCU\\System\\GameConfigStore\\GameDVR_DXGIHonorFSEWindowsCompatible: 0 -> 1\n- HKCU\\System\\GameConfigStore\\GameDVR_FSEBehavior: missing\n- HKCU\\System\\GameConfigStore\\GameDVR_FSEBehaviorMode: 0 -> 2\n- HKCU\\System\\GameConfigStore\\GameDVR_HonorUserFSEBehaviorMode: 0 -> 1",
+                "TimestampText": "00:29:37"
               },
               {
                 "Action": "Apply",
@@ -1252,8 +1524,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "HTTP only",
-            "TargetValue": "HTTP only",
+            "CurrentValue": "Multiple values",
+            "TargetValue": "Multiple values",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1262,20 +1534,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'HTTP only'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DeliveryOptimization\\DODownloadMode: missing -> 0",
-                "TimestampText": "00:18:28"
+                "Message": "Detected 3 of 4 values (matches: 0, missing: 1).\nEntries:\n- HKCU\\System\\GameConfigStore\\GameDVR_DXGIHonorFSEWindowsCompatible: 0 -> 1\n- HKCU\\System\\GameConfigStore\\GameDVR_FSEBehavior: missing\n- HKCU\\System\\GameConfigStore\\GameDVR_FSEBehaviorMode: 0 -> 2\n- HKCU\\System\\GameConfigStore\\GameDVR_HonorUserFSEBehaviorMode: 0 -> 1",
+                "TimestampText": "00:29:37"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'HTTP only'.",
-                "TimestampText": "00:18:31"
+                "Message": "Updated 4 values.",
+                "TimestampText": "00:29:37"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'HTTP only'.",
-                "TimestampText": "00:18:31"
+                "Message": "Verified desired values.",
+                "TimestampText": "00:29:37"
               },
               {
                 "Action": "Rollback",
@@ -1290,8 +1562,8 @@
             "AppliedStatus": "NotApplied",
             "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "HTTP only",
+            "CurrentValue": "Multiple values",
+            "TargetValue": "Multiple values",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1300,36 +1572,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'HTTP only'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DeliveryOptimization\\DODownloadMode: missing -> 0",
-                "TimestampText": "00:18:28"
+                "Message": "Detected 3 of 4 values (matches: 0, missing: 1).\nEntries:\n- HKCU\\System\\GameConfigStore\\GameDVR_DXGIHonorFSEWindowsCompatible: 0 -> 1\n- HKCU\\System\\GameConfigStore\\GameDVR_FSEBehavior: missing\n- HKCU\\System\\GameConfigStore\\GameDVR_FSEBehaviorMode: 0 -> 2\n- HKCU\\System\\GameConfigStore\\GameDVR_HonorUserFSEBehaviorMode: 0 -> 1",
+                "TimestampText": "00:29:37"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'HTTP only'.",
-                "TimestampText": "00:18:31"
+                "Message": "Updated 4 values.",
+                "TimestampText": "00:29:37"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'HTTP only'.",
-                "TimestampText": "00:18:31"
+                "Message": "Verified desired values.",
+                "TimestampText": "00:29:37"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "00:18:31"
+                "TimestampText": "00:29:38"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'HTTP only'.",
+            "StatusMessage": "Detected 3 of 4 values (matches: 0, missing: 1).",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "HTTP only",
+            "CurrentValue": "Multiple values",
+            "TargetValue": "Multiple values",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1338,299 +1610,37 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'HTTP only'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DeliveryOptimization\\DODownloadMode: missing -> 0",
-                "TimestampText": "00:18:31"
+                "Message": "Detected 3 of 4 values (matches: 0, missing: 1).\nEntries:\n- HKCU\\System\\GameConfigStore\\GameDVR_DXGIHonorFSEWindowsCompatible: 0 -> 1\n- HKCU\\System\\GameConfigStore\\GameDVR_FSEBehavior: missing\n- HKCU\\System\\GameConfigStore\\GameDVR_FSEBehaviorMode: 0 -> 2\n- HKCU\\System\\GameConfigStore\\GameDVR_HonorUserFSEBehaviorMode: 0 -> 1",
+                "TimestampText": "00:29:38"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'HTTP only'.",
-                "TimestampText": "00:18:31"
+                "Message": "Updated 4 values.",
+                "TimestampText": "00:29:37"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'HTTP only'.",
-                "TimestampText": "00:18:31"
+                "Message": "Verified desired values.",
+                "TimestampText": "00:29:37"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "00:18:31"
+                "TimestampText": "00:29:38"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T07:18:28.8168762+00:00",
-        "CompletedAtUtc": "2026-05-07T07:18:31.9051714+00:00"
+        "StartedAtUtc": "2026-05-07T07:29:37.8826163+00:00",
+        "CompletedAtUtc": "2026-05-07T07:29:38.148381+00:00"
       },
-      "qa_tweak_id": "security.disable-p2p-updates",
-      "candidate_id": "security.disable-p2p-updates",
-      "card_name": "Delivery Optimization Download Mode",
-      "documentation": "research/records/security.disable-p2p-updates.review.json"
-    },
-    {
-      "tweak_id": "security.disable-picture-password",
-      "host_exit": 0,
-      "execution_exit": 0,
-      "payload_status": "completed",
-      "report_app_success": true,
-      "report_success": true,
-      "report_status": "ok",
-      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
-      "report_contract_status": "ok",
-      "report_contract_summary": "QA card snapshot contract passed.",
-      "report_contract_failures": [],
-      "report_card_present": true,
-      "report_card_has_claim_boundary": true,
-      "report_card_present_fields": [
-        "TweakId",
-        "Name",
-        "Category",
-        "EvidenceClass",
-        "ResearchStatus",
-        "RollbackSnapshotState",
-        "HasClaimBoundary",
-        "WhatWeKnowSummary",
-        "WhatWeDoNotClaimSummary",
-        "ProofLanes"
-      ],
-      "report_card_missing_fields": [],
-      "report_card_proof_lanes": [
-        "docs",
-        "runtime",
-        "source",
-        "rollback"
-      ],
-      "report_card_missing_proof_lanes": [],
-      "report": {
-        "TweakId": "security.disable-picture-password",
-        "TweakName": "Picture Password Sign-In for Domain Users",
-        "Success": true,
-        "Status": "ok",
-        "Summary": "Apply/verify path completed and rollback restored the tweak.",
-        "RollbackRequested": true,
-        "Card": {
-          "TweakId": "security.disable-picture-password",
-          "Name": "Picture Password Sign-In for Domain Users",
-          "Category": "Security",
-          "Description": "Picture password lets someone sign in by tapping or drawing gestures on an image. This policy controls whether domain users are allowed to use that sign-in method.",
-          "FriendlyDescription": "Picture password lets someone sign in by tapping or drawing gestures on an image. This policy controls whether domain users are allowed to use that sign-in method.",
-          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\BlockDomainPicturePassword",
-          "EvidenceClass": "A",
-          "EvidenceClassTitle": "Cross-Layer Verified",
-          "ResearchStatus": "PROMOTED",
-          "IsMutationAllowed": true,
-          "RollbackSnapshotState": "ready",
-          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
-          "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Picture password lets someone sign in by tapping or drawing gestures on an image. This policy controls whether domain users are allowed to use that sign-in method. Evidence: The local official Microsoft ADMX file defines the exact policy path and value name used by the app, with enabledValue 1 and disabledValue 0. The paired ADML help text explains that enabling the policy blocks picture password sign-in for domain users. Rollback: Rollback: Verified via record-restore-story.",
-          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
-          "ProofLanes": [
-            {
-              "Key": "docs",
-              "Label": "DOCS",
-              "State": "ready",
-              "Summary": "The local official Microsoft ADMX file defines the exact policy path and value name used by the app, with enabledValue 1 and disabledValue 0. The paired ADML help text explains that enabling the policy blocks picture password sign-in for domain users.",
-              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/CredentialProviders.admx"
-            },
-            {
-              "Key": "runtime",
-              "Label": "RUNTIME",
-              "State": "ready",
-              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
-              "Source": ""
-            },
-            {
-              "Key": "source",
-              "Label": "SOURCE",
-              "State": "ready",
-              "Summary": "No upstream nohuto source link is attached to this record.",
-              "Source": ""
-            },
-            {
-              "Key": "rollback",
-              "Label": "ROLLBACK",
-              "State": "ready",
-              "Summary": "Rollback: Verified via record-restore-story.",
-              "Source": "record-restore-story"
-            }
-          ],
-          "ReferenceLinks": [
-            {
-              "Title": "Docs: Details (missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
-              "Kind": "Details"
-            },
-            {
-              "Title": "Docs: Security (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\security\\security-verified.md",
-              "Kind": "Docs"
-            }
-          ]
-        },
-        "Stages": [
-          {
-            "Stage": "detect-before",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Picture password blocked'.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Picture password blocked",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": false,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Picture password blocked'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\BlockDomainPicturePassword: missing -> 1",
-                "TimestampText": "00:18:38"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "apply",
-            "AppliedStatus": "Applied",
-            "StatusMessage": "Run completed.",
-            "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Picture password blocked",
-            "TargetValue": "Picture password blocked",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Picture password blocked'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\BlockDomainPicturePassword: missing -> 1",
-                "TimestampText": "00:18:38"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Applied preset 'Picture password blocked'.",
-                "TimestampText": "00:18:41"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified preset 'Picture password blocked'.",
-                "TimestampText": "00:18:41"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Not required",
-                "Message": "Step not executed.",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "rollback",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Rolled back registry values.",
-            "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Picture password blocked",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Picture password blocked'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\BlockDomainPicturePassword: missing -> 1",
-                "TimestampText": "00:18:38"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Applied preset 'Picture password blocked'.",
-                "TimestampText": "00:18:41"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified preset 'Picture password blocked'.",
-                "TimestampText": "00:18:41"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "00:18:41"
-              }
-            ]
-          },
-          {
-            "Stage": "detect-after",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Picture password blocked'.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Picture password blocked",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Picture password blocked'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\BlockDomainPicturePassword: missing -> 1",
-                "TimestampText": "00:18:41"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Applied preset 'Picture password blocked'.",
-                "TimestampText": "00:18:41"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified preset 'Picture password blocked'.",
-                "TimestampText": "00:18:41"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "00:18:41"
-              }
-            ]
-          }
-        ],
-        "StartedAtUtc": "2026-05-07T07:18:38.5292062+00:00",
-        "CompletedAtUtc": "2026-05-07T07:18:41.619556+00:00"
-      },
-      "qa_tweak_id": "security.disable-picture-password",
-      "candidate_id": "security.disable-picture-password",
-      "card_name": "Picture Password Sign-In for Domain Users",
-      "documentation": "research/records/security.disable-picture-password.json"
+      "qa_tweak_id": "system.disable-fullscreen-optimizations",
+      "candidate_id": "system.disable-fullscreen-optimizations",
+      "card_name": "Fullscreen Optimizations",
+      "documentation": "research/records/system.disable-fullscreen-optimizations.review.json"
     }
   ],
   "summary": {
@@ -1639,7 +1649,7 @@
     "live_success_count": 5,
     "live_failure_count": 0,
     "categories": [
-      "Security"
+      "System"
     ]
   }
 }

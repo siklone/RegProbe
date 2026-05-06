@@ -209,6 +209,7 @@ public sealed class CommandAllowlist
         AddRegDwordRule(regAllowlist, @"HKLM\SYSTEM\CurrentControlSet\Control\Power", "IdleStateTimeout", "0", "500");
         AddRegDwordRule(regAllowlist, @"HKLM\SYSTEM\CurrentControlSet\Services\Tcpip6\Parameters", "DisabledComponents", "0", "32", "255");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows NT\Terminal Services", "fAllowToGetHelp", "0", "1", "2");
+        AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows NT\Terminal Services", "fDisableClip", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System", "DisableBkGndGroupPolicy", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search", "DoNotUseWebResults", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search", "ConnectedSearchUseWeb", "0", "1", "2");
