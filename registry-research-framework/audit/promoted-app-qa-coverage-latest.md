@@ -1,11 +1,11 @@
 # Promoted App QA Coverage
 
-- Generated UTC: 2026-05-06T21:36:02Z
-- History entries: 23
+- Generated UTC: 2026-05-06T21:41:01Z
+- History entries: 25
 - Promoted app-QA candidates: 242
-- Covered: 69
-- Uncovered: 173
-- Coverage: 28.51%
+- Covered: 74
+- Uncovered: 168
+- Coverage: 30.58%
 
 ## Covered Categories
 
@@ -13,7 +13,7 @@
 - Cleanup: 1
 - Developer: 2
 - Explorer: 8
-- Network: 4
+- Network: 9
 - Notifications: 3
 - Performance: 3
 - Peripheral: 2
@@ -28,7 +28,7 @@
 - Audio: 1
 - Developer: 7
 - Explorer: 9
-- Network: 24
+- Network: 19
 - Notifications: 2
 - Peripheral: 1
 - Power: 3
@@ -39,9 +39,6 @@
 
 ## Recommended Next Batches
 
-- Network: 5 uncovered cards | coverage 14.29%
-  command: `dotnet run --project cli/cli.csproj -- research qa-batch --id network.disable-lltd --id network.disable-mdns --id network.disable-netbios --id network.disable-netbios-resolution --id network.disable-plaintext-smb-passwords`
-  live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id network.disable-lltd --id network.disable-mdns --id network.disable-netbios --id network.disable-netbios-resolution --id network.disable-plaintext-smb-passwords --run-kvm --json`
 - Privacy: 5 uncovered cards | coverage 19.4%
   command: `dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-appdeviceinventory.policy --id privacy.disable-application-telemetry --id privacy.disable-background-apps --id privacy.disable-biometrics --id privacy.disable-biometrics-domain-logon`
   live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-appdeviceinventory.policy --id privacy.disable-application-telemetry --id privacy.disable-background-apps --id privacy.disable-biometrics --id privacy.disable-biometrics-domain-logon --run-kvm --json`
@@ -54,6 +51,9 @@
 - Visibility: 5 uncovered cards | coverage 26.09%
   command: `dotnet run --project cli/cli.csproj -- research qa-batch --id visibility.disable-acrylic-logon --id visibility.disable-common-control-animations --id visibility.disable-first-signin-animation --id visibility.disable-lock-screen-camera --id visibility.disable-lock-screen-changes`
   live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id visibility.disable-acrylic-logon --id visibility.disable-common-control-animations --id visibility.disable-first-signin-animation --id visibility.disable-lock-screen-camera --id visibility.disable-lock-screen-changes --run-kvm --json`
+- Network: 5 uncovered cards | coverage 32.14%
+  command: `dotnet run --project cli/cli.csproj -- research qa-batch --id network.disable-smart-name-resolution --id network.disable-smb1 --id network.disable-smb2 --id network.disable-wifi-sense --id network.enable-lltd-responder`
+  live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id network.disable-smart-name-resolution --id network.disable-smb1 --id network.disable-smb2 --id network.disable-wifi-sense --id network.enable-lltd-responder --run-kvm --json`
 
 ## Remaining Uncovered Sample
 
@@ -74,6 +74,6 @@
 - `explorer.show-protected-operating-system-files` | Show Protected Operating System Files | Explorer
 - `explorer.show-recent-items` | Show Recent Items In Home | Explorer
 - `explorer.show-type-overlay` | Display File Icons On Thumbnails | Explorer
-- `network.disable-lltd` | Set LLTD Policies to Default Behavior | Network
-- `network.disable-mdns` | Set mDNS Policy to Local Settings | Network
-- `network.disable-netbios` | NetBIOS over TCP/IP | Network
+- `network.disable-smart-name-resolution` | Smart Multi-Homed Name Resolution | Network
+- `network.disable-smb1` | SMBv1 Server Protocol Support | Network
+- `network.disable-smb2` | SMBv2 and SMBv3 Server Protocol Support | Network

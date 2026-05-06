@@ -1,7 +1,7 @@
 # Promoted App QA Batch
 
 - Status: PASS
-- Generated UTC: 2026-05-06T21:36:02Z
+- Generated UTC: 2026-05-06T21:41:01Z
 - Catalog candidates: 242
 - Selected candidates: 5
 - Planned apply-allowed candidates: 5
@@ -10,41 +10,41 @@
 
 ## Selected Candidates
 
-- `privacy.deny-app-access.policy` | App capability access policies | Privacy
-  docs: `research/records/privacy.deny-app-access.policy.review.json`
+- `network.disable-lltd` | Set LLTD Policies to Default Behavior | Network
+  docs: `research/records/network.disable-lltd.review.json`
   rollback: default=true | previous=true
   card snapshot: claim_boundary=true | fields=TweakId, Name, Category, EvidenceClass, ResearchStatus, RollbackSnapshotState, HasClaimBoundary, WhatWeKnowSummary, WhatWeDoNotClaimSummary, ProofLanes | lanes=docs, runtime, source, rollback
-- `privacy.disable-activity-history` | Windows Activity History | Privacy
-  docs: `research/records/privacy.disable-activity-history.json`
+- `network.disable-mdns` | Set mDNS Policy to Local Settings | Network
+  docs: `research/records/network.disable-mdns.review.json`
   rollback: default=true | previous=true
   card snapshot: claim_boundary=true | fields=TweakId, Name, Category, EvidenceClass, ResearchStatus, RollbackSnapshotState, HasClaimBoundary, WhatWeKnowSummary, WhatWeDoNotClaimSummary, ProofLanes | lanes=docs, runtime, source, rollback
-- `privacy.disable-app-diagnostics` | App Diagnostic Information Access | Privacy
-  docs: `research/records/privacy.disable-app-diagnostics.json`
+- `network.disable-netbios` | NetBIOS over TCP/IP | Network
+  docs: `research/records/network.disable-netbios.review.json`
   rollback: default=true | previous=true
   card snapshot: claim_boundary=true | fields=TweakId, Name, Category, EvidenceClass, ResearchStatus, RollbackSnapshotState, HasClaimBoundary, WhatWeKnowSummary, WhatWeDoNotClaimSummary, ProofLanes | lanes=docs, runtime, source, rollback
-- `privacy.disable-app-suggestions` | App Suggestions in Start | Privacy
-  docs: `research/records/privacy.disable-app-suggestions.review.json`
+- `network.disable-netbios-resolution` | DNS Client NetBIOS Name Resolution | Network
+  docs: `research/records/network.disable-netbios-resolution.json`
   rollback: default=true | previous=true
   card snapshot: claim_boundary=true | fields=TweakId, Name, Category, EvidenceClass, ResearchStatus, RollbackSnapshotState, HasClaimBoundary, WhatWeKnowSummary, WhatWeDoNotClaimSummary, ProofLanes | lanes=docs, runtime, source, rollback
-- `privacy.disable-appcompat-engine.policy` | Disable Application Compatibility Engine and SwitchBack | Privacy
-  docs: `research/records/privacy.disable-appcompat-engine.policy.review.json`
+- `network.disable-plaintext-smb-passwords` | Plaintext SMB Passwords | Network
+  docs: `research/records/network.disable-plaintext-smb-passwords.json`
   rollback: default=true | previous=true
   card snapshot: claim_boundary=true | fields=TweakId, Name, Category, EvidenceClass, ResearchStatus, RollbackSnapshotState, HasClaimBoundary, WhatWeKnowSummary, WhatWeDoNotClaimSummary, ProofLanes | lanes=docs, runtime, source, rollback
 
 ## Live Results
 
-- `privacy.deny-app-access.policy` | success=true | status=ok
+- `network.disable-lltd` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
   card contract: ok | claim_boundary=true | lanes=docs, runtime, source, rollback
-- `privacy.disable-activity-history` | success=true | status=ok
+- `network.disable-mdns` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
   card contract: ok | claim_boundary=true | lanes=docs, runtime, source, rollback
-- `privacy.disable-app-diagnostics` | success=true | status=ok
+- `network.disable-netbios` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
   card contract: ok | claim_boundary=true | lanes=docs, runtime, source, rollback
-- `privacy.disable-app-suggestions` | success=true | status=ok
+- `network.disable-netbios-resolution` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
   card contract: ok | claim_boundary=true | lanes=docs, runtime, source, rollback
-- `privacy.disable-appcompat-engine.policy` | success=true | status=ok
+- `network.disable-plaintext-smb-passwords` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
   card contract: ok | claim_boundary=true | lanes=docs, runtime, source, rollback

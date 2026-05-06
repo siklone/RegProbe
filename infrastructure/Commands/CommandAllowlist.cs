@@ -182,6 +182,7 @@ public sealed class CommandAllowlist
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\NetworkConnectivityStatusIndicator", "NoActiveProbe", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows NT\DNSClient", "EnableMDNS", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows NT\DNSClient", "EnableMulticast", "0", "1", "2");
+        AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows NT\DNSClient", "EnableNetbios", "0", "1", "2", "3");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\LLTD", "EnableLLTDIO", "0", "1");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\LLTD", "EnableRspndr", "0", "1");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\Windows Chat", "ChatIcon", "0", "1", "2", "3");

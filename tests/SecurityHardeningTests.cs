@@ -204,6 +204,7 @@ public sealed class CommandAllowlistSecurityTests
             CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\CurrentVersion\MDM", "/v", "DisableRegistration", "/t", "REG_DWORD", "/d", "1", "/f"),
             CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\NetworkConnectivityStatusIndicator", "/v", "NoActiveProbe", "/t", "REG_DWORD", "/d", "1", "/f"),
             CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows NT\DNSClient", "/v", "EnableMDNS", "/t", "REG_DWORD", "/d", "0", "/f"),
+            CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows NT\DNSClient", "/v", "EnableNetbios", "/t", "REG_DWORD", "/d", "0", "/f"),
             CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\LLTD", "/v", "EnableLLTDIO", "/t", "REG_DWORD", "/d", "0", "/f"),
             CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\LLTD", "/v", "EnableRspndr", "/t", "REG_DWORD", "/d", "0", "/f"),
             CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\System", "/v", "DisableAcrylicBackgroundOnLogon", "/t", "REG_DWORD", "/d", "1", "/f"),
