@@ -1,6 +1,6 @@
 # Promoted App QA Coverage
 
-- Generated UTC: 2026-05-05T21:55:03Z
+- Generated UTC: 2026-05-06T18:51:02Z
 - History entries: 14
 - Promoted app-QA candidates: 242
 - Covered: 49
@@ -36,6 +36,24 @@
 - Security: 19
 - System: 46
 - Visibility: 17
+
+## Recommended Next Batches
+
+- Security: 5 uncovered cards | coverage 9.52%
+  command: `dotnet run --project cli/cli.csproj -- research qa-batch --id security.disable-downloads-blocking --id security.disable-enhanced-defender-notifications --id security.disable-ntfs-encryption --id security.disable-p2p-updates --id security.disable-picture-password`
+  live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id security.disable-downloads-blocking --id security.disable-enhanced-defender-notifications --id security.disable-ntfs-encryption --id security.disable-p2p-updates --id security.disable-picture-password --run-kvm --json`
+- System: 5 uncovered cards | coverage 11.54%
+  command: `dotnet run --project cli/cli.csproj -- research qa-batch --id system.bsod-display-parameters --id system.disable-auto-maintenance --id system.disable-background-gp-updates --id system.disable-clipboard-redirection --id system.disable-fullscreen-optimizations`
+  live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id system.bsod-display-parameters --id system.disable-auto-maintenance --id system.disable-background-gp-updates --id system.disable-clipboard-redirection --id system.disable-fullscreen-optimizations --run-kvm --json`
+- Privacy: 5 uncovered cards | coverage 11.94%
+  command: `dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.deny-app-access.policy --id privacy.disable-activity-history --id privacy.disable-app-diagnostics --id privacy.disable-app-suggestions --id privacy.disable-appcompat-engine.policy`
+  live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.deny-app-access.policy --id privacy.disable-activity-history --id privacy.disable-app-diagnostics --id privacy.disable-app-suggestions --id privacy.disable-appcompat-engine.policy --run-kvm --json`
+- Network: 5 uncovered cards | coverage 14.29%
+  command: `dotnet run --project cli/cli.csproj -- research qa-batch --id network.disable-lltd --id network.disable-mdns --id network.disable-netbios --id network.disable-netbios-resolution --id network.disable-plaintext-smb-passwords`
+  live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id network.disable-lltd --id network.disable-mdns --id network.disable-netbios --id network.disable-netbios-resolution --id network.disable-plaintext-smb-passwords --run-kvm --json`
+- Power: 5 uncovered cards | coverage 20.0%
+  command: `dotnet run --project cli/cli.csproj -- research qa-batch --id power.disable-cpu-idle-states --id power.disable-network-power-saving.policy --id power.disable-power-throttling --id power.hide-hibernate-option --id power.hide-lock-option`
+  live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id power.disable-cpu-idle-states --id power.disable-network-power-saving.policy --id power.disable-power-throttling --id power.hide-hibernate-option --id power.hide-lock-option --run-kvm --json`
 
 ## Remaining Uncovered Sample
 

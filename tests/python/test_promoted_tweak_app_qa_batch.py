@@ -399,6 +399,13 @@ class PromotedTweakAppQaBatchTests(unittest.TestCase):
             self.assertEqual(coverage["covered_count"], 1)
             self.assertEqual(coverage["uncovered_count"], 1)
             self.assertEqual(coverage["covered"][0]["tweak_id"], "privacy.beta")
+            self.assertEqual(coverage["recommended_next_batches"][0]["category"], "System")
+            self.assertEqual(coverage["recommended_next_batches"][0]["tweak_ids"], ["system.alpha"])
+            self.assertIn("--id system.alpha", coverage["recommended_next_batches"][0]["command"])
+
+            coverage_markdown = (audit_dir / "promoted-app-qa-coverage-latest.md").read_text(encoding="utf-8")
+            self.assertIn("## Recommended Next Batches", coverage_markdown)
+            self.assertIn("research qa-batch --id system.alpha", coverage_markdown)
 
 
 if __name__ == "__main__":

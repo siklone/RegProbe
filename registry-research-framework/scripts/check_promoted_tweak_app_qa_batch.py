@@ -22,6 +22,8 @@ HISTORY_PATH = AUDIT_DIR / "promoted-app-qa-batch-history.jsonl"
 COVERAGE_PATH = AUDIT_DIR / "promoted-app-qa-coverage-latest.json"
 COVERAGE_MARKDOWN_PATH = AUDIT_DIR / "promoted-app-qa-coverage-latest.md"
 DEFAULT_BATCH_RUNNER = REPO_ROOT / "scripts" / "vm-kvm" / "run-guest-app-tweak-qa-batch.py"
+NEXT_BATCH_CATEGORY_LIMIT = 5
+NEXT_BATCH_ITEM_LIMIT = 5
 
 
 def load_module(name: str, path: Path):
@@ -481,6 +483,52 @@ def append_history_entry(report: dict[str, Any], history_path: Path) -> None:
         handle.write(json.dumps(entry) + "\n")
 
 
+def build_next_batch_recommendations(
+    *,
+    covered_categories: dict[str, int],
+    uncovered_categories: dict[str, int],
+    uncovered: list[dict[str, Any]],
+    max_batches: int = NEXT_BATCH_CATEGORY_LIMIT,
+    batch_size: int = NEXT_BATCH_ITEM_LIMIT,
+) -> list[dict[str, Any]]:
+    by_category: defaultdict[str, list[dict[str, Any]]] = defaultdict(list)
+    for item in uncovered:
+        category = normalize_text(item.get("category")) or "Uncategorized"
+        by_category[category].append(item)
+
+    ranked_categories: list[tuple[float, int, str]] = []
+    for category, uncovered_count in uncovered_categories.items():
+        covered_count = int(covered_categories.get(category, 0))
+        total_count = covered_count + int(uncovered_count)
+        coverage_percent = round((covered_count / total_count * 100.0), 2) if total_count else 0.0
+        ranked_categories.append((coverage_percent, -int(uncovered_count), category))
+
+    recommendations: list[dict[str, Any]] = []
+    for coverage_percent, negative_uncovered_count, category in sorted(ranked_categories)[:max_batches]:
+        selected = by_category.get(category, [])[:batch_size]
+        if not selected:
+            continue
+
+        tweak_ids = [normalize_text(item.get("tweak_id")) for item in selected if normalize_text(item.get("tweak_id"))]
+        id_args = " ".join(f"--id {tweak_id}" for tweak_id in tweak_ids)
+        base_command = f"dotnet run --project cli/cli.csproj -- research qa-batch {id_args}".strip()
+        recommendations.append(
+            {
+                "category": category,
+                "covered_count": int(covered_categories.get(category, 0)),
+                "uncovered_count": -negative_uncovered_count,
+                "coverage_percent": coverage_percent,
+                "batch_size": len(tweak_ids),
+                "tweak_ids": tweak_ids,
+                "command": base_command,
+                "kvm_command": f"{base_command} --run-kvm --json",
+                "candidates": selected,
+            }
+        )
+
+    return recommendations
+
+
 def build_coverage_report(repo_root: Path, report: dict[str, Any], history_entries: list[dict[str, Any]]) -> dict[str, Any]:
     candidates = collect_promoted_candidates(repo_root)
     candidate_by_tweak_id = {normalize_text(item.get("tweak_id")).lower(): item for item in candidates}
@@ -530,6 +578,8 @@ def build_coverage_report(repo_root: Path, report: dict[str, Any], history_entri
 
     covered.sort(key=lambda item: (item["category"].lower(), item["tweak_id"].lower()))
     uncovered.sort(key=lambda item: (item["category"].lower(), item["tweak_id"].lower()))
+    covered_category_counts = dict(sorted(covered_categories.items()))
+    uncovered_category_counts = dict(sorted(uncovered_categories.items()))
 
     return {
         "generated_utc": report.get("generated_utc"),
@@ -539,9 +589,14 @@ def build_coverage_report(repo_root: Path, report: dict[str, Any], history_entri
         "uncovered_count": len(uncovered),
         "summary": {
             "coverage_percent": round((len(covered) / len(candidates) * 100.0), 2) if candidates else 0.0,
-            "covered_categories": dict(sorted(covered_categories.items())),
-            "uncovered_categories": dict(sorted(uncovered_categories.items())),
+            "covered_categories": covered_category_counts,
+            "uncovered_categories": uncovered_category_counts,
         },
+        "recommended_next_batches": build_next_batch_recommendations(
+            covered_categories=covered_category_counts,
+            uncovered_categories=uncovered_category_counts,
+            uncovered=uncovered,
+        ),
         "covered": covered,
         "uncovered": uncovered,
     }
@@ -568,6 +623,20 @@ def render_coverage_markdown(coverage: dict[str, Any]) -> str:
     lines.extend(["", "## Uncovered Categories", ""])
     for category, count in ((coverage.get("summary") or {}).get("uncovered_categories") or {}).items():
         lines.append(f"- {category}: {count}")
+
+    lines.extend(["", "## Recommended Next Batches", ""])
+    recommendations = coverage.get("recommended_next_batches") or []
+    if recommendations:
+        for item in recommendations:
+            lines.extend(
+                [
+                    f"- {item.get('category')}: {item.get('batch_size')} uncovered cards | coverage {item.get('coverage_percent')}%",
+                    f"  command: `{item.get('command')}`",
+                    f"  live KVM: `{item.get('kvm_command')}`",
+                ]
+            )
+    else:
+        lines.append("- No uncovered promoted app-QA candidates remain.")
 
     lines.extend(["", "## Remaining Uncovered Sample", ""])
     for item in (coverage.get("uncovered") or [])[:20]:

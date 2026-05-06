@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-05-05T21:55:03Z",
+  "generated_utc": "2026-05-06T18:51:02Z",
   "history_entry_count": 14,
   "catalog_candidate_count": 242,
   "covered_count": 49,
@@ -35,6 +35,273 @@
       "Visibility": 17
     }
   },
+  "recommended_next_batches": [
+    {
+      "category": "Security",
+      "covered_count": 2,
+      "uncovered_count": 19,
+      "coverage_percent": 9.52,
+      "batch_size": 5,
+      "tweak_ids": [
+        "security.disable-downloads-blocking",
+        "security.disable-enhanced-defender-notifications",
+        "security.disable-ntfs-encryption",
+        "security.disable-p2p-updates",
+        "security.disable-picture-password"
+      ],
+      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id security.disable-downloads-blocking --id security.disable-enhanced-defender-notifications --id security.disable-ntfs-encryption --id security.disable-p2p-updates --id security.disable-picture-password",
+      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id security.disable-downloads-blocking --id security.disable-enhanced-defender-notifications --id security.disable-ntfs-encryption --id security.disable-p2p-updates --id security.disable-picture-password --run-kvm --json",
+      "candidates": [
+        {
+          "tweak_id": "security.disable-downloads-blocking",
+          "record_id": "security.disable-downloads-blocking",
+          "category": "Security",
+          "name": "Preserve Zone Information on Attachments",
+          "documentation": "research/records/security.disable-downloads-blocking.json"
+        },
+        {
+          "tweak_id": "security.disable-enhanced-defender-notifications",
+          "record_id": "security.disable-enhanced-defender-notifications",
+          "category": "Security",
+          "name": "Windows Security Enhanced Notifications",
+          "documentation": "research/records/security.disable-enhanced-defender-notifications.review.json"
+        },
+        {
+          "tweak_id": "security.disable-ntfs-encryption",
+          "record_id": "security.disable-ntfs-encryption",
+          "category": "Security",
+          "name": "Disable NTFS Encryption (EFS)",
+          "documentation": "research/records/security.disable-ntfs-encryption.json"
+        },
+        {
+          "tweak_id": "security.disable-p2p-updates",
+          "record_id": "security.disable-p2p-updates",
+          "category": "Security",
+          "name": "Delivery Optimization Download Mode",
+          "documentation": "research/records/security.disable-p2p-updates.review.json"
+        },
+        {
+          "tweak_id": "security.disable-picture-password",
+          "record_id": "security.disable-picture-password",
+          "category": "Security",
+          "name": "Picture Password Sign-In for Domain Users",
+          "documentation": "research/records/security.disable-picture-password.json"
+        }
+      ]
+    },
+    {
+      "category": "System",
+      "covered_count": 6,
+      "uncovered_count": 46,
+      "coverage_percent": 11.54,
+      "batch_size": 5,
+      "tweak_ids": [
+        "system.bsod-display-parameters",
+        "system.disable-auto-maintenance",
+        "system.disable-background-gp-updates",
+        "system.disable-clipboard-redirection",
+        "system.disable-fullscreen-optimizations"
+      ],
+      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id system.bsod-display-parameters --id system.disable-auto-maintenance --id system.disable-background-gp-updates --id system.disable-clipboard-redirection --id system.disable-fullscreen-optimizations",
+      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id system.bsod-display-parameters --id system.disable-auto-maintenance --id system.disable-background-gp-updates --id system.disable-clipboard-redirection --id system.disable-fullscreen-optimizations --run-kvm --json",
+      "candidates": [
+        {
+          "tweak_id": "system.bsod-display-parameters",
+          "record_id": "system.bsod-display-parameters",
+          "category": "System",
+          "name": "Display Blue Screen Parameters",
+          "documentation": "research/records/system.bsod-display-parameters.review.json"
+        },
+        {
+          "tweak_id": "system.disable-auto-maintenance",
+          "record_id": "system.disable-auto-maintenance",
+          "category": "System",
+          "name": "Automatic Maintenance",
+          "documentation": "research/records/system.disable-auto-maintenance.review.json"
+        },
+        {
+          "tweak_id": "system.disable-background-gp-updates",
+          "record_id": "system.disable-background-gp-updates",
+          "category": "System",
+          "name": "Background Group Policy Refresh",
+          "documentation": "research/records/system.disable-background-gp-updates.json"
+        },
+        {
+          "tweak_id": "system.disable-clipboard-redirection",
+          "record_id": "system.disable-clipboard-redirection",
+          "category": "System",
+          "name": "RDP Clipboard Redirection",
+          "documentation": "research/records/system.disable-clipboard-redirection.json"
+        },
+        {
+          "tweak_id": "system.disable-fullscreen-optimizations",
+          "record_id": "system.disable-fullscreen-optimizations",
+          "category": "System",
+          "name": "Fullscreen Optimizations",
+          "documentation": "research/records/system.disable-fullscreen-optimizations.review.json"
+        }
+      ]
+    },
+    {
+      "category": "Privacy",
+      "covered_count": 8,
+      "uncovered_count": 59,
+      "coverage_percent": 11.94,
+      "batch_size": 5,
+      "tweak_ids": [
+        "privacy.deny-app-access.policy",
+        "privacy.disable-activity-history",
+        "privacy.disable-app-diagnostics",
+        "privacy.disable-app-suggestions",
+        "privacy.disable-appcompat-engine.policy"
+      ],
+      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.deny-app-access.policy --id privacy.disable-activity-history --id privacy.disable-app-diagnostics --id privacy.disable-app-suggestions --id privacy.disable-appcompat-engine.policy",
+      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.deny-app-access.policy --id privacy.disable-activity-history --id privacy.disable-app-diagnostics --id privacy.disable-app-suggestions --id privacy.disable-appcompat-engine.policy --run-kvm --json",
+      "candidates": [
+        {
+          "tweak_id": "privacy.deny-app-access.policy",
+          "record_id": "privacy.deny-app-access.policy",
+          "category": "Privacy",
+          "name": "App capability access policies",
+          "documentation": "research/records/privacy.deny-app-access.policy.review.json"
+        },
+        {
+          "tweak_id": "privacy.disable-activity-history",
+          "record_id": "privacy.disable-activity-history",
+          "category": "Privacy",
+          "name": "Windows Activity History",
+          "documentation": "research/records/privacy.disable-activity-history.json"
+        },
+        {
+          "tweak_id": "privacy.disable-app-diagnostics",
+          "record_id": "privacy.disable-app-diagnostics",
+          "category": "Privacy",
+          "name": "App Diagnostic Information Access",
+          "documentation": "research/records/privacy.disable-app-diagnostics.json"
+        },
+        {
+          "tweak_id": "privacy.disable-app-suggestions",
+          "record_id": "privacy.disable-app-suggestions",
+          "category": "Privacy",
+          "name": "App Suggestions in Start",
+          "documentation": "research/records/privacy.disable-app-suggestions.review.json"
+        },
+        {
+          "tweak_id": "privacy.disable-appcompat-engine.policy",
+          "record_id": "privacy.disable-appcompat-engine.policy",
+          "category": "Privacy",
+          "name": "Disable Application Compatibility Engine and SwitchBack",
+          "documentation": "research/records/privacy.disable-appcompat-engine.policy.review.json"
+        }
+      ]
+    },
+    {
+      "category": "Network",
+      "covered_count": 4,
+      "uncovered_count": 24,
+      "coverage_percent": 14.29,
+      "batch_size": 5,
+      "tweak_ids": [
+        "network.disable-lltd",
+        "network.disable-mdns",
+        "network.disable-netbios",
+        "network.disable-netbios-resolution",
+        "network.disable-plaintext-smb-passwords"
+      ],
+      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id network.disable-lltd --id network.disable-mdns --id network.disable-netbios --id network.disable-netbios-resolution --id network.disable-plaintext-smb-passwords",
+      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id network.disable-lltd --id network.disable-mdns --id network.disable-netbios --id network.disable-netbios-resolution --id network.disable-plaintext-smb-passwords --run-kvm --json",
+      "candidates": [
+        {
+          "tweak_id": "network.disable-lltd",
+          "record_id": "network.disable-lltd",
+          "category": "Network",
+          "name": "Set LLTD Policies to Default Behavior",
+          "documentation": "research/records/network.disable-lltd.review.json"
+        },
+        {
+          "tweak_id": "network.disable-mdns",
+          "record_id": "network.disable-mdns",
+          "category": "Network",
+          "name": "Set mDNS Policy to Local Settings",
+          "documentation": "research/records/network.disable-mdns.review.json"
+        },
+        {
+          "tweak_id": "network.disable-netbios",
+          "record_id": "network.disable-netbios",
+          "category": "Network",
+          "name": "NetBIOS over TCP/IP",
+          "documentation": "research/records/network.disable-netbios.review.json"
+        },
+        {
+          "tweak_id": "network.disable-netbios-resolution",
+          "record_id": "network.disable-netbios-resolution",
+          "category": "Network",
+          "name": "DNS Client NetBIOS Name Resolution",
+          "documentation": "research/records/network.disable-netbios-resolution.json"
+        },
+        {
+          "tweak_id": "network.disable-plaintext-smb-passwords",
+          "record_id": "network.disable-plaintext-smb-passwords",
+          "category": "Network",
+          "name": "Plaintext SMB Passwords",
+          "documentation": "research/records/network.disable-plaintext-smb-passwords.json"
+        }
+      ]
+    },
+    {
+      "category": "Power",
+      "covered_count": 2,
+      "uncovered_count": 8,
+      "coverage_percent": 20.0,
+      "batch_size": 5,
+      "tweak_ids": [
+        "power.disable-cpu-idle-states",
+        "power.disable-network-power-saving.policy",
+        "power.disable-power-throttling",
+        "power.hide-hibernate-option",
+        "power.hide-lock-option"
+      ],
+      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id power.disable-cpu-idle-states --id power.disable-network-power-saving.policy --id power.disable-power-throttling --id power.hide-hibernate-option --id power.hide-lock-option",
+      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id power.disable-cpu-idle-states --id power.disable-network-power-saving.policy --id power.disable-power-throttling --id power.hide-hibernate-option --id power.hide-lock-option --run-kvm --json",
+      "candidates": [
+        {
+          "tweak_id": "power.disable-cpu-idle-states",
+          "record_id": "power.disable-cpu-idle-states",
+          "category": "Power",
+          "name": "CPU Idle States Bundle",
+          "documentation": "research/records/power.disable-cpu-idle-states.json"
+        },
+        {
+          "tweak_id": "power.disable-network-power-saving.policy",
+          "record_id": "power.disable-network-power-saving.policy",
+          "category": "Power",
+          "name": "Network Power and Multimedia Responsiveness",
+          "documentation": "research/records/power.disable-network-power-saving.policy.review.json"
+        },
+        {
+          "tweak_id": "power.disable-power-throttling",
+          "record_id": "power.disable-power-throttling",
+          "category": "Power",
+          "name": "Power Throttling",
+          "documentation": "research/records/power.disable-power-throttling.json"
+        },
+        {
+          "tweak_id": "power.hide-hibernate-option",
+          "record_id": "power.hide-hibernate-option",
+          "category": "Power",
+          "name": "Show Hibernate Option",
+          "documentation": "research/records/power.hide-hibernate-option.json"
+        },
+        {
+          "tweak_id": "power.hide-lock-option",
+          "record_id": "power.hide-lock-option",
+          "category": "Power",
+          "name": "Show Lock Option",
+          "documentation": "research/records/power.hide-lock-option.json"
+        }
+      ]
+    }
+  ],
   "covered": [
     {
       "tweak_id": "audio.disable-beep",
