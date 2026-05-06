@@ -2,7 +2,7 @@
 
 ## Summary
 
-- Retained audit summary: [`registry-research-framework/audit/power-disable-cpu-idle-states-stepwise-orchestration-20260328.json`](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/power-disable-cpu-idle-states-stepwise-orchestration-20260328.json)
+- Retained audit summary: [`registry-research-framework/audit/power-disable-cpu-idle-states-stepwise-orchestration-20260328.json`](../../registry-research-framework/audit/power-disable-cpu-idle-states-stepwise-orchestration-20260328.json)
 - The monolithic CPU idle runtime chain was split into four independent stages:
   - Step A: baseline + `WPR start` + candidate write
   - Step B: reboot + settle + post-boot read + `WPR stop`

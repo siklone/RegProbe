@@ -25,7 +25,7 @@ The exporter runs inside the guest, captures:
 
 Host artifact root for this pass:
 
-- [`research/evidence-files/vm-tooling-staging/registry-dumps/high-risk-dumps-summary.json`](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/evidence/files/vm-tooling-staging/registry-dumps/high-risk-dumps-summary.json)
+- [`research/evidence-files/vm-tooling-staging/registry-dumps/high-risk-dumps-summary.json`](../../evidence/files/vm-tooling-staging/registry-dumps/high-risk-dumps-summary.json)
 
 Main batch summary:
 

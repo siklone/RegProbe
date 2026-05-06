@@ -3,7 +3,7 @@
 Date: 2026-04-12
 Domain: `regprobe-win11-25h2-session`
 
-We migrated [scripts/vm-kvm/run-guest-local-kd-smoke.py](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/scripts/vm-kvm/run-guest-local-kd-smoke.py) onto the same QGA no-wait launch path that now powers the registry policy probe wrapper. The host wrapper uploads a generated guest launcher through [scripts/vm-kvm/qga-run-powershell.py](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/scripts/vm-kvm/qga-run-powershell.py), returns immediately, and then polls the bridge for the local KD summary.
+We migrated [scripts/vm-kvm/run-guest-local-kd-smoke.py](../../scripts/vm-kvm/run-guest-local-kd-smoke.py) onto the same QGA no-wait launch path that now powers the registry policy probe wrapper. The host wrapper uploads a generated guest launcher through [scripts/vm-kvm/qga-run-powershell.py](../../scripts/vm-kvm/qga-run-powershell.py), returns immediately, and then polls the bridge for the local KD summary.
 
 Smoke command:
 
@@ -35,7 +35,7 @@ x nt!CmQueryValueKey
 fffff805`83274900 nt!CmQueryValueKey (CmQueryValueKey)
 ```
 
-One small quality fix came out of this run. The guest-side helper used to omit a `status` field, which made the host wrapper report successful runs as `unknown`. [scripts/vm/guest-tools/run-local-kd-smoke.ps1](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/scripts/vm/guest-tools/run-local-kd-smoke.ps1) now writes an explicit `status`, and the wrapper also has a safe fallback synthesizer for older summaries.
+One small quality fix came out of this run. The guest-side helper used to omit a `status` field, which made the host wrapper report successful runs as `unknown`. [scripts/vm/guest-tools/run-local-kd-smoke.ps1](../../scripts/vm/guest-tools/run-local-kd-smoke.ps1) now writes an explicit `status`, and the wrapper also has a safe fallback synthesizer for older summaries.
 
 Why this matters:
 
@@ -43,4 +43,4 @@ This is the second long-running KVM wrapper that now launches cleanly through QG
 
 ## Audit artifact
 
-- [kvm-qga-local-kd-smoke-20260412.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/kvm-qga-local-kd-smoke-20260412.json)
+- [kvm-qga-local-kd-smoke-20260412.json](../../registry-research-framework/audit/kvm-qga-local-kd-smoke-20260412.json)

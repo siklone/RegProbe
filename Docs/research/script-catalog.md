@@ -277,11 +277,11 @@ VMware-focused orchestration, diagnostics, provisioning, and runtime probes.
 - `scripts/vm/new-regprobe-defender-excluded-baseline.ps1`
   Creates regprobe defender excluded baseline.
   Retained bootstrap audit:
-  [regprobe-baseline-defender-exclusions-20260328.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/regprobe-baseline-defender-exclusions-20260328.json)
+  [regprobe-baseline-defender-exclusions-20260328.json](../../registry-research-framework/audit/regprobe-baseline-defender-exclusions-20260328.json)
 - `scripts/vm/new-regprobe-parallel-vm.ps1`
   Creates regprobe parallel vm.
   Retained bootstrap audit:
-  [regprobe-parallel-vm-secondary.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/regprobe-parallel-vm-secondary.json)
+  [regprobe-parallel-vm-secondary.json](../../registry-research-framework/audit/regprobe-parallel-vm-secondary.json)
 - `scripts/vm/new-regprobe-tools-hardened-baseline.ps1`
   Creates regprobe tools hardened baseline.
 - `scripts/vm/new-vmware-debug-only-baseline-plan.ps1`

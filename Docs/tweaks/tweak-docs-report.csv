@@ -45,12 +45,12 @@ power.disable-cpu-idle-states,Disable CPU Idle States (C-States),Docs/power/powe
 power.disable-cpu-parking,Disable CPU Core Parking,Docs/power/power.md,yes,yes,yes,yes,engine/Tweaks/Power/CPUPowerTweaks.cs#L29
 power.disable-fast-startup,Disable Fast Startup (Hiberboot),Docs/power/power.md,yes,yes,yes,yes,engine/Tweaks/Power/PowerSettingsTweaks.cs#L20
 power.disable-hibernation,Disable Hibernation,Docs/power/power.md,yes,yes,yes,yes,engine/Tweaks/Commands/Power/DisableHibernationTweak.cs#L13
-power.disable-network-power-saving,Disable Network Adapter Power Saving,Docs/power/power.md,yes,yes,yes,yes,app/Services/TweakProviders/PowerTweakProvider.cs#L42
+power.disable-network-power-saving.policy,Network Power and Multimedia Responsiveness,Docs/power/power.md,yes,yes,yes,yes,app/Services/TweakProviders/PowerTweakProvider.cs#L42
 power.disable-power-throttling,Disable Power Throttling,Docs/power/power.md,yes,yes,yes,yes,engine/Tweaks/Power/PowerSettingsTweaks.cs#L40
 power.disable-superfetch,Disable Superfetch (SysMain),Docs/power/power.md,yes,yes,yes,yes,engine/Tweaks/Commands/Performance/DisableSuperfetchTweak.cs#L13
 power.disable-windows-search,Disable Windows Search,Docs/power/power.md,yes,yes,yes,yes,engine/Tweaks/Commands/Performance/DisableWindowsSearchTweak.cs#L13
 power.optimize-cpu-boost,Apply Processor Performance Registry Bundle,Docs/power/power.md,yes,yes,yes,yes,engine/Tweaks/Power/CPUPowerTweaks.cs#L86
-power.optimize-gaming-network,Set MMCSS Games Task Profile,Docs/power/power.md,yes,yes,yes,yes,engine/Tweaks/Power/NetworkAdapterPowerTweaks.cs#L61
+power.optimize-gaming-network,Set MMCSS Games Task Profile,Docs/power/power.md,yes,yes,yes,yes,engine/Tweaks/Power/NetworkAdapterPowerTweaks.cs#L50
 power.optimize-performance,Apply Grouped Power-Control Registry Bundle,Docs/power/power.md,yes,yes,yes,yes,app/Services/TweakProviders/PowerTweakProvider.cs#L24
 privacy.deny-app-access,Deny App Access (Except Microphone),Docs/privacy/privacy-verified.md,yes,yes,yes,yes,app/Services/TweakProviders/PrivacyTweakProvider.cs#L162
 privacy.disable-application-compatibility,Disable Application Compatibility,Docs/privacy/privacy-verified.md,yes,yes,yes,yes,app/Services/TweakProviders/PrivacyTweakProvider.cs#L47

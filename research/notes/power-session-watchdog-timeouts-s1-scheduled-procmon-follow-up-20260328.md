@@ -36,4 +36,4 @@ Both fail before yielding a decisive exact-value live read. That makes the curre
 
 ## Retained audit artifact
 
-- [power-session-watchdog-timeouts-s1-scheduled-procmon-follow-up-20260328.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/power-session-watchdog-timeouts-s1-scheduled-procmon-follow-up-20260328.json)
+- [power-session-watchdog-timeouts-s1-scheduled-procmon-follow-up-20260328.json](../../registry-research-framework/audit/power-session-watchdog-timeouts-s1-scheduled-procmon-follow-up-20260328.json)

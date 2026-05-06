@@ -8,31 +8,20 @@ namespace RegProbe.Engine.Tweaks.Power;
 public static class NetworkAdapterPowerTweaks
 {
     /// <summary>
-    /// Disables power saving features for network adapters
-    /// This is a simplified version - full implementation would enumerate all adapters
+    /// Writes the narrowed TCP/IP offload and MMCSS values that have record-backed semantics.
     /// </summary>
     public static RegistryValueBatchTweak CreateDisableNetworkAdapterPowerSavingTweak(IRegistryAccessor registryAccessor)
     {
         var entries = new List<RegistryValueBatchEntry>
         {
-            // Global network adapter power settings
-            // Note: Full implementation would enumerate HKLM\SYSTEM\CurrentControlSet\Control\Class\{4d36e972-e325-11ce-bfc1-08002be10318}
-            // and apply settings to each adapter instance
-
-            // Common Intel adapter settings
             new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SYSTEM\CurrentControlSet\Services\Tcpip\Parameters", "DisableTaskOffload", RegistryValueKind.DWord, 0, RegistryView.Default),
-
-            // Disable network throttling
-            new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile", "NetworkThrottlingIndex", RegistryValueKind.DWord, 0xFFFFFFFF, RegistryView.Default),
-
-            // System responsiveness (audio/multimedia priority)
             new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile", "SystemResponsiveness", RegistryValueKind.DWord, 10, RegistryView.Default)
         };
 
         return new RegistryValueBatchTweak(
-            id: "power.disable-network-power-saving",
-            name: "Disable Network Adapter Power Saving",
-            description: "Writes the current network-throttling and multimedia system-profile values used by the app's network power bundle.",
+            id: "power.disable-network-power-saving.policy",
+            name: "Network Power and Multimedia Responsiveness",
+            description: "Writes the documented DisableTaskOffload and MMCSS SystemResponsiveness values while excluding the archived opaque NetworkThrottlingIndex write.",
             risk: TweakRiskLevel.Safe,
             entries: entries,
             registryAccessor: registryAccessor,

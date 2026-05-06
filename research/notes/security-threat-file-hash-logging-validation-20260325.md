@@ -71,25 +71,25 @@ Snapshot:
 Artifacts:
 
 - baseline:
-  - [`defender-threat-file-hash-baseline-events.json`](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/evidence/files/vm-tooling-staging/defender-threat-file-hash-baseline-1-20260325-011024/defender-threat-file-hash-baseline-events.json)
+  - [`defender-threat-file-hash-baseline-events.json`](../../evidence/files/vm-tooling-staging/defender-threat-file-hash-baseline-1-20260325-011024/defender-threat-file-hash-baseline-events.json)
 - documented MpEngine path:
-  - [`defender-threat-file-hash-mpengine-1-events.json`](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/evidence/files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-20260325-011519/defender-threat-file-hash-mpengine-1-events.json)
+  - [`defender-threat-file-hash-mpengine-1-events.json`](../../evidence/files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-20260325-011519/defender-threat-file-hash-mpengine-1-events.json)
 - legacy root path:
-  - [`defender-threat-file-hash-legacyroot-1.txt`](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/evidence/files/vm-tooling-staging/defender-threat-file-hash-legacyroot-1-20260325-011845/defender-threat-file-hash-legacyroot-1.txt)
+  - [`defender-threat-file-hash-legacyroot-1.txt`](../../evidence/files/vm-tooling-staging/defender-threat-file-hash-legacyroot-1-20260325-011845/defender-threat-file-hash-legacyroot-1.txt)
 - Policy Manager alias:
-  - [`defender-threat-file-hash-policymanager-1.txt`](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/evidence/files/vm-tooling-staging/defender-threat-file-hash-policymanager-1-20260325-012333/defender-threat-file-hash-policymanager-1.txt)
+  - [`defender-threat-file-hash-policymanager-1.txt`](../../evidence/files/vm-tooling-staging/defender-threat-file-hash-policymanager-1-20260325-012333/defender-threat-file-hash-policymanager-1.txt)
 - service-restart follow-up:
-  - [`defender-threat-file-hash-mpengine-1-events.json`](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/evidence/files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-20260325-095038/defender-threat-file-hash-mpengine-1-events.json)
+  - [`defender-threat-file-hash-mpengine-1-events.json`](../../evidence/files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-20260325-095038/defender-threat-file-hash-mpengine-1-events.json)
 - rebooted documented MpEngine path:
-  - [`defender-threat-file-hash-mpengine-1.txt`](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/evidence/files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-20260325-100039/defender-threat-file-hash-mpengine-1.txt)
+  - [`defender-threat-file-hash-mpengine-1.txt`](../../evidence/files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-20260325-100039/defender-threat-file-hash-mpengine-1.txt)
 - official Microsoft PE sample baseline:
-  - [`defender-threat-file-hash-baseline-custom-events.json`](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/evidence/files/vm-tooling-staging/defender-threat-file-hash-baseline-1-custom-20260325-131902/defender-threat-file-hash-baseline-custom-events.json)
+  - [`defender-threat-file-hash-baseline-custom-events.json`](../../evidence/files/vm-tooling-staging/defender-threat-file-hash-baseline-1-custom-20260325-131902/defender-threat-file-hash-baseline-custom-events.json)
 - official Microsoft PE sample with legacy root:
-  - [`defender-threat-file-hash-legacyroot-1-custom-events.json`](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/evidence/files/vm-tooling-staging/defender-threat-file-hash-legacyroot-1-custom-20260325-133409/defender-threat-file-hash-legacyroot-1-custom-events.json)
+  - [`defender-threat-file-hash-legacyroot-1-custom-events.json`](../../evidence/files/vm-tooling-staging/defender-threat-file-hash-legacyroot-1-custom-20260325-133409/defender-threat-file-hash-legacyroot-1-custom-events.json)
 - official Microsoft PE sample with Policy Manager:
-  - [`defender-threat-file-hash-policymanager-1-custom-events.json`](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/evidence/files/vm-tooling-staging/defender-threat-file-hash-policymanager-1-custom-20260325-135316/defender-threat-file-hash-policymanager-1-custom-events.json)
+  - [`defender-threat-file-hash-policymanager-1-custom-events.json`](../../evidence/files/vm-tooling-staging/defender-threat-file-hash-policymanager-1-custom-20260325-135316/defender-threat-file-hash-policymanager-1-custom-events.json)
 - official Microsoft PE sample with rebooted MpEngine path:
-  - [`defender-threat-file-hash-mpengine-1-custom-events.json`](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/evidence/files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-custom-20260325-140816/defender-threat-file-hash-mpengine-1-custom-events.json)
+  - [`defender-threat-file-hash-mpengine-1-custom-events.json`](../../evidence/files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-custom-20260325-140816/defender-threat-file-hash-mpengine-1-custom-events.json)
 
 ### Baseline
 
@@ -254,7 +254,7 @@ Host extraction proof:
 
 Artifacts:
 
-  - [`defender-threat-file-hash-baseline-custom-events.json`](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/evidence/files/vm-tooling-staging/defender-threat-file-hash-baseline-1-custom-20260325-131902/defender-threat-file-hash-baseline-custom-events.json)
+  - [`defender-threat-file-hash-baseline-custom-events.json`](../../evidence/files/vm-tooling-staging/defender-threat-file-hash-baseline-1-custom-20260325-131902/defender-threat-file-hash-baseline-custom-events.json)
 
 Result:
 
@@ -276,7 +276,7 @@ Setting:
 
 Artifacts:
 
-  - [`defender-threat-file-hash-legacyroot-1-custom-events.json`](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/evidence/files/vm-tooling-staging/defender-threat-file-hash-legacyroot-1-custom-20260325-133409/defender-threat-file-hash-legacyroot-1-custom-events.json)
+  - [`defender-threat-file-hash-legacyroot-1-custom-events.json`](../../evidence/files/vm-tooling-staging/defender-threat-file-hash-legacyroot-1-custom-20260325-133409/defender-threat-file-hash-legacyroot-1-custom-events.json)
 
 Result:
 
@@ -296,7 +296,7 @@ Setting:
 
 Artifacts:
 
-  - [`defender-threat-file-hash-policymanager-1-custom-events.json`](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/evidence/files/vm-tooling-staging/defender-threat-file-hash-policymanager-1-custom-20260325-135316/defender-threat-file-hash-policymanager-1-custom-events.json)
+  - [`defender-threat-file-hash-policymanager-1-custom-events.json`](../../evidence/files/vm-tooling-staging/defender-threat-file-hash-policymanager-1-custom-20260325-135316/defender-threat-file-hash-policymanager-1-custom-events.json)
 
 Result:
 
@@ -323,7 +323,7 @@ Method:
 
 Artifacts:
 
-  - [`defender-threat-file-hash-mpengine-1-custom-events.json`](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/evidence/files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-custom-20260325-140816/defender-threat-file-hash-mpengine-1-custom-events.json)
+  - [`defender-threat-file-hash-mpengine-1-custom-events.json`](../../evidence/files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-custom-20260325-140816/defender-threat-file-hash-mpengine-1-custom-events.json)
 
 Result:
 

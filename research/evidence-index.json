@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-05T21:53:03.777500Z",
+  "generated_utc": "2026-05-06T18:25:13.704955Z",
   "summary": {
     "total_records": 356,
     "validated": 255,
@@ -20,7 +20,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-05-05T21:53:03.384999Z",
+      "generated_utc": "2026-05-06T18:25:13.439420Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -2933,7 +2933,7 @@
         "action_state": "archived",
         "gating_reason": "Archived audit trail only. Keep this out of the normal tweak surface.",
         "confidence": "medium",
-        "app_mapping_status": "partially-matches",
+        "app_mapping_status": "not-mapped",
         "restore_story_known": true,
         "tested_build": "2026-03-31 child-record review snapshot",
         "anticheat_risk": {
@@ -3016,35 +3016,10 @@
         ]
       },
       "app_current_implementation": {
-        "status": "partially-matches",
+        "status": "not-mapped",
         "provider_source": "app/Services/TweakProviders/PowerTweakProvider.cs",
-        "notes": "The app writes DisableTaskOffload = 0, NetworkThrottlingIndex = 0xFFFFFFFF, and SystemResponsiveness = 10. Only two of these values are backed by primary Microsoft documentation in this review, and the bundle mixes separate feature areas.",
-        "writes": [
-          {
-            "target_id": "disable-task-offload",
-            "path": "HKLM\\System\\CurrentControlSet\\Services\\TCPIP\\Parameters",
-            "value_name": "DisableTaskOffload",
-            "value_type": "REG_DWORD",
-            "state_kind": "value",
-            "value": 0
-          },
-          {
-            "target_id": "network-throttling-index",
-            "path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile",
-            "value_name": "NetworkThrottlingIndex",
-            "value_type": "REG_DWORD",
-            "state_kind": "value",
-            "value": 4294967295
-          },
-          {
-            "target_id": "system-responsiveness",
-            "path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile",
-            "value_name": "SystemResponsiveness",
-            "value_type": "REG_DWORD",
-            "state_kind": "value",
-            "value": 10
-          }
-        ]
+        "notes": "The checked-in app no longer exposes this mixed parent bundle. It now surfaces the child power.disable-network-power-saving.policy record with DisableTaskOffload = 0 and SystemResponsiveness = 10; the opaque NetworkThrottlingIndex write is retained here only as historical audit context.",
+        "writes": []
       },
       "targets": [
         {
@@ -3209,9 +3184,9 @@
         {
           "evidence_id": "app-power-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
+          "title": "Historical app implementation before the policy split",
           "location": "app/Services/TweakProviders/PowerTweakProvider.cs",
-          "summary": "The provider writes DisableTaskOffload = 0, NetworkThrottlingIndex = 0xFFFFFFFF, and SystemResponsiveness = 10.",
+          "summary": "The previous mixed bundle wrote DisableTaskOffload = 0, NetworkThrottlingIndex = 0xFFFFFFFF, and SystemResponsiveness = 10. The checked-in app surface now uses the narrowed child record and excludes NetworkThrottlingIndex.",
           "strength": "high",
           "supports": [
             "path",

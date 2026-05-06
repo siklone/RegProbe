@@ -1,6 +1,6 @@
 Execution-required pair için 2026-04-11 statik follow-up:
 
-- Guest-side minimal UTF-16 tarama [string-offsets.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/evidence/files/vm-tooling-staging/executionrequired-xref-20260411/string-offsets.json) ile current-build `ntoskrnl.exe` içinde iki exact string hit verdi:
+- Guest-side minimal UTF-16 tarama [string-offsets.json](../../evidence/files/vm-tooling-staging/executionrequired-xref-20260411/string-offsets.json) ile current-build `ntoskrnl.exe` içinde iki exact string hit verdi:
   - `AllowAudioToEnableExecutionRequiredPowerRequests` -> file offset `0xBF6530`
   - `AllowSystemRequiredPowerRequests` -> file offset `0xBF65E0`
 - Her iki string de `INIT` section içinde yer alıyor; host-side PE eşlemesi bunları sırasıyla yaklaşık `0x140C7D530` ve `0x140C7D5E0` RVA/VA kümesine yerleştiriyor.

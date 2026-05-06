@@ -46,14 +46,14 @@ The point of this re-audit was not to make the records look stronger. It was to 
 
 ## Audit artifact
 
-- [nohuto-priority-v32-reaudit-20260331.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/nohuto-priority-v32-reaudit-20260331.json)
+- [nohuto-priority-v32-reaudit-20260331.json](../../registry-research-framework/audit/nohuto-priority-v32-reaudit-20260331.json)
 - Controlled cross-verification samples:
-  - [static-cross-verification-match-20260331.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/static-cross-verification-match-20260331.json)
-  - [static-cross-verification-conflict-20260331.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/static-cross-verification-conflict-20260331.json)
-  - [static-cross-verification-insufficient-20260331.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/static-cross-verification-insufficient-20260331.json)
-  - [serialize-timer-expiration-cross-verification-20260331.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/serialize-timer-expiration-cross-verification-20260331.json)
+  - [static-cross-verification-match-20260331.json](../../registry-research-framework/audit/static-cross-verification-match-20260331.json)
+  - [static-cross-verification-conflict-20260331.json](../../registry-research-framework/audit/static-cross-verification-conflict-20260331.json)
+  - [static-cross-verification-insufficient-20260331.json](../../registry-research-framework/audit/static-cross-verification-insufficient-20260331.json)
+  - [serialize-timer-expiration-cross-verification-20260331.json](../../registry-research-framework/audit/serialize-timer-expiration-cross-verification-20260331.json)
   - Raw controlled sample shards:
-    - [ghidra-match.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/cross-verification-controlled-20260331/ghidra-match.json)
-    - [ida-match.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/cross-verification-controlled-20260331/ida-match.json)
-    - [ida-conflict.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/cross-verification-controlled-20260331/ida-conflict.json)
-    - [ida-insufficient.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/cross-verification-controlled-20260331/ida-insufficient.json)
+    - [ghidra-match.json](../../registry-research-framework/audit/cross-verification-controlled-20260331/ghidra-match.json)
+    - [ida-match.json](../../registry-research-framework/audit/cross-verification-controlled-20260331/ida-match.json)
+    - [ida-conflict.json](../../registry-research-framework/audit/cross-verification-controlled-20260331/ida-conflict.json)
+    - [ida-insufficient.json](../../registry-research-framework/audit/cross-verification-controlled-20260331/ida-insufficient.json)

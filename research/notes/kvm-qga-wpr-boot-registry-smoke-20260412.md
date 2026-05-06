@@ -3,7 +3,7 @@
 Date: 2026-04-12
 Domain: `regprobe-win11-25h2-session`
 
-We migrated [scripts/vm-kvm/run-guest-wpr-boot-registry.py](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/scripts/vm-kvm/run-guest-wpr-boot-registry.py) onto the same QGA no-wait launch path that already works for the registry policy, local KD, and reboot-observation wrappers. The host wrapper now uploads generated guest launchers through [scripts/vm-kvm/qga-run-powershell.py](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/scripts/vm-kvm/qga-run-powershell.py), returns immediately, and then polls the host bridge for arm and collect summaries.
+We migrated [scripts/vm-kvm/run-guest-wpr-boot-registry.py](../../scripts/vm-kvm/run-guest-wpr-boot-registry.py) onto the same QGA no-wait launch path that already works for the registry policy, local KD, and reboot-observation wrappers. The host wrapper now uploads generated guest launchers through [scripts/vm-kvm/qga-run-powershell.py](../../scripts/vm-kvm/qga-run-powershell.py), returns immediately, and then polls the host bridge for arm and collect summaries.
 
 Smoke command:
 
@@ -33,7 +33,7 @@ What the smoke proved:
 - `normalization_status = ok`
 - `tracerpt_exit_code_indeterminate = true`
 
-Two concrete fixes came out of this pass. First, [scripts/vm/guest-tools/run-wpr-boot-registry-probe.ps1](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/scripts/vm/guest-tools/run-wpr-boot-registry-probe.ps1) now treats `tracerpt` runs with `exit_code = null` as indeterminate instead of automatically fatal when the CSV file exists and stdout reports success. That matters because this guest build does sometimes complete `tracerpt` successfully without a concrete exit code surfacing through the current process wrapper.
+Two concrete fixes came out of this pass. First, [scripts/vm/guest-tools/run-wpr-boot-registry-probe.ps1](../../scripts/vm/guest-tools/run-wpr-boot-registry-probe.ps1) now treats `tracerpt` runs with `exit_code = null` as indeterminate instead of automatically fatal when the CSV file exists and stdout reports success. That matters because this guest build does sometimes complete `tracerpt` successfully without a concrete exit code surfacing through the current process wrapper.
 
 Second, the guest normalizer no longer tries to build its root `[ordered]` bundle with inline `@($events)` and `@($events).Count` expressions. In this PowerShell environment those expressions can throw `Argument types do not match` when used directly inside the ordered hashtable literal. Precomputing the event array and count fixes that cleanly and made the normalizer stable on the retained hit-only CSV.
 
@@ -45,4 +45,4 @@ The WPR boot-registry lane is now on the same durable transport surface as the o
 
 ## Audit artifact
 
-- [kvm-qga-wpr-boot-registry-smoke-20260412.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/kvm-qga-wpr-boot-registry-smoke-20260412.json)
+- [kvm-qga-wpr-boot-registry-smoke-20260412.json](../../registry-research-framework/audit/kvm-qga-wpr-boot-registry-smoke-20260412.json)

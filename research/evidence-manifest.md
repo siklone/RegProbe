@@ -39,7 +39,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `explorer.disable-taskbar-widgets` | deprecated | Class E | `research/records/explorer.disable-taskbar-widgets.json` | - | `7c069b128c201c51dc876a74ec232bf5baeed744665aa3dfda6b699fab76fd17` | `4c5eb015b2133008c253c05310d676348c0f2bb0257da07c5a5e73a7b4ef793e` | 1 |
 | `network.optimize-smb` | deprecated | Class E | `research/records/network.optimize-smb.review.json` | - | `decce93c070e89b3027423fa959d381bd0cc9560cccae8bcaf0b9ae1c2389a0e` | `84c42e77bd367f7b0d744433779d5115665ec08b68e6b898c1fdd6446557e555` | 2 |
 | `power.disable-modern-standby` | deprecated | Class E | `research/records/power.disable-modern-standby.json` | - | `94f77c16d63ed1d774a09115a69d501d1827a5e21961082267db24cb063b069b` | `4c9e42cbeeb141e097c91feb15f0d3f25d872767973192e6c16cc719f69c9046` | 4 |
-| `power.disable-network-power-saving` | deprecated | Class E | `research/records/power.disable-network-power-saving.review.json` | - | `a8c4623edf78a913246f48e34fbc7d46b3de607d5bca5f4ac40f751095ed3bcd` | `bd0f5e2031c00c3ff5ec7c0e0f2a0006ada80a8f3d06b69900152776d6f62f3d` | 4 |
+| `power.disable-network-power-saving` | deprecated | Class E | `research/records/power.disable-network-power-saving.review.json` | - | `fc3b35a015a20f9d0a1d6dbf385c0300f0c10d262475a79bd10cfa443297e098` | `bd0f5e2031c00c3ff5ec7c0e0f2a0006ada80a8f3d06b69900152776d6f62f3d` | 4 |
 | `power.optimize-performance` | deprecated | Class E | `research/records/power.optimize-performance.review.json` | - | `d2b3ab008aa9df11fe6bc550e58cfba14a799aec84c1ffe6ca28a0d6b85be727` | `a8f91c58a282b3c88504eccae8f281d289033eb86a20f9c9238478804b922dd2` | 2 |
 | `privacy.deny-app-access` | deprecated | Class E | `research/records/privacy.deny-app-access.review.json` | - | `dced0a33e6da20eb010d9950e2bf43bf78fb956a48f18a3bfb84295a696223f5` | `bdb9f8de633925140c561be1deec5cb92a094f6eefb1993e7803befef76ea191` | 2 |
 | `privacy.disable-application-compatibility` | deprecated | Class E | `research/records/privacy.disable-application-compatibility.review.json` | - | `d3841e02a6c012ba16633c0c14c10234b5ab53abd4bcfe14943d9e471e2f80f0` | `649f6ab2af60c34b892e605a1ea1959d378ee196b2bc2d38d35ae456dc9b9fb1` | 3 |
@@ -211,7 +211,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `power.control.timer-rebase-threshold-on-drips-exit` | validated | Class B | `research/records/power.control.timer-rebase-threshold-on-drips-exit.json` | [evidence/records/power.control.timer-rebase-threshold-on-drips-exit](../evidence/records/power.control.timer-rebase-threshold-on-drips-exit) | `76adb993f6ac1fb8698609f5deeb5dc70ec9c28e5fdf8054f4f5e6a8f3686d12` | `54f7d729b7c430c4d8fa52ccb91256651e35c189b6c788691161084ffad23095` | 9 |
 | `power.disable-cpu-idle-states` | validated | Class A | `research/records/power.disable-cpu-idle-states.json` | [evidence/records/power.disable-cpu-idle-states](../evidence/records/power.disable-cpu-idle-states) | `0c4938318a9b502144c0f1ab5ed5ad201155466ae668ab8c1c3b654dfb294bb0` | `1798640a1a75847caf8a5c8caa6949c387e8118510e6cf57d7b76f44ed6a5a3b` | 14 |
 | `power.disable-fast-startup` | validated | Class A | `research/records/power.disable-fast-startup.review.json` | - | `5c6c3f5b3561a755cf0a46ca1ed0de6c44577464ad887e118bd5af655f0999bd` | `cf91e404c6ac19f5792f0a45c40cd8f2ed1504f0e633f6f09a2ec1cada0ec9b7` | 6 |
-| `power.disable-network-power-saving.policy` | validated | Class A | `research/records/power.disable-network-power-saving.policy.review.json` | [evidence/records/power.disable-network-power-saving.policy](../evidence/records/power.disable-network-power-saving.policy) | `e32c3137fa727a95880edb36fd632e80925cd340c630ba92a8e963354993c214` | `232e318df18a2327ad504a0c942305bb7c01eb9de6d469b2158aa056e1ac6d6a` | 3 |
+| `power.disable-network-power-saving.policy` | validated | Class A | `research/records/power.disable-network-power-saving.policy.review.json` | [evidence/records/power.disable-network-power-saving.policy](../evidence/records/power.disable-network-power-saving.policy) | `2a396fcba5e318a09ff608add6fa8d7d15d991ddc96b0d34609c7fd74c28a70b` | `232e318df18a2327ad504a0c942305bb7c01eb9de6d469b2158aa056e1ac6d6a` | 3 |
 | `power.disable-power-throttling` | validated | Class A | `research/records/power.disable-power-throttling.json` | - | `05d9d10bd486d058a8f1a3076c038a00c96222eba018d90c5548281975db71db` | `b78646de93a21d13b29902af3fba219292617267422db672a2be04241d37e94d` | 3 |
 | `power.disable-windows-search` | validated | Class A | `research/records/power.disable-windows-search.json` | - | `5a722966132e05610e5c1ac2e0dba6ad625124cc29365af83f1615015cda6255` | `98503aeb5448bb3f265d9e3ba710bf8e1b8092954776d1e853cde7fb0526511e` | 5 |
 | `power.hide-hibernate-option` | validated | Class A | `research/records/power.hide-hibernate-option.json` | - | `dc426788fdf83fd30fdb2abdc884707cf6d26f98dd8ff6d2198c2b755a200102` | `679ae02a4140c26f85c6c57787959e8ebd42c72e86e1c402ad95f6063698224d` | 6 |
@@ -647,7 +647,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `deprecated`
 - Evidence class: `Class E`
 - Source file: `research/records/power.disable-network-power-saving.review.json`
-- Source SHA256: `a8c4623edf78a913246f48e34fbc7d46b3de607d5bca5f4ac40f751095ed3bcd`
+- Source SHA256: `fc3b35a015a20f9d0a1d6dbf385c0300f0c10d262475a79bd10cfa443297e098`
 - Proof SHA256: `bd0f5e2031c00c3ff5ec7c0e0f2a0006ada80a8f3d06b69900152776d6f62f3d`
 
 **Summary:** Deprecated audit trail for the mixed network power-saving bundle. The official TCP/IP offload and MMCSS values are split into a child record; the opaque NetworkThrottlingIndex value remains tracked only here.
@@ -658,7 +658,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- | --- | --- |
 | `ms-task-offload` | `official-doc` | Microsoft Learn: Using Registry Values to Enable and Disable Task Offloading | [https://learn.microsoft.com/en-us/windows-hardware/drivers/network/using-registry-values-to-enable-and-disable-task-offloading](https://learn.microsoft.com/en-us/windows-hardware/drivers/network/using-registry-values-to-enable-and-disable-task-offloading) |
 | `ms-mmcss` | `official-doc` | Microsoft Learn: Multimedia Class Scheduler Service | [https://learn.microsoft.com/en-us/windows/win32/procthread/multimedia-class-scheduler-service](https://learn.microsoft.com/en-us/windows/win32/procthread/multimedia-class-scheduler-service) |
-| `app-power-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PowerTweakProvider.cs |
+| `app-power-provider` | `repo-code` | Historical app implementation before the policy split | app/Services/TweakProviders/PowerTweakProvider.cs |
 | `repo-power-doc` | `repo-doc` | Repo power notes | [Docs/power/power.md](../Docs/power/power.md) |
 
 **Validation proof**
@@ -5679,7 +5679,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Evidence class: `Class A`
 - Source file: `research/records/power.disable-network-power-saving.policy.review.json`
 - Evidence root: [evidence/records/power.disable-network-power-saving.policy](../evidence/records/power.disable-network-power-saving.policy)
-- Source SHA256: `e32c3137fa727a95880edb36fd632e80925cd340c630ba92a8e963354993c214`
+- Source SHA256: `2a396fcba5e318a09ff608add6fa8d7d15d991ddc96b0d34609c7fd74c28a70b`
 - Proof SHA256: `232e318df18a2327ad504a0c942305bb7c01eb9de6d469b2158aa056e1ac6d6a`
 
 **Summary:** This child record keeps only the documented DisableTaskOffload and SystemResponsiveness values. SystemResponsiveness is supported here for path plus rounding/clamping behavior; the opaque NetworkThrottlingIndex write remains outside this child in the deprecated parent audit trail.

@@ -13,7 +13,7 @@
     "casual_explanation": "This tweak tries to change a few different settings that affect network offloads and multimedia scheduling responsiveness.",
     "why_people_change_it": "People apply these settings when they want the adapter to stay on its less power-managed behavior during gaming, streaming, or other busy network use.",
     "tradeoffs_overview": "The bundle is not one single Windows setting. It mixes TCP/IP offload behavior with MMCSS scheduling behavior, and one of the values still lacks a primary Microsoft source in this review.",
-    "professional_notes": "Microsoft documents DisableTaskOffload under HKLM\\System\\CurrentControlSet\\Services\\TCPIP\\Parameters and SystemResponsiveness under HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile. The current app also writes NetworkThrottlingIndex in SystemProfile, but this review did not find a primary Microsoft source for that exact value name. The tweak title therefore overstates how cleanly these three writes map to one official 'disable network power saving' feature.",
+    "professional_notes": "Microsoft documents DisableTaskOffload under HKLM\\System\\CurrentControlSet\\Services\\TCPIP\\Parameters and SystemResponsiveness under HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile. The archived parent bundle also tracked NetworkThrottlingIndex in SystemProfile, but this review did not find a primary Microsoft source for that exact value name. The old title therefore overstated how cleanly these three writes mapped to one official 'disable network power saving' feature.",
     "targets": [
       {
         "target_id": "disable-task-offload",
@@ -84,35 +84,10 @@
     ]
   },
   "app_current_implementation": {
-    "status": "partially-matches",
+    "status": "not-mapped",
     "provider_source": "app/Services/TweakProviders/PowerTweakProvider.cs",
-    "notes": "The app writes DisableTaskOffload = 0, NetworkThrottlingIndex = 0xFFFFFFFF, and SystemResponsiveness = 10. Only two of these values are backed by primary Microsoft documentation in this review, and the bundle mixes separate feature areas.",
-    "writes": [
-      {
-        "target_id": "disable-task-offload",
-        "path": "HKLM\\System\\CurrentControlSet\\Services\\TCPIP\\Parameters",
-        "value_name": "DisableTaskOffload",
-        "value_type": "REG_DWORD",
-        "state_kind": "value",
-        "value": 0
-      },
-      {
-        "target_id": "network-throttling-index",
-        "path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile",
-        "value_name": "NetworkThrottlingIndex",
-        "value_type": "REG_DWORD",
-        "state_kind": "value",
-        "value": 4294967295
-      },
-      {
-        "target_id": "system-responsiveness",
-        "path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile",
-        "value_name": "SystemResponsiveness",
-        "value_type": "REG_DWORD",
-        "state_kind": "value",
-        "value": 10
-      }
-    ]
+    "notes": "The checked-in app no longer exposes this mixed parent bundle. It now surfaces the child power.disable-network-power-saving.policy record with DisableTaskOffload = 0 and SystemResponsiveness = 10; the opaque NetworkThrottlingIndex write is retained here only as historical audit context.",
+    "writes": []
   },
   "windows_defaults": [
     {
@@ -209,14 +184,14 @@
     {
       "evidence_id": "app-power-provider",
       "kind": "repo-code",
-      "title": "Current app implementation",
+      "title": "Historical app implementation before the policy split",
       "location": "app/Services/TweakProviders/PowerTweakProvider.cs",
-      "summary": "The provider writes DisableTaskOffload = 0, NetworkThrottlingIndex = 0xFFFFFFFF, and SystemResponsiveness = 10.",
+      "summary": "The previous mixed bundle wrote DisableTaskOffload = 0, NetworkThrottlingIndex = 0xFFFFFFFF, and SystemResponsiveness = 10. The checked-in app surface now uses the narrowed child record and excludes NetworkThrottlingIndex.",
       "supports": [
         "path",
         "value",
         "ui-mapping",
-        "app-mismatch"
+      "app-mismatch"
       ],
       "strength": "high"
     },

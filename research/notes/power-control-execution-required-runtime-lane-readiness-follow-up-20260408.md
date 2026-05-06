@@ -25,5 +25,5 @@ The remaining open gap for the execution-required pair is no longer runner desig
 
 ## Retained readiness audit
 
-- [runtime-trace-runner-readiness-20260408.md](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/runtime-trace-runner-readiness-20260408.md)
-- [runtime-trace-runner-readiness-20260408.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/runtime-trace-runner-readiness-20260408.json)
+- [runtime-trace-runner-readiness-20260408.md](../../registry-research-framework/audit/runtime-trace-runner-readiness-20260408.md)
+- [runtime-trace-runner-readiness-20260408.json](../../registry-research-framework/audit/runtime-trace-runner-readiness-20260408.json)

@@ -132,6 +132,9 @@ public sealed partial class TweakItemViewModel : ViewModelBase
             OnPropertyChanged(nameof(UserReferenceLinks));
             OnPropertyChanged(nameof(HasUserReferenceLinks));
             OnPropertyChanged(nameof(ProofLanes));
+            OnPropertyChanged(nameof(WhatWeKnowSummary));
+            OnPropertyChanged(nameof(WhatWeDoNotClaimSummary));
+            OnPropertyChanged(nameof(HasClaimBoundary));
             RaiseVerdictSnapshotChanged();
         };
         SubOptions = new ObservableCollection<TweakSubOption>();
@@ -845,6 +848,9 @@ public sealed partial class TweakItemViewModel : ViewModelBase
         OnPropertyChanged(nameof(PublicMutationGatingReason));
         OnPropertyChanged(nameof(ProofLanes));
         OnPropertyChanged(nameof(ProofBars));
+        OnPropertyChanged(nameof(WhatWeKnowSummary));
+        OnPropertyChanged(nameof(WhatWeDoNotClaimSummary));
+        OnPropertyChanged(nameof(HasClaimBoundary));
         OnPropertyChanged(nameof(ResearchHoldMessage));
         OnPropertyChanged(nameof(HasResearchHoldMessage));
         RaiseVerdictSnapshotChanged();
@@ -869,6 +875,9 @@ public sealed partial class TweakItemViewModel : ViewModelBase
         OnPropertyChanged(nameof(ResearchGateMessage));
         OnPropertyChanged(nameof(HasResearchGateMessage));
         OnPropertyChanged(nameof(RestoreDefaultTooltip));
+        OnPropertyChanged(nameof(WhatWeKnowSummary));
+        OnPropertyChanged(nameof(WhatWeDoNotClaimSummary));
+        OnPropertyChanged(nameof(HasClaimBoundary));
         OnPropertyChanged(nameof(ResearchHoldMessage));
         OnPropertyChanged(nameof(HasResearchHoldMessage));
         RaiseVerdictSnapshotChanged();
@@ -899,6 +908,9 @@ public sealed partial class TweakItemViewModel : ViewModelBase
         OnPropertyChanged(nameof(RollbackStoryText));
         OnPropertyChanged(nameof(ProofLanes));
         OnPropertyChanged(nameof(ProofBars));
+        OnPropertyChanged(nameof(WhatWeKnowSummary));
+        OnPropertyChanged(nameof(WhatWeDoNotClaimSummary));
+        OnPropertyChanged(nameof(HasClaimBoundary));
         OnPropertyChanged(nameof(ResearchHoldMessage));
         OnPropertyChanged(nameof(HasResearchHoldMessage));
     }

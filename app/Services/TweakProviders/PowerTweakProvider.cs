@@ -41,14 +41,13 @@ public sealed class PowerTweakProvider : BaseTweakProvider
         // Network Power Management
         yield return CreateRegistryValueBatchTweak(
             context,
-            "power.disable-network-power-saving",
-            "Disable Network Adapter Power Saving",
-            "Writes the current network-throttling and multimedia system-profile values used by the app's network power bundle.",
+            "power.disable-network-power-saving.policy",
+            "Network Power and Multimedia Responsiveness",
+            "Writes the documented DisableTaskOffload and MMCSS SystemResponsiveness values while excluding the archived opaque NetworkThrottlingIndex write.",
             TweakRiskLevel.Safe,
             new[]
             {
                 new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SYSTEM\CurrentControlSet\Services\Tcpip\Parameters", "DisableTaskOffload", RegistryValueKind.DWord, 0, RegistryView.Default),
-                new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile", "NetworkThrottlingIndex", RegistryValueKind.DWord, 0xFFFFFFFF, RegistryView.Default),
                 new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile", "SystemResponsiveness", RegistryValueKind.DWord, 10, RegistryView.Default)
             },
             requiresElevation: true);

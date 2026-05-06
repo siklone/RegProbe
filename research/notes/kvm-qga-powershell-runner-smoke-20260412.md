@@ -3,7 +3,7 @@
 Date: 2026-04-12
 Domain: `regprobe-win11-25h2-session`
 
-We now have a reusable host-side helper at [scripts/vm-kvm/qga-run-powershell.py](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/scripts/vm-kvm/qga-run-powershell.py) that uploads a local PowerShell script into the Windows guest through qemu guest agent `guest-file-*`, runs it through `guest-exec`, waits for completion, and optionally deletes the staged guest copy.
+We now have a reusable host-side helper at [scripts/vm-kvm/qga-run-powershell.py](../../scripts/vm-kvm/qga-run-powershell.py) that uploads a local PowerShell script into the Windows guest through qemu guest agent `guest-file-*`, runs it through `guest-exec`, waits for completion, and optionally deletes the staged guest copy.
 
 Smoke command:
 
@@ -39,4 +39,4 @@ This closes the fragile part of the KVM lane. We no longer need ISO short-name g
 
 ## Audit artifact
 
-- [kvm-qga-powershell-runner-smoke-20260412.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/kvm-qga-powershell-runner-smoke-20260412.json)
+- [kvm-qga-powershell-runner-smoke-20260412.json](../../registry-research-framework/audit/kvm-qga-powershell-runner-smoke-20260412.json)

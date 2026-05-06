@@ -6,7 +6,7 @@ Tool: `registry-research-framework/tools/run-power-control-lightweight-runtime-f
 
 ## Audit artifact
 
-- Retained audit summary: [`registry-research-framework/audit/power-control-lightweight-runtime-remaining-two-20260330.json`](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/power-control-lightweight-runtime-remaining-two-20260330.json)
+- Retained audit summary: [`registry-research-framework/audit/power-control-lightweight-runtime-remaining-two-20260330.json`](../../registry-research-framework/audit/power-control-lightweight-runtime-remaining-two-20260330.json)
 
 ## Scope
 

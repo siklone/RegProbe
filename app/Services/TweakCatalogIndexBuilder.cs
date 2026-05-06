@@ -19,10 +19,16 @@ internal static class TweakCatalogIndexBuilder
         bool isElevated)
     {
         var entries = new List<TweakCatalogEntry>();
+        var seenIds = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
         foreach (var provider in providers)
         {
             foreach (var tweak in provider.CreateTweaks(pipeline, context, isElevated))
             {
+                if (!string.IsNullOrWhiteSpace(tweak.Id) && !seenIds.Add(tweak.Id))
+                {
+                    continue;
+                }
+
                 entries.Add(new TweakCatalogEntry(provider.CategoryName, tweak));
             }
         }

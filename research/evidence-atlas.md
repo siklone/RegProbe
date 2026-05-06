@@ -31214,17 +31214,9 @@ Blocking issues:
 
 | Field | Value |
 | --- | --- |
-| Status | `partially-matches` |
+| Status | `not-mapped` |
 | Provider source | app/Services/TweakProviders/PowerTweakProvider.cs |
-| Notes | The app writes DisableTaskOffload = 0, NetworkThrottlingIndex = 0xFFFFFFFF, and SystemResponsiveness = 10. Only two of these values are backed by primary Microsoft documentation in this review, and the bundle mixes separate feature areas. |
-
-Current writes
-
-| Target | Path | Value | State | Kind | Notes |
-| --- | --- | --- | --- | --- | --- |
-| `disable-task-offload` | `HKLM\System\CurrentControlSet\Services\TCPIP\Parameters` | `DisableTaskOffload` | `0` | `value` |  |
-| `network-throttling-index` | `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile` | `NetworkThrottlingIndex` | `4294967295` | `value` |  |
-| `system-responsiveness` | `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile` | `SystemResponsiveness` | `10` | `value` |  |
+| Notes | The checked-in app no longer exposes this mixed parent bundle. It now surfaces the child power.disable-network-power-saving.policy record with DisableTaskOffload = 0 and SystemResponsiveness = 10; the opaque NetworkThrottlingIndex write is retained here only as historical audit context. |
 
 **Evidence class**
 
@@ -31322,7 +31314,7 @@ Windows Internals references:
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-task-offload` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Using Registry Values to Enable and Disable Task Offloading | [https://learn.microsoft.com/en-us/windows-hardware/drivers/network/using-registry-values-to-enable-and-disable-task-offloading](https://learn.microsoft.com/en-us/windows-hardware/drivers/network/using-registry-values-to-enable-and-disable-task-offloading) | `high` | path, value, allowed-values, behavior |
 | `ms-mmcss` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Multimedia Class Scheduler Service | [https://learn.microsoft.com/en-us/windows/win32/procthread/multimedia-class-scheduler-service](https://learn.microsoft.com/en-us/windows/win32/procthread/multimedia-class-scheduler-service) | `high` | path, value, behavior, allowed-values |
-| `app-power-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
+| `app-power-provider` | `repo-code` | `Current repo code` | Historical app implementation before the policy split | app/Services/TweakProviders/PowerTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
 | `repo-power-doc` | `repo-doc` | `Current repo docs` | Repo power notes | [Docs/power/power.md](../Docs/power/power.md) | `medium` | ui-mapping, app-mismatch |
 
 **Validation proof**

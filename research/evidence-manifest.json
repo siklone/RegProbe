@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-05T21:53:04.538482Z",
+  "generated_utc": "2026-05-06T18:25:14.336691Z",
   "source_index": "research/evidence-index.json",
   "summary": {
     "total_records": 356,
@@ -21,7 +21,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-05-05T21:53:03.384999Z",
+      "generated_utc": "2026-05-06T18:25:13.439420Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -2921,7 +2921,7 @@
         "action_state": "archived",
         "gating_reason": "Archived audit trail only. Keep this out of the normal tweak surface.",
         "confidence": "medium",
-        "app_mapping_status": "partially-matches",
+        "app_mapping_status": "not-mapped",
         "restore_story_known": true,
         "tested_build": "2026-03-31 child-record review snapshot",
         "anticheat_risk": {
@@ -2991,8 +2991,8 @@
         }
       },
       "source_file": "research/records/power.disable-network-power-saving.review.json",
-      "source_file_sha256": "a8c4623edf78a913246f48e34fbc7d46b3de607d5bca5f4ac40f751095ed3bcd",
-      "source_file_size_bytes": 13970,
+      "source_file_sha256": "fc3b35a015a20f9d0a1d6dbf385c0300f0c10d262475a79bd10cfa443297e098",
+      "source_file_size_bytes": 13283,
       "name": "Network Power and Multimedia Responsiveness Bundle",
       "category": "Power",
       "area": "Mixed Network and MMCSS Registry",
@@ -3012,35 +3012,10 @@
         ]
       },
       "app_current_implementation": {
-        "status": "partially-matches",
+        "status": "not-mapped",
         "provider_source": "app/Services/TweakProviders/PowerTweakProvider.cs",
-        "notes": "The app writes DisableTaskOffload = 0, NetworkThrottlingIndex = 0xFFFFFFFF, and SystemResponsiveness = 10. Only two of these values are backed by primary Microsoft documentation in this review, and the bundle mixes separate feature areas.",
-        "writes": [
-          {
-            "target_id": "disable-task-offload",
-            "path": "HKLM\\System\\CurrentControlSet\\Services\\TCPIP\\Parameters",
-            "value_name": "DisableTaskOffload",
-            "value_type": "REG_DWORD",
-            "state_kind": "value",
-            "value": 0
-          },
-          {
-            "target_id": "network-throttling-index",
-            "path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile",
-            "value_name": "NetworkThrottlingIndex",
-            "value_type": "REG_DWORD",
-            "state_kind": "value",
-            "value": 4294967295
-          },
-          {
-            "target_id": "system-responsiveness",
-            "path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile",
-            "value_name": "SystemResponsiveness",
-            "value_type": "REG_DWORD",
-            "state_kind": "value",
-            "value": 10
-          }
-        ]
+        "notes": "The checked-in app no longer exposes this mixed parent bundle. It now surfaces the child power.disable-network-power-saving.policy record with DisableTaskOffload = 0 and SystemResponsiveness = 10; the opaque NetworkThrottlingIndex write is retained here only as historical audit context.",
+        "writes": []
       },
       "targets": [
         {
@@ -3205,9 +3180,9 @@
         {
           "evidence_id": "app-power-provider",
           "kind": "repo-code",
-          "title": "Current app implementation",
+          "title": "Historical app implementation before the policy split",
           "location": "app/Services/TweakProviders/PowerTweakProvider.cs",
-          "summary": "The provider writes DisableTaskOffload = 0, NetworkThrottlingIndex = 0xFFFFFFFF, and SystemResponsiveness = 10.",
+          "summary": "The previous mixed bundle wrote DisableTaskOffload = 0, NetworkThrottlingIndex = 0xFFFFFFFF, and SystemResponsiveness = 10. The checked-in app surface now uses the narrowed child record and excludes NetworkThrottlingIndex.",
           "strength": "high",
           "supports": [
             "path",
@@ -59325,8 +59300,8 @@
         }
       },
       "source_file": "research/records/power.disable-network-power-saving.policy.review.json",
-      "source_file_sha256": "e32c3137fa727a95880edb36fd632e80925cd340c630ba92a8e963354993c214",
-      "source_file_size_bytes": 15099,
+      "source_file_sha256": "2a396fcba5e318a09ff608add6fa8d7d15d991ddc96b0d34609c7fd74c28a70b",
+      "source_file_size_bytes": 15087,
       "name": "Network Power and Multimedia Responsiveness",
       "category": "Power",
       "area": "TCP/IP offload + MMCSS policy",

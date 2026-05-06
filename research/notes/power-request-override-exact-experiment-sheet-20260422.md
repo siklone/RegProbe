@@ -90,16 +90,16 @@ python3 scripts/vm-kvm/run-power-request-override-reader-binding-pipeline.py
 
 ## Retained Handoff Bundle
 
-- [power-request-override-handoff-index-20260419.md](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/power-request-override-handoff-index-20260419.md)
-- [power-request-override-handoff-index-20260419.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/power-request-override-handoff-index-20260419.json)
-- [power-request-override-reader-binding-execution-manifest-20260419.md](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/power-request-override-reader-binding-execution-manifest-20260419.md)
-- [power-request-override-reader-binding-execution-manifest-20260419.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/power-request-override-reader-binding-execution-manifest-20260419.json)
-- [power-request-override-reader-binding-reacquire-plan-20260419.md](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/power-request-override-reader-binding-reacquire-plan-20260419.md)
-- [power-request-override-reader-binding-reacquire-plan-20260419.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/power-request-override-reader-binding-reacquire-plan-20260419.json)
-- [power-request-override-reader-binding-review-rubric-20260419.md](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/power-request-override-reader-binding-review-rubric-20260419.md)
-- [power-request-override-reader-binding-review-rubric-20260419.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/power-request-override-reader-binding-review-rubric-20260419.json)
-- [power-request-override-reader-binding-result-ledger-template-20260419.md](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/power-request-override-reader-binding-result-ledger-template-20260419.md)
-- [power-request-override-reader-binding-result-ledger-template-20260419.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/power-request-override-reader-binding-result-ledger-template-20260419.json)
+- [power-request-override-handoff-index-20260419.md](../../registry-research-framework/audit/power-request-override-handoff-index-20260419.md)
+- [power-request-override-handoff-index-20260419.json](../../registry-research-framework/audit/power-request-override-handoff-index-20260419.json)
+- [power-request-override-reader-binding-execution-manifest-20260419.md](../../registry-research-framework/audit/power-request-override-reader-binding-execution-manifest-20260419.md)
+- [power-request-override-reader-binding-execution-manifest-20260419.json](../../registry-research-framework/audit/power-request-override-reader-binding-execution-manifest-20260419.json)
+- [power-request-override-reader-binding-reacquire-plan-20260419.md](../../registry-research-framework/audit/power-request-override-reader-binding-reacquire-plan-20260419.md)
+- [power-request-override-reader-binding-reacquire-plan-20260419.json](../../registry-research-framework/audit/power-request-override-reader-binding-reacquire-plan-20260419.json)
+- [power-request-override-reader-binding-review-rubric-20260419.md](../../registry-research-framework/audit/power-request-override-reader-binding-review-rubric-20260419.md)
+- [power-request-override-reader-binding-review-rubric-20260419.json](../../registry-research-framework/audit/power-request-override-reader-binding-review-rubric-20260419.json)
+- [power-request-override-reader-binding-result-ledger-template-20260419.md](../../registry-research-framework/audit/power-request-override-reader-binding-result-ledger-template-20260419.md)
+- [power-request-override-reader-binding-result-ledger-template-20260419.json](../../registry-research-framework/audit/power-request-override-reader-binding-result-ledger-template-20260419.json)
 
 ## Success Conditions
 

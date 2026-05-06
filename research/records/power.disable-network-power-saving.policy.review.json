@@ -51,7 +51,7 @@
     "category": "Power",
     "area": "TCP/IP offload + MMCSS policy",
     "scope": "device",
-    "casual_explanation": "These settings affect whether TCP/IP task offloads stay enabled and how much CPU is reserved for multimedia responsiveness.",
+    "casual_explanation": "These settings affect whether TCP/IP task offloads stay enabled and how MMCSS reserves CPU for multimedia work.",
     "why_people_change_it": "People tune these values when they want the adapter to avoid extra network power-management behavior during gaming, streaming, or other timing-sensitive workloads.",
     "tradeoffs_overview": "The official TCP/IP offload and MMCSS values are documented by Microsoft, but this child record keeps the claims narrow. It excludes the opaque NetworkThrottlingIndex value that keeps the parent bundle from being publishable as a single preset.",
     "professional_notes": "Microsoft documents DisableTaskOffload under HKLM\\System\\CurrentControlSet\\Services\\TCPIP\\Parameters and SystemResponsiveness under HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile. For SystemResponsiveness, the Microsoft page proves the path and the rounding/clamping rules; this re-audit does not stretch that page into proof of NetworkThrottlingIndex semantics or of one universal stock default value across every build. The current app writes DisableTaskOffload = 0 and SystemResponsiveness = 10. The opaque NetworkThrottlingIndex write remains in the deprecated parent audit trail and is not part of this child record.",

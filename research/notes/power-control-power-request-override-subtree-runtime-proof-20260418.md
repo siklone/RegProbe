@@ -8,7 +8,7 @@
 
 ## Retained audit artifact
 
-- [power-request-override-runtime-proof-20260418.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/power-request-override-runtime-proof-20260418.json)
+- [power-request-override-runtime-proof-20260418.json](../../registry-research-framework/audit/power-request-override-runtime-proof-20260418.json)
 
 ## Why This Target
 

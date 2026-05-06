@@ -1,4 +1,4 @@
-﻿# WinDbg Pipe And Launch Matrix
+# WinDbg Pipe And Launch Matrix
 
 Date: `2026-04-03`
 
@@ -25,11 +25,11 @@ Date: `2026-04-03`
 
 ## Retained audit bundle
 
-- [windbg-pipe-launch-matrix-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-pipe-launch-matrix-20260403.json)
-- [windbg-pipe-launch-execution-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-pipe-launch-execution-20260403.json)
-- [windbg-pipe-launch-recovery-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-pipe-launch-recovery-20260403.json)
-- [windbg-pipe-launch-variants-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-pipe-launch-variants-20260403.json)
-- [windbg-pipe-launch-bundle-guest-restart-breakin-server-quiet-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-pipe-launch-bundle-guest-restart-breakin-server-quiet-20260403.json)
-- [windbg-pipe-launch-bundle-guest-restart-breakin-server-standard-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-pipe-launch-bundle-guest-restart-breakin-server-standard-20260403.json)
-- [windbg-pipe-launch-bundle-guest-restart-breakin-client-quiet-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-pipe-launch-bundle-guest-restart-breakin-client-quiet-20260403.json)
-- [windbg-pipe-launch-bundle-guest-restart-breakin-client-standard-20260403.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/windbg-pipe-launch-bundle-guest-restart-breakin-client-standard-20260403.json)
+- [windbg-pipe-launch-matrix-20260403.json](../../registry-research-framework/audit/windbg-pipe-launch-matrix-20260403.json)
+- [windbg-pipe-launch-execution-20260403.json](../../registry-research-framework/audit/windbg-pipe-launch-execution-20260403.json)
+- [windbg-pipe-launch-recovery-20260403.json](../../registry-research-framework/audit/windbg-pipe-launch-recovery-20260403.json)
+- [windbg-pipe-launch-variants-20260403.json](../../registry-research-framework/audit/windbg-pipe-launch-variants-20260403.json)
+- [windbg-pipe-launch-bundle-guest-restart-breakin-server-quiet-20260403.json](../../registry-research-framework/audit/windbg-pipe-launch-bundle-guest-restart-breakin-server-quiet-20260403.json)
+- [windbg-pipe-launch-bundle-guest-restart-breakin-server-standard-20260403.json](../../registry-research-framework/audit/windbg-pipe-launch-bundle-guest-restart-breakin-server-standard-20260403.json)
+- [windbg-pipe-launch-bundle-guest-restart-breakin-client-quiet-20260403.json](../../registry-research-framework/audit/windbg-pipe-launch-bundle-guest-restart-breakin-client-quiet-20260403.json)
+- [windbg-pipe-launch-bundle-guest-restart-breakin-client-standard-20260403.json](../../registry-research-framework/audit/windbg-pipe-launch-bundle-guest-restart-breakin-client-standard-20260403.json)

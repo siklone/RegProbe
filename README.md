@@ -185,6 +185,8 @@ That command reports:
 - whether requested values are present in tracked targets, app writes, profiles, or proof text
 - linked evidence and nearby source hits
 
+When you read an app card, treat the `CLAIM BOUNDARY` section as part of the product contract. `WHAT WE KNOW` describes the evidence-backed key, value, rollback, and promotion state. `WHAT WE DO NOT CLAIM` is just as important: key/value existence alone does not imply a benchmark win, ETW/WPR runtime proof, or complete undocumented semantics. For example, the app now surfaces `power.disable-network-power-saving.policy` for `DisableTaskOffload = 0` and `SystemResponsiveness = 10`, while the older mixed parent bundle keeps the opaque `NetworkThrottlingIndex` write only as archived audit context.
+
 ## Single Tweak App QA Plan
 
 If you want to retest one app card end to end, generate the exact QA commands before opening the desktop app.

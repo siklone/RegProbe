@@ -161,6 +161,24 @@ def main() -> int:
         "linger_seconds": args.linger_seconds,
     }
 
+    if not publish_zip.is_file():
+        summary.update(
+            {
+                "status": "error",
+                "error_kind": "publish-zip-missing",
+                "error": f"Publish zip does not exist: {publish_zip}",
+            }
+        )
+        payload = apply_summary_contract(
+            summary,
+            default_error_kind="publish-zip-missing",
+            default_recovery_action="inspect-local-publish-zip",
+            default_transport_blocker="local-input",
+            default_guest_health="stable",
+        )
+        print(json.dumps(payload, indent=2))
+        return 1
+
     prepare_returncode, prepare_payload = prepare_guest_paths(
         repo_root,
         guest_publish_zip_path=args.guest_publish_zip_path,
@@ -182,24 +200,6 @@ def main() -> int:
             default_recovery_action="inspect-guest-path-preparation",
             default_transport_blocker="qga-exec",
             default_guest_health="unknown",
-        )
-        print(json.dumps(payload, indent=2))
-        return 1
-
-    if not publish_zip.is_file():
-        summary.update(
-            {
-                "status": "error",
-                "error_kind": "publish-zip-missing",
-                "error": f"Publish zip does not exist: {publish_zip}",
-            }
-        )
-        payload = apply_summary_contract(
-            summary,
-            default_error_kind="publish-zip-missing",
-            default_recovery_action="inspect-local-publish-zip",
-            default_transport_blocker="local-input",
-            default_guest_health="stable",
         )
         print(json.dumps(payload, indent=2))
         return 1

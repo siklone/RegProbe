@@ -215,6 +215,16 @@ If you are validating the desktop app itself, `research qa-plan` is the next hop
 
 When you run several live promoted batches, treat `registry-research-framework/audit/promoted-app-qa-batch-latest.json` as the newest snapshot only. The cumulative view lives in `registry-research-framework/audit/promoted-app-qa-batch-history.jsonl` plus the paired coverage files `promoted-app-qa-coverage-latest.json` and `promoted-app-qa-coverage-latest.md`.
 
+## Evidence Card Quality Bar
+
+Do not treat a card as complete just because it names a key and a value. A reviewer should be able to answer three questions without reading your mind:
+
+1. What do we know? Name the exact key, value, app write, promotion state, rollback story, and evidence layer that backs the card.
+2. What do we not claim? Say when the record does not prove runtime behavior, benchmark impact, ETW/WPR activity, or full undocumented semantics.
+3. What happened to ambiguous values? Split or archive them instead of hiding them inside a broad app-ready bundle.
+
+Use `power.disable-network-power-saving.policy` as the current pattern. The shipped app card keeps `DisableTaskOffload = 0` and `SystemResponsiveness = 10`, but the older `power.disable-network-power-saving` parent is intentionally not mapped because its `NetworkThrottlingIndex` write is still opaque. That parent remains in research as audit history, not as a normal apply-ready tweak.
+
 ## Where To Find Keys and Values
 
 There is no single source of truth. Use several surfaces together.

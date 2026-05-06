@@ -69,5 +69,5 @@ The remaining gap for `AllowSystemRequiredPowerRequests` and `AllowAudioToEnable
 
 ## Audit artifacts
 
-- [execution-required-kvm-guest-control-gap-20260408.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/execution-required-kvm-guest-control-gap-20260408.json)
-- [execution-required-kvm-guest-control-gap-20260408.md](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/execution-required-kvm-guest-control-gap-20260408.md)
+- [execution-required-kvm-guest-control-gap-20260408.json](../../registry-research-framework/audit/execution-required-kvm-guest-control-gap-20260408.json)
+- [execution-required-kvm-guest-control-gap-20260408.md](../../registry-research-framework/audit/execution-required-kvm-guest-control-gap-20260408.md)

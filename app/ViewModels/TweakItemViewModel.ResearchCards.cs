@@ -24,6 +24,25 @@ public sealed partial class TweakItemViewModel
             ? choiceTweak.DefaultChoiceLabel ?? string.Empty
             : string.Empty;
 
+    public string WhatWeKnowSummary => TweakClaimBoundaryPresentation.BuildWhatWeKnowSummary(
+        FriendlyDescription,
+        ValidatedSemanticsSummary,
+        DocsSnapshotText,
+        RollbackSnapshotState,
+        RollbackStoryText);
+
+    public string WhatWeDoNotClaimSummary => TweakClaimBoundaryPresentation.BuildWhatWeDoNotClaimSummary(
+        VerdictState,
+        RuntimeSnapshotState,
+        RuntimeProofSummary,
+        UpstreamLineageSummary,
+        PublicMutationGatingReason,
+        IsMutationAllowed);
+
+    public bool HasClaimBoundary =>
+        !string.IsNullOrWhiteSpace(WhatWeKnowSummary)
+        || !string.IsNullOrWhiteSpace(WhatWeDoNotClaimSummary);
+
     public Brush EvidenceTierBackgroundBrush => TweakResearchPresentation.GetTierBackgroundBrush(EvidenceClassId);
 
     public Brush EvidenceTierBorderBrush => TweakResearchPresentation.GetTierBorderBrush(EvidenceClassId);

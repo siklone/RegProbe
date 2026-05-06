@@ -99,6 +99,10 @@ class VmKvmAppDeploySmokeTests(unittest.TestCase):
 
             with mock.patch.object(sys, "argv", argv), mock.patch.object(
                 app_deploy_smoke,
+                "prepare_guest_paths",
+                return_value=(0, {"status": "exited"}),
+            ), mock.patch.object(
+                app_deploy_smoke,
                 "run_qga_put_file",
                 return_value=(0, {"status": "uploaded"}),
             ), mock.patch.object(
@@ -124,6 +128,10 @@ class VmKvmAppDeploySmokeTests(unittest.TestCase):
             argv = ["run-guest-app-deploy-smoke.py", "--publish-zip", str(publish_zip)]
 
             with mock.patch.object(sys, "argv", argv), mock.patch.object(
+                app_deploy_smoke,
+                "prepare_guest_paths",
+                return_value=(0, {"status": "exited"}),
+            ), mock.patch.object(
                 app_deploy_smoke,
                 "run_qga_put_file",
                 return_value=(1, {"status": "error"}),
@@ -160,6 +168,10 @@ class VmKvmAppDeploySmokeTests(unittest.TestCase):
 
             with mock.patch.object(sys, "argv", argv), mock.patch.object(
                 app_deploy_smoke,
+                "prepare_guest_paths",
+                return_value=(0, {"status": "exited"}),
+            ), mock.patch.object(
+                app_deploy_smoke,
                 "run_qga_put_file",
                 return_value=(0, {"status": "uploaded"}),
             ), mock.patch.object(
@@ -184,6 +196,10 @@ class VmKvmAppDeploySmokeTests(unittest.TestCase):
 
             with mock.patch.object(sys, "argv", argv), mock.patch.object(
                 app_deploy_smoke,
+                "prepare_guest_paths",
+                return_value=(0, {"status": "exited"}),
+            ), mock.patch.object(
+                app_deploy_smoke,
                 "run_qga_put_file",
                 return_value=(0, {"status": "uploaded"}),
             ), mock.patch.object(
@@ -207,6 +223,10 @@ class VmKvmAppDeploySmokeTests(unittest.TestCase):
             argv = ["run-guest-app-deploy-smoke.py", "--publish-zip", str(publish_zip)]
 
             with mock.patch.object(sys, "argv", argv), mock.patch.object(
+                app_deploy_smoke,
+                "prepare_guest_paths",
+                return_value=(0, {"status": "exited"}),
+            ), mock.patch.object(
                 app_deploy_smoke,
                 "run_qga_put_file",
                 return_value=(0, {"status": "uploaded"}),
@@ -244,6 +264,10 @@ class VmKvmAppDeploySmokeTests(unittest.TestCase):
             argv = ["run-guest-app-deploy-smoke.py", "--publish-zip", str(publish_zip)]
 
             with mock.patch.object(sys, "argv", argv), mock.patch.object(
+                app_deploy_smoke,
+                "prepare_guest_paths",
+                return_value=(0, {"status": "exited"}),
+            ), mock.patch.object(
                 app_deploy_smoke,
                 "run_qga_put_file",
                 return_value=(0, {"status": "uploaded"}),
