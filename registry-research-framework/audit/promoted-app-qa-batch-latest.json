@@ -1,13 +1,13 @@
 {
-  "generated_utc": "2026-05-06T22:05:12Z",
+  "generated_utc": "2026-05-06T22:07:23Z",
   "status": "PASS",
   "selection": {
     "requested_ids": [
-      "privacy.disable-biometrics-logon",
-      "privacy.disable-camera",
-      "privacy.disable-cli-telemetry",
-      "privacy.disable-consumer-account-content",
-      "privacy.disable-copilot"
+      "system.disable-search-web-results",
+      "system.disable-storage-sense",
+      "system.disable-storage-sense-temp-cleanup",
+      "system.disable-store-open-with",
+      "system.dwm-disable-overlay-min-fps"
     ],
     "requested_categories": [],
     "limit_per_category": 1,
@@ -26,25 +26,25 @@
   "errors": [],
   "candidates": [
     {
-      "tweak_id": "privacy.disable-biometrics-logon",
-      "qa_tweak_id": "privacy.disable-biometrics-logon",
-      "candidate_id": "privacy.disable-biometrics-logon",
-      "record_id": "privacy.disable-biometrics-logon",
-      "category": "Privacy",
-      "name": "Biometric Sign-in",
-      "documentation": "research/records/privacy.disable-biometrics-logon.json",
+      "tweak_id": "system.disable-search-web-results",
+      "qa_tweak_id": "system.disable-search-web-results",
+      "candidate_id": "system.disable-search-web-results",
+      "record_id": "system.disable-search-web-results",
+      "category": "System",
+      "name": "Web Results in Windows Search",
+      "documentation": "research/records/system.disable-search-web-results.review.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.disable-biometrics-logon",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect system.disable-search-web-results",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-biometrics-logon' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-biometrics-logon.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-biometrics-logon' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-biometrics-logon.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-biometrics-logon' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-biometrics-logon.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-biometrics-logon' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-biometrics-logon.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.disable-biometrics-logon'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.disable-search-web-results' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.disable-search-web-results.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.disable-search-web-results' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.disable-search-web-results.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.disable-search-web-results' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.disable-search-web-results.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.disable-search-web-results' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.disable-search-web-results.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'system.disable-search-web-results'"
       },
       "expected_report": {
         "success": true,
@@ -85,25 +85,25 @@
       }
     },
     {
-      "tweak_id": "privacy.disable-camera",
-      "qa_tweak_id": "privacy.disable-camera",
-      "candidate_id": "privacy.disable-camera",
-      "record_id": "privacy.disable-camera",
-      "category": "Privacy",
-      "name": "Camera Device Use",
-      "documentation": "research/records/privacy.disable-camera.json",
+      "tweak_id": "system.disable-storage-sense",
+      "qa_tweak_id": "system.disable-storage-sense",
+      "candidate_id": "system.disable-storage-sense",
+      "record_id": "system.disable-storage-sense",
+      "category": "System",
+      "name": "Storage Sense Automatic Cleanup",
+      "documentation": "research/records/system.disable-storage-sense.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.disable-camera",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect system.disable-storage-sense",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-camera' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-camera.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-camera' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-camera.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-camera' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-camera.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-camera' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-camera.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.disable-camera'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.disable-storage-sense' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.disable-storage-sense.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.disable-storage-sense' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.disable-storage-sense.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.disable-storage-sense' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.disable-storage-sense.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.disable-storage-sense' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.disable-storage-sense.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'system.disable-storage-sense'"
       },
       "expected_report": {
         "success": true,
@@ -144,25 +144,25 @@
       }
     },
     {
-      "tweak_id": "privacy.disable-cli-telemetry",
-      "qa_tweak_id": "privacy.disable-cli-telemetry",
-      "candidate_id": "privacy.disable-cli-telemetry",
-      "record_id": "privacy.disable-cli-telemetry",
-      "category": "Privacy",
-      "name": "PowerShell and .NET CLI Telemetry Opt-Out",
-      "documentation": "research/records/privacy.disable-cli-telemetry.json",
+      "tweak_id": "system.disable-storage-sense-temp-cleanup",
+      "qa_tweak_id": "system.disable-storage-sense-temp-cleanup",
+      "candidate_id": "system.disable-storage-sense-temp-cleanup",
+      "record_id": "system.disable-storage-sense-temp-cleanup",
+      "category": "System",
+      "name": "Storage Sense Temporary Files Cleanup",
+      "documentation": "research/records/system.disable-storage-sense-temp-cleanup.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.disable-cli-telemetry",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect system.disable-storage-sense-temp-cleanup",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-cli-telemetry' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-cli-telemetry.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-cli-telemetry' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-cli-telemetry.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-cli-telemetry' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-cli-telemetry.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-cli-telemetry' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-cli-telemetry.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.disable-cli-telemetry'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.disable-storage-sense-temp-cleanup' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.disable-storage-sense-temp-cleanup.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.disable-storage-sense-temp-cleanup' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.disable-storage-sense-temp-cleanup.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.disable-storage-sense-temp-cleanup' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.disable-storage-sense-temp-cleanup.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.disable-storage-sense-temp-cleanup' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.disable-storage-sense-temp-cleanup.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'system.disable-storage-sense-temp-cleanup'"
       },
       "expected_report": {
         "success": true,
@@ -203,25 +203,25 @@
       }
     },
     {
-      "tweak_id": "privacy.disable-consumer-account-content",
-      "qa_tweak_id": "privacy.disable-consumer-account-content",
-      "candidate_id": "privacy.disable-consumer-account-content",
-      "record_id": "privacy.disable-consumer-account-content",
-      "category": "Privacy",
-      "name": "Cloud Consumer Account State Content",
-      "documentation": "research/records/privacy.disable-consumer-account-content.json",
+      "tweak_id": "system.disable-store-open-with",
+      "qa_tweak_id": "system.disable-store-open-with",
+      "candidate_id": "system.disable-store-open-with",
+      "record_id": "system.disable-store-open-with",
+      "category": "System",
+      "name": "Store in Open With",
+      "documentation": "research/records/system.disable-store-open-with.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.disable-consumer-account-content",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect system.disable-store-open-with",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-consumer-account-content' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-consumer-account-content.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-consumer-account-content' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-consumer-account-content.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-consumer-account-content' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-consumer-account-content.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-consumer-account-content' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-consumer-account-content.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.disable-consumer-account-content'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.disable-store-open-with' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.disable-store-open-with.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.disable-store-open-with' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.disable-store-open-with.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.disable-store-open-with' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.disable-store-open-with.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.disable-store-open-with' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.disable-store-open-with.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'system.disable-store-open-with'"
       },
       "expected_report": {
         "success": true,
@@ -262,25 +262,25 @@
       }
     },
     {
-      "tweak_id": "privacy.disable-copilot",
-      "qa_tweak_id": "privacy.disable-copilot",
-      "candidate_id": "privacy.disable-copilot",
-      "record_id": "privacy.disable-copilot",
-      "category": "Privacy",
-      "name": "Windows Copilot",
-      "documentation": "research/records/privacy.disable-copilot.json",
+      "tweak_id": "system.dwm-disable-overlay-min-fps",
+      "qa_tweak_id": "system.dwm-disable-overlay-min-fps",
+      "candidate_id": "system.dwm-disable-overlay-min-fps",
+      "record_id": "system.dwm-disable-overlay-min-fps",
+      "category": "System",
+      "name": "DWM Overlay Minimum FPS Check",
+      "documentation": "research/records/system.dwm-disable-overlay-min-fps.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.disable-copilot",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect system.dwm-disable-overlay-min-fps",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-copilot' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-copilot.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-copilot' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-copilot.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-copilot' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-copilot.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-copilot' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-copilot.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.disable-copilot'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.dwm-disable-overlay-min-fps' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.dwm-disable-overlay-min-fps.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.dwm-disable-overlay-min-fps' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.dwm-disable-overlay-min-fps.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.dwm-disable-overlay-min-fps' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.dwm-disable-overlay-min-fps.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.dwm-disable-overlay-min-fps' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.dwm-disable-overlay-min-fps.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'system.dwm-disable-overlay-min-fps'"
       },
       "expected_report": {
         "success": true,
@@ -323,7 +323,7 @@
   ],
   "run_results": [
     {
-      "tweak_id": "privacy.disable-biometrics-logon",
+      "tweak_id": "system.disable-search-web-results",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -357,19 +357,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "privacy.disable-biometrics-logon",
-        "TweakName": "Biometric Sign-in",
+        "TweakId": "system.disable-search-web-results",
+        "TweakName": "Web Results in Windows Search",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "privacy.disable-biometrics-logon",
-          "Name": "Biometric Sign-in",
-          "Category": "Privacy",
-          "Description": "Windows can let users sign in with biometrics like fingerprint or face through the credential provider. This policy controls whether that sign-in path is available.",
-          "FriendlyDescription": "Windows can let users sign in with biometrics like fingerprint or face through the credential provider. This policy controls whether that sign-in path is available.",
-          "RegistryPath": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Biometrics\\Credential Provider\\Enabled",
+          "TweakId": "system.disable-search-web-results",
+          "Name": "Web Results in Windows Search",
+          "Category": "System",
+          "Description": "Windows Search can send queries to the web and show web results in the search experience. This policy decides whether that web-connected behavior is allowed.",
+          "FriendlyDescription": "Windows Search can send queries to the web and show web results in the search experience. This policy decides whether that web-connected behavior is allowed.",
+          "RegistryPath": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search\\ConnectedSearchUseWeb",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -377,15 +377,15 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Windows can let users sign in with biometrics like fingerprint or face through the credential provider. This policy controls whether that sign-in path is available. Evidence: Local official ADMX defines the exact key and value name; local ADML confirms that disabling the policy blocks biometric sign-in for local computer logon. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: Windows Search can send queries to the web and show web results in the search experience. This policy decides whether that web-connected behavior is allowed. Evidence: Local official ADMX and ADML files document that the policy name is DoNotUseWebResults but the actual registry value name is ConnectedSearchUseWeb. The app now writes the documented value name and disable state exactly. Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "Local official ADMX defines the exact key and value name; local ADML confirms that disabling the policy blocks biometric sign-in for local computer logon.",
-              "Source": "Validation proof source: evidence/files/external/c/WINDOWS/PolicyDefinitions/Biometrics.admx"
+              "Summary": "Local official ADMX and ADML files document that the policy name is DoNotUseWebResults but the actual registry value name is ConnectedSearchUseWeb. The app now writes the documented value name and disable state exactly.",
+              "Source": "Validation proof source: evidence/files/missing/search-admx.md"
             },
             {
               "Key": "runtime",
@@ -416,8 +416,13 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Privacy (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\privacy\\privacy-verified.md",
+              "Title": "Docs: Win-Config",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\win-config\\batch-01.md#system.disable-search-web-results",
+              "Kind": "Docs"
+            },
+            {
+              "Title": "Docs: System (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\system\\system.md",
               "Kind": "Docs"
             }
           ]
@@ -426,10 +431,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Biometric sign-in disabled'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Web results disabled'.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Biometric sign-in disabled",
+            "TargetValue": "Web results disabled",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -438,8 +443,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Biometric sign-in disabled'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Biometrics\\Credential Provider\\Enabled: missing -> 0",
-                "TimestampText": "01:05:15"
+                "Message": "Current values do not match a named option. Selected option is 'Web results disabled'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search\\ConnectedSearchUseWeb: missing -> 0",
+                "TimestampText": "01:07:26"
               },
               {
                 "Action": "Apply",
@@ -466,8 +471,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Biometric sign-in disabled",
-            "TargetValue": "Biometric sign-in disabled",
+            "CurrentValue": "Web results disabled",
+            "TargetValue": "Web results disabled",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -476,20 +481,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Biometric sign-in disabled'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Biometrics\\Credential Provider\\Enabled: missing -> 0",
-                "TimestampText": "01:05:15"
+                "Message": "Current values do not match a named option. Selected option is 'Web results disabled'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search\\ConnectedSearchUseWeb: missing -> 0",
+                "TimestampText": "01:07:26"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Biometric sign-in disabled'.",
-                "TimestampText": "01:05:19"
+                "Message": "Applied preset 'Web results disabled'.",
+                "TimestampText": "01:07:29"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Biometric sign-in disabled'.",
-                "TimestampText": "01:05:19"
+                "Message": "Verified preset 'Web results disabled'.",
+                "TimestampText": "01:07:29"
               },
               {
                 "Action": "Rollback",
@@ -505,7 +510,7 @@
             "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Biometric sign-in disabled",
+            "TargetValue": "Web results disabled",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -514,36 +519,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Biometric sign-in disabled'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Biometrics\\Credential Provider\\Enabled: missing -> 0",
-                "TimestampText": "01:05:15"
+                "Message": "Current values do not match a named option. Selected option is 'Web results disabled'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search\\ConnectedSearchUseWeb: missing -> 0",
+                "TimestampText": "01:07:26"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Biometric sign-in disabled'.",
-                "TimestampText": "01:05:19"
+                "Message": "Applied preset 'Web results disabled'.",
+                "TimestampText": "01:07:29"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Biometric sign-in disabled'.",
-                "TimestampText": "01:05:19"
+                "Message": "Verified preset 'Web results disabled'.",
+                "TimestampText": "01:07:29"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "01:05:19"
+                "TimestampText": "01:07:29"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Biometric sign-in disabled'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Web results disabled'.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Biometric sign-in disabled",
+            "TargetValue": "Web results disabled",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -552,40 +557,40 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Biometric sign-in disabled'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Biometrics\\Credential Provider\\Enabled: missing -> 0",
-                "TimestampText": "01:05:19"
+                "Message": "Current values do not match a named option. Selected option is 'Web results disabled'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search\\ConnectedSearchUseWeb: missing -> 0",
+                "TimestampText": "01:07:29"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Biometric sign-in disabled'.",
-                "TimestampText": "01:05:19"
+                "Message": "Applied preset 'Web results disabled'.",
+                "TimestampText": "01:07:29"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Biometric sign-in disabled'.",
-                "TimestampText": "01:05:19"
+                "Message": "Verified preset 'Web results disabled'.",
+                "TimestampText": "01:07:29"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "01:05:19"
+                "TimestampText": "01:07:29"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T08:05:15.3112988+00:00",
-        "CompletedAtUtc": "2026-05-07T08:05:19.3764118+00:00"
+        "StartedAtUtc": "2026-05-07T08:07:26.2494321+00:00",
+        "CompletedAtUtc": "2026-05-07T08:07:29.3318484+00:00"
       },
-      "qa_tweak_id": "privacy.disable-biometrics-logon",
-      "candidate_id": "privacy.disable-biometrics-logon",
-      "card_name": "Biometric Sign-in",
-      "documentation": "research/records/privacy.disable-biometrics-logon.json"
+      "qa_tweak_id": "system.disable-search-web-results",
+      "candidate_id": "system.disable-search-web-results",
+      "card_name": "Web Results in Windows Search",
+      "documentation": "research/records/system.disable-search-web-results.review.json"
     },
     {
-      "tweak_id": "privacy.disable-camera",
+      "tweak_id": "system.disable-storage-sense",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -619,19 +624,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "privacy.disable-camera",
-        "TweakName": "Camera Device Use",
+        "TweakId": "system.disable-storage-sense",
+        "TweakName": "Storage Sense Automatic Cleanup",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "privacy.disable-camera",
-          "Name": "Camera Device Use",
-          "Category": "Privacy",
-          "Description": "Windows can allow or block the use of camera devices on the machine. This policy decides whether cameras are usable at all.",
-          "FriendlyDescription": "Windows can allow or block the use of camera devices on the machine. This policy decides whether cameras are usable at all.",
-          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Camera\\AllowCamera",
+          "TweakId": "system.disable-storage-sense",
+          "Name": "Storage Sense Automatic Cleanup",
+          "Category": "System",
+          "Description": "Storage Sense is Windows' automatic cleanup feature for temporary and unneeded files. This policy decides whether the feature is allowed at all on the device.",
+          "FriendlyDescription": "Storage Sense is Windows' automatic cleanup feature for temporary and unneeded files. This policy decides whether the feature is allowed at all on the device.",
+          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Windows\\StorageSense\\AllowStorageSenseGlobal",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -639,15 +644,15 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Windows can allow or block the use of camera devices on the machine. This policy decides whether cameras are usable at all. Evidence: The local official Microsoft ADMX file names the same machine policy surface used by the app. The paired Camera.adml help text states that enabling or not configuring the policy leaves camera devices enabled, while disabling the policy disables camera devices. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: Storage Sense is Windows' automatic cleanup feature for temporary and unneeded files. This policy decides whether the feature is allowed at all on the device. Evidence: Local official ADMX defines the exact key and value name; local ADML confirms that the disabled policy state turns Storage Sense off for the machine. Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "The local official Microsoft ADMX file names the same machine policy surface used by the app. The paired Camera.adml help text states that enabling or not configuring the policy leaves camera devices enabled, while disabling the policy disables camera devices.",
-              "Source": "Validation proof source: evidence/files/external/c/WINDOWS/PolicyDefinitions/Camera.admx"
+              "Summary": "Local official ADMX defines the exact key and value name; local ADML confirms that the disabled policy state turns Storage Sense off for the machine.",
+              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/StorageSense.admx"
             },
             {
               "Key": "runtime",
@@ -678,8 +683,13 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Privacy (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\privacy\\privacy-verified.md",
+              "Title": "Docs: Win-Config",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\win-config\\batch-01.md#system.disable-storage-sense",
+              "Kind": "Docs"
+            },
+            {
+              "Title": "Docs: System (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\system\\system.md",
               "Kind": "Docs"
             }
           ]
@@ -688,10 +698,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Camera disabled'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Storage Sense disabled'.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Camera disabled",
+            "TargetValue": "Storage Sense disabled",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -700,8 +710,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Camera disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Camera\\AllowCamera: missing -> 0",
-                "TimestampText": "01:05:25"
+                "Message": "Current values do not match a named option. Selected option is 'Storage Sense disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\StorageSense\\AllowStorageSenseGlobal: missing -> 0",
+                "TimestampText": "01:07:35"
               },
               {
                 "Action": "Apply",
@@ -728,8 +738,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Camera disabled",
-            "TargetValue": "Camera disabled",
+            "CurrentValue": "Storage Sense disabled",
+            "TargetValue": "Storage Sense disabled",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -738,20 +748,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Camera disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Camera\\AllowCamera: missing -> 0",
-                "TimestampText": "01:05:25"
+                "Message": "Current values do not match a named option. Selected option is 'Storage Sense disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\StorageSense\\AllowStorageSenseGlobal: missing -> 0",
+                "TimestampText": "01:07:35"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Camera disabled'.",
-                "TimestampText": "01:05:28"
+                "Message": "Applied preset 'Storage Sense disabled'.",
+                "TimestampText": "01:07:38"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Camera disabled'.",
-                "TimestampText": "01:05:28"
+                "Message": "Verified preset 'Storage Sense disabled'.",
+                "TimestampText": "01:07:38"
               },
               {
                 "Action": "Rollback",
@@ -767,7 +777,7 @@
             "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Camera disabled",
+            "TargetValue": "Storage Sense disabled",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -776,36 +786,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Camera disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Camera\\AllowCamera: missing -> 0",
-                "TimestampText": "01:05:25"
+                "Message": "Current values do not match a named option. Selected option is 'Storage Sense disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\StorageSense\\AllowStorageSenseGlobal: missing -> 0",
+                "TimestampText": "01:07:35"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Camera disabled'.",
-                "TimestampText": "01:05:28"
+                "Message": "Applied preset 'Storage Sense disabled'.",
+                "TimestampText": "01:07:38"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Camera disabled'.",
-                "TimestampText": "01:05:28"
+                "Message": "Verified preset 'Storage Sense disabled'.",
+                "TimestampText": "01:07:38"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "01:05:28"
+                "TimestampText": "01:07:38"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Camera disabled'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Storage Sense disabled'.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Camera disabled",
+            "TargetValue": "Storage Sense disabled",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -814,40 +824,40 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Camera disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Camera\\AllowCamera: missing -> 0",
-                "TimestampText": "01:05:28"
+                "Message": "Current values do not match a named option. Selected option is 'Storage Sense disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\StorageSense\\AllowStorageSenseGlobal: missing -> 0",
+                "TimestampText": "01:07:38"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Camera disabled'.",
-                "TimestampText": "01:05:28"
+                "Message": "Applied preset 'Storage Sense disabled'.",
+                "TimestampText": "01:07:38"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Camera disabled'.",
-                "TimestampText": "01:05:28"
+                "Message": "Verified preset 'Storage Sense disabled'.",
+                "TimestampText": "01:07:38"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "01:05:28"
+                "TimestampText": "01:07:38"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T08:05:25.5391005+00:00",
-        "CompletedAtUtc": "2026-05-07T08:05:28.6511716+00:00"
+        "StartedAtUtc": "2026-05-07T08:07:35.5931615+00:00",
+        "CompletedAtUtc": "2026-05-07T08:07:38.66543+00:00"
       },
-      "qa_tweak_id": "privacy.disable-camera",
-      "candidate_id": "privacy.disable-camera",
-      "card_name": "Camera Device Use",
-      "documentation": "research/records/privacy.disable-camera.json"
+      "qa_tweak_id": "system.disable-storage-sense",
+      "candidate_id": "system.disable-storage-sense",
+      "card_name": "Storage Sense Automatic Cleanup",
+      "documentation": "research/records/system.disable-storage-sense.json"
     },
     {
-      "tweak_id": "privacy.disable-cli-telemetry",
+      "tweak_id": "system.disable-storage-sense-temp-cleanup",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -881,19 +891,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "privacy.disable-cli-telemetry",
-        "TweakName": "PowerShell and .NET CLI Telemetry Opt-Out",
+        "TweakId": "system.disable-storage-sense-temp-cleanup",
+        "TweakName": "Storage Sense Temporary Files Cleanup",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "privacy.disable-cli-telemetry",
-          "Name": "PowerShell and .NET CLI Telemetry Opt-Out",
-          "Category": "Privacy",
-          "Description": "PowerShell and the .NET CLI can send telemetry about tool usage. This tweak sets the current user's opt-out environment variables so new shells and CLI sessions stop sending that telemetry.",
-          "FriendlyDescription": "PowerShell and the .NET CLI can send telemetry about tool usage. This tweak sets the current user's opt-out environment variables so new shells and CLI sessions stop sending that telemetry.",
-          "RegistryPath": "",
+          "TweakId": "system.disable-storage-sense-temp-cleanup",
+          "Name": "Storage Sense Temporary Files Cleanup",
+          "Category": "System",
+          "Description": "Storage Sense can automatically clean temporary files when Windows decides it is helpful. This policy controls that specific part of the cleanup behavior.",
+          "FriendlyDescription": "Storage Sense can automatically clean temporary files when Windows decides it is helpful. This policy controls that specific part of the cleanup behavior.",
+          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Windows\\StorageSense\\AllowStorageSenseTemporaryFilesCleanup",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -901,15 +911,15 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: PowerShell and the .NET CLI can send telemetry about tool usage. This tweak sets the current user's opt-out environment variables so new shells and CLI sessions stop sending that telemetry. Evidence: Microsoft documents both CLI telemetry opt-out variables and the accepted opt-out values. Microsoft also documents that persistent user environment variables live under HKEY_USERS\\<user>\\Environment, which corresponds to HKCU\\Environment for the current use... Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: Storage Sense can automatically clean temporary files when Windows decides it is helpful. This policy controls that specific part of the cleanup behavior. Evidence: Local official ADMX defines the exact key and value name; local ADML confirms that the disabled policy state prevents Storage Sense from deleting temporary files. Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "Microsoft documents both CLI telemetry opt-out variables and the accepted opt-out values. Microsoft also documents that persistent user environment variables live under HKEY_USERS\\<user>\\Environment, which corresponds to HKCU\\Environment for the current use...",
-              "Source": "Validation proof source: https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_environment_variables?view=powershell-7.5"
+              "Summary": "Local official ADMX defines the exact key and value name; local ADML confirms that the disabled policy state prevents Storage Sense from deleting temporary files.",
+              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/StorageSense.admx"
             },
             {
               "Key": "runtime",
@@ -940,8 +950,13 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Privacy (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\privacy\\privacy-verified.md",
+              "Title": "Docs: Win-Config",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\win-config\\batch-01.md#system.disable-storage-sense-temp-cleanup",
+              "Kind": "Docs"
+            },
+            {
+              "Title": "Docs: System (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\system\\system.md",
               "Kind": "Docs"
             }
           ]
@@ -950,10 +965,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Detected 0 of 2 values (matches: 0, missing: 2).",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Temporary files cleanup disabled'.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Unknown",
-            "TargetValue": "Multiple values",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Temporary files cleanup disabled",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -962,8 +977,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 0 of 2 values (matches: 0, missing: 2).\nEntries:\n- HKCU\\Environment\\DOTNET_CLI_TELEMETRY_OPTOUT: missing\n- HKCU\\Environment\\POWERSHELL_TELEMETRY_OPTOUT: missing",
-                "TimestampText": "01:05:34"
+                "Message": "Current values do not match a named option. Selected option is 'Temporary files cleanup disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\StorageSense\\AllowStorageSenseTemporaryFilesCleanup: missing -> 0",
+                "TimestampText": "01:07:45"
               },
               {
                 "Action": "Apply",
@@ -990,8 +1005,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Multiple values",
-            "TargetValue": "Multiple values",
+            "CurrentValue": "Temporary files cleanup disabled",
+            "TargetValue": "Temporary files cleanup disabled",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1000,20 +1015,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 0 of 2 values (matches: 0, missing: 2).\nEntries:\n- HKCU\\Environment\\DOTNET_CLI_TELEMETRY_OPTOUT: missing\n- HKCU\\Environment\\POWERSHELL_TELEMETRY_OPTOUT: missing",
-                "TimestampText": "01:05:34"
+                "Message": "Current values do not match a named option. Selected option is 'Temporary files cleanup disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\StorageSense\\AllowStorageSenseTemporaryFilesCleanup: missing -> 0",
+                "TimestampText": "01:07:45"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Updated 2 values.",
-                "TimestampText": "01:05:34"
+                "Message": "Applied preset 'Temporary files cleanup disabled'.",
+                "TimestampText": "01:07:47"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified desired values.",
-                "TimestampText": "01:05:34"
+                "Message": "Verified preset 'Temporary files cleanup disabled'.",
+                "TimestampText": "01:07:47"
               },
               {
                 "Action": "Rollback",
@@ -1028,8 +1043,8 @@
             "AppliedStatus": "NotApplied",
             "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Multiple values",
-            "TargetValue": "Multiple values",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Temporary files cleanup disabled",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1038,36 +1053,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 0 of 2 values (matches: 0, missing: 2).\nEntries:\n- HKCU\\Environment\\DOTNET_CLI_TELEMETRY_OPTOUT: missing\n- HKCU\\Environment\\POWERSHELL_TELEMETRY_OPTOUT: missing",
-                "TimestampText": "01:05:34"
+                "Message": "Current values do not match a named option. Selected option is 'Temporary files cleanup disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\StorageSense\\AllowStorageSenseTemporaryFilesCleanup: missing -> 0",
+                "TimestampText": "01:07:45"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Updated 2 values.",
-                "TimestampText": "01:05:34"
+                "Message": "Applied preset 'Temporary files cleanup disabled'.",
+                "TimestampText": "01:07:47"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified desired values.",
-                "TimestampText": "01:05:34"
+                "Message": "Verified preset 'Temporary files cleanup disabled'.",
+                "TimestampText": "01:07:47"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "01:05:35"
+                "TimestampText": "01:07:48"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Detected 0 of 2 values (matches: 0, missing: 2).",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Temporary files cleanup disabled'.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Multiple values",
-            "TargetValue": "Multiple values",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Temporary files cleanup disabled",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1076,40 +1091,40 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 0 of 2 values (matches: 0, missing: 2).\nEntries:\n- HKCU\\Environment\\DOTNET_CLI_TELEMETRY_OPTOUT: missing\n- HKCU\\Environment\\POWERSHELL_TELEMETRY_OPTOUT: missing",
-                "TimestampText": "01:05:35"
+                "Message": "Current values do not match a named option. Selected option is 'Temporary files cleanup disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\StorageSense\\AllowStorageSenseTemporaryFilesCleanup: missing -> 0",
+                "TimestampText": "01:07:48"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Updated 2 values.",
-                "TimestampText": "01:05:34"
+                "Message": "Applied preset 'Temporary files cleanup disabled'.",
+                "TimestampText": "01:07:47"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified desired values.",
-                "TimestampText": "01:05:34"
+                "Message": "Verified preset 'Temporary files cleanup disabled'.",
+                "TimestampText": "01:07:47"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "01:05:35"
+                "TimestampText": "01:07:48"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T08:05:34.8783705+00:00",
-        "CompletedAtUtc": "2026-05-07T08:05:35.1358027+00:00"
+        "StartedAtUtc": "2026-05-07T08:07:45.142392+00:00",
+        "CompletedAtUtc": "2026-05-07T08:07:48.2209585+00:00"
       },
-      "qa_tweak_id": "privacy.disable-cli-telemetry",
-      "candidate_id": "privacy.disable-cli-telemetry",
-      "card_name": "PowerShell and .NET CLI Telemetry Opt-Out",
-      "documentation": "research/records/privacy.disable-cli-telemetry.json"
+      "qa_tweak_id": "system.disable-storage-sense-temp-cleanup",
+      "candidate_id": "system.disable-storage-sense-temp-cleanup",
+      "card_name": "Storage Sense Temporary Files Cleanup",
+      "documentation": "research/records/system.disable-storage-sense-temp-cleanup.json"
     },
     {
-      "tweak_id": "privacy.disable-consumer-account-content",
+      "tweak_id": "system.disable-store-open-with",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -1143,19 +1158,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "privacy.disable-consumer-account-content",
-        "TweakName": "Cloud Consumer Account State Content",
+        "TweakId": "system.disable-store-open-with",
+        "TweakName": "Store in Open With",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "privacy.disable-consumer-account-content",
-          "Name": "Cloud Consumer Account State Content",
-          "Category": "Privacy",
-          "Description": "Some Windows experiences can use cloud-backed consumer account state content. This policy decides whether those experiences may use that content or must fall back to default content instead.",
-          "FriendlyDescription": "Some Windows experiences can use cloud-backed consumer account state content. This policy decides whether those experiences may use that content or must fall back to default content instead.",
-          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableConsumerAccountStateContent",
+          "TweakId": "system.disable-store-open-with",
+          "Name": "Store in Open With",
+          "Category": "System",
+          "Description": "When Windows cannot find an app for a file type, it can offer a Store-based option in the Open With dialog. This policy decides whether that Store option is available.",
+          "FriendlyDescription": "When Windows cannot find an app for a file type, it can offer a Store-based option in the Open With dialog. This policy decides whether that Store option is available.",
+          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer\\NoUseStoreOpenWith",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -1163,15 +1178,15 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Some Windows experiences can use cloud-backed consumer account state content. This policy decides whether those experiences may use that content or must fall back to default content instead. Evidence: The local official Microsoft ADMX file names the same policy key and value name that the app writes and confirms the 1/0 mapping. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: When Windows cannot find an app for a file type, it can offer a Store-based option in the Open With dialog. This policy decides whether that Store option is available. Evidence: Local official ADMX defines the exact machine-policy key and value name; local ADML confirms that enabling the policy removes the Store entry from the Open With dialog. Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "The local official Microsoft ADMX file names the same policy key and value name that the app writes and confirms the 1/0 mapping.",
-              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/CloudContent.admx"
+              "Summary": "Local official ADMX defines the exact machine-policy key and value name; local ADML confirms that enabling the policy removes the Store entry from the Open With dialog.",
+              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/ICM.admx"
             },
             {
               "Key": "runtime",
@@ -1202,8 +1217,8 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Privacy (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\privacy\\privacy-verified.md",
+              "Title": "Docs: System (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\system\\system.md",
               "Kind": "Docs"
             }
           ]
@@ -1212,10 +1227,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Cloud consumer content disabled'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Store option blocked'.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Cloud consumer content disabled",
+            "TargetValue": "Store option blocked",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -1224,8 +1239,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Cloud consumer content disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableConsumerAccountStateContent: missing -> 1",
-                "TimestampText": "01:05:41"
+                "Message": "Current values do not match a named option. Selected option is 'Store option blocked'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer\\NoUseStoreOpenWith: missing -> 1",
+                "TimestampText": "01:07:54"
               },
               {
                 "Action": "Apply",
@@ -1252,8 +1267,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Cloud consumer content disabled",
-            "TargetValue": "Cloud consumer content disabled",
+            "CurrentValue": "Store option blocked",
+            "TargetValue": "Store option blocked",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1262,20 +1277,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Cloud consumer content disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableConsumerAccountStateContent: missing -> 1",
-                "TimestampText": "01:05:41"
+                "Message": "Current values do not match a named option. Selected option is 'Store option blocked'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer\\NoUseStoreOpenWith: missing -> 1",
+                "TimestampText": "01:07:54"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Cloud consumer content disabled'.",
-                "TimestampText": "01:05:44"
+                "Message": "Applied preset 'Store option blocked'.",
+                "TimestampText": "01:07:57"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Cloud consumer content disabled'.",
-                "TimestampText": "01:05:44"
+                "Message": "Verified preset 'Store option blocked'.",
+                "TimestampText": "01:07:57"
               },
               {
                 "Action": "Rollback",
@@ -1291,7 +1306,7 @@
             "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Cloud consumer content disabled",
+            "TargetValue": "Store option blocked",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1300,36 +1315,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Cloud consumer content disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableConsumerAccountStateContent: missing -> 1",
-                "TimestampText": "01:05:41"
+                "Message": "Current values do not match a named option. Selected option is 'Store option blocked'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer\\NoUseStoreOpenWith: missing -> 1",
+                "TimestampText": "01:07:54"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Cloud consumer content disabled'.",
-                "TimestampText": "01:05:44"
+                "Message": "Applied preset 'Store option blocked'.",
+                "TimestampText": "01:07:57"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Cloud consumer content disabled'.",
-                "TimestampText": "01:05:44"
+                "Message": "Verified preset 'Store option blocked'.",
+                "TimestampText": "01:07:57"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "01:05:44"
+                "TimestampText": "01:07:57"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Cloud consumer content disabled'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Store option blocked'.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Cloud consumer content disabled",
+            "TargetValue": "Store option blocked",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1338,40 +1353,40 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Cloud consumer content disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableConsumerAccountStateContent: missing -> 1",
-                "TimestampText": "01:05:44"
+                "Message": "Current values do not match a named option. Selected option is 'Store option blocked'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer\\NoUseStoreOpenWith: missing -> 1",
+                "TimestampText": "01:07:57"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Cloud consumer content disabled'.",
-                "TimestampText": "01:05:44"
+                "Message": "Applied preset 'Store option blocked'.",
+                "TimestampText": "01:07:57"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Cloud consumer content disabled'.",
-                "TimestampText": "01:05:44"
+                "Message": "Verified preset 'Store option blocked'.",
+                "TimestampText": "01:07:57"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "01:05:44"
+                "TimestampText": "01:07:57"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T08:05:41.3238427+00:00",
-        "CompletedAtUtc": "2026-05-07T08:05:44.4031412+00:00"
+        "StartedAtUtc": "2026-05-07T08:07:54.2724854+00:00",
+        "CompletedAtUtc": "2026-05-07T08:07:57.3702558+00:00"
       },
-      "qa_tweak_id": "privacy.disable-consumer-account-content",
-      "candidate_id": "privacy.disable-consumer-account-content",
-      "card_name": "Cloud Consumer Account State Content",
-      "documentation": "research/records/privacy.disable-consumer-account-content.json"
+      "qa_tweak_id": "system.disable-store-open-with",
+      "candidate_id": "system.disable-store-open-with",
+      "card_name": "Store in Open With",
+      "documentation": "research/records/system.disable-store-open-with.json"
     },
     {
-      "tweak_id": "privacy.disable-copilot",
+      "tweak_id": "system.dwm-disable-overlay-min-fps",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -1405,19 +1420,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "privacy.disable-copilot",
-        "TweakName": "Windows Copilot",
+        "TweakId": "system.dwm-disable-overlay-min-fps",
+        "TweakName": "DWM Overlay Minimum FPS Check",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "privacy.disable-copilot",
-          "Name": "Windows Copilot",
-          "Category": "Privacy",
-          "Description": "Windows Copilot is the built-in AI assistant experience in Windows. This policy decides whether that experience is available to the signed-in user.",
-          "FriendlyDescription": "Windows Copilot is the built-in AI assistant experience in Windows. This policy decides whether that experience is available to the signed-in user.",
-          "RegistryPath": "HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsCopilot\\TurnOffWindowsCopilot",
+          "TweakId": "system.dwm-disable-overlay-min-fps",
+          "Name": "DWM Overlay Minimum FPS Check",
+          "Category": "System",
+          "Description": "Windows can use hardware overlays for some content, and one of the checks looks at how fast the surface is animating. This setting turns that minimum-FPS check off.",
+          "FriendlyDescription": "Windows can use hardware overlays for some content, and one of the checks looks at how fast the surface is animating. This setting turns that minimum-FPS check off.",
+          "RegistryPath": "HKLM\\SOFTWARE\\Microsoft\\Windows\\Dwm\\OverlayMinFPS",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -1425,22 +1440,22 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Windows Copilot is the built-in AI assistant experience in Windows. This policy decides whether that experience is available to the signed-in user. Evidence: The WindowsAI Policy CSP page explicitly names the exact user policy path and value name the app writes, defines the 0/1 semantics, and includes the deprecation and scope caveat for the newer Copilot experience. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: Windows can use hardware overlays for some content, and one of the checks looks at how fast the surface is animating. This setting turns that minimum-FPS check off. Evidence: Microsoft Learn documents the exact DWM runtime path and explains that setting OverlayMinFPS to 0 disables the minimum frame-rate check used for overlay assignment. Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "The WindowsAI Policy CSP page explicitly names the exact user policy path and value name the app writes, defines the 0/1 semantics, and includes the deprecation and scope caveat for the newer Copilot experience.",
-              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-windowsai#turnoffwindowscopilot"
+              "Summary": "Microsoft Learn documents the exact DWM runtime path and explains that setting OverlayMinFPS to 0 disables the minimum frame-rate check used for overlay assignment.",
+              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows/win32/dwm/registry-values"
             },
             {
               "Key": "runtime",
               "Label": "RUNTIME",
               "State": "ready",
-              "Summary": "A same-day fast guest Ghidra retry for `TurnOffWindowsCopilot` failed in `ensure-admin-shell` with a bounded timeout, so no xref bundle reached the host.",
-              "Source": "Guest Ghidra launch receipt for TurnOffWindowsCopilot: evidence/raw/ghidra/ghidra-privacy-disable-copilot-20260427b/summary.json"
+              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+              "Source": ""
             },
             {
               "Key": "source",
@@ -1464,8 +1479,13 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Privacy (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\privacy\\privacy-verified.md",
+              "Title": "Docs: Win-Config",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\win-config\\batch-01.md#system.dwm-disable-overlay-min-fps",
+              "Kind": "Docs"
+            },
+            {
+              "Title": "Docs: System (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\system\\system.md",
               "Kind": "Docs"
             }
           ]
@@ -1474,10 +1494,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Copilot turned off'.",
+            "StatusMessage": "Value not set.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Copilot turned off",
+            "CurrentValue": "Not set",
+            "TargetValue": "0 (0x0)",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -1486,8 +1506,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Copilot turned off'.\nEntries:\n- HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsCopilot\\TurnOffWindowsCopilot: missing -> 1",
-                "TimestampText": "01:05:50"
+                "Message": "Value not set.",
+                "TimestampText": "01:08:03"
               },
               {
                 "Action": "Apply",
@@ -1514,8 +1534,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Copilot turned off",
-            "TargetValue": "Copilot turned off",
+            "CurrentValue": "0 (0x0)",
+            "TargetValue": "0 (0x0)",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1524,20 +1544,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Copilot turned off'.\nEntries:\n- HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsCopilot\\TurnOffWindowsCopilot: missing -> 1",
-                "TimestampText": "01:05:50"
+                "Message": "Value not set.",
+                "TimestampText": "01:08:03"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Copilot turned off'.",
-                "TimestampText": "01:05:50"
+                "Message": "Set value to 0.",
+                "TimestampText": "01:08:06"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Copilot turned off'.",
-                "TimestampText": "01:05:50"
+                "Message": "Verified desired value.",
+                "TimestampText": "01:08:06"
               },
               {
                 "Action": "Rollback",
@@ -1550,10 +1570,10 @@
           {
             "Stage": "rollback",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Rolled back registry values.",
+            "StatusMessage": "Removed value to restore default.",
             "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Copilot turned off",
+            "CurrentValue": "0 (0x0)",
+            "TargetValue": "0 (0x0)",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1562,36 +1582,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Copilot turned off'.\nEntries:\n- HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsCopilot\\TurnOffWindowsCopilot: missing -> 1",
-                "TimestampText": "01:05:50"
+                "Message": "Value not set.",
+                "TimestampText": "01:08:03"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Copilot turned off'.",
-                "TimestampText": "01:05:50"
+                "Message": "Set value to 0.",
+                "TimestampText": "01:08:06"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Copilot turned off'.",
-                "TimestampText": "01:05:50"
+                "Message": "Verified desired value.",
+                "TimestampText": "01:08:06"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "01:05:50"
+                "Message": "Removed value to restore default.",
+                "TimestampText": "01:08:06"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Copilot turned off'.",
+            "StatusMessage": "Value not set.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Copilot turned off",
+            "CurrentValue": "Not set",
+            "TargetValue": "0 (0x0)",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1600,37 +1620,37 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Copilot turned off'.\nEntries:\n- HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsCopilot\\TurnOffWindowsCopilot: missing -> 1",
-                "TimestampText": "01:05:50"
+                "Message": "Value not set.",
+                "TimestampText": "01:08:06"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Copilot turned off'.",
-                "TimestampText": "01:05:50"
+                "Message": "Set value to 0.",
+                "TimestampText": "01:08:06"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Copilot turned off'.",
-                "TimestampText": "01:05:50"
+                "Message": "Verified desired value.",
+                "TimestampText": "01:08:06"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "01:05:50"
+                "Message": "Removed value to restore default.",
+                "TimestampText": "01:08:06"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T08:05:50.6737088+00:00",
-        "CompletedAtUtc": "2026-05-07T08:05:50.9731525+00:00"
+        "StartedAtUtc": "2026-05-07T08:08:03.6722288+00:00",
+        "CompletedAtUtc": "2026-05-07T08:08:06.765979+00:00"
       },
-      "qa_tweak_id": "privacy.disable-copilot",
-      "candidate_id": "privacy.disable-copilot",
-      "card_name": "Windows Copilot",
-      "documentation": "research/records/privacy.disable-copilot.json"
+      "qa_tweak_id": "system.dwm-disable-overlay-min-fps",
+      "candidate_id": "system.dwm-disable-overlay-min-fps",
+      "card_name": "DWM Overlay Minimum FPS Check",
+      "documentation": "research/records/system.dwm-disable-overlay-min-fps.json"
     }
   ],
   "summary": {
@@ -1639,7 +1659,7 @@
     "live_success_count": 5,
     "live_failure_count": 0,
     "categories": [
-      "Privacy"
+      "System"
     ]
   }
 }

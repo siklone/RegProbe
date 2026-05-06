@@ -1,11 +1,11 @@
 {
-  "generated_utc": "2026-05-06T22:05:12Z",
-  "history_entry_count": 32,
+  "generated_utc": "2026-05-06T22:07:23Z",
+  "history_entry_count": 33,
   "catalog_candidate_count": 242,
-  "covered_count": 99,
-  "uncovered_count": 143,
+  "covered_count": 104,
+  "uncovered_count": 138,
   "summary": {
-    "coverage_percent": 40.91,
+    "coverage_percent": 42.98,
     "covered_categories": {
       "Audio": 2,
       "Cleanup": 1,
@@ -18,7 +18,7 @@
       "Power": 7,
       "Privacy": 23,
       "Security": 7,
-      "System": 16,
+      "System": 21,
       "Visibility": 11
     },
     "uncovered_categories": {
@@ -31,64 +31,11 @@
       "Power": 3,
       "Privacy": 44,
       "Security": 14,
-      "System": 36,
+      "System": 31,
       "Visibility": 12
     }
   },
   "recommended_next_batches": [
-    {
-      "category": "System",
-      "covered_count": 16,
-      "uncovered_count": 36,
-      "coverage_percent": 30.77,
-      "batch_size": 5,
-      "tweak_ids": [
-        "system.disable-search-web-results",
-        "system.disable-storage-sense",
-        "system.disable-storage-sense-temp-cleanup",
-        "system.disable-store-open-with",
-        "system.dwm-disable-overlay-min-fps"
-      ],
-      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id system.disable-search-web-results --id system.disable-storage-sense --id system.disable-storage-sense-temp-cleanup --id system.disable-store-open-with --id system.dwm-disable-overlay-min-fps",
-      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id system.disable-search-web-results --id system.disable-storage-sense --id system.disable-storage-sense-temp-cleanup --id system.disable-store-open-with --id system.dwm-disable-overlay-min-fps --run-kvm --json",
-      "candidates": [
-        {
-          "tweak_id": "system.disable-search-web-results",
-          "record_id": "system.disable-search-web-results",
-          "category": "System",
-          "name": "Web Results in Windows Search",
-          "documentation": "research/records/system.disable-search-web-results.review.json"
-        },
-        {
-          "tweak_id": "system.disable-storage-sense",
-          "record_id": "system.disable-storage-sense",
-          "category": "System",
-          "name": "Storage Sense Automatic Cleanup",
-          "documentation": "research/records/system.disable-storage-sense.json"
-        },
-        {
-          "tweak_id": "system.disable-storage-sense-temp-cleanup",
-          "record_id": "system.disable-storage-sense-temp-cleanup",
-          "category": "System",
-          "name": "Storage Sense Temporary Files Cleanup",
-          "documentation": "research/records/system.disable-storage-sense-temp-cleanup.json"
-        },
-        {
-          "tweak_id": "system.disable-store-open-with",
-          "record_id": "system.disable-store-open-with",
-          "category": "System",
-          "name": "Store in Open With",
-          "documentation": "research/records/system.disable-store-open-with.json"
-        },
-        {
-          "tweak_id": "system.dwm-disable-overlay-min-fps",
-          "record_id": "system.dwm-disable-overlay-min-fps",
-          "category": "System",
-          "name": "DWM Overlay Minimum FPS Check",
-          "documentation": "research/records/system.dwm-disable-overlay-min-fps.json"
-        }
-      ]
-    },
     {
       "category": "Network",
       "covered_count": 9,
@@ -245,6 +192,59 @@
           "category": "Privacy",
           "name": "Edge Address Bar Suggestions",
           "documentation": "research/records/privacy.disable-edge-search-suggestions.json"
+        }
+      ]
+    },
+    {
+      "category": "System",
+      "covered_count": 21,
+      "uncovered_count": 31,
+      "coverage_percent": 40.38,
+      "batch_size": 5,
+      "tweak_ids": [
+        "system.enable-game-mode",
+        "system.enable-hags",
+        "system.enable-indexing-encrypted-items",
+        "system.graphics-tdr-ddi-delay",
+        "system.graphics-tdr-delay"
+      ],
+      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id system.enable-game-mode --id system.enable-hags --id system.enable-indexing-encrypted-items --id system.graphics-tdr-ddi-delay --id system.graphics-tdr-delay",
+      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id system.enable-game-mode --id system.enable-hags --id system.enable-indexing-encrypted-items --id system.graphics-tdr-ddi-delay --id system.graphics-tdr-delay --run-kvm --json",
+      "candidates": [
+        {
+          "tweak_id": "system.enable-game-mode",
+          "record_id": "system.enable-game-mode",
+          "category": "System",
+          "name": "Game Mode",
+          "documentation": "research/records/system.enable-game-mode.review.json"
+        },
+        {
+          "tweak_id": "system.enable-hags",
+          "record_id": "system.enable-hags",
+          "category": "System",
+          "name": "Hardware-Accelerated GPU Scheduling",
+          "documentation": "research/records/system.enable-hags.review.json"
+        },
+        {
+          "tweak_id": "system.enable-indexing-encrypted-items",
+          "record_id": "system.enable-indexing-encrypted-items",
+          "category": "System",
+          "name": "Indexing of Encrypted Files",
+          "documentation": "research/records/system.enable-indexing-encrypted-items.json"
+        },
+        {
+          "tweak_id": "system.graphics-tdr-ddi-delay",
+          "record_id": "system.graphics-tdr-ddi-delay",
+          "category": "System",
+          "name": "Graphics TDR DDI Delay",
+          "documentation": "research/records/system.graphics-tdr-ddi-delay.json"
+        },
+        {
+          "tweak_id": "system.graphics-tdr-delay",
+          "record_id": "system.graphics-tdr-delay",
+          "category": "System",
+          "name": "Graphics TDR Delay",
+          "documentation": "research/records/system.graphics-tdr-delay.json"
         }
       ]
     },
@@ -1078,6 +1078,15 @@
       "latest_report_status": "ok"
     },
     {
+      "tweak_id": "system.disable-search-web-results",
+      "qa_tweak_id": "system.disable-search-web-results",
+      "candidate_id": "system.disable-search-web-results",
+      "category": "System",
+      "name": "Web Results in Windows Search",
+      "documentation": "research/records/system.disable-search-web-results.review.json",
+      "latest_report_status": "ok"
+    },
+    {
       "tweak_id": "system.disable-shortcut-arrow",
       "qa_tweak_id": "system.disable-shortcut-arrow",
       "candidate_id": "system.disable-shortcut-arrow",
@@ -1093,6 +1102,42 @@
       "category": "System",
       "name": "Startup Program Delay",
       "documentation": "research/records/system.disable-startup-delay.review.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "system.disable-storage-sense",
+      "qa_tweak_id": "system.disable-storage-sense",
+      "candidate_id": "system.disable-storage-sense",
+      "category": "System",
+      "name": "Storage Sense Automatic Cleanup",
+      "documentation": "research/records/system.disable-storage-sense.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "system.disable-storage-sense-temp-cleanup",
+      "qa_tweak_id": "system.disable-storage-sense-temp-cleanup",
+      "candidate_id": "system.disable-storage-sense-temp-cleanup",
+      "category": "System",
+      "name": "Storage Sense Temporary Files Cleanup",
+      "documentation": "research/records/system.disable-storage-sense-temp-cleanup.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "system.disable-store-open-with",
+      "qa_tweak_id": "system.disable-store-open-with",
+      "candidate_id": "system.disable-store-open-with",
+      "category": "System",
+      "name": "Store in Open With",
+      "documentation": "research/records/system.disable-store-open-with.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "system.dwm-disable-overlay-min-fps",
+      "qa_tweak_id": "system.dwm-disable-overlay-min-fps",
+      "candidate_id": "system.dwm-disable-overlay-min-fps",
+      "category": "System",
+      "name": "DWM Overlay Minimum FPS Check",
+      "documentation": "research/records/system.dwm-disable-overlay-min-fps.json",
       "latest_report_status": "ok"
     },
     {
@@ -1860,41 +1905,6 @@
       "category": "Security",
       "name": "User Account Control Prompting Profile",
       "documentation": "research/records/security.uac-never-notify.json"
-    },
-    {
-      "tweak_id": "system.disable-search-web-results",
-      "record_id": "system.disable-search-web-results",
-      "category": "System",
-      "name": "Web Results in Windows Search",
-      "documentation": "research/records/system.disable-search-web-results.review.json"
-    },
-    {
-      "tweak_id": "system.disable-storage-sense",
-      "record_id": "system.disable-storage-sense",
-      "category": "System",
-      "name": "Storage Sense Automatic Cleanup",
-      "documentation": "research/records/system.disable-storage-sense.json"
-    },
-    {
-      "tweak_id": "system.disable-storage-sense-temp-cleanup",
-      "record_id": "system.disable-storage-sense-temp-cleanup",
-      "category": "System",
-      "name": "Storage Sense Temporary Files Cleanup",
-      "documentation": "research/records/system.disable-storage-sense-temp-cleanup.json"
-    },
-    {
-      "tweak_id": "system.disable-store-open-with",
-      "record_id": "system.disable-store-open-with",
-      "category": "System",
-      "name": "Store in Open With",
-      "documentation": "research/records/system.disable-store-open-with.json"
-    },
-    {
-      "tweak_id": "system.dwm-disable-overlay-min-fps",
-      "record_id": "system.dwm-disable-overlay-min-fps",
-      "category": "System",
-      "name": "DWM Overlay Minimum FPS Check",
-      "documentation": "research/records/system.dwm-disable-overlay-min-fps.json"
     },
     {
       "tweak_id": "system.enable-game-mode",

@@ -1,11 +1,11 @@
 # Promoted App QA Coverage
 
-- Generated UTC: 2026-05-06T22:05:12Z
-- History entries: 32
+- Generated UTC: 2026-05-06T22:07:23Z
+- History entries: 33
 - Promoted app-QA candidates: 242
-- Covered: 99
-- Uncovered: 143
-- Coverage: 40.91%
+- Covered: 104
+- Uncovered: 138
+- Coverage: 42.98%
 
 ## Covered Categories
 
@@ -20,7 +20,7 @@
 - Power: 7
 - Privacy: 23
 - Security: 7
-- System: 16
+- System: 21
 - Visibility: 11
 
 ## Uncovered Categories
@@ -34,14 +34,11 @@
 - Power: 3
 - Privacy: 44
 - Security: 14
-- System: 36
+- System: 31
 - Visibility: 12
 
 ## Recommended Next Batches
 
-- System: 5 uncovered cards | coverage 30.77%
-  command: `dotnet run --project cli/cli.csproj -- research qa-batch --id system.disable-search-web-results --id system.disable-storage-sense --id system.disable-storage-sense-temp-cleanup --id system.disable-store-open-with --id system.dwm-disable-overlay-min-fps`
-  live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id system.disable-search-web-results --id system.disable-storage-sense --id system.disable-storage-sense-temp-cleanup --id system.disable-store-open-with --id system.dwm-disable-overlay-min-fps --run-kvm --json`
 - Network: 5 uncovered cards | coverage 32.14%
   command: `dotnet run --project cli/cli.csproj -- research qa-batch --id network.disable-smart-name-resolution --id network.disable-smb1 --id network.disable-smb2 --id network.disable-wifi-sense --id network.enable-lltd-responder`
   live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id network.disable-smart-name-resolution --id network.disable-smb1 --id network.disable-smb2 --id network.disable-wifi-sense --id network.enable-lltd-responder --run-kvm --json`
@@ -51,6 +48,9 @@
 - Privacy: 5 uncovered cards | coverage 34.33%
   command: `dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-cross-device-experiences.policy --id privacy.disable-device-name-telemetry --id privacy.disable-diagnostic-data-delete --id privacy.disable-diagnostic-data-viewer --id privacy.disable-edge-search-suggestions`
   live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-cross-device-experiences.policy --id privacy.disable-device-name-telemetry --id privacy.disable-diagnostic-data-delete --id privacy.disable-diagnostic-data-viewer --id privacy.disable-edge-search-suggestions --run-kvm --json`
+- System: 5 uncovered cards | coverage 40.38%
+  command: `dotnet run --project cli/cli.csproj -- research qa-batch --id system.enable-game-mode --id system.enable-hags --id system.enable-indexing-encrypted-items --id system.graphics-tdr-ddi-delay --id system.graphics-tdr-delay`
+  live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id system.enable-game-mode --id system.enable-hags --id system.enable-indexing-encrypted-items --id system.graphics-tdr-ddi-delay --id system.graphics-tdr-delay --run-kvm --json`
 - Explorer: 5 uncovered cards | coverage 47.06%
   command: `dotnet run --project cli/cli.csproj -- research qa-batch --id explorer.enable-explorer-compact-mode --id explorer.launch-folder-windows-in-a-separate-process --id explorer.show-compressed-and-encrypted-files-in-color --id explorer.show-drive-letters-first --id explorer.show-full-path`
   live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id explorer.enable-explorer-compact-mode --id explorer.launch-folder-windows-in-a-separate-process --id explorer.show-compressed-and-encrypted-files-in-color --id explorer.show-drive-letters-first --id explorer.show-full-path --run-kvm --json`
