@@ -1,17 +1,17 @@
 # Promoted App QA Coverage
 
-- Generated UTC: 2026-05-06T21:49:01Z
-- History entries: 28
+- Generated UTC: 2026-05-06T21:57:33Z
+- History entries: 29
 - Promoted app-QA candidates: 242
-- Covered: 84
-- Uncovered: 158
-- Coverage: 34.71%
+- Covered: 89
+- Uncovered: 153
+- Coverage: 36.78%
 
 ## Covered Categories
 
 - Audio: 2
 - Cleanup: 1
-- Developer: 2
+- Developer: 7
 - Explorer: 8
 - Network: 9
 - Notifications: 3
@@ -26,7 +26,7 @@
 ## Uncovered Categories
 
 - Audio: 1
-- Developer: 7
+- Developer: 2
 - Explorer: 9
 - Network: 19
 - Notifications: 2
@@ -39,9 +39,6 @@
 
 ## Recommended Next Batches
 
-- Developer: 5 uncovered cards | coverage 22.22%
-  command: `dotnet run --project cli/cli.csproj -- research qa-batch --id developer.enable-windows-long-paths --id developer.nodejs-performance --id developer.powershell-execution --id developer.python-path-fix --id developer.ssh-agent-autostart`
-  live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id developer.enable-windows-long-paths --id developer.nodejs-performance --id developer.powershell-execution --id developer.python-path-fix --id developer.ssh-agent-autostart --run-kvm --json`
 - Visibility: 5 uncovered cards | coverage 26.09%
   command: `dotnet run --project cli/cli.csproj -- research qa-batch --id visibility.disable-acrylic-logon --id visibility.disable-common-control-animations --id visibility.disable-first-signin-animation --id visibility.disable-lock-screen-camera --id visibility.disable-lock-screen-changes`
   live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id visibility.disable-acrylic-logon --id visibility.disable-common-control-animations --id visibility.disable-first-signin-animation --id visibility.disable-lock-screen-camera --id visibility.disable-lock-screen-changes --run-kvm --json`
@@ -54,15 +51,13 @@
 - Network: 5 uncovered cards | coverage 32.14%
   command: `dotnet run --project cli/cli.csproj -- research qa-batch --id network.disable-smart-name-resolution --id network.disable-smb1 --id network.disable-smb2 --id network.disable-wifi-sense --id network.enable-lltd-responder`
   live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id network.disable-smart-name-resolution --id network.disable-smb1 --id network.disable-smb2 --id network.disable-wifi-sense --id network.enable-lltd-responder --run-kvm --json`
+- Security: 5 uncovered cards | coverage 33.33%
+  command: `dotnet run --project cli/cli.csproj -- research qa-batch --id security.disable-remote-assistance --id security.disable-system-mitigations --id security.disable-system-restore --id security.disable-windows-firewall --id security.disable-windows-update.policy`
+  live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id security.disable-remote-assistance --id security.disable-system-mitigations --id security.disable-system-restore --id security.disable-windows-firewall --id security.disable-windows-update.policy --run-kvm --json`
 
 ## Remaining Uncovered Sample
 
 - `audio.show-hidden-devices` | Show Hidden Audio Devices | Audio
-- `developer.enable-windows-long-paths` | Windows Long Paths | Developer
-- `developer.nodejs-performance` | Global Node.js Memory Limit Override | Developer
-- `developer.powershell-execution` | PowerShell Script Execution Policy | Developer
-- `developer.python-path-fix` | Enable Windows Long Paths for Python Workflows | Developer
-- `developer.ssh-agent-autostart` | SSH Agent Auto-start | Developer
 - `developer.windows-dev-mode` | Windows Developer Mode | Developer
 - `developer.wsl2-memory` | WSL 2 Memory Limit | Developer
 - `explorer.enable-explorer-compact-mode` | Enable Explorer Compact View | Explorer
@@ -77,3 +72,8 @@
 - `network.disable-smart-name-resolution` | Smart Multi-Homed Name Resolution | Network
 - `network.disable-smb1` | SMBv1 Server Protocol Support | Network
 - `network.disable-smb2` | SMBv2 and SMBv3 Server Protocol Support | Network
+- `network.disable-wifi-sense` | Wi-Fi Sense Suggested Hotspot Policy | Network
+- `network.enable-lltd-responder` | LLTD Responder Driver Policy | Network
+- `network.enable-lltdio` | LLTD Mapper I/O Driver Policy | Network
+- `network.prefer-ipv4` | IPv4 Preference Override | Network
+- `network.require-ntlm-ssp-client-session-security` | Require NTLM SSP Client Session Security and 128-bit Encryption | Network

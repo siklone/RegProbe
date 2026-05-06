@@ -1,13 +1,13 @@
 {
-  "generated_utc": "2026-05-06T21:49:01Z",
+  "generated_utc": "2026-05-06T21:57:33Z",
   "status": "PASS",
   "selection": {
     "requested_ids": [
-      "system.disable-game-recording-broadcasting",
-      "system.disable-jpeg-reduction",
-      "system.disable-restartable-apps",
-      "system.disable-search-highlights-policy",
-      "system.disable-search-remote-queries"
+      "developer.enable-windows-long-paths",
+      "developer.nodejs-performance",
+      "developer.powershell-execution",
+      "developer.python-path-fix",
+      "developer.ssh-agent-autostart"
     ],
     "requested_categories": [],
     "limit_per_category": 1,
@@ -26,25 +26,25 @@
   "errors": [],
   "candidates": [
     {
-      "tweak_id": "system.disable-game-recording-broadcasting",
-      "qa_tweak_id": "system.disable-game-recording-broadcasting",
-      "candidate_id": "system.disable-game-recording-broadcasting",
-      "record_id": "system.disable-game-recording-broadcasting",
-      "category": "System",
-      "name": "Windows Game Recording and Broadcasting",
-      "documentation": "research/records/system.disable-game-recording-broadcasting.json",
+      "tweak_id": "developer.enable-windows-long-paths",
+      "qa_tweak_id": "developer.enable-windows-long-paths",
+      "candidate_id": "developer.enable-windows-long-paths",
+      "record_id": "developer.enable-windows-long-paths",
+      "category": "Developer",
+      "name": "Windows Long Paths",
+      "documentation": "research/records/developer.enable-windows-long-paths.review.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
-      "restore_default_supported": true,
-      "restore_previous_supported": true,
+      "restore_default_supported": false,
+      "restore_previous_supported": false,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect system.disable-game-recording-broadcasting",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect developer.enable-windows-long-paths",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.disable-game-recording-broadcasting' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.disable-game-recording-broadcasting.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.disable-game-recording-broadcasting' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.disable-game-recording-broadcasting.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.disable-game-recording-broadcasting' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.disable-game-recording-broadcasting.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.disable-game-recording-broadcasting' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.disable-game-recording-broadcasting.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'system.disable-game-recording-broadcasting'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'developer.enable-windows-long-paths' --qa-output 'C:\\Tools\\ValidationController\\smoke\\developer.enable-windows-long-paths.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'developer.enable-windows-long-paths' --qa-output 'C:\\Tools\\ValidationController\\smoke\\developer.enable-windows-long-paths.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'developer.enable-windows-long-paths' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\developer.enable-windows-long-paths.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'developer.enable-windows-long-paths' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\developer.enable-windows-long-paths.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'developer.enable-windows-long-paths'"
       },
       "expected_report": {
         "success": true,
@@ -85,25 +85,25 @@
       }
     },
     {
-      "tweak_id": "system.disable-jpeg-reduction",
-      "qa_tweak_id": "system.disable-jpeg-reduction",
-      "candidate_id": "system.disable-jpeg-reduction",
-      "record_id": "system.disable-jpeg-reduction",
-      "category": "System",
-      "name": "Wallpaper JPEG Import Quality",
-      "documentation": "research/records/system.disable-jpeg-reduction.review.json",
+      "tweak_id": "developer.nodejs-performance",
+      "qa_tweak_id": "developer.nodejs-performance",
+      "candidate_id": "developer.nodejs-performance",
+      "record_id": "developer.nodejs-performance",
+      "category": "Developer",
+      "name": "Global Node.js Memory Limit Override",
+      "documentation": "research/records/developer.nodejs-performance.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect system.disable-jpeg-reduction",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect developer.nodejs-performance",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.disable-jpeg-reduction' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.disable-jpeg-reduction.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.disable-jpeg-reduction' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.disable-jpeg-reduction.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.disable-jpeg-reduction' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.disable-jpeg-reduction.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.disable-jpeg-reduction' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.disable-jpeg-reduction.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'system.disable-jpeg-reduction'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'developer.nodejs-performance' --qa-output 'C:\\Tools\\ValidationController\\smoke\\developer.nodejs-performance.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'developer.nodejs-performance' --qa-output 'C:\\Tools\\ValidationController\\smoke\\developer.nodejs-performance.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'developer.nodejs-performance' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\developer.nodejs-performance.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'developer.nodejs-performance' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\developer.nodejs-performance.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'developer.nodejs-performance'"
       },
       "expected_report": {
         "success": true,
@@ -144,25 +144,25 @@
       }
     },
     {
-      "tweak_id": "system.disable-restartable-apps",
-      "qa_tweak_id": "system.disable-restartable-apps",
-      "candidate_id": "system.disable-restartable-apps",
-      "record_id": "system.disable-restartable-apps",
-      "category": "System",
-      "name": "Restart Apps After Sign-In",
-      "documentation": "research/records/system.disable-restartable-apps.review.json",
+      "tweak_id": "developer.powershell-execution",
+      "qa_tweak_id": "developer.powershell-execution",
+      "candidate_id": "developer.powershell-execution",
+      "record_id": "developer.powershell-execution",
+      "category": "Developer",
+      "name": "PowerShell Script Execution Policy",
+      "documentation": "research/records/developer.powershell-execution.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect system.disable-restartable-apps",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect developer.powershell-execution",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.disable-restartable-apps' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.disable-restartable-apps.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.disable-restartable-apps' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.disable-restartable-apps.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.disable-restartable-apps' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.disable-restartable-apps.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.disable-restartable-apps' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.disable-restartable-apps.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'system.disable-restartable-apps'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'developer.powershell-execution' --qa-output 'C:\\Tools\\ValidationController\\smoke\\developer.powershell-execution.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'developer.powershell-execution' --qa-output 'C:\\Tools\\ValidationController\\smoke\\developer.powershell-execution.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'developer.powershell-execution' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\developer.powershell-execution.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'developer.powershell-execution' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\developer.powershell-execution.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'developer.powershell-execution'"
       },
       "expected_report": {
         "success": true,
@@ -203,25 +203,25 @@
       }
     },
     {
-      "tweak_id": "system.disable-search-highlights-policy",
-      "qa_tweak_id": "system.disable-search-highlights-policy",
-      "candidate_id": "system.disable-search-highlights-policy",
-      "record_id": "system.disable-search-highlights-policy",
-      "category": "System",
-      "name": "Search Highlights",
-      "documentation": "research/records/system.disable-search-highlights-policy.json",
+      "tweak_id": "developer.python-path-fix",
+      "qa_tweak_id": "developer.python-path-fix",
+      "candidate_id": "developer.python-path-fix",
+      "record_id": "developer.python-path-fix",
+      "category": "Developer",
+      "name": "Enable Windows Long Paths for Python Workflows",
+      "documentation": "research/records/developer.python-path-fix.review.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect system.disable-search-highlights-policy",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect developer.python-path-fix",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.disable-search-highlights-policy' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.disable-search-highlights-policy.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.disable-search-highlights-policy' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.disable-search-highlights-policy.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.disable-search-highlights-policy' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.disable-search-highlights-policy.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.disable-search-highlights-policy' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.disable-search-highlights-policy.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'system.disable-search-highlights-policy'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'developer.python-path-fix' --qa-output 'C:\\Tools\\ValidationController\\smoke\\developer.python-path-fix.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'developer.python-path-fix' --qa-output 'C:\\Tools\\ValidationController\\smoke\\developer.python-path-fix.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'developer.python-path-fix' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\developer.python-path-fix.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'developer.python-path-fix' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\developer.python-path-fix.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'developer.python-path-fix'"
       },
       "expected_report": {
         "success": true,
@@ -262,25 +262,25 @@
       }
     },
     {
-      "tweak_id": "system.disable-search-remote-queries",
-      "qa_tweak_id": "system.disable-search-remote-queries",
-      "candidate_id": "system.disable-search-remote-queries",
-      "record_id": "system.disable-search-remote-queries",
-      "category": "System",
-      "name": "Remote Windows Search Queries",
-      "documentation": "research/records/system.disable-search-remote-queries.json",
+      "tweak_id": "developer.ssh-agent-autostart",
+      "qa_tweak_id": "developer.ssh-agent-autostart",
+      "candidate_id": "developer.ssh-agent-autostart",
+      "record_id": "developer.ssh-agent-autostart",
+      "category": "Developer",
+      "name": "SSH Agent Auto-start",
+      "documentation": "research/records/developer.ssh-agent-autostart.review.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect system.disable-search-remote-queries",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect developer.ssh-agent-autostart",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.disable-search-remote-queries' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.disable-search-remote-queries.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.disable-search-remote-queries' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.disable-search-remote-queries.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.disable-search-remote-queries' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.disable-search-remote-queries.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.disable-search-remote-queries' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.disable-search-remote-queries.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'system.disable-search-remote-queries'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'developer.ssh-agent-autostart' --qa-output 'C:\\Tools\\ValidationController\\smoke\\developer.ssh-agent-autostart.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'developer.ssh-agent-autostart' --qa-output 'C:\\Tools\\ValidationController\\smoke\\developer.ssh-agent-autostart.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'developer.ssh-agent-autostart' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\developer.ssh-agent-autostart.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'developer.ssh-agent-autostart' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\developer.ssh-agent-autostart.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'developer.ssh-agent-autostart'"
       },
       "expected_report": {
         "success": true,
@@ -323,7 +323,7 @@
   ],
   "run_results": [
     {
-      "tweak_id": "system.disable-game-recording-broadcasting",
+      "tweak_id": "developer.enable-windows-long-paths",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -357,19 +357,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "system.disable-game-recording-broadcasting",
-        "TweakName": "Windows Game Recording and Broadcasting",
+        "TweakId": "developer.enable-windows-long-paths",
+        "TweakName": "Windows Long Paths",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "system.disable-game-recording-broadcasting",
-          "Name": "Windows Game Recording and Broadcasting",
-          "Category": "System",
-          "Description": "Windows includes built-in game recording and broadcasting features. This policy decides whether those features are allowed on the device.",
-          "FriendlyDescription": "Windows includes built-in game recording and broadcasting features. This policy decides whether those features are allowed on the device.",
-          "RegistryPath": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\GameDVR\\AllowGameDVR",
+          "TweakId": "developer.enable-windows-long-paths",
+          "Name": "Windows Long Paths",
+          "Category": "Developer",
+          "Description": "Windows can remove the old 260-character path limit. That helps many compatible applications, especially developer tools and projects with very deep folder trees.",
+          "FriendlyDescription": "Windows can remove the old 260-character path limit. That helps many compatible applications, especially developer tools and projects with very deep folder trees.",
+          "RegistryPath": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem\\LongPathsEnabled",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -377,22 +377,22 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Windows includes built-in game recording and broadcasting features. This policy decides whether those features are allowed on the device. Evidence: The local official Microsoft ADMX file names the same GameDVR policy key and AllowGameDVR value used by the app. The paired ADML help text states that disabling the setting prevents Windows Game Recording, while enabled or not configured allows recording an... Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: Windows can remove the old 260-character path limit. That helps many compatible applications, especially developer tools and projects with very deep folder trees. Evidence: Microsoft directly documents LongPathsEnabled as the Windows long-path switch and the app writes that exact documented value. Guest-side Procmon also captured SystemSettings.exe querying LongPathsEnabled when the developer settings page was opened, which co... Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "The local official Microsoft ADMX file names the same GameDVR policy key and AllowGameDVR value used by the app. The paired ADML help text states that disabling the setting prevents Windows Game Recording, while enabled or not configured allows recording an...",
-              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/GameDVR.admx"
+              "Summary": "Microsoft directly documents LongPathsEnabled as the Windows long-path switch and the app writes that exact documented value. Guest-side Procmon also captured SystemSettings.exe querying LongPathsEnabled when the developer settings page was opened, which co...",
+              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation"
             },
             {
               "Key": "runtime",
               "Label": "RUNTIME",
               "State": "ready",
-              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
-              "Source": ""
+              "Summary": "Guest-side Procmon capture confirmed SystemSettings.exe queried HKLM\\System\\CurrentControlSet\\Control\\FileSystem\\LongPathsEnabled while the developer settings page was opened. The probe observed the live value on this build and restored the original state a...",
+              "Source": "Procmon capture - Developer settings page reads LongPathsEnabled: evidence/raw/procmon/developer.enable-windows-long-paths/devmode_longpaths_probe.csv and evidence/raw/procmon/developer.enable-windows-long-paths/devmode-longpaths-probe-pml.md"
             },
             {
               "Key": "source",
@@ -416,8 +416,8 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: System (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\system\\system.md",
+              "Title": "Docs: Developer (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweaks.md",
               "Kind": "Docs"
             }
           ]
@@ -426,10 +426,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Game recording disabled'.",
+            "StatusMessage": "Current value is 0.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Game recording disabled",
+            "CurrentValue": "0",
+            "TargetValue": "1 (0x1)",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -438,8 +438,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Game recording disabled'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\GameDVR\\AllowGameDVR: missing -> 0",
-                "TimestampText": "00:49:05"
+                "Message": "Current value is 0.",
+                "TimestampText": "00:57:46"
               },
               {
                 "Action": "Apply",
@@ -466,8 +466,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Game recording disabled",
-            "TargetValue": "Game recording disabled",
+            "CurrentValue": "1 (0x1)",
+            "TargetValue": "1 (0x1)",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -476,20 +476,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Game recording disabled'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\GameDVR\\AllowGameDVR: missing -> 0",
-                "TimestampText": "00:49:05"
+                "Message": "Current value is 0.",
+                "TimestampText": "00:57:46"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Game recording disabled'.",
-                "TimestampText": "00:49:08"
+                "Message": "Set value to 1.",
+                "TimestampText": "00:57:49"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Game recording disabled'.",
-                "TimestampText": "00:49:08"
+                "Message": "Verified desired value.",
+                "TimestampText": "00:57:49"
               },
               {
                 "Action": "Rollback",
@@ -502,10 +502,10 @@
           {
             "Stage": "rollback",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Rolled back registry values.",
+            "StatusMessage": "Rolled back to 0.",
             "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Game recording disabled",
+            "CurrentValue": "1 (0x1)",
+            "TargetValue": "1 (0x1)",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -514,36 +514,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Game recording disabled'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\GameDVR\\AllowGameDVR: missing -> 0",
-                "TimestampText": "00:49:05"
+                "Message": "Current value is 0.",
+                "TimestampText": "00:57:46"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Game recording disabled'.",
-                "TimestampText": "00:49:08"
+                "Message": "Set value to 1.",
+                "TimestampText": "00:57:49"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Game recording disabled'.",
-                "TimestampText": "00:49:08"
+                "Message": "Verified desired value.",
+                "TimestampText": "00:57:49"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "00:49:08"
+                "Message": "Rolled back to 0.",
+                "TimestampText": "00:57:49"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Game recording disabled'.",
+            "StatusMessage": "Current value is 0.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Game recording disabled",
+            "CurrentValue": "0",
+            "TargetValue": "1 (0x1)",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -552,40 +552,40 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Game recording disabled'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\GameDVR\\AllowGameDVR: missing -> 0",
-                "TimestampText": "00:49:08"
+                "Message": "Current value is 0.",
+                "TimestampText": "00:57:49"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Game recording disabled'.",
-                "TimestampText": "00:49:08"
+                "Message": "Set value to 1.",
+                "TimestampText": "00:57:49"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Game recording disabled'.",
-                "TimestampText": "00:49:08"
+                "Message": "Verified desired value.",
+                "TimestampText": "00:57:49"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "00:49:08"
+                "Message": "Rolled back to 0.",
+                "TimestampText": "00:57:49"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T07:49:05.5900081+00:00",
-        "CompletedAtUtc": "2026-05-07T07:49:08.6737932+00:00"
+        "StartedAtUtc": "2026-05-07T07:57:46.5337262+00:00",
+        "CompletedAtUtc": "2026-05-07T07:57:49.8439093+00:00"
       },
-      "qa_tweak_id": "system.disable-game-recording-broadcasting",
-      "candidate_id": "system.disable-game-recording-broadcasting",
-      "card_name": "Windows Game Recording and Broadcasting",
-      "documentation": "research/records/system.disable-game-recording-broadcasting.json"
+      "qa_tweak_id": "developer.enable-windows-long-paths",
+      "candidate_id": "developer.enable-windows-long-paths",
+      "card_name": "Windows Long Paths",
+      "documentation": "research/records/developer.enable-windows-long-paths.review.json"
     },
     {
-      "tweak_id": "system.disable-jpeg-reduction",
+      "tweak_id": "developer.nodejs-performance",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -619,19 +619,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "system.disable-jpeg-reduction",
-        "TweakName": "Wallpaper JPEG Import Quality",
+        "TweakId": "developer.nodejs-performance",
+        "TweakName": "Global Node.js Memory Limit Override",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "system.disable-jpeg-reduction",
-          "Name": "Wallpaper JPEG Import Quality",
-          "Category": "System",
-          "Description": "Windows can reduce the quality of JPEG images when you set them as wallpaper. People change this when they want the wallpaper to stay as sharp as possible.",
-          "FriendlyDescription": "Windows can reduce the quality of JPEG images when you set them as wallpaper. People change this when they want the wallpaper to stay as sharp as possible.",
-          "RegistryPath": "HKCU\\Control Panel\\Desktop\\JPEGImportQuality",
+          "TweakId": "developer.nodejs-performance",
+          "Name": "Global Node.js Memory Limit Override",
+          "Category": "Developer",
+          "Description": "This tweak makes Node.js start with a larger memory limit by default. It can help very large builds or monorepos, but it also makes Node processes use more memory budget.",
+          "FriendlyDescription": "This tweak makes Node.js start with a larger memory limit by default. It can help very large builds or monorepos, but it also makes Node processes use more memory budget.",
+          "RegistryPath": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Environment\\NODE_OPTIONS",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -639,22 +639,22 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Windows can reduce the quality of JPEG images when you set them as wallpaper. People change this when they want the wallpaper to stay as sharp as possible. Evidence: The reversible VM probe still covers the missing -> 100 -> missing cycle. The 2026-03-26 Procmon and Ghidra passes add live shell consumption and current-build code-side proof, and the 2026-03-27 v3.1 runtime lane adds a fresh wallpaper-apply trace with cle... Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: This tweak makes Node.js start with a larger memory limit by default. It can help very large builds or monorepos, but it also makes Node processes use more memory budget. Evidence: Node.js directly documents NODE_OPTIONS and the --max-old-space-size flag. Microsoft documents that persistent machine environment variables are stored under HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\SessionManager\\Environment. The app writes NODE... Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "The reversible VM probe still covers the missing -> 100 -> missing cycle. The 2026-03-26 Procmon and Ghidra passes add live shell consumption and current-build code-side proof, and the 2026-03-27 v3.1 runtime lane adds a fresh wallpaper-apply trace with cle...",
-              "Source": "Validation proof source: research/notes/jpeg-import-quality-validation-20260326.md"
+              "Summary": "Node.js directly documents NODE_OPTIONS and the --max-old-space-size flag. Microsoft documents that persistent machine environment variables are stored under HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\SessionManager\\Environment. The app writes NODE...",
+              "Source": "Validation proof source: https://nodejs.org/api/cli.html"
             },
             {
               "Key": "runtime",
               "Label": "RUNTIME",
               "State": "ready",
-              "Summary": "A reversible Procmon pass on Win25H2Clean used the Explorer shell verb `setdesktopwallpaper` on a JPEG copy and captured Explorer.EXE querying HKCU/Control Panel/Desktop/JPEGImportQuality with Data:100. The repo now keeps the filtered capture files directly...",
-              "Source": "Procmon capture - Explorer JPEGImportQuality runtime read: evidence/raw/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.txt and evidence/raw/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.hits.csv"
+              "Summary": "A same-day guest Ghidra retry for `NODE_OPTIONS` failed in `ensure-admin-shell` before any xref bundle reached the host.",
+              "Source": "Guest Ghidra launch receipt for NODE_OPTIONS: evidence/raw/ghidra/ghidra-developer-nodejs-performance-20260424-batch6/summary.json"
             },
             {
               "Key": "source",
@@ -678,13 +678,8 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Win-Config",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\win-config\\batch-01.md#system.disable-jpeg-reduction",
-              "Kind": "Docs"
-            },
-            {
-              "Title": "Docs: System (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\system\\system.md",
+              "Title": "Docs: Developer (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweaks.md",
               "Kind": "Docs"
             }
           ]
@@ -696,7 +691,7 @@
             "StatusMessage": "Value not set.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Not set",
-            "TargetValue": "100 (0x64)",
+            "TargetValue": "--max-old-space-size=8192",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -706,7 +701,7 @@
                 "Action": "Detect",
                 "StatusText": "Detected",
                 "Message": "Value not set.",
-                "TimestampText": "00:49:14"
+                "TimestampText": "00:57:57"
               },
               {
                 "Action": "Apply",
@@ -733,8 +728,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "100 (0x64)",
-            "TargetValue": "100 (0x64)",
+            "CurrentValue": "--max-old-space-size=8192",
+            "TargetValue": "--max-old-space-size=8192",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -744,19 +739,19 @@
                 "Action": "Detect",
                 "StatusText": "Detected",
                 "Message": "Value not set.",
-                "TimestampText": "00:49:14"
+                "TimestampText": "00:57:57"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Set value to 100.",
-                "TimestampText": "00:49:14"
+                "Message": "Set value to --max-old-space-size=8192.",
+                "TimestampText": "00:58:00"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
                 "Message": "Verified desired value.",
-                "TimestampText": "00:49:14"
+                "TimestampText": "00:58:00"
               },
               {
                 "Action": "Rollback",
@@ -771,8 +766,8 @@
             "AppliedStatus": "NotApplied",
             "StatusMessage": "Removed value to restore default.",
             "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "100 (0x64)",
-            "TargetValue": "100 (0x64)",
+            "CurrentValue": "--max-old-space-size=8192",
+            "TargetValue": "--max-old-space-size=8192",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -782,25 +777,25 @@
                 "Action": "Detect",
                 "StatusText": "Detected",
                 "Message": "Value not set.",
-                "TimestampText": "00:49:14"
+                "TimestampText": "00:57:57"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Set value to 100.",
-                "TimestampText": "00:49:14"
+                "Message": "Set value to --max-old-space-size=8192.",
+                "TimestampText": "00:58:00"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
                 "Message": "Verified desired value.",
-                "TimestampText": "00:49:14"
+                "TimestampText": "00:58:00"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Removed value to restore default.",
-                "TimestampText": "00:49:15"
+                "TimestampText": "00:58:00"
               }
             ]
           },
@@ -810,7 +805,7 @@
             "StatusMessage": "Value not set.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Not set",
-            "TargetValue": "100 (0x64)",
+            "TargetValue": "--max-old-space-size=8192",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -820,39 +815,39 @@
                 "Action": "Detect",
                 "StatusText": "Detected",
                 "Message": "Value not set.",
-                "TimestampText": "00:49:15"
+                "TimestampText": "00:58:00"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Set value to 100.",
-                "TimestampText": "00:49:14"
+                "Message": "Set value to --max-old-space-size=8192.",
+                "TimestampText": "00:58:00"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
                 "Message": "Verified desired value.",
-                "TimestampText": "00:49:14"
+                "TimestampText": "00:58:00"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Removed value to restore default.",
-                "TimestampText": "00:49:15"
+                "TimestampText": "00:58:00"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T07:49:14.8446706+00:00",
-        "CompletedAtUtc": "2026-05-07T07:49:15.1401004+00:00"
+        "StartedAtUtc": "2026-05-07T07:57:57.2770714+00:00",
+        "CompletedAtUtc": "2026-05-07T07:58:00.4019319+00:00"
       },
-      "qa_tweak_id": "system.disable-jpeg-reduction",
-      "candidate_id": "system.disable-jpeg-reduction",
-      "card_name": "Wallpaper JPEG Import Quality",
-      "documentation": "research/records/system.disable-jpeg-reduction.review.json"
+      "qa_tweak_id": "developer.nodejs-performance",
+      "candidate_id": "developer.nodejs-performance",
+      "card_name": "Global Node.js Memory Limit Override",
+      "documentation": "research/records/developer.nodejs-performance.json"
     },
     {
-      "tweak_id": "system.disable-restartable-apps",
+      "tweak_id": "developer.powershell-execution",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -886,19 +881,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "system.disable-restartable-apps",
-        "TweakName": "Restart Apps After Sign-In",
+        "TweakId": "developer.powershell-execution",
+        "TweakName": "PowerShell Script Execution Policy",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "system.disable-restartable-apps",
-          "Name": "Restart Apps After Sign-In",
-          "Category": "System",
-          "Description": "Windows can automatically save certain restartable apps and reopen them after you sign back in. People turn it off when they want a cleaner sign-in and do not want apps reopening on their own.",
-          "FriendlyDescription": "Windows can automatically save certain restartable apps and reopen them after you sign back in. People turn it off when they want a cleaner sign-in and do not want apps reopening on their own.",
-          "RegistryPath": "HKCU\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\RestartApps",
+          "TweakId": "developer.powershell-execution",
+          "Name": "PowerShell Script Execution Policy",
+          "Category": "Developer",
+          "Description": "PowerShell execution policy controls which scripts are allowed to run. RemoteSigned allows local scripts and requires downloaded scripts to be signed.",
+          "FriendlyDescription": "PowerShell execution policy controls which scripts are allowed to run. RemoteSigned allows local scripts and requires downloaded scripts to be signed.",
+          "RegistryPath": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\PowerShell\\ExecutionPolicy",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -906,22 +901,22 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Windows can automatically save certain restartable apps and reopen them after you sign back in. People turn it off when they want a cleaner sign-in and do not want apps reopening on their own. Evidence: Guest-side reversible probe on Win25H2Clean confirmed the baseline missing state and the 1 / 0 toggle sequence, then restored the machine back to missing. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: PowerShell execution policy controls which scripts are allowed to run. RemoteSigned allows local scripts and requires downloaded scripts to be signed. Evidence: Local official Microsoft ADMX/ADML files document the PowerShell policy path and the ExecutionPolicy enum, including RemoteSigned. The app writes ExecutionPolicy = RemoteSigned on the documented policy path, so this record is re-validated under schema 1.1. Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "Guest-side reversible probe on Win25H2Clean confirmed the baseline missing state and the 1 / 0 toggle sequence, then restored the machine back to missing.",
-              "Source": "Validation proof source: evidence/files/vm-tooling-staging/restartapps_toggle_out.txt"
+              "Summary": "Local official Microsoft ADMX/ADML files document the PowerShell policy path and the ExecutionPolicy enum, including RemoteSigned. The app writes ExecutionPolicy = RemoteSigned on the documented policy path, so this record is re-validated under schema 1.1.",
+              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/PowerShellExecutionPolicy.admx"
             },
             {
               "Key": "runtime",
               "Label": "RUNTIME",
               "State": "ready",
-              "Summary": "Guest reversible probe on Win25H2Clean confirmed RestartApps transitions through missing, 1, and 0 before restoring to missing.",
-              "Source": "Guest reversible probe - RestartApps registry mapping: evidence/files/vm-tooling-staging/restartapps_toggle_out.txt"
+              "Summary": "A same-day guest Ghidra retry for `ExecutionPolicy` failed in `ensure-admin-shell` before any xref bundle reached the host.",
+              "Source": "Guest Ghidra launch receipt for ExecutionPolicy: evidence/raw/ghidra/ghidra-developer-powershell-execution-20260424-batch3/summary.json"
             },
             {
               "Key": "source",
@@ -945,8 +940,8 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: System (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\system\\system.md",
+              "Title": "Docs: Developer (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweaks.md",
               "Kind": "Docs"
             }
           ]
@@ -955,10 +950,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Restart apps off'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Allow local scripts and remote signed scripts'.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Restart apps off",
+            "TargetValue": "Allow local scripts and remote signed scripts",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -967,8 +962,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Restart apps off'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\RestartApps: missing -> 0",
-                "TimestampText": "00:49:21"
+                "Message": "Current values do not match a named option. Selected option is 'Allow local scripts and remote signed scripts'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\PowerShell\\ExecutionPolicy: missing -> RemoteSigned",
+                "TimestampText": "00:58:06"
               },
               {
                 "Action": "Apply",
@@ -995,8 +990,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Restart apps off",
-            "TargetValue": "Restart apps off",
+            "CurrentValue": "Allow local scripts and remote signed scripts",
+            "TargetValue": "Allow local scripts and remote signed scripts",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1005,20 +1000,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Restart apps off'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\RestartApps: missing -> 0",
-                "TimestampText": "00:49:21"
+                "Message": "Current values do not match a named option. Selected option is 'Allow local scripts and remote signed scripts'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\PowerShell\\ExecutionPolicy: missing -> RemoteSigned",
+                "TimestampText": "00:58:06"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Restart apps off'.",
-                "TimestampText": "00:49:21"
+                "Message": "Applied preset 'Allow local scripts and remote signed scripts'.",
+                "TimestampText": "00:58:09"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Restart apps off'.",
-                "TimestampText": "00:49:21"
+                "Message": "Verified preset 'Allow local scripts and remote signed scripts'.",
+                "TimestampText": "00:58:09"
               },
               {
                 "Action": "Rollback",
@@ -1034,7 +1029,7 @@
             "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Restart apps off",
+            "TargetValue": "Allow local scripts and remote signed scripts",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1043,36 +1038,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Restart apps off'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\RestartApps: missing -> 0",
-                "TimestampText": "00:49:21"
+                "Message": "Current values do not match a named option. Selected option is 'Allow local scripts and remote signed scripts'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\PowerShell\\ExecutionPolicy: missing -> RemoteSigned",
+                "TimestampText": "00:58:06"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Restart apps off'.",
-                "TimestampText": "00:49:21"
+                "Message": "Applied preset 'Allow local scripts and remote signed scripts'.",
+                "TimestampText": "00:58:09"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Restart apps off'.",
-                "TimestampText": "00:49:21"
+                "Message": "Verified preset 'Allow local scripts and remote signed scripts'.",
+                "TimestampText": "00:58:09"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "00:49:21"
+                "TimestampText": "00:58:09"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Restart apps off'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Allow local scripts and remote signed scripts'.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Restart apps off",
+            "TargetValue": "Allow local scripts and remote signed scripts",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1081,40 +1076,40 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Restart apps off'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon\\RestartApps: missing -> 0",
-                "TimestampText": "00:49:21"
+                "Message": "Current values do not match a named option. Selected option is 'Allow local scripts and remote signed scripts'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\PowerShell\\ExecutionPolicy: missing -> RemoteSigned",
+                "TimestampText": "00:58:09"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Restart apps off'.",
-                "TimestampText": "00:49:21"
+                "Message": "Applied preset 'Allow local scripts and remote signed scripts'.",
+                "TimestampText": "00:58:09"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Restart apps off'.",
-                "TimestampText": "00:49:21"
+                "Message": "Verified preset 'Allow local scripts and remote signed scripts'.",
+                "TimestampText": "00:58:09"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "00:49:21"
+                "TimestampText": "00:58:09"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T07:49:21.2110674+00:00",
-        "CompletedAtUtc": "2026-05-07T07:49:21.4960579+00:00"
+        "StartedAtUtc": "2026-05-07T07:58:06.4386771+00:00",
+        "CompletedAtUtc": "2026-05-07T07:58:09.5954953+00:00"
       },
-      "qa_tweak_id": "system.disable-restartable-apps",
-      "candidate_id": "system.disable-restartable-apps",
-      "card_name": "Restart Apps After Sign-In",
-      "documentation": "research/records/system.disable-restartable-apps.review.json"
+      "qa_tweak_id": "developer.powershell-execution",
+      "candidate_id": "developer.powershell-execution",
+      "card_name": "PowerShell Script Execution Policy",
+      "documentation": "research/records/developer.powershell-execution.json"
     },
     {
-      "tweak_id": "system.disable-search-highlights-policy",
+      "tweak_id": "developer.python-path-fix",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -1148,19 +1143,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "system.disable-search-highlights-policy",
-        "TweakName": "Search Highlights",
+        "TweakId": "developer.python-path-fix",
+        "TweakName": "Enable Windows Long Paths for Python Workflows",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "system.disable-search-highlights-policy",
-          "Name": "Search Highlights",
-          "Category": "System",
-          "Description": "Search Highlights are the dynamic bits Windows shows in the search area, such as seasonal or suggested content. This policy decides whether those highlights are allowed.",
-          "FriendlyDescription": "Search Highlights are the dynamic bits Windows shows in the search area, such as seasonal or suggested content. This policy decides whether those highlights are allowed.",
-          "RegistryPath": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search\\EnableDynamicContentInWSB",
+          "TweakId": "developer.python-path-fix",
+          "Name": "Enable Windows Long Paths for Python Workflows",
+          "Category": "Developer",
+          "Description": "Some Python environments fail on Windows when project folders get very deep. Enabling Windows long paths removes the old 260-character path limit for compatible applications, including Python workflows that rely on the operating system long-path setting.",
+          "FriendlyDescription": "Some Python environments fail on Windows when project folders get very deep. Enabling Windows long paths removes the old 260-character path limit for compatible applications, including Python workflows that rely on the operating system long-path setting.",
+          "RegistryPath": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem\\LongPathsEnabled",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -1168,22 +1163,22 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Search Highlights are the dynamic bits Windows shows in the search area, such as seasonal or suggested content. This policy decides whether those highlights are allowed. Evidence: Local official ADMX defines the exact machine-policy key and value name; local ADML confirms that disabling the policy turns off Search Highlights in Start search and search home. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: Some Python environments fail on Windows when project folders get very deep. Enabling Windows long paths removes the old 260-character path limit for compatible applications, including Python workflows that rely on the operating system long-path setting. Evidence: Python's official Windows documentation directly names LongPathsEnabled under the FileSystem key as the control to enable when long path limits are the problem. Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "Local official ADMX defines the exact machine-policy key and value name; local ADML confirms that disabling the policy turns off Search Highlights in Start search and search home.",
-              "Source": "Validation proof source: evidence/files/missing/search-admx.md"
+              "Summary": "Python's official Windows documentation directly names LongPathsEnabled under the FileSystem key as the control to enable when long path limits are the problem.",
+              "Source": "Validation proof source: https://docs.python.org/3/using/windows.html"
             },
             {
               "Key": "runtime",
               "Label": "RUNTIME",
               "State": "ready",
-              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
-              "Source": ""
+              "Summary": "A same-day guest Ghidra retry for `LongPathsEnabled` failed in `ensure-admin-shell` before any xref bundle reached the host.",
+              "Source": "Guest Ghidra launch receipt for LongPathsEnabled: evidence/raw/ghidra/ghidra-developer-python-path-fix-20260424-batch3/summary.json"
             },
             {
               "Key": "source",
@@ -1207,8 +1202,8 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: System (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\system\\system.md",
+              "Title": "Docs: Developer (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweaks.md",
               "Kind": "Docs"
             }
           ]
@@ -1217,10 +1212,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Disabled'.",
+            "StatusMessage": "Current option is 'Long paths disabled'. Selected option is 'Long paths enabled'.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Disabled",
+            "CurrentValue": "Long paths disabled",
+            "TargetValue": "Long paths enabled",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -1229,8 +1224,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Disabled'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search\\EnableDynamicContentInWSB: missing -> 0",
-                "TimestampText": "00:49:27"
+                "Message": "Current option is 'Long paths disabled'. Selected option is 'Long paths enabled'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem\\LongPathsEnabled: 0 -> 1",
+                "TimestampText": "00:58:15"
               },
               {
                 "Action": "Apply",
@@ -1257,8 +1252,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Disabled",
-            "TargetValue": "Disabled",
+            "CurrentValue": "Long paths enabled",
+            "TargetValue": "Long paths enabled",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1267,20 +1262,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Disabled'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search\\EnableDynamicContentInWSB: missing -> 0",
-                "TimestampText": "00:49:27"
+                "Message": "Current option is 'Long paths disabled'. Selected option is 'Long paths enabled'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem\\LongPathsEnabled: 0 -> 1",
+                "TimestampText": "00:58:15"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Disabled'.",
-                "TimestampText": "00:49:30"
+                "Message": "Applied preset 'Long paths enabled'.",
+                "TimestampText": "00:58:18"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Disabled'.",
-                "TimestampText": "00:49:30"
+                "Message": "Verified preset 'Long paths enabled'.",
+                "TimestampText": "00:58:18"
               },
               {
                 "Action": "Rollback",
@@ -1295,8 +1290,8 @@
             "AppliedStatus": "NotApplied",
             "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Disabled",
+            "CurrentValue": "Long paths disabled",
+            "TargetValue": "Long paths enabled",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1305,36 +1300,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Disabled'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search\\EnableDynamicContentInWSB: missing -> 0",
-                "TimestampText": "00:49:27"
+                "Message": "Current option is 'Long paths disabled'. Selected option is 'Long paths enabled'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem\\LongPathsEnabled: 0 -> 1",
+                "TimestampText": "00:58:15"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Disabled'.",
-                "TimestampText": "00:49:30"
+                "Message": "Applied preset 'Long paths enabled'.",
+                "TimestampText": "00:58:18"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Disabled'.",
-                "TimestampText": "00:49:30"
+                "Message": "Verified preset 'Long paths enabled'.",
+                "TimestampText": "00:58:18"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "00:49:30"
+                "TimestampText": "00:58:18"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Disabled'.",
+            "StatusMessage": "Current option is 'Long paths disabled'. Selected option is 'Long paths enabled'.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Disabled",
+            "CurrentValue": "Long paths disabled",
+            "TargetValue": "Long paths enabled",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1343,40 +1338,40 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Disabled'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search\\EnableDynamicContentInWSB: missing -> 0",
-                "TimestampText": "00:49:30"
+                "Message": "Current option is 'Long paths disabled'. Selected option is 'Long paths enabled'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem\\LongPathsEnabled: 0 -> 1",
+                "TimestampText": "00:58:18"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Disabled'.",
-                "TimestampText": "00:49:30"
+                "Message": "Applied preset 'Long paths enabled'.",
+                "TimestampText": "00:58:18"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Disabled'.",
-                "TimestampText": "00:49:30"
+                "Message": "Verified preset 'Long paths enabled'.",
+                "TimestampText": "00:58:18"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "00:49:30"
+                "TimestampText": "00:58:18"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T07:49:27.5675617+00:00",
-        "CompletedAtUtc": "2026-05-07T07:49:30.6547086+00:00"
+        "StartedAtUtc": "2026-05-07T07:58:15.7235089+00:00",
+        "CompletedAtUtc": "2026-05-07T07:58:18.8102509+00:00"
       },
-      "qa_tweak_id": "system.disable-search-highlights-policy",
-      "candidate_id": "system.disable-search-highlights-policy",
-      "card_name": "Search Highlights",
-      "documentation": "research/records/system.disable-search-highlights-policy.json"
+      "qa_tweak_id": "developer.python-path-fix",
+      "candidate_id": "developer.python-path-fix",
+      "card_name": "Enable Windows Long Paths for Python Workflows",
+      "documentation": "research/records/developer.python-path-fix.review.json"
     },
     {
-      "tweak_id": "system.disable-search-remote-queries",
+      "tweak_id": "developer.ssh-agent-autostart",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -1410,19 +1405,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "system.disable-search-remote-queries",
-        "TweakName": "Remote Windows Search Queries",
+        "TweakId": "developer.ssh-agent-autostart",
+        "TweakName": "SSH Agent Auto-start",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "system.disable-search-remote-queries",
-          "Name": "Remote Windows Search Queries",
-          "Category": "System",
-          "Description": "Windows Search can let other computers query this PC's search index over the network. This policy decides whether that remote index use is allowed.",
-          "FriendlyDescription": "Windows Search can let other computers query this PC's search index over the network. This policy decides whether that remote index use is allowed.",
-          "RegistryPath": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search\\PreventRemoteQueries",
+          "TweakId": "developer.ssh-agent-autostart",
+          "Name": "SSH Agent Auto-start",
+          "Category": "Developer",
+          "Description": "ssh-agent keeps SSH keys loaded so Git and terminal sessions can use them more easily. Auto-starting it can make developer login sessions more convenient.",
+          "FriendlyDescription": "ssh-agent keeps SSH keys loaded so Git and terminal sessions can use them more easily. Auto-starting it can make developer login sessions more convenient.",
+          "RegistryPath": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run\\SSH Agent",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -1430,22 +1425,22 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Windows Search can let other computers query this PC's search index over the network. This policy decides whether that remote index use is allowed. Evidence: The local official Microsoft ADMX file defines the exact machine policy path and value name used by the app, with enabledValue 1 and disabledValue 0. The paired ADML help text explains that enabling the policy blocks remote index queries and that the defaul... Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: ssh-agent keeps SSH keys loaded so Git and terminal sessions can use them more easily. Auto-starting it can make developer login sessions more convenient. Evidence: The Windows Run key documentation establishes the supported autostart surface used by the current app implementation. Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "The local official Microsoft ADMX file defines the exact machine policy path and value name used by the app, with enabledValue 1 and disabledValue 0. The paired ADML help text explains that enabling the policy blocks remote index queries and that the defaul...",
-              "Source": "Validation proof source: evidence/files/missing/search-admx.md"
+              "Summary": "The Windows Run key documentation establishes the supported autostart surface used by the current app implementation.",
+              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows/win32/setupapi/run-and-runonce-registry-keys"
             },
             {
               "Key": "runtime",
               "Label": "RUNTIME",
               "State": "ready",
-              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
-              "Source": ""
+              "Summary": "A same-day guest Ghidra retry for `SSH Agent` failed in `ensure-admin-shell` before any xref bundle reached the host.",
+              "Source": "Guest Ghidra launch receipt for SSH Agent: evidence/raw/ghidra/ghidra-developer-ssh-agent-autostart-20260424-batch3/summary.json"
             },
             {
               "Key": "source",
@@ -1469,13 +1464,8 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Win-Config",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\win-config\\batch-01.md#system.disable-search-remote-queries",
-              "Kind": "Docs"
-            },
-            {
-              "Title": "Docs: System (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\system\\system.md",
+              "Title": "Docs: Developer (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweaks.md",
               "Kind": "Docs"
             }
           ]
@@ -1484,10 +1474,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Remote queries blocked'.",
+            "StatusMessage": "Value not set.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Remote queries blocked",
+            "CurrentValue": "Not set",
+            "TargetValue": "C:\\Windows\\System32\\OpenSSH\\ssh-agent.exe",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -1496,8 +1486,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Remote queries blocked'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search\\PreventRemoteQueries: missing -> 1",
-                "TimestampText": "00:49:36"
+                "Message": "Value not set.",
+                "TimestampText": "00:58:25"
               },
               {
                 "Action": "Apply",
@@ -1524,8 +1514,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Remote queries blocked",
-            "TargetValue": "Remote queries blocked",
+            "CurrentValue": "C:\\Windows\\System32\\OpenSSH\\ssh-agent.exe",
+            "TargetValue": "C:\\Windows\\System32\\OpenSSH\\ssh-agent.exe",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1534,20 +1524,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Remote queries blocked'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search\\PreventRemoteQueries: missing -> 1",
-                "TimestampText": "00:49:36"
+                "Message": "Value not set.",
+                "TimestampText": "00:58:25"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Remote queries blocked'.",
-                "TimestampText": "00:49:39"
+                "Message": "Set value to C:\\Windows\\System32\\OpenSSH\\ssh-agent.exe.",
+                "TimestampText": "00:58:25"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Remote queries blocked'.",
-                "TimestampText": "00:49:39"
+                "Message": "Verified desired value.",
+                "TimestampText": "00:58:25"
               },
               {
                 "Action": "Rollback",
@@ -1560,10 +1550,10 @@
           {
             "Stage": "rollback",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Rolled back registry values.",
+            "StatusMessage": "Removed value to restore default.",
             "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Remote queries blocked",
+            "CurrentValue": "C:\\Windows\\System32\\OpenSSH\\ssh-agent.exe",
+            "TargetValue": "C:\\Windows\\System32\\OpenSSH\\ssh-agent.exe",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1572,36 +1562,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Remote queries blocked'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search\\PreventRemoteQueries: missing -> 1",
-                "TimestampText": "00:49:36"
+                "Message": "Value not set.",
+                "TimestampText": "00:58:25"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Remote queries blocked'.",
-                "TimestampText": "00:49:39"
+                "Message": "Set value to C:\\Windows\\System32\\OpenSSH\\ssh-agent.exe.",
+                "TimestampText": "00:58:25"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Remote queries blocked'.",
-                "TimestampText": "00:49:39"
+                "Message": "Verified desired value.",
+                "TimestampText": "00:58:25"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "00:49:39"
+                "Message": "Removed value to restore default.",
+                "TimestampText": "00:58:25"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Remote queries blocked'.",
+            "StatusMessage": "Value not set.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Remote queries blocked",
+            "CurrentValue": "Not set",
+            "TargetValue": "C:\\Windows\\System32\\OpenSSH\\ssh-agent.exe",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1610,37 +1600,37 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Remote queries blocked'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search\\PreventRemoteQueries: missing -> 1",
-                "TimestampText": "00:49:40"
+                "Message": "Value not set.",
+                "TimestampText": "00:58:25"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Remote queries blocked'.",
-                "TimestampText": "00:49:39"
+                "Message": "Set value to C:\\Windows\\System32\\OpenSSH\\ssh-agent.exe.",
+                "TimestampText": "00:58:25"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Remote queries blocked'.",
-                "TimestampText": "00:49:39"
+                "Message": "Verified desired value.",
+                "TimestampText": "00:58:25"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "00:49:39"
+                "Message": "Removed value to restore default.",
+                "TimestampText": "00:58:25"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T07:49:36.9261339+00:00",
-        "CompletedAtUtc": "2026-05-07T07:49:40.0674502+00:00"
+        "StartedAtUtc": "2026-05-07T07:58:25.2183671+00:00",
+        "CompletedAtUtc": "2026-05-07T07:58:25.5560745+00:00"
       },
-      "qa_tweak_id": "system.disable-search-remote-queries",
-      "candidate_id": "system.disable-search-remote-queries",
-      "card_name": "Remote Windows Search Queries",
-      "documentation": "research/records/system.disable-search-remote-queries.json"
+      "qa_tweak_id": "developer.ssh-agent-autostart",
+      "candidate_id": "developer.ssh-agent-autostart",
+      "card_name": "SSH Agent Auto-start",
+      "documentation": "research/records/developer.ssh-agent-autostart.review.json"
     }
   ],
   "summary": {
@@ -1649,7 +1639,7 @@
     "live_success_count": 5,
     "live_failure_count": 0,
     "categories": [
-      "System"
+      "Developer"
     ]
   }
 }
