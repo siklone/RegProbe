@@ -1,16 +1,16 @@
 {
-  "generated_utc": "2026-05-07T16:04:43Z",
-  "history_entry_count": 43,
+  "generated_utc": "2026-05-07T16:06:19Z",
+  "history_entry_count": 44,
   "catalog_candidate_count": 242,
-  "covered_count": 129,
-  "uncovered_count": 113,
+  "covered_count": 134,
+  "uncovered_count": 108,
   "summary": {
-    "coverage_percent": 53.31,
+    "coverage_percent": 55.37,
     "covered_categories": {
       "Audio": 2,
       "Cleanup": 1,
       "Developer": 7,
-      "Explorer": 8,
+      "Explorer": 13,
       "Network": 14,
       "Notifications": 3,
       "Performance": 3,
@@ -24,7 +24,7 @@
     "uncovered_categories": {
       "Audio": 1,
       "Developer": 2,
-      "Explorer": 9,
+      "Explorer": 4,
       "Network": 14,
       "Notifications": 2,
       "Peripheral": 1,
@@ -36,59 +36,6 @@
     }
   },
   "recommended_next_batches": [
-    {
-      "category": "Explorer",
-      "covered_count": 8,
-      "uncovered_count": 9,
-      "coverage_percent": 47.06,
-      "batch_size": 5,
-      "tweak_ids": [
-        "explorer.enable-explorer-compact-mode",
-        "explorer.launch-folder-windows-in-a-separate-process",
-        "explorer.show-compressed-and-encrypted-files-in-color",
-        "explorer.show-drive-letters-first",
-        "explorer.show-full-path"
-      ],
-      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id explorer.enable-explorer-compact-mode --id explorer.launch-folder-windows-in-a-separate-process --id explorer.show-compressed-and-encrypted-files-in-color --id explorer.show-drive-letters-first --id explorer.show-full-path",
-      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id explorer.enable-explorer-compact-mode --id explorer.launch-folder-windows-in-a-separate-process --id explorer.show-compressed-and-encrypted-files-in-color --id explorer.show-drive-letters-first --id explorer.show-full-path --run-kvm --json",
-      "candidates": [
-        {
-          "tweak_id": "explorer.enable-explorer-compact-mode",
-          "record_id": "explorer.enable-explorer-compact-mode",
-          "category": "Explorer",
-          "name": "Enable Explorer Compact View",
-          "documentation": "research/records/explorer.enable-explorer-compact-mode.review.json"
-        },
-        {
-          "tweak_id": "explorer.launch-folder-windows-in-a-separate-process",
-          "record_id": "explorer.launch-folder-windows-in-a-separate-process",
-          "category": "Explorer",
-          "name": "Launch Folder Windows in a Separate Process",
-          "documentation": "research/records/explorer.launch-folder-windows-in-a-separate-process.review.json"
-        },
-        {
-          "tweak_id": "explorer.show-compressed-and-encrypted-files-in-color",
-          "record_id": "explorer.show-compressed-and-encrypted-files-in-color",
-          "category": "Explorer",
-          "name": "Show Compressed and Encrypted Files in Color",
-          "documentation": "research/records/explorer.show-compressed-and-encrypted-files-in-color.review.json"
-        },
-        {
-          "tweak_id": "explorer.show-drive-letters-first",
-          "record_id": "explorer.show-drive-letters-first",
-          "category": "Explorer",
-          "name": "Show Drive Letters First",
-          "documentation": "research/records/explorer.show-drive-letters-first.review.json"
-        },
-        {
-          "tweak_id": "explorer.show-full-path",
-          "record_id": "explorer.show-full-path",
-          "category": "Explorer",
-          "name": "Show Full Path in Explorer",
-          "documentation": "research/records/explorer.show-full-path.review.json"
-        }
-      ]
-    },
     {
       "category": "Visibility",
       "covered_count": 11,
@@ -300,6 +247,59 @@
           "documentation": "research/records/network.smb-enable-large-mtu.json"
         }
       ]
+    },
+    {
+      "category": "Security",
+      "covered_count": 12,
+      "uncovered_count": 9,
+      "coverage_percent": 57.14,
+      "batch_size": 5,
+      "tweak_ids": [
+        "security.disable-wu-driver-updates",
+        "security.enable-defender-maps-advanced-membership",
+        "security.enable-dynamic-lock",
+        "security.enable-sudo",
+        "security.hide-defender-exclusions-from-local-admins"
+      ],
+      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id security.disable-wu-driver-updates --id security.enable-defender-maps-advanced-membership --id security.enable-dynamic-lock --id security.enable-sudo --id security.hide-defender-exclusions-from-local-admins",
+      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id security.disable-wu-driver-updates --id security.enable-defender-maps-advanced-membership --id security.enable-dynamic-lock --id security.enable-sudo --id security.hide-defender-exclusions-from-local-admins --run-kvm --json",
+      "candidates": [
+        {
+          "tweak_id": "security.disable-wu-driver-updates",
+          "record_id": "security.disable-wu-driver-updates",
+          "category": "Security",
+          "name": "Windows Update Driver Search Policy",
+          "documentation": "research/records/security.disable-wu-driver-updates.json"
+        },
+        {
+          "tweak_id": "security.enable-defender-maps-advanced-membership",
+          "record_id": "security.enable-defender-maps-advanced-membership",
+          "category": "Security",
+          "name": "Microsoft Defender MAPS Membership",
+          "documentation": "research/records/security.enable-defender-maps-advanced-membership.review.json"
+        },
+        {
+          "tweak_id": "security.enable-dynamic-lock",
+          "record_id": "security.enable-dynamic-lock",
+          "category": "Security",
+          "name": "Dynamic Lock",
+          "documentation": "research/records/security.enable-dynamic-lock.json"
+        },
+        {
+          "tweak_id": "security.enable-sudo",
+          "record_id": "security.enable-sudo",
+          "category": "Security",
+          "name": "Windows Sudo Mode Policy",
+          "documentation": "research/records/security.enable-sudo.json"
+        },
+        {
+          "tweak_id": "security.hide-defender-exclusions-from-local-admins",
+          "record_id": "security.hide-defender-exclusions-from-local-admins",
+          "category": "Security",
+          "name": "Hide Defender Exclusions From Local Admins",
+          "documentation": "research/records/security.hide-defender-exclusions-from-local-admins.review.json"
+        }
+      ]
     }
   ],
   "covered": [
@@ -421,6 +421,15 @@
       "latest_report_status": "ok"
     },
     {
+      "tweak_id": "explorer.enable-explorer-compact-mode",
+      "qa_tweak_id": "explorer.enable-explorer-compact-mode",
+      "candidate_id": "explorer.enable-explorer-compact-mode",
+      "category": "Explorer",
+      "name": "Enable Explorer Compact View",
+      "documentation": "research/records/explorer.enable-explorer-compact-mode.review.json",
+      "latest_report_status": "ok"
+    },
+    {
       "tweak_id": "explorer.hide-empty-drives",
       "qa_tweak_id": "explorer.hide-empty-drives",
       "candidate_id": "explorer.hide-empty-drives",
@@ -430,12 +439,48 @@
       "latest_report_status": "ok"
     },
     {
+      "tweak_id": "explorer.launch-folder-windows-in-a-separate-process",
+      "qa_tweak_id": "explorer.launch-folder-windows-in-a-separate-process",
+      "candidate_id": "explorer.launch-folder-windows-in-a-separate-process",
+      "category": "Explorer",
+      "name": "Launch Folder Windows in a Separate Process",
+      "documentation": "research/records/explorer.launch-folder-windows-in-a-separate-process.review.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "explorer.show-compressed-and-encrypted-files-in-color",
+      "qa_tweak_id": "explorer.show-compressed-and-encrypted-files-in-color",
+      "candidate_id": "explorer.show-compressed-and-encrypted-files-in-color",
+      "category": "Explorer",
+      "name": "Show Compressed and Encrypted Files in Color",
+      "documentation": "research/records/explorer.show-compressed-and-encrypted-files-in-color.review.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "explorer.show-drive-letters-first",
+      "qa_tweak_id": "explorer.show-drive-letters-first",
+      "candidate_id": "explorer.show-drive-letters-first",
+      "category": "Explorer",
+      "name": "Show Drive Letters First",
+      "documentation": "research/records/explorer.show-drive-letters-first.review.json",
+      "latest_report_status": "ok"
+    },
+    {
       "tweak_id": "explorer.show-file-extensions",
       "qa_tweak_id": "explorer.show-file-extensions",
       "candidate_id": "explorer.show-file-extensions",
       "category": "Explorer",
       "name": "Show File Extensions",
       "documentation": "research/records/explorer.show-file-extensions.review.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "explorer.show-full-path",
+      "qa_tweak_id": "explorer.show-full-path",
+      "candidate_id": "explorer.show-full-path",
+      "category": "Explorer",
+      "name": "Show Full Path in Explorer",
+      "documentation": "research/records/explorer.show-full-path.review.json",
       "latest_report_status": "ok"
     },
     {
@@ -1486,41 +1531,6 @@
       "category": "Developer",
       "name": "WSL 2 Memory Limit",
       "documentation": "research/records/developer.wsl2-memory.json"
-    },
-    {
-      "tweak_id": "explorer.enable-explorer-compact-mode",
-      "record_id": "explorer.enable-explorer-compact-mode",
-      "category": "Explorer",
-      "name": "Enable Explorer Compact View",
-      "documentation": "research/records/explorer.enable-explorer-compact-mode.review.json"
-    },
-    {
-      "tweak_id": "explorer.launch-folder-windows-in-a-separate-process",
-      "record_id": "explorer.launch-folder-windows-in-a-separate-process",
-      "category": "Explorer",
-      "name": "Launch Folder Windows in a Separate Process",
-      "documentation": "research/records/explorer.launch-folder-windows-in-a-separate-process.review.json"
-    },
-    {
-      "tweak_id": "explorer.show-compressed-and-encrypted-files-in-color",
-      "record_id": "explorer.show-compressed-and-encrypted-files-in-color",
-      "category": "Explorer",
-      "name": "Show Compressed and Encrypted Files in Color",
-      "documentation": "research/records/explorer.show-compressed-and-encrypted-files-in-color.review.json"
-    },
-    {
-      "tweak_id": "explorer.show-drive-letters-first",
-      "record_id": "explorer.show-drive-letters-first",
-      "category": "Explorer",
-      "name": "Show Drive Letters First",
-      "documentation": "research/records/explorer.show-drive-letters-first.review.json"
-    },
-    {
-      "tweak_id": "explorer.show-full-path",
-      "record_id": "explorer.show-full-path",
-      "category": "Explorer",
-      "name": "Show Full Path in Explorer",
-      "documentation": "research/records/explorer.show-full-path.review.json"
     },
     {
       "tweak_id": "explorer.show-info-tips",

@@ -1,18 +1,18 @@
 # Promoted App QA Coverage
 
-- Generated UTC: 2026-05-07T16:04:43Z
-- History entries: 43
+- Generated UTC: 2026-05-07T16:06:19Z
+- History entries: 44
 - Promoted app-QA candidates: 242
-- Covered: 129
-- Uncovered: 113
-- Coverage: 53.31%
+- Covered: 134
+- Uncovered: 108
+- Coverage: 55.37%
 
 ## Covered Categories
 
 - Audio: 2
 - Cleanup: 1
 - Developer: 7
-- Explorer: 8
+- Explorer: 13
 - Network: 14
 - Notifications: 3
 - Performance: 3
@@ -27,7 +27,7 @@
 
 - Audio: 1
 - Developer: 2
-- Explorer: 9
+- Explorer: 4
 - Network: 14
 - Notifications: 2
 - Peripheral: 1
@@ -39,9 +39,6 @@
 
 ## Recommended Next Batches
 
-- Explorer: 5 uncovered cards | coverage 47.06%
-  command: `dotnet run --project cli/cli.csproj -- research qa-batch --id explorer.enable-explorer-compact-mode --id explorer.launch-folder-windows-in-a-separate-process --id explorer.show-compressed-and-encrypted-files-in-color --id explorer.show-drive-letters-first --id explorer.show-full-path`
-  live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id explorer.enable-explorer-compact-mode --id explorer.launch-folder-windows-in-a-separate-process --id explorer.show-compressed-and-encrypted-files-in-color --id explorer.show-drive-letters-first --id explorer.show-full-path --run-kvm --json`
 - Visibility: 5 uncovered cards | coverage 47.83%
   command: `dotnet run --project cli/cli.csproj -- research qa-batch --id visibility.disable-lock-screen-motion --id visibility.disable-lock-screen-slideshow --id visibility.disable-spotlight-action-center --id visibility.disable-spotlight-desktop-collection --id visibility.disable-spotlight-features`
   live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id visibility.disable-lock-screen-motion --id visibility.disable-lock-screen-slideshow --id visibility.disable-spotlight-action-center --id visibility.disable-spotlight-desktop-collection --id visibility.disable-spotlight-features --run-kvm --json`
@@ -54,17 +51,15 @@
 - Network: 5 uncovered cards | coverage 50.0%
   command: `dotnet run --project cli/cli.csproj -- research qa-batch --id network.enable-lltdio --id network.prefer-ipv4 --id network.require-ntlm-ssp-client-session-security --id network.smb-disable-leasing --id network.smb-enable-large-mtu`
   live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id network.enable-lltdio --id network.prefer-ipv4 --id network.require-ntlm-ssp-client-session-security --id network.smb-disable-leasing --id network.smb-enable-large-mtu --run-kvm --json`
+- Security: 5 uncovered cards | coverage 57.14%
+  command: `dotnet run --project cli/cli.csproj -- research qa-batch --id security.disable-wu-driver-updates --id security.enable-defender-maps-advanced-membership --id security.enable-dynamic-lock --id security.enable-sudo --id security.hide-defender-exclusions-from-local-admins`
+  live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id security.disable-wu-driver-updates --id security.enable-defender-maps-advanced-membership --id security.enable-dynamic-lock --id security.enable-sudo --id security.hide-defender-exclusions-from-local-admins --run-kvm --json`
 
 ## Remaining Uncovered Sample
 
 - `audio.show-hidden-devices` | Show Hidden Audio Devices | Audio
 - `developer.windows-dev-mode` | Windows Developer Mode | Developer
 - `developer.wsl2-memory` | WSL 2 Memory Limit | Developer
-- `explorer.enable-explorer-compact-mode` | Enable Explorer Compact View | Explorer
-- `explorer.launch-folder-windows-in-a-separate-process` | Launch Folder Windows in a Separate Process | Explorer
-- `explorer.show-compressed-and-encrypted-files-in-color` | Show Compressed and Encrypted Files in Color | Explorer
-- `explorer.show-drive-letters-first` | Show Drive Letters First | Explorer
-- `explorer.show-full-path` | Show Full Path in Explorer | Explorer
 - `explorer.show-info-tips` | Show Explorer Info Tips | Explorer
 - `explorer.show-protected-operating-system-files` | Show Protected Operating System Files | Explorer
 - `explorer.show-recent-items` | Show Recent Items In Home | Explorer
@@ -77,3 +72,8 @@
 - `network.smb-enable-multichannel` | SMB Multichannel | Network
 - `network.smb-enable-quic` | SMB over QUIC | Network
 - `network.smb-encrypt-data` | SMB Server Encryption Requirement | Network
+- `network.smb-increase-client-metadata-cache` | SMB Client Metadata Cache Size Bundle | Network
+- `network.smb-reject-unencrypted-access` | SMB Server Reject Unencrypted Access | Network
+- `network.smb-require-dialect-3_1_1` | Require SMB Dialect 3.1.1 | Network
+- `network.smb-require-signing-client` | SMB Client Signing Requirement | Network
+- `network.smb-require-signing-server` | SMB Server Signing Requirement | Network

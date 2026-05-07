@@ -1,13 +1,13 @@
 {
-  "generated_utc": "2026-05-07T16:04:43Z",
+  "generated_utc": "2026-05-07T16:06:19Z",
   "status": "PASS",
   "selection": {
     "requested_ids": [
-      "privacy.disable-feedback-notifications",
-      "privacy.disable-file-history",
-      "privacy.disable-font-providers",
-      "privacy.disable-kms-activation-telemetry",
-      "privacy.disable-language-list-access"
+      "explorer.enable-explorer-compact-mode",
+      "explorer.launch-folder-windows-in-a-separate-process",
+      "explorer.show-compressed-and-encrypted-files-in-color",
+      "explorer.show-drive-letters-first",
+      "explorer.show-full-path"
     ],
     "requested_categories": [],
     "limit_per_category": 1,
@@ -26,25 +26,25 @@
   "errors": [],
   "candidates": [
     {
-      "tweak_id": "privacy.disable-feedback-notifications",
-      "qa_tweak_id": "privacy.disable-feedback-notifications",
-      "candidate_id": "privacy.disable-feedback-notifications",
-      "record_id": "privacy.disable-feedback-notifications",
-      "category": "Privacy",
-      "name": "Microsoft Feedback Notifications",
-      "documentation": "research/records/privacy.disable-feedback-notifications.json",
+      "tweak_id": "explorer.enable-explorer-compact-mode",
+      "qa_tweak_id": "explorer.enable-explorer-compact-mode",
+      "candidate_id": "explorer.enable-explorer-compact-mode",
+      "record_id": "explorer.enable-explorer-compact-mode",
+      "category": "Explorer",
+      "name": "Enable Explorer Compact View",
+      "documentation": "research/records/explorer.enable-explorer-compact-mode.review.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.disable-feedback-notifications",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect explorer.enable-explorer-compact-mode",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-feedback-notifications' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-feedback-notifications.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-feedback-notifications' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-feedback-notifications.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-feedback-notifications' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-feedback-notifications.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-feedback-notifications' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-feedback-notifications.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.disable-feedback-notifications'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'explorer.enable-explorer-compact-mode' --qa-output 'C:\\Tools\\ValidationController\\smoke\\explorer.enable-explorer-compact-mode.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'explorer.enable-explorer-compact-mode' --qa-output 'C:\\Tools\\ValidationController\\smoke\\explorer.enable-explorer-compact-mode.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'explorer.enable-explorer-compact-mode' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\explorer.enable-explorer-compact-mode.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'explorer.enable-explorer-compact-mode' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\explorer.enable-explorer-compact-mode.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'explorer.enable-explorer-compact-mode'"
       },
       "expected_report": {
         "success": true,
@@ -85,25 +85,25 @@
       }
     },
     {
-      "tweak_id": "privacy.disable-file-history",
-      "qa_tweak_id": "privacy.disable-file-history",
-      "candidate_id": "privacy.disable-file-history",
-      "record_id": "privacy.disable-file-history",
-      "category": "Privacy",
-      "name": "File History",
-      "documentation": "research/records/privacy.disable-file-history.json",
+      "tweak_id": "explorer.launch-folder-windows-in-a-separate-process",
+      "qa_tweak_id": "explorer.launch-folder-windows-in-a-separate-process",
+      "candidate_id": "explorer.launch-folder-windows-in-a-separate-process",
+      "record_id": "explorer.launch-folder-windows-in-a-separate-process",
+      "category": "Explorer",
+      "name": "Launch Folder Windows in a Separate Process",
+      "documentation": "research/records/explorer.launch-folder-windows-in-a-separate-process.review.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.disable-file-history",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect explorer.launch-folder-windows-in-a-separate-process",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-file-history' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-file-history.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-file-history' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-file-history.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-file-history' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-file-history.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-file-history' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-file-history.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.disable-file-history'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'explorer.launch-folder-windows-in-a-separate-process' --qa-output 'C:\\Tools\\ValidationController\\smoke\\explorer.launch-folder-windows-in-a-separate-process.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'explorer.launch-folder-windows-in-a-separate-process' --qa-output 'C:\\Tools\\ValidationController\\smoke\\explorer.launch-folder-windows-in-a-separate-process.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'explorer.launch-folder-windows-in-a-separate-process' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\explorer.launch-folder-windows-in-a-separate-process.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'explorer.launch-folder-windows-in-a-separate-process' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\explorer.launch-folder-windows-in-a-separate-process.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'explorer.launch-folder-windows-in-a-separate-process'"
       },
       "expected_report": {
         "success": true,
@@ -144,25 +144,25 @@
       }
     },
     {
-      "tweak_id": "privacy.disable-font-providers",
-      "qa_tweak_id": "privacy.disable-font-providers",
-      "candidate_id": "privacy.disable-font-providers",
-      "record_id": "privacy.disable-font-providers",
-      "category": "Privacy",
-      "name": "Online Font Providers",
-      "documentation": "research/records/privacy.disable-font-providers.json",
+      "tweak_id": "explorer.show-compressed-and-encrypted-files-in-color",
+      "qa_tweak_id": "explorer.show-compressed-and-encrypted-files-in-color",
+      "candidate_id": "explorer.show-compressed-and-encrypted-files-in-color",
+      "record_id": "explorer.show-compressed-and-encrypted-files-in-color",
+      "category": "Explorer",
+      "name": "Show Compressed and Encrypted Files in Color",
+      "documentation": "research/records/explorer.show-compressed-and-encrypted-files-in-color.review.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.disable-font-providers",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect explorer.show-compressed-and-encrypted-files-in-color",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-font-providers' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-font-providers.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-font-providers' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-font-providers.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-font-providers' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-font-providers.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-font-providers' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-font-providers.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.disable-font-providers'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'explorer.show-compressed-and-encrypted-files-in-color' --qa-output 'C:\\Tools\\ValidationController\\smoke\\explorer.show-compressed-and-encrypted-files-in-color.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'explorer.show-compressed-and-encrypted-files-in-color' --qa-output 'C:\\Tools\\ValidationController\\smoke\\explorer.show-compressed-and-encrypted-files-in-color.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'explorer.show-compressed-and-encrypted-files-in-color' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\explorer.show-compressed-and-encrypted-files-in-color.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'explorer.show-compressed-and-encrypted-files-in-color' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\explorer.show-compressed-and-encrypted-files-in-color.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'explorer.show-compressed-and-encrypted-files-in-color'"
       },
       "expected_report": {
         "success": true,
@@ -203,25 +203,25 @@
       }
     },
     {
-      "tweak_id": "privacy.disable-kms-activation-telemetry",
-      "qa_tweak_id": "privacy.disable-kms-activation-telemetry",
-      "candidate_id": "privacy.disable-kms-activation-telemetry",
-      "record_id": "privacy.disable-kms-activation-telemetry",
-      "category": "Privacy",
-      "name": "KMS Client Online AVS Validation",
-      "documentation": "research/records/privacy.disable-kms-activation-telemetry.json",
+      "tweak_id": "explorer.show-drive-letters-first",
+      "qa_tweak_id": "explorer.show-drive-letters-first",
+      "candidate_id": "explorer.show-drive-letters-first",
+      "record_id": "explorer.show-drive-letters-first",
+      "category": "Explorer",
+      "name": "Show Drive Letters First",
+      "documentation": "research/records/explorer.show-drive-letters-first.review.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.disable-kms-activation-telemetry",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect explorer.show-drive-letters-first",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-kms-activation-telemetry' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-kms-activation-telemetry.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-kms-activation-telemetry' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-kms-activation-telemetry.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-kms-activation-telemetry' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-kms-activation-telemetry.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-kms-activation-telemetry' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-kms-activation-telemetry.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.disable-kms-activation-telemetry'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'explorer.show-drive-letters-first' --qa-output 'C:\\Tools\\ValidationController\\smoke\\explorer.show-drive-letters-first.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'explorer.show-drive-letters-first' --qa-output 'C:\\Tools\\ValidationController\\smoke\\explorer.show-drive-letters-first.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'explorer.show-drive-letters-first' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\explorer.show-drive-letters-first.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'explorer.show-drive-letters-first' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\explorer.show-drive-letters-first.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'explorer.show-drive-letters-first'"
       },
       "expected_report": {
         "success": true,
@@ -262,25 +262,25 @@
       }
     },
     {
-      "tweak_id": "privacy.disable-language-list-access",
-      "qa_tweak_id": "privacy.disable-language-list-access",
-      "candidate_id": "privacy.disable-language-list-access",
-      "record_id": "privacy.disable-language-list-access",
-      "category": "Privacy",
-      "name": "Website Access to Language List",
-      "documentation": "research/records/privacy.disable-language-list-access.review.json",
+      "tweak_id": "explorer.show-full-path",
+      "qa_tweak_id": "explorer.show-full-path",
+      "candidate_id": "explorer.show-full-path",
+      "record_id": "explorer.show-full-path",
+      "category": "Explorer",
+      "name": "Show Full Path in Explorer",
+      "documentation": "research/records/explorer.show-full-path.review.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.disable-language-list-access",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect explorer.show-full-path",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-language-list-access' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-language-list-access.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-language-list-access' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-language-list-access.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-language-list-access' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-language-list-access.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-language-list-access' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-language-list-access.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.disable-language-list-access'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'explorer.show-full-path' --qa-output 'C:\\Tools\\ValidationController\\smoke\\explorer.show-full-path.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'explorer.show-full-path' --qa-output 'C:\\Tools\\ValidationController\\smoke\\explorer.show-full-path.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'explorer.show-full-path' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\explorer.show-full-path.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'explorer.show-full-path' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\explorer.show-full-path.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'explorer.show-full-path'"
       },
       "expected_report": {
         "success": true,
@@ -323,13 +323,13 @@
   ],
   "run_results": [
     {
-      "tweak_id": "privacy.disable-feedback-notifications",
+      "tweak_id": "explorer.enable-explorer-compact-mode",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
-      "report_source": "stdout",
+      "report_source": "guest-file",
       "report_parse_error": null,
-      "report_fetch_status": null,
+      "report_fetch_status": "ok",
       "report_app_success": true,
       "report_success": true,
       "report_status": "ok",
@@ -360,19 +360,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "privacy.disable-feedback-notifications",
-        "TweakName": "Microsoft Feedback Notifications",
+        "TweakId": "explorer.enable-explorer-compact-mode",
+        "TweakName": "Enable Explorer Compact View",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "privacy.disable-feedback-notifications",
-          "Name": "Microsoft Feedback Notifications",
-          "Category": "Privacy",
-          "Description": "Windows can occasionally show prompts asking for feedback. This policy decides whether those feedback questions appear on the device.",
-          "FriendlyDescription": "Windows can occasionally show prompts asking for feedback. This policy decides whether those feedback questions appear on the device.",
-          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection\\DoNotShowFeedbackNotifications",
+          "TweakId": "explorer.enable-explorer-compact-mode",
+          "Name": "Enable Explorer Compact View",
+          "Category": "Explorer",
+          "Description": "Explorer compact view reduces spacing between items so more files fit on screen. Some users like the denser layout, while others prefer the roomier default view.",
+          "FriendlyDescription": "Explorer compact view reduces spacing between items so more files fit on screen. Some users like the denser layout, while others prefer the roomier default view.",
+          "RegistryPath": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\UseCompactMode",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -380,22 +380,22 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Windows can occasionally show prompts asking for feedback. This policy decides whether those feedback questions appear on the device. Evidence: The Experience Policy CSP page explicitly names the exact machine policy path and value name the app writes and defines the 0/1 semantics. Added nohuto mirror corroboration via nohuto-donotshowfeedbacknotifications-admx. Win25H2Clean reversible probe at evi... Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: Explorer compact view reduces spacing between items so more files fit on screen. Some users like the denser layout, while others prefer the roomier default view. Evidence: The value was toggled from 1 to 0 and the original absent state was then restored. Both observed states were queried by Explorer.EXE on restart. Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "The Experience Policy CSP page explicitly names the exact machine policy path and value name the app writes and defines the 0/1 semantics. Added nohuto mirror corroboration via nohuto-donotshowfeedbacknotifications-admx. Win25H2Clean reversible probe at evi...",
-              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#donotshowfeedbacknotifications"
+              "Summary": "The value was toggled from 1 to 0 and the original absent state was then restored. Both observed states were queried by Explorer.EXE on restart.",
+              "Source": "Validation proof source: evidence/raw/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md"
             },
             {
               "Key": "runtime",
               "Label": "RUNTIME",
               "State": "ready",
-              "Summary": "The guest probe wrote DoNotShowFeedbackNotifications=0 and DoNotShowFeedbackNotifications=1, queried the live registry after each write, opened the feedback settings surface in both states, and restored the original state.",
-              "Source": "Win25H2Clean reversible probe - DoNotShowFeedbackNotifications 0/1 toggle: evidence/raw/procmon/privacy.disable-feedback-notifications/feedback_notifications_probe.txt"
+              "Summary": "Procmon captured Explorer.EXE querying HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\UseCompactMode with Data:1 and Data:0 in separate reversible captures after Explorer restart. That proves Explorer consumes this registry value on this b...",
+              "Source": "Procmon capture - Explorer UseCompactMode runtime reads: evidence/raw/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md and evidence/raw/procmon/explorer.enable-explorer-compact-mode/explorer-compact-zero-20260314-pml.md"
             },
             {
               "Key": "source",
@@ -419,8 +419,8 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Privacy (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\privacy\\privacy-verified.md",
+              "Title": "Docs: Explorer",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\visibility\\visibility.md#explorer.enable-explorer-compact-mode",
               "Kind": "Docs"
             }
           ]
@@ -429,10 +429,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Feedback notifications disabled'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Compact view enabled'.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Feedback notifications disabled",
+            "TargetValue": "Compact view enabled",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -441,8 +441,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Feedback notifications disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection\\DoNotShowFeedbackNotifications: missing -> 1",
-                "TimestampText": "09:04:47"
+                "Message": "Current values do not match a named option. Selected option is 'Compact view enabled'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\UseCompactMode: missing -> 1",
+                "TimestampText": "09:06:24"
               },
               {
                 "Action": "Apply",
@@ -469,8 +469,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Feedback notifications disabled",
-            "TargetValue": "Feedback notifications disabled",
+            "CurrentValue": "Compact view enabled",
+            "TargetValue": "Compact view enabled",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -479,20 +479,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Feedback notifications disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection\\DoNotShowFeedbackNotifications: missing -> 1",
-                "TimestampText": "09:04:47"
+                "Message": "Current values do not match a named option. Selected option is 'Compact view enabled'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\UseCompactMode: missing -> 1",
+                "TimestampText": "09:06:24"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Feedback notifications disabled'.",
-                "TimestampText": "09:04:50"
+                "Message": "Applied preset 'Compact view enabled'.",
+                "TimestampText": "09:06:24"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Feedback notifications disabled'.",
-                "TimestampText": "09:04:50"
+                "Message": "Verified preset 'Compact view enabled'.",
+                "TimestampText": "09:06:24"
               },
               {
                 "Action": "Rollback",
@@ -508,7 +508,7 @@
             "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Feedback notifications disabled",
+            "TargetValue": "Compact view enabled",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -517,36 +517,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Feedback notifications disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection\\DoNotShowFeedbackNotifications: missing -> 1",
-                "TimestampText": "09:04:47"
+                "Message": "Current values do not match a named option. Selected option is 'Compact view enabled'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\UseCompactMode: missing -> 1",
+                "TimestampText": "09:06:24"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Feedback notifications disabled'.",
-                "TimestampText": "09:04:50"
+                "Message": "Applied preset 'Compact view enabled'.",
+                "TimestampText": "09:06:24"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Feedback notifications disabled'.",
-                "TimestampText": "09:04:50"
+                "Message": "Verified preset 'Compact view enabled'.",
+                "TimestampText": "09:06:24"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "09:04:50"
+                "TimestampText": "09:06:24"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Feedback notifications disabled'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Compact view enabled'.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Feedback notifications disabled",
+            "TargetValue": "Compact view enabled",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -555,40 +555,40 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Feedback notifications disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection\\DoNotShowFeedbackNotifications: missing -> 1",
-                "TimestampText": "09:04:50"
+                "Message": "Current values do not match a named option. Selected option is 'Compact view enabled'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\UseCompactMode: missing -> 1",
+                "TimestampText": "09:06:24"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Feedback notifications disabled'.",
-                "TimestampText": "09:04:50"
+                "Message": "Applied preset 'Compact view enabled'.",
+                "TimestampText": "09:06:24"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Feedback notifications disabled'.",
-                "TimestampText": "09:04:50"
+                "Message": "Verified preset 'Compact view enabled'.",
+                "TimestampText": "09:06:24"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "09:04:50"
+                "TimestampText": "09:06:24"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T16:04:47.7257829+00:00",
-        "CompletedAtUtc": "2026-05-07T16:04:50.9459727+00:00"
+        "StartedAtUtc": "2026-05-07T16:06:24.1410668+00:00",
+        "CompletedAtUtc": "2026-05-07T16:06:24.5093422+00:00"
       },
-      "qa_tweak_id": "privacy.disable-feedback-notifications",
-      "candidate_id": "privacy.disable-feedback-notifications",
-      "card_name": "Microsoft Feedback Notifications",
-      "documentation": "research/records/privacy.disable-feedback-notifications.json"
+      "qa_tweak_id": "explorer.enable-explorer-compact-mode",
+      "candidate_id": "explorer.enable-explorer-compact-mode",
+      "card_name": "Enable Explorer Compact View",
+      "documentation": "research/records/explorer.enable-explorer-compact-mode.review.json"
     },
     {
-      "tweak_id": "privacy.disable-file-history",
+      "tweak_id": "explorer.launch-folder-windows-in-a-separate-process",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -625,19 +625,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "privacy.disable-file-history",
-        "TweakName": "File History",
+        "TweakId": "explorer.launch-folder-windows-in-a-separate-process",
+        "TweakName": "Launch Folder Windows in a Separate Process",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "privacy.disable-file-history",
-          "Name": "File History",
-          "Category": "Privacy",
-          "Description": "File History is Windows' built-in feature for making regular automatic backups of personal files. This policy decides whether File History can be turned on.",
-          "FriendlyDescription": "File History is Windows' built-in feature for making regular automatic backups of personal files. This policy decides whether File History can be turned on.",
-          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Windows\\FileHistory\\Disabled",
+          "TweakId": "explorer.launch-folder-windows-in-a-separate-process",
+          "Name": "Launch Folder Windows in a Separate Process",
+          "Category": "Explorer",
+          "Description": "Explorer can run folder windows in the same process or split them into separate Explorer processes.",
+          "FriendlyDescription": "Explorer can run folder windows in the same process or split them into separate Explorer processes.",
+          "RegistryPath": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\SeparateProcess",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -645,22 +645,22 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: File History is Windows' built-in feature for making regular automatic backups of personal files. This policy decides whether File History can be turned on. Evidence: Local official ADMX defines the exact key and value name; local ADML confirms that enabling the policy prevents File History from being activated for regular automatic backups. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: Explorer can run folder windows in the same process or split them into separate Explorer processes. Evidence: The result file was copied back to the host workspace during validation. Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "Local official ADMX defines the exact key and value name; local ADML confirms that enabling the policy prevents File History from being activated for regular automatic backups.",
-              "Source": "Validation proof source: evidence/files/external/c/WINDOWS/PolicyDefinitions/FileHistory.admx"
+              "Summary": "The result file was copied back to the host workspace during validation.",
+              "Source": "Validation proof source: evidence/files/vm-tooling-staging/separateprocess-result.txt"
             },
             {
               "Key": "runtime",
               "Label": "RUNTIME",
               "State": "ready",
-              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
-              "Source": ""
+              "Summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote SeparateProcess = 0 and SeparateProcess = 1, restarted Explorer after each write, and captured Explorer.EXE querying HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\SeparateProce...",
+              "Source": "Procmon capture - Explorer SeparateProcess runtime surface: evidence/raw/procmon/explorer.launch-folder-windows-in-a-separate-process/separateprocess-result.txt"
             },
             {
               "Key": "source",
@@ -684,8 +684,8 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Privacy (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\privacy\\privacy-verified.md",
+              "Title": "Docs: Explorer",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\visibility\\visibility.md#explorer.launch-folder-windows-in-a-separate-process",
               "Kind": "Docs"
             }
           ]
@@ -694,10 +694,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'File History disabled'.",
+            "StatusMessage": "Current option is 'Use the default shared Explorer process model'. Selected option is 'Launch folder windows in a separate process'.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "File History disabled",
+            "CurrentValue": "Use the default shared Explorer process model",
+            "TargetValue": "Launch folder windows in a separate process",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -706,8 +706,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'File History disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\FileHistory\\Disabled: missing -> 1",
-                "TimestampText": "09:04:56"
+                "Message": "Current option is 'Use the default shared Explorer process model'. Selected option is 'Launch folder windows in a separate process'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\SeparateProcess: 0 -> 1",
+                "TimestampText": "09:06:28"
               },
               {
                 "Action": "Apply",
@@ -734,8 +734,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "File History disabled",
-            "TargetValue": "File History disabled",
+            "CurrentValue": "Launch folder windows in a separate process",
+            "TargetValue": "Launch folder windows in a separate process",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -744,20 +744,550 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'File History disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\FileHistory\\Disabled: missing -> 1",
-                "TimestampText": "09:04:56"
+                "Message": "Current option is 'Use the default shared Explorer process model'. Selected option is 'Launch folder windows in a separate process'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\SeparateProcess: 0 -> 1",
+                "TimestampText": "09:06:28"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'File History disabled'.",
-                "TimestampText": "09:04:58"
+                "Message": "Applied preset 'Launch folder windows in a separate process'.",
+                "TimestampText": "09:06:28"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'File History disabled'.",
-                "TimestampText": "09:04:58"
+                "Message": "Verified preset 'Launch folder windows in a separate process'.",
+                "TimestampText": "09:06:28"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Not required",
+                "Message": "Step not executed.",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "rollback",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Rolled back registry values.",
+            "OutcomeSummary": "Rollback - Rolled Back",
+            "CurrentValue": "Use the default shared Explorer process model",
+            "TargetValue": "Launch folder windows in a separate process",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current option is 'Use the default shared Explorer process model'. Selected option is 'Launch folder windows in a separate process'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\SeparateProcess: 0 -> 1",
+                "TimestampText": "09:06:28"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Launch folder windows in a separate process'.",
+                "TimestampText": "09:06:28"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Launch folder windows in a separate process'.",
+                "TimestampText": "09:06:28"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "09:06:28"
+              }
+            ]
+          },
+          {
+            "Stage": "detect-after",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Current option is 'Use the default shared Explorer process model'. Selected option is 'Launch folder windows in a separate process'.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Use the default shared Explorer process model",
+            "TargetValue": "Launch folder windows in a separate process",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current option is 'Use the default shared Explorer process model'. Selected option is 'Launch folder windows in a separate process'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\SeparateProcess: 0 -> 1",
+                "TimestampText": "09:06:28"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Launch folder windows in a separate process'.",
+                "TimestampText": "09:06:28"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Launch folder windows in a separate process'.",
+                "TimestampText": "09:06:28"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "09:06:28"
+              }
+            ]
+          }
+        ],
+        "StartedAtUtc": "2026-05-07T16:06:28.6035747+00:00",
+        "CompletedAtUtc": "2026-05-07T16:06:28.9606996+00:00"
+      },
+      "qa_tweak_id": "explorer.launch-folder-windows-in-a-separate-process",
+      "candidate_id": "explorer.launch-folder-windows-in-a-separate-process",
+      "card_name": "Launch Folder Windows in a Separate Process",
+      "documentation": "research/records/explorer.launch-folder-windows-in-a-separate-process.review.json"
+    },
+    {
+      "tweak_id": "explorer.show-compressed-and-encrypted-files-in-color",
+      "host_exit": 0,
+      "execution_exit": 0,
+      "payload_status": "completed",
+      "report_source": "stdout",
+      "report_parse_error": null,
+      "report_fetch_status": null,
+      "report_app_success": true,
+      "report_success": true,
+      "report_status": "ok",
+      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
+      "report_contract_status": "ok",
+      "report_contract_summary": "QA card snapshot contract passed.",
+      "report_contract_failures": [],
+      "report_card_present": true,
+      "report_card_has_claim_boundary": true,
+      "report_card_present_fields": [
+        "TweakId",
+        "Name",
+        "Category",
+        "EvidenceClass",
+        "ResearchStatus",
+        "RollbackSnapshotState",
+        "HasClaimBoundary",
+        "WhatWeKnowSummary",
+        "WhatWeDoNotClaimSummary",
+        "ProofLanes"
+      ],
+      "report_card_missing_fields": [],
+      "report_card_proof_lanes": [
+        "docs",
+        "runtime",
+        "source",
+        "rollback"
+      ],
+      "report_card_missing_proof_lanes": [],
+      "report": {
+        "TweakId": "explorer.show-compressed-and-encrypted-files-in-color",
+        "TweakName": "Show Compressed and Encrypted Files in Color",
+        "Success": true,
+        "Status": "ok",
+        "Summary": "Apply/verify path completed and rollback restored the tweak.",
+        "RollbackRequested": true,
+        "Card": {
+          "TweakId": "explorer.show-compressed-and-encrypted-files-in-color",
+          "Name": "Show Compressed and Encrypted Files in Color",
+          "Category": "Explorer",
+          "Description": "File Explorer can color compressed and encrypted NTFS items so they stand out visually.",
+          "FriendlyDescription": "File Explorer can color compressed and encrypted NTFS items so they stand out visually.",
+          "RegistryPath": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowCompColor",
+          "EvidenceClass": "A",
+          "EvidenceClassTitle": "Cross-Layer Verified",
+          "ResearchStatus": "PROMOTED",
+          "IsMutationAllowed": true,
+          "RollbackSnapshotState": "ready",
+          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
+          "HasClaimBoundary": true,
+          "WhatWeKnowSummary": "Claim: File Explorer can color compressed and encrypted NTFS items so they stand out visually. Evidence: The guest-local result file was also copied to a host scratch location during validation for review. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
+          "ProofLanes": [
+            {
+              "Key": "docs",
+              "Label": "DOCS",
+              "State": "ready",
+              "Summary": "The guest-local result file was also copied to a host scratch location during validation for review.",
+              "Source": "Validation proof source: evidence/files/missing/showcompcolor-result-txt.md"
+            },
+            {
+              "Key": "runtime",
+              "Label": "RUNTIME",
+              "State": "ready",
+              "Summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote ShowCompColor = 0 and ShowCompColor = 1, restarted Explorer after each write, and captured Explorer.EXE querying HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowCompColor wit...",
+              "Source": "Procmon capture - Explorer ShowCompColor runtime surface: evidence/raw/procmon/explorer.show-compressed-and-encrypted-files-in-color/showcompcolor-result-txt.md"
+            },
+            {
+              "Key": "source",
+              "Label": "SOURCE",
+              "State": "ready",
+              "Summary": "No upstream nohuto source link is attached to this record.",
+              "Source": ""
+            },
+            {
+              "Key": "rollback",
+              "Label": "ROLLBACK",
+              "State": "ready",
+              "Summary": "Rollback: Verified via record-restore-story.",
+              "Source": "record-restore-story"
+            }
+          ],
+          "ReferenceLinks": [
+            {
+              "Title": "Docs: Details (missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
+              "Kind": "Details"
+            },
+            {
+              "Title": "Docs: Explorer",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\visibility\\visibility.md#explorer.show-compressed-and-encrypted-files-in-color",
+              "Kind": "Docs"
+            }
+          ]
+        },
+        "Stages": [
+          {
+            "Stage": "detect-before",
+            "AppliedStatus": "Applied",
+            "StatusMessage": "Current option is 'Color compressed and encrypted files'.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Color compressed and encrypted files",
+            "TargetValue": "Color compressed and encrypted files",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": false,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Applied",
+                "Message": "Current option is 'Color compressed and encrypted files'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowCompColor: 1 -> 1",
+                "TimestampText": "09:06:34"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "apply",
+            "AppliedStatus": "Applied",
+            "StatusMessage": "Run completed.",
+            "OutcomeSummary": "Apply - Success",
+            "CurrentValue": "Color compressed and encrypted files",
+            "TargetValue": "Color compressed and encrypted files",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Applied",
+                "Message": "Current option is 'Color compressed and encrypted files'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowCompColor: 1 -> 1",
+                "TimestampText": "09:06:35"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Skipped",
+                "Message": "Already in the desired state.",
+                "TimestampText": "09:06:35"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Color compressed and encrypted files'.",
+                "TimestampText": "09:06:35"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Skipped",
+                "Message": "No changes were made.",
+                "TimestampText": "09:06:35"
+              }
+            ]
+          },
+          {
+            "Stage": "rollback",
+            "AppliedStatus": "Applied",
+            "StatusMessage": "Rolled back registry values.",
+            "OutcomeSummary": "Rollback - Rolled Back",
+            "CurrentValue": "Color compressed and encrypted files",
+            "TargetValue": "Color compressed and encrypted files",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Applied",
+                "Message": "Current option is 'Color compressed and encrypted files'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowCompColor: 1 -> 1",
+                "TimestampText": "09:06:35"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Skipped",
+                "Message": "Already in the desired state.",
+                "TimestampText": "09:06:35"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Color compressed and encrypted files'.",
+                "TimestampText": "09:06:35"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "09:06:35"
+              }
+            ]
+          },
+          {
+            "Stage": "detect-after",
+            "AppliedStatus": "Applied",
+            "StatusMessage": "Current option is 'Color compressed and encrypted files'.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Color compressed and encrypted files",
+            "TargetValue": "Color compressed and encrypted files",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Applied",
+                "Message": "Current option is 'Color compressed and encrypted files'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowCompColor: 1 -> 1",
+                "TimestampText": "09:06:35"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Skipped",
+                "Message": "Already in the desired state.",
+                "TimestampText": "09:06:35"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Color compressed and encrypted files'.",
+                "TimestampText": "09:06:35"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "09:06:35"
+              }
+            ]
+          }
+        ],
+        "StartedAtUtc": "2026-05-07T16:06:34.9671705+00:00",
+        "CompletedAtUtc": "2026-05-07T16:06:35.2358574+00:00"
+      },
+      "qa_tweak_id": "explorer.show-compressed-and-encrypted-files-in-color",
+      "candidate_id": "explorer.show-compressed-and-encrypted-files-in-color",
+      "card_name": "Show Compressed and Encrypted Files in Color",
+      "documentation": "research/records/explorer.show-compressed-and-encrypted-files-in-color.review.json"
+    },
+    {
+      "tweak_id": "explorer.show-drive-letters-first",
+      "host_exit": 0,
+      "execution_exit": 0,
+      "payload_status": "completed",
+      "report_source": "stdout",
+      "report_parse_error": null,
+      "report_fetch_status": null,
+      "report_app_success": true,
+      "report_success": true,
+      "report_status": "ok",
+      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
+      "report_contract_status": "ok",
+      "report_contract_summary": "QA card snapshot contract passed.",
+      "report_contract_failures": [],
+      "report_card_present": true,
+      "report_card_has_claim_boundary": true,
+      "report_card_present_fields": [
+        "TweakId",
+        "Name",
+        "Category",
+        "EvidenceClass",
+        "ResearchStatus",
+        "RollbackSnapshotState",
+        "HasClaimBoundary",
+        "WhatWeKnowSummary",
+        "WhatWeDoNotClaimSummary",
+        "ProofLanes"
+      ],
+      "report_card_missing_fields": [],
+      "report_card_proof_lanes": [
+        "docs",
+        "runtime",
+        "source",
+        "rollback"
+      ],
+      "report_card_missing_proof_lanes": [],
+      "report": {
+        "TweakId": "explorer.show-drive-letters-first",
+        "TweakName": "Show Drive Letters First",
+        "Success": true,
+        "Status": "ok",
+        "Summary": "Apply/verify path completed and rollback restored the tweak.",
+        "RollbackRequested": true,
+        "Card": {
+          "TweakId": "explorer.show-drive-letters-first",
+          "Name": "Show Drive Letters First",
+          "Category": "Explorer",
+          "Description": "Explorer can show drive letters ahead of the drive name, or leave that presentation disabled.",
+          "FriendlyDescription": "Explorer can show drive letters ahead of the drive name, or leave that presentation disabled.",
+          "RegistryPath": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ShowDriveLettersFirst",
+          "EvidenceClass": "A",
+          "EvidenceClassTitle": "Cross-Layer Verified",
+          "ResearchStatus": "PROMOTED",
+          "IsMutationAllowed": true,
+          "RollbackSnapshotState": "ready",
+          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
+          "HasClaimBoundary": true,
+          "WhatWeKnowSummary": "Claim: Explorer can show drive letters ahead of the drive name, or leave that presentation disabled. Evidence: The guest-local result file was copied back to the host scratch area during validation. Baseline absence was restored after the probe. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
+          "ProofLanes": [
+            {
+              "Key": "docs",
+              "Label": "DOCS",
+              "State": "ready",
+              "Summary": "The guest-local result file was copied back to the host scratch area during validation. Baseline absence was restored after the probe.",
+              "Source": "Validation proof source: evidence/files/vm-tooling-staging/showdrivelettersfirst-result.txt"
+            },
+            {
+              "Key": "runtime",
+              "Label": "RUNTIME",
+              "State": "ready",
+              "Summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote ShowDriveLettersFirst = 0 and ShowDriveLettersFirst = 1, restarted Explorer after each write, and captured Explorer.EXE querying HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ShowDriveL...",
+              "Source": "Procmon capture - Explorer ShowDriveLettersFirst runtime surface: evidence/raw/procmon/explorer.show-drive-letters-first/showdrivelettersfirst-result.txt"
+            },
+            {
+              "Key": "source",
+              "Label": "SOURCE",
+              "State": "ready",
+              "Summary": "No upstream nohuto source link is attached to this record.",
+              "Source": ""
+            },
+            {
+              "Key": "rollback",
+              "Label": "ROLLBACK",
+              "State": "ready",
+              "Summary": "Rollback: Verified via record-restore-story.",
+              "Source": "record-restore-story"
+            }
+          ],
+          "ReferenceLinks": [
+            {
+              "Title": "Docs: Details (missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
+              "Kind": "Details"
+            },
+            {
+              "Title": "Docs: Explorer",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\visibility\\visibility.md#explorer.show-drive-letters-first",
+              "Kind": "Docs"
+            }
+          ]
+        },
+        "Stages": [
+          {
+            "Stage": "detect-before",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Show drive letters first'.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Show drive letters first",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": false,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Show drive letters first'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ShowDriveLettersFirst: missing -> 1",
+                "TimestampText": "09:06:41"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "apply",
+            "AppliedStatus": "Applied",
+            "StatusMessage": "Run completed.",
+            "OutcomeSummary": "Apply - Success",
+            "CurrentValue": "Show drive letters first",
+            "TargetValue": "Show drive letters first",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Show drive letters first'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ShowDriveLettersFirst: missing -> 1",
+                "TimestampText": "09:06:41"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Show drive letters first'.",
+                "TimestampText": "09:06:41"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Show drive letters first'.",
+                "TimestampText": "09:06:41"
               },
               {
                 "Action": "Rollback",
@@ -773,7 +1303,7 @@
             "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "File History disabled",
+            "TargetValue": "Show drive letters first",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -782,36 +1312,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'File History disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\FileHistory\\Disabled: missing -> 1",
-                "TimestampText": "09:04:56"
+                "Message": "Current values do not match a named option. Selected option is 'Show drive letters first'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ShowDriveLettersFirst: missing -> 1",
+                "TimestampText": "09:06:41"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'File History disabled'.",
-                "TimestampText": "09:04:58"
+                "Message": "Applied preset 'Show drive letters first'.",
+                "TimestampText": "09:06:41"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'File History disabled'.",
-                "TimestampText": "09:04:58"
+                "Message": "Verified preset 'Show drive letters first'.",
+                "TimestampText": "09:06:41"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "09:04:59"
+                "TimestampText": "09:06:41"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'File History disabled'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Show drive letters first'.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "File History disabled",
+            "TargetValue": "Show drive letters first",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -820,40 +1350,40 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'File History disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\FileHistory\\Disabled: missing -> 1",
-                "TimestampText": "09:04:59"
+                "Message": "Current values do not match a named option. Selected option is 'Show drive letters first'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ShowDriveLettersFirst: missing -> 1",
+                "TimestampText": "09:06:41"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'File History disabled'.",
-                "TimestampText": "09:04:58"
+                "Message": "Applied preset 'Show drive letters first'.",
+                "TimestampText": "09:06:41"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'File History disabled'.",
-                "TimestampText": "09:04:58"
+                "Message": "Verified preset 'Show drive letters first'.",
+                "TimestampText": "09:06:41"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "09:04:59"
+                "TimestampText": "09:06:41"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T16:04:56.0261687+00:00",
-        "CompletedAtUtc": "2026-05-07T16:04:59.2510345+00:00"
+        "StartedAtUtc": "2026-05-07T16:06:41.3375207+00:00",
+        "CompletedAtUtc": "2026-05-07T16:06:41.7130288+00:00"
       },
-      "qa_tweak_id": "privacy.disable-file-history",
-      "candidate_id": "privacy.disable-file-history",
-      "card_name": "File History",
-      "documentation": "research/records/privacy.disable-file-history.json"
+      "qa_tweak_id": "explorer.show-drive-letters-first",
+      "candidate_id": "explorer.show-drive-letters-first",
+      "card_name": "Show Drive Letters First",
+      "documentation": "research/records/explorer.show-drive-letters-first.review.json"
     },
     {
-      "tweak_id": "privacy.disable-font-providers",
+      "tweak_id": "explorer.show-full-path",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -890,19 +1420,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "privacy.disable-font-providers",
-        "TweakName": "Online Font Providers",
+        "TweakId": "explorer.show-full-path",
+        "TweakName": "Show Full Path in Explorer",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "privacy.disable-font-providers",
-          "Name": "Online Font Providers",
-          "Category": "Privacy",
-          "Description": "Windows can contact an online font provider to download font catalog data and, when needed, font data for rendering text. This policy decides whether that online font path is allowed.",
-          "FriendlyDescription": "Windows can contact an online font provider to download font catalog data and, when needed, font data for rendering text. This policy decides whether that online font path is allowed.",
-          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\EnableFontProviders",
+          "TweakId": "explorer.show-full-path",
+          "Name": "Show Full Path in Explorer",
+          "Category": "Explorer",
+          "Description": "Explorer can show the full folder path instead of a shorter title. Some advanced users prefer that when they navigate deep directories.",
+          "FriendlyDescription": "Explorer can show the full folder path instead of a shorter title. Some advanced users prefer that when they navigate deep directories.",
+          "RegistryPath": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\CabinetState\\FullPath",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -910,22 +1440,22 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Windows can contact an online font provider to download font catalog data and, when needed, font data for rendering text. This policy decides whether that online font path is allowed. Evidence: Local official ADMX defines the exact key and value name; local ADML confirms that disabling the policy blocks online font-provider access and limits enumeration to locally installed fonts. Added nohuto mirror corroboration via nohuto-enablefontproviders-admx. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: Explorer can show the full folder path instead of a shorter title. Some advanced users prefer that when they navigate deep directories. Evidence: Microsoft Open Specifications publishes the exact Explorer CabinetState path, FullPath value name, and 0/1 semantics. The app writes the documented enabled state under the same user-preference surface. Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "Local official ADMX defines the exact key and value name; local ADML confirms that disabling the policy blocks online font-provider access and limits enumeration to locally installed fonts. Added nohuto mirror corroboration via nohuto-enablefontproviders-admx.",
-              "Source": "Validation proof source: evidence/files/external/c/WINDOWS/PolicyDefinitions/GroupPolicy.admx"
+              "Summary": "Microsoft Open Specifications publishes the exact Explorer CabinetState path, FullPath value name, and 0/1 semantics. The app writes the documented enabled state under the same user-preference surface.",
+              "Source": "Validation proof source: https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/3c837e92-016e-4148-86e5-b4f0381a757f"
             },
             {
               "Key": "runtime",
               "Label": "RUNTIME",
               "State": "ready",
-              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
-              "Source": ""
+              "Summary": "A same-day guest Ghidra retry for `FullPath` failed in `ensure-admin-shell` before any xref bundle reached the host.",
+              "Source": "Guest Ghidra launch receipt for FullPath: evidence/raw/ghidra/ghidra-explorer-show-full-path-20260424-batch5/summary.json"
             },
             {
               "Key": "source",
@@ -949,8 +1479,8 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Privacy (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\privacy\\privacy-verified.md",
+              "Title": "Docs: Explorer",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\visibility\\visibility.md#explorer.show-full-path",
               "Kind": "Docs"
             }
           ]
@@ -959,10 +1489,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Online font providers disabled'.",
+            "StatusMessage": "Current option is 'Do not show full path'. Selected option is 'Show full path'.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Online font providers disabled",
+            "CurrentValue": "Do not show full path",
+            "TargetValue": "Show full path",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -971,8 +1501,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Online font providers disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\EnableFontProviders: missing -> 0",
-                "TimestampText": "09:05:05"
+                "Message": "Current option is 'Do not show full path'. Selected option is 'Show full path'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\CabinetState\\FullPath: 0 -> 1",
+                "TimestampText": "09:06:47"
               },
               {
                 "Action": "Apply",
@@ -999,8 +1529,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Online font providers disabled",
-            "TargetValue": "Online font providers disabled",
+            "CurrentValue": "Show full path",
+            "TargetValue": "Show full path",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1009,20 +1539,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Online font providers disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\EnableFontProviders: missing -> 0",
-                "TimestampText": "09:05:05"
+                "Message": "Current option is 'Do not show full path'. Selected option is 'Show full path'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\CabinetState\\FullPath: 0 -> 1",
+                "TimestampText": "09:06:47"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Online font providers disabled'.",
-                "TimestampText": "09:05:08"
+                "Message": "Applied preset 'Show full path'.",
+                "TimestampText": "09:06:47"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Online font providers disabled'.",
-                "TimestampText": "09:05:08"
+                "Message": "Verified preset 'Show full path'.",
+                "TimestampText": "09:06:47"
               },
               {
                 "Action": "Rollback",
@@ -1037,8 +1567,8 @@
             "AppliedStatus": "NotApplied",
             "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Online font providers disabled",
+            "CurrentValue": "Do not show full path",
+            "TargetValue": "Show full path",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1047,36 +1577,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Online font providers disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\EnableFontProviders: missing -> 0",
-                "TimestampText": "09:05:05"
+                "Message": "Current option is 'Do not show full path'. Selected option is 'Show full path'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\CabinetState\\FullPath: 0 -> 1",
+                "TimestampText": "09:06:47"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Online font providers disabled'.",
-                "TimestampText": "09:05:08"
+                "Message": "Applied preset 'Show full path'.",
+                "TimestampText": "09:06:47"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Online font providers disabled'.",
-                "TimestampText": "09:05:08"
+                "Message": "Verified preset 'Show full path'.",
+                "TimestampText": "09:06:47"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "09:05:08"
+                "TimestampText": "09:06:47"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Online font providers disabled'.",
+            "StatusMessage": "Current option is 'Do not show full path'. Selected option is 'Show full path'.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Online font providers disabled",
+            "CurrentValue": "Do not show full path",
+            "TargetValue": "Show full path",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1085,567 +1615,37 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Online font providers disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\EnableFontProviders: missing -> 0",
-                "TimestampText": "09:05:08"
+                "Message": "Current option is 'Do not show full path'. Selected option is 'Show full path'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\CabinetState\\FullPath: 0 -> 1",
+                "TimestampText": "09:06:48"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Online font providers disabled'.",
-                "TimestampText": "09:05:08"
+                "Message": "Applied preset 'Show full path'.",
+                "TimestampText": "09:06:47"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Online font providers disabled'.",
-                "TimestampText": "09:05:08"
+                "Message": "Verified preset 'Show full path'.",
+                "TimestampText": "09:06:47"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "09:05:08"
+                "TimestampText": "09:06:47"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T16:05:05.4389703+00:00",
-        "CompletedAtUtc": "2026-05-07T16:05:08.661434+00:00"
+        "StartedAtUtc": "2026-05-07T16:06:47.7540566+00:00",
+        "CompletedAtUtc": "2026-05-07T16:06:48.1228292+00:00"
       },
-      "qa_tweak_id": "privacy.disable-font-providers",
-      "candidate_id": "privacy.disable-font-providers",
-      "card_name": "Online Font Providers",
-      "documentation": "research/records/privacy.disable-font-providers.json"
-    },
-    {
-      "tweak_id": "privacy.disable-kms-activation-telemetry",
-      "host_exit": 0,
-      "execution_exit": 0,
-      "payload_status": "completed",
-      "report_source": "stdout",
-      "report_parse_error": null,
-      "report_fetch_status": null,
-      "report_app_success": true,
-      "report_success": true,
-      "report_status": "ok",
-      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
-      "report_contract_status": "ok",
-      "report_contract_summary": "QA card snapshot contract passed.",
-      "report_contract_failures": [],
-      "report_card_present": true,
-      "report_card_has_claim_boundary": true,
-      "report_card_present_fields": [
-        "TweakId",
-        "Name",
-        "Category",
-        "EvidenceClass",
-        "ResearchStatus",
-        "RollbackSnapshotState",
-        "HasClaimBoundary",
-        "WhatWeKnowSummary",
-        "WhatWeDoNotClaimSummary",
-        "ProofLanes"
-      ],
-      "report_card_missing_fields": [],
-      "report_card_proof_lanes": [
-        "docs",
-        "runtime",
-        "source",
-        "rollback"
-      ],
-      "report_card_missing_proof_lanes": [],
-      "report": {
-        "TweakId": "privacy.disable-kms-activation-telemetry",
-        "TweakName": "KMS Client Online AVS Validation",
-        "Success": true,
-        "Status": "ok",
-        "Summary": "Apply/verify path completed and rollback restored the tweak.",
-        "RollbackRequested": true,
-        "Card": {
-          "TweakId": "privacy.disable-kms-activation-telemetry",
-          "Name": "KMS Client Online AVS Validation",
-          "Category": "Privacy",
-          "Description": "Windows can send KMS client activation-state data to Microsoft during activation. This policy decides whether that data is sent automatically.",
-          "FriendlyDescription": "Windows can send KMS client activation-state data to Microsoft during activation. This policy decides whether that data is sent automatically.",
-          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Windows NT\\CurrentVersion\\Software Protection Platform\\NoGenTicket",
-          "EvidenceClass": "A",
-          "EvidenceClassTitle": "Cross-Layer Verified",
-          "ResearchStatus": "PROMOTED",
-          "IsMutationAllowed": true,
-          "RollbackSnapshotState": "ready",
-          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
-          "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Windows can send KMS client activation-state data to Microsoft during activation. This policy decides whether that data is sent automatically. Evidence: The local official Microsoft ADMX file defines the exact machine policy path and value name used by the app, with enabledValue 1 and disabledValue 0. The paired ADML help text explains that enabling the policy opts the device out of automatically sending KM... Rollback: Rollback: Verified via record-restore-story.",
-          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
-          "ProofLanes": [
-            {
-              "Key": "docs",
-              "Label": "DOCS",
-              "State": "ready",
-              "Summary": "The local official Microsoft ADMX file defines the exact machine policy path and value name used by the app, with enabledValue 1 and disabledValue 0. The paired ADML help text explains that enabling the policy opts the device out of automatically sending KM...",
-              "Source": "Validation proof source: evidence/files/external/c/WINDOWS/PolicyDefinitions/AVSValidationGP.admx"
-            },
-            {
-              "Key": "runtime",
-              "Label": "RUNTIME",
-              "State": "ready",
-              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
-              "Source": ""
-            },
-            {
-              "Key": "source",
-              "Label": "SOURCE",
-              "State": "ready",
-              "Summary": "No upstream nohuto source link is attached to this record.",
-              "Source": ""
-            },
-            {
-              "Key": "rollback",
-              "Label": "ROLLBACK",
-              "State": "ready",
-              "Summary": "Rollback: Verified via record-restore-story.",
-              "Source": "record-restore-story"
-            }
-          ],
-          "ReferenceLinks": [
-            {
-              "Title": "Docs: Details (missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
-              "Kind": "Details"
-            },
-            {
-              "Title": "Docs: Privacy (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\privacy\\privacy-verified.md",
-              "Kind": "Docs"
-            }
-          ]
-        },
-        "Stages": [
-          {
-            "Stage": "detect-before",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'KMS activation data not sent automatically'.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "KMS activation data not sent automatically",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": false,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'KMS activation data not sent automatically'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows NT\\CurrentVersion\\Software Protection Platform\\NoGenTicket: missing -> 1",
-                "TimestampText": "09:05:14"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "apply",
-            "AppliedStatus": "Applied",
-            "StatusMessage": "Run completed.",
-            "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "KMS activation data not sent automatically",
-            "TargetValue": "KMS activation data not sent automatically",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'KMS activation data not sent automatically'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows NT\\CurrentVersion\\Software Protection Platform\\NoGenTicket: missing -> 1",
-                "TimestampText": "09:05:14"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Applied preset 'KMS activation data not sent automatically'.",
-                "TimestampText": "09:05:17"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified preset 'KMS activation data not sent automatically'.",
-                "TimestampText": "09:05:17"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Not required",
-                "Message": "Step not executed.",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "rollback",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Rolled back registry values.",
-            "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "KMS activation data not sent automatically",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'KMS activation data not sent automatically'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows NT\\CurrentVersion\\Software Protection Platform\\NoGenTicket: missing -> 1",
-                "TimestampText": "09:05:14"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Applied preset 'KMS activation data not sent automatically'.",
-                "TimestampText": "09:05:17"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified preset 'KMS activation data not sent automatically'.",
-                "TimestampText": "09:05:17"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "09:05:17"
-              }
-            ]
-          },
-          {
-            "Stage": "detect-after",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'KMS activation data not sent automatically'.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "KMS activation data not sent automatically",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'KMS activation data not sent automatically'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows NT\\CurrentVersion\\Software Protection Platform\\NoGenTicket: missing -> 1",
-                "TimestampText": "09:05:18"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Applied preset 'KMS activation data not sent automatically'.",
-                "TimestampText": "09:05:17"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified preset 'KMS activation data not sent automatically'.",
-                "TimestampText": "09:05:17"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "09:05:17"
-              }
-            ]
-          }
-        ],
-        "StartedAtUtc": "2026-05-07T16:05:14.8779466+00:00",
-        "CompletedAtUtc": "2026-05-07T16:05:18.1194658+00:00"
-      },
-      "qa_tweak_id": "privacy.disable-kms-activation-telemetry",
-      "candidate_id": "privacy.disable-kms-activation-telemetry",
-      "card_name": "KMS Client Online AVS Validation",
-      "documentation": "research/records/privacy.disable-kms-activation-telemetry.json"
-    },
-    {
-      "tweak_id": "privacy.disable-language-list-access",
-      "host_exit": 0,
-      "execution_exit": 0,
-      "payload_status": "completed",
-      "report_source": "stdout",
-      "report_parse_error": null,
-      "report_fetch_status": null,
-      "report_app_success": true,
-      "report_success": true,
-      "report_status": "ok",
-      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
-      "report_contract_status": "ok",
-      "report_contract_summary": "QA card snapshot contract passed.",
-      "report_contract_failures": [],
-      "report_card_present": true,
-      "report_card_has_claim_boundary": true,
-      "report_card_present_fields": [
-        "TweakId",
-        "Name",
-        "Category",
-        "EvidenceClass",
-        "ResearchStatus",
-        "RollbackSnapshotState",
-        "HasClaimBoundary",
-        "WhatWeKnowSummary",
-        "WhatWeDoNotClaimSummary",
-        "ProofLanes"
-      ],
-      "report_card_missing_fields": [],
-      "report_card_proof_lanes": [
-        "docs",
-        "runtime",
-        "source",
-        "rollback"
-      ],
-      "report_card_missing_proof_lanes": [],
-      "report": {
-        "TweakId": "privacy.disable-language-list-access",
-        "TweakName": "Website Access to Language List",
-        "Success": true,
-        "Status": "ok",
-        "Summary": "Apply/verify path completed and rollback restored the tweak.",
-        "RollbackRequested": true,
-        "Card": {
-          "TweakId": "privacy.disable-language-list-access",
-          "Name": "Website Access to Language List",
-          "Category": "Privacy",
-          "Description": "Windows can let websites use your language list to show locally relevant content. This setting controls whether that language-list access is allowed.",
-          "FriendlyDescription": "Windows can let websites use your language list to show locally relevant content. This setting controls whether that language-list access is allowed.",
-          "RegistryPath": "HKCU\\Control Panel\\International\\User Profile\\HttpAcceptLanguageOptOut",
-          "EvidenceClass": "A",
-          "EvidenceClassTitle": "Cross-Layer Verified",
-          "ResearchStatus": "PROMOTED",
-          "IsMutationAllowed": true,
-          "RollbackSnapshotState": "ready",
-          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
-          "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Windows can let websites use your language list to show locally relevant content. This setting controls whether that language-list access is allowed. Evidence: The same Microsoft privacy guidance page documents the related UI toggle and the exact registry mapping for turning the feature off. Rollback: Rollback: Verified via record-restore-story.",
-          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
-          "ProofLanes": [
-            {
-              "Key": "docs",
-              "Label": "DOCS",
-              "State": "ready",
-              "Summary": "The same Microsoft privacy guidance page documents the related UI toggle and the exact registry mapping for turning the feature off.",
-              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows/privacy/manage-connections-from-windows-operating-system-components-to-microsoft-services"
-            },
-            {
-              "Key": "runtime",
-              "Label": "RUNTIME",
-              "State": "ready",
-              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
-              "Source": ""
-            },
-            {
-              "Key": "source",
-              "Label": "SOURCE",
-              "State": "ready",
-              "Summary": "No upstream nohuto source link is attached to this record.",
-              "Source": ""
-            },
-            {
-              "Key": "rollback",
-              "Label": "ROLLBACK",
-              "State": "ready",
-              "Summary": "Rollback: Verified via record-restore-story.",
-              "Source": "record-restore-story"
-            }
-          ],
-          "ReferenceLinks": [
-            {
-              "Title": "Docs: Details (missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
-              "Kind": "Details"
-            },
-            {
-              "Title": "Docs: Privacy (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\privacy\\privacy-verified.md",
-              "Kind": "Docs"
-            }
-          ]
-        },
-        "Stages": [
-          {
-            "Stage": "detect-before",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Value not set.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Not set",
-            "TargetValue": "1 (0x1)",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": false,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Value not set.",
-                "TimestampText": "09:05:24"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "apply",
-            "AppliedStatus": "Applied",
-            "StatusMessage": "Run completed.",
-            "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "1 (0x1)",
-            "TargetValue": "1 (0x1)",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Value not set.",
-                "TimestampText": "09:05:24"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Set value to 1.",
-                "TimestampText": "09:05:24"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified desired value.",
-                "TimestampText": "09:05:24"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Not required",
-                "Message": "Step not executed.",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "rollback",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Removed value to restore default.",
-            "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "1 (0x1)",
-            "TargetValue": "1 (0x1)",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Value not set.",
-                "TimestampText": "09:05:24"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Set value to 1.",
-                "TimestampText": "09:05:24"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified desired value.",
-                "TimestampText": "09:05:24"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Removed value to restore default.",
-                "TimestampText": "09:05:24"
-              }
-            ]
-          },
-          {
-            "Stage": "detect-after",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Value not set.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Not set",
-            "TargetValue": "1 (0x1)",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Value not set.",
-                "TimestampText": "09:05:24"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Set value to 1.",
-                "TimestampText": "09:05:24"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified desired value.",
-                "TimestampText": "09:05:24"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Removed value to restore default.",
-                "TimestampText": "09:05:24"
-              }
-            ]
-          }
-        ],
-        "StartedAtUtc": "2026-05-07T16:05:24.2283647+00:00",
-        "CompletedAtUtc": "2026-05-07T16:05:24.5302954+00:00"
-      },
-      "qa_tweak_id": "privacy.disable-language-list-access",
-      "candidate_id": "privacy.disable-language-list-access",
-      "card_name": "Website Access to Language List",
-      "documentation": "research/records/privacy.disable-language-list-access.review.json"
+      "qa_tweak_id": "explorer.show-full-path",
+      "candidate_id": "explorer.show-full-path",
+      "card_name": "Show Full Path in Explorer",
+      "documentation": "research/records/explorer.show-full-path.review.json"
     }
   ],
   "summary": {
@@ -1654,7 +1654,7 @@
     "live_success_count": 5,
     "live_failure_count": 0,
     "categories": [
-      "Privacy"
+      "Explorer"
     ]
   }
 }
