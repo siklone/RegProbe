@@ -289,6 +289,21 @@
         "transport-blocker"
       ],
       "strength": "medium"
+    },
+    {
+      "evidence_id": "vm-policy.system.enable-virtualization-etw-qga-unblock-20260507",
+      "kind": "etw-trace",
+      "title": "QGA-first ETW stackwalk runtime receipt for EnableVirtualization",
+      "location": "evidence/captures/policy-system-enable-virtualization-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/policy-system-enable-virtualization-etw-qga-unblock-20260507/policy-system-enable-virtualization-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/policy-system-enable-virtualization-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/policy-system-enable-virtualization-etw-qga-unblock-20260507/policy-system-enable-virtualization-etw-qga-unblock-20260507.etl",
+      "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4441 registry events with 527 caller-stack events. The bundle contains an exact helper-triggered `RegQueryValue` for `HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System` / `EnableVirtualization`, returning `0x80000005` on the clean baseline.",
+      "supports": [
+        "runtime-observation",
+        "tooling-fix",
+        "path",
+        "value",
+        "version-scope"
+      ],
+      "strength": "high"
     }
   ],
   "decision": {
@@ -323,19 +338,19 @@
       "root": "C:\\Users\\Deniz\\AppData\\Local\\RegProbe\\source-cache\\wrk-v1.2",
       "notes": "Retained local corpus review still returns no candidate-specific WRK hit for `EnableVirtualization`."
     },
-    "notes": "Retained source-enrichment output `source-enrichment-20260403-192135` keeps the lane research-only and records no candidate-specific ReactOS or WRK hits. Exact 2026-04-24 ReactOS doxygen searches for `EnableVirtualization` also returned no direct match. The only retained source-mirror-style support in that batch is the local DeviceGuard ADMX mapping, so this record remains policy-template-backed rather than ReactOS/WRK-backed. A bounded 2026-04-24 KVM ETW stackwalk retry for EnableVirtualization reached artifact-upload but still timed out before any ETL, XML, or normalized bundle returned to the host. The repo now retains summary and stage receipts only, so this closes the ETW attempt as a transport receipt rather than as exact runtime proof.",
+    "notes": "Retained source-enrichment output `source-enrichment-20260403-192135` keeps the lane research-only and records no candidate-specific ReactOS or WRK hits. Exact 2026-04-24 ReactOS doxygen searches for `EnableVirtualization` also returned no direct match. The only retained source-mirror-style support in that batch is the local DeviceGuard ADMX mapping, so this record remains policy-template-backed rather than ReactOS/WRK-backed. A bounded 2026-04-24 KVM ETW stackwalk retry for EnableVirtualization reached artifact-upload but still timed out before any ETL, XML, or normalized bundle returned to the host. The repo now retains summary and stage receipts only, so this closes the ETW attempt as a transport receipt rather than as exact runtime proof. A 2026-05-07 QGA-first ETW stackwalk rerun cleared the earlier ETW ingest/upload blocker and produced an exact helper-triggered `RegQueryValue` for `EnableVirtualization` with caller-stack capture.",
     "ghidra": true,
     "ghidra_status": "path_aware_static_probe_retained",
     "ghidra_artifact": "evidence/raw/ghidra/policy-system-enable-virtualization-ntoskrnl-exe-path-aware-20260330-222908/ghidra-matches.md",
     "runtime_capture_reviewed": {
       "etw-stackwalk": true,
-      "status": "artifact_upload_timeout"
+      "status": "qga_unblocked_ingest_ok"
     },
     "etw_stackwalk_reviewed": true,
-    "etw_stackwalk_review_status": "artifact_upload_timeout",
-    "etw_stackwalk_review_artifact": "evidence/captures/policy-system-enable-virtualization-etw-stackwalk-attempt-20260424.json"
+    "etw_stackwalk_review_status": "qga_unblocked_ingest_ok",
+    "etw_stackwalk_review_artifact": "evidence/captures/policy-system-enable-virtualization-etw-qga-unblock-20260507.json"
   },
-  "last_reviewed_utc": "2026-04-28T11:02:09Z",
+  "last_reviewed_utc": "2026-05-07T10:08:51.5651586Z",
   "version_stable": [
     "25H2"
   ]

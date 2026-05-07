@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-07T10:03:11.455652Z",
+  "generated_utc": "2026-05-07T10:21:11.414301Z",
   "summary": {
     "total_records": 356,
     "validated": 255,
@@ -20,7 +20,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-05-07T10:03:11.175945Z",
+      "generated_utc": "2026-05-07T10:21:11.062308Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -37801,6 +37801,22 @@
           "origin": "unspecified"
         },
         {
+          "evidence_id": "vm-explorer.disable-low-disk-space-warning-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk runtime receipt for NoLowDiskSpaceChecks",
+          "location": "evidence/captures/explorer-disable-low-disk-space-warning-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/explorer-disable-low-disk-space-warning-etw-qga-unblock-20260507/explorer-disable-low-disk-space-warning-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/explorer-disable-low-disk-space-warning-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/explorer-disable-low-disk-space-warning-etw-qga-unblock-20260507/explorer-disable-low-disk-space-warning-etw-qga-unblock-20260507.etl",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4444 registry events with 525 caller-stack events. The bundle contains an exact helper-triggered `RegQueryValue` for `HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer` / `NoLowDiskSpaceChecks`, returning `0xC0000034` on the clean baseline.",
+          "strength": "high",
+          "supports": [
+            "runtime-observation",
+            "tooling-fix",
+            "path",
+            "value",
+            "version-scope"
+          ],
+          "origin": "unspecified"
+        },
+        {
           "evidence_id": "vm-explorer-disable-low-disk-space-warning-ghidra-launch-receipt-20260424",
           "kind": "vm-test",
           "title": "Guest Ghidra launch receipt for NoLowDiskSpaceChecks",
@@ -38136,6 +38152,22 @@
           "strength": "low",
           "supports": [
             "behavior",
+            "version-scope"
+          ],
+          "origin": "unspecified"
+        },
+        {
+          "evidence_id": "vm-explorer.disable-taskbar-chat-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk runtime receipt for ChatIcon",
+          "location": "evidence/captures/explorer-disable-taskbar-chat-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/explorer-disable-taskbar-chat-etw-qga-unblock-20260507/explorer-disable-taskbar-chat-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/explorer-disable-taskbar-chat-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/explorer-disable-taskbar-chat-etw-qga-unblock-20260507/explorer-disable-taskbar-chat-etw-qga-unblock-20260507.etl",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4445 registry events with 525 caller-stack events. The bundle contains an exact helper-triggered `RegQueryValue` for `HKLM\\Software\\Policies\\Microsoft\\Windows\\Windows Chat` / `ChatIcon`, returning `0xC0000034` on the clean baseline.",
+          "strength": "high",
+          "supports": [
+            "runtime-observation",
+            "tooling-fix",
+            "path",
+            "value",
             "version-scope"
           ],
           "origin": "unspecified"
@@ -56051,6 +56083,22 @@
             "transport-blocker"
           ],
           "origin": "unspecified"
+        },
+        {
+          "evidence_id": "vm-policy.system.enable-virtualization-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk runtime receipt for EnableVirtualization",
+          "location": "evidence/captures/policy-system-enable-virtualization-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/policy-system-enable-virtualization-etw-qga-unblock-20260507/policy-system-enable-virtualization-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/policy-system-enable-virtualization-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/policy-system-enable-virtualization-etw-qga-unblock-20260507/policy-system-enable-virtualization-etw-qga-unblock-20260507.etl",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4441 registry events with 527 caller-stack events. The bundle contains an exact helper-triggered `RegQueryValue` for `HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System` / `EnableVirtualization`, returning `0x80000005` on the clean baseline.",
+          "strength": "high",
+          "supports": [
+            "runtime-observation",
+            "tooling-fix",
+            "path",
+            "value",
+            "version-scope"
+          ],
+          "origin": "unspecified"
         }
       ],
       "validation_proof": {
@@ -56388,6 +56436,22 @@
           "supports": [
             "runtime-lane-review",
             "transport-blocker"
+          ],
+          "origin": "unspecified"
+        },
+        {
+          "evidence_id": "vm-power.control.class1-initial-unpark-count-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk runtime receipt for Class1InitialUnparkCount",
+          "location": "evidence/captures/power-control-class1-initial-unpark-count-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/power-control-class1-initial-unpark-count-etw-qga-unblock-20260507/power-control-class1-initial-unpark-count-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/power-control-class1-initial-unpark-count-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/power-control-class1-initial-unpark-count-etw-qga-unblock-20260507/power-control-class1-initial-unpark-count-etw-qga-unblock-20260507.etl",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4442 registry events with 527 caller-stack events. The bundle contains an exact helper-triggered `RegQueryValue` for `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power` / `Class1InitialUnparkCount`, returning `0x80000005` on the clean baseline.",
+          "strength": "high",
+          "supports": [
+            "runtime-observation",
+            "tooling-fix",
+            "path",
+            "value",
+            "version-scope"
           ],
           "origin": "unspecified"
         }
@@ -57667,6 +57731,22 @@
             "transport-blocker"
           ],
           "origin": "unspecified"
+        },
+        {
+          "evidence_id": "vm-power.control.lid-reliability-state-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk runtime receipt for LidReliabilityState",
+          "location": "evidence/captures/power-control-lid-reliability-state-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/power-control-lid-reliability-state-etw-qga-unblock-20260507/power-control-lid-reliability-state-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/power-control-lid-reliability-state-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/power-control-lid-reliability-state-etw-qga-unblock-20260507/power-control-lid-reliability-state-etw-qga-unblock-20260507.etl",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4500 registry events with 572 caller-stack events. The bundle contains an exact helper-triggered `RegQueryValue` for `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power` / `LidReliabilityState`, returning `0x80000005` on the clean baseline.",
+          "strength": "high",
+          "supports": [
+            "runtime-observation",
+            "tooling-fix",
+            "path",
+            "value",
+            "version-scope"
+          ],
+          "origin": "unspecified"
         }
       ],
       "validation_proof": {
@@ -58003,6 +58083,22 @@
           "supports": [
             "runtime-lane-review",
             "transport-blocker"
+          ],
+          "origin": "unspecified"
+        },
+        {
+          "evidence_id": "vm-power.control.mf-buffering-threshold-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk runtime receipt for MfBufferingThreshold",
+          "location": "evidence/captures/power-control-mf-buffering-threshold-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/power-control-mf-buffering-threshold-etw-qga-unblock-20260507/power-control-mf-buffering-threshold-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/power-control-mf-buffering-threshold-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/power-control-mf-buffering-threshold-etw-qga-unblock-20260507/power-control-mf-buffering-threshold-etw-qga-unblock-20260507.etl",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4500 registry events with 572 caller-stack events. The bundle contains an exact helper-triggered `RegQueryValue` for `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power` / `MfBufferingThreshold`, returning `0x80000005` on the clean baseline.",
+          "strength": "high",
+          "supports": [
+            "runtime-observation",
+            "tooling-fix",
+            "path",
+            "value",
+            "version-scope"
           ],
           "origin": "unspecified"
         }
@@ -58344,6 +58440,22 @@
             "transport-blocker"
           ],
           "origin": "unspecified"
+        },
+        {
+          "evidence_id": "vm-power.control.perf-calculate-actual-utilization-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk runtime receipt for PerfCalculateActualUtilization",
+          "location": "evidence/captures/power-control-perf-calculate-actual-utilization-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/power-control-perf-calculate-actual-utilization-etw-qga-unblock-20260507/power-control-perf-calculate-actual-utilization-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/power-control-perf-calculate-actual-utilization-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/power-control-perf-calculate-actual-utilization-etw-qga-unblock-20260507/power-control-perf-calculate-actual-utilization-etw-qga-unblock-20260507.etl",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4503 registry events with 571 caller-stack events. The bundle contains an exact helper-triggered `RegQueryValue` for `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power` / `PerfCalculateActualUtilization`, returning `0x80000005` on the clean baseline.",
+          "strength": "high",
+          "supports": [
+            "runtime-observation",
+            "tooling-fix",
+            "path",
+            "value",
+            "version-scope"
+          ],
+          "origin": "unspecified"
         }
       ],
       "validation_proof": {
@@ -58676,6 +58788,22 @@
           "supports": [
             "runtime-lane-review",
             "transport-blocker"
+          ],
+          "origin": "unspecified"
+        },
+        {
+          "evidence_id": "vm-power.control.timer-rebase-threshold-on-drips-exit-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk runtime receipt for TimerRebaseThresholdOnDripsExit",
+          "location": "evidence/captures/power-control-timer-rebase-threshold-on-drips-exit-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/power-control-timer-rebase-threshold-on-drips-exit-etw-qga-unblock-20260507/power-control-timer-rebase-threshold-on-drips-exit-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/power-control-timer-rebase-threshold-on-drips-exit-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/power-control-timer-rebase-threshold-on-drips-exit-etw-qga-unblock-20260507/power-control-timer-rebase-threshold-on-drips-exit-etw-qga-unblock-20260507.etl",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4808 registry events with 809 caller-stack events. The bundle contains an exact helper-triggered `RegQueryValue` for `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power` / `TimerRebaseThresholdOnDripsExit`, returning `0x80000005` on the clean baseline.",
+          "strength": "high",
+          "supports": [
+            "runtime-observation",
+            "tooling-fix",
+            "path",
+            "value",
+            "version-scope"
           ],
           "origin": "unspecified"
         }
@@ -106173,6 +106301,21 @@
             "runtime-open-question",
             "version-scope",
             "investigation-open-question"
+          ],
+          "origin": "unspecified"
+        },
+        {
+          "evidence_id": "vm-system.reliability-timestamp-enabled-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk runtime receipt for TimeStampEnabled",
+          "location": "evidence/captures/system-reliability-timestamp-enabled-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/system-reliability-timestamp-enabled-etw-qga-unblock-20260507/system-reliability-timestamp-enabled-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/system-reliability-timestamp-enabled-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/system-reliability-timestamp-enabled-etw-qga-unblock-20260507/system-reliability-timestamp-enabled-etw-qga-unblock-20260507.etl",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4441 registry events with 524 caller-stack events. The QGA-launched helper targeted `HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Reliability` / `TimeStampEnabled` and the bundle contains target-key activity, but no exact `TimeStampEnabled` RegQueryValue event was observed on the clean baseline.",
+          "strength": "medium",
+          "supports": [
+            "runtime-observation",
+            "tooling-fix",
+            "path",
+            "version-scope"
           ],
           "origin": "unspecified"
         }

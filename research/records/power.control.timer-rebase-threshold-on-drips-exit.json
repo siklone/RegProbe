@@ -229,6 +229,21 @@
         "transport-blocker"
       ],
       "strength": "medium"
+    },
+    {
+      "evidence_id": "vm-power.control.timer-rebase-threshold-on-drips-exit-etw-qga-unblock-20260507",
+      "kind": "etw-trace",
+      "title": "QGA-first ETW stackwalk runtime receipt for TimerRebaseThresholdOnDripsExit",
+      "location": "evidence/captures/power-control-timer-rebase-threshold-on-drips-exit-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/power-control-timer-rebase-threshold-on-drips-exit-etw-qga-unblock-20260507/power-control-timer-rebase-threshold-on-drips-exit-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/power-control-timer-rebase-threshold-on-drips-exit-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/power-control-timer-rebase-threshold-on-drips-exit-etw-qga-unblock-20260507/power-control-timer-rebase-threshold-on-drips-exit-etw-qga-unblock-20260507.etl",
+      "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4808 registry events with 809 caller-stack events. The bundle contains an exact helper-triggered `RegQueryValue` for `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power` / `TimerRebaseThresholdOnDripsExit`, returning `0x80000005` on the clean baseline.",
+      "supports": [
+        "runtime-observation",
+        "tooling-fix",
+        "path",
+        "value",
+        "version-scope"
+      ],
+      "strength": "high"
     }
   ],
   "decision": {
@@ -263,7 +278,7 @@
       "notes": "The tools-hardened DRIPS capability gate and later KVM reboot observation confirmed that `TimerRebaseThresholdOnDripsExit` stays `60` while S0 Low Power Idle remains unavailable, leaving the record environment-limited rather than path-uncertain."
     }
   ],
-  "last_reviewed_utc": "2026-04-28T06:23:50Z",
+  "last_reviewed_utc": "2026-05-07T10:16:25.0142271Z",
   "version_stable": [
     "25H2"
   ],
@@ -291,14 +306,14 @@
       "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review still returns no candidate-specific WRK hit for TimerRebaseThresholdOnDripsExit."
     },
-    "notes": "The shared current-build ntoskrnl Ghidra batch retained reviewable string/xref artifacts for TimerRebaseThresholdOnDripsExit, but no naturally resolved function survived compaction. The runtime lane remains real but environment-limited: VMware and later KVM follow-ups kept the value stable across reboot while the baseline still reported S0 Low Power Idle unavailable, so the record stays decision-gated by missing Modern Standby capability rather than by a dead-flag conclusion. A bounded 2026-04-24 KVM ETW stackwalk retry for TimerRebaseThresholdOnDripsExit reached artifact-upload but still timed out before any ETL, XML, or normalized bundle returned to the host. The repo now retains summary and stage receipts only, so this closes the ETW attempt as a transport receipt rather than as exact runtime proof.",
+    "notes": "The shared current-build ntoskrnl Ghidra batch retained reviewable string/xref artifacts for TimerRebaseThresholdOnDripsExit, but no naturally resolved function survived compaction. The runtime lane remains real but environment-limited: VMware and later KVM follow-ups kept the value stable across reboot while the baseline still reported S0 Low Power Idle unavailable, so the record stays decision-gated by missing Modern Standby capability rather than by a dead-flag conclusion. A bounded 2026-04-24 KVM ETW stackwalk retry for TimerRebaseThresholdOnDripsExit reached artifact-upload but still timed out before any ETL, XML, or normalized bundle returned to the host. The repo now retains summary and stage receipts only, so this closes the ETW attempt as a transport receipt rather than as exact runtime proof. A 2026-05-07 QGA-first ETW stackwalk rerun cleared the earlier ETW ingest/upload blocker and produced an exact helper-triggered `RegQueryValue` for `TimerRebaseThresholdOnDripsExit` with caller-stack capture.",
     "last_updated_utc": "2026-04-28T06:23:50Z",
     "runtime_capture_reviewed": {
       "etw-stackwalk": true,
-      "status": "artifact_upload_timeout"
+      "status": "qga_unblocked_ingest_ok"
     },
     "etw_stackwalk_reviewed": true,
-    "etw_stackwalk_review_status": "artifact_upload_timeout",
-    "etw_stackwalk_review_artifact": "evidence/captures/power-control-timer-rebase-threshold-on-drips-exit-etw-stackwalk-attempt-20260424.json"
+    "etw_stackwalk_review_status": "qga_unblocked_ingest_ok",
+    "etw_stackwalk_review_artifact": "evidence/captures/power-control-timer-rebase-threshold-on-drips-exit-etw-qga-unblock-20260507.json"
   }
 }

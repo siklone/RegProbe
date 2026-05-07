@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-07T10:16:25.0142271Z",
+  "record_id": "power.control.timer-rebase-threshold-on-drips-exit",
+  "run_id": "power-control-timer-rebase-threshold-on-drips-exit-etw-qga-unblock-20260507",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+  "value_name": "TimerRebaseThresholdOnDripsExit",
+  "attempt_status": "qga_unblocked_ingest_ok",
+  "assessment": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and a normalized bundle with 4808 registry events and 809 caller-stack events. The bundle contains an exact RegQueryValue event for HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power / TimerRebaseThresholdOnDripsExit from the helper probe, returning 0x80000005 on the clean baseline.",
+  "target_observation": {
+    "exact_value_query": true,
+    "operation": "RegQueryValue",
+    "representative_status": "0x80000005",
+    "event_count": 4808,
+    "caller_stack_event_count": 809,
+    "target_key_event_count": 39,
+    "target_value_event_count": 1,
+    "target_command_event_count": 2,
+    "launch_transport": "qga"
+  },
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/power-control-timer-rebase-threshold-on-drips-exit-etw-qga-unblock-20260507/power-control-timer-rebase-threshold-on-drips-exit-etw-qga-unblock-20260507-summary.json",
+      "sha256": "27b1492186953cfa00edd84e0e16f35a1970a62287267460000d7b3e2fbb2a9f",
+      "size": 8365,
+      "collected_utc": "2026-05-07T10:16:25.0142271Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/power-control-timer-rebase-threshold-on-drips-exit-etw-qga-unblock-20260507/normalized-registry-bundle.json",
+      "sha256": "e79ae211eb1523fa894447c9b37a36d0b085855f4bdd7cbcc4f28969d9cb8e79",
+      "size": 6510286,
+      "collected_utc": "2026-05-07T10:16:25.0142271Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/power-control-timer-rebase-threshold-on-drips-exit-etw-qga-unblock-20260507/power-control-timer-rebase-threshold-on-drips-exit-etw-qga-unblock-20260507.etl",
+      "sha256": "fc7a08241952f8b401099437e1a68fd453a8a47d33cc92b053352a671aefe8b7",
+      "size": 12845056,
+      "collected_utc": "2026-05-07T10:16:25.0142271Z"
+    }
+  ]
+}

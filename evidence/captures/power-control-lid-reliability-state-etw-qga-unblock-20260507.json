@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-07T10:11:53.9122918Z",
+  "record_id": "power.control.lid-reliability-state",
+  "run_id": "power-control-lid-reliability-state-etw-qga-unblock-20260507",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+  "value_name": "LidReliabilityState",
+  "attempt_status": "qga_unblocked_ingest_ok",
+  "assessment": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and a normalized bundle with 4500 registry events and 572 caller-stack events. The bundle contains an exact RegQueryValue event for HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power / LidReliabilityState from the helper probe, returning 0x80000005 on the clean baseline.",
+  "target_observation": {
+    "exact_value_query": true,
+    "operation": "RegQueryValue",
+    "representative_status": "0x80000005",
+    "event_count": 4500,
+    "caller_stack_event_count": 572,
+    "target_key_event_count": 39,
+    "target_value_event_count": 1,
+    "target_command_event_count": 2,
+    "launch_transport": "qga"
+  },
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/power-control-lid-reliability-state-etw-qga-unblock-20260507/power-control-lid-reliability-state-etw-qga-unblock-20260507-summary.json",
+      "sha256": "2a69c9930114334267ac58d05a0ff18fd1f7649ca873bba3635c3ebd5c231d78",
+      "size": 7878,
+      "collected_utc": "2026-05-07T10:11:53.9122918Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/power-control-lid-reliability-state-etw-qga-unblock-20260507/normalized-registry-bundle.json",
+      "sha256": "a0fc618c9dfc4b644b9b98e8462dab70f221ed806214a7d76a0e8e4a4fd16a4d",
+      "size": 5679492,
+      "collected_utc": "2026-05-07T10:11:53.9122918Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/power-control-lid-reliability-state-etw-qga-unblock-20260507/power-control-lid-reliability-state-etw-qga-unblock-20260507.etl",
+      "sha256": "2ece5ab828a79d596a4d5f1ec707f867562ef7281ee59554cf5d2306c0d8a994",
+      "size": 12582912,
+      "collected_utc": "2026-05-07T10:11:53.9122918Z"
+    }
+  ]
+}

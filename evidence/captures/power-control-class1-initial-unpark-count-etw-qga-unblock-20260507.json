@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-07T10:10:22.8118655Z",
+  "record_id": "power.control.class1-initial-unpark-count",
+  "run_id": "power-control-class1-initial-unpark-count-etw-qga-unblock-20260507",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+  "value_name": "Class1InitialUnparkCount",
+  "attempt_status": "qga_unblocked_ingest_ok",
+  "assessment": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and a normalized bundle with 4442 registry events and 527 caller-stack events. The bundle contains an exact RegQueryValue event for HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power / Class1InitialUnparkCount from the helper probe, returning 0x80000005 on the clean baseline.",
+  "target_observation": {
+    "exact_value_query": true,
+    "operation": "RegQueryValue",
+    "representative_status": "0x80000005",
+    "event_count": 4442,
+    "caller_stack_event_count": 527,
+    "target_key_event_count": 39,
+    "target_value_event_count": 1,
+    "target_command_event_count": 2,
+    "launch_transport": "qga"
+  },
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/power-control-class1-initial-unpark-count-etw-qga-unblock-20260507/power-control-class1-initial-unpark-count-etw-qga-unblock-20260507-summary.json",
+      "sha256": "5593dfd7b6536ef3cf8961d6e1142b7fe068bd814a618e5c756ebaaf92f83943",
+      "size": 8074,
+      "collected_utc": "2026-05-07T10:10:22.8118655Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/power-control-class1-initial-unpark-count-etw-qga-unblock-20260507/normalized-registry-bundle.json",
+      "sha256": "11318a33b9b6e6c4af9c1f0f44eb13458bd3099ad91019d1a91831926294149c",
+      "size": 5708797,
+      "collected_utc": "2026-05-07T10:10:22.8118655Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/power-control-class1-initial-unpark-count-etw-qga-unblock-20260507/power-control-class1-initial-unpark-count-etw-qga-unblock-20260507.etl",
+      "sha256": "96ca3af4673459d828635b232339fa4f15092c4e2df6d3d99e5f4ea6b3a11b3d",
+      "size": 12582912,
+      "collected_utc": "2026-05-07T10:10:22.8118655Z"
+    }
+  ]
+}

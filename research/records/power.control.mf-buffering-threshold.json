@@ -215,6 +215,21 @@
         "transport-blocker"
       ],
       "strength": "medium"
+    },
+    {
+      "evidence_id": "vm-power.control.mf-buffering-threshold-etw-qga-unblock-20260507",
+      "kind": "etw-trace",
+      "title": "QGA-first ETW stackwalk runtime receipt for MfBufferingThreshold",
+      "location": "evidence/captures/power-control-mf-buffering-threshold-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/power-control-mf-buffering-threshold-etw-qga-unblock-20260507/power-control-mf-buffering-threshold-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/power-control-mf-buffering-threshold-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/power-control-mf-buffering-threshold-etw-qga-unblock-20260507/power-control-mf-buffering-threshold-etw-qga-unblock-20260507.etl",
+      "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4500 registry events with 572 caller-stack events. The bundle contains an exact helper-triggered `RegQueryValue` for `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power` / `MfBufferingThreshold`, returning `0x80000005` on the clean baseline.",
+      "supports": [
+        "runtime-observation",
+        "tooling-fix",
+        "path",
+        "value",
+        "version-scope"
+      ],
+      "strength": "high"
     }
   ],
   "decision": {
@@ -247,7 +262,7 @@
       "notes": "The tools-hardened lightweight ETW disk-I/O burst follow-up captured an exact runtime read for `MfBufferingThreshold` while the guest stayed shell-healthy."
     }
   ],
-  "last_reviewed_utc": "2026-04-28T11:11:34Z",
+  "last_reviewed_utc": "2026-05-07T10:13:25.2530846Z",
   "version_stable": [
     "25H2"
   ],
@@ -277,14 +292,14 @@
       "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review still returns no candidate-specific WRK hit for `MfBufferingThreshold`."
     },
-    "notes": "Shared docs-first static review already retains a current-build ntoskrnl string/xref batch for `MfBufferingThreshold`, while the retained local source-mirror corpus still carries no candidate-specific ReactOS or WRK corroboration. A bounded 2026-04-24 KVM ETW stackwalk retry for MfBufferingThreshold reached artifact-upload but still timed out before any ETL, XML, or normalized bundle returned to the host. The repo now retains summary and stage receipts only, so the ETW lane is reviewed but transport-blocked.",
+    "notes": "Shared docs-first static review already retains a current-build ntoskrnl string/xref batch for `MfBufferingThreshold`, while the retained local source-mirror corpus still carries no candidate-specific ReactOS or WRK corroboration. A bounded 2026-04-24 KVM ETW stackwalk retry for MfBufferingThreshold reached artifact-upload but still timed out before any ETL, XML, or normalized bundle returned to the host. The repo now retains summary and stage receipts only, so the ETW lane is reviewed but transport-blocked. A 2026-05-07 QGA-first ETW stackwalk rerun cleared the earlier ETW ingest/upload blocker and produced an exact helper-triggered `RegQueryValue` for `MfBufferingThreshold` with caller-stack capture.",
     "last_updated_utc": "2026-04-28T11:11:34Z",
     "runtime_capture_reviewed": {
       "etw-stackwalk": true,
-      "status": "artifact_upload_timeout"
+      "status": "qga_unblocked_ingest_ok"
     },
     "etw_stackwalk_reviewed": true,
-    "etw_stackwalk_review_status": "artifact_upload_timeout",
-    "etw_stackwalk_review_artifact": "evidence/captures/power-control-mf-buffering-threshold-etw-stackwalk-attempt-20260424.json"
+    "etw_stackwalk_review_status": "qga_unblocked_ingest_ok",
+    "etw_stackwalk_review_artifact": "evidence/captures/power-control-mf-buffering-threshold-etw-qga-unblock-20260507.json"
   }
 }

@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-07T10:07:20.3461021Z",
+  "record_id": "explorer.disable-taskbar-chat",
+  "run_id": "explorer-disable-taskbar-chat-etw-qga-unblock-20260507",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "registry_path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Windows Chat",
+  "value_name": "ChatIcon",
+  "attempt_status": "qga_unblocked_ingest_ok",
+  "assessment": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and a normalized bundle with 4445 registry events and 525 caller-stack events. The bundle contains an exact RegQueryValue event for HKLM\\Software\\Policies\\Microsoft\\Windows\\Windows Chat / ChatIcon from the helper probe, returning 0xC0000034 on the clean baseline.",
+  "target_observation": {
+    "exact_value_query": true,
+    "operation": "RegQueryValue",
+    "representative_status": "0xC0000034",
+    "event_count": 4445,
+    "caller_stack_event_count": 525,
+    "target_key_event_count": 8,
+    "target_value_event_count": 1,
+    "target_command_event_count": 2,
+    "launch_transport": "qga"
+  },
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/explorer-disable-taskbar-chat-etw-qga-unblock-20260507/explorer-disable-taskbar-chat-etw-qga-unblock-20260507-summary.json",
+      "sha256": "114fbf201e46a554e7039f9a6ff9af372da8b1ee9a666ba2fb3cdfbdf946cd0e",
+      "size": 7663,
+      "collected_utc": "2026-05-07T10:07:20.3461021Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/explorer-disable-taskbar-chat-etw-qga-unblock-20260507/normalized-registry-bundle.json",
+      "sha256": "a01f3ca9540432663e45651892ee3fb3ff9055e82fc3e3aae75521ee3945dfb2",
+      "size": 5444434,
+      "collected_utc": "2026-05-07T10:07:20.3461021Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/explorer-disable-taskbar-chat-etw-qga-unblock-20260507/explorer-disable-taskbar-chat-etw-qga-unblock-20260507.etl",
+      "sha256": "18938d7c013bf3207cda27869c0b49dae07d341427bab75b98809df1b2298568",
+      "size": 12845056,
+      "collected_utc": "2026-05-07T10:07:20.3461021Z"
+    }
+  ]
+}
