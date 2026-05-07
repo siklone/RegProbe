@@ -1,11 +1,11 @@
 # Promoted App QA Coverage
 
-- Generated UTC: 2026-05-07T16:56:37Z
-- History entries: 55
+- Generated UTC: 2026-05-07T16:58:14Z
+- History entries: 56
 - Promoted app-QA candidates: 242
-- Covered: 164
-- Uncovered: 78
-- Coverage: 67.77%
+- Covered: 169
+- Uncovered: 73
+- Coverage: 69.83%
 
 ## Covered Categories
 
@@ -20,7 +20,7 @@
 - Power: 7
 - Privacy: 43
 - Security: 17
-- System: 31
+- System: 36
 - Visibility: 16
 
 ## Uncovered Categories
@@ -34,14 +34,11 @@
 - Power: 3
 - Privacy: 24
 - Security: 4
-- System: 21
+- System: 16
 - Visibility: 7
 
 ## Recommended Next Batches
 
-- System: 5 uncovered cards | coverage 59.62%
-  command: `dotnet run --project cli/cli.csproj -- research qa-batch --id system.memory-disable-paging-executive --id system.memory-large-system-cache-client --id system.memory-nonpaged-pool-dynamic --id system.memory-paged-pool-dynamic --id system.memory-registry-quota-default`
-  live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id system.memory-disable-paging-executive --id system.memory-large-system-cache-client --id system.memory-nonpaged-pool-dynamic --id system.memory-paged-pool-dynamic --id system.memory-registry-quota-default --run-kvm --json`
 - Notifications: 2 uncovered cards | coverage 60.0%
   command: `dotnet run --project cli/cli.csproj -- research qa-batch --id notifications.disable-mirroring --id notifications.disable-tile`
   live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id notifications.disable-mirroring --id notifications.disable-tile --run-kvm --json`
@@ -54,6 +51,9 @@
 - Peripheral: 1 uncovered cards | coverage 66.67%
   command: `dotnet run --project cli/cli.csproj -- research qa-batch --id peripheral.disable-autoplay`
   live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id peripheral.disable-autoplay --run-kvm --json`
+- Network: 5 uncovered cards | coverage 67.86%
+  command: `dotnet run --project cli/cli.csproj -- research qa-batch --id network.smb-enable-multichannel --id network.smb-enable-quic --id network.smb-encrypt-data --id network.smb-increase-client-metadata-cache --id network.smb-reject-unencrypted-access`
+  live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id network.smb-enable-multichannel --id network.smb-enable-quic --id network.smb-encrypt-data --id network.smb-increase-client-metadata-cache --id network.smb-reject-unencrypted-access --run-kvm --json`
 
 ## Remaining Uncovered Sample
 

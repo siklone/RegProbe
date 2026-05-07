@@ -1,11 +1,11 @@
 {
-  "generated_utc": "2026-05-07T16:56:37Z",
-  "history_entry_count": 55,
+  "generated_utc": "2026-05-07T16:58:14Z",
+  "history_entry_count": 56,
   "catalog_candidate_count": 242,
-  "covered_count": 164,
-  "uncovered_count": 78,
+  "covered_count": 169,
+  "uncovered_count": 73,
   "summary": {
-    "coverage_percent": 67.77,
+    "coverage_percent": 69.83,
     "covered_categories": {
       "Audio": 2,
       "Cleanup": 1,
@@ -18,7 +18,7 @@
       "Power": 7,
       "Privacy": 43,
       "Security": 17,
-      "System": 31,
+      "System": 36,
       "Visibility": 16
     },
     "uncovered_categories": {
@@ -31,64 +31,11 @@
       "Power": 3,
       "Privacy": 24,
       "Security": 4,
-      "System": 21,
+      "System": 16,
       "Visibility": 7
     }
   },
   "recommended_next_batches": [
-    {
-      "category": "System",
-      "covered_count": 31,
-      "uncovered_count": 21,
-      "coverage_percent": 59.62,
-      "batch_size": 5,
-      "tweak_ids": [
-        "system.memory-disable-paging-executive",
-        "system.memory-large-system-cache-client",
-        "system.memory-nonpaged-pool-dynamic",
-        "system.memory-paged-pool-dynamic",
-        "system.memory-registry-quota-default"
-      ],
-      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id system.memory-disable-paging-executive --id system.memory-large-system-cache-client --id system.memory-nonpaged-pool-dynamic --id system.memory-paged-pool-dynamic --id system.memory-registry-quota-default",
-      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id system.memory-disable-paging-executive --id system.memory-large-system-cache-client --id system.memory-nonpaged-pool-dynamic --id system.memory-paged-pool-dynamic --id system.memory-registry-quota-default --run-kvm --json",
-      "candidates": [
-        {
-          "tweak_id": "system.memory-disable-paging-executive",
-          "record_id": "system.memory-disable-paging-executive",
-          "category": "System",
-          "name": "Disable Paging Executive",
-          "documentation": "research/records/system.memory-disable-paging-executive.json"
-        },
-        {
-          "tweak_id": "system.memory-large-system-cache-client",
-          "record_id": "system.memory-large-system-cache-client",
-          "category": "System",
-          "name": "Large System Cache",
-          "documentation": "research/records/system.memory-large-system-cache-client.review.json"
-        },
-        {
-          "tweak_id": "system.memory-nonpaged-pool-dynamic",
-          "record_id": "system.memory-nonpaged-pool-dynamic",
-          "category": "System",
-          "name": "Nonpaged Pool Size",
-          "documentation": "research/records/system.memory-nonpaged-pool-dynamic.json"
-        },
-        {
-          "tweak_id": "system.memory-paged-pool-dynamic",
-          "record_id": "system.memory-paged-pool-dynamic",
-          "category": "System",
-          "name": "Paged Pool Size",
-          "documentation": "research/records/system.memory-paged-pool-dynamic.json"
-        },
-        {
-          "tweak_id": "system.memory-registry-quota-default",
-          "record_id": "system.memory-registry-quota-default",
-          "category": "System",
-          "name": "Registry Size Limit / Registry Quota",
-          "documentation": "research/records/system.memory-registry-quota-default.review.json"
-        }
-      ]
-    },
     {
       "category": "Notifications",
       "covered_count": 3,
@@ -210,6 +157,59 @@
           "category": "Peripheral",
           "name": "Disable AutoPlay",
           "documentation": "research/records/peripheral.disable-autoplay.review.json"
+        }
+      ]
+    },
+    {
+      "category": "Network",
+      "covered_count": 19,
+      "uncovered_count": 9,
+      "coverage_percent": 67.86,
+      "batch_size": 5,
+      "tweak_ids": [
+        "network.smb-enable-multichannel",
+        "network.smb-enable-quic",
+        "network.smb-encrypt-data",
+        "network.smb-increase-client-metadata-cache",
+        "network.smb-reject-unencrypted-access"
+      ],
+      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id network.smb-enable-multichannel --id network.smb-enable-quic --id network.smb-encrypt-data --id network.smb-increase-client-metadata-cache --id network.smb-reject-unencrypted-access",
+      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id network.smb-enable-multichannel --id network.smb-enable-quic --id network.smb-encrypt-data --id network.smb-increase-client-metadata-cache --id network.smb-reject-unencrypted-access --run-kvm --json",
+      "candidates": [
+        {
+          "tweak_id": "network.smb-enable-multichannel",
+          "record_id": "network.smb-enable-multichannel",
+          "category": "Network",
+          "name": "SMB Multichannel",
+          "documentation": "research/records/network.smb-enable-multichannel.review.json"
+        },
+        {
+          "tweak_id": "network.smb-enable-quic",
+          "record_id": "network.smb-enable-quic",
+          "category": "Network",
+          "name": "SMB over QUIC",
+          "documentation": "research/records/network.smb-enable-quic.review.json"
+        },
+        {
+          "tweak_id": "network.smb-encrypt-data",
+          "record_id": "network.smb-encrypt-data",
+          "category": "Network",
+          "name": "SMB Server Encryption Requirement",
+          "documentation": "research/records/network.smb-encrypt-data.json"
+        },
+        {
+          "tweak_id": "network.smb-increase-client-metadata-cache",
+          "record_id": "network.smb-increase-client-metadata-cache",
+          "category": "Network",
+          "name": "SMB Client Metadata Cache Size Bundle",
+          "documentation": "research/records/network.smb-increase-client-metadata-cache.json"
+        },
+        {
+          "tweak_id": "network.smb-reject-unencrypted-access",
+          "record_id": "network.smb-reject-unencrypted-access",
+          "category": "Network",
+          "name": "SMB Server Reject Unencrypted Access",
+          "documentation": "research/records/network.smb-reject-unencrypted-access.json"
         }
       ]
     }
@@ -1548,6 +1548,51 @@
       "latest_report_status": "ok"
     },
     {
+      "tweak_id": "system.memory-disable-paging-executive",
+      "qa_tweak_id": "system.memory-disable-paging-executive",
+      "candidate_id": "system.memory-disable-paging-executive",
+      "category": "System",
+      "name": "Disable Paging Executive",
+      "documentation": "research/records/system.memory-disable-paging-executive.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "system.memory-large-system-cache-client",
+      "qa_tweak_id": "system.memory-large-system-cache-client",
+      "candidate_id": "system.memory-large-system-cache-client",
+      "category": "System",
+      "name": "Large System Cache",
+      "documentation": "research/records/system.memory-large-system-cache-client.review.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "system.memory-nonpaged-pool-dynamic",
+      "qa_tweak_id": "system.memory-nonpaged-pool-dynamic",
+      "candidate_id": "system.memory-nonpaged-pool-dynamic",
+      "category": "System",
+      "name": "Nonpaged Pool Size",
+      "documentation": "research/records/system.memory-nonpaged-pool-dynamic.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "system.memory-paged-pool-dynamic",
+      "qa_tweak_id": "system.memory-paged-pool-dynamic",
+      "candidate_id": "system.memory-paged-pool-dynamic",
+      "category": "System",
+      "name": "Paged Pool Size",
+      "documentation": "research/records/system.memory-paged-pool-dynamic.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "system.memory-registry-quota-default",
+      "qa_tweak_id": "system.memory-registry-quota-default",
+      "candidate_id": "system.memory-registry-quota-default",
+      "category": "System",
+      "name": "Registry Size Limit / Registry Quota",
+      "documentation": "research/records/system.memory-registry-quota-default.review.json",
+      "latest_report_status": "ok"
+    },
+    {
       "tweak_id": "visibility.default-account-picture",
       "qa_tweak_id": "visibility.default-account-picture",
       "candidate_id": "visibility.default-account-picture",
@@ -2042,41 +2087,6 @@
       "category": "Security",
       "name": "User Account Control Prompting Profile",
       "documentation": "research/records/security.uac-never-notify.json"
-    },
-    {
-      "tweak_id": "system.memory-disable-paging-executive",
-      "record_id": "system.memory-disable-paging-executive",
-      "category": "System",
-      "name": "Disable Paging Executive",
-      "documentation": "research/records/system.memory-disable-paging-executive.json"
-    },
-    {
-      "tweak_id": "system.memory-large-system-cache-client",
-      "record_id": "system.memory-large-system-cache-client",
-      "category": "System",
-      "name": "Large System Cache",
-      "documentation": "research/records/system.memory-large-system-cache-client.review.json"
-    },
-    {
-      "tweak_id": "system.memory-nonpaged-pool-dynamic",
-      "record_id": "system.memory-nonpaged-pool-dynamic",
-      "category": "System",
-      "name": "Nonpaged Pool Size",
-      "documentation": "research/records/system.memory-nonpaged-pool-dynamic.json"
-    },
-    {
-      "tweak_id": "system.memory-paged-pool-dynamic",
-      "record_id": "system.memory-paged-pool-dynamic",
-      "category": "System",
-      "name": "Paged Pool Size",
-      "documentation": "research/records/system.memory-paged-pool-dynamic.json"
-    },
-    {
-      "tweak_id": "system.memory-registry-quota-default",
-      "record_id": "system.memory-registry-quota-default",
-      "category": "System",
-      "name": "Registry Size Limit / Registry Quota",
-      "documentation": "research/records/system.memory-registry-quota-default.review.json"
     },
     {
       "tweak_id": "system.ntfs-disable-8dot3",
