@@ -222,6 +222,7 @@ public sealed class CommandAllowlist
         AddRegDwordRule(regAllowlist, @"HKLM\SYSTEM\CurrentControlSet\Control\Power", "DisableIdleStatesAtBoot", "0", "1");
         AddRegDwordRule(regAllowlist, @"HKLM\SYSTEM\CurrentControlSet\Control\Power", "ExitLatencyCheckEnabled", "0", "1");
         AddRegDwordRule(regAllowlist, @"HKLM\SYSTEM\CurrentControlSet\Control\Power", "IdleStateTimeout", "0", "500");
+        AddRegDwordRule(regAllowlist, @"HKLM\System\CurrentControlSet\Control\Lsa\MSV1_0", "NTLMMinClientSec", "0", "524288", "536870912", "537395200");
         AddRegDwordRule(regAllowlist, @"HKLM\SYSTEM\CurrentControlSet\Services\Tcpip6\Parameters", "DisabledComponents", "0", "32", "255");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows NT\Terminal Services", "fAllowToGetHelp", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows NT\Terminal Services", "fDisableClip", "0", "1", "2");
@@ -267,6 +268,7 @@ public sealed class CommandAllowlist
         AddRegDwordRule(regAllowlist, @"HKLM\System\CurrentControlSet\Services\LanmanWorkstation\Parameters", "EnableSecuritySignature", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\System\CurrentControlSet\Services\LanmanWorkstation\Parameters", "EnablePlainTextPassword", "0", "1");
         AddRegDwordRule(regAllowlist, @"HKLM\System\CurrentControlSet\Services\LanmanWorkstation\Parameters", "RequireSecuritySignature", "0", "1", "2");
+        AddRegDwordRule(regAllowlist, @"HKLM\System\CurrentControlSet\Services\LanmanWorkstation\Parameters", "DisableLargeMtu", "0", "1");
         AddRegDwordRule(regAllowlist, @"HKLM\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters", "DirectoryCacheEntriesMax", "16", "128", "4096");
         AddRegDwordRule(regAllowlist, @"HKLM\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters", "FileInfoCacheEntriesMax", "64", "128", "32768");
         AddRegDwordRule(regAllowlist, @"HKLM\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters", "FileNotFoundCacheEntriesMax", "128", "32768");

@@ -1,11 +1,11 @@
 # Promoted App QA Coverage
 
-- Generated UTC: 2026-05-07T16:43:59Z
-- History entries: 49
+- Generated UTC: 2026-05-07T16:50:10Z
+- History entries: 52
 - Promoted app-QA candidates: 242
-- Covered: 149
-- Uncovered: 93
-- Coverage: 61.57%
+- Covered: 154
+- Uncovered: 88
+- Coverage: 63.64%
 
 ## Covered Categories
 
@@ -13,7 +13,7 @@
 - Cleanup: 1
 - Developer: 7
 - Explorer: 13
-- Network: 14
+- Network: 19
 - Notifications: 3
 - Performance: 3
 - Peripheral: 2
@@ -28,7 +28,7 @@
 - Audio: 1
 - Developer: 2
 - Explorer: 4
-- Network: 14
+- Network: 9
 - Notifications: 2
 - Peripheral: 1
 - Power: 3
@@ -39,9 +39,6 @@
 
 ## Recommended Next Batches
 
-- Network: 5 uncovered cards | coverage 50.0%
-  command: `dotnet run --project cli/cli.csproj -- research qa-batch --id network.enable-lltdio --id network.prefer-ipv4 --id network.require-ntlm-ssp-client-session-security --id network.smb-disable-leasing --id network.smb-enable-large-mtu`
-  live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id network.enable-lltdio --id network.prefer-ipv4 --id network.require-ntlm-ssp-client-session-security --id network.smb-disable-leasing --id network.smb-enable-large-mtu --run-kvm --json`
 - Privacy: 5 uncovered cards | coverage 56.72%
   command: `dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-mdm-enrollment --id privacy.disable-message-sync --id privacy.disable-offline-files.policy --id privacy.disable-onesettings-downloads --id privacy.disable-online-tips`
   live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-mdm-enrollment --id privacy.disable-message-sync --id privacy.disable-offline-files.policy --id privacy.disable-onesettings-downloads --id privacy.disable-online-tips --run-kvm --json`
@@ -54,6 +51,9 @@
 - Notifications: 2 uncovered cards | coverage 60.0%
   command: `dotnet run --project cli/cli.csproj -- research qa-batch --id notifications.disable-mirroring --id notifications.disable-tile`
   live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id notifications.disable-mirroring --id notifications.disable-tile --run-kvm --json`
+- Audio: 1 uncovered cards | coverage 66.67%
+  command: `dotnet run --project cli/cli.csproj -- research qa-batch --id audio.show-hidden-devices`
+  live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id audio.show-hidden-devices --run-kvm --json`
 
 ## Remaining Uncovered Sample
 
@@ -64,11 +64,6 @@
 - `explorer.show-protected-operating-system-files` | Show Protected Operating System Files | Explorer
 - `explorer.show-recent-items` | Show Recent Items In Home | Explorer
 - `explorer.show-type-overlay` | Display File Icons On Thumbnails | Explorer
-- `network.enable-lltdio` | LLTD Mapper I/O Driver Policy | Network
-- `network.prefer-ipv4` | IPv4 Preference Override | Network
-- `network.require-ntlm-ssp-client-session-security` | Require NTLM SSP Client Session Security and 128-bit Encryption | Network
-- `network.smb-disable-leasing` | SMB Server Leasing | Network
-- `network.smb-enable-large-mtu` | SMB Client Large MTU | Network
 - `network.smb-enable-multichannel` | SMB Multichannel | Network
 - `network.smb-enable-quic` | SMB over QUIC | Network
 - `network.smb-encrypt-data` | SMB Server Encryption Requirement | Network
@@ -77,3 +72,8 @@
 - `network.smb-require-dialect-3_1_1` | Require SMB Dialect 3.1.1 | Network
 - `network.smb-require-signing-client` | SMB Client Signing Requirement | Network
 - `network.smb-require-signing-server` | SMB Server Signing Requirement | Network
+- `network.smb-set-cipher-suite-order` | SMB Cipher Suite Order | Network
+- `notifications.disable-mirroring` | Notification Mirroring | Notifications
+- `notifications.disable-tile` | Tile Notifications | Notifications
+- `peripheral.disable-autoplay` | Disable AutoPlay | Peripheral
+- `power.hide-sleep-option` | Show Sleep Option | Power

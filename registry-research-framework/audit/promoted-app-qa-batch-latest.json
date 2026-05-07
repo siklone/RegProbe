@@ -1,13 +1,13 @@
 {
-  "generated_utc": "2026-05-07T16:43:59Z",
+  "generated_utc": "2026-05-07T16:50:10Z",
   "status": "PASS",
   "selection": {
     "requested_ids": [
-      "system.graphics-tdr-level",
-      "system.graphics-tdr-limit-count",
-      "system.graphics-tdr-limit-time",
-      "system.kernel-thread-dpc-enable",
-      "system.memory-clear-pagefile-at-shutdown"
+      "network.enable-lltdio",
+      "network.prefer-ipv4",
+      "network.require-ntlm-ssp-client-session-security",
+      "network.smb-disable-leasing",
+      "network.smb-enable-large-mtu"
     ],
     "requested_categories": [],
     "limit_per_category": 1,
@@ -26,25 +26,25 @@
   "errors": [],
   "candidates": [
     {
-      "tweak_id": "system.graphics-tdr-level",
-      "qa_tweak_id": "system.graphics-tdr-level",
-      "candidate_id": "system.graphics-tdr-level",
-      "record_id": "system.graphics-tdr-level",
-      "category": "System",
-      "name": "Graphics TDR Level",
-      "documentation": "research/records/system.graphics-tdr-level.json",
+      "tweak_id": "network.enable-lltdio",
+      "qa_tweak_id": "network.enable-lltdio",
+      "candidate_id": "network.enable-lltdio",
+      "record_id": "network.enable-lltdio",
+      "category": "Network",
+      "name": "LLTD Mapper I/O Driver Policy",
+      "documentation": "research/records/network.enable-lltdio.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect system.graphics-tdr-level",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect network.enable-lltdio",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.graphics-tdr-level' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.graphics-tdr-level.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.graphics-tdr-level' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.graphics-tdr-level.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.graphics-tdr-level' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.graphics-tdr-level.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.graphics-tdr-level' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.graphics-tdr-level.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'system.graphics-tdr-level'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'network.enable-lltdio' --qa-output 'C:\\Tools\\ValidationController\\smoke\\network.enable-lltdio.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'network.enable-lltdio' --qa-output 'C:\\Tools\\ValidationController\\smoke\\network.enable-lltdio.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'network.enable-lltdio' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\network.enable-lltdio.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'network.enable-lltdio' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\network.enable-lltdio.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'network.enable-lltdio'"
       },
       "expected_report": {
         "success": true,
@@ -85,25 +85,25 @@
       }
     },
     {
-      "tweak_id": "system.graphics-tdr-limit-count",
-      "qa_tweak_id": "system.graphics-tdr-limit-count",
-      "candidate_id": "system.graphics-tdr-limit-count",
-      "record_id": "system.graphics-tdr-limit-count",
-      "category": "System",
-      "name": "Graphics TDR Limit Count",
-      "documentation": "research/records/system.graphics-tdr-limit-count.json",
+      "tweak_id": "network.prefer-ipv4",
+      "qa_tweak_id": "network.prefer-ipv4",
+      "candidate_id": "network.prefer-ipv4",
+      "record_id": "network.prefer-ipv4",
+      "category": "Network",
+      "name": "IPv4 Preference Override",
+      "documentation": "research/records/network.prefer-ipv4.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect system.graphics-tdr-limit-count",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect network.prefer-ipv4",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.graphics-tdr-limit-count' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.graphics-tdr-limit-count.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.graphics-tdr-limit-count' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.graphics-tdr-limit-count.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.graphics-tdr-limit-count' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.graphics-tdr-limit-count.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.graphics-tdr-limit-count' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.graphics-tdr-limit-count.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'system.graphics-tdr-limit-count'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'network.prefer-ipv4' --qa-output 'C:\\Tools\\ValidationController\\smoke\\network.prefer-ipv4.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'network.prefer-ipv4' --qa-output 'C:\\Tools\\ValidationController\\smoke\\network.prefer-ipv4.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'network.prefer-ipv4' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\network.prefer-ipv4.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'network.prefer-ipv4' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\network.prefer-ipv4.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'network.prefer-ipv4'"
       },
       "expected_report": {
         "success": true,
@@ -144,25 +144,25 @@
       }
     },
     {
-      "tweak_id": "system.graphics-tdr-limit-time",
-      "qa_tweak_id": "system.graphics-tdr-limit-time",
-      "candidate_id": "system.graphics-tdr-limit-time",
-      "record_id": "system.graphics-tdr-limit-time",
-      "category": "System",
-      "name": "Graphics TDR Limit Time",
-      "documentation": "research/records/system.graphics-tdr-limit-time.json",
+      "tweak_id": "network.require-ntlm-ssp-client-session-security",
+      "qa_tweak_id": "network.require-ntlm-ssp-client-session-security",
+      "candidate_id": "network.require-ntlm-ssp-client-session-security",
+      "record_id": "network.require-ntlm-ssp-client-session-security",
+      "category": "Network",
+      "name": "Require NTLM SSP Client Session Security and 128-bit Encryption",
+      "documentation": "research/records/network.require-ntlm-ssp-client-session-security.review.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
-      "restore_default_supported": true,
-      "restore_previous_supported": true,
+      "restore_default_supported": false,
+      "restore_previous_supported": false,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect system.graphics-tdr-limit-time",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect network.require-ntlm-ssp-client-session-security",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.graphics-tdr-limit-time' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.graphics-tdr-limit-time.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.graphics-tdr-limit-time' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.graphics-tdr-limit-time.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.graphics-tdr-limit-time' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.graphics-tdr-limit-time.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.graphics-tdr-limit-time' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.graphics-tdr-limit-time.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'system.graphics-tdr-limit-time'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'network.require-ntlm-ssp-client-session-security' --qa-output 'C:\\Tools\\ValidationController\\smoke\\network.require-ntlm-ssp-client-session-security.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'network.require-ntlm-ssp-client-session-security' --qa-output 'C:\\Tools\\ValidationController\\smoke\\network.require-ntlm-ssp-client-session-security.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'network.require-ntlm-ssp-client-session-security' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\network.require-ntlm-ssp-client-session-security.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'network.require-ntlm-ssp-client-session-security' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\network.require-ntlm-ssp-client-session-security.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'network.require-ntlm-ssp-client-session-security'"
       },
       "expected_report": {
         "success": true,
@@ -203,25 +203,25 @@
       }
     },
     {
-      "tweak_id": "system.kernel-thread-dpc-enable",
-      "qa_tweak_id": "system.kernel-thread-dpc-enable",
-      "candidate_id": "system.kernel-thread-dpc-enable",
-      "record_id": "system.kernel-thread-dpc-enable",
-      "category": "System",
-      "name": "Threaded DPCs",
-      "documentation": "research/records/system.kernel-thread-dpc-enable.json",
+      "tweak_id": "network.smb-disable-leasing",
+      "qa_tweak_id": "network.smb-disable-leasing",
+      "candidate_id": "network.smb-disable-leasing",
+      "record_id": "network.smb-disable-leasing",
+      "category": "Network",
+      "name": "SMB Server Leasing",
+      "documentation": "research/records/network.smb-disable-leasing.review.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect system.kernel-thread-dpc-enable",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect network.smb-disable-leasing",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.kernel-thread-dpc-enable' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.kernel-thread-dpc-enable.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.kernel-thread-dpc-enable' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.kernel-thread-dpc-enable.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.kernel-thread-dpc-enable' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.kernel-thread-dpc-enable.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.kernel-thread-dpc-enable' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.kernel-thread-dpc-enable.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'system.kernel-thread-dpc-enable'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'network.smb-disable-leasing' --qa-output 'C:\\Tools\\ValidationController\\smoke\\network.smb-disable-leasing.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'network.smb-disable-leasing' --qa-output 'C:\\Tools\\ValidationController\\smoke\\network.smb-disable-leasing.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'network.smb-disable-leasing' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\network.smb-disable-leasing.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'network.smb-disable-leasing' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\network.smb-disable-leasing.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'network.smb-disable-leasing'"
       },
       "expected_report": {
         "success": true,
@@ -262,25 +262,25 @@
       }
     },
     {
-      "tweak_id": "system.memory-clear-pagefile-at-shutdown",
-      "qa_tweak_id": "system.memory-clear-pagefile-at-shutdown",
-      "candidate_id": "system.memory-clear-pagefile-at-shutdown",
-      "record_id": "system.memory-clear-pagefile-at-shutdown",
-      "category": "System",
-      "name": "Clear Page File at Shutdown",
-      "documentation": "research/records/system.memory-clear-pagefile-at-shutdown.json",
+      "tweak_id": "network.smb-enable-large-mtu",
+      "qa_tweak_id": "network.smb-enable-large-mtu",
+      "candidate_id": "network.smb-enable-large-mtu",
+      "record_id": "network.smb-enable-large-mtu",
+      "category": "Network",
+      "name": "SMB Client Large MTU",
+      "documentation": "research/records/network.smb-enable-large-mtu.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect system.memory-clear-pagefile-at-shutdown",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect network.smb-enable-large-mtu",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.memory-clear-pagefile-at-shutdown' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.memory-clear-pagefile-at-shutdown.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.memory-clear-pagefile-at-shutdown' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.memory-clear-pagefile-at-shutdown.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.memory-clear-pagefile-at-shutdown' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.memory-clear-pagefile-at-shutdown.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.memory-clear-pagefile-at-shutdown' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.memory-clear-pagefile-at-shutdown.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'system.memory-clear-pagefile-at-shutdown'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'network.smb-enable-large-mtu' --qa-output 'C:\\Tools\\ValidationController\\smoke\\network.smb-enable-large-mtu.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'network.smb-enable-large-mtu' --qa-output 'C:\\Tools\\ValidationController\\smoke\\network.smb-enable-large-mtu.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'network.smb-enable-large-mtu' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\network.smb-enable-large-mtu.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'network.smb-enable-large-mtu' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\network.smb-enable-large-mtu.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'network.smb-enable-large-mtu'"
       },
       "expected_report": {
         "success": true,
@@ -323,7 +323,7 @@
   ],
   "run_results": [
     {
-      "tweak_id": "system.graphics-tdr-level",
+      "tweak_id": "network.enable-lltdio",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -360,19 +360,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "system.graphics-tdr-level",
-        "TweakName": "Graphics TDR Level",
+        "TweakId": "network.enable-lltdio",
+        "TweakName": "LLTD Mapper I/O Driver Policy",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "system.graphics-tdr-level",
-          "Name": "Graphics TDR Level",
-          "Category": "System",
-          "Description": "Windows can react to GPU timeouts in different ways, such as disabling detection or recovering on timeout. This setting controls that recovery mode.",
-          "FriendlyDescription": "Windows can react to GPU timeouts in different ways, such as disabling detection or recovering on timeout. This setting controls that recovery mode.",
-          "RegistryPath": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers\\TdrLevel",
+          "TweakId": "network.enable-lltdio",
+          "Name": "LLTD Mapper I/O Driver Policy",
+          "Category": "Network",
+          "Description": "LLTD helps Windows map and discover devices on a local network. The Mapper I/O side lets the PC ask the network about its topology.",
+          "FriendlyDescription": "LLTD helps Windows map and discover devices on a local network. The Mapper I/O side lets the PC ask the network about its topology.",
+          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Windows\\LLTD\\EnableLLTDIO",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -380,15 +380,15 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Windows can react to GPU timeouts in different ways, such as disabling detection or recovering on timeout. This setting controls that recovery mode. Evidence: Microsoft's TDR registry keys page documents the exact GraphicsDrivers runtime path, the TdrLevel value name, the supported values 0 through 3, and the documented default of 3. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: LLTD helps Windows map and discover devices on a local network. The Mapper I/O side lets the PC ask the network about its topology. Evidence: The local official Microsoft administrative template defines the exact LLTD policy path and value name used by the app, and the companion ADML help text documents the enable/default behavior. Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "Microsoft's TDR registry keys page documents the exact GraphicsDrivers runtime path, the TdrLevel value name, the supported values 0 through 3, and the documented default of 3.",
-              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows-hardware/drivers/display/tdr-registry-keys"
+              "Summary": "The local official Microsoft administrative template defines the exact LLTD policy path and value name used by the app, and the companion ADML help text documents the enable/default behavior.",
+              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/LinkLayerTopologyDiscovery.admx"
             },
             {
               "Key": "runtime",
@@ -419,13 +419,8 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Win-Config",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\win-config\\batch-01.md#system.graphics-tdr-level",
-              "Kind": "Docs"
-            },
-            {
-              "Title": "Docs: System (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\system\\system.md",
+              "Title": "Docs: Network (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\network\\network.md",
               "Kind": "Docs"
             }
           ]
@@ -434,10 +429,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Recover on timeout'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Policy enabled'.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Recover on timeout",
+            "TargetValue": "Policy enabled",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -446,8 +441,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Recover on timeout'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers\\TdrLevel: missing -> 3",
-                "TimestampText": "09:44:03"
+                "Message": "Current values do not match a named option. Selected option is 'Policy enabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\LLTD\\EnableLLTDIO: missing -> 1",
+                "TimestampText": "09:50:14"
               },
               {
                 "Action": "Apply",
@@ -474,8 +469,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Recover on timeout",
-            "TargetValue": "Recover on timeout",
+            "CurrentValue": "Policy enabled",
+            "TargetValue": "Policy enabled",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -484,20 +479,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Recover on timeout'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers\\TdrLevel: missing -> 3",
-                "TimestampText": "09:44:03"
+                "Message": "Current values do not match a named option. Selected option is 'Policy enabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\LLTD\\EnableLLTDIO: missing -> 1",
+                "TimestampText": "09:50:14"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Recover on timeout'.",
-                "TimestampText": "09:44:06"
+                "Message": "Applied preset 'Policy enabled'.",
+                "TimestampText": "09:50:17"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Recover on timeout'.",
-                "TimestampText": "09:44:06"
+                "Message": "Verified preset 'Policy enabled'.",
+                "TimestampText": "09:50:17"
               },
               {
                 "Action": "Rollback",
@@ -513,7 +508,7 @@
             "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Recover on timeout",
+            "TargetValue": "Policy enabled",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -522,36 +517,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Recover on timeout'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers\\TdrLevel: missing -> 3",
-                "TimestampText": "09:44:03"
+                "Message": "Current values do not match a named option. Selected option is 'Policy enabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\LLTD\\EnableLLTDIO: missing -> 1",
+                "TimestampText": "09:50:14"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Recover on timeout'.",
-                "TimestampText": "09:44:06"
+                "Message": "Applied preset 'Policy enabled'.",
+                "TimestampText": "09:50:17"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Recover on timeout'.",
-                "TimestampText": "09:44:06"
+                "Message": "Verified preset 'Policy enabled'.",
+                "TimestampText": "09:50:17"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "09:44:06"
+                "TimestampText": "09:50:17"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Recover on timeout'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Policy enabled'.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Recover on timeout",
+            "TargetValue": "Policy enabled",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -560,40 +555,40 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Recover on timeout'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers\\TdrLevel: missing -> 3",
-                "TimestampText": "09:44:06"
+                "Message": "Current values do not match a named option. Selected option is 'Policy enabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\LLTD\\EnableLLTDIO: missing -> 1",
+                "TimestampText": "09:50:17"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Recover on timeout'.",
-                "TimestampText": "09:44:06"
+                "Message": "Applied preset 'Policy enabled'.",
+                "TimestampText": "09:50:17"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Recover on timeout'.",
-                "TimestampText": "09:44:06"
+                "Message": "Verified preset 'Policy enabled'.",
+                "TimestampText": "09:50:17"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "09:44:06"
+                "TimestampText": "09:50:17"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T16:44:03.3710482+00:00",
-        "CompletedAtUtc": "2026-05-07T16:44:06.5692663+00:00"
+        "StartedAtUtc": "2026-05-07T16:50:14.7870362+00:00",
+        "CompletedAtUtc": "2026-05-07T16:50:18.0104321+00:00"
       },
-      "qa_tweak_id": "system.graphics-tdr-level",
-      "candidate_id": "system.graphics-tdr-level",
-      "card_name": "Graphics TDR Level",
-      "documentation": "research/records/system.graphics-tdr-level.json"
+      "qa_tweak_id": "network.enable-lltdio",
+      "candidate_id": "network.enable-lltdio",
+      "card_name": "LLTD Mapper I/O Driver Policy",
+      "documentation": "research/records/network.enable-lltdio.json"
     },
     {
-      "tweak_id": "system.graphics-tdr-limit-count",
+      "tweak_id": "network.prefer-ipv4",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -630,19 +625,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "system.graphics-tdr-limit-count",
-        "TweakName": "Graphics TDR Limit Count",
+        "TweakId": "network.prefer-ipv4",
+        "TweakName": "IPv4 Preference Override",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "system.graphics-tdr-limit-count",
-          "Name": "Graphics TDR Limit Count",
-          "Category": "System",
-          "Description": "Windows keeps track of how many GPU hangs occur within the TDR time window. This setting controls that count threshold.",
-          "FriendlyDescription": "Windows keeps track of how many GPU hangs occur within the TDR time window. This setting controls that count threshold.",
-          "RegistryPath": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers\\TdrLimitCount",
+          "TweakId": "network.prefer-ipv4",
+          "Name": "IPv4 Preference Override",
+          "Category": "Network",
+          "Description": "This keeps IPv6 available but tells Windows to prefer IPv4 when both protocols can work.",
+          "FriendlyDescription": "This keeps IPv6 available but tells Windows to prefer IPv4 when both protocols can work.",
+          "RegistryPath": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\Tcpip6\\Parameters\\DisabledComponents",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -650,15 +645,15 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Windows keeps track of how many GPU hangs occur within the TDR time window. This setting controls that count threshold. Evidence: Microsoft's TDR registry keys page documents the exact GraphicsDrivers runtime path, the TdrLimitCount value name, and the documented default of 5. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: This keeps IPv6 available but tells Windows to prefer IPv4 when both protocols can work. Evidence: Microsoft directly documents the DisabledComponents registry path and the decimal value 32 (0x20) for preferring IPv4 over IPv6. The app writes DisabledComponents = 32 on that exact documented path. Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "Microsoft's TDR registry keys page documents the exact GraphicsDrivers runtime path, the TdrLimitCount value name, and the documented default of 5.",
-              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows-hardware/drivers/display/tdr-registry-keys"
+              "Summary": "Microsoft directly documents the DisabledComponents registry path and the decimal value 32 (0x20) for preferring IPv4 over IPv6. The app writes DisabledComponents = 32 on that exact documented path.",
+              "Source": "Validation proof source: https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/configure-ipv6-in-windows"
             },
             {
               "Key": "runtime",
@@ -689,13 +684,8 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Win-Config",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\win-config\\batch-01.md#system.graphics-tdr-limit-count",
-              "Kind": "Docs"
-            },
-            {
-              "Title": "Docs: System (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\system\\system.md",
+              "Title": "Docs: Network (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\network\\network.md",
               "Kind": "Docs"
             }
           ]
@@ -704,550 +694,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Value not set.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Not set",
-            "TargetValue": "5 (0x5)",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": false,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Value not set.",
-                "TimestampText": "09:44:12"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "apply",
-            "AppliedStatus": "Applied",
-            "StatusMessage": "Run completed.",
-            "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "5 (0x5)",
-            "TargetValue": "5 (0x5)",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Value not set.",
-                "TimestampText": "09:44:12"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Set value to 5.",
-                "TimestampText": "09:44:15"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified desired value.",
-                "TimestampText": "09:44:15"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Not required",
-                "Message": "Step not executed.",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "rollback",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Removed value to restore default.",
-            "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "5 (0x5)",
-            "TargetValue": "5 (0x5)",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Value not set.",
-                "TimestampText": "09:44:12"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Set value to 5.",
-                "TimestampText": "09:44:15"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified desired value.",
-                "TimestampText": "09:44:15"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Removed value to restore default.",
-                "TimestampText": "09:44:15"
-              }
-            ]
-          },
-          {
-            "Stage": "detect-after",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Value not set.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Not set",
-            "TargetValue": "5 (0x5)",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Value not set.",
-                "TimestampText": "09:44:15"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Set value to 5.",
-                "TimestampText": "09:44:15"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified desired value.",
-                "TimestampText": "09:44:15"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Removed value to restore default.",
-                "TimestampText": "09:44:15"
-              }
-            ]
-          }
-        ],
-        "StartedAtUtc": "2026-05-07T16:44:12.6453149+00:00",
-        "CompletedAtUtc": "2026-05-07T16:44:15.7477317+00:00"
-      },
-      "qa_tweak_id": "system.graphics-tdr-limit-count",
-      "candidate_id": "system.graphics-tdr-limit-count",
-      "card_name": "Graphics TDR Limit Count",
-      "documentation": "research/records/system.graphics-tdr-limit-count.json"
-    },
-    {
-      "tweak_id": "system.graphics-tdr-limit-time",
-      "host_exit": 0,
-      "execution_exit": 0,
-      "payload_status": "completed",
-      "report_source": "stdout",
-      "report_parse_error": null,
-      "report_fetch_status": null,
-      "report_app_success": true,
-      "report_success": true,
-      "report_status": "ok",
-      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
-      "report_contract_status": "ok",
-      "report_contract_summary": "QA card snapshot contract passed.",
-      "report_contract_failures": [],
-      "report_card_present": true,
-      "report_card_has_claim_boundary": true,
-      "report_card_present_fields": [
-        "TweakId",
-        "Name",
-        "Category",
-        "EvidenceClass",
-        "ResearchStatus",
-        "RollbackSnapshotState",
-        "HasClaimBoundary",
-        "WhatWeKnowSummary",
-        "WhatWeDoNotClaimSummary",
-        "ProofLanes"
-      ],
-      "report_card_missing_fields": [],
-      "report_card_proof_lanes": [
-        "docs",
-        "runtime",
-        "source",
-        "rollback"
-      ],
-      "report_card_missing_proof_lanes": [],
-      "report": {
-        "TweakId": "system.graphics-tdr-limit-time",
-        "TweakName": "Graphics TDR Limit Time",
-        "Success": true,
-        "Status": "ok",
-        "Summary": "Apply/verify path completed and rollback restored the tweak.",
-        "RollbackRequested": true,
-        "Card": {
-          "TweakId": "system.graphics-tdr-limit-time",
-          "Name": "Graphics TDR Limit Time",
-          "Category": "System",
-          "Description": "Windows measures GPU hang events within a time window when deciding how to respond to repeated timeouts. This setting controls that time window.",
-          "FriendlyDescription": "Windows measures GPU hang events within a time window when deciding how to respond to repeated timeouts. This setting controls that time window.",
-          "RegistryPath": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers\\TdrLimitTime",
-          "EvidenceClass": "A",
-          "EvidenceClassTitle": "Cross-Layer Verified",
-          "ResearchStatus": "PROMOTED",
-          "IsMutationAllowed": true,
-          "RollbackSnapshotState": "ready",
-          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
-          "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Windows measures GPU hang events within a time window when deciding how to respond to repeated timeouts. This setting controls that time window. Evidence: Microsoft's TDR registry keys page documents the exact GraphicsDrivers runtime path, the TdrLimitTime value name, and the documented default of 60 seconds. Rollback: Rollback: Verified via record-restore-story.",
-          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
-          "ProofLanes": [
-            {
-              "Key": "docs",
-              "Label": "DOCS",
-              "State": "ready",
-              "Summary": "Microsoft's TDR registry keys page documents the exact GraphicsDrivers runtime path, the TdrLimitTime value name, and the documented default of 60 seconds.",
-              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows-hardware/drivers/display/tdr-registry-keys"
-            },
-            {
-              "Key": "runtime",
-              "Label": "RUNTIME",
-              "State": "ready",
-              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
-              "Source": ""
-            },
-            {
-              "Key": "source",
-              "Label": "SOURCE",
-              "State": "ready",
-              "Summary": "No upstream nohuto source link is attached to this record.",
-              "Source": ""
-            },
-            {
-              "Key": "rollback",
-              "Label": "ROLLBACK",
-              "State": "ready",
-              "Summary": "Rollback: Verified via record-restore-story.",
-              "Source": "record-restore-story"
-            }
-          ],
-          "ReferenceLinks": [
-            {
-              "Title": "Docs: Details (missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
-              "Kind": "Details"
-            },
-            {
-              "Title": "Docs: Win-Config",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\win-config\\batch-01.md#system.graphics-tdr-limit-time",
-              "Kind": "Docs"
-            },
-            {
-              "Title": "Docs: System (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\system\\system.md",
-              "Kind": "Docs"
-            }
-          ]
-        },
-        "Stages": [
-          {
-            "Stage": "detect-before",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Value not set.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Not set",
-            "TargetValue": "60 (0x3C)",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": false,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Value not set.",
-                "TimestampText": "09:44:22"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "apply",
-            "AppliedStatus": "Applied",
-            "StatusMessage": "Run completed.",
-            "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "60 (0x3C)",
-            "TargetValue": "60 (0x3C)",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Value not set.",
-                "TimestampText": "09:44:22"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Set value to 60.",
-                "TimestampText": "09:44:24"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified desired value.",
-                "TimestampText": "09:44:24"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Not required",
-                "Message": "Step not executed.",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "rollback",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Removed value to restore default.",
-            "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "60 (0x3C)",
-            "TargetValue": "60 (0x3C)",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Value not set.",
-                "TimestampText": "09:44:22"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Set value to 60.",
-                "TimestampText": "09:44:24"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified desired value.",
-                "TimestampText": "09:44:24"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Removed value to restore default.",
-                "TimestampText": "09:44:25"
-              }
-            ]
-          },
-          {
-            "Stage": "detect-after",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Value not set.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Not set",
-            "TargetValue": "60 (0x3C)",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Value not set.",
-                "TimestampText": "09:44:25"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Set value to 60.",
-                "TimestampText": "09:44:24"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified desired value.",
-                "TimestampText": "09:44:24"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Removed value to restore default.",
-                "TimestampText": "09:44:25"
-              }
-            ]
-          }
-        ],
-        "StartedAtUtc": "2026-05-07T16:44:22.0649254+00:00",
-        "CompletedAtUtc": "2026-05-07T16:44:25.1664765+00:00"
-      },
-      "qa_tweak_id": "system.graphics-tdr-limit-time",
-      "candidate_id": "system.graphics-tdr-limit-time",
-      "card_name": "Graphics TDR Limit Time",
-      "documentation": "research/records/system.graphics-tdr-limit-time.json"
-    },
-    {
-      "tweak_id": "system.kernel-thread-dpc-enable",
-      "host_exit": 0,
-      "execution_exit": 0,
-      "payload_status": "completed",
-      "report_source": "stdout",
-      "report_parse_error": null,
-      "report_fetch_status": null,
-      "report_app_success": true,
-      "report_success": true,
-      "report_status": "ok",
-      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
-      "report_contract_status": "ok",
-      "report_contract_summary": "QA card snapshot contract passed.",
-      "report_contract_failures": [],
-      "report_card_present": true,
-      "report_card_has_claim_boundary": true,
-      "report_card_present_fields": [
-        "TweakId",
-        "Name",
-        "Category",
-        "EvidenceClass",
-        "ResearchStatus",
-        "RollbackSnapshotState",
-        "HasClaimBoundary",
-        "WhatWeKnowSummary",
-        "WhatWeDoNotClaimSummary",
-        "ProofLanes"
-      ],
-      "report_card_missing_fields": [],
-      "report_card_proof_lanes": [
-        "docs",
-        "runtime",
-        "source",
-        "rollback"
-      ],
-      "report_card_missing_proof_lanes": [],
-      "report": {
-        "TweakId": "system.kernel-thread-dpc-enable",
-        "TweakName": "Threaded DPCs",
-        "Success": true,
-        "Status": "ok",
-        "Summary": "Apply/verify path completed and rollback restored the tweak.",
-        "RollbackRequested": true,
-        "Card": {
-          "TweakId": "system.kernel-thread-dpc-enable",
-          "Name": "Threaded DPCs",
-          "Category": "System",
-          "Description": "Threaded DPCs let some kernel deferred work run in a way that can reduce system latency compared with ordinary DPCs. Most normal systems should leave this enabled.",
-          "FriendlyDescription": "Threaded DPCs let some kernel deferred work run in a way that can reduce system latency compared with ordinary DPCs. Most normal systems should leave this enabled.",
-          "RegistryPath": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\\ThreadDpcEnable",
-          "EvidenceClass": "A",
-          "EvidenceClassTitle": "Cross-Layer Verified",
-          "ResearchStatus": "PROMOTED",
-          "IsMutationAllowed": true,
-          "RollbackSnapshotState": "ready",
-          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
-          "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Threaded DPCs let some kernel deferred work run in a way that can reduce system latency compared with ordinary DPCs. Most normal systems should leave this enabled. Evidence: The Microsoft Learn page gives the exact registry path and documents that the feature is enabled by default and disabled by setting ThreadDpcEnable to 0. The app's value 1 is treated as an explicit enabled-state reset on that documented surface, and the bou... Rollback: Rollback: Verified via record-restore-story.",
-          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
-          "ProofLanes": [
-            {
-              "Key": "docs",
-              "Label": "DOCS",
-              "State": "ready",
-              "Summary": "The Microsoft Learn page gives the exact registry path and documents that the feature is enabled by default and disabled by setting ThreadDpcEnable to 0. The app's value 1 is treated as an explicit enabled-state reset on that documented surface, and the bou...",
-              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/introduction-to-threaded-dpcs"
-            },
-            {
-              "Key": "runtime",
-              "Label": "RUNTIME",
-              "State": "ready",
-              "Summary": "A bounded VM suite applied ThreadDpcEnable = 0 from a missing baseline, completed WinSAT CPU and memory runs with real apply and restore reboots, and returned the guest to the original missing baseline.",
-              "Source": "Win25H2Clean bounded reboot suite for ThreadDpcEnable = 0: research/notes/thread-dpc-enable-vm-suite-20260324.md"
-            },
-            {
-              "Key": "source",
-              "Label": "SOURCE",
-              "State": "ready",
-              "Summary": "No upstream nohuto source link is attached to this record.",
-              "Source": ""
-            },
-            {
-              "Key": "rollback",
-              "Label": "ROLLBACK",
-              "State": "ready",
-              "Summary": "Rollback: Verified via record-restore-story.",
-              "Source": "record-restore-story"
-            }
-          ],
-          "ReferenceLinks": [
-            {
-              "Title": "Docs: Details (missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
-              "Kind": "Details"
-            },
-            {
-              "Title": "Docs: Win-Config",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\win-config\\batch-01.md#system.kernel-thread-dpc-enable",
-              "Kind": "Docs"
-            },
-            {
-              "Title": "Docs: System (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\system\\system.md",
-              "Kind": "Docs"
-            }
-          ]
-        },
-        "Stages": [
-          {
-            "Stage": "detect-before",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Threaded DPCs enabled'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Prefer IPv4'.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Threaded DPCs enabled",
+            "TargetValue": "Prefer IPv4",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -1256,8 +706,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Threaded DPCs enabled'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\\ThreadDpcEnable: missing -> 1",
-                "TimestampText": "09:44:31"
+                "Message": "Current values do not match a named option. Selected option is 'Prefer IPv4'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Services\\Tcpip6\\Parameters\\DisabledComponents: missing -> 32",
+                "TimestampText": "09:50:24"
               },
               {
                 "Action": "Apply",
@@ -1284,8 +734,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Threaded DPCs enabled",
-            "TargetValue": "Threaded DPCs enabled",
+            "CurrentValue": "Prefer IPv4",
+            "TargetValue": "Prefer IPv4",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1294,20 +744,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Threaded DPCs enabled'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\\ThreadDpcEnable: missing -> 1",
-                "TimestampText": "09:44:31"
+                "Message": "Current values do not match a named option. Selected option is 'Prefer IPv4'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Services\\Tcpip6\\Parameters\\DisabledComponents: missing -> 32",
+                "TimestampText": "09:50:24"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Threaded DPCs enabled'.",
-                "TimestampText": "09:44:34"
+                "Message": "Applied preset 'Prefer IPv4'.",
+                "TimestampText": "09:50:26"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Threaded DPCs enabled'.",
-                "TimestampText": "09:44:34"
+                "Message": "Verified preset 'Prefer IPv4'.",
+                "TimestampText": "09:50:26"
               },
               {
                 "Action": "Rollback",
@@ -1323,7 +773,7 @@
             "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Threaded DPCs enabled",
+            "TargetValue": "Prefer IPv4",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1332,36 +782,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Threaded DPCs enabled'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\\ThreadDpcEnable: missing -> 1",
-                "TimestampText": "09:44:31"
+                "Message": "Current values do not match a named option. Selected option is 'Prefer IPv4'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Services\\Tcpip6\\Parameters\\DisabledComponents: missing -> 32",
+                "TimestampText": "09:50:24"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Threaded DPCs enabled'.",
-                "TimestampText": "09:44:34"
+                "Message": "Applied preset 'Prefer IPv4'.",
+                "TimestampText": "09:50:26"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Threaded DPCs enabled'.",
-                "TimestampText": "09:44:34"
+                "Message": "Verified preset 'Prefer IPv4'.",
+                "TimestampText": "09:50:26"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "09:44:34"
+                "TimestampText": "09:50:27"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Threaded DPCs enabled'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Prefer IPv4'.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Threaded DPCs enabled",
+            "TargetValue": "Prefer IPv4",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1370,40 +820,40 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Threaded DPCs enabled'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel\\ThreadDpcEnable: missing -> 1",
-                "TimestampText": "09:44:34"
+                "Message": "Current values do not match a named option. Selected option is 'Prefer IPv4'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Services\\Tcpip6\\Parameters\\DisabledComponents: missing -> 32",
+                "TimestampText": "09:50:27"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Threaded DPCs enabled'.",
-                "TimestampText": "09:44:34"
+                "Message": "Applied preset 'Prefer IPv4'.",
+                "TimestampText": "09:50:26"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Threaded DPCs enabled'.",
-                "TimestampText": "09:44:34"
+                "Message": "Verified preset 'Prefer IPv4'.",
+                "TimestampText": "09:50:26"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "09:44:34"
+                "TimestampText": "09:50:27"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T16:44:31.3999543+00:00",
-        "CompletedAtUtc": "2026-05-07T16:44:34.4651517+00:00"
+        "StartedAtUtc": "2026-05-07T16:50:24.1131866+00:00",
+        "CompletedAtUtc": "2026-05-07T16:50:27.2212403+00:00"
       },
-      "qa_tweak_id": "system.kernel-thread-dpc-enable",
-      "candidate_id": "system.kernel-thread-dpc-enable",
-      "card_name": "Threaded DPCs",
-      "documentation": "research/records/system.kernel-thread-dpc-enable.json"
+      "qa_tweak_id": "network.prefer-ipv4",
+      "candidate_id": "network.prefer-ipv4",
+      "card_name": "IPv4 Preference Override",
+      "documentation": "research/records/network.prefer-ipv4.json"
     },
     {
-      "tweak_id": "system.memory-clear-pagefile-at-shutdown",
+      "tweak_id": "network.require-ntlm-ssp-client-session-security",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -1440,19 +890,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "system.memory-clear-pagefile-at-shutdown",
-        "TweakName": "Clear Page File at Shutdown",
+        "TweakId": "network.require-ntlm-ssp-client-session-security",
+        "TweakName": "Require NTLM SSP Client Session Security and 128-bit Encryption",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "system.memory-clear-pagefile-at-shutdown",
-          "Name": "Clear Page File at Shutdown",
-          "Category": "System",
-          "Description": "Windows can wipe the page file when the PC shuts down. This can reduce leftover data on disk, but it also makes shutdown take longer.",
-          "FriendlyDescription": "Windows can wipe the page file when the PC shuts down. This can reduce leftover data on disk, but it also makes shutdown take longer.",
-          "RegistryPath": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management\\ClearPageFileAtShutdown",
+          "TweakId": "network.require-ntlm-ssp-client-session-security",
+          "Name": "Require NTLM SSP Client Session Security and 128-bit Encryption",
+          "Category": "Network",
+          "Description": "This setting raises the minimum session security requirements for NTLM SSP based clients. In the app's enabled state it requires both NTLMv2 session security and 128-bit encryption.",
+          "FriendlyDescription": "This setting raises the minimum session security requirements for NTLM SSP based clients. In the app's enabled state it requires both NTLMv2 session security and 128-bit encryption.",
+          "RegistryPath": "HKLM\\System\\CurrentControlSet\\Control\\Lsa\\MSV1_0\\NTLMMinClientSec",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -1460,15 +910,15 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Windows can wipe the page file when the PC shuts down. This can reduce leftover data on disk, but it also makes shutdown take longer. Evidence: Local Microsoft security registry metadata maps the exact registry path and default state. The matching default value is also present in evidence/files/external/c/Windows/inf/defltbase.inf.md as MACHINE/System/CurrentControlSet/Control/Session Manager/Memor... Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: This setting raises the minimum session security requirements for NTLM SSP based clients. In the app's enabled state it requires both NTLMv2 session security and 128-bit encryption. Evidence: Microsoft directly documents NTLMMinClientSec for NTLM SSP based clients and the exact 537395200 value combination. Local sceregvl metadata independently exposes the same NTLMv2 session security and 128-bit encryption bit flags. Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "Local Microsoft security registry metadata maps the exact registry path and default state. The matching default value is also present in evidence/files/external/c/Windows/inf/defltbase.inf.md as MACHINE/System/CurrentControlSet/Control/Session Manager/Memor...",
-              "Source": "Validation proof source: evidence/files/external/c/Windows/inf/sceregvl.inf.md"
+              "Summary": "Microsoft directly documents NTLMMinClientSec for NTLM SSP based clients and the exact 537395200 value combination. Local sceregvl metadata independently exposes the same NTLMv2 session security and 128-bit encryption bit flags.",
+              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-localpoliciessecurityoptions#networksecurity_minimumsessionsecurityforntlmsspbasedincludingsecurerpcclients"
             },
             {
               "Key": "runtime",
@@ -1499,13 +949,8 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Win-Config",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\win-config\\batch-01.md#system.memory-clear-pagefile-at-shutdown",
-              "Kind": "Docs"
-            },
-            {
-              "Title": "Docs: System (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\system\\system.md",
+              "Title": "Docs: Network (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\network\\network.md",
               "Kind": "Docs"
             }
           ]
@@ -1514,10 +959,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current option is 'Do not clear page file'. Selected option is 'Clear page file at shutdown'.",
+            "StatusMessage": "Current option is 'Require 128-bit encryption'. Selected option is 'Require NTLMv2 session security and 128-bit encryption'.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Do not clear page file",
-            "TargetValue": "Clear page file at shutdown",
+            "CurrentValue": "Require 128-bit encryption",
+            "TargetValue": "Require NTLMv2 session security and 128-bit encryption",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -1526,8 +971,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current option is 'Do not clear page file'. Selected option is 'Clear page file at shutdown'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management\\ClearPageFileAtShutdown: 0 -> 1",
-                "TimestampText": "09:44:40"
+                "Message": "Current option is 'Require 128-bit encryption'. Selected option is 'Require NTLMv2 session security and 128-bit encryption'.\nEntries:\n- HKLM\\System\\CurrentControlSet\\Control\\Lsa\\MSV1_0\\NTLMMinClientSec: 536870912 -> 537395200",
+                "TimestampText": "09:50:33"
               },
               {
                 "Action": "Apply",
@@ -1554,8 +999,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Clear page file at shutdown",
-            "TargetValue": "Clear page file at shutdown",
+            "CurrentValue": "Require NTLMv2 session security and 128-bit encryption",
+            "TargetValue": "Require NTLMv2 session security and 128-bit encryption",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1564,20 +1009,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current option is 'Do not clear page file'. Selected option is 'Clear page file at shutdown'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management\\ClearPageFileAtShutdown: 0 -> 1",
-                "TimestampText": "09:44:40"
+                "Message": "Current option is 'Require 128-bit encryption'. Selected option is 'Require NTLMv2 session security and 128-bit encryption'.\nEntries:\n- HKLM\\System\\CurrentControlSet\\Control\\Lsa\\MSV1_0\\NTLMMinClientSec: 536870912 -> 537395200",
+                "TimestampText": "09:50:33"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Clear page file at shutdown'.",
-                "TimestampText": "09:44:43"
+                "Message": "Applied preset 'Require NTLMv2 session security and 128-bit encryption'.",
+                "TimestampText": "09:50:36"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Clear page file at shutdown'.",
-                "TimestampText": "09:44:43"
+                "Message": "Verified preset 'Require NTLMv2 session security and 128-bit encryption'.",
+                "TimestampText": "09:50:36"
               },
               {
                 "Action": "Rollback",
@@ -1592,8 +1037,8 @@
             "AppliedStatus": "NotApplied",
             "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Do not clear page file",
-            "TargetValue": "Clear page file at shutdown",
+            "CurrentValue": "Require 128-bit encryption",
+            "TargetValue": "Require NTLMv2 session security and 128-bit encryption",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1602,36 +1047,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current option is 'Do not clear page file'. Selected option is 'Clear page file at shutdown'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management\\ClearPageFileAtShutdown: 0 -> 1",
-                "TimestampText": "09:44:40"
+                "Message": "Current option is 'Require 128-bit encryption'. Selected option is 'Require NTLMv2 session security and 128-bit encryption'.\nEntries:\n- HKLM\\System\\CurrentControlSet\\Control\\Lsa\\MSV1_0\\NTLMMinClientSec: 536870912 -> 537395200",
+                "TimestampText": "09:50:33"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Clear page file at shutdown'.",
-                "TimestampText": "09:44:43"
+                "Message": "Applied preset 'Require NTLMv2 session security and 128-bit encryption'.",
+                "TimestampText": "09:50:36"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Clear page file at shutdown'.",
-                "TimestampText": "09:44:43"
+                "Message": "Verified preset 'Require NTLMv2 session security and 128-bit encryption'.",
+                "TimestampText": "09:50:36"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "09:44:43"
+                "TimestampText": "09:50:36"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current option is 'Do not clear page file'. Selected option is 'Clear page file at shutdown'.",
+            "StatusMessage": "Current option is 'Require 128-bit encryption'. Selected option is 'Require NTLMv2 session security and 128-bit encryption'.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Do not clear page file",
-            "TargetValue": "Clear page file at shutdown",
+            "CurrentValue": "Require 128-bit encryption",
+            "TargetValue": "Require NTLMv2 session security and 128-bit encryption",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1640,37 +1085,577 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current option is 'Do not clear page file'. Selected option is 'Clear page file at shutdown'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management\\ClearPageFileAtShutdown: 0 -> 1",
-                "TimestampText": "09:44:43"
+                "Message": "Current option is 'Require 128-bit encryption'. Selected option is 'Require NTLMv2 session security and 128-bit encryption'.\nEntries:\n- HKLM\\System\\CurrentControlSet\\Control\\Lsa\\MSV1_0\\NTLMMinClientSec: 536870912 -> 537395200",
+                "TimestampText": "09:50:36"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Clear page file at shutdown'.",
-                "TimestampText": "09:44:43"
+                "Message": "Applied preset 'Require NTLMv2 session security and 128-bit encryption'.",
+                "TimestampText": "09:50:36"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Clear page file at shutdown'.",
-                "TimestampText": "09:44:43"
+                "Message": "Verified preset 'Require NTLMv2 session security and 128-bit encryption'.",
+                "TimestampText": "09:50:36"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "09:44:43"
+                "TimestampText": "09:50:36"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T16:44:40.8067105+00:00",
-        "CompletedAtUtc": "2026-05-07T16:44:43.9034782+00:00"
+        "StartedAtUtc": "2026-05-07T16:50:33.4488252+00:00",
+        "CompletedAtUtc": "2026-05-07T16:50:36.5252589+00:00"
       },
-      "qa_tweak_id": "system.memory-clear-pagefile-at-shutdown",
-      "candidate_id": "system.memory-clear-pagefile-at-shutdown",
-      "card_name": "Clear Page File at Shutdown",
-      "documentation": "research/records/system.memory-clear-pagefile-at-shutdown.json"
+      "qa_tweak_id": "network.require-ntlm-ssp-client-session-security",
+      "candidate_id": "network.require-ntlm-ssp-client-session-security",
+      "card_name": "Require NTLM SSP Client Session Security and 128-bit Encryption",
+      "documentation": "research/records/network.require-ntlm-ssp-client-session-security.review.json"
+    },
+    {
+      "tweak_id": "network.smb-disable-leasing",
+      "host_exit": 0,
+      "execution_exit": 0,
+      "payload_status": "completed",
+      "report_source": "guest-file",
+      "report_parse_error": null,
+      "report_fetch_status": "ok",
+      "report_app_success": true,
+      "report_success": true,
+      "report_status": "ok",
+      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
+      "report_contract_status": "ok",
+      "report_contract_summary": "QA card snapshot contract passed.",
+      "report_contract_failures": [],
+      "report_card_present": true,
+      "report_card_has_claim_boundary": true,
+      "report_card_present_fields": [
+        "TweakId",
+        "Name",
+        "Category",
+        "EvidenceClass",
+        "ResearchStatus",
+        "RollbackSnapshotState",
+        "HasClaimBoundary",
+        "WhatWeKnowSummary",
+        "WhatWeDoNotClaimSummary",
+        "ProofLanes"
+      ],
+      "report_card_missing_fields": [],
+      "report_card_proof_lanes": [
+        "docs",
+        "runtime",
+        "source",
+        "rollback"
+      ],
+      "report_card_missing_proof_lanes": [],
+      "report": {
+        "TweakId": "network.smb-disable-leasing",
+        "TweakName": "SMB Server Leasing",
+        "Success": true,
+        "Status": "ok",
+        "Summary": "Apply/verify path completed and rollback restored the tweak.",
+        "RollbackRequested": true,
+        "Card": {
+          "TweakId": "network.smb-disable-leasing",
+          "Name": "SMB Server Leasing",
+          "Category": "Network",
+          "Description": "SMB leasing is part of the modern SMB protocol and controls client-side read, write, and handle caching behavior. Some compatibility or troubleshooting scenarios disable it to reduce caching side effects.",
+          "FriendlyDescription": "SMB leasing is part of the modern SMB protocol and controls client-side read, write, and handle caching behavior. Some compatibility or troubleshooting scenarios disable it to reduce caching side effects.",
+          "RegistryPath": "",
+          "EvidenceClass": "A",
+          "EvidenceClassTitle": "Cross-Layer Verified",
+          "ResearchStatus": "PROMOTED",
+          "IsMutationAllowed": true,
+          "RollbackSnapshotState": "ready",
+          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
+          "HasClaimBoundary": true,
+          "WhatWeKnowSummary": "Claim: SMB leasing is part of the modern SMB protocol and controls client-side read, write, and handle caching behavior. Some compatibility or troubleshooting scenarios disable it to reduce caching side effects. Evidence: Microsoft documents the official control surface as the SMB server configuration property EnableLeasing, and the app now uses that documented surface through a command-backed implementation. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeDoNotClaimSummary": "Source boundary: Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+          "ProofLanes": [
+            {
+              "Key": "docs",
+              "Label": "DOCS",
+              "State": "ready",
+              "Summary": "Microsoft documents the official control surface as the SMB server configuration property EnableLeasing, and the app now uses that documented surface through a command-backed implementation.",
+              "Source": "Validation proof source: https://learn.microsoft.com/en-us/previous-versions/windows/desktop/smb/msft-smbserverconfiguration"
+            },
+            {
+              "Key": "runtime",
+              "Label": "RUNTIME",
+              "State": "ready",
+              "Summary": "Read-only Get-SmbServerConfiguration run on the current machine returned EnableLeasing = True, confirming that the documented SMB server configuration surface is live on this build.",
+              "Source": "Local read-only SMB leasing detect run: Local run - 2026-03-14, Windows 11 Pro 10.0.26200.8037"
+            },
+            {
+              "Key": "source",
+              "Label": "SOURCE",
+              "State": "ready",
+              "Summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+              "Source": "win-config / network/desc.md: https://github.com/nohuto/win-config/blob/main/network/desc.md"
+            },
+            {
+              "Key": "rollback",
+              "Label": "ROLLBACK",
+              "State": "ready",
+              "Summary": "Rollback: Verified via record-restore-story.",
+              "Source": "record-restore-story"
+            }
+          ],
+          "ReferenceLinks": [
+            {
+              "Title": "Windows Internals resource page",
+              "Url": "https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals",
+              "Kind": "Docs"
+            },
+            {
+              "Title": "Local asset: Windows Internals E7 Part 2",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\affinities\\assets\\E7-P2.pdf",
+              "Kind": "Docs"
+            },
+            {
+              "Title": "Docs: Details",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html#network.smb-disable-leasing",
+              "Kind": "Details"
+            },
+            {
+              "Title": "Docs: Network",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\network\\network.md#network.smb-disable-leasing",
+              "Kind": "Docs"
+            }
+          ]
+        },
+        "Stages": [
+          {
+            "Stage": "detect-before",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Current state: True",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "True",
+            "TargetValue": "Optimized",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": false,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current state: True",
+                "TimestampText": "09:50:46"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "apply",
+            "AppliedStatus": "Applied",
+            "StatusMessage": "Run completed.",
+            "OutcomeSummary": "Apply - Success",
+            "CurrentValue": "Optimized",
+            "TargetValue": "Optimized",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current state: True",
+                "TimestampText": "09:50:46"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Successfully applied changes.",
+                "TimestampText": "09:50:47"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Changes verified successfully.",
+                "TimestampText": "09:50:47"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Not required",
+                "Message": "Step not executed.",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "rollback",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Successfully restored original state.",
+            "OutcomeSummary": "Rollback - Rolled Back",
+            "CurrentValue": "Optimized",
+            "TargetValue": "Optimized",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current state: True",
+                "TimestampText": "09:50:46"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Successfully applied changes.",
+                "TimestampText": "09:50:47"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Changes verified successfully.",
+                "TimestampText": "09:50:47"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Successfully restored original state.",
+                "TimestampText": "09:50:48"
+              }
+            ]
+          },
+          {
+            "Stage": "detect-after",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Current state: True",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "True",
+            "TargetValue": "Optimized",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current state: True",
+                "TimestampText": "09:50:48"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Successfully applied changes.",
+                "TimestampText": "09:50:47"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Changes verified successfully.",
+                "TimestampText": "09:50:47"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Successfully restored original state.",
+                "TimestampText": "09:50:48"
+              }
+            ]
+          }
+        ],
+        "StartedAtUtc": "2026-05-07T16:50:42.9017072+00:00",
+        "CompletedAtUtc": "2026-05-07T16:50:48.8764997+00:00"
+      },
+      "qa_tweak_id": "network.smb-disable-leasing",
+      "candidate_id": "network.smb-disable-leasing",
+      "card_name": "SMB Server Leasing",
+      "documentation": "research/records/network.smb-disable-leasing.review.json"
+    },
+    {
+      "tweak_id": "network.smb-enable-large-mtu",
+      "host_exit": 0,
+      "execution_exit": 0,
+      "payload_status": "completed",
+      "report_source": "stdout",
+      "report_parse_error": null,
+      "report_fetch_status": null,
+      "report_app_success": true,
+      "report_success": true,
+      "report_status": "ok",
+      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
+      "report_contract_status": "ok",
+      "report_contract_summary": "QA card snapshot contract passed.",
+      "report_contract_failures": [],
+      "report_card_present": true,
+      "report_card_has_claim_boundary": true,
+      "report_card_present_fields": [
+        "TweakId",
+        "Name",
+        "Category",
+        "EvidenceClass",
+        "ResearchStatus",
+        "RollbackSnapshotState",
+        "HasClaimBoundary",
+        "WhatWeKnowSummary",
+        "WhatWeDoNotClaimSummary",
+        "ProofLanes"
+      ],
+      "report_card_missing_fields": [],
+      "report_card_proof_lanes": [
+        "docs",
+        "runtime",
+        "source",
+        "rollback"
+      ],
+      "report_card_missing_proof_lanes": [],
+      "report": {
+        "TweakId": "network.smb-enable-large-mtu",
+        "TweakName": "SMB Client Large MTU",
+        "Success": true,
+        "Status": "ok",
+        "Summary": "Apply/verify path completed and rollback restored the tweak.",
+        "RollbackRequested": true,
+        "Card": {
+          "TweakId": "network.smb-enable-large-mtu",
+          "Name": "SMB Client Large MTU",
+          "Category": "Network",
+          "Description": "Large MTU lets SMB send larger requests over the network. On modern Windows networks this usually helps file-copy and share performance.",
+          "FriendlyDescription": "Large MTU lets SMB send larger requests over the network. On modern Windows networks this usually helps file-copy and share performance.",
+          "RegistryPath": "HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters\\DisableLargeMtu",
+          "EvidenceClass": "A",
+          "EvidenceClassTitle": "Cross-Layer Verified",
+          "ResearchStatus": "PROMOTED",
+          "IsMutationAllowed": true,
+          "RollbackSnapshotState": "ready",
+          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
+          "HasClaimBoundary": true,
+          "WhatWeKnowSummary": "Claim: Large MTU lets SMB send larger requests over the network. On modern Windows networks this usually helps file-copy and share performance. Evidence: The Microsoft SMB performance tuning page documents the exact client registry value under LanmanWorkstation and states that large MTU is enabled by default. The app writes 0 to keep the documented enabled state. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
+          "ProofLanes": [
+            {
+              "Key": "docs",
+              "Label": "DOCS",
+              "State": "ready",
+              "Summary": "The Microsoft SMB performance tuning page documents the exact client registry value under LanmanWorkstation and states that large MTU is enabled by default. The app writes 0 to keep the documented enabled state.",
+              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows-server/administration/performance-tuning/role/file-server/smb-file-server"
+            },
+            {
+              "Key": "runtime",
+              "Label": "RUNTIME",
+              "State": "ready",
+              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+              "Source": ""
+            },
+            {
+              "Key": "source",
+              "Label": "SOURCE",
+              "State": "ready",
+              "Summary": "No upstream nohuto source link is attached to this record.",
+              "Source": ""
+            },
+            {
+              "Key": "rollback",
+              "Label": "ROLLBACK",
+              "State": "ready",
+              "Summary": "Rollback: Verified via record-restore-story.",
+              "Source": "record-restore-story"
+            }
+          ],
+          "ReferenceLinks": [
+            {
+              "Title": "Docs: Details (missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
+              "Kind": "Details"
+            },
+            {
+              "Title": "Docs: Network (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\network\\network.md",
+              "Kind": "Docs"
+            }
+          ]
+        },
+        "Stages": [
+          {
+            "Stage": "detect-before",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Large MTU enabled'.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Large MTU enabled",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": false,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Large MTU enabled'.\nEntries:\n- HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters\\DisableLargeMtu: missing -> 0",
+                "TimestampText": "09:50:52"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "apply",
+            "AppliedStatus": "Applied",
+            "StatusMessage": "Run completed.",
+            "OutcomeSummary": "Apply - Success",
+            "CurrentValue": "Large MTU enabled",
+            "TargetValue": "Large MTU enabled",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Large MTU enabled'.\nEntries:\n- HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters\\DisableLargeMtu: missing -> 0",
+                "TimestampText": "09:50:52"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Large MTU enabled'.",
+                "TimestampText": "09:50:55"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Large MTU enabled'.",
+                "TimestampText": "09:50:55"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Not required",
+                "Message": "Step not executed.",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "rollback",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Rolled back registry values.",
+            "OutcomeSummary": "Rollback - Rolled Back",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Large MTU enabled",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Large MTU enabled'.\nEntries:\n- HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters\\DisableLargeMtu: missing -> 0",
+                "TimestampText": "09:50:52"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Large MTU enabled'.",
+                "TimestampText": "09:50:55"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Large MTU enabled'.",
+                "TimestampText": "09:50:55"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "09:50:55"
+              }
+            ]
+          },
+          {
+            "Stage": "detect-after",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Large MTU enabled'.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Large MTU enabled",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Large MTU enabled'.\nEntries:\n- HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters\\DisableLargeMtu: missing -> 0",
+                "TimestampText": "09:50:55"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Large MTU enabled'.",
+                "TimestampText": "09:50:55"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Large MTU enabled'.",
+                "TimestampText": "09:50:55"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "09:50:55"
+              }
+            ]
+          }
+        ],
+        "StartedAtUtc": "2026-05-07T16:50:52.6745323+00:00",
+        "CompletedAtUtc": "2026-05-07T16:50:55.857676+00:00"
+      },
+      "qa_tweak_id": "network.smb-enable-large-mtu",
+      "candidate_id": "network.smb-enable-large-mtu",
+      "card_name": "SMB Client Large MTU",
+      "documentation": "research/records/network.smb-enable-large-mtu.json"
     }
   ],
   "summary": {
@@ -1679,7 +1664,7 @@
     "live_success_count": 5,
     "live_failure_count": 0,
     "categories": [
-      "System"
+      "Network"
     ]
   }
 }

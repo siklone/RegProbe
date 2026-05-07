@@ -1,17 +1,17 @@
 {
-  "generated_utc": "2026-05-07T16:43:59Z",
-  "history_entry_count": 49,
+  "generated_utc": "2026-05-07T16:50:10Z",
+  "history_entry_count": 52,
   "catalog_candidate_count": 242,
-  "covered_count": 149,
-  "uncovered_count": 93,
+  "covered_count": 154,
+  "uncovered_count": 88,
   "summary": {
-    "coverage_percent": 61.57,
+    "coverage_percent": 63.64,
     "covered_categories": {
       "Audio": 2,
       "Cleanup": 1,
       "Developer": 7,
       "Explorer": 13,
-      "Network": 14,
+      "Network": 19,
       "Notifications": 3,
       "Performance": 3,
       "Peripheral": 2,
@@ -25,7 +25,7 @@
       "Audio": 1,
       "Developer": 2,
       "Explorer": 4,
-      "Network": 14,
+      "Network": 9,
       "Notifications": 2,
       "Peripheral": 1,
       "Power": 3,
@@ -36,59 +36,6 @@
     }
   },
   "recommended_next_batches": [
-    {
-      "category": "Network",
-      "covered_count": 14,
-      "uncovered_count": 14,
-      "coverage_percent": 50.0,
-      "batch_size": 5,
-      "tweak_ids": [
-        "network.enable-lltdio",
-        "network.prefer-ipv4",
-        "network.require-ntlm-ssp-client-session-security",
-        "network.smb-disable-leasing",
-        "network.smb-enable-large-mtu"
-      ],
-      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id network.enable-lltdio --id network.prefer-ipv4 --id network.require-ntlm-ssp-client-session-security --id network.smb-disable-leasing --id network.smb-enable-large-mtu",
-      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id network.enable-lltdio --id network.prefer-ipv4 --id network.require-ntlm-ssp-client-session-security --id network.smb-disable-leasing --id network.smb-enable-large-mtu --run-kvm --json",
-      "candidates": [
-        {
-          "tweak_id": "network.enable-lltdio",
-          "record_id": "network.enable-lltdio",
-          "category": "Network",
-          "name": "LLTD Mapper I/O Driver Policy",
-          "documentation": "research/records/network.enable-lltdio.json"
-        },
-        {
-          "tweak_id": "network.prefer-ipv4",
-          "record_id": "network.prefer-ipv4",
-          "category": "Network",
-          "name": "IPv4 Preference Override",
-          "documentation": "research/records/network.prefer-ipv4.json"
-        },
-        {
-          "tweak_id": "network.require-ntlm-ssp-client-session-security",
-          "record_id": "network.require-ntlm-ssp-client-session-security",
-          "category": "Network",
-          "name": "Require NTLM SSP Client Session Security and 128-bit Encryption",
-          "documentation": "research/records/network.require-ntlm-ssp-client-session-security.review.json"
-        },
-        {
-          "tweak_id": "network.smb-disable-leasing",
-          "record_id": "network.smb-disable-leasing",
-          "category": "Network",
-          "name": "SMB Server Leasing",
-          "documentation": "research/records/network.smb-disable-leasing.review.json"
-        },
-        {
-          "tweak_id": "network.smb-enable-large-mtu",
-          "record_id": "network.smb-enable-large-mtu",
-          "category": "Network",
-          "name": "SMB Client Large MTU",
-          "documentation": "research/records/network.smb-enable-large-mtu.json"
-        }
-      ]
-    },
     {
       "category": "Privacy",
       "covered_count": 38,
@@ -274,6 +221,27 @@
           "category": "Notifications",
           "name": "Tile Notifications",
           "documentation": "research/records/notifications.disable-tile.json"
+        }
+      ]
+    },
+    {
+      "category": "Audio",
+      "covered_count": 2,
+      "uncovered_count": 1,
+      "coverage_percent": 66.67,
+      "batch_size": 1,
+      "tweak_ids": [
+        "audio.show-hidden-devices"
+      ],
+      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id audio.show-hidden-devices",
+      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id audio.show-hidden-devices --run-kvm --json",
+      "candidates": [
+        {
+          "tweak_id": "audio.show-hidden-devices",
+          "record_id": "audio.show-hidden-devices",
+          "category": "Audio",
+          "name": "Show Hidden Audio Devices",
+          "documentation": "research/records/audio.show-hidden-devices.review.json"
         }
       ]
     }
@@ -610,6 +578,51 @@
       "category": "Network",
       "name": "LLTD Responder Driver Policy",
       "documentation": "research/records/network.enable-lltd-responder.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "network.enable-lltdio",
+      "qa_tweak_id": "network.enable-lltdio",
+      "candidate_id": "network.enable-lltdio",
+      "category": "Network",
+      "name": "LLTD Mapper I/O Driver Policy",
+      "documentation": "research/records/network.enable-lltdio.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "network.prefer-ipv4",
+      "qa_tweak_id": "network.prefer-ipv4",
+      "candidate_id": "network.prefer-ipv4",
+      "category": "Network",
+      "name": "IPv4 Preference Override",
+      "documentation": "research/records/network.prefer-ipv4.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "network.require-ntlm-ssp-client-session-security",
+      "qa_tweak_id": "network.require-ntlm-ssp-client-session-security",
+      "candidate_id": "network.require-ntlm-ssp-client-session-security",
+      "category": "Network",
+      "name": "Require NTLM SSP Client Session Security and 128-bit Encryption",
+      "documentation": "research/records/network.require-ntlm-ssp-client-session-security.review.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "network.smb-disable-leasing",
+      "qa_tweak_id": "network.smb-disable-leasing",
+      "candidate_id": "network.smb-disable-leasing",
+      "category": "Network",
+      "name": "SMB Server Leasing",
+      "documentation": "research/records/network.smb-disable-leasing.review.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "network.smb-enable-large-mtu",
+      "qa_tweak_id": "network.smb-enable-large-mtu",
+      "candidate_id": "network.smb-enable-large-mtu",
+      "category": "Network",
+      "name": "SMB Client Large MTU",
+      "documentation": "research/records/network.smb-enable-large-mtu.json",
       "latest_report_status": "ok"
     },
     {
@@ -1670,41 +1683,6 @@
       "category": "Explorer",
       "name": "Display File Icons On Thumbnails",
       "documentation": "research/records/explorer.show-type-overlay.review.json"
-    },
-    {
-      "tweak_id": "network.enable-lltdio",
-      "record_id": "network.enable-lltdio",
-      "category": "Network",
-      "name": "LLTD Mapper I/O Driver Policy",
-      "documentation": "research/records/network.enable-lltdio.json"
-    },
-    {
-      "tweak_id": "network.prefer-ipv4",
-      "record_id": "network.prefer-ipv4",
-      "category": "Network",
-      "name": "IPv4 Preference Override",
-      "documentation": "research/records/network.prefer-ipv4.json"
-    },
-    {
-      "tweak_id": "network.require-ntlm-ssp-client-session-security",
-      "record_id": "network.require-ntlm-ssp-client-session-security",
-      "category": "Network",
-      "name": "Require NTLM SSP Client Session Security and 128-bit Encryption",
-      "documentation": "research/records/network.require-ntlm-ssp-client-session-security.review.json"
-    },
-    {
-      "tweak_id": "network.smb-disable-leasing",
-      "record_id": "network.smb-disable-leasing",
-      "category": "Network",
-      "name": "SMB Server Leasing",
-      "documentation": "research/records/network.smb-disable-leasing.review.json"
-    },
-    {
-      "tweak_id": "network.smb-enable-large-mtu",
-      "record_id": "network.smb-enable-large-mtu",
-      "category": "Network",
-      "name": "SMB Client Large MTU",
-      "documentation": "research/records/network.smb-enable-large-mtu.json"
     },
     {
       "tweak_id": "network.smb-enable-multichannel",
