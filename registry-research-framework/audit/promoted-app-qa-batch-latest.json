@@ -1,10 +1,13 @@
 {
-  "generated_utc": "2026-05-07T17:18:45Z",
+  "generated_utc": "2026-05-07T17:24:52Z",
   "status": "PASS",
   "selection": {
     "requested_ids": [
-      "developer.windows-dev-mode",
-      "developer.wsl2-memory"
+      "system.priority-control",
+      "system.reliability-timestamp-enabled",
+      "system.services.disable-bluetooth-audio-gateway",
+      "system.services.disable-bluetooth-support",
+      "system.services.disable-bluetooth-user-service"
     ],
     "requested_categories": [],
     "limit_per_category": 1,
@@ -19,29 +22,29 @@
     "kvm_batch_runner": "scripts/vm-kvm/run-guest-app-tweak-qa-batch.py"
   },
   "catalog_candidate_count": 242,
-  "selected_candidate_count": 2,
+  "selected_candidate_count": 5,
   "errors": [],
   "candidates": [
     {
-      "tweak_id": "developer.windows-dev-mode",
-      "qa_tweak_id": "developer.windows-dev-mode",
-      "candidate_id": "developer.windows-dev-mode",
-      "record_id": "developer.windows-dev-mode",
-      "category": "Developer",
-      "name": "Windows Developer Mode",
-      "documentation": "research/records/developer.windows-dev-mode.json",
+      "tweak_id": "system.priority-control",
+      "qa_tweak_id": "system.priority-control",
+      "candidate_id": "system.priority-control",
+      "record_id": "system.priority-control",
+      "category": "System",
+      "name": "Foreground Scheduling Priority / Win32PrioritySeparation",
+      "documentation": "research/records/system.priority-control.review.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect developer.windows-dev-mode",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect system.priority-control",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'developer.windows-dev-mode' --qa-output 'C:\\Tools\\ValidationController\\smoke\\developer.windows-dev-mode.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'developer.windows-dev-mode' --qa-output 'C:\\Tools\\ValidationController\\smoke\\developer.windows-dev-mode.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'developer.windows-dev-mode' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\developer.windows-dev-mode.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'developer.windows-dev-mode' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\developer.windows-dev-mode.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'developer.windows-dev-mode'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.priority-control' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.priority-control.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.priority-control' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.priority-control.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.priority-control' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.priority-control.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.priority-control' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.priority-control.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'system.priority-control'"
       },
       "expected_report": {
         "success": true,
@@ -82,25 +85,202 @@
       }
     },
     {
-      "tweak_id": "developer.wsl2-memory",
-      "qa_tweak_id": "developer.wsl2-memory",
-      "candidate_id": "developer.wsl2-memory",
-      "record_id": "developer.wsl2-memory",
-      "category": "Developer",
-      "name": "WSL 2 Memory Limit",
-      "documentation": "research/records/developer.wsl2-memory.json",
+      "tweak_id": "system.reliability-timestamp-enabled",
+      "qa_tweak_id": "system.reliability-timestamp-enabled",
+      "candidate_id": "system.reliability-timestamp-enabled",
+      "record_id": "system.reliability-timestamp-enabled",
+      "category": "System",
+      "name": "Reliability Event Timestamping",
+      "documentation": "research/records/system.reliability-timestamp-enabled.review.json",
+      "promotion_state": "promoted",
+      "apply_allowed": true,
+      "restore_default_supported": true,
+      "restore_previous_supported": false,
+      "commands": {
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect system.reliability-timestamp-enabled",
+        "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.reliability-timestamp-enabled' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.reliability-timestamp-enabled.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.reliability-timestamp-enabled' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.reliability-timestamp-enabled.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.reliability-timestamp-enabled' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.reliability-timestamp-enabled.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.reliability-timestamp-enabled' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.reliability-timestamp-enabled.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'system.reliability-timestamp-enabled'"
+      },
+      "expected_report": {
+        "success": true,
+        "status": "ok",
+        "rollback_requested": true,
+        "required_stages": [
+          "detect-before",
+          "apply",
+          "rollback",
+          "detect-after"
+        ],
+        "required_card_snapshot": {
+          "required_fields": [
+            "TweakId",
+            "Name",
+            "Category",
+            "EvidenceClass",
+            "ResearchStatus",
+            "RollbackSnapshotState",
+            "HasClaimBoundary",
+            "WhatWeKnowSummary",
+            "WhatWeDoNotClaimSummary",
+            "ProofLanes"
+          ],
+          "required_proof_lanes": [
+            "docs",
+            "runtime",
+            "source",
+            "rollback"
+          ],
+          "claim_boundary_required": true
+        },
+        "required_stage_assertions": [
+          "apply stage reports a successful apply story",
+          "rollback stage reports a successful rollback story",
+          "detect-after is present"
+        ]
+      }
+    },
+    {
+      "tweak_id": "system.services.disable-bluetooth-audio-gateway",
+      "qa_tweak_id": "system.services.disable-bluetooth-audio-gateway",
+      "candidate_id": "system.services.disable-bluetooth-audio-gateway",
+      "record_id": "system.services.disable-bluetooth-audio-gateway",
+      "category": "System",
+      "name": "Bluetooth Audio Gateway Service",
+      "documentation": "research/records/system.services.disable-bluetooth-audio-gateway.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect developer.wsl2-memory",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect system.services.disable-bluetooth-audio-gateway",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'developer.wsl2-memory' --qa-output 'C:\\Tools\\ValidationController\\smoke\\developer.wsl2-memory.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'developer.wsl2-memory' --qa-output 'C:\\Tools\\ValidationController\\smoke\\developer.wsl2-memory.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'developer.wsl2-memory' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\developer.wsl2-memory.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'developer.wsl2-memory' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\developer.wsl2-memory.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'developer.wsl2-memory'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.services.disable-bluetooth-audio-gateway' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.services.disable-bluetooth-audio-gateway.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.services.disable-bluetooth-audio-gateway' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.services.disable-bluetooth-audio-gateway.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.services.disable-bluetooth-audio-gateway' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.services.disable-bluetooth-audio-gateway.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.services.disable-bluetooth-audio-gateway' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.services.disable-bluetooth-audio-gateway.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'system.services.disable-bluetooth-audio-gateway'"
+      },
+      "expected_report": {
+        "success": true,
+        "status": "ok",
+        "rollback_requested": true,
+        "required_stages": [
+          "detect-before",
+          "apply",
+          "rollback",
+          "detect-after"
+        ],
+        "required_card_snapshot": {
+          "required_fields": [
+            "TweakId",
+            "Name",
+            "Category",
+            "EvidenceClass",
+            "ResearchStatus",
+            "RollbackSnapshotState",
+            "HasClaimBoundary",
+            "WhatWeKnowSummary",
+            "WhatWeDoNotClaimSummary",
+            "ProofLanes"
+          ],
+          "required_proof_lanes": [
+            "docs",
+            "runtime",
+            "source",
+            "rollback"
+          ],
+          "claim_boundary_required": true
+        },
+        "required_stage_assertions": [
+          "apply stage reports a successful apply story",
+          "rollback stage reports a successful rollback story",
+          "detect-after is present"
+        ]
+      }
+    },
+    {
+      "tweak_id": "system.services.disable-bluetooth-support",
+      "qa_tweak_id": "system.services.disable-bluetooth-support",
+      "candidate_id": "system.services.disable-bluetooth-support",
+      "record_id": "system.services.disable-bluetooth-support",
+      "category": "System",
+      "name": "Bluetooth Support Service",
+      "documentation": "research/records/system.services.disable-bluetooth-support.json",
+      "promotion_state": "promoted",
+      "apply_allowed": true,
+      "restore_default_supported": true,
+      "restore_previous_supported": true,
+      "commands": {
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect system.services.disable-bluetooth-support",
+        "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.services.disable-bluetooth-support' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.services.disable-bluetooth-support.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.services.disable-bluetooth-support' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.services.disable-bluetooth-support.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.services.disable-bluetooth-support' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.services.disable-bluetooth-support.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.services.disable-bluetooth-support' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.services.disable-bluetooth-support.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'system.services.disable-bluetooth-support'"
+      },
+      "expected_report": {
+        "success": true,
+        "status": "ok",
+        "rollback_requested": true,
+        "required_stages": [
+          "detect-before",
+          "apply",
+          "rollback",
+          "detect-after"
+        ],
+        "required_card_snapshot": {
+          "required_fields": [
+            "TweakId",
+            "Name",
+            "Category",
+            "EvidenceClass",
+            "ResearchStatus",
+            "RollbackSnapshotState",
+            "HasClaimBoundary",
+            "WhatWeKnowSummary",
+            "WhatWeDoNotClaimSummary",
+            "ProofLanes"
+          ],
+          "required_proof_lanes": [
+            "docs",
+            "runtime",
+            "source",
+            "rollback"
+          ],
+          "claim_boundary_required": true
+        },
+        "required_stage_assertions": [
+          "apply stage reports a successful apply story",
+          "rollback stage reports a successful rollback story",
+          "detect-after is present"
+        ]
+      }
+    },
+    {
+      "tweak_id": "system.services.disable-bluetooth-user-service",
+      "qa_tweak_id": "system.services.disable-bluetooth-user-service",
+      "candidate_id": "system.services.disable-bluetooth-user-service",
+      "record_id": "system.services.disable-bluetooth-user-service",
+      "category": "System",
+      "name": "Bluetooth User Service",
+      "documentation": "research/records/system.services.disable-bluetooth-user-service.json",
+      "promotion_state": "promoted",
+      "apply_allowed": true,
+      "restore_default_supported": true,
+      "restore_previous_supported": true,
+      "commands": {
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect system.services.disable-bluetooth-user-service",
+        "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.services.disable-bluetooth-user-service' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.services.disable-bluetooth-user-service.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.services.disable-bluetooth-user-service' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.services.disable-bluetooth-user-service.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.services.disable-bluetooth-user-service' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.services.disable-bluetooth-user-service.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.services.disable-bluetooth-user-service' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.services.disable-bluetooth-user-service.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'system.services.disable-bluetooth-user-service'"
       },
       "expected_report": {
         "success": true,
@@ -143,7 +323,7 @@
   ],
   "run_results": [
     {
-      "tweak_id": "developer.windows-dev-mode",
+      "tweak_id": "system.priority-control",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -180,19 +360,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "developer.windows-dev-mode",
-        "TweakName": "Windows Developer Mode",
+        "TweakId": "system.priority-control",
+        "TweakName": "Foreground Scheduling Priority / Win32PrioritySeparation",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "developer.windows-dev-mode",
-          "Name": "Windows Developer Mode",
-          "Category": "Developer",
-          "Description": "Developer Mode turns on Windows support for building, sideloading, and debugging apps. Most casual users do not need it, but developers often do.",
-          "FriendlyDescription": "Developer Mode turns on Windows support for building, sideloading, and debugging apps. Most casual users do not need it, but developers often do.",
-          "RegistryPath": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\AppModelUnlock\\AllowDevelopmentWithoutDevLicense",
+          "TweakId": "system.priority-control",
+          "Name": "Foreground Scheduling Priority / Win32PrioritySeparation",
+          "Category": "System",
+          "Description": "This setting changes how Windows gives extra CPU time to the foreground application compared with background work. It is a low-level scheduler setting, not a normal everyday tweak.",
+          "FriendlyDescription": "This setting changes how Windows gives extra CPU time to the foreground application compared with background work. It is a low-level scheduler setting, not a normal everyday tweak.",
+          "RegistryPath": "HKLM\\System\\CurrentControlSet\\Control\\PriorityControl\\Win32PrioritySeparation",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -200,22 +380,22 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Developer Mode turns on Windows support for building, sideloading, and debugging apps. Most casual users do not need it, but developers often do. Evidence: The official Microsoft page explicitly names the exact registry path and value used by the app. A guest-side Procmon capture also observed SearchProtocolHost.exe querying the AppModelUnlock key and receiving NAME NOT FOUND for AllowDevelopmentWithoutDevLice... Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: This setting changes how Windows gives extra CPU time to the foreground application compared with background work. It is a low-level scheduler setting, not a normal everyday tweak. Evidence: The 2026-03-26 Procmon pass adds direct wmiprvse.exe reads for both observed states. The earlier rebooted VM benchmark pass still covers baseline 2, candidate 38, restore 2, and bounded CPU/memory measurements on the same build. Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "The official Microsoft page explicitly names the exact registry path and value used by the app. A guest-side Procmon capture also observed SearchProtocolHost.exe querying the AppModelUnlock key and receiving NAME NOT FOUND for AllowDevelopmentWithoutDevLice...",
-              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows/advanced-settings/developer-mode"
+              "Summary": "The 2026-03-26 Procmon pass adds direct wmiprvse.exe reads for both observed states. The earlier rebooted VM benchmark pass still covers baseline 2, candidate 38, restore 2, and bounded CPU/memory measurements on the same build.",
+              "Source": "Validation proof source: research/notes/priority-control-procmon-validation-20260326.md"
             },
             {
               "Key": "runtime",
               "Label": "RUNTIME",
               "State": "ready",
-              "Summary": "Guest-side Procmon capture showed SearchProtocolHost.exe querying HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\AppModelUnlock\\AllowDevelopmentWithoutDevLicense and receiving NAME NOT FOUND while the developer settings page was open. The same capture also...",
-              "Source": "Procmon capture - Developer settings search reads AppModelUnlock baseline: evidence/raw/procmon/developer.windows-dev-mode/devmode_probe2.csv and evidence/raw/procmon/developer.windows-dev-mode/devmode_probe2.txt"
+              "Summary": "Separate Win25H2Clean Procmon passes around `Get-CimInstance Win32_OperatingSystem` captured wmiprvse.exe reading HKLM\\SYSTEM\\CurrentControlSet\\Control\\PriorityControl\\Win32PrioritySeparation with Data: 2 and Data: 38 in reversible runs.",
+              "Source": "Procmon capture - wmiprvse.exe Win32PrioritySeparation reads: evidence/raw/procmon/system.priority-control/prioritycontrol-state-2.txt and evidence/raw/procmon/system.priority-control/prioritycontrol-state-2.hits.csv and evidence/raw/procmon/system.priority-control/prioritycontrol-state-38.txt and evidence/raw/procmon/system.priority-control/prioritycontrol-state-38.hits.csv"
             },
             {
               "Key": "source",
@@ -239,9 +419,19 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Developer (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweaks.md",
+              "Title": "Docs: Win-Config",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\win-config\\batch-01.md#system.priority-control",
               "Kind": "Docs"
+            },
+            {
+              "Title": "Docs: System (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\system\\system.md",
+              "Kind": "Docs"
+            },
+            {
+              "Title": "MSDN PriorityControl",
+              "Url": "https://learn.microsoft.com/en-us/windows/win32/procthread/scheduling-priorities",
+              "Kind": "Other"
             }
           ]
         },
@@ -249,10 +439,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Value not set.",
+            "StatusMessage": "Current option is 'Observed Win25H2Clean baseline'. Selected option is 'Observed app profile'.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Not set",
-            "TargetValue": "1 (0x1)",
+            "CurrentValue": "Observed Win25H2Clean baseline",
+            "TargetValue": "Observed app profile",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -261,8 +451,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Value not set.",
-                "TimestampText": "10:18:49"
+                "Message": "Current option is 'Observed Win25H2Clean baseline'. Selected option is 'Observed app profile'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\PriorityControl\\Win32PrioritySeparation: 2 -> 38",
+                "TimestampText": "10:24:56"
               },
               {
                 "Action": "Apply",
@@ -289,8 +479,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "1 (0x1)",
-            "TargetValue": "1 (0x1)",
+            "CurrentValue": "Observed app profile",
+            "TargetValue": "Observed app profile",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -299,20 +489,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Value not set.",
-                "TimestampText": "10:18:49"
+                "Message": "Current option is 'Observed Win25H2Clean baseline'. Selected option is 'Observed app profile'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\PriorityControl\\Win32PrioritySeparation: 2 -> 38",
+                "TimestampText": "10:24:56"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Set value to 1.",
-                "TimestampText": "10:18:52"
+                "Message": "Applied preset 'Observed app profile'.",
+                "TimestampText": "10:24:59"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified desired value.",
-                "TimestampText": "10:18:52"
+                "Message": "Verified preset 'Observed app profile'.",
+                "TimestampText": "10:24:59"
               },
               {
                 "Action": "Rollback",
@@ -325,10 +515,10 @@
           {
             "Stage": "rollback",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Removed value to restore default.",
+            "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "1 (0x1)",
-            "TargetValue": "1 (0x1)",
+            "CurrentValue": "Observed Win25H2Clean baseline",
+            "TargetValue": "Observed app profile",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -337,36 +527,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Value not set.",
-                "TimestampText": "10:18:49"
+                "Message": "Current option is 'Observed Win25H2Clean baseline'. Selected option is 'Observed app profile'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\PriorityControl\\Win32PrioritySeparation: 2 -> 38",
+                "TimestampText": "10:24:56"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Set value to 1.",
-                "TimestampText": "10:18:52"
+                "Message": "Applied preset 'Observed app profile'.",
+                "TimestampText": "10:24:59"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified desired value.",
-                "TimestampText": "10:18:52"
+                "Message": "Verified preset 'Observed app profile'.",
+                "TimestampText": "10:24:59"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
-                "Message": "Removed value to restore default.",
-                "TimestampText": "10:18:52"
+                "Message": "Rolled back registry values.",
+                "TimestampText": "10:24:59"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Value not set.",
+            "StatusMessage": "Current option is 'Observed Win25H2Clean baseline'. Selected option is 'Observed app profile'.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Not set",
-            "TargetValue": "1 (0x1)",
+            "CurrentValue": "Observed Win25H2Clean baseline",
+            "TargetValue": "Observed app profile",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -375,40 +565,40 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Value not set.",
-                "TimestampText": "10:18:52"
+                "Message": "Current option is 'Observed Win25H2Clean baseline'. Selected option is 'Observed app profile'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\PriorityControl\\Win32PrioritySeparation: 2 -> 38",
+                "TimestampText": "10:24:59"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Set value to 1.",
-                "TimestampText": "10:18:52"
+                "Message": "Applied preset 'Observed app profile'.",
+                "TimestampText": "10:24:59"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified desired value.",
-                "TimestampText": "10:18:52"
+                "Message": "Verified preset 'Observed app profile'.",
+                "TimestampText": "10:24:59"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
-                "Message": "Removed value to restore default.",
-                "TimestampText": "10:18:52"
+                "Message": "Rolled back registry values.",
+                "TimestampText": "10:24:59"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T17:18:49.5672058+00:00",
-        "CompletedAtUtc": "2026-05-07T17:18:52.7331273+00:00"
+        "StartedAtUtc": "2026-05-07T17:24:56.8273971+00:00",
+        "CompletedAtUtc": "2026-05-07T17:24:59.9051037+00:00"
       },
-      "qa_tweak_id": "developer.windows-dev-mode",
-      "candidate_id": "developer.windows-dev-mode",
-      "card_name": "Windows Developer Mode",
-      "documentation": "research/records/developer.windows-dev-mode.json"
+      "qa_tweak_id": "system.priority-control",
+      "candidate_id": "system.priority-control",
+      "card_name": "Foreground Scheduling Priority / Win32PrioritySeparation",
+      "documentation": "research/records/system.priority-control.review.json"
     },
     {
-      "tweak_id": "developer.wsl2-memory",
+      "tweak_id": "system.reliability-timestamp-enabled",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -445,18 +635,18 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "developer.wsl2-memory",
-        "TweakName": "WSL 2 Memory Limit",
+        "TweakId": "system.reliability-timestamp-enabled",
+        "TweakName": "Reliability Event Timestamping",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "developer.wsl2-memory",
-          "Name": "WSL 2 Memory Limit",
-          "Category": "Developer",
-          "Description": "WSL 2 can use a lot of RAM. Microsoft documents memory limits in .wslconfig, and this tweak writes that documented setting directly.",
-          "FriendlyDescription": "WSL 2 can use a lot of RAM. Microsoft documents memory limits in .wslconfig, and this tweak writes that documented setting directly.",
+          "TweakId": "system.reliability-timestamp-enabled",
+          "Name": "Reliability Event Timestamping",
+          "Category": "System",
+          "Description": "Windows can timestamp reliability events on a cadence. This setting controls whether that timestamping behavior runs for the machine.",
+          "FriendlyDescription": "Windows can timestamp reliability events on a cadence. This setting controls whether that timestamping behavior runs for the machine.",
           "RegistryPath": "",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
@@ -465,15 +655,280 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: WSL 2 can use a lot of RAM. Microsoft documents memory limits in .wslconfig, and this tweak writes that documented setting directly. Evidence: Microsoft documents WSL 2 memory limits in %UserProfile%\\.wslconfig under the [wsl2] section using the memory setting. The current app writes the same documented surface. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: Windows can timestamp reliability events on a cadence. This setting controls whether that timestamping behavior runs for the machine. Evidence: The Microsoft policy page now documents the gate path directly. The decompiled function still confirms the gate behavior, the 24-hour cap on the companion interval, and the current-version fallback path. Our 25H2 follow-up work also found TimeStampInterval... Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "Microsoft documents WSL 2 memory limits in %UserProfile%\\.wslconfig under the [wsl2] section using the memory setting. The current app writes the same documented surface.",
-              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows/wsl/wsl-config"
+              "Summary": "The Microsoft policy page now documents the gate path directly. The decompiled function still confirms the gate behavior, the 24-hour cap on the companion interval, and the current-version fallback path. Our 25H2 follow-up work also found TimeStampInterval...",
+              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-reliability"
+            },
+            {
+              "Key": "runtime",
+              "Label": "RUNTIME",
+              "State": "ready",
+              "Summary": "Procmon passes around `perfmon /rel`, a bounded WER crash path, and WMI reliability queries all produced captures but did not show reads on the TimeStampEnabled or TimeStampInterval policy/fallback paths during the tested windows.",
+              "Source": "Win25H2Clean Procmon trigger attempts for Reliability timestamp reads: research/notes/reliability-timestamp-probe-attempts-20260326.md"
+            },
+            {
+              "Key": "source",
+              "Label": "SOURCE",
+              "State": "ready",
+              "Summary": "No upstream nohuto source link is attached to this record.",
+              "Source": ""
+            },
+            {
+              "Key": "rollback",
+              "Label": "ROLLBACK",
+              "State": "ready",
+              "Summary": "Rollback: Verified via record-restore-story.",
+              "Source": "record-restore-story"
+            }
+          ],
+          "ReferenceLinks": [
+            {
+              "Title": "Docs: Details (missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
+              "Kind": "Details"
+            },
+            {
+              "Title": "Docs: System (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\system\\system.md",
+              "Kind": "Docs"
+            }
+          ]
+        },
+        "Stages": [
+          {
+            "Stage": "detect-before",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Detected 0 of 2 values (matches: 0, missing: 2).",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Unknown",
+            "TargetValue": "Multiple values",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": false,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Detected 0 of 2 values (matches: 0, missing: 2).\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Reliability\\TimeStampEnabled: missing\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Reliability\\TimeStampInterval: missing",
+                "TimestampText": "10:25:06"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "apply",
+            "AppliedStatus": "Applied",
+            "StatusMessage": "Run completed.",
+            "OutcomeSummary": "Apply - Success",
+            "CurrentValue": "Multiple values",
+            "TargetValue": "Multiple values",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Detected 0 of 2 values (matches: 0, missing: 2).\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Reliability\\TimeStampEnabled: missing\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Reliability\\TimeStampInterval: missing",
+                "TimestampText": "10:25:06"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Updated 2 values.",
+                "TimestampText": "10:25:09"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified desired values.",
+                "TimestampText": "10:25:09"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Not required",
+                "Message": "Step not executed.",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "rollback",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Rolled back registry values.",
+            "OutcomeSummary": "Rollback - Rolled Back",
+            "CurrentValue": "Multiple values",
+            "TargetValue": "Multiple values",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Detected 0 of 2 values (matches: 0, missing: 2).\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Reliability\\TimeStampEnabled: missing\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Reliability\\TimeStampInterval: missing",
+                "TimestampText": "10:25:06"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Updated 2 values.",
+                "TimestampText": "10:25:09"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified desired values.",
+                "TimestampText": "10:25:09"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "10:25:09"
+              }
+            ]
+          },
+          {
+            "Stage": "detect-after",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Detected 0 of 2 values (matches: 0, missing: 2).",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Multiple values",
+            "TargetValue": "Multiple values",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Detected 0 of 2 values (matches: 0, missing: 2).\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Reliability\\TimeStampEnabled: missing\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Reliability\\TimeStampInterval: missing",
+                "TimestampText": "10:25:09"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Updated 2 values.",
+                "TimestampText": "10:25:09"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified desired values.",
+                "TimestampText": "10:25:09"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "10:25:09"
+              }
+            ]
+          }
+        ],
+        "StartedAtUtc": "2026-05-07T17:25:06.4527762+00:00",
+        "CompletedAtUtc": "2026-05-07T17:25:09.5499035+00:00"
+      },
+      "qa_tweak_id": "system.reliability-timestamp-enabled",
+      "candidate_id": "system.reliability-timestamp-enabled",
+      "card_name": "Reliability Event Timestamping",
+      "documentation": "research/records/system.reliability-timestamp-enabled.review.json"
+    },
+    {
+      "tweak_id": "system.services.disable-bluetooth-audio-gateway",
+      "host_exit": 0,
+      "execution_exit": 0,
+      "payload_status": "completed",
+      "report_source": "stdout",
+      "report_parse_error": null,
+      "report_fetch_status": null,
+      "report_app_success": true,
+      "report_success": true,
+      "report_status": "ok",
+      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
+      "report_contract_status": "ok",
+      "report_contract_summary": "QA card snapshot contract passed.",
+      "report_contract_failures": [],
+      "report_card_present": true,
+      "report_card_has_claim_boundary": true,
+      "report_card_present_fields": [
+        "TweakId",
+        "Name",
+        "Category",
+        "EvidenceClass",
+        "ResearchStatus",
+        "RollbackSnapshotState",
+        "HasClaimBoundary",
+        "WhatWeKnowSummary",
+        "WhatWeDoNotClaimSummary",
+        "ProofLanes"
+      ],
+      "report_card_missing_fields": [],
+      "report_card_proof_lanes": [
+        "docs",
+        "runtime",
+        "source",
+        "rollback"
+      ],
+      "report_card_missing_proof_lanes": [],
+      "report": {
+        "TweakId": "system.services.disable-bluetooth-audio-gateway",
+        "TweakName": "Bluetooth Audio Gateway Service",
+        "Success": true,
+        "Status": "ok",
+        "Summary": "Apply/verify path completed and rollback restored the tweak.",
+        "RollbackRequested": true,
+        "Card": {
+          "TweakId": "system.services.disable-bluetooth-audio-gateway",
+          "Name": "Bluetooth Audio Gateway Service",
+          "Category": "System",
+          "Description": "This service supports Bluetooth hands-free audio gateway features. Disabling it removes that capability.",
+          "FriendlyDescription": "This service supports Bluetooth hands-free audio gateway features. Disabling it removes that capability.",
+          "RegistryPath": "",
+          "EvidenceClass": "A",
+          "EvidenceClassTitle": "Cross-Layer Verified",
+          "ResearchStatus": "PROMOTED",
+          "IsMutationAllowed": true,
+          "RollbackSnapshotState": "ready",
+          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
+          "HasClaimBoundary": true,
+          "WhatWeKnowSummary": "Claim: This service supports Bluetooth hands-free audio gateway features. Disabling it removes that capability. Evidence: The Microsoft services guidance page explicitly lists the BTAGService service, its Manual baseline, its Bluetooth Handsfree Profile role, and that it is OK to disable. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
+          "ProofLanes": [
+            {
+              "Key": "docs",
+              "Label": "DOCS",
+              "State": "ready",
+              "Summary": "The Microsoft services guidance page explicitly lists the BTAGService service, its Manual baseline, its Bluetooth Handsfree Profile role, and that it is OK to disable.",
+              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services"
             },
             {
               "Key": "runtime",
@@ -504,8 +959,8 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Developer (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweaks.md",
+              "Title": "Docs: System (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\system\\system.md",
               "Kind": "Docs"
             }
           ]
@@ -514,10 +969,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "WSL 2 memory is not explicitly configured.",
+            "StatusMessage": "Detected 1 of 1 services. Current state: Manual.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Unknown",
-            "TargetValue": "Optimized",
+            "CurrentValue": "Manual",
+            "TargetValue": "Disabled",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -526,8 +981,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "WSL 2 memory is not explicitly configured.",
-                "TimestampText": "10:18:59"
+                "Message": "Detected 1 of 1 services. Current state: Manual.\nServices:\n- BTAGService: Manual (Stopped) -> Disabled",
+                "TimestampText": "10:25:18"
               },
               {
                 "Action": "Apply",
@@ -554,8 +1009,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Optimized",
-            "TargetValue": "Optimized",
+            "CurrentValue": "Disabled",
+            "TargetValue": "Disabled",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -564,20 +1019,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "WSL 2 memory is not explicitly configured.",
-                "TimestampText": "10:18:59"
+                "Message": "Detected 1 of 1 services. Current state: Manual.\nServices:\n- BTAGService: Manual (Stopped) -> Disabled",
+                "TimestampText": "10:25:19"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Set WSL 2 memory limit to 4GB.",
-                "TimestampText": "10:18:59"
+                "Message": "Updated 1 services.",
+                "TimestampText": "10:25:19"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified WSL 2 memory limit 4GB.",
-                "TimestampText": "10:18:59"
+                "Message": "Verified service start modes.",
+                "TimestampText": "10:25:19"
               },
               {
                 "Action": "Rollback",
@@ -590,10 +1045,10 @@
           {
             "Stage": "rollback",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Removed .wslconfig created by the tweak.",
+            "StatusMessage": "Rolled back service start modes.",
             "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Optimized",
-            "TargetValue": "Optimized",
+            "CurrentValue": "Disabled",
+            "TargetValue": "Disabled",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -602,36 +1057,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "WSL 2 memory is not explicitly configured.",
-                "TimestampText": "10:18:59"
+                "Message": "Detected 1 of 1 services. Current state: Manual.\nServices:\n- BTAGService: Manual (Stopped) -> Disabled",
+                "TimestampText": "10:25:19"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Set WSL 2 memory limit to 4GB.",
-                "TimestampText": "10:18:59"
+                "Message": "Updated 1 services.",
+                "TimestampText": "10:25:19"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified WSL 2 memory limit 4GB.",
-                "TimestampText": "10:18:59"
+                "Message": "Verified service start modes.",
+                "TimestampText": "10:25:19"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
-                "Message": "Removed .wslconfig created by the tweak.",
-                "TimestampText": "10:18:59"
+                "Message": "Rolled back service start modes.",
+                "TimestampText": "10:25:19"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "WSL 2 memory is not explicitly configured.",
+            "StatusMessage": "Detected 1 of 1 services. Current state: Manual.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Optimized",
-            "TargetValue": "Optimized",
+            "CurrentValue": "Manual",
+            "TargetValue": "Disabled",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -640,46 +1095,576 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "WSL 2 memory is not explicitly configured.",
-                "TimestampText": "10:18:59"
+                "Message": "Detected 1 of 1 services. Current state: Manual.\nServices:\n- BTAGService: Manual (Stopped) -> Disabled",
+                "TimestampText": "10:25:19"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Set WSL 2 memory limit to 4GB.",
-                "TimestampText": "10:18:59"
+                "Message": "Updated 1 services.",
+                "TimestampText": "10:25:19"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified WSL 2 memory limit 4GB.",
-                "TimestampText": "10:18:59"
+                "Message": "Verified service start modes.",
+                "TimestampText": "10:25:19"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
-                "Message": "Removed .wslconfig created by the tweak.",
-                "TimestampText": "10:18:59"
+                "Message": "Rolled back service start modes.",
+                "TimestampText": "10:25:19"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T17:18:59.1497684+00:00",
-        "CompletedAtUtc": "2026-05-07T17:18:59.4534919+00:00"
+        "StartedAtUtc": "2026-05-07T17:25:16.1084956+00:00",
+        "CompletedAtUtc": "2026-05-07T17:25:19.4195307+00:00"
       },
-      "qa_tweak_id": "developer.wsl2-memory",
-      "candidate_id": "developer.wsl2-memory",
-      "card_name": "WSL 2 Memory Limit",
-      "documentation": "research/records/developer.wsl2-memory.json"
+      "qa_tweak_id": "system.services.disable-bluetooth-audio-gateway",
+      "candidate_id": "system.services.disable-bluetooth-audio-gateway",
+      "card_name": "Bluetooth Audio Gateway Service",
+      "documentation": "research/records/system.services.disable-bluetooth-audio-gateway.json"
+    },
+    {
+      "tweak_id": "system.services.disable-bluetooth-support",
+      "host_exit": 0,
+      "execution_exit": 0,
+      "payload_status": "completed",
+      "report_source": "stdout",
+      "report_parse_error": null,
+      "report_fetch_status": null,
+      "report_app_success": true,
+      "report_success": true,
+      "report_status": "ok",
+      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
+      "report_contract_status": "ok",
+      "report_contract_summary": "QA card snapshot contract passed.",
+      "report_contract_failures": [],
+      "report_card_present": true,
+      "report_card_has_claim_boundary": true,
+      "report_card_present_fields": [
+        "TweakId",
+        "Name",
+        "Category",
+        "EvidenceClass",
+        "ResearchStatus",
+        "RollbackSnapshotState",
+        "HasClaimBoundary",
+        "WhatWeKnowSummary",
+        "WhatWeDoNotClaimSummary",
+        "ProofLanes"
+      ],
+      "report_card_missing_fields": [],
+      "report_card_proof_lanes": [
+        "docs",
+        "runtime",
+        "source",
+        "rollback"
+      ],
+      "report_card_missing_proof_lanes": [],
+      "report": {
+        "TweakId": "system.services.disable-bluetooth-support",
+        "TweakName": "Bluetooth Support Service",
+        "Success": true,
+        "Status": "ok",
+        "Summary": "Apply/verify path completed and rollback restored the tweak.",
+        "RollbackRequested": true,
+        "Card": {
+          "TweakId": "system.services.disable-bluetooth-support",
+          "Name": "Bluetooth Support Service",
+          "Category": "System",
+          "Description": "This is the main Windows Bluetooth support service. It helps Windows discover, pair, and work with Bluetooth devices.",
+          "FriendlyDescription": "This is the main Windows Bluetooth support service. It helps Windows discover, pair, and work with Bluetooth devices.",
+          "RegistryPath": "",
+          "EvidenceClass": "A",
+          "EvidenceClassTitle": "Cross-Layer Verified",
+          "ResearchStatus": "PROMOTED",
+          "IsMutationAllowed": true,
+          "RollbackSnapshotState": "ready",
+          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
+          "HasClaimBoundary": true,
+          "WhatWeKnowSummary": "Claim: This is the main Windows Bluetooth support service. It helps Windows discover, pair, and work with Bluetooth devices. Evidence: The Microsoft services guidance page explicitly lists the bthserv service, its Manual baseline, the impact of disabling it, and that it is OK to disable. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
+          "ProofLanes": [
+            {
+              "Key": "docs",
+              "Label": "DOCS",
+              "State": "ready",
+              "Summary": "The Microsoft services guidance page explicitly lists the bthserv service, its Manual baseline, the impact of disabling it, and that it is OK to disable.",
+              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services"
+            },
+            {
+              "Key": "runtime",
+              "Label": "RUNTIME",
+              "State": "ready",
+              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+              "Source": ""
+            },
+            {
+              "Key": "source",
+              "Label": "SOURCE",
+              "State": "ready",
+              "Summary": "No upstream nohuto source link is attached to this record.",
+              "Source": ""
+            },
+            {
+              "Key": "rollback",
+              "Label": "ROLLBACK",
+              "State": "ready",
+              "Summary": "Rollback: Verified via record-restore-story.",
+              "Source": "record-restore-story"
+            }
+          ],
+          "ReferenceLinks": [
+            {
+              "Title": "Docs: Details (missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
+              "Kind": "Details"
+            },
+            {
+              "Title": "Docs: System (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\system\\system.md",
+              "Kind": "Docs"
+            }
+          ]
+        },
+        "Stages": [
+          {
+            "Stage": "detect-before",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Detected 1 of 1 services. Current state: Manual.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Manual",
+            "TargetValue": "Disabled",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": false,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Detected 1 of 1 services. Current state: Manual.\nServices:\n- bthserv: Manual (Stopped) -> Disabled",
+                "TimestampText": "10:25:28"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "apply",
+            "AppliedStatus": "Applied",
+            "StatusMessage": "Run completed.",
+            "OutcomeSummary": "Apply - Success",
+            "CurrentValue": "Disabled",
+            "TargetValue": "Disabled",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Detected 1 of 1 services. Current state: Manual.\nServices:\n- bthserv: Manual (Stopped) -> Disabled",
+                "TimestampText": "10:25:28"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Updated 1 services.",
+                "TimestampText": "10:25:28"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified service start modes.",
+                "TimestampText": "10:25:28"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Not required",
+                "Message": "Step not executed.",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "rollback",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Rolled back service start modes.",
+            "OutcomeSummary": "Rollback - Rolled Back",
+            "CurrentValue": "Disabled",
+            "TargetValue": "Disabled",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Detected 1 of 1 services. Current state: Manual.\nServices:\n- bthserv: Manual (Stopped) -> Disabled",
+                "TimestampText": "10:25:28"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Updated 1 services.",
+                "TimestampText": "10:25:28"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified service start modes.",
+                "TimestampText": "10:25:28"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back service start modes.",
+                "TimestampText": "10:25:28"
+              }
+            ]
+          },
+          {
+            "Stage": "detect-after",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Detected 1 of 1 services. Current state: Manual.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Manual",
+            "TargetValue": "Disabled",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Detected 1 of 1 services. Current state: Manual.\nServices:\n- bthserv: Manual (Stopped) -> Disabled",
+                "TimestampText": "10:25:28"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Updated 1 services.",
+                "TimestampText": "10:25:28"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified service start modes.",
+                "TimestampText": "10:25:28"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back service start modes.",
+                "TimestampText": "10:25:28"
+              }
+            ]
+          }
+        ],
+        "StartedAtUtc": "2026-05-07T17:25:25.7353768+00:00",
+        "CompletedAtUtc": "2026-05-07T17:25:29.0030846+00:00"
+      },
+      "qa_tweak_id": "system.services.disable-bluetooth-support",
+      "candidate_id": "system.services.disable-bluetooth-support",
+      "card_name": "Bluetooth Support Service",
+      "documentation": "research/records/system.services.disable-bluetooth-support.json"
+    },
+    {
+      "tweak_id": "system.services.disable-bluetooth-user-service",
+      "host_exit": 0,
+      "execution_exit": 0,
+      "payload_status": "completed",
+      "report_source": "stdout",
+      "report_parse_error": null,
+      "report_fetch_status": null,
+      "report_app_success": true,
+      "report_success": true,
+      "report_status": "ok",
+      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
+      "report_contract_status": "ok",
+      "report_contract_summary": "QA card snapshot contract passed.",
+      "report_contract_failures": [],
+      "report_card_present": true,
+      "report_card_has_claim_boundary": true,
+      "report_card_present_fields": [
+        "TweakId",
+        "Name",
+        "Category",
+        "EvidenceClass",
+        "ResearchStatus",
+        "RollbackSnapshotState",
+        "HasClaimBoundary",
+        "WhatWeKnowSummary",
+        "WhatWeDoNotClaimSummary",
+        "ProofLanes"
+      ],
+      "report_card_missing_fields": [],
+      "report_card_proof_lanes": [
+        "docs",
+        "runtime",
+        "source",
+        "rollback"
+      ],
+      "report_card_missing_proof_lanes": [],
+      "report": {
+        "TweakId": "system.services.disable-bluetooth-user-service",
+        "TweakName": "Bluetooth User Service",
+        "Success": true,
+        "Status": "ok",
+        "Summary": "Apply/verify path completed and rollback restored the tweak.",
+        "RollbackRequested": true,
+        "Card": {
+          "TweakId": "system.services.disable-bluetooth-user-service",
+          "Name": "Bluetooth User Service",
+          "Category": "System",
+          "Description": "This per-user Bluetooth service supports Bluetooth features tied to each signed-in user session. Disabling it removes those per-user Bluetooth service behaviors.",
+          "FriendlyDescription": "This per-user Bluetooth service supports Bluetooth features tied to each signed-in user session. Disabling it removes those per-user Bluetooth service behaviors.",
+          "RegistryPath": "",
+          "EvidenceClass": "A",
+          "EvidenceClassTitle": "Cross-Layer Verified",
+          "ResearchStatus": "PROMOTED",
+          "IsMutationAllowed": true,
+          "RollbackSnapshotState": "ready",
+          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
+          "HasClaimBoundary": true,
+          "WhatWeKnowSummary": "Claim: This per-user Bluetooth service supports Bluetooth features tied to each signed-in user session. Disabling it removes those per-user Bluetooth service behaviors. Evidence: The official Learn services page documents the base per-user service family as BluetoothUserService. The app targets instantiated per-user services via BluetoothUserService_*. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
+          "ProofLanes": [
+            {
+              "Key": "docs",
+              "Label": "DOCS",
+              "State": "ready",
+              "Summary": "The official Learn services page documents the base per-user service family as BluetoothUserService. The app targets instantiated per-user services via BluetoothUserService_*.",
+              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services"
+            },
+            {
+              "Key": "runtime",
+              "Label": "RUNTIME",
+              "State": "ready",
+              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+              "Source": ""
+            },
+            {
+              "Key": "source",
+              "Label": "SOURCE",
+              "State": "ready",
+              "Summary": "No upstream nohuto source link is attached to this record.",
+              "Source": ""
+            },
+            {
+              "Key": "rollback",
+              "Label": "ROLLBACK",
+              "State": "ready",
+              "Summary": "Rollback: Verified via record-restore-story.",
+              "Source": "record-restore-story"
+            }
+          ],
+          "ReferenceLinks": [
+            {
+              "Title": "Docs: Details (missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
+              "Kind": "Details"
+            },
+            {
+              "Title": "Docs: System (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\system\\system.md",
+              "Kind": "Docs"
+            }
+          ]
+        },
+        "Stages": [
+          {
+            "Stage": "detect-before",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Detected 1 of 1 services. Current state: Manual.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Manual",
+            "TargetValue": "Disabled",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": false,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Detected 1 of 1 services. Current state: Manual.\nServices:\n- BluetoothUserService_3733b: Manual (Stopped) -> Disabled",
+                "TimestampText": "10:25:38"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "apply",
+            "AppliedStatus": "Applied",
+            "StatusMessage": "Run completed.",
+            "OutcomeSummary": "Apply - Success",
+            "CurrentValue": "Disabled",
+            "TargetValue": "Disabled",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Detected 1 of 1 services. Current state: Manual.\nServices:\n- BluetoothUserService_3733b: Manual (Stopped) -> Disabled",
+                "TimestampText": "10:25:38"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Updated 1 services.",
+                "TimestampText": "10:25:38"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified service start modes.",
+                "TimestampText": "10:25:38"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Not required",
+                "Message": "Step not executed.",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "rollback",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Rolled back service start modes.",
+            "OutcomeSummary": "Rollback - Rolled Back",
+            "CurrentValue": "Disabled",
+            "TargetValue": "Disabled",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Detected 1 of 1 services. Current state: Manual.\nServices:\n- BluetoothUserService_3733b: Manual (Stopped) -> Disabled",
+                "TimestampText": "10:25:38"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Updated 1 services.",
+                "TimestampText": "10:25:38"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified service start modes.",
+                "TimestampText": "10:25:38"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back service start modes.",
+                "TimestampText": "10:25:38"
+              }
+            ]
+          },
+          {
+            "Stage": "detect-after",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Detected 1 of 1 services. Current state: Manual.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Manual",
+            "TargetValue": "Disabled",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Detected 1 of 1 services. Current state: Manual.\nServices:\n- BluetoothUserService_3733b: Manual (Stopped) -> Disabled",
+                "TimestampText": "10:25:38"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Updated 1 services.",
+                "TimestampText": "10:25:38"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified service start modes.",
+                "TimestampText": "10:25:38"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back service start modes.",
+                "TimestampText": "10:25:38"
+              }
+            ]
+          }
+        ],
+        "StartedAtUtc": "2026-05-07T17:25:35.6350589+00:00",
+        "CompletedAtUtc": "2026-05-07T17:25:38.8591873+00:00"
+      },
+      "qa_tweak_id": "system.services.disable-bluetooth-user-service",
+      "candidate_id": "system.services.disable-bluetooth-user-service",
+      "card_name": "Bluetooth User Service",
+      "documentation": "research/records/system.services.disable-bluetooth-user-service.json"
     }
   ],
   "summary": {
-    "planned_count": 2,
-    "planned_apply_allowed_count": 2,
-    "live_success_count": 2,
+    "planned_count": 5,
+    "planned_apply_allowed_count": 5,
+    "live_success_count": 5,
     "live_failure_count": 0,
     "categories": [
-      "Developer"
+      "System"
     ]
   }
 }

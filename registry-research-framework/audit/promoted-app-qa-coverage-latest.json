@@ -1,11 +1,11 @@
 {
-  "generated_utc": "2026-05-07T17:18:45Z",
-  "history_entry_count": 68,
+  "generated_utc": "2026-05-07T17:24:52Z",
+  "history_entry_count": 71,
   "catalog_candidate_count": 242,
-  "covered_count": 207,
-  "uncovered_count": 35,
+  "covered_count": 212,
+  "uncovered_count": 30,
   "summary": {
-    "coverage_percent": 85.54,
+    "coverage_percent": 87.6,
     "covered_categories": {
       "Audio": 3,
       "Cleanup": 1,
@@ -18,71 +18,18 @@
       "Power": 10,
       "Privacy": 53,
       "Security": 17,
-      "System": 41,
+      "System": 46,
       "Visibility": 21
     },
     "uncovered_categories": {
       "Network": 4,
       "Privacy": 14,
       "Security": 4,
-      "System": 11,
+      "System": 6,
       "Visibility": 2
     }
   },
   "recommended_next_batches": [
-    {
-      "category": "System",
-      "covered_count": 41,
-      "uncovered_count": 11,
-      "coverage_percent": 78.85,
-      "batch_size": 5,
-      "tweak_ids": [
-        "system.priority-control",
-        "system.reliability-timestamp-enabled",
-        "system.services.disable-bluetooth-audio-gateway",
-        "system.services.disable-bluetooth-support",
-        "system.services.disable-bluetooth-user-service"
-      ],
-      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id system.priority-control --id system.reliability-timestamp-enabled --id system.services.disable-bluetooth-audio-gateway --id system.services.disable-bluetooth-support --id system.services.disable-bluetooth-user-service",
-      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id system.priority-control --id system.reliability-timestamp-enabled --id system.services.disable-bluetooth-audio-gateway --id system.services.disable-bluetooth-support --id system.services.disable-bluetooth-user-service --run-kvm --json",
-      "candidates": [
-        {
-          "tweak_id": "system.priority-control",
-          "record_id": "system.priority-control",
-          "category": "System",
-          "name": "Foreground Scheduling Priority / Win32PrioritySeparation",
-          "documentation": "research/records/system.priority-control.review.json"
-        },
-        {
-          "tweak_id": "system.reliability-timestamp-enabled",
-          "record_id": "system.reliability-timestamp-enabled",
-          "category": "System",
-          "name": "Reliability Event Timestamping",
-          "documentation": "research/records/system.reliability-timestamp-enabled.review.json"
-        },
-        {
-          "tweak_id": "system.services.disable-bluetooth-audio-gateway",
-          "record_id": "system.services.disable-bluetooth-audio-gateway",
-          "category": "System",
-          "name": "Bluetooth Audio Gateway Service",
-          "documentation": "research/records/system.services.disable-bluetooth-audio-gateway.json"
-        },
-        {
-          "tweak_id": "system.services.disable-bluetooth-support",
-          "record_id": "system.services.disable-bluetooth-support",
-          "category": "System",
-          "name": "Bluetooth Support Service",
-          "documentation": "research/records/system.services.disable-bluetooth-support.json"
-        },
-        {
-          "tweak_id": "system.services.disable-bluetooth-user-service",
-          "record_id": "system.services.disable-bluetooth-user-service",
-          "category": "System",
-          "name": "Bluetooth User Service",
-          "documentation": "research/records/system.services.disable-bluetooth-user-service.json"
-        }
-      ]
-    },
     {
       "category": "Privacy",
       "covered_count": 53,
@@ -223,6 +170,59 @@
           "category": "Network",
           "name": "SMB Cipher Suite Order",
           "documentation": "research/records/network.smb-set-cipher-suite-order.review.json"
+        }
+      ]
+    },
+    {
+      "category": "System",
+      "covered_count": 46,
+      "uncovered_count": 6,
+      "coverage_percent": 88.46,
+      "batch_size": 5,
+      "tweak_ids": [
+        "system.services.disable-connected-user-experiences",
+        "system.services.disable-print-notifications",
+        "system.services.disable-print-spooler",
+        "system.services.disable-windows-search",
+        "system.verbose-status-messages"
+      ],
+      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id system.services.disable-connected-user-experiences --id system.services.disable-print-notifications --id system.services.disable-print-spooler --id system.services.disable-windows-search --id system.verbose-status-messages",
+      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id system.services.disable-connected-user-experiences --id system.services.disable-print-notifications --id system.services.disable-print-spooler --id system.services.disable-windows-search --id system.verbose-status-messages --run-kvm --json",
+      "candidates": [
+        {
+          "tweak_id": "system.services.disable-connected-user-experiences",
+          "record_id": "system.services.disable-connected-user-experiences",
+          "category": "System",
+          "name": "Connected User Experiences and Telemetry Service",
+          "documentation": "research/records/system.services.disable-connected-user-experiences.json"
+        },
+        {
+          "tweak_id": "system.services.disable-print-notifications",
+          "record_id": "system.services.disable-print-notifications",
+          "category": "System",
+          "name": "Print Notification Service",
+          "documentation": "research/records/system.services.disable-print-notifications.json"
+        },
+        {
+          "tweak_id": "system.services.disable-print-spooler",
+          "record_id": "system.services.disable-print-spooler",
+          "category": "System",
+          "name": "Print Spooler Service",
+          "documentation": "research/records/system.services.disable-print-spooler.json"
+        },
+        {
+          "tweak_id": "system.services.disable-windows-search",
+          "record_id": "system.services.disable-windows-search",
+          "category": "System",
+          "name": "Windows Search Service",
+          "documentation": "research/records/system.services.disable-windows-search.json"
+        },
+        {
+          "tweak_id": "system.verbose-status-messages",
+          "record_id": "system.verbose-status-messages",
+          "category": "System",
+          "name": "Verbose Status Messages",
+          "documentation": "research/records/system.verbose-status-messages.json"
         }
       ]
     },
@@ -1932,6 +1932,51 @@
       "latest_report_status": "ok"
     },
     {
+      "tweak_id": "system.priority-control",
+      "qa_tweak_id": "system.priority-control",
+      "candidate_id": "system.priority-control",
+      "category": "System",
+      "name": "Foreground Scheduling Priority / Win32PrioritySeparation",
+      "documentation": "research/records/system.priority-control.review.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "system.reliability-timestamp-enabled",
+      "qa_tweak_id": "system.reliability-timestamp-enabled",
+      "candidate_id": "system.reliability-timestamp-enabled",
+      "category": "System",
+      "name": "Reliability Event Timestamping",
+      "documentation": "research/records/system.reliability-timestamp-enabled.review.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "system.services.disable-bluetooth-audio-gateway",
+      "qa_tweak_id": "system.services.disable-bluetooth-audio-gateway",
+      "candidate_id": "system.services.disable-bluetooth-audio-gateway",
+      "category": "System",
+      "name": "Bluetooth Audio Gateway Service",
+      "documentation": "research/records/system.services.disable-bluetooth-audio-gateway.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "system.services.disable-bluetooth-support",
+      "qa_tweak_id": "system.services.disable-bluetooth-support",
+      "candidate_id": "system.services.disable-bluetooth-support",
+      "category": "System",
+      "name": "Bluetooth Support Service",
+      "documentation": "research/records/system.services.disable-bluetooth-support.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "system.services.disable-bluetooth-user-service",
+      "qa_tweak_id": "system.services.disable-bluetooth-user-service",
+      "candidate_id": "system.services.disable-bluetooth-user-service",
+      "category": "System",
+      "name": "Bluetooth User Service",
+      "documentation": "research/records/system.services.disable-bluetooth-user-service.json",
+      "latest_report_status": "ok"
+    },
+    {
       "tweak_id": "visibility.default-account-picture",
       "qa_tweak_id": "visibility.default-account-picture",
       "candidate_id": "visibility.default-account-picture",
@@ -2275,41 +2320,6 @@
       "category": "Security",
       "name": "User Account Control Prompting Profile",
       "documentation": "research/records/security.uac-never-notify.json"
-    },
-    {
-      "tweak_id": "system.priority-control",
-      "record_id": "system.priority-control",
-      "category": "System",
-      "name": "Foreground Scheduling Priority / Win32PrioritySeparation",
-      "documentation": "research/records/system.priority-control.review.json"
-    },
-    {
-      "tweak_id": "system.reliability-timestamp-enabled",
-      "record_id": "system.reliability-timestamp-enabled",
-      "category": "System",
-      "name": "Reliability Event Timestamping",
-      "documentation": "research/records/system.reliability-timestamp-enabled.review.json"
-    },
-    {
-      "tweak_id": "system.services.disable-bluetooth-audio-gateway",
-      "record_id": "system.services.disable-bluetooth-audio-gateway",
-      "category": "System",
-      "name": "Bluetooth Audio Gateway Service",
-      "documentation": "research/records/system.services.disable-bluetooth-audio-gateway.json"
-    },
-    {
-      "tweak_id": "system.services.disable-bluetooth-support",
-      "record_id": "system.services.disable-bluetooth-support",
-      "category": "System",
-      "name": "Bluetooth Support Service",
-      "documentation": "research/records/system.services.disable-bluetooth-support.json"
-    },
-    {
-      "tweak_id": "system.services.disable-bluetooth-user-service",
-      "record_id": "system.services.disable-bluetooth-user-service",
-      "category": "System",
-      "name": "Bluetooth User Service",
-      "documentation": "research/records/system.services.disable-bluetooth-user-service.json"
     },
     {
       "tweak_id": "system.services.disable-connected-user-experiences",

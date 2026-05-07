@@ -1,11 +1,11 @@
 # Promoted App QA Coverage
 
-- Generated UTC: 2026-05-07T17:18:45Z
-- History entries: 68
+- Generated UTC: 2026-05-07T17:24:52Z
+- History entries: 71
 - Promoted app-QA candidates: 242
-- Covered: 207
-- Uncovered: 35
-- Coverage: 85.54%
+- Covered: 212
+- Uncovered: 30
+- Coverage: 87.6%
 
 ## Covered Categories
 
@@ -20,7 +20,7 @@
 - Power: 10
 - Privacy: 53
 - Security: 17
-- System: 41
+- System: 46
 - Visibility: 21
 
 ## Uncovered Categories
@@ -28,14 +28,11 @@
 - Network: 4
 - Privacy: 14
 - Security: 4
-- System: 11
+- System: 6
 - Visibility: 2
 
 ## Recommended Next Batches
 
-- System: 5 uncovered cards | coverage 78.85%
-  command: `dotnet run --project cli/cli.csproj -- research qa-batch --id system.priority-control --id system.reliability-timestamp-enabled --id system.services.disable-bluetooth-audio-gateway --id system.services.disable-bluetooth-support --id system.services.disable-bluetooth-user-service`
-  live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id system.priority-control --id system.reliability-timestamp-enabled --id system.services.disable-bluetooth-audio-gateway --id system.services.disable-bluetooth-support --id system.services.disable-bluetooth-user-service --run-kvm --json`
 - Privacy: 5 uncovered cards | coverage 79.1%
   command: `dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-switchback.policy --id privacy.disable-telemetry-change-notifications --id privacy.disable-telemetry-optin-ui --id privacy.disable-wer --id privacy.disable-windows-location-provider`
   live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-switchback.policy --id privacy.disable-telemetry-change-notifications --id privacy.disable-telemetry-optin-ui --id privacy.disable-wer --id privacy.disable-windows-location-provider --run-kvm --json`
@@ -45,6 +42,9 @@
 - Network: 4 uncovered cards | coverage 85.71%
   command: `dotnet run --project cli/cli.csproj -- research qa-batch --id network.smb-require-dialect-3_1_1 --id network.smb-require-signing-client --id network.smb-require-signing-server --id network.smb-set-cipher-suite-order`
   live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id network.smb-require-dialect-3_1_1 --id network.smb-require-signing-client --id network.smb-require-signing-server --id network.smb-set-cipher-suite-order --run-kvm --json`
+- System: 5 uncovered cards | coverage 88.46%
+  command: `dotnet run --project cli/cli.csproj -- research qa-batch --id system.services.disable-connected-user-experiences --id system.services.disable-print-notifications --id system.services.disable-print-spooler --id system.services.disable-windows-search --id system.verbose-status-messages`
+  live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id system.services.disable-connected-user-experiences --id system.services.disable-print-notifications --id system.services.disable-print-spooler --id system.services.disable-windows-search --id system.verbose-status-messages --run-kvm --json`
 - Visibility: 2 uncovered cards | coverage 91.3%
   command: `dotnet run --project cli/cli.csproj -- research qa-batch --id visibility.disable-window-animations --id visibility.hide-people-bar`
   live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id visibility.disable-window-animations --id visibility.hide-people-bar --run-kvm --json`

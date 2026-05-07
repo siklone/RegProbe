@@ -291,6 +291,9 @@ public sealed class CommandAllowlist
         AddRegDwordRule(regAllowlist, @"HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers", "TdrLimitCount", "5");
         AddRegDwordRule(regAllowlist, @"HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers", "TdrLimitTime", "60");
         AddRegDwordRule(regAllowlist, @"HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel", "ThreadDpcEnable", "0", "1");
+        AddRegDwordRule(regAllowlist, @"HKLM\SYSTEM\CurrentControlSet\Control\PriorityControl", "Win32PrioritySeparation", "2", "38");
+        AddRegDwordRule(regAllowlist, @"HKLM\SOFTWARE\Policies\Microsoft\Windows NT\Reliability", "TimeStampEnabled", "0", "1");
+        AddRegDwordRule(regAllowlist, @"HKLM\SOFTWARE\Policies\Microsoft\Windows NT\Reliability", "TimeStampInterval", "86400");
         AddRegDwordRule(regAllowlist, @"HKLM\SOFTWARE\Microsoft\Windows\Dwm", "OverlayMinFPS", "0");
         AddRegDwordRule(regAllowlist, @"HKLM\System\CurrentControlSet\Control", "RegistrySizeLimit", "0");
         AddRegDwordRule(regAllowlist, @"HKLM\SYSTEM\CurrentControlSet\Control\FileSystem", "NtfsDisable8dot3NameCreation", "0", "1", "2", "3");
