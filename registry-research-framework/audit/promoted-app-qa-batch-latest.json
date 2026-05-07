@@ -1,13 +1,10 @@
 {
-  "generated_utc": "2026-05-07T18:11:28Z",
+  "generated_utc": "2026-05-07T18:13:19Z",
   "status": "PASS",
   "selection": {
     "requested_ids": [
-      "system.services.disable-connected-user-experiences",
-      "system.services.disable-print-notifications",
-      "system.services.disable-print-spooler",
-      "system.services.disable-windows-search",
-      "system.verbose-status-messages"
+      "visibility.disable-window-animations",
+      "visibility.hide-people-bar"
     ],
     "requested_categories": [],
     "limit_per_category": 1,
@@ -22,29 +19,29 @@
     "kvm_batch_runner": "scripts/vm-kvm/run-guest-app-tweak-qa-batch.py"
   },
   "catalog_candidate_count": 242,
-  "selected_candidate_count": 5,
+  "selected_candidate_count": 2,
   "errors": [],
   "candidates": [
     {
-      "tweak_id": "system.services.disable-connected-user-experiences",
-      "qa_tweak_id": "system.services.disable-connected-user-experiences",
-      "candidate_id": "system.services.disable-connected-user-experiences",
-      "record_id": "system.services.disable-connected-user-experiences",
-      "category": "System",
-      "name": "Connected User Experiences and Telemetry Service",
-      "documentation": "research/records/system.services.disable-connected-user-experiences.json",
+      "tweak_id": "visibility.disable-window-animations",
+      "qa_tweak_id": "visibility.disable-window-animations",
+      "candidate_id": "visibility.disable-window-animations",
+      "record_id": "visibility.disable-window-animations",
+      "category": "Visibility",
+      "name": "Window Animations",
+      "documentation": "research/records/visibility.disable-window-animations.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect system.services.disable-connected-user-experiences",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect visibility.disable-window-animations",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.services.disable-connected-user-experiences' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.services.disable-connected-user-experiences.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.services.disable-connected-user-experiences' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.services.disable-connected-user-experiences.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.services.disable-connected-user-experiences' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.services.disable-connected-user-experiences.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.services.disable-connected-user-experiences' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.services.disable-connected-user-experiences.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'system.services.disable-connected-user-experiences'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'visibility.disable-window-animations' --qa-output 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-window-animations.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'visibility.disable-window-animations' --qa-output 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-window-animations.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'visibility.disable-window-animations' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-window-animations.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'visibility.disable-window-animations' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-window-animations.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'visibility.disable-window-animations'"
       },
       "expected_report": {
         "success": true,
@@ -85,202 +82,25 @@
       }
     },
     {
-      "tweak_id": "system.services.disable-print-notifications",
-      "qa_tweak_id": "system.services.disable-print-notifications",
-      "candidate_id": "system.services.disable-print-notifications",
-      "record_id": "system.services.disable-print-notifications",
-      "category": "System",
-      "name": "Print Notification Service",
-      "documentation": "research/records/system.services.disable-print-notifications.json",
+      "tweak_id": "visibility.hide-people-bar",
+      "qa_tweak_id": "visibility.hide-people-bar",
+      "candidate_id": "visibility.hide-people-bar",
+      "record_id": "visibility.hide-people-bar",
+      "category": "Visibility",
+      "name": "People Bar on the Taskbar",
+      "documentation": "research/records/visibility.hide-people-bar.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect system.services.disable-print-notifications",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect visibility.hide-people-bar",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.services.disable-print-notifications' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.services.disable-print-notifications.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.services.disable-print-notifications' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.services.disable-print-notifications.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.services.disable-print-notifications' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.services.disable-print-notifications.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.services.disable-print-notifications' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.services.disable-print-notifications.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'system.services.disable-print-notifications'"
-      },
-      "expected_report": {
-        "success": true,
-        "status": "ok",
-        "rollback_requested": true,
-        "required_stages": [
-          "detect-before",
-          "apply",
-          "rollback",
-          "detect-after"
-        ],
-        "required_card_snapshot": {
-          "required_fields": [
-            "TweakId",
-            "Name",
-            "Category",
-            "EvidenceClass",
-            "ResearchStatus",
-            "RollbackSnapshotState",
-            "HasClaimBoundary",
-            "WhatWeKnowSummary",
-            "WhatWeDoNotClaimSummary",
-            "ProofLanes"
-          ],
-          "required_proof_lanes": [
-            "docs",
-            "runtime",
-            "source",
-            "rollback"
-          ],
-          "claim_boundary_required": true
-        },
-        "required_stage_assertions": [
-          "apply stage reports a successful apply story",
-          "rollback stage reports a successful rollback story",
-          "detect-after is present"
-        ]
-      }
-    },
-    {
-      "tweak_id": "system.services.disable-print-spooler",
-      "qa_tweak_id": "system.services.disable-print-spooler",
-      "candidate_id": "system.services.disable-print-spooler",
-      "record_id": "system.services.disable-print-spooler",
-      "category": "System",
-      "name": "Print Spooler Service",
-      "documentation": "research/records/system.services.disable-print-spooler.json",
-      "promotion_state": "promoted",
-      "apply_allowed": true,
-      "restore_default_supported": true,
-      "restore_previous_supported": true,
-      "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect system.services.disable-print-spooler",
-        "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.services.disable-print-spooler' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.services.disable-print-spooler.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.services.disable-print-spooler' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.services.disable-print-spooler.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.services.disable-print-spooler' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.services.disable-print-spooler.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.services.disable-print-spooler' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.services.disable-print-spooler.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'system.services.disable-print-spooler'"
-      },
-      "expected_report": {
-        "success": true,
-        "status": "ok",
-        "rollback_requested": true,
-        "required_stages": [
-          "detect-before",
-          "apply",
-          "rollback",
-          "detect-after"
-        ],
-        "required_card_snapshot": {
-          "required_fields": [
-            "TweakId",
-            "Name",
-            "Category",
-            "EvidenceClass",
-            "ResearchStatus",
-            "RollbackSnapshotState",
-            "HasClaimBoundary",
-            "WhatWeKnowSummary",
-            "WhatWeDoNotClaimSummary",
-            "ProofLanes"
-          ],
-          "required_proof_lanes": [
-            "docs",
-            "runtime",
-            "source",
-            "rollback"
-          ],
-          "claim_boundary_required": true
-        },
-        "required_stage_assertions": [
-          "apply stage reports a successful apply story",
-          "rollback stage reports a successful rollback story",
-          "detect-after is present"
-        ]
-      }
-    },
-    {
-      "tweak_id": "system.services.disable-windows-search",
-      "qa_tweak_id": "system.services.disable-windows-search",
-      "candidate_id": "system.services.disable-windows-search",
-      "record_id": "system.services.disable-windows-search",
-      "category": "System",
-      "name": "Windows Search Service",
-      "documentation": "research/records/system.services.disable-windows-search.json",
-      "promotion_state": "promoted",
-      "apply_allowed": true,
-      "restore_default_supported": true,
-      "restore_previous_supported": true,
-      "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect system.services.disable-windows-search",
-        "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.services.disable-windows-search' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.services.disable-windows-search.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.services.disable-windows-search' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.services.disable-windows-search.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.services.disable-windows-search' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.services.disable-windows-search.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.services.disable-windows-search' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.services.disable-windows-search.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'system.services.disable-windows-search'"
-      },
-      "expected_report": {
-        "success": true,
-        "status": "ok",
-        "rollback_requested": true,
-        "required_stages": [
-          "detect-before",
-          "apply",
-          "rollback",
-          "detect-after"
-        ],
-        "required_card_snapshot": {
-          "required_fields": [
-            "TweakId",
-            "Name",
-            "Category",
-            "EvidenceClass",
-            "ResearchStatus",
-            "RollbackSnapshotState",
-            "HasClaimBoundary",
-            "WhatWeKnowSummary",
-            "WhatWeDoNotClaimSummary",
-            "ProofLanes"
-          ],
-          "required_proof_lanes": [
-            "docs",
-            "runtime",
-            "source",
-            "rollback"
-          ],
-          "claim_boundary_required": true
-        },
-        "required_stage_assertions": [
-          "apply stage reports a successful apply story",
-          "rollback stage reports a successful rollback story",
-          "detect-after is present"
-        ]
-      }
-    },
-    {
-      "tweak_id": "system.verbose-status-messages",
-      "qa_tweak_id": "system.verbose-status-messages",
-      "candidate_id": "system.verbose-status-messages",
-      "record_id": "system.verbose-status-messages",
-      "category": "System",
-      "name": "Verbose Status Messages",
-      "documentation": "research/records/system.verbose-status-messages.json",
-      "promotion_state": "promoted",
-      "apply_allowed": true,
-      "restore_default_supported": true,
-      "restore_previous_supported": true,
-      "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect system.verbose-status-messages",
-        "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.verbose-status-messages' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.verbose-status-messages.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.verbose-status-messages' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.verbose-status-messages.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.verbose-status-messages' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.verbose-status-messages.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.verbose-status-messages' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.verbose-status-messages.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'system.verbose-status-messages'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'visibility.hide-people-bar' --qa-output 'C:\\Tools\\ValidationController\\smoke\\visibility.hide-people-bar.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'visibility.hide-people-bar' --qa-output 'C:\\Tools\\ValidationController\\smoke\\visibility.hide-people-bar.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'visibility.hide-people-bar' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\visibility.hide-people-bar.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'visibility.hide-people-bar' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\visibility.hide-people-bar.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'visibility.hide-people-bar'"
       },
       "expected_report": {
         "success": true,
@@ -323,7 +143,7 @@
   ],
   "run_results": [
     {
-      "tweak_id": "system.services.disable-connected-user-experiences",
+      "tweak_id": "visibility.disable-window-animations",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -360,19 +180,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "system.services.disable-connected-user-experiences",
-        "TweakName": "Connected User Experiences and Telemetry Service",
+        "TweakId": "visibility.disable-window-animations",
+        "TweakName": "Window Animations",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "system.services.disable-connected-user-experiences",
-          "Name": "Connected User Experiences and Telemetry Service",
-          "Category": "System",
-          "Description": "This service handles Windows telemetry and connected-user-experience data collection. Disabling it reduces diagnostic and usage reporting, but some connected-experience features can lose functionality.",
-          "FriendlyDescription": "This service handles Windows telemetry and connected-user-experience data collection. Disabling it reduces diagnostic and usage reporting, but some connected-experience features can lose functionality.",
-          "RegistryPath": "",
+          "TweakId": "visibility.disable-window-animations",
+          "Name": "Window Animations",
+          "Category": "Visibility",
+          "Description": "Windows can animate windows when they open, close, minimize, and restore. This policy decides whether those window animations are allowed.",
+          "FriendlyDescription": "Windows can animate windows when they open, close, minimize, and restore. This policy decides whether those window animations are allowed.",
+          "RegistryPath": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DWM\\DisallowAnimations",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -380,15 +200,15 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: This service handles Windows telemetry and connected-user-experience data collection. Disabling it reduces diagnostic and usage reporting, but some connected-experience features can lose functionality. Evidence: The Microsoft services guidance page explicitly lists the DiagTrack service, its Automatic baseline, its telemetry role, and that it is OK to disable. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: Windows can animate windows when they open, close, minimize, and restore. This policy decides whether those window animations are allowed. Evidence: The local official Microsoft ADMX file names the same DWM machine policy surface used by the app. The paired ADML help text documents that enabling the policy turns window animations off and disabling or not configuring it keeps them on. Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "The Microsoft services guidance page explicitly lists the DiagTrack service, its Automatic baseline, its telemetry role, and that it is OK to disable.",
-              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services"
+              "Summary": "The local official Microsoft ADMX file names the same DWM machine policy surface used by the app. The paired ADML help text documents that enabling the policy turns window animations off and disabling or not configuring it keeps them on.",
+              "Source": "Validation proof source: evidence/files/external/c/WINDOWS/PolicyDefinitions/DWM.admx"
             },
             {
               "Key": "runtime",
@@ -419,8 +239,8 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: System (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\system\\system.md",
+              "Title": "Docs: Visibility",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\visibility\\visibility.md#visibility.disable-window-animations",
               "Kind": "Docs"
             }
           ]
@@ -429,10 +249,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Detected 1 of 1 services. Current state: Automatic.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Window animations blocked'.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Automatic",
-            "TargetValue": "Disabled",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Window animations blocked",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -441,8 +261,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 1 of 1 services. Current state: Automatic.\nServices:\n- DiagTrack: Automatic (Running) -> Disabled",
-                "TimestampText": "11:11:36"
+                "Message": "Current values do not match a named option. Selected option is 'Window animations blocked'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DWM\\DisallowAnimations: missing -> 1",
+                "TimestampText": "11:13:23"
               },
               {
                 "Action": "Apply",
@@ -469,8 +289,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Disabled",
-            "TargetValue": "Disabled",
+            "CurrentValue": "Window animations blocked",
+            "TargetValue": "Window animations blocked",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -479,20 +299,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 1 of 1 services. Current state: Automatic.\nServices:\n- DiagTrack: Automatic (Running) -> Disabled",
-                "TimestampText": "11:11:36"
+                "Message": "Current values do not match a named option. Selected option is 'Window animations blocked'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DWM\\DisallowAnimations: missing -> 1",
+                "TimestampText": "11:13:23"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Updated 1 services.",
-                "TimestampText": "11:11:36"
+                "Message": "Applied preset 'Window animations blocked'.",
+                "TimestampText": "11:13:26"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified service start modes.",
-                "TimestampText": "11:11:36"
+                "Message": "Verified preset 'Window animations blocked'.",
+                "TimestampText": "11:13:26"
               },
               {
                 "Action": "Rollback",
@@ -505,10 +325,10 @@
           {
             "Stage": "rollback",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Rolled back service start modes.",
+            "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Disabled",
-            "TargetValue": "Disabled",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Window animations blocked",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -517,36 +337,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 1 of 1 services. Current state: Automatic.\nServices:\n- DiagTrack: Automatic (Running) -> Disabled",
-                "TimestampText": "11:11:36"
+                "Message": "Current values do not match a named option. Selected option is 'Window animations blocked'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DWM\\DisallowAnimations: missing -> 1",
+                "TimestampText": "11:13:23"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Updated 1 services.",
-                "TimestampText": "11:11:36"
+                "Message": "Applied preset 'Window animations blocked'.",
+                "TimestampText": "11:13:26"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified service start modes.",
-                "TimestampText": "11:11:36"
+                "Message": "Verified preset 'Window animations blocked'.",
+                "TimestampText": "11:13:26"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
-                "Message": "Rolled back service start modes.",
-                "TimestampText": "11:11:36"
+                "Message": "Rolled back registry values.",
+                "TimestampText": "11:13:26"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Detected 1 of 1 services. Current state: Automatic.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Window animations blocked'.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Automatic",
-            "TargetValue": "Disabled",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Window animations blocked",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -555,40 +375,40 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 1 of 1 services. Current state: Automatic.\nServices:\n- DiagTrack: Automatic (Running) -> Disabled",
-                "TimestampText": "11:11:36"
+                "Message": "Current values do not match a named option. Selected option is 'Window animations blocked'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DWM\\DisallowAnimations: missing -> 1",
+                "TimestampText": "11:13:26"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Updated 1 services.",
-                "TimestampText": "11:11:36"
+                "Message": "Applied preset 'Window animations blocked'.",
+                "TimestampText": "11:13:26"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified service start modes.",
-                "TimestampText": "11:11:36"
+                "Message": "Verified preset 'Window animations blocked'.",
+                "TimestampText": "11:13:26"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
-                "Message": "Rolled back service start modes.",
-                "TimestampText": "11:11:36"
+                "Message": "Rolled back registry values.",
+                "TimestampText": "11:13:26"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T18:11:33.1192808+00:00",
-        "CompletedAtUtc": "2026-05-07T18:11:36.9543541+00:00"
+        "StartedAtUtc": "2026-05-07T18:13:23.692109+00:00",
+        "CompletedAtUtc": "2026-05-07T18:13:26.8658353+00:00"
       },
-      "qa_tweak_id": "system.services.disable-connected-user-experiences",
-      "candidate_id": "system.services.disable-connected-user-experiences",
-      "card_name": "Connected User Experiences and Telemetry Service",
-      "documentation": "research/records/system.services.disable-connected-user-experiences.json"
+      "qa_tweak_id": "visibility.disable-window-animations",
+      "candidate_id": "visibility.disable-window-animations",
+      "card_name": "Window Animations",
+      "documentation": "research/records/visibility.disable-window-animations.json"
     },
     {
-      "tweak_id": "system.services.disable-print-notifications",
+      "tweak_id": "visibility.hide-people-bar",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -625,19 +445,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "system.services.disable-print-notifications",
-        "TweakName": "Print Notification Service",
+        "TweakId": "visibility.hide-people-bar",
+        "TweakName": "People Bar on the Taskbar",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "system.services.disable-print-notifications",
-          "Name": "Print Notification Service",
-          "Category": "System",
-          "Description": "This service opens custom printer dialogs and handles printer notifications. Disabling it removes those printer notifications and related extension dialogs.",
-          "FriendlyDescription": "This service opens custom printer dialogs and handles printer notifications. Disabling it removes those printer notifications and related extension dialogs.",
-          "RegistryPath": "",
+          "TweakId": "visibility.hide-people-bar",
+          "Name": "People Bar on the Taskbar",
+          "Category": "Visibility",
+          "Description": "Windows used to offer a People Bar icon on the taskbar for quick contact access. This policy decides whether that feature is shown for the current user.",
+          "FriendlyDescription": "Windows used to offer a People Bar icon on the taskbar for quick contact access. This policy decides whether that feature is shown for the current user.",
+          "RegistryPath": "HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer\\HidePeopleBar",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -645,15 +465,15 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: This service opens custom printer dialogs and handles printer notifications. Disabling it removes those printer notifications and related extension dialogs. Evidence: The Microsoft services guidance page lists the PrintNotify service under Printer Extensions and Notifications, gives its Manual baseline, describes the effect of turning it off, and marks it OK to disable. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: Windows used to offer a People Bar icon on the taskbar for quick contact access. This policy decides whether that feature is shown for the current user. Evidence: Local official ADMX defines the exact user-policy key and value name; local ADML confirms that enabling the policy removes the People Bar and disables the My People experience. Added nohuto mirror corroboration via nohuto-hidepeoplebar-admx. Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "The Microsoft services guidance page lists the PrintNotify service under Printer Extensions and Notifications, gives its Manual baseline, describes the effect of turning it off, and marks it OK to disable.",
-              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services"
+              "Summary": "Local official ADMX defines the exact user-policy key and value name; local ADML confirms that enabling the policy removes the People Bar and disables the My People experience. Added nohuto mirror corroboration via nohuto-hidepeoplebar-admx.",
+              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/StartMenu.admx"
             },
             {
               "Key": "runtime",
@@ -684,8 +504,8 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: System (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\system\\system.md",
+              "Title": "Docs: Visibility",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\visibility\\visibility.md#visibility.hide-people-bar",
               "Kind": "Docs"
             }
           ]
@@ -694,10 +514,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Detected 1 of 1 services. Current state: Manual.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'People Bar hidden'.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Manual",
-            "TargetValue": "Disabled",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "People Bar hidden",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -706,8 +526,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 1 of 1 services. Current state: Manual.\nServices:\n- PrintNotify: Manual (Stopped) -> Disabled",
-                "TimestampText": "11:11:45"
+                "Message": "Current values do not match a named option. Selected option is 'People Bar hidden'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer\\HidePeopleBar: missing -> 1",
+                "TimestampText": "11:13:32"
               },
               {
                 "Action": "Apply",
@@ -734,8 +554,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Disabled",
-            "TargetValue": "Disabled",
+            "CurrentValue": "People Bar hidden",
+            "TargetValue": "People Bar hidden",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -744,20 +564,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 1 of 1 services. Current state: Manual.\nServices:\n- PrintNotify: Manual (Stopped) -> Disabled",
-                "TimestampText": "11:11:45"
+                "Message": "Current values do not match a named option. Selected option is 'People Bar hidden'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer\\HidePeopleBar: missing -> 1",
+                "TimestampText": "11:13:33"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Updated 1 services.",
-                "TimestampText": "11:11:45"
+                "Message": "Applied preset 'People Bar hidden'.",
+                "TimestampText": "11:13:33"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified service start modes.",
-                "TimestampText": "11:11:45"
+                "Message": "Verified preset 'People Bar hidden'.",
+                "TimestampText": "11:13:33"
               },
               {
                 "Action": "Rollback",
@@ -770,10 +590,10 @@
           {
             "Stage": "rollback",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Rolled back service start modes.",
+            "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Disabled",
-            "TargetValue": "Disabled",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "People Bar hidden",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -782,36 +602,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 1 of 1 services. Current state: Manual.\nServices:\n- PrintNotify: Manual (Stopped) -> Disabled",
-                "TimestampText": "11:11:45"
+                "Message": "Current values do not match a named option. Selected option is 'People Bar hidden'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer\\HidePeopleBar: missing -> 1",
+                "TimestampText": "11:13:33"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Updated 1 services.",
-                "TimestampText": "11:11:45"
+                "Message": "Applied preset 'People Bar hidden'.",
+                "TimestampText": "11:13:33"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified service start modes.",
-                "TimestampText": "11:11:45"
+                "Message": "Verified preset 'People Bar hidden'.",
+                "TimestampText": "11:13:33"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
-                "Message": "Rolled back service start modes.",
-                "TimestampText": "11:11:45"
+                "Message": "Rolled back registry values.",
+                "TimestampText": "11:13:33"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Detected 1 of 1 services. Current state: Manual.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'People Bar hidden'.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Manual",
-            "TargetValue": "Disabled",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "People Bar hidden",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -820,846 +640,46 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 1 of 1 services. Current state: Manual.\nServices:\n- PrintNotify: Manual (Stopped) -> Disabled",
-                "TimestampText": "11:11:45"
+                "Message": "Current values do not match a named option. Selected option is 'People Bar hidden'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer\\HidePeopleBar: missing -> 1",
+                "TimestampText": "11:13:33"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Updated 1 services.",
-                "TimestampText": "11:11:45"
+                "Message": "Applied preset 'People Bar hidden'.",
+                "TimestampText": "11:13:33"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified service start modes.",
-                "TimestampText": "11:11:45"
+                "Message": "Verified preset 'People Bar hidden'.",
+                "TimestampText": "11:13:33"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
-                "Message": "Rolled back service start modes.",
-                "TimestampText": "11:11:45"
+                "Message": "Rolled back registry values.",
+                "TimestampText": "11:13:33"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T18:11:42.4242725+00:00",
-        "CompletedAtUtc": "2026-05-07T18:11:45.6802895+00:00"
+        "StartedAtUtc": "2026-05-07T18:13:32.9787516+00:00",
+        "CompletedAtUtc": "2026-05-07T18:13:33.2646287+00:00"
       },
-      "qa_tweak_id": "system.services.disable-print-notifications",
-      "candidate_id": "system.services.disable-print-notifications",
-      "card_name": "Print Notification Service",
-      "documentation": "research/records/system.services.disable-print-notifications.json"
-    },
-    {
-      "tweak_id": "system.services.disable-print-spooler",
-      "host_exit": 0,
-      "execution_exit": 0,
-      "payload_status": "completed",
-      "report_source": "stdout",
-      "report_parse_error": null,
-      "report_fetch_status": null,
-      "report_app_success": true,
-      "report_success": true,
-      "report_status": "ok",
-      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
-      "report_contract_status": "ok",
-      "report_contract_summary": "QA card snapshot contract passed.",
-      "report_contract_failures": [],
-      "report_card_present": true,
-      "report_card_has_claim_boundary": true,
-      "report_card_present_fields": [
-        "TweakId",
-        "Name",
-        "Category",
-        "EvidenceClass",
-        "ResearchStatus",
-        "RollbackSnapshotState",
-        "HasClaimBoundary",
-        "WhatWeKnowSummary",
-        "WhatWeDoNotClaimSummary",
-        "ProofLanes"
-      ],
-      "report_card_missing_fields": [],
-      "report_card_proof_lanes": [
-        "docs",
-        "runtime",
-        "source",
-        "rollback"
-      ],
-      "report_card_missing_proof_lanes": [],
-      "report": {
-        "TweakId": "system.services.disable-print-spooler",
-        "TweakName": "Print Spooler Service",
-        "Success": true,
-        "Status": "ok",
-        "Summary": "Apply/verify path completed and rollback restored the tweak.",
-        "RollbackRequested": true,
-        "Card": {
-          "TweakId": "system.services.disable-print-spooler",
-          "Name": "Print Spooler Service",
-          "Category": "System",
-          "Description": "Print Spooler handles print jobs and manages interaction with printers. Disabling it removes Windows printing support on the device.",
-          "FriendlyDescription": "Print Spooler handles print jobs and manages interaction with printers. Disabling it removes Windows printing support on the device.",
-          "RegistryPath": "",
-          "EvidenceClass": "A",
-          "EvidenceClassTitle": "Cross-Layer Verified",
-          "ResearchStatus": "PROMOTED",
-          "IsMutationAllowed": true,
-          "RollbackSnapshotState": "ready",
-          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
-          "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Print Spooler handles print jobs and manages interaction with printers. Disabling it removes Windows printing support on the device. Evidence: The Microsoft services guidance page explicitly lists the Spooler service, its Automatic baseline, the effect of turning it off, and that it is OK to disable. Rollback: Rollback: Verified via record-restore-story.",
-          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
-          "ProofLanes": [
-            {
-              "Key": "docs",
-              "Label": "DOCS",
-              "State": "ready",
-              "Summary": "The Microsoft services guidance page explicitly lists the Spooler service, its Automatic baseline, the effect of turning it off, and that it is OK to disable.",
-              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services"
-            },
-            {
-              "Key": "runtime",
-              "Label": "RUNTIME",
-              "State": "ready",
-              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
-              "Source": ""
-            },
-            {
-              "Key": "source",
-              "Label": "SOURCE",
-              "State": "ready",
-              "Summary": "No upstream nohuto source link is attached to this record.",
-              "Source": ""
-            },
-            {
-              "Key": "rollback",
-              "Label": "ROLLBACK",
-              "State": "ready",
-              "Summary": "Rollback: Verified via record-restore-story.",
-              "Source": "record-restore-story"
-            }
-          ],
-          "ReferenceLinks": [
-            {
-              "Title": "Docs: Details (missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
-              "Kind": "Details"
-            },
-            {
-              "Title": "Docs: System (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\system\\system.md",
-              "Kind": "Docs"
-            }
-          ]
-        },
-        "Stages": [
-          {
-            "Stage": "detect-before",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Detected 1 of 1 services. Current state: Automatic.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Automatic",
-            "TargetValue": "Disabled",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": false,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Detected 1 of 1 services. Current state: Automatic.\nServices:\n- Spooler: Automatic (Running) -> Disabled",
-                "TimestampText": "11:11:54"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "apply",
-            "AppliedStatus": "Applied",
-            "StatusMessage": "Run completed.",
-            "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Disabled",
-            "TargetValue": "Disabled",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Detected 1 of 1 services. Current state: Automatic.\nServices:\n- Spooler: Automatic (Running) -> Disabled",
-                "TimestampText": "11:11:54"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Updated 1 services.",
-                "TimestampText": "11:11:54"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified service start modes.",
-                "TimestampText": "11:11:54"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Not required",
-                "Message": "Step not executed.",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "rollback",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Rolled back service start modes.",
-            "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Disabled",
-            "TargetValue": "Disabled",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Detected 1 of 1 services. Current state: Automatic.\nServices:\n- Spooler: Automatic (Running) -> Disabled",
-                "TimestampText": "11:11:54"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Updated 1 services.",
-                "TimestampText": "11:11:54"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified service start modes.",
-                "TimestampText": "11:11:54"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Rolled back service start modes.",
-                "TimestampText": "11:11:55"
-              }
-            ]
-          },
-          {
-            "Stage": "detect-after",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Detected 1 of 1 services. Current state: Automatic.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Automatic",
-            "TargetValue": "Disabled",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Detected 1 of 1 services. Current state: Automatic.\nServices:\n- Spooler: Automatic (Running) -> Disabled",
-                "TimestampText": "11:11:55"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Updated 1 services.",
-                "TimestampText": "11:11:54"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified service start modes.",
-                "TimestampText": "11:11:54"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Rolled back service start modes.",
-                "TimestampText": "11:11:55"
-              }
-            ]
-          }
-        ],
-        "StartedAtUtc": "2026-05-07T18:11:51.8169278+00:00",
-        "CompletedAtUtc": "2026-05-07T18:11:55.2829289+00:00"
-      },
-      "qa_tweak_id": "system.services.disable-print-spooler",
-      "candidate_id": "system.services.disable-print-spooler",
-      "card_name": "Print Spooler Service",
-      "documentation": "research/records/system.services.disable-print-spooler.json"
-    },
-    {
-      "tweak_id": "system.services.disable-windows-search",
-      "host_exit": 0,
-      "execution_exit": 0,
-      "payload_status": "completed",
-      "report_source": "stdout",
-      "report_parse_error": null,
-      "report_fetch_status": null,
-      "report_app_success": true,
-      "report_success": true,
-      "report_status": "ok",
-      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
-      "report_contract_status": "ok",
-      "report_contract_summary": "QA card snapshot contract passed.",
-      "report_contract_failures": [],
-      "report_card_present": true,
-      "report_card_has_claim_boundary": true,
-      "report_card_present_fields": [
-        "TweakId",
-        "Name",
-        "Category",
-        "EvidenceClass",
-        "ResearchStatus",
-        "RollbackSnapshotState",
-        "HasClaimBoundary",
-        "WhatWeKnowSummary",
-        "WhatWeDoNotClaimSummary",
-        "ProofLanes"
-      ],
-      "report_card_missing_fields": [],
-      "report_card_proof_lanes": [
-        "docs",
-        "runtime",
-        "source",
-        "rollback"
-      ],
-      "report_card_missing_proof_lanes": [],
-      "report": {
-        "TweakId": "system.services.disable-windows-search",
-        "TweakName": "Windows Search Service",
-        "Success": true,
-        "Status": "ok",
-        "Summary": "Apply/verify path completed and rollback restored the tweak.",
-        "RollbackRequested": true,
-        "Card": {
-          "TweakId": "system.services.disable-windows-search",
-          "Name": "Windows Search Service",
-          "Category": "System",
-          "Description": "Windows Search builds and maintains an index so file, email, and content searches can return indexed results without a full content crawl. Disabling it reduces indexing activity, but it also removes the indexed search experience.",
-          "FriendlyDescription": "Windows Search builds and maintains an index so file, email, and content searches can return indexed results without a full content crawl. Disabling it reduces indexing activity, but it also removes the indexed search experience.",
-          "RegistryPath": "",
-          "EvidenceClass": "A",
-          "EvidenceClassTitle": "Cross-Layer Verified",
-          "ResearchStatus": "PROMOTED",
-          "IsMutationAllowed": true,
-          "RollbackSnapshotState": "ready",
-          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
-          "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Windows Search builds and maintains an index so file, email, and content searches can return indexed results without a full content crawl. Disabling it reduces indexing activity, but it also removes the indexed search experience. Evidence: The QGA receipt proves the exact SCM control surface and current VM state on Windows build 26200.8246 without mutation. Microsoft service guidance remains the evidence for the documented baseline and OK-to-disable decision. Rollback: Rollback: Verified via record-restore-story.",
-          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
-          "ProofLanes": [
-            {
-              "Key": "docs",
-              "Label": "DOCS",
-              "State": "ready",
-              "Summary": "The QGA receipt proves the exact SCM control surface and current VM state on Windows build 26200.8246 without mutation. Microsoft service guidance remains the evidence for the documented baseline and OK-to-disable decision.",
-              "Source": "Validation proof source: evidence/captures/system-services-disable-windows-search-service-qga-20260507.json"
-            },
-            {
-              "Key": "runtime",
-              "Label": "RUNTIME",
-              "State": "ready",
-              "Summary": "A 2026-05-07 non-mutating QGA service inspection captured `sc qc WSearch`, the backing `HKLM\\SYSTEM\\CurrentControlSet\\Services\\WSearch` / `Start` value, and PowerShell `Win32_Service`/`Get-Service` output. The guest confirmed exact service identity `WSearch...",
-              "Source": "QGA service inspection receipt for WSearch: evidence/captures/system-services-disable-windows-search-service-qga-20260507.json and evidence/raw/service-inspection/power-disable-windows-search-service-qga-20260507/service-inspection.json"
-            },
-            {
-              "Key": "source",
-              "Label": "SOURCE",
-              "State": "ready",
-              "Summary": "No upstream nohuto source link is attached to this record.",
-              "Source": ""
-            },
-            {
-              "Key": "rollback",
-              "Label": "ROLLBACK",
-              "State": "ready",
-              "Summary": "Rollback: Verified via record-restore-story.",
-              "Source": "record-restore-story"
-            }
-          ],
-          "ReferenceLinks": [
-            {
-              "Title": "Docs: Details (missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
-              "Kind": "Details"
-            },
-            {
-              "Title": "Docs: System (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\system\\system.md",
-              "Kind": "Docs"
-            }
-          ]
-        },
-        "Stages": [
-          {
-            "Stage": "detect-before",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Detected 1 of 1 services. Current state: Automatic.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Automatic",
-            "TargetValue": "Disabled",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": false,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Detected 1 of 1 services. Current state: Automatic.\nServices:\n- WSearch: Automatic (Running) -> Disabled",
-                "TimestampText": "11:12:05"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "apply",
-            "AppliedStatus": "Applied",
-            "StatusMessage": "Run completed.",
-            "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Disabled",
-            "TargetValue": "Disabled",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Detected 1 of 1 services. Current state: Automatic.\nServices:\n- WSearch: Automatic (Running) -> Disabled",
-                "TimestampText": "11:12:05"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Updated 1 services.",
-                "TimestampText": "11:12:05"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified service start modes.",
-                "TimestampText": "11:12:05"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Not required",
-                "Message": "Step not executed.",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "rollback",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Rolled back service start modes.",
-            "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Disabled",
-            "TargetValue": "Disabled",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Detected 1 of 1 services. Current state: Automatic.\nServices:\n- WSearch: Automatic (Running) -> Disabled",
-                "TimestampText": "11:12:05"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Updated 1 services.",
-                "TimestampText": "11:12:05"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified service start modes.",
-                "TimestampText": "11:12:05"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Rolled back service start modes.",
-                "TimestampText": "11:12:05"
-              }
-            ]
-          },
-          {
-            "Stage": "detect-after",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Detected 1 of 1 services. Current state: Automatic.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Automatic",
-            "TargetValue": "Disabled",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Detected 1 of 1 services. Current state: Automatic.\nServices:\n- WSearch: Automatic (Running) -> Disabled",
-                "TimestampText": "11:12:05"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Updated 1 services.",
-                "TimestampText": "11:12:05"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified service start modes.",
-                "TimestampText": "11:12:05"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Rolled back service start modes.",
-                "TimestampText": "11:12:05"
-              }
-            ]
-          }
-        ],
-        "StartedAtUtc": "2026-05-07T18:12:02.2263767+00:00",
-        "CompletedAtUtc": "2026-05-07T18:12:05.9147529+00:00"
-      },
-      "qa_tweak_id": "system.services.disable-windows-search",
-      "candidate_id": "system.services.disable-windows-search",
-      "card_name": "Windows Search Service",
-      "documentation": "research/records/system.services.disable-windows-search.json"
-    },
-    {
-      "tweak_id": "system.verbose-status-messages",
-      "host_exit": 0,
-      "execution_exit": 0,
-      "payload_status": "completed",
-      "report_source": "stdout",
-      "report_parse_error": null,
-      "report_fetch_status": null,
-      "report_app_success": true,
-      "report_success": true,
-      "report_status": "ok",
-      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
-      "report_contract_status": "ok",
-      "report_contract_summary": "QA card snapshot contract passed.",
-      "report_contract_failures": [],
-      "report_card_present": true,
-      "report_card_has_claim_boundary": true,
-      "report_card_present_fields": [
-        "TweakId",
-        "Name",
-        "Category",
-        "EvidenceClass",
-        "ResearchStatus",
-        "RollbackSnapshotState",
-        "HasClaimBoundary",
-        "WhatWeKnowSummary",
-        "WhatWeDoNotClaimSummary",
-        "ProofLanes"
-      ],
-      "report_card_missing_fields": [],
-      "report_card_proof_lanes": [
-        "docs",
-        "runtime",
-        "source",
-        "rollback"
-      ],
-      "report_card_missing_proof_lanes": [],
-      "report": {
-        "TweakId": "system.verbose-status-messages",
-        "TweakName": "Verbose Status Messages",
-        "Success": true,
-        "Status": "ok",
-        "Summary": "Apply/verify path completed and rollback restored the tweak.",
-        "RollbackRequested": true,
-        "Card": {
-          "TweakId": "system.verbose-status-messages",
-          "Name": "Verbose Status Messages",
-          "Category": "System",
-          "Description": "Windows can either show simple loading screens or more detailed status text during startup, shutdown, sign-in, and sign-out. This policy decides whether the detailed messages are shown.",
-          "FriendlyDescription": "Windows can either show simple loading screens or more detailed status text during startup, shutdown, sign-in, and sign-out. This policy decides whether the detailed messages are shown.",
-          "RegistryPath": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\VerboseStatus",
-          "EvidenceClass": "A",
-          "EvidenceClassTitle": "Cross-Layer Verified",
-          "ResearchStatus": "PROMOTED",
-          "IsMutationAllowed": true,
-          "RollbackSnapshotState": "ready",
-          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
-          "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Windows can either show simple loading screens or more detailed status text during startup, shutdown, sign-in, and sign-out. This policy decides whether the detailed messages are shown. Evidence: Local official ADMX defines the exact machine-policy key and value name; local ADML confirms that the policy enables highly detailed status messages during system transitions. Rollback: Rollback: Verified via record-restore-story.",
-          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
-          "ProofLanes": [
-            {
-              "Key": "docs",
-              "Label": "DOCS",
-              "State": "ready",
-              "Summary": "Local official ADMX defines the exact machine-policy key and value name; local ADML confirms that the policy enables highly detailed status messages during system transitions.",
-              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/Logon.admx"
-            },
-            {
-              "Key": "runtime",
-              "Label": "RUNTIME",
-              "State": "ready",
-              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
-              "Source": ""
-            },
-            {
-              "Key": "source",
-              "Label": "SOURCE",
-              "State": "ready",
-              "Summary": "No upstream nohuto source link is attached to this record.",
-              "Source": ""
-            },
-            {
-              "Key": "rollback",
-              "Label": "ROLLBACK",
-              "State": "ready",
-              "Summary": "Rollback: Verified via record-restore-story.",
-              "Source": "record-restore-story"
-            }
-          ],
-          "ReferenceLinks": [
-            {
-              "Title": "Docs: Details (missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
-              "Kind": "Details"
-            },
-            {
-              "Title": "Docs: Win-Config",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\win-config\\batch-01.md#system.verbose-status-messages",
-              "Kind": "Docs"
-            },
-            {
-              "Title": "Docs: System (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\system\\system.md",
-              "Kind": "Docs"
-            }
-          ]
-        },
-        "Stages": [
-          {
-            "Stage": "detect-before",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Value not set.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Not set",
-            "TargetValue": "1 (0x1)",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": false,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Value not set.",
-                "TimestampText": "11:12:12"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "apply",
-            "AppliedStatus": "Applied",
-            "StatusMessage": "Run completed.",
-            "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "1 (0x1)",
-            "TargetValue": "1 (0x1)",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Value not set.",
-                "TimestampText": "11:12:12"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Set value to 1.",
-                "TimestampText": "11:12:15"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified desired value.",
-                "TimestampText": "11:12:15"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Not required",
-                "Message": "Step not executed.",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "rollback",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Removed value to restore default.",
-            "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "1 (0x1)",
-            "TargetValue": "1 (0x1)",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Value not set.",
-                "TimestampText": "11:12:12"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Set value to 1.",
-                "TimestampText": "11:12:15"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified desired value.",
-                "TimestampText": "11:12:15"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Removed value to restore default.",
-                "TimestampText": "11:12:15"
-              }
-            ]
-          },
-          {
-            "Stage": "detect-after",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Value not set.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Not set",
-            "TargetValue": "1 (0x1)",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Value not set.",
-                "TimestampText": "11:12:15"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Set value to 1.",
-                "TimestampText": "11:12:15"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified desired value.",
-                "TimestampText": "11:12:15"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Removed value to restore default.",
-                "TimestampText": "11:12:15"
-              }
-            ]
-          }
-        ],
-        "StartedAtUtc": "2026-05-07T18:12:12.5882027+00:00",
-        "CompletedAtUtc": "2026-05-07T18:12:15.8313954+00:00"
-      },
-      "qa_tweak_id": "system.verbose-status-messages",
-      "candidate_id": "system.verbose-status-messages",
-      "card_name": "Verbose Status Messages",
-      "documentation": "research/records/system.verbose-status-messages.json"
+      "qa_tweak_id": "visibility.hide-people-bar",
+      "candidate_id": "visibility.hide-people-bar",
+      "card_name": "People Bar on the Taskbar",
+      "documentation": "research/records/visibility.hide-people-bar.json"
     }
   ],
   "summary": {
-    "planned_count": 5,
-    "planned_apply_allowed_count": 5,
-    "live_success_count": 5,
+    "planned_count": 2,
+    "planned_apply_allowed_count": 2,
+    "live_success_count": 2,
     "live_failure_count": 0,
     "categories": [
-      "System"
+      "Visibility"
     ]
   }
 }
