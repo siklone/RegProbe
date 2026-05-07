@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-07T09:38:23.5201495Z",
+  "record_id": "system.memory-paged-pool-dynamic",
+  "run_id": "system-memory-paged-pool-dynamic-etw-qga-unblock-20260507",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management",
+  "value_name": "PagedPoolSize",
+  "attempt_status": "qga_unblocked_ingest_ok",
+  "assessment": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and a normalized bundle with 4450 registry events and 577 caller-stack events. The bundle contains an exact RegQueryValue event for HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management / PagedPoolSize from the helper probe, returning 0x80000005 on the clean baseline.",
+  "target_observation": {
+    "exact_value_query": true,
+    "operation": "RegQueryValue",
+    "representative_status": "0x80000005",
+    "event_count": 4450,
+    "caller_stack_event_count": 577,
+    "target_key_event_count": 12,
+    "target_value_event_count": 1,
+    "target_command_event_count": 2,
+    "launch_transport": "qga"
+  },
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/system-memory-paged-pool-dynamic-etw-qga-unblock-20260507/system-memory-paged-pool-dynamic-etw-qga-unblock-20260507-summary.json",
+      "sha256": "a8a9d42849426ab1e19ffb0f44d9df41848e1d0645e68e28854d2591cab40673",
+      "size": 7857,
+      "collected_utc": "2026-05-07T09:38:23.5201495Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/system-memory-paged-pool-dynamic-etw-qga-unblock-20260507/normalized-registry-bundle.json",
+      "sha256": "f81e6359f9531feaa68511d3e0a2a39a6db4804d7e390725528ea21236dfe23d",
+      "size": 5562927,
+      "collected_utc": "2026-05-07T09:38:23.5201495Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/system-memory-paged-pool-dynamic-etw-qga-unblock-20260507/system-memory-paged-pool-dynamic-etw-qga-unblock-20260507.etl",
+      "sha256": "fa97f044b901c430bd554dca1334db6b613eb362f3906ad131a5bef33b8b65af",
+      "size": 12582912,
+      "collected_utc": "2026-05-07T09:38:23.5201495Z"
+    }
+  ]
+}

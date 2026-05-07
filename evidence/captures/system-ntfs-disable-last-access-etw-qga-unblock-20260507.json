@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-07T09:39:54.9236305Z",
+  "record_id": "system.ntfs-disable-last-access",
+  "run_id": "system-ntfs-disable-last-access-etw-qga-unblock-20260507",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem",
+  "value_name": "NtfsDisableLastAccessUpdate",
+  "attempt_status": "qga_unblocked_ingest_ok",
+  "assessment": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and a normalized bundle with 4447 registry events and 572 caller-stack events. The bundle contains an exact RegQueryValue event for HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem / NtfsDisableLastAccessUpdate from the helper probe, returning 0x80000005 on the clean baseline.",
+  "target_observation": {
+    "exact_value_query": true,
+    "operation": "RegQueryValue",
+    "representative_status": "0x80000005",
+    "event_count": 4447,
+    "caller_stack_event_count": 572,
+    "target_key_event_count": 13,
+    "target_value_event_count": 1,
+    "target_command_event_count": 2,
+    "launch_transport": "qga"
+  },
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/system-ntfs-disable-last-access-etw-qga-unblock-20260507/system-ntfs-disable-last-access-etw-qga-unblock-20260507-summary.json",
+      "sha256": "ac24e41c8d3b7f843ecbd0b2e81a1364e6057d52bca1b4c7d06029b396cd0a15",
+      "size": 7804,
+      "collected_utc": "2026-05-07T09:39:54.9236305Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/system-ntfs-disable-last-access-etw-qga-unblock-20260507/normalized-registry-bundle.json",
+      "sha256": "479d44cfbf98fc04741dc083f886f554b17ad40356f960166d335e6c19254af6",
+      "size": 5532769,
+      "collected_utc": "2026-05-07T09:39:54.9236305Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/system-ntfs-disable-last-access-etw-qga-unblock-20260507/system-ntfs-disable-last-access-etw-qga-unblock-20260507.etl",
+      "sha256": "6d7cb5a10021fa17309411fd63127d8dc7f0b226591f80308f8400fd0d71137b",
+      "size": 12582912,
+      "collected_utc": "2026-05-07T09:39:54.9236305Z"
+    }
+  ]
+}

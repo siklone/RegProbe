@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-07T09:36:52.3119378Z",
+  "record_id": "system.memory-nonpaged-pool-dynamic",
+  "run_id": "system-memory-nonpaged-pool-dynamic-etw-qga-unblock-20260507",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management",
+  "value_name": "NonPagedPoolSize",
+  "attempt_status": "qga_unblocked_ingest_ok",
+  "assessment": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and a normalized bundle with 4389 registry events and 527 caller-stack events. The bundle contains an exact RegQueryValue event for HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management / NonPagedPoolSize from the helper probe, returning 0x80000005 on the clean baseline.",
+  "target_observation": {
+    "exact_value_query": true,
+    "operation": "RegQueryValue",
+    "representative_status": "0x80000005",
+    "event_count": 4389,
+    "caller_stack_event_count": 527,
+    "target_key_event_count": 12,
+    "target_value_event_count": 1,
+    "target_command_event_count": 2,
+    "launch_transport": "qga"
+  },
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/system-memory-nonpaged-pool-dynamic-etw-qga-unblock-20260507/system-memory-nonpaged-pool-dynamic-etw-qga-unblock-20260507-summary.json",
+      "sha256": "d7ae29e67c5bbd90e2f007b009ae15b818db793d931fade16f11825cbf7fe9e0",
+      "size": 7956,
+      "collected_utc": "2026-05-07T09:36:52.3119378Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/system-memory-nonpaged-pool-dynamic-etw-qga-unblock-20260507/normalized-registry-bundle.json",
+      "sha256": "62c51abdff9a44b7d7486ec322ae482d353f7c1a98cb833f79b27bcd91ade1ac",
+      "size": 5518219,
+      "collected_utc": "2026-05-07T09:36:52.3119378Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/system-memory-nonpaged-pool-dynamic-etw-qga-unblock-20260507/system-memory-nonpaged-pool-dynamic-etw-qga-unblock-20260507.etl",
+      "sha256": "a6ba590bf318d7bbd3b61518aaabf49362c3c40fe385f65ddffc8454e30c0732",
+      "size": 12582912,
+      "collected_utc": "2026-05-07T09:36:52.3119378Z"
+    }
+  ]
+}

@@ -227,6 +227,21 @@
       "strength": "low"
     },
     {
+      "evidence_id": "vm-visibility.disable-acrylic-logon-etw-qga-unblock-20260507",
+      "kind": "etw-trace",
+      "title": "QGA-first ETW stackwalk runtime receipt for DisableAcrylicBackgroundOnLogon",
+      "location": "evidence/captures/visibility-disable-acrylic-logon-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/visibility-disable-acrylic-logon-etw-qga-unblock-20260507/visibility-disable-acrylic-logon-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/visibility-disable-acrylic-logon-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/visibility-disable-acrylic-logon-etw-qga-unblock-20260507/visibility-disable-acrylic-logon-etw-qga-unblock-20260507.etl",
+      "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4620 registry events with 636 caller-stack events. The bundle contains an exact helper-triggered `RegQueryValue` for `HKLM\\Software\\Policies\\Microsoft\\Windows\\System` / `DisableAcrylicBackgroundOnLogon`, returning `0xC0000034` on the clean baseline.",
+      "supports": [
+        "runtime-observation",
+        "tooling-fix",
+        "path",
+        "value",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
       "evidence_id": "vm-visibility.disable-acrylic-logon-ghidra-launch-receipt-20260427",
       "kind": "vm-test",
       "title": "Guest Ghidra launch receipt for DisableAcrylicBackgroundOnLogon",
@@ -248,7 +263,7 @@
     "why": "The local Microsoft Logon.admx file explicitly defines DisableAcrylicBackgroundOnLogon under Software\\Policies\\Microsoft\\Windows\\System, and the paired ADML help text documents that enabling the policy shows the logon background without blur. The app writes that exact enabled state.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-28T18:44:26Z",
+  "last_reviewed_utc": "2026-05-07T09:41:24.3749056Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/WINDOWS/PolicyDefinitions/Logon.admx",
     "exact_quote_or_path": "<policy name=\"DisableAcrylicBackgroundOnLogon\" class=\"Machine\" ... key=\"Software\\Policies\\Microsoft\\Windows\\System\" valueName=\"DisableAcrylicBackgroundOnLogon\">",
@@ -281,11 +296,11 @@
     },
     "runtime_capture_reviewed": {
       "etw-stackwalk": true,
-      "status": "ensure_admin_shell_timeout_after_qga_fallback"
+      "status": "qga_unblocked_ingest_ok"
     },
     "etw_stackwalk_reviewed": true,
-    "etw_stackwalk_review_status": "ensure_admin_shell_timeout_after_qga_fallback",
-    "etw_stackwalk_review_artifact": "evidence/captures/visibility-disable-acrylic-logon-etw-stackwalk-attempt-20260427.json",
+    "etw_stackwalk_review_status": "qga_unblocked_ingest_ok",
+    "etw_stackwalk_review_artifact": "evidence/captures/visibility-disable-acrylic-logon-etw-qga-unblock-20260507.json",
     "static_reviewed": {
       "ghidra": true,
       "status": "ensure_admin_shell_timeout"
@@ -293,6 +308,6 @@
     "ghidra": true,
     "ghidra_status": "ensure_admin_shell_timeout",
     "ghidra_artifact": "evidence/raw/ghidra/ghidra-visibility-disable-acrylic-logon-20260427a/summary.json",
-    "notes": "A bounded 2026-04-27 ETW retry for `DisableAcrylicBackgroundOnLogon` never reached trace collection because QGA guest-exec failed during guest-dir setup and the send-key fallback still timed out in `ensure-admin-shell`. A same-day fast guest Ghidra retry for `DisableAcrylicBackgroundOnLogon` also failed in `ensure-admin-shell` with the same bounded timeout, so no xref bundle reached the host."
+    "notes": "A bounded 2026-04-27 ETW retry for `DisableAcrylicBackgroundOnLogon` never reached trace collection because QGA guest-exec failed during guest-dir setup and the send-key fallback still timed out in `ensure-admin-shell`. A same-day fast guest Ghidra retry for `DisableAcrylicBackgroundOnLogon` also failed in `ensure-admin-shell` with the same bounded timeout, so no xref bundle reached the host. A 2026-05-07 QGA-first ETW stackwalk rerun cleared the earlier QGA/send-key blocker and produced an exact helper-triggered `RegQueryValue` for `DisableAcrylicBackgroundOnLogon` with caller-stack capture."
   }
 }

@@ -234,6 +234,21 @@
       "strength": "low"
     },
     {
+      "evidence_id": "vm-system.enable-hags-etw-qga-unblock-20260507",
+      "kind": "etw-trace",
+      "title": "QGA-first ETW stackwalk runtime receipt for HwSchMode",
+      "location": "evidence/captures/system-enable-hags-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/system-enable-hags-etw-qga-unblock-20260507/system-enable-hags-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/system-enable-hags-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/system-enable-hags-etw-qga-unblock-20260507/system-enable-hags-etw-qga-unblock-20260507.etl",
+      "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4551 registry events with 570 caller-stack events. The bundle contains an exact helper-triggered `RegQueryValue` for `HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers` / `HwSchMode`, returning `0xC0000034` on the clean baseline.",
+      "supports": [
+        "runtime-observation",
+        "tooling-fix",
+        "path",
+        "value",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
       "evidence_id": "vm-system.enable-hags-ghidra-launch-receipt-20260427",
       "kind": "vm-test",
       "title": "Guest Ghidra launch receipt for HwSchMode",
@@ -255,7 +270,7 @@
     "why": "Guest-side reversible probe on Win25H2Clean confirmed HwSchMode transitions through missing, 2, and 1, and then restored the guest baseline back to missing. The app mapping matches the observed enabled profile on this build.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-28T17:11:29Z",
+  "last_reviewed_utc": "2026-05-07T09:35:23.0708594Z",
   "source_enrichment": {
     "last_updated_utc": "2026-04-28T17:11:29Z",
     "source_mirror_reviewed": {
@@ -282,11 +297,11 @@
     },
     "runtime_capture_reviewed": {
       "etw-stackwalk": true,
-      "status": "ensure_admin_shell_timeout_after_qga_fallback"
+      "status": "qga_unblocked_ingest_ok"
     },
     "etw_stackwalk_reviewed": true,
-    "etw_stackwalk_review_status": "ensure_admin_shell_timeout_after_qga_fallback",
-    "etw_stackwalk_review_artifact": "evidence/captures/system-enable-hags-etw-stackwalk-attempt-20260427.json",
+    "etw_stackwalk_review_status": "qga_unblocked_ingest_ok",
+    "etw_stackwalk_review_artifact": "evidence/captures/system-enable-hags-etw-qga-unblock-20260507.json",
     "static_reviewed": {
       "ghidra": true,
       "status": "ensure_admin_shell_timeout"
@@ -294,6 +309,6 @@
     "ghidra": true,
     "ghidra_status": "ensure_admin_shell_timeout",
     "ghidra_artifact": "evidence/raw/ghidra/ghidra-system-enable-hags-20260427b/summary.json",
-    "notes": "A bounded 2026-04-27 ETW retry for `HwSchMode` never reached trace collection. QGA guest-exec failed during guest-dir setup, the runner fell back to send-key launch, and the fallback still timed out in `ensure-admin-shell` before any ETW artifact reached the host. A same-day fast guest Ghidra retry for `HwSchMode` failed in `ensure-admin-shell` with a bounded timeout, so no xref bundle reached the host."
+    "notes": "A bounded 2026-04-27 ETW retry for `HwSchMode` never reached trace collection. QGA guest-exec failed during guest-dir setup, the runner fell back to send-key launch, and the fallback still timed out in `ensure-admin-shell` before any ETW artifact reached the host. A same-day fast guest Ghidra retry for `HwSchMode` failed in `ensure-admin-shell` with a bounded timeout, so no xref bundle reached the host. A 2026-05-07 QGA-first ETW stackwalk rerun cleared the earlier QGA/send-key blocker and produced an exact helper-triggered `RegQueryValue` for `HwSchMode` with caller-stack capture."
   }
 }

@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-07T09:35:23.0708594Z",
+  "record_id": "system.enable-hags",
+  "run_id": "system-enable-hags-etw-qga-unblock-20260507",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers",
+  "value_name": "HwSchMode",
+  "attempt_status": "qga_unblocked_ingest_ok",
+  "assessment": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and a normalized bundle with 4551 registry events and 570 caller-stack events. The bundle contains an exact RegQueryValue event for HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers / HwSchMode from the helper probe, returning 0xC0000034 on the clean baseline.",
+  "target_observation": {
+    "exact_value_query": true,
+    "operation": "RegQueryValue",
+    "representative_status": "0xC0000034",
+    "event_count": 4551,
+    "caller_stack_event_count": 570,
+    "target_key_event_count": 8,
+    "target_value_event_count": 1,
+    "target_command_event_count": 2,
+    "launch_transport": "qga"
+  },
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/system-enable-hags-etw-qga-unblock-20260507/system-enable-hags-etw-qga-unblock-20260507-summary.json",
+      "sha256": "e318d000c65430a9af02fef42016e56a985e31d89ea7b8e6839c54e933103935",
+      "size": 7333,
+      "collected_utc": "2026-05-07T09:35:23.0708594Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/system-enable-hags-etw-qga-unblock-20260507/normalized-registry-bundle.json",
+      "sha256": "6f0edc1bca1eb01af37ba14d226e2002b25a53fc5aac0ea5a03165bb72f7f086",
+      "size": 5340069,
+      "collected_utc": "2026-05-07T09:35:23.0708594Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/system-enable-hags-etw-qga-unblock-20260507/system-enable-hags-etw-qga-unblock-20260507.etl",
+      "sha256": "b93a8e87a0f13e728be7768fc5cf9f695c8ccd1ec0b8b2a9f203082e91f77913",
+      "size": 12582912,
+      "collected_utc": "2026-05-07T09:35:23.0708594Z"
+    }
+  ]
+}

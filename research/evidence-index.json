@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-07T09:29:18.991988Z",
+  "generated_utc": "2026-05-07T09:45:35.202544Z",
   "summary": {
     "total_records": 356,
     "validated": 255,
@@ -20,7 +20,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-05-07T09:29:18.711595Z",
+      "generated_utc": "2026-05-07T09:45:34.872528Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -92648,6 +92648,22 @@
           "origin": "unspecified"
         },
         {
+          "evidence_id": "vm-system.bsod-display-parameters-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk runtime receipt for DisplayParameters",
+          "location": "evidence/captures/system-bsod-display-parameters-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/system-bsod-display-parameters-etw-qga-unblock-20260507/system-bsod-display-parameters-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/system-bsod-display-parameters-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/system-bsod-display-parameters-etw-qga-unblock-20260507/system-bsod-display-parameters-etw-qga-unblock-20260507.etl",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 5139 registry events with 1181 caller-stack events. The bundle contains an exact helper-triggered `RegQueryValue` for `HKLM\\SYSTEM\\CurrentControlSet\\Control\\CrashControl` / `DisplayParameters`, returning `0xC0000034` on the clean baseline.",
+          "strength": "high",
+          "supports": [
+            "runtime-observation",
+            "tooling-fix",
+            "path",
+            "value",
+            "version-scope"
+          ],
+          "origin": "unspecified"
+        },
+        {
           "evidence_id": "vm-system.bsod-display-parameters-ghidra-launch-receipt-20260427",
           "kind": "vm-test",
           "title": "Guest Ghidra launch receipt for DisplayParameters",
@@ -95634,6 +95650,21 @@
           "strength": "low",
           "supports": [
             "behavior",
+            "version-scope"
+          ],
+          "origin": "unspecified"
+        },
+        {
+          "evidence_id": "vm-system.disable-restartable-apps-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk runtime receipt for RestartApps",
+          "location": "evidence/captures/system-disable-restartable-apps-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/system-disable-restartable-apps-etw-qga-unblock-20260507/system-disable-restartable-apps-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/system-disable-restartable-apps-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/system-disable-restartable-apps-etw-qga-unblock-20260507/system-disable-restartable-apps-etw-qga-unblock-20260507.etl",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4490 registry events with 524 caller-stack events. The QGA-launched helper targeted `HKCU\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon` / `RestartApps` and the bundle contains target-key activity, but no exact `RestartApps` RegQueryValue event was observed on the clean baseline.",
+          "strength": "medium",
+          "supports": [
+            "runtime-observation",
+            "tooling-fix",
+            "path",
             "version-scope"
           ],
           "origin": "unspecified"
@@ -98922,6 +98953,22 @@
           "strength": "low",
           "supports": [
             "behavior",
+            "version-scope"
+          ],
+          "origin": "unspecified"
+        },
+        {
+          "evidence_id": "vm-system.enable-hags-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk runtime receipt for HwSchMode",
+          "location": "evidence/captures/system-enable-hags-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/system-enable-hags-etw-qga-unblock-20260507/system-enable-hags-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/system-enable-hags-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/system-enable-hags-etw-qga-unblock-20260507/system-enable-hags-etw-qga-unblock-20260507.etl",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4551 registry events with 570 caller-stack events. The bundle contains an exact helper-triggered `RegQueryValue` for `HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers` / `HwSchMode`, returning `0xC0000034` on the clean baseline.",
+          "strength": "high",
+          "supports": [
+            "runtime-observation",
+            "tooling-fix",
+            "path",
+            "value",
             "version-scope"
           ],
           "origin": "unspecified"
@@ -103023,6 +103070,22 @@
           "origin": "unspecified"
         },
         {
+          "evidence_id": "vm-system.memory-nonpaged-pool-dynamic-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk runtime receipt for NonPagedPoolSize",
+          "location": "evidence/captures/system-memory-nonpaged-pool-dynamic-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/system-memory-nonpaged-pool-dynamic-etw-qga-unblock-20260507/system-memory-nonpaged-pool-dynamic-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/system-memory-nonpaged-pool-dynamic-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/system-memory-nonpaged-pool-dynamic-etw-qga-unblock-20260507/system-memory-nonpaged-pool-dynamic-etw-qga-unblock-20260507.etl",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4389 registry events with 527 caller-stack events. The bundle contains an exact helper-triggered `RegQueryValue` for `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management` / `NonPagedPoolSize`, returning `0x80000005` on the clean baseline.",
+          "strength": "high",
+          "supports": [
+            "runtime-observation",
+            "tooling-fix",
+            "path",
+            "value",
+            "version-scope"
+          ],
+          "origin": "unspecified"
+        },
+        {
           "evidence_id": "vm-system.memory-nonpaged-pool-dynamic-ghidra-launch-receipt-20260427",
           "kind": "vm-test",
           "title": "Guest Ghidra launch receipt for NonPagedPoolSize",
@@ -103286,6 +103349,22 @@
           "strength": "low",
           "supports": [
             "behavior",
+            "version-scope"
+          ],
+          "origin": "unspecified"
+        },
+        {
+          "evidence_id": "vm-system.memory-paged-pool-dynamic-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk runtime receipt for PagedPoolSize",
+          "location": "evidence/captures/system-memory-paged-pool-dynamic-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/system-memory-paged-pool-dynamic-etw-qga-unblock-20260507/system-memory-paged-pool-dynamic-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/system-memory-paged-pool-dynamic-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/system-memory-paged-pool-dynamic-etw-qga-unblock-20260507/system-memory-paged-pool-dynamic-etw-qga-unblock-20260507.etl",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4450 registry events with 577 caller-stack events. The bundle contains an exact helper-triggered `RegQueryValue` for `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management` / `PagedPoolSize`, returning `0x80000005` on the clean baseline.",
+          "strength": "high",
+          "supports": [
+            "runtime-observation",
+            "tooling-fix",
+            "path",
+            "value",
             "version-scope"
           ],
           "origin": "unspecified"
@@ -104190,6 +104269,22 @@
           "strength": "low",
           "supports": [
             "behavior",
+            "version-scope"
+          ],
+          "origin": "unspecified"
+        },
+        {
+          "evidence_id": "vm-system.ntfs-disable-last-access-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk runtime receipt for NtfsDisableLastAccessUpdate",
+          "location": "evidence/captures/system-ntfs-disable-last-access-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/system-ntfs-disable-last-access-etw-qga-unblock-20260507/system-ntfs-disable-last-access-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/system-ntfs-disable-last-access-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/system-ntfs-disable-last-access-etw-qga-unblock-20260507/system-ntfs-disable-last-access-etw-qga-unblock-20260507.etl",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4447 registry events with 572 caller-stack events. The bundle contains an exact helper-triggered `RegQueryValue` for `HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem` / `NtfsDisableLastAccessUpdate`, returning `0x80000005` on the clean baseline.",
+          "strength": "high",
+          "supports": [
+            "runtime-observation",
+            "tooling-fix",
+            "path",
+            "value",
             "version-scope"
           ],
           "origin": "unspecified"
@@ -108971,6 +109066,22 @@
           "strength": "low",
           "supports": [
             "behavior",
+            "version-scope"
+          ],
+          "origin": "unspecified"
+        },
+        {
+          "evidence_id": "vm-visibility.disable-acrylic-logon-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk runtime receipt for DisableAcrylicBackgroundOnLogon",
+          "location": "evidence/captures/visibility-disable-acrylic-logon-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/visibility-disable-acrylic-logon-etw-qga-unblock-20260507/visibility-disable-acrylic-logon-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/visibility-disable-acrylic-logon-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/visibility-disable-acrylic-logon-etw-qga-unblock-20260507/visibility-disable-acrylic-logon-etw-qga-unblock-20260507.etl",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4620 registry events with 636 caller-stack events. The bundle contains an exact helper-triggered `RegQueryValue` for `HKLM\\Software\\Policies\\Microsoft\\Windows\\System` / `DisableAcrylicBackgroundOnLogon`, returning `0xC0000034` on the clean baseline.",
+          "strength": "high",
+          "supports": [
+            "runtime-observation",
+            "tooling-fix",
+            "path",
+            "value",
             "version-scope"
           ],
           "origin": "unspecified"
