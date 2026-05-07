@@ -1,7 +1,7 @@
 {
   "schema_version": "1.0",
   "evaluator_version": "3.6.0",
-  "generated_utc": "2026-05-07T09:45:34.675179Z",
+  "generated_utc": "2026-05-07T10:03:10.977027Z",
   "summary": {
     "total_records": 356,
     "promotion_state_counts": {
@@ -117,7 +117,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.566192Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.866330Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -145,7 +145,7 @@
         "has_rollback_context": true
       },
       "evidence_status": {
-        "evidence_count": 6,
+        "evidence_count": 7,
         "next_missing_layer": "none",
         "has_procmon_evidence": false,
         "has_ghidra_evidence": false,
@@ -217,19 +217,19 @@
         "last_known_good_build": "26100",
         "current_build": "26100",
         "builds_since": 0,
-        "last_verified_at": "2026-04-29T18:35:00Z",
+        "last_verified_at": "2026-05-07T09:47:53.3825217Z",
         "last_known_good_verification_context": {
           "backend_id": "rai-linux-vm",
           "tested_build": "26100",
           "current_build": "26100",
-          "last_verified_at": "2026-04-29T18:35:00Z"
+          "last_verified_at": "2026-05-07T09:47:53.3825217Z"
         }
       },
       "verification_context": {
         "backend_id": "rai-linux-vm",
         "current_build": "26100",
         "tested_build": "26100",
-        "last_verified_at": "2026-04-29T18:35:00Z",
+        "last_verified_at": "2026-05-07T09:47:53.3825217Z",
         "stale_reason": null,
         "revalidation_needed": false,
         "last_known_good_build": "26100"
@@ -256,7 +256,7 @@
       "app_mapping_status": "unknown",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.566569Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.866709Z",
       "score_breakdown": {
         "static_evidence_strength": 2,
         "runtime_evidence_strength": 2,
@@ -387,7 +387,7 @@
       "app_mapping_status": "unknown",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.566853Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.867004Z",
       "score_breakdown": {
         "static_evidence_strength": 2,
         "runtime_evidence_strength": 1,
@@ -516,7 +516,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.567211Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.867372Z",
       "score_breakdown": {
         "static_evidence_strength": 4,
         "runtime_evidence_strength": 3,
@@ -655,7 +655,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.567533Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.867693Z",
       "score_breakdown": {
         "static_evidence_strength": 4,
         "runtime_evidence_strength": 3,
@@ -797,7 +797,7 @@
       "app_mapping_status": "unknown",
       "next_missing_layer": "validation-proof",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.567826Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.867987Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 1,
@@ -933,7 +933,7 @@
       "app_mapping_status": "unknown",
       "next_missing_layer": "validation-proof",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.568113Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.868275Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 1,
@@ -1065,7 +1065,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.568418Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.868584Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 3,
@@ -1208,7 +1208,7 @@
       "app_mapping_status": "unknown",
       "next_missing_layer": "validation-proof",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.568691Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.868857Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 1,
@@ -1344,7 +1344,7 @@
       "app_mapping_status": "unknown",
       "next_missing_layer": "validation-proof",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.568947Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.869123Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 2,
@@ -1484,7 +1484,7 @@
       "app_mapping_status": "unknown",
       "next_missing_layer": "validation-proof",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.569212Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.869387Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 1,
@@ -1620,7 +1620,7 @@
       "app_mapping_status": "unknown",
       "next_missing_layer": "validation-proof",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.569504Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.869660Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 1,
@@ -1756,7 +1756,7 @@
       "app_mapping_status": "unknown",
       "next_missing_layer": "validation-proof",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.569796Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.869936Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 1,
@@ -1892,7 +1892,7 @@
       "app_mapping_status": "unknown",
       "next_missing_layer": "validation-proof",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.570075Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.870213Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 1,
@@ -2028,7 +2028,7 @@
       "app_mapping_status": "unknown",
       "next_missing_layer": "validation-proof",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.570347Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.870526Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 1,
@@ -2164,7 +2164,7 @@
       "app_mapping_status": "unknown",
       "next_missing_layer": "validation-proof",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.570613Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.870895Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 1,
@@ -2300,7 +2300,7 @@
       "app_mapping_status": "unknown",
       "next_missing_layer": "validation-proof",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.570877Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.871201Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 1,
@@ -2436,7 +2436,7 @@
       "app_mapping_status": "unknown",
       "next_missing_layer": "validation-proof",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.571146Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.871473Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 1,
@@ -2572,7 +2572,7 @@
       "app_mapping_status": "unknown",
       "next_missing_layer": "validation-proof",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.571409Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.871735Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 1,
@@ -2708,7 +2708,7 @@
       "app_mapping_status": "unknown",
       "next_missing_layer": "validation-proof",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.571666Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.872007Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 1,
@@ -2840,7 +2840,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.571947Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.872294Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -2974,7 +2974,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.572252Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.872601Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -3111,7 +3111,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.572545Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.872920Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 3,
@@ -3139,7 +3139,7 @@
         "has_rollback_context": true
       },
       "evidence_status": {
-        "evidence_count": 5,
+        "evidence_count": 6,
         "next_missing_layer": "none",
         "has_procmon_evidence": true,
         "has_ghidra_evidence": false,
@@ -3213,19 +3213,19 @@
         "last_known_good_build": "26100",
         "current_build": "26100",
         "builds_since": 0,
-        "last_verified_at": "2026-04-29T20:15:00Z",
+        "last_verified_at": "2026-05-07T09:49:22.7370600Z",
         "last_known_good_verification_context": {
           "backend_id": "rai-linux-vm",
           "tested_build": "26100",
           "current_build": "26100",
-          "last_verified_at": "2026-04-29T20:15:00Z"
+          "last_verified_at": "2026-05-07T09:49:22.7370600Z"
         }
       },
       "verification_context": {
         "backend_id": "rai-linux-vm",
         "current_build": "26100",
         "tested_build": "26100",
-        "last_verified_at": "2026-04-29T20:15:00Z",
+        "last_verified_at": "2026-05-07T09:49:22.7370600Z",
         "stale_reason": null,
         "revalidation_needed": false,
         "last_known_good_build": "26100"
@@ -3250,7 +3250,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.572855Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.873268Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -3278,7 +3278,7 @@
         "has_rollback_context": true
       },
       "evidence_status": {
-        "evidence_count": 6,
+        "evidence_count": 7,
         "next_missing_layer": "none",
         "has_procmon_evidence": false,
         "has_ghidra_evidence": false,
@@ -3350,19 +3350,19 @@
         "last_known_good_build": "26100",
         "current_build": "26100",
         "builds_since": 0,
-        "last_verified_at": "2026-04-30T00:20:00Z",
+        "last_verified_at": "2026-05-07T09:50:51.8708812Z",
         "last_known_good_verification_context": {
           "backend_id": "rai-linux-vm",
           "tested_build": "26100",
           "current_build": "26100",
-          "last_verified_at": "2026-04-30T00:20:00Z"
+          "last_verified_at": "2026-05-07T09:50:51.8708812Z"
         }
       },
       "verification_context": {
         "backend_id": "rai-linux-vm",
         "current_build": "26100",
         "tested_build": "26100",
-        "last_verified_at": "2026-04-30T00:20:00Z",
+        "last_verified_at": "2026-05-07T09:50:51.8708812Z",
         "stale_reason": null,
         "revalidation_needed": false,
         "last_known_good_build": "26100"
@@ -3387,7 +3387,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.573146Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.873582Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -3415,7 +3415,7 @@
         "has_rollback_context": true
       },
       "evidence_status": {
-        "evidence_count": 5,
+        "evidence_count": 6,
         "next_missing_layer": "none",
         "has_procmon_evidence": false,
         "has_ghidra_evidence": false,
@@ -3487,19 +3487,19 @@
         "last_known_good_build": "26100",
         "current_build": "26100",
         "builds_since": 0,
-        "last_verified_at": "2026-04-29T20:15:00Z",
+        "last_verified_at": "2026-05-07T09:52:21.2139183Z",
         "last_known_good_verification_context": {
           "backend_id": "rai-linux-vm",
           "tested_build": "26100",
           "current_build": "26100",
-          "last_verified_at": "2026-04-29T20:15:00Z"
+          "last_verified_at": "2026-05-07T09:52:21.2139183Z"
         }
       },
       "verification_context": {
         "backend_id": "rai-linux-vm",
         "current_build": "26100",
         "tested_build": "26100",
-        "last_verified_at": "2026-04-29T20:15:00Z",
+        "last_verified_at": "2026-05-07T09:52:21.2139183Z",
         "stale_reason": null,
         "revalidation_needed": false,
         "last_known_good_build": "26100"
@@ -3524,7 +3524,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.573479Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.873933Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -3552,7 +3552,7 @@
         "has_rollback_context": true
       },
       "evidence_status": {
-        "evidence_count": 7,
+        "evidence_count": 8,
         "next_missing_layer": "none",
         "has_procmon_evidence": false,
         "has_ghidra_evidence": false,
@@ -3625,19 +3625,19 @@
         "last_known_good_build": "26100",
         "current_build": "26100",
         "builds_since": 0,
-        "last_verified_at": "2026-04-29T20:15:00Z",
+        "last_verified_at": "2026-05-07T09:49:22.7370600Z",
         "last_known_good_verification_context": {
           "backend_id": "rai-linux-vm",
           "tested_build": "26100",
           "current_build": "26100",
-          "last_verified_at": "2026-04-29T20:15:00Z"
+          "last_verified_at": "2026-05-07T09:49:22.7370600Z"
         }
       },
       "verification_context": {
         "backend_id": "rai-linux-vm",
         "current_build": "26100",
         "tested_build": "26100",
-        "last_verified_at": "2026-04-29T20:15:00Z",
+        "last_verified_at": "2026-05-07T09:49:22.7370600Z",
         "stale_reason": null,
         "revalidation_needed": false,
         "last_known_good_build": "26100"
@@ -3662,7 +3662,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.573765Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.874228Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -3801,7 +3801,7 @@
       "app_mapping_status": "unknown",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.574081Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.874544Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -3932,7 +3932,7 @@
       "app_mapping_status": "unknown",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.574353Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.874810Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -4063,7 +4063,7 @@
       "app_mapping_status": "unknown",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.574615Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.875081Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -4194,7 +4194,7 @@
       "app_mapping_status": "mismatch-suspected",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.574912Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.875386Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -4323,7 +4323,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.575234Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.875726Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 3,
@@ -4351,7 +4351,7 @@
         "has_rollback_context": true
       },
       "evidence_status": {
-        "evidence_count": 7,
+        "evidence_count": 8,
         "next_missing_layer": "none",
         "has_procmon_evidence": true,
         "has_ghidra_evidence": false,
@@ -4426,19 +4426,19 @@
         "last_known_good_build": "26100",
         "current_build": "26100",
         "builds_since": 0,
-        "last_verified_at": "2026-04-29T20:15:00Z",
+        "last_verified_at": "2026-05-07T09:53:52.3649659Z",
         "last_known_good_verification_context": {
           "backend_id": "rai-linux-vm",
           "tested_build": "26100",
           "current_build": "26100",
-          "last_verified_at": "2026-04-29T20:15:00Z"
+          "last_verified_at": "2026-05-07T09:53:52.3649659Z"
         }
       },
       "verification_context": {
         "backend_id": "rai-linux-vm",
         "current_build": "26100",
         "tested_build": "26100",
-        "last_verified_at": "2026-04-29T20:15:00Z",
+        "last_verified_at": "2026-05-07T09:53:52.3649659Z",
         "stale_reason": null,
         "revalidation_needed": false,
         "last_known_good_build": "26100"
@@ -4463,7 +4463,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.575472Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.875962Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -4596,7 +4596,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.575727Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.876230Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 4,
@@ -4736,7 +4736,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.576043Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.876540Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -4872,7 +4872,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.576371Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.876868Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -5011,7 +5011,7 @@
       "app_mapping_status": "not-mapped",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.576639Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.877146Z",
       "score_breakdown": {
         "static_evidence_strength": 2,
         "runtime_evidence_strength": 1,
@@ -5140,7 +5140,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.576930Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.877440Z",
       "score_breakdown": {
         "static_evidence_strength": 4,
         "runtime_evidence_strength": 4,
@@ -5280,7 +5280,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.577207Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.877709Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 4,
@@ -5420,7 +5420,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.577472Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.877976Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 4,
@@ -5560,7 +5560,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.577732Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.878237Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 4,
@@ -5700,7 +5700,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.577992Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.878507Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 4,
@@ -5840,7 +5840,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.578263Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.878771Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 4,
@@ -5980,7 +5980,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.578569Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.879088Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -6116,7 +6116,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.578835Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.879366Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 4,
@@ -6256,7 +6256,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.579097Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.879624Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 4,
@@ -6396,7 +6396,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.579364Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.879891Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 4,
@@ -6536,7 +6536,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.579629Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.880159Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 4,
@@ -6676,7 +6676,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.579891Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.880422Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 4,
@@ -6816,7 +6816,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.580150Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.880680Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 3,
@@ -6953,7 +6953,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.580415Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.880947Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 3,
@@ -7094,7 +7094,7 @@
       "app_mapping_status": "unknown",
       "next_missing_layer": "validation-proof",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.580670Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.881212Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 1,
@@ -7229,7 +7229,7 @@
       "app_mapping_status": "unknown",
       "next_missing_layer": "validation-proof",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.580920Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.881470Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 1,
@@ -7364,7 +7364,7 @@
       "app_mapping_status": "unknown",
       "next_missing_layer": "validation-proof",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.581178Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.881725Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 1,
@@ -7499,7 +7499,7 @@
       "app_mapping_status": "unknown",
       "next_missing_layer": "validation-proof",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.581428Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.881974Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 1,
@@ -7634,7 +7634,7 @@
       "app_mapping_status": "unknown",
       "next_missing_layer": "validation-proof",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.581675Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.882236Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 1,
@@ -7769,7 +7769,7 @@
       "app_mapping_status": "unknown",
       "next_missing_layer": "validation-proof",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.581918Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.882485Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 1,
@@ -7901,7 +7901,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.582237Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.882827Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -7929,7 +7929,7 @@
         "has_rollback_context": true
       },
       "evidence_status": {
-        "evidence_count": 6,
+        "evidence_count": 7,
         "next_missing_layer": "none",
         "has_procmon_evidence": false,
         "has_ghidra_evidence": false,
@@ -8000,19 +8000,19 @@
         "last_known_good_build": "26100",
         "current_build": "26100",
         "builds_since": 0,
-        "last_verified_at": "2026-04-30T00:20:00Z",
+        "last_verified_at": "2026-05-07T09:55:21.6444595Z",
         "last_known_good_verification_context": {
           "backend_id": "rai-linux-vm",
           "tested_build": "26100",
           "current_build": "26100",
-          "last_verified_at": "2026-04-30T00:20:00Z"
+          "last_verified_at": "2026-05-07T09:55:21.6444595Z"
         }
       },
       "verification_context": {
         "backend_id": "rai-linux-vm",
         "current_build": "26100",
         "tested_build": "26100",
-        "last_verified_at": "2026-04-30T00:20:00Z",
+        "last_verified_at": "2026-05-07T09:55:21.6444595Z",
         "stale_reason": null,
         "revalidation_needed": false,
         "last_known_good_build": "26100"
@@ -8037,7 +8037,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.582545Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.883142Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -8171,7 +8171,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.582827Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.883452Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -8199,7 +8199,7 @@
         "has_rollback_context": true
       },
       "evidence_status": {
-        "evidence_count": 4,
+        "evidence_count": 5,
         "next_missing_layer": "none",
         "has_procmon_evidence": false,
         "has_ghidra_evidence": false,
@@ -8270,19 +8270,19 @@
         "last_known_good_build": "26100",
         "current_build": "26100",
         "builds_since": 0,
-        "last_verified_at": "2026-04-30T00:20:00Z",
+        "last_verified_at": "2026-05-07T09:56:52.8699827Z",
         "last_known_good_verification_context": {
           "backend_id": "rai-linux-vm",
           "tested_build": "26100",
           "current_build": "26100",
-          "last_verified_at": "2026-04-30T00:20:00Z"
+          "last_verified_at": "2026-05-07T09:56:52.8699827Z"
         }
       },
       "verification_context": {
         "backend_id": "rai-linux-vm",
         "current_build": "26100",
         "tested_build": "26100",
-        "last_verified_at": "2026-04-30T00:20:00Z",
+        "last_verified_at": "2026-05-07T09:56:52.8699827Z",
         "stale_reason": null,
         "revalidation_needed": false,
         "last_known_good_build": "26100"
@@ -8307,7 +8307,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.583132Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.883776Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -8335,7 +8335,7 @@
         "has_rollback_context": true
       },
       "evidence_status": {
-        "evidence_count": 6,
+        "evidence_count": 7,
         "next_missing_layer": "none",
         "has_procmon_evidence": false,
         "has_ghidra_evidence": false,
@@ -8407,19 +8407,19 @@
         "last_known_good_build": "26100",
         "current_build": "26100",
         "builds_since": 0,
-        "last_verified_at": "2026-04-30T00:20:00Z",
+        "last_verified_at": "2026-05-07T09:58:24.0027755Z",
         "last_known_good_verification_context": {
           "backend_id": "rai-linux-vm",
           "tested_build": "26100",
           "current_build": "26100",
-          "last_verified_at": "2026-04-30T00:20:00Z"
+          "last_verified_at": "2026-05-07T09:58:24.0027755Z"
         }
       },
       "verification_context": {
         "backend_id": "rai-linux-vm",
         "current_build": "26100",
         "tested_build": "26100",
-        "last_verified_at": "2026-04-30T00:20:00Z",
+        "last_verified_at": "2026-05-07T09:58:24.0027755Z",
         "stale_reason": null,
         "revalidation_needed": false,
         "last_known_good_build": "26100"
@@ -8444,7 +8444,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.583499Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.884142Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -8578,7 +8578,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.583799Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.884470Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -8606,7 +8606,7 @@
         "has_rollback_context": true
       },
       "evidence_status": {
-        "evidence_count": 5,
+        "evidence_count": 6,
         "next_missing_layer": "none",
         "has_procmon_evidence": false,
         "has_ghidra_evidence": false,
@@ -8678,19 +8678,19 @@
         "last_known_good_build": "26100",
         "current_build": "26100",
         "builds_since": 0,
-        "last_verified_at": "2026-04-30T00:20:00Z",
+        "last_verified_at": "2026-05-07T09:59:55.2474097Z",
         "last_known_good_verification_context": {
           "backend_id": "rai-linux-vm",
           "tested_build": "26100",
           "current_build": "26100",
-          "last_verified_at": "2026-04-30T00:20:00Z"
+          "last_verified_at": "2026-05-07T09:59:55.2474097Z"
         }
       },
       "verification_context": {
         "backend_id": "rai-linux-vm",
         "current_build": "26100",
         "tested_build": "26100",
-        "last_verified_at": "2026-04-30T00:20:00Z",
+        "last_verified_at": "2026-05-07T09:59:55.2474097Z",
         "stale_reason": null,
         "revalidation_needed": false,
         "last_known_good_build": "26100"
@@ -8715,7 +8715,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.584124Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.884804Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -8852,7 +8852,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.584476Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.885153Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -8986,7 +8986,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.584798Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.885479Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -9122,7 +9122,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.585130Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.885812Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -9259,7 +9259,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.585438Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.886130Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -9395,7 +9395,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.585698Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.886395Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -9528,7 +9528,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.586026Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.886721Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -9664,7 +9664,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.586300Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.887001Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -9797,7 +9797,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.586567Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.887287Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -9934,7 +9934,7 @@
       "app_mapping_status": "unknown",
       "next_missing_layer": "validation-proof",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.586836Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.887560Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 1,
@@ -10069,7 +10069,7 @@
       "app_mapping_status": "mismatch-suspected",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.587105Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.887825Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -10198,7 +10198,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.587364Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.888093Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -10331,7 +10331,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.587649Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.888385Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -10469,7 +10469,7 @@
       "app_mapping_status": "unknown",
       "next_missing_layer": "validation-proof",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.587918Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.888656Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 2,
@@ -10605,7 +10605,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.588247Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.888986Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -10739,7 +10739,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.588500Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.889263Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -10872,7 +10872,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.588846Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.889612Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -11005,7 +11005,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.589163Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.889930Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -11140,7 +11140,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.589459Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.890232Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -11276,7 +11276,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.589724Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.890506Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -11409,7 +11409,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.589983Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.890763Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -11542,7 +11542,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.590307Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.891092Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -11677,7 +11677,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.590577Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.891376Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -11810,7 +11810,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.590858Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.891669Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -11943,7 +11943,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.591179Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.891993Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -12078,7 +12078,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.591435Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.892302Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -12212,7 +12212,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.591722Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.892599Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -12346,7 +12346,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.591997Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.892930Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -12480,7 +12480,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.592291Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.893246Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -12614,7 +12614,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.592577Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.893575Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -12748,7 +12748,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.592880Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.893919Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -12881,7 +12881,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.593165Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.894305Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -13014,7 +13014,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.593453Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.894652Z",
       "score_breakdown": {
         "static_evidence_strength": 4,
         "runtime_evidence_strength": 4,
@@ -13158,7 +13158,7 @@
       "app_mapping_status": "unknown",
       "next_missing_layer": "validation-proof",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.593710Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.894940Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 1,
@@ -13293,7 +13293,7 @@
       "app_mapping_status": "unknown",
       "next_missing_layer": "validation-proof",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.593959Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.895237Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 1,
@@ -13425,7 +13425,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.594258Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.895589Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -13558,7 +13558,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.594602Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.895959Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -13694,7 +13694,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.594904Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.896307Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -13830,7 +13830,7 @@
       "app_mapping_status": "unknown",
       "next_missing_layer": "validation-proof",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.595163Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.896608Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 1,
@@ -13965,7 +13965,7 @@
       "app_mapping_status": "unknown",
       "next_missing_layer": "validation-proof",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.595415Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.896872Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 1,
@@ -14100,7 +14100,7 @@
       "app_mapping_status": "unknown",
       "next_missing_layer": "validation-proof",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.595665Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.897165Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 1,
@@ -14235,7 +14235,7 @@
       "app_mapping_status": "unknown",
       "next_missing_layer": "validation-proof",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.595908Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.897480Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 1,
@@ -14369,7 +14369,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "intentional-hold",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.596269Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.897859Z",
       "score_breakdown": {
         "static_evidence_strength": 4,
         "runtime_evidence_strength": 4,
@@ -14513,7 +14513,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "intentional-hold",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.596880Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.898493Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 4,
@@ -14659,7 +14659,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "intentional-hold",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.597470Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.899092Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 4,
@@ -14802,7 +14802,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.597823Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.899451Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 4,
@@ -14945,7 +14945,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "intentional-hold",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.598170Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.899806Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 4,
@@ -15088,7 +15088,7 @@
       "app_mapping_status": "not-mapped",
       "next_missing_layer": "intentional-hold",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.598494Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.900145Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 4,
@@ -15229,7 +15229,7 @@
       "app_mapping_status": "not-mapped",
       "next_missing_layer": "none",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.598821Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.900479Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 3,
@@ -15367,7 +15367,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.599130Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.900787Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 4,
@@ -15508,7 +15508,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.599474Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.901143Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 4,
@@ -15649,7 +15649,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.599811Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.901493Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 4,
@@ -15794,7 +15794,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "intentional-hold",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.600321Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.901994Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 3,
@@ -15941,7 +15941,7 @@
       "app_mapping_status": "not-mapped",
       "next_missing_layer": "intentional-hold",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.600736Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.902413Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 2,
@@ -16077,7 +16077,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "intentional-hold",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.601059Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.902731Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 4,
@@ -16223,7 +16223,7 @@
       "app_mapping_status": "not-mapped",
       "next_missing_layer": "intentional-hold",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.601450Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.903119Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 2,
@@ -16365,7 +16365,7 @@
       "app_mapping_status": "not-mapped",
       "next_missing_layer": "intentional-hold",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.601867Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.903539Z",
       "score_breakdown": {
         "static_evidence_strength": 4,
         "runtime_evidence_strength": 4,
@@ -16506,7 +16506,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.602281Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.903954Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 4,
@@ -16662,7 +16662,7 @@
       "app_mapping_status": "unknown",
       "next_missing_layer": "validation-proof",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.602572Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.904248Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 1,
@@ -16795,7 +16795,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.602964Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.904640Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -16934,7 +16934,7 @@
       "app_mapping_status": "unknown",
       "next_missing_layer": "validation-proof",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.603255Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.904926Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 1,
@@ -17069,7 +17069,7 @@
       "app_mapping_status": "not-mapped",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.603548Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.905232Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -17198,7 +17198,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.603855Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.905545Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -17334,7 +17334,7 @@
       "app_mapping_status": "not-mapped",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.604182Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.905868Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -17465,7 +17465,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.604461Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.906153Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -17602,7 +17602,7 @@
       "app_mapping_status": "unknown",
       "next_missing_layer": "validation-proof",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.604722Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.906421Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 1,
@@ -17739,7 +17739,7 @@
       "app_mapping_status": "unknown",
       "next_missing_layer": "validation-proof",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.605008Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.906706Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 1,
@@ -17872,7 +17872,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.605320Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.907008Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -18010,7 +18010,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.605662Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.907339Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -18149,7 +18149,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.605963Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.907640Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -18288,7 +18288,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.606311Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.907943Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -18427,7 +18427,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.606665Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.908257Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -18562,7 +18562,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.606973Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.908558Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -18699,7 +18699,7 @@
       "app_mapping_status": "mismatch-suspected",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.607261Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.908839Z",
       "score_breakdown": {
         "static_evidence_strength": 2,
         "runtime_evidence_strength": 1,
@@ -18833,7 +18833,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "intentional-hold",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.607870Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.909350Z",
       "score_breakdown": {
         "static_evidence_strength": 4,
         "runtime_evidence_strength": 4,
@@ -18980,7 +18980,7 @@
       "app_mapping_status": "not-mapped",
       "next_missing_layer": "intentional-hold",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.608436Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.909848Z",
       "score_breakdown": {
         "static_evidence_strength": 4,
         "runtime_evidence_strength": 3,
@@ -19124,7 +19124,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.608751Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.910150Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -19258,7 +19258,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.609070Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.910421Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -19393,7 +19393,7 @@
       "app_mapping_status": "partially-matches",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.609392Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.910700Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -19522,7 +19522,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.609712Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.910985Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -19656,7 +19656,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.609992Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.911271Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -19790,7 +19790,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.610294Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.911542Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -19924,7 +19924,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.610646Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.911843Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -20060,7 +20060,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.610970Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.912171Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -20194,7 +20194,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.611375Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.912535Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -20330,7 +20330,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.611750Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.912850Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -20469,7 +20469,7 @@
       "app_mapping_status": "not-mapped",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.612035Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.913114Z",
       "score_breakdown": {
         "static_evidence_strength": 2,
         "runtime_evidence_strength": 1,
@@ -20600,7 +20600,7 @@
       "app_mapping_status": "partially-matches",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.612323Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.913394Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 1,
@@ -20732,7 +20732,7 @@
       "app_mapping_status": "partially-matches",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.612559Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.913640Z",
       "score_breakdown": {
         "static_evidence_strength": 1,
         "runtime_evidence_strength": 1,
@@ -20861,7 +20861,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.612867Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.913950Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -20995,7 +20995,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.613148Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.914233Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -21129,7 +21129,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.613409Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.914500Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -21262,7 +21262,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.613671Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.914771Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -21395,7 +21395,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.613927Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.915036Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -21528,7 +21528,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.614214Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.915316Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -21664,7 +21664,7 @@
       "app_mapping_status": "partially-matches",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.614455Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.915562Z",
       "score_breakdown": {
         "static_evidence_strength": 1,
         "runtime_evidence_strength": 1,
@@ -21793,7 +21793,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.614781Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.915889Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -21928,7 +21928,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.615070Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.916182Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -22062,7 +22062,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.615430Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.916541Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -22199,7 +22199,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.615735Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.916847Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -22338,7 +22338,7 @@
       "app_mapping_status": "partially-matches",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.616062Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.917185Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -22468,7 +22468,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.616370Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.917497Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -22603,7 +22603,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.616682Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.917808Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -22740,7 +22740,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.616994Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.918125Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -22877,7 +22877,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.617294Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.918417Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -23016,7 +23016,7 @@
       "app_mapping_status": "partially-matches",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.617534Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.918657Z",
       "score_breakdown": {
         "static_evidence_strength": 1,
         "runtime_evidence_strength": 1,
@@ -23145,7 +23145,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.617853Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.918984Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -23284,7 +23284,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.618143Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.919280Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -23418,7 +23418,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.618497Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.919635Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -23557,7 +23557,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.618803Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.919948Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -23696,7 +23696,7 @@
       "app_mapping_status": "partially-matches",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.619063Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.920213Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 1,
@@ -23825,7 +23825,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.619405Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.920556Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -23962,7 +23962,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.619665Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.920823Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -24095,7 +24095,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.619996Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.921161Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -24233,7 +24233,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.620253Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.921503Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -24367,7 +24367,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.620518Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.921813Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -24500,7 +24500,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.620802Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.922112Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -24634,7 +24634,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.621072Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.922395Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -24768,7 +24768,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.621378Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.922704Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -24905,7 +24905,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.621678Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.923021Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -25044,7 +25044,7 @@
       "app_mapping_status": "partially-matches",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.621912Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.923270Z",
       "score_breakdown": {
         "static_evidence_strength": 1,
         "runtime_evidence_strength": 1,
@@ -25173,7 +25173,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.622199Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.923550Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -25309,7 +25309,7 @@
       "app_mapping_status": "partially-matches",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.622453Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.923810Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 1,
@@ -25440,7 +25440,7 @@
       "app_mapping_status": "partially-matches",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.622722Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.924089Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 1,
@@ -25572,7 +25572,7 @@
       "app_mapping_status": "partially-matches",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.622993Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.924368Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 1,
@@ -25701,7 +25701,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.623347Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.924713Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -25838,7 +25838,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.623661Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.925038Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -25975,7 +25975,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.624015Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.925393Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -26112,7 +26112,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.624314Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.925693Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -26249,7 +26249,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.624629Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.926016Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -26386,7 +26386,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.624964Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.926351Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -26525,7 +26525,7 @@
       "app_mapping_status": "not-mapped",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.625236Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.926626Z",
       "score_breakdown": {
         "static_evidence_strength": 2,
         "runtime_evidence_strength": 1,
@@ -26654,7 +26654,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.625577Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.926971Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 3,
@@ -26792,7 +26792,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.625877Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.927281Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -26926,7 +26926,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.626199Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.927608Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -27063,7 +27063,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.626527Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.927935Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -27202,7 +27202,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.626833Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.928254Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -27341,7 +27341,7 @@
       "app_mapping_status": "partially-matches",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.627079Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.928498Z",
       "score_breakdown": {
         "static_evidence_strength": 1,
         "runtime_evidence_strength": 1,
@@ -27470,7 +27470,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.627429Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.928845Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -27612,7 +27612,7 @@
       "app_mapping_status": "partially-matches",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.627791Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.929216Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -27743,7 +27743,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.628122Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.929548Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -27880,7 +27880,7 @@
       "app_mapping_status": "partially-matches",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.628377Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.929813Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 1,
@@ -28009,7 +28009,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.628703Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.930148Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -28145,7 +28145,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.629006Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.930454Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -28279,7 +28279,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.629347Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.930795Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -28415,7 +28415,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.629678Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.931141Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -28550,7 +28550,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.629999Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.931473Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -28687,7 +28687,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.630298Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.931767Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -28822,7 +28822,7 @@
       "app_mapping_status": "partially-matches",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.630531Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.932004Z",
       "score_breakdown": {
         "static_evidence_strength": 1,
         "runtime_evidence_strength": 1,
@@ -28951,7 +28951,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.630844Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.932321Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -29084,7 +29084,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.631132Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.932603Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -29218,7 +29218,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.631412Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.932892Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -29352,7 +29352,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.631704Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.933182Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -29486,7 +29486,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.631976Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.933468Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -29620,7 +29620,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.632330Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.933819Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -29756,7 +29756,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.632625Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.934114Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -29890,7 +29890,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.632968Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.934464Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -30029,7 +30029,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.633313Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.934807Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -30166,7 +30166,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.633595Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.935097Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -30300,7 +30300,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.633884Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.935386Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -30434,7 +30434,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.634228Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.935726Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -30570,7 +30570,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.634505Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.936000Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -30704,7 +30704,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.634842Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.936350Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -30840,7 +30840,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.635103Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.936607Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -30976,7 +30976,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.635376Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.936883Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -31110,7 +31110,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.635656Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.937173Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -31244,7 +31244,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.635942Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.937460Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -31377,7 +31377,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.636233Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.937745Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -31511,7 +31511,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.636569Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.938089Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -31646,7 +31646,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.636861Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.938371Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -31784,7 +31784,7 @@
       "app_mapping_status": "unknown",
       "next_missing_layer": "validation-proof",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.637133Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.938643Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 2,
@@ -31922,7 +31922,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "archived",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.637424Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.938940Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 3,
@@ -32052,7 +32052,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.637764Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.939281Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -32186,7 +32186,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.638063Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.939576Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -32323,7 +32323,7 @@
       "app_mapping_status": "partially-matches",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.638355Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.939871Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -32456,7 +32456,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "archived",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.638655Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.940181Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -32585,7 +32585,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.639003Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.940532Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -32723,7 +32723,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.639318Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.940835Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -32859,7 +32859,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.639600Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.941123Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -32993,7 +32993,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.639870Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.941399Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -33127,7 +33127,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.640241Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.941768Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -33263,7 +33263,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.640541Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.942070Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -33397,7 +33397,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.640935Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.942479Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 3,
@@ -33536,7 +33536,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.641257Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.942794Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -33672,7 +33672,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.641568Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.943112Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -33809,7 +33809,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.641846Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.943397Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -33943,7 +33943,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.642117Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.943658Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -34079,7 +34079,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.642408Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.943954Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -34215,7 +34215,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.642703Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.944257Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -34349,7 +34349,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.643013Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.944559Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -34482,7 +34482,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.643294Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.944850Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -34616,7 +34616,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.643601Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.945155Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -34751,7 +34751,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.643879Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.945440Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -34885,7 +34885,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.644269Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.945831Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -35026,7 +35026,7 @@
       "app_mapping_status": "not-mapped",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.644531Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.946083Z",
       "score_breakdown": {
         "static_evidence_strength": 2,
         "runtime_evidence_strength": 1,
@@ -35153,7 +35153,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.644824Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.946379Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -35287,7 +35287,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.645172Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.946726Z",
       "score_breakdown": {
         "static_evidence_strength": 4,
         "runtime_evidence_strength": 3,
@@ -35428,7 +35428,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.645442Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.946990Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 3,
@@ -35569,7 +35569,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "archived",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.645732Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.947296Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -35699,7 +35699,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.646013Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.947581Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -35835,7 +35835,7 @@
       "app_mapping_status": "not-mapped",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.646257Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.947829Z",
       "score_breakdown": {
         "static_evidence_strength": 2,
         "runtime_evidence_strength": 1,
@@ -35962,7 +35962,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.646533Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.948110Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -36096,7 +36096,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.646809Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.948394Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -36232,7 +36232,7 @@
       "app_mapping_status": "partially-matches",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.647124Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.948718Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -36361,7 +36361,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.647400Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.948992Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -36496,7 +36496,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.647677Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.949276Z",
       "score_breakdown": {
         "static_evidence_strength": 2,
         "runtime_evidence_strength": 4,
@@ -36638,7 +36638,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.647955Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.949561Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -36772,7 +36772,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.648230Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.949839Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -36906,7 +36906,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.648506Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.950113Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -37042,7 +37042,7 @@
       "app_mapping_status": "unknown",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.648753Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.950364Z",
       "score_breakdown": {
         "static_evidence_strength": 1,
         "runtime_evidence_strength": 1,
@@ -37171,7 +37171,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.649012Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.950631Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -37304,7 +37304,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.649344Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.950955Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -37442,7 +37442,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.649667Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.951289Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -37579,7 +37579,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.649945Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.951570Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -37713,7 +37713,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.650508Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.952130Z",
       "score_breakdown": {
         "static_evidence_strength": 4,
         "runtime_evidence_strength": 3,
@@ -37851,7 +37851,7 @@
       "app_mapping_status": "not-mapped",
       "next_missing_layer": "none",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.651020Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.952634Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 4,
@@ -38004,7 +38004,7 @@
       "app_mapping_status": "unknown",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.651285Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.952899Z",
       "score_breakdown": {
         "static_evidence_strength": 1,
         "runtime_evidence_strength": 1,
@@ -38135,7 +38135,7 @@
       "app_mapping_status": "unknown",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.651542Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.953158Z",
       "score_breakdown": {
         "static_evidence_strength": 1,
         "runtime_evidence_strength": 1,
@@ -38264,7 +38264,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.651802Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.953424Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -38397,7 +38397,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.652064Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.953683Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -38530,7 +38530,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.652326Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.953948Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -38663,7 +38663,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.652583Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.954207Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -38796,7 +38796,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.652838Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.954468Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -38931,7 +38931,7 @@
       "app_mapping_status": "not-mapped",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.653273Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.954899Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 3,
@@ -39062,7 +39062,7 @@
       "app_mapping_status": "unknown",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.653572Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.955218Z",
       "score_breakdown": {
         "static_evidence_strength": 4,
         "runtime_evidence_strength": 1,
@@ -39193,7 +39193,7 @@
       "app_mapping_status": "unknown",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.653872Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.955519Z",
       "score_breakdown": {
         "static_evidence_strength": 2,
         "runtime_evidence_strength": 1,
@@ -39325,7 +39325,7 @@
       "app_mapping_status": "partially-matches",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.654171Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.955809Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 3,
@@ -39457,7 +39457,7 @@
       "app_mapping_status": "unknown",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.654516Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.956170Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -39590,7 +39590,7 @@
       "app_mapping_status": "unknown",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.654810Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.956465Z",
       "score_breakdown": {
         "static_evidence_strength": 4,
         "runtime_evidence_strength": 1,
@@ -39725,7 +39725,7 @@
       "app_mapping_status": "not-mapped",
       "next_missing_layer": "intentional-hold",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.655411Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.957068Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -39867,7 +39867,7 @@
       "app_mapping_status": "unknown",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.656161Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.957816Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -40005,7 +40005,7 @@
       "app_mapping_status": "not-mapped",
       "next_missing_layer": "intentional-hold",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.656643Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.958306Z",
       "score_breakdown": {
         "static_evidence_strength": 4,
         "runtime_evidence_strength": 3,
@@ -40145,7 +40145,7 @@
       "app_mapping_status": "unknown",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.656945Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.958619Z",
       "score_breakdown": {
         "static_evidence_strength": 4,
         "runtime_evidence_strength": 1,
@@ -40279,7 +40279,7 @@
       "app_mapping_status": "not-mapped",
       "next_missing_layer": "intentional-hold",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.657480Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.959151Z",
       "score_breakdown": {
         "static_evidence_strength": 4,
         "runtime_evidence_strength": 4,
@@ -40420,7 +40420,7 @@
       "app_mapping_status": "unknown",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.657775Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.959458Z",
       "score_breakdown": {
         "static_evidence_strength": 4,
         "runtime_evidence_strength": 1,
@@ -40551,7 +40551,7 @@
       "app_mapping_status": "unknown",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.658106Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.959790Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 2,
@@ -40680,7 +40680,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.658364Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.960043Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 4,
@@ -40820,7 +40820,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.658651Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.960338Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 3,
@@ -40963,7 +40963,7 @@
       "app_mapping_status": "not-mapped",
       "next_missing_layer": "intentional-hold",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.659048Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.960735Z",
       "score_breakdown": {
         "static_evidence_strength": 4,
         "runtime_evidence_strength": 3,
@@ -41105,7 +41105,7 @@
       "app_mapping_status": "not-mapped",
       "next_missing_layer": "intentional-hold",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.659523Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.961227Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 4,
@@ -41252,7 +41252,7 @@
       "app_mapping_status": "not-mapped",
       "next_missing_layer": "intentional-hold",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.659980Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.961683Z",
       "score_breakdown": {
         "static_evidence_strength": 4,
         "runtime_evidence_strength": 3,
@@ -41389,7 +41389,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.660283Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.961988Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -41523,7 +41523,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.660576Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.962295Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -41659,7 +41659,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.660863Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.962584Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -41793,7 +41793,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.661191Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.962906Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -41930,7 +41930,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.661502Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.963223Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -42066,7 +42066,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.661824Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.963556Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -42201,7 +42201,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.662128Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.963856Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -42335,7 +42335,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.662464Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.964206Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -42472,7 +42472,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.662755Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.964508Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -42606,7 +42606,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.663020Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.964761Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -42739,7 +42739,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.663294Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.965040Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -42873,7 +42873,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.663585Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.965338Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 5,
@@ -43020,7 +43020,7 @@
       "app_mapping_status": "not-mapped",
       "next_missing_layer": "archived",
       "debug_override_allowed": true,
-      "last_evaluated_at": "2026-05-07T09:45:34.663873Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.965635Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -43151,7 +43151,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.664186Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.965948Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 4,
@@ -43294,7 +43294,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.664468Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.966233Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -43428,7 +43428,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.664754Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.966523Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -43562,7 +43562,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.665036Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.966804Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -43696,7 +43696,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.665323Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.967092Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -43832,7 +43832,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "archived",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.665637Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.967414Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -43962,7 +43962,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.665918Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.967697Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -44098,7 +44098,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "archived",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.666232Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.968022Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -44228,7 +44228,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.666513Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.968312Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -44364,7 +44364,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "archived",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.666815Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.968627Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -44496,7 +44496,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "archived",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.667102Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.968918Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -44628,7 +44628,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "archived",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.667392Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.969212Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -44760,7 +44760,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "archived",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.667678Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.969507Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -44890,7 +44890,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.668006Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.969834Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -45030,7 +45030,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.668281Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.970114Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -45163,7 +45163,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.668561Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.970397Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -45299,7 +45299,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.668833Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.970667Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -45432,7 +45432,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.669186Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.971019Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 2,
@@ -45569,7 +45569,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.669475Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.971312Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -45703,7 +45703,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.669751Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.971595Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -45837,7 +45837,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.670042Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.971882Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -45971,7 +45971,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.670348Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.972194Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -46105,7 +46105,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.670652Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.972501Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -46239,7 +46239,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.670952Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.972808Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -46373,7 +46373,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.671224Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.973088Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -46506,7 +46506,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.671509Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.973372Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -46640,7 +46640,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.671793Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.973657Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -46774,7 +46774,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.672076Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.973940Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -46908,7 +46908,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.672361Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.974232Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -47042,7 +47042,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.672646Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.974518Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -47176,7 +47176,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.672925Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.974794Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -47310,7 +47310,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.673208Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.975073Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -47444,7 +47444,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.673509Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.975368Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -47579,7 +47579,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.673785Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.975639Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -47713,7 +47713,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.674059Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.975915Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -47847,7 +47847,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.674315Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.976171Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 3,
@@ -47984,7 +47984,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.674592Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.976450Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -48118,7 +48118,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.674883Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.976736Z",
       "score_breakdown": {
         "static_evidence_strength": 5,
         "runtime_evidence_strength": 1,
@@ -48254,7 +48254,7 @@
       "app_mapping_status": "matches-research",
       "next_missing_layer": "none",
       "debug_override_allowed": false,
-      "last_evaluated_at": "2026-05-07T09:45:34.675171Z",
+      "last_evaluated_at": "2026-05-07T10:03:10.977019Z",
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 2,

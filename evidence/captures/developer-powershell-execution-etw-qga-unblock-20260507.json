@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-07T09:52:21.2139183Z",
+  "record_id": "developer.powershell-execution",
+  "run_id": "developer-powershell-execution-etw-qga-unblock-20260507",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "registry_path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\PowerShell",
+  "value_name": "ExecutionPolicy",
+  "attempt_status": "qga_unblocked_ingest_ok",
+  "assessment": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and a normalized bundle with 4443 registry events and 525 caller-stack events. The bundle contains an exact RegQueryValue event for HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\PowerShell / ExecutionPolicy from the helper probe, returning 0xC0000034 on the clean baseline.",
+  "target_observation": {
+    "exact_value_query": true,
+    "operation": "RegQueryValue",
+    "representative_status": "0xC0000034",
+    "event_count": 4443,
+    "caller_stack_event_count": 525,
+    "target_key_event_count": 16,
+    "target_value_event_count": 1,
+    "target_command_event_count": 2,
+    "launch_transport": "qga"
+  },
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/developer-powershell-execution-etw-qga-unblock-20260507/developer-powershell-execution-etw-qga-unblock-20260507-summary.json",
+      "sha256": "e487947b193055b630e5c281315c15fd28243b026745930a5373c92d2fe6fa86",
+      "size": 7703,
+      "collected_utc": "2026-05-07T09:52:21.2139183Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/developer-powershell-execution-etw-qga-unblock-20260507/normalized-registry-bundle.json",
+      "sha256": "edf23b7d9ed66d7ae930ef975c95904dc8869b50c493fcf8c6820abc23a366cc",
+      "size": 5464355,
+      "collected_utc": "2026-05-07T09:52:21.2139183Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/developer-powershell-execution-etw-qga-unblock-20260507/developer-powershell-execution-etw-qga-unblock-20260507.etl",
+      "sha256": "c014acb599e3e4fc4d3614f8df6c7a34682e5322ba79b74e2659036e806c7859",
+      "size": 12582912,
+      "collected_utc": "2026-05-07T09:52:21.2139183Z"
+    }
+  ]
+}

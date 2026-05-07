@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-07T09:45:35.845018Z",
+  "generated_utc": "2026-05-07T10:03:12.097370Z",
   "source_index": "research/evidence-index.json",
   "summary": {
     "total_records": 356,
@@ -21,7 +21,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-05-07T09:45:34.872528Z",
+      "generated_utc": "2026-05-07T10:03:11.175945Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -33202,8 +33202,8 @@
         }
       },
       "source_file": "research/records/audio.disable-beep.review.json",
-      "source_file_sha256": "8d246076b4e82b19e2edbcec9f364c7b3722fc4ae9c6936d16f58b94ebe9bbf4",
-      "source_file_size_bytes": 12235,
+      "source_file_sha256": "6d8ec1e66a7e07ee63b2ccc0de667b30146fab7fbf4358e3334d626090ef2380",
+      "source_file_size_bytes": 13553,
       "name": "System Beep Driver",
       "category": "Audio",
       "area": "Driver Start Mode",
@@ -33410,6 +33410,22 @@
           "strength": "low",
           "supports": [
             "behavior",
+            "version-scope"
+          ],
+          "origin": "unspecified"
+        },
+        {
+          "evidence_id": "vm-audio.disable-beep-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk runtime receipt for Start",
+          "location": "evidence/captures/audio-disable-beep-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/audio-disable-beep-etw-qga-unblock-20260507/audio-disable-beep-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/audio-disable-beep-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/audio-disable-beep-etw-qga-unblock-20260507/audio-disable-beep-etw-qga-unblock-20260507.etl",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4503 registry events with 572 caller-stack events. The bundle contains an exact helper-triggered `RegQueryValue` for `HKLM\\SYSTEM\\CurrentControlSet\\Services\\Beep` / `Start`, returning `0x80000005` on the clean baseline.",
+          "strength": "high",
+          "supports": [
+            "runtime-observation",
+            "tooling-fix",
+            "path",
+            "value",
             "version-scope"
           ],
           "origin": "unspecified"
@@ -35016,8 +35032,8 @@
         }
       },
       "source_file": "research/records/developer.enable-windows-long-paths.review.json",
-      "source_file_sha256": "06cd3e2e841fee62ae6ea2674f45b37d963a2138df2f1b378d43913f089a15c6",
-      "source_file_size_bytes": 13212,
+      "source_file_sha256": "b5976256625d522293340b22b02df40a2dbf06223e6edb4cbfe254909b113bae",
+      "source_file_size_bytes": 14469,
       "name": "Windows Long Paths",
       "category": "Developer",
       "area": "Windows Path Handling vs Git Configuration",
@@ -35214,6 +35230,22 @@
           "origin": "unspecified"
         },
         {
+          "evidence_id": "vm-developer.enable-windows-long-paths-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk runtime receipt for LongPathsEnabled",
+          "location": "evidence/captures/developer-enable-windows-long-paths-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/developer-enable-windows-long-paths-etw-qga-unblock-20260507/developer-enable-windows-long-paths-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/developer-enable-windows-long-paths-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/developer-enable-windows-long-paths-etw-qga-unblock-20260507/developer-enable-windows-long-paths-etw-qga-unblock-20260507.etl",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4442 registry events with 527 caller-stack events. The bundle contains an exact helper-triggered `RegQueryValue` for `HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem` / `LongPathsEnabled`, returning `0x00000000` on the clean baseline.",
+          "strength": "high",
+          "supports": [
+            "runtime-observation",
+            "tooling-fix",
+            "path",
+            "value",
+            "version-scope"
+          ],
+          "origin": "unspecified"
+        },
+        {
           "evidence_id": "vm-developer.enable-windows-long-paths-ghidra-launch-receipt-20260424",
           "kind": "vm-test",
           "title": "Guest Ghidra launch receipt for LongPathsEnabled",
@@ -35310,8 +35342,8 @@
         }
       },
       "source_file": "research/records/developer.nodejs-performance.json",
-      "source_file_sha256": "e9f06cf3c3de236b8dabe008a6645d076673a5b8b27a71f9440d1da504de2cbe",
-      "source_file_size_bytes": 13376,
+      "source_file_sha256": "b973249a6c98ff23ed6d702a4fd6897340cec4051c403628ee12fee80874665b",
+      "source_file_size_bytes": 14587,
       "name": "Global Node.js Memory Limit Override",
       "category": "Developer",
       "area": "System Environment Variable",
@@ -35528,6 +35560,22 @@
           "origin": "unspecified"
         },
         {
+          "evidence_id": "vm-developer.nodejs-performance-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk runtime receipt for NODE_OPTIONS",
+          "location": "evidence/captures/developer-nodejs-performance-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/developer-nodejs-performance-etw-qga-unblock-20260507/developer-nodejs-performance-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/developer-nodejs-performance-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/developer-nodejs-performance-etw-qga-unblock-20260507/developer-nodejs-performance-etw-qga-unblock-20260507.etl",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4442 registry events with 525 caller-stack events. The bundle contains an exact helper-triggered `RegQueryValue` for `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Environment` / `NODE_OPTIONS`, returning `0xC0000034` on the clean baseline.",
+          "strength": "high",
+          "supports": [
+            "runtime-observation",
+            "tooling-fix",
+            "path",
+            "value",
+            "version-scope"
+          ],
+          "origin": "unspecified"
+        },
+        {
           "evidence_id": "vm-developer.nodejs-performance-ghidra-launch-receipt-20260424",
           "kind": "vm-test",
           "title": "Guest Ghidra launch receipt for NODE_OPTIONS",
@@ -35624,8 +35672,8 @@
         }
       },
       "source_file": "research/records/developer.powershell-execution.json",
-      "source_file_sha256": "e003aa89debc5e5f5a4c4b1d4d7a4699498928c14db4564c89ab0572ccafd141",
-      "source_file_size_bytes": 13540,
+      "source_file_sha256": "d3438d52fa2284f920fce374c5e6f902f9a2c9dc81e305d9fcde323c82d998af",
+      "source_file_size_bytes": 14764,
       "name": "PowerShell Script Execution Policy",
       "category": "Developer",
       "area": "Registry Policy",
@@ -35841,6 +35889,22 @@
           "origin": "unspecified"
         },
         {
+          "evidence_id": "vm-developer.powershell-execution-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk runtime receipt for ExecutionPolicy",
+          "location": "evidence/captures/developer-powershell-execution-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/developer-powershell-execution-etw-qga-unblock-20260507/developer-powershell-execution-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/developer-powershell-execution-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/developer-powershell-execution-etw-qga-unblock-20260507/developer-powershell-execution-etw-qga-unblock-20260507.etl",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4443 registry events with 525 caller-stack events. The bundle contains an exact helper-triggered `RegQueryValue` for `HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\PowerShell` / `ExecutionPolicy`, returning `0xC0000034` on the clean baseline.",
+          "strength": "high",
+          "supports": [
+            "runtime-observation",
+            "tooling-fix",
+            "path",
+            "value",
+            "version-scope"
+          ],
+          "origin": "unspecified"
+        },
+        {
           "evidence_id": "vm-developer.powershell-execution-ghidra-launch-receipt-20260424",
           "kind": "vm-test",
           "title": "Guest Ghidra launch receipt for ExecutionPolicy",
@@ -35937,8 +36001,8 @@
         }
       },
       "source_file": "research/records/developer.python-path-fix.review.json",
-      "source_file_sha256": "96d359be0aa682c8766e01b43b1504ceda83c0b4dd60205da80a18ead42a2922",
-      "source_file_size_bytes": 15009,
+      "source_file_sha256": "0fe3e10c5b3e7d23653efcb67e6d9a3e1c3b375c59b27ac580c57080518abfd0",
+      "source_file_size_bytes": 16235,
       "name": "Enable Windows Long Paths for Python Workflows",
       "category": "Developer",
       "area": "Python / Windows Path Handling",
@@ -36180,6 +36244,22 @@
           "strength": "low",
           "supports": [
             "behavior",
+            "version-scope"
+          ],
+          "origin": "unspecified"
+        },
+        {
+          "evidence_id": "vm-developer.python-path-fix-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk runtime receipt for LongPathsEnabled",
+          "location": "evidence/captures/developer-python-path-fix-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/developer-enable-windows-long-paths-etw-qga-unblock-20260507/developer-enable-windows-long-paths-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/developer-enable-windows-long-paths-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/developer-enable-windows-long-paths-etw-qga-unblock-20260507/developer-enable-windows-long-paths-etw-qga-unblock-20260507.etl",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4442 registry events with 527 caller-stack events. The bundle contains an exact helper-triggered `RegQueryValue` for `HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem` / `LongPathsEnabled`, returning `0x00000000` on the clean baseline.",
+          "strength": "high",
+          "supports": [
+            "runtime-observation",
+            "tooling-fix",
+            "path",
+            "value",
             "version-scope"
           ],
           "origin": "unspecified"
@@ -36554,8 +36634,8 @@
         }
       },
       "source_file": "research/records/developer.windows-dev-mode.json",
-      "source_file_sha256": "4ffe911b247e6b5496b26f980091e67d57161135515acfffc71e1257d815d5eb",
-      "source_file_size_bytes": 14915,
+      "source_file_sha256": "c382942e0e81d3f7909c1c26ad9926b814b833046121b9d6c272e55481c118d3",
+      "source_file_size_bytes": 16360,
       "name": "Windows Developer Mode",
       "category": "Developer",
       "area": "Registry Enablement",
@@ -36785,6 +36865,22 @@
           "strength": "low",
           "supports": [
             "behavior",
+            "version-scope"
+          ],
+          "origin": "unspecified"
+        },
+        {
+          "evidence_id": "vm-developer.windows-dev-mode-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk runtime receipt for AllowDevelopmentWithoutDevLicense",
+          "location": "evidence/captures/developer-windows-dev-mode-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/developer-windows-dev-mode-etw-qga-unblock-20260507/developer-windows-dev-mode-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/developer-windows-dev-mode-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/developer-windows-dev-mode-etw-qga-unblock-20260507/developer-windows-dev-mode-etw-qga-unblock-20260507.etl",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4440 registry events with 522 caller-stack events. The bundle contains an exact helper-triggered `RegQueryValue` for `HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\AppModelUnlock` / `AllowDevelopmentWithoutDevLicense`, returning `0xC0000034` on the clean baseline.",
+          "strength": "high",
+          "supports": [
+            "runtime-observation",
+            "tooling-fix",
+            "path",
+            "value",
             "version-scope"
           ],
           "origin": "unspecified"
@@ -42394,8 +42490,8 @@
         }
       },
       "source_file": "research/records/network.disable-active-probing.review.json",
-      "source_file_sha256": "42a9900a8ac1a594917b6ed236f29db126a7aa179601090cf8a656acfab24e7e",
-      "source_file_size_bytes": 14038,
+      "source_file_sha256": "85c98bb50cbfbcfd43c7760a66087d827c57fbf10b229d2ae3c4e0f78522bd80",
+      "source_file_size_bytes": 15280,
       "name": "NCSI Active Probing Policy",
       "category": "Network",
       "area": "Group Policy",
@@ -42611,6 +42707,22 @@
           "strength": "low",
           "supports": [
             "behavior",
+            "version-scope"
+          ],
+          "origin": "unspecified"
+        },
+        {
+          "evidence_id": "vm-network.disable-active-probing-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk runtime receipt for NoActiveProbe",
+          "location": "evidence/captures/network-disable-active-probing-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/network-disable-active-probing-etw-qga-unblock-20260507/network-disable-active-probing-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/network-disable-active-probing-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/network-disable-active-probing-etw-qga-unblock-20260507/network-disable-active-probing-etw-qga-unblock-20260507.etl",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4445 registry events with 525 caller-stack events. The bundle contains an exact helper-triggered `RegQueryValue` for `HKLM\\Software\\Policies\\Microsoft\\Windows\\NetworkConnectivityStatusIndicator` / `NoActiveProbe`, returning `0xC0000034` on the clean baseline.",
+          "strength": "high",
+          "supports": [
+            "runtime-observation",
+            "tooling-fix",
+            "path",
+            "value",
             "version-scope"
           ],
           "origin": "unspecified"
@@ -43068,8 +43180,8 @@
         }
       },
       "source_file": "research/records/network.disable-ipv6.json",
-      "source_file_sha256": "6b83bed6f0719a386fc43133d41cb73ae26e56d814483fb100b4db50a8b33c9a",
-      "source_file_size_bytes": 12680,
+      "source_file_sha256": "fe3fd7f0df35f3bf1b0c8aa6c62205cfb41f436bab62da2f6297db1398366b4d",
+      "source_file_size_bytes": 13850,
       "name": "IPv6 Stack Disable Override",
       "category": "Network",
       "area": "Registry Configuration",
@@ -43269,6 +43381,22 @@
           "origin": "unspecified"
         },
         {
+          "evidence_id": "vm-network.disable-ipv6-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk runtime receipt for DisabledComponents",
+          "location": "evidence/captures/network-disable-ipv6-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/network-disable-ipv6-etw-qga-unblock-20260507/network-disable-ipv6-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/network-disable-ipv6-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/network-disable-ipv6-etw-qga-unblock-20260507/network-disable-ipv6-etw-qga-unblock-20260507.etl",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4500 registry events with 572 caller-stack events. The bundle contains an exact helper-triggered `RegQueryValue` for `HKLM\\SYSTEM\\CurrentControlSet\\Services\\Tcpip6\\Parameters` / `DisabledComponents`, returning `0xC0000034` on the clean baseline.",
+          "strength": "high",
+          "supports": [
+            "runtime-observation",
+            "tooling-fix",
+            "path",
+            "value",
+            "version-scope"
+          ],
+          "origin": "unspecified"
+        },
+        {
           "evidence_id": "vm-network.disable-ipv6-ghidra-launch-receipt-20260424",
           "kind": "vm-test",
           "title": "Guest Ghidra launch receipt for DisabledComponents",
@@ -43365,8 +43493,8 @@
         }
       },
       "source_file": "research/records/network.disable-llmnr.json",
-      "source_file_sha256": "a2999a48247009b115f0f51170bdc51e46bedc39689c413609039e1c9f1c1692",
-      "source_file_size_bytes": 12611,
+      "source_file_sha256": "949dfd3d7a45031d8c7db30341f50039fbd2ec55572a481c58723a379d91c4de",
+      "source_file_size_bytes": 13991,
       "name": "Link-Local Multicast Name Resolution (LLMNR)",
       "category": "Network",
       "area": "Registry Policy",
@@ -43583,6 +43711,22 @@
           "strength": "low",
           "supports": [
             "behavior",
+            "version-scope"
+          ],
+          "origin": "unspecified"
+        },
+        {
+          "evidence_id": "vm-network.disable-llmnr-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk runtime receipt for EnableMulticast",
+          "location": "evidence/captures/network-disable-llmnr-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/network-disable-llmnr-etw-qga-unblock-20260507/network-disable-llmnr-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/network-disable-llmnr-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/network-disable-llmnr-etw-qga-unblock-20260507/network-disable-llmnr-etw-qga-unblock-20260507.etl",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4498 registry events with 571 caller-stack events. The bundle contains an exact helper-triggered `RegQueryValue` for `HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient` / `EnableMulticast`, returning `0xC0000034` on the clean baseline.",
+          "strength": "high",
+          "supports": [
+            "runtime-observation",
+            "tooling-fix",
+            "path",
+            "value",
             "version-scope"
           ],
           "origin": "unspecified"
@@ -44074,8 +44218,8 @@
         }
       },
       "source_file": "research/records/network.disable-mdns.review.json",
-      "source_file_sha256": "d731cfcca9bce13e2ed7288ace4ea1699a642aff0f7c2cc76757a9447870ceac",
-      "source_file_size_bytes": 13258,
+      "source_file_sha256": "7eb6618229e7993c67ac6e67c87c1daafdb69cc42a14b45c671086289844a433",
+      "source_file_size_bytes": 14616,
       "name": "Set mDNS Policy to Local Settings",
       "category": "Network",
       "area": "mDNS Policy Semantics",
@@ -44274,6 +44418,22 @@
           "strength": "low",
           "supports": [
             "behavior",
+            "version-scope"
+          ],
+          "origin": "unspecified"
+        },
+        {
+          "evidence_id": "vm-network.disable-mdns-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk runtime receipt for EnableMDNS",
+          "location": "evidence/captures/network-disable-mdns-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/network-disable-mdns-etw-qga-unblock-20260507/network-disable-mdns-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/network-disable-mdns-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/network-disable-mdns-etw-qga-unblock-20260507/network-disable-mdns-etw-qga-unblock-20260507.etl",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4498 registry events with 570 caller-stack events. The bundle contains an exact helper-triggered `RegQueryValue` for `HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient` / `EnableMDNS`, returning `0xC0000034` on the clean baseline.",
+          "strength": "high",
+          "supports": [
+            "runtime-observation",
+            "tooling-fix",
+            "path",
+            "value",
             "version-scope"
           ],
           "origin": "unspecified"

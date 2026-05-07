@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-07T09:56:52.8699827Z",
+  "record_id": "network.disable-ipv6",
+  "run_id": "network-disable-ipv6-etw-qga-unblock-20260507",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\Tcpip6\\Parameters",
+  "value_name": "DisabledComponents",
+  "attempt_status": "qga_unblocked_ingest_ok",
+  "assessment": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and a normalized bundle with 4500 registry events and 572 caller-stack events. The bundle contains an exact RegQueryValue event for HKLM\\SYSTEM\\CurrentControlSet\\Services\\Tcpip6\\Parameters / DisabledComponents from the helper probe, returning 0xC0000034 on the clean baseline.",
+  "target_observation": {
+    "exact_value_query": true,
+    "operation": "RegQueryValue",
+    "representative_status": "0xC0000034",
+    "event_count": 4500,
+    "caller_stack_event_count": 572,
+    "target_key_event_count": 41,
+    "target_value_event_count": 1,
+    "target_command_event_count": 2,
+    "launch_transport": "qga"
+  },
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/network-disable-ipv6-etw-qga-unblock-20260507/network-disable-ipv6-etw-qga-unblock-20260507-summary.json",
+      "sha256": "f61cc0db3cb48e58a7798edce4f165fe76f1f2f5c77ccdf1e6a9af407876d4d7",
+      "size": 7419,
+      "collected_utc": "2026-05-07T09:56:52.8699827Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/network-disable-ipv6-etw-qga-unblock-20260507/normalized-registry-bundle.json",
+      "sha256": "318f91644906bf4a5e5080e8b02a6133c473e7076479c61bf9c5317acbf92282",
+      "size": 5342106,
+      "collected_utc": "2026-05-07T09:56:52.8699827Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/network-disable-ipv6-etw-qga-unblock-20260507/network-disable-ipv6-etw-qga-unblock-20260507.etl",
+      "sha256": "07201ea7e5b122e98b5f7d2387a64cfb1a984476686be3c3982bf9a0921c6cd7",
+      "size": 12582912,
+      "collected_utc": "2026-05-07T09:56:52.8699827Z"
+    }
+  ]
+}

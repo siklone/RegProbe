@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-07T09:47:53.3825217Z",
+  "record_id": "audio.disable-beep",
+  "run_id": "audio-disable-beep-etw-qga-unblock-20260507",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\Beep",
+  "value_name": "Start",
+  "attempt_status": "qga_unblocked_ingest_ok",
+  "assessment": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and a normalized bundle with 4503 registry events and 572 caller-stack events. The bundle contains an exact RegQueryValue event for HKLM\\SYSTEM\\CurrentControlSet\\Services\\Beep / Start from the helper probe, returning 0x80000005 on the clean baseline.",
+  "target_observation": {
+    "exact_value_query": true,
+    "operation": "RegQueryValue",
+    "representative_status": "0x80000005",
+    "event_count": 4503,
+    "caller_stack_event_count": 572,
+    "target_key_event_count": 8,
+    "target_value_event_count": 1,
+    "target_command_event_count": 39,
+    "launch_transport": "qga"
+  },
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/audio-disable-beep-etw-qga-unblock-20260507/audio-disable-beep-etw-qga-unblock-20260507-summary.json",
+      "sha256": "68ed01db2299b0a853aaa0bbbd75b7b346f6328e0395ed7560e9c7a5ff1529af",
+      "size": 7326,
+      "collected_utc": "2026-05-07T09:47:53.3825217Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/audio-disable-beep-etw-qga-unblock-20260507/normalized-registry-bundle.json",
+      "sha256": "2873b645db59a07b298873e4472c2c2e826a600ea50d4d3082e7f9bc1a7e6825",
+      "size": 5294271,
+      "collected_utc": "2026-05-07T09:47:53.3825217Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/audio-disable-beep-etw-qga-unblock-20260507/audio-disable-beep-etw-qga-unblock-20260507.etl",
+      "sha256": "6252a188e22b28eafcbb8b3f067f51fe8a172640b540b035b9014b0b3ffd1078",
+      "size": 12582912,
+      "collected_utc": "2026-05-07T09:47:53.3825217Z"
+    }
+  ]
+}
