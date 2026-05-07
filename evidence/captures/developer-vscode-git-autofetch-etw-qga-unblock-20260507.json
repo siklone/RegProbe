@@ -1,0 +1,58 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-07T15:07:22.697871Z",
+  "record_id": "developer.vscode-git-autofetch",
+  "run_id": "developer-vscode-git-autofetch-etw-qga-unblock-20260507",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "attempt_status": "qga_unblocked_ingest_ok",
+  "assessment": "A 2026-05-07 QGA-first ETW stackwalk rerun produced host-ingested ETL/XML artifacts and normalized bundles for 1 HKCU-oriented target value(s): `DisableGitAutofetch`. Because the QGA helper runs as SYSTEM, the bundles contain target `reg.exe query` command activity but 0/1 exact current-user HKCU value-query events. This clears the earlier tracerpt/artifact-upload/ingest blocker for the probe pipeline, but it is not current-user product-consumer proof. This receipt covers only the registry companion target; the primary VS Code `%APPDATA%\\Code\\User\\settings.json` file setting was not mutated or inspected by this ETW registry probe.",
+  "aggregate_observation": {
+    "target_count": 1,
+    "exact_probe_value_query_count": 0,
+    "current_user_hkcu_value_query_count": 0,
+    "all_artifacts_ingested": true,
+    "launch_transport": "qga",
+    "probe_read_not_product_consumer_proof": true,
+    "system_qga_context": true
+  },
+  "target_observations": [
+    {
+      "run_id": "developer-vscode-git-autofetch-disablegitautofetch-etw-qga-unblock-20260507",
+      "registry_path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+      "value_name": "DisableGitAutofetch",
+      "exact_probe_value_query": false,
+      "current_user_hkcu_value_query": false,
+      "operation": "RegQueryValue",
+      "representative_status": null,
+      "event_count": 4447,
+      "caller_stack_event_count": 524,
+      "target_key_event_count": 0,
+      "target_value_event_count": 0,
+      "exact_target_value_event_count": 0,
+      "current_user_hkcu_value_event_count": 0,
+      "target_command_event_count": 2,
+      "launch_transport": "qga"
+    }
+  ],
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/developer-vscode-git-autofetch-disablegitautofetch-etw-qga-unblock-20260507/developer-vscode-git-autofetch-disablegitautofetch-etw-qga-unblock-20260507-summary.json",
+      "sha256": "dbb0058c2165cf5f0fdbc8ac0665fe5919059ad32e6a3bc487de4c439136abb1",
+      "size": 8339,
+      "collected_utc": "2026-05-07T14:46:53.9114417Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/developer-vscode-git-autofetch-disablegitautofetch-etw-qga-unblock-20260507/normalized-registry-bundle.json",
+      "sha256": "3c026914f9fd35c69e98e39b883b7d23198d8a9fb1ab02acf1b3060ea5e36540",
+      "size": 5907685,
+      "collected_utc": "2026-05-07T14:46:53.9114417Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/developer-vscode-git-autofetch-disablegitautofetch-etw-qga-unblock-20260507/developer-vscode-git-autofetch-disablegitautofetch-etw-qga-unblock-20260507.etl",
+      "sha256": "5a3564270769940bb8cb991cc9ca3ca58eb3a2554de1e70bb81c0724b09646c2",
+      "size": 12582912,
+      "collected_utc": "2026-05-07T14:46:53.9114417Z"
+    }
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-07T15:07:22.697871Z",
+  "record_id": "developer.terminal-dev-mode",
+  "run_id": "developer-terminal-dev-mode-etw-qga-unblock-20260507",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "attempt_status": "qga_unblocked_ingest_ok",
+  "assessment": "A 2026-05-07 QGA-first ETW stackwalk rerun produced host-ingested ETL/XML artifacts and normalized bundles for 2 HKCU-oriented target value(s): `DeveloperMode`, `EnableDebugTap`. Because the QGA helper runs as SYSTEM, the bundles contain target `reg.exe query` command activity but 0/2 exact current-user HKCU value-query events. This clears the earlier tracerpt/artifact-upload/ingest blocker for the probe pipeline, but it is not current-user product-consumer proof.",
+  "aggregate_observation": {
+    "target_count": 2,
+    "exact_probe_value_query_count": 0,
+    "current_user_hkcu_value_query_count": 0,
+    "all_artifacts_ingested": true,
+    "launch_transport": "qga",
+    "probe_read_not_product_consumer_proof": true,
+    "system_qga_context": true
+  },
+  "target_observations": [
+    {
+      "run_id": "developer-terminal-dev-mode-developermode-etw-qga-unblock-20260507",
+      "registry_path": "HKCU\\Software\\Microsoft\\Windows Terminal",
+      "value_name": "DeveloperMode",
+      "exact_probe_value_query": false,
+      "current_user_hkcu_value_query": false,
+      "operation": "RegQueryValue",
+      "representative_status": null,
+      "event_count": 4480,
+      "caller_stack_event_count": 524,
+      "target_key_event_count": 0,
+      "target_value_event_count": 0,
+      "exact_target_value_event_count": 0,
+      "current_user_hkcu_value_event_count": 0,
+      "target_command_event_count": 2,
+      "launch_transport": "qga"
+    },
+    {
+      "run_id": "developer-terminal-dev-mode-enabledebugtap-etw-qga-unblock-20260507",
+      "registry_path": "HKCU\\Software\\Microsoft\\Windows Terminal",
+      "value_name": "EnableDebugTap",
+      "exact_probe_value_query": false,
+      "current_user_hkcu_value_query": false,
+      "operation": "RegQueryValue",
+      "representative_status": null,
+      "event_count": 4485,
+      "caller_stack_event_count": 528,
+      "target_key_event_count": 0,
+      "target_value_event_count": 0,
+      "exact_target_value_event_count": 0,
+      "current_user_hkcu_value_event_count": 0,
+      "target_command_event_count": 2,
+      "launch_transport": "qga"
+    }
+  ],
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/developer-terminal-dev-mode-developermode-etw-qga-unblock-20260507/developer-terminal-dev-mode-developermode-etw-qga-unblock-20260507-summary.json",
+      "sha256": "aefa522276e35b5596605c89de252995dc87a42790015c9927948e756a974696",
+      "size": 8003,
+      "collected_utc": "2026-05-07T15:02:10.0230076Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/developer-terminal-dev-mode-developermode-etw-qga-unblock-20260507/normalized-registry-bundle.json",
+      "sha256": "6bcbdd55aea895c9b0021749fdebdadd52f8228c20f932243cd6f6c829d8baee",
+      "size": 5747678,
+      "collected_utc": "2026-05-07T15:02:10.0230076Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/developer-terminal-dev-mode-developermode-etw-qga-unblock-20260507/developer-terminal-dev-mode-developermode-etw-qga-unblock-20260507.etl",
+      "sha256": "0216d3c31af6caaed6087805c0cf69b10d2f870481983cfd02e13b2626ec0a5a",
+      "size": 12582912,
+      "collected_utc": "2026-05-07T15:02:10.0230076Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/developer-terminal-dev-mode-enabledebugtap-etw-qga-unblock-20260507/developer-terminal-dev-mode-enabledebugtap-etw-qga-unblock-20260507-summary.json",
+      "sha256": "898b87d685f49f44ae0dd5469f4c44872cd7e311298835798c875a5a27edec5b",
+      "size": 8035,
+      "collected_utc": "2026-05-07T15:04:09.6714513Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/developer-terminal-dev-mode-enabledebugtap-etw-qga-unblock-20260507/normalized-registry-bundle.json",
+      "sha256": "a520de48870d85a92ee6a8baab02ee6f35bb31b14b51b27ef00298c679598520",
+      "size": 5778190,
+      "collected_utc": "2026-05-07T15:04:09.6714513Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/developer-terminal-dev-mode-enabledebugtap-etw-qga-unblock-20260507/developer-terminal-dev-mode-enabledebugtap-etw-qga-unblock-20260507.etl",
+      "sha256": "b70e6bcc29270f523974f31622fe1855492fe2b8f25d98436345fd153ed5d531",
+      "size": 12582912,
+      "collected_utc": "2026-05-07T15:04:09.6714513Z"
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-07T14:44:19.855025Z",
+  "generated_utc": "2026-05-07T15:07:46.951410Z",
   "summary": {
     "total_records": 356,
     "validated": 255,
@@ -20,7 +20,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-05-07T14:44:19.422958Z",
+      "generated_utc": "2026-05-07T15:07:46.275111Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -1063,6 +1063,19 @@
             "transport-blocker"
           ],
           "origin": "unspecified"
+        },
+        {
+          "evidence_id": "vm-developer.terminal-dev-mode-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk HKCU probe receipt",
+          "location": "evidence/captures/developer-terminal-dev-mode-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/developer-terminal-dev-mode-developermode-etw-qga-unblock-20260507/developer-terminal-dev-mode-developermode-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/developer-terminal-dev-mode-developermode-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/developer-terminal-dev-mode-developermode-etw-qga-unblock-20260507/developer-terminal-dev-mode-developermode-etw-qga-unblock-20260507.etl and evidence/raw/etw-stackwalk/developer-terminal-dev-mode-enabledebugtap-etw-qga-unblock-20260507/developer-terminal-dev-mode-enabledebugtap-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/developer-terminal-dev-mode-enabledebugtap-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/developer-terminal-dev-mode-enabledebugtap-etw-qga-unblock-20260507/developer-terminal-dev-mode-enabledebugtap-etw-qga-unblock-20260507.etl",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced host-ingested ETL/XML artifacts and normalized bundles for 2 HKCU-oriented target value(s): `DeveloperMode`, `EnableDebugTap`. Because the QGA helper runs as SYSTEM, the bundles contain target `reg.exe query` command activity but 0/2 exact current-user HKCU value-query events. This clears the earlier tracerpt/artifact-upload/ingest blocker for the probe pipeline, but it is not current-user product-consumer proof.",
+          "strength": "low",
+          "supports": [
+            "path",
+            "version-scope"
+          ],
+          "origin": "unspecified"
         }
       ],
       "validation_proof": {
@@ -2006,6 +2019,19 @@
           "strength": "low",
           "supports": [
             "behavior",
+            "version-scope"
+          ],
+          "origin": "unspecified"
+        },
+        {
+          "evidence_id": "vm-developer.vscode-git-autofetch-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk HKCU probe receipt",
+          "location": "evidence/captures/developer-vscode-git-autofetch-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/developer-vscode-git-autofetch-disablegitautofetch-etw-qga-unblock-20260507/developer-vscode-git-autofetch-disablegitautofetch-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/developer-vscode-git-autofetch-disablegitautofetch-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/developer-vscode-git-autofetch-disablegitautofetch-etw-qga-unblock-20260507/developer-vscode-git-autofetch-disablegitautofetch-etw-qga-unblock-20260507.etl",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced host-ingested ETL/XML artifacts and normalized bundles for 1 HKCU-oriented target value(s): `DisableGitAutofetch`. Because the QGA helper runs as SYSTEM, the bundles contain target `reg.exe query` command activity but 0/1 exact current-user HKCU value-query events. This clears the earlier tracerpt/artifact-upload/ingest blocker for the probe pipeline, but it is not current-user product-consumer proof. This receipt covers only the registry companion target; the primary VS Code `%APPDATA%\\Code\\User\\settings.json` file setting was not mutated or inspected by this ETW registry probe.",
+          "strength": "low",
+          "supports": [
+            "path",
             "version-scope"
           ],
           "origin": "unspecified"
@@ -8128,6 +8154,19 @@
             "behavior"
           ],
           "origin": "Current repo docs"
+        },
+        {
+          "evidence_id": "vm-privacy.disable-suggestions-cdm-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk HKCU probe receipt",
+          "location": "evidence/captures/privacy-disable-suggestions-cdm-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/privacy-disable-suggestions-policy-disablethirdpartysuggestions-etw-qga-unblock-20260507/privacy-disable-suggestions-policy-disablethirdpartysuggestions-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/privacy-disable-suggestions-policy-disablethirdpartysuggestions-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/privacy-disable-suggestions-policy-disablethirdpartysuggestions-etw-qga-unblock-20260507/privacy-disable-suggestions-policy-disablethirdpartysuggestions-etw-qga-unblock-20260507.etl and evidence/raw/etw-stackwalk/privacy-disable-suggestions-policy-disablewindowsspotlightonsettings-etw-qga-unblock-20260507/privacy-disable-suggestions-policy-disablewindowsspotlightonsettings-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/privacy-disable-suggestions-policy-disablewindowsspotlightonsettings-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/privacy-disable-suggestions-policy-disablewindowsspotlightonsettings-etw-qga-unblock-20260507/privacy-disable-suggestions-policy-disablewindowsspotlightonsettings-etw-qga-unblock-20260507.etl and 15 additional raw artifact refs listed in the receipt",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced host-ingested ETL/XML artifacts and normalized bundles for 7 HKCU-oriented target value(s): `DisableThirdPartySuggestions`, `DisableWindowsSpotlightOnSettings`, `DisableWindowsSpotlightWindowsWelcomeExperience`, `SubscribedContent-310093Enabled`, `SubscribedContent-338393Enabled`, `SubscribedContent-353694Enabled`, `SubscribedContent-353696Enabled`. Because the QGA helper runs as SYSTEM, the bundles contain target `reg.exe query` command activity but 0/7 exact current-user HKCU value-query events. This clears the earlier tracerpt/artifact-upload/ingest blocker for the probe pipeline, but it is not current-user product-consumer proof.",
+          "strength": "low",
+          "supports": [
+            "path",
+            "version-scope"
+          ],
+          "origin": "unspecified"
         }
       ],
       "validation_proof": {
@@ -79833,6 +79872,19 @@
             "side-effects"
           ],
           "origin": "Microsoft official doc"
+        },
+        {
+          "evidence_id": "vm-privacy.disable-suggestions.policy-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk HKCU probe receipt",
+          "location": "evidence/captures/privacy-disable-suggestions-policy-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/privacy-disable-suggestions-policy-disablethirdpartysuggestions-etw-qga-unblock-20260507/privacy-disable-suggestions-policy-disablethirdpartysuggestions-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/privacy-disable-suggestions-policy-disablethirdpartysuggestions-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/privacy-disable-suggestions-policy-disablethirdpartysuggestions-etw-qga-unblock-20260507/privacy-disable-suggestions-policy-disablethirdpartysuggestions-etw-qga-unblock-20260507.etl and evidence/raw/etw-stackwalk/privacy-disable-suggestions-policy-disablewindowsspotlightonsettings-etw-qga-unblock-20260507/privacy-disable-suggestions-policy-disablewindowsspotlightonsettings-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/privacy-disable-suggestions-policy-disablewindowsspotlightonsettings-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/privacy-disable-suggestions-policy-disablewindowsspotlightonsettings-etw-qga-unblock-20260507/privacy-disable-suggestions-policy-disablewindowsspotlightonsettings-etw-qga-unblock-20260507.etl and 3 additional raw artifact refs listed in the receipt",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced host-ingested ETL/XML artifacts and normalized bundles for 3 HKCU-oriented target value(s): `DisableThirdPartySuggestions`, `DisableWindowsSpotlightOnSettings`, `DisableWindowsSpotlightWindowsWelcomeExperience`. Because the QGA helper runs as SYSTEM, the bundles contain target `reg.exe query` command activity but 0/3 exact current-user HKCU value-query events. This clears the earlier tracerpt/artifact-upload/ingest blocker for the probe pipeline, but it is not current-user product-consumer proof.",
+          "strength": "low",
+          "supports": [
+            "path",
+            "version-scope"
+          ],
+          "origin": "unspecified"
         }
       ],
       "validation_proof": {

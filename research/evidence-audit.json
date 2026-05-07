@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-07T14:44:20.567061Z",
+  "generated_utc": "2026-05-07T15:07:47.776151Z",
   "summary": {
     "total_active_records": 301,
     "class_counts": {
@@ -28,7 +28,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-05-07T14:44:19.422958Z",
+      "generated_utc": "2026-05-07T15:07:46.275111Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -15227,30 +15227,33 @@
       "procmon": false,
       "ghidra": false,
       "ghidra_no_function_fallback": false,
-      "wpr": false,
+      "wpr": true,
       "benchmark": false,
       "reboot_tested": false,
       "incident_seen": false,
       "next_missing_layer": "none",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "behavior_wpr",
         "official_doc"
       ],
       "tools_used": [
-        "official-doc"
+        "official-doc",
+        "etw",
+        "wpr"
       ],
       "boot_phase_relevant": false,
       "suspected_layer": "user-mode",
       "frida_kernel_guard_applied": false,
       "dead_flag_checks": {
-        "etw_executed": false,
+        "etw_executed": true,
         "boot_phase_included": true,
         "correct_tool_used": true,
-        "trigger_condition_tested": false
+        "trigger_condition_tested": true
       },
       "re_audit_required": false,
       "re_audit_priority": 0,
-      "re_audit_reason": "etw_not_recorded; dead_flag_checks_incomplete",
+      "re_audit_reason": "",
       "original_class": null,
       "original_pipeline_version": null,
       "new_pipeline_version": "v3.2",
@@ -15266,7 +15269,7 @@
       "tweak_ingest_allowed": true,
       "score_breakdown": {
         "static_evidence_strength": 5,
-        "runtime_evidence_strength": 1,
+        "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 3,
         "tweak_suitability": 5,
@@ -15274,7 +15277,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 2,
         "bench_priority": 3,
-        "overall_score": 3.67,
+        "overall_score": 3.78,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -15289,7 +15292,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-04-28T10:50:56Z"
+        "last_verified_at": "2026-05-07T15:07:22.697871Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",

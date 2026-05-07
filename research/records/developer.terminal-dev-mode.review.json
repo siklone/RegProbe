@@ -255,6 +255,18 @@
         "transport-blocker"
       ],
       "strength": "medium"
+    },
+    {
+      "evidence_id": "vm-developer.terminal-dev-mode-etw-qga-unblock-20260507",
+      "kind": "etw-trace",
+      "title": "QGA-first ETW stackwalk HKCU probe receipt",
+      "location": "evidence/captures/developer-terminal-dev-mode-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/developer-terminal-dev-mode-developermode-etw-qga-unblock-20260507/developer-terminal-dev-mode-developermode-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/developer-terminal-dev-mode-developermode-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/developer-terminal-dev-mode-developermode-etw-qga-unblock-20260507/developer-terminal-dev-mode-developermode-etw-qga-unblock-20260507.etl and evidence/raw/etw-stackwalk/developer-terminal-dev-mode-enabledebugtap-etw-qga-unblock-20260507/developer-terminal-dev-mode-enabledebugtap-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/developer-terminal-dev-mode-enabledebugtap-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/developer-terminal-dev-mode-enabledebugtap-etw-qga-unblock-20260507/developer-terminal-dev-mode-enabledebugtap-etw-qga-unblock-20260507.etl",
+      "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced host-ingested ETL/XML artifacts and normalized bundles for 2 HKCU-oriented target value(s): `DeveloperMode`, `EnableDebugTap`. Because the QGA helper runs as SYSTEM, the bundles contain target `reg.exe query` command activity but 0/2 exact current-user HKCU value-query events. This clears the earlier tracerpt/artifact-upload/ingest blocker for the probe pipeline, but it is not current-user product-consumer proof.",
+      "supports": [
+        "path",
+        "version-scope"
+      ],
+      "strength": "low"
     }
   ],
   "decision": {
@@ -271,7 +283,7 @@
       "The Ghidra scan only provides negative string evidence, not a documented registry contract."
     ]
   },
-  "last_reviewed_utc": "2026-04-28T11:11:34Z",
+  "last_reviewed_utc": "2026-05-07T15:07:22.697871Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows/terminal/customize-settings/startup",
     "exact_quote_or_path": "Microsoft Learn: Windows Terminal settings: Microsoft documents Windows Terminal through settings.json and documented settings pages. This research pass did not capture a primary registry contract for DeveloperMode or EnableDebugTap.",
@@ -302,14 +314,14 @@
       "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review still returns no candidate-specific WRK hit for DeveloperMode or EnableDebugTap."
     },
-    "notes": "Retained TerminalApp raw-memory scans provide bounded static context for DeveloperMode and EnableDebugTap, but the local source-mirror corpus still carries no candidate-specific ReactOS or WRK corroboration. A bounded 2026-04-24 KVM ETW stackwalk retry for Windows Terminal DeveloperMode advanced to artifact-upload but still timed out before any ETL, XML, or normalized bundle reached the host. The repo now retains summary and stage receipts only, so the ETW lane is reviewed but transport-blocked.",
+    "notes": "Retained TerminalApp raw-memory scans provide bounded static context for DeveloperMode and EnableDebugTap, but the local source-mirror corpus still carries no candidate-specific ReactOS or WRK corroboration. A bounded 2026-04-24 KVM ETW stackwalk retry for Windows Terminal DeveloperMode advanced to artifact-upload but still timed out before any ETL, XML, or normalized bundle reached the host. The repo now retains summary and stage receipts only, so the ETW lane is reviewed but transport-blocked. A 2026-05-07 QGA-first ETW stackwalk rerun cleared the earlier timeout/upload/ingest blocker for 2 HKCU-oriented probe target(s) and produced host-ingested raw ETL/XML plus normalized bundles; under SYSTEM QGA context, no exact current-user HKCU value query was observed, so this remains pipeline proof rather than user-profile product-consumer proof.",
     "last_updated_utc": "2026-04-28T11:11:34Z",
     "runtime_capture_reviewed": {
       "etw-stackwalk": true,
-      "status": "artifact_upload_timeout"
+      "status": "qga_unblocked_ingest_ok"
     },
     "etw_stackwalk_reviewed": true,
-    "etw_stackwalk_review_status": "artifact_upload_timeout",
-    "etw_stackwalk_review_artifact": "evidence/captures/developer-terminal-dev-mode-etw-stackwalk-attempt-20260424.json"
+    "etw_stackwalk_review_status": "qga_unblocked_ingest_ok",
+    "etw_stackwalk_review_artifact": "evidence/captures/developer-terminal-dev-mode-etw-qga-unblock-20260507.json"
   }
 }
