@@ -1,17 +1,17 @@
 {
-  "generated_utc": "2026-05-07T17:03:53Z",
-  "history_entry_count": 59,
+  "generated_utc": "2026-05-07T17:08:57Z",
+  "history_entry_count": 62,
   "catalog_candidate_count": 242,
-  "covered_count": 178,
-  "uncovered_count": 64,
+  "covered_count": 183,
+  "uncovered_count": 59,
   "summary": {
-    "coverage_percent": 73.55,
+    "coverage_percent": 75.62,
     "covered_categories": {
       "Audio": 3,
       "Cleanup": 1,
       "Developer": 7,
       "Explorer": 13,
-      "Network": 19,
+      "Network": 24,
       "Notifications": 5,
       "Performance": 3,
       "Peripheral": 3,
@@ -24,7 +24,7 @@
     "uncovered_categories": {
       "Developer": 2,
       "Explorer": 4,
-      "Network": 9,
+      "Network": 4,
       "Power": 3,
       "Privacy": 19,
       "Security": 4,
@@ -33,59 +33,6 @@
     }
   },
   "recommended_next_batches": [
-    {
-      "category": "Network",
-      "covered_count": 19,
-      "uncovered_count": 9,
-      "coverage_percent": 67.86,
-      "batch_size": 5,
-      "tweak_ids": [
-        "network.smb-enable-multichannel",
-        "network.smb-enable-quic",
-        "network.smb-encrypt-data",
-        "network.smb-increase-client-metadata-cache",
-        "network.smb-reject-unencrypted-access"
-      ],
-      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id network.smb-enable-multichannel --id network.smb-enable-quic --id network.smb-encrypt-data --id network.smb-increase-client-metadata-cache --id network.smb-reject-unencrypted-access",
-      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id network.smb-enable-multichannel --id network.smb-enable-quic --id network.smb-encrypt-data --id network.smb-increase-client-metadata-cache --id network.smb-reject-unencrypted-access --run-kvm --json",
-      "candidates": [
-        {
-          "tweak_id": "network.smb-enable-multichannel",
-          "record_id": "network.smb-enable-multichannel",
-          "category": "Network",
-          "name": "SMB Multichannel",
-          "documentation": "research/records/network.smb-enable-multichannel.review.json"
-        },
-        {
-          "tweak_id": "network.smb-enable-quic",
-          "record_id": "network.smb-enable-quic",
-          "category": "Network",
-          "name": "SMB over QUIC",
-          "documentation": "research/records/network.smb-enable-quic.review.json"
-        },
-        {
-          "tweak_id": "network.smb-encrypt-data",
-          "record_id": "network.smb-encrypt-data",
-          "category": "Network",
-          "name": "SMB Server Encryption Requirement",
-          "documentation": "research/records/network.smb-encrypt-data.json"
-        },
-        {
-          "tweak_id": "network.smb-increase-client-metadata-cache",
-          "record_id": "network.smb-increase-client-metadata-cache",
-          "category": "Network",
-          "name": "SMB Client Metadata Cache Size Bundle",
-          "documentation": "research/records/network.smb-increase-client-metadata-cache.json"
-        },
-        {
-          "tweak_id": "network.smb-reject-unencrypted-access",
-          "record_id": "network.smb-reject-unencrypted-access",
-          "category": "Network",
-          "name": "SMB Server Reject Unencrypted Access",
-          "documentation": "research/records/network.smb-reject-unencrypted-access.json"
-        }
-      ]
-    },
     {
       "category": "System",
       "covered_count": 36,
@@ -279,6 +226,51 @@
           "category": "Privacy",
           "name": "Windows Suggestion Surfaces Policy Group",
           "documentation": "research/records/privacy.disable-suggestions.policy.review.json"
+        }
+      ]
+    },
+    {
+      "category": "Explorer",
+      "covered_count": 13,
+      "uncovered_count": 4,
+      "coverage_percent": 76.47,
+      "batch_size": 4,
+      "tweak_ids": [
+        "explorer.show-info-tips",
+        "explorer.show-protected-operating-system-files",
+        "explorer.show-recent-items",
+        "explorer.show-type-overlay"
+      ],
+      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id explorer.show-info-tips --id explorer.show-protected-operating-system-files --id explorer.show-recent-items --id explorer.show-type-overlay",
+      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id explorer.show-info-tips --id explorer.show-protected-operating-system-files --id explorer.show-recent-items --id explorer.show-type-overlay --run-kvm --json",
+      "candidates": [
+        {
+          "tweak_id": "explorer.show-info-tips",
+          "record_id": "explorer.show-info-tips",
+          "category": "Explorer",
+          "name": "Show Explorer Info Tips",
+          "documentation": "research/records/explorer.show-info-tips.review.json"
+        },
+        {
+          "tweak_id": "explorer.show-protected-operating-system-files",
+          "record_id": "explorer.show-protected-operating-system-files",
+          "category": "Explorer",
+          "name": "Show Protected Operating System Files",
+          "documentation": "research/records/explorer.show-protected-operating-system-files.review.json"
+        },
+        {
+          "tweak_id": "explorer.show-recent-items",
+          "record_id": "explorer.show-recent-items",
+          "category": "Explorer",
+          "name": "Show Recent Items In Home",
+          "documentation": "research/records/explorer.show-recent-items.review.json"
+        },
+        {
+          "tweak_id": "explorer.show-type-overlay",
+          "record_id": "explorer.show-type-overlay",
+          "category": "Explorer",
+          "name": "Display File Icons On Thumbnails",
+          "documentation": "research/records/explorer.show-type-overlay.review.json"
         }
       ]
     }
@@ -669,6 +661,51 @@
       "category": "Network",
       "name": "SMB Client Large MTU",
       "documentation": "research/records/network.smb-enable-large-mtu.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "network.smb-enable-multichannel",
+      "qa_tweak_id": "network.smb-enable-multichannel",
+      "candidate_id": "network.smb-enable-multichannel",
+      "category": "Network",
+      "name": "SMB Multichannel",
+      "documentation": "research/records/network.smb-enable-multichannel.review.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "network.smb-enable-quic",
+      "qa_tweak_id": "network.smb-enable-quic",
+      "candidate_id": "network.smb-enable-quic",
+      "category": "Network",
+      "name": "SMB over QUIC",
+      "documentation": "research/records/network.smb-enable-quic.review.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "network.smb-encrypt-data",
+      "qa_tweak_id": "network.smb-encrypt-data",
+      "candidate_id": "network.smb-encrypt-data",
+      "category": "Network",
+      "name": "SMB Server Encryption Requirement",
+      "documentation": "research/records/network.smb-encrypt-data.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "network.smb-increase-client-metadata-cache",
+      "qa_tweak_id": "network.smb-increase-client-metadata-cache",
+      "candidate_id": "network.smb-increase-client-metadata-cache",
+      "category": "Network",
+      "name": "SMB Client Metadata Cache Size Bundle",
+      "documentation": "research/records/network.smb-increase-client-metadata-cache.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "network.smb-reject-unencrypted-access",
+      "qa_tweak_id": "network.smb-reject-unencrypted-access",
+      "candidate_id": "network.smb-reject-unencrypted-access",
+      "category": "Network",
+      "name": "SMB Server Reject Unencrypted Access",
+      "documentation": "research/records/network.smb-reject-unencrypted-access.json",
       "latest_report_status": "ok"
     },
     {
@@ -1929,41 +1966,6 @@
       "category": "Explorer",
       "name": "Display File Icons On Thumbnails",
       "documentation": "research/records/explorer.show-type-overlay.review.json"
-    },
-    {
-      "tweak_id": "network.smb-enable-multichannel",
-      "record_id": "network.smb-enable-multichannel",
-      "category": "Network",
-      "name": "SMB Multichannel",
-      "documentation": "research/records/network.smb-enable-multichannel.review.json"
-    },
-    {
-      "tweak_id": "network.smb-enable-quic",
-      "record_id": "network.smb-enable-quic",
-      "category": "Network",
-      "name": "SMB over QUIC",
-      "documentation": "research/records/network.smb-enable-quic.review.json"
-    },
-    {
-      "tweak_id": "network.smb-encrypt-data",
-      "record_id": "network.smb-encrypt-data",
-      "category": "Network",
-      "name": "SMB Server Encryption Requirement",
-      "documentation": "research/records/network.smb-encrypt-data.json"
-    },
-    {
-      "tweak_id": "network.smb-increase-client-metadata-cache",
-      "record_id": "network.smb-increase-client-metadata-cache",
-      "category": "Network",
-      "name": "SMB Client Metadata Cache Size Bundle",
-      "documentation": "research/records/network.smb-increase-client-metadata-cache.json"
-    },
-    {
-      "tweak_id": "network.smb-reject-unencrypted-access",
-      "record_id": "network.smb-reject-unencrypted-access",
-      "category": "Network",
-      "name": "SMB Server Reject Unencrypted Access",
-      "documentation": "research/records/network.smb-reject-unencrypted-access.json"
     },
     {
       "tweak_id": "network.smb-require-dialect-3_1_1",

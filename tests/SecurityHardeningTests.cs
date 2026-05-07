@@ -295,6 +295,8 @@ public sealed class CommandAllowlistSecurityTests
             CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters", "/v", "MaxCmds", "/t", "REG_DWORD", "/d", "32768", "/f"),
             CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters", "/v", "EnableSecuritySignature", "/t", "REG_DWORD", "/d", "1", "/f"),
             CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters", "/v", "RequireSecuritySignature", "/t", "REG_DWORD", "/d", "1", "/f"),
+            CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters", "/v", "EncryptData", "/t", "REG_DWORD", "/d", "1", "/f"),
+            CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters", "/v", "RejectUnencryptedAccess", "/t", "REG_DWORD", "/d", "1", "/f"),
             CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers", "/v", "HwSchMode", "/t", "REG_DWORD", "/d", "2", "/f"),
             CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers", "/v", "TdrDdiDelay", "/t", "REG_DWORD", "/d", "5", "/f"),
             CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers", "/v", "TdrDelay", "/t", "REG_DWORD", "/d", "2", "/f"),

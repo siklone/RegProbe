@@ -282,6 +282,8 @@ public sealed class CommandAllowlist
         AddRegDwordRule(regAllowlist, @"HKLM\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters", "MaxCmds", "15", "64", "32768");
         AddRegDwordRule(regAllowlist, @"HKLM\System\CurrentControlSet\Services\LanmanServer\Parameters", "EnableSecuritySignature", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\System\CurrentControlSet\Services\LanmanServer\Parameters", "RequireSecuritySignature", "0", "1", "2");
+        AddRegDwordRule(regAllowlist, @"HKLM\System\CurrentControlSet\Services\LanmanServer\Parameters", "EncryptData", "0", "1");
+        AddRegDwordRule(regAllowlist, @"HKLM\System\CurrentControlSet\Services\LanmanServer\Parameters", "RejectUnencryptedAccess", "0", "1");
         AddRegDwordRule(regAllowlist, @"HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers", "HwSchMode", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers", "TdrDdiDelay", "5");
         AddRegDwordRule(regAllowlist, @"HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers", "TdrDelay", "2");
