@@ -191,7 +191,7 @@
         "path",
         "value",
         "ui-mapping",
-      "app-mismatch"
+        "app-mismatch"
       ],
       "strength": "high"
     },
@@ -204,6 +204,19 @@
       "supports": [
         "ui-mapping",
         "app-mismatch"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "vm-power.disable-network-power-saving-etw-qga-unblock-20260507",
+      "kind": "etw-trace",
+      "title": "QGA-first ETW stackwalk probe receipt",
+      "location": "evidence/captures/power-disable-network-power-saving-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507.etl and evidence/raw/etw-stackwalk/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507.etl and 3 additional raw artifact refs listed in the receipt",
+      "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced host-ingested ETL/XML artifacts and normalized bundles for 3 target value(s): `DisableTaskOffload`, `SystemResponsiveness`, `NetworkThrottlingIndex`. The QGA-launched `reg.exe query` probe produced exact target RegQueryValue events for 3/3 target(s), clearing the earlier tracerpt/artifact-upload blocker. This receipt proves the ETW/QGA probe can observe the documented registry surface, but it is probe-read evidence rather than independent Windows component consumption proof.",
+      "supports": [
+        "path",
+        "value",
+        "version-scope"
       ],
       "strength": "medium"
     }
@@ -243,7 +256,7 @@
     },
     "runtime_capture_reviewed": {
       "etw-stackwalk": true,
-      "status": "host-timeout-at-tracerpt"
+      "status": "qga_unblocked_ingest_ok"
     },
     "static_reviewed": {
       "ghidra": true,
@@ -269,9 +282,12 @@
       "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review still returns no candidate-specific WRK hit for `DisableTaskOffload` or `SystemResponsiveness`."
     },
-    "notes": "The deprecated mixed bundle does not retain candidate-specific ReactOS or WRK corroboration in the local enrichment corpus, and exact 2026-04-24 ReactOS doxygen searches for the retained official child values also returned no direct match. Current justification remains official-doc and repo-code driven, with the opaque `NetworkThrottlingIndex` concern preserved in the parent audit trail. A bounded 2026-04-24 ETW stackwalk retry for `DisableTaskOffload` reached `stage = tracerpt` before the hard 90 second timeout fired without uploading a repo-visible bundle, and a same-day guest Ghidra string-xref retry failed in `ensure-admin-shell` before any wrapper stage could start."
+    "notes": "The deprecated mixed bundle does not retain candidate-specific ReactOS or WRK corroboration in the local enrichment corpus, and exact 2026-04-24 ReactOS doxygen searches for the retained official child values also returned no direct match. Current justification remains official-doc and repo-code driven, with the opaque `NetworkThrottlingIndex` concern preserved in the parent audit trail. A bounded 2026-04-24 ETW stackwalk retry for `DisableTaskOffload` reached `stage = tracerpt` before the hard 90 second timeout fired without uploading a repo-visible bundle, and a same-day guest Ghidra string-xref retry failed in `ensure-admin-shell` before any wrapper stage could start. A 2026-05-07 QGA-first ETW stackwalk rerun cleared the earlier timeout/upload blocker for 3/3 target probe(s) and produced host-ingested raw ETL/XML plus normalized bundles; the captured value reads are QGA-launched probe reads, not independent product-consumer proof.",
+    "etw_stackwalk_reviewed": true,
+    "etw_stackwalk_review_status": "qga_unblocked_ingest_ok",
+    "etw_stackwalk_review_artifact": "evidence/captures/power-disable-network-power-saving-etw-qga-unblock-20260507.json"
   },
-  "last_reviewed_utc": "2026-04-28T06:36:37Z",
+  "last_reviewed_utc": "2026-05-07T14:43:50.544726Z",
   "validation_proof": {
     "source_url": "research/_source-mirrors/win-config/network/desc.md",
     "exact_quote_or_path": "RegSetValue HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters\\DisableBandwidthThrottling Type: REG_DWORD, Length: 4, Data: 1. Task offloading has to be enabled, or RSS won't work (DisableTaskOffload). *RssOrVmqPreference = 0; // range 0-1; 0 Report RSS capabilities - 1 Report VMQ capabilities.",

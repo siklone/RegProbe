@@ -162,6 +162,19 @@
       "strength": "low"
     },
     {
+      "evidence_id": "vm-audio.disable-spatial-audio-etw-qga-unblock-20260507",
+      "kind": "etw-trace",
+      "title": "QGA-first ETW stackwalk probe receipt",
+      "location": "evidence/captures/audio-disable-spatial-audio-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/audio-disable-spatial-audio-disablespatialonlowlatency-etw-qga-unblock-20260507/audio-disable-spatial-audio-disablespatialonlowlatency-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/audio-disable-spatial-audio-disablespatialonlowlatency-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/audio-disable-spatial-audio-disablespatialonlowlatency-etw-qga-unblock-20260507/audio-disable-spatial-audio-disablespatialonlowlatency-etw-qga-unblock-20260507.etl",
+      "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced host-ingested ETL/XML artifacts and normalized bundles for 1 target value(s): `DisableSpatialOnLowLatency`. The QGA-launched `reg.exe query` probe produced exact target RegQueryValue events for 1/1 target(s), clearing the earlier tracerpt/artifact-upload blocker. This receipt proves the ETW/QGA probe can observe the documented registry surface, but it is probe-read evidence rather than independent Windows component consumption proof.",
+      "supports": [
+        "path",
+        "value",
+        "version-scope"
+      ],
+      "strength": "medium"
+    },
+    {
       "evidence_id": "vm-audio-disable-spatial-audio-ghidra-launch-receipt-20260424",
       "kind": "vm-test",
       "title": "Guest Ghidra launch receipt for DisableSpatialOnLowLatency",
@@ -185,7 +198,7 @@
       "No primary Microsoft source for HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Audio\\DisableSpatialOnLowLatency was captured in this pass."
     ]
   },
-  "last_reviewed_utc": "2026-04-28T11:11:34Z",
+  "last_reviewed_utc": "2026-05-07T14:43:50.544726Z",
   "validation_proof": {
     "source_url": "Docs/tweaks/tweak-provenance.json",
     "exact_quote_or_path": "Repo source note for audio.disable-spatial-audio: The repo source note links DisableSpatialOnLowLatency to upstream nohuto research and marks the tweak as repo-backed.",
@@ -218,11 +231,11 @@
     },
     "runtime_capture_reviewed": {
       "etw-stackwalk": true,
-      "status": "artifact_upload_timeout_stage_only"
+      "status": "qga_unblocked_ingest_ok"
     },
     "etw_stackwalk_reviewed": true,
-    "etw_stackwalk_review_status": "artifact_upload_timeout_stage_only",
-    "etw_stackwalk_review_artifact": "evidence/captures/audio-disable-spatial-audio-etw-stackwalk-attempt-20260424.json",
+    "etw_stackwalk_review_status": "qga_unblocked_ingest_ok",
+    "etw_stackwalk_review_artifact": "evidence/captures/audio-disable-spatial-audio-etw-qga-unblock-20260507.json",
     "static_reviewed": {
       "ghidra": true,
       "status": "launch_blocked"
@@ -230,6 +243,6 @@
     "ghidra": true,
     "ghidra_status": "launch_blocked",
     "ghidra_artifact": "evidence/raw/ghidra/ghidra-audio-disable-spatial-audio-20260424-batch1/summary.json",
-    "notes": "The record still lacks a primary Microsoft registry contract for `DisableSpatialOnLowLatency`. A bounded 2026-04-24 ETW retry only retained a stage receipt at artifact-upload, and a paired guest Ghidra retry failed in `ensure-admin-shell` before any xref bundle reached the host."
+    "notes": "The record still lacks a primary Microsoft registry contract for `DisableSpatialOnLowLatency`. A bounded 2026-04-24 ETW retry only retained a stage receipt at artifact-upload, and a paired guest Ghidra retry failed in `ensure-admin-shell` before any xref bundle reached the host. A 2026-05-07 QGA-first ETW stackwalk rerun cleared the earlier timeout/upload blocker for 1/1 target probe(s) and produced host-ingested raw ETL/XML plus normalized bundles; the captured value reads are QGA-launched probe reads, not independent product-consumer proof."
   }
 }

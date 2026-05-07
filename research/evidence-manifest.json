@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-07T14:09:11.028551Z",
+  "generated_utc": "2026-05-07T14:44:20.763548Z",
   "source_index": "research/evidence-index.json",
   "summary": {
     "total_records": 356,
@@ -21,7 +21,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-05-07T14:09:09.771231Z",
+      "generated_utc": "2026-05-07T14:44:19.422958Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -135,8 +135,8 @@
         }
       },
       "source_file": "research/records/audio.disable-spatial-audio.review.json",
-      "source_file_sha256": "616df0b514756b59204b5d416f4c01f96bb2b256545c3b1e7d19255af7839b23",
-      "source_file_size_bytes": 11643,
+      "source_file_sha256": "e8cee1240707d588784b82bea0b9c6a4bc0c4ea2c674094efdf5e07dfef985bf",
+      "source_file_size_bytes": 13329,
       "name": "Spatial Audio on Low-Latency Devices",
       "category": "Audio",
       "area": "Audio Engine Flags",
@@ -298,6 +298,20 @@
           "strength": "low",
           "supports": [
             "behavior",
+            "version-scope"
+          ],
+          "origin": "unspecified"
+        },
+        {
+          "evidence_id": "vm-audio.disable-spatial-audio-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk probe receipt",
+          "location": "evidence/captures/audio-disable-spatial-audio-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/audio-disable-spatial-audio-disablespatialonlowlatency-etw-qga-unblock-20260507/audio-disable-spatial-audio-disablespatialonlowlatency-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/audio-disable-spatial-audio-disablespatialonlowlatency-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/audio-disable-spatial-audio-disablespatialonlowlatency-etw-qga-unblock-20260507/audio-disable-spatial-audio-disablespatialonlowlatency-etw-qga-unblock-20260507.etl",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced host-ingested ETL/XML artifacts and normalized bundles for 1 target value(s): `DisableSpatialOnLowLatency`. The QGA-launched `reg.exe query` probe produced exact target RegQueryValue events for 1/1 target(s), clearing the earlier tracerpt/artifact-upload blocker. This receipt proves the ETW/QGA probe can observe the documented registry surface, but it is probe-read evidence rather than independent Windows component consumption proof.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "value",
             "version-scope"
           ],
           "origin": "unspecified"
@@ -2968,8 +2982,8 @@
         }
       },
       "source_file": "research/records/power.disable-network-power-saving.review.json",
-      "source_file_sha256": "fc3b35a015a20f9d0a1d6dbf385c0300f0c10d262475a79bd10cfa443297e098",
-      "source_file_size_bytes": 13283,
+      "source_file_sha256": "d7814c9041219e2491f02ebee57422ae9ed4d0119059a2a069a4f5cbcdda6b27",
+      "source_file_size_bytes": 15874,
       "name": "Network Power and Multimedia Responsiveness Bundle",
       "category": "Power",
       "area": "Mixed Network and MMCSS Registry",
@@ -3181,6 +3195,20 @@
             "app-mismatch"
           ],
           "origin": "Current repo docs"
+        },
+        {
+          "evidence_id": "vm-power.disable-network-power-saving-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk probe receipt",
+          "location": "evidence/captures/power-disable-network-power-saving-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507.etl and evidence/raw/etw-stackwalk/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507.etl and 3 additional raw artifact refs listed in the receipt",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced host-ingested ETL/XML artifacts and normalized bundles for 3 target value(s): `DisableTaskOffload`, `SystemResponsiveness`, `NetworkThrottlingIndex`. The QGA-launched `reg.exe query` probe produced exact target RegQueryValue events for 3/3 target(s), clearing the earlier tracerpt/artifact-upload blocker. This receipt proves the ETW/QGA probe can observe the documented registry surface, but it is probe-read evidence rather than independent Windows component consumption proof.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "value",
+            "version-scope"
+          ],
+          "origin": "unspecified"
         }
       ],
       "validation_proof": {
@@ -4867,8 +4895,8 @@
         }
       },
       "source_file": "research/records/privacy.disable-cross-device-experiences.review.json",
-      "source_file_sha256": "f2c90fc57b546218481e2580b98622888b1093968e5da864b00a87b45e28d133",
-      "source_file_size_bytes": 16114,
+      "source_file_sha256": "dc085c99a4fa1e7912af4c03ad0d4bf2c671421444fe18252383cdaee241129e",
+      "source_file_size_bytes": 18378,
       "name": "Cross-Device Experiences",
       "category": "Privacy",
       "area": "Mixed Registry Configuration",
@@ -5179,6 +5207,20 @@
             "version-scope"
           ],
           "origin": "VM test / probe"
+        },
+        {
+          "evidence_id": "vm-privacy.disable-cross-device-experiences-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk probe receipt",
+          "location": "evidence/captures/privacy-disable-cross-device-experiences-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507.etl",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced host-ingested ETL/XML artifacts and normalized bundles for 1 target value(s): `EnableCdp`. The QGA-launched `reg.exe query` probe produced exact target RegQueryValue events for 1/1 target(s), clearing the earlier tracerpt/artifact-upload blocker. This receipt proves the ETW/QGA probe can observe the documented registry surface, but it is probe-read evidence rather than independent Windows component consumption proof. This receipt covers the HKLM EnableCdp policy target only; the deprecated mixed parent also retains HKCU CDP companion values outside this ETW rerun.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "value",
+            "version-scope"
+          ],
+          "origin": "unspecified"
         }
       ],
       "validation_proof": {
@@ -20120,8 +20162,8 @@
         }
       },
       "source_file": "research/records/system.kernel-dpc-watchdog-control-cluster.json",
-      "source_file_sha256": "71823d80308cf31e9003b04054a96105323168726ffcd7574d7290e846d38b5f",
-      "source_file_size_bytes": 33798,
+      "source_file_sha256": "e6379fcd408b1a84e980205af5df4fd83f895ea6b3119dd3ec2039cc0ecb199e",
+      "source_file_size_bytes": 36242,
       "name": "Session Manager Kernel DPC Watchdog Control Timeout Cluster",
       "category": "System",
       "area": "Session Manager Kernel DPC Watchdog Control Timeouts",
@@ -20476,6 +20518,20 @@
             "version-scope"
           ],
           "origin": "VM test / probe"
+        },
+        {
+          "evidence_id": "vm-system.kernel-dpc-watchdog-control-cluster-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk probe receipt",
+          "location": "evidence/captures/system-kernel-dpc-watchdog-control-cluster-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/system-kernel-dpc-watchdog-dpctimeout-etw-qga-unblock-20260507/system-kernel-dpc-watchdog-dpctimeout-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/system-kernel-dpc-watchdog-dpctimeout-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/system-kernel-dpc-watchdog-dpctimeout-etw-qga-unblock-20260507/system-kernel-dpc-watchdog-dpctimeout-etw-qga-unblock-20260507.etl and evidence/raw/etw-stackwalk/system-kernel-dpc-watchdog-dpcsofttimeout-etw-qga-unblock-20260507/system-kernel-dpc-watchdog-dpcsofttimeout-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/system-kernel-dpc-watchdog-dpcsofttimeout-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/system-kernel-dpc-watchdog-dpcsofttimeout-etw-qga-unblock-20260507/system-kernel-dpc-watchdog-dpcsofttimeout-etw-qga-unblock-20260507.etl and 3 additional raw artifact refs listed in the receipt",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced host-ingested ETL/XML artifacts and normalized bundles for 3 target value(s): `DPCTimeout`, `DpcSoftTimeout`, `DpcCumulativeSoftTimeout`. The QGA-launched `reg.exe query` probe produced exact target RegQueryValue events for 3/3 target(s), clearing the earlier tracerpt/artifact-upload blocker. This receipt proves the ETW/QGA probe can observe the documented registry surface, but it is probe-read evidence rather than independent Windows component consumption proof.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "value",
+            "version-scope"
+          ],
+          "origin": "unspecified"
         }
       ],
       "validation_proof": {
@@ -43104,8 +43160,8 @@
         }
       },
       "source_file": "research/records/network.disable-default-shares.json",
-      "source_file_sha256": "f014ca024e574a28f2f11708c68648e882fb53ade128548b94ae2b3fb10cb44e",
-      "source_file_size_bytes": 14936,
+      "source_file_sha256": "de61e1c176d8cc6e7f3a781c6edf00ba49a3b35717c84acc6f9e20cbee7fd64b",
+      "source_file_size_bytes": 17324,
       "name": "Automatic Administrative Shares",
       "category": "Network",
       "area": "Registry Configuration",
@@ -43381,6 +43437,20 @@
             "ui-mapping"
           ],
           "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "vm-network.disable-default-shares-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk probe receipt",
+          "location": "evidence/captures/network-disable-default-shares-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/network-disable-default-shares-autoshareserver-etw-qga-unblock-20260507/network-disable-default-shares-autoshareserver-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/network-disable-default-shares-autoshareserver-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/network-disable-default-shares-autoshareserver-etw-qga-unblock-20260507/network-disable-default-shares-autoshareserver-etw-qga-unblock-20260507.etl and evidence/raw/etw-stackwalk/network-disable-default-shares-autosharewks-etw-qga-unblock-20260507/network-disable-default-shares-autosharewks-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/network-disable-default-shares-autosharewks-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/network-disable-default-shares-autosharewks-etw-qga-unblock-20260507/network-disable-default-shares-autosharewks-etw-qga-unblock-20260507.etl",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced host-ingested ETL/XML artifacts and normalized bundles for 2 target value(s): `AutoShareServer`, `AutoShareWks`. The QGA-launched `reg.exe query` probe produced exact target RegQueryValue events for 2/2 target(s), clearing the earlier tracerpt/artifact-upload blocker. This receipt proves the ETW/QGA probe can observe the documented registry surface, but it is probe-read evidence rather than independent Windows component consumption proof.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "value",
+            "version-scope"
+          ],
+          "origin": "unspecified"
         }
       ],
       "validation_proof": {
@@ -59916,8 +59986,8 @@
         }
       },
       "source_file": "research/records/power.disable-network-power-saving.policy.review.json",
-      "source_file_sha256": "2a396fcba5e318a09ff608add6fa8d7d15d991ddc96b0d34609c7fd74c28a70b",
-      "source_file_size_bytes": 15087,
+      "source_file_sha256": "ad2354239542f7cf0b1ba220d201c15bec557ea601ab9956d9925a23290988af",
+      "source_file_size_bytes": 17614,
       "name": "Network Power and Multimedia Responsiveness",
       "category": "Power",
       "area": "TCP/IP offload + MMCSS policy",
@@ -60111,6 +60181,20 @@
             "ui-mapping"
           ],
           "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "vm-power.disable-network-power-saving.policy-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk probe receipt",
+          "location": "evidence/captures/power-disable-network-power-saving-policy-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507.etl and evidence/raw/etw-stackwalk/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507.etl",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced host-ingested ETL/XML artifacts and normalized bundles for 2 target value(s): `DisableTaskOffload`, `SystemResponsiveness`. The QGA-launched `reg.exe query` probe produced exact target RegQueryValue events for 2/2 target(s), clearing the earlier tracerpt/artifact-upload blocker. This receipt proves the ETW/QGA probe can observe the documented registry surface, but it is probe-read evidence rather than independent Windows component consumption proof.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "value",
+            "version-scope"
+          ],
+          "origin": "unspecified"
         }
       ],
       "validation_proof": {
@@ -60266,8 +60350,8 @@
         }
       },
       "source_file": "research/records/power.disable-power-throttling.json",
-      "source_file_sha256": "05d9d10bd486d058a8f1a3076c038a00c96222eba018d90c5548281975db71db",
-      "source_file_size_bytes": 11281,
+      "source_file_sha256": "8a5f23aac7116900e33068e8b0c7ace86b5a17f1ab791020061f38551552ff3f",
+      "source_file_size_bytes": 13184,
       "name": "Power Throttling",
       "category": "Power",
       "area": "Registry Policy",
@@ -60462,6 +60546,20 @@
             "ui-mapping"
           ],
           "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "vm-power.disable-power-throttling-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk probe receipt",
+          "location": "evidence/captures/power-disable-power-throttling-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/power-disable-power-throttling-powerthrottlingoff-etw-qga-unblock-20260507/power-disable-power-throttling-powerthrottlingoff-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/power-disable-power-throttling-powerthrottlingoff-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/power-disable-power-throttling-powerthrottlingoff-etw-qga-unblock-20260507/power-disable-power-throttling-powerthrottlingoff-etw-qga-unblock-20260507.etl",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced host-ingested ETL/XML artifacts and normalized bundles for 1 target value(s): `PowerThrottlingOff`. The QGA-launched `reg.exe query` probe produced exact target RegQueryValue events for 1/1 target(s), clearing the earlier tracerpt/artifact-upload blocker. This receipt proves the ETW/QGA probe can observe the documented registry surface, but it is probe-read evidence rather than independent Windows component consumption proof.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "value",
+            "version-scope"
+          ],
+          "origin": "unspecified"
         }
       ],
       "validation_proof": {
@@ -69248,8 +69346,8 @@
         }
       },
       "source_file": "research/records/privacy.disable-cross-device-experiences.policy.review.json",
-      "source_file_sha256": "634f76eb39cba15a7e665521fcbb93bd8323c57d1a2c8ea1c672e1759343f8ab",
-      "source_file_size_bytes": 13214,
+      "source_file_sha256": "c5967c1da67acbb6265025c05d67ecf56e3b8a39d55298a32b907eff2ddf8d8c",
+      "source_file_size_bytes": 15152,
       "name": "Cross-Device Experiences Machine Policy",
       "category": "Privacy",
       "area": "Machine Policy",
@@ -69484,6 +69582,20 @@
             "allowed-values"
           ],
           "origin": "Nohuto's and our Ghidra decompilation"
+        },
+        {
+          "evidence_id": "vm-privacy.disable-cross-device-experiences.policy-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk probe receipt",
+          "location": "evidence/captures/privacy-disable-cross-device-experiences-policy-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507.etl",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced host-ingested ETL/XML artifacts and normalized bundles for 1 target value(s): `EnableCdp`. The QGA-launched `reg.exe query` probe produced exact target RegQueryValue events for 1/1 target(s), clearing the earlier tracerpt/artifact-upload blocker. This receipt proves the ETW/QGA probe can observe the documented registry surface, but it is probe-read evidence rather than independent Windows component consumption proof.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "value",
+            "version-scope"
+          ],
+          "origin": "unspecified"
         }
       ],
       "validation_proof": {
@@ -89198,8 +89310,8 @@
         }
       },
       "source_file": "research/records/security.enable-defender-maps-advanced-membership.review.json",
-      "source_file_sha256": "418ffa55eda325e4fa06ce5a53c68537f3a6590e1a59039f40fa6b9fcdc114e9",
-      "source_file_size_bytes": 13774,
+      "source_file_sha256": "083c10075ea7561ce27b39a0e24e1064436dd98c7a06e9cd63b40b908875678a",
+      "source_file_size_bytes": 15804,
       "name": "Microsoft Defender MAPS Membership",
       "category": "Security",
       "area": "Microsoft Defender cloud protection",
@@ -89434,6 +89546,20 @@
             "ui-mapping"
           ],
           "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "vm-security.enable-defender-maps-advanced-membership-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk probe receipt",
+          "location": "evidence/captures/security-enable-defender-maps-advanced-membership-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/security-enable-defender-maps-advanced-membership-spynetreporting-etw-qga-unblock-20260507/security-enable-defender-maps-advanced-membership-spynetreporting-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/security-enable-defender-maps-advanced-membership-spynetreporting-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/security-enable-defender-maps-advanced-membership-spynetreporting-etw-qga-unblock-20260507/security-enable-defender-maps-advanced-membership-spynetreporting-etw-qga-unblock-20260507.etl",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced host-ingested ETL/XML artifacts and normalized bundles for 1 target value(s): `SpyNetReporting`. The QGA-launched `reg.exe query` probe produced exact target RegQueryValue events for 1/1 target(s), clearing the earlier tracerpt/artifact-upload blocker. This receipt proves the ETW/QGA probe can observe the documented registry surface, but it is probe-read evidence rather than independent Windows component consumption proof.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "value",
+            "version-scope"
+          ],
+          "origin": "unspecified"
         }
       ],
       "validation_proof": {
@@ -89789,8 +89915,8 @@
         }
       },
       "source_file": "research/records/security.enable-sudo.json",
-      "source_file_sha256": "cd302d5d5772f55844bc67ff810d0c93e1d2cd5b978723b8ed31a6dbe078e03d",
-      "source_file_size_bytes": 11582,
+      "source_file_sha256": "5e9f8b6cc796091e7d02d1508a156b9534e510ca2328c37859e181e6398e7ae3",
+      "source_file_size_bytes": 13332,
       "name": "Windows Sudo Mode Policy",
       "category": "Security",
       "area": "Registry Policy",
@@ -90004,6 +90130,20 @@
             "ui-mapping"
           ],
           "origin": "Current repo code"
+        },
+        {
+          "evidence_id": "vm-security.enable-sudo-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk probe receipt",
+          "location": "evidence/captures/security-enable-sudo-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/security-enable-sudo-enabled-etw-qga-unblock-20260507/security-enable-sudo-enabled-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/security-enable-sudo-enabled-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/security-enable-sudo-enabled-etw-qga-unblock-20260507/security-enable-sudo-enabled-etw-qga-unblock-20260507.etl",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced host-ingested ETL/XML artifacts and normalized bundles for 1 target value(s): `Enabled`. The QGA-launched `reg.exe query` probe produced exact target RegQueryValue events for 1/1 target(s), clearing the earlier tracerpt/artifact-upload blocker. This receipt proves the ETW/QGA probe can observe the documented registry surface, but it is probe-read evidence rather than independent Windows component consumption proof.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "value",
+            "version-scope"
+          ],
+          "origin": "unspecified"
         }
       ],
       "validation_proof": {
@@ -90825,8 +90965,8 @@
         }
       },
       "source_file": "research/records/security.threat-file-hash-logging.review.json",
-      "source_file_sha256": "f399e688f4bc2734fec87c550cf72724f58016c9570818a1e942604b9c77aa54",
-      "source_file_size_bytes": 28176,
+      "source_file_sha256": "09a3e4a5617a49edbb6c4670561af0275f9a6497f1bd2209478be486ac2ba81a",
+      "source_file_size_bytes": 30871,
       "name": "Microsoft Defender Threat File Hash Logging",
       "category": "Security",
       "area": "Microsoft Defender file hash logging",
@@ -91304,6 +91444,20 @@
             "path"
           ],
           "origin": "VM test / probe"
+        },
+        {
+          "evidence_id": "vm-security.threat-file-hash-logging-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk probe receipt",
+          "location": "evidence/captures/security-threat-file-hash-logging-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/security-threat-file-hash-logging-threatfilehashlogging-etw-qga-unblock-20260507/security-threat-file-hash-logging-threatfilehashlogging-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/security-threat-file-hash-logging-threatfilehashlogging-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/security-threat-file-hash-logging-threatfilehashlogging-etw-qga-unblock-20260507/security-threat-file-hash-logging-threatfilehashlogging-etw-qga-unblock-20260507.etl and evidence/raw/etw-stackwalk/security-threat-file-hash-logging-policy-manager-enablefilehashcomputation-etw-qga-unblock-20260507/security-threat-file-hash-logging-policy-manager-enablefilehashcomputation-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/security-threat-file-hash-logging-policy-manager-enablefilehashcomputation-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/security-threat-file-hash-logging-policy-manager-enablefilehashcomputation-etw-qga-unblock-20260507/security-threat-file-hash-logging-policy-manager-enablefilehashcomputation-etw-qga-unblock-20260507.etl and 3 additional raw artifact refs listed in the receipt",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced host-ingested ETL/XML artifacts and normalized bundles for 3 target value(s): `ThreatFileHashLogging`, `EnableFileHashComputation`, `EnableFileHashComputation`. The QGA-launched `reg.exe query` probe produced exact target RegQueryValue events for 2/3 target(s), clearing the earlier tracerpt/artifact-upload blocker. This receipt proves the ETW/QGA probe can observe the documented registry surface, but it is probe-read evidence rather than independent Windows component consumption proof.",
+          "strength": "medium",
+          "supports": [
+            "path",
+            "value",
+            "version-scope"
+          ],
+          "origin": "unspecified"
         }
       ],
       "validation_proof": {

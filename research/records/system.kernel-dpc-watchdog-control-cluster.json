@@ -349,6 +349,19 @@
         "version-scope"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "vm-system.kernel-dpc-watchdog-control-cluster-etw-qga-unblock-20260507",
+      "kind": "etw-trace",
+      "title": "QGA-first ETW stackwalk probe receipt",
+      "location": "evidence/captures/system-kernel-dpc-watchdog-control-cluster-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/system-kernel-dpc-watchdog-dpctimeout-etw-qga-unblock-20260507/system-kernel-dpc-watchdog-dpctimeout-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/system-kernel-dpc-watchdog-dpctimeout-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/system-kernel-dpc-watchdog-dpctimeout-etw-qga-unblock-20260507/system-kernel-dpc-watchdog-dpctimeout-etw-qga-unblock-20260507.etl and evidence/raw/etw-stackwalk/system-kernel-dpc-watchdog-dpcsofttimeout-etw-qga-unblock-20260507/system-kernel-dpc-watchdog-dpcsofttimeout-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/system-kernel-dpc-watchdog-dpcsofttimeout-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/system-kernel-dpc-watchdog-dpcsofttimeout-etw-qga-unblock-20260507/system-kernel-dpc-watchdog-dpcsofttimeout-etw-qga-unblock-20260507.etl and 3 additional raw artifact refs listed in the receipt",
+      "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced host-ingested ETL/XML artifacts and normalized bundles for 3 target value(s): `DPCTimeout`, `DpcSoftTimeout`, `DpcCumulativeSoftTimeout`. The QGA-launched `reg.exe query` probe produced exact target RegQueryValue events for 3/3 target(s), clearing the earlier tracerpt/artifact-upload blocker. This receipt proves the ETW/QGA probe can observe the documented registry surface, but it is probe-read evidence rather than independent Windows component consumption proof.",
+      "supports": [
+        "path",
+        "value",
+        "version-scope"
+      ],
+      "strength": "medium"
     }
   ],
   "decision": {
@@ -401,7 +414,7 @@
     "wpr_boot_registry_artifact": "evidence/files/vm-tooling-staging/dpc-watchdog-control-wpr-filter-20260414b/dpc-watchdog-control-wpr-filter-20260414b-summary.json",
     "runtime_capture_reviewed": {
       "etw-stackwalk": true,
-      "status": "host-timeout-at-artifact-upload"
+      "status": "qga_unblocked_ingest_ok"
     },
     "source_mirror_reviewed": {
       "reactos": true,
@@ -426,7 +439,10 @@
     "official_docs": true,
     "official_docs_status": "feature_area_only_no_registry_contract",
     "official_docs_note": "Microsoft documents `KeQueryDpcWatchdogInformation` and zero-as-disabled `KDPC_WATCHDOG_INFORMATION` semantics, but does not publish the `Session Manager\\\\Kernel` registry value contract for this cluster.",
-    "notes": "This cluster is now source-enriched enough that more bounded retries in the same environment are unlikely to change the record. Static lanes are strong: Ghidra tied the writer path to `NtSetSystemInformation`, a later init-semantics pass explained how zero-valued control globals survive initialization, and the 2026-04-12 INIT descriptor scan bound all three value names to the same live KD globals. Runtime lanes are also saturated: live KD proved reader, validator, writer, outer query wrapper, and zero-valued current-build state, while the retained 2026-04-14 WPR boot replay still returned zero exact hits for all three value names. Retained ReactOS/WRK source-mirror review still adds no candidate-specific corroboration for the three value names, and exact 2026-04-24 ReactOS doxygen searches also returned no direct match. A bounded 2026-04-23 ETW stackwalk retry for representative value `DPCTimeout` returned no host-visible bridge artifact within the hard 90 second window, and a fresh 2026-04-24 retry advanced only as far as `stage = artifact-upload` / `status = starting` before the same 90 second host timeout fired. Keep this record on intentional hold until a stronger persisted seeding caller, an exact inner query arm, or a primary current-build Microsoft source appears."
+    "notes": "This cluster is now source-enriched enough that more bounded retries in the same environment are unlikely to change the record. Static lanes are strong: Ghidra tied the writer path to `NtSetSystemInformation`, a later init-semantics pass explained how zero-valued control globals survive initialization, and the 2026-04-12 INIT descriptor scan bound all three value names to the same live KD globals. Runtime lanes are also saturated: live KD proved reader, validator, writer, outer query wrapper, and zero-valued current-build state, while the retained 2026-04-14 WPR boot replay still returned zero exact hits for all three value names. Retained ReactOS/WRK source-mirror review still adds no candidate-specific corroboration for the three value names, and exact 2026-04-24 ReactOS doxygen searches also returned no direct match. A bounded 2026-04-23 ETW stackwalk retry for representative value `DPCTimeout` returned no host-visible bridge artifact within the hard 90 second window, and a fresh 2026-04-24 retry advanced only as far as `stage = artifact-upload` / `status = starting` before the same 90 second host timeout fired. Keep this record on intentional hold until a stronger persisted seeding caller, an exact inner query arm, or a primary current-build Microsoft source appears. A 2026-05-07 QGA-first ETW stackwalk rerun cleared the earlier timeout/upload blocker for 3/3 target probe(s) and produced host-ingested raw ETL/XML plus normalized bundles; the captured value reads are QGA-launched probe reads, not independent product-consumer proof.",
+    "etw_stackwalk_reviewed": true,
+    "etw_stackwalk_review_status": "qga_unblocked_ingest_ok",
+    "etw_stackwalk_review_artifact": "evidence/captures/system-kernel-dpc-watchdog-control-cluster-etw-qga-unblock-20260507.json"
   },
-  "last_reviewed_utc": "2026-04-28T10:54:02Z"
+  "last_reviewed_utc": "2026-05-07T14:43:50.544726Z"
 }
