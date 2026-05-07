@@ -1,11 +1,11 @@
 # Promoted App QA Coverage
 
-- Generated UTC: 2026-05-07T17:14:00Z
-- History entries: 65
+- Generated UTC: 2026-05-07T17:15:34Z
+- History entries: 66
 - Promoted app-QA candidates: 242
-- Covered: 196
-- Uncovered: 46
-- Coverage: 80.99%
+- Covered: 201
+- Uncovered: 41
+- Coverage: 83.06%
 
 ## Covered Categories
 
@@ -18,7 +18,7 @@
 - Performance: 3
 - Peripheral: 3
 - Power: 10
-- Privacy: 48
+- Privacy: 53
 - Security: 17
 - System: 41
 - Visibility: 21
@@ -28,16 +28,13 @@
 - Developer: 2
 - Explorer: 4
 - Network: 4
-- Privacy: 19
+- Privacy: 14
 - Security: 4
 - System: 11
 - Visibility: 2
 
 ## Recommended Next Batches
 
-- Privacy: 5 uncovered cards | coverage 71.64%
-  command: `dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-rsop-logging --id privacy.disable-search-box-suggestions --id privacy.disable-sensors --id privacy.disable-steps-recorder --id privacy.disable-suggestions.policy`
-  live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-rsop-logging --id privacy.disable-search-box-suggestions --id privacy.disable-sensors --id privacy.disable-steps-recorder --id privacy.disable-suggestions.policy --run-kvm --json`
 - Explorer: 4 uncovered cards | coverage 76.47%
   command: `dotnet run --project cli/cli.csproj -- research qa-batch --id explorer.show-info-tips --id explorer.show-protected-operating-system-files --id explorer.show-recent-items --id explorer.show-type-overlay`
   live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id explorer.show-info-tips --id explorer.show-protected-operating-system-files --id explorer.show-recent-items --id explorer.show-type-overlay --run-kvm --json`
@@ -47,6 +44,9 @@
 - System: 5 uncovered cards | coverage 78.85%
   command: `dotnet run --project cli/cli.csproj -- research qa-batch --id system.priority-control --id system.reliability-timestamp-enabled --id system.services.disable-bluetooth-audio-gateway --id system.services.disable-bluetooth-support --id system.services.disable-bluetooth-user-service`
   live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id system.priority-control --id system.reliability-timestamp-enabled --id system.services.disable-bluetooth-audio-gateway --id system.services.disable-bluetooth-support --id system.services.disable-bluetooth-user-service --run-kvm --json`
+- Privacy: 5 uncovered cards | coverage 79.1%
+  command: `dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-switchback.policy --id privacy.disable-telemetry-change-notifications --id privacy.disable-telemetry-optin-ui --id privacy.disable-wer --id privacy.disable-windows-location-provider`
+  live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-switchback.policy --id privacy.disable-telemetry-change-notifications --id privacy.disable-telemetry-optin-ui --id privacy.disable-wer --id privacy.disable-windows-location-provider --run-kvm --json`
 - Security: 4 uncovered cards | coverage 80.95%
   command: `dotnet run --project cli/cli.csproj -- research qa-batch --id security.powershell-unrestricted --id security.threat-file-hash-logging --id security.trusted-path-credential-prompting --id security.uac-never-notify`
   live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id security.powershell-unrestricted --id security.threat-file-hash-logging --id security.trusted-path-credential-prompting --id security.uac-never-notify --run-kvm --json`
@@ -63,13 +63,13 @@
 - `network.smb-require-signing-client` | SMB Client Signing Requirement | Network
 - `network.smb-require-signing-server` | SMB Server Signing Requirement | Network
 - `network.smb-set-cipher-suite-order` | SMB Cipher Suite Order | Network
-- `privacy.disable-rsop-logging` | Resultant Set of Policy Logging | Privacy
-- `privacy.disable-search-box-suggestions` | File Explorer Search Box Suggestions | Privacy
-- `privacy.disable-sensors` | Windows Sensors | Privacy
-- `privacy.disable-steps-recorder` | Steps Recorder | Privacy
-- `privacy.disable-suggestions.policy` | Windows Suggestion Surfaces Policy Group | Privacy
 - `privacy.disable-switchback.policy` | Disable SwitchBack Compatibility Policy | Privacy
 - `privacy.disable-telemetry-change-notifications` | Diagnostic Data Change Notifications | Privacy
 - `privacy.disable-telemetry-optin-ui` | Diagnostic Data Opt-In Settings UI | Privacy
 - `privacy.disable-wer` | Windows Error Reporting | Privacy
 - `privacy.disable-windows-location-provider` | Windows Location Provider | Privacy
+- `privacy.disable-windows-tips` | Turn Off Windows Tips | Privacy
+- `privacy.hide-last-logged-in-user` | Display of the Last Signed-In Username | Privacy
+- `privacy.hide-recommended-personalized-sites` | Start Personalized Site Recommendations | Privacy
+- `privacy.hide-recommended-personalized-sites-user` | Start Personalized Site Recommendations (Current User) | Privacy
+- `privacy.hide-recommended-section` | Start Menu Recommended Section | Privacy

@@ -1,11 +1,11 @@
 {
-  "generated_utc": "2026-05-07T17:14:00Z",
-  "history_entry_count": 65,
+  "generated_utc": "2026-05-07T17:15:34Z",
+  "history_entry_count": 66,
   "catalog_candidate_count": 242,
-  "covered_count": 196,
-  "uncovered_count": 46,
+  "covered_count": 201,
+  "uncovered_count": 41,
   "summary": {
-    "coverage_percent": 80.99,
+    "coverage_percent": 83.06,
     "covered_categories": {
       "Audio": 3,
       "Cleanup": 1,
@@ -16,7 +16,7 @@
       "Performance": 3,
       "Peripheral": 3,
       "Power": 10,
-      "Privacy": 48,
+      "Privacy": 53,
       "Security": 17,
       "System": 41,
       "Visibility": 21
@@ -25,66 +25,13 @@
       "Developer": 2,
       "Explorer": 4,
       "Network": 4,
-      "Privacy": 19,
+      "Privacy": 14,
       "Security": 4,
       "System": 11,
       "Visibility": 2
     }
   },
   "recommended_next_batches": [
-    {
-      "category": "Privacy",
-      "covered_count": 48,
-      "uncovered_count": 19,
-      "coverage_percent": 71.64,
-      "batch_size": 5,
-      "tweak_ids": [
-        "privacy.disable-rsop-logging",
-        "privacy.disable-search-box-suggestions",
-        "privacy.disable-sensors",
-        "privacy.disable-steps-recorder",
-        "privacy.disable-suggestions.policy"
-      ],
-      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-rsop-logging --id privacy.disable-search-box-suggestions --id privacy.disable-sensors --id privacy.disable-steps-recorder --id privacy.disable-suggestions.policy",
-      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-rsop-logging --id privacy.disable-search-box-suggestions --id privacy.disable-sensors --id privacy.disable-steps-recorder --id privacy.disable-suggestions.policy --run-kvm --json",
-      "candidates": [
-        {
-          "tweak_id": "privacy.disable-rsop-logging",
-          "record_id": "privacy.disable-rsop-logging",
-          "category": "Privacy",
-          "name": "Resultant Set of Policy Logging",
-          "documentation": "research/records/privacy.disable-rsop-logging.json"
-        },
-        {
-          "tweak_id": "privacy.disable-search-box-suggestions",
-          "record_id": "privacy.disable-search-box-suggestions",
-          "category": "Privacy",
-          "name": "File Explorer Search Box Suggestions",
-          "documentation": "research/records/privacy.disable-search-box-suggestions.json"
-        },
-        {
-          "tweak_id": "privacy.disable-sensors",
-          "record_id": "privacy.disable-sensors",
-          "category": "Privacy",
-          "name": "Windows Sensors",
-          "documentation": "research/records/privacy.disable-sensors.json"
-        },
-        {
-          "tweak_id": "privacy.disable-steps-recorder",
-          "record_id": "privacy.disable-steps-recorder",
-          "category": "Privacy",
-          "name": "Steps Recorder",
-          "documentation": "research/records/privacy.disable-steps-recorder.json"
-        },
-        {
-          "tweak_id": "privacy.disable-suggestions.policy",
-          "record_id": "privacy.disable-suggestions.policy",
-          "category": "Privacy",
-          "name": "Windows Suggestion Surfaces Policy Group",
-          "documentation": "research/records/privacy.disable-suggestions.policy.review.json"
-        }
-      ]
-    },
     {
       "category": "Explorer",
       "covered_count": 13,
@@ -209,6 +156,59 @@
           "category": "System",
           "name": "Bluetooth User Service",
           "documentation": "research/records/system.services.disable-bluetooth-user-service.json"
+        }
+      ]
+    },
+    {
+      "category": "Privacy",
+      "covered_count": 53,
+      "uncovered_count": 14,
+      "coverage_percent": 79.1,
+      "batch_size": 5,
+      "tweak_ids": [
+        "privacy.disable-switchback.policy",
+        "privacy.disable-telemetry-change-notifications",
+        "privacy.disable-telemetry-optin-ui",
+        "privacy.disable-wer",
+        "privacy.disable-windows-location-provider"
+      ],
+      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-switchback.policy --id privacy.disable-telemetry-change-notifications --id privacy.disable-telemetry-optin-ui --id privacy.disable-wer --id privacy.disable-windows-location-provider",
+      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-switchback.policy --id privacy.disable-telemetry-change-notifications --id privacy.disable-telemetry-optin-ui --id privacy.disable-wer --id privacy.disable-windows-location-provider --run-kvm --json",
+      "candidates": [
+        {
+          "tweak_id": "privacy.disable-switchback.policy",
+          "record_id": "privacy.disable-switchback.policy",
+          "category": "Privacy",
+          "name": "Disable SwitchBack Compatibility Policy",
+          "documentation": "research/records/privacy.disable-switchback.policy.review.json"
+        },
+        {
+          "tweak_id": "privacy.disable-telemetry-change-notifications",
+          "record_id": "privacy.disable-telemetry-change-notifications",
+          "category": "Privacy",
+          "name": "Diagnostic Data Change Notifications",
+          "documentation": "research/records/privacy.disable-telemetry-change-notifications.json"
+        },
+        {
+          "tweak_id": "privacy.disable-telemetry-optin-ui",
+          "record_id": "privacy.disable-telemetry-optin-ui",
+          "category": "Privacy",
+          "name": "Diagnostic Data Opt-In Settings UI",
+          "documentation": "research/records/privacy.disable-telemetry-optin-ui.json"
+        },
+        {
+          "tweak_id": "privacy.disable-wer",
+          "record_id": "privacy.disable-wer",
+          "category": "Privacy",
+          "name": "Windows Error Reporting",
+          "documentation": "research/records/privacy.disable-wer.json"
+        },
+        {
+          "tweak_id": "privacy.disable-windows-location-provider",
+          "record_id": "privacy.disable-windows-location-provider",
+          "category": "Privacy",
+          "name": "Windows Location Provider",
+          "documentation": "research/records/privacy.disable-windows-location-provider.json"
         }
       ]
     },
@@ -1286,12 +1286,57 @@
       "latest_report_status": "ok"
     },
     {
+      "tweak_id": "privacy.disable-rsop-logging",
+      "qa_tweak_id": "privacy.disable-rsop-logging",
+      "candidate_id": "privacy.disable-rsop-logging",
+      "category": "Privacy",
+      "name": "Resultant Set of Policy Logging",
+      "documentation": "research/records/privacy.disable-rsop-logging.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "privacy.disable-search-box-suggestions",
+      "qa_tweak_id": "privacy.disable-search-box-suggestions",
+      "candidate_id": "privacy.disable-search-box-suggestions",
+      "category": "Privacy",
+      "name": "File Explorer Search Box Suggestions",
+      "documentation": "research/records/privacy.disable-search-box-suggestions.json",
+      "latest_report_status": "ok"
+    },
+    {
       "tweak_id": "privacy.disable-search-history",
       "qa_tweak_id": "privacy.disable-search-history",
       "candidate_id": "privacy.disable-search-history",
       "category": "Privacy",
       "name": "Search History Storage and Display",
       "documentation": "research/records/privacy.disable-search-history.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "privacy.disable-sensors",
+      "qa_tweak_id": "privacy.disable-sensors",
+      "candidate_id": "privacy.disable-sensors",
+      "category": "Privacy",
+      "name": "Windows Sensors",
+      "documentation": "research/records/privacy.disable-sensors.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "privacy.disable-steps-recorder",
+      "qa_tweak_id": "privacy.disable-steps-recorder",
+      "candidate_id": "privacy.disable-steps-recorder",
+      "category": "Privacy",
+      "name": "Steps Recorder",
+      "documentation": "research/records/privacy.disable-steps-recorder.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "privacy.disable-suggestions.policy",
+      "qa_tweak_id": "privacy.disable-suggestions.policy",
+      "candidate_id": "privacy.disable-suggestions.policy",
+      "category": "Privacy",
+      "name": "Windows Suggestion Surfaces Policy Group",
+      "documentation": "research/records/privacy.disable-suggestions.policy.review.json",
       "latest_report_status": "ok"
     },
     {
@@ -2094,41 +2139,6 @@
       "category": "Network",
       "name": "SMB Cipher Suite Order",
       "documentation": "research/records/network.smb-set-cipher-suite-order.review.json"
-    },
-    {
-      "tweak_id": "privacy.disable-rsop-logging",
-      "record_id": "privacy.disable-rsop-logging",
-      "category": "Privacy",
-      "name": "Resultant Set of Policy Logging",
-      "documentation": "research/records/privacy.disable-rsop-logging.json"
-    },
-    {
-      "tweak_id": "privacy.disable-search-box-suggestions",
-      "record_id": "privacy.disable-search-box-suggestions",
-      "category": "Privacy",
-      "name": "File Explorer Search Box Suggestions",
-      "documentation": "research/records/privacy.disable-search-box-suggestions.json"
-    },
-    {
-      "tweak_id": "privacy.disable-sensors",
-      "record_id": "privacy.disable-sensors",
-      "category": "Privacy",
-      "name": "Windows Sensors",
-      "documentation": "research/records/privacy.disable-sensors.json"
-    },
-    {
-      "tweak_id": "privacy.disable-steps-recorder",
-      "record_id": "privacy.disable-steps-recorder",
-      "category": "Privacy",
-      "name": "Steps Recorder",
-      "documentation": "research/records/privacy.disable-steps-recorder.json"
-    },
-    {
-      "tweak_id": "privacy.disable-suggestions.policy",
-      "record_id": "privacy.disable-suggestions.policy",
-      "category": "Privacy",
-      "name": "Windows Suggestion Surfaces Policy Group",
-      "documentation": "research/records/privacy.disable-suggestions.policy.review.json"
     },
     {
       "tweak_id": "privacy.disable-switchback.policy",

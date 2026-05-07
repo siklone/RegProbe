@@ -1,11 +1,13 @@
 {
-  "generated_utc": "2026-05-07T17:14:00Z",
+  "generated_utc": "2026-05-07T17:15:34Z",
   "status": "PASS",
   "selection": {
     "requested_ids": [
-      "power.hide-sleep-option",
-      "power.optimize-cpu-boost",
-      "power.optimize-gaming-network"
+      "privacy.disable-rsop-logging",
+      "privacy.disable-search-box-suggestions",
+      "privacy.disable-sensors",
+      "privacy.disable-steps-recorder",
+      "privacy.disable-suggestions.policy"
     ],
     "requested_categories": [],
     "limit_per_category": 1,
@@ -20,29 +22,29 @@
     "kvm_batch_runner": "scripts/vm-kvm/run-guest-app-tweak-qa-batch.py"
   },
   "catalog_candidate_count": 242,
-  "selected_candidate_count": 3,
+  "selected_candidate_count": 5,
   "errors": [],
   "candidates": [
     {
-      "tweak_id": "power.hide-sleep-option",
-      "qa_tweak_id": "power.hide-sleep-option",
-      "candidate_id": "power.hide-sleep-option",
-      "record_id": "power.hide-sleep-option",
-      "category": "Power",
-      "name": "Show Sleep Option",
-      "documentation": "research/records/power.hide-sleep-option.json",
+      "tweak_id": "privacy.disable-rsop-logging",
+      "qa_tweak_id": "privacy.disable-rsop-logging",
+      "candidate_id": "privacy.disable-rsop-logging",
+      "record_id": "privacy.disable-rsop-logging",
+      "category": "Privacy",
+      "name": "Resultant Set of Policy Logging",
+      "documentation": "research/records/privacy.disable-rsop-logging.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect power.hide-sleep-option",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.disable-rsop-logging",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'power.hide-sleep-option' --qa-output 'C:\\Tools\\ValidationController\\smoke\\power.hide-sleep-option.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'power.hide-sleep-option' --qa-output 'C:\\Tools\\ValidationController\\smoke\\power.hide-sleep-option.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'power.hide-sleep-option' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\power.hide-sleep-option.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'power.hide-sleep-option' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\power.hide-sleep-option.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'power.hide-sleep-option'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-rsop-logging' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-rsop-logging.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-rsop-logging' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-rsop-logging.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-rsop-logging' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-rsop-logging.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-rsop-logging' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-rsop-logging.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.disable-rsop-logging'"
       },
       "expected_report": {
         "success": true,
@@ -83,25 +85,25 @@
       }
     },
     {
-      "tweak_id": "power.optimize-cpu-boost",
-      "qa_tweak_id": "power.optimize-cpu-boost",
-      "candidate_id": "power.optimize-cpu-boost",
-      "record_id": "power.optimize-cpu-boost",
-      "category": "Power",
-      "name": "Optimize CPU Performance Boost",
-      "documentation": "research/records/power.optimize-cpu-boost.json",
+      "tweak_id": "privacy.disable-search-box-suggestions",
+      "qa_tweak_id": "privacy.disable-search-box-suggestions",
+      "candidate_id": "privacy.disable-search-box-suggestions",
+      "record_id": "privacy.disable-search-box-suggestions",
+      "category": "Privacy",
+      "name": "File Explorer Search Box Suggestions",
+      "documentation": "research/records/privacy.disable-search-box-suggestions.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
-      "restore_default_supported": false,
+      "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect power.optimize-cpu-boost",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.disable-search-box-suggestions",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'power.optimize-cpu-boost' --qa-output 'C:\\Tools\\ValidationController\\smoke\\power.optimize-cpu-boost.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'power.optimize-cpu-boost' --qa-output 'C:\\Tools\\ValidationController\\smoke\\power.optimize-cpu-boost.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'power.optimize-cpu-boost' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\power.optimize-cpu-boost.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'power.optimize-cpu-boost' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\power.optimize-cpu-boost.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'power.optimize-cpu-boost'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-search-box-suggestions' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-search-box-suggestions.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-search-box-suggestions' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-search-box-suggestions.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-search-box-suggestions' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-search-box-suggestions.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-search-box-suggestions' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-search-box-suggestions.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.disable-search-box-suggestions'"
       },
       "expected_report": {
         "success": true,
@@ -142,25 +144,143 @@
       }
     },
     {
-      "tweak_id": "power.optimize-gaming-network",
-      "qa_tweak_id": "power.optimize-gaming-network",
-      "candidate_id": "power.optimize-gaming-network",
-      "record_id": "power.optimize-gaming-network",
-      "category": "Power",
-      "name": "Games MMCSS Task Profile",
-      "documentation": "research/records/power.optimize-gaming-network.json",
+      "tweak_id": "privacy.disable-sensors",
+      "qa_tweak_id": "privacy.disable-sensors",
+      "candidate_id": "privacy.disable-sensors",
+      "record_id": "privacy.disable-sensors",
+      "category": "Privacy",
+      "name": "Windows Sensors",
+      "documentation": "research/records/privacy.disable-sensors.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
-      "restore_default_supported": false,
+      "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect power.optimize-gaming-network",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.disable-sensors",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'power.optimize-gaming-network' --qa-output 'C:\\Tools\\ValidationController\\smoke\\power.optimize-gaming-network.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'power.optimize-gaming-network' --qa-output 'C:\\Tools\\ValidationController\\smoke\\power.optimize-gaming-network.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'power.optimize-gaming-network' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\power.optimize-gaming-network.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'power.optimize-gaming-network' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\power.optimize-gaming-network.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'power.optimize-gaming-network'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-sensors' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-sensors.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-sensors' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-sensors.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-sensors' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-sensors.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-sensors' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-sensors.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.disable-sensors'"
+      },
+      "expected_report": {
+        "success": true,
+        "status": "ok",
+        "rollback_requested": true,
+        "required_stages": [
+          "detect-before",
+          "apply",
+          "rollback",
+          "detect-after"
+        ],
+        "required_card_snapshot": {
+          "required_fields": [
+            "TweakId",
+            "Name",
+            "Category",
+            "EvidenceClass",
+            "ResearchStatus",
+            "RollbackSnapshotState",
+            "HasClaimBoundary",
+            "WhatWeKnowSummary",
+            "WhatWeDoNotClaimSummary",
+            "ProofLanes"
+          ],
+          "required_proof_lanes": [
+            "docs",
+            "runtime",
+            "source",
+            "rollback"
+          ],
+          "claim_boundary_required": true
+        },
+        "required_stage_assertions": [
+          "apply stage reports a successful apply story",
+          "rollback stage reports a successful rollback story",
+          "detect-after is present"
+        ]
+      }
+    },
+    {
+      "tweak_id": "privacy.disable-steps-recorder",
+      "qa_tweak_id": "privacy.disable-steps-recorder",
+      "candidate_id": "privacy.disable-steps-recorder",
+      "record_id": "privacy.disable-steps-recorder",
+      "category": "Privacy",
+      "name": "Steps Recorder",
+      "documentation": "research/records/privacy.disable-steps-recorder.json",
+      "promotion_state": "promoted",
+      "apply_allowed": true,
+      "restore_default_supported": true,
+      "restore_previous_supported": true,
+      "commands": {
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.disable-steps-recorder",
+        "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-steps-recorder' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-steps-recorder.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-steps-recorder' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-steps-recorder.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-steps-recorder' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-steps-recorder.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-steps-recorder' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-steps-recorder.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.disable-steps-recorder'"
+      },
+      "expected_report": {
+        "success": true,
+        "status": "ok",
+        "rollback_requested": true,
+        "required_stages": [
+          "detect-before",
+          "apply",
+          "rollback",
+          "detect-after"
+        ],
+        "required_card_snapshot": {
+          "required_fields": [
+            "TweakId",
+            "Name",
+            "Category",
+            "EvidenceClass",
+            "ResearchStatus",
+            "RollbackSnapshotState",
+            "HasClaimBoundary",
+            "WhatWeKnowSummary",
+            "WhatWeDoNotClaimSummary",
+            "ProofLanes"
+          ],
+          "required_proof_lanes": [
+            "docs",
+            "runtime",
+            "source",
+            "rollback"
+          ],
+          "claim_boundary_required": true
+        },
+        "required_stage_assertions": [
+          "apply stage reports a successful apply story",
+          "rollback stage reports a successful rollback story",
+          "detect-after is present"
+        ]
+      }
+    },
+    {
+      "tweak_id": "privacy.disable-suggestions.policy",
+      "qa_tweak_id": "privacy.disable-suggestions.policy",
+      "candidate_id": "privacy.disable-suggestions.policy",
+      "record_id": "privacy.disable-suggestions.policy",
+      "category": "Privacy",
+      "name": "Windows Suggestion Surfaces Policy Group",
+      "documentation": "research/records/privacy.disable-suggestions.policy.review.json",
+      "promotion_state": "promoted",
+      "apply_allowed": true,
+      "restore_default_supported": true,
+      "restore_previous_supported": true,
+      "commands": {
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.disable-suggestions.policy",
+        "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-suggestions.policy' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-suggestions.policy.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-suggestions.policy' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-suggestions.policy.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-suggestions.policy' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-suggestions.policy.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-suggestions.policy' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-suggestions.policy.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.disable-suggestions.policy'"
       },
       "expected_report": {
         "success": true,
@@ -203,7 +323,7 @@
   ],
   "run_results": [
     {
-      "tweak_id": "power.hide-sleep-option",
+      "tweak_id": "privacy.disable-rsop-logging",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -240,19 +360,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "power.hide-sleep-option",
-        "TweakName": "Show Sleep Option",
+        "TweakId": "privacy.disable-rsop-logging",
+        "TweakName": "Resultant Set of Policy Logging",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "power.hide-sleep-option",
-          "Name": "Show Sleep Option",
-          "Category": "Power",
-          "Description": "Windows can show or hide Sleep in the power menu. This policy decides whether that shortcut is visible.",
-          "FriendlyDescription": "Windows can show or hide Sleep in the power menu. This policy decides whether that shortcut is visible.",
-          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer\\ShowSleepOption",
+          "TweakId": "privacy.disable-rsop-logging",
+          "Name": "Resultant Set of Policy Logging",
+          "Category": "Privacy",
+          "Description": "RSoP logging records which Group Policy settings were applied to the PC. Some people turn it off to reduce policy logging, while administrators often keep it on for troubleshooting and auditing.",
+          "FriendlyDescription": "RSoP logging records which Group Policy settings were applied to the PC. Some people turn it off to reduce policy logging, while administrators often keep it on for troubleshooting and auditing.",
+          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\RSoPLogging",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -260,22 +380,22 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Windows can show or hide Sleep in the power menu. This policy decides whether that shortcut is visible. Evidence: Local official ADMX defines the exact key and value name; local ADML confirms that disabling the policy hides Sleep from the Power Options menu. Added nohuto mirror corroboration via nohuto-showsleepoption-admx. Win25H2Clean reversible probe at evidence/fil... Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: RSoP logging records which Group Policy settings were applied to the PC. Some people turn it off to reduce policy logging, while administrators often keep it on for troubleshooting and auditing. Evidence: Local official ADMX defines the exact machine-policy key and value name; local ADML confirms that enabling the policy turns RSoP logging off. The app now matches that documented surface exactly. Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "Local official ADMX defines the exact key and value name; local ADML confirms that disabling the policy hides Sleep from the Power Options menu. Added nohuto mirror corroboration via nohuto-showsleepoption-admx. Win25H2Clean reversible probe at evidence/fil...",
-              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/WindowsExplorer.admx"
+              "Summary": "Local official ADMX defines the exact machine-policy key and value name; local ADML confirms that enabling the policy turns RSoP logging off. The app now matches that documented surface exactly.",
+              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/GroupPolicy.admx"
             },
             {
               "Key": "runtime",
               "Label": "RUNTIME",
               "State": "ready",
-              "Summary": "The guest probe wrote ShowSleepOption=0 and ShowSleepOption=1, queried the live registry after each write, opened the Power Options surface twice, and restored the original state.",
-              "Source": "Win25H2Clean reversible probe - ShowSleepOption 0/1 toggle: evidence/raw/procmon/power.hide-sleep-option/power_hide_sleep_option_probe.txt"
+              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+              "Source": ""
             },
             {
               "Key": "source",
@@ -299,8 +419,8 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Power (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\power\\power.md",
+              "Title": "Docs: Privacy (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\privacy\\privacy-verified.md",
               "Kind": "Docs"
             }
           ]
@@ -309,10 +429,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Sleep option hidden'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'RSoP logging turned off'.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Sleep option hidden",
+            "TargetValue": "RSoP logging turned off",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -321,8 +441,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Sleep option hidden'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer\\ShowSleepOption: missing -> 0",
-                "TimestampText": "10:14:04"
+                "Message": "Current values do not match a named option. Selected option is 'RSoP logging turned off'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\RSoPLogging: missing -> 0",
+                "TimestampText": "10:15:38"
               },
               {
                 "Action": "Apply",
@@ -349,8 +469,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Sleep option hidden",
-            "TargetValue": "Sleep option hidden",
+            "CurrentValue": "RSoP logging turned off",
+            "TargetValue": "RSoP logging turned off",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -359,20 +479,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Sleep option hidden'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer\\ShowSleepOption: missing -> 0",
-                "TimestampText": "10:14:04"
+                "Message": "Current values do not match a named option. Selected option is 'RSoP logging turned off'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\RSoPLogging: missing -> 0",
+                "TimestampText": "10:15:38"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Sleep option hidden'.",
-                "TimestampText": "10:14:07"
+                "Message": "Applied preset 'RSoP logging turned off'.",
+                "TimestampText": "10:15:41"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Sleep option hidden'.",
-                "TimestampText": "10:14:07"
+                "Message": "Verified preset 'RSoP logging turned off'.",
+                "TimestampText": "10:15:41"
               },
               {
                 "Action": "Rollback",
@@ -388,7 +508,7 @@
             "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Sleep option hidden",
+            "TargetValue": "RSoP logging turned off",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -397,36 +517,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Sleep option hidden'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer\\ShowSleepOption: missing -> 0",
-                "TimestampText": "10:14:04"
+                "Message": "Current values do not match a named option. Selected option is 'RSoP logging turned off'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\RSoPLogging: missing -> 0",
+                "TimestampText": "10:15:38"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Sleep option hidden'.",
-                "TimestampText": "10:14:07"
+                "Message": "Applied preset 'RSoP logging turned off'.",
+                "TimestampText": "10:15:41"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Sleep option hidden'.",
-                "TimestampText": "10:14:07"
+                "Message": "Verified preset 'RSoP logging turned off'.",
+                "TimestampText": "10:15:41"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "10:14:07"
+                "TimestampText": "10:15:41"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Sleep option hidden'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'RSoP logging turned off'.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Sleep option hidden",
+            "TargetValue": "RSoP logging turned off",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -435,40 +555,40 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Sleep option hidden'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer\\ShowSleepOption: missing -> 0",
-                "TimestampText": "10:14:07"
+                "Message": "Current values do not match a named option. Selected option is 'RSoP logging turned off'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\RSoPLogging: missing -> 0",
+                "TimestampText": "10:15:41"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Sleep option hidden'.",
-                "TimestampText": "10:14:07"
+                "Message": "Applied preset 'RSoP logging turned off'.",
+                "TimestampText": "10:15:41"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Sleep option hidden'.",
-                "TimestampText": "10:14:07"
+                "Message": "Verified preset 'RSoP logging turned off'.",
+                "TimestampText": "10:15:41"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "10:14:07"
+                "TimestampText": "10:15:41"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T17:14:04.3427484+00:00",
-        "CompletedAtUtc": "2026-05-07T17:14:07.5784602+00:00"
+        "StartedAtUtc": "2026-05-07T17:15:38.3721649+00:00",
+        "CompletedAtUtc": "2026-05-07T17:15:41.4576615+00:00"
       },
-      "qa_tweak_id": "power.hide-sleep-option",
-      "candidate_id": "power.hide-sleep-option",
-      "card_name": "Show Sleep Option",
-      "documentation": "research/records/power.hide-sleep-option.json"
+      "qa_tweak_id": "privacy.disable-rsop-logging",
+      "candidate_id": "privacy.disable-rsop-logging",
+      "card_name": "Resultant Set of Policy Logging",
+      "documentation": "research/records/privacy.disable-rsop-logging.json"
     },
     {
-      "tweak_id": "power.optimize-cpu-boost",
+      "tweak_id": "privacy.disable-search-box-suggestions",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -505,19 +625,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "power.optimize-cpu-boost",
-        "TweakName": "Optimize CPU Performance Boost",
+        "TweakId": "privacy.disable-search-box-suggestions",
+        "TweakName": "File Explorer Search Box Suggestions",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "power.optimize-cpu-boost",
-          "Name": "Optimize CPU Performance Boost",
-          "Category": "Power",
-          "Description": "This tweak uses the documented powercfg PERFBOOSTMODE surface to push the active power plan toward a more aggressive CPU boost profile.",
-          "FriendlyDescription": "This tweak uses the documented powercfg PERFBOOSTMODE surface to push the active power plan toward a more aggressive CPU boost profile.",
-          "RegistryPath": "",
+          "TweakId": "privacy.disable-search-box-suggestions",
+          "Name": "File Explorer Search Box Suggestions",
+          "Category": "Privacy",
+          "Description": "File Explorer can show suggestion pop-ups as you type into its search box, based on past search entries. This policy decides whether those suggestions are available.",
+          "FriendlyDescription": "File Explorer can show suggestion pop-ups as you type into its search box, based on past search entries. This policy decides whether those suggestions are available.",
+          "RegistryPath": "HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer\\DisableSearchBoxSuggestions",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -525,29 +645,29 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: This tweak uses the documented powercfg PERFBOOSTMODE surface to push the active power plan toward a more aggressive CPU boost profile. Evidence: The guest reversible probe on Win25H2Clean confirmed the live surface on this build with BEFORE_AC=2, BEFORE_DC=2, AFTER_1_AC=1, AFTER_1_DC=1, AFTER_2_AC=2, AFTER_2_DC=2, RESTORED_AC=2, and RESTORED_DC=2. Rollback: Rollback: Verified via record-restore-story.",
-          "WhatWeDoNotClaimSummary": "Source boundary: Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+          "WhatWeKnowSummary": "Claim: File Explorer can show suggestion pop-ups as you type into its search box, based on past search entries. This policy decides whether those suggestions are available. Evidence: The ADMX_WindowsExplorer Policy CSP page explicitly names the exact user policy path and value name the app writes, and its policy description matches the disabled behavior. Added nohuto mirror corroboration via nohuto-disablesearchboxsuggestions-admx. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "The guest reversible probe on Win25H2Clean confirmed the live surface on this build with BEFORE_AC=2, BEFORE_DC=2, AFTER_1_AC=1, AFTER_1_DC=1, AFTER_2_AC=2, AFTER_2_DC=2, RESTORED_AC=2, and RESTORED_DC=2.",
-              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows-hardware/customize/power-settings/options-for-perf-state-engine-perfboostmode"
+              "Summary": "The ADMX_WindowsExplorer Policy CSP page explicitly names the exact user policy path and value name the app writes, and its policy description matches the disabled behavior. Added nohuto mirror corroboration via nohuto-disablesearchboxsuggestions-admx.",
+              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-windowsexplorer#disablesearchboxsuggestions"
             },
             {
               "Key": "runtime",
               "Label": "RUNTIME",
               "State": "ready",
-              "Summary": "Win25H2Clean guest reversible probe confirmed BEFORE_AC=2, BEFORE_DC=2, AFTER_1_AC=1, AFTER_1_DC=1, AFTER_2_AC=2, AFTER_2_DC=2, RESTORED_AC=2, and RESTORED_DC=2.",
-              "Source": "Guest reversible probe for PERFBOOSTMODE: evidence/files/vm-tooling-staging/perfboostmode-transition-probe.txt"
+              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+              "Source": ""
             },
             {
               "Key": "source",
               "Label": "SOURCE",
               "State": "ready",
-              "Summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
-              "Source": "win-config / power/desc.md: https://github.com/nohuto/win-config/blob/main/power/desc.md"
+              "Summary": "No upstream nohuto source link is attached to this record.",
+              "Source": ""
             },
             {
               "Key": "rollback",
@@ -559,13 +679,13 @@
           ],
           "ReferenceLinks": [
             {
-              "Title": "Docs: Details",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html#power.optimize-cpu-boost",
+              "Title": "Docs: Details (missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Power",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\power\\power.md#power.optimize-cpu-boost",
+              "Title": "Docs: Privacy (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\privacy\\privacy-verified.md",
               "Kind": "Docs"
             }
           ]
@@ -573,11 +693,11 @@
         "Stages": [
           {
             "Stage": "detect-before",
-            "AppliedStatus": "Applied",
-            "StatusMessage": "Current state: {\"AcValue\":2,\"DcValue\":2}",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Search suggestions disabled'.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "{\"AcValue\":2,\"DcValue\":2}",
-            "TargetValue": "Optimized",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Search suggestions disabled",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -585,9 +705,9 @@
             "Steps": [
               {
                 "Action": "Detect",
-                "StatusText": "Applied",
-                "Message": "Current state: {\"AcValue\":2,\"DcValue\":2}",
-                "TimestampText": "10:14:16"
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Search suggestions disabled'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer\\DisableSearchBoxSuggestions: missing -> 1",
+                "TimestampText": "10:15:47"
               },
               {
                 "Action": "Apply",
@@ -614,8 +734,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Optimized",
-            "TargetValue": "Optimized",
+            "CurrentValue": "Search suggestions disabled",
+            "TargetValue": "Search suggestions disabled",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -623,37 +743,37 @@
             "Steps": [
               {
                 "Action": "Detect",
-                "StatusText": "Applied",
-                "Message": "Current state: {\"AcValue\":2,\"DcValue\":2}",
-                "TimestampText": "10:14:16"
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Search suggestions disabled'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer\\DisableSearchBoxSuggestions: missing -> 1",
+                "TimestampText": "10:15:48"
               },
               {
                 "Action": "Apply",
-                "StatusText": "Skipped",
-                "Message": "Already in the desired state.",
-                "TimestampText": "10:14:16"
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Search suggestions disabled'.",
+                "TimestampText": "10:15:48"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "CPU performance boost mode is Aggressive for AC and DC power.",
-                "TimestampText": "10:14:16"
+                "Message": "Verified preset 'Search suggestions disabled'.",
+                "TimestampText": "10:15:48"
               },
               {
                 "Action": "Rollback",
-                "StatusText": "Skipped",
-                "Message": "No changes were made.",
-                "TimestampText": "10:14:16"
+                "StatusText": "Not required",
+                "Message": "Step not executed.",
+                "TimestampText": "-"
               }
             ]
           },
           {
             "Stage": "rollback",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Restored previous CPU performance boost mode values for the active power plan.",
+            "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Optimized",
-            "TargetValue": "Optimized",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Search suggestions disabled",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -661,37 +781,37 @@
             "Steps": [
               {
                 "Action": "Detect",
-                "StatusText": "Applied",
-                "Message": "Current state: {\"AcValue\":2,\"DcValue\":2}",
-                "TimestampText": "10:14:16"
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Search suggestions disabled'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer\\DisableSearchBoxSuggestions: missing -> 1",
+                "TimestampText": "10:15:48"
               },
               {
                 "Action": "Apply",
-                "StatusText": "Skipped",
-                "Message": "Already in the desired state.",
-                "TimestampText": "10:14:16"
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Search suggestions disabled'.",
+                "TimestampText": "10:15:48"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "CPU performance boost mode is Aggressive for AC and DC power.",
-                "TimestampText": "10:14:16"
+                "Message": "Verified preset 'Search suggestions disabled'.",
+                "TimestampText": "10:15:48"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
-                "Message": "Restored previous CPU performance boost mode values for the active power plan.",
-                "TimestampText": "10:14:17"
+                "Message": "Rolled back registry values.",
+                "TimestampText": "10:15:48"
               }
             ]
           },
           {
             "Stage": "detect-after",
-            "AppliedStatus": "Applied",
-            "StatusMessage": "Current state: {\"AcValue\":2,\"DcValue\":2}",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Search suggestions disabled'.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "{\"AcValue\":2,\"DcValue\":2}",
-            "TargetValue": "Optimized",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Search suggestions disabled",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -699,41 +819,41 @@
             "Steps": [
               {
                 "Action": "Detect",
-                "StatusText": "Applied",
-                "Message": "Current state: {\"AcValue\":2,\"DcValue\":2}",
-                "TimestampText": "10:14:17"
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Search suggestions disabled'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer\\DisableSearchBoxSuggestions: missing -> 1",
+                "TimestampText": "10:15:48"
               },
               {
                 "Action": "Apply",
-                "StatusText": "Skipped",
-                "Message": "Already in the desired state.",
-                "TimestampText": "10:14:16"
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Search suggestions disabled'.",
+                "TimestampText": "10:15:48"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "CPU performance boost mode is Aggressive for AC and DC power.",
-                "TimestampText": "10:14:16"
+                "Message": "Verified preset 'Search suggestions disabled'.",
+                "TimestampText": "10:15:48"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
-                "Message": "Restored previous CPU performance boost mode values for the active power plan.",
-                "TimestampText": "10:14:17"
+                "Message": "Rolled back registry values.",
+                "TimestampText": "10:15:48"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T17:14:13.9041353+00:00",
-        "CompletedAtUtc": "2026-05-07T17:14:17.3293917+00:00"
+        "StartedAtUtc": "2026-05-07T17:15:47.9675196+00:00",
+        "CompletedAtUtc": "2026-05-07T17:15:48.2474767+00:00"
       },
-      "qa_tweak_id": "power.optimize-cpu-boost",
-      "candidate_id": "power.optimize-cpu-boost",
-      "card_name": "Optimize CPU Performance Boost",
-      "documentation": "research/records/power.optimize-cpu-boost.json"
+      "qa_tweak_id": "privacy.disable-search-box-suggestions",
+      "candidate_id": "privacy.disable-search-box-suggestions",
+      "card_name": "File Explorer Search Box Suggestions",
+      "documentation": "research/records/privacy.disable-search-box-suggestions.json"
     },
     {
-      "tweak_id": "power.optimize-gaming-network",
+      "tweak_id": "privacy.disable-sensors",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -770,19 +890,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "power.optimize-gaming-network",
-        "TweakName": "Games MMCSS Task Profile",
+        "TweakId": "privacy.disable-sensors",
+        "TweakName": "Windows Sensors",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "power.optimize-gaming-network",
-          "Name": "Games MMCSS Task Profile",
-          "Category": "Power",
-          "Description": "Windows uses MMCSS to prioritize time-sensitive multimedia work. This tweak changes the built-in Games task profile to use more aggressive scheduling values.",
-          "FriendlyDescription": "Windows uses MMCSS to prioritize time-sensitive multimedia work. This tweak changes the built-in Games task profile to use more aggressive scheduling values.",
-          "RegistryPath": "",
+          "TweakId": "privacy.disable-sensors",
+          "Name": "Windows Sensors",
+          "Category": "Privacy",
+          "Description": "Windows can use hardware sensors such as orientation, ambient light, motion, or other environmental sensors. This policy decides whether sensors are allowed.",
+          "FriendlyDescription": "Windows can use hardware sensors such as orientation, ambient light, motion, or other environmental sensors. This policy decides whether sensors are allowed.",
+          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Windows\\LocationAndSensors\\DisableSensors",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -790,29 +910,29 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Windows uses MMCSS to prioritize time-sensitive multimedia work. This tweak changes the built-in Games task profile to use more aggressive scheduling values. Evidence: The VM export gives the current 25H2 Games-task baseline, while the Microsoft MMCSS page documents the same path and the allowed values for the fields the app writes. Rollback: Rollback: Verified via record-restore-story.",
-          "WhatWeDoNotClaimSummary": "Source boundary: Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+          "WhatWeKnowSummary": "Claim: Windows can use hardware sensors such as orientation, ambient light, motion, or other environmental sensors. This policy decides whether sensors are allowed. Evidence: The ADMX_Sensors Policy CSP page explicitly names the exact machine policy path and value name the app writes, and its policy description matches the disabled behavior. Added nohuto mirror corroboration via nohuto-disablesensors-admx. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "The VM export gives the current 25H2 Games-task baseline, while the Microsoft MMCSS page documents the same path and the allowed values for the fields the app writes.",
-              "Source": "Validation proof source: evidence/files/vm-tooling-staging/registry-dumps/mmcss-games-task-20260325-031514/mmcss-games-task.txt"
+              "Summary": "The ADMX_Sensors Policy CSP page explicitly names the exact machine policy path and value name the app writes, and its policy description matches the disabled behavior. Added nohuto mirror corroboration via nohuto-disablesensors-admx.",
+              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-sensors#disablesensors"
             },
             {
               "Key": "runtime",
               "Label": "RUNTIME",
               "State": "ready",
-              "Summary": "The current 25H2 VM baseline reads Priority=2, Scheduling Category=Medium, SFIO Priority=Normal, GPU Priority=8, and Affinity=0 under the built-in Games task.",
-              "Source": "Win25H2Clean export of the built-in Games MMCSS task: evidence/files/vm-tooling-staging/registry-dumps/mmcss-games-task-20260325-031514/mmcss-games-task.txt"
+              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+              "Source": ""
             },
             {
               "Key": "source",
               "Label": "SOURCE",
               "State": "ready",
-              "Summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
-              "Source": "win-config / power/desc.md: https://github.com/nohuto/win-config/blob/main/power/desc.md"
+              "Summary": "No upstream nohuto source link is attached to this record.",
+              "Source": ""
             },
             {
               "Key": "rollback",
@@ -824,18 +944,13 @@
           ],
           "ReferenceLinks": [
             {
-              "Title": "Windows Internals resource page",
-              "Url": "https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals",
-              "Kind": "Docs"
-            },
-            {
-              "Title": "Docs: Details",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html#power.optimize-gaming-network",
+              "Title": "Docs: Details (missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Power",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\power\\power.md#power.optimize-gaming-network",
+              "Title": "Docs: Privacy (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\privacy\\privacy-verified.md",
               "Kind": "Docs"
             }
           ]
@@ -844,7 +959,537 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Detected 5 of 5 values (matches: 2, missing: 0).",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Sensors disabled'.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Sensors disabled",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": false,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Sensors disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\LocationAndSensors\\DisableSensors: missing -> 1",
+                "TimestampText": "10:15:54"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "apply",
+            "AppliedStatus": "Applied",
+            "StatusMessage": "Run completed.",
+            "OutcomeSummary": "Apply - Success",
+            "CurrentValue": "Sensors disabled",
+            "TargetValue": "Sensors disabled",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Sensors disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\LocationAndSensors\\DisableSensors: missing -> 1",
+                "TimestampText": "10:15:54"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Sensors disabled'.",
+                "TimestampText": "10:15:57"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Sensors disabled'.",
+                "TimestampText": "10:15:57"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Not required",
+                "Message": "Step not executed.",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "rollback",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Rolled back registry values.",
+            "OutcomeSummary": "Rollback - Rolled Back",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Sensors disabled",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Sensors disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\LocationAndSensors\\DisableSensors: missing -> 1",
+                "TimestampText": "10:15:54"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Sensors disabled'.",
+                "TimestampText": "10:15:57"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Sensors disabled'.",
+                "TimestampText": "10:15:57"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "10:15:57"
+              }
+            ]
+          },
+          {
+            "Stage": "detect-after",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Sensors disabled'.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Sensors disabled",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Sensors disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\LocationAndSensors\\DisableSensors: missing -> 1",
+                "TimestampText": "10:15:57"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Sensors disabled'.",
+                "TimestampText": "10:15:57"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Sensors disabled'.",
+                "TimestampText": "10:15:57"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "10:15:57"
+              }
+            ]
+          }
+        ],
+        "StartedAtUtc": "2026-05-07T17:15:54.5392481+00:00",
+        "CompletedAtUtc": "2026-05-07T17:15:57.619903+00:00"
+      },
+      "qa_tweak_id": "privacy.disable-sensors",
+      "candidate_id": "privacy.disable-sensors",
+      "card_name": "Windows Sensors",
+      "documentation": "research/records/privacy.disable-sensors.json"
+    },
+    {
+      "tweak_id": "privacy.disable-steps-recorder",
+      "host_exit": 0,
+      "execution_exit": 0,
+      "payload_status": "completed",
+      "report_source": "stdout",
+      "report_parse_error": null,
+      "report_fetch_status": null,
+      "report_app_success": true,
+      "report_success": true,
+      "report_status": "ok",
+      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
+      "report_contract_status": "ok",
+      "report_contract_summary": "QA card snapshot contract passed.",
+      "report_contract_failures": [],
+      "report_card_present": true,
+      "report_card_has_claim_boundary": true,
+      "report_card_present_fields": [
+        "TweakId",
+        "Name",
+        "Category",
+        "EvidenceClass",
+        "ResearchStatus",
+        "RollbackSnapshotState",
+        "HasClaimBoundary",
+        "WhatWeKnowSummary",
+        "WhatWeDoNotClaimSummary",
+        "ProofLanes"
+      ],
+      "report_card_missing_fields": [],
+      "report_card_proof_lanes": [
+        "docs",
+        "runtime",
+        "source",
+        "rollback"
+      ],
+      "report_card_missing_proof_lanes": [],
+      "report": {
+        "TweakId": "privacy.disable-steps-recorder",
+        "TweakName": "Steps Recorder",
+        "Success": true,
+        "Status": "ok",
+        "Summary": "Apply/verify path completed and rollback restored the tweak.",
+        "RollbackRequested": true,
+        "Card": {
+          "TweakId": "privacy.disable-steps-recorder",
+          "Name": "Steps Recorder",
+          "Category": "Privacy",
+          "Description": "Steps Recorder can capture user actions and screenshots to help explain a problem. This policy decides whether the feature is available.",
+          "FriendlyDescription": "Steps Recorder can capture user actions and screenshots to help explain a problem. This policy decides whether the feature is available.",
+          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat\\DisableUAR",
+          "EvidenceClass": "A",
+          "EvidenceClassTitle": "Cross-Layer Verified",
+          "ResearchStatus": "PROMOTED",
+          "IsMutationAllowed": true,
+          "RollbackSnapshotState": "ready",
+          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
+          "HasClaimBoundary": true,
+          "WhatWeKnowSummary": "Claim: Steps Recorder can capture user actions and screenshots to help explain a problem. This policy decides whether the feature is available. Evidence: The ADMX_AppCompat Policy CSP page explicitly names the exact machine policy path and value name the app writes, and its policy description matches the disabled behavior. Added nohuto mirror corroboration via nohuto-uar-admx. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
+          "ProofLanes": [
+            {
+              "Key": "docs",
+              "Label": "DOCS",
+              "State": "ready",
+              "Summary": "The ADMX_AppCompat Policy CSP page explicitly names the exact machine policy path and value name the app writes, and its policy description matches the disabled behavior. Added nohuto mirror corroboration via nohuto-uar-admx.",
+              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat#appcompatturnoffuseractionrecord"
+            },
+            {
+              "Key": "runtime",
+              "Label": "RUNTIME",
+              "State": "ready",
+              "Summary": "A same-day fast guest Ghidra retry for `DisableUAR` failed in `ensure-admin-shell` with a bounded timeout, so no xref bundle reached the host.",
+              "Source": "Guest Ghidra launch receipt for DisableUAR: evidence/raw/ghidra/ghidra-privacy-disable-steps-recorder-20260427a/summary.json"
+            },
+            {
+              "Key": "source",
+              "Label": "SOURCE",
+              "State": "ready",
+              "Summary": "No upstream nohuto source link is attached to this record.",
+              "Source": ""
+            },
+            {
+              "Key": "rollback",
+              "Label": "ROLLBACK",
+              "State": "ready",
+              "Summary": "Rollback: Verified via record-restore-story.",
+              "Source": "record-restore-story"
+            }
+          ],
+          "ReferenceLinks": [
+            {
+              "Title": "Docs: Details (missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
+              "Kind": "Details"
+            },
+            {
+              "Title": "Docs: Privacy (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\privacy\\privacy-verified.md",
+              "Kind": "Docs"
+            }
+          ]
+        },
+        "Stages": [
+          {
+            "Stage": "detect-before",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Steps Recorder disabled'.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Steps Recorder disabled",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": false,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Steps Recorder disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat\\DisableUAR: missing -> 1",
+                "TimestampText": "10:16:04"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "apply",
+            "AppliedStatus": "Applied",
+            "StatusMessage": "Run completed.",
+            "OutcomeSummary": "Apply - Success",
+            "CurrentValue": "Steps Recorder disabled",
+            "TargetValue": "Steps Recorder disabled",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Steps Recorder disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat\\DisableUAR: missing -> 1",
+                "TimestampText": "10:16:04"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Steps Recorder disabled'.",
+                "TimestampText": "10:16:07"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Steps Recorder disabled'.",
+                "TimestampText": "10:16:07"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Not required",
+                "Message": "Step not executed.",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "rollback",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Rolled back registry values.",
+            "OutcomeSummary": "Rollback - Rolled Back",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Steps Recorder disabled",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Steps Recorder disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat\\DisableUAR: missing -> 1",
+                "TimestampText": "10:16:04"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Steps Recorder disabled'.",
+                "TimestampText": "10:16:07"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Steps Recorder disabled'.",
+                "TimestampText": "10:16:07"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "10:16:07"
+              }
+            ]
+          },
+          {
+            "Stage": "detect-after",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Steps Recorder disabled'.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Steps Recorder disabled",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Steps Recorder disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat\\DisableUAR: missing -> 1",
+                "TimestampText": "10:16:07"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Steps Recorder disabled'.",
+                "TimestampText": "10:16:07"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Steps Recorder disabled'.",
+                "TimestampText": "10:16:07"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "10:16:07"
+              }
+            ]
+          }
+        ],
+        "StartedAtUtc": "2026-05-07T17:16:04.2430559+00:00",
+        "CompletedAtUtc": "2026-05-07T17:16:07.3089645+00:00"
+      },
+      "qa_tweak_id": "privacy.disable-steps-recorder",
+      "candidate_id": "privacy.disable-steps-recorder",
+      "card_name": "Steps Recorder",
+      "documentation": "research/records/privacy.disable-steps-recorder.json"
+    },
+    {
+      "tweak_id": "privacy.disable-suggestions.policy",
+      "host_exit": 0,
+      "execution_exit": 0,
+      "payload_status": "completed",
+      "report_source": "stdout",
+      "report_parse_error": null,
+      "report_fetch_status": null,
+      "report_app_success": true,
+      "report_success": true,
+      "report_status": "ok",
+      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
+      "report_contract_status": "ok",
+      "report_contract_summary": "QA card snapshot contract passed.",
+      "report_contract_failures": [],
+      "report_card_present": true,
+      "report_card_has_claim_boundary": true,
+      "report_card_present_fields": [
+        "TweakId",
+        "Name",
+        "Category",
+        "EvidenceClass",
+        "ResearchStatus",
+        "RollbackSnapshotState",
+        "HasClaimBoundary",
+        "WhatWeKnowSummary",
+        "WhatWeDoNotClaimSummary",
+        "ProofLanes"
+      ],
+      "report_card_missing_fields": [],
+      "report_card_proof_lanes": [
+        "docs",
+        "runtime",
+        "source",
+        "rollback"
+      ],
+      "report_card_missing_proof_lanes": [],
+      "report": {
+        "TweakId": "privacy.disable-suggestions.policy",
+        "TweakName": "Windows Suggestion Surfaces Policy Group",
+        "Success": true,
+        "Status": "ok",
+        "Summary": "Apply/verify path completed and rollback restored the tweak.",
+        "RollbackRequested": true,
+        "Card": {
+          "TweakId": "privacy.disable-suggestions.policy",
+          "Name": "Windows Suggestion Surfaces Policy Group",
+          "Category": "Privacy",
+          "Description": "Windows uses Spotlight-like suggestion surfaces in Start, Settings, and the Windows Welcome experience. These policies control those official suggestion surfaces.",
+          "FriendlyDescription": "Windows uses Spotlight-like suggestion surfaces in Start, Settings, and the Windows Welcome experience. These policies control those official suggestion surfaces.",
+          "RegistryPath": "",
+          "EvidenceClass": "A",
+          "EvidenceClassTitle": "Cross-Layer Verified",
+          "ResearchStatus": "PROMOTED",
+          "IsMutationAllowed": true,
+          "RollbackSnapshotState": "ready",
+          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
+          "HasClaimBoundary": true,
+          "WhatWeKnowSummary": "Claim: Windows uses Spotlight-like suggestion surfaces in Start, Settings, and the Windows Welcome experience. These policies control those official suggestion surfaces. Evidence: The local CloudContent.admx/adml mappings anchor the three official policy values. The deprecated parent audit trail keeps the opaque ContentDeliveryManager IDs separate from this child record. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
+          "ProofLanes": [
+            {
+              "Key": "docs",
+              "Label": "DOCS",
+              "State": "ready",
+              "Summary": "The local CloudContent.admx/adml mappings anchor the three official policy values. The deprecated parent audit trail keeps the opaque ContentDeliveryManager IDs separate from this child record.",
+              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowthirdpartysuggestionsinwindowsspotlight"
+            },
+            {
+              "Key": "runtime",
+              "Label": "RUNTIME",
+              "State": "ready",
+              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+              "Source": ""
+            },
+            {
+              "Key": "source",
+              "Label": "SOURCE",
+              "State": "ready",
+              "Summary": "No upstream nohuto source link is attached to this record.",
+              "Source": ""
+            },
+            {
+              "Key": "rollback",
+              "Label": "ROLLBACK",
+              "State": "ready",
+              "Summary": "Rollback: Verified via record-restore-story.",
+              "Source": "record-restore-story"
+            }
+          ],
+          "ReferenceLinks": [
+            {
+              "Title": "Docs: Details (missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
+              "Kind": "Details"
+            },
+            {
+              "Title": "Docs: Privacy (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\privacy\\privacy-verified.md",
+              "Kind": "Docs"
+            }
+          ]
+        },
+        "Stages": [
+          {
+            "Stage": "detect-before",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Detected 0 of 3 values (matches: 0, missing: 3).",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Unknown",
             "TargetValue": "Multiple values",
@@ -856,8 +1501,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 5 of 5 values (matches: 2, missing: 0).\nEntries:\n- HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games\\Affinity: 0 -> 0\n- HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games\\GPU Priority: 8 -> 8\n- HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games\\Priority: 2 -> 8\n- HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games\\Scheduling Category: Medium -> High\n- HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games\\SFIO Priority: Normal -> High",
-                "TimestampText": "10:14:23"
+                "Message": "Detected 0 of 3 values (matches: 0, missing: 3).\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableThirdPartySuggestions: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableWindowsSpotlightOnSettings: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableWindowsSpotlightWindowsWelcomeExperience: missing",
+                "TimestampText": "10:16:12"
               },
               {
                 "Action": "Apply",
@@ -894,20 +1539,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 5 of 5 values (matches: 2, missing: 0).\nEntries:\n- HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games\\Affinity: 0 -> 0\n- HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games\\GPU Priority: 8 -> 8\n- HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games\\Priority: 2 -> 8\n- HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games\\Scheduling Category: Medium -> High\n- HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games\\SFIO Priority: Normal -> High",
-                "TimestampText": "10:14:23"
+                "Message": "Detected 0 of 3 values (matches: 0, missing: 3).\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableThirdPartySuggestions: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableWindowsSpotlightOnSettings: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableWindowsSpotlightWindowsWelcomeExperience: missing",
+                "TimestampText": "10:16:12"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Updated 5 values.",
-                "TimestampText": "10:14:26"
+                "Message": "Updated 3 values.",
+                "TimestampText": "10:16:12"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
                 "Message": "Verified desired values.",
-                "TimestampText": "10:14:26"
+                "TimestampText": "10:16:12"
               },
               {
                 "Action": "Rollback",
@@ -932,33 +1577,33 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 5 of 5 values (matches: 2, missing: 0).\nEntries:\n- HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games\\Affinity: 0 -> 0\n- HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games\\GPU Priority: 8 -> 8\n- HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games\\Priority: 2 -> 8\n- HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games\\Scheduling Category: Medium -> High\n- HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games\\SFIO Priority: Normal -> High",
-                "TimestampText": "10:14:23"
+                "Message": "Detected 0 of 3 values (matches: 0, missing: 3).\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableThirdPartySuggestions: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableWindowsSpotlightOnSettings: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableWindowsSpotlightWindowsWelcomeExperience: missing",
+                "TimestampText": "10:16:12"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Updated 5 values.",
-                "TimestampText": "10:14:26"
+                "Message": "Updated 3 values.",
+                "TimestampText": "10:16:12"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
                 "Message": "Verified desired values.",
-                "TimestampText": "10:14:26"
+                "TimestampText": "10:16:12"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "10:14:26"
+                "TimestampText": "10:16:13"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Detected 5 of 5 values (matches: 2, missing: 0).",
+            "StatusMessage": "Detected 0 of 3 values (matches: 0, missing: 3).",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Multiple values",
             "TargetValue": "Multiple values",
@@ -970,46 +1615,46 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 5 of 5 values (matches: 2, missing: 0).\nEntries:\n- HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games\\Affinity: 0 -> 0\n- HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games\\GPU Priority: 8 -> 8\n- HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games\\Priority: 2 -> 8\n- HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games\\Scheduling Category: Medium -> High\n- HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games\\SFIO Priority: Normal -> High",
-                "TimestampText": "10:14:26"
+                "Message": "Detected 0 of 3 values (matches: 0, missing: 3).\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableThirdPartySuggestions: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableWindowsSpotlightOnSettings: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableWindowsSpotlightWindowsWelcomeExperience: missing",
+                "TimestampText": "10:16:13"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Updated 5 values.",
-                "TimestampText": "10:14:26"
+                "Message": "Updated 3 values.",
+                "TimestampText": "10:16:12"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
                 "Message": "Verified desired values.",
-                "TimestampText": "10:14:26"
+                "TimestampText": "10:16:12"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "10:14:26"
+                "TimestampText": "10:16:13"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T17:14:23.5570096+00:00",
-        "CompletedAtUtc": "2026-05-07T17:14:26.7762109+00:00"
+        "StartedAtUtc": "2026-05-07T17:16:12.8333666+00:00",
+        "CompletedAtUtc": "2026-05-07T17:16:13.0947226+00:00"
       },
-      "qa_tweak_id": "power.optimize-gaming-network",
-      "candidate_id": "power.optimize-gaming-network",
-      "card_name": "Games MMCSS Task Profile",
-      "documentation": "research/records/power.optimize-gaming-network.json"
+      "qa_tweak_id": "privacy.disable-suggestions.policy",
+      "candidate_id": "privacy.disable-suggestions.policy",
+      "card_name": "Windows Suggestion Surfaces Policy Group",
+      "documentation": "research/records/privacy.disable-suggestions.policy.review.json"
     }
   ],
   "summary": {
-    "planned_count": 3,
-    "planned_apply_allowed_count": 3,
-    "live_success_count": 3,
+    "planned_count": 5,
+    "planned_apply_allowed_count": 5,
+    "live_success_count": 5,
     "live_failure_count": 0,
     "categories": [
-      "Power"
+      "Privacy"
     ]
   }
 }
