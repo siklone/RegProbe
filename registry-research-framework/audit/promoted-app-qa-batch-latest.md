@@ -1,43 +1,29 @@
 # Promoted App QA Batch
 
 - Status: PASS
-- Generated UTC: 2026-05-07T17:17:12Z
+- Generated UTC: 2026-05-07T17:18:45Z
 - Catalog candidates: 242
-- Selected candidates: 4
-- Planned apply-allowed candidates: 4
-- Live successes: 4
+- Selected candidates: 2
+- Planned apply-allowed candidates: 2
+- Live successes: 2
 - Live failures: 0
 
 ## Selected Candidates
 
-- `explorer.show-info-tips` | Show Explorer Info Tips | Explorer
-  docs: `research/records/explorer.show-info-tips.review.json`
+- `developer.windows-dev-mode` | Windows Developer Mode | Developer
+  docs: `research/records/developer.windows-dev-mode.json`
   rollback: default=true | previous=true
   card snapshot: claim_boundary=true | fields=TweakId, Name, Category, EvidenceClass, ResearchStatus, RollbackSnapshotState, HasClaimBoundary, WhatWeKnowSummary, WhatWeDoNotClaimSummary, ProofLanes | lanes=docs, runtime, source, rollback
-- `explorer.show-protected-operating-system-files` | Show Protected Operating System Files | Explorer
-  docs: `research/records/explorer.show-protected-operating-system-files.review.json`
-  rollback: default=true | previous=true
-  card snapshot: claim_boundary=true | fields=TweakId, Name, Category, EvidenceClass, ResearchStatus, RollbackSnapshotState, HasClaimBoundary, WhatWeKnowSummary, WhatWeDoNotClaimSummary, ProofLanes | lanes=docs, runtime, source, rollback
-- `explorer.show-recent-items` | Show Recent Items In Home | Explorer
-  docs: `research/records/explorer.show-recent-items.review.json`
-  rollback: default=true | previous=true
-  card snapshot: claim_boundary=true | fields=TweakId, Name, Category, EvidenceClass, ResearchStatus, RollbackSnapshotState, HasClaimBoundary, WhatWeKnowSummary, WhatWeDoNotClaimSummary, ProofLanes | lanes=docs, runtime, source, rollback
-- `explorer.show-type-overlay` | Display File Icons On Thumbnails | Explorer
-  docs: `research/records/explorer.show-type-overlay.review.json`
+- `developer.wsl2-memory` | WSL 2 Memory Limit | Developer
+  docs: `research/records/developer.wsl2-memory.json`
   rollback: default=true | previous=true
   card snapshot: claim_boundary=true | fields=TweakId, Name, Category, EvidenceClass, ResearchStatus, RollbackSnapshotState, HasClaimBoundary, WhatWeKnowSummary, WhatWeDoNotClaimSummary, ProofLanes | lanes=docs, runtime, source, rollback
 
 ## Live Results
 
-- `explorer.show-info-tips` | success=true | status=ok
+- `developer.windows-dev-mode` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
   card contract: ok | claim_boundary=true | lanes=docs, runtime, source, rollback
-- `explorer.show-protected-operating-system-files` | success=true | status=ok
-  summary: Apply/verify path completed and rollback restored the tweak.
-  card contract: ok | claim_boundary=true | lanes=docs, runtime, source, rollback
-- `explorer.show-recent-items` | success=true | status=ok
-  summary: Apply/verify path completed and rollback restored the tweak.
-  card contract: ok | claim_boundary=true | lanes=docs, runtime, source, rollback
-- `explorer.show-type-overlay` | success=true | status=ok
+- `developer.wsl2-memory` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
   card contract: ok | claim_boundary=true | lanes=docs, runtime, source, rollback

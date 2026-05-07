@@ -1,15 +1,15 @@
 {
-  "generated_utc": "2026-05-07T17:17:12Z",
-  "history_entry_count": 67,
+  "generated_utc": "2026-05-07T17:18:45Z",
+  "history_entry_count": 68,
   "catalog_candidate_count": 242,
-  "covered_count": 205,
-  "uncovered_count": 37,
+  "covered_count": 207,
+  "uncovered_count": 35,
   "summary": {
-    "coverage_percent": 84.71,
+    "coverage_percent": 85.54,
     "covered_categories": {
       "Audio": 3,
       "Cleanup": 1,
-      "Developer": 7,
+      "Developer": 9,
       "Explorer": 17,
       "Network": 24,
       "Notifications": 5,
@@ -22,7 +22,6 @@
       "Visibility": 21
     },
     "uncovered_categories": {
-      "Developer": 2,
       "Network": 4,
       "Privacy": 14,
       "Security": 4,
@@ -31,35 +30,6 @@
     }
   },
   "recommended_next_batches": [
-    {
-      "category": "Developer",
-      "covered_count": 7,
-      "uncovered_count": 2,
-      "coverage_percent": 77.78,
-      "batch_size": 2,
-      "tweak_ids": [
-        "developer.windows-dev-mode",
-        "developer.wsl2-memory"
-      ],
-      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id developer.windows-dev-mode --id developer.wsl2-memory",
-      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id developer.windows-dev-mode --id developer.wsl2-memory --run-kvm --json",
-      "candidates": [
-        {
-          "tweak_id": "developer.windows-dev-mode",
-          "record_id": "developer.windows-dev-mode",
-          "category": "Developer",
-          "name": "Windows Developer Mode",
-          "documentation": "research/records/developer.windows-dev-mode.json"
-        },
-        {
-          "tweak_id": "developer.wsl2-memory",
-          "record_id": "developer.wsl2-memory",
-          "category": "Developer",
-          "name": "WSL 2 Memory Limit",
-          "documentation": "research/records/developer.wsl2-memory.json"
-        }
-      ]
-    },
     {
       "category": "System",
       "covered_count": 41,
@@ -255,6 +225,35 @@
           "documentation": "research/records/network.smb-set-cipher-suite-order.review.json"
         }
       ]
+    },
+    {
+      "category": "Visibility",
+      "covered_count": 21,
+      "uncovered_count": 2,
+      "coverage_percent": 91.3,
+      "batch_size": 2,
+      "tweak_ids": [
+        "visibility.disable-window-animations",
+        "visibility.hide-people-bar"
+      ],
+      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id visibility.disable-window-animations --id visibility.hide-people-bar",
+      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id visibility.disable-window-animations --id visibility.hide-people-bar --run-kvm --json",
+      "candidates": [
+        {
+          "tweak_id": "visibility.disable-window-animations",
+          "record_id": "visibility.disable-window-animations",
+          "category": "Visibility",
+          "name": "Window Animations",
+          "documentation": "research/records/visibility.disable-window-animations.json"
+        },
+        {
+          "tweak_id": "visibility.hide-people-bar",
+          "record_id": "visibility.hide-people-bar",
+          "category": "Visibility",
+          "name": "People Bar on the Taskbar",
+          "documentation": "research/records/visibility.hide-people-bar.json"
+        }
+      ]
     }
   ],
   "covered": [
@@ -355,6 +354,24 @@
       "category": "Developer",
       "name": "SSH Agent Auto-start",
       "documentation": "research/records/developer.ssh-agent-autostart.review.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "developer.windows-dev-mode",
+      "qa_tweak_id": "developer.windows-dev-mode",
+      "candidate_id": "developer.windows-dev-mode",
+      "category": "Developer",
+      "name": "Windows Developer Mode",
+      "documentation": "research/records/developer.windows-dev-mode.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "developer.wsl2-memory",
+      "qa_tweak_id": "developer.wsl2-memory",
+      "candidate_id": "developer.wsl2-memory",
+      "category": "Developer",
+      "name": "WSL 2 Memory Limit",
+      "documentation": "research/records/developer.wsl2-memory.json",
       "latest_report_status": "ok"
     },
     {
@@ -2105,20 +2122,6 @@
     }
   ],
   "uncovered": [
-    {
-      "tweak_id": "developer.windows-dev-mode",
-      "record_id": "developer.windows-dev-mode",
-      "category": "Developer",
-      "name": "Windows Developer Mode",
-      "documentation": "research/records/developer.windows-dev-mode.json"
-    },
-    {
-      "tweak_id": "developer.wsl2-memory",
-      "record_id": "developer.wsl2-memory",
-      "category": "Developer",
-      "name": "WSL 2 Memory Limit",
-      "documentation": "research/records/developer.wsl2-memory.json"
-    },
     {
       "tweak_id": "network.smb-require-dialect-3_1_1",
       "record_id": "network.smb-require-dialect-3_1_1",

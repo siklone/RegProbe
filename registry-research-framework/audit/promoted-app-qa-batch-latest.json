@@ -1,12 +1,10 @@
 {
-  "generated_utc": "2026-05-07T17:17:12Z",
+  "generated_utc": "2026-05-07T17:18:45Z",
   "status": "PASS",
   "selection": {
     "requested_ids": [
-      "explorer.show-info-tips",
-      "explorer.show-protected-operating-system-files",
-      "explorer.show-recent-items",
-      "explorer.show-type-overlay"
+      "developer.windows-dev-mode",
+      "developer.wsl2-memory"
     ],
     "requested_categories": [],
     "limit_per_category": 1,
@@ -21,29 +19,29 @@
     "kvm_batch_runner": "scripts/vm-kvm/run-guest-app-tweak-qa-batch.py"
   },
   "catalog_candidate_count": 242,
-  "selected_candidate_count": 4,
+  "selected_candidate_count": 2,
   "errors": [],
   "candidates": [
     {
-      "tweak_id": "explorer.show-info-tips",
-      "qa_tweak_id": "explorer.show-info-tips",
-      "candidate_id": "explorer.show-info-tips",
-      "record_id": "explorer.show-info-tips",
-      "category": "Explorer",
-      "name": "Show Explorer Info Tips",
-      "documentation": "research/records/explorer.show-info-tips.review.json",
+      "tweak_id": "developer.windows-dev-mode",
+      "qa_tweak_id": "developer.windows-dev-mode",
+      "candidate_id": "developer.windows-dev-mode",
+      "record_id": "developer.windows-dev-mode",
+      "category": "Developer",
+      "name": "Windows Developer Mode",
+      "documentation": "research/records/developer.windows-dev-mode.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect explorer.show-info-tips",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect developer.windows-dev-mode",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'explorer.show-info-tips' --qa-output 'C:\\Tools\\ValidationController\\smoke\\explorer.show-info-tips.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'explorer.show-info-tips' --qa-output 'C:\\Tools\\ValidationController\\smoke\\explorer.show-info-tips.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'explorer.show-info-tips' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\explorer.show-info-tips.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'explorer.show-info-tips' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\explorer.show-info-tips.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'explorer.show-info-tips'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'developer.windows-dev-mode' --qa-output 'C:\\Tools\\ValidationController\\smoke\\developer.windows-dev-mode.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'developer.windows-dev-mode' --qa-output 'C:\\Tools\\ValidationController\\smoke\\developer.windows-dev-mode.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'developer.windows-dev-mode' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\developer.windows-dev-mode.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'developer.windows-dev-mode' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\developer.windows-dev-mode.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'developer.windows-dev-mode'"
       },
       "expected_report": {
         "success": true,
@@ -84,143 +82,25 @@
       }
     },
     {
-      "tweak_id": "explorer.show-protected-operating-system-files",
-      "qa_tweak_id": "explorer.show-protected-operating-system-files",
-      "candidate_id": "explorer.show-protected-operating-system-files",
-      "record_id": "explorer.show-protected-operating-system-files",
-      "category": "Explorer",
-      "name": "Show Protected Operating System Files",
-      "documentation": "research/records/explorer.show-protected-operating-system-files.review.json",
+      "tweak_id": "developer.wsl2-memory",
+      "qa_tweak_id": "developer.wsl2-memory",
+      "candidate_id": "developer.wsl2-memory",
+      "record_id": "developer.wsl2-memory",
+      "category": "Developer",
+      "name": "WSL 2 Memory Limit",
+      "documentation": "research/records/developer.wsl2-memory.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect explorer.show-protected-operating-system-files",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect developer.wsl2-memory",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'explorer.show-protected-operating-system-files' --qa-output 'C:\\Tools\\ValidationController\\smoke\\explorer.show-protected-operating-system-files.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'explorer.show-protected-operating-system-files' --qa-output 'C:\\Tools\\ValidationController\\smoke\\explorer.show-protected-operating-system-files.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'explorer.show-protected-operating-system-files' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\explorer.show-protected-operating-system-files.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'explorer.show-protected-operating-system-files' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\explorer.show-protected-operating-system-files.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'explorer.show-protected-operating-system-files'"
-      },
-      "expected_report": {
-        "success": true,
-        "status": "ok",
-        "rollback_requested": true,
-        "required_stages": [
-          "detect-before",
-          "apply",
-          "rollback",
-          "detect-after"
-        ],
-        "required_card_snapshot": {
-          "required_fields": [
-            "TweakId",
-            "Name",
-            "Category",
-            "EvidenceClass",
-            "ResearchStatus",
-            "RollbackSnapshotState",
-            "HasClaimBoundary",
-            "WhatWeKnowSummary",
-            "WhatWeDoNotClaimSummary",
-            "ProofLanes"
-          ],
-          "required_proof_lanes": [
-            "docs",
-            "runtime",
-            "source",
-            "rollback"
-          ],
-          "claim_boundary_required": true
-        },
-        "required_stage_assertions": [
-          "apply stage reports a successful apply story",
-          "rollback stage reports a successful rollback story",
-          "detect-after is present"
-        ]
-      }
-    },
-    {
-      "tweak_id": "explorer.show-recent-items",
-      "qa_tweak_id": "explorer.show-recent-items",
-      "candidate_id": "explorer.show-recent-items",
-      "record_id": "explorer.show-recent-items",
-      "category": "Explorer",
-      "name": "Show Recent Items In Home",
-      "documentation": "research/records/explorer.show-recent-items.review.json",
-      "promotion_state": "promoted",
-      "apply_allowed": true,
-      "restore_default_supported": true,
-      "restore_previous_supported": true,
-      "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect explorer.show-recent-items",
-        "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'explorer.show-recent-items' --qa-output 'C:\\Tools\\ValidationController\\smoke\\explorer.show-recent-items.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'explorer.show-recent-items' --qa-output 'C:\\Tools\\ValidationController\\smoke\\explorer.show-recent-items.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'explorer.show-recent-items' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\explorer.show-recent-items.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'explorer.show-recent-items' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\explorer.show-recent-items.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'explorer.show-recent-items'"
-      },
-      "expected_report": {
-        "success": true,
-        "status": "ok",
-        "rollback_requested": true,
-        "required_stages": [
-          "detect-before",
-          "apply",
-          "rollback",
-          "detect-after"
-        ],
-        "required_card_snapshot": {
-          "required_fields": [
-            "TweakId",
-            "Name",
-            "Category",
-            "EvidenceClass",
-            "ResearchStatus",
-            "RollbackSnapshotState",
-            "HasClaimBoundary",
-            "WhatWeKnowSummary",
-            "WhatWeDoNotClaimSummary",
-            "ProofLanes"
-          ],
-          "required_proof_lanes": [
-            "docs",
-            "runtime",
-            "source",
-            "rollback"
-          ],
-          "claim_boundary_required": true
-        },
-        "required_stage_assertions": [
-          "apply stage reports a successful apply story",
-          "rollback stage reports a successful rollback story",
-          "detect-after is present"
-        ]
-      }
-    },
-    {
-      "tweak_id": "explorer.show-type-overlay",
-      "qa_tweak_id": "explorer.show-type-overlay",
-      "candidate_id": "explorer.show-type-overlay",
-      "record_id": "explorer.show-type-overlay",
-      "category": "Explorer",
-      "name": "Display File Icons On Thumbnails",
-      "documentation": "research/records/explorer.show-type-overlay.review.json",
-      "promotion_state": "promoted",
-      "apply_allowed": true,
-      "restore_default_supported": true,
-      "restore_previous_supported": true,
-      "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect explorer.show-type-overlay",
-        "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'explorer.show-type-overlay' --qa-output 'C:\\Tools\\ValidationController\\smoke\\explorer.show-type-overlay.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'explorer.show-type-overlay' --qa-output 'C:\\Tools\\ValidationController\\smoke\\explorer.show-type-overlay.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'explorer.show-type-overlay' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\explorer.show-type-overlay.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'explorer.show-type-overlay' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\explorer.show-type-overlay.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'explorer.show-type-overlay'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'developer.wsl2-memory' --qa-output 'C:\\Tools\\ValidationController\\smoke\\developer.wsl2-memory.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'developer.wsl2-memory' --qa-output 'C:\\Tools\\ValidationController\\smoke\\developer.wsl2-memory.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'developer.wsl2-memory' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\developer.wsl2-memory.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'developer.wsl2-memory' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\developer.wsl2-memory.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'developer.wsl2-memory'"
       },
       "expected_report": {
         "success": true,
@@ -263,7 +143,7 @@
   ],
   "run_results": [
     {
-      "tweak_id": "explorer.show-info-tips",
+      "tweak_id": "developer.windows-dev-mode",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -300,19 +180,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "explorer.show-info-tips",
-        "TweakName": "Show Explorer Info Tips",
+        "TweakId": "developer.windows-dev-mode",
+        "TweakName": "Windows Developer Mode",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "explorer.show-info-tips",
-          "Name": "Show Explorer Info Tips",
-          "Category": "Explorer",
-          "Description": "File Explorer can show or suppress pop-up descriptions for folder and desktop items when you hover them.",
-          "FriendlyDescription": "File Explorer can show or suppress pop-up descriptions for folder and desktop items when you hover them.",
-          "RegistryPath": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowInfoTip",
+          "TweakId": "developer.windows-dev-mode",
+          "Name": "Windows Developer Mode",
+          "Category": "Developer",
+          "Description": "Developer Mode turns on Windows support for building, sideloading, and debugging apps. Most casual users do not need it, but developers often do.",
+          "FriendlyDescription": "Developer Mode turns on Windows support for building, sideloading, and debugging apps. Most casual users do not need it, but developers often do.",
+          "RegistryPath": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\AppModelUnlock\\AllowDevelopmentWithoutDevLicense",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -320,22 +200,22 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: File Explorer can show or suppress pop-up descriptions for folder and desktop items when you hover them. Evidence: Raw hit exports were also copied to evidence/files/vm-tooling-staging/showinfotip-0-hits.csv and evidence/files/vm-tooling-staging/showinfotip-1-hits.csv..md Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: Developer Mode turns on Windows support for building, sideloading, and debugging apps. Most casual users do not need it, but developers often do. Evidence: The official Microsoft page explicitly names the exact registry path and value used by the app. A guest-side Procmon capture also observed SearchProtocolHost.exe querying the AppModelUnlock key and receiving NAME NOT FOUND for AllowDevelopmentWithoutDevLice... Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "Raw hit exports were also copied to evidence/files/vm-tooling-staging/showinfotip-0-hits.csv and evidence/files/vm-tooling-staging/showinfotip-1-hits.csv..md",
-              "Source": "Validation proof source: evidence/files/vm-tooling-staging/showinfotip-result.txt"
+              "Summary": "The official Microsoft page explicitly names the exact registry path and value used by the app. A guest-side Procmon capture also observed SearchProtocolHost.exe querying the AppModelUnlock key and receiving NAME NOT FOUND for AllowDevelopmentWithoutDevLice...",
+              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows/advanced-settings/developer-mode"
             },
             {
               "Key": "runtime",
               "Label": "RUNTIME",
               "State": "ready",
-              "Summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote ShowInfoTip = 0 and ShowInfoTip = 1, restarted Explorer after each write, and captured Explorer.EXE querying HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowInfoTip with matc...",
-              "Source": "Procmon capture - Explorer ShowInfoTip runtime surface: evidence/raw/procmon/explorer.show-info-tips/showinfotip-result.txt"
+              "Summary": "Guest-side Procmon capture showed SearchProtocolHost.exe querying HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\AppModelUnlock\\AllowDevelopmentWithoutDevLicense and receiving NAME NOT FOUND while the developer settings page was open. The same capture also...",
+              "Source": "Procmon capture - Developer settings search reads AppModelUnlock baseline: evidence/raw/procmon/developer.windows-dev-mode/devmode_probe2.csv and evidence/raw/procmon/developer.windows-dev-mode/devmode_probe2.txt"
             },
             {
               "Key": "source",
@@ -359,273 +239,8 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Explorer",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\visibility\\visibility.md#explorer.show-info-tips",
-              "Kind": "Docs"
-            }
-          ]
-        },
-        "Stages": [
-          {
-            "Stage": "detect-before",
-            "AppliedStatus": "Applied",
-            "StatusMessage": "Current option is 'Show Explorer info tips'.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Show Explorer info tips",
-            "TargetValue": "Show Explorer info tips",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": false,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Applied",
-                "Message": "Current option is 'Show Explorer info tips'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowInfoTip: 1 -> 1",
-                "TimestampText": "10:17:16"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "apply",
-            "AppliedStatus": "Applied",
-            "StatusMessage": "Run completed.",
-            "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Show Explorer info tips",
-            "TargetValue": "Show Explorer info tips",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Applied",
-                "Message": "Current option is 'Show Explorer info tips'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowInfoTip: 1 -> 1",
-                "TimestampText": "10:17:16"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Skipped",
-                "Message": "Already in the desired state.",
-                "TimestampText": "10:17:16"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified preset 'Show Explorer info tips'.",
-                "TimestampText": "10:17:16"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Skipped",
-                "Message": "No changes were made.",
-                "TimestampText": "10:17:16"
-              }
-            ]
-          },
-          {
-            "Stage": "rollback",
-            "AppliedStatus": "Applied",
-            "StatusMessage": "Rolled back registry values.",
-            "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Show Explorer info tips",
-            "TargetValue": "Show Explorer info tips",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Applied",
-                "Message": "Current option is 'Show Explorer info tips'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowInfoTip: 1 -> 1",
-                "TimestampText": "10:17:16"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Skipped",
-                "Message": "Already in the desired state.",
-                "TimestampText": "10:17:16"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified preset 'Show Explorer info tips'.",
-                "TimestampText": "10:17:16"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "10:17:16"
-              }
-            ]
-          },
-          {
-            "Stage": "detect-after",
-            "AppliedStatus": "Applied",
-            "StatusMessage": "Current option is 'Show Explorer info tips'.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Show Explorer info tips",
-            "TargetValue": "Show Explorer info tips",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Applied",
-                "Message": "Current option is 'Show Explorer info tips'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowInfoTip: 1 -> 1",
-                "TimestampText": "10:17:16"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Skipped",
-                "Message": "Already in the desired state.",
-                "TimestampText": "10:17:16"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified preset 'Show Explorer info tips'.",
-                "TimestampText": "10:17:16"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "10:17:16"
-              }
-            ]
-          }
-        ],
-        "StartedAtUtc": "2026-05-07T17:17:16.4087559+00:00",
-        "CompletedAtUtc": "2026-05-07T17:17:16.6547341+00:00"
-      },
-      "qa_tweak_id": "explorer.show-info-tips",
-      "candidate_id": "explorer.show-info-tips",
-      "card_name": "Show Explorer Info Tips",
-      "documentation": "research/records/explorer.show-info-tips.review.json"
-    },
-    {
-      "tweak_id": "explorer.show-protected-operating-system-files",
-      "host_exit": 0,
-      "execution_exit": 0,
-      "payload_status": "completed",
-      "report_source": "stdout",
-      "report_parse_error": null,
-      "report_fetch_status": null,
-      "report_app_success": true,
-      "report_success": true,
-      "report_status": "ok",
-      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
-      "report_contract_status": "ok",
-      "report_contract_summary": "QA card snapshot contract passed.",
-      "report_contract_failures": [],
-      "report_card_present": true,
-      "report_card_has_claim_boundary": true,
-      "report_card_present_fields": [
-        "TweakId",
-        "Name",
-        "Category",
-        "EvidenceClass",
-        "ResearchStatus",
-        "RollbackSnapshotState",
-        "HasClaimBoundary",
-        "WhatWeKnowSummary",
-        "WhatWeDoNotClaimSummary",
-        "ProofLanes"
-      ],
-      "report_card_missing_fields": [],
-      "report_card_proof_lanes": [
-        "docs",
-        "runtime",
-        "source",
-        "rollback"
-      ],
-      "report_card_missing_proof_lanes": [],
-      "report": {
-        "TweakId": "explorer.show-protected-operating-system-files",
-        "TweakName": "Show Protected Operating System Files",
-        "Success": true,
-        "Status": "ok",
-        "Summary": "Apply/verify path completed and rollback restored the tweak.",
-        "RollbackRequested": true,
-        "Card": {
-          "TweakId": "explorer.show-protected-operating-system-files",
-          "Name": "Show Protected Operating System Files",
-          "Category": "Explorer",
-          "Description": "File Explorer can hide or reveal protected operating system files. Most people should leave them hidden, but advanced troubleshooting sometimes requires seeing them.",
-          "FriendlyDescription": "File Explorer can hide or reveal protected operating system files. Most people should leave them hidden, but advanced troubleshooting sometimes requires seeing them.",
-          "RegistryPath": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowSuperHidden",
-          "EvidenceClass": "A",
-          "EvidenceClassTitle": "Cross-Layer Verified",
-          "ResearchStatus": "PROMOTED",
-          "IsMutationAllowed": true,
-          "RollbackSnapshotState": "ready",
-          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
-          "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: File Explorer can hide or reveal protected operating system files. Most people should leave them hidden, but advanced troubleshooting sometimes requires seeing them. Evidence: Raw hit exports were also copied to evidence/files/vm-tooling-staging/showsuperhidden-0-hits.csv and evidence/files/vm-tooling-staging/showsuperhidden-1-hits.csv..md Rollback: Rollback: Verified via record-restore-story.",
-          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
-          "ProofLanes": [
-            {
-              "Key": "docs",
-              "Label": "DOCS",
-              "State": "ready",
-              "Summary": "Raw hit exports were also copied to evidence/files/vm-tooling-staging/showsuperhidden-0-hits.csv and evidence/files/vm-tooling-staging/showsuperhidden-1-hits.csv..md",
-              "Source": "Validation proof source: evidence/files/vm-tooling-staging/showsuperhidden-result.txt"
-            },
-            {
-              "Key": "runtime",
-              "Label": "RUNTIME",
-              "State": "ready",
-              "Summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote ShowSuperHidden = 0 and ShowSuperHidden = 1 with Hidden held at 1, restarted Explorer after each write, and captured Explorer.EXE querying HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\...",
-              "Source": "Procmon capture - Explorer ShowSuperHidden runtime surface: evidence/raw/procmon/explorer.show-protected-operating-system-files/showsuperhidden-result.txt"
-            },
-            {
-              "Key": "source",
-              "Label": "SOURCE",
-              "State": "ready",
-              "Summary": "No upstream nohuto source link is attached to this record.",
-              "Source": ""
-            },
-            {
-              "Key": "rollback",
-              "Label": "ROLLBACK",
-              "State": "ready",
-              "Summary": "Rollback: Verified via record-restore-story.",
-              "Source": "record-restore-story"
-            }
-          ],
-          "ReferenceLinks": [
-            {
-              "Title": "Docs: Details (missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
-              "Kind": "Details"
-            },
-            {
-              "Title": "Docs: Explorer",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\visibility\\visibility.md#explorer.show-protected-operating-system-files",
+              "Title": "Docs: Developer (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweaks.md",
               "Kind": "Docs"
             }
           ]
@@ -634,10 +249,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current option is 'Hide protected operating system files'. Selected option is 'Show protected operating system files'.",
+            "StatusMessage": "Value not set.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Hide protected operating system files",
-            "TargetValue": "Show protected operating system files",
+            "CurrentValue": "Not set",
+            "TargetValue": "1 (0x1)",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -646,8 +261,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current option is 'Hide protected operating system files'. Selected option is 'Show protected operating system files'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowSuperHidden: 0 -> 1",
-                "TimestampText": "10:17:21"
+                "Message": "Value not set.",
+                "TimestampText": "10:18:49"
               },
               {
                 "Action": "Apply",
@@ -674,8 +289,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Show protected operating system files",
-            "TargetValue": "Show protected operating system files",
+            "CurrentValue": "1 (0x1)",
+            "TargetValue": "1 (0x1)",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -684,20 +299,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current option is 'Hide protected operating system files'. Selected option is 'Show protected operating system files'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowSuperHidden: 0 -> 1",
-                "TimestampText": "10:17:22"
+                "Message": "Value not set.",
+                "TimestampText": "10:18:49"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Show protected operating system files'.",
-                "TimestampText": "10:17:22"
+                "Message": "Set value to 1.",
+                "TimestampText": "10:18:52"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Show protected operating system files'.",
-                "TimestampText": "10:17:22"
+                "Message": "Verified desired value.",
+                "TimestampText": "10:18:52"
               },
               {
                 "Action": "Rollback",
@@ -710,10 +325,10 @@
           {
             "Stage": "rollback",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Rolled back registry values.",
+            "StatusMessage": "Removed value to restore default.",
             "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Hide protected operating system files",
-            "TargetValue": "Show protected operating system files",
+            "CurrentValue": "1 (0x1)",
+            "TargetValue": "1 (0x1)",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -722,36 +337,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current option is 'Hide protected operating system files'. Selected option is 'Show protected operating system files'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowSuperHidden: 0 -> 1",
-                "TimestampText": "10:17:22"
+                "Message": "Value not set.",
+                "TimestampText": "10:18:49"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Show protected operating system files'.",
-                "TimestampText": "10:17:22"
+                "Message": "Set value to 1.",
+                "TimestampText": "10:18:52"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Show protected operating system files'.",
-                "TimestampText": "10:17:22"
+                "Message": "Verified desired value.",
+                "TimestampText": "10:18:52"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "10:17:22"
+                "Message": "Removed value to restore default.",
+                "TimestampText": "10:18:52"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current option is 'Hide protected operating system files'. Selected option is 'Show protected operating system files'.",
+            "StatusMessage": "Value not set.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Hide protected operating system files",
-            "TargetValue": "Show protected operating system files",
+            "CurrentValue": "Not set",
+            "TargetValue": "1 (0x1)",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -760,40 +375,40 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current option is 'Hide protected operating system files'. Selected option is 'Show protected operating system files'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowSuperHidden: 0 -> 1",
-                "TimestampText": "10:17:22"
+                "Message": "Value not set.",
+                "TimestampText": "10:18:52"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Show protected operating system files'.",
-                "TimestampText": "10:17:22"
+                "Message": "Set value to 1.",
+                "TimestampText": "10:18:52"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Show protected operating system files'.",
-                "TimestampText": "10:17:22"
+                "Message": "Verified desired value.",
+                "TimestampText": "10:18:52"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "10:17:22"
+                "Message": "Removed value to restore default.",
+                "TimestampText": "10:18:52"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T17:17:21.9270698+00:00",
-        "CompletedAtUtc": "2026-05-07T17:17:22.2180164+00:00"
+        "StartedAtUtc": "2026-05-07T17:18:49.5672058+00:00",
+        "CompletedAtUtc": "2026-05-07T17:18:52.7331273+00:00"
       },
-      "qa_tweak_id": "explorer.show-protected-operating-system-files",
-      "candidate_id": "explorer.show-protected-operating-system-files",
-      "card_name": "Show Protected Operating System Files",
-      "documentation": "research/records/explorer.show-protected-operating-system-files.review.json"
+      "qa_tweak_id": "developer.windows-dev-mode",
+      "candidate_id": "developer.windows-dev-mode",
+      "card_name": "Windows Developer Mode",
+      "documentation": "research/records/developer.windows-dev-mode.json"
     },
     {
-      "tweak_id": "explorer.show-recent-items",
+      "tweak_id": "developer.wsl2-memory",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -830,19 +445,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "explorer.show-recent-items",
-        "TweakName": "Show Recent Items In Home",
+        "TweakId": "developer.wsl2-memory",
+        "TweakName": "WSL 2 Memory Limit",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "explorer.show-recent-items",
-          "Name": "Show Recent Items In Home",
-          "Category": "Explorer",
-          "Description": "Explorer Home can show or hide recently used files.",
-          "FriendlyDescription": "Explorer Home can show or hide recently used files.",
-          "RegistryPath": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ShowRecent",
+          "TweakId": "developer.wsl2-memory",
+          "Name": "WSL 2 Memory Limit",
+          "Category": "Developer",
+          "Description": "WSL 2 can use a lot of RAM. Microsoft documents memory limits in .wslconfig, and this tweak writes that documented setting directly.",
+          "FriendlyDescription": "WSL 2 can use a lot of RAM. Microsoft documents memory limits in .wslconfig, and this tweak writes that documented setting directly.",
+          "RegistryPath": "",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -850,22 +465,22 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Explorer Home can show or hide recently used files. Evidence: The guest-local result file was copied back to the host scratch area during validation. The VM user baseline was 0 and was restored after the probe. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: WSL 2 can use a lot of RAM. Microsoft documents memory limits in .wslconfig, and this tweak writes that documented setting directly. Evidence: Microsoft documents WSL 2 memory limits in %UserProfile%\\.wslconfig under the [wsl2] section using the memory setting. The current app writes the same documented surface. Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "The guest-local result file was copied back to the host scratch area during validation. The VM user baseline was 0 and was restored after the probe.",
-              "Source": "Validation proof source: evidence/files/vm-tooling-staging/showrecent-result.txt"
+              "Summary": "Microsoft documents WSL 2 memory limits in %UserProfile%\\.wslconfig under the [wsl2] section using the memory setting. The current app writes the same documented surface.",
+              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows/wsl/wsl-config"
             },
             {
               "Key": "runtime",
               "Label": "RUNTIME",
               "State": "ready",
-              "Summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote ShowRecent = 0 and ShowRecent = 1, restarted Explorer after each write, and captured Explorer.EXE querying HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ShowRecent with matching Data: 0...",
-              "Source": "Procmon capture - Explorer ShowRecent runtime surface: evidence/raw/procmon/explorer.show-recent-items/showrecent-result.txt"
+              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+              "Source": ""
             },
             {
               "Key": "source",
@@ -889,8 +504,8 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Explorer",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\visibility\\visibility.md#explorer.show-recent-items",
+              "Title": "Docs: Developer (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweaks.md",
               "Kind": "Docs"
             }
           ]
@@ -899,10 +514,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Show recent items'.",
+            "StatusMessage": "WSL 2 memory is not explicitly configured.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Show recent items",
+            "CurrentValue": "Unknown",
+            "TargetValue": "Optimized",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -911,8 +526,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Show recent items'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ShowRecent: missing -> 1",
-                "TimestampText": "10:17:28"
+                "Message": "WSL 2 memory is not explicitly configured.",
+                "TimestampText": "10:18:59"
               },
               {
                 "Action": "Apply",
@@ -939,8 +554,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Show recent items",
-            "TargetValue": "Show recent items",
+            "CurrentValue": "Optimized",
+            "TargetValue": "Optimized",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -949,20 +564,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Show recent items'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ShowRecent: missing -> 1",
-                "TimestampText": "10:17:28"
+                "Message": "WSL 2 memory is not explicitly configured.",
+                "TimestampText": "10:18:59"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Show recent items'.",
-                "TimestampText": "10:17:28"
+                "Message": "Set WSL 2 memory limit to 4GB.",
+                "TimestampText": "10:18:59"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Show recent items'.",
-                "TimestampText": "10:17:28"
+                "Message": "Verified WSL 2 memory limit 4GB.",
+                "TimestampText": "10:18:59"
               },
               {
                 "Action": "Rollback",
@@ -975,10 +590,10 @@
           {
             "Stage": "rollback",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Rolled back registry values.",
+            "StatusMessage": "Removed .wslconfig created by the tweak.",
             "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Show recent items",
+            "CurrentValue": "Optimized",
+            "TargetValue": "Optimized",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -987,36 +602,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Show recent items'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ShowRecent: missing -> 1",
-                "TimestampText": "10:17:28"
+                "Message": "WSL 2 memory is not explicitly configured.",
+                "TimestampText": "10:18:59"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Show recent items'.",
-                "TimestampText": "10:17:28"
+                "Message": "Set WSL 2 memory limit to 4GB.",
+                "TimestampText": "10:18:59"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Show recent items'.",
-                "TimestampText": "10:17:28"
+                "Message": "Verified WSL 2 memory limit 4GB.",
+                "TimestampText": "10:18:59"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "10:17:28"
+                "Message": "Removed .wslconfig created by the tweak.",
+                "TimestampText": "10:18:59"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Show recent items'.",
+            "StatusMessage": "WSL 2 memory is not explicitly configured.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Show recent items",
+            "CurrentValue": "Optimized",
+            "TargetValue": "Optimized",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1025,311 +640,46 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Show recent items'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ShowRecent: missing -> 1",
-                "TimestampText": "10:17:28"
+                "Message": "WSL 2 memory is not explicitly configured.",
+                "TimestampText": "10:18:59"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Show recent items'.",
-                "TimestampText": "10:17:28"
+                "Message": "Set WSL 2 memory limit to 4GB.",
+                "TimestampText": "10:18:59"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Show recent items'.",
-                "TimestampText": "10:17:28"
+                "Message": "Verified WSL 2 memory limit 4GB.",
+                "TimestampText": "10:18:59"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "10:17:28"
+                "Message": "Removed .wslconfig created by the tweak.",
+                "TimestampText": "10:18:59"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T17:17:28.4426803+00:00",
-        "CompletedAtUtc": "2026-05-07T17:17:28.7367679+00:00"
+        "StartedAtUtc": "2026-05-07T17:18:59.1497684+00:00",
+        "CompletedAtUtc": "2026-05-07T17:18:59.4534919+00:00"
       },
-      "qa_tweak_id": "explorer.show-recent-items",
-      "candidate_id": "explorer.show-recent-items",
-      "card_name": "Show Recent Items In Home",
-      "documentation": "research/records/explorer.show-recent-items.review.json"
-    },
-    {
-      "tweak_id": "explorer.show-type-overlay",
-      "host_exit": 0,
-      "execution_exit": 0,
-      "payload_status": "completed",
-      "report_source": "stdout",
-      "report_parse_error": null,
-      "report_fetch_status": null,
-      "report_app_success": true,
-      "report_success": true,
-      "report_status": "ok",
-      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
-      "report_contract_status": "ok",
-      "report_contract_summary": "QA card snapshot contract passed.",
-      "report_contract_failures": [],
-      "report_card_present": true,
-      "report_card_has_claim_boundary": true,
-      "report_card_present_fields": [
-        "TweakId",
-        "Name",
-        "Category",
-        "EvidenceClass",
-        "ResearchStatus",
-        "RollbackSnapshotState",
-        "HasClaimBoundary",
-        "WhatWeKnowSummary",
-        "WhatWeDoNotClaimSummary",
-        "ProofLanes"
-      ],
-      "report_card_missing_fields": [],
-      "report_card_proof_lanes": [
-        "docs",
-        "runtime",
-        "source",
-        "rollback"
-      ],
-      "report_card_missing_proof_lanes": [],
-      "report": {
-        "TweakId": "explorer.show-type-overlay",
-        "TweakName": "Display File Icons On Thumbnails",
-        "Success": true,
-        "Status": "ok",
-        "Summary": "Apply/verify path completed and rollback restored the tweak.",
-        "RollbackRequested": true,
-        "Card": {
-          "TweakId": "explorer.show-type-overlay",
-          "Name": "Display File Icons On Thumbnails",
-          "Category": "Explorer",
-          "Description": "Explorer can show or hide file icons on top of thumbnails.",
-          "FriendlyDescription": "Explorer can show or hide file icons on top of thumbnails.",
-          "RegistryPath": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowTypeOverlay",
-          "EvidenceClass": "A",
-          "EvidenceClassTitle": "Cross-Layer Verified",
-          "ResearchStatus": "PROMOTED",
-          "IsMutationAllowed": true,
-          "RollbackSnapshotState": "ready",
-          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
-          "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Explorer can show or hide file icons on top of thumbnails. Evidence: The guest-local result file was copied back to the host scratch area during validation. The VM user baseline was 1 and was restored after the probe. Rollback: Rollback: Verified via record-restore-story.",
-          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
-          "ProofLanes": [
-            {
-              "Key": "docs",
-              "Label": "DOCS",
-              "State": "ready",
-              "Summary": "The guest-local result file was copied back to the host scratch area during validation. The VM user baseline was 1 and was restored after the probe.",
-              "Source": "Validation proof source: evidence/files/vm-tooling-staging/showtypeoverlay-result.txt"
-            },
-            {
-              "Key": "runtime",
-              "Label": "RUNTIME",
-              "State": "ready",
-              "Summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote ShowTypeOverlay = 0 and ShowTypeOverlay = 1, restarted Explorer after each write, and captured Explorer.EXE querying HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowTypeOverl...",
-              "Source": "Procmon capture - Explorer ShowTypeOverlay runtime surface: evidence/raw/procmon/explorer.show-type-overlay/showtypeoverlay-result.txt"
-            },
-            {
-              "Key": "source",
-              "Label": "SOURCE",
-              "State": "ready",
-              "Summary": "No upstream nohuto source link is attached to this record.",
-              "Source": ""
-            },
-            {
-              "Key": "rollback",
-              "Label": "ROLLBACK",
-              "State": "ready",
-              "Summary": "Rollback: Verified via record-restore-story.",
-              "Source": "record-restore-story"
-            }
-          ],
-          "ReferenceLinks": [
-            {
-              "Title": "Docs: Details (missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
-              "Kind": "Details"
-            },
-            {
-              "Title": "Docs: Explorer",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\visibility\\visibility.md#explorer.show-type-overlay",
-              "Kind": "Docs"
-            }
-          ]
-        },
-        "Stages": [
-          {
-            "Stage": "detect-before",
-            "AppliedStatus": "Applied",
-            "StatusMessage": "Current option is 'Show file icons on thumbnails'.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Show file icons on thumbnails",
-            "TargetValue": "Show file icons on thumbnails",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": false,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Applied",
-                "Message": "Current option is 'Show file icons on thumbnails'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowTypeOverlay: 1 -> 1",
-                "TimestampText": "10:17:35"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "apply",
-            "AppliedStatus": "Applied",
-            "StatusMessage": "Run completed.",
-            "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Show file icons on thumbnails",
-            "TargetValue": "Show file icons on thumbnails",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Applied",
-                "Message": "Current option is 'Show file icons on thumbnails'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowTypeOverlay: 1 -> 1",
-                "TimestampText": "10:17:35"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Skipped",
-                "Message": "Already in the desired state.",
-                "TimestampText": "10:17:35"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified preset 'Show file icons on thumbnails'.",
-                "TimestampText": "10:17:35"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Skipped",
-                "Message": "No changes were made.",
-                "TimestampText": "10:17:35"
-              }
-            ]
-          },
-          {
-            "Stage": "rollback",
-            "AppliedStatus": "Applied",
-            "StatusMessage": "Rolled back registry values.",
-            "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Show file icons on thumbnails",
-            "TargetValue": "Show file icons on thumbnails",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Applied",
-                "Message": "Current option is 'Show file icons on thumbnails'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowTypeOverlay: 1 -> 1",
-                "TimestampText": "10:17:35"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Skipped",
-                "Message": "Already in the desired state.",
-                "TimestampText": "10:17:35"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified preset 'Show file icons on thumbnails'.",
-                "TimestampText": "10:17:35"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "10:17:35"
-              }
-            ]
-          },
-          {
-            "Stage": "detect-after",
-            "AppliedStatus": "Applied",
-            "StatusMessage": "Current option is 'Show file icons on thumbnails'.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Show file icons on thumbnails",
-            "TargetValue": "Show file icons on thumbnails",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Applied",
-                "Message": "Current option is 'Show file icons on thumbnails'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowTypeOverlay: 1 -> 1",
-                "TimestampText": "10:17:35"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Skipped",
-                "Message": "Already in the desired state.",
-                "TimestampText": "10:17:35"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified preset 'Show file icons on thumbnails'.",
-                "TimestampText": "10:17:35"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "10:17:35"
-              }
-            ]
-          }
-        ],
-        "StartedAtUtc": "2026-05-07T17:17:35.1719324+00:00",
-        "CompletedAtUtc": "2026-05-07T17:17:35.4239554+00:00"
-      },
-      "qa_tweak_id": "explorer.show-type-overlay",
-      "candidate_id": "explorer.show-type-overlay",
-      "card_name": "Display File Icons On Thumbnails",
-      "documentation": "research/records/explorer.show-type-overlay.review.json"
+      "qa_tweak_id": "developer.wsl2-memory",
+      "candidate_id": "developer.wsl2-memory",
+      "card_name": "WSL 2 Memory Limit",
+      "documentation": "research/records/developer.wsl2-memory.json"
     }
   ],
   "summary": {
-    "planned_count": 4,
-    "planned_apply_allowed_count": 4,
-    "live_success_count": 4,
+    "planned_count": 2,
+    "planned_apply_allowed_count": 2,
+    "live_success_count": 2,
     "live_failure_count": 0,
     "categories": [
-      "Explorer"
+      "Developer"
     ]
   }
 }

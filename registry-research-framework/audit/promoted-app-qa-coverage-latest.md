@@ -1,17 +1,17 @@
 # Promoted App QA Coverage
 
-- Generated UTC: 2026-05-07T17:17:12Z
-- History entries: 67
+- Generated UTC: 2026-05-07T17:18:45Z
+- History entries: 68
 - Promoted app-QA candidates: 242
-- Covered: 205
-- Uncovered: 37
-- Coverage: 84.71%
+- Covered: 207
+- Uncovered: 35
+- Coverage: 85.54%
 
 ## Covered Categories
 
 - Audio: 3
 - Cleanup: 1
-- Developer: 7
+- Developer: 9
 - Explorer: 17
 - Network: 24
 - Notifications: 5
@@ -25,7 +25,6 @@
 
 ## Uncovered Categories
 
-- Developer: 2
 - Network: 4
 - Privacy: 14
 - Security: 4
@@ -34,9 +33,6 @@
 
 ## Recommended Next Batches
 
-- Developer: 2 uncovered cards | coverage 77.78%
-  command: `dotnet run --project cli/cli.csproj -- research qa-batch --id developer.windows-dev-mode --id developer.wsl2-memory`
-  live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id developer.windows-dev-mode --id developer.wsl2-memory --run-kvm --json`
 - System: 5 uncovered cards | coverage 78.85%
   command: `dotnet run --project cli/cli.csproj -- research qa-batch --id system.priority-control --id system.reliability-timestamp-enabled --id system.services.disable-bluetooth-audio-gateway --id system.services.disable-bluetooth-support --id system.services.disable-bluetooth-user-service`
   live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id system.priority-control --id system.reliability-timestamp-enabled --id system.services.disable-bluetooth-audio-gateway --id system.services.disable-bluetooth-support --id system.services.disable-bluetooth-user-service --run-kvm --json`
@@ -49,11 +45,12 @@
 - Network: 4 uncovered cards | coverage 85.71%
   command: `dotnet run --project cli/cli.csproj -- research qa-batch --id network.smb-require-dialect-3_1_1 --id network.smb-require-signing-client --id network.smb-require-signing-server --id network.smb-set-cipher-suite-order`
   live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id network.smb-require-dialect-3_1_1 --id network.smb-require-signing-client --id network.smb-require-signing-server --id network.smb-set-cipher-suite-order --run-kvm --json`
+- Visibility: 2 uncovered cards | coverage 91.3%
+  command: `dotnet run --project cli/cli.csproj -- research qa-batch --id visibility.disable-window-animations --id visibility.hide-people-bar`
+  live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id visibility.disable-window-animations --id visibility.hide-people-bar --run-kvm --json`
 
 ## Remaining Uncovered Sample
 
-- `developer.windows-dev-mode` | Windows Developer Mode | Developer
-- `developer.wsl2-memory` | WSL 2 Memory Limit | Developer
 - `network.smb-require-dialect-3_1_1` | Require SMB Dialect 3.1.1 | Network
 - `network.smb-require-signing-client` | SMB Client Signing Requirement | Network
 - `network.smb-require-signing-server` | SMB Server Signing Requirement | Network
@@ -72,3 +69,5 @@
 - `privacy.limit-diagnostic-log-collection` | Advanced Diagnostic Log Collection | Privacy
 - `privacy.limit-dump-collection` | Diagnostic Dump Collection | Privacy
 - `privacy.troubleshooter-dont-run` | Recommended Troubleshooting for Known Problems | Privacy
+- `security.powershell-unrestricted` | Windows PowerShell Script Execution Policy | Security
+- `security.threat-file-hash-logging` | Microsoft Defender Threat File Hash Logging | Security
