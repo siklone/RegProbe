@@ -1,10 +1,13 @@
 {
-  "generated_utc": "2026-05-07T16:59:48Z",
+  "generated_utc": "2026-05-07T17:00:48Z",
   "status": "PASS",
   "selection": {
     "requested_ids": [
-      "notifications.disable-mirroring",
-      "notifications.disable-tile"
+      "privacy.disable-pca-diagnostics.policy",
+      "privacy.disable-phone-linking",
+      "privacy.disable-program-compatibility-assistant",
+      "privacy.disable-recall",
+      "privacy.disable-resume"
     ],
     "requested_categories": [],
     "limit_per_category": 1,
@@ -19,29 +22,29 @@
     "kvm_batch_runner": "scripts/vm-kvm/run-guest-app-tweak-qa-batch.py"
   },
   "catalog_candidate_count": 242,
-  "selected_candidate_count": 2,
+  "selected_candidate_count": 5,
   "errors": [],
   "candidates": [
     {
-      "tweak_id": "notifications.disable-mirroring",
-      "qa_tweak_id": "notifications.disable-mirroring",
-      "candidate_id": "notifications.disable-mirroring",
-      "record_id": "notifications.disable-mirroring",
-      "category": "Notifications",
-      "name": "Notification Mirroring",
-      "documentation": "research/records/notifications.disable-mirroring.json",
+      "tweak_id": "privacy.disable-pca-diagnostics.policy",
+      "qa_tweak_id": "privacy.disable-pca-diagnostics.policy",
+      "candidate_id": "privacy.disable-pca-diagnostics.policy",
+      "record_id": "privacy.disable-pca-diagnostics.policy",
+      "category": "Privacy",
+      "name": "Disable PCA Compatibility Diagnostics Detection",
+      "documentation": "research/records/privacy.disable-pca-diagnostics.policy.review.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect notifications.disable-mirroring",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.disable-pca-diagnostics.policy",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'notifications.disable-mirroring' --qa-output 'C:\\Tools\\ValidationController\\smoke\\notifications.disable-mirroring.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'notifications.disable-mirroring' --qa-output 'C:\\Tools\\ValidationController\\smoke\\notifications.disable-mirroring.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'notifications.disable-mirroring' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\notifications.disable-mirroring.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'notifications.disable-mirroring' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\notifications.disable-mirroring.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'notifications.disable-mirroring'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-pca-diagnostics.policy' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-pca-diagnostics.policy.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-pca-diagnostics.policy' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-pca-diagnostics.policy.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-pca-diagnostics.policy' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-pca-diagnostics.policy.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-pca-diagnostics.policy' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-pca-diagnostics.policy.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.disable-pca-diagnostics.policy'"
       },
       "expected_report": {
         "success": true,
@@ -82,25 +85,202 @@
       }
     },
     {
-      "tweak_id": "notifications.disable-tile",
-      "qa_tweak_id": "notifications.disable-tile",
-      "candidate_id": "notifications.disable-tile",
-      "record_id": "notifications.disable-tile",
-      "category": "Notifications",
-      "name": "Tile Notifications",
-      "documentation": "research/records/notifications.disable-tile.json",
+      "tweak_id": "privacy.disable-phone-linking",
+      "qa_tweak_id": "privacy.disable-phone-linking",
+      "candidate_id": "privacy.disable-phone-linking",
+      "record_id": "privacy.disable-phone-linking",
+      "category": "Privacy",
+      "name": "Phone-PC Linking",
+      "documentation": "research/records/privacy.disable-phone-linking.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect notifications.disable-tile",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.disable-phone-linking",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'notifications.disable-tile' --qa-output 'C:\\Tools\\ValidationController\\smoke\\notifications.disable-tile.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'notifications.disable-tile' --qa-output 'C:\\Tools\\ValidationController\\smoke\\notifications.disable-tile.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'notifications.disable-tile' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\notifications.disable-tile.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'notifications.disable-tile' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\notifications.disable-tile.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'notifications.disable-tile'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-phone-linking' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-phone-linking.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-phone-linking' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-phone-linking.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-phone-linking' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-phone-linking.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-phone-linking' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-phone-linking.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.disable-phone-linking'"
+      },
+      "expected_report": {
+        "success": true,
+        "status": "ok",
+        "rollback_requested": true,
+        "required_stages": [
+          "detect-before",
+          "apply",
+          "rollback",
+          "detect-after"
+        ],
+        "required_card_snapshot": {
+          "required_fields": [
+            "TweakId",
+            "Name",
+            "Category",
+            "EvidenceClass",
+            "ResearchStatus",
+            "RollbackSnapshotState",
+            "HasClaimBoundary",
+            "WhatWeKnowSummary",
+            "WhatWeDoNotClaimSummary",
+            "ProofLanes"
+          ],
+          "required_proof_lanes": [
+            "docs",
+            "runtime",
+            "source",
+            "rollback"
+          ],
+          "claim_boundary_required": true
+        },
+        "required_stage_assertions": [
+          "apply stage reports a successful apply story",
+          "rollback stage reports a successful rollback story",
+          "detect-after is present"
+        ]
+      }
+    },
+    {
+      "tweak_id": "privacy.disable-program-compatibility-assistant",
+      "qa_tweak_id": "privacy.disable-program-compatibility-assistant",
+      "candidate_id": "privacy.disable-program-compatibility-assistant",
+      "record_id": "privacy.disable-program-compatibility-assistant",
+      "category": "Privacy",
+      "name": "Disable Program Compatibility Assistant",
+      "documentation": "research/records/privacy.disable-program-compatibility-assistant.review.json",
+      "promotion_state": "promoted",
+      "apply_allowed": true,
+      "restore_default_supported": true,
+      "restore_previous_supported": true,
+      "commands": {
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.disable-program-compatibility-assistant",
+        "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-program-compatibility-assistant' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-program-compatibility-assistant.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-program-compatibility-assistant' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-program-compatibility-assistant.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-program-compatibility-assistant' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-program-compatibility-assistant.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-program-compatibility-assistant' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-program-compatibility-assistant.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.disable-program-compatibility-assistant'"
+      },
+      "expected_report": {
+        "success": true,
+        "status": "ok",
+        "rollback_requested": true,
+        "required_stages": [
+          "detect-before",
+          "apply",
+          "rollback",
+          "detect-after"
+        ],
+        "required_card_snapshot": {
+          "required_fields": [
+            "TweakId",
+            "Name",
+            "Category",
+            "EvidenceClass",
+            "ResearchStatus",
+            "RollbackSnapshotState",
+            "HasClaimBoundary",
+            "WhatWeKnowSummary",
+            "WhatWeDoNotClaimSummary",
+            "ProofLanes"
+          ],
+          "required_proof_lanes": [
+            "docs",
+            "runtime",
+            "source",
+            "rollback"
+          ],
+          "claim_boundary_required": true
+        },
+        "required_stage_assertions": [
+          "apply stage reports a successful apply story",
+          "rollback stage reports a successful rollback story",
+          "detect-after is present"
+        ]
+      }
+    },
+    {
+      "tweak_id": "privacy.disable-recall",
+      "qa_tweak_id": "privacy.disable-recall",
+      "candidate_id": "privacy.disable-recall",
+      "record_id": "privacy.disable-recall",
+      "category": "Privacy",
+      "name": "Recall Snapshot Saving",
+      "documentation": "research/records/privacy.disable-recall.json",
+      "promotion_state": "promoted",
+      "apply_allowed": true,
+      "restore_default_supported": true,
+      "restore_previous_supported": true,
+      "commands": {
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.disable-recall",
+        "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-recall' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-recall.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-recall' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-recall.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-recall' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-recall.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-recall' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-recall.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.disable-recall'"
+      },
+      "expected_report": {
+        "success": true,
+        "status": "ok",
+        "rollback_requested": true,
+        "required_stages": [
+          "detect-before",
+          "apply",
+          "rollback",
+          "detect-after"
+        ],
+        "required_card_snapshot": {
+          "required_fields": [
+            "TweakId",
+            "Name",
+            "Category",
+            "EvidenceClass",
+            "ResearchStatus",
+            "RollbackSnapshotState",
+            "HasClaimBoundary",
+            "WhatWeKnowSummary",
+            "WhatWeDoNotClaimSummary",
+            "ProofLanes"
+          ],
+          "required_proof_lanes": [
+            "docs",
+            "runtime",
+            "source",
+            "rollback"
+          ],
+          "claim_boundary_required": true
+        },
+        "required_stage_assertions": [
+          "apply stage reports a successful apply story",
+          "rollback stage reports a successful rollback story",
+          "detect-after is present"
+        ]
+      }
+    },
+    {
+      "tweak_id": "privacy.disable-resume",
+      "qa_tweak_id": "privacy.disable-resume",
+      "candidate_id": "privacy.disable-resume",
+      "record_id": "privacy.disable-resume",
+      "category": "Privacy",
+      "name": "Disable Resume for Current User",
+      "documentation": "research/records/privacy.disable-resume.json",
+      "promotion_state": "promoted",
+      "apply_allowed": true,
+      "restore_default_supported": true,
+      "restore_previous_supported": true,
+      "commands": {
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.disable-resume",
+        "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-resume' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-resume.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-resume' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-resume.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-resume' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-resume.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-resume' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-resume.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.disable-resume'"
       },
       "expected_report": {
         "success": true,
@@ -143,7 +323,7 @@
   ],
   "run_results": [
     {
-      "tweak_id": "notifications.disable-mirroring",
+      "tweak_id": "privacy.disable-pca-diagnostics.policy",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -180,19 +360,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "notifications.disable-mirroring",
-        "TweakName": "Notification Mirroring",
+        "TweakId": "privacy.disable-pca-diagnostics.policy",
+        "TweakName": "Disable PCA Compatibility Diagnostics Detection",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "notifications.disable-mirroring",
-          "Name": "Notification Mirroring",
-          "Category": "Notifications",
-          "Description": "Windows can mirror some notifications to other devices. This policy decides whether that cross-device mirroring is allowed for the current user.",
-          "FriendlyDescription": "Windows can mirror some notifications to other devices. This policy decides whether that cross-device mirroring is allowed for the current user.",
-          "RegistryPath": "HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\CurrentVersion\\PushNotifications\\DisallowNotificationMirroring",
+          "TweakId": "privacy.disable-pca-diagnostics.policy",
+          "Name": "Disable PCA Compatibility Diagnostics Detection",
+          "Category": "Privacy",
+          "Description": "Windows PCA watches for compatibility issues when you run applications and drivers, and can show warnings or suggest fixes. This policy controls whether that detection runs. Disabling it stops PCA from actively monitoring for compatibility problems - it does not disable PCA itself (that is controlled separately by DisablePCA).",
+          "FriendlyDescription": "Windows PCA watches for compatibility issues when you run applications and drivers, and can show warnings or suggest fixes. This policy controls whether that detection runs. Disabling it stops PCA from actively monitoring for compatibility problems - it does not disable PCA itself (that is controlled separately by DisablePCA).",
+          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat\\DisablePcaUI",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -200,15 +380,15 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Windows can mirror some notifications to other devices. This policy decides whether that cross-device mirroring is allowed for the current user. Evidence: The local official Microsoft ADMX file names the same user policy key and value name that the app writes and confirms the 1/0 mapping. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: Windows PCA watches for compatibility issues when you run applications and drivers, and can show warnings or suggest fixes. This policy controls whether that detection runs. Disabling it stops PCA from actively monitoring for compatibility problems - it does not disable PCA itself (that is controlled separately by DisablePCA). Evidence: Local official pca.admx and pca.adml files document the exact DisablePcaUI policy surface and semantics. The Microsoft Learn ADMX_pca CSP page confirms the same device-scoped policy mapping. Added nohuto mirror corroboration via nohuto-pca-diagnostics-admx. Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "The local official Microsoft ADMX file names the same user policy key and value name that the app writes and confirms the 1/0 mapping.",
-              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/WPN.admx"
+              "Summary": "Local official pca.admx and pca.adml files document the exact DisablePcaUI policy surface and semantics. The Microsoft Learn ADMX_pca CSP page confirms the same device-scoped policy mapping. Added nohuto mirror corroboration via nohuto-pca-diagnostics-admx.",
+              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/pca.admx"
             },
             {
               "Key": "runtime",
@@ -239,8 +419,8 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Notifications",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\notifications\\notifications.md#notifications.disable-mirroring",
+              "Title": "Docs: Privacy (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\privacy\\privacy-verified.md",
               "Kind": "Docs"
             }
           ]
@@ -249,10 +429,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Notification mirroring turned off'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Disable PCA diagnostics detection'.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Notification mirroring turned off",
+            "TargetValue": "Disable PCA diagnostics detection",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -261,8 +441,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Notification mirroring turned off'.\nEntries:\n- HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\CurrentVersion\\PushNotifications\\DisallowNotificationMirroring: missing -> 1",
-                "TimestampText": "09:59:52"
+                "Message": "Current values do not match a named option. Selected option is 'Disable PCA diagnostics detection'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat\\DisablePcaUI: missing -> 0",
+                "TimestampText": "10:00:52"
               },
               {
                 "Action": "Apply",
@@ -289,8 +469,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Notification mirroring turned off",
-            "TargetValue": "Notification mirroring turned off",
+            "CurrentValue": "Disable PCA diagnostics detection",
+            "TargetValue": "Disable PCA diagnostics detection",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -299,20 +479,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Notification mirroring turned off'.\nEntries:\n- HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\CurrentVersion\\PushNotifications\\DisallowNotificationMirroring: missing -> 1",
-                "TimestampText": "09:59:52"
+                "Message": "Current values do not match a named option. Selected option is 'Disable PCA diagnostics detection'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat\\DisablePcaUI: missing -> 0",
+                "TimestampText": "10:00:52"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Notification mirroring turned off'.",
-                "TimestampText": "09:59:52"
+                "Message": "Applied preset 'Disable PCA diagnostics detection'.",
+                "TimestampText": "10:00:55"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Notification mirroring turned off'.",
-                "TimestampText": "09:59:52"
+                "Message": "Verified preset 'Disable PCA diagnostics detection'.",
+                "TimestampText": "10:00:55"
               },
               {
                 "Action": "Rollback",
@@ -328,7 +508,7 @@
             "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Notification mirroring turned off",
+            "TargetValue": "Disable PCA diagnostics detection",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -337,36 +517,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Notification mirroring turned off'.\nEntries:\n- HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\CurrentVersion\\PushNotifications\\DisallowNotificationMirroring: missing -> 1",
-                "TimestampText": "09:59:52"
+                "Message": "Current values do not match a named option. Selected option is 'Disable PCA diagnostics detection'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat\\DisablePcaUI: missing -> 0",
+                "TimestampText": "10:00:52"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Notification mirroring turned off'.",
-                "TimestampText": "09:59:52"
+                "Message": "Applied preset 'Disable PCA diagnostics detection'.",
+                "TimestampText": "10:00:55"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Notification mirroring turned off'.",
-                "TimestampText": "09:59:52"
+                "Message": "Verified preset 'Disable PCA diagnostics detection'.",
+                "TimestampText": "10:00:55"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "09:59:52"
+                "TimestampText": "10:00:55"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Notification mirroring turned off'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Disable PCA diagnostics detection'.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Notification mirroring turned off",
+            "TargetValue": "Disable PCA diagnostics detection",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -375,40 +555,40 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Notification mirroring turned off'.\nEntries:\n- HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\CurrentVersion\\PushNotifications\\DisallowNotificationMirroring: missing -> 1",
-                "TimestampText": "09:59:52"
+                "Message": "Current values do not match a named option. Selected option is 'Disable PCA diagnostics detection'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat\\DisablePcaUI: missing -> 0",
+                "TimestampText": "10:00:55"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Notification mirroring turned off'.",
-                "TimestampText": "09:59:52"
+                "Message": "Applied preset 'Disable PCA diagnostics detection'.",
+                "TimestampText": "10:00:55"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Notification mirroring turned off'.",
-                "TimestampText": "09:59:52"
+                "Message": "Verified preset 'Disable PCA diagnostics detection'.",
+                "TimestampText": "10:00:55"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "09:59:52"
+                "TimestampText": "10:00:55"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T16:59:52.1623466+00:00",
-        "CompletedAtUtc": "2026-05-07T16:59:52.4551339+00:00"
+        "StartedAtUtc": "2026-05-07T17:00:52.7082102+00:00",
+        "CompletedAtUtc": "2026-05-07T17:00:55.7732305+00:00"
       },
-      "qa_tweak_id": "notifications.disable-mirroring",
-      "candidate_id": "notifications.disable-mirroring",
-      "card_name": "Notification Mirroring",
-      "documentation": "research/records/notifications.disable-mirroring.json"
+      "qa_tweak_id": "privacy.disable-pca-diagnostics.policy",
+      "candidate_id": "privacy.disable-pca-diagnostics.policy",
+      "card_name": "Disable PCA Compatibility Diagnostics Detection",
+      "documentation": "research/records/privacy.disable-pca-diagnostics.policy.review.json"
     },
     {
-      "tweak_id": "notifications.disable-tile",
+      "tweak_id": "privacy.disable-phone-linking",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -445,19 +625,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "notifications.disable-tile",
-        "TweakName": "Tile Notifications",
+        "TweakId": "privacy.disable-phone-linking",
+        "TweakName": "Phone-PC Linking",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "notifications.disable-tile",
-          "Name": "Tile Notifications",
-          "Category": "Notifications",
-          "Description": "Tile notifications are the live updates and badges some Windows tiles can show. This policy decides whether those tile updates are allowed for the current user.",
-          "FriendlyDescription": "Tile notifications are the live updates and badges some Windows tiles can show. This policy decides whether those tile updates are allowed for the current user.",
-          "RegistryPath": "HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\CurrentVersion\\PushNotifications\\NoTileApplicationNotification",
+          "TweakId": "privacy.disable-phone-linking",
+          "Name": "Phone-PC Linking",
+          "Category": "Privacy",
+          "Description": "Windows can link the PC with a phone so reading, emailing, and similar tasks can continue across devices. This policy decides whether the PC can participate in that linking.",
+          "FriendlyDescription": "Windows can link the PC with a phone so reading, emailing, and similar tasks can continue across devices. This policy decides whether the PC can participate in that linking.",
+          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\EnableMmx",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -465,15 +645,15 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Tile notifications are the live updates and badges some Windows tiles can show. This policy decides whether those tile updates are allowed for the current user. Evidence: The local official Microsoft ADMX file names the same user policy key and value name that the app writes and confirms the 1/0 mapping. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: Windows can link the PC with a phone so reading, emailing, and similar tasks can continue across devices. This policy decides whether the PC can participate in that linking. Evidence: The local official Microsoft ADMX file defines the exact machine policy path and value name used by the app, with enabledValue 1 and disabledValue 0. The paired ADML help text explains that disabling the policy blocks Phone-PC linking and Continue on PC exp... Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "The local official Microsoft ADMX file names the same user policy key and value name that the app writes and confirms the 1/0 mapping.",
-              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/WPN.admx"
+              "Summary": "The local official Microsoft ADMX file defines the exact machine policy path and value name used by the app, with enabledValue 1 and disabledValue 0. The paired ADML help text explains that disabling the policy blocks Phone-PC linking and Continue on PC exp...",
+              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/GroupPolicy.admx"
             },
             {
               "Key": "runtime",
@@ -504,13 +684,8 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Win-Config",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\win-config\\batch-01.md#notifications.disable-tile",
-              "Kind": "Docs"
-            },
-            {
-              "Title": "Docs: Notifications",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\notifications\\notifications.md#notifications.disable-tile",
+              "Title": "Docs: Privacy (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\privacy\\privacy-verified.md",
               "Kind": "Docs"
             }
           ]
@@ -519,10 +694,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Tile notifications turned off'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Phone-PC linking disabled'.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Tile notifications turned off",
+            "TargetValue": "Phone-PC linking disabled",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -531,8 +706,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Tile notifications turned off'.\nEntries:\n- HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\CurrentVersion\\PushNotifications\\NoTileApplicationNotification: missing -> 1",
-                "TimestampText": "09:59:58"
+                "Message": "Current values do not match a named option. Selected option is 'Phone-PC linking disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\EnableMmx: missing -> 0",
+                "TimestampText": "10:01:02"
               },
               {
                 "Action": "Apply",
@@ -559,8 +734,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Tile notifications turned off",
-            "TargetValue": "Tile notifications turned off",
+            "CurrentValue": "Phone-PC linking disabled",
+            "TargetValue": "Phone-PC linking disabled",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -569,20 +744,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Tile notifications turned off'.\nEntries:\n- HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\CurrentVersion\\PushNotifications\\NoTileApplicationNotification: missing -> 1",
-                "TimestampText": "09:59:58"
+                "Message": "Current values do not match a named option. Selected option is 'Phone-PC linking disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\EnableMmx: missing -> 0",
+                "TimestampText": "10:01:02"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Tile notifications turned off'.",
-                "TimestampText": "09:59:58"
+                "Message": "Applied preset 'Phone-PC linking disabled'.",
+                "TimestampText": "10:01:04"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Tile notifications turned off'.",
-                "TimestampText": "09:59:58"
+                "Message": "Verified preset 'Phone-PC linking disabled'.",
+                "TimestampText": "10:01:04"
               },
               {
                 "Action": "Rollback",
@@ -598,7 +773,7 @@
             "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Tile notifications turned off",
+            "TargetValue": "Phone-PC linking disabled",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -607,36 +782,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Tile notifications turned off'.\nEntries:\n- HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\CurrentVersion\\PushNotifications\\NoTileApplicationNotification: missing -> 1",
-                "TimestampText": "09:59:58"
+                "Message": "Current values do not match a named option. Selected option is 'Phone-PC linking disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\EnableMmx: missing -> 0",
+                "TimestampText": "10:01:02"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Tile notifications turned off'.",
-                "TimestampText": "09:59:58"
+                "Message": "Applied preset 'Phone-PC linking disabled'.",
+                "TimestampText": "10:01:04"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Tile notifications turned off'.",
-                "TimestampText": "09:59:58"
+                "Message": "Verified preset 'Phone-PC linking disabled'.",
+                "TimestampText": "10:01:04"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "09:59:58"
+                "TimestampText": "10:01:04"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Tile notifications turned off'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Phone-PC linking disabled'.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Tile notifications turned off",
+            "TargetValue": "Phone-PC linking disabled",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -645,46 +820,841 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Tile notifications turned off'.\nEntries:\n- HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\CurrentVersion\\PushNotifications\\NoTileApplicationNotification: missing -> 1",
-                "TimestampText": "09:59:58"
+                "Message": "Current values do not match a named option. Selected option is 'Phone-PC linking disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\EnableMmx: missing -> 0",
+                "TimestampText": "10:01:05"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Tile notifications turned off'.",
-                "TimestampText": "09:59:58"
+                "Message": "Applied preset 'Phone-PC linking disabled'.",
+                "TimestampText": "10:01:04"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Tile notifications turned off'.",
-                "TimestampText": "09:59:58"
+                "Message": "Verified preset 'Phone-PC linking disabled'.",
+                "TimestampText": "10:01:04"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "09:59:58"
+                "TimestampText": "10:01:04"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T16:59:58.5455987+00:00",
-        "CompletedAtUtc": "2026-05-07T16:59:58.8360407+00:00"
+        "StartedAtUtc": "2026-05-07T17:01:02.0482666+00:00",
+        "CompletedAtUtc": "2026-05-07T17:01:05.1298218+00:00"
       },
-      "qa_tweak_id": "notifications.disable-tile",
-      "candidate_id": "notifications.disable-tile",
-      "card_name": "Tile Notifications",
-      "documentation": "research/records/notifications.disable-tile.json"
+      "qa_tweak_id": "privacy.disable-phone-linking",
+      "candidate_id": "privacy.disable-phone-linking",
+      "card_name": "Phone-PC Linking",
+      "documentation": "research/records/privacy.disable-phone-linking.json"
+    },
+    {
+      "tweak_id": "privacy.disable-program-compatibility-assistant",
+      "host_exit": 0,
+      "execution_exit": 0,
+      "payload_status": "completed",
+      "report_source": "stdout",
+      "report_parse_error": null,
+      "report_fetch_status": null,
+      "report_app_success": true,
+      "report_success": true,
+      "report_status": "ok",
+      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
+      "report_contract_status": "ok",
+      "report_contract_summary": "QA card snapshot contract passed.",
+      "report_contract_failures": [],
+      "report_card_present": true,
+      "report_card_has_claim_boundary": true,
+      "report_card_present_fields": [
+        "TweakId",
+        "Name",
+        "Category",
+        "EvidenceClass",
+        "ResearchStatus",
+        "RollbackSnapshotState",
+        "HasClaimBoundary",
+        "WhatWeKnowSummary",
+        "WhatWeDoNotClaimSummary",
+        "ProofLanes"
+      ],
+      "report_card_missing_fields": [],
+      "report_card_proof_lanes": [
+        "docs",
+        "runtime",
+        "source",
+        "rollback"
+      ],
+      "report_card_missing_proof_lanes": [],
+      "report": {
+        "TweakId": "privacy.disable-program-compatibility-assistant",
+        "TweakName": "Disable Program Compatibility Assistant",
+        "Success": true,
+        "Status": "ok",
+        "Summary": "Apply/verify path completed and rollback restored the tweak.",
+        "RollbackRequested": true,
+        "Card": {
+          "TweakId": "privacy.disable-program-compatibility-assistant",
+          "Name": "Disable Program Compatibility Assistant",
+          "Category": "Privacy",
+          "Description": "Program Compatibility Assistant monitors applications and can suggest compatibility solutions when Windows detects install failures, runtime failures, or blocked drivers. This policy turns PCA off.",
+          "FriendlyDescription": "Program Compatibility Assistant monitors applications and can suggest compatibility solutions when Windows detects install failures, runtime failures, or blocked drivers. This policy turns PCA off.",
+          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat\\DisablePCA",
+          "EvidenceClass": "A",
+          "EvidenceClassTitle": "Cross-Layer Verified",
+          "ResearchStatus": "PROMOTED",
+          "IsMutationAllowed": true,
+          "RollbackSnapshotState": "ready",
+          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
+          "HasClaimBoundary": true,
+          "WhatWeKnowSummary": "Claim: Program Compatibility Assistant monitors applications and can suggest compatibility solutions when Windows detects install failures, runtime failures, or blocked drivers. This policy turns PCA off. Evidence: The official Microsoft Learn ADMX_AppCompat page names the same registry key and value name that the corrected app implementation now writes. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
+          "ProofLanes": [
+            {
+              "Key": "docs",
+              "Label": "DOCS",
+              "State": "ready",
+              "Summary": "The official Microsoft Learn ADMX_AppCompat page names the same registry key and value name that the corrected app implementation now writes.",
+              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat"
+            },
+            {
+              "Key": "runtime",
+              "Label": "RUNTIME",
+              "State": "ready",
+              "Summary": "VM reversible Procmon capture on 2026-03-26 in Win25H2Clean. powershell.exe wrote DisablePCA=REG_DWORD 0x1 under HKLM/Software/Policies/Microsoft/Windows/AppCompat and reg.exe read it back successfully. The probe restored the original missing state after ca...",
+              "Source": "VM Procmon capture - Turn off Program Compatibility Assistant: evidence/raw/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.pml and evidence/raw/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.filtered.hits.csv"
+            },
+            {
+              "Key": "source",
+              "Label": "SOURCE",
+              "State": "ready",
+              "Summary": "No upstream nohuto source link is attached to this record.",
+              "Source": ""
+            },
+            {
+              "Key": "rollback",
+              "Label": "ROLLBACK",
+              "State": "ready",
+              "Summary": "Rollback: Verified via record-restore-story.",
+              "Source": "record-restore-story"
+            }
+          ],
+          "ReferenceLinks": [
+            {
+              "Title": "Docs: Details (missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
+              "Kind": "Details"
+            },
+            {
+              "Title": "Docs: Privacy (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\privacy\\privacy-verified.md",
+              "Kind": "Docs"
+            }
+          ]
+        },
+        "Stages": [
+          {
+            "Stage": "detect-before",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Turn off Program Compatibility Assistant'.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Turn off Program Compatibility Assistant",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": false,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Turn off Program Compatibility Assistant'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat\\DisablePCA: missing -> 1",
+                "TimestampText": "10:01:11"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "apply",
+            "AppliedStatus": "Applied",
+            "StatusMessage": "Run completed.",
+            "OutcomeSummary": "Apply - Success",
+            "CurrentValue": "Turn off Program Compatibility Assistant",
+            "TargetValue": "Turn off Program Compatibility Assistant",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Turn off Program Compatibility Assistant'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat\\DisablePCA: missing -> 1",
+                "TimestampText": "10:01:11"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Turn off Program Compatibility Assistant'.",
+                "TimestampText": "10:01:14"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Turn off Program Compatibility Assistant'.",
+                "TimestampText": "10:01:14"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Not required",
+                "Message": "Step not executed.",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "rollback",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Rolled back registry values.",
+            "OutcomeSummary": "Rollback - Rolled Back",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Turn off Program Compatibility Assistant",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Turn off Program Compatibility Assistant'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat\\DisablePCA: missing -> 1",
+                "TimestampText": "10:01:11"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Turn off Program Compatibility Assistant'.",
+                "TimestampText": "10:01:14"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Turn off Program Compatibility Assistant'.",
+                "TimestampText": "10:01:14"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "10:01:14"
+              }
+            ]
+          },
+          {
+            "Stage": "detect-after",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Turn off Program Compatibility Assistant'.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Turn off Program Compatibility Assistant",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Turn off Program Compatibility Assistant'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat\\DisablePCA: missing -> 1",
+                "TimestampText": "10:01:14"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Turn off Program Compatibility Assistant'.",
+                "TimestampText": "10:01:14"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Turn off Program Compatibility Assistant'.",
+                "TimestampText": "10:01:14"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "10:01:14"
+              }
+            ]
+          }
+        ],
+        "StartedAtUtc": "2026-05-07T17:01:11.4566019+00:00",
+        "CompletedAtUtc": "2026-05-07T17:01:14.5404464+00:00"
+      },
+      "qa_tweak_id": "privacy.disable-program-compatibility-assistant",
+      "candidate_id": "privacy.disable-program-compatibility-assistant",
+      "card_name": "Disable Program Compatibility Assistant",
+      "documentation": "research/records/privacy.disable-program-compatibility-assistant.review.json"
+    },
+    {
+      "tweak_id": "privacy.disable-recall",
+      "host_exit": 0,
+      "execution_exit": 0,
+      "payload_status": "completed",
+      "report_source": "stdout",
+      "report_parse_error": null,
+      "report_fetch_status": null,
+      "report_app_success": true,
+      "report_success": true,
+      "report_status": "ok",
+      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
+      "report_contract_status": "ok",
+      "report_contract_summary": "QA card snapshot contract passed.",
+      "report_contract_failures": [],
+      "report_card_present": true,
+      "report_card_has_claim_boundary": true,
+      "report_card_present_fields": [
+        "TweakId",
+        "Name",
+        "Category",
+        "EvidenceClass",
+        "ResearchStatus",
+        "RollbackSnapshotState",
+        "HasClaimBoundary",
+        "WhatWeKnowSummary",
+        "WhatWeDoNotClaimSummary",
+        "ProofLanes"
+      ],
+      "report_card_missing_fields": [],
+      "report_card_proof_lanes": [
+        "docs",
+        "runtime",
+        "source",
+        "rollback"
+      ],
+      "report_card_missing_proof_lanes": [],
+      "report": {
+        "TweakId": "privacy.disable-recall",
+        "TweakName": "Recall Snapshot Saving",
+        "Success": true,
+        "Status": "ok",
+        "Summary": "Apply/verify path completed and rollback restored the tweak.",
+        "RollbackRequested": true,
+        "Card": {
+          "TweakId": "privacy.disable-recall",
+          "Name": "Recall Snapshot Saving",
+          "Category": "Privacy",
+          "Description": "Recall can save snapshots of what you have seen on the screen so you can search and revisit it later. This policy decides whether those snapshots can be saved for the signed-in user.",
+          "FriendlyDescription": "Recall can save snapshots of what you have seen on the screen so you can search and revisit it later. This policy decides whether those snapshots can be saved for the signed-in user.",
+          "RegistryPath": "HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI\\DisableAIDataAnalysis",
+          "EvidenceClass": "A",
+          "EvidenceClassTitle": "Cross-Layer Verified",
+          "ResearchStatus": "PROMOTED",
+          "IsMutationAllowed": true,
+          "RollbackSnapshotState": "ready",
+          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
+          "HasClaimBoundary": true,
+          "WhatWeKnowSummary": "Claim: Recall can save snapshots of what you have seen on the screen so you can search and revisit it later. This policy decides whether those snapshots can be saved for the signed-in user. Evidence: The local official Microsoft ADMX file names the same WindowsAI policy key and DisableAIDataAnalysis value used by the app; the paired ADML help text explains that not configured keeps snapshots off on managed devices and enabling the policy blocks snapshot... Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
+          "ProofLanes": [
+            {
+              "Key": "docs",
+              "Label": "DOCS",
+              "State": "ready",
+              "Summary": "The local official Microsoft ADMX file names the same WindowsAI policy key and DisableAIDataAnalysis value used by the app; the paired ADML help text explains that not configured keeps snapshots off on managed devices and enabling the policy blocks snapshot...",
+              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/WindowsCopilot.admx"
+            },
+            {
+              "Key": "runtime",
+              "Label": "RUNTIME",
+              "State": "ready",
+              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+              "Source": ""
+            },
+            {
+              "Key": "source",
+              "Label": "SOURCE",
+              "State": "ready",
+              "Summary": "No upstream nohuto source link is attached to this record.",
+              "Source": ""
+            },
+            {
+              "Key": "rollback",
+              "Label": "ROLLBACK",
+              "State": "ready",
+              "Summary": "Rollback: Verified via record-restore-story.",
+              "Source": "record-restore-story"
+            }
+          ],
+          "ReferenceLinks": [
+            {
+              "Title": "Docs: Details (missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
+              "Kind": "Details"
+            },
+            {
+              "Title": "Docs: Privacy (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\privacy\\privacy-verified.md",
+              "Kind": "Docs"
+            }
+          ]
+        },
+        "Stages": [
+          {
+            "Stage": "detect-before",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Recall snapshots turned off'.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Recall snapshots turned off",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": false,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Recall snapshots turned off'.\nEntries:\n- HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI\\DisableAIDataAnalysis: missing -> 1",
+                "TimestampText": "10:01:20"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "apply",
+            "AppliedStatus": "Applied",
+            "StatusMessage": "Run completed.",
+            "OutcomeSummary": "Apply - Success",
+            "CurrentValue": "Recall snapshots turned off",
+            "TargetValue": "Recall snapshots turned off",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Recall snapshots turned off'.\nEntries:\n- HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI\\DisableAIDataAnalysis: missing -> 1",
+                "TimestampText": "10:01:20"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Recall snapshots turned off'.",
+                "TimestampText": "10:01:20"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Recall snapshots turned off'.",
+                "TimestampText": "10:01:20"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Not required",
+                "Message": "Step not executed.",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "rollback",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Rolled back registry values.",
+            "OutcomeSummary": "Rollback - Rolled Back",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Recall snapshots turned off",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Recall snapshots turned off'.\nEntries:\n- HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI\\DisableAIDataAnalysis: missing -> 1",
+                "TimestampText": "10:01:20"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Recall snapshots turned off'.",
+                "TimestampText": "10:01:20"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Recall snapshots turned off'.",
+                "TimestampText": "10:01:20"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "10:01:21"
+              }
+            ]
+          },
+          {
+            "Stage": "detect-after",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Recall snapshots turned off'.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Recall snapshots turned off",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Recall snapshots turned off'.\nEntries:\n- HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsAI\\DisableAIDataAnalysis: missing -> 1",
+                "TimestampText": "10:01:21"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Recall snapshots turned off'.",
+                "TimestampText": "10:01:20"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Recall snapshots turned off'.",
+                "TimestampText": "10:01:20"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "10:01:21"
+              }
+            ]
+          }
+        ],
+        "StartedAtUtc": "2026-05-07T17:01:20.8247512+00:00",
+        "CompletedAtUtc": "2026-05-07T17:01:21.1059432+00:00"
+      },
+      "qa_tweak_id": "privacy.disable-recall",
+      "candidate_id": "privacy.disable-recall",
+      "card_name": "Recall Snapshot Saving",
+      "documentation": "research/records/privacy.disable-recall.json"
+    },
+    {
+      "tweak_id": "privacy.disable-resume",
+      "host_exit": 0,
+      "execution_exit": 0,
+      "payload_status": "completed",
+      "report_source": "stdout",
+      "report_parse_error": null,
+      "report_fetch_status": null,
+      "report_app_success": true,
+      "report_success": true,
+      "report_status": "ok",
+      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
+      "report_contract_status": "ok",
+      "report_contract_summary": "QA card snapshot contract passed.",
+      "report_contract_failures": [],
+      "report_card_present": true,
+      "report_card_has_claim_boundary": true,
+      "report_card_present_fields": [
+        "TweakId",
+        "Name",
+        "Category",
+        "EvidenceClass",
+        "ResearchStatus",
+        "RollbackSnapshotState",
+        "HasClaimBoundary",
+        "WhatWeKnowSummary",
+        "WhatWeDoNotClaimSummary",
+        "ProofLanes"
+      ],
+      "report_card_missing_fields": [],
+      "report_card_proof_lanes": [
+        "docs",
+        "runtime",
+        "source",
+        "rollback"
+      ],
+      "report_card_missing_proof_lanes": [],
+      "report": {
+        "TweakId": "privacy.disable-resume",
+        "TweakName": "Disable Resume for Current User",
+        "Success": true,
+        "Status": "ok",
+        "Summary": "Apply/verify path completed and rollback restored the tweak.",
+        "RollbackRequested": true,
+        "Card": {
+          "TweakId": "privacy.disable-resume",
+          "Name": "Disable Resume for Current User",
+          "Category": "Privacy",
+          "Description": "Resume lets you start on one device and continue on this PC. This tweak turns off that current-user Resume setting.",
+          "FriendlyDescription": "Resume lets you start on one device and continue on this PC. This tweak turns off that current-user Resume setting.",
+          "RegistryPath": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CrossDeviceResume\\Configuration\\IsResumeAllowed",
+          "EvidenceClass": "A",
+          "EvidenceClassTitle": "Cross-Layer Verified",
+          "ResearchStatus": "PROMOTED",
+          "IsMutationAllowed": true,
+          "RollbackSnapshotState": "ready",
+          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
+          "HasClaimBoundary": true,
+          "WhatWeKnowSummary": "Claim: Resume lets you start on one device and continue on this PC. This tweak turns off that current-user Resume setting. Evidence: This record now documents the current-user Resume setting that the app actually writes. The companion guest Procmon probe captured CrossDeviceResume settings activity while IsResumeAllowed was toggled between 0 and 1 and then restored. The separate policy C... Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
+          "ProofLanes": [
+            {
+              "Key": "docs",
+              "Label": "DOCS",
+              "State": "ready",
+              "Summary": "This record now documents the current-user Resume setting that the app actually writes. The companion guest Procmon probe captured CrossDeviceResume settings activity while IsResumeAllowed was toggled between 0 and 1 and then restored. The separate policy C...",
+              "Source": "Validation proof source: C:\\Tools\\AppSmoke\\Docs\\privacy\\privacy.md"
+            },
+            {
+              "Key": "runtime",
+              "Label": "RUNTIME",
+              "State": "ready",
+              "Summary": "Local read-only registry query on March 14, 2026 found IsResumeAllowed = 0 and IsOneDriveResumeAllowed = 1 under the current-user CrossDeviceResume configuration key, confirming the observed runtime path is present and active on this build.",
+              "Source": "Local CrossDeviceResume registry observation: HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CrossDeviceResume\\Configuration"
+            },
+            {
+              "Key": "source",
+              "Label": "SOURCE",
+              "State": "ready",
+              "Summary": "No upstream nohuto source link is attached to this record.",
+              "Source": ""
+            },
+            {
+              "Key": "rollback",
+              "Label": "ROLLBACK",
+              "State": "ready",
+              "Summary": "Rollback: Verified via record-restore-story.",
+              "Source": "record-restore-story"
+            }
+          ],
+          "ReferenceLinks": [
+            {
+              "Title": "Docs: Details (missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
+              "Kind": "Details"
+            },
+            {
+              "Title": "Docs: Privacy (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\privacy\\privacy-verified.md",
+              "Kind": "Docs"
+            }
+          ]
+        },
+        "Stages": [
+          {
+            "Stage": "detect-before",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Current option is 'Resume enabled'. Selected option is 'Resume disabled'.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Resume enabled",
+            "TargetValue": "Resume disabled",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": false,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current option is 'Resume enabled'. Selected option is 'Resume disabled'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CrossDeviceResume\\Configuration\\IsResumeAllowed: 1 -> 0",
+                "TimestampText": "10:01:26"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "apply",
+            "AppliedStatus": "Applied",
+            "StatusMessage": "Run completed.",
+            "OutcomeSummary": "Apply - Success",
+            "CurrentValue": "Resume disabled",
+            "TargetValue": "Resume disabled",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current option is 'Resume enabled'. Selected option is 'Resume disabled'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CrossDeviceResume\\Configuration\\IsResumeAllowed: 1 -> 0",
+                "TimestampText": "10:01:26"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Resume disabled'.",
+                "TimestampText": "10:01:26"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Resume disabled'.",
+                "TimestampText": "10:01:26"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Not required",
+                "Message": "Step not executed.",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "rollback",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Rolled back registry values.",
+            "OutcomeSummary": "Rollback - Rolled Back",
+            "CurrentValue": "Resume enabled",
+            "TargetValue": "Resume disabled",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current option is 'Resume enabled'. Selected option is 'Resume disabled'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CrossDeviceResume\\Configuration\\IsResumeAllowed: 1 -> 0",
+                "TimestampText": "10:01:26"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Resume disabled'.",
+                "TimestampText": "10:01:26"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Resume disabled'.",
+                "TimestampText": "10:01:26"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "10:01:26"
+              }
+            ]
+          },
+          {
+            "Stage": "detect-after",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Current option is 'Resume enabled'. Selected option is 'Resume disabled'.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Resume enabled",
+            "TargetValue": "Resume disabled",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current option is 'Resume enabled'. Selected option is 'Resume disabled'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CrossDeviceResume\\Configuration\\IsResumeAllowed: 1 -> 0",
+                "TimestampText": "10:01:26"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Resume disabled'.",
+                "TimestampText": "10:01:26"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Resume disabled'.",
+                "TimestampText": "10:01:26"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "10:01:26"
+              }
+            ]
+          }
+        ],
+        "StartedAtUtc": "2026-05-07T17:01:26.2838661+00:00",
+        "CompletedAtUtc": "2026-05-07T17:01:26.6535765+00:00"
+      },
+      "qa_tweak_id": "privacy.disable-resume",
+      "candidate_id": "privacy.disable-resume",
+      "card_name": "Disable Resume for Current User",
+      "documentation": "research/records/privacy.disable-resume.json"
     }
   ],
   "summary": {
-    "planned_count": 2,
-    "planned_apply_allowed_count": 2,
-    "live_success_count": 2,
+    "planned_count": 5,
+    "planned_apply_allowed_count": 5,
+    "live_success_count": 5,
     "live_failure_count": 0,
     "categories": [
-      "Notifications"
+      "Privacy"
     ]
   }
 }

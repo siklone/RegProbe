@@ -1,11 +1,11 @@
 {
-  "generated_utc": "2026-05-07T16:59:48Z",
-  "history_entry_count": 57,
+  "generated_utc": "2026-05-07T17:00:48Z",
+  "history_entry_count": 58,
   "catalog_candidate_count": 242,
-  "covered_count": 171,
-  "uncovered_count": 71,
+  "covered_count": 176,
+  "uncovered_count": 66,
   "summary": {
-    "coverage_percent": 70.66,
+    "coverage_percent": 72.73,
     "covered_categories": {
       "Audio": 2,
       "Cleanup": 1,
@@ -16,7 +16,7 @@
       "Performance": 3,
       "Peripheral": 2,
       "Power": 7,
-      "Privacy": 43,
+      "Privacy": 48,
       "Security": 17,
       "System": 36,
       "Visibility": 16
@@ -28,66 +28,13 @@
       "Network": 9,
       "Peripheral": 1,
       "Power": 3,
-      "Privacy": 24,
+      "Privacy": 19,
       "Security": 4,
       "System": 16,
       "Visibility": 7
     }
   },
   "recommended_next_batches": [
-    {
-      "category": "Privacy",
-      "covered_count": 43,
-      "uncovered_count": 24,
-      "coverage_percent": 64.18,
-      "batch_size": 5,
-      "tweak_ids": [
-        "privacy.disable-pca-diagnostics.policy",
-        "privacy.disable-phone-linking",
-        "privacy.disable-program-compatibility-assistant",
-        "privacy.disable-recall",
-        "privacy.disable-resume"
-      ],
-      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-pca-diagnostics.policy --id privacy.disable-phone-linking --id privacy.disable-program-compatibility-assistant --id privacy.disable-recall --id privacy.disable-resume",
-      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-pca-diagnostics.policy --id privacy.disable-phone-linking --id privacy.disable-program-compatibility-assistant --id privacy.disable-recall --id privacy.disable-resume --run-kvm --json",
-      "candidates": [
-        {
-          "tweak_id": "privacy.disable-pca-diagnostics.policy",
-          "record_id": "privacy.disable-pca-diagnostics.policy",
-          "category": "Privacy",
-          "name": "Disable PCA Compatibility Diagnostics Detection",
-          "documentation": "research/records/privacy.disable-pca-diagnostics.policy.review.json"
-        },
-        {
-          "tweak_id": "privacy.disable-phone-linking",
-          "record_id": "privacy.disable-phone-linking",
-          "category": "Privacy",
-          "name": "Phone-PC Linking",
-          "documentation": "research/records/privacy.disable-phone-linking.json"
-        },
-        {
-          "tweak_id": "privacy.disable-program-compatibility-assistant",
-          "record_id": "privacy.disable-program-compatibility-assistant",
-          "category": "Privacy",
-          "name": "Disable Program Compatibility Assistant",
-          "documentation": "research/records/privacy.disable-program-compatibility-assistant.review.json"
-        },
-        {
-          "tweak_id": "privacy.disable-recall",
-          "record_id": "privacy.disable-recall",
-          "category": "Privacy",
-          "name": "Recall Snapshot Saving",
-          "documentation": "research/records/privacy.disable-recall.json"
-        },
-        {
-          "tweak_id": "privacy.disable-resume",
-          "record_id": "privacy.disable-resume",
-          "category": "Privacy",
-          "name": "Disable Resume for Current User",
-          "documentation": "research/records/privacy.disable-resume.json"
-        }
-      ]
-    },
     {
       "category": "Audio",
       "covered_count": 2,
@@ -233,6 +180,59 @@
           "category": "System",
           "name": "NTFS MFT Zone Reservation",
           "documentation": "research/records/system.ntfs-reset-mft-zone.json"
+        }
+      ]
+    },
+    {
+      "category": "Visibility",
+      "covered_count": 16,
+      "uncovered_count": 7,
+      "coverage_percent": 69.57,
+      "batch_size": 5,
+      "tweak_ids": [
+        "visibility.disable-spotlight-settings",
+        "visibility.disable-spotlight-third-party",
+        "visibility.disable-spotlight-welcome",
+        "visibility.disable-wcn-wizards",
+        "visibility.disable-widgets"
+      ],
+      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id visibility.disable-spotlight-settings --id visibility.disable-spotlight-third-party --id visibility.disable-spotlight-welcome --id visibility.disable-wcn-wizards --id visibility.disable-widgets",
+      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id visibility.disable-spotlight-settings --id visibility.disable-spotlight-third-party --id visibility.disable-spotlight-welcome --id visibility.disable-wcn-wizards --id visibility.disable-widgets --run-kvm --json",
+      "candidates": [
+        {
+          "tweak_id": "visibility.disable-spotlight-settings",
+          "record_id": "visibility.disable-spotlight-settings",
+          "category": "Visibility",
+          "name": "Windows Spotlight on Settings",
+          "documentation": "research/records/visibility.disable-spotlight-settings.json"
+        },
+        {
+          "tweak_id": "visibility.disable-spotlight-third-party",
+          "record_id": "visibility.disable-spotlight-third-party",
+          "category": "Visibility",
+          "name": "Third-Party Suggestions in Windows Spotlight",
+          "documentation": "research/records/visibility.disable-spotlight-third-party.json"
+        },
+        {
+          "tweak_id": "visibility.disable-spotlight-welcome",
+          "record_id": "visibility.disable-spotlight-welcome",
+          "category": "Visibility",
+          "name": "Windows Spotlight Welcome Experience",
+          "documentation": "research/records/visibility.disable-spotlight-welcome.json"
+        },
+        {
+          "tweak_id": "visibility.disable-wcn-wizards",
+          "record_id": "visibility.disable-wcn-wizards",
+          "category": "Visibility",
+          "name": "Windows Connect Now Wizards",
+          "documentation": "research/records/visibility.disable-wcn-wizards.json"
+        },
+        {
+          "tweak_id": "visibility.disable-widgets",
+          "record_id": "visibility.disable-widgets",
+          "category": "Visibility",
+          "name": "Widgets Feature",
+          "documentation": "research/records/visibility.disable-widgets.json"
         }
       ]
     }
@@ -1130,6 +1130,51 @@
       "latest_report_status": "ok"
     },
     {
+      "tweak_id": "privacy.disable-pca-diagnostics.policy",
+      "qa_tweak_id": "privacy.disable-pca-diagnostics.policy",
+      "candidate_id": "privacy.disable-pca-diagnostics.policy",
+      "category": "Privacy",
+      "name": "Disable PCA Compatibility Diagnostics Detection",
+      "documentation": "research/records/privacy.disable-pca-diagnostics.policy.review.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "privacy.disable-phone-linking",
+      "qa_tweak_id": "privacy.disable-phone-linking",
+      "candidate_id": "privacy.disable-phone-linking",
+      "category": "Privacy",
+      "name": "Phone-PC Linking",
+      "documentation": "research/records/privacy.disable-phone-linking.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "privacy.disable-program-compatibility-assistant",
+      "qa_tweak_id": "privacy.disable-program-compatibility-assistant",
+      "candidate_id": "privacy.disable-program-compatibility-assistant",
+      "category": "Privacy",
+      "name": "Disable Program Compatibility Assistant",
+      "documentation": "research/records/privacy.disable-program-compatibility-assistant.review.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "privacy.disable-recall",
+      "qa_tweak_id": "privacy.disable-recall",
+      "candidate_id": "privacy.disable-recall",
+      "category": "Privacy",
+      "name": "Recall Snapshot Saving",
+      "documentation": "research/records/privacy.disable-recall.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "privacy.disable-resume",
+      "qa_tweak_id": "privacy.disable-resume",
+      "candidate_id": "privacy.disable-resume",
+      "category": "Privacy",
+      "name": "Disable Resume for Current User",
+      "documentation": "research/records/privacy.disable-resume.json",
+      "latest_report_status": "ok"
+    },
+    {
       "tweak_id": "privacy.disable-search-history",
       "qa_tweak_id": "privacy.disable-search-history",
       "candidate_id": "privacy.disable-search-history",
@@ -1918,41 +1963,6 @@
       "category": "Power",
       "name": "Games MMCSS Task Profile",
       "documentation": "research/records/power.optimize-gaming-network.json"
-    },
-    {
-      "tweak_id": "privacy.disable-pca-diagnostics.policy",
-      "record_id": "privacy.disable-pca-diagnostics.policy",
-      "category": "Privacy",
-      "name": "Disable PCA Compatibility Diagnostics Detection",
-      "documentation": "research/records/privacy.disable-pca-diagnostics.policy.review.json"
-    },
-    {
-      "tweak_id": "privacy.disable-phone-linking",
-      "record_id": "privacy.disable-phone-linking",
-      "category": "Privacy",
-      "name": "Phone-PC Linking",
-      "documentation": "research/records/privacy.disable-phone-linking.json"
-    },
-    {
-      "tweak_id": "privacy.disable-program-compatibility-assistant",
-      "record_id": "privacy.disable-program-compatibility-assistant",
-      "category": "Privacy",
-      "name": "Disable Program Compatibility Assistant",
-      "documentation": "research/records/privacy.disable-program-compatibility-assistant.review.json"
-    },
-    {
-      "tweak_id": "privacy.disable-recall",
-      "record_id": "privacy.disable-recall",
-      "category": "Privacy",
-      "name": "Recall Snapshot Saving",
-      "documentation": "research/records/privacy.disable-recall.json"
-    },
-    {
-      "tweak_id": "privacy.disable-resume",
-      "record_id": "privacy.disable-resume",
-      "category": "Privacy",
-      "name": "Disable Resume for Current User",
-      "documentation": "research/records/privacy.disable-resume.json"
     },
     {
       "tweak_id": "privacy.disable-rsop-logging",

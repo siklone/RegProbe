@@ -1,11 +1,11 @@
 # Promoted App QA Coverage
 
-- Generated UTC: 2026-05-07T16:59:48Z
-- History entries: 57
+- Generated UTC: 2026-05-07T17:00:48Z
+- History entries: 58
 - Promoted app-QA candidates: 242
-- Covered: 171
-- Uncovered: 71
-- Coverage: 70.66%
+- Covered: 176
+- Uncovered: 66
+- Coverage: 72.73%
 
 ## Covered Categories
 
@@ -18,7 +18,7 @@
 - Performance: 3
 - Peripheral: 2
 - Power: 7
-- Privacy: 43
+- Privacy: 48
 - Security: 17
 - System: 36
 - Visibility: 16
@@ -31,16 +31,13 @@
 - Network: 9
 - Peripheral: 1
 - Power: 3
-- Privacy: 24
+- Privacy: 19
 - Security: 4
 - System: 16
 - Visibility: 7
 
 ## Recommended Next Batches
 
-- Privacy: 5 uncovered cards | coverage 64.18%
-  command: `dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-pca-diagnostics.policy --id privacy.disable-phone-linking --id privacy.disable-program-compatibility-assistant --id privacy.disable-recall --id privacy.disable-resume`
-  live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-pca-diagnostics.policy --id privacy.disable-phone-linking --id privacy.disable-program-compatibility-assistant --id privacy.disable-recall --id privacy.disable-resume --run-kvm --json`
 - Audio: 1 uncovered cards | coverage 66.67%
   command: `dotnet run --project cli/cli.csproj -- research qa-batch --id audio.show-hidden-devices`
   live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id audio.show-hidden-devices --run-kvm --json`
@@ -53,6 +50,9 @@
 - System: 5 uncovered cards | coverage 69.23%
   command: `dotnet run --project cli/cli.csproj -- research qa-batch --id system.ntfs-disable-8dot3 --id system.ntfs-disable-last-access --id system.ntfs-enable-long-paths --id system.ntfs-reset-memory-usage --id system.ntfs-reset-mft-zone`
   live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id system.ntfs-disable-8dot3 --id system.ntfs-disable-last-access --id system.ntfs-enable-long-paths --id system.ntfs-reset-memory-usage --id system.ntfs-reset-mft-zone --run-kvm --json`
+- Visibility: 5 uncovered cards | coverage 69.57%
+  command: `dotnet run --project cli/cli.csproj -- research qa-batch --id visibility.disable-spotlight-settings --id visibility.disable-spotlight-third-party --id visibility.disable-spotlight-welcome --id visibility.disable-wcn-wizards --id visibility.disable-widgets`
+  live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id visibility.disable-spotlight-settings --id visibility.disable-spotlight-third-party --id visibility.disable-spotlight-welcome --id visibility.disable-wcn-wizards --id visibility.disable-widgets --run-kvm --json`
 
 ## Remaining Uncovered Sample
 
