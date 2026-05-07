@@ -647,6 +647,9 @@ class VmKvmGhidraProbeTests(unittest.TestCase):
         self.assertEqual(exit_code, 0)
         self.assertEqual(payload["status"], "ok")
         self.assertEqual(payload["launch_transport"], "qga")
+        self.assertEqual(payload["error_kind"], None)
+        self.assertEqual(payload["recovery_action"], "none")
+        self.assertEqual(payload["transport_blocker"], "none")
         send_key_run.assert_not_called()
 
     def test_symbolized_auto_launch_uses_qga_after_preflight(self) -> None:
@@ -697,6 +700,9 @@ class VmKvmGhidraProbeTests(unittest.TestCase):
         self.assertEqual(exit_code, 0)
         self.assertEqual(payload["status"], "ok")
         self.assertEqual(payload["launch_transport"], "qga")
+        self.assertEqual(payload["error_kind"], None)
+        self.assertEqual(payload["recovery_action"], "none")
+        self.assertEqual(payload["transport_blocker"], "none")
         send_key_run.assert_not_called()
 
 

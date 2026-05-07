@@ -515,13 +515,14 @@ def main() -> int:
                 ghidra_exit = summary.get("ghidra_exit_code")
                 summary["status"] = "ok" if ghidra_exit == 0 else "error"
             summary["launch_transport"] = launch_transport
+            summary_status = str(summary.get("status") or "").lower()
 
             summary = apply_summary_contract(
                 summary,
-                default_error_kind="ghidra-symbolized-probe-error",
-                default_recovery_action="inspect-ghidra-symbolized-run",
-                default_transport_blocker="ghidra",
-                default_guest_health="stable" if summary.get("status") == "ok" else "degraded",
+                default_error_kind=None if summary_status == "ok" else "ghidra-symbolized-probe-error",
+                default_recovery_action="none" if summary_status == "ok" else "inspect-ghidra-symbolized-run",
+                default_transport_blocker="none" if summary_status == "ok" else "ghidra",
+                default_guest_health="stable" if summary_status == "ok" else "degraded",
             )
             summary_path.write_text(json.dumps(summary, indent=2) + "\n", encoding="utf-8")
             print(json.dumps(summary, indent=2))
