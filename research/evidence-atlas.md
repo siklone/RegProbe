@@ -4441,6 +4441,7 @@ Current writes
 | `app-network-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-netbios-resolution` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 | `vm-network.disable-netbios-resolution-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for EnableNetbios | [evidence/captures/network-disable-netbios-resolution-etw-stackwalk-attempt-20260427.json](../evidence/captures/network-disable-netbios-resolution-etw-stackwalk-attempt-20260427.json) and [evidence/raw/etw-stackwalk/network-disable-netbios-resolution-etw-20260427a/network-disable-netbios-resolution-etw-20260427a-summary.json](../evidence/raw/etw-stackwalk/network-disable-netbios-resolution-etw-20260427a/network-disable-netbios-resolution-etw-20260427a-summary.json) and [evidence/raw/etw-stackwalk/network-disable-netbios-resolution-etw-20260427a/network-disable-netbios-resolution-etw-20260427a-stage.json](../evidence/raw/etw-stackwalk/network-disable-netbios-resolution-etw-20260427a/network-disable-netbios-resolution-etw-20260427a-stage.json) | `low` | behavior, version-scope |
+| `vm-network.disable-netbios-resolution-etw-qga-unblock-20260507` | `etw-trace` | `unspecified` | QGA-first ETW stackwalk runtime receipt for EnableNetbios | [evidence/captures/network-disable-netbios-resolution-etw-qga-unblock-20260507.json](../evidence/captures/network-disable-netbios-resolution-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/network-disable-netbios-resolution-etw-qga-unblock-20260507/network-disable-netbios-resolution-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/network-disable-netbios-resolution-etw-qga-unblock-20260507/network-disable-netbios-resolution-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/network-disable-netbios-resolution-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/network-disable-netbios-resolution-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/network-disable-netbios-resolution-etw-qga-unblock-20260507/network-disable-netbios-resolution-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/network-disable-netbios-resolution-etw-qga-unblock-20260507/network-disable-netbios-resolution-etw-qga-unblock-20260507.etl) | `high` | runtime-observation, tooling-fix, path, value, version-scope |
 | `vm-network.disable-netbios-resolution-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for EnableNetbios | [evidence/raw/ghidra/ghidra-network-disable-netbios-resolution-20260427a/summary.json](../evidence/raw/ghidra/ghidra-network-disable-netbios-resolution-20260427a/summary.json) | `low` | version-scope |
 
 **Validation proof**
@@ -4556,6 +4557,7 @@ Current writes
 | `ms-sceregvl-plaintext-smb-password` | `official-doc` | `Microsoft official doc` | Local Microsoft security metadata: sceregvl.inf | [evidence/files/external/c/Windows/inf/sceregvl.inf.md](../evidence/files/external/c/Windows/inf/sceregvl.inf.md) | `high` | path, value |
 | `app-network-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `vm-network.disable-plaintext-smb-passwords-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for EnablePlainTextPassword | [evidence/captures/network-disable-plaintext-smb-passwords-etw-stackwalk-attempt-20260427.json](../evidence/captures/network-disable-plaintext-smb-passwords-etw-stackwalk-attempt-20260427.json) and [evidence/raw/etw-stackwalk/network-disable-plaintext-smb-passwords-etw-20260427a/network-disable-plaintext-smb-passwords-etw-20260427a-summary.json](../evidence/raw/etw-stackwalk/network-disable-plaintext-smb-passwords-etw-20260427a/network-disable-plaintext-smb-passwords-etw-20260427a-summary.json) and [evidence/raw/etw-stackwalk/network-disable-plaintext-smb-passwords-etw-20260427a/network-disable-plaintext-smb-passwords-etw-20260427a-stage.json](../evidence/raw/etw-stackwalk/network-disable-plaintext-smb-passwords-etw-20260427a/network-disable-plaintext-smb-passwords-etw-20260427a-stage.json) | `low` | behavior, version-scope |
+| `vm-network.disable-plaintext-smb-passwords-etw-qga-unblock-20260507` | `etw-trace` | `unspecified` | QGA-first ETW stackwalk runtime receipt for EnablePlainTextPassword | [evidence/captures/network-disable-plaintext-smb-passwords-etw-qga-unblock-20260507.json](../evidence/captures/network-disable-plaintext-smb-passwords-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/network-disable-plaintext-smb-passwords-etw-qga-unblock-20260507/network-disable-plaintext-smb-passwords-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/network-disable-plaintext-smb-passwords-etw-qga-unblock-20260507/network-disable-plaintext-smb-passwords-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/network-disable-plaintext-smb-passwords-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/network-disable-plaintext-smb-passwords-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/network-disable-plaintext-smb-passwords-etw-qga-unblock-20260507/network-disable-plaintext-smb-passwords-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/network-disable-plaintext-smb-passwords-etw-qga-unblock-20260507/network-disable-plaintext-smb-passwords-etw-qga-unblock-20260507.etl) | `high` | runtime-observation, tooling-fix, path, value, version-scope |
 | `vm-network.disable-plaintext-smb-passwords-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for EnablePlainTextPassword | [evidence/raw/ghidra/ghidra-network-disable-plaintext-smb-passwords-20260427b/summary.json](../evidence/raw/ghidra/ghidra-network-disable-plaintext-smb-passwords-20260427b/summary.json) | `low` | version-scope |
 
 **Validation proof**
@@ -4671,6 +4673,7 @@ Current writes
 | `app-network-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-smart-name-resolution` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 | `vm-network.disable-smart-name-resolution-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for DisableSmartNameResolution | [evidence/captures/network-disable-smart-name-resolution-etw-stackwalk-attempt-20260427.json](../evidence/captures/network-disable-smart-name-resolution-etw-stackwalk-attempt-20260427.json) and [evidence/raw/etw-stackwalk/network-disable-smart-name-resolution-etw-20260427a/network-disable-smart-name-resolution-etw-20260427a-summary.json](../evidence/raw/etw-stackwalk/network-disable-smart-name-resolution-etw-20260427a/network-disable-smart-name-resolution-etw-20260427a-summary.json) and [evidence/raw/etw-stackwalk/network-disable-smart-name-resolution-etw-20260427a/network-disable-smart-name-resolution-etw-20260427a-stage.json](../evidence/raw/etw-stackwalk/network-disable-smart-name-resolution-etw-20260427a/network-disable-smart-name-resolution-etw-20260427a-stage.json) | `low` | behavior, version-scope |
+| `vm-network.disable-smart-name-resolution-etw-qga-unblock-20260507` | `etw-trace` | `unspecified` | QGA-first ETW stackwalk runtime receipt for DisableSmartNameResolution | [evidence/captures/network-disable-smart-name-resolution-etw-qga-unblock-20260507.json](../evidence/captures/network-disable-smart-name-resolution-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/network-disable-smart-name-resolution-etw-qga-unblock-20260507/network-disable-smart-name-resolution-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/network-disable-smart-name-resolution-etw-qga-unblock-20260507/network-disable-smart-name-resolution-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/network-disable-smart-name-resolution-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/network-disable-smart-name-resolution-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/network-disable-smart-name-resolution-etw-qga-unblock-20260507/network-disable-smart-name-resolution-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/network-disable-smart-name-resolution-etw-qga-unblock-20260507/network-disable-smart-name-resolution-etw-qga-unblock-20260507.etl) | `high` | runtime-observation, tooling-fix, path, value, version-scope |
 | `vm-network.disable-smart-name-resolution-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for DisableSmartNameResolution | [evidence/raw/ghidra/ghidra-network-disable-smart-name-resolution-20260427b/summary.json](../evidence/raw/ghidra/ghidra-network-disable-smart-name-resolution-20260427b/summary.json) | `low` | version-scope |
 
 **Validation proof**
@@ -4787,6 +4790,7 @@ Current writes
 | `app-network-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-smb1` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk, version-scope |
 | `vm-network.disable-smb1-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for SMB1 | [evidence/captures/network-disable-smb1-etw-stackwalk-attempt-20260427.json](../evidence/captures/network-disable-smb1-etw-stackwalk-attempt-20260427.json) and [evidence/raw/etw-stackwalk/network-disable-smb1-etw-20260427a/network-disable-smb1-etw-20260427a-summary.json](../evidence/raw/etw-stackwalk/network-disable-smb1-etw-20260427a/network-disable-smb1-etw-20260427a-summary.json) and [evidence/raw/etw-stackwalk/network-disable-smb1-etw-20260427a/network-disable-smb1-etw-20260427a-stage.json](../evidence/raw/etw-stackwalk/network-disable-smb1-etw-20260427a/network-disable-smb1-etw-20260427a-stage.json) | `low` | behavior, version-scope |
+| `vm-network.disable-smb1-etw-qga-unblock-20260507` | `etw-trace` | `unspecified` | QGA-first ETW stackwalk runtime receipt for SMB1 | [evidence/captures/network-disable-smb1-etw-qga-unblock-20260507.json](../evidence/captures/network-disable-smb1-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/network-disable-smb1-etw-qga-unblock-20260507/network-disable-smb1-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/network-disable-smb1-etw-qga-unblock-20260507/network-disable-smb1-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/network-disable-smb1-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/network-disable-smb1-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/network-disable-smb1-etw-qga-unblock-20260507/network-disable-smb1-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/network-disable-smb1-etw-qga-unblock-20260507/network-disable-smb1-etw-qga-unblock-20260507.etl) | `high` | runtime-observation, tooling-fix, path, value, version-scope |
 | `vm-network.disable-smb1-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for SMB1 | [evidence/raw/ghidra/ghidra-network-disable-smb1-20260427b/summary.json](../evidence/raw/ghidra/ghidra-network-disable-smb1-20260427b/summary.json) | `low` | version-scope |
 
 **Validation proof**
@@ -5012,6 +5016,7 @@ Current writes
 | `ms-wifisense-adml` | `official-doc` | `Microsoft official doc` | Microsoft help text for Wi-Fi Sense policy | [evidence/files/external/c/PolicyDefinitions/en-US/wlansvc.adml](../evidence/files/external/c/PolicyDefinitions/en-US/wlansvc.adml) | `high` | behavior, default, risk |
 | `app-network-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `vm-network.disable-wifi-sense-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for AutoConnectAllowedOEM | [evidence/captures/network-disable-wifi-sense-etw-stackwalk-attempt-20260427.json](../evidence/captures/network-disable-wifi-sense-etw-stackwalk-attempt-20260427.json) and [evidence/raw/etw-stackwalk/network-disable-wifi-sense-etw-20260427a/network-disable-wifi-sense-etw-20260427a-summary.json](../evidence/raw/etw-stackwalk/network-disable-wifi-sense-etw-20260427a/network-disable-wifi-sense-etw-20260427a-summary.json) and [evidence/raw/etw-stackwalk/network-disable-wifi-sense-etw-20260427a/network-disable-wifi-sense-etw-20260427a-stage.json](../evidence/raw/etw-stackwalk/network-disable-wifi-sense-etw-20260427a/network-disable-wifi-sense-etw-20260427a-stage.json) | `low` | behavior, version-scope |
+| `vm-network.disable-wifi-sense-etw-qga-unblock-20260507` | `etw-trace` | `unspecified` | QGA-first ETW stackwalk runtime receipt for AutoConnectAllowedOEM | [evidence/captures/network-disable-wifi-sense-etw-qga-unblock-20260507.json](../evidence/captures/network-disable-wifi-sense-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/network-disable-wifi-sense-etw-qga-unblock-20260507/network-disable-wifi-sense-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/network-disable-wifi-sense-etw-qga-unblock-20260507/network-disable-wifi-sense-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/network-disable-wifi-sense-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/network-disable-wifi-sense-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/network-disable-wifi-sense-etw-qga-unblock-20260507/network-disable-wifi-sense-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/network-disable-wifi-sense-etw-qga-unblock-20260507/network-disable-wifi-sense-etw-qga-unblock-20260507.etl) | `high` | runtime-observation, tooling-fix, path, value, version-scope |
 | `vm-network.disable-wifi-sense-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for AutoConnectAllowedOEM | [evidence/raw/ghidra/ghidra-network-disable-wifi-sense-20260427b/summary.json](../evidence/raw/ghidra/ghidra-network-disable-wifi-sense-20260427b/summary.json) | `low` | version-scope |
 
 **Validation proof**
@@ -9462,13 +9467,28 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `` |
-| Has nohuto lineage | `` |
-| Has Windows Internals notes | `` |
-| Needs review | `` |
-| Source repositories |  |
-| Matched tokens |  |
-| Lineage note |  |
+| Coverage state | `repo-backed` |
+| Has nohuto lineage | `True` |
+| Has Windows Internals notes | `True` |
+| Needs review | `False` |
+| Source repositories | win-config, win-registry, decompiled-pseudocode |
+| Matched tokens | tcpip, multimedia, systemprofile, systemresponsiveness, disabletaskoffload |
+| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
+
+Nohuto lineage references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 5 audit token(s) in win-config. |
+| win-config / system/assets/mmcss-CiConfigInitialize.c | [https://github.com/nohuto/win-config/blob/main/system/assets/mmcss-CiConfigInitialize.c](https://github.com/nohuto/win-config/blob/main/system/assets/mmcss-CiConfigInitialize.c) | Matched 4 audit token(s) in win-config. |
+| win-registry / records/MultiMedia.txt | [https://github.com/nohuto/win-registry/blob/main/records/MultiMedia.txt](https://github.com/nohuto/win-registry/blob/main/records/MultiMedia.txt) | Matched 4 audit token(s) in win-registry. |
+| decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
+
+Windows Internals references:
+
+| Title | Location | Summary |
+| --- | --- | --- |
+| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
 
 **Targets**
 
@@ -12740,6 +12760,7 @@ Current writes
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-disable-copilot` | `repo-doc` | `Current repo docs` | Existing tweak source record | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | ui-mapping, risk |
 | `vm-privacy.disable-copilot-etw-stackwalk-attempt-20260427` | `etw-trace` | `unspecified` | KVM ETW summary receipt for TurnOffWindowsCopilot | [evidence/captures/privacy-disable-copilot-etw-stackwalk-attempt-20260427.json](../evidence/captures/privacy-disable-copilot-etw-stackwalk-attempt-20260427.json) and [evidence/raw/etw-stackwalk/privacy-disable-copilot-etw-20260427b/privacy-disable-copilot-etw-20260427b-summary.json](../evidence/raw/etw-stackwalk/privacy-disable-copilot-etw-20260427b/privacy-disable-copilot-etw-20260427b-summary.json) | `low` | behavior, version-scope |
+| `vm-privacy.disable-copilot-etw-qga-unblock-20260507` | `etw-trace` | `unspecified` | QGA-first ETW stackwalk runtime receipt for TurnOffWindowsCopilot | [evidence/captures/privacy-disable-copilot-etw-qga-unblock-20260507.json](../evidence/captures/privacy-disable-copilot-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/privacy-disable-copilot-etw-qga-unblock-20260507c/privacy-disable-copilot-etw-qga-unblock-20260507c-summary.json](../evidence/raw/etw-stackwalk/privacy-disable-copilot-etw-qga-unblock-20260507c/privacy-disable-copilot-etw-qga-unblock-20260507c-summary.json) and [evidence/raw/etw-stackwalk/privacy-disable-copilot-etw-qga-unblock-20260507c/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/privacy-disable-copilot-etw-qga-unblock-20260507c/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/privacy-disable-copilot-etw-qga-unblock-20260507c/privacy-disable-copilot-etw-qga-unblock-20260507c.etl](../evidence/raw/etw-stackwalk/privacy-disable-copilot-etw-qga-unblock-20260507c/privacy-disable-copilot-etw-qga-unblock-20260507c.etl) | `medium` | runtime-observation, tooling-fix, version-scope, behavior |
 | `vm-privacy.disable-copilot-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for TurnOffWindowsCopilot | [evidence/raw/ghidra/ghidra-privacy-disable-copilot-20260427b/summary.json](../evidence/raw/ghidra/ghidra-privacy-disable-copilot-20260427b/summary.json) | `low` | version-scope |
 
 **Validation proof**
@@ -31231,28 +31252,13 @@ Blocking issues:
 
 | Field | Value |
 | --- | --- |
-| Coverage state | `repo-backed` |
-| Has nohuto lineage | `True` |
-| Has Windows Internals notes | `True` |
-| Needs review | `False` |
-| Source repositories | win-config, win-registry, decompiled-pseudocode |
-| Matched tokens | tcpip, multimedia, systemprofile, networkthrottlingindex, systemresponsiveness |
-| Lineage note | Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof. |
-
-Nohuto lineage references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| win-config / system/desc.md | [https://github.com/nohuto/win-config/blob/main/system/desc.md](https://github.com/nohuto/win-config/blob/main/system/desc.md) | Matched 5 audit token(s) in win-config. |
-| win-config / system/assets/mmcss-CiConfigInitialize.c | [https://github.com/nohuto/win-config/blob/main/system/assets/mmcss-CiConfigInitialize.c](https://github.com/nohuto/win-config/blob/main/system/assets/mmcss-CiConfigInitialize.c) | Matched 4 audit token(s) in win-config. |
-| win-registry / records/MultiMedia.txt | [https://github.com/nohuto/win-registry/blob/main/records/MultiMedia.txt](https://github.com/nohuto/win-registry/blob/main/records/MultiMedia.txt) | Matched 4 audit token(s) in win-registry. |
-| decompiled-pseudocode / mmcss | [https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss](https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss) | MMCSS pseudocode relevant to SystemProfile scheduler values. |
-
-Windows Internals references:
-
-| Title | Location | Summary |
-| --- | --- | --- |
-| Windows Internals resource page | [https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals](https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals) | Official Microsoft landing page for the Windows Internals books and companion material. |
+| Coverage state | `` |
+| Has nohuto lineage | `` |
+| Has Windows Internals notes | `` |
+| Needs review | `` |
+| Source repositories |  |
+| Matched tokens |  |
+| Lineage note |  |
 
 **Targets**
 

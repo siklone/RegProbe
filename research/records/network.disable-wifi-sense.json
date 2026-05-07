@@ -201,6 +201,21 @@
       "strength": "low"
     },
     {
+      "evidence_id": "vm-network.disable-wifi-sense-etw-qga-unblock-20260507",
+      "kind": "etw-trace",
+      "title": "QGA-first ETW stackwalk runtime receipt for AutoConnectAllowedOEM",
+      "location": "evidence/captures/network-disable-wifi-sense-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/network-disable-wifi-sense-etw-qga-unblock-20260507/network-disable-wifi-sense-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/network-disable-wifi-sense-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/network-disable-wifi-sense-etw-qga-unblock-20260507/network-disable-wifi-sense-etw-qga-unblock-20260507.etl",
+      "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4423 registry events with 535 caller-stack events. The bundle contains an exact helper-triggered `RegQueryValue` for `HKLM\\Software\\Microsoft\\wcmsvc\\wifinetworkmanager\\config` / `AutoConnectAllowedOEM`, returning `0xC0000034` on the clean baseline.",
+      "supports": [
+        "runtime-observation",
+        "tooling-fix",
+        "path",
+        "value",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
       "evidence_id": "vm-network.disable-wifi-sense-ghidra-launch-receipt-20260427",
       "kind": "vm-test",
       "title": "Guest Ghidra launch receipt for AutoConnectAllowedOEM",
@@ -222,7 +237,7 @@
     "why": "Microsoft directly documents HKLM\\Software\\Microsoft\\wcmsvc\\wifinetworkmanager\\config -> AutoConnectAllowedOEM in wlansvc.admx, with enabledValue 1 and disabledValue 0. The companion help text in wlansvc.adml explains that disabled turns off suggested hotspot, contact-shared network, and paid-service options and prevents users from enabling them.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-30T18:44:44Z",
+  "last_reviewed_utc": "2026-05-07T08:56:15Z",
   "validation_proof": {
     "source_url": "evidence/files/external/c/Windows/PolicyDefinitions/wlansvc.admx",
     "exact_quote_or_path": "<policy name=\"WiFiSense\" class=\"Machine\" ... key=\"Software\\Microsoft\\wcmsvc\\wifinetworkmanager\\config\" valueName=\"AutoConnectAllowedOEM\"> ... <enabledValue><decimal value=\"1\" /></enabledValue> ... <disabledValue><decimal value=\"0\" /></disabledValue>; wlansvc.adml: If this policy setting is disabled, both \"Connect to suggested open hotspots,\" \"Connect to networks shared by my contacts,\" and \"Enable paid services\" will be turned off and users on this device will be prevented from enabling them.",
@@ -255,11 +270,11 @@
     },
     "runtime_capture_reviewed": {
       "etw-stackwalk": true,
-      "status": "ingest_missing_etl"
+      "status": "qga_unblocked_ingest_ok"
     },
     "etw_stackwalk_reviewed": true,
-    "etw_stackwalk_review_status": "ingest_missing_etl",
-    "etw_stackwalk_review_artifact": "evidence/captures/network-disable-wifi-sense-etw-stackwalk-attempt-20260427.json",
+    "etw_stackwalk_review_status": "qga_unblocked_ingest_ok",
+    "etw_stackwalk_review_artifact": "evidence/captures/network-disable-wifi-sense-etw-qga-unblock-20260507.json",
     "static_reviewed": {
       "ghidra": true,
       "status": "ensure_admin_shell_timeout"
@@ -267,6 +282,6 @@
     "ghidra": true,
     "ghidra_status": "ensure_admin_shell_timeout",
     "ghidra_artifact": "evidence/raw/ghidra/ghidra-network-disable-wifi-sense-20260427b/summary.json",
-    "notes": "A same-day guest Ghidra retry for `AutoConnectAllowedOEM` failed in `ensure-admin-shell` after the bounded 90 second wrapper timeout, so no xref bundle reached the host."
+    "notes": "The 2026-04-27 ETW retry published summary and stage receipts but failed before ETL ingest. A 2026-05-07 QGA-first ETW stackwalk rerun cleared that blocker and produced an exact helper-triggered `RegQueryValue` for `AutoConnectAllowedOEM` with caller-stack capture. The same-day guest Ghidra retry from 2026-04-27 still remains an `ensure-admin-shell` launch failure receipt."
   }
 }

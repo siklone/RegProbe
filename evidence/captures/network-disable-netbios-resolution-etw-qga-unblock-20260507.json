@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-07T08:58:04Z",
+  "record_id": "network.disable-netbios-resolution",
+  "run_id": "network-disable-netbios-resolution-etw-qga-unblock-20260507",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "registry_path": "HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient",
+  "value_name": "EnableNetbios",
+  "attempt_status": "qga_unblocked_ingest_ok",
+  "assessment": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and a normalized bundle with 5028 registry events and 1181 caller-stack events. The bundle contains an exact RegQueryValue event for HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient / EnableNetbios from the helper probe, returning 0xC0000034 on the clean baseline.",
+  "target_observation": {
+    "exact_value_query": true,
+    "operation": "RegQueryValue",
+    "representative_status": "0xC0000034",
+    "event_count": 5028,
+    "caller_stack_event_count": 1181,
+    "launch_transport": "qga"
+  },
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/network-disable-netbios-resolution-etw-qga-unblock-20260507/network-disable-netbios-resolution-etw-qga-unblock-20260507-summary.json",
+      "sha256": "80c621b6ee4c43ca39a3886ed1023478b185fe3967186feec54e362b4c4f2e04",
+      "size": 7932,
+      "collected_utc": "2026-05-07T08:58:04Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/network-disable-netbios-resolution-etw-qga-unblock-20260507/normalized-registry-bundle.json",
+      "sha256": "145496ac604f7753e27810a284dbc0e5c0a7abb23e1df7c02a2cf0943c399457",
+      "size": 6736537,
+      "collected_utc": "2026-05-07T08:58:04Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/network-disable-netbios-resolution-etw-qga-unblock-20260507/network-disable-netbios-resolution-etw-qga-unblock-20260507.etl",
+      "sha256": "f524aad71b891837f5fa26e53c57ce4e0d320235fa3e7c3bd7e11b193291bc9a",
+      "size": 12845056,
+      "collected_utc": "2026-05-07T08:58:04Z"
+    }
+  ]
+}

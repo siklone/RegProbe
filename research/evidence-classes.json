@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-06T18:25:13.350133Z",
+  "generated_utc": "2026-05-07T09:00:52.071375Z",
   "summary": {
     "total_records": 356,
     "class_counts": {
@@ -11232,10 +11232,33 @@
         "links": []
       },
       "upstream_lineage": {
-        "summary": "No upstream nohuto source link is attached to this record.",
-        "has_nohuto_lineage": false,
-        "source_repositories": [],
-        "links": []
+        "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+        "has_nohuto_lineage": true,
+        "source_repositories": [
+          "win-config",
+          "win-registry",
+          "decompiled-pseudocode"
+        ],
+        "links": [
+          {
+            "title": "win-config / system/desc.md",
+            "url": "https://github.com/nohuto/win-config/blob/main/system/desc.md",
+            "kind": "nohuto",
+            "summary": "Matched 5 audit token(s) in win-config."
+          },
+          {
+            "title": "win-config / system/assets/mmcss-CiConfigInitialize.c",
+            "url": "https://github.com/nohuto/win-config/blob/main/system/assets/mmcss-CiConfigInitialize.c",
+            "kind": "nohuto",
+            "summary": "Matched 4 audit token(s) in win-config."
+          },
+          {
+            "title": "win-registry / records/MultiMedia.txt",
+            "url": "https://github.com/nohuto/win-registry/blob/main/records/MultiMedia.txt",
+            "kind": "nohuto",
+            "summary": "Matched 4 audit token(s) in win-registry."
+          }
+        ]
       },
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
@@ -11311,33 +11334,10 @@
         "links": []
       },
       "upstream_lineage": {
-        "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
-        "has_nohuto_lineage": true,
-        "source_repositories": [
-          "win-config",
-          "win-registry",
-          "decompiled-pseudocode"
-        ],
-        "links": [
-          {
-            "title": "win-config / system/desc.md",
-            "url": "https://github.com/nohuto/win-config/blob/main/system/desc.md",
-            "kind": "nohuto",
-            "summary": "Matched 5 audit token(s) in win-config."
-          },
-          {
-            "title": "win-config / system/assets/mmcss-CiConfigInitialize.c",
-            "url": "https://github.com/nohuto/win-config/blob/main/system/assets/mmcss-CiConfigInitialize.c",
-            "kind": "nohuto",
-            "summary": "Matched 4 audit token(s) in win-config."
-          },
-          {
-            "title": "win-registry / records/MultiMedia.txt",
-            "url": "https://github.com/nohuto/win-registry/blob/main/records/MultiMedia.txt",
-            "kind": "nohuto",
-            "summary": "Matched 4 audit token(s) in win-registry."
-          }
-        ]
+        "summary": "No upstream nohuto source link is attached to this record.",
+        "has_nohuto_lineage": false,
+        "source_repositories": [],
+        "links": []
       },
       "tweak_origin": "research-derived",
       "promotion_state": "rejected",

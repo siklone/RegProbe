@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-07T08:56:15Z",
+  "record_id": "network.disable-wifi-sense",
+  "run_id": "network-disable-wifi-sense-etw-qga-unblock-20260507",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "registry_path": "HKLM\\Software\\Microsoft\\wcmsvc\\wifinetworkmanager\\config",
+  "value_name": "AutoConnectAllowedOEM",
+  "attempt_status": "qga_unblocked_ingest_ok",
+  "assessment": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and a normalized bundle with 4423 registry events and 535 caller-stack events. The bundle contains an exact RegQueryValue event for HKLM\\Software\\Microsoft\\wcmsvc\\wifinetworkmanager\\config / AutoConnectAllowedOEM from the helper probe, returning 0xC0000034 on the clean baseline.",
+  "target_observation": {
+    "exact_value_query": true,
+    "operation": "RegQueryValue",
+    "representative_status": "0xC0000034",
+    "event_count": 4423,
+    "caller_stack_event_count": 535,
+    "launch_transport": "qga"
+  },
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/network-disable-wifi-sense-etw-qga-unblock-20260507/network-disable-wifi-sense-etw-qga-unblock-20260507-summary.json",
+      "sha256": "3e648a48f539f5bb36877a22509ce1fe4c6451fc8a25438805217074d088529b",
+      "size": 7714,
+      "collected_utc": "2026-05-07T08:56:15Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/network-disable-wifi-sense-etw-qga-unblock-20260507/normalized-registry-bundle.json",
+      "sha256": "16392a25ca82c4e776c4bdfc09441a59d4d1759a9e2d853de558e8b9c8e7cc61",
+      "size": 5373507,
+      "collected_utc": "2026-05-07T08:56:15Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/network-disable-wifi-sense-etw-qga-unblock-20260507/network-disable-wifi-sense-etw-qga-unblock-20260507.etl",
+      "sha256": "613f54bab9e819eda41f420eb1c1246239e9062ca6d0661bf46518da2465d2e7",
+      "size": 12845056,
+      "collected_utc": "2026-05-07T08:56:15Z"
+    }
+  ]
+}

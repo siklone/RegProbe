@@ -351,6 +351,8 @@ python3 scripts/vm-kvm/vm-health-check.py --domain regprobe-win11-25h2-session -
 
 Decision tree: if `domstate` is not `running`, start or restore the VM before collecting evidence. If `guest_ping`, `guest_info`, or `guest_exec` fails, repair QGA in the guest or rerun the health check; do not treat a downstream `ensure-admin-shell` timeout as evidence. If QGA is healthy, keep the default `--launch-transport auto --preflight require` path for ETW/Ghidra. Use `--launch-transport send-key` only when you intentionally want the interactive fallback, and expect summaries to record `launch_transport=send-key`.
 
+When recovering old blocked evidence, prefer a small QGA-first retry over dragging stale guest artifacts into the repo. The current repeatable pattern is a narrow ETW stackwalk with `--stackwalk-event RegQueryValue`, small buffers, `--ingest-to-repo`, and the default QGA preflight. Keep raw tracerpt XML ignored, commit the summary, ETL, normalized bundle, and `evidence/captures/...` receipt, then refresh the published research surfaces with `python3 scripts/refresh_research_publish_surfaces.py`.
+
 ## Scripts
 
 The repo has a lot of PowerShell, but not every script has the same job. Some scripts are everyday build, package, clean, baseline maintenance, shell-health, and app-smoke helpers. Some are active research runners for checked-in escalation lanes. Others are historical reproducibility scripts kept because old notes, audits, and evidence bundles still depend on them.

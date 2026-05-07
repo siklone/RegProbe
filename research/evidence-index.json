@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-06T18:25:13.704955Z",
+  "generated_utc": "2026-05-07T09:00:52.584461Z",
   "summary": {
     "total_records": 356,
     "validated": 255,
@@ -20,7 +20,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-05-06T18:25:13.439420Z",
+      "generated_utc": "2026-05-07T09:00:52.221108Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -2973,33 +2973,10 @@
           "links": []
         },
         "upstream_lineage": {
-          "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
-          "has_nohuto_lineage": true,
-          "source_repositories": [
-            "win-config",
-            "win-registry",
-            "decompiled-pseudocode"
-          ],
-          "links": [
-            {
-              "title": "win-config / system/desc.md",
-              "url": "https://github.com/nohuto/win-config/blob/main/system/desc.md",
-              "kind": "nohuto",
-              "summary": "Matched 5 audit token(s) in win-config."
-            },
-            {
-              "title": "win-config / system/assets/mmcss-CiConfigInitialize.c",
-              "url": "https://github.com/nohuto/win-config/blob/main/system/assets/mmcss-CiConfigInitialize.c",
-              "kind": "nohuto",
-              "summary": "Matched 4 audit token(s) in win-config."
-            },
-            {
-              "title": "win-registry / records/MultiMedia.txt",
-              "url": "https://github.com/nohuto/win-registry/blob/main/records/MultiMedia.txt",
-              "kind": "nohuto",
-              "summary": "Matched 4 audit token(s) in win-registry."
-            }
-          ]
+          "summary": "No upstream nohuto source link is attached to this record.",
+          "has_nohuto_lineage": false,
+          "source_repositories": [],
+          "links": []
         }
       },
       "decision": {
@@ -3219,60 +3196,7 @@
       "doc_source": null,
       "static_analysis": null,
       "cross_verification": null,
-      "provenance": {
-        "coverage_state": "repo-backed",
-        "has_nohuto_evidence": true,
-        "has_windows_internals_context": true,
-        "needs_review": false,
-        "source_repositories": [
-          "win-config",
-          "win-registry",
-          "decompiled-pseudocode"
-        ],
-        "matched_tokens": [
-          "tcpip",
-          "multimedia",
-          "systemprofile",
-          "networkthrottlingindex",
-          "systemresponsiveness"
-        ],
-        "lineage_note": "Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof.",
-        "nohuto_references": [
-          {
-            "Kind": "nohuto",
-            "Title": "win-config / system/desc.md",
-            "Url": "https://github.com/nohuto/win-config/blob/main/system/desc.md",
-            "Summary": "Matched 5 audit token(s) in win-config."
-          },
-          {
-            "Kind": "nohuto",
-            "Title": "win-config / system/assets/mmcss-CiConfigInitialize.c",
-            "Url": "https://github.com/nohuto/win-config/blob/main/system/assets/mmcss-CiConfigInitialize.c",
-            "Summary": "Matched 4 audit token(s) in win-config."
-          },
-          {
-            "Kind": "nohuto",
-            "Title": "win-registry / records/MultiMedia.txt",
-            "Url": "https://github.com/nohuto/win-registry/blob/main/records/MultiMedia.txt",
-            "Summary": "Matched 4 audit token(s) in win-registry."
-          },
-          {
-            "Kind": "nohuto",
-            "Title": "decompiled-pseudocode / mmcss",
-            "Url": "https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss",
-            "Summary": "MMCSS pseudocode relevant to SystemProfile scheduler values."
-          }
-        ],
-        "windows_internals_references": [
-          {
-            "Kind": "internals",
-            "Title": "Windows Internals resource page",
-            "Url": "https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals",
-            "Summary": "Official Microsoft landing page for the Windows Internals books and companion material."
-          }
-        ],
-        "other_references": []
-      },
+      "provenance": null,
       "v31_evidence_root": null,
       "v31_pipeline_version": null,
       "artifact_refs": [],
@@ -45283,6 +45207,22 @@
           "origin": "unspecified"
         },
         {
+          "evidence_id": "vm-network.disable-netbios-resolution-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk runtime receipt for EnableNetbios",
+          "location": "evidence/captures/network-disable-netbios-resolution-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/network-disable-netbios-resolution-etw-qga-unblock-20260507/network-disable-netbios-resolution-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/network-disable-netbios-resolution-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/network-disable-netbios-resolution-etw-qga-unblock-20260507/network-disable-netbios-resolution-etw-qga-unblock-20260507.etl",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 5028 registry events with 1181 caller-stack events. The bundle contains an exact helper-triggered `RegQueryValue` for `HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient` / `EnableNetbios`, returning `0xC0000034` on the clean baseline.",
+          "strength": "high",
+          "supports": [
+            "runtime-observation",
+            "tooling-fix",
+            "path",
+            "value",
+            "version-scope"
+          ],
+          "origin": "unspecified"
+        },
+        {
           "evidence_id": "vm-network.disable-netbios-resolution-ghidra-launch-receipt-20260427",
           "kind": "vm-test",
           "title": "Guest Ghidra launch receipt for EnableNetbios",
@@ -45616,6 +45556,22 @@
           "origin": "unspecified"
         },
         {
+          "evidence_id": "vm-network.disable-plaintext-smb-passwords-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk runtime receipt for EnablePlainTextPassword",
+          "location": "evidence/captures/network-disable-plaintext-smb-passwords-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/network-disable-plaintext-smb-passwords-etw-qga-unblock-20260507/network-disable-plaintext-smb-passwords-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/network-disable-plaintext-smb-passwords-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/network-disable-plaintext-smb-passwords-etw-qga-unblock-20260507/network-disable-plaintext-smb-passwords-etw-qga-unblock-20260507.etl",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 5000 registry events with 1184 caller-stack events. The bundle contains an exact helper-triggered `RegQueryValue` for `HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters` / `EnablePlainTextPassword`, returning `0x80000005` on the clean baseline.",
+          "strength": "high",
+          "supports": [
+            "runtime-observation",
+            "tooling-fix",
+            "path",
+            "value",
+            "version-scope"
+          ],
+          "origin": "unspecified"
+        },
+        {
           "evidence_id": "vm-network.disable-plaintext-smb-passwords-ghidra-launch-receipt-20260427",
           "kind": "vm-test",
           "title": "Guest Ghidra launch receipt for EnablePlainTextPassword",
@@ -45931,6 +45887,22 @@
           "strength": "low",
           "supports": [
             "behavior",
+            "version-scope"
+          ],
+          "origin": "unspecified"
+        },
+        {
+          "evidence_id": "vm-network.disable-smart-name-resolution-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk runtime receipt for DisableSmartNameResolution",
+          "location": "evidence/captures/network-disable-smart-name-resolution-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/network-disable-smart-name-resolution-etw-qga-unblock-20260507/network-disable-smart-name-resolution-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/network-disable-smart-name-resolution-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/network-disable-smart-name-resolution-etw-qga-unblock-20260507/network-disable-smart-name-resolution-etw-qga-unblock-20260507.etl",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4887 registry events with 989 caller-stack events. The bundle contains an exact helper-triggered `RegQueryValue` for `HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient` / `DisableSmartNameResolution`, returning `0xC0000034` on the clean baseline.",
+          "strength": "high",
+          "supports": [
+            "runtime-observation",
+            "tooling-fix",
+            "path",
+            "value",
             "version-scope"
           ],
           "origin": "unspecified"
@@ -46270,6 +46242,22 @@
           "strength": "low",
           "supports": [
             "behavior",
+            "version-scope"
+          ],
+          "origin": "unspecified"
+        },
+        {
+          "evidence_id": "vm-network.disable-smb1-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk runtime receipt for SMB1",
+          "location": "evidence/captures/network-disable-smb1-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/network-disable-smb1-etw-qga-unblock-20260507/network-disable-smb1-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/network-disable-smb1-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/network-disable-smb1-etw-qga-unblock-20260507/network-disable-smb1-etw-qga-unblock-20260507.etl",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4459 registry events with 618 caller-stack events. The bundle contains an exact helper-triggered `RegQueryValue` for `HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanServer\\Parameters` / `SMB1`, returning `0xC0000034` on the clean baseline.",
+          "strength": "high",
+          "supports": [
+            "runtime-observation",
+            "tooling-fix",
+            "path",
+            "value",
             "version-scope"
           ],
           "origin": "unspecified"
@@ -46835,6 +46823,22 @@
           "strength": "low",
           "supports": [
             "behavior",
+            "version-scope"
+          ],
+          "origin": "unspecified"
+        },
+        {
+          "evidence_id": "vm-network.disable-wifi-sense-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk runtime receipt for AutoConnectAllowedOEM",
+          "location": "evidence/captures/network-disable-wifi-sense-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/network-disable-wifi-sense-etw-qga-unblock-20260507/network-disable-wifi-sense-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/network-disable-wifi-sense-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/network-disable-wifi-sense-etw-qga-unblock-20260507/network-disable-wifi-sense-etw-qga-unblock-20260507.etl",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4423 registry events with 535 caller-stack events. The bundle contains an exact helper-triggered `RegQueryValue` for `HKLM\\Software\\Microsoft\\wcmsvc\\wifinetworkmanager\\config` / `AutoConnectAllowedOEM`, returning `0xC0000034` on the clean baseline.",
+          "strength": "high",
+          "supports": [
+            "runtime-observation",
+            "tooling-fix",
+            "path",
+            "value",
             "version-scope"
           ],
           "origin": "unspecified"
@@ -59492,10 +59496,33 @@
           "links": []
         },
         "upstream_lineage": {
-          "summary": "No upstream nohuto source link is attached to this record.",
-          "has_nohuto_lineage": false,
-          "source_repositories": [],
-          "links": []
+          "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+          "has_nohuto_lineage": true,
+          "source_repositories": [
+            "win-config",
+            "win-registry",
+            "decompiled-pseudocode"
+          ],
+          "links": [
+            {
+              "title": "win-config / system/desc.md",
+              "url": "https://github.com/nohuto/win-config/blob/main/system/desc.md",
+              "kind": "nohuto",
+              "summary": "Matched 5 audit token(s) in win-config."
+            },
+            {
+              "title": "win-config / system/assets/mmcss-CiConfigInitialize.c",
+              "url": "https://github.com/nohuto/win-config/blob/main/system/assets/mmcss-CiConfigInitialize.c",
+              "kind": "nohuto",
+              "summary": "Matched 4 audit token(s) in win-config."
+            },
+            {
+              "title": "win-registry / records/MultiMedia.txt",
+              "url": "https://github.com/nohuto/win-registry/blob/main/records/MultiMedia.txt",
+              "kind": "nohuto",
+              "summary": "Matched 4 audit token(s) in win-registry."
+            }
+          ]
         }
       },
       "decision": {
@@ -59735,7 +59762,60 @@
         "cross_conflict": false,
         "notes": "This child record is currently doc-driven. No dedicated Ghidra+IDA parity artifact is attached yet."
       },
-      "provenance": null,
+      "provenance": {
+        "coverage_state": "repo-backed",
+        "has_nohuto_evidence": true,
+        "has_windows_internals_context": true,
+        "needs_review": false,
+        "source_repositories": [
+          "win-config",
+          "win-registry",
+          "decompiled-pseudocode"
+        ],
+        "matched_tokens": [
+          "tcpip",
+          "multimedia",
+          "systemprofile",
+          "systemresponsiveness",
+          "disabletaskoffload"
+        ],
+        "lineage_note": "Nohuto references only show upstream dump or naming links. Value semantics are validated separately in the record evidence and validation proof.",
+        "nohuto_references": [
+          {
+            "Kind": "nohuto",
+            "Title": "win-config / system/desc.md",
+            "Url": "https://github.com/nohuto/win-config/blob/main/system/desc.md",
+            "Summary": "Matched 5 audit token(s) in win-config."
+          },
+          {
+            "Kind": "nohuto",
+            "Title": "win-config / system/assets/mmcss-CiConfigInitialize.c",
+            "Url": "https://github.com/nohuto/win-config/blob/main/system/assets/mmcss-CiConfigInitialize.c",
+            "Summary": "Matched 4 audit token(s) in win-config."
+          },
+          {
+            "Kind": "nohuto",
+            "Title": "win-registry / records/MultiMedia.txt",
+            "Url": "https://github.com/nohuto/win-registry/blob/main/records/MultiMedia.txt",
+            "Summary": "Matched 4 audit token(s) in win-registry."
+          },
+          {
+            "Kind": "nohuto",
+            "Title": "decompiled-pseudocode / mmcss",
+            "Url": "https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss",
+            "Summary": "MMCSS pseudocode relevant to SystemProfile scheduler values."
+          }
+        ],
+        "windows_internals_references": [
+          {
+            "Kind": "internals",
+            "Title": "Windows Internals resource page",
+            "Url": "https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals",
+            "Summary": "Official Microsoft landing page for the Windows Internals books and companion material."
+          }
+        ],
+        "other_references": []
+      },
       "v31_evidence_root": "evidence/records/power.disable-network-power-saving.policy",
       "v31_pipeline_version": "v3.2",
       "artifact_refs": [],
@@ -68706,6 +68786,21 @@
           "supports": [
             "behavior",
             "version-scope"
+          ],
+          "origin": "unspecified"
+        },
+        {
+          "evidence_id": "vm-privacy.disable-copilot-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk runtime receipt for TurnOffWindowsCopilot",
+          "location": "evidence/captures/privacy-disable-copilot-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/privacy-disable-copilot-etw-qga-unblock-20260507c/privacy-disable-copilot-etw-qga-unblock-20260507c-summary.json and evidence/raw/etw-stackwalk/privacy-disable-copilot-etw-qga-unblock-20260507c/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/privacy-disable-copilot-etw-qga-unblock-20260507c/privacy-disable-copilot-etw-qga-unblock-20260507c.etl",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun cleared the earlier guest-control blocker, produced ETL/XML artifacts, and normalized 5534 registry events with 1349 caller-stack events. The helper command queried `HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsCopilot` / `TurnOffWindowsCopilot`; the clean baseline did not produce an exact value event, but the bundle retained WindowsCopilot policy key open/query activity with absent-status evidence.",
+          "strength": "medium",
+          "supports": [
+            "runtime-observation",
+            "tooling-fix",
+            "version-scope",
+            "behavior"
           ],
           "origin": "unspecified"
         },

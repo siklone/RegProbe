@@ -145,6 +145,15 @@ Recovery decision tree:
 - Health is `ok`: use the default QGA-first runner path, `--launch-transport auto --preflight require`.
 - You intentionally need keyboard injection: pass `--launch-transport send-key`; this bypasses QGA preflight and the summary must record `launch_transport=send-key`.
 
+Blocked evidence recovery loop:
+
+1. Confirm QGA health with `vm-health-check.py`.
+2. Check guest disk space before ETW; stale `C:\RegProbe-Diag\etw-stackwalk\*202604*` diagnostics can consume tens of GB.
+3. Prefer a narrow QGA-first retry over committing stale giant XML: use `run-guest-etw-stackwalk-capture.py --stackwalk-event RegQueryValue --buffer-size-kb 256 --min-buffers 16 --max-buffers 64 --ingest-to-repo`.
+4. Treat `launch_transport=qga`, `etl_exists=true`, `xml_exists=true`, and normalized bundle `status=ok` as the unblock contract.
+5. Record what the bundle actually proves: exact target `RegQueryValue` is stronger than a helper command line; absent-key/open evidence can support transport and baseline state but should not be overstated.
+6. Add an `evidence/captures/...json` receipt, update the owning record, and run `python3 scripts/refresh_research_publish_surfaces.py`.
+
 ### VMware Workstation
 
 ```bash
