@@ -1,13 +1,9 @@
 {
-  "generated_utc": "2026-05-06T22:07:23Z",
+  "generated_utc": "2026-05-07T15:32:30Z",
   "status": "PASS",
   "selection": {
     "requested_ids": [
-      "system.disable-search-web-results",
-      "system.disable-storage-sense",
-      "system.disable-storage-sense-temp-cleanup",
-      "system.disable-store-open-with",
-      "system.dwm-disable-overlay-min-fps"
+      "power.disable-network-power-saving.policy"
     ],
     "requested_categories": [],
     "limit_per_category": 1,
@@ -22,265 +18,29 @@
     "kvm_batch_runner": "scripts/vm-kvm/run-guest-app-tweak-qa-batch.py"
   },
   "catalog_candidate_count": 242,
-  "selected_candidate_count": 5,
+  "selected_candidate_count": 1,
   "errors": [],
   "candidates": [
     {
-      "tweak_id": "system.disable-search-web-results",
-      "qa_tweak_id": "system.disable-search-web-results",
-      "candidate_id": "system.disable-search-web-results",
-      "record_id": "system.disable-search-web-results",
-      "category": "System",
-      "name": "Web Results in Windows Search",
-      "documentation": "research/records/system.disable-search-web-results.review.json",
+      "tweak_id": "power.disable-network-power-saving.policy",
+      "qa_tweak_id": "power.disable-network-power-saving.policy",
+      "candidate_id": "power.disable-network-power-saving.policy",
+      "record_id": "power.disable-network-power-saving.policy",
+      "category": "Power",
+      "name": "Network Power and Multimedia Responsiveness",
+      "documentation": "research/records/power.disable-network-power-saving.policy.review.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect system.disable-search-web-results",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect power.disable-network-power-saving.policy",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.disable-search-web-results' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.disable-search-web-results.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.disable-search-web-results' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.disable-search-web-results.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.disable-search-web-results' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.disable-search-web-results.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.disable-search-web-results' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.disable-search-web-results.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'system.disable-search-web-results'"
-      },
-      "expected_report": {
-        "success": true,
-        "status": "ok",
-        "rollback_requested": true,
-        "required_stages": [
-          "detect-before",
-          "apply",
-          "rollback",
-          "detect-after"
-        ],
-        "required_card_snapshot": {
-          "required_fields": [
-            "TweakId",
-            "Name",
-            "Category",
-            "EvidenceClass",
-            "ResearchStatus",
-            "RollbackSnapshotState",
-            "HasClaimBoundary",
-            "WhatWeKnowSummary",
-            "WhatWeDoNotClaimSummary",
-            "ProofLanes"
-          ],
-          "required_proof_lanes": [
-            "docs",
-            "runtime",
-            "source",
-            "rollback"
-          ],
-          "claim_boundary_required": true
-        },
-        "required_stage_assertions": [
-          "apply stage reports a successful apply story",
-          "rollback stage reports a successful rollback story",
-          "detect-after is present"
-        ]
-      }
-    },
-    {
-      "tweak_id": "system.disable-storage-sense",
-      "qa_tweak_id": "system.disable-storage-sense",
-      "candidate_id": "system.disable-storage-sense",
-      "record_id": "system.disable-storage-sense",
-      "category": "System",
-      "name": "Storage Sense Automatic Cleanup",
-      "documentation": "research/records/system.disable-storage-sense.json",
-      "promotion_state": "promoted",
-      "apply_allowed": true,
-      "restore_default_supported": true,
-      "restore_previous_supported": true,
-      "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect system.disable-storage-sense",
-        "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.disable-storage-sense' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.disable-storage-sense.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.disable-storage-sense' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.disable-storage-sense.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.disable-storage-sense' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.disable-storage-sense.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.disable-storage-sense' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.disable-storage-sense.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'system.disable-storage-sense'"
-      },
-      "expected_report": {
-        "success": true,
-        "status": "ok",
-        "rollback_requested": true,
-        "required_stages": [
-          "detect-before",
-          "apply",
-          "rollback",
-          "detect-after"
-        ],
-        "required_card_snapshot": {
-          "required_fields": [
-            "TweakId",
-            "Name",
-            "Category",
-            "EvidenceClass",
-            "ResearchStatus",
-            "RollbackSnapshotState",
-            "HasClaimBoundary",
-            "WhatWeKnowSummary",
-            "WhatWeDoNotClaimSummary",
-            "ProofLanes"
-          ],
-          "required_proof_lanes": [
-            "docs",
-            "runtime",
-            "source",
-            "rollback"
-          ],
-          "claim_boundary_required": true
-        },
-        "required_stage_assertions": [
-          "apply stage reports a successful apply story",
-          "rollback stage reports a successful rollback story",
-          "detect-after is present"
-        ]
-      }
-    },
-    {
-      "tweak_id": "system.disable-storage-sense-temp-cleanup",
-      "qa_tweak_id": "system.disable-storage-sense-temp-cleanup",
-      "candidate_id": "system.disable-storage-sense-temp-cleanup",
-      "record_id": "system.disable-storage-sense-temp-cleanup",
-      "category": "System",
-      "name": "Storage Sense Temporary Files Cleanup",
-      "documentation": "research/records/system.disable-storage-sense-temp-cleanup.json",
-      "promotion_state": "promoted",
-      "apply_allowed": true,
-      "restore_default_supported": true,
-      "restore_previous_supported": true,
-      "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect system.disable-storage-sense-temp-cleanup",
-        "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.disable-storage-sense-temp-cleanup' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.disable-storage-sense-temp-cleanup.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.disable-storage-sense-temp-cleanup' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.disable-storage-sense-temp-cleanup.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.disable-storage-sense-temp-cleanup' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.disable-storage-sense-temp-cleanup.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.disable-storage-sense-temp-cleanup' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.disable-storage-sense-temp-cleanup.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'system.disable-storage-sense-temp-cleanup'"
-      },
-      "expected_report": {
-        "success": true,
-        "status": "ok",
-        "rollback_requested": true,
-        "required_stages": [
-          "detect-before",
-          "apply",
-          "rollback",
-          "detect-after"
-        ],
-        "required_card_snapshot": {
-          "required_fields": [
-            "TweakId",
-            "Name",
-            "Category",
-            "EvidenceClass",
-            "ResearchStatus",
-            "RollbackSnapshotState",
-            "HasClaimBoundary",
-            "WhatWeKnowSummary",
-            "WhatWeDoNotClaimSummary",
-            "ProofLanes"
-          ],
-          "required_proof_lanes": [
-            "docs",
-            "runtime",
-            "source",
-            "rollback"
-          ],
-          "claim_boundary_required": true
-        },
-        "required_stage_assertions": [
-          "apply stage reports a successful apply story",
-          "rollback stage reports a successful rollback story",
-          "detect-after is present"
-        ]
-      }
-    },
-    {
-      "tweak_id": "system.disable-store-open-with",
-      "qa_tweak_id": "system.disable-store-open-with",
-      "candidate_id": "system.disable-store-open-with",
-      "record_id": "system.disable-store-open-with",
-      "category": "System",
-      "name": "Store in Open With",
-      "documentation": "research/records/system.disable-store-open-with.json",
-      "promotion_state": "promoted",
-      "apply_allowed": true,
-      "restore_default_supported": true,
-      "restore_previous_supported": true,
-      "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect system.disable-store-open-with",
-        "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.disable-store-open-with' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.disable-store-open-with.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.disable-store-open-with' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.disable-store-open-with.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.disable-store-open-with' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.disable-store-open-with.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.disable-store-open-with' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.disable-store-open-with.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'system.disable-store-open-with'"
-      },
-      "expected_report": {
-        "success": true,
-        "status": "ok",
-        "rollback_requested": true,
-        "required_stages": [
-          "detect-before",
-          "apply",
-          "rollback",
-          "detect-after"
-        ],
-        "required_card_snapshot": {
-          "required_fields": [
-            "TweakId",
-            "Name",
-            "Category",
-            "EvidenceClass",
-            "ResearchStatus",
-            "RollbackSnapshotState",
-            "HasClaimBoundary",
-            "WhatWeKnowSummary",
-            "WhatWeDoNotClaimSummary",
-            "ProofLanes"
-          ],
-          "required_proof_lanes": [
-            "docs",
-            "runtime",
-            "source",
-            "rollback"
-          ],
-          "claim_boundary_required": true
-        },
-        "required_stage_assertions": [
-          "apply stage reports a successful apply story",
-          "rollback stage reports a successful rollback story",
-          "detect-after is present"
-        ]
-      }
-    },
-    {
-      "tweak_id": "system.dwm-disable-overlay-min-fps",
-      "qa_tweak_id": "system.dwm-disable-overlay-min-fps",
-      "candidate_id": "system.dwm-disable-overlay-min-fps",
-      "record_id": "system.dwm-disable-overlay-min-fps",
-      "category": "System",
-      "name": "DWM Overlay Minimum FPS Check",
-      "documentation": "research/records/system.dwm-disable-overlay-min-fps.json",
-      "promotion_state": "promoted",
-      "apply_allowed": true,
-      "restore_default_supported": true,
-      "restore_previous_supported": true,
-      "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect system.dwm-disable-overlay-min-fps",
-        "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.dwm-disable-overlay-min-fps' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.dwm-disable-overlay-min-fps.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.dwm-disable-overlay-min-fps' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.dwm-disable-overlay-min-fps.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.dwm-disable-overlay-min-fps' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.dwm-disable-overlay-min-fps.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.dwm-disable-overlay-min-fps' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.dwm-disable-overlay-min-fps.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'system.dwm-disable-overlay-min-fps'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'power.disable-network-power-saving.policy' --qa-output 'C:\\Tools\\ValidationController\\smoke\\power.disable-network-power-saving.policy.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'power.disable-network-power-saving.policy' --qa-output 'C:\\Tools\\ValidationController\\smoke\\power.disable-network-power-saving.policy.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'power.disable-network-power-saving.policy' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\power.disable-network-power-saving.policy.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'power.disable-network-power-saving.policy' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\power.disable-network-power-saving.policy.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'power.disable-network-power-saving.policy'"
       },
       "expected_report": {
         "success": true,
@@ -323,7 +83,7 @@
   ],
   "run_results": [
     {
-      "tweak_id": "system.disable-search-web-results",
+      "tweak_id": "power.disable-network-power-saving.policy",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -357,19 +117,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "system.disable-search-web-results",
-        "TweakName": "Web Results in Windows Search",
+        "TweakId": "power.disable-network-power-saving.policy",
+        "TweakName": "Network Power and Multimedia Responsiveness",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "system.disable-search-web-results",
-          "Name": "Web Results in Windows Search",
-          "Category": "System",
-          "Description": "Windows Search can send queries to the web and show web results in the search experience. This policy decides whether that web-connected behavior is allowed.",
-          "FriendlyDescription": "Windows Search can send queries to the web and show web results in the search experience. This policy decides whether that web-connected behavior is allowed.",
-          "RegistryPath": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search\\ConnectedSearchUseWeb",
+          "TweakId": "power.disable-network-power-saving.policy",
+          "Name": "Network Power and Multimedia Responsiveness",
+          "Category": "Power",
+          "Description": "These settings affect whether TCP/IP task offloads stay enabled and how MMCSS reserves CPU for multimedia work.",
+          "FriendlyDescription": "These settings affect whether TCP/IP task offloads stay enabled and how MMCSS reserves CPU for multimedia work.",
+          "RegistryPath": "",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -377,15 +137,15 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Windows Search can send queries to the web and show web results in the search experience. This policy decides whether that web-connected behavior is allowed. Evidence: Local official ADMX and ADML files document that the policy name is DoNotUseWebResults but the actual registry value name is ConnectedSearchUseWeb. The app now writes the documented value name and disable state exactly. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: These settings affect whether TCP/IP task offloads stay enabled and how MMCSS reserves CPU for multimedia work. Evidence: DisableTaskOffload remains covered by the separate Microsoft task-offload page. This validation proof focuses on the narrower MMCSS claim for SystemResponsiveness: path plus rounding/clamping behavior. The opaque NetworkThrottlingIndex write remains only in... Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "Local official ADMX and ADML files document that the policy name is DoNotUseWebResults but the actual registry value name is ConnectedSearchUseWeb. The app now writes the documented value name and disable state exactly.",
-              "Source": "Validation proof source: evidence/files/missing/search-admx.md"
+              "Summary": "DisableTaskOffload remains covered by the separate Microsoft task-offload page. This validation proof focuses on the narrower MMCSS claim for SystemResponsiveness: path plus rounding/clamping behavior. The opaque NetworkThrottlingIndex write remains only in...",
+              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows/win32/procthread/multimedia-class-scheduler-service"
             },
             {
               "Key": "runtime",
@@ -411,18 +171,13 @@
           ],
           "ReferenceLinks": [
             {
-              "Title": "Docs: Details (missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
+              "Title": "Docs: Details",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html#power.disable-network-power-saving.policy",
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Win-Config",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\win-config\\batch-01.md#system.disable-search-web-results",
-              "Kind": "Docs"
-            },
-            {
-              "Title": "Docs: System (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\system\\system.md",
+              "Title": "Docs: Power",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\power\\power.md#power.disable-network-power-saving.policy",
               "Kind": "Docs"
             }
           ]
@@ -431,10 +186,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Web results disabled'.",
+            "StatusMessage": "Detected 1 of 2 values (matches: 0, missing: 1).",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Web results disabled",
+            "CurrentValue": "Multiple values",
+            "TargetValue": "Multiple values",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -443,8 +198,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Web results disabled'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search\\ConnectedSearchUseWeb: missing -> 0",
-                "TimestampText": "01:07:26"
+                "Message": "Detected 1 of 2 values (matches: 0, missing: 1).\nEntries:\n- HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\SystemResponsiveness: 20 -> 10\n- HKLM\\System\\CurrentControlSet\\Services\\TCPIP\\Parameters\\DisableTaskOffload: missing",
+                "TimestampText": "08:32:35"
               },
               {
                 "Action": "Apply",
@@ -471,8 +226,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Web results disabled",
-            "TargetValue": "Web results disabled",
+            "CurrentValue": "Multiple values",
+            "TargetValue": "Multiple values",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -481,20 +236,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Web results disabled'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search\\ConnectedSearchUseWeb: missing -> 0",
-                "TimestampText": "01:07:26"
+                "Message": "Detected 1 of 2 values (matches: 0, missing: 1).\nEntries:\n- HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\SystemResponsiveness: 20 -> 10\n- HKLM\\System\\CurrentControlSet\\Services\\TCPIP\\Parameters\\DisableTaskOffload: missing",
+                "TimestampText": "08:32:35"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Web results disabled'.",
-                "TimestampText": "01:07:29"
+                "Message": "Updated 2 values.",
+                "TimestampText": "08:32:38"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Web results disabled'.",
-                "TimestampText": "01:07:29"
+                "Message": "Verified desired values.",
+                "TimestampText": "08:32:38"
               },
               {
                 "Action": "Rollback",
@@ -509,8 +264,8 @@
             "AppliedStatus": "NotApplied",
             "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Web results disabled",
+            "CurrentValue": "Multiple values",
+            "TargetValue": "Multiple values",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -519,36 +274,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Web results disabled'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search\\ConnectedSearchUseWeb: missing -> 0",
-                "TimestampText": "01:07:26"
+                "Message": "Detected 1 of 2 values (matches: 0, missing: 1).\nEntries:\n- HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\SystemResponsiveness: 20 -> 10\n- HKLM\\System\\CurrentControlSet\\Services\\TCPIP\\Parameters\\DisableTaskOffload: missing",
+                "TimestampText": "08:32:35"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Web results disabled'.",
-                "TimestampText": "01:07:29"
+                "Message": "Updated 2 values.",
+                "TimestampText": "08:32:38"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Web results disabled'.",
-                "TimestampText": "01:07:29"
+                "Message": "Verified desired values.",
+                "TimestampText": "08:32:38"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "01:07:29"
+                "TimestampText": "08:32:38"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Web results disabled'.",
+            "StatusMessage": "Detected 1 of 2 values (matches: 0, missing: 1).",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Web results disabled",
+            "CurrentValue": "Multiple values",
+            "TargetValue": "Multiple values",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -557,1109 +312,46 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Web results disabled'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Search\\ConnectedSearchUseWeb: missing -> 0",
-                "TimestampText": "01:07:29"
+                "Message": "Detected 1 of 2 values (matches: 0, missing: 1).\nEntries:\n- HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\SystemResponsiveness: 20 -> 10\n- HKLM\\System\\CurrentControlSet\\Services\\TCPIP\\Parameters\\DisableTaskOffload: missing",
+                "TimestampText": "08:32:38"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Web results disabled'.",
-                "TimestampText": "01:07:29"
+                "Message": "Updated 2 values.",
+                "TimestampText": "08:32:38"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Web results disabled'.",
-                "TimestampText": "01:07:29"
+                "Message": "Verified desired values.",
+                "TimestampText": "08:32:38"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "01:07:29"
+                "TimestampText": "08:32:38"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T08:07:26.2494321+00:00",
-        "CompletedAtUtc": "2026-05-07T08:07:29.3318484+00:00"
+        "StartedAtUtc": "2026-05-07T15:32:35.7635526+00:00",
+        "CompletedAtUtc": "2026-05-07T15:32:38.9691874+00:00"
       },
-      "qa_tweak_id": "system.disable-search-web-results",
-      "candidate_id": "system.disable-search-web-results",
-      "card_name": "Web Results in Windows Search",
-      "documentation": "research/records/system.disable-search-web-results.review.json"
-    },
-    {
-      "tweak_id": "system.disable-storage-sense",
-      "host_exit": 0,
-      "execution_exit": 0,
-      "payload_status": "completed",
-      "report_app_success": true,
-      "report_success": true,
-      "report_status": "ok",
-      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
-      "report_contract_status": "ok",
-      "report_contract_summary": "QA card snapshot contract passed.",
-      "report_contract_failures": [],
-      "report_card_present": true,
-      "report_card_has_claim_boundary": true,
-      "report_card_present_fields": [
-        "TweakId",
-        "Name",
-        "Category",
-        "EvidenceClass",
-        "ResearchStatus",
-        "RollbackSnapshotState",
-        "HasClaimBoundary",
-        "WhatWeKnowSummary",
-        "WhatWeDoNotClaimSummary",
-        "ProofLanes"
-      ],
-      "report_card_missing_fields": [],
-      "report_card_proof_lanes": [
-        "docs",
-        "runtime",
-        "source",
-        "rollback"
-      ],
-      "report_card_missing_proof_lanes": [],
-      "report": {
-        "TweakId": "system.disable-storage-sense",
-        "TweakName": "Storage Sense Automatic Cleanup",
-        "Success": true,
-        "Status": "ok",
-        "Summary": "Apply/verify path completed and rollback restored the tweak.",
-        "RollbackRequested": true,
-        "Card": {
-          "TweakId": "system.disable-storage-sense",
-          "Name": "Storage Sense Automatic Cleanup",
-          "Category": "System",
-          "Description": "Storage Sense is Windows' automatic cleanup feature for temporary and unneeded files. This policy decides whether the feature is allowed at all on the device.",
-          "FriendlyDescription": "Storage Sense is Windows' automatic cleanup feature for temporary and unneeded files. This policy decides whether the feature is allowed at all on the device.",
-          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Windows\\StorageSense\\AllowStorageSenseGlobal",
-          "EvidenceClass": "A",
-          "EvidenceClassTitle": "Cross-Layer Verified",
-          "ResearchStatus": "PROMOTED",
-          "IsMutationAllowed": true,
-          "RollbackSnapshotState": "ready",
-          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
-          "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Storage Sense is Windows' automatic cleanup feature for temporary and unneeded files. This policy decides whether the feature is allowed at all on the device. Evidence: Local official ADMX defines the exact key and value name; local ADML confirms that the disabled policy state turns Storage Sense off for the machine. Rollback: Rollback: Verified via record-restore-story.",
-          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
-          "ProofLanes": [
-            {
-              "Key": "docs",
-              "Label": "DOCS",
-              "State": "ready",
-              "Summary": "Local official ADMX defines the exact key and value name; local ADML confirms that the disabled policy state turns Storage Sense off for the machine.",
-              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/StorageSense.admx"
-            },
-            {
-              "Key": "runtime",
-              "Label": "RUNTIME",
-              "State": "ready",
-              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
-              "Source": ""
-            },
-            {
-              "Key": "source",
-              "Label": "SOURCE",
-              "State": "ready",
-              "Summary": "No upstream nohuto source link is attached to this record.",
-              "Source": ""
-            },
-            {
-              "Key": "rollback",
-              "Label": "ROLLBACK",
-              "State": "ready",
-              "Summary": "Rollback: Verified via record-restore-story.",
-              "Source": "record-restore-story"
-            }
-          ],
-          "ReferenceLinks": [
-            {
-              "Title": "Docs: Details (missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
-              "Kind": "Details"
-            },
-            {
-              "Title": "Docs: Win-Config",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\win-config\\batch-01.md#system.disable-storage-sense",
-              "Kind": "Docs"
-            },
-            {
-              "Title": "Docs: System (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\system\\system.md",
-              "Kind": "Docs"
-            }
-          ]
-        },
-        "Stages": [
-          {
-            "Stage": "detect-before",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Storage Sense disabled'.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Storage Sense disabled",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": false,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Storage Sense disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\StorageSense\\AllowStorageSenseGlobal: missing -> 0",
-                "TimestampText": "01:07:35"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "apply",
-            "AppliedStatus": "Applied",
-            "StatusMessage": "Run completed.",
-            "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Storage Sense disabled",
-            "TargetValue": "Storage Sense disabled",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Storage Sense disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\StorageSense\\AllowStorageSenseGlobal: missing -> 0",
-                "TimestampText": "01:07:35"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Applied preset 'Storage Sense disabled'.",
-                "TimestampText": "01:07:38"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified preset 'Storage Sense disabled'.",
-                "TimestampText": "01:07:38"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Not required",
-                "Message": "Step not executed.",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "rollback",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Rolled back registry values.",
-            "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Storage Sense disabled",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Storage Sense disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\StorageSense\\AllowStorageSenseGlobal: missing -> 0",
-                "TimestampText": "01:07:35"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Applied preset 'Storage Sense disabled'.",
-                "TimestampText": "01:07:38"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified preset 'Storage Sense disabled'.",
-                "TimestampText": "01:07:38"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "01:07:38"
-              }
-            ]
-          },
-          {
-            "Stage": "detect-after",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Storage Sense disabled'.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Storage Sense disabled",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Storage Sense disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\StorageSense\\AllowStorageSenseGlobal: missing -> 0",
-                "TimestampText": "01:07:38"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Applied preset 'Storage Sense disabled'.",
-                "TimestampText": "01:07:38"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified preset 'Storage Sense disabled'.",
-                "TimestampText": "01:07:38"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "01:07:38"
-              }
-            ]
-          }
-        ],
-        "StartedAtUtc": "2026-05-07T08:07:35.5931615+00:00",
-        "CompletedAtUtc": "2026-05-07T08:07:38.66543+00:00"
-      },
-      "qa_tweak_id": "system.disable-storage-sense",
-      "candidate_id": "system.disable-storage-sense",
-      "card_name": "Storage Sense Automatic Cleanup",
-      "documentation": "research/records/system.disable-storage-sense.json"
-    },
-    {
-      "tweak_id": "system.disable-storage-sense-temp-cleanup",
-      "host_exit": 0,
-      "execution_exit": 0,
-      "payload_status": "completed",
-      "report_app_success": true,
-      "report_success": true,
-      "report_status": "ok",
-      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
-      "report_contract_status": "ok",
-      "report_contract_summary": "QA card snapshot contract passed.",
-      "report_contract_failures": [],
-      "report_card_present": true,
-      "report_card_has_claim_boundary": true,
-      "report_card_present_fields": [
-        "TweakId",
-        "Name",
-        "Category",
-        "EvidenceClass",
-        "ResearchStatus",
-        "RollbackSnapshotState",
-        "HasClaimBoundary",
-        "WhatWeKnowSummary",
-        "WhatWeDoNotClaimSummary",
-        "ProofLanes"
-      ],
-      "report_card_missing_fields": [],
-      "report_card_proof_lanes": [
-        "docs",
-        "runtime",
-        "source",
-        "rollback"
-      ],
-      "report_card_missing_proof_lanes": [],
-      "report": {
-        "TweakId": "system.disable-storage-sense-temp-cleanup",
-        "TweakName": "Storage Sense Temporary Files Cleanup",
-        "Success": true,
-        "Status": "ok",
-        "Summary": "Apply/verify path completed and rollback restored the tweak.",
-        "RollbackRequested": true,
-        "Card": {
-          "TweakId": "system.disable-storage-sense-temp-cleanup",
-          "Name": "Storage Sense Temporary Files Cleanup",
-          "Category": "System",
-          "Description": "Storage Sense can automatically clean temporary files when Windows decides it is helpful. This policy controls that specific part of the cleanup behavior.",
-          "FriendlyDescription": "Storage Sense can automatically clean temporary files when Windows decides it is helpful. This policy controls that specific part of the cleanup behavior.",
-          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Windows\\StorageSense\\AllowStorageSenseTemporaryFilesCleanup",
-          "EvidenceClass": "A",
-          "EvidenceClassTitle": "Cross-Layer Verified",
-          "ResearchStatus": "PROMOTED",
-          "IsMutationAllowed": true,
-          "RollbackSnapshotState": "ready",
-          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
-          "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Storage Sense can automatically clean temporary files when Windows decides it is helpful. This policy controls that specific part of the cleanup behavior. Evidence: Local official ADMX defines the exact key and value name; local ADML confirms that the disabled policy state prevents Storage Sense from deleting temporary files. Rollback: Rollback: Verified via record-restore-story.",
-          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
-          "ProofLanes": [
-            {
-              "Key": "docs",
-              "Label": "DOCS",
-              "State": "ready",
-              "Summary": "Local official ADMX defines the exact key and value name; local ADML confirms that the disabled policy state prevents Storage Sense from deleting temporary files.",
-              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/StorageSense.admx"
-            },
-            {
-              "Key": "runtime",
-              "Label": "RUNTIME",
-              "State": "ready",
-              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
-              "Source": ""
-            },
-            {
-              "Key": "source",
-              "Label": "SOURCE",
-              "State": "ready",
-              "Summary": "No upstream nohuto source link is attached to this record.",
-              "Source": ""
-            },
-            {
-              "Key": "rollback",
-              "Label": "ROLLBACK",
-              "State": "ready",
-              "Summary": "Rollback: Verified via record-restore-story.",
-              "Source": "record-restore-story"
-            }
-          ],
-          "ReferenceLinks": [
-            {
-              "Title": "Docs: Details (missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
-              "Kind": "Details"
-            },
-            {
-              "Title": "Docs: Win-Config",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\win-config\\batch-01.md#system.disable-storage-sense-temp-cleanup",
-              "Kind": "Docs"
-            },
-            {
-              "Title": "Docs: System (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\system\\system.md",
-              "Kind": "Docs"
-            }
-          ]
-        },
-        "Stages": [
-          {
-            "Stage": "detect-before",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Temporary files cleanup disabled'.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Temporary files cleanup disabled",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": false,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Temporary files cleanup disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\StorageSense\\AllowStorageSenseTemporaryFilesCleanup: missing -> 0",
-                "TimestampText": "01:07:45"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "apply",
-            "AppliedStatus": "Applied",
-            "StatusMessage": "Run completed.",
-            "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Temporary files cleanup disabled",
-            "TargetValue": "Temporary files cleanup disabled",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Temporary files cleanup disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\StorageSense\\AllowStorageSenseTemporaryFilesCleanup: missing -> 0",
-                "TimestampText": "01:07:45"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Applied preset 'Temporary files cleanup disabled'.",
-                "TimestampText": "01:07:47"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified preset 'Temporary files cleanup disabled'.",
-                "TimestampText": "01:07:47"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Not required",
-                "Message": "Step not executed.",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "rollback",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Rolled back registry values.",
-            "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Temporary files cleanup disabled",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Temporary files cleanup disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\StorageSense\\AllowStorageSenseTemporaryFilesCleanup: missing -> 0",
-                "TimestampText": "01:07:45"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Applied preset 'Temporary files cleanup disabled'.",
-                "TimestampText": "01:07:47"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified preset 'Temporary files cleanup disabled'.",
-                "TimestampText": "01:07:47"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "01:07:48"
-              }
-            ]
-          },
-          {
-            "Stage": "detect-after",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Temporary files cleanup disabled'.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Temporary files cleanup disabled",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Temporary files cleanup disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\StorageSense\\AllowStorageSenseTemporaryFilesCleanup: missing -> 0",
-                "TimestampText": "01:07:48"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Applied preset 'Temporary files cleanup disabled'.",
-                "TimestampText": "01:07:47"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified preset 'Temporary files cleanup disabled'.",
-                "TimestampText": "01:07:47"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "01:07:48"
-              }
-            ]
-          }
-        ],
-        "StartedAtUtc": "2026-05-07T08:07:45.142392+00:00",
-        "CompletedAtUtc": "2026-05-07T08:07:48.2209585+00:00"
-      },
-      "qa_tweak_id": "system.disable-storage-sense-temp-cleanup",
-      "candidate_id": "system.disable-storage-sense-temp-cleanup",
-      "card_name": "Storage Sense Temporary Files Cleanup",
-      "documentation": "research/records/system.disable-storage-sense-temp-cleanup.json"
-    },
-    {
-      "tweak_id": "system.disable-store-open-with",
-      "host_exit": 0,
-      "execution_exit": 0,
-      "payload_status": "completed",
-      "report_app_success": true,
-      "report_success": true,
-      "report_status": "ok",
-      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
-      "report_contract_status": "ok",
-      "report_contract_summary": "QA card snapshot contract passed.",
-      "report_contract_failures": [],
-      "report_card_present": true,
-      "report_card_has_claim_boundary": true,
-      "report_card_present_fields": [
-        "TweakId",
-        "Name",
-        "Category",
-        "EvidenceClass",
-        "ResearchStatus",
-        "RollbackSnapshotState",
-        "HasClaimBoundary",
-        "WhatWeKnowSummary",
-        "WhatWeDoNotClaimSummary",
-        "ProofLanes"
-      ],
-      "report_card_missing_fields": [],
-      "report_card_proof_lanes": [
-        "docs",
-        "runtime",
-        "source",
-        "rollback"
-      ],
-      "report_card_missing_proof_lanes": [],
-      "report": {
-        "TweakId": "system.disable-store-open-with",
-        "TweakName": "Store in Open With",
-        "Success": true,
-        "Status": "ok",
-        "Summary": "Apply/verify path completed and rollback restored the tweak.",
-        "RollbackRequested": true,
-        "Card": {
-          "TweakId": "system.disable-store-open-with",
-          "Name": "Store in Open With",
-          "Category": "System",
-          "Description": "When Windows cannot find an app for a file type, it can offer a Store-based option in the Open With dialog. This policy decides whether that Store option is available.",
-          "FriendlyDescription": "When Windows cannot find an app for a file type, it can offer a Store-based option in the Open With dialog. This policy decides whether that Store option is available.",
-          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer\\NoUseStoreOpenWith",
-          "EvidenceClass": "A",
-          "EvidenceClassTitle": "Cross-Layer Verified",
-          "ResearchStatus": "PROMOTED",
-          "IsMutationAllowed": true,
-          "RollbackSnapshotState": "ready",
-          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
-          "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: When Windows cannot find an app for a file type, it can offer a Store-based option in the Open With dialog. This policy decides whether that Store option is available. Evidence: Local official ADMX defines the exact machine-policy key and value name; local ADML confirms that enabling the policy removes the Store entry from the Open With dialog. Rollback: Rollback: Verified via record-restore-story.",
-          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
-          "ProofLanes": [
-            {
-              "Key": "docs",
-              "Label": "DOCS",
-              "State": "ready",
-              "Summary": "Local official ADMX defines the exact machine-policy key and value name; local ADML confirms that enabling the policy removes the Store entry from the Open With dialog.",
-              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/ICM.admx"
-            },
-            {
-              "Key": "runtime",
-              "Label": "RUNTIME",
-              "State": "ready",
-              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
-              "Source": ""
-            },
-            {
-              "Key": "source",
-              "Label": "SOURCE",
-              "State": "ready",
-              "Summary": "No upstream nohuto source link is attached to this record.",
-              "Source": ""
-            },
-            {
-              "Key": "rollback",
-              "Label": "ROLLBACK",
-              "State": "ready",
-              "Summary": "Rollback: Verified via record-restore-story.",
-              "Source": "record-restore-story"
-            }
-          ],
-          "ReferenceLinks": [
-            {
-              "Title": "Docs: Details (missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
-              "Kind": "Details"
-            },
-            {
-              "Title": "Docs: System (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\system\\system.md",
-              "Kind": "Docs"
-            }
-          ]
-        },
-        "Stages": [
-          {
-            "Stage": "detect-before",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Store option blocked'.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Store option blocked",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": false,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Store option blocked'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer\\NoUseStoreOpenWith: missing -> 1",
-                "TimestampText": "01:07:54"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "apply",
-            "AppliedStatus": "Applied",
-            "StatusMessage": "Run completed.",
-            "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Store option blocked",
-            "TargetValue": "Store option blocked",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Store option blocked'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer\\NoUseStoreOpenWith: missing -> 1",
-                "TimestampText": "01:07:54"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Applied preset 'Store option blocked'.",
-                "TimestampText": "01:07:57"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified preset 'Store option blocked'.",
-                "TimestampText": "01:07:57"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Not required",
-                "Message": "Step not executed.",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "rollback",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Rolled back registry values.",
-            "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Store option blocked",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Store option blocked'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer\\NoUseStoreOpenWith: missing -> 1",
-                "TimestampText": "01:07:54"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Applied preset 'Store option blocked'.",
-                "TimestampText": "01:07:57"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified preset 'Store option blocked'.",
-                "TimestampText": "01:07:57"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "01:07:57"
-              }
-            ]
-          },
-          {
-            "Stage": "detect-after",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Store option blocked'.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Store option blocked",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Store option blocked'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer\\NoUseStoreOpenWith: missing -> 1",
-                "TimestampText": "01:07:57"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Applied preset 'Store option blocked'.",
-                "TimestampText": "01:07:57"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified preset 'Store option blocked'.",
-                "TimestampText": "01:07:57"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "01:07:57"
-              }
-            ]
-          }
-        ],
-        "StartedAtUtc": "2026-05-07T08:07:54.2724854+00:00",
-        "CompletedAtUtc": "2026-05-07T08:07:57.3702558+00:00"
-      },
-      "qa_tweak_id": "system.disable-store-open-with",
-      "candidate_id": "system.disable-store-open-with",
-      "card_name": "Store in Open With",
-      "documentation": "research/records/system.disable-store-open-with.json"
-    },
-    {
-      "tweak_id": "system.dwm-disable-overlay-min-fps",
-      "host_exit": 0,
-      "execution_exit": 0,
-      "payload_status": "completed",
-      "report_app_success": true,
-      "report_success": true,
-      "report_status": "ok",
-      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
-      "report_contract_status": "ok",
-      "report_contract_summary": "QA card snapshot contract passed.",
-      "report_contract_failures": [],
-      "report_card_present": true,
-      "report_card_has_claim_boundary": true,
-      "report_card_present_fields": [
-        "TweakId",
-        "Name",
-        "Category",
-        "EvidenceClass",
-        "ResearchStatus",
-        "RollbackSnapshotState",
-        "HasClaimBoundary",
-        "WhatWeKnowSummary",
-        "WhatWeDoNotClaimSummary",
-        "ProofLanes"
-      ],
-      "report_card_missing_fields": [],
-      "report_card_proof_lanes": [
-        "docs",
-        "runtime",
-        "source",
-        "rollback"
-      ],
-      "report_card_missing_proof_lanes": [],
-      "report": {
-        "TweakId": "system.dwm-disable-overlay-min-fps",
-        "TweakName": "DWM Overlay Minimum FPS Check",
-        "Success": true,
-        "Status": "ok",
-        "Summary": "Apply/verify path completed and rollback restored the tweak.",
-        "RollbackRequested": true,
-        "Card": {
-          "TweakId": "system.dwm-disable-overlay-min-fps",
-          "Name": "DWM Overlay Minimum FPS Check",
-          "Category": "System",
-          "Description": "Windows can use hardware overlays for some content, and one of the checks looks at how fast the surface is animating. This setting turns that minimum-FPS check off.",
-          "FriendlyDescription": "Windows can use hardware overlays for some content, and one of the checks looks at how fast the surface is animating. This setting turns that minimum-FPS check off.",
-          "RegistryPath": "HKLM\\SOFTWARE\\Microsoft\\Windows\\Dwm\\OverlayMinFPS",
-          "EvidenceClass": "A",
-          "EvidenceClassTitle": "Cross-Layer Verified",
-          "ResearchStatus": "PROMOTED",
-          "IsMutationAllowed": true,
-          "RollbackSnapshotState": "ready",
-          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
-          "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Windows can use hardware overlays for some content, and one of the checks looks at how fast the surface is animating. This setting turns that minimum-FPS check off. Evidence: Microsoft Learn documents the exact DWM runtime path and explains that setting OverlayMinFPS to 0 disables the minimum frame-rate check used for overlay assignment. Rollback: Rollback: Verified via record-restore-story.",
-          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
-          "ProofLanes": [
-            {
-              "Key": "docs",
-              "Label": "DOCS",
-              "State": "ready",
-              "Summary": "Microsoft Learn documents the exact DWM runtime path and explains that setting OverlayMinFPS to 0 disables the minimum frame-rate check used for overlay assignment.",
-              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows/win32/dwm/registry-values"
-            },
-            {
-              "Key": "runtime",
-              "Label": "RUNTIME",
-              "State": "ready",
-              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
-              "Source": ""
-            },
-            {
-              "Key": "source",
-              "Label": "SOURCE",
-              "State": "ready",
-              "Summary": "No upstream nohuto source link is attached to this record.",
-              "Source": ""
-            },
-            {
-              "Key": "rollback",
-              "Label": "ROLLBACK",
-              "State": "ready",
-              "Summary": "Rollback: Verified via record-restore-story.",
-              "Source": "record-restore-story"
-            }
-          ],
-          "ReferenceLinks": [
-            {
-              "Title": "Docs: Details (missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
-              "Kind": "Details"
-            },
-            {
-              "Title": "Docs: Win-Config",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\win-config\\batch-01.md#system.dwm-disable-overlay-min-fps",
-              "Kind": "Docs"
-            },
-            {
-              "Title": "Docs: System (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\system\\system.md",
-              "Kind": "Docs"
-            }
-          ]
-        },
-        "Stages": [
-          {
-            "Stage": "detect-before",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Value not set.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Not set",
-            "TargetValue": "0 (0x0)",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": false,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Value not set.",
-                "TimestampText": "01:08:03"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "apply",
-            "AppliedStatus": "Applied",
-            "StatusMessage": "Run completed.",
-            "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "0 (0x0)",
-            "TargetValue": "0 (0x0)",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Value not set.",
-                "TimestampText": "01:08:03"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Set value to 0.",
-                "TimestampText": "01:08:06"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified desired value.",
-                "TimestampText": "01:08:06"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Not required",
-                "Message": "Step not executed.",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "rollback",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Removed value to restore default.",
-            "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "0 (0x0)",
-            "TargetValue": "0 (0x0)",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Value not set.",
-                "TimestampText": "01:08:03"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Set value to 0.",
-                "TimestampText": "01:08:06"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified desired value.",
-                "TimestampText": "01:08:06"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Removed value to restore default.",
-                "TimestampText": "01:08:06"
-              }
-            ]
-          },
-          {
-            "Stage": "detect-after",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Value not set.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Not set",
-            "TargetValue": "0 (0x0)",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Value not set.",
-                "TimestampText": "01:08:06"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Set value to 0.",
-                "TimestampText": "01:08:06"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified desired value.",
-                "TimestampText": "01:08:06"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Removed value to restore default.",
-                "TimestampText": "01:08:06"
-              }
-            ]
-          }
-        ],
-        "StartedAtUtc": "2026-05-07T08:08:03.6722288+00:00",
-        "CompletedAtUtc": "2026-05-07T08:08:06.765979+00:00"
-      },
-      "qa_tweak_id": "system.dwm-disable-overlay-min-fps",
-      "candidate_id": "system.dwm-disable-overlay-min-fps",
-      "card_name": "DWM Overlay Minimum FPS Check",
-      "documentation": "research/records/system.dwm-disable-overlay-min-fps.json"
+      "qa_tweak_id": "power.disable-network-power-saving.policy",
+      "candidate_id": "power.disable-network-power-saving.policy",
+      "card_name": "Network Power and Multimedia Responsiveness",
+      "documentation": "research/records/power.disable-network-power-saving.policy.review.json"
     }
   ],
   "summary": {
-    "planned_count": 5,
-    "planned_apply_allowed_count": 5,
-    "live_success_count": 5,
+    "planned_count": 1,
+    "planned_apply_allowed_count": 1,
+    "live_success_count": 1,
     "live_failure_count": 0,
     "categories": [
-      "System"
+      "Power"
     ]
   }
 }
