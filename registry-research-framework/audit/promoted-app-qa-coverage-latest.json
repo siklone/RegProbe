@@ -1,16 +1,16 @@
 {
-  "generated_utc": "2026-05-07T17:15:34Z",
-  "history_entry_count": 66,
+  "generated_utc": "2026-05-07T17:17:12Z",
+  "history_entry_count": 67,
   "catalog_candidate_count": 242,
-  "covered_count": 201,
-  "uncovered_count": 41,
+  "covered_count": 205,
+  "uncovered_count": 37,
   "summary": {
-    "coverage_percent": 83.06,
+    "coverage_percent": 84.71,
     "covered_categories": {
       "Audio": 3,
       "Cleanup": 1,
       "Developer": 7,
-      "Explorer": 13,
+      "Explorer": 17,
       "Network": 24,
       "Notifications": 5,
       "Performance": 3,
@@ -23,7 +23,6 @@
     },
     "uncovered_categories": {
       "Developer": 2,
-      "Explorer": 4,
       "Network": 4,
       "Privacy": 14,
       "Security": 4,
@@ -32,51 +31,6 @@
     }
   },
   "recommended_next_batches": [
-    {
-      "category": "Explorer",
-      "covered_count": 13,
-      "uncovered_count": 4,
-      "coverage_percent": 76.47,
-      "batch_size": 4,
-      "tweak_ids": [
-        "explorer.show-info-tips",
-        "explorer.show-protected-operating-system-files",
-        "explorer.show-recent-items",
-        "explorer.show-type-overlay"
-      ],
-      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id explorer.show-info-tips --id explorer.show-protected-operating-system-files --id explorer.show-recent-items --id explorer.show-type-overlay",
-      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id explorer.show-info-tips --id explorer.show-protected-operating-system-files --id explorer.show-recent-items --id explorer.show-type-overlay --run-kvm --json",
-      "candidates": [
-        {
-          "tweak_id": "explorer.show-info-tips",
-          "record_id": "explorer.show-info-tips",
-          "category": "Explorer",
-          "name": "Show Explorer Info Tips",
-          "documentation": "research/records/explorer.show-info-tips.review.json"
-        },
-        {
-          "tweak_id": "explorer.show-protected-operating-system-files",
-          "record_id": "explorer.show-protected-operating-system-files",
-          "category": "Explorer",
-          "name": "Show Protected Operating System Files",
-          "documentation": "research/records/explorer.show-protected-operating-system-files.review.json"
-        },
-        {
-          "tweak_id": "explorer.show-recent-items",
-          "record_id": "explorer.show-recent-items",
-          "category": "Explorer",
-          "name": "Show Recent Items In Home",
-          "documentation": "research/records/explorer.show-recent-items.review.json"
-        },
-        {
-          "tweak_id": "explorer.show-type-overlay",
-          "record_id": "explorer.show-type-overlay",
-          "category": "Explorer",
-          "name": "Display File Icons On Thumbnails",
-          "documentation": "research/records/explorer.show-type-overlay.review.json"
-        }
-      ]
-    },
     {
       "category": "Developer",
       "covered_count": 7,
@@ -254,6 +208,51 @@
           "category": "Security",
           "name": "User Account Control Prompting Profile",
           "documentation": "research/records/security.uac-never-notify.json"
+        }
+      ]
+    },
+    {
+      "category": "Network",
+      "covered_count": 24,
+      "uncovered_count": 4,
+      "coverage_percent": 85.71,
+      "batch_size": 4,
+      "tweak_ids": [
+        "network.smb-require-dialect-3_1_1",
+        "network.smb-require-signing-client",
+        "network.smb-require-signing-server",
+        "network.smb-set-cipher-suite-order"
+      ],
+      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id network.smb-require-dialect-3_1_1 --id network.smb-require-signing-client --id network.smb-require-signing-server --id network.smb-set-cipher-suite-order",
+      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id network.smb-require-dialect-3_1_1 --id network.smb-require-signing-client --id network.smb-require-signing-server --id network.smb-set-cipher-suite-order --run-kvm --json",
+      "candidates": [
+        {
+          "tweak_id": "network.smb-require-dialect-3_1_1",
+          "record_id": "network.smb-require-dialect-3_1_1",
+          "category": "Network",
+          "name": "Require SMB Dialect 3.1.1",
+          "documentation": "research/records/network.smb-require-dialect-3_1_1.review.json"
+        },
+        {
+          "tweak_id": "network.smb-require-signing-client",
+          "record_id": "network.smb-require-signing-client",
+          "category": "Network",
+          "name": "SMB Client Signing Requirement",
+          "documentation": "research/records/network.smb-require-signing-client.json"
+        },
+        {
+          "tweak_id": "network.smb-require-signing-server",
+          "record_id": "network.smb-require-signing-server",
+          "category": "Network",
+          "name": "SMB Server Signing Requirement",
+          "documentation": "research/records/network.smb-require-signing-server.json"
+        },
+        {
+          "tweak_id": "network.smb-set-cipher-suite-order",
+          "record_id": "network.smb-set-cipher-suite-order",
+          "category": "Network",
+          "name": "SMB Cipher Suite Order",
+          "documentation": "research/records/network.smb-set-cipher-suite-order.review.json"
         }
       ]
     }
@@ -458,12 +457,48 @@
       "latest_report_status": "ok"
     },
     {
+      "tweak_id": "explorer.show-info-tips",
+      "qa_tweak_id": "explorer.show-info-tips",
+      "candidate_id": "explorer.show-info-tips",
+      "category": "Explorer",
+      "name": "Show Explorer Info Tips",
+      "documentation": "research/records/explorer.show-info-tips.review.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "explorer.show-protected-operating-system-files",
+      "qa_tweak_id": "explorer.show-protected-operating-system-files",
+      "candidate_id": "explorer.show-protected-operating-system-files",
+      "category": "Explorer",
+      "name": "Show Protected Operating System Files",
+      "documentation": "research/records/explorer.show-protected-operating-system-files.review.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "explorer.show-recent-items",
+      "qa_tweak_id": "explorer.show-recent-items",
+      "candidate_id": "explorer.show-recent-items",
+      "category": "Explorer",
+      "name": "Show Recent Items In Home",
+      "documentation": "research/records/explorer.show-recent-items.review.json",
+      "latest_report_status": "ok"
+    },
+    {
       "tweak_id": "explorer.show-status-bar",
       "qa_tweak_id": "explorer.show-status-bar",
       "candidate_id": "explorer.show-status-bar",
       "category": "Explorer",
       "name": "Show Status Bar",
       "documentation": "research/records/explorer.show-status-bar.review.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "explorer.show-type-overlay",
+      "qa_tweak_id": "explorer.show-type-overlay",
+      "candidate_id": "explorer.show-type-overlay",
+      "category": "Explorer",
+      "name": "Display File Icons On Thumbnails",
+      "documentation": "research/records/explorer.show-type-overlay.review.json",
       "latest_report_status": "ok"
     },
     {
@@ -2083,34 +2118,6 @@
       "category": "Developer",
       "name": "WSL 2 Memory Limit",
       "documentation": "research/records/developer.wsl2-memory.json"
-    },
-    {
-      "tweak_id": "explorer.show-info-tips",
-      "record_id": "explorer.show-info-tips",
-      "category": "Explorer",
-      "name": "Show Explorer Info Tips",
-      "documentation": "research/records/explorer.show-info-tips.review.json"
-    },
-    {
-      "tweak_id": "explorer.show-protected-operating-system-files",
-      "record_id": "explorer.show-protected-operating-system-files",
-      "category": "Explorer",
-      "name": "Show Protected Operating System Files",
-      "documentation": "research/records/explorer.show-protected-operating-system-files.review.json"
-    },
-    {
-      "tweak_id": "explorer.show-recent-items",
-      "record_id": "explorer.show-recent-items",
-      "category": "Explorer",
-      "name": "Show Recent Items In Home",
-      "documentation": "research/records/explorer.show-recent-items.review.json"
-    },
-    {
-      "tweak_id": "explorer.show-type-overlay",
-      "record_id": "explorer.show-type-overlay",
-      "category": "Explorer",
-      "name": "Display File Icons On Thumbnails",
-      "documentation": "research/records/explorer.show-type-overlay.review.json"
     },
     {
       "tweak_id": "network.smb-require-dialect-3_1_1",

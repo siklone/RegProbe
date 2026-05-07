@@ -1,18 +1,18 @@
 # Promoted App QA Coverage
 
-- Generated UTC: 2026-05-07T17:15:34Z
-- History entries: 66
+- Generated UTC: 2026-05-07T17:17:12Z
+- History entries: 67
 - Promoted app-QA candidates: 242
-- Covered: 201
-- Uncovered: 41
-- Coverage: 83.06%
+- Covered: 205
+- Uncovered: 37
+- Coverage: 84.71%
 
 ## Covered Categories
 
 - Audio: 3
 - Cleanup: 1
 - Developer: 7
-- Explorer: 13
+- Explorer: 17
 - Network: 24
 - Notifications: 5
 - Performance: 3
@@ -26,7 +26,6 @@
 ## Uncovered Categories
 
 - Developer: 2
-- Explorer: 4
 - Network: 4
 - Privacy: 14
 - Security: 4
@@ -35,9 +34,6 @@
 
 ## Recommended Next Batches
 
-- Explorer: 4 uncovered cards | coverage 76.47%
-  command: `dotnet run --project cli/cli.csproj -- research qa-batch --id explorer.show-info-tips --id explorer.show-protected-operating-system-files --id explorer.show-recent-items --id explorer.show-type-overlay`
-  live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id explorer.show-info-tips --id explorer.show-protected-operating-system-files --id explorer.show-recent-items --id explorer.show-type-overlay --run-kvm --json`
 - Developer: 2 uncovered cards | coverage 77.78%
   command: `dotnet run --project cli/cli.csproj -- research qa-batch --id developer.windows-dev-mode --id developer.wsl2-memory`
   live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id developer.windows-dev-mode --id developer.wsl2-memory --run-kvm --json`
@@ -50,15 +46,14 @@
 - Security: 4 uncovered cards | coverage 80.95%
   command: `dotnet run --project cli/cli.csproj -- research qa-batch --id security.powershell-unrestricted --id security.threat-file-hash-logging --id security.trusted-path-credential-prompting --id security.uac-never-notify`
   live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id security.powershell-unrestricted --id security.threat-file-hash-logging --id security.trusted-path-credential-prompting --id security.uac-never-notify --run-kvm --json`
+- Network: 4 uncovered cards | coverage 85.71%
+  command: `dotnet run --project cli/cli.csproj -- research qa-batch --id network.smb-require-dialect-3_1_1 --id network.smb-require-signing-client --id network.smb-require-signing-server --id network.smb-set-cipher-suite-order`
+  live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id network.smb-require-dialect-3_1_1 --id network.smb-require-signing-client --id network.smb-require-signing-server --id network.smb-set-cipher-suite-order --run-kvm --json`
 
 ## Remaining Uncovered Sample
 
 - `developer.windows-dev-mode` | Windows Developer Mode | Developer
 - `developer.wsl2-memory` | WSL 2 Memory Limit | Developer
-- `explorer.show-info-tips` | Show Explorer Info Tips | Explorer
-- `explorer.show-protected-operating-system-files` | Show Protected Operating System Files | Explorer
-- `explorer.show-recent-items` | Show Recent Items In Home | Explorer
-- `explorer.show-type-overlay` | Display File Icons On Thumbnails | Explorer
 - `network.smb-require-dialect-3_1_1` | Require SMB Dialect 3.1.1 | Network
 - `network.smb-require-signing-client` | SMB Client Signing Requirement | Network
 - `network.smb-require-signing-server` | SMB Server Signing Requirement | Network
@@ -73,3 +68,7 @@
 - `privacy.hide-recommended-personalized-sites` | Start Personalized Site Recommendations | Privacy
 - `privacy.hide-recommended-personalized-sites-user` | Start Personalized Site Recommendations (Current User) | Privacy
 - `privacy.hide-recommended-section` | Start Menu Recommended Section | Privacy
+- `privacy.hide-username-at-signin` | Display of Username During Sign-In | Privacy
+- `privacy.limit-diagnostic-log-collection` | Advanced Diagnostic Log Collection | Privacy
+- `privacy.limit-dump-collection` | Diagnostic Dump Collection | Privacy
+- `privacy.troubleshooter-dont-run` | Recommended Troubleshooting for Known Problems | Privacy

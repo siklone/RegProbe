@@ -1,50 +1,43 @@
 # Promoted App QA Batch
 
 - Status: PASS
-- Generated UTC: 2026-05-07T17:15:34Z
+- Generated UTC: 2026-05-07T17:17:12Z
 - Catalog candidates: 242
-- Selected candidates: 5
-- Planned apply-allowed candidates: 5
-- Live successes: 5
+- Selected candidates: 4
+- Planned apply-allowed candidates: 4
+- Live successes: 4
 - Live failures: 0
 
 ## Selected Candidates
 
-- `privacy.disable-rsop-logging` | Resultant Set of Policy Logging | Privacy
-  docs: `research/records/privacy.disable-rsop-logging.json`
+- `explorer.show-info-tips` | Show Explorer Info Tips | Explorer
+  docs: `research/records/explorer.show-info-tips.review.json`
   rollback: default=true | previous=true
   card snapshot: claim_boundary=true | fields=TweakId, Name, Category, EvidenceClass, ResearchStatus, RollbackSnapshotState, HasClaimBoundary, WhatWeKnowSummary, WhatWeDoNotClaimSummary, ProofLanes | lanes=docs, runtime, source, rollback
-- `privacy.disable-search-box-suggestions` | File Explorer Search Box Suggestions | Privacy
-  docs: `research/records/privacy.disable-search-box-suggestions.json`
+- `explorer.show-protected-operating-system-files` | Show Protected Operating System Files | Explorer
+  docs: `research/records/explorer.show-protected-operating-system-files.review.json`
   rollback: default=true | previous=true
   card snapshot: claim_boundary=true | fields=TweakId, Name, Category, EvidenceClass, ResearchStatus, RollbackSnapshotState, HasClaimBoundary, WhatWeKnowSummary, WhatWeDoNotClaimSummary, ProofLanes | lanes=docs, runtime, source, rollback
-- `privacy.disable-sensors` | Windows Sensors | Privacy
-  docs: `research/records/privacy.disable-sensors.json`
+- `explorer.show-recent-items` | Show Recent Items In Home | Explorer
+  docs: `research/records/explorer.show-recent-items.review.json`
   rollback: default=true | previous=true
   card snapshot: claim_boundary=true | fields=TweakId, Name, Category, EvidenceClass, ResearchStatus, RollbackSnapshotState, HasClaimBoundary, WhatWeKnowSummary, WhatWeDoNotClaimSummary, ProofLanes | lanes=docs, runtime, source, rollback
-- `privacy.disable-steps-recorder` | Steps Recorder | Privacy
-  docs: `research/records/privacy.disable-steps-recorder.json`
-  rollback: default=true | previous=true
-  card snapshot: claim_boundary=true | fields=TweakId, Name, Category, EvidenceClass, ResearchStatus, RollbackSnapshotState, HasClaimBoundary, WhatWeKnowSummary, WhatWeDoNotClaimSummary, ProofLanes | lanes=docs, runtime, source, rollback
-- `privacy.disable-suggestions.policy` | Windows Suggestion Surfaces Policy Group | Privacy
-  docs: `research/records/privacy.disable-suggestions.policy.review.json`
+- `explorer.show-type-overlay` | Display File Icons On Thumbnails | Explorer
+  docs: `research/records/explorer.show-type-overlay.review.json`
   rollback: default=true | previous=true
   card snapshot: claim_boundary=true | fields=TweakId, Name, Category, EvidenceClass, ResearchStatus, RollbackSnapshotState, HasClaimBoundary, WhatWeKnowSummary, WhatWeDoNotClaimSummary, ProofLanes | lanes=docs, runtime, source, rollback
 
 ## Live Results
 
-- `privacy.disable-rsop-logging` | success=true | status=ok
+- `explorer.show-info-tips` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
   card contract: ok | claim_boundary=true | lanes=docs, runtime, source, rollback
-- `privacy.disable-search-box-suggestions` | success=true | status=ok
+- `explorer.show-protected-operating-system-files` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
   card contract: ok | claim_boundary=true | lanes=docs, runtime, source, rollback
-- `privacy.disable-sensors` | success=true | status=ok
+- `explorer.show-recent-items` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
   card contract: ok | claim_boundary=true | lanes=docs, runtime, source, rollback
-- `privacy.disable-steps-recorder` | success=true | status=ok
-  summary: Apply/verify path completed and rollback restored the tweak.
-  card contract: ok | claim_boundary=true | lanes=docs, runtime, source, rollback
-- `privacy.disable-suggestions.policy` | success=true | status=ok
+- `explorer.show-type-overlay` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
   card contract: ok | claim_boundary=true | lanes=docs, runtime, source, rollback
