@@ -238,6 +238,7 @@ public sealed class CommandAllowlist
         AddRegSzRule(regAllowlist, @"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games", "Scheduling Category", "High", "Medium", "Normal");
         AddRegSzRule(regAllowlist, @"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games", "SFIO Priority", "High", "Normal");
         AddRegDwordRule(regAllowlist, @"HKLM\System\CurrentControlSet\Control\Power\PowerThrottling", "PowerThrottlingOff", "0", "1", "2");
+        AddRegSzRule(regAllowlist, @"HKLM\SYSTEM\CurrentControlSet\Control", "WaitToKillServiceTimeout", "2500", "5000");
         AddRegDwordRule(regAllowlist, @"HKLM\SYSTEM\CurrentControlSet\Control\CrashControl", "AutoReboot", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\SYSTEM\CurrentControlSet\Control\CrashControl", "DisplayParameters", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power", "HiberbootEnabled", "0", "1", "2");

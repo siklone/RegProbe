@@ -1,10 +1,9 @@
 {
-  "generated_utc": "2026-05-07T18:13:19Z",
+  "generated_utc": "2026-05-07T18:16:56Z",
   "status": "PASS",
   "selection": {
     "requested_ids": [
-      "visibility.disable-window-animations",
-      "visibility.hide-people-bar"
+      "system.wait-to-kill-service-timeout"
     ],
     "requested_categories": [],
     "limit_per_category": 1,
@@ -19,88 +18,29 @@
     "kvm_batch_runner": "scripts/vm-kvm/run-guest-app-tweak-qa-batch.py"
   },
   "catalog_candidate_count": 242,
-  "selected_candidate_count": 2,
+  "selected_candidate_count": 1,
   "errors": [],
   "candidates": [
     {
-      "tweak_id": "visibility.disable-window-animations",
-      "qa_tweak_id": "visibility.disable-window-animations",
-      "candidate_id": "visibility.disable-window-animations",
-      "record_id": "visibility.disable-window-animations",
-      "category": "Visibility",
-      "name": "Window Animations",
-      "documentation": "research/records/visibility.disable-window-animations.json",
+      "tweak_id": "system.wait-to-kill-service-timeout",
+      "qa_tweak_id": "system.wait-to-kill-service-timeout",
+      "candidate_id": "system.wait-to-kill-service-timeout",
+      "record_id": "system.wait-to-kill-service-timeout",
+      "category": "System",
+      "name": "Service Shutdown Timeout",
+      "documentation": "research/records/system.wait-to-kill-service-timeout.review.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect visibility.disable-window-animations",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect system.wait-to-kill-service-timeout",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'visibility.disable-window-animations' --qa-output 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-window-animations.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'visibility.disable-window-animations' --qa-output 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-window-animations.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'visibility.disable-window-animations' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-window-animations.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'visibility.disable-window-animations' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-window-animations.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'visibility.disable-window-animations'"
-      },
-      "expected_report": {
-        "success": true,
-        "status": "ok",
-        "rollback_requested": true,
-        "required_stages": [
-          "detect-before",
-          "apply",
-          "rollback",
-          "detect-after"
-        ],
-        "required_card_snapshot": {
-          "required_fields": [
-            "TweakId",
-            "Name",
-            "Category",
-            "EvidenceClass",
-            "ResearchStatus",
-            "RollbackSnapshotState",
-            "HasClaimBoundary",
-            "WhatWeKnowSummary",
-            "WhatWeDoNotClaimSummary",
-            "ProofLanes"
-          ],
-          "required_proof_lanes": [
-            "docs",
-            "runtime",
-            "source",
-            "rollback"
-          ],
-          "claim_boundary_required": true
-        },
-        "required_stage_assertions": [
-          "apply stage reports a successful apply story",
-          "rollback stage reports a successful rollback story",
-          "detect-after is present"
-        ]
-      }
-    },
-    {
-      "tweak_id": "visibility.hide-people-bar",
-      "qa_tweak_id": "visibility.hide-people-bar",
-      "candidate_id": "visibility.hide-people-bar",
-      "record_id": "visibility.hide-people-bar",
-      "category": "Visibility",
-      "name": "People Bar on the Taskbar",
-      "documentation": "research/records/visibility.hide-people-bar.json",
-      "promotion_state": "promoted",
-      "apply_allowed": true,
-      "restore_default_supported": true,
-      "restore_previous_supported": true,
-      "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect visibility.hide-people-bar",
-        "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'visibility.hide-people-bar' --qa-output 'C:\\Tools\\ValidationController\\smoke\\visibility.hide-people-bar.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'visibility.hide-people-bar' --qa-output 'C:\\Tools\\ValidationController\\smoke\\visibility.hide-people-bar.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'visibility.hide-people-bar' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\visibility.hide-people-bar.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'visibility.hide-people-bar' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\visibility.hide-people-bar.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'visibility.hide-people-bar'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.wait-to-kill-service-timeout' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.wait-to-kill-service-timeout.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.wait-to-kill-service-timeout' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.wait-to-kill-service-timeout.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.wait-to-kill-service-timeout' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.wait-to-kill-service-timeout.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.wait-to-kill-service-timeout' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.wait-to-kill-service-timeout.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'system.wait-to-kill-service-timeout'"
       },
       "expected_report": {
         "success": true,
@@ -143,7 +83,7 @@
   ],
   "run_results": [
     {
-      "tweak_id": "visibility.disable-window-animations",
+      "tweak_id": "system.wait-to-kill-service-timeout",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -180,19 +120,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "visibility.disable-window-animations",
-        "TweakName": "Window Animations",
+        "TweakId": "system.wait-to-kill-service-timeout",
+        "TweakName": "Service Shutdown Timeout",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "visibility.disable-window-animations",
-          "Name": "Window Animations",
-          "Category": "Visibility",
-          "Description": "Windows can animate windows when they open, close, minimize, and restore. This policy decides whether those window animations are allowed.",
-          "FriendlyDescription": "Windows can animate windows when they open, close, minimize, and restore. This policy decides whether those window animations are allowed.",
-          "RegistryPath": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DWM\\DisallowAnimations",
+          "TweakId": "system.wait-to-kill-service-timeout",
+          "Name": "Service Shutdown Timeout",
+          "Category": "System",
+          "Description": "Windows waits a set amount of time for a service to stop cleanly during shutdown. Lowering that timeout reduces how long Windows waits, but it also gives services less time to flush state and clean up.",
+          "FriendlyDescription": "Windows waits a set amount of time for a service to stop cleanly during shutdown. Lowering that timeout reduces how long Windows waits, but it also gives services less time to flush state and clean up.",
+          "RegistryPath": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\WaitToKillServiceTimeout",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -200,22 +140,22 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Windows can animate windows when they open, close, minimize, and restore. This policy decides whether those window animations are allowed. Evidence: The local official Microsoft ADMX file names the same DWM machine policy surface used by the app. The paired ADML help text documents that enabling the policy turns window animations off and disabling or not configuring it keeps them on. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: Windows waits a set amount of time for a service to stop cleanly during shutdown. Lowering that timeout reduces how long Windows waits, but it also gives services less time to flush state and clean up. Evidence: The reversible VM probe confirmed the current baseline, the app write, and a clean restore. Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "The local official Microsoft ADMX file names the same DWM machine policy surface used by the app. The paired ADML help text documents that enabling the policy turns window animations off and disabling or not configuring it keeps them on.",
-              "Source": "Validation proof source: evidence/files/external/c/WINDOWS/PolicyDefinitions/DWM.admx"
+              "Summary": "The reversible VM probe confirmed the current baseline, the app write, and a clean restore.",
+              "Source": "Validation proof source: evidence/files/vm-tooling-staging/wait-to-kill-service-timeout-probe-20260325-103117/wait-to-kill-service-timeout-probe.txt"
             },
             {
               "Key": "runtime",
               "Label": "RUNTIME",
               "State": "ready",
-              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
-              "Source": ""
+              "Summary": "The VM probe captured ORIGINAL=5000, AFTER=2500, and RESTORED=5000 for HKLM\\SYSTEM\\CurrentControlSet\\Control\\WaitToKillServiceTimeout.",
+              "Source": "Win25H2Clean reversible probe for WaitToKillServiceTimeout: evidence/files/vm-tooling-staging/wait-to-kill-service-timeout-probe-20260325-103117/wait-to-kill-service-timeout-probe.txt"
             },
             {
               "Key": "source",
@@ -239,8 +179,8 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Visibility",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\visibility\\visibility.md#visibility.disable-window-animations",
+              "Title": "Docs: System",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\system\\system.md#system.wait-to-kill-service-timeout",
               "Kind": "Docs"
             }
           ]
@@ -249,10 +189,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Window animations blocked'.",
+            "StatusMessage": "Current option is 'Observed Win25H2Clean baseline'. Selected option is 'Current app profile'.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Window animations blocked",
+            "CurrentValue": "Observed Win25H2Clean baseline",
+            "TargetValue": "Current app profile",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -261,8 +201,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Window animations blocked'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DWM\\DisallowAnimations: missing -> 1",
-                "TimestampText": "11:13:23"
+                "Message": "Current option is 'Observed Win25H2Clean baseline'. Selected option is 'Current app profile'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\WaitToKillServiceTimeout: 5000 -> 2500",
+                "TimestampText": "11:17:00"
               },
               {
                 "Action": "Apply",
@@ -289,8 +229,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Window animations blocked",
-            "TargetValue": "Window animations blocked",
+            "CurrentValue": "Current app profile",
+            "TargetValue": "Current app profile",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -299,20 +239,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Window animations blocked'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DWM\\DisallowAnimations: missing -> 1",
-                "TimestampText": "11:13:23"
+                "Message": "Current option is 'Observed Win25H2Clean baseline'. Selected option is 'Current app profile'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\WaitToKillServiceTimeout: 5000 -> 2500",
+                "TimestampText": "11:17:00"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Window animations blocked'.",
-                "TimestampText": "11:13:26"
+                "Message": "Applied preset 'Current app profile'.",
+                "TimestampText": "11:17:13"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Window animations blocked'.",
-                "TimestampText": "11:13:26"
+                "Message": "Verified preset 'Current app profile'.",
+                "TimestampText": "11:17:13"
               },
               {
                 "Action": "Rollback",
@@ -327,8 +267,8 @@
             "AppliedStatus": "NotApplied",
             "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Window animations blocked",
+            "CurrentValue": "Observed Win25H2Clean baseline",
+            "TargetValue": "Current app profile",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -337,36 +277,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Window animations blocked'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DWM\\DisallowAnimations: missing -> 1",
-                "TimestampText": "11:13:23"
+                "Message": "Current option is 'Observed Win25H2Clean baseline'. Selected option is 'Current app profile'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\WaitToKillServiceTimeout: 5000 -> 2500",
+                "TimestampText": "11:17:00"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Window animations blocked'.",
-                "TimestampText": "11:13:26"
+                "Message": "Applied preset 'Current app profile'.",
+                "TimestampText": "11:17:13"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Window animations blocked'.",
-                "TimestampText": "11:13:26"
+                "Message": "Verified preset 'Current app profile'.",
+                "TimestampText": "11:17:13"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "11:13:26"
+                "TimestampText": "11:17:13"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Window animations blocked'.",
+            "StatusMessage": "Current option is 'Observed Win25H2Clean baseline'. Selected option is 'Current app profile'.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Window animations blocked",
+            "CurrentValue": "Observed Win25H2Clean baseline",
+            "TargetValue": "Current app profile",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -375,311 +315,46 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Window animations blocked'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DWM\\DisallowAnimations: missing -> 1",
-                "TimestampText": "11:13:26"
+                "Message": "Current option is 'Observed Win25H2Clean baseline'. Selected option is 'Current app profile'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\WaitToKillServiceTimeout: 5000 -> 2500",
+                "TimestampText": "11:17:13"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Window animations blocked'.",
-                "TimestampText": "11:13:26"
+                "Message": "Applied preset 'Current app profile'.",
+                "TimestampText": "11:17:13"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Window animations blocked'.",
-                "TimestampText": "11:13:26"
+                "Message": "Verified preset 'Current app profile'.",
+                "TimestampText": "11:17:13"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "11:13:26"
+                "TimestampText": "11:17:13"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T18:13:23.692109+00:00",
-        "CompletedAtUtc": "2026-05-07T18:13:26.8658353+00:00"
+        "StartedAtUtc": "2026-05-07T18:17:00.0315954+00:00",
+        "CompletedAtUtc": "2026-05-07T18:17:13.2738127+00:00"
       },
-      "qa_tweak_id": "visibility.disable-window-animations",
-      "candidate_id": "visibility.disable-window-animations",
-      "card_name": "Window Animations",
-      "documentation": "research/records/visibility.disable-window-animations.json"
-    },
-    {
-      "tweak_id": "visibility.hide-people-bar",
-      "host_exit": 0,
-      "execution_exit": 0,
-      "payload_status": "completed",
-      "report_source": "stdout",
-      "report_parse_error": null,
-      "report_fetch_status": null,
-      "report_app_success": true,
-      "report_success": true,
-      "report_status": "ok",
-      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
-      "report_contract_status": "ok",
-      "report_contract_summary": "QA card snapshot contract passed.",
-      "report_contract_failures": [],
-      "report_card_present": true,
-      "report_card_has_claim_boundary": true,
-      "report_card_present_fields": [
-        "TweakId",
-        "Name",
-        "Category",
-        "EvidenceClass",
-        "ResearchStatus",
-        "RollbackSnapshotState",
-        "HasClaimBoundary",
-        "WhatWeKnowSummary",
-        "WhatWeDoNotClaimSummary",
-        "ProofLanes"
-      ],
-      "report_card_missing_fields": [],
-      "report_card_proof_lanes": [
-        "docs",
-        "runtime",
-        "source",
-        "rollback"
-      ],
-      "report_card_missing_proof_lanes": [],
-      "report": {
-        "TweakId": "visibility.hide-people-bar",
-        "TweakName": "People Bar on the Taskbar",
-        "Success": true,
-        "Status": "ok",
-        "Summary": "Apply/verify path completed and rollback restored the tweak.",
-        "RollbackRequested": true,
-        "Card": {
-          "TweakId": "visibility.hide-people-bar",
-          "Name": "People Bar on the Taskbar",
-          "Category": "Visibility",
-          "Description": "Windows used to offer a People Bar icon on the taskbar for quick contact access. This policy decides whether that feature is shown for the current user.",
-          "FriendlyDescription": "Windows used to offer a People Bar icon on the taskbar for quick contact access. This policy decides whether that feature is shown for the current user.",
-          "RegistryPath": "HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer\\HidePeopleBar",
-          "EvidenceClass": "A",
-          "EvidenceClassTitle": "Cross-Layer Verified",
-          "ResearchStatus": "PROMOTED",
-          "IsMutationAllowed": true,
-          "RollbackSnapshotState": "ready",
-          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
-          "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Windows used to offer a People Bar icon on the taskbar for quick contact access. This policy decides whether that feature is shown for the current user. Evidence: Local official ADMX defines the exact user-policy key and value name; local ADML confirms that enabling the policy removes the People Bar and disables the My People experience. Added nohuto mirror corroboration via nohuto-hidepeoplebar-admx. Rollback: Rollback: Verified via record-restore-story.",
-          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
-          "ProofLanes": [
-            {
-              "Key": "docs",
-              "Label": "DOCS",
-              "State": "ready",
-              "Summary": "Local official ADMX defines the exact user-policy key and value name; local ADML confirms that enabling the policy removes the People Bar and disables the My People experience. Added nohuto mirror corroboration via nohuto-hidepeoplebar-admx.",
-              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/StartMenu.admx"
-            },
-            {
-              "Key": "runtime",
-              "Label": "RUNTIME",
-              "State": "ready",
-              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
-              "Source": ""
-            },
-            {
-              "Key": "source",
-              "Label": "SOURCE",
-              "State": "ready",
-              "Summary": "No upstream nohuto source link is attached to this record.",
-              "Source": ""
-            },
-            {
-              "Key": "rollback",
-              "Label": "ROLLBACK",
-              "State": "ready",
-              "Summary": "Rollback: Verified via record-restore-story.",
-              "Source": "record-restore-story"
-            }
-          ],
-          "ReferenceLinks": [
-            {
-              "Title": "Docs: Details (missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
-              "Kind": "Details"
-            },
-            {
-              "Title": "Docs: Visibility",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\visibility\\visibility.md#visibility.hide-people-bar",
-              "Kind": "Docs"
-            }
-          ]
-        },
-        "Stages": [
-          {
-            "Stage": "detect-before",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'People Bar hidden'.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "People Bar hidden",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": false,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'People Bar hidden'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer\\HidePeopleBar: missing -> 1",
-                "TimestampText": "11:13:32"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "apply",
-            "AppliedStatus": "Applied",
-            "StatusMessage": "Run completed.",
-            "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "People Bar hidden",
-            "TargetValue": "People Bar hidden",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'People Bar hidden'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer\\HidePeopleBar: missing -> 1",
-                "TimestampText": "11:13:33"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Applied preset 'People Bar hidden'.",
-                "TimestampText": "11:13:33"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified preset 'People Bar hidden'.",
-                "TimestampText": "11:13:33"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Not required",
-                "Message": "Step not executed.",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "rollback",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Rolled back registry values.",
-            "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "People Bar hidden",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'People Bar hidden'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer\\HidePeopleBar: missing -> 1",
-                "TimestampText": "11:13:33"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Applied preset 'People Bar hidden'.",
-                "TimestampText": "11:13:33"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified preset 'People Bar hidden'.",
-                "TimestampText": "11:13:33"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "11:13:33"
-              }
-            ]
-          },
-          {
-            "Stage": "detect-after",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'People Bar hidden'.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "People Bar hidden",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'People Bar hidden'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer\\HidePeopleBar: missing -> 1",
-                "TimestampText": "11:13:33"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Applied preset 'People Bar hidden'.",
-                "TimestampText": "11:13:33"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified preset 'People Bar hidden'.",
-                "TimestampText": "11:13:33"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "11:13:33"
-              }
-            ]
-          }
-        ],
-        "StartedAtUtc": "2026-05-07T18:13:32.9787516+00:00",
-        "CompletedAtUtc": "2026-05-07T18:13:33.2646287+00:00"
-      },
-      "qa_tweak_id": "visibility.hide-people-bar",
-      "candidate_id": "visibility.hide-people-bar",
-      "card_name": "People Bar on the Taskbar",
-      "documentation": "research/records/visibility.hide-people-bar.json"
+      "qa_tweak_id": "system.wait-to-kill-service-timeout",
+      "candidate_id": "system.wait-to-kill-service-timeout",
+      "card_name": "Service Shutdown Timeout",
+      "documentation": "research/records/system.wait-to-kill-service-timeout.review.json"
     }
   ],
   "summary": {
-    "planned_count": 2,
-    "planned_apply_allowed_count": 2,
-    "live_success_count": 2,
+    "planned_count": 1,
+    "planned_apply_allowed_count": 1,
+    "live_success_count": 1,
     "live_failure_count": 0,
     "categories": [
-      "Visibility"
+      "System"
     ]
   }
 }

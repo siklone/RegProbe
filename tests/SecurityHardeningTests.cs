@@ -249,6 +249,8 @@ public sealed class CommandAllowlistSecurityTests
             CreateRegRequest("add", @"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games", "/v", "Scheduling Category", "/t", "REG_SZ", "/d", "High", "/f"),
             CreateRegRequest("add", @"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games", "/v", "SFIO Priority", "/t", "REG_SZ", "/d", "High", "/f"),
             CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerThrottling", "/v", "PowerThrottlingOff", "/t", "REG_DWORD", "/d", "1", "/f"),
+            CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Control", "/v", "WaitToKillServiceTimeout", "/t", "REG_SZ", "/d", "2500", "/f"),
+            CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Control", "/v", "WaitToKillServiceTimeout", "/t", "REG_SZ", "/d", "5000", "/f"),
             CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Control\CrashControl", "/v", "AutoReboot", "/t", "REG_DWORD", "/d", "0", "/f"),
             CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Control\CrashControl", "/v", "DisplayParameters", "/t", "REG_DWORD", "/d", "1", "/f"),
             CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power", "/v", "HiberbootEnabled", "/t", "REG_DWORD", "/d", "0", "/f"),

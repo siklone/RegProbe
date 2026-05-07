@@ -1,11 +1,11 @@
 {
-  "generated_utc": "2026-05-07T18:13:19Z",
-  "history_entry_count": 84,
+  "generated_utc": "2026-05-07T18:16:56Z",
+  "history_entry_count": 86,
   "catalog_candidate_count": 242,
-  "covered_count": 237,
-  "uncovered_count": 5,
+  "covered_count": 242,
+  "uncovered_count": 0,
   "summary": {
-    "coverage_percent": 97.93,
+    "coverage_percent": 100.0,
     "covered_categories": {
       "Audio": 3,
       "Cleanup": 1,
@@ -16,84 +16,14 @@
       "Performance": 3,
       "Peripheral": 3,
       "Power": 10,
-      "Privacy": 63,
+      "Privacy": 67,
       "Security": 21,
-      "System": 51,
+      "System": 52,
       "Visibility": 23
     },
-    "uncovered_categories": {
-      "Privacy": 4,
-      "System": 1
-    }
+    "uncovered_categories": {}
   },
-  "recommended_next_batches": [
-    {
-      "category": "Privacy",
-      "covered_count": 63,
-      "uncovered_count": 4,
-      "coverage_percent": 94.03,
-      "batch_size": 4,
-      "tweak_ids": [
-        "privacy.hide-username-at-signin",
-        "privacy.limit-diagnostic-log-collection",
-        "privacy.limit-dump-collection",
-        "privacy.troubleshooter-dont-run"
-      ],
-      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.hide-username-at-signin --id privacy.limit-diagnostic-log-collection --id privacy.limit-dump-collection --id privacy.troubleshooter-dont-run",
-      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.hide-username-at-signin --id privacy.limit-diagnostic-log-collection --id privacy.limit-dump-collection --id privacy.troubleshooter-dont-run --run-kvm --json",
-      "candidates": [
-        {
-          "tweak_id": "privacy.hide-username-at-signin",
-          "record_id": "privacy.hide-username-at-signin",
-          "category": "Privacy",
-          "name": "Display of Username During Sign-In",
-          "documentation": "research/records/privacy.hide-username-at-signin.json"
-        },
-        {
-          "tweak_id": "privacy.limit-diagnostic-log-collection",
-          "record_id": "privacy.limit-diagnostic-log-collection",
-          "category": "Privacy",
-          "name": "Advanced Diagnostic Log Collection",
-          "documentation": "research/records/privacy.limit-diagnostic-log-collection.json"
-        },
-        {
-          "tweak_id": "privacy.limit-dump-collection",
-          "record_id": "privacy.limit-dump-collection",
-          "category": "Privacy",
-          "name": "Diagnostic Dump Collection",
-          "documentation": "research/records/privacy.limit-dump-collection.json"
-        },
-        {
-          "tweak_id": "privacy.troubleshooter-dont-run",
-          "record_id": "privacy.troubleshooter-dont-run",
-          "category": "Privacy",
-          "name": "Recommended Troubleshooting for Known Problems",
-          "documentation": "research/records/privacy.troubleshooter-dont-run.review.json"
-        }
-      ]
-    },
-    {
-      "category": "System",
-      "covered_count": 51,
-      "uncovered_count": 1,
-      "coverage_percent": 98.08,
-      "batch_size": 1,
-      "tweak_ids": [
-        "system.wait-to-kill-service-timeout"
-      ],
-      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id system.wait-to-kill-service-timeout",
-      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id system.wait-to-kill-service-timeout --run-kvm --json",
-      "candidates": [
-        {
-          "tweak_id": "system.wait-to-kill-service-timeout",
-          "record_id": "system.wait-to-kill-service-timeout",
-          "category": "System",
-          "name": "Service Shutdown Timeout",
-          "documentation": "research/records/system.wait-to-kill-service-timeout.review.json"
-        }
-      ]
-    }
-  ],
+  "recommended_next_batches": [],
   "covered": [
     {
       "tweak_id": "audio.disable-beep",
@@ -1374,6 +1304,42 @@
       "latest_report_status": "ok"
     },
     {
+      "tweak_id": "privacy.hide-username-at-signin",
+      "qa_tweak_id": "privacy.hide-username-at-signin",
+      "candidate_id": "privacy.hide-username-at-signin",
+      "category": "Privacy",
+      "name": "Display of Username During Sign-In",
+      "documentation": "research/records/privacy.hide-username-at-signin.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "privacy.limit-diagnostic-log-collection",
+      "qa_tweak_id": "privacy.limit-diagnostic-log-collection",
+      "candidate_id": "privacy.limit-diagnostic-log-collection",
+      "category": "Privacy",
+      "name": "Advanced Diagnostic Log Collection",
+      "documentation": "research/records/privacy.limit-diagnostic-log-collection.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "privacy.limit-dump-collection",
+      "qa_tweak_id": "privacy.limit-dump-collection",
+      "candidate_id": "privacy.limit-dump-collection",
+      "category": "Privacy",
+      "name": "Diagnostic Dump Collection",
+      "documentation": "research/records/privacy.limit-dump-collection.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "privacy.troubleshooter-dont-run",
+      "qa_tweak_id": "privacy.troubleshooter-dont-run",
+      "candidate_id": "privacy.troubleshooter-dont-run",
+      "category": "Privacy",
+      "name": "Recommended Troubleshooting for Known Problems",
+      "documentation": "research/records/privacy.troubleshooter-dont-run.review.json",
+      "latest_report_status": "ok"
+    },
+    {
       "tweak_id": "security.disable-defender-sample-submission",
       "qa_tweak_id": "security.disable-defender-sample-submission",
       "candidate_id": "security.disable-defender-sample-submission",
@@ -2022,6 +1988,15 @@
       "latest_report_status": "ok"
     },
     {
+      "tweak_id": "system.wait-to-kill-service-timeout",
+      "qa_tweak_id": "system.wait-to-kill-service-timeout",
+      "candidate_id": "system.wait-to-kill-service-timeout",
+      "category": "System",
+      "name": "Service Shutdown Timeout",
+      "documentation": "research/records/system.wait-to-kill-service-timeout.review.json",
+      "latest_report_status": "ok"
+    },
+    {
       "tweak_id": "visibility.default-account-picture",
       "qa_tweak_id": "visibility.default-account-picture",
       "candidate_id": "visibility.default-account-picture",
@@ -2229,41 +2204,5 @@
       "latest_report_status": "ok"
     }
   ],
-  "uncovered": [
-    {
-      "tweak_id": "privacy.hide-username-at-signin",
-      "record_id": "privacy.hide-username-at-signin",
-      "category": "Privacy",
-      "name": "Display of Username During Sign-In",
-      "documentation": "research/records/privacy.hide-username-at-signin.json"
-    },
-    {
-      "tweak_id": "privacy.limit-diagnostic-log-collection",
-      "record_id": "privacy.limit-diagnostic-log-collection",
-      "category": "Privacy",
-      "name": "Advanced Diagnostic Log Collection",
-      "documentation": "research/records/privacy.limit-diagnostic-log-collection.json"
-    },
-    {
-      "tweak_id": "privacy.limit-dump-collection",
-      "record_id": "privacy.limit-dump-collection",
-      "category": "Privacy",
-      "name": "Diagnostic Dump Collection",
-      "documentation": "research/records/privacy.limit-dump-collection.json"
-    },
-    {
-      "tweak_id": "privacy.troubleshooter-dont-run",
-      "record_id": "privacy.troubleshooter-dont-run",
-      "category": "Privacy",
-      "name": "Recommended Troubleshooting for Known Problems",
-      "documentation": "research/records/privacy.troubleshooter-dont-run.review.json"
-    },
-    {
-      "tweak_id": "system.wait-to-kill-service-timeout",
-      "record_id": "system.wait-to-kill-service-timeout",
-      "category": "System",
-      "name": "Service Shutdown Timeout",
-      "documentation": "research/records/system.wait-to-kill-service-timeout.review.json"
-    }
-  ]
+  "uncovered": []
 }
