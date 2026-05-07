@@ -1,7 +1,7 @@
 # Promoted App QA Batch
 
 - Status: PASS
-- Generated UTC: 2026-05-07T17:10:54Z
+- Generated UTC: 2026-05-07T17:12:35Z
 - Catalog candidates: 242
 - Selected candidates: 5
 - Planned apply-allowed candidates: 5
@@ -10,41 +10,41 @@
 
 ## Selected Candidates
 
-- `system.ntfs-disable-8dot3` | NTFS 8.3 Short Name Creation | System
-  docs: `research/records/system.ntfs-disable-8dot3.json`
+- `visibility.disable-spotlight-settings` | Windows Spotlight on Settings | Visibility
+  docs: `research/records/visibility.disable-spotlight-settings.json`
   rollback: default=true | previous=true
   card snapshot: claim_boundary=true | fields=TweakId, Name, Category, EvidenceClass, ResearchStatus, RollbackSnapshotState, HasClaimBoundary, WhatWeKnowSummary, WhatWeDoNotClaimSummary, ProofLanes | lanes=docs, runtime, source, rollback
-- `system.ntfs-disable-last-access` | NTFS Last Access Time Updates | System
-  docs: `research/records/system.ntfs-disable-last-access.json`
+- `visibility.disable-spotlight-third-party` | Third-Party Suggestions in Windows Spotlight | Visibility
+  docs: `research/records/visibility.disable-spotlight-third-party.json`
   rollback: default=true | previous=true
   card snapshot: claim_boundary=true | fields=TweakId, Name, Category, EvidenceClass, ResearchStatus, RollbackSnapshotState, HasClaimBoundary, WhatWeKnowSummary, WhatWeDoNotClaimSummary, ProofLanes | lanes=docs, runtime, source, rollback
-- `system.ntfs-enable-long-paths` | Win32 Long Paths | System
-  docs: `research/records/system.ntfs-enable-long-paths.json`
+- `visibility.disable-spotlight-welcome` | Windows Spotlight Welcome Experience | Visibility
+  docs: `research/records/visibility.disable-spotlight-welcome.json`
   rollback: default=true | previous=true
   card snapshot: claim_boundary=true | fields=TweakId, Name, Category, EvidenceClass, ResearchStatus, RollbackSnapshotState, HasClaimBoundary, WhatWeKnowSummary, WhatWeDoNotClaimSummary, ProofLanes | lanes=docs, runtime, source, rollback
-- `system.ntfs-reset-memory-usage` | NTFS Memory Usage | System
-  docs: `research/records/system.ntfs-reset-memory-usage.json`
+- `visibility.disable-wcn-wizards` | Windows Connect Now Wizards | Visibility
+  docs: `research/records/visibility.disable-wcn-wizards.json`
   rollback: default=true | previous=true
   card snapshot: claim_boundary=true | fields=TweakId, Name, Category, EvidenceClass, ResearchStatus, RollbackSnapshotState, HasClaimBoundary, WhatWeKnowSummary, WhatWeDoNotClaimSummary, ProofLanes | lanes=docs, runtime, source, rollback
-- `system.ntfs-reset-mft-zone` | NTFS MFT Zone Reservation | System
-  docs: `research/records/system.ntfs-reset-mft-zone.json`
+- `visibility.disable-widgets` | Widgets Feature | Visibility
+  docs: `research/records/visibility.disable-widgets.json`
   rollback: default=true | previous=true
   card snapshot: claim_boundary=true | fields=TweakId, Name, Category, EvidenceClass, ResearchStatus, RollbackSnapshotState, HasClaimBoundary, WhatWeKnowSummary, WhatWeDoNotClaimSummary, ProofLanes | lanes=docs, runtime, source, rollback
 
 ## Live Results
 
-- `system.ntfs-disable-8dot3` | success=true | status=ok
+- `visibility.disable-spotlight-settings` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
   card contract: ok | claim_boundary=true | lanes=docs, runtime, source, rollback
-- `system.ntfs-disable-last-access` | success=true | status=ok
+- `visibility.disable-spotlight-third-party` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
   card contract: ok | claim_boundary=true | lanes=docs, runtime, source, rollback
-- `system.ntfs-enable-long-paths` | success=true | status=ok
+- `visibility.disable-spotlight-welcome` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
   card contract: ok | claim_boundary=true | lanes=docs, runtime, source, rollback
-- `system.ntfs-reset-memory-usage` | success=true | status=ok
+- `visibility.disable-wcn-wizards` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
   card contract: ok | claim_boundary=true | lanes=docs, runtime, source, rollback
-- `system.ntfs-reset-mft-zone` | success=true | status=ok
+- `visibility.disable-widgets` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
   card contract: ok | claim_boundary=true | lanes=docs, runtime, source, rollback

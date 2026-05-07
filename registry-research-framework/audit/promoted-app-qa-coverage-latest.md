@@ -1,11 +1,11 @@
 # Promoted App QA Coverage
 
-- Generated UTC: 2026-05-07T17:10:54Z
-- History entries: 63
+- Generated UTC: 2026-05-07T17:12:35Z
+- History entries: 64
 - Promoted app-QA candidates: 242
-- Covered: 188
-- Uncovered: 54
-- Coverage: 77.69%
+- Covered: 193
+- Uncovered: 49
+- Coverage: 79.75%
 
 ## Covered Categories
 
@@ -21,7 +21,7 @@
 - Privacy: 48
 - Security: 17
 - System: 41
-- Visibility: 16
+- Visibility: 21
 
 ## Uncovered Categories
 
@@ -32,13 +32,10 @@
 - Privacy: 19
 - Security: 4
 - System: 11
-- Visibility: 7
+- Visibility: 2
 
 ## Recommended Next Batches
 
-- Visibility: 5 uncovered cards | coverage 69.57%
-  command: `dotnet run --project cli/cli.csproj -- research qa-batch --id visibility.disable-spotlight-settings --id visibility.disable-spotlight-third-party --id visibility.disable-spotlight-welcome --id visibility.disable-wcn-wizards --id visibility.disable-widgets`
-  live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id visibility.disable-spotlight-settings --id visibility.disable-spotlight-third-party --id visibility.disable-spotlight-welcome --id visibility.disable-wcn-wizards --id visibility.disable-widgets --run-kvm --json`
 - Power: 3 uncovered cards | coverage 70.0%
   command: `dotnet run --project cli/cli.csproj -- research qa-batch --id power.hide-sleep-option --id power.optimize-cpu-boost --id power.optimize-gaming-network`
   live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id power.hide-sleep-option --id power.optimize-cpu-boost --id power.optimize-gaming-network --run-kvm --json`
@@ -51,6 +48,9 @@
 - Developer: 2 uncovered cards | coverage 77.78%
   command: `dotnet run --project cli/cli.csproj -- research qa-batch --id developer.windows-dev-mode --id developer.wsl2-memory`
   live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id developer.windows-dev-mode --id developer.wsl2-memory --run-kvm --json`
+- System: 5 uncovered cards | coverage 78.85%
+  command: `dotnet run --project cli/cli.csproj -- research qa-batch --id system.priority-control --id system.reliability-timestamp-enabled --id system.services.disable-bluetooth-audio-gateway --id system.services.disable-bluetooth-support --id system.services.disable-bluetooth-user-service`
+  live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id system.priority-control --id system.reliability-timestamp-enabled --id system.services.disable-bluetooth-audio-gateway --id system.services.disable-bluetooth-support --id system.services.disable-bluetooth-user-service --run-kvm --json`
 
 ## Remaining Uncovered Sample
 

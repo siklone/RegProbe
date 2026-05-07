@@ -1,11 +1,11 @@
 {
-  "generated_utc": "2026-05-07T17:10:54Z",
-  "history_entry_count": 63,
+  "generated_utc": "2026-05-07T17:12:35Z",
+  "history_entry_count": 64,
   "catalog_candidate_count": 242,
-  "covered_count": 188,
-  "uncovered_count": 54,
+  "covered_count": 193,
+  "uncovered_count": 49,
   "summary": {
-    "coverage_percent": 77.69,
+    "coverage_percent": 79.75,
     "covered_categories": {
       "Audio": 3,
       "Cleanup": 1,
@@ -19,7 +19,7 @@
       "Privacy": 48,
       "Security": 17,
       "System": 41,
-      "Visibility": 16
+      "Visibility": 21
     },
     "uncovered_categories": {
       "Developer": 2,
@@ -29,63 +29,10 @@
       "Privacy": 19,
       "Security": 4,
       "System": 11,
-      "Visibility": 7
+      "Visibility": 2
     }
   },
   "recommended_next_batches": [
-    {
-      "category": "Visibility",
-      "covered_count": 16,
-      "uncovered_count": 7,
-      "coverage_percent": 69.57,
-      "batch_size": 5,
-      "tweak_ids": [
-        "visibility.disable-spotlight-settings",
-        "visibility.disable-spotlight-third-party",
-        "visibility.disable-spotlight-welcome",
-        "visibility.disable-wcn-wizards",
-        "visibility.disable-widgets"
-      ],
-      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id visibility.disable-spotlight-settings --id visibility.disable-spotlight-third-party --id visibility.disable-spotlight-welcome --id visibility.disable-wcn-wizards --id visibility.disable-widgets",
-      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id visibility.disable-spotlight-settings --id visibility.disable-spotlight-third-party --id visibility.disable-spotlight-welcome --id visibility.disable-wcn-wizards --id visibility.disable-widgets --run-kvm --json",
-      "candidates": [
-        {
-          "tweak_id": "visibility.disable-spotlight-settings",
-          "record_id": "visibility.disable-spotlight-settings",
-          "category": "Visibility",
-          "name": "Windows Spotlight on Settings",
-          "documentation": "research/records/visibility.disable-spotlight-settings.json"
-        },
-        {
-          "tweak_id": "visibility.disable-spotlight-third-party",
-          "record_id": "visibility.disable-spotlight-third-party",
-          "category": "Visibility",
-          "name": "Third-Party Suggestions in Windows Spotlight",
-          "documentation": "research/records/visibility.disable-spotlight-third-party.json"
-        },
-        {
-          "tweak_id": "visibility.disable-spotlight-welcome",
-          "record_id": "visibility.disable-spotlight-welcome",
-          "category": "Visibility",
-          "name": "Windows Spotlight Welcome Experience",
-          "documentation": "research/records/visibility.disable-spotlight-welcome.json"
-        },
-        {
-          "tweak_id": "visibility.disable-wcn-wizards",
-          "record_id": "visibility.disable-wcn-wizards",
-          "category": "Visibility",
-          "name": "Windows Connect Now Wizards",
-          "documentation": "research/records/visibility.disable-wcn-wizards.json"
-        },
-        {
-          "tweak_id": "visibility.disable-widgets",
-          "record_id": "visibility.disable-widgets",
-          "category": "Visibility",
-          "name": "Widgets Feature",
-          "documentation": "research/records/visibility.disable-widgets.json"
-        }
-      ]
-    },
     {
       "category": "Power",
       "covered_count": 7,
@@ -247,6 +194,59 @@
           "category": "Developer",
           "name": "WSL 2 Memory Limit",
           "documentation": "research/records/developer.wsl2-memory.json"
+        }
+      ]
+    },
+    {
+      "category": "System",
+      "covered_count": 41,
+      "uncovered_count": 11,
+      "coverage_percent": 78.85,
+      "batch_size": 5,
+      "tweak_ids": [
+        "system.priority-control",
+        "system.reliability-timestamp-enabled",
+        "system.services.disable-bluetooth-audio-gateway",
+        "system.services.disable-bluetooth-support",
+        "system.services.disable-bluetooth-user-service"
+      ],
+      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id system.priority-control --id system.reliability-timestamp-enabled --id system.services.disable-bluetooth-audio-gateway --id system.services.disable-bluetooth-support --id system.services.disable-bluetooth-user-service",
+      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id system.priority-control --id system.reliability-timestamp-enabled --id system.services.disable-bluetooth-audio-gateway --id system.services.disable-bluetooth-support --id system.services.disable-bluetooth-user-service --run-kvm --json",
+      "candidates": [
+        {
+          "tweak_id": "system.priority-control",
+          "record_id": "system.priority-control",
+          "category": "System",
+          "name": "Foreground Scheduling Priority / Win32PrioritySeparation",
+          "documentation": "research/records/system.priority-control.review.json"
+        },
+        {
+          "tweak_id": "system.reliability-timestamp-enabled",
+          "record_id": "system.reliability-timestamp-enabled",
+          "category": "System",
+          "name": "Reliability Event Timestamping",
+          "documentation": "research/records/system.reliability-timestamp-enabled.review.json"
+        },
+        {
+          "tweak_id": "system.services.disable-bluetooth-audio-gateway",
+          "record_id": "system.services.disable-bluetooth-audio-gateway",
+          "category": "System",
+          "name": "Bluetooth Audio Gateway Service",
+          "documentation": "research/records/system.services.disable-bluetooth-audio-gateway.json"
+        },
+        {
+          "tweak_id": "system.services.disable-bluetooth-support",
+          "record_id": "system.services.disable-bluetooth-support",
+          "category": "System",
+          "name": "Bluetooth Support Service",
+          "documentation": "research/records/system.services.disable-bluetooth-support.json"
+        },
+        {
+          "tweak_id": "system.services.disable-bluetooth-user-service",
+          "record_id": "system.services.disable-bluetooth-user-service",
+          "category": "System",
+          "name": "Bluetooth User Service",
+          "documentation": "research/records/system.services.disable-bluetooth-user-service.json"
         }
       ]
     }
@@ -1909,6 +1909,51 @@
       "latest_report_status": "ok"
     },
     {
+      "tweak_id": "visibility.disable-spotlight-settings",
+      "qa_tweak_id": "visibility.disable-spotlight-settings",
+      "candidate_id": "visibility.disable-spotlight-settings",
+      "category": "Visibility",
+      "name": "Windows Spotlight on Settings",
+      "documentation": "research/records/visibility.disable-spotlight-settings.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "visibility.disable-spotlight-third-party",
+      "qa_tweak_id": "visibility.disable-spotlight-third-party",
+      "candidate_id": "visibility.disable-spotlight-third-party",
+      "category": "Visibility",
+      "name": "Third-Party Suggestions in Windows Spotlight",
+      "documentation": "research/records/visibility.disable-spotlight-third-party.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "visibility.disable-spotlight-welcome",
+      "qa_tweak_id": "visibility.disable-spotlight-welcome",
+      "candidate_id": "visibility.disable-spotlight-welcome",
+      "category": "Visibility",
+      "name": "Windows Spotlight Welcome Experience",
+      "documentation": "research/records/visibility.disable-spotlight-welcome.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "visibility.disable-wcn-wizards",
+      "qa_tweak_id": "visibility.disable-wcn-wizards",
+      "candidate_id": "visibility.disable-wcn-wizards",
+      "category": "Visibility",
+      "name": "Windows Connect Now Wizards",
+      "documentation": "research/records/visibility.disable-wcn-wizards.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "visibility.disable-widgets",
+      "qa_tweak_id": "visibility.disable-widgets",
+      "candidate_id": "visibility.disable-widgets",
+      "category": "Visibility",
+      "name": "Widgets Feature",
+      "documentation": "research/records/visibility.disable-widgets.json",
+      "latest_report_status": "ok"
+    },
+    {
       "tweak_id": "visibility.force-classic-control-panel",
       "qa_tweak_id": "visibility.force-classic-control-panel",
       "candidate_id": "visibility.force-classic-control-panel",
@@ -2274,41 +2319,6 @@
       "category": "System",
       "name": "Service Shutdown Timeout",
       "documentation": "research/records/system.wait-to-kill-service-timeout.review.json"
-    },
-    {
-      "tweak_id": "visibility.disable-spotlight-settings",
-      "record_id": "visibility.disable-spotlight-settings",
-      "category": "Visibility",
-      "name": "Windows Spotlight on Settings",
-      "documentation": "research/records/visibility.disable-spotlight-settings.json"
-    },
-    {
-      "tweak_id": "visibility.disable-spotlight-third-party",
-      "record_id": "visibility.disable-spotlight-third-party",
-      "category": "Visibility",
-      "name": "Third-Party Suggestions in Windows Spotlight",
-      "documentation": "research/records/visibility.disable-spotlight-third-party.json"
-    },
-    {
-      "tweak_id": "visibility.disable-spotlight-welcome",
-      "record_id": "visibility.disable-spotlight-welcome",
-      "category": "Visibility",
-      "name": "Windows Spotlight Welcome Experience",
-      "documentation": "research/records/visibility.disable-spotlight-welcome.json"
-    },
-    {
-      "tweak_id": "visibility.disable-wcn-wizards",
-      "record_id": "visibility.disable-wcn-wizards",
-      "category": "Visibility",
-      "name": "Windows Connect Now Wizards",
-      "documentation": "research/records/visibility.disable-wcn-wizards.json"
-    },
-    {
-      "tweak_id": "visibility.disable-widgets",
-      "record_id": "visibility.disable-widgets",
-      "category": "Visibility",
-      "name": "Widgets Feature",
-      "documentation": "research/records/visibility.disable-widgets.json"
     },
     {
       "tweak_id": "visibility.disable-window-animations",

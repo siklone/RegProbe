@@ -1,13 +1,13 @@
 {
-  "generated_utc": "2026-05-07T17:10:54Z",
+  "generated_utc": "2026-05-07T17:12:35Z",
   "status": "PASS",
   "selection": {
     "requested_ids": [
-      "system.ntfs-disable-8dot3",
-      "system.ntfs-disable-last-access",
-      "system.ntfs-enable-long-paths",
-      "system.ntfs-reset-memory-usage",
-      "system.ntfs-reset-mft-zone"
+      "visibility.disable-spotlight-settings",
+      "visibility.disable-spotlight-third-party",
+      "visibility.disable-spotlight-welcome",
+      "visibility.disable-wcn-wizards",
+      "visibility.disable-widgets"
     ],
     "requested_categories": [],
     "limit_per_category": 1,
@@ -26,25 +26,25 @@
   "errors": [],
   "candidates": [
     {
-      "tweak_id": "system.ntfs-disable-8dot3",
-      "qa_tweak_id": "system.ntfs-disable-8dot3",
-      "candidate_id": "system.ntfs-disable-8dot3",
-      "record_id": "system.ntfs-disable-8dot3",
-      "category": "System",
-      "name": "NTFS 8.3 Short Name Creation",
-      "documentation": "research/records/system.ntfs-disable-8dot3.json",
+      "tweak_id": "visibility.disable-spotlight-settings",
+      "qa_tweak_id": "visibility.disable-spotlight-settings",
+      "candidate_id": "visibility.disable-spotlight-settings",
+      "record_id": "visibility.disable-spotlight-settings",
+      "category": "Visibility",
+      "name": "Windows Spotlight on Settings",
+      "documentation": "research/records/visibility.disable-spotlight-settings.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect system.ntfs-disable-8dot3",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect visibility.disable-spotlight-settings",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.ntfs-disable-8dot3' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.ntfs-disable-8dot3.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.ntfs-disable-8dot3' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.ntfs-disable-8dot3.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.ntfs-disable-8dot3' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.ntfs-disable-8dot3.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.ntfs-disable-8dot3' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.ntfs-disable-8dot3.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'system.ntfs-disable-8dot3'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'visibility.disable-spotlight-settings' --qa-output 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-spotlight-settings.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'visibility.disable-spotlight-settings' --qa-output 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-spotlight-settings.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'visibility.disable-spotlight-settings' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-spotlight-settings.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'visibility.disable-spotlight-settings' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-spotlight-settings.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'visibility.disable-spotlight-settings'"
       },
       "expected_report": {
         "success": true,
@@ -85,25 +85,25 @@
       }
     },
     {
-      "tweak_id": "system.ntfs-disable-last-access",
-      "qa_tweak_id": "system.ntfs-disable-last-access",
-      "candidate_id": "system.ntfs-disable-last-access",
-      "record_id": "system.ntfs-disable-last-access",
-      "category": "System",
-      "name": "NTFS Last Access Time Updates",
-      "documentation": "research/records/system.ntfs-disable-last-access.json",
+      "tweak_id": "visibility.disable-spotlight-third-party",
+      "qa_tweak_id": "visibility.disable-spotlight-third-party",
+      "candidate_id": "visibility.disable-spotlight-third-party",
+      "record_id": "visibility.disable-spotlight-third-party",
+      "category": "Visibility",
+      "name": "Third-Party Suggestions in Windows Spotlight",
+      "documentation": "research/records/visibility.disable-spotlight-third-party.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect system.ntfs-disable-last-access",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect visibility.disable-spotlight-third-party",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.ntfs-disable-last-access' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.ntfs-disable-last-access.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.ntfs-disable-last-access' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.ntfs-disable-last-access.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.ntfs-disable-last-access' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.ntfs-disable-last-access.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.ntfs-disable-last-access' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.ntfs-disable-last-access.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'system.ntfs-disable-last-access'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'visibility.disable-spotlight-third-party' --qa-output 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-spotlight-third-party.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'visibility.disable-spotlight-third-party' --qa-output 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-spotlight-third-party.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'visibility.disable-spotlight-third-party' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-spotlight-third-party.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'visibility.disable-spotlight-third-party' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-spotlight-third-party.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'visibility.disable-spotlight-third-party'"
       },
       "expected_report": {
         "success": true,
@@ -144,25 +144,25 @@
       }
     },
     {
-      "tweak_id": "system.ntfs-enable-long-paths",
-      "qa_tweak_id": "system.ntfs-enable-long-paths",
-      "candidate_id": "system.ntfs-enable-long-paths",
-      "record_id": "system.ntfs-enable-long-paths",
-      "category": "System",
-      "name": "Win32 Long Paths",
-      "documentation": "research/records/system.ntfs-enable-long-paths.json",
+      "tweak_id": "visibility.disable-spotlight-welcome",
+      "qa_tweak_id": "visibility.disable-spotlight-welcome",
+      "candidate_id": "visibility.disable-spotlight-welcome",
+      "record_id": "visibility.disable-spotlight-welcome",
+      "category": "Visibility",
+      "name": "Windows Spotlight Welcome Experience",
+      "documentation": "research/records/visibility.disable-spotlight-welcome.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect system.ntfs-enable-long-paths",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect visibility.disable-spotlight-welcome",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.ntfs-enable-long-paths' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.ntfs-enable-long-paths.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.ntfs-enable-long-paths' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.ntfs-enable-long-paths.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.ntfs-enable-long-paths' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.ntfs-enable-long-paths.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.ntfs-enable-long-paths' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.ntfs-enable-long-paths.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'system.ntfs-enable-long-paths'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'visibility.disable-spotlight-welcome' --qa-output 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-spotlight-welcome.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'visibility.disable-spotlight-welcome' --qa-output 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-spotlight-welcome.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'visibility.disable-spotlight-welcome' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-spotlight-welcome.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'visibility.disable-spotlight-welcome' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-spotlight-welcome.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'visibility.disable-spotlight-welcome'"
       },
       "expected_report": {
         "success": true,
@@ -203,25 +203,25 @@
       }
     },
     {
-      "tweak_id": "system.ntfs-reset-memory-usage",
-      "qa_tweak_id": "system.ntfs-reset-memory-usage",
-      "candidate_id": "system.ntfs-reset-memory-usage",
-      "record_id": "system.ntfs-reset-memory-usage",
-      "category": "System",
-      "name": "NTFS Memory Usage",
-      "documentation": "research/records/system.ntfs-reset-memory-usage.json",
+      "tweak_id": "visibility.disable-wcn-wizards",
+      "qa_tweak_id": "visibility.disable-wcn-wizards",
+      "candidate_id": "visibility.disable-wcn-wizards",
+      "record_id": "visibility.disable-wcn-wizards",
+      "category": "Visibility",
+      "name": "Windows Connect Now Wizards",
+      "documentation": "research/records/visibility.disable-wcn-wizards.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect system.ntfs-reset-memory-usage",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect visibility.disable-wcn-wizards",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.ntfs-reset-memory-usage' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.ntfs-reset-memory-usage.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.ntfs-reset-memory-usage' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.ntfs-reset-memory-usage.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.ntfs-reset-memory-usage' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.ntfs-reset-memory-usage.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.ntfs-reset-memory-usage' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.ntfs-reset-memory-usage.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'system.ntfs-reset-memory-usage'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'visibility.disable-wcn-wizards' --qa-output 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-wcn-wizards.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'visibility.disable-wcn-wizards' --qa-output 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-wcn-wizards.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'visibility.disable-wcn-wizards' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-wcn-wizards.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'visibility.disable-wcn-wizards' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-wcn-wizards.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'visibility.disable-wcn-wizards'"
       },
       "expected_report": {
         "success": true,
@@ -262,25 +262,25 @@
       }
     },
     {
-      "tweak_id": "system.ntfs-reset-mft-zone",
-      "qa_tweak_id": "system.ntfs-reset-mft-zone",
-      "candidate_id": "system.ntfs-reset-mft-zone",
-      "record_id": "system.ntfs-reset-mft-zone",
-      "category": "System",
-      "name": "NTFS MFT Zone Reservation",
-      "documentation": "research/records/system.ntfs-reset-mft-zone.json",
+      "tweak_id": "visibility.disable-widgets",
+      "qa_tweak_id": "visibility.disable-widgets",
+      "candidate_id": "visibility.disable-widgets",
+      "record_id": "visibility.disable-widgets",
+      "category": "Visibility",
+      "name": "Widgets Feature",
+      "documentation": "research/records/visibility.disable-widgets.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect system.ntfs-reset-mft-zone",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect visibility.disable-widgets",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.ntfs-reset-mft-zone' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.ntfs-reset-mft-zone.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.ntfs-reset-mft-zone' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.ntfs-reset-mft-zone.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.ntfs-reset-mft-zone' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.ntfs-reset-mft-zone.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.ntfs-reset-mft-zone' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.ntfs-reset-mft-zone.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'system.ntfs-reset-mft-zone'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'visibility.disable-widgets' --qa-output 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-widgets.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'visibility.disable-widgets' --qa-output 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-widgets.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'visibility.disable-widgets' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-widgets.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'visibility.disable-widgets' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-widgets.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'visibility.disable-widgets'"
       },
       "expected_report": {
         "success": true,
@@ -323,817 +323,7 @@
   ],
   "run_results": [
     {
-      "tweak_id": "system.ntfs-disable-8dot3",
-      "host_exit": 0,
-      "execution_exit": 0,
-      "payload_status": "completed",
-      "report_source": "stdout",
-      "report_parse_error": null,
-      "report_fetch_status": null,
-      "report_app_success": true,
-      "report_success": true,
-      "report_status": "ok",
-      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
-      "report_contract_status": "ok",
-      "report_contract_summary": "QA card snapshot contract passed.",
-      "report_contract_failures": [],
-      "report_card_present": true,
-      "report_card_has_claim_boundary": true,
-      "report_card_present_fields": [
-        "TweakId",
-        "Name",
-        "Category",
-        "EvidenceClass",
-        "ResearchStatus",
-        "RollbackSnapshotState",
-        "HasClaimBoundary",
-        "WhatWeKnowSummary",
-        "WhatWeDoNotClaimSummary",
-        "ProofLanes"
-      ],
-      "report_card_missing_fields": [],
-      "report_card_proof_lanes": [
-        "docs",
-        "runtime",
-        "source",
-        "rollback"
-      ],
-      "report_card_missing_proof_lanes": [],
-      "report": {
-        "TweakId": "system.ntfs-disable-8dot3",
-        "TweakName": "NTFS 8.3 Short Name Creation",
-        "Success": true,
-        "Status": "ok",
-        "Summary": "Apply/verify path completed and rollback restored the tweak.",
-        "RollbackRequested": true,
-        "Card": {
-          "TweakId": "system.ntfs-disable-8dot3",
-          "Name": "NTFS 8.3 Short Name Creation",
-          "Category": "System",
-          "Description": "NTFS can create old-style short file names for compatibility. Disabling them can reduce some filesystem overhead, but some legacy software still expects those short names to exist.",
-          "FriendlyDescription": "NTFS can create old-style short file names for compatibility. Disabling them can reduce some filesystem overhead, but some legacy software still expects those short names to exist.",
-          "RegistryPath": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem\\NtfsDisable8dot3NameCreation",
-          "EvidenceClass": "A",
-          "EvidenceClassTitle": "Cross-Layer Verified",
-          "ResearchStatus": "PROMOTED",
-          "IsMutationAllowed": true,
-          "RollbackSnapshotState": "ready",
-          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
-          "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: NTFS can create old-style short file names for compatibility. Disabling them can reduce some filesystem overhead, but some legacy software still expects those short names to exist. Evidence: Microsoft Learn directly documents the runtime registry path, value name, and numeric mode table for NtfsDisable8dot3NameCreation. Rollback: Rollback: Verified via record-restore-story.",
-          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
-          "ProofLanes": [
-            {
-              "Key": "docs",
-              "Label": "DOCS",
-              "State": "ready",
-              "Summary": "Microsoft Learn directly documents the runtime registry path, value name, and numeric mode table for NtfsDisable8dot3NameCreation.",
-              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/fsutil-8dot3name"
-            },
-            {
-              "Key": "runtime",
-              "Label": "RUNTIME",
-              "State": "ready",
-              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
-              "Source": ""
-            },
-            {
-              "Key": "source",
-              "Label": "SOURCE",
-              "State": "ready",
-              "Summary": "No upstream nohuto source link is attached to this record.",
-              "Source": ""
-            },
-            {
-              "Key": "rollback",
-              "Label": "ROLLBACK",
-              "State": "ready",
-              "Summary": "Rollback: Verified via record-restore-story.",
-              "Source": "record-restore-story"
-            }
-          ],
-          "ReferenceLinks": [
-            {
-              "Title": "Docs: Details (missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
-              "Kind": "Details"
-            },
-            {
-              "Title": "Docs: Win-Config",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\win-config\\batch-01.md#system.ntfs-disable-8dot3",
-              "Kind": "Docs"
-            },
-            {
-              "Title": "Docs: System (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\system\\system.md",
-              "Kind": "Docs"
-            }
-          ]
-        },
-        "Stages": [
-          {
-            "Stage": "detect-before",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current option is 'Per-volume behavior'. Selected option is 'Disable on all volumes'.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Per-volume behavior",
-            "TargetValue": "Disable on all volumes",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": false,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current option is 'Per-volume behavior'. Selected option is 'Disable on all volumes'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem\\NtfsDisable8dot3NameCreation: 2 -> 1",
-                "TimestampText": "10:10:57"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "apply",
-            "AppliedStatus": "Applied",
-            "StatusMessage": "Run completed.",
-            "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Disable on all volumes",
-            "TargetValue": "Disable on all volumes",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current option is 'Per-volume behavior'. Selected option is 'Disable on all volumes'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem\\NtfsDisable8dot3NameCreation: 2 -> 1",
-                "TimestampText": "10:10:57"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Applied preset 'Disable on all volumes'.",
-                "TimestampText": "10:11:00"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified preset 'Disable on all volumes'.",
-                "TimestampText": "10:11:00"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Not required",
-                "Message": "Step not executed.",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "rollback",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Rolled back registry values.",
-            "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Per-volume behavior",
-            "TargetValue": "Disable on all volumes",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current option is 'Per-volume behavior'. Selected option is 'Disable on all volumes'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem\\NtfsDisable8dot3NameCreation: 2 -> 1",
-                "TimestampText": "10:10:57"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Applied preset 'Disable on all volumes'.",
-                "TimestampText": "10:11:00"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified preset 'Disable on all volumes'.",
-                "TimestampText": "10:11:00"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "10:11:00"
-              }
-            ]
-          },
-          {
-            "Stage": "detect-after",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current option is 'Per-volume behavior'. Selected option is 'Disable on all volumes'.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Per-volume behavior",
-            "TargetValue": "Disable on all volumes",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current option is 'Per-volume behavior'. Selected option is 'Disable on all volumes'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem\\NtfsDisable8dot3NameCreation: 2 -> 1",
-                "TimestampText": "10:11:01"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Applied preset 'Disable on all volumes'.",
-                "TimestampText": "10:11:00"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified preset 'Disable on all volumes'.",
-                "TimestampText": "10:11:00"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "10:11:00"
-              }
-            ]
-          }
-        ],
-        "StartedAtUtc": "2026-05-07T17:10:57.9343412+00:00",
-        "CompletedAtUtc": "2026-05-07T17:11:01.0745024+00:00"
-      },
-      "qa_tweak_id": "system.ntfs-disable-8dot3",
-      "candidate_id": "system.ntfs-disable-8dot3",
-      "card_name": "NTFS 8.3 Short Name Creation",
-      "documentation": "research/records/system.ntfs-disable-8dot3.json"
-    },
-    {
-      "tweak_id": "system.ntfs-disable-last-access",
-      "host_exit": 0,
-      "execution_exit": 0,
-      "payload_status": "completed",
-      "report_source": "stdout",
-      "report_parse_error": null,
-      "report_fetch_status": null,
-      "report_app_success": true,
-      "report_success": true,
-      "report_status": "ok",
-      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
-      "report_contract_status": "ok",
-      "report_contract_summary": "QA card snapshot contract passed.",
-      "report_contract_failures": [],
-      "report_card_present": true,
-      "report_card_has_claim_boundary": true,
-      "report_card_present_fields": [
-        "TweakId",
-        "Name",
-        "Category",
-        "EvidenceClass",
-        "ResearchStatus",
-        "RollbackSnapshotState",
-        "HasClaimBoundary",
-        "WhatWeKnowSummary",
-        "WhatWeDoNotClaimSummary",
-        "ProofLanes"
-      ],
-      "report_card_missing_fields": [],
-      "report_card_proof_lanes": [
-        "docs",
-        "runtime",
-        "source",
-        "rollback"
-      ],
-      "report_card_missing_proof_lanes": [],
-      "report": {
-        "TweakId": "system.ntfs-disable-last-access",
-        "TweakName": "NTFS Last Access Time Updates",
-        "Success": true,
-        "Status": "ok",
-        "Summary": "Apply/verify path completed and rollback restored the tweak.",
-        "RollbackRequested": true,
-        "Card": {
-          "TweakId": "system.ntfs-disable-last-access",
-          "Name": "NTFS Last Access Time Updates",
-          "Category": "System",
-          "Description": "Windows can update a file or directory's last-access timestamp when it is accessed. Disabling these updates can reduce some disk overhead, but software that depends on last-access data can lose that signal.",
-          "FriendlyDescription": "Windows can update a file or directory's last-access timestamp when it is accessed. Disabling these updates can reduce some disk overhead, but software that depends on last-access data can lose that signal.",
-          "RegistryPath": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem\\NtfsDisableLastAccessUpdate",
-          "EvidenceClass": "A",
-          "EvidenceClassTitle": "Cross-Layer Verified",
-          "ResearchStatus": "PROMOTED",
-          "IsMutationAllowed": true,
-          "RollbackSnapshotState": "ready",
-          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
-          "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Windows can update a file or directory's last-access timestamp when it is accessed. Disabling these updates can reduce some disk overhead, but software that depends on last-access data can lose that signal. Evidence: Microsoft's web-server performance guidance provides the exact registry path and modern default of 1. The matching fsutil behavior documentation states that disablelastaccess {1|0} disables (1) or enables (0) updates to the Last Access Time stamp. Rollback: Rollback: Verified via record-restore-story.",
-          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
-          "ProofLanes": [
-            {
-              "Key": "docs",
-              "Label": "DOCS",
-              "State": "ready",
-              "Summary": "Microsoft's web-server performance guidance provides the exact registry path and modern default of 1. The matching fsutil behavior documentation states that disablelastaccess {1|0} disables (1) or enables (0) updates to the Last Access Time stamp.",
-              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows-server/administration/performance-tuning/role/web-server/"
-            },
-            {
-              "Key": "runtime",
-              "Label": "RUNTIME",
-              "State": "ready",
-              "Summary": "A same-day fast guest Ghidra retry for `NtfsDisableLastAccessUpdate` failed in `ensure-admin-shell` with a bounded timeout, so no xref bundle reached the host.",
-              "Source": "Guest Ghidra launch receipt for NtfsDisableLastAccessUpdate: evidence/raw/ghidra/ghidra-system-ntfs-disable-last-access-20260427a/summary.json"
-            },
-            {
-              "Key": "source",
-              "Label": "SOURCE",
-              "State": "ready",
-              "Summary": "No upstream nohuto source link is attached to this record.",
-              "Source": ""
-            },
-            {
-              "Key": "rollback",
-              "Label": "ROLLBACK",
-              "State": "ready",
-              "Summary": "Rollback: Verified via record-restore-story.",
-              "Source": "record-restore-story"
-            }
-          ],
-          "ReferenceLinks": [
-            {
-              "Title": "Docs: Details (missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
-              "Kind": "Details"
-            },
-            {
-              "Title": "Docs: Win-Config",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\win-config\\batch-01.md#system.ntfs-disable-last-access",
-              "Kind": "Docs"
-            },
-            {
-              "Title": "Docs: System (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\system\\system.md",
-              "Kind": "Docs"
-            }
-          ]
-        },
-        "Stages": [
-          {
-            "Stage": "detect-before",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Last-access updates disabled'.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Last-access updates disabled",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": false,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Last-access updates disabled'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem\\NtfsDisableLastAccessUpdate: -2147483646 -> 1",
-                "TimestampText": "10:11:07"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "apply",
-            "AppliedStatus": "Applied",
-            "StatusMessage": "Run completed.",
-            "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Last-access updates disabled",
-            "TargetValue": "Last-access updates disabled",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Last-access updates disabled'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem\\NtfsDisableLastAccessUpdate: -2147483646 -> 1",
-                "TimestampText": "10:11:07"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Applied preset 'Last-access updates disabled'.",
-                "TimestampText": "10:11:10"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified preset 'Last-access updates disabled'.",
-                "TimestampText": "10:11:10"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Not required",
-                "Message": "Step not executed.",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "rollback",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Rolled back registry values.",
-            "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Last-access updates disabled",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Last-access updates disabled'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem\\NtfsDisableLastAccessUpdate: -2147483646 -> 1",
-                "TimestampText": "10:11:07"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Applied preset 'Last-access updates disabled'.",
-                "TimestampText": "10:11:10"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified preset 'Last-access updates disabled'.",
-                "TimestampText": "10:11:10"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "10:11:10"
-              }
-            ]
-          },
-          {
-            "Stage": "detect-after",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Last-access updates disabled'.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Last-access updates disabled",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Last-access updates disabled'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem\\NtfsDisableLastAccessUpdate: -2147483646 -> 1",
-                "TimestampText": "10:11:10"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Applied preset 'Last-access updates disabled'.",
-                "TimestampText": "10:11:10"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified preset 'Last-access updates disabled'.",
-                "TimestampText": "10:11:10"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "10:11:10"
-              }
-            ]
-          }
-        ],
-        "StartedAtUtc": "2026-05-07T17:11:07.5515469+00:00",
-        "CompletedAtUtc": "2026-05-07T17:11:10.6739777+00:00"
-      },
-      "qa_tweak_id": "system.ntfs-disable-last-access",
-      "candidate_id": "system.ntfs-disable-last-access",
-      "card_name": "NTFS Last Access Time Updates",
-      "documentation": "research/records/system.ntfs-disable-last-access.json"
-    },
-    {
-      "tweak_id": "system.ntfs-enable-long-paths",
-      "host_exit": 0,
-      "execution_exit": 0,
-      "payload_status": "completed",
-      "report_source": "stdout",
-      "report_parse_error": null,
-      "report_fetch_status": null,
-      "report_app_success": true,
-      "report_success": true,
-      "report_status": "ok",
-      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
-      "report_contract_status": "ok",
-      "report_contract_summary": "QA card snapshot contract passed.",
-      "report_contract_failures": [],
-      "report_card_present": true,
-      "report_card_has_claim_boundary": true,
-      "report_card_present_fields": [
-        "TweakId",
-        "Name",
-        "Category",
-        "EvidenceClass",
-        "ResearchStatus",
-        "RollbackSnapshotState",
-        "HasClaimBoundary",
-        "WhatWeKnowSummary",
-        "WhatWeDoNotClaimSummary",
-        "ProofLanes"
-      ],
-      "report_card_missing_fields": [],
-      "report_card_proof_lanes": [
-        "docs",
-        "runtime",
-        "source",
-        "rollback"
-      ],
-      "report_card_missing_proof_lanes": [],
-      "report": {
-        "TweakId": "system.ntfs-enable-long-paths",
-        "TweakName": "Win32 Long Paths",
-        "Success": true,
-        "Status": "ok",
-        "Summary": "Apply/verify path completed and rollback restored the tweak.",
-        "RollbackRequested": true,
-        "Card": {
-          "TweakId": "system.ntfs-enable-long-paths",
-          "Name": "Win32 Long Paths",
-          "Category": "System",
-          "Description": "Windows normally keeps many apps limited to shorter file paths. This setting allows long paths for apps that are built to support them.",
-          "FriendlyDescription": "Windows normally keeps many apps limited to shorter file paths. This setting allows long paths for apps that are built to support them.",
-          "RegistryPath": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem\\LongPathsEnabled",
-          "EvidenceClass": "A",
-          "EvidenceClassTitle": "Cross-Layer Verified",
-          "ResearchStatus": "PROMOTED",
-          "IsMutationAllowed": true,
-          "RollbackSnapshotState": "ready",
-          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
-          "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Windows normally keeps many apps limited to shorter file paths. This setting allows long paths for apps that are built to support them. Evidence: Local official ADMX defines the exact machine key and value name; local ADML confirms that enabling the policy allows long-path-aware Win32 and packaged apps to access paths beyond the normal 260-character limit. Rollback: Rollback: Verified via record-restore-story.",
-          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
-          "ProofLanes": [
-            {
-              "Key": "docs",
-              "Label": "DOCS",
-              "State": "ready",
-              "Summary": "Local official ADMX defines the exact machine key and value name; local ADML confirms that enabling the policy allows long-path-aware Win32 and packaged apps to access paths beyond the normal 260-character limit.",
-              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/FileSys.admx"
-            },
-            {
-              "Key": "runtime",
-              "Label": "RUNTIME",
-              "State": "ready",
-              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
-              "Source": ""
-            },
-            {
-              "Key": "source",
-              "Label": "SOURCE",
-              "State": "ready",
-              "Summary": "No upstream nohuto source link is attached to this record.",
-              "Source": ""
-            },
-            {
-              "Key": "rollback",
-              "Label": "ROLLBACK",
-              "State": "ready",
-              "Summary": "Rollback: Verified via record-restore-story.",
-              "Source": "record-restore-story"
-            }
-          ],
-          "ReferenceLinks": [
-            {
-              "Title": "Docs: Details (missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
-              "Kind": "Details"
-            },
-            {
-              "Title": "Docs: Win-Config",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\win-config\\batch-01.md#system.ntfs-enable-long-paths",
-              "Kind": "Docs"
-            },
-            {
-              "Title": "Docs: System (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\system\\system.md",
-              "Kind": "Docs"
-            }
-          ]
-        },
-        "Stages": [
-          {
-            "Stage": "detect-before",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current option is 'Long paths disabled'. Selected option is 'Long paths enabled'.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Long paths disabled",
-            "TargetValue": "Long paths enabled",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": false,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current option is 'Long paths disabled'. Selected option is 'Long paths enabled'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem\\LongPathsEnabled: 0 -> 1",
-                "TimestampText": "10:11:17"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "apply",
-            "AppliedStatus": "Applied",
-            "StatusMessage": "Run completed.",
-            "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Long paths enabled",
-            "TargetValue": "Long paths enabled",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current option is 'Long paths disabled'. Selected option is 'Long paths enabled'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem\\LongPathsEnabled: 0 -> 1",
-                "TimestampText": "10:11:17"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Applied preset 'Long paths enabled'.",
-                "TimestampText": "10:11:20"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified preset 'Long paths enabled'.",
-                "TimestampText": "10:11:20"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Not required",
-                "Message": "Step not executed.",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "rollback",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Rolled back registry values.",
-            "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Long paths disabled",
-            "TargetValue": "Long paths enabled",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current option is 'Long paths disabled'. Selected option is 'Long paths enabled'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem\\LongPathsEnabled: 0 -> 1",
-                "TimestampText": "10:11:17"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Applied preset 'Long paths enabled'.",
-                "TimestampText": "10:11:20"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified preset 'Long paths enabled'.",
-                "TimestampText": "10:11:20"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "10:11:20"
-              }
-            ]
-          },
-          {
-            "Stage": "detect-after",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current option is 'Long paths disabled'. Selected option is 'Long paths enabled'.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Long paths disabled",
-            "TargetValue": "Long paths enabled",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current option is 'Long paths disabled'. Selected option is 'Long paths enabled'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem\\LongPathsEnabled: 0 -> 1",
-                "TimestampText": "10:11:20"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Applied preset 'Long paths enabled'.",
-                "TimestampText": "10:11:20"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified preset 'Long paths enabled'.",
-                "TimestampText": "10:11:20"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "10:11:20"
-              }
-            ]
-          }
-        ],
-        "StartedAtUtc": "2026-05-07T17:11:17.2360492+00:00",
-        "CompletedAtUtc": "2026-05-07T17:11:20.3349869+00:00"
-      },
-      "qa_tweak_id": "system.ntfs-enable-long-paths",
-      "candidate_id": "system.ntfs-enable-long-paths",
-      "card_name": "Win32 Long Paths",
-      "documentation": "research/records/system.ntfs-enable-long-paths.json"
-    },
-    {
-      "tweak_id": "system.ntfs-reset-memory-usage",
+      "tweak_id": "visibility.disable-spotlight-settings",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -1170,19 +360,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "system.ntfs-reset-memory-usage",
-        "TweakName": "NTFS Memory Usage",
+        "TweakId": "visibility.disable-spotlight-settings",
+        "TweakName": "Windows Spotlight on Settings",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "system.ntfs-reset-memory-usage",
-          "Name": "NTFS Memory Usage",
-          "Category": "System",
-          "Description": "NTFS has an internal memory-usage tuning that affects its cache behavior. Most people should leave it at the default unless they have a proven file-server style workload.",
-          "FriendlyDescription": "NTFS has an internal memory-usage tuning that affects its cache behavior. Most people should leave it at the default unless they have a proven file-server style workload.",
-          "RegistryPath": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem\\NtfsMemoryUsage",
+          "TweakId": "visibility.disable-spotlight-settings",
+          "Name": "Windows Spotlight on Settings",
+          "Category": "Visibility",
+          "Description": "The Settings app can show Spotlight-based suggestions and highlights. This policy decides whether those Spotlight elements are allowed for the current user.",
+          "FriendlyDescription": "The Settings app can show Spotlight-based suggestions and highlights. This policy decides whether those Spotlight elements are allowed for the current user.",
+          "RegistryPath": "HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableWindowsSpotlightOnSettings",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -1190,15 +380,15 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: NTFS has an internal memory-usage tuning that affects its cache behavior. Most people should leave it at the default unless they have a proven file-server style workload. Evidence: Microsoft documents fsutil behavior memoryusage as updating NtfsMemoryUsage, with 1 as the default and 2 as the raised-memory option. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: The Settings app can show Spotlight-based suggestions and highlights. This policy decides whether those Spotlight elements are allowed for the current user. Evidence: Local official ADMX defines the exact user-policy key and value name; local ADML confirms that enabling the policy removes Windows Spotlight suggestions from the Settings app. Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "Microsoft documents fsutil behavior memoryusage as updating NtfsMemoryUsage, with 1 as the default and 2 as the raised-memory option.",
-              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/fsutil-behavior"
+              "Summary": "Local official ADMX defines the exact user-policy key and value name; local ADML confirms that enabling the policy removes Windows Spotlight suggestions from the Settings app.",
+              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/CloudContent.admx"
             },
             {
               "Key": "runtime",
@@ -1229,13 +419,8 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Win-Config",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\win-config\\batch-01.md#system.ntfs-reset-memory-usage",
-              "Kind": "Docs"
-            },
-            {
-              "Title": "Docs: System (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\system\\system.md",
+              "Title": "Docs: Visibility",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\visibility\\visibility.md#visibility.disable-spotlight-settings",
               "Kind": "Docs"
             }
           ]
@@ -1244,10 +429,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Default NTFS memory usage'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Settings Spotlight disabled'.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Default NTFS memory usage",
+            "TargetValue": "Settings Spotlight disabled",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -1256,8 +441,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Default NTFS memory usage'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem\\NtfsMemoryUsage: 0 -> 1",
-                "TimestampText": "10:11:26"
+                "Message": "Current values do not match a named option. Selected option is 'Settings Spotlight disabled'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableWindowsSpotlightOnSettings: missing -> 1",
+                "TimestampText": "10:12:39"
               },
               {
                 "Action": "Apply",
@@ -1284,8 +469,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Default NTFS memory usage",
-            "TargetValue": "Default NTFS memory usage",
+            "CurrentValue": "Settings Spotlight disabled",
+            "TargetValue": "Settings Spotlight disabled",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1294,20 +479,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Default NTFS memory usage'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem\\NtfsMemoryUsage: 0 -> 1",
-                "TimestampText": "10:11:26"
+                "Message": "Current values do not match a named option. Selected option is 'Settings Spotlight disabled'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableWindowsSpotlightOnSettings: missing -> 1",
+                "TimestampText": "10:12:39"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Default NTFS memory usage'.",
-                "TimestampText": "10:11:29"
+                "Message": "Applied preset 'Settings Spotlight disabled'.",
+                "TimestampText": "10:12:39"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Default NTFS memory usage'.",
-                "TimestampText": "10:11:29"
+                "Message": "Verified preset 'Settings Spotlight disabled'.",
+                "TimestampText": "10:12:39"
               },
               {
                 "Action": "Rollback",
@@ -1323,7 +508,7 @@
             "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Default NTFS memory usage",
+            "TargetValue": "Settings Spotlight disabled",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1332,36 +517,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Default NTFS memory usage'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem\\NtfsMemoryUsage: 0 -> 1",
-                "TimestampText": "10:11:26"
+                "Message": "Current values do not match a named option. Selected option is 'Settings Spotlight disabled'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableWindowsSpotlightOnSettings: missing -> 1",
+                "TimestampText": "10:12:39"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Default NTFS memory usage'.",
-                "TimestampText": "10:11:29"
+                "Message": "Applied preset 'Settings Spotlight disabled'.",
+                "TimestampText": "10:12:39"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Default NTFS memory usage'.",
-                "TimestampText": "10:11:29"
+                "Message": "Verified preset 'Settings Spotlight disabled'.",
+                "TimestampText": "10:12:39"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "10:11:29"
+                "TimestampText": "10:12:39"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Default NTFS memory usage'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Settings Spotlight disabled'.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Default NTFS memory usage",
+            "TargetValue": "Settings Spotlight disabled",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1370,40 +555,40 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Default NTFS memory usage'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem\\NtfsMemoryUsage: 0 -> 1",
-                "TimestampText": "10:11:30"
+                "Message": "Current values do not match a named option. Selected option is 'Settings Spotlight disabled'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableWindowsSpotlightOnSettings: missing -> 1",
+                "TimestampText": "10:12:39"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Default NTFS memory usage'.",
-                "TimestampText": "10:11:29"
+                "Message": "Applied preset 'Settings Spotlight disabled'.",
+                "TimestampText": "10:12:39"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Default NTFS memory usage'.",
-                "TimestampText": "10:11:29"
+                "Message": "Verified preset 'Settings Spotlight disabled'.",
+                "TimestampText": "10:12:39"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "10:11:29"
+                "TimestampText": "10:12:39"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T17:11:26.9245139+00:00",
-        "CompletedAtUtc": "2026-05-07T17:11:30.0411223+00:00"
+        "StartedAtUtc": "2026-05-07T17:12:39.5798739+00:00",
+        "CompletedAtUtc": "2026-05-07T17:12:39.8727355+00:00"
       },
-      "qa_tweak_id": "system.ntfs-reset-memory-usage",
-      "candidate_id": "system.ntfs-reset-memory-usage",
-      "card_name": "NTFS Memory Usage",
-      "documentation": "research/records/system.ntfs-reset-memory-usage.json"
+      "qa_tweak_id": "visibility.disable-spotlight-settings",
+      "candidate_id": "visibility.disable-spotlight-settings",
+      "card_name": "Windows Spotlight on Settings",
+      "documentation": "research/records/visibility.disable-spotlight-settings.json"
     },
     {
-      "tweak_id": "system.ntfs-reset-mft-zone",
+      "tweak_id": "visibility.disable-spotlight-third-party",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -1440,19 +625,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "system.ntfs-reset-mft-zone",
-        "TweakName": "NTFS MFT Zone Reservation",
+        "TweakId": "visibility.disable-spotlight-third-party",
+        "TweakName": "Third-Party Suggestions in Windows Spotlight",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "system.ntfs-reset-mft-zone",
-          "Name": "NTFS MFT Zone Reservation",
-          "Category": "System",
-          "Description": "NTFS reserves some space for the master file table so it can grow with less fragmentation. This setting controls how large that reserved area is.",
-          "FriendlyDescription": "NTFS reserves some space for the master file table so it can grow with less fragmentation. This setting controls how large that reserved area is.",
-          "RegistryPath": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem\\NtfsMftZoneReservation",
+          "TweakId": "visibility.disable-spotlight-third-party",
+          "Name": "Third-Party Suggestions in Windows Spotlight",
+          "Category": "Visibility",
+          "Description": "Windows Spotlight can include suggestions that point to third-party content or apps. This policy decides whether those suggestions are allowed for the current user.",
+          "FriendlyDescription": "Windows Spotlight can include suggestions that point to third-party content or apps. This policy decides whether those suggestions are allowed for the current user.",
+          "RegistryPath": "HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableThirdPartySuggestions",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -1460,15 +645,15 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: NTFS reserves some space for the master file table so it can grow with less fragmentation. This setting controls how large that reserved area is. Evidence: The Microsoft NTFS MFT reservation article documents the exact FileSystem path, the valid range 1-4, and the default value of 1 when the registry value is missing or invalid. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: Windows Spotlight can include suggestions that point to third-party content or apps. This policy decides whether those suggestions are allowed for the current user. Evidence: Local official ADMX defines the exact user-policy key and value name; local ADML confirms that enabling the policy stops Windows Spotlight from suggesting third-party apps and content. Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "The Microsoft NTFS MFT reservation article documents the exact FileSystem path, the valid range 1-4, and the default value of 1 when the registry value is missing or invalid.",
-              "Source": "Validation proof source: https://learn.microsoft.com/en-us/troubleshoot/windows-server/backup-and-storage/ntfs-reserves-space-for-mft"
+              "Summary": "Local official ADMX defines the exact user-policy key and value name; local ADML confirms that enabling the policy stops Windows Spotlight from suggesting third-party apps and content.",
+              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/CloudContent.admx"
             },
             {
               "Key": "runtime",
@@ -1499,13 +684,8 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Win-Config",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\win-config\\batch-01.md#system.ntfs-reset-mft-zone",
-              "Kind": "Docs"
-            },
-            {
-              "Title": "Docs: System (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\system\\system.md",
+              "Title": "Docs: Visibility",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\visibility\\visibility.md#visibility.disable-spotlight-third-party",
               "Kind": "Docs"
             }
           ]
@@ -1514,10 +694,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Default minimum reservation'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Third-party Spotlight suggestions disabled'.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Default minimum reservation",
+            "TargetValue": "Third-party Spotlight suggestions disabled",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -1526,8 +706,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Default minimum reservation'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem\\NtfsMftZoneReservation: 0 -> 1",
-                "TimestampText": "10:11:34"
+                "Message": "Current values do not match a named option. Selected option is 'Third-party Spotlight suggestions disabled'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableThirdPartySuggestions: missing -> 1",
+                "TimestampText": "10:12:44"
               },
               {
                 "Action": "Apply",
@@ -1554,8 +734,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Default minimum reservation",
-            "TargetValue": "Default minimum reservation",
+            "CurrentValue": "Third-party Spotlight suggestions disabled",
+            "TargetValue": "Third-party Spotlight suggestions disabled",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1564,20 +744,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Default minimum reservation'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem\\NtfsMftZoneReservation: 0 -> 1",
-                "TimestampText": "10:11:34"
+                "Message": "Current values do not match a named option. Selected option is 'Third-party Spotlight suggestions disabled'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableThirdPartySuggestions: missing -> 1",
+                "TimestampText": "10:12:44"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Default minimum reservation'.",
-                "TimestampText": "10:11:37"
+                "Message": "Applied preset 'Third-party Spotlight suggestions disabled'.",
+                "TimestampText": "10:12:44"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Default minimum reservation'.",
-                "TimestampText": "10:11:37"
+                "Message": "Verified preset 'Third-party Spotlight suggestions disabled'.",
+                "TimestampText": "10:12:44"
               },
               {
                 "Action": "Rollback",
@@ -1593,7 +773,7 @@
             "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Default minimum reservation",
+            "TargetValue": "Third-party Spotlight suggestions disabled",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1602,36 +782,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Default minimum reservation'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem\\NtfsMftZoneReservation: 0 -> 1",
-                "TimestampText": "10:11:34"
+                "Message": "Current values do not match a named option. Selected option is 'Third-party Spotlight suggestions disabled'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableThirdPartySuggestions: missing -> 1",
+                "TimestampText": "10:12:44"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Default minimum reservation'.",
-                "TimestampText": "10:11:37"
+                "Message": "Applied preset 'Third-party Spotlight suggestions disabled'.",
+                "TimestampText": "10:12:44"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Default minimum reservation'.",
-                "TimestampText": "10:11:37"
+                "Message": "Verified preset 'Third-party Spotlight suggestions disabled'.",
+                "TimestampText": "10:12:44"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "10:11:37"
+                "TimestampText": "10:12:44"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Default minimum reservation'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Third-party Spotlight suggestions disabled'.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Default minimum reservation",
+            "TargetValue": "Third-party Spotlight suggestions disabled",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1640,37 +820,832 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Default minimum reservation'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem\\NtfsMftZoneReservation: 0 -> 1",
-                "TimestampText": "10:11:37"
+                "Message": "Current values do not match a named option. Selected option is 'Third-party Spotlight suggestions disabled'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableThirdPartySuggestions: missing -> 1",
+                "TimestampText": "10:12:44"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Default minimum reservation'.",
-                "TimestampText": "10:11:37"
+                "Message": "Applied preset 'Third-party Spotlight suggestions disabled'.",
+                "TimestampText": "10:12:44"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Default minimum reservation'.",
-                "TimestampText": "10:11:37"
+                "Message": "Verified preset 'Third-party Spotlight suggestions disabled'.",
+                "TimestampText": "10:12:44"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "10:11:37"
+                "TimestampText": "10:12:44"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T17:11:34.8825722+00:00",
-        "CompletedAtUtc": "2026-05-07T17:11:37.9863824+00:00"
+        "StartedAtUtc": "2026-05-07T17:12:44.2692095+00:00",
+        "CompletedAtUtc": "2026-05-07T17:12:44.5579508+00:00"
       },
-      "qa_tweak_id": "system.ntfs-reset-mft-zone",
-      "candidate_id": "system.ntfs-reset-mft-zone",
-      "card_name": "NTFS MFT Zone Reservation",
-      "documentation": "research/records/system.ntfs-reset-mft-zone.json"
+      "qa_tweak_id": "visibility.disable-spotlight-third-party",
+      "candidate_id": "visibility.disable-spotlight-third-party",
+      "card_name": "Third-Party Suggestions in Windows Spotlight",
+      "documentation": "research/records/visibility.disable-spotlight-third-party.json"
+    },
+    {
+      "tweak_id": "visibility.disable-spotlight-welcome",
+      "host_exit": 0,
+      "execution_exit": 0,
+      "payload_status": "completed",
+      "report_source": "stdout",
+      "report_parse_error": null,
+      "report_fetch_status": null,
+      "report_app_success": true,
+      "report_success": true,
+      "report_status": "ok",
+      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
+      "report_contract_status": "ok",
+      "report_contract_summary": "QA card snapshot contract passed.",
+      "report_contract_failures": [],
+      "report_card_present": true,
+      "report_card_has_claim_boundary": true,
+      "report_card_present_fields": [
+        "TweakId",
+        "Name",
+        "Category",
+        "EvidenceClass",
+        "ResearchStatus",
+        "RollbackSnapshotState",
+        "HasClaimBoundary",
+        "WhatWeKnowSummary",
+        "WhatWeDoNotClaimSummary",
+        "ProofLanes"
+      ],
+      "report_card_missing_fields": [],
+      "report_card_proof_lanes": [
+        "docs",
+        "runtime",
+        "source",
+        "rollback"
+      ],
+      "report_card_missing_proof_lanes": [],
+      "report": {
+        "TweakId": "visibility.disable-spotlight-welcome",
+        "TweakName": "Windows Spotlight Welcome Experience",
+        "Success": true,
+        "Status": "ok",
+        "Summary": "Apply/verify path completed and rollback restored the tweak.",
+        "RollbackRequested": true,
+        "Card": {
+          "TweakId": "visibility.disable-spotlight-welcome",
+          "Name": "Windows Spotlight Welcome Experience",
+          "Category": "Visibility",
+          "Description": "Windows can show a Spotlight-based welcome or introductory experience after updates or sign-in. This policy decides whether that welcome experience is allowed for the current user.",
+          "FriendlyDescription": "Windows can show a Spotlight-based welcome or introductory experience after updates or sign-in. This policy decides whether that welcome experience is allowed for the current user.",
+          "RegistryPath": "HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableWindowsSpotlightWindowsWelcomeExperience",
+          "EvidenceClass": "A",
+          "EvidenceClassTitle": "Cross-Layer Verified",
+          "ResearchStatus": "PROMOTED",
+          "IsMutationAllowed": true,
+          "RollbackSnapshotState": "ready",
+          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
+          "HasClaimBoundary": true,
+          "WhatWeKnowSummary": "Claim: Windows can show a Spotlight-based welcome or introductory experience after updates or sign-in. This policy decides whether that welcome experience is allowed for the current user. Evidence: Local official ADMX defines the exact user-policy key and value name; local ADML confirms that enabling the policy suppresses the Windows Welcome Experience. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
+          "ProofLanes": [
+            {
+              "Key": "docs",
+              "Label": "DOCS",
+              "State": "ready",
+              "Summary": "Local official ADMX defines the exact user-policy key and value name; local ADML confirms that enabling the policy suppresses the Windows Welcome Experience.",
+              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/CloudContent.admx"
+            },
+            {
+              "Key": "runtime",
+              "Label": "RUNTIME",
+              "State": "ready",
+              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+              "Source": ""
+            },
+            {
+              "Key": "source",
+              "Label": "SOURCE",
+              "State": "ready",
+              "Summary": "No upstream nohuto source link is attached to this record.",
+              "Source": ""
+            },
+            {
+              "Key": "rollback",
+              "Label": "ROLLBACK",
+              "State": "ready",
+              "Summary": "Rollback: Verified via record-restore-story.",
+              "Source": "record-restore-story"
+            }
+          ],
+          "ReferenceLinks": [
+            {
+              "Title": "Docs: Details (missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
+              "Kind": "Details"
+            },
+            {
+              "Title": "Docs: Visibility",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\visibility\\visibility.md#visibility.disable-spotlight-welcome",
+              "Kind": "Docs"
+            }
+          ]
+        },
+        "Stages": [
+          {
+            "Stage": "detect-before",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Welcome experience disabled'.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Welcome experience disabled",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": false,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Welcome experience disabled'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableWindowsSpotlightWindowsWelcomeExperience: missing -> 1",
+                "TimestampText": "10:12:50"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "apply",
+            "AppliedStatus": "Applied",
+            "StatusMessage": "Run completed.",
+            "OutcomeSummary": "Apply - Success",
+            "CurrentValue": "Welcome experience disabled",
+            "TargetValue": "Welcome experience disabled",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Welcome experience disabled'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableWindowsSpotlightWindowsWelcomeExperience: missing -> 1",
+                "TimestampText": "10:12:50"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Welcome experience disabled'.",
+                "TimestampText": "10:12:50"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Welcome experience disabled'.",
+                "TimestampText": "10:12:50"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Not required",
+                "Message": "Step not executed.",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "rollback",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Rolled back registry values.",
+            "OutcomeSummary": "Rollback - Rolled Back",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Welcome experience disabled",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Welcome experience disabled'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableWindowsSpotlightWindowsWelcomeExperience: missing -> 1",
+                "TimestampText": "10:12:50"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Welcome experience disabled'.",
+                "TimestampText": "10:12:50"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Welcome experience disabled'.",
+                "TimestampText": "10:12:50"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "10:12:51"
+              }
+            ]
+          },
+          {
+            "Stage": "detect-after",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Welcome experience disabled'.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Welcome experience disabled",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Welcome experience disabled'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableWindowsSpotlightWindowsWelcomeExperience: missing -> 1",
+                "TimestampText": "10:12:51"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Welcome experience disabled'.",
+                "TimestampText": "10:12:50"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Welcome experience disabled'.",
+                "TimestampText": "10:12:50"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "10:12:51"
+              }
+            ]
+          }
+        ],
+        "StartedAtUtc": "2026-05-07T17:12:50.8341709+00:00",
+        "CompletedAtUtc": "2026-05-07T17:12:51.1190678+00:00"
+      },
+      "qa_tweak_id": "visibility.disable-spotlight-welcome",
+      "candidate_id": "visibility.disable-spotlight-welcome",
+      "card_name": "Windows Spotlight Welcome Experience",
+      "documentation": "research/records/visibility.disable-spotlight-welcome.json"
+    },
+    {
+      "tweak_id": "visibility.disable-wcn-wizards",
+      "host_exit": 0,
+      "execution_exit": 0,
+      "payload_status": "completed",
+      "report_source": "stdout",
+      "report_parse_error": null,
+      "report_fetch_status": null,
+      "report_app_success": true,
+      "report_success": true,
+      "report_status": "ok",
+      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
+      "report_contract_status": "ok",
+      "report_contract_summary": "QA card snapshot contract passed.",
+      "report_contract_failures": [],
+      "report_card_present": true,
+      "report_card_has_claim_boundary": true,
+      "report_card_present_fields": [
+        "TweakId",
+        "Name",
+        "Category",
+        "EvidenceClass",
+        "ResearchStatus",
+        "RollbackSnapshotState",
+        "HasClaimBoundary",
+        "WhatWeKnowSummary",
+        "WhatWeDoNotClaimSummary",
+        "ProofLanes"
+      ],
+      "report_card_missing_fields": [],
+      "report_card_proof_lanes": [
+        "docs",
+        "runtime",
+        "source",
+        "rollback"
+      ],
+      "report_card_missing_proof_lanes": [],
+      "report": {
+        "TweakId": "visibility.disable-wcn-wizards",
+        "TweakName": "Windows Connect Now Wizards",
+        "Success": true,
+        "Status": "ok",
+        "Summary": "Apply/verify path completed and rollback restored the tweak.",
+        "RollbackRequested": true,
+        "Card": {
+          "TweakId": "visibility.disable-wcn-wizards",
+          "Name": "Windows Connect Now Wizards",
+          "Category": "Visibility",
+          "Description": "Windows Connect Now is an older wizard-based way to help set up some wireless routers and wireless devices. This policy decides whether those wizards are available.",
+          "FriendlyDescription": "Windows Connect Now is an older wizard-based way to help set up some wireless routers and wireless devices. This policy decides whether those wizards are available.",
+          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Windows\\WCN\\UI\\DisableWcnUi",
+          "EvidenceClass": "A",
+          "EvidenceClassTitle": "Cross-Layer Verified",
+          "ResearchStatus": "PROMOTED",
+          "IsMutationAllowed": true,
+          "RollbackSnapshotState": "ready",
+          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
+          "HasClaimBoundary": true,
+          "WhatWeKnowSummary": "Claim: Windows Connect Now is an older wizard-based way to help set up some wireless routers and wireless devices. This policy decides whether those wizards are available. Evidence: The local official Microsoft ADMX file names the same machine policy surface used by the app. The paired ADML help text states that enabling the setting turns off the Windows Connect Now wizards and disables related wizard tasks. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
+          "ProofLanes": [
+            {
+              "Key": "docs",
+              "Label": "DOCS",
+              "State": "ready",
+              "Summary": "The local official Microsoft ADMX file names the same machine policy surface used by the app. The paired ADML help text states that enabling the setting turns off the Windows Connect Now wizards and disables related wizard tasks.",
+              "Source": "Validation proof source: evidence/files/external/c/WINDOWS/PolicyDefinitions/WindowsConnectNow.admx"
+            },
+            {
+              "Key": "runtime",
+              "Label": "RUNTIME",
+              "State": "ready",
+              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+              "Source": ""
+            },
+            {
+              "Key": "source",
+              "Label": "SOURCE",
+              "State": "ready",
+              "Summary": "No upstream nohuto source link is attached to this record.",
+              "Source": ""
+            },
+            {
+              "Key": "rollback",
+              "Label": "ROLLBACK",
+              "State": "ready",
+              "Summary": "Rollback: Verified via record-restore-story.",
+              "Source": "record-restore-story"
+            }
+          ],
+          "ReferenceLinks": [
+            {
+              "Title": "Docs: Details (missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
+              "Kind": "Details"
+            },
+            {
+              "Title": "Docs: Visibility",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\visibility\\visibility.md#visibility.disable-wcn-wizards",
+              "Kind": "Docs"
+            }
+          ]
+        },
+        "Stages": [
+          {
+            "Stage": "detect-before",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'WCN wizards blocked'.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "WCN wizards blocked",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": false,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'WCN wizards blocked'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\WCN\\UI\\DisableWcnUi: missing -> 1",
+                "TimestampText": "10:12:56"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "apply",
+            "AppliedStatus": "Applied",
+            "StatusMessage": "Run completed.",
+            "OutcomeSummary": "Apply - Success",
+            "CurrentValue": "WCN wizards blocked",
+            "TargetValue": "WCN wizards blocked",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'WCN wizards blocked'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\WCN\\UI\\DisableWcnUi: missing -> 1",
+                "TimestampText": "10:12:56"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'WCN wizards blocked'.",
+                "TimestampText": "10:12:59"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'WCN wizards blocked'.",
+                "TimestampText": "10:12:59"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Not required",
+                "Message": "Step not executed.",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "rollback",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Rolled back registry values.",
+            "OutcomeSummary": "Rollback - Rolled Back",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "WCN wizards blocked",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'WCN wizards blocked'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\WCN\\UI\\DisableWcnUi: missing -> 1",
+                "TimestampText": "10:12:56"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'WCN wizards blocked'.",
+                "TimestampText": "10:12:59"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'WCN wizards blocked'.",
+                "TimestampText": "10:12:59"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "10:12:59"
+              }
+            ]
+          },
+          {
+            "Stage": "detect-after",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'WCN wizards blocked'.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "WCN wizards blocked",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'WCN wizards blocked'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\WCN\\UI\\DisableWcnUi: missing -> 1",
+                "TimestampText": "10:12:59"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'WCN wizards blocked'.",
+                "TimestampText": "10:12:59"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'WCN wizards blocked'.",
+                "TimestampText": "10:12:59"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "10:12:59"
+              }
+            ]
+          }
+        ],
+        "StartedAtUtc": "2026-05-07T17:12:56.3563935+00:00",
+        "CompletedAtUtc": "2026-05-07T17:12:59.5567564+00:00"
+      },
+      "qa_tweak_id": "visibility.disable-wcn-wizards",
+      "candidate_id": "visibility.disable-wcn-wizards",
+      "card_name": "Windows Connect Now Wizards",
+      "documentation": "research/records/visibility.disable-wcn-wizards.json"
+    },
+    {
+      "tweak_id": "visibility.disable-widgets",
+      "host_exit": 0,
+      "execution_exit": 0,
+      "payload_status": "completed",
+      "report_source": "stdout",
+      "report_parse_error": null,
+      "report_fetch_status": null,
+      "report_app_success": true,
+      "report_success": true,
+      "report_status": "ok",
+      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
+      "report_contract_status": "ok",
+      "report_contract_summary": "QA card snapshot contract passed.",
+      "report_contract_failures": [],
+      "report_card_present": true,
+      "report_card_has_claim_boundary": true,
+      "report_card_present_fields": [
+        "TweakId",
+        "Name",
+        "Category",
+        "EvidenceClass",
+        "ResearchStatus",
+        "RollbackSnapshotState",
+        "HasClaimBoundary",
+        "WhatWeKnowSummary",
+        "WhatWeDoNotClaimSummary",
+        "ProofLanes"
+      ],
+      "report_card_missing_fields": [],
+      "report_card_proof_lanes": [
+        "docs",
+        "runtime",
+        "source",
+        "rollback"
+      ],
+      "report_card_missing_proof_lanes": [],
+      "report": {
+        "TweakId": "visibility.disable-widgets",
+        "TweakName": "Widgets Feature",
+        "Success": true,
+        "Status": "ok",
+        "Summary": "Apply/verify path completed and rollback restored the tweak.",
+        "RollbackRequested": true,
+        "Card": {
+          "TweakId": "visibility.disable-widgets",
+          "Name": "Widgets Feature",
+          "Category": "Visibility",
+          "Description": "Windows Widgets can show a board with news, weather, and other feed content. This policy decides whether the Widgets feature is allowed on the device at all.",
+          "FriendlyDescription": "Windows Widgets can show a board with news, weather, and other feed content. This policy decides whether the Widgets feature is allowed on the device at all.",
+          "RegistryPath": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Dsh\\AllowNewsAndInterests",
+          "EvidenceClass": "A",
+          "EvidenceClassTitle": "Cross-Layer Verified",
+          "ResearchStatus": "PROMOTED",
+          "IsMutationAllowed": true,
+          "RollbackSnapshotState": "ready",
+          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
+          "HasClaimBoundary": true,
+          "WhatWeKnowSummary": "Claim: Windows Widgets can show a board with news, weather, and other feed content. This policy decides whether the Widgets feature is allowed on the device at all. Evidence: Local official ADMX defines the exact machine-policy key, value name, and 1/0 mapping; local ADML confirms this is the Widgets allow-form policy and documents its default behavior. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
+          "ProofLanes": [
+            {
+              "Key": "docs",
+              "Label": "DOCS",
+              "State": "ready",
+              "Summary": "Local official ADMX defines the exact machine-policy key, value name, and 1/0 mapping; local ADML confirms this is the Widgets allow-form policy and documents its default behavior.",
+              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/NewsAndInterests.admx"
+            },
+            {
+              "Key": "runtime",
+              "Label": "RUNTIME",
+              "State": "ready",
+              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+              "Source": ""
+            },
+            {
+              "Key": "source",
+              "Label": "SOURCE",
+              "State": "ready",
+              "Summary": "No upstream nohuto source link is attached to this record.",
+              "Source": ""
+            },
+            {
+              "Key": "rollback",
+              "Label": "ROLLBACK",
+              "State": "ready",
+              "Summary": "Rollback: Verified via record-restore-story.",
+              "Source": "record-restore-story"
+            }
+          ],
+          "ReferenceLinks": [
+            {
+              "Title": "Docs: Details (missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
+              "Kind": "Details"
+            },
+            {
+              "Title": "Docs: Visibility",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\visibility\\visibility.md#visibility.disable-widgets",
+              "Kind": "Docs"
+            }
+          ]
+        },
+        "Stages": [
+          {
+            "Stage": "detect-before",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Widgets blocked'.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Widgets blocked",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": false,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Widgets blocked'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Dsh\\AllowNewsAndInterests: missing -> 0",
+                "TimestampText": "10:13:06"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "apply",
+            "AppliedStatus": "Applied",
+            "StatusMessage": "Run completed.",
+            "OutcomeSummary": "Apply - Success",
+            "CurrentValue": "Widgets blocked",
+            "TargetValue": "Widgets blocked",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Widgets blocked'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Dsh\\AllowNewsAndInterests: missing -> 0",
+                "TimestampText": "10:13:06"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Widgets blocked'.",
+                "TimestampText": "10:13:08"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Widgets blocked'.",
+                "TimestampText": "10:13:08"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Not required",
+                "Message": "Step not executed.",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "rollback",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Rolled back registry values.",
+            "OutcomeSummary": "Rollback - Rolled Back",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Widgets blocked",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Widgets blocked'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Dsh\\AllowNewsAndInterests: missing -> 0",
+                "TimestampText": "10:13:06"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Widgets blocked'.",
+                "TimestampText": "10:13:08"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Widgets blocked'.",
+                "TimestampText": "10:13:08"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "10:13:08"
+              }
+            ]
+          },
+          {
+            "Stage": "detect-after",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Widgets blocked'.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Widgets blocked",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Widgets blocked'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Dsh\\AllowNewsAndInterests: missing -> 0",
+                "TimestampText": "10:13:09"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Widgets blocked'.",
+                "TimestampText": "10:13:08"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Widgets blocked'.",
+                "TimestampText": "10:13:08"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "10:13:08"
+              }
+            ]
+          }
+        ],
+        "StartedAtUtc": "2026-05-07T17:13:06.0006563+00:00",
+        "CompletedAtUtc": "2026-05-07T17:13:09.0935529+00:00"
+      },
+      "qa_tweak_id": "visibility.disable-widgets",
+      "candidate_id": "visibility.disable-widgets",
+      "card_name": "Widgets Feature",
+      "documentation": "research/records/visibility.disable-widgets.json"
     }
   ],
   "summary": {
@@ -1679,7 +1654,7 @@
     "live_success_count": 5,
     "live_failure_count": 0,
     "categories": [
-      "System"
+      "Visibility"
     ]
   }
 }
