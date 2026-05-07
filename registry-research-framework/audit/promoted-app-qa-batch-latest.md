@@ -1,7 +1,7 @@
 # Promoted App QA Batch
 
 - Status: PASS
-- Generated UTC: 2026-05-07T17:08:57Z
+- Generated UTC: 2026-05-07T17:10:54Z
 - Catalog candidates: 242
 - Selected candidates: 5
 - Planned apply-allowed candidates: 5
@@ -10,41 +10,41 @@
 
 ## Selected Candidates
 
-- `network.smb-enable-multichannel` | SMB Multichannel | Network
-  docs: `research/records/network.smb-enable-multichannel.review.json`
+- `system.ntfs-disable-8dot3` | NTFS 8.3 Short Name Creation | System
+  docs: `research/records/system.ntfs-disable-8dot3.json`
   rollback: default=true | previous=true
   card snapshot: claim_boundary=true | fields=TweakId, Name, Category, EvidenceClass, ResearchStatus, RollbackSnapshotState, HasClaimBoundary, WhatWeKnowSummary, WhatWeDoNotClaimSummary, ProofLanes | lanes=docs, runtime, source, rollback
-- `network.smb-enable-quic` | SMB over QUIC | Network
-  docs: `research/records/network.smb-enable-quic.review.json`
+- `system.ntfs-disable-last-access` | NTFS Last Access Time Updates | System
+  docs: `research/records/system.ntfs-disable-last-access.json`
   rollback: default=true | previous=true
   card snapshot: claim_boundary=true | fields=TweakId, Name, Category, EvidenceClass, ResearchStatus, RollbackSnapshotState, HasClaimBoundary, WhatWeKnowSummary, WhatWeDoNotClaimSummary, ProofLanes | lanes=docs, runtime, source, rollback
-- `network.smb-encrypt-data` | SMB Server Encryption Requirement | Network
-  docs: `research/records/network.smb-encrypt-data.json`
+- `system.ntfs-enable-long-paths` | Win32 Long Paths | System
+  docs: `research/records/system.ntfs-enable-long-paths.json`
   rollback: default=true | previous=true
   card snapshot: claim_boundary=true | fields=TweakId, Name, Category, EvidenceClass, ResearchStatus, RollbackSnapshotState, HasClaimBoundary, WhatWeKnowSummary, WhatWeDoNotClaimSummary, ProofLanes | lanes=docs, runtime, source, rollback
-- `network.smb-increase-client-metadata-cache` | SMB Client Metadata Cache Size Bundle | Network
-  docs: `research/records/network.smb-increase-client-metadata-cache.json`
+- `system.ntfs-reset-memory-usage` | NTFS Memory Usage | System
+  docs: `research/records/system.ntfs-reset-memory-usage.json`
   rollback: default=true | previous=true
   card snapshot: claim_boundary=true | fields=TweakId, Name, Category, EvidenceClass, ResearchStatus, RollbackSnapshotState, HasClaimBoundary, WhatWeKnowSummary, WhatWeDoNotClaimSummary, ProofLanes | lanes=docs, runtime, source, rollback
-- `network.smb-reject-unencrypted-access` | SMB Server Reject Unencrypted Access | Network
-  docs: `research/records/network.smb-reject-unencrypted-access.json`
+- `system.ntfs-reset-mft-zone` | NTFS MFT Zone Reservation | System
+  docs: `research/records/system.ntfs-reset-mft-zone.json`
   rollback: default=true | previous=true
   card snapshot: claim_boundary=true | fields=TweakId, Name, Category, EvidenceClass, ResearchStatus, RollbackSnapshotState, HasClaimBoundary, WhatWeKnowSummary, WhatWeDoNotClaimSummary, ProofLanes | lanes=docs, runtime, source, rollback
 
 ## Live Results
 
-- `network.smb-enable-multichannel` | success=true | status=ok
+- `system.ntfs-disable-8dot3` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
   card contract: ok | claim_boundary=true | lanes=docs, runtime, source, rollback
-- `network.smb-enable-quic` | success=true | status=ok
+- `system.ntfs-disable-last-access` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
   card contract: ok | claim_boundary=true | lanes=docs, runtime, source, rollback
-- `network.smb-encrypt-data` | success=true | status=ok
+- `system.ntfs-enable-long-paths` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
   card contract: ok | claim_boundary=true | lanes=docs, runtime, source, rollback
-- `network.smb-increase-client-metadata-cache` | success=true | status=ok
+- `system.ntfs-reset-memory-usage` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
   card contract: ok | claim_boundary=true | lanes=docs, runtime, source, rollback
-- `network.smb-reject-unencrypted-access` | success=true | status=ok
+- `system.ntfs-reset-mft-zone` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
   card contract: ok | claim_boundary=true | lanes=docs, runtime, source, rollback

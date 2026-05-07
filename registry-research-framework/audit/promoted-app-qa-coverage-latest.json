@@ -1,11 +1,11 @@
 {
-  "generated_utc": "2026-05-07T17:08:57Z",
-  "history_entry_count": 62,
+  "generated_utc": "2026-05-07T17:10:54Z",
+  "history_entry_count": 63,
   "catalog_candidate_count": 242,
-  "covered_count": 183,
-  "uncovered_count": 59,
+  "covered_count": 188,
+  "uncovered_count": 54,
   "summary": {
-    "coverage_percent": 75.62,
+    "coverage_percent": 77.69,
     "covered_categories": {
       "Audio": 3,
       "Cleanup": 1,
@@ -18,7 +18,7 @@
       "Power": 7,
       "Privacy": 48,
       "Security": 17,
-      "System": 36,
+      "System": 41,
       "Visibility": 16
     },
     "uncovered_categories": {
@@ -28,64 +28,11 @@
       "Power": 3,
       "Privacy": 19,
       "Security": 4,
-      "System": 16,
+      "System": 11,
       "Visibility": 7
     }
   },
   "recommended_next_batches": [
-    {
-      "category": "System",
-      "covered_count": 36,
-      "uncovered_count": 16,
-      "coverage_percent": 69.23,
-      "batch_size": 5,
-      "tweak_ids": [
-        "system.ntfs-disable-8dot3",
-        "system.ntfs-disable-last-access",
-        "system.ntfs-enable-long-paths",
-        "system.ntfs-reset-memory-usage",
-        "system.ntfs-reset-mft-zone"
-      ],
-      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id system.ntfs-disable-8dot3 --id system.ntfs-disable-last-access --id system.ntfs-enable-long-paths --id system.ntfs-reset-memory-usage --id system.ntfs-reset-mft-zone",
-      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id system.ntfs-disable-8dot3 --id system.ntfs-disable-last-access --id system.ntfs-enable-long-paths --id system.ntfs-reset-memory-usage --id system.ntfs-reset-mft-zone --run-kvm --json",
-      "candidates": [
-        {
-          "tweak_id": "system.ntfs-disable-8dot3",
-          "record_id": "system.ntfs-disable-8dot3",
-          "category": "System",
-          "name": "NTFS 8.3 Short Name Creation",
-          "documentation": "research/records/system.ntfs-disable-8dot3.json"
-        },
-        {
-          "tweak_id": "system.ntfs-disable-last-access",
-          "record_id": "system.ntfs-disable-last-access",
-          "category": "System",
-          "name": "NTFS Last Access Time Updates",
-          "documentation": "research/records/system.ntfs-disable-last-access.json"
-        },
-        {
-          "tweak_id": "system.ntfs-enable-long-paths",
-          "record_id": "system.ntfs-enable-long-paths",
-          "category": "System",
-          "name": "Win32 Long Paths",
-          "documentation": "research/records/system.ntfs-enable-long-paths.json"
-        },
-        {
-          "tweak_id": "system.ntfs-reset-memory-usage",
-          "record_id": "system.ntfs-reset-memory-usage",
-          "category": "System",
-          "name": "NTFS Memory Usage",
-          "documentation": "research/records/system.ntfs-reset-memory-usage.json"
-        },
-        {
-          "tweak_id": "system.ntfs-reset-mft-zone",
-          "record_id": "system.ntfs-reset-mft-zone",
-          "category": "System",
-          "name": "NTFS MFT Zone Reservation",
-          "documentation": "research/records/system.ntfs-reset-mft-zone.json"
-        }
-      ]
-    },
     {
       "category": "Visibility",
       "covered_count": 16,
@@ -271,6 +218,35 @@
           "category": "Explorer",
           "name": "Display File Icons On Thumbnails",
           "documentation": "research/records/explorer.show-type-overlay.review.json"
+        }
+      ]
+    },
+    {
+      "category": "Developer",
+      "covered_count": 7,
+      "uncovered_count": 2,
+      "coverage_percent": 77.78,
+      "batch_size": 2,
+      "tweak_ids": [
+        "developer.windows-dev-mode",
+        "developer.wsl2-memory"
+      ],
+      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id developer.windows-dev-mode --id developer.wsl2-memory",
+      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id developer.windows-dev-mode --id developer.wsl2-memory --run-kvm --json",
+      "candidates": [
+        {
+          "tweak_id": "developer.windows-dev-mode",
+          "record_id": "developer.windows-dev-mode",
+          "category": "Developer",
+          "name": "Windows Developer Mode",
+          "documentation": "research/records/developer.windows-dev-mode.json"
+        },
+        {
+          "tweak_id": "developer.wsl2-memory",
+          "record_id": "developer.wsl2-memory",
+          "category": "Developer",
+          "name": "WSL 2 Memory Limit",
+          "documentation": "research/records/developer.wsl2-memory.json"
         }
       ]
     }
@@ -1780,6 +1756,51 @@
       "latest_report_status": "ok"
     },
     {
+      "tweak_id": "system.ntfs-disable-8dot3",
+      "qa_tweak_id": "system.ntfs-disable-8dot3",
+      "candidate_id": "system.ntfs-disable-8dot3",
+      "category": "System",
+      "name": "NTFS 8.3 Short Name Creation",
+      "documentation": "research/records/system.ntfs-disable-8dot3.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "system.ntfs-disable-last-access",
+      "qa_tweak_id": "system.ntfs-disable-last-access",
+      "candidate_id": "system.ntfs-disable-last-access",
+      "category": "System",
+      "name": "NTFS Last Access Time Updates",
+      "documentation": "research/records/system.ntfs-disable-last-access.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "system.ntfs-enable-long-paths",
+      "qa_tweak_id": "system.ntfs-enable-long-paths",
+      "candidate_id": "system.ntfs-enable-long-paths",
+      "category": "System",
+      "name": "Win32 Long Paths",
+      "documentation": "research/records/system.ntfs-enable-long-paths.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "system.ntfs-reset-memory-usage",
+      "qa_tweak_id": "system.ntfs-reset-memory-usage",
+      "candidate_id": "system.ntfs-reset-memory-usage",
+      "category": "System",
+      "name": "NTFS Memory Usage",
+      "documentation": "research/records/system.ntfs-reset-memory-usage.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "system.ntfs-reset-mft-zone",
+      "qa_tweak_id": "system.ntfs-reset-mft-zone",
+      "candidate_id": "system.ntfs-reset-mft-zone",
+      "category": "System",
+      "name": "NTFS MFT Zone Reservation",
+      "documentation": "research/records/system.ntfs-reset-mft-zone.json",
+      "latest_report_status": "ok"
+    },
+    {
       "tweak_id": "visibility.default-account-picture",
       "qa_tweak_id": "visibility.default-account-picture",
       "candidate_id": "visibility.default-account-picture",
@@ -2176,41 +2197,6 @@
       "category": "Security",
       "name": "User Account Control Prompting Profile",
       "documentation": "research/records/security.uac-never-notify.json"
-    },
-    {
-      "tweak_id": "system.ntfs-disable-8dot3",
-      "record_id": "system.ntfs-disable-8dot3",
-      "category": "System",
-      "name": "NTFS 8.3 Short Name Creation",
-      "documentation": "research/records/system.ntfs-disable-8dot3.json"
-    },
-    {
-      "tweak_id": "system.ntfs-disable-last-access",
-      "record_id": "system.ntfs-disable-last-access",
-      "category": "System",
-      "name": "NTFS Last Access Time Updates",
-      "documentation": "research/records/system.ntfs-disable-last-access.json"
-    },
-    {
-      "tweak_id": "system.ntfs-enable-long-paths",
-      "record_id": "system.ntfs-enable-long-paths",
-      "category": "System",
-      "name": "Win32 Long Paths",
-      "documentation": "research/records/system.ntfs-enable-long-paths.json"
-    },
-    {
-      "tweak_id": "system.ntfs-reset-memory-usage",
-      "record_id": "system.ntfs-reset-memory-usage",
-      "category": "System",
-      "name": "NTFS Memory Usage",
-      "documentation": "research/records/system.ntfs-reset-memory-usage.json"
-    },
-    {
-      "tweak_id": "system.ntfs-reset-mft-zone",
-      "record_id": "system.ntfs-reset-mft-zone",
-      "category": "System",
-      "name": "NTFS MFT Zone Reservation",
-      "documentation": "research/records/system.ntfs-reset-mft-zone.json"
     },
     {
       "tweak_id": "system.priority-control",

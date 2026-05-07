@@ -1,11 +1,11 @@
 # Promoted App QA Coverage
 
-- Generated UTC: 2026-05-07T17:08:57Z
-- History entries: 62
+- Generated UTC: 2026-05-07T17:10:54Z
+- History entries: 63
 - Promoted app-QA candidates: 242
-- Covered: 183
-- Uncovered: 59
-- Coverage: 75.62%
+- Covered: 188
+- Uncovered: 54
+- Coverage: 77.69%
 
 ## Covered Categories
 
@@ -20,7 +20,7 @@
 - Power: 7
 - Privacy: 48
 - Security: 17
-- System: 36
+- System: 41
 - Visibility: 16
 
 ## Uncovered Categories
@@ -31,14 +31,11 @@
 - Power: 3
 - Privacy: 19
 - Security: 4
-- System: 16
+- System: 11
 - Visibility: 7
 
 ## Recommended Next Batches
 
-- System: 5 uncovered cards | coverage 69.23%
-  command: `dotnet run --project cli/cli.csproj -- research qa-batch --id system.ntfs-disable-8dot3 --id system.ntfs-disable-last-access --id system.ntfs-enable-long-paths --id system.ntfs-reset-memory-usage --id system.ntfs-reset-mft-zone`
-  live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id system.ntfs-disable-8dot3 --id system.ntfs-disable-last-access --id system.ntfs-enable-long-paths --id system.ntfs-reset-memory-usage --id system.ntfs-reset-mft-zone --run-kvm --json`
 - Visibility: 5 uncovered cards | coverage 69.57%
   command: `dotnet run --project cli/cli.csproj -- research qa-batch --id visibility.disable-spotlight-settings --id visibility.disable-spotlight-third-party --id visibility.disable-spotlight-welcome --id visibility.disable-wcn-wizards --id visibility.disable-widgets`
   live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id visibility.disable-spotlight-settings --id visibility.disable-spotlight-third-party --id visibility.disable-spotlight-welcome --id visibility.disable-wcn-wizards --id visibility.disable-widgets --run-kvm --json`
@@ -51,6 +48,9 @@
 - Explorer: 4 uncovered cards | coverage 76.47%
   command: `dotnet run --project cli/cli.csproj -- research qa-batch --id explorer.show-info-tips --id explorer.show-protected-operating-system-files --id explorer.show-recent-items --id explorer.show-type-overlay`
   live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id explorer.show-info-tips --id explorer.show-protected-operating-system-files --id explorer.show-recent-items --id explorer.show-type-overlay --run-kvm --json`
+- Developer: 2 uncovered cards | coverage 77.78%
+  command: `dotnet run --project cli/cli.csproj -- research qa-batch --id developer.windows-dev-mode --id developer.wsl2-memory`
+  live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id developer.windows-dev-mode --id developer.wsl2-memory --run-kvm --json`
 
 ## Remaining Uncovered Sample
 
