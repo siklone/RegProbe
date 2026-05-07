@@ -1,11 +1,11 @@
 {
-  "generated_utc": "2026-05-07T16:51:52Z",
-  "history_entry_count": 53,
+  "generated_utc": "2026-05-07T16:56:37Z",
+  "history_entry_count": 55,
   "catalog_candidate_count": 242,
-  "covered_count": 159,
-  "uncovered_count": 83,
+  "covered_count": 164,
+  "uncovered_count": 78,
   "summary": {
-    "coverage_percent": 65.7,
+    "coverage_percent": 67.77,
     "covered_categories": {
       "Audio": 2,
       "Cleanup": 1,
@@ -17,7 +17,7 @@
       "Peripheral": 2,
       "Power": 7,
       "Privacy": 43,
-      "Security": 12,
+      "Security": 17,
       "System": 31,
       "Visibility": 16
     },
@@ -30,65 +30,12 @@
       "Peripheral": 1,
       "Power": 3,
       "Privacy": 24,
-      "Security": 9,
+      "Security": 4,
       "System": 21,
       "Visibility": 7
     }
   },
   "recommended_next_batches": [
-    {
-      "category": "Security",
-      "covered_count": 12,
-      "uncovered_count": 9,
-      "coverage_percent": 57.14,
-      "batch_size": 5,
-      "tweak_ids": [
-        "security.disable-wu-driver-updates",
-        "security.enable-defender-maps-advanced-membership",
-        "security.enable-dynamic-lock",
-        "security.enable-sudo",
-        "security.hide-defender-exclusions-from-local-admins"
-      ],
-      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id security.disable-wu-driver-updates --id security.enable-defender-maps-advanced-membership --id security.enable-dynamic-lock --id security.enable-sudo --id security.hide-defender-exclusions-from-local-admins",
-      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id security.disable-wu-driver-updates --id security.enable-defender-maps-advanced-membership --id security.enable-dynamic-lock --id security.enable-sudo --id security.hide-defender-exclusions-from-local-admins --run-kvm --json",
-      "candidates": [
-        {
-          "tweak_id": "security.disable-wu-driver-updates",
-          "record_id": "security.disable-wu-driver-updates",
-          "category": "Security",
-          "name": "Windows Update Driver Search Policy",
-          "documentation": "research/records/security.disable-wu-driver-updates.json"
-        },
-        {
-          "tweak_id": "security.enable-defender-maps-advanced-membership",
-          "record_id": "security.enable-defender-maps-advanced-membership",
-          "category": "Security",
-          "name": "Microsoft Defender MAPS Membership",
-          "documentation": "research/records/security.enable-defender-maps-advanced-membership.review.json"
-        },
-        {
-          "tweak_id": "security.enable-dynamic-lock",
-          "record_id": "security.enable-dynamic-lock",
-          "category": "Security",
-          "name": "Dynamic Lock",
-          "documentation": "research/records/security.enable-dynamic-lock.json"
-        },
-        {
-          "tweak_id": "security.enable-sudo",
-          "record_id": "security.enable-sudo",
-          "category": "Security",
-          "name": "Windows Sudo Mode Policy",
-          "documentation": "research/records/security.enable-sudo.json"
-        },
-        {
-          "tweak_id": "security.hide-defender-exclusions-from-local-admins",
-          "record_id": "security.hide-defender-exclusions-from-local-admins",
-          "category": "Security",
-          "name": "Hide Defender Exclusions From Local Admins",
-          "documentation": "research/records/security.hide-defender-exclusions-from-local-admins.review.json"
-        }
-      ]
-    },
     {
       "category": "System",
       "covered_count": 31,
@@ -242,6 +189,27 @@
           "category": "Audio",
           "name": "Show Hidden Audio Devices",
           "documentation": "research/records/audio.show-hidden-devices.review.json"
+        }
+      ]
+    },
+    {
+      "category": "Peripheral",
+      "covered_count": 2,
+      "uncovered_count": 1,
+      "coverage_percent": 66.67,
+      "batch_size": 1,
+      "tweak_ids": [
+        "peripheral.disable-autoplay"
+      ],
+      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id peripheral.disable-autoplay",
+      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id peripheral.disable-autoplay --run-kvm --json",
+      "candidates": [
+        {
+          "tweak_id": "peripheral.disable-autoplay",
+          "record_id": "peripheral.disable-autoplay",
+          "category": "Peripheral",
+          "name": "Disable AutoPlay",
+          "documentation": "research/records/peripheral.disable-autoplay.review.json"
         }
       ]
     }
@@ -1256,6 +1224,51 @@
       "latest_report_status": "ok"
     },
     {
+      "tweak_id": "security.disable-wu-driver-updates",
+      "qa_tweak_id": "security.disable-wu-driver-updates",
+      "candidate_id": "security.disable-wu-driver-updates",
+      "category": "Security",
+      "name": "Windows Update Driver Search Policy",
+      "documentation": "research/records/security.disable-wu-driver-updates.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "security.enable-defender-maps-advanced-membership",
+      "qa_tweak_id": "security.enable-defender-maps-advanced-membership",
+      "candidate_id": "security.enable-defender-maps-advanced-membership",
+      "category": "Security",
+      "name": "Microsoft Defender MAPS Membership",
+      "documentation": "research/records/security.enable-defender-maps-advanced-membership.review.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "security.enable-dynamic-lock",
+      "qa_tweak_id": "security.enable-dynamic-lock",
+      "candidate_id": "security.enable-dynamic-lock",
+      "category": "Security",
+      "name": "Dynamic Lock",
+      "documentation": "research/records/security.enable-dynamic-lock.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "security.enable-sudo",
+      "qa_tweak_id": "security.enable-sudo",
+      "candidate_id": "security.enable-sudo",
+      "category": "Security",
+      "name": "Windows Sudo Mode Policy",
+      "documentation": "research/records/security.enable-sudo.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "security.hide-defender-exclusions-from-local-admins",
+      "qa_tweak_id": "security.hide-defender-exclusions-from-local-admins",
+      "candidate_id": "security.hide-defender-exclusions-from-local-admins",
+      "category": "Security",
+      "name": "Hide Defender Exclusions From Local Admins",
+      "documentation": "research/records/security.hide-defender-exclusions-from-local-admins.review.json",
+      "latest_report_status": "ok"
+    },
+    {
       "tweak_id": "system.aero-shake",
       "qa_tweak_id": "system.aero-shake",
       "candidate_id": "system.aero-shake",
@@ -2001,41 +2014,6 @@
       "category": "Privacy",
       "name": "Recommended Troubleshooting for Known Problems",
       "documentation": "research/records/privacy.troubleshooter-dont-run.review.json"
-    },
-    {
-      "tweak_id": "security.disable-wu-driver-updates",
-      "record_id": "security.disable-wu-driver-updates",
-      "category": "Security",
-      "name": "Windows Update Driver Search Policy",
-      "documentation": "research/records/security.disable-wu-driver-updates.json"
-    },
-    {
-      "tweak_id": "security.enable-defender-maps-advanced-membership",
-      "record_id": "security.enable-defender-maps-advanced-membership",
-      "category": "Security",
-      "name": "Microsoft Defender MAPS Membership",
-      "documentation": "research/records/security.enable-defender-maps-advanced-membership.review.json"
-    },
-    {
-      "tweak_id": "security.enable-dynamic-lock",
-      "record_id": "security.enable-dynamic-lock",
-      "category": "Security",
-      "name": "Dynamic Lock",
-      "documentation": "research/records/security.enable-dynamic-lock.json"
-    },
-    {
-      "tweak_id": "security.enable-sudo",
-      "record_id": "security.enable-sudo",
-      "category": "Security",
-      "name": "Windows Sudo Mode Policy",
-      "documentation": "research/records/security.enable-sudo.json"
-    },
-    {
-      "tweak_id": "security.hide-defender-exclusions-from-local-admins",
-      "record_id": "security.hide-defender-exclusions-from-local-admins",
-      "category": "Security",
-      "name": "Hide Defender Exclusions From Local Admins",
-      "documentation": "research/records/security.hide-defender-exclusions-from-local-admins.review.json"
     },
     {
       "tweak_id": "security.powershell-unrestricted",

@@ -1,11 +1,11 @@
 # Promoted App QA Coverage
 
-- Generated UTC: 2026-05-07T16:51:52Z
-- History entries: 53
+- Generated UTC: 2026-05-07T16:56:37Z
+- History entries: 55
 - Promoted app-QA candidates: 242
-- Covered: 159
-- Uncovered: 83
-- Coverage: 65.7%
+- Covered: 164
+- Uncovered: 78
+- Coverage: 67.77%
 
 ## Covered Categories
 
@@ -19,7 +19,7 @@
 - Peripheral: 2
 - Power: 7
 - Privacy: 43
-- Security: 12
+- Security: 17
 - System: 31
 - Visibility: 16
 
@@ -33,15 +33,12 @@
 - Peripheral: 1
 - Power: 3
 - Privacy: 24
-- Security: 9
+- Security: 4
 - System: 21
 - Visibility: 7
 
 ## Recommended Next Batches
 
-- Security: 5 uncovered cards | coverage 57.14%
-  command: `dotnet run --project cli/cli.csproj -- research qa-batch --id security.disable-wu-driver-updates --id security.enable-defender-maps-advanced-membership --id security.enable-dynamic-lock --id security.enable-sudo --id security.hide-defender-exclusions-from-local-admins`
-  live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id security.disable-wu-driver-updates --id security.enable-defender-maps-advanced-membership --id security.enable-dynamic-lock --id security.enable-sudo --id security.hide-defender-exclusions-from-local-admins --run-kvm --json`
 - System: 5 uncovered cards | coverage 59.62%
   command: `dotnet run --project cli/cli.csproj -- research qa-batch --id system.memory-disable-paging-executive --id system.memory-large-system-cache-client --id system.memory-nonpaged-pool-dynamic --id system.memory-paged-pool-dynamic --id system.memory-registry-quota-default`
   live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id system.memory-disable-paging-executive --id system.memory-large-system-cache-client --id system.memory-nonpaged-pool-dynamic --id system.memory-paged-pool-dynamic --id system.memory-registry-quota-default --run-kvm --json`
@@ -54,6 +51,9 @@
 - Audio: 1 uncovered cards | coverage 66.67%
   command: `dotnet run --project cli/cli.csproj -- research qa-batch --id audio.show-hidden-devices`
   live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id audio.show-hidden-devices --run-kvm --json`
+- Peripheral: 1 uncovered cards | coverage 66.67%
+  command: `dotnet run --project cli/cli.csproj -- research qa-batch --id peripheral.disable-autoplay`
+  live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id peripheral.disable-autoplay --run-kvm --json`
 
 ## Remaining Uncovered Sample
 

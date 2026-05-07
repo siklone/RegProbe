@@ -1,13 +1,13 @@
 {
-  "generated_utc": "2026-05-07T16:51:52Z",
+  "generated_utc": "2026-05-07T16:56:37Z",
   "status": "PASS",
   "selection": {
     "requested_ids": [
-      "privacy.disable-mdm-enrollment",
-      "privacy.disable-message-sync",
-      "privacy.disable-offline-files.policy",
-      "privacy.disable-onesettings-downloads",
-      "privacy.disable-online-tips"
+      "security.disable-wu-driver-updates",
+      "security.enable-defender-maps-advanced-membership",
+      "security.enable-dynamic-lock",
+      "security.enable-sudo",
+      "security.hide-defender-exclusions-from-local-admins"
     ],
     "requested_categories": [],
     "limit_per_category": 1,
@@ -26,25 +26,25 @@
   "errors": [],
   "candidates": [
     {
-      "tweak_id": "privacy.disable-mdm-enrollment",
-      "qa_tweak_id": "privacy.disable-mdm-enrollment",
-      "candidate_id": "privacy.disable-mdm-enrollment",
-      "record_id": "privacy.disable-mdm-enrollment",
-      "category": "Privacy",
-      "name": "MDM Enrollment",
-      "documentation": "research/records/privacy.disable-mdm-enrollment.json",
+      "tweak_id": "security.disable-wu-driver-updates",
+      "qa_tweak_id": "security.disable-wu-driver-updates",
+      "candidate_id": "security.disable-wu-driver-updates",
+      "record_id": "security.disable-wu-driver-updates",
+      "category": "Security",
+      "name": "Windows Update Driver Search Policy",
+      "documentation": "research/records/security.disable-wu-driver-updates.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.disable-mdm-enrollment",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect security.disable-wu-driver-updates",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-mdm-enrollment' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-mdm-enrollment.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-mdm-enrollment' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-mdm-enrollment.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-mdm-enrollment' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-mdm-enrollment.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-mdm-enrollment' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-mdm-enrollment.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.disable-mdm-enrollment'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'security.disable-wu-driver-updates' --qa-output 'C:\\Tools\\ValidationController\\smoke\\security.disable-wu-driver-updates.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'security.disable-wu-driver-updates' --qa-output 'C:\\Tools\\ValidationController\\smoke\\security.disable-wu-driver-updates.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'security.disable-wu-driver-updates' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\security.disable-wu-driver-updates.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'security.disable-wu-driver-updates' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\security.disable-wu-driver-updates.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'security.disable-wu-driver-updates'"
       },
       "expected_report": {
         "success": true,
@@ -85,25 +85,25 @@
       }
     },
     {
-      "tweak_id": "privacy.disable-message-sync",
-      "qa_tweak_id": "privacy.disable-message-sync",
-      "candidate_id": "privacy.disable-message-sync",
-      "record_id": "privacy.disable-message-sync",
-      "category": "Privacy",
-      "name": "Message Service Cloud Sync",
-      "documentation": "research/records/privacy.disable-message-sync.json",
+      "tweak_id": "security.enable-defender-maps-advanced-membership",
+      "qa_tweak_id": "security.enable-defender-maps-advanced-membership",
+      "candidate_id": "security.enable-defender-maps-advanced-membership",
+      "record_id": "security.enable-defender-maps-advanced-membership",
+      "category": "Security",
+      "name": "Microsoft Defender MAPS Membership",
+      "documentation": "research/records/security.enable-defender-maps-advanced-membership.review.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.disable-message-sync",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect security.enable-defender-maps-advanced-membership",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-message-sync' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-message-sync.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-message-sync' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-message-sync.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-message-sync' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-message-sync.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-message-sync' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-message-sync.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.disable-message-sync'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'security.enable-defender-maps-advanced-membership' --qa-output 'C:\\Tools\\ValidationController\\smoke\\security.enable-defender-maps-advanced-membership.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'security.enable-defender-maps-advanced-membership' --qa-output 'C:\\Tools\\ValidationController\\smoke\\security.enable-defender-maps-advanced-membership.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'security.enable-defender-maps-advanced-membership' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\security.enable-defender-maps-advanced-membership.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'security.enable-defender-maps-advanced-membership' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\security.enable-defender-maps-advanced-membership.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'security.enable-defender-maps-advanced-membership'"
       },
       "expected_report": {
         "success": true,
@@ -144,25 +144,25 @@
       }
     },
     {
-      "tweak_id": "privacy.disable-offline-files.policy",
-      "qa_tweak_id": "privacy.disable-offline-files.policy",
-      "candidate_id": "privacy.disable-offline-files.policy",
-      "record_id": "privacy.disable-offline-files.policy",
-      "category": "Privacy",
-      "name": "Offline Files Feature Policy",
-      "documentation": "research/records/privacy.disable-offline-files.policy.json",
+      "tweak_id": "security.enable-dynamic-lock",
+      "qa_tweak_id": "security.enable-dynamic-lock",
+      "candidate_id": "security.enable-dynamic-lock",
+      "record_id": "security.enable-dynamic-lock",
+      "category": "Security",
+      "name": "Dynamic Lock",
+      "documentation": "research/records/security.enable-dynamic-lock.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.disable-offline-files.policy",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect security.enable-dynamic-lock",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-offline-files.policy' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-offline-files.policy.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-offline-files.policy' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-offline-files.policy.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-offline-files.policy' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-offline-files.policy.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-offline-files.policy' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-offline-files.policy.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.disable-offline-files.policy'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'security.enable-dynamic-lock' --qa-output 'C:\\Tools\\ValidationController\\smoke\\security.enable-dynamic-lock.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'security.enable-dynamic-lock' --qa-output 'C:\\Tools\\ValidationController\\smoke\\security.enable-dynamic-lock.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'security.enable-dynamic-lock' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\security.enable-dynamic-lock.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'security.enable-dynamic-lock' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\security.enable-dynamic-lock.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'security.enable-dynamic-lock'"
       },
       "expected_report": {
         "success": true,
@@ -203,25 +203,25 @@
       }
     },
     {
-      "tweak_id": "privacy.disable-onesettings-downloads",
-      "qa_tweak_id": "privacy.disable-onesettings-downloads",
-      "candidate_id": "privacy.disable-onesettings-downloads",
-      "record_id": "privacy.disable-onesettings-downloads",
-      "category": "Privacy",
-      "name": "OneSettings Downloads",
-      "documentation": "research/records/privacy.disable-onesettings-downloads.json",
+      "tweak_id": "security.enable-sudo",
+      "qa_tweak_id": "security.enable-sudo",
+      "candidate_id": "security.enable-sudo",
+      "record_id": "security.enable-sudo",
+      "category": "Security",
+      "name": "Windows Sudo Mode Policy",
+      "documentation": "research/records/security.enable-sudo.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.disable-onesettings-downloads",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect security.enable-sudo",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-onesettings-downloads' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-onesettings-downloads.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-onesettings-downloads' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-onesettings-downloads.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-onesettings-downloads' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-onesettings-downloads.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-onesettings-downloads' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-onesettings-downloads.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.disable-onesettings-downloads'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'security.enable-sudo' --qa-output 'C:\\Tools\\ValidationController\\smoke\\security.enable-sudo.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'security.enable-sudo' --qa-output 'C:\\Tools\\ValidationController\\smoke\\security.enable-sudo.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'security.enable-sudo' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\security.enable-sudo.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'security.enable-sudo' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\security.enable-sudo.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'security.enable-sudo'"
       },
       "expected_report": {
         "success": true,
@@ -262,25 +262,25 @@
       }
     },
     {
-      "tweak_id": "privacy.disable-online-tips",
-      "qa_tweak_id": "privacy.disable-online-tips",
-      "candidate_id": "privacy.disable-online-tips",
-      "record_id": "privacy.disable-online-tips",
-      "category": "Privacy",
-      "name": "Online Tips in Settings",
-      "documentation": "research/records/privacy.disable-online-tips.json",
+      "tweak_id": "security.hide-defender-exclusions-from-local-admins",
+      "qa_tweak_id": "security.hide-defender-exclusions-from-local-admins",
+      "candidate_id": "security.hide-defender-exclusions-from-local-admins",
+      "record_id": "security.hide-defender-exclusions-from-local-admins",
+      "category": "Security",
+      "name": "Hide Defender Exclusions From Local Admins",
+      "documentation": "research/records/security.hide-defender-exclusions-from-local-admins.review.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.disable-online-tips",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect security.hide-defender-exclusions-from-local-admins",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-online-tips' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-online-tips.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-online-tips' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-online-tips.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-online-tips' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-online-tips.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-online-tips' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-online-tips.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.disable-online-tips'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'security.hide-defender-exclusions-from-local-admins' --qa-output 'C:\\Tools\\ValidationController\\smoke\\security.hide-defender-exclusions-from-local-admins.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'security.hide-defender-exclusions-from-local-admins' --qa-output 'C:\\Tools\\ValidationController\\smoke\\security.hide-defender-exclusions-from-local-admins.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'security.hide-defender-exclusions-from-local-admins' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\security.hide-defender-exclusions-from-local-admins.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'security.hide-defender-exclusions-from-local-admins' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\security.hide-defender-exclusions-from-local-admins.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'security.hide-defender-exclusions-from-local-admins'"
       },
       "expected_report": {
         "success": true,
@@ -323,7 +323,7 @@
   ],
   "run_results": [
     {
-      "tweak_id": "privacy.disable-mdm-enrollment",
+      "tweak_id": "security.disable-wu-driver-updates",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -360,19 +360,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "privacy.disable-mdm-enrollment",
-        "TweakName": "MDM Enrollment",
+        "TweakId": "security.disable-wu-driver-updates",
+        "TweakName": "Windows Update Driver Search Policy",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "privacy.disable-mdm-enrollment",
-          "Name": "MDM Enrollment",
-          "Category": "Privacy",
-          "Description": "Windows can allow the computer to enroll into a Mobile Device Management service for remote management. This policy decides whether new MDM enrollment is allowed.",
-          "FriendlyDescription": "Windows can allow the computer to enroll into a Mobile Device Management service for remote management. This policy decides whether new MDM enrollment is allowed.",
-          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Windows\\CurrentVersion\\MDM\\DisableRegistration",
+          "TweakId": "security.disable-wu-driver-updates",
+          "Name": "Windows Update Driver Search Policy",
+          "Category": "Security",
+          "Description": "When Windows needs a device driver, it can search Windows Update for one. These policies control whether that search is allowed and, if it is, when it happens.",
+          "FriendlyDescription": "When Windows needs a device driver, it can search Windows Update for one. These policies control whether that search is allowed and, if it is, when it happens.",
+          "RegistryPath": "",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -380,15 +380,15 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Windows can allow the computer to enroll into a Mobile Device Management service for remote management. This policy decides whether new MDM enrollment is allowed. Evidence: Local official ADMX defines the exact key and value name; local ADML confirms that enabling the policy disables new MDM enrollment without unenrolling existing devices. Added nohuto mirror corroboration via nohuto-disableregistration-admx. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: When Windows needs a device driver, it can search Windows Update for one. These policies control whether that search is allowed and, if it is, when it happens. Evidence: The local official Microsoft policy files define the exact DriverSearching and WindowsUpdate policy paths used by the app. SearchOrderConfig = 0 means do not search Windows Update, DontSearchWindowsUpdate = 1 blocks Windows Update device-driver searching, a... Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "Local official ADMX defines the exact key and value name; local ADML confirms that enabling the policy disables new MDM enrollment without unenrolling existing devices. Added nohuto mirror corroboration via nohuto-disableregistration-admx.",
-              "Source": "Validation proof source: evidence/files/external/c/WINDOWS/PolicyDefinitions/MDM.admx"
+              "Summary": "The local official Microsoft policy files define the exact DriverSearching and WindowsUpdate policy paths used by the app. SearchOrderConfig = 0 means do not search Windows Update, DontSearchWindowsUpdate = 1 blocks Windows Update device-driver searching, a...",
+              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/DeviceSetup.admx"
             },
             {
               "Key": "runtime",
@@ -419,8 +419,8 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Privacy (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\privacy\\privacy-verified.md",
+              "Title": "Docs: Security (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\security\\security-verified.md",
               "Kind": "Docs"
             }
           ]
@@ -429,10 +429,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'MDM enrollment disabled'.",
+            "StatusMessage": "Detected 0 of 3 values (matches: 0, missing: 3).",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "MDM enrollment disabled",
+            "CurrentValue": "Unknown",
+            "TargetValue": "Multiple values",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -441,8 +441,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'MDM enrollment disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\CurrentVersion\\MDM\\DisableRegistration: missing -> 1",
-                "TimestampText": "09:51:56"
+                "Message": "Detected 0 of 3 values (matches: 0, missing: 3).\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\DriverSearching\\DontSearchWindowsUpdate: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\DriverSearching\\SearchOrderConfig: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\WindowsUpdate\\ExcludeWUDriversInQualityUpdate: missing",
+                "TimestampText": "09:56:41"
               },
               {
                 "Action": "Apply",
@@ -469,8 +469,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "MDM enrollment disabled",
-            "TargetValue": "MDM enrollment disabled",
+            "CurrentValue": "Multiple values",
+            "TargetValue": "Multiple values",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -479,20 +479,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'MDM enrollment disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\CurrentVersion\\MDM\\DisableRegistration: missing -> 1",
-                "TimestampText": "09:51:56"
+                "Message": "Detected 0 of 3 values (matches: 0, missing: 3).\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\DriverSearching\\DontSearchWindowsUpdate: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\DriverSearching\\SearchOrderConfig: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\WindowsUpdate\\ExcludeWUDriversInQualityUpdate: missing",
+                "TimestampText": "09:56:41"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'MDM enrollment disabled'.",
-                "TimestampText": "09:51:59"
+                "Message": "Updated 3 values.",
+                "TimestampText": "09:56:46"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'MDM enrollment disabled'.",
-                "TimestampText": "09:51:59"
+                "Message": "Verified desired values.",
+                "TimestampText": "09:56:46"
               },
               {
                 "Action": "Rollback",
@@ -507,8 +507,8 @@
             "AppliedStatus": "NotApplied",
             "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "MDM enrollment disabled",
+            "CurrentValue": "Multiple values",
+            "TargetValue": "Multiple values",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -517,36 +517,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'MDM enrollment disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\CurrentVersion\\MDM\\DisableRegistration: missing -> 1",
-                "TimestampText": "09:51:56"
+                "Message": "Detected 0 of 3 values (matches: 0, missing: 3).\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\DriverSearching\\DontSearchWindowsUpdate: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\DriverSearching\\SearchOrderConfig: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\WindowsUpdate\\ExcludeWUDriversInQualityUpdate: missing",
+                "TimestampText": "09:56:41"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'MDM enrollment disabled'.",
-                "TimestampText": "09:51:59"
+                "Message": "Updated 3 values.",
+                "TimestampText": "09:56:46"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'MDM enrollment disabled'.",
-                "TimestampText": "09:51:59"
+                "Message": "Verified desired values.",
+                "TimestampText": "09:56:46"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "09:51:59"
+                "TimestampText": "09:56:46"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'MDM enrollment disabled'.",
+            "StatusMessage": "Detected 0 of 3 values (matches: 0, missing: 3).",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "MDM enrollment disabled",
+            "CurrentValue": "Multiple values",
+            "TargetValue": "Multiple values",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -555,40 +555,40 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'MDM enrollment disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\CurrentVersion\\MDM\\DisableRegistration: missing -> 1",
-                "TimestampText": "09:51:59"
+                "Message": "Detected 0 of 3 values (matches: 0, missing: 3).\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\DriverSearching\\DontSearchWindowsUpdate: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\DriverSearching\\SearchOrderConfig: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\WindowsUpdate\\ExcludeWUDriversInQualityUpdate: missing",
+                "TimestampText": "09:56:46"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'MDM enrollment disabled'.",
-                "TimestampText": "09:51:59"
+                "Message": "Updated 3 values.",
+                "TimestampText": "09:56:46"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'MDM enrollment disabled'.",
-                "TimestampText": "09:51:59"
+                "Message": "Verified desired values.",
+                "TimestampText": "09:56:46"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "09:51:59"
+                "TimestampText": "09:56:46"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T16:51:56.7634606+00:00",
-        "CompletedAtUtc": "2026-05-07T16:51:59.9360258+00:00"
+        "StartedAtUtc": "2026-05-07T16:56:41.2372784+00:00",
+        "CompletedAtUtc": "2026-05-07T16:56:46.3082933+00:00"
       },
-      "qa_tweak_id": "privacy.disable-mdm-enrollment",
-      "candidate_id": "privacy.disable-mdm-enrollment",
-      "card_name": "MDM Enrollment",
-      "documentation": "research/records/privacy.disable-mdm-enrollment.json"
+      "qa_tweak_id": "security.disable-wu-driver-updates",
+      "candidate_id": "security.disable-wu-driver-updates",
+      "card_name": "Windows Update Driver Search Policy",
+      "documentation": "research/records/security.disable-wu-driver-updates.json"
     },
     {
-      "tweak_id": "privacy.disable-message-sync",
+      "tweak_id": "security.enable-defender-maps-advanced-membership",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -625,19 +625,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "privacy.disable-message-sync",
-        "TweakName": "Message Service Cloud Sync",
+        "TweakId": "security.enable-defender-maps-advanced-membership",
+        "TweakName": "Microsoft Defender MAPS Membership",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "privacy.disable-message-sync",
-          "Name": "Message Service Cloud Sync",
-          "Category": "Privacy",
-          "Description": "Windows can back up and restore cellular text messages through Microsoft's cloud services. This policy decides whether that cloud sync is allowed on the device.",
-          "FriendlyDescription": "Windows can back up and restore cellular text messages through Microsoft's cloud services. This policy decides whether that cloud sync is allowed on the device.",
-          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Messaging\\AllowMessageSync",
+          "TweakId": "security.enable-defender-maps-advanced-membership",
+          "Name": "Microsoft Defender MAPS Membership",
+          "Category": "Security",
+          "Description": "Microsoft Defender can join Microsoft MAPS so the service can use cloud lookup and share more threat data with Microsoft.",
+          "FriendlyDescription": "Microsoft Defender can join Microsoft MAPS so the service can use cloud lookup and share more threat data with Microsoft.",
+          "RegistryPath": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet\\SpyNetReporting",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -645,22 +645,22 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Windows can back up and restore cellular text messages through Microsoft's cloud services. This policy decides whether that cloud sync is allowed on the device. Evidence: The Messaging Policy CSP page explicitly names the exact machine policy path and value name the app writes and defines the 0/1 semantics. Added nohuto mirror corroboration via nohuto-allowmessagesync-admx. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: Microsoft Defender can join Microsoft MAPS so the service can use cloud lookup and share more threat data with Microsoft. Evidence: The clean baseline first showed the Defender Spynet policy branch as absent and the non-policy live store reading SpyNetReporting = 2. After the policy write, SecurityHealthService.exe read the same value directly from the policy path. Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "The Messaging Policy CSP page explicitly names the exact machine policy path and value name the app writes and defines the 0/1 semantics. Added nohuto mirror corroboration via nohuto-allowmessagesync-admx.",
-              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-messaging#allowmessagesync"
+              "Summary": "The clean baseline first showed the Defender Spynet policy branch as absent and the non-policy live store reading SpyNetReporting = 2. After the policy write, SecurityHealthService.exe read the same value directly from the policy path.",
+              "Source": "Validation proof source: evidence/files/vm-tooling-staging/spynet-ui-state2.txt"
             },
             {
               "Key": "runtime",
               "Label": "RUNTIME",
               "State": "ready",
-              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
-              "Source": ""
+              "Summary": "On the clean high-risk snapshot, SecurityHealthService.exe opened HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet and got NAME NOT FOUND, then fell back to HKLM\\SOFTWARE\\Microsoft\\Windows Defender\\Spynet\\SpyNetReporting and read Data: 2.",
+              "Source": "Win25H2Clean Procmon baseline for Defender MAPS policy path: evidence/raw/procmon/security.enable-defender-maps-advanced-membership/spynet-ui-baseline.txt"
             },
             {
               "Key": "source",
@@ -684,8 +684,8 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Privacy (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\privacy\\privacy-verified.md",
+              "Title": "Docs: Security (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\security\\security-verified.md",
               "Kind": "Docs"
             }
           ]
@@ -694,10 +694,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Message cloud sync disabled'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Advanced membership'.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Message cloud sync disabled",
+            "TargetValue": "Advanced membership",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -706,8 +706,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Message cloud sync disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\Messaging\\AllowMessageSync: missing -> 0",
-                "TimestampText": "09:52:06"
+                "Message": "Current values do not match a named option. Selected option is 'Advanced membership'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet\\SpyNetReporting: missing -> 2",
+                "TimestampText": "09:56:52"
               },
               {
                 "Action": "Apply",
@@ -734,8 +734,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Message cloud sync disabled",
-            "TargetValue": "Message cloud sync disabled",
+            "CurrentValue": "Advanced membership",
+            "TargetValue": "Advanced membership",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -744,20 +744,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Message cloud sync disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\Messaging\\AllowMessageSync: missing -> 0",
-                "TimestampText": "09:52:06"
+                "Message": "Current values do not match a named option. Selected option is 'Advanced membership'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet\\SpyNetReporting: missing -> 2",
+                "TimestampText": "09:56:52"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Message cloud sync disabled'.",
-                "TimestampText": "09:52:08"
+                "Message": "Applied preset 'Advanced membership'.",
+                "TimestampText": "09:56:55"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Message cloud sync disabled'.",
-                "TimestampText": "09:52:08"
+                "Message": "Verified preset 'Advanced membership'.",
+                "TimestampText": "09:56:55"
               },
               {
                 "Action": "Rollback",
@@ -773,7 +773,7 @@
             "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Message cloud sync disabled",
+            "TargetValue": "Advanced membership",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -782,36 +782,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Message cloud sync disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\Messaging\\AllowMessageSync: missing -> 0",
-                "TimestampText": "09:52:06"
+                "Message": "Current values do not match a named option. Selected option is 'Advanced membership'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet\\SpyNetReporting: missing -> 2",
+                "TimestampText": "09:56:52"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Message cloud sync disabled'.",
-                "TimestampText": "09:52:08"
+                "Message": "Applied preset 'Advanced membership'.",
+                "TimestampText": "09:56:55"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Message cloud sync disabled'.",
-                "TimestampText": "09:52:08"
+                "Message": "Verified preset 'Advanced membership'.",
+                "TimestampText": "09:56:55"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "09:52:09"
+                "TimestampText": "09:56:55"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Message cloud sync disabled'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Advanced membership'.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Message cloud sync disabled",
+            "TargetValue": "Advanced membership",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -820,40 +820,40 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Message cloud sync disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\Messaging\\AllowMessageSync: missing -> 0",
-                "TimestampText": "09:52:09"
+                "Message": "Current values do not match a named option. Selected option is 'Advanced membership'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet\\SpyNetReporting: missing -> 2",
+                "TimestampText": "09:56:55"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Message cloud sync disabled'.",
-                "TimestampText": "09:52:08"
+                "Message": "Applied preset 'Advanced membership'.",
+                "TimestampText": "09:56:55"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Message cloud sync disabled'.",
-                "TimestampText": "09:52:08"
+                "Message": "Verified preset 'Advanced membership'.",
+                "TimestampText": "09:56:55"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "09:52:09"
+                "TimestampText": "09:56:55"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T16:52:06.0467674+00:00",
-        "CompletedAtUtc": "2026-05-07T16:52:09.1354293+00:00"
+        "StartedAtUtc": "2026-05-07T16:56:52.5965234+00:00",
+        "CompletedAtUtc": "2026-05-07T16:56:55.731926+00:00"
       },
-      "qa_tweak_id": "privacy.disable-message-sync",
-      "candidate_id": "privacy.disable-message-sync",
-      "card_name": "Message Service Cloud Sync",
-      "documentation": "research/records/privacy.disable-message-sync.json"
+      "qa_tweak_id": "security.enable-defender-maps-advanced-membership",
+      "candidate_id": "security.enable-defender-maps-advanced-membership",
+      "card_name": "Microsoft Defender MAPS Membership",
+      "documentation": "research/records/security.enable-defender-maps-advanced-membership.review.json"
     },
     {
-      "tweak_id": "privacy.disable-offline-files.policy",
+      "tweak_id": "security.enable-dynamic-lock",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -890,19 +890,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "privacy.disable-offline-files.policy",
-        "TweakName": "Offline Files Feature Policy",
+        "TweakId": "security.enable-dynamic-lock",
+        "TweakName": "Dynamic Lock",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "privacy.disable-offline-files.policy",
-          "Name": "Offline Files Feature Policy",
-          "Category": "Privacy",
-          "Description": "Offline Files keeps local copies of network files so they can still be used when the computer is offline. This policy decides whether the feature is allowed at all.",
-          "FriendlyDescription": "Offline Files keeps local copies of network files so they can still be used when the computer is offline. This policy decides whether the feature is allowed at all.",
-          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Windows\\NetCache\\Enabled",
+          "TweakId": "security.enable-dynamic-lock",
+          "Name": "Dynamic Lock",
+          "Category": "Security",
+          "Description": "Dynamic Lock can automatically lock the PC when Windows decides the user is away, often based on Bluetooth signals.",
+          "FriendlyDescription": "Dynamic Lock can automatically lock the PC when Windows decides the user is away, often based on Bluetooth signals.",
+          "RegistryPath": "HKLM\\SOFTWARE\\Policies\\Microsoft\\PassportForWork\\DynamicLock\\DynamicLock",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -910,15 +910,15 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Offline Files keeps local copies of network files so they can still be used when the computer is offline. This policy decides whether the feature is allowed at all. Evidence: The local official Microsoft ADMX file names the same NetCache policy key and Enabled value used by the app, and it confirms the 1/0 mapping. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: Dynamic Lock can automatically lock the PC when Windows decides the user is away, often based on Bluetooth signals. Evidence: The official Dynamic Lock policy surface is machine-checkably documented in the local ADMX and ADML files. Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "The local official Microsoft ADMX file names the same NetCache policy key and Enabled value used by the app, and it confirms the 1/0 mapping.",
-              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/OfflineFiles.admx"
+              "Summary": "The official Dynamic Lock policy surface is machine-checkably documented in the local ADMX and ADML files.",
+              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/Passport.admx"
             },
             {
               "Key": "runtime",
@@ -949,8 +949,8 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Privacy (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\privacy\\privacy-verified.md",
+              "Title": "Docs: Security (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\security\\security-verified.md",
               "Kind": "Docs"
             }
           ]
@@ -959,10 +959,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Offline Files disabled'.",
+            "StatusMessage": "Value not set.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Offline Files disabled",
+            "CurrentValue": "Not set",
+            "TargetValue": "1 (0x1)",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -971,8 +971,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Offline Files disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\NetCache\\Enabled: missing -> 0",
-                "TimestampText": "09:52:15"
+                "Message": "Value not set.",
+                "TimestampText": "09:57:01"
               },
               {
                 "Action": "Apply",
@@ -999,8 +999,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Offline Files disabled",
-            "TargetValue": "Offline Files disabled",
+            "CurrentValue": "1 (0x1)",
+            "TargetValue": "1 (0x1)",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1009,20 +1009,285 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Offline Files disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\NetCache\\Enabled: missing -> 0",
-                "TimestampText": "09:52:15"
+                "Message": "Value not set.",
+                "TimestampText": "09:57:02"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Offline Files disabled'.",
-                "TimestampText": "09:52:18"
+                "Message": "Set value to 1.",
+                "TimestampText": "09:57:04"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Offline Files disabled'.",
-                "TimestampText": "09:52:18"
+                "Message": "Verified desired value.",
+                "TimestampText": "09:57:04"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Not required",
+                "Message": "Step not executed.",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "rollback",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Removed value to restore default.",
+            "OutcomeSummary": "Rollback - Rolled Back",
+            "CurrentValue": "1 (0x1)",
+            "TargetValue": "1 (0x1)",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Value not set.",
+                "TimestampText": "09:57:02"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Set value to 1.",
+                "TimestampText": "09:57:04"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified desired value.",
+                "TimestampText": "09:57:04"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Removed value to restore default.",
+                "TimestampText": "09:57:04"
+              }
+            ]
+          },
+          {
+            "Stage": "detect-after",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Value not set.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Not set",
+            "TargetValue": "1 (0x1)",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Value not set.",
+                "TimestampText": "09:57:05"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Set value to 1.",
+                "TimestampText": "09:57:04"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified desired value.",
+                "TimestampText": "09:57:04"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Removed value to restore default.",
+                "TimestampText": "09:57:04"
+              }
+            ]
+          }
+        ],
+        "StartedAtUtc": "2026-05-07T16:57:01.9872958+00:00",
+        "CompletedAtUtc": "2026-05-07T16:57:05.0845956+00:00"
+      },
+      "qa_tweak_id": "security.enable-dynamic-lock",
+      "candidate_id": "security.enable-dynamic-lock",
+      "card_name": "Dynamic Lock",
+      "documentation": "research/records/security.enable-dynamic-lock.json"
+    },
+    {
+      "tweak_id": "security.enable-sudo",
+      "host_exit": 0,
+      "execution_exit": 0,
+      "payload_status": "completed",
+      "report_source": "stdout",
+      "report_parse_error": null,
+      "report_fetch_status": null,
+      "report_app_success": true,
+      "report_success": true,
+      "report_status": "ok",
+      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
+      "report_contract_status": "ok",
+      "report_contract_summary": "QA card snapshot contract passed.",
+      "report_contract_failures": [],
+      "report_card_present": true,
+      "report_card_has_claim_boundary": true,
+      "report_card_present_fields": [
+        "TweakId",
+        "Name",
+        "Category",
+        "EvidenceClass",
+        "ResearchStatus",
+        "RollbackSnapshotState",
+        "HasClaimBoundary",
+        "WhatWeKnowSummary",
+        "WhatWeDoNotClaimSummary",
+        "ProofLanes"
+      ],
+      "report_card_missing_fields": [],
+      "report_card_proof_lanes": [
+        "docs",
+        "runtime",
+        "source",
+        "rollback"
+      ],
+      "report_card_missing_proof_lanes": [],
+      "report": {
+        "TweakId": "security.enable-sudo",
+        "TweakName": "Windows Sudo Mode Policy",
+        "Success": true,
+        "Status": "ok",
+        "Summary": "Apply/verify path completed and rollback restored the tweak.",
+        "RollbackRequested": true,
+        "Card": {
+          "TweakId": "security.enable-sudo",
+          "Name": "Windows Sudo Mode Policy",
+          "Category": "Security",
+          "Description": "Windows sudo lets elevated commands run from the command line. This policy decides whether sudo is allowed and, if it is, which interaction mode is the most permissive one users can use.",
+          "FriendlyDescription": "Windows sudo lets elevated commands run from the command line. This policy decides whether sudo is allowed and, if it is, which interaction mode is the most permissive one users can use.",
+          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Sudo\\Enabled",
+          "EvidenceClass": "A",
+          "EvidenceClassTitle": "Cross-Layer Verified",
+          "ResearchStatus": "PROMOTED",
+          "IsMutationAllowed": true,
+          "RollbackSnapshotState": "ready",
+          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
+          "HasClaimBoundary": true,
+          "WhatWeKnowSummary": "Claim: Windows sudo lets elevated commands run from the command line. This policy decides whether sudo is allowed and, if it is, which interaction mode is the most permissive one users can use. Evidence: The local official Microsoft ADMX file defines the exact machine policy path and value name used by the app, and enumerates modes 0 through 3. The paired ADML help text explains that value 3 is the Normal mode, matching the app's current write. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
+          "ProofLanes": [
+            {
+              "Key": "docs",
+              "Label": "DOCS",
+              "State": "ready",
+              "Summary": "The local official Microsoft ADMX file defines the exact machine policy path and value name used by the app, and enumerates modes 0 through 3. The paired ADML help text explains that value 3 is the Normal mode, matching the app's current write.",
+              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/Sudo.admx"
+            },
+            {
+              "Key": "runtime",
+              "Label": "RUNTIME",
+              "State": "ready",
+              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+              "Source": ""
+            },
+            {
+              "Key": "source",
+              "Label": "SOURCE",
+              "State": "ready",
+              "Summary": "No upstream nohuto source link is attached to this record.",
+              "Source": ""
+            },
+            {
+              "Key": "rollback",
+              "Label": "ROLLBACK",
+              "State": "ready",
+              "Summary": "Rollback: Verified via record-restore-story.",
+              "Source": "record-restore-story"
+            }
+          ],
+          "ReferenceLinks": [
+            {
+              "Title": "Docs: Details (missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
+              "Kind": "Details"
+            },
+            {
+              "Title": "Docs: Security (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\security\\security-verified.md",
+              "Kind": "Docs"
+            }
+          ]
+        },
+        "Stages": [
+          {
+            "Stage": "detect-before",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Normal'.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Normal",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": false,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Normal'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\Sudo\\Enabled: missing -> 3",
+                "TimestampText": "09:57:11"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "apply",
+            "AppliedStatus": "Applied",
+            "StatusMessage": "Run completed.",
+            "OutcomeSummary": "Apply - Success",
+            "CurrentValue": "Normal",
+            "TargetValue": "Normal",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Normal'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\Sudo\\Enabled: missing -> 3",
+                "TimestampText": "09:57:11"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Normal'.",
+                "TimestampText": "09:57:14"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Normal'.",
+                "TimestampText": "09:57:14"
               },
               {
                 "Action": "Rollback",
@@ -1038,7 +1303,7 @@
             "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Offline Files disabled",
+            "TargetValue": "Normal",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1047,36 +1312,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Offline Files disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\NetCache\\Enabled: missing -> 0",
-                "TimestampText": "09:52:15"
+                "Message": "Current values do not match a named option. Selected option is 'Normal'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\Sudo\\Enabled: missing -> 3",
+                "TimestampText": "09:57:11"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Offline Files disabled'.",
-                "TimestampText": "09:52:18"
+                "Message": "Applied preset 'Normal'.",
+                "TimestampText": "09:57:14"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Offline Files disabled'.",
-                "TimestampText": "09:52:18"
+                "Message": "Verified preset 'Normal'.",
+                "TimestampText": "09:57:14"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "09:52:18"
+                "TimestampText": "09:57:14"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Offline Files disabled'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Normal'.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Offline Files disabled",
+            "TargetValue": "Normal",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1085,40 +1350,40 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Offline Files disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\NetCache\\Enabled: missing -> 0",
-                "TimestampText": "09:52:18"
+                "Message": "Current values do not match a named option. Selected option is 'Normal'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\Sudo\\Enabled: missing -> 3",
+                "TimestampText": "09:57:14"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Offline Files disabled'.",
-                "TimestampText": "09:52:18"
+                "Message": "Applied preset 'Normal'.",
+                "TimestampText": "09:57:14"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Offline Files disabled'.",
-                "TimestampText": "09:52:18"
+                "Message": "Verified preset 'Normal'.",
+                "TimestampText": "09:57:14"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "09:52:18"
+                "TimestampText": "09:57:14"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T16:52:15.4499018+00:00",
-        "CompletedAtUtc": "2026-05-07T16:52:18.6635997+00:00"
+        "StartedAtUtc": "2026-05-07T16:57:11.4132041+00:00",
+        "CompletedAtUtc": "2026-05-07T16:57:14.6129606+00:00"
       },
-      "qa_tweak_id": "privacy.disable-offline-files.policy",
-      "candidate_id": "privacy.disable-offline-files.policy",
-      "card_name": "Offline Files Feature Policy",
-      "documentation": "research/records/privacy.disable-offline-files.policy.json"
+      "qa_tweak_id": "security.enable-sudo",
+      "candidate_id": "security.enable-sudo",
+      "card_name": "Windows Sudo Mode Policy",
+      "documentation": "research/records/security.enable-sudo.json"
     },
     {
-      "tweak_id": "privacy.disable-onesettings-downloads",
+      "tweak_id": "security.hide-defender-exclusions-from-local-admins",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -1155,19 +1420,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "privacy.disable-onesettings-downloads",
-        "TweakName": "OneSettings Downloads",
+        "TweakId": "security.hide-defender-exclusions-from-local-admins",
+        "TweakName": "Hide Defender Exclusions From Local Admins",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "privacy.disable-onesettings-downloads",
-          "Name": "OneSettings Downloads",
-          "Category": "Privacy",
-          "Description": "Windows can periodically connect to the OneSettings service to download configuration settings. This policy decides whether those download attempts happen.",
-          "FriendlyDescription": "Windows can periodically connect to the OneSettings service to download configuration settings. This policy decides whether those download attempts happen.",
-          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection\\DisableOneSettingsDownloads",
+          "TweakId": "security.hide-defender-exclusions-from-local-admins",
+          "Name": "Hide Defender Exclusions From Local Admins",
+          "Category": "Security",
+          "Description": "Defender can keep managed exclusions in effect but stop local admins from seeing them in the usual Defender admin surfaces.",
+          "FriendlyDescription": "Defender can keep managed exclusions in effect but stop local admins from seeing them in the usual Defender admin surfaces.",
+          "RegistryPath": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\HideExclusionsFromLocalAdmins",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -1175,22 +1440,22 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Windows can periodically connect to the OneSettings service to download configuration settings. This policy decides whether those download attempts happen. Evidence: The System Policy CSP page explicitly names the exact control and registry key path used by the app. The separate Registry Value Name row isn't shown on the page, so the record relies on the local DataCollection.admx file to confirm that the value name is a... Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: Defender can keep managed exclusions in effect but stop local admins from seeing them in the usual Defender admin surfaces. Evidence: The baseline visibility JSON showed the managed exclusion path in Get-MpPreference while both policy values were unset. The root-path state-1 run then hid that exclusion from Get-MpPreference, and a separate Policy Manager run produced the same behavior aft... Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "The System Policy CSP page explicitly names the exact control and registry key path used by the app. The separate Registry Value Name row isn't shown on the page, so the record relies on the local DataCollection.admx file to confirm that the value name is a...",
-              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#disableonesettingsdownloads"
+              "Summary": "The baseline visibility JSON showed the managed exclusion path in Get-MpPreference while both policy values were unset. The root-path state-1 run then hid that exclusion from Get-MpPreference, and a separate Policy Manager run produced the same behavior aft...",
+              "Source": "Validation proof source: evidence/files/vm-tooling-staging/hideexclusions-admins-root-1-20260325-002348/hideexclusions-admins-root-1.txt"
             },
             {
               "Key": "runtime",
               "Label": "RUNTIME",
               "State": "ready",
-              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
-              "Source": ""
+              "Summary": "With both HideExclusionsFromLocalAdmins surfaces unset, a managed exclusion under the policy exclusions branch still appeared in Get-MpPreference and remained present in the managed policy hive.",
+              "Source": "Win25H2Clean baseline visibility with managed exclusion present: evidence/files/vm-tooling-staging/hideexclusions-admins-baseline-1-20260325-001524/hideexclusions-admins-baseline-visibility.json"
             },
             {
               "Key": "source",
@@ -1214,8 +1479,8 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Privacy (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\privacy\\privacy-verified.md",
+              "Title": "Docs: Security (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\security\\security-verified.md",
               "Kind": "Docs"
             }
           ]
@@ -1224,10 +1489,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Disable OneSettings downloads'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Hide managed exclusions from local admins'.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Disable OneSettings downloads",
+            "TargetValue": "Hide managed exclusions from local admins",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -1236,8 +1501,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Disable OneSettings downloads'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection\\DisableOneSettingsDownloads: missing -> 1",
-                "TimestampText": "09:52:24"
+                "Message": "Current values do not match a named option. Selected option is 'Hide managed exclusions from local admins'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\HideExclusionsFromLocalAdmins: missing -> 1",
+                "TimestampText": "09:57:20"
               },
               {
                 "Action": "Apply",
@@ -1264,8 +1529,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Disable OneSettings downloads",
-            "TargetValue": "Disable OneSettings downloads",
+            "CurrentValue": "Hide managed exclusions from local admins",
+            "TargetValue": "Hide managed exclusions from local admins",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1274,20 +1539,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Disable OneSettings downloads'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection\\DisableOneSettingsDownloads: missing -> 1",
-                "TimestampText": "09:52:24"
+                "Message": "Current values do not match a named option. Selected option is 'Hide managed exclusions from local admins'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\HideExclusionsFromLocalAdmins: missing -> 1",
+                "TimestampText": "09:57:20"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Disable OneSettings downloads'.",
-                "TimestampText": "09:52:27"
+                "Message": "Applied preset 'Hide managed exclusions from local admins'.",
+                "TimestampText": "09:57:23"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Disable OneSettings downloads'.",
-                "TimestampText": "09:52:27"
+                "Message": "Verified preset 'Hide managed exclusions from local admins'.",
+                "TimestampText": "09:57:23"
               },
               {
                 "Action": "Rollback",
@@ -1303,7 +1568,7 @@
             "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Disable OneSettings downloads",
+            "TargetValue": "Hide managed exclusions from local admins",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1312,36 +1577,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Disable OneSettings downloads'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection\\DisableOneSettingsDownloads: missing -> 1",
-                "TimestampText": "09:52:24"
+                "Message": "Current values do not match a named option. Selected option is 'Hide managed exclusions from local admins'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\HideExclusionsFromLocalAdmins: missing -> 1",
+                "TimestampText": "09:57:20"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Disable OneSettings downloads'.",
-                "TimestampText": "09:52:27"
+                "Message": "Applied preset 'Hide managed exclusions from local admins'.",
+                "TimestampText": "09:57:23"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Disable OneSettings downloads'.",
-                "TimestampText": "09:52:27"
+                "Message": "Verified preset 'Hide managed exclusions from local admins'.",
+                "TimestampText": "09:57:23"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "09:52:27"
+                "TimestampText": "09:57:23"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Disable OneSettings downloads'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Hide managed exclusions from local admins'.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Disable OneSettings downloads",
+            "TargetValue": "Hide managed exclusions from local admins",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1350,302 +1615,37 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Disable OneSettings downloads'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection\\DisableOneSettingsDownloads: missing -> 1",
-                "TimestampText": "09:52:27"
+                "Message": "Current values do not match a named option. Selected option is 'Hide managed exclusions from local admins'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\HideExclusionsFromLocalAdmins: missing -> 1",
+                "TimestampText": "09:57:23"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Disable OneSettings downloads'.",
-                "TimestampText": "09:52:27"
+                "Message": "Applied preset 'Hide managed exclusions from local admins'.",
+                "TimestampText": "09:57:23"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Disable OneSettings downloads'.",
-                "TimestampText": "09:52:27"
+                "Message": "Verified preset 'Hide managed exclusions from local admins'.",
+                "TimestampText": "09:57:23"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "09:52:27"
+                "TimestampText": "09:57:23"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T16:52:24.8891383+00:00",
-        "CompletedAtUtc": "2026-05-07T16:52:27.9721605+00:00"
+        "StartedAtUtc": "2026-05-07T16:57:20.8101091+00:00",
+        "CompletedAtUtc": "2026-05-07T16:57:23.886666+00:00"
       },
-      "qa_tweak_id": "privacy.disable-onesettings-downloads",
-      "candidate_id": "privacy.disable-onesettings-downloads",
-      "card_name": "OneSettings Downloads",
-      "documentation": "research/records/privacy.disable-onesettings-downloads.json"
-    },
-    {
-      "tweak_id": "privacy.disable-online-tips",
-      "host_exit": 0,
-      "execution_exit": 0,
-      "payload_status": "completed",
-      "report_source": "stdout",
-      "report_parse_error": null,
-      "report_fetch_status": null,
-      "report_app_success": true,
-      "report_success": true,
-      "report_status": "ok",
-      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
-      "report_contract_status": "ok",
-      "report_contract_summary": "QA card snapshot contract passed.",
-      "report_contract_failures": [],
-      "report_card_present": true,
-      "report_card_has_claim_boundary": true,
-      "report_card_present_fields": [
-        "TweakId",
-        "Name",
-        "Category",
-        "EvidenceClass",
-        "ResearchStatus",
-        "RollbackSnapshotState",
-        "HasClaimBoundary",
-        "WhatWeKnowSummary",
-        "WhatWeDoNotClaimSummary",
-        "ProofLanes"
-      ],
-      "report_card_missing_fields": [],
-      "report_card_proof_lanes": [
-        "docs",
-        "runtime",
-        "source",
-        "rollback"
-      ],
-      "report_card_missing_proof_lanes": [],
-      "report": {
-        "TweakId": "privacy.disable-online-tips",
-        "TweakName": "Online Tips in Settings",
-        "Success": true,
-        "Status": "ok",
-        "Summary": "Apply/verify path completed and rollback restored the tweak.",
-        "RollbackRequested": true,
-        "Card": {
-          "TweakId": "privacy.disable-online-tips",
-          "Name": "Online Tips in Settings",
-          "Category": "Privacy",
-          "Description": "The Settings app can contact Microsoft to retrieve tips and help content. This policy decides whether those online tips are allowed.",
-          "FriendlyDescription": "The Settings app can contact Microsoft to retrieve tips and help content. This policy decides whether those online tips are allowed.",
-          "RegistryPath": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\AllowOnlineTips",
-          "EvidenceClass": "A",
-          "EvidenceClassTitle": "Cross-Layer Verified",
-          "ResearchStatus": "PROMOTED",
-          "IsMutationAllowed": true,
-          "RollbackSnapshotState": "ready",
-          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
-          "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: The Settings app can contact Microsoft to retrieve tips and help content. This policy decides whether those online tips are allowed. Evidence: The Settings Policy CSP page explicitly names the exact machine policy path used by the app and defines the 0/1 semantics for allowing or blocking online tips. Added nohuto mirror corroboration via nohuto-allowonlinetips-admx. Rollback: Rollback: Verified via record-restore-story.",
-          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
-          "ProofLanes": [
-            {
-              "Key": "docs",
-              "Label": "DOCS",
-              "State": "ready",
-              "Summary": "The Settings Policy CSP page explicitly names the exact machine policy path used by the app and defines the 0/1 semantics for allowing or blocking online tips. Added nohuto mirror corroboration via nohuto-allowonlinetips-admx.",
-              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-settings#allowonlinetips"
-            },
-            {
-              "Key": "runtime",
-              "Label": "RUNTIME",
-              "State": "ready",
-              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
-              "Source": ""
-            },
-            {
-              "Key": "source",
-              "Label": "SOURCE",
-              "State": "ready",
-              "Summary": "No upstream nohuto source link is attached to this record.",
-              "Source": ""
-            },
-            {
-              "Key": "rollback",
-              "Label": "ROLLBACK",
-              "State": "ready",
-              "Summary": "Rollback: Verified via record-restore-story.",
-              "Source": "record-restore-story"
-            }
-          ],
-          "ReferenceLinks": [
-            {
-              "Title": "Docs: Details (missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
-              "Kind": "Details"
-            },
-            {
-              "Title": "Docs: Privacy (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\privacy\\privacy-verified.md",
-              "Kind": "Docs"
-            }
-          ]
-        },
-        "Stages": [
-          {
-            "Stage": "detect-before",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Online tips disabled'.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Online tips disabled",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": false,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Online tips disabled'.\nEntries:\n- HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\AllowOnlineTips: missing -> 0",
-                "TimestampText": "09:52:32"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "apply",
-            "AppliedStatus": "Applied",
-            "StatusMessage": "Run completed.",
-            "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Online tips disabled",
-            "TargetValue": "Online tips disabled",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Online tips disabled'.\nEntries:\n- HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\AllowOnlineTips: missing -> 0",
-                "TimestampText": "09:52:32"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Applied preset 'Online tips disabled'.",
-                "TimestampText": "09:52:35"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified preset 'Online tips disabled'.",
-                "TimestampText": "09:52:35"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Not required",
-                "Message": "Step not executed.",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "rollback",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Rolled back registry values.",
-            "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Online tips disabled",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Online tips disabled'.\nEntries:\n- HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\AllowOnlineTips: missing -> 0",
-                "TimestampText": "09:52:32"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Applied preset 'Online tips disabled'.",
-                "TimestampText": "09:52:35"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified preset 'Online tips disabled'.",
-                "TimestampText": "09:52:35"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "09:52:35"
-              }
-            ]
-          },
-          {
-            "Stage": "detect-after",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Online tips disabled'.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Online tips disabled",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Online tips disabled'.\nEntries:\n- HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\AllowOnlineTips: missing -> 0",
-                "TimestampText": "09:52:35"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Applied preset 'Online tips disabled'.",
-                "TimestampText": "09:52:35"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified preset 'Online tips disabled'.",
-                "TimestampText": "09:52:35"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "09:52:35"
-              }
-            ]
-          }
-        ],
-        "StartedAtUtc": "2026-05-07T16:52:32.5686527+00:00",
-        "CompletedAtUtc": "2026-05-07T16:52:35.6982894+00:00"
-      },
-      "qa_tweak_id": "privacy.disable-online-tips",
-      "candidate_id": "privacy.disable-online-tips",
-      "card_name": "Online Tips in Settings",
-      "documentation": "research/records/privacy.disable-online-tips.json"
+      "qa_tweak_id": "security.hide-defender-exclusions-from-local-admins",
+      "candidate_id": "security.hide-defender-exclusions-from-local-admins",
+      "card_name": "Hide Defender Exclusions From Local Admins",
+      "documentation": "research/records/security.hide-defender-exclusions-from-local-admins.review.json"
     }
   ],
   "summary": {
@@ -1654,7 +1654,7 @@
     "live_success_count": 5,
     "live_failure_count": 0,
     "categories": [
-      "Privacy"
+      "Security"
     ]
   }
 }
