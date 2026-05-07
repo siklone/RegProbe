@@ -1,11 +1,11 @@
 # Promoted App QA Coverage
 
-- Generated UTC: 2026-05-07T16:03:08Z
-- History entries: 42
+- Generated UTC: 2026-05-07T16:04:43Z
+- History entries: 43
 - Promoted app-QA candidates: 242
-- Covered: 124
-- Uncovered: 118
-- Coverage: 51.24%
+- Covered: 129
+- Uncovered: 113
+- Coverage: 53.31%
 
 ## Covered Categories
 
@@ -18,7 +18,7 @@
 - Performance: 3
 - Peripheral: 2
 - Power: 7
-- Privacy: 28
+- Privacy: 33
 - Security: 12
 - System: 26
 - Visibility: 11
@@ -32,22 +32,22 @@
 - Notifications: 2
 - Peripheral: 1
 - Power: 3
-- Privacy: 39
+- Privacy: 34
 - Security: 9
 - System: 26
 - Visibility: 12
 
 ## Recommended Next Batches
 
-- Privacy: 5 uncovered cards | coverage 41.79%
-  command: `dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-feedback-notifications --id privacy.disable-file-history --id privacy.disable-font-providers --id privacy.disable-kms-activation-telemetry --id privacy.disable-language-list-access`
-  live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-feedback-notifications --id privacy.disable-file-history --id privacy.disable-font-providers --id privacy.disable-kms-activation-telemetry --id privacy.disable-language-list-access --run-kvm --json`
 - Explorer: 5 uncovered cards | coverage 47.06%
   command: `dotnet run --project cli/cli.csproj -- research qa-batch --id explorer.enable-explorer-compact-mode --id explorer.launch-folder-windows-in-a-separate-process --id explorer.show-compressed-and-encrypted-files-in-color --id explorer.show-drive-letters-first --id explorer.show-full-path`
   live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id explorer.enable-explorer-compact-mode --id explorer.launch-folder-windows-in-a-separate-process --id explorer.show-compressed-and-encrypted-files-in-color --id explorer.show-drive-letters-first --id explorer.show-full-path --run-kvm --json`
 - Visibility: 5 uncovered cards | coverage 47.83%
   command: `dotnet run --project cli/cli.csproj -- research qa-batch --id visibility.disable-lock-screen-motion --id visibility.disable-lock-screen-slideshow --id visibility.disable-spotlight-action-center --id visibility.disable-spotlight-desktop-collection --id visibility.disable-spotlight-features`
   live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id visibility.disable-lock-screen-motion --id visibility.disable-lock-screen-slideshow --id visibility.disable-spotlight-action-center --id visibility.disable-spotlight-desktop-collection --id visibility.disable-spotlight-features --run-kvm --json`
+- Privacy: 5 uncovered cards | coverage 49.25%
+  command: `dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-local-security-questions --id privacy.disable-location-consent --id privacy.disable-location-consent-system --id privacy.disable-location-scripting --id privacy.disable-location-services`
+  live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-local-security-questions --id privacy.disable-location-consent --id privacy.disable-location-consent-system --id privacy.disable-location-scripting --id privacy.disable-location-services --run-kvm --json`
 - System: 5 uncovered cards | coverage 50.0%
   command: `dotnet run --project cli/cli.csproj -- research qa-batch --id system.graphics-tdr-level --id system.graphics-tdr-limit-count --id system.graphics-tdr-limit-time --id system.kernel-thread-dpc-enable --id system.memory-clear-pagefile-at-shutdown`
   live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id system.graphics-tdr-level --id system.graphics-tdr-limit-count --id system.graphics-tdr-limit-time --id system.kernel-thread-dpc-enable --id system.memory-clear-pagefile-at-shutdown --run-kvm --json`
