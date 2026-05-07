@@ -1,13 +1,13 @@
 {
-  "generated_utc": "2026-05-07T17:24:52Z",
+  "generated_utc": "2026-05-07T17:51:01Z",
   "status": "PASS",
   "selection": {
     "requested_ids": [
-      "system.priority-control",
-      "system.reliability-timestamp-enabled",
-      "system.services.disable-bluetooth-audio-gateway",
-      "system.services.disable-bluetooth-support",
-      "system.services.disable-bluetooth-user-service"
+      "privacy.disable-switchback.policy",
+      "privacy.disable-telemetry-change-notifications",
+      "privacy.disable-telemetry-optin-ui",
+      "privacy.disable-wer",
+      "privacy.disable-windows-location-provider"
     ],
     "requested_categories": [],
     "limit_per_category": 1,
@@ -26,25 +26,25 @@
   "errors": [],
   "candidates": [
     {
-      "tweak_id": "system.priority-control",
-      "qa_tweak_id": "system.priority-control",
-      "candidate_id": "system.priority-control",
-      "record_id": "system.priority-control",
-      "category": "System",
-      "name": "Foreground Scheduling Priority / Win32PrioritySeparation",
-      "documentation": "research/records/system.priority-control.review.json",
+      "tweak_id": "privacy.disable-switchback.policy",
+      "qa_tweak_id": "privacy.disable-switchback.policy",
+      "candidate_id": "privacy.disable-switchback.policy",
+      "record_id": "privacy.disable-switchback.policy",
+      "category": "Privacy",
+      "name": "Disable SwitchBack Compatibility Policy",
+      "documentation": "research/records/privacy.disable-switchback.policy.review.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect system.priority-control",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.disable-switchback.policy",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.priority-control' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.priority-control.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.priority-control' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.priority-control.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.priority-control' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.priority-control.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.priority-control' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.priority-control.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'system.priority-control'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-switchback.policy' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-switchback.policy.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-switchback.policy' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-switchback.policy.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-switchback.policy' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-switchback.policy.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-switchback.policy' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-switchback.policy.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.disable-switchback.policy'"
       },
       "expected_report": {
         "success": true,
@@ -85,25 +85,25 @@
       }
     },
     {
-      "tweak_id": "system.reliability-timestamp-enabled",
-      "qa_tweak_id": "system.reliability-timestamp-enabled",
-      "candidate_id": "system.reliability-timestamp-enabled",
-      "record_id": "system.reliability-timestamp-enabled",
-      "category": "System",
-      "name": "Reliability Event Timestamping",
-      "documentation": "research/records/system.reliability-timestamp-enabled.review.json",
+      "tweak_id": "privacy.disable-telemetry-change-notifications",
+      "qa_tweak_id": "privacy.disable-telemetry-change-notifications",
+      "candidate_id": "privacy.disable-telemetry-change-notifications",
+      "record_id": "privacy.disable-telemetry-change-notifications",
+      "category": "Privacy",
+      "name": "Diagnostic Data Change Notifications",
+      "documentation": "research/records/privacy.disable-telemetry-change-notifications.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
-      "restore_previous_supported": false,
+      "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect system.reliability-timestamp-enabled",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.disable-telemetry-change-notifications",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.reliability-timestamp-enabled' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.reliability-timestamp-enabled.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.reliability-timestamp-enabled' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.reliability-timestamp-enabled.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.reliability-timestamp-enabled' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.reliability-timestamp-enabled.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.reliability-timestamp-enabled' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.reliability-timestamp-enabled.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'system.reliability-timestamp-enabled'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-telemetry-change-notifications' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-telemetry-change-notifications.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-telemetry-change-notifications' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-telemetry-change-notifications.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-telemetry-change-notifications' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-telemetry-change-notifications.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-telemetry-change-notifications' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-telemetry-change-notifications.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.disable-telemetry-change-notifications'"
       },
       "expected_report": {
         "success": true,
@@ -144,25 +144,25 @@
       }
     },
     {
-      "tweak_id": "system.services.disable-bluetooth-audio-gateway",
-      "qa_tweak_id": "system.services.disable-bluetooth-audio-gateway",
-      "candidate_id": "system.services.disable-bluetooth-audio-gateway",
-      "record_id": "system.services.disable-bluetooth-audio-gateway",
-      "category": "System",
-      "name": "Bluetooth Audio Gateway Service",
-      "documentation": "research/records/system.services.disable-bluetooth-audio-gateway.json",
+      "tweak_id": "privacy.disable-telemetry-optin-ui",
+      "qa_tweak_id": "privacy.disable-telemetry-optin-ui",
+      "candidate_id": "privacy.disable-telemetry-optin-ui",
+      "record_id": "privacy.disable-telemetry-optin-ui",
+      "category": "Privacy",
+      "name": "Diagnostic Data Opt-In Settings UI",
+      "documentation": "research/records/privacy.disable-telemetry-optin-ui.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect system.services.disable-bluetooth-audio-gateway",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.disable-telemetry-optin-ui",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.services.disable-bluetooth-audio-gateway' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.services.disable-bluetooth-audio-gateway.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.services.disable-bluetooth-audio-gateway' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.services.disable-bluetooth-audio-gateway.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.services.disable-bluetooth-audio-gateway' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.services.disable-bluetooth-audio-gateway.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.services.disable-bluetooth-audio-gateway' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.services.disable-bluetooth-audio-gateway.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'system.services.disable-bluetooth-audio-gateway'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-telemetry-optin-ui' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-telemetry-optin-ui.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-telemetry-optin-ui' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-telemetry-optin-ui.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-telemetry-optin-ui' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-telemetry-optin-ui.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-telemetry-optin-ui' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-telemetry-optin-ui.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.disable-telemetry-optin-ui'"
       },
       "expected_report": {
         "success": true,
@@ -203,25 +203,25 @@
       }
     },
     {
-      "tweak_id": "system.services.disable-bluetooth-support",
-      "qa_tweak_id": "system.services.disable-bluetooth-support",
-      "candidate_id": "system.services.disable-bluetooth-support",
-      "record_id": "system.services.disable-bluetooth-support",
-      "category": "System",
-      "name": "Bluetooth Support Service",
-      "documentation": "research/records/system.services.disable-bluetooth-support.json",
+      "tweak_id": "privacy.disable-wer",
+      "qa_tweak_id": "privacy.disable-wer",
+      "candidate_id": "privacy.disable-wer",
+      "record_id": "privacy.disable-wer",
+      "category": "Privacy",
+      "name": "Windows Error Reporting",
+      "documentation": "research/records/privacy.disable-wer.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect system.services.disable-bluetooth-support",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.disable-wer",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.services.disable-bluetooth-support' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.services.disable-bluetooth-support.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.services.disable-bluetooth-support' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.services.disable-bluetooth-support.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.services.disable-bluetooth-support' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.services.disable-bluetooth-support.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.services.disable-bluetooth-support' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.services.disable-bluetooth-support.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'system.services.disable-bluetooth-support'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-wer' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-wer.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-wer' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-wer.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-wer' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-wer.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-wer' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-wer.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.disable-wer'"
       },
       "expected_report": {
         "success": true,
@@ -262,25 +262,25 @@
       }
     },
     {
-      "tweak_id": "system.services.disable-bluetooth-user-service",
-      "qa_tweak_id": "system.services.disable-bluetooth-user-service",
-      "candidate_id": "system.services.disable-bluetooth-user-service",
-      "record_id": "system.services.disable-bluetooth-user-service",
-      "category": "System",
-      "name": "Bluetooth User Service",
-      "documentation": "research/records/system.services.disable-bluetooth-user-service.json",
+      "tweak_id": "privacy.disable-windows-location-provider",
+      "qa_tweak_id": "privacy.disable-windows-location-provider",
+      "candidate_id": "privacy.disable-windows-location-provider",
+      "record_id": "privacy.disable-windows-location-provider",
+      "category": "Privacy",
+      "name": "Windows Location Provider",
+      "documentation": "research/records/privacy.disable-windows-location-provider.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect system.services.disable-bluetooth-user-service",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.disable-windows-location-provider",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.services.disable-bluetooth-user-service' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.services.disable-bluetooth-user-service.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.services.disable-bluetooth-user-service' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.services.disable-bluetooth-user-service.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.services.disable-bluetooth-user-service' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.services.disable-bluetooth-user-service.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.services.disable-bluetooth-user-service' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.services.disable-bluetooth-user-service.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'system.services.disable-bluetooth-user-service'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-windows-location-provider' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-windows-location-provider.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-windows-location-provider' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-windows-location-provider.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-windows-location-provider' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-windows-location-provider.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-windows-location-provider' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-windows-location-provider.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.disable-windows-location-provider'"
       },
       "expected_report": {
         "success": true,
@@ -323,7 +323,7 @@
   ],
   "run_results": [
     {
-      "tweak_id": "system.priority-control",
+      "tweak_id": "privacy.disable-switchback.policy",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -360,19 +360,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "system.priority-control",
-        "TweakName": "Foreground Scheduling Priority / Win32PrioritySeparation",
+        "TweakId": "privacy.disable-switchback.policy",
+        "TweakName": "Disable SwitchBack Compatibility Policy",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "system.priority-control",
-          "Name": "Foreground Scheduling Priority / Win32PrioritySeparation",
-          "Category": "System",
-          "Description": "This setting changes how Windows gives extra CPU time to the foreground application compared with background work. It is a low-level scheduler setting, not a normal everyday tweak.",
-          "FriendlyDescription": "This setting changes how Windows gives extra CPU time to the foreground application compared with background work. It is a low-level scheduler setting, not a normal everyday tweak.",
-          "RegistryPath": "HKLM\\System\\CurrentControlSet\\Control\\PriorityControl\\Win32PrioritySeparation",
+          "TweakId": "privacy.disable-switchback.policy",
+          "Name": "Disable SwitchBack Compatibility Policy",
+          "Category": "Privacy",
+          "Description": "SwitchBack is a Windows compatibility feature that lets newer applications receive compatibility fixes originally designed for older OS versions. On a modern Windows 11 system running only current software, this feature usually has no practical effect. This policy disables it.",
+          "FriendlyDescription": "SwitchBack is a Windows compatibility feature that lets newer applications receive compatibility fixes originally designed for older OS versions. On a modern Windows 11 system running only current software, this feature usually has no practical effect. This policy disables it.",
+          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat\\SbEnable",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -380,22 +380,22 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: This setting changes how Windows gives extra CPU time to the foreground application compared with background work. It is a low-level scheduler setting, not a normal everyday tweak. Evidence: The 2026-03-26 Procmon pass adds direct wmiprvse.exe reads for both observed states. The earlier rebooted VM benchmark pass still covers baseline 2, candidate 38, restore 2, and bounded CPU/memory measurements on the same build. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: SwitchBack is a Windows compatibility feature that lets newer applications receive compatibility fixes originally designed for older OS versions. On a modern Windows 11 system running only current software, this feature usually has no practical effect. This policy disables it. Evidence: Local official AppCompat.admx and AppCompat.adml files document the exact SbEnable policy surface and semantics, and Procmon confirmed gpupdate writes SbEnable=REG_DWORD 0x0 on Windows 11 Pro 10.0.26200.8037. Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "The 2026-03-26 Procmon pass adds direct wmiprvse.exe reads for both observed states. The earlier rebooted VM benchmark pass still covers baseline 2, candidate 38, restore 2, and bounded CPU/memory measurements on the same build.",
-              "Source": "Validation proof source: research/notes/priority-control-procmon-validation-20260326.md"
+              "Summary": "Local official AppCompat.admx and AppCompat.adml files document the exact SbEnable policy surface and semantics, and Procmon confirmed gpupdate writes SbEnable=REG_DWORD 0x0 on Windows 11 Pro 10.0.26200.8037.",
+              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/AppCompat.admx"
             },
             {
               "Key": "runtime",
               "Label": "RUNTIME",
               "State": "ready",
-              "Summary": "Separate Win25H2Clean Procmon passes around `Get-CimInstance Win32_OperatingSystem` captured wmiprvse.exe reading HKLM\\SYSTEM\\CurrentControlSet\\Control\\PriorityControl\\Win32PrioritySeparation with Data: 2 and Data: 38 in reversible runs.",
-              "Source": "Procmon capture - wmiprvse.exe Win32PrioritySeparation reads: evidence/raw/procmon/system.priority-control/prioritycontrol-state-2.txt and evidence/raw/procmon/system.priority-control/prioritycontrol-state-2.hits.csv and evidence/raw/procmon/system.priority-control/prioritycontrol-state-38.txt and evidence/raw/procmon/system.priority-control/prioritycontrol-state-38.hits.csv"
+              "Summary": "VM reversible Procmon capture on 2026-03-26 in Win25H2Clean. powershell.exe wrote SbEnable=REG_DWORD 0x0 under HKLM/Software/Policies/Microsoft/Windows/AppCompat and reg.exe read it back successfully. The probe restored the original missing state after capt...",
+              "Source": "VM Procmon capture - AppCompatTurnOffSwitchBack: evidence/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml and evidence/raw/procmon/privacy.disable-switchback.policy/switchback-only.hits.csv"
             },
             {
               "Key": "source",
@@ -419,19 +419,9 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Win-Config",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\win-config\\batch-01.md#system.priority-control",
+              "Title": "Docs: Privacy (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\privacy\\privacy-verified.md",
               "Kind": "Docs"
-            },
-            {
-              "Title": "Docs: System (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\system\\system.md",
-              "Kind": "Docs"
-            },
-            {
-              "Title": "MSDN PriorityControl",
-              "Url": "https://learn.microsoft.com/en-us/windows/win32/procthread/scheduling-priorities",
-              "Kind": "Other"
             }
           ]
         },
@@ -439,10 +429,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current option is 'Observed Win25H2Clean baseline'. Selected option is 'Observed app profile'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Turn off SwitchBack'.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Observed Win25H2Clean baseline",
-            "TargetValue": "Observed app profile",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Turn off SwitchBack",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -451,8 +441,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current option is 'Observed Win25H2Clean baseline'. Selected option is 'Observed app profile'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\PriorityControl\\Win32PrioritySeparation: 2 -> 38",
-                "TimestampText": "10:24:56"
+                "Message": "Current values do not match a named option. Selected option is 'Turn off SwitchBack'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat\\SbEnable: missing -> 0",
+                "TimestampText": "10:51:05"
               },
               {
                 "Action": "Apply",
@@ -479,8 +469,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Observed app profile",
-            "TargetValue": "Observed app profile",
+            "CurrentValue": "Turn off SwitchBack",
+            "TargetValue": "Turn off SwitchBack",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -489,20 +479,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current option is 'Observed Win25H2Clean baseline'. Selected option is 'Observed app profile'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\PriorityControl\\Win32PrioritySeparation: 2 -> 38",
-                "TimestampText": "10:24:56"
+                "Message": "Current values do not match a named option. Selected option is 'Turn off SwitchBack'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat\\SbEnable: missing -> 0",
+                "TimestampText": "10:51:05"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Observed app profile'.",
-                "TimestampText": "10:24:59"
+                "Message": "Applied preset 'Turn off SwitchBack'.",
+                "TimestampText": "10:51:08"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Observed app profile'.",
-                "TimestampText": "10:24:59"
+                "Message": "Verified preset 'Turn off SwitchBack'.",
+                "TimestampText": "10:51:08"
               },
               {
                 "Action": "Rollback",
@@ -517,8 +507,8 @@
             "AppliedStatus": "NotApplied",
             "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Observed Win25H2Clean baseline",
-            "TargetValue": "Observed app profile",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Turn off SwitchBack",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -527,36 +517,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current option is 'Observed Win25H2Clean baseline'. Selected option is 'Observed app profile'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\PriorityControl\\Win32PrioritySeparation: 2 -> 38",
-                "TimestampText": "10:24:56"
+                "Message": "Current values do not match a named option. Selected option is 'Turn off SwitchBack'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat\\SbEnable: missing -> 0",
+                "TimestampText": "10:51:05"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Observed app profile'.",
-                "TimestampText": "10:24:59"
+                "Message": "Applied preset 'Turn off SwitchBack'.",
+                "TimestampText": "10:51:08"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Observed app profile'.",
-                "TimestampText": "10:24:59"
+                "Message": "Verified preset 'Turn off SwitchBack'.",
+                "TimestampText": "10:51:08"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "10:24:59"
+                "TimestampText": "10:51:08"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current option is 'Observed Win25H2Clean baseline'. Selected option is 'Observed app profile'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Turn off SwitchBack'.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Observed Win25H2Clean baseline",
-            "TargetValue": "Observed app profile",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Turn off SwitchBack",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -565,40 +555,40 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current option is 'Observed Win25H2Clean baseline'. Selected option is 'Observed app profile'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\PriorityControl\\Win32PrioritySeparation: 2 -> 38",
-                "TimestampText": "10:24:59"
+                "Message": "Current values do not match a named option. Selected option is 'Turn off SwitchBack'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat\\SbEnable: missing -> 0",
+                "TimestampText": "10:51:08"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Observed app profile'.",
-                "TimestampText": "10:24:59"
+                "Message": "Applied preset 'Turn off SwitchBack'.",
+                "TimestampText": "10:51:08"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Observed app profile'.",
-                "TimestampText": "10:24:59"
+                "Message": "Verified preset 'Turn off SwitchBack'.",
+                "TimestampText": "10:51:08"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "10:24:59"
+                "TimestampText": "10:51:08"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T17:24:56.8273971+00:00",
-        "CompletedAtUtc": "2026-05-07T17:24:59.9051037+00:00"
+        "StartedAtUtc": "2026-05-07T17:51:05.6113991+00:00",
+        "CompletedAtUtc": "2026-05-07T17:51:08.7342085+00:00"
       },
-      "qa_tweak_id": "system.priority-control",
-      "candidate_id": "system.priority-control",
-      "card_name": "Foreground Scheduling Priority / Win32PrioritySeparation",
-      "documentation": "research/records/system.priority-control.review.json"
+      "qa_tweak_id": "privacy.disable-switchback.policy",
+      "candidate_id": "privacy.disable-switchback.policy",
+      "card_name": "Disable SwitchBack Compatibility Policy",
+      "documentation": "research/records/privacy.disable-switchback.policy.review.json"
     },
     {
-      "tweak_id": "system.reliability-timestamp-enabled",
+      "tweak_id": "privacy.disable-telemetry-change-notifications",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -635,19 +625,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "system.reliability-timestamp-enabled",
-        "TweakName": "Reliability Event Timestamping",
+        "TweakId": "privacy.disable-telemetry-change-notifications",
+        "TweakName": "Diagnostic Data Change Notifications",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "system.reliability-timestamp-enabled",
-          "Name": "Reliability Event Timestamping",
-          "Category": "System",
-          "Description": "Windows can timestamp reliability events on a cadence. This setting controls whether that timestamping behavior runs for the machine.",
-          "FriendlyDescription": "Windows can timestamp reliability events on a cadence. This setting controls whether that timestamping behavior runs for the machine.",
-          "RegistryPath": "",
+          "TweakId": "privacy.disable-telemetry-change-notifications",
+          "Name": "Diagnostic Data Change Notifications",
+          "Category": "Privacy",
+          "Description": "Windows can notify the user when the diagnostic-data opt-in setting changes. This policy decides whether those notifications are shown.",
+          "FriendlyDescription": "Windows can notify the user when the diagnostic-data opt-in setting changes. This policy decides whether those notifications are shown.",
+          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection\\DisableTelemetryOptInChangeNotification",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -655,22 +645,22 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Windows can timestamp reliability events on a cadence. This setting controls whether that timestamping behavior runs for the machine. Evidence: The Microsoft policy page now documents the gate path directly. The decompiled function still confirms the gate behavior, the 24-hour cap on the companion interval, and the current-version fallback path. Our 25H2 follow-up work also found TimeStampInterval... Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: Windows can notify the user when the diagnostic-data opt-in setting changes. This policy decides whether those notifications are shown. Evidence: The System Policy CSP page explicitly documents the same policy behavior, key path, and 0/1 semantics. The exact registry value name is confirmed by the local DataCollection.admx file as DisableTelemetryOptInChangeNotification. Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "The Microsoft policy page now documents the gate path directly. The decompiled function still confirms the gate behavior, the 24-hour cap on the companion interval, and the current-version fallback path. Our 25H2 follow-up work also found TimeStampInterval...",
-              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-reliability"
+              "Summary": "The System Policy CSP page explicitly documents the same policy behavior, key path, and 0/1 semantics. The exact registry value name is confirmed by the local DataCollection.admx file as DisableTelemetryOptInChangeNotification.",
+              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#configuretelemetryoptinchangenotification"
             },
             {
               "Key": "runtime",
               "Label": "RUNTIME",
               "State": "ready",
-              "Summary": "Procmon passes around `perfmon /rel`, a bounded WER crash path, and WMI reliability queries all produced captures but did not show reads on the TimeStampEnabled or TimeStampInterval policy/fallback paths during the tested windows.",
-              "Source": "Win25H2Clean Procmon trigger attempts for Reliability timestamp reads: research/notes/reliability-timestamp-probe-attempts-20260326.md"
+              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+              "Source": ""
             },
             {
               "Key": "source",
@@ -694,8 +684,8 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: System (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\system\\system.md",
+              "Title": "Docs: Privacy (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\privacy\\privacy-verified.md",
               "Kind": "Docs"
             }
           ]
@@ -704,10 +694,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Detected 0 of 2 values (matches: 0, missing: 2).",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Notification disabled'.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Unknown",
-            "TargetValue": "Multiple values",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Notification disabled",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -716,8 +706,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 0 of 2 values (matches: 0, missing: 2).\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Reliability\\TimeStampEnabled: missing\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Reliability\\TimeStampInterval: missing",
-                "TimestampText": "10:25:06"
+                "Message": "Current values do not match a named option. Selected option is 'Notification disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection\\DisableTelemetryOptInChangeNotification: missing -> 1",
+                "TimestampText": "10:51:15"
               },
               {
                 "Action": "Apply",
@@ -744,8 +734,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Multiple values",
-            "TargetValue": "Multiple values",
+            "CurrentValue": "Notification disabled",
+            "TargetValue": "Notification disabled",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -754,20 +744,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 0 of 2 values (matches: 0, missing: 2).\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Reliability\\TimeStampEnabled: missing\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Reliability\\TimeStampInterval: missing",
-                "TimestampText": "10:25:06"
+                "Message": "Current values do not match a named option. Selected option is 'Notification disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection\\DisableTelemetryOptInChangeNotification: missing -> 1",
+                "TimestampText": "10:51:15"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Updated 2 values.",
-                "TimestampText": "10:25:09"
+                "Message": "Applied preset 'Notification disabled'.",
+                "TimestampText": "10:51:18"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified desired values.",
-                "TimestampText": "10:25:09"
+                "Message": "Verified preset 'Notification disabled'.",
+                "TimestampText": "10:51:18"
               },
               {
                 "Action": "Rollback",
@@ -782,8 +772,8 @@
             "AppliedStatus": "NotApplied",
             "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Multiple values",
-            "TargetValue": "Multiple values",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Notification disabled",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -792,36 +782,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 0 of 2 values (matches: 0, missing: 2).\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Reliability\\TimeStampEnabled: missing\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Reliability\\TimeStampInterval: missing",
-                "TimestampText": "10:25:06"
+                "Message": "Current values do not match a named option. Selected option is 'Notification disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection\\DisableTelemetryOptInChangeNotification: missing -> 1",
+                "TimestampText": "10:51:15"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Updated 2 values.",
-                "TimestampText": "10:25:09"
+                "Message": "Applied preset 'Notification disabled'.",
+                "TimestampText": "10:51:18"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified desired values.",
-                "TimestampText": "10:25:09"
+                "Message": "Verified preset 'Notification disabled'.",
+                "TimestampText": "10:51:18"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "10:25:09"
+                "TimestampText": "10:51:18"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Detected 0 of 2 values (matches: 0, missing: 2).",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Notification disabled'.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Multiple values",
-            "TargetValue": "Multiple values",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Notification disabled",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -830,40 +820,305 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 0 of 2 values (matches: 0, missing: 2).\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Reliability\\TimeStampEnabled: missing\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Reliability\\TimeStampInterval: missing",
-                "TimestampText": "10:25:09"
+                "Message": "Current values do not match a named option. Selected option is 'Notification disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection\\DisableTelemetryOptInChangeNotification: missing -> 1",
+                "TimestampText": "10:51:18"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Updated 2 values.",
-                "TimestampText": "10:25:09"
+                "Message": "Applied preset 'Notification disabled'.",
+                "TimestampText": "10:51:18"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified desired values.",
-                "TimestampText": "10:25:09"
+                "Message": "Verified preset 'Notification disabled'.",
+                "TimestampText": "10:51:18"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "10:25:09"
+                "TimestampText": "10:51:18"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T17:25:06.4527762+00:00",
-        "CompletedAtUtc": "2026-05-07T17:25:09.5499035+00:00"
+        "StartedAtUtc": "2026-05-07T17:51:15.2742242+00:00",
+        "CompletedAtUtc": "2026-05-07T17:51:18.4285021+00:00"
       },
-      "qa_tweak_id": "system.reliability-timestamp-enabled",
-      "candidate_id": "system.reliability-timestamp-enabled",
-      "card_name": "Reliability Event Timestamping",
-      "documentation": "research/records/system.reliability-timestamp-enabled.review.json"
+      "qa_tweak_id": "privacy.disable-telemetry-change-notifications",
+      "candidate_id": "privacy.disable-telemetry-change-notifications",
+      "card_name": "Diagnostic Data Change Notifications",
+      "documentation": "research/records/privacy.disable-telemetry-change-notifications.json"
     },
     {
-      "tweak_id": "system.services.disable-bluetooth-audio-gateway",
+      "tweak_id": "privacy.disable-telemetry-optin-ui",
+      "host_exit": 0,
+      "execution_exit": 0,
+      "payload_status": "completed",
+      "report_source": "guest-file",
+      "report_parse_error": null,
+      "report_fetch_status": "ok",
+      "report_app_success": true,
+      "report_success": true,
+      "report_status": "ok",
+      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
+      "report_contract_status": "ok",
+      "report_contract_summary": "QA card snapshot contract passed.",
+      "report_contract_failures": [],
+      "report_card_present": true,
+      "report_card_has_claim_boundary": true,
+      "report_card_present_fields": [
+        "TweakId",
+        "Name",
+        "Category",
+        "EvidenceClass",
+        "ResearchStatus",
+        "RollbackSnapshotState",
+        "HasClaimBoundary",
+        "WhatWeKnowSummary",
+        "WhatWeDoNotClaimSummary",
+        "ProofLanes"
+      ],
+      "report_card_missing_fields": [],
+      "report_card_proof_lanes": [
+        "docs",
+        "runtime",
+        "source",
+        "rollback"
+      ],
+      "report_card_missing_proof_lanes": [],
+      "report": {
+        "TweakId": "privacy.disable-telemetry-optin-ui",
+        "TweakName": "Diagnostic Data Opt-In Settings UI",
+        "Success": true,
+        "Status": "ok",
+        "Summary": "Apply/verify path completed and rollback restored the tweak.",
+        "RollbackRequested": true,
+        "Card": {
+          "TweakId": "privacy.disable-telemetry-optin-ui",
+          "Name": "Diagnostic Data Opt-In Settings UI",
+          "Category": "Privacy",
+          "Description": "Windows can show controls in Settings that let a user change diagnostic data choices. This policy decides whether that Settings UI stays available.",
+          "FriendlyDescription": "Windows can show controls in Settings that let a user change diagnostic data choices. This policy decides whether that Settings UI stays available.",
+          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection\\DisableTelemetryOptInSettingsUx",
+          "EvidenceClass": "A",
+          "EvidenceClassTitle": "Cross-Layer Verified",
+          "ResearchStatus": "PROMOTED",
+          "IsMutationAllowed": true,
+          "RollbackSnapshotState": "ready",
+          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
+          "HasClaimBoundary": true,
+          "WhatWeKnowSummary": "Claim: Windows can show controls in Settings that let a user change diagnostic data choices. This policy decides whether that Settings UI stays available. Evidence: The System Policy CSP page explicitly documents the same policy behavior, key path, and 0/1 semantics. The exact registry value name is confirmed by the local DataCollection.admx file as DisableTelemetryOptInSettingsUx. Added nohuto mirror corroboration via... Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
+          "ProofLanes": [
+            {
+              "Key": "docs",
+              "Label": "DOCS",
+              "State": "ready",
+              "Summary": "The System Policy CSP page explicitly documents the same policy behavior, key path, and 0/1 semantics. The exact registry value name is confirmed by the local DataCollection.admx file as DisableTelemetryOptInSettingsUx. Added nohuto mirror corroboration via...",
+              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#configuretelemetryoptinsettingsux"
+            },
+            {
+              "Key": "runtime",
+              "Label": "RUNTIME",
+              "State": "ready",
+              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+              "Source": ""
+            },
+            {
+              "Key": "source",
+              "Label": "SOURCE",
+              "State": "ready",
+              "Summary": "No upstream nohuto source link is attached to this record.",
+              "Source": ""
+            },
+            {
+              "Key": "rollback",
+              "Label": "ROLLBACK",
+              "State": "ready",
+              "Summary": "Rollback: Verified via record-restore-story.",
+              "Source": "record-restore-story"
+            }
+          ],
+          "ReferenceLinks": [
+            {
+              "Title": "Docs: Details (missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
+              "Kind": "Details"
+            },
+            {
+              "Title": "Docs: Privacy (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\privacy\\privacy-verified.md",
+              "Kind": "Docs"
+            }
+          ]
+        },
+        "Stages": [
+          {
+            "Stage": "detect-before",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Disable diagnostic data opt-in settings'.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Disable diagnostic data opt-in settings",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": false,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Disable diagnostic data opt-in settings'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection\\DisableTelemetryOptInSettingsUx: missing -> 1",
+                "TimestampText": "10:51:25"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "apply",
+            "AppliedStatus": "Applied",
+            "StatusMessage": "Run completed.",
+            "OutcomeSummary": "Apply - Success",
+            "CurrentValue": "Disable diagnostic data opt-in settings",
+            "TargetValue": "Disable diagnostic data opt-in settings",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Disable diagnostic data opt-in settings'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection\\DisableTelemetryOptInSettingsUx: missing -> 1",
+                "TimestampText": "10:51:25"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Disable diagnostic data opt-in settings'.",
+                "TimestampText": "10:51:27"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Disable diagnostic data opt-in settings'.",
+                "TimestampText": "10:51:27"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Not required",
+                "Message": "Step not executed.",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "rollback",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Rolled back registry values.",
+            "OutcomeSummary": "Rollback - Rolled Back",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Disable diagnostic data opt-in settings",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Disable diagnostic data opt-in settings'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection\\DisableTelemetryOptInSettingsUx: missing -> 1",
+                "TimestampText": "10:51:25"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Disable diagnostic data opt-in settings'.",
+                "TimestampText": "10:51:27"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Disable diagnostic data opt-in settings'.",
+                "TimestampText": "10:51:27"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "10:51:28"
+              }
+            ]
+          },
+          {
+            "Stage": "detect-after",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Disable diagnostic data opt-in settings'.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Disable diagnostic data opt-in settings",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Disable diagnostic data opt-in settings'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection\\DisableTelemetryOptInSettingsUx: missing -> 1",
+                "TimestampText": "10:51:28"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Disable diagnostic data opt-in settings'.",
+                "TimestampText": "10:51:27"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Disable diagnostic data opt-in settings'.",
+                "TimestampText": "10:51:27"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "10:51:28"
+              }
+            ]
+          }
+        ],
+        "StartedAtUtc": "2026-05-07T17:51:25.0110678+00:00",
+        "CompletedAtUtc": "2026-05-07T17:51:28.2543018+00:00"
+      },
+      "qa_tweak_id": "privacy.disable-telemetry-optin-ui",
+      "candidate_id": "privacy.disable-telemetry-optin-ui",
+      "card_name": "Diagnostic Data Opt-In Settings UI",
+      "documentation": "research/records/privacy.disable-telemetry-optin-ui.json"
+    },
+    {
+      "tweak_id": "privacy.disable-wer",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -900,19 +1155,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "system.services.disable-bluetooth-audio-gateway",
-        "TweakName": "Bluetooth Audio Gateway Service",
+        "TweakId": "privacy.disable-wer",
+        "TweakName": "Windows Error Reporting",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "system.services.disable-bluetooth-audio-gateway",
-          "Name": "Bluetooth Audio Gateway Service",
-          "Category": "System",
-          "Description": "This service supports Bluetooth hands-free audio gateway features. Disabling it removes that capability.",
-          "FriendlyDescription": "This service supports Bluetooth hands-free audio gateway features. Disabling it removes that capability.",
-          "RegistryPath": "",
+          "TweakId": "privacy.disable-wer",
+          "Name": "Windows Error Reporting",
+          "Category": "Privacy",
+          "Description": "Windows Error Reporting can send information about crashes and failures so Microsoft or an internal server can analyze them. This policy turns that reporting off for the device.",
+          "FriendlyDescription": "Windows Error Reporting can send information about crashes and failures so Microsoft or an internal server can analyze them. This policy turns that reporting off for the device.",
+          "RegistryPath": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Error Reporting\\Disabled",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -920,15 +1175,15 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: This service supports Bluetooth hands-free audio gateway features. Disabling it removes that capability. Evidence: The Microsoft services guidance page explicitly lists the BTAGService service, its Manual baseline, its Bluetooth Handsfree Profile role, and that it is OK to disable. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: Windows Error Reporting can send information about crashes and failures so Microsoft or an internal server can analyze them. This policy turns that reporting off for the device. Evidence: The ADMX_ErrorReporting Policy CSP page explicitly names the exact machine policy path and value name the app writes, and its policy description matches the disabled behavior. Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "The Microsoft services guidance page explicitly lists the BTAGService service, its Manual baseline, its Bluetooth Handsfree Profile role, and that it is OK to disable.",
-              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services"
+              "Summary": "The ADMX_ErrorReporting Policy CSP page explicitly names the exact machine policy path and value name the app writes, and its policy description matches the disabled behavior.",
+              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-errorreporting#werdisable_2"
             },
             {
               "Key": "runtime",
@@ -959,8 +1214,8 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: System (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\system\\system.md",
+              "Title": "Docs: Privacy (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\privacy\\privacy-verified.md",
               "Kind": "Docs"
             }
           ]
@@ -969,10 +1224,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Detected 1 of 1 services. Current state: Manual.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Windows Error Reporting disabled'.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Manual",
-            "TargetValue": "Disabled",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Windows Error Reporting disabled",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -981,8 +1236,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 1 of 1 services. Current state: Manual.\nServices:\n- BTAGService: Manual (Stopped) -> Disabled",
-                "TimestampText": "10:25:18"
+                "Message": "Current values do not match a named option. Selected option is 'Windows Error Reporting disabled'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Error Reporting\\Disabled: missing -> 1",
+                "TimestampText": "10:51:33"
               },
               {
                 "Action": "Apply",
@@ -1009,8 +1264,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Disabled",
-            "TargetValue": "Disabled",
+            "CurrentValue": "Windows Error Reporting disabled",
+            "TargetValue": "Windows Error Reporting disabled",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1019,20 +1274,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 1 of 1 services. Current state: Manual.\nServices:\n- BTAGService: Manual (Stopped) -> Disabled",
-                "TimestampText": "10:25:19"
+                "Message": "Current values do not match a named option. Selected option is 'Windows Error Reporting disabled'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Error Reporting\\Disabled: missing -> 1",
+                "TimestampText": "10:51:33"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Updated 1 services.",
-                "TimestampText": "10:25:19"
+                "Message": "Applied preset 'Windows Error Reporting disabled'.",
+                "TimestampText": "10:51:35"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified service start modes.",
-                "TimestampText": "10:25:19"
+                "Message": "Verified preset 'Windows Error Reporting disabled'.",
+                "TimestampText": "10:51:35"
               },
               {
                 "Action": "Rollback",
@@ -1045,10 +1300,10 @@
           {
             "Stage": "rollback",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Rolled back service start modes.",
+            "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Disabled",
-            "TargetValue": "Disabled",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Windows Error Reporting disabled",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1057,36 +1312,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 1 of 1 services. Current state: Manual.\nServices:\n- BTAGService: Manual (Stopped) -> Disabled",
-                "TimestampText": "10:25:19"
+                "Message": "Current values do not match a named option. Selected option is 'Windows Error Reporting disabled'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Error Reporting\\Disabled: missing -> 1",
+                "TimestampText": "10:51:33"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Updated 1 services.",
-                "TimestampText": "10:25:19"
+                "Message": "Applied preset 'Windows Error Reporting disabled'.",
+                "TimestampText": "10:51:35"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified service start modes.",
-                "TimestampText": "10:25:19"
+                "Message": "Verified preset 'Windows Error Reporting disabled'.",
+                "TimestampText": "10:51:35"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
-                "Message": "Rolled back service start modes.",
-                "TimestampText": "10:25:19"
+                "Message": "Rolled back registry values.",
+                "TimestampText": "10:51:36"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Detected 1 of 1 services. Current state: Manual.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Windows Error Reporting disabled'.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Manual",
-            "TargetValue": "Disabled",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Windows Error Reporting disabled",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1095,40 +1350,40 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 1 of 1 services. Current state: Manual.\nServices:\n- BTAGService: Manual (Stopped) -> Disabled",
-                "TimestampText": "10:25:19"
+                "Message": "Current values do not match a named option. Selected option is 'Windows Error Reporting disabled'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Error Reporting\\Disabled: missing -> 1",
+                "TimestampText": "10:51:36"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Updated 1 services.",
-                "TimestampText": "10:25:19"
+                "Message": "Applied preset 'Windows Error Reporting disabled'.",
+                "TimestampText": "10:51:35"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified service start modes.",
-                "TimestampText": "10:25:19"
+                "Message": "Verified preset 'Windows Error Reporting disabled'.",
+                "TimestampText": "10:51:35"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
-                "Message": "Rolled back service start modes.",
-                "TimestampText": "10:25:19"
+                "Message": "Rolled back registry values.",
+                "TimestampText": "10:51:36"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T17:25:16.1084956+00:00",
-        "CompletedAtUtc": "2026-05-07T17:25:19.4195307+00:00"
+        "StartedAtUtc": "2026-05-07T17:51:33.0269581+00:00",
+        "CompletedAtUtc": "2026-05-07T17:51:36.2192654+00:00"
       },
-      "qa_tweak_id": "system.services.disable-bluetooth-audio-gateway",
-      "candidate_id": "system.services.disable-bluetooth-audio-gateway",
-      "card_name": "Bluetooth Audio Gateway Service",
-      "documentation": "research/records/system.services.disable-bluetooth-audio-gateway.json"
+      "qa_tweak_id": "privacy.disable-wer",
+      "candidate_id": "privacy.disable-wer",
+      "card_name": "Windows Error Reporting",
+      "documentation": "research/records/privacy.disable-wer.json"
     },
     {
-      "tweak_id": "system.services.disable-bluetooth-support",
+      "tweak_id": "privacy.disable-windows-location-provider",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -1165,19 +1420,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "system.services.disable-bluetooth-support",
-        "TweakName": "Bluetooth Support Service",
+        "TweakId": "privacy.disable-windows-location-provider",
+        "TweakName": "Windows Location Provider",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "system.services.disable-bluetooth-support",
-          "Name": "Bluetooth Support Service",
-          "Category": "System",
-          "Description": "This is the main Windows Bluetooth support service. It helps Windows discover, pair, and work with Bluetooth devices.",
-          "FriendlyDescription": "This is the main Windows Bluetooth support service. It helps Windows discover, pair, and work with Bluetooth devices.",
-          "RegistryPath": "",
+          "TweakId": "privacy.disable-windows-location-provider",
+          "Name": "Windows Location Provider",
+          "Category": "Privacy",
+          "Description": "Windows has a built-in location provider that apps and system features can use. This policy decides whether that provider is available.",
+          "FriendlyDescription": "Windows has a built-in location provider that apps and system features can use. This policy decides whether that provider is available.",
+          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Windows\\LocationAndSensors\\DisableWindowsLocationProvider",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -1185,15 +1440,15 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: This is the main Windows Bluetooth support service. It helps Windows discover, pair, and work with Bluetooth devices. Evidence: The Microsoft services guidance page explicitly lists the bthserv service, its Manual baseline, the impact of disabling it, and that it is OK to disable. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: Windows has a built-in location provider that apps and system features can use. This policy decides whether that provider is available. Evidence: The ADMX_LocationProviderAdm Policy CSP page explicitly names the exact machine policy path and value name the app writes, and its policy description matches the disabled behavior. Added nohuto mirror corroboration via nohuto-disablewindowslocationprovider-... Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "The Microsoft services guidance page explicitly lists the bthserv service, its Manual baseline, the impact of disabling it, and that it is OK to disable.",
-              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services"
+              "Summary": "The ADMX_LocationProviderAdm Policy CSP page explicitly names the exact machine policy path and value name the app writes, and its policy description matches the disabled behavior. Added nohuto mirror corroboration via nohuto-disablewindowslocationprovider-...",
+              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-locationprovideradm#disablewindowslocationprovider"
             },
             {
               "Key": "runtime",
@@ -1224,8 +1479,8 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: System (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\system\\system.md",
+              "Title": "Docs: Privacy (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\privacy\\privacy-verified.md",
               "Kind": "Docs"
             }
           ]
@@ -1234,10 +1489,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Detected 1 of 1 services. Current state: Manual.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Windows Location Provider disabled'.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Manual",
-            "TargetValue": "Disabled",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Windows Location Provider disabled",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -1246,8 +1501,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 1 of 1 services. Current state: Manual.\nServices:\n- bthserv: Manual (Stopped) -> Disabled",
-                "TimestampText": "10:25:28"
+                "Message": "Current values do not match a named option. Selected option is 'Windows Location Provider disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\LocationAndSensors\\DisableWindowsLocationProvider: missing -> 1",
+                "TimestampText": "10:51:42"
               },
               {
                 "Action": "Apply",
@@ -1274,8 +1529,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Disabled",
-            "TargetValue": "Disabled",
+            "CurrentValue": "Windows Location Provider disabled",
+            "TargetValue": "Windows Location Provider disabled",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1284,20 +1539,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 1 of 1 services. Current state: Manual.\nServices:\n- bthserv: Manual (Stopped) -> Disabled",
-                "TimestampText": "10:25:28"
+                "Message": "Current values do not match a named option. Selected option is 'Windows Location Provider disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\LocationAndSensors\\DisableWindowsLocationProvider: missing -> 1",
+                "TimestampText": "10:51:42"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Updated 1 services.",
-                "TimestampText": "10:25:28"
+                "Message": "Applied preset 'Windows Location Provider disabled'.",
+                "TimestampText": "10:51:45"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified service start modes.",
-                "TimestampText": "10:25:28"
+                "Message": "Verified preset 'Windows Location Provider disabled'.",
+                "TimestampText": "10:51:45"
               },
               {
                 "Action": "Rollback",
@@ -1310,10 +1565,10 @@
           {
             "Stage": "rollback",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Rolled back service start modes.",
+            "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Disabled",
-            "TargetValue": "Disabled",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Windows Location Provider disabled",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1322,36 +1577,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 1 of 1 services. Current state: Manual.\nServices:\n- bthserv: Manual (Stopped) -> Disabled",
-                "TimestampText": "10:25:28"
+                "Message": "Current values do not match a named option. Selected option is 'Windows Location Provider disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\LocationAndSensors\\DisableWindowsLocationProvider: missing -> 1",
+                "TimestampText": "10:51:42"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Updated 1 services.",
-                "TimestampText": "10:25:28"
+                "Message": "Applied preset 'Windows Location Provider disabled'.",
+                "TimestampText": "10:51:45"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified service start modes.",
-                "TimestampText": "10:25:28"
+                "Message": "Verified preset 'Windows Location Provider disabled'.",
+                "TimestampText": "10:51:45"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
-                "Message": "Rolled back service start modes.",
-                "TimestampText": "10:25:28"
+                "Message": "Rolled back registry values.",
+                "TimestampText": "10:51:45"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Detected 1 of 1 services. Current state: Manual.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Windows Location Provider disabled'.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Manual",
-            "TargetValue": "Disabled",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Windows Location Provider disabled",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1360,302 +1615,37 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 1 of 1 services. Current state: Manual.\nServices:\n- bthserv: Manual (Stopped) -> Disabled",
-                "TimestampText": "10:25:28"
+                "Message": "Current values do not match a named option. Selected option is 'Windows Location Provider disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\LocationAndSensors\\DisableWindowsLocationProvider: missing -> 1",
+                "TimestampText": "10:51:45"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Updated 1 services.",
-                "TimestampText": "10:25:28"
+                "Message": "Applied preset 'Windows Location Provider disabled'.",
+                "TimestampText": "10:51:45"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified service start modes.",
-                "TimestampText": "10:25:28"
+                "Message": "Verified preset 'Windows Location Provider disabled'.",
+                "TimestampText": "10:51:45"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
-                "Message": "Rolled back service start modes.",
-                "TimestampText": "10:25:28"
+                "Message": "Rolled back registry values.",
+                "TimestampText": "10:51:45"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T17:25:25.7353768+00:00",
-        "CompletedAtUtc": "2026-05-07T17:25:29.0030846+00:00"
+        "StartedAtUtc": "2026-05-07T17:51:42.680349+00:00",
+        "CompletedAtUtc": "2026-05-07T17:51:45.9208711+00:00"
       },
-      "qa_tweak_id": "system.services.disable-bluetooth-support",
-      "candidate_id": "system.services.disable-bluetooth-support",
-      "card_name": "Bluetooth Support Service",
-      "documentation": "research/records/system.services.disable-bluetooth-support.json"
-    },
-    {
-      "tweak_id": "system.services.disable-bluetooth-user-service",
-      "host_exit": 0,
-      "execution_exit": 0,
-      "payload_status": "completed",
-      "report_source": "stdout",
-      "report_parse_error": null,
-      "report_fetch_status": null,
-      "report_app_success": true,
-      "report_success": true,
-      "report_status": "ok",
-      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
-      "report_contract_status": "ok",
-      "report_contract_summary": "QA card snapshot contract passed.",
-      "report_contract_failures": [],
-      "report_card_present": true,
-      "report_card_has_claim_boundary": true,
-      "report_card_present_fields": [
-        "TweakId",
-        "Name",
-        "Category",
-        "EvidenceClass",
-        "ResearchStatus",
-        "RollbackSnapshotState",
-        "HasClaimBoundary",
-        "WhatWeKnowSummary",
-        "WhatWeDoNotClaimSummary",
-        "ProofLanes"
-      ],
-      "report_card_missing_fields": [],
-      "report_card_proof_lanes": [
-        "docs",
-        "runtime",
-        "source",
-        "rollback"
-      ],
-      "report_card_missing_proof_lanes": [],
-      "report": {
-        "TweakId": "system.services.disable-bluetooth-user-service",
-        "TweakName": "Bluetooth User Service",
-        "Success": true,
-        "Status": "ok",
-        "Summary": "Apply/verify path completed and rollback restored the tweak.",
-        "RollbackRequested": true,
-        "Card": {
-          "TweakId": "system.services.disable-bluetooth-user-service",
-          "Name": "Bluetooth User Service",
-          "Category": "System",
-          "Description": "This per-user Bluetooth service supports Bluetooth features tied to each signed-in user session. Disabling it removes those per-user Bluetooth service behaviors.",
-          "FriendlyDescription": "This per-user Bluetooth service supports Bluetooth features tied to each signed-in user session. Disabling it removes those per-user Bluetooth service behaviors.",
-          "RegistryPath": "",
-          "EvidenceClass": "A",
-          "EvidenceClassTitle": "Cross-Layer Verified",
-          "ResearchStatus": "PROMOTED",
-          "IsMutationAllowed": true,
-          "RollbackSnapshotState": "ready",
-          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
-          "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: This per-user Bluetooth service supports Bluetooth features tied to each signed-in user session. Disabling it removes those per-user Bluetooth service behaviors. Evidence: The official Learn services page documents the base per-user service family as BluetoothUserService. The app targets instantiated per-user services via BluetoothUserService_*. Rollback: Rollback: Verified via record-restore-story.",
-          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
-          "ProofLanes": [
-            {
-              "Key": "docs",
-              "Label": "DOCS",
-              "State": "ready",
-              "Summary": "The official Learn services page documents the base per-user service family as BluetoothUserService. The app targets instantiated per-user services via BluetoothUserService_*.",
-              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services"
-            },
-            {
-              "Key": "runtime",
-              "Label": "RUNTIME",
-              "State": "ready",
-              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
-              "Source": ""
-            },
-            {
-              "Key": "source",
-              "Label": "SOURCE",
-              "State": "ready",
-              "Summary": "No upstream nohuto source link is attached to this record.",
-              "Source": ""
-            },
-            {
-              "Key": "rollback",
-              "Label": "ROLLBACK",
-              "State": "ready",
-              "Summary": "Rollback: Verified via record-restore-story.",
-              "Source": "record-restore-story"
-            }
-          ],
-          "ReferenceLinks": [
-            {
-              "Title": "Docs: Details (missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
-              "Kind": "Details"
-            },
-            {
-              "Title": "Docs: System (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\system\\system.md",
-              "Kind": "Docs"
-            }
-          ]
-        },
-        "Stages": [
-          {
-            "Stage": "detect-before",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Detected 1 of 1 services. Current state: Manual.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Manual",
-            "TargetValue": "Disabled",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": false,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Detected 1 of 1 services. Current state: Manual.\nServices:\n- BluetoothUserService_3733b: Manual (Stopped) -> Disabled",
-                "TimestampText": "10:25:38"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "apply",
-            "AppliedStatus": "Applied",
-            "StatusMessage": "Run completed.",
-            "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Disabled",
-            "TargetValue": "Disabled",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Detected 1 of 1 services. Current state: Manual.\nServices:\n- BluetoothUserService_3733b: Manual (Stopped) -> Disabled",
-                "TimestampText": "10:25:38"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Updated 1 services.",
-                "TimestampText": "10:25:38"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified service start modes.",
-                "TimestampText": "10:25:38"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Not required",
-                "Message": "Step not executed.",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "rollback",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Rolled back service start modes.",
-            "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Disabled",
-            "TargetValue": "Disabled",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Detected 1 of 1 services. Current state: Manual.\nServices:\n- BluetoothUserService_3733b: Manual (Stopped) -> Disabled",
-                "TimestampText": "10:25:38"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Updated 1 services.",
-                "TimestampText": "10:25:38"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified service start modes.",
-                "TimestampText": "10:25:38"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Rolled back service start modes.",
-                "TimestampText": "10:25:38"
-              }
-            ]
-          },
-          {
-            "Stage": "detect-after",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Detected 1 of 1 services. Current state: Manual.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Manual",
-            "TargetValue": "Disabled",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Detected 1 of 1 services. Current state: Manual.\nServices:\n- BluetoothUserService_3733b: Manual (Stopped) -> Disabled",
-                "TimestampText": "10:25:38"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Updated 1 services.",
-                "TimestampText": "10:25:38"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified service start modes.",
-                "TimestampText": "10:25:38"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Rolled back service start modes.",
-                "TimestampText": "10:25:38"
-              }
-            ]
-          }
-        ],
-        "StartedAtUtc": "2026-05-07T17:25:35.6350589+00:00",
-        "CompletedAtUtc": "2026-05-07T17:25:38.8591873+00:00"
-      },
-      "qa_tweak_id": "system.services.disable-bluetooth-user-service",
-      "candidate_id": "system.services.disable-bluetooth-user-service",
-      "card_name": "Bluetooth User Service",
-      "documentation": "research/records/system.services.disable-bluetooth-user-service.json"
+      "qa_tweak_id": "privacy.disable-windows-location-provider",
+      "candidate_id": "privacy.disable-windows-location-provider",
+      "card_name": "Windows Location Provider",
+      "documentation": "research/records/privacy.disable-windows-location-provider.json"
     }
   ],
   "summary": {
@@ -1664,7 +1654,7 @@
     "live_success_count": 5,
     "live_failure_count": 0,
     "categories": [
-      "System"
+      "Privacy"
     ]
   }
 }

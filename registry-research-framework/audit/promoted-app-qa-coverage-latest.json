@@ -1,11 +1,11 @@
 {
-  "generated_utc": "2026-05-07T17:24:52Z",
-  "history_entry_count": 71,
+  "generated_utc": "2026-05-07T17:51:01Z",
+  "history_entry_count": 75,
   "catalog_candidate_count": 242,
-  "covered_count": 212,
-  "uncovered_count": 30,
+  "covered_count": 217,
+  "uncovered_count": 25,
   "summary": {
-    "coverage_percent": 87.6,
+    "coverage_percent": 89.67,
     "covered_categories": {
       "Audio": 3,
       "Cleanup": 1,
@@ -16,73 +16,20 @@
       "Performance": 3,
       "Peripheral": 3,
       "Power": 10,
-      "Privacy": 53,
+      "Privacy": 58,
       "Security": 17,
       "System": 46,
       "Visibility": 21
     },
     "uncovered_categories": {
       "Network": 4,
-      "Privacy": 14,
+      "Privacy": 9,
       "Security": 4,
       "System": 6,
       "Visibility": 2
     }
   },
   "recommended_next_batches": [
-    {
-      "category": "Privacy",
-      "covered_count": 53,
-      "uncovered_count": 14,
-      "coverage_percent": 79.1,
-      "batch_size": 5,
-      "tweak_ids": [
-        "privacy.disable-switchback.policy",
-        "privacy.disable-telemetry-change-notifications",
-        "privacy.disable-telemetry-optin-ui",
-        "privacy.disable-wer",
-        "privacy.disable-windows-location-provider"
-      ],
-      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-switchback.policy --id privacy.disable-telemetry-change-notifications --id privacy.disable-telemetry-optin-ui --id privacy.disable-wer --id privacy.disable-windows-location-provider",
-      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-switchback.policy --id privacy.disable-telemetry-change-notifications --id privacy.disable-telemetry-optin-ui --id privacy.disable-wer --id privacy.disable-windows-location-provider --run-kvm --json",
-      "candidates": [
-        {
-          "tweak_id": "privacy.disable-switchback.policy",
-          "record_id": "privacy.disable-switchback.policy",
-          "category": "Privacy",
-          "name": "Disable SwitchBack Compatibility Policy",
-          "documentation": "research/records/privacy.disable-switchback.policy.review.json"
-        },
-        {
-          "tweak_id": "privacy.disable-telemetry-change-notifications",
-          "record_id": "privacy.disable-telemetry-change-notifications",
-          "category": "Privacy",
-          "name": "Diagnostic Data Change Notifications",
-          "documentation": "research/records/privacy.disable-telemetry-change-notifications.json"
-        },
-        {
-          "tweak_id": "privacy.disable-telemetry-optin-ui",
-          "record_id": "privacy.disable-telemetry-optin-ui",
-          "category": "Privacy",
-          "name": "Diagnostic Data Opt-In Settings UI",
-          "documentation": "research/records/privacy.disable-telemetry-optin-ui.json"
-        },
-        {
-          "tweak_id": "privacy.disable-wer",
-          "record_id": "privacy.disable-wer",
-          "category": "Privacy",
-          "name": "Windows Error Reporting",
-          "documentation": "research/records/privacy.disable-wer.json"
-        },
-        {
-          "tweak_id": "privacy.disable-windows-location-provider",
-          "record_id": "privacy.disable-windows-location-provider",
-          "category": "Privacy",
-          "name": "Windows Location Provider",
-          "documentation": "research/records/privacy.disable-windows-location-provider.json"
-        }
-      ]
-    },
     {
       "category": "Security",
       "covered_count": 17,
@@ -170,6 +117,59 @@
           "category": "Network",
           "name": "SMB Cipher Suite Order",
           "documentation": "research/records/network.smb-set-cipher-suite-order.review.json"
+        }
+      ]
+    },
+    {
+      "category": "Privacy",
+      "covered_count": 58,
+      "uncovered_count": 9,
+      "coverage_percent": 86.57,
+      "batch_size": 5,
+      "tweak_ids": [
+        "privacy.disable-windows-tips",
+        "privacy.hide-last-logged-in-user",
+        "privacy.hide-recommended-personalized-sites",
+        "privacy.hide-recommended-personalized-sites-user",
+        "privacy.hide-recommended-section"
+      ],
+      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-windows-tips --id privacy.hide-last-logged-in-user --id privacy.hide-recommended-personalized-sites --id privacy.hide-recommended-personalized-sites-user --id privacy.hide-recommended-section",
+      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-windows-tips --id privacy.hide-last-logged-in-user --id privacy.hide-recommended-personalized-sites --id privacy.hide-recommended-personalized-sites-user --id privacy.hide-recommended-section --run-kvm --json",
+      "candidates": [
+        {
+          "tweak_id": "privacy.disable-windows-tips",
+          "record_id": "privacy.disable-windows-tips",
+          "category": "Privacy",
+          "name": "Turn Off Windows Tips",
+          "documentation": "research/records/privacy.disable-windows-tips.review.json"
+        },
+        {
+          "tweak_id": "privacy.hide-last-logged-in-user",
+          "record_id": "privacy.hide-last-logged-in-user",
+          "category": "Privacy",
+          "name": "Display of the Last Signed-In Username",
+          "documentation": "research/records/privacy.hide-last-logged-in-user.json"
+        },
+        {
+          "tweak_id": "privacy.hide-recommended-personalized-sites",
+          "record_id": "privacy.hide-recommended-personalized-sites",
+          "category": "Privacy",
+          "name": "Start Personalized Site Recommendations",
+          "documentation": "research/records/privacy.hide-recommended-personalized-sites.json"
+        },
+        {
+          "tweak_id": "privacy.hide-recommended-personalized-sites-user",
+          "record_id": "privacy.hide-recommended-personalized-sites-user",
+          "category": "Privacy",
+          "name": "Start Personalized Site Recommendations (Current User)",
+          "documentation": "research/records/privacy.hide-recommended-personalized-sites-user.json"
+        },
+        {
+          "tweak_id": "privacy.hide-recommended-section",
+          "record_id": "privacy.hide-recommended-section",
+          "category": "Privacy",
+          "name": "Start Menu Recommended Section",
+          "documentation": "research/records/privacy.hide-recommended-section.json"
         }
       ]
     },
@@ -1392,12 +1392,57 @@
       "latest_report_status": "ok"
     },
     {
+      "tweak_id": "privacy.disable-switchback.policy",
+      "qa_tweak_id": "privacy.disable-switchback.policy",
+      "candidate_id": "privacy.disable-switchback.policy",
+      "category": "Privacy",
+      "name": "Disable SwitchBack Compatibility Policy",
+      "documentation": "research/records/privacy.disable-switchback.policy.review.json",
+      "latest_report_status": "ok"
+    },
+    {
       "tweak_id": "privacy.disable-sync-settings",
       "qa_tweak_id": "privacy.turn-off-sync-by-default-allow-user-override",
       "candidate_id": "privacy.turn-off-sync-by-default-allow-user-override",
       "category": "Privacy",
       "name": "Turn Off Settings Sync by Default",
       "documentation": "research/records/privacy.turn-off-sync-by-default-allow-user-override.review.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "privacy.disable-telemetry-change-notifications",
+      "qa_tweak_id": "privacy.disable-telemetry-change-notifications",
+      "candidate_id": "privacy.disable-telemetry-change-notifications",
+      "category": "Privacy",
+      "name": "Diagnostic Data Change Notifications",
+      "documentation": "research/records/privacy.disable-telemetry-change-notifications.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "privacy.disable-telemetry-optin-ui",
+      "qa_tweak_id": "privacy.disable-telemetry-optin-ui",
+      "candidate_id": "privacy.disable-telemetry-optin-ui",
+      "category": "Privacy",
+      "name": "Diagnostic Data Opt-In Settings UI",
+      "documentation": "research/records/privacy.disable-telemetry-optin-ui.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "privacy.disable-wer",
+      "qa_tweak_id": "privacy.disable-wer",
+      "candidate_id": "privacy.disable-wer",
+      "category": "Privacy",
+      "name": "Windows Error Reporting",
+      "documentation": "research/records/privacy.disable-wer.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "privacy.disable-windows-location-provider",
+      "qa_tweak_id": "privacy.disable-windows-location-provider",
+      "candidate_id": "privacy.disable-windows-location-provider",
+      "category": "Privacy",
+      "name": "Windows Location Provider",
+      "documentation": "research/records/privacy.disable-windows-location-provider.json",
       "latest_report_status": "ok"
     },
     {
@@ -2194,41 +2239,6 @@
       "category": "Network",
       "name": "SMB Cipher Suite Order",
       "documentation": "research/records/network.smb-set-cipher-suite-order.review.json"
-    },
-    {
-      "tweak_id": "privacy.disable-switchback.policy",
-      "record_id": "privacy.disable-switchback.policy",
-      "category": "Privacy",
-      "name": "Disable SwitchBack Compatibility Policy",
-      "documentation": "research/records/privacy.disable-switchback.policy.review.json"
-    },
-    {
-      "tweak_id": "privacy.disable-telemetry-change-notifications",
-      "record_id": "privacy.disable-telemetry-change-notifications",
-      "category": "Privacy",
-      "name": "Diagnostic Data Change Notifications",
-      "documentation": "research/records/privacy.disable-telemetry-change-notifications.json"
-    },
-    {
-      "tweak_id": "privacy.disable-telemetry-optin-ui",
-      "record_id": "privacy.disable-telemetry-optin-ui",
-      "category": "Privacy",
-      "name": "Diagnostic Data Opt-In Settings UI",
-      "documentation": "research/records/privacy.disable-telemetry-optin-ui.json"
-    },
-    {
-      "tweak_id": "privacy.disable-wer",
-      "record_id": "privacy.disable-wer",
-      "category": "Privacy",
-      "name": "Windows Error Reporting",
-      "documentation": "research/records/privacy.disable-wer.json"
-    },
-    {
-      "tweak_id": "privacy.disable-windows-location-provider",
-      "record_id": "privacy.disable-windows-location-provider",
-      "category": "Privacy",
-      "name": "Windows Location Provider",
-      "documentation": "research/records/privacy.disable-windows-location-provider.json"
     },
     {
       "tweak_id": "privacy.disable-windows-tips",

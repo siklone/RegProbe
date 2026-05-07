@@ -139,6 +139,8 @@ public sealed class CommandAllowlistSecurityTests
             CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection", "/v", "DisableDiagnosticDataViewer", "/t", "REG_DWORD", "/d", "1", "/f"),
             CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection", "/v", "DoNotShowFeedbackNotifications", "/t", "REG_DWORD", "/d", "1", "/f"),
             CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection", "/v", "DisableOneSettingsDownloads", "/t", "REG_DWORD", "/d", "1", "/f"),
+            CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection", "/v", "DisableTelemetryOptInChangeNotification", "/t", "REG_DWORD", "/d", "1", "/f"),
+            CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection", "/v", "DisableTelemetryOptInSettingsUx", "/t", "REG_DWORD", "/d", "1", "/f"),
             CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection", "/v", "LimitDiagnosticLogCollection", "/t", "REG_DWORD", "/d", "1", "/f"),
             CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection", "/v", "LimitDumpCollection", "/t", "REG_DWORD", "/d", "1", "/f"),
             CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection", "/v", "AllowTelemetry", "/t", "REG_DWORD", "/d", "0", "/f"),
