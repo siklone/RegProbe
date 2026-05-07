@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-07T10:21:11.414301Z",
+  "generated_utc": "2026-05-07T13:42:00.712220Z",
   "summary": {
     "total_records": 356,
     "validated": 255,
@@ -20,7 +20,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-05-07T10:21:11.062308Z",
+      "generated_utc": "2026-05-07T13:42:00.408072Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -33819,6 +33819,21 @@
             "transport-blocker"
           ],
           "origin": "unspecified"
+        },
+        {
+          "evidence_id": "vm-audio.show-disconnected-devices-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk runtime receipt for ShowDisconnectedDevices",
+          "location": "evidence/captures/audio-show-disconnected-devices-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/audio-show-disconnected-devices-etw-qga-unblock-20260507/audio-show-disconnected-devices-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/audio-show-disconnected-devices-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/audio-show-disconnected-devices-etw-qga-unblock-20260507/audio-show-disconnected-devices-etw-qga-unblock-20260507.etl",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 5621 registry events with 1364 caller-stack events. The QGA-launched helper targeted `HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl` / `ShowDisconnectedDevices` and the bundle contains target command/subkey activity, but no exact current-user HKCU `ShowDisconnectedDevices` RegQueryValue event was observed under the SYSTEM QGA context.",
+          "strength": "medium",
+          "supports": [
+            "runtime-observation",
+            "tooling-fix",
+            "path",
+            "version-scope"
+          ],
+          "origin": "unspecified"
         }
       ],
       "validation_proof": {
@@ -34116,6 +34131,21 @@
             "runtime-review-artifact",
             "version-scope",
             "investigation-open-question"
+          ],
+          "origin": "unspecified"
+        },
+        {
+          "evidence_id": "vm-audio.show-hidden-devices-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk runtime receipt for ShowHiddenDevices",
+          "location": "evidence/captures/audio-show-hidden-devices-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/audio-show-hidden-devices-etw-qga-unblock-20260507/audio-show-hidden-devices-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/audio-show-hidden-devices-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/audio-show-hidden-devices-etw-qga-unblock-20260507/audio-show-hidden-devices-etw-qga-unblock-20260507.etl",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4552 registry events with 524 caller-stack events. The QGA-launched helper targeted `HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl` / `ShowHiddenDevices` and the bundle contains target command/subkey activity, but no exact current-user HKCU `ShowHiddenDevices` RegQueryValue event was observed under the SYSTEM QGA context.",
+          "strength": "medium",
+          "supports": [
+            "runtime-observation",
+            "tooling-fix",
+            "path",
+            "version-scope"
           ],
           "origin": "unspecified"
         }
@@ -35041,6 +35071,21 @@
           "strength": "low",
           "supports": [
             "behavior",
+            "version-scope"
+          ],
+          "origin": "unspecified"
+        },
+        {
+          "evidence_id": "vm-developer.dotnet-telemetry-disable-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk runtime receipt for DOTNET_CLI_TELEMETRY_OPTOUT",
+          "location": "evidence/captures/developer-dotnet-telemetry-disable-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/developer-dotnet-telemetry-disable-etw-qga-unblock-20260507/developer-dotnet-telemetry-disable-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/developer-dotnet-telemetry-disable-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/developer-dotnet-telemetry-disable-etw-qga-unblock-20260507/developer-dotnet-telemetry-disable-etw-qga-unblock-20260507.etl",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 5025 registry events with 1181 caller-stack events. The QGA-launched helper targeted `HKCU\\Environment` / `DOTNET_CLI_TELEMETRY_OPTOUT` and the bundle contains target command/subkey activity, but no exact current-user HKCU `DOTNET_CLI_TELEMETRY_OPTOUT` RegQueryValue event was observed under the SYSTEM QGA context.",
+          "strength": "medium",
+          "supports": [
+            "runtime-observation",
+            "tooling-fix",
+            "path",
             "version-scope"
           ],
           "origin": "unspecified"
@@ -36653,6 +36698,21 @@
           "origin": "unspecified"
         },
         {
+          "evidence_id": "vm-developer.ssh-agent-autostart-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk runtime receipt for SSH Agent",
+          "location": "evidence/captures/developer-ssh-agent-autostart-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/developer-ssh-agent-autostart-etw-qga-unblock-20260507/developer-ssh-agent-autostart-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/developer-ssh-agent-autostart-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/developer-ssh-agent-autostart-etw-qga-unblock-20260507/developer-ssh-agent-autostart-etw-qga-unblock-20260507.etl",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4390 registry events with 524 caller-stack events. The QGA-launched helper targeted `HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run` / `SSH Agent` and the bundle contains target command/subkey activity, but no exact current-user HKCU `SSH Agent` RegQueryValue event was observed under the SYSTEM QGA context.",
+          "strength": "medium",
+          "supports": [
+            "runtime-observation",
+            "tooling-fix",
+            "path",
+            "version-scope"
+          ],
+          "origin": "unspecified"
+        },
+        {
           "evidence_id": "vm-developer.ssh-agent-autostart-ghidra-launch-receipt-20260424",
           "kind": "vm-test",
           "title": "Guest Ghidra launch receipt for SSH Agent",
@@ -37500,6 +37560,21 @@
           "strength": "low",
           "supports": [
             "behavior",
+            "version-scope"
+          ],
+          "origin": "unspecified"
+        },
+        {
+          "evidence_id": "vm-explorer.always-show-icons-never-thumbnails-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk runtime receipt for IconsOnly",
+          "location": "evidence/captures/explorer-always-show-icons-never-thumbnails-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/explorer-always-show-icons-never-thumbnails-etw-qga-unblock-20260507/explorer-always-show-icons-never-thumbnails-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/explorer-always-show-icons-never-thumbnails-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/explorer-always-show-icons-never-thumbnails-etw-qga-unblock-20260507/explorer-always-show-icons-never-thumbnails-etw-qga-unblock-20260507.etl",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4446 registry events with 569 caller-stack events. The QGA-launched helper targeted `HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced` / `IconsOnly` and the bundle contains target command/subkey activity, but no exact current-user HKCU `IconsOnly` RegQueryValue event was observed under the SYSTEM QGA context.",
+          "strength": "medium",
+          "supports": [
+            "runtime-observation",
+            "tooling-fix",
+            "path",
             "version-scope"
           ],
           "origin": "unspecified"
@@ -38461,6 +38536,21 @@
             "transport-blocker"
           ],
           "origin": "unspecified"
+        },
+        {
+          "evidence_id": "vm-explorer.enable-explorer-compact-mode-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk runtime receipt for UseCompactMode",
+          "location": "evidence/captures/explorer-enable-explorer-compact-mode-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/explorer-enable-explorer-compact-mode-etw-qga-unblock-20260507/explorer-enable-explorer-compact-mode-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/explorer-enable-explorer-compact-mode-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/explorer-enable-explorer-compact-mode-etw-qga-unblock-20260507/explorer-enable-explorer-compact-mode-etw-qga-unblock-20260507.etl",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4484 registry events with 529 caller-stack events. The QGA-launched helper targeted `HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced` / `UseCompactMode` and the bundle contains target command/subkey activity, but no exact current-user HKCU `UseCompactMode` RegQueryValue event was observed under the SYSTEM QGA context.",
+          "strength": "medium",
+          "supports": [
+            "runtime-observation",
+            "tooling-fix",
+            "path",
+            "version-scope"
+          ],
+          "origin": "unspecified"
         }
       ],
       "validation_proof": {
@@ -38794,6 +38884,21 @@
           "origin": "unspecified"
         },
         {
+          "evidence_id": "vm-explorer.hide-empty-drives-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk runtime receipt for HideDrivesWithNoMedia",
+          "location": "evidence/captures/explorer-hide-empty-drives-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/explorer-hide-empty-drives-etw-qga-unblock-20260507/explorer-hide-empty-drives-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/explorer-hide-empty-drives-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/explorer-hide-empty-drives-etw-qga-unblock-20260507/explorer-hide-empty-drives-etw-qga-unblock-20260507.etl",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4485 registry events with 525 caller-stack events. The QGA-launched helper targeted `HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced` / `HideDrivesWithNoMedia` and the bundle contains target command/subkey activity, but no exact current-user HKCU `HideDrivesWithNoMedia` RegQueryValue event was observed under the SYSTEM QGA context.",
+          "strength": "medium",
+          "supports": [
+            "runtime-observation",
+            "tooling-fix",
+            "path",
+            "version-scope"
+          ],
+          "origin": "unspecified"
+        },
+        {
           "evidence_id": "vm-explorer.hide-empty-drives-ghidra-launch-receipt-20260424",
           "kind": "vm-test",
           "title": "Guest Ghidra launch receipt for HideDrivesWithNoMedia",
@@ -39109,6 +39214,21 @@
           "strength": "low",
           "supports": [
             "behavior",
+            "version-scope"
+          ],
+          "origin": "unspecified"
+        },
+        {
+          "evidence_id": "vm-explorer.launch-folder-windows-in-a-separate-process-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk runtime receipt for SeparateProcess",
+          "location": "evidence/captures/explorer-launch-folder-windows-in-a-separate-process-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/explorer-launch-folder-windows-in-a-separate-process-etw-qga-unblock-20260507/explorer-launch-folder-windows-in-a-separate-process-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/explorer-launch-folder-windows-in-a-separate-process-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/explorer-launch-folder-windows-in-a-separate-process-etw-qga-unblock-20260507/explorer-launch-folder-windows-in-a-separate-process-etw-qga-unblock-20260507.etl",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4485 registry events with 524 caller-stack events. The QGA-launched helper targeted `HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced` / `SeparateProcess` and the bundle contains target command/subkey activity, but no exact current-user HKCU `SeparateProcess` RegQueryValue event was observed under the SYSTEM QGA context.",
+          "strength": "medium",
+          "supports": [
+            "runtime-observation",
+            "tooling-fix",
+            "path",
             "version-scope"
           ],
           "origin": "unspecified"
@@ -39432,6 +39552,21 @@
           "origin": "unspecified"
         },
         {
+          "evidence_id": "vm-explorer.show-compressed-and-encrypted-files-in-color-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk runtime receipt for ShowCompColor",
+          "location": "evidence/captures/explorer-show-compressed-and-encrypted-files-in-color-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/explorer-show-compressed-and-encrypted-files-in-color-etw-qga-unblock-20260507/explorer-show-compressed-and-encrypted-files-in-color-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/explorer-show-compressed-and-encrypted-files-in-color-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/explorer-show-compressed-and-encrypted-files-in-color-etw-qga-unblock-20260507/explorer-show-compressed-and-encrypted-files-in-color-etw-qga-unblock-20260507.etl",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4502 registry events with 524 caller-stack events. The QGA-launched helper targeted `HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced` / `ShowCompColor` and the bundle contains target command/subkey activity, but no exact current-user HKCU `ShowCompColor` RegQueryValue event was observed under the SYSTEM QGA context.",
+          "strength": "medium",
+          "supports": [
+            "runtime-observation",
+            "tooling-fix",
+            "path",
+            "version-scope"
+          ],
+          "origin": "unspecified"
+        },
+        {
           "evidence_id": "vm-explorer.show-compressed-and-encrypted-files-in-color-ghidra-launch-receipt-20260424",
           "kind": "vm-test",
           "title": "Guest Ghidra launch receipt for ShowCompColor",
@@ -39746,6 +39881,21 @@
           "strength": "low",
           "supports": [
             "behavior",
+            "version-scope"
+          ],
+          "origin": "unspecified"
+        },
+        {
+          "evidence_id": "vm-explorer.show-drive-letters-first-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk runtime receipt for ShowDriveLettersFirst",
+          "location": "evidence/captures/explorer-show-drive-letters-first-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/explorer-show-drive-letters-first-etw-qga-unblock-20260507/explorer-show-drive-letters-first-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/explorer-show-drive-letters-first-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/explorer-show-drive-letters-first-etw-qga-unblock-20260507/explorer-show-drive-letters-first-etw-qga-unblock-20260507.etl",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4506 registry events with 525 caller-stack events. The QGA-launched helper targeted `HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer` / `ShowDriveLettersFirst` and the bundle contains target command/subkey activity, but no exact current-user HKCU `ShowDriveLettersFirst` RegQueryValue event was observed under the SYSTEM QGA context.",
+          "strength": "medium",
+          "supports": [
+            "runtime-observation",
+            "tooling-fix",
+            "path",
             "version-scope"
           ],
           "origin": "unspecified"

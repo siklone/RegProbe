@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-07T13:25:42.8073282Z",
+  "record_id": "audio.show-hidden-devices",
+  "run_id": "audio-show-hidden-devices-etw-qga-unblock-20260507",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "registry_path": "HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl",
+  "value_name": "ShowHiddenDevices",
+  "attempt_status": "qga_unblocked_ingest_ok",
+  "assessment": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and a normalized bundle with 4552 registry events and 524 caller-stack events. The QGA-launched helper targeted HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl / ShowHiddenDevices; the bundle contains target command/subkey activity, but no exact current-user HKCU RegQueryValue event for ShowHiddenDevices was observed under the SYSTEM QGA context.",
+  "target_observation": {
+    "exact_value_query": false,
+    "operation": "RegOpenKey",
+    "representative_status": "0xC0000034",
+    "event_count": 4552,
+    "caller_stack_event_count": 524,
+    "target_key_event_count": 6,
+    "target_value_event_count": 0,
+    "current_user_hkcu_value_event_count": 0,
+    "target_command_event_count": 1,
+    "launch_transport": "qga"
+  },
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/audio-show-hidden-devices-etw-qga-unblock-20260507/audio-show-hidden-devices-etw-qga-unblock-20260507-summary.json",
+      "sha256": "05f21292e2adabd6ef4991ca4b7ed6b754d082890d8ca156bee2cf614cd42753",
+      "size": 7555,
+      "collected_utc": "2026-05-07T13:25:42.8073282Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/audio-show-hidden-devices-etw-qga-unblock-20260507/normalized-registry-bundle.json",
+      "sha256": "a0e8075a00a5cbb95118dde556c6d6a8f11c4bd48b3a0cea1532114408f47216",
+      "size": 5482116,
+      "collected_utc": "2026-05-07T13:25:42.8073282Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/audio-show-hidden-devices-etw-qga-unblock-20260507/audio-show-hidden-devices-etw-qga-unblock-20260507.etl",
+      "sha256": "832a2252985c4d7fc41d0ad0eb73612d5bf6426106fa0c59557cf2937ed6ff90",
+      "size": 12582912,
+      "collected_utc": "2026-05-07T13:25:42.8073282Z"
+    }
+  ]
+}

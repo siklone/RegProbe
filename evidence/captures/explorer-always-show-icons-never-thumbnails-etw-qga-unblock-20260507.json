@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-07T13:30:56.7082555Z",
+  "record_id": "explorer.always-show-icons-never-thumbnails",
+  "run_id": "explorer-always-show-icons-never-thumbnails-etw-qga-unblock-20260507",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "registry_path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+  "value_name": "IconsOnly",
+  "attempt_status": "qga_unblocked_ingest_ok",
+  "assessment": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and a normalized bundle with 4446 registry events and 569 caller-stack events. The QGA-launched helper targeted HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced / IconsOnly; the bundle contains target command/subkey activity, but no exact current-user HKCU RegQueryValue event for IconsOnly was observed under the SYSTEM QGA context.",
+  "target_observation": {
+    "exact_value_query": false,
+    "operation": "RegOpenKey",
+    "representative_status": "0xC0000034",
+    "event_count": 4446,
+    "caller_stack_event_count": 569,
+    "target_key_event_count": 8,
+    "target_value_event_count": 0,
+    "current_user_hkcu_value_event_count": 0,
+    "target_command_event_count": 1,
+    "launch_transport": "qga"
+  },
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/explorer-always-show-icons-never-thumbnails-etw-qga-unblock-20260507/explorer-always-show-icons-never-thumbnails-etw-qga-unblock-20260507-summary.json",
+      "sha256": "5fba9b821674a3f602fe757025989e5fdf73e7f18977bb5030aeaf6e8cb30910",
+      "size": 8109,
+      "collected_utc": "2026-05-07T13:30:56.7082555Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/explorer-always-show-icons-never-thumbnails-etw-qga-unblock-20260507/normalized-registry-bundle.json",
+      "sha256": "962b87cb5727fcf24a8f0c4bc97d8e2be957de3e51bc17313bd821945224c81e",
+      "size": 5805370,
+      "collected_utc": "2026-05-07T13:30:56.7082555Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/explorer-always-show-icons-never-thumbnails-etw-qga-unblock-20260507/explorer-always-show-icons-never-thumbnails-etw-qga-unblock-20260507.etl",
+      "sha256": "cd0c94597fb526541f10942d73ad2674161043bc12ecb7016e622c2884102daa",
+      "size": 12582912,
+      "collected_utc": "2026-05-07T13:30:56.7082555Z"
+    }
+  ]
+}

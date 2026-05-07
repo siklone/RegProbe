@@ -212,6 +212,20 @@
       "strength": "low"
     },
     {
+      "evidence_id": "vm-explorer.show-drive-letters-first-etw-qga-unblock-20260507",
+      "kind": "etw-trace",
+      "title": "QGA-first ETW stackwalk runtime receipt for ShowDriveLettersFirst",
+      "location": "evidence/captures/explorer-show-drive-letters-first-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/explorer-show-drive-letters-first-etw-qga-unblock-20260507/explorer-show-drive-letters-first-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/explorer-show-drive-letters-first-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/explorer-show-drive-letters-first-etw-qga-unblock-20260507/explorer-show-drive-letters-first-etw-qga-unblock-20260507.etl",
+      "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4506 registry events with 525 caller-stack events. The QGA-launched helper targeted `HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer` / `ShowDriveLettersFirst` and the bundle contains target command/subkey activity, but no exact current-user HKCU `ShowDriveLettersFirst` RegQueryValue event was observed under the SYSTEM QGA context.",
+      "supports": [
+        "runtime-observation",
+        "tooling-fix",
+        "path",
+        "version-scope"
+      ],
+      "strength": "medium"
+    },
+    {
       "evidence_id": "vm-explorer.show-drive-letters-first-ghidra-launch-receipt-20260424",
       "kind": "vm-test",
       "title": "Guest Ghidra launch receipt for ShowDriveLettersFirst",
@@ -233,7 +247,7 @@
     "why": "Microsoft documents the 0/1 semantics, the 25H2 raw registry dump corroborates the value family on current builds, and the Win25H2Clean Procmon trace confirms live Explorer consumption of both states on this build. This is a low-risk user-scope Explorer preference.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-29T19:20:00Z",
+  "last_reviewed_utc": "2026-05-07T13:38:38.8207516Z",
   "version_stable": [
     "25H2"
   ],
@@ -268,11 +282,11 @@
     },
     "runtime_capture_reviewed": {
       "etw-stackwalk": true,
-      "status": "ingest_missing_etl"
+      "status": "qga_unblocked_ingest_ok"
     },
     "etw_stackwalk_reviewed": true,
-    "etw_stackwalk_review_status": "ingest_missing_etl",
-    "etw_stackwalk_review_artifact": "evidence/captures/explorer-show-drive-letters-first-etw-stackwalk-attempt-20260424.json",
+    "etw_stackwalk_review_status": "qga_unblocked_ingest_ok",
+    "etw_stackwalk_review_artifact": "evidence/captures/explorer-show-drive-letters-first-etw-qga-unblock-20260507.json",
     "static_reviewed": {
       "ghidra": true,
       "status": "launch_blocked"
@@ -280,6 +294,6 @@
     "ghidra": true,
     "ghidra_status": "launch_blocked",
     "ghidra_artifact": "evidence/raw/ghidra/ghidra-explorer-show-drive-letters-first-20260424-batch5/summary.json",
-    "notes": "A bounded 2026-04-24 ETW retry for `HKCU\\\\Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Explorer` / `ShowDriveLettersFirst` published host-visible summary and stage receipts, but ETL upload never completed so ingest failed before any normalized bundle reached the repo. A same-day guest Ghidra retry for `ShowDriveLettersFirst` failed in `ensure-admin-shell` before any xref bundle reached the host."
+    "notes": "A bounded 2026-04-24 ETW retry for `HKCU\\\\Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Explorer` / `ShowDriveLettersFirst` published host-visible summary and stage receipts, but ETL upload never completed so ingest failed before any normalized bundle reached the repo. A same-day guest Ghidra retry for `ShowDriveLettersFirst` failed in `ensure-admin-shell` before any xref bundle reached the host. A 2026-05-07 QGA-first ETW stackwalk rerun cleared the earlier ETW ingest/upload blocker and produced host-ingested artifacts for `ShowDriveLettersFirst`, but no exact current-user HKCU value query was observed under the SYSTEM QGA context."
   }
 }
