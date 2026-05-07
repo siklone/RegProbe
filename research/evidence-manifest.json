@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-07T13:42:01.373172Z",
+  "generated_utc": "2026-05-07T14:01:51.069240Z",
   "source_index": "research/evidence-index.json",
   "summary": {
     "total_records": 356,
@@ -21,7 +21,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-05-07T13:42:00.408072Z",
+      "generated_utc": "2026-05-07T14:01:49.619617Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -39872,8 +39872,8 @@
         }
       },
       "source_file": "research/records/explorer.show-file-extensions.review.json",
-      "source_file_sha256": "6c07a91d795e8683a4af6cb621b53818083df4fc7ebf48b5e2c65eac381a8106",
-      "source_file_size_bytes": 15833,
+      "source_file_sha256": "140adbb0089a95c0aa24dc769b40551aea7c429cabc907affdb561f0d2d8defa",
+      "source_file_size_bytes": 17380,
       "name": "Show File Extensions",
       "category": "Explorer",
       "area": "Observed Explorer Runtime Setting",
@@ -40087,6 +40087,21 @@
           "origin": "unspecified"
         },
         {
+          "evidence_id": "vm-explorer.show-file-extensions-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk runtime receipt for HideFileExt",
+          "location": "evidence/captures/explorer-show-file-extensions-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/explorer-show-file-extensions-etw-qga-unblock-20260507/explorer-show-file-extensions-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/explorer-show-file-extensions-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/explorer-show-file-extensions-etw-qga-unblock-20260507/explorer-show-file-extensions-etw-qga-unblock-20260507.etl",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4566 registry events with 569 caller-stack events. The QGA-launched helper targeted `HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced` / `HideFileExt` and the bundle contains target command/subkey activity, but no exact current-user HKCU `HideFileExt` RegQueryValue event was observed under the SYSTEM QGA context.",
+          "strength": "medium",
+          "supports": [
+            "runtime-observation",
+            "tooling-fix",
+            "path",
+            "version-scope"
+          ],
+          "origin": "unspecified"
+        },
+        {
           "evidence_id": "vm-explorer.show-file-extensions-ghidra-launch-receipt-20260424",
           "kind": "vm-test",
           "title": "Guest Ghidra launch receipt for HideFileExt",
@@ -40183,8 +40198,8 @@
         }
       },
       "source_file": "research/records/explorer.show-full-path.review.json",
-      "source_file_sha256": "0ffdb58b6a4fc6cf022b834b0895fd6bf212b778f5b9c0997fd6940263fe78e4",
-      "source_file_size_bytes": 13697,
+      "source_file_sha256": "32f2718fc442503bc202cc44c019600f55b509967b80b1d00706d5d63320affc",
+      "source_file_size_bytes": 14988,
       "name": "Show Full Path in Explorer",
       "category": "Explorer",
       "area": "Explorer Cabinet State",
@@ -40407,6 +40422,21 @@
           "origin": "unspecified"
         },
         {
+          "evidence_id": "vm-explorer.show-full-path-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk runtime receipt for FullPath",
+          "location": "evidence/captures/explorer-show-full-path-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/explorer-show-full-path-etw-qga-unblock-20260507/explorer-show-full-path-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/explorer-show-full-path-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/explorer-show-full-path-etw-qga-unblock-20260507/explorer-show-full-path-etw-qga-unblock-20260507.etl",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4507 registry events with 525 caller-stack events. The QGA-launched helper targeted `HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\CabinetState` / `FullPath` and the bundle contains target command/subkey activity, but no exact current-user HKCU `FullPath` RegQueryValue event was observed under the SYSTEM QGA context.",
+          "strength": "medium",
+          "supports": [
+            "runtime-observation",
+            "tooling-fix",
+            "path",
+            "version-scope"
+          ],
+          "origin": "unspecified"
+        },
+        {
           "evidence_id": "vm-explorer.show-full-path-ghidra-launch-receipt-20260424",
           "kind": "vm-test",
           "title": "Guest Ghidra launch receipt for FullPath",
@@ -40509,8 +40539,8 @@
         }
       },
       "source_file": "research/records/explorer.show-hidden-files.review.json",
-      "source_file_sha256": "931cfc93e95926b49d55e89ba3de1bf9c24ef0740819633558ed43bb74870e65",
-      "source_file_size_bytes": 15700,
+      "source_file_sha256": "74dc2d6636638c04f55a500cb98126fd8795b9a59c75d64c899f607602df9c62",
+      "source_file_size_bytes": 17206,
       "name": "Show Hidden Files and Folders",
       "category": "Explorer",
       "area": "Observed Explorer Runtime Setting",
@@ -40724,6 +40754,21 @@
           "origin": "unspecified"
         },
         {
+          "evidence_id": "vm-explorer.show-hidden-files-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk runtime receipt for Hidden",
+          "location": "evidence/captures/explorer-show-hidden-files-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/explorer-show-hidden-files-etw-qga-unblock-20260507/explorer-show-hidden-files-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/explorer-show-hidden-files-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/explorer-show-hidden-files-etw-qga-unblock-20260507/explorer-show-hidden-files-etw-qga-unblock-20260507.etl",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4505 registry events with 524 caller-stack events. The QGA-launched helper targeted `HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced` / `Hidden` and the bundle contains target command/subkey activity, but no exact current-user HKCU `Hidden` RegQueryValue event was observed under the SYSTEM QGA context.",
+          "strength": "medium",
+          "supports": [
+            "runtime-observation",
+            "tooling-fix",
+            "path",
+            "version-scope"
+          ],
+          "origin": "unspecified"
+        },
+        {
           "evidence_id": "vm-explorer.show-hidden-files-ghidra-launch-receipt-20260424",
           "kind": "vm-test",
           "title": "Guest Ghidra launch receipt for Hidden",
@@ -40826,8 +40871,8 @@
         }
       },
       "source_file": "research/records/explorer.show-info-tips.review.json",
-      "source_file_sha256": "b93d02096bd31298beb5487d5ffd3e3a395291278dba9c429cef9c6955386bdd",
-      "source_file_size_bytes": 14443,
+      "source_file_sha256": "f1f2003ca5b6b105efb715a00789c02cc4e365839d47df9fb99d16862028da3c",
+      "source_file_size_bytes": 15948,
       "name": "Show Explorer Info Tips",
       "category": "Explorer",
       "area": "Observed Explorer Runtime Setting",
@@ -41042,6 +41087,21 @@
           "origin": "unspecified"
         },
         {
+          "evidence_id": "vm-explorer.show-info-tips-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk runtime receipt for ShowInfoTip",
+          "location": "evidence/captures/explorer-show-info-tips-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/explorer-show-info-tips-etw-qga-unblock-20260507/explorer-show-info-tips-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/explorer-show-info-tips-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/explorer-show-info-tips-etw-qga-unblock-20260507/explorer-show-info-tips-etw-qga-unblock-20260507.etl",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4508 registry events with 524 caller-stack events. The QGA-launched helper targeted `HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced` / `ShowInfoTip` and the bundle contains target command/subkey activity, but no exact current-user HKCU `ShowInfoTip` RegQueryValue event was observed under the SYSTEM QGA context.",
+          "strength": "medium",
+          "supports": [
+            "runtime-observation",
+            "tooling-fix",
+            "path",
+            "version-scope"
+          ],
+          "origin": "unspecified"
+        },
+        {
           "evidence_id": "vm-explorer.show-info-tips-ghidra-launch-receipt-20260424",
           "kind": "vm-test",
           "title": "Guest Ghidra launch receipt for ShowInfoTip",
@@ -41144,8 +41204,8 @@
         }
       },
       "source_file": "research/records/explorer.show-protected-operating-system-files.review.json",
-      "source_file_sha256": "48b61526fcd659118129fd6d9da769a8c94c545140cb78b3dc162e5b0cac4339",
-      "source_file_size_bytes": 15977,
+      "source_file_sha256": "1ee04e73705c620dd62a3f787d8fb19ad2a329ef33d0b5a6cfc4e911c8d628e9",
+      "source_file_size_bytes": 17446,
       "name": "Show Protected Operating System Files",
       "category": "Explorer",
       "area": "Observed Explorer Runtime Setting",
@@ -41362,6 +41422,21 @@
           "origin": "unspecified"
         },
         {
+          "evidence_id": "vm-explorer.show-protected-operating-system-files-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk runtime receipt for ShowSuperHidden",
+          "location": "evidence/captures/explorer-show-protected-operating-system-files-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/explorer-show-protected-operating-system-files-etw-qga-unblock-20260507/explorer-show-protected-operating-system-files-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/explorer-show-protected-operating-system-files-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/explorer-show-protected-operating-system-files-etw-qga-unblock-20260507/explorer-show-protected-operating-system-files-etw-qga-unblock-20260507.etl",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4510 registry events with 527 caller-stack events. The QGA-launched helper targeted `HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced` / `ShowSuperHidden` and the bundle contains target command/subkey activity, but no exact current-user HKCU `ShowSuperHidden` RegQueryValue event was observed under the SYSTEM QGA context.",
+          "strength": "medium",
+          "supports": [
+            "runtime-observation",
+            "tooling-fix",
+            "path",
+            "version-scope"
+          ],
+          "origin": "unspecified"
+        },
+        {
           "evidence_id": "vm-explorer.show-protected-operating-system-files-ghidra-launch-receipt-20260424",
           "kind": "vm-test",
           "title": "Guest Ghidra launch receipt for ShowSuperHidden",
@@ -41464,8 +41539,8 @@
         }
       },
       "source_file": "research/records/explorer.show-recent-items.review.json",
-      "source_file_sha256": "3f473db209a047edc539dd64560a79a73929d645a0fef01954eb8f7fe6f6f48b",
-      "source_file_size_bytes": 14542,
+      "source_file_sha256": "9ca42a927ca33fffaf7055ae72486c7cd8e551f6622bdf40e32fee4d3a00c37f",
+      "source_file_size_bytes": 16054,
       "name": "Show Recent Items In Home",
       "category": "Explorer",
       "area": "Observed Explorer Runtime Setting",
@@ -41680,6 +41755,21 @@
           "origin": "unspecified"
         },
         {
+          "evidence_id": "vm-explorer.show-recent-items-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk runtime receipt for ShowRecent",
+          "location": "evidence/captures/explorer-show-recent-items-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/explorer-show-recent-items-etw-qga-unblock-20260507/explorer-show-recent-items-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/explorer-show-recent-items-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/explorer-show-recent-items-etw-qga-unblock-20260507/explorer-show-recent-items-etw-qga-unblock-20260507.etl",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4740 registry events with 676 caller-stack events. The QGA-launched helper targeted `HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer` / `ShowRecent` and the bundle contains target command/subkey activity, but no exact current-user HKCU `ShowRecent` RegQueryValue event was observed under the SYSTEM QGA context.",
+          "strength": "medium",
+          "supports": [
+            "runtime-observation",
+            "tooling-fix",
+            "path",
+            "version-scope"
+          ],
+          "origin": "unspecified"
+        },
+        {
           "evidence_id": "vm-explorer.show-recent-items-ghidra-launch-receipt-20260424",
           "kind": "vm-test",
           "title": "Guest Ghidra launch receipt for ShowRecent",
@@ -41782,8 +41872,8 @@
         }
       },
       "source_file": "research/records/explorer.show-status-bar.review.json",
-      "source_file_sha256": "2d80b9f4da1dfb02989f0b27fea55ccbe7ce5b007bc6f70f201067dd82878bbf",
-      "source_file_size_bytes": 14922,
+      "source_file_sha256": "ae7cf26850b877d8108fe6d80751563136236b3b16f3d0f4066b90d271acc72a",
+      "source_file_size_bytes": 16442,
       "name": "Show Status Bar",
       "category": "Explorer",
       "area": "Observed Explorer Runtime Setting",
@@ -41994,6 +42084,21 @@
           "strength": "low",
           "supports": [
             "behavior",
+            "version-scope"
+          ],
+          "origin": "unspecified"
+        },
+        {
+          "evidence_id": "vm-explorer.show-status-bar-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk runtime receipt for ShowStatusBar",
+          "location": "evidence/captures/explorer-show-status-bar-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/explorer-show-status-bar-etw-qga-unblock-20260507/explorer-show-status-bar-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/explorer-show-status-bar-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/explorer-show-status-bar-etw-qga-unblock-20260507/explorer-show-status-bar-etw-qga-unblock-20260507.etl",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4517 registry events with 524 caller-stack events. The QGA-launched helper targeted `HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced` / `ShowStatusBar` and the bundle contains target command/subkey activity, but no exact current-user HKCU `ShowStatusBar` RegQueryValue event was observed under the SYSTEM QGA context.",
+          "strength": "medium",
+          "supports": [
+            "runtime-observation",
+            "tooling-fix",
+            "path",
             "version-scope"
           ],
           "origin": "unspecified"
@@ -54263,8 +54368,8 @@
         }
       },
       "source_file": "research/records/performance.disable-taskbar-animations.review.json",
-      "source_file_sha256": "f73926c70631046cb65761683f844d6d56530cf51c9578189bc473e054681e00",
-      "source_file_size_bytes": 15116,
+      "source_file_sha256": "72c394cea36c238a1b956bd28bbb59098fa1760f83adfe79209505daf4d3e622",
+      "source_file_size_bytes": 16740,
       "name": "Taskbar Animations",
       "category": "Performance",
       "area": "Explorer Taskbar Animation Flags",
@@ -54475,6 +54580,21 @@
           "supports": [
             "runtime-lane-review",
             "transport-blocker"
+          ],
+          "origin": "unspecified"
+        },
+        {
+          "evidence_id": "vm-performance.disable-taskbar-animations-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk runtime receipt for TaskbarAnimations",
+          "location": "evidence/captures/performance-disable-taskbar-animations-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/performance-disable-taskbar-animations-etw-qga-unblock-20260507/performance-disable-taskbar-animations-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/performance-disable-taskbar-animations-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/performance-disable-taskbar-animations-etw-qga-unblock-20260507/performance-disable-taskbar-animations-etw-qga-unblock-20260507.etl",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4510 registry events with 524 caller-stack events. The QGA-launched helper targeted `HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced` / `TaskbarAnimations` and the bundle contains target command/subkey activity, but no exact current-user HKCU `TaskbarAnimations` RegQueryValue event was observed under the SYSTEM QGA context.",
+          "strength": "medium",
+          "supports": [
+            "runtime-observation",
+            "tooling-fix",
+            "path",
+            "version-scope"
           ],
           "origin": "unspecified"
         }

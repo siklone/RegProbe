@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-07T13:53:26.0756523Z",
+  "record_id": "explorer.show-status-bar",
+  "run_id": "explorer-show-status-bar-etw-qga-unblock-20260507",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "registry_path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+  "value_name": "ShowStatusBar",
+  "attempt_status": "qga_unblocked_ingest_ok",
+  "assessment": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and a normalized bundle with 4517 registry events and 524 caller-stack events. The QGA-launched helper targeted HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced / ShowStatusBar; the bundle contains target command/subkey activity (0 target value events), but no exact current-user HKCU RegQueryValue event for ShowStatusBar was observed under the SYSTEM QGA context.",
+  "target_observation": {
+    "exact_value_query": false,
+    "operation": "RegQueryValue",
+    "representative_status": null,
+    "event_count": 4517,
+    "caller_stack_event_count": 524,
+    "target_key_event_count": 9,
+    "target_value_event_count": 0,
+    "current_user_hkcu_value_event_count": 0,
+    "target_command_event_count": 2,
+    "launch_transport": "qga"
+  },
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/explorer-show-status-bar-etw-qga-unblock-20260507/explorer-show-status-bar-etw-qga-unblock-20260507-summary.json",
+      "sha256": "bd06e972c70c4b3f8345e018ce887b4d26b3ac2ea6256711026e12dc332add0d",
+      "size": 7547,
+      "collected_utc": "2026-05-07T13:53:26.0756523Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/explorer-show-status-bar-etw-qga-unblock-20260507/normalized-registry-bundle.json",
+      "sha256": "7d86df576efb0df8204caa25ad3845de3e1e1da9eb9e34e561c3ae3ea9738094",
+      "size": 5410933,
+      "collected_utc": "2026-05-07T13:53:26.0756523Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/explorer-show-status-bar-etw-qga-unblock-20260507/explorer-show-status-bar-etw-qga-unblock-20260507.etl",
+      "sha256": "ca571fb9b1ddd10326ad0b7d57056af154ee28abeec6fb170d409bd55adcb308",
+      "size": 12582912,
+      "collected_utc": "2026-05-07T13:53:26.0756523Z"
+    }
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-07T13:45:31.7248529Z",
+  "record_id": "explorer.show-full-path",
+  "run_id": "explorer-show-full-path-etw-qga-unblock-20260507",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "registry_path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\CabinetState",
+  "value_name": "FullPath",
+  "attempt_status": "qga_unblocked_ingest_ok",
+  "assessment": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and a normalized bundle with 4507 registry events and 525 caller-stack events. The QGA-launched helper targeted HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\CabinetState / FullPath; the bundle contains target command/subkey activity (0 target value events), but no exact current-user HKCU RegQueryValue event for FullPath was observed under the SYSTEM QGA context.",
+  "target_observation": {
+    "exact_value_query": false,
+    "operation": "RegQueryValue",
+    "representative_status": null,
+    "event_count": 4507,
+    "caller_stack_event_count": 525,
+    "target_key_event_count": 6,
+    "target_value_event_count": 0,
+    "current_user_hkcu_value_event_count": 0,
+    "target_command_event_count": 2,
+    "launch_transport": "qga"
+  },
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/explorer-show-full-path-etw-qga-unblock-20260507/explorer-show-full-path-etw-qga-unblock-20260507-summary.json",
+      "sha256": "1d99b7073114ec3381d50f9f7c57deffbe52cd8d3f3ce32d7090f04c37e7a94f",
+      "size": 7515,
+      "collected_utc": "2026-05-07T13:45:31.7248529Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/explorer-show-full-path-etw-qga-unblock-20260507/normalized-registry-bundle.json",
+      "sha256": "be14707877eaa26366d1b1c02b03d0e61e5a9365d8ce87a9d8a478684076f17c",
+      "size": 5378279,
+      "collected_utc": "2026-05-07T13:45:31.7248529Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/explorer-show-full-path-etw-qga-unblock-20260507/explorer-show-full-path-etw-qga-unblock-20260507.etl",
+      "sha256": "798941fd8d227a60d5a57d31a2055af3eea8ffbebe4d1fa85d17a8108fc59678",
+      "size": 12582912,
+      "collected_utc": "2026-05-07T13:45:31.7248529Z"
+    }
+  ]
+}

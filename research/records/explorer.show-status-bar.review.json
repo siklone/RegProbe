@@ -213,6 +213,20 @@
       "strength": "low"
     },
     {
+      "evidence_id": "vm-explorer.show-status-bar-etw-qga-unblock-20260507",
+      "kind": "etw-trace",
+      "title": "QGA-first ETW stackwalk runtime receipt for ShowStatusBar",
+      "location": "evidence/captures/explorer-show-status-bar-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/explorer-show-status-bar-etw-qga-unblock-20260507/explorer-show-status-bar-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/explorer-show-status-bar-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/explorer-show-status-bar-etw-qga-unblock-20260507/explorer-show-status-bar-etw-qga-unblock-20260507.etl",
+      "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4517 registry events with 524 caller-stack events. The QGA-launched helper targeted `HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced` / `ShowStatusBar` and the bundle contains target command/subkey activity, but no exact current-user HKCU `ShowStatusBar` RegQueryValue event was observed under the SYSTEM QGA context.",
+      "supports": [
+        "runtime-observation",
+        "tooling-fix",
+        "path",
+        "version-scope"
+      ],
+      "strength": "medium"
+    },
+    {
       "evidence_id": "vm-explorer.show-status-bar-ghidra-launch-receipt-20260424",
       "kind": "vm-test",
       "title": "Guest Ghidra launch receipt for ShowStatusBar",
@@ -234,7 +248,7 @@
     "why": "The 25H2 dump and default-user hive corroborate the ShowStatusBar value family, Microsoft Learn describes showStatusBar as a File Explorer Classic advanced setting, the Win25H2Clean Procmon trace confirms live Explorer consumption of both states, and the research app-surface implementation now writes the same validated value. This closes the loop from dump lineage to runtime behavior to shipped app mapping.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-29T19:20:00Z",
+  "last_reviewed_utc": "2026-05-07T13:53:26.0756523Z",
   "version_stable": [
     "25H2"
   ],
@@ -270,11 +284,11 @@
     },
     "runtime_capture_reviewed": {
       "etw-stackwalk": true,
-      "status": "ingest_missing_etl"
+      "status": "qga_unblocked_ingest_ok"
     },
     "etw_stackwalk_reviewed": true,
-    "etw_stackwalk_review_status": "ingest_missing_etl",
-    "etw_stackwalk_review_artifact": "evidence/captures/explorer-show-status-bar-etw-stackwalk-attempt-20260424.json",
+    "etw_stackwalk_review_status": "qga_unblocked_ingest_ok",
+    "etw_stackwalk_review_artifact": "evidence/captures/explorer-show-status-bar-etw-qga-unblock-20260507.json",
     "static_reviewed": {
       "ghidra": true,
       "status": "launch_blocked"
@@ -282,6 +296,6 @@
     "ghidra": true,
     "ghidra_status": "launch_blocked",
     "ghidra_artifact": "evidence/raw/ghidra/ghidra-explorer-show-status-bar-20260424-batch6/summary.json",
-    "notes": "A bounded 2026-04-24 ETW retry for `HKCU\\\\Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Explorer\\\\Advanced` / `ShowStatusBar` published host-visible summary and stage receipts, but ETL upload never completed so ingest failed before any normalized bundle reached the repo. A same-day guest Ghidra retry for `ShowStatusBar` failed in `ensure-admin-shell` before any xref bundle reached the host."
+    "notes": "A bounded 2026-04-24 ETW retry for `HKCU\\\\Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Explorer\\\\Advanced` / `ShowStatusBar` published host-visible summary and stage receipts, but ETL upload never completed so ingest failed before any normalized bundle reached the repo. A same-day guest Ghidra retry for `ShowStatusBar` failed in `ensure-admin-shell` before any xref bundle reached the host. A 2026-05-07 QGA-first ETW stackwalk rerun cleared the earlier ETW ingest/upload blocker and produced host-ingested artifacts for `ShowStatusBar`, but no exact current-user HKCU value query was observed under the SYSTEM QGA context."
   }
 }
