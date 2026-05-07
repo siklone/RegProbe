@@ -1,11 +1,11 @@
 # Promoted App QA Coverage
 
-- Generated UTC: 2026-05-07T15:44:37Z
-- History entries: 38
+- Generated UTC: 2026-05-07T15:46:15Z
+- History entries: 39
 - Promoted app-QA candidates: 242
-- Covered: 114
-- Uncovered: 128
-- Coverage: 47.11%
+- Covered: 119
+- Uncovered: 123
+- Coverage: 49.17%
 
 ## Covered Categories
 
@@ -18,7 +18,7 @@
 - Performance: 3
 - Peripheral: 2
 - Power: 7
-- Privacy: 23
+- Privacy: 28
 - Security: 12
 - System: 21
 - Visibility: 11
@@ -32,19 +32,19 @@
 - Notifications: 2
 - Peripheral: 1
 - Power: 3
-- Privacy: 44
+- Privacy: 39
 - Security: 9
 - System: 31
 - Visibility: 12
 
 ## Recommended Next Batches
 
-- Privacy: 5 uncovered cards | coverage 34.33%
-  command: `dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-cross-device-experiences.policy --id privacy.disable-device-name-telemetry --id privacy.disable-diagnostic-data-delete --id privacy.disable-diagnostic-data-viewer --id privacy.disable-edge-search-suggestions`
-  live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-cross-device-experiences.policy --id privacy.disable-device-name-telemetry --id privacy.disable-diagnostic-data-delete --id privacy.disable-diagnostic-data-viewer --id privacy.disable-edge-search-suggestions --run-kvm --json`
 - System: 5 uncovered cards | coverage 40.38%
   command: `dotnet run --project cli/cli.csproj -- research qa-batch --id system.enable-game-mode --id system.enable-hags --id system.enable-indexing-encrypted-items --id system.graphics-tdr-ddi-delay --id system.graphics-tdr-delay`
   live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id system.enable-game-mode --id system.enable-hags --id system.enable-indexing-encrypted-items --id system.graphics-tdr-ddi-delay --id system.graphics-tdr-delay --run-kvm --json`
+- Privacy: 5 uncovered cards | coverage 41.79%
+  command: `dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-feedback-notifications --id privacy.disable-file-history --id privacy.disable-font-providers --id privacy.disable-kms-activation-telemetry --id privacy.disable-language-list-access`
+  live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-feedback-notifications --id privacy.disable-file-history --id privacy.disable-font-providers --id privacy.disable-kms-activation-telemetry --id privacy.disable-language-list-access --run-kvm --json`
 - Explorer: 5 uncovered cards | coverage 47.06%
   command: `dotnet run --project cli/cli.csproj -- research qa-batch --id explorer.enable-explorer-compact-mode --id explorer.launch-folder-windows-in-a-separate-process --id explorer.show-compressed-and-encrypted-files-in-color --id explorer.show-drive-letters-first --id explorer.show-full-path`
   live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id explorer.enable-explorer-compact-mode --id explorer.launch-folder-windows-in-a-separate-process --id explorer.show-compressed-and-encrypted-files-in-color --id explorer.show-drive-letters-first --id explorer.show-full-path --run-kvm --json`

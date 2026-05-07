@@ -1,11 +1,11 @@
 {
-  "generated_utc": "2026-05-07T15:44:37Z",
-  "history_entry_count": 38,
+  "generated_utc": "2026-05-07T15:46:15Z",
+  "history_entry_count": 39,
   "catalog_candidate_count": 242,
-  "covered_count": 114,
-  "uncovered_count": 128,
+  "covered_count": 119,
+  "uncovered_count": 123,
   "summary": {
-    "coverage_percent": 47.11,
+    "coverage_percent": 49.17,
     "covered_categories": {
       "Audio": 2,
       "Cleanup": 1,
@@ -16,7 +16,7 @@
       "Performance": 3,
       "Peripheral": 2,
       "Power": 7,
-      "Privacy": 23,
+      "Privacy": 28,
       "Security": 12,
       "System": 21,
       "Visibility": 11
@@ -29,66 +29,13 @@
       "Notifications": 2,
       "Peripheral": 1,
       "Power": 3,
-      "Privacy": 44,
+      "Privacy": 39,
       "Security": 9,
       "System": 31,
       "Visibility": 12
     }
   },
   "recommended_next_batches": [
-    {
-      "category": "Privacy",
-      "covered_count": 23,
-      "uncovered_count": 44,
-      "coverage_percent": 34.33,
-      "batch_size": 5,
-      "tweak_ids": [
-        "privacy.disable-cross-device-experiences.policy",
-        "privacy.disable-device-name-telemetry",
-        "privacy.disable-diagnostic-data-delete",
-        "privacy.disable-diagnostic-data-viewer",
-        "privacy.disable-edge-search-suggestions"
-      ],
-      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-cross-device-experiences.policy --id privacy.disable-device-name-telemetry --id privacy.disable-diagnostic-data-delete --id privacy.disable-diagnostic-data-viewer --id privacy.disable-edge-search-suggestions",
-      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-cross-device-experiences.policy --id privacy.disable-device-name-telemetry --id privacy.disable-diagnostic-data-delete --id privacy.disable-diagnostic-data-viewer --id privacy.disable-edge-search-suggestions --run-kvm --json",
-      "candidates": [
-        {
-          "tweak_id": "privacy.disable-cross-device-experiences.policy",
-          "record_id": "privacy.disable-cross-device-experiences.policy",
-          "category": "Privacy",
-          "name": "Cross-Device Experiences Machine Policy",
-          "documentation": "research/records/privacy.disable-cross-device-experiences.policy.review.json"
-        },
-        {
-          "tweak_id": "privacy.disable-device-name-telemetry",
-          "record_id": "privacy.disable-device-name-telemetry",
-          "category": "Privacy",
-          "name": "Device Name in Diagnostic Data",
-          "documentation": "research/records/privacy.disable-device-name-telemetry.json"
-        },
-        {
-          "tweak_id": "privacy.disable-diagnostic-data-delete",
-          "record_id": "privacy.disable-diagnostic-data-delete",
-          "category": "Privacy",
-          "name": "Diagnostic Data Deletion",
-          "documentation": "research/records/privacy.disable-diagnostic-data-delete.json"
-        },
-        {
-          "tweak_id": "privacy.disable-diagnostic-data-viewer",
-          "record_id": "privacy.disable-diagnostic-data-viewer",
-          "category": "Privacy",
-          "name": "Diagnostic Data Viewer",
-          "documentation": "research/records/privacy.disable-diagnostic-data-viewer.json"
-        },
-        {
-          "tweak_id": "privacy.disable-edge-search-suggestions",
-          "record_id": "privacy.disable-edge-search-suggestions",
-          "category": "Privacy",
-          "name": "Edge Address Bar Suggestions",
-          "documentation": "research/records/privacy.disable-edge-search-suggestions.json"
-        }
-      ]
-    },
     {
       "category": "System",
       "covered_count": 21,
@@ -139,6 +86,59 @@
           "category": "System",
           "name": "Graphics TDR Delay",
           "documentation": "research/records/system.graphics-tdr-delay.json"
+        }
+      ]
+    },
+    {
+      "category": "Privacy",
+      "covered_count": 28,
+      "uncovered_count": 39,
+      "coverage_percent": 41.79,
+      "batch_size": 5,
+      "tweak_ids": [
+        "privacy.disable-feedback-notifications",
+        "privacy.disable-file-history",
+        "privacy.disable-font-providers",
+        "privacy.disable-kms-activation-telemetry",
+        "privacy.disable-language-list-access"
+      ],
+      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-feedback-notifications --id privacy.disable-file-history --id privacy.disable-font-providers --id privacy.disable-kms-activation-telemetry --id privacy.disable-language-list-access",
+      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-feedback-notifications --id privacy.disable-file-history --id privacy.disable-font-providers --id privacy.disable-kms-activation-telemetry --id privacy.disable-language-list-access --run-kvm --json",
+      "candidates": [
+        {
+          "tweak_id": "privacy.disable-feedback-notifications",
+          "record_id": "privacy.disable-feedback-notifications",
+          "category": "Privacy",
+          "name": "Microsoft Feedback Notifications",
+          "documentation": "research/records/privacy.disable-feedback-notifications.json"
+        },
+        {
+          "tweak_id": "privacy.disable-file-history",
+          "record_id": "privacy.disable-file-history",
+          "category": "Privacy",
+          "name": "File History",
+          "documentation": "research/records/privacy.disable-file-history.json"
+        },
+        {
+          "tweak_id": "privacy.disable-font-providers",
+          "record_id": "privacy.disable-font-providers",
+          "category": "Privacy",
+          "name": "Online Font Providers",
+          "documentation": "research/records/privacy.disable-font-providers.json"
+        },
+        {
+          "tweak_id": "privacy.disable-kms-activation-telemetry",
+          "record_id": "privacy.disable-kms-activation-telemetry",
+          "category": "Privacy",
+          "name": "KMS Client Online AVS Validation",
+          "documentation": "research/records/privacy.disable-kms-activation-telemetry.json"
+        },
+        {
+          "tweak_id": "privacy.disable-language-list-access",
+          "record_id": "privacy.disable-language-list-access",
+          "category": "Privacy",
+          "name": "Website Access to Language List",
+          "documentation": "research/records/privacy.disable-language-list-access.review.json"
         }
       ]
     },
@@ -889,6 +889,24 @@
       "latest_report_status": "ok"
     },
     {
+      "tweak_id": "privacy.disable-cross-device-experiences.policy",
+      "qa_tweak_id": "privacy.disable-cross-device-experiences.policy",
+      "candidate_id": "privacy.disable-cross-device-experiences.policy",
+      "category": "Privacy",
+      "name": "Cross-Device Experiences Machine Policy",
+      "documentation": "research/records/privacy.disable-cross-device-experiences.policy.review.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "privacy.disable-device-name-telemetry",
+      "qa_tweak_id": "privacy.disable-device-name-telemetry",
+      "candidate_id": "privacy.disable-device-name-telemetry",
+      "category": "Privacy",
+      "name": "Device Name in Diagnostic Data",
+      "documentation": "research/records/privacy.disable-device-name-telemetry.json",
+      "latest_report_status": "ok"
+    },
+    {
       "tweak_id": "privacy.disable-diagnostic-data",
       "qa_tweak_id": "privacy.set-diagnostic-data-to-minimum-supported-level",
       "candidate_id": "privacy.set-diagnostic-data-to-minimum-supported-level",
@@ -896,6 +914,33 @@
       "name": "Set Diagnostic Data to Minimum Supported Level",
       "documentation": "research/records/privacy.set-diagnostic-data-to-minimum-supported-level.review.json",
       "latest_report_status": "not-applicable"
+    },
+    {
+      "tweak_id": "privacy.disable-diagnostic-data-delete",
+      "qa_tweak_id": "privacy.disable-diagnostic-data-delete",
+      "candidate_id": "privacy.disable-diagnostic-data-delete",
+      "category": "Privacy",
+      "name": "Diagnostic Data Deletion",
+      "documentation": "research/records/privacy.disable-diagnostic-data-delete.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "privacy.disable-diagnostic-data-viewer",
+      "qa_tweak_id": "privacy.disable-diagnostic-data-viewer",
+      "candidate_id": "privacy.disable-diagnostic-data-viewer",
+      "category": "Privacy",
+      "name": "Diagnostic Data Viewer",
+      "documentation": "research/records/privacy.disable-diagnostic-data-viewer.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "privacy.disable-edge-search-suggestions",
+      "qa_tweak_id": "privacy.disable-edge-search-suggestions",
+      "candidate_id": "privacy.disable-edge-search-suggestions",
+      "category": "Privacy",
+      "name": "Edge Address Bar Suggestions",
+      "documentation": "research/records/privacy.disable-edge-search-suggestions.json",
+      "latest_report_status": "ok"
     },
     {
       "tweak_id": "privacy.disable-find-my-device",
@@ -1554,41 +1599,6 @@
       "category": "Power",
       "name": "Games MMCSS Task Profile",
       "documentation": "research/records/power.optimize-gaming-network.json"
-    },
-    {
-      "tweak_id": "privacy.disable-cross-device-experiences.policy",
-      "record_id": "privacy.disable-cross-device-experiences.policy",
-      "category": "Privacy",
-      "name": "Cross-Device Experiences Machine Policy",
-      "documentation": "research/records/privacy.disable-cross-device-experiences.policy.review.json"
-    },
-    {
-      "tweak_id": "privacy.disable-device-name-telemetry",
-      "record_id": "privacy.disable-device-name-telemetry",
-      "category": "Privacy",
-      "name": "Device Name in Diagnostic Data",
-      "documentation": "research/records/privacy.disable-device-name-telemetry.json"
-    },
-    {
-      "tweak_id": "privacy.disable-diagnostic-data-delete",
-      "record_id": "privacy.disable-diagnostic-data-delete",
-      "category": "Privacy",
-      "name": "Diagnostic Data Deletion",
-      "documentation": "research/records/privacy.disable-diagnostic-data-delete.json"
-    },
-    {
-      "tweak_id": "privacy.disable-diagnostic-data-viewer",
-      "record_id": "privacy.disable-diagnostic-data-viewer",
-      "category": "Privacy",
-      "name": "Diagnostic Data Viewer",
-      "documentation": "research/records/privacy.disable-diagnostic-data-viewer.json"
-    },
-    {
-      "tweak_id": "privacy.disable-edge-search-suggestions",
-      "record_id": "privacy.disable-edge-search-suggestions",
-      "category": "Privacy",
-      "name": "Edge Address Bar Suggestions",
-      "documentation": "research/records/privacy.disable-edge-search-suggestions.json"
     },
     {
       "tweak_id": "privacy.disable-feedback-notifications",

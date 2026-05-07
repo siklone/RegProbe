@@ -1,11 +1,13 @@
 {
-  "generated_utc": "2026-05-07T15:44:37Z",
+  "generated_utc": "2026-05-07T15:46:15Z",
   "status": "PASS",
   "selection": {
     "requested_ids": [
-      "security.disable-system-restore",
-      "security.disable-windows-firewall",
-      "security.disable-windows-update.policy"
+      "privacy.disable-cross-device-experiences.policy",
+      "privacy.disable-device-name-telemetry",
+      "privacy.disable-diagnostic-data-delete",
+      "privacy.disable-diagnostic-data-viewer",
+      "privacy.disable-edge-search-suggestions"
     ],
     "requested_categories": [],
     "limit_per_category": 1,
@@ -20,29 +22,29 @@
     "kvm_batch_runner": "scripts/vm-kvm/run-guest-app-tweak-qa-batch.py"
   },
   "catalog_candidate_count": 242,
-  "selected_candidate_count": 3,
+  "selected_candidate_count": 5,
   "errors": [],
   "candidates": [
     {
-      "tweak_id": "security.disable-system-restore",
-      "qa_tweak_id": "security.disable-system-restore",
-      "candidate_id": "security.disable-system-restore",
-      "record_id": "security.disable-system-restore",
-      "category": "Security",
-      "name": "Turn Off System Restore",
-      "documentation": "research/records/security.disable-system-restore.review.json",
+      "tweak_id": "privacy.disable-cross-device-experiences.policy",
+      "qa_tweak_id": "privacy.disable-cross-device-experiences.policy",
+      "candidate_id": "privacy.disable-cross-device-experiences.policy",
+      "record_id": "privacy.disable-cross-device-experiences.policy",
+      "category": "Privacy",
+      "name": "Cross-Device Experiences Machine Policy",
+      "documentation": "research/records/privacy.disable-cross-device-experiences.policy.review.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect security.disable-system-restore",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.disable-cross-device-experiences.policy",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'security.disable-system-restore' --qa-output 'C:\\Tools\\ValidationController\\smoke\\security.disable-system-restore.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'security.disable-system-restore' --qa-output 'C:\\Tools\\ValidationController\\smoke\\security.disable-system-restore.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'security.disable-system-restore' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\security.disable-system-restore.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'security.disable-system-restore' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\security.disable-system-restore.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'security.disable-system-restore'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-cross-device-experiences.policy' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-cross-device-experiences.policy.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-cross-device-experiences.policy' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-cross-device-experiences.policy.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-cross-device-experiences.policy' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-cross-device-experiences.policy.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-cross-device-experiences.policy' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-cross-device-experiences.policy.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.disable-cross-device-experiences.policy'"
       },
       "expected_report": {
         "success": true,
@@ -83,25 +85,25 @@
       }
     },
     {
-      "tweak_id": "security.disable-windows-firewall",
-      "qa_tweak_id": "security.disable-windows-firewall",
-      "candidate_id": "security.disable-windows-firewall",
-      "record_id": "security.disable-windows-firewall",
-      "category": "Security",
-      "name": "Windows Defender Firewall Policy",
-      "documentation": "research/records/security.disable-windows-firewall.review.json",
+      "tweak_id": "privacy.disable-device-name-telemetry",
+      "qa_tweak_id": "privacy.disable-device-name-telemetry",
+      "candidate_id": "privacy.disable-device-name-telemetry",
+      "record_id": "privacy.disable-device-name-telemetry",
+      "category": "Privacy",
+      "name": "Device Name in Diagnostic Data",
+      "documentation": "research/records/privacy.disable-device-name-telemetry.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect security.disable-windows-firewall",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.disable-device-name-telemetry",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'security.disable-windows-firewall' --qa-output 'C:\\Tools\\ValidationController\\smoke\\security.disable-windows-firewall.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'security.disable-windows-firewall' --qa-output 'C:\\Tools\\ValidationController\\smoke\\security.disable-windows-firewall.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'security.disable-windows-firewall' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\security.disable-windows-firewall.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'security.disable-windows-firewall' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\security.disable-windows-firewall.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'security.disable-windows-firewall'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-device-name-telemetry' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-device-name-telemetry.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-device-name-telemetry' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-device-name-telemetry.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-device-name-telemetry' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-device-name-telemetry.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-device-name-telemetry' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-device-name-telemetry.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.disable-device-name-telemetry'"
       },
       "expected_report": {
         "success": true,
@@ -142,25 +144,143 @@
       }
     },
     {
-      "tweak_id": "security.disable-windows-update.policy",
-      "qa_tweak_id": "security.disable-windows-update.policy",
-      "candidate_id": "security.disable-windows-update.policy",
-      "record_id": "security.disable-windows-update.policy",
-      "category": "Security",
-      "name": "Windows Update Policy Control",
-      "documentation": "research/records/security.disable-windows-update.policy.review.json",
+      "tweak_id": "privacy.disable-diagnostic-data-delete",
+      "qa_tweak_id": "privacy.disable-diagnostic-data-delete",
+      "candidate_id": "privacy.disable-diagnostic-data-delete",
+      "record_id": "privacy.disable-diagnostic-data-delete",
+      "category": "Privacy",
+      "name": "Diagnostic Data Deletion",
+      "documentation": "research/records/privacy.disable-diagnostic-data-delete.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect security.disable-windows-update.policy",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.disable-diagnostic-data-delete",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'security.disable-windows-update.policy' --qa-output 'C:\\Tools\\ValidationController\\smoke\\security.disable-windows-update.policy.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'security.disable-windows-update.policy' --qa-output 'C:\\Tools\\ValidationController\\smoke\\security.disable-windows-update.policy.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'security.disable-windows-update.policy' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\security.disable-windows-update.policy.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'security.disable-windows-update.policy' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\security.disable-windows-update.policy.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'security.disable-windows-update.policy'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-diagnostic-data-delete' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-diagnostic-data-delete.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-diagnostic-data-delete' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-diagnostic-data-delete.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-diagnostic-data-delete' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-diagnostic-data-delete.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-diagnostic-data-delete' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-diagnostic-data-delete.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.disable-diagnostic-data-delete'"
+      },
+      "expected_report": {
+        "success": true,
+        "status": "ok",
+        "rollback_requested": true,
+        "required_stages": [
+          "detect-before",
+          "apply",
+          "rollback",
+          "detect-after"
+        ],
+        "required_card_snapshot": {
+          "required_fields": [
+            "TweakId",
+            "Name",
+            "Category",
+            "EvidenceClass",
+            "ResearchStatus",
+            "RollbackSnapshotState",
+            "HasClaimBoundary",
+            "WhatWeKnowSummary",
+            "WhatWeDoNotClaimSummary",
+            "ProofLanes"
+          ],
+          "required_proof_lanes": [
+            "docs",
+            "runtime",
+            "source",
+            "rollback"
+          ],
+          "claim_boundary_required": true
+        },
+        "required_stage_assertions": [
+          "apply stage reports a successful apply story",
+          "rollback stage reports a successful rollback story",
+          "detect-after is present"
+        ]
+      }
+    },
+    {
+      "tweak_id": "privacy.disable-diagnostic-data-viewer",
+      "qa_tweak_id": "privacy.disable-diagnostic-data-viewer",
+      "candidate_id": "privacy.disable-diagnostic-data-viewer",
+      "record_id": "privacy.disable-diagnostic-data-viewer",
+      "category": "Privacy",
+      "name": "Diagnostic Data Viewer",
+      "documentation": "research/records/privacy.disable-diagnostic-data-viewer.json",
+      "promotion_state": "promoted",
+      "apply_allowed": true,
+      "restore_default_supported": true,
+      "restore_previous_supported": true,
+      "commands": {
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.disable-diagnostic-data-viewer",
+        "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-diagnostic-data-viewer' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-diagnostic-data-viewer.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-diagnostic-data-viewer' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-diagnostic-data-viewer.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-diagnostic-data-viewer' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-diagnostic-data-viewer.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-diagnostic-data-viewer' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-diagnostic-data-viewer.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.disable-diagnostic-data-viewer'"
+      },
+      "expected_report": {
+        "success": true,
+        "status": "ok",
+        "rollback_requested": true,
+        "required_stages": [
+          "detect-before",
+          "apply",
+          "rollback",
+          "detect-after"
+        ],
+        "required_card_snapshot": {
+          "required_fields": [
+            "TweakId",
+            "Name",
+            "Category",
+            "EvidenceClass",
+            "ResearchStatus",
+            "RollbackSnapshotState",
+            "HasClaimBoundary",
+            "WhatWeKnowSummary",
+            "WhatWeDoNotClaimSummary",
+            "ProofLanes"
+          ],
+          "required_proof_lanes": [
+            "docs",
+            "runtime",
+            "source",
+            "rollback"
+          ],
+          "claim_boundary_required": true
+        },
+        "required_stage_assertions": [
+          "apply stage reports a successful apply story",
+          "rollback stage reports a successful rollback story",
+          "detect-after is present"
+        ]
+      }
+    },
+    {
+      "tweak_id": "privacy.disable-edge-search-suggestions",
+      "qa_tweak_id": "privacy.disable-edge-search-suggestions",
+      "candidate_id": "privacy.disable-edge-search-suggestions",
+      "record_id": "privacy.disable-edge-search-suggestions",
+      "category": "Privacy",
+      "name": "Edge Address Bar Suggestions",
+      "documentation": "research/records/privacy.disable-edge-search-suggestions.json",
+      "promotion_state": "promoted",
+      "apply_allowed": true,
+      "restore_default_supported": true,
+      "restore_previous_supported": true,
+      "commands": {
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.disable-edge-search-suggestions",
+        "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-edge-search-suggestions' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-edge-search-suggestions.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-edge-search-suggestions' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-edge-search-suggestions.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-edge-search-suggestions' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-edge-search-suggestions.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-edge-search-suggestions' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-edge-search-suggestions.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.disable-edge-search-suggestions'"
       },
       "expected_report": {
         "success": true,
@@ -203,7 +323,7 @@
   ],
   "run_results": [
     {
-      "tweak_id": "security.disable-system-restore",
+      "tweak_id": "privacy.disable-cross-device-experiences.policy",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -237,19 +357,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "security.disable-system-restore",
-        "TweakName": "Turn Off System Restore",
+        "TweakId": "privacy.disable-cross-device-experiences.policy",
+        "TweakName": "Cross-Device Experiences Machine Policy",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "security.disable-system-restore",
-          "Name": "Turn Off System Restore",
-          "Category": "Security",
-          "Description": "System Restore lets Windows roll the system back to an earlier state after problems. This policy turns that recovery feature off.",
-          "FriendlyDescription": "System Restore lets Windows roll the system back to an earlier state after problems. This policy turns that recovery feature off.",
-          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Windows NT\\SystemRestore\\DisableSR",
+          "TweakId": "privacy.disable-cross-device-experiences.policy",
+          "Name": "Cross-Device Experiences Machine Policy",
+          "Category": "Privacy",
+          "Description": "Windows can let devices belonging to the same user discover each other and continue some experiences across devices. This policy controls the official machine-level part of that feature.",
+          "FriendlyDescription": "Windows can let devices belonging to the same user discover each other and continue some experiences across devices. This policy controls the official machine-level part of that feature.",
+          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\EnableCdp",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -257,15 +377,15 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: System Restore lets Windows roll the system back to an earlier state after problems. This policy turns that recovery feature off. Evidence: Local official Microsoft ADMX and ADML files document DisableSR as the supported System Restore turn-off policy. The app now writes that exact documented value. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: Windows can let devices belonging to the same user discover each other and continue some experiences across devices. This policy controls the official machine-level part of that feature. Evidence: Local GroupPolicy.admx also maps EnableCdp with enabledValue 1 and disabledValue 0. The deprecated parent audit trail keeps the mixed user-side CDP preset values separate from this child record. Added nohuto mirror corroboration via nohuto-enablecdp-admx. Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "Local official Microsoft ADMX and ADML files document DisableSR as the supported System Restore turn-off policy. The app now writes that exact documented value.",
-              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/SystemRestore.admx"
+              "Summary": "Local GroupPolicy.admx also maps EnableCdp with enabledValue 1 and disabledValue 0. The deprecated parent audit trail keeps the mixed user-side CDP preset values separate from this child record. Added nohuto mirror corroboration via nohuto-enablecdp-admx.",
+              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-grouppolicy#enablecdp"
             },
             {
               "Key": "runtime",
@@ -296,8 +416,8 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Security (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\security\\security-verified.md",
+              "Title": "Docs: Privacy (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\privacy\\privacy-verified.md",
               "Kind": "Docs"
             }
           ]
@@ -306,10 +426,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Turn off System Restore'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Continue experiences blocked'.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Turn off System Restore",
+            "TargetValue": "Continue experiences blocked",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -318,8 +438,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Turn off System Restore'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows NT\\SystemRestore\\DisableSR: missing -> 1",
-                "TimestampText": "08:44:41"
+                "Message": "Current values do not match a named option. Selected option is 'Continue experiences blocked'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\EnableCdp: missing -> 0",
+                "TimestampText": "08:46:20"
               },
               {
                 "Action": "Apply",
@@ -346,8 +466,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Turn off System Restore",
-            "TargetValue": "Turn off System Restore",
+            "CurrentValue": "Continue experiences blocked",
+            "TargetValue": "Continue experiences blocked",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -356,20 +476,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Turn off System Restore'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows NT\\SystemRestore\\DisableSR: missing -> 1",
-                "TimestampText": "08:44:41"
+                "Message": "Current values do not match a named option. Selected option is 'Continue experiences blocked'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\EnableCdp: missing -> 0",
+                "TimestampText": "08:46:20"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Turn off System Restore'.",
-                "TimestampText": "08:44:47"
+                "Message": "Applied preset 'Continue experiences blocked'.",
+                "TimestampText": "08:46:23"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Turn off System Restore'.",
-                "TimestampText": "08:44:47"
+                "Message": "Verified preset 'Continue experiences blocked'.",
+                "TimestampText": "08:46:23"
               },
               {
                 "Action": "Rollback",
@@ -385,7 +505,7 @@
             "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Turn off System Restore",
+            "TargetValue": "Continue experiences blocked",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -394,36 +514,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Turn off System Restore'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows NT\\SystemRestore\\DisableSR: missing -> 1",
-                "TimestampText": "08:44:41"
+                "Message": "Current values do not match a named option. Selected option is 'Continue experiences blocked'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\EnableCdp: missing -> 0",
+                "TimestampText": "08:46:20"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Turn off System Restore'.",
-                "TimestampText": "08:44:47"
+                "Message": "Applied preset 'Continue experiences blocked'.",
+                "TimestampText": "08:46:23"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Turn off System Restore'.",
-                "TimestampText": "08:44:47"
+                "Message": "Verified preset 'Continue experiences blocked'.",
+                "TimestampText": "08:46:23"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "08:44:47"
+                "TimestampText": "08:46:23"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Turn off System Restore'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Continue experiences blocked'.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Turn off System Restore",
+            "TargetValue": "Continue experiences blocked",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -432,40 +552,40 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Turn off System Restore'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows NT\\SystemRestore\\DisableSR: missing -> 1",
-                "TimestampText": "08:44:47"
+                "Message": "Current values do not match a named option. Selected option is 'Continue experiences blocked'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\EnableCdp: missing -> 0",
+                "TimestampText": "08:46:23"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Turn off System Restore'.",
-                "TimestampText": "08:44:47"
+                "Message": "Applied preset 'Continue experiences blocked'.",
+                "TimestampText": "08:46:23"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Turn off System Restore'.",
-                "TimestampText": "08:44:47"
+                "Message": "Verified preset 'Continue experiences blocked'.",
+                "TimestampText": "08:46:23"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "08:44:47"
+                "TimestampText": "08:46:23"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T15:44:41.9016569+00:00",
-        "CompletedAtUtc": "2026-05-07T15:44:47.4111669+00:00"
+        "StartedAtUtc": "2026-05-07T15:46:20.1317409+00:00",
+        "CompletedAtUtc": "2026-05-07T15:46:23.4038786+00:00"
       },
-      "qa_tweak_id": "security.disable-system-restore",
-      "candidate_id": "security.disable-system-restore",
-      "card_name": "Turn Off System Restore",
-      "documentation": "research/records/security.disable-system-restore.review.json"
+      "qa_tweak_id": "privacy.disable-cross-device-experiences.policy",
+      "candidate_id": "privacy.disable-cross-device-experiences.policy",
+      "card_name": "Cross-Device Experiences Machine Policy",
+      "documentation": "research/records/privacy.disable-cross-device-experiences.policy.review.json"
     },
     {
-      "tweak_id": "security.disable-windows-firewall",
+      "tweak_id": "privacy.disable-device-name-telemetry",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -499,19 +619,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "security.disable-windows-firewall",
-        "TweakName": "Windows Defender Firewall Policy",
+        "TweakId": "privacy.disable-device-name-telemetry",
+        "TweakName": "Device Name in Diagnostic Data",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "security.disable-windows-firewall",
-          "Name": "Windows Defender Firewall Policy",
-          "Category": "Security",
-          "Description": "Windows Defender Firewall protects the PC's network connections. The official policy can force the firewall on or off for managed profiles.",
-          "FriendlyDescription": "Windows Defender Firewall protects the PC's network connections. The official policy can force the firewall on or off for managed profiles.",
-          "RegistryPath": "",
+          "TweakId": "privacy.disable-device-name-telemetry",
+          "Name": "Device Name in Diagnostic Data",
+          "Category": "Privacy",
+          "Description": "Windows diagnostic data can include the computer name. This policy decides whether that name is allowed to be sent with diagnostic data.",
+          "FriendlyDescription": "Windows diagnostic data can include the computer name. This policy decides whether that name is allowed to be sent with diagnostic data.",
+          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection\\AllowDeviceNameInTelemetry",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -519,15 +639,277 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Windows Defender Firewall protects the PC's network connections. The official policy can force the firewall on or off for managed profiles. Evidence: Microsoft documents the official Firewall CSP surface for EnableFirewall, DefaultInboundAction, DefaultOutboundAction, and related values. The current app now writes the documented policy surface instead of the runtime SharedAccess profile paths. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: Windows diagnostic data can include the computer name. This policy decides whether that name is allowed to be sent with diagnostic data. Evidence: The System Policy CSP page explicitly names the policy, gives the default and allowed values, and maps it to the same DataCollection machine policy key the app writes. Added nohuto mirror corroboration via nohuto-allow-device-name-telemetry-trace. Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "Microsoft documents the official Firewall CSP surface for EnableFirewall, DefaultInboundAction, DefaultOutboundAction, and related values. The current app now writes the documented policy surface instead of the runtime SharedAccess profile paths.",
-              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows/client-management/mdm/firewall-csp"
+              "Summary": "The System Policy CSP page explicitly names the policy, gives the default and allowed values, and maps it to the same DataCollection machine policy key the app writes. Added nohuto mirror corroboration via nohuto-allow-device-name-telemetry-trace.",
+              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#allowdevicenameindiagnosticdata"
+            },
+            {
+              "Key": "runtime",
+              "Label": "RUNTIME",
+              "State": "ready",
+              "Summary": "The mirror records list AllowDeviceNameInTelemetry under HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DataCollection and the regkit traces show the same PolicyManager path. This corroborates the device-name-in-diagnostic-data policy surface and its live registr...",
+              "Source": "nohuto win-config mirror - AllowDeviceNameInTelemetry trace: research/_source-mirrors/win-config/privacy/desc.md and research/_source-mirrors/win-registry/records/25H2.txt"
+            },
+            {
+              "Key": "source",
+              "Label": "SOURCE",
+              "State": "ready",
+              "Summary": "No upstream nohuto source link is attached to this record.",
+              "Source": ""
+            },
+            {
+              "Key": "rollback",
+              "Label": "ROLLBACK",
+              "State": "ready",
+              "Summary": "Rollback: Verified via record-restore-story.",
+              "Source": "record-restore-story"
+            }
+          ],
+          "ReferenceLinks": [
+            {
+              "Title": "Docs: Details (missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
+              "Kind": "Details"
+            },
+            {
+              "Title": "Docs: Privacy (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\privacy\\privacy-verified.md",
+              "Kind": "Docs"
+            }
+          ]
+        },
+        "Stages": [
+          {
+            "Stage": "detect-before",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Do not include device name'.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Do not include device name",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": false,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Do not include device name'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection\\AllowDeviceNameInTelemetry: missing -> 0",
+                "TimestampText": "08:46:28"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "apply",
+            "AppliedStatus": "Applied",
+            "StatusMessage": "Run completed.",
+            "OutcomeSummary": "Apply - Success",
+            "CurrentValue": "Do not include device name",
+            "TargetValue": "Do not include device name",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Do not include device name'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection\\AllowDeviceNameInTelemetry: missing -> 0",
+                "TimestampText": "08:46:28"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Do not include device name'.",
+                "TimestampText": "08:46:31"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Do not include device name'.",
+                "TimestampText": "08:46:31"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Not required",
+                "Message": "Step not executed.",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "rollback",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Rolled back registry values.",
+            "OutcomeSummary": "Rollback - Rolled Back",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Do not include device name",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Do not include device name'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection\\AllowDeviceNameInTelemetry: missing -> 0",
+                "TimestampText": "08:46:28"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Do not include device name'.",
+                "TimestampText": "08:46:31"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Do not include device name'.",
+                "TimestampText": "08:46:31"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "08:46:31"
+              }
+            ]
+          },
+          {
+            "Stage": "detect-after",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Do not include device name'.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Do not include device name",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Do not include device name'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection\\AllowDeviceNameInTelemetry: missing -> 0",
+                "TimestampText": "08:46:31"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Do not include device name'.",
+                "TimestampText": "08:46:31"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Do not include device name'.",
+                "TimestampText": "08:46:31"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "08:46:31"
+              }
+            ]
+          }
+        ],
+        "StartedAtUtc": "2026-05-07T15:46:28.5689213+00:00",
+        "CompletedAtUtc": "2026-05-07T15:46:31.7387518+00:00"
+      },
+      "qa_tweak_id": "privacy.disable-device-name-telemetry",
+      "candidate_id": "privacy.disable-device-name-telemetry",
+      "card_name": "Device Name in Diagnostic Data",
+      "documentation": "research/records/privacy.disable-device-name-telemetry.json"
+    },
+    {
+      "tweak_id": "privacy.disable-diagnostic-data-delete",
+      "host_exit": 0,
+      "execution_exit": 0,
+      "payload_status": "completed",
+      "report_app_success": true,
+      "report_success": true,
+      "report_status": "ok",
+      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
+      "report_contract_status": "ok",
+      "report_contract_summary": "QA card snapshot contract passed.",
+      "report_contract_failures": [],
+      "report_card_present": true,
+      "report_card_has_claim_boundary": true,
+      "report_card_present_fields": [
+        "TweakId",
+        "Name",
+        "Category",
+        "EvidenceClass",
+        "ResearchStatus",
+        "RollbackSnapshotState",
+        "HasClaimBoundary",
+        "WhatWeKnowSummary",
+        "WhatWeDoNotClaimSummary",
+        "ProofLanes"
+      ],
+      "report_card_missing_fields": [],
+      "report_card_proof_lanes": [
+        "docs",
+        "runtime",
+        "source",
+        "rollback"
+      ],
+      "report_card_missing_proof_lanes": [],
+      "report": {
+        "TweakId": "privacy.disable-diagnostic-data-delete",
+        "TweakName": "Diagnostic Data Deletion",
+        "Success": true,
+        "Status": "ok",
+        "Summary": "Apply/verify path completed and rollback restored the tweak.",
+        "RollbackRequested": true,
+        "Card": {
+          "TweakId": "privacy.disable-diagnostic-data-delete",
+          "Name": "Diagnostic Data Deletion",
+          "Category": "Privacy",
+          "Description": "Windows can offer a Settings action that deletes diagnostic data associated with the device. This policy decides whether that delete option is available.",
+          "FriendlyDescription": "Windows can offer a Settings action that deletes diagnostic data associated with the device. This policy decides whether that delete option is available.",
+          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection\\DisableDeviceDelete",
+          "EvidenceClass": "A",
+          "EvidenceClassTitle": "Cross-Layer Verified",
+          "ResearchStatus": "PROMOTED",
+          "IsMutationAllowed": true,
+          "RollbackSnapshotState": "ready",
+          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
+          "HasClaimBoundary": true,
+          "WhatWeKnowSummary": "Claim: Windows can offer a Settings action that deletes diagnostic data associated with the device. This policy decides whether that delete option is available. Evidence: The System Policy CSP page explicitly names the exact machine policy path and value name the app writes and defines the 0/1 semantics. Added nohuto mirror corroboration via nohuto-datacollection-delete-admx. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
+          "ProofLanes": [
+            {
+              "Key": "docs",
+              "Label": "DOCS",
+              "State": "ready",
+              "Summary": "The System Policy CSP page explicitly names the exact machine policy path and value name the app writes and defines the 0/1 semantics. Added nohuto mirror corroboration via nohuto-datacollection-delete-admx.",
+              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#disabledevicedelete"
             },
             {
               "Key": "runtime",
@@ -558,8 +940,8 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Security (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\security\\security-verified.md",
+              "Title": "Docs: Privacy (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\privacy\\privacy-verified.md",
               "Kind": "Docs"
             }
           ]
@@ -568,7 +950,531 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Detected 0 of 2 values (matches: 0, missing: 2).",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Diagnostic data deletion disabled'.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Diagnostic data deletion disabled",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": false,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Diagnostic data deletion disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection\\DisableDeviceDelete: missing -> 1",
+                "TimestampText": "08:46:37"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "apply",
+            "AppliedStatus": "Applied",
+            "StatusMessage": "Run completed.",
+            "OutcomeSummary": "Apply - Success",
+            "CurrentValue": "Diagnostic data deletion disabled",
+            "TargetValue": "Diagnostic data deletion disabled",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Diagnostic data deletion disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection\\DisableDeviceDelete: missing -> 1",
+                "TimestampText": "08:46:38"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Diagnostic data deletion disabled'.",
+                "TimestampText": "08:46:40"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Diagnostic data deletion disabled'.",
+                "TimestampText": "08:46:40"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Not required",
+                "Message": "Step not executed.",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "rollback",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Rolled back registry values.",
+            "OutcomeSummary": "Rollback - Rolled Back",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Diagnostic data deletion disabled",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Diagnostic data deletion disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection\\DisableDeviceDelete: missing -> 1",
+                "TimestampText": "08:46:38"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Diagnostic data deletion disabled'.",
+                "TimestampText": "08:46:40"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Diagnostic data deletion disabled'.",
+                "TimestampText": "08:46:40"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "08:46:41"
+              }
+            ]
+          },
+          {
+            "Stage": "detect-after",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Diagnostic data deletion disabled'.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Diagnostic data deletion disabled",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Diagnostic data deletion disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection\\DisableDeviceDelete: missing -> 1",
+                "TimestampText": "08:46:41"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Diagnostic data deletion disabled'.",
+                "TimestampText": "08:46:40"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Diagnostic data deletion disabled'.",
+                "TimestampText": "08:46:40"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "08:46:41"
+              }
+            ]
+          }
+        ],
+        "StartedAtUtc": "2026-05-07T15:46:37.9426217+00:00",
+        "CompletedAtUtc": "2026-05-07T15:46:41.2658142+00:00"
+      },
+      "qa_tweak_id": "privacy.disable-diagnostic-data-delete",
+      "candidate_id": "privacy.disable-diagnostic-data-delete",
+      "card_name": "Diagnostic Data Deletion",
+      "documentation": "research/records/privacy.disable-diagnostic-data-delete.json"
+    },
+    {
+      "tweak_id": "privacy.disable-diagnostic-data-viewer",
+      "host_exit": 0,
+      "execution_exit": 0,
+      "payload_status": "completed",
+      "report_app_success": true,
+      "report_success": true,
+      "report_status": "ok",
+      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
+      "report_contract_status": "ok",
+      "report_contract_summary": "QA card snapshot contract passed.",
+      "report_contract_failures": [],
+      "report_card_present": true,
+      "report_card_has_claim_boundary": true,
+      "report_card_present_fields": [
+        "TweakId",
+        "Name",
+        "Category",
+        "EvidenceClass",
+        "ResearchStatus",
+        "RollbackSnapshotState",
+        "HasClaimBoundary",
+        "WhatWeKnowSummary",
+        "WhatWeDoNotClaimSummary",
+        "ProofLanes"
+      ],
+      "report_card_missing_fields": [],
+      "report_card_proof_lanes": [
+        "docs",
+        "runtime",
+        "source",
+        "rollback"
+      ],
+      "report_card_missing_proof_lanes": [],
+      "report": {
+        "TweakId": "privacy.disable-diagnostic-data-viewer",
+        "TweakName": "Diagnostic Data Viewer",
+        "Success": true,
+        "Status": "ok",
+        "Summary": "Apply/verify path completed and rollback restored the tweak.",
+        "RollbackRequested": true,
+        "Card": {
+          "TweakId": "privacy.disable-diagnostic-data-viewer",
+          "Name": "Diagnostic Data Viewer",
+          "Category": "Privacy",
+          "Description": "Windows includes a viewer that can show diagnostic data categories on the device. This policy decides whether that viewer is available.",
+          "FriendlyDescription": "Windows includes a viewer that can show diagnostic data categories on the device. This policy decides whether that viewer is available.",
+          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection\\DisableDiagnosticDataViewer",
+          "EvidenceClass": "A",
+          "EvidenceClassTitle": "Cross-Layer Verified",
+          "ResearchStatus": "PROMOTED",
+          "IsMutationAllowed": true,
+          "RollbackSnapshotState": "ready",
+          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
+          "HasClaimBoundary": true,
+          "WhatWeKnowSummary": "Claim: Windows includes a viewer that can show diagnostic data categories on the device. This policy decides whether that viewer is available. Evidence: The System Policy CSP page explicitly names the policy control, gives the default and allowed values, and maps it to the same DataCollection machine policy key the app writes. Added nohuto mirror corroboration via nohuto-datacollection-viewer-admx. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
+          "ProofLanes": [
+            {
+              "Key": "docs",
+              "Label": "DOCS",
+              "State": "ready",
+              "Summary": "The System Policy CSP page explicitly names the policy control, gives the default and allowed values, and maps it to the same DataCollection machine policy key the app writes. Added nohuto mirror corroboration via nohuto-datacollection-viewer-admx.",
+              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#disablediagnosticdataviewer"
+            },
+            {
+              "Key": "runtime",
+              "Label": "RUNTIME",
+              "State": "ready",
+              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+              "Source": ""
+            },
+            {
+              "Key": "source",
+              "Label": "SOURCE",
+              "State": "ready",
+              "Summary": "No upstream nohuto source link is attached to this record.",
+              "Source": ""
+            },
+            {
+              "Key": "rollback",
+              "Label": "ROLLBACK",
+              "State": "ready",
+              "Summary": "Rollback: Verified via record-restore-story.",
+              "Source": "record-restore-story"
+            }
+          ],
+          "ReferenceLinks": [
+            {
+              "Title": "Docs: Details (missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
+              "Kind": "Details"
+            },
+            {
+              "Title": "Docs: Privacy (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\privacy\\privacy-verified.md",
+              "Kind": "Docs"
+            }
+          ]
+        },
+        "Stages": [
+          {
+            "Stage": "detect-before",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Diagnostic Data Viewer disabled'.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Diagnostic Data Viewer disabled",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": false,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Diagnostic Data Viewer disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection\\DisableDiagnosticDataViewer: missing -> 1",
+                "TimestampText": "08:46:48"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "apply",
+            "AppliedStatus": "Applied",
+            "StatusMessage": "Run completed.",
+            "OutcomeSummary": "Apply - Success",
+            "CurrentValue": "Diagnostic Data Viewer disabled",
+            "TargetValue": "Diagnostic Data Viewer disabled",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Diagnostic Data Viewer disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection\\DisableDiagnosticDataViewer: missing -> 1",
+                "TimestampText": "08:46:48"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Diagnostic Data Viewer disabled'.",
+                "TimestampText": "08:46:51"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Diagnostic Data Viewer disabled'.",
+                "TimestampText": "08:46:51"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Not required",
+                "Message": "Step not executed.",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "rollback",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Rolled back registry values.",
+            "OutcomeSummary": "Rollback - Rolled Back",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Diagnostic Data Viewer disabled",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Diagnostic Data Viewer disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection\\DisableDiagnosticDataViewer: missing -> 1",
+                "TimestampText": "08:46:48"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Diagnostic Data Viewer disabled'.",
+                "TimestampText": "08:46:51"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Diagnostic Data Viewer disabled'.",
+                "TimestampText": "08:46:51"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "08:46:51"
+              }
+            ]
+          },
+          {
+            "Stage": "detect-after",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Diagnostic Data Viewer disabled'.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Diagnostic Data Viewer disabled",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Diagnostic Data Viewer disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection\\DisableDiagnosticDataViewer: missing -> 1",
+                "TimestampText": "08:46:51"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Diagnostic Data Viewer disabled'.",
+                "TimestampText": "08:46:51"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Diagnostic Data Viewer disabled'.",
+                "TimestampText": "08:46:51"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "08:46:51"
+              }
+            ]
+          }
+        ],
+        "StartedAtUtc": "2026-05-07T15:46:48.4812927+00:00",
+        "CompletedAtUtc": "2026-05-07T15:46:51.7577402+00:00"
+      },
+      "qa_tweak_id": "privacy.disable-diagnostic-data-viewer",
+      "candidate_id": "privacy.disable-diagnostic-data-viewer",
+      "card_name": "Diagnostic Data Viewer",
+      "documentation": "research/records/privacy.disable-diagnostic-data-viewer.json"
+    },
+    {
+      "tweak_id": "privacy.disable-edge-search-suggestions",
+      "host_exit": 0,
+      "execution_exit": 0,
+      "payload_status": "completed",
+      "report_app_success": true,
+      "report_success": true,
+      "report_status": "ok",
+      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
+      "report_contract_status": "ok",
+      "report_contract_summary": "QA card snapshot contract passed.",
+      "report_contract_failures": [],
+      "report_card_present": true,
+      "report_card_has_claim_boundary": true,
+      "report_card_present_fields": [
+        "TweakId",
+        "Name",
+        "Category",
+        "EvidenceClass",
+        "ResearchStatus",
+        "RollbackSnapshotState",
+        "HasClaimBoundary",
+        "WhatWeKnowSummary",
+        "WhatWeDoNotClaimSummary",
+        "ProofLanes"
+      ],
+      "report_card_missing_fields": [],
+      "report_card_proof_lanes": [
+        "docs",
+        "runtime",
+        "source",
+        "rollback"
+      ],
+      "report_card_missing_proof_lanes": [],
+      "report": {
+        "TweakId": "privacy.disable-edge-search-suggestions",
+        "TweakName": "Edge Address Bar Suggestions",
+        "Success": true,
+        "Status": "ok",
+        "Summary": "Apply/verify path completed and rollback restored the tweak.",
+        "RollbackRequested": true,
+        "Card": {
+          "TweakId": "privacy.disable-edge-search-suggestions",
+          "Name": "Edge Address Bar Suggestions",
+          "Category": "Privacy",
+          "Description": "Microsoft Edge can show web suggestions, local history and favorites suggestions, and legacy address-bar search suggestions as you type. This bundle turns those suggestion sources off.",
+          "FriendlyDescription": "Microsoft Edge can show web suggestions, local history and favorites suggestions, and legacy address-bar search suggestions as you type. This bundle turns those suggestion sources off.",
+          "RegistryPath": "",
+          "EvidenceClass": "A",
+          "EvidenceClassTitle": "Cross-Layer Verified",
+          "ResearchStatus": "PROMOTED",
+          "IsMutationAllowed": true,
+          "RollbackSnapshotState": "ready",
+          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
+          "HasClaimBoundary": true,
+          "WhatWeKnowSummary": "Claim: Microsoft Edge can show web suggestions, local history and favorites suggestions, and legacy address-bar search suggestions as you type. This bundle turns those suggestion sources off. Evidence: Bundle validation completed with three exact surfaces: 1) SearchSuggestEnabled is documented on the linked Microsoft Edge policy page. 2) LocalProvidersEnabled is documented on https://learn.microsoft.com/en-us/deployedge/microsoft-edge-browser-policies/loc... Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
+          "ProofLanes": [
+            {
+              "Key": "docs",
+              "Label": "DOCS",
+              "State": "ready",
+              "Summary": "Bundle validation completed with three exact surfaces: 1) SearchSuggestEnabled is documented on the linked Microsoft Edge policy page. 2) LocalProvidersEnabled is documented on https://learn.microsoft.com/en-us/deployedge/microsoft-edge-browser-policies/loc...",
+              "Source": "Validation proof source: https://learn.microsoft.com/en-us/deployedge/microsoft-edge-browser-policies/searchsuggestenabled"
+            },
+            {
+              "Key": "runtime",
+              "Label": "RUNTIME",
+              "State": "ready",
+              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+              "Source": ""
+            },
+            {
+              "Key": "source",
+              "Label": "SOURCE",
+              "State": "ready",
+              "Summary": "No upstream nohuto source link is attached to this record.",
+              "Source": ""
+            },
+            {
+              "Key": "rollback",
+              "Label": "ROLLBACK",
+              "State": "ready",
+              "Summary": "Rollback: Verified via record-restore-story.",
+              "Source": "record-restore-story"
+            }
+          ],
+          "ReferenceLinks": [
+            {
+              "Title": "Docs: Details (missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
+              "Kind": "Details"
+            },
+            {
+              "Title": "Docs: Privacy (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\privacy\\privacy-verified.md",
+              "Kind": "Docs"
+            }
+          ]
+        },
+        "Stages": [
+          {
+            "Stage": "detect-before",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Detected 0 of 3 values (matches: 0, missing: 3).",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Unknown",
             "TargetValue": "Multiple values",
@@ -580,8 +1486,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 0 of 2 values (matches: 0, missing: 2).\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\WindowsFirewall\\DomainProfile\\EnableFirewall: missing\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\WindowsFirewall\\StandardProfile\\EnableFirewall: missing",
-                "TimestampText": "08:44:54"
+                "Message": "Detected 0 of 3 values (matches: 0, missing: 3).\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge\\LocalProvidersEnabled: missing\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge\\SearchSuggestEnabled: missing\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\MicrosoftEdge\\SearchScopes\\ShowSearchSuggestionsGlobal: missing",
+                "TimestampText": "08:46:57"
               },
               {
                 "Action": "Apply",
@@ -618,20 +1524,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 0 of 2 values (matches: 0, missing: 2).\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\WindowsFirewall\\DomainProfile\\EnableFirewall: missing\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\WindowsFirewall\\StandardProfile\\EnableFirewall: missing",
-                "TimestampText": "08:44:54"
+                "Message": "Detected 0 of 3 values (matches: 0, missing: 3).\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge\\LocalProvidersEnabled: missing\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge\\SearchSuggestEnabled: missing\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\MicrosoftEdge\\SearchScopes\\ShowSearchSuggestionsGlobal: missing",
+                "TimestampText": "08:46:58"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Updated 2 values.",
-                "TimestampText": "08:44:57"
+                "Message": "Updated 3 values.",
+                "TimestampText": "08:47:00"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
                 "Message": "Verified desired values.",
-                "TimestampText": "08:44:57"
+                "TimestampText": "08:47:00"
               },
               {
                 "Action": "Rollback",
@@ -656,33 +1562,33 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 0 of 2 values (matches: 0, missing: 2).\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\WindowsFirewall\\DomainProfile\\EnableFirewall: missing\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\WindowsFirewall\\StandardProfile\\EnableFirewall: missing",
-                "TimestampText": "08:44:54"
+                "Message": "Detected 0 of 3 values (matches: 0, missing: 3).\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge\\LocalProvidersEnabled: missing\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge\\SearchSuggestEnabled: missing\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\MicrosoftEdge\\SearchScopes\\ShowSearchSuggestionsGlobal: missing",
+                "TimestampText": "08:46:58"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Updated 2 values.",
-                "TimestampText": "08:44:57"
+                "Message": "Updated 3 values.",
+                "TimestampText": "08:47:00"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
                 "Message": "Verified desired values.",
-                "TimestampText": "08:44:57"
+                "TimestampText": "08:47:00"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "08:44:57"
+                "TimestampText": "08:47:01"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Detected 0 of 2 values (matches: 0, missing: 2).",
+            "StatusMessage": "Detected 0 of 3 values (matches: 0, missing: 3).",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Multiple values",
             "TargetValue": "Multiple values",
@@ -694,308 +1600,46 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 0 of 2 values (matches: 0, missing: 2).\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\WindowsFirewall\\DomainProfile\\EnableFirewall: missing\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\WindowsFirewall\\StandardProfile\\EnableFirewall: missing",
-                "TimestampText": "08:44:57"
+                "Message": "Detected 0 of 3 values (matches: 0, missing: 3).\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge\\LocalProvidersEnabled: missing\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Edge\\SearchSuggestEnabled: missing\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\MicrosoftEdge\\SearchScopes\\ShowSearchSuggestionsGlobal: missing",
+                "TimestampText": "08:47:01"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Updated 2 values.",
-                "TimestampText": "08:44:57"
+                "Message": "Updated 3 values.",
+                "TimestampText": "08:47:00"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
                 "Message": "Verified desired values.",
-                "TimestampText": "08:44:57"
+                "TimestampText": "08:47:00"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "08:44:57"
+                "TimestampText": "08:47:01"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T15:44:54.1776838+00:00",
-        "CompletedAtUtc": "2026-05-07T15:44:57.3486838+00:00"
+        "StartedAtUtc": "2026-05-07T15:46:57.8952666+00:00",
+        "CompletedAtUtc": "2026-05-07T15:47:01.2936404+00:00"
       },
-      "qa_tweak_id": "security.disable-windows-firewall",
-      "candidate_id": "security.disable-windows-firewall",
-      "card_name": "Windows Defender Firewall Policy",
-      "documentation": "research/records/security.disable-windows-firewall.review.json"
-    },
-    {
-      "tweak_id": "security.disable-windows-update.policy",
-      "host_exit": 0,
-      "execution_exit": 0,
-      "payload_status": "completed",
-      "report_app_success": true,
-      "report_success": true,
-      "report_status": "ok",
-      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
-      "report_contract_status": "ok",
-      "report_contract_summary": "QA card snapshot contract passed.",
-      "report_contract_failures": [],
-      "report_card_present": true,
-      "report_card_has_claim_boundary": true,
-      "report_card_present_fields": [
-        "TweakId",
-        "Name",
-        "Category",
-        "EvidenceClass",
-        "ResearchStatus",
-        "RollbackSnapshotState",
-        "HasClaimBoundary",
-        "WhatWeKnowSummary",
-        "WhatWeDoNotClaimSummary",
-        "ProofLanes"
-      ],
-      "report_card_missing_fields": [],
-      "report_card_proof_lanes": [
-        "docs",
-        "runtime",
-        "source",
-        "rollback"
-      ],
-      "report_card_missing_proof_lanes": [],
-      "report": {
-        "TweakId": "security.disable-windows-update.policy",
-        "TweakName": "Windows Update Policy Control",
-        "Success": true,
-        "Status": "ok",
-        "Summary": "Apply/verify path completed and rollback restored the tweak.",
-        "RollbackRequested": true,
-        "Card": {
-          "TweakId": "security.disable-windows-update.policy",
-          "Name": "Windows Update Policy Control",
-          "Category": "Security",
-          "Description": "These policies control whether Windows Update access is removed and whether automatic updates are prohibited.",
-          "FriendlyDescription": "These policies control whether Windows Update access is removed and whether automatic updates are prohibited.",
-          "RegistryPath": "",
-          "EvidenceClass": "A",
-          "EvidenceClassTitle": "Cross-Layer Verified",
-          "ResearchStatus": "PROMOTED",
-          "IsMutationAllowed": true,
-          "RollbackSnapshotState": "ready",
-          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
-          "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: These policies control whether Windows Update access is removed and whether automatic updates are prohibited. Evidence: The deprecated parent retains the pause-timestamp behavior; this child records the official policy half only. Rollback: Rollback: Verified via record-restore-story.",
-          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
-          "ProofLanes": [
-            {
-              "Key": "docs",
-              "Label": "DOCS",
-              "State": "ready",
-              "Summary": "The deprecated parent retains the pause-timestamp behavior; this child records the official policy half only.",
-              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/WindowsUpdate.admx"
-            },
-            {
-              "Key": "runtime",
-              "Label": "RUNTIME",
-              "State": "ready",
-              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
-              "Source": ""
-            },
-            {
-              "Key": "source",
-              "Label": "SOURCE",
-              "State": "ready",
-              "Summary": "No upstream nohuto source link is attached to this record.",
-              "Source": ""
-            },
-            {
-              "Key": "rollback",
-              "Label": "ROLLBACK",
-              "State": "ready",
-              "Summary": "Rollback: Verified via record-restore-story.",
-              "Source": "record-restore-story"
-            }
-          ],
-          "ReferenceLinks": [
-            {
-              "Title": "Docs: Details (missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
-              "Kind": "Details"
-            },
-            {
-              "Title": "Docs: Security (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\security\\security-verified.md",
-              "Kind": "Docs"
-            }
-          ]
-        },
-        "Stages": [
-          {
-            "Stage": "detect-before",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Detected 0 of 2 values (matches: 0, missing: 2).",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Unknown",
-            "TargetValue": "Multiple values",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": false,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Detected 0 of 2 values (matches: 0, missing: 2).\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\DisableWindowsUpdateAccess: missing\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU\\NoAutoUpdate: missing",
-                "TimestampText": "08:45:03"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "apply",
-            "AppliedStatus": "Applied",
-            "StatusMessage": "Run completed.",
-            "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Multiple values",
-            "TargetValue": "Multiple values",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Detected 0 of 2 values (matches: 0, missing: 2).\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\DisableWindowsUpdateAccess: missing\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU\\NoAutoUpdate: missing",
-                "TimestampText": "08:45:03"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Updated 2 values.",
-                "TimestampText": "08:45:06"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified desired values.",
-                "TimestampText": "08:45:06"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Not required",
-                "Message": "Step not executed.",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "rollback",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Rolled back registry values.",
-            "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Multiple values",
-            "TargetValue": "Multiple values",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Detected 0 of 2 values (matches: 0, missing: 2).\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\DisableWindowsUpdateAccess: missing\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU\\NoAutoUpdate: missing",
-                "TimestampText": "08:45:03"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Updated 2 values.",
-                "TimestampText": "08:45:06"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified desired values.",
-                "TimestampText": "08:45:06"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "08:45:06"
-              }
-            ]
-          },
-          {
-            "Stage": "detect-after",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Detected 0 of 2 values (matches: 0, missing: 2).",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Multiple values",
-            "TargetValue": "Multiple values",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Detected 0 of 2 values (matches: 0, missing: 2).\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\DisableWindowsUpdateAccess: missing\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU\\NoAutoUpdate: missing",
-                "TimestampText": "08:45:06"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Updated 2 values.",
-                "TimestampText": "08:45:06"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified desired values.",
-                "TimestampText": "08:45:06"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "08:45:06"
-              }
-            ]
-          }
-        ],
-        "StartedAtUtc": "2026-05-07T15:45:03.6708965+00:00",
-        "CompletedAtUtc": "2026-05-07T15:45:06.8612746+00:00"
-      },
-      "qa_tweak_id": "security.disable-windows-update.policy",
-      "candidate_id": "security.disable-windows-update.policy",
-      "card_name": "Windows Update Policy Control",
-      "documentation": "research/records/security.disable-windows-update.policy.review.json"
+      "qa_tweak_id": "privacy.disable-edge-search-suggestions",
+      "candidate_id": "privacy.disable-edge-search-suggestions",
+      "card_name": "Edge Address Bar Suggestions",
+      "documentation": "research/records/privacy.disable-edge-search-suggestions.json"
     }
   ],
   "summary": {
-    "planned_count": 3,
-    "planned_apply_allowed_count": 3,
-    "live_success_count": 3,
+    "planned_count": 5,
+    "planned_apply_allowed_count": 5,
+    "live_success_count": 5,
     "live_failure_count": 0,
     "categories": [
-      "Security"
+      "Privacy"
     ]
   }
 }
