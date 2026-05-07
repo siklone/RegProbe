@@ -162,17 +162,22 @@ The docs are now split the same way the repo is meant to feel from the outside: 
 
 ## Single Setting Check
 
-If you want to sanity-check one tweak, one registry value, or one path before opening the app, use the CLI inspector.
+If you want to sanity-check one tweak, one registry value, or one path before opening the app, use the single-setting inspector. On a Linux host without `Microsoft.WindowsDesktop.App`, prefer the Python mirror; run the .NET CLI version inside the Windows VM or on a host with the desktop runtime installed.
 
-```powershell
-# Inspect a raw value name across records, app cards, and source mappings
-dotnet run --project cli/cli.csproj -- research inspect SystemResponsiveness
+```bash
+# Host-safe inspector; does not require the Windows desktop runtime
+python3 registry-research-framework/scripts/check_single_tweak.py SystemResponsiveness
 
 # Ask whether specific values are tracked by that setting
-dotnet run --project cli/cli.csproj -- research inspect SystemResponsiveness --expected-value 10 --expected-value 30000
+python3 registry-research-framework/scripts/check_single_tweak.py SystemResponsiveness --expected-value 10 --expected-value 30000
 
 # Emit the same inspection result as JSON
-dotnet run --project cli/cli.csproj -- research inspect SystemResponsiveness --expected-value 10 --json
+python3 registry-research-framework/scripts/check_single_tweak.py SystemResponsiveness --expected-value 10 --json
+```
+
+```powershell
+# Equivalent .NET CLI path for Windows/VM or desktop-runtime hosts
+dotnet run --project cli/cli.csproj -- research inspect SystemResponsiveness --expected-value 10 --expected-value 30000
 ```
 
 That command reports:
@@ -189,13 +194,18 @@ When you read an app card, treat the `CLAIM BOUNDARY` section as part of the pro
 
 ## Single Tweak App QA Plan
 
-If you want to retest one app card end to end, generate the exact QA commands before opening the desktop app.
+If you want to retest one app card end to end, generate the exact QA commands before opening the desktop app. The Python planner is the safest host-side option; it prints the same app, guest VM, and KVM commands without launching the Windows-targeted CLI.
 
-```powershell
+```bash
 # Generate the manual app-QA plan for one setting
-dotnet run --project cli/cli.csproj -- research qa-plan SystemResponsiveness
+python3 registry-research-framework/scripts/check_single_tweak_app_qa.py SystemResponsiveness
 
 # Keep the value checks in the plan and emit the same result as JSON
+python3 registry-research-framework/scripts/check_single_tweak_app_qa.py SystemResponsiveness --expected-value 10 --expected-value 30000 --json
+```
+
+```powershell
+# Equivalent .NET CLI path for Windows/VM or desktop-runtime hosts
 dotnet run --project cli/cli.csproj -- research qa-plan SystemResponsiveness --expected-value 10 --expected-value 30000 --json
 ```
 
@@ -210,14 +220,14 @@ That command gives you:
 
 ## Promoted App QA Batch
 
-If you want to retest several shipped cards in one pass, generate or run a promoted app-QA batch.
+If you want to retest several shipped cards in one pass, generate or run a promoted app-QA batch. This is the host-safe mirror of `research qa-batch`: use the Python planner from Linux hosts, and use the .NET CLI in the Windows VM or on a desktop-runtime host.
 
-```powershell
+```bash
 # Plan a small promoted batch without touching the VM
-dotnet run --project cli/cli.csproj -- research qa-batch --category Power --category Explorer --total-limit 4
+python3 registry-research-framework/scripts/check_promoted_tweak_app_qa_batch.py --category Power --category Explorer --total-limit 4
 
 # Run a live KVM batch across a hand-picked set of cards
-dotnet run --project cli/cli.csproj -- research qa-batch --id power.disable-fast-startup --id power.disable-windows-search --id explorer.hide-empty-drives --id privacy.disable-find-my-device --run-kvm --json
+python3 registry-research-framework/scripts/check_promoted_tweak_app_qa_batch.py --id power.disable-fast-startup --id power.disable-windows-search --id explorer.hide-empty-drives --id privacy.disable-find-my-device --run-kvm --json
 ```
 
 That command gives you:
@@ -236,14 +246,14 @@ The latest batch file is only the newest run. If you want cumulative coverage ac
 
 ## Retest Readiness Check
 
-If you are about to retest the desktop app and want one quick truth pass first, use the readiness check.
+If you are about to retest the desktop app and want one quick truth pass first, use the `research readiness` check. The Python command below is the host-safe mirror for Linux; the .NET CLI command is equivalent when the Windows desktop runtime is available.
 
-```powershell
+```bash
 # Run the full app-retest readiness check
-dotnet run --project cli/cli.csproj -- research readiness
+python3 registry-research-framework/scripts/check_app_retest_readiness.py
 
 # Emit the same readiness report as JSON
-dotnet run --project cli/cli.csproj -- research readiness --json
+python3 registry-research-framework/scripts/check_app_retest_readiness.py --json
 ```
 
 That command checks:

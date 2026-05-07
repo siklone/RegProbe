@@ -194,32 +194,41 @@ Read these first:
 If you do not know the repo yet, use this order:
 
 1. Build and test the repo once so you know the baseline is green.
-2. Run a single-setting inspection before editing anything:
+2. Run a single-setting inspection before editing anything. On Linux hosts
+   without `Microsoft.WindowsDesktop.App`, use the Python mirror; use the .NET
+   CLI in the Windows VM or on a desktop-runtime host.
 
-```powershell
-dotnet run --project cli/cli.csproj -- research inspect SystemResponsiveness
-dotnet run --project cli/cli.csproj -- research inspect SystemResponsiveness --expected-value 10 --expected-value 30000
+```bash
+python3 registry-research-framework/scripts/check_single_tweak.py SystemResponsiveness
+python3 registry-research-framework/scripts/check_single_tweak.py SystemResponsiveness --expected-value 10 --expected-value 30000
 ```
 
 3. Run the app-retest readiness check if you are about to verify cards, evidence, rollback, or KVM smoke:
 
-```powershell
-dotnet run --project cli/cli.csproj -- research readiness
-dotnet run --project cli/cli.csproj -- research readiness --json
+```bash
+python3 registry-research-framework/scripts/check_app_retest_readiness.py
+python3 registry-research-framework/scripts/check_app_retest_readiness.py --json
 ```
 
 4. Generate the single-card app QA plan before touching the desktop app:
 
+```bash
+python3 registry-research-framework/scripts/check_single_tweak_app_qa.py SystemResponsiveness
+python3 registry-research-framework/scripts/check_single_tweak_app_qa.py SystemResponsiveness --expected-value 10 --expected-value 30000 --json
+```
+
+The equivalent .NET CLI commands are:
+
 ```powershell
-dotnet run --project cli/cli.csproj -- research qa-plan SystemResponsiveness
+dotnet run --project cli/cli.csproj -- research inspect SystemResponsiveness --expected-value 10 --expected-value 30000
 dotnet run --project cli/cli.csproj -- research qa-plan SystemResponsiveness --expected-value 10 --expected-value 30000 --json
 ```
 
 5. If you are about to retest several shipped cards, plan or run a promoted batch:
 
-```powershell
-dotnet run --project cli/cli.csproj -- research qa-batch --category Power --category Explorer --total-limit 4
-dotnet run --project cli/cli.csproj -- research qa-batch --id power.disable-fast-startup --id power.disable-windows-search --id explorer.hide-empty-drives --id privacy.disable-find-my-device --run-kvm --json
+```bash
+python3 registry-research-framework/scripts/check_promoted_tweak_app_qa_batch.py --category Power --category Explorer --total-limit 4
+python3 registry-research-framework/scripts/check_promoted_tweak_app_qa_batch.py --id power.disable-fast-startup --id power.disable-windows-search --id explorer.hide-empty-drives --id privacy.disable-find-my-device --run-kvm --json
 ```
 
 6. Open the reported research record, app card doc, and source file together.

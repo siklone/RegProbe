@@ -2,6 +2,8 @@
 
 RegProbe ships a command-line surface for scripted, automation-friendly workflows. The CLI uses the same research gating and SAFE execution model as the desktop app, so a tweak can still be visible yet blocked from mutation if the promotion state says it is not ready.
 
+Host note: the .NET CLI targets the Windows desktop app stack. On Linux hosts that do not have `Microsoft.WindowsDesktop.App`, use the Python mirrors for `research inspect` and `research qa-plan`, or run the .NET CLI inside the Windows VM.
+
 ## Common Commands
 
 ```powershell
@@ -24,28 +26,28 @@ dotnet run --project cli/cli.csproj -- config export --file regprobe-config.json
 dotnet run --project cli/cli.csproj -- research validate-json-tweaks --input-dir app/Config/Tweaks
 
 # Inspect one tweak or raw registry value name
-dotnet run --project cli/cli.csproj -- research inspect SystemResponsiveness
+python3 registry-research-framework/scripts/check_single_tweak.py SystemResponsiveness
 
 # Check whether specific values are tracked for that setting
-dotnet run --project cli/cli.csproj -- research inspect SystemResponsiveness --expected-value 10 --expected-value 30000
+python3 registry-research-framework/scripts/check_single_tweak.py SystemResponsiveness --expected-value 10 --expected-value 30000
 
 # Build the manual app-QA plan for one shipped card
-dotnet run --project cli/cli.csproj -- research qa-plan SystemResponsiveness
+python3 registry-research-framework/scripts/check_single_tweak_app_qa.py SystemResponsiveness
 
 # Emit the same app-QA plan as JSON
-dotnet run --project cli/cli.csproj -- research qa-plan SystemResponsiveness --expected-value 10 --expected-value 30000 --json
+python3 registry-research-framework/scripts/check_single_tweak_app_qa.py SystemResponsiveness --expected-value 10 --expected-value 30000 --json
 
 # Plan a promoted multi-card batch
-dotnet run --project cli/cli.csproj -- research qa-batch --category Power --category Explorer --total-limit 4
+python3 registry-research-framework/scripts/check_promoted_tweak_app_qa_batch.py --category Power --category Explorer --total-limit 4
 
 # Run a live KVM promoted batch
-dotnet run --project cli/cli.csproj -- research qa-batch --id power.disable-fast-startup --id power.disable-windows-search --id explorer.hide-empty-drives --id privacy.disable-find-my-device --run-kvm --json
+python3 registry-research-framework/scripts/check_promoted_tweak_app_qa_batch.py --id power.disable-fast-startup --id power.disable-windows-search --id explorer.hide-empty-drives --id privacy.disable-find-my-device --run-kvm --json
 
 # Run the full app-retest readiness check
-dotnet run --project cli/cli.csproj -- research readiness
+python3 registry-research-framework/scripts/check_app_retest_readiness.py
 
 # Emit the readiness report as JSON
-dotnet run --project cli/cli.csproj -- research readiness --json
+python3 registry-research-framework/scripts/check_app_retest_readiness.py --json
 ```
 
 ## Main Command Groups
@@ -73,6 +75,12 @@ Use it with:
 - a record id such as `power.disable-network-power-saving.policy`
 - a raw registry value name such as `SystemResponsiveness`
 - a registry path fragment such as `Multimedia\\SystemProfile`
+
+Host-safe equivalent:
+
+```bash
+python3 registry-research-framework/scripts/check_single_tweak.py SystemResponsiveness --expected-value 10 --expected-value 30000 --json
+```
 
 Optional flags:
 
@@ -107,6 +115,12 @@ Use it when you want to confirm:
 - rollback support and promotion state are what the repo says they are
 - the desktop app can apply and optionally roll back that card through the hidden startup QA lane
 
+Host-safe equivalent:
+
+```bash
+python3 registry-research-framework/scripts/check_single_tweak_app_qa.py SystemResponsiveness --expected-value 10 --expected-value 30000 --json
+```
+
 The plan includes:
 
 - the matched tweak id and card title
@@ -135,7 +149,7 @@ Typical flow:
 
 ## Promoted App QA Batch
 
-`research qa-batch` takes the same app-QA truth model and scales it to several shipped cards at once.
+`research qa-batch` takes the same app-QA truth model and scales it to several shipped cards at once. The host-safe Python equivalent is `registry-research-framework/scripts/check_promoted_tweak_app_qa_batch.py`.
 
 Use it when you want to:
 
@@ -179,7 +193,7 @@ If you are running several live batches over time, use the cumulative artifacts 
 
 ## Retest Readiness
 
-`research readiness` is the fast preflight check to run before a manual desktop-app retest.
+`research readiness` is the fast preflight check to run before a manual desktop-app retest. The host-safe Python equivalent is `registry-research-framework/scripts/check_app_retest_readiness.py`.
 
 It ties together:
 
