@@ -1,11 +1,11 @@
 {
-  "generated_utc": "2026-05-07T17:12:35Z",
-  "history_entry_count": 64,
+  "generated_utc": "2026-05-07T17:14:00Z",
+  "history_entry_count": 65,
   "catalog_candidate_count": 242,
-  "covered_count": 193,
-  "uncovered_count": 49,
+  "covered_count": 196,
+  "uncovered_count": 46,
   "summary": {
-    "coverage_percent": 79.75,
+    "coverage_percent": 80.99,
     "covered_categories": {
       "Audio": 3,
       "Cleanup": 1,
@@ -15,7 +15,7 @@
       "Notifications": 5,
       "Performance": 3,
       "Peripheral": 3,
-      "Power": 7,
+      "Power": 10,
       "Privacy": 48,
       "Security": 17,
       "System": 41,
@@ -25,7 +25,6 @@
       "Developer": 2,
       "Explorer": 4,
       "Network": 4,
-      "Power": 3,
       "Privacy": 19,
       "Security": 4,
       "System": 11,
@@ -33,43 +32,6 @@
     }
   },
   "recommended_next_batches": [
-    {
-      "category": "Power",
-      "covered_count": 7,
-      "uncovered_count": 3,
-      "coverage_percent": 70.0,
-      "batch_size": 3,
-      "tweak_ids": [
-        "power.hide-sleep-option",
-        "power.optimize-cpu-boost",
-        "power.optimize-gaming-network"
-      ],
-      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id power.hide-sleep-option --id power.optimize-cpu-boost --id power.optimize-gaming-network",
-      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id power.hide-sleep-option --id power.optimize-cpu-boost --id power.optimize-gaming-network --run-kvm --json",
-      "candidates": [
-        {
-          "tweak_id": "power.hide-sleep-option",
-          "record_id": "power.hide-sleep-option",
-          "category": "Power",
-          "name": "Show Sleep Option",
-          "documentation": "research/records/power.hide-sleep-option.json"
-        },
-        {
-          "tweak_id": "power.optimize-cpu-boost",
-          "record_id": "power.optimize-cpu-boost",
-          "category": "Power",
-          "name": "Optimize CPU Performance Boost",
-          "documentation": "research/records/power.optimize-cpu-boost.json"
-        },
-        {
-          "tweak_id": "power.optimize-gaming-network",
-          "record_id": "power.optimize-gaming-network",
-          "category": "Power",
-          "name": "Games MMCSS Task Profile",
-          "documentation": "research/records/power.optimize-gaming-network.json"
-        }
-      ]
-    },
     {
       "category": "Privacy",
       "covered_count": 48,
@@ -247,6 +209,51 @@
           "category": "System",
           "name": "Bluetooth User Service",
           "documentation": "research/records/system.services.disable-bluetooth-user-service.json"
+        }
+      ]
+    },
+    {
+      "category": "Security",
+      "covered_count": 17,
+      "uncovered_count": 4,
+      "coverage_percent": 80.95,
+      "batch_size": 4,
+      "tweak_ids": [
+        "security.powershell-unrestricted",
+        "security.threat-file-hash-logging",
+        "security.trusted-path-credential-prompting",
+        "security.uac-never-notify"
+      ],
+      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id security.powershell-unrestricted --id security.threat-file-hash-logging --id security.trusted-path-credential-prompting --id security.uac-never-notify",
+      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id security.powershell-unrestricted --id security.threat-file-hash-logging --id security.trusted-path-credential-prompting --id security.uac-never-notify --run-kvm --json",
+      "candidates": [
+        {
+          "tweak_id": "security.powershell-unrestricted",
+          "record_id": "security.powershell-unrestricted",
+          "category": "Security",
+          "name": "Windows PowerShell Script Execution Policy",
+          "documentation": "research/records/security.powershell-unrestricted.review.json"
+        },
+        {
+          "tweak_id": "security.threat-file-hash-logging",
+          "record_id": "security.threat-file-hash-logging",
+          "category": "Security",
+          "name": "Microsoft Defender Threat File Hash Logging",
+          "documentation": "research/records/security.threat-file-hash-logging.review.json"
+        },
+        {
+          "tweak_id": "security.trusted-path-credential-prompting",
+          "record_id": "security.trusted-path-credential-prompting",
+          "category": "Security",
+          "name": "Trusted Path for Credential Entry",
+          "documentation": "research/records/security.trusted-path-credential-prompting.review.json"
+        },
+        {
+          "tweak_id": "security.uac-never-notify",
+          "record_id": "security.uac-never-notify",
+          "category": "Security",
+          "name": "User Account Control Prompting Profile",
+          "documentation": "research/records/security.uac-never-notify.json"
         }
       ]
     }
@@ -844,6 +851,33 @@
       "category": "Power",
       "name": "Show Lock Option",
       "documentation": "research/records/power.hide-lock-option.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "power.hide-sleep-option",
+      "qa_tweak_id": "power.hide-sleep-option",
+      "candidate_id": "power.hide-sleep-option",
+      "category": "Power",
+      "name": "Show Sleep Option",
+      "documentation": "research/records/power.hide-sleep-option.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "power.optimize-cpu-boost",
+      "qa_tweak_id": "power.optimize-cpu-boost",
+      "candidate_id": "power.optimize-cpu-boost",
+      "category": "Power",
+      "name": "Optimize CPU Performance Boost",
+      "documentation": "research/records/power.optimize-cpu-boost.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "power.optimize-gaming-network",
+      "qa_tweak_id": "power.optimize-gaming-network",
+      "candidate_id": "power.optimize-gaming-network",
+      "category": "Power",
+      "name": "Games MMCSS Task Profile",
+      "documentation": "research/records/power.optimize-gaming-network.json",
       "latest_report_status": "ok"
     },
     {
@@ -2060,27 +2094,6 @@
       "category": "Network",
       "name": "SMB Cipher Suite Order",
       "documentation": "research/records/network.smb-set-cipher-suite-order.review.json"
-    },
-    {
-      "tweak_id": "power.hide-sleep-option",
-      "record_id": "power.hide-sleep-option",
-      "category": "Power",
-      "name": "Show Sleep Option",
-      "documentation": "research/records/power.hide-sleep-option.json"
-    },
-    {
-      "tweak_id": "power.optimize-cpu-boost",
-      "record_id": "power.optimize-cpu-boost",
-      "category": "Power",
-      "name": "Optimize CPU Performance Boost",
-      "documentation": "research/records/power.optimize-cpu-boost.json"
-    },
-    {
-      "tweak_id": "power.optimize-gaming-network",
-      "record_id": "power.optimize-gaming-network",
-      "category": "Power",
-      "name": "Games MMCSS Task Profile",
-      "documentation": "research/records/power.optimize-gaming-network.json"
     },
     {
       "tweak_id": "privacy.disable-rsop-logging",

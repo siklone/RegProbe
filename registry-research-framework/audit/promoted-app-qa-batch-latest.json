@@ -1,13 +1,11 @@
 {
-  "generated_utc": "2026-05-07T17:12:35Z",
+  "generated_utc": "2026-05-07T17:14:00Z",
   "status": "PASS",
   "selection": {
     "requested_ids": [
-      "visibility.disable-spotlight-settings",
-      "visibility.disable-spotlight-third-party",
-      "visibility.disable-spotlight-welcome",
-      "visibility.disable-wcn-wizards",
-      "visibility.disable-widgets"
+      "power.hide-sleep-option",
+      "power.optimize-cpu-boost",
+      "power.optimize-gaming-network"
     ],
     "requested_categories": [],
     "limit_per_category": 1,
@@ -22,29 +20,29 @@
     "kvm_batch_runner": "scripts/vm-kvm/run-guest-app-tweak-qa-batch.py"
   },
   "catalog_candidate_count": 242,
-  "selected_candidate_count": 5,
+  "selected_candidate_count": 3,
   "errors": [],
   "candidates": [
     {
-      "tweak_id": "visibility.disable-spotlight-settings",
-      "qa_tweak_id": "visibility.disable-spotlight-settings",
-      "candidate_id": "visibility.disable-spotlight-settings",
-      "record_id": "visibility.disable-spotlight-settings",
-      "category": "Visibility",
-      "name": "Windows Spotlight on Settings",
-      "documentation": "research/records/visibility.disable-spotlight-settings.json",
+      "tweak_id": "power.hide-sleep-option",
+      "qa_tweak_id": "power.hide-sleep-option",
+      "candidate_id": "power.hide-sleep-option",
+      "record_id": "power.hide-sleep-option",
+      "category": "Power",
+      "name": "Show Sleep Option",
+      "documentation": "research/records/power.hide-sleep-option.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect visibility.disable-spotlight-settings",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect power.hide-sleep-option",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'visibility.disable-spotlight-settings' --qa-output 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-spotlight-settings.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'visibility.disable-spotlight-settings' --qa-output 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-spotlight-settings.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'visibility.disable-spotlight-settings' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-spotlight-settings.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'visibility.disable-spotlight-settings' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-spotlight-settings.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'visibility.disable-spotlight-settings'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'power.hide-sleep-option' --qa-output 'C:\\Tools\\ValidationController\\smoke\\power.hide-sleep-option.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'power.hide-sleep-option' --qa-output 'C:\\Tools\\ValidationController\\smoke\\power.hide-sleep-option.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'power.hide-sleep-option' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\power.hide-sleep-option.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'power.hide-sleep-option' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\power.hide-sleep-option.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'power.hide-sleep-option'"
       },
       "expected_report": {
         "success": true,
@@ -85,25 +83,25 @@
       }
     },
     {
-      "tweak_id": "visibility.disable-spotlight-third-party",
-      "qa_tweak_id": "visibility.disable-spotlight-third-party",
-      "candidate_id": "visibility.disable-spotlight-third-party",
-      "record_id": "visibility.disable-spotlight-third-party",
-      "category": "Visibility",
-      "name": "Third-Party Suggestions in Windows Spotlight",
-      "documentation": "research/records/visibility.disable-spotlight-third-party.json",
+      "tweak_id": "power.optimize-cpu-boost",
+      "qa_tweak_id": "power.optimize-cpu-boost",
+      "candidate_id": "power.optimize-cpu-boost",
+      "record_id": "power.optimize-cpu-boost",
+      "category": "Power",
+      "name": "Optimize CPU Performance Boost",
+      "documentation": "research/records/power.optimize-cpu-boost.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
-      "restore_default_supported": true,
+      "restore_default_supported": false,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect visibility.disable-spotlight-third-party",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect power.optimize-cpu-boost",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'visibility.disable-spotlight-third-party' --qa-output 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-spotlight-third-party.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'visibility.disable-spotlight-third-party' --qa-output 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-spotlight-third-party.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'visibility.disable-spotlight-third-party' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-spotlight-third-party.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'visibility.disable-spotlight-third-party' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-spotlight-third-party.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'visibility.disable-spotlight-third-party'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'power.optimize-cpu-boost' --qa-output 'C:\\Tools\\ValidationController\\smoke\\power.optimize-cpu-boost.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'power.optimize-cpu-boost' --qa-output 'C:\\Tools\\ValidationController\\smoke\\power.optimize-cpu-boost.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'power.optimize-cpu-boost' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\power.optimize-cpu-boost.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'power.optimize-cpu-boost' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\power.optimize-cpu-boost.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'power.optimize-cpu-boost'"
       },
       "expected_report": {
         "success": true,
@@ -144,143 +142,25 @@
       }
     },
     {
-      "tweak_id": "visibility.disable-spotlight-welcome",
-      "qa_tweak_id": "visibility.disable-spotlight-welcome",
-      "candidate_id": "visibility.disable-spotlight-welcome",
-      "record_id": "visibility.disable-spotlight-welcome",
-      "category": "Visibility",
-      "name": "Windows Spotlight Welcome Experience",
-      "documentation": "research/records/visibility.disable-spotlight-welcome.json",
+      "tweak_id": "power.optimize-gaming-network",
+      "qa_tweak_id": "power.optimize-gaming-network",
+      "candidate_id": "power.optimize-gaming-network",
+      "record_id": "power.optimize-gaming-network",
+      "category": "Power",
+      "name": "Games MMCSS Task Profile",
+      "documentation": "research/records/power.optimize-gaming-network.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
-      "restore_default_supported": true,
+      "restore_default_supported": false,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect visibility.disable-spotlight-welcome",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect power.optimize-gaming-network",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'visibility.disable-spotlight-welcome' --qa-output 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-spotlight-welcome.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'visibility.disable-spotlight-welcome' --qa-output 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-spotlight-welcome.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'visibility.disable-spotlight-welcome' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-spotlight-welcome.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'visibility.disable-spotlight-welcome' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-spotlight-welcome.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'visibility.disable-spotlight-welcome'"
-      },
-      "expected_report": {
-        "success": true,
-        "status": "ok",
-        "rollback_requested": true,
-        "required_stages": [
-          "detect-before",
-          "apply",
-          "rollback",
-          "detect-after"
-        ],
-        "required_card_snapshot": {
-          "required_fields": [
-            "TweakId",
-            "Name",
-            "Category",
-            "EvidenceClass",
-            "ResearchStatus",
-            "RollbackSnapshotState",
-            "HasClaimBoundary",
-            "WhatWeKnowSummary",
-            "WhatWeDoNotClaimSummary",
-            "ProofLanes"
-          ],
-          "required_proof_lanes": [
-            "docs",
-            "runtime",
-            "source",
-            "rollback"
-          ],
-          "claim_boundary_required": true
-        },
-        "required_stage_assertions": [
-          "apply stage reports a successful apply story",
-          "rollback stage reports a successful rollback story",
-          "detect-after is present"
-        ]
-      }
-    },
-    {
-      "tweak_id": "visibility.disable-wcn-wizards",
-      "qa_tweak_id": "visibility.disable-wcn-wizards",
-      "candidate_id": "visibility.disable-wcn-wizards",
-      "record_id": "visibility.disable-wcn-wizards",
-      "category": "Visibility",
-      "name": "Windows Connect Now Wizards",
-      "documentation": "research/records/visibility.disable-wcn-wizards.json",
-      "promotion_state": "promoted",
-      "apply_allowed": true,
-      "restore_default_supported": true,
-      "restore_previous_supported": true,
-      "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect visibility.disable-wcn-wizards",
-        "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'visibility.disable-wcn-wizards' --qa-output 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-wcn-wizards.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'visibility.disable-wcn-wizards' --qa-output 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-wcn-wizards.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'visibility.disable-wcn-wizards' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-wcn-wizards.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'visibility.disable-wcn-wizards' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-wcn-wizards.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'visibility.disable-wcn-wizards'"
-      },
-      "expected_report": {
-        "success": true,
-        "status": "ok",
-        "rollback_requested": true,
-        "required_stages": [
-          "detect-before",
-          "apply",
-          "rollback",
-          "detect-after"
-        ],
-        "required_card_snapshot": {
-          "required_fields": [
-            "TweakId",
-            "Name",
-            "Category",
-            "EvidenceClass",
-            "ResearchStatus",
-            "RollbackSnapshotState",
-            "HasClaimBoundary",
-            "WhatWeKnowSummary",
-            "WhatWeDoNotClaimSummary",
-            "ProofLanes"
-          ],
-          "required_proof_lanes": [
-            "docs",
-            "runtime",
-            "source",
-            "rollback"
-          ],
-          "claim_boundary_required": true
-        },
-        "required_stage_assertions": [
-          "apply stage reports a successful apply story",
-          "rollback stage reports a successful rollback story",
-          "detect-after is present"
-        ]
-      }
-    },
-    {
-      "tweak_id": "visibility.disable-widgets",
-      "qa_tweak_id": "visibility.disable-widgets",
-      "candidate_id": "visibility.disable-widgets",
-      "record_id": "visibility.disable-widgets",
-      "category": "Visibility",
-      "name": "Widgets Feature",
-      "documentation": "research/records/visibility.disable-widgets.json",
-      "promotion_state": "promoted",
-      "apply_allowed": true,
-      "restore_default_supported": true,
-      "restore_previous_supported": true,
-      "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect visibility.disable-widgets",
-        "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'visibility.disable-widgets' --qa-output 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-widgets.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'visibility.disable-widgets' --qa-output 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-widgets.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'visibility.disable-widgets' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-widgets.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'visibility.disable-widgets' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-widgets.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'visibility.disable-widgets'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'power.optimize-gaming-network' --qa-output 'C:\\Tools\\ValidationController\\smoke\\power.optimize-gaming-network.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'power.optimize-gaming-network' --qa-output 'C:\\Tools\\ValidationController\\smoke\\power.optimize-gaming-network.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'power.optimize-gaming-network' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\power.optimize-gaming-network.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'power.optimize-gaming-network' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\power.optimize-gaming-network.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'power.optimize-gaming-network'"
       },
       "expected_report": {
         "success": true,
@@ -323,272 +203,7 @@
   ],
   "run_results": [
     {
-      "tweak_id": "visibility.disable-spotlight-settings",
-      "host_exit": 0,
-      "execution_exit": 0,
-      "payload_status": "completed",
-      "report_source": "guest-file",
-      "report_parse_error": null,
-      "report_fetch_status": "ok",
-      "report_app_success": true,
-      "report_success": true,
-      "report_status": "ok",
-      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
-      "report_contract_status": "ok",
-      "report_contract_summary": "QA card snapshot contract passed.",
-      "report_contract_failures": [],
-      "report_card_present": true,
-      "report_card_has_claim_boundary": true,
-      "report_card_present_fields": [
-        "TweakId",
-        "Name",
-        "Category",
-        "EvidenceClass",
-        "ResearchStatus",
-        "RollbackSnapshotState",
-        "HasClaimBoundary",
-        "WhatWeKnowSummary",
-        "WhatWeDoNotClaimSummary",
-        "ProofLanes"
-      ],
-      "report_card_missing_fields": [],
-      "report_card_proof_lanes": [
-        "docs",
-        "runtime",
-        "source",
-        "rollback"
-      ],
-      "report_card_missing_proof_lanes": [],
-      "report": {
-        "TweakId": "visibility.disable-spotlight-settings",
-        "TweakName": "Windows Spotlight on Settings",
-        "Success": true,
-        "Status": "ok",
-        "Summary": "Apply/verify path completed and rollback restored the tweak.",
-        "RollbackRequested": true,
-        "Card": {
-          "TweakId": "visibility.disable-spotlight-settings",
-          "Name": "Windows Spotlight on Settings",
-          "Category": "Visibility",
-          "Description": "The Settings app can show Spotlight-based suggestions and highlights. This policy decides whether those Spotlight elements are allowed for the current user.",
-          "FriendlyDescription": "The Settings app can show Spotlight-based suggestions and highlights. This policy decides whether those Spotlight elements are allowed for the current user.",
-          "RegistryPath": "HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableWindowsSpotlightOnSettings",
-          "EvidenceClass": "A",
-          "EvidenceClassTitle": "Cross-Layer Verified",
-          "ResearchStatus": "PROMOTED",
-          "IsMutationAllowed": true,
-          "RollbackSnapshotState": "ready",
-          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
-          "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: The Settings app can show Spotlight-based suggestions and highlights. This policy decides whether those Spotlight elements are allowed for the current user. Evidence: Local official ADMX defines the exact user-policy key and value name; local ADML confirms that enabling the policy removes Windows Spotlight suggestions from the Settings app. Rollback: Rollback: Verified via record-restore-story.",
-          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
-          "ProofLanes": [
-            {
-              "Key": "docs",
-              "Label": "DOCS",
-              "State": "ready",
-              "Summary": "Local official ADMX defines the exact user-policy key and value name; local ADML confirms that enabling the policy removes Windows Spotlight suggestions from the Settings app.",
-              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/CloudContent.admx"
-            },
-            {
-              "Key": "runtime",
-              "Label": "RUNTIME",
-              "State": "ready",
-              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
-              "Source": ""
-            },
-            {
-              "Key": "source",
-              "Label": "SOURCE",
-              "State": "ready",
-              "Summary": "No upstream nohuto source link is attached to this record.",
-              "Source": ""
-            },
-            {
-              "Key": "rollback",
-              "Label": "ROLLBACK",
-              "State": "ready",
-              "Summary": "Rollback: Verified via record-restore-story.",
-              "Source": "record-restore-story"
-            }
-          ],
-          "ReferenceLinks": [
-            {
-              "Title": "Docs: Details (missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
-              "Kind": "Details"
-            },
-            {
-              "Title": "Docs: Visibility",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\visibility\\visibility.md#visibility.disable-spotlight-settings",
-              "Kind": "Docs"
-            }
-          ]
-        },
-        "Stages": [
-          {
-            "Stage": "detect-before",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Settings Spotlight disabled'.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Settings Spotlight disabled",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": false,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Settings Spotlight disabled'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableWindowsSpotlightOnSettings: missing -> 1",
-                "TimestampText": "10:12:39"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "apply",
-            "AppliedStatus": "Applied",
-            "StatusMessage": "Run completed.",
-            "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Settings Spotlight disabled",
-            "TargetValue": "Settings Spotlight disabled",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Settings Spotlight disabled'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableWindowsSpotlightOnSettings: missing -> 1",
-                "TimestampText": "10:12:39"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Applied preset 'Settings Spotlight disabled'.",
-                "TimestampText": "10:12:39"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified preset 'Settings Spotlight disabled'.",
-                "TimestampText": "10:12:39"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Not required",
-                "Message": "Step not executed.",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "rollback",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Rolled back registry values.",
-            "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Settings Spotlight disabled",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Settings Spotlight disabled'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableWindowsSpotlightOnSettings: missing -> 1",
-                "TimestampText": "10:12:39"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Applied preset 'Settings Spotlight disabled'.",
-                "TimestampText": "10:12:39"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified preset 'Settings Spotlight disabled'.",
-                "TimestampText": "10:12:39"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "10:12:39"
-              }
-            ]
-          },
-          {
-            "Stage": "detect-after",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Settings Spotlight disabled'.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Settings Spotlight disabled",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Settings Spotlight disabled'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableWindowsSpotlightOnSettings: missing -> 1",
-                "TimestampText": "10:12:39"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Applied preset 'Settings Spotlight disabled'.",
-                "TimestampText": "10:12:39"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified preset 'Settings Spotlight disabled'.",
-                "TimestampText": "10:12:39"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "10:12:39"
-              }
-            ]
-          }
-        ],
-        "StartedAtUtc": "2026-05-07T17:12:39.5798739+00:00",
-        "CompletedAtUtc": "2026-05-07T17:12:39.8727355+00:00"
-      },
-      "qa_tweak_id": "visibility.disable-spotlight-settings",
-      "candidate_id": "visibility.disable-spotlight-settings",
-      "card_name": "Windows Spotlight on Settings",
-      "documentation": "research/records/visibility.disable-spotlight-settings.json"
-    },
-    {
-      "tweak_id": "visibility.disable-spotlight-third-party",
+      "tweak_id": "power.hide-sleep-option",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -625,19 +240,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "visibility.disable-spotlight-third-party",
-        "TweakName": "Third-Party Suggestions in Windows Spotlight",
+        "TweakId": "power.hide-sleep-option",
+        "TweakName": "Show Sleep Option",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "visibility.disable-spotlight-third-party",
-          "Name": "Third-Party Suggestions in Windows Spotlight",
-          "Category": "Visibility",
-          "Description": "Windows Spotlight can include suggestions that point to third-party content or apps. This policy decides whether those suggestions are allowed for the current user.",
-          "FriendlyDescription": "Windows Spotlight can include suggestions that point to third-party content or apps. This policy decides whether those suggestions are allowed for the current user.",
-          "RegistryPath": "HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableThirdPartySuggestions",
+          "TweakId": "power.hide-sleep-option",
+          "Name": "Show Sleep Option",
+          "Category": "Power",
+          "Description": "Windows can show or hide Sleep in the power menu. This policy decides whether that shortcut is visible.",
+          "FriendlyDescription": "Windows can show or hide Sleep in the power menu. This policy decides whether that shortcut is visible.",
+          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer\\ShowSleepOption",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -645,22 +260,22 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Windows Spotlight can include suggestions that point to third-party content or apps. This policy decides whether those suggestions are allowed for the current user. Evidence: Local official ADMX defines the exact user-policy key and value name; local ADML confirms that enabling the policy stops Windows Spotlight from suggesting third-party apps and content. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: Windows can show or hide Sleep in the power menu. This policy decides whether that shortcut is visible. Evidence: Local official ADMX defines the exact key and value name; local ADML confirms that disabling the policy hides Sleep from the Power Options menu. Added nohuto mirror corroboration via nohuto-showsleepoption-admx. Win25H2Clean reversible probe at evidence/fil... Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "Local official ADMX defines the exact user-policy key and value name; local ADML confirms that enabling the policy stops Windows Spotlight from suggesting third-party apps and content.",
-              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/CloudContent.admx"
+              "Summary": "Local official ADMX defines the exact key and value name; local ADML confirms that disabling the policy hides Sleep from the Power Options menu. Added nohuto mirror corroboration via nohuto-showsleepoption-admx. Win25H2Clean reversible probe at evidence/fil...",
+              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/WindowsExplorer.admx"
             },
             {
               "Key": "runtime",
               "Label": "RUNTIME",
               "State": "ready",
-              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
-              "Source": ""
+              "Summary": "The guest probe wrote ShowSleepOption=0 and ShowSleepOption=1, queried the live registry after each write, opened the Power Options surface twice, and restored the original state.",
+              "Source": "Win25H2Clean reversible probe - ShowSleepOption 0/1 toggle: evidence/raw/procmon/power.hide-sleep-option/power_hide_sleep_option_probe.txt"
             },
             {
               "Key": "source",
@@ -684,8 +299,8 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Visibility",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\visibility\\visibility.md#visibility.disable-spotlight-third-party",
+              "Title": "Docs: Power (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\power\\power.md",
               "Kind": "Docs"
             }
           ]
@@ -694,10 +309,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Third-party Spotlight suggestions disabled'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Sleep option hidden'.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Third-party Spotlight suggestions disabled",
+            "TargetValue": "Sleep option hidden",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -706,8 +321,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Third-party Spotlight suggestions disabled'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableThirdPartySuggestions: missing -> 1",
-                "TimestampText": "10:12:44"
+                "Message": "Current values do not match a named option. Selected option is 'Sleep option hidden'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer\\ShowSleepOption: missing -> 0",
+                "TimestampText": "10:14:04"
               },
               {
                 "Action": "Apply",
@@ -734,8 +349,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Third-party Spotlight suggestions disabled",
-            "TargetValue": "Third-party Spotlight suggestions disabled",
+            "CurrentValue": "Sleep option hidden",
+            "TargetValue": "Sleep option hidden",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -744,20 +359,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Third-party Spotlight suggestions disabled'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableThirdPartySuggestions: missing -> 1",
-                "TimestampText": "10:12:44"
+                "Message": "Current values do not match a named option. Selected option is 'Sleep option hidden'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer\\ShowSleepOption: missing -> 0",
+                "TimestampText": "10:14:04"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Third-party Spotlight suggestions disabled'.",
-                "TimestampText": "10:12:44"
+                "Message": "Applied preset 'Sleep option hidden'.",
+                "TimestampText": "10:14:07"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Third-party Spotlight suggestions disabled'.",
-                "TimestampText": "10:12:44"
+                "Message": "Verified preset 'Sleep option hidden'.",
+                "TimestampText": "10:14:07"
               },
               {
                 "Action": "Rollback",
@@ -773,7 +388,7 @@
             "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Third-party Spotlight suggestions disabled",
+            "TargetValue": "Sleep option hidden",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -782,36 +397,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Third-party Spotlight suggestions disabled'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableThirdPartySuggestions: missing -> 1",
-                "TimestampText": "10:12:44"
+                "Message": "Current values do not match a named option. Selected option is 'Sleep option hidden'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer\\ShowSleepOption: missing -> 0",
+                "TimestampText": "10:14:04"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Third-party Spotlight suggestions disabled'.",
-                "TimestampText": "10:12:44"
+                "Message": "Applied preset 'Sleep option hidden'.",
+                "TimestampText": "10:14:07"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Third-party Spotlight suggestions disabled'.",
-                "TimestampText": "10:12:44"
+                "Message": "Verified preset 'Sleep option hidden'.",
+                "TimestampText": "10:14:07"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "10:12:44"
+                "TimestampText": "10:14:07"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Third-party Spotlight suggestions disabled'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Sleep option hidden'.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Third-party Spotlight suggestions disabled",
+            "TargetValue": "Sleep option hidden",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -820,40 +435,40 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Third-party Spotlight suggestions disabled'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableThirdPartySuggestions: missing -> 1",
-                "TimestampText": "10:12:44"
+                "Message": "Current values do not match a named option. Selected option is 'Sleep option hidden'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer\\ShowSleepOption: missing -> 0",
+                "TimestampText": "10:14:07"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Third-party Spotlight suggestions disabled'.",
-                "TimestampText": "10:12:44"
+                "Message": "Applied preset 'Sleep option hidden'.",
+                "TimestampText": "10:14:07"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Third-party Spotlight suggestions disabled'.",
-                "TimestampText": "10:12:44"
+                "Message": "Verified preset 'Sleep option hidden'.",
+                "TimestampText": "10:14:07"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "10:12:44"
+                "TimestampText": "10:14:07"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T17:12:44.2692095+00:00",
-        "CompletedAtUtc": "2026-05-07T17:12:44.5579508+00:00"
+        "StartedAtUtc": "2026-05-07T17:14:04.3427484+00:00",
+        "CompletedAtUtc": "2026-05-07T17:14:07.5784602+00:00"
       },
-      "qa_tweak_id": "visibility.disable-spotlight-third-party",
-      "candidate_id": "visibility.disable-spotlight-third-party",
-      "card_name": "Third-Party Suggestions in Windows Spotlight",
-      "documentation": "research/records/visibility.disable-spotlight-third-party.json"
+      "qa_tweak_id": "power.hide-sleep-option",
+      "candidate_id": "power.hide-sleep-option",
+      "card_name": "Show Sleep Option",
+      "documentation": "research/records/power.hide-sleep-option.json"
     },
     {
-      "tweak_id": "visibility.disable-spotlight-welcome",
+      "tweak_id": "power.optimize-cpu-boost",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -890,19 +505,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "visibility.disable-spotlight-welcome",
-        "TweakName": "Windows Spotlight Welcome Experience",
+        "TweakId": "power.optimize-cpu-boost",
+        "TweakName": "Optimize CPU Performance Boost",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "visibility.disable-spotlight-welcome",
-          "Name": "Windows Spotlight Welcome Experience",
-          "Category": "Visibility",
-          "Description": "Windows can show a Spotlight-based welcome or introductory experience after updates or sign-in. This policy decides whether that welcome experience is allowed for the current user.",
-          "FriendlyDescription": "Windows can show a Spotlight-based welcome or introductory experience after updates or sign-in. This policy decides whether that welcome experience is allowed for the current user.",
-          "RegistryPath": "HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableWindowsSpotlightWindowsWelcomeExperience",
+          "TweakId": "power.optimize-cpu-boost",
+          "Name": "Optimize CPU Performance Boost",
+          "Category": "Power",
+          "Description": "This tweak uses the documented powercfg PERFBOOSTMODE surface to push the active power plan toward a more aggressive CPU boost profile.",
+          "FriendlyDescription": "This tweak uses the documented powercfg PERFBOOSTMODE surface to push the active power plan toward a more aggressive CPU boost profile.",
+          "RegistryPath": "",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -910,29 +525,29 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Windows can show a Spotlight-based welcome or introductory experience after updates or sign-in. This policy decides whether that welcome experience is allowed for the current user. Evidence: Local official ADMX defines the exact user-policy key and value name; local ADML confirms that enabling the policy suppresses the Windows Welcome Experience. Rollback: Rollback: Verified via record-restore-story.",
-          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
+          "WhatWeKnowSummary": "Claim: This tweak uses the documented powercfg PERFBOOSTMODE surface to push the active power plan toward a more aggressive CPU boost profile. Evidence: The guest reversible probe on Win25H2Clean confirmed the live surface on this build with BEFORE_AC=2, BEFORE_DC=2, AFTER_1_AC=1, AFTER_1_DC=1, AFTER_2_AC=2, AFTER_2_DC=2, RESTORED_AC=2, and RESTORED_DC=2. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeDoNotClaimSummary": "Source boundary: Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "Local official ADMX defines the exact user-policy key and value name; local ADML confirms that enabling the policy suppresses the Windows Welcome Experience.",
-              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/CloudContent.admx"
+              "Summary": "The guest reversible probe on Win25H2Clean confirmed the live surface on this build with BEFORE_AC=2, BEFORE_DC=2, AFTER_1_AC=1, AFTER_1_DC=1, AFTER_2_AC=2, AFTER_2_DC=2, RESTORED_AC=2, and RESTORED_DC=2.",
+              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows-hardware/customize/power-settings/options-for-perf-state-engine-perfboostmode"
             },
             {
               "Key": "runtime",
               "Label": "RUNTIME",
               "State": "ready",
-              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
-              "Source": ""
+              "Summary": "Win25H2Clean guest reversible probe confirmed BEFORE_AC=2, BEFORE_DC=2, AFTER_1_AC=1, AFTER_1_DC=1, AFTER_2_AC=2, AFTER_2_DC=2, RESTORED_AC=2, and RESTORED_DC=2.",
+              "Source": "Guest reversible probe for PERFBOOSTMODE: evidence/files/vm-tooling-staging/perfboostmode-transition-probe.txt"
             },
             {
               "Key": "source",
               "Label": "SOURCE",
               "State": "ready",
-              "Summary": "No upstream nohuto source link is attached to this record.",
-              "Source": ""
+              "Summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+              "Source": "win-config / power/desc.md: https://github.com/nohuto/win-config/blob/main/power/desc.md"
             },
             {
               "Key": "rollback",
@@ -944,13 +559,13 @@
           ],
           "ReferenceLinks": [
             {
-              "Title": "Docs: Details (missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
+              "Title": "Docs: Details",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html#power.optimize-cpu-boost",
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Visibility",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\visibility\\visibility.md#visibility.disable-spotlight-welcome",
+              "Title": "Docs: Power",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\power\\power.md#power.optimize-cpu-boost",
               "Kind": "Docs"
             }
           ]
@@ -958,11 +573,11 @@
         "Stages": [
           {
             "Stage": "detect-before",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Welcome experience disabled'.",
+            "AppliedStatus": "Applied",
+            "StatusMessage": "Current state: {\"AcValue\":2,\"DcValue\":2}",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Welcome experience disabled",
+            "CurrentValue": "{\"AcValue\":2,\"DcValue\":2}",
+            "TargetValue": "Optimized",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -970,9 +585,9 @@
             "Steps": [
               {
                 "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Welcome experience disabled'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableWindowsSpotlightWindowsWelcomeExperience: missing -> 1",
-                "TimestampText": "10:12:50"
+                "StatusText": "Applied",
+                "Message": "Current state: {\"AcValue\":2,\"DcValue\":2}",
+                "TimestampText": "10:14:16"
               },
               {
                 "Action": "Apply",
@@ -999,8 +614,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Welcome experience disabled",
-            "TargetValue": "Welcome experience disabled",
+            "CurrentValue": "Optimized",
+            "TargetValue": "Optimized",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1008,37 +623,37 @@
             "Steps": [
               {
                 "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Welcome experience disabled'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableWindowsSpotlightWindowsWelcomeExperience: missing -> 1",
-                "TimestampText": "10:12:50"
+                "StatusText": "Applied",
+                "Message": "Current state: {\"AcValue\":2,\"DcValue\":2}",
+                "TimestampText": "10:14:16"
               },
               {
                 "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Applied preset 'Welcome experience disabled'.",
-                "TimestampText": "10:12:50"
+                "StatusText": "Skipped",
+                "Message": "Already in the desired state.",
+                "TimestampText": "10:14:16"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Welcome experience disabled'.",
-                "TimestampText": "10:12:50"
+                "Message": "CPU performance boost mode is Aggressive for AC and DC power.",
+                "TimestampText": "10:14:16"
               },
               {
                 "Action": "Rollback",
-                "StatusText": "Not required",
-                "Message": "Step not executed.",
-                "TimestampText": "-"
+                "StatusText": "Skipped",
+                "Message": "No changes were made.",
+                "TimestampText": "10:14:16"
               }
             ]
           },
           {
             "Stage": "rollback",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Rolled back registry values.",
+            "StatusMessage": "Restored previous CPU performance boost mode values for the active power plan.",
             "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Welcome experience disabled",
+            "CurrentValue": "Optimized",
+            "TargetValue": "Optimized",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1046,37 +661,37 @@
             "Steps": [
               {
                 "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Welcome experience disabled'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableWindowsSpotlightWindowsWelcomeExperience: missing -> 1",
-                "TimestampText": "10:12:50"
+                "StatusText": "Applied",
+                "Message": "Current state: {\"AcValue\":2,\"DcValue\":2}",
+                "TimestampText": "10:14:16"
               },
               {
                 "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Applied preset 'Welcome experience disabled'.",
-                "TimestampText": "10:12:50"
+                "StatusText": "Skipped",
+                "Message": "Already in the desired state.",
+                "TimestampText": "10:14:16"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Welcome experience disabled'.",
-                "TimestampText": "10:12:50"
+                "Message": "CPU performance boost mode is Aggressive for AC and DC power.",
+                "TimestampText": "10:14:16"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "10:12:51"
+                "Message": "Restored previous CPU performance boost mode values for the active power plan.",
+                "TimestampText": "10:14:17"
               }
             ]
           },
           {
             "Stage": "detect-after",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Welcome experience disabled'.",
+            "AppliedStatus": "Applied",
+            "StatusMessage": "Current state: {\"AcValue\":2,\"DcValue\":2}",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Welcome experience disabled",
+            "CurrentValue": "{\"AcValue\":2,\"DcValue\":2}",
+            "TargetValue": "Optimized",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1084,41 +699,41 @@
             "Steps": [
               {
                 "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Welcome experience disabled'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableWindowsSpotlightWindowsWelcomeExperience: missing -> 1",
-                "TimestampText": "10:12:51"
+                "StatusText": "Applied",
+                "Message": "Current state: {\"AcValue\":2,\"DcValue\":2}",
+                "TimestampText": "10:14:17"
               },
               {
                 "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Applied preset 'Welcome experience disabled'.",
-                "TimestampText": "10:12:50"
+                "StatusText": "Skipped",
+                "Message": "Already in the desired state.",
+                "TimestampText": "10:14:16"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Welcome experience disabled'.",
-                "TimestampText": "10:12:50"
+                "Message": "CPU performance boost mode is Aggressive for AC and DC power.",
+                "TimestampText": "10:14:16"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "10:12:51"
+                "Message": "Restored previous CPU performance boost mode values for the active power plan.",
+                "TimestampText": "10:14:17"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T17:12:50.8341709+00:00",
-        "CompletedAtUtc": "2026-05-07T17:12:51.1190678+00:00"
+        "StartedAtUtc": "2026-05-07T17:14:13.9041353+00:00",
+        "CompletedAtUtc": "2026-05-07T17:14:17.3293917+00:00"
       },
-      "qa_tweak_id": "visibility.disable-spotlight-welcome",
-      "candidate_id": "visibility.disable-spotlight-welcome",
-      "card_name": "Windows Spotlight Welcome Experience",
-      "documentation": "research/records/visibility.disable-spotlight-welcome.json"
+      "qa_tweak_id": "power.optimize-cpu-boost",
+      "candidate_id": "power.optimize-cpu-boost",
+      "card_name": "Optimize CPU Performance Boost",
+      "documentation": "research/records/power.optimize-cpu-boost.json"
     },
     {
-      "tweak_id": "visibility.disable-wcn-wizards",
+      "tweak_id": "power.optimize-gaming-network",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -1155,19 +770,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "visibility.disable-wcn-wizards",
-        "TweakName": "Windows Connect Now Wizards",
+        "TweakId": "power.optimize-gaming-network",
+        "TweakName": "Games MMCSS Task Profile",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "visibility.disable-wcn-wizards",
-          "Name": "Windows Connect Now Wizards",
-          "Category": "Visibility",
-          "Description": "Windows Connect Now is an older wizard-based way to help set up some wireless routers and wireless devices. This policy decides whether those wizards are available.",
-          "FriendlyDescription": "Windows Connect Now is an older wizard-based way to help set up some wireless routers and wireless devices. This policy decides whether those wizards are available.",
-          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Windows\\WCN\\UI\\DisableWcnUi",
+          "TweakId": "power.optimize-gaming-network",
+          "Name": "Games MMCSS Task Profile",
+          "Category": "Power",
+          "Description": "Windows uses MMCSS to prioritize time-sensitive multimedia work. This tweak changes the built-in Games task profile to use more aggressive scheduling values.",
+          "FriendlyDescription": "Windows uses MMCSS to prioritize time-sensitive multimedia work. This tweak changes the built-in Games task profile to use more aggressive scheduling values.",
+          "RegistryPath": "",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -1175,29 +790,29 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Windows Connect Now is an older wizard-based way to help set up some wireless routers and wireless devices. This policy decides whether those wizards are available. Evidence: The local official Microsoft ADMX file names the same machine policy surface used by the app. The paired ADML help text states that enabling the setting turns off the Windows Connect Now wizards and disables related wizard tasks. Rollback: Rollback: Verified via record-restore-story.",
-          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
+          "WhatWeKnowSummary": "Claim: Windows uses MMCSS to prioritize time-sensitive multimedia work. This tweak changes the built-in Games task profile to use more aggressive scheduling values. Evidence: The VM export gives the current 25H2 Games-task baseline, while the Microsoft MMCSS page documents the same path and the allowed values for the fields the app writes. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeDoNotClaimSummary": "Source boundary: Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "The local official Microsoft ADMX file names the same machine policy surface used by the app. The paired ADML help text states that enabling the setting turns off the Windows Connect Now wizards and disables related wizard tasks.",
-              "Source": "Validation proof source: evidence/files/external/c/WINDOWS/PolicyDefinitions/WindowsConnectNow.admx"
+              "Summary": "The VM export gives the current 25H2 Games-task baseline, while the Microsoft MMCSS page documents the same path and the allowed values for the fields the app writes.",
+              "Source": "Validation proof source: evidence/files/vm-tooling-staging/registry-dumps/mmcss-games-task-20260325-031514/mmcss-games-task.txt"
             },
             {
               "Key": "runtime",
               "Label": "RUNTIME",
               "State": "ready",
-              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
-              "Source": ""
+              "Summary": "The current 25H2 VM baseline reads Priority=2, Scheduling Category=Medium, SFIO Priority=Normal, GPU Priority=8, and Affinity=0 under the built-in Games task.",
+              "Source": "Win25H2Clean export of the built-in Games MMCSS task: evidence/files/vm-tooling-staging/registry-dumps/mmcss-games-task-20260325-031514/mmcss-games-task.txt"
             },
             {
               "Key": "source",
               "Label": "SOURCE",
               "State": "ready",
-              "Summary": "No upstream nohuto source link is attached to this record.",
-              "Source": ""
+              "Summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+              "Source": "win-config / power/desc.md: https://github.com/nohuto/win-config/blob/main/power/desc.md"
             },
             {
               "Key": "rollback",
@@ -1209,13 +824,18 @@
           ],
           "ReferenceLinks": [
             {
-              "Title": "Docs: Details (missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
+              "Title": "Windows Internals resource page",
+              "Url": "https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals",
+              "Kind": "Docs"
+            },
+            {
+              "Title": "Docs: Details",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html#power.optimize-gaming-network",
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Visibility",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\visibility\\visibility.md#visibility.disable-wcn-wizards",
+              "Title": "Docs: Power",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\power\\power.md#power.optimize-gaming-network",
               "Kind": "Docs"
             }
           ]
@@ -1224,10 +844,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'WCN wizards blocked'.",
+            "StatusMessage": "Detected 5 of 5 values (matches: 2, missing: 0).",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "WCN wizards blocked",
+            "CurrentValue": "Unknown",
+            "TargetValue": "Multiple values",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -1236,8 +856,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'WCN wizards blocked'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\WCN\\UI\\DisableWcnUi: missing -> 1",
-                "TimestampText": "10:12:56"
+                "Message": "Detected 5 of 5 values (matches: 2, missing: 0).\nEntries:\n- HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games\\Affinity: 0 -> 0\n- HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games\\GPU Priority: 8 -> 8\n- HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games\\Priority: 2 -> 8\n- HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games\\Scheduling Category: Medium -> High\n- HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games\\SFIO Priority: Normal -> High",
+                "TimestampText": "10:14:23"
               },
               {
                 "Action": "Apply",
@@ -1264,8 +884,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "WCN wizards blocked",
-            "TargetValue": "WCN wizards blocked",
+            "CurrentValue": "Multiple values",
+            "TargetValue": "Multiple values",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1274,20 +894,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'WCN wizards blocked'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\WCN\\UI\\DisableWcnUi: missing -> 1",
-                "TimestampText": "10:12:56"
+                "Message": "Detected 5 of 5 values (matches: 2, missing: 0).\nEntries:\n- HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games\\Affinity: 0 -> 0\n- HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games\\GPU Priority: 8 -> 8\n- HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games\\Priority: 2 -> 8\n- HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games\\Scheduling Category: Medium -> High\n- HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games\\SFIO Priority: Normal -> High",
+                "TimestampText": "10:14:23"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'WCN wizards blocked'.",
-                "TimestampText": "10:12:59"
+                "Message": "Updated 5 values.",
+                "TimestampText": "10:14:26"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'WCN wizards blocked'.",
-                "TimestampText": "10:12:59"
+                "Message": "Verified desired values.",
+                "TimestampText": "10:14:26"
               },
               {
                 "Action": "Rollback",
@@ -1302,8 +922,8 @@
             "AppliedStatus": "NotApplied",
             "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "WCN wizards blocked",
+            "CurrentValue": "Multiple values",
+            "TargetValue": "Multiple values",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1312,36 +932,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'WCN wizards blocked'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\WCN\\UI\\DisableWcnUi: missing -> 1",
-                "TimestampText": "10:12:56"
+                "Message": "Detected 5 of 5 values (matches: 2, missing: 0).\nEntries:\n- HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games\\Affinity: 0 -> 0\n- HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games\\GPU Priority: 8 -> 8\n- HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games\\Priority: 2 -> 8\n- HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games\\Scheduling Category: Medium -> High\n- HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games\\SFIO Priority: Normal -> High",
+                "TimestampText": "10:14:23"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'WCN wizards blocked'.",
-                "TimestampText": "10:12:59"
+                "Message": "Updated 5 values.",
+                "TimestampText": "10:14:26"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'WCN wizards blocked'.",
-                "TimestampText": "10:12:59"
+                "Message": "Verified desired values.",
+                "TimestampText": "10:14:26"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "10:12:59"
+                "TimestampText": "10:14:26"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'WCN wizards blocked'.",
+            "StatusMessage": "Detected 5 of 5 values (matches: 2, missing: 0).",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "WCN wizards blocked",
+            "CurrentValue": "Multiple values",
+            "TargetValue": "Multiple values",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1350,311 +970,46 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'WCN wizards blocked'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\WCN\\UI\\DisableWcnUi: missing -> 1",
-                "TimestampText": "10:12:59"
+                "Message": "Detected 5 of 5 values (matches: 2, missing: 0).\nEntries:\n- HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games\\Affinity: 0 -> 0\n- HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games\\GPU Priority: 8 -> 8\n- HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games\\Priority: 2 -> 8\n- HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games\\Scheduling Category: Medium -> High\n- HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games\\SFIO Priority: Normal -> High",
+                "TimestampText": "10:14:26"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'WCN wizards blocked'.",
-                "TimestampText": "10:12:59"
+                "Message": "Updated 5 values.",
+                "TimestampText": "10:14:26"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'WCN wizards blocked'.",
-                "TimestampText": "10:12:59"
+                "Message": "Verified desired values.",
+                "TimestampText": "10:14:26"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "10:12:59"
+                "TimestampText": "10:14:26"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T17:12:56.3563935+00:00",
-        "CompletedAtUtc": "2026-05-07T17:12:59.5567564+00:00"
+        "StartedAtUtc": "2026-05-07T17:14:23.5570096+00:00",
+        "CompletedAtUtc": "2026-05-07T17:14:26.7762109+00:00"
       },
-      "qa_tweak_id": "visibility.disable-wcn-wizards",
-      "candidate_id": "visibility.disable-wcn-wizards",
-      "card_name": "Windows Connect Now Wizards",
-      "documentation": "research/records/visibility.disable-wcn-wizards.json"
-    },
-    {
-      "tweak_id": "visibility.disable-widgets",
-      "host_exit": 0,
-      "execution_exit": 0,
-      "payload_status": "completed",
-      "report_source": "stdout",
-      "report_parse_error": null,
-      "report_fetch_status": null,
-      "report_app_success": true,
-      "report_success": true,
-      "report_status": "ok",
-      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
-      "report_contract_status": "ok",
-      "report_contract_summary": "QA card snapshot contract passed.",
-      "report_contract_failures": [],
-      "report_card_present": true,
-      "report_card_has_claim_boundary": true,
-      "report_card_present_fields": [
-        "TweakId",
-        "Name",
-        "Category",
-        "EvidenceClass",
-        "ResearchStatus",
-        "RollbackSnapshotState",
-        "HasClaimBoundary",
-        "WhatWeKnowSummary",
-        "WhatWeDoNotClaimSummary",
-        "ProofLanes"
-      ],
-      "report_card_missing_fields": [],
-      "report_card_proof_lanes": [
-        "docs",
-        "runtime",
-        "source",
-        "rollback"
-      ],
-      "report_card_missing_proof_lanes": [],
-      "report": {
-        "TweakId": "visibility.disable-widgets",
-        "TweakName": "Widgets Feature",
-        "Success": true,
-        "Status": "ok",
-        "Summary": "Apply/verify path completed and rollback restored the tweak.",
-        "RollbackRequested": true,
-        "Card": {
-          "TweakId": "visibility.disable-widgets",
-          "Name": "Widgets Feature",
-          "Category": "Visibility",
-          "Description": "Windows Widgets can show a board with news, weather, and other feed content. This policy decides whether the Widgets feature is allowed on the device at all.",
-          "FriendlyDescription": "Windows Widgets can show a board with news, weather, and other feed content. This policy decides whether the Widgets feature is allowed on the device at all.",
-          "RegistryPath": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Dsh\\AllowNewsAndInterests",
-          "EvidenceClass": "A",
-          "EvidenceClassTitle": "Cross-Layer Verified",
-          "ResearchStatus": "PROMOTED",
-          "IsMutationAllowed": true,
-          "RollbackSnapshotState": "ready",
-          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
-          "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Windows Widgets can show a board with news, weather, and other feed content. This policy decides whether the Widgets feature is allowed on the device at all. Evidence: Local official ADMX defines the exact machine-policy key, value name, and 1/0 mapping; local ADML confirms this is the Widgets allow-form policy and documents its default behavior. Rollback: Rollback: Verified via record-restore-story.",
-          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
-          "ProofLanes": [
-            {
-              "Key": "docs",
-              "Label": "DOCS",
-              "State": "ready",
-              "Summary": "Local official ADMX defines the exact machine-policy key, value name, and 1/0 mapping; local ADML confirms this is the Widgets allow-form policy and documents its default behavior.",
-              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/NewsAndInterests.admx"
-            },
-            {
-              "Key": "runtime",
-              "Label": "RUNTIME",
-              "State": "ready",
-              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
-              "Source": ""
-            },
-            {
-              "Key": "source",
-              "Label": "SOURCE",
-              "State": "ready",
-              "Summary": "No upstream nohuto source link is attached to this record.",
-              "Source": ""
-            },
-            {
-              "Key": "rollback",
-              "Label": "ROLLBACK",
-              "State": "ready",
-              "Summary": "Rollback: Verified via record-restore-story.",
-              "Source": "record-restore-story"
-            }
-          ],
-          "ReferenceLinks": [
-            {
-              "Title": "Docs: Details (missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
-              "Kind": "Details"
-            },
-            {
-              "Title": "Docs: Visibility",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\visibility\\visibility.md#visibility.disable-widgets",
-              "Kind": "Docs"
-            }
-          ]
-        },
-        "Stages": [
-          {
-            "Stage": "detect-before",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Widgets blocked'.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Widgets blocked",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": false,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Widgets blocked'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Dsh\\AllowNewsAndInterests: missing -> 0",
-                "TimestampText": "10:13:06"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "apply",
-            "AppliedStatus": "Applied",
-            "StatusMessage": "Run completed.",
-            "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Widgets blocked",
-            "TargetValue": "Widgets blocked",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Widgets blocked'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Dsh\\AllowNewsAndInterests: missing -> 0",
-                "TimestampText": "10:13:06"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Applied preset 'Widgets blocked'.",
-                "TimestampText": "10:13:08"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified preset 'Widgets blocked'.",
-                "TimestampText": "10:13:08"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Not required",
-                "Message": "Step not executed.",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "rollback",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Rolled back registry values.",
-            "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Widgets blocked",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Widgets blocked'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Dsh\\AllowNewsAndInterests: missing -> 0",
-                "TimestampText": "10:13:06"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Applied preset 'Widgets blocked'.",
-                "TimestampText": "10:13:08"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified preset 'Widgets blocked'.",
-                "TimestampText": "10:13:08"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "10:13:08"
-              }
-            ]
-          },
-          {
-            "Stage": "detect-after",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Widgets blocked'.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Widgets blocked",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Widgets blocked'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Dsh\\AllowNewsAndInterests: missing -> 0",
-                "TimestampText": "10:13:09"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Applied preset 'Widgets blocked'.",
-                "TimestampText": "10:13:08"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified preset 'Widgets blocked'.",
-                "TimestampText": "10:13:08"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "10:13:08"
-              }
-            ]
-          }
-        ],
-        "StartedAtUtc": "2026-05-07T17:13:06.0006563+00:00",
-        "CompletedAtUtc": "2026-05-07T17:13:09.0935529+00:00"
-      },
-      "qa_tweak_id": "visibility.disable-widgets",
-      "candidate_id": "visibility.disable-widgets",
-      "card_name": "Widgets Feature",
-      "documentation": "research/records/visibility.disable-widgets.json"
+      "qa_tweak_id": "power.optimize-gaming-network",
+      "candidate_id": "power.optimize-gaming-network",
+      "card_name": "Games MMCSS Task Profile",
+      "documentation": "research/records/power.optimize-gaming-network.json"
     }
   ],
   "summary": {
-    "planned_count": 5,
-    "planned_apply_allowed_count": 5,
-    "live_success_count": 5,
+    "planned_count": 3,
+    "planned_apply_allowed_count": 3,
+    "live_success_count": 3,
     "live_failure_count": 0,
     "categories": [
-      "Visibility"
+      "Power"
     ]
   }
 }

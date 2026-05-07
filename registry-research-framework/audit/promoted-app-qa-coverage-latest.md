@@ -1,11 +1,11 @@
 # Promoted App QA Coverage
 
-- Generated UTC: 2026-05-07T17:12:35Z
-- History entries: 64
+- Generated UTC: 2026-05-07T17:14:00Z
+- History entries: 65
 - Promoted app-QA candidates: 242
-- Covered: 193
-- Uncovered: 49
-- Coverage: 79.75%
+- Covered: 196
+- Uncovered: 46
+- Coverage: 80.99%
 
 ## Covered Categories
 
@@ -17,7 +17,7 @@
 - Notifications: 5
 - Performance: 3
 - Peripheral: 3
-- Power: 7
+- Power: 10
 - Privacy: 48
 - Security: 17
 - System: 41
@@ -28,7 +28,6 @@
 - Developer: 2
 - Explorer: 4
 - Network: 4
-- Power: 3
 - Privacy: 19
 - Security: 4
 - System: 11
@@ -36,9 +35,6 @@
 
 ## Recommended Next Batches
 
-- Power: 3 uncovered cards | coverage 70.0%
-  command: `dotnet run --project cli/cli.csproj -- research qa-batch --id power.hide-sleep-option --id power.optimize-cpu-boost --id power.optimize-gaming-network`
-  live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id power.hide-sleep-option --id power.optimize-cpu-boost --id power.optimize-gaming-network --run-kvm --json`
 - Privacy: 5 uncovered cards | coverage 71.64%
   command: `dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-rsop-logging --id privacy.disable-search-box-suggestions --id privacy.disable-sensors --id privacy.disable-steps-recorder --id privacy.disable-suggestions.policy`
   live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-rsop-logging --id privacy.disable-search-box-suggestions --id privacy.disable-sensors --id privacy.disable-steps-recorder --id privacy.disable-suggestions.policy --run-kvm --json`
@@ -51,6 +47,9 @@
 - System: 5 uncovered cards | coverage 78.85%
   command: `dotnet run --project cli/cli.csproj -- research qa-batch --id system.priority-control --id system.reliability-timestamp-enabled --id system.services.disable-bluetooth-audio-gateway --id system.services.disable-bluetooth-support --id system.services.disable-bluetooth-user-service`
   live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id system.priority-control --id system.reliability-timestamp-enabled --id system.services.disable-bluetooth-audio-gateway --id system.services.disable-bluetooth-support --id system.services.disable-bluetooth-user-service --run-kvm --json`
+- Security: 4 uncovered cards | coverage 80.95%
+  command: `dotnet run --project cli/cli.csproj -- research qa-batch --id security.powershell-unrestricted --id security.threat-file-hash-logging --id security.trusted-path-credential-prompting --id security.uac-never-notify`
+  live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id security.powershell-unrestricted --id security.threat-file-hash-logging --id security.trusted-path-credential-prompting --id security.uac-never-notify --run-kvm --json`
 
 ## Remaining Uncovered Sample
 
@@ -64,9 +63,6 @@
 - `network.smb-require-signing-client` | SMB Client Signing Requirement | Network
 - `network.smb-require-signing-server` | SMB Server Signing Requirement | Network
 - `network.smb-set-cipher-suite-order` | SMB Cipher Suite Order | Network
-- `power.hide-sleep-option` | Show Sleep Option | Power
-- `power.optimize-cpu-boost` | Optimize CPU Performance Boost | Power
-- `power.optimize-gaming-network` | Games MMCSS Task Profile | Power
 - `privacy.disable-rsop-logging` | Resultant Set of Policy Logging | Privacy
 - `privacy.disable-search-box-suggestions` | File Explorer Search Box Suggestions | Privacy
 - `privacy.disable-sensors` | Windows Sensors | Privacy
@@ -74,3 +70,6 @@
 - `privacy.disable-suggestions.policy` | Windows Suggestion Surfaces Policy Group | Privacy
 - `privacy.disable-switchback.policy` | Disable SwitchBack Compatibility Policy | Privacy
 - `privacy.disable-telemetry-change-notifications` | Diagnostic Data Change Notifications | Privacy
+- `privacy.disable-telemetry-optin-ui` | Diagnostic Data Opt-In Settings UI | Privacy
+- `privacy.disable-wer` | Windows Error Reporting | Privacy
+- `privacy.disable-windows-location-provider` | Windows Location Provider | Privacy
