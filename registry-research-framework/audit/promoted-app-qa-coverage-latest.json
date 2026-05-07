@@ -1,11 +1,11 @@
 {
-  "generated_utc": "2026-05-07T18:09:47Z",
-  "history_entry_count": 82,
+  "generated_utc": "2026-05-07T18:11:28Z",
+  "history_entry_count": 83,
   "catalog_candidate_count": 242,
-  "covered_count": 230,
-  "uncovered_count": 12,
+  "covered_count": 235,
+  "uncovered_count": 7,
   "summary": {
-    "coverage_percent": 95.04,
+    "coverage_percent": 97.11,
     "covered_categories": {
       "Audio": 3,
       "Cleanup": 1,
@@ -18,69 +18,16 @@
       "Power": 10,
       "Privacy": 63,
       "Security": 21,
-      "System": 46,
+      "System": 51,
       "Visibility": 21
     },
     "uncovered_categories": {
       "Privacy": 4,
-      "System": 6,
+      "System": 1,
       "Visibility": 2
     }
   },
   "recommended_next_batches": [
-    {
-      "category": "System",
-      "covered_count": 46,
-      "uncovered_count": 6,
-      "coverage_percent": 88.46,
-      "batch_size": 5,
-      "tweak_ids": [
-        "system.services.disable-connected-user-experiences",
-        "system.services.disable-print-notifications",
-        "system.services.disable-print-spooler",
-        "system.services.disable-windows-search",
-        "system.verbose-status-messages"
-      ],
-      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id system.services.disable-connected-user-experiences --id system.services.disable-print-notifications --id system.services.disable-print-spooler --id system.services.disable-windows-search --id system.verbose-status-messages",
-      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id system.services.disable-connected-user-experiences --id system.services.disable-print-notifications --id system.services.disable-print-spooler --id system.services.disable-windows-search --id system.verbose-status-messages --run-kvm --json",
-      "candidates": [
-        {
-          "tweak_id": "system.services.disable-connected-user-experiences",
-          "record_id": "system.services.disable-connected-user-experiences",
-          "category": "System",
-          "name": "Connected User Experiences and Telemetry Service",
-          "documentation": "research/records/system.services.disable-connected-user-experiences.json"
-        },
-        {
-          "tweak_id": "system.services.disable-print-notifications",
-          "record_id": "system.services.disable-print-notifications",
-          "category": "System",
-          "name": "Print Notification Service",
-          "documentation": "research/records/system.services.disable-print-notifications.json"
-        },
-        {
-          "tweak_id": "system.services.disable-print-spooler",
-          "record_id": "system.services.disable-print-spooler",
-          "category": "System",
-          "name": "Print Spooler Service",
-          "documentation": "research/records/system.services.disable-print-spooler.json"
-        },
-        {
-          "tweak_id": "system.services.disable-windows-search",
-          "record_id": "system.services.disable-windows-search",
-          "category": "System",
-          "name": "Windows Search Service",
-          "documentation": "research/records/system.services.disable-windows-search.json"
-        },
-        {
-          "tweak_id": "system.verbose-status-messages",
-          "record_id": "system.verbose-status-messages",
-          "category": "System",
-          "name": "Verbose Status Messages",
-          "documentation": "research/records/system.verbose-status-messages.json"
-        }
-      ]
-    },
     {
       "category": "Visibility",
       "covered_count": 21,
@@ -152,6 +99,27 @@
           "category": "Privacy",
           "name": "Recommended Troubleshooting for Known Problems",
           "documentation": "research/records/privacy.troubleshooter-dont-run.review.json"
+        }
+      ]
+    },
+    {
+      "category": "System",
+      "covered_count": 51,
+      "uncovered_count": 1,
+      "coverage_percent": 98.08,
+      "batch_size": 1,
+      "tweak_ids": [
+        "system.wait-to-kill-service-timeout"
+      ],
+      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id system.wait-to-kill-service-timeout",
+      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id system.wait-to-kill-service-timeout --run-kvm --json",
+      "candidates": [
+        {
+          "tweak_id": "system.wait-to-kill-service-timeout",
+          "record_id": "system.wait-to-kill-service-timeout",
+          "category": "System",
+          "name": "Service Shutdown Timeout",
+          "documentation": "research/records/system.wait-to-kill-service-timeout.review.json"
         }
       ]
     }
@@ -2039,6 +2007,51 @@
       "latest_report_status": "ok"
     },
     {
+      "tweak_id": "system.services.disable-connected-user-experiences",
+      "qa_tweak_id": "system.services.disable-connected-user-experiences",
+      "candidate_id": "system.services.disable-connected-user-experiences",
+      "category": "System",
+      "name": "Connected User Experiences and Telemetry Service",
+      "documentation": "research/records/system.services.disable-connected-user-experiences.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "system.services.disable-print-notifications",
+      "qa_tweak_id": "system.services.disable-print-notifications",
+      "candidate_id": "system.services.disable-print-notifications",
+      "category": "System",
+      "name": "Print Notification Service",
+      "documentation": "research/records/system.services.disable-print-notifications.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "system.services.disable-print-spooler",
+      "qa_tweak_id": "system.services.disable-print-spooler",
+      "candidate_id": "system.services.disable-print-spooler",
+      "category": "System",
+      "name": "Print Spooler Service",
+      "documentation": "research/records/system.services.disable-print-spooler.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "system.services.disable-windows-search",
+      "qa_tweak_id": "system.services.disable-windows-search",
+      "candidate_id": "system.services.disable-windows-search",
+      "category": "System",
+      "name": "Windows Search Service",
+      "documentation": "research/records/system.services.disable-windows-search.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "system.verbose-status-messages",
+      "qa_tweak_id": "system.verbose-status-messages",
+      "candidate_id": "system.verbose-status-messages",
+      "category": "System",
+      "name": "Verbose Status Messages",
+      "documentation": "research/records/system.verbose-status-messages.json",
+      "latest_report_status": "ok"
+    },
+    {
       "tweak_id": "visibility.default-account-picture",
       "qa_tweak_id": "visibility.default-account-picture",
       "candidate_id": "visibility.default-account-picture",
@@ -2256,41 +2269,6 @@
       "category": "Privacy",
       "name": "Recommended Troubleshooting for Known Problems",
       "documentation": "research/records/privacy.troubleshooter-dont-run.review.json"
-    },
-    {
-      "tweak_id": "system.services.disable-connected-user-experiences",
-      "record_id": "system.services.disable-connected-user-experiences",
-      "category": "System",
-      "name": "Connected User Experiences and Telemetry Service",
-      "documentation": "research/records/system.services.disable-connected-user-experiences.json"
-    },
-    {
-      "tweak_id": "system.services.disable-print-notifications",
-      "record_id": "system.services.disable-print-notifications",
-      "category": "System",
-      "name": "Print Notification Service",
-      "documentation": "research/records/system.services.disable-print-notifications.json"
-    },
-    {
-      "tweak_id": "system.services.disable-print-spooler",
-      "record_id": "system.services.disable-print-spooler",
-      "category": "System",
-      "name": "Print Spooler Service",
-      "documentation": "research/records/system.services.disable-print-spooler.json"
-    },
-    {
-      "tweak_id": "system.services.disable-windows-search",
-      "record_id": "system.services.disable-windows-search",
-      "category": "System",
-      "name": "Windows Search Service",
-      "documentation": "research/records/system.services.disable-windows-search.json"
-    },
-    {
-      "tweak_id": "system.verbose-status-messages",
-      "record_id": "system.verbose-status-messages",
-      "category": "System",
-      "name": "Verbose Status Messages",
-      "documentation": "research/records/system.verbose-status-messages.json"
     },
     {
       "tweak_id": "system.wait-to-kill-service-timeout",

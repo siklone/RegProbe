@@ -1,13 +1,13 @@
 {
-  "generated_utc": "2026-05-07T18:09:47Z",
+  "generated_utc": "2026-05-07T18:11:28Z",
   "status": "PASS",
   "selection": {
     "requested_ids": [
-      "privacy.disable-windows-tips",
-      "privacy.hide-last-logged-in-user",
-      "privacy.hide-recommended-personalized-sites",
-      "privacy.hide-recommended-personalized-sites-user",
-      "privacy.hide-recommended-section"
+      "system.services.disable-connected-user-experiences",
+      "system.services.disable-print-notifications",
+      "system.services.disable-print-spooler",
+      "system.services.disable-windows-search",
+      "system.verbose-status-messages"
     ],
     "requested_categories": [],
     "limit_per_category": 1,
@@ -26,25 +26,25 @@
   "errors": [],
   "candidates": [
     {
-      "tweak_id": "privacy.disable-windows-tips",
-      "qa_tweak_id": "privacy.disable-windows-tips",
-      "candidate_id": "privacy.disable-windows-tips",
-      "record_id": "privacy.disable-windows-tips",
-      "category": "Privacy",
-      "name": "Turn Off Windows Tips",
-      "documentation": "research/records/privacy.disable-windows-tips.review.json",
+      "tweak_id": "system.services.disable-connected-user-experiences",
+      "qa_tweak_id": "system.services.disable-connected-user-experiences",
+      "candidate_id": "system.services.disable-connected-user-experiences",
+      "record_id": "system.services.disable-connected-user-experiences",
+      "category": "System",
+      "name": "Connected User Experiences and Telemetry Service",
+      "documentation": "research/records/system.services.disable-connected-user-experiences.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.disable-windows-tips",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect system.services.disable-connected-user-experiences",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-windows-tips' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-windows-tips.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-windows-tips' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-windows-tips.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-windows-tips' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-windows-tips.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-windows-tips' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-windows-tips.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.disable-windows-tips'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.services.disable-connected-user-experiences' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.services.disable-connected-user-experiences.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.services.disable-connected-user-experiences' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.services.disable-connected-user-experiences.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.services.disable-connected-user-experiences' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.services.disable-connected-user-experiences.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.services.disable-connected-user-experiences' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.services.disable-connected-user-experiences.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'system.services.disable-connected-user-experiences'"
       },
       "expected_report": {
         "success": true,
@@ -85,25 +85,25 @@
       }
     },
     {
-      "tweak_id": "privacy.hide-last-logged-in-user",
-      "qa_tweak_id": "privacy.hide-last-logged-in-user",
-      "candidate_id": "privacy.hide-last-logged-in-user",
-      "record_id": "privacy.hide-last-logged-in-user",
-      "category": "Privacy",
-      "name": "Display of the Last Signed-In Username",
-      "documentation": "research/records/privacy.hide-last-logged-in-user.json",
+      "tweak_id": "system.services.disable-print-notifications",
+      "qa_tweak_id": "system.services.disable-print-notifications",
+      "candidate_id": "system.services.disable-print-notifications",
+      "record_id": "system.services.disable-print-notifications",
+      "category": "System",
+      "name": "Print Notification Service",
+      "documentation": "research/records/system.services.disable-print-notifications.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.hide-last-logged-in-user",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect system.services.disable-print-notifications",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.hide-last-logged-in-user' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.hide-last-logged-in-user.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.hide-last-logged-in-user' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.hide-last-logged-in-user.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.hide-last-logged-in-user' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.hide-last-logged-in-user.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.hide-last-logged-in-user' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.hide-last-logged-in-user.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.hide-last-logged-in-user'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.services.disable-print-notifications' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.services.disable-print-notifications.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.services.disable-print-notifications' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.services.disable-print-notifications.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.services.disable-print-notifications' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.services.disable-print-notifications.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.services.disable-print-notifications' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.services.disable-print-notifications.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'system.services.disable-print-notifications'"
       },
       "expected_report": {
         "success": true,
@@ -144,25 +144,25 @@
       }
     },
     {
-      "tweak_id": "privacy.hide-recommended-personalized-sites",
-      "qa_tweak_id": "privacy.hide-recommended-personalized-sites",
-      "candidate_id": "privacy.hide-recommended-personalized-sites",
-      "record_id": "privacy.hide-recommended-personalized-sites",
-      "category": "Privacy",
-      "name": "Start Personalized Site Recommendations",
-      "documentation": "research/records/privacy.hide-recommended-personalized-sites.json",
+      "tweak_id": "system.services.disable-print-spooler",
+      "qa_tweak_id": "system.services.disable-print-spooler",
+      "candidate_id": "system.services.disable-print-spooler",
+      "record_id": "system.services.disable-print-spooler",
+      "category": "System",
+      "name": "Print Spooler Service",
+      "documentation": "research/records/system.services.disable-print-spooler.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.hide-recommended-personalized-sites",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect system.services.disable-print-spooler",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.hide-recommended-personalized-sites' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.hide-recommended-personalized-sites.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.hide-recommended-personalized-sites' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.hide-recommended-personalized-sites.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.hide-recommended-personalized-sites' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.hide-recommended-personalized-sites.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.hide-recommended-personalized-sites' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.hide-recommended-personalized-sites.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.hide-recommended-personalized-sites'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.services.disable-print-spooler' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.services.disable-print-spooler.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.services.disable-print-spooler' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.services.disable-print-spooler.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.services.disable-print-spooler' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.services.disable-print-spooler.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.services.disable-print-spooler' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.services.disable-print-spooler.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'system.services.disable-print-spooler'"
       },
       "expected_report": {
         "success": true,
@@ -203,25 +203,25 @@
       }
     },
     {
-      "tweak_id": "privacy.hide-recommended-personalized-sites-user",
-      "qa_tweak_id": "privacy.hide-recommended-personalized-sites-user",
-      "candidate_id": "privacy.hide-recommended-personalized-sites-user",
-      "record_id": "privacy.hide-recommended-personalized-sites-user",
-      "category": "Privacy",
-      "name": "Start Personalized Site Recommendations (Current User)",
-      "documentation": "research/records/privacy.hide-recommended-personalized-sites-user.json",
+      "tweak_id": "system.services.disable-windows-search",
+      "qa_tweak_id": "system.services.disable-windows-search",
+      "candidate_id": "system.services.disable-windows-search",
+      "record_id": "system.services.disable-windows-search",
+      "category": "System",
+      "name": "Windows Search Service",
+      "documentation": "research/records/system.services.disable-windows-search.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.hide-recommended-personalized-sites-user",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect system.services.disable-windows-search",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.hide-recommended-personalized-sites-user' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.hide-recommended-personalized-sites-user.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.hide-recommended-personalized-sites-user' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.hide-recommended-personalized-sites-user.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.hide-recommended-personalized-sites-user' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.hide-recommended-personalized-sites-user.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.hide-recommended-personalized-sites-user' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.hide-recommended-personalized-sites-user.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.hide-recommended-personalized-sites-user'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.services.disable-windows-search' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.services.disable-windows-search.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.services.disable-windows-search' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.services.disable-windows-search.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.services.disable-windows-search' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.services.disable-windows-search.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.services.disable-windows-search' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.services.disable-windows-search.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'system.services.disable-windows-search'"
       },
       "expected_report": {
         "success": true,
@@ -262,25 +262,25 @@
       }
     },
     {
-      "tweak_id": "privacy.hide-recommended-section",
-      "qa_tweak_id": "privacy.hide-recommended-section",
-      "candidate_id": "privacy.hide-recommended-section",
-      "record_id": "privacy.hide-recommended-section",
-      "category": "Privacy",
-      "name": "Start Menu Recommended Section",
-      "documentation": "research/records/privacy.hide-recommended-section.json",
+      "tweak_id": "system.verbose-status-messages",
+      "qa_tweak_id": "system.verbose-status-messages",
+      "candidate_id": "system.verbose-status-messages",
+      "record_id": "system.verbose-status-messages",
+      "category": "System",
+      "name": "Verbose Status Messages",
+      "documentation": "research/records/system.verbose-status-messages.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.hide-recommended-section",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect system.verbose-status-messages",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.hide-recommended-section' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.hide-recommended-section.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.hide-recommended-section' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.hide-recommended-section.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.hide-recommended-section' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.hide-recommended-section.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.hide-recommended-section' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.hide-recommended-section.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.hide-recommended-section'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.verbose-status-messages' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.verbose-status-messages.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.verbose-status-messages' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.verbose-status-messages.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.verbose-status-messages' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.verbose-status-messages.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.verbose-status-messages' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.verbose-status-messages.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'system.verbose-status-messages'"
       },
       "expected_report": {
         "success": true,
@@ -323,7 +323,7 @@
   ],
   "run_results": [
     {
-      "tweak_id": "privacy.disable-windows-tips",
+      "tweak_id": "system.services.disable-connected-user-experiences",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -360,19 +360,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "privacy.disable-windows-tips",
-        "TweakName": "Turn Off Windows Tips",
+        "TweakId": "system.services.disable-connected-user-experiences",
+        "TweakName": "Connected User Experiences and Telemetry Service",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "privacy.disable-windows-tips",
-          "Name": "Turn Off Windows Tips",
-          "Category": "Privacy",
-          "Description": "Windows can show popups and onboarding tips that explain features and suggest ways to use the system. People often turn them off when they want a quieter desktop experience.",
-          "FriendlyDescription": "Windows can show popups and onboarding tips that explain features and suggest ways to use the system. People often turn them off when they want a quieter desktop experience.",
-          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableSoftLanding",
+          "TweakId": "system.services.disable-connected-user-experiences",
+          "Name": "Connected User Experiences and Telemetry Service",
+          "Category": "System",
+          "Description": "This service handles Windows telemetry and connected-user-experience data collection. Disabling it reduces diagnostic and usage reporting, but some connected-experience features can lose functionality.",
+          "FriendlyDescription": "This service handles Windows telemetry and connected-user-experience data collection. Disabling it reduces diagnostic and usage reporting, but some connected-experience features can lose functionality.",
+          "RegistryPath": "",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -380,15 +380,15 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Windows can show popups and onboarding tips that explain features and suggest ways to use the system. People often turn them off when they want a quieter desktop experience. Evidence: The provider now writes HKLM\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableSoftLanding = 1. The older HKCU ContentDeliveryManager value remains documented only as an observed historical mapping. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: This service handles Windows telemetry and connected-user-experience data collection. Disabling it reduces diagnostic and usage reporting, but some connected-experience features can lose functionality. Evidence: The Microsoft services guidance page explicitly lists the DiagTrack service, its Automatic baseline, its telemetry role, and that it is OK to disable. Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "The provider now writes HKLM\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableSoftLanding = 1. The older HKCU ContentDeliveryManager value remains documented only as an observed historical mapping.",
-              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowwindowstips"
+              "Summary": "The Microsoft services guidance page explicitly lists the DiagTrack service, its Automatic baseline, its telemetry role, and that it is OK to disable.",
+              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services"
             },
             {
               "Key": "runtime",
@@ -419,8 +419,8 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Privacy (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\privacy\\privacy-verified.md",
+              "Title": "Docs: System (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\system\\system.md",
               "Kind": "Docs"
             }
           ]
@@ -429,10 +429,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Tips turned off by policy'.",
+            "StatusMessage": "Detected 1 of 1 services. Current state: Automatic.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Tips turned off by policy",
+            "CurrentValue": "Automatic",
+            "TargetValue": "Disabled",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -441,8 +441,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Tips turned off by policy'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableSoftLanding: missing -> 1",
-                "TimestampText": "11:09:51"
+                "Message": "Detected 1 of 1 services. Current state: Automatic.\nServices:\n- DiagTrack: Automatic (Running) -> Disabled",
+                "TimestampText": "11:11:36"
               },
               {
                 "Action": "Apply",
@@ -469,8 +469,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Tips turned off by policy",
-            "TargetValue": "Tips turned off by policy",
+            "CurrentValue": "Disabled",
+            "TargetValue": "Disabled",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -479,20 +479,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Tips turned off by policy'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableSoftLanding: missing -> 1",
-                "TimestampText": "11:09:51"
+                "Message": "Detected 1 of 1 services. Current state: Automatic.\nServices:\n- DiagTrack: Automatic (Running) -> Disabled",
+                "TimestampText": "11:11:36"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Tips turned off by policy'.",
-                "TimestampText": "11:09:54"
+                "Message": "Updated 1 services.",
+                "TimestampText": "11:11:36"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Tips turned off by policy'.",
-                "TimestampText": "11:09:54"
+                "Message": "Verified service start modes.",
+                "TimestampText": "11:11:36"
               },
               {
                 "Action": "Rollback",
@@ -505,10 +505,10 @@
           {
             "Stage": "rollback",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Rolled back registry values.",
+            "StatusMessage": "Rolled back service start modes.",
             "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Tips turned off by policy",
+            "CurrentValue": "Disabled",
+            "TargetValue": "Disabled",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -517,36 +517,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Tips turned off by policy'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableSoftLanding: missing -> 1",
-                "TimestampText": "11:09:51"
+                "Message": "Detected 1 of 1 services. Current state: Automatic.\nServices:\n- DiagTrack: Automatic (Running) -> Disabled",
+                "TimestampText": "11:11:36"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Tips turned off by policy'.",
-                "TimestampText": "11:09:54"
+                "Message": "Updated 1 services.",
+                "TimestampText": "11:11:36"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Tips turned off by policy'.",
-                "TimestampText": "11:09:54"
+                "Message": "Verified service start modes.",
+                "TimestampText": "11:11:36"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "11:09:54"
+                "Message": "Rolled back service start modes.",
+                "TimestampText": "11:11:36"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Tips turned off by policy'.",
+            "StatusMessage": "Detected 1 of 1 services. Current state: Automatic.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Tips turned off by policy",
+            "CurrentValue": "Automatic",
+            "TargetValue": "Disabled",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -555,40 +555,40 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Tips turned off by policy'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableSoftLanding: missing -> 1",
-                "TimestampText": "11:09:54"
+                "Message": "Detected 1 of 1 services. Current state: Automatic.\nServices:\n- DiagTrack: Automatic (Running) -> Disabled",
+                "TimestampText": "11:11:36"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Tips turned off by policy'.",
-                "TimestampText": "11:09:54"
+                "Message": "Updated 1 services.",
+                "TimestampText": "11:11:36"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Tips turned off by policy'.",
-                "TimestampText": "11:09:54"
+                "Message": "Verified service start modes.",
+                "TimestampText": "11:11:36"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "11:09:54"
+                "Message": "Rolled back service start modes.",
+                "TimestampText": "11:11:36"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T18:09:51.8431964+00:00",
-        "CompletedAtUtc": "2026-05-07T18:09:55.0202312+00:00"
+        "StartedAtUtc": "2026-05-07T18:11:33.1192808+00:00",
+        "CompletedAtUtc": "2026-05-07T18:11:36.9543541+00:00"
       },
-      "qa_tweak_id": "privacy.disable-windows-tips",
-      "candidate_id": "privacy.disable-windows-tips",
-      "card_name": "Turn Off Windows Tips",
-      "documentation": "research/records/privacy.disable-windows-tips.review.json"
+      "qa_tweak_id": "system.services.disable-connected-user-experiences",
+      "candidate_id": "system.services.disable-connected-user-experiences",
+      "card_name": "Connected User Experiences and Telemetry Service",
+      "documentation": "research/records/system.services.disable-connected-user-experiences.json"
     },
     {
-      "tweak_id": "privacy.hide-last-logged-in-user",
+      "tweak_id": "system.services.disable-print-notifications",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -625,19 +625,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "privacy.hide-last-logged-in-user",
-        "TweakName": "Display of the Last Signed-In Username",
+        "TweakId": "system.services.disable-print-notifications",
+        "TweakName": "Print Notification Service",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "privacy.hide-last-logged-in-user",
-          "Name": "Display of the Last Signed-In Username",
-          "Category": "Privacy",
-          "Description": "Windows can show the name of the last person who signed in on the sign-in screen. This setting decides whether that username is shown or hidden.",
-          "FriendlyDescription": "Windows can show the name of the last person who signed in on the sign-in screen. This setting decides whether that username is shown or hidden.",
-          "RegistryPath": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\DontDisplayLastUserName",
+          "TweakId": "system.services.disable-print-notifications",
+          "Name": "Print Notification Service",
+          "Category": "System",
+          "Description": "This service opens custom printer dialogs and handles printer notifications. Disabling it removes those printer notifications and related extension dialogs.",
+          "FriendlyDescription": "This service opens custom printer dialogs and handles printer notifications. Disabling it removes those printer notifications and related extension dialogs.",
+          "RegistryPath": "",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -645,15 +645,15 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Windows can show the name of the last person who signed in on the sign-in screen. This setting decides whether that username is shown or hidden. Evidence: The local official Windows security metadata maps the security option directly to Policies/System/DontDisplayLastUserName. evidence/files/external/c/Windows/inf/defltbase.inf.md also confirms the default value 0, and Microsoft documents the enabled behavior... Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: This service opens custom printer dialogs and handles printer notifications. Disabling it removes those printer notifications and related extension dialogs. Evidence: The Microsoft services guidance page lists the PrintNotify service under Printer Extensions and Notifications, gives its Manual baseline, describes the effect of turning it off, and marks it OK to disable. Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "The local official Windows security metadata maps the security option directly to Policies/System/DontDisplayLastUserName. evidence/files/external/c/Windows/inf/defltbase.inf.md also confirms the default value 0, and Microsoft documents the enabled behavior...",
-              "Source": "Validation proof source: evidence/files/external/c/Windows/inf/sceregvl.inf.md"
+              "Summary": "The Microsoft services guidance page lists the PrintNotify service under Printer Extensions and Notifications, gives its Manual baseline, describes the effect of turning it off, and marks it OK to disable.",
+              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services"
             },
             {
               "Key": "runtime",
@@ -684,8 +684,8 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Privacy (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\privacy\\privacy-verified.md",
+              "Title": "Docs: System (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\system\\system.md",
               "Kind": "Docs"
             }
           ]
@@ -694,10 +694,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current option is 'Show the last signed-in username'. Selected option is 'Hide the last signed-in username'.",
+            "StatusMessage": "Detected 1 of 1 services. Current state: Manual.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Show the last signed-in username",
-            "TargetValue": "Hide the last signed-in username",
+            "CurrentValue": "Manual",
+            "TargetValue": "Disabled",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -706,8 +706,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current option is 'Show the last signed-in username'. Selected option is 'Hide the last signed-in username'.\nEntries:\n- HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\DontDisplayLastUserName: 0 -> 1",
-                "TimestampText": "11:10:01"
+                "Message": "Detected 1 of 1 services. Current state: Manual.\nServices:\n- PrintNotify: Manual (Stopped) -> Disabled",
+                "TimestampText": "11:11:45"
               },
               {
                 "Action": "Apply",
@@ -734,8 +734,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Hide the last signed-in username",
-            "TargetValue": "Hide the last signed-in username",
+            "CurrentValue": "Disabled",
+            "TargetValue": "Disabled",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -744,20 +744,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current option is 'Show the last signed-in username'. Selected option is 'Hide the last signed-in username'.\nEntries:\n- HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\DontDisplayLastUserName: 0 -> 1",
-                "TimestampText": "11:10:01"
+                "Message": "Detected 1 of 1 services. Current state: Manual.\nServices:\n- PrintNotify: Manual (Stopped) -> Disabled",
+                "TimestampText": "11:11:45"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Hide the last signed-in username'.",
-                "TimestampText": "11:10:03"
+                "Message": "Updated 1 services.",
+                "TimestampText": "11:11:45"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Hide the last signed-in username'.",
-                "TimestampText": "11:10:03"
+                "Message": "Verified service start modes.",
+                "TimestampText": "11:11:45"
               },
               {
                 "Action": "Rollback",
@@ -770,10 +770,10 @@
           {
             "Stage": "rollback",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Rolled back registry values.",
+            "StatusMessage": "Rolled back service start modes.",
             "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Show the last signed-in username",
-            "TargetValue": "Hide the last signed-in username",
+            "CurrentValue": "Disabled",
+            "TargetValue": "Disabled",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -782,36 +782,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current option is 'Show the last signed-in username'. Selected option is 'Hide the last signed-in username'.\nEntries:\n- HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\DontDisplayLastUserName: 0 -> 1",
-                "TimestampText": "11:10:01"
+                "Message": "Detected 1 of 1 services. Current state: Manual.\nServices:\n- PrintNotify: Manual (Stopped) -> Disabled",
+                "TimestampText": "11:11:45"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Hide the last signed-in username'.",
-                "TimestampText": "11:10:03"
+                "Message": "Updated 1 services.",
+                "TimestampText": "11:11:45"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Hide the last signed-in username'.",
-                "TimestampText": "11:10:03"
+                "Message": "Verified service start modes.",
+                "TimestampText": "11:11:45"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "11:10:04"
+                "Message": "Rolled back service start modes.",
+                "TimestampText": "11:11:45"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current option is 'Show the last signed-in username'. Selected option is 'Hide the last signed-in username'.",
+            "StatusMessage": "Detected 1 of 1 services. Current state: Manual.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Show the last signed-in username",
-            "TargetValue": "Hide the last signed-in username",
+            "CurrentValue": "Manual",
+            "TargetValue": "Disabled",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -820,40 +820,40 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current option is 'Show the last signed-in username'. Selected option is 'Hide the last signed-in username'.\nEntries:\n- HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\DontDisplayLastUserName: 0 -> 1",
-                "TimestampText": "11:10:04"
+                "Message": "Detected 1 of 1 services. Current state: Manual.\nServices:\n- PrintNotify: Manual (Stopped) -> Disabled",
+                "TimestampText": "11:11:45"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Hide the last signed-in username'.",
-                "TimestampText": "11:10:03"
+                "Message": "Updated 1 services.",
+                "TimestampText": "11:11:45"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Hide the last signed-in username'.",
-                "TimestampText": "11:10:03"
+                "Message": "Verified service start modes.",
+                "TimestampText": "11:11:45"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "11:10:04"
+                "Message": "Rolled back service start modes.",
+                "TimestampText": "11:11:45"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T18:10:01.1279619+00:00",
-        "CompletedAtUtc": "2026-05-07T18:10:04.1974887+00:00"
+        "StartedAtUtc": "2026-05-07T18:11:42.4242725+00:00",
+        "CompletedAtUtc": "2026-05-07T18:11:45.6802895+00:00"
       },
-      "qa_tweak_id": "privacy.hide-last-logged-in-user",
-      "candidate_id": "privacy.hide-last-logged-in-user",
-      "card_name": "Display of the Last Signed-In Username",
-      "documentation": "research/records/privacy.hide-last-logged-in-user.json"
+      "qa_tweak_id": "system.services.disable-print-notifications",
+      "candidate_id": "system.services.disable-print-notifications",
+      "card_name": "Print Notification Service",
+      "documentation": "research/records/system.services.disable-print-notifications.json"
     },
     {
-      "tweak_id": "privacy.hide-recommended-personalized-sites",
+      "tweak_id": "system.services.disable-print-spooler",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -890,19 +890,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "privacy.hide-recommended-personalized-sites",
-        "TweakName": "Start Personalized Site Recommendations",
+        "TweakId": "system.services.disable-print-spooler",
+        "TweakName": "Print Spooler Service",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "privacy.hide-recommended-personalized-sites",
-          "Name": "Start Personalized Site Recommendations",
-          "Category": "Privacy",
-          "Description": "Windows 11 Start can surface personalized website suggestions. This device policy hides those recommendations for everyone on the machine.",
-          "FriendlyDescription": "Windows 11 Start can surface personalized website suggestions. This device policy hides those recommendations for everyone on the machine.",
-          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer\\HideRecommendedPersonalizedSites",
+          "TweakId": "system.services.disable-print-spooler",
+          "Name": "Print Spooler Service",
+          "Category": "System",
+          "Description": "Print Spooler handles print jobs and manages interaction with printers. Disabling it removes Windows printing support on the device.",
+          "FriendlyDescription": "Print Spooler handles print jobs and manages interaction with printers. Disabling it removes Windows printing support on the device.",
+          "RegistryPath": "",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -910,15 +910,15 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Windows 11 Start can surface personalized website suggestions. This device policy hides those recommendations for everyone on the machine. Evidence: The local official Microsoft ADMX file names the same Explorer policy key and HideRecommendedPersonalizedSites value used by the app. The official Start Policy CSP provides the 0/1 shown-versus-hidden semantics for the same policy. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: Print Spooler handles print jobs and manages interaction with printers. Disabling it removes Windows printing support on the device. Evidence: The Microsoft services guidance page explicitly lists the Spooler service, its Automatic baseline, the effect of turning it off, and that it is OK to disable. Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "The local official Microsoft ADMX file names the same Explorer policy key and HideRecommendedPersonalizedSites value used by the app. The official Start Policy CSP provides the 0/1 shown-versus-hidden semantics for the same policy.",
-              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/StartMenu.admx"
+              "Summary": "The Microsoft services guidance page explicitly lists the Spooler service, its Automatic baseline, the effect of turning it off, and that it is OK to disable.",
+              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services"
             },
             {
               "Key": "runtime",
@@ -949,8 +949,8 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Privacy (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\privacy\\privacy-verified.md",
+              "Title": "Docs: System (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\system\\system.md",
               "Kind": "Docs"
             }
           ]
@@ -959,10 +959,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Personalized sites hidden'.",
+            "StatusMessage": "Detected 1 of 1 services. Current state: Automatic.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Personalized sites hidden",
+            "CurrentValue": "Automatic",
+            "TargetValue": "Disabled",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -971,8 +971,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Personalized sites hidden'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer\\HideRecommendedPersonalizedSites: missing -> 1",
-                "TimestampText": "11:10:10"
+                "Message": "Detected 1 of 1 services. Current state: Automatic.\nServices:\n- Spooler: Automatic (Running) -> Disabled",
+                "TimestampText": "11:11:54"
               },
               {
                 "Action": "Apply",
@@ -999,8 +999,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Personalized sites hidden",
-            "TargetValue": "Personalized sites hidden",
+            "CurrentValue": "Disabled",
+            "TargetValue": "Disabled",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1009,20 +1009,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Personalized sites hidden'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer\\HideRecommendedPersonalizedSites: missing -> 1",
-                "TimestampText": "11:10:10"
+                "Message": "Detected 1 of 1 services. Current state: Automatic.\nServices:\n- Spooler: Automatic (Running) -> Disabled",
+                "TimestampText": "11:11:54"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Personalized sites hidden'.",
-                "TimestampText": "11:10:13"
+                "Message": "Updated 1 services.",
+                "TimestampText": "11:11:54"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Personalized sites hidden'.",
-                "TimestampText": "11:10:13"
+                "Message": "Verified service start modes.",
+                "TimestampText": "11:11:54"
               },
               {
                 "Action": "Rollback",
@@ -1035,10 +1035,10 @@
           {
             "Stage": "rollback",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Rolled back registry values.",
+            "StatusMessage": "Rolled back service start modes.",
             "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Personalized sites hidden",
+            "CurrentValue": "Disabled",
+            "TargetValue": "Disabled",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1047,36 +1047,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Personalized sites hidden'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer\\HideRecommendedPersonalizedSites: missing -> 1",
-                "TimestampText": "11:10:10"
+                "Message": "Detected 1 of 1 services. Current state: Automatic.\nServices:\n- Spooler: Automatic (Running) -> Disabled",
+                "TimestampText": "11:11:54"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Personalized sites hidden'.",
-                "TimestampText": "11:10:13"
+                "Message": "Updated 1 services.",
+                "TimestampText": "11:11:54"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Personalized sites hidden'.",
-                "TimestampText": "11:10:13"
+                "Message": "Verified service start modes.",
+                "TimestampText": "11:11:54"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "11:10:13"
+                "Message": "Rolled back service start modes.",
+                "TimestampText": "11:11:55"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Personalized sites hidden'.",
+            "StatusMessage": "Detected 1 of 1 services. Current state: Automatic.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Personalized sites hidden",
+            "CurrentValue": "Automatic",
+            "TargetValue": "Disabled",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1085,40 +1085,40 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Personalized sites hidden'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer\\HideRecommendedPersonalizedSites: missing -> 1",
-                "TimestampText": "11:10:13"
+                "Message": "Detected 1 of 1 services. Current state: Automatic.\nServices:\n- Spooler: Automatic (Running) -> Disabled",
+                "TimestampText": "11:11:55"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Personalized sites hidden'.",
-                "TimestampText": "11:10:13"
+                "Message": "Updated 1 services.",
+                "TimestampText": "11:11:54"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Personalized sites hidden'.",
-                "TimestampText": "11:10:13"
+                "Message": "Verified service start modes.",
+                "TimestampText": "11:11:54"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "11:10:13"
+                "Message": "Rolled back service start modes.",
+                "TimestampText": "11:11:55"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T18:10:10.4871102+00:00",
-        "CompletedAtUtc": "2026-05-07T18:10:13.6062421+00:00"
+        "StartedAtUtc": "2026-05-07T18:11:51.8169278+00:00",
+        "CompletedAtUtc": "2026-05-07T18:11:55.2829289+00:00"
       },
-      "qa_tweak_id": "privacy.hide-recommended-personalized-sites",
-      "candidate_id": "privacy.hide-recommended-personalized-sites",
-      "card_name": "Start Personalized Site Recommendations",
-      "documentation": "research/records/privacy.hide-recommended-personalized-sites.json"
+      "qa_tweak_id": "system.services.disable-print-spooler",
+      "candidate_id": "system.services.disable-print-spooler",
+      "card_name": "Print Spooler Service",
+      "documentation": "research/records/system.services.disable-print-spooler.json"
     },
     {
-      "tweak_id": "privacy.hide-recommended-personalized-sites-user",
+      "tweak_id": "system.services.disable-windows-search",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -1155,19 +1155,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "privacy.hide-recommended-personalized-sites-user",
-        "TweakName": "Start Personalized Site Recommendations (Current User)",
+        "TweakId": "system.services.disable-windows-search",
+        "TweakName": "Windows Search Service",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "privacy.hide-recommended-personalized-sites-user",
-          "Name": "Start Personalized Site Recommendations (Current User)",
-          "Category": "Privacy",
-          "Description": "Windows 11 Start can surface personalized website suggestions. This user policy hides those recommendations just for the current account.",
-          "FriendlyDescription": "Windows 11 Start can surface personalized website suggestions. This user policy hides those recommendations just for the current account.",
-          "RegistryPath": "HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer\\HideRecommendedPersonalizedSites",
+          "TweakId": "system.services.disable-windows-search",
+          "Name": "Windows Search Service",
+          "Category": "System",
+          "Description": "Windows Search builds and maintains an index so file, email, and content searches can return indexed results without a full content crawl. Disabling it reduces indexing activity, but it also removes the indexed search experience.",
+          "FriendlyDescription": "Windows Search builds and maintains an index so file, email, and content searches can return indexed results without a full content crawl. Disabling it reduces indexing activity, but it also removes the indexed search experience.",
+          "RegistryPath": "",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -1175,22 +1175,22 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Windows 11 Start can surface personalized website suggestions. This user policy hides those recommendations just for the current account. Evidence: The local official Microsoft ADMX file names the same Explorer policy key and HideRecommendedPersonalizedSites value used by the app. Because the policy is class=\"Both\", the same surface is valid for HKCU as well as HKLM. The official Start Policy CSP provi... Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: Windows Search builds and maintains an index so file, email, and content searches can return indexed results without a full content crawl. Disabling it reduces indexing activity, but it also removes the indexed search experience. Evidence: The QGA receipt proves the exact SCM control surface and current VM state on Windows build 26200.8246 without mutation. Microsoft service guidance remains the evidence for the documented baseline and OK-to-disable decision. Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "The local official Microsoft ADMX file names the same Explorer policy key and HideRecommendedPersonalizedSites value used by the app. Because the policy is class=\"Both\", the same surface is valid for HKCU as well as HKLM. The official Start Policy CSP provi...",
-              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/StartMenu.admx"
+              "Summary": "The QGA receipt proves the exact SCM control surface and current VM state on Windows build 26200.8246 without mutation. Microsoft service guidance remains the evidence for the documented baseline and OK-to-disable decision.",
+              "Source": "Validation proof source: evidence/captures/system-services-disable-windows-search-service-qga-20260507.json"
             },
             {
               "Key": "runtime",
               "Label": "RUNTIME",
               "State": "ready",
-              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
-              "Source": ""
+              "Summary": "A 2026-05-07 non-mutating QGA service inspection captured `sc qc WSearch`, the backing `HKLM\\SYSTEM\\CurrentControlSet\\Services\\WSearch` / `Start` value, and PowerShell `Win32_Service`/`Get-Service` output. The guest confirmed exact service identity `WSearch...",
+              "Source": "QGA service inspection receipt for WSearch: evidence/captures/system-services-disable-windows-search-service-qga-20260507.json and evidence/raw/service-inspection/power-disable-windows-search-service-qga-20260507/service-inspection.json"
             },
             {
               "Key": "source",
@@ -1214,8 +1214,8 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Privacy (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\privacy\\privacy-verified.md",
+              "Title": "Docs: System (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\system\\system.md",
               "Kind": "Docs"
             }
           ]
@@ -1224,10 +1224,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Personalized sites hidden'.",
+            "StatusMessage": "Detected 1 of 1 services. Current state: Automatic.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Personalized sites hidden",
+            "CurrentValue": "Automatic",
+            "TargetValue": "Disabled",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -1236,8 +1236,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Personalized sites hidden'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer\\HideRecommendedPersonalizedSites: missing -> 1",
-                "TimestampText": "11:10:19"
+                "Message": "Detected 1 of 1 services. Current state: Automatic.\nServices:\n- WSearch: Automatic (Running) -> Disabled",
+                "TimestampText": "11:12:05"
               },
               {
                 "Action": "Apply",
@@ -1264,8 +1264,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Personalized sites hidden",
-            "TargetValue": "Personalized sites hidden",
+            "CurrentValue": "Disabled",
+            "TargetValue": "Disabled",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1274,20 +1274,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Personalized sites hidden'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer\\HideRecommendedPersonalizedSites: missing -> 1",
-                "TimestampText": "11:10:20"
+                "Message": "Detected 1 of 1 services. Current state: Automatic.\nServices:\n- WSearch: Automatic (Running) -> Disabled",
+                "TimestampText": "11:12:05"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Personalized sites hidden'.",
-                "TimestampText": "11:10:20"
+                "Message": "Updated 1 services.",
+                "TimestampText": "11:12:05"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Personalized sites hidden'.",
-                "TimestampText": "11:10:20"
+                "Message": "Verified service start modes.",
+                "TimestampText": "11:12:05"
               },
               {
                 "Action": "Rollback",
@@ -1300,10 +1300,10 @@
           {
             "Stage": "rollback",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Rolled back registry values.",
+            "StatusMessage": "Rolled back service start modes.",
             "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Personalized sites hidden",
+            "CurrentValue": "Disabled",
+            "TargetValue": "Disabled",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1312,36 +1312,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Personalized sites hidden'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer\\HideRecommendedPersonalizedSites: missing -> 1",
-                "TimestampText": "11:10:20"
+                "Message": "Detected 1 of 1 services. Current state: Automatic.\nServices:\n- WSearch: Automatic (Running) -> Disabled",
+                "TimestampText": "11:12:05"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Personalized sites hidden'.",
-                "TimestampText": "11:10:20"
+                "Message": "Updated 1 services.",
+                "TimestampText": "11:12:05"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Personalized sites hidden'.",
-                "TimestampText": "11:10:20"
+                "Message": "Verified service start modes.",
+                "TimestampText": "11:12:05"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "11:10:20"
+                "Message": "Rolled back service start modes.",
+                "TimestampText": "11:12:05"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Personalized sites hidden'.",
+            "StatusMessage": "Detected 1 of 1 services. Current state: Automatic.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Personalized sites hidden",
+            "CurrentValue": "Automatic",
+            "TargetValue": "Disabled",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1350,40 +1350,40 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Personalized sites hidden'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer\\HideRecommendedPersonalizedSites: missing -> 1",
-                "TimestampText": "11:10:20"
+                "Message": "Detected 1 of 1 services. Current state: Automatic.\nServices:\n- WSearch: Automatic (Running) -> Disabled",
+                "TimestampText": "11:12:05"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Personalized sites hidden'.",
-                "TimestampText": "11:10:20"
+                "Message": "Updated 1 services.",
+                "TimestampText": "11:12:05"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Personalized sites hidden'.",
-                "TimestampText": "11:10:20"
+                "Message": "Verified service start modes.",
+                "TimestampText": "11:12:05"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "11:10:20"
+                "Message": "Rolled back service start modes.",
+                "TimestampText": "11:12:05"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T18:10:19.8846914+00:00",
-        "CompletedAtUtc": "2026-05-07T18:10:20.1826088+00:00"
+        "StartedAtUtc": "2026-05-07T18:12:02.2263767+00:00",
+        "CompletedAtUtc": "2026-05-07T18:12:05.9147529+00:00"
       },
-      "qa_tweak_id": "privacy.hide-recommended-personalized-sites-user",
-      "candidate_id": "privacy.hide-recommended-personalized-sites-user",
-      "card_name": "Start Personalized Site Recommendations (Current User)",
-      "documentation": "research/records/privacy.hide-recommended-personalized-sites-user.json"
+      "qa_tweak_id": "system.services.disable-windows-search",
+      "candidate_id": "system.services.disable-windows-search",
+      "card_name": "Windows Search Service",
+      "documentation": "research/records/system.services.disable-windows-search.json"
     },
     {
-      "tweak_id": "privacy.hide-recommended-section",
+      "tweak_id": "system.verbose-status-messages",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -1420,19 +1420,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "privacy.hide-recommended-section",
-        "TweakName": "Start Menu Recommended Section",
+        "TweakId": "system.verbose-status-messages",
+        "TweakName": "Verbose Status Messages",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "privacy.hide-recommended-section",
-          "Name": "Start Menu Recommended Section",
-          "Category": "Privacy",
-          "Description": "Windows 11 Start can show a Recommended section with suggested apps and files. This policy lets the device hide that section for everyone.",
-          "FriendlyDescription": "Windows 11 Start can show a Recommended section with suggested apps and files. This policy lets the device hide that section for everyone.",
-          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer\\HideRecommendedSection",
+          "TweakId": "system.verbose-status-messages",
+          "Name": "Verbose Status Messages",
+          "Category": "System",
+          "Description": "Windows can either show simple loading screens or more detailed status text during startup, shutdown, sign-in, and sign-out. This policy decides whether the detailed messages are shown.",
+          "FriendlyDescription": "Windows can either show simple loading screens or more detailed status text during startup, shutdown, sign-in, and sign-out. This policy decides whether the detailed messages are shown.",
+          "RegistryPath": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\VerboseStatus",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -1440,15 +1440,15 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Windows 11 Start can show a Recommended section with suggested apps and files. This policy lets the device hide that section for everyone. Evidence: The official Start Policy CSP documents the exact Explorer policy key, value name, and 0/1 semantics. The local StartMenu.admx file confirms the same Both-scope policy surface for Windows 11 22H2 and later. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: Windows can either show simple loading screens or more detailed status text during startup, shutdown, sign-in, and sign-out. This policy decides whether the detailed messages are shown. Evidence: Local official ADMX defines the exact machine-policy key and value name; local ADML confirms that the policy enables highly detailed status messages during system transitions. Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "The official Start Policy CSP documents the exact Explorer policy key, value name, and 0/1 semantics. The local StartMenu.admx file confirms the same Both-scope policy surface for Windows 11 22H2 and later.",
-              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-start"
+              "Summary": "Local official ADMX defines the exact machine-policy key and value name; local ADML confirms that the policy enables highly detailed status messages during system transitions.",
+              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/Logon.admx"
             },
             {
               "Key": "runtime",
@@ -1479,8 +1479,13 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Privacy (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\privacy\\privacy-verified.md",
+              "Title": "Docs: Win-Config",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\win-config\\batch-01.md#system.verbose-status-messages",
+              "Kind": "Docs"
+            },
+            {
+              "Title": "Docs: System (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\system\\system.md",
               "Kind": "Docs"
             }
           ]
@@ -1489,10 +1494,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Recommended section hidden'.",
+            "StatusMessage": "Value not set.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Recommended section hidden",
+            "CurrentValue": "Not set",
+            "TargetValue": "1 (0x1)",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -1501,8 +1506,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Recommended section hidden'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer\\HideRecommendedSection: missing -> 1",
-                "TimestampText": "11:10:26"
+                "Message": "Value not set.",
+                "TimestampText": "11:12:12"
               },
               {
                 "Action": "Apply",
@@ -1529,8 +1534,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Recommended section hidden",
-            "TargetValue": "Recommended section hidden",
+            "CurrentValue": "1 (0x1)",
+            "TargetValue": "1 (0x1)",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1539,20 +1544,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Recommended section hidden'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer\\HideRecommendedSection: missing -> 1",
-                "TimestampText": "11:10:26"
+                "Message": "Value not set.",
+                "TimestampText": "11:12:12"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Recommended section hidden'.",
-                "TimestampText": "11:10:29"
+                "Message": "Set value to 1.",
+                "TimestampText": "11:12:15"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Recommended section hidden'.",
-                "TimestampText": "11:10:29"
+                "Message": "Verified desired value.",
+                "TimestampText": "11:12:15"
               },
               {
                 "Action": "Rollback",
@@ -1565,10 +1570,10 @@
           {
             "Stage": "rollback",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Rolled back registry values.",
+            "StatusMessage": "Removed value to restore default.",
             "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Recommended section hidden",
+            "CurrentValue": "1 (0x1)",
+            "TargetValue": "1 (0x1)",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1577,36 +1582,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Recommended section hidden'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer\\HideRecommendedSection: missing -> 1",
-                "TimestampText": "11:10:26"
+                "Message": "Value not set.",
+                "TimestampText": "11:12:12"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Recommended section hidden'.",
-                "TimestampText": "11:10:29"
+                "Message": "Set value to 1.",
+                "TimestampText": "11:12:15"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Recommended section hidden'.",
-                "TimestampText": "11:10:29"
+                "Message": "Verified desired value.",
+                "TimestampText": "11:12:15"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "11:10:29"
+                "Message": "Removed value to restore default.",
+                "TimestampText": "11:12:15"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Recommended section hidden'.",
+            "StatusMessage": "Value not set.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Recommended section hidden",
+            "CurrentValue": "Not set",
+            "TargetValue": "1 (0x1)",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1615,37 +1620,37 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Recommended section hidden'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer\\HideRecommendedSection: missing -> 1",
-                "TimestampText": "11:10:29"
+                "Message": "Value not set.",
+                "TimestampText": "11:12:15"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Recommended section hidden'.",
-                "TimestampText": "11:10:29"
+                "Message": "Set value to 1.",
+                "TimestampText": "11:12:15"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Recommended section hidden'.",
-                "TimestampText": "11:10:29"
+                "Message": "Verified desired value.",
+                "TimestampText": "11:12:15"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "11:10:29"
+                "Message": "Removed value to restore default.",
+                "TimestampText": "11:12:15"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T18:10:26.2623365+00:00",
-        "CompletedAtUtc": "2026-05-07T18:10:29.4440617+00:00"
+        "StartedAtUtc": "2026-05-07T18:12:12.5882027+00:00",
+        "CompletedAtUtc": "2026-05-07T18:12:15.8313954+00:00"
       },
-      "qa_tweak_id": "privacy.hide-recommended-section",
-      "candidate_id": "privacy.hide-recommended-section",
-      "card_name": "Start Menu Recommended Section",
-      "documentation": "research/records/privacy.hide-recommended-section.json"
+      "qa_tweak_id": "system.verbose-status-messages",
+      "candidate_id": "system.verbose-status-messages",
+      "card_name": "Verbose Status Messages",
+      "documentation": "research/records/system.verbose-status-messages.json"
     }
   ],
   "summary": {
@@ -1654,7 +1659,7 @@
     "live_success_count": 5,
     "live_failure_count": 0,
     "categories": [
-      "Privacy"
+      "System"
     ]
   }
 }

@@ -1,7 +1,7 @@
 # Promoted App QA Batch
 
 - Status: PASS
-- Generated UTC: 2026-05-07T18:09:47Z
+- Generated UTC: 2026-05-07T18:11:28Z
 - Catalog candidates: 242
 - Selected candidates: 5
 - Planned apply-allowed candidates: 5
@@ -10,41 +10,41 @@
 
 ## Selected Candidates
 
-- `privacy.disable-windows-tips` | Turn Off Windows Tips | Privacy
-  docs: `research/records/privacy.disable-windows-tips.review.json`
+- `system.services.disable-connected-user-experiences` | Connected User Experiences and Telemetry Service | System
+  docs: `research/records/system.services.disable-connected-user-experiences.json`
   rollback: default=true | previous=true
   card snapshot: claim_boundary=true | fields=TweakId, Name, Category, EvidenceClass, ResearchStatus, RollbackSnapshotState, HasClaimBoundary, WhatWeKnowSummary, WhatWeDoNotClaimSummary, ProofLanes | lanes=docs, runtime, source, rollback
-- `privacy.hide-last-logged-in-user` | Display of the Last Signed-In Username | Privacy
-  docs: `research/records/privacy.hide-last-logged-in-user.json`
+- `system.services.disable-print-notifications` | Print Notification Service | System
+  docs: `research/records/system.services.disable-print-notifications.json`
   rollback: default=true | previous=true
   card snapshot: claim_boundary=true | fields=TweakId, Name, Category, EvidenceClass, ResearchStatus, RollbackSnapshotState, HasClaimBoundary, WhatWeKnowSummary, WhatWeDoNotClaimSummary, ProofLanes | lanes=docs, runtime, source, rollback
-- `privacy.hide-recommended-personalized-sites` | Start Personalized Site Recommendations | Privacy
-  docs: `research/records/privacy.hide-recommended-personalized-sites.json`
+- `system.services.disable-print-spooler` | Print Spooler Service | System
+  docs: `research/records/system.services.disable-print-spooler.json`
   rollback: default=true | previous=true
   card snapshot: claim_boundary=true | fields=TweakId, Name, Category, EvidenceClass, ResearchStatus, RollbackSnapshotState, HasClaimBoundary, WhatWeKnowSummary, WhatWeDoNotClaimSummary, ProofLanes | lanes=docs, runtime, source, rollback
-- `privacy.hide-recommended-personalized-sites-user` | Start Personalized Site Recommendations (Current User) | Privacy
-  docs: `research/records/privacy.hide-recommended-personalized-sites-user.json`
+- `system.services.disable-windows-search` | Windows Search Service | System
+  docs: `research/records/system.services.disable-windows-search.json`
   rollback: default=true | previous=true
   card snapshot: claim_boundary=true | fields=TweakId, Name, Category, EvidenceClass, ResearchStatus, RollbackSnapshotState, HasClaimBoundary, WhatWeKnowSummary, WhatWeDoNotClaimSummary, ProofLanes | lanes=docs, runtime, source, rollback
-- `privacy.hide-recommended-section` | Start Menu Recommended Section | Privacy
-  docs: `research/records/privacy.hide-recommended-section.json`
+- `system.verbose-status-messages` | Verbose Status Messages | System
+  docs: `research/records/system.verbose-status-messages.json`
   rollback: default=true | previous=true
   card snapshot: claim_boundary=true | fields=TweakId, Name, Category, EvidenceClass, ResearchStatus, RollbackSnapshotState, HasClaimBoundary, WhatWeKnowSummary, WhatWeDoNotClaimSummary, ProofLanes | lanes=docs, runtime, source, rollback
 
 ## Live Results
 
-- `privacy.disable-windows-tips` | success=true | status=ok
+- `system.services.disable-connected-user-experiences` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
   card contract: ok | claim_boundary=true | lanes=docs, runtime, source, rollback
-- `privacy.hide-last-logged-in-user` | success=true | status=ok
+- `system.services.disable-print-notifications` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
   card contract: ok | claim_boundary=true | lanes=docs, runtime, source, rollback
-- `privacy.hide-recommended-personalized-sites` | success=true | status=ok
+- `system.services.disable-print-spooler` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
   card contract: ok | claim_boundary=true | lanes=docs, runtime, source, rollback
-- `privacy.hide-recommended-personalized-sites-user` | success=true | status=ok
+- `system.services.disable-windows-search` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
   card contract: ok | claim_boundary=true | lanes=docs, runtime, source, rollback
-- `privacy.hide-recommended-section` | success=true | status=ok
+- `system.verbose-status-messages` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
   card contract: ok | claim_boundary=true | lanes=docs, runtime, source, rollback
