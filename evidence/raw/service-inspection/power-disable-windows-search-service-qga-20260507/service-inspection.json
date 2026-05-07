@@ -1,0 +1,447 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-07T14:04:34.684895Z",
+  "record_id": "power.disable-windows-search",
+  "run_id": "power-disable-windows-search-service-qga-20260507",
+  "capture_profile": "qga-service-inspection-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "connect": "qemu:///session",
+  "launch_transport": "qga",
+  "mutation_performed": false,
+  "target": {
+    "location_kind": "service",
+    "service_name": "WSearch",
+    "value_name": "StartMode"
+  },
+  "preflight": {
+    "status": "ok",
+    "summary_source": "qga-preflight",
+    "domain": "regprobe-win11-25h2-session",
+    "connect": "qemu:///session",
+    "checks": {
+      "domstate": {
+        "status": "ok",
+        "command": [
+          "virsh",
+          "-c",
+          "qemu:///session",
+          "domstate",
+          "regprobe-win11-25h2-session"
+        ],
+        "returncode": 0,
+        "state": "running",
+        "stdout": "running",
+        "stderr": ""
+      },
+      "guest_ping": {
+        "status": "ok",
+        "command": [
+          "virsh",
+          "-c",
+          "qemu:///session",
+          "qemu-agent-command",
+          "regprobe-win11-25h2-session",
+          "{\"execute\":\"guest-ping\"}"
+        ],
+        "returncode": 0,
+        "stdout": "{\"return\":{}}",
+        "stderr": "",
+        "return": {}
+      },
+      "guest_info": {
+        "status": "ok",
+        "command": [
+          "virsh",
+          "-c",
+          "qemu:///session",
+          "qemu-agent-command",
+          "regprobe-win11-25h2-session",
+          "{\"execute\":\"guest-info\"}"
+        ],
+        "returncode": 0,
+        "stdout": "{\"return\":{\"version\":\"110.0.2\",\"supported_commands\":[{\"enabled\":true,\"name\":\"guest-get-load\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-ssh-remove-authorized-keys\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-ssh-add-authorized-keys\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-ssh-get-authorized-keys\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-get-devices\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-get-osinfo\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-get-timezone\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-get-users\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-get-host-name\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-exec\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-exec-status\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-set-user-password\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-get-fsinfo\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-get-disks\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-get-vcpus\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-network-get-interfaces\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-suspend-ram\",\"success-response\":false},{\"enabled\":true,\"name\":\"guest-suspend-disk\",\"success-response\":false},{\"enabled\":true,\"name\":\"guest-fstrim\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-fsfreeze-thaw\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-fsfreeze-freeze-list\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-fsfreeze-freeze\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-fsfreeze-status\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-file-flush\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-file-seek\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-file-write\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-file-read\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-file-close\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-file-open\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-shutdown\",\"success-response\":false},{\"enabled\":true,\"name\":\"guest-info\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-set-time\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-get-time\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-ping\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-sync\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-sync-delimited\",\"success-response\":true}]}}",
+        "stderr": "",
+        "return": {
+          "version": "110.0.2",
+          "supported_commands": [
+            {
+              "enabled": true,
+              "name": "guest-get-load",
+              "success-response": true
+            },
+            {
+              "enabled": true,
+              "name": "guest-ssh-remove-authorized-keys",
+              "success-response": true
+            },
+            {
+              "enabled": true,
+              "name": "guest-ssh-add-authorized-keys",
+              "success-response": true
+            },
+            {
+              "enabled": true,
+              "name": "guest-ssh-get-authorized-keys",
+              "success-response": true
+            },
+            {
+              "enabled": true,
+              "name": "guest-get-devices",
+              "success-response": true
+            },
+            {
+              "enabled": true,
+              "name": "guest-get-osinfo",
+              "success-response": true
+            },
+            {
+              "enabled": true,
+              "name": "guest-get-timezone",
+              "success-response": true
+            },
+            {
+              "enabled": true,
+              "name": "guest-get-users",
+              "success-response": true
+            },
+            {
+              "enabled": true,
+              "name": "guest-get-host-name",
+              "success-response": true
+            },
+            {
+              "enabled": true,
+              "name": "guest-exec",
+              "success-response": true
+            },
+            {
+              "enabled": true,
+              "name": "guest-exec-status",
+              "success-response": true
+            },
+            {
+              "enabled": true,
+              "name": "guest-set-user-password",
+              "success-response": true
+            },
+            {
+              "enabled": true,
+              "name": "guest-get-fsinfo",
+              "success-response": true
+            },
+            {
+              "enabled": true,
+              "name": "guest-get-disks",
+              "success-response": true
+            },
+            {
+              "enabled": true,
+              "name": "guest-get-vcpus",
+              "success-response": true
+            },
+            {
+              "enabled": true,
+              "name": "guest-network-get-interfaces",
+              "success-response": true
+            },
+            {
+              "enabled": true,
+              "name": "guest-suspend-ram",
+              "success-response": false
+            },
+            {
+              "enabled": true,
+              "name": "guest-suspend-disk",
+              "success-response": false
+            },
+            {
+              "enabled": true,
+              "name": "guest-fstrim",
+              "success-response": true
+            },
+            {
+              "enabled": true,
+              "name": "guest-fsfreeze-thaw",
+              "success-response": true
+            },
+            {
+              "enabled": true,
+              "name": "guest-fsfreeze-freeze-list",
+              "success-response": true
+            },
+            {
+              "enabled": true,
+              "name": "guest-fsfreeze-freeze",
+              "success-response": true
+            },
+            {
+              "enabled": true,
+              "name": "guest-fsfreeze-status",
+              "success-response": true
+            },
+            {
+              "enabled": true,
+              "name": "guest-file-flush",
+              "success-response": true
+            },
+            {
+              "enabled": true,
+              "name": "guest-file-seek",
+              "success-response": true
+            },
+            {
+              "enabled": true,
+              "name": "guest-file-write",
+              "success-response": true
+            },
+            {
+              "enabled": true,
+              "name": "guest-file-read",
+              "success-response": true
+            },
+            {
+              "enabled": true,
+              "name": "guest-file-close",
+              "success-response": true
+            },
+            {
+              "enabled": true,
+              "name": "guest-file-open",
+              "success-response": true
+            },
+            {
+              "enabled": true,
+              "name": "guest-shutdown",
+              "success-response": false
+            },
+            {
+              "enabled": true,
+              "name": "guest-info",
+              "success-response": true
+            },
+            {
+              "enabled": true,
+              "name": "guest-set-time",
+              "success-response": true
+            },
+            {
+              "enabled": true,
+              "name": "guest-get-time",
+              "success-response": true
+            },
+            {
+              "enabled": true,
+              "name": "guest-ping",
+              "success-response": true
+            },
+            {
+              "enabled": true,
+              "name": "guest-sync",
+              "success-response": true
+            },
+            {
+              "enabled": true,
+              "name": "guest-sync-delimited",
+              "success-response": true
+            }
+          ]
+        }
+      },
+      "guest_exec": {
+        "status": "ok",
+        "command": [
+          "virsh",
+          "-c",
+          "qemu:///session",
+          "qemu-agent-command",
+          "regprobe-win11-25h2-session",
+          "{\"execute\":\"guest-exec-status\",\"arguments\":{\"pid\":2056}}"
+        ],
+        "returncode": 0,
+        "stdout": "{\"return\":{\"exitcode\":0,\"out-data\":\"bnQgYXV0aG9yaXR5XHN5c3RlbQ0K\",\"exited\":true}}",
+        "stderr": "",
+        "return": {
+          "exitcode": 0,
+          "out-data": "bnQgYXV0aG9yaXR5XHN5c3RlbQ0K",
+          "exited": true
+        },
+        "phase": "guest-exec-status",
+        "pid": 2056,
+        "exitcode": 0,
+        "out_data": "nt authority\\system\r\n",
+        "err_data": ""
+      }
+    },
+    "failed_checks": [],
+    "error_kind": null,
+    "recovery_action": "none",
+    "transport_blocker": "none",
+    "guest_health": "stable"
+  },
+  "commands": [
+    {
+      "label": "sc_qc_wsearch",
+      "path": "C:\\Windows\\System32\\sc.exe",
+      "args": [
+        "qc",
+        "WSearch"
+      ],
+      "start": {
+        "status": "ok",
+        "command": [
+          "virsh",
+          "-c",
+          "qemu:///session",
+          "qemu-agent-command",
+          "regprobe-win11-25h2-session",
+          "{\"execute\":\"guest-exec\",\"arguments\":{\"path\":\"C:\\\\Windows\\\\System32\\\\sc.exe\",\"arg\":[\"qc\",\"WSearch\"],\"capture-output\":true}}"
+        ],
+        "returncode": 0,
+        "stdout": "{\"return\":{\"pid\":7944}}",
+        "stderr": "",
+        "return": {
+          "pid": 7944
+        }
+      },
+      "status": "ok",
+      "pid": 7944,
+      "exitcode": 0,
+      "out_data": "[SC] QueryServiceConfig SUCCESS\r\n\r\nSERVICE_NAME: WSearch\r\n        TYPE               : 10  WIN32_OWN_PROCESS \r\n        START_TYPE         : 2   AUTO_START  (DELAYED)\r\n        ERROR_CONTROL      : 1   NORMAL\r\n        BINARY_PATH_NAME   : C:\\WINDOWS\\system32\\SearchIndexer.exe /Embedding\r\n        LOAD_ORDER_GROUP   : \r\n        TAG                : 0\r\n        DISPLAY_NAME       : Windows Search\r\n        DEPENDENCIES       : RPCSS\r\n                           : BrokerInfrastructure\r\n        SERVICE_START_NAME : LocalSystem\r\n",
+      "err_data": "",
+      "status_check": {
+        "status": "ok",
+        "command": [
+          "virsh",
+          "-c",
+          "qemu:///session",
+          "qemu-agent-command",
+          "regprobe-win11-25h2-session",
+          "{\"execute\":\"guest-exec-status\",\"arguments\":{\"pid\":7944}}"
+        ],
+        "returncode": 0,
+        "stdout": "{\"return\":{\"exitcode\":0,\"out-data\":\"W1NDXSBRdWVyeVNlcnZpY2VDb25maWcgU1VDQ0VTUw0KDQpTRVJWSUNFX05BTUU6IFdTZWFyY2gNCiAgICAgICAgVFlQRSAgICAgICAgICAgICAgIDogMTAgIFdJTjMyX09XTl9QUk9DRVNTIA0KICAgICAgICBTVEFSVF9UWVBFICAgICAgICAgOiAyICAgQVVUT19TVEFSVCAgKERFTEFZRUQpDQogICAgICAgIEVSUk9SX0NPTlRST0wgICAgICA6IDEgICBOT1JNQUwNCiAgICAgICAgQklOQVJZX1BBVEhfTkFNRSAgIDogQzpcV0lORE9XU1xzeXN0ZW0zMlxTZWFyY2hJbmRleGVyLmV4ZSAvRW1iZWRkaW5nDQogICAgICAgIExPQURfT1JERVJfR1JPVVAgICA6IA0KICAgICAgICBUQUcgICAgICAgICAgICAgICAgOiAwDQogICAgICAgIERJU1BMQVlfTkFNRSAgICAgICA6IFdpbmRvd3MgU2VhcmNoDQogICAgICAgIERFUEVOREVOQ0lFUyAgICAgICA6IFJQQ1NTDQogICAgICAgICAgICAgICAgICAgICAgICAgICA6IEJyb2tlckluZnJhc3RydWN0dXJlDQogICAgICAgIFNFUlZJQ0VfU1RBUlRfTkFNRSA6IExvY2FsU3lzdGVtDQo=\",\"exited\":true}}",
+        "stderr": "",
+        "return": {
+          "exitcode": 0,
+          "out-data": "W1NDXSBRdWVyeVNlcnZpY2VDb25maWcgU1VDQ0VTUw0KDQpTRVJWSUNFX05BTUU6IFdTZWFyY2gNCiAgICAgICAgVFlQRSAgICAgICAgICAgICAgIDogMTAgIFdJTjMyX09XTl9QUk9DRVNTIA0KICAgICAgICBTVEFSVF9UWVBFICAgICAgICAgOiAyICAgQVVUT19TVEFSVCAgKERFTEFZRUQpDQogICAgICAgIEVSUk9SX0NPTlRST0wgICAgICA6IDEgICBOT1JNQUwNCiAgICAgICAgQklOQVJZX1BBVEhfTkFNRSAgIDogQzpcV0lORE9XU1xzeXN0ZW0zMlxTZWFyY2hJbmRleGVyLmV4ZSAvRW1iZWRkaW5nDQogICAgICAgIExPQURfT1JERVJfR1JPVVAgICA6IA0KICAgICAgICBUQUcgICAgICAgICAgICAgICAgOiAwDQogICAgICAgIERJU1BMQVlfTkFNRSAgICAgICA6IFdpbmRvd3MgU2VhcmNoDQogICAgICAgIERFUEVOREVOQ0lFUyAgICAgICA6IFJQQ1NTDQogICAgICAgICAgICAgICAgICAgICAgICAgICA6IEJyb2tlckluZnJhc3RydWN0dXJlDQogICAgICAgIFNFUlZJQ0VfU1RBUlRfTkFNRSA6IExvY2FsU3lzdGVtDQo=",
+          "exited": true
+        }
+      }
+    },
+    {
+      "label": "reg_query_wsearch_start",
+      "path": "C:\\Windows\\System32\\reg.exe",
+      "args": [
+        "query",
+        "HKLM\\SYSTEM\\CurrentControlSet\\Services\\WSearch",
+        "/v",
+        "Start"
+      ],
+      "start": {
+        "status": "ok",
+        "command": [
+          "virsh",
+          "-c",
+          "qemu:///session",
+          "qemu-agent-command",
+          "regprobe-win11-25h2-session",
+          "{\"execute\":\"guest-exec\",\"arguments\":{\"path\":\"C:\\\\Windows\\\\System32\\\\reg.exe\",\"arg\":[\"query\",\"HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Services\\\\WSearch\",\"/v\",\"Start\"],\"capture-output\":true}}"
+        ],
+        "returncode": 0,
+        "stdout": "{\"return\":{\"pid\":8580}}",
+        "stderr": "",
+        "return": {
+          "pid": 8580
+        }
+      },
+      "status": "ok",
+      "pid": 8580,
+      "exitcode": 0,
+      "out_data": "\r\nHKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\WSearch\r\n    Start    REG_DWORD    0x2\r\n\r\n",
+      "err_data": "",
+      "status_check": {
+        "status": "ok",
+        "command": [
+          "virsh",
+          "-c",
+          "qemu:///session",
+          "qemu-agent-command",
+          "regprobe-win11-25h2-session",
+          "{\"execute\":\"guest-exec-status\",\"arguments\":{\"pid\":8580}}"
+        ],
+        "returncode": 0,
+        "stdout": "{\"return\":{\"exitcode\":0,\"out-data\":\"DQpIS0VZX0xPQ0FMX01BQ0hJTkVcU1lTVEVNXEN1cnJlbnRDb250cm9sU2V0XFNlcnZpY2VzXFdTZWFyY2gNCiAgICBTdGFydCAgICBSRUdfRFdPUkQgICAgMHgyDQoNCg==\",\"exited\":true}}",
+        "stderr": "",
+        "return": {
+          "exitcode": 0,
+          "out-data": "DQpIS0VZX0xPQ0FMX01BQ0hJTkVcU1lTVEVNXEN1cnJlbnRDb250cm9sU2V0XFNlcnZpY2VzXFdTZWFyY2gNCiAgICBTdGFydCAgICBSRUdfRFdPUkQgICAgMHgyDQoNCg==",
+          "exited": true
+        }
+      }
+    },
+    {
+      "label": "powershell_wsearch_service_snapshot",
+      "path": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "args": [
+        "-NoProfile",
+        "-NonInteractive",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-Command",
+        "$svc = Get-CimInstance Win32_Service -Filter \"Name='WSearch'\"; $gs = Get-Service -Name WSearch; [pscustomobject]@{CimName=$svc.Name; DisplayName=$svc.DisplayName; State=$svc.State; StartMode=$svc.StartMode; StartName=$svc.StartName; PathName=$svc.PathName; ServiceName=$gs.ServiceName; Status=$gs.Status.ToString(); StartType=$gs.StartType.ToString(); CanStop=$gs.CanStop} | ConvertTo-Json -Compress"
+      ],
+      "start": {
+        "status": "ok",
+        "command": [
+          "virsh",
+          "-c",
+          "qemu:///session",
+          "qemu-agent-command",
+          "regprobe-win11-25h2-session",
+          "{\"execute\":\"guest-exec\",\"arguments\":{\"path\":\"C:\\\\Windows\\\\System32\\\\WindowsPowerShell\\\\v1.0\\\\powershell.exe\",\"arg\":[\"-NoProfile\",\"-NonInteractive\",\"-ExecutionPolicy\",\"Bypass\",\"-Command\",\"$svc = Get-CimInstance Win32_Service -Filter \\\"Name='WSearch'\\\"; $gs = Get-Service -Name WSearch; [pscustomobject]@{CimName=$svc.Name; DisplayName=$svc.DisplayName; State=$svc.State; StartMode=$svc.StartMode; StartName=$svc.StartName; PathName=$svc.PathName; ServiceName=$gs.ServiceName; Status=$gs.Status.ToString(); StartType=$gs.StartType.ToString(); CanStop=$gs.CanStop} | ConvertTo-Json -Compress\"],\"capture-output\":true}}"
+        ],
+        "returncode": 0,
+        "stdout": "{\"return\":{\"pid\":1900}}",
+        "stderr": "",
+        "return": {
+          "pid": 1900
+        }
+      },
+      "status": "ok",
+      "pid": 1900,
+      "exitcode": 0,
+      "out_data": "{\"CimName\":\"WSearch\",\"DisplayName\":\"Windows Search\",\"State\":\"Running\",\"StartMode\":\"Auto\",\"StartName\":\"LocalSystem\",\"PathName\":\"C:\\\\WINDOWS\\\\system32\\\\SearchIndexer.exe /Embedding\",\"ServiceName\":\"WSearch\",\"Status\":\"Running\",\"StartType\":\"Automatic\",\"CanStop\":true}\r\n",
+      "err_data": "",
+      "status_check": {
+        "status": "ok",
+        "command": [
+          "virsh",
+          "-c",
+          "qemu:///session",
+          "qemu-agent-command",
+          "regprobe-win11-25h2-session",
+          "{\"execute\":\"guest-exec-status\",\"arguments\":{\"pid\":1900}}"
+        ],
+        "returncode": 0,
+        "stdout": "{\"return\":{\"exitcode\":0,\"out-data\":\"eyJDaW1OYW1lIjoiV1NlYXJjaCIsIkRpc3BsYXlOYW1lIjoiV2luZG93cyBTZWFyY2giLCJTdGF0ZSI6IlJ1bm5pbmciLCJTdGFydE1vZGUiOiJBdXRvIiwiU3RhcnROYW1lIjoiTG9jYWxTeXN0ZW0iLCJQYXRoTmFtZSI6IkM6XFxXSU5ET1dTXFxzeXN0ZW0zMlxcU2VhcmNoSW5kZXhlci5leGUgL0VtYmVkZGluZyIsIlNlcnZpY2VOYW1lIjoiV1NlYXJjaCIsIlN0YXR1cyI6IlJ1bm5pbmciLCJTdGFydFR5cGUiOiJBdXRvbWF0aWMiLCJDYW5TdG9wIjp0cnVlfQ0K\",\"exited\":true}}",
+        "stderr": "",
+        "return": {
+          "exitcode": 0,
+          "out-data": "eyJDaW1OYW1lIjoiV1NlYXJjaCIsIkRpc3BsYXlOYW1lIjoiV2luZG93cyBTZWFyY2giLCJTdGF0ZSI6IlJ1bm5pbmciLCJTdGFydE1vZGUiOiJBdXRvIiwiU3RhcnROYW1lIjoiTG9jYWxTeXN0ZW0iLCJQYXRoTmFtZSI6IkM6XFxXSU5ET1dTXFxzeXN0ZW0zMlxcU2VhcmNoSW5kZXhlci5leGUgL0VtYmVkZGluZyIsIlNlcnZpY2VOYW1lIjoiV1NlYXJjaCIsIlN0YXR1cyI6IlJ1bm5pbmciLCJTdGFydFR5cGUiOiJBdXRvbWF0aWMiLCJDYW5TdG9wIjp0cnVlfQ0K",
+          "exited": true
+        }
+      }
+    }
+  ],
+  "status": "ok",
+  "os_snapshot": {
+    "ProductName": "Windows 10 Pro",
+    "DisplayVersion": "25H2",
+    "CurrentBuild": "26200",
+    "CurrentBuildNumber": "26200",
+    "UBR": 8246,
+    "BuildLabEx": "26100.1.amd64fre.ge_release.240331-1435",
+    "EditionID": "Professional",
+    "InstallationType": "Client"
+  }
+}

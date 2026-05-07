@@ -213,7 +213,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `power.disable-fast-startup` | validated | Class A | `research/records/power.disable-fast-startup.review.json` | - | `5c6c3f5b3561a755cf0a46ca1ed0de6c44577464ad887e118bd5af655f0999bd` | `cf91e404c6ac19f5792f0a45c40cd8f2ed1504f0e633f6f09a2ec1cada0ec9b7` | 6 |
 | `power.disable-network-power-saving.policy` | validated | Class A | `research/records/power.disable-network-power-saving.policy.review.json` | [evidence/records/power.disable-network-power-saving.policy](../evidence/records/power.disable-network-power-saving.policy) | `2a396fcba5e318a09ff608add6fa8d7d15d991ddc96b0d34609c7fd74c28a70b` | `232e318df18a2327ad504a0c942305bb7c01eb9de6d469b2158aa056e1ac6d6a` | 3 |
 | `power.disable-power-throttling` | validated | Class A | `research/records/power.disable-power-throttling.json` | - | `05d9d10bd486d058a8f1a3076c038a00c96222eba018d90c5548281975db71db` | `b78646de93a21d13b29902af3fba219292617267422db672a2be04241d37e94d` | 3 |
-| `power.disable-windows-search` | validated | Class A | `research/records/power.disable-windows-search.json` | - | `5a722966132e05610e5c1ac2e0dba6ad625124cc29365af83f1615015cda6255` | `98503aeb5448bb3f265d9e3ba710bf8e1b8092954776d1e853cde7fb0526511e` | 5 |
+| `power.disable-windows-search` | validated | Class A | `research/records/power.disable-windows-search.json` | - | `8d98575ba6f85845533e0642e881181636be6de333fd2b2b40c04718ec40e7aa` | `c82e383ebc1d9ef49330c8ccf697c957423c7af93707b85c0c8ae4f84e9ee524` | 6 |
 | `power.hide-hibernate-option` | validated | Class A | `research/records/power.hide-hibernate-option.json` | - | `dc426788fdf83fd30fdb2abdc884707cf6d26f98dd8ff6d2198c2b755a200102` | `679ae02a4140c26f85c6c57787959e8ebd42c72e86e1c402ad95f6063698224d` | 6 |
 | `power.hide-lock-option` | validated | Class A | `research/records/power.hide-lock-option.json` | - | `2855747942d8a60218d00bacd044eeed213938413db81914f5afbd264d330946` | `8d6c5471ede7b9e9a855b5d408606e9d1beb7f6c8922bafa4903f4308fa45806` | 5 |
 | `power.hide-sleep-option` | validated | Class A | `research/records/power.hide-sleep-option.json` | - | `6639e94795711376bb69e0c70aa67f776adf241655647f7282b515aa96e639ac` | `b847a573fa658e74b958e4d7ff201de98eaff097b55046bf7f245ee525ae725b` | 5 |
@@ -360,7 +360,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `system.services.disable-connected-user-experiences` | validated | Class A | `research/records/system.services.disable-connected-user-experiences.json` | - | `c4d94540a11b1c67e1ef937297096df11578035eaff527784575689afa1cb185` | `6ec09b30f275d83c47fb5131b30415c8c6f30c7592fe9083e8757b6db453f0c1` | 3 |
 | `system.services.disable-print-notifications` | validated | Class A | `research/records/system.services.disable-print-notifications.json` | - | `612a1d7d78580c6ef3d566f0f48525d2cff1c7d5b5446e676a76d3e3677e0889` | `2e70f781308c21df2c4dad8d6d2eef702da3587082aa3470d9d47723603453f9` | 3 |
 | `system.services.disable-print-spooler` | validated | Class A | `research/records/system.services.disable-print-spooler.json` | - | `3c9a66bca7c40c335459851dcd833a7162917ddf4a343fd1d4ab8bd97d7638b3` | `0b1dfd54f1e9bd095baf4f2d37500c6ecea49319ac27a300e6e5db08dba01a3a` | 3 |
-| `system.services.disable-windows-search` | validated | Class A | `research/records/system.services.disable-windows-search.json` | - | `380953844f8806c4952c924d2e9153e6e21582037f58ab516da209c238afabb3` | `318efd0a4ecf571547b592047299eb031f980f5aa896121c357292b885def872` | 6 |
+| `system.services.disable-windows-search` | validated | Class A | `research/records/system.services.disable-windows-search.json` | - | `b01f1277e770259b0bbcd2b8aea8083c2488437b727c4e8ecd3a13aa8535bec0` | `9b683516726b8993b28c59c507cff3fd559682fb6bfd7dbe0a119468e99e8bc1` | 7 |
 | `system.verbose-status-messages` | validated | Class A | `research/records/system.verbose-status-messages.json` | - | `20bc5e309e0ce630044da5008ca1b9ee3d1f5eb1b67ccb5c7cdffaea16f282c5` | `38aa1379b8d90330de5ea4c60ba228c2add08852e62f84a921c5d365986b9067` | 3 |
 | `system.wait-to-kill-service-timeout` | validated | Class A | `research/records/system.wait-to-kill-service-timeout.review.json` | - | `e6fb925590e0d80fbc2da1717ca01066914b33cc85e3210e0d80799f1d9af4a5` | `8341b5ed9f8b8ddb72423a0c3e91c38a4c65bdab76909a7996d64f632e8ec75b` | 5 |
 | `visibility.default-account-picture` | validated | Class A | `research/records/visibility.default-account-picture.json` | - | `48d47f7d3ce847180aad8c58a3622dba38a5c2ac92a84738937608dadbaf74d6` | `6786d7cae85f022f2e51adf5c68d64ee35c5f2ab18e64035b9d73f9adfa2e53b` | 3 |
@@ -5778,8 +5778,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/power.disable-windows-search.json`
-- Source SHA256: `5a722966132e05610e5c1ac2e0dba6ad625124cc29365af83f1615015cda6255`
-- Proof SHA256: `98503aeb5448bb3f265d9e3ba710bf8e1b8092954776d1e853cde7fb0526511e`
+- Source SHA256: `8d98575ba6f85845533e0642e881181636be6de333fd2b2b40c04718ec40e7aa`
+- Proof SHA256: `c82e383ebc1d9ef49330c8ccf697c957423c7af93707b85c0c8ae4f84e9ee524`
 
 **Summary:** Official Windows service control for Windows Search (WSearch). Microsoft documents the service name, start-mode baseline, feature behavior, and says it is OK to disable in the service guidance used here. The app disables the service by setting its start mode to Disabled.
 
@@ -5790,6 +5790,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `ms-iot-services-wsearch` | `official-doc` | Microsoft Learn: Guidance on configuring system services - Windows Search | [https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services](https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services) |
 | `ms-search-indexing-overview` | `official-doc` | Microsoft Learn: Search indexing process overview | [https://learn.microsoft.com/en-us/windows/win32/search/-search-indexing-process-overview](https://learn.microsoft.com/en-us/windows/win32/search/-search-indexing-process-overview) |
 | `app-performance-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PerformanceTweakProvider.cs |
+| `vm-power-disable-windows-search-service-qga-20260507` | `vm-test` | QGA service inspection receipt for WSearch | [evidence/captures/power-disable-windows-search-service-qga-20260507.json](../evidence/captures/power-disable-windows-search-service-qga-20260507.json) and [evidence/raw/service-inspection/power-disable-windows-search-service-qga-20260507/service-inspection.json](../evidence/raw/service-inspection/power-disable-windows-search-service-qga-20260507/service-inspection.json) |
 | `vm-power-disable-windows-search-etw-stackwalk-attempt-20260424` | `etw-trace` | KVM ETW stage receipt for WSearch backing registry key | [evidence/captures/power-disable-windows-search-etw-stackwalk-attempt-20260424.json](../evidence/captures/power-disable-windows-search-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/power-disable-windows-search-etw-20260424-batch1/power-disable-windows-search-etw-20260424-batch1-stage.json](../evidence/raw/etw-stackwalk/power-disable-windows-search-etw-20260424-batch1/power-disable-windows-search-etw-20260424-batch1-stage.json) |
 | `vm-power-disable-windows-search-ghidra-launch-receipt-20260424` | `vm-test` | Guest Ghidra launch receipt for WSearch | [evidence/raw/ghidra/ghidra-power-disable-windows-search-20260424-batch1/summary.json](../evidence/raw/ghidra/ghidra-power-disable-windows-search-20260424-batch1/summary.json) |
 
@@ -5797,9 +5798,9 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 
 | Field | Value |
 | --- | --- |
-| Source | [https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services](https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services) |
-| Exact quote / path | Windows Search (WSearch); Manual; Provides content indexing, property caching, and search results for files, e-mail, and other content.; OK to disable: This service provides functionality that is useful to some but not all enterprises, and security-focused enterprises that don't use it can safely disable it. |
-| Notes | The Microsoft services guidance page explicitly lists the WSearch service, documents its Manual baseline and behavior, and marks it OK to disable. |
+| Source | [evidence/captures/power-disable-windows-search-service-qga-20260507.json](../evidence/captures/power-disable-windows-search-service-qga-20260507.json) |
+| Exact quote / path | SERVICE_NAME: WSearch; DISPLAY_NAME: Windows Search; START_TYPE: 2   AUTO_START  (DELAYED); Start REG_DWORD 0x2; Win32_Service StartMode Auto; Get-Service StartType Automatic |
+| Notes | The QGA receipt proves the exact SCM control surface and current VM state on Windows build 26200.8246 without mutation. Microsoft service guidance remains the evidence for the documented baseline and OK-to-disable decision. |
 
 ---
 
@@ -10265,8 +10266,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.services.disable-windows-search.json`
-- Source SHA256: `380953844f8806c4952c924d2e9153e6e21582037f58ab516da209c238afabb3`
-- Proof SHA256: `318efd0a4ecf571547b592047299eb031f980f5aa896121c357292b885def872`
+- Source SHA256: `b01f1277e770259b0bbcd2b8aea8083c2488437b727c4e8ecd3a13aa8535bec0`
+- Proof SHA256: `9b683516726b8993b28c59c507cff3fd559682fb6bfd7dbe0a119468e99e8bc1`
 
 **Summary:** Official Windows service control for Windows Search (WSearch). Microsoft documents the service name, default start mode, and says it is OK to disable on Windows IoT Enterprise. The app disables the service by setting its start mode to Disabled.
 
@@ -10278,6 +10279,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `local-scm-wsearch-2026-03-14` | `repo-doc` | Local SCM snapshot - WSearch | [research/notes/service-snapshots/wsearch-sc-qc-2026-03-14.txt](notes/service-snapshots/wsearch-sc-qc-2026-03-14.txt) |
 | `ms-search-indexing-overview` | `official-doc` | Microsoft Learn: Search indexing process overview | [https://learn.microsoft.com/en-us/windows/win32/search/-search-indexing-process-overview](https://learn.microsoft.com/en-us/windows/win32/search/-search-indexing-process-overview) |
 | `app-system-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs |
+| `vm-system-services-disable-windows-search-service-qga-20260507` | `vm-test` | QGA service inspection receipt for WSearch | [evidence/captures/system-services-disable-windows-search-service-qga-20260507.json](../evidence/captures/system-services-disable-windows-search-service-qga-20260507.json) and [evidence/raw/service-inspection/power-disable-windows-search-service-qga-20260507/service-inspection.json](../evidence/raw/service-inspection/power-disable-windows-search-service-qga-20260507/service-inspection.json) |
 | `vm-wsearch-etw-stackwalk-20260424` | `etw-trace` | Bounded KVM ETW stackwalk receipt for the Windows Search service key | [evidence/raw/etw-stackwalk/system-services-disable-windows-search-etw-20260424-main/system-services-disable-windows-search-etw-20260424-main-summary.json](../evidence/raw/etw-stackwalk/system-services-disable-windows-search-etw-20260424-main/system-services-disable-windows-search-etw-20260424-main-summary.json) and [evidence/raw/etw-stackwalk/system-services-disable-windows-search-etw-20260424-main/system-services-disable-windows-search-etw-20260424-main-stage.json](../evidence/raw/etw-stackwalk/system-services-disable-windows-search-etw-20260424-main/system-services-disable-windows-search-etw-20260424-main-stage.json) and [evidence/captures/system-services-disable-windows-search-etw-stackwalk-attempt-20260424.json](../evidence/captures/system-services-disable-windows-search-etw-stackwalk-attempt-20260424.json) |
 | `vm-wsearch-ghidra-launch-receipt-20260424` | `ghidra-trace` | Guest Ghidra string-xref launcher receipt for WSearch | [evidence/raw/ghidra/ghidra-system-services-disable-windows-search-20260424-main/summary.json](../evidence/raw/ghidra/ghidra-system-services-disable-windows-search-20260424-main/summary.json) |
 
@@ -10285,9 +10287,9 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 
 | Field | Value |
 | --- | --- |
-| Source | [https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services](https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services) |
-| Exact quote / path | Windows Search (WSearch) \| Manual \| OK to disable \| Provides content indexing, property caching, and search results for files, e-mail, and other content. |
-| Notes | The official Learn services page documents the exact WSearch service name, default start mode, disable guidance, and behavior. A companion SCM snapshot is checked in at [research/notes/service-snapshots/wsearch-sc-qc-2026-03-14.txt.](notes/service-snapshots/wsearch-sc-qc-2026-03-14.txt.) |
+| Source | [evidence/captures/system-services-disable-windows-search-service-qga-20260507.json](../evidence/captures/system-services-disable-windows-search-service-qga-20260507.json) |
+| Exact quote / path | SERVICE_NAME: WSearch; DISPLAY_NAME: Windows Search; START_TYPE: 2   AUTO_START  (DELAYED); Start REG_DWORD 0x2; Win32_Service StartMode Auto; Get-Service StartType Automatic |
+| Notes | The QGA receipt proves the exact SCM control surface and current VM state on Windows build 26200.8246 without mutation. Microsoft service guidance remains the evidence for the documented baseline and OK-to-disable decision. |
 
 ---
 

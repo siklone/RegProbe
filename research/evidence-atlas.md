@@ -9825,6 +9825,7 @@ Windows Internals references:
 | `ms-iot-services-wsearch` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Guidance on configuring system services - Windows Search | [https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services](https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services) | `high` | path, value, default, behavior, side-effects, version-scope |
 | `ms-search-indexing-overview` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Search indexing process overview | [https://learn.microsoft.com/en-us/windows/win32/search/-search-indexing-process-overview](https://learn.microsoft.com/en-us/windows/win32/search/-search-indexing-process-overview) | `high` | behavior, side-effects, version-scope |
 | `app-performance-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PerformanceTweakProvider.cs | `high` | path, value, ui-mapping |
+| `vm-power-disable-windows-search-service-qga-20260507` | `vm-test` | `VM test / probe` | QGA service inspection receipt for WSearch | [evidence/captures/power-disable-windows-search-service-qga-20260507.json](../evidence/captures/power-disable-windows-search-service-qga-20260507.json) and [evidence/raw/service-inspection/power-disable-windows-search-service-qga-20260507/service-inspection.json](../evidence/raw/service-inspection/power-disable-windows-search-service-qga-20260507/service-inspection.json) | `high` | path, value, version-scope |
 | `vm-power-disable-windows-search-etw-stackwalk-attempt-20260424` | `etw-trace` | `unspecified` | KVM ETW stage receipt for WSearch backing registry key | [evidence/captures/power-disable-windows-search-etw-stackwalk-attempt-20260424.json](../evidence/captures/power-disable-windows-search-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/power-disable-windows-search-etw-20260424-batch1/power-disable-windows-search-etw-20260424-batch1-stage.json](../evidence/raw/etw-stackwalk/power-disable-windows-search-etw-20260424-batch1/power-disable-windows-search-etw-20260424-batch1-stage.json) | `low` | behavior, version-scope |
 | `vm-power-disable-windows-search-ghidra-launch-receipt-20260424` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for WSearch | [evidence/raw/ghidra/ghidra-power-disable-windows-search-20260424-batch1/summary.json](../evidence/raw/ghidra/ghidra-power-disable-windows-search-20260424-batch1/summary.json) | `low` | version-scope |
 
@@ -9832,10 +9833,10 @@ Windows Internals references:
 
 | Field | Value |
 | --- | --- |
-| Source | [https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services](https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services) |
-| Exact quote / path | Windows Search (WSearch); Manual; Provides content indexing, property caching, and search results for files, e-mail, and other content.; OK to disable: This service provides functionality that is useful to some but not all enterprises, and security-focused enterprises that don't use it can safely disable it. |
+| Source | [evidence/captures/power-disable-windows-search-service-qga-20260507.json](../evidence/captures/power-disable-windows-search-service-qga-20260507.json) |
+| Exact quote / path | SERVICE_NAME: WSearch; DISPLAY_NAME: Windows Search; START_TYPE: 2   AUTO_START  (DELAYED); Start REG_DWORD 0x2; Win32_Service StartMode Auto; Get-Service StartType Automatic |
 | Key found on page | `True` |
-| Notes | The Microsoft services guidance page explicitly lists the WSearch service, documents its Manual baseline and behavior, and marks it OK to disable. |
+| Notes | The QGA receipt proves the exact SCM control surface and current VM state on Windows build 26200.8246 without mutation. Microsoft service guidance remains the evidence for the documented baseline and OK-to-disable decision. |
 
 **Decision**
 
@@ -27267,6 +27268,7 @@ Current writes
 | `local-scm-wsearch-2026-03-14` | `repo-doc` | `Current repo docs` | Local SCM snapshot - WSearch | [research/notes/service-snapshots/wsearch-sc-qc-2026-03-14.txt](notes/service-snapshots/wsearch-sc-qc-2026-03-14.txt) | `high` | path, value, version-scope |
 | `ms-search-indexing-overview` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Search indexing process overview | [https://learn.microsoft.com/en-us/windows/win32/search/-search-indexing-process-overview](https://learn.microsoft.com/en-us/windows/win32/search/-search-indexing-process-overview) | `high` | behavior, side-effects, version-scope |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
+| `vm-system-services-disable-windows-search-service-qga-20260507` | `vm-test` | `VM test / probe` | QGA service inspection receipt for WSearch | [evidence/captures/system-services-disable-windows-search-service-qga-20260507.json](../evidence/captures/system-services-disable-windows-search-service-qga-20260507.json) and [evidence/raw/service-inspection/power-disable-windows-search-service-qga-20260507/service-inspection.json](../evidence/raw/service-inspection/power-disable-windows-search-service-qga-20260507/service-inspection.json) | `high` | path, value, version-scope |
 | `vm-wsearch-etw-stackwalk-20260424` | `etw-trace` | `unspecified` | Bounded KVM ETW stackwalk receipt for the Windows Search service key | [evidence/raw/etw-stackwalk/system-services-disable-windows-search-etw-20260424-main/system-services-disable-windows-search-etw-20260424-main-summary.json](../evidence/raw/etw-stackwalk/system-services-disable-windows-search-etw-20260424-main/system-services-disable-windows-search-etw-20260424-main-summary.json) and [evidence/raw/etw-stackwalk/system-services-disable-windows-search-etw-20260424-main/system-services-disable-windows-search-etw-20260424-main-stage.json](../evidence/raw/etw-stackwalk/system-services-disable-windows-search-etw-20260424-main/system-services-disable-windows-search-etw-20260424-main-stage.json) and [evidence/captures/system-services-disable-windows-search-etw-stackwalk-attempt-20260424.json](../evidence/captures/system-services-disable-windows-search-etw-stackwalk-attempt-20260424.json) | `medium` | behavior, risk, version-scope |
 | `vm-wsearch-ghidra-launch-receipt-20260424` | `ghidra-trace` | `unspecified` | Guest Ghidra string-xref launcher receipt for WSearch | [evidence/raw/ghidra/ghidra-system-services-disable-windows-search-20260424-main/summary.json](../evidence/raw/ghidra/ghidra-system-services-disable-windows-search-20260424-main/summary.json) | `low` | open-question, version-scope |
 
@@ -27274,10 +27276,10 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Source | [https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services](https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services) |
-| Exact quote / path | Windows Search (WSearch) \| Manual \| OK to disable \| Provides content indexing, property caching, and search results for files, e-mail, and other content. |
+| Source | [evidence/captures/system-services-disable-windows-search-service-qga-20260507.json](../evidence/captures/system-services-disable-windows-search-service-qga-20260507.json) |
+| Exact quote / path | SERVICE_NAME: WSearch; DISPLAY_NAME: Windows Search; START_TYPE: 2   AUTO_START  (DELAYED); Start REG_DWORD 0x2; Win32_Service StartMode Auto; Get-Service StartType Automatic |
 | Key found on page | `True` |
-| Notes | The official Learn services page documents the exact WSearch service name, default start mode, disable guidance, and behavior. A companion SCM snapshot is checked in at [research/notes/service-snapshots/wsearch-sc-qc-2026-03-14.txt.](notes/service-snapshots/wsearch-sc-qc-2026-03-14.txt.) |
+| Notes | The QGA receipt proves the exact SCM control surface and current VM state on Windows build 26200.8246 without mutation. Microsoft service guidance remains the evidence for the documented baseline and OK-to-disable decision. |
 
 **Decision**
 

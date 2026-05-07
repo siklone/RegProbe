@@ -1,0 +1,52 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-07T14:04:34.684895Z",
+  "run_id": "power-disable-windows-search-service-qga-20260507",
+  "capture_profile": "qga-service-inspection-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "connect": "qemu:///session",
+  "launch_transport": "qga",
+  "mutation_performed": false,
+  "target": {
+    "location_kind": "service",
+    "service_name": "WSearch",
+    "value_name": "StartMode"
+  },
+  "attempt_status": "qga_service_inspection_ok",
+  "assessment": "A 2026-05-07 non-mutating QGA service inspection ran `sc qc WSearch`, `reg query HKLM\\SYSTEM\\CurrentControlSet\\Services\\WSearch /v Start`, and a PowerShell `Win32_Service`/`Get-Service` snapshot. The guest confirmed the exact SCM service `WSearch`, display name `Windows Search`, binary `C:\\WINDOWS\\system32\\SearchIndexer.exe /Embedding`, current VM start mode `Auto` / `Automatic`, service state `Running`, and backing `Start` DWORD `0x2`. No service state or start-mode mutation was performed; Microsoft service guidance remains the authority for the documented baseline and OK-to-disable decision.",
+  "service_observation": {
+    "service_name": "WSearch",
+    "display_name": "Windows Search",
+    "state": "Running",
+    "status": "Running",
+    "start_mode": "Auto",
+    "start_type": "Automatic",
+    "sc_start_type": "2   AUTO_START  (DELAYED)",
+    "registry_start_dword": "0x2",
+    "binary_path": "C:\\WINDOWS\\system32\\SearchIndexer.exe /Embedding",
+    "service_start_name": "LocalSystem",
+    "can_stop": true,
+    "mutation_performed": false,
+    "launch_transport": "qga",
+    "os_build": "10.0.26200.8246"
+  },
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/service-inspection/power-disable-windows-search-service-qga-20260507/service-inspection.json",
+      "sha256": "c4e761ac5dbbdbf933740d32db9ec8457993c8af177a9c34ba1974195e4e0386",
+      "size": 19498,
+      "collected_utc": "2026-05-07T14:04:34.684895Z"
+    }
+  ],
+  "record_id": "power.disable-windows-search",
+  "os_snapshot": {
+    "ProductName": "Windows 10 Pro",
+    "DisplayVersion": "25H2",
+    "CurrentBuild": "26200",
+    "CurrentBuildNumber": "26200",
+    "UBR": 8246,
+    "BuildLabEx": "26100.1.amd64fre.ge_release.240331-1435",
+    "EditionID": "Professional",
+    "InstallationType": "Client"
+  }
+}

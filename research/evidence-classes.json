@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-07T14:01:49.474353Z",
+  "generated_utc": "2026-05-07T14:09:09.652060Z",
   "summary": {
     "total_records": 356,
     "class_counts": {
@@ -11655,15 +11655,15 @@
         "gaming_safe": null
       },
       "validated_semantics": {
-        "summary": "The Microsoft services guidance page explicitly lists the WSearch service, documents its Manual baseline and behavior, and marks it OK to disable.",
+        "summary": "The QGA receipt proves the exact SCM control surface and current VM state on Windows build 26200.8246 without mutation. Microsoft service guidance remains the evidence for the documented baseline and OK-to-disable decision.",
         "has_validation_proof": true,
         "has_semantics_evidence": true,
         "links": [
           {
             "title": "Validation proof source",
-            "url": "https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services",
+            "url": "evidence/captures/power-disable-windows-search-service-qga-20260507.json",
             "kind": "validation-proof",
-            "summary": "Windows Search (WSearch); Manual; Provides content indexing, property caching, and search results for files, e-mail, and other content.; OK to disable: This service provides fun..."
+            "summary": "SERVICE_NAME: WSearch; DISPLAY_NAME: Windows Search; START_TYPE: 2   AUTO_START  (DELAYED); Start REG_DWORD 0x2; Win32_Service StartMode Auto; Get-Service StartType Automatic"
           },
           {
             "title": "Microsoft Learn: Guidance on configuring system services - Windows Search",
@@ -11680,10 +11680,16 @@
         ]
       },
       "runtime_proof": {
-        "summary": "A bounded 2026-04-24 guest string-xref retry for `WSearch` failed in `ensure-admin-shell` before any Ghidra bundle reached the host.",
+        "summary": "A 2026-05-07 non-mutating QGA service inspection captured `sc qc WSearch`, the backing `HKLM\\SYSTEM\\CurrentControlSet\\Services\\WSearch` / `Start` value, and PowerShell `Win32_Service`/`Get-Service` output. The guest confirmed exact service identity `WSearch...",
         "needs_vm_validation": false,
         "has_runtime_evidence": true,
         "links": [
+          {
+            "title": "QGA service inspection receipt for WSearch",
+            "url": "evidence/captures/power-disable-windows-search-service-qga-20260507.json and evidence/raw/service-inspection/power-disable-windows-search-service-qga-20260507/service-inspection.json",
+            "kind": "vm-test",
+            "summary": "A 2026-05-07 non-mutating QGA service inspection captured `sc qc WSearch`, the backing `HKLM\\SYSTEM\\CurrentControlSet\\Services\\WSearch` / `Start` value, and PowerShell `Win32_Se..."
+          },
           {
             "title": "Guest Ghidra launch receipt for WSearch",
             "url": "evidence/raw/ghidra/ghidra-power-disable-windows-search-20260424-batch1/summary.json",
@@ -28762,22 +28768,22 @@
       "confidence": "high",
       "app_mapping_status": "matches-research",
       "restore_story_known": true,
-      "tested_build": "26100",
+      "tested_build": "26200.8246",
       "anticheat_risk": {
         "anticheat_risk": "unknown",
         "anticheat_details": null,
         "gaming_safe": null
       },
       "validated_semantics": {
-        "summary": "The official Learn services page documents the exact WSearch service name, default start mode, disable guidance, and behavior. A companion SCM snapshot is checked in at research/notes/service-snapshots/wsearch-sc-qc-2026-03-14.txt.",
+        "summary": "The QGA receipt proves the exact SCM control surface and current VM state on Windows build 26200.8246 without mutation. Microsoft service guidance remains the evidence for the documented baseline and OK-to-disable decision.",
         "has_validation_proof": true,
         "has_semantics_evidence": true,
         "links": [
           {
             "title": "Validation proof source",
-            "url": "https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services",
+            "url": "evidence/captures/system-services-disable-windows-search-service-qga-20260507.json",
             "kind": "validation-proof",
-            "summary": "Windows Search (WSearch) | Manual | OK to disable | Provides content indexing, property caching, and search results for files, e-mail, and other content."
+            "summary": "SERVICE_NAME: WSearch; DISPLAY_NAME: Windows Search; START_TYPE: 2   AUTO_START  (DELAYED); Start REG_DWORD 0x2; Win32_Service StartMode Auto; Get-Service StartType Automatic"
           },
           {
             "title": "Microsoft Learn: Guidance on configuring system services - Windows Search",
@@ -28794,10 +28800,17 @@
         ]
       },
       "runtime_proof": {
-        "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "summary": "A 2026-05-07 non-mutating QGA service inspection captured `sc qc WSearch`, the backing `HKLM\\SYSTEM\\CurrentControlSet\\Services\\WSearch` / `Start` value, and PowerShell `Win32_Service`/`Get-Service` output. The guest confirmed exact service identity `WSearch...",
         "needs_vm_validation": false,
-        "has_runtime_evidence": false,
-        "links": []
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "QGA service inspection receipt for WSearch",
+            "url": "evidence/captures/system-services-disable-windows-search-service-qga-20260507.json and evidence/raw/service-inspection/power-disable-windows-search-service-qga-20260507/service-inspection.json",
+            "kind": "vm-test",
+            "summary": "A 2026-05-07 non-mutating QGA service inspection captured `sc qc WSearch`, the backing `HKLM\\SYSTEM\\CurrentControlSet\\Services\\WSearch` / `Start` value, and PowerShell `Win32_Se..."
+          }
+        ]
       },
       "upstream_lineage": {
         "summary": "No upstream nohuto source link is attached to this record.",

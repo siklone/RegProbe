@@ -204,6 +204,19 @@
       "strength": "high"
     },
     {
+      "evidence_id": "vm-system-services-disable-windows-search-service-qga-20260507",
+      "kind": "vm-test",
+      "title": "QGA service inspection receipt for WSearch",
+      "location": "evidence/captures/system-services-disable-windows-search-service-qga-20260507.json and evidence/raw/service-inspection/power-disable-windows-search-service-qga-20260507/service-inspection.json",
+      "summary": "A 2026-05-07 non-mutating QGA service inspection captured `sc qc WSearch`, the backing `HKLM\\SYSTEM\\CurrentControlSet\\Services\\WSearch` / `Start` value, and PowerShell `Win32_Service`/`Get-Service` output. The guest confirmed exact service identity `WSearch`, display name `Windows Search`, current VM start mode `Auto` / `Automatic`, service state `Running`, and `Start` DWORD `0x2` without mutating the service. This supersedes the earlier ETW artifact-upload blocker for this service-control lane; Microsoft guidance remains the default and disable-support authority.",
+      "supports": [
+        "path",
+        "value",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
       "evidence_id": "vm-wsearch-etw-stackwalk-20260424",
       "kind": "etw-trace",
       "title": "Bounded KVM ETW stackwalk receipt for the Windows Search service key",
@@ -239,12 +252,12 @@
     "why": "Microsoft documents Windows Search `(WSearch)` with a Manual default start mode, marks it `OK to disable`, and states that it provides content indexing, property caching, and search results. The app disables the same documented service control surface by setting its start mode to Disabled, with no path mismatch in the retained implementation review.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-28T18:44:26Z",
+  "last_reviewed_utc": "2026-05-07T14:04:34.684895Z",
   "validation_proof": {
-    "source_url": "https://learn.microsoft.com/en-us/windows/iot/iot-enterprise/optimize/services",
-    "exact_quote_or_path": "Windows Search (WSearch) | Manual | OK to disable | Provides content indexing, property caching, and search results for files, e-mail, and other content.",
+    "source_url": "evidence/captures/system-services-disable-windows-search-service-qga-20260507.json",
+    "exact_quote_or_path": "SERVICE_NAME: WSearch; DISPLAY_NAME: Windows Search; START_TYPE: 2   AUTO_START  (DELAYED); Start REG_DWORD 0x2; Win32_Service StartMode Auto; Get-Service StartType Automatic",
     "key_found_on_page": true,
-    "notes": "The official Learn services page documents the exact WSearch service name, default start mode, disable guidance, and behavior. A companion SCM snapshot is checked in at research/notes/service-snapshots/wsearch-sc-qc-2026-03-14.txt."
+    "notes": "The QGA receipt proves the exact SCM control surface and current VM state on Windows build 26200.8246 without mutation. Microsoft service guidance remains the evidence for the documented baseline and OK-to-disable decision."
   },
   "source_enrichment": {
     "last_updated_utc": "2026-04-28T18:44:26Z",
@@ -268,10 +281,11 @@
       "missing_reason": "service-control-record-no-wrk-lane-retained",
       "notes": "This service-control record is grounded in Microsoft service guidance and repo SCM snapshots; no candidate-specific WRK lane is retained."
     },
-    "notes": "Windows Search service disablement remains an official-doc and service-snapshot record rather than a source-mirror-backed kernel or registry lane. A bounded 2026-04-24 KVM ETW stackwalk retry for `HKLM\\SYSTEM\\CurrentControlSet\\Services\\WSearch` reached `stage = artifact-upload` and published host-visible summary and stage receipts, but no ETL, XML, or normalized bundle reached the repo before the hard 90 second timeout fired. A same-day guest Ghidra string-xref retry for `WSearch` then failed in `ensure-admin-shell` with `error_kind = ghidra-string-launch-error` before any bounded xref artifact reached the host.",
+    "notes": "Windows Search service disablement remains an official-doc and service-snapshot record rather than a source-mirror-backed kernel or registry lane. A bounded 2026-04-24 KVM ETW stackwalk retry for `HKLM\\SYSTEM\\CurrentControlSet\\Services\\WSearch` reached `stage = artifact-upload` and published host-visible summary and stage receipts, but no ETL, XML, or normalized bundle reached the repo before the hard 90 second timeout fired. A same-day guest Ghidra string-xref retry for `WSearch` then failed in `ensure-admin-shell` with `error_kind = ghidra-string-launch-error` before any bounded xref artifact reached the host. A 2026-05-07 non-mutating QGA service inspection superseded the earlier ETW artifact-upload blocker for `WSearch` by confirming the exact SCM service identity, current VM start mode, service state, and backing `Start` DWORD without changing the service.",
     "runtime_capture_reviewed": {
       "etw-stackwalk": true,
-      "status": "host-timeout-at-artifact-upload"
+      "service-inspection": true,
+      "status": "qga_service_inspection_ok"
     },
     "static_reviewed": {
       "ghidra": true,
@@ -279,6 +293,20 @@
     },
     "ghidra": true,
     "ghidra_status": "launch_blocked",
-    "ghidra_artifact": "evidence/raw/ghidra/ghidra-system-services-disable-windows-search-20260424-main/summary.json"
-  }
+    "ghidra_artifact": "evidence/raw/ghidra/ghidra-system-services-disable-windows-search-20260424-main/summary.json",
+    "service_inspection_reviewed": true,
+    "service_inspection_review_status": "qga_service_inspection_ok",
+    "service_inspection_review_artifact": "evidence/captures/system-services-disable-windows-search-service-qga-20260507.json",
+    "etw_stackwalk_reviewed": true,
+    "etw_stackwalk_review_status": "superseded_by_qga_service_inspection",
+    "etw_stackwalk_review_artifact": "evidence/captures/system-services-disable-windows-search-service-qga-20260507.json"
+  },
+  "tested_on": [
+    {
+      "environment": "RegProbe KVM QGA service inspection",
+      "os": "Windows 11 Pro 25H2 guest (registry ProductName reports Windows 10 Pro)",
+      "build": "26200.8246",
+      "notes": "Non-mutating QGA inspection confirmed WSearch SCM identity, current VM StartMode `Auto` / StartType `Automatic`, backing `Start` DWORD `0x2`, and guest build 26200.8246."
+    }
+  ]
 }
