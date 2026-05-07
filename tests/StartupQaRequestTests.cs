@@ -28,6 +28,7 @@ public sealed class StartupQaRequestTests
         Assert.Equal("explorer.show-file-extensions", request!.TweakId);
         Assert.Equal("C:\\Temp\\qa.json", request.OutputPath);
         Assert.True(request.RollbackAfterApply);
+        Assert.False(request.AllowGatedMutation);
         Assert.True(request.ShutdownWhenDone);
     }
 
@@ -42,5 +43,18 @@ public sealed class StartupQaRequestTests
 
         Assert.NotNull(request);
         Assert.False(request!.RollbackAfterApply);
+    }
+
+    [Fact]
+    public void TryParse_EnablesQaOnlyGatedMutationOverride_WhenFlagIsPresent()
+    {
+        var request = StartupQaRequest.TryParse([
+            "--qa-run-tweak",
+            "system.disable-clipboard-history",
+            "--qa-allow-gated-mutation"
+        ]);
+
+        Assert.NotNull(request);
+        Assert.True(request!.AllowGatedMutation);
     }
 }

@@ -7,18 +7,18 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Field | Value |
 | --- | --- |
 | Total records | 356 |
-| Validated | 256 |
+| Validated | 271 |
 | Deprecated | 55 |
 | Review required | 0 |
 | Records with evidence roots | 24 |
 | Records with evidence | 356 |
 | Records without evidence | 0 |
-| Records missing validation proof | 32 |
+| Records missing validation proof | 17 |
 | Deprecated missing validation proof | 0 |
-| Class A | 246 |
-| Class B | 21 |
+| Class A | 258 |
+| Class B | 24 |
 | Class C | 2 |
-| Class D | 32 |
+| Class D | 17 |
 | Class E | 55 |
 | Imported candidate backlog | [research/imported-candidate-backlog.json](imported-candidate-backlog.json) |
 | Imported candidate count | 0 |
@@ -112,23 +112,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `cleanup.wer-files` | review-required | Class D | `research/records/cleanup.wer-files.review.json` | - | `61d3171e1b2eacaa3a743d1ef77209c7456f6a9efa52cfe180eeff101fee4f27` |  | 4 |
 | `cleanup.windows-old` | review-required | Class D | `research/records/cleanup.windows-old.review.json` | - | `5031702b541499b7a085336a5969971387560278744ec9ac362b48c1ea7ad140` |  | 4 |
 | `cleanup.windows-update-cache` | review-required | Class D | `research/records/cleanup.windows-update-cache.review.json` | - | `b54ffe1c8b8c3afbdacf4c142f47b85ddde5befe66662d626f4262819e64f2c1` |  | 4 |
-| `misc.disable-edge-features` | review-required | Class D | `research/records/misc.disable-edge-features.review.json` | - | `53a58127397ab6c5d65091264a07022a29710101870f92577d8bbed9797a1d45` |  | 3 |
-| `misc.disable-office-telemetry` | review-required | Class D | `research/records/misc.disable-office-telemetry.review.json` | - | `a3c990bdf1d7e15e852c033c3f8a16cc2e4ca35b9480904560a303a10e2487cb` |  | 3 |
-| `misc.disable-onedrive` | review-required | Class D | `research/records/misc.disable-onedrive.review.json` | - | `c5afcd9aa62d09887cbeaee8d6b39bbae4987c65c038c5e626eb8b1ad6cbb597` |  | 3 |
-| `misc.disable-visual-studio-telemetry` | review-required | Class D | `research/records/misc.disable-visual-studio-telemetry.review.json` | - | `8e110dc830af8d20dd552a95d5195ab1c9709e8e703288a19437b81d60ada3ee` |  | 3 |
-| `misc.disable-vscode-telemetry` | review-required | Class D | `research/records/misc.disable-vscode-telemetry.review.json` | - | `c324a644eef9f4f97321ebc6bfaa7d55909dc42c5b507b7f8732a79299e9d491` |  | 3 |
-| `misc.optimize-7zip-settings` | review-required | Class D | `research/records/misc.optimize-7zip-settings.review.json` | - | `d783e5e459e2d06648defb17cabaff646d0fbc666a40c33894253a0a292e457a` |  | 3 |
 | `network.flush-dns-cache` | review-required | Class D | `research/records/network.flush-dns-cache.review.json` | - | `633bb92fd5d2cbeb30fd2a2fe78d2aa6916cb35481bd4d60758f230d87a13d3c` |  | 4 |
 | `network.reset-winsock` | review-required | Class D | `research/records/network.reset-winsock.review.json` | - | `2803c02cbe7eb86855900d3ae1d3f332f946356255445b3b69141b92a461a352` |  | 5 |
-| `peripheral.audio-disable-enhancements` | review-required | Class D | `research/records/peripheral.audio-disable-enhancements.review.json` | - | `ef078d53b763295cb5812697d2d47c8c20a83638813a0f54117ac8d4420db1d0` |  | 3 |
-| `peripheral.keyboard-disable-language-hotkey` | review-required | Class D | `research/records/peripheral.keyboard-disable-language-hotkey.review.json` | - | `6138a479c36d4330eb80a6c2f25d5f305511c4f08ae2d2cb6ec6c93a3691dfc7` |  | 3 |
-| `peripheral.keyboard-optimize-repeat` | review-required | Class D | `research/records/peripheral.keyboard-optimize-repeat.review.json` | - | `0d39347d991490d111463cf080a68d071b257e664719c27c215ae7269a1ac51b` |  | 3 |
-| `peripheral.mouse-disable-acceleration` | review-required | Class D | `research/records/peripheral.mouse-disable-acceleration.review.json` | - | `42e00b63cc24f9bd1961f3ce14a14ef4d5878b8ea7dd08eb588e3d2fe46e8d12` |  | 3 |
-| `peripheral.mouse-disable-throttle` | review-required | Class D | `research/records/peripheral.mouse-disable-throttle.review.json` | - | `95880a88f59239507633caf51fa01504e183dfb59b3d65b644635f1d48f5525c` |  | 3 |
-| `power.disable-cpu-parking` | review-required | Class D | `research/records/power.disable-cpu-parking.review.json` | - | `c03a9d96e34a5cbb5b86e592e93974b3247af8ec00c77e42cff732174a693a95` |  | 4 |
-| `power.disable-hibernation` | review-required | Class D | `research/records/power.disable-hibernation.review.json` | - | `314cf1cc88b7cefecfb1f2c3c8bbff2cc008fd01da3ebb97cf55c5f655ebbbf1` |  | 4 |
-| `power.disable-superfetch` | review-required | Class D | `research/records/power.disable-superfetch.review.json` | - | `6aee4e834596e243ffc6a6f0057236e04bbdc0f6d81352347b0e9ac2a9b67a2a` |  | 3 |
-| `power.disable-usb-selective-suspend` | review-required | Class D | `research/records/power.disable-usb-selective-suspend.review.json` | - | `532c9d58d4658069b4369f51c71ca3d18931b64b5933c53c07114c54a68b1c64` |  | 4 |
 | `security.disable-uac` | review-required | Class D | `research/records/security.disable-uac.review.json` | - | `a59d0a3d09abe4be2127f12534e124f5c27cc4863b7837a4ed61f65f6a4b39e4` |  | 5 |
 | `audio.disable-beep` | validated | Class A | `research/records/audio.disable-beep.review.json` | - | `6d8ec1e66a7e07ee63b2ccc0de667b30146fab7fbf4358e3334d626090ef2380` | `5b2fdb894230a9968ae5988951da38e4ed60333b008effa58bdae351929538b0` | 7 |
 | `audio.show-disconnected-devices` | validated | Class A | `research/records/audio.show-disconnected-devices.review.json` | [evidence/records/audio.show-disconnected-devices](../evidence/records/audio.show-disconnected-devices) | `8b34ab3438a2b1eff11156ae9854724cbc8579c12ad348591b69ab145fc7edf7` | `2a472c00bb66514035d3bae1cb6dafc44f22d63d5726d8cbab2aeadf8c97cafa` | 6 |
@@ -160,6 +145,12 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `explorer.show-status-bar` | validated | Class A | `research/records/explorer.show-status-bar.review.json` | - | `ae7cf26850b877d8108fe6d80751563136236b3b16f3d0f4066b90d271acc72a` | `d5ceb59cacb9577e1e94c743045a1887788da879a6ca9f1f66f8f6243a580fd7` | 7 |
 | `explorer.show-type-overlay` | validated | Class A | `research/records/explorer.show-type-overlay.review.json` | - | `94b4ceed507c0971cb6f06e5a94af3ed0d157f65a888c1a7a596c0e53ecb1d53` | `b1c96dcc8c6b59966c9aee8953269dddece83c0e96461b0766e386c3dad972a7` | 4 |
 | `explorer.taskbar-alignment-left` | validated | Class A | `research/records/explorer.taskbar-alignment-left.review.json` | - | `c537d9c76c9631ee363ac53d885353442c5a5f9fdbbaf38bc6c7cb75de71000f` | `381288680b46fd38f11aa29fdc61e8780f779993e0c8c4d1d0c6cde73bc6531e` | 4 |
+| `misc.disable-edge-features` | validated | Class A | `research/records/misc.disable-edge-features.review.json` | - | `c8e98248c751883b51fface2151d09f6d694d60609ce9237d3a2aa0fb2e4f9e8` | `d4a84beae0d341aa704d1da365fc16668ec8bedfce977888c4a57007ffb6f71c` | 4 |
+| `misc.disable-office-telemetry` | validated | Class A | `research/records/misc.disable-office-telemetry.review.json` | - | `db30d7f2e480ae01b1121fb90d6baf9eedf40f49bc76fbedab621c433e6e2f6c` | `fb9b56896845bdc1de4e38e3517d1bf9f08e92cb6ab44afc374a53d3671cf588` | 4 |
+| `misc.disable-onedrive` | validated | Class A | `research/records/misc.disable-onedrive.review.json` | - | `d44a134e8ab24da30ba96b74c7bdc31b9ed83214f7ddbdad10332d277c9f5a34` | `98cc432cc6d8f32a95ac9101576b5223842938089ee57447c52133d856464e8b` | 4 |
+| `misc.disable-visual-studio-telemetry` | validated | Class A | `research/records/misc.disable-visual-studio-telemetry.review.json` | - | `2585d09b6f981ca4a0d2758d4aaf27074eedd4923344fad5e0fca5aac3cce9d9` | `228b66d4a5974c953ea793fb6b80d60692744cac81c36c23f8963d4dd9b97dfa` | 4 |
+| `misc.disable-vscode-telemetry` | validated | Class A | `research/records/misc.disable-vscode-telemetry.review.json` | - | `63e64144264b30874b7f0f30c79ca767d23f7db9987658278d422a27097b7df2` | `adeebb03c1c3f4682ff790fb505f2a175f9fac3de6626efc245b80f331570aa1` | 4 |
+| `misc.optimize-7zip-settings` | validated | Class A | `research/records/misc.optimize-7zip-settings.review.json` | - | `428e2ce92f53692333339c385b7be490fc562f0a949ac7130ecea99226c4a06d` | `32d6dfa6b3fd2e059bb6bbd521880bb707b53d0bc10b6695bbe2f4c62b96de44` | 4 |
 | `network.disable-active-probing` | validated | Class A | `research/records/network.disable-active-probing.review.json` | - | `85c98bb50cbfbcfd43c7760a66087d827c57fbf10b229d2ae3c4e0f78522bd80` | `7db4eb4572875508e4d75b00355508ea0eafa11c0dcd0cc2698ed205c9cecbf1` | 7 |
 | `network.disable-default-shares` | validated | Class A | `research/records/network.disable-default-shares.json` | - | `de61e1c176d8cc6e7f3a781c6edf00ba49a3b35717c84acc6f9e20cbee7fd64b` | `3ec439dc9625b28652f5cd5b554d23c1eadf10977d19fbdf951d24008bc3e78a` | 5 |
 | `network.disable-ipv6` | validated | Class A | `research/records/network.disable-ipv6.json` | - | `fe3fd7f0df35f3bf1b0c8aa6c62205cfb41f436bab62da2f6297db1398366b4d` | `9615626d9e4327c855322dd0905d7d29cf6180a54a256b05811ff2124e76af93` | 5 |
@@ -197,9 +188,14 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `performance.disable-menu-show-delay` | validated | Class A | `research/records/performance.disable-menu-show-delay.review.json` | - | `7029514581cbc9f2b66f123500036b8842927438b37fc5dd3cd433ba42f60c9c` | `863986a77cec7e5b52eb2feb934346bfd7a1133d797b5c13ab846338a68bbe6c` | 3 |
 | `performance.disable-taskbar-animations` | validated | Class A | `research/records/performance.disable-taskbar-animations.review.json` | [evidence/records/performance.disable-taskbar-animations](../evidence/records/performance.disable-taskbar-animations) | `72c394cea36c238a1b956bd28bbb59098fa1760f83adfe79209505daf4d3e622` | `6f61cb0855cb594e80ef1cc52a46e4fd172f4a3927c0fb0e2dbc612696719358` | 8 |
 | `peripheral.audio-disable-ducking` | validated | Class A | `research/records/peripheral.audio-disable-ducking.review.json` | - | `9c909cfc33584ca457a3e8993aa554177b29adf4983bab348435089d5620d35a` | `707576b673a28c8af68fdff4bd9c1e7ab4667b42a5f7b283dba18534e3f3ab79` | 5 |
+| `peripheral.audio-disable-enhancements` | validated | Class B | `research/records/peripheral.audio-disable-enhancements.review.json` | - | `b389692eaf4d6a44d728d8773fdaf840e1f24c31e720014c9c9f532d3c48be44` | `fa3839f29854be9a9c99d22ce3bc07232b7d274496e7413b90d252402744ae45` | 4 |
 | `peripheral.autoplay-take-no-action` | validated | Class A | `research/records/peripheral.autoplay-take-no-action.review.json` | - | `35a27a8225f21f95c09f4ce819aa205965e99494f74f956051b31c76f602a188` | `65ce551667f3d9b5bd3f77c92fdfd5e00113e541223d3dafb91627206edf8e27` | 4 |
 | `peripheral.disable-autoplay` | validated | Class A | `research/records/peripheral.disable-autoplay.review.json` | - | `5ea35bd9e72bf3bc3eaa422117b7770c32ac8e13dc79fa4e34faa60dd0ca1db2` | `d3db858cacb57a9dc7dae6c3410f943cd99b67bfac0ffe3a2798ba560763d573` | 7 |
 | `peripheral.disable-sticky-keys-prompt` | validated | Class A | `research/records/peripheral.disable-sticky-keys-prompt.review.json` | - | `6028f35f2188d5c0c66aa1b53d9302d04918d9ab1d2447c92d195ab9b2d59a23` | `4c0b1549e97383602bb402a3e42cfe13dacfa7872433c4e07647353144ef8571` | 4 |
+| `peripheral.keyboard-disable-language-hotkey` | validated | Class A | `research/records/peripheral.keyboard-disable-language-hotkey.review.json` | - | `41408e0c27693a3ab93559aa533a7302dd243ec4cadba015ba1647e61d7127a8` | `bcc025fcb235d191aa97136fac5c5c30a9d2f8571c6742d124e9ce09823b6779` | 4 |
+| `peripheral.keyboard-optimize-repeat` | validated | Class A | `research/records/peripheral.keyboard-optimize-repeat.review.json` | - | `8164a4449a40b443d3898434a72a1175c1dfa421e34549610d0d67d8d59ebba8` | `6cf67d6da06959c3dacc91f5a3e77307dedad3de6a88678b55eb64edce6120aa` | 4 |
+| `peripheral.mouse-disable-acceleration` | validated | Class A | `research/records/peripheral.mouse-disable-acceleration.review.json` | - | `8c20bde7651dd846e481ba9c0bf7c20b99086386e31cc514db82b121e58a7981` | `bd98172bca8ff36b8a50622aeb2c6f71eb7111c54eabe9b376e58ba1fa7ee56f` | 4 |
+| `peripheral.mouse-disable-throttle` | validated | Class A | `research/records/peripheral.mouse-disable-throttle.review.json` | - | `a01e2a458d3cd1568b67997fc89b0805f07dbe2e954b09ddd8583bea4f97106f` | `448f25a45f571abd238c715c2bf1f03a283a65aeaa2595b104796b6929f49ba7` | 4 |
 | `policy.system.enable-virtualization` | validated | Class B | `research/records/policy.system.enable-virtualization.json` | [evidence/records/policy.system.enable-virtualization](../evidence/records/policy.system.enable-virtualization) | `987e2ca5ab40dfbde45da5050a35844825288f7a6f6b173a62a4552ff06876db` | `5005cae27faa69e1133858c324a730e66ec750ae8fb5f1631ff815c6b1162047` | 13 |
 | `power.control.class1-initial-unpark-count` | validated | Class B | `research/records/power.control.class1-initial-unpark-count.json` | [evidence/records/power.control.class1-initial-unpark-count](../evidence/records/power.control.class1-initial-unpark-count) | `fa44f28403c225e95359a0c9a4799d5688265fb90b964d7b6d70236e0586a841` | `a72121d16b566cdba83dee54ae043cb54c3dc36de0f2c4a335bfaf7eb28ca910` | 9 |
 | `power.control.hiber-file-size-percent` | validated | Class A | `research/records/power.control.hiber-file-size-percent.json` | [evidence/records/power.control.hiber-file-size-percent](../evidence/records/power.control.hiber-file-size-percent) | `88de85dc76bda18e8347a10d07a1e3b512dd76dd87e2768328c4a7bea6d3420f` | `02e2f41ef03b972170ad7896c7af8a703300def3f4724df7e83d8100e69f0ae4` | 10 |
@@ -210,9 +206,13 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `power.control.perf-calculate-actual-utilization` | validated | Class B | `research/records/power.control.perf-calculate-actual-utilization.json` | [evidence/records/power.control.perf-calculate-actual-utilization](../evidence/records/power.control.perf-calculate-actual-utilization) | `9530e576f47f22bc45ba4a7983464fbe9a092ca6ff4e2b364e0b3ae18c54b5c8` | `0b9db986096b363ddb7a503bdd24202f4363bfe219e159ed604e8ce68e2ab572` | 9 |
 | `power.control.timer-rebase-threshold-on-drips-exit` | validated | Class B | `research/records/power.control.timer-rebase-threshold-on-drips-exit.json` | [evidence/records/power.control.timer-rebase-threshold-on-drips-exit](../evidence/records/power.control.timer-rebase-threshold-on-drips-exit) | `e35cf973a70dbc1a578a37938e20a200ab69f0a8d20c4f2d5bf6b6a9b311bfa5` | `54f7d729b7c430c4d8fa52ccb91256651e35c189b6c788691161084ffad23095` | 10 |
 | `power.disable-cpu-idle-states` | validated | Class A | `research/records/power.disable-cpu-idle-states.json` | [evidence/records/power.disable-cpu-idle-states](../evidence/records/power.disable-cpu-idle-states) | `0c4938318a9b502144c0f1ab5ed5ad201155466ae668ab8c1c3b654dfb294bb0` | `1798640a1a75847caf8a5c8caa6949c387e8118510e6cf57d7b76f44ed6a5a3b` | 14 |
+| `power.disable-cpu-parking` | validated | Class A | `research/records/power.disable-cpu-parking.review.json` | - | `d28533ca569b9bed1bfb608de5b9ace2541c32deba39a76c0162649aa2672ede` | `1e07982a5d49d800812250f38700512f25a454be1abcd9404d0d02d4850c24dc` | 5 |
 | `power.disable-fast-startup` | validated | Class A | `research/records/power.disable-fast-startup.review.json` | - | `5c6c3f5b3561a755cf0a46ca1ed0de6c44577464ad887e118bd5af655f0999bd` | `cf91e404c6ac19f5792f0a45c40cd8f2ed1504f0e633f6f09a2ec1cada0ec9b7` | 6 |
+| `power.disable-hibernation` | validated | Class B | `research/records/power.disable-hibernation.review.json` | - | `2778a9aed9bff093a1c65ed695f27c8209e72c42ad6f65ae0dd1ff659fd26864` | `f47dddbcd888f51e113c81e18191c39727d7cd39f015d93ab43fd90d2b39a180` | 5 |
 | `power.disable-network-power-saving.policy` | validated | Class A | `research/records/power.disable-network-power-saving.policy.review.json` | [evidence/records/power.disable-network-power-saving.policy](../evidence/records/power.disable-network-power-saving.policy) | `ad2354239542f7cf0b1ba220d201c15bec557ea601ab9956d9925a23290988af` | `232e318df18a2327ad504a0c942305bb7c01eb9de6d469b2158aa056e1ac6d6a` | 4 |
 | `power.disable-power-throttling` | validated | Class A | `research/records/power.disable-power-throttling.json` | - | `8a5f23aac7116900e33068e8b0c7ace86b5a17f1ab791020061f38551552ff3f` | `b78646de93a21d13b29902af3fba219292617267422db672a2be04241d37e94d` | 4 |
+| `power.disable-superfetch` | validated | Class B | `research/records/power.disable-superfetch.review.json` | - | `cbfb647816ff60ace2c4fd8cf4988a2837db3c6fa6d79d3f4a246254beb1f1cf` | `9fbaad016cabf25ae43a493b8e4f5de69015ae8a59e8d41c7408dcad867a3862` | 4 |
+| `power.disable-usb-selective-suspend` | validated | Class A | `research/records/power.disable-usb-selective-suspend.review.json` | - | `859b84c4cf70cc6646c94fd9307a14ab731de1c1e27c171d037e1754e05f45d6` | `38ff009d8392af24227425ae676d45d2273541bd086b1eb54760c56d20ebeab3` | 5 |
 | `power.disable-windows-search` | validated | Class A | `research/records/power.disable-windows-search.json` | - | `8d98575ba6f85845533e0642e881181636be6de333fd2b2b40c04718ec40e7aa` | `c82e383ebc1d9ef49330c8ccf697c957423c7af93707b85c0c8ae4f84e9ee524` | 6 |
 | `power.hide-hibernate-option` | validated | Class A | `research/records/power.hide-hibernate-option.json` | - | `dc426788fdf83fd30fdb2abdc884707cf6d26f98dd8ff6d2198c2b755a200102` | `679ae02a4140c26f85c6c57787959e8ebd42c72e86e1c402ad95f6063698224d` | 6 |
 | `power.hide-lock-option` | validated | Class A | `research/records/power.hide-lock-option.json` | - | `2855747942d8a60218d00bacd044eeed213938413db81914f5afbd264d330946` | `8d6c5471ede7b9e9a855b5d408606e9d1beb7f6c8922bafa4903f4308fa45806` | 5 |
@@ -2755,126 +2755,6 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 
 ---
 
-### `misc.disable-edge-features`
-
-- Status: `review-required`
-- Evidence class: `Class D`
-- Source file: `research/records/misc.disable-edge-features.review.json`
-- Source SHA256: `53a58127397ab6c5d65091264a07022a29710101870f92577d8bbed9797a1d45`
-- Proof SHA256: ``
-
-**Summary:** Review-required audit trail for the live Disable Microsoft Edge Features card. The app already ships the current microsoft edge policy bundle action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
-
-**Evidence**
-
-| Evidence ID | Kind | Title | Location |
-| --- | --- | --- | --- |
-| `repo-tweak-provenance` | `repo-doc` | Repo tweak provenance for misc.disable-edge-features | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) |
-| `app-provider` | `repo-code` | Live provider mapping | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| `engine-implementation` | `repo-code` | Current engine implementation | engine/Tweaks/Misc/DisableEdgeFeaturesTweaks.cs |
-
----
-
-### `misc.disable-office-telemetry`
-
-- Status: `review-required`
-- Evidence class: `Class D`
-- Source file: `research/records/misc.disable-office-telemetry.review.json`
-- Source SHA256: `a3c990bdf1d7e15e852c033c3f8a16cc2e4ca35b9480904560a303a10e2487cb`
-- Proof SHA256: ``
-
-**Summary:** Review-required audit trail for the live Disable Microsoft Office Telemetry card. The app already ships the current microsoft office telemetry policy bundle action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
-
-**Evidence**
-
-| Evidence ID | Kind | Title | Location |
-| --- | --- | --- | --- |
-| `repo-tweak-provenance` | `repo-doc` | Repo tweak provenance for misc.disable-office-telemetry | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) |
-| `app-provider` | `repo-code` | Live provider mapping | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| `engine-implementation` | `repo-code` | Current engine implementation | engine/Tweaks/Misc/DisableOfficeTelemetryTweak.cs |
-
----
-
-### `misc.disable-onedrive`
-
-- Status: `review-required`
-- Evidence class: `Class D`
-- Source file: `research/records/misc.disable-onedrive.review.json`
-- Source SHA256: `c5afcd9aa62d09887cbeaee8d6b39bbae4987c65c038c5e626eb8b1ad6cbb597`
-- Proof SHA256: ``
-
-**Summary:** Review-required audit trail for the live Disable OneDrive card. The app already ships the current onedrive policy and explorer bundle action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
-
-**Evidence**
-
-| Evidence ID | Kind | Title | Location |
-| --- | --- | --- | --- |
-| `repo-tweak-provenance` | `repo-doc` | Repo tweak provenance for misc.disable-onedrive | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) |
-| `app-provider` | `repo-code` | Live provider mapping | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| `engine-implementation` | `repo-code` | Current engine implementation | engine/Tweaks/Misc/DisableOneDriveTweaks.cs |
-
----
-
-### `misc.disable-visual-studio-telemetry`
-
-- Status: `review-required`
-- Evidence class: `Class D`
-- Source file: `research/records/misc.disable-visual-studio-telemetry.review.json`
-- Source SHA256: `8e110dc830af8d20dd552a95d5195ab1c9709e8e703288a19437b81d60ada3ee`
-- Proof SHA256: ``
-
-**Summary:** Review-required audit trail for the live Disable Visual Studio Telemetry card. The app already ships the current visual studio telemetry policy bundle action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
-
-**Evidence**
-
-| Evidence ID | Kind | Title | Location |
-| --- | --- | --- | --- |
-| `repo-tweak-provenance` | `repo-doc` | Repo tweak provenance for misc.disable-visual-studio-telemetry | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) |
-| `app-provider` | `repo-code` | Live provider mapping | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| `engine-implementation` | `repo-code` | Current engine implementation | engine/Tweaks/Misc/DisableVisualStudioTelemetryTweak.cs |
-
----
-
-### `misc.disable-vscode-telemetry`
-
-- Status: `review-required`
-- Evidence class: `Class D`
-- Source file: `research/records/misc.disable-vscode-telemetry.review.json`
-- Source SHA256: `c324a644eef9f4f97321ebc6bfaa7d55909dc42c5b507b7f8732a79299e9d491`
-- Proof SHA256: ``
-
-**Summary:** Review-required audit trail for the live VS Code Telemetry & Online Features card. The app already ships the current vs code user settings profile action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
-
-**Evidence**
-
-| Evidence ID | Kind | Title | Location |
-| --- | --- | --- | --- |
-| `repo-tweak-provenance` | `repo-doc` | Repo tweak provenance for misc.disable-vscode-telemetry | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) |
-| `app-provider` | `repo-code` | Live provider mapping | app/Services/TweakProviders/PrivacyTweakProvider.cs |
-| `engine-implementation` | `repo-code` | Current engine implementation | engine/Tweaks/Misc/DisableVSCodeTelemetryTweak.cs |
-
----
-
-### `misc.optimize-7zip-settings`
-
-- Status: `review-required`
-- Evidence class: `Class D`
-- Source file: `research/records/misc.optimize-7zip-settings.review.json`
-- Source SHA256: `d783e5e459e2d06648defb17cabaff646d0fbc666a40c33894253a0a292e457a`
-- Proof SHA256: ``
-
-**Summary:** Review-required audit trail for the live Configure 7-Zip Context Menu Settings card. The app already ships the current 7-zip user options action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
-
-**Evidence**
-
-| Evidence ID | Kind | Title | Location |
-| --- | --- | --- | --- |
-| `repo-tweak-provenance` | `repo-doc` | Repo tweak provenance for misc.optimize-7zip-settings | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) |
-| `app-provider` | `repo-code` | Live provider mapping | app/Services/TweakProviders/MiscTweakProvider.cs |
-| `engine-implementation` | `repo-code` | Current engine implementation | engine/Tweaks/Misc/SevenZipSettingsTweak.cs |
-
----
-
 ### `network.flush-dns-cache`
 
 - Status: `review-required`
@@ -2915,189 +2795,6 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `repo-network-provenance-missing` | `repo-doc` | Missing-provenance backlog for network.reset-winsock | [Docs/tweaks/tweak-provenance-missing.md](../Docs/tweaks/tweak-provenance-missing.md) |
 | `app-network-provider` | `repo-code` | Live network provider mapping | app/Services/TweakProviders/NetworkTweakProvider.cs |
 | `engine-reset-winsock-command` | `repo-code` | Current Winsock reset implementation | engine/Tweaks/Commands/Network/ResetNetworkStackTweak.cs |
-
----
-
-### `peripheral.audio-disable-enhancements`
-
-- Status: `review-required`
-- Evidence class: `Class D`
-- Source file: `research/records/peripheral.audio-disable-enhancements.review.json`
-- Source SHA256: `ef078d53b763295cb5812697d2d47c8c20a83638813a0f54117ac8d4420db1d0`
-- Proof SHA256: ``
-
-**Summary:** Review-required audit trail for the live Disable Audio Enhancements card. The app already ships the current audio enhancement flags action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
-
-**Evidence**
-
-| Evidence ID | Kind | Title | Location |
-| --- | --- | --- | --- |
-| `repo-tweak-provenance` | `repo-doc` | Repo tweak provenance for peripheral.audio-disable-enhancements | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) |
-| `app-provider` | `repo-code` | Live provider mapping | app/Services/TweakProviders/AudioTweakProvider.cs |
-| `engine-implementation` | `repo-code` | Current engine implementation | engine/Tweaks/Peripheral/AudioTweaks.cs |
-
----
-
-### `peripheral.keyboard-disable-language-hotkey`
-
-- Status: `review-required`
-- Evidence class: `Class D`
-- Source file: `research/records/peripheral.keyboard-disable-language-hotkey.review.json`
-- Source SHA256: `6138a479c36d4330eb80a6c2f25d5f305511c4f08ae2d2cb6ec6c93a3691dfc7`
-- Proof SHA256: ``
-
-**Summary:** Review-required audit trail for the live Disable Language Switch Hotkey card. The app already ships the current keyboard layout toggle bundle action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
-
-**Evidence**
-
-| Evidence ID | Kind | Title | Location |
-| --- | --- | --- | --- |
-| `repo-tweak-provenance` | `repo-doc` | Repo tweak provenance for peripheral.keyboard-disable-language-hotkey | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) |
-| `app-provider` | `repo-code` | Live provider mapping | app/Services/TweakProviders/PeripheralTweakProvider.cs |
-| `engine-implementation` | `repo-code` | Current engine implementation | engine/Tweaks/Peripheral/KeyboardTweaks.cs |
-
----
-
-### `peripheral.keyboard-optimize-repeat`
-
-- Status: `review-required`
-- Evidence class: `Class D`
-- Source file: `research/records/peripheral.keyboard-optimize-repeat.review.json`
-- Source SHA256: `0d39347d991490d111463cf080a68d071b257e664719c27c215ae7269a1ac51b`
-- Proof SHA256: ``
-
-**Summary:** Review-required audit trail for the live Set Keyboard Repeat and Cursor Blink Values card. The app already ships the current keyboard repeat profile action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
-
-**Evidence**
-
-| Evidence ID | Kind | Title | Location |
-| --- | --- | --- | --- |
-| `repo-tweak-provenance` | `repo-doc` | Repo tweak provenance for peripheral.keyboard-optimize-repeat | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) |
-| `app-provider` | `repo-code` | Live provider mapping | app/Services/TweakProviders/PeripheralTweakProvider.cs |
-| `engine-implementation` | `repo-code` | Current engine implementation | engine/Tweaks/Peripheral/KeyboardTweaks.cs |
-
----
-
-### `peripheral.mouse-disable-acceleration`
-
-- Status: `review-required`
-- Evidence class: `Class D`
-- Source file: `research/records/peripheral.mouse-disable-acceleration.review.json`
-- Source SHA256: `42e00b63cc24f9bd1961f3ce14a14ef4d5878b8ea7dd08eb588e3d2fe46e8d12`
-- Proof SHA256: ``
-
-**Summary:** Review-required audit trail for the live Disable Enhanced Pointer Precision (Mouse Acceleration) card. The app already ships the current mouse acceleration profile action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
-
-**Evidence**
-
-| Evidence ID | Kind | Title | Location |
-| --- | --- | --- | --- |
-| `repo-tweak-provenance` | `repo-doc` | Repo tweak provenance for peripheral.mouse-disable-acceleration | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) |
-| `app-provider` | `repo-code` | Live provider mapping | app/Services/TweakProviders/PeripheralTweakProvider.cs |
-| `engine-implementation` | `repo-code` | Current engine implementation | engine/Tweaks/Peripheral/MouseTweaks.cs |
-
----
-
-### `peripheral.mouse-disable-throttle`
-
-- Status: `review-required`
-- Evidence class: `Class D`
-- Source file: `research/records/peripheral.mouse-disable-throttle.review.json`
-- Source SHA256: `95880a88f59239507633caf51fa01504e183dfb59b3d65b644635f1d48f5525c`
-- Proof SHA256: ``
-
-**Summary:** Review-required audit trail for the live Disable Mouse Throttling for Background Windows card. The app already ships the current raw mouse throttle bundle action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
-
-**Evidence**
-
-| Evidence ID | Kind | Title | Location |
-| --- | --- | --- | --- |
-| `repo-tweak-provenance` | `repo-doc` | Repo tweak provenance for peripheral.mouse-disable-throttle | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) |
-| `app-provider` | `repo-code` | Live provider mapping | app/Services/TweakProviders/PeripheralTweakProvider.cs |
-| `engine-implementation` | `repo-code` | Current engine implementation | engine/Tweaks/Peripheral/MouseTweaks.cs |
-
----
-
-### `power.disable-cpu-parking`
-
-- Status: `review-required`
-- Evidence class: `Class D`
-- Source file: `research/records/power.disable-cpu-parking.review.json`
-- Source SHA256: `c03a9d96e34a5cbb5b86e592e93974b3247af8ec00c77e42cff732174a693a95`
-- Proof SHA256: ``
-
-**Summary:** Review-required audit trail for the live CPU core parking card. The app already exposes a command-backed powercfg implementation, and repo docs map the tweak id to core-parking research, but the card still lives only in the first-party provider and has not yet been promoted into the validated research-provider surface.
-
-**Evidence**
-
-| Evidence ID | Kind | Title | Location |
-| --- | --- | --- | --- |
-| `repo-power-doc` | `repo-doc` | Repo power catalog entry | [Docs/power/power.md](../Docs/power/power.md) |
-| `repo-power-provenance` | `repo-doc` | Repo tweak provenance for power.disable-cpu-parking | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) |
-| `app-power-provider` | `repo-code` | Live power provider mapping | app/Services/TweakProviders/PowerTweakProvider.cs |
-| `engine-cpu-parking-command` | `repo-code` | Current core-parking implementation | engine/Tweaks/Commands/Power/DisableCpuCoreParkingTweak.cs |
-
----
-
-### `power.disable-hibernation`
-
-- Status: `review-required`
-- Evidence class: `Class D`
-- Source file: `research/records/power.disable-hibernation.review.json`
-- Source SHA256: `314cf1cc88b7cefecfb1f2c3c8bbff2cc008fd01da3ebb97cf55c5f655ebbbf1`
-- Proof SHA256: ``
-
-**Summary:** Review-required audit trail for the live hibernation card. The app already ships the powercfg-backed action and repo docs map the tweak id to that same flow, but the card still lives only in the first-party provider and has not yet been promoted into the validated research-provider surface.
-
-**Evidence**
-
-| Evidence ID | Kind | Title | Location |
-| --- | --- | --- | --- |
-| `repo-power-doc` | `repo-doc` | Repo power catalog entry | [Docs/power/power.md](../Docs/power/power.md) |
-| `repo-power-provenance` | `repo-doc` | Repo tweak provenance for power.disable-hibernation | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) |
-| `app-power-provider` | `repo-code` | Live power provider mapping | app/Services/TweakProviders/PowerTweakProvider.cs |
-| `engine-disable-hibernation-command` | `repo-code` | Current hibernation command implementation | engine/Tweaks/Commands/Power/DisableHibernationTweak.cs |
-
----
-
-### `power.disable-superfetch`
-
-- Status: `review-required`
-- Evidence class: `Class D`
-- Source file: `research/records/power.disable-superfetch.review.json`
-- Source SHA256: `6aee4e834596e243ffc6a6f0057236e04bbdc0f6d81352347b0e9ac2a9b67a2a`
-- Proof SHA256: ``
-
-**Summary:** Review-required audit trail for the live Disable Superfetch (SysMain) card. The app already ships the current sysmain service stop command action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
-
-**Evidence**
-
-| Evidence ID | Kind | Title | Location |
-| --- | --- | --- | --- |
-| `repo-tweak-provenance` | `repo-doc` | Repo tweak provenance for power.disable-superfetch | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) |
-| `app-provider` | `repo-code` | Live provider mapping | app/Services/TweakProviders/PerformanceTweakProvider.cs |
-| `engine-implementation` | `repo-code` | Current engine implementation | engine/Tweaks/Commands/Performance/DisableSuperfetchTweak.cs |
-
----
-
-### `power.disable-usb-selective-suspend`
-
-- Status: `review-required`
-- Evidence class: `Class D`
-- Source file: `research/records/power.disable-usb-selective-suspend.review.json`
-- Source SHA256: `532c9d58d4658069b4369f51c71ca3d18931b64b5933c53c07114c54a68b1c64`
-- Proof SHA256: ``
-
-**Summary:** Review-required audit trail for the live USB selective suspend card. The app already exposes a command-backed powercfg implementation, and repo docs plus provenance overrides map the tweak id to USB power-management research, but the card still lives only in the first-party provider and has not yet been promoted into the validated research-provider surface.
-
-**Evidence**
-
-| Evidence ID | Kind | Title | Location |
-| --- | --- | --- | --- |
-| `repo-power-doc` | `repo-doc` | Repo power USB power-management notes | [Docs/power/power.md](../Docs/power/power.md) |
-| `repo-power-provenance-override` | `repo-doc` | Repo provenance override for power.disable-usb-selective-suspend | [Docs/tweaks/tweak-provenance-overrides.json](../Docs/tweaks/tweak-provenance-overrides.json) |
-| `app-power-provider` | `repo-code` | Live power provider mapping | app/Services/TweakProviders/PowerTweakProvider.cs |
-| `engine-usb-suspend-command` | `repo-code` | Current USB selective suspend implementation | engine/Tweaks/Commands/Power/DisableUsbSelectiveSuspendTweak.cs |
 
 ---
 
@@ -4096,6 +3793,180 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Source | [evidence/files/missing/taskbar-alignment-capture-20260313-csv.md](../evidence/files/missing/taskbar-alignment-capture-20260313-csv.md) |
 | Exact quote / path | reg.exe RegSetValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/TaskbarAl Type: REG_DWORD Data: 0; Explorer.EXE RegQueryValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/TaskbarAl Type: REG_DWORD Data: 0; reg.exe RegSetValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/TaskbarAl Type: REG_DWORD Data: 1; Explorer.EXE RegQueryValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/TaskbarAl Type: REG_DWORD Data: 1 |
 | Notes | The runtime capture proves the actual Explorer persistence surface used on this host. The documented TaskbarAl subkey with SystemSettings_DesktopTaskbar_Al was not observed in this trace. |
+
+---
+
+### `misc.disable-edge-features`
+
+- Status: `validated`
+- Evidence class: `Class A`
+- Source file: `research/records/misc.disable-edge-features.review.json`
+- Source SHA256: `c8e98248c751883b51fface2151d09f6d694d60609ce9237d3a2aa0fb2e4f9e8`
+- Proof SHA256: `d4a84beae0d341aa704d1da365fc16668ec8bedfce977888c4a57007ffb6f71c`
+
+**Summary:** Review-required audit trail for the live Disable Microsoft Edge Features card. The app already ships the current microsoft edge policy bundle action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
+
+**Evidence**
+
+| Evidence ID | Kind | Title | Location |
+| --- | --- | --- | --- |
+| `repo-tweak-provenance` | `repo-doc` | Repo tweak provenance for misc.disable-edge-features | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) |
+| `app-provider` | `repo-code` | Live provider mapping | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| `engine-implementation` | `repo-code` | Current engine implementation | engine/Tweaks/Misc/DisableEdgeFeaturesTweaks.cs |
+| `vm-misc.disable-edge-features-app-qa-20260507` | `vm-test` | RegProbe app QA apply/rollback proof for misc.disable-edge-features | [evidence/captures/misc-disable-edge-features-app-qa-20260507.json](../evidence/captures/misc-disable-edge-features-app-qa-20260507.json) |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source | [Docs/misc/misc.md](../Docs/misc/misc.md) |
+| Exact quote / path | [Docs/misc/misc.md:561](../Docs/misc/misc.md:561) documents the Disable Edge Features policy bundle; [Docs/misc/misc.md:565-598](../Docs/misc/misc.md:565-598) lists the retained Edge policy values and EdgeUI values used by this card. |
+| Notes | The misc documentation maps this card to the Edge policy bundle and names the Microsoft Edge / EdgeUI policy values that the current app writes. |
+
+---
+
+### `misc.disable-office-telemetry`
+
+- Status: `validated`
+- Evidence class: `Class A`
+- Source file: `research/records/misc.disable-office-telemetry.review.json`
+- Source SHA256: `db30d7f2e480ae01b1121fb90d6baf9eedf40f49bc76fbedab621c433e6e2f6c`
+- Proof SHA256: `fb9b56896845bdc1de4e38e3517d1bf9f08e92cb6ab44afc374a53d3671cf588`
+
+**Summary:** Review-required audit trail for the live Disable Microsoft Office Telemetry card. The app already ships the current microsoft office telemetry policy bundle action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
+
+**Evidence**
+
+| Evidence ID | Kind | Title | Location |
+| --- | --- | --- | --- |
+| `repo-tweak-provenance` | `repo-doc` | Repo tweak provenance for misc.disable-office-telemetry | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) |
+| `app-provider` | `repo-code` | Live provider mapping | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| `engine-implementation` | `repo-code` | Current engine implementation | engine/Tweaks/Misc/DisableOfficeTelemetryTweak.cs |
+| `vm-misc.disable-office-telemetry-app-qa-20260507` | `vm-test` | RegProbe app QA apply/rollback proof for misc.disable-office-telemetry | [evidence/captures/misc-disable-office-telemetry-app-qa-20260507.json](../evidence/captures/misc-disable-office-telemetry-app-qa-20260507.json) |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source | [Docs/misc/misc.md](../Docs/misc/misc.md) |
+| Exact quote / path | [Docs/misc/misc.md:404](../Docs/misc/misc.md:404) documents Disable MS Office Telemetry; [Docs/misc/misc.md:428-456](../Docs/misc/misc.md:428-456) lists the Office OSM preventedapplications and preventedsolutiontypes policy values. |
+| Notes | The misc documentation names the Office telemetry policy paths, values, and data meanings used by the current Office telemetry card. |
+
+---
+
+### `misc.disable-onedrive`
+
+- Status: `validated`
+- Evidence class: `Class A`
+- Source file: `research/records/misc.disable-onedrive.review.json`
+- Source SHA256: `d44a134e8ab24da30ba96b74c7bdc31b9ed83214f7ddbdad10332d277c9f5a34`
+- Proof SHA256: `98cc432cc6d8f32a95ac9101576b5223842938089ee57447c52133d856464e8b`
+
+**Summary:** Review-required audit trail for the live Disable OneDrive card. The app already ships the current onedrive policy and explorer bundle action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
+
+**Evidence**
+
+| Evidence ID | Kind | Title | Location |
+| --- | --- | --- | --- |
+| `repo-tweak-provenance` | `repo-doc` | Repo tweak provenance for misc.disable-onedrive | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) |
+| `app-provider` | `repo-code` | Live provider mapping | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| `engine-implementation` | `repo-code` | Current engine implementation | engine/Tweaks/Misc/DisableOneDriveTweaks.cs |
+| `vm-misc.disable-onedrive-app-qa-20260507` | `vm-test` | RegProbe app QA apply/rollback proof for misc.disable-onedrive | [evidence/captures/misc-disable-onedrive-app-qa-20260507.json](../evidence/captures/misc-disable-onedrive-app-qa-20260507.json) |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source | [Docs/misc/misc.md](../Docs/misc/misc.md) |
+| Exact quote / path | [Docs/misc/misc.md:465](../Docs/misc/misc.md:465) documents Disable OneDrive; [Docs/misc/misc.md:469-551](../Docs/misc/misc.md:469-551) names the OneDrive policy and Explorer namespace values used by this card. |
+| Notes | The misc documentation maps DisableLibrariesDefaultSaveToOneDrive, DisableFileSync, DisableFileSyncNGSC, DisableMeteredNetworkFileSync, PreventNetworkTrafficPreUserSignIn, and the Explorer namespace pin values to the OneDrive disable behavior. |
+
+---
+
+### `misc.disable-visual-studio-telemetry`
+
+- Status: `validated`
+- Evidence class: `Class A`
+- Source file: `research/records/misc.disable-visual-studio-telemetry.review.json`
+- Source SHA256: `2585d09b6f981ca4a0d2758d4aaf27074eedd4923344fad5e0fca5aac3cce9d9`
+- Proof SHA256: `228b66d4a5974c953ea793fb6b80d60692744cac81c36c23f8963d4dd9b97dfa`
+
+**Summary:** Review-required audit trail for the live Disable Visual Studio Telemetry card. The app already ships the current visual studio telemetry policy bundle action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
+
+**Evidence**
+
+| Evidence ID | Kind | Title | Location |
+| --- | --- | --- | --- |
+| `repo-tweak-provenance` | `repo-doc` | Repo tweak provenance for misc.disable-visual-studio-telemetry | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) |
+| `app-provider` | `repo-code` | Live provider mapping | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| `engine-implementation` | `repo-code` | Current engine implementation | engine/Tweaks/Misc/DisableVisualStudioTelemetryTweak.cs |
+| `vm-misc.disable-visual-studio-telemetry-app-qa-20260507` | `vm-test` | RegProbe app QA apply/rollback proof for misc.disable-visual-studio-telemetry | [evidence/captures/misc-disable-visual-studio-telemetry-app-qa-20260507.json](../evidence/captures/misc-disable-visual-studio-telemetry-app-qa-20260507.json) |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source | [Docs/misc/misc.md](../Docs/misc/misc.md) |
+| Exact quote / path | [Docs/misc/misc.md:331](../Docs/misc/misc.md:331) documents Disable VS Telemetry and the Visual Studio SQM, feedback, IntelliCode, and DiagnosticsHub-related policy/data paths. |
+| Notes | The misc documentation names the Visual Studio telemetry, SQM, feedback, and remote-analysis controls that the current app card writes or audits. |
+
+---
+
+### `misc.disable-vscode-telemetry`
+
+- Status: `validated`
+- Evidence class: `Class A`
+- Source file: `research/records/misc.disable-vscode-telemetry.review.json`
+- Source SHA256: `63e64144264b30874b7f0f30c79ca767d23f7db9987658278d422a27097b7df2`
+- Proof SHA256: `adeebb03c1c3f4682ff790fb505f2a175f9fac3de6626efc245b80f331570aa1`
+
+**Summary:** Review-required audit trail for the live VS Code Telemetry & Online Features card. The app already ships the current vs code user settings profile action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
+
+**Evidence**
+
+| Evidence ID | Kind | Title | Location |
+| --- | --- | --- | --- |
+| `repo-tweak-provenance` | `repo-doc` | Repo tweak provenance for misc.disable-vscode-telemetry | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) |
+| `app-provider` | `repo-code` | Live provider mapping | app/Services/TweakProviders/PrivacyTweakProvider.cs |
+| `engine-implementation` | `repo-code` | Current engine implementation | engine/Tweaks/Misc/DisableVSCodeTelemetryTweak.cs |
+| `vm-misc.disable-vscode-telemetry-app-qa-20260507` | `vm-test` | RegProbe app QA apply/rollback proof for misc.disable-vscode-telemetry | [evidence/captures/misc-disable-vscode-telemetry-app-qa-20260507.json](../evidence/captures/misc-disable-vscode-telemetry-app-qa-20260507.json) |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source | [Docs/misc/misc.md](../Docs/misc/misc.md) |
+| Exact quote / path | [Docs/misc/misc.md:297](../Docs/misc/misc.md:297) documents Disable VSC Telemetry and the VS Code telemetry/update/online-feature settings used by this card. |
+| Notes | The misc documentation maps the VS Code settings profile to telemetry level, update mode, online experiments, git/npm online fetches, and recommendation controls. |
+
+---
+
+### `misc.optimize-7zip-settings`
+
+- Status: `validated`
+- Evidence class: `Class A`
+- Source file: `research/records/misc.optimize-7zip-settings.review.json`
+- Source SHA256: `428e2ce92f53692333339c385b7be490fc562f0a949ac7130ecea99226c4a06d`
+- Proof SHA256: `32d6dfa6b3fd2e059bb6bbd521880bb707b53d0bc10b6695bbe2f4c62b96de44`
+
+**Summary:** Review-required audit trail for the live Configure 7-Zip Context Menu Settings card. The app already ships the current 7-zip user options action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
+
+**Evidence**
+
+| Evidence ID | Kind | Title | Location |
+| --- | --- | --- | --- |
+| `repo-tweak-provenance` | `repo-doc` | Repo tweak provenance for misc.optimize-7zip-settings | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) |
+| `app-provider` | `repo-code` | Live provider mapping | app/Services/TweakProviders/MiscTweakProvider.cs |
+| `engine-implementation` | `repo-code` | Current engine implementation | engine/Tweaks/Misc/SevenZipSettingsTweak.cs |
+| `vm-misc.optimize-7zip-settings-app-qa-20260507` | `vm-test` | RegProbe app QA apply/rollback proof for misc.optimize-7zip-settings | [evidence/captures/misc-optimize-7zip-settings-app-qa-20260507.json](../evidence/captures/misc-optimize-7zip-settings-app-qa-20260507.json) |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source | [Docs/misc/misc.md](../Docs/misc/misc.md) |
+| Exact quote / path | [Docs/misc/misc.md:266](../Docs/misc/misc.md:266) documents 7-Zip Settings; [Docs/misc/misc.md:275-288](../Docs/misc/misc.md:275-288) lists CascadedMenu, ElimDupExtract, MenuIcons, and WriteZoneIdExtract under HKCU/Software/7-Zip/Options. |
+| Notes | The misc documentation names the exact 7-Zip Options registry values and the app profile values used by this card. |
 
 ---
 
@@ -5203,6 +5074,35 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 
 ---
 
+### `peripheral.audio-disable-enhancements`
+
+- Status: `validated`
+- Evidence class: `Class B`
+- Source file: `research/records/peripheral.audio-disable-enhancements.review.json`
+- Source SHA256: `b389692eaf4d6a44d728d8773fdaf840e1f24c31e720014c9c9f532d3c48be44`
+- Proof SHA256: `fa3839f29854be9a9c99d22ce3bc07232b7d274496e7413b90d252402744ae45`
+
+**Summary:** Review-required audit trail for the live Disable Audio Enhancements card. The app already ships the current audio enhancement flags action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
+
+**Evidence**
+
+| Evidence ID | Kind | Title | Location |
+| --- | --- | --- | --- |
+| `repo-tweak-provenance` | `repo-doc` | Repo tweak provenance for peripheral.audio-disable-enhancements | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) |
+| `app-provider` | `repo-code` | Live provider mapping | app/Services/TweakProviders/AudioTweakProvider.cs |
+| `engine-implementation` | `repo-code` | Current engine implementation | engine/Tweaks/Peripheral/AudioTweaks.cs |
+| `vm-peripheral.audio-disable-enhancements-app-qa-20260507` | `vm-test` | RegProbe app QA access-denied failure for peripheral.audio-disable-enhancements | [evidence/captures/peripheral-audio-disable-enhancements-app-qa-20260507.json](../evidence/captures/peripheral-audio-disable-enhancements-app-qa-20260507.json) |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source | [Docs/peripheral/peripheral.md](../Docs/peripheral/peripheral.md) |
+| Exact quote / path | [Docs/peripheral/peripheral.md:97](../Docs/peripheral/peripheral.md:97) documents Disable Audio Enhancements and lists the MMDevices Audio Render/Capture property values touched by this card. |
+| Notes | The peripheral documentation maps the audio-enhancement control to the MMDevices Audio property/FxProperties values and notes the elevation/device-scope tradeoff. |
+
+---
+
 ### `peripheral.autoplay-take-no-action`
 
 - Status: `validated`
@@ -5290,6 +5190,122 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Source | [evidence/files/missing/stickykeys-spi-diff-20260314-json.md](../evidence/files/missing/stickykeys-spi-diff-20260314-json.md) |
 | Exact quote / path | after_hotkey_on: API flags 510, registry Flags = "510". after_hotkey_off: API flags 506, registry Flags = "506". restored: API flags 506, registry Flags = "506". |
 | Notes | The local runtime diff used the official SystemParametersInfo Sticky Keys API to change the feature flags and then read the persisted registry backend. The machine ended in its original state. |
+
+---
+
+### `peripheral.keyboard-disable-language-hotkey`
+
+- Status: `validated`
+- Evidence class: `Class A`
+- Source file: `research/records/peripheral.keyboard-disable-language-hotkey.review.json`
+- Source SHA256: `41408e0c27693a3ab93559aa533a7302dd243ec4cadba015ba1647e61d7127a8`
+- Proof SHA256: `bcc025fcb235d191aa97136fac5c5c30a9d2f8571c6742d124e9ce09823b6779`
+
+**Summary:** Review-required audit trail for the live Disable Language Switch Hotkey card. The app already ships the current keyboard layout toggle bundle action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
+
+**Evidence**
+
+| Evidence ID | Kind | Title | Location |
+| --- | --- | --- | --- |
+| `repo-tweak-provenance` | `repo-doc` | Repo tweak provenance for peripheral.keyboard-disable-language-hotkey | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) |
+| `app-provider` | `repo-code` | Live provider mapping | app/Services/TweakProviders/PeripheralTweakProvider.cs |
+| `engine-implementation` | `repo-code` | Current engine implementation | engine/Tweaks/Peripheral/KeyboardTweaks.cs |
+| `vm-peripheral.keyboard-disable-language-hotkey-app-qa-20260507` | `vm-test` | RegProbe app QA apply/rollback proof for peripheral.keyboard-disable-language-hotkey | [evidence/captures/peripheral-keyboard-disable-language-hotkey-app-qa-20260507.json](../evidence/captures/peripheral-keyboard-disable-language-hotkey-app-qa-20260507.json) |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source | [Docs/peripheral/peripheral.md](../Docs/peripheral/peripheral.md) |
+| Exact quote / path | [Docs/peripheral/peripheral.md:62](../Docs/peripheral/peripheral.md:62) documents Disable Language Switch Hotkey and lists Language Hotkey, Hotkey, and Layout Hotkey under HKCU/Keyboard Layout/Toggle. |
+| Notes | The peripheral documentation ties the Ctrl+Shift / Alt+Shift language-switch UI action to the three Keyboard Layout Toggle values used by the app. |
+
+---
+
+### `peripheral.keyboard-optimize-repeat`
+
+- Status: `validated`
+- Evidence class: `Class A`
+- Source file: `research/records/peripheral.keyboard-optimize-repeat.review.json`
+- Source SHA256: `8164a4449a40b443d3898434a72a1175c1dfa421e34549610d0d67d8d59ebba8`
+- Proof SHA256: `6cf67d6da06959c3dacc91f5a3e77307dedad3de6a88678b55eb64edce6120aa`
+
+**Summary:** Review-required audit trail for the live Set Keyboard Repeat and Cursor Blink Values card. The app already ships the current keyboard repeat profile action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
+
+**Evidence**
+
+| Evidence ID | Kind | Title | Location |
+| --- | --- | --- | --- |
+| `repo-tweak-provenance` | `repo-doc` | Repo tweak provenance for peripheral.keyboard-optimize-repeat | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) |
+| `app-provider` | `repo-code` | Live provider mapping | app/Services/TweakProviders/PeripheralTweakProvider.cs |
+| `engine-implementation` | `repo-code` | Current engine implementation | engine/Tweaks/Peripheral/KeyboardTweaks.cs |
+| `vm-peripheral.keyboard-optimize-repeat-app-qa-20260507` | `vm-test` | RegProbe app QA apply/rollback proof for peripheral.keyboard-optimize-repeat | [evidence/captures/peripheral-keyboard-optimize-repeat-app-qa-20260507.json](../evidence/captures/peripheral-keyboard-optimize-repeat-app-qa-20260507.json) |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source | [Docs/peripheral/peripheral.md](../Docs/peripheral/peripheral.md) |
+| Exact quote / path | [Docs/peripheral/peripheral.md:55](../Docs/peripheral/peripheral.md:55) documents Keyboard Values; [Docs/peripheral/peripheral.md:57-61](../Docs/peripheral/peripheral.md:57-61) lists repeat delay, repeat rate, and cursor blink changed values. |
+| Notes | The peripheral documentation maps the keyboard repeat profile to repeat delay, repeat rate, and cursor blink settings tracked by the app card. |
+
+---
+
+### `peripheral.mouse-disable-acceleration`
+
+- Status: `validated`
+- Evidence class: `Class A`
+- Source file: `research/records/peripheral.mouse-disable-acceleration.review.json`
+- Source SHA256: `8c20bde7651dd846e481ba9c0bf7c20b99086386e31cc514db82b121e58a7981`
+- Proof SHA256: `bd98172bca8ff36b8a50622aeb2c6f71eb7111c54eabe9b376e58ba1fa7ee56f`
+
+**Summary:** Review-required audit trail for the live Disable Enhanced Pointer Precision (Mouse Acceleration) card. The app already ships the current mouse acceleration profile action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
+
+**Evidence**
+
+| Evidence ID | Kind | Title | Location |
+| --- | --- | --- | --- |
+| `repo-tweak-provenance` | `repo-doc` | Repo tweak provenance for peripheral.mouse-disable-acceleration | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) |
+| `app-provider` | `repo-code` | Live provider mapping | app/Services/TweakProviders/PeripheralTweakProvider.cs |
+| `engine-implementation` | `repo-code` | Current engine implementation | engine/Tweaks/Peripheral/MouseTweaks.cs |
+| `vm-peripheral.mouse-disable-acceleration-app-qa-20260507` | `vm-test` | RegProbe app QA apply/rollback proof for peripheral.mouse-disable-acceleration | [evidence/captures/peripheral-mouse-disable-acceleration-app-qa-20260507.json](../evidence/captures/peripheral-mouse-disable-acceleration-app-qa-20260507.json) |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source | [Docs/peripheral/peripheral.md](../Docs/peripheral/peripheral.md) |
+| Exact quote / path | [Docs/peripheral/peripheral.md:36-48](../Docs/peripheral/peripheral.md:36-48) documents the disabled Enhance Pointer Precision state: MouseThreshold1=0, MouseThreshold2=0, MouseSpeed=0, and MouseSensitivity=10. |
+| Notes | The peripheral documentation names the HKCU Control Panel Mouse values for enabled and disabled pointer-precision states. |
+
+---
+
+### `peripheral.mouse-disable-throttle`
+
+- Status: `validated`
+- Evidence class: `Class A`
+- Source file: `research/records/peripheral.mouse-disable-throttle.review.json`
+- Source SHA256: `a01e2a458d3cd1568b67997fc89b0805f07dbe2e954b09ddd8583bea4f97106f`
+- Proof SHA256: `448f25a45f571abd238c715c2bf1f03a283a65aeaa2595b104796b6929f49ba7`
+
+**Summary:** Review-required audit trail for the live Disable Mouse Throttling for Background Windows card. The app already ships the current raw mouse throttle bundle action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
+
+**Evidence**
+
+| Evidence ID | Kind | Title | Location |
+| --- | --- | --- | --- |
+| `repo-tweak-provenance` | `repo-doc` | Repo tweak provenance for peripheral.mouse-disable-throttle | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) |
+| `app-provider` | `repo-code` | Live provider mapping | app/Services/TweakProviders/PeripheralTweakProvider.cs |
+| `engine-implementation` | `repo-code` | Current engine implementation | engine/Tweaks/Peripheral/MouseTweaks.cs |
+| `vm-peripheral.mouse-disable-throttle-app-qa-20260507` | `vm-test` | RegProbe app QA apply/rollback proof for peripheral.mouse-disable-throttle | [evidence/captures/peripheral-mouse-disable-throttle-app-qa-20260507.json](../evidence/captures/peripheral-mouse-disable-throttle-app-qa-20260507.json) |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source | [Docs/peripheral/peripheral.md](../Docs/peripheral/peripheral.md) |
+| Exact quote / path | [Docs/peripheral/peripheral.md:8-25](../Docs/peripheral/peripheral.md:8-25) documents RawMouseThrottleDuration, RawMouseThrottleEnabled, RawMouseThrottleForced, and RawMouseThrottleLeeway. |
+| Notes | The peripheral documentation includes retained source notes for raw mouse throttling values and the duration/leeway thresholds used by this card. |
 
 ---
 
@@ -5703,6 +5719,36 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 
 ---
 
+### `power.disable-cpu-parking`
+
+- Status: `validated`
+- Evidence class: `Class A`
+- Source file: `research/records/power.disable-cpu-parking.review.json`
+- Source SHA256: `d28533ca569b9bed1bfb608de5b9ace2541c32deba39a76c0162649aa2672ede`
+- Proof SHA256: `1e07982a5d49d800812250f38700512f25a454be1abcd9404d0d02d4850c24dc`
+
+**Summary:** Review-required audit trail for the live CPU core parking card. The app already exposes a command-backed powercfg implementation, and repo docs map the tweak id to core-parking research, but the card still lives only in the first-party provider and has not yet been promoted into the validated research-provider surface.
+
+**Evidence**
+
+| Evidence ID | Kind | Title | Location |
+| --- | --- | --- | --- |
+| `repo-power-doc` | `repo-doc` | Repo power catalog entry | [Docs/power/power.md](../Docs/power/power.md) |
+| `repo-power-provenance` | `repo-doc` | Repo tweak provenance for power.disable-cpu-parking | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) |
+| `app-power-provider` | `repo-code` | Live power provider mapping | app/Services/TweakProviders/PowerTweakProvider.cs |
+| `engine-cpu-parking-command` | `repo-code` | Current core-parking implementation | engine/Tweaks/Commands/Power/DisableCpuCoreParkingTweak.cs |
+| `vm-power.disable-cpu-parking-app-qa-20260507` | `vm-test` | RegProbe app QA apply/rollback proof for power.disable-cpu-parking | [evidence/captures/power-disable-cpu-parking-app-qa-20260507.json](../evidence/captures/power-disable-cpu-parking-app-qa-20260507.json) |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source | [Docs/power/power.md](../Docs/power/power.md) |
+| Exact quote / path | [Docs/power/power.md:139-154](../Docs/power/power.md:139-154) documents Control/Power processor parking-related values such as LatencyToleranceParked and LatencyToleranceSoftParked; [Docs/tweaks/tweak-catalog.md:52](../Docs/tweaks/tweak-catalog.md:52) maps the current card to the CPU parking implementation. |
+| Notes | The power documentation names the low-level power-manager values adjacent to the core-parking card, while the checked-in command/provider code supplies the exact powercfg/app write contract. |
+
+---
+
 ### `power.disable-fast-startup`
 
 - Status: `validated`
@@ -5731,6 +5777,36 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Source | [https://learn.microsoft.com/en-us/windows/configuration/unified-write-filter/hibernate-once-resume-many-horm](https://learn.microsoft.com/en-us/windows/configuration/unified-write-filter/hibernate-once-resume-many-horm) |
 | Exact quote / path | To disable fast startup, set the following registry value: Key: HKEY_LOCAL_MACHINE/SYSTEM/CurrentControlSet/Control/Session Manager/Power Name: HiberbootEnabled Type: DWORD Value: 0 (0 = Disabled, 1 = Enabled) |
 | Notes | Official Microsoft guidance documents Fast Startup through HiberbootEnabled under the Session Manager Power path, and the current app now writes that documented local surface. |
+
+---
+
+### `power.disable-hibernation`
+
+- Status: `validated`
+- Evidence class: `Class B`
+- Source file: `research/records/power.disable-hibernation.review.json`
+- Source SHA256: `2778a9aed9bff093a1c65ed695f27c8209e72c42ad6f65ae0dd1ff659fd26864`
+- Proof SHA256: `f47dddbcd888f51e113c81e18191c39727d7cd39f015d93ab43fd90d2b39a180`
+
+**Summary:** Review-required audit trail for the live hibernation card. The app already ships the powercfg-backed action and repo docs map the tweak id to that same flow, but the card still lives only in the first-party provider and has not yet been promoted into the validated research-provider surface.
+
+**Evidence**
+
+| Evidence ID | Kind | Title | Location |
+| --- | --- | --- | --- |
+| `repo-power-doc` | `repo-doc` | Repo power catalog entry | [Docs/power/power.md](../Docs/power/power.md) |
+| `repo-power-provenance` | `repo-doc` | Repo tweak provenance for power.disable-hibernation | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) |
+| `app-power-provider` | `repo-code` | Live power provider mapping | app/Services/TweakProviders/PowerTweakProvider.cs |
+| `engine-disable-hibernation-command` | `repo-code` | Current hibernation command implementation | engine/Tweaks/Commands/Power/DisableHibernationTweak.cs |
+| `vm-power.disable-hibernation-app-qa-20260507` | `vm-test` | RegProbe app QA not-applicable observation for power.disable-hibernation | [evidence/captures/power-disable-hibernation-app-qa-20260507.json](../evidence/captures/power-disable-hibernation-app-qa-20260507.json) |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source | [Docs/power/power.md](../Docs/power/power.md) |
+| Exact quote / path | [Docs/power/power.md:339](../Docs/power/power.md:339) documents Disable Hibernation; [Docs/power/power.md:376](../Docs/power/power.md:376) records that powercfg /hibernate off sets HibernateEnabled to 0. |
+| Notes | The power documentation explains S4 hibernation behavior and maps the app command to the powercfg /hibernate off registry effect. |
 
 ---
 
@@ -5790,6 +5866,65 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Source | [evidence/files/external/c/Windows/PolicyDefinitions/Power.admx](../evidence/files/external/c/Windows/PolicyDefinitions/Power.admx) |
 | Exact quote / path | <policy name="PowerThrottlingTurnOff" class="Machine" ... key="System/CurrentControlSet/Control/Power/PowerThrottling" valueName="PowerThrottlingOff"> ... <enabledValue><decimal value="1" /></enabledValue> |
 | Notes | Local Microsoft Power.admx defines the exact machine policy path and value name. The companion Power.adml help text explains that enabling the policy turns Power Throttling off, while disabled or not configured leaves it under user control. |
+
+---
+
+### `power.disable-superfetch`
+
+- Status: `validated`
+- Evidence class: `Class B`
+- Source file: `research/records/power.disable-superfetch.review.json`
+- Source SHA256: `cbfb647816ff60ace2c4fd8cf4988a2837db3c6fa6d79d3f4a246254beb1f1cf`
+- Proof SHA256: `9fbaad016cabf25ae43a493b8e4f5de69015ae8a59e8d41c7408dcad867a3862`
+
+**Summary:** Review-required audit trail for the live Disable Superfetch (SysMain) card. The app already ships the current sysmain service stop command action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
+
+**Evidence**
+
+| Evidence ID | Kind | Title | Location |
+| --- | --- | --- | --- |
+| `repo-tweak-provenance` | `repo-doc` | Repo tweak provenance for power.disable-superfetch | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) |
+| `app-provider` | `repo-code` | Live provider mapping | app/Services/TweakProviders/PerformanceTweakProvider.cs |
+| `engine-implementation` | `repo-code` | Current engine implementation | engine/Tweaks/Commands/Performance/DisableSuperfetchTweak.cs |
+| `vm-power.disable-superfetch-app-qa-20260507` | `vm-test` | RegProbe app QA already-applied observation for power.disable-superfetch | [evidence/captures/power-disable-superfetch-app-qa-20260507.json](../evidence/captures/power-disable-superfetch-app-qa-20260507.json) |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source | [Docs/SERVICES_DOCUMENTATION.md](../Docs/SERVICES_DOCUMENTATION.md) |
+| Exact quote / path | [Docs/SERVICES_DOCUMENTATION.md:19](../Docs/SERVICES_DOCUMENTATION.md:19) lists SysMain as the service that prefetches application data; [Docs/tweaks/tweak-catalog.md:57](../Docs/tweaks/tweak-catalog.md:57) maps power.disable-superfetch to the SysMain command implementation. |
+| Notes | The service documentation identifies SysMain/Superfetch behavior, and the tweak catalog maps the shipped card to the checked-in command implementation. |
+
+---
+
+### `power.disable-usb-selective-suspend`
+
+- Status: `validated`
+- Evidence class: `Class A`
+- Source file: `research/records/power.disable-usb-selective-suspend.review.json`
+- Source SHA256: `859b84c4cf70cc6646c94fd9307a14ab731de1c1e27c171d037e1754e05f45d6`
+- Proof SHA256: `38ff009d8392af24227425ae676d45d2273541bd086b1eb54760c56d20ebeab3`
+
+**Summary:** Review-required audit trail for the live USB selective suspend card. The app already exposes a command-backed powercfg implementation, and repo docs plus provenance overrides map the tweak id to USB power-management research, but the card still lives only in the first-party provider and has not yet been promoted into the validated research-provider surface.
+
+**Evidence**
+
+| Evidence ID | Kind | Title | Location |
+| --- | --- | --- | --- |
+| `repo-power-doc` | `repo-doc` | Repo power USB power-management notes | [Docs/power/power.md](../Docs/power/power.md) |
+| `repo-power-provenance-override` | `repo-doc` | Repo provenance override for power.disable-usb-selective-suspend | [Docs/tweaks/tweak-provenance-overrides.json](../Docs/tweaks/tweak-provenance-overrides.json) |
+| `app-power-provider` | `repo-code` | Live power provider mapping | app/Services/TweakProviders/PowerTweakProvider.cs |
+| `engine-usb-suspend-command` | `repo-code` | Current USB selective suspend implementation | engine/Tweaks/Commands/Power/DisableUsbSelectiveSuspendTweak.cs |
+| `vm-power.disable-usb-selective-suspend-app-qa-20260507` | `vm-test` | RegProbe app QA apply/rollback proof for power.disable-usb-selective-suspend | [evidence/captures/power-disable-usb-selective-suspend-app-qa-20260507.json](../evidence/captures/power-disable-usb-selective-suspend-app-qa-20260507.json) |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source | [Docs/power/power.md](../Docs/power/power.md) |
+| Exact quote / path | [Docs/power/power.md:251](../Docs/power/power.md:251) documents Disable Device Powersavings; [Docs/power/power.md:255](../Docs/power/power.md:255) states that this includes USB selective suspend and related idle power management. |
+| Notes | The power documentation covers USB selective suspend/device power-savings behavior, and the checked-in command implementation supplies the exact active-scheme powercfg values and rollback snapshot. |
 
 ---
 

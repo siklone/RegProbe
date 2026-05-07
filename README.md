@@ -244,7 +244,7 @@ The latest batch file is only the newest run. If you want cumulative coverage ac
 - `registry-research-framework/audit/promoted-app-qa-coverage-latest.json`
 - `registry-research-framework/audit/promoted-app-qa-coverage-latest.md`
 
-Current audit snapshot: as of 2026-05-07, promoted app-QA coverage is `242/242` (`100.0%`) with no uncovered promoted app-QA candidates remaining. Re-run the batch checker after changing app providers, evidence promotion gates, rollback behavior, or card mapping.
+Current audit snapshot: as of 2026-05-07, app retest readiness is passing with `265` app-surface entries, `0` app-only backlog items, `263` apply-allowed records with rollback story, and `3` evidence-backed blocked follow-ups. Re-run readiness and the batch checker after changing app providers, evidence promotion gates, rollback behavior, or card mapping.
 
 ## Retest Readiness Check
 
@@ -311,7 +311,7 @@ Collection mode is explicit now. `evidence` is the safe default for research and
 
 VM secret handling was also tightened. Repo-tracked VM scripts no longer keep plaintext guest passwords. Credentials are resolved from explicit input first, then environment variables such as `REGPROBE_VM_GUEST_USER` and `REGPROBE_VM_GUEST_PASSWORD`, and finally from a DPAPI-protected CLIXML credential file referenced outside the repo. `vmrun` still consumes credentials at invocation time because that is a VMware CLI limitation, but the repo avoids storing or logging those secrets directly and the shared VM helper masks them in runner output.
 
-For hard runtime cases, the escalation path extends beyond "reboot and idle." The checked-in path moves from targeted `ETW` or runtime trace work, to the safe mega-trigger runtime lane, to `WinDbg` boot registry tracing when QGA allows it, and then to source-enrichment cross-reference through `ReactOS`, `WRK`, `System Informer`, `Sandboxie`, `Wine`, `ADMX`, and `WDK`. ETL discovery feeds the queue, feature-area enrichment and triage narrow the candidate set, VM safety bench results promote only the profiles that meet the retained bar, and hard blockers record the missing prerequisite instead of collapsing into generic review language. The active blocked worklist is now zero; records that still lack safe current-build proof, rollback, or authoritative semantics are closed with an explicit rejected promotion disposition and reopen criteria instead of remaining as ambiguous blockers.
+For hard runtime cases, the escalation path extends beyond "reboot and idle." The checked-in path moves from targeted `ETW` or runtime trace work, to the safe mega-trigger runtime lane, to `WinDbg` boot registry tracing when QGA allows it, and then to source-enrichment cross-reference through `ReactOS`, `WRK`, `System Informer`, `Sandboxie`, `Wine`, `ADMX`, and `WDK`. ETL discovery feeds the queue, feature-area enrichment and triage narrow the candidate set, VM safety bench results promote only the profiles that meet the retained bar, and hard blockers record the missing prerequisite instead of collapsing into generic review language. The active blocked worklist is currently three evidence-backed follow-ups: audio enhancements hit a real app-QA access-denied failure, hibernation needs a hibernation-capable VM or hardware lane, and SysMain needs a clean enabled/running baseline for full mutation proof.
 
 For the full validation flow, start with the [VM workflow](Docs/research/vm-workflow.md), [Runtime escalation](Docs/research/runtime-escalation.md), and the historical [Pipeline v3.1](registry-research-framework/docs/pipeline-v3.1.md) reference when an older audit pack still points to it.
 
@@ -320,13 +320,13 @@ For the full validation flow, start with the [VM workflow](Docs/research/vm-work
 <!-- BEGIN:RESEARCH_HEALTH -->
 | Metric | Value |
 |--------|-------|
-| Promoted | 244 |
-| Blocked | 0 |
+| Promoted | 256 |
+| Blocked | 3 |
 | Revalidation Pending | 0 |
 | Gate Health | 🟡 yellow |
 | Schema Complete | 100% |
-| Missing Docs | 32 |
-| Blocked Actionability | n/a |
+| Missing Docs | 17 |
+| Blocked Actionability | 3 active |
 | Blocked Worklist Gate | PASS |
 | Blocked Worklist | `registry-research-framework/audit/blocked-worklist.md` |
 <!-- END:RESEARCH_HEALTH -->

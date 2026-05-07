@@ -1,0 +1,225 @@
+{
+  "TweakId": "power.disable-usb-selective-suspend",
+  "TweakName": "Disable USB Selective Suspend",
+  "Success": true,
+  "Status": "ok-gated-override",
+  "Summary": "QA-only gated mutation override used; apply/verify path completed and rollback restored the tweak.",
+  "RollbackRequested": true,
+  "GatedMutationOverrideRequested": true,
+  "GatedMutationOverrideUsed": true,
+  "Card": {
+    "TweakId": "power.disable-usb-selective-suspend",
+    "Name": "Disable USB Selective Suspend",
+    "Category": "Power",
+    "Description": "Sets the USB Selective Suspend power setting to Disabled for AC and DC on the active power plan.",
+    "FriendlyDescription": "Sets the USB Selective Suspend power setting to Disabled for AC and DC on the active power plan.",
+    "RegistryPath": "",
+    "EvidenceClass": "B",
+    "EvidenceClassTitle": "Strong but Decision-Gated",
+    "ResearchStatus": "INTENTIONAL HOLD",
+    "IsMutationAllowed": false,
+    "RollbackSnapshotState": "ready",
+    "RollbackStoryText": "Rollback: Verified via record-restore-story.",
+    "HasClaimBoundary": true,
+    "WhatWeKnowSummary": "Claim: Sets the USB Selective Suspend power setting to Disabled for AC and DC on the active power plan. Evidence: The power documentation covers USB selective suspend/device power-savings behavior, and the checked-in command implementation supplies the exact active-scheme powercfg values and rollback snapshot. Rollback: Rollback: Verified via record-restore-story.",
+    "WhatWeDoNotClaimSummary": "Apply gate: Evidence pending",
+    "ProofLanes": [
+      {
+        "Key": "docs",
+        "Label": "DOCS",
+        "State": "ready",
+        "Summary": "The power documentation covers USB selective suspend/device power-savings behavior, and the checked-in command implementation supplies the exact active-scheme powercfg values and rollback snapshot.",
+        "Source": "Validation proof source: C:\\Tools\\AppSmoke\\Docs\\power\\power.md"
+      },
+      {
+        "Key": "runtime",
+        "Label": "RUNTIME",
+        "State": "ready",
+        "Summary": "No runtime proof is attached yet. This record still needs VM validation.",
+        "Source": ""
+      },
+      {
+        "Key": "source",
+        "Label": "SOURCE",
+        "State": "ready",
+        "Summary": "No upstream nohuto source link is attached to this record.",
+        "Source": ""
+      },
+      {
+        "Key": "rollback",
+        "Label": "ROLLBACK",
+        "State": "ready",
+        "Summary": "Rollback: Verified via record-restore-story.",
+        "Source": "record-restore-story"
+      }
+    ],
+    "ReferenceLinks": [
+      {
+        "Title": "Docs: Details (missing)",
+        "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
+        "Kind": "Details"
+      },
+      {
+        "Title": "Docs: Power (section missing)",
+        "Url": "C:\\Tools\\AppSmoke\\Docs\\power\\power.md",
+        "Kind": "Docs"
+      }
+    ]
+  },
+  "Stages": [
+    {
+      "Stage": "detect-before",
+      "AppliedStatus": "NotApplied",
+      "StatusMessage": "USB Selective Suspend: Enabled (AC/DC: 1/1).",
+      "OutcomeSummary": "Detect - Success",
+      "CurrentValue": "Unknown",
+      "TargetValue": "Optimized",
+      "WasRolledBack": false,
+      "IsMutationAllowed": false,
+      "HasSuccessfulApplyStory": false,
+      "HasSuccessfulRollbackStory": false,
+      "Steps": [
+        {
+          "Action": "Detect",
+          "StatusText": "Detected",
+          "Message": "USB Selective Suspend: Enabled (AC/DC: 1/1).",
+          "TimestampText": "16:09:23"
+        },
+        {
+          "Action": "Apply",
+          "StatusText": "Pending",
+          "Message": "",
+          "TimestampText": "-"
+        },
+        {
+          "Action": "Verify",
+          "StatusText": "Pending",
+          "Message": "",
+          "TimestampText": "-"
+        },
+        {
+          "Action": "Rollback",
+          "StatusText": "Pending",
+          "Message": "",
+          "TimestampText": "-"
+        }
+      ]
+    },
+    {
+      "Stage": "apply",
+      "AppliedStatus": "Applied",
+      "StatusMessage": "Run completed.",
+      "OutcomeSummary": "Apply - Success",
+      "CurrentValue": "Optimized",
+      "TargetValue": "Optimized",
+      "WasRolledBack": false,
+      "IsMutationAllowed": false,
+      "HasSuccessfulApplyStory": true,
+      "HasSuccessfulRollbackStory": false,
+      "Steps": [
+        {
+          "Action": "Detect",
+          "StatusText": "Detected",
+          "Message": "USB Selective Suspend: Enabled (AC/DC: 1/1).",
+          "TimestampText": "16:09:23"
+        },
+        {
+          "Action": "Apply",
+          "StatusText": "Applied",
+          "Message": "Disabled USB Selective Suspend for the active power plan.",
+          "TimestampText": "16:09:23"
+        },
+        {
+          "Action": "Verify",
+          "StatusText": "Verified",
+          "Message": "USB Selective Suspend is disabled for AC and DC power.",
+          "TimestampText": "16:09:23"
+        },
+        {
+          "Action": "Rollback",
+          "StatusText": "Not required",
+          "Message": "Step not executed.",
+          "TimestampText": "-"
+        }
+      ]
+    },
+    {
+      "Stage": "rollback",
+      "AppliedStatus": "NotApplied",
+      "StatusMessage": "Restored previous USB Selective Suspend values for the active power plan.",
+      "OutcomeSummary": "Rollback - Rolled Back",
+      "CurrentValue": "Optimized",
+      "TargetValue": "Optimized",
+      "WasRolledBack": true,
+      "IsMutationAllowed": false,
+      "HasSuccessfulApplyStory": true,
+      "HasSuccessfulRollbackStory": true,
+      "Steps": [
+        {
+          "Action": "Detect",
+          "StatusText": "Detected",
+          "Message": "USB Selective Suspend: Enabled (AC/DC: 1/1).",
+          "TimestampText": "16:09:23"
+        },
+        {
+          "Action": "Apply",
+          "StatusText": "Applied",
+          "Message": "Disabled USB Selective Suspend for the active power plan.",
+          "TimestampText": "16:09:23"
+        },
+        {
+          "Action": "Verify",
+          "StatusText": "Verified",
+          "Message": "USB Selective Suspend is disabled for AC and DC power.",
+          "TimestampText": "16:09:23"
+        },
+        {
+          "Action": "Rollback",
+          "StatusText": "Rolled back",
+          "Message": "Restored previous USB Selective Suspend values for the active power plan.",
+          "TimestampText": "16:09:23"
+        }
+      ]
+    },
+    {
+      "Stage": "detect-after",
+      "AppliedStatus": "NotApplied",
+      "StatusMessage": "USB Selective Suspend: Enabled (AC/DC: 1/1).",
+      "OutcomeSummary": "Detect - Success",
+      "CurrentValue": "Optimized",
+      "TargetValue": "Optimized",
+      "WasRolledBack": true,
+      "IsMutationAllowed": false,
+      "HasSuccessfulApplyStory": true,
+      "HasSuccessfulRollbackStory": true,
+      "Steps": [
+        {
+          "Action": "Detect",
+          "StatusText": "Detected",
+          "Message": "USB Selective Suspend: Enabled (AC/DC: 1/1).",
+          "TimestampText": "16:09:23"
+        },
+        {
+          "Action": "Apply",
+          "StatusText": "Applied",
+          "Message": "Disabled USB Selective Suspend for the active power plan.",
+          "TimestampText": "16:09:23"
+        },
+        {
+          "Action": "Verify",
+          "StatusText": "Verified",
+          "Message": "USB Selective Suspend is disabled for AC and DC power.",
+          "TimestampText": "16:09:23"
+        },
+        {
+          "Action": "Rollback",
+          "StatusText": "Rolled back",
+          "Message": "Restored previous USB Selective Suspend values for the active power plan.",
+          "TimestampText": "16:09:23"
+        }
+      ]
+    }
+  ],
+  "StartedAtUtc": "2026-05-07T23:09:20.5782481+00:00",
+  "CompletedAtUtc": "2026-05-07T23:09:24.0224261+00:00"
+}

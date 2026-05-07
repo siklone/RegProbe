@@ -139,4 +139,85 @@ public sealed class StartupQaRunnerTests
 
         Assert.False(result);
     }
+
+    [Fact]
+    public void TryBuildAlreadyAppliedSummary_ReturnsTrue_WhenNoMutationWasNeeded()
+    {
+        var stages = new[]
+        {
+            new StartupQaRunner.QaRunStageReport(
+                "detect-before",
+                "Applied",
+                "Current state: Superfetch is stopped",
+                "Detect - Success",
+                "Optimized",
+                "Optimized",
+                false,
+                true,
+                true,
+                false,
+                [
+                    new StartupQaRunner.QaRunStepReport("Detect", "Applied", "Current state: Superfetch is stopped", "10:24:23"),
+                    new StartupQaRunner.QaRunStepReport("Apply", "Pending", string.Empty, "-"),
+                    new StartupQaRunner.QaRunStepReport("Verify", "Pending", string.Empty, "-"),
+                    new StartupQaRunner.QaRunStepReport("Rollback", "Pending", string.Empty, "-"),
+                ]),
+            new StartupQaRunner.QaRunStageReport(
+                "apply",
+                "Applied",
+                "Run completed.",
+                "Apply - Success",
+                "Optimized",
+                "Optimized",
+                false,
+                true,
+                true,
+                false,
+                [
+                    new StartupQaRunner.QaRunStepReport("Detect", "Applied", "Current state: Superfetch is stopped", "10:24:23"),
+                    new StartupQaRunner.QaRunStepReport("Apply", "Skipped", "Already in the desired state.", "10:24:23"),
+                    new StartupQaRunner.QaRunStepReport("Verify", "Verified", "Changes verified successfully.", "10:24:23"),
+                    new StartupQaRunner.QaRunStepReport("Rollback", "Skipped", "No changes were made.", "10:24:23"),
+                ]),
+            new StartupQaRunner.QaRunStageReport(
+                "rollback",
+                "Applied",
+                "Rollback not supported for this tweak.",
+                "Rollback - Skipped",
+                "Optimized",
+                "Optimized",
+                false,
+                true,
+                true,
+                false,
+                [
+                    new StartupQaRunner.QaRunStepReport("Detect", "Applied", "Current state: Superfetch is stopped", "10:24:23"),
+                    new StartupQaRunner.QaRunStepReport("Apply", "Skipped", "Already in the desired state.", "10:24:23"),
+                    new StartupQaRunner.QaRunStepReport("Verify", "Verified", "Changes verified successfully.", "10:24:23"),
+                    new StartupQaRunner.QaRunStepReport("Rollback", "Not applicable", "Rollback not supported for this tweak.", "10:24:23"),
+                ]),
+            new StartupQaRunner.QaRunStageReport(
+                "detect-after",
+                "Applied",
+                "Current state: Superfetch is stopped",
+                "Detect - Success",
+                "Optimized",
+                "Optimized",
+                false,
+                true,
+                true,
+                false,
+                [
+                    new StartupQaRunner.QaRunStepReport("Detect", "Applied", "Current state: Superfetch is stopped", "10:24:23"),
+                    new StartupQaRunner.QaRunStepReport("Apply", "Skipped", "Already in the desired state.", "10:24:23"),
+                    new StartupQaRunner.QaRunStepReport("Verify", "Verified", "Changes verified successfully.", "10:24:23"),
+                    new StartupQaRunner.QaRunStepReport("Rollback", "Not applicable", "Rollback not supported for this tweak.", "10:24:23"),
+                ]),
+        };
+
+        var result = StartupQaRunner.TryBuildAlreadyAppliedSummary(stages, rollbackRequested: true, out var summary);
+
+        Assert.True(result);
+        Assert.Contains("already matched", summary);
+    }
 }

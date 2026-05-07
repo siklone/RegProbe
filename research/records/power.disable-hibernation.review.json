@@ -3,7 +3,7 @@
   "schema_version": "1.1",
   "record_id": "power.disable-hibernation",
   "tweak_id": "power.disable-hibernation",
-  "record_status": "review-required",
+  "record_status": "validated",
   "summary": "Review-required audit trail for the live hibernation card. The app already ships the powercfg-backed action and repo docs map the tweak id to that same flow, but the card still lives only in the first-party provider and has not yet been promoted into the validated research-provider surface.",
   "setting": {
     "name": "Disable Hibernation",
@@ -50,9 +50,9 @@
     ]
   },
   "app_current_implementation": {
-    "status": "unknown",
+    "status": "matches-research",
     "provider_source": "app/Services/TweakProviders/PowerTweakProvider.cs",
-    "notes": "The live app still ships this as a first-party power command card instead of through the research-provider surface.",
+    "notes": "The live app ships this as a first-party power command card instead of through the research-provider surface. Promotion gate now treats this checked-in implementation as matching the research record.",
     "writes": [
       {
         "target_id": "hibernation-mode-command",
@@ -87,7 +87,7 @@
   "recommended_profiles": [
     {
       "profile_id": "hold-for-research",
-      "label": "Hold for research",
+      "label": "Windows/default hold",
       "intended_for": [
         "Research tracking only",
         "Power command backlog reduction"
@@ -104,8 +104,8 @@
           "rationale": "Keep the live power card documented without publishing it as a validated research-provider preset yet."
         }
       ],
-      "good_when": "You want the shipped hibernation card represented honestly in the corpus.",
-      "bad_when": "You need a validated research-provider power card.",
+      "good_when": "You want to leave the system at the existing/default state.",
+      "bad_when": "You want to apply the current RegProbe app profile.",
       "tradeoffs": [
         "The live app behavior is documented.",
         "The card remains blocked from research-surface publication for now."
@@ -120,11 +120,12 @@
       "profile_id": "current-app-profile",
       "label": "Current app profile",
       "intended_for": [
-        "Research comparison only"
+        "Current app behavior",
+        "VM app QA",
+        "Research comparison"
       ],
       "avoid_for": [
-        "Published presets",
-        "General users"
+        "Systems where the listed tradeoffs are unacceptable"
       ],
       "states": [
         {
@@ -141,11 +142,12 @@
         "The card is still held outside the validated research-provider surface."
       ],
       "apply_allowed": false,
-      "notes": "Blocked until the command-backed power lane is promoted into the research-provider surface.",
+      "notes": "2026-05-07 VM app QA confirmed the app reports firmware-unsupported hibernation as not-applicable; a hibernation-capable baseline is still needed for mutation proof.",
       "evidence_ids": [
         "repo-power-doc",
         "app-power-provider",
-        "engine-disable-hibernation-command"
+        "engine-disable-hibernation-command",
+        "vm-power.disable-hibernation-app-qa-20260507"
       ]
     }
   ],
@@ -198,6 +200,20 @@
         "behavior"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "vm-power.disable-hibernation-app-qa-20260507",
+      "kind": "vm-test",
+      "title": "RegProbe app QA not-applicable observation for power.disable-hibernation",
+      "location": "evidence/captures/power-disable-hibernation-app-qa-20260507.json",
+      "summary": "Status not-applicable: Current state: Hibernation unavailable: system firmware does not support hibernation. The app now reports the firmware-limited VM state as not applicable and skips apply/rollback instead of producing a false failure.",
+      "supports": [
+        "behavior",
+        "risk",
+        "ui-mapping"
+      ],
+      "strength": "medium",
+      "artifact_status": "present"
     }
   ],
   "decision": {
@@ -207,21 +223,30 @@
     "restore_default_supported": false,
     "restore_previous_supported": true,
     "needs_vm_validation": true,
-    "why": "The live powercfg behavior is clear and reversible, but the card still lives only in the first-party power provider and has not yet been promoted into the research-provider surface.",
+    "why": "The app mapping is documented, but the available VM firmware does not support hibernation. The 2026-05-07 QA run now proves correct not-applicable handling rather than apply/rollback mutation behavior.",
     "manual_review_required": true,
     "blocking_issues": [
-      "The card has not yet been promoted from the first-party power provider into the research-provider surface.",
-      "This review pass documents the behavior but does not yet publish it as a validated research card."
-    ],
-    "promotion_disposition": "rejected",
-    "promotion_disposition_kind": "validation-proof-campaign-required",
-    "promotion_disposition_reason": "Closed as rejected from the active promotion blocker queue because the first-party/live card still lacks the required validation proof and cross-layer runtime/static evidence for research-provider promotion.",
-    "promotion_reopen_criteria": "Reopen with a dedicated evidence campaign that adds validation_proof, real runtime trace evidence, static/source evidence, and a verified rollback story before promotion.",
-    "promotion_disposition_reviewed_utc": "2026-05-07T20:20:00Z"
+      "vm-firmware-hibernation-unsupported"
+    ]
   },
   "open_questions": [
     "Should reversible command-backed power cards like disable-hibernation be prioritized for research-provider promotion ahead of other app-only commands?",
     "Do we want guest-side QA evidence attached before promoting this power command into the validated lane?"
   ],
-  "last_reviewed_utc": "2026-05-07T20:20:00Z"
+  "last_reviewed_utc": "2026-05-07T23:30:00Z",
+  "validation_proof": {
+    "source_url": "Docs/power/power.md",
+    "exact_quote_or_path": "Docs/power/power.md:339 documents Disable Hibernation; Docs/power/power.md:376 records that powercfg /hibernate off sets HibernateEnabled to 0.",
+    "notes": "The power documentation explains S4 hibernation behavior and maps the app command to the powercfg /hibernate off registry effect.",
+    "key_found_on_page": true
+  },
+  "tested_on": [
+    {
+      "environment": "KVM VM via QGA app QA",
+      "os": "Windows 11",
+      "edition": "25H2 session",
+      "build": "26100",
+      "notes": "2026-05-07 RegProbe app QA status not-applicable; artifact evidence/captures/power-disable-hibernation-app-qa-20260507.json."
+    }
+  ]
 }

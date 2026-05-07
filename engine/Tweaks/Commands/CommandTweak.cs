@@ -39,6 +39,9 @@ public abstract class CommandTweak : ITweak
     protected abstract bool ParseDetectedState(CommandResult result, out string state);
     protected abstract bool VerifyApplied(CommandResult result);
 
+    protected virtual TweakStatus GetDetectedStatus(CommandResult result, string detectedState)
+        => VerifyApplied(result) ? TweakStatus.Applied : TweakStatus.Detected;
+
     public async Task<TweakResult> DetectAsync(CancellationToken ct)
     {
         ct.ThrowIfCancellationRequested();
@@ -74,10 +77,9 @@ public abstract class CommandTweak : ITweak
 
             _hasDetected = true;
 
-            // Check if the tweak is already in the desired (applied) state
-            var isApplied = VerifyApplied(result);
+            var detectedStatus = GetDetectedStatus(result, _detectedState);
             return new TweakResult(
-                isApplied ? TweakStatus.Applied : TweakStatus.Detected,
+                detectedStatus,
                 $"Current state: {_detectedState}",
                 DateTimeOffset.UtcNow);
         }
@@ -164,7 +166,24 @@ public abstract class CommandTweak : ITweak
                     DateTimeOffset.UtcNow);
             }
 
-            if (VerifyApplied(result))
+            if (!ParseDetectedState(result, out var detectedState))
+            {
+                return new TweakResult(
+                    TweakStatus.Failed,
+                    "Failed to parse verification state.",
+                    DateTimeOffset.UtcNow);
+            }
+
+            var detectedStatus = GetDetectedStatus(result, detectedState);
+            if (detectedStatus == TweakStatus.NotApplicable)
+            {
+                return new TweakResult(
+                    TweakStatus.NotApplicable,
+                    $"Verification not applicable: {detectedState}",
+                    DateTimeOffset.UtcNow);
+            }
+
+            if (detectedStatus == TweakStatus.Applied || VerifyApplied(result))
             {
                 return new TweakResult(
                     TweakStatus.Verified,

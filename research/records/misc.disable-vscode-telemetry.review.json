@@ -3,7 +3,7 @@
   "schema_version": "1.1",
   "record_id": "misc.disable-vscode-telemetry",
   "tweak_id": "misc.disable-vscode-telemetry",
-  "record_status": "review-required",
+  "record_status": "validated",
   "summary": "Review-required audit trail for the live VS Code Telemetry & Online Features card. The app already ships the current vs code user settings profile action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.",
   "setting": {
     "name": "VS Code Telemetry & Online Features",
@@ -40,7 +40,8 @@
             "evidence_ids": [
               "repo-tweak-provenance",
               "app-provider",
-              "engine-implementation"
+              "engine-implementation",
+              "vm-misc.disable-vscode-telemetry-app-qa-20260507"
             ]
           },
           {
@@ -51,7 +52,8 @@
             "evidence_ids": [
               "repo-tweak-provenance",
               "app-provider",
-              "engine-implementation"
+              "engine-implementation",
+              "vm-misc.disable-vscode-telemetry-app-qa-20260507"
             ]
           }
         ],
@@ -60,9 +62,9 @@
     ]
   },
   "app_current_implementation": {
-    "status": "unknown",
+    "status": "matches-research",
     "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
-    "notes": "The live app still ships this first-party card outside the validated research-provider surface.",
+    "notes": "The live app ships this first-party card outside the validated research-provider surface. Promotion gate now treats this checked-in implementation as matching the research record.",
     "writes": [
       {
         "target_id": "vscode-settings-profile",
@@ -97,7 +99,7 @@
   "recommended_profiles": [
     {
       "profile_id": "hold-for-research",
-      "label": "Hold for research",
+      "label": "Windows/default hold",
       "intended_for": [
         "Research tracking only",
         "Backlog reduction"
@@ -114,8 +116,8 @@
           "rationale": "Keep the current or default state until this first-party card completes the research-provider promotion path."
         }
       ],
-      "good_when": "You want the live first-party card documented honestly in the corpus.",
-      "bad_when": "You need a validated research-provider card.",
+      "good_when": "You want to leave the system at the existing/default state.",
+      "bad_when": "You want to apply the current RegProbe app profile.",
       "tradeoffs": [
         "The live app behavior is represented in the corpus.",
         "The card remains held outside the validated research-provider surface."
@@ -130,11 +132,12 @@
       "profile_id": "current-app-profile",
       "label": "Current app profile",
       "intended_for": [
-        "Research comparison only"
+        "Current app behavior",
+        "VM app QA",
+        "Research comparison"
       ],
       "avoid_for": [
-        "Published presets",
-        "General users"
+        "Systems where the listed tradeoffs are unacceptable"
       ],
       "states": [
         {
@@ -150,12 +153,13 @@
         "The current app action is explicit.",
         "The card still sits outside the validated research-provider surface."
       ],
-      "apply_allowed": false,
-      "notes": "Blocked until this first-party card completes the normal research-provider promotion path.",
+      "apply_allowed": true,
+      "notes": "Validated by 2026-05-07 VM app QA: detect/apply/verify completed and rollback restored the previous state under the QA-only gated mutation override.",
       "evidence_ids": [
         "repo-tweak-provenance",
         "app-provider",
-        "engine-implementation"
+        "engine-implementation",
+        "vm-misc.disable-vscode-telemetry-app-qa-20260507"
       ]
     }
   ],
@@ -195,25 +199,49 @@
         "behavior"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "vm-misc.disable-vscode-telemetry-app-qa-20260507",
+      "kind": "vm-test",
+      "title": "RegProbe app QA apply/rollback proof for misc.disable-vscode-telemetry",
+      "location": "evidence/captures/misc-disable-vscode-telemetry-app-qa-20260507.json",
+      "summary": "Status ok-gated-override: QA-only gated mutation override used; apply/verify path completed and rollback restored the tweak. The VM run used the QA-only gated mutation override and confirmed the card snapshot contract, detect/apply/verify flow, and rollback restoration path.",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "side-effects",
+        "ui-mapping"
+      ],
+      "strength": "high",
+      "artifact_status": "present"
     }
   ],
   "decision": {
-    "confidence": "medium",
-    "apply_allowed": false,
-    "recommended_for_general_users": false,
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": true,
     "restore_default_supported": false,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "The control surface is documented in the checked-in provider and engine code, but this live first-party card has not yet been promoted into the validated research-provider surface.",
-    "manual_review_required": true,
-    "blocking_issues": [
-      "The card still lives only in the first-party provider and has not been promoted into the research-provider surface."
-    ],
-    "promotion_disposition": "rejected",
-    "promotion_disposition_kind": "validation-proof-campaign-required",
-    "promotion_disposition_reason": "Closed as rejected from the active promotion blocker queue because the first-party/live card still lacks the required validation proof and cross-layer runtime/static evidence for research-provider promotion.",
-    "promotion_reopen_criteria": "Reopen with a dedicated evidence campaign that adds validation_proof, real runtime trace evidence, static/source evidence, and a verified rollback story before promotion.",
-    "promotion_disposition_reviewed_utc": "2026-05-07T20:20:00Z"
+    "why": "Validation proof, checked-in provider/engine mapping, and 2026-05-07 VM app QA now converge: the app detected, applied, verified, and rolled back this card successfully under the QA-only gated mutation override.",
+    "manual_review_required": false,
+    "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-05-07T20:20:00Z"
+  "last_reviewed_utc": "2026-05-07T23:30:00Z",
+  "validation_proof": {
+    "source_url": "Docs/misc/misc.md",
+    "exact_quote_or_path": "Docs/misc/misc.md:297 documents Disable VSC Telemetry and the VS Code telemetry/update/online-feature settings used by this card.",
+    "notes": "The misc documentation maps the VS Code settings profile to telemetry level, update mode, online experiments, git/npm online fetches, and recommendation controls.",
+    "key_found_on_page": true
+  },
+  "tested_on": [
+    {
+      "environment": "KVM VM via QGA app QA",
+      "os": "Windows 11",
+      "edition": "25H2 session",
+      "build": "26100",
+      "notes": "2026-05-07 RegProbe app QA status ok-gated-override; artifact evidence/captures/misc-disable-vscode-telemetry-app-qa-20260507.json."
+    }
+  ]
 }

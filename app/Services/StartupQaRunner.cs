@@ -63,7 +63,8 @@ internal static class StartupQaRunner
         await tweak.RunDetectAsync(CancellationToken.None);
         stages.Add(QaRunStageReport.Create("detect-before", tweak));
 
-        if (!tweak.IsMutationAllowed)
+        var gatedMutationOverrideUsed = request.AllowGatedMutation && !tweak.IsMutationAllowed;
+        if (!tweak.IsMutationAllowed && !request.AllowGatedMutation)
         {
             return new QaRunReport(
                 tweak.Id,
@@ -72,18 +73,20 @@ internal static class StartupQaRunner
                 "mutation-blocked",
                 "The app loaded the tweak, but the current evidence/promotion gate still blocks mutation.",
                 request.RollbackAfterApply,
+                request.AllowGatedMutation,
+                gatedMutationOverrideUsed,
                 card,
                 stages,
                 startedAt,
                 DateTimeOffset.UtcNow);
         }
 
-        await tweak.RunApplyAsync(CancellationToken.None);
+        await tweak.RunApplyForQaAsync(CancellationToken.None, request.AllowGatedMutation);
         stages.Add(QaRunStageReport.Create("apply", tweak));
 
         if (request.RollbackAfterApply)
         {
-            await tweak.RunRollbackAsync(CancellationToken.None);
+            await tweak.RunRollbackForQaAsync(CancellationToken.None, request.AllowGatedMutation);
             stages.Add(QaRunStageReport.Create("rollback", tweak));
         }
 
@@ -101,6 +104,25 @@ internal static class StartupQaRunner
                 "not-applicable",
                 notApplicableSummary,
                 request.RollbackAfterApply,
+                request.AllowGatedMutation,
+                gatedMutationOverrideUsed,
+                card,
+                stages,
+                startedAt,
+                DateTimeOffset.UtcNow);
+        }
+
+        if (TryBuildAlreadyAppliedSummary(stages, request.RollbackAfterApply, out var alreadyAppliedSummary))
+        {
+            return new QaRunReport(
+                tweak.Id,
+                tweak.Name,
+                true,
+                "already-applied",
+                alreadyAppliedSummary,
+                request.RollbackAfterApply,
+                request.AllowGatedMutation,
+                gatedMutationOverrideUsed,
                 card,
                 stages,
                 startedAt,
@@ -111,16 +133,20 @@ internal static class StartupQaRunner
                       && (!request.RollbackAfterApply || rollbackStage?.HasSuccessfulRollbackStory == true);
 
         var summary = success
-            ? "Apply/verify path completed and rollback restored the tweak."
+            ? gatedMutationOverrideUsed
+                ? "QA-only gated mutation override used; apply/verify path completed and rollback restored the tweak."
+                : "Apply/verify path completed and rollback restored the tweak."
             : "The tweak flow completed, but at least one apply or rollback checkpoint did not come back clean.";
 
         return new QaRunReport(
             tweak.Id,
             tweak.Name,
             success,
-            success ? "ok" : "check-failed",
+            success && gatedMutationOverrideUsed ? "ok-gated-override" : success ? "ok" : "check-failed",
             summary,
             request.RollbackAfterApply,
+            request.AllowGatedMutation,
+            gatedMutationOverrideUsed,
             card,
             stages,
             startedAt,
@@ -165,6 +191,42 @@ internal static class StartupQaRunner
         return true;
     }
 
+    internal static bool TryBuildAlreadyAppliedSummary(
+        IReadOnlyList<QaRunStageReport> stages,
+        bool rollbackRequested,
+        out string summary)
+    {
+        summary = string.Empty;
+        var detectBefore = stages.FirstOrDefault(stage => stage.Stage == "detect-before");
+        var applyStage = stages.FirstOrDefault(stage => stage.Stage == "apply");
+        var detectAfter = stages.FirstOrDefault(stage => stage.Stage == "detect-after");
+        var rollbackStage = stages.FirstOrDefault(stage => stage.Stage == "rollback");
+
+        if (detectBefore is null || applyStage is null || detectAfter is null)
+        {
+            return false;
+        }
+
+        if (!HasStepStatus(detectBefore, "Detect", "Applied", "Verified")
+            || !HasStepStatus(applyStage, "Apply", "Skipped")
+            || !HasStepStatus(applyStage, "Verify", "Verified")
+            || !HasStepStatus(applyStage, "Rollback", "Skipped")
+            || !HasStepStatus(detectAfter, "Detect", "Applied", "Verified"))
+        {
+            return false;
+        }
+
+        if (rollbackRequested
+            && rollbackStage is not null
+            && !HasStepStatus(rollbackStage, "Rollback", "Not applicable", "Skipped", "Rolled back"))
+        {
+            return false;
+        }
+
+        summary = "The tweak already matched the desired state; the app verified it and skipped rollback because no mutation was performed.";
+        return true;
+    }
+
     private static bool HasStepStatus(QaRunStageReport stage, string action, params string[] statuses)
         => stage.Steps.Any(step =>
             string.Equals(step.Action, action, StringComparison.OrdinalIgnoreCase)
@@ -191,6 +253,8 @@ internal static class StartupQaRunner
         string Status,
         string Summary,
         bool RollbackRequested,
+        bool GatedMutationOverrideRequested,
+        bool GatedMutationOverrideUsed,
         QaRunCardSnapshot Card,
         IReadOnlyList<QaRunStageReport> Stages,
         DateTimeOffset StartedAtUtc,
@@ -204,6 +268,8 @@ internal static class StartupQaRunner
                 "error",
                 message,
                 RollbackRequested: false,
+                GatedMutationOverrideRequested: false,
+                GatedMutationOverrideUsed: false,
                 Card: QaRunCardSnapshot.CreateMissing(tweakId),
                 Stages: Array.Empty<QaRunStageReport>(),
                 startedAt,

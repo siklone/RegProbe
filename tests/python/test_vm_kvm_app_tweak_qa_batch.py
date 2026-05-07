@@ -106,6 +106,55 @@ class VmKvmAppTweakQaBatchTests(unittest.TestCase):
         self.assertEqual(result["report_card_missing_fields"], [])
         self.assertEqual(result["report_card_missing_proof_lanes"], [])
 
+    def test_allow_gated_mutation_passes_explicit_guest_script_switch(self) -> None:
+        report = {
+            "Success": False,
+            "Status": "mutation-blocked",
+            "Summary": "blocked",
+            "Card": {
+                "TweakId": "system.alpha",
+                "Name": "System Alpha",
+                "Category": "System",
+                "EvidenceClass": "B",
+                "ResearchStatus": "INTENTIONAL HOLD",
+                "RollbackSnapshotState": "ready",
+                "HasClaimBoundary": True,
+                "WhatWeKnowSummary": "Known bounded claim.",
+                "WhatWeDoNotClaimSummary": "No benchmark claim.",
+                "ProofLanes": [
+                    {"Key": "docs"},
+                    {"Key": "runtime"},
+                    {"Key": "source"},
+                    {"Key": "rollback"},
+                ],
+            },
+        }
+        qga_payload = {
+            "status": "completed",
+            "execution": {
+                "exitcode": 2,
+                "stdout": json.dumps(report),
+            },
+        }
+        completed = mock.Mock(returncode=0, stdout=json.dumps(qga_payload), stderr="")
+        argv = [
+            "run-guest-app-tweak-qa-batch.py",
+            "--id",
+            "system.alpha",
+            "--wait-timeout",
+            "1",
+            "--allow-gated-mutation",
+        ]
+        with mock.patch.object(sys, "argv", argv), mock.patch.object(
+            app_tweak_qa_batch.subprocess,
+            "run",
+            return_value=completed,
+        ) as run_mock, mock.patch("sys.stdout", new_callable=io.StringIO):
+            app_tweak_qa_batch.main()
+
+        command = run_mock.call_args.args[0]
+        self.assertIn("--ps-arg=-AllowGatedMutation", command)
+
     def test_empty_stdout_downloads_guest_report_fallback(self) -> None:
         report = {
             "Success": True,

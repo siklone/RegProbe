@@ -1,19 +1,19 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-07T19:50:30.763618Z",
+  "generated_utc": "2026-05-07T23:25:44.061795Z",
   "summary": {
     "total_records": 356,
     "class_counts": {
-      "A": 246,
-      "B": 21,
+      "A": 258,
+      "B": 24,
       "C": 2,
-      "D": 32,
+      "D": 17,
       "E": 55
     },
     "action_state_counts": {
-      "actionable": 243,
+      "actionable": 255,
       "archived": 55,
-      "research-gated": 58
+      "research-gated": 46
     }
   },
   "classes": {
@@ -4855,18 +4855,18 @@
     {
       "record_id": "misc.disable-edge-features",
       "tweak_id": "misc.disable-edge-features",
-      "record_status": "review-required",
-      "evidence_class": "D",
-      "class_label": "Class D",
-      "class_title": "Key Known, Value Semantics Unknown",
-      "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+      "record_status": "validated",
+      "evidence_class": "A",
+      "class_label": "Class A",
+      "class_title": "Cross-Layer Verified",
+      "class_description": "Key exists, primary values have trusted meanings, and the docs/static/runtime layers converge. App surfacing and one-click actionability are tracked separately.",
       "show_in_app": true,
-      "is_actionable": false,
+      "is_actionable": true,
       "is_archived": false,
-      "action_state": "research-gated",
-      "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
-      "confidence": "medium",
-      "app_mapping_status": "unknown",
+      "action_state": "actionable",
+      "gating_reason": "This record is cross-layer verified and also aligned with a shipped one-click surface.",
+      "confidence": "high",
+      "app_mapping_status": "matches-research",
       "restore_story_known": true,
       "tested_build": "26100",
       "anticheat_risk": {
@@ -4875,10 +4875,16 @@
         "gaming_safe": null
       },
       "validated_semantics": {
-        "summary": "The checked-in tweak provenance tables map misc.disable-edge-features to the current repo implementation.",
-        "has_validation_proof": false,
+        "summary": "The misc documentation maps this card to the Edge policy bundle and names the Microsoft Edge / EdgeUI policy values that the current app writes.",
+        "has_validation_proof": true,
         "has_semantics_evidence": true,
         "links": [
+          {
+            "title": "Validation proof source",
+            "url": "Docs/misc/misc.md",
+            "kind": "validation-proof",
+            "summary": "Docs/misc/misc.md:561 documents the Disable Edge Features policy bundle; Docs/misc/misc.md:565-598 lists the retained Edge policy values and EdgeUI values used by this card."
+          },
           {
             "title": "Repo tweak provenance for misc.disable-edge-features",
             "url": "Docs/tweaks/tweak-provenance.md",
@@ -4894,10 +4900,17 @@
         ]
       },
       "runtime_proof": {
-        "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "summary": "Status ok-gated-override: QA-only gated mutation override used; apply/verify path completed and rollback restored the tweak. The VM run used the QA-only gated mutation override and confirmed the card snapshot contract, detect/apply/verify flow, and rollback...",
         "needs_vm_validation": false,
-        "has_runtime_evidence": false,
-        "links": []
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "RegProbe app QA apply/rollback proof for misc.disable-edge-features",
+            "url": "evidence/captures/misc-disable-edge-features-app-qa-20260507.json",
+            "kind": "vm-test",
+            "summary": "Status ok-gated-override: QA-only gated mutation override used; apply/verify path completed and rollback restored the tweak. The VM run used the QA-only gated mutation override..."
+          }
+        ]
       },
       "upstream_lineage": {
         "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
@@ -4926,44 +4939,41 @@
           }
         ]
       },
-      "tweak_origin": "research-derived",
-      "promotion_state": "rejected",
-      "promotion_blockers": [
-        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
-        "validation-proof"
-      ],
-      "record_promotion_allowed": false,
-      "tweak_ingest_allowed": false,
-      "debug_override_allowed": true,
+      "tweak_origin": "legacy-curated",
+      "promotion_state": "promoted",
+      "promotion_blockers": [],
+      "record_promotion_allowed": true,
+      "tweak_ingest_allowed": true,
+      "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 4,
-        "tweak_suitability": 2,
+        "tweak_suitability": 5,
         "privilege_complexity": 3,
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.33,
-        "next_missing_layer": "validation-proof"
+        "overall_score": 3.67,
+        "next_missing_layer": "none"
       }
     },
     {
       "record_id": "misc.disable-office-telemetry",
       "tweak_id": "misc.disable-office-telemetry",
-      "record_status": "review-required",
-      "evidence_class": "D",
-      "class_label": "Class D",
-      "class_title": "Key Known, Value Semantics Unknown",
-      "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+      "record_status": "validated",
+      "evidence_class": "A",
+      "class_label": "Class A",
+      "class_title": "Cross-Layer Verified",
+      "class_description": "Key exists, primary values have trusted meanings, and the docs/static/runtime layers converge. App surfacing and one-click actionability are tracked separately.",
       "show_in_app": true,
-      "is_actionable": false,
+      "is_actionable": true,
       "is_archived": false,
-      "action_state": "research-gated",
-      "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
-      "confidence": "medium",
-      "app_mapping_status": "unknown",
+      "action_state": "actionable",
+      "gating_reason": "This record is cross-layer verified and also aligned with a shipped one-click surface.",
+      "confidence": "high",
+      "app_mapping_status": "matches-research",
       "restore_story_known": true,
       "tested_build": "26100",
       "anticheat_risk": {
@@ -4972,10 +4982,16 @@
         "gaming_safe": null
       },
       "validated_semantics": {
-        "summary": "The checked-in tweak provenance tables map misc.disable-office-telemetry to the current repo implementation.",
-        "has_validation_proof": false,
+        "summary": "The misc documentation names the Office telemetry policy paths, values, and data meanings used by the current Office telemetry card.",
+        "has_validation_proof": true,
         "has_semantics_evidence": true,
         "links": [
+          {
+            "title": "Validation proof source",
+            "url": "Docs/misc/misc.md",
+            "kind": "validation-proof",
+            "summary": "Docs/misc/misc.md:404 documents Disable MS Office Telemetry; Docs/misc/misc.md:428-456 lists the Office OSM preventedapplications and preventedsolutiontypes policy values."
+          },
           {
             "title": "Repo tweak provenance for misc.disable-office-telemetry",
             "url": "Docs/tweaks/tweak-provenance.md",
@@ -4991,10 +5007,17 @@
         ]
       },
       "runtime_proof": {
-        "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "summary": "Status ok-gated-override: QA-only gated mutation override used; apply/verify path completed and rollback restored the tweak. The VM run used the QA-only gated mutation override and confirmed the card snapshot contract, detect/apply/verify flow, and rollback...",
         "needs_vm_validation": false,
-        "has_runtime_evidence": false,
-        "links": []
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "RegProbe app QA apply/rollback proof for misc.disable-office-telemetry",
+            "url": "evidence/captures/misc-disable-office-telemetry-app-qa-20260507.json",
+            "kind": "vm-test",
+            "summary": "Status ok-gated-override: QA-only gated mutation override used; apply/verify path completed and rollback restored the tweak. The VM run used the QA-only gated mutation override..."
+          }
+        ]
       },
       "upstream_lineage": {
         "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
@@ -5011,44 +5034,41 @@
           }
         ]
       },
-      "tweak_origin": "research-derived",
-      "promotion_state": "rejected",
-      "promotion_blockers": [
-        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
-        "validation-proof"
-      ],
-      "record_promotion_allowed": false,
-      "tweak_ingest_allowed": false,
-      "debug_override_allowed": true,
+      "tweak_origin": "legacy-curated",
+      "promotion_state": "promoted",
+      "promotion_blockers": [],
+      "record_promotion_allowed": true,
+      "tweak_ingest_allowed": true,
+      "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 4,
-        "tweak_suitability": 2,
+        "tweak_suitability": 5,
         "privilege_complexity": 4,
         "build_specificity": 5,
         "sibling_expansion_value": 2,
         "bench_priority": 3,
-        "overall_score": 3.22,
-        "next_missing_layer": "validation-proof"
+        "overall_score": 3.56,
+        "next_missing_layer": "none"
       }
     },
     {
       "record_id": "misc.disable-onedrive",
       "tweak_id": "misc.disable-onedrive",
-      "record_status": "review-required",
-      "evidence_class": "D",
-      "class_label": "Class D",
-      "class_title": "Key Known, Value Semantics Unknown",
-      "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+      "record_status": "validated",
+      "evidence_class": "A",
+      "class_label": "Class A",
+      "class_title": "Cross-Layer Verified",
+      "class_description": "Key exists, primary values have trusted meanings, and the docs/static/runtime layers converge. App surfacing and one-click actionability are tracked separately.",
       "show_in_app": true,
-      "is_actionable": false,
+      "is_actionable": true,
       "is_archived": false,
-      "action_state": "research-gated",
-      "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
-      "confidence": "medium",
-      "app_mapping_status": "unknown",
+      "action_state": "actionable",
+      "gating_reason": "This record is cross-layer verified and also aligned with a shipped one-click surface.",
+      "confidence": "high",
+      "app_mapping_status": "matches-research",
       "restore_story_known": true,
       "tested_build": "26100",
       "anticheat_risk": {
@@ -5057,10 +5077,16 @@
         "gaming_safe": null
       },
       "validated_semantics": {
-        "summary": "The checked-in tweak provenance tables map misc.disable-onedrive to the current repo implementation.",
-        "has_validation_proof": false,
+        "summary": "The misc documentation maps DisableLibrariesDefaultSaveToOneDrive, DisableFileSync, DisableFileSyncNGSC, DisableMeteredNetworkFileSync, PreventNetworkTrafficPreUserSignIn, and the Explorer namespace pin values to the OneDrive disable behavior.",
+        "has_validation_proof": true,
         "has_semantics_evidence": true,
         "links": [
+          {
+            "title": "Validation proof source",
+            "url": "Docs/misc/misc.md",
+            "kind": "validation-proof",
+            "summary": "Docs/misc/misc.md:465 documents Disable OneDrive; Docs/misc/misc.md:469-551 names the OneDrive policy and Explorer namespace values used by this card."
+          },
           {
             "title": "Repo tweak provenance for misc.disable-onedrive",
             "url": "Docs/tweaks/tweak-provenance.md",
@@ -5076,10 +5102,17 @@
         ]
       },
       "runtime_proof": {
-        "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "summary": "Status ok-gated-override: QA-only gated mutation override used; apply/verify path completed and rollback restored the tweak. The VM run used the QA-only gated mutation override and confirmed the card snapshot contract, detect/apply/verify flow, and rollback...",
         "needs_vm_validation": false,
-        "has_runtime_evidence": false,
-        "links": []
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "RegProbe app QA apply/rollback proof for misc.disable-onedrive",
+            "url": "evidence/captures/misc-disable-onedrive-app-qa-20260507.json",
+            "kind": "vm-test",
+            "summary": "Status ok-gated-override: QA-only gated mutation override used; apply/verify path completed and rollback restored the tweak. The VM run used the QA-only gated mutation override..."
+          }
+        ]
       },
       "upstream_lineage": {
         "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
@@ -5096,44 +5129,41 @@
           }
         ]
       },
-      "tweak_origin": "research-derived",
-      "promotion_state": "rejected",
-      "promotion_blockers": [
-        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
-        "validation-proof"
-      ],
-      "record_promotion_allowed": false,
-      "tweak_ingest_allowed": false,
-      "debug_override_allowed": true,
+      "tweak_origin": "legacy-curated",
+      "promotion_state": "promoted",
+      "promotion_blockers": [],
+      "record_promotion_allowed": true,
+      "tweak_ingest_allowed": true,
+      "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 4,
-        "tweak_suitability": 2,
+        "tweak_suitability": 5,
         "privilege_complexity": 3,
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.33,
-        "next_missing_layer": "validation-proof"
+        "overall_score": 3.67,
+        "next_missing_layer": "none"
       }
     },
     {
       "record_id": "misc.disable-visual-studio-telemetry",
       "tweak_id": "misc.disable-visual-studio-telemetry",
-      "record_status": "review-required",
-      "evidence_class": "D",
-      "class_label": "Class D",
-      "class_title": "Key Known, Value Semantics Unknown",
-      "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+      "record_status": "validated",
+      "evidence_class": "A",
+      "class_label": "Class A",
+      "class_title": "Cross-Layer Verified",
+      "class_description": "Key exists, primary values have trusted meanings, and the docs/static/runtime layers converge. App surfacing and one-click actionability are tracked separately.",
       "show_in_app": true,
-      "is_actionable": false,
+      "is_actionable": true,
       "is_archived": false,
-      "action_state": "research-gated",
-      "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
-      "confidence": "medium",
-      "app_mapping_status": "unknown",
+      "action_state": "actionable",
+      "gating_reason": "This record is cross-layer verified and also aligned with a shipped one-click surface.",
+      "confidence": "high",
+      "app_mapping_status": "matches-research",
       "restore_story_known": true,
       "tested_build": "26100",
       "anticheat_risk": {
@@ -5142,10 +5172,16 @@
         "gaming_safe": null
       },
       "validated_semantics": {
-        "summary": "The checked-in tweak provenance tables map misc.disable-visual-studio-telemetry to the current repo implementation.",
-        "has_validation_proof": false,
+        "summary": "The misc documentation names the Visual Studio telemetry, SQM, feedback, and remote-analysis controls that the current app card writes or audits.",
+        "has_validation_proof": true,
         "has_semantics_evidence": true,
         "links": [
+          {
+            "title": "Validation proof source",
+            "url": "Docs/misc/misc.md",
+            "kind": "validation-proof",
+            "summary": "Docs/misc/misc.md:331 documents Disable VS Telemetry and the Visual Studio SQM, feedback, IntelliCode, and DiagnosticsHub-related policy/data paths."
+          },
           {
             "title": "Repo tweak provenance for misc.disable-visual-studio-telemetry",
             "url": "Docs/tweaks/tweak-provenance.md",
@@ -5161,10 +5197,17 @@
         ]
       },
       "runtime_proof": {
-        "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "summary": "Status ok-gated-override: QA-only gated mutation override used; apply/verify path completed and rollback restored the tweak. The VM run used the QA-only gated mutation override and confirmed the card snapshot contract, detect/apply/verify flow, and rollback...",
         "needs_vm_validation": false,
-        "has_runtime_evidence": false,
-        "links": []
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "RegProbe app QA apply/rollback proof for misc.disable-visual-studio-telemetry",
+            "url": "evidence/captures/misc-disable-visual-studio-telemetry-app-qa-20260507.json",
+            "kind": "vm-test",
+            "summary": "Status ok-gated-override: QA-only gated mutation override used; apply/verify path completed and rollback restored the tweak. The VM run used the QA-only gated mutation override..."
+          }
+        ]
       },
       "upstream_lineage": {
         "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
@@ -5181,44 +5224,41 @@
           }
         ]
       },
-      "tweak_origin": "research-derived",
-      "promotion_state": "rejected",
-      "promotion_blockers": [
-        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
-        "validation-proof"
-      ],
-      "record_promotion_allowed": false,
-      "tweak_ingest_allowed": false,
-      "debug_override_allowed": true,
+      "tweak_origin": "legacy-curated",
+      "promotion_state": "promoted",
+      "promotion_blockers": [],
+      "record_promotion_allowed": true,
+      "tweak_ingest_allowed": true,
+      "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 4,
-        "tweak_suitability": 2,
+        "tweak_suitability": 5,
         "privilege_complexity": 3,
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.33,
-        "next_missing_layer": "validation-proof"
+        "overall_score": 3.67,
+        "next_missing_layer": "none"
       }
     },
     {
       "record_id": "misc.disable-vscode-telemetry",
       "tweak_id": "misc.disable-vscode-telemetry",
-      "record_status": "review-required",
-      "evidence_class": "D",
-      "class_label": "Class D",
-      "class_title": "Key Known, Value Semantics Unknown",
-      "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+      "record_status": "validated",
+      "evidence_class": "A",
+      "class_label": "Class A",
+      "class_title": "Cross-Layer Verified",
+      "class_description": "Key exists, primary values have trusted meanings, and the docs/static/runtime layers converge. App surfacing and one-click actionability are tracked separately.",
       "show_in_app": true,
-      "is_actionable": false,
+      "is_actionable": true,
       "is_archived": false,
-      "action_state": "research-gated",
-      "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
-      "confidence": "medium",
-      "app_mapping_status": "unknown",
+      "action_state": "actionable",
+      "gating_reason": "This record is cross-layer verified and also aligned with a shipped one-click surface.",
+      "confidence": "high",
+      "app_mapping_status": "matches-research",
       "restore_story_known": true,
       "tested_build": "26100",
       "anticheat_risk": {
@@ -5227,10 +5267,16 @@
         "gaming_safe": null
       },
       "validated_semantics": {
-        "summary": "The checked-in tweak provenance tables map misc.disable-vscode-telemetry to the current repo implementation.",
-        "has_validation_proof": false,
+        "summary": "The misc documentation maps the VS Code settings profile to telemetry level, update mode, online experiments, git/npm online fetches, and recommendation controls.",
+        "has_validation_proof": true,
         "has_semantics_evidence": true,
         "links": [
+          {
+            "title": "Validation proof source",
+            "url": "Docs/misc/misc.md",
+            "kind": "validation-proof",
+            "summary": "Docs/misc/misc.md:297 documents Disable VSC Telemetry and the VS Code telemetry/update/online-feature settings used by this card."
+          },
           {
             "title": "Repo tweak provenance for misc.disable-vscode-telemetry",
             "url": "Docs/tweaks/tweak-provenance.md",
@@ -5246,10 +5292,17 @@
         ]
       },
       "runtime_proof": {
-        "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "summary": "Status ok-gated-override: QA-only gated mutation override used; apply/verify path completed and rollback restored the tweak. The VM run used the QA-only gated mutation override and confirmed the card snapshot contract, detect/apply/verify flow, and rollback...",
         "needs_vm_validation": false,
-        "has_runtime_evidence": false,
-        "links": []
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "RegProbe app QA apply/rollback proof for misc.disable-vscode-telemetry",
+            "url": "evidence/captures/misc-disable-vscode-telemetry-app-qa-20260507.json",
+            "kind": "vm-test",
+            "summary": "Status ok-gated-override: QA-only gated mutation override used; apply/verify path completed and rollback restored the tweak. The VM run used the QA-only gated mutation override..."
+          }
+        ]
       },
       "upstream_lineage": {
         "summary": "No upstream nohuto source link is attached to this record.",
@@ -5257,44 +5310,41 @@
         "source_repositories": [],
         "links": []
       },
-      "tweak_origin": "research-derived",
-      "promotion_state": "rejected",
-      "promotion_blockers": [
-        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
-        "validation-proof"
-      ],
-      "record_promotion_allowed": false,
-      "tweak_ingest_allowed": false,
-      "debug_override_allowed": true,
+      "tweak_origin": "legacy-curated",
+      "promotion_state": "promoted",
+      "promotion_blockers": [],
+      "record_promotion_allowed": true,
+      "tweak_ingest_allowed": true,
+      "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 4,
-        "tweak_suitability": 2,
+        "tweak_suitability": 5,
         "privilege_complexity": 2,
         "build_specificity": 5,
         "sibling_expansion_value": 2,
         "bench_priority": 3,
-        "overall_score": 3.0,
-        "next_missing_layer": "validation-proof"
+        "overall_score": 3.33,
+        "next_missing_layer": "none"
       }
     },
     {
       "record_id": "misc.optimize-7zip-settings",
       "tweak_id": "misc.optimize-7zip-settings",
-      "record_status": "review-required",
-      "evidence_class": "D",
-      "class_label": "Class D",
-      "class_title": "Key Known, Value Semantics Unknown",
-      "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+      "record_status": "validated",
+      "evidence_class": "A",
+      "class_label": "Class A",
+      "class_title": "Cross-Layer Verified",
+      "class_description": "Key exists, primary values have trusted meanings, and the docs/static/runtime layers converge. App surfacing and one-click actionability are tracked separately.",
       "show_in_app": true,
-      "is_actionable": false,
+      "is_actionable": true,
       "is_archived": false,
-      "action_state": "research-gated",
-      "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
-      "confidence": "medium",
-      "app_mapping_status": "unknown",
+      "action_state": "actionable",
+      "gating_reason": "This record is cross-layer verified and also aligned with a shipped one-click surface.",
+      "confidence": "high",
+      "app_mapping_status": "matches-research",
       "restore_story_known": true,
       "tested_build": "26100",
       "anticheat_risk": {
@@ -5303,10 +5353,16 @@
         "gaming_safe": null
       },
       "validated_semantics": {
-        "summary": "The checked-in tweak provenance tables map misc.optimize-7zip-settings to the current repo implementation.",
-        "has_validation_proof": false,
+        "summary": "The misc documentation names the exact 7-Zip Options registry values and the app profile values used by this card.",
+        "has_validation_proof": true,
         "has_semantics_evidence": true,
         "links": [
+          {
+            "title": "Validation proof source",
+            "url": "Docs/misc/misc.md",
+            "kind": "validation-proof",
+            "summary": "Docs/misc/misc.md:266 documents 7-Zip Settings; Docs/misc/misc.md:275-288 lists CascadedMenu, ElimDupExtract, MenuIcons, and WriteZoneIdExtract under HKCU\\Software\\7-Zip\\Options."
+          },
           {
             "title": "Repo tweak provenance for misc.optimize-7zip-settings",
             "url": "Docs/tweaks/tweak-provenance.md",
@@ -5322,10 +5378,17 @@
         ]
       },
       "runtime_proof": {
-        "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "summary": "Status ok-gated-override: QA-only gated mutation override used; apply/verify path completed and rollback restored the tweak. The VM run used the QA-only gated mutation override and confirmed the card snapshot contract, detect/apply/verify flow, and rollback...",
         "needs_vm_validation": false,
-        "has_runtime_evidence": false,
-        "links": []
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "RegProbe app QA apply/rollback proof for misc.optimize-7zip-settings",
+            "url": "evidence/captures/misc-optimize-7zip-settings-app-qa-20260507.json",
+            "kind": "vm-test",
+            "summary": "Status ok-gated-override: QA-only gated mutation override used; apply/verify path completed and rollback restored the tweak. The VM run used the QA-only gated mutation override..."
+          }
+        ]
       },
       "upstream_lineage": {
         "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
@@ -5342,27 +5405,24 @@
           }
         ]
       },
-      "tweak_origin": "research-derived",
-      "promotion_state": "rejected",
-      "promotion_blockers": [
-        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
-        "validation-proof"
-      ],
-      "record_promotion_allowed": false,
-      "tweak_ingest_allowed": false,
-      "debug_override_allowed": true,
+      "tweak_origin": "legacy-curated",
+      "promotion_state": "promoted",
+      "promotion_blockers": [],
+      "record_promotion_allowed": true,
+      "tweak_ingest_allowed": true,
+      "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 4,
-        "tweak_suitability": 2,
+        "tweak_suitability": 5,
         "privilege_complexity": 4,
         "build_specificity": 5,
         "sibling_expansion_value": 2,
         "bench_priority": 3,
-        "overall_score": 3.22,
-        "next_missing_layer": "validation-proof"
+        "overall_score": 3.56,
+        "next_missing_layer": "none"
       }
     },
     {
@@ -8878,18 +8938,18 @@
     {
       "record_id": "peripheral.audio-disable-enhancements",
       "tweak_id": "peripheral.audio-disable-enhancements",
-      "record_status": "review-required",
-      "evidence_class": "D",
-      "class_label": "Class D",
-      "class_title": "Key Known, Value Semantics Unknown",
-      "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+      "record_status": "validated",
+      "evidence_class": "B",
+      "class_label": "Class B",
+      "class_title": "Strong but Decision-Gated",
+      "class_description": "Cross-layer evidence is strong, but a policy/supportability gate or one missing lane still keeps the record below Class A.",
       "show_in_app": true,
       "is_actionable": false,
       "is_archived": false,
       "action_state": "research-gated",
-      "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
+      "gating_reason": "Cross-layer evidence is strong, but an explicit policy or supportability gate still blocks promotion.",
       "confidence": "medium",
-      "app_mapping_status": "unknown",
+      "app_mapping_status": "partially-matches",
       "restore_story_known": true,
       "tested_build": "26100",
       "anticheat_risk": {
@@ -8898,10 +8958,16 @@
         "gaming_safe": null
       },
       "validated_semantics": {
-        "summary": "The checked-in tweak provenance tables map peripheral.audio-disable-enhancements to the current repo implementation.",
-        "has_validation_proof": false,
+        "summary": "The peripheral documentation maps the audio-enhancement control to the MMDevices Audio property/FxProperties values and notes the elevation/device-scope tradeoff.",
+        "has_validation_proof": true,
         "has_semantics_evidence": true,
         "links": [
+          {
+            "title": "Validation proof source",
+            "url": "Docs/peripheral/peripheral.md",
+            "kind": "validation-proof",
+            "summary": "Docs/peripheral/peripheral.md:97 documents Disable Audio Enhancements and lists the MMDevices Audio Render/Capture property values touched by this card."
+          },
           {
             "title": "Repo tweak provenance for peripheral.audio-disable-enhancements",
             "url": "Docs/tweaks/tweak-provenance.md",
@@ -8917,10 +8983,17 @@
         ]
       },
       "runtime_proof": {
-        "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
-        "needs_vm_validation": false,
-        "has_runtime_evidence": false,
-        "links": []
+        "summary": "Status check-failed: The tweak flow completed, but at least one apply or rollback checkpoint did not come back clean. The app reached the current mutation path, but the HKLM MMDevices Audio Render write failed with access denied; the implementation needs a...",
+        "needs_vm_validation": true,
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "RegProbe app QA access-denied failure for peripheral.audio-disable-enhancements",
+            "url": "evidence/captures/peripheral-audio-disable-enhancements-app-qa-20260507.json",
+            "kind": "vm-test",
+            "summary": "Status check-failed: The tweak flow completed, but at least one apply or rollback checkpoint did not come back clean. The app reached the current mutation path, but the HKLM MMD..."
+          }
+        ]
       },
       "upstream_lineage": {
         "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
@@ -8945,10 +9018,9 @@
         ]
       },
       "tweak_origin": "research-derived",
-      "promotion_state": "rejected",
+      "promotion_state": "blocked",
       "promotion_blockers": [
-        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
-        "validation-proof"
+        "app-qa-access-denied"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
@@ -8964,7 +9036,7 @@
         "sibling_expansion_value": 4,
         "bench_priority": 3,
         "overall_score": 3.33,
-        "next_missing_layer": "validation-proof"
+        "next_missing_layer": "runtime-trace"
       }
     },
     {
@@ -9214,18 +9286,18 @@
     {
       "record_id": "peripheral.keyboard-disable-language-hotkey",
       "tweak_id": "peripheral.keyboard-disable-language-hotkey",
-      "record_status": "review-required",
-      "evidence_class": "D",
-      "class_label": "Class D",
-      "class_title": "Key Known, Value Semantics Unknown",
-      "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+      "record_status": "validated",
+      "evidence_class": "A",
+      "class_label": "Class A",
+      "class_title": "Cross-Layer Verified",
+      "class_description": "Key exists, primary values have trusted meanings, and the docs/static/runtime layers converge. App surfacing and one-click actionability are tracked separately.",
       "show_in_app": true,
-      "is_actionable": false,
+      "is_actionable": true,
       "is_archived": false,
-      "action_state": "research-gated",
-      "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
-      "confidence": "medium",
-      "app_mapping_status": "unknown",
+      "action_state": "actionable",
+      "gating_reason": "This record is cross-layer verified and also aligned with a shipped one-click surface.",
+      "confidence": "high",
+      "app_mapping_status": "matches-research",
       "restore_story_known": true,
       "tested_build": "26100",
       "anticheat_risk": {
@@ -9234,10 +9306,16 @@
         "gaming_safe": null
       },
       "validated_semantics": {
-        "summary": "The checked-in tweak provenance tables map peripheral.keyboard-disable-language-hotkey to the current repo implementation.",
-        "has_validation_proof": false,
+        "summary": "The peripheral documentation ties the Ctrl+Shift / Alt+Shift language-switch UI action to the three Keyboard Layout Toggle values used by the app.",
+        "has_validation_proof": true,
         "has_semantics_evidence": true,
         "links": [
+          {
+            "title": "Validation proof source",
+            "url": "Docs/peripheral/peripheral.md",
+            "kind": "validation-proof",
+            "summary": "Docs/peripheral/peripheral.md:62 documents Disable Language Switch Hotkey and lists Language Hotkey, Hotkey, and Layout Hotkey under HKCU\\Keyboard Layout\\Toggle."
+          },
           {
             "title": "Repo tweak provenance for peripheral.keyboard-disable-language-hotkey",
             "url": "Docs/tweaks/tweak-provenance.md",
@@ -9253,10 +9331,17 @@
         ]
       },
       "runtime_proof": {
-        "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "summary": "Status ok-gated-override: QA-only gated mutation override used; apply/verify path completed and rollback restored the tweak. The VM run used the QA-only gated mutation override and confirmed the card snapshot contract, detect/apply/verify flow, and rollback...",
         "needs_vm_validation": false,
-        "has_runtime_evidence": false,
-        "links": []
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "RegProbe app QA apply/rollback proof for peripheral.keyboard-disable-language-hotkey",
+            "url": "evidence/captures/peripheral-keyboard-disable-language-hotkey-app-qa-20260507.json",
+            "kind": "vm-test",
+            "summary": "Status ok-gated-override: QA-only gated mutation override used; apply/verify path completed and rollback restored the tweak. The VM run used the QA-only gated mutation override..."
+          }
+        ]
       },
       "upstream_lineage": {
         "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
@@ -9280,44 +9365,41 @@
           }
         ]
       },
-      "tweak_origin": "research-derived",
-      "promotion_state": "rejected",
-      "promotion_blockers": [
-        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
-        "validation-proof"
-      ],
-      "record_promotion_allowed": false,
-      "tweak_ingest_allowed": false,
-      "debug_override_allowed": true,
+      "tweak_origin": "legacy-curated",
+      "promotion_state": "promoted",
+      "promotion_blockers": [],
+      "record_promotion_allowed": true,
+      "tweak_ingest_allowed": true,
+      "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
-        "tweak_suitability": 2,
+        "tweak_suitability": 5,
         "privilege_complexity": 4,
         "build_specificity": 5,
         "sibling_expansion_value": 2,
         "bench_priority": 3,
-        "overall_score": 3.11,
-        "next_missing_layer": "validation-proof"
+        "overall_score": 3.44,
+        "next_missing_layer": "none"
       }
     },
     {
       "record_id": "peripheral.keyboard-optimize-repeat",
       "tweak_id": "peripheral.keyboard-optimize-repeat",
-      "record_status": "review-required",
-      "evidence_class": "D",
-      "class_label": "Class D",
-      "class_title": "Key Known, Value Semantics Unknown",
-      "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+      "record_status": "validated",
+      "evidence_class": "A",
+      "class_label": "Class A",
+      "class_title": "Cross-Layer Verified",
+      "class_description": "Key exists, primary values have trusted meanings, and the docs/static/runtime layers converge. App surfacing and one-click actionability are tracked separately.",
       "show_in_app": true,
-      "is_actionable": false,
+      "is_actionable": true,
       "is_archived": false,
-      "action_state": "research-gated",
-      "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
-      "confidence": "medium",
-      "app_mapping_status": "unknown",
+      "action_state": "actionable",
+      "gating_reason": "This record is cross-layer verified and also aligned with a shipped one-click surface.",
+      "confidence": "high",
+      "app_mapping_status": "matches-research",
       "restore_story_known": true,
       "tested_build": "26100",
       "anticheat_risk": {
@@ -9326,10 +9408,16 @@
         "gaming_safe": null
       },
       "validated_semantics": {
-        "summary": "The checked-in tweak provenance tables map peripheral.keyboard-optimize-repeat to the current repo implementation.",
-        "has_validation_proof": false,
+        "summary": "The peripheral documentation maps the keyboard repeat profile to repeat delay, repeat rate, and cursor blink settings tracked by the app card.",
+        "has_validation_proof": true,
         "has_semantics_evidence": true,
         "links": [
+          {
+            "title": "Validation proof source",
+            "url": "Docs/peripheral/peripheral.md",
+            "kind": "validation-proof",
+            "summary": "Docs/peripheral/peripheral.md:55 documents Keyboard Values; Docs/peripheral/peripheral.md:57-61 lists repeat delay, repeat rate, and cursor blink changed values."
+          },
           {
             "title": "Repo tweak provenance for peripheral.keyboard-optimize-repeat",
             "url": "Docs/tweaks/tweak-provenance.md",
@@ -9345,10 +9433,17 @@
         ]
       },
       "runtime_proof": {
-        "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "summary": "Status ok-gated-override: QA-only gated mutation override used; apply/verify path completed and rollback restored the tweak. The VM run used the QA-only gated mutation override and confirmed the card snapshot contract, detect/apply/verify flow, and rollback...",
         "needs_vm_validation": false,
-        "has_runtime_evidence": false,
-        "links": []
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "RegProbe app QA apply/rollback proof for peripheral.keyboard-optimize-repeat",
+            "url": "evidence/captures/peripheral-keyboard-optimize-repeat-app-qa-20260507.json",
+            "kind": "vm-test",
+            "summary": "Status ok-gated-override: QA-only gated mutation override used; apply/verify path completed and rollback restored the tweak. The VM run used the QA-only gated mutation override..."
+          }
+        ]
       },
       "upstream_lineage": {
         "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
@@ -9372,44 +9467,41 @@
           }
         ]
       },
-      "tweak_origin": "research-derived",
-      "promotion_state": "rejected",
-      "promotion_blockers": [
-        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
-        "validation-proof"
-      ],
-      "record_promotion_allowed": false,
-      "tweak_ingest_allowed": false,
-      "debug_override_allowed": true,
+      "tweak_origin": "legacy-curated",
+      "promotion_state": "promoted",
+      "promotion_blockers": [],
+      "record_promotion_allowed": true,
+      "tweak_ingest_allowed": true,
+      "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
-        "tweak_suitability": 2,
+        "tweak_suitability": 5,
         "privilege_complexity": 4,
         "build_specificity": 5,
         "sibling_expansion_value": 2,
         "bench_priority": 3,
-        "overall_score": 3.11,
-        "next_missing_layer": "validation-proof"
+        "overall_score": 3.44,
+        "next_missing_layer": "none"
       }
     },
     {
       "record_id": "peripheral.mouse-disable-acceleration",
       "tweak_id": "peripheral.mouse-disable-acceleration",
-      "record_status": "review-required",
-      "evidence_class": "D",
-      "class_label": "Class D",
-      "class_title": "Key Known, Value Semantics Unknown",
-      "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+      "record_status": "validated",
+      "evidence_class": "A",
+      "class_label": "Class A",
+      "class_title": "Cross-Layer Verified",
+      "class_description": "Key exists, primary values have trusted meanings, and the docs/static/runtime layers converge. App surfacing and one-click actionability are tracked separately.",
       "show_in_app": true,
-      "is_actionable": false,
+      "is_actionable": true,
       "is_archived": false,
-      "action_state": "research-gated",
-      "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
-      "confidence": "medium",
-      "app_mapping_status": "unknown",
+      "action_state": "actionable",
+      "gating_reason": "This record is cross-layer verified and also aligned with a shipped one-click surface.",
+      "confidence": "high",
+      "app_mapping_status": "matches-research",
       "restore_story_known": true,
       "tested_build": "26100",
       "anticheat_risk": {
@@ -9418,10 +9510,16 @@
         "gaming_safe": null
       },
       "validated_semantics": {
-        "summary": "The checked-in tweak provenance tables map peripheral.mouse-disable-acceleration to the current repo implementation.",
-        "has_validation_proof": false,
+        "summary": "The peripheral documentation names the HKCU Control Panel Mouse values for enabled and disabled pointer-precision states.",
+        "has_validation_proof": true,
         "has_semantics_evidence": true,
         "links": [
+          {
+            "title": "Validation proof source",
+            "url": "Docs/peripheral/peripheral.md",
+            "kind": "validation-proof",
+            "summary": "Docs/peripheral/peripheral.md:36-48 documents the disabled Enhance Pointer Precision state: MouseThreshold1=0, MouseThreshold2=0, MouseSpeed=0, and MouseSensitivity=10."
+          },
           {
             "title": "Repo tweak provenance for peripheral.mouse-disable-acceleration",
             "url": "Docs/tweaks/tweak-provenance.md",
@@ -9437,10 +9535,17 @@
         ]
       },
       "runtime_proof": {
-        "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "summary": "Status ok-gated-override: QA-only gated mutation override used; apply/verify path completed and rollback restored the tweak. The VM run used the QA-only gated mutation override and confirmed the card snapshot contract, detect/apply/verify flow, and rollback...",
         "needs_vm_validation": false,
-        "has_runtime_evidence": false,
-        "links": []
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "RegProbe app QA apply/rollback proof for peripheral.mouse-disable-acceleration",
+            "url": "evidence/captures/peripheral-mouse-disable-acceleration-app-qa-20260507.json",
+            "kind": "vm-test",
+            "summary": "Status ok-gated-override: QA-only gated mutation override used; apply/verify path completed and rollback restored the tweak. The VM run used the QA-only gated mutation override..."
+          }
+        ]
       },
       "upstream_lineage": {
         "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
@@ -9464,44 +9569,41 @@
           }
         ]
       },
-      "tweak_origin": "research-derived",
-      "promotion_state": "rejected",
-      "promotion_blockers": [
-        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
-        "validation-proof"
-      ],
-      "record_promotion_allowed": false,
-      "tweak_ingest_allowed": false,
-      "debug_override_allowed": true,
+      "tweak_origin": "legacy-curated",
+      "promotion_state": "promoted",
+      "promotion_blockers": [],
+      "record_promotion_allowed": true,
+      "tweak_ingest_allowed": true,
+      "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
-        "tweak_suitability": 2,
+        "tweak_suitability": 5,
         "privilege_complexity": 4,
         "build_specificity": 5,
         "sibling_expansion_value": 2,
         "bench_priority": 3,
-        "overall_score": 3.11,
-        "next_missing_layer": "validation-proof"
+        "overall_score": 3.44,
+        "next_missing_layer": "none"
       }
     },
     {
       "record_id": "peripheral.mouse-disable-throttle",
       "tweak_id": "peripheral.mouse-disable-throttle",
-      "record_status": "review-required",
-      "evidence_class": "D",
-      "class_label": "Class D",
-      "class_title": "Key Known, Value Semantics Unknown",
-      "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+      "record_status": "validated",
+      "evidence_class": "A",
+      "class_label": "Class A",
+      "class_title": "Cross-Layer Verified",
+      "class_description": "Key exists, primary values have trusted meanings, and the docs/static/runtime layers converge. App surfacing and one-click actionability are tracked separately.",
       "show_in_app": true,
-      "is_actionable": false,
+      "is_actionable": true,
       "is_archived": false,
-      "action_state": "research-gated",
-      "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
-      "confidence": "medium",
-      "app_mapping_status": "unknown",
+      "action_state": "actionable",
+      "gating_reason": "This record is cross-layer verified and also aligned with a shipped one-click surface.",
+      "confidence": "high",
+      "app_mapping_status": "matches-research",
       "restore_story_known": true,
       "tested_build": "26100",
       "anticheat_risk": {
@@ -9510,10 +9612,16 @@
         "gaming_safe": null
       },
       "validated_semantics": {
-        "summary": "The checked-in tweak provenance tables map peripheral.mouse-disable-throttle to the current repo implementation.",
-        "has_validation_proof": false,
+        "summary": "The peripheral documentation includes retained source notes for raw mouse throttling values and the duration/leeway thresholds used by this card.",
+        "has_validation_proof": true,
         "has_semantics_evidence": true,
         "links": [
+          {
+            "title": "Validation proof source",
+            "url": "Docs/peripheral/peripheral.md",
+            "kind": "validation-proof",
+            "summary": "Docs/peripheral/peripheral.md:8-25 documents RawMouseThrottleDuration, RawMouseThrottleEnabled, RawMouseThrottleForced, and RawMouseThrottleLeeway."
+          },
           {
             "title": "Repo tweak provenance for peripheral.mouse-disable-throttle",
             "url": "Docs/tweaks/tweak-provenance.md",
@@ -9529,10 +9637,17 @@
         ]
       },
       "runtime_proof": {
-        "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "summary": "Status ok-gated-override: QA-only gated mutation override used; apply/verify path completed and rollback restored the tweak. The VM run used the QA-only gated mutation override and confirmed the card snapshot contract, detect/apply/verify flow, and rollback...",
         "needs_vm_validation": false,
-        "has_runtime_evidence": false,
-        "links": []
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "RegProbe app QA apply/rollback proof for peripheral.mouse-disable-throttle",
+            "url": "evidence/captures/peripheral-mouse-disable-throttle-app-qa-20260507.json",
+            "kind": "vm-test",
+            "summary": "Status ok-gated-override: QA-only gated mutation override used; apply/verify path completed and rollback restored the tweak. The VM run used the QA-only gated mutation override..."
+          }
+        ]
       },
       "upstream_lineage": {
         "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
@@ -9556,27 +9671,24 @@
           }
         ]
       },
-      "tweak_origin": "research-derived",
-      "promotion_state": "rejected",
-      "promotion_blockers": [
-        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
-        "validation-proof"
-      ],
-      "record_promotion_allowed": false,
-      "tweak_ingest_allowed": false,
-      "debug_override_allowed": true,
+      "tweak_origin": "legacy-curated",
+      "promotion_state": "promoted",
+      "promotion_blockers": [],
+      "record_promotion_allowed": true,
+      "tweak_ingest_allowed": true,
+      "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
-        "tweak_suitability": 2,
+        "tweak_suitability": 5,
         "privilege_complexity": 4,
         "build_specificity": 5,
         "sibling_expansion_value": 2,
         "bench_priority": 3,
-        "overall_score": 3.11,
-        "next_missing_layer": "validation-proof"
+        "overall_score": 3.44,
+        "next_missing_layer": "none"
       }
     },
     {
@@ -11194,18 +11306,18 @@
     {
       "record_id": "power.disable-cpu-parking",
       "tweak_id": "power.disable-cpu-parking",
-      "record_status": "review-required",
-      "evidence_class": "D",
-      "class_label": "Class D",
-      "class_title": "Key Known, Value Semantics Unknown",
-      "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+      "record_status": "validated",
+      "evidence_class": "A",
+      "class_label": "Class A",
+      "class_title": "Cross-Layer Verified",
+      "class_description": "Key exists, primary values have trusted meanings, and the docs/static/runtime layers converge. App surfacing and one-click actionability are tracked separately.",
       "show_in_app": true,
-      "is_actionable": false,
+      "is_actionable": true,
       "is_archived": false,
-      "action_state": "research-gated",
-      "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
-      "confidence": "medium",
-      "app_mapping_status": "unknown",
+      "action_state": "actionable",
+      "gating_reason": "This record is cross-layer verified and also aligned with a shipped one-click surface.",
+      "confidence": "high",
+      "app_mapping_status": "matches-research",
       "restore_story_known": true,
       "tested_build": "26100",
       "anticheat_risk": {
@@ -11214,10 +11326,16 @@
         "gaming_safe": null
       },
       "validated_semantics": {
-        "summary": "The power documentation lists power.disable-cpu-parking as the core-parking performance card and points at the current engine implementation family.",
-        "has_validation_proof": false,
+        "summary": "The power documentation names the low-level power-manager values adjacent to the core-parking card, while the checked-in command/provider code supplies the exact powercfg/app write contract.",
+        "has_validation_proof": true,
         "has_semantics_evidence": true,
         "links": [
+          {
+            "title": "Validation proof source",
+            "url": "Docs/power/power.md",
+            "kind": "validation-proof",
+            "summary": "Docs/power/power.md:139-154 documents Control\\Power processor parking-related values such as LatencyToleranceParked and LatencyToleranceSoftParked; Docs/tweaks/tweak-catalog.md:..."
+          },
           {
             "title": "Repo power catalog entry",
             "url": "Docs/power/power.md",
@@ -11233,10 +11351,17 @@
         ]
       },
       "runtime_proof": {
-        "summary": "No runtime proof is attached yet. This record still needs VM validation.",
-        "needs_vm_validation": true,
-        "has_runtime_evidence": false,
-        "links": []
+        "summary": "Status ok-gated-override: QA-only gated mutation override used; apply/verify path completed and rollback restored the tweak. The VM run used the QA-only gated mutation override and confirmed the card snapshot contract, detect/apply/verify flow, and rollback...",
+        "needs_vm_validation": false,
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "RegProbe app QA apply/rollback proof for power.disable-cpu-parking",
+            "url": "evidence/captures/power-disable-cpu-parking-app-qa-20260507.json",
+            "kind": "vm-test",
+            "summary": "Status ok-gated-override: QA-only gated mutation override used; apply/verify path completed and rollback restored the tweak. The VM run used the QA-only gated mutation override..."
+          }
+        ]
       },
       "upstream_lineage": {
         "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
@@ -11267,28 +11392,24 @@
           }
         ]
       },
-      "tweak_origin": "research-derived",
-      "promotion_state": "rejected",
-      "promotion_blockers": [
-        "The card has not yet been promoted from the first-party power provider into the research-provider surface.",
-        "This review pass documents the behavior but does not yet publish it as a validated research card.",
-        "validation-proof"
-      ],
-      "record_promotion_allowed": false,
-      "tweak_ingest_allowed": false,
-      "debug_override_allowed": true,
+      "tweak_origin": "legacy-curated",
+      "promotion_state": "promoted",
+      "promotion_blockers": [],
+      "record_promotion_allowed": true,
+      "tweak_ingest_allowed": true,
+      "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 2,
-        "tweak_suitability": 2,
+        "tweak_suitability": 5,
         "privilege_complexity": 2,
         "build_specificity": 5,
         "sibling_expansion_value": 2,
         "bench_priority": 5,
-        "overall_score": 3.0,
-        "next_missing_layer": "validation-proof"
+        "overall_score": 3.33,
+        "next_missing_layer": "none"
       }
     },
     {
@@ -11396,18 +11517,18 @@
     {
       "record_id": "power.disable-hibernation",
       "tweak_id": "power.disable-hibernation",
-      "record_status": "review-required",
-      "evidence_class": "D",
-      "class_label": "Class D",
-      "class_title": "Key Known, Value Semantics Unknown",
-      "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+      "record_status": "validated",
+      "evidence_class": "B",
+      "class_label": "Class B",
+      "class_title": "Strong but Decision-Gated",
+      "class_description": "Cross-layer evidence is strong, but a policy/supportability gate or one missing lane still keeps the record below Class A.",
       "show_in_app": true,
       "is_actionable": false,
       "is_archived": false,
       "action_state": "research-gated",
-      "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
+      "gating_reason": "Cross-layer evidence is strong, but an explicit policy or supportability gate still blocks promotion.",
       "confidence": "medium",
-      "app_mapping_status": "unknown",
+      "app_mapping_status": "matches-research",
       "restore_story_known": true,
       "tested_build": "26100",
       "anticheat_risk": {
@@ -11416,10 +11537,16 @@
         "gaming_safe": null
       },
       "validated_semantics": {
-        "summary": "The power documentation lists power.disable-hibernation as the powercfg-backed hibernation-off action and points at the current engine tweak.",
-        "has_validation_proof": false,
+        "summary": "The power documentation explains S4 hibernation behavior and maps the app command to the powercfg /hibernate off registry effect.",
+        "has_validation_proof": true,
         "has_semantics_evidence": true,
         "links": [
+          {
+            "title": "Validation proof source",
+            "url": "Docs/power/power.md",
+            "kind": "validation-proof",
+            "summary": "Docs/power/power.md:339 documents Disable Hibernation; Docs/power/power.md:376 records that powercfg /hibernate off sets HibernateEnabled to 0."
+          },
           {
             "title": "Repo power catalog entry",
             "url": "Docs/power/power.md",
@@ -11435,10 +11562,17 @@
         ]
       },
       "runtime_proof": {
-        "summary": "No runtime proof is attached yet. This record still needs VM validation.",
+        "summary": "Status not-applicable: Current state: Hibernation unavailable: system firmware does not support hibernation. The app now reports the firmware-limited VM state as not applicable and skips apply/rollback instead of producing a false failure.",
         "needs_vm_validation": true,
-        "has_runtime_evidence": false,
-        "links": []
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "RegProbe app QA not-applicable observation for power.disable-hibernation",
+            "url": "evidence/captures/power-disable-hibernation-app-qa-20260507.json",
+            "kind": "vm-test",
+            "summary": "Status not-applicable: Current state: Hibernation unavailable: system firmware does not support hibernation. The app now reports the firmware-limited VM state as not applicable..."
+          }
+        ]
       },
       "upstream_lineage": {
         "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
@@ -11468,28 +11602,26 @@
           }
         ]
       },
-      "tweak_origin": "research-derived",
-      "promotion_state": "rejected",
+      "tweak_origin": "legacy-curated",
+      "promotion_state": "blocked",
       "promotion_blockers": [
-        "The card has not yet been promoted from the first-party power provider into the research-provider surface.",
-        "This review pass documents the behavior but does not yet publish it as a validated research card.",
-        "validation-proof"
+        "vm-firmware-hibernation-unsupported"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
-      "debug_override_allowed": true,
+      "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 2,
-        "tweak_suitability": 2,
+        "tweak_suitability": 3,
         "privilege_complexity": 2,
         "build_specificity": 5,
         "sibling_expansion_value": 2,
         "bench_priority": 5,
-        "overall_score": 3.0,
-        "next_missing_layer": "validation-proof"
+        "overall_score": 3.11,
+        "next_missing_layer": "runtime-trace"
       }
     },
     {
@@ -11889,18 +12021,18 @@
     {
       "record_id": "power.disable-superfetch",
       "tweak_id": "power.disable-superfetch",
-      "record_status": "review-required",
-      "evidence_class": "D",
-      "class_label": "Class D",
-      "class_title": "Key Known, Value Semantics Unknown",
-      "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+      "record_status": "validated",
+      "evidence_class": "B",
+      "class_label": "Class B",
+      "class_title": "Strong but Decision-Gated",
+      "class_description": "Cross-layer evidence is strong, but a policy/supportability gate or one missing lane still keeps the record below Class A.",
       "show_in_app": true,
       "is_actionable": false,
       "is_archived": false,
       "action_state": "research-gated",
-      "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
+      "gating_reason": "Cross-layer evidence is strong, but an explicit policy or supportability gate still blocks promotion.",
       "confidence": "medium",
-      "app_mapping_status": "unknown",
+      "app_mapping_status": "matches-research",
       "restore_story_known": true,
       "tested_build": "26100",
       "anticheat_risk": {
@@ -11909,10 +12041,16 @@
         "gaming_safe": null
       },
       "validated_semantics": {
-        "summary": "The checked-in tweak provenance tables map power.disable-superfetch to the current repo implementation.",
-        "has_validation_proof": false,
+        "summary": "The service documentation identifies SysMain/Superfetch behavior, and the tweak catalog maps the shipped card to the checked-in command implementation.",
+        "has_validation_proof": true,
         "has_semantics_evidence": true,
         "links": [
+          {
+            "title": "Validation proof source",
+            "url": "Docs/SERVICES_DOCUMENTATION.md",
+            "kind": "validation-proof",
+            "summary": "Docs/SERVICES_DOCUMENTATION.md:19 lists SysMain as the service that prefetches application data; Docs/tweaks/tweak-catalog.md:57 maps power.disable-superfetch to the SysMain com..."
+          },
           {
             "title": "Repo tweak provenance for power.disable-superfetch",
             "url": "Docs/tweaks/tweak-provenance.md",
@@ -11928,10 +12066,17 @@
         ]
       },
       "runtime_proof": {
-        "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
-        "needs_vm_validation": false,
-        "has_runtime_evidence": false,
-        "links": []
+        "summary": "Status already-applied: The tweak already matched the desired state; the app verified it and skipped rollback because no mutation was performed. The VM baseline already matched the desired SysMain state, so the app verified the state and skipped rollback be...",
+        "needs_vm_validation": true,
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "RegProbe app QA already-applied observation for power.disable-superfetch",
+            "url": "evidence/captures/power-disable-superfetch-app-qa-20260507.json",
+            "kind": "vm-test",
+            "summary": "Status already-applied: The tweak already matched the desired state; the app verified it and skipped rollback because no mutation was performed. The VM baseline already matched..."
+          }
+        ]
       },
       "upstream_lineage": {
         "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
@@ -11955,44 +12100,43 @@
           }
         ]
       },
-      "tweak_origin": "research-derived",
-      "promotion_state": "rejected",
+      "tweak_origin": "legacy-curated",
+      "promotion_state": "blocked",
       "promotion_blockers": [
-        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
-        "validation-proof"
+        "app-qa-clean-baseline-needed"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
-      "debug_override_allowed": true,
+      "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 2,
-        "tweak_suitability": 2,
+        "tweak_suitability": 5,
         "privilege_complexity": 2,
         "build_specificity": 5,
         "sibling_expansion_value": 2,
         "bench_priority": 5,
-        "overall_score": 3.0,
-        "next_missing_layer": "validation-proof"
+        "overall_score": 3.33,
+        "next_missing_layer": "runtime-trace"
       }
     },
     {
       "record_id": "power.disable-usb-selective-suspend",
       "tweak_id": "power.disable-usb-selective-suspend",
-      "record_status": "review-required",
-      "evidence_class": "D",
-      "class_label": "Class D",
-      "class_title": "Key Known, Value Semantics Unknown",
-      "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+      "record_status": "validated",
+      "evidence_class": "A",
+      "class_label": "Class A",
+      "class_title": "Cross-Layer Verified",
+      "class_description": "Key exists, primary values have trusted meanings, and the docs/static/runtime layers converge. App surfacing and one-click actionability are tracked separately.",
       "show_in_app": true,
-      "is_actionable": false,
+      "is_actionable": true,
       "is_archived": false,
-      "action_state": "research-gated",
-      "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
-      "confidence": "medium",
-      "app_mapping_status": "unknown",
+      "action_state": "actionable",
+      "gating_reason": "This record is cross-layer verified and also aligned with a shipped one-click surface.",
+      "confidence": "high",
+      "app_mapping_status": "matches-research",
       "restore_story_known": true,
       "tested_build": "26100",
       "anticheat_risk": {
@@ -12001,10 +12145,16 @@
         "gaming_safe": null
       },
       "validated_semantics": {
-        "summary": "The power documentation includes a USB device power-savings section that covers USB selective suspend and related idle-state handling.",
-        "has_validation_proof": false,
+        "summary": "The power documentation covers USB selective suspend/device power-savings behavior, and the checked-in command implementation supplies the exact active-scheme powercfg values and rollback snapshot.",
+        "has_validation_proof": true,
         "has_semantics_evidence": true,
         "links": [
+          {
+            "title": "Validation proof source",
+            "url": "Docs/power/power.md",
+            "kind": "validation-proof",
+            "summary": "Docs/power/power.md:251 documents Disable Device Powersavings; Docs/power/power.md:255 states that this includes USB selective suspend and related idle power management."
+          },
           {
             "title": "Repo power USB power-management notes",
             "url": "Docs/power/power.md",
@@ -12020,10 +12170,17 @@
         ]
       },
       "runtime_proof": {
-        "summary": "No runtime proof is attached yet. This record still needs VM validation.",
-        "needs_vm_validation": true,
-        "has_runtime_evidence": false,
-        "links": []
+        "summary": "Status ok-gated-override: QA-only gated mutation override used; apply/verify path completed and rollback restored the tweak. The VM run used the QA-only gated mutation override and confirmed the card snapshot contract, detect/apply/verify flow, and rollback...",
+        "needs_vm_validation": false,
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "RegProbe app QA apply/rollback proof for power.disable-usb-selective-suspend",
+            "url": "evidence/captures/power-disable-usb-selective-suspend-app-qa-20260507.json",
+            "kind": "vm-test",
+            "summary": "Status ok-gated-override: QA-only gated mutation override used; apply/verify path completed and rollback restored the tweak. The VM run used the QA-only gated mutation override..."
+          }
+        ]
       },
       "upstream_lineage": {
         "summary": "No upstream nohuto source link is attached to this record.",
@@ -12031,28 +12188,24 @@
         "source_repositories": [],
         "links": []
       },
-      "tweak_origin": "research-derived",
-      "promotion_state": "rejected",
-      "promotion_blockers": [
-        "The card has not yet been promoted from the first-party power provider into the research-provider surface.",
-        "This review pass documents the behavior but does not yet publish it as a validated research card.",
-        "validation-proof"
-      ],
-      "record_promotion_allowed": false,
-      "tweak_ingest_allowed": false,
-      "debug_override_allowed": true,
+      "tweak_origin": "legacy-curated",
+      "promotion_state": "promoted",
+      "promotion_blockers": [],
+      "record_promotion_allowed": true,
+      "tweak_ingest_allowed": true,
+      "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 2,
-        "tweak_suitability": 2,
+        "tweak_suitability": 5,
         "privilege_complexity": 2,
         "build_specificity": 5,
         "sibling_expansion_value": 2,
         "bench_priority": 5,
-        "overall_score": 3.0,
-        "next_missing_layer": "validation-proof"
+        "overall_score": 3.33,
+        "next_missing_layer": "none"
       }
     },
     {

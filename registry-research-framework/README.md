@@ -21,15 +21,15 @@ The checked-in v3.6 publishing, manifest, and metrics helpers live in the top-le
 
 | Metric | Value |
 |--------|-------|
-| Promoted | 244 |
-| Blocked | 0 |
+| Promoted | 256 |
+| Blocked | 3 |
 | Revalidation Pending | 0 |
 | Gate Health | 🟡 yellow |
 | Schema Complete | 100% |
-| Missing Docs | 32 |
-| Blocked Actionability | n/a |
+| Missing Docs | 17 |
+| Blocked Actionability | 3 active |
 | Blocked Worklist Gate | PASS |
 | Blocked Worklist | `audit/blocked-worklist.md` |
 <!-- END:RESEARCH_HEALTH -->
 
-For a compact blocked-queue entrypoint, start with `audit/blocked-worklist.md`. The current active blocked worklist is intentionally empty; the 2026-05-07 closure ledger in `audit/blocked-worklist-closure-20260507.md` explains which records were rejected from promotion and what evidence would be required to reopen them. For terminal use, `winopt research list-blocked --summary` prints the checked-in lane split without dumping the whole list, and `winopt research show-blocked <candidate-id>` remains available if future blocked records are added. The operator flow is documented in `docs/blocked-worklist-operator-guide.md`.
+For a compact blocked-queue entrypoint, start with `audit/blocked-worklist.md`. The current active blocked worklist has three evidence-backed follow-ups: `peripheral.audio-disable-enhancements` needs an implementation redesign after VM app-QA hit HKLM MMDevices access denied, `power.disable-hibernation` needs a hibernation-capable validation lane, and `power.disable-superfetch` needs a clean enabled/running SysMain baseline for full mutation proof. For terminal use, `winopt research list-blocked --summary` prints the checked-in lane split without dumping the whole list, and `winopt research show-blocked <candidate-id>` opens the detailed record. The operator flow is documented in `docs/blocked-worklist-operator-guide.md`.

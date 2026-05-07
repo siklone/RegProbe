@@ -1167,11 +1167,17 @@ public sealed partial class TweakItemViewModel : ViewModelBase
 
     public Task RunApplyAsync(CancellationToken ct) => CanMutate() ? RunAsync(false, ct) : Task.CompletedTask;
 
+    public Task RunApplyForQaAsync(CancellationToken ct, bool allowGatedMutation)
+        => allowGatedMutation && CanForceQaMutation() ? RunAsync(false, ct) : RunApplyAsync(ct);
+
     public Task RunDetectAsync(CancellationToken ct) => CanInspect() ? RunSingleStepAsync(TweakAction.Detect, ct) : Task.CompletedTask;
 
     public Task RunVerifyAsync(CancellationToken ct) => CanInspect() ? RunSingleStepAsync(TweakAction.Verify, ct) : Task.CompletedTask;
 
     public Task RunRollbackAsync(CancellationToken ct) => CanMutate() ? RunSingleStepAsync(TweakAction.Rollback, ct) : Task.CompletedTask;
+
+    public Task RunRollbackForQaAsync(CancellationToken ct, bool allowGatedMutation)
+        => allowGatedMutation && CanForceQaMutation() ? RunSingleStepAsync(TweakAction.Rollback, ct) : RunRollbackAsync(ct);
 
     private async Task RunAsync(bool dryRun, CancellationToken ct)
     {
@@ -1514,6 +1520,8 @@ public sealed partial class TweakItemViewModel : ViewModelBase
     private bool CanInspect() => !IsRunning && !IsBulkLocked;
 
     private bool CanMutate() => !IsRunning && !IsBulkLocked && IsMutationAllowed;
+
+    private bool CanForceQaMutation() => !IsRunning && !IsBulkLocked;
 
     private bool CanCancel() => IsRunning && !IsBulkLocked;
 

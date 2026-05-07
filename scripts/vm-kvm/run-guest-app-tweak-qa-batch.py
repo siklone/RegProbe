@@ -180,6 +180,11 @@ def main() -> int:
     parser.add_argument("--guest-dir", default=r"C:\Tools\ValidationController\smoke")
     parser.add_argument("--guest-script", default="")
     parser.add_argument("--wait-timeout", type=int, default=600)
+    parser.add_argument(
+        "--allow-gated-mutation",
+        action="store_true",
+        help="Pass the explicit QA-only gated mutation override to the app. Intended for VM evidence acquisition only.",
+    )
     args = parser.parse_args()
 
     tweak_ids = load_ids(args.id, args.id_file)
@@ -209,6 +214,8 @@ def main() -> int:
             "--wait-timeout",
             str(args.wait_timeout),
         ]
+        if args.allow_gated_mutation:
+            cmd.append("--ps-arg=-AllowGatedMutation")
         proc = subprocess.run(cmd, cwd=repo_root, capture_output=True, text=True)
 
         try:

@@ -547,6 +547,62 @@ public sealed class CommandAllowlistSecurityTests
     }
 
     [Fact]
+    public void ResearchAppRegistryMutations_AreAllowlisted()
+    {
+        var allowlist = CommandAllowlist.CreateDefault();
+        var requests = new[]
+        {
+            CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\OneDrive", "/v", "DisableFileSyncNGSC", "/t", "REG_DWORD", "/d", "1", "/f"),
+            CreateRegRequest("delete", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\OneDrive", "/v", "DisableFileSyncNGSC", "/f"),
+            CreateRegRequest("add", @"HKLM\SOFTWARE\Microsoft\OneDrive", "/v", "PreventNetworkTrafficPreUserSignIn", "/t", "REG_DWORD", "/d", "1", "/f"),
+            CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Edge", "/v", "AutoImportAtFirstRun", "/t", "REG_DWORD", "/d", "4", "/f"),
+            CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\EdgeUI", "/v", "DisableRecentApps", "/t", "REG_DWORD", "/d", "1", "/f"),
+            CreateRegRequest("add", @"HKCU\SOFTWARE\Policies\Microsoft\Office\16.0\OSM\preventedapplications", "/v", "xlsolution", "/t", "REG_DWORD", "/d", "1", "/f"),
+            CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\VisualStudio\Feedback", "/v", "DisableFeedbackDialog", "/t", "REG_DWORD", "/d", "1", "/f"),
+            CreateRegRequest("add", @"HKLM\SOFTWARE\Microsoft\VSCommon\17.0\SQM", "/v", "OptIn", "/t", "REG_DWORD", "/d", "0", "/f"),
+            CreateRegRequest("add", @"HKCU\SOFTWARE\7-Zip\Options", "/v", "WriteZoneIdExtract", "/t", "REG_DWORD", "/d", "2", "/f"),
+            CreateRegRequest("add", @"HKCU\Control Panel\Keyboard", "/v", "KeyboardSpeed", "/t", "REG_SZ", "/d", "31", "/f"),
+            CreateRegRequest("add", @"HKCU\Keyboard Layout\Toggle", "/v", "Language Hotkey", "/t", "REG_SZ", "/d", "3", "/f"),
+            CreateRegRequest("add", @"HKCU\Control Panel\Mouse", "/v", "MouseSensitivity", "/t", "REG_SZ", "/d", "10", "/f"),
+            CreateRegRequest("add", @"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Render", "/v", "DisableEnhancements", "/t", "REG_DWORD", "/d", "1", "/f")
+        };
+
+        foreach (var request in requests)
+        {
+            var allowed = allowlist.IsAllowed(request, out var reason);
+
+            Assert.True(allowed);
+            Assert.Null(reason);
+        }
+    }
+
+    [Fact]
+    public void CoreParkingAndUsbPowerCfgCommands_AreAllowlisted()
+    {
+        var allowlist = CommandAllowlist.CreateDefault();
+        var executable = Path.Combine(Environment.SystemDirectory, "powercfg.exe");
+        var usbSubgroupGuid = "2a737441-1930-4402-8d77-b2bebba308a3";
+        var usbSelectiveSuspendGuid = "48e6b7a6-50f5-4782-a5d4-53bb8f07e226";
+        var requests = new[]
+        {
+            new CommandRequest(executable, new[] { "/qh", "SCHEME_CURRENT", "SUB_PROCESSOR", "CPMINCORES" }),
+            new CommandRequest(executable, new[] { "/setdcvalueindex", "SCHEME_CURRENT", "SUB_PROCESSOR", "CPMINCORES", "10" }),
+            new CommandRequest(executable, new[] { "/setacvalueindex", "SCHEME_CURRENT", "SUB_PROCESSOR", "CPMAXCORES", "100" }),
+            new CommandRequest(executable, new[] { "/query", "SCHEME_CURRENT", usbSubgroupGuid, usbSelectiveSuspendGuid }),
+            new CommandRequest(executable, new[] { "/setacvalueindex", "SCHEME_CURRENT", usbSubgroupGuid, usbSelectiveSuspendGuid, "0" }),
+            new CommandRequest(executable, new[] { "/setdcvalueindex", "SCHEME_CURRENT", usbSubgroupGuid, usbSelectiveSuspendGuid, "1" })
+        };
+
+        foreach (var request in requests)
+        {
+            var allowed = allowlist.IsAllowed(request, out var reason);
+
+            Assert.True(allowed);
+            Assert.Null(reason);
+        }
+    }
+
+    [Fact]
     public void SmbLeasingPowerShellCommands_AreAllowlisted()
     {
         var allowlist = CommandAllowlist.CreateDefault();

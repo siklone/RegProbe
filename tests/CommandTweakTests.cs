@@ -216,6 +216,30 @@ public sealed class CommandTweakTests
     }
 
     [Fact]
+    public async Task DisableHibernationTweak_DetectAsync_WhenFirmwareDoesNotSupportHibernation_ReturnsNotApplicable()
+    {
+        // Arrange
+        var mockRunner = new Mock<ICommandRunner>();
+        mockRunner
+            .Setup(r => r.RunAsync(It.IsAny<CommandRequest>(), It.IsAny<CancellationToken>()))
+            .ReturnsAsync(new CommandResult(
+                ExitCode: 0,
+                StandardOutput: "The following sleep states are not available on this system:\n    Hibernate\n        The system firmware does not support hibernation.\n",
+                StandardError: "",
+                TimedOut: false,
+                Duration: TimeSpan.FromMilliseconds(100)));
+
+        var tweak = new DisableHibernationTweak(mockRunner.Object);
+
+        // Act
+        var result = await tweak.DetectAsync(CancellationToken.None);
+
+        // Assert
+        Assert.Equal(TweakStatus.NotApplicable, result.Status);
+        Assert.Contains("firmware does not support hibernation", result.Message, StringComparison.OrdinalIgnoreCase);
+    }
+
+    [Fact]
     public async Task DisableHibernationTweak_ApplyAsync_WhenSuccessful_ReturnsAppliedStatus()
     {
         // Arrange
@@ -259,6 +283,55 @@ public sealed class CommandTweakTests
 
         // Assert
         Assert.Equal(TweakStatus.Verified, result.Status);
+    }
+
+    [Fact]
+    public async Task DisableHibernationTweak_VerifyAsync_WhenFirmwareDoesNotSupportHibernation_ReturnsNotApplicable()
+    {
+        // Arrange
+        var mockRunner = new Mock<ICommandRunner>();
+        mockRunner
+            .Setup(r => r.RunAsync(It.IsAny<CommandRequest>(), It.IsAny<CancellationToken>()))
+            .ReturnsAsync(new CommandResult(
+                ExitCode: 0,
+                StandardOutput: "The following sleep states are not available on this system:\n    Hibernate\n        The system firmware does not support hibernation.\n",
+                StandardError: "",
+                TimedOut: false,
+                Duration: TimeSpan.FromMilliseconds(100)));
+
+        var tweak = new DisableHibernationTweak(mockRunner.Object);
+
+        // Act
+        var result = await tweak.VerifyAsync(CancellationToken.None);
+
+        // Assert
+        Assert.Equal(TweakStatus.NotApplicable, result.Status);
+        Assert.Contains("not applicable", result.Message, StringComparison.OrdinalIgnoreCase);
+    }
+
+    [Fact]
+    public async Task DisableHibernationTweak_RollbackAsync_WhenFirmwareDoesNotSupportHibernation_ReturnsNotApplicable()
+    {
+        // Arrange
+        var mockRunner = new Mock<ICommandRunner>();
+        mockRunner
+            .Setup(r => r.RunAsync(It.IsAny<CommandRequest>(), It.IsAny<CancellationToken>()))
+            .ReturnsAsync(new CommandResult(
+                ExitCode: 0,
+                StandardOutput: "The following sleep states are not available on this system:\n    Hibernate\n        The system firmware does not support hibernation.\n",
+                StandardError: "",
+                TimedOut: false,
+                Duration: TimeSpan.FromMilliseconds(100)));
+
+        var tweak = new DisableHibernationTweak(mockRunner.Object);
+        await tweak.DetectAsync(CancellationToken.None);
+
+        // Act
+        var result = await tweak.RollbackAsync(CancellationToken.None);
+
+        // Assert
+        Assert.Equal(TweakStatus.NotApplicable, result.Status);
+        Assert.Contains("not supported", result.Message, StringComparison.OrdinalIgnoreCase);
     }
 
     [Fact]

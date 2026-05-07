@@ -1,14 +1,12 @@
 {
-  "generated_utc": "2026-05-07T19:38:13Z",
+  "generated_utc": "2026-05-07T23:27:06Z",
   "status": "PASS",
   "selection": {
-    "requested_ids": [
-      "peripheral.audio-disable-ducking"
-    ],
+    "requested_ids": [],
     "requested_categories": [],
     "limit_per_category": 1,
     "total_limit": 6,
-    "run_kvm": true,
+    "run_kvm": false,
     "wait_timeout": 900
   },
   "sources": {
@@ -17,30 +15,325 @@
     "single_tweak_app_qa": "registry-research-framework/scripts/check_single_tweak_app_qa.py",
     "kvm_batch_runner": "scripts/vm-kvm/run-guest-app-tweak-qa-batch.py"
   },
-  "catalog_candidate_count": 243,
-  "selected_candidate_count": 1,
+  "catalog_candidate_count": 253,
+  "selected_candidate_count": 6,
   "errors": [],
   "candidates": [
     {
-      "tweak_id": "peripheral.audio-disable-ducking",
-      "qa_tweak_id": "peripheral.audio-disable-ducking",
-      "candidate_id": "peripheral.audio-disable-ducking",
-      "record_id": "peripheral.audio-disable-ducking",
-      "category": "Peripheral",
-      "name": "Disable Audio Ducking",
-      "documentation": "research/records/peripheral.audio-disable-ducking.review.json",
+      "tweak_id": "audio.disable-beep",
+      "qa_tweak_id": "audio.disable-beep",
+      "candidate_id": "audio.disable-beep",
+      "record_id": "audio.disable-beep",
+      "category": "Audio",
+      "name": "System Beep Driver",
+      "documentation": "research/records/audio.disable-beep.review.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect peripheral.audio-disable-ducking",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect audio.disable-beep",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'peripheral.audio-disable-ducking' --qa-output 'C:\\Tools\\ValidationController\\smoke\\peripheral.audio-disable-ducking.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'peripheral.audio-disable-ducking' --qa-output 'C:\\Tools\\ValidationController\\smoke\\peripheral.audio-disable-ducking.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'peripheral.audio-disable-ducking' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\peripheral.audio-disable-ducking.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'peripheral.audio-disable-ducking' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\peripheral.audio-disable-ducking.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'peripheral.audio-disable-ducking'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'audio.disable-beep' --qa-output 'C:\\Tools\\ValidationController\\smoke\\audio.disable-beep.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'audio.disable-beep' --qa-output 'C:\\Tools\\ValidationController\\smoke\\audio.disable-beep.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'audio.disable-beep' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\audio.disable-beep.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'audio.disable-beep' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\audio.disable-beep.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'audio.disable-beep'"
+      },
+      "expected_report": {
+        "success": true,
+        "status": "ok",
+        "rollback_requested": true,
+        "required_stages": [
+          "detect-before",
+          "apply",
+          "rollback",
+          "detect-after"
+        ],
+        "required_card_snapshot": {
+          "required_fields": [
+            "TweakId",
+            "Name",
+            "Category",
+            "EvidenceClass",
+            "ResearchStatus",
+            "RollbackSnapshotState",
+            "HasClaimBoundary",
+            "WhatWeKnowSummary",
+            "WhatWeDoNotClaimSummary",
+            "ProofLanes"
+          ],
+          "required_proof_lanes": [
+            "docs",
+            "runtime",
+            "source",
+            "rollback"
+          ],
+          "claim_boundary_required": true
+        },
+        "required_stage_assertions": [
+          "apply stage reports a successful apply story",
+          "rollback stage reports a successful rollback story",
+          "detect-after is present"
+        ]
+      }
+    },
+    {
+      "tweak_id": "cleanup.disable-reserved-storage",
+      "qa_tweak_id": "cleanup.disable-reserved-storage",
+      "candidate_id": "cleanup.disable-reserved-storage",
+      "record_id": "cleanup.disable-reserved-storage",
+      "category": "Cleanup",
+      "name": "Disable Reserved Storage",
+      "documentation": "research/records/cleanup.disable-reserved-storage.review.json",
+      "promotion_state": "promoted",
+      "apply_allowed": true,
+      "restore_default_supported": true,
+      "restore_previous_supported": true,
+      "commands": {
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect cleanup.disable-reserved-storage",
+        "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'cleanup.disable-reserved-storage' --qa-output 'C:\\Tools\\ValidationController\\smoke\\cleanup.disable-reserved-storage.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'cleanup.disable-reserved-storage' --qa-output 'C:\\Tools\\ValidationController\\smoke\\cleanup.disable-reserved-storage.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'cleanup.disable-reserved-storage' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\cleanup.disable-reserved-storage.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'cleanup.disable-reserved-storage' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\cleanup.disable-reserved-storage.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'cleanup.disable-reserved-storage'"
+      },
+      "expected_report": {
+        "success": true,
+        "status": "ok",
+        "rollback_requested": true,
+        "required_stages": [
+          "detect-before",
+          "apply",
+          "rollback",
+          "detect-after"
+        ],
+        "required_card_snapshot": {
+          "required_fields": [
+            "TweakId",
+            "Name",
+            "Category",
+            "EvidenceClass",
+            "ResearchStatus",
+            "RollbackSnapshotState",
+            "HasClaimBoundary",
+            "WhatWeKnowSummary",
+            "WhatWeDoNotClaimSummary",
+            "ProofLanes"
+          ],
+          "required_proof_lanes": [
+            "docs",
+            "runtime",
+            "source",
+            "rollback"
+          ],
+          "claim_boundary_required": true
+        },
+        "required_stage_assertions": [
+          "apply stage reports a successful apply story",
+          "rollback stage reports a successful rollback story",
+          "detect-after is present"
+        ]
+      }
+    },
+    {
+      "tweak_id": "developer.docker-performance",
+      "qa_tweak_id": "developer.docker-performance",
+      "candidate_id": "developer.docker-performance",
+      "record_id": "developer.docker-performance",
+      "category": "Developer",
+      "name": "Docker Desktop WSL 2 Backend",
+      "documentation": "research/records/developer.docker-performance.review.json",
+      "promotion_state": "promoted",
+      "apply_allowed": true,
+      "restore_default_supported": true,
+      "restore_previous_supported": true,
+      "commands": {
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect developer.docker-performance",
+        "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'developer.docker-performance' --qa-output 'C:\\Tools\\ValidationController\\smoke\\developer.docker-performance.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'developer.docker-performance' --qa-output 'C:\\Tools\\ValidationController\\smoke\\developer.docker-performance.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'developer.docker-performance' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\developer.docker-performance.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'developer.docker-performance' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\developer.docker-performance.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'developer.docker-performance'"
+      },
+      "expected_report": {
+        "success": true,
+        "status": "ok",
+        "rollback_requested": true,
+        "required_stages": [
+          "detect-before",
+          "apply",
+          "rollback",
+          "detect-after"
+        ],
+        "required_card_snapshot": {
+          "required_fields": [
+            "TweakId",
+            "Name",
+            "Category",
+            "EvidenceClass",
+            "ResearchStatus",
+            "RollbackSnapshotState",
+            "HasClaimBoundary",
+            "WhatWeKnowSummary",
+            "WhatWeDoNotClaimSummary",
+            "ProofLanes"
+          ],
+          "required_proof_lanes": [
+            "docs",
+            "runtime",
+            "source",
+            "rollback"
+          ],
+          "claim_boundary_required": true
+        },
+        "required_stage_assertions": [
+          "apply stage reports a successful apply story",
+          "rollback stage reports a successful rollback story",
+          "detect-after is present"
+        ]
+      }
+    },
+    {
+      "tweak_id": "explorer.always-show-icons-never-thumbnails",
+      "qa_tweak_id": "explorer.always-show-icons-never-thumbnails",
+      "candidate_id": "explorer.always-show-icons-never-thumbnails",
+      "record_id": "explorer.always-show-icons-never-thumbnails",
+      "category": "Explorer",
+      "name": "Always Show Icons, Never Thumbnails",
+      "documentation": "research/records/explorer.always-show-icons-never-thumbnails.review.json",
+      "promotion_state": "promoted",
+      "apply_allowed": true,
+      "restore_default_supported": true,
+      "restore_previous_supported": true,
+      "commands": {
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect explorer.always-show-icons-never-thumbnails",
+        "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'explorer.always-show-icons-never-thumbnails' --qa-output 'C:\\Tools\\ValidationController\\smoke\\explorer.always-show-icons-never-thumbnails.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'explorer.always-show-icons-never-thumbnails' --qa-output 'C:\\Tools\\ValidationController\\smoke\\explorer.always-show-icons-never-thumbnails.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'explorer.always-show-icons-never-thumbnails' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\explorer.always-show-icons-never-thumbnails.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'explorer.always-show-icons-never-thumbnails' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\explorer.always-show-icons-never-thumbnails.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'explorer.always-show-icons-never-thumbnails'"
+      },
+      "expected_report": {
+        "success": true,
+        "status": "ok",
+        "rollback_requested": true,
+        "required_stages": [
+          "detect-before",
+          "apply",
+          "rollback",
+          "detect-after"
+        ],
+        "required_card_snapshot": {
+          "required_fields": [
+            "TweakId",
+            "Name",
+            "Category",
+            "EvidenceClass",
+            "ResearchStatus",
+            "RollbackSnapshotState",
+            "HasClaimBoundary",
+            "WhatWeKnowSummary",
+            "WhatWeDoNotClaimSummary",
+            "ProofLanes"
+          ],
+          "required_proof_lanes": [
+            "docs",
+            "runtime",
+            "source",
+            "rollback"
+          ],
+          "claim_boundary_required": true
+        },
+        "required_stage_assertions": [
+          "apply stage reports a successful apply story",
+          "rollback stage reports a successful rollback story",
+          "detect-after is present"
+        ]
+      }
+    },
+    {
+      "tweak_id": "misc.disable-edge-features",
+      "qa_tweak_id": "misc.disable-edge-features",
+      "candidate_id": "misc.disable-edge-features",
+      "record_id": "misc.disable-edge-features",
+      "category": "Misc",
+      "name": "Disable Microsoft Edge Features",
+      "documentation": "Docs/misc/misc.md",
+      "promotion_state": "promoted",
+      "apply_allowed": true,
+      "restore_default_supported": false,
+      "restore_previous_supported": true,
+      "commands": {
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect misc.disable-edge-features",
+        "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'misc.disable-edge-features' --qa-output 'C:\\Tools\\ValidationController\\smoke\\misc.disable-edge-features.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'misc.disable-edge-features' --qa-output 'C:\\Tools\\ValidationController\\smoke\\misc.disable-edge-features.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'misc.disable-edge-features' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\misc.disable-edge-features.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'misc.disable-edge-features' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\misc.disable-edge-features.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'misc.disable-edge-features'"
+      },
+      "expected_report": {
+        "success": true,
+        "status": "ok",
+        "rollback_requested": true,
+        "required_stages": [
+          "detect-before",
+          "apply",
+          "rollback",
+          "detect-after"
+        ],
+        "required_card_snapshot": {
+          "required_fields": [
+            "TweakId",
+            "Name",
+            "Category",
+            "EvidenceClass",
+            "ResearchStatus",
+            "RollbackSnapshotState",
+            "HasClaimBoundary",
+            "WhatWeKnowSummary",
+            "WhatWeDoNotClaimSummary",
+            "ProofLanes"
+          ],
+          "required_proof_lanes": [
+            "docs",
+            "runtime",
+            "source",
+            "rollback"
+          ],
+          "claim_boundary_required": true
+        },
+        "required_stage_assertions": [
+          "apply stage reports a successful apply story",
+          "rollback stage reports a successful rollback story",
+          "detect-after is present"
+        ]
+      }
+    },
+    {
+      "tweak_id": "network.disable-active-probing",
+      "qa_tweak_id": "network.disable-active-probing",
+      "candidate_id": "network.disable-active-probing",
+      "record_id": "network.disable-active-probing",
+      "category": "Network",
+      "name": "NCSI Active Probing Policy",
+      "documentation": "research/records/network.disable-active-probing.review.json",
+      "promotion_state": "promoted",
+      "apply_allowed": true,
+      "restore_default_supported": true,
+      "restore_previous_supported": true,
+      "commands": {
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect network.disable-active-probing",
+        "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'network.disable-active-probing' --qa-output 'C:\\Tools\\ValidationController\\smoke\\network.disable-active-probing.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'network.disable-active-probing' --qa-output 'C:\\Tools\\ValidationController\\smoke\\network.disable-active-probing.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'network.disable-active-probing' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\network.disable-active-probing.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'network.disable-active-probing' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\network.disable-active-probing.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'network.disable-active-probing'"
       },
       "expected_report": {
         "success": true,
@@ -81,285 +374,19 @@
       }
     }
   ],
-  "run_results": [
-    {
-      "tweak_id": "peripheral.audio-disable-ducking",
-      "host_exit": 0,
-      "execution_exit": 0,
-      "payload_status": "completed",
-      "report_source": "stdout",
-      "report_parse_error": null,
-      "report_fetch_status": null,
-      "report_app_success": true,
-      "report_success": true,
-      "report_status": "ok",
-      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
-      "report_contract_status": "ok",
-      "report_contract_summary": "QA card snapshot contract passed.",
-      "report_contract_failures": [],
-      "report_card_present": true,
-      "report_card_has_claim_boundary": true,
-      "report_card_present_fields": [
-        "TweakId",
-        "Name",
-        "Category",
-        "EvidenceClass",
-        "ResearchStatus",
-        "RollbackSnapshotState",
-        "HasClaimBoundary",
-        "WhatWeKnowSummary",
-        "WhatWeDoNotClaimSummary",
-        "ProofLanes"
-      ],
-      "report_card_missing_fields": [],
-      "report_card_proof_lanes": [
-        "docs",
-        "runtime",
-        "source",
-        "rollback"
-      ],
-      "report_card_missing_proof_lanes": [],
-      "report": {
-        "TweakId": "peripheral.audio-disable-ducking",
-        "TweakName": "Disable Audio Ducking",
-        "Success": true,
-        "Status": "ok",
-        "Summary": "Apply/verify path completed and rollback restored the tweak.",
-        "RollbackRequested": true,
-        "Card": {
-          "TweakId": "peripheral.audio-disable-ducking",
-          "Name": "Disable Audio Ducking",
-          "Category": "Peripheral",
-          "Description": "This sets the Windows communications ducking preference so the system does not reduce other audio volumes during calls.",
-          "FriendlyDescription": "This sets the Windows communications ducking preference so the system does not reduce other audio volumes during calls.",
-          "RegistryPath": "HKCU\\Software\\Microsoft\\Multimedia\\Audio\\UserDuckingPreference",
-          "EvidenceClass": "A",
-          "EvidenceClassTitle": "Cross-Layer Verified",
-          "ResearchStatus": "PROMOTED",
-          "IsMutationAllowed": true,
-          "RollbackSnapshotState": "ready",
-          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
-          "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: This sets the Windows communications ducking preference so the system does not reduce other audio volumes during calls. Evidence: Validated on 2026-05-07 with QGA-first VM tooling. Ghidra provides the code-side mmsys.cpl string/xref evidence; ETW provides a runtime registry trace with caller-stack capture for the exact value name. A stale value left by an earlier Procmon timeout was r... Rollback: Rollback: Verified via record-restore-story.",
-          "WhatWeDoNotClaimSummary": "Source boundary: Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
-          "ProofLanes": [
-            {
-              "Key": "docs",
-              "Label": "DOCS",
-              "State": "ready",
-              "Summary": "Validated on 2026-05-07 with QGA-first VM tooling. Ghidra provides the code-side mmsys.cpl string/xref evidence; ETW provides a runtime registry trace with caller-stack capture for the exact value name. A stale value left by an earlier Procmon timeout was r...",
-              "Source": "Validation proof source: evidence/raw/ghidra/peripheral-audio-ducking-ghidra-20260507/ghidra-matches.md"
-            },
-            {
-              "Key": "runtime",
-              "Label": "RUNTIME",
-              "State": "ready",
-              "Summary": "The 2026-05-07 QGA-first xperf REGISTRY stackwalk captured a narrow RegQueryValue run for HKCU\\Software\\Microsoft\\Multimedia\\Audio\\UserDuckingPreference. The normalized bundle is ok, contains 5221 registry events, 1357 caller-stack events, and an exact User...",
-              "Source": "QGA ETW stackwalk - UserDuckingPreference runtime registry probe: evidence/raw/etw-stackwalk/peripheral-audio-ducking-etw-20260507/peripheral-audio-ducking-etw-20260507-summary.json and evidence/raw/etw-stackwalk/peripheral-audio-ducking-etw-20260507/normalized-registry-bundle.json"
-            },
-            {
-              "Key": "source",
-              "Label": "SOURCE",
-              "State": "ready",
-              "Summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
-              "Source": "decompiled-pseudocode / USBHUB3: https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3"
-            },
-            {
-              "Key": "rollback",
-              "Label": "ROLLBACK",
-              "State": "ready",
-              "Summary": "Rollback: Verified via record-restore-story.",
-              "Source": "record-restore-story"
-            }
-          ],
-          "ReferenceLinks": [
-            {
-              "Title": "Windows Internals resource page",
-              "Url": "https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals",
-              "Kind": "Docs"
-            },
-            {
-              "Title": "Docs: Details",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html#peripheral.audio-disable-ducking",
-              "Kind": "Details"
-            },
-            {
-              "Title": "Docs: Peripheral",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\peripheral\\peripheral.md#peripheral.audio-disable-ducking",
-              "Kind": "Docs"
-            }
-          ]
-        },
-        "Stages": [
-          {
-            "Stage": "detect-before",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Value not set.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Not set",
-            "TargetValue": "3 (0x3)",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": false,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Value not set.",
-                "TimestampText": "12:38:17"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "apply",
-            "AppliedStatus": "Applied",
-            "StatusMessage": "Run completed.",
-            "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "3 (0x3)",
-            "TargetValue": "3 (0x3)",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Value not set.",
-                "TimestampText": "12:38:17"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Set value to 3.",
-                "TimestampText": "12:38:17"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified desired value.",
-                "TimestampText": "12:38:17"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Not required",
-                "Message": "Step not executed.",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "rollback",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Removed value to restore default.",
-            "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "3 (0x3)",
-            "TargetValue": "3 (0x3)",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Value not set.",
-                "TimestampText": "12:38:17"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Set value to 3.",
-                "TimestampText": "12:38:17"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified desired value.",
-                "TimestampText": "12:38:17"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Removed value to restore default.",
-                "TimestampText": "12:38:17"
-              }
-            ]
-          },
-          {
-            "Stage": "detect-after",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Value not set.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Not set",
-            "TargetValue": "3 (0x3)",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Value not set.",
-                "TimestampText": "12:38:17"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Set value to 3.",
-                "TimestampText": "12:38:17"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified desired value.",
-                "TimestampText": "12:38:17"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Removed value to restore default.",
-                "TimestampText": "12:38:17"
-              }
-            ]
-          }
-        ],
-        "StartedAtUtc": "2026-05-07T19:38:17.4228232+00:00",
-        "CompletedAtUtc": "2026-05-07T19:38:17.7367489+00:00"
-      },
-      "qa_tweak_id": "peripheral.audio-disable-ducking",
-      "candidate_id": "peripheral.audio-disable-ducking",
-      "card_name": "Disable Audio Ducking",
-      "documentation": "research/records/peripheral.audio-disable-ducking.review.json"
-    }
-  ],
+  "run_results": [],
   "summary": {
-    "planned_count": 1,
-    "planned_apply_allowed_count": 1,
-    "live_success_count": 1,
+    "planned_count": 6,
+    "planned_apply_allowed_count": 6,
+    "live_success_count": 0,
     "live_failure_count": 0,
     "categories": [
-      "Peripheral"
+      "Audio",
+      "Cleanup",
+      "Developer",
+      "Explorer",
+      "Misc",
+      "Network"
     ]
   }
 }

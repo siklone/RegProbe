@@ -246,7 +246,7 @@ If you are validating the desktop app itself, `research qa-plan` is the next hop
 
 When you run several live promoted batches, treat `registry-research-framework/audit/promoted-app-qa-batch-latest.json` as the newest snapshot only. The cumulative view lives in `registry-research-framework/audit/promoted-app-qa-batch-history.jsonl` plus the paired coverage files `promoted-app-qa-coverage-latest.json` and `promoted-app-qa-coverage-latest.md`.
 
-Current audit snapshot: as of 2026-05-07, promoted app-QA coverage is `242/242` (`100.0%`) with no uncovered promoted app-QA candidates remaining. If you change shipped providers, card mapping, promotion gates, evidence links, or rollback behavior, refresh this coverage before handing the repo back.
+Current audit snapshot: as of 2026-05-07, app retest readiness is passing with `265` app-surface entries, `0` app-only backlog items, `263` apply-allowed records with rollback story, and `3` evidence-backed blocked follow-ups. If you change shipped providers, card mapping, promotion gates, evidence links, or rollback behavior, refresh this readiness and the promoted app-QA batch plan before handing the repo back.
 
 ## Evidence Card Quality Bar
 

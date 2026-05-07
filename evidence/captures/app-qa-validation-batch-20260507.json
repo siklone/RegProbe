@@ -1,0 +1,3992 @@
+[
+  {
+    "tweak_id": "misc.disable-edge-features",
+    "host_exit": 0,
+    "execution_exit": 0,
+    "payload_status": "completed",
+    "report_source": "stdout",
+    "report_parse_error": null,
+    "report_fetch_status": null,
+    "report_app_success": true,
+    "report_success": true,
+    "report_status": "ok-gated-override",
+    "report_summary": "QA-only gated mutation override used; apply/verify path completed and rollback restored the tweak.",
+    "report_contract_status": "ok",
+    "report_contract_summary": "QA card snapshot contract passed.",
+    "report_contract_failures": [],
+    "report_card_present": true,
+    "report_card_has_claim_boundary": true,
+    "report_card_present_fields": [
+      "TweakId",
+      "Name",
+      "Category",
+      "EvidenceClass",
+      "ResearchStatus",
+      "RollbackSnapshotState",
+      "HasClaimBoundary",
+      "WhatWeKnowSummary",
+      "WhatWeDoNotClaimSummary",
+      "ProofLanes"
+    ],
+    "report_card_missing_fields": [],
+    "report_card_proof_lanes": [
+      "docs",
+      "runtime",
+      "source",
+      "rollback"
+    ],
+    "report_card_missing_proof_lanes": [],
+    "report": {
+      "TweakId": "misc.disable-edge-features",
+      "TweakName": "Disable Microsoft Edge Features",
+      "Success": true,
+      "Status": "ok-gated-override",
+      "Summary": "QA-only gated mutation override used; apply/verify path completed and rollback restored the tweak.",
+      "RollbackRequested": true,
+      "GatedMutationOverrideRequested": true,
+      "GatedMutationOverrideUsed": true,
+      "Card": {
+        "TweakId": "misc.disable-edge-features",
+        "Name": "Disable Microsoft Edge Features",
+        "Category": "Misc",
+        "Description": "Disables telemetry, personalization, sync, sidebar, shopping, rewards, and various other Edge features. Also disables Windows 8/8.1 EdgeUI features.",
+        "FriendlyDescription": "Disables telemetry, personalization, sync, sidebar, shopping, rewards, and various other Edge features. Also disables Windows 8/8.1 EdgeUI features.",
+        "RegistryPath": "",
+        "EvidenceClass": "B",
+        "EvidenceClassTitle": "Strong but Decision-Gated",
+        "ResearchStatus": "INTENTIONAL HOLD",
+        "IsMutationAllowed": false,
+        "RollbackSnapshotState": "ready",
+        "RollbackStoryText": "Rollback: Verified via record-restore-story.",
+        "HasClaimBoundary": true,
+        "WhatWeKnowSummary": "Claim: Disables telemetry, personalization, sync, sidebar, shopping, rewards, and various other Edge features. Also disables Windows 8/8.1 EdgeUI features. Evidence: The misc documentation maps this card to the Edge policy bundle and names the Microsoft Edge / EdgeUI policy values that the current app writes. Rollback: Rollback: Verified via record-restore-story.",
+        "WhatWeDoNotClaimSummary": "Apply gate: Evidence pending Source boundary: Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+        "ProofLanes": [
+          {
+            "Key": "docs",
+            "Label": "DOCS",
+            "State": "ready",
+            "Summary": "The misc documentation maps this card to the Edge policy bundle and names the Microsoft Edge / EdgeUI policy values that the current app writes.",
+            "Source": "Validation proof source: C:\\Tools\\AppSmoke\\Docs\\misc\\misc.md"
+          },
+          {
+            "Key": "runtime",
+            "Label": "RUNTIME",
+            "State": "ready",
+            "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+            "Source": ""
+          },
+          {
+            "Key": "source",
+            "Label": "SOURCE",
+            "State": "ready",
+            "Summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+            "Source": "win-config / misc/desc.md: https://github.com/nohuto/win-config/blob/main/misc/desc.md"
+          },
+          {
+            "Key": "rollback",
+            "Label": "ROLLBACK",
+            "State": "ready",
+            "Summary": "Rollback: Verified via record-restore-story.",
+            "Source": "record-restore-story"
+          }
+        ],
+        "ReferenceLinks": [
+          {
+            "Title": "Docs: Details",
+            "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html#misc.disable-edge-features",
+            "Kind": "Details"
+          },
+          {
+            "Title": "Docs: Misc",
+            "Url": "C:\\Tools\\AppSmoke\\Docs\\misc\\misc.md#misc.disable-edge-features",
+            "Kind": "Docs"
+          }
+        ]
+      },
+      "Stages": [
+        {
+          "Stage": "detect-before",
+          "AppliedStatus": "NotApplied",
+          "StatusMessage": "Detected 0 of 40 values (matches: 0, missing: 40).",
+          "OutcomeSummary": "Detect - Success",
+          "CurrentValue": "Unknown",
+          "TargetValue": "Multiple values",
+          "WasRolledBack": false,
+          "IsMutationAllowed": false,
+          "HasSuccessfulApplyStory": false,
+          "HasSuccessfulRollbackStory": false,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Detected",
+              "Message": "Detected 0 of 40 values (matches: 0, missing: 40).\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\AutoImportAtFirstRun: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\DefaultBrowserSettingEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\DefaultSensorsSetting: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\EdgeCollectionsEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\EdgeFollowEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\EdgeShoppingAssistantEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\HideFirstRunExperience: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\HideRestoreDialogEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\HubsSidebarEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\ImplicitSignInEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\NewTabPageAllowedBackgroundTypes: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\NewTabPageContentEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\NewTabPageHideDefaultTopSites: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\NewTabPageQuickLinksEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\PersonalizationReportingEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\PinBrowserEssentialsToolbarButton: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\QuickSearchShowMiniMenu: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\SearchbarAllowed: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\ShowMicrosoftRewards: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\ShowRecommendationsEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\SplitScreenEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\StandaloneHubsSidebarEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\StartupBoostEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\SyncDisabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\TabServicesEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\TextPredictionEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\TrackingPrevention: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\UserFeedbackAllowed: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\AllowEdgeSwipe: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\AllowEdgeSwipe: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableCharms: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableCharms: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableHelpSticker: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableHelpSticker: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableMFUTracking: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableMFUTracking: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableRecentApps: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableRecentApps: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\TurnOffBackstack: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\TurnOffBackstack: missing",
+              "TimestampText": "16:07:24"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Pending",
+              "Message": "",
+              "TimestampText": "-"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Pending",
+              "Message": "",
+              "TimestampText": "-"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Pending",
+              "Message": "",
+              "TimestampText": "-"
+            }
+          ]
+        },
+        {
+          "Stage": "apply",
+          "AppliedStatus": "Applied",
+          "StatusMessage": "Run completed.",
+          "OutcomeSummary": "Apply - Success",
+          "CurrentValue": "Multiple values",
+          "TargetValue": "Multiple values",
+          "WasRolledBack": false,
+          "IsMutationAllowed": false,
+          "HasSuccessfulApplyStory": true,
+          "HasSuccessfulRollbackStory": false,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Detected",
+              "Message": "Detected 0 of 40 values (matches: 0, missing: 40).\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\AutoImportAtFirstRun: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\DefaultBrowserSettingEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\DefaultSensorsSetting: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\EdgeCollectionsEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\EdgeFollowEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\EdgeShoppingAssistantEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\HideFirstRunExperience: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\HideRestoreDialogEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\HubsSidebarEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\ImplicitSignInEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\NewTabPageAllowedBackgroundTypes: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\NewTabPageContentEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\NewTabPageHideDefaultTopSites: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\NewTabPageQuickLinksEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\PersonalizationReportingEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\PinBrowserEssentialsToolbarButton: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\QuickSearchShowMiniMenu: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\SearchbarAllowed: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\ShowMicrosoftRewards: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\ShowRecommendationsEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\SplitScreenEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\StandaloneHubsSidebarEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\StartupBoostEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\SyncDisabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\TabServicesEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\TextPredictionEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\TrackingPrevention: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\UserFeedbackAllowed: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\AllowEdgeSwipe: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\AllowEdgeSwipe: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableCharms: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableCharms: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableHelpSticker: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableHelpSticker: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableMFUTracking: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableMFUTracking: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableRecentApps: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableRecentApps: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\TurnOffBackstack: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\TurnOffBackstack: missing",
+              "TimestampText": "16:07:24"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Applied",
+              "Message": "Updated 40 values.",
+              "TimestampText": "16:07:28"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Verified",
+              "Message": "Verified desired values.",
+              "TimestampText": "16:07:28"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Not required",
+              "Message": "Step not executed.",
+              "TimestampText": "-"
+            }
+          ]
+        },
+        {
+          "Stage": "rollback",
+          "AppliedStatus": "NotApplied",
+          "StatusMessage": "Rolled back registry values.",
+          "OutcomeSummary": "Rollback - Rolled Back",
+          "CurrentValue": "Multiple values",
+          "TargetValue": "Multiple values",
+          "WasRolledBack": true,
+          "IsMutationAllowed": false,
+          "HasSuccessfulApplyStory": true,
+          "HasSuccessfulRollbackStory": true,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Detected",
+              "Message": "Detected 0 of 40 values (matches: 0, missing: 40).\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\AutoImportAtFirstRun: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\DefaultBrowserSettingEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\DefaultSensorsSetting: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\EdgeCollectionsEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\EdgeFollowEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\EdgeShoppingAssistantEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\HideFirstRunExperience: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\HideRestoreDialogEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\HubsSidebarEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\ImplicitSignInEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\NewTabPageAllowedBackgroundTypes: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\NewTabPageContentEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\NewTabPageHideDefaultTopSites: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\NewTabPageQuickLinksEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\PersonalizationReportingEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\PinBrowserEssentialsToolbarButton: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\QuickSearchShowMiniMenu: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\SearchbarAllowed: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\ShowMicrosoftRewards: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\ShowRecommendationsEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\SplitScreenEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\StandaloneHubsSidebarEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\StartupBoostEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\SyncDisabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\TabServicesEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\TextPredictionEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\TrackingPrevention: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\UserFeedbackAllowed: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\AllowEdgeSwipe: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\AllowEdgeSwipe: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableCharms: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableCharms: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableHelpSticker: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableHelpSticker: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableMFUTracking: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableMFUTracking: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableRecentApps: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableRecentApps: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\TurnOffBackstack: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\TurnOffBackstack: missing",
+              "TimestampText": "16:07:24"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Applied",
+              "Message": "Updated 40 values.",
+              "TimestampText": "16:07:28"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Verified",
+              "Message": "Verified desired values.",
+              "TimestampText": "16:07:28"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Rolled back",
+              "Message": "Rolled back registry values.",
+              "TimestampText": "16:07:28"
+            }
+          ]
+        },
+        {
+          "Stage": "detect-after",
+          "AppliedStatus": "NotApplied",
+          "StatusMessage": "Detected 0 of 40 values (matches: 0, missing: 40).",
+          "OutcomeSummary": "Detect - Success",
+          "CurrentValue": "Multiple values",
+          "TargetValue": "Multiple values",
+          "WasRolledBack": true,
+          "IsMutationAllowed": false,
+          "HasSuccessfulApplyStory": true,
+          "HasSuccessfulRollbackStory": true,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Detected",
+              "Message": "Detected 0 of 40 values (matches: 0, missing: 40).\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\AutoImportAtFirstRun: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\DefaultBrowserSettingEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\DefaultSensorsSetting: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\EdgeCollectionsEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\EdgeFollowEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\EdgeShoppingAssistantEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\HideFirstRunExperience: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\HideRestoreDialogEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\HubsSidebarEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\ImplicitSignInEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\NewTabPageAllowedBackgroundTypes: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\NewTabPageContentEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\NewTabPageHideDefaultTopSites: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\NewTabPageQuickLinksEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\PersonalizationReportingEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\PinBrowserEssentialsToolbarButton: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\QuickSearchShowMiniMenu: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\SearchbarAllowed: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\ShowMicrosoftRewards: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\ShowRecommendationsEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\SplitScreenEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\StandaloneHubsSidebarEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\StartupBoostEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\SyncDisabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\TabServicesEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\TextPredictionEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\TrackingPrevention: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\UserFeedbackAllowed: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\AllowEdgeSwipe: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\AllowEdgeSwipe: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableCharms: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableCharms: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableHelpSticker: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableHelpSticker: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableMFUTracking: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableMFUTracking: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableRecentApps: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableRecentApps: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\TurnOffBackstack: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\TurnOffBackstack: missing",
+              "TimestampText": "16:07:29"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Applied",
+              "Message": "Updated 40 values.",
+              "TimestampText": "16:07:28"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Verified",
+              "Message": "Verified desired values.",
+              "TimestampText": "16:07:28"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Rolled back",
+              "Message": "Rolled back registry values.",
+              "TimestampText": "16:07:28"
+            }
+          ]
+        }
+      ],
+      "StartedAtUtc": "2026-05-07T23:07:24.355392+00:00",
+      "CompletedAtUtc": "2026-05-07T23:07:29.1283472+00:00"
+    }
+  },
+  {
+    "tweak_id": "misc.disable-office-telemetry",
+    "host_exit": 0,
+    "execution_exit": 0,
+    "payload_status": "completed",
+    "report_source": "stdout",
+    "report_parse_error": null,
+    "report_fetch_status": null,
+    "report_app_success": true,
+    "report_success": true,
+    "report_status": "ok-gated-override",
+    "report_summary": "QA-only gated mutation override used; apply/verify path completed and rollback restored the tweak.",
+    "report_contract_status": "ok",
+    "report_contract_summary": "QA card snapshot contract passed.",
+    "report_contract_failures": [],
+    "report_card_present": true,
+    "report_card_has_claim_boundary": true,
+    "report_card_present_fields": [
+      "TweakId",
+      "Name",
+      "Category",
+      "EvidenceClass",
+      "ResearchStatus",
+      "RollbackSnapshotState",
+      "HasClaimBoundary",
+      "WhatWeKnowSummary",
+      "WhatWeDoNotClaimSummary",
+      "ProofLanes"
+    ],
+    "report_card_missing_fields": [],
+    "report_card_proof_lanes": [
+      "docs",
+      "runtime",
+      "source",
+      "rollback"
+    ],
+    "report_card_missing_proof_lanes": [],
+    "report": {
+      "TweakId": "misc.disable-office-telemetry",
+      "TweakName": "Disable Microsoft Office Telemetry",
+      "Success": true,
+      "Status": "ok-gated-override",
+      "Summary": "QA-only gated mutation override used; apply/verify path completed and rollback restored the tweak.",
+      "RollbackRequested": true,
+      "GatedMutationOverrideRequested": true,
+      "GatedMutationOverrideUsed": true,
+      "Card": {
+        "TweakId": "misc.disable-office-telemetry",
+        "Name": "Disable Microsoft Office Telemetry",
+        "Category": "Misc",
+        "Description": "Disables Office telemetry logging, data collection, CEIP opt-in, feedback collection, and telemetry agent tasks for all Office applications.",
+        "FriendlyDescription": "Disables Office telemetry logging, data collection, CEIP opt-in, feedback collection, and telemetry agent tasks for all Office applications.",
+        "RegistryPath": "",
+        "EvidenceClass": "B",
+        "EvidenceClassTitle": "Strong but Decision-Gated",
+        "ResearchStatus": "INTENTIONAL HOLD",
+        "IsMutationAllowed": false,
+        "RollbackSnapshotState": "ready",
+        "RollbackStoryText": "Rollback: Verified via record-restore-story.",
+        "HasClaimBoundary": true,
+        "WhatWeKnowSummary": "Claim: Disables Office telemetry logging, data collection, CEIP opt-in, feedback collection, and telemetry agent tasks for all Office applications. Evidence: The misc documentation names the Office telemetry policy paths, values, and data meanings used by the current Office telemetry card. Rollback: Rollback: Verified via record-restore-story.",
+        "WhatWeDoNotClaimSummary": "Apply gate: Evidence pending Source boundary: Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+        "ProofLanes": [
+          {
+            "Key": "docs",
+            "Label": "DOCS",
+            "State": "ready",
+            "Summary": "The misc documentation names the Office telemetry policy paths, values, and data meanings used by the current Office telemetry card.",
+            "Source": "Validation proof source: C:\\Tools\\AppSmoke\\Docs\\misc\\misc.md"
+          },
+          {
+            "Key": "runtime",
+            "Label": "RUNTIME",
+            "State": "ready",
+            "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+            "Source": ""
+          },
+          {
+            "Key": "source",
+            "Label": "SOURCE",
+            "State": "ready",
+            "Summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+            "Source": "win-config / misc/desc.md#disable-ms-office-telemetry: https://github.com/nohuto/win-config/blob/main/misc/desc.md#disable-ms-office-telemetry"
+          },
+          {
+            "Key": "rollback",
+            "Label": "ROLLBACK",
+            "State": "ready",
+            "Summary": "Rollback: Verified via record-restore-story.",
+            "Source": "record-restore-story"
+          }
+        ],
+        "ReferenceLinks": [
+          {
+            "Title": "Manage the privacy of data monitored by Telemetry in Office",
+            "Url": "https://learn.microsoft.com/en-us/office/compatibility/manage-the-privacy-of-data-monitored-by-telemetry-in-office",
+            "Kind": "Docs"
+          },
+          {
+            "Title": "Docs: Details",
+            "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html#misc.disable-office-telemetry",
+            "Kind": "Details"
+          },
+          {
+            "Title": "Docs: Misc",
+            "Url": "C:\\Tools\\AppSmoke\\Docs\\misc\\misc.md#misc.disable-office-telemetry",
+            "Kind": "Docs"
+          }
+        ]
+      },
+      "Stages": [
+        {
+          "Stage": "detect-before",
+          "AppliedStatus": "NotApplied",
+          "StatusMessage": "Detected 0 of 18 values (matches: 0, missing: 18).",
+          "OutcomeSummary": "Detect - Success",
+          "CurrentValue": "Unknown",
+          "TargetValue": "Multiple values",
+          "WasRolledBack": false,
+          "IsMutationAllowed": false,
+          "HasSuccessfulApplyStory": false,
+          "HasSuccessfulRollbackStory": false,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Detected",
+              "Message": "Detected 0 of 18 values (matches: 0, missing: 18).\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\Common\\QMEnable: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\Common\\Feedback\\Enabled: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\EnableLogging: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\EnableUpload: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedapplications\\accesssolution: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedapplications\\olksolution: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedapplications\\onenotesolution: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedapplications\\pptsolution: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedapplications\\projectsolution: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedapplications\\publishersolution: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedapplications\\visiosolution: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedapplications\\wdsolution: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedapplications\\xlsolution: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedsolutiontypes\\agave: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedsolutiontypes\\appaddins: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedsolutiontypes\\comaddins: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedsolutiontypes\\documentfiles: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedsolutiontypes\\templatefiles: missing",
+              "TimestampText": "16:07:35"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Pending",
+              "Message": "",
+              "TimestampText": "-"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Pending",
+              "Message": "",
+              "TimestampText": "-"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Pending",
+              "Message": "",
+              "TimestampText": "-"
+            }
+          ]
+        },
+        {
+          "Stage": "apply",
+          "AppliedStatus": "Applied",
+          "StatusMessage": "Run completed.",
+          "OutcomeSummary": "Apply - Success",
+          "CurrentValue": "Multiple values",
+          "TargetValue": "Multiple values",
+          "WasRolledBack": false,
+          "IsMutationAllowed": false,
+          "HasSuccessfulApplyStory": true,
+          "HasSuccessfulRollbackStory": false,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Detected",
+              "Message": "Detected 0 of 18 values (matches: 0, missing: 18).\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\Common\\QMEnable: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\Common\\Feedback\\Enabled: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\EnableLogging: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\EnableUpload: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedapplications\\accesssolution: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedapplications\\olksolution: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedapplications\\onenotesolution: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedapplications\\pptsolution: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedapplications\\projectsolution: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedapplications\\publishersolution: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedapplications\\visiosolution: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedapplications\\wdsolution: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedapplications\\xlsolution: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedsolutiontypes\\agave: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedsolutiontypes\\appaddins: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedsolutiontypes\\comaddins: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedsolutiontypes\\documentfiles: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedsolutiontypes\\templatefiles: missing",
+              "TimestampText": "16:07:35"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Applied",
+              "Message": "Updated 18 values.",
+              "TimestampText": "16:07:35"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Verified",
+              "Message": "Verified desired values.",
+              "TimestampText": "16:07:35"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Not required",
+              "Message": "Step not executed.",
+              "TimestampText": "-"
+            }
+          ]
+        },
+        {
+          "Stage": "rollback",
+          "AppliedStatus": "NotApplied",
+          "StatusMessage": "Rolled back registry values.",
+          "OutcomeSummary": "Rollback - Rolled Back",
+          "CurrentValue": "Multiple values",
+          "TargetValue": "Multiple values",
+          "WasRolledBack": true,
+          "IsMutationAllowed": false,
+          "HasSuccessfulApplyStory": true,
+          "HasSuccessfulRollbackStory": true,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Detected",
+              "Message": "Detected 0 of 18 values (matches: 0, missing: 18).\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\Common\\QMEnable: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\Common\\Feedback\\Enabled: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\EnableLogging: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\EnableUpload: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedapplications\\accesssolution: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedapplications\\olksolution: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedapplications\\onenotesolution: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedapplications\\pptsolution: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedapplications\\projectsolution: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedapplications\\publishersolution: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedapplications\\visiosolution: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedapplications\\wdsolution: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedapplications\\xlsolution: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedsolutiontypes\\agave: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedsolutiontypes\\appaddins: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedsolutiontypes\\comaddins: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedsolutiontypes\\documentfiles: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedsolutiontypes\\templatefiles: missing",
+              "TimestampText": "16:07:35"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Applied",
+              "Message": "Updated 18 values.",
+              "TimestampText": "16:07:35"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Verified",
+              "Message": "Verified desired values.",
+              "TimestampText": "16:07:35"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Rolled back",
+              "Message": "Rolled back registry values.",
+              "TimestampText": "16:07:35"
+            }
+          ]
+        },
+        {
+          "Stage": "detect-after",
+          "AppliedStatus": "NotApplied",
+          "StatusMessage": "Detected 0 of 18 values (matches: 0, missing: 18).",
+          "OutcomeSummary": "Detect - Success",
+          "CurrentValue": "Multiple values",
+          "TargetValue": "Multiple values",
+          "WasRolledBack": true,
+          "IsMutationAllowed": false,
+          "HasSuccessfulApplyStory": true,
+          "HasSuccessfulRollbackStory": true,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Detected",
+              "Message": "Detected 0 of 18 values (matches: 0, missing: 18).\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\Common\\QMEnable: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\Common\\Feedback\\Enabled: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\EnableLogging: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\EnableUpload: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedapplications\\accesssolution: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedapplications\\olksolution: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedapplications\\onenotesolution: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedapplications\\pptsolution: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedapplications\\projectsolution: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedapplications\\publishersolution: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedapplications\\visiosolution: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedapplications\\wdsolution: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedapplications\\xlsolution: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedsolutiontypes\\agave: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedsolutiontypes\\appaddins: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedsolutiontypes\\comaddins: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedsolutiontypes\\documentfiles: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedsolutiontypes\\templatefiles: missing",
+              "TimestampText": "16:07:36"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Applied",
+              "Message": "Updated 18 values.",
+              "TimestampText": "16:07:35"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Verified",
+              "Message": "Verified desired values.",
+              "TimestampText": "16:07:35"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Rolled back",
+              "Message": "Rolled back registry values.",
+              "TimestampText": "16:07:35"
+            }
+          ]
+        }
+      ],
+      "StartedAtUtc": "2026-05-07T23:07:35.735799+00:00",
+      "CompletedAtUtc": "2026-05-07T23:07:36.0580313+00:00"
+    }
+  },
+  {
+    "tweak_id": "misc.disable-onedrive",
+    "host_exit": 0,
+    "execution_exit": 0,
+    "payload_status": "completed",
+    "report_source": "stdout",
+    "report_parse_error": null,
+    "report_fetch_status": null,
+    "report_app_success": true,
+    "report_success": true,
+    "report_status": "ok-gated-override",
+    "report_summary": "QA-only gated mutation override used; apply/verify path completed and rollback restored the tweak.",
+    "report_contract_status": "ok",
+    "report_contract_summary": "QA card snapshot contract passed.",
+    "report_contract_failures": [],
+    "report_card_present": true,
+    "report_card_has_claim_boundary": true,
+    "report_card_present_fields": [
+      "TweakId",
+      "Name",
+      "Category",
+      "EvidenceClass",
+      "ResearchStatus",
+      "RollbackSnapshotState",
+      "HasClaimBoundary",
+      "WhatWeKnowSummary",
+      "WhatWeDoNotClaimSummary",
+      "ProofLanes"
+    ],
+    "report_card_missing_fields": [],
+    "report_card_proof_lanes": [
+      "docs",
+      "runtime",
+      "source",
+      "rollback"
+    ],
+    "report_card_missing_proof_lanes": [],
+    "report": {
+      "TweakId": "misc.disable-onedrive",
+      "TweakName": "Disable OneDrive",
+      "Success": true,
+      "Status": "ok-gated-override",
+      "Summary": "QA-only gated mutation override used; apply/verify path completed and rollback restored the tweak.",
+      "RollbackRequested": true,
+      "GatedMutationOverrideRequested": true,
+      "GatedMutationOverrideUsed": true,
+      "Card": {
+        "TweakId": "misc.disable-onedrive",
+        "Name": "Disable OneDrive",
+        "Category": "Misc",
+        "Description": "Writes OneDrive policy and Explorer values that disable default-save and sync features, set PreventNetworkTrafficPreUserSignIn, and unpin OneDrive from File Explorer.",
+        "FriendlyDescription": "Writes OneDrive policy and Explorer values that disable default-save and sync features, set PreventNetworkTrafficPreUserSignIn, and unpin OneDrive from File Explorer.",
+        "RegistryPath": "",
+        "EvidenceClass": "B",
+        "EvidenceClassTitle": "Strong but Decision-Gated",
+        "ResearchStatus": "INTENTIONAL HOLD",
+        "IsMutationAllowed": false,
+        "RollbackSnapshotState": "ready",
+        "RollbackStoryText": "Rollback: Verified via record-restore-story.",
+        "HasClaimBoundary": true,
+        "WhatWeKnowSummary": "Claim: Writes OneDrive policy and Explorer values that disable default-save and sync features, set PreventNetworkTrafficPreUserSignIn, and unpin OneDrive from File Explorer. Evidence: The misc documentation maps DisableLibrariesDefaultSaveToOneDrive, DisableFileSync, DisableFileSyncNGSC, DisableMeteredNetworkFileSync, PreventNetworkTrafficPreUserSignIn, and the Explorer namespace pin values to the OneDrive disable behavior. Rollback: Rollback: Verified via record-restore-story.",
+        "WhatWeDoNotClaimSummary": "Apply gate: Evidence pending Source boundary: Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+        "ProofLanes": [
+          {
+            "Key": "docs",
+            "Label": "DOCS",
+            "State": "ready",
+            "Summary": "The misc documentation maps DisableLibrariesDefaultSaveToOneDrive, DisableFileSync, DisableFileSyncNGSC, DisableMeteredNetworkFileSync, PreventNetworkTrafficPreUserSignIn, and the Explorer namespace pin values to the OneDrive disable behavior.",
+            "Source": "Validation proof source: C:\\Tools\\AppSmoke\\Docs\\misc\\misc.md"
+          },
+          {
+            "Key": "runtime",
+            "Label": "RUNTIME",
+            "State": "ready",
+            "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+            "Source": ""
+          },
+          {
+            "Key": "source",
+            "Label": "SOURCE",
+            "State": "ready",
+            "Summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+            "Source": "win-config / misc/desc.md: https://github.com/nohuto/win-config/blob/main/misc/desc.md"
+          },
+          {
+            "Key": "rollback",
+            "Label": "ROLLBACK",
+            "State": "ready",
+            "Summary": "Rollback: Verified via record-restore-story.",
+            "Source": "record-restore-story"
+          }
+        ],
+        "ReferenceLinks": [
+          {
+            "Title": "Docs: Details",
+            "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html#misc.disable-onedrive",
+            "Kind": "Details"
+          },
+          {
+            "Title": "Docs: Misc",
+            "Url": "C:\\Tools\\AppSmoke\\Docs\\misc\\misc.md#misc.disable-onedrive",
+            "Kind": "Docs"
+          }
+        ]
+      },
+      "Stages": [
+        {
+          "Stage": "detect-before",
+          "AppliedStatus": "NotApplied",
+          "StatusMessage": "Detected 2 of 7 values (matches: 0, missing: 5).",
+          "OutcomeSummary": "Detect - Success",
+          "CurrentValue": "Unknown",
+          "TargetValue": "Multiple values",
+          "WasRolledBack": false,
+          "IsMutationAllowed": false,
+          "HasSuccessfulApplyStory": false,
+          "HasSuccessfulRollbackStory": false,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Detected",
+              "Message": "Detected 2 of 7 values (matches: 0, missing: 5).\nEntries:\n- HKCU\\Software\\Classes\\CLSID\\{018D5C66-4533-4307-9B53-224DE2ED1FE6}\\System.IsPinnedToNameSpaceTree: 1 -> 0\n- HKCU\\Software\\Classes\\Wow6432Node\\CLSID\\{018D5C66-4533-4307-9B53-224DE2ED1FE6}\\System.IsPinnedToNameSpaceTree: 1 -> 0\n- HKLM\\SOFTWARE\\Microsoft\\OneDrive\\PreventNetworkTrafficPreUserSignIn: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\OneDrive\\DisableFileSync: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\OneDrive\\DisableFileSyncNGSC: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\OneDrive\\DisableLibrariesDefaultSaveToOneDrive: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\OneDrive\\DisableMeteredNetworkFileSync: missing",
+              "TimestampText": "16:07:44"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Pending",
+              "Message": "",
+              "TimestampText": "-"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Pending",
+              "Message": "",
+              "TimestampText": "-"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Pending",
+              "Message": "",
+              "TimestampText": "-"
+            }
+          ]
+        },
+        {
+          "Stage": "apply",
+          "AppliedStatus": "Applied",
+          "StatusMessage": "Run completed.",
+          "OutcomeSummary": "Apply - Success",
+          "CurrentValue": "Multiple values",
+          "TargetValue": "Multiple values",
+          "WasRolledBack": false,
+          "IsMutationAllowed": false,
+          "HasSuccessfulApplyStory": true,
+          "HasSuccessfulRollbackStory": false,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Detected",
+              "Message": "Detected 2 of 7 values (matches: 0, missing: 5).\nEntries:\n- HKCU\\Software\\Classes\\CLSID\\{018D5C66-4533-4307-9B53-224DE2ED1FE6}\\System.IsPinnedToNameSpaceTree: 1 -> 0\n- HKCU\\Software\\Classes\\Wow6432Node\\CLSID\\{018D5C66-4533-4307-9B53-224DE2ED1FE6}\\System.IsPinnedToNameSpaceTree: 1 -> 0\n- HKLM\\SOFTWARE\\Microsoft\\OneDrive\\PreventNetworkTrafficPreUserSignIn: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\OneDrive\\DisableFileSync: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\OneDrive\\DisableFileSyncNGSC: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\OneDrive\\DisableLibrariesDefaultSaveToOneDrive: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\OneDrive\\DisableMeteredNetworkFileSync: missing",
+              "TimestampText": "16:07:45"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Applied",
+              "Message": "Updated 7 values.",
+              "TimestampText": "16:07:45"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Verified",
+              "Message": "Verified desired values.",
+              "TimestampText": "16:07:45"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Not required",
+              "Message": "Step not executed.",
+              "TimestampText": "-"
+            }
+          ]
+        },
+        {
+          "Stage": "rollback",
+          "AppliedStatus": "NotApplied",
+          "StatusMessage": "Rolled back registry values.",
+          "OutcomeSummary": "Rollback - Rolled Back",
+          "CurrentValue": "Multiple values",
+          "TargetValue": "Multiple values",
+          "WasRolledBack": true,
+          "IsMutationAllowed": false,
+          "HasSuccessfulApplyStory": true,
+          "HasSuccessfulRollbackStory": true,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Detected",
+              "Message": "Detected 2 of 7 values (matches: 0, missing: 5).\nEntries:\n- HKCU\\Software\\Classes\\CLSID\\{018D5C66-4533-4307-9B53-224DE2ED1FE6}\\System.IsPinnedToNameSpaceTree: 1 -> 0\n- HKCU\\Software\\Classes\\Wow6432Node\\CLSID\\{018D5C66-4533-4307-9B53-224DE2ED1FE6}\\System.IsPinnedToNameSpaceTree: 1 -> 0\n- HKLM\\SOFTWARE\\Microsoft\\OneDrive\\PreventNetworkTrafficPreUserSignIn: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\OneDrive\\DisableFileSync: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\OneDrive\\DisableFileSyncNGSC: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\OneDrive\\DisableLibrariesDefaultSaveToOneDrive: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\OneDrive\\DisableMeteredNetworkFileSync: missing",
+              "TimestampText": "16:07:45"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Applied",
+              "Message": "Updated 7 values.",
+              "TimestampText": "16:07:45"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Verified",
+              "Message": "Verified desired values.",
+              "TimestampText": "16:07:45"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Rolled back",
+              "Message": "Rolled back registry values.",
+              "TimestampText": "16:07:45"
+            }
+          ]
+        },
+        {
+          "Stage": "detect-after",
+          "AppliedStatus": "NotApplied",
+          "StatusMessage": "Detected 2 of 7 values (matches: 0, missing: 5).",
+          "OutcomeSummary": "Detect - Success",
+          "CurrentValue": "Multiple values",
+          "TargetValue": "Multiple values",
+          "WasRolledBack": true,
+          "IsMutationAllowed": false,
+          "HasSuccessfulApplyStory": true,
+          "HasSuccessfulRollbackStory": true,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Detected",
+              "Message": "Detected 2 of 7 values (matches: 0, missing: 5).\nEntries:\n- HKCU\\Software\\Classes\\CLSID\\{018D5C66-4533-4307-9B53-224DE2ED1FE6}\\System.IsPinnedToNameSpaceTree: 1 -> 0\n- HKCU\\Software\\Classes\\Wow6432Node\\CLSID\\{018D5C66-4533-4307-9B53-224DE2ED1FE6}\\System.IsPinnedToNameSpaceTree: 1 -> 0\n- HKLM\\SOFTWARE\\Microsoft\\OneDrive\\PreventNetworkTrafficPreUserSignIn: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\OneDrive\\DisableFileSync: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\OneDrive\\DisableFileSyncNGSC: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\OneDrive\\DisableLibrariesDefaultSaveToOneDrive: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\OneDrive\\DisableMeteredNetworkFileSync: missing",
+              "TimestampText": "16:07:45"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Applied",
+              "Message": "Updated 7 values.",
+              "TimestampText": "16:07:45"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Verified",
+              "Message": "Verified desired values.",
+              "TimestampText": "16:07:45"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Rolled back",
+              "Message": "Rolled back registry values.",
+              "TimestampText": "16:07:45"
+            }
+          ]
+        }
+      ],
+      "StartedAtUtc": "2026-05-07T23:07:42.0988657+00:00",
+      "CompletedAtUtc": "2026-05-07T23:07:45.5577464+00:00"
+    }
+  },
+  {
+    "tweak_id": "misc.disable-visual-studio-telemetry",
+    "host_exit": 0,
+    "execution_exit": 0,
+    "payload_status": "completed",
+    "report_source": "stdout",
+    "report_parse_error": null,
+    "report_fetch_status": null,
+    "report_app_success": true,
+    "report_success": true,
+    "report_status": "ok-gated-override",
+    "report_summary": "QA-only gated mutation override used; apply/verify path completed and rollback restored the tweak.",
+    "report_contract_status": "ok",
+    "report_contract_summary": "QA card snapshot contract passed.",
+    "report_contract_failures": [],
+    "report_card_present": true,
+    "report_card_has_claim_boundary": true,
+    "report_card_present_fields": [
+      "TweakId",
+      "Name",
+      "Category",
+      "EvidenceClass",
+      "ResearchStatus",
+      "RollbackSnapshotState",
+      "HasClaimBoundary",
+      "WhatWeKnowSummary",
+      "WhatWeDoNotClaimSummary",
+      "ProofLanes"
+    ],
+    "report_card_missing_fields": [],
+    "report_card_proof_lanes": [
+      "docs",
+      "runtime",
+      "source",
+      "rollback"
+    ],
+    "report_card_missing_proof_lanes": [],
+    "report": {
+      "TweakId": "misc.disable-visual-studio-telemetry",
+      "TweakName": "Disable Visual Studio Telemetry",
+      "Success": true,
+      "Status": "ok-gated-override",
+      "Summary": "QA-only gated mutation override used; apply/verify path completed and rollback restored the tweak.",
+      "RollbackRequested": true,
+      "GatedMutationOverrideRequested": true,
+      "GatedMutationOverrideUsed": true,
+      "Card": {
+        "TweakId": "misc.disable-visual-studio-telemetry",
+        "Name": "Disable Visual Studio Telemetry",
+        "Category": "Misc",
+        "Description": "Disables Visual Studio telemetry, SQM data collection, IntelliCode remote analysis, and feedback features for VS 2015-2022.",
+        "FriendlyDescription": "Disables Visual Studio telemetry, SQM data collection, IntelliCode remote analysis, and feedback features for VS 2015-2022.",
+        "RegistryPath": "",
+        "EvidenceClass": "B",
+        "EvidenceClassTitle": "Strong but Decision-Gated",
+        "ResearchStatus": "INTENTIONAL HOLD",
+        "IsMutationAllowed": false,
+        "RollbackSnapshotState": "ready",
+        "RollbackStoryText": "Rollback: Verified via record-restore-story.",
+        "HasClaimBoundary": true,
+        "WhatWeKnowSummary": "Claim: Disables Visual Studio telemetry, SQM data collection, IntelliCode remote analysis, and feedback features for VS 2015-2022. Evidence: The misc documentation names the Visual Studio telemetry, SQM, feedback, and remote-analysis controls that the current app card writes or audits. Rollback: Rollback: Verified via record-restore-story.",
+        "WhatWeDoNotClaimSummary": "Apply gate: Evidence pending Source boundary: Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+        "ProofLanes": [
+          {
+            "Key": "docs",
+            "Label": "DOCS",
+            "State": "ready",
+            "Summary": "The misc documentation names the Visual Studio telemetry, SQM, feedback, and remote-analysis controls that the current app card writes or audits.",
+            "Source": "Validation proof source: C:\\Tools\\AppSmoke\\Docs\\misc\\misc.md"
+          },
+          {
+            "Key": "runtime",
+            "Label": "RUNTIME",
+            "State": "ready",
+            "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+            "Source": ""
+          },
+          {
+            "Key": "source",
+            "Label": "SOURCE",
+            "State": "ready",
+            "Summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+            "Source": "win-config / misc/desc.md#disable-vs-telemetry: https://github.com/nohuto/win-config/blob/main/misc/desc.md#disable-vs-telemetry"
+          },
+          {
+            "Key": "rollback",
+            "Label": "ROLLBACK",
+            "State": "ready",
+            "Summary": "Rollback: Verified via record-restore-story.",
+            "Source": "record-restore-story"
+          }
+        ],
+        "ReferenceLinks": [
+          {
+            "Title": "Docs: Details",
+            "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html#misc.disable-visual-studio-telemetry",
+            "Kind": "Details"
+          },
+          {
+            "Title": "Docs: Misc",
+            "Url": "C:\\Tools\\AppSmoke\\Docs\\misc\\misc.md#misc.disable-visual-studio-telemetry",
+            "Kind": "Docs"
+          }
+        ]
+      },
+      "Stages": [
+        {
+          "Stage": "detect-before",
+          "AppliedStatus": "NotApplied",
+          "StatusMessage": "Detected 0 of 8 values (matches: 0, missing: 8).",
+          "OutcomeSummary": "Detect - Success",
+          "CurrentValue": "Unknown",
+          "TargetValue": "Multiple values",
+          "WasRolledBack": false,
+          "IsMutationAllowed": false,
+          "HasSuccessfulApplyStory": false,
+          "HasSuccessfulRollbackStory": false,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Detected",
+              "Message": "Detected 0 of 8 values (matches: 0, missing: 8).\nEntries:\n- HKLM\\SOFTWARE\\Microsoft\\VSCommon\\14.0\\SQM\\OptIn: missing\n- HKLM\\SOFTWARE\\Microsoft\\VSCommon\\15.0\\SQM\\OptIn: missing\n- HKLM\\SOFTWARE\\Microsoft\\VSCommon\\16.0\\SQM\\OptIn: missing\n- HKLM\\SOFTWARE\\Microsoft\\VSCommon\\17.0\\SQM\\OptIn: missing\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\VisualStudio\\Feedback\\DisableEmailInput: missing\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\VisualStudio\\Feedback\\DisableFeedbackDialog: missing\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\VisualStudio\\Feedback\\DisableScreenshotCapture: missing\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\VisualStudio\\SQM\\OptIn: missing",
+              "TimestampText": "16:07:55"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Pending",
+              "Message": "",
+              "TimestampText": "-"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Pending",
+              "Message": "",
+              "TimestampText": "-"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Pending",
+              "Message": "",
+              "TimestampText": "-"
+            }
+          ]
+        },
+        {
+          "Stage": "apply",
+          "AppliedStatus": "Applied",
+          "StatusMessage": "Run completed.",
+          "OutcomeSummary": "Apply - Success",
+          "CurrentValue": "Multiple values",
+          "TargetValue": "Multiple values",
+          "WasRolledBack": false,
+          "IsMutationAllowed": false,
+          "HasSuccessfulApplyStory": true,
+          "HasSuccessfulRollbackStory": false,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Detected",
+              "Message": "Detected 0 of 8 values (matches: 0, missing: 8).\nEntries:\n- HKLM\\SOFTWARE\\Microsoft\\VSCommon\\14.0\\SQM\\OptIn: missing\n- HKLM\\SOFTWARE\\Microsoft\\VSCommon\\15.0\\SQM\\OptIn: missing\n- HKLM\\SOFTWARE\\Microsoft\\VSCommon\\16.0\\SQM\\OptIn: missing\n- HKLM\\SOFTWARE\\Microsoft\\VSCommon\\17.0\\SQM\\OptIn: missing\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\VisualStudio\\Feedback\\DisableEmailInput: missing\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\VisualStudio\\Feedback\\DisableFeedbackDialog: missing\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\VisualStudio\\Feedback\\DisableScreenshotCapture: missing\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\VisualStudio\\SQM\\OptIn: missing",
+              "TimestampText": "16:07:55"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Applied",
+              "Message": "Updated 8 values.",
+              "TimestampText": "16:07:55"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Verified",
+              "Message": "Verified desired values.",
+              "TimestampText": "16:07:55"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Not required",
+              "Message": "Step not executed.",
+              "TimestampText": "-"
+            }
+          ]
+        },
+        {
+          "Stage": "rollback",
+          "AppliedStatus": "NotApplied",
+          "StatusMessage": "Rolled back registry values.",
+          "OutcomeSummary": "Rollback - Rolled Back",
+          "CurrentValue": "Multiple values",
+          "TargetValue": "Multiple values",
+          "WasRolledBack": true,
+          "IsMutationAllowed": false,
+          "HasSuccessfulApplyStory": true,
+          "HasSuccessfulRollbackStory": true,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Detected",
+              "Message": "Detected 0 of 8 values (matches: 0, missing: 8).\nEntries:\n- HKLM\\SOFTWARE\\Microsoft\\VSCommon\\14.0\\SQM\\OptIn: missing\n- HKLM\\SOFTWARE\\Microsoft\\VSCommon\\15.0\\SQM\\OptIn: missing\n- HKLM\\SOFTWARE\\Microsoft\\VSCommon\\16.0\\SQM\\OptIn: missing\n- HKLM\\SOFTWARE\\Microsoft\\VSCommon\\17.0\\SQM\\OptIn: missing\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\VisualStudio\\Feedback\\DisableEmailInput: missing\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\VisualStudio\\Feedback\\DisableFeedbackDialog: missing\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\VisualStudio\\Feedback\\DisableScreenshotCapture: missing\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\VisualStudio\\SQM\\OptIn: missing",
+              "TimestampText": "16:07:55"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Applied",
+              "Message": "Updated 8 values.",
+              "TimestampText": "16:07:55"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Verified",
+              "Message": "Verified desired values.",
+              "TimestampText": "16:07:55"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Rolled back",
+              "Message": "Rolled back registry values.",
+              "TimestampText": "16:07:55"
+            }
+          ]
+        },
+        {
+          "Stage": "detect-after",
+          "AppliedStatus": "NotApplied",
+          "StatusMessage": "Detected 0 of 8 values (matches: 0, missing: 8).",
+          "OutcomeSummary": "Detect - Success",
+          "CurrentValue": "Multiple values",
+          "TargetValue": "Multiple values",
+          "WasRolledBack": true,
+          "IsMutationAllowed": false,
+          "HasSuccessfulApplyStory": true,
+          "HasSuccessfulRollbackStory": true,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Detected",
+              "Message": "Detected 0 of 8 values (matches: 0, missing: 8).\nEntries:\n- HKLM\\SOFTWARE\\Microsoft\\VSCommon\\14.0\\SQM\\OptIn: missing\n- HKLM\\SOFTWARE\\Microsoft\\VSCommon\\15.0\\SQM\\OptIn: missing\n- HKLM\\SOFTWARE\\Microsoft\\VSCommon\\16.0\\SQM\\OptIn: missing\n- HKLM\\SOFTWARE\\Microsoft\\VSCommon\\17.0\\SQM\\OptIn: missing\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\VisualStudio\\Feedback\\DisableEmailInput: missing\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\VisualStudio\\Feedback\\DisableFeedbackDialog: missing\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\VisualStudio\\Feedback\\DisableScreenshotCapture: missing\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\VisualStudio\\SQM\\OptIn: missing",
+              "TimestampText": "16:07:56"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Applied",
+              "Message": "Updated 8 values.",
+              "TimestampText": "16:07:55"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Verified",
+              "Message": "Verified desired values.",
+              "TimestampText": "16:07:55"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Rolled back",
+              "Message": "Rolled back registry values.",
+              "TimestampText": "16:07:55"
+            }
+          ]
+        }
+      ],
+      "StartedAtUtc": "2026-05-07T23:07:52.4819303+00:00",
+      "CompletedAtUtc": "2026-05-07T23:07:56.064977+00:00"
+    }
+  },
+  {
+    "tweak_id": "misc.disable-vscode-telemetry",
+    "host_exit": 0,
+    "execution_exit": 0,
+    "payload_status": "completed",
+    "report_source": "stdout",
+    "report_parse_error": null,
+    "report_fetch_status": null,
+    "report_app_success": true,
+    "report_success": true,
+    "report_status": "ok-gated-override",
+    "report_summary": "QA-only gated mutation override used; apply/verify path completed and rollback restored the tweak.",
+    "report_contract_status": "ok",
+    "report_contract_summary": "QA card snapshot contract passed.",
+    "report_contract_failures": [],
+    "report_card_present": true,
+    "report_card_has_claim_boundary": true,
+    "report_card_present_fields": [
+      "TweakId",
+      "Name",
+      "Category",
+      "EvidenceClass",
+      "ResearchStatus",
+      "RollbackSnapshotState",
+      "HasClaimBoundary",
+      "WhatWeKnowSummary",
+      "WhatWeDoNotClaimSummary",
+      "ProofLanes"
+    ],
+    "report_card_missing_fields": [],
+    "report_card_proof_lanes": [
+      "docs",
+      "runtime",
+      "source",
+      "rollback"
+    ],
+    "report_card_missing_proof_lanes": [],
+    "report": {
+      "TweakId": "misc.disable-vscode-telemetry",
+      "TweakName": "VS Code Telemetry & Online Features",
+      "Success": true,
+      "Status": "ok-gated-override",
+      "Summary": "QA-only gated mutation override used; apply/verify path completed and rollback restored the tweak.",
+      "RollbackRequested": true,
+      "GatedMutationOverrideRequested": true,
+      "GatedMutationOverrideUsed": true,
+      "Card": {
+        "TweakId": "misc.disable-vscode-telemetry",
+        "Name": "VS Code Telemetry & Online Features",
+        "Category": "Misc",
+        "Description": "Choose which VS Code user-settings keys this tweak writes for telemetry, experiments, updates, recommendations, autofetch, and npm package lookups.",
+        "FriendlyDescription": "This only changes your VS Code user settings file. It does not touch Windows services or block network traffic system-wide.",
+        "RegistryPath": "",
+        "EvidenceClass": "B",
+        "EvidenceClassTitle": "Strong but Decision-Gated",
+        "ResearchStatus": "INTENTIONAL HOLD",
+        "IsMutationAllowed": false,
+        "RollbackSnapshotState": "ready",
+        "RollbackStoryText": "Rollback: Verified via record-restore-story.",
+        "HasClaimBoundary": true,
+        "WhatWeKnowSummary": "Claim: This only changes your VS Code user settings file. It does not touch Windows services or block network traffic system-wide. Evidence: The misc documentation maps the VS Code settings profile to telemetry level, update mode, online experiments, git/npm online fetches, and recommendation controls. Rollback: Rollback: Verified via record-restore-story.",
+        "WhatWeDoNotClaimSummary": "Apply gate: Evidence pending",
+        "ProofLanes": [
+          {
+            "Key": "docs",
+            "Label": "DOCS",
+            "State": "ready",
+            "Summary": "The misc documentation maps the VS Code settings profile to telemetry level, update mode, online experiments, git/npm online fetches, and recommendation controls.",
+            "Source": "Validation proof source: C:\\Tools\\AppSmoke\\Docs\\misc\\misc.md"
+          },
+          {
+            "Key": "runtime",
+            "Label": "RUNTIME",
+            "State": "ready",
+            "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+            "Source": ""
+          },
+          {
+            "Key": "source",
+            "Label": "SOURCE",
+            "State": "ready",
+            "Summary": "No upstream nohuto source link is attached to this record.",
+            "Source": ""
+          },
+          {
+            "Key": "rollback",
+            "Label": "ROLLBACK",
+            "State": "ready",
+            "Summary": "Rollback: Verified via record-restore-story.",
+            "Source": "record-restore-story"
+          }
+        ],
+        "ReferenceLinks": [
+          {
+            "Title": "Docs: Details (missing)",
+            "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
+            "Kind": "Details"
+          },
+          {
+            "Title": "Docs: Misc (section missing)",
+            "Url": "C:\\Tools\\AppSmoke\\Docs\\misc\\misc.md",
+            "Kind": "Docs"
+          },
+          {
+            "Title": "VS Code telemetry docs",
+            "Url": "https://code.visualstudio.com/docs/getstarted/telemetry",
+            "Kind": "Docs"
+          },
+          {
+            "Title": "VS Code update behavior",
+            "Url": "https://code.visualstudio.com/docs/setup/setup-overview#_updates",
+            "Kind": "Docs"
+          }
+        ]
+      },
+      "Stages": [
+        {
+          "Stage": "detect-before",
+          "AppliedStatus": "NotApplied",
+          "StatusMessage": "Current profile is 'VS Code default'. Selected profile is 'Privacy-focused'.\nManaged settings: extensions.autoCheckUpdates, extensions.autoUpdate, extensions.ignoreRecommendations, git.autofetch, npm.fetchOnlinePackageInfo, telemetry.telemetryLevel, update.mode, update.showReleaseNotes, workbench.enableExperiments.",
+          "OutcomeSummary": "Detect - Success",
+          "CurrentValue": "VS Code default",
+          "TargetValue": "Privacy-focused",
+          "WasRolledBack": false,
+          "IsMutationAllowed": false,
+          "HasSuccessfulApplyStory": false,
+          "HasSuccessfulRollbackStory": false,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Detected",
+              "Message": "Current profile is 'VS Code default'. Selected profile is 'Privacy-focused'.\nManaged settings: extensions.autoCheckUpdates, extensions.autoUpdate, extensions.ignoreRecommendations, git.autofetch, npm.fetchOnlinePackageInfo, telemetry.telemetryLevel, update.mode, update.showReleaseNotes, workbench.enableExperiments.",
+              "TimestampText": "16:08:02"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Pending",
+              "Message": "",
+              "TimestampText": "-"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Pending",
+              "Message": "",
+              "TimestampText": "-"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Pending",
+              "Message": "",
+              "TimestampText": "-"
+            }
+          ]
+        },
+        {
+          "Stage": "apply",
+          "AppliedStatus": "Applied",
+          "StatusMessage": "Run completed.",
+          "OutcomeSummary": "Apply - Success",
+          "CurrentValue": "Privacy-focused",
+          "TargetValue": "Privacy-focused",
+          "WasRolledBack": false,
+          "IsMutationAllowed": false,
+          "HasSuccessfulApplyStory": true,
+          "HasSuccessfulRollbackStory": false,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Detected",
+              "Message": "Current profile is 'VS Code default'. Selected profile is 'Privacy-focused'.\nManaged settings: extensions.autoCheckUpdates, extensions.autoUpdate, extensions.ignoreRecommendations, git.autofetch, npm.fetchOnlinePackageInfo, telemetry.telemetryLevel, update.mode, update.showReleaseNotes, workbench.enableExperiments.",
+              "TimestampText": "16:08:03"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Applied",
+              "Message": "Applied profile 'Privacy-focused'.",
+              "TimestampText": "16:08:03"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Verified",
+              "Message": "Verified profile 'Privacy-focused'.",
+              "TimestampText": "16:08:03"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Not required",
+              "Message": "Step not executed.",
+              "TimestampText": "-"
+            }
+          ]
+        },
+        {
+          "Stage": "rollback",
+          "AppliedStatus": "NotApplied",
+          "StatusMessage": "Removed settings.json to restore the pre-tweak state.",
+          "OutcomeSummary": "Rollback - Rolled Back",
+          "CurrentValue": "VS Code default",
+          "TargetValue": "Privacy-focused",
+          "WasRolledBack": true,
+          "IsMutationAllowed": false,
+          "HasSuccessfulApplyStory": true,
+          "HasSuccessfulRollbackStory": true,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Detected",
+              "Message": "Current profile is 'VS Code default'. Selected profile is 'Privacy-focused'.\nManaged settings: extensions.autoCheckUpdates, extensions.autoUpdate, extensions.ignoreRecommendations, git.autofetch, npm.fetchOnlinePackageInfo, telemetry.telemetryLevel, update.mode, update.showReleaseNotes, workbench.enableExperiments.",
+              "TimestampText": "16:08:03"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Applied",
+              "Message": "Applied profile 'Privacy-focused'.",
+              "TimestampText": "16:08:03"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Verified",
+              "Message": "Verified profile 'Privacy-focused'.",
+              "TimestampText": "16:08:03"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Rolled back",
+              "Message": "Removed settings.json to restore the pre-tweak state.",
+              "TimestampText": "16:08:03"
+            }
+          ]
+        },
+        {
+          "Stage": "detect-after",
+          "AppliedStatus": "NotApplied",
+          "StatusMessage": "Current profile is 'VS Code default'. Selected profile is 'Privacy-focused'.\nManaged settings: extensions.autoCheckUpdates, extensions.autoUpdate, extensions.ignoreRecommendations, git.autofetch, npm.fetchOnlinePackageInfo, telemetry.telemetryLevel, update.mode, update.showReleaseNotes, workbench.enableExperiments.",
+          "OutcomeSummary": "Detect - Success",
+          "CurrentValue": "VS Code default",
+          "TargetValue": "Privacy-focused",
+          "WasRolledBack": true,
+          "IsMutationAllowed": false,
+          "HasSuccessfulApplyStory": true,
+          "HasSuccessfulRollbackStory": true,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Detected",
+              "Message": "Current profile is 'VS Code default'. Selected profile is 'Privacy-focused'.\nManaged settings: extensions.autoCheckUpdates, extensions.autoUpdate, extensions.ignoreRecommendations, git.autofetch, npm.fetchOnlinePackageInfo, telemetry.telemetryLevel, update.mode, update.showReleaseNotes, workbench.enableExperiments.",
+              "TimestampText": "16:08:03"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Applied",
+              "Message": "Applied profile 'Privacy-focused'.",
+              "TimestampText": "16:08:03"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Verified",
+              "Message": "Verified profile 'Privacy-focused'.",
+              "TimestampText": "16:08:03"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Rolled back",
+              "Message": "Removed settings.json to restore the pre-tweak state.",
+              "TimestampText": "16:08:03"
+            }
+          ]
+        }
+      ],
+      "StartedAtUtc": "2026-05-07T23:08:02.9545911+00:00",
+      "CompletedAtUtc": "2026-05-07T23:08:03.3873734+00:00"
+    }
+  },
+  {
+    "tweak_id": "misc.optimize-7zip-settings",
+    "host_exit": 0,
+    "execution_exit": 0,
+    "payload_status": "completed",
+    "report_source": "stdout",
+    "report_parse_error": null,
+    "report_fetch_status": null,
+    "report_app_success": true,
+    "report_success": true,
+    "report_status": "ok-gated-override",
+    "report_summary": "QA-only gated mutation override used; apply/verify path completed and rollback restored the tweak.",
+    "report_contract_status": "ok",
+    "report_contract_summary": "QA card snapshot contract passed.",
+    "report_contract_failures": [],
+    "report_card_present": true,
+    "report_card_has_claim_boundary": true,
+    "report_card_present_fields": [
+      "TweakId",
+      "Name",
+      "Category",
+      "EvidenceClass",
+      "ResearchStatus",
+      "RollbackSnapshotState",
+      "HasClaimBoundary",
+      "WhatWeKnowSummary",
+      "WhatWeDoNotClaimSummary",
+      "ProofLanes"
+    ],
+    "report_card_missing_fields": [],
+    "report_card_proof_lanes": [
+      "docs",
+      "runtime",
+      "source",
+      "rollback"
+    ],
+    "report_card_missing_proof_lanes": [],
+    "report": {
+      "TweakId": "misc.optimize-7zip-settings",
+      "TweakName": "Configure 7-Zip Context Menu Settings",
+      "Success": true,
+      "Status": "ok-gated-override",
+      "Summary": "QA-only gated mutation override used; apply/verify path completed and rollback restored the tweak.",
+      "RollbackRequested": true,
+      "GatedMutationOverrideRequested": true,
+      "GatedMutationOverrideUsed": true,
+      "Card": {
+        "TweakId": "misc.optimize-7zip-settings",
+        "Name": "Configure 7-Zip Context Menu Settings",
+        "Category": "Misc",
+        "Description": "Sets the 7-Zip context-menu values for CascadedMenu, ElimDupExtract, MenuIcons, and WriteZoneIdExtract.",
+        "FriendlyDescription": "Sets the 7-Zip context-menu values for CascadedMenu, ElimDupExtract, MenuIcons, and WriteZoneIdExtract.",
+        "RegistryPath": "",
+        "EvidenceClass": "B",
+        "EvidenceClassTitle": "Strong but Decision-Gated",
+        "ResearchStatus": "INTENTIONAL HOLD",
+        "IsMutationAllowed": false,
+        "RollbackSnapshotState": "ready",
+        "RollbackStoryText": "Rollback: Verified via record-restore-story.",
+        "HasClaimBoundary": true,
+        "WhatWeKnowSummary": "Claim: Sets the 7-Zip context-menu values for CascadedMenu, ElimDupExtract, MenuIcons, and WriteZoneIdExtract. Evidence: The misc documentation names the exact 7-Zip Options registry values and the app profile values used by this card. Rollback: Rollback: Verified via record-restore-story.",
+        "WhatWeDoNotClaimSummary": "Apply gate: Evidence pending Source boundary: Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+        "ProofLanes": [
+          {
+            "Key": "docs",
+            "Label": "DOCS",
+            "State": "ready",
+            "Summary": "The misc documentation names the exact 7-Zip Options registry values and the app profile values used by this card.",
+            "Source": "Validation proof source: C:\\Tools\\AppSmoke\\Docs\\misc\\misc.md"
+          },
+          {
+            "Key": "runtime",
+            "Label": "RUNTIME",
+            "State": "ready",
+            "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+            "Source": ""
+          },
+          {
+            "Key": "source",
+            "Label": "SOURCE",
+            "State": "ready",
+            "Summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+            "Source": "win-config / misc/desc.md#7-zip-settings: https://github.com/nohuto/win-config/blob/main/misc/desc.md#7-zip-settings"
+          },
+          {
+            "Key": "rollback",
+            "Label": "ROLLBACK",
+            "State": "ready",
+            "Summary": "Rollback: Verified via record-restore-story.",
+            "Source": "record-restore-story"
+          }
+        ],
+        "ReferenceLinks": [
+          {
+            "Title": "Docs: Details",
+            "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html#misc.optimize-7zip-settings",
+            "Kind": "Details"
+          },
+          {
+            "Title": "Docs: Misc",
+            "Url": "C:\\Tools\\AppSmoke\\Docs\\misc\\misc.md#misc.optimize-7zip-settings",
+            "Kind": "Docs"
+          }
+        ]
+      },
+      "Stages": [
+        {
+          "Stage": "detect-before",
+          "AppliedStatus": "NotApplied",
+          "StatusMessage": "Detected 0 of 4 values (matches: 0, missing: 4).",
+          "OutcomeSummary": "Detect - Success",
+          "CurrentValue": "Unknown",
+          "TargetValue": "Multiple values",
+          "WasRolledBack": false,
+          "IsMutationAllowed": false,
+          "HasSuccessfulApplyStory": false,
+          "HasSuccessfulRollbackStory": false,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Detected",
+              "Message": "Detected 0 of 4 values (matches: 0, missing: 4).\nEntries:\n- HKCU\\Software\\7-Zip\\Options\\CascadedMenu: missing\n- HKCU\\Software\\7-Zip\\Options\\ElimDupExtract: missing\n- HKCU\\Software\\7-Zip\\Options\\MenuIcons: missing\n- HKCU\\Software\\7-Zip\\Options\\WriteZoneIdExtract: missing",
+              "TimestampText": "16:08:10"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Pending",
+              "Message": "",
+              "TimestampText": "-"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Pending",
+              "Message": "",
+              "TimestampText": "-"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Pending",
+              "Message": "",
+              "TimestampText": "-"
+            }
+          ]
+        },
+        {
+          "Stage": "apply",
+          "AppliedStatus": "Applied",
+          "StatusMessage": "Run completed.",
+          "OutcomeSummary": "Apply - Success",
+          "CurrentValue": "Multiple values",
+          "TargetValue": "Multiple values",
+          "WasRolledBack": false,
+          "IsMutationAllowed": false,
+          "HasSuccessfulApplyStory": true,
+          "HasSuccessfulRollbackStory": false,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Detected",
+              "Message": "Detected 0 of 4 values (matches: 0, missing: 4).\nEntries:\n- HKCU\\Software\\7-Zip\\Options\\CascadedMenu: missing\n- HKCU\\Software\\7-Zip\\Options\\ElimDupExtract: missing\n- HKCU\\Software\\7-Zip\\Options\\MenuIcons: missing\n- HKCU\\Software\\7-Zip\\Options\\WriteZoneIdExtract: missing",
+              "TimestampText": "16:08:10"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Applied",
+              "Message": "Updated 4 values.",
+              "TimestampText": "16:08:10"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Verified",
+              "Message": "Verified desired values.",
+              "TimestampText": "16:08:10"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Not required",
+              "Message": "Step not executed.",
+              "TimestampText": "-"
+            }
+          ]
+        },
+        {
+          "Stage": "rollback",
+          "AppliedStatus": "NotApplied",
+          "StatusMessage": "Rolled back registry values.",
+          "OutcomeSummary": "Rollback - Rolled Back",
+          "CurrentValue": "Multiple values",
+          "TargetValue": "Multiple values",
+          "WasRolledBack": true,
+          "IsMutationAllowed": false,
+          "HasSuccessfulApplyStory": true,
+          "HasSuccessfulRollbackStory": true,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Detected",
+              "Message": "Detected 0 of 4 values (matches: 0, missing: 4).\nEntries:\n- HKCU\\Software\\7-Zip\\Options\\CascadedMenu: missing\n- HKCU\\Software\\7-Zip\\Options\\ElimDupExtract: missing\n- HKCU\\Software\\7-Zip\\Options\\MenuIcons: missing\n- HKCU\\Software\\7-Zip\\Options\\WriteZoneIdExtract: missing",
+              "TimestampText": "16:08:10"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Applied",
+              "Message": "Updated 4 values.",
+              "TimestampText": "16:08:10"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Verified",
+              "Message": "Verified desired values.",
+              "TimestampText": "16:08:10"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Rolled back",
+              "Message": "Rolled back registry values.",
+              "TimestampText": "16:08:10"
+            }
+          ]
+        },
+        {
+          "Stage": "detect-after",
+          "AppliedStatus": "NotApplied",
+          "StatusMessage": "Detected 0 of 4 values (matches: 0, missing: 4).",
+          "OutcomeSummary": "Detect - Success",
+          "CurrentValue": "Multiple values",
+          "TargetValue": "Multiple values",
+          "WasRolledBack": true,
+          "IsMutationAllowed": false,
+          "HasSuccessfulApplyStory": true,
+          "HasSuccessfulRollbackStory": true,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Detected",
+              "Message": "Detected 0 of 4 values (matches: 0, missing: 4).\nEntries:\n- HKCU\\Software\\7-Zip\\Options\\CascadedMenu: missing\n- HKCU\\Software\\7-Zip\\Options\\ElimDupExtract: missing\n- HKCU\\Software\\7-Zip\\Options\\MenuIcons: missing\n- HKCU\\Software\\7-Zip\\Options\\WriteZoneIdExtract: missing",
+              "TimestampText": "16:08:10"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Applied",
+              "Message": "Updated 4 values.",
+              "TimestampText": "16:08:10"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Verified",
+              "Message": "Verified desired values.",
+              "TimestampText": "16:08:10"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Rolled back",
+              "Message": "Rolled back registry values.",
+              "TimestampText": "16:08:10"
+            }
+          ]
+        }
+      ],
+      "StartedAtUtc": "2026-05-07T23:08:10.2785638+00:00",
+      "CompletedAtUtc": "2026-05-07T23:08:10.5999273+00:00"
+    }
+  },
+  {
+    "tweak_id": "peripheral.audio-disable-enhancements",
+    "host_exit": 0,
+    "execution_exit": 2,
+    "payload_status": "completed",
+    "report_source": "stdout",
+    "report_parse_error": null,
+    "report_fetch_status": null,
+    "report_app_success": false,
+    "report_success": false,
+    "report_status": "check-failed",
+    "report_summary": "The tweak flow completed, but at least one apply or rollback checkpoint did not come back clean.",
+    "report_contract_status": "ok",
+    "report_contract_summary": "QA card snapshot contract passed.",
+    "report_contract_failures": [],
+    "report_card_present": true,
+    "report_card_has_claim_boundary": true,
+    "report_card_present_fields": [
+      "TweakId",
+      "Name",
+      "Category",
+      "EvidenceClass",
+      "ResearchStatus",
+      "RollbackSnapshotState",
+      "HasClaimBoundary",
+      "WhatWeKnowSummary",
+      "WhatWeDoNotClaimSummary",
+      "ProofLanes"
+    ],
+    "report_card_missing_fields": [],
+    "report_card_proof_lanes": [
+      "docs",
+      "runtime",
+      "source",
+      "rollback"
+    ],
+    "report_card_missing_proof_lanes": [],
+    "report": {
+      "TweakId": "peripheral.audio-disable-enhancements",
+      "TweakName": "Disable Audio Enhancements",
+      "Success": false,
+      "Status": "check-failed",
+      "Summary": "The tweak flow completed, but at least one apply or rollback checkpoint did not come back clean.",
+      "RollbackRequested": true,
+      "GatedMutationOverrideRequested": true,
+      "GatedMutationOverrideUsed": true,
+      "Card": {
+        "TweakId": "peripheral.audio-disable-enhancements",
+        "Name": "Disable Audio Enhancements",
+        "Category": "Peripheral",
+        "Description": "Disables the audio-enhancement flags and exclusive-mode setting touched by this tweak.",
+        "FriendlyDescription": "Disables the audio-enhancement flags and exclusive-mode setting touched by this tweak.",
+        "RegistryPath": "",
+        "EvidenceClass": "B",
+        "EvidenceClassTitle": "Strong but Decision-Gated",
+        "ResearchStatus": "INTENTIONAL HOLD",
+        "IsMutationAllowed": false,
+        "RollbackSnapshotState": "ready",
+        "RollbackStoryText": "Rollback: Verified via record-restore-story.",
+        "HasClaimBoundary": true,
+        "WhatWeKnowSummary": "Claim: Disables the audio-enhancement flags and exclusive-mode setting touched by this tweak. Evidence: The peripheral documentation maps the audio-enhancement control to the MMDevices Audio property/FxProperties values and notes the elevation/device-scope tradeoff. Rollback: Rollback: Verified via record-restore-story.",
+        "WhatWeDoNotClaimSummary": "Apply gate: Evidence pending Source boundary: Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+        "ProofLanes": [
+          {
+            "Key": "docs",
+            "Label": "DOCS",
+            "State": "ready",
+            "Summary": "The peripheral documentation maps the audio-enhancement control to the MMDevices Audio property/FxProperties values and notes the elevation/device-scope tradeoff.",
+            "Source": "Validation proof source: C:\\Tools\\AppSmoke\\Docs\\peripheral\\peripheral.md"
+          },
+          {
+            "Key": "runtime",
+            "Label": "RUNTIME",
+            "State": "ready",
+            "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+            "Source": ""
+          },
+          {
+            "Key": "source",
+            "Label": "SOURCE",
+            "State": "ready",
+            "Summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+            "Source": "win-config / peripheral/desc.md: https://github.com/nohuto/win-config/blob/main/peripheral/desc.md"
+          },
+          {
+            "Key": "rollback",
+            "Label": "ROLLBACK",
+            "State": "ready",
+            "Summary": "Rollback: Verified via record-restore-story.",
+            "Source": "record-restore-story"
+          }
+        ],
+        "ReferenceLinks": [
+          {
+            "Title": "Windows Internals resource page",
+            "Url": "https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals",
+            "Kind": "Docs"
+          },
+          {
+            "Title": "Docs: Details",
+            "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html#peripheral.audio-disable-enhancements",
+            "Kind": "Details"
+          },
+          {
+            "Title": "Docs: Peripheral",
+            "Url": "C:\\Tools\\AppSmoke\\Docs\\peripheral\\peripheral.md#peripheral.audio-disable-enhancements",
+            "Kind": "Docs"
+          }
+        ]
+      },
+      "Stages": [
+        {
+          "Stage": "detect-before",
+          "AppliedStatus": "NotApplied",
+          "StatusMessage": "Detected 0 of 2 values (matches: 0, missing: 2).",
+          "OutcomeSummary": "Detect - Success",
+          "CurrentValue": "Unknown",
+          "TargetValue": "Multiple values",
+          "WasRolledBack": false,
+          "IsMutationAllowed": false,
+          "HasSuccessfulApplyStory": false,
+          "HasSuccessfulRollbackStory": false,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Detected",
+              "Message": "Detected 0 of 2 values (matches: 0, missing: 2).\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Audio\\DisableProtectedAudioDG: missing\n- HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\MMDevices\\Audio\\Render\\DisableEnhancements: missing",
+              "TimestampText": "16:08:19"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Pending",
+              "Message": "",
+              "TimestampText": "-"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Pending",
+              "Message": "",
+              "TimestampText": "-"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Pending",
+              "Message": "",
+              "TimestampText": "-"
+            }
+          ]
+        },
+        {
+          "Stage": "apply",
+          "AppliedStatus": "Error",
+          "StatusMessage": "Run completed with errors.",
+          "OutcomeSummary": "Apply - Failed",
+          "CurrentValue": "Unknown",
+          "TargetValue": "Multiple values",
+          "WasRolledBack": false,
+          "IsMutationAllowed": false,
+          "HasSuccessfulApplyStory": false,
+          "HasSuccessfulRollbackStory": false,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Detected",
+              "Message": "Detected 0 of 2 values (matches: 0, missing: 2).\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Audio\\DisableProtectedAudioDG: missing\n- HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\MMDevices\\Audio\\Render\\DisableEnhancements: missing",
+              "TimestampText": "16:08:19"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Failed",
+              "Message": "Apply failed: reg.exe failed (1): ERROR: Access is denied.",
+              "TimestampText": "16:08:19"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Not required",
+              "Message": "Step not executed.",
+              "TimestampText": "-"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Failed",
+              "Message": "Rollback failed: Requested registry access is not allowed.",
+              "TimestampText": "16:08:19"
+            }
+          ]
+        },
+        {
+          "Stage": "rollback",
+          "AppliedStatus": "Error",
+          "StatusMessage": "Rollback failed: Requested registry access is not allowed.",
+          "OutcomeSummary": "Rollback - Failed",
+          "CurrentValue": "Unknown",
+          "TargetValue": "Multiple values",
+          "WasRolledBack": false,
+          "IsMutationAllowed": false,
+          "HasSuccessfulApplyStory": false,
+          "HasSuccessfulRollbackStory": false,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Detected",
+              "Message": "Detected 0 of 2 values (matches: 0, missing: 2).\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Audio\\DisableProtectedAudioDG: missing\n- HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\MMDevices\\Audio\\Render\\DisableEnhancements: missing",
+              "TimestampText": "16:08:19"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Failed",
+              "Message": "Apply failed: reg.exe failed (1): ERROR: Access is denied.",
+              "TimestampText": "16:08:19"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Not required",
+              "Message": "Step not executed.",
+              "TimestampText": "-"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Failed",
+              "Message": "Rollback failed: Requested registry access is not allowed.",
+              "TimestampText": "16:08:19"
+            }
+          ]
+        },
+        {
+          "Stage": "detect-after",
+          "AppliedStatus": "NotApplied",
+          "StatusMessage": "Detected 0 of 2 values (matches: 0, missing: 2).",
+          "OutcomeSummary": "Detect - Success",
+          "CurrentValue": "Unknown",
+          "TargetValue": "Multiple values",
+          "WasRolledBack": false,
+          "IsMutationAllowed": false,
+          "HasSuccessfulApplyStory": false,
+          "HasSuccessfulRollbackStory": false,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Detected",
+              "Message": "Detected 0 of 2 values (matches: 0, missing: 2).\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Audio\\DisableProtectedAudioDG: missing\n- HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\MMDevices\\Audio\\Render\\DisableEnhancements: missing",
+              "TimestampText": "16:08:19"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Failed",
+              "Message": "Apply failed: reg.exe failed (1): ERROR: Access is denied.",
+              "TimestampText": "16:08:19"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Not required",
+              "Message": "Step not executed.",
+              "TimestampText": "-"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Failed",
+              "Message": "Rollback failed: Requested registry access is not allowed.",
+              "TimestampText": "16:08:19"
+            }
+          ]
+        }
+      ],
+      "StartedAtUtc": "2026-05-07T23:08:16.6287607+00:00",
+      "CompletedAtUtc": "2026-05-07T23:08:19.8277697+00:00"
+    }
+  },
+  {
+    "tweak_id": "peripheral.keyboard-disable-language-hotkey",
+    "host_exit": 0,
+    "execution_exit": 0,
+    "payload_status": "completed",
+    "report_source": "stdout",
+    "report_parse_error": null,
+    "report_fetch_status": null,
+    "report_app_success": true,
+    "report_success": true,
+    "report_status": "ok-gated-override",
+    "report_summary": "QA-only gated mutation override used; apply/verify path completed and rollback restored the tweak.",
+    "report_contract_status": "ok",
+    "report_contract_summary": "QA card snapshot contract passed.",
+    "report_contract_failures": [],
+    "report_card_present": true,
+    "report_card_has_claim_boundary": true,
+    "report_card_present_fields": [
+      "TweakId",
+      "Name",
+      "Category",
+      "EvidenceClass",
+      "ResearchStatus",
+      "RollbackSnapshotState",
+      "HasClaimBoundary",
+      "WhatWeKnowSummary",
+      "WhatWeDoNotClaimSummary",
+      "ProofLanes"
+    ],
+    "report_card_missing_fields": [],
+    "report_card_proof_lanes": [
+      "docs",
+      "runtime",
+      "source",
+      "rollback"
+    ],
+    "report_card_missing_proof_lanes": [],
+    "report": {
+      "TweakId": "peripheral.keyboard-disable-language-hotkey",
+      "TweakName": "Disable Language Switch Hotkey",
+      "Success": true,
+      "Status": "ok-gated-override",
+      "Summary": "QA-only gated mutation override used; apply/verify path completed and rollback restored the tweak.",
+      "RollbackRequested": true,
+      "GatedMutationOverrideRequested": true,
+      "GatedMutationOverrideUsed": true,
+      "Card": {
+        "TweakId": "peripheral.keyboard-disable-language-hotkey",
+        "Name": "Disable Language Switch Hotkey",
+        "Category": "Peripheral",
+        "Description": "Disables the Ctrl+Shift and Alt+Shift language-switch hotkeys.",
+        "FriendlyDescription": "Disables the Ctrl+Shift and Alt+Shift language-switch hotkeys.",
+        "RegistryPath": "",
+        "EvidenceClass": "B",
+        "EvidenceClassTitle": "Strong but Decision-Gated",
+        "ResearchStatus": "INTENTIONAL HOLD",
+        "IsMutationAllowed": false,
+        "RollbackSnapshotState": "ready",
+        "RollbackStoryText": "Rollback: Verified via record-restore-story.",
+        "HasClaimBoundary": true,
+        "WhatWeKnowSummary": "Claim: Disables the Ctrl+Shift and Alt+Shift language-switch hotkeys. Evidence: The peripheral documentation ties the Ctrl+Shift / Alt+Shift language-switch UI action to the three Keyboard Layout Toggle values used by the app. Rollback: Rollback: Verified via record-restore-story.",
+        "WhatWeDoNotClaimSummary": "Apply gate: Evidence pending Source boundary: Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+        "ProofLanes": [
+          {
+            "Key": "docs",
+            "Label": "DOCS",
+            "State": "ready",
+            "Summary": "The peripheral documentation ties the Ctrl+Shift / Alt+Shift language-switch UI action to the three Keyboard Layout Toggle values used by the app.",
+            "Source": "Validation proof source: C:\\Tools\\AppSmoke\\Docs\\peripheral\\peripheral.md"
+          },
+          {
+            "Key": "runtime",
+            "Label": "RUNTIME",
+            "State": "ready",
+            "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+            "Source": ""
+          },
+          {
+            "Key": "source",
+            "Label": "SOURCE",
+            "State": "ready",
+            "Summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+            "Source": "win-config / peripheral/desc.md: https://github.com/nohuto/win-config/blob/main/peripheral/desc.md"
+          },
+          {
+            "Key": "rollback",
+            "Label": "ROLLBACK",
+            "State": "ready",
+            "Summary": "Rollback: Verified via record-restore-story.",
+            "Source": "record-restore-story"
+          }
+        ],
+        "ReferenceLinks": [
+          {
+            "Title": "Windows Internals resource page",
+            "Url": "https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals",
+            "Kind": "Docs"
+          },
+          {
+            "Title": "Docs: Details",
+            "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html#peripheral.keyboard-disable-language-hotkey",
+            "Kind": "Details"
+          },
+          {
+            "Title": "Docs: Peripheral",
+            "Url": "C:\\Tools\\AppSmoke\\Docs\\peripheral\\peripheral.md#peripheral.keyboard-disable-language-hotkey",
+            "Kind": "Docs"
+          }
+        ]
+      },
+      "Stages": [
+        {
+          "Stage": "detect-before",
+          "AppliedStatus": "NotApplied",
+          "StatusMessage": "Detected 0 of 3 values (matches: 0, missing: 3).",
+          "OutcomeSummary": "Detect - Success",
+          "CurrentValue": "Unknown",
+          "TargetValue": "Multiple values",
+          "WasRolledBack": false,
+          "IsMutationAllowed": false,
+          "HasSuccessfulApplyStory": false,
+          "HasSuccessfulRollbackStory": false,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Detected",
+              "Message": "Detected 0 of 3 values (matches: 0, missing: 3).\nEntries:\n- HKCU\\Keyboard Layout\\Toggle\\Hotkey: missing\n- HKCU\\Keyboard Layout\\Toggle\\Language Hotkey: missing\n- HKCU\\Keyboard Layout\\Toggle\\Layout Hotkey: missing",
+              "TimestampText": "16:08:26"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Pending",
+              "Message": "",
+              "TimestampText": "-"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Pending",
+              "Message": "",
+              "TimestampText": "-"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Pending",
+              "Message": "",
+              "TimestampText": "-"
+            }
+          ]
+        },
+        {
+          "Stage": "apply",
+          "AppliedStatus": "Applied",
+          "StatusMessage": "Run completed.",
+          "OutcomeSummary": "Apply - Success",
+          "CurrentValue": "Multiple values",
+          "TargetValue": "Multiple values",
+          "WasRolledBack": false,
+          "IsMutationAllowed": false,
+          "HasSuccessfulApplyStory": true,
+          "HasSuccessfulRollbackStory": false,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Detected",
+              "Message": "Detected 0 of 3 values (matches: 0, missing: 3).\nEntries:\n- HKCU\\Keyboard Layout\\Toggle\\Hotkey: missing\n- HKCU\\Keyboard Layout\\Toggle\\Language Hotkey: missing\n- HKCU\\Keyboard Layout\\Toggle\\Layout Hotkey: missing",
+              "TimestampText": "16:08:26"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Applied",
+              "Message": "Updated 3 values.",
+              "TimestampText": "16:08:26"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Verified",
+              "Message": "Verified desired values.",
+              "TimestampText": "16:08:26"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Not required",
+              "Message": "Step not executed.",
+              "TimestampText": "-"
+            }
+          ]
+        },
+        {
+          "Stage": "rollback",
+          "AppliedStatus": "NotApplied",
+          "StatusMessage": "Rolled back registry values.",
+          "OutcomeSummary": "Rollback - Rolled Back",
+          "CurrentValue": "Multiple values",
+          "TargetValue": "Multiple values",
+          "WasRolledBack": true,
+          "IsMutationAllowed": false,
+          "HasSuccessfulApplyStory": true,
+          "HasSuccessfulRollbackStory": true,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Detected",
+              "Message": "Detected 0 of 3 values (matches: 0, missing: 3).\nEntries:\n- HKCU\\Keyboard Layout\\Toggle\\Hotkey: missing\n- HKCU\\Keyboard Layout\\Toggle\\Language Hotkey: missing\n- HKCU\\Keyboard Layout\\Toggle\\Layout Hotkey: missing",
+              "TimestampText": "16:08:26"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Applied",
+              "Message": "Updated 3 values.",
+              "TimestampText": "16:08:26"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Verified",
+              "Message": "Verified desired values.",
+              "TimestampText": "16:08:26"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Rolled back",
+              "Message": "Rolled back registry values.",
+              "TimestampText": "16:08:26"
+            }
+          ]
+        },
+        {
+          "Stage": "detect-after",
+          "AppliedStatus": "NotApplied",
+          "StatusMessage": "Detected 0 of 3 values (matches: 0, missing: 3).",
+          "OutcomeSummary": "Detect - Success",
+          "CurrentValue": "Multiple values",
+          "TargetValue": "Multiple values",
+          "WasRolledBack": true,
+          "IsMutationAllowed": false,
+          "HasSuccessfulApplyStory": true,
+          "HasSuccessfulRollbackStory": true,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Detected",
+              "Message": "Detected 0 of 3 values (matches: 0, missing: 3).\nEntries:\n- HKCU\\Keyboard Layout\\Toggle\\Hotkey: missing\n- HKCU\\Keyboard Layout\\Toggle\\Language Hotkey: missing\n- HKCU\\Keyboard Layout\\Toggle\\Layout Hotkey: missing",
+              "TimestampText": "16:08:26"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Applied",
+              "Message": "Updated 3 values.",
+              "TimestampText": "16:08:26"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Verified",
+              "Message": "Verified desired values.",
+              "TimestampText": "16:08:26"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Rolled back",
+              "Message": "Rolled back registry values.",
+              "TimestampText": "16:08:26"
+            }
+          ]
+        }
+      ],
+      "StartedAtUtc": "2026-05-07T23:08:26.0359873+00:00",
+      "CompletedAtUtc": "2026-05-07T23:08:26.3485956+00:00"
+    }
+  },
+  {
+    "tweak_id": "peripheral.keyboard-optimize-repeat",
+    "host_exit": 0,
+    "execution_exit": 0,
+    "payload_status": "completed",
+    "report_source": "stdout",
+    "report_parse_error": null,
+    "report_fetch_status": null,
+    "report_app_success": true,
+    "report_success": true,
+    "report_status": "ok-gated-override",
+    "report_summary": "QA-only gated mutation override used; apply/verify path completed and rollback restored the tweak.",
+    "report_contract_status": "ok",
+    "report_contract_summary": "QA card snapshot contract passed.",
+    "report_contract_failures": [],
+    "report_card_present": true,
+    "report_card_has_claim_boundary": true,
+    "report_card_present_fields": [
+      "TweakId",
+      "Name",
+      "Category",
+      "EvidenceClass",
+      "ResearchStatus",
+      "RollbackSnapshotState",
+      "HasClaimBoundary",
+      "WhatWeKnowSummary",
+      "WhatWeDoNotClaimSummary",
+      "ProofLanes"
+    ],
+    "report_card_missing_fields": [],
+    "report_card_proof_lanes": [
+      "docs",
+      "runtime",
+      "source",
+      "rollback"
+    ],
+    "report_card_missing_proof_lanes": [],
+    "report": {
+      "TweakId": "peripheral.keyboard-optimize-repeat",
+      "TweakName": "Set Keyboard Repeat and Cursor Blink Values",
+      "Success": true,
+      "Status": "ok-gated-override",
+      "Summary": "QA-only gated mutation override used; apply/verify path completed and rollback restored the tweak.",
+      "RollbackRequested": true,
+      "GatedMutationOverrideRequested": true,
+      "GatedMutationOverrideUsed": true,
+      "Card": {
+        "TweakId": "peripheral.keyboard-optimize-repeat",
+        "Name": "Set Keyboard Repeat and Cursor Blink Values",
+        "Category": "Peripheral",
+        "Description": "Sets keyboard repeat delay to 0, repeat speed to 31, and cursor blink interval to 900 ms.",
+        "FriendlyDescription": "Sets keyboard repeat delay to 0, repeat speed to 31, and cursor blink interval to 900 ms.",
+        "RegistryPath": "",
+        "EvidenceClass": "B",
+        "EvidenceClassTitle": "Strong but Decision-Gated",
+        "ResearchStatus": "INTENTIONAL HOLD",
+        "IsMutationAllowed": false,
+        "RollbackSnapshotState": "ready",
+        "RollbackStoryText": "Rollback: Verified via record-restore-story.",
+        "HasClaimBoundary": true,
+        "WhatWeKnowSummary": "Claim: Sets keyboard repeat delay to 0, repeat speed to 31, and cursor blink interval to 900 ms. Evidence: The peripheral documentation maps the keyboard repeat profile to repeat delay, repeat rate, and cursor blink settings tracked by the app card. Rollback: Rollback: Verified via record-restore-story.",
+        "WhatWeDoNotClaimSummary": "Apply gate: Evidence pending Source boundary: Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+        "ProofLanes": [
+          {
+            "Key": "docs",
+            "Label": "DOCS",
+            "State": "ready",
+            "Summary": "The peripheral documentation maps the keyboard repeat profile to repeat delay, repeat rate, and cursor blink settings tracked by the app card.",
+            "Source": "Validation proof source: C:\\Tools\\AppSmoke\\Docs\\peripheral\\peripheral.md"
+          },
+          {
+            "Key": "runtime",
+            "Label": "RUNTIME",
+            "State": "ready",
+            "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+            "Source": ""
+          },
+          {
+            "Key": "source",
+            "Label": "SOURCE",
+            "State": "ready",
+            "Summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+            "Source": "decompiled-pseudocode / USBHUB3: https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3"
+          },
+          {
+            "Key": "rollback",
+            "Label": "ROLLBACK",
+            "State": "ready",
+            "Summary": "Rollback: Verified via record-restore-story.",
+            "Source": "record-restore-story"
+          }
+        ],
+        "ReferenceLinks": [
+          {
+            "Title": "Windows Internals resource page",
+            "Url": "https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals",
+            "Kind": "Docs"
+          },
+          {
+            "Title": "Docs: Details",
+            "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html#peripheral.keyboard-optimize-repeat",
+            "Kind": "Details"
+          },
+          {
+            "Title": "Docs: Peripheral",
+            "Url": "C:\\Tools\\AppSmoke\\Docs\\peripheral\\peripheral.md#peripheral.keyboard-optimize-repeat",
+            "Kind": "Docs"
+          }
+        ]
+      },
+      "Stages": [
+        {
+          "Stage": "detect-before",
+          "AppliedStatus": "NotApplied",
+          "StatusMessage": "Detected 3 of 3 values (matches: 1, missing: 0).",
+          "OutcomeSummary": "Detect - Success",
+          "CurrentValue": "Unknown",
+          "TargetValue": "Multiple values",
+          "WasRolledBack": false,
+          "IsMutationAllowed": false,
+          "HasSuccessfulApplyStory": false,
+          "HasSuccessfulRollbackStory": false,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Detected",
+              "Message": "Detected 3 of 3 values (matches: 1, missing: 0).\nEntries:\n- HKCU\\Control Panel\\Desktop\\CursorBlinkRate: 530 -> 900\n- HKCU\\Control Panel\\Keyboard\\KeyboardDelay: 1 -> 0\n- HKCU\\Control Panel\\Keyboard\\KeyboardSpeed: 31 -> 31",
+              "TimestampText": "16:08:32"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Pending",
+              "Message": "",
+              "TimestampText": "-"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Pending",
+              "Message": "",
+              "TimestampText": "-"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Pending",
+              "Message": "",
+              "TimestampText": "-"
+            }
+          ]
+        },
+        {
+          "Stage": "apply",
+          "AppliedStatus": "Applied",
+          "StatusMessage": "Run completed.",
+          "OutcomeSummary": "Apply - Success",
+          "CurrentValue": "Multiple values",
+          "TargetValue": "Multiple values",
+          "WasRolledBack": false,
+          "IsMutationAllowed": false,
+          "HasSuccessfulApplyStory": true,
+          "HasSuccessfulRollbackStory": false,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Detected",
+              "Message": "Detected 3 of 3 values (matches: 1, missing: 0).\nEntries:\n- HKCU\\Control Panel\\Desktop\\CursorBlinkRate: 530 -> 900\n- HKCU\\Control Panel\\Keyboard\\KeyboardDelay: 1 -> 0\n- HKCU\\Control Panel\\Keyboard\\KeyboardSpeed: 31 -> 31",
+              "TimestampText": "16:08:32"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Applied",
+              "Message": "Updated 3 values.",
+              "TimestampText": "16:08:32"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Verified",
+              "Message": "Verified desired values.",
+              "TimestampText": "16:08:32"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Not required",
+              "Message": "Step not executed.",
+              "TimestampText": "-"
+            }
+          ]
+        },
+        {
+          "Stage": "rollback",
+          "AppliedStatus": "NotApplied",
+          "StatusMessage": "Rolled back registry values.",
+          "OutcomeSummary": "Rollback - Rolled Back",
+          "CurrentValue": "Multiple values",
+          "TargetValue": "Multiple values",
+          "WasRolledBack": true,
+          "IsMutationAllowed": false,
+          "HasSuccessfulApplyStory": true,
+          "HasSuccessfulRollbackStory": true,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Detected",
+              "Message": "Detected 3 of 3 values (matches: 1, missing: 0).\nEntries:\n- HKCU\\Control Panel\\Desktop\\CursorBlinkRate: 530 -> 900\n- HKCU\\Control Panel\\Keyboard\\KeyboardDelay: 1 -> 0\n- HKCU\\Control Panel\\Keyboard\\KeyboardSpeed: 31 -> 31",
+              "TimestampText": "16:08:32"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Applied",
+              "Message": "Updated 3 values.",
+              "TimestampText": "16:08:32"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Verified",
+              "Message": "Verified desired values.",
+              "TimestampText": "16:08:32"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Rolled back",
+              "Message": "Rolled back registry values.",
+              "TimestampText": "16:08:32"
+            }
+          ]
+        },
+        {
+          "Stage": "detect-after",
+          "AppliedStatus": "NotApplied",
+          "StatusMessage": "Detected 3 of 3 values (matches: 1, missing: 0).",
+          "OutcomeSummary": "Detect - Success",
+          "CurrentValue": "Multiple values",
+          "TargetValue": "Multiple values",
+          "WasRolledBack": true,
+          "IsMutationAllowed": false,
+          "HasSuccessfulApplyStory": true,
+          "HasSuccessfulRollbackStory": true,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Detected",
+              "Message": "Detected 3 of 3 values (matches: 1, missing: 0).\nEntries:\n- HKCU\\Control Panel\\Desktop\\CursorBlinkRate: 530 -> 900\n- HKCU\\Control Panel\\Keyboard\\KeyboardDelay: 1 -> 0\n- HKCU\\Control Panel\\Keyboard\\KeyboardSpeed: 31 -> 31",
+              "TimestampText": "16:08:32"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Applied",
+              "Message": "Updated 3 values.",
+              "TimestampText": "16:08:32"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Verified",
+              "Message": "Verified desired values.",
+              "TimestampText": "16:08:32"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Rolled back",
+              "Message": "Rolled back registry values.",
+              "TimestampText": "16:08:32"
+            }
+          ]
+        }
+      ],
+      "StartedAtUtc": "2026-05-07T23:08:32.3534362+00:00",
+      "CompletedAtUtc": "2026-05-07T23:08:32.6059727+00:00"
+    }
+  },
+  {
+    "tweak_id": "peripheral.mouse-disable-acceleration",
+    "host_exit": 0,
+    "execution_exit": 0,
+    "payload_status": "completed",
+    "report_source": "stdout",
+    "report_parse_error": null,
+    "report_fetch_status": null,
+    "report_app_success": true,
+    "report_success": true,
+    "report_status": "ok-gated-override",
+    "report_summary": "QA-only gated mutation override used; apply/verify path completed and rollback restored the tweak.",
+    "report_contract_status": "ok",
+    "report_contract_summary": "QA card snapshot contract passed.",
+    "report_contract_failures": [],
+    "report_card_present": true,
+    "report_card_has_claim_boundary": true,
+    "report_card_present_fields": [
+      "TweakId",
+      "Name",
+      "Category",
+      "EvidenceClass",
+      "ResearchStatus",
+      "RollbackSnapshotState",
+      "HasClaimBoundary",
+      "WhatWeKnowSummary",
+      "WhatWeDoNotClaimSummary",
+      "ProofLanes"
+    ],
+    "report_card_missing_fields": [],
+    "report_card_proof_lanes": [
+      "docs",
+      "runtime",
+      "source",
+      "rollback"
+    ],
+    "report_card_missing_proof_lanes": [],
+    "report": {
+      "TweakId": "peripheral.mouse-disable-acceleration",
+      "TweakName": "Disable Enhanced Pointer Precision (Mouse Acceleration)",
+      "Success": true,
+      "Status": "ok-gated-override",
+      "Summary": "QA-only gated mutation override used; apply/verify path completed and rollback restored the tweak.",
+      "RollbackRequested": true,
+      "GatedMutationOverrideRequested": true,
+      "GatedMutationOverrideUsed": true,
+      "Card": {
+        "TweakId": "peripheral.mouse-disable-acceleration",
+        "Name": "Disable Enhanced Pointer Precision (Mouse Acceleration)",
+        "Category": "Peripheral",
+        "Description": "Disables Enhanced Pointer Precision by setting mouse speed and threshold values to their non-accelerated configuration.",
+        "FriendlyDescription": "Disables Enhanced Pointer Precision by setting mouse speed and threshold values to their non-accelerated configuration.",
+        "RegistryPath": "",
+        "EvidenceClass": "B",
+        "EvidenceClassTitle": "Strong but Decision-Gated",
+        "ResearchStatus": "INTENTIONAL HOLD",
+        "IsMutationAllowed": false,
+        "RollbackSnapshotState": "ready",
+        "RollbackStoryText": "Rollback: Verified via record-restore-story.",
+        "HasClaimBoundary": true,
+        "WhatWeKnowSummary": "Claim: Disables Enhanced Pointer Precision by setting mouse speed and threshold values to their non-accelerated configuration. Evidence: The peripheral documentation names the HKCU Control Panel Mouse values for enabled and disabled pointer-precision states. Rollback: Rollback: Verified via record-restore-story.",
+        "WhatWeDoNotClaimSummary": "Apply gate: Evidence pending Source boundary: Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+        "ProofLanes": [
+          {
+            "Key": "docs",
+            "Label": "DOCS",
+            "State": "ready",
+            "Summary": "The peripheral documentation names the HKCU Control Panel Mouse values for enabled and disabled pointer-precision states.",
+            "Source": "Validation proof source: C:\\Tools\\AppSmoke\\Docs\\peripheral\\peripheral.md"
+          },
+          {
+            "Key": "runtime",
+            "Label": "RUNTIME",
+            "State": "ready",
+            "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+            "Source": ""
+          },
+          {
+            "Key": "source",
+            "Label": "SOURCE",
+            "State": "ready",
+            "Summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+            "Source": "decompiled-pseudocode / USBHUB3: https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3"
+          },
+          {
+            "Key": "rollback",
+            "Label": "ROLLBACK",
+            "State": "ready",
+            "Summary": "Rollback: Verified via record-restore-story.",
+            "Source": "record-restore-story"
+          }
+        ],
+        "ReferenceLinks": [
+          {
+            "Title": "Windows Internals resource page",
+            "Url": "https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals",
+            "Kind": "Docs"
+          },
+          {
+            "Title": "Docs: Details",
+            "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html#peripheral.mouse-disable-acceleration",
+            "Kind": "Details"
+          },
+          {
+            "Title": "Docs: Peripheral",
+            "Url": "C:\\Tools\\AppSmoke\\Docs\\peripheral\\peripheral.md#peripheral.mouse-disable-acceleration",
+            "Kind": "Docs"
+          }
+        ]
+      },
+      "Stages": [
+        {
+          "Stage": "detect-before",
+          "AppliedStatus": "NotApplied",
+          "StatusMessage": "Detected 4 of 4 values (matches: 1, missing: 0).",
+          "OutcomeSummary": "Detect - Success",
+          "CurrentValue": "Unknown",
+          "TargetValue": "Multiple values",
+          "WasRolledBack": false,
+          "IsMutationAllowed": false,
+          "HasSuccessfulApplyStory": false,
+          "HasSuccessfulRollbackStory": false,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Detected",
+              "Message": "Detected 4 of 4 values (matches: 1, missing: 0).\nEntries:\n- HKCU\\Control Panel\\Mouse\\MouseSensitivity: 10 -> 10\n- HKCU\\Control Panel\\Mouse\\MouseSpeed: 1 -> 0\n- HKCU\\Control Panel\\Mouse\\MouseThreshold1: 6 -> 0\n- HKCU\\Control Panel\\Mouse\\MouseThreshold2: 10 -> 0",
+              "TimestampText": "16:08:38"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Pending",
+              "Message": "",
+              "TimestampText": "-"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Pending",
+              "Message": "",
+              "TimestampText": "-"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Pending",
+              "Message": "",
+              "TimestampText": "-"
+            }
+          ]
+        },
+        {
+          "Stage": "apply",
+          "AppliedStatus": "Applied",
+          "StatusMessage": "Run completed.",
+          "OutcomeSummary": "Apply - Success",
+          "CurrentValue": "Multiple values",
+          "TargetValue": "Multiple values",
+          "WasRolledBack": false,
+          "IsMutationAllowed": false,
+          "HasSuccessfulApplyStory": true,
+          "HasSuccessfulRollbackStory": false,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Detected",
+              "Message": "Detected 4 of 4 values (matches: 1, missing: 0).\nEntries:\n- HKCU\\Control Panel\\Mouse\\MouseSensitivity: 10 -> 10\n- HKCU\\Control Panel\\Mouse\\MouseSpeed: 1 -> 0\n- HKCU\\Control Panel\\Mouse\\MouseThreshold1: 6 -> 0\n- HKCU\\Control Panel\\Mouse\\MouseThreshold2: 10 -> 0",
+              "TimestampText": "16:08:38"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Applied",
+              "Message": "Updated 4 values.",
+              "TimestampText": "16:08:38"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Verified",
+              "Message": "Verified desired values.",
+              "TimestampText": "16:08:38"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Not required",
+              "Message": "Step not executed.",
+              "TimestampText": "-"
+            }
+          ]
+        },
+        {
+          "Stage": "rollback",
+          "AppliedStatus": "NotApplied",
+          "StatusMessage": "Rolled back registry values.",
+          "OutcomeSummary": "Rollback - Rolled Back",
+          "CurrentValue": "Multiple values",
+          "TargetValue": "Multiple values",
+          "WasRolledBack": true,
+          "IsMutationAllowed": false,
+          "HasSuccessfulApplyStory": true,
+          "HasSuccessfulRollbackStory": true,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Detected",
+              "Message": "Detected 4 of 4 values (matches: 1, missing: 0).\nEntries:\n- HKCU\\Control Panel\\Mouse\\MouseSensitivity: 10 -> 10\n- HKCU\\Control Panel\\Mouse\\MouseSpeed: 1 -> 0\n- HKCU\\Control Panel\\Mouse\\MouseThreshold1: 6 -> 0\n- HKCU\\Control Panel\\Mouse\\MouseThreshold2: 10 -> 0",
+              "TimestampText": "16:08:38"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Applied",
+              "Message": "Updated 4 values.",
+              "TimestampText": "16:08:38"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Verified",
+              "Message": "Verified desired values.",
+              "TimestampText": "16:08:38"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Rolled back",
+              "Message": "Rolled back registry values.",
+              "TimestampText": "16:08:38"
+            }
+          ]
+        },
+        {
+          "Stage": "detect-after",
+          "AppliedStatus": "NotApplied",
+          "StatusMessage": "Detected 4 of 4 values (matches: 1, missing: 0).",
+          "OutcomeSummary": "Detect - Success",
+          "CurrentValue": "Multiple values",
+          "TargetValue": "Multiple values",
+          "WasRolledBack": true,
+          "IsMutationAllowed": false,
+          "HasSuccessfulApplyStory": true,
+          "HasSuccessfulRollbackStory": true,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Detected",
+              "Message": "Detected 4 of 4 values (matches: 1, missing: 0).\nEntries:\n- HKCU\\Control Panel\\Mouse\\MouseSensitivity: 10 -> 10\n- HKCU\\Control Panel\\Mouse\\MouseSpeed: 1 -> 0\n- HKCU\\Control Panel\\Mouse\\MouseThreshold1: 6 -> 0\n- HKCU\\Control Panel\\Mouse\\MouseThreshold2: 10 -> 0",
+              "TimestampText": "16:08:39"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Applied",
+              "Message": "Updated 4 values.",
+              "TimestampText": "16:08:38"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Verified",
+              "Message": "Verified desired values.",
+              "TimestampText": "16:08:38"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Rolled back",
+              "Message": "Rolled back registry values.",
+              "TimestampText": "16:08:38"
+            }
+          ]
+        }
+      ],
+      "StartedAtUtc": "2026-05-07T23:08:38.7192716+00:00",
+      "CompletedAtUtc": "2026-05-07T23:08:39.0294185+00:00"
+    }
+  },
+  {
+    "tweak_id": "peripheral.mouse-disable-throttle",
+    "host_exit": 0,
+    "execution_exit": 0,
+    "payload_status": "completed",
+    "report_source": "stdout",
+    "report_parse_error": null,
+    "report_fetch_status": null,
+    "report_app_success": true,
+    "report_success": true,
+    "report_status": "ok-gated-override",
+    "report_summary": "QA-only gated mutation override used; apply/verify path completed and rollback restored the tweak.",
+    "report_contract_status": "ok",
+    "report_contract_summary": "QA card snapshot contract passed.",
+    "report_contract_failures": [],
+    "report_card_present": true,
+    "report_card_has_claim_boundary": true,
+    "report_card_present_fields": [
+      "TweakId",
+      "Name",
+      "Category",
+      "EvidenceClass",
+      "ResearchStatus",
+      "RollbackSnapshotState",
+      "HasClaimBoundary",
+      "WhatWeKnowSummary",
+      "WhatWeDoNotClaimSummary",
+      "ProofLanes"
+    ],
+    "report_card_missing_fields": [],
+    "report_card_proof_lanes": [
+      "docs",
+      "runtime",
+      "source",
+      "rollback"
+    ],
+    "report_card_missing_proof_lanes": [],
+    "report": {
+      "TweakId": "peripheral.mouse-disable-throttle",
+      "TweakName": "Disable Mouse Throttling for Background Windows",
+      "Success": true,
+      "Status": "ok-gated-override",
+      "Summary": "QA-only gated mutation override used; apply/verify path completed and rollback restored the tweak.",
+      "RollbackRequested": true,
+      "GatedMutationOverrideRequested": true,
+      "GatedMutationOverrideUsed": true,
+      "Card": {
+        "TweakId": "peripheral.mouse-disable-throttle",
+        "Name": "Disable Mouse Throttling for Background Windows",
+        "Category": "Peripheral",
+        "Description": "Disables raw mouse input throttling for background windows and sets the associated throttle duration and leeway values.",
+        "FriendlyDescription": "Disables raw mouse input throttling for background windows and sets the associated throttle duration and leeway values.",
+        "RegistryPath": "",
+        "EvidenceClass": "B",
+        "EvidenceClassTitle": "Strong but Decision-Gated",
+        "ResearchStatus": "INTENTIONAL HOLD",
+        "IsMutationAllowed": false,
+        "RollbackSnapshotState": "ready",
+        "RollbackStoryText": "Rollback: Verified via record-restore-story.",
+        "HasClaimBoundary": true,
+        "WhatWeKnowSummary": "Claim: Disables raw mouse input throttling for background windows and sets the associated throttle duration and leeway values. Evidence: The peripheral documentation includes retained source notes for raw mouse throttling values and the duration/leeway thresholds used by this card. Rollback: Rollback: Verified via record-restore-story.",
+        "WhatWeDoNotClaimSummary": "Apply gate: Evidence pending Source boundary: Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+        "ProofLanes": [
+          {
+            "Key": "docs",
+            "Label": "DOCS",
+            "State": "ready",
+            "Summary": "The peripheral documentation includes retained source notes for raw mouse throttling values and the duration/leeway thresholds used by this card.",
+            "Source": "Validation proof source: C:\\Tools\\AppSmoke\\Docs\\peripheral\\peripheral.md"
+          },
+          {
+            "Key": "runtime",
+            "Label": "RUNTIME",
+            "State": "ready",
+            "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+            "Source": ""
+          },
+          {
+            "Key": "source",
+            "Label": "SOURCE",
+            "State": "ready",
+            "Summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+            "Source": "decompiled-pseudocode / USBHUB3: https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3"
+          },
+          {
+            "Key": "rollback",
+            "Label": "ROLLBACK",
+            "State": "ready",
+            "Summary": "Rollback: Verified via record-restore-story.",
+            "Source": "record-restore-story"
+          }
+        ],
+        "ReferenceLinks": [
+          {
+            "Title": "Windows Internals resource page",
+            "Url": "https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals",
+            "Kind": "Docs"
+          },
+          {
+            "Title": "Docs: Details",
+            "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html#peripheral.mouse-disable-throttle",
+            "Kind": "Details"
+          },
+          {
+            "Title": "Docs: Peripheral",
+            "Url": "C:\\Tools\\AppSmoke\\Docs\\peripheral\\peripheral.md#peripheral.mouse-disable-throttle",
+            "Kind": "Docs"
+          }
+        ]
+      },
+      "Stages": [
+        {
+          "Stage": "detect-before",
+          "AppliedStatus": "NotApplied",
+          "StatusMessage": "Detected 0 of 3 values (matches: 0, missing: 3).",
+          "OutcomeSummary": "Detect - Success",
+          "CurrentValue": "Unknown",
+          "TargetValue": "Multiple values",
+          "WasRolledBack": false,
+          "IsMutationAllowed": false,
+          "HasSuccessfulApplyStory": false,
+          "HasSuccessfulRollbackStory": false,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Detected",
+              "Message": "Detected 0 of 3 values (matches: 0, missing: 3).\nEntries:\n- HKCU\\Control Panel\\Mouse\\RawMouseThrottleDuration: missing\n- HKCU\\Control Panel\\Mouse\\RawMouseThrottleEnabled: missing\n- HKCU\\Control Panel\\Mouse\\RawMouseThrottleLeeway: missing",
+              "TimestampText": "16:08:45"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Pending",
+              "Message": "",
+              "TimestampText": "-"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Pending",
+              "Message": "",
+              "TimestampText": "-"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Pending",
+              "Message": "",
+              "TimestampText": "-"
+            }
+          ]
+        },
+        {
+          "Stage": "apply",
+          "AppliedStatus": "Applied",
+          "StatusMessage": "Run completed.",
+          "OutcomeSummary": "Apply - Success",
+          "CurrentValue": "Multiple values",
+          "TargetValue": "Multiple values",
+          "WasRolledBack": false,
+          "IsMutationAllowed": false,
+          "HasSuccessfulApplyStory": true,
+          "HasSuccessfulRollbackStory": false,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Detected",
+              "Message": "Detected 0 of 3 values (matches: 0, missing: 3).\nEntries:\n- HKCU\\Control Panel\\Mouse\\RawMouseThrottleDuration: missing\n- HKCU\\Control Panel\\Mouse\\RawMouseThrottleEnabled: missing\n- HKCU\\Control Panel\\Mouse\\RawMouseThrottleLeeway: missing",
+              "TimestampText": "16:08:45"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Applied",
+              "Message": "Updated 3 values.",
+              "TimestampText": "16:08:45"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Verified",
+              "Message": "Verified desired values.",
+              "TimestampText": "16:08:45"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Not required",
+              "Message": "Step not executed.",
+              "TimestampText": "-"
+            }
+          ]
+        },
+        {
+          "Stage": "rollback",
+          "AppliedStatus": "NotApplied",
+          "StatusMessage": "Rolled back registry values.",
+          "OutcomeSummary": "Rollback - Rolled Back",
+          "CurrentValue": "Multiple values",
+          "TargetValue": "Multiple values",
+          "WasRolledBack": true,
+          "IsMutationAllowed": false,
+          "HasSuccessfulApplyStory": true,
+          "HasSuccessfulRollbackStory": true,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Detected",
+              "Message": "Detected 0 of 3 values (matches: 0, missing: 3).\nEntries:\n- HKCU\\Control Panel\\Mouse\\RawMouseThrottleDuration: missing\n- HKCU\\Control Panel\\Mouse\\RawMouseThrottleEnabled: missing\n- HKCU\\Control Panel\\Mouse\\RawMouseThrottleLeeway: missing",
+              "TimestampText": "16:08:45"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Applied",
+              "Message": "Updated 3 values.",
+              "TimestampText": "16:08:45"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Verified",
+              "Message": "Verified desired values.",
+              "TimestampText": "16:08:45"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Rolled back",
+              "Message": "Rolled back registry values.",
+              "TimestampText": "16:08:45"
+            }
+          ]
+        },
+        {
+          "Stage": "detect-after",
+          "AppliedStatus": "NotApplied",
+          "StatusMessage": "Detected 0 of 3 values (matches: 0, missing: 3).",
+          "OutcomeSummary": "Detect - Success",
+          "CurrentValue": "Multiple values",
+          "TargetValue": "Multiple values",
+          "WasRolledBack": true,
+          "IsMutationAllowed": false,
+          "HasSuccessfulApplyStory": true,
+          "HasSuccessfulRollbackStory": true,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Detected",
+              "Message": "Detected 0 of 3 values (matches: 0, missing: 3).\nEntries:\n- HKCU\\Control Panel\\Mouse\\RawMouseThrottleDuration: missing\n- HKCU\\Control Panel\\Mouse\\RawMouseThrottleEnabled: missing\n- HKCU\\Control Panel\\Mouse\\RawMouseThrottleLeeway: missing",
+              "TimestampText": "16:08:45"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Applied",
+              "Message": "Updated 3 values.",
+              "TimestampText": "16:08:45"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Verified",
+              "Message": "Verified desired values.",
+              "TimestampText": "16:08:45"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Rolled back",
+              "Message": "Rolled back registry values.",
+              "TimestampText": "16:08:45"
+            }
+          ]
+        }
+      ],
+      "StartedAtUtc": "2026-05-07T23:08:45.0893973+00:00",
+      "CompletedAtUtc": "2026-05-07T23:08:45.348714+00:00"
+    }
+  },
+  {
+    "tweak_id": "power.disable-superfetch",
+    "host_exit": 0,
+    "execution_exit": 2,
+    "payload_status": "completed",
+    "report_source": "stdout",
+    "report_parse_error": null,
+    "report_fetch_status": null,
+    "report_app_success": false,
+    "report_success": false,
+    "report_status": "check-failed",
+    "report_summary": "The tweak flow completed, but at least one apply or rollback checkpoint did not come back clean.",
+    "report_contract_status": "ok",
+    "report_contract_summary": "QA card snapshot contract passed.",
+    "report_contract_failures": [],
+    "report_card_present": true,
+    "report_card_has_claim_boundary": true,
+    "report_card_present_fields": [
+      "TweakId",
+      "Name",
+      "Category",
+      "EvidenceClass",
+      "ResearchStatus",
+      "RollbackSnapshotState",
+      "HasClaimBoundary",
+      "WhatWeKnowSummary",
+      "WhatWeDoNotClaimSummary",
+      "ProofLanes"
+    ],
+    "report_card_missing_fields": [],
+    "report_card_proof_lanes": [
+      "docs",
+      "runtime",
+      "source",
+      "rollback"
+    ],
+    "report_card_missing_proof_lanes": [],
+    "report": {
+      "TweakId": "power.disable-superfetch",
+      "TweakName": "Disable Superfetch (SysMain)",
+      "Success": false,
+      "Status": "check-failed",
+      "Summary": "The tweak flow completed, but at least one apply or rollback checkpoint did not come back clean.",
+      "RollbackRequested": true,
+      "GatedMutationOverrideRequested": true,
+      "GatedMutationOverrideUsed": true,
+      "Card": {
+        "TweakId": "power.disable-superfetch",
+        "Name": "Disable Superfetch (SysMain)",
+        "Category": "Power",
+        "Description": "Disables the SysMain service that preloads frequently used applications and maintains usage heuristics.",
+        "FriendlyDescription": "Disables the SysMain service that preloads frequently used applications and maintains usage heuristics.",
+        "RegistryPath": "",
+        "EvidenceClass": "B",
+        "EvidenceClassTitle": "Strong but Decision-Gated",
+        "ResearchStatus": "INTENTIONAL HOLD",
+        "IsMutationAllowed": false,
+        "RollbackSnapshotState": "ready",
+        "RollbackStoryText": "Rollback: Verified via record-restore-story.",
+        "HasClaimBoundary": true,
+        "WhatWeKnowSummary": "Claim: Disables the SysMain service that preloads frequently used applications and maintains usage heuristics. Evidence: The service documentation identifies SysMain/Superfetch behavior, and the tweak catalog maps the shipped card to the checked-in command implementation. Rollback: Rollback: Verified via record-restore-story.",
+        "WhatWeDoNotClaimSummary": "Apply gate: Evidence pending Source boundary: Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+        "ProofLanes": [
+          {
+            "Key": "docs",
+            "Label": "DOCS",
+            "State": "ready",
+            "Summary": "The service documentation identifies SysMain/Superfetch behavior, and the tweak catalog maps the shipped card to the checked-in command implementation.",
+            "Source": "Validation proof source: Docs/SERVICES_DOCUMENTATION.md"
+          },
+          {
+            "Key": "runtime",
+            "Label": "RUNTIME",
+            "State": "ready",
+            "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+            "Source": ""
+          },
+          {
+            "Key": "source",
+            "Label": "SOURCE",
+            "State": "ready",
+            "Summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+            "Source": "decompiled-pseudocode / mmcss: https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss"
+          },
+          {
+            "Key": "rollback",
+            "Label": "ROLLBACK",
+            "State": "ready",
+            "Summary": "Rollback: Verified via record-restore-story.",
+            "Source": "record-restore-story"
+          }
+        ],
+        "ReferenceLinks": [
+          {
+            "Title": "Windows Internals resource page",
+            "Url": "https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals",
+            "Kind": "Docs"
+          },
+          {
+            "Title": "Docs: Details",
+            "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html#power.disable-superfetch",
+            "Kind": "Details"
+          },
+          {
+            "Title": "Docs: Power",
+            "Url": "C:\\Tools\\AppSmoke\\Docs\\power\\power.md#power.disable-superfetch",
+            "Kind": "Docs"
+          }
+        ]
+      },
+      "Stages": [
+        {
+          "Stage": "detect-before",
+          "AppliedStatus": "Applied",
+          "StatusMessage": "Current state: Superfetch is stopped",
+          "OutcomeSummary": "Detect - Success",
+          "CurrentValue": "Superfetch is stopped",
+          "TargetValue": "Optimized",
+          "WasRolledBack": false,
+          "IsMutationAllowed": false,
+          "HasSuccessfulApplyStory": false,
+          "HasSuccessfulRollbackStory": false,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Applied",
+              "Message": "Current state: Superfetch is stopped",
+              "TimestampText": "16:08:54"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Pending",
+              "Message": "",
+              "TimestampText": "-"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Pending",
+              "Message": "",
+              "TimestampText": "-"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Pending",
+              "Message": "",
+              "TimestampText": "-"
+            }
+          ]
+        },
+        {
+          "Stage": "apply",
+          "AppliedStatus": "Applied",
+          "StatusMessage": "Run completed.",
+          "OutcomeSummary": "Apply - Success",
+          "CurrentValue": "Optimized",
+          "TargetValue": "Optimized",
+          "WasRolledBack": false,
+          "IsMutationAllowed": false,
+          "HasSuccessfulApplyStory": true,
+          "HasSuccessfulRollbackStory": false,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Applied",
+              "Message": "Current state: Superfetch is stopped",
+              "TimestampText": "16:08:54"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Skipped",
+              "Message": "Already in the desired state.",
+              "TimestampText": "16:08:54"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Verified",
+              "Message": "Changes verified successfully.",
+              "TimestampText": "16:08:54"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Skipped",
+              "Message": "No changes were made.",
+              "TimestampText": "16:08:54"
+            }
+          ]
+        },
+        {
+          "Stage": "rollback",
+          "AppliedStatus": "Applied",
+          "StatusMessage": "Rollback not supported for this tweak.",
+          "OutcomeSummary": "Rollback - Skipped",
+          "CurrentValue": "Optimized",
+          "TargetValue": "Optimized",
+          "WasRolledBack": false,
+          "IsMutationAllowed": false,
+          "HasSuccessfulApplyStory": true,
+          "HasSuccessfulRollbackStory": false,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Applied",
+              "Message": "Current state: Superfetch is stopped",
+              "TimestampText": "16:08:54"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Skipped",
+              "Message": "Already in the desired state.",
+              "TimestampText": "16:08:54"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Verified",
+              "Message": "Changes verified successfully.",
+              "TimestampText": "16:08:54"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Not applicable",
+              "Message": "Rollback not supported for this tweak.",
+              "TimestampText": "16:08:54"
+            }
+          ]
+        },
+        {
+          "Stage": "detect-after",
+          "AppliedStatus": "Applied",
+          "StatusMessage": "Current state: Superfetch is stopped",
+          "OutcomeSummary": "Detect - Success",
+          "CurrentValue": "Superfetch is stopped",
+          "TargetValue": "Optimized",
+          "WasRolledBack": false,
+          "IsMutationAllowed": false,
+          "HasSuccessfulApplyStory": true,
+          "HasSuccessfulRollbackStory": false,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Applied",
+              "Message": "Current state: Superfetch is stopped",
+              "TimestampText": "16:08:54"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Skipped",
+              "Message": "Already in the desired state.",
+              "TimestampText": "16:08:54"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Verified",
+              "Message": "Changes verified successfully.",
+              "TimestampText": "16:08:54"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Not applicable",
+              "Message": "Rollback not supported for this tweak.",
+              "TimestampText": "16:08:54"
+            }
+          ]
+        }
+      ],
+      "StartedAtUtc": "2026-05-07T23:08:51.3961685+00:00",
+      "CompletedAtUtc": "2026-05-07T23:08:54.543913+00:00"
+    }
+  },
+  {
+    "tweak_id": "power.disable-cpu-parking",
+    "host_exit": 0,
+    "execution_exit": 0,
+    "payload_status": "completed",
+    "report_source": "stdout",
+    "report_parse_error": null,
+    "report_fetch_status": null,
+    "report_app_success": true,
+    "report_success": true,
+    "report_status": "ok-gated-override",
+    "report_summary": "QA-only gated mutation override used; apply/verify path completed and rollback restored the tweak.",
+    "report_contract_status": "ok",
+    "report_contract_summary": "QA card snapshot contract passed.",
+    "report_contract_failures": [],
+    "report_card_present": true,
+    "report_card_has_claim_boundary": true,
+    "report_card_present_fields": [
+      "TweakId",
+      "Name",
+      "Category",
+      "EvidenceClass",
+      "ResearchStatus",
+      "RollbackSnapshotState",
+      "HasClaimBoundary",
+      "WhatWeKnowSummary",
+      "WhatWeDoNotClaimSummary",
+      "ProofLanes"
+    ],
+    "report_card_missing_fields": [],
+    "report_card_proof_lanes": [
+      "docs",
+      "runtime",
+      "source",
+      "rollback"
+    ],
+    "report_card_missing_proof_lanes": [],
+    "report": {
+      "TweakId": "power.disable-cpu-parking",
+      "TweakName": "Disable CPU Core Parking",
+      "Success": true,
+      "Status": "ok-gated-override",
+      "Summary": "QA-only gated mutation override used; apply/verify path completed and rollback restored the tweak.",
+      "RollbackRequested": true,
+      "GatedMutationOverrideRequested": true,
+      "GatedMutationOverrideUsed": true,
+      "Card": {
+        "TweakId": "power.disable-cpu-parking",
+        "Name": "Disable CPU Core Parking",
+        "Category": "Power",
+        "Description": "Sets the active power plan core-parking minimum and maximum values to 100% for AC and DC power.",
+        "FriendlyDescription": "Sets the active power plan core-parking minimum and maximum values to 100% for AC and DC power.",
+        "RegistryPath": "",
+        "EvidenceClass": "B",
+        "EvidenceClassTitle": "Strong but Decision-Gated",
+        "ResearchStatus": "INTENTIONAL HOLD",
+        "IsMutationAllowed": false,
+        "RollbackSnapshotState": "ready",
+        "RollbackStoryText": "Rollback: Verified via record-restore-story.",
+        "HasClaimBoundary": true,
+        "WhatWeKnowSummary": "Claim: Sets the active power plan core-parking minimum and maximum values to 100% for AC and DC power. Evidence: The power documentation names the low-level power-manager values adjacent to the core-parking card, while the checked-in command/provider code supplies the exact powercfg/app write contract. Rollback: Rollback: Verified via record-restore-story.",
+        "WhatWeDoNotClaimSummary": "Apply gate: Evidence pending Source boundary: Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+        "ProofLanes": [
+          {
+            "Key": "docs",
+            "Label": "DOCS",
+            "State": "ready",
+            "Summary": "The power documentation names the low-level power-manager values adjacent to the core-parking card, while the checked-in command/provider code supplies the exact powercfg/app write contract.",
+            "Source": "Validation proof source: C:\\Tools\\AppSmoke\\Docs\\power\\power.md"
+          },
+          {
+            "Key": "runtime",
+            "Label": "RUNTIME",
+            "State": "ready",
+            "Summary": "No runtime proof is attached yet. This record still needs VM validation.",
+            "Source": ""
+          },
+          {
+            "Key": "source",
+            "Label": "SOURCE",
+            "State": "ready",
+            "Summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+            "Source": "win-config / power/desc.md: https://github.com/nohuto/win-config/blob/main/power/desc.md"
+          },
+          {
+            "Key": "rollback",
+            "Label": "ROLLBACK",
+            "State": "ready",
+            "Summary": "Rollback: Verified via record-restore-story.",
+            "Source": "record-restore-story"
+          }
+        ],
+        "ReferenceLinks": [
+          {
+            "Title": "Docs: Details",
+            "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html#power.disable-cpu-parking",
+            "Kind": "Details"
+          },
+          {
+            "Title": "Docs: Power",
+            "Url": "C:\\Tools\\AppSmoke\\Docs\\power\\power.md#power.disable-cpu-parking",
+            "Kind": "Docs"
+          }
+        ]
+      },
+      "Stages": [
+        {
+          "Stage": "detect-before",
+          "AppliedStatus": "NotApplied",
+          "StatusMessage": "Current plan values - Min AC/DC: 100/10, Max AC/DC: 100/100.",
+          "OutcomeSummary": "Detect - Success",
+          "CurrentValue": "Unknown",
+          "TargetValue": "Optimized",
+          "WasRolledBack": false,
+          "IsMutationAllowed": false,
+          "HasSuccessfulApplyStory": false,
+          "HasSuccessfulRollbackStory": false,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Detected",
+              "Message": "Current plan values - Min AC/DC: 100/10, Max AC/DC: 100/100.",
+              "TimestampText": "16:09:03"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Pending",
+              "Message": "",
+              "TimestampText": "-"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Pending",
+              "Message": "",
+              "TimestampText": "-"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Pending",
+              "Message": "",
+              "TimestampText": "-"
+            }
+          ]
+        },
+        {
+          "Stage": "apply",
+          "AppliedStatus": "Applied",
+          "StatusMessage": "Run completed.",
+          "OutcomeSummary": "Apply - Success",
+          "CurrentValue": "Optimized",
+          "TargetValue": "Optimized",
+          "WasRolledBack": false,
+          "IsMutationAllowed": false,
+          "HasSuccessfulApplyStory": true,
+          "HasSuccessfulRollbackStory": false,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Detected",
+              "Message": "Current plan values - Min AC/DC: 100/10, Max AC/DC: 100/100.",
+              "TimestampText": "16:09:03"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Applied",
+              "Message": "Disabled CPU core parking for the active power plan.",
+              "TimestampText": "16:09:03"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Verified",
+              "Message": "Core parking is disabled for the active power plan.",
+              "TimestampText": "16:09:04"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Not required",
+              "Message": "Step not executed.",
+              "TimestampText": "-"
+            }
+          ]
+        },
+        {
+          "Stage": "rollback",
+          "AppliedStatus": "NotApplied",
+          "StatusMessage": "Restored previous CPU core parking values for the active power plan.",
+          "OutcomeSummary": "Rollback - Rolled Back",
+          "CurrentValue": "Optimized",
+          "TargetValue": "Optimized",
+          "WasRolledBack": true,
+          "IsMutationAllowed": false,
+          "HasSuccessfulApplyStory": true,
+          "HasSuccessfulRollbackStory": true,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Detected",
+              "Message": "Current plan values - Min AC/DC: 100/10, Max AC/DC: 100/100.",
+              "TimestampText": "16:09:03"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Applied",
+              "Message": "Disabled CPU core parking for the active power plan.",
+              "TimestampText": "16:09:03"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Verified",
+              "Message": "Core parking is disabled for the active power plan.",
+              "TimestampText": "16:09:04"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Rolled back",
+              "Message": "Restored previous CPU core parking values for the active power plan.",
+              "TimestampText": "16:09:04"
+            }
+          ]
+        },
+        {
+          "Stage": "detect-after",
+          "AppliedStatus": "NotApplied",
+          "StatusMessage": "Current plan values - Min AC/DC: 100/10, Max AC/DC: 100/100.",
+          "OutcomeSummary": "Detect - Success",
+          "CurrentValue": "Optimized",
+          "TargetValue": "Optimized",
+          "WasRolledBack": true,
+          "IsMutationAllowed": false,
+          "HasSuccessfulApplyStory": true,
+          "HasSuccessfulRollbackStory": true,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Detected",
+              "Message": "Current plan values - Min AC/DC: 100/10, Max AC/DC: 100/100.",
+              "TimestampText": "16:09:04"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Applied",
+              "Message": "Disabled CPU core parking for the active power plan.",
+              "TimestampText": "16:09:03"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Verified",
+              "Message": "Core parking is disabled for the active power plan.",
+              "TimestampText": "16:09:04"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Rolled back",
+              "Message": "Restored previous CPU core parking values for the active power plan.",
+              "TimestampText": "16:09:04"
+            }
+          ]
+        }
+      ],
+      "StartedAtUtc": "2026-05-07T23:09:00.8041193+00:00",
+      "CompletedAtUtc": "2026-05-07T23:09:04.4721744+00:00"
+    }
+  },
+  {
+    "tweak_id": "power.disable-hibernation",
+    "host_exit": 0,
+    "execution_exit": 2,
+    "payload_status": "completed",
+    "report_source": "stdout",
+    "report_parse_error": null,
+    "report_fetch_status": null,
+    "report_app_success": false,
+    "report_success": false,
+    "report_status": "check-failed",
+    "report_summary": "The tweak flow completed, but at least one apply or rollback checkpoint did not come back clean.",
+    "report_contract_status": "ok",
+    "report_contract_summary": "QA card snapshot contract passed.",
+    "report_contract_failures": [],
+    "report_card_present": true,
+    "report_card_has_claim_boundary": true,
+    "report_card_present_fields": [
+      "TweakId",
+      "Name",
+      "Category",
+      "EvidenceClass",
+      "ResearchStatus",
+      "RollbackSnapshotState",
+      "HasClaimBoundary",
+      "WhatWeKnowSummary",
+      "WhatWeDoNotClaimSummary",
+      "ProofLanes"
+    ],
+    "report_card_missing_fields": [],
+    "report_card_proof_lanes": [
+      "docs",
+      "runtime",
+      "source",
+      "rollback"
+    ],
+    "report_card_missing_proof_lanes": [],
+    "report": {
+      "TweakId": "power.disable-hibernation",
+      "TweakName": "Disable Hibernation",
+      "Success": false,
+      "Status": "check-failed",
+      "Summary": "The tweak flow completed, but at least one apply or rollback checkpoint did not come back clean.",
+      "RollbackRequested": true,
+      "GatedMutationOverrideRequested": true,
+      "GatedMutationOverrideUsed": true,
+      "Card": {
+        "TweakId": "power.disable-hibernation",
+        "Name": "Disable Hibernation",
+        "Category": "Power",
+        "Description": "Runs powercfg /hibernate off. This disables hibernation and removes hiberfil.sys.",
+        "FriendlyDescription": "Runs powercfg /hibernate off. This disables hibernation and removes hiberfil.sys.",
+        "RegistryPath": "",
+        "EvidenceClass": "B",
+        "EvidenceClassTitle": "Strong but Decision-Gated",
+        "ResearchStatus": "INTENTIONAL HOLD",
+        "IsMutationAllowed": false,
+        "RollbackSnapshotState": "ready",
+        "RollbackStoryText": "Rollback: Verified via record-restore-story.",
+        "HasClaimBoundary": true,
+        "WhatWeKnowSummary": "Claim: Runs powercfg /hibernate off. This disables hibernation and removes hiberfil.sys. Evidence: The power documentation explains S4 hibernation behavior and maps the app command to the powercfg /hibernate off registry effect. Rollback: Rollback: Verified via record-restore-story.",
+        "WhatWeDoNotClaimSummary": "Apply gate: Evidence pending Source boundary: Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+        "ProofLanes": [
+          {
+            "Key": "docs",
+            "Label": "DOCS",
+            "State": "ready",
+            "Summary": "The power documentation explains S4 hibernation behavior and maps the app command to the powercfg /hibernate off registry effect.",
+            "Source": "Validation proof source: C:\\Tools\\AppSmoke\\Docs\\power\\power.md"
+          },
+          {
+            "Key": "runtime",
+            "Label": "RUNTIME",
+            "State": "ready",
+            "Summary": "No runtime proof is attached yet. This record still needs VM validation.",
+            "Source": ""
+          },
+          {
+            "Key": "source",
+            "Label": "SOURCE",
+            "State": "ready",
+            "Summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+            "Source": "win-config / power/desc.md: https://github.com/nohuto/win-config/blob/main/power/desc.md"
+          },
+          {
+            "Key": "rollback",
+            "Label": "ROLLBACK",
+            "State": "ready",
+            "Summary": "Rollback: Verified via record-restore-story.",
+            "Source": "record-restore-story"
+          }
+        ],
+        "ReferenceLinks": [
+          {
+            "Title": "Docs: Details",
+            "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html#power.disable-hibernation",
+            "Kind": "Details"
+          },
+          {
+            "Title": "Docs: Power",
+            "Url": "C:\\Tools\\AppSmoke\\Docs\\power\\power.md#power.disable-hibernation",
+            "Kind": "Docs"
+          }
+        ]
+      },
+      "Stages": [
+        {
+          "Stage": "detect-before",
+          "AppliedStatus": "NotApplied",
+          "StatusMessage": "Current state: Hibernation enabled",
+          "OutcomeSummary": "Detect - Success",
+          "CurrentValue": "Hibernation enabled",
+          "TargetValue": "Optimized",
+          "WasRolledBack": false,
+          "IsMutationAllowed": false,
+          "HasSuccessfulApplyStory": false,
+          "HasSuccessfulRollbackStory": false,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Detected",
+              "Message": "Current state: Hibernation enabled",
+              "TimestampText": "16:09:13"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Pending",
+              "Message": "",
+              "TimestampText": "-"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Pending",
+              "Message": "",
+              "TimestampText": "-"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Pending",
+              "Message": "",
+              "TimestampText": "-"
+            }
+          ]
+        },
+        {
+          "Stage": "apply",
+          "AppliedStatus": "Error",
+          "StatusMessage": "Run completed with errors.",
+          "OutcomeSummary": "Apply - Failed",
+          "CurrentValue": "Hibernation enabled",
+          "TargetValue": "Optimized",
+          "WasRolledBack": false,
+          "IsMutationAllowed": false,
+          "HasSuccessfulApplyStory": true,
+          "HasSuccessfulRollbackStory": false,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Detected",
+              "Message": "Current state: Hibernation enabled",
+              "TimestampText": "16:09:14"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Applied",
+              "Message": "Successfully applied changes.",
+              "TimestampText": "16:09:14"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Failed",
+              "Message": "Verification failed - changes not applied.",
+              "TimestampText": "16:09:14"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Failed",
+              "Message": "Rollback command failed with exit code 1: Hibernation failed with the following error: The request is not supported.\r\r\n\r\nThe following items are preventing hibernation on this system.\r\n\tThe system firmware does not support hibernation.\r\n",
+              "TimestampText": "16:09:14"
+            }
+          ]
+        },
+        {
+          "Stage": "rollback",
+          "AppliedStatus": "Error",
+          "StatusMessage": "Rollback command failed with exit code 1: Hibernation failed with the following error: The request is not supported.\r\r\n\r\nThe following items are preventing hibernation on this system.\r\n\tThe system firmware does not support hibernation.",
+          "OutcomeSummary": "Rollback - Failed",
+          "CurrentValue": "Hibernation enabled",
+          "TargetValue": "Optimized",
+          "WasRolledBack": false,
+          "IsMutationAllowed": false,
+          "HasSuccessfulApplyStory": true,
+          "HasSuccessfulRollbackStory": false,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Detected",
+              "Message": "Current state: Hibernation enabled",
+              "TimestampText": "16:09:14"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Applied",
+              "Message": "Successfully applied changes.",
+              "TimestampText": "16:09:14"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Failed",
+              "Message": "Verification failed - changes not applied.",
+              "TimestampText": "16:09:14"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Failed",
+              "Message": "Rollback command failed with exit code 1: Hibernation failed with the following error: The request is not supported.\r\r\n\r\nThe following items are preventing hibernation on this system.\r\n\tThe system firmware does not support hibernation.\r\n",
+              "TimestampText": "16:09:14"
+            }
+          ]
+        },
+        {
+          "Stage": "detect-after",
+          "AppliedStatus": "NotApplied",
+          "StatusMessage": "Current state: Hibernation enabled",
+          "OutcomeSummary": "Detect - Success",
+          "CurrentValue": "Hibernation enabled",
+          "TargetValue": "Optimized",
+          "WasRolledBack": false,
+          "IsMutationAllowed": false,
+          "HasSuccessfulApplyStory": true,
+          "HasSuccessfulRollbackStory": false,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Detected",
+              "Message": "Current state: Hibernation enabled",
+              "TimestampText": "16:09:14"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Applied",
+              "Message": "Successfully applied changes.",
+              "TimestampText": "16:09:14"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Failed",
+              "Message": "Verification failed - changes not applied.",
+              "TimestampText": "16:09:14"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Failed",
+              "Message": "Rollback command failed with exit code 1: Hibernation failed with the following error: The request is not supported.\r\r\n\r\nThe following items are preventing hibernation on this system.\r\n\tThe system firmware does not support hibernation.\r\n",
+              "TimestampText": "16:09:14"
+            }
+          ]
+        }
+      ],
+      "StartedAtUtc": "2026-05-07T23:09:11.1943683+00:00",
+      "CompletedAtUtc": "2026-05-07T23:09:14.4789742+00:00"
+    }
+  },
+  {
+    "tweak_id": "power.disable-usb-selective-suspend",
+    "host_exit": 0,
+    "execution_exit": 0,
+    "payload_status": "completed",
+    "report_source": "stdout",
+    "report_parse_error": null,
+    "report_fetch_status": null,
+    "report_app_success": true,
+    "report_success": true,
+    "report_status": "ok-gated-override",
+    "report_summary": "QA-only gated mutation override used; apply/verify path completed and rollback restored the tweak.",
+    "report_contract_status": "ok",
+    "report_contract_summary": "QA card snapshot contract passed.",
+    "report_contract_failures": [],
+    "report_card_present": true,
+    "report_card_has_claim_boundary": true,
+    "report_card_present_fields": [
+      "TweakId",
+      "Name",
+      "Category",
+      "EvidenceClass",
+      "ResearchStatus",
+      "RollbackSnapshotState",
+      "HasClaimBoundary",
+      "WhatWeKnowSummary",
+      "WhatWeDoNotClaimSummary",
+      "ProofLanes"
+    ],
+    "report_card_missing_fields": [],
+    "report_card_proof_lanes": [
+      "docs",
+      "runtime",
+      "source",
+      "rollback"
+    ],
+    "report_card_missing_proof_lanes": [],
+    "report": {
+      "TweakId": "power.disable-usb-selective-suspend",
+      "TweakName": "Disable USB Selective Suspend",
+      "Success": true,
+      "Status": "ok-gated-override",
+      "Summary": "QA-only gated mutation override used; apply/verify path completed and rollback restored the tweak.",
+      "RollbackRequested": true,
+      "GatedMutationOverrideRequested": true,
+      "GatedMutationOverrideUsed": true,
+      "Card": {
+        "TweakId": "power.disable-usb-selective-suspend",
+        "Name": "Disable USB Selective Suspend",
+        "Category": "Power",
+        "Description": "Sets the USB Selective Suspend power setting to Disabled for AC and DC on the active power plan.",
+        "FriendlyDescription": "Sets the USB Selective Suspend power setting to Disabled for AC and DC on the active power plan.",
+        "RegistryPath": "",
+        "EvidenceClass": "B",
+        "EvidenceClassTitle": "Strong but Decision-Gated",
+        "ResearchStatus": "INTENTIONAL HOLD",
+        "IsMutationAllowed": false,
+        "RollbackSnapshotState": "ready",
+        "RollbackStoryText": "Rollback: Verified via record-restore-story.",
+        "HasClaimBoundary": true,
+        "WhatWeKnowSummary": "Claim: Sets the USB Selective Suspend power setting to Disabled for AC and DC on the active power plan. Evidence: The power documentation covers USB selective suspend/device power-savings behavior, and the checked-in command implementation supplies the exact active-scheme powercfg values and rollback snapshot. Rollback: Rollback: Verified via record-restore-story.",
+        "WhatWeDoNotClaimSummary": "Apply gate: Evidence pending",
+        "ProofLanes": [
+          {
+            "Key": "docs",
+            "Label": "DOCS",
+            "State": "ready",
+            "Summary": "The power documentation covers USB selective suspend/device power-savings behavior, and the checked-in command implementation supplies the exact active-scheme powercfg values and rollback snapshot.",
+            "Source": "Validation proof source: C:\\Tools\\AppSmoke\\Docs\\power\\power.md"
+          },
+          {
+            "Key": "runtime",
+            "Label": "RUNTIME",
+            "State": "ready",
+            "Summary": "No runtime proof is attached yet. This record still needs VM validation.",
+            "Source": ""
+          },
+          {
+            "Key": "source",
+            "Label": "SOURCE",
+            "State": "ready",
+            "Summary": "No upstream nohuto source link is attached to this record.",
+            "Source": ""
+          },
+          {
+            "Key": "rollback",
+            "Label": "ROLLBACK",
+            "State": "ready",
+            "Summary": "Rollback: Verified via record-restore-story.",
+            "Source": "record-restore-story"
+          }
+        ],
+        "ReferenceLinks": [
+          {
+            "Title": "Docs: Details (missing)",
+            "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
+            "Kind": "Details"
+          },
+          {
+            "Title": "Docs: Power (section missing)",
+            "Url": "C:\\Tools\\AppSmoke\\Docs\\power\\power.md",
+            "Kind": "Docs"
+          }
+        ]
+      },
+      "Stages": [
+        {
+          "Stage": "detect-before",
+          "AppliedStatus": "NotApplied",
+          "StatusMessage": "USB Selective Suspend: Enabled (AC/DC: 1/1).",
+          "OutcomeSummary": "Detect - Success",
+          "CurrentValue": "Unknown",
+          "TargetValue": "Optimized",
+          "WasRolledBack": false,
+          "IsMutationAllowed": false,
+          "HasSuccessfulApplyStory": false,
+          "HasSuccessfulRollbackStory": false,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Detected",
+              "Message": "USB Selective Suspend: Enabled (AC/DC: 1/1).",
+              "TimestampText": "16:09:23"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Pending",
+              "Message": "",
+              "TimestampText": "-"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Pending",
+              "Message": "",
+              "TimestampText": "-"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Pending",
+              "Message": "",
+              "TimestampText": "-"
+            }
+          ]
+        },
+        {
+          "Stage": "apply",
+          "AppliedStatus": "Applied",
+          "StatusMessage": "Run completed.",
+          "OutcomeSummary": "Apply - Success",
+          "CurrentValue": "Optimized",
+          "TargetValue": "Optimized",
+          "WasRolledBack": false,
+          "IsMutationAllowed": false,
+          "HasSuccessfulApplyStory": true,
+          "HasSuccessfulRollbackStory": false,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Detected",
+              "Message": "USB Selective Suspend: Enabled (AC/DC: 1/1).",
+              "TimestampText": "16:09:23"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Applied",
+              "Message": "Disabled USB Selective Suspend for the active power plan.",
+              "TimestampText": "16:09:23"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Verified",
+              "Message": "USB Selective Suspend is disabled for AC and DC power.",
+              "TimestampText": "16:09:23"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Not required",
+              "Message": "Step not executed.",
+              "TimestampText": "-"
+            }
+          ]
+        },
+        {
+          "Stage": "rollback",
+          "AppliedStatus": "NotApplied",
+          "StatusMessage": "Restored previous USB Selective Suspend values for the active power plan.",
+          "OutcomeSummary": "Rollback - Rolled Back",
+          "CurrentValue": "Optimized",
+          "TargetValue": "Optimized",
+          "WasRolledBack": true,
+          "IsMutationAllowed": false,
+          "HasSuccessfulApplyStory": true,
+          "HasSuccessfulRollbackStory": true,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Detected",
+              "Message": "USB Selective Suspend: Enabled (AC/DC: 1/1).",
+              "TimestampText": "16:09:23"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Applied",
+              "Message": "Disabled USB Selective Suspend for the active power plan.",
+              "TimestampText": "16:09:23"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Verified",
+              "Message": "USB Selective Suspend is disabled for AC and DC power.",
+              "TimestampText": "16:09:23"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Rolled back",
+              "Message": "Restored previous USB Selective Suspend values for the active power plan.",
+              "TimestampText": "16:09:23"
+            }
+          ]
+        },
+        {
+          "Stage": "detect-after",
+          "AppliedStatus": "NotApplied",
+          "StatusMessage": "USB Selective Suspend: Enabled (AC/DC: 1/1).",
+          "OutcomeSummary": "Detect - Success",
+          "CurrentValue": "Optimized",
+          "TargetValue": "Optimized",
+          "WasRolledBack": true,
+          "IsMutationAllowed": false,
+          "HasSuccessfulApplyStory": true,
+          "HasSuccessfulRollbackStory": true,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Detected",
+              "Message": "USB Selective Suspend: Enabled (AC/DC: 1/1).",
+              "TimestampText": "16:09:23"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Applied",
+              "Message": "Disabled USB Selective Suspend for the active power plan.",
+              "TimestampText": "16:09:23"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Verified",
+              "Message": "USB Selective Suspend is disabled for AC and DC power.",
+              "TimestampText": "16:09:23"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Rolled back",
+              "Message": "Restored previous USB Selective Suspend values for the active power plan.",
+              "TimestampText": "16:09:23"
+            }
+          ]
+        }
+      ],
+      "StartedAtUtc": "2026-05-07T23:09:20.5782481+00:00",
+      "CompletedAtUtc": "2026-05-07T23:09:24.0224261+00:00"
+    }
+  }
+]

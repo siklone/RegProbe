@@ -41,6 +41,12 @@ GENERIC_SLUG_WORDS = {
 
 def blocker_hint(blockers: list[str], lane: str) -> str:
     lowered = " | ".join(str(item).lower() for item in blockers)
+    if "app-qa-access-denied" in lowered:
+        return "Redesign the current app mutation path before more evidence collection; audio enhancements likely need per-device or permission-aware handling, then rerun VM app QA."
+    if "vm-firmware-hibernation-unsupported" in lowered:
+        return "Move this to a hibernation-capable VM or bare-metal validation lane; the current VM correctly proves not-applicable handling only."
+    if "app-qa-clean-baseline-needed" in lowered:
+        return "Provision a clean baseline where the target service is enabled/running, then rerun VM app QA to prove apply and rollback mutation."
     if "live-reader-binding-unresolved" in lowered:
         return "Target the override response/message boundary next; start with PopPowerRequestHandleRequestOverrideQueryResponse and PopUmpoSendPowerMessage before widening the lane."
     if "restore-story" in lowered or "rollback" in lowered:

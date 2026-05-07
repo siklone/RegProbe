@@ -8,6 +8,8 @@ namespace RegProbe.Engine.Tweaks.Commands.Power;
 public sealed class DisableHibernationTweak : CommandTweak
 {
     private const string System32PowerCfgExe = "powercfg.exe";
+    private const string HibernationDisabledText = "Hibernation has not been enabled";
+    private const string FirmwareUnsupportedText = "system firmware does not support hibernation";
 
     public DisableHibernationTweak(ICommandRunner commandRunner)
         : base(
@@ -37,7 +39,13 @@ public sealed class DisableHibernationTweak : CommandTweak
 
     protected override CommandRequest? GetRollbackCommand(string detectedState)
     {
-        if (detectedState.Contains("Hibernation has not been enabled", StringComparison.OrdinalIgnoreCase))
+        if (detectedState.Contains("unavailable", StringComparison.OrdinalIgnoreCase)
+            || detectedState.Contains(FirmwareUnsupportedText, StringComparison.OrdinalIgnoreCase))
+        {
+            return null;
+        }
+
+        if (detectedState.Contains(HibernationDisabledText, StringComparison.OrdinalIgnoreCase))
         {
             return null;
         }
@@ -50,7 +58,13 @@ public sealed class DisableHibernationTweak : CommandTweak
 
     protected override bool ParseDetectedState(CommandResult result, out string state)
     {
-        if (result.StandardOutput.Contains("Hibernation has not been enabled", StringComparison.OrdinalIgnoreCase))
+        if (result.StandardOutput.Contains(FirmwareUnsupportedText, StringComparison.OrdinalIgnoreCase))
+        {
+            state = "Hibernation unavailable: system firmware does not support hibernation";
+            return true;
+        }
+
+        if (result.StandardOutput.Contains(HibernationDisabledText, StringComparison.OrdinalIgnoreCase))
         {
             state = "Hibernation disabled";
             return true;
@@ -66,8 +80,18 @@ public sealed class DisableHibernationTweak : CommandTweak
         return true;
     }
 
+    protected override TweakStatus GetDetectedStatus(CommandResult result, string detectedState)
+    {
+        if (result.StandardOutput.Contains(FirmwareUnsupportedText, StringComparison.OrdinalIgnoreCase))
+        {
+            return TweakStatus.NotApplicable;
+        }
+
+        return base.GetDetectedStatus(result, detectedState);
+    }
+
     protected override bool VerifyApplied(CommandResult result)
     {
-        return result.StandardOutput.Contains("Hibernation has not been enabled", StringComparison.OrdinalIgnoreCase);
+        return result.StandardOutput.Contains(HibernationDisabledText, StringComparison.OrdinalIgnoreCase);
     }
 }

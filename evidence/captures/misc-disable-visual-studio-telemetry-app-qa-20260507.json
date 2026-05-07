@@ -1,0 +1,225 @@
+{
+  "TweakId": "misc.disable-visual-studio-telemetry",
+  "TweakName": "Disable Visual Studio Telemetry",
+  "Success": true,
+  "Status": "ok-gated-override",
+  "Summary": "QA-only gated mutation override used; apply/verify path completed and rollback restored the tweak.",
+  "RollbackRequested": true,
+  "GatedMutationOverrideRequested": true,
+  "GatedMutationOverrideUsed": true,
+  "Card": {
+    "TweakId": "misc.disable-visual-studio-telemetry",
+    "Name": "Disable Visual Studio Telemetry",
+    "Category": "Misc",
+    "Description": "Disables Visual Studio telemetry, SQM data collection, IntelliCode remote analysis, and feedback features for VS 2015-2022.",
+    "FriendlyDescription": "Disables Visual Studio telemetry, SQM data collection, IntelliCode remote analysis, and feedback features for VS 2015-2022.",
+    "RegistryPath": "",
+    "EvidenceClass": "B",
+    "EvidenceClassTitle": "Strong but Decision-Gated",
+    "ResearchStatus": "INTENTIONAL HOLD",
+    "IsMutationAllowed": false,
+    "RollbackSnapshotState": "ready",
+    "RollbackStoryText": "Rollback: Verified via record-restore-story.",
+    "HasClaimBoundary": true,
+    "WhatWeKnowSummary": "Claim: Disables Visual Studio telemetry, SQM data collection, IntelliCode remote analysis, and feedback features for VS 2015-2022. Evidence: The misc documentation names the Visual Studio telemetry, SQM, feedback, and remote-analysis controls that the current app card writes or audits. Rollback: Rollback: Verified via record-restore-story.",
+    "WhatWeDoNotClaimSummary": "Apply gate: Evidence pending Source boundary: Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+    "ProofLanes": [
+      {
+        "Key": "docs",
+        "Label": "DOCS",
+        "State": "ready",
+        "Summary": "The misc documentation names the Visual Studio telemetry, SQM, feedback, and remote-analysis controls that the current app card writes or audits.",
+        "Source": "Validation proof source: C:\\Tools\\AppSmoke\\Docs\\misc\\misc.md"
+      },
+      {
+        "Key": "runtime",
+        "Label": "RUNTIME",
+        "State": "ready",
+        "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "Source": ""
+      },
+      {
+        "Key": "source",
+        "Label": "SOURCE",
+        "State": "ready",
+        "Summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+        "Source": "win-config / misc/desc.md#disable-vs-telemetry: https://github.com/nohuto/win-config/blob/main/misc/desc.md#disable-vs-telemetry"
+      },
+      {
+        "Key": "rollback",
+        "Label": "ROLLBACK",
+        "State": "ready",
+        "Summary": "Rollback: Verified via record-restore-story.",
+        "Source": "record-restore-story"
+      }
+    ],
+    "ReferenceLinks": [
+      {
+        "Title": "Docs: Details",
+        "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html#misc.disable-visual-studio-telemetry",
+        "Kind": "Details"
+      },
+      {
+        "Title": "Docs: Misc",
+        "Url": "C:\\Tools\\AppSmoke\\Docs\\misc\\misc.md#misc.disable-visual-studio-telemetry",
+        "Kind": "Docs"
+      }
+    ]
+  },
+  "Stages": [
+    {
+      "Stage": "detect-before",
+      "AppliedStatus": "NotApplied",
+      "StatusMessage": "Detected 0 of 8 values (matches: 0, missing: 8).",
+      "OutcomeSummary": "Detect - Success",
+      "CurrentValue": "Unknown",
+      "TargetValue": "Multiple values",
+      "WasRolledBack": false,
+      "IsMutationAllowed": false,
+      "HasSuccessfulApplyStory": false,
+      "HasSuccessfulRollbackStory": false,
+      "Steps": [
+        {
+          "Action": "Detect",
+          "StatusText": "Detected",
+          "Message": "Detected 0 of 8 values (matches: 0, missing: 8).\nEntries:\n- HKLM\\SOFTWARE\\Microsoft\\VSCommon\\14.0\\SQM\\OptIn: missing\n- HKLM\\SOFTWARE\\Microsoft\\VSCommon\\15.0\\SQM\\OptIn: missing\n- HKLM\\SOFTWARE\\Microsoft\\VSCommon\\16.0\\SQM\\OptIn: missing\n- HKLM\\SOFTWARE\\Microsoft\\VSCommon\\17.0\\SQM\\OptIn: missing\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\VisualStudio\\Feedback\\DisableEmailInput: missing\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\VisualStudio\\Feedback\\DisableFeedbackDialog: missing\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\VisualStudio\\Feedback\\DisableScreenshotCapture: missing\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\VisualStudio\\SQM\\OptIn: missing",
+          "TimestampText": "16:07:55"
+        },
+        {
+          "Action": "Apply",
+          "StatusText": "Pending",
+          "Message": "",
+          "TimestampText": "-"
+        },
+        {
+          "Action": "Verify",
+          "StatusText": "Pending",
+          "Message": "",
+          "TimestampText": "-"
+        },
+        {
+          "Action": "Rollback",
+          "StatusText": "Pending",
+          "Message": "",
+          "TimestampText": "-"
+        }
+      ]
+    },
+    {
+      "Stage": "apply",
+      "AppliedStatus": "Applied",
+      "StatusMessage": "Run completed.",
+      "OutcomeSummary": "Apply - Success",
+      "CurrentValue": "Multiple values",
+      "TargetValue": "Multiple values",
+      "WasRolledBack": false,
+      "IsMutationAllowed": false,
+      "HasSuccessfulApplyStory": true,
+      "HasSuccessfulRollbackStory": false,
+      "Steps": [
+        {
+          "Action": "Detect",
+          "StatusText": "Detected",
+          "Message": "Detected 0 of 8 values (matches: 0, missing: 8).\nEntries:\n- HKLM\\SOFTWARE\\Microsoft\\VSCommon\\14.0\\SQM\\OptIn: missing\n- HKLM\\SOFTWARE\\Microsoft\\VSCommon\\15.0\\SQM\\OptIn: missing\n- HKLM\\SOFTWARE\\Microsoft\\VSCommon\\16.0\\SQM\\OptIn: missing\n- HKLM\\SOFTWARE\\Microsoft\\VSCommon\\17.0\\SQM\\OptIn: missing\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\VisualStudio\\Feedback\\DisableEmailInput: missing\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\VisualStudio\\Feedback\\DisableFeedbackDialog: missing\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\VisualStudio\\Feedback\\DisableScreenshotCapture: missing\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\VisualStudio\\SQM\\OptIn: missing",
+          "TimestampText": "16:07:55"
+        },
+        {
+          "Action": "Apply",
+          "StatusText": "Applied",
+          "Message": "Updated 8 values.",
+          "TimestampText": "16:07:55"
+        },
+        {
+          "Action": "Verify",
+          "StatusText": "Verified",
+          "Message": "Verified desired values.",
+          "TimestampText": "16:07:55"
+        },
+        {
+          "Action": "Rollback",
+          "StatusText": "Not required",
+          "Message": "Step not executed.",
+          "TimestampText": "-"
+        }
+      ]
+    },
+    {
+      "Stage": "rollback",
+      "AppliedStatus": "NotApplied",
+      "StatusMessage": "Rolled back registry values.",
+      "OutcomeSummary": "Rollback - Rolled Back",
+      "CurrentValue": "Multiple values",
+      "TargetValue": "Multiple values",
+      "WasRolledBack": true,
+      "IsMutationAllowed": false,
+      "HasSuccessfulApplyStory": true,
+      "HasSuccessfulRollbackStory": true,
+      "Steps": [
+        {
+          "Action": "Detect",
+          "StatusText": "Detected",
+          "Message": "Detected 0 of 8 values (matches: 0, missing: 8).\nEntries:\n- HKLM\\SOFTWARE\\Microsoft\\VSCommon\\14.0\\SQM\\OptIn: missing\n- HKLM\\SOFTWARE\\Microsoft\\VSCommon\\15.0\\SQM\\OptIn: missing\n- HKLM\\SOFTWARE\\Microsoft\\VSCommon\\16.0\\SQM\\OptIn: missing\n- HKLM\\SOFTWARE\\Microsoft\\VSCommon\\17.0\\SQM\\OptIn: missing\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\VisualStudio\\Feedback\\DisableEmailInput: missing\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\VisualStudio\\Feedback\\DisableFeedbackDialog: missing\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\VisualStudio\\Feedback\\DisableScreenshotCapture: missing\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\VisualStudio\\SQM\\OptIn: missing",
+          "TimestampText": "16:07:55"
+        },
+        {
+          "Action": "Apply",
+          "StatusText": "Applied",
+          "Message": "Updated 8 values.",
+          "TimestampText": "16:07:55"
+        },
+        {
+          "Action": "Verify",
+          "StatusText": "Verified",
+          "Message": "Verified desired values.",
+          "TimestampText": "16:07:55"
+        },
+        {
+          "Action": "Rollback",
+          "StatusText": "Rolled back",
+          "Message": "Rolled back registry values.",
+          "TimestampText": "16:07:55"
+        }
+      ]
+    },
+    {
+      "Stage": "detect-after",
+      "AppliedStatus": "NotApplied",
+      "StatusMessage": "Detected 0 of 8 values (matches: 0, missing: 8).",
+      "OutcomeSummary": "Detect - Success",
+      "CurrentValue": "Multiple values",
+      "TargetValue": "Multiple values",
+      "WasRolledBack": true,
+      "IsMutationAllowed": false,
+      "HasSuccessfulApplyStory": true,
+      "HasSuccessfulRollbackStory": true,
+      "Steps": [
+        {
+          "Action": "Detect",
+          "StatusText": "Detected",
+          "Message": "Detected 0 of 8 values (matches: 0, missing: 8).\nEntries:\n- HKLM\\SOFTWARE\\Microsoft\\VSCommon\\14.0\\SQM\\OptIn: missing\n- HKLM\\SOFTWARE\\Microsoft\\VSCommon\\15.0\\SQM\\OptIn: missing\n- HKLM\\SOFTWARE\\Microsoft\\VSCommon\\16.0\\SQM\\OptIn: missing\n- HKLM\\SOFTWARE\\Microsoft\\VSCommon\\17.0\\SQM\\OptIn: missing\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\VisualStudio\\Feedback\\DisableEmailInput: missing\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\VisualStudio\\Feedback\\DisableFeedbackDialog: missing\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\VisualStudio\\Feedback\\DisableScreenshotCapture: missing\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\VisualStudio\\SQM\\OptIn: missing",
+          "TimestampText": "16:07:56"
+        },
+        {
+          "Action": "Apply",
+          "StatusText": "Applied",
+          "Message": "Updated 8 values.",
+          "TimestampText": "16:07:55"
+        },
+        {
+          "Action": "Verify",
+          "StatusText": "Verified",
+          "Message": "Verified desired values.",
+          "TimestampText": "16:07:55"
+        },
+        {
+          "Action": "Rollback",
+          "StatusText": "Rolled back",
+          "Message": "Rolled back registry values.",
+          "TimestampText": "16:07:55"
+        }
+      ]
+    }
+  ],
+  "StartedAtUtc": "2026-05-07T23:07:52.4819303+00:00",
+  "CompletedAtUtc": "2026-05-07T23:07:56.064977+00:00"
+}

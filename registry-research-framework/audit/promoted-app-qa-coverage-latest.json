@@ -1,11 +1,11 @@
 {
-  "generated_utc": "2026-05-07T19:38:13Z",
+  "generated_utc": "2026-05-07T23:27:06Z",
   "history_entry_count": 88,
-  "catalog_candidate_count": 243,
+  "catalog_candidate_count": 253,
   "covered_count": 243,
-  "uncovered_count": 0,
+  "uncovered_count": 10,
   "summary": {
-    "coverage_percent": 100.0,
+    "coverage_percent": 96.05,
     "covered_categories": {
       "Audio": 3,
       "Cleanup": 1,
@@ -21,9 +21,133 @@
       "System": 52,
       "Visibility": 23
     },
-    "uncovered_categories": {}
+    "uncovered_categories": {
+      "Misc": 5,
+      "Peripheral": 4,
+      "Power": 1
+    }
   },
-  "recommended_next_batches": [],
+  "recommended_next_batches": [
+    {
+      "category": "Misc",
+      "covered_count": 0,
+      "uncovered_count": 5,
+      "coverage_percent": 0.0,
+      "batch_size": 5,
+      "tweak_ids": [
+        "misc.disable-edge-features",
+        "misc.disable-office-telemetry",
+        "misc.disable-onedrive",
+        "misc.disable-visual-studio-telemetry",
+        "misc.optimize-7zip-settings"
+      ],
+      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id misc.disable-edge-features --id misc.disable-office-telemetry --id misc.disable-onedrive --id misc.disable-visual-studio-telemetry --id misc.optimize-7zip-settings",
+      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id misc.disable-edge-features --id misc.disable-office-telemetry --id misc.disable-onedrive --id misc.disable-visual-studio-telemetry --id misc.optimize-7zip-settings --run-kvm --json",
+      "candidates": [
+        {
+          "tweak_id": "misc.disable-edge-features",
+          "record_id": "misc.disable-edge-features",
+          "category": "Misc",
+          "name": "Disable Microsoft Edge Features",
+          "documentation": "Docs/misc/misc.md"
+        },
+        {
+          "tweak_id": "misc.disable-office-telemetry",
+          "record_id": "misc.disable-office-telemetry",
+          "category": "Misc",
+          "name": "Disable Microsoft Office Telemetry",
+          "documentation": "Docs/misc/misc.md"
+        },
+        {
+          "tweak_id": "misc.disable-onedrive",
+          "record_id": "misc.disable-onedrive",
+          "category": "Misc",
+          "name": "Disable OneDrive",
+          "documentation": "Docs/misc/misc.md"
+        },
+        {
+          "tweak_id": "misc.disable-visual-studio-telemetry",
+          "record_id": "misc.disable-visual-studio-telemetry",
+          "category": "Misc",
+          "name": "Disable Visual Studio Telemetry",
+          "documentation": "Docs/misc/misc.md"
+        },
+        {
+          "tweak_id": "misc.optimize-7zip-settings",
+          "record_id": "misc.optimize-7zip-settings",
+          "category": "Misc",
+          "name": "Configure 7-Zip Context Menu Settings",
+          "documentation": "Docs/misc/misc.md"
+        }
+      ]
+    },
+    {
+      "category": "Peripheral",
+      "covered_count": 4,
+      "uncovered_count": 4,
+      "coverage_percent": 50.0,
+      "batch_size": 4,
+      "tweak_ids": [
+        "peripheral.keyboard-disable-language-hotkey",
+        "peripheral.keyboard-optimize-repeat",
+        "peripheral.mouse-disable-acceleration",
+        "peripheral.mouse-disable-throttle"
+      ],
+      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id peripheral.keyboard-disable-language-hotkey --id peripheral.keyboard-optimize-repeat --id peripheral.mouse-disable-acceleration --id peripheral.mouse-disable-throttle",
+      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id peripheral.keyboard-disable-language-hotkey --id peripheral.keyboard-optimize-repeat --id peripheral.mouse-disable-acceleration --id peripheral.mouse-disable-throttle --run-kvm --json",
+      "candidates": [
+        {
+          "tweak_id": "peripheral.keyboard-disable-language-hotkey",
+          "record_id": "peripheral.keyboard-disable-language-hotkey",
+          "category": "Peripheral",
+          "name": "Disable Language Switch Hotkey",
+          "documentation": "Docs/peripheral/peripheral.md"
+        },
+        {
+          "tweak_id": "peripheral.keyboard-optimize-repeat",
+          "record_id": "peripheral.keyboard-optimize-repeat",
+          "category": "Peripheral",
+          "name": "Set Keyboard Repeat and Cursor Blink Values",
+          "documentation": "Docs/peripheral/peripheral.md"
+        },
+        {
+          "tweak_id": "peripheral.mouse-disable-acceleration",
+          "record_id": "peripheral.mouse-disable-acceleration",
+          "category": "Peripheral",
+          "name": "Disable Enhanced Pointer Precision (Mouse Acceleration)",
+          "documentation": "Docs/peripheral/peripheral.md"
+        },
+        {
+          "tweak_id": "peripheral.mouse-disable-throttle",
+          "record_id": "peripheral.mouse-disable-throttle",
+          "category": "Peripheral",
+          "name": "Disable Mouse Throttling for Background Windows",
+          "documentation": "Docs/peripheral/peripheral.md"
+        }
+      ]
+    },
+    {
+      "category": "Power",
+      "covered_count": 10,
+      "uncovered_count": 1,
+      "coverage_percent": 90.91,
+      "batch_size": 1,
+      "tweak_ids": [
+        "power.disable-cpu-parking"
+      ],
+      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id power.disable-cpu-parking",
+      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id power.disable-cpu-parking --run-kvm --json",
+      "candidates": [
+        {
+          "tweak_id": "power.disable-cpu-parking",
+          "record_id": "power.disable-cpu-parking",
+          "category": "Power",
+          "name": "Disable CPU Core Parking",
+          "documentation": "Docs/power/power.md"
+        }
+      ]
+    }
+  ],
   "covered": [
     {
       "tweak_id": "audio.disable-beep",
@@ -2213,5 +2337,76 @@
       "latest_report_status": "ok"
     }
   ],
-  "uncovered": []
+  "uncovered": [
+    {
+      "tweak_id": "misc.disable-edge-features",
+      "record_id": "misc.disable-edge-features",
+      "category": "Misc",
+      "name": "Disable Microsoft Edge Features",
+      "documentation": "Docs/misc/misc.md"
+    },
+    {
+      "tweak_id": "misc.disable-office-telemetry",
+      "record_id": "misc.disable-office-telemetry",
+      "category": "Misc",
+      "name": "Disable Microsoft Office Telemetry",
+      "documentation": "Docs/misc/misc.md"
+    },
+    {
+      "tweak_id": "misc.disable-onedrive",
+      "record_id": "misc.disable-onedrive",
+      "category": "Misc",
+      "name": "Disable OneDrive",
+      "documentation": "Docs/misc/misc.md"
+    },
+    {
+      "tweak_id": "misc.disable-visual-studio-telemetry",
+      "record_id": "misc.disable-visual-studio-telemetry",
+      "category": "Misc",
+      "name": "Disable Visual Studio Telemetry",
+      "documentation": "Docs/misc/misc.md"
+    },
+    {
+      "tweak_id": "misc.optimize-7zip-settings",
+      "record_id": "misc.optimize-7zip-settings",
+      "category": "Misc",
+      "name": "Configure 7-Zip Context Menu Settings",
+      "documentation": "Docs/misc/misc.md"
+    },
+    {
+      "tweak_id": "peripheral.keyboard-disable-language-hotkey",
+      "record_id": "peripheral.keyboard-disable-language-hotkey",
+      "category": "Peripheral",
+      "name": "Disable Language Switch Hotkey",
+      "documentation": "Docs/peripheral/peripheral.md"
+    },
+    {
+      "tweak_id": "peripheral.keyboard-optimize-repeat",
+      "record_id": "peripheral.keyboard-optimize-repeat",
+      "category": "Peripheral",
+      "name": "Set Keyboard Repeat and Cursor Blink Values",
+      "documentation": "Docs/peripheral/peripheral.md"
+    },
+    {
+      "tweak_id": "peripheral.mouse-disable-acceleration",
+      "record_id": "peripheral.mouse-disable-acceleration",
+      "category": "Peripheral",
+      "name": "Disable Enhanced Pointer Precision (Mouse Acceleration)",
+      "documentation": "Docs/peripheral/peripheral.md"
+    },
+    {
+      "tweak_id": "peripheral.mouse-disable-throttle",
+      "record_id": "peripheral.mouse-disable-throttle",
+      "category": "Peripheral",
+      "name": "Disable Mouse Throttling for Background Windows",
+      "documentation": "Docs/peripheral/peripheral.md"
+    },
+    {
+      "tweak_id": "power.disable-cpu-parking",
+      "record_id": "power.disable-cpu-parking",
+      "category": "Power",
+      "name": "Disable CPU Core Parking",
+      "documentation": "Docs/power/power.md"
+    }
+  ]
 }

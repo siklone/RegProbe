@@ -1,34 +1,36 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-07T19:50:30.389383Z",
+  "generated_utc": "2026-05-07T23:25:43.677052Z",
   "summary": {
     "total_active_records": 301,
     "class_counts": {
-      "A": 246,
-      "D": 32,
-      "B": 21,
+      "A": 258,
+      "D": 17,
+      "B": 24,
       "C": 2
     },
     "lane_counts": {
       "official-policy": 241,
-      "runtime": 35,
-      "system": 9,
+      "runtime": 33,
+      "system": 11,
       "early-boot": 16
     },
     "next_missing_layer_counts": {
-      "none": 251,
-      "validation-proof": 32,
+      "none": 263,
+      "validation-proof": 17,
+      "runtime-trace": 3,
       "intentional-hold": 18
     },
     "promotion_state_counts": {
-      "promoted": 251,
-      "rejected": 50
+      "promoted": 263,
+      "rejected": 35,
+      "blocked": 3
     },
-    "re_audit_required_count": 24,
+    "re_audit_required_count": 39,
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-05-07T19:37:14.732143Z",
+      "generated_utc": "2026-05-07T20:06:08.471076Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -38,8 +40,8 @@
       "counts_by_promotion_state": {}
     },
     "total": 301,
-    "promoted": 251,
-    "blocked": 0,
+    "promoted": 263,
+    "blocked": 3,
     "revalidation_pending": 0,
     "stale": 0,
     "gate_health": "yellow"
@@ -3884,9 +3886,9 @@
     {
       "record_id": "misc.disable-edge-features",
       "tweak_id": "misc.disable-edge-features",
-      "evidence_class": "D",
+      "evidence_class": "A",
       "lane": "runtime",
-      "class_ready_basis": "pending",
+      "class_ready_basis": "converged-vm",
       "official": false,
       "official_doc_exists": false,
       "procmon": false,
@@ -3896,9 +3898,11 @@
       "benchmark": false,
       "reboot_tested": false,
       "incident_seen": false,
-      "next_missing_layer": "validation-proof",
+      "next_missing_layer": "none",
       "cross_layer_satisfied": false,
-      "layers_used": [],
+      "layers_used": [
+        "runtime_trace"
+      ],
       "tools_used": [],
       "boot_phase_relevant": false,
       "suspected_layer": "user-mode",
@@ -3909,37 +3913,34 @@
         "correct_tool_used": true,
         "trigger_condition_tested": false
       },
-      "re_audit_required": false,
-      "re_audit_priority": 0,
-      "re_audit_reason": "cross_layer_missing; etw_not_recorded; dead_flag_checks_incomplete",
-      "original_class": null,
-      "original_pipeline_version": null,
+      "re_audit_required": true,
+      "re_audit_priority": 2,
+      "re_audit_reason": "non_official_v31_reaudit; cross_layer_missing; etw_not_recorded; dead_flag_checks_incomplete",
+      "original_class": "A",
+      "original_pipeline_version": "pre-v3.1",
       "new_pipeline_version": "v3.2",
       "artifact_refs": [],
-      "app_mapping_status": "unknown",
+      "app_mapping_status": "matches-research",
       "restore_story_known": true,
-      "apply_allowed": false,
-      "confidence": "medium",
-      "tweak_origin": "research-derived",
-      "promotion_state": "rejected",
-      "promotion_blockers": [
-        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
-        "validation-proof"
-      ],
-      "record_promotion_allowed": false,
-      "tweak_ingest_allowed": false,
+      "apply_allowed": true,
+      "confidence": "high",
+      "tweak_origin": "legacy-curated",
+      "promotion_state": "promoted",
+      "promotion_blockers": [],
+      "record_promotion_allowed": true,
+      "tweak_ingest_allowed": true,
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 4,
-        "tweak_suitability": 2,
+        "tweak_suitability": 5,
         "privilege_complexity": 3,
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.33,
-        "next_missing_layer": "validation-proof"
+        "overall_score": 3.67,
+        "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
@@ -3953,7 +3954,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-05-07T20:20:00Z"
+        "last_verified_at": "2026-05-07T23:30:00Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -3966,9 +3967,9 @@
     {
       "record_id": "misc.disable-office-telemetry",
       "tweak_id": "misc.disable-office-telemetry",
-      "evidence_class": "D",
+      "evidence_class": "A",
       "lane": "runtime",
-      "class_ready_basis": "pending",
+      "class_ready_basis": "converged-vm",
       "official": false,
       "official_doc_exists": false,
       "procmon": false,
@@ -3978,9 +3979,11 @@
       "benchmark": false,
       "reboot_tested": false,
       "incident_seen": false,
-      "next_missing_layer": "validation-proof",
+      "next_missing_layer": "none",
       "cross_layer_satisfied": false,
-      "layers_used": [],
+      "layers_used": [
+        "runtime_trace"
+      ],
       "tools_used": [],
       "boot_phase_relevant": false,
       "suspected_layer": "user-mode",
@@ -3991,37 +3994,34 @@
         "correct_tool_used": true,
         "trigger_condition_tested": false
       },
-      "re_audit_required": false,
-      "re_audit_priority": 0,
-      "re_audit_reason": "cross_layer_missing; etw_not_recorded; dead_flag_checks_incomplete",
-      "original_class": null,
-      "original_pipeline_version": null,
+      "re_audit_required": true,
+      "re_audit_priority": 2,
+      "re_audit_reason": "non_official_v31_reaudit; cross_layer_missing; etw_not_recorded; dead_flag_checks_incomplete",
+      "original_class": "A",
+      "original_pipeline_version": "pre-v3.1",
       "new_pipeline_version": "v3.2",
       "artifact_refs": [],
-      "app_mapping_status": "unknown",
+      "app_mapping_status": "matches-research",
       "restore_story_known": true,
-      "apply_allowed": false,
-      "confidence": "medium",
-      "tweak_origin": "research-derived",
-      "promotion_state": "rejected",
-      "promotion_blockers": [
-        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
-        "validation-proof"
-      ],
-      "record_promotion_allowed": false,
-      "tweak_ingest_allowed": false,
+      "apply_allowed": true,
+      "confidence": "high",
+      "tweak_origin": "legacy-curated",
+      "promotion_state": "promoted",
+      "promotion_blockers": [],
+      "record_promotion_allowed": true,
+      "tweak_ingest_allowed": true,
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 4,
-        "tweak_suitability": 2,
+        "tweak_suitability": 5,
         "privilege_complexity": 4,
         "build_specificity": 5,
         "sibling_expansion_value": 2,
         "bench_priority": 3,
-        "overall_score": 3.22,
-        "next_missing_layer": "validation-proof"
+        "overall_score": 3.56,
+        "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
@@ -4035,7 +4035,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-05-07T20:20:00Z"
+        "last_verified_at": "2026-05-07T23:30:00Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -4048,9 +4048,9 @@
     {
       "record_id": "misc.disable-onedrive",
       "tweak_id": "misc.disable-onedrive",
-      "evidence_class": "D",
-      "lane": "runtime",
-      "class_ready_basis": "pending",
+      "evidence_class": "A",
+      "lane": "system",
+      "class_ready_basis": "converged-vm",
       "official": false,
       "official_doc_exists": false,
       "procmon": false,
@@ -4060,9 +4060,11 @@
       "benchmark": false,
       "reboot_tested": false,
       "incident_seen": false,
-      "next_missing_layer": "validation-proof",
+      "next_missing_layer": "none",
       "cross_layer_satisfied": false,
-      "layers_used": [],
+      "layers_used": [
+        "runtime_trace"
+      ],
       "tools_used": [],
       "boot_phase_relevant": false,
       "suspected_layer": "user-mode",
@@ -4073,37 +4075,34 @@
         "correct_tool_used": true,
         "trigger_condition_tested": false
       },
-      "re_audit_required": false,
-      "re_audit_priority": 0,
-      "re_audit_reason": "cross_layer_missing; etw_not_recorded; dead_flag_checks_incomplete",
-      "original_class": null,
-      "original_pipeline_version": null,
+      "re_audit_required": true,
+      "re_audit_priority": 2,
+      "re_audit_reason": "non_official_v31_reaudit; cross_layer_missing; etw_not_recorded; dead_flag_checks_incomplete",
+      "original_class": "A",
+      "original_pipeline_version": "pre-v3.1",
       "new_pipeline_version": "v3.2",
       "artifact_refs": [],
-      "app_mapping_status": "unknown",
+      "app_mapping_status": "matches-research",
       "restore_story_known": true,
-      "apply_allowed": false,
-      "confidence": "medium",
-      "tweak_origin": "research-derived",
-      "promotion_state": "rejected",
-      "promotion_blockers": [
-        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
-        "validation-proof"
-      ],
-      "record_promotion_allowed": false,
-      "tweak_ingest_allowed": false,
+      "apply_allowed": true,
+      "confidence": "high",
+      "tweak_origin": "legacy-curated",
+      "promotion_state": "promoted",
+      "promotion_blockers": [],
+      "record_promotion_allowed": true,
+      "tweak_ingest_allowed": true,
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 4,
-        "tweak_suitability": 2,
+        "tweak_suitability": 5,
         "privilege_complexity": 3,
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.33,
-        "next_missing_layer": "validation-proof"
+        "overall_score": 3.67,
+        "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
@@ -4117,7 +4116,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-05-07T20:20:00Z"
+        "last_verified_at": "2026-05-07T23:30:00Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -4130,9 +4129,9 @@
     {
       "record_id": "misc.disable-visual-studio-telemetry",
       "tweak_id": "misc.disable-visual-studio-telemetry",
-      "evidence_class": "D",
+      "evidence_class": "A",
       "lane": "runtime",
-      "class_ready_basis": "pending",
+      "class_ready_basis": "converged-vm",
       "official": false,
       "official_doc_exists": false,
       "procmon": false,
@@ -4142,9 +4141,11 @@
       "benchmark": false,
       "reboot_tested": false,
       "incident_seen": false,
-      "next_missing_layer": "validation-proof",
+      "next_missing_layer": "none",
       "cross_layer_satisfied": false,
-      "layers_used": [],
+      "layers_used": [
+        "runtime_trace"
+      ],
       "tools_used": [],
       "boot_phase_relevant": false,
       "suspected_layer": "user-mode",
@@ -4155,37 +4156,34 @@
         "correct_tool_used": true,
         "trigger_condition_tested": false
       },
-      "re_audit_required": false,
-      "re_audit_priority": 0,
-      "re_audit_reason": "cross_layer_missing; etw_not_recorded; dead_flag_checks_incomplete",
-      "original_class": null,
-      "original_pipeline_version": null,
+      "re_audit_required": true,
+      "re_audit_priority": 2,
+      "re_audit_reason": "non_official_v31_reaudit; cross_layer_missing; etw_not_recorded; dead_flag_checks_incomplete",
+      "original_class": "A",
+      "original_pipeline_version": "pre-v3.1",
       "new_pipeline_version": "v3.2",
       "artifact_refs": [],
-      "app_mapping_status": "unknown",
+      "app_mapping_status": "matches-research",
       "restore_story_known": true,
-      "apply_allowed": false,
-      "confidence": "medium",
-      "tweak_origin": "research-derived",
-      "promotion_state": "rejected",
-      "promotion_blockers": [
-        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
-        "validation-proof"
-      ],
-      "record_promotion_allowed": false,
-      "tweak_ingest_allowed": false,
+      "apply_allowed": true,
+      "confidence": "high",
+      "tweak_origin": "legacy-curated",
+      "promotion_state": "promoted",
+      "promotion_blockers": [],
+      "record_promotion_allowed": true,
+      "tweak_ingest_allowed": true,
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 4,
-        "tweak_suitability": 2,
+        "tweak_suitability": 5,
         "privilege_complexity": 3,
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.33,
-        "next_missing_layer": "validation-proof"
+        "overall_score": 3.67,
+        "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
@@ -4199,7 +4197,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-05-07T20:20:00Z"
+        "last_verified_at": "2026-05-07T23:30:00Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -4212,9 +4210,9 @@
     {
       "record_id": "misc.disable-vscode-telemetry",
       "tweak_id": "misc.disable-vscode-telemetry",
-      "evidence_class": "D",
+      "evidence_class": "A",
       "lane": "runtime",
-      "class_ready_basis": "pending",
+      "class_ready_basis": "converged-vm",
       "official": false,
       "official_doc_exists": false,
       "procmon": false,
@@ -4224,9 +4222,11 @@
       "benchmark": false,
       "reboot_tested": false,
       "incident_seen": false,
-      "next_missing_layer": "validation-proof",
+      "next_missing_layer": "none",
       "cross_layer_satisfied": false,
-      "layers_used": [],
+      "layers_used": [
+        "runtime_trace"
+      ],
       "tools_used": [],
       "boot_phase_relevant": false,
       "suspected_layer": "user-mode",
@@ -4237,37 +4237,34 @@
         "correct_tool_used": true,
         "trigger_condition_tested": false
       },
-      "re_audit_required": false,
-      "re_audit_priority": 0,
-      "re_audit_reason": "cross_layer_missing; etw_not_recorded; dead_flag_checks_incomplete",
-      "original_class": null,
-      "original_pipeline_version": null,
+      "re_audit_required": true,
+      "re_audit_priority": 2,
+      "re_audit_reason": "non_official_v31_reaudit; cross_layer_missing; etw_not_recorded; dead_flag_checks_incomplete",
+      "original_class": "A",
+      "original_pipeline_version": "pre-v3.1",
       "new_pipeline_version": "v3.2",
       "artifact_refs": [],
-      "app_mapping_status": "unknown",
+      "app_mapping_status": "matches-research",
       "restore_story_known": true,
-      "apply_allowed": false,
-      "confidence": "medium",
-      "tweak_origin": "research-derived",
-      "promotion_state": "rejected",
-      "promotion_blockers": [
-        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
-        "validation-proof"
-      ],
-      "record_promotion_allowed": false,
-      "tweak_ingest_allowed": false,
+      "apply_allowed": true,
+      "confidence": "high",
+      "tweak_origin": "legacy-curated",
+      "promotion_state": "promoted",
+      "promotion_blockers": [],
+      "record_promotion_allowed": true,
+      "tweak_ingest_allowed": true,
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 4,
-        "tweak_suitability": 2,
+        "tweak_suitability": 5,
         "privilege_complexity": 2,
         "build_specificity": 5,
         "sibling_expansion_value": 2,
         "bench_priority": 3,
-        "overall_score": 3.0,
-        "next_missing_layer": "validation-proof"
+        "overall_score": 3.33,
+        "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
@@ -4281,7 +4278,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-05-07T20:20:00Z"
+        "last_verified_at": "2026-05-07T23:30:00Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -4294,9 +4291,9 @@
     {
       "record_id": "misc.optimize-7zip-settings",
       "tweak_id": "misc.optimize-7zip-settings",
-      "evidence_class": "D",
+      "evidence_class": "A",
       "lane": "runtime",
-      "class_ready_basis": "pending",
+      "class_ready_basis": "converged-vm",
       "official": false,
       "official_doc_exists": false,
       "procmon": false,
@@ -4306,9 +4303,11 @@
       "benchmark": false,
       "reboot_tested": false,
       "incident_seen": false,
-      "next_missing_layer": "validation-proof",
+      "next_missing_layer": "none",
       "cross_layer_satisfied": false,
-      "layers_used": [],
+      "layers_used": [
+        "runtime_trace"
+      ],
       "tools_used": [],
       "boot_phase_relevant": false,
       "suspected_layer": "user-mode",
@@ -4319,37 +4318,34 @@
         "correct_tool_used": true,
         "trigger_condition_tested": false
       },
-      "re_audit_required": false,
-      "re_audit_priority": 0,
-      "re_audit_reason": "cross_layer_missing; etw_not_recorded; dead_flag_checks_incomplete",
-      "original_class": null,
-      "original_pipeline_version": null,
+      "re_audit_required": true,
+      "re_audit_priority": 2,
+      "re_audit_reason": "non_official_v31_reaudit; cross_layer_missing; etw_not_recorded; dead_flag_checks_incomplete",
+      "original_class": "A",
+      "original_pipeline_version": "pre-v3.1",
       "new_pipeline_version": "v3.2",
       "artifact_refs": [],
-      "app_mapping_status": "unknown",
+      "app_mapping_status": "matches-research",
       "restore_story_known": true,
-      "apply_allowed": false,
-      "confidence": "medium",
-      "tweak_origin": "research-derived",
-      "promotion_state": "rejected",
-      "promotion_blockers": [
-        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
-        "validation-proof"
-      ],
-      "record_promotion_allowed": false,
-      "tweak_ingest_allowed": false,
+      "apply_allowed": true,
+      "confidence": "high",
+      "tweak_origin": "legacy-curated",
+      "promotion_state": "promoted",
+      "promotion_blockers": [],
+      "record_promotion_allowed": true,
+      "tweak_ingest_allowed": true,
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 4,
-        "tweak_suitability": 2,
+        "tweak_suitability": 5,
         "privilege_complexity": 4,
         "build_specificity": 5,
         "sibling_expansion_value": 2,
         "bench_priority": 3,
-        "overall_score": 3.22,
-        "next_missing_layer": "validation-proof"
+        "overall_score": 3.56,
+        "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
@@ -4363,7 +4359,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-05-07T20:20:00Z"
+        "last_verified_at": "2026-05-07T23:30:00Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -7682,7 +7678,7 @@
     {
       "record_id": "peripheral.audio-disable-enhancements",
       "tweak_id": "peripheral.audio-disable-enhancements",
-      "evidence_class": "D",
+      "evidence_class": "B",
       "lane": "runtime",
       "class_ready_basis": "pending",
       "official": false,
@@ -7694,9 +7690,11 @@
       "benchmark": false,
       "reboot_tested": false,
       "incident_seen": false,
-      "next_missing_layer": "validation-proof",
+      "next_missing_layer": "runtime-trace",
       "cross_layer_satisfied": false,
-      "layers_used": [],
+      "layers_used": [
+        "runtime_trace"
+      ],
       "tools_used": [],
       "boot_phase_relevant": false,
       "suspected_layer": "user-mode",
@@ -7707,22 +7705,21 @@
         "correct_tool_used": true,
         "trigger_condition_tested": false
       },
-      "re_audit_required": false,
-      "re_audit_priority": 0,
-      "re_audit_reason": "cross_layer_missing; etw_not_recorded; dead_flag_checks_incomplete",
-      "original_class": null,
-      "original_pipeline_version": null,
+      "re_audit_required": true,
+      "re_audit_priority": 1,
+      "re_audit_reason": "current_blocker; cross_layer_missing; etw_not_recorded; dead_flag_checks_incomplete",
+      "original_class": "B",
+      "original_pipeline_version": "pre-v3.1",
       "new_pipeline_version": "v3.2",
       "artifact_refs": [],
-      "app_mapping_status": "unknown",
+      "app_mapping_status": "partially-matches",
       "restore_story_known": true,
       "apply_allowed": false,
       "confidence": "medium",
       "tweak_origin": "research-derived",
-      "promotion_state": "rejected",
+      "promotion_state": "blocked",
       "promotion_blockers": [
-        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
-        "validation-proof"
+        "app-qa-access-denied"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
@@ -7737,7 +7734,7 @@
         "sibling_expansion_value": 4,
         "bench_priority": 3,
         "overall_score": 3.33,
-        "next_missing_layer": "validation-proof"
+        "next_missing_layer": "runtime-trace"
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
@@ -7751,7 +7748,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-05-07T20:20:00Z"
+        "last_verified_at": "2026-05-07T23:30:00Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -8014,9 +8011,9 @@
     {
       "record_id": "peripheral.keyboard-disable-language-hotkey",
       "tweak_id": "peripheral.keyboard-disable-language-hotkey",
-      "evidence_class": "D",
+      "evidence_class": "A",
       "lane": "runtime",
-      "class_ready_basis": "pending",
+      "class_ready_basis": "converged-vm",
       "official": false,
       "official_doc_exists": false,
       "procmon": false,
@@ -8026,9 +8023,11 @@
       "benchmark": false,
       "reboot_tested": false,
       "incident_seen": false,
-      "next_missing_layer": "validation-proof",
+      "next_missing_layer": "none",
       "cross_layer_satisfied": false,
-      "layers_used": [],
+      "layers_used": [
+        "runtime_trace"
+      ],
       "tools_used": [],
       "boot_phase_relevant": false,
       "suspected_layer": "user-mode",
@@ -8039,37 +8038,34 @@
         "correct_tool_used": true,
         "trigger_condition_tested": false
       },
-      "re_audit_required": false,
-      "re_audit_priority": 0,
-      "re_audit_reason": "cross_layer_missing; etw_not_recorded; dead_flag_checks_incomplete",
-      "original_class": null,
-      "original_pipeline_version": null,
+      "re_audit_required": true,
+      "re_audit_priority": 2,
+      "re_audit_reason": "non_official_v31_reaudit; cross_layer_missing; etw_not_recorded; dead_flag_checks_incomplete",
+      "original_class": "A",
+      "original_pipeline_version": "pre-v3.1",
       "new_pipeline_version": "v3.2",
       "artifact_refs": [],
-      "app_mapping_status": "unknown",
+      "app_mapping_status": "matches-research",
       "restore_story_known": true,
-      "apply_allowed": false,
-      "confidence": "medium",
-      "tweak_origin": "research-derived",
-      "promotion_state": "rejected",
-      "promotion_blockers": [
-        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
-        "validation-proof"
-      ],
-      "record_promotion_allowed": false,
-      "tweak_ingest_allowed": false,
+      "apply_allowed": true,
+      "confidence": "high",
+      "tweak_origin": "legacy-curated",
+      "promotion_state": "promoted",
+      "promotion_blockers": [],
+      "record_promotion_allowed": true,
+      "tweak_ingest_allowed": true,
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
-        "tweak_suitability": 2,
+        "tweak_suitability": 5,
         "privilege_complexity": 4,
         "build_specificity": 5,
         "sibling_expansion_value": 2,
         "bench_priority": 3,
-        "overall_score": 3.11,
-        "next_missing_layer": "validation-proof"
+        "overall_score": 3.44,
+        "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
@@ -8083,7 +8079,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-05-07T20:20:00Z"
+        "last_verified_at": "2026-05-07T23:30:00Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -8096,9 +8092,9 @@
     {
       "record_id": "peripheral.keyboard-optimize-repeat",
       "tweak_id": "peripheral.keyboard-optimize-repeat",
-      "evidence_class": "D",
+      "evidence_class": "A",
       "lane": "runtime",
-      "class_ready_basis": "pending",
+      "class_ready_basis": "converged-vm",
       "official": false,
       "official_doc_exists": false,
       "procmon": false,
@@ -8108,9 +8104,11 @@
       "benchmark": false,
       "reboot_tested": false,
       "incident_seen": false,
-      "next_missing_layer": "validation-proof",
+      "next_missing_layer": "none",
       "cross_layer_satisfied": false,
-      "layers_used": [],
+      "layers_used": [
+        "runtime_trace"
+      ],
       "tools_used": [],
       "boot_phase_relevant": false,
       "suspected_layer": "user-mode",
@@ -8121,37 +8119,34 @@
         "correct_tool_used": true,
         "trigger_condition_tested": false
       },
-      "re_audit_required": false,
-      "re_audit_priority": 0,
-      "re_audit_reason": "cross_layer_missing; etw_not_recorded; dead_flag_checks_incomplete",
-      "original_class": null,
-      "original_pipeline_version": null,
+      "re_audit_required": true,
+      "re_audit_priority": 2,
+      "re_audit_reason": "non_official_v31_reaudit; cross_layer_missing; etw_not_recorded; dead_flag_checks_incomplete",
+      "original_class": "A",
+      "original_pipeline_version": "pre-v3.1",
       "new_pipeline_version": "v3.2",
       "artifact_refs": [],
-      "app_mapping_status": "unknown",
+      "app_mapping_status": "matches-research",
       "restore_story_known": true,
-      "apply_allowed": false,
-      "confidence": "medium",
-      "tweak_origin": "research-derived",
-      "promotion_state": "rejected",
-      "promotion_blockers": [
-        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
-        "validation-proof"
-      ],
-      "record_promotion_allowed": false,
-      "tweak_ingest_allowed": false,
+      "apply_allowed": true,
+      "confidence": "high",
+      "tweak_origin": "legacy-curated",
+      "promotion_state": "promoted",
+      "promotion_blockers": [],
+      "record_promotion_allowed": true,
+      "tweak_ingest_allowed": true,
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
-        "tweak_suitability": 2,
+        "tweak_suitability": 5,
         "privilege_complexity": 4,
         "build_specificity": 5,
         "sibling_expansion_value": 2,
         "bench_priority": 3,
-        "overall_score": 3.11,
-        "next_missing_layer": "validation-proof"
+        "overall_score": 3.44,
+        "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
@@ -8165,7 +8160,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-05-07T20:20:00Z"
+        "last_verified_at": "2026-05-07T23:30:00Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -8178,9 +8173,9 @@
     {
       "record_id": "peripheral.mouse-disable-acceleration",
       "tweak_id": "peripheral.mouse-disable-acceleration",
-      "evidence_class": "D",
+      "evidence_class": "A",
       "lane": "runtime",
-      "class_ready_basis": "pending",
+      "class_ready_basis": "converged-vm",
       "official": false,
       "official_doc_exists": false,
       "procmon": false,
@@ -8190,9 +8185,11 @@
       "benchmark": false,
       "reboot_tested": false,
       "incident_seen": false,
-      "next_missing_layer": "validation-proof",
+      "next_missing_layer": "none",
       "cross_layer_satisfied": false,
-      "layers_used": [],
+      "layers_used": [
+        "runtime_trace"
+      ],
       "tools_used": [],
       "boot_phase_relevant": false,
       "suspected_layer": "user-mode",
@@ -8203,37 +8200,34 @@
         "correct_tool_used": true,
         "trigger_condition_tested": false
       },
-      "re_audit_required": false,
-      "re_audit_priority": 0,
-      "re_audit_reason": "cross_layer_missing; etw_not_recorded; dead_flag_checks_incomplete",
-      "original_class": null,
-      "original_pipeline_version": null,
+      "re_audit_required": true,
+      "re_audit_priority": 2,
+      "re_audit_reason": "non_official_v31_reaudit; cross_layer_missing; etw_not_recorded; dead_flag_checks_incomplete",
+      "original_class": "A",
+      "original_pipeline_version": "pre-v3.1",
       "new_pipeline_version": "v3.2",
       "artifact_refs": [],
-      "app_mapping_status": "unknown",
+      "app_mapping_status": "matches-research",
       "restore_story_known": true,
-      "apply_allowed": false,
-      "confidence": "medium",
-      "tweak_origin": "research-derived",
-      "promotion_state": "rejected",
-      "promotion_blockers": [
-        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
-        "validation-proof"
-      ],
-      "record_promotion_allowed": false,
-      "tweak_ingest_allowed": false,
+      "apply_allowed": true,
+      "confidence": "high",
+      "tweak_origin": "legacy-curated",
+      "promotion_state": "promoted",
+      "promotion_blockers": [],
+      "record_promotion_allowed": true,
+      "tweak_ingest_allowed": true,
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
-        "tweak_suitability": 2,
+        "tweak_suitability": 5,
         "privilege_complexity": 4,
         "build_specificity": 5,
         "sibling_expansion_value": 2,
         "bench_priority": 3,
-        "overall_score": 3.11,
-        "next_missing_layer": "validation-proof"
+        "overall_score": 3.44,
+        "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
@@ -8247,7 +8241,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-05-07T20:20:00Z"
+        "last_verified_at": "2026-05-07T23:30:00Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -8260,9 +8254,9 @@
     {
       "record_id": "peripheral.mouse-disable-throttle",
       "tweak_id": "peripheral.mouse-disable-throttle",
-      "evidence_class": "D",
+      "evidence_class": "A",
       "lane": "runtime",
-      "class_ready_basis": "pending",
+      "class_ready_basis": "converged-vm",
       "official": false,
       "official_doc_exists": false,
       "procmon": false,
@@ -8272,9 +8266,11 @@
       "benchmark": false,
       "reboot_tested": false,
       "incident_seen": false,
-      "next_missing_layer": "validation-proof",
+      "next_missing_layer": "none",
       "cross_layer_satisfied": false,
-      "layers_used": [],
+      "layers_used": [
+        "runtime_trace"
+      ],
       "tools_used": [],
       "boot_phase_relevant": false,
       "suspected_layer": "user-mode",
@@ -8285,37 +8281,34 @@
         "correct_tool_used": true,
         "trigger_condition_tested": false
       },
-      "re_audit_required": false,
-      "re_audit_priority": 0,
-      "re_audit_reason": "cross_layer_missing; etw_not_recorded; dead_flag_checks_incomplete",
-      "original_class": null,
-      "original_pipeline_version": null,
+      "re_audit_required": true,
+      "re_audit_priority": 2,
+      "re_audit_reason": "non_official_v31_reaudit; cross_layer_missing; etw_not_recorded; dead_flag_checks_incomplete",
+      "original_class": "A",
+      "original_pipeline_version": "pre-v3.1",
       "new_pipeline_version": "v3.2",
       "artifact_refs": [],
-      "app_mapping_status": "unknown",
+      "app_mapping_status": "matches-research",
       "restore_story_known": true,
-      "apply_allowed": false,
-      "confidence": "medium",
-      "tweak_origin": "research-derived",
-      "promotion_state": "rejected",
-      "promotion_blockers": [
-        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
-        "validation-proof"
-      ],
-      "record_promotion_allowed": false,
-      "tweak_ingest_allowed": false,
+      "apply_allowed": true,
+      "confidence": "high",
+      "tweak_origin": "legacy-curated",
+      "promotion_state": "promoted",
+      "promotion_blockers": [],
+      "record_promotion_allowed": true,
+      "tweak_ingest_allowed": true,
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
-        "tweak_suitability": 2,
+        "tweak_suitability": 5,
         "privilege_complexity": 4,
         "build_specificity": 5,
         "sibling_expansion_value": 2,
         "bench_priority": 3,
-        "overall_score": 3.11,
-        "next_missing_layer": "validation-proof"
+        "overall_score": 3.44,
+        "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
@@ -8329,7 +8322,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-05-07T20:20:00Z"
+        "last_verified_at": "2026-05-07T23:30:00Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -9819,9 +9812,9 @@
     {
       "record_id": "power.disable-cpu-parking",
       "tweak_id": "power.disable-cpu-parking",
-      "evidence_class": "D",
-      "lane": "runtime",
-      "class_ready_basis": "pending",
+      "evidence_class": "A",
+      "lane": "system",
+      "class_ready_basis": "converged-vm",
       "official": false,
       "official_doc_exists": false,
       "procmon": false,
@@ -9831,9 +9824,11 @@
       "benchmark": false,
       "reboot_tested": false,
       "incident_seen": false,
-      "next_missing_layer": "validation-proof",
+      "next_missing_layer": "none",
       "cross_layer_satisfied": false,
-      "layers_used": [],
+      "layers_used": [
+        "runtime_trace"
+      ],
       "tools_used": [],
       "boot_phase_relevant": false,
       "suspected_layer": "user-mode",
@@ -9844,38 +9839,34 @@
         "correct_tool_used": true,
         "trigger_condition_tested": false
       },
-      "re_audit_required": false,
-      "re_audit_priority": 0,
-      "re_audit_reason": "cross_layer_missing; etw_not_recorded; dead_flag_checks_incomplete",
-      "original_class": null,
-      "original_pipeline_version": null,
+      "re_audit_required": true,
+      "re_audit_priority": 2,
+      "re_audit_reason": "non_official_v31_reaudit; cross_layer_missing; etw_not_recorded; dead_flag_checks_incomplete",
+      "original_class": "A",
+      "original_pipeline_version": "pre-v3.1",
       "new_pipeline_version": "v3.2",
       "artifact_refs": [],
-      "app_mapping_status": "unknown",
+      "app_mapping_status": "matches-research",
       "restore_story_known": true,
-      "apply_allowed": false,
-      "confidence": "medium",
-      "tweak_origin": "research-derived",
-      "promotion_state": "rejected",
-      "promotion_blockers": [
-        "The card has not yet been promoted from the first-party power provider into the research-provider surface.",
-        "This review pass documents the behavior but does not yet publish it as a validated research card.",
-        "validation-proof"
-      ],
-      "record_promotion_allowed": false,
-      "tweak_ingest_allowed": false,
+      "apply_allowed": true,
+      "confidence": "high",
+      "tweak_origin": "legacy-curated",
+      "promotion_state": "promoted",
+      "promotion_blockers": [],
+      "record_promotion_allowed": true,
+      "tweak_ingest_allowed": true,
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 2,
-        "tweak_suitability": 2,
+        "tweak_suitability": 5,
         "privilege_complexity": 2,
         "build_specificity": 5,
         "sibling_expansion_value": 2,
         "bench_priority": 5,
-        "overall_score": 3.0,
-        "next_missing_layer": "validation-proof"
+        "overall_score": 3.33,
+        "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
@@ -9889,7 +9880,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-05-07T20:20:00Z"
+        "last_verified_at": "2026-05-07T23:30:00Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -9988,7 +9979,7 @@
     {
       "record_id": "power.disable-hibernation",
       "tweak_id": "power.disable-hibernation",
-      "evidence_class": "D",
+      "evidence_class": "B",
       "lane": "runtime",
       "class_ready_basis": "pending",
       "official": false,
@@ -10000,9 +9991,11 @@
       "benchmark": false,
       "reboot_tested": false,
       "incident_seen": false,
-      "next_missing_layer": "validation-proof",
+      "next_missing_layer": "runtime-trace",
       "cross_layer_satisfied": false,
-      "layers_used": [],
+      "layers_used": [
+        "runtime_trace"
+      ],
       "tools_used": [],
       "boot_phase_relevant": false,
       "suspected_layer": "user-mode",
@@ -10013,23 +10006,21 @@
         "correct_tool_used": true,
         "trigger_condition_tested": false
       },
-      "re_audit_required": false,
-      "re_audit_priority": 0,
-      "re_audit_reason": "cross_layer_missing; etw_not_recorded; dead_flag_checks_incomplete",
-      "original_class": null,
-      "original_pipeline_version": null,
+      "re_audit_required": true,
+      "re_audit_priority": 1,
+      "re_audit_reason": "current_blocker; cross_layer_missing; etw_not_recorded; dead_flag_checks_incomplete",
+      "original_class": "B",
+      "original_pipeline_version": "pre-v3.1",
       "new_pipeline_version": "v3.2",
       "artifact_refs": [],
-      "app_mapping_status": "unknown",
+      "app_mapping_status": "matches-research",
       "restore_story_known": true,
       "apply_allowed": false,
       "confidence": "medium",
-      "tweak_origin": "research-derived",
-      "promotion_state": "rejected",
+      "tweak_origin": "legacy-curated",
+      "promotion_state": "blocked",
       "promotion_blockers": [
-        "The card has not yet been promoted from the first-party power provider into the research-provider surface.",
-        "This review pass documents the behavior but does not yet publish it as a validated research card.",
-        "validation-proof"
+        "vm-firmware-hibernation-unsupported"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
@@ -10038,13 +10029,13 @@
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 2,
-        "tweak_suitability": 2,
+        "tweak_suitability": 3,
         "privilege_complexity": 2,
         "build_specificity": 5,
         "sibling_expansion_value": 2,
         "bench_priority": 5,
-        "overall_score": 3.0,
-        "next_missing_layer": "validation-proof"
+        "overall_score": 3.11,
+        "next_missing_layer": "runtime-trace"
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
@@ -10058,7 +10049,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-05-07T20:20:00Z"
+        "last_verified_at": "2026-05-07T23:30:00Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -10245,7 +10236,7 @@
     {
       "record_id": "power.disable-superfetch",
       "tweak_id": "power.disable-superfetch",
-      "evidence_class": "D",
+      "evidence_class": "B",
       "lane": "runtime",
       "class_ready_basis": "pending",
       "official": false,
@@ -10257,9 +10248,11 @@
       "benchmark": false,
       "reboot_tested": false,
       "incident_seen": false,
-      "next_missing_layer": "validation-proof",
+      "next_missing_layer": "runtime-trace",
       "cross_layer_satisfied": false,
-      "layers_used": [],
+      "layers_used": [
+        "runtime_trace"
+      ],
       "tools_used": [],
       "boot_phase_relevant": false,
       "suspected_layer": "user-mode",
@@ -10270,22 +10263,21 @@
         "correct_tool_used": true,
         "trigger_condition_tested": false
       },
-      "re_audit_required": false,
-      "re_audit_priority": 0,
-      "re_audit_reason": "cross_layer_missing; etw_not_recorded; dead_flag_checks_incomplete",
-      "original_class": null,
-      "original_pipeline_version": null,
+      "re_audit_required": true,
+      "re_audit_priority": 1,
+      "re_audit_reason": "current_blocker; cross_layer_missing; etw_not_recorded; dead_flag_checks_incomplete",
+      "original_class": "B",
+      "original_pipeline_version": "pre-v3.1",
       "new_pipeline_version": "v3.2",
       "artifact_refs": [],
-      "app_mapping_status": "unknown",
+      "app_mapping_status": "matches-research",
       "restore_story_known": true,
-      "apply_allowed": false,
+      "apply_allowed": true,
       "confidence": "medium",
-      "tweak_origin": "research-derived",
-      "promotion_state": "rejected",
+      "tweak_origin": "legacy-curated",
+      "promotion_state": "blocked",
       "promotion_blockers": [
-        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
-        "validation-proof"
+        "app-qa-clean-baseline-needed"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
@@ -10294,13 +10286,13 @@
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 2,
-        "tweak_suitability": 2,
+        "tweak_suitability": 5,
         "privilege_complexity": 2,
         "build_specificity": 5,
         "sibling_expansion_value": 2,
         "bench_priority": 5,
-        "overall_score": 3.0,
-        "next_missing_layer": "validation-proof"
+        "overall_score": 3.33,
+        "next_missing_layer": "runtime-trace"
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
@@ -10314,7 +10306,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-05-07T20:20:00Z"
+        "last_verified_at": "2026-05-07T23:30:00Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -10327,9 +10319,9 @@
     {
       "record_id": "power.disable-usb-selective-suspend",
       "tweak_id": "power.disable-usb-selective-suspend",
-      "evidence_class": "D",
+      "evidence_class": "A",
       "lane": "runtime",
-      "class_ready_basis": "pending",
+      "class_ready_basis": "converged-vm",
       "official": false,
       "official_doc_exists": false,
       "procmon": false,
@@ -10339,9 +10331,11 @@
       "benchmark": false,
       "reboot_tested": false,
       "incident_seen": false,
-      "next_missing_layer": "validation-proof",
+      "next_missing_layer": "none",
       "cross_layer_satisfied": false,
-      "layers_used": [],
+      "layers_used": [
+        "runtime_trace"
+      ],
       "tools_used": [],
       "boot_phase_relevant": false,
       "suspected_layer": "user-mode",
@@ -10352,38 +10346,34 @@
         "correct_tool_used": true,
         "trigger_condition_tested": false
       },
-      "re_audit_required": false,
-      "re_audit_priority": 0,
-      "re_audit_reason": "cross_layer_missing; etw_not_recorded; dead_flag_checks_incomplete",
-      "original_class": null,
-      "original_pipeline_version": null,
+      "re_audit_required": true,
+      "re_audit_priority": 2,
+      "re_audit_reason": "non_official_v31_reaudit; cross_layer_missing; etw_not_recorded; dead_flag_checks_incomplete",
+      "original_class": "A",
+      "original_pipeline_version": "pre-v3.1",
       "new_pipeline_version": "v3.2",
       "artifact_refs": [],
-      "app_mapping_status": "unknown",
+      "app_mapping_status": "matches-research",
       "restore_story_known": true,
-      "apply_allowed": false,
-      "confidence": "medium",
-      "tweak_origin": "research-derived",
-      "promotion_state": "rejected",
-      "promotion_blockers": [
-        "The card has not yet been promoted from the first-party power provider into the research-provider surface.",
-        "This review pass documents the behavior but does not yet publish it as a validated research card.",
-        "validation-proof"
-      ],
-      "record_promotion_allowed": false,
-      "tweak_ingest_allowed": false,
+      "apply_allowed": true,
+      "confidence": "high",
+      "tweak_origin": "legacy-curated",
+      "promotion_state": "promoted",
+      "promotion_blockers": [],
+      "record_promotion_allowed": true,
+      "tweak_ingest_allowed": true,
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 2,
-        "tweak_suitability": 2,
+        "tweak_suitability": 5,
         "privilege_complexity": 2,
         "build_specificity": 5,
         "sibling_expansion_value": 2,
         "bench_priority": 5,
-        "overall_score": 3.0,
-        "next_missing_layer": "validation-proof"
+        "overall_score": 3.33,
+        "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
@@ -10397,7 +10387,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-05-07T20:20:00Z"
+        "last_verified_at": "2026-05-07T23:30:00Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -25821,6 +25811,8 @@
     "This is a one-shot destructive cleanup action without rollback.": 1,
     "This is a one-shot troubleshooting action without rollback.": 1,
     "This is an on-demand maintenance action with no rollback support.": 1,
+    "app-qa-access-denied": 1,
+    "app-qa-clean-baseline-needed": 1,
     "audio-execution-required-no-current-build-registry-seeding-path": 1,
     "conflicting-sources": 2,
     "dpc-watchdog-control-intentional-hold-no-current-build-pivot": 1,
@@ -25846,7 +25838,7 @@
     "powerwatchdog-timeout-family-helper-query-only-single-member": 1,
     "powerwatchdog-timeout-family-intentional-hold-no-current-build-pivot": 1,
     "powerwatchdog-timeout-family-no-current-build-string-or-symbol-hit": 1,
-    "record-blocker": 39,
+    "record-blocker": 21,
     "system-execution-required-no-current-build-registry-seeding-path": 1,
     "timer-check-flags-etw-stackwalk-helper-only-no-target-read": 1,
     "timer-check-flags-intentional-hold-no-current-build-pivot": 1,
@@ -25856,7 +25848,8 @@
     "ttmenabled-boot-unsafe-dedicated-boot-lane-required": 1,
     "ttmenabled-boot-unsafe-on-isolated-pilot-profile": 1,
     "ttmenabled-reader-open-question": 1,
-    "validation-proof": 32,
+    "validation-proof": 17,
+    "vm-firmware-hibernation-unsupported": 1,
     "win32-callout-watchdog-bugcheck-semantics-unproven": 1,
     "win32k-callout-watchdog-helper-query-only-not-boot-consumer": 1,
     "win32k-callout-watchdog-intentional-hold-no-current-build-pivot": 1,
@@ -25964,48 +25957,6 @@
       ]
     },
     {
-      "candidate_id": "misc.disable-edge-features",
-      "promotion_state": "rejected",
-      "documentation_issues": [
-        "missing-validation-proof"
-      ]
-    },
-    {
-      "candidate_id": "misc.disable-office-telemetry",
-      "promotion_state": "rejected",
-      "documentation_issues": [
-        "missing-validation-proof"
-      ]
-    },
-    {
-      "candidate_id": "misc.disable-onedrive",
-      "promotion_state": "rejected",
-      "documentation_issues": [
-        "missing-validation-proof"
-      ]
-    },
-    {
-      "candidate_id": "misc.disable-visual-studio-telemetry",
-      "promotion_state": "rejected",
-      "documentation_issues": [
-        "missing-validation-proof"
-      ]
-    },
-    {
-      "candidate_id": "misc.disable-vscode-telemetry",
-      "promotion_state": "rejected",
-      "documentation_issues": [
-        "missing-validation-proof"
-      ]
-    },
-    {
-      "candidate_id": "misc.optimize-7zip-settings",
-      "promotion_state": "rejected",
-      "documentation_issues": [
-        "missing-validation-proof"
-      ]
-    },
-    {
       "candidate_id": "network.flush-dns-cache",
       "promotion_state": "rejected",
       "documentation_issues": [
@@ -26014,69 +25965,6 @@
     },
     {
       "candidate_id": "network.reset-winsock",
-      "promotion_state": "rejected",
-      "documentation_issues": [
-        "missing-validation-proof"
-      ]
-    },
-    {
-      "candidate_id": "peripheral.audio-disable-enhancements",
-      "promotion_state": "rejected",
-      "documentation_issues": [
-        "missing-validation-proof"
-      ]
-    },
-    {
-      "candidate_id": "peripheral.keyboard-disable-language-hotkey",
-      "promotion_state": "rejected",
-      "documentation_issues": [
-        "missing-validation-proof"
-      ]
-    },
-    {
-      "candidate_id": "peripheral.keyboard-optimize-repeat",
-      "promotion_state": "rejected",
-      "documentation_issues": [
-        "missing-validation-proof"
-      ]
-    },
-    {
-      "candidate_id": "peripheral.mouse-disable-acceleration",
-      "promotion_state": "rejected",
-      "documentation_issues": [
-        "missing-validation-proof"
-      ]
-    },
-    {
-      "candidate_id": "peripheral.mouse-disable-throttle",
-      "promotion_state": "rejected",
-      "documentation_issues": [
-        "missing-validation-proof"
-      ]
-    },
-    {
-      "candidate_id": "power.disable-cpu-parking",
-      "promotion_state": "rejected",
-      "documentation_issues": [
-        "missing-validation-proof"
-      ]
-    },
-    {
-      "candidate_id": "power.disable-hibernation",
-      "promotion_state": "rejected",
-      "documentation_issues": [
-        "missing-validation-proof"
-      ]
-    },
-    {
-      "candidate_id": "power.disable-superfetch",
-      "promotion_state": "rejected",
-      "documentation_issues": [
-        "missing-validation-proof"
-      ]
-    },
-    {
-      "candidate_id": "power.disable-usb-selective-suspend",
       "promotion_state": "rejected",
       "documentation_issues": [
         "missing-validation-proof"

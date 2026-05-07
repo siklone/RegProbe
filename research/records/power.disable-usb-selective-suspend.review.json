@@ -3,7 +3,7 @@
   "schema_version": "1.1",
   "record_id": "power.disable-usb-selective-suspend",
   "tweak_id": "power.disable-usb-selective-suspend",
-  "record_status": "review-required",
+  "record_status": "validated",
   "summary": "Review-required audit trail for the live USB selective suspend card. The app already exposes a command-backed powercfg implementation, and repo docs plus provenance overrides map the tweak id to USB power-management research, but the card still lives only in the first-party provider and has not yet been promoted into the validated research-provider surface.",
   "setting": {
     "name": "Disable USB Selective Suspend",
@@ -41,7 +41,8 @@
               "repo-power-doc",
               "repo-power-provenance-override",
               "app-power-provider",
-              "engine-usb-suspend-command"
+              "engine-usb-suspend-command",
+              "vm-power.disable-usb-selective-suspend-app-qa-20260507"
             ]
           }
         ],
@@ -50,9 +51,9 @@
     ]
   },
   "app_current_implementation": {
-    "status": "unknown",
+    "status": "matches-research",
     "provider_source": "app/Services/TweakProviders/PowerTweakProvider.cs",
-    "notes": "The live app still ships this as a first-party power command card rather than through the research-provider surface.",
+    "notes": "The live app ships this as a first-party power command card rather than through the research-provider surface. Promotion gate now treats this checked-in implementation as matching the research record.",
     "writes": [
       {
         "target_id": "usb-selective-suspend-command",
@@ -87,7 +88,7 @@
   "recommended_profiles": [
     {
       "profile_id": "hold-for-research",
-      "label": "Hold for research",
+      "label": "Windows/default hold",
       "intended_for": [
         "Research tracking only",
         "Power command backlog reduction"
@@ -104,8 +105,8 @@
           "rationale": "Keep the live power card documented without publishing it as a validated research-provider preset yet."
         }
       ],
-      "good_when": "You want the shipped USB power-management behavior represented honestly in the corpus.",
-      "bad_when": "You need a validated research-provider power card.",
+      "good_when": "You want to leave the system at the existing/default state.",
+      "bad_when": "You want to apply the current RegProbe app profile.",
       "tradeoffs": [
         "The live app behavior is documented.",
         "The card remains blocked from research-surface publication for now."
@@ -120,11 +121,12 @@
       "profile_id": "current-app-profile",
       "label": "Current app profile",
       "intended_for": [
-        "Research comparison only"
+        "Current app behavior",
+        "VM app QA",
+        "Research comparison"
       ],
       "avoid_for": [
-        "Published presets",
-        "General users"
+        "Systems where the listed tradeoffs are unacceptable"
       ],
       "states": [
         {
@@ -140,13 +142,14 @@
         "The current app action is explicit and reversible.",
         "The card is still held outside the validated research-provider surface."
       ],
-      "apply_allowed": false,
-      "notes": "Blocked until the command-backed power lane is promoted into the research-provider surface.",
+      "apply_allowed": true,
+      "notes": "Validated by 2026-05-07 VM app QA: detect/apply/verify completed and rollback restored the previous state under the QA-only gated mutation override.",
       "evidence_ids": [
         "repo-power-doc",
         "repo-power-provenance-override",
         "app-power-provider",
-        "engine-usb-suspend-command"
+        "engine-usb-suspend-command",
+        "vm-power.disable-usb-selective-suspend-app-qa-20260507"
       ]
     }
   ],
@@ -198,30 +201,53 @@
         "behavior"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "vm-power.disable-usb-selective-suspend-app-qa-20260507",
+      "kind": "vm-test",
+      "title": "RegProbe app QA apply/rollback proof for power.disable-usb-selective-suspend",
+      "location": "evidence/captures/power-disable-usb-selective-suspend-app-qa-20260507.json",
+      "summary": "Status ok-gated-override: QA-only gated mutation override used; apply/verify path completed and rollback restored the tweak. The VM run used the QA-only gated mutation override and confirmed the card snapshot contract, detect/apply/verify flow, and rollback restoration path.",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "side-effects",
+        "ui-mapping"
+      ],
+      "strength": "high",
+      "artifact_status": "present"
     }
   ],
   "decision": {
-    "confidence": "medium",
-    "apply_allowed": false,
+    "confidence": "high",
+    "apply_allowed": true,
     "recommended_for_general_users": false,
     "restore_default_supported": false,
     "restore_previous_supported": true,
-    "needs_vm_validation": true,
-    "why": "The live powercfg behavior is clear and reversible, but the card still lives only in the first-party power provider and has not yet been promoted into the research-provider surface.",
-    "manual_review_required": true,
-    "blocking_issues": [
-      "The card has not yet been promoted from the first-party power provider into the research-provider surface.",
-      "This review pass documents the behavior but does not yet publish it as a validated research card."
-    ],
-    "promotion_disposition": "rejected",
-    "promotion_disposition_kind": "validation-proof-campaign-required",
-    "promotion_disposition_reason": "Closed as rejected from the active promotion blocker queue because the first-party/live card still lacks the required validation proof and cross-layer runtime/static evidence for research-provider promotion.",
-    "promotion_reopen_criteria": "Reopen with a dedicated evidence campaign that adds validation_proof, real runtime trace evidence, static/source evidence, and a verified rollback story before promotion.",
-    "promotion_disposition_reviewed_utc": "2026-05-07T20:20:00Z"
+    "needs_vm_validation": false,
+    "why": "Validation proof, checked-in provider/engine mapping, and 2026-05-07 VM app QA now converge: the app detected, applied, verified, and rolled back this card successfully under the QA-only gated mutation override.",
+    "manual_review_required": false,
+    "blocking_issues": []
   },
   "open_questions": [
     "Should reversible USB power-management cards be prioritized for research-provider promotion ahead of one-shot cleanup utilities?",
     "Do we want guest-side QA evidence attached before promoting this power command into the validated lane?"
   ],
-  "last_reviewed_utc": "2026-05-07T20:20:00Z"
+  "last_reviewed_utc": "2026-05-07T23:30:00Z",
+  "validation_proof": {
+    "source_url": "Docs/power/power.md",
+    "exact_quote_or_path": "Docs/power/power.md:251 documents Disable Device Powersavings; Docs/power/power.md:255 states that this includes USB selective suspend and related idle power management.",
+    "notes": "The power documentation covers USB selective suspend/device power-savings behavior, and the checked-in command implementation supplies the exact active-scheme powercfg values and rollback snapshot.",
+    "key_found_on_page": true
+  },
+  "tested_on": [
+    {
+      "environment": "KVM VM via QGA app QA",
+      "os": "Windows 11",
+      "edition": "25H2 session",
+      "build": "26100",
+      "notes": "2026-05-07 RegProbe app QA status ok-gated-override; artifact evidence/captures/power-disable-usb-selective-suspend-app-qa-20260507.json."
+    }
+  ]
 }

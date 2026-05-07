@@ -1,14 +1,14 @@
 # App Retest Readiness
 
 - Status: **PASS**
-- Generated UTC: `2026-05-07T19:53:36Z`
+- Generated UTC: `2026-05-07T23:29:05Z`
 
 ## Summary
 - `record_count`: `356`
 - `promotion_gate_entry_count`: `356`
 - `app_surface_entry_count`: `265`
 - `app_only_tweak_count`: `0`
-- `apply_allowed_record_count`: `251`
+- `apply_allowed_record_count`: `263`
 - `missing_rollback_story_count`: `0`
 - `kvm_app_smoke_status`: `ok`
 - `kvm_lane_health_status`: `ok`

@@ -260,6 +260,134 @@ public sealed class CommandAllowlist
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Edge", "SearchSuggestEnabled", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Edge", "LocalProvidersEnabled", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\MicrosoftEdge\SearchScopes", "ShowSearchSuggestionsGlobal", "0", "1", "2");
+        foreach (var valueName in new[]
+                 {
+                     "DefaultBrowserSettingEnabled",
+                     "EdgeCollectionsEnabled",
+                     "EdgeFollowEnabled",
+                     "EdgeShoppingAssistantEnabled",
+                     "HubsSidebarEnabled",
+                     "ImplicitSignInEnabled",
+                     "LocalProvidersEnabled",
+                     "NewTabPageContentEnabled",
+                     "NewTabPageQuickLinksEnabled",
+                     "PersonalizationReportingEnabled",
+                     "PinBrowserEssentialsToolbarButton",
+                     "QuickSearchShowMiniMenu",
+                     "SearchbarAllowed",
+                     "ShowMicrosoftRewards",
+                     "ShowRecommendationsEnabled",
+                     "SplitScreenEnabled",
+                     "StandaloneHubsSidebarEnabled",
+                     "StartupBoostEnabled",
+                     "SyncDisabled",
+                     "TabServicesEnabled",
+                     "TextPredictionEnabled",
+                     "UserFeedbackAllowed"
+                 })
+        {
+            AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Edge", valueName, "0", "1", "2");
+        }
+
+        foreach (var valueName in new[]
+                 {
+                     "AutoImportAtFirstRun",
+                     "DefaultSensorsSetting",
+                     "HideFirstRunExperience",
+                     "HideRestoreDialogEnabled",
+                     "NewTabPageAllowedBackgroundTypes",
+                     "NewTabPageHideDefaultTopSites",
+                     "TrackingPrevention"
+                 })
+        {
+            AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Edge", valueName, "0", "1", "2", "3", "4");
+        }
+
+        foreach (var valueName in new[]
+                 {
+                     "AllowEdgeSwipe",
+                     "DisableCharms",
+                     "DisableHelpSticker",
+                     "DisableMFUTracking",
+                     "DisableRecentApps",
+                     "TurnOffBackstack"
+                 })
+        {
+            AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\EdgeUI", valueName, "0", "1", "2");
+            AddRegDwordRule(regAllowlist, @"HKCU\Software\Policies\Microsoft\Windows\EdgeUI", valueName, "0", "1", "2");
+        }
+
+        foreach (var valueName in new[]
+                 {
+                     "DisableFileSync",
+                     "DisableFileSyncNGSC",
+                     "DisableLibrariesDefaultSaveToOneDrive",
+                     "DisableMeteredNetworkFileSync"
+                 })
+        {
+            AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\OneDrive", valueName, "0", "1", "2");
+        }
+
+        AddRegDwordRule(regAllowlist, @"HKLM\SOFTWARE\Microsoft\OneDrive", "PreventNetworkTrafficPreUserSignIn", "0", "1", "2");
+        AddRegDwordRule(regAllowlist, @"HKCU\Software\Classes\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}", "System.IsPinnedToNameSpaceTree", "0", "1");
+        AddRegDwordRule(regAllowlist, @"HKCU\Software\Classes\Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}", "System.IsPinnedToNameSpaceTree", "0", "1");
+
+        AddRegDwordRule(regAllowlist, @"HKCU\Software\Policies\Microsoft\Office\16.0\OSM", "EnableLogging", "0", "1");
+        AddRegDwordRule(regAllowlist, @"HKCU\Software\Policies\Microsoft\Office\16.0\OSM", "EnableUpload", "0", "1");
+        AddRegDwordRule(regAllowlist, @"HKCU\Software\Policies\Microsoft\Office\16.0\Common", "QMEnable", "0", "1");
+        AddRegDwordRule(regAllowlist, @"HKCU\Software\Policies\Microsoft\Office\16.0\Common\Feedback", "Enabled", "0", "1");
+        foreach (var valueName in new[]
+                 {
+                     "accesssolution",
+                     "olksolution",
+                     "onenotesolution",
+                     "pptsolution",
+                     "projectsolution",
+                     "publishersolution",
+                     "visiosolution",
+                     "wdsolution",
+                     "xlsolution"
+                 })
+        {
+            AddRegDwordRule(regAllowlist, @"HKCU\Software\Policies\Microsoft\Office\16.0\OSM\preventedapplications", valueName, "0", "1");
+        }
+
+        foreach (var valueName in new[] { "agave", "appaddins", "comaddins", "documentfiles", "templatefiles" })
+        {
+            AddRegDwordRule(regAllowlist, @"HKCU\Software\Policies\Microsoft\Office\16.0\OSM\preventedsolutiontypes", valueName, "0", "1");
+        }
+
+        AddRegDwordRule(regAllowlist, @"HKLM\SOFTWARE\Policies\Microsoft\VisualStudio\SQM", "OptIn", "0", "1");
+        AddRegDwordRule(regAllowlist, @"HKLM\SOFTWARE\Policies\Microsoft\VisualStudio\Feedback", "DisableEmailInput", "0", "1");
+        AddRegDwordRule(regAllowlist, @"HKLM\SOFTWARE\Policies\Microsoft\VisualStudio\Feedback", "DisableFeedbackDialog", "0", "1");
+        AddRegDwordRule(regAllowlist, @"HKLM\SOFTWARE\Policies\Microsoft\VisualStudio\Feedback", "DisableScreenshotCapture", "0", "1");
+        foreach (var version in new[] { "14.0", "15.0", "16.0", "17.0" })
+        {
+            AddRegDwordRule(regAllowlist, $@"HKLM\SOFTWARE\Microsoft\VSCommon\{version}\SQM", "OptIn", "0", "1");
+        }
+
+        AddRegDwordRule(regAllowlist, @"HKCU\Software\7-Zip\Options", "CascadedMenu", "0", "1");
+        AddRegDwordRule(regAllowlist, @"HKCU\Software\7-Zip\Options", "ElimDupExtract", "0", "1");
+        AddRegDwordRule(regAllowlist, @"HKCU\Software\7-Zip\Options", "MenuIcons", "0", "1");
+        AddRegDwordRule(regAllowlist, @"HKCU\Software\7-Zip\Options", "WriteZoneIdExtract", "0", "1", "2");
+
+        AddRegDwordRule(regAllowlist, @"HKCU\Software\Microsoft\Windows\CurrentVersion\Audio", "DisableProtectedAudioDG", "0", "1");
+        AddRegDwordRule(regAllowlist, @"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Render", "DisableEnhancements", "0", "1");
+
+        AddRegSzRule(regAllowlist, @"HKCU\Control Panel\Keyboard", "KeyboardDelay", "0", "1", "2", "3");
+        AddRegSzRule(regAllowlist, @"HKCU\Control Panel\Keyboard", "KeyboardSpeed", "0", "10", "20", "31");
+        AddRegSzRule(regAllowlist, @"HKCU\Control Panel\Desktop", "CursorBlinkRate", "200", "500", "900", "1200");
+        AddRegSzRule(regAllowlist, @"HKCU\Keyboard Layout\Toggle", "Language Hotkey", "1", "2", "3", "4");
+        AddRegSzRule(regAllowlist, @"HKCU\Keyboard Layout\Toggle", "Hotkey", "1", "2", "3", "4");
+        AddRegSzRule(regAllowlist, @"HKCU\Keyboard Layout\Toggle", "Layout Hotkey", "1", "2", "3", "4");
+
+        AddRegDwordRule(regAllowlist, @"HKCU\Control Panel\Mouse", "RawMouseThrottleEnabled", "0", "1");
+        AddRegDwordRule(regAllowlist, @"HKCU\Control Panel\Mouse", "RawMouseThrottleDuration", "0", "1", "2", "10");
+        AddRegDwordRule(regAllowlist, @"HKCU\Control Panel\Mouse", "RawMouseThrottleLeeway", "0", "1", "2", "10");
+        AddRegSzRule(regAllowlist, @"HKCU\Control Panel\Mouse", "MouseSpeed", "0", "1", "2");
+        AddRegSzRule(regAllowlist, @"HKCU\Control Panel\Mouse", "MouseThreshold1", "0", "1", "2", "6");
+        AddRegSzRule(regAllowlist, @"HKCU\Control Panel\Mouse", "MouseThreshold2", "0", "1", "2", "10");
+        AddRegSzRule(regAllowlist, @"HKCU\Control Panel\Mouse", "MouseSensitivity", "1", "6", "10", "15", "20");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer", "NoLowDiskSpaceChecks", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer", "UseDefaultTile", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer", "AllowOnlineTips", "0", "1", "2");
@@ -715,11 +843,35 @@ public sealed class CommandAllowlist
 
     private static bool IsKnownPowerCfgCommandAllowed(IReadOnlyList<string> arguments, out string? reason)
     {
+        const string usbSubgroupGuid = "2a737441-1930-4402-8d77-b2bebba308a3";
+        const string usbSelectiveSuspendGuid = "48e6b7a6-50f5-4782-a5d4-53bb8f07e226";
+
         if (arguments.Count == 4
             && arguments[0].Equals("/qh", StringComparison.OrdinalIgnoreCase)
             && arguments[1].Equals("SCHEME_CURRENT", StringComparison.OrdinalIgnoreCase)
             && arguments[2].Equals("SUB_PROCESSOR", StringComparison.OrdinalIgnoreCase)
             && arguments[3].Equals("PERFBOOSTMODE", StringComparison.OrdinalIgnoreCase))
+        {
+            reason = null;
+            return true;
+        }
+
+        if (arguments.Count == 4
+            && arguments[0].Equals("/qh", StringComparison.OrdinalIgnoreCase)
+            && arguments[1].Equals("SCHEME_CURRENT", StringComparison.OrdinalIgnoreCase)
+            && arguments[2].Equals("SUB_PROCESSOR", StringComparison.OrdinalIgnoreCase)
+            && (arguments[3].Equals("CPMINCORES", StringComparison.OrdinalIgnoreCase)
+                || arguments[3].Equals("CPMAXCORES", StringComparison.OrdinalIgnoreCase)))
+        {
+            reason = null;
+            return true;
+        }
+
+        if (arguments.Count == 4
+            && arguments[0].Equals("/query", StringComparison.OrdinalIgnoreCase)
+            && arguments[1].Equals("SCHEME_CURRENT", StringComparison.OrdinalIgnoreCase)
+            && arguments[2].Equals(usbSubgroupGuid, StringComparison.OrdinalIgnoreCase)
+            && arguments[3].Equals(usbSelectiveSuspendGuid, StringComparison.OrdinalIgnoreCase))
         {
             reason = null;
             return true;
@@ -750,6 +902,33 @@ public sealed class CommandAllowlist
             && arguments[2].Equals("SUB_PROCESSOR", StringComparison.OrdinalIgnoreCase)
             && arguments[3].Equals("PERFBOOSTMODE", StringComparison.OrdinalIgnoreCase)
             && int.TryParse(arguments[4], out _))
+        {
+            reason = null;
+            return true;
+        }
+
+        if (arguments.Count == 5
+            && (arguments[0].Equals("/setacvalueindex", StringComparison.OrdinalIgnoreCase)
+                || arguments[0].Equals("/setdcvalueindex", StringComparison.OrdinalIgnoreCase))
+            && arguments[1].Equals("SCHEME_CURRENT", StringComparison.OrdinalIgnoreCase)
+            && arguments[2].Equals("SUB_PROCESSOR", StringComparison.OrdinalIgnoreCase)
+            && (arguments[3].Equals("CPMINCORES", StringComparison.OrdinalIgnoreCase)
+                || arguments[3].Equals("CPMAXCORES", StringComparison.OrdinalIgnoreCase))
+            && int.TryParse(arguments[4], out var coreParkingValue)
+            && coreParkingValue is >= 0 and <= 100)
+        {
+            reason = null;
+            return true;
+        }
+
+        if (arguments.Count == 5
+            && (arguments[0].Equals("/setacvalueindex", StringComparison.OrdinalIgnoreCase)
+                || arguments[0].Equals("/setdcvalueindex", StringComparison.OrdinalIgnoreCase))
+            && arguments[1].Equals("SCHEME_CURRENT", StringComparison.OrdinalIgnoreCase)
+            && arguments[2].Equals(usbSubgroupGuid, StringComparison.OrdinalIgnoreCase)
+            && arguments[3].Equals(usbSelectiveSuspendGuid, StringComparison.OrdinalIgnoreCase)
+            && (arguments[4].Equals("0", StringComparison.OrdinalIgnoreCase)
+                || arguments[4].Equals("1", StringComparison.OrdinalIgnoreCase)))
         {
             reason = null;
             return true;

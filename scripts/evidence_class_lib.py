@@ -104,6 +104,23 @@ INCIDENT_EVIDENCE_KINDS = {
     "vm-incident",
 }
 
+APP_QA_EVIDENCE_KINDS = {
+    "vm-test",
+}
+
+APP_QA_SUCCESS_HINTS = (
+    "ok-gated-override",
+    "qa-only gated mutation override used",
+)
+
+APP_QA_FAILURE_HINTS = (
+    "check-failed",
+    "access is denied",
+    "not-applicable",
+    "already-applied",
+    "skipped rollback because no mutation was performed",
+)
+
 SEMANTICS_EVIDENCE_KINDS = {
     "official-doc",
     "policy-csp",
@@ -413,6 +430,54 @@ def has_trace_evidence(record: dict[str, Any]) -> bool:
     return "runtime-trace" in evidence_kinds(record)
 
 
+def evidence_text(item: dict[str, Any]) -> str:
+    return " ".join(
+        str(item.get(field) or "")
+        for field in ("evidence_id", "title", "summary", "location", "Title", "Summary", "Location")
+    ).lower()
+
+
+def is_app_qa_evidence(item: dict[str, Any]) -> bool:
+    if evidence_kind(item) not in APP_QA_EVIDENCE_KINDS:
+        return False
+    text = evidence_text(item)
+    return "app-qa" in text or "qa-only gated mutation" in text or "qa card snapshot" in text
+
+
+def has_successful_app_qa_evidence(record: dict[str, Any]) -> bool:
+    for item in evidence_items(record):
+        if not is_app_qa_evidence(item):
+            continue
+        text = evidence_text(item)
+        if any(hint in text for hint in APP_QA_FAILURE_HINTS):
+            continue
+        if not any(hint in text for hint in APP_QA_SUCCESS_HINTS):
+            continue
+        if "apply/verify" in text and "rollback restored" in text:
+            return True
+        if all(word in text for word in ("apply", "verify", "rollback", "restored")):
+            return True
+    return False
+
+
+def has_repo_code_mapping(record: dict[str, Any]) -> bool:
+    return any(evidence_kind(item) == "repo-code" for item in evidence_items(record))
+
+
+def has_app_backed_runtime_contract(record: dict[str, Any]) -> bool:
+    decision = record.get("decision") or {}
+    return (
+        extract_app_status(record) == "matches-research"
+        and bool_value(decision.get("apply_allowed"))
+        and not bool_value(decision.get("needs_vm_validation"))
+        and not bool(decision.get("blocking_issues"))
+        and bool(validation_proof(record))
+        and restore_story_known(record)
+        and has_repo_code_mapping(record)
+        and has_successful_app_qa_evidence(record)
+    )
+
+
 def has_exact_runtime_read(record: dict[str, Any]) -> bool:
     for item in evidence_items(record):
         if evidence_kind(item) not in (RUNTIME_EVIDENCE_KINDS | PROCMON_EVIDENCE_KINDS | WPR_EVIDENCE_KINDS):
@@ -518,6 +583,9 @@ def determine_evidence_lane(record: dict[str, Any]) -> str:
 
 
 def has_converged_vm_evidence(record: dict[str, Any]) -> bool:
+    if has_app_backed_runtime_contract(record):
+        return True
+
     lane = determine_evidence_lane(record)
     if lane == "early-boot":
         runtime_signal = has_wpr_evidence(record) or has_exact_runtime_read(record)
@@ -672,6 +740,8 @@ def next_missing_layer(record: dict[str, Any], incident_seen: bool = False) -> s
         return "restore-story"
     if incident_seen and not has_incident_review(record):
         return "incident-review"
+    if has_app_backed_runtime_contract(record):
+        return "none"
 
     lane = determine_evidence_lane(record)
     if lane == "official-policy":
