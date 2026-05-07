@@ -1,7 +1,7 @@
 # Promoted App QA Batch
 
 - Status: PASS
-- Generated UTC: 2026-05-07T17:56:48Z
+- Generated UTC: 2026-05-07T18:07:07Z
 - Catalog candidates: 242
 - Selected candidates: 4
 - Planned apply-allowed candidates: 4
@@ -10,34 +10,34 @@
 
 ## Selected Candidates
 
-- `security.powershell-unrestricted` | Windows PowerShell Script Execution Policy | Security
-  docs: `research/records/security.powershell-unrestricted.review.json`
+- `network.smb-require-dialect-3_1_1` | Require SMB Dialect 3.1.1 | Network
+  docs: `research/records/network.smb-require-dialect-3_1_1.review.json`
   rollback: default=true | previous=true
   card snapshot: claim_boundary=true | fields=TweakId, Name, Category, EvidenceClass, ResearchStatus, RollbackSnapshotState, HasClaimBoundary, WhatWeKnowSummary, WhatWeDoNotClaimSummary, ProofLanes | lanes=docs, runtime, source, rollback
-- `security.threat-file-hash-logging` | Microsoft Defender Threat File Hash Logging | Security
-  docs: `research/records/security.threat-file-hash-logging.review.json`
+- `network.smb-require-signing-client` | SMB Client Signing Requirement | Network
+  docs: `research/records/network.smb-require-signing-client.json`
   rollback: default=true | previous=true
   card snapshot: claim_boundary=true | fields=TweakId, Name, Category, EvidenceClass, ResearchStatus, RollbackSnapshotState, HasClaimBoundary, WhatWeKnowSummary, WhatWeDoNotClaimSummary, ProofLanes | lanes=docs, runtime, source, rollback
-- `security.trusted-path-credential-prompting` | Trusted Path for Credential Entry | Security
-  docs: `research/records/security.trusted-path-credential-prompting.review.json`
+- `network.smb-require-signing-server` | SMB Server Signing Requirement | Network
+  docs: `research/records/network.smb-require-signing-server.json`
   rollback: default=true | previous=true
   card snapshot: claim_boundary=true | fields=TweakId, Name, Category, EvidenceClass, ResearchStatus, RollbackSnapshotState, HasClaimBoundary, WhatWeKnowSummary, WhatWeDoNotClaimSummary, ProofLanes | lanes=docs, runtime, source, rollback
-- `security.uac-never-notify` | User Account Control Prompting Profile | Security
-  docs: `research/records/security.uac-never-notify.json`
+- `network.smb-set-cipher-suite-order` | SMB Cipher Suite Order | Network
+  docs: `research/records/network.smb-set-cipher-suite-order.review.json`
   rollback: default=true | previous=true
   card snapshot: claim_boundary=true | fields=TweakId, Name, Category, EvidenceClass, ResearchStatus, RollbackSnapshotState, HasClaimBoundary, WhatWeKnowSummary, WhatWeDoNotClaimSummary, ProofLanes | lanes=docs, runtime, source, rollback
 
 ## Live Results
 
-- `security.powershell-unrestricted` | success=true | status=ok
+- `network.smb-require-dialect-3_1_1` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
   card contract: ok | claim_boundary=true | lanes=docs, runtime, source, rollback
-- `security.threat-file-hash-logging` | success=true | status=ok
+- `network.smb-require-signing-client` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
   card contract: ok | claim_boundary=true | lanes=docs, runtime, source, rollback
-- `security.trusted-path-credential-prompting` | success=true | status=ok
+- `network.smb-require-signing-server` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
   card contract: ok | claim_boundary=true | lanes=docs, runtime, source, rollback
-- `security.uac-never-notify` | success=true | status=ok
+- `network.smb-set-cipher-suite-order` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
   card contract: ok | claim_boundary=true | lanes=docs, runtime, source, rollback

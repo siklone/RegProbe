@@ -280,6 +280,8 @@ public sealed class CommandAllowlistSecurityTests
             CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\LanmanWorkstation", "/v", "MaxSmb2Dialect", "/t", "REG_DWORD", "/d", "785", "/f"),
             CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\LanmanServer", "/v", "MinSmb2Dialect", "/t", "REG_DWORD", "/d", "785", "/f"),
             CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\LanmanServer", "/v", "MaxSmb2Dialect", "/t", "REG_DWORD", "/d", "785", "/f"),
+            CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\LanmanWorkstation", "/v", "CipherSuiteOrder", "/t", "REG_MULTI_SZ", "/d", @"AES_256_GCM\0AES_256_CCM", "/f"),
+            CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\LanmanServer", "/v", "CipherSuiteOrder", "/t", "REG_MULTI_SZ", "/d", @"AES_256_GCM\0AES_256_CCM", "/f"),
             CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\System", "/v", "EnableCdp", "/t", "REG_DWORD", "/d", "0", "/f"),
             CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\System", "/v", "BlockDomainPicturePassword", "/t", "REG_DWORD", "/d", "1", "/f"),
             CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows NT\CurrentVersion\Software Protection Platform", "/v", "NoGenTicket", "/t", "REG_DWORD", "/d", "1", "/f"),

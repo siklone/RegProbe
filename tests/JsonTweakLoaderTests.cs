@@ -1,7 +1,10 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading;
+using System.Threading.Tasks;
+using Microsoft.Win32;
 using Moq;
 using RegProbe.Core.Registry;
 using RegProbe.Core.Services;
@@ -197,6 +200,57 @@ public sealed class JsonTweakLoaderTests : IDisposable
 
         Assert.Equal("power.session-watchdog-timeouts", tweak.Id);
         Assert.IsType<RegistryValueBatchTweak>(tweak);
+    }
+
+    [Fact]
+    public async Task Loader_Splits_Pipe_Delimited_MultiString_BatchValues()
+    {
+        var filePath = Path.Combine(_directory, "multi-string-batch.json");
+        File.WriteAllText(
+            filePath,
+            """
+            {
+              "categories": {
+                "network": {
+                  "name": "Network",
+                  "entries": [
+                    {
+                      "id": "network.smb-set-cipher-suite-order",
+                      "name": "SMB Cipher Suite Order",
+                      "batch_entries": [
+                        {
+                          "path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanWorkstation",
+                          "value_name": "CipherSuiteOrder",
+                          "type": "REG_MULTI_SZ",
+                          "target_value": "AES_256_GCM|AES_256_CCM"
+                        }
+                      ],
+                      "verified": true
+                    }
+                  ]
+                }
+              }
+            }
+            """);
+
+        using var loader = new JsonTweakLoader(_directory, preserveEntryIds: true);
+        var writes = new List<RegistryValueData>();
+        var registry = new Mock<IRegistryAccessor>(MockBehavior.Loose);
+        registry
+            .Setup(accessor => accessor.SetValueAsync(
+                It.IsAny<RegistryValueReference>(),
+                It.IsAny<RegistryValueData>(),
+                It.IsAny<CancellationToken>()))
+            .Callback<RegistryValueReference, RegistryValueData, CancellationToken>((_, value, _) => writes.Add(value))
+            .Returns(Task.CompletedTask);
+
+        var tweak = Assert.IsType<RegistryValueBatchTweak>(Assert.Single(loader.CreateTweaks(registry.Object)));
+
+        _ = await tweak.ApplyAsync(CancellationToken.None);
+
+        var write = Assert.Single(writes);
+        Assert.Equal(RegistryValueKind.MultiString, write.Kind);
+        Assert.Equal(new[] { "AES_256_GCM", "AES_256_CCM" }, write.MultiStringValue);
     }
 
     [Fact]

@@ -1,17 +1,17 @@
 {
-  "generated_utc": "2026-05-07T17:56:48Z",
-  "history_entry_count": 77,
+  "generated_utc": "2026-05-07T18:07:07Z",
+  "history_entry_count": 81,
   "catalog_candidate_count": 242,
-  "covered_count": 221,
-  "uncovered_count": 21,
+  "covered_count": 225,
+  "uncovered_count": 17,
   "summary": {
-    "coverage_percent": 91.32,
+    "coverage_percent": 92.98,
     "covered_categories": {
       "Audio": 3,
       "Cleanup": 1,
       "Developer": 9,
       "Explorer": 17,
-      "Network": 24,
+      "Network": 28,
       "Notifications": 5,
       "Performance": 3,
       "Peripheral": 3,
@@ -22,58 +22,12 @@
       "Visibility": 21
     },
     "uncovered_categories": {
-      "Network": 4,
       "Privacy": 9,
       "System": 6,
       "Visibility": 2
     }
   },
   "recommended_next_batches": [
-    {
-      "category": "Network",
-      "covered_count": 24,
-      "uncovered_count": 4,
-      "coverage_percent": 85.71,
-      "batch_size": 4,
-      "tweak_ids": [
-        "network.smb-require-dialect-3_1_1",
-        "network.smb-require-signing-client",
-        "network.smb-require-signing-server",
-        "network.smb-set-cipher-suite-order"
-      ],
-      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id network.smb-require-dialect-3_1_1 --id network.smb-require-signing-client --id network.smb-require-signing-server --id network.smb-set-cipher-suite-order",
-      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id network.smb-require-dialect-3_1_1 --id network.smb-require-signing-client --id network.smb-require-signing-server --id network.smb-set-cipher-suite-order --run-kvm --json",
-      "candidates": [
-        {
-          "tweak_id": "network.smb-require-dialect-3_1_1",
-          "record_id": "network.smb-require-dialect-3_1_1",
-          "category": "Network",
-          "name": "Require SMB Dialect 3.1.1",
-          "documentation": "research/records/network.smb-require-dialect-3_1_1.review.json"
-        },
-        {
-          "tweak_id": "network.smb-require-signing-client",
-          "record_id": "network.smb-require-signing-client",
-          "category": "Network",
-          "name": "SMB Client Signing Requirement",
-          "documentation": "research/records/network.smb-require-signing-client.json"
-        },
-        {
-          "tweak_id": "network.smb-require-signing-server",
-          "record_id": "network.smb-require-signing-server",
-          "category": "Network",
-          "name": "SMB Server Signing Requirement",
-          "documentation": "research/records/network.smb-require-signing-server.json"
-        },
-        {
-          "tweak_id": "network.smb-set-cipher-suite-order",
-          "record_id": "network.smb-set-cipher-suite-order",
-          "category": "Network",
-          "name": "SMB Cipher Suite Order",
-          "documentation": "research/records/network.smb-set-cipher-suite-order.review.json"
-        }
-      ]
-    },
     {
       "category": "Privacy",
       "covered_count": 58,
@@ -695,6 +649,42 @@
       "category": "Network",
       "name": "SMB Server Reject Unencrypted Access",
       "documentation": "research/records/network.smb-reject-unencrypted-access.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "network.smb-require-dialect-3_1_1",
+      "qa_tweak_id": "network.smb-require-dialect-3_1_1",
+      "candidate_id": "network.smb-require-dialect-3_1_1",
+      "category": "Network",
+      "name": "Require SMB Dialect 3.1.1",
+      "documentation": "research/records/network.smb-require-dialect-3_1_1.review.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "network.smb-require-signing-client",
+      "qa_tweak_id": "network.smb-require-signing-client",
+      "candidate_id": "network.smb-require-signing-client",
+      "category": "Network",
+      "name": "SMB Client Signing Requirement",
+      "documentation": "research/records/network.smb-require-signing-client.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "network.smb-require-signing-server",
+      "qa_tweak_id": "network.smb-require-signing-server",
+      "candidate_id": "network.smb-require-signing-server",
+      "category": "Network",
+      "name": "SMB Server Signing Requirement",
+      "documentation": "research/records/network.smb-require-signing-server.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "network.smb-set-cipher-suite-order",
+      "qa_tweak_id": "network.smb-set-cipher-suite-order",
+      "candidate_id": "network.smb-set-cipher-suite-order",
+      "category": "Network",
+      "name": "SMB Cipher Suite Order",
+      "documentation": "research/records/network.smb-set-cipher-suite-order.review.json",
       "latest_report_status": "ok"
     },
     {
@@ -2202,34 +2192,6 @@
     }
   ],
   "uncovered": [
-    {
-      "tweak_id": "network.smb-require-dialect-3_1_1",
-      "record_id": "network.smb-require-dialect-3_1_1",
-      "category": "Network",
-      "name": "Require SMB Dialect 3.1.1",
-      "documentation": "research/records/network.smb-require-dialect-3_1_1.review.json"
-    },
-    {
-      "tweak_id": "network.smb-require-signing-client",
-      "record_id": "network.smb-require-signing-client",
-      "category": "Network",
-      "name": "SMB Client Signing Requirement",
-      "documentation": "research/records/network.smb-require-signing-client.json"
-    },
-    {
-      "tweak_id": "network.smb-require-signing-server",
-      "record_id": "network.smb-require-signing-server",
-      "category": "Network",
-      "name": "SMB Server Signing Requirement",
-      "documentation": "research/records/network.smb-require-signing-server.json"
-    },
-    {
-      "tweak_id": "network.smb-set-cipher-suite-order",
-      "record_id": "network.smb-set-cipher-suite-order",
-      "category": "Network",
-      "name": "SMB Cipher Suite Order",
-      "documentation": "research/records/network.smb-set-cipher-suite-order.review.json"
-    },
     {
       "tweak_id": "privacy.disable-windows-tips",
       "record_id": "privacy.disable-windows-tips",

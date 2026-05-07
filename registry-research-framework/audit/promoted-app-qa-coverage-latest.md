@@ -1,11 +1,11 @@
 # Promoted App QA Coverage
 
-- Generated UTC: 2026-05-07T17:56:48Z
-- History entries: 77
+- Generated UTC: 2026-05-07T18:07:07Z
+- History entries: 81
 - Promoted app-QA candidates: 242
-- Covered: 221
-- Uncovered: 21
-- Coverage: 91.32%
+- Covered: 225
+- Uncovered: 17
+- Coverage: 92.98%
 
 ## Covered Categories
 
@@ -13,7 +13,7 @@
 - Cleanup: 1
 - Developer: 9
 - Explorer: 17
-- Network: 24
+- Network: 28
 - Notifications: 5
 - Performance: 3
 - Peripheral: 3
@@ -25,16 +25,12 @@
 
 ## Uncovered Categories
 
-- Network: 4
 - Privacy: 9
 - System: 6
 - Visibility: 2
 
 ## Recommended Next Batches
 
-- Network: 4 uncovered cards | coverage 85.71%
-  command: `dotnet run --project cli/cli.csproj -- research qa-batch --id network.smb-require-dialect-3_1_1 --id network.smb-require-signing-client --id network.smb-require-signing-server --id network.smb-set-cipher-suite-order`
-  live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id network.smb-require-dialect-3_1_1 --id network.smb-require-signing-client --id network.smb-require-signing-server --id network.smb-set-cipher-suite-order --run-kvm --json`
 - Privacy: 5 uncovered cards | coverage 86.57%
   command: `dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-windows-tips --id privacy.hide-last-logged-in-user --id privacy.hide-recommended-personalized-sites --id privacy.hide-recommended-personalized-sites-user --id privacy.hide-recommended-section`
   live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-windows-tips --id privacy.hide-last-logged-in-user --id privacy.hide-recommended-personalized-sites --id privacy.hide-recommended-personalized-sites-user --id privacy.hide-recommended-section --run-kvm --json`
@@ -47,10 +43,6 @@
 
 ## Remaining Uncovered Sample
 
-- `network.smb-require-dialect-3_1_1` | Require SMB Dialect 3.1.1 | Network
-- `network.smb-require-signing-client` | SMB Client Signing Requirement | Network
-- `network.smb-require-signing-server` | SMB Server Signing Requirement | Network
-- `network.smb-set-cipher-suite-order` | SMB Cipher Suite Order | Network
 - `privacy.disable-windows-tips` | Turn Off Windows Tips | Privacy
 - `privacy.hide-last-logged-in-user` | Display of the Last Signed-In Username | Privacy
 - `privacy.hide-recommended-personalized-sites` | Start Personalized Site Recommendations | Privacy
@@ -67,3 +59,4 @@
 - `system.verbose-status-messages` | Verbose Status Messages | System
 - `system.wait-to-kill-service-timeout` | Service Shutdown Timeout | System
 - `visibility.disable-window-animations` | Window Animations | Visibility
+- `visibility.hide-people-bar` | People Bar on the Taskbar | Visibility

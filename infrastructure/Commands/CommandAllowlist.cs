@@ -68,6 +68,16 @@ public sealed class CommandAllowlist
             allowlist.Add(new[] { "delete", keyPath, "/v", valueName, "/f" });
         }
 
+        static void AddRegMultiSzRule(List<string[]> allowlist, string keyPath, string valueName, params string[] values)
+        {
+            foreach (var value in values)
+            {
+                allowlist.Add(new[] { "add", keyPath, "/v", valueName, "/t", "REG_MULTI_SZ", "/d", value, "/f" });
+            }
+
+            allowlist.Add(new[] { "delete", keyPath, "/v", valueName, "/f" });
+        }
+
         AddRegDwordRule(regAllowlist, @"HKCU\Software\Policies\Microsoft\Windows\Explorer", "DisableSearchHistory", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKCU\Software\Policies\Microsoft\Windows\Explorer", "DisableSearchBoxSuggestions", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKCU\Software\Policies\Microsoft\Windows\Explorer", "HideRecommendedSection", "0", "1", "2");
@@ -266,6 +276,8 @@ public sealed class CommandAllowlist
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\LanmanWorkstation", "MaxSmb2Dialect", "514", "528", "768", "770", "785");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\LanmanServer", "MinSmb2Dialect", "514", "528", "768", "770", "785");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\LanmanServer", "MaxSmb2Dialect", "514", "528", "768", "770", "785");
+        AddRegMultiSzRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\LanmanWorkstation", "CipherSuiteOrder", @"AES_256_GCM\0AES_256_CCM");
+        AddRegMultiSzRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\LanmanServer", "CipherSuiteOrder", @"AES_256_GCM\0AES_256_CCM");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\System", "BlockDomainPicturePassword", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\System", "EnableCdp", "0", "1");
         AddRegDwordRule(regAllowlist, @"HKLM\SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization", "DODownloadMode", "0", "1", "2", "3", "99", "100");
