@@ -1,11 +1,11 @@
 {
-  "generated_utc": "2026-05-07T17:51:01Z",
-  "history_entry_count": 75,
+  "generated_utc": "2026-05-07T17:56:48Z",
+  "history_entry_count": 77,
   "catalog_candidate_count": 242,
-  "covered_count": 217,
-  "uncovered_count": 25,
+  "covered_count": 221,
+  "uncovered_count": 21,
   "summary": {
-    "coverage_percent": 89.67,
+    "coverage_percent": 91.32,
     "covered_categories": {
       "Audio": 3,
       "Cleanup": 1,
@@ -17,64 +17,18 @@
       "Peripheral": 3,
       "Power": 10,
       "Privacy": 58,
-      "Security": 17,
+      "Security": 21,
       "System": 46,
       "Visibility": 21
     },
     "uncovered_categories": {
       "Network": 4,
       "Privacy": 9,
-      "Security": 4,
       "System": 6,
       "Visibility": 2
     }
   },
   "recommended_next_batches": [
-    {
-      "category": "Security",
-      "covered_count": 17,
-      "uncovered_count": 4,
-      "coverage_percent": 80.95,
-      "batch_size": 4,
-      "tweak_ids": [
-        "security.powershell-unrestricted",
-        "security.threat-file-hash-logging",
-        "security.trusted-path-credential-prompting",
-        "security.uac-never-notify"
-      ],
-      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id security.powershell-unrestricted --id security.threat-file-hash-logging --id security.trusted-path-credential-prompting --id security.uac-never-notify",
-      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id security.powershell-unrestricted --id security.threat-file-hash-logging --id security.trusted-path-credential-prompting --id security.uac-never-notify --run-kvm --json",
-      "candidates": [
-        {
-          "tweak_id": "security.powershell-unrestricted",
-          "record_id": "security.powershell-unrestricted",
-          "category": "Security",
-          "name": "Windows PowerShell Script Execution Policy",
-          "documentation": "research/records/security.powershell-unrestricted.review.json"
-        },
-        {
-          "tweak_id": "security.threat-file-hash-logging",
-          "record_id": "security.threat-file-hash-logging",
-          "category": "Security",
-          "name": "Microsoft Defender Threat File Hash Logging",
-          "documentation": "research/records/security.threat-file-hash-logging.review.json"
-        },
-        {
-          "tweak_id": "security.trusted-path-credential-prompting",
-          "record_id": "security.trusted-path-credential-prompting",
-          "category": "Security",
-          "name": "Trusted Path for Credential Entry",
-          "documentation": "research/records/security.trusted-path-credential-prompting.review.json"
-        },
-        {
-          "tweak_id": "security.uac-never-notify",
-          "record_id": "security.uac-never-notify",
-          "category": "Security",
-          "name": "User Account Control Prompting Profile",
-          "documentation": "research/records/security.uac-never-notify.json"
-        }
-      ]
-    },
     {
       "category": "Network",
       "covered_count": 24,
@@ -1608,6 +1562,42 @@
       "latest_report_status": "ok"
     },
     {
+      "tweak_id": "security.powershell-unrestricted",
+      "qa_tweak_id": "security.powershell-unrestricted",
+      "candidate_id": "security.powershell-unrestricted",
+      "category": "Security",
+      "name": "Windows PowerShell Script Execution Policy",
+      "documentation": "research/records/security.powershell-unrestricted.review.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "security.threat-file-hash-logging",
+      "qa_tweak_id": "security.threat-file-hash-logging",
+      "candidate_id": "security.threat-file-hash-logging",
+      "category": "Security",
+      "name": "Microsoft Defender Threat File Hash Logging",
+      "documentation": "research/records/security.threat-file-hash-logging.review.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "security.trusted-path-credential-prompting",
+      "qa_tweak_id": "security.trusted-path-credential-prompting",
+      "candidate_id": "security.trusted-path-credential-prompting",
+      "category": "Security",
+      "name": "Trusted Path for Credential Entry",
+      "documentation": "research/records/security.trusted-path-credential-prompting.review.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "security.uac-never-notify",
+      "qa_tweak_id": "security.uac-never-notify",
+      "candidate_id": "security.uac-never-notify",
+      "category": "Security",
+      "name": "User Account Control Prompting Profile",
+      "documentation": "research/records/security.uac-never-notify.json",
+      "latest_report_status": "ok"
+    },
+    {
       "tweak_id": "system.aero-shake",
       "qa_tweak_id": "system.aero-shake",
       "candidate_id": "system.aero-shake",
@@ -2302,34 +2292,6 @@
       "category": "Privacy",
       "name": "Recommended Troubleshooting for Known Problems",
       "documentation": "research/records/privacy.troubleshooter-dont-run.review.json"
-    },
-    {
-      "tweak_id": "security.powershell-unrestricted",
-      "record_id": "security.powershell-unrestricted",
-      "category": "Security",
-      "name": "Windows PowerShell Script Execution Policy",
-      "documentation": "research/records/security.powershell-unrestricted.review.json"
-    },
-    {
-      "tweak_id": "security.threat-file-hash-logging",
-      "record_id": "security.threat-file-hash-logging",
-      "category": "Security",
-      "name": "Microsoft Defender Threat File Hash Logging",
-      "documentation": "research/records/security.threat-file-hash-logging.review.json"
-    },
-    {
-      "tweak_id": "security.trusted-path-credential-prompting",
-      "record_id": "security.trusted-path-credential-prompting",
-      "category": "Security",
-      "name": "Trusted Path for Credential Entry",
-      "documentation": "research/records/security.trusted-path-credential-prompting.review.json"
-    },
-    {
-      "tweak_id": "security.uac-never-notify",
-      "record_id": "security.uac-never-notify",
-      "category": "Security",
-      "name": "User Account Control Prompting Profile",
-      "documentation": "research/records/security.uac-never-notify.json"
     },
     {
       "tweak_id": "system.services.disable-connected-user-experiences",

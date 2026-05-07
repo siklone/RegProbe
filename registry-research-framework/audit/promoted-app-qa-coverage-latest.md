@@ -1,11 +1,11 @@
 # Promoted App QA Coverage
 
-- Generated UTC: 2026-05-07T17:51:01Z
-- History entries: 75
+- Generated UTC: 2026-05-07T17:56:48Z
+- History entries: 77
 - Promoted app-QA candidates: 242
-- Covered: 217
-- Uncovered: 25
-- Coverage: 89.67%
+- Covered: 221
+- Uncovered: 21
+- Coverage: 91.32%
 
 ## Covered Categories
 
@@ -19,7 +19,7 @@
 - Peripheral: 3
 - Power: 10
 - Privacy: 58
-- Security: 17
+- Security: 21
 - System: 46
 - Visibility: 21
 
@@ -27,15 +27,11 @@
 
 - Network: 4
 - Privacy: 9
-- Security: 4
 - System: 6
 - Visibility: 2
 
 ## Recommended Next Batches
 
-- Security: 4 uncovered cards | coverage 80.95%
-  command: `dotnet run --project cli/cli.csproj -- research qa-batch --id security.powershell-unrestricted --id security.threat-file-hash-logging --id security.trusted-path-credential-prompting --id security.uac-never-notify`
-  live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id security.powershell-unrestricted --id security.threat-file-hash-logging --id security.trusted-path-credential-prompting --id security.uac-never-notify --run-kvm --json`
 - Network: 4 uncovered cards | coverage 85.71%
   command: `dotnet run --project cli/cli.csproj -- research qa-batch --id network.smb-require-dialect-3_1_1 --id network.smb-require-signing-client --id network.smb-require-signing-server --id network.smb-set-cipher-suite-order`
   live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id network.smb-require-dialect-3_1_1 --id network.smb-require-signing-client --id network.smb-require-signing-server --id network.smb-set-cipher-suite-order --run-kvm --json`
@@ -64,10 +60,10 @@
 - `privacy.limit-diagnostic-log-collection` | Advanced Diagnostic Log Collection | Privacy
 - `privacy.limit-dump-collection` | Diagnostic Dump Collection | Privacy
 - `privacy.troubleshooter-dont-run` | Recommended Troubleshooting for Known Problems | Privacy
-- `security.powershell-unrestricted` | Windows PowerShell Script Execution Policy | Security
-- `security.threat-file-hash-logging` | Microsoft Defender Threat File Hash Logging | Security
-- `security.trusted-path-credential-prompting` | Trusted Path for Credential Entry | Security
-- `security.uac-never-notify` | User Account Control Prompting Profile | Security
 - `system.services.disable-connected-user-experiences` | Connected User Experiences and Telemetry Service | System
 - `system.services.disable-print-notifications` | Print Notification Service | System
 - `system.services.disable-print-spooler` | Print Spooler Service | System
+- `system.services.disable-windows-search` | Windows Search Service | System
+- `system.verbose-status-messages` | Verbose Status Messages | System
+- `system.wait-to-kill-service-timeout` | Service Shutdown Timeout | System
+- `visibility.disable-window-animations` | Window Animations | Visibility

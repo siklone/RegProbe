@@ -1,13 +1,12 @@
 {
-  "generated_utc": "2026-05-07T17:51:01Z",
+  "generated_utc": "2026-05-07T17:56:48Z",
   "status": "PASS",
   "selection": {
     "requested_ids": [
-      "privacy.disable-switchback.policy",
-      "privacy.disable-telemetry-change-notifications",
-      "privacy.disable-telemetry-optin-ui",
-      "privacy.disable-wer",
-      "privacy.disable-windows-location-provider"
+      "security.powershell-unrestricted",
+      "security.threat-file-hash-logging",
+      "security.trusted-path-credential-prompting",
+      "security.uac-never-notify"
     ],
     "requested_categories": [],
     "limit_per_category": 1,
@@ -22,29 +21,29 @@
     "kvm_batch_runner": "scripts/vm-kvm/run-guest-app-tweak-qa-batch.py"
   },
   "catalog_candidate_count": 242,
-  "selected_candidate_count": 5,
+  "selected_candidate_count": 4,
   "errors": [],
   "candidates": [
     {
-      "tweak_id": "privacy.disable-switchback.policy",
-      "qa_tweak_id": "privacy.disable-switchback.policy",
-      "candidate_id": "privacy.disable-switchback.policy",
-      "record_id": "privacy.disable-switchback.policy",
-      "category": "Privacy",
-      "name": "Disable SwitchBack Compatibility Policy",
-      "documentation": "research/records/privacy.disable-switchback.policy.review.json",
+      "tweak_id": "security.powershell-unrestricted",
+      "qa_tweak_id": "security.powershell-unrestricted",
+      "candidate_id": "security.powershell-unrestricted",
+      "record_id": "security.powershell-unrestricted",
+      "category": "Security",
+      "name": "Windows PowerShell Script Execution Policy",
+      "documentation": "research/records/security.powershell-unrestricted.review.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.disable-switchback.policy",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect security.powershell-unrestricted",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-switchback.policy' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-switchback.policy.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-switchback.policy' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-switchback.policy.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-switchback.policy' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-switchback.policy.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-switchback.policy' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-switchback.policy.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.disable-switchback.policy'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'security.powershell-unrestricted' --qa-output 'C:\\Tools\\ValidationController\\smoke\\security.powershell-unrestricted.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'security.powershell-unrestricted' --qa-output 'C:\\Tools\\ValidationController\\smoke\\security.powershell-unrestricted.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'security.powershell-unrestricted' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\security.powershell-unrestricted.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'security.powershell-unrestricted' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\security.powershell-unrestricted.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'security.powershell-unrestricted'"
       },
       "expected_report": {
         "success": true,
@@ -85,25 +84,25 @@
       }
     },
     {
-      "tweak_id": "privacy.disable-telemetry-change-notifications",
-      "qa_tweak_id": "privacy.disable-telemetry-change-notifications",
-      "candidate_id": "privacy.disable-telemetry-change-notifications",
-      "record_id": "privacy.disable-telemetry-change-notifications",
-      "category": "Privacy",
-      "name": "Diagnostic Data Change Notifications",
-      "documentation": "research/records/privacy.disable-telemetry-change-notifications.json",
+      "tweak_id": "security.threat-file-hash-logging",
+      "qa_tweak_id": "security.threat-file-hash-logging",
+      "candidate_id": "security.threat-file-hash-logging",
+      "record_id": "security.threat-file-hash-logging",
+      "category": "Security",
+      "name": "Microsoft Defender Threat File Hash Logging",
+      "documentation": "research/records/security.threat-file-hash-logging.review.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.disable-telemetry-change-notifications",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect security.threat-file-hash-logging",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-telemetry-change-notifications' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-telemetry-change-notifications.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-telemetry-change-notifications' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-telemetry-change-notifications.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-telemetry-change-notifications' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-telemetry-change-notifications.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-telemetry-change-notifications' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-telemetry-change-notifications.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.disable-telemetry-change-notifications'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'security.threat-file-hash-logging' --qa-output 'C:\\Tools\\ValidationController\\smoke\\security.threat-file-hash-logging.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'security.threat-file-hash-logging' --qa-output 'C:\\Tools\\ValidationController\\smoke\\security.threat-file-hash-logging.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'security.threat-file-hash-logging' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\security.threat-file-hash-logging.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'security.threat-file-hash-logging' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\security.threat-file-hash-logging.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'security.threat-file-hash-logging'"
       },
       "expected_report": {
         "success": true,
@@ -144,25 +143,25 @@
       }
     },
     {
-      "tweak_id": "privacy.disable-telemetry-optin-ui",
-      "qa_tweak_id": "privacy.disable-telemetry-optin-ui",
-      "candidate_id": "privacy.disable-telemetry-optin-ui",
-      "record_id": "privacy.disable-telemetry-optin-ui",
-      "category": "Privacy",
-      "name": "Diagnostic Data Opt-In Settings UI",
-      "documentation": "research/records/privacy.disable-telemetry-optin-ui.json",
+      "tweak_id": "security.trusted-path-credential-prompting",
+      "qa_tweak_id": "security.trusted-path-credential-prompting",
+      "candidate_id": "security.trusted-path-credential-prompting",
+      "record_id": "security.trusted-path-credential-prompting",
+      "category": "Security",
+      "name": "Trusted Path for Credential Entry",
+      "documentation": "research/records/security.trusted-path-credential-prompting.review.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.disable-telemetry-optin-ui",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect security.trusted-path-credential-prompting",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-telemetry-optin-ui' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-telemetry-optin-ui.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-telemetry-optin-ui' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-telemetry-optin-ui.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-telemetry-optin-ui' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-telemetry-optin-ui.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-telemetry-optin-ui' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-telemetry-optin-ui.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.disable-telemetry-optin-ui'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'security.trusted-path-credential-prompting' --qa-output 'C:\\Tools\\ValidationController\\smoke\\security.trusted-path-credential-prompting.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'security.trusted-path-credential-prompting' --qa-output 'C:\\Tools\\ValidationController\\smoke\\security.trusted-path-credential-prompting.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'security.trusted-path-credential-prompting' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\security.trusted-path-credential-prompting.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'security.trusted-path-credential-prompting' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\security.trusted-path-credential-prompting.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'security.trusted-path-credential-prompting'"
       },
       "expected_report": {
         "success": true,
@@ -203,84 +202,25 @@
       }
     },
     {
-      "tweak_id": "privacy.disable-wer",
-      "qa_tweak_id": "privacy.disable-wer",
-      "candidate_id": "privacy.disable-wer",
-      "record_id": "privacy.disable-wer",
-      "category": "Privacy",
-      "name": "Windows Error Reporting",
-      "documentation": "research/records/privacy.disable-wer.json",
+      "tweak_id": "security.uac-never-notify",
+      "qa_tweak_id": "security.uac-never-notify",
+      "candidate_id": "security.uac-never-notify",
+      "record_id": "security.uac-never-notify",
+      "category": "Security",
+      "name": "User Account Control Prompting Profile",
+      "documentation": "research/records/security.uac-never-notify.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.disable-wer",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect security.uac-never-notify",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-wer' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-wer.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-wer' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-wer.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-wer' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-wer.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-wer' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-wer.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.disable-wer'"
-      },
-      "expected_report": {
-        "success": true,
-        "status": "ok",
-        "rollback_requested": true,
-        "required_stages": [
-          "detect-before",
-          "apply",
-          "rollback",
-          "detect-after"
-        ],
-        "required_card_snapshot": {
-          "required_fields": [
-            "TweakId",
-            "Name",
-            "Category",
-            "EvidenceClass",
-            "ResearchStatus",
-            "RollbackSnapshotState",
-            "HasClaimBoundary",
-            "WhatWeKnowSummary",
-            "WhatWeDoNotClaimSummary",
-            "ProofLanes"
-          ],
-          "required_proof_lanes": [
-            "docs",
-            "runtime",
-            "source",
-            "rollback"
-          ],
-          "claim_boundary_required": true
-        },
-        "required_stage_assertions": [
-          "apply stage reports a successful apply story",
-          "rollback stage reports a successful rollback story",
-          "detect-after is present"
-        ]
-      }
-    },
-    {
-      "tweak_id": "privacy.disable-windows-location-provider",
-      "qa_tweak_id": "privacy.disable-windows-location-provider",
-      "candidate_id": "privacy.disable-windows-location-provider",
-      "record_id": "privacy.disable-windows-location-provider",
-      "category": "Privacy",
-      "name": "Windows Location Provider",
-      "documentation": "research/records/privacy.disable-windows-location-provider.json",
-      "promotion_state": "promoted",
-      "apply_allowed": true,
-      "restore_default_supported": true,
-      "restore_previous_supported": true,
-      "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.disable-windows-location-provider",
-        "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-windows-location-provider' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-windows-location-provider.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-windows-location-provider' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-windows-location-provider.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-windows-location-provider' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-windows-location-provider.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-windows-location-provider' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-windows-location-provider.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.disable-windows-location-provider'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'security.uac-never-notify' --qa-output 'C:\\Tools\\ValidationController\\smoke\\security.uac-never-notify.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'security.uac-never-notify' --qa-output 'C:\\Tools\\ValidationController\\smoke\\security.uac-never-notify.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'security.uac-never-notify' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\security.uac-never-notify.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'security.uac-never-notify' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\security.uac-never-notify.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'security.uac-never-notify'"
       },
       "expected_report": {
         "success": true,
@@ -323,7 +263,7 @@
   ],
   "run_results": [
     {
-      "tweak_id": "privacy.disable-switchback.policy",
+      "tweak_id": "security.powershell-unrestricted",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -360,19 +300,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "privacy.disable-switchback.policy",
-        "TweakName": "Disable SwitchBack Compatibility Policy",
+        "TweakId": "security.powershell-unrestricted",
+        "TweakName": "Windows PowerShell Script Execution Policy",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "privacy.disable-switchback.policy",
-          "Name": "Disable SwitchBack Compatibility Policy",
-          "Category": "Privacy",
-          "Description": "SwitchBack is a Windows compatibility feature that lets newer applications receive compatibility fixes originally designed for older OS versions. On a modern Windows 11 system running only current software, this feature usually has no practical effect. This policy disables it.",
-          "FriendlyDescription": "SwitchBack is a Windows compatibility feature that lets newer applications receive compatibility fixes originally designed for older OS versions. On a modern Windows 11 system running only current software, this feature usually has no practical effect. This policy disables it.",
-          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat\\SbEnable",
+          "TweakId": "security.powershell-unrestricted",
+          "Name": "Windows PowerShell Script Execution Policy",
+          "Category": "Security",
+          "Description": "PowerShell can be configured to block scripts, allow only signed scripts, or allow all scripts. The official policy uses a Group Policy path to control that behavior.",
+          "FriendlyDescription": "PowerShell can be configured to block scripts, allow only signed scripts, or allow all scripts. The official policy uses a Group Policy path to control that behavior.",
+          "RegistryPath": "",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -380,22 +320,22 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: SwitchBack is a Windows compatibility feature that lets newer applications receive compatibility fixes originally designed for older OS versions. On a modern Windows 11 system running only current software, this feature usually has no practical effect. This policy disables it. Evidence: Local official AppCompat.admx and AppCompat.adml files document the exact SbEnable policy surface and semantics, and Procmon confirmed gpupdate writes SbEnable=REG_DWORD 0x0 on Windows 11 Pro 10.0.26200.8037. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: PowerShell can be configured to block scripts, allow only signed scripts, or allow all scripts. The official policy uses a Group Policy path to control that behavior. Evidence: Local official ADMX and ADML files document the exact Group Policy surface under Software\\Policies\\Microsoft\\Windows\\PowerShell using EnableScripts and ExecutionPolicy, and the app now writes those documented values. Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "Local official AppCompat.admx and AppCompat.adml files document the exact SbEnable policy surface and semantics, and Procmon confirmed gpupdate writes SbEnable=REG_DWORD 0x0 on Windows 11 Pro 10.0.26200.8037.",
-              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/AppCompat.admx"
+              "Summary": "Local official ADMX and ADML files document the exact Group Policy surface under Software\\Policies\\Microsoft\\Windows\\PowerShell using EnableScripts and ExecutionPolicy, and the app now writes those documented values.",
+              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/PowerShellExecutionPolicy.admx"
             },
             {
               "Key": "runtime",
               "Label": "RUNTIME",
               "State": "ready",
-              "Summary": "VM reversible Procmon capture on 2026-03-26 in Win25H2Clean. powershell.exe wrote SbEnable=REG_DWORD 0x0 under HKLM/Software/Policies/Microsoft/Windows/AppCompat and reg.exe read it back successfully. The probe restored the original missing state after capt...",
-              "Source": "VM Procmon capture - AppCompatTurnOffSwitchBack: evidence/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml and evidence/raw/procmon/privacy.disable-switchback.policy/switchback-only.hits.csv"
+              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+              "Source": ""
             },
             {
               "Key": "source",
@@ -419,8 +359,8 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Privacy (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\privacy\\privacy-verified.md",
+              "Title": "Docs: Security (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\security\\security-verified.md",
               "Kind": "Docs"
             }
           ]
@@ -429,10 +369,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Turn off SwitchBack'.",
+            "StatusMessage": "Detected 0 of 2 values (matches: 0, missing: 2).",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Turn off SwitchBack",
+            "CurrentValue": "Unknown",
+            "TargetValue": "Multiple values",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -441,8 +381,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Turn off SwitchBack'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat\\SbEnable: missing -> 0",
-                "TimestampText": "10:51:05"
+                "Message": "Detected 0 of 2 values (matches: 0, missing: 2).\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\PowerShell\\EnableScripts: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\PowerShell\\ExecutionPolicy: missing",
+                "TimestampText": "10:56:52"
               },
               {
                 "Action": "Apply",
@@ -469,8 +409,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Turn off SwitchBack",
-            "TargetValue": "Turn off SwitchBack",
+            "CurrentValue": "Multiple values",
+            "TargetValue": "Multiple values",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -479,20 +419,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Turn off SwitchBack'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat\\SbEnable: missing -> 0",
-                "TimestampText": "10:51:05"
+                "Message": "Detected 0 of 2 values (matches: 0, missing: 2).\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\PowerShell\\EnableScripts: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\PowerShell\\ExecutionPolicy: missing",
+                "TimestampText": "10:56:52"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Turn off SwitchBack'.",
-                "TimestampText": "10:51:08"
+                "Message": "Updated 2 values.",
+                "TimestampText": "10:56:56"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Turn off SwitchBack'.",
-                "TimestampText": "10:51:08"
+                "Message": "Verified desired values.",
+                "TimestampText": "10:56:56"
               },
               {
                 "Action": "Rollback",
@@ -507,8 +447,8 @@
             "AppliedStatus": "NotApplied",
             "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Turn off SwitchBack",
+            "CurrentValue": "Multiple values",
+            "TargetValue": "Multiple values",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -517,36 +457,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Turn off SwitchBack'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat\\SbEnable: missing -> 0",
-                "TimestampText": "10:51:05"
+                "Message": "Detected 0 of 2 values (matches: 0, missing: 2).\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\PowerShell\\EnableScripts: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\PowerShell\\ExecutionPolicy: missing",
+                "TimestampText": "10:56:52"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Turn off SwitchBack'.",
-                "TimestampText": "10:51:08"
+                "Message": "Updated 2 values.",
+                "TimestampText": "10:56:56"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Turn off SwitchBack'.",
-                "TimestampText": "10:51:08"
+                "Message": "Verified desired values.",
+                "TimestampText": "10:56:56"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "10:51:08"
+                "TimestampText": "10:56:56"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Turn off SwitchBack'.",
+            "StatusMessage": "Detected 0 of 2 values (matches: 0, missing: 2).",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Turn off SwitchBack",
+            "CurrentValue": "Multiple values",
+            "TargetValue": "Multiple values",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -555,40 +495,40 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Turn off SwitchBack'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat\\SbEnable: missing -> 0",
-                "TimestampText": "10:51:08"
+                "Message": "Detected 0 of 2 values (matches: 0, missing: 2).\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\PowerShell\\EnableScripts: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\PowerShell\\ExecutionPolicy: missing",
+                "TimestampText": "10:56:56"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Turn off SwitchBack'.",
-                "TimestampText": "10:51:08"
+                "Message": "Updated 2 values.",
+                "TimestampText": "10:56:56"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Turn off SwitchBack'.",
-                "TimestampText": "10:51:08"
+                "Message": "Verified desired values.",
+                "TimestampText": "10:56:56"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "10:51:08"
+                "TimestampText": "10:56:56"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T17:51:05.6113991+00:00",
-        "CompletedAtUtc": "2026-05-07T17:51:08.7342085+00:00"
+        "StartedAtUtc": "2026-05-07T17:56:52.1647492+00:00",
+        "CompletedAtUtc": "2026-05-07T17:56:56.9450138+00:00"
       },
-      "qa_tweak_id": "privacy.disable-switchback.policy",
-      "candidate_id": "privacy.disable-switchback.policy",
-      "card_name": "Disable SwitchBack Compatibility Policy",
-      "documentation": "research/records/privacy.disable-switchback.policy.review.json"
+      "qa_tweak_id": "security.powershell-unrestricted",
+      "candidate_id": "security.powershell-unrestricted",
+      "card_name": "Windows PowerShell Script Execution Policy",
+      "documentation": "research/records/security.powershell-unrestricted.review.json"
     },
     {
-      "tweak_id": "privacy.disable-telemetry-change-notifications",
+      "tweak_id": "security.threat-file-hash-logging",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -625,19 +565,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "privacy.disable-telemetry-change-notifications",
-        "TweakName": "Diagnostic Data Change Notifications",
+        "TweakId": "security.threat-file-hash-logging",
+        "TweakName": "Microsoft Defender Threat File Hash Logging",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "privacy.disable-telemetry-change-notifications",
-          "Name": "Diagnostic Data Change Notifications",
-          "Category": "Privacy",
-          "Description": "Windows can notify the user when the diagnostic-data opt-in setting changes. This policy decides whether those notifications are shown.",
-          "FriendlyDescription": "Windows can notify the user when the diagnostic-data opt-in setting changes. This policy decides whether those notifications are shown.",
-          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection\\DisableTelemetryOptInChangeNotification",
+          "TweakId": "security.threat-file-hash-logging",
+          "Name": "Microsoft Defender Threat File Hash Logging",
+          "Category": "Security",
+          "Description": "Defender can compute and log file hashes for some file-based detections, but the current 25H2 engine still exposes more than one registry surface for the setting.",
+          "FriendlyDescription": "Defender can compute and log file hashes for some file-based detections, but the current 25H2 engine still exposes more than one registry surface for the setting.",
+          "RegistryPath": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\ThreatFileHashLogging",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -645,22 +585,22 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Windows can notify the user when the diagnostic-data opt-in setting changes. This policy decides whether those notifications are shown. Evidence: The System Policy CSP page explicitly documents the same policy behavior, key path, and 0/1 semantics. The exact registry value name is confirmed by the local DataCollection.admx file as DisableTelemetryOptInChangeNotification. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: Defender can compute and log file hashes for some file-based detections, but the current 25H2 engine still exposes more than one registry surface for the setting. Evidence: The Defender-on 25H2 VM produced a clean baseline event 1116 with no event 1120. Earlier text-file passes showed MsMpEng.exe reading the root ThreatFileHashLogging value directly and reading the Policy Manager EnableFileHashComputation alias directly in a s... Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "The System Policy CSP page explicitly documents the same policy behavior, key path, and 0/1 semantics. The exact registry value name is confirmed by the local DataCollection.admx file as DisableTelemetryOptInChangeNotification.",
-              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#configuretelemetryoptinchangenotification"
+              "Summary": "The Defender-on 25H2 VM produced a clean baseline event 1116 with no event 1120. Earlier text-file passes showed MsMpEng.exe reading the root ThreatFileHashLogging value directly and reading the Policy Manager EnableFileHashComputation alias directly in a s...",
+              "Source": "Validation proof source: evidence/files/vm-tooling-staging/defender-threat-file-hash-legacyroot-1-20260325-011845/defender-threat-file-hash-legacyroot-1.txt"
             },
             {
               "Key": "runtime",
               "Label": "RUNTIME",
               "State": "ready",
-              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
-              "Source": ""
+              "Summary": "The original high-risk snapshot had WinDefend and WdNisSvc set to Disabled and Get-MpComputerStatus reported 'Not running', which would have made Defender policy validation misleading until the VM was repaired.",
+              "Source": "Original high-risk snapshot had Defender disabled: evidence/files/vm-tooling-staging/defender-runtime-repair.json"
             },
             {
               "Key": "source",
@@ -684,8 +624,8 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Privacy (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\privacy\\privacy-verified.md",
+              "Title": "Docs: Security (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\security\\security-verified.md",
               "Kind": "Docs"
             }
           ]
@@ -694,10 +634,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Notification disabled'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Legacy root enabled'.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Notification disabled",
+            "TargetValue": "Legacy root enabled",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -706,8 +646,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Notification disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection\\DisableTelemetryOptInChangeNotification: missing -> 1",
-                "TimestampText": "10:51:15"
+                "Message": "Current values do not match a named option. Selected option is 'Legacy root enabled'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\ThreatFileHashLogging: missing -> 1",
+                "TimestampText": "10:57:03"
               },
               {
                 "Action": "Apply",
@@ -734,8 +674,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Notification disabled",
-            "TargetValue": "Notification disabled",
+            "CurrentValue": "Legacy root enabled",
+            "TargetValue": "Legacy root enabled",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -744,20 +684,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Notification disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection\\DisableTelemetryOptInChangeNotification: missing -> 1",
-                "TimestampText": "10:51:15"
+                "Message": "Current values do not match a named option. Selected option is 'Legacy root enabled'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\ThreatFileHashLogging: missing -> 1",
+                "TimestampText": "10:57:03"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Notification disabled'.",
-                "TimestampText": "10:51:18"
+                "Message": "Applied preset 'Legacy root enabled'.",
+                "TimestampText": "10:57:06"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Notification disabled'.",
-                "TimestampText": "10:51:18"
+                "Message": "Verified preset 'Legacy root enabled'.",
+                "TimestampText": "10:57:06"
               },
               {
                 "Action": "Rollback",
@@ -773,7 +713,7 @@
             "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Notification disabled",
+            "TargetValue": "Legacy root enabled",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -782,36 +722,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Notification disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection\\DisableTelemetryOptInChangeNotification: missing -> 1",
-                "TimestampText": "10:51:15"
+                "Message": "Current values do not match a named option. Selected option is 'Legacy root enabled'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\ThreatFileHashLogging: missing -> 1",
+                "TimestampText": "10:57:03"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Notification disabled'.",
-                "TimestampText": "10:51:18"
+                "Message": "Applied preset 'Legacy root enabled'.",
+                "TimestampText": "10:57:06"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Notification disabled'.",
-                "TimestampText": "10:51:18"
+                "Message": "Verified preset 'Legacy root enabled'.",
+                "TimestampText": "10:57:06"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "10:51:18"
+                "TimestampText": "10:57:06"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Notification disabled'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Legacy root enabled'.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Notification disabled",
+            "TargetValue": "Legacy root enabled",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -820,305 +760,40 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Notification disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection\\DisableTelemetryOptInChangeNotification: missing -> 1",
-                "TimestampText": "10:51:18"
+                "Message": "Current values do not match a named option. Selected option is 'Legacy root enabled'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\ThreatFileHashLogging: missing -> 1",
+                "TimestampText": "10:57:06"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Notification disabled'.",
-                "TimestampText": "10:51:18"
+                "Message": "Applied preset 'Legacy root enabled'.",
+                "TimestampText": "10:57:06"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Notification disabled'.",
-                "TimestampText": "10:51:18"
+                "Message": "Verified preset 'Legacy root enabled'.",
+                "TimestampText": "10:57:06"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "10:51:18"
+                "TimestampText": "10:57:06"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T17:51:15.2742242+00:00",
-        "CompletedAtUtc": "2026-05-07T17:51:18.4285021+00:00"
+        "StartedAtUtc": "2026-05-07T17:57:03.8544281+00:00",
+        "CompletedAtUtc": "2026-05-07T17:57:06.9654052+00:00"
       },
-      "qa_tweak_id": "privacy.disable-telemetry-change-notifications",
-      "candidate_id": "privacy.disable-telemetry-change-notifications",
-      "card_name": "Diagnostic Data Change Notifications",
-      "documentation": "research/records/privacy.disable-telemetry-change-notifications.json"
+      "qa_tweak_id": "security.threat-file-hash-logging",
+      "candidate_id": "security.threat-file-hash-logging",
+      "card_name": "Microsoft Defender Threat File Hash Logging",
+      "documentation": "research/records/security.threat-file-hash-logging.review.json"
     },
     {
-      "tweak_id": "privacy.disable-telemetry-optin-ui",
-      "host_exit": 0,
-      "execution_exit": 0,
-      "payload_status": "completed",
-      "report_source": "guest-file",
-      "report_parse_error": null,
-      "report_fetch_status": "ok",
-      "report_app_success": true,
-      "report_success": true,
-      "report_status": "ok",
-      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
-      "report_contract_status": "ok",
-      "report_contract_summary": "QA card snapshot contract passed.",
-      "report_contract_failures": [],
-      "report_card_present": true,
-      "report_card_has_claim_boundary": true,
-      "report_card_present_fields": [
-        "TweakId",
-        "Name",
-        "Category",
-        "EvidenceClass",
-        "ResearchStatus",
-        "RollbackSnapshotState",
-        "HasClaimBoundary",
-        "WhatWeKnowSummary",
-        "WhatWeDoNotClaimSummary",
-        "ProofLanes"
-      ],
-      "report_card_missing_fields": [],
-      "report_card_proof_lanes": [
-        "docs",
-        "runtime",
-        "source",
-        "rollback"
-      ],
-      "report_card_missing_proof_lanes": [],
-      "report": {
-        "TweakId": "privacy.disable-telemetry-optin-ui",
-        "TweakName": "Diagnostic Data Opt-In Settings UI",
-        "Success": true,
-        "Status": "ok",
-        "Summary": "Apply/verify path completed and rollback restored the tweak.",
-        "RollbackRequested": true,
-        "Card": {
-          "TweakId": "privacy.disable-telemetry-optin-ui",
-          "Name": "Diagnostic Data Opt-In Settings UI",
-          "Category": "Privacy",
-          "Description": "Windows can show controls in Settings that let a user change diagnostic data choices. This policy decides whether that Settings UI stays available.",
-          "FriendlyDescription": "Windows can show controls in Settings that let a user change diagnostic data choices. This policy decides whether that Settings UI stays available.",
-          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection\\DisableTelemetryOptInSettingsUx",
-          "EvidenceClass": "A",
-          "EvidenceClassTitle": "Cross-Layer Verified",
-          "ResearchStatus": "PROMOTED",
-          "IsMutationAllowed": true,
-          "RollbackSnapshotState": "ready",
-          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
-          "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Windows can show controls in Settings that let a user change diagnostic data choices. This policy decides whether that Settings UI stays available. Evidence: The System Policy CSP page explicitly documents the same policy behavior, key path, and 0/1 semantics. The exact registry value name is confirmed by the local DataCollection.admx file as DisableTelemetryOptInSettingsUx. Added nohuto mirror corroboration via... Rollback: Rollback: Verified via record-restore-story.",
-          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
-          "ProofLanes": [
-            {
-              "Key": "docs",
-              "Label": "DOCS",
-              "State": "ready",
-              "Summary": "The System Policy CSP page explicitly documents the same policy behavior, key path, and 0/1 semantics. The exact registry value name is confirmed by the local DataCollection.admx file as DisableTelemetryOptInSettingsUx. Added nohuto mirror corroboration via...",
-              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#configuretelemetryoptinsettingsux"
-            },
-            {
-              "Key": "runtime",
-              "Label": "RUNTIME",
-              "State": "ready",
-              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
-              "Source": ""
-            },
-            {
-              "Key": "source",
-              "Label": "SOURCE",
-              "State": "ready",
-              "Summary": "No upstream nohuto source link is attached to this record.",
-              "Source": ""
-            },
-            {
-              "Key": "rollback",
-              "Label": "ROLLBACK",
-              "State": "ready",
-              "Summary": "Rollback: Verified via record-restore-story.",
-              "Source": "record-restore-story"
-            }
-          ],
-          "ReferenceLinks": [
-            {
-              "Title": "Docs: Details (missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
-              "Kind": "Details"
-            },
-            {
-              "Title": "Docs: Privacy (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\privacy\\privacy-verified.md",
-              "Kind": "Docs"
-            }
-          ]
-        },
-        "Stages": [
-          {
-            "Stage": "detect-before",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Disable diagnostic data opt-in settings'.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Disable diagnostic data opt-in settings",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": false,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Disable diagnostic data opt-in settings'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection\\DisableTelemetryOptInSettingsUx: missing -> 1",
-                "TimestampText": "10:51:25"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "apply",
-            "AppliedStatus": "Applied",
-            "StatusMessage": "Run completed.",
-            "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Disable diagnostic data opt-in settings",
-            "TargetValue": "Disable diagnostic data opt-in settings",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Disable diagnostic data opt-in settings'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection\\DisableTelemetryOptInSettingsUx: missing -> 1",
-                "TimestampText": "10:51:25"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Applied preset 'Disable diagnostic data opt-in settings'.",
-                "TimestampText": "10:51:27"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified preset 'Disable diagnostic data opt-in settings'.",
-                "TimestampText": "10:51:27"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Not required",
-                "Message": "Step not executed.",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "rollback",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Rolled back registry values.",
-            "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Disable diagnostic data opt-in settings",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Disable diagnostic data opt-in settings'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection\\DisableTelemetryOptInSettingsUx: missing -> 1",
-                "TimestampText": "10:51:25"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Applied preset 'Disable diagnostic data opt-in settings'.",
-                "TimestampText": "10:51:27"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified preset 'Disable diagnostic data opt-in settings'.",
-                "TimestampText": "10:51:27"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "10:51:28"
-              }
-            ]
-          },
-          {
-            "Stage": "detect-after",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Disable diagnostic data opt-in settings'.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Disable diagnostic data opt-in settings",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Disable diagnostic data opt-in settings'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection\\DisableTelemetryOptInSettingsUx: missing -> 1",
-                "TimestampText": "10:51:28"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Applied preset 'Disable diagnostic data opt-in settings'.",
-                "TimestampText": "10:51:27"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified preset 'Disable diagnostic data opt-in settings'.",
-                "TimestampText": "10:51:27"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "10:51:28"
-              }
-            ]
-          }
-        ],
-        "StartedAtUtc": "2026-05-07T17:51:25.0110678+00:00",
-        "CompletedAtUtc": "2026-05-07T17:51:28.2543018+00:00"
-      },
-      "qa_tweak_id": "privacy.disable-telemetry-optin-ui",
-      "candidate_id": "privacy.disable-telemetry-optin-ui",
-      "card_name": "Diagnostic Data Opt-In Settings UI",
-      "documentation": "research/records/privacy.disable-telemetry-optin-ui.json"
-    },
-    {
-      "tweak_id": "privacy.disable-wer",
+      "tweak_id": "security.trusted-path-credential-prompting",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -1155,19 +830,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "privacy.disable-wer",
-        "TweakName": "Windows Error Reporting",
+        "TweakId": "security.trusted-path-credential-prompting",
+        "TweakName": "Trusted Path for Credential Entry",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "privacy.disable-wer",
-          "Name": "Windows Error Reporting",
-          "Category": "Privacy",
-          "Description": "Windows Error Reporting can send information about crashes and failures so Microsoft or an internal server can analyze them. This policy turns that reporting off for the device.",
-          "FriendlyDescription": "Windows Error Reporting can send information about crashes and failures so Microsoft or an internal server can analyze them. This policy turns that reporting off for the device.",
-          "RegistryPath": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Error Reporting\\Disabled",
+          "TweakId": "security.trusted-path-credential-prompting",
+          "Name": "Trusted Path for Credential Entry",
+          "Category": "Security",
+          "Description": "This setting controls whether certain Windows credential prompts must happen on the Secure Desktop instead of inside the normal desktop session.",
+          "FriendlyDescription": "This setting controls whether certain Windows credential prompts must happen on the Secure Desktop instead of inside the normal desktop session.",
+          "RegistryPath": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\CredUI\\EnableSecureCredentialPrompting",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -1175,22 +850,22 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Windows Error Reporting can send information about crashes and failures so Microsoft or an internal server can analyze them. This policy turns that reporting off for the device. Evidence: The ADMX_ErrorReporting Policy CSP page explicitly names the exact machine policy path and value name the app writes, and its policy description matches the disabled behavior. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: This setting controls whether certain Windows credential prompts must happen on the Secure Desktop instead of inside the normal desktop session. Evidence: Guest-side reversible probe on Win25H2Clean; see the batch probe output in evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json..md Added nohuto mirror corroboration via nohuto-enablesecurecredentialprompting-admx. Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "The ADMX_ErrorReporting Policy CSP page explicitly names the exact machine policy path and value name the app writes, and its policy description matches the disabled behavior.",
-              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-errorreporting#werdisable_2"
+              "Summary": "Guest-side reversible probe on Win25H2Clean; see the batch probe output in evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json..md Added nohuto mirror corroboration via nohuto-enablesecurecredentialprompting-admx.",
+              "Source": "Validation proof source: evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json"
             },
             {
               "Key": "runtime",
               "Label": "RUNTIME",
               "State": "ready",
-              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
-              "Source": ""
+              "Summary": "Guest reversible probe toggled EnableSecureCredentialPrompting through 1 and back to missing on the CredUI policy path, confirming the current app write and rollback behavior on Win25H2Clean.",
+              "Source": "Win25H2Clean reversible probe - Trusted path credential prompting: evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json"
             },
             {
               "Key": "source",
@@ -1214,8 +889,8 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Privacy (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\privacy\\privacy-verified.md",
+              "Title": "Docs: Security (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\security\\security-verified.md",
               "Kind": "Docs"
             }
           ]
@@ -1224,10 +899,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Windows Error Reporting disabled'.",
+            "StatusMessage": "Value not set.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Windows Error Reporting disabled",
+            "CurrentValue": "Not set",
+            "TargetValue": "1 (0x1)",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -1236,8 +911,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Windows Error Reporting disabled'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Error Reporting\\Disabled: missing -> 1",
-                "TimestampText": "10:51:33"
+                "Message": "Value not set.",
+                "TimestampText": "10:57:13"
               },
               {
                 "Action": "Apply",
@@ -1264,8 +939,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Windows Error Reporting disabled",
-            "TargetValue": "Windows Error Reporting disabled",
+            "CurrentValue": "1 (0x1)",
+            "TargetValue": "1 (0x1)",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1274,20 +949,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Windows Error Reporting disabled'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Error Reporting\\Disabled: missing -> 1",
-                "TimestampText": "10:51:33"
+                "Message": "Value not set.",
+                "TimestampText": "10:57:13"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Windows Error Reporting disabled'.",
-                "TimestampText": "10:51:35"
+                "Message": "Set value to 1.",
+                "TimestampText": "10:57:16"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Windows Error Reporting disabled'.",
-                "TimestampText": "10:51:35"
+                "Message": "Verified desired value.",
+                "TimestampText": "10:57:16"
               },
               {
                 "Action": "Rollback",
@@ -1300,10 +975,10 @@
           {
             "Stage": "rollback",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Rolled back registry values.",
+            "StatusMessage": "Removed value to restore default.",
             "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Windows Error Reporting disabled",
+            "CurrentValue": "1 (0x1)",
+            "TargetValue": "1 (0x1)",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1312,36 +987,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Windows Error Reporting disabled'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Error Reporting\\Disabled: missing -> 1",
-                "TimestampText": "10:51:33"
+                "Message": "Value not set.",
+                "TimestampText": "10:57:13"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Windows Error Reporting disabled'.",
-                "TimestampText": "10:51:35"
+                "Message": "Set value to 1.",
+                "TimestampText": "10:57:16"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Windows Error Reporting disabled'.",
-                "TimestampText": "10:51:35"
+                "Message": "Verified desired value.",
+                "TimestampText": "10:57:16"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "10:51:36"
+                "Message": "Removed value to restore default.",
+                "TimestampText": "10:57:16"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Windows Error Reporting disabled'.",
+            "StatusMessage": "Value not set.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Windows Error Reporting disabled",
+            "CurrentValue": "Not set",
+            "TargetValue": "1 (0x1)",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1350,40 +1025,40 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Windows Error Reporting disabled'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\Windows Error Reporting\\Disabled: missing -> 1",
-                "TimestampText": "10:51:36"
+                "Message": "Value not set.",
+                "TimestampText": "10:57:16"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Windows Error Reporting disabled'.",
-                "TimestampText": "10:51:35"
+                "Message": "Set value to 1.",
+                "TimestampText": "10:57:16"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Windows Error Reporting disabled'.",
-                "TimestampText": "10:51:35"
+                "Message": "Verified desired value.",
+                "TimestampText": "10:57:16"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "10:51:36"
+                "Message": "Removed value to restore default.",
+                "TimestampText": "10:57:16"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T17:51:33.0269581+00:00",
-        "CompletedAtUtc": "2026-05-07T17:51:36.2192654+00:00"
+        "StartedAtUtc": "2026-05-07T17:57:13.507778+00:00",
+        "CompletedAtUtc": "2026-05-07T17:57:16.5910839+00:00"
       },
-      "qa_tweak_id": "privacy.disable-wer",
-      "candidate_id": "privacy.disable-wer",
-      "card_name": "Windows Error Reporting",
-      "documentation": "research/records/privacy.disable-wer.json"
+      "qa_tweak_id": "security.trusted-path-credential-prompting",
+      "candidate_id": "security.trusted-path-credential-prompting",
+      "card_name": "Trusted Path for Credential Entry",
+      "documentation": "research/records/security.trusted-path-credential-prompting.review.json"
     },
     {
-      "tweak_id": "privacy.disable-windows-location-provider",
+      "tweak_id": "security.uac-never-notify",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -1420,19 +1095,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "privacy.disable-windows-location-provider",
-        "TweakName": "Windows Location Provider",
+        "TweakId": "security.uac-never-notify",
+        "TweakName": "User Account Control Prompting Profile",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "privacy.disable-windows-location-provider",
-          "Name": "Windows Location Provider",
-          "Category": "Privacy",
-          "Description": "Windows has a built-in location provider that apps and system features can use. This policy decides whether that provider is available.",
-          "FriendlyDescription": "Windows has a built-in location provider that apps and system features can use. This policy decides whether that provider is available.",
-          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Windows\\LocationAndSensors\\DisableWindowsLocationProvider",
+          "TweakId": "security.uac-never-notify",
+          "Name": "User Account Control Prompting Profile",
+          "Category": "Security",
+          "Description": "These settings control whether Windows asks administrators before elevated actions and whether those prompts appear on the Secure Desktop.",
+          "FriendlyDescription": "These settings control whether Windows asks administrators before elevated actions and whether those prompts appear on the Secure Desktop.",
+          "RegistryPath": "",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -1440,22 +1115,22 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Windows has a built-in location provider that apps and system features can use. This policy decides whether that provider is available. Evidence: The ADMX_LocationProviderAdm Policy CSP page explicitly names the exact machine policy path and value name the app writes, and its policy description matches the disabled behavior. Added nohuto mirror corroboration via nohuto-disablewindowslocationprovider-... Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: These settings control whether Windows asks administrators before elevated actions and whether those prompts appear on the Secure Desktop. Evidence: The Microsoft Learn UAC registry section explicitly lists the exact registry path and the numeric meanings for the three values written by the app. A Win25H2Clean Procmon capture on 2026-03-21 confirmed DllHost.exe reading the same values while the UAC sett... Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "The ADMX_LocationProviderAdm Policy CSP page explicitly names the exact machine policy path and value name the app writes, and its policy description matches the disabled behavior. Added nohuto mirror corroboration via nohuto-disablewindowslocationprovider-...",
-              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-locationprovideradm#disablewindowslocationprovider"
+              "Summary": "The Microsoft Learn UAC registry section explicitly lists the exact registry path and the numeric meanings for the three values written by the app. A Win25H2Clean Procmon capture on 2026-03-21 confirmed DllHost.exe reading the same values while the UAC sett...",
+              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows/security/application-security/application-control/user-account-control/settings-and-configuration#registry-key-settings"
             },
             {
               "Key": "runtime",
               "Label": "RUNTIME",
               "State": "ready",
-              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
-              "Source": ""
+              "Summary": "Win25H2Clean Procmon captured DllHost.exe reading EnableLUA, ConsentPromptBehaviorAdmin, and PromptOnSecureDesktop while the UAC settings surface was open. The guest probe restored the original registry state after the capture.",
+              "Source": "Procmon capture - UAC policy value reads: evidence/raw/procmon/security.uac-never-notify/uac-never-notify-capture-pml.md and evidence/raw/procmon/security.uac-never-notify/uac-never-notify-capture-csv.md"
             },
             {
               "Key": "source",
@@ -1479,8 +1154,8 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Privacy (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\privacy\\privacy-verified.md",
+              "Title": "Docs: Security (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\security\\security-verified.md",
               "Kind": "Docs"
             }
           ]
@@ -1489,10 +1164,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Windows Location Provider disabled'.",
+            "StatusMessage": "Detected 3 of 3 values (matches: 2, missing: 0).",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Windows Location Provider disabled",
+            "CurrentValue": "Unknown",
+            "TargetValue": "Multiple values",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -1501,8 +1176,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Windows Location Provider disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\LocationAndSensors\\DisableWindowsLocationProvider: missing -> 1",
-                "TimestampText": "10:51:42"
+                "Message": "Detected 3 of 3 values (matches: 2, missing: 0).\nEntries:\n- HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\ConsentPromptBehaviorAdmin: 0 -> 0\n- HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\EnableLUA: 0 -> 1\n- HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\PromptOnSecureDesktop: 0 -> 0",
+                "TimestampText": "10:57:23"
               },
               {
                 "Action": "Apply",
@@ -1529,8 +1204,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Windows Location Provider disabled",
-            "TargetValue": "Windows Location Provider disabled",
+            "CurrentValue": "Multiple values",
+            "TargetValue": "Multiple values",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1539,20 +1214,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Windows Location Provider disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\LocationAndSensors\\DisableWindowsLocationProvider: missing -> 1",
-                "TimestampText": "10:51:42"
+                "Message": "Detected 3 of 3 values (matches: 2, missing: 0).\nEntries:\n- HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\ConsentPromptBehaviorAdmin: 0 -> 0\n- HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\EnableLUA: 0 -> 1\n- HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\PromptOnSecureDesktop: 0 -> 0",
+                "TimestampText": "10:57:23"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Windows Location Provider disabled'.",
-                "TimestampText": "10:51:45"
+                "Message": "Updated 3 values.",
+                "TimestampText": "10:57:26"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Windows Location Provider disabled'.",
-                "TimestampText": "10:51:45"
+                "Message": "Verified desired values.",
+                "TimestampText": "10:57:26"
               },
               {
                 "Action": "Rollback",
@@ -1567,8 +1242,8 @@
             "AppliedStatus": "NotApplied",
             "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Windows Location Provider disabled",
+            "CurrentValue": "Multiple values",
+            "TargetValue": "Multiple values",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1577,36 +1252,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Windows Location Provider disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\LocationAndSensors\\DisableWindowsLocationProvider: missing -> 1",
-                "TimestampText": "10:51:42"
+                "Message": "Detected 3 of 3 values (matches: 2, missing: 0).\nEntries:\n- HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\ConsentPromptBehaviorAdmin: 0 -> 0\n- HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\EnableLUA: 0 -> 1\n- HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\PromptOnSecureDesktop: 0 -> 0",
+                "TimestampText": "10:57:23"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Windows Location Provider disabled'.",
-                "TimestampText": "10:51:45"
+                "Message": "Updated 3 values.",
+                "TimestampText": "10:57:26"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Windows Location Provider disabled'.",
-                "TimestampText": "10:51:45"
+                "Message": "Verified desired values.",
+                "TimestampText": "10:57:26"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "10:51:45"
+                "TimestampText": "10:57:26"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Windows Location Provider disabled'.",
+            "StatusMessage": "Detected 3 of 3 values (matches: 2, missing: 0).",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Windows Location Provider disabled",
+            "CurrentValue": "Multiple values",
+            "TargetValue": "Multiple values",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1615,46 +1290,46 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Windows Location Provider disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\LocationAndSensors\\DisableWindowsLocationProvider: missing -> 1",
-                "TimestampText": "10:51:45"
+                "Message": "Detected 3 of 3 values (matches: 2, missing: 0).\nEntries:\n- HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\ConsentPromptBehaviorAdmin: 0 -> 0\n- HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\EnableLUA: 0 -> 1\n- HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\PromptOnSecureDesktop: 0 -> 0",
+                "TimestampText": "10:57:26"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Windows Location Provider disabled'.",
-                "TimestampText": "10:51:45"
+                "Message": "Updated 3 values.",
+                "TimestampText": "10:57:26"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Windows Location Provider disabled'.",
-                "TimestampText": "10:51:45"
+                "Message": "Verified desired values.",
+                "TimestampText": "10:57:26"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "10:51:45"
+                "TimestampText": "10:57:26"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T17:51:42.680349+00:00",
-        "CompletedAtUtc": "2026-05-07T17:51:45.9208711+00:00"
+        "StartedAtUtc": "2026-05-07T17:57:23.1535825+00:00",
+        "CompletedAtUtc": "2026-05-07T17:57:26.4106943+00:00"
       },
-      "qa_tweak_id": "privacy.disable-windows-location-provider",
-      "candidate_id": "privacy.disable-windows-location-provider",
-      "card_name": "Windows Location Provider",
-      "documentation": "research/records/privacy.disable-windows-location-provider.json"
+      "qa_tweak_id": "security.uac-never-notify",
+      "candidate_id": "security.uac-never-notify",
+      "card_name": "User Account Control Prompting Profile",
+      "documentation": "research/records/security.uac-never-notify.json"
     }
   ],
   "summary": {
-    "planned_count": 5,
-    "planned_apply_allowed_count": 5,
-    "live_success_count": 5,
+    "planned_count": 4,
+    "planned_apply_allowed_count": 4,
+    "live_success_count": 4,
     "live_failure_count": 0,
     "categories": [
-      "Privacy"
+      "Security"
     ]
   }
 }
