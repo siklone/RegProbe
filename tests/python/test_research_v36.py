@@ -479,6 +479,121 @@ class PromotionStateTests(unittest.TestCase):
 
         self.assertTrue(evidence_class_lib.has_exact_runtime_read(record))
 
+    def test_etw_trace_satisfies_runtime_trace_lane_before_static_followup(self) -> None:
+        record = {
+            "record_id": "example.etw-trace",
+            "tweak_id": "example.etw-trace",
+            "record_status": "validated",
+            "setting": {
+                "area": "Example",
+                "targets": [
+                    {
+                        "path": "HKCU\\Software\\Example",
+                        "value_name": "Enabled",
+                        "value_type": "REG_DWORD",
+                    }
+                ],
+            },
+            "decision": {
+                "apply_allowed": False,
+                "confidence": "medium",
+                "restore_default_supported": True,
+            },
+            "validation_proof": {
+                "source_url": "Docs/example.md",
+                "exact_quote_or_path": "Docs/example.md:1",
+            },
+            "evidence": [
+                {
+                    "kind": "etw-trace",
+                    "location": "evidence/raw/etw-stackwalk/example/normalized-registry-bundle.json",
+                    "summary": "Narrow ETW registry stackwalk captured RegQueryValue for Enabled.",
+                }
+            ],
+        }
+
+        self.assertTrue(evidence_class_lib.has_trace_evidence(record))
+        self.assertTrue(evidence_class_lib.has_runtime_evidence(record))
+        self.assertEqual(evidence_class_lib.next_missing_layer(record), "ghidra")
+        class_entry = evidence_class_lib.build_class_entry(record)
+        runtime = class_entry["runtime_proof"]
+        self.assertTrue(runtime["has_runtime_evidence"])
+        self.assertIn("Narrow ETW registry stackwalk", runtime["summary"])
+        self.assertEqual(runtime["links"][0]["kind"], "etw-trace")
+
+    def test_failed_procmon_or_wpr_mentions_do_not_count_as_trace_evidence(self) -> None:
+        record = {
+            "record_id": "example.failed-trace-mentions",
+            "tweak_id": "example.failed-trace-mentions",
+            "record_status": "validated",
+            "setting": {
+                "area": "Example",
+                "targets": [
+                    {
+                        "path": "HKCU\\Software\\Example",
+                        "value_name": "Enabled",
+                        "value_type": "REG_DWORD",
+                    }
+                ],
+            },
+            "decision": {
+                "apply_allowed": False,
+                "confidence": "medium",
+                "restore_default_supported": True,
+            },
+            "validation_proof": {
+                "source_url": "Docs/example.md",
+                "exact_quote_or_path": "Docs/example.md:1",
+                "notes": "Procmon SaveAs timed out and WPR no-hit remained unresolved.",
+            },
+            "evidence": [
+                {
+                    "kind": "ghidra-headless",
+                    "summary": "Static xref exists, but runtime still needs a real trace artifact.",
+                }
+            ],
+        }
+
+        self.assertFalse(evidence_class_lib.has_procmon_evidence(record))
+        self.assertFalse(evidence_class_lib.has_wpr_evidence(record))
+        self.assertFalse(evidence_class_lib.has_trace_evidence(record))
+        self.assertEqual(evidence_class_lib.next_missing_layer(record), "runtime-trace")
+
+    def test_runtime_diff_alone_does_not_satisfy_trace_lane(self) -> None:
+        record = {
+            "record_id": "example.runtime-diff",
+            "tweak_id": "example.runtime-diff",
+            "record_status": "validated",
+            "setting": {
+                "area": "Example",
+                "targets": [
+                    {
+                        "path": "HKCU\\Software\\Example",
+                        "value_name": "Enabled",
+                        "value_type": "REG_DWORD",
+                    }
+                ],
+            },
+            "decision": {
+                "apply_allowed": False,
+                "confidence": "medium",
+                "restore_default_supported": True,
+            },
+            "validation_proof": {
+                "source_url": "Docs/example.md",
+                "exact_quote_or_path": "Docs/example.md:1",
+            },
+            "evidence": [
+                {
+                    "kind": "runtime-diff",
+                    "summary": "A reversible write/read diff changed Enabled, but no trace was captured.",
+                }
+            ],
+        }
+
+        self.assertFalse(evidence_class_lib.has_trace_evidence(record))
+        self.assertEqual(evidence_class_lib.next_missing_layer(record), "runtime-trace")
+
     def test_repo_code_only_static_evidence_scores_low(self) -> None:
         record = {
             "record_id": "example.repo-code",

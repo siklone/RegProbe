@@ -1,8 +1,8 @@
 {
-  "generated_utc": "2026-05-07T18:16:56Z",
-  "history_entry_count": 86,
-  "catalog_candidate_count": 242,
-  "covered_count": 242,
+  "generated_utc": "2026-05-07T19:38:13Z",
+  "history_entry_count": 88,
+  "catalog_candidate_count": 243,
+  "covered_count": 243,
   "uncovered_count": 0,
   "summary": {
     "coverage_percent": 100.0,
@@ -14,7 +14,7 @@
       "Network": 28,
       "Notifications": 5,
       "Performance": 3,
-      "Peripheral": 3,
+      "Peripheral": 4,
       "Power": 10,
       "Privacy": 67,
       "Security": 21,
@@ -617,6 +617,15 @@
       "category": "Performance",
       "name": "Taskbar Animations",
       "documentation": "research/records/performance.disable-taskbar-animations.review.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "peripheral.audio-disable-ducking",
+      "qa_tweak_id": "peripheral.audio-disable-ducking",
+      "candidate_id": "peripheral.audio-disable-ducking",
+      "category": "Peripheral",
+      "name": "Disable Audio Ducking",
+      "documentation": "research/records/peripheral.audio-disable-ducking.review.json",
       "latest_report_status": "ok"
     },
     {

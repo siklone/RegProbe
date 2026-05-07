@@ -140,10 +140,15 @@ def evidence_origin(kind: Any) -> str:
         "repo-doc": "Current repo docs",
         "procmon-trace": "VM Procmon trace",
         "runtime-diff": "VM runtime diff",
+        "runtime-trace": "VM runtime trace",
         "vm-test": "VM test / probe",
         "registry-observation": "VM registry observation",
+        "wpr-trace": "VM WPR trace",
+        "etw-trace": "VM ETW trace",
         "decompilation": "Our Ghidra decompilation",
         "decompiled-pseudocode": "Nohuto upstream pseudocode",
+        "ghidra-headless": "Our Ghidra headless analysis",
+        "ghidra-trace": "Our Ghidra analysis",
     }
     return mapping.get(str(kind), "unspecified")
 

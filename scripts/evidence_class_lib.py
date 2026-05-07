@@ -48,6 +48,8 @@ RUNTIME_EVIDENCE_KINDS = {
     "runtime-trace",
     "vm-test",
     "registry-observation",
+    "wpr-trace",
+    "etw-trace",
 }
 
 OFFICIAL_EVIDENCE_KINDS = {
@@ -380,9 +382,7 @@ def has_official_evidence(record: dict[str, Any]) -> bool:
 
 
 def has_procmon_evidence(record: dict[str, Any]) -> bool:
-    if evidence_kinds(record) & PROCMON_EVIDENCE_KINDS:
-        return True
-    return "procmon" in record_text_blob(record)
+    return bool(evidence_kinds(record) & PROCMON_EVIDENCE_KINDS)
 
 
 def has_ghidra_evidence(record: dict[str, Any]) -> bool:
@@ -404,10 +404,13 @@ def has_ida_evidence(record: dict[str, Any]) -> bool:
 
 
 def has_wpr_evidence(record: dict[str, Any]) -> bool:
-    if evidence_kinds(record) & WPR_EVIDENCE_KINDS:
+    return bool(evidence_kinds(record) & WPR_EVIDENCE_KINDS)
+
+
+def has_trace_evidence(record: dict[str, Any]) -> bool:
+    if has_procmon_evidence(record) or has_wpr_evidence(record):
         return True
-    blob = record_text_blob(record)
-    return any(keyword in blob for keyword in ("wpr", ".etl", "etl exists", "boot trace"))
+    return "runtime-trace" in evidence_kinds(record)
 
 
 def has_exact_runtime_read(record: dict[str, Any]) -> bool:
@@ -468,6 +471,8 @@ def classification_layers(record: dict[str, Any]) -> list[str]:
     layers: list[str] = []
     if has_procmon_evidence(record):
         layers.append("runtime_procmon")
+    elif has_runtime_evidence(record):
+        layers.append("runtime_trace")
     if has_ghidra_evidence(record):
         layers.append("static_ghidra")
     if has_ida_evidence(record):
@@ -519,7 +524,7 @@ def has_converged_vm_evidence(record: dict[str, Any]) -> bool:
         signals = [has_ghidra_evidence(record), has_reboot_evidence(record), runtime_signal]
         return all(signals)
 
-    if not has_procmon_evidence(record):
+    if not has_trace_evidence(record):
         return False
     if not has_ghidra_evidence(record):
         return False
@@ -687,8 +692,8 @@ def next_missing_layer(record: dict[str, Any], incident_seen: bool = False) -> s
             return "decision-gate"
         return "none"
 
-    if not has_procmon_evidence(record):
-        return "procmon"
+    if not has_trace_evidence(record):
+        return "runtime-trace"
     if not has_ghidra_evidence(record):
         return "ghidra"
     if lane == "system" and not (has_wpr_evidence(record) or has_benchmark_evidence(record)):

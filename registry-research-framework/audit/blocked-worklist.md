@@ -1,17 +1,17 @@
 # Blocked Worklist
 
-Generated: `2026-05-07T18:26:06.037227Z`
+Generated: `2026-05-07T19:37:16.282541Z`
 
-Blocked candidates: `51`
+Blocked candidates: `50`
 
 ## Actionability
 
-- `hold`: 51
+- `hold`: 50
 
 ## Lane Summary
 
 - `intentional-hold`: 18 | first: `policy.system.enable-virtualization` | `winopt research list-blocked --worklist --lane intentional-hold` | Treat as environment-limited or intentional hold unless a safer lane becomes available.
-- `validation-proof`: 33 | first: `misc.disable-edge-features` | `winopt research list-blocked --worklist --lane validation-proof` | Review blockers manually and choose the next evidence lane.
+- `validation-proof`: 32 | first: `misc.disable-edge-features` | `winopt research list-blocked --worklist --lane validation-proof` | Review blockers manually and choose the next evidence lane.
 
 ## Top Holds
 
@@ -322,18 +322,6 @@ Blocked candidates: `51`
 - Feature area: `7-Zip User Options`
 - Key path: `HKCU\Software\7-Zip\Options`
 - Value name: `OptionBundle`
-- Blockers: `The card still lives only in the first-party provider and has not been promoted into the research-provider surface.`, `validation-proof`
-- Suggested command: `winopt research list-blocked --worklist --lane validation-proof`
-- Next action hint: Review blockers manually and choose the next evidence lane.
-
-### `peripheral.audio-disable-ducking`
-
-- Lane: `validation-proof`
-- Actionability: `hold`
-- Priority score: `-2`
-- Feature area: `Audio Communications Preference`
-- Key path: `HKCU\Software\Microsoft\Multimedia\Audio`
-- Value name: `UserDuckingPreference`
 - Blockers: `The card still lives only in the first-party provider and has not been promoted into the research-provider surface.`, `validation-proof`
 - Suggested command: `winopt research list-blocked --worklist --lane validation-proof`
 - Next action hint: Review blockers manually and choose the next evidence lane.

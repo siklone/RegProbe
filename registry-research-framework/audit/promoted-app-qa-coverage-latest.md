@@ -1,9 +1,9 @@
 # Promoted App QA Coverage
 
-- Generated UTC: 2026-05-07T18:16:56Z
-- History entries: 86
-- Promoted app-QA candidates: 242
-- Covered: 242
+- Generated UTC: 2026-05-07T19:38:13Z
+- History entries: 88
+- Promoted app-QA candidates: 243
+- Covered: 243
 - Uncovered: 0
 - Coverage: 100.0%
 
@@ -16,7 +16,7 @@
 - Network: 28
 - Notifications: 5
 - Performance: 3
-- Peripheral: 3
+- Peripheral: 4
 - Power: 10
 - Privacy: 67
 - Security: 21
@@ -25,9 +25,12 @@
 
 ## Uncovered Categories
 
+- No uncovered promoted app-QA candidates remain.
 
 ## Recommended Next Batches
 
 - No uncovered promoted app-QA candidates remain.
 
 ## Remaining Uncovered Sample
+
+- No uncovered promoted app-QA candidates remain.

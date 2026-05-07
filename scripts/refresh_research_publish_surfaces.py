@@ -19,14 +19,14 @@ def build_refresh_steps(repo_root: Path = REPO_ROOT) -> list[dict[str, object]]:
             "command": [sys.executable, str(scripts_root / "research" / "generate_app_surface_manifest.py"), "--write"],
         },
         {
+            "name": "evidence-audit",
+            "script": str((scripts_root / "generate_evidence_audit.py").relative_to(repo_root)).replace("\\", "/"),
+            "command": [sys.executable, str(scripts_root / "generate_evidence_audit.py")],
+        },
+        {
             "name": "promotion-gates",
             "script": str((scripts_root / "generate_promotion_gates.py").relative_to(repo_root)).replace("\\", "/"),
             "command": [sys.executable, str(scripts_root / "generate_promotion_gates.py")],
-        },
-        {
-            "name": "evidence-classes",
-            "script": str((scripts_root / "generate_evidence_classes.py").relative_to(repo_root)).replace("\\", "/"),
-            "command": [sys.executable, str(scripts_root / "generate_evidence_classes.py")],
         },
         {
             "name": "imported-candidate-backlog",
@@ -34,14 +34,14 @@ def build_refresh_steps(repo_root: Path = REPO_ROOT) -> list[dict[str, object]]:
             "command": [sys.executable, str(scripts_root / "generate_imported_candidate_backlog.py")],
         },
         {
+            "name": "evidence-classes",
+            "script": str((scripts_root / "generate_evidence_classes.py").relative_to(repo_root)).replace("\\", "/"),
+            "command": [sys.executable, str(scripts_root / "generate_evidence_classes.py")],
+        },
+        {
             "name": "evidence-index",
             "script": str((scripts_root / "generate_evidence_index.py").relative_to(repo_root)).replace("\\", "/"),
             "command": [sys.executable, str(scripts_root / "generate_evidence_index.py")],
-        },
-        {
-            "name": "evidence-audit",
-            "script": str((scripts_root / "generate_evidence_audit.py").relative_to(repo_root)).replace("\\", "/"),
-            "command": [sys.executable, str(scripts_root / "generate_evidence_audit.py")],
         },
         {
             "name": "evidence-manifest",

@@ -3,8 +3,8 @@
   "schema_version": "1.1",
   "record_id": "peripheral.audio-disable-ducking",
   "tweak_id": "peripheral.audio-disable-ducking",
-  "record_status": "review-required",
-  "summary": "Review-required audit trail for the live Disable Audio Ducking card. The app already ships the current audio communications preference action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.",
+  "record_status": "validated",
+  "summary": "Validated app-surface record for the Disable Audio Ducking card. The research provider now surfaces the current app action, which writes UserDuckingPreference=3 for the current user.",
   "setting": {
     "name": "Disable Audio Ducking",
     "category": "Peripheral",
@@ -12,8 +12,8 @@
     "scope": "user",
     "casual_explanation": "This sets the Windows communications ducking preference so the system does not reduce other audio volumes during calls.",
     "why_people_change_it": "People change it when they do not want Windows to lower media volume automatically during communications activity.",
-    "tradeoffs_overview": "The single-value control is straightforward, but the card still lives only in the first-party provider and has not been promoted into the validated research-provider surface.",
-    "professional_notes": "The current app still exposes this tweak through app/Services/TweakProviders/AudioTweakProvider.cs and engine/Tweaks/Peripheral/AudioTweaks.cs. The current engine tweak writes UserDuckingPreference=3 on the current user profile. This record keeps the live behavior documented without publishing it as a validated research-provider card yet.",
+    "tradeoffs_overview": "The single-value control is straightforward and reversible. Applying it pins the Communications preference to the Do nothing state; rollback should restore the previous value or remove the explicit override.",
+    "professional_notes": "The research app-surface manifest projects this record through app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs. The current engine implementation writes UserDuckingPreference=3 on the current user profile, and the app provider loader de-duplicates the older first-party copy by id after the research provider is loaded.",
     "targets": [
       {
         "target_id": "audio-ducking-preference",
@@ -26,7 +26,7 @@
             "state_kind": "missing",
             "value": null,
             "label": "Windows or tool default",
-            "meaning": "Windows keeps the existing or default communications-ducking preference because the value is not explicitly set by this record.",
+            "meaning": "Windows keeps the existing or default communications-ducking preference because the value is not explicitly set.",
             "evidence_ids": [
               "repo-tweak-provenance",
               "engine-implementation"
@@ -36,11 +36,13 @@
             "state_kind": "value",
             "value": 3,
             "label": "Do nothing",
-            "meaning": "Sets the communications ducking preference to 3, which is the current app value.",
+            "meaning": "Sets the communications ducking preference to 3, which corresponds to the Do nothing state used by the current app.",
             "evidence_ids": [
               "repo-tweak-provenance",
               "app-provider",
-              "engine-implementation"
+              "engine-implementation",
+              "etw-userduckingpreference-20260507",
+              "ghidra-mmsys-userduckingpreference-20260507"
             ]
           }
         ],
@@ -49,9 +51,9 @@
     ]
   },
   "app_current_implementation": {
-    "status": "unknown",
-    "provider_source": "app/Services/TweakProviders/AudioTweakProvider.cs",
-    "notes": "The live app still ships this first-party card outside the validated research-provider surface.",
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+    "notes": "The research manifest now surfaces this card. The older first-party AudioTweakProvider implementation remains in code, but the live provider loader adds the research provider first and de-duplicates the same tweak id.",
     "writes": [
       {
         "target_id": "audio-ducking-preference",
@@ -67,16 +69,16 @@
   "windows_defaults": [
     {
       "label": "Hold current or default state",
-      "applies_to": "Research tracking and backlog reduction only",
+      "applies_to": "Windows profiles where no explicit communications-ducking override is desired",
       "states": [
         {
           "target_id": "audio-ducking-preference",
           "state_kind": "missing",
           "value": null,
-          "rationale": "Keep the current or default state until this first-party card completes the research-provider promotion path."
+          "rationale": "Leave the communications-ducking value unset unless the user explicitly chooses the Do nothing profile."
         }
       ],
-      "notes": "This review record documents the live card without promoting it into the validated research-provider surface.",
+      "notes": "The app rollback path can restore the previous snapshot; the record default story keeps the unset state as the safest generic baseline.",
       "evidence_ids": [
         "repo-tweak-provenance",
         "engine-implementation"
@@ -85,69 +87,76 @@
   ],
   "recommended_profiles": [
     {
-      "profile_id": "hold-for-research",
-      "label": "Hold for research",
+      "profile_id": "windows-or-existing-default",
+      "label": "Windows or existing default",
       "intended_for": [
-        "Research tracking only",
-        "Backlog reduction"
+        "General users",
+        "Systems where communications ducking should stay at the existing profile"
       ],
       "avoid_for": [
-        "Published presets",
-        "General users"
+        "Users who want Windows to stop lowering other audio during calls"
       ],
       "states": [
         {
           "target_id": "audio-ducking-preference",
           "state_kind": "missing",
           "value": null,
-          "rationale": "Keep the current or default state until this first-party card completes the research-provider promotion path."
+          "rationale": "Keep the current or default communications-ducking behavior."
         }
       ],
-      "good_when": "You want the live first-party card documented honestly in the corpus.",
-      "bad_when": "You need a validated research-provider card.",
+      "good_when": "You want Windows to keep its existing communications-ducking behavior.",
+      "bad_when": "You want other audio to stay unchanged during calls.",
       "tradeoffs": [
-        "The live app behavior is represented in the corpus.",
-        "The card remains held outside the validated research-provider surface."
+        "No explicit user override is written.",
+        "Windows or the existing profile can still reduce other audio during communications activity."
       ],
-      "apply_allowed": false,
+      "apply_allowed": true,
       "evidence_ids": [
         "repo-tweak-provenance",
-        "app-provider"
+        "app-provider",
+        "etw-userduckingpreference-20260507"
       ]
     },
     {
       "profile_id": "current-app-profile",
       "label": "Current app profile",
       "intended_for": [
-        "Research comparison only"
+        "Users who do not want Windows to lower other audio during calls"
       ],
       "avoid_for": [
-        "Published presets",
-        "General users"
+        "Users who prefer Windows communications ducking"
       ],
       "states": [
         {
           "target_id": "audio-ducking-preference",
           "state_kind": "value",
           "value": 3,
-          "rationale": "Capture the exact state or profile that the current app card writes."
+          "rationale": "Write the Do nothing communications-ducking preference used by the current app."
         }
       ],
-      "good_when": "You are auditing the exact state or profile that the current app currently writes.",
-      "bad_when": "You need a validated research-provider card.",
+      "good_when": "You want calls and communications apps to stop reducing media or game audio.",
+      "bad_when": "You rely on automatic ducking to make call audio easier to hear.",
       "tradeoffs": [
-        "The current app action is explicit.",
-        "The card still sits outside the validated research-provider surface."
+        "Other audio remains at its normal volume during communications activity.",
+        "Call audio may be less prominent in a noisy mix."
       ],
-      "apply_allowed": false,
-      "notes": "Blocked until this first-party card completes the normal research-provider promotion path.",
+      "apply_allowed": true,
+      "notes": "This is the app-surfaced profile and maps to UserDuckingPreference=3.",
       "evidence_ids": [
         "repo-tweak-provenance",
         "app-provider",
-        "engine-implementation"
+        "engine-implementation",
+        "etw-userduckingpreference-20260507",
+        "ghidra-mmsys-userduckingpreference-20260507"
       ]
     }
   ],
+  "validation_proof": {
+    "source_url": "evidence/raw/ghidra/peripheral-audio-ducking-ghidra-20260507/ghidra-matches.md",
+    "exact_quote_or_path": "mmsys.cpl Ghidra string/xref probe found UserDuckingPreference in two naturally resolved decompiled functions, including call sites that reference SHGetValueW and SHSetValueW. The paired ETW stackwalk run evidence/raw/etw-stackwalk/peripheral-audio-ducking-etw-20260507/normalized-registry-bundle.json captured an exact RegQueryValue event for UserDuckingPreference during the guest registry probe.",
+    "key_found_on_page": true,
+    "notes": "Validated on 2026-05-07 with QGA-first VM tooling. Ghidra provides the code-side mmsys.cpl string/xref evidence; ETW provides a runtime registry trace with caller-stack capture for the exact value name. A stale value left by an earlier Procmon timeout was removed after the evidence run and the guest was verified back to value_exists=false."
+  },
   "evidence": [
     {
       "evidence_id": "repo-tweak-provenance",
@@ -184,20 +193,46 @@
         "behavior"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "etw-userduckingpreference-20260507",
+      "kind": "etw-trace",
+      "title": "QGA ETW stackwalk - UserDuckingPreference runtime registry probe",
+      "location": "evidence/raw/etw-stackwalk/peripheral-audio-ducking-etw-20260507/peripheral-audio-ducking-etw-20260507-summary.json and evidence/raw/etw-stackwalk/peripheral-audio-ducking-etw-20260507/normalized-registry-bundle.json",
+      "summary": "The 2026-05-07 QGA-first xperf REGISTRY stackwalk captured a narrow RegQueryValue run for HKCU\\Software\\Microsoft\\Multimedia\\Audio\\UserDuckingPreference. The normalized bundle is ok, contains 5221 registry events, 1357 caller-stack events, and an exact UserDuckingPreference RegQueryValue event.",
+      "supports": [
+        "path",
+        "value",
+        "runtime-read",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "ghidra-mmsys-userduckingpreference-20260507",
+      "kind": "ghidra-headless",
+      "title": "QGA Ghidra string/xref - mmsys.cpl UserDuckingPreference handlers",
+      "location": "evidence/raw/ghidra/peripheral-audio-ducking-ghidra-20260507/evidence.json and evidence/raw/ghidra/peripheral-audio-ducking-ghidra-20260507/ghidra-matches.md",
+      "summary": "A headless Ghidra run on C:\\Windows\\System32\\mmsys.cpl found two UserDuckingPreference matches with naturally resolved decompilation output. The markdown export shows SHGetValueW and SHSetValueW call sites for the value name.",
+      "supports": [
+        "path",
+        "behavior",
+        "ui-mapping",
+        "version-scope"
+      ],
+      "strength": "high"
     }
   ],
   "decision": {
-    "confidence": "medium",
-    "apply_allowed": false,
+    "confidence": "high",
+    "apply_allowed": true,
     "recommended_for_general_users": false,
-    "restore_default_supported": false,
+    "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "The control surface is documented in the checked-in provider and engine code, but this live first-party card has not yet been promoted into the validated research-provider surface.",
-    "manual_review_required": true,
-    "blocking_issues": [
-      "The card still lives only in the first-party provider and has not been promoted into the research-provider surface."
-    ]
+    "why": "The value path, app write, runtime trace, static mmsys.cpl string/xref evidence, and rollback story now converge. The research provider can safely surface the current app profile while preserving previous-value rollback.",
+    "manual_review_required": false,
+    "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-05-05T11:00:00Z"
+  "last_reviewed_utc": "2026-05-07T19:05:00Z"
 }

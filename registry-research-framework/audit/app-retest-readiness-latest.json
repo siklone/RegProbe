@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-05-07T18:26:56Z",
+  "generated_utc": "2026-05-07T19:40:05Z",
   "check_status": "PASS",
   "checks": {
     "public_repo_hygiene_pass": true,
@@ -23,9 +23,9 @@
   "summary": {
     "record_count": 356,
     "promotion_gate_entry_count": 356,
-    "app_surface_entry_count": 264,
+    "app_surface_entry_count": 265,
     "app_only_tweak_count": 0,
-    "apply_allowed_record_count": 250,
+    "apply_allowed_record_count": 251,
     "missing_rollback_story_count": 0,
     "kvm_app_smoke_status": "ok",
     "kvm_lane_health_status": "ok"
@@ -50,7 +50,7 @@
       },
       "summary": {
         "category_count": 14,
-        "entry_count": 264,
+        "entry_count": 265,
         "app_only_tweak_count": 0
       },
       "missing_gate_ids": [],
@@ -76,7 +76,7 @@
         "evidence_index_record_count": 356,
         "evidence_manifest_record_count": 356,
         "evidence_audit_active_record_count": 301,
-        "records_missing_validation_proof": 33
+        "records_missing_validation_proof": 32
       },
       "atlas_summary_mismatches": [],
       "atlas_category_mismatches": [],
@@ -89,7 +89,7 @@
         "apply_allowed_records_have_rollback_story": true
       },
       "summary": {
-        "apply_allowed_record_count": 250,
+        "apply_allowed_record_count": 251,
         "missing_rollback_story_count": 0
       },
       "missing_rollback_story_ids": [],

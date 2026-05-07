@@ -1,19 +1,19 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-07T18:26:30.912873Z",
+  "generated_utc": "2026-05-07T19:37:14.838649Z",
   "summary": {
     "total_records": 356,
     "class_counts": {
-      "A": 245,
+      "A": 246,
       "B": 21,
       "C": 2,
-      "D": 33,
+      "D": 32,
       "E": 55
     },
     "action_state_counts": {
-      "actionable": 242,
+      "actionable": 243,
       "archived": 55,
-      "research-gated": 59
+      "research-gated": 58
     }
   },
   "classes": {
@@ -103,10 +103,16 @@
             "summary": "Guest reversible probe on Win25H2Clean confirmed Start transitions through 1 and 4 before restoring to 1."
           },
           {
-            "title": "Guest Ghidra launch receipt for Beep",
-            "url": "evidence/raw/ghidra/ghidra-audio-disable-beep-20260424-batch2/summary.json",
-            "kind": "vm-test",
-            "summary": "A same-day guest Ghidra retry for `Beep` failed in `ensure-admin-shell` before any xref bundle reached the host."
+            "title": "KVM ETW summary receipt for Start",
+            "url": "evidence/captures/audio-disable-beep-etw-stackwalk-attempt-20260424.json and evidence/raw/etw-stackwalk/audio-disable-beep-etw-20260424-batch2/audio-disable-beep-etw-20260424-batch2-summary.json and evidence/raw/etw-stackwalk/audio-disable-beep-etw-20260424-batch2/audio-disable-beep-etw-20260424-batch2-stage.json",
+            "kind": "etw-trace",
+            "summary": "A bounded 2026-04-24 ETW retry for `HKLM\\SYSTEM\\CurrentControlSet\\Services\\Beep` / `Start` published host-visible summary and stage receipts, but ETL upload never completed so i..."
+          },
+          {
+            "title": "QGA-first ETW stackwalk runtime receipt for Start",
+            "url": "evidence/captures/audio-disable-beep-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/audio-disable-beep-etw-qga-unblock-20260507/audio-disable-beep-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/audio-disable-beep-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/audio-disable-beep-etw-qga-unblock-20260507/audio-disable-beep-etw-qga-unblock-20260507.etl",
+            "kind": "etw-trace",
+            "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4503 registry events with 572 caller-stack events. The bundle contains an exact helper-trigg..."
           }
         ]
       },
@@ -195,10 +201,16 @@
             "summary": "Win25H2Clean guest string scan of audiodg.exe, AudioEng.dll, AudioSes.dll, mmdevapi.dll, audiosrv.dll, and AudioEndpointBuilder.dll did not find DisableSpatialOnLowLatency. A Gh..."
           },
           {
-            "title": "Guest Ghidra launch receipt for DisableSpatialOnLowLatency",
-            "url": "evidence/raw/ghidra/ghidra-audio-disable-spatial-audio-20260424-batch1/summary.json",
-            "kind": "vm-test",
-            "summary": "A bounded 2026-04-24 guest string-xref retry for `DisableSpatialOnLowLatency` failed in `ensure-admin-shell` before any Ghidra bundle reached the host."
+            "title": "KVM ETW stage receipt for DisableSpatialOnLowLatency",
+            "url": "evidence/captures/audio-disable-spatial-audio-etw-stackwalk-attempt-20260424.json and evidence/raw/etw-stackwalk/audio-disable-spatial-audio-etw-20260424-batch1/audio-disable-spatial-audio-etw-20260424-batch1-stage.json",
+            "kind": "etw-trace",
+            "summary": "A bounded 2026-04-24 ETW retry for `DisableSpatialOnLowLatency` reached artifact-upload and only retained a stage receipt before the hard timeout fired."
+          },
+          {
+            "title": "QGA-first ETW stackwalk probe receipt",
+            "url": "evidence/captures/audio-disable-spatial-audio-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/audio-disable-spatial-audio-disablespatialonlowlatency-etw-qga-unblock-20260507/audio-disable-spatial-audio-disablespatialonlowlatency-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/audio-disable-spatial-audio-disablespatialonlowlatency-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/audio-disable-spatial-audio-disablespatialonlowlatency-etw-qga-unblock-20260507/audio-disable-spatial-audio-disablespatialonlowlatency-etw-qga-unblock-20260507.etl",
+            "kind": "etw-trace",
+            "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced host-ingested ETL/XML artifacts and normalized bundles for 1 target value(s): `DisableSpatialOnLowLatency`. The QGA-launched..."
           }
         ]
       },
@@ -407,6 +419,18 @@
             "url": "evidence/raw/procmon/audio.show-disconnected-devices/audio-devicecpl-query-20260314-pml.md and evidence/raw/procmon/audio.show-disconnected-devices/audio-devicecpl-query-zero-20260314-pml.md",
             "kind": "procmon-trace",
             "summary": "Procmon captured rundll32.exe launching shell32.dll,Control_RunDLL mmsys.cpl,,0 and querying HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowDisconnectedDevices with Data..."
+          },
+          {
+            "title": "Win25H2Clean v3.1 runtime lane - Audio DeviceCpl ShowDisconnectedDevices",
+            "url": "evidence/files/vm-tooling-staging/audio-devicecpl-runtime-showdisconnecteddevices-20260327-104736/summary.json and evidence/files/vm-tooling-staging/audio-devicecpl-runtime-showdisconnecteddevices-20260327-104736/audio-devicecpl.etl.md",
+            "kind": "wpr-trace",
+            "summary": "A v3.1 runtime runner on Win25H2Clean started from a missing-value baseline, wrote ShowDisconnectedDevices = 1, launched the classic Sound control panel via rundll32.exe, captur..."
+          },
+          {
+            "title": "Bounded ETW stackwalk timeout receipt",
+            "url": "evidence/raw/etw-stackwalk/audio.show-disconnected-devices-etw-20260424h/audio.show-disconnected-devices-etw-20260424h-summary.json and evidence/raw/etw-stackwalk/audio.show-disconnected-devices-etw-20260424h/audio.show-disconnected-devices-etw-20260424h-stage.json and evidence/captures/audio-show-disconnected-devices-etw-stackwalk-attempt-20260424.json",
+            "kind": "etw-trace",
+            "summary": "A bounded 2026-04-24 KVM ETW stackwalk retry for ShowDisconnectedDevices advanced to artifact-upload but still timed out before any ETL, XML, or normalized bundle reached the ho..."
           }
         ]
       },
@@ -487,6 +511,18 @@
             "url": "research/notes/audio.show-hidden-devices-v31-reaudit-20260327.md; evidence/raw/procmon/audio.show-hidden-devices/audio-devicecpl-query-20260314-pml.md; evidence/raw/procmon/audio.show-hidden-devices/audio-devicecpl-query-zero-20260314-pml.md",
             "kind": "procmon-trace",
             "summary": "The raw Procmon PML is off-git, but the repo preserves a normalized summary of the 2026-03-14 capture showing rundll32.exe launching shell32.dll,Control_RunDLL mmsys.cpl,,0 and..."
+          },
+          {
+            "title": "Bounded KVM ETW stackwalk review for ShowHiddenDevices retained no exact target hit",
+            "url": "evidence/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/audio.show-hidden-devices-etw-20260424e-summary.json and evidence/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/audio.show-hidden-devices-etw-20260424e-stage.json and evidence/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/audio.show-hidden-devices-etw-20260424e.etl and evidence/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/normalized-registry-bundle.json and evidence/captures/audio-show-hidden-devices-etw-stackwalk-20260424.json",
+            "kind": "etw-trace",
+            "summary": "A bounded 2026-04-24 KVM ETW stackwalk run eventually retained ETL, XML, summary, stage, and normalized-bundle artifacts for the DeviceCpl path. The helper reg.exe command line..."
+          },
+          {
+            "title": "QGA-first ETW stackwalk runtime receipt for ShowHiddenDevices",
+            "url": "evidence/captures/audio-show-hidden-devices-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/audio-show-hidden-devices-etw-qga-unblock-20260507/audio-show-hidden-devices-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/audio-show-hidden-devices-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/audio-show-hidden-devices-etw-qga-unblock-20260507/audio-show-hidden-devices-etw-qga-unblock-20260507.etl",
+            "kind": "etw-trace",
+            "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4552 registry events with 524 caller-stack events. The QGA-launched helper targeted `HKCU\\So..."
           }
         ]
       },
@@ -771,7 +807,7 @@
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
-        "runtime_evidence_strength": 3,
+        "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 5,
         "tweak_suitability": 5,
@@ -779,7 +815,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 2,
         "bench_priority": 3,
-        "overall_score": 3.89,
+        "overall_score": 3.78,
         "next_missing_layer": "none"
       }
     },
@@ -1978,10 +2014,22 @@
         ]
       },
       "runtime_proof": {
-        "summary": "A same-day guest Ghidra retry for `DOTNET_CLI_TELEMETRY_OPTOUT` failed in `ensure-admin-shell` before any xref bundle reached the host.",
+        "summary": "A bounded 2026-04-24 ETW retry for `HKCU\\\\Environment` / `DOTNET_CLI_TELEMETRY_OPTOUT` published host-visible summary and stage receipts, but ETL upload never completed so ingest failed before any normalized bundle reached the repo.",
         "needs_vm_validation": false,
         "has_runtime_evidence": true,
         "links": [
+          {
+            "title": "KVM ETW summary receipt for DOTNET_CLI_TELEMETRY_OPTOUT",
+            "url": "evidence/captures/developer-dotnet-telemetry-disable-etw-stackwalk-attempt-20260424.json and evidence/raw/etw-stackwalk/developer-dotnet-telemetry-disable-etw-20260424-batch6/developer-dotnet-telemetry-disable-etw-20260424-batch6-summary.json and evidence/raw/etw-stackwalk/developer-dotnet-telemetry-disable-etw-20260424-batch6/developer-dotnet-telemetry-disable-etw-20260424-batch6-stage.json",
+            "kind": "etw-trace",
+            "summary": "A bounded 2026-04-24 ETW retry for `HKCU\\\\Environment` / `DOTNET_CLI_TELEMETRY_OPTOUT` published host-visible summary and stage receipts, but ETL upload never completed so inges..."
+          },
+          {
+            "title": "QGA-first ETW stackwalk runtime receipt for DOTNET_CLI_TELEMETRY_OPTOUT",
+            "url": "evidence/captures/developer-dotnet-telemetry-disable-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/developer-dotnet-telemetry-disable-etw-qga-unblock-20260507/developer-dotnet-telemetry-disable-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/developer-dotnet-telemetry-disable-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/developer-dotnet-telemetry-disable-etw-qga-unblock-20260507/developer-dotnet-telemetry-disable-etw-qga-unblock-20260507.etl",
+            "kind": "etw-trace",
+            "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 5025 registry events with 1181 caller-stack events. The QGA-launched helper targeted `HKCU\\E..."
+          },
           {
             "title": "Guest Ghidra launch receipt for DOTNET_CLI_TELEMETRY_OPTOUT",
             "url": "evidence/raw/ghidra/ghidra-developer-dotnet-telemetry-disable-20260424-batch6/summary.json",
@@ -2075,10 +2123,16 @@
             "summary": "Guest-side Procmon capture confirmed SystemSettings.exe queried HKLM\\System\\CurrentControlSet\\Control\\FileSystem\\LongPathsEnabled while the developer settings page was opened. T..."
           },
           {
-            "title": "Guest Ghidra launch receipt for LongPathsEnabled",
-            "url": "evidence/raw/ghidra/ghidra-developer-enable-windows-long-paths-20260424-batch2/summary.json",
-            "kind": "vm-test",
-            "summary": "A same-day guest Ghidra retry for `LongPathsEnabled` failed in `ensure-admin-shell` before any xref bundle reached the host."
+            "title": "KVM ETW summary receipt for LongPathsEnabled",
+            "url": "evidence/captures/developer-enable-windows-long-paths-etw-stackwalk-attempt-20260424.json and evidence/raw/etw-stackwalk/developer-enable-windows-long-paths-etw-20260424-batch2/developer-enable-windows-long-paths-etw-20260424-batch2-summary.json and evidence/raw/etw-stackwalk/developer-enable-windows-long-paths-etw-20260424-batch2/developer-enable-windows-long-paths-etw-20260424-batch2-stage.json",
+            "kind": "etw-trace",
+            "summary": "A bounded 2026-04-24 ETW retry for `HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem` / `LongPathsEnabled` published host-visible summary and stage receipts, but ETL upload neve..."
+          },
+          {
+            "title": "QGA-first ETW stackwalk runtime receipt for LongPathsEnabled",
+            "url": "evidence/captures/developer-enable-windows-long-paths-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/developer-enable-windows-long-paths-etw-qga-unblock-20260507/developer-enable-windows-long-paths-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/developer-enable-windows-long-paths-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/developer-enable-windows-long-paths-etw-qga-unblock-20260507/developer-enable-windows-long-paths-etw-qga-unblock-20260507.etl",
+            "kind": "etw-trace",
+            "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4442 registry events with 527 caller-stack events. The bundle contains an exact helper-trigg..."
           }
         ]
       },
@@ -2156,10 +2210,22 @@
         ]
       },
       "runtime_proof": {
-        "summary": "A same-day guest Ghidra retry for `NODE_OPTIONS` failed in `ensure-admin-shell` before any xref bundle reached the host.",
+        "summary": "A bounded 2026-04-24 ETW retry for `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Environment` / `NODE_OPTIONS` published host-visible summary and stage receipts, but ETL upload never completed so ingest failed before any normalized bundle reac...",
         "needs_vm_validation": false,
         "has_runtime_evidence": true,
         "links": [
+          {
+            "title": "KVM ETW summary receipt for NODE_OPTIONS",
+            "url": "evidence/captures/developer-nodejs-performance-etw-stackwalk-attempt-20260424.json and evidence/raw/etw-stackwalk/developer-nodejs-performance-etw-20260424-batch6/developer-nodejs-performance-etw-20260424-batch6-summary.json and evidence/raw/etw-stackwalk/developer-nodejs-performance-etw-20260424-batch6/developer-nodejs-performance-etw-20260424-batch6-stage.json",
+            "kind": "etw-trace",
+            "summary": "A bounded 2026-04-24 ETW retry for `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Environment` / `NODE_OPTIONS` published host-visible summary and stage receipts, b..."
+          },
+          {
+            "title": "QGA-first ETW stackwalk runtime receipt for NODE_OPTIONS",
+            "url": "evidence/captures/developer-nodejs-performance-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/developer-nodejs-performance-etw-qga-unblock-20260507/developer-nodejs-performance-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/developer-nodejs-performance-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/developer-nodejs-performance-etw-qga-unblock-20260507/developer-nodejs-performance-etw-qga-unblock-20260507.etl",
+            "kind": "etw-trace",
+            "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4442 registry events with 525 caller-stack events. The bundle contains an exact helper-trigg..."
+          },
           {
             "title": "Guest Ghidra launch receipt for NODE_OPTIONS",
             "url": "evidence/raw/ghidra/ghidra-developer-nodejs-performance-20260424-batch6/summary.json",
@@ -2242,10 +2308,22 @@
         ]
       },
       "runtime_proof": {
-        "summary": "A same-day guest Ghidra retry for `ExecutionPolicy` failed in `ensure-admin-shell` before any xref bundle reached the host.",
+        "summary": "A bounded 2026-04-24 ETW retry for `HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\PowerShell` / `ExecutionPolicy` published host-visible summary and stage receipts, but ETL upload never completed so ingest failed before any normalized bundle reached the repo.",
         "needs_vm_validation": false,
         "has_runtime_evidence": true,
         "links": [
+          {
+            "title": "KVM ETW summary receipt for ExecutionPolicy",
+            "url": "evidence/captures/developer-powershell-execution-etw-stackwalk-attempt-20260424.json and evidence/raw/etw-stackwalk/developer-powershell-execution-etw-20260424-batch3/developer-powershell-execution-etw-20260424-batch3-summary.json and evidence/raw/etw-stackwalk/developer-powershell-execution-etw-20260424-batch3/developer-powershell-execution-etw-20260424-batch3-stage.json",
+            "kind": "etw-trace",
+            "summary": "A bounded 2026-04-24 ETW retry for `HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\PowerShell` / `ExecutionPolicy` published host-visible summary and stage receipts, but ETL upload ne..."
+          },
+          {
+            "title": "QGA-first ETW stackwalk runtime receipt for ExecutionPolicy",
+            "url": "evidence/captures/developer-powershell-execution-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/developer-powershell-execution-etw-qga-unblock-20260507/developer-powershell-execution-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/developer-powershell-execution-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/developer-powershell-execution-etw-qga-unblock-20260507/developer-powershell-execution-etw-qga-unblock-20260507.etl",
+            "kind": "etw-trace",
+            "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4443 registry events with 525 caller-stack events. The bundle contains an exact helper-trigg..."
+          },
           {
             "title": "Guest Ghidra launch receipt for ExecutionPolicy",
             "url": "evidence/raw/ghidra/ghidra-developer-powershell-execution-20260424-batch3/summary.json",
@@ -2328,10 +2406,22 @@
         ]
       },
       "runtime_proof": {
-        "summary": "A same-day guest Ghidra retry for `LongPathsEnabled` failed in `ensure-admin-shell` before any xref bundle reached the host.",
+        "summary": "A bounded 2026-04-24 ETW retry for `HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem` / `LongPathsEnabled` published host-visible summary and stage receipts, but ETL upload never completed so ingest failed before any normalized bundle reached the repo.",
         "needs_vm_validation": false,
         "has_runtime_evidence": true,
         "links": [
+          {
+            "title": "KVM ETW summary receipt for LongPathsEnabled",
+            "url": "evidence/captures/developer-python-path-fix-etw-stackwalk-attempt-20260424.json and evidence/raw/etw-stackwalk/developer-python-path-fix-etw-20260424-batch3/developer-python-path-fix-etw-20260424-batch3-summary.json and evidence/raw/etw-stackwalk/developer-python-path-fix-etw-20260424-batch3/developer-python-path-fix-etw-20260424-batch3-stage.json",
+            "kind": "etw-trace",
+            "summary": "A bounded 2026-04-24 ETW retry for `HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem` / `LongPathsEnabled` published host-visible summary and stage receipts, but ETL upload neve..."
+          },
+          {
+            "title": "QGA-first ETW stackwalk runtime receipt for LongPathsEnabled",
+            "url": "evidence/captures/developer-python-path-fix-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/developer-enable-windows-long-paths-etw-qga-unblock-20260507/developer-enable-windows-long-paths-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/developer-enable-windows-long-paths-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/developer-enable-windows-long-paths-etw-qga-unblock-20260507/developer-enable-windows-long-paths-etw-qga-unblock-20260507.etl",
+            "kind": "etw-trace",
+            "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4442 registry events with 527 caller-stack events. The bundle contains an exact helper-trigg..."
+          },
           {
             "title": "Guest Ghidra launch receipt for LongPathsEnabled",
             "url": "evidence/raw/ghidra/ghidra-developer-python-path-fix-20260424-batch3/summary.json",
@@ -2414,10 +2504,22 @@
         ]
       },
       "runtime_proof": {
-        "summary": "A same-day guest Ghidra retry for `SSH Agent` failed in `ensure-admin-shell` before any xref bundle reached the host.",
+        "summary": "A bounded 2026-04-24 ETW retry for `HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run` / `SSH Agent` published host-visible summary and stage receipts, but ETL upload never completed so ingest failed before any normalized bundle reached the repo.",
         "needs_vm_validation": false,
         "has_runtime_evidence": true,
         "links": [
+          {
+            "title": "KVM ETW summary receipt for SSH Agent",
+            "url": "evidence/captures/developer-ssh-agent-autostart-etw-stackwalk-attempt-20260424.json and evidence/raw/etw-stackwalk/developer-ssh-agent-autostart-etw-20260424-batch3/developer-ssh-agent-autostart-etw-20260424-batch3-summary.json and evidence/raw/etw-stackwalk/developer-ssh-agent-autostart-etw-20260424-batch3/developer-ssh-agent-autostart-etw-20260424-batch3-stage.json",
+            "kind": "etw-trace",
+            "summary": "A bounded 2026-04-24 ETW retry for `HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run` / `SSH Agent` published host-visible summary and stage receipts, but ETL upload never com..."
+          },
+          {
+            "title": "QGA-first ETW stackwalk runtime receipt for SSH Agent",
+            "url": "evidence/captures/developer-ssh-agent-autostart-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/developer-ssh-agent-autostart-etw-qga-unblock-20260507/developer-ssh-agent-autostart-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/developer-ssh-agent-autostart-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/developer-ssh-agent-autostart-etw-qga-unblock-20260507/developer-ssh-agent-autostart-etw-qga-unblock-20260507.etl",
+            "kind": "etw-trace",
+            "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4390 registry events with 524 caller-stack events. The QGA-launched helper targeted `HKCU\\So..."
+          },
           {
             "title": "Guest Ghidra launch receipt for SSH Agent",
             "url": "evidence/raw/ghidra/ghidra-developer-ssh-agent-autostart-20260424-batch3/summary.json",
@@ -2500,10 +2602,29 @@
         ]
       },
       "runtime_proof": {
-        "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "summary": "GeneralProfile WPR capture of wt.exe launch captured the startup sequence for manual trace review. This is supporting runtime context, not registry-semantic proof.",
         "needs_vm_validation": false,
-        "has_runtime_evidence": false,
-        "links": []
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "WPR capture of Windows Terminal launch",
+            "url": "evidence/files/host-temp/terminal-launch.etl.md",
+            "kind": "wpr-trace",
+            "summary": "GeneralProfile WPR capture of wt.exe launch captured the startup sequence for manual trace review. This is supporting runtime context, not registry-semantic proof."
+          },
+          {
+            "title": "Bounded ETW stackwalk timeout receipt",
+            "url": "evidence/raw/etw-stackwalk/developer.terminal-dev-mode-etw-20260424h/developer.terminal-dev-mode-etw-20260424h-summary.json and evidence/raw/etw-stackwalk/developer.terminal-dev-mode-etw-20260424h/developer.terminal-dev-mode-etw-20260424h-stage.json and evidence/captures/developer-terminal-dev-mode-etw-stackwalk-attempt-20260424.json",
+            "kind": "etw-trace",
+            "summary": "A bounded 2026-04-24 KVM ETW stackwalk retry for Windows Terminal DeveloperMode advanced to artifact-upload but still timed out before any ETL, XML, or normalized bundle reached..."
+          },
+          {
+            "title": "QGA-first ETW stackwalk HKCU probe receipt",
+            "url": "evidence/captures/developer-terminal-dev-mode-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/developer-terminal-dev-mode-developermode-etw-qga-unblock-20260507/developer-terminal-dev-mode-developermode-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/developer-terminal-dev-mode-developermode-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/developer-terminal-dev-mode-developermode-etw-qga-unblock-20260507/developer-terminal-dev-mode-developermode-etw-qga-unblock-20260507.etl and evidence/raw/etw-stackwalk/developer-terminal-dev-mode-enabledebugtap-etw-qga-unblock-20260507/developer-terminal-dev-mode-enabledebugtap-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/developer-terminal-dev-mode-enabledebugtap-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/developer-terminal-dev-mode-enabledebugtap-etw-qga-unblock-20260507/developer-terminal-dev-mode-enabledebugtap-etw-qga-unblock-20260507.etl",
+            "kind": "etw-trace",
+            "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced host-ingested ETL/XML artifacts and normalized bundles for 2 HKCU-oriented target value(s): `DeveloperMode`, `EnableDebugTap`..."
+          }
+        ]
       },
       "upstream_lineage": {
         "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
@@ -2782,10 +2903,22 @@
         ]
       },
       "runtime_proof": {
-        "summary": "A same-day guest Ghidra retry for `DisableGitAutofetch` failed in `ensure-admin-shell` before any xref bundle reached the host.",
+        "summary": "The record also tracks a VS Code settings-file surface, but the bounded 2026-04-24 ETW retry only targeted the legacy registry fallback `HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced` / `DisableGitAutofetch`. That retry published host-vis...",
         "needs_vm_validation": false,
         "has_runtime_evidence": true,
         "links": [
+          {
+            "title": "KVM ETW summary receipt for DisableGitAutofetch",
+            "url": "evidence/captures/developer-vscode-git-autofetch-etw-stackwalk-attempt-20260424.json and evidence/raw/etw-stackwalk/developer-vscode-git-autofetch-etw-20260424-batch2/developer-vscode-git-autofetch-etw-20260424-batch2-summary.json and evidence/raw/etw-stackwalk/developer-vscode-git-autofetch-etw-20260424-batch2/developer-vscode-git-autofetch-etw-20260424-batch2-stage.json",
+            "kind": "etw-trace",
+            "summary": "The record also tracks a VS Code settings-file surface, but the bounded 2026-04-24 ETW retry only targeted the legacy registry fallback `HKCU\\Software\\Microsoft\\Windows\\CurrentV..."
+          },
+          {
+            "title": "QGA-first ETW stackwalk HKCU probe receipt",
+            "url": "evidence/captures/developer-vscode-git-autofetch-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/developer-vscode-git-autofetch-disablegitautofetch-etw-qga-unblock-20260507/developer-vscode-git-autofetch-disablegitautofetch-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/developer-vscode-git-autofetch-disablegitautofetch-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/developer-vscode-git-autofetch-disablegitautofetch-etw-qga-unblock-20260507/developer-vscode-git-autofetch-disablegitautofetch-etw-qga-unblock-20260507.etl",
+            "kind": "etw-trace",
+            "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced host-ingested ETL/XML artifacts and normalized bundles for 1 HKCU-oriented target value(s): `DisableGitAutofetch`. Because th..."
+          },
           {
             "title": "Guest Ghidra launch receipt for DisableGitAutofetch",
             "url": "evidence/raw/ghidra/ghidra-developer-vscode-git-autofetch-20260424-batch2/summary.json",
@@ -2902,10 +3035,16 @@
             "summary": "Guest-side Procmon capture showed SearchProtocolHost.exe querying HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\AppModelUnlock\\AllowDevelopmentWithoutDevLicense and receiving N..."
           },
           {
-            "title": "Guest Ghidra launch receipt for AllowDevelopmentWithoutDevLicense",
-            "url": "evidence/raw/ghidra/ghidra-developer-windows-dev-mode-20260424-batch1/summary.json",
-            "kind": "vm-test",
-            "summary": "A bounded 2026-04-24 guest string-xref retry for `AllowDevelopmentWithoutDevLicense` failed in `ensure-admin-shell` before any Ghidra bundle reached the host."
+            "title": "KVM ETW stage receipt for AllowDevelopmentWithoutDevLicense",
+            "url": "evidence/captures/developer-windows-dev-mode-etw-stackwalk-attempt-20260424.json and evidence/raw/etw-stackwalk/developer-windows-dev-mode-etw-20260424-batch1/developer-windows-dev-mode-etw-20260424-batch1-stage.json",
+            "kind": "etw-trace",
+            "summary": "A bounded 2026-04-24 ETW retry for `AllowDevelopmentWithoutDevLicense` reached artifact-upload and only retained a stage receipt before the hard timeout fired."
+          },
+          {
+            "title": "QGA-first ETW stackwalk runtime receipt for AllowDevelopmentWithoutDevLicense",
+            "url": "evidence/captures/developer-windows-dev-mode-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/developer-windows-dev-mode-etw-qga-unblock-20260507/developer-windows-dev-mode-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/developer-windows-dev-mode-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/developer-windows-dev-mode-etw-qga-unblock-20260507/developer-windows-dev-mode-etw-qga-unblock-20260507.etl",
+            "kind": "etw-trace",
+            "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4440 registry events with 522 caller-stack events. The bundle contains an exact helper-trigg..."
           }
         ]
       },
@@ -3061,10 +3200,16 @@
             "summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote IconsOnly = 0 and IconsOnly = 1, restarted Explorer after each write, and captured Explorer.EXE querying HKCU\\Softw..."
           },
           {
-            "title": "Guest Ghidra launch receipt for IconsOnly",
-            "url": "evidence/raw/ghidra/ghidra-explorer-always-show-icons-never-thumbnails-20260424-batch4/summary.json",
-            "kind": "vm-test",
-            "summary": "A same-day guest Ghidra retry for `IconsOnly` failed in `ensure-admin-shell` before any xref bundle reached the host."
+            "title": "KVM ETW summary receipt for IconsOnly",
+            "url": "evidence/captures/explorer-always-show-icons-never-thumbnails-etw-stackwalk-attempt-20260424.json and evidence/raw/etw-stackwalk/explorer-always-show-icons-never-thumbnails-etw-20260424-batch4/explorer-always-show-icons-never-thumbnails-etw-20260424-batch4-summary.json and evidence/raw/etw-stackwalk/explorer-always-show-icons-never-thumbnails-etw-20260424-batch4/explorer-always-show-icons-never-thumbnails-etw-20260424-batch4-stage.json",
+            "kind": "etw-trace",
+            "summary": "A bounded 2026-04-24 ETW retry for `HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced` / `IconsOnly` published host-visible summary and stage receipts, but ETL up..."
+          },
+          {
+            "title": "QGA-first ETW stackwalk runtime receipt for IconsOnly",
+            "url": "evidence/captures/explorer-always-show-icons-never-thumbnails-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/explorer-always-show-icons-never-thumbnails-etw-qga-unblock-20260507/explorer-always-show-icons-never-thumbnails-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/explorer-always-show-icons-never-thumbnails-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/explorer-always-show-icons-never-thumbnails-etw-qga-unblock-20260507/explorer-always-show-icons-never-thumbnails-etw-qga-unblock-20260507.etl",
+            "kind": "etw-trace",
+            "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4446 registry events with 569 caller-stack events. The QGA-launched helper targeted `HKCU\\So..."
           }
         ]
       },
@@ -3142,10 +3287,22 @@
         ]
       },
       "runtime_proof": {
-        "summary": "A bounded 2026-04-24 guest string-xref retry for `NoLowDiskSpaceChecks` failed in `ensure-admin-shell` before any Ghidra bundle reached the host.",
+        "summary": "A bounded 2026-04-24 ETW retry for `NoLowDiskSpaceChecks` reached artifact-upload and only retained a stage receipt before the hard timeout fired.",
         "needs_vm_validation": false,
         "has_runtime_evidence": true,
         "links": [
+          {
+            "title": "KVM ETW stage receipt for NoLowDiskSpaceChecks",
+            "url": "evidence/captures/explorer-disable-low-disk-space-warning-etw-stackwalk-attempt-20260424.json and evidence/raw/etw-stackwalk/explorer-disable-low-disk-space-warning-etw-20260424-batch1/explorer-disable-low-disk-space-warning-etw-20260424-batch1-stage.json",
+            "kind": "etw-trace",
+            "summary": "A bounded 2026-04-24 ETW retry for `NoLowDiskSpaceChecks` reached artifact-upload and only retained a stage receipt before the hard timeout fired."
+          },
+          {
+            "title": "QGA-first ETW stackwalk runtime receipt for NoLowDiskSpaceChecks",
+            "url": "evidence/captures/explorer-disable-low-disk-space-warning-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/explorer-disable-low-disk-space-warning-etw-qga-unblock-20260507/explorer-disable-low-disk-space-warning-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/explorer-disable-low-disk-space-warning-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/explorer-disable-low-disk-space-warning-etw-qga-unblock-20260507/explorer-disable-low-disk-space-warning-etw-qga-unblock-20260507.etl",
+            "kind": "etw-trace",
+            "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4444 registry events with 525 caller-stack events. The bundle contains an exact helper-trigg..."
+          },
           {
             "title": "Guest Ghidra launch receipt for NoLowDiskSpaceChecks",
             "url": "evidence/raw/ghidra/ghidra-explorer-disable-low-disk-space-warning-20260424-batch1/summary.json",
@@ -3228,10 +3385,22 @@
         ]
       },
       "runtime_proof": {
-        "summary": "A same-day guest Ghidra retry for `ChatIcon` failed in `ensure-admin-shell` before any xref bundle reached the host.",
+        "summary": "A bounded 2026-04-24 ETW retry for `HKLM\\Software\\Policies\\Microsoft\\Windows\\Windows Chat` / `ChatIcon` published host-visible summary and stage receipts, but ETL upload never completed so ingest failed before any normalized bundle reached the repo.",
         "needs_vm_validation": false,
         "has_runtime_evidence": true,
         "links": [
+          {
+            "title": "KVM ETW summary receipt for ChatIcon",
+            "url": "evidence/captures/explorer-disable-taskbar-chat-etw-stackwalk-attempt-20260424.json and evidence/raw/etw-stackwalk/explorer-disable-taskbar-chat-etw-20260424-batch2/explorer-disable-taskbar-chat-etw-20260424-batch2-summary.json and evidence/raw/etw-stackwalk/explorer-disable-taskbar-chat-etw-20260424-batch2/explorer-disable-taskbar-chat-etw-20260424-batch2-stage.json",
+            "kind": "etw-trace",
+            "summary": "A bounded 2026-04-24 ETW retry for `HKLM\\Software\\Policies\\Microsoft\\Windows\\Windows Chat` / `ChatIcon` published host-visible summary and stage receipts, but ETL upload never c..."
+          },
+          {
+            "title": "QGA-first ETW stackwalk runtime receipt for ChatIcon",
+            "url": "evidence/captures/explorer-disable-taskbar-chat-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/explorer-disable-taskbar-chat-etw-qga-unblock-20260507/explorer-disable-taskbar-chat-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/explorer-disable-taskbar-chat-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/explorer-disable-taskbar-chat-etw-qga-unblock-20260507/explorer-disable-taskbar-chat-etw-qga-unblock-20260507.etl",
+            "kind": "etw-trace",
+            "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4445 registry events with 525 caller-stack events. The bundle contains an exact helper-trigg..."
+          },
           {
             "title": "Guest Ghidra launch receipt for ChatIcon",
             "url": "evidence/raw/ghidra/ghidra-explorer-disable-taskbar-chat-20260424-batch2/summary.json",
@@ -3392,6 +3561,18 @@
             "url": "evidence/raw/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md and evidence/raw/procmon/explorer.enable-explorer-compact-mode/explorer-compact-zero-20260314-pml.md",
             "kind": "procmon-trace",
             "summary": "Procmon captured Explorer.EXE querying HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\UseCompactMode with Data:1 and Data:0 in separate reversible captures aft..."
+          },
+          {
+            "title": "Bounded ETW stackwalk timeout receipt",
+            "url": "evidence/raw/etw-stackwalk/explorer.enable-explorer-compact-mode-etw-20260424h/explorer.enable-explorer-compact-mode-etw-20260424h-summary.json and evidence/raw/etw-stackwalk/explorer.enable-explorer-compact-mode-etw-20260424h/explorer.enable-explorer-compact-mode-etw-20260424h-stage.json and evidence/captures/explorer-enable-explorer-compact-mode-etw-stackwalk-attempt-20260424.json",
+            "kind": "etw-trace",
+            "summary": "A bounded 2026-04-24 KVM ETW stackwalk retry for UseCompactMode advanced to artifact-upload but still timed out before any ETL, XML, or normalized bundle reached the host. The r..."
+          },
+          {
+            "title": "QGA-first ETW stackwalk runtime receipt for UseCompactMode",
+            "url": "evidence/captures/explorer-enable-explorer-compact-mode-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/explorer-enable-explorer-compact-mode-etw-qga-unblock-20260507/explorer-enable-explorer-compact-mode-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/explorer-enable-explorer-compact-mode-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/explorer-enable-explorer-compact-mode-etw-qga-unblock-20260507/explorer-enable-explorer-compact-mode-etw-qga-unblock-20260507.etl",
+            "kind": "etw-trace",
+            "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4484 registry events with 529 caller-stack events. The QGA-launched helper targeted `HKCU\\So..."
           }
         ]
       },
@@ -3480,10 +3661,16 @@
             "summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote HideDrivesWithNoMedia = 0 and HideDrivesWithNoMedia = 1, restarted Explorer into This PC after each write, and capt..."
           },
           {
-            "title": "Guest Ghidra launch receipt for HideDrivesWithNoMedia",
-            "url": "evidence/raw/ghidra/ghidra-explorer-hide-empty-drives-20260424-batch4/summary.json",
-            "kind": "vm-test",
-            "summary": "A same-day guest Ghidra retry for `HideDrivesWithNoMedia` failed in `ensure-admin-shell` before any xref bundle reached the host."
+            "title": "KVM ETW summary receipt for HideDrivesWithNoMedia",
+            "url": "evidence/captures/explorer-hide-empty-drives-etw-stackwalk-attempt-20260424.json and evidence/raw/etw-stackwalk/explorer-hide-empty-drives-etw-20260424-batch4/explorer-hide-empty-drives-etw-20260424-batch4-summary.json and evidence/raw/etw-stackwalk/explorer-hide-empty-drives-etw-20260424-batch4/explorer-hide-empty-drives-etw-20260424-batch4-stage.json",
+            "kind": "etw-trace",
+            "summary": "A bounded 2026-04-24 ETW retry for `HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced` / `HideDrivesWithNoMedia` published host-visible summary and stage receipts..."
+          },
+          {
+            "title": "QGA-first ETW stackwalk runtime receipt for HideDrivesWithNoMedia",
+            "url": "evidence/captures/explorer-hide-empty-drives-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/explorer-hide-empty-drives-etw-qga-unblock-20260507/explorer-hide-empty-drives-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/explorer-hide-empty-drives-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/explorer-hide-empty-drives-etw-qga-unblock-20260507/explorer-hide-empty-drives-etw-qga-unblock-20260507.etl",
+            "kind": "etw-trace",
+            "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4485 registry events with 525 caller-stack events. The QGA-launched helper targeted `HKCU\\So..."
           }
         ]
       },
@@ -3572,10 +3759,16 @@
             "summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote SeparateProcess = 0 and SeparateProcess = 1, restarted Explorer after each write, and captured Explorer.EXE queryin..."
           },
           {
-            "title": "Guest Ghidra launch receipt for SeparateProcess",
-            "url": "evidence/raw/ghidra/ghidra-explorer-launch-folder-windows-separate-process-20260424-batch4/summary.json",
-            "kind": "vm-test",
-            "summary": "A same-day guest Ghidra retry for `SeparateProcess` failed in `ensure-admin-shell` before any xref bundle reached the host."
+            "title": "KVM ETW summary receipt for SeparateProcess",
+            "url": "evidence/captures/explorer-launch-folder-windows-in-a-separate-process-etw-stackwalk-attempt-20260424.json and evidence/raw/etw-stackwalk/explorer-launch-folder-windows-separate-process-etw-20260424-batch4/explorer-launch-folder-windows-separate-process-etw-20260424-batch4-summary.json and evidence/raw/etw-stackwalk/explorer-launch-folder-windows-separate-process-etw-20260424-batch4/explorer-launch-folder-windows-separate-process-etw-20260424-batch4-stage.json",
+            "kind": "etw-trace",
+            "summary": "A bounded 2026-04-24 ETW retry for `HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced` / `SeparateProcess` published host-visible summary and stage receipts, but..."
+          },
+          {
+            "title": "QGA-first ETW stackwalk runtime receipt for SeparateProcess",
+            "url": "evidence/captures/explorer-launch-folder-windows-in-a-separate-process-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/explorer-launch-folder-windows-in-a-separate-process-etw-qga-unblock-20260507/explorer-launch-folder-windows-in-a-separate-process-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/explorer-launch-folder-windows-in-a-separate-process-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/explorer-launch-folder-windows-in-a-separate-process-etw-qga-unblock-20260507/explorer-launch-folder-windows-in-a-separate-process-etw-qga-unblock-20260507.etl",
+            "kind": "etw-trace",
+            "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4485 registry events with 524 caller-stack events. The QGA-launched helper targeted `HKCU\\So..."
           }
         ]
       },
@@ -3664,10 +3857,16 @@
             "summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote ShowCompColor = 0 and ShowCompColor = 1, restarted Explorer after each write, and captured Explorer.EXE querying HK..."
           },
           {
-            "title": "Guest Ghidra launch receipt for ShowCompColor",
-            "url": "evidence/raw/ghidra/ghidra-explorer-show-compressed-and-encrypted-files-in-color-20260424-batch5/summary.json",
-            "kind": "vm-test",
-            "summary": "A same-day guest Ghidra retry for `ShowCompColor` failed in `ensure-admin-shell` before any xref bundle reached the host."
+            "title": "KVM ETW summary receipt for ShowCompColor",
+            "url": "evidence/captures/explorer-show-compressed-and-encrypted-files-in-color-etw-stackwalk-attempt-20260424.json and evidence/raw/etw-stackwalk/explorer-show-compressed-and-encrypted-files-in-color-etw-20260424-batch5/explorer-show-compressed-and-encrypted-files-in-color-etw-20260424-batch5-summary.json and evidence/raw/etw-stackwalk/explorer-show-compressed-and-encrypted-files-in-color-etw-20260424-batch5/explorer-show-compressed-and-encrypted-files-in-color-etw-20260424-batch5-stage.json",
+            "kind": "etw-trace",
+            "summary": "A bounded 2026-04-24 ETW retry for `HKCU\\\\Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Explorer\\\\Advanced` / `ShowCompColor` published host-visible summary and stage receipts,..."
+          },
+          {
+            "title": "QGA-first ETW stackwalk runtime receipt for ShowCompColor",
+            "url": "evidence/captures/explorer-show-compressed-and-encrypted-files-in-color-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/explorer-show-compressed-and-encrypted-files-in-color-etw-qga-unblock-20260507/explorer-show-compressed-and-encrypted-files-in-color-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/explorer-show-compressed-and-encrypted-files-in-color-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/explorer-show-compressed-and-encrypted-files-in-color-etw-qga-unblock-20260507/explorer-show-compressed-and-encrypted-files-in-color-etw-qga-unblock-20260507.etl",
+            "kind": "etw-trace",
+            "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4502 registry events with 524 caller-stack events. The QGA-launched helper targeted `HKCU\\So..."
           }
         ]
       },
@@ -3756,10 +3955,16 @@
             "summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote ShowDriveLettersFirst = 0 and ShowDriveLettersFirst = 1, restarted Explorer after each write, and captured Explorer..."
           },
           {
-            "title": "Guest Ghidra launch receipt for ShowDriveLettersFirst",
-            "url": "evidence/raw/ghidra/ghidra-explorer-show-drive-letters-first-20260424-batch5/summary.json",
-            "kind": "vm-test",
-            "summary": "A same-day guest Ghidra retry for `ShowDriveLettersFirst` failed in `ensure-admin-shell` before any xref bundle reached the host."
+            "title": "KVM ETW summary receipt for ShowDriveLettersFirst",
+            "url": "evidence/captures/explorer-show-drive-letters-first-etw-stackwalk-attempt-20260424.json and evidence/raw/etw-stackwalk/explorer-show-drive-letters-first-etw-20260424-batch5/explorer-show-drive-letters-first-etw-20260424-batch5-summary.json and evidence/raw/etw-stackwalk/explorer-show-drive-letters-first-etw-20260424-batch5/explorer-show-drive-letters-first-etw-20260424-batch5-stage.json",
+            "kind": "etw-trace",
+            "summary": "A bounded 2026-04-24 ETW retry for `HKCU\\\\Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Explorer` / `ShowDriveLettersFirst` published host-visible summary and stage receipts, bu..."
+          },
+          {
+            "title": "QGA-first ETW stackwalk runtime receipt for ShowDriveLettersFirst",
+            "url": "evidence/captures/explorer-show-drive-letters-first-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/explorer-show-drive-letters-first-etw-qga-unblock-20260507/explorer-show-drive-letters-first-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/explorer-show-drive-letters-first-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/explorer-show-drive-letters-first-etw-qga-unblock-20260507/explorer-show-drive-letters-first-etw-qga-unblock-20260507.etl",
+            "kind": "etw-trace",
+            "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4506 registry events with 525 caller-stack events. The QGA-launched helper targeted `HKCU\\So..."
           }
         ]
       },
@@ -3848,10 +4053,16 @@
             "summary": "A reversible Procmon capture on 2026-03-13 wrote HideFileExt = 1, restarted Explorer, wrote HideFileExt = 0, and restarted Explorer again. PowerShell issued the RegSetValue oper..."
           },
           {
-            "title": "Guest Ghidra launch receipt for HideFileExt",
-            "url": "evidence/raw/ghidra/ghidra-explorer-show-file-extensions-20260424-batch5/summary.json",
-            "kind": "vm-test",
-            "summary": "A same-day guest Ghidra retry for `HideFileExt` failed in `ensure-admin-shell` before any xref bundle reached the host."
+            "title": "KVM ETW summary receipt for HideFileExt",
+            "url": "evidence/captures/explorer-show-file-extensions-etw-stackwalk-attempt-20260424.json and evidence/raw/etw-stackwalk/explorer-show-file-extensions-etw-20260424-batch5/explorer-show-file-extensions-etw-20260424-batch5-summary.json and evidence/raw/etw-stackwalk/explorer-show-file-extensions-etw-20260424-batch5/explorer-show-file-extensions-etw-20260424-batch5-stage.json",
+            "kind": "etw-trace",
+            "summary": "A bounded 2026-04-24 ETW retry for `HKCU\\\\Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Explorer\\\\Advanced` / `HideFileExt` published host-visible summary and stage receipts, bu..."
+          },
+          {
+            "title": "QGA-first ETW stackwalk runtime receipt for HideFileExt",
+            "url": "evidence/captures/explorer-show-file-extensions-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/explorer-show-file-extensions-etw-qga-unblock-20260507/explorer-show-file-extensions-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/explorer-show-file-extensions-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/explorer-show-file-extensions-etw-qga-unblock-20260507/explorer-show-file-extensions-etw-qga-unblock-20260507.etl",
+            "kind": "etw-trace",
+            "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4566 registry events with 569 caller-stack events. The QGA-launched helper targeted `HKCU\\So..."
           }
         ]
       },
@@ -3929,10 +4140,22 @@
         ]
       },
       "runtime_proof": {
-        "summary": "A same-day guest Ghidra retry for `FullPath` failed in `ensure-admin-shell` before any xref bundle reached the host.",
+        "summary": "A bounded 2026-04-24 ETW retry for `HKCU\\\\Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Explorer\\\\CabinetState` / `FullPath` published host-visible summary and stage receipts, but ETL upload never completed so ingest failed before any normalized bundle reac...",
         "needs_vm_validation": false,
         "has_runtime_evidence": true,
         "links": [
+          {
+            "title": "KVM ETW summary receipt for FullPath",
+            "url": "evidence/captures/explorer-show-full-path-etw-stackwalk-attempt-20260424.json and evidence/raw/etw-stackwalk/explorer-show-full-path-etw-20260424-batch5/explorer-show-full-path-etw-20260424-batch5-summary.json and evidence/raw/etw-stackwalk/explorer-show-full-path-etw-20260424-batch5/explorer-show-full-path-etw-20260424-batch5-stage.json",
+            "kind": "etw-trace",
+            "summary": "A bounded 2026-04-24 ETW retry for `HKCU\\\\Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Explorer\\\\CabinetState` / `FullPath` published host-visible summary and stage receipts, b..."
+          },
+          {
+            "title": "QGA-first ETW stackwalk runtime receipt for FullPath",
+            "url": "evidence/captures/explorer-show-full-path-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/explorer-show-full-path-etw-qga-unblock-20260507/explorer-show-full-path-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/explorer-show-full-path-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/explorer-show-full-path-etw-qga-unblock-20260507/explorer-show-full-path-etw-qga-unblock-20260507.etl",
+            "kind": "etw-trace",
+            "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4507 registry events with 525 caller-stack events. The QGA-launched helper targeted `HKCU\\So..."
+          },
           {
             "title": "Guest Ghidra launch receipt for FullPath",
             "url": "evidence/raw/ghidra/ghidra-explorer-show-full-path-20260424-batch5/summary.json",
@@ -4026,10 +4249,16 @@
             "summary": "A reversible Procmon capture on 2026-03-13 wrote Hidden = 1, restarted Explorer, wrote Hidden = 2, and restarted Explorer again. PowerShell issued the RegSetValue operations, Ex..."
           },
           {
-            "title": "Guest Ghidra launch receipt for Hidden",
-            "url": "evidence/raw/ghidra/ghidra-explorer-show-hidden-files-20260424-batch5/summary.json",
-            "kind": "vm-test",
-            "summary": "A same-day guest Ghidra retry for `Hidden` failed in `ensure-admin-shell` before any xref bundle reached the host."
+            "title": "KVM ETW summary receipt for Hidden",
+            "url": "evidence/captures/explorer-show-hidden-files-etw-stackwalk-attempt-20260424.json and evidence/raw/etw-stackwalk/explorer-show-hidden-files-etw-20260424-batch5/explorer-show-hidden-files-etw-20260424-batch5-summary.json and evidence/raw/etw-stackwalk/explorer-show-hidden-files-etw-20260424-batch5/explorer-show-hidden-files-etw-20260424-batch5-stage.json",
+            "kind": "etw-trace",
+            "summary": "A bounded 2026-04-24 ETW retry for `HKCU\\\\Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Explorer\\\\Advanced` / `Hidden` published host-visible summary and stage receipts, but ETL..."
+          },
+          {
+            "title": "QGA-first ETW stackwalk runtime receipt for Hidden",
+            "url": "evidence/captures/explorer-show-hidden-files-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/explorer-show-hidden-files-etw-qga-unblock-20260507/explorer-show-hidden-files-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/explorer-show-hidden-files-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/explorer-show-hidden-files-etw-qga-unblock-20260507/explorer-show-hidden-files-etw-qga-unblock-20260507.etl",
+            "kind": "etw-trace",
+            "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4505 registry events with 524 caller-stack events. The QGA-launched helper targeted `HKCU\\So..."
           }
         ]
       },
@@ -4118,10 +4347,16 @@
             "summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote ShowInfoTip = 0 and ShowInfoTip = 1, restarted Explorer after each write, and captured Explorer.EXE querying HKCU\\S..."
           },
           {
-            "title": "Guest Ghidra launch receipt for ShowInfoTip",
-            "url": "evidence/raw/ghidra/ghidra-explorer-show-info-tips-20260424-batch4/summary.json",
-            "kind": "vm-test",
-            "summary": "A same-day guest Ghidra retry for `ShowInfoTip` failed in `ensure-admin-shell` before any xref bundle reached the host."
+            "title": "KVM ETW summary receipt for ShowInfoTip",
+            "url": "evidence/captures/explorer-show-info-tips-etw-stackwalk-attempt-20260424.json and evidence/raw/etw-stackwalk/explorer-show-info-tips-etw-20260424-batch4/explorer-show-info-tips-etw-20260424-batch4-summary.json and evidence/raw/etw-stackwalk/explorer-show-info-tips-etw-20260424-batch4/explorer-show-info-tips-etw-20260424-batch4-stage.json",
+            "kind": "etw-trace",
+            "summary": "A bounded 2026-04-24 ETW retry for `HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced` / `ShowInfoTip` published host-visible summary and stage receipts, but ETL..."
+          },
+          {
+            "title": "QGA-first ETW stackwalk runtime receipt for ShowInfoTip",
+            "url": "evidence/captures/explorer-show-info-tips-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/explorer-show-info-tips-etw-qga-unblock-20260507/explorer-show-info-tips-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/explorer-show-info-tips-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/explorer-show-info-tips-etw-qga-unblock-20260507/explorer-show-info-tips-etw-qga-unblock-20260507.etl",
+            "kind": "etw-trace",
+            "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4508 registry events with 524 caller-stack events. The QGA-launched helper targeted `HKCU\\So..."
           }
         ]
       },
@@ -4210,10 +4445,16 @@
             "summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote ShowSuperHidden = 0 and ShowSuperHidden = 1 with Hidden held at 1, restarted Explorer after each write, and capture..."
           },
           {
-            "title": "Guest Ghidra launch receipt for ShowSuperHidden",
-            "url": "evidence/raw/ghidra/ghidra-explorer-show-protected-operating-system-files-20260424-batch4/summary.json",
-            "kind": "vm-test",
-            "summary": "A same-day guest Ghidra retry for `ShowSuperHidden` failed in `ensure-admin-shell` before any xref bundle reached the host."
+            "title": "KVM ETW summary receipt for ShowSuperHidden",
+            "url": "evidence/captures/explorer-show-protected-operating-system-files-etw-stackwalk-attempt-20260424.json and evidence/raw/etw-stackwalk/explorer-show-protected-operating-system-files-etw-20260424-batch4/explorer-show-protected-operating-system-files-etw-20260424-batch4-summary.json and evidence/raw/etw-stackwalk/explorer-show-protected-operating-system-files-etw-20260424-batch4/explorer-show-protected-operating-system-files-etw-20260424-batch4-stage.json",
+            "kind": "etw-trace",
+            "summary": "A bounded 2026-04-24 ETW retry for `HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced` / `ShowSuperHidden` published host-visible summary and stage receipts, but..."
+          },
+          {
+            "title": "QGA-first ETW stackwalk runtime receipt for ShowSuperHidden",
+            "url": "evidence/captures/explorer-show-protected-operating-system-files-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/explorer-show-protected-operating-system-files-etw-qga-unblock-20260507/explorer-show-protected-operating-system-files-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/explorer-show-protected-operating-system-files-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/explorer-show-protected-operating-system-files-etw-qga-unblock-20260507/explorer-show-protected-operating-system-files-etw-qga-unblock-20260507.etl",
+            "kind": "etw-trace",
+            "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4510 registry events with 527 caller-stack events. The QGA-launched helper targeted `HKCU\\So..."
           }
         ]
       },
@@ -4302,10 +4543,16 @@
             "summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote ShowRecent = 0 and ShowRecent = 1, restarted Explorer after each write, and captured Explorer.EXE querying HKCU\\Sof..."
           },
           {
-            "title": "Guest Ghidra launch receipt for ShowRecent",
-            "url": "evidence/raw/ghidra/ghidra-explorer-show-recent-items-20260424-batch6/summary.json",
-            "kind": "vm-test",
-            "summary": "A same-day guest Ghidra retry for `ShowRecent` failed in `ensure-admin-shell` before any xref bundle reached the host."
+            "title": "KVM ETW summary receipt for ShowRecent",
+            "url": "evidence/captures/explorer-show-recent-items-etw-stackwalk-attempt-20260424.json and evidence/raw/etw-stackwalk/explorer-show-recent-items-etw-20260424-batch6/explorer-show-recent-items-etw-20260424-batch6-summary.json and evidence/raw/etw-stackwalk/explorer-show-recent-items-etw-20260424-batch6/explorer-show-recent-items-etw-20260424-batch6-stage.json",
+            "kind": "etw-trace",
+            "summary": "A bounded 2026-04-24 ETW retry for `HKCU\\\\Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Explorer` / `ShowRecent` published host-visible summary and stage receipts, but ETL uploa..."
+          },
+          {
+            "title": "QGA-first ETW stackwalk runtime receipt for ShowRecent",
+            "url": "evidence/captures/explorer-show-recent-items-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/explorer-show-recent-items-etw-qga-unblock-20260507/explorer-show-recent-items-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/explorer-show-recent-items-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/explorer-show-recent-items-etw-qga-unblock-20260507/explorer-show-recent-items-etw-qga-unblock-20260507.etl",
+            "kind": "etw-trace",
+            "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4740 registry events with 676 caller-stack events. The QGA-launched helper targeted `HKCU\\So..."
           }
         ]
       },
@@ -4394,10 +4641,16 @@
             "summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote ShowStatusBar = 0 and ShowStatusBar = 1, restarted Explorer after each write, and captured Explorer.EXE querying HK..."
           },
           {
-            "title": "Guest Ghidra launch receipt for ShowStatusBar",
-            "url": "evidence/raw/ghidra/ghidra-explorer-show-status-bar-20260424-batch6/summary.json",
-            "kind": "vm-test",
-            "summary": "A same-day guest Ghidra retry for `ShowStatusBar` failed in `ensure-admin-shell` before any xref bundle reached the host."
+            "title": "KVM ETW summary receipt for ShowStatusBar",
+            "url": "evidence/captures/explorer-show-status-bar-etw-stackwalk-attempt-20260424.json and evidence/raw/etw-stackwalk/explorer-show-status-bar-etw-20260424-batch6/explorer-show-status-bar-etw-20260424-batch6-summary.json and evidence/raw/etw-stackwalk/explorer-show-status-bar-etw-20260424-batch6/explorer-show-status-bar-etw-20260424-batch6-stage.json",
+            "kind": "etw-trace",
+            "summary": "A bounded 2026-04-24 ETW retry for `HKCU\\\\Software\\\\Microsoft\\\\Windows\\\\CurrentVersion\\\\Explorer\\\\Advanced` / `ShowStatusBar` published host-visible summary and stage receipts,..."
+          },
+          {
+            "title": "QGA-first ETW stackwalk runtime receipt for ShowStatusBar",
+            "url": "evidence/captures/explorer-show-status-bar-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/explorer-show-status-bar-etw-qga-unblock-20260507/explorer-show-status-bar-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/explorer-show-status-bar-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/explorer-show-status-bar-etw-qga-unblock-20260507/explorer-show-status-bar-etw-qga-unblock-20260507.etl",
+            "kind": "etw-trace",
+            "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4517 registry events with 524 caller-stack events. The QGA-launched helper targeted `HKCU\\So..."
           }
         ]
       },
@@ -5171,10 +5424,16 @@
             "summary": "The local nohuto mirror records PolicyName and ValueName as NoActiveProbe and includes the registry path \\Registry\\Machine\\SOFTWARE\\Policies\\Microsoft\\WINDOWS\\NetworkConnectivit..."
           },
           {
-            "title": "Guest Ghidra launch receipt for NoActiveProbe",
-            "url": "evidence/raw/ghidra/ghidra-network-disable-active-probing-20260424-batch2/summary.json",
-            "kind": "vm-test",
-            "summary": "A same-day guest Ghidra retry for `NoActiveProbe` failed in `ensure-admin-shell` before any xref bundle reached the host."
+            "title": "KVM ETW summary receipt for NoActiveProbe",
+            "url": "evidence/captures/network-disable-active-probing-etw-stackwalk-attempt-20260424.json and evidence/raw/etw-stackwalk/network-disable-active-probing-etw-20260424-batch2/network-disable-active-probing-etw-20260424-batch2-summary.json and evidence/raw/etw-stackwalk/network-disable-active-probing-etw-20260424-batch2/network-disable-active-probing-etw-20260424-batch2-stage.json",
+            "kind": "etw-trace",
+            "summary": "Official policy docs remain the primary proof surface here. A bounded 2026-04-24 ETW retry for `HKLM\\Software\\Policies\\Microsoft\\Windows\\NetworkConnectivityStatusIndicator` / `N..."
+          },
+          {
+            "title": "QGA-first ETW stackwalk runtime receipt for NoActiveProbe",
+            "url": "evidence/captures/network-disable-active-probing-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/network-disable-active-probing-etw-qga-unblock-20260507/network-disable-active-probing-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/network-disable-active-probing-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/network-disable-active-probing-etw-qga-unblock-20260507/network-disable-active-probing-etw-qga-unblock-20260507.etl",
+            "kind": "etw-trace",
+            "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4445 registry events with 525 caller-stack events. The bundle contains an exact helper-trigg..."
           }
         ]
       },
@@ -5252,10 +5511,17 @@
         ]
       },
       "runtime_proof": {
-        "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced host-ingested ETL/XML artifacts and normalized bundles for 2 target value(s): `AutoShareServer`, `AutoShareWks`. The QGA-launched `reg.exe query` probe produced exact target RegQueryValue events for 2/2 ta...",
         "needs_vm_validation": false,
-        "has_runtime_evidence": false,
-        "links": []
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "QGA-first ETW stackwalk probe receipt",
+            "url": "evidence/captures/network-disable-default-shares-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/network-disable-default-shares-autoshareserver-etw-qga-unblock-20260507/network-disable-default-shares-autoshareserver-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/network-disable-default-shares-autoshareserver-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/network-disable-default-shares-autoshareserver-etw-qga-unblock-20260507/network-disable-default-shares-autoshareserver-etw-qga-unblock-20260507.etl and evidence/raw/etw-stackwalk/network-disable-default-shares-autosharewks-etw-qga-unblock-20260507/network-disable-default-shares-autosharewks-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/network-disable-default-shares-autosharewks-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/network-disable-default-shares-autosharewks-etw-qga-unblock-20260507/network-disable-default-shares-autosharewks-etw-qga-unblock-20260507.etl",
+            "kind": "etw-trace",
+            "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced host-ingested ETL/XML artifacts and normalized bundles for 2 target value(s): `AutoShareServer`, `AutoShareWks`. The QGA-laun..."
+          }
+        ]
       },
       "upstream_lineage": {
         "summary": "No upstream nohuto source link is attached to this record.",
@@ -5331,10 +5597,22 @@
         ]
       },
       "runtime_proof": {
-        "summary": "A same-day guest Ghidra retry for `DisabledComponents` failed in `ensure-admin-shell` before any xref bundle reached the host.",
+        "summary": "A bounded 2026-04-24 ETW retry for `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Services\\\\Tcpip6\\\\Parameters` / `DisabledComponents` published host-visible summary and stage receipts, but ETL upload never completed so ingest failed before any normalized bundle reached...",
         "needs_vm_validation": false,
         "has_runtime_evidence": true,
         "links": [
+          {
+            "title": "KVM ETW summary receipt for DisabledComponents",
+            "url": "evidence/captures/network-disable-ipv6-etw-stackwalk-attempt-20260424.json and evidence/raw/etw-stackwalk/network-disable-ipv6-etw-20260424-batch6/network-disable-ipv6-etw-20260424-batch6-summary.json and evidence/raw/etw-stackwalk/network-disable-ipv6-etw-20260424-batch6/network-disable-ipv6-etw-20260424-batch6-stage.json",
+            "kind": "etw-trace",
+            "summary": "A bounded 2026-04-24 ETW retry for `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Services\\\\Tcpip6\\\\Parameters` / `DisabledComponents` published host-visible summary and stage receipts, but..."
+          },
+          {
+            "title": "QGA-first ETW stackwalk runtime receipt for DisabledComponents",
+            "url": "evidence/captures/network-disable-ipv6-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/network-disable-ipv6-etw-qga-unblock-20260507/network-disable-ipv6-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/network-disable-ipv6-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/network-disable-ipv6-etw-qga-unblock-20260507/network-disable-ipv6-etw-qga-unblock-20260507.etl",
+            "kind": "etw-trace",
+            "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4500 registry events with 572 caller-stack events. The bundle contains an exact helper-trigg..."
+          },
           {
             "title": "Guest Ghidra launch receipt for DisabledComponents",
             "url": "evidence/raw/ghidra/ghidra-network-disable-ipv6-20260424-batch6/summary.json",
@@ -5417,10 +5695,22 @@
         ]
       },
       "runtime_proof": {
-        "summary": "A same-day guest Ghidra retry for `EnableMulticast` failed in `ensure-admin-shell` before any xref bundle reached the host.",
+        "summary": "A bounded 2026-04-24 ETW retry for `HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient` / `EnableMulticast` published host-visible summary and stage receipts, but ETL upload never completed so ingest failed before any normalized bundle reached the repo.",
         "needs_vm_validation": false,
         "has_runtime_evidence": true,
         "links": [
+          {
+            "title": "KVM ETW summary receipt for EnableMulticast",
+            "url": "evidence/captures/network-disable-llmnr-etw-stackwalk-attempt-20260424.json and evidence/raw/etw-stackwalk/network-disable-llmnr-etw-20260424-batch3/network-disable-llmnr-etw-20260424-batch3-summary.json and evidence/raw/etw-stackwalk/network-disable-llmnr-etw-20260424-batch3/network-disable-llmnr-etw-20260424-batch3-stage.json",
+            "kind": "etw-trace",
+            "summary": "A bounded 2026-04-24 ETW retry for `HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient` / `EnableMulticast` published host-visible summary and stage receipts, but ETL upload..."
+          },
+          {
+            "title": "QGA-first ETW stackwalk runtime receipt for EnableMulticast",
+            "url": "evidence/captures/network-disable-llmnr-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/network-disable-llmnr-etw-qga-unblock-20260507/network-disable-llmnr-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/network-disable-llmnr-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/network-disable-llmnr-etw-qga-unblock-20260507/network-disable-llmnr-etw-qga-unblock-20260507.etl",
+            "kind": "etw-trace",
+            "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4498 registry events with 571 caller-stack events. The bundle contains an exact helper-trigg..."
+          },
           {
             "title": "Guest Ghidra launch receipt for EnableMulticast",
             "url": "evidence/raw/ghidra/ghidra-network-disable-llmnr-20260424-batch3/summary.json",
@@ -5582,10 +5872,22 @@
         ]
       },
       "runtime_proof": {
-        "summary": "A same-day guest Ghidra retry for `EnableMDNS` failed in `ensure-admin-shell` before any xref bundle reached the host.",
+        "summary": "A bounded 2026-04-24 ETW retry for `HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient` / `EnableMDNS` published host-visible summary and stage receipts, but ETL upload never completed so ingest failed before any normalized bundle reached the repo.",
         "needs_vm_validation": false,
         "has_runtime_evidence": true,
         "links": [
+          {
+            "title": "KVM ETW summary receipt for EnableMDNS",
+            "url": "evidence/captures/network-disable-mdns-etw-stackwalk-attempt-20260424.json and evidence/raw/etw-stackwalk/network-disable-mdns-etw-20260424-batch3/network-disable-mdns-etw-20260424-batch3-summary.json and evidence/raw/etw-stackwalk/network-disable-mdns-etw-20260424-batch3/network-disable-mdns-etw-20260424-batch3-stage.json",
+            "kind": "etw-trace",
+            "summary": "A bounded 2026-04-24 ETW retry for `HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient` / `EnableMDNS` published host-visible summary and stage receipts, but ETL upload never..."
+          },
+          {
+            "title": "QGA-first ETW stackwalk runtime receipt for EnableMDNS",
+            "url": "evidence/captures/network-disable-mdns-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/network-disable-mdns-etw-qga-unblock-20260507/network-disable-mdns-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/network-disable-mdns-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/network-disable-mdns-etw-qga-unblock-20260507/network-disable-mdns-etw-qga-unblock-20260507.etl",
+            "kind": "etw-trace",
+            "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4498 registry events with 570 caller-stack events. The bundle contains an exact helper-trigg..."
+          },
           {
             "title": "Guest Ghidra launch receipt for EnableMDNS",
             "url": "evidence/raw/ghidra/ghidra-network-disable-mdns-20260424-batch3/summary.json",
@@ -5668,10 +5970,22 @@
         ]
       },
       "runtime_proof": {
-        "summary": "A same-day guest Ghidra retry for `EnableNetbios` progressed beyond the earlier admin-shell failure mode, but still stopped with `launcher-exception` before any evidence.json xref bundle was produced.",
+        "summary": "A bounded 2026-04-27 ETW retry for `HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient` / `EnableNetbios` advanced as far as `tracerpt`, but still timed out before any ETL, XML, or normalized bundle reached the repo.",
         "needs_vm_validation": false,
         "has_runtime_evidence": true,
         "links": [
+          {
+            "title": "KVM ETW summary receipt for EnableNetbios",
+            "url": "evidence/captures/network-disable-netbios-resolution-etw-stackwalk-attempt-20260427.json and evidence/raw/etw-stackwalk/network-disable-netbios-resolution-etw-20260427a/network-disable-netbios-resolution-etw-20260427a-summary.json and evidence/raw/etw-stackwalk/network-disable-netbios-resolution-etw-20260427a/network-disable-netbios-resolution-etw-20260427a-stage.json",
+            "kind": "etw-trace",
+            "summary": "A bounded 2026-04-27 ETW retry for `HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient` / `EnableNetbios` advanced as far as `tracerpt`, but still timed out before any ETL, X..."
+          },
+          {
+            "title": "QGA-first ETW stackwalk runtime receipt for EnableNetbios",
+            "url": "evidence/captures/network-disable-netbios-resolution-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/network-disable-netbios-resolution-etw-qga-unblock-20260507/network-disable-netbios-resolution-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/network-disable-netbios-resolution-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/network-disable-netbios-resolution-etw-qga-unblock-20260507/network-disable-netbios-resolution-etw-qga-unblock-20260507.etl",
+            "kind": "etw-trace",
+            "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 5028 registry events with 1181 caller-stack events. The bundle contains an exact helper-trig..."
+          },
           {
             "title": "Guest Ghidra launch receipt for EnableNetbios",
             "url": "evidence/raw/ghidra/ghidra-network-disable-netbios-resolution-20260427a/summary.json",
@@ -5861,10 +6175,22 @@
         ]
       },
       "runtime_proof": {
-        "summary": "A same-day guest Ghidra retry for `EnablePlainTextPassword` failed in `ensure-admin-shell` after the bounded 90 second wrapper timeout, so no xref bundle reached the host.",
+        "summary": "A bounded 2026-04-27 ETW retry for `HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters` / `EnablePlainTextPassword` published host-visible summary and stage receipts, but ETL upload never completed so ingest failed before any normalized bun...",
         "needs_vm_validation": false,
         "has_runtime_evidence": true,
         "links": [
+          {
+            "title": "KVM ETW summary receipt for EnablePlainTextPassword",
+            "url": "evidence/captures/network-disable-plaintext-smb-passwords-etw-stackwalk-attempt-20260427.json and evidence/raw/etw-stackwalk/network-disable-plaintext-smb-passwords-etw-20260427a/network-disable-plaintext-smb-passwords-etw-20260427a-summary.json and evidence/raw/etw-stackwalk/network-disable-plaintext-smb-passwords-etw-20260427a/network-disable-plaintext-smb-passwords-etw-20260427a-stage.json",
+            "kind": "etw-trace",
+            "summary": "A bounded 2026-04-27 ETW retry for `HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters` / `EnablePlainTextPassword` published host-visible summary and stage rec..."
+          },
+          {
+            "title": "QGA-first ETW stackwalk runtime receipt for EnablePlainTextPassword",
+            "url": "evidence/captures/network-disable-plaintext-smb-passwords-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/network-disable-plaintext-smb-passwords-etw-qga-unblock-20260507/network-disable-plaintext-smb-passwords-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/network-disable-plaintext-smb-passwords-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/network-disable-plaintext-smb-passwords-etw-qga-unblock-20260507/network-disable-plaintext-smb-passwords-etw-qga-unblock-20260507.etl",
+            "kind": "etw-trace",
+            "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 5000 registry events with 1184 caller-stack events. The bundle contains an exact helper-trig..."
+          },
           {
             "title": "Guest Ghidra launch receipt for EnablePlainTextPassword",
             "url": "evidence/raw/ghidra/ghidra-network-disable-plaintext-smb-passwords-20260427b/summary.json",
@@ -5947,10 +6273,22 @@
         ]
       },
       "runtime_proof": {
-        "summary": "A same-day guest Ghidra retry for `DisableSmartNameResolution` failed in `ensure-admin-shell` after the bounded 90 second wrapper timeout, so no xref bundle reached the host.",
+        "summary": "A bounded 2026-04-27 ETW retry for `HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient` / `DisableSmartNameResolution` published host-visible summary and stage receipts, but ETL upload never completed so ingest failed before any normalized bundle reached...",
         "needs_vm_validation": false,
         "has_runtime_evidence": true,
         "links": [
+          {
+            "title": "KVM ETW summary receipt for DisableSmartNameResolution",
+            "url": "evidence/captures/network-disable-smart-name-resolution-etw-stackwalk-attempt-20260427.json and evidence/raw/etw-stackwalk/network-disable-smart-name-resolution-etw-20260427a/network-disable-smart-name-resolution-etw-20260427a-summary.json and evidence/raw/etw-stackwalk/network-disable-smart-name-resolution-etw-20260427a/network-disable-smart-name-resolution-etw-20260427a-stage.json",
+            "kind": "etw-trace",
+            "summary": "A bounded 2026-04-27 ETW retry for `HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient` / `DisableSmartNameResolution` published host-visible summary and stage receipts, but..."
+          },
+          {
+            "title": "QGA-first ETW stackwalk runtime receipt for DisableSmartNameResolution",
+            "url": "evidence/captures/network-disable-smart-name-resolution-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/network-disable-smart-name-resolution-etw-qga-unblock-20260507/network-disable-smart-name-resolution-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/network-disable-smart-name-resolution-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/network-disable-smart-name-resolution-etw-qga-unblock-20260507/network-disable-smart-name-resolution-etw-qga-unblock-20260507.etl",
+            "kind": "etw-trace",
+            "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4887 registry events with 989 caller-stack events. The bundle contains an exact helper-trigg..."
+          },
           {
             "title": "Guest Ghidra launch receipt for DisableSmartNameResolution",
             "url": "evidence/raw/ghidra/ghidra-network-disable-smart-name-resolution-20260427b/summary.json",
@@ -6033,10 +6371,22 @@
         ]
       },
       "runtime_proof": {
-        "summary": "A same-day guest Ghidra retry for `SMB1` failed in `ensure-admin-shell` after the bounded 90 second wrapper timeout, so no xref bundle reached the host.",
+        "summary": "A bounded 2026-04-27 ETW retry for `HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanServer\\Parameters` / `SMB1` published host-visible summary and stage receipts, but ETL upload never completed so ingest failed before any normalized bundle reached the repo.",
         "needs_vm_validation": false,
         "has_runtime_evidence": true,
         "links": [
+          {
+            "title": "KVM ETW summary receipt for SMB1",
+            "url": "evidence/captures/network-disable-smb1-etw-stackwalk-attempt-20260427.json and evidence/raw/etw-stackwalk/network-disable-smb1-etw-20260427a/network-disable-smb1-etw-20260427a-summary.json and evidence/raw/etw-stackwalk/network-disable-smb1-etw-20260427a/network-disable-smb1-etw-20260427a-stage.json",
+            "kind": "etw-trace",
+            "summary": "A bounded 2026-04-27 ETW retry for `HKLM\\SYSTEM\\CurrentControlSet\\Services\\LanmanServer\\Parameters` / `SMB1` published host-visible summary and stage receipts, but ETL upload ne..."
+          },
+          {
+            "title": "QGA-first ETW stackwalk runtime receipt for SMB1",
+            "url": "evidence/captures/network-disable-smb1-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/network-disable-smb1-etw-qga-unblock-20260507/network-disable-smb1-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/network-disable-smb1-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/network-disable-smb1-etw-qga-unblock-20260507/network-disable-smb1-etw-qga-unblock-20260507.etl",
+            "kind": "etw-trace",
+            "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4459 registry events with 618 caller-stack events. The bundle contains an exact helper-trigg..."
+          },
           {
             "title": "Guest Ghidra launch receipt for SMB1",
             "url": "evidence/raw/ghidra/ghidra-network-disable-smb1-20260427b/summary.json",
@@ -6198,10 +6548,22 @@
         ]
       },
       "runtime_proof": {
-        "summary": "A same-day guest Ghidra retry for `AutoConnectAllowedOEM` failed in `ensure-admin-shell` after the bounded 90 second wrapper timeout, so no xref bundle reached the host.",
+        "summary": "A bounded 2026-04-27 ETW retry for `HKLM\\Software\\Microsoft\\wcmsvc\\wifinetworkmanager\\config` / `AutoConnectAllowedOEM` published host-visible summary and stage receipts, but ETL upload never completed so ingest failed before any normalized bundle reached t...",
         "needs_vm_validation": false,
         "has_runtime_evidence": true,
         "links": [
+          {
+            "title": "KVM ETW summary receipt for AutoConnectAllowedOEM",
+            "url": "evidence/captures/network-disable-wifi-sense-etw-stackwalk-attempt-20260427.json and evidence/raw/etw-stackwalk/network-disable-wifi-sense-etw-20260427a/network-disable-wifi-sense-etw-20260427a-summary.json and evidence/raw/etw-stackwalk/network-disable-wifi-sense-etw-20260427a/network-disable-wifi-sense-etw-20260427a-stage.json",
+            "kind": "etw-trace",
+            "summary": "A bounded 2026-04-27 ETW retry for `HKLM\\Software\\Microsoft\\wcmsvc\\wifinetworkmanager\\config` / `AutoConnectAllowedOEM` published host-visible summary and stage receipts, but ET..."
+          },
+          {
+            "title": "QGA-first ETW stackwalk runtime receipt for AutoConnectAllowedOEM",
+            "url": "evidence/captures/network-disable-wifi-sense-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/network-disable-wifi-sense-etw-qga-unblock-20260507/network-disable-wifi-sense-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/network-disable-wifi-sense-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/network-disable-wifi-sense-etw-qga-unblock-20260507/network-disable-wifi-sense-etw-qga-unblock-20260507.etl",
+            "kind": "etw-trace",
+            "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4423 registry events with 535 caller-stack events. The bundle contains an exact helper-trigg..."
+          },
           {
             "title": "Guest Ghidra launch receipt for AutoConnectAllowedOEM",
             "url": "evidence/raw/ghidra/ghidra-network-disable-wifi-sense-20260427b/summary.json",
@@ -7222,10 +7584,22 @@
         ]
       },
       "runtime_proof": {
-        "summary": "A same-day fast guest Ghidra retry for `EncryptData` failed in `ensure-admin-shell` with a bounded timeout, so no xref bundle reached the host.",
+        "summary": "A bounded 2026-04-27 ETW retry for `EncryptData` never reached trace collection. QGA guest-exec failed during guest-dir setup, the runner fell back to send-key launch, and the fallback still timed out in `ensure-admin-shell` before any ETW artifact reached...",
         "needs_vm_validation": false,
         "has_runtime_evidence": true,
         "links": [
+          {
+            "title": "KVM ETW summary receipt for EncryptData",
+            "url": "evidence/captures/network-smb-encrypt-data-etw-stackwalk-attempt-20260427.json and evidence/raw/etw-stackwalk/network-smb-encrypt-data-etw-20260427a/network-smb-encrypt-data-etw-20260427a-summary.json",
+            "kind": "etw-trace",
+            "summary": "A bounded 2026-04-27 ETW retry for `EncryptData` never reached trace collection. QGA guest-exec failed during guest-dir setup, the runner fell back to send-key launch, and the f..."
+          },
+          {
+            "title": "QGA-first ETW stackwalk runtime receipt for EncryptData",
+            "url": "evidence/captures/network-smb-encrypt-data-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/network-smb-encrypt-data-etw-qga-unblock-20260507/network-smb-encrypt-data-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/network-smb-encrypt-data-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/network-smb-encrypt-data-etw-qga-unblock-20260507/network-smb-encrypt-data-etw-qga-unblock-20260507.etl",
+            "kind": "etw-trace",
+            "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 5130 registry events with 1190 caller-stack events. The bundle contains an exact helper-trig..."
+          },
           {
             "title": "Guest Ghidra launch receipt for EncryptData",
             "url": "evidence/raw/ghidra/ghidra-network-smb-encrypt-data-20260427a/summary.json",
@@ -8364,6 +8738,12 @@
             "url": "evidence/raw/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.txt and evidence/raw/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-0.hits.csv and evidence/raw/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.txt and evidence/raw/procmon/taskbar-animations-procmon-validation-20260326/taskbaranimations-state-1.hits.csv",
             "kind": "procmon-trace",
             "summary": "Separate reversible Procmon captures on Win25H2Clean showed explorer.exe querying HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/TaskbarAnimations with Data:0..."
+          },
+          {
+            "title": "Bounded ETW stackwalk timeout receipt",
+            "url": "evidence/raw/etw-stackwalk/performance.disable-taskbar-animations-etw-20260424h/performance.disable-taskbar-animations-etw-20260424h-summary.json and evidence/raw/etw-stackwalk/performance.disable-taskbar-animations-etw-20260424h/performance.disable-taskbar-animations-etw-20260424h-stage.json and evidence/captures/performance-disable-taskbar-animations-etw-stackwalk-attempt-20260424.json",
+            "kind": "etw-trace",
+            "summary": "A bounded 2026-04-24 KVM ETW stackwalk retry for TaskbarAnimations advanced to artifact-upload but still timed out before any ETL, XML, or normalized bundle reached the host. Th..."
           }
         ]
       },
@@ -8396,18 +8776,18 @@
     {
       "record_id": "peripheral.audio-disable-ducking",
       "tweak_id": "peripheral.audio-disable-ducking",
-      "record_status": "review-required",
-      "evidence_class": "D",
-      "class_label": "Class D",
-      "class_title": "Key Known, Value Semantics Unknown",
-      "class_description": "The key existence is proven, but the value semantics are not trusted enough yet for an app-ready surface.",
+      "record_status": "validated",
+      "evidence_class": "A",
+      "class_label": "Class A",
+      "class_title": "Cross-Layer Verified",
+      "class_description": "Key exists, primary values have trusted meanings, and the docs/static/runtime layers converge. App surfacing and one-click actionability are tracked separately.",
       "show_in_app": true,
-      "is_actionable": false,
+      "is_actionable": true,
       "is_archived": false,
-      "action_state": "research-gated",
-      "gating_reason": "The key exists, but the value semantics are still too weak or ambiguous for an app-ready surface.",
-      "confidence": "medium",
-      "app_mapping_status": "unknown",
+      "action_state": "actionable",
+      "gating_reason": "This record is cross-layer verified and also aligned with a shipped one-click surface.",
+      "confidence": "high",
+      "app_mapping_status": "matches-research",
       "restore_story_known": true,
       "tested_build": "26100",
       "anticheat_risk": {
@@ -8416,10 +8796,16 @@
         "gaming_safe": null
       },
       "validated_semantics": {
-        "summary": "The checked-in tweak provenance tables map peripheral.audio-disable-ducking to the current repo implementation.",
-        "has_validation_proof": false,
+        "summary": "Validated on 2026-05-07 with QGA-first VM tooling. Ghidra provides the code-side mmsys.cpl string/xref evidence; ETW provides a runtime registry trace with caller-stack capture for the exact value name. A stale value left by an earlier Procmon timeout was r...",
+        "has_validation_proof": true,
         "has_semantics_evidence": true,
         "links": [
+          {
+            "title": "Validation proof source",
+            "url": "evidence/raw/ghidra/peripheral-audio-ducking-ghidra-20260507/ghidra-matches.md",
+            "kind": "validation-proof",
+            "summary": "mmsys.cpl Ghidra string/xref probe found UserDuckingPreference in two naturally resolved decompiled functions, including call sites that reference SHGetValueW and SHSetValueW. T..."
+          },
           {
             "title": "Repo tweak provenance for peripheral.audio-disable-ducking",
             "url": "Docs/tweaks/tweak-provenance.md",
@@ -8435,10 +8821,17 @@
         ]
       },
       "runtime_proof": {
-        "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "summary": "The 2026-05-07 QGA-first xperf REGISTRY stackwalk captured a narrow RegQueryValue run for HKCU\\Software\\Microsoft\\Multimedia\\Audio\\UserDuckingPreference. The normalized bundle is ok, contains 5221 registry events, 1357 caller-stack events, and an exact User...",
         "needs_vm_validation": false,
-        "has_runtime_evidence": false,
-        "links": []
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "QGA ETW stackwalk - UserDuckingPreference runtime registry probe",
+            "url": "evidence/raw/etw-stackwalk/peripheral-audio-ducking-etw-20260507/peripheral-audio-ducking-etw-20260507-summary.json and evidence/raw/etw-stackwalk/peripheral-audio-ducking-etw-20260507/normalized-registry-bundle.json",
+            "kind": "etw-trace",
+            "summary": "The 2026-05-07 QGA-first xperf REGISTRY stackwalk captured a narrow RegQueryValue run for HKCU\\Software\\Microsoft\\Multimedia\\Audio\\UserDuckingPreference. The normalized bundle i..."
+          }
+        ]
       },
       "upstream_lineage": {
         "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
@@ -8462,27 +8855,24 @@
           }
         ]
       },
-      "tweak_origin": "research-derived",
-      "promotion_state": "blocked",
-      "promotion_blockers": [
-        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
-        "validation-proof"
-      ],
-      "record_promotion_allowed": false,
-      "tweak_ingest_allowed": false,
-      "debug_override_allowed": true,
+      "tweak_origin": "legacy-curated",
+      "promotion_state": "promoted",
+      "promotion_blockers": [],
+      "record_promotion_allowed": true,
+      "tweak_ingest_allowed": true,
+      "debug_override_allowed": false,
       "score_breakdown": {
-        "static_evidence_strength": 3,
-        "runtime_evidence_strength": 1,
+        "static_evidence_strength": 4,
+        "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 3,
-        "tweak_suitability": 2,
+        "tweak_suitability": 5,
         "privilege_complexity": 4,
         "build_specificity": 5,
         "sibling_expansion_value": 2,
         "bench_priority": 3,
-        "overall_score": 3.11,
-        "next_missing_layer": "validation-proof"
+        "overall_score": 3.67,
+        "next_missing_layer": "none"
       }
     },
     {
@@ -9248,16 +9638,16 @@
             "summary": "The 96-key existence batch confirmed EnableVirtualization exists on the clean baseline with observed value 1."
           },
           {
-            "title": "Linux KVM Procmon replay for EnableVirtualization",
-            "url": "evidence/files/vm-tooling-staging/enablevirtualization-procmon-kvm-20260406b/enablevirtualization-procmon-kvm-20260406b-summary.json and evidence/files/vm-tooling-staging/enablevirtualization-procmon-kvm-20260406b/host-review.json",
-            "kind": "procmon-trace",
-            "summary": "A dedicated KVM UAC/policy burst produced a real Procmon CSV with 300881 rows and still returned zero path or value-name matches for EnableVirtualization under Policies\\\\System."
+            "title": "Path-aware lightweight ETW follow-up for EnableVirtualization",
+            "url": "evidence/files/path-aware/path-aware-runtime-20260330-221529/summary.json and evidence/files/path-aware/path-aware-runtime-20260330-221529/policy-system-enable-virtualization/summary.json",
+            "kind": "etw-trace",
+            "summary": "The tools-hardened path-aware ETW lane completed shell-safe and produced real ETL/CSV outputs, but still did not capture an exact runtime read or intended-path line for EnableVi..."
           },
           {
-            "title": "Linux KVM local-KD disassembly for EnableVirtualization",
-            "url": "evidence/files/vm-tooling-staging/local-kd-enablevirtualization-slice-20260406a/local-kd-enablevirtualization-slice-20260406a-summary.json and evidence/files/vm-tooling-staging/local-kd-enablevirtualization-slice-20260406a/local-kd-enablevirtualization-slice-20260406a.log and evidence/files/vm-tooling-staging/local-kd-enablevirtualization-strings-20260406a/local-kd-enablevirtualization-strings-20260406a-summary.json and evidence/files/vm-tooling-staging/local-kd-enablevirtualization-strings-20260406a/local-kd-enablevirtualization-strings-20260406a.log and research/notes/policy-system-enable-virtualization-kvm-local-kd-disasm-follow-up-20260406.md",
-            "kind": "vm-test",
-            "summary": "A debugger-assisted KVM local-KD follow-up disassembled the live `PsBootPhaseComplete` cluster, confirmed a direct `Policies\\System` key-path literal on the running guest, and r..."
+            "title": "Secondary-profile path-aware ETW replay for EnableVirtualization",
+            "url": "evidence/files/path-aware/secondary/path-aware-runtime-secondary-20260331-110610/summary.json and evidence/files/path-aware/secondary/path-aware-runtime-secondary-20260331-110610/policy-system-enable-virtualization/summary.json",
+            "kind": "etw-trace",
+            "summary": "The secondary-profile path-aware ETW replay completed shell-safe on Win25H2Clean-B and reproduced the same zero exact-target hits for the exact value name and intended path."
           }
         ]
       },
@@ -9379,7 +9769,7 @@
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
-        "runtime_evidence_strength": 4,
+        "runtime_evidence_strength": 3,
         "rollback_clarity": 5,
         "blast_radius": 2,
         "tweak_suitability": 3,
@@ -9387,7 +9777,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 4.0,
+        "overall_score": 3.89,
         "next_missing_layer": "intentional-hold"
       }
     },
@@ -9480,7 +9870,7 @@
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
-        "runtime_evidence_strength": 4,
+        "runtime_evidence_strength": 3,
         "rollback_clarity": 5,
         "blast_radius": 2,
         "tweak_suitability": 3,
@@ -9488,7 +9878,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 4.0,
+        "overall_score": 3.89,
         "next_missing_layer": "intentional-hold"
       }
     },
@@ -9649,16 +10039,16 @@
             "summary": "The 96-key existence batch confirmed HiberFileSizePercent exists on the clean baseline with observed value 0."
           },
           {
+            "title": "Tools-hardened lightweight ETW follow-up for HiberFileSizePercent",
+            "url": "evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-164001/summary.json and evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-164001/results.json and research/notes/power-control-hiber-file-size-percent-lightweight-runtime-20260330.md",
+            "kind": "etw-trace",
+            "summary": "The tools-hardened lightweight ETW lane surfaced exact HiberFileSizePercent lines on the current VMware baseline but did not capture an exact RegQueryValue hit."
+          },
+          {
             "title": "Linux KVM local-KD follow-up for HiberFileSizePercent",
             "url": "evidence/files/vm-tooling-staging/local-kd-hiber-symbols-20260406a/local-kd-hiber-symbols-20260406a-summary.json and evidence/files/vm-tooling-staging/local-kd-hiber-symbols-20260406a/local-kd-hiber-symbols-20260406a.log and evidence/files/vm-tooling-staging/local-kd-hiber-disasm-20260406a/local-kd-hiber-disasm-20260406a-summary.json and evidence/files/vm-tooling-staging/local-kd-hiber-disasm-20260406a/local-kd-hiber-disasm-20260406a.log and evidence/files/vm-tooling-staging/local-kd-hiber-strings-20260406a/local-kd-hiber-strings-20260406a-summary.json and evidence/files/vm-tooling-staging/local-kd-hiber-strings-20260406a/local-kd-hiber-strings-20260406a.log and research/notes/power-control-hiber-file-size-percent-kvm-local-kd-follow-up-20260406.md",
             "kind": "vm-test",
             "summary": "A debugger-assisted KVM local-KD follow-up resolved the live hibernation symbol family, showed `PopHiberFileSizePercent = 0` on the running guest, resolved `PopHibernatePersiste..."
-          },
-          {
-            "title": "Linux KVM Procmon runtime replay for HiberFileSizePercent",
-            "url": "evidence/files/vm-tooling-staging/hiberfilesizepercent-procmon-kvm-20260407c/hiberfilesizepercent-procmon-kvm-20260407c-summary.json and evidence/files/vm-tooling-staging/hiberfilesizepercent-procmon-kvm-20260407c/hiberfilesizepercent-procmon-kvm-20260407c.txt and evidence/files/vm-tooling-staging/hiberfilesizepercent-procmon-kvm-20260407c/host-review.json and research/notes/power-control-hiber-file-size-percent-kvm-procmon-runtime-20260407.md",
-            "kind": "vm-test",
-            "summary": "A host-driven KVM Procmon replay produced a `267382`-row capture, surfaced adjacent live `Control\\Power` activity through `powercfg.exe` and `System`, but still returned zero di..."
           }
         ]
       },
@@ -9678,7 +10068,7 @@
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 3,
-        "runtime_evidence_strength": 4,
+        "runtime_evidence_strength": 3,
         "rollback_clarity": 5,
         "blast_radius": 2,
         "tweak_suitability": 3,
@@ -9686,7 +10076,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.78,
+        "overall_score": 3.67,
         "next_missing_layer": "intentional-hold"
       }
     },
@@ -9945,6 +10335,12 @@
             "url": "evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json and evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/results.json and research/notes/power-control-docs-first-stepwise-runtime-capture-20260329.md and evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv",
             "kind": "procmon-trace",
             "summary": "The guest-processed stepwise Procmon boot log captured an exact runtime read for LidReliabilityState on RegProbe-Baseline-Clean-20260329. Processes: System."
+          },
+          {
+            "title": "Bounded ETW stackwalk timeout receipt",
+            "url": "evidence/raw/etw-stackwalk/power.control.lid-reliability-state-etw-20260424i/power.control.lid-reliability-state-etw-20260424i-summary.json and evidence/raw/etw-stackwalk/power.control.lid-reliability-state-etw-20260424i/power.control.lid-reliability-state-etw-20260424i-stage.json and evidence/captures/power-control-lid-reliability-state-etw-stackwalk-attempt-20260424.json",
+            "kind": "etw-trace",
+            "summary": "A bounded 2026-04-24 KVM ETW stackwalk retry for LidReliabilityState reached artifact-upload but still timed out before any ETL, XML, or normalized bundle returned to the host...."
           }
         ]
       },
@@ -10357,7 +10753,7 @@
       "debug_override_allowed": true,
       "score_breakdown": {
         "static_evidence_strength": 3,
-        "runtime_evidence_strength": 2,
+        "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 2,
         "tweak_suitability": 2,
@@ -10365,7 +10761,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.44,
+        "overall_score": 3.33,
         "next_missing_layer": "intentional-hold"
       }
     },
@@ -10532,6 +10928,12 @@
             "url": "registry-research-framework/audit/power-control-mega-trigger-v2-status-20260402.json and research/notes/power-control-mega-trigger-v2-status-20260402.md",
             "kind": "vm-test",
             "summary": "The mega-trigger V2 follow-up isolated TtmEnabled and recorded `boot-unsafe` under `DWORD=1`, while sibling HiberbootEnabled and MSDisabled probes on the same pilot family remai..."
+          },
+          {
+            "title": "Bounded KVM ETW stackwalk captures exact TtmEnabled helper query",
+            "url": "evidence/raw/etw-stackwalk/power.control.ttm-enabled-etw-20260424e/power.control.ttm-enabled-etw-20260424e-summary.json and evidence/raw/etw-stackwalk/power.control.ttm-enabled-etw-20260424e/power.control.ttm-enabled-etw-20260424e-stage.json and evidence/raw/etw-stackwalk/power.control.ttm-enabled-etw-20260424e/power.control.ttm-enabled-etw-20260424e.etl and evidence/raw/etw-stackwalk/power.control.ttm-enabled-etw-20260424e/normalized-registry-bundle.json and evidence/captures/power-control-ttm-enabled-etw-stackwalk-20260424.json",
+            "kind": "etw-trace",
+            "summary": "A bounded 2026-04-24 KVM ETW stackwalk run retained ETL, XML, summary, stage, and normalized-bundle artifacts. The retained bundle contains one exact helper-triggered RegQueryVa..."
           }
         ]
       },
@@ -10657,7 +11059,7 @@
       "debug_override_allowed": true,
       "score_breakdown": {
         "static_evidence_strength": 4,
-        "runtime_evidence_strength": 4,
+        "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 2,
         "tweak_suitability": 2,
@@ -10665,7 +11067,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.78,
+        "overall_score": 3.56,
         "next_missing_layer": "intentional-hold"
       }
     },
@@ -11226,10 +11628,17 @@
         ]
       },
       "runtime_proof": {
-        "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced host-ingested ETL/XML artifacts and normalized bundles for 2 target value(s): `DisableTaskOffload`, `SystemResponsiveness`. The QGA-launched `reg.exe query` probe produced exact target RegQueryValue events...",
         "needs_vm_validation": false,
-        "has_runtime_evidence": false,
-        "links": []
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "QGA-first ETW stackwalk probe receipt",
+            "url": "evidence/captures/power-disable-network-power-saving-policy-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507.etl and evidence/raw/etw-stackwalk/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507.etl",
+            "kind": "etw-trace",
+            "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced host-ingested ETL/XML artifacts and normalized bundles for 2 target value(s): `DisableTaskOffload`, `SystemResponsiveness`. T..."
+          }
+        ]
       },
       "upstream_lineage": {
         "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
@@ -11328,10 +11737,17 @@
         ]
       },
       "runtime_proof": {
-        "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced host-ingested ETL/XML artifacts and normalized bundles for 3 target value(s): `DisableTaskOffload`, `SystemResponsiveness`, `NetworkThrottlingIndex`. The QGA-launched `reg.exe query` probe produced exact t...",
         "needs_vm_validation": false,
-        "has_runtime_evidence": false,
-        "links": []
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "QGA-first ETW stackwalk probe receipt",
+            "url": "evidence/captures/power-disable-network-power-saving-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507.etl and evidence/raw/etw-stackwalk/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507.etl and 3 additional raw artifact refs listed in the receipt",
+            "kind": "etw-trace",
+            "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced host-ingested ETL/XML artifacts and normalized bundles for 3 target value(s): `DisableTaskOffload`, `SystemResponsiveness`, `..."
+          }
+        ]
       },
       "upstream_lineage": {
         "summary": "No upstream nohuto source link is attached to this record.",
@@ -11409,10 +11825,17 @@
         ]
       },
       "runtime_proof": {
-        "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced host-ingested ETL/XML artifacts and normalized bundles for 1 target value(s): `PowerThrottlingOff`. The QGA-launched `reg.exe query` probe produced exact target RegQueryValue events for 1/1 target(s), clea...",
         "needs_vm_validation": false,
-        "has_runtime_evidence": false,
-        "links": []
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "QGA-first ETW stackwalk probe receipt",
+            "url": "evidence/captures/power-disable-power-throttling-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/power-disable-power-throttling-powerthrottlingoff-etw-qga-unblock-20260507/power-disable-power-throttling-powerthrottlingoff-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/power-disable-power-throttling-powerthrottlingoff-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/power-disable-power-throttling-powerthrottlingoff-etw-qga-unblock-20260507/power-disable-power-throttling-powerthrottlingoff-etw-qga-unblock-20260507.etl",
+            "kind": "etw-trace",
+            "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced host-ingested ETL/XML artifacts and normalized bundles for 1 target value(s): `PowerThrottlingOff`. The QGA-launched `reg.exe..."
+          }
+        ]
       },
       "upstream_lineage": {
         "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
@@ -11689,6 +12112,12 @@
             "url": "evidence/captures/power-disable-windows-search-service-qga-20260507.json and evidence/raw/service-inspection/power-disable-windows-search-service-qga-20260507/service-inspection.json",
             "kind": "vm-test",
             "summary": "A 2026-05-07 non-mutating QGA service inspection captured `sc qc WSearch`, the backing `HKLM\\SYSTEM\\CurrentControlSet\\Services\\WSearch` / `Start` value, and PowerShell `Win32_Se..."
+          },
+          {
+            "title": "KVM ETW stage receipt for WSearch backing registry key",
+            "url": "evidence/captures/power-disable-windows-search-etw-stackwalk-attempt-20260424.json and evidence/raw/etw-stackwalk/power-disable-windows-search-etw-20260424-batch1/power-disable-windows-search-etw-20260424-batch1-stage.json",
+            "kind": "etw-trace",
+            "summary": "A bounded 2026-04-24 ETW retry for the WSearch backing registry key reached artifact-upload and only retained a stage receipt before the hard timeout fired."
           },
           {
             "title": "Guest Ghidra launch receipt for WSearch",
@@ -12384,16 +12813,16 @@
             "summary": "A clean VM baseline export confirmed WatchdogResumeTimeout = 120 and WatchdogSleepTimeout = 300 under Session Manager\\Power, with adjacent PowerSettingProfile = 0."
           },
           {
-            "title": "Linux KVM local-KD value follow-up for the watchdog timeout pair",
-            "url": "evidence/files/vm-tooling-staging/local-kd-watchdog-values-20260407a/local-kd-watchdog-values-20260407a-summary.json and evidence/files/vm-tooling-staging/local-kd-watchdog-values-20260407a/local-kd-watchdog-values-20260407a.log and evidence/files/vm-tooling-staging/local-kd-watchdog-sleep-20260407a/local-kd-watchdog-sleep-20260407a-summary.json and evidence/files/vm-tooling-staging/local-kd-watchdog-sleep-20260407a/local-kd-watchdog-sleep-20260407a.log and research/notes/power-session-watchdog-timeouts-kvm-local-kd-follow-up-20260407.md",
-            "kind": "vm-test",
-            "summary": "A debugger-assisted KVM local-KD follow-up resolved the live watchdog globals on the running guest, read `PopWatchdogResumeTimeout = 120` and `PopWatchdogSleepTimeout = 300`, an..."
+            "title": "Win25H2Clean reboot-verified watchdog timeout boot trace",
+            "url": "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/summary.json and evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/watchdog-timeouts-boot.etl.md and research/notes/power-session-watchdog-timeouts-boot-trace-20260328.md",
+            "kind": "etw-trace",
+            "summary": "A successful host-driven boot trace on the current visible-shell baseline confirmed a real reboot cycle, preserved the same 120/300 values after boot, and kept shell health intact."
           },
           {
-            "title": "Linux KVM local-KD disassembly for the watchdog timeout path",
-            "url": "evidence/files/vm-tooling-staging/local-kd-watchdog-disasm-20260407a/local-kd-watchdog-disasm-20260407a-summary.json and evidence/files/vm-tooling-staging/local-kd-watchdog-disasm-20260407a/local-kd-watchdog-disasm-20260407a.log and research/notes/power-session-watchdog-timeouts-kvm-local-kd-disasm-follow-up-20260407.md",
-            "kind": "vm-test",
-            "summary": "A debugger-assisted KVM local-KD disassembly follow-up showed `PopComputeWatchdogTimeout` selecting directly between `PopWatchdogSleepTimeout` and `PopWatchdogResumeTimeout` on..."
+            "title": "Host-side ETL registry review for Session Manager Power",
+            "url": "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/registry-dump-watchdog-session-manager-power.txt and research/notes/power-session-watchdog-timeouts-etl-registry-review-20260328.md",
+            "kind": "etw-trace",
+            "summary": "A filtered xperf dump of the successful boot trace proved repeated boot-time access to Session Manager\\Power by System and later svchost.exe, with adjacent SystemPowerPolicy and..."
           }
         ]
       },
@@ -12415,7 +12844,7 @@
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 4,
-        "runtime_evidence_strength": 4,
+        "runtime_evidence_strength": 3,
         "rollback_clarity": 5,
         "blast_radius": 2,
         "tweak_suitability": 3,
@@ -12423,7 +12852,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.89,
+        "overall_score": 3.78,
         "next_missing_layer": "intentional-hold"
       }
     },
@@ -12512,7 +12941,7 @@
       "debug_override_allowed": true,
       "score_breakdown": {
         "static_evidence_strength": 4,
-        "runtime_evidence_strength": 3,
+        "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 2,
         "tweak_suitability": 2,
@@ -12520,7 +12949,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.67,
+        "overall_score": 3.56,
         "next_missing_layer": "intentional-hold"
       }
     },
@@ -14382,10 +14811,22 @@
         ]
       },
       "runtime_proof": {
-        "summary": "A same-day fast guest Ghidra retry for `TurnOffWindowsCopilot` failed in `ensure-admin-shell` with a bounded timeout, so no xref bundle reached the host.",
+        "summary": "A bounded 2026-04-27 ETW retry for `TurnOffWindowsCopilot` never reached trace collection. QGA guest-exec failed during guest-dir setup, the runner fell back to send-key launch, and the fallback still timed out in `ensure-admin-shell` before any ETW artifac...",
         "needs_vm_validation": false,
         "has_runtime_evidence": true,
         "links": [
+          {
+            "title": "KVM ETW summary receipt for TurnOffWindowsCopilot",
+            "url": "evidence/captures/privacy-disable-copilot-etw-stackwalk-attempt-20260427.json and evidence/raw/etw-stackwalk/privacy-disable-copilot-etw-20260427b/privacy-disable-copilot-etw-20260427b-summary.json",
+            "kind": "etw-trace",
+            "summary": "A bounded 2026-04-27 ETW retry for `TurnOffWindowsCopilot` never reached trace collection. QGA guest-exec failed during guest-dir setup, the runner fell back to send-key launch,..."
+          },
+          {
+            "title": "QGA-first ETW stackwalk runtime receipt for TurnOffWindowsCopilot",
+            "url": "evidence/captures/privacy-disable-copilot-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/privacy-disable-copilot-etw-qga-unblock-20260507c/privacy-disable-copilot-etw-qga-unblock-20260507c-summary.json and evidence/raw/etw-stackwalk/privacy-disable-copilot-etw-qga-unblock-20260507c/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/privacy-disable-copilot-etw-qga-unblock-20260507c/privacy-disable-copilot-etw-qga-unblock-20260507c.etl",
+            "kind": "etw-trace",
+            "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun cleared the earlier guest-control blocker, produced ETL/XML artifacts, and normalized 5534 registry events with 1349 caller-stack even..."
+          },
           {
             "title": "Guest Ghidra launch receipt for TurnOffWindowsCopilot",
             "url": "evidence/raw/ghidra/ghidra-privacy-disable-copilot-20260427b/summary.json",
@@ -14468,10 +14909,17 @@
         ]
       },
       "runtime_proof": {
-        "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced host-ingested ETL/XML artifacts and normalized bundles for 1 target value(s): `EnableCdp`. The QGA-launched `reg.exe query` probe produced exact target RegQueryValue events for 1/1 target(s), clearing the...",
         "needs_vm_validation": false,
-        "has_runtime_evidence": false,
-        "links": []
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "QGA-first ETW stackwalk probe receipt",
+            "url": "evidence/captures/privacy-disable-cross-device-experiences-policy-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507.etl",
+            "kind": "etw-trace",
+            "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced host-ingested ETL/XML artifacts and normalized bundles for 1 target value(s): `EnableCdp`. The QGA-launched `reg.exe query` p..."
+          }
+        ]
       },
       "upstream_lineage": {
         "summary": "No upstream nohuto source link is attached to this record.",
@@ -14556,6 +15004,12 @@
             "url": "evidence/files/vm-tooling-staging/crossdevice_resume_probe.csv",
             "kind": "vm-test",
             "summary": "Win25H2Clean guest Procmon capture shows CrossDeviceResume.exe launching from the MicrosoftWindows.Client.CBS app tile, confirming the runtime surface is present. This trigger d..."
+          },
+          {
+            "title": "QGA-first ETW stackwalk probe receipt",
+            "url": "evidence/captures/privacy-disable-cross-device-experiences-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507.etl",
+            "kind": "etw-trace",
+            "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced host-ingested ETL/XML artifacts and normalized bundles for 1 target value(s): `EnableCdp`. The QGA-launched `reg.exe query` p..."
           }
         ]
       },
@@ -14584,7 +15038,7 @@
       "debug_override_allowed": true,
       "score_breakdown": {
         "static_evidence_strength": 5,
-        "runtime_evidence_strength": 3,
+        "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 3,
         "tweak_suitability": 2,
@@ -14592,7 +15046,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.67,
+        "overall_score": 3.56,
         "next_missing_layer": "archived"
       }
     },
@@ -15216,10 +15670,22 @@
         ]
       },
       "runtime_proof": {
-        "summary": "A same-day fast guest Ghidra retry for `AllowFindMyDevice` failed in `ensure-admin-shell` with a bounded timeout, so no xref bundle reached the host.",
+        "summary": "A bounded 2026-04-27 ETW retry for `AllowFindMyDevice` never reached trace collection because QGA guest-exec failed during guest-dir setup and the send-key fallback still timed out in `ensure-admin-shell`.",
         "needs_vm_validation": false,
         "has_runtime_evidence": true,
         "links": [
+          {
+            "title": "KVM ETW summary receipt for AllowFindMyDevice",
+            "url": "evidence/captures/privacy-disable-find-my-device-etw-stackwalk-attempt-20260427.json and evidence/raw/etw-stackwalk/privacy-disable-find-my-device-etw-20260427a/privacy-disable-find-my-device-etw-20260427a-summary.json",
+            "kind": "etw-trace",
+            "summary": "A bounded 2026-04-27 ETW retry for `AllowFindMyDevice` never reached trace collection because QGA guest-exec failed during guest-dir setup and the send-key fallback still timed..."
+          },
+          {
+            "title": "QGA-first ETW stackwalk runtime receipt for AllowFindMyDevice",
+            "url": "evidence/captures/privacy-disable-find-my-device-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/privacy-disable-find-my-device-etw-qga-unblock-20260507/privacy-disable-find-my-device-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/privacy-disable-find-my-device-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/privacy-disable-find-my-device-etw-qga-unblock-20260507/privacy-disable-find-my-device-etw-qga-unblock-20260507.etl",
+            "kind": "etw-trace",
+            "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4531 registry events with 571 caller-stack events. The bundle contains an exact helper-trigg..."
+          },
           {
             "title": "Guest Ghidra launch receipt for AllowFindMyDevice",
             "url": "evidence/raw/ghidra/ghidra-privacy-disable-find-my-device-20260427a/summary.json",
@@ -17684,10 +18150,22 @@
         ]
       },
       "runtime_proof": {
-        "summary": "A same-day fast guest Ghidra retry for `DisableUAR` failed in `ensure-admin-shell` with a bounded timeout, so no xref bundle reached the host.",
+        "summary": "A bounded 2026-04-27 ETW retry for `DisableUAR` never reached trace collection because QGA guest-exec failed during guest-dir setup and the send-key fallback still timed out in `ensure-admin-shell`.",
         "needs_vm_validation": false,
         "has_runtime_evidence": true,
         "links": [
+          {
+            "title": "KVM ETW summary receipt for DisableUAR",
+            "url": "evidence/captures/privacy-disable-steps-recorder-etw-stackwalk-attempt-20260427.json and evidence/raw/etw-stackwalk/privacy-disable-steps-recorder-etw-20260427a/privacy-disable-steps-recorder-etw-20260427a-summary.json",
+            "kind": "etw-trace",
+            "summary": "A bounded 2026-04-27 ETW retry for `DisableUAR` never reached trace collection because QGA guest-exec failed during guest-dir setup and the send-key fallback still timed out in..."
+          },
+          {
+            "title": "QGA-first ETW stackwalk runtime receipt for DisableUAR",
+            "url": "evidence/captures/privacy-disable-steps-recorder-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/privacy-disable-steps-recorder-etw-qga-unblock-20260507/privacy-disable-steps-recorder-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/privacy-disable-steps-recorder-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/privacy-disable-steps-recorder-etw-qga-unblock-20260507/privacy-disable-steps-recorder-etw-qga-unblock-20260507.etl",
+            "kind": "etw-trace",
+            "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4468 registry events with 526 caller-stack events. The bundle contains an exact helper-trigg..."
+          },
           {
             "title": "Guest Ghidra launch receipt for DisableUAR",
             "url": "evidence/raw/ghidra/ghidra-privacy-disable-steps-recorder-20260427a/summary.json",
@@ -17770,10 +18248,17 @@
         ]
       },
       "runtime_proof": {
-        "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced host-ingested ETL/XML artifacts and normalized bundles for 7 HKCU-oriented target value(s): `DisableThirdPartySuggestions`, `DisableWindowsSpotlightOnSettings`, `DisableWindowsSpotlightWindowsWelcomeExperi...",
         "needs_vm_validation": false,
-        "has_runtime_evidence": false,
-        "links": []
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "QGA-first ETW stackwalk HKCU probe receipt",
+            "url": "evidence/captures/privacy-disable-suggestions-cdm-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/privacy-disable-suggestions-policy-disablethirdpartysuggestions-etw-qga-unblock-20260507/privacy-disable-suggestions-policy-disablethirdpartysuggestions-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/privacy-disable-suggestions-policy-disablethirdpartysuggestions-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/privacy-disable-suggestions-policy-disablethirdpartysuggestions-etw-qga-unblock-20260507/privacy-disable-suggestions-policy-disablethirdpartysuggestions-etw-qga-unblock-20260507.etl and evidence/raw/etw-stackwalk/privacy-disable-suggestions-policy-disablewindowsspotlightonsettings-etw-qga-unblock-20260507/privacy-disable-suggestions-policy-disablewindowsspotlightonsettings-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/privacy-disable-suggestions-policy-disablewindowsspotlightonsettings-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/privacy-disable-suggestions-policy-disablewindowsspotlightonsettings-etw-qga-unblock-20260507/privacy-disable-suggestions-policy-disablewindowsspotlightonsettings-etw-qga-unblock-20260507.etl and 15 additional raw artifact refs listed in the receipt",
+            "kind": "etw-trace",
+            "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced host-ingested ETL/XML artifacts and normalized bundles for 7 HKCU-oriented target value(s): `DisableThirdPartySuggestions`, `..."
+          }
+        ]
       },
       "upstream_lineage": {
         "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
@@ -17866,10 +18351,17 @@
         ]
       },
       "runtime_proof": {
-        "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced host-ingested ETL/XML artifacts and normalized bundles for 3 HKCU-oriented target value(s): `DisableThirdPartySuggestions`, `DisableWindowsSpotlightOnSettings`, `DisableWindowsSpotlightWindowsWelcomeExperi...",
         "needs_vm_validation": false,
-        "has_runtime_evidence": false,
-        "links": []
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "QGA-first ETW stackwalk HKCU probe receipt",
+            "url": "evidence/captures/privacy-disable-suggestions-policy-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/privacy-disable-suggestions-policy-disablethirdpartysuggestions-etw-qga-unblock-20260507/privacy-disable-suggestions-policy-disablethirdpartysuggestions-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/privacy-disable-suggestions-policy-disablethirdpartysuggestions-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/privacy-disable-suggestions-policy-disablethirdpartysuggestions-etw-qga-unblock-20260507/privacy-disable-suggestions-policy-disablethirdpartysuggestions-etw-qga-unblock-20260507.etl and evidence/raw/etw-stackwalk/privacy-disable-suggestions-policy-disablewindowsspotlightonsettings-etw-qga-unblock-20260507/privacy-disable-suggestions-policy-disablewindowsspotlightonsettings-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/privacy-disable-suggestions-policy-disablewindowsspotlightonsettings-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/privacy-disable-suggestions-policy-disablewindowsspotlightonsettings-etw-qga-unblock-20260507/privacy-disable-suggestions-policy-disablewindowsspotlightonsettings-etw-qga-unblock-20260507.etl and 3 additional raw artifact refs listed in the receipt",
+            "kind": "etw-trace",
+            "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced host-ingested ETL/XML artifacts and normalized bundles for 3 HKCU-oriented target value(s): `DisableThirdPartySuggestions`, `..."
+          }
+        ]
       },
       "upstream_lineage": {
         "summary": "No upstream nohuto source link is attached to this record.",
@@ -19014,10 +19506,22 @@
         ]
       },
       "runtime_proof": {
-        "summary": "A same-day fast guest Ghidra retry for `DontDisplayUserName` failed in `ensure-admin-shell` with a bounded timeout, so no xref bundle reached the host.",
+        "summary": "A bounded 2026-04-27 ETW retry for `DontDisplayUserName` never reached trace collection. QGA guest-exec failed during guest-dir setup, the runner fell back to send-key launch, and the fallback still timed out in `ensure-admin-shell` before any ETW artifact...",
         "needs_vm_validation": false,
         "has_runtime_evidence": true,
         "links": [
+          {
+            "title": "KVM ETW summary receipt for DontDisplayUserName",
+            "url": "evidence/captures/privacy-hide-username-at-signin-etw-stackwalk-attempt-20260427.json and evidence/raw/etw-stackwalk/privacy-hide-username-at-signin-etw-20260427a/privacy-hide-username-at-signin-etw-20260427a-summary.json",
+            "kind": "etw-trace",
+            "summary": "A bounded 2026-04-27 ETW retry for `DontDisplayUserName` never reached trace collection. QGA guest-exec failed during guest-dir setup, the runner fell back to send-key launch, a..."
+          },
+          {
+            "title": "QGA-first ETW stackwalk runtime receipt for DontDisplayUserName",
+            "url": "evidence/captures/privacy-hide-username-at-signin-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/privacy-hide-username-at-signin-etw-qga-unblock-20260507/privacy-hide-username-at-signin-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/privacy-hide-username-at-signin-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/privacy-hide-username-at-signin-etw-qga-unblock-20260507/privacy-hide-username-at-signin-etw-qga-unblock-20260507.etl",
+            "kind": "etw-trace",
+            "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4776 registry events with 685 caller-stack events. The bundle contains an exact helper-trigg..."
+          },
           {
             "title": "Guest Ghidra launch receipt for DontDisplayUserName",
             "url": "evidence/raw/ghidra/ghidra-privacy-hide-username-at-signin-20260427a/summary.json",
@@ -19179,10 +19683,22 @@
         ]
       },
       "runtime_proof": {
-        "summary": "A same-day fast guest Ghidra retry for `LimitDumpCollection` failed in `ensure-admin-shell` with a bounded timeout, so no xref bundle reached the host.",
+        "summary": "A bounded 2026-04-27 ETW retry for `LimitDumpCollection` never reached trace collection because QGA guest-exec failed during guest-dir setup and the send-key fallback still timed out in `ensure-admin-shell`.",
         "needs_vm_validation": false,
         "has_runtime_evidence": true,
         "links": [
+          {
+            "title": "KVM ETW summary receipt for LimitDumpCollection",
+            "url": "evidence/captures/privacy-limit-dump-collection-etw-stackwalk-attempt-20260427.json and evidence/raw/etw-stackwalk/privacy-limit-dump-collection-etw-20260427a/privacy-limit-dump-collection-etw-20260427a-summary.json",
+            "kind": "etw-trace",
+            "summary": "A bounded 2026-04-27 ETW retry for `LimitDumpCollection` never reached trace collection because QGA guest-exec failed during guest-dir setup and the send-key fallback still time..."
+          },
+          {
+            "title": "QGA-first ETW stackwalk runtime receipt for LimitDumpCollection",
+            "url": "evidence/captures/privacy-limit-dump-collection-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/privacy-limit-dump-collection-etw-qga-unblock-20260507/privacy-limit-dump-collection-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/privacy-limit-dump-collection-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/privacy-limit-dump-collection-etw-qga-unblock-20260507/privacy-limit-dump-collection-etw-qga-unblock-20260507.etl",
+            "kind": "etw-trace",
+            "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4399 registry events with 525 caller-stack events. The bundle contains an exact helper-trigg..."
+          },
           {
             "title": "Guest Ghidra launch receipt for LimitDumpCollection",
             "url": "evidence/raw/ghidra/ghidra-privacy-limit-dump-collection-20260427a/summary.json",
@@ -20419,10 +20935,22 @@
         ]
       },
       "runtime_proof": {
-        "summary": "A same-day fast guest Ghidra retry for `EnableVirtualizationBasedSecurity` failed in `ensure-admin-shell` with a bounded timeout, so no xref bundle reached the host.",
+        "summary": "A bounded 2026-04-27 ETW retry for `EnableVirtualizationBasedSecurity` never reached trace collection. QGA guest-exec failed during guest-dir setup, the runner fell back to send-key launch, and the fallback still timed out in `ensure-admin-shell` before any...",
         "needs_vm_validation": false,
         "has_runtime_evidence": true,
         "links": [
+          {
+            "title": "KVM ETW summary receipt for EnableVirtualizationBasedSecurity",
+            "url": "evidence/captures/security-disable-vbs-etw-stackwalk-attempt-20260427.json and evidence/raw/etw-stackwalk/security-disable-vbs-etw-20260427a/security-disable-vbs-etw-20260427a-summary.json",
+            "kind": "etw-trace",
+            "summary": "A bounded 2026-04-27 ETW retry for `EnableVirtualizationBasedSecurity` never reached trace collection. QGA guest-exec failed during guest-dir setup, the runner fell back to send..."
+          },
+          {
+            "title": "QGA-first ETW stackwalk runtime receipt for EnableVirtualizationBasedSecurity",
+            "url": "evidence/captures/security-disable-vbs-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/security-disable-vbs-etw-qga-unblock-20260507/security-disable-vbs-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/security-disable-vbs-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/security-disable-vbs-etw-qga-unblock-20260507/security-disable-vbs-etw-qga-unblock-20260507.etl",
+            "kind": "etw-trace",
+            "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4396 registry events with 525 caller-stack events. The QGA-launched helper targeted `HKLM\\SO..."
+          },
           {
             "title": "Guest Ghidra launch receipt for EnableVirtualizationBasedSecurity",
             "url": "evidence/raw/ghidra/ghidra-security-disable-vbs-20260427a/summary.json",
@@ -20928,6 +21456,12 @@
             "url": "evidence/raw/procmon/security.disable-defender-sample-submission/spynet-ui-state2.txt",
             "kind": "procmon-trace",
             "summary": "After writing SpyNetReporting = 2 on the Defender Spynet policy path, SecurityHealthService.exe queried the same value and read Data: 2 directly from the policy branch."
+          },
+          {
+            "title": "QGA-first ETW stackwalk probe receipt",
+            "url": "evidence/captures/security-enable-defender-maps-advanced-membership-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/security-enable-defender-maps-advanced-membership-spynetreporting-etw-qga-unblock-20260507/security-enable-defender-maps-advanced-membership-spynetreporting-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/security-enable-defender-maps-advanced-membership-spynetreporting-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/security-enable-defender-maps-advanced-membership-spynetreporting-etw-qga-unblock-20260507/security-enable-defender-maps-advanced-membership-spynetreporting-etw-qga-unblock-20260507.etl",
+            "kind": "etw-trace",
+            "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced host-ingested ETL/XML artifacts and normalized bundles for 1 target value(s): `SpyNetReporting`. The QGA-launched `reg.exe qu..."
           }
         ]
       },
@@ -21084,10 +21618,17 @@
         ]
       },
       "runtime_proof": {
-        "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced host-ingested ETL/XML artifacts and normalized bundles for 1 target value(s): `Enabled`. The QGA-launched `reg.exe query` probe produced exact target RegQueryValue events for 1/1 target(s), clearing the ea...",
         "needs_vm_validation": false,
-        "has_runtime_evidence": false,
-        "links": []
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "QGA-first ETW stackwalk probe receipt",
+            "url": "evidence/captures/security-enable-sudo-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/security-enable-sudo-enabled-etw-qga-unblock-20260507/security-enable-sudo-enabled-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/security-enable-sudo-enabled-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/security-enable-sudo-enabled-etw-qga-unblock-20260507/security-enable-sudo-enabled-etw-qga-unblock-20260507.etl",
+            "kind": "etw-trace",
+            "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced host-ingested ETL/XML artifacts and normalized bundles for 1 target value(s): `Enabled`. The QGA-launched `reg.exe query` pro..."
+          }
+        ]
       },
       "upstream_lineage": {
         "summary": "No upstream nohuto source link is attached to this record.",
@@ -21768,10 +22309,22 @@
         ]
       },
       "runtime_proof": {
-        "summary": "A same-day fast guest Ghidra retry for `DisplayParameters` failed in `ensure-admin-shell` with a bounded timeout, so no xref bundle reached the host.",
+        "summary": "A bounded 2026-04-27 ETW retry for `DisplayParameters` never reached trace collection. QGA guest-exec failed during guest-dir setup, the runner fell back to send-key launch, and the fallback still timed out in `ensure-admin-shell` before any ETW artifact re...",
         "needs_vm_validation": false,
         "has_runtime_evidence": true,
         "links": [
+          {
+            "title": "KVM ETW summary receipt for DisplayParameters",
+            "url": "evidence/captures/system-bsod-display-parameters-etw-stackwalk-attempt-20260427.json and evidence/raw/etw-stackwalk/system-bsod-display-parameters-etw-20260427a/system-bsod-display-parameters-etw-20260427a-summary.json",
+            "kind": "etw-trace",
+            "summary": "A bounded 2026-04-27 ETW retry for `DisplayParameters` never reached trace collection. QGA guest-exec failed during guest-dir setup, the runner fell back to send-key launch, and..."
+          },
+          {
+            "title": "QGA-first ETW stackwalk runtime receipt for DisplayParameters",
+            "url": "evidence/captures/system-bsod-display-parameters-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/system-bsod-display-parameters-etw-qga-unblock-20260507/system-bsod-display-parameters-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/system-bsod-display-parameters-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/system-bsod-display-parameters-etw-qga-unblock-20260507/system-bsod-display-parameters-etw-qga-unblock-20260507.etl",
+            "kind": "etw-trace",
+            "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 5139 registry events with 1181 caller-stack events. The bundle contains an exact helper-trig..."
+          },
           {
             "title": "Guest Ghidra launch receipt for DisplayParameters",
             "url": "evidence/raw/ghidra/ghidra-system-bsod-display-parameters-20260427a/summary.json",
@@ -22529,6 +23082,12 @@
             "url": "evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json",
             "kind": "runtime-diff",
             "summary": "Guest reversible probe toggled JPEGImportQuality to 100 and restored the missing baseline on HKCU\\Control Panel\\Desktop, confirming the current app write and rollback cycle."
+          },
+          {
+            "title": "Win25H2Clean v3.1 runtime lane - JPEG wallpaper apply",
+            "url": "evidence/files/vm-tooling-staging/jpeg-import-quality-runtime-20260327-124349/summary.json and evidence/files/vm-tooling-staging/jpeg-import-quality-runtime-20260327-124349/jpeg-import-quality-runtime.etl.md",
+            "kind": "etw-trace",
+            "summary": "A v3.1 runtime lane set JPEGImportQuality = 100, invoked the shell wallpaper apply path on a JPEG working copy, captured a WPR GeneralProfile trace placeholder, restored the mis..."
           }
         ]
       },
@@ -22617,10 +23176,16 @@
             "summary": "Guest reversible probe on Win25H2Clean confirmed RestartApps transitions through missing, 1, and 0 before restoring to missing."
           },
           {
-            "title": "Guest Ghidra launch receipt for RestartApps",
-            "url": "evidence/raw/ghidra/ghidra-system-disable-restartable-apps-20260427b/summary.json",
-            "kind": "vm-test",
-            "summary": "A same-day fast guest Ghidra retry for `RestartApps` failed in `ensure-admin-shell` with a bounded timeout, so no xref bundle reached the host."
+            "title": "KVM ETW summary receipt for RestartApps",
+            "url": "evidence/captures/system-disable-restartable-apps-etw-stackwalk-attempt-20260427.json and evidence/raw/etw-stackwalk/system-disable-restartable-apps-etw-20260427b/system-disable-restartable-apps-etw-20260427b-summary.json",
+            "kind": "etw-trace",
+            "summary": "A bounded 2026-04-27 ETW retry for `RestartApps` never reached trace collection. QGA guest-exec failed during guest-dir setup, the runner fell back to send-key launch, and the f..."
+          },
+          {
+            "title": "QGA-first ETW stackwalk runtime receipt for RestartApps",
+            "url": "evidence/captures/system-disable-restartable-apps-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/system-disable-restartable-apps-etw-qga-unblock-20260507/system-disable-restartable-apps-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/system-disable-restartable-apps-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/system-disable-restartable-apps-etw-qga-unblock-20260507/system-disable-restartable-apps-etw-qga-unblock-20260507.etl",
+            "kind": "etw-trace",
+            "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4490 registry events with 524 caller-stack events. The QGA-launched helper targeted `HKCU\\So..."
           }
         ]
       },
@@ -23295,6 +23860,12 @@
             "url": "evidence/raw/procmon/system.disable-startup-delay/procmon-startup-delay.pml.md",
             "kind": "procmon-trace",
             "summary": "The record keeps the Procmon layer as the repo-friendly placeholder for the original Win25H2Clean Explorer shell-restart capture while StartupDelayInMSec was toggled to 0 and re..."
+          },
+          {
+            "title": "Win25H2Clean WPR trace - Explorer shell restart with StartupDelayInMSec missing and 0",
+            "url": "research/notes/startup-delay-wpr-trace-20260326.md",
+            "kind": "wpr-trace",
+            "summary": "A bounded WPR lane captured Explorer restarts for both the missing baseline and the app's value 0, and the shell recovered cleanly in both states."
           }
         ]
       },
@@ -23882,10 +24453,16 @@
             "summary": "Guest-side reversible probe on Win25H2Clean confirmed HwSchMode transitions through missing, 2, and 1, then restores to missing on this build."
           },
           {
-            "title": "Guest Ghidra launch receipt for HwSchMode",
-            "url": "evidence/raw/ghidra/ghidra-system-enable-hags-20260427b/summary.json",
-            "kind": "vm-test",
-            "summary": "A same-day fast guest Ghidra retry for `HwSchMode` failed in `ensure-admin-shell` with a bounded timeout, so no xref bundle reached the host."
+            "title": "KVM ETW summary receipt for HwSchMode",
+            "url": "evidence/captures/system-enable-hags-etw-stackwalk-attempt-20260427.json and evidence/raw/etw-stackwalk/system-enable-hags-etw-20260427b/system-enable-hags-etw-20260427b-summary.json",
+            "kind": "etw-trace",
+            "summary": "A bounded 2026-04-27 ETW retry for `HwSchMode` never reached trace collection. QGA guest-exec failed during guest-dir setup, the runner fell back to send-key launch, and the fal..."
+          },
+          {
+            "title": "QGA-first ETW stackwalk runtime receipt for HwSchMode",
+            "url": "evidence/captures/system-enable-hags-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/system-enable-hags-etw-qga-unblock-20260507/system-enable-hags-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/system-enable-hags-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/system-enable-hags-etw-qga-unblock-20260507/system-enable-hags-etw-qga-unblock-20260507.etl",
+            "kind": "etw-trace",
+            "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4551 registry events with 570 caller-stack events. The bundle contains an exact helper-trigg..."
           }
         ]
       },
@@ -24036,10 +24613,16 @@
         ]
       },
       "runtime_proof": {
-        "summary": "A clean VM baseline export confirmed AdditionalCriticalWorkerThreads = 0 and AdditionalDelayedWorkerThreads = 0 under Session Manager\\Executive, with UuidSequenceNumber also present as adjacent context.",
+        "summary": "A tools-hardened lightweight ETW lane on RegProbe-Baseline-ToolsHardened-20260330 used a concurrent I/O and process-burst trigger and produced exact RegQueryValue hits for both AdditionalCriticalWorkerThreads and AdditionalDelayedWorkerThreads, while shell...",
         "needs_vm_validation": false,
         "has_runtime_evidence": true,
         "links": [
+          {
+            "title": "Tools-hardened lightweight ETW runtime follow-up for the Executive worker-thread pair",
+            "url": "evidence/files/vm-tooling-staging/executive-worker-threads-lightweight-runtime-20260330-122422/summary.json and evidence/files/vm-tooling-staging/executive-worker-threads-lightweight-runtime-20260330-122422/system-executive-additional-worker-threads/summary.json and research/notes/system-executive-additional-worker-threads-lightweight-runtime-20260330.md",
+            "kind": "etw-trace",
+            "summary": "A tools-hardened lightweight ETW lane on RegProbe-Baseline-ToolsHardened-20260330 used a concurrent I/O and process-burst trigger and produced exact RegQueryValue hits for both..."
+          },
           {
             "title": "Win25H2Clean Session Manager Executive baseline export",
             "url": "evidence/files/vm-tooling-staging/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.reg and evidence/files/vm-tooling-staging/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.txt",
@@ -24047,16 +24630,10 @@
             "summary": "A clean VM baseline export confirmed AdditionalCriticalWorkerThreads = 0 and AdditionalDelayedWorkerThreads = 0 under Session Manager\\Executive, with UuidSequenceNumber also pre..."
           },
           {
-            "title": "Procmon boot-log review for the Executive worker-thread pair",
-            "url": "evidence/files/vm-tooling-staging/executive-worker-threads-procmon-bootlog-20260328-172645/summary.json and evidence/files/vm-tooling-staging/executive-worker-threads-procmon-bootlog-20260328-172645/summary-collect.json and research/notes/system-executive-additional-worker-threads-procmon-bootlog-20260328.md",
-            "kind": "procmon-trace",
-            "summary": "A real Procmon boot-log lane completed cleanly on the RegProbe baseline, produced a PML plus CSV, and still returned zero filtered hits for AdditionalCriticalWorkerThreads, Addi..."
-          },
-          {
-            "title": "Shell-safe post-boot stress trigger for the Executive worker-thread pair",
-            "url": "evidence/files/vm-tooling-staging/executive-worker-threads-stress-20260328-184856/summary.json and evidence/files/vm-tooling-staging/executive-worker-threads-stress-20260328-184856/executive-worker-threads-stress.txt and research/notes/system-executive-additional-worker-threads-stress-trigger-20260328.md",
-            "kind": "procmon-trace",
-            "summary": "A shell-safe post-boot stress trigger lane combined service enumeration, event-log enumeration, CIM service export, and parallel service and file pressure on the clean RegProbe..."
+            "title": "Bounded host-side ETL review for Session Manager Executive",
+            "url": "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/watchdog-timeouts-boot.etl.md and evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/registry-dump-session-manager-executive.txt and research/notes/system-executive-additional-worker-threads-etl-registry-review-20260328.md",
+            "kind": "etw-trace",
+            "summary": "A bounded host-side ETL extract from the successful boot trace proved early-boot access to Session Manager\\Executive by System (PID 4) and captured adjacent UuidSequenceNumber q..."
           }
         ]
       },
@@ -24151,10 +24728,10 @@
             "summary": "The 96-key phase-0 live batch confirmed UuidSequenceNumber exists on the clean baseline with observed preview value 25272111."
           },
           {
-            "title": "KVM Procmon UUID / RPC / COM replay for UuidSequenceNumber",
-            "url": "evidence/files/vm-tooling-staging/uuidsequence-procmon-kvm-20260406a/uuidsequence-procmon-kvm-20260406a.txt and evidence/files/vm-tooling-staging/uuidsequence-procmon-kvm-20260406a/uuidsequence-procmon-kvm-20260406a-summary.json and research/notes/system-executive-uuid-sequence-number-kvm-procmon-runtime-20260406.md",
-            "kind": "procmon-trace",
-            "summary": "A KVM Procmon replay of the UUID / RPC / COM trigger family exported 286763 rows on the working guest and still found zero `Session Manager\\Executive` or `UuidSequenceNumber` hits."
+            "title": "Bounded Executive ETL review with adjacent UuidSequenceNumber activity",
+            "url": "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/watchdog-timeouts-boot.etl.md and evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/registry-dump-session-manager-executive.txt and research/notes/system-executive-additional-worker-threads-etl-registry-review-20260328.md",
+            "kind": "etw-trace",
+            "summary": "A bounded host-side ETL extract from the successful boot trace showed System (PID 4) querying and later setting UuidSequenceNumber during early boot in the Session Manager\\Execu..."
           }
         ]
       },
@@ -24832,16 +25409,16 @@
             "summary": "The 96-key existence batch confirmed AllowRemoteDASD exists on the clean baseline at the intended Session Manager I/O path with observed value 0."
           },
           {
+            "title": "Path-aware lightweight ETW follow-up for AllowRemoteDASD",
+            "url": "evidence/files/path-aware/path-aware-runtime-20260330-220218/summary.json and evidence/files/path-aware/path-aware-runtime-20260330-220218/system-io-allow-remote-dasd/summary.json",
+            "kind": "etw-trace",
+            "summary": "The tools-hardened path-aware ETW lane completed shell-safe with a real I/O burst and produced real ETL/CSV outputs, but still did not capture an exact runtime read or intended-..."
+          },
+          {
             "title": "Linux KVM Procmon replay for AllowRemoteDASD",
             "url": "evidence/files/vm-tooling-staging/allowremotedasd-procmon-kvm-20260406b/allowremotedasd-procmon-kvm-20260406b-summary.json and evidence/files/vm-tooling-staging/allowremotedasd-procmon-kvm-20260406b/host-review.json",
             "kind": "procmon-trace",
             "summary": "A dedicated KVM raw-I/O burst produced a real Procmon CSV with 267176 rows and still returned zero lines containing the intended Session Manager I/O path, AllowRemoteDASD itself..."
-          },
-          {
-            "title": "Linux KVM local-KD live symbol query for AllowRemoteDASD",
-            "url": "evidence/files/vm-tooling-staging/local-kd-allowremotedasd-20260406h/local-kd-allowremotedasd-20260406h-summary.json and evidence/files/vm-tooling-staging/local-kd-allowremotedasd-20260406h/local-kd-allowremotedasd-20260406h.log",
-            "kind": "vm-test",
-            "summary": "A debugger-assisted KVM local-KD follow-up attached to the live guest kernel, completed successfully, and resolved `nt!IopAllowRemoteDASD` at `fffff800`970cb370`, confirming the..."
           }
         ]
       },
@@ -25925,7 +26502,7 @@
       "debug_override_allowed": true,
       "score_breakdown": {
         "static_evidence_strength": 4,
-        "runtime_evidence_strength": 4,
+        "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 2,
         "tweak_suitability": 2,
@@ -25933,7 +26510,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.78,
+        "overall_score": 3.56,
         "next_missing_layer": "intentional-hold"
       }
     },
@@ -26088,10 +26665,17 @@
         ]
       },
       "runtime_proof": {
-        "summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "summary": "A bounded 2026-04-24 KVM ETW stackwalk run retained ETL, XML, summary, stage, and normalized-bundle artifacts. The retained bundle contains one exact helper-triggered RegQueryValue event for SerializeTimerExpiration under Session Manager\\Kernel, which close...",
         "needs_vm_validation": false,
-        "has_runtime_evidence": false,
-        "links": []
+        "has_runtime_evidence": true,
+        "links": [
+          {
+            "title": "Bounded KVM ETW stackwalk captures exact SerializeTimerExpiration helper query",
+            "url": "evidence/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e-summary.json and evidence/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e-stage.json and evidence/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e.etl and evidence/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/normalized-registry-bundle.json and evidence/captures/system-kernel-serialize-timer-expiration-etw-stackwalk-20260424.json",
+            "kind": "etw-trace",
+            "summary": "A bounded 2026-04-24 KVM ETW stackwalk run retained ETL, XML, summary, stage, and normalized-bundle artifacts. The retained bundle contains one exact helper-triggered RegQueryVa..."
+          }
+        ]
       },
       "upstream_lineage": {
         "summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
@@ -26200,6 +26784,18 @@
             "url": "research/notes/thread-dpc-enable-vm-suite-20260324.md",
             "kind": "vm-test",
             "summary": "A bounded VM suite applied ThreadDpcEnable = 0 from a missing baseline, completed WinSAT CPU and memory runs with real apply and restore reboots, and returned the guest to the o..."
+          },
+          {
+            "title": "WPR trace for ThreadDpcEnable CPU bounded run",
+            "url": "evidence/files/vm-tooling-staging/thread-dpc-enable-0-cpu3.etl.md",
+            "kind": "etw-trace",
+            "summary": "ETW trace captured during the bounded WinSAT CPU run for ThreadDpcEnable = 0 after a real reboot in Win25H2Clean."
+          },
+          {
+            "title": "WPR trace for ThreadDpcEnable memory bounded run",
+            "url": "evidence/files/vm-tooling-staging/thread-dpc-enable-0-mem2.etl.md",
+            "kind": "etw-trace",
+            "summary": "ETW trace captured during the bounded WinSAT memory run for ThreadDpcEnable = 0 after a real reboot in Win25H2Clean."
           }
         ]
       },
@@ -26286,6 +26882,12 @@
             "url": "evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json",
             "kind": "registry-observation",
             "summary": "The 96-key phase-0 live batch confirmed DisableExceptionChainValidation exists as a tracked value under Session Manager\\Kernel and is missing on the clean baseline."
+          },
+          {
+            "title": "Tools-hardened single-reboot ETW batch for Session Manager Kernel",
+            "url": "evidence/files/vm-tooling-staging/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/summary.json and evidence/files/vm-tooling-staging/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/results.json and research/notes/session-manager-kernel-batch-lightweight-runtime-20260331.md",
+            "kind": "etw-trace",
+            "summary": "The tools-hardened Session Manager Kernel lightweight runtime batch wrote all 21 candidate values, rebooted once, parsed the ETW payload inside the guest, and captured exact Reg..."
           }
         ]
       },
@@ -26406,7 +27008,7 @@
       "debug_override_allowed": true,
       "score_breakdown": {
         "static_evidence_strength": 4,
-        "runtime_evidence_strength": 3,
+        "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 2,
         "tweak_suitability": 2,
@@ -26414,7 +27016,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.67,
+        "overall_score": 3.56,
         "next_missing_layer": "intentional-hold"
       }
     },
@@ -26508,7 +27110,7 @@
       "debug_override_allowed": true,
       "score_breakdown": {
         "static_evidence_strength": 5,
-        "runtime_evidence_strength": 4,
+        "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 2,
         "tweak_suitability": 2,
@@ -26516,7 +27118,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.89,
+        "overall_score": 3.67,
         "next_missing_layer": "intentional-hold"
       }
     },
@@ -26612,7 +27214,7 @@
       "debug_override_allowed": true,
       "score_breakdown": {
         "static_evidence_strength": 4,
-        "runtime_evidence_strength": 3,
+        "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 2,
         "tweak_suitability": 2,
@@ -26620,7 +27222,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.67,
+        "overall_score": 3.56,
         "next_missing_layer": "intentional-hold"
       }
     },
@@ -26770,7 +27372,7 @@
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
-        "runtime_evidence_strength": 2,
+        "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 2,
         "tweak_suitability": 5,
@@ -26778,7 +27380,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 4.0,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       }
     },
@@ -26909,10 +27511,22 @@
         ]
       },
       "runtime_proof": {
-        "summary": "A same-day fast guest Ghidra retry for `NonPagedPoolSize` failed in `ensure-admin-shell` with a bounded timeout, so no xref bundle reached the host.",
+        "summary": "A bounded 2026-04-27 ETW retry for `NonPagedPoolSize` never reached trace collection. QGA guest-exec failed during guest-dir setup, the runner fell back to send-key launch, and the fallback still timed out in `ensure-admin-shell` before any ETW artifact rea...",
         "needs_vm_validation": false,
         "has_runtime_evidence": true,
         "links": [
+          {
+            "title": "KVM ETW summary receipt for NonPagedPoolSize",
+            "url": "evidence/captures/system-memory-nonpaged-pool-dynamic-etw-stackwalk-attempt-20260427.json and evidence/raw/etw-stackwalk/system-memory-nonpaged-pool-dynamic-etw-20260427b/system-memory-nonpaged-pool-dynamic-etw-20260427b-summary.json",
+            "kind": "etw-trace",
+            "summary": "A bounded 2026-04-27 ETW retry for `NonPagedPoolSize` never reached trace collection. QGA guest-exec failed during guest-dir setup, the runner fell back to send-key launch, and..."
+          },
+          {
+            "title": "QGA-first ETW stackwalk runtime receipt for NonPagedPoolSize",
+            "url": "evidence/captures/system-memory-nonpaged-pool-dynamic-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/system-memory-nonpaged-pool-dynamic-etw-qga-unblock-20260507/system-memory-nonpaged-pool-dynamic-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/system-memory-nonpaged-pool-dynamic-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/system-memory-nonpaged-pool-dynamic-etw-qga-unblock-20260507/system-memory-nonpaged-pool-dynamic-etw-qga-unblock-20260507.etl",
+            "kind": "etw-trace",
+            "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4389 registry events with 527 caller-stack events. The bundle contains an exact helper-trigg..."
+          },
           {
             "title": "Guest Ghidra launch receipt for NonPagedPoolSize",
             "url": "evidence/raw/ghidra/ghidra-system-memory-nonpaged-pool-dynamic-20260427b/summary.json",
@@ -26995,10 +27609,22 @@
         ]
       },
       "runtime_proof": {
-        "summary": "A same-day fast guest Ghidra retry for `PagedPoolSize` failed in `ensure-admin-shell` with a bounded timeout, so no xref bundle reached the host.",
+        "summary": "A bounded 2026-04-27 ETW retry for `PagedPoolSize` never reached trace collection. QGA guest-exec failed during guest-dir setup, the runner fell back to send-key launch, and the fallback still timed out in `ensure-admin-shell` before any ETW artifact reache...",
         "needs_vm_validation": false,
         "has_runtime_evidence": true,
         "links": [
+          {
+            "title": "KVM ETW summary receipt for PagedPoolSize",
+            "url": "evidence/captures/system-memory-paged-pool-dynamic-etw-stackwalk-attempt-20260427.json and evidence/raw/etw-stackwalk/system-memory-paged-pool-dynamic-etw-20260427b/system-memory-paged-pool-dynamic-etw-20260427b-summary.json",
+            "kind": "etw-trace",
+            "summary": "A bounded 2026-04-27 ETW retry for `PagedPoolSize` never reached trace collection. QGA guest-exec failed during guest-dir setup, the runner fell back to send-key launch, and the..."
+          },
+          {
+            "title": "QGA-first ETW stackwalk runtime receipt for PagedPoolSize",
+            "url": "evidence/captures/system-memory-paged-pool-dynamic-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/system-memory-paged-pool-dynamic-etw-qga-unblock-20260507/system-memory-paged-pool-dynamic-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/system-memory-paged-pool-dynamic-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/system-memory-paged-pool-dynamic-etw-qga-unblock-20260507/system-memory-paged-pool-dynamic-etw-qga-unblock-20260507.etl",
+            "kind": "etw-trace",
+            "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4450 registry events with 577 caller-stack events. The bundle contains an exact helper-trigg..."
+          },
           {
             "title": "Guest Ghidra launch receipt for PagedPoolSize",
             "url": "evidence/raw/ghidra/ghidra-system-memory-paged-pool-dynamic-20260427b/summary.json",
@@ -27246,10 +27872,22 @@
         ]
       },
       "runtime_proof": {
-        "summary": "A same-day fast guest Ghidra retry for `NtfsDisableLastAccessUpdate` failed in `ensure-admin-shell` with a bounded timeout, so no xref bundle reached the host.",
+        "summary": "A bounded 2026-04-27 ETW retry for `NtfsDisableLastAccessUpdate` never reached trace collection because QGA guest-exec failed during guest-dir setup and the send-key fallback still timed out in `ensure-admin-shell`.",
         "needs_vm_validation": false,
         "has_runtime_evidence": true,
         "links": [
+          {
+            "title": "KVM ETW summary receipt for NtfsDisableLastAccessUpdate",
+            "url": "evidence/captures/system-ntfs-disable-last-access-etw-stackwalk-attempt-20260427.json and evidence/raw/etw-stackwalk/system-ntfs-disable-last-access-etw-20260427a/system-ntfs-disable-last-access-etw-20260427a-summary.json",
+            "kind": "etw-trace",
+            "summary": "A bounded 2026-04-27 ETW retry for `NtfsDisableLastAccessUpdate` never reached trace collection because QGA guest-exec failed during guest-dir setup and the send-key fallback st..."
+          },
+          {
+            "title": "QGA-first ETW stackwalk runtime receipt for NtfsDisableLastAccessUpdate",
+            "url": "evidence/captures/system-ntfs-disable-last-access-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/system-ntfs-disable-last-access-etw-qga-unblock-20260507/system-ntfs-disable-last-access-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/system-ntfs-disable-last-access-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/system-ntfs-disable-last-access-etw-qga-unblock-20260507/system-ntfs-disable-last-access-etw-qga-unblock-20260507.etl",
+            "kind": "etw-trace",
+            "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4447 registry events with 572 caller-stack events. The bundle contains an exact helper-trigg..."
+          },
           {
             "title": "Guest Ghidra launch receipt for NtfsDisableLastAccessUpdate",
             "url": "evidence/raw/ghidra/ghidra-system-ntfs-disable-last-access-20260427a/summary.json",
@@ -27607,7 +28245,7 @@
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
-        "runtime_evidence_strength": 5,
+        "runtime_evidence_strength": 4,
         "rollback_clarity": 5,
         "blast_radius": 2,
         "tweak_suitability": 5,
@@ -27615,7 +28253,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 4.33,
+        "overall_score": 4.22,
         "next_missing_layer": "none"
       }
     },
@@ -27763,6 +28401,12 @@
             "url": "research/notes/reliability-timestamp-follow-up-20260326.md and evidence/raw/procmon/system.reliability-timestamp-enabled/reliability-timestamp-probe.txt and evidence/raw/procmon/system.reliability-timestamp-enabled/reliability-timestamp-probe.runtime.hits.csv",
             "kind": "procmon-trace",
             "summary": "A DiagTrack service-restart Procmon pass showed an adjacent Reliability\\PBR read, and a later hidden structured probe that bundled DiagTrack restart, Consolidator, QueueReportin..."
+          },
+          {
+            "title": "Bounded KVM ETW stackwalk review for TimeStampEnabled retained no exact target hit",
+            "url": "evidence/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/system.reliability-timestamp-enabled-etw-20260424e-summary.json and evidence/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/system.reliability-timestamp-enabled-etw-20260424e-stage.json and evidence/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/system.reliability-timestamp-enabled-etw-20260424e.etl and evidence/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/normalized-registry-bundle.json and evidence/captures/system-reliability-timestamp-enabled-etw-stackwalk-20260424.json",
+            "kind": "etw-trace",
+            "summary": "A bounded 2026-04-24 KVM ETW stackwalk run eventually retained ETL, XML, summary, stage, and normalized-bundle artifacts for the Reliability policy path. The helper reg.exe comm..."
           }
         ]
       },
@@ -28809,6 +29453,12 @@
             "url": "evidence/captures/system-services-disable-windows-search-service-qga-20260507.json and evidence/raw/service-inspection/power-disable-windows-search-service-qga-20260507/service-inspection.json",
             "kind": "vm-test",
             "summary": "A 2026-05-07 non-mutating QGA service inspection captured `sc qc WSearch`, the backing `HKLM\\SYSTEM\\CurrentControlSet\\Services\\WSearch` / `Start` value, and PowerShell `Win32_Se..."
+          },
+          {
+            "title": "Bounded KVM ETW stackwalk receipt for the Windows Search service key",
+            "url": "evidence/raw/etw-stackwalk/system-services-disable-windows-search-etw-20260424-main/system-services-disable-windows-search-etw-20260424-main-summary.json and evidence/raw/etw-stackwalk/system-services-disable-windows-search-etw-20260424-main/system-services-disable-windows-search-etw-20260424-main-stage.json and evidence/captures/system-services-disable-windows-search-etw-stackwalk-attempt-20260424.json",
+            "kind": "etw-trace",
+            "summary": "A bounded 2026-04-24 KVM ETW stackwalk retry for the Windows Search service key reached artifact-upload and published host-visible summary and stage receipts, but no ETL, XML, o..."
           }
         ]
       },
@@ -29130,10 +29780,22 @@
         ]
       },
       "runtime_proof": {
-        "summary": "A same-day fast guest Ghidra retry for `DisableAcrylicBackgroundOnLogon` failed in `ensure-admin-shell` with a bounded timeout, so no xref bundle reached the host.",
+        "summary": "A bounded 2026-04-27 ETW retry for `DisableAcrylicBackgroundOnLogon` never reached trace collection because QGA guest-exec failed during guest-dir setup and the send-key fallback still timed out in `ensure-admin-shell`.",
         "needs_vm_validation": false,
         "has_runtime_evidence": true,
         "links": [
+          {
+            "title": "KVM ETW summary receipt for DisableAcrylicBackgroundOnLogon",
+            "url": "evidence/captures/visibility-disable-acrylic-logon-etw-stackwalk-attempt-20260427.json and evidence/raw/etw-stackwalk/visibility-disable-acrylic-logon-etw-20260427a/visibility-disable-acrylic-logon-etw-20260427a-summary.json",
+            "kind": "etw-trace",
+            "summary": "A bounded 2026-04-27 ETW retry for `DisableAcrylicBackgroundOnLogon` never reached trace collection because QGA guest-exec failed during guest-dir setup and the send-key fallbac..."
+          },
+          {
+            "title": "QGA-first ETW stackwalk runtime receipt for DisableAcrylicBackgroundOnLogon",
+            "url": "evidence/captures/visibility-disable-acrylic-logon-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/visibility-disable-acrylic-logon-etw-qga-unblock-20260507/visibility-disable-acrylic-logon-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/visibility-disable-acrylic-logon-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/visibility-disable-acrylic-logon-etw-qga-unblock-20260507/visibility-disable-acrylic-logon-etw-qga-unblock-20260507.etl",
+            "kind": "etw-trace",
+            "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4620 registry events with 636 caller-stack events. The bundle contains an exact helper-trigg..."
+          },
           {
             "title": "Guest Ghidra launch receipt for DisableAcrylicBackgroundOnLogon",
             "url": "evidence/raw/ghidra/ghidra-visibility-disable-acrylic-logon-20260427a/summary.json",

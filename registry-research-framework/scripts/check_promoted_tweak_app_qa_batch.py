@@ -640,8 +640,12 @@ def render_coverage_markdown(coverage: dict[str, Any]) -> str:
         lines.append(f"- {category}: {count}")
 
     lines.extend(["", "## Uncovered Categories", ""])
-    for category, count in ((coverage.get("summary") or {}).get("uncovered_categories") or {}).items():
-        lines.append(f"- {category}: {count}")
+    uncovered_categories = (coverage.get("summary") or {}).get("uncovered_categories") or {}
+    if uncovered_categories:
+        for category, count in uncovered_categories.items():
+            lines.append(f"- {category}: {count}")
+    else:
+        lines.append("- No uncovered promoted app-QA candidates remain.")
 
     lines.extend(["", "## Recommended Next Batches", ""])
     recommendations = coverage.get("recommended_next_batches") or []
@@ -658,8 +662,12 @@ def render_coverage_markdown(coverage: dict[str, Any]) -> str:
         lines.append("- No uncovered promoted app-QA candidates remain.")
 
     lines.extend(["", "## Remaining Uncovered Sample", ""])
-    for item in (coverage.get("uncovered") or [])[:20]:
-        lines.append(f"- `{item.get('tweak_id')}` | {item.get('name')} | {item.get('category')}")
+    uncovered = coverage.get("uncovered") or []
+    if uncovered:
+        for item in uncovered[:20]:
+            lines.append(f"- `{item.get('tweak_id')}` | {item.get('name')} | {item.get('category')}")
+    else:
+        lines.append("- No uncovered promoted app-QA candidates remain.")
 
     return "\n".join(lines) + "\n"
 

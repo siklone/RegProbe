@@ -2144,6 +2144,17 @@
       "risk_level": "medium",
       "entries": [
         {
+          "id": "peripheral.audio-disable-ducking",
+          "name": "Disable Audio Ducking",
+          "description": "This sets the Windows communications ducking preference so the system does not reduce other audio volumes during calls.",
+          "documentation": "research/records/peripheral.audio-disable-ducking.review.json",
+          "verified": true,
+          "path": "HKCU\\Software\\Microsoft\\Multimedia\\Audio",
+          "value_name": "UserDuckingPreference",
+          "type": "REG_DWORD",
+          "recommended_value": 3
+        },
+        {
           "id": "peripheral.autoplay-take-no-action",
           "name": "AutoPlay Event Default Action",
           "description": "Windows can remember what to do when a device or media arrives. This tweak tries to change those remembered choices so common AutoPlay events take no action.",

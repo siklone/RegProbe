@@ -7,18 +7,18 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Field | Value |
 | --- | --- |
 | Total records | 356 |
-| Validated | 255 |
+| Validated | 256 |
 | Deprecated | 55 |
 | Review required | 0 |
 | Records with evidence roots | 24 |
 | Records with evidence | 356 |
 | Records without evidence | 0 |
-| Records missing validation proof | 33 |
+| Records missing validation proof | 32 |
 | Deprecated missing validation proof | 0 |
-| Class A | 245 |
+| Class A | 246 |
 | Class B | 21 |
 | Class C | 2 |
-| Class D | 33 |
+| Class D | 32 |
 | Class E | 55 |
 | Imported candidate backlog | [research/imported-candidate-backlog.json](imported-candidate-backlog.json) |
 | Imported candidate count | 0 |
@@ -120,7 +120,6 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `misc.optimize-7zip-settings` | review-required | Class D | `research/records/misc.optimize-7zip-settings.review.json` | - | `69c3394468cde40bbd49093ce50c33b73dec8700bfedbf90c92577d84ec69091` |  | 3 |
 | `network.flush-dns-cache` | review-required | Class D | `research/records/network.flush-dns-cache.review.json` | - | `5e0d288f7b0f4796491f4d3ef37ff087f59ba82c42cfdf1892eb58471ecf76f7` |  | 4 |
 | `network.reset-winsock` | review-required | Class D | `research/records/network.reset-winsock.review.json` | - | `4ae49d0f2dfafc117f7065c9d3052b0590496983a203c0e456339c36c6aa3cfa` |  | 5 |
-| `peripheral.audio-disable-ducking` | review-required | Class D | `research/records/peripheral.audio-disable-ducking.review.json` | - | `501d4d0565c864a28bcf7b13cf6befbb7659ac77d6bbecb2bd803c6efa59b137` |  | 3 |
 | `peripheral.audio-disable-enhancements` | review-required | Class D | `research/records/peripheral.audio-disable-enhancements.review.json` | - | `56355ccd23aca0d4492ef2010b2bcbd58398fda9aae5b25f53a2d001be991cf8` |  | 3 |
 | `peripheral.keyboard-disable-language-hotkey` | review-required | Class D | `research/records/peripheral.keyboard-disable-language-hotkey.review.json` | - | `4001d6dcfc6025c6025564e03a3a806c729212e18c04ff720996c7c28ad460e7` |  | 3 |
 | `peripheral.keyboard-optimize-repeat` | review-required | Class D | `research/records/peripheral.keyboard-optimize-repeat.review.json` | - | `c740ae6af5a3ffe56d274309fc83755ee170e3e8c0c49367e63b0163f22385e3` |  | 3 |
@@ -197,6 +196,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `performance.disable-animations` | validated | Class A | `research/records/performance.disable-animations.review.json` | - | `ea61fb54245b743e4afa8bc34e02377948a3c615b84242a2a06405043ea05bf2` | `2e729ab193573fda810e324e2db0d2b30d94060b5f29e668f51b886da4388746` | 4 |
 | `performance.disable-menu-show-delay` | validated | Class A | `research/records/performance.disable-menu-show-delay.review.json` | - | `7029514581cbc9f2b66f123500036b8842927438b37fc5dd3cd433ba42f60c9c` | `863986a77cec7e5b52eb2feb934346bfd7a1133d797b5c13ab846338a68bbe6c` | 3 |
 | `performance.disable-taskbar-animations` | validated | Class A | `research/records/performance.disable-taskbar-animations.review.json` | [evidence/records/performance.disable-taskbar-animations](../evidence/records/performance.disable-taskbar-animations) | `72c394cea36c238a1b956bd28bbb59098fa1760f83adfe79209505daf4d3e622` | `6f61cb0855cb594e80ef1cc52a46e4fd172f4a3927c0fb0e2dbc612696719358` | 8 |
+| `peripheral.audio-disable-ducking` | validated | Class A | `research/records/peripheral.audio-disable-ducking.review.json` | - | `9c909cfc33584ca457a3e8993aa554177b29adf4983bab348435089d5620d35a` | `707576b673a28c8af68fdff4bd9c1e7ab4667b42a5f7b283dba18534e3f3ab79` | 5 |
 | `peripheral.autoplay-take-no-action` | validated | Class A | `research/records/peripheral.autoplay-take-no-action.review.json` | - | `35a27a8225f21f95c09f4ce819aa205965e99494f74f956051b31c76f602a188` | `65ce551667f3d9b5bd3f77c92fdfd5e00113e541223d3dafb91627206edf8e27` | 4 |
 | `peripheral.disable-autoplay` | validated | Class A | `research/records/peripheral.disable-autoplay.review.json` | - | `5ea35bd9e72bf3bc3eaa422117b7770c32ac8e13dc79fa4e34faa60dd0ca1db2` | `d3db858cacb57a9dc7dae6c3410f943cd99b67bfac0ffe3a2798ba560763d573` | 7 |
 | `peripheral.disable-sticky-keys-prompt` | validated | Class A | `research/records/peripheral.disable-sticky-keys-prompt.review.json` | - | `6028f35f2188d5c0c66aa1b53d9302d04918d9ab1d2447c92d195ab9b2d59a23` | `4c0b1549e97383602bb402a3e42cfe13dacfa7872433c4e07647353144ef8571` | 4 |
@@ -2918,26 +2918,6 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 
 ---
 
-### `peripheral.audio-disable-ducking`
-
-- Status: `review-required`
-- Evidence class: `Class D`
-- Source file: `research/records/peripheral.audio-disable-ducking.review.json`
-- Source SHA256: `501d4d0565c864a28bcf7b13cf6befbb7659ac77d6bbecb2bd803c6efa59b137`
-- Proof SHA256: ``
-
-**Summary:** Review-required audit trail for the live Disable Audio Ducking card. The app already ships the current audio communications preference action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
-
-**Evidence**
-
-| Evidence ID | Kind | Title | Location |
-| --- | --- | --- | --- |
-| `repo-tweak-provenance` | `repo-doc` | Repo tweak provenance for peripheral.audio-disable-ducking | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) |
-| `app-provider` | `repo-code` | Live provider mapping | app/Services/TweakProviders/AudioTweakProvider.cs |
-| `engine-implementation` | `repo-code` | Current engine implementation | engine/Tweaks/Peripheral/AudioTweaks.cs |
-
----
-
 ### `peripheral.audio-disable-enhancements`
 
 - Status: `review-required`
@@ -5190,6 +5170,36 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Reason | non_official_v31_reaudit |
 | Priority | 2 |
 | New pipeline version | v3.1 |
+
+---
+
+### `peripheral.audio-disable-ducking`
+
+- Status: `validated`
+- Evidence class: `Class A`
+- Source file: `research/records/peripheral.audio-disable-ducking.review.json`
+- Source SHA256: `9c909cfc33584ca457a3e8993aa554177b29adf4983bab348435089d5620d35a`
+- Proof SHA256: `707576b673a28c8af68fdff4bd9c1e7ab4667b42a5f7b283dba18534e3f3ab79`
+
+**Summary:** Validated app-surface record for the Disable Audio Ducking card. The research provider now surfaces the current app action, which writes UserDuckingPreference=3 for the current user.
+
+**Evidence**
+
+| Evidence ID | Kind | Title | Location |
+| --- | --- | --- | --- |
+| `repo-tweak-provenance` | `repo-doc` | Repo tweak provenance for peripheral.audio-disable-ducking | [Docs/tweaks/tweak-provenance.md](../Docs/tweaks/tweak-provenance.md) |
+| `app-provider` | `repo-code` | Live provider mapping | app/Services/TweakProviders/AudioTweakProvider.cs |
+| `engine-implementation` | `repo-code` | Current engine implementation | engine/Tweaks/Peripheral/AudioTweaks.cs |
+| `etw-userduckingpreference-20260507` | `etw-trace` | QGA ETW stackwalk - UserDuckingPreference runtime registry probe | [evidence/raw/etw-stackwalk/peripheral-audio-ducking-etw-20260507/peripheral-audio-ducking-etw-20260507-summary.json](../evidence/raw/etw-stackwalk/peripheral-audio-ducking-etw-20260507/peripheral-audio-ducking-etw-20260507-summary.json) and [evidence/raw/etw-stackwalk/peripheral-audio-ducking-etw-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/peripheral-audio-ducking-etw-20260507/normalized-registry-bundle.json) |
+| `ghidra-mmsys-userduckingpreference-20260507` | `ghidra-headless` | QGA Ghidra string/xref - mmsys.cpl UserDuckingPreference handlers | [evidence/raw/ghidra/peripheral-audio-ducking-ghidra-20260507/evidence.json](../evidence/raw/ghidra/peripheral-audio-ducking-ghidra-20260507/evidence.json) and [evidence/raw/ghidra/peripheral-audio-ducking-ghidra-20260507/ghidra-matches.md](../evidence/raw/ghidra/peripheral-audio-ducking-ghidra-20260507/ghidra-matches.md) |
+
+**Validation proof**
+
+| Field | Value |
+| --- | --- |
+| Source | [evidence/raw/ghidra/peripheral-audio-ducking-ghidra-20260507/ghidra-matches.md](../evidence/raw/ghidra/peripheral-audio-ducking-ghidra-20260507/ghidra-matches.md) |
+| Exact quote / path | mmsys.cpl Ghidra string/xref probe found UserDuckingPreference in two naturally resolved decompiled functions, including call sites that reference SHGetValueW and SHSetValueW. The paired ETW stackwalk run [evidence/raw/etw-stackwalk/peripheral-audio-ducking-etw-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/peripheral-audio-ducking-etw-20260507/normalized-registry-bundle.json) captured an exact RegQueryValue event for UserDuckingPreference during the guest registry probe. |
+| Notes | Validated on 2026-05-07 with QGA-first VM tooling. Ghidra provides the code-side mmsys.cpl string/xref evidence; ETW provides a runtime registry trace with caller-stack capture for the exact value name. A stale value left by an earlier Procmon timeout was removed after the evidence run and the guest was verified back to value_exists=false. |
 
 ---
 

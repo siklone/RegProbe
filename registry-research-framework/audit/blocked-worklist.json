@@ -1,12 +1,12 @@
 {
-  "generated_at": "2026-05-07T18:26:06.037227Z",
-  "blocked_count": 51,
+  "generated_at": "2026-05-07T19:37:16.282541Z",
+  "blocked_count": 50,
   "lane_counts": {
     "intentional-hold": 18,
-    "validation-proof": 33
+    "validation-proof": 32
   },
   "actionability_counts": {
-    "hold": 51
+    "hold": 50
   },
   "ordered_lanes": [
     "intentional-hold",
@@ -518,23 +518,6 @@
       ],
       "key_path": "HKCU\\Software\\7-Zip\\Options",
       "value_name": "OptionBundle",
-      "recent_audit_artifacts": [],
-      "suggested_command": "winopt research list-blocked --worklist --lane validation-proof",
-      "next_action_hint": "Review blockers manually and choose the next evidence lane."
-    },
-    {
-      "candidate_id": "peripheral.audio-disable-ducking",
-      "feature_area": "Audio Communications Preference",
-      "next_missing_layer": "validation-proof",
-      "actionability": "hold",
-      "priority_score": -2,
-      "blocker_count": 2,
-      "promotion_blockers": [
-        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
-        "validation-proof"
-      ],
-      "key_path": "HKCU\\Software\\Microsoft\\Multimedia\\Audio",
-      "value_name": "UserDuckingPreference",
       "recent_audit_artifacts": [],
       "suggested_command": "winopt research list-blocked --worklist --lane validation-proof",
       "next_action_hint": "Review blockers manually and choose the next evidence lane."

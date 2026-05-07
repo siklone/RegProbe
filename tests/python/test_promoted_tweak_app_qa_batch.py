@@ -410,6 +410,29 @@ class PromotedTweakAppQaBatchTests(unittest.TestCase):
             self.assertIn("## Recommended Next Batches", coverage_markdown)
             self.assertIn("research qa-batch --id system.alpha", coverage_markdown)
 
+    def test_coverage_markdown_has_placeholders_when_everything_is_covered(self) -> None:
+        coverage = {
+            "generated_utc": "2026-05-07T00:00:00Z",
+            "history_entry_count": 1,
+            "catalog_candidate_count": 1,
+            "covered_count": 1,
+            "uncovered_count": 0,
+            "summary": {
+                "coverage_percent": 100.0,
+                "covered_categories": {"System": 1},
+                "uncovered_categories": {},
+            },
+            "recommended_next_batches": [],
+            "covered": [{"tweak_id": "system.alpha"}],
+            "uncovered": [],
+        }
+
+        markdown = promoted_app_qa_batch.render_coverage_markdown(coverage)
+
+        self.assertIn("## Uncovered Categories\n\n- No uncovered promoted app-QA candidates remain.", markdown)
+        self.assertTrue(markdown.endswith("- No uncovered promoted app-QA candidates remain.\n"))
+        self.assertNotIn("\n\n\n", markdown)
+
 
 if __name__ == "__main__":
     unittest.main()

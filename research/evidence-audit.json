@@ -1,11 +1,11 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-07T18:26:31.830107Z",
+  "generated_utc": "2026-05-07T19:37:14.470003Z",
   "summary": {
     "total_active_records": 301,
     "class_counts": {
-      "A": 245,
-      "D": 33,
+      "A": 246,
+      "D": 32,
       "B": 21,
       "C": 2
     },
@@ -16,19 +16,19 @@
       "early-boot": 16
     },
     "next_missing_layer_counts": {
-      "none": 250,
-      "validation-proof": 33,
+      "none": 251,
+      "validation-proof": 32,
       "intentional-hold": 18
     },
     "promotion_state_counts": {
-      "promoted": 250,
-      "blocked": 51
+      "promoted": 251,
+      "blocked": 50
     },
-    "re_audit_required_count": 23,
+    "re_audit_required_count": 24,
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-05-07T18:26:30.989842Z",
+      "generated_utc": "2026-05-07T19:33:01.090214Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -57,6 +57,7 @@
       "next_missing_layer": "none",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_trace",
         "behavior_wpr",
         "official_doc"
       ],
@@ -500,7 +501,7 @@
       "class_ready_basis": "official-doc",
       "official": true,
       "official_doc_exists": true,
-      "procmon": true,
+      "procmon": false,
       "ghidra": false,
       "ghidra_no_function_fallback": false,
       "wpr": false,
@@ -510,13 +511,12 @@
       "next_missing_layer": "none",
       "cross_layer_satisfied": true,
       "layers_used": [
-        "runtime_procmon",
+        "runtime_trace",
         "runtime_reboot",
         "official_doc"
       ],
       "tools_used": [
         "official-doc",
-        "procmon",
         "reboot"
       ],
       "boot_phase_relevant": false,
@@ -546,7 +546,7 @@
       "tweak_ingest_allowed": true,
       "score_breakdown": {
         "static_evidence_strength": 5,
-        "runtime_evidence_strength": 3,
+        "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 5,
         "tweak_suitability": 5,
@@ -554,7 +554,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 2,
         "bench_priority": 3,
-        "overall_score": 3.89,
+        "overall_score": 3.78,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -1680,6 +1680,7 @@
       "next_missing_layer": "none",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_trace",
         "behavior_wpr",
         "official_doc"
       ],
@@ -1854,6 +1855,7 @@
       "next_missing_layer": "none",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_trace",
         "behavior_wpr",
         "official_doc"
       ],
@@ -1940,6 +1942,7 @@
       "next_missing_layer": "none",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_trace",
         "behavior_wpr",
         "official_doc"
       ],
@@ -2026,6 +2029,7 @@
       "next_missing_layer": "none",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_trace",
         "behavior_wpr",
         "official_doc"
       ],
@@ -2112,6 +2116,7 @@
       "next_missing_layer": "none",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_trace",
         "behavior_wpr",
         "official_doc"
       ],
@@ -2459,6 +2464,7 @@
       "next_missing_layer": "none",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_trace",
         "behavior_wpr",
         "official_doc"
       ],
@@ -2545,6 +2551,7 @@
       "next_missing_layer": "none",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_trace",
         "behavior_wpr",
         "official_doc"
       ],
@@ -3175,6 +3182,7 @@
       "next_missing_layer": "none",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_trace",
         "behavior_wpr",
         "official_doc"
       ],
@@ -4377,6 +4385,7 @@
       "next_missing_layer": "none",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_trace",
         "behavior_wpr",
         "official_doc"
       ],
@@ -4463,6 +4472,7 @@
       "next_missing_layer": "none",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_trace",
         "behavior_wpr",
         "official_doc"
       ],
@@ -4549,6 +4559,7 @@
       "next_missing_layer": "none",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_trace",
         "behavior_wpr",
         "official_doc"
       ],
@@ -4635,6 +4646,7 @@
       "next_missing_layer": "none",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_trace",
         "behavior_wpr",
         "official_doc"
       ],
@@ -4804,6 +4816,7 @@
       "next_missing_layer": "none",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_trace",
         "behavior_wpr",
         "official_doc"
       ],
@@ -4890,6 +4903,7 @@
       "next_missing_layer": "none",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_trace",
         "behavior_wpr",
         "official_doc"
       ],
@@ -4976,6 +4990,7 @@
       "next_missing_layer": "none",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_trace",
         "official_doc"
       ],
       "tools_used": [
@@ -5059,6 +5074,7 @@
       "next_missing_layer": "none",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_trace",
         "behavior_wpr",
         "official_doc"
       ],
@@ -5145,6 +5161,7 @@
       "next_missing_layer": "none",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_trace",
         "behavior_wpr",
         "official_doc"
       ],
@@ -5231,6 +5248,7 @@
       "next_missing_layer": "none",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_trace",
         "behavior_wpr",
         "official_doc"
       ],
@@ -5400,6 +5418,7 @@
       "next_missing_layer": "none",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_trace",
         "behavior_wpr",
         "official_doc"
       ],
@@ -5988,6 +6007,7 @@
       "next_missing_layer": "none",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_trace",
         "official_doc"
       ],
       "tools_used": [
@@ -6154,6 +6174,7 @@
       "next_missing_layer": "none",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_trace",
         "official_doc"
       ],
       "tools_used": [
@@ -6320,6 +6341,7 @@
       "next_missing_layer": "none",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_trace",
         "behavior_wpr",
         "official_doc"
       ],
@@ -7319,6 +7341,7 @@
       "next_missing_layer": "none",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_trace",
         "official_doc"
       ],
       "tools_used": [
@@ -7402,6 +7425,7 @@
       "next_missing_layer": "none",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_trace",
         "official_doc"
       ],
       "tools_used": [
@@ -7565,62 +7589,67 @@
     {
       "record_id": "peripheral.audio-disable-ducking",
       "tweak_id": "peripheral.audio-disable-ducking",
-      "evidence_class": "D",
+      "evidence_class": "A",
       "lane": "runtime",
-      "class_ready_basis": "pending",
+      "class_ready_basis": "converged-vm",
       "official": false,
       "official_doc_exists": false,
       "procmon": false,
-      "ghidra": false,
+      "ghidra": true,
       "ghidra_no_function_fallback": false,
-      "wpr": false,
+      "wpr": true,
       "benchmark": false,
       "reboot_tested": false,
       "incident_seen": false,
-      "next_missing_layer": "validation-proof",
-      "cross_layer_satisfied": false,
-      "layers_used": [],
-      "tools_used": [],
+      "next_missing_layer": "none",
+      "cross_layer_satisfied": true,
+      "layers_used": [
+        "runtime_trace",
+        "static_ghidra",
+        "behavior_wpr"
+      ],
+      "tools_used": [
+        "etw",
+        "ghidra",
+        "wpr"
+      ],
       "boot_phase_relevant": false,
       "suspected_layer": "user-mode",
       "frida_kernel_guard_applied": false,
       "dead_flag_checks": {
-        "etw_executed": false,
+        "etw_executed": true,
         "boot_phase_included": true,
         "correct_tool_used": true,
-        "trigger_condition_tested": false
+        "trigger_condition_tested": true
       },
-      "re_audit_required": false,
-      "re_audit_priority": 0,
-      "re_audit_reason": "cross_layer_missing; etw_not_recorded; dead_flag_checks_incomplete",
-      "original_class": null,
-      "original_pipeline_version": null,
+      "re_audit_required": true,
+      "re_audit_priority": 3,
+      "re_audit_reason": "non_official_v31_reaudit",
+      "original_class": "A",
+      "original_pipeline_version": "pre-v3.1",
       "new_pipeline_version": "v3.2",
       "artifact_refs": [],
-      "app_mapping_status": "unknown",
+      "app_mapping_status": "matches-research",
       "restore_story_known": true,
-      "apply_allowed": false,
-      "confidence": "medium",
-      "tweak_origin": "research-derived",
-      "promotion_state": "blocked",
-      "promotion_blockers": [
-        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
-        "validation-proof"
-      ],
-      "record_promotion_allowed": false,
-      "tweak_ingest_allowed": false,
+      "apply_allowed": true,
+      "confidence": "high",
+      "tweak_origin": "legacy-curated",
+      "promotion_state": "promoted",
+      "promotion_blockers": [],
+      "record_promotion_allowed": true,
+      "tweak_ingest_allowed": true,
       "score_breakdown": {
-        "static_evidence_strength": 3,
-        "runtime_evidence_strength": 1,
+        "static_evidence_strength": 4,
+        "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 3,
-        "tweak_suitability": 2,
+        "tweak_suitability": 5,
         "privilege_complexity": 4,
         "build_specificity": 5,
         "sibling_expansion_value": 2,
         "bench_priority": 3,
-        "overall_score": 3.11,
-        "next_missing_layer": "validation-proof"
+        "overall_score": 3.67,
+        "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
@@ -7634,7 +7663,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-05-05T11:00:00Z"
+        "last_verified_at": "2026-05-07T19:05:00Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -7910,6 +7939,7 @@
       "next_missing_layer": "none",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_trace",
         "official_doc"
       ],
       "tools_used": [
@@ -8403,7 +8433,7 @@
       "class_ready_basis": "pending",
       "official": true,
       "official_doc_exists": true,
-      "procmon": true,
+      "procmon": false,
       "ghidra": true,
       "ghidra_no_function_fallback": false,
       "wpr": true,
@@ -8413,7 +8443,7 @@
       "next_missing_layer": "intentional-hold",
       "cross_layer_satisfied": true,
       "layers_used": [
-        "runtime_procmon",
+        "runtime_trace",
         "static_ghidra",
         "behavior_wpr",
         "runtime_reboot",
@@ -8422,7 +8452,6 @@
       "tools_used": [
         "official-doc",
         "etw",
-        "procmon",
         "ghidra",
         "wpr",
         "reboot"
@@ -8458,7 +8487,7 @@
       "tweak_ingest_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
-        "runtime_evidence_strength": 4,
+        "runtime_evidence_strength": 3,
         "rollback_clarity": 5,
         "blast_radius": 2,
         "tweak_suitability": 3,
@@ -8466,7 +8495,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 4.0,
+        "overall_score": 3.89,
         "next_missing_layer": "decision-gate"
       },
       "schema_compatibility_mode": "native",
@@ -8499,7 +8528,7 @@
       "class_ready_basis": "pending",
       "official": true,
       "official_doc_exists": true,
-      "procmon": true,
+      "procmon": false,
       "ghidra": true,
       "ghidra_no_function_fallback": false,
       "wpr": true,
@@ -8509,7 +8538,7 @@
       "next_missing_layer": "intentional-hold",
       "cross_layer_satisfied": true,
       "layers_used": [
-        "runtime_procmon",
+        "runtime_trace",
         "static_ghidra",
         "behavior_wpr",
         "runtime_reboot",
@@ -8518,7 +8547,6 @@
       "tools_used": [
         "official-doc",
         "etw",
-        "procmon",
         "ghidra",
         "wpr",
         "reboot"
@@ -8553,7 +8581,7 @@
       "tweak_ingest_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
-        "runtime_evidence_strength": 4,
+        "runtime_evidence_strength": 3,
         "rollback_clarity": 5,
         "blast_radius": 2,
         "tweak_suitability": 3,
@@ -8561,7 +8589,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 4.0,
+        "overall_score": 3.89,
         "next_missing_layer": "decision-gate"
       },
       "schema_compatibility_mode": "native",
@@ -8684,7 +8712,7 @@
       "class_ready_basis": "converged-vm",
       "official": false,
       "official_doc_exists": false,
-      "procmon": true,
+      "procmon": false,
       "ghidra": true,
       "ghidra_no_function_fallback": false,
       "wpr": true,
@@ -8694,14 +8722,13 @@
       "next_missing_layer": "intentional-hold",
       "cross_layer_satisfied": true,
       "layers_used": [
-        "runtime_procmon",
+        "runtime_trace",
         "static_ghidra",
         "behavior_wpr",
         "runtime_reboot"
       ],
       "tools_used": [
         "etw",
-        "procmon",
         "ghidra",
         "wpr",
         "reboot"
@@ -8735,7 +8762,7 @@
       "tweak_ingest_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 3,
-        "runtime_evidence_strength": 4,
+        "runtime_evidence_strength": 3,
         "rollback_clarity": 5,
         "blast_radius": 2,
         "tweak_suitability": 3,
@@ -8743,7 +8770,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.78,
+        "overall_score": 3.67,
         "next_missing_layer": "decision-gate"
       },
       "schema_compatibility_mode": "native",
@@ -9322,30 +9349,28 @@
       "procmon": false,
       "ghidra": false,
       "ghidra_no_function_fallback": false,
-      "wpr": true,
+      "wpr": false,
       "benchmark": false,
       "reboot_tested": false,
       "incident_seen": false,
       "next_missing_layer": "intentional-hold",
       "cross_layer_satisfied": false,
       "layers_used": [
-        "behavior_wpr"
+        "runtime_trace"
       ],
-      "tools_used": [
-        "wpr"
-      ],
+      "tools_used": [],
       "boot_phase_relevant": true,
       "suspected_layer": "kernel",
       "frida_kernel_guard_applied": true,
       "dead_flag_checks": {
         "etw_executed": false,
-        "boot_phase_included": true,
+        "boot_phase_included": false,
         "correct_tool_used": true,
-        "trigger_condition_tested": true
+        "trigger_condition_tested": false
       },
       "re_audit_required": true,
       "re_audit_priority": 1,
-      "re_audit_reason": "current_blocker; cross_layer_missing; etw_not_recorded; dead_flag_checks_incomplete",
+      "re_audit_reason": "current_blocker; cross_layer_missing; etw_not_recorded; dead_flag_checks_incomplete; boot_trace_missing",
       "original_class": "B",
       "original_pipeline_version": "pre-v3.1",
       "new_pipeline_version": "v3.2",
@@ -9366,7 +9391,7 @@
       "tweak_ingest_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 3,
-        "runtime_evidence_strength": 2,
+        "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 2,
         "tweak_suitability": 2,
@@ -9374,7 +9399,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.44,
+        "overall_score": 3.33,
         "next_missing_layer": "ghidra"
       },
       "schema_compatibility_mode": "native",
@@ -9509,6 +9534,7 @@
       "next_missing_layer": "intentional-hold",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_trace",
         "static_ghidra",
         "behavior_wpr"
       ],
@@ -9590,25 +9616,22 @@
       "class_ready_basis": "pending",
       "official": false,
       "official_doc_exists": false,
-      "procmon": true,
+      "procmon": false,
       "ghidra": true,
       "ghidra_no_function_fallback": false,
-      "wpr": true,
+      "wpr": false,
       "benchmark": false,
       "reboot_tested": true,
       "incident_seen": false,
       "next_missing_layer": "intentional-hold",
       "cross_layer_satisfied": true,
       "layers_used": [
-        "runtime_procmon",
+        "runtime_trace",
         "static_ghidra",
-        "behavior_wpr",
         "runtime_reboot"
       ],
       "tools_used": [
-        "procmon",
         "ghidra",
-        "wpr",
         "reboot"
       ],
       "boot_phase_relevant": true,
@@ -9643,7 +9666,7 @@
       "tweak_ingest_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 4,
-        "runtime_evidence_strength": 4,
+        "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 2,
         "tweak_suitability": 2,
@@ -9651,8 +9674,8 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.78,
-        "next_missing_layer": "decision-gate"
+        "overall_score": 3.56,
+        "next_missing_layer": "runtime-trace"
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
@@ -9694,6 +9717,7 @@
       "next_missing_layer": "none",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_trace",
         "static_ghidra",
         "behavior_wpr",
         "behavior_benchmark",
@@ -9887,6 +9911,7 @@
       "next_missing_layer": "none",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_trace",
         "static_ghidra",
         "official_doc"
       ],
@@ -10055,6 +10080,7 @@
       "next_missing_layer": "none",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_trace",
         "behavior_wpr",
         "official_doc"
       ],
@@ -10141,6 +10167,7 @@
       "next_missing_layer": "none",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_trace",
         "behavior_wpr",
         "official_doc"
       ],
@@ -10392,6 +10419,7 @@
       "next_missing_layer": "none",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_trace",
         "behavior_wpr",
         "official_doc"
       ],
@@ -10739,6 +10767,7 @@
       "next_missing_layer": "none",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_trace",
         "official_doc"
       ],
       "tools_used": [
@@ -10822,6 +10851,7 @@
       "next_missing_layer": "none",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_trace",
         "official_doc"
       ],
       "tools_used": [
@@ -10895,7 +10925,7 @@
       "class_ready_basis": "pending",
       "official": false,
       "official_doc_exists": false,
-      "procmon": true,
+      "procmon": false,
       "ghidra": true,
       "ghidra_no_function_fallback": false,
       "wpr": true,
@@ -10905,14 +10935,13 @@
       "next_missing_layer": "intentional-hold",
       "cross_layer_satisfied": true,
       "layers_used": [
-        "runtime_procmon",
+        "runtime_trace",
         "static_ghidra",
         "behavior_wpr",
         "runtime_reboot"
       ],
       "tools_used": [
         "etw",
-        "procmon",
         "ghidra",
         "wpr",
         "reboot"
@@ -10948,7 +10977,7 @@
       "tweak_ingest_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 4,
-        "runtime_evidence_strength": 4,
+        "runtime_evidence_strength": 3,
         "rollback_clarity": 5,
         "blast_radius": 2,
         "tweak_suitability": 3,
@@ -10956,7 +10985,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.89,
+        "overall_score": 3.78,
         "next_missing_layer": "decision-gate"
       },
       "schema_compatibility_mode": "native",
@@ -10996,7 +11025,7 @@
       "class_ready_basis": "pending",
       "official": false,
       "official_doc_exists": false,
-      "procmon": true,
+      "procmon": false,
       "ghidra": true,
       "ghidra_no_function_fallback": false,
       "wpr": false,
@@ -11006,12 +11035,11 @@
       "next_missing_layer": "intentional-hold",
       "cross_layer_satisfied": true,
       "layers_used": [
-        "runtime_procmon",
+        "runtime_trace",
         "static_ghidra",
         "behavior_benchmark"
       ],
       "tools_used": [
-        "procmon",
         "ghidra",
         "benchmark"
       ],
@@ -11047,7 +11075,7 @@
       "tweak_ingest_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 4,
-        "runtime_evidence_strength": 3,
+        "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 2,
         "tweak_suitability": 2,
@@ -11055,8 +11083,8 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.67,
-        "next_missing_layer": "decision-gate"
+        "overall_score": 3.56,
+        "next_missing_layer": "runtime-trace"
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
@@ -11098,6 +11126,7 @@
       "next_missing_layer": "none",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_trace",
         "official_doc"
       ],
       "tools_used": [
@@ -11598,6 +11627,7 @@
       "next_missing_layer": "none",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_trace",
         "official_doc"
       ],
       "tools_used": [
@@ -12515,6 +12545,7 @@
       "next_missing_layer": "none",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_trace",
         "behavior_wpr",
         "official_doc"
       ],
@@ -12601,6 +12632,7 @@
       "next_missing_layer": "none",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_trace",
         "static_ghidra",
         "behavior_wpr",
         "official_doc"
@@ -12689,6 +12721,7 @@
       "next_missing_layer": "none",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_trace",
         "official_doc"
       ],
       "tools_used": [
@@ -13197,6 +13230,7 @@
       "next_missing_layer": "none",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_trace",
         "static_ghidra",
         "behavior_wpr",
         "official_doc"
@@ -15146,6 +15180,7 @@
       "next_missing_layer": "none",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_trace",
         "static_ghidra",
         "behavior_wpr",
         "official_doc"
@@ -15234,6 +15269,7 @@
       "next_missing_layer": "none",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_trace",
         "behavior_wpr",
         "official_doc"
       ],
@@ -16239,6 +16275,7 @@
       "next_missing_layer": "none",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_trace",
         "behavior_wpr",
         "official_doc"
       ],
@@ -16408,6 +16445,7 @@
       "next_missing_layer": "none",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_trace",
         "static_ghidra",
         "behavior_wpr",
         "official_doc"
@@ -18090,6 +18128,7 @@
       "next_missing_layer": "none",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_trace",
         "behavior_wpr",
         "official_doc"
       ],
@@ -18434,6 +18473,7 @@
       "next_missing_layer": "none",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_trace",
         "static_ghidra",
         "official_doc"
       ],
@@ -18774,6 +18814,7 @@
       "next_missing_layer": "none",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_trace",
         "behavior_wpr",
         "official_doc"
       ],
@@ -18943,6 +18984,7 @@
       "next_missing_layer": "none",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_trace",
         "official_doc"
       ],
       "tools_used": [
@@ -19533,6 +19575,7 @@
       "next_missing_layer": "none",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_trace",
         "behavior_wpr",
         "runtime_reboot",
         "official_doc"
@@ -20495,6 +20538,7 @@
       "next_missing_layer": "none",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_trace",
         "behavior_wpr",
         "official_doc"
       ],
@@ -21257,6 +21301,7 @@
       "next_missing_layer": "intentional-hold",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_trace",
         "static_ghidra",
         "behavior_wpr",
         "official_doc"
@@ -21351,6 +21396,7 @@
       "next_missing_layer": "intentional-hold",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_trace",
         "static_ghidra",
         "behavior_wpr",
         "runtime_reboot"
@@ -21434,25 +21480,22 @@
       "class_ready_basis": "pending",
       "official": false,
       "official_doc_exists": false,
-      "procmon": true,
+      "procmon": false,
       "ghidra": true,
       "ghidra_no_function_fallback": false,
-      "wpr": true,
+      "wpr": false,
       "benchmark": false,
       "reboot_tested": true,
       "incident_seen": false,
       "next_missing_layer": "intentional-hold",
       "cross_layer_satisfied": true,
       "layers_used": [
-        "runtime_procmon",
+        "runtime_trace",
         "static_ghidra",
-        "behavior_wpr",
         "runtime_reboot"
       ],
       "tools_used": [
-        "procmon",
         "ghidra",
-        "wpr",
         "reboot"
       ],
       "boot_phase_relevant": true,
@@ -21487,7 +21530,7 @@
       "tweak_ingest_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 4,
-        "runtime_evidence_strength": 4,
+        "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 2,
         "tweak_suitability": 2,
@@ -21495,8 +21538,8 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.78,
-        "next_missing_layer": "decision-gate"
+        "overall_score": 3.56,
+        "next_missing_layer": "runtime-trace"
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
@@ -21538,6 +21581,7 @@
       "next_missing_layer": "none",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_trace",
         "behavior_wpr",
         "behavior_benchmark",
         "runtime_reboot",
@@ -21628,6 +21672,7 @@
       "next_missing_layer": "none",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_trace",
         "static_ghidra",
         "behavior_wpr",
         "runtime_reboot"
@@ -21709,20 +21754,19 @@
       "procmon": false,
       "ghidra": true,
       "ghidra_no_function_fallback": false,
-      "wpr": true,
+      "wpr": false,
       "benchmark": false,
       "reboot_tested": true,
       "incident_seen": false,
       "next_missing_layer": "intentional-hold",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_trace",
         "static_ghidra",
-        "behavior_wpr",
         "runtime_reboot"
       ],
       "tools_used": [
         "ghidra",
-        "wpr",
         "reboot"
       ],
       "boot_phase_relevant": true,
@@ -21757,7 +21801,7 @@
       "tweak_ingest_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 4,
-        "runtime_evidence_strength": 3,
+        "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 2,
         "tweak_suitability": 2,
@@ -21765,8 +21809,8 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.67,
-        "next_missing_layer": "decision-gate"
+        "overall_score": 3.56,
+        "next_missing_layer": "runtime-trace"
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
@@ -21798,27 +21842,24 @@
       "class_ready_basis": "pending",
       "official": true,
       "official_doc_exists": true,
-      "procmon": true,
+      "procmon": false,
       "ghidra": true,
       "ghidra_no_function_fallback": false,
-      "wpr": true,
+      "wpr": false,
       "benchmark": false,
       "reboot_tested": true,
       "incident_seen": false,
       "next_missing_layer": "intentional-hold",
       "cross_layer_satisfied": true,
       "layers_used": [
-        "runtime_procmon",
+        "runtime_trace",
         "static_ghidra",
-        "behavior_wpr",
         "runtime_reboot",
         "official_doc"
       ],
       "tools_used": [
         "official-doc",
-        "procmon",
         "ghidra",
-        "wpr",
         "reboot"
       ],
       "boot_phase_relevant": true,
@@ -21852,7 +21893,7 @@
       "tweak_ingest_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 5,
-        "runtime_evidence_strength": 4,
+        "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 2,
         "tweak_suitability": 2,
@@ -21860,7 +21901,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.89,
+        "overall_score": 3.67,
         "next_missing_layer": "decision-gate"
       },
       "schema_compatibility_mode": "native",
@@ -21896,20 +21937,19 @@
       "procmon": false,
       "ghidra": true,
       "ghidra_no_function_fallback": false,
-      "wpr": true,
+      "wpr": false,
       "benchmark": false,
       "reboot_tested": true,
       "incident_seen": false,
       "next_missing_layer": "intentional-hold",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_trace",
         "static_ghidra",
-        "behavior_wpr",
         "runtime_reboot"
       ],
       "tools_used": [
         "ghidra",
-        "wpr",
         "reboot"
       ],
       "boot_phase_relevant": true,
@@ -21945,7 +21985,7 @@
       "tweak_ingest_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 4,
-        "runtime_evidence_strength": 3,
+        "runtime_evidence_strength": 2,
         "rollback_clarity": 5,
         "blast_radius": 2,
         "tweak_suitability": 2,
@@ -21953,8 +21993,8 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.67,
-        "next_missing_layer": "decision-gate"
+        "overall_score": 3.56,
+        "next_missing_layer": "runtime-trace"
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
@@ -22072,32 +22112,30 @@
       "procmon": false,
       "ghidra": false,
       "ghidra_no_function_fallback": false,
-      "wpr": true,
+      "wpr": false,
       "benchmark": false,
       "reboot_tested": false,
       "incident_seen": false,
       "next_missing_layer": "none",
       "cross_layer_satisfied": true,
       "layers_used": [
-        "behavior_wpr",
         "official_doc"
       ],
       "tools_used": [
-        "official-doc",
-        "wpr"
+        "official-doc"
       ],
       "boot_phase_relevant": true,
       "suspected_layer": "kernel",
       "frida_kernel_guard_applied": true,
       "dead_flag_checks": {
         "etw_executed": false,
-        "boot_phase_included": true,
+        "boot_phase_included": false,
         "correct_tool_used": true,
-        "trigger_condition_tested": true
+        "trigger_condition_tested": false
       },
       "re_audit_required": false,
       "re_audit_priority": 0,
-      "re_audit_reason": "etw_not_recorded; dead_flag_checks_incomplete",
+      "re_audit_reason": "etw_not_recorded; dead_flag_checks_incomplete; boot_trace_missing",
       "original_class": null,
       "original_pipeline_version": null,
       "new_pipeline_version": "v3.2",
@@ -22113,7 +22151,7 @@
       "tweak_ingest_allowed": true,
       "score_breakdown": {
         "static_evidence_strength": 5,
-        "runtime_evidence_strength": 2,
+        "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 2,
         "tweak_suitability": 5,
@@ -22121,7 +22159,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 4.0,
+        "overall_score": 3.89,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -22247,6 +22285,7 @@
       "next_missing_layer": "none",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_trace",
         "behavior_wpr",
         "official_doc"
       ],
@@ -22333,6 +22372,7 @@
       "next_missing_layer": "none",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_trace",
         "behavior_wpr",
         "official_doc"
       ],
@@ -22419,6 +22459,7 @@
       "next_missing_layer": "none",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_trace",
         "official_doc"
       ],
       "tools_used": [
@@ -22585,6 +22626,7 @@
       "next_missing_layer": "none",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_trace",
         "behavior_wpr",
         "official_doc"
       ],
@@ -22913,7 +22955,7 @@
       "procmon": true,
       "ghidra": true,
       "ghidra_no_function_fallback": false,
-      "wpr": true,
+      "wpr": false,
       "benchmark": true,
       "reboot_tested": true,
       "incident_seen": false,
@@ -22922,7 +22964,6 @@
       "layers_used": [
         "runtime_procmon",
         "static_ghidra",
-        "behavior_wpr",
         "behavior_benchmark",
         "runtime_reboot",
         "official_doc"
@@ -22931,7 +22972,6 @@
         "official-doc",
         "procmon",
         "ghidra",
-        "wpr",
         "benchmark",
         "reboot"
       ],
@@ -22962,7 +23002,7 @@
       "tweak_ingest_allowed": true,
       "score_breakdown": {
         "static_evidence_strength": 5,
-        "runtime_evidence_strength": 5,
+        "runtime_evidence_strength": 4,
         "rollback_clarity": 5,
         "blast_radius": 2,
         "tweak_suitability": 5,
@@ -22970,7 +23010,7 @@
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 4.33,
+        "overall_score": 4.22,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -23603,6 +23643,7 @@
       "next_missing_layer": "none",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_trace",
         "static_ghidra",
         "behavior_wpr",
         "official_doc"
@@ -23774,6 +23815,7 @@
       "next_missing_layer": "none",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_trace",
         "runtime_reboot",
         "official_doc"
       ],
@@ -23942,6 +23984,7 @@
       "next_missing_layer": "none",
       "cross_layer_satisfied": true,
       "layers_used": [
+        "runtime_trace",
         "behavior_wpr",
         "official_doc"
       ],
