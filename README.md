@@ -244,6 +244,8 @@ The latest batch file is only the newest run. If you want cumulative coverage ac
 - `registry-research-framework/audit/promoted-app-qa-coverage-latest.json`
 - `registry-research-framework/audit/promoted-app-qa-coverage-latest.md`
 
+Current audit snapshot: as of 2026-05-07, promoted app-QA coverage is `242/242` (`100.0%`) with no uncovered promoted app-QA candidates remaining. Re-run the batch checker after changing app providers, evidence promotion gates, rollback behavior, or card mapping.
+
 ## Retest Readiness Check
 
 If you are about to retest the desktop app and want one quick truth pass first, use the `research readiness` check. The Python command below is the host-safe mirror for Linux; the .NET CLI command is equivalent when the Windows desktop runtime is available.

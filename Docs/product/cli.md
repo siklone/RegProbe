@@ -191,6 +191,8 @@ If you are running several live batches over time, use the cumulative artifacts 
 - `registry-research-framework/audit/promoted-app-qa-coverage-latest.json`
 - `registry-research-framework/audit/promoted-app-qa-coverage-latest.md`
 
+Current audit snapshot: as of 2026-05-07, promoted app-QA coverage is `242/242` (`100.0%`) with no uncovered promoted app-QA candidates remaining. Treat that number as a living release gate: refresh it after app-provider, card-mapping, promotion-gate, evidence, or rollback changes.
+
 ## Retest Readiness
 
 `research readiness` is the fast preflight check to run before a manual desktop-app retest. The host-safe Python equivalent is `registry-research-framework/scripts/check_app_retest_readiness.py`.
