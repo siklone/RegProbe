@@ -1,13 +1,13 @@
 {
-  "generated_utc": "2026-05-07T16:50:10Z",
+  "generated_utc": "2026-05-07T16:51:52Z",
   "status": "PASS",
   "selection": {
     "requested_ids": [
-      "network.enable-lltdio",
-      "network.prefer-ipv4",
-      "network.require-ntlm-ssp-client-session-security",
-      "network.smb-disable-leasing",
-      "network.smb-enable-large-mtu"
+      "privacy.disable-mdm-enrollment",
+      "privacy.disable-message-sync",
+      "privacy.disable-offline-files.policy",
+      "privacy.disable-onesettings-downloads",
+      "privacy.disable-online-tips"
     ],
     "requested_categories": [],
     "limit_per_category": 1,
@@ -26,25 +26,25 @@
   "errors": [],
   "candidates": [
     {
-      "tweak_id": "network.enable-lltdio",
-      "qa_tweak_id": "network.enable-lltdio",
-      "candidate_id": "network.enable-lltdio",
-      "record_id": "network.enable-lltdio",
-      "category": "Network",
-      "name": "LLTD Mapper I/O Driver Policy",
-      "documentation": "research/records/network.enable-lltdio.json",
+      "tweak_id": "privacy.disable-mdm-enrollment",
+      "qa_tweak_id": "privacy.disable-mdm-enrollment",
+      "candidate_id": "privacy.disable-mdm-enrollment",
+      "record_id": "privacy.disable-mdm-enrollment",
+      "category": "Privacy",
+      "name": "MDM Enrollment",
+      "documentation": "research/records/privacy.disable-mdm-enrollment.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect network.enable-lltdio",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.disable-mdm-enrollment",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'network.enable-lltdio' --qa-output 'C:\\Tools\\ValidationController\\smoke\\network.enable-lltdio.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'network.enable-lltdio' --qa-output 'C:\\Tools\\ValidationController\\smoke\\network.enable-lltdio.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'network.enable-lltdio' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\network.enable-lltdio.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'network.enable-lltdio' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\network.enable-lltdio.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'network.enable-lltdio'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-mdm-enrollment' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-mdm-enrollment.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-mdm-enrollment' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-mdm-enrollment.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-mdm-enrollment' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-mdm-enrollment.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-mdm-enrollment' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-mdm-enrollment.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.disable-mdm-enrollment'"
       },
       "expected_report": {
         "success": true,
@@ -85,25 +85,25 @@
       }
     },
     {
-      "tweak_id": "network.prefer-ipv4",
-      "qa_tweak_id": "network.prefer-ipv4",
-      "candidate_id": "network.prefer-ipv4",
-      "record_id": "network.prefer-ipv4",
-      "category": "Network",
-      "name": "IPv4 Preference Override",
-      "documentation": "research/records/network.prefer-ipv4.json",
+      "tweak_id": "privacy.disable-message-sync",
+      "qa_tweak_id": "privacy.disable-message-sync",
+      "candidate_id": "privacy.disable-message-sync",
+      "record_id": "privacy.disable-message-sync",
+      "category": "Privacy",
+      "name": "Message Service Cloud Sync",
+      "documentation": "research/records/privacy.disable-message-sync.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect network.prefer-ipv4",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.disable-message-sync",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'network.prefer-ipv4' --qa-output 'C:\\Tools\\ValidationController\\smoke\\network.prefer-ipv4.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'network.prefer-ipv4' --qa-output 'C:\\Tools\\ValidationController\\smoke\\network.prefer-ipv4.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'network.prefer-ipv4' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\network.prefer-ipv4.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'network.prefer-ipv4' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\network.prefer-ipv4.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'network.prefer-ipv4'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-message-sync' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-message-sync.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-message-sync' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-message-sync.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-message-sync' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-message-sync.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-message-sync' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-message-sync.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.disable-message-sync'"
       },
       "expected_report": {
         "success": true,
@@ -144,25 +144,25 @@
       }
     },
     {
-      "tweak_id": "network.require-ntlm-ssp-client-session-security",
-      "qa_tweak_id": "network.require-ntlm-ssp-client-session-security",
-      "candidate_id": "network.require-ntlm-ssp-client-session-security",
-      "record_id": "network.require-ntlm-ssp-client-session-security",
-      "category": "Network",
-      "name": "Require NTLM SSP Client Session Security and 128-bit Encryption",
-      "documentation": "research/records/network.require-ntlm-ssp-client-session-security.review.json",
+      "tweak_id": "privacy.disable-offline-files.policy",
+      "qa_tweak_id": "privacy.disable-offline-files.policy",
+      "candidate_id": "privacy.disable-offline-files.policy",
+      "record_id": "privacy.disable-offline-files.policy",
+      "category": "Privacy",
+      "name": "Offline Files Feature Policy",
+      "documentation": "research/records/privacy.disable-offline-files.policy.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
-      "restore_default_supported": false,
-      "restore_previous_supported": false,
+      "restore_default_supported": true,
+      "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect network.require-ntlm-ssp-client-session-security",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.disable-offline-files.policy",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'network.require-ntlm-ssp-client-session-security' --qa-output 'C:\\Tools\\ValidationController\\smoke\\network.require-ntlm-ssp-client-session-security.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'network.require-ntlm-ssp-client-session-security' --qa-output 'C:\\Tools\\ValidationController\\smoke\\network.require-ntlm-ssp-client-session-security.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'network.require-ntlm-ssp-client-session-security' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\network.require-ntlm-ssp-client-session-security.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'network.require-ntlm-ssp-client-session-security' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\network.require-ntlm-ssp-client-session-security.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'network.require-ntlm-ssp-client-session-security'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-offline-files.policy' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-offline-files.policy.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-offline-files.policy' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-offline-files.policy.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-offline-files.policy' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-offline-files.policy.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-offline-files.policy' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-offline-files.policy.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.disable-offline-files.policy'"
       },
       "expected_report": {
         "success": true,
@@ -203,25 +203,25 @@
       }
     },
     {
-      "tweak_id": "network.smb-disable-leasing",
-      "qa_tweak_id": "network.smb-disable-leasing",
-      "candidate_id": "network.smb-disable-leasing",
-      "record_id": "network.smb-disable-leasing",
-      "category": "Network",
-      "name": "SMB Server Leasing",
-      "documentation": "research/records/network.smb-disable-leasing.review.json",
+      "tweak_id": "privacy.disable-onesettings-downloads",
+      "qa_tweak_id": "privacy.disable-onesettings-downloads",
+      "candidate_id": "privacy.disable-onesettings-downloads",
+      "record_id": "privacy.disable-onesettings-downloads",
+      "category": "Privacy",
+      "name": "OneSettings Downloads",
+      "documentation": "research/records/privacy.disable-onesettings-downloads.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect network.smb-disable-leasing",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.disable-onesettings-downloads",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'network.smb-disable-leasing' --qa-output 'C:\\Tools\\ValidationController\\smoke\\network.smb-disable-leasing.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'network.smb-disable-leasing' --qa-output 'C:\\Tools\\ValidationController\\smoke\\network.smb-disable-leasing.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'network.smb-disable-leasing' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\network.smb-disable-leasing.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'network.smb-disable-leasing' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\network.smb-disable-leasing.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'network.smb-disable-leasing'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-onesettings-downloads' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-onesettings-downloads.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-onesettings-downloads' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-onesettings-downloads.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-onesettings-downloads' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-onesettings-downloads.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-onesettings-downloads' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-onesettings-downloads.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.disable-onesettings-downloads'"
       },
       "expected_report": {
         "success": true,
@@ -262,25 +262,25 @@
       }
     },
     {
-      "tweak_id": "network.smb-enable-large-mtu",
-      "qa_tweak_id": "network.smb-enable-large-mtu",
-      "candidate_id": "network.smb-enable-large-mtu",
-      "record_id": "network.smb-enable-large-mtu",
-      "category": "Network",
-      "name": "SMB Client Large MTU",
-      "documentation": "research/records/network.smb-enable-large-mtu.json",
+      "tweak_id": "privacy.disable-online-tips",
+      "qa_tweak_id": "privacy.disable-online-tips",
+      "candidate_id": "privacy.disable-online-tips",
+      "record_id": "privacy.disable-online-tips",
+      "category": "Privacy",
+      "name": "Online Tips in Settings",
+      "documentation": "research/records/privacy.disable-online-tips.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect network.smb-enable-large-mtu",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.disable-online-tips",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'network.smb-enable-large-mtu' --qa-output 'C:\\Tools\\ValidationController\\smoke\\network.smb-enable-large-mtu.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'network.smb-enable-large-mtu' --qa-output 'C:\\Tools\\ValidationController\\smoke\\network.smb-enable-large-mtu.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'network.smb-enable-large-mtu' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\network.smb-enable-large-mtu.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'network.smb-enable-large-mtu' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\network.smb-enable-large-mtu.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'network.smb-enable-large-mtu'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-online-tips' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-online-tips.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-online-tips' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-online-tips.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-online-tips' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-online-tips.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-online-tips' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-online-tips.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.disable-online-tips'"
       },
       "expected_report": {
         "success": true,
@@ -323,7 +323,7 @@
   ],
   "run_results": [
     {
-      "tweak_id": "network.enable-lltdio",
+      "tweak_id": "privacy.disable-mdm-enrollment",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -360,19 +360,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "network.enable-lltdio",
-        "TweakName": "LLTD Mapper I/O Driver Policy",
+        "TweakId": "privacy.disable-mdm-enrollment",
+        "TweakName": "MDM Enrollment",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "network.enable-lltdio",
-          "Name": "LLTD Mapper I/O Driver Policy",
-          "Category": "Network",
-          "Description": "LLTD helps Windows map and discover devices on a local network. The Mapper I/O side lets the PC ask the network about its topology.",
-          "FriendlyDescription": "LLTD helps Windows map and discover devices on a local network. The Mapper I/O side lets the PC ask the network about its topology.",
-          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Windows\\LLTD\\EnableLLTDIO",
+          "TweakId": "privacy.disable-mdm-enrollment",
+          "Name": "MDM Enrollment",
+          "Category": "Privacy",
+          "Description": "Windows can allow the computer to enroll into a Mobile Device Management service for remote management. This policy decides whether new MDM enrollment is allowed.",
+          "FriendlyDescription": "Windows can allow the computer to enroll into a Mobile Device Management service for remote management. This policy decides whether new MDM enrollment is allowed.",
+          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Windows\\CurrentVersion\\MDM\\DisableRegistration",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -380,15 +380,15 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: LLTD helps Windows map and discover devices on a local network. The Mapper I/O side lets the PC ask the network about its topology. Evidence: The local official Microsoft administrative template defines the exact LLTD policy path and value name used by the app, and the companion ADML help text documents the enable/default behavior. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: Windows can allow the computer to enroll into a Mobile Device Management service for remote management. This policy decides whether new MDM enrollment is allowed. Evidence: Local official ADMX defines the exact key and value name; local ADML confirms that enabling the policy disables new MDM enrollment without unenrolling existing devices. Added nohuto mirror corroboration via nohuto-disableregistration-admx. Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "The local official Microsoft administrative template defines the exact LLTD policy path and value name used by the app, and the companion ADML help text documents the enable/default behavior.",
-              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/LinkLayerTopologyDiscovery.admx"
+              "Summary": "Local official ADMX defines the exact key and value name; local ADML confirms that enabling the policy disables new MDM enrollment without unenrolling existing devices. Added nohuto mirror corroboration via nohuto-disableregistration-admx.",
+              "Source": "Validation proof source: evidence/files/external/c/WINDOWS/PolicyDefinitions/MDM.admx"
             },
             {
               "Key": "runtime",
@@ -419,8 +419,8 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Network (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\network\\network.md",
+              "Title": "Docs: Privacy (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\privacy\\privacy-verified.md",
               "Kind": "Docs"
             }
           ]
@@ -429,10 +429,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Policy enabled'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'MDM enrollment disabled'.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Policy enabled",
+            "TargetValue": "MDM enrollment disabled",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -441,8 +441,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Policy enabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\LLTD\\EnableLLTDIO: missing -> 1",
-                "TimestampText": "09:50:14"
+                "Message": "Current values do not match a named option. Selected option is 'MDM enrollment disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\CurrentVersion\\MDM\\DisableRegistration: missing -> 1",
+                "TimestampText": "09:51:56"
               },
               {
                 "Action": "Apply",
@@ -469,8 +469,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Policy enabled",
-            "TargetValue": "Policy enabled",
+            "CurrentValue": "MDM enrollment disabled",
+            "TargetValue": "MDM enrollment disabled",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -479,20 +479,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Policy enabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\LLTD\\EnableLLTDIO: missing -> 1",
-                "TimestampText": "09:50:14"
+                "Message": "Current values do not match a named option. Selected option is 'MDM enrollment disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\CurrentVersion\\MDM\\DisableRegistration: missing -> 1",
+                "TimestampText": "09:51:56"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Policy enabled'.",
-                "TimestampText": "09:50:17"
+                "Message": "Applied preset 'MDM enrollment disabled'.",
+                "TimestampText": "09:51:59"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Policy enabled'.",
-                "TimestampText": "09:50:17"
+                "Message": "Verified preset 'MDM enrollment disabled'.",
+                "TimestampText": "09:51:59"
               },
               {
                 "Action": "Rollback",
@@ -508,7 +508,7 @@
             "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Policy enabled",
+            "TargetValue": "MDM enrollment disabled",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -517,36 +517,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Policy enabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\LLTD\\EnableLLTDIO: missing -> 1",
-                "TimestampText": "09:50:14"
+                "Message": "Current values do not match a named option. Selected option is 'MDM enrollment disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\CurrentVersion\\MDM\\DisableRegistration: missing -> 1",
+                "TimestampText": "09:51:56"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Policy enabled'.",
-                "TimestampText": "09:50:17"
+                "Message": "Applied preset 'MDM enrollment disabled'.",
+                "TimestampText": "09:51:59"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Policy enabled'.",
-                "TimestampText": "09:50:17"
+                "Message": "Verified preset 'MDM enrollment disabled'.",
+                "TimestampText": "09:51:59"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "09:50:17"
+                "TimestampText": "09:51:59"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Policy enabled'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'MDM enrollment disabled'.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Policy enabled",
+            "TargetValue": "MDM enrollment disabled",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -555,40 +555,40 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Policy enabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\LLTD\\EnableLLTDIO: missing -> 1",
-                "TimestampText": "09:50:17"
+                "Message": "Current values do not match a named option. Selected option is 'MDM enrollment disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\CurrentVersion\\MDM\\DisableRegistration: missing -> 1",
+                "TimestampText": "09:51:59"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Policy enabled'.",
-                "TimestampText": "09:50:17"
+                "Message": "Applied preset 'MDM enrollment disabled'.",
+                "TimestampText": "09:51:59"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Policy enabled'.",
-                "TimestampText": "09:50:17"
+                "Message": "Verified preset 'MDM enrollment disabled'.",
+                "TimestampText": "09:51:59"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "09:50:17"
+                "TimestampText": "09:51:59"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T16:50:14.7870362+00:00",
-        "CompletedAtUtc": "2026-05-07T16:50:18.0104321+00:00"
+        "StartedAtUtc": "2026-05-07T16:51:56.7634606+00:00",
+        "CompletedAtUtc": "2026-05-07T16:51:59.9360258+00:00"
       },
-      "qa_tweak_id": "network.enable-lltdio",
-      "candidate_id": "network.enable-lltdio",
-      "card_name": "LLTD Mapper I/O Driver Policy",
-      "documentation": "research/records/network.enable-lltdio.json"
+      "qa_tweak_id": "privacy.disable-mdm-enrollment",
+      "candidate_id": "privacy.disable-mdm-enrollment",
+      "card_name": "MDM Enrollment",
+      "documentation": "research/records/privacy.disable-mdm-enrollment.json"
     },
     {
-      "tweak_id": "network.prefer-ipv4",
+      "tweak_id": "privacy.disable-message-sync",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -625,19 +625,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "network.prefer-ipv4",
-        "TweakName": "IPv4 Preference Override",
+        "TweakId": "privacy.disable-message-sync",
+        "TweakName": "Message Service Cloud Sync",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "network.prefer-ipv4",
-          "Name": "IPv4 Preference Override",
-          "Category": "Network",
-          "Description": "This keeps IPv6 available but tells Windows to prefer IPv4 when both protocols can work.",
-          "FriendlyDescription": "This keeps IPv6 available but tells Windows to prefer IPv4 when both protocols can work.",
-          "RegistryPath": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\Tcpip6\\Parameters\\DisabledComponents",
+          "TweakId": "privacy.disable-message-sync",
+          "Name": "Message Service Cloud Sync",
+          "Category": "Privacy",
+          "Description": "Windows can back up and restore cellular text messages through Microsoft's cloud services. This policy decides whether that cloud sync is allowed on the device.",
+          "FriendlyDescription": "Windows can back up and restore cellular text messages through Microsoft's cloud services. This policy decides whether that cloud sync is allowed on the device.",
+          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Messaging\\AllowMessageSync",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -645,15 +645,15 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: This keeps IPv6 available but tells Windows to prefer IPv4 when both protocols can work. Evidence: Microsoft directly documents the DisabledComponents registry path and the decimal value 32 (0x20) for preferring IPv4 over IPv6. The app writes DisabledComponents = 32 on that exact documented path. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: Windows can back up and restore cellular text messages through Microsoft's cloud services. This policy decides whether that cloud sync is allowed on the device. Evidence: The Messaging Policy CSP page explicitly names the exact machine policy path and value name the app writes and defines the 0/1 semantics. Added nohuto mirror corroboration via nohuto-allowmessagesync-admx. Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "Microsoft directly documents the DisabledComponents registry path and the decimal value 32 (0x20) for preferring IPv4 over IPv6. The app writes DisabledComponents = 32 on that exact documented path.",
-              "Source": "Validation proof source: https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/configure-ipv6-in-windows"
+              "Summary": "The Messaging Policy CSP page explicitly names the exact machine policy path and value name the app writes and defines the 0/1 semantics. Added nohuto mirror corroboration via nohuto-allowmessagesync-admx.",
+              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-messaging#allowmessagesync"
             },
             {
               "Key": "runtime",
@@ -684,8 +684,8 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Network (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\network\\network.md",
+              "Title": "Docs: Privacy (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\privacy\\privacy-verified.md",
               "Kind": "Docs"
             }
           ]
@@ -694,10 +694,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Prefer IPv4'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Message cloud sync disabled'.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Prefer IPv4",
+            "TargetValue": "Message cloud sync disabled",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -706,8 +706,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Prefer IPv4'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Services\\Tcpip6\\Parameters\\DisabledComponents: missing -> 32",
-                "TimestampText": "09:50:24"
+                "Message": "Current values do not match a named option. Selected option is 'Message cloud sync disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\Messaging\\AllowMessageSync: missing -> 0",
+                "TimestampText": "09:52:06"
               },
               {
                 "Action": "Apply",
@@ -734,8 +734,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Prefer IPv4",
-            "TargetValue": "Prefer IPv4",
+            "CurrentValue": "Message cloud sync disabled",
+            "TargetValue": "Message cloud sync disabled",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -744,20 +744,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Prefer IPv4'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Services\\Tcpip6\\Parameters\\DisabledComponents: missing -> 32",
-                "TimestampText": "09:50:24"
+                "Message": "Current values do not match a named option. Selected option is 'Message cloud sync disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\Messaging\\AllowMessageSync: missing -> 0",
+                "TimestampText": "09:52:06"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Prefer IPv4'.",
-                "TimestampText": "09:50:26"
+                "Message": "Applied preset 'Message cloud sync disabled'.",
+                "TimestampText": "09:52:08"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Prefer IPv4'.",
-                "TimestampText": "09:50:26"
+                "Message": "Verified preset 'Message cloud sync disabled'.",
+                "TimestampText": "09:52:08"
               },
               {
                 "Action": "Rollback",
@@ -773,7 +773,7 @@
             "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Prefer IPv4",
+            "TargetValue": "Message cloud sync disabled",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -782,36 +782,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Prefer IPv4'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Services\\Tcpip6\\Parameters\\DisabledComponents: missing -> 32",
-                "TimestampText": "09:50:24"
+                "Message": "Current values do not match a named option. Selected option is 'Message cloud sync disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\Messaging\\AllowMessageSync: missing -> 0",
+                "TimestampText": "09:52:06"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Prefer IPv4'.",
-                "TimestampText": "09:50:26"
+                "Message": "Applied preset 'Message cloud sync disabled'.",
+                "TimestampText": "09:52:08"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Prefer IPv4'.",
-                "TimestampText": "09:50:26"
+                "Message": "Verified preset 'Message cloud sync disabled'.",
+                "TimestampText": "09:52:08"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "09:50:27"
+                "TimestampText": "09:52:09"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Prefer IPv4'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Message cloud sync disabled'.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Prefer IPv4",
+            "TargetValue": "Message cloud sync disabled",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -820,40 +820,40 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Prefer IPv4'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Services\\Tcpip6\\Parameters\\DisabledComponents: missing -> 32",
-                "TimestampText": "09:50:27"
+                "Message": "Current values do not match a named option. Selected option is 'Message cloud sync disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\Messaging\\AllowMessageSync: missing -> 0",
+                "TimestampText": "09:52:09"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Prefer IPv4'.",
-                "TimestampText": "09:50:26"
+                "Message": "Applied preset 'Message cloud sync disabled'.",
+                "TimestampText": "09:52:08"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Prefer IPv4'.",
-                "TimestampText": "09:50:26"
+                "Message": "Verified preset 'Message cloud sync disabled'.",
+                "TimestampText": "09:52:08"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "09:50:27"
+                "TimestampText": "09:52:09"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T16:50:24.1131866+00:00",
-        "CompletedAtUtc": "2026-05-07T16:50:27.2212403+00:00"
+        "StartedAtUtc": "2026-05-07T16:52:06.0467674+00:00",
+        "CompletedAtUtc": "2026-05-07T16:52:09.1354293+00:00"
       },
-      "qa_tweak_id": "network.prefer-ipv4",
-      "candidate_id": "network.prefer-ipv4",
-      "card_name": "IPv4 Preference Override",
-      "documentation": "research/records/network.prefer-ipv4.json"
+      "qa_tweak_id": "privacy.disable-message-sync",
+      "candidate_id": "privacy.disable-message-sync",
+      "card_name": "Message Service Cloud Sync",
+      "documentation": "research/records/privacy.disable-message-sync.json"
     },
     {
-      "tweak_id": "network.require-ntlm-ssp-client-session-security",
+      "tweak_id": "privacy.disable-offline-files.policy",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -890,19 +890,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "network.require-ntlm-ssp-client-session-security",
-        "TweakName": "Require NTLM SSP Client Session Security and 128-bit Encryption",
+        "TweakId": "privacy.disable-offline-files.policy",
+        "TweakName": "Offline Files Feature Policy",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "network.require-ntlm-ssp-client-session-security",
-          "Name": "Require NTLM SSP Client Session Security and 128-bit Encryption",
-          "Category": "Network",
-          "Description": "This setting raises the minimum session security requirements for NTLM SSP based clients. In the app's enabled state it requires both NTLMv2 session security and 128-bit encryption.",
-          "FriendlyDescription": "This setting raises the minimum session security requirements for NTLM SSP based clients. In the app's enabled state it requires both NTLMv2 session security and 128-bit encryption.",
-          "RegistryPath": "HKLM\\System\\CurrentControlSet\\Control\\Lsa\\MSV1_0\\NTLMMinClientSec",
+          "TweakId": "privacy.disable-offline-files.policy",
+          "Name": "Offline Files Feature Policy",
+          "Category": "Privacy",
+          "Description": "Offline Files keeps local copies of network files so they can still be used when the computer is offline. This policy decides whether the feature is allowed at all.",
+          "FriendlyDescription": "Offline Files keeps local copies of network files so they can still be used when the computer is offline. This policy decides whether the feature is allowed at all.",
+          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Windows\\NetCache\\Enabled",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -910,15 +910,15 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: This setting raises the minimum session security requirements for NTLM SSP based clients. In the app's enabled state it requires both NTLMv2 session security and 128-bit encryption. Evidence: Microsoft directly documents NTLMMinClientSec for NTLM SSP based clients and the exact 537395200 value combination. Local sceregvl metadata independently exposes the same NTLMv2 session security and 128-bit encryption bit flags. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: Offline Files keeps local copies of network files so they can still be used when the computer is offline. This policy decides whether the feature is allowed at all. Evidence: The local official Microsoft ADMX file names the same NetCache policy key and Enabled value used by the app, and it confirms the 1/0 mapping. Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "Microsoft directly documents NTLMMinClientSec for NTLM SSP based clients and the exact 537395200 value combination. Local sceregvl metadata independently exposes the same NTLMv2 session security and 128-bit encryption bit flags.",
-              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-localpoliciessecurityoptions#networksecurity_minimumsessionsecurityforntlmsspbasedincludingsecurerpcclients"
+              "Summary": "The local official Microsoft ADMX file names the same NetCache policy key and Enabled value used by the app, and it confirms the 1/0 mapping.",
+              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/OfflineFiles.admx"
             },
             {
               "Key": "runtime",
@@ -949,8 +949,8 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Network (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\network\\network.md",
+              "Title": "Docs: Privacy (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\privacy\\privacy-verified.md",
               "Kind": "Docs"
             }
           ]
@@ -959,10 +959,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current option is 'Require 128-bit encryption'. Selected option is 'Require NTLMv2 session security and 128-bit encryption'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Offline Files disabled'.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Require 128-bit encryption",
-            "TargetValue": "Require NTLMv2 session security and 128-bit encryption",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Offline Files disabled",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -971,8 +971,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current option is 'Require 128-bit encryption'. Selected option is 'Require NTLMv2 session security and 128-bit encryption'.\nEntries:\n- HKLM\\System\\CurrentControlSet\\Control\\Lsa\\MSV1_0\\NTLMMinClientSec: 536870912 -> 537395200",
-                "TimestampText": "09:50:33"
+                "Message": "Current values do not match a named option. Selected option is 'Offline Files disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\NetCache\\Enabled: missing -> 0",
+                "TimestampText": "09:52:15"
               },
               {
                 "Action": "Apply",
@@ -999,8 +999,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Require NTLMv2 session security and 128-bit encryption",
-            "TargetValue": "Require NTLMv2 session security and 128-bit encryption",
+            "CurrentValue": "Offline Files disabled",
+            "TargetValue": "Offline Files disabled",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1009,20 +1009,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current option is 'Require 128-bit encryption'. Selected option is 'Require NTLMv2 session security and 128-bit encryption'.\nEntries:\n- HKLM\\System\\CurrentControlSet\\Control\\Lsa\\MSV1_0\\NTLMMinClientSec: 536870912 -> 537395200",
-                "TimestampText": "09:50:33"
+                "Message": "Current values do not match a named option. Selected option is 'Offline Files disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\NetCache\\Enabled: missing -> 0",
+                "TimestampText": "09:52:15"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Require NTLMv2 session security and 128-bit encryption'.",
-                "TimestampText": "09:50:36"
+                "Message": "Applied preset 'Offline Files disabled'.",
+                "TimestampText": "09:52:18"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Require NTLMv2 session security and 128-bit encryption'.",
-                "TimestampText": "09:50:36"
+                "Message": "Verified preset 'Offline Files disabled'.",
+                "TimestampText": "09:52:18"
               },
               {
                 "Action": "Rollback",
@@ -1037,8 +1037,8 @@
             "AppliedStatus": "NotApplied",
             "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Require 128-bit encryption",
-            "TargetValue": "Require NTLMv2 session security and 128-bit encryption",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Offline Files disabled",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1047,36 +1047,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current option is 'Require 128-bit encryption'. Selected option is 'Require NTLMv2 session security and 128-bit encryption'.\nEntries:\n- HKLM\\System\\CurrentControlSet\\Control\\Lsa\\MSV1_0\\NTLMMinClientSec: 536870912 -> 537395200",
-                "TimestampText": "09:50:33"
+                "Message": "Current values do not match a named option. Selected option is 'Offline Files disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\NetCache\\Enabled: missing -> 0",
+                "TimestampText": "09:52:15"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Require NTLMv2 session security and 128-bit encryption'.",
-                "TimestampText": "09:50:36"
+                "Message": "Applied preset 'Offline Files disabled'.",
+                "TimestampText": "09:52:18"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Require NTLMv2 session security and 128-bit encryption'.",
-                "TimestampText": "09:50:36"
+                "Message": "Verified preset 'Offline Files disabled'.",
+                "TimestampText": "09:52:18"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "09:50:36"
+                "TimestampText": "09:52:18"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current option is 'Require 128-bit encryption'. Selected option is 'Require NTLMv2 session security and 128-bit encryption'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Offline Files disabled'.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Require 128-bit encryption",
-            "TargetValue": "Require NTLMv2 session security and 128-bit encryption",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Offline Files disabled",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1085,40 +1085,40 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current option is 'Require 128-bit encryption'. Selected option is 'Require NTLMv2 session security and 128-bit encryption'.\nEntries:\n- HKLM\\System\\CurrentControlSet\\Control\\Lsa\\MSV1_0\\NTLMMinClientSec: 536870912 -> 537395200",
-                "TimestampText": "09:50:36"
+                "Message": "Current values do not match a named option. Selected option is 'Offline Files disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\NetCache\\Enabled: missing -> 0",
+                "TimestampText": "09:52:18"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Require NTLMv2 session security and 128-bit encryption'.",
-                "TimestampText": "09:50:36"
+                "Message": "Applied preset 'Offline Files disabled'.",
+                "TimestampText": "09:52:18"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Require NTLMv2 session security and 128-bit encryption'.",
-                "TimestampText": "09:50:36"
+                "Message": "Verified preset 'Offline Files disabled'.",
+                "TimestampText": "09:52:18"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "09:50:36"
+                "TimestampText": "09:52:18"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T16:50:33.4488252+00:00",
-        "CompletedAtUtc": "2026-05-07T16:50:36.5252589+00:00"
+        "StartedAtUtc": "2026-05-07T16:52:15.4499018+00:00",
+        "CompletedAtUtc": "2026-05-07T16:52:18.6635997+00:00"
       },
-      "qa_tweak_id": "network.require-ntlm-ssp-client-session-security",
-      "candidate_id": "network.require-ntlm-ssp-client-session-security",
-      "card_name": "Require NTLM SSP Client Session Security and 128-bit Encryption",
-      "documentation": "research/records/network.require-ntlm-ssp-client-session-security.review.json"
+      "qa_tweak_id": "privacy.disable-offline-files.policy",
+      "candidate_id": "privacy.disable-offline-files.policy",
+      "card_name": "Offline Files Feature Policy",
+      "documentation": "research/records/privacy.disable-offline-files.policy.json"
     },
     {
-      "tweak_id": "network.smb-disable-leasing",
+      "tweak_id": "privacy.disable-onesettings-downloads",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -1155,19 +1155,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "network.smb-disable-leasing",
-        "TweakName": "SMB Server Leasing",
+        "TweakId": "privacy.disable-onesettings-downloads",
+        "TweakName": "OneSettings Downloads",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "network.smb-disable-leasing",
-          "Name": "SMB Server Leasing",
-          "Category": "Network",
-          "Description": "SMB leasing is part of the modern SMB protocol and controls client-side read, write, and handle caching behavior. Some compatibility or troubleshooting scenarios disable it to reduce caching side effects.",
-          "FriendlyDescription": "SMB leasing is part of the modern SMB protocol and controls client-side read, write, and handle caching behavior. Some compatibility or troubleshooting scenarios disable it to reduce caching side effects.",
-          "RegistryPath": "",
+          "TweakId": "privacy.disable-onesettings-downloads",
+          "Name": "OneSettings Downloads",
+          "Category": "Privacy",
+          "Description": "Windows can periodically connect to the OneSettings service to download configuration settings. This policy decides whether those download attempts happen.",
+          "FriendlyDescription": "Windows can periodically connect to the OneSettings service to download configuration settings. This policy decides whether those download attempts happen.",
+          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection\\DisableOneSettingsDownloads",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -1175,29 +1175,29 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: SMB leasing is part of the modern SMB protocol and controls client-side read, write, and handle caching behavior. Some compatibility or troubleshooting scenarios disable it to reduce caching side effects. Evidence: Microsoft documents the official control surface as the SMB server configuration property EnableLeasing, and the app now uses that documented surface through a command-backed implementation. Rollback: Rollback: Verified via record-restore-story.",
-          "WhatWeDoNotClaimSummary": "Source boundary: Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+          "WhatWeKnowSummary": "Claim: Windows can periodically connect to the OneSettings service to download configuration settings. This policy decides whether those download attempts happen. Evidence: The System Policy CSP page explicitly names the exact control and registry key path used by the app. The separate Registry Value Name row isn't shown on the page, so the record relies on the local DataCollection.admx file to confirm that the value name is a... Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "Microsoft documents the official control surface as the SMB server configuration property EnableLeasing, and the app now uses that documented surface through a command-backed implementation.",
-              "Source": "Validation proof source: https://learn.microsoft.com/en-us/previous-versions/windows/desktop/smb/msft-smbserverconfiguration"
+              "Summary": "The System Policy CSP page explicitly names the exact control and registry key path used by the app. The separate Registry Value Name row isn't shown on the page, so the record relies on the local DataCollection.admx file to confirm that the value name is a...",
+              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-system#disableonesettingsdownloads"
             },
             {
               "Key": "runtime",
               "Label": "RUNTIME",
               "State": "ready",
-              "Summary": "Read-only Get-SmbServerConfiguration run on the current machine returned EnableLeasing = True, confirming that the documented SMB server configuration surface is live on this build.",
-              "Source": "Local read-only SMB leasing detect run: Local run - 2026-03-14, Windows 11 Pro 10.0.26200.8037"
+              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+              "Source": ""
             },
             {
               "Key": "source",
               "Label": "SOURCE",
               "State": "ready",
-              "Summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
-              "Source": "win-config / network/desc.md: https://github.com/nohuto/win-config/blob/main/network/desc.md"
+              "Summary": "No upstream nohuto source link is attached to this record.",
+              "Source": ""
             },
             {
               "Key": "rollback",
@@ -1209,23 +1209,13 @@
           ],
           "ReferenceLinks": [
             {
-              "Title": "Windows Internals resource page",
-              "Url": "https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals",
-              "Kind": "Docs"
-            },
-            {
-              "Title": "Local asset: Windows Internals E7 Part 2",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\affinities\\assets\\E7-P2.pdf",
-              "Kind": "Docs"
-            },
-            {
-              "Title": "Docs: Details",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html#network.smb-disable-leasing",
+              "Title": "Docs: Details (missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Network",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\network\\network.md#network.smb-disable-leasing",
+              "Title": "Docs: Privacy (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\privacy\\privacy-verified.md",
               "Kind": "Docs"
             }
           ]
@@ -1234,10 +1224,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current state: True",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Disable OneSettings downloads'.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "True",
-            "TargetValue": "Optimized",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Disable OneSettings downloads",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -1246,8 +1236,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current state: True",
-                "TimestampText": "09:50:46"
+                "Message": "Current values do not match a named option. Selected option is 'Disable OneSettings downloads'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection\\DisableOneSettingsDownloads: missing -> 1",
+                "TimestampText": "09:52:24"
               },
               {
                 "Action": "Apply",
@@ -1274,8 +1264,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Optimized",
-            "TargetValue": "Optimized",
+            "CurrentValue": "Disable OneSettings downloads",
+            "TargetValue": "Disable OneSettings downloads",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1284,20 +1274,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current state: True",
-                "TimestampText": "09:50:46"
+                "Message": "Current values do not match a named option. Selected option is 'Disable OneSettings downloads'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection\\DisableOneSettingsDownloads: missing -> 1",
+                "TimestampText": "09:52:24"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Successfully applied changes.",
-                "TimestampText": "09:50:47"
+                "Message": "Applied preset 'Disable OneSettings downloads'.",
+                "TimestampText": "09:52:27"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Changes verified successfully.",
-                "TimestampText": "09:50:47"
+                "Message": "Verified preset 'Disable OneSettings downloads'.",
+                "TimestampText": "09:52:27"
               },
               {
                 "Action": "Rollback",
@@ -1310,10 +1300,10 @@
           {
             "Stage": "rollback",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Successfully restored original state.",
+            "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Optimized",
-            "TargetValue": "Optimized",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Disable OneSettings downloads",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1322,36 +1312,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current state: True",
-                "TimestampText": "09:50:46"
+                "Message": "Current values do not match a named option. Selected option is 'Disable OneSettings downloads'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection\\DisableOneSettingsDownloads: missing -> 1",
+                "TimestampText": "09:52:24"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Successfully applied changes.",
-                "TimestampText": "09:50:47"
+                "Message": "Applied preset 'Disable OneSettings downloads'.",
+                "TimestampText": "09:52:27"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Changes verified successfully.",
-                "TimestampText": "09:50:47"
+                "Message": "Verified preset 'Disable OneSettings downloads'.",
+                "TimestampText": "09:52:27"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
-                "Message": "Successfully restored original state.",
-                "TimestampText": "09:50:48"
+                "Message": "Rolled back registry values.",
+                "TimestampText": "09:52:27"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current state: True",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Disable OneSettings downloads'.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "True",
-            "TargetValue": "Optimized",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Disable OneSettings downloads",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1360,40 +1350,40 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current state: True",
-                "TimestampText": "09:50:48"
+                "Message": "Current values do not match a named option. Selected option is 'Disable OneSettings downloads'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection\\DisableOneSettingsDownloads: missing -> 1",
+                "TimestampText": "09:52:27"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Successfully applied changes.",
-                "TimestampText": "09:50:47"
+                "Message": "Applied preset 'Disable OneSettings downloads'.",
+                "TimestampText": "09:52:27"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Changes verified successfully.",
-                "TimestampText": "09:50:47"
+                "Message": "Verified preset 'Disable OneSettings downloads'.",
+                "TimestampText": "09:52:27"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
-                "Message": "Successfully restored original state.",
-                "TimestampText": "09:50:48"
+                "Message": "Rolled back registry values.",
+                "TimestampText": "09:52:27"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T16:50:42.9017072+00:00",
-        "CompletedAtUtc": "2026-05-07T16:50:48.8764997+00:00"
+        "StartedAtUtc": "2026-05-07T16:52:24.8891383+00:00",
+        "CompletedAtUtc": "2026-05-07T16:52:27.9721605+00:00"
       },
-      "qa_tweak_id": "network.smb-disable-leasing",
-      "candidate_id": "network.smb-disable-leasing",
-      "card_name": "SMB Server Leasing",
-      "documentation": "research/records/network.smb-disable-leasing.review.json"
+      "qa_tweak_id": "privacy.disable-onesettings-downloads",
+      "candidate_id": "privacy.disable-onesettings-downloads",
+      "card_name": "OneSettings Downloads",
+      "documentation": "research/records/privacy.disable-onesettings-downloads.json"
     },
     {
-      "tweak_id": "network.smb-enable-large-mtu",
+      "tweak_id": "privacy.disable-online-tips",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -1430,19 +1420,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "network.smb-enable-large-mtu",
-        "TweakName": "SMB Client Large MTU",
+        "TweakId": "privacy.disable-online-tips",
+        "TweakName": "Online Tips in Settings",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "network.smb-enable-large-mtu",
-          "Name": "SMB Client Large MTU",
-          "Category": "Network",
-          "Description": "Large MTU lets SMB send larger requests over the network. On modern Windows networks this usually helps file-copy and share performance.",
-          "FriendlyDescription": "Large MTU lets SMB send larger requests over the network. On modern Windows networks this usually helps file-copy and share performance.",
-          "RegistryPath": "HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters\\DisableLargeMtu",
+          "TweakId": "privacy.disable-online-tips",
+          "Name": "Online Tips in Settings",
+          "Category": "Privacy",
+          "Description": "The Settings app can contact Microsoft to retrieve tips and help content. This policy decides whether those online tips are allowed.",
+          "FriendlyDescription": "The Settings app can contact Microsoft to retrieve tips and help content. This policy decides whether those online tips are allowed.",
+          "RegistryPath": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\AllowOnlineTips",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -1450,15 +1440,15 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Large MTU lets SMB send larger requests over the network. On modern Windows networks this usually helps file-copy and share performance. Evidence: The Microsoft SMB performance tuning page documents the exact client registry value under LanmanWorkstation and states that large MTU is enabled by default. The app writes 0 to keep the documented enabled state. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: The Settings app can contact Microsoft to retrieve tips and help content. This policy decides whether those online tips are allowed. Evidence: The Settings Policy CSP page explicitly names the exact machine policy path used by the app and defines the 0/1 semantics for allowing or blocking online tips. Added nohuto mirror corroboration via nohuto-allowonlinetips-admx. Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "The Microsoft SMB performance tuning page documents the exact client registry value under LanmanWorkstation and states that large MTU is enabled by default. The app writes 0 to keep the documented enabled state.",
-              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows-server/administration/performance-tuning/role/file-server/smb-file-server"
+              "Summary": "The Settings Policy CSP page explicitly names the exact machine policy path used by the app and defines the 0/1 semantics for allowing or blocking online tips. Added nohuto mirror corroboration via nohuto-allowonlinetips-admx.",
+              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-settings#allowonlinetips"
             },
             {
               "Key": "runtime",
@@ -1489,8 +1479,8 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Network (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\network\\network.md",
+              "Title": "Docs: Privacy (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\privacy\\privacy-verified.md",
               "Kind": "Docs"
             }
           ]
@@ -1499,10 +1489,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Large MTU enabled'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Online tips disabled'.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Large MTU enabled",
+            "TargetValue": "Online tips disabled",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -1511,8 +1501,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Large MTU enabled'.\nEntries:\n- HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters\\DisableLargeMtu: missing -> 0",
-                "TimestampText": "09:50:52"
+                "Message": "Current values do not match a named option. Selected option is 'Online tips disabled'.\nEntries:\n- HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\AllowOnlineTips: missing -> 0",
+                "TimestampText": "09:52:32"
               },
               {
                 "Action": "Apply",
@@ -1539,8 +1529,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Large MTU enabled",
-            "TargetValue": "Large MTU enabled",
+            "CurrentValue": "Online tips disabled",
+            "TargetValue": "Online tips disabled",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1549,20 +1539,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Large MTU enabled'.\nEntries:\n- HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters\\DisableLargeMtu: missing -> 0",
-                "TimestampText": "09:50:52"
+                "Message": "Current values do not match a named option. Selected option is 'Online tips disabled'.\nEntries:\n- HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\AllowOnlineTips: missing -> 0",
+                "TimestampText": "09:52:32"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Large MTU enabled'.",
-                "TimestampText": "09:50:55"
+                "Message": "Applied preset 'Online tips disabled'.",
+                "TimestampText": "09:52:35"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Large MTU enabled'.",
-                "TimestampText": "09:50:55"
+                "Message": "Verified preset 'Online tips disabled'.",
+                "TimestampText": "09:52:35"
               },
               {
                 "Action": "Rollback",
@@ -1578,7 +1568,7 @@
             "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Large MTU enabled",
+            "TargetValue": "Online tips disabled",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1587,36 +1577,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Large MTU enabled'.\nEntries:\n- HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters\\DisableLargeMtu: missing -> 0",
-                "TimestampText": "09:50:52"
+                "Message": "Current values do not match a named option. Selected option is 'Online tips disabled'.\nEntries:\n- HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\AllowOnlineTips: missing -> 0",
+                "TimestampText": "09:52:32"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Large MTU enabled'.",
-                "TimestampText": "09:50:55"
+                "Message": "Applied preset 'Online tips disabled'.",
+                "TimestampText": "09:52:35"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Large MTU enabled'.",
-                "TimestampText": "09:50:55"
+                "Message": "Verified preset 'Online tips disabled'.",
+                "TimestampText": "09:52:35"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "09:50:55"
+                "TimestampText": "09:52:35"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Large MTU enabled'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Online tips disabled'.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Large MTU enabled",
+            "TargetValue": "Online tips disabled",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1625,37 +1615,37 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Large MTU enabled'.\nEntries:\n- HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters\\DisableLargeMtu: missing -> 0",
-                "TimestampText": "09:50:55"
+                "Message": "Current values do not match a named option. Selected option is 'Online tips disabled'.\nEntries:\n- HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\Explorer\\AllowOnlineTips: missing -> 0",
+                "TimestampText": "09:52:35"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Large MTU enabled'.",
-                "TimestampText": "09:50:55"
+                "Message": "Applied preset 'Online tips disabled'.",
+                "TimestampText": "09:52:35"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Large MTU enabled'.",
-                "TimestampText": "09:50:55"
+                "Message": "Verified preset 'Online tips disabled'.",
+                "TimestampText": "09:52:35"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "09:50:55"
+                "TimestampText": "09:52:35"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T16:50:52.6745323+00:00",
-        "CompletedAtUtc": "2026-05-07T16:50:55.857676+00:00"
+        "StartedAtUtc": "2026-05-07T16:52:32.5686527+00:00",
+        "CompletedAtUtc": "2026-05-07T16:52:35.6982894+00:00"
       },
-      "qa_tweak_id": "network.smb-enable-large-mtu",
-      "candidate_id": "network.smb-enable-large-mtu",
-      "card_name": "SMB Client Large MTU",
-      "documentation": "research/records/network.smb-enable-large-mtu.json"
+      "qa_tweak_id": "privacy.disable-online-tips",
+      "candidate_id": "privacy.disable-online-tips",
+      "card_name": "Online Tips in Settings",
+      "documentation": "research/records/privacy.disable-online-tips.json"
     }
   ],
   "summary": {
@@ -1664,7 +1654,7 @@
     "live_success_count": 5,
     "live_failure_count": 0,
     "categories": [
-      "Network"
+      "Privacy"
     ]
   }
 }

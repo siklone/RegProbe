@@ -1,11 +1,11 @@
 # Promoted App QA Coverage
 
-- Generated UTC: 2026-05-07T16:50:10Z
-- History entries: 52
+- Generated UTC: 2026-05-07T16:51:52Z
+- History entries: 53
 - Promoted app-QA candidates: 242
-- Covered: 154
-- Uncovered: 88
-- Coverage: 63.64%
+- Covered: 159
+- Uncovered: 83
+- Coverage: 65.7%
 
 ## Covered Categories
 
@@ -18,7 +18,7 @@
 - Performance: 3
 - Peripheral: 2
 - Power: 7
-- Privacy: 38
+- Privacy: 43
 - Security: 12
 - System: 31
 - Visibility: 16
@@ -32,16 +32,13 @@
 - Notifications: 2
 - Peripheral: 1
 - Power: 3
-- Privacy: 29
+- Privacy: 24
 - Security: 9
 - System: 21
 - Visibility: 7
 
 ## Recommended Next Batches
 
-- Privacy: 5 uncovered cards | coverage 56.72%
-  command: `dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-mdm-enrollment --id privacy.disable-message-sync --id privacy.disable-offline-files.policy --id privacy.disable-onesettings-downloads --id privacy.disable-online-tips`
-  live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-mdm-enrollment --id privacy.disable-message-sync --id privacy.disable-offline-files.policy --id privacy.disable-onesettings-downloads --id privacy.disable-online-tips --run-kvm --json`
 - Security: 5 uncovered cards | coverage 57.14%
   command: `dotnet run --project cli/cli.csproj -- research qa-batch --id security.disable-wu-driver-updates --id security.enable-defender-maps-advanced-membership --id security.enable-dynamic-lock --id security.enable-sudo --id security.hide-defender-exclusions-from-local-admins`
   live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id security.disable-wu-driver-updates --id security.enable-defender-maps-advanced-membership --id security.enable-dynamic-lock --id security.enable-sudo --id security.hide-defender-exclusions-from-local-admins --run-kvm --json`
@@ -51,6 +48,9 @@
 - Notifications: 2 uncovered cards | coverage 60.0%
   command: `dotnet run --project cli/cli.csproj -- research qa-batch --id notifications.disable-mirroring --id notifications.disable-tile`
   live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id notifications.disable-mirroring --id notifications.disable-tile --run-kvm --json`
+- Privacy: 5 uncovered cards | coverage 64.18%
+  command: `dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-pca-diagnostics.policy --id privacy.disable-phone-linking --id privacy.disable-program-compatibility-assistant --id privacy.disable-recall --id privacy.disable-resume`
+  live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-pca-diagnostics.policy --id privacy.disable-phone-linking --id privacy.disable-program-compatibility-assistant --id privacy.disable-recall --id privacy.disable-resume --run-kvm --json`
 - Audio: 1 uncovered cards | coverage 66.67%
   command: `dotnet run --project cli/cli.csproj -- research qa-batch --id audio.show-hidden-devices`
   live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id audio.show-hidden-devices --run-kvm --json`

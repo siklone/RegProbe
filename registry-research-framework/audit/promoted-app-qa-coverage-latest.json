@@ -1,11 +1,11 @@
 {
-  "generated_utc": "2026-05-07T16:50:10Z",
-  "history_entry_count": 52,
+  "generated_utc": "2026-05-07T16:51:52Z",
+  "history_entry_count": 53,
   "catalog_candidate_count": 242,
-  "covered_count": 154,
-  "uncovered_count": 88,
+  "covered_count": 159,
+  "uncovered_count": 83,
   "summary": {
-    "coverage_percent": 63.64,
+    "coverage_percent": 65.7,
     "covered_categories": {
       "Audio": 2,
       "Cleanup": 1,
@@ -16,7 +16,7 @@
       "Performance": 3,
       "Peripheral": 2,
       "Power": 7,
-      "Privacy": 38,
+      "Privacy": 43,
       "Security": 12,
       "System": 31,
       "Visibility": 16
@@ -29,66 +29,13 @@
       "Notifications": 2,
       "Peripheral": 1,
       "Power": 3,
-      "Privacy": 29,
+      "Privacy": 24,
       "Security": 9,
       "System": 21,
       "Visibility": 7
     }
   },
   "recommended_next_batches": [
-    {
-      "category": "Privacy",
-      "covered_count": 38,
-      "uncovered_count": 29,
-      "coverage_percent": 56.72,
-      "batch_size": 5,
-      "tweak_ids": [
-        "privacy.disable-mdm-enrollment",
-        "privacy.disable-message-sync",
-        "privacy.disable-offline-files.policy",
-        "privacy.disable-onesettings-downloads",
-        "privacy.disable-online-tips"
-      ],
-      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-mdm-enrollment --id privacy.disable-message-sync --id privacy.disable-offline-files.policy --id privacy.disable-onesettings-downloads --id privacy.disable-online-tips",
-      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-mdm-enrollment --id privacy.disable-message-sync --id privacy.disable-offline-files.policy --id privacy.disable-onesettings-downloads --id privacy.disable-online-tips --run-kvm --json",
-      "candidates": [
-        {
-          "tweak_id": "privacy.disable-mdm-enrollment",
-          "record_id": "privacy.disable-mdm-enrollment",
-          "category": "Privacy",
-          "name": "MDM Enrollment",
-          "documentation": "research/records/privacy.disable-mdm-enrollment.json"
-        },
-        {
-          "tweak_id": "privacy.disable-message-sync",
-          "record_id": "privacy.disable-message-sync",
-          "category": "Privacy",
-          "name": "Message Service Cloud Sync",
-          "documentation": "research/records/privacy.disable-message-sync.json"
-        },
-        {
-          "tweak_id": "privacy.disable-offline-files.policy",
-          "record_id": "privacy.disable-offline-files.policy",
-          "category": "Privacy",
-          "name": "Offline Files Feature Policy",
-          "documentation": "research/records/privacy.disable-offline-files.policy.json"
-        },
-        {
-          "tweak_id": "privacy.disable-onesettings-downloads",
-          "record_id": "privacy.disable-onesettings-downloads",
-          "category": "Privacy",
-          "name": "OneSettings Downloads",
-          "documentation": "research/records/privacy.disable-onesettings-downloads.json"
-        },
-        {
-          "tweak_id": "privacy.disable-online-tips",
-          "record_id": "privacy.disable-online-tips",
-          "category": "Privacy",
-          "name": "Online Tips in Settings",
-          "documentation": "research/records/privacy.disable-online-tips.json"
-        }
-      ]
-    },
     {
       "category": "Security",
       "covered_count": 12,
@@ -221,6 +168,59 @@
           "category": "Notifications",
           "name": "Tile Notifications",
           "documentation": "research/records/notifications.disable-tile.json"
+        }
+      ]
+    },
+    {
+      "category": "Privacy",
+      "covered_count": 43,
+      "uncovered_count": 24,
+      "coverage_percent": 64.18,
+      "batch_size": 5,
+      "tweak_ids": [
+        "privacy.disable-pca-diagnostics.policy",
+        "privacy.disable-phone-linking",
+        "privacy.disable-program-compatibility-assistant",
+        "privacy.disable-recall",
+        "privacy.disable-resume"
+      ],
+      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-pca-diagnostics.policy --id privacy.disable-phone-linking --id privacy.disable-program-compatibility-assistant --id privacy.disable-recall --id privacy.disable-resume",
+      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-pca-diagnostics.policy --id privacy.disable-phone-linking --id privacy.disable-program-compatibility-assistant --id privacy.disable-recall --id privacy.disable-resume --run-kvm --json",
+      "candidates": [
+        {
+          "tweak_id": "privacy.disable-pca-diagnostics.policy",
+          "record_id": "privacy.disable-pca-diagnostics.policy",
+          "category": "Privacy",
+          "name": "Disable PCA Compatibility Diagnostics Detection",
+          "documentation": "research/records/privacy.disable-pca-diagnostics.policy.review.json"
+        },
+        {
+          "tweak_id": "privacy.disable-phone-linking",
+          "record_id": "privacy.disable-phone-linking",
+          "category": "Privacy",
+          "name": "Phone-PC Linking",
+          "documentation": "research/records/privacy.disable-phone-linking.json"
+        },
+        {
+          "tweak_id": "privacy.disable-program-compatibility-assistant",
+          "record_id": "privacy.disable-program-compatibility-assistant",
+          "category": "Privacy",
+          "name": "Disable Program Compatibility Assistant",
+          "documentation": "research/records/privacy.disable-program-compatibility-assistant.review.json"
+        },
+        {
+          "tweak_id": "privacy.disable-recall",
+          "record_id": "privacy.disable-recall",
+          "category": "Privacy",
+          "name": "Recall Snapshot Saving",
+          "documentation": "research/records/privacy.disable-recall.json"
+        },
+        {
+          "tweak_id": "privacy.disable-resume",
+          "record_id": "privacy.disable-resume",
+          "category": "Privacy",
+          "name": "Disable Resume for Current User",
+          "documentation": "research/records/privacy.disable-resume.json"
         }
       ]
     },
@@ -1076,6 +1076,51 @@
       "latest_report_status": "ok"
     },
     {
+      "tweak_id": "privacy.disable-mdm-enrollment",
+      "qa_tweak_id": "privacy.disable-mdm-enrollment",
+      "candidate_id": "privacy.disable-mdm-enrollment",
+      "category": "Privacy",
+      "name": "MDM Enrollment",
+      "documentation": "research/records/privacy.disable-mdm-enrollment.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "privacy.disable-message-sync",
+      "qa_tweak_id": "privacy.disable-message-sync",
+      "candidate_id": "privacy.disable-message-sync",
+      "category": "Privacy",
+      "name": "Message Service Cloud Sync",
+      "documentation": "research/records/privacy.disable-message-sync.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "privacy.disable-offline-files.policy",
+      "qa_tweak_id": "privacy.disable-offline-files.policy",
+      "candidate_id": "privacy.disable-offline-files.policy",
+      "category": "Privacy",
+      "name": "Offline Files Feature Policy",
+      "documentation": "research/records/privacy.disable-offline-files.policy.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "privacy.disable-onesettings-downloads",
+      "qa_tweak_id": "privacy.disable-onesettings-downloads",
+      "candidate_id": "privacy.disable-onesettings-downloads",
+      "category": "Privacy",
+      "name": "OneSettings Downloads",
+      "documentation": "research/records/privacy.disable-onesettings-downloads.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "privacy.disable-online-tips",
+      "qa_tweak_id": "privacy.disable-online-tips",
+      "candidate_id": "privacy.disable-online-tips",
+      "category": "Privacy",
+      "name": "Online Tips in Settings",
+      "documentation": "research/records/privacy.disable-online-tips.json",
+      "latest_report_status": "ok"
+    },
+    {
       "tweak_id": "privacy.disable-search-history",
       "qa_tweak_id": "privacy.disable-search-history",
       "candidate_id": "privacy.disable-search-history",
@@ -1788,41 +1833,6 @@
       "category": "Power",
       "name": "Games MMCSS Task Profile",
       "documentation": "research/records/power.optimize-gaming-network.json"
-    },
-    {
-      "tweak_id": "privacy.disable-mdm-enrollment",
-      "record_id": "privacy.disable-mdm-enrollment",
-      "category": "Privacy",
-      "name": "MDM Enrollment",
-      "documentation": "research/records/privacy.disable-mdm-enrollment.json"
-    },
-    {
-      "tweak_id": "privacy.disable-message-sync",
-      "record_id": "privacy.disable-message-sync",
-      "category": "Privacy",
-      "name": "Message Service Cloud Sync",
-      "documentation": "research/records/privacy.disable-message-sync.json"
-    },
-    {
-      "tweak_id": "privacy.disable-offline-files.policy",
-      "record_id": "privacy.disable-offline-files.policy",
-      "category": "Privacy",
-      "name": "Offline Files Feature Policy",
-      "documentation": "research/records/privacy.disable-offline-files.policy.json"
-    },
-    {
-      "tweak_id": "privacy.disable-onesettings-downloads",
-      "record_id": "privacy.disable-onesettings-downloads",
-      "category": "Privacy",
-      "name": "OneSettings Downloads",
-      "documentation": "research/records/privacy.disable-onesettings-downloads.json"
-    },
-    {
-      "tweak_id": "privacy.disable-online-tips",
-      "record_id": "privacy.disable-online-tips",
-      "category": "Privacy",
-      "name": "Online Tips in Settings",
-      "documentation": "research/records/privacy.disable-online-tips.json"
     },
     {
       "tweak_id": "privacy.disable-pca-diagnostics.policy",
