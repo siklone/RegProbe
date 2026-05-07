@@ -1,17 +1,17 @@
 {
-  "generated_utc": "2026-05-07T15:32:30Z",
-  "history_entry_count": 34,
+  "generated_utc": "2026-05-07T15:38:40Z",
+  "history_entry_count": 36,
   "catalog_candidate_count": 242,
-  "covered_count": 104,
-  "uncovered_count": 138,
+  "covered_count": 109,
+  "uncovered_count": 133,
   "summary": {
-    "coverage_percent": 42.98,
+    "coverage_percent": 45.04,
     "covered_categories": {
       "Audio": 2,
       "Cleanup": 1,
       "Developer": 7,
       "Explorer": 8,
-      "Network": 9,
+      "Network": 14,
       "Notifications": 3,
       "Performance": 3,
       "Peripheral": 2,
@@ -25,7 +25,7 @@
       "Audio": 1,
       "Developer": 2,
       "Explorer": 9,
-      "Network": 19,
+      "Network": 14,
       "Notifications": 2,
       "Peripheral": 1,
       "Power": 3,
@@ -36,59 +36,6 @@
     }
   },
   "recommended_next_batches": [
-    {
-      "category": "Network",
-      "covered_count": 9,
-      "uncovered_count": 19,
-      "coverage_percent": 32.14,
-      "batch_size": 5,
-      "tweak_ids": [
-        "network.disable-smart-name-resolution",
-        "network.disable-smb1",
-        "network.disable-smb2",
-        "network.disable-wifi-sense",
-        "network.enable-lltd-responder"
-      ],
-      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id network.disable-smart-name-resolution --id network.disable-smb1 --id network.disable-smb2 --id network.disable-wifi-sense --id network.enable-lltd-responder",
-      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id network.disable-smart-name-resolution --id network.disable-smb1 --id network.disable-smb2 --id network.disable-wifi-sense --id network.enable-lltd-responder --run-kvm --json",
-      "candidates": [
-        {
-          "tweak_id": "network.disable-smart-name-resolution",
-          "record_id": "network.disable-smart-name-resolution",
-          "category": "Network",
-          "name": "Smart Multi-Homed Name Resolution",
-          "documentation": "research/records/network.disable-smart-name-resolution.json"
-        },
-        {
-          "tweak_id": "network.disable-smb1",
-          "record_id": "network.disable-smb1",
-          "category": "Network",
-          "name": "SMBv1 Server Protocol Support",
-          "documentation": "research/records/network.disable-smb1.json"
-        },
-        {
-          "tweak_id": "network.disable-smb2",
-          "record_id": "network.disable-smb2",
-          "category": "Network",
-          "name": "SMBv2 and SMBv3 Server Protocol Support",
-          "documentation": "research/records/network.disable-smb2.json"
-        },
-        {
-          "tweak_id": "network.disable-wifi-sense",
-          "record_id": "network.disable-wifi-sense",
-          "category": "Network",
-          "name": "Wi-Fi Sense Suggested Hotspot Policy",
-          "documentation": "research/records/network.disable-wifi-sense.json"
-        },
-        {
-          "tweak_id": "network.enable-lltd-responder",
-          "record_id": "network.enable-lltd-responder",
-          "category": "Network",
-          "name": "LLTD Responder Driver Policy",
-          "documentation": "research/records/network.enable-lltd-responder.json"
-        }
-      ]
-    },
     {
       "category": "Security",
       "covered_count": 7,
@@ -298,6 +245,59 @@
           "category": "Explorer",
           "name": "Show Full Path in Explorer",
           "documentation": "research/records/explorer.show-full-path.review.json"
+        }
+      ]
+    },
+    {
+      "category": "Visibility",
+      "covered_count": 11,
+      "uncovered_count": 12,
+      "coverage_percent": 47.83,
+      "batch_size": 5,
+      "tweak_ids": [
+        "visibility.disable-lock-screen-motion",
+        "visibility.disable-lock-screen-slideshow",
+        "visibility.disable-spotlight-action-center",
+        "visibility.disable-spotlight-desktop-collection",
+        "visibility.disable-spotlight-features"
+      ],
+      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id visibility.disable-lock-screen-motion --id visibility.disable-lock-screen-slideshow --id visibility.disable-spotlight-action-center --id visibility.disable-spotlight-desktop-collection --id visibility.disable-spotlight-features",
+      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id visibility.disable-lock-screen-motion --id visibility.disable-lock-screen-slideshow --id visibility.disable-spotlight-action-center --id visibility.disable-spotlight-desktop-collection --id visibility.disable-spotlight-features --run-kvm --json",
+      "candidates": [
+        {
+          "tweak_id": "visibility.disable-lock-screen-motion",
+          "record_id": "visibility.disable-lock-screen-motion",
+          "category": "Visibility",
+          "name": "Lock Screen Background Motion",
+          "documentation": "research/records/visibility.disable-lock-screen-motion.json"
+        },
+        {
+          "tweak_id": "visibility.disable-lock-screen-slideshow",
+          "record_id": "visibility.disable-lock-screen-slideshow",
+          "category": "Visibility",
+          "name": "Lock Screen Slideshow",
+          "documentation": "research/records/visibility.disable-lock-screen-slideshow.json"
+        },
+        {
+          "tweak_id": "visibility.disable-spotlight-action-center",
+          "record_id": "visibility.disable-spotlight-action-center",
+          "category": "Visibility",
+          "name": "Windows Spotlight on Action Center",
+          "documentation": "research/records/visibility.disable-spotlight-action-center.json"
+        },
+        {
+          "tweak_id": "visibility.disable-spotlight-desktop-collection",
+          "record_id": "visibility.disable-spotlight-desktop-collection",
+          "category": "Visibility",
+          "name": "Spotlight Collection on Desktop",
+          "documentation": "research/records/visibility.disable-spotlight-desktop-collection.json"
+        },
+        {
+          "tweak_id": "visibility.disable-spotlight-features",
+          "record_id": "visibility.disable-spotlight-features",
+          "category": "Visibility",
+          "name": "Windows Spotlight Features",
+          "documentation": "research/records/visibility.disable-spotlight-features.json"
         }
       ]
     }
@@ -544,6 +544,51 @@
       "category": "Network",
       "name": "Plaintext SMB Passwords",
       "documentation": "research/records/network.disable-plaintext-smb-passwords.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "network.disable-smart-name-resolution",
+      "qa_tweak_id": "network.disable-smart-name-resolution",
+      "candidate_id": "network.disable-smart-name-resolution",
+      "category": "Network",
+      "name": "Smart Multi-Homed Name Resolution",
+      "documentation": "research/records/network.disable-smart-name-resolution.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "network.disable-smb1",
+      "qa_tweak_id": "network.disable-smb1",
+      "candidate_id": "network.disable-smb1",
+      "category": "Network",
+      "name": "SMBv1 Server Protocol Support",
+      "documentation": "research/records/network.disable-smb1.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "network.disable-smb2",
+      "qa_tweak_id": "network.disable-smb2",
+      "candidate_id": "network.disable-smb2",
+      "category": "Network",
+      "name": "SMBv2 and SMBv3 Server Protocol Support",
+      "documentation": "research/records/network.disable-smb2.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "network.disable-wifi-sense",
+      "qa_tweak_id": "network.disable-wifi-sense",
+      "candidate_id": "network.disable-wifi-sense",
+      "category": "Network",
+      "name": "Wi-Fi Sense Suggested Hotspot Policy",
+      "documentation": "research/records/network.disable-wifi-sense.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "network.enable-lltd-responder",
+      "qa_tweak_id": "network.enable-lltd-responder",
+      "candidate_id": "network.enable-lltd-responder",
+      "category": "Network",
+      "name": "LLTD Responder Driver Policy",
+      "documentation": "research/records/network.enable-lltd-responder.json",
       "latest_report_status": "ok"
     },
     {
@@ -1324,41 +1369,6 @@
       "category": "Explorer",
       "name": "Display File Icons On Thumbnails",
       "documentation": "research/records/explorer.show-type-overlay.review.json"
-    },
-    {
-      "tweak_id": "network.disable-smart-name-resolution",
-      "record_id": "network.disable-smart-name-resolution",
-      "category": "Network",
-      "name": "Smart Multi-Homed Name Resolution",
-      "documentation": "research/records/network.disable-smart-name-resolution.json"
-    },
-    {
-      "tweak_id": "network.disable-smb1",
-      "record_id": "network.disable-smb1",
-      "category": "Network",
-      "name": "SMBv1 Server Protocol Support",
-      "documentation": "research/records/network.disable-smb1.json"
-    },
-    {
-      "tweak_id": "network.disable-smb2",
-      "record_id": "network.disable-smb2",
-      "category": "Network",
-      "name": "SMBv2 and SMBv3 Server Protocol Support",
-      "documentation": "research/records/network.disable-smb2.json"
-    },
-    {
-      "tweak_id": "network.disable-wifi-sense",
-      "record_id": "network.disable-wifi-sense",
-      "category": "Network",
-      "name": "Wi-Fi Sense Suggested Hotspot Policy",
-      "documentation": "research/records/network.disable-wifi-sense.json"
-    },
-    {
-      "tweak_id": "network.enable-lltd-responder",
-      "record_id": "network.enable-lltd-responder",
-      "category": "Network",
-      "name": "LLTD Responder Driver Policy",
-      "documentation": "research/records/network.enable-lltd-responder.json"
     },
     {
       "tweak_id": "network.enable-lltdio",

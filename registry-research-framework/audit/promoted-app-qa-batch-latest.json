@@ -1,9 +1,10 @@
 {
-  "generated_utc": "2026-05-07T15:32:30Z",
+  "generated_utc": "2026-05-07T15:38:40Z",
   "status": "PASS",
   "selection": {
     "requested_ids": [
-      "power.disable-network-power-saving.policy"
+      "network.disable-smart-name-resolution",
+      "network.disable-wifi-sense"
     ],
     "requested_categories": [],
     "limit_per_category": 1,
@@ -18,29 +19,88 @@
     "kvm_batch_runner": "scripts/vm-kvm/run-guest-app-tweak-qa-batch.py"
   },
   "catalog_candidate_count": 242,
-  "selected_candidate_count": 1,
+  "selected_candidate_count": 2,
   "errors": [],
   "candidates": [
     {
-      "tweak_id": "power.disable-network-power-saving.policy",
-      "qa_tweak_id": "power.disable-network-power-saving.policy",
-      "candidate_id": "power.disable-network-power-saving.policy",
-      "record_id": "power.disable-network-power-saving.policy",
-      "category": "Power",
-      "name": "Network Power and Multimedia Responsiveness",
-      "documentation": "research/records/power.disable-network-power-saving.policy.review.json",
+      "tweak_id": "network.disable-smart-name-resolution",
+      "qa_tweak_id": "network.disable-smart-name-resolution",
+      "candidate_id": "network.disable-smart-name-resolution",
+      "record_id": "network.disable-smart-name-resolution",
+      "category": "Network",
+      "name": "Smart Multi-Homed Name Resolution",
+      "documentation": "research/records/network.disable-smart-name-resolution.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect power.disable-network-power-saving.policy",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect network.disable-smart-name-resolution",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'power.disable-network-power-saving.policy' --qa-output 'C:\\Tools\\ValidationController\\smoke\\power.disable-network-power-saving.policy.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'power.disable-network-power-saving.policy' --qa-output 'C:\\Tools\\ValidationController\\smoke\\power.disable-network-power-saving.policy.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'power.disable-network-power-saving.policy' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\power.disable-network-power-saving.policy.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'power.disable-network-power-saving.policy' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\power.disable-network-power-saving.policy.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'power.disable-network-power-saving.policy'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'network.disable-smart-name-resolution' --qa-output 'C:\\Tools\\ValidationController\\smoke\\network.disable-smart-name-resolution.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'network.disable-smart-name-resolution' --qa-output 'C:\\Tools\\ValidationController\\smoke\\network.disable-smart-name-resolution.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'network.disable-smart-name-resolution' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\network.disable-smart-name-resolution.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'network.disable-smart-name-resolution' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\network.disable-smart-name-resolution.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'network.disable-smart-name-resolution'"
+      },
+      "expected_report": {
+        "success": true,
+        "status": "ok",
+        "rollback_requested": true,
+        "required_stages": [
+          "detect-before",
+          "apply",
+          "rollback",
+          "detect-after"
+        ],
+        "required_card_snapshot": {
+          "required_fields": [
+            "TweakId",
+            "Name",
+            "Category",
+            "EvidenceClass",
+            "ResearchStatus",
+            "RollbackSnapshotState",
+            "HasClaimBoundary",
+            "WhatWeKnowSummary",
+            "WhatWeDoNotClaimSummary",
+            "ProofLanes"
+          ],
+          "required_proof_lanes": [
+            "docs",
+            "runtime",
+            "source",
+            "rollback"
+          ],
+          "claim_boundary_required": true
+        },
+        "required_stage_assertions": [
+          "apply stage reports a successful apply story",
+          "rollback stage reports a successful rollback story",
+          "detect-after is present"
+        ]
+      }
+    },
+    {
+      "tweak_id": "network.disable-wifi-sense",
+      "qa_tweak_id": "network.disable-wifi-sense",
+      "candidate_id": "network.disable-wifi-sense",
+      "record_id": "network.disable-wifi-sense",
+      "category": "Network",
+      "name": "Wi-Fi Sense Suggested Hotspot Policy",
+      "documentation": "research/records/network.disable-wifi-sense.json",
+      "promotion_state": "promoted",
+      "apply_allowed": true,
+      "restore_default_supported": true,
+      "restore_previous_supported": true,
+      "commands": {
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect network.disable-wifi-sense",
+        "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'network.disable-wifi-sense' --qa-output 'C:\\Tools\\ValidationController\\smoke\\network.disable-wifi-sense.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'network.disable-wifi-sense' --qa-output 'C:\\Tools\\ValidationController\\smoke\\network.disable-wifi-sense.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'network.disable-wifi-sense' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\network.disable-wifi-sense.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'network.disable-wifi-sense' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\network.disable-wifi-sense.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'network.disable-wifi-sense'"
       },
       "expected_report": {
         "success": true,
@@ -83,7 +143,7 @@
   ],
   "run_results": [
     {
-      "tweak_id": "power.disable-network-power-saving.policy",
+      "tweak_id": "network.disable-smart-name-resolution",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -117,19 +177,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "power.disable-network-power-saving.policy",
-        "TweakName": "Network Power and Multimedia Responsiveness",
+        "TweakId": "network.disable-smart-name-resolution",
+        "TweakName": "Smart Multi-Homed Name Resolution",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "power.disable-network-power-saving.policy",
-          "Name": "Network Power and Multimedia Responsiveness",
-          "Category": "Power",
-          "Description": "These settings affect whether TCP/IP task offloads stay enabled and how MMCSS reserves CPU for multimedia work.",
-          "FriendlyDescription": "These settings affect whether TCP/IP task offloads stay enabled and how MMCSS reserves CPU for multimedia work.",
-          "RegistryPath": "",
+          "TweakId": "network.disable-smart-name-resolution",
+          "Name": "Smart Multi-Homed Name Resolution",
+          "Category": "Network",
+          "Description": "When a PC has multiple network paths, Windows can try name lookups more aggressively across them. This policy decides whether that smart multi-homed behavior stays on.",
+          "FriendlyDescription": "When a PC has multiple network paths, Windows can try name lookups more aggressively across them. This policy decides whether that smart multi-homed behavior stays on.",
+          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient\\DisableSmartNameResolution",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -137,22 +197,22 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: These settings affect whether TCP/IP task offloads stay enabled and how MMCSS reserves CPU for multimedia work. Evidence: DisableTaskOffload remains covered by the separate Microsoft task-offload page. This validation proof focuses on the narrower MMCSS claim for SystemResponsiveness: path plus rounding/clamping behavior. The opaque NetworkThrottlingIndex write remains only in... Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: When a PC has multiple network paths, Windows can try name lookups more aggressively across them. This policy decides whether that smart multi-homed behavior stays on. Evidence: The local official Microsoft ADMX file names the same registry key and value name that the app writes and confirms the 1/0 mapping. Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "DisableTaskOffload remains covered by the separate Microsoft task-offload page. This validation proof focuses on the narrower MMCSS claim for SystemResponsiveness: path plus rounding/clamping behavior. The opaque NetworkThrottlingIndex write remains only in...",
-              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows/win32/procthread/multimedia-class-scheduler-service"
+              "Summary": "The local official Microsoft ADMX file names the same registry key and value name that the app writes and confirms the 1/0 mapping.",
+              "Source": "Validation proof source: evidence/files/external/c/WINDOWS/PolicyDefinitions/DnsClient.admx"
             },
             {
               "Key": "runtime",
               "Label": "RUNTIME",
               "State": "ready",
-              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
-              "Source": ""
+              "Summary": "A same-day guest Ghidra retry for `DisableSmartNameResolution` failed in `ensure-admin-shell` after the bounded 90 second wrapper timeout, so no xref bundle reached the host.",
+              "Source": "Guest Ghidra launch receipt for DisableSmartNameResolution: evidence/raw/ghidra/ghidra-network-disable-smart-name-resolution-20260427b/summary.json"
             },
             {
               "Key": "source",
@@ -171,13 +231,13 @@
           ],
           "ReferenceLinks": [
             {
-              "Title": "Docs: Details",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html#power.disable-network-power-saving.policy",
+              "Title": "Docs: Details (missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Power",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\power\\power.md#power.disable-network-power-saving.policy",
+              "Title": "Docs: Network (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\network\\network.md",
               "Kind": "Docs"
             }
           ]
@@ -186,10 +246,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Detected 1 of 2 values (matches: 0, missing: 1).",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Feature disabled'.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Multiple values",
-            "TargetValue": "Multiple values",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Feature disabled",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -198,8 +258,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 1 of 2 values (matches: 0, missing: 1).\nEntries:\n- HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\SystemResponsiveness: 20 -> 10\n- HKLM\\System\\CurrentControlSet\\Services\\TCPIP\\Parameters\\DisableTaskOffload: missing",
-                "TimestampText": "08:32:35"
+                "Message": "Current values do not match a named option. Selected option is 'Feature disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient\\DisableSmartNameResolution: missing -> 1",
+                "TimestampText": "08:38:44"
               },
               {
                 "Action": "Apply",
@@ -226,8 +286,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Multiple values",
-            "TargetValue": "Multiple values",
+            "CurrentValue": "Feature disabled",
+            "TargetValue": "Feature disabled",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -236,20 +296,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 1 of 2 values (matches: 0, missing: 1).\nEntries:\n- HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\SystemResponsiveness: 20 -> 10\n- HKLM\\System\\CurrentControlSet\\Services\\TCPIP\\Parameters\\DisableTaskOffload: missing",
-                "TimestampText": "08:32:35"
+                "Message": "Current values do not match a named option. Selected option is 'Feature disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient\\DisableSmartNameResolution: missing -> 1",
+                "TimestampText": "08:38:45"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Updated 2 values.",
-                "TimestampText": "08:32:38"
+                "Message": "Applied preset 'Feature disabled'.",
+                "TimestampText": "08:38:50"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified desired values.",
-                "TimestampText": "08:32:38"
+                "Message": "Verified preset 'Feature disabled'.",
+                "TimestampText": "08:38:50"
               },
               {
                 "Action": "Rollback",
@@ -264,8 +324,8 @@
             "AppliedStatus": "NotApplied",
             "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Multiple values",
-            "TargetValue": "Multiple values",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Feature disabled",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -274,36 +334,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 1 of 2 values (matches: 0, missing: 1).\nEntries:\n- HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\SystemResponsiveness: 20 -> 10\n- HKLM\\System\\CurrentControlSet\\Services\\TCPIP\\Parameters\\DisableTaskOffload: missing",
-                "TimestampText": "08:32:35"
+                "Message": "Current values do not match a named option. Selected option is 'Feature disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient\\DisableSmartNameResolution: missing -> 1",
+                "TimestampText": "08:38:45"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Updated 2 values.",
-                "TimestampText": "08:32:38"
+                "Message": "Applied preset 'Feature disabled'.",
+                "TimestampText": "08:38:50"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified desired values.",
-                "TimestampText": "08:32:38"
+                "Message": "Verified preset 'Feature disabled'.",
+                "TimestampText": "08:38:50"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "08:32:38"
+                "TimestampText": "08:38:50"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Detected 1 of 2 values (matches: 0, missing: 1).",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Feature disabled'.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Multiple values",
-            "TargetValue": "Multiple values",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Feature disabled",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -312,46 +372,308 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 1 of 2 values (matches: 0, missing: 1).\nEntries:\n- HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\SystemResponsiveness: 20 -> 10\n- HKLM\\System\\CurrentControlSet\\Services\\TCPIP\\Parameters\\DisableTaskOffload: missing",
-                "TimestampText": "08:32:38"
+                "Message": "Current values do not match a named option. Selected option is 'Feature disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows NT\\DNSClient\\DisableSmartNameResolution: missing -> 1",
+                "TimestampText": "08:38:50"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Updated 2 values.",
-                "TimestampText": "08:32:38"
+                "Message": "Applied preset 'Feature disabled'.",
+                "TimestampText": "08:38:50"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified desired values.",
-                "TimestampText": "08:32:38"
+                "Message": "Verified preset 'Feature disabled'.",
+                "TimestampText": "08:38:50"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "08:32:38"
+                "TimestampText": "08:38:50"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T15:32:35.7635526+00:00",
-        "CompletedAtUtc": "2026-05-07T15:32:38.9691874+00:00"
+        "StartedAtUtc": "2026-05-07T15:38:44.929502+00:00",
+        "CompletedAtUtc": "2026-05-07T15:38:50.8862108+00:00"
       },
-      "qa_tweak_id": "power.disable-network-power-saving.policy",
-      "candidate_id": "power.disable-network-power-saving.policy",
-      "card_name": "Network Power and Multimedia Responsiveness",
-      "documentation": "research/records/power.disable-network-power-saving.policy.review.json"
+      "qa_tweak_id": "network.disable-smart-name-resolution",
+      "candidate_id": "network.disable-smart-name-resolution",
+      "card_name": "Smart Multi-Homed Name Resolution",
+      "documentation": "research/records/network.disable-smart-name-resolution.json"
+    },
+    {
+      "tweak_id": "network.disable-wifi-sense",
+      "host_exit": 0,
+      "execution_exit": 0,
+      "payload_status": "completed",
+      "report_app_success": true,
+      "report_success": true,
+      "report_status": "ok",
+      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
+      "report_contract_status": "ok",
+      "report_contract_summary": "QA card snapshot contract passed.",
+      "report_contract_failures": [],
+      "report_card_present": true,
+      "report_card_has_claim_boundary": true,
+      "report_card_present_fields": [
+        "TweakId",
+        "Name",
+        "Category",
+        "EvidenceClass",
+        "ResearchStatus",
+        "RollbackSnapshotState",
+        "HasClaimBoundary",
+        "WhatWeKnowSummary",
+        "WhatWeDoNotClaimSummary",
+        "ProofLanes"
+      ],
+      "report_card_missing_fields": [],
+      "report_card_proof_lanes": [
+        "docs",
+        "runtime",
+        "source",
+        "rollback"
+      ],
+      "report_card_missing_proof_lanes": [],
+      "report": {
+        "TweakId": "network.disable-wifi-sense",
+        "TweakName": "Wi-Fi Sense Suggested Hotspot Policy",
+        "Success": true,
+        "Status": "ok",
+        "Summary": "Apply/verify path completed and rollback restored the tweak.",
+        "RollbackRequested": true,
+        "Card": {
+          "TweakId": "network.disable-wifi-sense",
+          "Name": "Wi-Fi Sense Suggested Hotspot Policy",
+          "Category": "Network",
+          "Description": "This controls whether Windows can automatically connect to suggested open hotspots, contact-shared networks, and some paid hotspot discovery flows.",
+          "FriendlyDescription": "This controls whether Windows can automatically connect to suggested open hotspots, contact-shared networks, and some paid hotspot discovery flows.",
+          "RegistryPath": "HKLM\\Software\\Microsoft\\wcmsvc\\wifinetworkmanager\\config\\AutoConnectAllowedOEM",
+          "EvidenceClass": "A",
+          "EvidenceClassTitle": "Cross-Layer Verified",
+          "ResearchStatus": "PROMOTED",
+          "IsMutationAllowed": true,
+          "RollbackSnapshotState": "ready",
+          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
+          "HasClaimBoundary": true,
+          "WhatWeKnowSummary": "Claim: This controls whether Windows can automatically connect to suggested open hotspots, contact-shared networks, and some paid hotspot discovery flows. Evidence: The local official Microsoft WLAN administrative template defines the exact path and value name used by the app, and the companion ADML help text explains the disabled behavior in plain language. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
+          "ProofLanes": [
+            {
+              "Key": "docs",
+              "Label": "DOCS",
+              "State": "ready",
+              "Summary": "The local official Microsoft WLAN administrative template defines the exact path and value name used by the app, and the companion ADML help text explains the disabled behavior in plain language.",
+              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/wlansvc.admx"
+            },
+            {
+              "Key": "runtime",
+              "Label": "RUNTIME",
+              "State": "ready",
+              "Summary": "A same-day guest Ghidra retry for `AutoConnectAllowedOEM` failed in `ensure-admin-shell` after the bounded 90 second wrapper timeout, so no xref bundle reached the host.",
+              "Source": "Guest Ghidra launch receipt for AutoConnectAllowedOEM: evidence/raw/ghidra/ghidra-network-disable-wifi-sense-20260427b/summary.json"
+            },
+            {
+              "Key": "source",
+              "Label": "SOURCE",
+              "State": "ready",
+              "Summary": "No upstream nohuto source link is attached to this record.",
+              "Source": ""
+            },
+            {
+              "Key": "rollback",
+              "Label": "ROLLBACK",
+              "State": "ready",
+              "Summary": "Rollback: Verified via record-restore-story.",
+              "Source": "record-restore-story"
+            }
+          ],
+          "ReferenceLinks": [
+            {
+              "Title": "Docs: Details (missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
+              "Kind": "Details"
+            },
+            {
+              "Title": "Docs: Network (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\network\\network.md",
+              "Kind": "Docs"
+            }
+          ]
+        },
+        "Stages": [
+          {
+            "Stage": "detect-before",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Disabled'.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Disabled",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": false,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Disabled'.\nEntries:\n- HKLM\\Software\\Microsoft\\wcmsvc\\wifinetworkmanager\\config\\AutoConnectAllowedOEM: missing -> 0",
+                "TimestampText": "08:38:57"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "apply",
+            "AppliedStatus": "Applied",
+            "StatusMessage": "Run completed.",
+            "OutcomeSummary": "Apply - Success",
+            "CurrentValue": "Disabled",
+            "TargetValue": "Disabled",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Disabled'.\nEntries:\n- HKLM\\Software\\Microsoft\\wcmsvc\\wifinetworkmanager\\config\\AutoConnectAllowedOEM: missing -> 0",
+                "TimestampText": "08:38:57"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Disabled'.",
+                "TimestampText": "08:39:00"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Disabled'.",
+                "TimestampText": "08:39:00"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Not required",
+                "Message": "Step not executed.",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "rollback",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Rolled back registry values.",
+            "OutcomeSummary": "Rollback - Rolled Back",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Disabled",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Disabled'.\nEntries:\n- HKLM\\Software\\Microsoft\\wcmsvc\\wifinetworkmanager\\config\\AutoConnectAllowedOEM: missing -> 0",
+                "TimestampText": "08:38:57"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Disabled'.",
+                "TimestampText": "08:39:00"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Disabled'.",
+                "TimestampText": "08:39:00"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "08:39:00"
+              }
+            ]
+          },
+          {
+            "Stage": "detect-after",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Disabled'.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Disabled",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Disabled'.\nEntries:\n- HKLM\\Software\\Microsoft\\wcmsvc\\wifinetworkmanager\\config\\AutoConnectAllowedOEM: missing -> 0",
+                "TimestampText": "08:39:00"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Disabled'.",
+                "TimestampText": "08:39:00"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Disabled'.",
+                "TimestampText": "08:39:00"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "08:39:00"
+              }
+            ]
+          }
+        ],
+        "StartedAtUtc": "2026-05-07T15:38:57.2997256+00:00",
+        "CompletedAtUtc": "2026-05-07T15:39:00.5458115+00:00"
+      },
+      "qa_tweak_id": "network.disable-wifi-sense",
+      "candidate_id": "network.disable-wifi-sense",
+      "card_name": "Wi-Fi Sense Suggested Hotspot Policy",
+      "documentation": "research/records/network.disable-wifi-sense.json"
     }
   ],
   "summary": {
-    "planned_count": 1,
-    "planned_apply_allowed_count": 1,
-    "live_success_count": 1,
+    "planned_count": 2,
+    "planned_apply_allowed_count": 2,
+    "live_success_count": 2,
     "live_failure_count": 0,
     "categories": [
-      "Power"
+      "Network"
     ]
   }
 }
