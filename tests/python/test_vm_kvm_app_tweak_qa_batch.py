@@ -106,6 +106,65 @@ class VmKvmAppTweakQaBatchTests(unittest.TestCase):
         self.assertEqual(result["report_card_missing_fields"], [])
         self.assertEqual(result["report_card_missing_proof_lanes"], [])
 
+    def test_empty_stdout_downloads_guest_report_fallback(self) -> None:
+        report = {
+            "Success": True,
+            "Status": "ok",
+            "Summary": "Apply/verify path completed.",
+            "Card": {
+                "TweakId": "system.alpha",
+                "Name": "System Alpha",
+                "Category": "System",
+                "EvidenceClass": "A",
+                "ResearchStatus": "PROMOTED",
+                "RollbackSnapshotState": "ready",
+                "HasClaimBoundary": True,
+                "WhatWeKnowSummary": "Known bounded claim.",
+                "WhatWeDoNotClaimSummary": "No benchmark claim.",
+                "ProofLanes": [
+                    {"Key": "docs"},
+                    {"Key": "runtime"},
+                    {"Key": "source"},
+                    {"Key": "rollback"},
+                ],
+            },
+        }
+        qga_payload = {
+            "status": "completed",
+            "execution": {
+                "exitcode": 0,
+                "stdout": "",
+            },
+        }
+
+        def fake_run(cmd, cwd, capture_output, text):
+            if "qga-get-file.py" in str(cmd[1]):
+                destination = Path(cmd[cmd.index("--destination") + 1])
+                destination.write_text(json.dumps(report), encoding="utf-8")
+                return mock.Mock(returncode=0, stdout=json.dumps({"status": "downloaded"}), stderr="")
+            return mock.Mock(returncode=0, stdout=json.dumps(qga_payload), stderr="")
+
+        argv = [
+            "run-guest-app-tweak-qa-batch.py",
+            "--id",
+            "system.alpha",
+            "--wait-timeout",
+            "1",
+        ]
+        with mock.patch.object(sys, "argv", argv), mock.patch.object(
+            app_tweak_qa_batch.subprocess,
+            "run",
+            side_effect=fake_run,
+        ), mock.patch("sys.stdout", new_callable=io.StringIO) as stdout:
+            exit_code = app_tweak_qa_batch.main()
+
+        payload = json.loads(stdout.getvalue())
+        result = payload[0]
+        self.assertEqual(exit_code, 0)
+        self.assertTrue(result["report_success"])
+        self.assertEqual(result["report_source"], "guest-file")
+        self.assertEqual(result["report_fetch_status"], "ok")
+
 
 if __name__ == "__main__":
     unittest.main()

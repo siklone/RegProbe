@@ -1,11 +1,11 @@
 {
-  "generated_utc": "2026-05-07T15:46:15Z",
-  "history_entry_count": 39,
+  "generated_utc": "2026-05-07T16:03:08Z",
+  "history_entry_count": 42,
   "catalog_candidate_count": 242,
-  "covered_count": 119,
-  "uncovered_count": 123,
+  "covered_count": 124,
+  "uncovered_count": 118,
   "summary": {
-    "coverage_percent": 49.17,
+    "coverage_percent": 51.24,
     "covered_categories": {
       "Audio": 2,
       "Cleanup": 1,
@@ -18,7 +18,7 @@
       "Power": 7,
       "Privacy": 28,
       "Security": 12,
-      "System": 21,
+      "System": 26,
       "Visibility": 11
     },
     "uncovered_categories": {
@@ -31,64 +31,11 @@
       "Power": 3,
       "Privacy": 39,
       "Security": 9,
-      "System": 31,
+      "System": 26,
       "Visibility": 12
     }
   },
   "recommended_next_batches": [
-    {
-      "category": "System",
-      "covered_count": 21,
-      "uncovered_count": 31,
-      "coverage_percent": 40.38,
-      "batch_size": 5,
-      "tweak_ids": [
-        "system.enable-game-mode",
-        "system.enable-hags",
-        "system.enable-indexing-encrypted-items",
-        "system.graphics-tdr-ddi-delay",
-        "system.graphics-tdr-delay"
-      ],
-      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id system.enable-game-mode --id system.enable-hags --id system.enable-indexing-encrypted-items --id system.graphics-tdr-ddi-delay --id system.graphics-tdr-delay",
-      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id system.enable-game-mode --id system.enable-hags --id system.enable-indexing-encrypted-items --id system.graphics-tdr-ddi-delay --id system.graphics-tdr-delay --run-kvm --json",
-      "candidates": [
-        {
-          "tweak_id": "system.enable-game-mode",
-          "record_id": "system.enable-game-mode",
-          "category": "System",
-          "name": "Game Mode",
-          "documentation": "research/records/system.enable-game-mode.review.json"
-        },
-        {
-          "tweak_id": "system.enable-hags",
-          "record_id": "system.enable-hags",
-          "category": "System",
-          "name": "Hardware-Accelerated GPU Scheduling",
-          "documentation": "research/records/system.enable-hags.review.json"
-        },
-        {
-          "tweak_id": "system.enable-indexing-encrypted-items",
-          "record_id": "system.enable-indexing-encrypted-items",
-          "category": "System",
-          "name": "Indexing of Encrypted Files",
-          "documentation": "research/records/system.enable-indexing-encrypted-items.json"
-        },
-        {
-          "tweak_id": "system.graphics-tdr-ddi-delay",
-          "record_id": "system.graphics-tdr-ddi-delay",
-          "category": "System",
-          "name": "Graphics TDR DDI Delay",
-          "documentation": "research/records/system.graphics-tdr-ddi-delay.json"
-        },
-        {
-          "tweak_id": "system.graphics-tdr-delay",
-          "record_id": "system.graphics-tdr-delay",
-          "category": "System",
-          "name": "Graphics TDR Delay",
-          "documentation": "research/records/system.graphics-tdr-delay.json"
-        }
-      ]
-    },
     {
       "category": "Privacy",
       "covered_count": 28,
@@ -245,6 +192,59 @@
           "category": "Visibility",
           "name": "Windows Spotlight Features",
           "documentation": "research/records/visibility.disable-spotlight-features.json"
+        }
+      ]
+    },
+    {
+      "category": "System",
+      "covered_count": 26,
+      "uncovered_count": 26,
+      "coverage_percent": 50.0,
+      "batch_size": 5,
+      "tweak_ids": [
+        "system.graphics-tdr-level",
+        "system.graphics-tdr-limit-count",
+        "system.graphics-tdr-limit-time",
+        "system.kernel-thread-dpc-enable",
+        "system.memory-clear-pagefile-at-shutdown"
+      ],
+      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id system.graphics-tdr-level --id system.graphics-tdr-limit-count --id system.graphics-tdr-limit-time --id system.kernel-thread-dpc-enable --id system.memory-clear-pagefile-at-shutdown",
+      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id system.graphics-tdr-level --id system.graphics-tdr-limit-count --id system.graphics-tdr-limit-time --id system.kernel-thread-dpc-enable --id system.memory-clear-pagefile-at-shutdown --run-kvm --json",
+      "candidates": [
+        {
+          "tweak_id": "system.graphics-tdr-level",
+          "record_id": "system.graphics-tdr-level",
+          "category": "System",
+          "name": "Graphics TDR Level",
+          "documentation": "research/records/system.graphics-tdr-level.json"
+        },
+        {
+          "tweak_id": "system.graphics-tdr-limit-count",
+          "record_id": "system.graphics-tdr-limit-count",
+          "category": "System",
+          "name": "Graphics TDR Limit Count",
+          "documentation": "research/records/system.graphics-tdr-limit-count.json"
+        },
+        {
+          "tweak_id": "system.graphics-tdr-limit-time",
+          "record_id": "system.graphics-tdr-limit-time",
+          "category": "System",
+          "name": "Graphics TDR Limit Time",
+          "documentation": "research/records/system.graphics-tdr-limit-time.json"
+        },
+        {
+          "tweak_id": "system.kernel-thread-dpc-enable",
+          "record_id": "system.kernel-thread-dpc-enable",
+          "category": "System",
+          "name": "Threaded DPCs",
+          "documentation": "research/records/system.kernel-thread-dpc-enable.json"
+        },
+        {
+          "tweak_id": "system.memory-clear-pagefile-at-shutdown",
+          "record_id": "system.memory-clear-pagefile-at-shutdown",
+          "category": "System",
+          "name": "Clear Page File at Shutdown",
+          "documentation": "research/records/system.memory-clear-pagefile-at-shutdown.json"
         }
       ]
     },
@@ -1276,6 +1276,51 @@
       "latest_report_status": "ok"
     },
     {
+      "tweak_id": "system.enable-game-mode",
+      "qa_tweak_id": "system.enable-game-mode",
+      "candidate_id": "system.enable-game-mode",
+      "category": "System",
+      "name": "Game Mode",
+      "documentation": "research/records/system.enable-game-mode.review.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "system.enable-hags",
+      "qa_tweak_id": "system.enable-hags",
+      "candidate_id": "system.enable-hags",
+      "category": "System",
+      "name": "Hardware-Accelerated GPU Scheduling",
+      "documentation": "research/records/system.enable-hags.review.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "system.enable-indexing-encrypted-items",
+      "qa_tweak_id": "system.enable-indexing-encrypted-items",
+      "candidate_id": "system.enable-indexing-encrypted-items",
+      "category": "System",
+      "name": "Indexing of Encrypted Files",
+      "documentation": "research/records/system.enable-indexing-encrypted-items.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "system.graphics-tdr-ddi-delay",
+      "qa_tweak_id": "system.graphics-tdr-ddi-delay",
+      "candidate_id": "system.graphics-tdr-ddi-delay",
+      "category": "System",
+      "name": "Graphics TDR DDI Delay",
+      "documentation": "research/records/system.graphics-tdr-ddi-delay.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "system.graphics-tdr-delay",
+      "qa_tweak_id": "system.graphics-tdr-delay",
+      "candidate_id": "system.graphics-tdr-delay",
+      "category": "System",
+      "name": "Graphics TDR Delay",
+      "documentation": "research/records/system.graphics-tdr-delay.json",
+      "latest_report_status": "ok"
+    },
+    {
       "tweak_id": "visibility.default-account-picture",
       "qa_tweak_id": "visibility.default-account-picture",
       "candidate_id": "visibility.default-account-picture",
@@ -1935,41 +1980,6 @@
       "category": "Security",
       "name": "User Account Control Prompting Profile",
       "documentation": "research/records/security.uac-never-notify.json"
-    },
-    {
-      "tweak_id": "system.enable-game-mode",
-      "record_id": "system.enable-game-mode",
-      "category": "System",
-      "name": "Game Mode",
-      "documentation": "research/records/system.enable-game-mode.review.json"
-    },
-    {
-      "tweak_id": "system.enable-hags",
-      "record_id": "system.enable-hags",
-      "category": "System",
-      "name": "Hardware-Accelerated GPU Scheduling",
-      "documentation": "research/records/system.enable-hags.review.json"
-    },
-    {
-      "tweak_id": "system.enable-indexing-encrypted-items",
-      "record_id": "system.enable-indexing-encrypted-items",
-      "category": "System",
-      "name": "Indexing of Encrypted Files",
-      "documentation": "research/records/system.enable-indexing-encrypted-items.json"
-    },
-    {
-      "tweak_id": "system.graphics-tdr-ddi-delay",
-      "record_id": "system.graphics-tdr-ddi-delay",
-      "category": "System",
-      "name": "Graphics TDR DDI Delay",
-      "documentation": "research/records/system.graphics-tdr-ddi-delay.json"
-    },
-    {
-      "tweak_id": "system.graphics-tdr-delay",
-      "record_id": "system.graphics-tdr-delay",
-      "category": "System",
-      "name": "Graphics TDR Delay",
-      "documentation": "research/records/system.graphics-tdr-delay.json"
     },
     {
       "tweak_id": "system.graphics-tdr-level",

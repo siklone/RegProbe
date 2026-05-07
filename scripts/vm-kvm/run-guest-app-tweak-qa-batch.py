@@ -5,6 +5,8 @@ import argparse
 import json
 import subprocess
 import sys
+import tempfile
+import time
 from pathlib import Path
 from typing import Any
 
@@ -22,6 +24,71 @@ REQUIRED_CARD_FIELDS = [
     "ProofLanes",
 ]
 REQUIRED_PROOF_LANES = ["docs", "runtime", "source", "rollback"]
+
+
+def parse_report_text(report_text: str) -> tuple[dict[str, object], str | None]:
+    if not report_text.strip():
+        return {}, "empty-report"
+    try:
+        report = json.loads(report_text)
+    except json.JSONDecodeError as exc:
+        return {"parse_error": True, "raw": report_text}, str(exc)
+    if not isinstance(report, dict):
+        return {"parse_error": True, "raw": report_text}, "report root is not an object"
+    return report, None
+
+
+def download_guest_report(
+    repo_root: Path,
+    guest_output: str,
+    *,
+    attempts: int = 10,
+    delay_seconds: float = 1.0,
+) -> tuple[dict[str, object], dict[str, object]]:
+    downloader = repo_root / "scripts" / "vm-kvm" / "qga-get-file.py"
+    last_fetch: dict[str, object] = {
+        "status": "not-attempted",
+        "guest_output": guest_output,
+    }
+    for attempt in range(1, attempts + 1):
+        with tempfile.TemporaryDirectory(prefix="regprobe-qa-report-") as temp_dir:
+            destination = Path(temp_dir) / "qa-report.json"
+            proc = subprocess.run(
+                [
+                    sys.executable,
+                    str(downloader),
+                    "--source",
+                    guest_output,
+                    "--destination",
+                    str(destination),
+                ],
+                cwd=repo_root,
+                capture_output=True,
+                text=True,
+            )
+
+            fetch: dict[str, object] = {
+                "status": "ok" if proc.returncode == 0 else "failed",
+                "attempt": attempt,
+                "attempts": attempts,
+                "returncode": proc.returncode,
+                "stdout": proc.stdout,
+                "stderr": proc.stderr,
+                "guest_output": guest_output,
+                "host_output": str(destination),
+            }
+            last_fetch = fetch
+            if proc.returncode == 0 and destination.exists():
+                report_text = destination.read_text(encoding="utf-8")
+                report, parse_error = parse_report_text(report_text)
+                fetch["parse_error"] = parse_error
+                fetch["bytes"] = destination.stat().st_size
+                return report, fetch
+
+        if attempt < attempts:
+            time.sleep(delay_seconds)
+
+    return {}, last_fetch
 
 
 def load_ids(id_args: list[str], id_file: str | None) -> list[str]:
@@ -155,13 +222,23 @@ def main() -> int:
 
         execution = payload.get("execution", {}) if isinstance(payload, dict) else {}
         report: dict[str, object] = {}
+        report_source = "missing"
+        report_parse_error = None
+        report_fetch: dict[str, object] | None = None
         if isinstance(execution, dict):
             report_text = execution.get("stdout")
             if isinstance(report_text, str) and report_text.strip():
-                try:
-                    report = json.loads(report_text)
-                except json.JSONDecodeError:
-                    report = {"parse_error": True, "raw": report_text}
+                report, report_parse_error = parse_report_text(report_text)
+                report_source = "stdout"
+
+        if not report or report.get("parse_error"):
+            fallback_report, report_fetch = download_guest_report(repo_root, guest_output)
+            if fallback_report and not fallback_report.get("parse_error"):
+                report = fallback_report
+                report_source = "guest-file"
+                report_parse_error = None
+            elif report_fetch:
+                report_parse_error = str(report_fetch.get("parse_error") or report_parse_error or report_fetch.get("stderr") or "guest report unavailable")
 
         app_success = bool(report.get("Success")) if report else False
         card_snapshot = summarize_card_snapshot(report) if report else {}
@@ -174,6 +251,9 @@ def main() -> int:
                 "host_exit": proc.returncode,
                 "execution_exit": execution.get("exitcode") if isinstance(execution, dict) else None,
                 "payload_status": payload.get("status") if isinstance(payload, dict) else None,
+                "report_source": report_source,
+                "report_parse_error": report_parse_error,
+                "report_fetch_status": report_fetch.get("status") if isinstance(report_fetch, dict) else None,
                 "report_app_success": report.get("Success") if report else None,
                 "report_success": success if report else None,
                 "report_status": report.get("Status") if report else None,
