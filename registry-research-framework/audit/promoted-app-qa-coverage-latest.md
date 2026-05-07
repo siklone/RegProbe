@@ -1,11 +1,11 @@
 # Promoted App QA Coverage
 
-- Generated UTC: 2026-05-07T15:38:40Z
-- History entries: 36
+- Generated UTC: 2026-05-07T15:44:37Z
+- History entries: 38
 - Promoted app-QA candidates: 242
-- Covered: 109
-- Uncovered: 133
-- Coverage: 45.04%
+- Covered: 114
+- Uncovered: 128
+- Coverage: 47.11%
 
 ## Covered Categories
 
@@ -19,7 +19,7 @@
 - Peripheral: 2
 - Power: 7
 - Privacy: 23
-- Security: 7
+- Security: 12
 - System: 21
 - Visibility: 11
 
@@ -33,15 +33,12 @@
 - Peripheral: 1
 - Power: 3
 - Privacy: 44
-- Security: 14
+- Security: 9
 - System: 31
 - Visibility: 12
 
 ## Recommended Next Batches
 
-- Security: 5 uncovered cards | coverage 33.33%
-  command: `dotnet run --project cli/cli.csproj -- research qa-batch --id security.disable-remote-assistance --id security.disable-system-mitigations --id security.disable-system-restore --id security.disable-windows-firewall --id security.disable-windows-update.policy`
-  live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id security.disable-remote-assistance --id security.disable-system-mitigations --id security.disable-system-restore --id security.disable-windows-firewall --id security.disable-windows-update.policy --run-kvm --json`
 - Privacy: 5 uncovered cards | coverage 34.33%
   command: `dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-cross-device-experiences.policy --id privacy.disable-device-name-telemetry --id privacy.disable-diagnostic-data-delete --id privacy.disable-diagnostic-data-viewer --id privacy.disable-edge-search-suggestions`
   live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-cross-device-experiences.policy --id privacy.disable-device-name-telemetry --id privacy.disable-diagnostic-data-delete --id privacy.disable-diagnostic-data-viewer --id privacy.disable-edge-search-suggestions --run-kvm --json`
@@ -54,6 +51,9 @@
 - Visibility: 5 uncovered cards | coverage 47.83%
   command: `dotnet run --project cli/cli.csproj -- research qa-batch --id visibility.disable-lock-screen-motion --id visibility.disable-lock-screen-slideshow --id visibility.disable-spotlight-action-center --id visibility.disable-spotlight-desktop-collection --id visibility.disable-spotlight-features`
   live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id visibility.disable-lock-screen-motion --id visibility.disable-lock-screen-slideshow --id visibility.disable-spotlight-action-center --id visibility.disable-spotlight-desktop-collection --id visibility.disable-spotlight-features --run-kvm --json`
+- Network: 5 uncovered cards | coverage 50.0%
+  command: `dotnet run --project cli/cli.csproj -- research qa-batch --id network.enable-lltdio --id network.prefer-ipv4 --id network.require-ntlm-ssp-client-session-security --id network.smb-disable-leasing --id network.smb-enable-large-mtu`
+  live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id network.enable-lltdio --id network.prefer-ipv4 --id network.require-ntlm-ssp-client-session-security --id network.smb-disable-leasing --id network.smb-enable-large-mtu --run-kvm --json`
 
 ## Remaining Uncovered Sample
 

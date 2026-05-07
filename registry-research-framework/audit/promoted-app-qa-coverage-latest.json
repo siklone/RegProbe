@@ -1,11 +1,11 @@
 {
-  "generated_utc": "2026-05-07T15:38:40Z",
-  "history_entry_count": 36,
+  "generated_utc": "2026-05-07T15:44:37Z",
+  "history_entry_count": 38,
   "catalog_candidate_count": 242,
-  "covered_count": 109,
-  "uncovered_count": 133,
+  "covered_count": 114,
+  "uncovered_count": 128,
   "summary": {
-    "coverage_percent": 45.04,
+    "coverage_percent": 47.11,
     "covered_categories": {
       "Audio": 2,
       "Cleanup": 1,
@@ -17,7 +17,7 @@
       "Peripheral": 2,
       "Power": 7,
       "Privacy": 23,
-      "Security": 7,
+      "Security": 12,
       "System": 21,
       "Visibility": 11
     },
@@ -30,65 +30,12 @@
       "Peripheral": 1,
       "Power": 3,
       "Privacy": 44,
-      "Security": 14,
+      "Security": 9,
       "System": 31,
       "Visibility": 12
     }
   },
   "recommended_next_batches": [
-    {
-      "category": "Security",
-      "covered_count": 7,
-      "uncovered_count": 14,
-      "coverage_percent": 33.33,
-      "batch_size": 5,
-      "tweak_ids": [
-        "security.disable-remote-assistance",
-        "security.disable-system-mitigations",
-        "security.disable-system-restore",
-        "security.disable-windows-firewall",
-        "security.disable-windows-update.policy"
-      ],
-      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id security.disable-remote-assistance --id security.disable-system-mitigations --id security.disable-system-restore --id security.disable-windows-firewall --id security.disable-windows-update.policy",
-      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id security.disable-remote-assistance --id security.disable-system-mitigations --id security.disable-system-restore --id security.disable-windows-firewall --id security.disable-windows-update.policy --run-kvm --json",
-      "candidates": [
-        {
-          "tweak_id": "security.disable-remote-assistance",
-          "record_id": "security.disable-remote-assistance",
-          "category": "Security",
-          "name": "Solicited Remote Assistance",
-          "documentation": "research/records/security.disable-remote-assistance.json"
-        },
-        {
-          "tweak_id": "security.disable-system-mitigations",
-          "record_id": "security.disable-system-mitigations",
-          "category": "Security",
-          "name": "Exploit Protection System Mitigations",
-          "documentation": "research/records/security.disable-system-mitigations.review.json"
-        },
-        {
-          "tweak_id": "security.disable-system-restore",
-          "record_id": "security.disable-system-restore",
-          "category": "Security",
-          "name": "Turn Off System Restore",
-          "documentation": "research/records/security.disable-system-restore.review.json"
-        },
-        {
-          "tweak_id": "security.disable-windows-firewall",
-          "record_id": "security.disable-windows-firewall",
-          "category": "Security",
-          "name": "Windows Defender Firewall Policy",
-          "documentation": "research/records/security.disable-windows-firewall.review.json"
-        },
-        {
-          "tweak_id": "security.disable-windows-update.policy",
-          "record_id": "security.disable-windows-update.policy",
-          "category": "Security",
-          "name": "Windows Update Policy Control",
-          "documentation": "research/records/security.disable-windows-update.policy.review.json"
-        }
-      ]
-    },
     {
       "category": "Privacy",
       "covered_count": 23,
@@ -298,6 +245,59 @@
           "category": "Visibility",
           "name": "Windows Spotlight Features",
           "documentation": "research/records/visibility.disable-spotlight-features.json"
+        }
+      ]
+    },
+    {
+      "category": "Network",
+      "covered_count": 14,
+      "uncovered_count": 14,
+      "coverage_percent": 50.0,
+      "batch_size": 5,
+      "tweak_ids": [
+        "network.enable-lltdio",
+        "network.prefer-ipv4",
+        "network.require-ntlm-ssp-client-session-security",
+        "network.smb-disable-leasing",
+        "network.smb-enable-large-mtu"
+      ],
+      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id network.enable-lltdio --id network.prefer-ipv4 --id network.require-ntlm-ssp-client-session-security --id network.smb-disable-leasing --id network.smb-enable-large-mtu",
+      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id network.enable-lltdio --id network.prefer-ipv4 --id network.require-ntlm-ssp-client-session-security --id network.smb-disable-leasing --id network.smb-enable-large-mtu --run-kvm --json",
+      "candidates": [
+        {
+          "tweak_id": "network.enable-lltdio",
+          "record_id": "network.enable-lltdio",
+          "category": "Network",
+          "name": "LLTD Mapper I/O Driver Policy",
+          "documentation": "research/records/network.enable-lltdio.json"
+        },
+        {
+          "tweak_id": "network.prefer-ipv4",
+          "record_id": "network.prefer-ipv4",
+          "category": "Network",
+          "name": "IPv4 Preference Override",
+          "documentation": "research/records/network.prefer-ipv4.json"
+        },
+        {
+          "tweak_id": "network.require-ntlm-ssp-client-session-security",
+          "record_id": "network.require-ntlm-ssp-client-session-security",
+          "category": "Network",
+          "name": "Require NTLM SSP Client Session Security and 128-bit Encryption",
+          "documentation": "research/records/network.require-ntlm-ssp-client-session-security.review.json"
+        },
+        {
+          "tweak_id": "network.smb-disable-leasing",
+          "record_id": "network.smb-disable-leasing",
+          "category": "Network",
+          "name": "SMB Server Leasing",
+          "documentation": "research/records/network.smb-disable-leasing.review.json"
+        },
+        {
+          "tweak_id": "network.smb-enable-large-mtu",
+          "record_id": "network.smb-enable-large-mtu",
+          "category": "Network",
+          "name": "SMB Client Large MTU",
+          "documentation": "research/records/network.smb-enable-large-mtu.json"
         }
       ]
     }
@@ -994,6 +994,51 @@
       "category": "Security",
       "name": "Picture Password Sign-In for Domain Users",
       "documentation": "research/records/security.disable-picture-password.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "security.disable-remote-assistance",
+      "qa_tweak_id": "security.disable-remote-assistance",
+      "candidate_id": "security.disable-remote-assistance",
+      "category": "Security",
+      "name": "Solicited Remote Assistance",
+      "documentation": "research/records/security.disable-remote-assistance.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "security.disable-system-mitigations",
+      "qa_tweak_id": "security.disable-system-mitigations",
+      "candidate_id": "security.disable-system-mitigations",
+      "category": "Security",
+      "name": "Exploit Protection System Mitigations",
+      "documentation": "research/records/security.disable-system-mitigations.review.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "security.disable-system-restore",
+      "qa_tweak_id": "security.disable-system-restore",
+      "candidate_id": "security.disable-system-restore",
+      "category": "Security",
+      "name": "Turn Off System Restore",
+      "documentation": "research/records/security.disable-system-restore.review.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "security.disable-windows-firewall",
+      "qa_tweak_id": "security.disable-windows-firewall",
+      "candidate_id": "security.disable-windows-firewall",
+      "category": "Security",
+      "name": "Windows Defender Firewall Policy",
+      "documentation": "research/records/security.disable-windows-firewall.review.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "security.disable-windows-update.policy",
+      "qa_tweak_id": "security.disable-windows-update.policy",
+      "candidate_id": "security.disable-windows-update.policy",
+      "category": "Security",
+      "name": "Windows Update Policy Control",
+      "documentation": "research/records/security.disable-windows-update.policy.review.json",
       "latest_report_status": "ok"
     },
     {
@@ -1817,41 +1862,6 @@
       "category": "Privacy",
       "name": "Recommended Troubleshooting for Known Problems",
       "documentation": "research/records/privacy.troubleshooter-dont-run.review.json"
-    },
-    {
-      "tweak_id": "security.disable-remote-assistance",
-      "record_id": "security.disable-remote-assistance",
-      "category": "Security",
-      "name": "Solicited Remote Assistance",
-      "documentation": "research/records/security.disable-remote-assistance.json"
-    },
-    {
-      "tweak_id": "security.disable-system-mitigations",
-      "record_id": "security.disable-system-mitigations",
-      "category": "Security",
-      "name": "Exploit Protection System Mitigations",
-      "documentation": "research/records/security.disable-system-mitigations.review.json"
-    },
-    {
-      "tweak_id": "security.disable-system-restore",
-      "record_id": "security.disable-system-restore",
-      "category": "Security",
-      "name": "Turn Off System Restore",
-      "documentation": "research/records/security.disable-system-restore.review.json"
-    },
-    {
-      "tweak_id": "security.disable-windows-firewall",
-      "record_id": "security.disable-windows-firewall",
-      "category": "Security",
-      "name": "Windows Defender Firewall Policy",
-      "documentation": "research/records/security.disable-windows-firewall.review.json"
-    },
-    {
-      "tweak_id": "security.disable-windows-update.policy",
-      "record_id": "security.disable-windows-update.policy",
-      "category": "Security",
-      "name": "Windows Update Policy Control",
-      "documentation": "research/records/security.disable-windows-update.policy.review.json"
     },
     {
       "tweak_id": "security.disable-wu-driver-updates",

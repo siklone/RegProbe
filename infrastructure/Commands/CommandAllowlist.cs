@@ -177,11 +177,16 @@ public sealed class CommandAllowlist
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\AppPrivacy", "LetAppsRunInBackground", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\AppPrivacy", "LetAppsSyncWithDevices", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\FileHistory", "Disabled", "0", "1");
+        AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows NT\SystemRestore", "DisableSR", "0", "1");
+        AddRegDwordRule(regAllowlist, @"HKLM\SOFTWARE\Policies\Microsoft\WindowsFirewall\DomainProfile", "EnableFirewall", "0", "1");
+        AddRegDwordRule(regAllowlist, @"HKLM\SOFTWARE\Policies\Microsoft\WindowsFirewall\StandardProfile", "EnableFirewall", "0", "1");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\LocationAndSensors", "DisableLocation", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\LocationAndSensors", "DisableLocationScripting", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\LocationAndSensors", "DisableSensors", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\LocationAndSensors", "DisableWindowsLocationProvider", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\Messaging", "AllowMessageSync", "0", "1", "2");
+        AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate", "DisableWindowsUpdateAccess", "0", "1");
+        AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate\AU", "NoAutoUpdate", "0", "1");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\CurrentVersion\MDM", "DisableRegistration", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\NetworkConnectivityStatusIndicator", "NoActiveProbe", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows NT\DNSClient", "DisableSmartNameResolution", "0", "1");
