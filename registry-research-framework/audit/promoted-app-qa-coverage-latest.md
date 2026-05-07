@@ -1,11 +1,11 @@
 # Promoted App QA Coverage
 
-- Generated UTC: 2026-05-07T16:06:19Z
-- History entries: 44
+- Generated UTC: 2026-05-07T16:08:03Z
+- History entries: 45
 - Promoted app-QA candidates: 242
-- Covered: 134
-- Uncovered: 108
-- Coverage: 55.37%
+- Covered: 139
+- Uncovered: 103
+- Coverage: 57.44%
 
 ## Covered Categories
 
@@ -21,7 +21,7 @@
 - Privacy: 33
 - Security: 12
 - System: 26
-- Visibility: 11
+- Visibility: 16
 
 ## Uncovered Categories
 
@@ -35,13 +35,10 @@
 - Privacy: 34
 - Security: 9
 - System: 26
-- Visibility: 12
+- Visibility: 7
 
 ## Recommended Next Batches
 
-- Visibility: 5 uncovered cards | coverage 47.83%
-  command: `dotnet run --project cli/cli.csproj -- research qa-batch --id visibility.disable-lock-screen-motion --id visibility.disable-lock-screen-slideshow --id visibility.disable-spotlight-action-center --id visibility.disable-spotlight-desktop-collection --id visibility.disable-spotlight-features`
-  live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id visibility.disable-lock-screen-motion --id visibility.disable-lock-screen-slideshow --id visibility.disable-spotlight-action-center --id visibility.disable-spotlight-desktop-collection --id visibility.disable-spotlight-features --run-kvm --json`
 - Privacy: 5 uncovered cards | coverage 49.25%
   command: `dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-local-security-questions --id privacy.disable-location-consent --id privacy.disable-location-consent-system --id privacy.disable-location-scripting --id privacy.disable-location-services`
   live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-local-security-questions --id privacy.disable-location-consent --id privacy.disable-location-consent-system --id privacy.disable-location-scripting --id privacy.disable-location-services --run-kvm --json`
@@ -54,6 +51,9 @@
 - Security: 5 uncovered cards | coverage 57.14%
   command: `dotnet run --project cli/cli.csproj -- research qa-batch --id security.disable-wu-driver-updates --id security.enable-defender-maps-advanced-membership --id security.enable-dynamic-lock --id security.enable-sudo --id security.hide-defender-exclusions-from-local-admins`
   live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id security.disable-wu-driver-updates --id security.enable-defender-maps-advanced-membership --id security.enable-dynamic-lock --id security.enable-sudo --id security.hide-defender-exclusions-from-local-admins --run-kvm --json`
+- Notifications: 2 uncovered cards | coverage 60.0%
+  command: `dotnet run --project cli/cli.csproj -- research qa-batch --id notifications.disable-mirroring --id notifications.disable-tile`
+  live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id notifications.disable-mirroring --id notifications.disable-tile --run-kvm --json`
 
 ## Remaining Uncovered Sample
 

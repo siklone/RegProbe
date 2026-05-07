@@ -1,11 +1,11 @@
 {
-  "generated_utc": "2026-05-07T16:06:19Z",
-  "history_entry_count": 44,
+  "generated_utc": "2026-05-07T16:08:03Z",
+  "history_entry_count": 45,
   "catalog_candidate_count": 242,
-  "covered_count": 134,
-  "uncovered_count": 108,
+  "covered_count": 139,
+  "uncovered_count": 103,
   "summary": {
-    "coverage_percent": 55.37,
+    "coverage_percent": 57.44,
     "covered_categories": {
       "Audio": 2,
       "Cleanup": 1,
@@ -19,7 +19,7 @@
       "Privacy": 33,
       "Security": 12,
       "System": 26,
-      "Visibility": 11
+      "Visibility": 16
     },
     "uncovered_categories": {
       "Audio": 1,
@@ -32,63 +32,10 @@
       "Privacy": 34,
       "Security": 9,
       "System": 26,
-      "Visibility": 12
+      "Visibility": 7
     }
   },
   "recommended_next_batches": [
-    {
-      "category": "Visibility",
-      "covered_count": 11,
-      "uncovered_count": 12,
-      "coverage_percent": 47.83,
-      "batch_size": 5,
-      "tweak_ids": [
-        "visibility.disable-lock-screen-motion",
-        "visibility.disable-lock-screen-slideshow",
-        "visibility.disable-spotlight-action-center",
-        "visibility.disable-spotlight-desktop-collection",
-        "visibility.disable-spotlight-features"
-      ],
-      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id visibility.disable-lock-screen-motion --id visibility.disable-lock-screen-slideshow --id visibility.disable-spotlight-action-center --id visibility.disable-spotlight-desktop-collection --id visibility.disable-spotlight-features",
-      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id visibility.disable-lock-screen-motion --id visibility.disable-lock-screen-slideshow --id visibility.disable-spotlight-action-center --id visibility.disable-spotlight-desktop-collection --id visibility.disable-spotlight-features --run-kvm --json",
-      "candidates": [
-        {
-          "tweak_id": "visibility.disable-lock-screen-motion",
-          "record_id": "visibility.disable-lock-screen-motion",
-          "category": "Visibility",
-          "name": "Lock Screen Background Motion",
-          "documentation": "research/records/visibility.disable-lock-screen-motion.json"
-        },
-        {
-          "tweak_id": "visibility.disable-lock-screen-slideshow",
-          "record_id": "visibility.disable-lock-screen-slideshow",
-          "category": "Visibility",
-          "name": "Lock Screen Slideshow",
-          "documentation": "research/records/visibility.disable-lock-screen-slideshow.json"
-        },
-        {
-          "tweak_id": "visibility.disable-spotlight-action-center",
-          "record_id": "visibility.disable-spotlight-action-center",
-          "category": "Visibility",
-          "name": "Windows Spotlight on Action Center",
-          "documentation": "research/records/visibility.disable-spotlight-action-center.json"
-        },
-        {
-          "tweak_id": "visibility.disable-spotlight-desktop-collection",
-          "record_id": "visibility.disable-spotlight-desktop-collection",
-          "category": "Visibility",
-          "name": "Spotlight Collection on Desktop",
-          "documentation": "research/records/visibility.disable-spotlight-desktop-collection.json"
-        },
-        {
-          "tweak_id": "visibility.disable-spotlight-features",
-          "record_id": "visibility.disable-spotlight-features",
-          "category": "Visibility",
-          "name": "Windows Spotlight Features",
-          "documentation": "research/records/visibility.disable-spotlight-features.json"
-        }
-      ]
-    },
     {
       "category": "Privacy",
       "covered_count": 33,
@@ -298,6 +245,35 @@
           "category": "Security",
           "name": "Hide Defender Exclusions From Local Admins",
           "documentation": "research/records/security.hide-defender-exclusions-from-local-admins.review.json"
+        }
+      ]
+    },
+    {
+      "category": "Notifications",
+      "covered_count": 3,
+      "uncovered_count": 2,
+      "coverage_percent": 60.0,
+      "batch_size": 2,
+      "tweak_ids": [
+        "notifications.disable-mirroring",
+        "notifications.disable-tile"
+      ],
+      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id notifications.disable-mirroring --id notifications.disable-tile",
+      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id notifications.disable-mirroring --id notifications.disable-tile --run-kvm --json",
+      "candidates": [
+        {
+          "tweak_id": "notifications.disable-mirroring",
+          "record_id": "notifications.disable-mirroring",
+          "category": "Notifications",
+          "name": "Notification Mirroring",
+          "documentation": "research/records/notifications.disable-mirroring.json"
+        },
+        {
+          "tweak_id": "notifications.disable-tile",
+          "record_id": "notifications.disable-tile",
+          "category": "Notifications",
+          "name": "Tile Notifications",
+          "documentation": "research/records/notifications.disable-tile.json"
         }
       ]
     }
@@ -1474,6 +1450,51 @@
       "latest_report_status": "ok"
     },
     {
+      "tweak_id": "visibility.disable-lock-screen-motion",
+      "qa_tweak_id": "visibility.disable-lock-screen-motion",
+      "candidate_id": "visibility.disable-lock-screen-motion",
+      "category": "Visibility",
+      "name": "Lock Screen Background Motion",
+      "documentation": "research/records/visibility.disable-lock-screen-motion.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "visibility.disable-lock-screen-slideshow",
+      "qa_tweak_id": "visibility.disable-lock-screen-slideshow",
+      "candidate_id": "visibility.disable-lock-screen-slideshow",
+      "category": "Visibility",
+      "name": "Lock Screen Slideshow",
+      "documentation": "research/records/visibility.disable-lock-screen-slideshow.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "visibility.disable-spotlight-action-center",
+      "qa_tweak_id": "visibility.disable-spotlight-action-center",
+      "candidate_id": "visibility.disable-spotlight-action-center",
+      "category": "Visibility",
+      "name": "Windows Spotlight on Action Center",
+      "documentation": "research/records/visibility.disable-spotlight-action-center.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "visibility.disable-spotlight-desktop-collection",
+      "qa_tweak_id": "visibility.disable-spotlight-desktop-collection",
+      "candidate_id": "visibility.disable-spotlight-desktop-collection",
+      "category": "Visibility",
+      "name": "Spotlight Collection on Desktop",
+      "documentation": "research/records/visibility.disable-spotlight-desktop-collection.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "visibility.disable-spotlight-features",
+      "qa_tweak_id": "visibility.disable-spotlight-features",
+      "candidate_id": "visibility.disable-spotlight-features",
+      "category": "Visibility",
+      "name": "Windows Spotlight Features",
+      "documentation": "research/records/visibility.disable-spotlight-features.json",
+      "latest_report_status": "ok"
+    },
+    {
       "tweak_id": "visibility.force-classic-control-panel",
       "qa_tweak_id": "visibility.force-classic-control-panel",
       "candidate_id": "visibility.force-classic-control-panel",
@@ -2182,41 +2203,6 @@
       "category": "System",
       "name": "Service Shutdown Timeout",
       "documentation": "research/records/system.wait-to-kill-service-timeout.review.json"
-    },
-    {
-      "tweak_id": "visibility.disable-lock-screen-motion",
-      "record_id": "visibility.disable-lock-screen-motion",
-      "category": "Visibility",
-      "name": "Lock Screen Background Motion",
-      "documentation": "research/records/visibility.disable-lock-screen-motion.json"
-    },
-    {
-      "tweak_id": "visibility.disable-lock-screen-slideshow",
-      "record_id": "visibility.disable-lock-screen-slideshow",
-      "category": "Visibility",
-      "name": "Lock Screen Slideshow",
-      "documentation": "research/records/visibility.disable-lock-screen-slideshow.json"
-    },
-    {
-      "tweak_id": "visibility.disable-spotlight-action-center",
-      "record_id": "visibility.disable-spotlight-action-center",
-      "category": "Visibility",
-      "name": "Windows Spotlight on Action Center",
-      "documentation": "research/records/visibility.disable-spotlight-action-center.json"
-    },
-    {
-      "tweak_id": "visibility.disable-spotlight-desktop-collection",
-      "record_id": "visibility.disable-spotlight-desktop-collection",
-      "category": "Visibility",
-      "name": "Spotlight Collection on Desktop",
-      "documentation": "research/records/visibility.disable-spotlight-desktop-collection.json"
-    },
-    {
-      "tweak_id": "visibility.disable-spotlight-features",
-      "record_id": "visibility.disable-spotlight-features",
-      "category": "Visibility",
-      "name": "Windows Spotlight Features",
-      "documentation": "research/records/visibility.disable-spotlight-features.json"
     },
     {
       "tweak_id": "visibility.disable-spotlight-settings",

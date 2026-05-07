@@ -1,13 +1,13 @@
 {
-  "generated_utc": "2026-05-07T16:06:19Z",
+  "generated_utc": "2026-05-07T16:08:03Z",
   "status": "PASS",
   "selection": {
     "requested_ids": [
-      "explorer.enable-explorer-compact-mode",
-      "explorer.launch-folder-windows-in-a-separate-process",
-      "explorer.show-compressed-and-encrypted-files-in-color",
-      "explorer.show-drive-letters-first",
-      "explorer.show-full-path"
+      "visibility.disable-lock-screen-motion",
+      "visibility.disable-lock-screen-slideshow",
+      "visibility.disable-spotlight-action-center",
+      "visibility.disable-spotlight-desktop-collection",
+      "visibility.disable-spotlight-features"
     ],
     "requested_categories": [],
     "limit_per_category": 1,
@@ -26,25 +26,25 @@
   "errors": [],
   "candidates": [
     {
-      "tweak_id": "explorer.enable-explorer-compact-mode",
-      "qa_tweak_id": "explorer.enable-explorer-compact-mode",
-      "candidate_id": "explorer.enable-explorer-compact-mode",
-      "record_id": "explorer.enable-explorer-compact-mode",
-      "category": "Explorer",
-      "name": "Enable Explorer Compact View",
-      "documentation": "research/records/explorer.enable-explorer-compact-mode.review.json",
+      "tweak_id": "visibility.disable-lock-screen-motion",
+      "qa_tweak_id": "visibility.disable-lock-screen-motion",
+      "candidate_id": "visibility.disable-lock-screen-motion",
+      "record_id": "visibility.disable-lock-screen-motion",
+      "category": "Visibility",
+      "name": "Lock Screen Background Motion",
+      "documentation": "research/records/visibility.disable-lock-screen-motion.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect explorer.enable-explorer-compact-mode",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect visibility.disable-lock-screen-motion",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'explorer.enable-explorer-compact-mode' --qa-output 'C:\\Tools\\ValidationController\\smoke\\explorer.enable-explorer-compact-mode.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'explorer.enable-explorer-compact-mode' --qa-output 'C:\\Tools\\ValidationController\\smoke\\explorer.enable-explorer-compact-mode.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'explorer.enable-explorer-compact-mode' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\explorer.enable-explorer-compact-mode.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'explorer.enable-explorer-compact-mode' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\explorer.enable-explorer-compact-mode.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'explorer.enable-explorer-compact-mode'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'visibility.disable-lock-screen-motion' --qa-output 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-lock-screen-motion.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'visibility.disable-lock-screen-motion' --qa-output 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-lock-screen-motion.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'visibility.disable-lock-screen-motion' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-lock-screen-motion.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'visibility.disable-lock-screen-motion' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-lock-screen-motion.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'visibility.disable-lock-screen-motion'"
       },
       "expected_report": {
         "success": true,
@@ -85,25 +85,25 @@
       }
     },
     {
-      "tweak_id": "explorer.launch-folder-windows-in-a-separate-process",
-      "qa_tweak_id": "explorer.launch-folder-windows-in-a-separate-process",
-      "candidate_id": "explorer.launch-folder-windows-in-a-separate-process",
-      "record_id": "explorer.launch-folder-windows-in-a-separate-process",
-      "category": "Explorer",
-      "name": "Launch Folder Windows in a Separate Process",
-      "documentation": "research/records/explorer.launch-folder-windows-in-a-separate-process.review.json",
+      "tweak_id": "visibility.disable-lock-screen-slideshow",
+      "qa_tweak_id": "visibility.disable-lock-screen-slideshow",
+      "candidate_id": "visibility.disable-lock-screen-slideshow",
+      "record_id": "visibility.disable-lock-screen-slideshow",
+      "category": "Visibility",
+      "name": "Lock Screen Slideshow",
+      "documentation": "research/records/visibility.disable-lock-screen-slideshow.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect explorer.launch-folder-windows-in-a-separate-process",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect visibility.disable-lock-screen-slideshow",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'explorer.launch-folder-windows-in-a-separate-process' --qa-output 'C:\\Tools\\ValidationController\\smoke\\explorer.launch-folder-windows-in-a-separate-process.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'explorer.launch-folder-windows-in-a-separate-process' --qa-output 'C:\\Tools\\ValidationController\\smoke\\explorer.launch-folder-windows-in-a-separate-process.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'explorer.launch-folder-windows-in-a-separate-process' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\explorer.launch-folder-windows-in-a-separate-process.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'explorer.launch-folder-windows-in-a-separate-process' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\explorer.launch-folder-windows-in-a-separate-process.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'explorer.launch-folder-windows-in-a-separate-process'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'visibility.disable-lock-screen-slideshow' --qa-output 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-lock-screen-slideshow.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'visibility.disable-lock-screen-slideshow' --qa-output 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-lock-screen-slideshow.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'visibility.disable-lock-screen-slideshow' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-lock-screen-slideshow.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'visibility.disable-lock-screen-slideshow' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-lock-screen-slideshow.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'visibility.disable-lock-screen-slideshow'"
       },
       "expected_report": {
         "success": true,
@@ -144,25 +144,25 @@
       }
     },
     {
-      "tweak_id": "explorer.show-compressed-and-encrypted-files-in-color",
-      "qa_tweak_id": "explorer.show-compressed-and-encrypted-files-in-color",
-      "candidate_id": "explorer.show-compressed-and-encrypted-files-in-color",
-      "record_id": "explorer.show-compressed-and-encrypted-files-in-color",
-      "category": "Explorer",
-      "name": "Show Compressed and Encrypted Files in Color",
-      "documentation": "research/records/explorer.show-compressed-and-encrypted-files-in-color.review.json",
+      "tweak_id": "visibility.disable-spotlight-action-center",
+      "qa_tweak_id": "visibility.disable-spotlight-action-center",
+      "candidate_id": "visibility.disable-spotlight-action-center",
+      "record_id": "visibility.disable-spotlight-action-center",
+      "category": "Visibility",
+      "name": "Windows Spotlight on Action Center",
+      "documentation": "research/records/visibility.disable-spotlight-action-center.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect explorer.show-compressed-and-encrypted-files-in-color",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect visibility.disable-spotlight-action-center",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'explorer.show-compressed-and-encrypted-files-in-color' --qa-output 'C:\\Tools\\ValidationController\\smoke\\explorer.show-compressed-and-encrypted-files-in-color.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'explorer.show-compressed-and-encrypted-files-in-color' --qa-output 'C:\\Tools\\ValidationController\\smoke\\explorer.show-compressed-and-encrypted-files-in-color.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'explorer.show-compressed-and-encrypted-files-in-color' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\explorer.show-compressed-and-encrypted-files-in-color.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'explorer.show-compressed-and-encrypted-files-in-color' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\explorer.show-compressed-and-encrypted-files-in-color.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'explorer.show-compressed-and-encrypted-files-in-color'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'visibility.disable-spotlight-action-center' --qa-output 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-spotlight-action-center.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'visibility.disable-spotlight-action-center' --qa-output 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-spotlight-action-center.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'visibility.disable-spotlight-action-center' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-spotlight-action-center.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'visibility.disable-spotlight-action-center' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-spotlight-action-center.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'visibility.disable-spotlight-action-center'"
       },
       "expected_report": {
         "success": true,
@@ -203,25 +203,25 @@
       }
     },
     {
-      "tweak_id": "explorer.show-drive-letters-first",
-      "qa_tweak_id": "explorer.show-drive-letters-first",
-      "candidate_id": "explorer.show-drive-letters-first",
-      "record_id": "explorer.show-drive-letters-first",
-      "category": "Explorer",
-      "name": "Show Drive Letters First",
-      "documentation": "research/records/explorer.show-drive-letters-first.review.json",
+      "tweak_id": "visibility.disable-spotlight-desktop-collection",
+      "qa_tweak_id": "visibility.disable-spotlight-desktop-collection",
+      "candidate_id": "visibility.disable-spotlight-desktop-collection",
+      "record_id": "visibility.disable-spotlight-desktop-collection",
+      "category": "Visibility",
+      "name": "Spotlight Collection on Desktop",
+      "documentation": "research/records/visibility.disable-spotlight-desktop-collection.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect explorer.show-drive-letters-first",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect visibility.disable-spotlight-desktop-collection",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'explorer.show-drive-letters-first' --qa-output 'C:\\Tools\\ValidationController\\smoke\\explorer.show-drive-letters-first.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'explorer.show-drive-letters-first' --qa-output 'C:\\Tools\\ValidationController\\smoke\\explorer.show-drive-letters-first.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'explorer.show-drive-letters-first' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\explorer.show-drive-letters-first.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'explorer.show-drive-letters-first' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\explorer.show-drive-letters-first.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'explorer.show-drive-letters-first'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'visibility.disable-spotlight-desktop-collection' --qa-output 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-spotlight-desktop-collection.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'visibility.disable-spotlight-desktop-collection' --qa-output 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-spotlight-desktop-collection.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'visibility.disable-spotlight-desktop-collection' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-spotlight-desktop-collection.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'visibility.disable-spotlight-desktop-collection' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-spotlight-desktop-collection.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'visibility.disable-spotlight-desktop-collection'"
       },
       "expected_report": {
         "success": true,
@@ -262,25 +262,25 @@
       }
     },
     {
-      "tweak_id": "explorer.show-full-path",
-      "qa_tweak_id": "explorer.show-full-path",
-      "candidate_id": "explorer.show-full-path",
-      "record_id": "explorer.show-full-path",
-      "category": "Explorer",
-      "name": "Show Full Path in Explorer",
-      "documentation": "research/records/explorer.show-full-path.review.json",
+      "tweak_id": "visibility.disable-spotlight-features",
+      "qa_tweak_id": "visibility.disable-spotlight-features",
+      "candidate_id": "visibility.disable-spotlight-features",
+      "record_id": "visibility.disable-spotlight-features",
+      "category": "Visibility",
+      "name": "Windows Spotlight Features",
+      "documentation": "research/records/visibility.disable-spotlight-features.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect explorer.show-full-path",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect visibility.disable-spotlight-features",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'explorer.show-full-path' --qa-output 'C:\\Tools\\ValidationController\\smoke\\explorer.show-full-path.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'explorer.show-full-path' --qa-output 'C:\\Tools\\ValidationController\\smoke\\explorer.show-full-path.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'explorer.show-full-path' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\explorer.show-full-path.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'explorer.show-full-path' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\explorer.show-full-path.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'explorer.show-full-path'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'visibility.disable-spotlight-features' --qa-output 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-spotlight-features.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'visibility.disable-spotlight-features' --qa-output 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-spotlight-features.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'visibility.disable-spotlight-features' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-spotlight-features.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'visibility.disable-spotlight-features' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-spotlight-features.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'visibility.disable-spotlight-features'"
       },
       "expected_report": {
         "success": true,
@@ -323,272 +323,7 @@
   ],
   "run_results": [
     {
-      "tweak_id": "explorer.enable-explorer-compact-mode",
-      "host_exit": 0,
-      "execution_exit": 0,
-      "payload_status": "completed",
-      "report_source": "guest-file",
-      "report_parse_error": null,
-      "report_fetch_status": "ok",
-      "report_app_success": true,
-      "report_success": true,
-      "report_status": "ok",
-      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
-      "report_contract_status": "ok",
-      "report_contract_summary": "QA card snapshot contract passed.",
-      "report_contract_failures": [],
-      "report_card_present": true,
-      "report_card_has_claim_boundary": true,
-      "report_card_present_fields": [
-        "TweakId",
-        "Name",
-        "Category",
-        "EvidenceClass",
-        "ResearchStatus",
-        "RollbackSnapshotState",
-        "HasClaimBoundary",
-        "WhatWeKnowSummary",
-        "WhatWeDoNotClaimSummary",
-        "ProofLanes"
-      ],
-      "report_card_missing_fields": [],
-      "report_card_proof_lanes": [
-        "docs",
-        "runtime",
-        "source",
-        "rollback"
-      ],
-      "report_card_missing_proof_lanes": [],
-      "report": {
-        "TweakId": "explorer.enable-explorer-compact-mode",
-        "TweakName": "Enable Explorer Compact View",
-        "Success": true,
-        "Status": "ok",
-        "Summary": "Apply/verify path completed and rollback restored the tweak.",
-        "RollbackRequested": true,
-        "Card": {
-          "TweakId": "explorer.enable-explorer-compact-mode",
-          "Name": "Enable Explorer Compact View",
-          "Category": "Explorer",
-          "Description": "Explorer compact view reduces spacing between items so more files fit on screen. Some users like the denser layout, while others prefer the roomier default view.",
-          "FriendlyDescription": "Explorer compact view reduces spacing between items so more files fit on screen. Some users like the denser layout, while others prefer the roomier default view.",
-          "RegistryPath": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\UseCompactMode",
-          "EvidenceClass": "A",
-          "EvidenceClassTitle": "Cross-Layer Verified",
-          "ResearchStatus": "PROMOTED",
-          "IsMutationAllowed": true,
-          "RollbackSnapshotState": "ready",
-          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
-          "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Explorer compact view reduces spacing between items so more files fit on screen. Some users like the denser layout, while others prefer the roomier default view. Evidence: The value was toggled from 1 to 0 and the original absent state was then restored. Both observed states were queried by Explorer.EXE on restart. Rollback: Rollback: Verified via record-restore-story.",
-          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
-          "ProofLanes": [
-            {
-              "Key": "docs",
-              "Label": "DOCS",
-              "State": "ready",
-              "Summary": "The value was toggled from 1 to 0 and the original absent state was then restored. Both observed states were queried by Explorer.EXE on restart.",
-              "Source": "Validation proof source: evidence/raw/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md"
-            },
-            {
-              "Key": "runtime",
-              "Label": "RUNTIME",
-              "State": "ready",
-              "Summary": "Procmon captured Explorer.EXE querying HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\UseCompactMode with Data:1 and Data:0 in separate reversible captures after Explorer restart. That proves Explorer consumes this registry value on this b...",
-              "Source": "Procmon capture - Explorer UseCompactMode runtime reads: evidence/raw/procmon/explorer.enable-explorer-compact-mode/explorer-batch-applied-20260314-pml.md and evidence/raw/procmon/explorer.enable-explorer-compact-mode/explorer-compact-zero-20260314-pml.md"
-            },
-            {
-              "Key": "source",
-              "Label": "SOURCE",
-              "State": "ready",
-              "Summary": "No upstream nohuto source link is attached to this record.",
-              "Source": ""
-            },
-            {
-              "Key": "rollback",
-              "Label": "ROLLBACK",
-              "State": "ready",
-              "Summary": "Rollback: Verified via record-restore-story.",
-              "Source": "record-restore-story"
-            }
-          ],
-          "ReferenceLinks": [
-            {
-              "Title": "Docs: Details (missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
-              "Kind": "Details"
-            },
-            {
-              "Title": "Docs: Explorer",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\visibility\\visibility.md#explorer.enable-explorer-compact-mode",
-              "Kind": "Docs"
-            }
-          ]
-        },
-        "Stages": [
-          {
-            "Stage": "detect-before",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Compact view enabled'.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Compact view enabled",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": false,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Compact view enabled'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\UseCompactMode: missing -> 1",
-                "TimestampText": "09:06:24"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "apply",
-            "AppliedStatus": "Applied",
-            "StatusMessage": "Run completed.",
-            "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Compact view enabled",
-            "TargetValue": "Compact view enabled",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Compact view enabled'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\UseCompactMode: missing -> 1",
-                "TimestampText": "09:06:24"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Applied preset 'Compact view enabled'.",
-                "TimestampText": "09:06:24"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified preset 'Compact view enabled'.",
-                "TimestampText": "09:06:24"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Not required",
-                "Message": "Step not executed.",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "rollback",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Rolled back registry values.",
-            "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Compact view enabled",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Compact view enabled'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\UseCompactMode: missing -> 1",
-                "TimestampText": "09:06:24"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Applied preset 'Compact view enabled'.",
-                "TimestampText": "09:06:24"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified preset 'Compact view enabled'.",
-                "TimestampText": "09:06:24"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "09:06:24"
-              }
-            ]
-          },
-          {
-            "Stage": "detect-after",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Compact view enabled'.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Compact view enabled",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Compact view enabled'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\UseCompactMode: missing -> 1",
-                "TimestampText": "09:06:24"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Applied preset 'Compact view enabled'.",
-                "TimestampText": "09:06:24"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified preset 'Compact view enabled'.",
-                "TimestampText": "09:06:24"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "09:06:24"
-              }
-            ]
-          }
-        ],
-        "StartedAtUtc": "2026-05-07T16:06:24.1410668+00:00",
-        "CompletedAtUtc": "2026-05-07T16:06:24.5093422+00:00"
-      },
-      "qa_tweak_id": "explorer.enable-explorer-compact-mode",
-      "candidate_id": "explorer.enable-explorer-compact-mode",
-      "card_name": "Enable Explorer Compact View",
-      "documentation": "research/records/explorer.enable-explorer-compact-mode.review.json"
-    },
-    {
-      "tweak_id": "explorer.launch-folder-windows-in-a-separate-process",
+      "tweak_id": "visibility.disable-lock-screen-motion",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -625,19 +360,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "explorer.launch-folder-windows-in-a-separate-process",
-        "TweakName": "Launch Folder Windows in a Separate Process",
+        "TweakId": "visibility.disable-lock-screen-motion",
+        "TweakName": "Lock Screen Background Motion",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "explorer.launch-folder-windows-in-a-separate-process",
-          "Name": "Launch Folder Windows in a Separate Process",
-          "Category": "Explorer",
-          "Description": "Explorer can run folder windows in the same process or split them into separate Explorer processes.",
-          "FriendlyDescription": "Explorer can run folder windows in the same process or split them into separate Explorer processes.",
-          "RegistryPath": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\SeparateProcess",
+          "TweakId": "visibility.disable-lock-screen-motion",
+          "Name": "Lock Screen Background Motion",
+          "Category": "Visibility",
+          "Description": "Some devices can show a subtle motion effect on the lock-screen background. This policy decides whether that motion is prevented.",
+          "FriendlyDescription": "Some devices can show a subtle motion effect on the lock-screen background. This policy decides whether that motion is prevented.",
+          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Personalization\\AnimateLockScreenBackground",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -645,22 +380,22 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Explorer can run folder windows in the same process or split them into separate Explorer processes. Evidence: The result file was copied back to the host workspace during validation. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: Some devices can show a subtle motion effect on the lock-screen background. This policy decides whether that motion is prevented. Evidence: The local official Microsoft ADMX file names the same machine policy surface used by the app. The paired ADML help text states that enabling the setting prevents lock-screen motion and shows the traditional static background image. Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "The result file was copied back to the host workspace during validation.",
-              "Source": "Validation proof source: evidence/files/vm-tooling-staging/separateprocess-result.txt"
+              "Summary": "The local official Microsoft ADMX file names the same machine policy surface used by the app. The paired ADML help text states that enabling the setting prevents lock-screen motion and shows the traditional static background image.",
+              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/ControlPanelDisplay.admx"
             },
             {
               "Key": "runtime",
               "Label": "RUNTIME",
               "State": "ready",
-              "Summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote SeparateProcess = 0 and SeparateProcess = 1, restarted Explorer after each write, and captured Explorer.EXE querying HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\SeparateProce...",
-              "Source": "Procmon capture - Explorer SeparateProcess runtime surface: evidence/raw/procmon/explorer.launch-folder-windows-in-a-separate-process/separateprocess-result.txt"
+              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+              "Source": ""
             },
             {
               "Key": "source",
@@ -684,8 +419,8 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Explorer",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\visibility\\visibility.md#explorer.launch-folder-windows-in-a-separate-process",
+              "Title": "Docs: Visibility",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\visibility\\visibility.md#visibility.disable-lock-screen-motion",
               "Kind": "Docs"
             }
           ]
@@ -694,10 +429,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current option is 'Use the default shared Explorer process model'. Selected option is 'Launch folder windows in a separate process'.",
+            "StatusMessage": "Value not set.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Use the default shared Explorer process model",
-            "TargetValue": "Launch folder windows in a separate process",
+            "CurrentValue": "Not set",
+            "TargetValue": "1 (0x1)",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -706,8 +441,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current option is 'Use the default shared Explorer process model'. Selected option is 'Launch folder windows in a separate process'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\SeparateProcess: 0 -> 1",
-                "TimestampText": "09:06:28"
+                "Message": "Value not set.",
+                "TimestampText": "09:08:07"
               },
               {
                 "Action": "Apply",
@@ -734,8 +469,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Launch folder windows in a separate process",
-            "TargetValue": "Launch folder windows in a separate process",
+            "CurrentValue": "1 (0x1)",
+            "TargetValue": "1 (0x1)",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -744,20 +479,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current option is 'Use the default shared Explorer process model'. Selected option is 'Launch folder windows in a separate process'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\SeparateProcess: 0 -> 1",
-                "TimestampText": "09:06:28"
+                "Message": "Value not set.",
+                "TimestampText": "09:08:07"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Launch folder windows in a separate process'.",
-                "TimestampText": "09:06:28"
+                "Message": "Set value to 1.",
+                "TimestampText": "09:08:10"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Launch folder windows in a separate process'.",
-                "TimestampText": "09:06:28"
+                "Message": "Verified desired value.",
+                "TimestampText": "09:08:10"
               },
               {
                 "Action": "Rollback",
@@ -770,10 +505,10 @@
           {
             "Stage": "rollback",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Rolled back registry values.",
+            "StatusMessage": "Removed value to restore default.",
             "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Use the default shared Explorer process model",
-            "TargetValue": "Launch folder windows in a separate process",
+            "CurrentValue": "1 (0x1)",
+            "TargetValue": "1 (0x1)",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -782,36 +517,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current option is 'Use the default shared Explorer process model'. Selected option is 'Launch folder windows in a separate process'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\SeparateProcess: 0 -> 1",
-                "TimestampText": "09:06:28"
+                "Message": "Value not set.",
+                "TimestampText": "09:08:07"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Launch folder windows in a separate process'.",
-                "TimestampText": "09:06:28"
+                "Message": "Set value to 1.",
+                "TimestampText": "09:08:10"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Launch folder windows in a separate process'.",
-                "TimestampText": "09:06:28"
+                "Message": "Verified desired value.",
+                "TimestampText": "09:08:10"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "09:06:28"
+                "Message": "Removed value to restore default.",
+                "TimestampText": "09:08:10"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current option is 'Use the default shared Explorer process model'. Selected option is 'Launch folder windows in a separate process'.",
+            "StatusMessage": "Value not set.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Use the default shared Explorer process model",
-            "TargetValue": "Launch folder windows in a separate process",
+            "CurrentValue": "Not set",
+            "TargetValue": "1 (0x1)",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -820,40 +555,40 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current option is 'Use the default shared Explorer process model'. Selected option is 'Launch folder windows in a separate process'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\SeparateProcess: 0 -> 1",
-                "TimestampText": "09:06:28"
+                "Message": "Value not set.",
+                "TimestampText": "09:08:10"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Launch folder windows in a separate process'.",
-                "TimestampText": "09:06:28"
+                "Message": "Set value to 1.",
+                "TimestampText": "09:08:10"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Launch folder windows in a separate process'.",
-                "TimestampText": "09:06:28"
+                "Message": "Verified desired value.",
+                "TimestampText": "09:08:10"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "09:06:28"
+                "Message": "Removed value to restore default.",
+                "TimestampText": "09:08:10"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T16:06:28.6035747+00:00",
-        "CompletedAtUtc": "2026-05-07T16:06:28.9606996+00:00"
+        "StartedAtUtc": "2026-05-07T16:08:07.2413578+00:00",
+        "CompletedAtUtc": "2026-05-07T16:08:10.4726392+00:00"
       },
-      "qa_tweak_id": "explorer.launch-folder-windows-in-a-separate-process",
-      "candidate_id": "explorer.launch-folder-windows-in-a-separate-process",
-      "card_name": "Launch Folder Windows in a Separate Process",
-      "documentation": "research/records/explorer.launch-folder-windows-in-a-separate-process.review.json"
+      "qa_tweak_id": "visibility.disable-lock-screen-motion",
+      "candidate_id": "visibility.disable-lock-screen-motion",
+      "card_name": "Lock Screen Background Motion",
+      "documentation": "research/records/visibility.disable-lock-screen-motion.json"
     },
     {
-      "tweak_id": "explorer.show-compressed-and-encrypted-files-in-color",
+      "tweak_id": "visibility.disable-lock-screen-slideshow",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -890,19 +625,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "explorer.show-compressed-and-encrypted-files-in-color",
-        "TweakName": "Show Compressed and Encrypted Files in Color",
+        "TweakId": "visibility.disable-lock-screen-slideshow",
+        "TweakName": "Lock Screen Slideshow",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "explorer.show-compressed-and-encrypted-files-in-color",
-          "Name": "Show Compressed and Encrypted Files in Color",
-          "Category": "Explorer",
-          "Description": "File Explorer can color compressed and encrypted NTFS items so they stand out visually.",
-          "FriendlyDescription": "File Explorer can color compressed and encrypted NTFS items so they stand out visually.",
-          "RegistryPath": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowCompColor",
+          "TweakId": "visibility.disable-lock-screen-slideshow",
+          "Name": "Lock Screen Slideshow",
+          "Category": "Visibility",
+          "Description": "Windows can run a slideshow on the lock screen instead of always showing a single image. This policy decides whether users can use that slideshow feature.",
+          "FriendlyDescription": "Windows can run a slideshow on the lock screen instead of always showing a single image. This policy decides whether users can use that slideshow feature.",
+          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Personalization\\NoLockScreenSlideshow",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -910,22 +645,22 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: File Explorer can color compressed and encrypted NTFS items so they stand out visually. Evidence: The guest-local result file was also copied to a host scratch location during validation for review. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: Windows can run a slideshow on the lock screen instead of always showing a single image. This policy decides whether users can use that slideshow feature. Evidence: The local official Microsoft ADMX file names the same machine policy surface used by the app. The paired ADML help text states that enabling the setting prevents a slide show from playing on the lock screen. Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "The guest-local result file was also copied to a host scratch location during validation for review.",
-              "Source": "Validation proof source: evidence/files/missing/showcompcolor-result-txt.md"
+              "Summary": "The local official Microsoft ADMX file names the same machine policy surface used by the app. The paired ADML help text states that enabling the setting prevents a slide show from playing on the lock screen.",
+              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/ControlPanelDisplay.admx"
             },
             {
               "Key": "runtime",
               "Label": "RUNTIME",
               "State": "ready",
-              "Summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote ShowCompColor = 0 and ShowCompColor = 1, restarted Explorer after each write, and captured Explorer.EXE querying HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowCompColor wit...",
-              "Source": "Procmon capture - Explorer ShowCompColor runtime surface: evidence/raw/procmon/explorer.show-compressed-and-encrypted-files-in-color/showcompcolor-result-txt.md"
+              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+              "Source": ""
             },
             {
               "Key": "source",
@@ -949,8 +684,8 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Explorer",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\visibility\\visibility.md#explorer.show-compressed-and-encrypted-files-in-color",
+              "Title": "Docs: Visibility",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\visibility\\visibility.md#visibility.disable-lock-screen-slideshow",
               "Kind": "Docs"
             }
           ]
@@ -958,11 +693,11 @@
         "Stages": [
           {
             "Stage": "detect-before",
-            "AppliedStatus": "Applied",
-            "StatusMessage": "Current option is 'Color compressed and encrypted files'.",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Value not set.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Color compressed and encrypted files",
-            "TargetValue": "Color compressed and encrypted files",
+            "CurrentValue": "Not set",
+            "TargetValue": "1 (0x1)",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -970,9 +705,9 @@
             "Steps": [
               {
                 "Action": "Detect",
-                "StatusText": "Applied",
-                "Message": "Current option is 'Color compressed and encrypted files'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowCompColor: 1 -> 1",
-                "TimestampText": "09:06:34"
+                "StatusText": "Detected",
+                "Message": "Value not set.",
+                "TimestampText": "09:08:15"
               },
               {
                 "Action": "Apply",
@@ -999,8 +734,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Color compressed and encrypted files",
-            "TargetValue": "Color compressed and encrypted files",
+            "CurrentValue": "1 (0x1)",
+            "TargetValue": "1 (0x1)",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1008,37 +743,37 @@
             "Steps": [
               {
                 "Action": "Detect",
-                "StatusText": "Applied",
-                "Message": "Current option is 'Color compressed and encrypted files'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowCompColor: 1 -> 1",
-                "TimestampText": "09:06:35"
+                "StatusText": "Detected",
+                "Message": "Value not set.",
+                "TimestampText": "09:08:15"
               },
               {
                 "Action": "Apply",
-                "StatusText": "Skipped",
-                "Message": "Already in the desired state.",
-                "TimestampText": "09:06:35"
+                "StatusText": "Applied",
+                "Message": "Set value to 1.",
+                "TimestampText": "09:08:18"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Color compressed and encrypted files'.",
-                "TimestampText": "09:06:35"
+                "Message": "Verified desired value.",
+                "TimestampText": "09:08:18"
               },
               {
                 "Action": "Rollback",
-                "StatusText": "Skipped",
-                "Message": "No changes were made.",
-                "TimestampText": "09:06:35"
+                "StatusText": "Not required",
+                "Message": "Step not executed.",
+                "TimestampText": "-"
               }
             ]
           },
           {
             "Stage": "rollback",
-            "AppliedStatus": "Applied",
-            "StatusMessage": "Rolled back registry values.",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Removed value to restore default.",
             "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Color compressed and encrypted files",
-            "TargetValue": "Color compressed and encrypted files",
+            "CurrentValue": "1 (0x1)",
+            "TargetValue": "1 (0x1)",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1046,37 +781,37 @@
             "Steps": [
               {
                 "Action": "Detect",
-                "StatusText": "Applied",
-                "Message": "Current option is 'Color compressed and encrypted files'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowCompColor: 1 -> 1",
-                "TimestampText": "09:06:35"
+                "StatusText": "Detected",
+                "Message": "Value not set.",
+                "TimestampText": "09:08:15"
               },
               {
                 "Action": "Apply",
-                "StatusText": "Skipped",
-                "Message": "Already in the desired state.",
-                "TimestampText": "09:06:35"
+                "StatusText": "Applied",
+                "Message": "Set value to 1.",
+                "TimestampText": "09:08:18"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Color compressed and encrypted files'.",
-                "TimestampText": "09:06:35"
+                "Message": "Verified desired value.",
+                "TimestampText": "09:08:18"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "09:06:35"
+                "Message": "Removed value to restore default.",
+                "TimestampText": "09:08:18"
               }
             ]
           },
           {
             "Stage": "detect-after",
-            "AppliedStatus": "Applied",
-            "StatusMessage": "Current option is 'Color compressed and encrypted files'.",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Value not set.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Color compressed and encrypted files",
-            "TargetValue": "Color compressed and encrypted files",
+            "CurrentValue": "Not set",
+            "TargetValue": "1 (0x1)",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1084,41 +819,41 @@
             "Steps": [
               {
                 "Action": "Detect",
-                "StatusText": "Applied",
-                "Message": "Current option is 'Color compressed and encrypted files'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowCompColor: 1 -> 1",
-                "TimestampText": "09:06:35"
+                "StatusText": "Detected",
+                "Message": "Value not set.",
+                "TimestampText": "09:08:18"
               },
               {
                 "Action": "Apply",
-                "StatusText": "Skipped",
-                "Message": "Already in the desired state.",
-                "TimestampText": "09:06:35"
+                "StatusText": "Applied",
+                "Message": "Set value to 1.",
+                "TimestampText": "09:08:18"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Color compressed and encrypted files'.",
-                "TimestampText": "09:06:35"
+                "Message": "Verified desired value.",
+                "TimestampText": "09:08:18"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "09:06:35"
+                "Message": "Removed value to restore default.",
+                "TimestampText": "09:08:18"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T16:06:34.9671705+00:00",
-        "CompletedAtUtc": "2026-05-07T16:06:35.2358574+00:00"
+        "StartedAtUtc": "2026-05-07T16:08:15.6014674+00:00",
+        "CompletedAtUtc": "2026-05-07T16:08:18.8347306+00:00"
       },
-      "qa_tweak_id": "explorer.show-compressed-and-encrypted-files-in-color",
-      "candidate_id": "explorer.show-compressed-and-encrypted-files-in-color",
-      "card_name": "Show Compressed and Encrypted Files in Color",
-      "documentation": "research/records/explorer.show-compressed-and-encrypted-files-in-color.review.json"
+      "qa_tweak_id": "visibility.disable-lock-screen-slideshow",
+      "candidate_id": "visibility.disable-lock-screen-slideshow",
+      "card_name": "Lock Screen Slideshow",
+      "documentation": "research/records/visibility.disable-lock-screen-slideshow.json"
     },
     {
-      "tweak_id": "explorer.show-drive-letters-first",
+      "tweak_id": "visibility.disable-spotlight-action-center",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -1155,19 +890,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "explorer.show-drive-letters-first",
-        "TweakName": "Show Drive Letters First",
+        "TweakId": "visibility.disable-spotlight-action-center",
+        "TweakName": "Windows Spotlight on Action Center",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "explorer.show-drive-letters-first",
-          "Name": "Show Drive Letters First",
-          "Category": "Explorer",
-          "Description": "Explorer can show drive letters ahead of the drive name, or leave that presentation disabled.",
-          "FriendlyDescription": "Explorer can show drive letters ahead of the drive name, or leave that presentation disabled.",
-          "RegistryPath": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ShowDriveLettersFirst",
+          "TweakId": "visibility.disable-spotlight-action-center",
+          "Name": "Windows Spotlight on Action Center",
+          "Category": "Visibility",
+          "Description": "Windows can show Spotlight-driven suggestions or prompts in Action Center style notification surfaces. This policy decides whether that content is allowed for the current user.",
+          "FriendlyDescription": "Windows can show Spotlight-driven suggestions or prompts in Action Center style notification surfaces. This policy decides whether that content is allowed for the current user.",
+          "RegistryPath": "HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableWindowsSpotlightOnActionCenter",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -1175,22 +910,22 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Explorer can show drive letters ahead of the drive name, or leave that presentation disabled. Evidence: The guest-local result file was copied back to the host scratch area during validation. Baseline absence was restored after the probe. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: Windows can show Spotlight-driven suggestions or prompts in Action Center style notification surfaces. This policy decides whether that content is allowed for the current user. Evidence: Local official ADMX defines the exact user-policy key and value name; local ADML confirms that enabling the policy removes Windows Spotlight notifications from Action Center. Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "The guest-local result file was copied back to the host scratch area during validation. Baseline absence was restored after the probe.",
-              "Source": "Validation proof source: evidence/files/vm-tooling-staging/showdrivelettersfirst-result.txt"
+              "Summary": "Local official ADMX defines the exact user-policy key and value name; local ADML confirms that enabling the policy removes Windows Spotlight notifications from Action Center.",
+              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/CloudContent.admx"
             },
             {
               "Key": "runtime",
               "Label": "RUNTIME",
               "State": "ready",
-              "Summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote ShowDriveLettersFirst = 0 and ShowDriveLettersFirst = 1, restarted Explorer after each write, and captured Explorer.EXE querying HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ShowDriveL...",
-              "Source": "Procmon capture - Explorer ShowDriveLettersFirst runtime surface: evidence/raw/procmon/explorer.show-drive-letters-first/showdrivelettersfirst-result.txt"
+              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+              "Source": ""
             },
             {
               "Key": "source",
@@ -1214,8 +949,8 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Explorer",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\visibility\\visibility.md#explorer.show-drive-letters-first",
+              "Title": "Docs: Visibility",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\visibility\\visibility.md#visibility.disable-spotlight-action-center",
               "Kind": "Docs"
             }
           ]
@@ -1224,10 +959,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Show drive letters first'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Action Center Spotlight disabled'.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Show drive letters first",
+            "TargetValue": "Action Center Spotlight disabled",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -1236,8 +971,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Show drive letters first'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ShowDriveLettersFirst: missing -> 1",
-                "TimestampText": "09:06:41"
+                "Message": "Current values do not match a named option. Selected option is 'Action Center Spotlight disabled'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableWindowsSpotlightOnActionCenter: missing -> 1",
+                "TimestampText": "09:08:23"
               },
               {
                 "Action": "Apply",
@@ -1264,8 +999,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Show drive letters first",
-            "TargetValue": "Show drive letters first",
+            "CurrentValue": "Action Center Spotlight disabled",
+            "TargetValue": "Action Center Spotlight disabled",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1274,20 +1009,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Show drive letters first'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ShowDriveLettersFirst: missing -> 1",
-                "TimestampText": "09:06:41"
+                "Message": "Current values do not match a named option. Selected option is 'Action Center Spotlight disabled'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableWindowsSpotlightOnActionCenter: missing -> 1",
+                "TimestampText": "09:08:24"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Show drive letters first'.",
-                "TimestampText": "09:06:41"
+                "Message": "Applied preset 'Action Center Spotlight disabled'.",
+                "TimestampText": "09:08:24"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Show drive letters first'.",
-                "TimestampText": "09:06:41"
+                "Message": "Verified preset 'Action Center Spotlight disabled'.",
+                "TimestampText": "09:08:24"
               },
               {
                 "Action": "Rollback",
@@ -1303,7 +1038,7 @@
             "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Show drive letters first",
+            "TargetValue": "Action Center Spotlight disabled",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1312,36 +1047,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Show drive letters first'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ShowDriveLettersFirst: missing -> 1",
-                "TimestampText": "09:06:41"
+                "Message": "Current values do not match a named option. Selected option is 'Action Center Spotlight disabled'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableWindowsSpotlightOnActionCenter: missing -> 1",
+                "TimestampText": "09:08:24"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Show drive letters first'.",
-                "TimestampText": "09:06:41"
+                "Message": "Applied preset 'Action Center Spotlight disabled'.",
+                "TimestampText": "09:08:24"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Show drive letters first'.",
-                "TimestampText": "09:06:41"
+                "Message": "Verified preset 'Action Center Spotlight disabled'.",
+                "TimestampText": "09:08:24"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "09:06:41"
+                "TimestampText": "09:08:24"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Show drive letters first'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Action Center Spotlight disabled'.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Show drive letters first",
+            "TargetValue": "Action Center Spotlight disabled",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1350,40 +1085,40 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Show drive letters first'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\ShowDriveLettersFirst: missing -> 1",
-                "TimestampText": "09:06:41"
+                "Message": "Current values do not match a named option. Selected option is 'Action Center Spotlight disabled'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableWindowsSpotlightOnActionCenter: missing -> 1",
+                "TimestampText": "09:08:24"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Show drive letters first'.",
-                "TimestampText": "09:06:41"
+                "Message": "Applied preset 'Action Center Spotlight disabled'.",
+                "TimestampText": "09:08:24"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Show drive letters first'.",
-                "TimestampText": "09:06:41"
+                "Message": "Verified preset 'Action Center Spotlight disabled'.",
+                "TimestampText": "09:08:24"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "09:06:41"
+                "TimestampText": "09:08:24"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T16:06:41.3375207+00:00",
-        "CompletedAtUtc": "2026-05-07T16:06:41.7130288+00:00"
+        "StartedAtUtc": "2026-05-07T16:08:23.958572+00:00",
+        "CompletedAtUtc": "2026-05-07T16:08:24.2498726+00:00"
       },
-      "qa_tweak_id": "explorer.show-drive-letters-first",
-      "candidate_id": "explorer.show-drive-letters-first",
-      "card_name": "Show Drive Letters First",
-      "documentation": "research/records/explorer.show-drive-letters-first.review.json"
+      "qa_tweak_id": "visibility.disable-spotlight-action-center",
+      "candidate_id": "visibility.disable-spotlight-action-center",
+      "card_name": "Windows Spotlight on Action Center",
+      "documentation": "research/records/visibility.disable-spotlight-action-center.json"
     },
     {
-      "tweak_id": "explorer.show-full-path",
+      "tweak_id": "visibility.disable-spotlight-desktop-collection",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -1420,19 +1155,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "explorer.show-full-path",
-        "TweakName": "Show Full Path in Explorer",
+        "TweakId": "visibility.disable-spotlight-desktop-collection",
+        "TweakName": "Spotlight Collection on Desktop",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "explorer.show-full-path",
-          "Name": "Show Full Path in Explorer",
-          "Category": "Explorer",
-          "Description": "Explorer can show the full folder path instead of a shorter title. Some advanced users prefer that when they navigate deep directories.",
-          "FriendlyDescription": "Explorer can show the full folder path instead of a shorter title. Some advanced users prefer that when they navigate deep directories.",
-          "RegistryPath": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\CabinetState\\FullPath",
+          "TweakId": "visibility.disable-spotlight-desktop-collection",
+          "Name": "Spotlight Collection on Desktop",
+          "Category": "Visibility",
+          "Description": "Windows can offer a Spotlight collection option for desktop backgrounds. This policy decides whether that Spotlight wallpaper option is allowed for the current user.",
+          "FriendlyDescription": "Windows can offer a Spotlight collection option for desktop backgrounds. This policy decides whether that Spotlight wallpaper option is allowed for the current user.",
+          "RegistryPath": "HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableSpotlightCollectionOnDesktop",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -1440,22 +1175,22 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Explorer can show the full folder path instead of a shorter title. Some advanced users prefer that when they navigate deep directories. Evidence: Microsoft Open Specifications publishes the exact Explorer CabinetState path, FullPath value name, and 0/1 semantics. The app writes the documented enabled state under the same user-preference surface. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: Windows can offer a Spotlight collection option for desktop backgrounds. This policy decides whether that Spotlight wallpaper option is allowed for the current user. Evidence: Local official ADMX defines the exact user-policy key and value name; local ADML confirms that enabling the policy removes the Spotlight collection desktop option from Personalization settings. Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "Microsoft Open Specifications publishes the exact Explorer CabinetState path, FullPath value name, and 0/1 semantics. The app writes the documented enabled state under the same user-preference surface.",
-              "Source": "Validation proof source: https://learn.microsoft.com/en-us/openspecs/windows_protocols/ms-gppref/3c837e92-016e-4148-86e5-b4f0381a757f"
+              "Summary": "Local official ADMX defines the exact user-policy key and value name; local ADML confirms that enabling the policy removes the Spotlight collection desktop option from Personalization settings.",
+              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/CloudContent.admx"
             },
             {
               "Key": "runtime",
               "Label": "RUNTIME",
               "State": "ready",
-              "Summary": "A same-day guest Ghidra retry for `FullPath` failed in `ensure-admin-shell` before any xref bundle reached the host.",
-              "Source": "Guest Ghidra launch receipt for FullPath: evidence/raw/ghidra/ghidra-explorer-show-full-path-20260424-batch5/summary.json"
+              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+              "Source": ""
             },
             {
               "Key": "source",
@@ -1479,8 +1214,8 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Explorer",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\visibility\\visibility.md#explorer.show-full-path",
+              "Title": "Docs: Visibility",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\visibility\\visibility.md#visibility.disable-spotlight-desktop-collection",
               "Kind": "Docs"
             }
           ]
@@ -1489,10 +1224,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current option is 'Do not show full path'. Selected option is 'Show full path'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Desktop Spotlight collection disabled'.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Do not show full path",
-            "TargetValue": "Show full path",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Desktop Spotlight collection disabled",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -1501,8 +1236,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current option is 'Do not show full path'. Selected option is 'Show full path'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\CabinetState\\FullPath: 0 -> 1",
-                "TimestampText": "09:06:47"
+                "Message": "Current values do not match a named option. Selected option is 'Desktop Spotlight collection disabled'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableSpotlightCollectionOnDesktop: missing -> 1",
+                "TimestampText": "09:08:30"
               },
               {
                 "Action": "Apply",
@@ -1529,8 +1264,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Show full path",
-            "TargetValue": "Show full path",
+            "CurrentValue": "Desktop Spotlight collection disabled",
+            "TargetValue": "Desktop Spotlight collection disabled",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1539,20 +1274,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current option is 'Do not show full path'. Selected option is 'Show full path'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\CabinetState\\FullPath: 0 -> 1",
-                "TimestampText": "09:06:47"
+                "Message": "Current values do not match a named option. Selected option is 'Desktop Spotlight collection disabled'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableSpotlightCollectionOnDesktop: missing -> 1",
+                "TimestampText": "09:08:30"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Show full path'.",
-                "TimestampText": "09:06:47"
+                "Message": "Applied preset 'Desktop Spotlight collection disabled'.",
+                "TimestampText": "09:08:30"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Show full path'.",
-                "TimestampText": "09:06:47"
+                "Message": "Verified preset 'Desktop Spotlight collection disabled'.",
+                "TimestampText": "09:08:30"
               },
               {
                 "Action": "Rollback",
@@ -1567,8 +1302,8 @@
             "AppliedStatus": "NotApplied",
             "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Do not show full path",
-            "TargetValue": "Show full path",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Desktop Spotlight collection disabled",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1577,36 +1312,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current option is 'Do not show full path'. Selected option is 'Show full path'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\CabinetState\\FullPath: 0 -> 1",
-                "TimestampText": "09:06:47"
+                "Message": "Current values do not match a named option. Selected option is 'Desktop Spotlight collection disabled'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableSpotlightCollectionOnDesktop: missing -> 1",
+                "TimestampText": "09:08:30"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Show full path'.",
-                "TimestampText": "09:06:47"
+                "Message": "Applied preset 'Desktop Spotlight collection disabled'.",
+                "TimestampText": "09:08:30"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Show full path'.",
-                "TimestampText": "09:06:47"
+                "Message": "Verified preset 'Desktop Spotlight collection disabled'.",
+                "TimestampText": "09:08:30"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "09:06:47"
+                "TimestampText": "09:08:30"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current option is 'Do not show full path'. Selected option is 'Show full path'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Desktop Spotlight collection disabled'.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Do not show full path",
-            "TargetValue": "Show full path",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Desktop Spotlight collection disabled",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1615,37 +1350,302 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current option is 'Do not show full path'. Selected option is 'Show full path'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\CabinetState\\FullPath: 0 -> 1",
-                "TimestampText": "09:06:48"
+                "Message": "Current values do not match a named option. Selected option is 'Desktop Spotlight collection disabled'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableSpotlightCollectionOnDesktop: missing -> 1",
+                "TimestampText": "09:08:30"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Show full path'.",
-                "TimestampText": "09:06:47"
+                "Message": "Applied preset 'Desktop Spotlight collection disabled'.",
+                "TimestampText": "09:08:30"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Show full path'.",
-                "TimestampText": "09:06:47"
+                "Message": "Verified preset 'Desktop Spotlight collection disabled'.",
+                "TimestampText": "09:08:30"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "09:06:47"
+                "TimestampText": "09:08:30"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T16:06:47.7540566+00:00",
-        "CompletedAtUtc": "2026-05-07T16:06:48.1228292+00:00"
+        "StartedAtUtc": "2026-05-07T16:08:30.3368084+00:00",
+        "CompletedAtUtc": "2026-05-07T16:08:30.6375829+00:00"
       },
-      "qa_tweak_id": "explorer.show-full-path",
-      "candidate_id": "explorer.show-full-path",
-      "card_name": "Show Full Path in Explorer",
-      "documentation": "research/records/explorer.show-full-path.review.json"
+      "qa_tweak_id": "visibility.disable-spotlight-desktop-collection",
+      "candidate_id": "visibility.disable-spotlight-desktop-collection",
+      "card_name": "Spotlight Collection on Desktop",
+      "documentation": "research/records/visibility.disable-spotlight-desktop-collection.json"
+    },
+    {
+      "tweak_id": "visibility.disable-spotlight-features",
+      "host_exit": 0,
+      "execution_exit": 0,
+      "payload_status": "completed",
+      "report_source": "stdout",
+      "report_parse_error": null,
+      "report_fetch_status": null,
+      "report_app_success": true,
+      "report_success": true,
+      "report_status": "ok",
+      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
+      "report_contract_status": "ok",
+      "report_contract_summary": "QA card snapshot contract passed.",
+      "report_contract_failures": [],
+      "report_card_present": true,
+      "report_card_has_claim_boundary": true,
+      "report_card_present_fields": [
+        "TweakId",
+        "Name",
+        "Category",
+        "EvidenceClass",
+        "ResearchStatus",
+        "RollbackSnapshotState",
+        "HasClaimBoundary",
+        "WhatWeKnowSummary",
+        "WhatWeDoNotClaimSummary",
+        "ProofLanes"
+      ],
+      "report_card_missing_fields": [],
+      "report_card_proof_lanes": [
+        "docs",
+        "runtime",
+        "source",
+        "rollback"
+      ],
+      "report_card_missing_proof_lanes": [],
+      "report": {
+        "TweakId": "visibility.disable-spotlight-features",
+        "TweakName": "Windows Spotlight Features",
+        "Success": true,
+        "Status": "ok",
+        "Summary": "Apply/verify path completed and rollback restored the tweak.",
+        "RollbackRequested": true,
+        "Card": {
+          "TweakId": "visibility.disable-spotlight-features",
+          "Name": "Windows Spotlight Features",
+          "Category": "Visibility",
+          "Description": "Windows Spotlight powers various suggestions, tips, and promotional surfaces in Windows. This policy decides whether those Spotlight features are allowed for the current user.",
+          "FriendlyDescription": "Windows Spotlight powers various suggestions, tips, and promotional surfaces in Windows. This policy decides whether those Spotlight features are allowed for the current user.",
+          "RegistryPath": "HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableWindowsSpotlightFeatures",
+          "EvidenceClass": "A",
+          "EvidenceClassTitle": "Cross-Layer Verified",
+          "ResearchStatus": "PROMOTED",
+          "IsMutationAllowed": true,
+          "RollbackSnapshotState": "ready",
+          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
+          "HasClaimBoundary": true,
+          "WhatWeKnowSummary": "Claim: Windows Spotlight powers various suggestions, tips, and promotional surfaces in Windows. This policy decides whether those Spotlight features are allowed for the current user. Evidence: Local official ADMX defines the exact user-policy key and value name; local ADML confirms that enabling the policy turns off Windows Spotlight features as a whole. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
+          "ProofLanes": [
+            {
+              "Key": "docs",
+              "Label": "DOCS",
+              "State": "ready",
+              "Summary": "Local official ADMX defines the exact user-policy key and value name; local ADML confirms that enabling the policy turns off Windows Spotlight features as a whole.",
+              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/CloudContent.admx"
+            },
+            {
+              "Key": "runtime",
+              "Label": "RUNTIME",
+              "State": "ready",
+              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+              "Source": ""
+            },
+            {
+              "Key": "source",
+              "Label": "SOURCE",
+              "State": "ready",
+              "Summary": "No upstream nohuto source link is attached to this record.",
+              "Source": ""
+            },
+            {
+              "Key": "rollback",
+              "Label": "ROLLBACK",
+              "State": "ready",
+              "Summary": "Rollback: Verified via record-restore-story.",
+              "Source": "record-restore-story"
+            }
+          ],
+          "ReferenceLinks": [
+            {
+              "Title": "Docs: Details (missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
+              "Kind": "Details"
+            },
+            {
+              "Title": "Docs: Visibility",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\visibility\\visibility.md#visibility.disable-spotlight-features",
+              "Kind": "Docs"
+            }
+          ]
+        },
+        "Stages": [
+          {
+            "Stage": "detect-before",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Windows Spotlight features disabled'.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Windows Spotlight features disabled",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": false,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Windows Spotlight features disabled'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableWindowsSpotlightFeatures: missing -> 1",
+                "TimestampText": "09:08:36"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "apply",
+            "AppliedStatus": "Applied",
+            "StatusMessage": "Run completed.",
+            "OutcomeSummary": "Apply - Success",
+            "CurrentValue": "Windows Spotlight features disabled",
+            "TargetValue": "Windows Spotlight features disabled",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Windows Spotlight features disabled'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableWindowsSpotlightFeatures: missing -> 1",
+                "TimestampText": "09:08:36"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Windows Spotlight features disabled'.",
+                "TimestampText": "09:08:36"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Windows Spotlight features disabled'.",
+                "TimestampText": "09:08:36"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Not required",
+                "Message": "Step not executed.",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "rollback",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Rolled back registry values.",
+            "OutcomeSummary": "Rollback - Rolled Back",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Windows Spotlight features disabled",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Windows Spotlight features disabled'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableWindowsSpotlightFeatures: missing -> 1",
+                "TimestampText": "09:08:36"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Windows Spotlight features disabled'.",
+                "TimestampText": "09:08:36"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Windows Spotlight features disabled'.",
+                "TimestampText": "09:08:36"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "09:08:36"
+              }
+            ]
+          },
+          {
+            "Stage": "detect-after",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Windows Spotlight features disabled'.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Windows Spotlight features disabled",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Windows Spotlight features disabled'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableWindowsSpotlightFeatures: missing -> 1",
+                "TimestampText": "09:08:37"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Windows Spotlight features disabled'.",
+                "TimestampText": "09:08:36"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Windows Spotlight features disabled'.",
+                "TimestampText": "09:08:36"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "09:08:36"
+              }
+            ]
+          }
+        ],
+        "StartedAtUtc": "2026-05-07T16:08:36.7253061+00:00",
+        "CompletedAtUtc": "2026-05-07T16:08:37.0885698+00:00"
+      },
+      "qa_tweak_id": "visibility.disable-spotlight-features",
+      "candidate_id": "visibility.disable-spotlight-features",
+      "card_name": "Windows Spotlight Features",
+      "documentation": "research/records/visibility.disable-spotlight-features.json"
     }
   ],
   "summary": {
@@ -1654,7 +1654,7 @@
     "live_success_count": 5,
     "live_failure_count": 0,
     "categories": [
-      "Explorer"
+      "Visibility"
     ]
   }
 }
