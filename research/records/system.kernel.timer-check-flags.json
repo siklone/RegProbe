@@ -315,7 +315,12 @@
       "timer-check-flags-etw-stackwalk-helper-only-no-target-read",
       "timer-check-flags-no-primary-current-build-doc",
       "timer-check-flags-modern-bit-semantics-unproven"
-    ]
+    ],
+    "promotion_disposition": "rejected",
+    "promotion_disposition_kind": "intentional-hold-closed",
+    "promotion_disposition_reason": "Closed as rejected for app/research-provider promotion because the remaining evidence gap is intentional: current-build exact reads, safe trigger conditions, authoritative semantics, or boot-safe validation are still missing.",
+    "promotion_reopen_criteria": "Reopen only with a safer current-build lane that proves exact target consumption and resolves the listed intentional-hold blockers.",
+    "promotion_disposition_reviewed_utc": "2026-05-07T20:20:00Z"
   },
   "open_questions": [
     "Can a future boot/runtime trace capture the exact registry query that consumes the current-build INIT descriptor path?",
@@ -354,7 +359,7 @@
       "notes": "The 2026-04-23 quoted helper rerun captured an exact TimerCheckFlags RegQueryValue event and stack, returning absent-value status on the clean baseline."
     }
   ],
-  "last_reviewed_utc": "2026-04-28T18:15:27Z",
+  "last_reviewed_utc": "2026-05-07T20:20:00Z",
   "no_hit_reason": "candidate-specific-absent: ReactOS still carries no direct `TimerCheckFlags` hit and the retained Ghidra lane is now static-context-only; WRK corroborates `KeTimerCheckFlags`, but the exact boot-consumer runtime read remains open.",
   "source_enrichment": {
     "ghidra": true,

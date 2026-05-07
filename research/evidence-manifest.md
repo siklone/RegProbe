@@ -85,51 +85,51 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `system.services.disable-sysmain` | deprecated | Class E | `research/records/system.services.disable-sysmain.review.json` | - | `47d465e6b8bbff7d213ac0922668c02130c8776d724fc0d57a50e561d04f4156` | `4de3a7df4980a70b5b8054c5affbe6d604891f9adbdb842e6380b5af6e15a71d` | 3 |
 | `system.services.disable-wap-push-routing` | deprecated | Class E | `research/records/system.services.disable-wap-push-routing.review.json` | - | `b4ec777b12a889c0a502849f5e8df5c7ad9f72d6abe9a6510c2419c61e5c2185` | `b8372215cd08f642042a2fb7470b401e5a30db993b1ab9486f449c2d13b5949f` | 3 |
 | `system.services.disable-windows-error-reporting` | deprecated | Class E | `research/records/system.services.disable-windows-error-reporting.review.json` | - | `fdce4fb14356388a798fcac29ee4901382fce0abf24d05ae4e88ba784cf16911` | `f17a1714cfd9fa49a10a99fa66df3b256ac008642f794eb8120fdeba92f52750` | 3 |
-| `power.control.allow-audio-to-enable-execution-required-power-requests` | draft | Class B | `research/records/power.control.allow-audio-to-enable-execution-required-power-requests.json` | - | `cec7b486cbef53d994360736bbdded17599c5f32cced2491da9cf4162316d8f5` | `2ffdec91585870e10eb4415ed384f541b5d6feb6862e5b8b7ff2475b5c347095` | 25 |
-| `power.control.allow-system-required-power-requests` | draft | Class B | `research/records/power.control.allow-system-required-power-requests.json` | - | `5ee782a9c991f4a0ac99b5c43be3fb283598e192f4400ccd543f1f7816a8a537` | `2a2929def36c09c23496578e30d7e27ce31a30195aab77c39d1005f223a63b2c` | 25 |
-| `power.control.power-request-override-subtree` | draft | Class C | `research/records/power.control.power-request-override-subtree.json` | - | `125720201d3129589de4c2c08546c7a5d03941d8ddf2b0904c57ece266b3a11b` | `aa9c9e94ec63d67015132776dd1e6edd9ec30b2a7abd1f99c34ecb2cdfec8152` | 9 |
-| `power.control.power-watchdog-timeout-cluster` | draft | Class B | `research/records/power.control.power-watchdog-timeout-cluster.json` | - | `0a78080a6dbd159783c9db9a8514793353b2663e89079c861766a4c94eaa4f0e` | `c16d68b5195920f06e54966a5cf38fee7353e6969aca0aaf233f5c0ae00449f2` | 5 |
-| `power.control.ttm-enabled` | draft | Class C | `research/records/power.control.ttm-enabled.json` | - | `58cde41f282e9388213d6d1c837de7258ad0c4381e61fa3c9cd5fb45ac4e52ff` | `d089559db142b895dd78437c259ba6f4fad9609cbc0f25e8b78604f1e5a38b7d` | 7 |
-| `power.control.win32k-callout-watchdog-timeout-seconds` | draft | Class B | `research/records/power.control.win32k-callout-watchdog-timeout-seconds.json` | - | `c25d2a97129acedc044bf4035218aadd367ed9f1e96e2583b0277ce020b14dd2` | `78a6dc8b9e9368a96d5e92eb357796a527599e10ed57e1dbcb54348daf17511b` | 10 |
-| `power.session-win32-callout-watchdog-bugcheck-enabled` | draft | Class B | `research/records/power.session-win32-callout-watchdog-bugcheck-enabled.json` | - | `b8adc7cba8f01ab2a5eec4ed8aa7c7ee2f177c1999dbe4a48bfdbc606feeb02f` | `b7e11395b7dc9b59aab95e0ddffc7ece6614dcf86804c26d884612dd6f23619f` | 10 |
-| `system.kernel-dpc-watchdog-control-cluster` | draft | Class B | `research/records/system.kernel-dpc-watchdog-control-cluster.json` | - | `e6379fcd408b1a84e980205af5df4fd83f895ea6b3119dd3ec2039cc0ecb199e` | `f24fafaceb0545a72c21340fed72e4dd5f971a9478ce00f4aed449f7d6ba313c` | 13 |
-| `system.kernel-dpc-watchdog-profile-cluster` | draft | Class B | `research/records/system.kernel-dpc-watchdog-profile-cluster.json` | - | `ab3e04eec6d28a5792df84cf8432425a48428eba7a86e28814cd9dbaa695fe50` | `a3e96809fd5affb35a0075c970e7b3d1195f890c51d8c3bba60a5f55ce5605c8` | 16 |
-| `system.kernel-long-dpc-threshold-cluster` | draft | Class B | `research/records/system.kernel-long-dpc-threshold-cluster.json` | - | `2b6bdd39dc5a2e3b2eee05578b71caa9b9af49ea76b3b76111fd8a0467a1d4c6` | `ca8215fe7087982f51e069f32cab24279742764ace8d4e94d7abb03d103eea3c` | 19 |
-| `system.kernel.force-bugcheck-for-dpc-watchdog` | draft | Class B | `research/records/system.kernel.force-bugcheck-for-dpc-watchdog.json` | - | `dcf6427f88d6f9e5c298a800fe3ad1a467fbbaf575b25529885d0de06e4184fa` | `bb31c63a551e1366dadec933dd59533cfc3d9515a79d84c1c6d9f169ab18542c` | 12 |
-| `system.kernel.global-timer-resolution-requests` | draft | Class B | `research/records/system.kernel.global-timer-resolution-requests.json` | - | `6e31847d8973826b81458ba351cbc3c44e0ef75625e76664985f0652b0fc16e9` | `ac764730842591e0546b06383c5461c2f08d233e8b34f7d8e0b18702a7f87e79` | 16 |
-| `system.kernel.timer-check-flags` | draft | Class B | `research/records/system.kernel.timer-check-flags.json` | - | `0464051faf97130e4093ff9380155fc40b267ffe8469db124daf6149fc9df36c` | `20e854cf8e22f4bac21dced117d33d93453092c5e679bfb7e33559f7411132e3` | 14 |
-| `cleanup.component-store` | review-required | Class D | `research/records/cleanup.component-store.review.json` | - | `63969da0843f1125fdf55375bd06c3b54a7cc013fbd843de0bf951b2e6b2ffaa` |  | 4 |
-| `cleanup.directx-shader-cache` | review-required | Class D | `research/records/cleanup.directx-shader-cache.review.json` | - | `04d7f5e55e87bbec0027f977401fb1efc16417d8fcf968d12f3a5f7609dad091` |  | 4 |
-| `cleanup.eventlog-system` | review-required | Class D | `research/records/cleanup.eventlog-system.review.json` | - | `2e7ebae4014247e22b196fae28d663447a22e9ffa688894a49329d65dae2937c` |  | 4 |
-| `cleanup.font-cache` | review-required | Class D | `research/records/cleanup.font-cache.review.json` | - | `e8be7acf6e5b79280ee31fa409c4882900fb7455168f13a0c12795b54c71252a` |  | 4 |
-| `cleanup.memory-dumps` | review-required | Class D | `research/records/cleanup.memory-dumps.review.json` | - | `fe502bdae3750870c0d4c4fb4c3b8d4c8c6b3abd165da7b00c09d8db3cd763e5` |  | 4 |
-| `cleanup.prefetch-files` | review-required | Class D | `research/records/cleanup.prefetch-files.review.json` | - | `9bd37d854142babf00e73c47c9e5f799661d60b05130ca55aaba3a010bbf2102` |  | 4 |
-| `cleanup.product-key` | review-required | Class D | `research/records/cleanup.product-key.review.json` | - | `d9f6ff1391f31b99245dc5c91489ddc255e41f902fd1485609a8ad3332fd0416` |  | 4 |
-| `cleanup.recycle-bin` | review-required | Class D | `research/records/cleanup.recycle-bin.review.json` | - | `67d5fd6d622366c8f92af27707d2ecac59f89e21f5782a2033609c004e08a333` |  | 4 |
-| `cleanup.shadow-copies` | review-required | Class D | `research/records/cleanup.shadow-copies.review.json` | - | `e42fc4cda1468fb1af009a4a04cd1deb7a3f57abf5e5e848b337904b054544ef` |  | 4 |
-| `cleanup.temp-files` | review-required | Class D | `research/records/cleanup.temp-files.review.json` | - | `c91ccdcc7c90ec2f15b884fcd99aba2b44ade20dcb8b8b4a76e5b792f844f70d` |  | 4 |
-| `cleanup.thumbnail-cache` | review-required | Class D | `research/records/cleanup.thumbnail-cache.review.json` | - | `da9a65251af8f4173273b3696aa1b82a89f1a9adb9a3af859d1aa14a1a2764f9` |  | 4 |
-| `cleanup.wer-files` | review-required | Class D | `research/records/cleanup.wer-files.review.json` | - | `51909b0fe747f9f94bbf567f6184f018abd86ed4b0dddfa9e537a124837872a8` |  | 4 |
-| `cleanup.windows-old` | review-required | Class D | `research/records/cleanup.windows-old.review.json` | - | `8aa03022b131c34ebf9b29fe245932435d8f813364b083a4f8d1047befed4399` |  | 4 |
-| `cleanup.windows-update-cache` | review-required | Class D | `research/records/cleanup.windows-update-cache.review.json` | - | `93bb09e926c562a2afccd1ce2cb520858a88620eac28d2ba854c0ebf46baf865` |  | 4 |
-| `misc.disable-edge-features` | review-required | Class D | `research/records/misc.disable-edge-features.review.json` | - | `ca64dccb1309a765891fed690c56f9728c8fda1b81230b42c135e4a22757d565` |  | 3 |
-| `misc.disable-office-telemetry` | review-required | Class D | `research/records/misc.disable-office-telemetry.review.json` | - | `a4c9cb65297f14e3479008021a09f9cc153e9117da6d07efdc3f2822cf3c7c8b` |  | 3 |
-| `misc.disable-onedrive` | review-required | Class D | `research/records/misc.disable-onedrive.review.json` | - | `6b33496c004e35d2432bf31f6d206556b36f945fdc9f8118cacfce67a2768e91` |  | 3 |
-| `misc.disable-visual-studio-telemetry` | review-required | Class D | `research/records/misc.disable-visual-studio-telemetry.review.json` | - | `d3673c025a450063f58aa3df729125773fb642eeb0d3e87b85f2be63bf993de7` |  | 3 |
-| `misc.disable-vscode-telemetry` | review-required | Class D | `research/records/misc.disable-vscode-telemetry.review.json` | - | `bf9ad911a40d3ea32a3b77c052b7048caa108248e2f78fbf4d45faf67966ba75` |  | 3 |
-| `misc.optimize-7zip-settings` | review-required | Class D | `research/records/misc.optimize-7zip-settings.review.json` | - | `69c3394468cde40bbd49093ce50c33b73dec8700bfedbf90c92577d84ec69091` |  | 3 |
-| `network.flush-dns-cache` | review-required | Class D | `research/records/network.flush-dns-cache.review.json` | - | `5e0d288f7b0f4796491f4d3ef37ff087f59ba82c42cfdf1892eb58471ecf76f7` |  | 4 |
-| `network.reset-winsock` | review-required | Class D | `research/records/network.reset-winsock.review.json` | - | `4ae49d0f2dfafc117f7065c9d3052b0590496983a203c0e456339c36c6aa3cfa` |  | 5 |
-| `peripheral.audio-disable-enhancements` | review-required | Class D | `research/records/peripheral.audio-disable-enhancements.review.json` | - | `56355ccd23aca0d4492ef2010b2bcbd58398fda9aae5b25f53a2d001be991cf8` |  | 3 |
-| `peripheral.keyboard-disable-language-hotkey` | review-required | Class D | `research/records/peripheral.keyboard-disable-language-hotkey.review.json` | - | `4001d6dcfc6025c6025564e03a3a806c729212e18c04ff720996c7c28ad460e7` |  | 3 |
-| `peripheral.keyboard-optimize-repeat` | review-required | Class D | `research/records/peripheral.keyboard-optimize-repeat.review.json` | - | `c740ae6af5a3ffe56d274309fc83755ee170e3e8c0c49367e63b0163f22385e3` |  | 3 |
-| `peripheral.mouse-disable-acceleration` | review-required | Class D | `research/records/peripheral.mouse-disable-acceleration.review.json` | - | `bc3323794cc6c7b0537d1fd529b3a0f146e5a6773d20d1f8db7feabf500325c6` |  | 3 |
-| `peripheral.mouse-disable-throttle` | review-required | Class D | `research/records/peripheral.mouse-disable-throttle.review.json` | - | `3b6b5dc28a0e200f356fab5bd6b8a97531129334051a151b1c5c45bd7409430d` |  | 3 |
-| `power.disable-cpu-parking` | review-required | Class D | `research/records/power.disable-cpu-parking.review.json` | - | `4f981dcb5285a38d01f0a24354218681ba7f4f598b64fe10fcb7ff8896eac36c` |  | 4 |
-| `power.disable-hibernation` | review-required | Class D | `research/records/power.disable-hibernation.review.json` | - | `d09dc5edc3bef96253e651f3b1738776beef52fc4124e37c5ab3af9eb18b34cc` |  | 4 |
-| `power.disable-superfetch` | review-required | Class D | `research/records/power.disable-superfetch.review.json` | - | `94fd5dbe9e39c5f8a9e456b2047f87598a615019ac7b2b953f035aeecea16b90` |  | 3 |
-| `power.disable-usb-selective-suspend` | review-required | Class D | `research/records/power.disable-usb-selective-suspend.review.json` | - | `3c4cc57db6d4c0b5166985e37317ad8d2f562746b1ab834f77b423067499e08c` |  | 4 |
-| `security.disable-uac` | review-required | Class D | `research/records/security.disable-uac.review.json` | - | `97daa9e9877ba2d8f033eb115de1431a0d6d3c8a2b1acc8dd767cb05ef1b34c9` |  | 5 |
+| `power.control.allow-audio-to-enable-execution-required-power-requests` | draft | Class B | `research/records/power.control.allow-audio-to-enable-execution-required-power-requests.json` | - | `6d2c75a9c1bacf8812384bc1293ff345096dac9be541415026ed65de419d739e` | `2ffdec91585870e10eb4415ed384f541b5d6feb6862e5b8b7ff2475b5c347095` | 25 |
+| `power.control.allow-system-required-power-requests` | draft | Class B | `research/records/power.control.allow-system-required-power-requests.json` | - | `118632c6f3a916e2883c65446fba50dc57ff94ee8994d38fc111ed50a9c4f430` | `2a2929def36c09c23496578e30d7e27ce31a30195aab77c39d1005f223a63b2c` | 25 |
+| `power.control.power-request-override-subtree` | draft | Class C | `research/records/power.control.power-request-override-subtree.json` | - | `adc1d1285239ae4bebe84faa03ffdc3a2115932a57fa212016ad666c751f8b4d` | `aa9c9e94ec63d67015132776dd1e6edd9ec30b2a7abd1f99c34ecb2cdfec8152` | 9 |
+| `power.control.power-watchdog-timeout-cluster` | draft | Class B | `research/records/power.control.power-watchdog-timeout-cluster.json` | - | `9e17271a73ab81223b56eca470c6a3e5b409c753e23f1b8c7d2c82f199415119` | `c16d68b5195920f06e54966a5cf38fee7353e6969aca0aaf233f5c0ae00449f2` | 5 |
+| `power.control.ttm-enabled` | draft | Class C | `research/records/power.control.ttm-enabled.json` | - | `eeb3a38cfe0ef9bfc85e059c91e1c13b799374d4be08d89478e14b5be94f91d1` | `d089559db142b895dd78437c259ba6f4fad9609cbc0f25e8b78604f1e5a38b7d` | 7 |
+| `power.control.win32k-callout-watchdog-timeout-seconds` | draft | Class B | `research/records/power.control.win32k-callout-watchdog-timeout-seconds.json` | - | `04d5f48a256b6e01bcec0d896258d3ac0420aceaf5fef75303431189b8dd14c8` | `78a6dc8b9e9368a96d5e92eb357796a527599e10ed57e1dbcb54348daf17511b` | 10 |
+| `power.session-win32-callout-watchdog-bugcheck-enabled` | draft | Class B | `research/records/power.session-win32-callout-watchdog-bugcheck-enabled.json` | - | `033e814514628a7b034d5aded6bccdd8251230684d7171363b21c9e34157aaa5` | `b7e11395b7dc9b59aab95e0ddffc7ece6614dcf86804c26d884612dd6f23619f` | 10 |
+| `system.kernel-dpc-watchdog-control-cluster` | draft | Class B | `research/records/system.kernel-dpc-watchdog-control-cluster.json` | - | `6baae5fa5347b255d385557130f7d891f61f63451b322ba14f39813b1d0015fd` | `f24fafaceb0545a72c21340fed72e4dd5f971a9478ce00f4aed449f7d6ba313c` | 13 |
+| `system.kernel-dpc-watchdog-profile-cluster` | draft | Class B | `research/records/system.kernel-dpc-watchdog-profile-cluster.json` | - | `483e8786f9c32c6915e94020b7120eceb8f80ea591a00b8f78bf65100268333b` | `a3e96809fd5affb35a0075c970e7b3d1195f890c51d8c3bba60a5f55ce5605c8` | 16 |
+| `system.kernel-long-dpc-threshold-cluster` | draft | Class B | `research/records/system.kernel-long-dpc-threshold-cluster.json` | - | `151b906dd70e782dc9deac3dd27c28d7dd33079ad1e27484c90bdc49cb22efd4` | `ca8215fe7087982f51e069f32cab24279742764ace8d4e94d7abb03d103eea3c` | 19 |
+| `system.kernel.force-bugcheck-for-dpc-watchdog` | draft | Class B | `research/records/system.kernel.force-bugcheck-for-dpc-watchdog.json` | - | `615c7bbab128c92d2c7460bd8b5cc186bc557a6dd3c9af523076c38871b2020f` | `bb31c63a551e1366dadec933dd59533cfc3d9515a79d84c1c6d9f169ab18542c` | 12 |
+| `system.kernel.global-timer-resolution-requests` | draft | Class B | `research/records/system.kernel.global-timer-resolution-requests.json` | - | `e4c0eca54ae04ce922cd1503a714042fd7e9caa98a2ceb33eb57f4feb00972ff` | `ac764730842591e0546b06383c5461c2f08d233e8b34f7d8e0b18702a7f87e79` | 16 |
+| `system.kernel.timer-check-flags` | draft | Class B | `research/records/system.kernel.timer-check-flags.json` | - | `f40a3797f8eb6183d0b6dfc1b618e7736db7981a8e0b2d5f5c04be8dbe712d6e` | `20e854cf8e22f4bac21dced117d33d93453092c5e679bfb7e33559f7411132e3` | 14 |
+| `cleanup.component-store` | review-required | Class D | `research/records/cleanup.component-store.review.json` | - | `af8f42536ca29a7361beb18646345e2299b959d859cd005132c7b25a660716c5` |  | 4 |
+| `cleanup.directx-shader-cache` | review-required | Class D | `research/records/cleanup.directx-shader-cache.review.json` | - | `f06b6aa92e041cf8de08048eb56d7aa35a607b266d46be522ebdfced05d51681` |  | 4 |
+| `cleanup.eventlog-system` | review-required | Class D | `research/records/cleanup.eventlog-system.review.json` | - | `da9815af1832d948c386391ac94a89e06ccaaf79ccd7eb0f4c761969cc846b37` |  | 4 |
+| `cleanup.font-cache` | review-required | Class D | `research/records/cleanup.font-cache.review.json` | - | `1818cf8c50987ffb08b329a196c53f44caed0538f43ca650742035cc391cf9fb` |  | 4 |
+| `cleanup.memory-dumps` | review-required | Class D | `research/records/cleanup.memory-dumps.review.json` | - | `4369357b1d6d3e20dd436f4ae73973dd24acb373d36c55a83613dac5a5affa38` |  | 4 |
+| `cleanup.prefetch-files` | review-required | Class D | `research/records/cleanup.prefetch-files.review.json` | - | `246d83753844ec5bc7592f4525061d89f83dfb6da193f19213eb0b7d3c84812d` |  | 4 |
+| `cleanup.product-key` | review-required | Class D | `research/records/cleanup.product-key.review.json` | - | `6ba2379a5b64614a6821a111532e21eb8cabd71175d0d4c047576402204873b6` |  | 4 |
+| `cleanup.recycle-bin` | review-required | Class D | `research/records/cleanup.recycle-bin.review.json` | - | `84bad9f73d2a6eb7a36dea30b3a0a6e9a6de2f1613ddb1e89408925d5f543544` |  | 4 |
+| `cleanup.shadow-copies` | review-required | Class D | `research/records/cleanup.shadow-copies.review.json` | - | `73f172de18c069ad5a5deeb47d0f12ba8dc94083d5cd1dc9e5727c03a912263a` |  | 4 |
+| `cleanup.temp-files` | review-required | Class D | `research/records/cleanup.temp-files.review.json` | - | `29c19864b83796a22aebf308ef92f7f466f4255c219c4bdec30dd014fa3e363b` |  | 4 |
+| `cleanup.thumbnail-cache` | review-required | Class D | `research/records/cleanup.thumbnail-cache.review.json` | - | `d15691c921548666c07848397c1d7c18b0f7b0569dc2a5072bbfcdff6034e248` |  | 4 |
+| `cleanup.wer-files` | review-required | Class D | `research/records/cleanup.wer-files.review.json` | - | `61d3171e1b2eacaa3a743d1ef77209c7456f6a9efa52cfe180eeff101fee4f27` |  | 4 |
+| `cleanup.windows-old` | review-required | Class D | `research/records/cleanup.windows-old.review.json` | - | `5031702b541499b7a085336a5969971387560278744ec9ac362b48c1ea7ad140` |  | 4 |
+| `cleanup.windows-update-cache` | review-required | Class D | `research/records/cleanup.windows-update-cache.review.json` | - | `b54ffe1c8b8c3afbdacf4c142f47b85ddde5befe66662d626f4262819e64f2c1` |  | 4 |
+| `misc.disable-edge-features` | review-required | Class D | `research/records/misc.disable-edge-features.review.json` | - | `53a58127397ab6c5d65091264a07022a29710101870f92577d8bbed9797a1d45` |  | 3 |
+| `misc.disable-office-telemetry` | review-required | Class D | `research/records/misc.disable-office-telemetry.review.json` | - | `a3c990bdf1d7e15e852c033c3f8a16cc2e4ca35b9480904560a303a10e2487cb` |  | 3 |
+| `misc.disable-onedrive` | review-required | Class D | `research/records/misc.disable-onedrive.review.json` | - | `c5afcd9aa62d09887cbeaee8d6b39bbae4987c65c038c5e626eb8b1ad6cbb597` |  | 3 |
+| `misc.disable-visual-studio-telemetry` | review-required | Class D | `research/records/misc.disable-visual-studio-telemetry.review.json` | - | `8e110dc830af8d20dd552a95d5195ab1c9709e8e703288a19437b81d60ada3ee` |  | 3 |
+| `misc.disable-vscode-telemetry` | review-required | Class D | `research/records/misc.disable-vscode-telemetry.review.json` | - | `c324a644eef9f4f97321ebc6bfaa7d55909dc42c5b507b7f8732a79299e9d491` |  | 3 |
+| `misc.optimize-7zip-settings` | review-required | Class D | `research/records/misc.optimize-7zip-settings.review.json` | - | `d783e5e459e2d06648defb17cabaff646d0fbc666a40c33894253a0a292e457a` |  | 3 |
+| `network.flush-dns-cache` | review-required | Class D | `research/records/network.flush-dns-cache.review.json` | - | `633bb92fd5d2cbeb30fd2a2fe78d2aa6916cb35481bd4d60758f230d87a13d3c` |  | 4 |
+| `network.reset-winsock` | review-required | Class D | `research/records/network.reset-winsock.review.json` | - | `2803c02cbe7eb86855900d3ae1d3f332f946356255445b3b69141b92a461a352` |  | 5 |
+| `peripheral.audio-disable-enhancements` | review-required | Class D | `research/records/peripheral.audio-disable-enhancements.review.json` | - | `ef078d53b763295cb5812697d2d47c8c20a83638813a0f54117ac8d4420db1d0` |  | 3 |
+| `peripheral.keyboard-disable-language-hotkey` | review-required | Class D | `research/records/peripheral.keyboard-disable-language-hotkey.review.json` | - | `6138a479c36d4330eb80a6c2f25d5f305511c4f08ae2d2cb6ec6c93a3691dfc7` |  | 3 |
+| `peripheral.keyboard-optimize-repeat` | review-required | Class D | `research/records/peripheral.keyboard-optimize-repeat.review.json` | - | `0d39347d991490d111463cf080a68d071b257e664719c27c215ae7269a1ac51b` |  | 3 |
+| `peripheral.mouse-disable-acceleration` | review-required | Class D | `research/records/peripheral.mouse-disable-acceleration.review.json` | - | `42e00b63cc24f9bd1961f3ce14a14ef4d5878b8ea7dd08eb588e3d2fe46e8d12` |  | 3 |
+| `peripheral.mouse-disable-throttle` | review-required | Class D | `research/records/peripheral.mouse-disable-throttle.review.json` | - | `95880a88f59239507633caf51fa01504e183dfb59b3d65b644635f1d48f5525c` |  | 3 |
+| `power.disable-cpu-parking` | review-required | Class D | `research/records/power.disable-cpu-parking.review.json` | - | `c03a9d96e34a5cbb5b86e592e93974b3247af8ec00c77e42cff732174a693a95` |  | 4 |
+| `power.disable-hibernation` | review-required | Class D | `research/records/power.disable-hibernation.review.json` | - | `314cf1cc88b7cefecfb1f2c3c8bbff2cc008fd01da3ebb97cf55c5f655ebbbf1` |  | 4 |
+| `power.disable-superfetch` | review-required | Class D | `research/records/power.disable-superfetch.review.json` | - | `6aee4e834596e243ffc6a6f0057236e04bbdc0f6d81352347b0e9ac2a9b67a2a` |  | 3 |
+| `power.disable-usb-selective-suspend` | review-required | Class D | `research/records/power.disable-usb-selective-suspend.review.json` | - | `532c9d58d4658069b4369f51c71ca3d18931b64b5933c53c07114c54a68b1c64` |  | 4 |
+| `security.disable-uac` | review-required | Class D | `research/records/security.disable-uac.review.json` | - | `a59d0a3d09abe4be2127f12534e124f5c27cc4863b7837a4ed61f65f6a4b39e4` |  | 5 |
 | `audio.disable-beep` | validated | Class A | `research/records/audio.disable-beep.review.json` | - | `6d8ec1e66a7e07ee63b2ccc0de667b30146fab7fbf4358e3334d626090ef2380` | `5b2fdb894230a9968ae5988951da38e4ed60333b008effa58bdae351929538b0` | 7 |
 | `audio.show-disconnected-devices` | validated | Class A | `research/records/audio.show-disconnected-devices.review.json` | [evidence/records/audio.show-disconnected-devices](../evidence/records/audio.show-disconnected-devices) | `8b34ab3438a2b1eff11156ae9854724cbc8579c12ad348591b69ab145fc7edf7` | `2a472c00bb66514035d3bae1cb6dafc44f22d63d5726d8cbab2aeadf8c97cafa` | 6 |
 | `audio.show-hidden-devices` | validated | Class A | `research/records/audio.show-hidden-devices.review.json` | [evidence/records/audio.show-hidden-devices](../evidence/records/audio.show-hidden-devices) | `64560028dfaad3202ed014c19db77668614dd0b874f1feb790d093fb26339b3c` | `e72423c7fa0b7972a43fa0d15baad6b470cca0f7de053480c53fcaa8a01b4379` | 5 |
@@ -200,15 +200,15 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `peripheral.autoplay-take-no-action` | validated | Class A | `research/records/peripheral.autoplay-take-no-action.review.json` | - | `35a27a8225f21f95c09f4ce819aa205965e99494f74f956051b31c76f602a188` | `65ce551667f3d9b5bd3f77c92fdfd5e00113e541223d3dafb91627206edf8e27` | 4 |
 | `peripheral.disable-autoplay` | validated | Class A | `research/records/peripheral.disable-autoplay.review.json` | - | `5ea35bd9e72bf3bc3eaa422117b7770c32ac8e13dc79fa4e34faa60dd0ca1db2` | `d3db858cacb57a9dc7dae6c3410f943cd99b67bfac0ffe3a2798ba560763d573` | 7 |
 | `peripheral.disable-sticky-keys-prompt` | validated | Class A | `research/records/peripheral.disable-sticky-keys-prompt.review.json` | - | `6028f35f2188d5c0c66aa1b53d9302d04918d9ab1d2447c92d195ab9b2d59a23` | `4c0b1549e97383602bb402a3e42cfe13dacfa7872433c4e07647353144ef8571` | 4 |
-| `policy.system.enable-virtualization` | validated | Class B | `research/records/policy.system.enable-virtualization.json` | [evidence/records/policy.system.enable-virtualization](../evidence/records/policy.system.enable-virtualization) | `86d5fdeccf833eadceaa46932a459048bc5f8ae6a7e569460192d1e30ca49c91` | `5005cae27faa69e1133858c324a730e66ec750ae8fb5f1631ff815c6b1162047` | 13 |
+| `policy.system.enable-virtualization` | validated | Class B | `research/records/policy.system.enable-virtualization.json` | [evidence/records/policy.system.enable-virtualization](../evidence/records/policy.system.enable-virtualization) | `987e2ca5ab40dfbde45da5050a35844825288f7a6f6b173a62a4552ff06876db` | `5005cae27faa69e1133858c324a730e66ec750ae8fb5f1631ff815c6b1162047` | 13 |
 | `power.control.class1-initial-unpark-count` | validated | Class B | `research/records/power.control.class1-initial-unpark-count.json` | [evidence/records/power.control.class1-initial-unpark-count](../evidence/records/power.control.class1-initial-unpark-count) | `fa44f28403c225e95359a0c9a4799d5688265fb90b964d7b6d70236e0586a841` | `a72121d16b566cdba83dee54ae043cb54c3dc36de0f2c4a335bfaf7eb28ca910` | 9 |
-| `power.control.hiber-file-size-percent` | validated | Class A | `research/records/power.control.hiber-file-size-percent.json` | [evidence/records/power.control.hiber-file-size-percent](../evidence/records/power.control.hiber-file-size-percent) | `69b67bd52e7401d0da794addbd8a33f657fef3ea3d0ae36ccb376e4b7f8518fb` | `02e2f41ef03b972170ad7896c7af8a703300def3f4724df7e83d8100e69f0ae4` | 10 |
+| `power.control.hiber-file-size-percent` | validated | Class A | `research/records/power.control.hiber-file-size-percent.json` | [evidence/records/power.control.hiber-file-size-percent](../evidence/records/power.control.hiber-file-size-percent) | `88de85dc76bda18e8347a10d07a1e3b512dd76dd87e2768328c4a7bea6d3420f` | `02e2f41ef03b972170ad7896c7af8a703300def3f4724df7e83d8100e69f0ae4` | 10 |
 | `power.control.hibernate-enabled` | validated | Class A | `research/records/power.control.hibernate-enabled.json` | [evidence/records/power.control.hibernate-enabled](../evidence/records/power.control.hibernate-enabled) | `f62ceedb9e71c3d462a7240092217f1bbf3d9113d1bce700f1dc1f894f014b24` | `c3911d1326540d7f1276550075e7c7eb7c434a2dd287e02d644b739579800b5b` | 6 |
-| `power.control.hibernate-enabled-default` | validated | Class B | `research/records/power.control.hibernate-enabled-default.json` | [evidence/records/power.control.hibernate-enabled-default](../evidence/records/power.control.hibernate-enabled-default) | `a84a03b7216960d68d02afd6dea4cce95047121a131760615c62ea20ad2e3e37` | `4b6b5426cee9abeb3f568710619525a4a70fbffa9d5d7082863c9ac7c8d90916` | 9 |
+| `power.control.hibernate-enabled-default` | validated | Class B | `research/records/power.control.hibernate-enabled-default.json` | [evidence/records/power.control.hibernate-enabled-default](../evidence/records/power.control.hibernate-enabled-default) | `29a701c0cb3a9440b7669e7f3810feec0275b25f739fe48fd27ee0fe9faf11a3` | `4b6b5426cee9abeb3f568710619525a4a70fbffa9d5d7082863c9ac7c8d90916` | 9 |
 | `power.control.lid-reliability-state` | validated | Class B | `research/records/power.control.lid-reliability-state.json` | [evidence/records/power.control.lid-reliability-state](../evidence/records/power.control.lid-reliability-state) | `abe773ecec342aff971793ceb9cbb4399540862b1033ab0af35d2efdb4245833` | `568cda6c5db740257e809b7d530fe6dbdf2fc7e4f10b9fc3182beec481c0be8e` | 7 |
 | `power.control.mf-buffering-threshold` | validated | Class B | `research/records/power.control.mf-buffering-threshold.json` | [evidence/records/power.control.mf-buffering-threshold](../evidence/records/power.control.mf-buffering-threshold) | `ae1194394e74b75673c3a5222ec2ca4fc43aa0297580affa06d6f5c981db988b` | `76b19ee2eb617fdf751f3fe4bc3482b147ae62e713c61c3ad07b0539bdbe5ce2` | 9 |
 | `power.control.perf-calculate-actual-utilization` | validated | Class B | `research/records/power.control.perf-calculate-actual-utilization.json` | [evidence/records/power.control.perf-calculate-actual-utilization](../evidence/records/power.control.perf-calculate-actual-utilization) | `9530e576f47f22bc45ba4a7983464fbe9a092ca6ff4e2b364e0b3ae18c54b5c8` | `0b9db986096b363ddb7a503bdd24202f4363bfe219e159ed604e8ce68e2ab572` | 9 |
-| `power.control.timer-rebase-threshold-on-drips-exit` | validated | Class B | `research/records/power.control.timer-rebase-threshold-on-drips-exit.json` | [evidence/records/power.control.timer-rebase-threshold-on-drips-exit](../evidence/records/power.control.timer-rebase-threshold-on-drips-exit) | `ad40c6c708c907bbd3310c5a4b3b68433021d96e393714ce79daedaebecc52a6` | `54f7d729b7c430c4d8fa52ccb91256651e35c189b6c788691161084ffad23095` | 10 |
+| `power.control.timer-rebase-threshold-on-drips-exit` | validated | Class B | `research/records/power.control.timer-rebase-threshold-on-drips-exit.json` | [evidence/records/power.control.timer-rebase-threshold-on-drips-exit](../evidence/records/power.control.timer-rebase-threshold-on-drips-exit) | `e35cf973a70dbc1a578a37938e20a200ab69f0a8d20c4f2d5bf6b6a9b311bfa5` | `54f7d729b7c430c4d8fa52ccb91256651e35c189b6c788691161084ffad23095` | 10 |
 | `power.disable-cpu-idle-states` | validated | Class A | `research/records/power.disable-cpu-idle-states.json` | [evidence/records/power.disable-cpu-idle-states](../evidence/records/power.disable-cpu-idle-states) | `0c4938318a9b502144c0f1ab5ed5ad201155466ae668ab8c1c3b654dfb294bb0` | `1798640a1a75847caf8a5c8caa6949c387e8118510e6cf57d7b76f44ed6a5a3b` | 14 |
 | `power.disable-fast-startup` | validated | Class A | `research/records/power.disable-fast-startup.review.json` | - | `5c6c3f5b3561a755cf0a46ca1ed0de6c44577464ad887e118bd5af655f0999bd` | `cf91e404c6ac19f5792f0a45c40cd8f2ed1504f0e633f6f09a2ec1cada0ec9b7` | 6 |
 | `power.disable-network-power-saving.policy` | validated | Class A | `research/records/power.disable-network-power-saving.policy.review.json` | [evidence/records/power.disable-network-power-saving.policy](../evidence/records/power.disable-network-power-saving.policy) | `ad2354239542f7cf0b1ba220d201c15bec557ea601ab9956d9925a23290988af` | `232e318df18a2327ad504a0c942305bb7c01eb9de6d469b2158aa056e1ac6d6a` | 4 |
@@ -219,7 +219,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `power.hide-sleep-option` | validated | Class A | `research/records/power.hide-sleep-option.json` | - | `6639e94795711376bb69e0c70aa67f776adf241655647f7282b515aa96e639ac` | `b847a573fa658e74b958e4d7ff201de98eaff097b55046bf7f245ee525ae725b` | 5 |
 | `power.optimize-cpu-boost` | validated | Class A | `research/records/power.optimize-cpu-boost.json` | - | `87acbbe873aa5815854cd5c9ca4ab84dc99adde2af67d28e34b41a6bfe374037` | `1ee2490d2c59b07a38138bc68bd0d251af7c684cb953dbb62a84f0efc4da976e` | 5 |
 | `power.optimize-gaming-network` | validated | Class A | `research/records/power.optimize-gaming-network.json` | - | `6bcb80aa1f5180d8982df2f6de034d597945df021eac27475ac8d42e65fe166b` | `b5fe16151f1dc0b9291b42f57aaaf84cd63abea46ec04701e8140f51ef2d4de6` | 4 |
-| `power.session-watchdog-timeouts` | validated | Class B | `research/records/power.session-watchdog-timeouts.json` | [evidence/records/power.session-watchdog-timeouts](../evidence/records/power.session-watchdog-timeouts) | `790c76a0f139b470f1c1c5c108892893bb87a0229678d909141871c8b6ccce57` | `83a7435730e3c12569c7100f02dc986e96c494a1605753fc3b3796cc3f0ab893` | 19 |
+| `power.session-watchdog-timeouts` | validated | Class B | `research/records/power.session-watchdog-timeouts.json` | [evidence/records/power.session-watchdog-timeouts](../evidence/records/power.session-watchdog-timeouts) | `cc0674a8c9c7afffaf651bb34dec9530ff0a6507260d8d779e610e4ec64c8eca` | `83a7435730e3c12569c7100f02dc986e96c494a1605753fc3b3796cc3f0ab893` | 19 |
 | `privacy.block-microsoft-accounts` | validated | Class A | `research/records/privacy.block-microsoft-accounts.json` | - | `d487f27a936d572c8bf164bc99d06958009a71ff1d7a18295358eda83a25c4d8` | `a7f65482d895f07ff02f5817f4491563f33cedb80aae14fb210fe9bddfb14965` | 4 |
 | `privacy.deny-app-access.policy` | validated | Class A | `research/records/privacy.deny-app-access.policy.review.json` | - | `8792aa0d052ab5f49192039ff6cfdd96e6d137ed6183368a2cb4b6ad4ec25dd8` | `88c20ba5d5ea529943d5b7570fc4cb4837eaf1ab60a2e3d0c9e7a7a37975af99` | 3 |
 | `privacy.disable-activity-history` | validated | Class A | `research/records/privacy.disable-activity-history.json` | - | `d55e660871eb770d34f4d88ca26adacf6c8d1982198d10d79519cc120ab47a1b` | `342ef30f33fb769e6c87cdb284c73ba6aa25347325f4dbf19d9b2e4ee1ff3f59` | 4 |
@@ -1960,7 +1960,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `draft`
 - Evidence class: `Class B`
 - Source file: `research/records/power.control.allow-audio-to-enable-execution-required-power-requests.json`
-- Source SHA256: `cec7b486cbef53d994360736bbdded17599c5f32cced2491da9cf4162316d8f5`
+- Source SHA256: `6d2c75a9c1bacf8812384bc1293ff345096dac9be541415026ed65de419d739e`
 - Proof SHA256: `2ffdec91585870e10eb4415ed384f541b5d6feb6862e5b8b7ff2475b5c347095`
 
 **Summary:** Draft Control Power record. `AllowAudioToEnableExecutionRequiredPowerRequests` sits under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Power`, has an explicit repo-doc default of `1`, is absent on the observed clean baseline, produced an exact current-build Unicode string hit in `ntoskrnl.exe`, and was later retained by source-enrichment as a docs-first kernel candidate with a `power-request-simulation` trigger recommendation. A later repo-native follow-up then exposed that same trigger family as a named guest Procmon profile and mega-trigger runtime alias. Adjacent Microsoft docs later clarified the generic `PowerRequestExecutionRequired` contract and the way audio playback keeps the audio stack active during connected-standby playback, but no current Microsoft page has been found that names this exact audio-specific internal setting. Later KVM local-KD passes first surfaced the exact symbol `nt!PopPowerRequestActiveAudioEnablesExecutionRequired` and then resolved its live current-build value as `1`, aligning the running kernel with the repo-doc default. A later static INIT-table follow-up then showed a current-build `ntoskrnl.exe` descriptor entry under `Power` that binds `AllowAudioToEnableExecutionRequiredPowerRequests` to the exact global later resolved by local KD as `nt!PopPowerRequestActiveAudioEnablesExecutionRequired`. A later current-build disassembly pass then showed a direct consumer in `nt!PopPowerRequestEvaluateExecutionRequiredStatus`. Later follow-ups then showed `nt!PopUmpoSendPowerRequestOverrideQuery` packaging requester state for `nt!PopUmpoSendPowerMessage`, `nt!PopPowerRequestExecutionRequiredSettingCallback` staying timeout-setting specific by updating `nt!PopExecutionRequiredTimeout`, the timeout timer/worker chain feeding back into `nt!PopPowerRequestHandleExecutionEnablementUpdate`, the broader override-response plus callback-worker path staying queue and PDC driven with no visible `*PowerRequest*Reg*` symbol, and a generic power-setting callback subsystem around `PoRegisterPowerSettingCallback` and `PopInitializePowerSettingCallbacks`. A later host-side objdump follow-up then showed an unlabeled current-build `INIT` walker at `0x140C48AB8` uniquely consuming the broader `Power` descriptor table, passing row key and value names through subkey and value-lookup helpers before copying payload into the paired target global. A later Wave 4 ETW stackwalk plus grouped Ghidra follow-up then captured an exact current-build runtime query lane from `reg.exe` through `QueryValue`, `QueryRegistry`, `RegGetValueW`, `RegQueryValueExW`, `BaseRegQueryValueInternal`, `NtQueryValueKey`, and kernel-side `EtwpTraceRegistry`, `EtwpTraceStackWalk`, `KiSystemServiceStart`, and `ntoskrnl.exe!NtQueryValueKey`. The lane is strong enough for a schema-backed draft, but it still lacks a primary current-build doc for this exact audio-specific policy and the earlier boot/init seeding path remains open.
@@ -2010,7 +2010,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `draft`
 - Evidence class: `Class B`
 - Source file: `research/records/power.control.allow-system-required-power-requests.json`
-- Source SHA256: `5ee782a9c991f4a0ac99b5c43be3fb283598e192f4400ccd543f1f7816a8a537`
+- Source SHA256: `118632c6f3a916e2883c65446fba50dc57ff94ee8994d38fc111ed50a9c4f430`
 - Proof SHA256: `2a2929def36c09c23496578e30d7e27ce31a30195aab77c39d1005f223a63b2c`
 
 **Summary:** Draft Control Power record. `AllowSystemRequiredPowerRequests` sits under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Power`, has an explicit repo-doc default of `1`, is absent on the observed clean baseline, produced an exact current-build Unicode string hit in `ntoskrnl.exe`, and was later retained by source-enrichment as a docs-first kernel candidate with a `power-request-simulation` trigger recommendation. A later repo-native follow-up then exposed that same trigger family as a named guest Procmon profile and mega-trigger runtime alias. A later Microsoft power-setting page plus the companion `Power.admx` / `Power.adml` mapping then documented the public hidden `Allow system required requests` setting family, its `SYSTEMREQUIRED` alias, GUID `a4b195f5-8225-47d8-8012-9d41369786e2`, and `0/1` accepted semantics. A later KVM local-KD pass then resolved live current-build `nt!PopPowerRequestConvertSystemToExecution = 1`, which aligns with the repo-doc default. A later static INIT-table follow-up then showed a current-build `ntoskrnl.exe` descriptor entry under `Power` that binds `AllowSystemRequiredPowerRequests` to the exact global later resolved by local KD as `nt!PopPowerRequestConvertSystemToExecution`. A later current-build disassembly pass then showed direct consumers in `nt!PopPowerRequestHandleExecutionEnablementUpdate` and `nt!PopPowerRequestCallbackExecutionRequired`. Later follow-ups then showed `nt!PopUmpoSendPowerRequestOverrideQuery` packaging requester state for `nt!PopUmpoSendPowerMessage`, `nt!PopPowerRequestExecutionRequiredSettingCallback` staying timeout-setting specific by updating `nt!PopExecutionRequiredTimeout`, the timeout timer/worker chain feeding back into `nt!PopPowerRequestHandleExecutionEnablementUpdate`, the broader override-response plus callback-worker path staying queue and PDC driven with no visible `*PowerRequest*Reg*` symbol, and a generic power-setting callback subsystem around `PoRegisterPowerSettingCallback` and `PopInitializePowerSettingCallbacks`. A later host-side objdump follow-up then showed an unlabeled current-build `INIT` walker at `0x140C48AB8` uniquely consuming the broader `Power` descriptor table, passing row key and value names through subkey and value-lookup helpers before copying payload into the paired target global. A later Wave 4 ETW stackwalk plus grouped Ghidra follow-up then captured an exact current-build runtime query lane from `reg.exe` through `QueryValue`, `NtQueryValueKey`, and the ETW registry/stackwalk surfaces. The lane is strong enough for a schema-backed draft, but Microsoft still does not publish the internal `Control\\\\Power\\\\AllowSystemRequiredPowerRequests` seeding path and the earlier boot/init seeding route remains open.
@@ -2060,7 +2060,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `draft`
 - Evidence class: `Class C`
 - Source file: `research/records/power.control.power-request-override-subtree.json`
-- Source SHA256: `125720201d3129589de4c2c08546c7a5d03941d8ddf2b0904c57ece266b3a11b`
+- Source SHA256: `adc1d1285239ae4bebe84faa03ffdc3a2115932a57fa212016ad666c751f8b4d`
 - Proof SHA256: `aa9c9e94ec63d67015132776dd1e6edd9ec30b2a7abd1f99c34ecb2cdfec8152`
 
 **Summary:** Draft candidate package for the PowerRequestOverride subtree under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. A retained power-control root dump proves the subtree exists on baseline, a retained current-build path-hits capture shows 15 `svchost.exe` accesses to the subtree root plus the `Driver`, `Process`, and `Service` leaves, a retained wildcard local-KD lineage exposes current-build override-family symbols for response handling, initialization, and UMPO override query/cleanup, and retained Ghidra plus local-KD query/store follow-ups now provide bounded current-build static context around the same power-request family. A later ETW stackwalk pass captured current-build root and `RuleCount` / `ENABLED` / `DISABLED` reads, a QGA powercfg proof showed `powercfg /requestsoverride PROCESS RegProbeOverrideProof.exe DISPLAY SYSTEM AWAYMODE` materializing a `Process` leaf value of `7` and removing it cleanly, and a later QGA driver/service proof showed the same documented surface materializing reversible `Service\\Audiosrv=7` and `Driver\\ACPI=7` leaves for `DISPLAY SYSTEM AWAYMODE`. The lane remains draft because the exact current-build reader binding and live consumer semantics remain open, not because the subtree lacks runtime, rollback, or cross-leaf storage context. A fresh 2026-04-23 QGA ETW call stack capture now repeats the root/control-value path with physical ETL/XML artifacts and module-offset-resolved ntoskrnl.exe / ntdll.dll stacks for reg.exe query events.
@@ -2094,7 +2094,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `draft`
 - Evidence class: `Class B`
 - Source file: `research/records/power.control.power-watchdog-timeout-cluster.json`
-- Source SHA256: `0a78080a6dbd159783c9db9a8514793353b2663e89079c861766a4c94eaa4f0e`
+- Source SHA256: `9e17271a73ab81223b56eca470c6a3e5b409c753e23f1b8c7d2c82f199415119`
 - Proof SHA256: `c16d68b5195920f06e54966a5cf38fee7353e6969aca0aaf233f5c0ae00449f2`
 
 **Summary:** Draft docs-first watchdog-default cluster record. The `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power` `PowerWatchdog*TimeoutMsec` family has explicit repo-doc defaults under `InitializePowerWatchdogTimeoutDefaults`, all five values are absent on the observed clean baseline, and the broad current-build string batch still returns clean `zero-exact-target-hits` results for all five names. A later 2026-04-23 skip-tracerpt ETW stackwalk rerun now captured one exact helper-triggered `RegQueryValue` for `PowerWatchdogPoCalloutTimeoutMsec` with status `0xC0000034`, which closes generic parser/target-visibility for one sibling while leaving the family as a lower-priority docs-first hold rather than an active current-build RE lane.
@@ -2124,7 +2124,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `draft`
 - Evidence class: `Class C`
 - Source file: `research/records/power.control.ttm-enabled.json`
-- Source SHA256: `58cde41f282e9388213d6d1c837de7258ad0c4381e61fa3c9cd5fb45ac4e52ff`
+- Source SHA256: `eeb3a38cfe0ef9bfc85e059c91e1c13b799374d4be08d89478e14b5be94f91d1`
 - Proof SHA256: `d089559db142b895dd78437c259ba6f4fad9609cbc0f25e8b78604f1e5a38b7d`
 
 **Summary:** Draft Control Power record. `TtmEnabled` sits under `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power`, has an exact repo-doc default of `0`, exists on the observed clean baseline with preview value `0`, produced an exact current-build Unicode string hit in `ntoskrnl.exe`, and later gained a lightweight public-header corroboration through `systeminformer/phnt` where `ntpoapi.h` exposes `BOOLEAN TtmEnabled;`. A later current-build INIT-table follow-up also showed `TtmEnabled` adjacent to the broader `Power` descriptor family that contains the execution-required pair and Power Throttling surfaces. The main caution is runtime behavior: a dedicated mega-trigger isolation pass later showed `DWORD=1` reproducing `boot-unsafe` on the pilot-safe profile. That is enough for a schema-backed draft, but not for a safe tweak recommendation.
@@ -2156,7 +2156,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `draft`
 - Evidence class: `Class B`
 - Source file: `research/records/power.control.win32k-callout-watchdog-timeout-seconds.json`
-- Source SHA256: `c25d2a97129acedc044bf4035218aadd367ed9f1e96e2583b0277ce020b14dd2`
+- Source SHA256: `04d5f48a256b6e01bcec0d896258d3ac0420aceaf5fef75303431189b8dd14c8`
 - Proof SHA256: `78a6dc8b9e9368a96d5e92eb357796a527599e10ed57e1dbcb54348daf17511b`
 
 **Summary:** Draft watchdog-family record. `Win32kCalloutWatchdogTimeoutSeconds` sits under `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power`, is absent by default on the observed clean baseline, has a current-build Unicode string hit in `ntoskrnl.exe`, and now has direct KVM local-KD proof that the running kernel keeps `nt!PopWin32kCalloutWatchdogTimeoutSeconds = 30` and consumes that global in `nt!PopInvokeWin32CalloutWithWatchdog` by multiplying it by `1000` before issuing the watchdog packet through `ZwPowerInformation`. A later current-build INIT descriptor scan then found the matching value-name binding row pointing at the same live global RVA, which closes the static registry-seeding layer for the candidate. A new host-driven KVM reboot observation then confirmed that the `Control\\Power` parent key still exists across a real guest reboot while `Win32kCalloutWatchdogTimeoutSeconds` stays absent before and after boot. A dedicated KVM S1 Procmon replay reached live guest execution through a new `watchdog-s1-callout` trigger; a cleanup rerun removed stale Procmon boot-log registry state before capture, but Procmon `SaveAs` still timed out before any CSV review. A later non-Procmon S1 ETW lane produced a real registry ETL with sentinel hits but no target read during the bounded S1 window. A 2026-04-23 KVM Ghidra static batch retained the `Win32kCalloutWatchdogTimeoutSeconds` ntoskrnl string seed but left the function/xref path static-context-only. A later 2026-04-23 skip-tracerpt ETW stackwalk rerun used guest-side tracerpt XML backfill and captured one exact helper-triggered `RegQueryValue` for `Win32kCalloutWatchdogTimeoutSeconds` with status `0xC0000034`; this closes generic parser/target-visibility for the value while leaving non-default override semantics and the boot/init consumer query path open.
@@ -2191,7 +2191,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `draft`
 - Evidence class: `Class B`
 - Source file: `research/records/power.session-win32-callout-watchdog-bugcheck-enabled.json`
-- Source SHA256: `b8adc7cba8f01ab2a5eec4ed8aa7c7ee2f177c1999dbe4a48bfdbc606feeb02f`
+- Source SHA256: `033e814514628a7b034d5aded6bccdd8251230684d7171363b21c9e34157aaa5`
 - Proof SHA256: `b7e11395b7dc9b59aab95e0ddffc7ece6614dcf86804c26d884612dd6f23619f`
 
 **Summary:** Draft watchdog sibling record. `Win32CalloutWatchdogBugcheckEnabled` sits under the same `Session Manager\\Power` lane as the validated watchdog timeout pair, is absent by default on the clean baseline, has a current-build Unicode string hit in `ntoskrnl.exe`, resolves to a live `nt!PopWin32CalloutWatchdogBugcheckEnabled` watchdog-family global on the KVM current build, and now has both a canonical PDB-backed Ghidra structural pass and a broader KVM local-KD seeding sweep. Together they now say something narrower and more useful: the current build still carries the sibling, the live global currently reads `0`, the named wrapper path is not the direct reader, code-xref recovery stayed empty, but a later current-build INIT descriptor scan found the value-name binding row for the same live global RVA under `Session Manager\\Power`. A dedicated KVM Procmon runtime replay reached live guest execution under `TriggerProfile = watchdog-power-burst`, but stalled at `procmon-saveas` and ended with `Procmon SaveAs timed out after 60 second(s).` A later neutral-value VM perf bench applied DWORD `0`, verified apply, restored the missing baseline, and verified rollback. This keeps the record alive as an adjacent watchdog-family global with structurally real registry-seeding metadata and bounded VM bench coverage, but still with unproven runtime registry semantics.
@@ -2226,7 +2226,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `draft`
 - Evidence class: `Class B`
 - Source file: `research/records/system.kernel-dpc-watchdog-control-cluster.json`
-- Source SHA256: `e6379fcd408b1a84e980205af5df4fd83f895ea6b3119dd3ec2039cc0ecb199e`
+- Source SHA256: `6baae5fa5347b255d385557130f7d891f61f63451b322ba14f39813b1d0015fd`
 - Proof SHA256: `f24fafaceb0545a72c21340fed72e4dd5f971a9478ce00f4aed449f7d6ba313c`
 
 **Summary:** Draft Session Manager Kernel DPC watchdog control timeout cluster record. Repo docs list `DPCTimeout = 20000`, `DpcSoftTimeout = 20000`, and `DpcCumulativeSoftTimeout = 120000` under `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel`. Current-build KVM evidence now proves the full structural lane plus live values: `KeQueryDpcWatchdogConfiguration` reads the corresponding globals, `KiValidateDpcWatchdogConfiguration` backfills and validates them, `KeUpdateDpcWatchdogConfiguration` writes them from caller-supplied validated input, a PDB-backed Ghidra pass ties the writer to `NtSetSystemInformation`, a later class-focused live KD pass confirms the exact syscall call site plus admin-group gate and implies numeric arm `0xE4` from the dispatch chain, a dedicated live query-side KD pass now confirms the exact outer wrapper `NtQuerySystemInformation+0x8c -> ExpQuerySystemInformation` while leaving the inner watchdog query arm open, a dedicated live value pass reads all three globals as `0` on the running build, Microsoft still documents the public `KeQueryDpcWatchdogInformation` API plus `KDPC_WATCHDOG_INFORMATION` zero-as-disabled semantics, and a canonical boot/init Ghidra follow-up shows that `KiInitDpcThresholds` preserves zero-valued control globals rather than forcing non-zero defaults. A later current-build INIT descriptor scan now also binds all three registry value-name strings to the same live globals. The family is real, but the current build still does not support treating the repo-doc values as unconditional live defaults and runtime traces still have no exact registry read for the cluster.
@@ -2264,7 +2264,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `draft`
 - Evidence class: `Class B`
 - Source file: `research/records/system.kernel-dpc-watchdog-profile-cluster.json`
-- Source SHA256: `ab3e04eec6d28a5792df84cf8432425a48428eba7a86e28814cd9dbaa695fe50`
+- Source SHA256: `483e8786f9c32c6915e94020b7120eceb8f80ea591a00b8f78bf65100268333b`
 - Proof SHA256: `a3e96809fd5affb35a0075c970e7b3d1195f890c51d8c3bba60a5f55ce5605c8`
 
 **Summary:** Draft Session Manager Kernel DPC watchdog profile cluster record. Repo docs list non-zero defaults for `DpcWatchdogProfileBufferSizeBytes`, `DpcWatchdogProfileCumulativeDpcThreshold`, `DpcWatchdogProfileOffset`, and `DpcWatchdogProfileSingleDpcThreshold` under `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel`. Dedicated live KVM local-KD bundles now prove the mixed current-build global state plus the concrete reader, validator, and writer path: only `KeDpcWatchdogProfileOffsetMs` matches the repo-doc default while the other profile globals read as `0`, `KeQueryDpcWatchdogConfiguration` only emits these fields when the globals are non-zero, `KiValidateDpcWatchdogConfiguration` backfills missing fields from the same globals and validates ranges, and `KeUpdateDpcWatchdogConfiguration` writes the globals from caller-supplied validated input. A later PDB-backed Ghidra symbol-xref pass narrowed the caller story further, a class-focused live KD pass then confirmed the exact runtime edge `NtSetSystemInformation+0x1bc9 -> KeUpdateDpcWatchdogConfiguration`, the admin-group gate, and a dispatch-chain inference that the writer arm is reached via numeric system-information arm `0xE4`, a dedicated live query-side KD pass now confirms the exact outer wrapper `NtQuerySystemInformation+0x8c -> ExpQuerySystemInformation` while leaving the inner watchdog query arm open, and a canonical init-semantics Ghidra follow-up then showed that current-build legacy/profile backfill only activates under sentinel/non-zero prerequisites. A later current-build INIT descriptor scan now also binds all four registry value-name strings to the same live globals, a write-free KVM reboot observation confirmed the registry value states survive a real reboot unchanged, and quoted KVM ETW stackwalk reruns now capture exact helper-triggered `RegQueryValue` events for `DpcWatchdogProfileOffset` and `DpcWatchdogProfileSingleDpcThreshold`. The family is real, but the current build still does not support treating the repo-doc values as unconditional live defaults and the remaining gap is the true boot/init consumer path rather than generic parser visibility.
@@ -2305,7 +2305,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `draft`
 - Evidence class: `Class B`
 - Source file: `research/records/system.kernel-long-dpc-threshold-cluster.json`
-- Source SHA256: `2b6bdd39dc5a2e3b2eee05578b71caa9b9af49ea76b3b76111fd8a0467a1d4c6`
+- Source SHA256: `151b906dd70e782dc9deac3dd27c28d7dd33079ad1e27484c90bdc49cb22efd4`
 - Proof SHA256: `ca8215fe7087982f51e069f32cab24279742764ace8d4e94d7abb03d103eea3c`
 
 **Summary:** Draft Session Manager Kernel DPC-threshold cluster record. `LongDpcQueueThreshold` and `LongDpcRuntimeThreshold` have explicit repo-doc defaults under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`, both values are absent on the observed clean baseline, both produced exact current-build Unicode string hits in `ntoskrnl.exe`, and a later KVM local-KD pass showed the live current-build globals `KiLongDpcQueueThreshold = 3` and `KiLongDpcRuntimeThreshold = 100`, with adjacent `KiLongDpcRuntimeThresholdCycles = 0x493e0`. A later full-function KVM local-KD consumer pass then showed `KiEnterLongDpcProcessing` calling `EtwTraceLongDpcMitigationEvent`, while a later PDB-backed Ghidra xref pass directly resolved `KiLongDpcQueueThreshold` references in `KiExecuteAllDpcs` and `KeInitSystem`. Two dedicated KVM Procmon replays for `LongDpcRuntimeThreshold` under `TriggerProfile = timer-dpc-stress` then reached live guest execution but both failed at Procmon export, first with `Procmon SaveAs timed out after 60 second(s)` and then, after widening the export budget and wrapper deadline, with `Procmon SaveAs timed out after 180 second(s)`. A later current-build INIT descriptor scan now binds both registry value-name strings to the same live KD global RVAs. A targeted QGA/WPR boot run then exercised raw-collector salvage and produced a normalized zero-hit bundle for both Long-DPC value names, but the requested target ETL was still missing. The cluster is therefore live-state-confirmed and current-build registry-seeding-confirmed, and quoted KVM ETW stackwalk reruns now capture exact helper-triggered `RegQueryValue` events for both `LongDpcRuntimeThreshold` and `LongDpcQueueThreshold`; however, the lane remains export-blocked and still lacks a true boot/runtime consumer read.
@@ -2349,7 +2349,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `draft`
 - Evidence class: `Class B`
 - Source file: `research/records/system.kernel.force-bugcheck-for-dpc-watchdog.json`
-- Source SHA256: `dcf6427f88d6f9e5c298a800fe3ad1a467fbbaf575b25529885d0de06e4184fa`
+- Source SHA256: `615c7bbab128c92d2c7460bd8b5cc186bc557a6dd3c9af523076c38871b2020f`
 - Proof SHA256: `bb31c63a551e1366dadec933dd59533cfc3d9515a79d84c1c6d9f169ab18542c`
 
 **Summary:** Draft Session Manager Kernel record. `ForceBugcheckForDpcWatchdog` sits under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`, has an explicit repo-doc default of `0`, is absent on the observed clean baseline, produced an exact current-build string hit in `ntoskrnl.exe`, survived a write-and-reboot lightweight runtime batch as a candidate value of `1`, has dedicated live KVM local-KD proof that `KiForceBugcheckForDpcWatchdog` exists on the running current build with value `0`, and now has a current-build INIT descriptor row that binds the registry value name to the same live global RVA. A later QGA WPR boot run failed to save the requested target ETL, but the raw WPR System Collector ETL converted successfully and still produced zero exact `ForceBugcheckForDpcWatchdog` hits. The lane is real, but still lacks an exact runtime registry read and proven non-default semantics. A 2026-04-23 KVM Ghidra static batch retained the `ForceBugcheckForDpcWatchdog` ntoskrnl string seed but left the function/xref path static-context-only, so the runtime/read gap remains open. A 2026-04-23 quoted KVM ETW stackwalk rerun fixed the guest helper `reg.exe` quoting path and captured an exact `RegQueryValue` event for `ForceBugcheckForDpcWatchdog`, with status `0xC0000034` because the value is absent; this validates the parser and target filter but remains helper-triggered rather than kernel boot-consumer proof.
@@ -2386,7 +2386,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `draft`
 - Evidence class: `Class B`
 - Source file: `research/records/system.kernel.global-timer-resolution-requests.json`
-- Source SHA256: `6e31847d8973826b81458ba351cbc3c44e0ef75625e76664985f0652b0fc16e9`
+- Source SHA256: `e4c0eca54ae04ce922cd1503a714042fd7e9caa98a2ceb33eb57f4feb00972ff`
 - Proof SHA256: `ac764730842591e0546b06383c5461c2f08d233e8b34f7d8e0b18702a7f87e79`
 
 **Summary:** Draft Session Manager Kernel record. `GlobalTimerResolutionRequests` sits under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`, has an explicit repo-doc default of `0`, is absent on the observed clean baseline, produced an exact current-build Unicode string hit in `ntoskrnl.exe`, and was later carried forward by source-enrichment as a docs-first current-build kernel candidate with a `power-request-simulation` trigger recommendation. Adjacent Microsoft docs later documented the public timer-resolution contract, including system-wide `ExSetTimerResolution` behavior and the Windows 10 2004+ change that `timeBeginPeriod` no longer globally affects unrelated processes, but no current Microsoft page has been found that names this exact internal registry seed. A later KVM local-KD pass then showed the live current-build global `KiGlobalTimerResolutionRequests = 0`, aligning the running kernel with the repo-doc default, and a later current-build INIT descriptor scan found the matching `Session Manager\\\\Kernel` binding row for the same global RVA. The broad lightweight runtime batch then wrote the candidate value as `1` and still returned `zero-exact-target-hits`, while a later repo-native follow-up added an explicit `power-request-simulation` harness to both the generic Procmon guest tool and the mega-trigger runtime surface. The 2026-04-18 runtime sprint then ran the intended lane order on the KVM guest: ETW produced only helper-query resolver hits, Procmon failed at `SaveAs`, and a clean QGA-launched WPR boot-registry rerun completed end-to-end and retained 101 `Session Manager\\\\Kernel` subtree hit lines with zero exact `GlobalTimerResolutionRequests` value hits and an empty normalized bundle. The lane is strong enough for a schema-backed draft, but still lacks an exact runtime registry read and Microsoft documentation for the exact internal registry seed. A 2026-04-23 KVM Ghidra static batch retained the `GlobalTimerResolutionRequests` ntoskrnl string seed but left the function/xref path static-context-only, so the runtime/read gap remains open. A 2026-04-23 quoted KVM ETW stackwalk rerun fixed the guest helper `reg.exe` quoting path and captured an exact `RegQueryValue` event for `GlobalTimerResolutionRequests`, with status `0xC0000034` because the value is absent; this validates the parser and target filter but remains helper-triggered rather than kernel boot-consumer proof.
@@ -2427,7 +2427,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `draft`
 - Evidence class: `Class B`
 - Source file: `research/records/system.kernel.timer-check-flags.json`
-- Source SHA256: `0464051faf97130e4093ff9380155fc40b267ffe8469db124daf6149fc9df36c`
+- Source SHA256: `f40a3797f8eb6183d0b6dfc1b618e7736db7981a8e0b2d5f5c04be8dbe712d6e`
 - Proof SHA256: `20e854cf8e22f4bac21dced117d33d93453092c5e679bfb7e33559f7411132e3`
 
 **Summary:** Draft Session Manager Kernel record. `TimerCheckFlags` sits under `HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel`, has an explicit repo-doc default of `1`, is absent on the observed clean baseline, produced an exact current-build Unicode string hit in `ntoskrnl.exe`, and has WRK-backed source-enrichment evidence that `KeTimerCheckFlags` is initialized from `KE_TIMER_CHECK_FREES` and later bit-tested in timer code. The broad lightweight runtime batch then wrote the candidate value as `1` and still returned `zero-exact-target-hits`. A later dedicated KVM local-KD pass resolved `nt!KeTimerCheckFlags` on the running current build and read its live value as `1`; a follow-up host-side `ntoskrnl.exe` INIT descriptor decode then bound the `Session Manager\\\\Kernel` `TimerCheckFlags` value-name string directly to the same `KeTimerCheckFlags` RVA. A later QGA-launched WPR boot-registry rerun then completed a real reboot, produced a 1.76 GB ETL plus a 6.06 GB tracerpt CSV, and still returned zero target hits for both the key path and `TimerCheckFlags` fragment filters. The 2026-04-18 ETW stackwalk sprint then completed through QGA and produced fresh ETL plus a normalized bundle, but retained only helper-command-line text for `TimerCheckFlags`, no `value_name = TimerCheckFlags` event, and no exact `Session Manager\\\\Kernel` key-path event. The lane is therefore live-state-confirmed and static-binding-confirmed, but still blocked on an exact runtime registry read showing the boot/init descriptor path being consumed. A 2026-04-23 KVM Ghidra static batch retained the `TimerCheckFlags` ntoskrnl string seed but left the function/xref path static-context-only, so the runtime/read gap remains open. A 2026-04-23 quoted KVM ETW stackwalk rerun fixed the guest helper `reg.exe` quoting path and captured an exact `RegQueryValue` event for `TimerCheckFlags`, with status `0xC0000034` because the value is absent; this validates the parser and target filter but remains helper-triggered rather than kernel boot-consumer proof.
@@ -2466,7 +2466,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `review-required`
 - Evidence class: `Class D`
 - Source file: `research/records/cleanup.component-store.review.json`
-- Source SHA256: `63969da0843f1125fdf55375bd06c3b54a7cc013fbd843de0bf951b2e6b2ffaa`
+- Source SHA256: `af8f42536ca29a7361beb18646345e2299b959d859cd005132c7b25a660716c5`
 - Proof SHA256: ``
 
 **Summary:** Review-required audit trail for the DISM-based component-store cleanup card. The live app already surfaces cleanup.component-store as a first-party command tweak, and repo docs point to the exact DISM cleanup flow, but this card has not yet been promoted into the validated research-provider surface.
@@ -2487,7 +2487,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `review-required`
 - Evidence class: `Class D`
 - Source file: `research/records/cleanup.directx-shader-cache.review.json`
-- Source SHA256: `04d7f5e55e87bbec0027f977401fb1efc16417d8fcf968d12f3a5f7609dad091`
+- Source SHA256: `f06b6aa92e041cf8de08048eb56d7aa35a607b266d46be522ebdfced05d51681`
 - Proof SHA256: ``
 
 **Summary:** Review-required audit trail for the live DirectX shader-cache cleanup card. The app already ships this file-backed cleanup action from the first-party provider and the repo cleanup docs describe the same cache directories, but the card has not yet been promoted into the validated research-provider surface.
@@ -2508,7 +2508,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `review-required`
 - Evidence class: `Class D`
 - Source file: `research/records/cleanup.eventlog-system.review.json`
-- Source SHA256: `2e7ebae4014247e22b196fae28d663447a22e9ffa688894a49329d65dae2937c`
+- Source SHA256: `da9815af1832d948c386391ac94a89e06ccaaf79ccd7eb0f4c761969cc846b37`
 - Proof SHA256: ``
 
 **Summary:** Review-required audit trail for the live System event-log cleanup card. The app already ships the wevtutil-backed action and the repo cleanup docs describe the same log-clear flow, but the card has not yet been promoted into the validated research-provider surface.
@@ -2529,7 +2529,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `review-required`
 - Evidence class: `Class D`
 - Source file: `research/records/cleanup.font-cache.review.json`
-- Source SHA256: `e8be7acf6e5b79280ee31fa409c4882900fb7455168f13a0c12795b54c71252a`
+- Source SHA256: `1818cf8c50987ffb08b329a196c53f44caed0538f43ca650742035cc391cf9fb`
 - Proof SHA256: ``
 
 **Summary:** Review-required audit trail for the live font-cache cleanup card. The app already ships this file-backed cleanup action and repo cleanup docs describe the same cache files and service handling, but the card has not yet been promoted into the validated research-provider surface.
@@ -2550,7 +2550,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `review-required`
 - Evidence class: `Class D`
 - Source file: `research/records/cleanup.memory-dumps.review.json`
-- Source SHA256: `fe502bdae3750870c0d4c4fb4c3b8d4c8c6b3abd165da7b00c09d8db3cd763e5`
+- Source SHA256: `4369357b1d6d3e20dd436f4ae73973dd24acb373d36c55a83613dac5a5affa38`
 - Proof SHA256: ``
 
 **Summary:** Review-required audit trail for the live memory-dump cleanup card. The app already ships this file-backed cleanup action and the repo cleanup docs describe the same dump paths, but the card has not yet been promoted into the validated research-provider surface.
@@ -2571,7 +2571,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `review-required`
 - Evidence class: `Class D`
 - Source file: `research/records/cleanup.prefetch-files.review.json`
-- Source SHA256: `9bd37d854142babf00e73c47c9e5f799661d60b05130ca55aaba3a010bbf2102`
+- Source SHA256: `246d83753844ec5bc7592f4525061d89f83dfb6da193f19213eb0b7d3c84812d`
 - Proof SHA256: ``
 
 **Summary:** Review-required audit trail for the live Prefetch cleanup card. The app already ships this file-backed cleanup action and the repo cleanup docs describe the same Prefetch directory, but the card has not yet been promoted into the validated research-provider surface.
@@ -2592,7 +2592,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `review-required`
 - Evidence class: `Class D`
 - Source file: `research/records/cleanup.product-key.review.json`
-- Source SHA256: `d9f6ff1391f31b99245dc5c91489ddc255e41f902fd1485609a8ad3332fd0416`
+- Source SHA256: `6ba2379a5b64614a6821a111532e21eb8cabd71175d0d4c047576402204873b6`
 - Proof SHA256: ``
 
 **Summary:** Review-required audit trail for the live product-key cleanup card. The app already exposes the slmgr-backed action and repo docs map the tweak id to the same cleanup flow, but the card still lives only in the first-party provider and has not yet been promoted into the validated research-provider surface.
@@ -2613,7 +2613,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `review-required`
 - Evidence class: `Class D`
 - Source file: `research/records/cleanup.recycle-bin.review.json`
-- Source SHA256: `67d5fd6d622366c8f92af27707d2ecac59f89e21f5782a2033609c004e08a333`
+- Source SHA256: `84bad9f73d2a6eb7a36dea30b3a0a6e9a6de2f1613ddb1e89408925d5f543544`
 - Proof SHA256: ``
 
 **Summary:** Review-required audit trail for the live recycle-bin cleanup card. The app already surfaces the PowerShell-based action and repo docs map the tweak id to the same clear flow, but the card has not yet been promoted into the validated research-provider surface.
@@ -2634,7 +2634,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `review-required`
 - Evidence class: `Class D`
 - Source file: `research/records/cleanup.shadow-copies.review.json`
-- Source SHA256: `e42fc4cda1468fb1af009a4a04cd1deb7a3f57abf5e5e848b337904b054544ef`
+- Source SHA256: `73f172de18c069ad5a5deeb47d0f12ba8dc94083d5cd1dc9e5727c03a912263a`
 - Proof SHA256: ``
 
 **Summary:** Review-required audit trail for the live shadow-copy cleanup card. The app already surfaces the vssadmin-based action and repo docs map the tweak id to the same delete flow, but the card still lives only in the first-party provider and has not yet been promoted into the validated research-provider surface.
@@ -2655,7 +2655,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `review-required`
 - Evidence class: `Class D`
 - Source file: `research/records/cleanup.temp-files.review.json`
-- Source SHA256: `c91ccdcc7c90ec2f15b884fcd99aba2b44ade20dcb8b8b4a76e5b792f844f70d`
+- Source SHA256: `29c19864b83796a22aebf308ef92f7f466f4255c219c4bdec30dd014fa3e363b`
 - Proof SHA256: ``
 
 **Summary:** Review-required audit trail for the live temporary-file cleanup card. The app already ships this file-backed cleanup action and the repo cleanup docs describe the same temp directories, but the card has not yet been promoted into the validated research-provider surface.
@@ -2676,7 +2676,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `review-required`
 - Evidence class: `Class D`
 - Source file: `research/records/cleanup.thumbnail-cache.review.json`
-- Source SHA256: `da9a65251af8f4173273b3696aa1b82a89f1a9adb9a3af859d1aa14a1a2764f9`
+- Source SHA256: `d15691c921548666c07848397c1d7c18b0f7b0569dc2a5072bbfcdff6034e248`
 - Proof SHA256: ``
 
 **Summary:** Review-required audit trail for the live thumbnail-cache cleanup card. The app already ships this file-backed cleanup action and the repo cleanup docs describe the Explorer thumbnail-cache files, but the card has not yet been promoted into the validated research-provider surface.
@@ -2697,7 +2697,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `review-required`
 - Evidence class: `Class D`
 - Source file: `research/records/cleanup.wer-files.review.json`
-- Source SHA256: `51909b0fe747f9f94bbf567f6184f018abd86ed4b0dddfa9e537a124837872a8`
+- Source SHA256: `61d3171e1b2eacaa3a743d1ef77209c7456f6a9efa52cfe180eeff101fee4f27`
 - Proof SHA256: ``
 
 **Summary:** Review-required audit trail for the live Windows Error Reporting cleanup card. The app already ships this file-backed cleanup action and the repo cleanup docs describe the same WER directories, but the card has not yet been promoted into the validated research-provider surface.
@@ -2718,7 +2718,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `review-required`
 - Evidence class: `Class D`
 - Source file: `research/records/cleanup.windows-old.review.json`
-- Source SHA256: `8aa03022b131c34ebf9b29fe245932435d8f813364b083a4f8d1047befed4399`
+- Source SHA256: `5031702b541499b7a085336a5969971387560278744ec9ac362b48c1ea7ad140`
 - Proof SHA256: ``
 
 **Summary:** Review-required audit trail for the live Windows.old cleanup card. The app already ships this file-backed cleanup action and the repo cleanup docs describe the same rollback-sensitive folder, but the card has not yet been promoted into the validated research-provider surface.
@@ -2739,7 +2739,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `review-required`
 - Evidence class: `Class D`
 - Source file: `research/records/cleanup.windows-update-cache.review.json`
-- Source SHA256: `93bb09e926c562a2afccd1ce2cb520858a88620eac28d2ba854c0ebf46baf865`
+- Source SHA256: `b54ffe1c8b8c3afbdacf4c142f47b85ddde5befe66662d626f4262819e64f2c1`
 - Proof SHA256: ``
 
 **Summary:** Review-required audit trail for the live Windows Update cache cleanup card. The app already ships this file-backed cleanup action and the repo cleanup docs describe the same update-cache directories, but the card has not yet been promoted into the validated research-provider surface.
@@ -2760,7 +2760,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `review-required`
 - Evidence class: `Class D`
 - Source file: `research/records/misc.disable-edge-features.review.json`
-- Source SHA256: `ca64dccb1309a765891fed690c56f9728c8fda1b81230b42c135e4a22757d565`
+- Source SHA256: `53a58127397ab6c5d65091264a07022a29710101870f92577d8bbed9797a1d45`
 - Proof SHA256: ``
 
 **Summary:** Review-required audit trail for the live Disable Microsoft Edge Features card. The app already ships the current microsoft edge policy bundle action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
@@ -2780,7 +2780,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `review-required`
 - Evidence class: `Class D`
 - Source file: `research/records/misc.disable-office-telemetry.review.json`
-- Source SHA256: `a4c9cb65297f14e3479008021a09f9cc153e9117da6d07efdc3f2822cf3c7c8b`
+- Source SHA256: `a3c990bdf1d7e15e852c033c3f8a16cc2e4ca35b9480904560a303a10e2487cb`
 - Proof SHA256: ``
 
 **Summary:** Review-required audit trail for the live Disable Microsoft Office Telemetry card. The app already ships the current microsoft office telemetry policy bundle action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
@@ -2800,7 +2800,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `review-required`
 - Evidence class: `Class D`
 - Source file: `research/records/misc.disable-onedrive.review.json`
-- Source SHA256: `6b33496c004e35d2432bf31f6d206556b36f945fdc9f8118cacfce67a2768e91`
+- Source SHA256: `c5afcd9aa62d09887cbeaee8d6b39bbae4987c65c038c5e626eb8b1ad6cbb597`
 - Proof SHA256: ``
 
 **Summary:** Review-required audit trail for the live Disable OneDrive card. The app already ships the current onedrive policy and explorer bundle action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
@@ -2820,7 +2820,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `review-required`
 - Evidence class: `Class D`
 - Source file: `research/records/misc.disable-visual-studio-telemetry.review.json`
-- Source SHA256: `d3673c025a450063f58aa3df729125773fb642eeb0d3e87b85f2be63bf993de7`
+- Source SHA256: `8e110dc830af8d20dd552a95d5195ab1c9709e8e703288a19437b81d60ada3ee`
 - Proof SHA256: ``
 
 **Summary:** Review-required audit trail for the live Disable Visual Studio Telemetry card. The app already ships the current visual studio telemetry policy bundle action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
@@ -2840,7 +2840,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `review-required`
 - Evidence class: `Class D`
 - Source file: `research/records/misc.disable-vscode-telemetry.review.json`
-- Source SHA256: `bf9ad911a40d3ea32a3b77c052b7048caa108248e2f78fbf4d45faf67966ba75`
+- Source SHA256: `c324a644eef9f4f97321ebc6bfaa7d55909dc42c5b507b7f8732a79299e9d491`
 - Proof SHA256: ``
 
 **Summary:** Review-required audit trail for the live VS Code Telemetry & Online Features card. The app already ships the current vs code user settings profile action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
@@ -2860,7 +2860,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `review-required`
 - Evidence class: `Class D`
 - Source file: `research/records/misc.optimize-7zip-settings.review.json`
-- Source SHA256: `69c3394468cde40bbd49093ce50c33b73dec8700bfedbf90c92577d84ec69091`
+- Source SHA256: `d783e5e459e2d06648defb17cabaff646d0fbc666a40c33894253a0a292e457a`
 - Proof SHA256: ``
 
 **Summary:** Review-required audit trail for the live Configure 7-Zip Context Menu Settings card. The app already ships the current 7-zip user options action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
@@ -2880,7 +2880,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `review-required`
 - Evidence class: `Class D`
 - Source file: `research/records/network.flush-dns-cache.review.json`
-- Source SHA256: `5e0d288f7b0f4796491f4d3ef37ff087f59ba82c42cfdf1892eb58471ecf76f7`
+- Source SHA256: `633bb92fd5d2cbeb30fd2a2fe78d2aa6916cb35481bd4d60758f230d87a13d3c`
 - Proof SHA256: ``
 
 **Summary:** Review-required audit trail for the live DNS cache flush card. The app already exposes the command-backed action and repo docs point to the same ipconfig flow, but the card has not yet been promoted through the validated research-provider pipeline.
@@ -2901,7 +2901,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `review-required`
 - Evidence class: `Class D`
 - Source file: `research/records/network.reset-winsock.review.json`
-- Source SHA256: `4ae49d0f2dfafc117f7065c9d3052b0590496983a203c0e456339c36c6aa3cfa`
+- Source SHA256: `2803c02cbe7eb86855900d3ae1d3f332f946356255445b3b69141b92a461a352`
 - Proof SHA256: ``
 
 **Summary:** Review-required audit trail for the live Winsock reset card. The app already exposes the netsh-based action and repo docs describe the same reset flow, but provenance still marks it as category-fallback and review-only until a stronger upstream match is captured.
@@ -2923,7 +2923,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `review-required`
 - Evidence class: `Class D`
 - Source file: `research/records/peripheral.audio-disable-enhancements.review.json`
-- Source SHA256: `56355ccd23aca0d4492ef2010b2bcbd58398fda9aae5b25f53a2d001be991cf8`
+- Source SHA256: `ef078d53b763295cb5812697d2d47c8c20a83638813a0f54117ac8d4420db1d0`
 - Proof SHA256: ``
 
 **Summary:** Review-required audit trail for the live Disable Audio Enhancements card. The app already ships the current audio enhancement flags action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
@@ -2943,7 +2943,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `review-required`
 - Evidence class: `Class D`
 - Source file: `research/records/peripheral.keyboard-disable-language-hotkey.review.json`
-- Source SHA256: `4001d6dcfc6025c6025564e03a3a806c729212e18c04ff720996c7c28ad460e7`
+- Source SHA256: `6138a479c36d4330eb80a6c2f25d5f305511c4f08ae2d2cb6ec6c93a3691dfc7`
 - Proof SHA256: ``
 
 **Summary:** Review-required audit trail for the live Disable Language Switch Hotkey card. The app already ships the current keyboard layout toggle bundle action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
@@ -2963,7 +2963,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `review-required`
 - Evidence class: `Class D`
 - Source file: `research/records/peripheral.keyboard-optimize-repeat.review.json`
-- Source SHA256: `c740ae6af5a3ffe56d274309fc83755ee170e3e8c0c49367e63b0163f22385e3`
+- Source SHA256: `0d39347d991490d111463cf080a68d071b257e664719c27c215ae7269a1ac51b`
 - Proof SHA256: ``
 
 **Summary:** Review-required audit trail for the live Set Keyboard Repeat and Cursor Blink Values card. The app already ships the current keyboard repeat profile action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
@@ -2983,7 +2983,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `review-required`
 - Evidence class: `Class D`
 - Source file: `research/records/peripheral.mouse-disable-acceleration.review.json`
-- Source SHA256: `bc3323794cc6c7b0537d1fd529b3a0f146e5a6773d20d1f8db7feabf500325c6`
+- Source SHA256: `42e00b63cc24f9bd1961f3ce14a14ef4d5878b8ea7dd08eb588e3d2fe46e8d12`
 - Proof SHA256: ``
 
 **Summary:** Review-required audit trail for the live Disable Enhanced Pointer Precision (Mouse Acceleration) card. The app already ships the current mouse acceleration profile action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
@@ -3003,7 +3003,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `review-required`
 - Evidence class: `Class D`
 - Source file: `research/records/peripheral.mouse-disable-throttle.review.json`
-- Source SHA256: `3b6b5dc28a0e200f356fab5bd6b8a97531129334051a151b1c5c45bd7409430d`
+- Source SHA256: `95880a88f59239507633caf51fa01504e183dfb59b3d65b644635f1d48f5525c`
 - Proof SHA256: ``
 
 **Summary:** Review-required audit trail for the live Disable Mouse Throttling for Background Windows card. The app already ships the current raw mouse throttle bundle action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
@@ -3023,7 +3023,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `review-required`
 - Evidence class: `Class D`
 - Source file: `research/records/power.disable-cpu-parking.review.json`
-- Source SHA256: `4f981dcb5285a38d01f0a24354218681ba7f4f598b64fe10fcb7ff8896eac36c`
+- Source SHA256: `c03a9d96e34a5cbb5b86e592e93974b3247af8ec00c77e42cff732174a693a95`
 - Proof SHA256: ``
 
 **Summary:** Review-required audit trail for the live CPU core parking card. The app already exposes a command-backed powercfg implementation, and repo docs map the tweak id to core-parking research, but the card still lives only in the first-party provider and has not yet been promoted into the validated research-provider surface.
@@ -3044,7 +3044,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `review-required`
 - Evidence class: `Class D`
 - Source file: `research/records/power.disable-hibernation.review.json`
-- Source SHA256: `d09dc5edc3bef96253e651f3b1738776beef52fc4124e37c5ab3af9eb18b34cc`
+- Source SHA256: `314cf1cc88b7cefecfb1f2c3c8bbff2cc008fd01da3ebb97cf55c5f655ebbbf1`
 - Proof SHA256: ``
 
 **Summary:** Review-required audit trail for the live hibernation card. The app already ships the powercfg-backed action and repo docs map the tweak id to that same flow, but the card still lives only in the first-party provider and has not yet been promoted into the validated research-provider surface.
@@ -3065,7 +3065,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `review-required`
 - Evidence class: `Class D`
 - Source file: `research/records/power.disable-superfetch.review.json`
-- Source SHA256: `94fd5dbe9e39c5f8a9e456b2047f87598a615019ac7b2b953f035aeecea16b90`
+- Source SHA256: `6aee4e834596e243ffc6a6f0057236e04bbdc0f6d81352347b0e9ac2a9b67a2a`
 - Proof SHA256: ``
 
 **Summary:** Review-required audit trail for the live Disable Superfetch (SysMain) card. The app already ships the current sysmain service stop command action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
@@ -3085,7 +3085,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `review-required`
 - Evidence class: `Class D`
 - Source file: `research/records/power.disable-usb-selective-suspend.review.json`
-- Source SHA256: `3c4cc57db6d4c0b5166985e37317ad8d2f562746b1ab834f77b423067499e08c`
+- Source SHA256: `532c9d58d4658069b4369f51c71ca3d18931b64b5933c53c07114c54a68b1c64`
 - Proof SHA256: ``
 
 **Summary:** Review-required audit trail for the live USB selective suspend card. The app already exposes a command-backed powercfg implementation, and repo docs plus provenance overrides map the tweak id to USB power-management research, but the card still lives only in the first-party provider and has not yet been promoted into the validated research-provider surface.
@@ -3106,7 +3106,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `review-required`
 - Evidence class: `Class D`
 - Source file: `research/records/security.disable-uac.review.json`
-- Source SHA256: `97daa9e9877ba2d8f033eb115de1431a0d6d3c8a2b1acc8dd767cb05ef1b34c9`
+- Source SHA256: `a59d0a3d09abe4be2127f12534e124f5c27cc4863b7837a4ed61f65f6a4b39e4`
 - Proof SHA256: ``
 
 **Summary:** Review-required audit trail for the live full-UAC-disable card. The app already writes EnableLUA = 0 through a command-backed registry tweak, and repo docs describe that same action, but provenance still marks the card as category-fallback until a stronger tweak-specific upstream match is captured.
@@ -5299,7 +5299,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Evidence class: `Class B`
 - Source file: `research/records/policy.system.enable-virtualization.json`
 - Evidence root: [evidence/records/policy.system.enable-virtualization](../evidence/records/policy.system.enable-virtualization)
-- Source SHA256: `86d5fdeccf833eadceaa46932a459048bc5f8ae6a7e569460192d1e30ca49c91`
+- Source SHA256: `987e2ca5ab40dfbde45da5050a35844825288f7a6f6b173a62a4552ff06876db`
 - Proof SHA256: `5005cae27faa69e1133858c324a730e66ec750ae8fb5f1631ff815c6b1162047`
 
 **Summary:** Validated decision-gated record for EnableVirtualization under HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System. The clean Win25H2Clean baseline confirmed the live value, the repo security notes document the value and meanings, the path-aware static pass found exact current-build ntoskrnl.exe value hits plus adjacent EnableLUA and EnableInstallerDetection hits, and the tools-hardened path-aware ETW lane completed shell-safe but retained zero exact-target hits. The same path-aware runtime lane on the secondary profile reproduced the zero-hit result, and a Linux KVM Procmon replay with a dedicated UAC/policy burst also produced a real CSV with zero matching lines. A KVM local-KD disassembly and string-dump follow-up on the running guest then showed the same current-build `PsBootPhaseComplete` cluster opening `\\Registry\\Machine\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System` and staging `EnableLUA`, `EnableVirtualization`, and `EnableInstallerDetection` directly. A later recovery-backed KVM Procmon replay reopened the elevated guest shell automatically and still returned zero intended-path or family hits. A follow-up KVM Procmon bootlog probe then completed a real reboot cycle, but Procmon returned exit code 1 for both `/EnableBootLogging` variants, left Procmon state unchanged, and skipped bootlog conversion with no PML or CSV. A later QGA-launched WPR boot registry trace then retained five exact quoted `EnableVirtualization` QueryValue hit lines and normalized them against the intended `Policies\\System` target path, closing the runtime-read gap while keeping the record research-only and non-actionable.
@@ -5382,7 +5382,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Evidence class: `Class A`
 - Source file: `research/records/power.control.hiber-file-size-percent.json`
 - Evidence root: [evidence/records/power.control.hiber-file-size-percent](../evidence/records/power.control.hiber-file-size-percent)
-- Source SHA256: `69b67bd52e7401d0da794addbd8a33f657fef3ea3d0ae36ccb376e4b7f8518fb`
+- Source SHA256: `88de85dc76bda18e8347a10d07a1e3b512dd76dd87e2768328c4a7bea6d3420f`
 - Proof SHA256: `02e2f41ef03b972170ad7896c7af8a703300def3f4724df7e83d8100e69f0ae4`
 
 **Summary:** Validated decision-gated record for HiberFileSizePercent under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The clean Win25H2Clean baseline confirmed the current default, the repo power notes carry an exact docs hit, the residual string triage found an exact current-build ntoskrnl.exe hit, and the tools-hardened lightweight ETW follow-up surfaced exact runtime lines but not an exact runtime read. A later KVM local-KD follow-up then resolved the live hibernation symbol family, confirmed the current-build `Control\\Power` registry path through `PopOpenHiberPersistedKey` and `PopQueryHiberPersistedRegValue`, and showed `PopHiberFileSizePercent = 0` on the running guest. Dedicated and recovery-backed KVM Procmon replays then captured real `Control\\Power` activity through `powercfg.exe` and the `System` process, but still surfaced zero direct `HiberFileSizePercent` hits. A later host-driven KVM reboot observation closed the reboot gap by confirming a real boot-time advance while `HiberFileSizePercent` stayed `0` and `powercfg /a` stayed hibernation-unsupported before and after reboot. A QGA-launched WPR boot registry trace then produced an exact normalized `Registry / QueryValue / HiberFileSizePercent` event, closing the remaining runtime-read attribution gap while keeping the record research-only and non-actionable.
@@ -5459,7 +5459,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Evidence class: `Class B`
 - Source file: `research/records/power.control.hibernate-enabled-default.json`
 - Evidence root: [evidence/records/power.control.hibernate-enabled-default](../evidence/records/power.control.hibernate-enabled-default)
-- Source SHA256: `a84a03b7216960d68d02afd6dea4cce95047121a131760615c62ea20ad2e3e37`
+- Source SHA256: `29a701c0cb3a9440b7669e7f3810feec0275b25f739fe48fd27ee0fe9faf11a3`
 - Proof SHA256: `4b6b5426cee9abeb3f568710619525a4a70fbffa9d5d7082863c9ac7c8d90916`
 
 **Summary:** Validated decision-gated record for HibernateEnabledDefault under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The clean Win25H2Clean baseline confirmed the current default, the repo power notes carry an exact docs hit, the shared string batch found an exact current-build ntoskrnl.exe hit, the shared Ghidra batch produced reviewable xref artifacts, and the guest-processed stepwise Procmon boot log on RegProbe-Baseline-Clean-20260329 completed shell-safe but did not capture an exact runtime read for HibernateEnabledDefault. A follow-up guest-processed post-boot Procmon trigger batch using powercfg, powercfg /energy, CPU stress, and profile-specific probes also completed shell-safe but still did not capture an exact runtime read for HibernateEnabledDefault. Later ETW follow-ups confirmed that the virtualized guest still cannot exercise a real hibernation trigger, and a newer KVM reboot observation showed that HibernateEnabledDefault stays `1` across a real reboot while `powercfg /a` remains hibernation-unsupported before and after boot. The lane therefore remains decision-gated by an environment limitation rather than by path uncertainty.
@@ -5624,7 +5624,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Evidence class: `Class B`
 - Source file: `research/records/power.control.timer-rebase-threshold-on-drips-exit.json`
 - Evidence root: [evidence/records/power.control.timer-rebase-threshold-on-drips-exit](../evidence/records/power.control.timer-rebase-threshold-on-drips-exit)
-- Source SHA256: `ad40c6c708c907bbd3310c5a4b3b68433021d96e393714ce79daedaebecc52a6`
+- Source SHA256: `e35cf973a70dbc1a578a37938e20a200ab69f0a8d20c4f2d5bf6b6a9b311bfa5`
 - Proof SHA256: `54f7d729b7c430c4d8fa52ccb91256651e35c189b6c788691161084ffad23095`
 
 **Summary:** Validated decision-gated record for TimerRebaseThresholdOnDripsExit under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The clean Win25H2Clean baseline confirmed the current default, the repo power notes carry an exact docs hit, the shared string batch found an exact current-build ntoskrnl.exe hit, the shared Ghidra batch produced reviewable xref artifacts, and the tools-hardened lightweight ETW follow-up on RegProbe-Baseline-ToolsHardened-20260330 first checked modern standby capability before attempting any DRIPS-exit trigger. That capability gate showed the older VMware baseline does not expose S0 Low Power Idle / Modern Standby. A newer KVM reboot observation then confirmed that TimerRebaseThresholdOnDripsExit stays `60` across a real reboot while `powercfg /a` still reports S0 Low Power Idle unavailable before and after boot. The record therefore remains decision-gated by a virtualized-baseline standby limitation rather than by a dead-flag conclusion.
@@ -5980,7 +5980,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Evidence class: `Class B`
 - Source file: `research/records/power.session-watchdog-timeouts.json`
 - Evidence root: [evidence/records/power.session-watchdog-timeouts](../evidence/records/power.session-watchdog-timeouts)
-- Source SHA256: `790c76a0f139b470f1c1c5c108892893bb87a0229678d909141871c8b6ccce57`
+- Source SHA256: `cc0674a8c9c7afffaf651bb34dec9530ff0a6507260d8d779e610e4ec64c8eca`
 - Proof SHA256: `83a7435730e3c12569c7100f02dc986e96c494a1605753fc3b3796cc3f0ab893`
 
 **Summary:** Validated decision-gated record. The Session Manager watchdog timeout pair now has baseline existence on Win25H2Clean, exact ntoskrnl string hits, earlier Ghidra fallback artifacts, repo-side PoFx pseudocode that ties the pair to directed power watchdog timeout globals, a successful reboot-verified boot trace baseline, a host-side ETL registry review that proves repeated boot-time access to Session Manager\\Power, a working Procmon boot-log capture that reproduces adjacent Session Manager\\Power traffic from System during boot, a DcomLaunch attribution package that narrows the svchost lead to the service host group containing Power, prior S1-specific Procmon follow-ups that failed to leave decisive in-guest artifacts, a tools-hardened lightweight ETW S1 follow-up that still lost the guest before a usable exact-value capture could be completed, and an explicit incident review that classifies those S1 losses as validation-environment limitations rather than safety proof. Later Linux KVM local-KD follow-ups first resolved the live watchdog globals plus the derived directed-power timeout globals, then disassembled the current-build watchdog selection path, and later identified the generic current-build power-manager registry helper family (`PopOpenPowerKey`, `PopReadRegKeyValue`) while remapping the older fallback xref offsets away from the watchdog lane and into unrelated PnP initialization code. A reusable Linux KVM Procmon power-burst replay still exported a real 260953-row CSV but returned zero hits for the watchdog pair and adjacent Session Manager\\Power fragments. A later 2026-04-23 skip-tracerpt ETW stackwalk rerun now captures one exact helper-triggered `RegQueryValue` for `WatchdogResumeTimeout`, which moves the pair beyond a pure no-exact-read hold while still leaving the sleep-side exact read and the named watchdog caller into the generic helper surface open.

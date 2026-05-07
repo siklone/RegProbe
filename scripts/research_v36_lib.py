@@ -80,6 +80,11 @@ DEFAULT_BACKEND_ID = "rai-linux-vm"
 CURRENT_SCHEMA_VERSION = "1.0"
 STALE_REVALIDATION_DAYS = 28
 STALE_BUILD_THRESHOLD = 2
+REJECTED_PROMOTION_DISPOSITIONS = {
+    "rejected",
+    "archived",
+    "not-promotable",
+}
 STRONG_STATIC_SUPPORTS = {
     "allowed-values",
     "behavior",
@@ -1863,6 +1868,7 @@ def evaluate_candidate_gate(
 
     blockers = [str(item) for item in (decision.get("blocking_issues") or []) if item]
     blocker_set = set(blockers)
+    promotion_disposition = str(decision.get("promotion_disposition") or "").strip().lower()
 
     target = primary_target(record)
     if CURRENT_SCHEMA_VERSION not in SUPPORTED_SCHEMA_VERSIONS:
@@ -1923,6 +1929,8 @@ def evaluate_candidate_gate(
 
     if record_status == "deprecated" or "archived" in blocker_set:
         state = "rejected"
+    elif promotion_disposition in REJECTED_PROMOTION_DISPOSITIONS:
+        state = "rejected"
     elif "schema-version-unsupported" in blocker_set:
         state = "blocked"
     elif hard_blockers:
@@ -1939,6 +1947,8 @@ def evaluate_candidate_gate(
         promotion_blockers = ["stale-evidence"]
     elif state == "rejected" and "deprecated-record" in blocker_set:
         promotion_blockers = ["deprecated-record"]
+    elif state == "rejected" and not promotion_blockers:
+        promotion_blockers = [f"promotion-disposition-{promotion_disposition or 'rejected'}"]
 
     return {
         "schema_version": CURRENT_SCHEMA_VERSION,
@@ -1949,6 +1959,7 @@ def evaluate_candidate_gate(
         "record_id": str(record.get("record_id") or record.get("tweak_id") or ""),
         "tweak_id": str(record.get("tweak_id") or record.get("record_id") or ""),
         "tweak_origin": tweak_origin,
+        "promotion_disposition": promotion_disposition or None,
         "promotion_state": state,
         "promotion_blockers": promotion_blockers,
         "record_promotion_allowed": state in {"promotion-eligible", "promoted", "revalidation-pending"},
@@ -2497,7 +2508,7 @@ def blocked_worklist_surface_status(payload: dict[str, Any] | None = None) -> di
         errors.append("top_actionable_candidates-missing")
     elif expected_actionability_counts.get("active", 0) > 0 and not payload.get("top_actionable_candidates"):
         errors.append("top_actionable_candidates-missing")
-    if not payload.get("lane_focus"):
+    if items and not payload.get("lane_focus"):
         errors.append("lane_focus-missing")
     if any(not item.get("suggested_command") for item in items):
         errors.append("suggested_command-missing")

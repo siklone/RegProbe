@@ -420,7 +420,12 @@
       "long-dpc-threshold-wpr-boot-zero-exact-target-hits-current-build",
       "long-dpc-threshold-no-primary-current-build-doc",
       "long-dpc-threshold-procmon-saveas-timeout-on-dedicated-timer-dpc-stress-lane"
-    ]
+    ],
+    "promotion_disposition": "rejected",
+    "promotion_disposition_kind": "intentional-hold-closed",
+    "promotion_disposition_reason": "Closed as rejected for app/research-provider promotion because the remaining evidence gap is intentional: current-build exact reads, safe trigger conditions, authoritative semantics, or boot-safe validation are still missing.",
+    "promotion_reopen_criteria": "Reopen only with a safer current-build lane that proves exact target consumption and resolves the listed intentional-hold blockers.",
+    "promotion_disposition_reviewed_utc": "2026-05-07T20:20:00Z"
   },
   "open_questions": [
     "Which exact current-build runtime path consumes the Long-DPC INIT descriptor table before WPR can observe value-name reads, if any?",
@@ -468,7 +473,7 @@
       "notes": "The 2026-04-23 quoted helper rerun captured an exact `RegQueryValue` event and stack for `LongDpcQueueThreshold`; the returned status `0xC0000034` confirms the registry value remains absent on the clean baseline even though the live kernel global defaults to `3`."
     }
   ],
-  "last_reviewed_utc": "2026-04-28T06:11:02Z",
+  "last_reviewed_utc": "2026-05-07T20:20:00Z",
   "source_enrichment": {
     "last_updated_utc": "2026-04-28T06:11:02Z",
     "runtime_capture_reviewed": {

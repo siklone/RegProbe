@@ -249,8 +249,9 @@ def evaluate_evidence_surfaces(
     active_expected = int(index_summary.get("total_records") or 0) - int(index_summary.get("deprecated") or 0)
     active_expected_from_gates = 0
     for entry in promotion_entries:
-        state = str(entry.get("promotion_state") or "").strip()
-        if state == "rejected":
+        documentation_status = entry.get("documentation_status") or {}
+        record_status = str(documentation_status.get("record_status") or "").strip().lower()
+        if record_status == "deprecated":
             continue
         active_expected_from_gates += 1
 
@@ -315,7 +316,7 @@ def evaluate_evidence_surfaces(
     if not checks["evidence_audit_active_count_matches_index_summary"]:
         errors.append("Evidence audit active count no longer matches evidence-index summary counts.")
     if not checks["evidence_audit_active_count_matches_gate_states"]:
-        errors.append("Evidence audit active count no longer matches non-rejected promotion-gate entries.")
+        errors.append("Evidence audit active count no longer matches non-deprecated promotion-gate entries.")
     if not checks["evidence_audit_validation_proof_count_matches_index_summary"]:
         errors.append("Evidence audit validation-proof backlog no longer matches evidence-index summary.")
     if source_file_violations:

@@ -379,7 +379,12 @@
       "dpc-watchdog-control-wpr-boot-zero-exact-target-hits-current-build",
       "dpc-watchdog-control-no-current-build-persisted-seeding-caller-or-exact-query-arm",
       "dpc-watchdog-control-no-primary-current-build-doc"
-    ]
+    ],
+    "promotion_disposition": "rejected",
+    "promotion_disposition_kind": "intentional-hold-closed",
+    "promotion_disposition_reason": "Closed as rejected for app/research-provider promotion because the remaining evidence gap is intentional: current-build exact reads, safe trigger conditions, authoritative semantics, or boot-safe validation are still missing.",
+    "promotion_reopen_criteria": "Reopen only with a safer current-build lane that proves exact target consumption and resolves the listed intentional-hold blockers.",
+    "promotion_disposition_reviewed_utc": "2026-05-07T20:20:00Z"
   },
   "open_questions": [
     "Which boot/init routine consumes the resolved `Session Manager\\Kernel` INIT descriptor rows for the DPC watchdog control values, if any?",
@@ -444,5 +449,5 @@
     "etw_stackwalk_review_status": "qga_unblocked_ingest_ok",
     "etw_stackwalk_review_artifact": "evidence/captures/system-kernel-dpc-watchdog-control-cluster-etw-qga-unblock-20260507.json"
   },
-  "last_reviewed_utc": "2026-05-07T14:43:50.544726Z"
+  "last_reviewed_utc": "2026-05-07T20:20:00Z"
 }

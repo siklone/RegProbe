@@ -21,15 +21,15 @@ The checked-in v3.6 publishing, manifest, and metrics helpers live in the top-le
 
 | Metric | Value |
 |--------|-------|
-| Promoted | 226 |
-| Blocked | 18 |
-| Revalidation Pending | 24 |
-| Gate Health | 🟢 green |
+| Promoted | 244 |
+| Blocked | 0 |
+| Revalidation Pending | 0 |
+| Gate Health | 🟡 yellow |
 | Schema Complete | 100% |
-| Missing Docs | 0 |
-| Blocked Actionability | 18 hold |
+| Missing Docs | 32 |
+| Blocked Actionability | n/a |
 | Blocked Worklist Gate | PASS |
 | Blocked Worklist | `audit/blocked-worklist.md` |
 <!-- END:RESEARCH_HEALTH -->
 
-For a compact blocked-queue entrypoint, start with `audit/blocked-worklist.md`. For terminal use, `winopt research list-blocked --worklist --actionability active --top 5` shows the highest-priority active items, `winopt research list-blocked --worklist --actionability hold` shows intentional holds, `winopt research show-blocked <candidate-id>` opens one blocked candidate in detail, and `winopt research list-blocked --summary` prints the checked-in lane split without dumping the whole list. The operator flow is documented in `docs/blocked-worklist-operator-guide.md`.
+For a compact blocked-queue entrypoint, start with `audit/blocked-worklist.md`. The current active blocked worklist is intentionally empty; the 2026-05-07 closure ledger in `audit/blocked-worklist-closure-20260507.md` explains which records were rejected from promotion and what evidence would be required to reopen them. For terminal use, `winopt research list-blocked --summary` prints the checked-in lane split without dumping the whole list, and `winopt research show-blocked <candidate-id>` remains available if future blocked records are added. The operator flow is documented in `docs/blocked-worklist-operator-guide.md`.

@@ -208,7 +208,12 @@
     "manual_review_required": true,
     "blocking_issues": [
       "The card still lives only in the first-party provider and has not been promoted into the research-provider surface."
-    ]
+    ],
+    "promotion_disposition": "rejected",
+    "promotion_disposition_kind": "validation-proof-campaign-required",
+    "promotion_disposition_reason": "Closed as rejected from the active promotion blocker queue because the first-party/live card still lacks the required validation proof and cross-layer runtime/static evidence for research-provider promotion.",
+    "promotion_reopen_criteria": "Reopen with a dedicated evidence campaign that adds validation_proof, real runtime trace evidence, static/source evidence, and a verified rollback story before promotion.",
+    "promotion_disposition_reviewed_utc": "2026-05-07T20:20:00Z"
   },
-  "last_reviewed_utc": "2026-05-05T11:00:00Z"
+  "last_reviewed_utc": "2026-05-07T20:20:00Z"
 }

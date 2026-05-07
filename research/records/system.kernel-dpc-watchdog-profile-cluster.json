@@ -453,7 +453,12 @@
       "dpc-watchdog-profile-no-primary-current-build-doc",
       "dpc-watchdog-profile-conditional-init-semantics-unproven",
       "dpc-watchdog-profile-no-persisted-boot-consumer-proof"
-    ]
+    ],
+    "promotion_disposition": "rejected",
+    "promotion_disposition_kind": "intentional-hold-closed",
+    "promotion_disposition_reason": "Closed as rejected for app/research-provider promotion because the remaining evidence gap is intentional: current-build exact reads, safe trigger conditions, authoritative semantics, or boot-safe validation are still missing.",
+    "promotion_reopen_criteria": "Reopen only with a safer current-build lane that proves exact target consumption and resolves the listed intentional-hold blockers.",
+    "promotion_disposition_reviewed_utc": "2026-05-07T20:20:00Z"
   },
   "open_questions": [
     "Which boot/init routine consumes the resolved `Session Manager\\Kernel` INIT descriptor rows for the DPC watchdog profile values, if any?",
@@ -501,7 +506,7 @@
       "notes": "The 2026-04-23 quoted helper rerun captured an exact `RegQueryValue` event and stack for `DpcWatchdogProfileSingleDpcThreshold`; the returned status `0xC0000034` confirms the registry value remains absent on the clean baseline even though the live kernel global defaults to `0`."
     }
   ],
-  "last_reviewed_utc": "2026-04-28T06:11:02Z",
+  "last_reviewed_utc": "2026-05-07T20:20:00Z",
   "source_enrichment": {
     "last_updated_utc": "2026-04-28T06:11:02Z",
     "runtime_capture_reviewed": {

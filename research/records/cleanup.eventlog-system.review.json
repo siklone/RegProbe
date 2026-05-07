@@ -211,7 +211,12 @@
     "blocking_issues": [
       "The card has not yet been promoted from the first-party system provider into the research-provider surface.",
       "Clearing the event log has no rollback path."
-    ]
+    ],
+    "promotion_disposition": "rejected",
+    "promotion_disposition_kind": "non-reversible-or-high-risk-action",
+    "promotion_disposition_reason": "Closed as rejected for research-provider promotion because the live action is one-shot, destructive, high-risk, reboot-sensitive, or lacks a rollback story suitable for a validated tweak card.",
+    "promotion_reopen_criteria": "Reopen only if the app gains a verified rollback/snapshot contract and dedicated validation proof for the exact action.",
+    "promotion_disposition_reviewed_utc": "2026-05-07T20:20:00Z"
   },
-  "last_reviewed_utc": "2026-05-05T10:40:00Z"
+  "last_reviewed_utc": "2026-05-07T20:20:00Z"
 }

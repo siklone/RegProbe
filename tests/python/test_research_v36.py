@@ -1467,6 +1467,39 @@ class PromotionStateTests(unittest.TestCase):
         self.assertIn("functional-no-effect", gate["promotion_blockers"])
         self.assertLessEqual(gate["score_breakdown"]["runtime_evidence_strength"], 1)
 
+    def test_rejected_promotion_disposition_closes_active_blocker_without_hiding_reason(self) -> None:
+        record = {
+            "record_id": "example.rejected-disposition",
+            "tweak_id": "example.rejected-disposition",
+            "record_status": "review-required",
+            "setting": {
+                "name": "Rejected Disposition",
+                "targets": [
+                    {
+                        "path": "HKCU\\Software\\Example",
+                        "value_name": "ExampleValue",
+                        "value_type": "REG_DWORD",
+                    }
+                ],
+            },
+            "decision": {
+                "confidence": "low",
+                "apply_allowed": False,
+                "restore_default_supported": False,
+                "restore_previous_supported": False,
+                "promotion_disposition": "rejected",
+                "promotion_disposition_reason": "One-shot action has no rollback story.",
+                "blocking_issues": ["validation-proof", "one-shot-no-rollback"],
+            },
+        }
+
+        gate = research_v36_lib.derive_promotion_state(record, {})
+
+        self.assertEqual(gate["promotion_state"], "rejected")
+        self.assertEqual(gate["promotion_disposition"], "rejected")
+        self.assertIn("validation-proof", gate["promotion_blockers"])
+        self.assertIn("one-shot-no-rollback", gate["promotion_blockers"])
+
 
 class GapAnalysisTests(unittest.TestCase):
     def test_gap_analysis_emits_hkcu_and_policy_analogs(self) -> None:
@@ -5572,7 +5605,7 @@ class BlockedWorklistTests(unittest.TestCase):
     def test_blocked_worklist_payload_is_structurally_sound(self) -> None:
         payload = blocked_worklist_lib.build_worklist()
 
-        self.assertGreaterEqual(int(payload.get("blocked_count") or 0), 1)
+        self.assertGreaterEqual(int(payload.get("blocked_count") or 0), 0)
         self.assertIsInstance(payload.get("top_actionable_candidates"), list)
         self.assertIsInstance(payload.get("top_hold_candidates"), list)
         self.assertIsInstance(payload.get("actionability_counts"), dict)

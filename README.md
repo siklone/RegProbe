@@ -311,7 +311,7 @@ Collection mode is explicit now. `evidence` is the safe default for research and
 
 VM secret handling was also tightened. Repo-tracked VM scripts no longer keep plaintext guest passwords. Credentials are resolved from explicit input first, then environment variables such as `REGPROBE_VM_GUEST_USER` and `REGPROBE_VM_GUEST_PASSWORD`, and finally from a DPAPI-protected CLIXML credential file referenced outside the repo. `vmrun` still consumes credentials at invocation time because that is a VMware CLI limitation, but the repo avoids storing or logging those secrets directly and the shared VM helper masks them in runner output.
 
-For hard runtime cases, the escalation path extends beyond "reboot and idle." The checked-in path moves from targeted `ETW` or runtime trace work, to the safe mega-trigger runtime lane, to `WinDbg` boot registry tracing when QGA allows it, and then to source-enrichment cross-reference through `ReactOS`, `WRK`, `System Informer`, `Sandboxie`, `Wine`, `ADMX`, and `WDK`. ETL discovery feeds the queue, feature-area enrichment and triage narrow the candidate set, VM safety bench results promote only the profiles that meet the retained bar, and hard blockers record the missing prerequisite instead of collapsing into generic review language. Some lanes are still intentionally held, but they are held with reasons: exact runtime reads are missing, the VM cannot expose the right power state, or the probe is boot-unsafe without a dedicated lane.
+For hard runtime cases, the escalation path extends beyond "reboot and idle." The checked-in path moves from targeted `ETW` or runtime trace work, to the safe mega-trigger runtime lane, to `WinDbg` boot registry tracing when QGA allows it, and then to source-enrichment cross-reference through `ReactOS`, `WRK`, `System Informer`, `Sandboxie`, `Wine`, `ADMX`, and `WDK`. ETL discovery feeds the queue, feature-area enrichment and triage narrow the candidate set, VM safety bench results promote only the profiles that meet the retained bar, and hard blockers record the missing prerequisite instead of collapsing into generic review language. The active blocked worklist is now zero; records that still lack safe current-build proof, rollback, or authoritative semantics are closed with an explicit rejected promotion disposition and reopen criteria instead of remaining as ambiguous blockers.
 
 For the full validation flow, start with the [VM workflow](Docs/research/vm-workflow.md), [Runtime escalation](Docs/research/runtime-escalation.md), and the historical [Pipeline v3.1](registry-research-framework/docs/pipeline-v3.1.md) reference when an older audit pack still points to it.
 
@@ -320,12 +320,15 @@ For the full validation flow, start with the [VM workflow](Docs/research/vm-work
 <!-- BEGIN:RESEARCH_HEALTH -->
 | Metric | Value |
 |--------|-------|
-| Promoted | 250 |
-| Blocked | 18 |
+| Promoted | 244 |
+| Blocked | 0 |
 | Revalidation Pending | 0 |
-| Gate Health | green |
+| Gate Health | 🟡 yellow |
 | Schema Complete | 100% |
-| Missing Docs | 0 |
+| Missing Docs | 32 |
+| Blocked Actionability | n/a |
+| Blocked Worklist Gate | PASS |
+| Blocked Worklist | `registry-research-framework/audit/blocked-worklist.md` |
 <!-- END:RESEARCH_HEALTH -->
 
 ## Repo Shape

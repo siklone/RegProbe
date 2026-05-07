@@ -212,11 +212,16 @@
     "blocking_issues": [
       "The card has not yet been promoted from the first-party power provider into the research-provider surface.",
       "This review pass documents the behavior but does not yet publish it as a validated research card."
-    ]
+    ],
+    "promotion_disposition": "rejected",
+    "promotion_disposition_kind": "validation-proof-campaign-required",
+    "promotion_disposition_reason": "Closed as rejected from the active promotion blocker queue because the first-party/live card still lacks the required validation proof and cross-layer runtime/static evidence for research-provider promotion.",
+    "promotion_reopen_criteria": "Reopen with a dedicated evidence campaign that adds validation_proof, real runtime trace evidence, static/source evidence, and a verified rollback story before promotion.",
+    "promotion_disposition_reviewed_utc": "2026-05-07T20:20:00Z"
   },
   "open_questions": [
     "Should reversible USB power-management cards be prioritized for research-provider promotion ahead of one-shot cleanup utilities?",
     "Do we want guest-side QA evidence attached before promoting this power command into the validated lane?"
   ],
-  "last_reviewed_utc": "2026-05-02T20:32:36Z"
+  "last_reviewed_utc": "2026-05-07T20:20:00Z"
 }

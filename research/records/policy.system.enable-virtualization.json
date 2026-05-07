@@ -316,7 +316,12 @@
     "why": "EnableVirtualization is backed by repo documentation, phase-0 baseline existence, a current-build ntoskrnl value hit with adjacent UAC-policy context, shell-safe runtime follow-ups across multiple transports, a KVM bootlog probe that completed a real reboot but showed `/EnableBootLogging` is not accepted on the current guest, a KVM local-KD disassembly that confirms the live current-build `Policies\\System` path plus the adjacent `EnableLUA` / `EnableVirtualization` / `EnableInstallerDetection` family on the running guest, and a QGA-launched WPR boot trace that retained five exact quoted `EnableVirtualization` `QueryValue` lines during boot. The WPR normalizer binds those retained exact-value hits to the intended `Policies\\System` target path supplied to the run, and that path was already independently corroborated by the earlier static and local-KD work. The record therefore no longer lacks runtime attribution. It remains intentionally held because this is a research-only legacy UAC virtualization control that is not mapped to a supported app surface.",
     "blocking_issues": [
       "enable-virtualization-research-only-raw-policy-system-value"
-    ]
+    ],
+    "promotion_disposition": "rejected",
+    "promotion_disposition_kind": "intentional-hold-closed",
+    "promotion_disposition_reason": "Closed as rejected for app/research-provider promotion because the remaining evidence gap is intentional: current-build exact reads, safe trigger conditions, authoritative semantics, or boot-safe validation are still missing.",
+    "promotion_reopen_criteria": "Reopen only with a safer current-build lane that proves exact target consumption and resolves the listed intentional-hold blockers.",
+    "promotion_disposition_reviewed_utc": "2026-05-07T20:20:00Z"
   },
   "source_enrichment": {
     "last_updated_utc": "2026-04-28T11:02:09Z",
@@ -350,7 +355,7 @@
     "etw_stackwalk_review_status": "qga_unblocked_ingest_ok",
     "etw_stackwalk_review_artifact": "evidence/captures/policy-system-enable-virtualization-etw-qga-unblock-20260507.json"
   },
-  "last_reviewed_utc": "2026-05-07T10:08:51.5651586Z",
+  "last_reviewed_utc": "2026-05-07T20:20:00Z",
   "version_stable": [
     "25H2"
   ]
