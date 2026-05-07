@@ -1,11 +1,11 @@
 # Promoted App QA Coverage
 
-- Generated UTC: 2026-05-07T16:10:05Z
-- History entries: 46
+- Generated UTC: 2026-05-07T16:43:59Z
+- History entries: 49
 - Promoted app-QA candidates: 242
-- Covered: 144
-- Uncovered: 98
-- Coverage: 59.5%
+- Covered: 149
+- Uncovered: 93
+- Coverage: 61.57%
 
 ## Covered Categories
 
@@ -20,7 +20,7 @@
 - Power: 7
 - Privacy: 38
 - Security: 12
-- System: 26
+- System: 31
 - Visibility: 16
 
 ## Uncovered Categories
@@ -34,14 +34,11 @@
 - Power: 3
 - Privacy: 29
 - Security: 9
-- System: 26
+- System: 21
 - Visibility: 7
 
 ## Recommended Next Batches
 
-- System: 5 uncovered cards | coverage 50.0%
-  command: `dotnet run --project cli/cli.csproj -- research qa-batch --id system.graphics-tdr-level --id system.graphics-tdr-limit-count --id system.graphics-tdr-limit-time --id system.kernel-thread-dpc-enable --id system.memory-clear-pagefile-at-shutdown`
-  live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id system.graphics-tdr-level --id system.graphics-tdr-limit-count --id system.graphics-tdr-limit-time --id system.kernel-thread-dpc-enable --id system.memory-clear-pagefile-at-shutdown --run-kvm --json`
 - Network: 5 uncovered cards | coverage 50.0%
   command: `dotnet run --project cli/cli.csproj -- research qa-batch --id network.enable-lltdio --id network.prefer-ipv4 --id network.require-ntlm-ssp-client-session-security --id network.smb-disable-leasing --id network.smb-enable-large-mtu`
   live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id network.enable-lltdio --id network.prefer-ipv4 --id network.require-ntlm-ssp-client-session-security --id network.smb-disable-leasing --id network.smb-enable-large-mtu --run-kvm --json`
@@ -51,6 +48,9 @@
 - Security: 5 uncovered cards | coverage 57.14%
   command: `dotnet run --project cli/cli.csproj -- research qa-batch --id security.disable-wu-driver-updates --id security.enable-defender-maps-advanced-membership --id security.enable-dynamic-lock --id security.enable-sudo --id security.hide-defender-exclusions-from-local-admins`
   live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id security.disable-wu-driver-updates --id security.enable-defender-maps-advanced-membership --id security.enable-dynamic-lock --id security.enable-sudo --id security.hide-defender-exclusions-from-local-admins --run-kvm --json`
+- System: 5 uncovered cards | coverage 59.62%
+  command: `dotnet run --project cli/cli.csproj -- research qa-batch --id system.memory-disable-paging-executive --id system.memory-large-system-cache-client --id system.memory-nonpaged-pool-dynamic --id system.memory-paged-pool-dynamic --id system.memory-registry-quota-default`
+  live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id system.memory-disable-paging-executive --id system.memory-large-system-cache-client --id system.memory-nonpaged-pool-dynamic --id system.memory-paged-pool-dynamic --id system.memory-registry-quota-default --run-kvm --json`
 - Notifications: 2 uncovered cards | coverage 60.0%
   command: `dotnet run --project cli/cli.csproj -- research qa-batch --id notifications.disable-mirroring --id notifications.disable-tile`
   live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id notifications.disable-mirroring --id notifications.disable-tile --run-kvm --json`

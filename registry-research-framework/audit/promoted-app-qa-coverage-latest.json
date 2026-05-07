@@ -1,11 +1,11 @@
 {
-  "generated_utc": "2026-05-07T16:10:05Z",
-  "history_entry_count": 46,
+  "generated_utc": "2026-05-07T16:43:59Z",
+  "history_entry_count": 49,
   "catalog_candidate_count": 242,
-  "covered_count": 144,
-  "uncovered_count": 98,
+  "covered_count": 149,
+  "uncovered_count": 93,
   "summary": {
-    "coverage_percent": 59.5,
+    "coverage_percent": 61.57,
     "covered_categories": {
       "Audio": 2,
       "Cleanup": 1,
@@ -18,7 +18,7 @@
       "Power": 7,
       "Privacy": 38,
       "Security": 12,
-      "System": 26,
+      "System": 31,
       "Visibility": 16
     },
     "uncovered_categories": {
@@ -31,64 +31,11 @@
       "Power": 3,
       "Privacy": 29,
       "Security": 9,
-      "System": 26,
+      "System": 21,
       "Visibility": 7
     }
   },
   "recommended_next_batches": [
-    {
-      "category": "System",
-      "covered_count": 26,
-      "uncovered_count": 26,
-      "coverage_percent": 50.0,
-      "batch_size": 5,
-      "tweak_ids": [
-        "system.graphics-tdr-level",
-        "system.graphics-tdr-limit-count",
-        "system.graphics-tdr-limit-time",
-        "system.kernel-thread-dpc-enable",
-        "system.memory-clear-pagefile-at-shutdown"
-      ],
-      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id system.graphics-tdr-level --id system.graphics-tdr-limit-count --id system.graphics-tdr-limit-time --id system.kernel-thread-dpc-enable --id system.memory-clear-pagefile-at-shutdown",
-      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id system.graphics-tdr-level --id system.graphics-tdr-limit-count --id system.graphics-tdr-limit-time --id system.kernel-thread-dpc-enable --id system.memory-clear-pagefile-at-shutdown --run-kvm --json",
-      "candidates": [
-        {
-          "tweak_id": "system.graphics-tdr-level",
-          "record_id": "system.graphics-tdr-level",
-          "category": "System",
-          "name": "Graphics TDR Level",
-          "documentation": "research/records/system.graphics-tdr-level.json"
-        },
-        {
-          "tweak_id": "system.graphics-tdr-limit-count",
-          "record_id": "system.graphics-tdr-limit-count",
-          "category": "System",
-          "name": "Graphics TDR Limit Count",
-          "documentation": "research/records/system.graphics-tdr-limit-count.json"
-        },
-        {
-          "tweak_id": "system.graphics-tdr-limit-time",
-          "record_id": "system.graphics-tdr-limit-time",
-          "category": "System",
-          "name": "Graphics TDR Limit Time",
-          "documentation": "research/records/system.graphics-tdr-limit-time.json"
-        },
-        {
-          "tweak_id": "system.kernel-thread-dpc-enable",
-          "record_id": "system.kernel-thread-dpc-enable",
-          "category": "System",
-          "name": "Threaded DPCs",
-          "documentation": "research/records/system.kernel-thread-dpc-enable.json"
-        },
-        {
-          "tweak_id": "system.memory-clear-pagefile-at-shutdown",
-          "record_id": "system.memory-clear-pagefile-at-shutdown",
-          "category": "System",
-          "name": "Clear Page File at Shutdown",
-          "documentation": "research/records/system.memory-clear-pagefile-at-shutdown.json"
-        }
-      ]
-    },
     {
       "category": "Network",
       "covered_count": 14,
@@ -245,6 +192,59 @@
           "category": "Security",
           "name": "Hide Defender Exclusions From Local Admins",
           "documentation": "research/records/security.hide-defender-exclusions-from-local-admins.review.json"
+        }
+      ]
+    },
+    {
+      "category": "System",
+      "covered_count": 31,
+      "uncovered_count": 21,
+      "coverage_percent": 59.62,
+      "batch_size": 5,
+      "tweak_ids": [
+        "system.memory-disable-paging-executive",
+        "system.memory-large-system-cache-client",
+        "system.memory-nonpaged-pool-dynamic",
+        "system.memory-paged-pool-dynamic",
+        "system.memory-registry-quota-default"
+      ],
+      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id system.memory-disable-paging-executive --id system.memory-large-system-cache-client --id system.memory-nonpaged-pool-dynamic --id system.memory-paged-pool-dynamic --id system.memory-registry-quota-default",
+      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id system.memory-disable-paging-executive --id system.memory-large-system-cache-client --id system.memory-nonpaged-pool-dynamic --id system.memory-paged-pool-dynamic --id system.memory-registry-quota-default --run-kvm --json",
+      "candidates": [
+        {
+          "tweak_id": "system.memory-disable-paging-executive",
+          "record_id": "system.memory-disable-paging-executive",
+          "category": "System",
+          "name": "Disable Paging Executive",
+          "documentation": "research/records/system.memory-disable-paging-executive.json"
+        },
+        {
+          "tweak_id": "system.memory-large-system-cache-client",
+          "record_id": "system.memory-large-system-cache-client",
+          "category": "System",
+          "name": "Large System Cache",
+          "documentation": "research/records/system.memory-large-system-cache-client.review.json"
+        },
+        {
+          "tweak_id": "system.memory-nonpaged-pool-dynamic",
+          "record_id": "system.memory-nonpaged-pool-dynamic",
+          "category": "System",
+          "name": "Nonpaged Pool Size",
+          "documentation": "research/records/system.memory-nonpaged-pool-dynamic.json"
+        },
+        {
+          "tweak_id": "system.memory-paged-pool-dynamic",
+          "record_id": "system.memory-paged-pool-dynamic",
+          "category": "System",
+          "name": "Paged Pool Size",
+          "documentation": "research/records/system.memory-paged-pool-dynamic.json"
+        },
+        {
+          "tweak_id": "system.memory-registry-quota-default",
+          "record_id": "system.memory-registry-quota-default",
+          "category": "System",
+          "name": "Registry Size Limit / Registry Quota",
+          "documentation": "research/records/system.memory-registry-quota-default.review.json"
         }
       ]
     },
@@ -1432,6 +1432,51 @@
       "latest_report_status": "ok"
     },
     {
+      "tweak_id": "system.graphics-tdr-level",
+      "qa_tweak_id": "system.graphics-tdr-level",
+      "candidate_id": "system.graphics-tdr-level",
+      "category": "System",
+      "name": "Graphics TDR Level",
+      "documentation": "research/records/system.graphics-tdr-level.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "system.graphics-tdr-limit-count",
+      "qa_tweak_id": "system.graphics-tdr-limit-count",
+      "candidate_id": "system.graphics-tdr-limit-count",
+      "category": "System",
+      "name": "Graphics TDR Limit Count",
+      "documentation": "research/records/system.graphics-tdr-limit-count.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "system.graphics-tdr-limit-time",
+      "qa_tweak_id": "system.graphics-tdr-limit-time",
+      "candidate_id": "system.graphics-tdr-limit-time",
+      "category": "System",
+      "name": "Graphics TDR Limit Time",
+      "documentation": "research/records/system.graphics-tdr-limit-time.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "system.kernel-thread-dpc-enable",
+      "qa_tweak_id": "system.kernel-thread-dpc-enable",
+      "candidate_id": "system.kernel-thread-dpc-enable",
+      "category": "System",
+      "name": "Threaded DPCs",
+      "documentation": "research/records/system.kernel-thread-dpc-enable.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "system.memory-clear-pagefile-at-shutdown",
+      "qa_tweak_id": "system.memory-clear-pagefile-at-shutdown",
+      "candidate_id": "system.memory-clear-pagefile-at-shutdown",
+      "category": "System",
+      "name": "Clear Page File at Shutdown",
+      "documentation": "research/records/system.memory-clear-pagefile-at-shutdown.json",
+      "latest_report_status": "ok"
+    },
+    {
       "tweak_id": "visibility.default-account-picture",
       "qa_tweak_id": "visibility.default-account-picture",
       "candidate_id": "visibility.default-account-picture",
@@ -2031,41 +2076,6 @@
       "category": "Security",
       "name": "User Account Control Prompting Profile",
       "documentation": "research/records/security.uac-never-notify.json"
-    },
-    {
-      "tweak_id": "system.graphics-tdr-level",
-      "record_id": "system.graphics-tdr-level",
-      "category": "System",
-      "name": "Graphics TDR Level",
-      "documentation": "research/records/system.graphics-tdr-level.json"
-    },
-    {
-      "tweak_id": "system.graphics-tdr-limit-count",
-      "record_id": "system.graphics-tdr-limit-count",
-      "category": "System",
-      "name": "Graphics TDR Limit Count",
-      "documentation": "research/records/system.graphics-tdr-limit-count.json"
-    },
-    {
-      "tweak_id": "system.graphics-tdr-limit-time",
-      "record_id": "system.graphics-tdr-limit-time",
-      "category": "System",
-      "name": "Graphics TDR Limit Time",
-      "documentation": "research/records/system.graphics-tdr-limit-time.json"
-    },
-    {
-      "tweak_id": "system.kernel-thread-dpc-enable",
-      "record_id": "system.kernel-thread-dpc-enable",
-      "category": "System",
-      "name": "Threaded DPCs",
-      "documentation": "research/records/system.kernel-thread-dpc-enable.json"
-    },
-    {
-      "tweak_id": "system.memory-clear-pagefile-at-shutdown",
-      "record_id": "system.memory-clear-pagefile-at-shutdown",
-      "category": "System",
-      "name": "Clear Page File at Shutdown",
-      "documentation": "research/records/system.memory-clear-pagefile-at-shutdown.json"
     },
     {
       "tweak_id": "system.memory-disable-paging-executive",

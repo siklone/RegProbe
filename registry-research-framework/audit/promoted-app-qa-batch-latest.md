@@ -1,7 +1,7 @@
 # Promoted App QA Batch
 
 - Status: PASS
-- Generated UTC: 2026-05-07T16:10:05Z
+- Generated UTC: 2026-05-07T16:43:59Z
 - Catalog candidates: 242
 - Selected candidates: 5
 - Planned apply-allowed candidates: 5
@@ -10,41 +10,41 @@
 
 ## Selected Candidates
 
-- `privacy.disable-local-security-questions` | Security Questions for Local Accounts | Privacy
-  docs: `research/records/privacy.disable-local-security-questions.json`
+- `system.graphics-tdr-level` | Graphics TDR Level | System
+  docs: `research/records/system.graphics-tdr-level.json`
   rollback: default=true | previous=true
   card snapshot: claim_boundary=true | fields=TweakId, Name, Category, EvidenceClass, ResearchStatus, RollbackSnapshotState, HasClaimBoundary, WhatWeKnowSummary, WhatWeDoNotClaimSummary, ProofLanes | lanes=docs, runtime, source, rollback
-- `privacy.disable-location-consent` | Disable Location Consent (Current User) | Privacy
-  docs: `research/records/privacy.disable-location-consent.review.json`
+- `system.graphics-tdr-limit-count` | Graphics TDR Limit Count | System
+  docs: `research/records/system.graphics-tdr-limit-count.json`
   rollback: default=true | previous=true
   card snapshot: claim_boundary=true | fields=TweakId, Name, Category, EvidenceClass, ResearchStatus, RollbackSnapshotState, HasClaimBoundary, WhatWeKnowSummary, WhatWeDoNotClaimSummary, ProofLanes | lanes=docs, runtime, source, rollback
-- `privacy.disable-location-consent-system` | Location Consent Store (System) | Privacy
-  docs: `research/records/privacy.disable-location-consent-system.review.json`
+- `system.graphics-tdr-limit-time` | Graphics TDR Limit Time | System
+  docs: `research/records/system.graphics-tdr-limit-time.json`
   rollback: default=true | previous=true
   card snapshot: claim_boundary=true | fields=TweakId, Name, Category, EvidenceClass, ResearchStatus, RollbackSnapshotState, HasClaimBoundary, WhatWeKnowSummary, WhatWeDoNotClaimSummary, ProofLanes | lanes=docs, runtime, source, rollback
-- `privacy.disable-location-scripting` | Location Scripting | Privacy
-  docs: `research/records/privacy.disable-location-scripting.json`
+- `system.kernel-thread-dpc-enable` | Threaded DPCs | System
+  docs: `research/records/system.kernel-thread-dpc-enable.json`
   rollback: default=true | previous=true
   card snapshot: claim_boundary=true | fields=TweakId, Name, Category, EvidenceClass, ResearchStatus, RollbackSnapshotState, HasClaimBoundary, WhatWeKnowSummary, WhatWeDoNotClaimSummary, ProofLanes | lanes=docs, runtime, source, rollback
-- `privacy.disable-location-services` | Location Feature | Privacy
-  docs: `research/records/privacy.disable-location-services.json`
+- `system.memory-clear-pagefile-at-shutdown` | Clear Page File at Shutdown | System
+  docs: `research/records/system.memory-clear-pagefile-at-shutdown.json`
   rollback: default=true | previous=true
   card snapshot: claim_boundary=true | fields=TweakId, Name, Category, EvidenceClass, ResearchStatus, RollbackSnapshotState, HasClaimBoundary, WhatWeKnowSummary, WhatWeDoNotClaimSummary, ProofLanes | lanes=docs, runtime, source, rollback
 
 ## Live Results
 
-- `privacy.disable-local-security-questions` | success=true | status=ok
+- `system.graphics-tdr-level` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
   card contract: ok | claim_boundary=true | lanes=docs, runtime, source, rollback
-- `privacy.disable-location-consent` | success=true | status=ok
+- `system.graphics-tdr-limit-count` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
   card contract: ok | claim_boundary=true | lanes=docs, runtime, source, rollback
-- `privacy.disable-location-consent-system` | success=true | status=ok
+- `system.graphics-tdr-limit-time` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
   card contract: ok | claim_boundary=true | lanes=docs, runtime, source, rollback
-- `privacy.disable-location-scripting` | success=true | status=ok
+- `system.kernel-thread-dpc-enable` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
   card contract: ok | claim_boundary=true | lanes=docs, runtime, source, rollback
-- `privacy.disable-location-services` | success=true | status=ok
+- `system.memory-clear-pagefile-at-shutdown` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
   card contract: ok | claim_boundary=true | lanes=docs, runtime, source, rollback

@@ -291,6 +291,7 @@ public sealed class CommandAllowlistSecurityTests
             CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers", "/v", "TdrLevel", "/t", "REG_DWORD", "/d", "3", "/f"),
             CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers", "/v", "TdrLimitCount", "/t", "REG_DWORD", "/d", "5", "/f"),
             CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers", "/v", "TdrLimitTime", "/t", "REG_DWORD", "/d", "60", "/f"),
+            CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel", "/v", "ThreadDpcEnable", "/t", "REG_DWORD", "/d", "1", "/f"),
             CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management", "/v", "ClearPageFileAtShutdown", "/t", "REG_DWORD", "/d", "1", "/f"),
             CreateRegRequest("add", @"HKLM\SOFTWARE\Microsoft\Windows\Dwm", "/v", "OverlayMinFPS", "/t", "REG_DWORD", "/d", "0", "/f"),
             CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Control", "/v", "RegistrySizeLimit", "/t", "REG_DWORD", "/d", "0", "/f"),
