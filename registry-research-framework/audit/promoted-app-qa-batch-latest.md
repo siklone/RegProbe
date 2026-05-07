@@ -1,43 +1,50 @@
 # Promoted App QA Batch
 
 - Status: PASS
-- Generated UTC: 2026-05-07T18:07:07Z
+- Generated UTC: 2026-05-07T18:09:47Z
 - Catalog candidates: 242
-- Selected candidates: 4
-- Planned apply-allowed candidates: 4
-- Live successes: 4
+- Selected candidates: 5
+- Planned apply-allowed candidates: 5
+- Live successes: 5
 - Live failures: 0
 
 ## Selected Candidates
 
-- `network.smb-require-dialect-3_1_1` | Require SMB Dialect 3.1.1 | Network
-  docs: `research/records/network.smb-require-dialect-3_1_1.review.json`
+- `privacy.disable-windows-tips` | Turn Off Windows Tips | Privacy
+  docs: `research/records/privacy.disable-windows-tips.review.json`
   rollback: default=true | previous=true
   card snapshot: claim_boundary=true | fields=TweakId, Name, Category, EvidenceClass, ResearchStatus, RollbackSnapshotState, HasClaimBoundary, WhatWeKnowSummary, WhatWeDoNotClaimSummary, ProofLanes | lanes=docs, runtime, source, rollback
-- `network.smb-require-signing-client` | SMB Client Signing Requirement | Network
-  docs: `research/records/network.smb-require-signing-client.json`
+- `privacy.hide-last-logged-in-user` | Display of the Last Signed-In Username | Privacy
+  docs: `research/records/privacy.hide-last-logged-in-user.json`
   rollback: default=true | previous=true
   card snapshot: claim_boundary=true | fields=TweakId, Name, Category, EvidenceClass, ResearchStatus, RollbackSnapshotState, HasClaimBoundary, WhatWeKnowSummary, WhatWeDoNotClaimSummary, ProofLanes | lanes=docs, runtime, source, rollback
-- `network.smb-require-signing-server` | SMB Server Signing Requirement | Network
-  docs: `research/records/network.smb-require-signing-server.json`
+- `privacy.hide-recommended-personalized-sites` | Start Personalized Site Recommendations | Privacy
+  docs: `research/records/privacy.hide-recommended-personalized-sites.json`
   rollback: default=true | previous=true
   card snapshot: claim_boundary=true | fields=TweakId, Name, Category, EvidenceClass, ResearchStatus, RollbackSnapshotState, HasClaimBoundary, WhatWeKnowSummary, WhatWeDoNotClaimSummary, ProofLanes | lanes=docs, runtime, source, rollback
-- `network.smb-set-cipher-suite-order` | SMB Cipher Suite Order | Network
-  docs: `research/records/network.smb-set-cipher-suite-order.review.json`
+- `privacy.hide-recommended-personalized-sites-user` | Start Personalized Site Recommendations (Current User) | Privacy
+  docs: `research/records/privacy.hide-recommended-personalized-sites-user.json`
+  rollback: default=true | previous=true
+  card snapshot: claim_boundary=true | fields=TweakId, Name, Category, EvidenceClass, ResearchStatus, RollbackSnapshotState, HasClaimBoundary, WhatWeKnowSummary, WhatWeDoNotClaimSummary, ProofLanes | lanes=docs, runtime, source, rollback
+- `privacy.hide-recommended-section` | Start Menu Recommended Section | Privacy
+  docs: `research/records/privacy.hide-recommended-section.json`
   rollback: default=true | previous=true
   card snapshot: claim_boundary=true | fields=TweakId, Name, Category, EvidenceClass, ResearchStatus, RollbackSnapshotState, HasClaimBoundary, WhatWeKnowSummary, WhatWeDoNotClaimSummary, ProofLanes | lanes=docs, runtime, source, rollback
 
 ## Live Results
 
-- `network.smb-require-dialect-3_1_1` | success=true | status=ok
+- `privacy.disable-windows-tips` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
   card contract: ok | claim_boundary=true | lanes=docs, runtime, source, rollback
-- `network.smb-require-signing-client` | success=true | status=ok
+- `privacy.hide-last-logged-in-user` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
   card contract: ok | claim_boundary=true | lanes=docs, runtime, source, rollback
-- `network.smb-require-signing-server` | success=true | status=ok
+- `privacy.hide-recommended-personalized-sites` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
   card contract: ok | claim_boundary=true | lanes=docs, runtime, source, rollback
-- `network.smb-set-cipher-suite-order` | success=true | status=ok
+- `privacy.hide-recommended-personalized-sites-user` | success=true | status=ok
+  summary: Apply/verify path completed and rollback restored the tweak.
+  card contract: ok | claim_boundary=true | lanes=docs, runtime, source, rollback
+- `privacy.hide-recommended-section` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
   card contract: ok | claim_boundary=true | lanes=docs, runtime, source, rollback

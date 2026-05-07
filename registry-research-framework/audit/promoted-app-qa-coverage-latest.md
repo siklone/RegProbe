@@ -1,11 +1,11 @@
 # Promoted App QA Coverage
 
-- Generated UTC: 2026-05-07T18:07:07Z
-- History entries: 81
+- Generated UTC: 2026-05-07T18:09:47Z
+- History entries: 82
 - Promoted app-QA candidates: 242
-- Covered: 225
-- Uncovered: 17
-- Coverage: 92.98%
+- Covered: 230
+- Uncovered: 12
+- Coverage: 95.04%
 
 ## Covered Categories
 
@@ -18,36 +18,31 @@
 - Performance: 3
 - Peripheral: 3
 - Power: 10
-- Privacy: 58
+- Privacy: 63
 - Security: 21
 - System: 46
 - Visibility: 21
 
 ## Uncovered Categories
 
-- Privacy: 9
+- Privacy: 4
 - System: 6
 - Visibility: 2
 
 ## Recommended Next Batches
 
-- Privacy: 5 uncovered cards | coverage 86.57%
-  command: `dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-windows-tips --id privacy.hide-last-logged-in-user --id privacy.hide-recommended-personalized-sites --id privacy.hide-recommended-personalized-sites-user --id privacy.hide-recommended-section`
-  live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-windows-tips --id privacy.hide-last-logged-in-user --id privacy.hide-recommended-personalized-sites --id privacy.hide-recommended-personalized-sites-user --id privacy.hide-recommended-section --run-kvm --json`
 - System: 5 uncovered cards | coverage 88.46%
   command: `dotnet run --project cli/cli.csproj -- research qa-batch --id system.services.disable-connected-user-experiences --id system.services.disable-print-notifications --id system.services.disable-print-spooler --id system.services.disable-windows-search --id system.verbose-status-messages`
   live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id system.services.disable-connected-user-experiences --id system.services.disable-print-notifications --id system.services.disable-print-spooler --id system.services.disable-windows-search --id system.verbose-status-messages --run-kvm --json`
 - Visibility: 2 uncovered cards | coverage 91.3%
   command: `dotnet run --project cli/cli.csproj -- research qa-batch --id visibility.disable-window-animations --id visibility.hide-people-bar`
   live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id visibility.disable-window-animations --id visibility.hide-people-bar --run-kvm --json`
+- Privacy: 4 uncovered cards | coverage 94.03%
+  command: `dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.hide-username-at-signin --id privacy.limit-diagnostic-log-collection --id privacy.limit-dump-collection --id privacy.troubleshooter-dont-run`
+  live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.hide-username-at-signin --id privacy.limit-diagnostic-log-collection --id privacy.limit-dump-collection --id privacy.troubleshooter-dont-run --run-kvm --json`
 
 ## Remaining Uncovered Sample
 
-- `privacy.disable-windows-tips` | Turn Off Windows Tips | Privacy
-- `privacy.hide-last-logged-in-user` | Display of the Last Signed-In Username | Privacy
-- `privacy.hide-recommended-personalized-sites` | Start Personalized Site Recommendations | Privacy
-- `privacy.hide-recommended-personalized-sites-user` | Start Personalized Site Recommendations (Current User) | Privacy
-- `privacy.hide-recommended-section` | Start Menu Recommended Section | Privacy
 - `privacy.hide-username-at-signin` | Display of Username During Sign-In | Privacy
 - `privacy.limit-diagnostic-log-collection` | Advanced Diagnostic Log Collection | Privacy
 - `privacy.limit-dump-collection` | Diagnostic Dump Collection | Privacy

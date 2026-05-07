@@ -1,12 +1,13 @@
 {
-  "generated_utc": "2026-05-07T18:07:07Z",
+  "generated_utc": "2026-05-07T18:09:47Z",
   "status": "PASS",
   "selection": {
     "requested_ids": [
-      "network.smb-require-dialect-3_1_1",
-      "network.smb-require-signing-client",
-      "network.smb-require-signing-server",
-      "network.smb-set-cipher-suite-order"
+      "privacy.disable-windows-tips",
+      "privacy.hide-last-logged-in-user",
+      "privacy.hide-recommended-personalized-sites",
+      "privacy.hide-recommended-personalized-sites-user",
+      "privacy.hide-recommended-section"
     ],
     "requested_categories": [],
     "limit_per_category": 1,
@@ -21,29 +22,29 @@
     "kvm_batch_runner": "scripts/vm-kvm/run-guest-app-tweak-qa-batch.py"
   },
   "catalog_candidate_count": 242,
-  "selected_candidate_count": 4,
+  "selected_candidate_count": 5,
   "errors": [],
   "candidates": [
     {
-      "tweak_id": "network.smb-require-dialect-3_1_1",
-      "qa_tweak_id": "network.smb-require-dialect-3_1_1",
-      "candidate_id": "network.smb-require-dialect-3_1_1",
-      "record_id": "network.smb-require-dialect-3_1_1",
-      "category": "Network",
-      "name": "Require SMB Dialect 3.1.1",
-      "documentation": "research/records/network.smb-require-dialect-3_1_1.review.json",
+      "tweak_id": "privacy.disable-windows-tips",
+      "qa_tweak_id": "privacy.disable-windows-tips",
+      "candidate_id": "privacy.disable-windows-tips",
+      "record_id": "privacy.disable-windows-tips",
+      "category": "Privacy",
+      "name": "Turn Off Windows Tips",
+      "documentation": "research/records/privacy.disable-windows-tips.review.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect network.smb-require-dialect-3_1_1",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.disable-windows-tips",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'network.smb-require-dialect-3_1_1' --qa-output 'C:\\Tools\\ValidationController\\smoke\\network.smb-require-dialect-3_1_1.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'network.smb-require-dialect-3_1_1' --qa-output 'C:\\Tools\\ValidationController\\smoke\\network.smb-require-dialect-3_1_1.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'network.smb-require-dialect-3_1_1' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\network.smb-require-dialect-3_1_1.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'network.smb-require-dialect-3_1_1' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\network.smb-require-dialect-3_1_1.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'network.smb-require-dialect-3_1_1'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-windows-tips' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-windows-tips.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-windows-tips' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-windows-tips.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-windows-tips' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-windows-tips.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-windows-tips' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-windows-tips.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.disable-windows-tips'"
       },
       "expected_report": {
         "success": true,
@@ -84,25 +85,25 @@
       }
     },
     {
-      "tweak_id": "network.smb-require-signing-client",
-      "qa_tweak_id": "network.smb-require-signing-client",
-      "candidate_id": "network.smb-require-signing-client",
-      "record_id": "network.smb-require-signing-client",
-      "category": "Network",
-      "name": "SMB Client Signing Requirement",
-      "documentation": "research/records/network.smb-require-signing-client.json",
+      "tweak_id": "privacy.hide-last-logged-in-user",
+      "qa_tweak_id": "privacy.hide-last-logged-in-user",
+      "candidate_id": "privacy.hide-last-logged-in-user",
+      "record_id": "privacy.hide-last-logged-in-user",
+      "category": "Privacy",
+      "name": "Display of the Last Signed-In Username",
+      "documentation": "research/records/privacy.hide-last-logged-in-user.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect network.smb-require-signing-client",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.hide-last-logged-in-user",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'network.smb-require-signing-client' --qa-output 'C:\\Tools\\ValidationController\\smoke\\network.smb-require-signing-client.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'network.smb-require-signing-client' --qa-output 'C:\\Tools\\ValidationController\\smoke\\network.smb-require-signing-client.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'network.smb-require-signing-client' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\network.smb-require-signing-client.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'network.smb-require-signing-client' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\network.smb-require-signing-client.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'network.smb-require-signing-client'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.hide-last-logged-in-user' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.hide-last-logged-in-user.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.hide-last-logged-in-user' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.hide-last-logged-in-user.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.hide-last-logged-in-user' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.hide-last-logged-in-user.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.hide-last-logged-in-user' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.hide-last-logged-in-user.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.hide-last-logged-in-user'"
       },
       "expected_report": {
         "success": true,
@@ -143,25 +144,25 @@
       }
     },
     {
-      "tweak_id": "network.smb-require-signing-server",
-      "qa_tweak_id": "network.smb-require-signing-server",
-      "candidate_id": "network.smb-require-signing-server",
-      "record_id": "network.smb-require-signing-server",
-      "category": "Network",
-      "name": "SMB Server Signing Requirement",
-      "documentation": "research/records/network.smb-require-signing-server.json",
+      "tweak_id": "privacy.hide-recommended-personalized-sites",
+      "qa_tweak_id": "privacy.hide-recommended-personalized-sites",
+      "candidate_id": "privacy.hide-recommended-personalized-sites",
+      "record_id": "privacy.hide-recommended-personalized-sites",
+      "category": "Privacy",
+      "name": "Start Personalized Site Recommendations",
+      "documentation": "research/records/privacy.hide-recommended-personalized-sites.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect network.smb-require-signing-server",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.hide-recommended-personalized-sites",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'network.smb-require-signing-server' --qa-output 'C:\\Tools\\ValidationController\\smoke\\network.smb-require-signing-server.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'network.smb-require-signing-server' --qa-output 'C:\\Tools\\ValidationController\\smoke\\network.smb-require-signing-server.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'network.smb-require-signing-server' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\network.smb-require-signing-server.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'network.smb-require-signing-server' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\network.smb-require-signing-server.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'network.smb-require-signing-server'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.hide-recommended-personalized-sites' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.hide-recommended-personalized-sites.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.hide-recommended-personalized-sites' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.hide-recommended-personalized-sites.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.hide-recommended-personalized-sites' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.hide-recommended-personalized-sites.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.hide-recommended-personalized-sites' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.hide-recommended-personalized-sites.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.hide-recommended-personalized-sites'"
       },
       "expected_report": {
         "success": true,
@@ -202,25 +203,84 @@
       }
     },
     {
-      "tweak_id": "network.smb-set-cipher-suite-order",
-      "qa_tweak_id": "network.smb-set-cipher-suite-order",
-      "candidate_id": "network.smb-set-cipher-suite-order",
-      "record_id": "network.smb-set-cipher-suite-order",
-      "category": "Network",
-      "name": "SMB Cipher Suite Order",
-      "documentation": "research/records/network.smb-set-cipher-suite-order.review.json",
+      "tweak_id": "privacy.hide-recommended-personalized-sites-user",
+      "qa_tweak_id": "privacy.hide-recommended-personalized-sites-user",
+      "candidate_id": "privacy.hide-recommended-personalized-sites-user",
+      "record_id": "privacy.hide-recommended-personalized-sites-user",
+      "category": "Privacy",
+      "name": "Start Personalized Site Recommendations (Current User)",
+      "documentation": "research/records/privacy.hide-recommended-personalized-sites-user.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect network.smb-set-cipher-suite-order",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.hide-recommended-personalized-sites-user",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'network.smb-set-cipher-suite-order' --qa-output 'C:\\Tools\\ValidationController\\smoke\\network.smb-set-cipher-suite-order.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'network.smb-set-cipher-suite-order' --qa-output 'C:\\Tools\\ValidationController\\smoke\\network.smb-set-cipher-suite-order.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'network.smb-set-cipher-suite-order' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\network.smb-set-cipher-suite-order.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'network.smb-set-cipher-suite-order' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\network.smb-set-cipher-suite-order.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'network.smb-set-cipher-suite-order'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.hide-recommended-personalized-sites-user' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.hide-recommended-personalized-sites-user.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.hide-recommended-personalized-sites-user' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.hide-recommended-personalized-sites-user.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.hide-recommended-personalized-sites-user' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.hide-recommended-personalized-sites-user.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.hide-recommended-personalized-sites-user' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.hide-recommended-personalized-sites-user.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.hide-recommended-personalized-sites-user'"
+      },
+      "expected_report": {
+        "success": true,
+        "status": "ok",
+        "rollback_requested": true,
+        "required_stages": [
+          "detect-before",
+          "apply",
+          "rollback",
+          "detect-after"
+        ],
+        "required_card_snapshot": {
+          "required_fields": [
+            "TweakId",
+            "Name",
+            "Category",
+            "EvidenceClass",
+            "ResearchStatus",
+            "RollbackSnapshotState",
+            "HasClaimBoundary",
+            "WhatWeKnowSummary",
+            "WhatWeDoNotClaimSummary",
+            "ProofLanes"
+          ],
+          "required_proof_lanes": [
+            "docs",
+            "runtime",
+            "source",
+            "rollback"
+          ],
+          "claim_boundary_required": true
+        },
+        "required_stage_assertions": [
+          "apply stage reports a successful apply story",
+          "rollback stage reports a successful rollback story",
+          "detect-after is present"
+        ]
+      }
+    },
+    {
+      "tweak_id": "privacy.hide-recommended-section",
+      "qa_tweak_id": "privacy.hide-recommended-section",
+      "candidate_id": "privacy.hide-recommended-section",
+      "record_id": "privacy.hide-recommended-section",
+      "category": "Privacy",
+      "name": "Start Menu Recommended Section",
+      "documentation": "research/records/privacy.hide-recommended-section.json",
+      "promotion_state": "promoted",
+      "apply_allowed": true,
+      "restore_default_supported": true,
+      "restore_previous_supported": true,
+      "commands": {
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.hide-recommended-section",
+        "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.hide-recommended-section' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.hide-recommended-section.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.hide-recommended-section' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.hide-recommended-section.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.hide-recommended-section' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.hide-recommended-section.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.hide-recommended-section' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.hide-recommended-section.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.hide-recommended-section'"
       },
       "expected_report": {
         "success": true,
@@ -263,7 +323,7 @@
   ],
   "run_results": [
     {
-      "tweak_id": "network.smb-require-dialect-3_1_1",
+      "tweak_id": "privacy.disable-windows-tips",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -300,19 +360,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "network.smb-require-dialect-3_1_1",
-        "TweakName": "Require SMB Dialect 3.1.1",
+        "TweakId": "privacy.disable-windows-tips",
+        "TweakName": "Turn Off Windows Tips",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "network.smb-require-dialect-3_1_1",
-          "Name": "Require SMB Dialect 3.1.1",
-          "Category": "Network",
-          "Description": "This setting forces both SMB client and SMB server components to use only SMB 3.1.1. It is a strict compatibility boundary and can quickly block older devices or software that do not support that dialect.",
-          "FriendlyDescription": "This setting forces both SMB client and SMB server components to use only SMB 3.1.1. It is a strict compatibility boundary and can quickly block older devices or software that do not support that dialect.",
-          "RegistryPath": "",
+          "TweakId": "privacy.disable-windows-tips",
+          "Name": "Turn Off Windows Tips",
+          "Category": "Privacy",
+          "Description": "Windows can show popups and onboarding tips that explain features and suggest ways to use the system. People often turn them off when they want a quieter desktop experience.",
+          "FriendlyDescription": "Windows can show popups and onboarding tips that explain features and suggest ways to use the system. People often turn them off when they want a quieter desktop experience.",
+          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableSoftLanding",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -320,15 +380,15 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: This setting forces both SMB client and SMB server components to use only SMB 3.1.1. It is a strict compatibility boundary and can quickly block older devices or software that do not support that dialect. Evidence: Local official ADMX and ADML files document the exact MinSmb2Dialect and MaxSmb2Dialect policy surfaces and official dialect enum values. The app now writes the documented LanmanWorkstation and LanmanServer policy keys directly with MinSmb2Dialect = 785 and... Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: Windows can show popups and onboarding tips that explain features and suggest ways to use the system. People often turn them off when they want a quieter desktop experience. Evidence: The provider now writes HKLM\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableSoftLanding = 1. The older HKCU ContentDeliveryManager value remains documented only as an observed historical mapping. Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "Local official ADMX and ADML files document the exact MinSmb2Dialect and MaxSmb2Dialect policy surfaces and official dialect enum values. The app now writes the documented LanmanWorkstation and LanmanServer policy keys directly with MinSmb2Dialect = 785 and...",
-              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/LanmanWorkstation.admx"
+              "Summary": "The provider now writes HKLM\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableSoftLanding = 1. The older HKCU ContentDeliveryManager value remains documented only as an observed historical mapping.",
+              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#allowwindowstips"
             },
             {
               "Key": "runtime",
@@ -359,8 +419,8 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Network (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\network\\network.md",
+              "Title": "Docs: Privacy (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\privacy\\privacy-verified.md",
               "Kind": "Docs"
             }
           ]
@@ -369,10 +429,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Detected 0 of 4 values (matches: 0, missing: 4).",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Tips turned off by policy'.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Unknown",
-            "TargetValue": "Multiple values",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Tips turned off by policy",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -381,8 +441,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 0 of 4 values (matches: 0, missing: 4).\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanServer\\MaxSmb2Dialect: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanServer\\MinSmb2Dialect: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanWorkstation\\MaxSmb2Dialect: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanWorkstation\\MinSmb2Dialect: missing",
-                "TimestampText": "11:07:11"
+                "Message": "Current values do not match a named option. Selected option is 'Tips turned off by policy'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableSoftLanding: missing -> 1",
+                "TimestampText": "11:09:51"
               },
               {
                 "Action": "Apply",
@@ -409,8 +469,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Multiple values",
-            "TargetValue": "Multiple values",
+            "CurrentValue": "Tips turned off by policy",
+            "TargetValue": "Tips turned off by policy",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -419,20 +479,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 0 of 4 values (matches: 0, missing: 4).\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanServer\\MaxSmb2Dialect: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanServer\\MinSmb2Dialect: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanWorkstation\\MaxSmb2Dialect: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanWorkstation\\MinSmb2Dialect: missing",
-                "TimestampText": "11:07:11"
+                "Message": "Current values do not match a named option. Selected option is 'Tips turned off by policy'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableSoftLanding: missing -> 1",
+                "TimestampText": "11:09:51"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Updated 4 values.",
-                "TimestampText": "11:07:14"
+                "Message": "Applied preset 'Tips turned off by policy'.",
+                "TimestampText": "11:09:54"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified desired values.",
-                "TimestampText": "11:07:14"
+                "Message": "Verified preset 'Tips turned off by policy'.",
+                "TimestampText": "11:09:54"
               },
               {
                 "Action": "Rollback",
@@ -447,8 +507,8 @@
             "AppliedStatus": "NotApplied",
             "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Multiple values",
-            "TargetValue": "Multiple values",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Tips turned off by policy",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -457,36 +517,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 0 of 4 values (matches: 0, missing: 4).\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanServer\\MaxSmb2Dialect: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanServer\\MinSmb2Dialect: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanWorkstation\\MaxSmb2Dialect: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanWorkstation\\MinSmb2Dialect: missing",
-                "TimestampText": "11:07:11"
+                "Message": "Current values do not match a named option. Selected option is 'Tips turned off by policy'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableSoftLanding: missing -> 1",
+                "TimestampText": "11:09:51"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Updated 4 values.",
-                "TimestampText": "11:07:14"
+                "Message": "Applied preset 'Tips turned off by policy'.",
+                "TimestampText": "11:09:54"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified desired values.",
-                "TimestampText": "11:07:14"
+                "Message": "Verified preset 'Tips turned off by policy'.",
+                "TimestampText": "11:09:54"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "11:07:14"
+                "TimestampText": "11:09:54"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Detected 0 of 4 values (matches: 0, missing: 4).",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Tips turned off by policy'.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Multiple values",
-            "TargetValue": "Multiple values",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Tips turned off by policy",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -495,40 +555,40 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 0 of 4 values (matches: 0, missing: 4).\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanServer\\MaxSmb2Dialect: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanServer\\MinSmb2Dialect: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanWorkstation\\MaxSmb2Dialect: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanWorkstation\\MinSmb2Dialect: missing",
-                "TimestampText": "11:07:14"
+                "Message": "Current values do not match a named option. Selected option is 'Tips turned off by policy'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableSoftLanding: missing -> 1",
+                "TimestampText": "11:09:54"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Updated 4 values.",
-                "TimestampText": "11:07:14"
+                "Message": "Applied preset 'Tips turned off by policy'.",
+                "TimestampText": "11:09:54"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified desired values.",
-                "TimestampText": "11:07:14"
+                "Message": "Verified preset 'Tips turned off by policy'.",
+                "TimestampText": "11:09:54"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "11:07:14"
+                "TimestampText": "11:09:54"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T18:07:11.6330137+00:00",
-        "CompletedAtUtc": "2026-05-07T18:07:14.837004+00:00"
+        "StartedAtUtc": "2026-05-07T18:09:51.8431964+00:00",
+        "CompletedAtUtc": "2026-05-07T18:09:55.0202312+00:00"
       },
-      "qa_tweak_id": "network.smb-require-dialect-3_1_1",
-      "candidate_id": "network.smb-require-dialect-3_1_1",
-      "card_name": "Require SMB Dialect 3.1.1",
-      "documentation": "research/records/network.smb-require-dialect-3_1_1.review.json"
+      "qa_tweak_id": "privacy.disable-windows-tips",
+      "candidate_id": "privacy.disable-windows-tips",
+      "card_name": "Turn Off Windows Tips",
+      "documentation": "research/records/privacy.disable-windows-tips.review.json"
     },
     {
-      "tweak_id": "network.smb-require-signing-client",
+      "tweak_id": "privacy.hide-last-logged-in-user",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -565,19 +625,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "network.smb-require-signing-client",
-        "TweakName": "SMB Client Signing Requirement",
+        "TweakId": "privacy.hide-last-logged-in-user",
+        "TweakName": "Display of the Last Signed-In Username",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "network.smb-require-signing-client",
-          "Name": "SMB Client Signing Requirement",
-          "Category": "Network",
-          "Description": "SMB signing helps Windows verify that network file-sharing traffic was not altered in transit. Requiring it makes the SMB client stricter when talking to servers.",
-          "FriendlyDescription": "SMB signing helps Windows verify that network file-sharing traffic was not altered in transit. Requiring it makes the SMB client stricter when talking to servers.",
-          "RegistryPath": "",
+          "TweakId": "privacy.hide-last-logged-in-user",
+          "Name": "Display of the Last Signed-In Username",
+          "Category": "Privacy",
+          "Description": "Windows can show the name of the last person who signed in on the sign-in screen. This setting decides whether that username is shown or hidden.",
+          "FriendlyDescription": "Windows can show the name of the last person who signed in on the sign-in screen. This setting decides whether that username is shown or hidden.",
+          "RegistryPath": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\DontDisplayLastUserName",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -585,15 +645,15 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: SMB signing helps Windows verify that network file-sharing traffic was not altered in transit. Requiring it makes the SMB client stricter when talking to servers. Evidence: Microsoft documents both client-side SMB signing registry values on the same LanManWorkstation runtime path the app writes. The article also notes that EnableSecuritySignature is ignored for SMB2+ and that SMB2.02 and later signing is controlled by being re... Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: Windows can show the name of the last person who signed in on the sign-in screen. This setting decides whether that username is shown or hidden. Evidence: The local official Windows security metadata maps the security option directly to Policies/System/DontDisplayLastUserName. evidence/files/external/c/Windows/inf/defltbase.inf.md also confirms the default value 0, and Microsoft documents the enabled behavior... Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "Microsoft documents both client-side SMB signing registry values on the same LanManWorkstation runtime path the app writes. The article also notes that EnableSecuritySignature is ignored for SMB2+ and that SMB2.02 and later signing is controlled by being re...",
-              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows-server/storage/file-server/smb-signing-overview"
+              "Summary": "The local official Windows security metadata maps the security option directly to Policies/System/DontDisplayLastUserName. evidence/files/external/c/Windows/inf/defltbase.inf.md also confirms the default value 0, and Microsoft documents the enabled behavior...",
+              "Source": "Validation proof source: evidence/files/external/c/Windows/inf/sceregvl.inf.md"
             },
             {
               "Key": "runtime",
@@ -624,8 +684,8 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Network (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\network\\network.md",
+              "Title": "Docs: Privacy (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\privacy\\privacy-verified.md",
               "Kind": "Docs"
             }
           ]
@@ -634,10 +694,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Detected 1 of 2 values (matches: 1, missing: 1).",
+            "StatusMessage": "Current option is 'Show the last signed-in username'. Selected option is 'Hide the last signed-in username'.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Unknown",
-            "TargetValue": "Multiple values",
+            "CurrentValue": "Show the last signed-in username",
+            "TargetValue": "Hide the last signed-in username",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -646,8 +706,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 1 of 2 values (matches: 1, missing: 1).\nEntries:\n- HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters\\EnableSecuritySignature: 1 -> 1\n- HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters\\RequireSecuritySignature: missing",
-                "TimestampText": "11:07:21"
+                "Message": "Current option is 'Show the last signed-in username'. Selected option is 'Hide the last signed-in username'.\nEntries:\n- HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\DontDisplayLastUserName: 0 -> 1",
+                "TimestampText": "11:10:01"
               },
               {
                 "Action": "Apply",
@@ -674,8 +734,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Multiple values",
-            "TargetValue": "Multiple values",
+            "CurrentValue": "Hide the last signed-in username",
+            "TargetValue": "Hide the last signed-in username",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -684,20 +744,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 1 of 2 values (matches: 1, missing: 1).\nEntries:\n- HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters\\EnableSecuritySignature: 1 -> 1\n- HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters\\RequireSecuritySignature: missing",
-                "TimestampText": "11:07:21"
+                "Message": "Current option is 'Show the last signed-in username'. Selected option is 'Hide the last signed-in username'.\nEntries:\n- HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\DontDisplayLastUserName: 0 -> 1",
+                "TimestampText": "11:10:01"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Updated 2 values.",
-                "TimestampText": "11:07:24"
+                "Message": "Applied preset 'Hide the last signed-in username'.",
+                "TimestampText": "11:10:03"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified desired values.",
-                "TimestampText": "11:07:24"
+                "Message": "Verified preset 'Hide the last signed-in username'.",
+                "TimestampText": "11:10:03"
               },
               {
                 "Action": "Rollback",
@@ -712,8 +772,8 @@
             "AppliedStatus": "NotApplied",
             "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Multiple values",
-            "TargetValue": "Multiple values",
+            "CurrentValue": "Show the last signed-in username",
+            "TargetValue": "Hide the last signed-in username",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -722,36 +782,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 1 of 2 values (matches: 1, missing: 1).\nEntries:\n- HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters\\EnableSecuritySignature: 1 -> 1\n- HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters\\RequireSecuritySignature: missing",
-                "TimestampText": "11:07:21"
+                "Message": "Current option is 'Show the last signed-in username'. Selected option is 'Hide the last signed-in username'.\nEntries:\n- HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\DontDisplayLastUserName: 0 -> 1",
+                "TimestampText": "11:10:01"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Updated 2 values.",
-                "TimestampText": "11:07:24"
+                "Message": "Applied preset 'Hide the last signed-in username'.",
+                "TimestampText": "11:10:03"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified desired values.",
-                "TimestampText": "11:07:24"
+                "Message": "Verified preset 'Hide the last signed-in username'.",
+                "TimestampText": "11:10:03"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "11:07:24"
+                "TimestampText": "11:10:04"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Detected 1 of 2 values (matches: 1, missing: 1).",
+            "StatusMessage": "Current option is 'Show the last signed-in username'. Selected option is 'Hide the last signed-in username'.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Multiple values",
-            "TargetValue": "Multiple values",
+            "CurrentValue": "Show the last signed-in username",
+            "TargetValue": "Hide the last signed-in username",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -760,40 +820,40 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 1 of 2 values (matches: 1, missing: 1).\nEntries:\n- HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters\\EnableSecuritySignature: 1 -> 1\n- HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters\\RequireSecuritySignature: missing",
-                "TimestampText": "11:07:24"
+                "Message": "Current option is 'Show the last signed-in username'. Selected option is 'Hide the last signed-in username'.\nEntries:\n- HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\DontDisplayLastUserName: 0 -> 1",
+                "TimestampText": "11:10:04"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Updated 2 values.",
-                "TimestampText": "11:07:24"
+                "Message": "Applied preset 'Hide the last signed-in username'.",
+                "TimestampText": "11:10:03"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified desired values.",
-                "TimestampText": "11:07:24"
+                "Message": "Verified preset 'Hide the last signed-in username'.",
+                "TimestampText": "11:10:03"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "11:07:24"
+                "TimestampText": "11:10:04"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T18:07:21.2775723+00:00",
-        "CompletedAtUtc": "2026-05-07T18:07:24.4148234+00:00"
+        "StartedAtUtc": "2026-05-07T18:10:01.1279619+00:00",
+        "CompletedAtUtc": "2026-05-07T18:10:04.1974887+00:00"
       },
-      "qa_tweak_id": "network.smb-require-signing-client",
-      "candidate_id": "network.smb-require-signing-client",
-      "card_name": "SMB Client Signing Requirement",
-      "documentation": "research/records/network.smb-require-signing-client.json"
+      "qa_tweak_id": "privacy.hide-last-logged-in-user",
+      "candidate_id": "privacy.hide-last-logged-in-user",
+      "card_name": "Display of the Last Signed-In Username",
+      "documentation": "research/records/privacy.hide-last-logged-in-user.json"
     },
     {
-      "tweak_id": "network.smb-require-signing-server",
+      "tweak_id": "privacy.hide-recommended-personalized-sites",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -830,19 +890,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "network.smb-require-signing-server",
-        "TweakName": "SMB Server Signing Requirement",
+        "TweakId": "privacy.hide-recommended-personalized-sites",
+        "TweakName": "Start Personalized Site Recommendations",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "network.smb-require-signing-server",
-          "Name": "SMB Server Signing Requirement",
-          "Category": "Network",
-          "Description": "SMB signing helps Windows verify that file-sharing traffic was not tampered with. Requiring it on the server side makes the machine stricter about inbound SMB connections.",
-          "FriendlyDescription": "SMB signing helps Windows verify that file-sharing traffic was not tampered with. Requiring it on the server side makes the machine stricter about inbound SMB connections.",
-          "RegistryPath": "",
+          "TweakId": "privacy.hide-recommended-personalized-sites",
+          "Name": "Start Personalized Site Recommendations",
+          "Category": "Privacy",
+          "Description": "Windows 11 Start can surface personalized website suggestions. This device policy hides those recommendations for everyone on the machine.",
+          "FriendlyDescription": "Windows 11 Start can surface personalized website suggestions. This device policy hides those recommendations for everyone on the machine.",
+          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer\\HideRecommendedPersonalizedSites",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -850,15 +910,15 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: SMB signing helps Windows verify that file-sharing traffic was not tampered with. Requiring it on the server side makes the machine stricter about inbound SMB connections. Evidence: Microsoft documents the exact LanManServer runtime path used by the app for RequireSecuritySignature and explicitly explains the modern SMB2+ semantics of EnableSecuritySignature on the same signing surface. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: Windows 11 Start can surface personalized website suggestions. This device policy hides those recommendations for everyone on the machine. Evidence: The local official Microsoft ADMX file names the same Explorer policy key and HideRecommendedPersonalizedSites value used by the app. The official Start Policy CSP provides the 0/1 shown-versus-hidden semantics for the same policy. Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "Microsoft documents the exact LanManServer runtime path used by the app for RequireSecuritySignature and explicitly explains the modern SMB2+ semantics of EnableSecuritySignature on the same signing surface.",
-              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows-server/storage/file-server/smb-signing-overview"
+              "Summary": "The local official Microsoft ADMX file names the same Explorer policy key and HideRecommendedPersonalizedSites value used by the app. The official Start Policy CSP provides the 0/1 shown-versus-hidden semantics for the same policy.",
+              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/StartMenu.admx"
             },
             {
               "Key": "runtime",
@@ -889,8 +949,8 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Network (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\network\\network.md",
+              "Title": "Docs: Privacy (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\privacy\\privacy-verified.md",
               "Kind": "Docs"
             }
           ]
@@ -899,10 +959,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Detected 1 of 2 values (matches: 0, missing: 1).",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Personalized sites hidden'.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Unknown",
-            "TargetValue": "Multiple values",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Personalized sites hidden",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -911,8 +971,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 1 of 2 values (matches: 0, missing: 1).\nEntries:\n- HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters\\EnableSecuritySignature: 0 -> 1\n- HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters\\RequireSecuritySignature: missing",
-                "TimestampText": "11:07:30"
+                "Message": "Current values do not match a named option. Selected option is 'Personalized sites hidden'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer\\HideRecommendedPersonalizedSites: missing -> 1",
+                "TimestampText": "11:10:10"
               },
               {
                 "Action": "Apply",
@@ -939,8 +999,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Multiple values",
-            "TargetValue": "Multiple values",
+            "CurrentValue": "Personalized sites hidden",
+            "TargetValue": "Personalized sites hidden",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -949,20 +1009,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 1 of 2 values (matches: 0, missing: 1).\nEntries:\n- HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters\\EnableSecuritySignature: 0 -> 1\n- HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters\\RequireSecuritySignature: missing",
-                "TimestampText": "11:07:30"
+                "Message": "Current values do not match a named option. Selected option is 'Personalized sites hidden'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer\\HideRecommendedPersonalizedSites: missing -> 1",
+                "TimestampText": "11:10:10"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Updated 2 values.",
-                "TimestampText": "11:07:33"
+                "Message": "Applied preset 'Personalized sites hidden'.",
+                "TimestampText": "11:10:13"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified desired values.",
-                "TimestampText": "11:07:33"
+                "Message": "Verified preset 'Personalized sites hidden'.",
+                "TimestampText": "11:10:13"
               },
               {
                 "Action": "Rollback",
@@ -977,8 +1037,8 @@
             "AppliedStatus": "NotApplied",
             "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Multiple values",
-            "TargetValue": "Multiple values",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Personalized sites hidden",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -987,36 +1047,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 1 of 2 values (matches: 0, missing: 1).\nEntries:\n- HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters\\EnableSecuritySignature: 0 -> 1\n- HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters\\RequireSecuritySignature: missing",
-                "TimestampText": "11:07:30"
+                "Message": "Current values do not match a named option. Selected option is 'Personalized sites hidden'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer\\HideRecommendedPersonalizedSites: missing -> 1",
+                "TimestampText": "11:10:10"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Updated 2 values.",
-                "TimestampText": "11:07:33"
+                "Message": "Applied preset 'Personalized sites hidden'.",
+                "TimestampText": "11:10:13"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified desired values.",
-                "TimestampText": "11:07:33"
+                "Message": "Verified preset 'Personalized sites hidden'.",
+                "TimestampText": "11:10:13"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "11:07:33"
+                "TimestampText": "11:10:13"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Detected 1 of 2 values (matches: 0, missing: 1).",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Personalized sites hidden'.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Multiple values",
-            "TargetValue": "Multiple values",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Personalized sites hidden",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1025,46 +1085,46 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 1 of 2 values (matches: 0, missing: 1).\nEntries:\n- HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters\\EnableSecuritySignature: 0 -> 1\n- HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters\\RequireSecuritySignature: missing",
-                "TimestampText": "11:07:34"
+                "Message": "Current values do not match a named option. Selected option is 'Personalized sites hidden'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer\\HideRecommendedPersonalizedSites: missing -> 1",
+                "TimestampText": "11:10:13"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Updated 2 values.",
-                "TimestampText": "11:07:33"
+                "Message": "Applied preset 'Personalized sites hidden'.",
+                "TimestampText": "11:10:13"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified desired values.",
-                "TimestampText": "11:07:33"
+                "Message": "Verified preset 'Personalized sites hidden'.",
+                "TimestampText": "11:10:13"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "11:07:33"
+                "TimestampText": "11:10:13"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T18:07:30.9278373+00:00",
-        "CompletedAtUtc": "2026-05-07T18:07:34.1351473+00:00"
+        "StartedAtUtc": "2026-05-07T18:10:10.4871102+00:00",
+        "CompletedAtUtc": "2026-05-07T18:10:13.6062421+00:00"
       },
-      "qa_tweak_id": "network.smb-require-signing-server",
-      "candidate_id": "network.smb-require-signing-server",
-      "card_name": "SMB Server Signing Requirement",
-      "documentation": "research/records/network.smb-require-signing-server.json"
+      "qa_tweak_id": "privacy.hide-recommended-personalized-sites",
+      "candidate_id": "privacy.hide-recommended-personalized-sites",
+      "card_name": "Start Personalized Site Recommendations",
+      "documentation": "research/records/privacy.hide-recommended-personalized-sites.json"
     },
     {
-      "tweak_id": "network.smb-set-cipher-suite-order",
+      "tweak_id": "privacy.hide-recommended-personalized-sites-user",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
-      "report_source": "guest-file",
+      "report_source": "stdout",
       "report_parse_error": null,
-      "report_fetch_status": "ok",
+      "report_fetch_status": null,
       "report_app_success": true,
       "report_success": true,
       "report_status": "ok",
@@ -1095,19 +1155,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "network.smb-set-cipher-suite-order",
-        "TweakName": "SMB Cipher Suite Order",
+        "TweakId": "privacy.hide-recommended-personalized-sites-user",
+        "TweakName": "Start Personalized Site Recommendations (Current User)",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "network.smb-set-cipher-suite-order",
-          "Name": "SMB Cipher Suite Order",
-          "Category": "Network",
-          "Description": "This setting controls which SMB encryption cipher suites are preferred and in what order. It matters mostly for advanced SMB hardening or specific compliance requirements.",
-          "FriendlyDescription": "This setting controls which SMB encryption cipher suites are preferred and in what order. It matters mostly for advanced SMB hardening or specific compliance requirements.",
-          "RegistryPath": "",
+          "TweakId": "privacy.hide-recommended-personalized-sites-user",
+          "Name": "Start Personalized Site Recommendations (Current User)",
+          "Category": "Privacy",
+          "Description": "Windows 11 Start can surface personalized website suggestions. This user policy hides those recommendations just for the current account.",
+          "FriendlyDescription": "Windows 11 Start can surface personalized website suggestions. This user policy hides those recommendations just for the current account.",
+          "RegistryPath": "HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer\\HideRecommendedPersonalizedSites",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -1115,15 +1175,15 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: This setting controls which SMB encryption cipher suites are preferred and in what order. It matters mostly for advanced SMB hardening or specific compliance requirements. Evidence: Local official Microsoft ADMX/ADML files document CipherSuiteOrder under the LanmanWorkstation and LanmanServer policy keys as REG_MULTI_SZ multi-text policy values, and the app now writes those documented policy keys directly. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: Windows 11 Start can surface personalized website suggestions. This user policy hides those recommendations just for the current account. Evidence: The local official Microsoft ADMX file names the same Explorer policy key and HideRecommendedPersonalizedSites value used by the app. Because the policy is class=\"Both\", the same surface is valid for HKCU as well as HKLM. The official Start Policy CSP provi... Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "Local official Microsoft ADMX/ADML files document CipherSuiteOrder under the LanmanWorkstation and LanmanServer policy keys as REG_MULTI_SZ multi-text policy values, and the app now writes those documented policy keys directly.",
-              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/LanmanWorkstation.admx"
+              "Summary": "The local official Microsoft ADMX file names the same Explorer policy key and HideRecommendedPersonalizedSites value used by the app. Because the policy is class=\"Both\", the same surface is valid for HKCU as well as HKLM. The official Start Policy CSP provi...",
+              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/StartMenu.admx"
             },
             {
               "Key": "runtime",
@@ -1154,8 +1214,8 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Network (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\network\\network.md",
+              "Title": "Docs: Privacy (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\privacy\\privacy-verified.md",
               "Kind": "Docs"
             }
           ]
@@ -1164,10 +1224,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Detected 0 of 2 values (matches: 0, missing: 2).",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Personalized sites hidden'.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Unknown",
-            "TargetValue": "Multiple values",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Personalized sites hidden",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -1176,8 +1236,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 0 of 2 values (matches: 0, missing: 2).\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanServer\\CipherSuiteOrder: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanWorkstation\\CipherSuiteOrder: missing",
-                "TimestampText": "11:07:39"
+                "Message": "Current values do not match a named option. Selected option is 'Personalized sites hidden'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer\\HideRecommendedPersonalizedSites: missing -> 1",
+                "TimestampText": "11:10:19"
               },
               {
                 "Action": "Apply",
@@ -1204,8 +1264,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Multiple values",
-            "TargetValue": "Multiple values",
+            "CurrentValue": "Personalized sites hidden",
+            "TargetValue": "Personalized sites hidden",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1214,20 +1274,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 0 of 2 values (matches: 0, missing: 2).\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanServer\\CipherSuiteOrder: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanWorkstation\\CipherSuiteOrder: missing",
-                "TimestampText": "11:07:39"
+                "Message": "Current values do not match a named option. Selected option is 'Personalized sites hidden'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer\\HideRecommendedPersonalizedSites: missing -> 1",
+                "TimestampText": "11:10:20"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Updated 2 values.",
-                "TimestampText": "11:07:42"
+                "Message": "Applied preset 'Personalized sites hidden'.",
+                "TimestampText": "11:10:20"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified desired values.",
-                "TimestampText": "11:07:42"
+                "Message": "Verified preset 'Personalized sites hidden'.",
+                "TimestampText": "11:10:20"
               },
               {
                 "Action": "Rollback",
@@ -1242,8 +1302,8 @@
             "AppliedStatus": "NotApplied",
             "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Multiple values",
-            "TargetValue": "Multiple values",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Personalized sites hidden",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1252,36 +1312,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 0 of 2 values (matches: 0, missing: 2).\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanServer\\CipherSuiteOrder: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanWorkstation\\CipherSuiteOrder: missing",
-                "TimestampText": "11:07:39"
+                "Message": "Current values do not match a named option. Selected option is 'Personalized sites hidden'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer\\HideRecommendedPersonalizedSites: missing -> 1",
+                "TimestampText": "11:10:20"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Updated 2 values.",
-                "TimestampText": "11:07:42"
+                "Message": "Applied preset 'Personalized sites hidden'.",
+                "TimestampText": "11:10:20"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified desired values.",
-                "TimestampText": "11:07:42"
+                "Message": "Verified preset 'Personalized sites hidden'.",
+                "TimestampText": "11:10:20"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "11:07:42"
+                "TimestampText": "11:10:20"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Detected 0 of 2 values (matches: 0, missing: 2).",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Personalized sites hidden'.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Multiple values",
-            "TargetValue": "Multiple values",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Personalized sites hidden",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1290,46 +1350,311 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Detected 0 of 2 values (matches: 0, missing: 2).\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanServer\\CipherSuiteOrder: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\LanmanWorkstation\\CipherSuiteOrder: missing",
-                "TimestampText": "11:07:42"
+                "Message": "Current values do not match a named option. Selected option is 'Personalized sites hidden'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer\\HideRecommendedPersonalizedSites: missing -> 1",
+                "TimestampText": "11:10:20"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Updated 2 values.",
-                "TimestampText": "11:07:42"
+                "Message": "Applied preset 'Personalized sites hidden'.",
+                "TimestampText": "11:10:20"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified desired values.",
-                "TimestampText": "11:07:42"
+                "Message": "Verified preset 'Personalized sites hidden'.",
+                "TimestampText": "11:10:20"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "11:07:42"
+                "TimestampText": "11:10:20"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T18:07:39.657178+00:00",
-        "CompletedAtUtc": "2026-05-07T18:07:42.7790674+00:00"
+        "StartedAtUtc": "2026-05-07T18:10:19.8846914+00:00",
+        "CompletedAtUtc": "2026-05-07T18:10:20.1826088+00:00"
       },
-      "qa_tweak_id": "network.smb-set-cipher-suite-order",
-      "candidate_id": "network.smb-set-cipher-suite-order",
-      "card_name": "SMB Cipher Suite Order",
-      "documentation": "research/records/network.smb-set-cipher-suite-order.review.json"
+      "qa_tweak_id": "privacy.hide-recommended-personalized-sites-user",
+      "candidate_id": "privacy.hide-recommended-personalized-sites-user",
+      "card_name": "Start Personalized Site Recommendations (Current User)",
+      "documentation": "research/records/privacy.hide-recommended-personalized-sites-user.json"
+    },
+    {
+      "tweak_id": "privacy.hide-recommended-section",
+      "host_exit": 0,
+      "execution_exit": 0,
+      "payload_status": "completed",
+      "report_source": "stdout",
+      "report_parse_error": null,
+      "report_fetch_status": null,
+      "report_app_success": true,
+      "report_success": true,
+      "report_status": "ok",
+      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
+      "report_contract_status": "ok",
+      "report_contract_summary": "QA card snapshot contract passed.",
+      "report_contract_failures": [],
+      "report_card_present": true,
+      "report_card_has_claim_boundary": true,
+      "report_card_present_fields": [
+        "TweakId",
+        "Name",
+        "Category",
+        "EvidenceClass",
+        "ResearchStatus",
+        "RollbackSnapshotState",
+        "HasClaimBoundary",
+        "WhatWeKnowSummary",
+        "WhatWeDoNotClaimSummary",
+        "ProofLanes"
+      ],
+      "report_card_missing_fields": [],
+      "report_card_proof_lanes": [
+        "docs",
+        "runtime",
+        "source",
+        "rollback"
+      ],
+      "report_card_missing_proof_lanes": [],
+      "report": {
+        "TweakId": "privacy.hide-recommended-section",
+        "TweakName": "Start Menu Recommended Section",
+        "Success": true,
+        "Status": "ok",
+        "Summary": "Apply/verify path completed and rollback restored the tweak.",
+        "RollbackRequested": true,
+        "Card": {
+          "TweakId": "privacy.hide-recommended-section",
+          "Name": "Start Menu Recommended Section",
+          "Category": "Privacy",
+          "Description": "Windows 11 Start can show a Recommended section with suggested apps and files. This policy lets the device hide that section for everyone.",
+          "FriendlyDescription": "Windows 11 Start can show a Recommended section with suggested apps and files. This policy lets the device hide that section for everyone.",
+          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer\\HideRecommendedSection",
+          "EvidenceClass": "A",
+          "EvidenceClassTitle": "Cross-Layer Verified",
+          "ResearchStatus": "PROMOTED",
+          "IsMutationAllowed": true,
+          "RollbackSnapshotState": "ready",
+          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
+          "HasClaimBoundary": true,
+          "WhatWeKnowSummary": "Claim: Windows 11 Start can show a Recommended section with suggested apps and files. This policy lets the device hide that section for everyone. Evidence: The official Start Policy CSP documents the exact Explorer policy key, value name, and 0/1 semantics. The local StartMenu.admx file confirms the same Both-scope policy surface for Windows 11 22H2 and later. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
+          "ProofLanes": [
+            {
+              "Key": "docs",
+              "Label": "DOCS",
+              "State": "ready",
+              "Summary": "The official Start Policy CSP documents the exact Explorer policy key, value name, and 0/1 semantics. The local StartMenu.admx file confirms the same Both-scope policy surface for Windows 11 22H2 and later.",
+              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-start"
+            },
+            {
+              "Key": "runtime",
+              "Label": "RUNTIME",
+              "State": "ready",
+              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+              "Source": ""
+            },
+            {
+              "Key": "source",
+              "Label": "SOURCE",
+              "State": "ready",
+              "Summary": "No upstream nohuto source link is attached to this record.",
+              "Source": ""
+            },
+            {
+              "Key": "rollback",
+              "Label": "ROLLBACK",
+              "State": "ready",
+              "Summary": "Rollback: Verified via record-restore-story.",
+              "Source": "record-restore-story"
+            }
+          ],
+          "ReferenceLinks": [
+            {
+              "Title": "Docs: Details (missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
+              "Kind": "Details"
+            },
+            {
+              "Title": "Docs: Privacy (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\privacy\\privacy-verified.md",
+              "Kind": "Docs"
+            }
+          ]
+        },
+        "Stages": [
+          {
+            "Stage": "detect-before",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Recommended section hidden'.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Recommended section hidden",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": false,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Recommended section hidden'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer\\HideRecommendedSection: missing -> 1",
+                "TimestampText": "11:10:26"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "apply",
+            "AppliedStatus": "Applied",
+            "StatusMessage": "Run completed.",
+            "OutcomeSummary": "Apply - Success",
+            "CurrentValue": "Recommended section hidden",
+            "TargetValue": "Recommended section hidden",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Recommended section hidden'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer\\HideRecommendedSection: missing -> 1",
+                "TimestampText": "11:10:26"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Recommended section hidden'.",
+                "TimestampText": "11:10:29"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Recommended section hidden'.",
+                "TimestampText": "11:10:29"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Not required",
+                "Message": "Step not executed.",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "rollback",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Rolled back registry values.",
+            "OutcomeSummary": "Rollback - Rolled Back",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Recommended section hidden",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Recommended section hidden'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer\\HideRecommendedSection: missing -> 1",
+                "TimestampText": "11:10:26"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Recommended section hidden'.",
+                "TimestampText": "11:10:29"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Recommended section hidden'.",
+                "TimestampText": "11:10:29"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "11:10:29"
+              }
+            ]
+          },
+          {
+            "Stage": "detect-after",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Recommended section hidden'.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Recommended section hidden",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Recommended section hidden'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\Explorer\\HideRecommendedSection: missing -> 1",
+                "TimestampText": "11:10:29"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Recommended section hidden'.",
+                "TimestampText": "11:10:29"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Recommended section hidden'.",
+                "TimestampText": "11:10:29"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "11:10:29"
+              }
+            ]
+          }
+        ],
+        "StartedAtUtc": "2026-05-07T18:10:26.2623365+00:00",
+        "CompletedAtUtc": "2026-05-07T18:10:29.4440617+00:00"
+      },
+      "qa_tweak_id": "privacy.hide-recommended-section",
+      "candidate_id": "privacy.hide-recommended-section",
+      "card_name": "Start Menu Recommended Section",
+      "documentation": "research/records/privacy.hide-recommended-section.json"
     }
   ],
   "summary": {
-    "planned_count": 4,
-    "planned_apply_allowed_count": 4,
-    "live_success_count": 4,
+    "planned_count": 5,
+    "planned_apply_allowed_count": 5,
+    "live_success_count": 5,
     "live_failure_count": 0,
     "categories": [
-      "Network"
+      "Privacy"
     ]
   }
 }
