@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-07T09:15:18.2495192Z",
+  "record_id": "network.smb-encrypt-data",
+  "run_id": "network-smb-encrypt-data-etw-qga-unblock-20260507",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "registry_path": "HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters",
+  "value_name": "EncryptData",
+  "attempt_status": "qga_unblocked_ingest_ok",
+  "assessment": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and a normalized bundle with 5130 registry events and 1190 caller-stack events. The bundle contains an exact RegQueryValue event for HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters / EncryptData from the helper probe, returning 0xC0000034 on the clean baseline.",
+  "target_observation": {
+    "exact_value_query": true,
+    "operation": "RegQueryValue",
+    "representative_status": "0xC0000034",
+    "event_count": 5130,
+    "caller_stack_event_count": 1190,
+    "target_key_event_count": 8,
+    "target_value_event_count": 1,
+    "target_command_event_count": 2,
+    "launch_transport": "qga"
+  },
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/network-smb-encrypt-data-etw-qga-unblock-20260507/network-smb-encrypt-data-etw-qga-unblock-20260507-summary.json",
+      "sha256": "fb5dd7b6ad139e719f02f718e3d07931c36fa87d373c3dba8359171aa88d97d8",
+      "size": 7537,
+      "collected_utc": "2026-05-07T09:15:18.2495192Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/network-smb-encrypt-data-etw-qga-unblock-20260507/normalized-registry-bundle.json",
+      "sha256": "e0f8b23ada10c9abb64c871792ca6171a44a2af30ee172671df2df14eb5a1bf3",
+      "size": 6517337,
+      "collected_utc": "2026-05-07T09:15:18.2495192Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/network-smb-encrypt-data-etw-qga-unblock-20260507/network-smb-encrypt-data-etw-qga-unblock-20260507.etl",
+      "sha256": "d819187a19ed1061d9cddd37c21bfb10a4c1c11c17b01be6b89bc10282b40322",
+      "size": 12582912,
+      "collected_utc": "2026-05-07T09:15:18.2495192Z"
+    }
+  ]
+}

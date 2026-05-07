@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-07T09:00:53.397468Z",
+  "generated_utc": "2026-05-07T09:29:19.652752Z",
   "source_index": "research/evidence-index.json",
   "summary": {
     "total_records": 356,
@@ -21,7 +21,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-05-07T09:00:52.221108Z",
+      "generated_utc": "2026-05-07T09:29:18.711595Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -8462,8 +8462,8 @@
         }
       },
       "source_file": "research/records/security.disable-vbs.json",
-      "source_file_sha256": "f0d770578cb39c26505b48f5aaf6d5cc80de8ffea1d11413fddc5796cc35a251",
-      "source_file_size_bytes": 19165,
+      "source_file_sha256": "1252047227f5ef0f3dc3738e7003249d95e2a6c6cc0856f32c52546652303645",
+      "source_file_size_bytes": 20607,
       "name": "Virtualization Based Security Policy Bundle",
       "category": "Security",
       "area": "Registry Policy Bundle",
@@ -8838,6 +8838,21 @@
           "strength": "low",
           "supports": [
             "behavior",
+            "version-scope"
+          ],
+          "origin": "unspecified"
+        },
+        {
+          "evidence_id": "vm-security.disable-vbs-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk runtime receipt for EnableVirtualizationBasedSecurity",
+          "location": "evidence/captures/security-disable-vbs-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/security-disable-vbs-etw-qga-unblock-20260507/security-disable-vbs-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/security-disable-vbs-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/security-disable-vbs-etw-qga-unblock-20260507/security-disable-vbs-etw-qga-unblock-20260507.etl",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4396 registry events with 525 caller-stack events. The QGA-launched helper targeted `HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\DeviceGuard` / `EnableVirtualizationBasedSecurity` and the bundle contains target-key activity, but no exact `EnableVirtualizationBasedSecurity` RegQueryValue event was observed on the clean baseline.",
+          "strength": "medium",
+          "supports": [
+            "runtime-observation",
+            "tooling-fix",
+            "path",
             "version-scope"
           ],
           "origin": "unspecified"
@@ -49315,8 +49330,8 @@
         }
       },
       "source_file": "research/records/network.smb-encrypt-data.json",
-      "source_file_sha256": "01377541590ee7057cdf5e708e6510875d004c3a77b550450d570bea9ed67a42",
-      "source_file_size_bytes": 12586,
+      "source_file_sha256": "9f025521fe7e22b3269bdfbce46e9a73e6883b1d0c8f38a198e05621169bde17",
+      "source_file_size_bytes": 13926,
       "name": "SMB Server Encryption Requirement",
       "category": "Network",
       "area": "Registry Security Baseline",
@@ -49505,6 +49520,22 @@
           "strength": "low",
           "supports": [
             "behavior",
+            "version-scope"
+          ],
+          "origin": "unspecified"
+        },
+        {
+          "evidence_id": "vm-network.smb-encrypt-data-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk runtime receipt for EncryptData",
+          "location": "evidence/captures/network-smb-encrypt-data-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/network-smb-encrypt-data-etw-qga-unblock-20260507/network-smb-encrypt-data-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/network-smb-encrypt-data-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/network-smb-encrypt-data-etw-qga-unblock-20260507/network-smb-encrypt-data-etw-qga-unblock-20260507.etl",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 5130 registry events with 1190 caller-stack events. The bundle contains an exact helper-triggered `RegQueryValue` for `HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters` / `EncryptData`, returning `0xC0000034` on the clean baseline.",
+          "strength": "high",
+          "supports": [
+            "runtime-observation",
+            "tooling-fix",
+            "path",
+            "value",
             "version-scope"
           ],
           "origin": "unspecified"
@@ -70969,8 +71000,8 @@
         }
       },
       "source_file": "research/records/privacy.disable-find-my-device.json",
-      "source_file_sha256": "95170645f0ff239fb7c3537dd961bfd3391a4c31e23af9ff12780cf9b00fe3d8",
-      "source_file_size_bytes": 14235,
+      "source_file_sha256": "08cecfffdc5124e8f52bf77fb6dc624f035a545d2453f3b49b9bd0ecd4642acc",
+      "source_file_size_bytes": 15616,
       "name": "Find My Device",
       "category": "Privacy",
       "area": "Registry Policy",
@@ -71216,6 +71247,22 @@
           "strength": "low",
           "supports": [
             "behavior",
+            "version-scope"
+          ],
+          "origin": "unspecified"
+        },
+        {
+          "evidence_id": "vm-privacy.disable-find-my-device-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk runtime receipt for AllowFindMyDevice",
+          "location": "evidence/captures/privacy-disable-find-my-device-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/privacy-disable-find-my-device-etw-qga-unblock-20260507/privacy-disable-find-my-device-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/privacy-disable-find-my-device-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/privacy-disable-find-my-device-etw-qga-unblock-20260507/privacy-disable-find-my-device-etw-qga-unblock-20260507.etl",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4531 registry events with 571 caller-stack events. The bundle contains an exact helper-triggered `RegQueryValue` for `HKLM\\SOFTWARE\\Policies\\Microsoft\\FindMyDevice` / `AllowFindMyDevice`, returning `0xC0000034` on the clean baseline.",
+          "strength": "high",
+          "supports": [
+            "runtime-observation",
+            "tooling-fix",
+            "path",
+            "value",
             "version-scope"
           ],
           "origin": "unspecified"
@@ -76510,8 +76557,8 @@
         }
       },
       "source_file": "research/records/privacy.disable-resume.json",
-      "source_file_sha256": "b86d728758c26405afb12e5d7d2f69657c65a3560ecdbfcfc7feb4d70d920cfe",
-      "source_file_size_bytes": 13844,
+      "source_file_sha256": "808a20a34ce7bca474e90af73047b48e2d1f347fcab734da1e97dd86ed602600",
+      "source_file_size_bytes": 15255,
       "name": "Disable Resume for Current User",
       "category": "Privacy",
       "area": "Current-user Resume Setting",
@@ -76725,6 +76772,21 @@
           "strength": "low",
           "supports": [
             "behavior",
+            "version-scope"
+          ],
+          "origin": "unspecified"
+        },
+        {
+          "evidence_id": "vm-privacy.disable-resume-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk runtime receipt for IsResumeAllowed",
+          "location": "evidence/captures/privacy-disable-resume-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/privacy-disable-resume-etw-qga-unblock-20260507/privacy-disable-resume-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/privacy-disable-resume-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/privacy-disable-resume-etw-qga-unblock-20260507/privacy-disable-resume-etw-qga-unblock-20260507.etl",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4475 registry events with 524 caller-stack events. The QGA-launched helper targeted `HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CrossDeviceResume\\Configuration` / `IsResumeAllowed` and the bundle contains target-key activity, but no exact `IsResumeAllowed` RegQueryValue event was observed on the clean baseline.",
+          "strength": "medium",
+          "supports": [
+            "runtime-observation",
+            "tooling-fix",
+            "path",
             "version-scope"
           ],
           "origin": "unspecified"
@@ -78072,8 +78134,8 @@
         }
       },
       "source_file": "research/records/privacy.disable-steps-recorder.json",
-      "source_file_sha256": "800816faaa32dc3086cbbf528ad7c2d47ef683d177d2468ec1e9453294678542",
-      "source_file_size_bytes": 13729,
+      "source_file_sha256": "4c1b663dbcacbfd8568bf813ff58d58382ab607f38da048a950791783587dbae",
+      "source_file_size_bytes": 15095,
       "name": "Steps Recorder",
       "category": "Privacy",
       "area": "Registry Policy",
@@ -78311,6 +78373,22 @@
           "strength": "low",
           "supports": [
             "behavior",
+            "version-scope"
+          ],
+          "origin": "unspecified"
+        },
+        {
+          "evidence_id": "vm-privacy.disable-steps-recorder-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk runtime receipt for DisableUAR",
+          "location": "evidence/captures/privacy-disable-steps-recorder-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/privacy-disable-steps-recorder-etw-qga-unblock-20260507/privacy-disable-steps-recorder-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/privacy-disable-steps-recorder-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/privacy-disable-steps-recorder-etw-qga-unblock-20260507/privacy-disable-steps-recorder-etw-qga-unblock-20260507.etl",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4468 registry events with 526 caller-stack events. The bundle contains an exact helper-triggered `RegQueryValue` for `HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat` / `DisableUAR`, returning `0xC0000034` on the clean baseline.",
+          "strength": "high",
+          "supports": [
+            "runtime-observation",
+            "tooling-fix",
+            "path",
+            "value",
             "version-scope"
           ],
           "origin": "unspecified"
@@ -82172,8 +82250,8 @@
         }
       },
       "source_file": "research/records/privacy.hide-username-at-signin.json",
-      "source_file_sha256": "73669bbeaf526c6f2e4c87f3e6d25d61b3c16ba334b71bc8707d22f67c108153",
-      "source_file_size_bytes": 13538,
+      "source_file_sha256": "d57090efd80b1a5cde1cd3fb9faa5fa408e8592bb3e54cf7eb95d647cefd903b",
+      "source_file_size_bytes": 14951,
       "name": "Display of Username During Sign-In",
       "category": "Privacy",
       "area": "Security Option",
@@ -82393,6 +82471,22 @@
           "strength": "low",
           "supports": [
             "behavior",
+            "version-scope"
+          ],
+          "origin": "unspecified"
+        },
+        {
+          "evidence_id": "vm-privacy.hide-username-at-signin-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk runtime receipt for DontDisplayUserName",
+          "location": "evidence/captures/privacy-hide-username-at-signin-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/privacy-hide-username-at-signin-etw-qga-unblock-20260507/privacy-hide-username-at-signin-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/privacy-hide-username-at-signin-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/privacy-hide-username-at-signin-etw-qga-unblock-20260507/privacy-hide-username-at-signin-etw-qga-unblock-20260507.etl",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4776 registry events with 685 caller-stack events. The bundle contains an exact helper-triggered `RegQueryValue` for `HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System` / `DontDisplayUserName`, returning `0xC0000034` on the clean baseline.",
+          "strength": "high",
+          "supports": [
+            "runtime-observation",
+            "tooling-fix",
+            "path",
+            "value",
             "version-scope"
           ],
           "origin": "unspecified"
@@ -82785,8 +82879,8 @@
         }
       },
       "source_file": "research/records/privacy.limit-dump-collection.json",
-      "source_file_sha256": "b23f5637918f605b1943a580a075ed7d50d369a32a0646f4ddeea4733aba3c96",
-      "source_file_size_bytes": 14292,
+      "source_file_sha256": "cd6708f515c764b60b56c5e3bb0859d03591557c6967284e201eeb398865dd8c",
+      "source_file_size_bytes": 15683,
       "name": "Diagnostic Dump Collection",
       "category": "Privacy",
       "area": "Registry Policy",
@@ -83021,6 +83115,22 @@
           "strength": "low",
           "supports": [
             "behavior",
+            "version-scope"
+          ],
+          "origin": "unspecified"
+        },
+        {
+          "evidence_id": "vm-privacy.limit-dump-collection-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk runtime receipt for LimitDumpCollection",
+          "location": "evidence/captures/privacy-limit-dump-collection-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/privacy-limit-dump-collection-etw-qga-unblock-20260507/privacy-limit-dump-collection-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/privacy-limit-dump-collection-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/privacy-limit-dump-collection-etw-qga-unblock-20260507/privacy-limit-dump-collection-etw-qga-unblock-20260507.etl",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4399 registry events with 525 caller-stack events. The bundle contains an exact helper-triggered `RegQueryValue` for `HKLM\\Software\\Policies\\Microsoft\\Windows\\DataCollection` / `LimitDumpCollection`, returning `0xC0000034` on the clean baseline.",
+          "strength": "high",
+          "supports": [
+            "runtime-observation",
+            "tooling-fix",
+            "path",
+            "value",
             "version-scope"
           ],
           "origin": "unspecified"

@@ -242,6 +242,21 @@
       "strength": "low"
     },
     {
+      "evidence_id": "vm-privacy.disable-steps-recorder-etw-qga-unblock-20260507",
+      "kind": "etw-trace",
+      "title": "QGA-first ETW stackwalk runtime receipt for DisableUAR",
+      "location": "evidence/captures/privacy-disable-steps-recorder-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/privacy-disable-steps-recorder-etw-qga-unblock-20260507/privacy-disable-steps-recorder-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/privacy-disable-steps-recorder-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/privacy-disable-steps-recorder-etw-qga-unblock-20260507/privacy-disable-steps-recorder-etw-qga-unblock-20260507.etl",
+      "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4468 registry events with 526 caller-stack events. The bundle contains an exact helper-triggered `RegQueryValue` for `HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat` / `DisableUAR`, returning `0xC0000034` on the clean baseline.",
+      "supports": [
+        "runtime-observation",
+        "tooling-fix",
+        "path",
+        "value",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
       "evidence_id": "vm-privacy.disable-steps-recorder-ghidra-launch-receipt-20260427",
       "kind": "vm-test",
       "title": "Guest Ghidra launch receipt for DisableUAR",
@@ -263,7 +278,7 @@
     "why": "Microsoft documents AppCompatTurnOffUserActionRecord directly in the ADMX_AppCompat Policy CSP and maps it to Software\\Policies\\Microsoft\\Windows\\AppCompat\\DisableUAR. The same page describes that enabling the policy turns off Steps Recorder, and the app writes that exact machine policy surface.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-30T18:30:00Z",
+  "last_reviewed_utc": "2026-05-07T09:20:07.1228797Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-appcompat#appcompatturnoffuseractionrecord",
     "exact_quote_or_path": "Turn off Steps Recorder. This policy setting enables or disables Steps Recorder (Steps Recorder was called Problem Steps Recorder in Windows 7). If you enable this policy setting, Steps Recorder does not start when a user runs Psr.exe or clicks Start Record. ADMX mapping: Registry Key Name Software\\Policies\\Microsoft\\Windows\\AppCompat; Registry Value Name DisableUAR.",
@@ -296,11 +311,11 @@
     },
     "runtime_capture_reviewed": {
       "etw-stackwalk": true,
-      "status": "ensure_admin_shell_timeout_after_qga_fallback"
+      "status": "qga_unblocked_ingest_ok"
     },
     "etw_stackwalk_reviewed": true,
-    "etw_stackwalk_review_status": "ensure_admin_shell_timeout_after_qga_fallback",
-    "etw_stackwalk_review_artifact": "evidence/captures/privacy-disable-steps-recorder-etw-stackwalk-attempt-20260427.json",
+    "etw_stackwalk_review_status": "qga_unblocked_ingest_ok",
+    "etw_stackwalk_review_artifact": "evidence/captures/privacy-disable-steps-recorder-etw-qga-unblock-20260507.json",
     "static_reviewed": {
       "ghidra": true,
       "status": "ensure_admin_shell_timeout"
@@ -308,6 +323,6 @@
     "ghidra": true,
     "ghidra_status": "ensure_admin_shell_timeout",
     "ghidra_artifact": "evidence/raw/ghidra/ghidra-privacy-disable-steps-recorder-20260427a/summary.json",
-    "notes": "A bounded 2026-04-27 ETW retry for `DisableUAR` never reached trace collection because QGA guest-exec failed during guest-dir setup and the send-key fallback still timed out in `ensure-admin-shell`. A same-day fast guest Ghidra retry for `DisableUAR` also failed in `ensure-admin-shell` with the same bounded timeout, so no xref bundle reached the host."
+    "notes": "A bounded 2026-04-27 ETW retry for `DisableUAR` never reached trace collection because QGA guest-exec failed during guest-dir setup and the send-key fallback still timed out in `ensure-admin-shell`. A same-day fast guest Ghidra retry for `DisableUAR` also failed in `ensure-admin-shell` with the same bounded timeout, so no xref bundle reached the host. A 2026-05-07 QGA-first ETW stackwalk rerun cleared the earlier QGA/send-key blocker and produced an exact helper-triggered `RegQueryValue` for `DisableUAR` with caller-stack capture."
   }
 }

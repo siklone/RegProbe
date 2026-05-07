@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-07T09:21:40.5202161Z",
+  "record_id": "privacy.hide-username-at-signin",
+  "run_id": "privacy-hide-username-at-signin-etw-qga-unblock-20260507",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "registry_path": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+  "value_name": "DontDisplayUserName",
+  "attempt_status": "qga_unblocked_ingest_ok",
+  "assessment": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and a normalized bundle with 4776 registry events and 685 caller-stack events. The bundle contains an exact RegQueryValue event for HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\System / DontDisplayUserName from the helper probe, returning 0xC0000034 on the clean baseline.",
+  "target_observation": {
+    "exact_value_query": true,
+    "operation": "RegQueryValue",
+    "representative_status": "0xC0000034",
+    "event_count": 4776,
+    "caller_stack_event_count": 685,
+    "target_key_event_count": 11,
+    "target_value_event_count": 1,
+    "target_command_event_count": 2,
+    "launch_transport": "qga"
+  },
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/privacy-hide-username-at-signin-etw-qga-unblock-20260507/privacy-hide-username-at-signin-etw-qga-unblock-20260507-summary.json",
+      "sha256": "054a0039d1c69cff3e572e04d69aff44a58e52bef17f3d0663557e9cc011d376",
+      "size": 7765,
+      "collected_utc": "2026-05-07T09:21:40.5202161Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/privacy-hide-username-at-signin-etw-qga-unblock-20260507/normalized-registry-bundle.json",
+      "sha256": "82c87293b2d6bdade0f9011884ffac23d826c2fc21eefea1fef7a86dfb042f8a",
+      "size": 5987072,
+      "collected_utc": "2026-05-07T09:21:40.5202161Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/privacy-hide-username-at-signin-etw-qga-unblock-20260507/privacy-hide-username-at-signin-etw-qga-unblock-20260507.etl",
+      "sha256": "a780a6bc2589296e3e9ad1b2cf3f677b1871ab096f3c8fa5ffef29e5d2369085",
+      "size": 13107200,
+      "collected_utc": "2026-05-07T09:21:40.5202161Z"
+    }
+  ]
+}
