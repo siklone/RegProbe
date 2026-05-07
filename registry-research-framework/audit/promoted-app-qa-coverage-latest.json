@@ -1,20 +1,20 @@
 {
-  "generated_utc": "2026-05-07T17:00:48Z",
-  "history_entry_count": 58,
+  "generated_utc": "2026-05-07T17:03:53Z",
+  "history_entry_count": 59,
   "catalog_candidate_count": 242,
-  "covered_count": 176,
-  "uncovered_count": 66,
+  "covered_count": 178,
+  "uncovered_count": 64,
   "summary": {
-    "coverage_percent": 72.73,
+    "coverage_percent": 73.55,
     "covered_categories": {
-      "Audio": 2,
+      "Audio": 3,
       "Cleanup": 1,
       "Developer": 7,
       "Explorer": 13,
       "Network": 19,
       "Notifications": 5,
       "Performance": 3,
-      "Peripheral": 2,
+      "Peripheral": 3,
       "Power": 7,
       "Privacy": 48,
       "Security": 17,
@@ -22,11 +22,9 @@
       "Visibility": 16
     },
     "uncovered_categories": {
-      "Audio": 1,
       "Developer": 2,
       "Explorer": 4,
       "Network": 9,
-      "Peripheral": 1,
       "Power": 3,
       "Privacy": 19,
       "Security": 4,
@@ -35,48 +33,6 @@
     }
   },
   "recommended_next_batches": [
-    {
-      "category": "Audio",
-      "covered_count": 2,
-      "uncovered_count": 1,
-      "coverage_percent": 66.67,
-      "batch_size": 1,
-      "tweak_ids": [
-        "audio.show-hidden-devices"
-      ],
-      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id audio.show-hidden-devices",
-      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id audio.show-hidden-devices --run-kvm --json",
-      "candidates": [
-        {
-          "tweak_id": "audio.show-hidden-devices",
-          "record_id": "audio.show-hidden-devices",
-          "category": "Audio",
-          "name": "Show Hidden Audio Devices",
-          "documentation": "research/records/audio.show-hidden-devices.review.json"
-        }
-      ]
-    },
-    {
-      "category": "Peripheral",
-      "covered_count": 2,
-      "uncovered_count": 1,
-      "coverage_percent": 66.67,
-      "batch_size": 1,
-      "tweak_ids": [
-        "peripheral.disable-autoplay"
-      ],
-      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id peripheral.disable-autoplay",
-      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id peripheral.disable-autoplay --run-kvm --json",
-      "candidates": [
-        {
-          "tweak_id": "peripheral.disable-autoplay",
-          "record_id": "peripheral.disable-autoplay",
-          "category": "Peripheral",
-          "name": "Disable AutoPlay",
-          "documentation": "research/records/peripheral.disable-autoplay.review.json"
-        }
-      ]
-    },
     {
       "category": "Network",
       "covered_count": 19,
@@ -235,6 +191,96 @@
           "documentation": "research/records/visibility.disable-widgets.json"
         }
       ]
+    },
+    {
+      "category": "Power",
+      "covered_count": 7,
+      "uncovered_count": 3,
+      "coverage_percent": 70.0,
+      "batch_size": 3,
+      "tweak_ids": [
+        "power.hide-sleep-option",
+        "power.optimize-cpu-boost",
+        "power.optimize-gaming-network"
+      ],
+      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id power.hide-sleep-option --id power.optimize-cpu-boost --id power.optimize-gaming-network",
+      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id power.hide-sleep-option --id power.optimize-cpu-boost --id power.optimize-gaming-network --run-kvm --json",
+      "candidates": [
+        {
+          "tweak_id": "power.hide-sleep-option",
+          "record_id": "power.hide-sleep-option",
+          "category": "Power",
+          "name": "Show Sleep Option",
+          "documentation": "research/records/power.hide-sleep-option.json"
+        },
+        {
+          "tweak_id": "power.optimize-cpu-boost",
+          "record_id": "power.optimize-cpu-boost",
+          "category": "Power",
+          "name": "Optimize CPU Performance Boost",
+          "documentation": "research/records/power.optimize-cpu-boost.json"
+        },
+        {
+          "tweak_id": "power.optimize-gaming-network",
+          "record_id": "power.optimize-gaming-network",
+          "category": "Power",
+          "name": "Games MMCSS Task Profile",
+          "documentation": "research/records/power.optimize-gaming-network.json"
+        }
+      ]
+    },
+    {
+      "category": "Privacy",
+      "covered_count": 48,
+      "uncovered_count": 19,
+      "coverage_percent": 71.64,
+      "batch_size": 5,
+      "tweak_ids": [
+        "privacy.disable-rsop-logging",
+        "privacy.disable-search-box-suggestions",
+        "privacy.disable-sensors",
+        "privacy.disable-steps-recorder",
+        "privacy.disable-suggestions.policy"
+      ],
+      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-rsop-logging --id privacy.disable-search-box-suggestions --id privacy.disable-sensors --id privacy.disable-steps-recorder --id privacy.disable-suggestions.policy",
+      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-rsop-logging --id privacy.disable-search-box-suggestions --id privacy.disable-sensors --id privacy.disable-steps-recorder --id privacy.disable-suggestions.policy --run-kvm --json",
+      "candidates": [
+        {
+          "tweak_id": "privacy.disable-rsop-logging",
+          "record_id": "privacy.disable-rsop-logging",
+          "category": "Privacy",
+          "name": "Resultant Set of Policy Logging",
+          "documentation": "research/records/privacy.disable-rsop-logging.json"
+        },
+        {
+          "tweak_id": "privacy.disable-search-box-suggestions",
+          "record_id": "privacy.disable-search-box-suggestions",
+          "category": "Privacy",
+          "name": "File Explorer Search Box Suggestions",
+          "documentation": "research/records/privacy.disable-search-box-suggestions.json"
+        },
+        {
+          "tweak_id": "privacy.disable-sensors",
+          "record_id": "privacy.disable-sensors",
+          "category": "Privacy",
+          "name": "Windows Sensors",
+          "documentation": "research/records/privacy.disable-sensors.json"
+        },
+        {
+          "tweak_id": "privacy.disable-steps-recorder",
+          "record_id": "privacy.disable-steps-recorder",
+          "category": "Privacy",
+          "name": "Steps Recorder",
+          "documentation": "research/records/privacy.disable-steps-recorder.json"
+        },
+        {
+          "tweak_id": "privacy.disable-suggestions.policy",
+          "record_id": "privacy.disable-suggestions.policy",
+          "category": "Privacy",
+          "name": "Windows Suggestion Surfaces Policy Group",
+          "documentation": "research/records/privacy.disable-suggestions.policy.review.json"
+        }
+      ]
     }
   ],
   "covered": [
@@ -254,6 +300,15 @@
       "category": "Audio",
       "name": "Show Disconnected Audio Devices",
       "documentation": "research/records/audio.show-disconnected-devices.review.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "audio.show-hidden-devices",
+      "qa_tweak_id": "audio.show-hidden-devices",
+      "candidate_id": "audio.show-hidden-devices",
+      "category": "Audio",
+      "name": "Show Hidden Audio Devices",
+      "documentation": "research/records/audio.show-hidden-devices.review.json",
       "latest_report_status": "ok"
     },
     {
@@ -695,6 +750,15 @@
       "category": "Peripheral",
       "name": "AutoPlay Event Default Action",
       "documentation": "research/records/peripheral.autoplay-take-no-action.review.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "peripheral.disable-autoplay",
+      "qa_tweak_id": "peripheral.disable-autoplay",
+      "candidate_id": "peripheral.disable-autoplay",
+      "category": "Peripheral",
+      "name": "Disable AutoPlay",
+      "documentation": "research/records/peripheral.disable-autoplay.review.json",
       "latest_report_status": "ok"
     },
     {
@@ -1825,13 +1889,6 @@
   ],
   "uncovered": [
     {
-      "tweak_id": "audio.show-hidden-devices",
-      "record_id": "audio.show-hidden-devices",
-      "category": "Audio",
-      "name": "Show Hidden Audio Devices",
-      "documentation": "research/records/audio.show-hidden-devices.review.json"
-    },
-    {
       "tweak_id": "developer.windows-dev-mode",
       "record_id": "developer.windows-dev-mode",
       "category": "Developer",
@@ -1935,13 +1992,6 @@
       "category": "Network",
       "name": "SMB Cipher Suite Order",
       "documentation": "research/records/network.smb-set-cipher-suite-order.review.json"
-    },
-    {
-      "tweak_id": "peripheral.disable-autoplay",
-      "record_id": "peripheral.disable-autoplay",
-      "category": "Peripheral",
-      "name": "Disable AutoPlay",
-      "documentation": "research/records/peripheral.disable-autoplay.review.json"
     },
     {
       "tweak_id": "power.hide-sleep-option",

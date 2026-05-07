@@ -1,22 +1,22 @@
 # Promoted App QA Coverage
 
-- Generated UTC: 2026-05-07T17:00:48Z
-- History entries: 58
+- Generated UTC: 2026-05-07T17:03:53Z
+- History entries: 59
 - Promoted app-QA candidates: 242
-- Covered: 176
-- Uncovered: 66
-- Coverage: 72.73%
+- Covered: 178
+- Uncovered: 64
+- Coverage: 73.55%
 
 ## Covered Categories
 
-- Audio: 2
+- Audio: 3
 - Cleanup: 1
 - Developer: 7
 - Explorer: 13
 - Network: 19
 - Notifications: 5
 - Performance: 3
-- Peripheral: 2
+- Peripheral: 3
 - Power: 7
 - Privacy: 48
 - Security: 17
@@ -25,11 +25,9 @@
 
 ## Uncovered Categories
 
-- Audio: 1
 - Developer: 2
 - Explorer: 4
 - Network: 9
-- Peripheral: 1
 - Power: 3
 - Privacy: 19
 - Security: 4
@@ -38,12 +36,6 @@
 
 ## Recommended Next Batches
 
-- Audio: 1 uncovered cards | coverage 66.67%
-  command: `dotnet run --project cli/cli.csproj -- research qa-batch --id audio.show-hidden-devices`
-  live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id audio.show-hidden-devices --run-kvm --json`
-- Peripheral: 1 uncovered cards | coverage 66.67%
-  command: `dotnet run --project cli/cli.csproj -- research qa-batch --id peripheral.disable-autoplay`
-  live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id peripheral.disable-autoplay --run-kvm --json`
 - Network: 5 uncovered cards | coverage 67.86%
   command: `dotnet run --project cli/cli.csproj -- research qa-batch --id network.smb-enable-multichannel --id network.smb-enable-quic --id network.smb-encrypt-data --id network.smb-increase-client-metadata-cache --id network.smb-reject-unencrypted-access`
   live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id network.smb-enable-multichannel --id network.smb-enable-quic --id network.smb-encrypt-data --id network.smb-increase-client-metadata-cache --id network.smb-reject-unencrypted-access --run-kvm --json`
@@ -53,10 +45,15 @@
 - Visibility: 5 uncovered cards | coverage 69.57%
   command: `dotnet run --project cli/cli.csproj -- research qa-batch --id visibility.disable-spotlight-settings --id visibility.disable-spotlight-third-party --id visibility.disable-spotlight-welcome --id visibility.disable-wcn-wizards --id visibility.disable-widgets`
   live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id visibility.disable-spotlight-settings --id visibility.disable-spotlight-third-party --id visibility.disable-spotlight-welcome --id visibility.disable-wcn-wizards --id visibility.disable-widgets --run-kvm --json`
+- Power: 3 uncovered cards | coverage 70.0%
+  command: `dotnet run --project cli/cli.csproj -- research qa-batch --id power.hide-sleep-option --id power.optimize-cpu-boost --id power.optimize-gaming-network`
+  live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id power.hide-sleep-option --id power.optimize-cpu-boost --id power.optimize-gaming-network --run-kvm --json`
+- Privacy: 5 uncovered cards | coverage 71.64%
+  command: `dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-rsop-logging --id privacy.disable-search-box-suggestions --id privacy.disable-sensors --id privacy.disable-steps-recorder --id privacy.disable-suggestions.policy`
+  live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-rsop-logging --id privacy.disable-search-box-suggestions --id privacy.disable-sensors --id privacy.disable-steps-recorder --id privacy.disable-suggestions.policy --run-kvm --json`
 
 ## Remaining Uncovered Sample
 
-- `audio.show-hidden-devices` | Show Hidden Audio Devices | Audio
 - `developer.windows-dev-mode` | Windows Developer Mode | Developer
 - `developer.wsl2-memory` | WSL 2 Memory Limit | Developer
 - `explorer.show-info-tips` | Show Explorer Info Tips | Explorer
@@ -72,7 +69,8 @@
 - `network.smb-require-signing-client` | SMB Client Signing Requirement | Network
 - `network.smb-require-signing-server` | SMB Server Signing Requirement | Network
 - `network.smb-set-cipher-suite-order` | SMB Cipher Suite Order | Network
-- `peripheral.disable-autoplay` | Disable AutoPlay | Peripheral
 - `power.hide-sleep-option` | Show Sleep Option | Power
 - `power.optimize-cpu-boost` | Optimize CPU Performance Boost | Power
 - `power.optimize-gaming-network` | Games MMCSS Task Profile | Power
+- `privacy.disable-rsop-logging` | Resultant Set of Policy Logging | Privacy
+- `privacy.disable-search-box-suggestions` | File Explorer Search Box Suggestions | Privacy
