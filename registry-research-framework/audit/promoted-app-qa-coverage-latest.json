@@ -1,11 +1,11 @@
 {
-  "generated_utc": "2026-05-07T16:08:03Z",
-  "history_entry_count": 45,
+  "generated_utc": "2026-05-07T16:10:05Z",
+  "history_entry_count": 46,
   "catalog_candidate_count": 242,
-  "covered_count": 139,
-  "uncovered_count": 103,
+  "covered_count": 144,
+  "uncovered_count": 98,
   "summary": {
-    "coverage_percent": 57.44,
+    "coverage_percent": 59.5,
     "covered_categories": {
       "Audio": 2,
       "Cleanup": 1,
@@ -16,7 +16,7 @@
       "Performance": 3,
       "Peripheral": 2,
       "Power": 7,
-      "Privacy": 33,
+      "Privacy": 38,
       "Security": 12,
       "System": 26,
       "Visibility": 16
@@ -29,66 +29,13 @@
       "Notifications": 2,
       "Peripheral": 1,
       "Power": 3,
-      "Privacy": 34,
+      "Privacy": 29,
       "Security": 9,
       "System": 26,
       "Visibility": 7
     }
   },
   "recommended_next_batches": [
-    {
-      "category": "Privacy",
-      "covered_count": 33,
-      "uncovered_count": 34,
-      "coverage_percent": 49.25,
-      "batch_size": 5,
-      "tweak_ids": [
-        "privacy.disable-local-security-questions",
-        "privacy.disable-location-consent",
-        "privacy.disable-location-consent-system",
-        "privacy.disable-location-scripting",
-        "privacy.disable-location-services"
-      ],
-      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-local-security-questions --id privacy.disable-location-consent --id privacy.disable-location-consent-system --id privacy.disable-location-scripting --id privacy.disable-location-services",
-      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-local-security-questions --id privacy.disable-location-consent --id privacy.disable-location-consent-system --id privacy.disable-location-scripting --id privacy.disable-location-services --run-kvm --json",
-      "candidates": [
-        {
-          "tweak_id": "privacy.disable-local-security-questions",
-          "record_id": "privacy.disable-local-security-questions",
-          "category": "Privacy",
-          "name": "Security Questions for Local Accounts",
-          "documentation": "research/records/privacy.disable-local-security-questions.json"
-        },
-        {
-          "tweak_id": "privacy.disable-location-consent",
-          "record_id": "privacy.disable-location-consent",
-          "category": "Privacy",
-          "name": "Disable Location Consent (Current User)",
-          "documentation": "research/records/privacy.disable-location-consent.review.json"
-        },
-        {
-          "tweak_id": "privacy.disable-location-consent-system",
-          "record_id": "privacy.disable-location-consent-system",
-          "category": "Privacy",
-          "name": "Location Consent Store (System)",
-          "documentation": "research/records/privacy.disable-location-consent-system.review.json"
-        },
-        {
-          "tweak_id": "privacy.disable-location-scripting",
-          "record_id": "privacy.disable-location-scripting",
-          "category": "Privacy",
-          "name": "Location Scripting",
-          "documentation": "research/records/privacy.disable-location-scripting.json"
-        },
-        {
-          "tweak_id": "privacy.disable-location-services",
-          "record_id": "privacy.disable-location-services",
-          "category": "Privacy",
-          "name": "Location Feature",
-          "documentation": "research/records/privacy.disable-location-services.json"
-        }
-      ]
-    },
     {
       "category": "System",
       "covered_count": 26,
@@ -192,6 +139,59 @@
           "category": "Network",
           "name": "SMB Client Large MTU",
           "documentation": "research/records/network.smb-enable-large-mtu.json"
+        }
+      ]
+    },
+    {
+      "category": "Privacy",
+      "covered_count": 38,
+      "uncovered_count": 29,
+      "coverage_percent": 56.72,
+      "batch_size": 5,
+      "tweak_ids": [
+        "privacy.disable-mdm-enrollment",
+        "privacy.disable-message-sync",
+        "privacy.disable-offline-files.policy",
+        "privacy.disable-onesettings-downloads",
+        "privacy.disable-online-tips"
+      ],
+      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-mdm-enrollment --id privacy.disable-message-sync --id privacy.disable-offline-files.policy --id privacy.disable-onesettings-downloads --id privacy.disable-online-tips",
+      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-mdm-enrollment --id privacy.disable-message-sync --id privacy.disable-offline-files.policy --id privacy.disable-onesettings-downloads --id privacy.disable-online-tips --run-kvm --json",
+      "candidates": [
+        {
+          "tweak_id": "privacy.disable-mdm-enrollment",
+          "record_id": "privacy.disable-mdm-enrollment",
+          "category": "Privacy",
+          "name": "MDM Enrollment",
+          "documentation": "research/records/privacy.disable-mdm-enrollment.json"
+        },
+        {
+          "tweak_id": "privacy.disable-message-sync",
+          "record_id": "privacy.disable-message-sync",
+          "category": "Privacy",
+          "name": "Message Service Cloud Sync",
+          "documentation": "research/records/privacy.disable-message-sync.json"
+        },
+        {
+          "tweak_id": "privacy.disable-offline-files.policy",
+          "record_id": "privacy.disable-offline-files.policy",
+          "category": "Privacy",
+          "name": "Offline Files Feature Policy",
+          "documentation": "research/records/privacy.disable-offline-files.policy.json"
+        },
+        {
+          "tweak_id": "privacy.disable-onesettings-downloads",
+          "record_id": "privacy.disable-onesettings-downloads",
+          "category": "Privacy",
+          "name": "OneSettings Downloads",
+          "documentation": "research/records/privacy.disable-onesettings-downloads.json"
+        },
+        {
+          "tweak_id": "privacy.disable-online-tips",
+          "record_id": "privacy.disable-online-tips",
+          "category": "Privacy",
+          "name": "Online Tips in Settings",
+          "documentation": "research/records/privacy.disable-online-tips.json"
         }
       ]
     },
@@ -1018,6 +1018,51 @@
       "latest_report_status": "ok"
     },
     {
+      "tweak_id": "privacy.disable-local-security-questions",
+      "qa_tweak_id": "privacy.disable-local-security-questions",
+      "candidate_id": "privacy.disable-local-security-questions",
+      "category": "Privacy",
+      "name": "Security Questions for Local Accounts",
+      "documentation": "research/records/privacy.disable-local-security-questions.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "privacy.disable-location-consent",
+      "qa_tweak_id": "privacy.disable-location-consent",
+      "candidate_id": "privacy.disable-location-consent",
+      "category": "Privacy",
+      "name": "Disable Location Consent (Current User)",
+      "documentation": "research/records/privacy.disable-location-consent.review.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "privacy.disable-location-consent-system",
+      "qa_tweak_id": "privacy.disable-location-consent-system",
+      "candidate_id": "privacy.disable-location-consent-system",
+      "category": "Privacy",
+      "name": "Location Consent Store (System)",
+      "documentation": "research/records/privacy.disable-location-consent-system.review.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "privacy.disable-location-scripting",
+      "qa_tweak_id": "privacy.disable-location-scripting",
+      "candidate_id": "privacy.disable-location-scripting",
+      "category": "Privacy",
+      "name": "Location Scripting",
+      "documentation": "research/records/privacy.disable-location-scripting.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "privacy.disable-location-services",
+      "qa_tweak_id": "privacy.disable-location-services",
+      "candidate_id": "privacy.disable-location-services",
+      "category": "Privacy",
+      "name": "Location Feature",
+      "documentation": "research/records/privacy.disable-location-services.json",
+      "latest_report_status": "ok"
+    },
+    {
       "tweak_id": "privacy.disable-search-history",
       "qa_tweak_id": "privacy.disable-search-history",
       "candidate_id": "privacy.disable-search-history",
@@ -1720,41 +1765,6 @@
       "category": "Power",
       "name": "Games MMCSS Task Profile",
       "documentation": "research/records/power.optimize-gaming-network.json"
-    },
-    {
-      "tweak_id": "privacy.disable-local-security-questions",
-      "record_id": "privacy.disable-local-security-questions",
-      "category": "Privacy",
-      "name": "Security Questions for Local Accounts",
-      "documentation": "research/records/privacy.disable-local-security-questions.json"
-    },
-    {
-      "tweak_id": "privacy.disable-location-consent",
-      "record_id": "privacy.disable-location-consent",
-      "category": "Privacy",
-      "name": "Disable Location Consent (Current User)",
-      "documentation": "research/records/privacy.disable-location-consent.review.json"
-    },
-    {
-      "tweak_id": "privacy.disable-location-consent-system",
-      "record_id": "privacy.disable-location-consent-system",
-      "category": "Privacy",
-      "name": "Location Consent Store (System)",
-      "documentation": "research/records/privacy.disable-location-consent-system.review.json"
-    },
-    {
-      "tweak_id": "privacy.disable-location-scripting",
-      "record_id": "privacy.disable-location-scripting",
-      "category": "Privacy",
-      "name": "Location Scripting",
-      "documentation": "research/records/privacy.disable-location-scripting.json"
-    },
-    {
-      "tweak_id": "privacy.disable-location-services",
-      "record_id": "privacy.disable-location-services",
-      "category": "Privacy",
-      "name": "Location Feature",
-      "documentation": "research/records/privacy.disable-location-services.json"
     },
     {
       "tweak_id": "privacy.disable-mdm-enrollment",

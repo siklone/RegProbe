@@ -1,13 +1,13 @@
 {
-  "generated_utc": "2026-05-07T16:08:03Z",
+  "generated_utc": "2026-05-07T16:10:05Z",
   "status": "PASS",
   "selection": {
     "requested_ids": [
-      "visibility.disable-lock-screen-motion",
-      "visibility.disable-lock-screen-slideshow",
-      "visibility.disable-spotlight-action-center",
-      "visibility.disable-spotlight-desktop-collection",
-      "visibility.disable-spotlight-features"
+      "privacy.disable-local-security-questions",
+      "privacy.disable-location-consent",
+      "privacy.disable-location-consent-system",
+      "privacy.disable-location-scripting",
+      "privacy.disable-location-services"
     ],
     "requested_categories": [],
     "limit_per_category": 1,
@@ -26,25 +26,25 @@
   "errors": [],
   "candidates": [
     {
-      "tweak_id": "visibility.disable-lock-screen-motion",
-      "qa_tweak_id": "visibility.disable-lock-screen-motion",
-      "candidate_id": "visibility.disable-lock-screen-motion",
-      "record_id": "visibility.disable-lock-screen-motion",
-      "category": "Visibility",
-      "name": "Lock Screen Background Motion",
-      "documentation": "research/records/visibility.disable-lock-screen-motion.json",
+      "tweak_id": "privacy.disable-local-security-questions",
+      "qa_tweak_id": "privacy.disable-local-security-questions",
+      "candidate_id": "privacy.disable-local-security-questions",
+      "record_id": "privacy.disable-local-security-questions",
+      "category": "Privacy",
+      "name": "Security Questions for Local Accounts",
+      "documentation": "research/records/privacy.disable-local-security-questions.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect visibility.disable-lock-screen-motion",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.disable-local-security-questions",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'visibility.disable-lock-screen-motion' --qa-output 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-lock-screen-motion.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'visibility.disable-lock-screen-motion' --qa-output 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-lock-screen-motion.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'visibility.disable-lock-screen-motion' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-lock-screen-motion.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'visibility.disable-lock-screen-motion' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-lock-screen-motion.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'visibility.disable-lock-screen-motion'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-local-security-questions' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-local-security-questions.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-local-security-questions' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-local-security-questions.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-local-security-questions' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-local-security-questions.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-local-security-questions' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-local-security-questions.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.disable-local-security-questions'"
       },
       "expected_report": {
         "success": true,
@@ -85,25 +85,25 @@
       }
     },
     {
-      "tweak_id": "visibility.disable-lock-screen-slideshow",
-      "qa_tweak_id": "visibility.disable-lock-screen-slideshow",
-      "candidate_id": "visibility.disable-lock-screen-slideshow",
-      "record_id": "visibility.disable-lock-screen-slideshow",
-      "category": "Visibility",
-      "name": "Lock Screen Slideshow",
-      "documentation": "research/records/visibility.disable-lock-screen-slideshow.json",
+      "tweak_id": "privacy.disable-location-consent",
+      "qa_tweak_id": "privacy.disable-location-consent",
+      "candidate_id": "privacy.disable-location-consent",
+      "record_id": "privacy.disable-location-consent",
+      "category": "Privacy",
+      "name": "Disable Location Consent (Current User)",
+      "documentation": "research/records/privacy.disable-location-consent.review.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect visibility.disable-lock-screen-slideshow",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.disable-location-consent",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'visibility.disable-lock-screen-slideshow' --qa-output 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-lock-screen-slideshow.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'visibility.disable-lock-screen-slideshow' --qa-output 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-lock-screen-slideshow.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'visibility.disable-lock-screen-slideshow' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-lock-screen-slideshow.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'visibility.disable-lock-screen-slideshow' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-lock-screen-slideshow.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'visibility.disable-lock-screen-slideshow'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-location-consent' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-location-consent.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-location-consent' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-location-consent.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-location-consent' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-location-consent.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-location-consent' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-location-consent.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.disable-location-consent'"
       },
       "expected_report": {
         "success": true,
@@ -144,25 +144,25 @@
       }
     },
     {
-      "tweak_id": "visibility.disable-spotlight-action-center",
-      "qa_tweak_id": "visibility.disable-spotlight-action-center",
-      "candidate_id": "visibility.disable-spotlight-action-center",
-      "record_id": "visibility.disable-spotlight-action-center",
-      "category": "Visibility",
-      "name": "Windows Spotlight on Action Center",
-      "documentation": "research/records/visibility.disable-spotlight-action-center.json",
+      "tweak_id": "privacy.disable-location-consent-system",
+      "qa_tweak_id": "privacy.disable-location-consent-system",
+      "candidate_id": "privacy.disable-location-consent-system",
+      "record_id": "privacy.disable-location-consent-system",
+      "category": "Privacy",
+      "name": "Location Consent Store (System)",
+      "documentation": "research/records/privacy.disable-location-consent-system.review.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect visibility.disable-spotlight-action-center",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.disable-location-consent-system",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'visibility.disable-spotlight-action-center' --qa-output 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-spotlight-action-center.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'visibility.disable-spotlight-action-center' --qa-output 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-spotlight-action-center.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'visibility.disable-spotlight-action-center' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-spotlight-action-center.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'visibility.disable-spotlight-action-center' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-spotlight-action-center.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'visibility.disable-spotlight-action-center'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-location-consent-system' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-location-consent-system.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-location-consent-system' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-location-consent-system.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-location-consent-system' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-location-consent-system.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-location-consent-system' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-location-consent-system.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.disable-location-consent-system'"
       },
       "expected_report": {
         "success": true,
@@ -203,25 +203,25 @@
       }
     },
     {
-      "tweak_id": "visibility.disable-spotlight-desktop-collection",
-      "qa_tweak_id": "visibility.disable-spotlight-desktop-collection",
-      "candidate_id": "visibility.disable-spotlight-desktop-collection",
-      "record_id": "visibility.disable-spotlight-desktop-collection",
-      "category": "Visibility",
-      "name": "Spotlight Collection on Desktop",
-      "documentation": "research/records/visibility.disable-spotlight-desktop-collection.json",
+      "tweak_id": "privacy.disable-location-scripting",
+      "qa_tweak_id": "privacy.disable-location-scripting",
+      "candidate_id": "privacy.disable-location-scripting",
+      "record_id": "privacy.disable-location-scripting",
+      "category": "Privacy",
+      "name": "Location Scripting",
+      "documentation": "research/records/privacy.disable-location-scripting.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect visibility.disable-spotlight-desktop-collection",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.disable-location-scripting",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'visibility.disable-spotlight-desktop-collection' --qa-output 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-spotlight-desktop-collection.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'visibility.disable-spotlight-desktop-collection' --qa-output 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-spotlight-desktop-collection.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'visibility.disable-spotlight-desktop-collection' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-spotlight-desktop-collection.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'visibility.disable-spotlight-desktop-collection' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-spotlight-desktop-collection.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'visibility.disable-spotlight-desktop-collection'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-location-scripting' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-location-scripting.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-location-scripting' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-location-scripting.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-location-scripting' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-location-scripting.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-location-scripting' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-location-scripting.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.disable-location-scripting'"
       },
       "expected_report": {
         "success": true,
@@ -262,25 +262,25 @@
       }
     },
     {
-      "tweak_id": "visibility.disable-spotlight-features",
-      "qa_tweak_id": "visibility.disable-spotlight-features",
-      "candidate_id": "visibility.disable-spotlight-features",
-      "record_id": "visibility.disable-spotlight-features",
-      "category": "Visibility",
-      "name": "Windows Spotlight Features",
-      "documentation": "research/records/visibility.disable-spotlight-features.json",
+      "tweak_id": "privacy.disable-location-services",
+      "qa_tweak_id": "privacy.disable-location-services",
+      "candidate_id": "privacy.disable-location-services",
+      "record_id": "privacy.disable-location-services",
+      "category": "Privacy",
+      "name": "Location Feature",
+      "documentation": "research/records/privacy.disable-location-services.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect visibility.disable-spotlight-features",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect privacy.disable-location-services",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'visibility.disable-spotlight-features' --qa-output 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-spotlight-features.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'visibility.disable-spotlight-features' --qa-output 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-spotlight-features.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'visibility.disable-spotlight-features' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-spotlight-features.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'visibility.disable-spotlight-features' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\visibility.disable-spotlight-features.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'visibility.disable-spotlight-features'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-location-services' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-location-services.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'privacy.disable-location-services' --qa-output 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-location-services.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-location-services' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-location-services.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'privacy.disable-location-services' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\privacy.disable-location-services.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'privacy.disable-location-services'"
       },
       "expected_report": {
         "success": true,
@@ -323,7 +323,7 @@
   ],
   "run_results": [
     {
-      "tweak_id": "visibility.disable-lock-screen-motion",
+      "tweak_id": "privacy.disable-local-security-questions",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -360,19 +360,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "visibility.disable-lock-screen-motion",
-        "TweakName": "Lock Screen Background Motion",
+        "TweakId": "privacy.disable-local-security-questions",
+        "TweakName": "Security Questions for Local Accounts",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "visibility.disable-lock-screen-motion",
-          "Name": "Lock Screen Background Motion",
-          "Category": "Visibility",
-          "Description": "Some devices can show a subtle motion effect on the lock-screen background. This policy decides whether that motion is prevented.",
-          "FriendlyDescription": "Some devices can show a subtle motion effect on the lock-screen background. This policy decides whether that motion is prevented.",
-          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Personalization\\AnimateLockScreenBackground",
+          "TweakId": "privacy.disable-local-security-questions",
+          "Name": "Security Questions for Local Accounts",
+          "Category": "Privacy",
+          "Description": "Windows can let local-account users create security questions so they can reset their password later. This policy decides whether those security questions are allowed.",
+          "FriendlyDescription": "Windows can let local-account users create security questions so they can reset their password later. This policy decides whether those security questions are allowed.",
+          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\NoLocalPasswordResetQuestions",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -380,15 +380,15 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Some devices can show a subtle motion effect on the lock-screen background. This policy decides whether that motion is prevented. Evidence: The local official Microsoft ADMX file names the same machine policy surface used by the app. The paired ADML help text states that enabling the setting prevents lock-screen motion and shows the traditional static background image. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: Windows can let local-account users create security questions so they can reset their password later. This policy decides whether those security questions are allowed. Evidence: The ADMX_CredUI Policy CSP page explicitly names the exact machine policy path and value name the app writes, and its policy description matches the blocked behavior. Added nohuto mirror corroboration via nohuto-nolocalpasswordresetquestions-admx. Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "The local official Microsoft ADMX file names the same machine policy surface used by the app. The paired ADML help text states that enabling the setting prevents lock-screen motion and shows the traditional static background image.",
-              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/ControlPanelDisplay.admx"
+              "Summary": "The ADMX_CredUI Policy CSP page explicitly names the exact machine policy path and value name the app writes, and its policy description matches the blocked behavior. Added nohuto mirror corroboration via nohuto-nolocalpasswordresetquestions-admx.",
+              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-credui#credui-nolocalpasswordresetquestions"
             },
             {
               "Key": "runtime",
@@ -419,8 +419,8 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Visibility",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\visibility\\visibility.md#visibility.disable-lock-screen-motion",
+              "Title": "Docs: Privacy (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\privacy\\privacy-verified.md",
               "Kind": "Docs"
             }
           ]
@@ -429,540 +429,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Value not set.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Not set",
-            "TargetValue": "1 (0x1)",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": false,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Value not set.",
-                "TimestampText": "09:08:07"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "apply",
-            "AppliedStatus": "Applied",
-            "StatusMessage": "Run completed.",
-            "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "1 (0x1)",
-            "TargetValue": "1 (0x1)",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Value not set.",
-                "TimestampText": "09:08:07"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Set value to 1.",
-                "TimestampText": "09:08:10"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified desired value.",
-                "TimestampText": "09:08:10"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Not required",
-                "Message": "Step not executed.",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "rollback",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Removed value to restore default.",
-            "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "1 (0x1)",
-            "TargetValue": "1 (0x1)",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Value not set.",
-                "TimestampText": "09:08:07"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Set value to 1.",
-                "TimestampText": "09:08:10"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified desired value.",
-                "TimestampText": "09:08:10"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Removed value to restore default.",
-                "TimestampText": "09:08:10"
-              }
-            ]
-          },
-          {
-            "Stage": "detect-after",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Value not set.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Not set",
-            "TargetValue": "1 (0x1)",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Value not set.",
-                "TimestampText": "09:08:10"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Set value to 1.",
-                "TimestampText": "09:08:10"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified desired value.",
-                "TimestampText": "09:08:10"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Removed value to restore default.",
-                "TimestampText": "09:08:10"
-              }
-            ]
-          }
-        ],
-        "StartedAtUtc": "2026-05-07T16:08:07.2413578+00:00",
-        "CompletedAtUtc": "2026-05-07T16:08:10.4726392+00:00"
-      },
-      "qa_tweak_id": "visibility.disable-lock-screen-motion",
-      "candidate_id": "visibility.disable-lock-screen-motion",
-      "card_name": "Lock Screen Background Motion",
-      "documentation": "research/records/visibility.disable-lock-screen-motion.json"
-    },
-    {
-      "tweak_id": "visibility.disable-lock-screen-slideshow",
-      "host_exit": 0,
-      "execution_exit": 0,
-      "payload_status": "completed",
-      "report_source": "stdout",
-      "report_parse_error": null,
-      "report_fetch_status": null,
-      "report_app_success": true,
-      "report_success": true,
-      "report_status": "ok",
-      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
-      "report_contract_status": "ok",
-      "report_contract_summary": "QA card snapshot contract passed.",
-      "report_contract_failures": [],
-      "report_card_present": true,
-      "report_card_has_claim_boundary": true,
-      "report_card_present_fields": [
-        "TweakId",
-        "Name",
-        "Category",
-        "EvidenceClass",
-        "ResearchStatus",
-        "RollbackSnapshotState",
-        "HasClaimBoundary",
-        "WhatWeKnowSummary",
-        "WhatWeDoNotClaimSummary",
-        "ProofLanes"
-      ],
-      "report_card_missing_fields": [],
-      "report_card_proof_lanes": [
-        "docs",
-        "runtime",
-        "source",
-        "rollback"
-      ],
-      "report_card_missing_proof_lanes": [],
-      "report": {
-        "TweakId": "visibility.disable-lock-screen-slideshow",
-        "TweakName": "Lock Screen Slideshow",
-        "Success": true,
-        "Status": "ok",
-        "Summary": "Apply/verify path completed and rollback restored the tweak.",
-        "RollbackRequested": true,
-        "Card": {
-          "TweakId": "visibility.disable-lock-screen-slideshow",
-          "Name": "Lock Screen Slideshow",
-          "Category": "Visibility",
-          "Description": "Windows can run a slideshow on the lock screen instead of always showing a single image. This policy decides whether users can use that slideshow feature.",
-          "FriendlyDescription": "Windows can run a slideshow on the lock screen instead of always showing a single image. This policy decides whether users can use that slideshow feature.",
-          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Windows\\Personalization\\NoLockScreenSlideshow",
-          "EvidenceClass": "A",
-          "EvidenceClassTitle": "Cross-Layer Verified",
-          "ResearchStatus": "PROMOTED",
-          "IsMutationAllowed": true,
-          "RollbackSnapshotState": "ready",
-          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
-          "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Windows can run a slideshow on the lock screen instead of always showing a single image. This policy decides whether users can use that slideshow feature. Evidence: The local official Microsoft ADMX file names the same machine policy surface used by the app. The paired ADML help text states that enabling the setting prevents a slide show from playing on the lock screen. Rollback: Rollback: Verified via record-restore-story.",
-          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
-          "ProofLanes": [
-            {
-              "Key": "docs",
-              "Label": "DOCS",
-              "State": "ready",
-              "Summary": "The local official Microsoft ADMX file names the same machine policy surface used by the app. The paired ADML help text states that enabling the setting prevents a slide show from playing on the lock screen.",
-              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/ControlPanelDisplay.admx"
-            },
-            {
-              "Key": "runtime",
-              "Label": "RUNTIME",
-              "State": "ready",
-              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
-              "Source": ""
-            },
-            {
-              "Key": "source",
-              "Label": "SOURCE",
-              "State": "ready",
-              "Summary": "No upstream nohuto source link is attached to this record.",
-              "Source": ""
-            },
-            {
-              "Key": "rollback",
-              "Label": "ROLLBACK",
-              "State": "ready",
-              "Summary": "Rollback: Verified via record-restore-story.",
-              "Source": "record-restore-story"
-            }
-          ],
-          "ReferenceLinks": [
-            {
-              "Title": "Docs: Details (missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
-              "Kind": "Details"
-            },
-            {
-              "Title": "Docs: Visibility",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\visibility\\visibility.md#visibility.disable-lock-screen-slideshow",
-              "Kind": "Docs"
-            }
-          ]
-        },
-        "Stages": [
-          {
-            "Stage": "detect-before",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Value not set.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Not set",
-            "TargetValue": "1 (0x1)",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": false,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Value not set.",
-                "TimestampText": "09:08:15"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "apply",
-            "AppliedStatus": "Applied",
-            "StatusMessage": "Run completed.",
-            "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "1 (0x1)",
-            "TargetValue": "1 (0x1)",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Value not set.",
-                "TimestampText": "09:08:15"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Set value to 1.",
-                "TimestampText": "09:08:18"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified desired value.",
-                "TimestampText": "09:08:18"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Not required",
-                "Message": "Step not executed.",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "rollback",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Removed value to restore default.",
-            "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "1 (0x1)",
-            "TargetValue": "1 (0x1)",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Value not set.",
-                "TimestampText": "09:08:15"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Set value to 1.",
-                "TimestampText": "09:08:18"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified desired value.",
-                "TimestampText": "09:08:18"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Removed value to restore default.",
-                "TimestampText": "09:08:18"
-              }
-            ]
-          },
-          {
-            "Stage": "detect-after",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Value not set.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Not set",
-            "TargetValue": "1 (0x1)",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Value not set.",
-                "TimestampText": "09:08:18"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Set value to 1.",
-                "TimestampText": "09:08:18"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified desired value.",
-                "TimestampText": "09:08:18"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Removed value to restore default.",
-                "TimestampText": "09:08:18"
-              }
-            ]
-          }
-        ],
-        "StartedAtUtc": "2026-05-07T16:08:15.6014674+00:00",
-        "CompletedAtUtc": "2026-05-07T16:08:18.8347306+00:00"
-      },
-      "qa_tweak_id": "visibility.disable-lock-screen-slideshow",
-      "candidate_id": "visibility.disable-lock-screen-slideshow",
-      "card_name": "Lock Screen Slideshow",
-      "documentation": "research/records/visibility.disable-lock-screen-slideshow.json"
-    },
-    {
-      "tweak_id": "visibility.disable-spotlight-action-center",
-      "host_exit": 0,
-      "execution_exit": 0,
-      "payload_status": "completed",
-      "report_source": "stdout",
-      "report_parse_error": null,
-      "report_fetch_status": null,
-      "report_app_success": true,
-      "report_success": true,
-      "report_status": "ok",
-      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
-      "report_contract_status": "ok",
-      "report_contract_summary": "QA card snapshot contract passed.",
-      "report_contract_failures": [],
-      "report_card_present": true,
-      "report_card_has_claim_boundary": true,
-      "report_card_present_fields": [
-        "TweakId",
-        "Name",
-        "Category",
-        "EvidenceClass",
-        "ResearchStatus",
-        "RollbackSnapshotState",
-        "HasClaimBoundary",
-        "WhatWeKnowSummary",
-        "WhatWeDoNotClaimSummary",
-        "ProofLanes"
-      ],
-      "report_card_missing_fields": [],
-      "report_card_proof_lanes": [
-        "docs",
-        "runtime",
-        "source",
-        "rollback"
-      ],
-      "report_card_missing_proof_lanes": [],
-      "report": {
-        "TweakId": "visibility.disable-spotlight-action-center",
-        "TweakName": "Windows Spotlight on Action Center",
-        "Success": true,
-        "Status": "ok",
-        "Summary": "Apply/verify path completed and rollback restored the tweak.",
-        "RollbackRequested": true,
-        "Card": {
-          "TweakId": "visibility.disable-spotlight-action-center",
-          "Name": "Windows Spotlight on Action Center",
-          "Category": "Visibility",
-          "Description": "Windows can show Spotlight-driven suggestions or prompts in Action Center style notification surfaces. This policy decides whether that content is allowed for the current user.",
-          "FriendlyDescription": "Windows can show Spotlight-driven suggestions or prompts in Action Center style notification surfaces. This policy decides whether that content is allowed for the current user.",
-          "RegistryPath": "HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableWindowsSpotlightOnActionCenter",
-          "EvidenceClass": "A",
-          "EvidenceClassTitle": "Cross-Layer Verified",
-          "ResearchStatus": "PROMOTED",
-          "IsMutationAllowed": true,
-          "RollbackSnapshotState": "ready",
-          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
-          "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Windows can show Spotlight-driven suggestions or prompts in Action Center style notification surfaces. This policy decides whether that content is allowed for the current user. Evidence: Local official ADMX defines the exact user-policy key and value name; local ADML confirms that enabling the policy removes Windows Spotlight notifications from Action Center. Rollback: Rollback: Verified via record-restore-story.",
-          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
-          "ProofLanes": [
-            {
-              "Key": "docs",
-              "Label": "DOCS",
-              "State": "ready",
-              "Summary": "Local official ADMX defines the exact user-policy key and value name; local ADML confirms that enabling the policy removes Windows Spotlight notifications from Action Center.",
-              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/CloudContent.admx"
-            },
-            {
-              "Key": "runtime",
-              "Label": "RUNTIME",
-              "State": "ready",
-              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
-              "Source": ""
-            },
-            {
-              "Key": "source",
-              "Label": "SOURCE",
-              "State": "ready",
-              "Summary": "No upstream nohuto source link is attached to this record.",
-              "Source": ""
-            },
-            {
-              "Key": "rollback",
-              "Label": "ROLLBACK",
-              "State": "ready",
-              "Summary": "Rollback: Verified via record-restore-story.",
-              "Source": "record-restore-story"
-            }
-          ],
-          "ReferenceLinks": [
-            {
-              "Title": "Docs: Details (missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
-              "Kind": "Details"
-            },
-            {
-              "Title": "Docs: Visibility",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\visibility\\visibility.md#visibility.disable-spotlight-action-center",
-              "Kind": "Docs"
-            }
-          ]
-        },
-        "Stages": [
-          {
-            "Stage": "detect-before",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Action Center Spotlight disabled'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Security questions blocked'.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Action Center Spotlight disabled",
+            "TargetValue": "Security questions blocked",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -971,8 +441,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Action Center Spotlight disabled'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableWindowsSpotlightOnActionCenter: missing -> 1",
-                "TimestampText": "09:08:23"
+                "Message": "Current values do not match a named option. Selected option is 'Security questions blocked'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\NoLocalPasswordResetQuestions: missing -> 1",
+                "TimestampText": "09:10:09"
               },
               {
                 "Action": "Apply",
@@ -999,8 +469,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Action Center Spotlight disabled",
-            "TargetValue": "Action Center Spotlight disabled",
+            "CurrentValue": "Security questions blocked",
+            "TargetValue": "Security questions blocked",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1009,20 +479,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Action Center Spotlight disabled'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableWindowsSpotlightOnActionCenter: missing -> 1",
-                "TimestampText": "09:08:24"
+                "Message": "Current values do not match a named option. Selected option is 'Security questions blocked'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\NoLocalPasswordResetQuestions: missing -> 1",
+                "TimestampText": "09:10:09"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Action Center Spotlight disabled'.",
-                "TimestampText": "09:08:24"
+                "Message": "Applied preset 'Security questions blocked'.",
+                "TimestampText": "09:10:12"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Action Center Spotlight disabled'.",
-                "TimestampText": "09:08:24"
+                "Message": "Verified preset 'Security questions blocked'.",
+                "TimestampText": "09:10:12"
               },
               {
                 "Action": "Rollback",
@@ -1038,7 +508,7 @@
             "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Action Center Spotlight disabled",
+            "TargetValue": "Security questions blocked",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1047,36 +517,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Action Center Spotlight disabled'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableWindowsSpotlightOnActionCenter: missing -> 1",
-                "TimestampText": "09:08:24"
+                "Message": "Current values do not match a named option. Selected option is 'Security questions blocked'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\NoLocalPasswordResetQuestions: missing -> 1",
+                "TimestampText": "09:10:09"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Action Center Spotlight disabled'.",
-                "TimestampText": "09:08:24"
+                "Message": "Applied preset 'Security questions blocked'.",
+                "TimestampText": "09:10:12"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Action Center Spotlight disabled'.",
-                "TimestampText": "09:08:24"
+                "Message": "Verified preset 'Security questions blocked'.",
+                "TimestampText": "09:10:12"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "09:08:24"
+                "TimestampText": "09:10:12"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Action Center Spotlight disabled'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Security questions blocked'.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Action Center Spotlight disabled",
+            "TargetValue": "Security questions blocked",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1085,40 +555,40 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Action Center Spotlight disabled'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableWindowsSpotlightOnActionCenter: missing -> 1",
-                "TimestampText": "09:08:24"
+                "Message": "Current values do not match a named option. Selected option is 'Security questions blocked'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\System\\NoLocalPasswordResetQuestions: missing -> 1",
+                "TimestampText": "09:10:13"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Action Center Spotlight disabled'.",
-                "TimestampText": "09:08:24"
+                "Message": "Applied preset 'Security questions blocked'.",
+                "TimestampText": "09:10:12"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Action Center Spotlight disabled'.",
-                "TimestampText": "09:08:24"
+                "Message": "Verified preset 'Security questions blocked'.",
+                "TimestampText": "09:10:12"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "09:08:24"
+                "TimestampText": "09:10:12"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T16:08:23.958572+00:00",
-        "CompletedAtUtc": "2026-05-07T16:08:24.2498726+00:00"
+        "StartedAtUtc": "2026-05-07T16:10:09.9183834+00:00",
+        "CompletedAtUtc": "2026-05-07T16:10:13.1090007+00:00"
       },
-      "qa_tweak_id": "visibility.disable-spotlight-action-center",
-      "candidate_id": "visibility.disable-spotlight-action-center",
-      "card_name": "Windows Spotlight on Action Center",
-      "documentation": "research/records/visibility.disable-spotlight-action-center.json"
+      "qa_tweak_id": "privacy.disable-local-security-questions",
+      "candidate_id": "privacy.disable-local-security-questions",
+      "card_name": "Security Questions for Local Accounts",
+      "documentation": "research/records/privacy.disable-local-security-questions.json"
     },
     {
-      "tweak_id": "visibility.disable-spotlight-desktop-collection",
+      "tweak_id": "privacy.disable-location-consent",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -1155,19 +625,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "visibility.disable-spotlight-desktop-collection",
-        "TweakName": "Spotlight Collection on Desktop",
+        "TweakId": "privacy.disable-location-consent",
+        "TweakName": "Disable Location Consent (Current User)",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "visibility.disable-spotlight-desktop-collection",
-          "Name": "Spotlight Collection on Desktop",
-          "Category": "Visibility",
-          "Description": "Windows can offer a Spotlight collection option for desktop backgrounds. This policy decides whether that Spotlight wallpaper option is allowed for the current user.",
-          "FriendlyDescription": "Windows can offer a Spotlight collection option for desktop backgrounds. This policy decides whether that Spotlight wallpaper option is allowed for the current user.",
-          "RegistryPath": "HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableSpotlightCollectionOnDesktop",
+          "TweakId": "privacy.disable-location-consent",
+          "Name": "Disable Location Consent (Current User)",
+          "Category": "Privacy",
+          "Description": "This changes the current user's location permission state to deny access for packaged and desktop apps.",
+          "FriendlyDescription": "This changes the current user's location permission state to deny access for packaged and desktop apps.",
+          "RegistryPath": "",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -1175,15 +645,15 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Windows can offer a Spotlight collection option for desktop backgrounds. This policy decides whether that Spotlight wallpaper option is allowed for the current user. Evidence: Local official ADMX defines the exact user-policy key and value name; local ADML confirms that enabling the policy removes the Spotlight collection desktop option from Personalization settings. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: This changes the current user's location permission state to deny access for packaged and desktop apps. Evidence: This is an official current-user runtime consent surface for location access, not a Group Policy-backed LocationAndSensors setting. Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "Local official ADMX defines the exact user-policy key and value name; local ADML confirms that enabling the policy removes the Spotlight collection desktop option from Personalization settings.",
-              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/CloudContent.admx"
+              "Summary": "This is an official current-user runtime consent surface for location access, not a Group Policy-backed LocationAndSensors setting.",
+              "Source": "Validation proof source: https://learn.microsoft.com/en-us/azure/virtual-desktop/redirection-configure-location"
             },
             {
               "Key": "runtime",
@@ -1214,8 +684,8 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Visibility",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\visibility\\visibility.md#visibility.disable-spotlight-desktop-collection",
+              "Title": "Docs: Privacy (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\privacy\\privacy-verified.md",
               "Kind": "Docs"
             }
           ]
@@ -1224,10 +694,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Desktop Spotlight collection disabled'.",
+            "StatusMessage": "Detected 2 of 2 values (matches: 0, missing: 0).",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Desktop Spotlight collection disabled",
+            "CurrentValue": "Unknown",
+            "TargetValue": "Multiple values",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -1236,8 +706,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Desktop Spotlight collection disabled'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableSpotlightCollectionOnDesktop: missing -> 1",
-                "TimestampText": "09:08:30"
+                "Message": "Detected 2 of 2 values (matches: 0, missing: 0).\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\location\\Value: Allow -> Deny\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\location\\NonPackaged\\Value: Allow -> Deny",
+                "TimestampText": "09:10:19"
               },
               {
                 "Action": "Apply",
@@ -1264,8 +734,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Desktop Spotlight collection disabled",
-            "TargetValue": "Desktop Spotlight collection disabled",
+            "CurrentValue": "Multiple values",
+            "TargetValue": "Multiple values",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1274,20 +744,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Desktop Spotlight collection disabled'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableSpotlightCollectionOnDesktop: missing -> 1",
-                "TimestampText": "09:08:30"
+                "Message": "Detected 2 of 2 values (matches: 0, missing: 0).\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\location\\Value: Allow -> Deny\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\location\\NonPackaged\\Value: Allow -> Deny",
+                "TimestampText": "09:10:19"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Desktop Spotlight collection disabled'.",
-                "TimestampText": "09:08:30"
+                "Message": "Updated 2 values.",
+                "TimestampText": "09:10:19"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Desktop Spotlight collection disabled'.",
-                "TimestampText": "09:08:30"
+                "Message": "Verified desired values.",
+                "TimestampText": "09:10:19"
               },
               {
                 "Action": "Rollback",
@@ -1302,8 +772,8 @@
             "AppliedStatus": "NotApplied",
             "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Desktop Spotlight collection disabled",
+            "CurrentValue": "Multiple values",
+            "TargetValue": "Multiple values",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1312,36 +782,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Desktop Spotlight collection disabled'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableSpotlightCollectionOnDesktop: missing -> 1",
-                "TimestampText": "09:08:30"
+                "Message": "Detected 2 of 2 values (matches: 0, missing: 0).\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\location\\Value: Allow -> Deny\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\location\\NonPackaged\\Value: Allow -> Deny",
+                "TimestampText": "09:10:19"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Desktop Spotlight collection disabled'.",
-                "TimestampText": "09:08:30"
+                "Message": "Updated 2 values.",
+                "TimestampText": "09:10:19"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Desktop Spotlight collection disabled'.",
-                "TimestampText": "09:08:30"
+                "Message": "Verified desired values.",
+                "TimestampText": "09:10:19"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "09:08:30"
+                "TimestampText": "09:10:19"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Desktop Spotlight collection disabled'.",
+            "StatusMessage": "Detected 2 of 2 values (matches: 0, missing: 0).",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Desktop Spotlight collection disabled",
+            "CurrentValue": "Multiple values",
+            "TargetValue": "Multiple values",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1350,40 +820,40 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Desktop Spotlight collection disabled'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableSpotlightCollectionOnDesktop: missing -> 1",
-                "TimestampText": "09:08:30"
+                "Message": "Detected 2 of 2 values (matches: 0, missing: 0).\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\location\\Value: Allow -> Deny\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\location\\NonPackaged\\Value: Allow -> Deny",
+                "TimestampText": "09:10:19"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Desktop Spotlight collection disabled'.",
-                "TimestampText": "09:08:30"
+                "Message": "Updated 2 values.",
+                "TimestampText": "09:10:19"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Desktop Spotlight collection disabled'.",
-                "TimestampText": "09:08:30"
+                "Message": "Verified desired values.",
+                "TimestampText": "09:10:19"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "09:08:30"
+                "TimestampText": "09:10:19"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T16:08:30.3368084+00:00",
-        "CompletedAtUtc": "2026-05-07T16:08:30.6375829+00:00"
+        "StartedAtUtc": "2026-05-07T16:10:19.2652078+00:00",
+        "CompletedAtUtc": "2026-05-07T16:10:19.5782543+00:00"
       },
-      "qa_tweak_id": "visibility.disable-spotlight-desktop-collection",
-      "candidate_id": "visibility.disable-spotlight-desktop-collection",
-      "card_name": "Spotlight Collection on Desktop",
-      "documentation": "research/records/visibility.disable-spotlight-desktop-collection.json"
+      "qa_tweak_id": "privacy.disable-location-consent",
+      "candidate_id": "privacy.disable-location-consent",
+      "card_name": "Disable Location Consent (Current User)",
+      "documentation": "research/records/privacy.disable-location-consent.review.json"
     },
     {
-      "tweak_id": "visibility.disable-spotlight-features",
+      "tweak_id": "privacy.disable-location-consent-system",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -1420,19 +890,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "visibility.disable-spotlight-features",
-        "TweakName": "Windows Spotlight Features",
+        "TweakId": "privacy.disable-location-consent-system",
+        "TweakName": "Location Consent Store (System)",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "visibility.disable-spotlight-features",
-          "Name": "Windows Spotlight Features",
-          "Category": "Visibility",
-          "Description": "Windows Spotlight powers various suggestions, tips, and promotional surfaces in Windows. This policy decides whether those Spotlight features are allowed for the current user.",
-          "FriendlyDescription": "Windows Spotlight powers various suggestions, tips, and promotional surfaces in Windows. This policy decides whether those Spotlight features are allowed for the current user.",
-          "RegistryPath": "HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableWindowsSpotlightFeatures",
+          "TweakId": "privacy.disable-location-consent-system",
+          "Name": "Location Consent Store (System)",
+          "Category": "Privacy",
+          "Description": "This changes the system-level location permission state to deny access.",
+          "FriendlyDescription": "This changes the system-level location permission state to deny access.",
+          "RegistryPath": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\location\\Value",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -1440,15 +910,15 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Windows Spotlight powers various suggestions, tips, and promotional surfaces in Windows. This policy decides whether those Spotlight features are allowed for the current user. Evidence: Local official ADMX defines the exact user-policy key and value name; local ADML confirms that enabling the policy turns off Windows Spotlight features as a whole. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: This changes the system-level location permission state to deny access. Evidence: This is an official runtime consent-store surface from Microsoft troubleshooting guidance, not a Group Policy-backed LocationAndSensors setting. Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "Local official ADMX defines the exact user-policy key and value name; local ADML confirms that enabling the policy turns off Windows Spotlight features as a whole.",
-              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/CloudContent.admx"
+              "Summary": "This is an official runtime consent-store surface from Microsoft troubleshooting guidance, not a Group Policy-backed LocationAndSensors setting.",
+              "Source": "Validation proof source: https://learn.microsoft.com/en-us/troubleshoot/windows-client/shell-experience/cannot-set-timezone-automatically"
             },
             {
               "Key": "runtime",
@@ -1479,8 +949,8 @@
               "Kind": "Details"
             },
             {
-              "Title": "Docs: Visibility",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\visibility\\visibility.md#visibility.disable-spotlight-features",
+              "Title": "Docs: Privacy (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\privacy\\privacy-verified.md",
               "Kind": "Docs"
             }
           ]
@@ -1489,10 +959,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Windows Spotlight features disabled'.",
+            "StatusMessage": "Current option is 'System-level allow'. Selected option is 'System-level deny'.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Windows Spotlight features disabled",
+            "CurrentValue": "System-level allow",
+            "TargetValue": "System-level deny",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -1501,8 +971,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Windows Spotlight features disabled'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableWindowsSpotlightFeatures: missing -> 1",
-                "TimestampText": "09:08:36"
+                "Message": "Current option is 'System-level allow'. Selected option is 'System-level deny'.\nEntries:\n- HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\location\\Value: Allow -> Deny",
+                "TimestampText": "09:10:25"
               },
               {
                 "Action": "Apply",
@@ -1529,8 +999,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Windows Spotlight features disabled",
-            "TargetValue": "Windows Spotlight features disabled",
+            "CurrentValue": "System-level deny",
+            "TargetValue": "System-level deny",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1539,20 +1009,285 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Windows Spotlight features disabled'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableWindowsSpotlightFeatures: missing -> 1",
-                "TimestampText": "09:08:36"
+                "Message": "Current option is 'System-level allow'. Selected option is 'System-level deny'.\nEntries:\n- HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\location\\Value: Allow -> Deny",
+                "TimestampText": "09:10:25"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Windows Spotlight features disabled'.",
-                "TimestampText": "09:08:36"
+                "Message": "Applied preset 'System-level deny'.",
+                "TimestampText": "09:10:28"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Windows Spotlight features disabled'.",
-                "TimestampText": "09:08:36"
+                "Message": "Verified preset 'System-level deny'.",
+                "TimestampText": "09:10:28"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Not required",
+                "Message": "Step not executed.",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "rollback",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Rolled back registry values.",
+            "OutcomeSummary": "Rollback - Rolled Back",
+            "CurrentValue": "System-level allow",
+            "TargetValue": "System-level deny",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current option is 'System-level allow'. Selected option is 'System-level deny'.\nEntries:\n- HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\location\\Value: Allow -> Deny",
+                "TimestampText": "09:10:25"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'System-level deny'.",
+                "TimestampText": "09:10:28"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'System-level deny'.",
+                "TimestampText": "09:10:28"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "09:10:28"
+              }
+            ]
+          },
+          {
+            "Stage": "detect-after",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Current option is 'System-level allow'. Selected option is 'System-level deny'.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "System-level allow",
+            "TargetValue": "System-level deny",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current option is 'System-level allow'. Selected option is 'System-level deny'.\nEntries:\n- HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\CapabilityAccessManager\\ConsentStore\\location\\Value: Allow -> Deny",
+                "TimestampText": "09:10:28"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'System-level deny'.",
+                "TimestampText": "09:10:28"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'System-level deny'.",
+                "TimestampText": "09:10:28"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "09:10:28"
+              }
+            ]
+          }
+        ],
+        "StartedAtUtc": "2026-05-07T16:10:25.6604155+00:00",
+        "CompletedAtUtc": "2026-05-07T16:10:28.8727756+00:00"
+      },
+      "qa_tweak_id": "privacy.disable-location-consent-system",
+      "candidate_id": "privacy.disable-location-consent-system",
+      "card_name": "Location Consent Store (System)",
+      "documentation": "research/records/privacy.disable-location-consent-system.review.json"
+    },
+    {
+      "tweak_id": "privacy.disable-location-scripting",
+      "host_exit": 0,
+      "execution_exit": 0,
+      "payload_status": "completed",
+      "report_source": "stdout",
+      "report_parse_error": null,
+      "report_fetch_status": null,
+      "report_app_success": true,
+      "report_success": true,
+      "report_status": "ok",
+      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
+      "report_contract_status": "ok",
+      "report_contract_summary": "QA card snapshot contract passed.",
+      "report_contract_failures": [],
+      "report_card_present": true,
+      "report_card_has_claim_boundary": true,
+      "report_card_present_fields": [
+        "TweakId",
+        "Name",
+        "Category",
+        "EvidenceClass",
+        "ResearchStatus",
+        "RollbackSnapshotState",
+        "HasClaimBoundary",
+        "WhatWeKnowSummary",
+        "WhatWeDoNotClaimSummary",
+        "ProofLanes"
+      ],
+      "report_card_missing_fields": [],
+      "report_card_proof_lanes": [
+        "docs",
+        "runtime",
+        "source",
+        "rollback"
+      ],
+      "report_card_missing_proof_lanes": [],
+      "report": {
+        "TweakId": "privacy.disable-location-scripting",
+        "TweakName": "Location Scripting",
+        "Success": true,
+        "Status": "ok",
+        "Summary": "Apply/verify path completed and rollback restored the tweak.",
+        "RollbackRequested": true,
+        "Card": {
+          "TweakId": "privacy.disable-location-scripting",
+          "Name": "Location Scripting",
+          "Category": "Privacy",
+          "Description": "Some scripts and apps can access Windows location features through scripting interfaces. This policy decides whether that scripting access is allowed.",
+          "FriendlyDescription": "Some scripts and apps can access Windows location features through scripting interfaces. This policy decides whether that scripting access is allowed.",
+          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Windows\\LocationAndSensors\\DisableLocationScripting",
+          "EvidenceClass": "A",
+          "EvidenceClassTitle": "Cross-Layer Verified",
+          "ResearchStatus": "PROMOTED",
+          "IsMutationAllowed": true,
+          "RollbackSnapshotState": "ready",
+          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
+          "HasClaimBoundary": true,
+          "WhatWeKnowSummary": "Claim: Some scripts and apps can access Windows location features through scripting interfaces. This policy decides whether that scripting access is allowed. Evidence: The ADMX_Sensors Policy CSP page explicitly names the exact machine policy path and value name the app writes, and its policy description matches the disabled behavior. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
+          "ProofLanes": [
+            {
+              "Key": "docs",
+              "Label": "DOCS",
+              "State": "ready",
+              "Summary": "The ADMX_Sensors Policy CSP page explicitly names the exact machine policy path and value name the app writes, and its policy description matches the disabled behavior.",
+              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-sensors#disablelocationscripting"
+            },
+            {
+              "Key": "runtime",
+              "Label": "RUNTIME",
+              "State": "ready",
+              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+              "Source": ""
+            },
+            {
+              "Key": "source",
+              "Label": "SOURCE",
+              "State": "ready",
+              "Summary": "No upstream nohuto source link is attached to this record.",
+              "Source": ""
+            },
+            {
+              "Key": "rollback",
+              "Label": "ROLLBACK",
+              "State": "ready",
+              "Summary": "Rollback: Verified via record-restore-story.",
+              "Source": "record-restore-story"
+            }
+          ],
+          "ReferenceLinks": [
+            {
+              "Title": "Docs: Details (missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
+              "Kind": "Details"
+            },
+            {
+              "Title": "Docs: Privacy (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\privacy\\privacy-verified.md",
+              "Kind": "Docs"
+            }
+          ]
+        },
+        "Stages": [
+          {
+            "Stage": "detect-before",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Location scripting disabled'.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Location scripting disabled",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": false,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Location scripting disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\LocationAndSensors\\DisableLocationScripting: missing -> 1",
+                "TimestampText": "09:10:35"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "apply",
+            "AppliedStatus": "Applied",
+            "StatusMessage": "Run completed.",
+            "OutcomeSummary": "Apply - Success",
+            "CurrentValue": "Location scripting disabled",
+            "TargetValue": "Location scripting disabled",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Location scripting disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\LocationAndSensors\\DisableLocationScripting: missing -> 1",
+                "TimestampText": "09:10:35"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Location scripting disabled'.",
+                "TimestampText": "09:10:37"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Location scripting disabled'.",
+                "TimestampText": "09:10:37"
               },
               {
                 "Action": "Rollback",
@@ -1568,7 +1303,7 @@
             "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Windows Spotlight features disabled",
+            "TargetValue": "Location scripting disabled",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1577,36 +1312,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Windows Spotlight features disabled'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableWindowsSpotlightFeatures: missing -> 1",
-                "TimestampText": "09:08:36"
+                "Message": "Current values do not match a named option. Selected option is 'Location scripting disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\LocationAndSensors\\DisableLocationScripting: missing -> 1",
+                "TimestampText": "09:10:35"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Windows Spotlight features disabled'.",
-                "TimestampText": "09:08:36"
+                "Message": "Applied preset 'Location scripting disabled'.",
+                "TimestampText": "09:10:37"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Windows Spotlight features disabled'.",
-                "TimestampText": "09:08:36"
+                "Message": "Verified preset 'Location scripting disabled'.",
+                "TimestampText": "09:10:37"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "09:08:36"
+                "TimestampText": "09:10:38"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current values do not match a named option. Selected option is 'Windows Spotlight features disabled'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Location scripting disabled'.",
             "OutcomeSummary": "Detect - Success",
             "CurrentValue": "Custom / Mixed",
-            "TargetValue": "Windows Spotlight features disabled",
+            "TargetValue": "Location scripting disabled",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -1615,37 +1350,302 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current values do not match a named option. Selected option is 'Windows Spotlight features disabled'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent\\DisableWindowsSpotlightFeatures: missing -> 1",
-                "TimestampText": "09:08:37"
+                "Message": "Current values do not match a named option. Selected option is 'Location scripting disabled'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\LocationAndSensors\\DisableLocationScripting: missing -> 1",
+                "TimestampText": "09:10:38"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Windows Spotlight features disabled'.",
-                "TimestampText": "09:08:36"
+                "Message": "Applied preset 'Location scripting disabled'.",
+                "TimestampText": "09:10:37"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Windows Spotlight features disabled'.",
-                "TimestampText": "09:08:36"
+                "Message": "Verified preset 'Location scripting disabled'.",
+                "TimestampText": "09:10:37"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "09:08:36"
+                "TimestampText": "09:10:38"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T16:08:36.7253061+00:00",
-        "CompletedAtUtc": "2026-05-07T16:08:37.0885698+00:00"
+        "StartedAtUtc": "2026-05-07T16:10:35.0314673+00:00",
+        "CompletedAtUtc": "2026-05-07T16:10:38.1375198+00:00"
       },
-      "qa_tweak_id": "visibility.disable-spotlight-features",
-      "candidate_id": "visibility.disable-spotlight-features",
-      "card_name": "Windows Spotlight Features",
-      "documentation": "research/records/visibility.disable-spotlight-features.json"
+      "qa_tweak_id": "privacy.disable-location-scripting",
+      "candidate_id": "privacy.disable-location-scripting",
+      "card_name": "Location Scripting",
+      "documentation": "research/records/privacy.disable-location-scripting.json"
+    },
+    {
+      "tweak_id": "privacy.disable-location-services",
+      "host_exit": 0,
+      "execution_exit": 0,
+      "payload_status": "completed",
+      "report_source": "guest-file",
+      "report_parse_error": null,
+      "report_fetch_status": "ok",
+      "report_app_success": true,
+      "report_success": true,
+      "report_status": "ok",
+      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
+      "report_contract_status": "ok",
+      "report_contract_summary": "QA card snapshot contract passed.",
+      "report_contract_failures": [],
+      "report_card_present": true,
+      "report_card_has_claim_boundary": true,
+      "report_card_present_fields": [
+        "TweakId",
+        "Name",
+        "Category",
+        "EvidenceClass",
+        "ResearchStatus",
+        "RollbackSnapshotState",
+        "HasClaimBoundary",
+        "WhatWeKnowSummary",
+        "WhatWeDoNotClaimSummary",
+        "ProofLanes"
+      ],
+      "report_card_missing_fields": [],
+      "report_card_proof_lanes": [
+        "docs",
+        "runtime",
+        "source",
+        "rollback"
+      ],
+      "report_card_missing_proof_lanes": [],
+      "report": {
+        "TweakId": "privacy.disable-location-services",
+        "TweakName": "Location Feature",
+        "Success": true,
+        "Status": "ok",
+        "Summary": "Apply/verify path completed and rollback restored the tweak.",
+        "RollbackRequested": true,
+        "Card": {
+          "TweakId": "privacy.disable-location-services",
+          "Name": "Location Feature",
+          "Category": "Privacy",
+          "Description": "Windows can provide location information to apps and system features. This policy decides whether the location feature is turned off for the computer.",
+          "FriendlyDescription": "Windows can provide location information to apps and system features. This policy decides whether the location feature is turned off for the computer.",
+          "RegistryPath": "HKLM\\Software\\Policies\\Microsoft\\Windows\\LocationAndSensors\\DisableLocation",
+          "EvidenceClass": "A",
+          "EvidenceClassTitle": "Cross-Layer Verified",
+          "ResearchStatus": "PROMOTED",
+          "IsMutationAllowed": true,
+          "RollbackSnapshotState": "ready",
+          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
+          "HasClaimBoundary": true,
+          "WhatWeKnowSummary": "Claim: Windows can provide location information to apps and system features. This policy decides whether the location feature is turned off for the computer. Evidence: Local official ADMX defines the exact machine-policy key and value name; local ADML confirms that enabling the policy turns off the Windows location feature for the computer. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
+          "ProofLanes": [
+            {
+              "Key": "docs",
+              "Label": "DOCS",
+              "State": "ready",
+              "Summary": "Local official ADMX defines the exact machine-policy key and value name; local ADML confirms that enabling the policy turns off the Windows location feature for the computer.",
+              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/Sensors.admx"
+            },
+            {
+              "Key": "runtime",
+              "Label": "RUNTIME",
+              "State": "ready",
+              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+              "Source": ""
+            },
+            {
+              "Key": "source",
+              "Label": "SOURCE",
+              "State": "ready",
+              "Summary": "No upstream nohuto source link is attached to this record.",
+              "Source": ""
+            },
+            {
+              "Key": "rollback",
+              "Label": "ROLLBACK",
+              "State": "ready",
+              "Summary": "Rollback: Verified via record-restore-story.",
+              "Source": "record-restore-story"
+            }
+          ],
+          "ReferenceLinks": [
+            {
+              "Title": "Docs: Details (missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
+              "Kind": "Details"
+            },
+            {
+              "Title": "Docs: Privacy (section missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\privacy\\privacy-verified.md",
+              "Kind": "Docs"
+            }
+          ]
+        },
+        "Stages": [
+          {
+            "Stage": "detect-before",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Location turned off'.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Location turned off",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": false,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Location turned off'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\LocationAndSensors\\DisableLocation: missing -> 1",
+                "TimestampText": "09:10:44"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "apply",
+            "AppliedStatus": "Applied",
+            "StatusMessage": "Run completed.",
+            "OutcomeSummary": "Apply - Success",
+            "CurrentValue": "Location turned off",
+            "TargetValue": "Location turned off",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Location turned off'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\LocationAndSensors\\DisableLocation: missing -> 1",
+                "TimestampText": "09:10:44"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Location turned off'.",
+                "TimestampText": "09:10:47"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Location turned off'.",
+                "TimestampText": "09:10:47"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Not required",
+                "Message": "Step not executed.",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "rollback",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Rolled back registry values.",
+            "OutcomeSummary": "Rollback - Rolled Back",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Location turned off",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Location turned off'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\LocationAndSensors\\DisableLocation: missing -> 1",
+                "TimestampText": "09:10:44"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Location turned off'.",
+                "TimestampText": "09:10:47"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Location turned off'.",
+                "TimestampText": "09:10:47"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "09:10:47"
+              }
+            ]
+          },
+          {
+            "Stage": "detect-after",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Location turned off'.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Location turned off",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Location turned off'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\LocationAndSensors\\DisableLocation: missing -> 1",
+                "TimestampText": "09:10:47"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Location turned off'.",
+                "TimestampText": "09:10:47"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Location turned off'.",
+                "TimestampText": "09:10:47"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "09:10:47"
+              }
+            ]
+          }
+        ],
+        "StartedAtUtc": "2026-05-07T16:10:44.5392433+00:00",
+        "CompletedAtUtc": "2026-05-07T16:10:47.7741578+00:00"
+      },
+      "qa_tweak_id": "privacy.disable-location-services",
+      "candidate_id": "privacy.disable-location-services",
+      "card_name": "Location Feature",
+      "documentation": "research/records/privacy.disable-location-services.json"
     }
   ],
   "summary": {
@@ -1654,7 +1654,7 @@
     "live_success_count": 5,
     "live_failure_count": 0,
     "categories": [
-      "Visibility"
+      "Privacy"
     ]
   }
 }
