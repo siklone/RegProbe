@@ -1,11 +1,11 @@
 # Promoted App QA Coverage
 
-- Generated UTC: 2026-05-07T16:58:14Z
-- History entries: 56
+- Generated UTC: 2026-05-07T16:59:48Z
+- History entries: 57
 - Promoted app-QA candidates: 242
-- Covered: 169
-- Uncovered: 73
-- Coverage: 69.83%
+- Covered: 171
+- Uncovered: 71
+- Coverage: 70.66%
 
 ## Covered Categories
 
@@ -14,7 +14,7 @@
 - Developer: 7
 - Explorer: 13
 - Network: 19
-- Notifications: 3
+- Notifications: 5
 - Performance: 3
 - Peripheral: 2
 - Power: 7
@@ -29,7 +29,6 @@
 - Developer: 2
 - Explorer: 4
 - Network: 9
-- Notifications: 2
 - Peripheral: 1
 - Power: 3
 - Privacy: 24
@@ -39,9 +38,6 @@
 
 ## Recommended Next Batches
 
-- Notifications: 2 uncovered cards | coverage 60.0%
-  command: `dotnet run --project cli/cli.csproj -- research qa-batch --id notifications.disable-mirroring --id notifications.disable-tile`
-  live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id notifications.disable-mirroring --id notifications.disable-tile --run-kvm --json`
 - Privacy: 5 uncovered cards | coverage 64.18%
   command: `dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-pca-diagnostics.policy --id privacy.disable-phone-linking --id privacy.disable-program-compatibility-assistant --id privacy.disable-recall --id privacy.disable-resume`
   live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id privacy.disable-pca-diagnostics.policy --id privacy.disable-phone-linking --id privacy.disable-program-compatibility-assistant --id privacy.disable-recall --id privacy.disable-resume --run-kvm --json`
@@ -54,6 +50,9 @@
 - Network: 5 uncovered cards | coverage 67.86%
   command: `dotnet run --project cli/cli.csproj -- research qa-batch --id network.smb-enable-multichannel --id network.smb-enable-quic --id network.smb-encrypt-data --id network.smb-increase-client-metadata-cache --id network.smb-reject-unencrypted-access`
   live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id network.smb-enable-multichannel --id network.smb-enable-quic --id network.smb-encrypt-data --id network.smb-increase-client-metadata-cache --id network.smb-reject-unencrypted-access --run-kvm --json`
+- System: 5 uncovered cards | coverage 69.23%
+  command: `dotnet run --project cli/cli.csproj -- research qa-batch --id system.ntfs-disable-8dot3 --id system.ntfs-disable-last-access --id system.ntfs-enable-long-paths --id system.ntfs-reset-memory-usage --id system.ntfs-reset-mft-zone`
+  live KVM: `dotnet run --project cli/cli.csproj -- research qa-batch --id system.ntfs-disable-8dot3 --id system.ntfs-disable-last-access --id system.ntfs-enable-long-paths --id system.ntfs-reset-memory-usage --id system.ntfs-reset-mft-zone --run-kvm --json`
 
 ## Remaining Uncovered Sample
 
@@ -73,7 +72,7 @@
 - `network.smb-require-signing-client` | SMB Client Signing Requirement | Network
 - `network.smb-require-signing-server` | SMB Server Signing Requirement | Network
 - `network.smb-set-cipher-suite-order` | SMB Cipher Suite Order | Network
-- `notifications.disable-mirroring` | Notification Mirroring | Notifications
-- `notifications.disable-tile` | Tile Notifications | Notifications
 - `peripheral.disable-autoplay` | Disable AutoPlay | Peripheral
 - `power.hide-sleep-option` | Show Sleep Option | Power
+- `power.optimize-cpu-boost` | Optimize CPU Performance Boost | Power
+- `power.optimize-gaming-network` | Games MMCSS Task Profile | Power

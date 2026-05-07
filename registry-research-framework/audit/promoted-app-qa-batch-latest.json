@@ -1,13 +1,10 @@
 {
-  "generated_utc": "2026-05-07T16:58:14Z",
+  "generated_utc": "2026-05-07T16:59:48Z",
   "status": "PASS",
   "selection": {
     "requested_ids": [
-      "system.memory-disable-paging-executive",
-      "system.memory-large-system-cache-client",
-      "system.memory-nonpaged-pool-dynamic",
-      "system.memory-paged-pool-dynamic",
-      "system.memory-registry-quota-default"
+      "notifications.disable-mirroring",
+      "notifications.disable-tile"
     ],
     "requested_categories": [],
     "limit_per_category": 1,
@@ -22,29 +19,29 @@
     "kvm_batch_runner": "scripts/vm-kvm/run-guest-app-tweak-qa-batch.py"
   },
   "catalog_candidate_count": 242,
-  "selected_candidate_count": 5,
+  "selected_candidate_count": 2,
   "errors": [],
   "candidates": [
     {
-      "tweak_id": "system.memory-disable-paging-executive",
-      "qa_tweak_id": "system.memory-disable-paging-executive",
-      "candidate_id": "system.memory-disable-paging-executive",
-      "record_id": "system.memory-disable-paging-executive",
-      "category": "System",
-      "name": "Disable Paging Executive",
-      "documentation": "research/records/system.memory-disable-paging-executive.json",
+      "tweak_id": "notifications.disable-mirroring",
+      "qa_tweak_id": "notifications.disable-mirroring",
+      "candidate_id": "notifications.disable-mirroring",
+      "record_id": "notifications.disable-mirroring",
+      "category": "Notifications",
+      "name": "Notification Mirroring",
+      "documentation": "research/records/notifications.disable-mirroring.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect system.memory-disable-paging-executive",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect notifications.disable-mirroring",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.memory-disable-paging-executive' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.memory-disable-paging-executive.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.memory-disable-paging-executive' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.memory-disable-paging-executive.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.memory-disable-paging-executive' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.memory-disable-paging-executive.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.memory-disable-paging-executive' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.memory-disable-paging-executive.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'system.memory-disable-paging-executive'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'notifications.disable-mirroring' --qa-output 'C:\\Tools\\ValidationController\\smoke\\notifications.disable-mirroring.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'notifications.disable-mirroring' --qa-output 'C:\\Tools\\ValidationController\\smoke\\notifications.disable-mirroring.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'notifications.disable-mirroring' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\notifications.disable-mirroring.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'notifications.disable-mirroring' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\notifications.disable-mirroring.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'notifications.disable-mirroring'"
       },
       "expected_report": {
         "success": true,
@@ -85,202 +82,25 @@
       }
     },
     {
-      "tweak_id": "system.memory-large-system-cache-client",
-      "qa_tweak_id": "system.memory-large-system-cache-client",
-      "candidate_id": "system.memory-large-system-cache-client",
-      "record_id": "system.memory-large-system-cache-client",
-      "category": "System",
-      "name": "Large System Cache",
-      "documentation": "research/records/system.memory-large-system-cache-client.review.json",
+      "tweak_id": "notifications.disable-tile",
+      "qa_tweak_id": "notifications.disable-tile",
+      "candidate_id": "notifications.disable-tile",
+      "record_id": "notifications.disable-tile",
+      "category": "Notifications",
+      "name": "Tile Notifications",
+      "documentation": "research/records/notifications.disable-tile.json",
       "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect system.memory-large-system-cache-client",
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect notifications.disable-tile",
         "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.memory-large-system-cache-client' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.memory-large-system-cache-client.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.memory-large-system-cache-client' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.memory-large-system-cache-client.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.memory-large-system-cache-client' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.memory-large-system-cache-client.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.memory-large-system-cache-client' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.memory-large-system-cache-client.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'system.memory-large-system-cache-client'"
-      },
-      "expected_report": {
-        "success": true,
-        "status": "ok",
-        "rollback_requested": true,
-        "required_stages": [
-          "detect-before",
-          "apply",
-          "rollback",
-          "detect-after"
-        ],
-        "required_card_snapshot": {
-          "required_fields": [
-            "TweakId",
-            "Name",
-            "Category",
-            "EvidenceClass",
-            "ResearchStatus",
-            "RollbackSnapshotState",
-            "HasClaimBoundary",
-            "WhatWeKnowSummary",
-            "WhatWeDoNotClaimSummary",
-            "ProofLanes"
-          ],
-          "required_proof_lanes": [
-            "docs",
-            "runtime",
-            "source",
-            "rollback"
-          ],
-          "claim_boundary_required": true
-        },
-        "required_stage_assertions": [
-          "apply stage reports a successful apply story",
-          "rollback stage reports a successful rollback story",
-          "detect-after is present"
-        ]
-      }
-    },
-    {
-      "tweak_id": "system.memory-nonpaged-pool-dynamic",
-      "qa_tweak_id": "system.memory-nonpaged-pool-dynamic",
-      "candidate_id": "system.memory-nonpaged-pool-dynamic",
-      "record_id": "system.memory-nonpaged-pool-dynamic",
-      "category": "System",
-      "name": "Nonpaged Pool Size",
-      "documentation": "research/records/system.memory-nonpaged-pool-dynamic.json",
-      "promotion_state": "promoted",
-      "apply_allowed": true,
-      "restore_default_supported": true,
-      "restore_previous_supported": true,
-      "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect system.memory-nonpaged-pool-dynamic",
-        "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.memory-nonpaged-pool-dynamic' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.memory-nonpaged-pool-dynamic.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.memory-nonpaged-pool-dynamic' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.memory-nonpaged-pool-dynamic.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.memory-nonpaged-pool-dynamic' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.memory-nonpaged-pool-dynamic.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.memory-nonpaged-pool-dynamic' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.memory-nonpaged-pool-dynamic.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'system.memory-nonpaged-pool-dynamic'"
-      },
-      "expected_report": {
-        "success": true,
-        "status": "ok",
-        "rollback_requested": true,
-        "required_stages": [
-          "detect-before",
-          "apply",
-          "rollback",
-          "detect-after"
-        ],
-        "required_card_snapshot": {
-          "required_fields": [
-            "TweakId",
-            "Name",
-            "Category",
-            "EvidenceClass",
-            "ResearchStatus",
-            "RollbackSnapshotState",
-            "HasClaimBoundary",
-            "WhatWeKnowSummary",
-            "WhatWeDoNotClaimSummary",
-            "ProofLanes"
-          ],
-          "required_proof_lanes": [
-            "docs",
-            "runtime",
-            "source",
-            "rollback"
-          ],
-          "claim_boundary_required": true
-        },
-        "required_stage_assertions": [
-          "apply stage reports a successful apply story",
-          "rollback stage reports a successful rollback story",
-          "detect-after is present"
-        ]
-      }
-    },
-    {
-      "tweak_id": "system.memory-paged-pool-dynamic",
-      "qa_tweak_id": "system.memory-paged-pool-dynamic",
-      "candidate_id": "system.memory-paged-pool-dynamic",
-      "record_id": "system.memory-paged-pool-dynamic",
-      "category": "System",
-      "name": "Paged Pool Size",
-      "documentation": "research/records/system.memory-paged-pool-dynamic.json",
-      "promotion_state": "promoted",
-      "apply_allowed": true,
-      "restore_default_supported": true,
-      "restore_previous_supported": true,
-      "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect system.memory-paged-pool-dynamic",
-        "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.memory-paged-pool-dynamic' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.memory-paged-pool-dynamic.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.memory-paged-pool-dynamic' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.memory-paged-pool-dynamic.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.memory-paged-pool-dynamic' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.memory-paged-pool-dynamic.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.memory-paged-pool-dynamic' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.memory-paged-pool-dynamic.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'system.memory-paged-pool-dynamic'"
-      },
-      "expected_report": {
-        "success": true,
-        "status": "ok",
-        "rollback_requested": true,
-        "required_stages": [
-          "detect-before",
-          "apply",
-          "rollback",
-          "detect-after"
-        ],
-        "required_card_snapshot": {
-          "required_fields": [
-            "TweakId",
-            "Name",
-            "Category",
-            "EvidenceClass",
-            "ResearchStatus",
-            "RollbackSnapshotState",
-            "HasClaimBoundary",
-            "WhatWeKnowSummary",
-            "WhatWeDoNotClaimSummary",
-            "ProofLanes"
-          ],
-          "required_proof_lanes": [
-            "docs",
-            "runtime",
-            "source",
-            "rollback"
-          ],
-          "claim_boundary_required": true
-        },
-        "required_stage_assertions": [
-          "apply stage reports a successful apply story",
-          "rollback stage reports a successful rollback story",
-          "detect-after is present"
-        ]
-      }
-    },
-    {
-      "tweak_id": "system.memory-registry-quota-default",
-      "qa_tweak_id": "system.memory-registry-quota-default",
-      "candidate_id": "system.memory-registry-quota-default",
-      "record_id": "system.memory-registry-quota-default",
-      "category": "System",
-      "name": "Registry Size Limit / Registry Quota",
-      "documentation": "research/records/system.memory-registry-quota-default.review.json",
-      "promotion_state": "promoted",
-      "apply_allowed": true,
-      "restore_default_supported": true,
-      "restore_previous_supported": true,
-      "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect system.memory-registry-quota-default",
-        "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.memory-registry-quota-default' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.memory-registry-quota-default.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'system.memory-registry-quota-default' --qa-output 'C:\\Tools\\ValidationController\\smoke\\system.memory-registry-quota-default.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.memory-registry-quota-default' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.memory-registry-quota-default.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'system.memory-registry-quota-default' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\system.memory-registry-quota-default.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'system.memory-registry-quota-default'"
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'notifications.disable-tile' --qa-output 'C:\\Tools\\ValidationController\\smoke\\notifications.disable-tile.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'notifications.disable-tile' --qa-output 'C:\\Tools\\ValidationController\\smoke\\notifications.disable-tile.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'notifications.disable-tile' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\notifications.disable-tile.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'notifications.disable-tile' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\notifications.disable-tile.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'notifications.disable-tile'"
       },
       "expected_report": {
         "success": true,
@@ -323,7 +143,7 @@
   ],
   "run_results": [
     {
-      "tweak_id": "system.memory-disable-paging-executive",
+      "tweak_id": "notifications.disable-mirroring",
       "host_exit": 0,
       "execution_exit": 0,
       "payload_status": "completed",
@@ -360,19 +180,19 @@
       ],
       "report_card_missing_proof_lanes": [],
       "report": {
-        "TweakId": "system.memory-disable-paging-executive",
-        "TweakName": "Disable Paging Executive",
+        "TweakId": "notifications.disable-mirroring",
+        "TweakName": "Notification Mirroring",
         "Success": true,
         "Status": "ok",
         "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "Card": {
-          "TweakId": "system.memory-disable-paging-executive",
-          "Name": "Disable Paging Executive",
-          "Category": "System",
-          "Description": "This setting was used for older tracing and diagnosis scenarios to keep some kernel-mode code and drivers in RAM instead of letting Windows page them out to disk. Microsoft says Windows 8 and newer systems do not need this change.",
-          "FriendlyDescription": "This setting was used for older tracing and diagnosis scenarios to keep some kernel-mode code and drivers in RAM instead of letting Windows page them out to disk. Microsoft says Windows 8 and newer systems do not need this change.",
-          "RegistryPath": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management\\DisablePagingExecutive",
+          "TweakId": "notifications.disable-mirroring",
+          "Name": "Notification Mirroring",
+          "Category": "Notifications",
+          "Description": "Windows can mirror some notifications to other devices. This policy decides whether that cross-device mirroring is allowed for the current user.",
+          "FriendlyDescription": "Windows can mirror some notifications to other devices. This policy decides whether that cross-device mirroring is allowed for the current user.",
+          "RegistryPath": "HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\CurrentVersion\\PushNotifications\\DisallowNotificationMirroring",
           "EvidenceClass": "A",
           "EvidenceClassTitle": "Cross-Layer Verified",
           "ResearchStatus": "PROMOTED",
@@ -380,15 +200,280 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: This setting was used for older tracing and diagnosis scenarios to keep some kernel-mode code and drivers in RAM instead of letting Windows page them out to disk. Microsoft says Windows 8 and newer systems do not need this change. Evidence: Microsoft explicitly documents the setting and explicitly says newer Windows systems do not need it, so the record stays research-only for Windows 11 rather than moving toward Apply. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: Windows can mirror some notifications to other devices. This policy decides whether that cross-device mirroring is allowed for the current user. Evidence: The local official Microsoft ADMX file names the same user policy key and value name that the app writes and confirms the 1/0 mapping. Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "Microsoft explicitly documents the setting and explicitly says newer Windows systems do not need it, so the record stays research-only for Windows 11 rather than moving toward Apply.",
-              "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows-hardware/test/wpt/kernel-trace-control-api-reference"
+              "Summary": "The local official Microsoft ADMX file names the same user policy key and value name that the app writes and confirms the 1/0 mapping.",
+              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/WPN.admx"
+            },
+            {
+              "Key": "runtime",
+              "Label": "RUNTIME",
+              "State": "ready",
+              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+              "Source": ""
+            },
+            {
+              "Key": "source",
+              "Label": "SOURCE",
+              "State": "ready",
+              "Summary": "No upstream nohuto source link is attached to this record.",
+              "Source": ""
+            },
+            {
+              "Key": "rollback",
+              "Label": "ROLLBACK",
+              "State": "ready",
+              "Summary": "Rollback: Verified via record-restore-story.",
+              "Source": "record-restore-story"
+            }
+          ],
+          "ReferenceLinks": [
+            {
+              "Title": "Docs: Details (missing)",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
+              "Kind": "Details"
+            },
+            {
+              "Title": "Docs: Notifications",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\notifications\\notifications.md#notifications.disable-mirroring",
+              "Kind": "Docs"
+            }
+          ]
+        },
+        "Stages": [
+          {
+            "Stage": "detect-before",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Notification mirroring turned off'.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Notification mirroring turned off",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": false,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Notification mirroring turned off'.\nEntries:\n- HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\CurrentVersion\\PushNotifications\\DisallowNotificationMirroring: missing -> 1",
+                "TimestampText": "09:59:52"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "apply",
+            "AppliedStatus": "Applied",
+            "StatusMessage": "Run completed.",
+            "OutcomeSummary": "Apply - Success",
+            "CurrentValue": "Notification mirroring turned off",
+            "TargetValue": "Notification mirroring turned off",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Notification mirroring turned off'.\nEntries:\n- HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\CurrentVersion\\PushNotifications\\DisallowNotificationMirroring: missing -> 1",
+                "TimestampText": "09:59:52"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Notification mirroring turned off'.",
+                "TimestampText": "09:59:52"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Notification mirroring turned off'.",
+                "TimestampText": "09:59:52"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Not required",
+                "Message": "Step not executed.",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "rollback",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Rolled back registry values.",
+            "OutcomeSummary": "Rollback - Rolled Back",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Notification mirroring turned off",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Notification mirroring turned off'.\nEntries:\n- HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\CurrentVersion\\PushNotifications\\DisallowNotificationMirroring: missing -> 1",
+                "TimestampText": "09:59:52"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Notification mirroring turned off'.",
+                "TimestampText": "09:59:52"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Notification mirroring turned off'.",
+                "TimestampText": "09:59:52"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "09:59:52"
+              }
+            ]
+          },
+          {
+            "Stage": "detect-after",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Notification mirroring turned off'.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Notification mirroring turned off",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current values do not match a named option. Selected option is 'Notification mirroring turned off'.\nEntries:\n- HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\CurrentVersion\\PushNotifications\\DisallowNotificationMirroring: missing -> 1",
+                "TimestampText": "09:59:52"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Notification mirroring turned off'.",
+                "TimestampText": "09:59:52"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Notification mirroring turned off'.",
+                "TimestampText": "09:59:52"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "09:59:52"
+              }
+            ]
+          }
+        ],
+        "StartedAtUtc": "2026-05-07T16:59:52.1623466+00:00",
+        "CompletedAtUtc": "2026-05-07T16:59:52.4551339+00:00"
+      },
+      "qa_tweak_id": "notifications.disable-mirroring",
+      "candidate_id": "notifications.disable-mirroring",
+      "card_name": "Notification Mirroring",
+      "documentation": "research/records/notifications.disable-mirroring.json"
+    },
+    {
+      "tweak_id": "notifications.disable-tile",
+      "host_exit": 0,
+      "execution_exit": 0,
+      "payload_status": "completed",
+      "report_source": "stdout",
+      "report_parse_error": null,
+      "report_fetch_status": null,
+      "report_app_success": true,
+      "report_success": true,
+      "report_status": "ok",
+      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
+      "report_contract_status": "ok",
+      "report_contract_summary": "QA card snapshot contract passed.",
+      "report_contract_failures": [],
+      "report_card_present": true,
+      "report_card_has_claim_boundary": true,
+      "report_card_present_fields": [
+        "TweakId",
+        "Name",
+        "Category",
+        "EvidenceClass",
+        "ResearchStatus",
+        "RollbackSnapshotState",
+        "HasClaimBoundary",
+        "WhatWeKnowSummary",
+        "WhatWeDoNotClaimSummary",
+        "ProofLanes"
+      ],
+      "report_card_missing_fields": [],
+      "report_card_proof_lanes": [
+        "docs",
+        "runtime",
+        "source",
+        "rollback"
+      ],
+      "report_card_missing_proof_lanes": [],
+      "report": {
+        "TweakId": "notifications.disable-tile",
+        "TweakName": "Tile Notifications",
+        "Success": true,
+        "Status": "ok",
+        "Summary": "Apply/verify path completed and rollback restored the tweak.",
+        "RollbackRequested": true,
+        "Card": {
+          "TweakId": "notifications.disable-tile",
+          "Name": "Tile Notifications",
+          "Category": "Notifications",
+          "Description": "Tile notifications are the live updates and badges some Windows tiles can show. This policy decides whether those tile updates are allowed for the current user.",
+          "FriendlyDescription": "Tile notifications are the live updates and badges some Windows tiles can show. This policy decides whether those tile updates are allowed for the current user.",
+          "RegistryPath": "HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\CurrentVersion\\PushNotifications\\NoTileApplicationNotification",
+          "EvidenceClass": "A",
+          "EvidenceClassTitle": "Cross-Layer Verified",
+          "ResearchStatus": "PROMOTED",
+          "IsMutationAllowed": true,
+          "RollbackSnapshotState": "ready",
+          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
+          "HasClaimBoundary": true,
+          "WhatWeKnowSummary": "Claim: Tile notifications are the live updates and badges some Windows tiles can show. This policy decides whether those tile updates are allowed for the current user. Evidence: The local official Microsoft ADMX file names the same user policy key and value name that the app writes and confirms the 1/0 mapping. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
+          "ProofLanes": [
+            {
+              "Key": "docs",
+              "Label": "DOCS",
+              "State": "ready",
+              "Summary": "The local official Microsoft ADMX file names the same user policy key and value name that the app writes and confirms the 1/0 mapping.",
+              "Source": "Validation proof source: evidence/files/external/c/Windows/PolicyDefinitions/WPN.admx"
             },
             {
               "Key": "runtime",
@@ -420,12 +505,12 @@
             },
             {
               "Title": "Docs: Win-Config",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\win-config\\batch-01.md#system.memory-disable-paging-executive",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\win-config\\batch-01.md#notifications.disable-tile",
               "Kind": "Docs"
             },
             {
-              "Title": "Docs: System (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\system\\system.md",
+              "Title": "Docs: Notifications",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\notifications\\notifications.md#notifications.disable-tile",
               "Kind": "Docs"
             }
           ]
@@ -434,10 +519,10 @@
           {
             "Stage": "detect-before",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current option is 'Paging executive allowed'. Selected option is 'Paging executive disabled'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Tile notifications turned off'.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Paging executive allowed",
-            "TargetValue": "Paging executive disabled",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Tile notifications turned off",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": false,
@@ -446,8 +531,8 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current option is 'Paging executive allowed'. Selected option is 'Paging executive disabled'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management\\DisablePagingExecutive: 0 -> 1",
-                "TimestampText": "09:58:18"
+                "Message": "Current values do not match a named option. Selected option is 'Tile notifications turned off'.\nEntries:\n- HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\CurrentVersion\\PushNotifications\\NoTileApplicationNotification: missing -> 1",
+                "TimestampText": "09:59:58"
               },
               {
                 "Action": "Apply",
@@ -474,8 +559,8 @@
             "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Paging executive disabled",
-            "TargetValue": "Paging executive disabled",
+            "CurrentValue": "Tile notifications turned off",
+            "TargetValue": "Tile notifications turned off",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -484,20 +569,20 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current option is 'Paging executive allowed'. Selected option is 'Paging executive disabled'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management\\DisablePagingExecutive: 0 -> 1",
-                "TimestampText": "09:58:18"
+                "Message": "Current values do not match a named option. Selected option is 'Tile notifications turned off'.\nEntries:\n- HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\CurrentVersion\\PushNotifications\\NoTileApplicationNotification: missing -> 1",
+                "TimestampText": "09:59:58"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Paging executive disabled'.",
-                "TimestampText": "09:58:21"
+                "Message": "Applied preset 'Tile notifications turned off'.",
+                "TimestampText": "09:59:58"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Paging executive disabled'.",
-                "TimestampText": "09:58:21"
+                "Message": "Verified preset 'Tile notifications turned off'.",
+                "TimestampText": "09:59:58"
               },
               {
                 "Action": "Rollback",
@@ -512,8 +597,8 @@
             "AppliedStatus": "NotApplied",
             "StatusMessage": "Rolled back registry values.",
             "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Paging executive allowed",
-            "TargetValue": "Paging executive disabled",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Tile notifications turned off",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -522,36 +607,36 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current option is 'Paging executive allowed'. Selected option is 'Paging executive disabled'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management\\DisablePagingExecutive: 0 -> 1",
-                "TimestampText": "09:58:18"
+                "Message": "Current values do not match a named option. Selected option is 'Tile notifications turned off'.\nEntries:\n- HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\CurrentVersion\\PushNotifications\\NoTileApplicationNotification: missing -> 1",
+                "TimestampText": "09:59:58"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Paging executive disabled'.",
-                "TimestampText": "09:58:21"
+                "Message": "Applied preset 'Tile notifications turned off'.",
+                "TimestampText": "09:59:58"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Paging executive disabled'.",
-                "TimestampText": "09:58:21"
+                "Message": "Verified preset 'Tile notifications turned off'.",
+                "TimestampText": "09:59:58"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "09:58:21"
+                "TimestampText": "09:59:58"
               }
             ]
           },
           {
             "Stage": "detect-after",
             "AppliedStatus": "NotApplied",
-            "StatusMessage": "Current option is 'Paging executive allowed'. Selected option is 'Paging executive disabled'.",
+            "StatusMessage": "Current values do not match a named option. Selected option is 'Tile notifications turned off'.",
             "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Paging executive allowed",
-            "TargetValue": "Paging executive disabled",
+            "CurrentValue": "Custom / Mixed",
+            "TargetValue": "Tile notifications turned off",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
             "HasSuccessfulApplyStory": true,
@@ -560,1106 +645,46 @@
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
-                "Message": "Current option is 'Paging executive allowed'. Selected option is 'Paging executive disabled'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management\\DisablePagingExecutive: 0 -> 1",
-                "TimestampText": "09:58:21"
+                "Message": "Current values do not match a named option. Selected option is 'Tile notifications turned off'.\nEntries:\n- HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\CurrentVersion\\PushNotifications\\NoTileApplicationNotification: missing -> 1",
+                "TimestampText": "09:59:58"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
-                "Message": "Applied preset 'Paging executive disabled'.",
-                "TimestampText": "09:58:21"
+                "Message": "Applied preset 'Tile notifications turned off'.",
+                "TimestampText": "09:59:58"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
-                "Message": "Verified preset 'Paging executive disabled'.",
-                "TimestampText": "09:58:21"
+                "Message": "Verified preset 'Tile notifications turned off'.",
+                "TimestampText": "09:59:58"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "09:58:21"
+                "TimestampText": "09:59:58"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-07T16:58:18.4283961+00:00",
-        "CompletedAtUtc": "2026-05-07T16:58:21.6308456+00:00"
+        "StartedAtUtc": "2026-05-07T16:59:58.5455987+00:00",
+        "CompletedAtUtc": "2026-05-07T16:59:58.8360407+00:00"
       },
-      "qa_tweak_id": "system.memory-disable-paging-executive",
-      "candidate_id": "system.memory-disable-paging-executive",
-      "card_name": "Disable Paging Executive",
-      "documentation": "research/records/system.memory-disable-paging-executive.json"
-    },
-    {
-      "tweak_id": "system.memory-large-system-cache-client",
-      "host_exit": 0,
-      "execution_exit": 0,
-      "payload_status": "completed",
-      "report_source": "stdout",
-      "report_parse_error": null,
-      "report_fetch_status": null,
-      "report_app_success": true,
-      "report_success": true,
-      "report_status": "ok",
-      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
-      "report_contract_status": "ok",
-      "report_contract_summary": "QA card snapshot contract passed.",
-      "report_contract_failures": [],
-      "report_card_present": true,
-      "report_card_has_claim_boundary": true,
-      "report_card_present_fields": [
-        "TweakId",
-        "Name",
-        "Category",
-        "EvidenceClass",
-        "ResearchStatus",
-        "RollbackSnapshotState",
-        "HasClaimBoundary",
-        "WhatWeKnowSummary",
-        "WhatWeDoNotClaimSummary",
-        "ProofLanes"
-      ],
-      "report_card_missing_fields": [],
-      "report_card_proof_lanes": [
-        "docs",
-        "runtime",
-        "source",
-        "rollback"
-      ],
-      "report_card_missing_proof_lanes": [],
-      "report": {
-        "TweakId": "system.memory-large-system-cache-client",
-        "TweakName": "Large System Cache",
-        "Success": true,
-        "Status": "ok",
-        "Summary": "Apply/verify path completed and rollback restored the tweak.",
-        "RollbackRequested": true,
-        "Card": {
-          "TweakId": "system.memory-large-system-cache-client",
-          "Name": "Large System Cache",
-          "Category": "System",
-          "Description": "Windows historically had a switch between favoring normal applications and favoring a larger system cache. Most normal users should leave this alone on modern systems.",
-          "FriendlyDescription": "Windows historically had a switch between favoring normal applications and favoring a larger system cache. Most normal users should leave this alone on modern systems.",
-          "RegistryPath": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management\\LargeSystemCache",
-          "EvidenceClass": "A",
-          "EvidenceClassTitle": "Cross-Layer Verified",
-          "ResearchStatus": "PROMOTED",
-          "IsMutationAllowed": true,
-          "RollbackSnapshotState": "ready",
-          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
-          "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Windows historically had a switch between favoring normal applications and favoring a larger system cache. Most normal users should leave this alone on modern systems. Evidence: Guest-side reversible probe on Win25H2Clean; see the batch probe output in evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json..md Rollback: Rollback: Verified via record-restore-story.",
-          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
-          "ProofLanes": [
-            {
-              "Key": "docs",
-              "Label": "DOCS",
-              "State": "ready",
-              "Summary": "Guest-side reversible probe on Win25H2Clean; see the batch probe output in evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json..md",
-              "Source": "Validation proof source: evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json"
-            },
-            {
-              "Key": "runtime",
-              "Label": "RUNTIME",
-              "State": "ready",
-              "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
-              "Source": ""
-            },
-            {
-              "Key": "source",
-              "Label": "SOURCE",
-              "State": "ready",
-              "Summary": "No upstream nohuto source link is attached to this record.",
-              "Source": ""
-            },
-            {
-              "Key": "rollback",
-              "Label": "ROLLBACK",
-              "State": "ready",
-              "Summary": "Rollback: Verified via record-restore-story.",
-              "Source": "record-restore-story"
-            }
-          ],
-          "ReferenceLinks": [
-            {
-              "Title": "Docs: Details (missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
-              "Kind": "Details"
-            },
-            {
-              "Title": "Docs: System (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\system\\system.md",
-              "Kind": "Docs"
-            }
-          ]
-        },
-        "Stages": [
-          {
-            "Stage": "detect-before",
-            "AppliedStatus": "Applied",
-            "StatusMessage": "Current option is 'Optimize for applications'.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Optimize for applications",
-            "TargetValue": "Optimize for applications",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": false,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Applied",
-                "Message": "Current option is 'Optimize for applications'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management\\LargeSystemCache: 0 -> 0",
-                "TimestampText": "09:58:27"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "apply",
-            "AppliedStatus": "Applied",
-            "StatusMessage": "Run completed.",
-            "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Optimize for applications",
-            "TargetValue": "Optimize for applications",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Applied",
-                "Message": "Current option is 'Optimize for applications'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management\\LargeSystemCache: 0 -> 0",
-                "TimestampText": "09:58:27"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Skipped",
-                "Message": "Already in the desired state.",
-                "TimestampText": "09:58:27"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified preset 'Optimize for applications'.",
-                "TimestampText": "09:58:27"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Skipped",
-                "Message": "No changes were made.",
-                "TimestampText": "09:58:27"
-              }
-            ]
-          },
-          {
-            "Stage": "rollback",
-            "AppliedStatus": "Applied",
-            "StatusMessage": "Rolled back registry values.",
-            "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Optimize for applications",
-            "TargetValue": "Optimize for applications",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Applied",
-                "Message": "Current option is 'Optimize for applications'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management\\LargeSystemCache: 0 -> 0",
-                "TimestampText": "09:58:27"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Skipped",
-                "Message": "Already in the desired state.",
-                "TimestampText": "09:58:27"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified preset 'Optimize for applications'.",
-                "TimestampText": "09:58:27"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "09:58:30"
-              }
-            ]
-          },
-          {
-            "Stage": "detect-after",
-            "AppliedStatus": "Applied",
-            "StatusMessage": "Current option is 'Optimize for applications'.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Optimize for applications",
-            "TargetValue": "Optimize for applications",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Applied",
-                "Message": "Current option is 'Optimize for applications'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management\\LargeSystemCache: 0 -> 0",
-                "TimestampText": "09:58:30"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Skipped",
-                "Message": "Already in the desired state.",
-                "TimestampText": "09:58:27"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified preset 'Optimize for applications'.",
-                "TimestampText": "09:58:27"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "09:58:30"
-              }
-            ]
-          }
-        ],
-        "StartedAtUtc": "2026-05-07T16:58:27.828384+00:00",
-        "CompletedAtUtc": "2026-05-07T16:58:30.813359+00:00"
-      },
-      "qa_tweak_id": "system.memory-large-system-cache-client",
-      "candidate_id": "system.memory-large-system-cache-client",
-      "card_name": "Large System Cache",
-      "documentation": "research/records/system.memory-large-system-cache-client.review.json"
-    },
-    {
-      "tweak_id": "system.memory-nonpaged-pool-dynamic",
-      "host_exit": 0,
-      "execution_exit": 0,
-      "payload_status": "completed",
-      "report_source": "stdout",
-      "report_parse_error": null,
-      "report_fetch_status": null,
-      "report_app_success": true,
-      "report_success": true,
-      "report_status": "ok",
-      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
-      "report_contract_status": "ok",
-      "report_contract_summary": "QA card snapshot contract passed.",
-      "report_contract_failures": [],
-      "report_card_present": true,
-      "report_card_has_claim_boundary": true,
-      "report_card_present_fields": [
-        "TweakId",
-        "Name",
-        "Category",
-        "EvidenceClass",
-        "ResearchStatus",
-        "RollbackSnapshotState",
-        "HasClaimBoundary",
-        "WhatWeKnowSummary",
-        "WhatWeDoNotClaimSummary",
-        "ProofLanes"
-      ],
-      "report_card_missing_fields": [],
-      "report_card_proof_lanes": [
-        "docs",
-        "runtime",
-        "source",
-        "rollback"
-      ],
-      "report_card_missing_proof_lanes": [],
-      "report": {
-        "TweakId": "system.memory-nonpaged-pool-dynamic",
-        "TweakName": "Nonpaged Pool Size",
-        "Success": true,
-        "Status": "ok",
-        "Summary": "Apply/verify path completed and rollback restored the tweak.",
-        "RollbackRequested": true,
-        "Card": {
-          "TweakId": "system.memory-nonpaged-pool-dynamic",
-          "Name": "Nonpaged Pool Size",
-          "Category": "System",
-          "Description": "Nonpaged pool is kernel memory that must always stay resident in RAM. This is a low-level legacy tuning area that normal users should not adjust manually.",
-          "FriendlyDescription": "Nonpaged pool is kernel memory that must always stay resident in RAM. This is a low-level legacy tuning area that normal users should not adjust manually.",
-          "RegistryPath": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management\\NonPagedPoolSize",
-          "EvidenceClass": "A",
-          "EvidenceClassTitle": "Cross-Layer Verified",
-          "ResearchStatus": "PROMOTED",
-          "IsMutationAllowed": true,
-          "RollbackSnapshotState": "ready",
-          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
-          "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Nonpaged pool is kernel memory that must always stay resident in RAM. This is a low-level legacy tuning area that normal users should not adjust manually. Evidence: Microsoft Q&A captures the default Memory Management registry snapshot and includes NonPagedPoolSize = 0. Rollback: Rollback: Verified via record-restore-story.",
-          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
-          "ProofLanes": [
-            {
-              "Key": "docs",
-              "Label": "DOCS",
-              "State": "ready",
-              "Summary": "Microsoft Q&A captures the default Memory Management registry snapshot and includes NonPagedPoolSize = 0.",
-              "Source": "Validation proof source: https://learn.microsoft.com/en-us/answers/questions/4238560/can-i-have-the-default-registry-value-for-memory-m"
-            },
-            {
-              "Key": "runtime",
-              "Label": "RUNTIME",
-              "State": "ready",
-              "Summary": "A same-day fast guest Ghidra retry for `NonPagedPoolSize` failed in `ensure-admin-shell` with a bounded timeout, so no xref bundle reached the host.",
-              "Source": "Guest Ghidra launch receipt for NonPagedPoolSize: evidence/raw/ghidra/ghidra-system-memory-nonpaged-pool-dynamic-20260427b/summary.json"
-            },
-            {
-              "Key": "source",
-              "Label": "SOURCE",
-              "State": "ready",
-              "Summary": "No upstream nohuto source link is attached to this record.",
-              "Source": ""
-            },
-            {
-              "Key": "rollback",
-              "Label": "ROLLBACK",
-              "State": "ready",
-              "Summary": "Rollback: Verified via record-restore-story.",
-              "Source": "record-restore-story"
-            }
-          ],
-          "ReferenceLinks": [
-            {
-              "Title": "Docs: Details (missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
-              "Kind": "Details"
-            },
-            {
-              "Title": "Docs: System (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\system\\system.md",
-              "Kind": "Docs"
-            }
-          ]
-        },
-        "Stages": [
-          {
-            "Stage": "detect-before",
-            "AppliedStatus": "Applied",
-            "StatusMessage": "Current value is 0.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "0",
-            "TargetValue": "0 (0x0)",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": false,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Applied",
-                "Message": "Current value is 0.",
-                "TimestampText": "09:58:37"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "apply",
-            "AppliedStatus": "Applied",
-            "StatusMessage": "Run completed.",
-            "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "0 (0x0)",
-            "TargetValue": "0 (0x0)",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Applied",
-                "Message": "Current value is 0.",
-                "TimestampText": "09:58:37"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Skipped",
-                "Message": "Already in the desired state.",
-                "TimestampText": "09:58:37"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified desired value.",
-                "TimestampText": "09:58:37"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Skipped",
-                "Message": "No changes were made.",
-                "TimestampText": "09:58:37"
-              }
-            ]
-          },
-          {
-            "Stage": "rollback",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Rolled back to 0.",
-            "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "0",
-            "TargetValue": "0 (0x0)",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Applied",
-                "Message": "Current value is 0.",
-                "TimestampText": "09:58:37"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Skipped",
-                "Message": "Already in the desired state.",
-                "TimestampText": "09:58:37"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified desired value.",
-                "TimestampText": "09:58:37"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Rolled back to 0.",
-                "TimestampText": "09:58:40"
-              }
-            ]
-          },
-          {
-            "Stage": "detect-after",
-            "AppliedStatus": "Applied",
-            "StatusMessage": "Current value is 0.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "0",
-            "TargetValue": "0 (0x0)",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Applied",
-                "Message": "Current value is 0.",
-                "TimestampText": "09:58:40"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Skipped",
-                "Message": "Already in the desired state.",
-                "TimestampText": "09:58:37"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified desired value.",
-                "TimestampText": "09:58:37"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Rolled back to 0.",
-                "TimestampText": "09:58:40"
-              }
-            ]
-          }
-        ],
-        "StartedAtUtc": "2026-05-07T16:58:37.217474+00:00",
-        "CompletedAtUtc": "2026-05-07T16:58:40.2058977+00:00"
-      },
-      "qa_tweak_id": "system.memory-nonpaged-pool-dynamic",
-      "candidate_id": "system.memory-nonpaged-pool-dynamic",
-      "card_name": "Nonpaged Pool Size",
-      "documentation": "research/records/system.memory-nonpaged-pool-dynamic.json"
-    },
-    {
-      "tweak_id": "system.memory-paged-pool-dynamic",
-      "host_exit": 0,
-      "execution_exit": 0,
-      "payload_status": "completed",
-      "report_source": "guest-file",
-      "report_parse_error": null,
-      "report_fetch_status": "ok",
-      "report_app_success": true,
-      "report_success": true,
-      "report_status": "ok",
-      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
-      "report_contract_status": "ok",
-      "report_contract_summary": "QA card snapshot contract passed.",
-      "report_contract_failures": [],
-      "report_card_present": true,
-      "report_card_has_claim_boundary": true,
-      "report_card_present_fields": [
-        "TweakId",
-        "Name",
-        "Category",
-        "EvidenceClass",
-        "ResearchStatus",
-        "RollbackSnapshotState",
-        "HasClaimBoundary",
-        "WhatWeKnowSummary",
-        "WhatWeDoNotClaimSummary",
-        "ProofLanes"
-      ],
-      "report_card_missing_fields": [],
-      "report_card_proof_lanes": [
-        "docs",
-        "runtime",
-        "source",
-        "rollback"
-      ],
-      "report_card_missing_proof_lanes": [],
-      "report": {
-        "TweakId": "system.memory-paged-pool-dynamic",
-        "TweakName": "Paged Pool Size",
-        "Success": true,
-        "Status": "ok",
-        "Summary": "Apply/verify path completed and rollback restored the tweak.",
-        "RollbackRequested": true,
-        "Card": {
-          "TweakId": "system.memory-paged-pool-dynamic",
-          "Name": "Paged Pool Size",
-          "Category": "System",
-          "Description": "Paged pool is kernel memory that Windows can page out when needed. This is a legacy low-level memory tuning area that most people should never touch manually.",
-          "FriendlyDescription": "Paged pool is kernel memory that Windows can page out when needed. This is a legacy low-level memory tuning area that most people should never touch manually.",
-          "RegistryPath": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management\\PagedPoolSize",
-          "EvidenceClass": "A",
-          "EvidenceClassTitle": "Cross-Layer Verified",
-          "ResearchStatus": "PROMOTED",
-          "IsMutationAllowed": true,
-          "RollbackSnapshotState": "ready",
-          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
-          "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Paged pool is kernel memory that Windows can page out when needed. This is a legacy low-level memory tuning area that most people should never touch manually. Evidence: Microsoft Q&A captures the default Memory Management registry snapshot and includes PagedPoolSize = 0. Rollback: Rollback: Verified via record-restore-story.",
-          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
-          "ProofLanes": [
-            {
-              "Key": "docs",
-              "Label": "DOCS",
-              "State": "ready",
-              "Summary": "Microsoft Q&A captures the default Memory Management registry snapshot and includes PagedPoolSize = 0.",
-              "Source": "Validation proof source: https://learn.microsoft.com/en-us/answers/questions/4238560/can-i-have-the-default-registry-value-for-memory-m"
-            },
-            {
-              "Key": "runtime",
-              "Label": "RUNTIME",
-              "State": "ready",
-              "Summary": "A same-day fast guest Ghidra retry for `PagedPoolSize` failed in `ensure-admin-shell` with a bounded timeout, so no xref bundle reached the host.",
-              "Source": "Guest Ghidra launch receipt for PagedPoolSize: evidence/raw/ghidra/ghidra-system-memory-paged-pool-dynamic-20260427b/summary.json"
-            },
-            {
-              "Key": "source",
-              "Label": "SOURCE",
-              "State": "ready",
-              "Summary": "No upstream nohuto source link is attached to this record.",
-              "Source": ""
-            },
-            {
-              "Key": "rollback",
-              "Label": "ROLLBACK",
-              "State": "ready",
-              "Summary": "Rollback: Verified via record-restore-story.",
-              "Source": "record-restore-story"
-            }
-          ],
-          "ReferenceLinks": [
-            {
-              "Title": "Docs: Details (missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
-              "Kind": "Details"
-            },
-            {
-              "Title": "Docs: System (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\system\\system.md",
-              "Kind": "Docs"
-            }
-          ]
-        },
-        "Stages": [
-          {
-            "Stage": "detect-before",
-            "AppliedStatus": "Applied",
-            "StatusMessage": "Current option is 'Default paged pool size'.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Default paged pool size",
-            "TargetValue": "Default paged pool size",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": false,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Applied",
-                "Message": "Current option is 'Default paged pool size'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management\\PagedPoolSize: 0 -> 0",
-                "TimestampText": "09:58:46"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "apply",
-            "AppliedStatus": "Applied",
-            "StatusMessage": "Run completed.",
-            "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Default paged pool size",
-            "TargetValue": "Default paged pool size",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Applied",
-                "Message": "Current option is 'Default paged pool size'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management\\PagedPoolSize: 0 -> 0",
-                "TimestampText": "09:58:46"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Skipped",
-                "Message": "Already in the desired state.",
-                "TimestampText": "09:58:46"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified preset 'Default paged pool size'.",
-                "TimestampText": "09:58:46"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Skipped",
-                "Message": "No changes were made.",
-                "TimestampText": "09:58:46"
-              }
-            ]
-          },
-          {
-            "Stage": "rollback",
-            "AppliedStatus": "Applied",
-            "StatusMessage": "Rolled back registry values.",
-            "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Default paged pool size",
-            "TargetValue": "Default paged pool size",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Applied",
-                "Message": "Current option is 'Default paged pool size'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management\\PagedPoolSize: 0 -> 0",
-                "TimestampText": "09:58:46"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Skipped",
-                "Message": "Already in the desired state.",
-                "TimestampText": "09:58:46"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified preset 'Default paged pool size'.",
-                "TimestampText": "09:58:46"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "09:58:49"
-              }
-            ]
-          },
-          {
-            "Stage": "detect-after",
-            "AppliedStatus": "Applied",
-            "StatusMessage": "Current option is 'Default paged pool size'.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Default paged pool size",
-            "TargetValue": "Default paged pool size",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Applied",
-                "Message": "Current option is 'Default paged pool size'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management\\PagedPoolSize: 0 -> 0",
-                "TimestampText": "09:58:49"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Skipped",
-                "Message": "Already in the desired state.",
-                "TimestampText": "09:58:46"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified preset 'Default paged pool size'.",
-                "TimestampText": "09:58:46"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Rolled back registry values.",
-                "TimestampText": "09:58:49"
-              }
-            ]
-          }
-        ],
-        "StartedAtUtc": "2026-05-07T16:58:46.6963953+00:00",
-        "CompletedAtUtc": "2026-05-07T16:58:49.6768762+00:00"
-      },
-      "qa_tweak_id": "system.memory-paged-pool-dynamic",
-      "candidate_id": "system.memory-paged-pool-dynamic",
-      "card_name": "Paged Pool Size",
-      "documentation": "research/records/system.memory-paged-pool-dynamic.json"
-    },
-    {
-      "tweak_id": "system.memory-registry-quota-default",
-      "host_exit": 0,
-      "execution_exit": 0,
-      "payload_status": "completed",
-      "report_source": "stdout",
-      "report_parse_error": null,
-      "report_fetch_status": null,
-      "report_app_success": true,
-      "report_success": true,
-      "report_status": "ok",
-      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
-      "report_contract_status": "ok",
-      "report_contract_summary": "QA card snapshot contract passed.",
-      "report_contract_failures": [],
-      "report_card_present": true,
-      "report_card_has_claim_boundary": true,
-      "report_card_present_fields": [
-        "TweakId",
-        "Name",
-        "Category",
-        "EvidenceClass",
-        "ResearchStatus",
-        "RollbackSnapshotState",
-        "HasClaimBoundary",
-        "WhatWeKnowSummary",
-        "WhatWeDoNotClaimSummary",
-        "ProofLanes"
-      ],
-      "report_card_missing_fields": [],
-      "report_card_proof_lanes": [
-        "docs",
-        "runtime",
-        "source",
-        "rollback"
-      ],
-      "report_card_missing_proof_lanes": [],
-      "report": {
-        "TweakId": "system.memory-registry-quota-default",
-        "TweakName": "Registry Size Limit / Registry Quota",
-        "Success": true,
-        "Status": "ok",
-        "Summary": "Apply/verify path completed and rollback restored the tweak.",
-        "RollbackRequested": true,
-        "Card": {
-          "TweakId": "system.memory-registry-quota-default",
-          "Name": "Registry Size Limit / Registry Quota",
-          "Category": "System",
-          "Description": "Windows historically exposed a registry size limit tied to paged-pool memory. Modern systems normally manage this automatically, so the safest reset is to return the published control to automatic sizing.",
-          "FriendlyDescription": "Windows historically exposed a registry size limit tied to paged-pool memory. Modern systems normally manage this automatically, so the safest reset is to return the published control to automatic sizing.",
-          "RegistryPath": "HKLM\\System\\CurrentControlSet\\Control\\RegistrySizeLimit",
-          "EvidenceClass": "A",
-          "EvidenceClassTitle": "Cross-Layer Verified",
-          "ResearchStatus": "PROMOTED",
-          "IsMutationAllowed": true,
-          "RollbackSnapshotState": "ready",
-          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
-          "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: Windows historically exposed a registry size limit tied to paged-pool memory. Modern systems normally manage this automatically, so the safest reset is to return the published control to automatic sizing. Evidence: Official Microsoft documentation publishes RegistrySizeLimit under HKLM\\System\\CurrentControlSet\\Control as the supported registry-size control, and the app now writes the documented automatic-sizing value 0 on that surface. Rollback: Rollback: Verified via record-restore-story.",
-          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
-          "ProofLanes": [
-            {
-              "Key": "docs",
-              "Label": "DOCS",
-              "State": "ready",
-              "Summary": "Official Microsoft documentation publishes RegistrySizeLimit under HKLM\\System\\CurrentControlSet\\Control as the supported registry-size control, and the app now writes the documented automatic-sizing value 0 on that surface.",
-              "Source": "Validation proof source: https://learn.microsoft.com/en-us/troubleshoot/windows-server/remote/honors-registry-size-limit-functionality-key-set"
-            },
-            {
-              "Key": "runtime",
-              "Label": "RUNTIME",
-              "State": "ready",
-              "Summary": "RegistrySizeLimit was not present on the validation host, which matches Microsoft's documented automatic-sizing baseline.",
-              "Source": "Validation host observation of missing RegistrySizeLimit: Local observation - 2026-03-13, HKLM\\System\\CurrentControlSet\\Control"
-            },
-            {
-              "Key": "source",
-              "Label": "SOURCE",
-              "State": "ready",
-              "Summary": "No upstream nohuto source link is attached to this record.",
-              "Source": ""
-            },
-            {
-              "Key": "rollback",
-              "Label": "ROLLBACK",
-              "State": "ready",
-              "Summary": "Rollback: Verified via record-restore-story.",
-              "Source": "record-restore-story"
-            }
-          ],
-          "ReferenceLinks": [
-            {
-              "Title": "Docs: Details (missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
-              "Kind": "Details"
-            },
-            {
-              "Title": "Docs: System (section missing)",
-              "Url": "C:\\Tools\\AppSmoke\\Docs\\system\\system.md",
-              "Kind": "Docs"
-            }
-          ]
-        },
-        "Stages": [
-          {
-            "Stage": "detect-before",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Value not set.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Not set",
-            "TargetValue": "0 (0x0)",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": false,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Value not set.",
-                "TimestampText": "09:58:54"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Pending",
-                "Message": "",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "apply",
-            "AppliedStatus": "Applied",
-            "StatusMessage": "Run completed.",
-            "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "0 (0x0)",
-            "TargetValue": "0 (0x0)",
-            "WasRolledBack": false,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": false,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Value not set.",
-                "TimestampText": "09:58:54"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Set value to 0.",
-                "TimestampText": "09:58:57"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified desired value.",
-                "TimestampText": "09:58:57"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Not required",
-                "Message": "Step not executed.",
-                "TimestampText": "-"
-              }
-            ]
-          },
-          {
-            "Stage": "rollback",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Removed value to restore default.",
-            "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "0 (0x0)",
-            "TargetValue": "0 (0x0)",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Value not set.",
-                "TimestampText": "09:58:54"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Set value to 0.",
-                "TimestampText": "09:58:57"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified desired value.",
-                "TimestampText": "09:58:57"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Removed value to restore default.",
-                "TimestampText": "09:58:57"
-              }
-            ]
-          },
-          {
-            "Stage": "detect-after",
-            "AppliedStatus": "NotApplied",
-            "StatusMessage": "Value not set.",
-            "OutcomeSummary": "Detect - Success",
-            "CurrentValue": "Not set",
-            "TargetValue": "0 (0x0)",
-            "WasRolledBack": true,
-            "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": true,
-            "HasSuccessfulRollbackStory": true,
-            "Steps": [
-              {
-                "Action": "Detect",
-                "StatusText": "Detected",
-                "Message": "Value not set.",
-                "TimestampText": "09:58:57"
-              },
-              {
-                "Action": "Apply",
-                "StatusText": "Applied",
-                "Message": "Set value to 0.",
-                "TimestampText": "09:58:57"
-              },
-              {
-                "Action": "Verify",
-                "StatusText": "Verified",
-                "Message": "Verified desired value.",
-                "TimestampText": "09:58:57"
-              },
-              {
-                "Action": "Rollback",
-                "StatusText": "Rolled back",
-                "Message": "Removed value to restore default.",
-                "TimestampText": "09:58:57"
-              }
-            ]
-          }
-        ],
-        "StartedAtUtc": "2026-05-07T16:58:54.3448782+00:00",
-        "CompletedAtUtc": "2026-05-07T16:58:57.4270427+00:00"
-      },
-      "qa_tweak_id": "system.memory-registry-quota-default",
-      "candidate_id": "system.memory-registry-quota-default",
-      "card_name": "Registry Size Limit / Registry Quota",
-      "documentation": "research/records/system.memory-registry-quota-default.review.json"
+      "qa_tweak_id": "notifications.disable-tile",
+      "candidate_id": "notifications.disable-tile",
+      "card_name": "Tile Notifications",
+      "documentation": "research/records/notifications.disable-tile.json"
     }
   ],
   "summary": {
-    "planned_count": 5,
-    "planned_apply_allowed_count": 5,
-    "live_success_count": 5,
+    "planned_count": 2,
+    "planned_apply_allowed_count": 2,
+    "live_success_count": 2,
     "live_failure_count": 0,
     "categories": [
-      "System"
+      "Notifications"
     ]
   }
 }

@@ -1,18 +1,18 @@
 {
-  "generated_utc": "2026-05-07T16:58:14Z",
-  "history_entry_count": 56,
+  "generated_utc": "2026-05-07T16:59:48Z",
+  "history_entry_count": 57,
   "catalog_candidate_count": 242,
-  "covered_count": 169,
-  "uncovered_count": 73,
+  "covered_count": 171,
+  "uncovered_count": 71,
   "summary": {
-    "coverage_percent": 69.83,
+    "coverage_percent": 70.66,
     "covered_categories": {
       "Audio": 2,
       "Cleanup": 1,
       "Developer": 7,
       "Explorer": 13,
       "Network": 19,
-      "Notifications": 3,
+      "Notifications": 5,
       "Performance": 3,
       "Peripheral": 2,
       "Power": 7,
@@ -26,7 +26,6 @@
       "Developer": 2,
       "Explorer": 4,
       "Network": 9,
-      "Notifications": 2,
       "Peripheral": 1,
       "Power": 3,
       "Privacy": 24,
@@ -36,35 +35,6 @@
     }
   },
   "recommended_next_batches": [
-    {
-      "category": "Notifications",
-      "covered_count": 3,
-      "uncovered_count": 2,
-      "coverage_percent": 60.0,
-      "batch_size": 2,
-      "tweak_ids": [
-        "notifications.disable-mirroring",
-        "notifications.disable-tile"
-      ],
-      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id notifications.disable-mirroring --id notifications.disable-tile",
-      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id notifications.disable-mirroring --id notifications.disable-tile --run-kvm --json",
-      "candidates": [
-        {
-          "tweak_id": "notifications.disable-mirroring",
-          "record_id": "notifications.disable-mirroring",
-          "category": "Notifications",
-          "name": "Notification Mirroring",
-          "documentation": "research/records/notifications.disable-mirroring.json"
-        },
-        {
-          "tweak_id": "notifications.disable-tile",
-          "record_id": "notifications.disable-tile",
-          "category": "Notifications",
-          "name": "Tile Notifications",
-          "documentation": "research/records/notifications.disable-tile.json"
-        }
-      ]
-    },
     {
       "category": "Privacy",
       "covered_count": 43,
@@ -210,6 +180,59 @@
           "category": "Network",
           "name": "SMB Server Reject Unencrypted Access",
           "documentation": "research/records/network.smb-reject-unencrypted-access.json"
+        }
+      ]
+    },
+    {
+      "category": "System",
+      "covered_count": 36,
+      "uncovered_count": 16,
+      "coverage_percent": 69.23,
+      "batch_size": 5,
+      "tweak_ids": [
+        "system.ntfs-disable-8dot3",
+        "system.ntfs-disable-last-access",
+        "system.ntfs-enable-long-paths",
+        "system.ntfs-reset-memory-usage",
+        "system.ntfs-reset-mft-zone"
+      ],
+      "command": "dotnet run --project cli/cli.csproj -- research qa-batch --id system.ntfs-disable-8dot3 --id system.ntfs-disable-last-access --id system.ntfs-enable-long-paths --id system.ntfs-reset-memory-usage --id system.ntfs-reset-mft-zone",
+      "kvm_command": "dotnet run --project cli/cli.csproj -- research qa-batch --id system.ntfs-disable-8dot3 --id system.ntfs-disable-last-access --id system.ntfs-enable-long-paths --id system.ntfs-reset-memory-usage --id system.ntfs-reset-mft-zone --run-kvm --json",
+      "candidates": [
+        {
+          "tweak_id": "system.ntfs-disable-8dot3",
+          "record_id": "system.ntfs-disable-8dot3",
+          "category": "System",
+          "name": "NTFS 8.3 Short Name Creation",
+          "documentation": "research/records/system.ntfs-disable-8dot3.json"
+        },
+        {
+          "tweak_id": "system.ntfs-disable-last-access",
+          "record_id": "system.ntfs-disable-last-access",
+          "category": "System",
+          "name": "NTFS Last Access Time Updates",
+          "documentation": "research/records/system.ntfs-disable-last-access.json"
+        },
+        {
+          "tweak_id": "system.ntfs-enable-long-paths",
+          "record_id": "system.ntfs-enable-long-paths",
+          "category": "System",
+          "name": "Win32 Long Paths",
+          "documentation": "research/records/system.ntfs-enable-long-paths.json"
+        },
+        {
+          "tweak_id": "system.ntfs-reset-memory-usage",
+          "record_id": "system.ntfs-reset-memory-usage",
+          "category": "System",
+          "name": "NTFS Memory Usage",
+          "documentation": "research/records/system.ntfs-reset-memory-usage.json"
+        },
+        {
+          "tweak_id": "system.ntfs-reset-mft-zone",
+          "record_id": "system.ntfs-reset-mft-zone",
+          "category": "System",
+          "name": "NTFS MFT Zone Reservation",
+          "documentation": "research/records/system.ntfs-reset-mft-zone.json"
         }
       ]
     }
@@ -609,6 +632,24 @@
       "category": "Notifications",
       "name": "Lock Screen Toast Notifications",
       "documentation": "research/records/notifications.disable-lock-screen.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "notifications.disable-mirroring",
+      "qa_tweak_id": "notifications.disable-mirroring",
+      "candidate_id": "notifications.disable-mirroring",
+      "category": "Notifications",
+      "name": "Notification Mirroring",
+      "documentation": "research/records/notifications.disable-mirroring.json",
+      "latest_report_status": "ok"
+    },
+    {
+      "tweak_id": "notifications.disable-tile",
+      "qa_tweak_id": "notifications.disable-tile",
+      "candidate_id": "notifications.disable-tile",
+      "category": "Notifications",
+      "name": "Tile Notifications",
+      "documentation": "research/records/notifications.disable-tile.json",
       "latest_report_status": "ok"
     },
     {
@@ -1849,20 +1890,6 @@
       "category": "Network",
       "name": "SMB Cipher Suite Order",
       "documentation": "research/records/network.smb-set-cipher-suite-order.review.json"
-    },
-    {
-      "tweak_id": "notifications.disable-mirroring",
-      "record_id": "notifications.disable-mirroring",
-      "category": "Notifications",
-      "name": "Notification Mirroring",
-      "documentation": "research/records/notifications.disable-mirroring.json"
-    },
-    {
-      "tweak_id": "notifications.disable-tile",
-      "record_id": "notifications.disable-tile",
-      "category": "Notifications",
-      "name": "Tile Notifications",
-      "documentation": "research/records/notifications.disable-tile.json"
     },
     {
       "tweak_id": "peripheral.disable-autoplay",
