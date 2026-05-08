@@ -11,7 +11,7 @@ from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
-from vm_env import vm_connect, vm_domain
+from vm_env import vm_connect, vm_domain, vm_snapshot
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
@@ -48,7 +48,11 @@ param(
     [string]$ValueData,
 
     [Parameter(Mandatory = $true)]
-    [string]$ExperimentId
+    [string]$ExperimentId,
+
+    [Parameter(Mandatory = $true)]
+    [ValidateSet('none', 'core', 'gui')]
+    [string]$SmokeProfile
 )
 
 $ErrorActionPreference = 'Stop'
@@ -118,8 +122,17 @@ function Set-DwordValue {
     )
 
     $psPath = Convert-ToPsPath -Path $Path
-    New-Item -Path $psPath -Force | Out-Null
-    New-ItemProperty -Path $psPath -Name $Name -PropertyType DWord -Value $Data -Force | Out-Null
+    if (-not (Test-Path -LiteralPath $psPath)) {
+        New-Item -Path $psPath -Force | Out-Null
+    }
+
+    $props = Get-ItemProperty -LiteralPath $psPath -ErrorAction Stop
+    if ($null -eq $props.PSObject.Properties[$Name]) {
+        New-ItemProperty -Path $psPath -Name $Name -PropertyType DWord -Value $Data -Force | Out-Null
+    }
+    else {
+        Set-ItemProperty -LiteralPath $psPath -Name $Name -Value $Data
+    }
 }
 
 function Restore-RegistryValue {
@@ -129,8 +142,19 @@ function Restore-RegistryValue {
 
     $psPath = Convert-ToPsPath -Path ([string]$State.registry_path)
     if ($State.original.key_exists -and $State.original.value_exists) {
-        New-Item -Path $psPath -Force | Out-Null
-        New-ItemProperty -Path $psPath -Name ([string]$State.value_name) -PropertyType DWord -Value ([int]$State.original.value) -Force | Out-Null
+        if (-not (Test-Path -LiteralPath $psPath)) {
+            New-Item -Path $psPath -Force | Out-Null
+            New-ItemProperty -Path $psPath -Name ([string]$State.value_name) -PropertyType DWord -Value ([int]$State.original.value) -Force | Out-Null
+        }
+        else {
+            $props = Get-ItemProperty -LiteralPath $psPath -ErrorAction Stop
+            if ($null -eq $props.PSObject.Properties[([string]$State.value_name)]) {
+                New-ItemProperty -Path $psPath -Name ([string]$State.value_name) -PropertyType DWord -Value ([int]$State.original.value) -Force | Out-Null
+            }
+            else {
+                Set-ItemProperty -LiteralPath $psPath -Name ([string]$State.value_name) -Value ([int]$State.original.value)
+            }
+        }
         return 'restored-original-value'
     }
 
@@ -152,6 +176,12 @@ function Restore-RegistryValue {
 }
 
 function Invoke-ProcessSmoke {
+    param(
+        [Parameter(Mandatory = $true)]
+        [ValidateSet('none', 'core', 'gui')]
+        [string]$Profile
+    )
+
     $items = New-Object System.Collections.Generic.List[object]
 
     function Add-SmokeResult {
@@ -161,6 +191,15 @@ function Invoke-ProcessSmoke {
             success = $Success
             detail = $Detail
         }) | Out-Null
+    }
+
+    if ($Profile -eq 'none') {
+        Add-SmokeResult -Name 'process-smoke-skipped' -Success $true -Detail 'smoke_profile=none'
+        return [pscustomobject]@{
+            success = $true
+            failure_count = 0
+            items = $items
+        }
     }
 
     try {
@@ -175,13 +214,19 @@ function Invoke-ProcessSmoke {
         Add-SmokeResult -Name 'shell-process-presence' -Success $false -Detail $_.Exception.Message
     }
 
-    foreach ($probe in @(
+    $processProbes = @(
         @{ name = 'cmd-ver'; file = "$env:SystemRoot\System32\cmd.exe"; args = '/c ver'; wait = $true },
-        @{ name = 'powershell-version'; file = "$env:SystemRoot\System32\WindowsPowerShell\v1.0\powershell.exe"; args = '-NoProfile -Command "$PSVersionTable.PSVersion.ToString()"'; wait = $true },
-        @{ name = 'notepad-x64-launch'; file = "$env:SystemRoot\System32\notepad.exe"; args = ''; wait = $false },
-        @{ name = 'notepad-x86-launch'; file = "$env:SystemRoot\SysWOW64\notepad.exe"; args = ''; wait = $false },
-        @{ name = 'calc-launch'; file = "$env:SystemRoot\System32\calc.exe"; args = ''; wait = $false }
-    )) {
+        @{ name = 'powershell-version'; file = "$env:SystemRoot\System32\WindowsPowerShell\v1.0\powershell.exe"; args = '-NoProfile -Command "$PSVersionTable.PSVersion.ToString()"'; wait = $true }
+    )
+    if ($Profile -eq 'gui') {
+        $processProbes += @(
+            @{ name = 'notepad-x64-launch'; file = "$env:SystemRoot\System32\notepad.exe"; args = ''; wait = $false },
+            @{ name = 'notepad-x86-launch'; file = "$env:SystemRoot\SysWOW64\notepad.exe"; args = ''; wait = $false },
+            @{ name = 'calc-launch'; file = "$env:SystemRoot\System32\calc.exe"; args = ''; wait = $false }
+        )
+    }
+
+    foreach ($probe in $processProbes) {
         try {
             if (-not (Test-Path -LiteralPath $probe.file)) {
                 Add-SmokeResult -Name $probe.name -Success $false -Detail "missing: $($probe.file)"
@@ -221,17 +266,19 @@ function Invoke-ProcessSmoke {
         }
     }
 
-    foreach ($uriProbe in @(
-        @{ name = 'settings-uri-launch'; uri = 'ms-settings:' },
-        @{ name = 'store-uri-launch'; uri = 'ms-windows-store:' }
-    )) {
-        try {
-            Start-Process -FilePath $uriProbe.uri -ErrorAction Stop
-            Start-Sleep -Seconds 3
-            Add-SmokeResult -Name $uriProbe.name -Success $true -Detail 'launch-command-succeeded'
-        }
-        catch {
-            Add-SmokeResult -Name $uriProbe.name -Success $false -Detail $_.Exception.Message
+    if ($Profile -eq 'gui') {
+        foreach ($uriProbe in @(
+            @{ name = 'settings-uri-launch'; uri = 'ms-settings:' },
+            @{ name = 'store-uri-launch'; uri = 'ms-windows-store:' }
+        )) {
+            try {
+                Start-Process -FilePath $uriProbe.uri -ErrorAction Stop
+                Start-Sleep -Seconds 3
+                Add-SmokeResult -Name $uriProbe.name -Success $true -Detail 'launch-command-succeeded'
+            }
+            catch {
+                Add-SmokeResult -Name $uriProbe.name -Success $false -Detail $_.Exception.Message
+            }
         }
     }
 
@@ -250,6 +297,7 @@ $result = [ordered]@{
     registry_path = $RegistryPath
     value_name = $ValueName
     value_data = $ValueData
+    smoke_profile = $SmokeProfile
     status = 'ok'
     error = $null
 }
@@ -269,7 +317,7 @@ try {
         Set-DwordValue -Path $RegistryPath -Name $ValueName -Data ([int]$ValueData)
         $result.original = $original
         $result.after_apply = Read-RegistryValue -Path $RegistryPath -Name $ValueName
-        $result.smoke = Invoke-ProcessSmoke
+        $result.smoke = Invoke-ProcessSmoke -Profile $SmokeProfile
     }
     elseif ($Stage -eq 'post-reboot-rollback') {
         if (-not (Test-Path -LiteralPath $statePath)) {
@@ -277,13 +325,13 @@ try {
         }
         $state = Get-Content -LiteralPath $statePath -Raw | ConvertFrom-Json
         $result.after_reboot = Read-RegistryValue -Path $RegistryPath -Name $ValueName
-        $result.smoke = Invoke-ProcessSmoke
+        $result.smoke = Invoke-ProcessSmoke -Profile $SmokeProfile
         $result.restore_action = Restore-RegistryValue -State $state
         $result.after_restore = Read-RegistryValue -Path $RegistryPath -Name $ValueName
     }
     elseif ($Stage -eq 'post-rollback') {
         $result.final = Read-RegistryValue -Path $RegistryPath -Name $ValueName
-        $result.smoke = Invoke-ProcessSmoke
+        $result.smoke = Invoke-ProcessSmoke -Profile $SmokeProfile
     }
 }
 catch {
@@ -308,6 +356,7 @@ def run_guest_stage(
     value_name: str,
     value_data: int,
     experiment_id: str,
+    smoke_profile: str,
     domain: str,
     connect: str,
     wait_timeout: int,
@@ -336,6 +385,8 @@ def run_guest_stage(
         f"--ps-arg={value_data}",
         "--ps-arg=-ExperimentId",
         f"--ps-arg={experiment_id}",
+        "--ps-arg=-SmokeProfile",
+        f"--ps-arg={smoke_profile}",
     ]
     completed = run(cmd, timeout=wait_timeout + 60)
     try:
@@ -395,6 +446,66 @@ def reboot_guest(domain: str, connect: str) -> dict[str, Any]:
     }
 
 
+def recover_from_snapshot(
+    *,
+    domain: str,
+    connect: str,
+    snapshot_name: str,
+    wait_timeout: int,
+) -> dict[str, Any]:
+    recovery: dict[str, Any] = {
+        "snapshot": snapshot_name,
+        "steps": [],
+        "health": None,
+        "status": "running",
+    }
+
+    destroy = run(["virsh", "-c", connect, "destroy", domain], timeout=30)
+    recovery["steps"].append(
+        {
+            "action": "destroy-runtime",
+            "returncode": destroy.returncode,
+            "stdout": destroy.stdout.strip(),
+            "stderr": destroy.stderr.strip(),
+        }
+    )
+
+    revert = run(["virsh", "-c", connect, "snapshot-revert", domain, snapshot_name, "--force"], timeout=120)
+    recovery["steps"].append(
+        {
+            "action": "snapshot-revert",
+            "returncode": revert.returncode,
+            "stdout": revert.stdout.strip(),
+            "stderr": revert.stderr.strip(),
+        }
+    )
+    if revert.returncode != 0:
+        recovery["status"] = "error"
+        recovery["error"] = "snapshot-revert-failed"
+        return recovery
+
+    start = run(["virsh", "-c", connect, "start", domain], timeout=30)
+    recovery["steps"].append(
+        {
+            "action": "start-domain",
+            "returncode": start.returncode,
+            "stdout": start.stdout.strip(),
+            "stderr": start.stderr.strip(),
+        }
+    )
+    if start.returncode != 0:
+        recovery["status"] = "error"
+        recovery["error"] = "start-after-revert-failed"
+        return recovery
+
+    health = wait_for_qga(domain, connect, wait_timeout)
+    recovery["health"] = health
+    recovery["status"] = "ok" if health.get("status") == "ok" else "error"
+    if recovery["status"] != "ok":
+        recovery["error"] = "guest-did-not-return-after-snapshot-revert"
+    return recovery
+
+
 def list_domain_snapshots(domain: str, connect: str) -> dict[str, Any]:
     completed = run(["virsh", "-c", connect, "snapshot-list", domain, "--name"], timeout=30)
     snapshots = [line.strip() for line in completed.stdout.splitlines() if line.strip()]
@@ -436,6 +547,7 @@ def run_experiment(args: argparse.Namespace) -> dict[str, Any]:
         "registry_path": args.registry_path,
         "value_name": args.value_name,
         "value_data": args.value_data,
+        "smoke_profile": args.smoke_profile,
         "stages": {},
         "reboots": [],
         "health_checks": [],
@@ -461,6 +573,7 @@ def run_experiment(args: argparse.Namespace) -> dict[str, Any]:
         value_name=args.value_name,
         value_data=args.value_data,
         experiment_id=experiment_id,
+        smoke_profile=args.smoke_profile,
         domain=args.domain,
         connect=args.connect,
         wait_timeout=args.stage_wait_timeout,
@@ -477,6 +590,13 @@ def run_experiment(args: argparse.Namespace) -> dict[str, Any]:
     if health.get("status") != "ok":
         result["status"] = "error"
         result["error"] = "guest-did-not-return-after-apply-reboot"
+        if args.auto_revert_snapshot_on_boot_failure:
+            result["recovery"] = recover_from_snapshot(
+                domain=args.domain,
+                connect=args.connect,
+                snapshot_name=args.revert_snapshot_name,
+                wait_timeout=args.reboot_wait_timeout,
+            )
         return result
 
     rc, payload, stage_payload = run_guest_stage(
@@ -486,6 +606,7 @@ def run_experiment(args: argparse.Namespace) -> dict[str, Any]:
         value_name=args.value_name,
         value_data=args.value_data,
         experiment_id=experiment_id,
+        smoke_profile=args.smoke_profile,
         domain=args.domain,
         connect=args.connect,
         wait_timeout=args.stage_wait_timeout,
@@ -502,6 +623,13 @@ def run_experiment(args: argparse.Namespace) -> dict[str, Any]:
     if health.get("status") != "ok":
         result["status"] = "error"
         result["error"] = "guest-did-not-return-after-rollback-reboot"
+        if args.auto_revert_snapshot_on_boot_failure:
+            result["recovery"] = recover_from_snapshot(
+                domain=args.domain,
+                connect=args.connect,
+                snapshot_name=args.revert_snapshot_name,
+                wait_timeout=args.reboot_wait_timeout,
+            )
         return result
 
     rc, payload, stage_payload = run_guest_stage(
@@ -511,6 +639,7 @@ def run_experiment(args: argparse.Namespace) -> dict[str, Any]:
         value_name=args.value_name,
         value_data=args.value_data,
         experiment_id=experiment_id,
+        smoke_profile=args.smoke_profile,
         domain=args.domain,
         connect=args.connect,
         wait_timeout=args.stage_wait_timeout,
@@ -586,9 +715,25 @@ def main() -> int:
     parser.add_argument("--stage-wait-timeout", type=int, default=180)
     parser.add_argument("--reboot-wait-timeout", type=int, default=240)
     parser.add_argument(
+        "--smoke-profile",
+        choices=["none", "core", "gui"],
+        default="none",
+        help="none skips process smoke; core runs command/shell checks; gui additionally launches desktop apps and URI handlers from QGA/SYSTEM context.",
+    )
+    parser.add_argument(
         "--require-domain-snapshot",
         action="store_true",
         help="Fail before applying a value unless a libvirt domain snapshot exists.",
+    )
+    parser.add_argument(
+        "--auto-revert-snapshot-on-boot-failure",
+        action="store_true",
+        help="If the guest does not return to QGA after an experiment reboot, destroy the runtime, revert a snapshot, restart, and record recovery details.",
+    )
+    parser.add_argument(
+        "--revert-snapshot-name",
+        default=vm_snapshot("clean-25h2-qga"),
+        help="Snapshot to use with --auto-revert-snapshot-on-boot-failure.",
     )
     args = parser.parse_args()
 
