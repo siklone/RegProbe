@@ -34,6 +34,24 @@ Wave 1 quality hardening is now the repo baseline.
 
 When in doubt, prefer honest `missing-capture`, `staged-without-capture`, or `missing-required-runner` statuses over optimistic prose.
 
+## Rejected Closure Decisions
+
+Do not leave a rejected setting looking like an active evidence blocker. Pick the right closure lane and make it explicit:
+
+- protected or ACL-owned surfaces should cite ACL/API evidence and use a protected-lane closure
+- platform-limited VM behavior should cite the firmware or platform declaration and use an environment-limited closure
+- one-shot cleanup, repair, or destructive actions should use a non-reversible closure unless a tested rollback lane exists
+- deprecated records should stay rejected as `deprecated-record` and remain searchable for history
+
+After changing any rejected decision, run:
+
+```bash
+python3 scripts/refresh_research_publish_surfaces.py
+python3 registry-research-framework/scripts/generate_rejected_closure_ledger.py
+```
+
+Then inspect [rejected-closure-ledger.md](registry-research-framework/audit/rejected-closure-ledger.md). `promotion_blockers` should show the compact closure label, while `rejection_closure.superseded_blockers` preserves the old blocker context for auditors.
+
 ## Wave 2 Metadata
 
 New research output should preserve and reuse these surfaces instead of inventing local ad-hoc notes:

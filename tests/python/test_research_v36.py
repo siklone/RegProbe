@@ -1497,8 +1497,11 @@ class PromotionStateTests(unittest.TestCase):
 
         self.assertEqual(gate["promotion_state"], "rejected")
         self.assertEqual(gate["promotion_disposition"], "rejected")
-        self.assertIn("validation-proof", gate["promotion_blockers"])
-        self.assertIn("one-shot-no-rollback", gate["promotion_blockers"])
+        self.assertEqual(gate["promotion_blockers"], ["promotion-disposition-non-reversible-action"])
+        self.assertEqual(gate["closure_status"], "decision-backed-rejected")
+        self.assertEqual(gate["closure_kind"], "non-reversible-action")
+        self.assertIn("validation-proof", gate["rejection_closure"]["superseded_blockers"])
+        self.assertIn("one-shot-no-rollback", gate["rejection_closure"]["superseded_blockers"])
 
 
 class GapAnalysisTests(unittest.TestCase):

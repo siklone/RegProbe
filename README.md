@@ -149,7 +149,14 @@ The proof model and vocabulary are documented in more detail in [Proof model and
 | `Experimental` | Promising, but still under validation |
 | `Research-only` | Retained record, not safe to expose for apply |
 | `Blocked` | Known control surface, insufficient runtime proof |
+| `Rejected` | Closed promotion decision with a named evidence lane or deprecation reason |
 | `Archived` | Retained to avoid rediscovering dead ends |
+
+## Rejected Closure Ledger
+
+Rejected does not mean "missing evidence" by default. When a setting is unsafe, platform-limited, protected by ACLs, deprecated, first-party-only, or non-reversible, RegProbe records that lane as a closure decision instead of keeping it in the active blocked queue.
+
+Use [rejected-closure-ledger.md](registry-research-framework/audit/rejected-closure-ledger.md) to audit every rejected record. The gate contract keeps the old blocker context under `rejection_closure.superseded_blockers`, while `promotion_blockers` carries a compact `promotion-disposition-*` or `deprecated-record` closure label.
 
 ## Start Here
 

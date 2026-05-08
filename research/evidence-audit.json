@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-08T08:46:53.659314Z",
+  "generated_utc": "2026-05-08T09:13:43.958127Z",
   "summary": {
     "total_active_records": 301,
     "class_counts": {
@@ -29,7 +29,7 @@
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-05-08T08:34:35.760748Z",
+      "generated_utc": "2026-05-08T08:46:53.944063Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -96,6 +96,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -209,6 +212,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -297,6 +303,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -376,10 +385,24 @@
       "tweak_origin": "research-derived",
       "promotion_state": "rejected",
       "promotion_blockers": [
-        "The card still lives only in the first-party cleanup provider and has not been promoted into the research-provider surface.",
-        "This is an on-demand maintenance action with no rollback support.",
-        "validation-proof"
+        "promotion-disposition-non-reversible-or-high-risk-action"
       ],
+      "rejection_closure": {
+        "status": "evidence-backed-rejected",
+        "kind": "non-reversible-or-high-risk-action",
+        "reason": "Closed as rejected for research-provider promotion because the live action is one-shot, destructive, high-risk, reboot-sensitive, or lacks a rollback story suitable for a validated tweak card.",
+        "reviewed_utc": "2026-05-07T20:20:00Z",
+        "closure_blocker": "promotion-disposition-non-reversible-or-high-risk-action",
+        "superseded_blockers": [
+          "The card still lives only in the first-party cleanup provider and has not been promoted into the research-provider surface.",
+          "This is an on-demand maintenance action with no rollback support.",
+          "validation-proof"
+        ],
+        "evidence_count": 4,
+        "confidence": "medium"
+      },
+      "closure_status": "evidence-backed-rejected",
+      "closure_kind": "non-reversible-or-high-risk-action",
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
       "score_breakdown": {
@@ -459,10 +482,24 @@
       "tweak_origin": "research-derived",
       "promotion_state": "rejected",
       "promotion_blockers": [
-        "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
-        "This is a maintenance action with no rollback support.",
-        "validation-proof"
+        "promotion-disposition-non-reversible-or-high-risk-action"
       ],
+      "rejection_closure": {
+        "status": "evidence-backed-rejected",
+        "kind": "non-reversible-or-high-risk-action",
+        "reason": "Closed as rejected for research-provider promotion because the live action is one-shot, destructive, high-risk, reboot-sensitive, or lacks a rollback story suitable for a validated tweak card.",
+        "reviewed_utc": "2026-05-07T20:20:00Z",
+        "closure_blocker": "promotion-disposition-non-reversible-or-high-risk-action",
+        "superseded_blockers": [
+          "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
+          "This is a maintenance action with no rollback support.",
+          "validation-proof"
+        ],
+        "evidence_count": 4,
+        "confidence": "medium"
+      },
+      "closure_status": "evidence-backed-rejected",
+      "closure_kind": "non-reversible-or-high-risk-action",
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
       "score_breakdown": {
@@ -549,6 +586,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -628,10 +668,24 @@
       "tweak_origin": "research-derived",
       "promotion_state": "rejected",
       "promotion_blockers": [
-        "Clearing the event log has no rollback path.",
-        "The card has not yet been promoted from the first-party system provider into the research-provider surface.",
-        "validation-proof"
+        "promotion-disposition-non-reversible-or-high-risk-action"
       ],
+      "rejection_closure": {
+        "status": "evidence-backed-rejected",
+        "kind": "non-reversible-or-high-risk-action",
+        "reason": "Closed as rejected for research-provider promotion because the live action is one-shot, destructive, high-risk, reboot-sensitive, or lacks a rollback story suitable for a validated tweak card.",
+        "reviewed_utc": "2026-05-07T20:20:00Z",
+        "closure_blocker": "promotion-disposition-non-reversible-or-high-risk-action",
+        "superseded_blockers": [
+          "Clearing the event log has no rollback path.",
+          "The card has not yet been promoted from the first-party system provider into the research-provider surface.",
+          "validation-proof"
+        ],
+        "evidence_count": 4,
+        "confidence": "medium"
+      },
+      "closure_status": "evidence-backed-rejected",
+      "closure_kind": "non-reversible-or-high-risk-action",
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
       "score_breakdown": {
@@ -715,10 +769,24 @@
       "tweak_origin": "research-derived",
       "promotion_state": "rejected",
       "promotion_blockers": [
-        "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
-        "This is a maintenance action with no rollback support.",
-        "validation-proof"
+        "promotion-disposition-non-reversible-or-high-risk-action"
       ],
+      "rejection_closure": {
+        "status": "evidence-backed-rejected",
+        "kind": "non-reversible-or-high-risk-action",
+        "reason": "Closed as rejected for research-provider promotion because the live action is one-shot, destructive, high-risk, reboot-sensitive, or lacks a rollback story suitable for a validated tweak card.",
+        "reviewed_utc": "2026-05-07T20:20:00Z",
+        "closure_blocker": "promotion-disposition-non-reversible-or-high-risk-action",
+        "superseded_blockers": [
+          "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
+          "This is a maintenance action with no rollback support.",
+          "validation-proof"
+        ],
+        "evidence_count": 4,
+        "confidence": "medium"
+      },
+      "closure_status": "evidence-backed-rejected",
+      "closure_kind": "non-reversible-or-high-risk-action",
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
       "score_breakdown": {
@@ -798,10 +866,24 @@
       "tweak_origin": "research-derived",
       "promotion_state": "rejected",
       "promotion_blockers": [
-        "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
-        "This is a maintenance action with no rollback support.",
-        "validation-proof"
+        "promotion-disposition-non-reversible-or-high-risk-action"
       ],
+      "rejection_closure": {
+        "status": "evidence-backed-rejected",
+        "kind": "non-reversible-or-high-risk-action",
+        "reason": "Closed as rejected for research-provider promotion because the live action is one-shot, destructive, high-risk, reboot-sensitive, or lacks a rollback story suitable for a validated tweak card.",
+        "reviewed_utc": "2026-05-07T20:20:00Z",
+        "closure_blocker": "promotion-disposition-non-reversible-or-high-risk-action",
+        "superseded_blockers": [
+          "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
+          "This is a maintenance action with no rollback support.",
+          "validation-proof"
+        ],
+        "evidence_count": 4,
+        "confidence": "medium"
+      },
+      "closure_status": "evidence-backed-rejected",
+      "closure_kind": "non-reversible-or-high-risk-action",
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
       "score_breakdown": {
@@ -881,10 +963,24 @@
       "tweak_origin": "research-derived",
       "promotion_state": "rejected",
       "promotion_blockers": [
-        "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
-        "This is a maintenance action with no rollback support.",
-        "validation-proof"
+        "promotion-disposition-non-reversible-or-high-risk-action"
       ],
+      "rejection_closure": {
+        "status": "evidence-backed-rejected",
+        "kind": "non-reversible-or-high-risk-action",
+        "reason": "Closed as rejected for research-provider promotion because the live action is one-shot, destructive, high-risk, reboot-sensitive, or lacks a rollback story suitable for a validated tweak card.",
+        "reviewed_utc": "2026-05-07T20:20:00Z",
+        "closure_blocker": "promotion-disposition-non-reversible-or-high-risk-action",
+        "superseded_blockers": [
+          "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
+          "This is a maintenance action with no rollback support.",
+          "validation-proof"
+        ],
+        "evidence_count": 4,
+        "confidence": "medium"
+      },
+      "closure_status": "evidence-backed-rejected",
+      "closure_kind": "non-reversible-or-high-risk-action",
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
       "score_breakdown": {
@@ -964,10 +1060,24 @@
       "tweak_origin": "research-derived",
       "promotion_state": "rejected",
       "promotion_blockers": [
-        "The card has not yet been promoted into the research-provider surface.",
-        "This is a one-shot cleanup action without automatic rollback.",
-        "validation-proof"
+        "promotion-disposition-non-reversible-or-high-risk-action"
       ],
+      "rejection_closure": {
+        "status": "evidence-backed-rejected",
+        "kind": "non-reversible-or-high-risk-action",
+        "reason": "Closed as rejected for research-provider promotion because the live action is one-shot, destructive, high-risk, reboot-sensitive, or lacks a rollback story suitable for a validated tweak card.",
+        "reviewed_utc": "2026-05-07T20:20:00Z",
+        "closure_blocker": "promotion-disposition-non-reversible-or-high-risk-action",
+        "superseded_blockers": [
+          "The card has not yet been promoted into the research-provider surface.",
+          "This is a one-shot cleanup action without automatic rollback.",
+          "validation-proof"
+        ],
+        "evidence_count": 4,
+        "confidence": "medium"
+      },
+      "closure_status": "evidence-backed-rejected",
+      "closure_kind": "non-reversible-or-high-risk-action",
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
       "score_breakdown": {
@@ -1047,10 +1157,24 @@
       "tweak_origin": "research-derived",
       "promotion_state": "rejected",
       "promotion_blockers": [
-        "The card has not yet been promoted into the research-provider surface.",
-        "This is a one-shot destructive cleanup action without rollback.",
-        "validation-proof"
+        "promotion-disposition-non-reversible-or-high-risk-action"
       ],
+      "rejection_closure": {
+        "status": "evidence-backed-rejected",
+        "kind": "non-reversible-or-high-risk-action",
+        "reason": "Closed as rejected for research-provider promotion because the live action is one-shot, destructive, high-risk, reboot-sensitive, or lacks a rollback story suitable for a validated tweak card.",
+        "reviewed_utc": "2026-05-07T20:20:00Z",
+        "closure_blocker": "promotion-disposition-non-reversible-or-high-risk-action",
+        "superseded_blockers": [
+          "The card has not yet been promoted into the research-provider surface.",
+          "This is a one-shot destructive cleanup action without rollback.",
+          "validation-proof"
+        ],
+        "evidence_count": 4,
+        "confidence": "medium"
+      },
+      "closure_status": "evidence-backed-rejected",
+      "closure_kind": "non-reversible-or-high-risk-action",
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
       "score_breakdown": {
@@ -1130,10 +1254,24 @@
       "tweak_origin": "research-derived",
       "promotion_state": "rejected",
       "promotion_blockers": [
-        "The card has not yet been promoted into the research-provider surface.",
-        "This is a destructive cleanup action without rollback.",
-        "validation-proof"
+        "promotion-disposition-non-reversible-or-high-risk-action"
       ],
+      "rejection_closure": {
+        "status": "evidence-backed-rejected",
+        "kind": "non-reversible-or-high-risk-action",
+        "reason": "Closed as rejected for research-provider promotion because the live action is one-shot, destructive, high-risk, reboot-sensitive, or lacks a rollback story suitable for a validated tweak card.",
+        "reviewed_utc": "2026-05-07T20:20:00Z",
+        "closure_blocker": "promotion-disposition-non-reversible-or-high-risk-action",
+        "superseded_blockers": [
+          "The card has not yet been promoted into the research-provider surface.",
+          "This is a destructive cleanup action without rollback.",
+          "validation-proof"
+        ],
+        "evidence_count": 4,
+        "confidence": "medium"
+      },
+      "closure_status": "evidence-backed-rejected",
+      "closure_kind": "non-reversible-or-high-risk-action",
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
       "score_breakdown": {
@@ -1213,10 +1351,24 @@
       "tweak_origin": "research-derived",
       "promotion_state": "rejected",
       "promotion_blockers": [
-        "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
-        "This is a maintenance action with no rollback support.",
-        "validation-proof"
+        "promotion-disposition-non-reversible-or-high-risk-action"
       ],
+      "rejection_closure": {
+        "status": "evidence-backed-rejected",
+        "kind": "non-reversible-or-high-risk-action",
+        "reason": "Closed as rejected for research-provider promotion because the live action is one-shot, destructive, high-risk, reboot-sensitive, or lacks a rollback story suitable for a validated tweak card.",
+        "reviewed_utc": "2026-05-07T20:20:00Z",
+        "closure_blocker": "promotion-disposition-non-reversible-or-high-risk-action",
+        "superseded_blockers": [
+          "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
+          "This is a maintenance action with no rollback support.",
+          "validation-proof"
+        ],
+        "evidence_count": 4,
+        "confidence": "medium"
+      },
+      "closure_status": "evidence-backed-rejected",
+      "closure_kind": "non-reversible-or-high-risk-action",
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
       "score_breakdown": {
@@ -1296,10 +1448,24 @@
       "tweak_origin": "research-derived",
       "promotion_state": "rejected",
       "promotion_blockers": [
-        "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
-        "This is a maintenance action with no rollback support.",
-        "validation-proof"
+        "promotion-disposition-non-reversible-or-high-risk-action"
       ],
+      "rejection_closure": {
+        "status": "evidence-backed-rejected",
+        "kind": "non-reversible-or-high-risk-action",
+        "reason": "Closed as rejected for research-provider promotion because the live action is one-shot, destructive, high-risk, reboot-sensitive, or lacks a rollback story suitable for a validated tweak card.",
+        "reviewed_utc": "2026-05-07T20:20:00Z",
+        "closure_blocker": "promotion-disposition-non-reversible-or-high-risk-action",
+        "superseded_blockers": [
+          "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
+          "This is a maintenance action with no rollback support.",
+          "validation-proof"
+        ],
+        "evidence_count": 4,
+        "confidence": "medium"
+      },
+      "closure_status": "evidence-backed-rejected",
+      "closure_kind": "non-reversible-or-high-risk-action",
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
       "score_breakdown": {
@@ -1379,10 +1545,24 @@
       "tweak_origin": "research-derived",
       "promotion_state": "rejected",
       "promotion_blockers": [
-        "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
-        "This is a maintenance action with no rollback support.",
-        "validation-proof"
+        "promotion-disposition-non-reversible-or-high-risk-action"
       ],
+      "rejection_closure": {
+        "status": "evidence-backed-rejected",
+        "kind": "non-reversible-or-high-risk-action",
+        "reason": "Closed as rejected for research-provider promotion because the live action is one-shot, destructive, high-risk, reboot-sensitive, or lacks a rollback story suitable for a validated tweak card.",
+        "reviewed_utc": "2026-05-07T20:20:00Z",
+        "closure_blocker": "promotion-disposition-non-reversible-or-high-risk-action",
+        "superseded_blockers": [
+          "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
+          "This is a maintenance action with no rollback support.",
+          "validation-proof"
+        ],
+        "evidence_count": 4,
+        "confidence": "medium"
+      },
+      "closure_status": "evidence-backed-rejected",
+      "closure_kind": "non-reversible-or-high-risk-action",
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
       "score_breakdown": {
@@ -1462,10 +1642,24 @@
       "tweak_origin": "research-derived",
       "promotion_state": "rejected",
       "promotion_blockers": [
-        "Deleting Windows.old has no rollback path through the app.",
-        "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
-        "validation-proof"
+        "promotion-disposition-non-reversible-or-high-risk-action"
       ],
+      "rejection_closure": {
+        "status": "evidence-backed-rejected",
+        "kind": "non-reversible-or-high-risk-action",
+        "reason": "Closed as rejected for research-provider promotion because the live action is one-shot, destructive, high-risk, reboot-sensitive, or lacks a rollback story suitable for a validated tweak card.",
+        "reviewed_utc": "2026-05-07T20:20:00Z",
+        "closure_blocker": "promotion-disposition-non-reversible-or-high-risk-action",
+        "superseded_blockers": [
+          "Deleting Windows.old has no rollback path through the app.",
+          "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
+          "validation-proof"
+        ],
+        "evidence_count": 4,
+        "confidence": "medium"
+      },
+      "closure_status": "evidence-backed-rejected",
+      "closure_kind": "non-reversible-or-high-risk-action",
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
       "score_breakdown": {
@@ -1545,10 +1739,24 @@
       "tweak_origin": "research-derived",
       "promotion_state": "rejected",
       "promotion_blockers": [
-        "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
-        "This is a maintenance action with no rollback support.",
-        "validation-proof"
+        "promotion-disposition-non-reversible-or-high-risk-action"
       ],
+      "rejection_closure": {
+        "status": "evidence-backed-rejected",
+        "kind": "non-reversible-or-high-risk-action",
+        "reason": "Closed as rejected for research-provider promotion because the live action is one-shot, destructive, high-risk, reboot-sensitive, or lacks a rollback story suitable for a validated tweak card.",
+        "reviewed_utc": "2026-05-07T20:20:00Z",
+        "closure_blocker": "promotion-disposition-non-reversible-or-high-risk-action",
+        "superseded_blockers": [
+          "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
+          "This is a maintenance action with no rollback support.",
+          "validation-proof"
+        ],
+        "evidence_count": 4,
+        "confidence": "medium"
+      },
+      "closure_status": "evidence-backed-rejected",
+      "closure_kind": "non-reversible-or-high-risk-action",
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
       "score_breakdown": {
@@ -1632,6 +1840,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -1719,6 +1930,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -1807,6 +2021,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -1894,6 +2111,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -1981,6 +2201,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -2068,6 +2291,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -2155,6 +2381,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -2243,6 +2472,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -2326,6 +2558,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -2416,6 +2651,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -2503,6 +2741,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -2590,6 +2831,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -2680,6 +2924,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -2774,6 +3021,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -2864,6 +3114,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -2954,6 +3207,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -3044,6 +3300,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -3134,6 +3393,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -3221,6 +3483,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -3311,6 +3576,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -3401,6 +3669,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -3491,6 +3762,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -3581,6 +3855,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -3671,6 +3948,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -3758,6 +4038,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -3845,6 +4128,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -3926,6 +4212,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -4007,6 +4296,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -4088,6 +4380,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -4169,6 +4464,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -4250,6 +4548,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -4331,6 +4632,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -4418,6 +4722,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -4505,6 +4812,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -4592,6 +4902,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -4679,6 +4992,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -4762,6 +5078,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -4849,6 +5168,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -4936,6 +5258,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -5020,6 +5345,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -5107,6 +5435,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -5194,6 +5525,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -5281,6 +5615,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -5364,6 +5701,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -5451,6 +5791,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -5534,6 +5877,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -5617,6 +5963,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -5696,10 +6045,24 @@
       "tweak_origin": "research-derived",
       "promotion_state": "rejected",
       "promotion_blockers": [
-        "The card still ships only as a first-party network utility and has not been promoted into the research-provider surface.",
-        "This is a one-shot troubleshooting action without rollback.",
-        "validation-proof"
+        "promotion-disposition-non-reversible-or-high-risk-action"
       ],
+      "rejection_closure": {
+        "status": "evidence-backed-rejected",
+        "kind": "non-reversible-or-high-risk-action",
+        "reason": "Closed as rejected for research-provider promotion because the live action is one-shot, destructive, high-risk, reboot-sensitive, or lacks a rollback story suitable for a validated tweak card.",
+        "reviewed_utc": "2026-05-07T20:20:00Z",
+        "closure_blocker": "promotion-disposition-non-reversible-or-high-risk-action",
+        "superseded_blockers": [
+          "The card still ships only as a first-party network utility and has not been promoted into the research-provider surface.",
+          "This is a one-shot troubleshooting action without rollback.",
+          "validation-proof"
+        ],
+        "evidence_count": 4,
+        "confidence": "medium"
+      },
+      "closure_status": "evidence-backed-rejected",
+      "closure_kind": "non-reversible-or-high-risk-action",
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
       "score_breakdown": {
@@ -5783,6 +6146,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -5866,6 +6232,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -5949,10 +6318,24 @@
       "tweak_origin": "research-derived",
       "promotion_state": "rejected",
       "promotion_blockers": [
-        "The command is a repair action that usually expects reboot and does not support rollback.",
-        "Tweak provenance still marks network.reset-winsock as category-fallback and review-only.",
-        "validation-proof"
+        "promotion-disposition-non-reversible-or-high-risk-action"
       ],
+      "rejection_closure": {
+        "status": "evidence-backed-rejected",
+        "kind": "non-reversible-or-high-risk-action",
+        "reason": "Closed as rejected for research-provider promotion because the live action is one-shot, destructive, high-risk, reboot-sensitive, or lacks a rollback story suitable for a validated tweak card.",
+        "reviewed_utc": "2026-05-07T20:20:00Z",
+        "closure_blocker": "promotion-disposition-non-reversible-or-high-risk-action",
+        "superseded_blockers": [
+          "The command is a repair action that usually expects reboot and does not support rollback.",
+          "Tweak provenance still marks network.reset-winsock as category-fallback and review-only.",
+          "validation-proof"
+        ],
+        "evidence_count": 5,
+        "confidence": "low"
+      },
+      "closure_status": "evidence-backed-rejected",
+      "closure_kind": "non-reversible-or-high-risk-action",
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
       "score_breakdown": {
@@ -6037,6 +6420,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -6120,6 +6506,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -6204,6 +6593,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -6287,6 +6679,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -6374,6 +6769,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -6457,6 +6855,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -6540,6 +6941,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -6623,6 +7027,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -6706,6 +7113,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -6789,6 +7199,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -6872,6 +7285,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -6955,6 +7371,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -7038,6 +7457,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -7121,6 +7543,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -7204,6 +7629,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -7287,6 +7715,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -7371,6 +7802,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -7455,6 +7889,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -7545,6 +7982,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -7637,6 +8077,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -7718,8 +8161,22 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "rejected",
       "promotion_blockers": [
-        "no-runtime-proof"
+        "promotion-disposition-protected-acl-not-actionable"
       ],
+      "rejection_closure": {
+        "status": "evidence-backed-rejected",
+        "kind": "protected-acl-not-actionable",
+        "reason": "Closed as rejected for research-provider promotion because the documented MMDevices audio enhancement endpoint values are protected by Windows ACLs on the current build, and the app now reports a truthful NotApplicable state instead of writing.",
+        "reviewed_utc": "2026-05-08T08:45:00Z",
+        "closure_blocker": "promotion-disposition-protected-acl-not-actionable",
+        "superseded_blockers": [
+          "no-runtime-proof"
+        ],
+        "evidence_count": 5,
+        "confidence": "high"
+      },
+      "closure_status": "evidence-backed-rejected",
+      "closure_kind": "protected-acl-not-actionable",
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
       "score_breakdown": {
@@ -7803,6 +8260,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -7886,6 +8346,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -7970,6 +8433,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -8051,6 +8517,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -8132,6 +8601,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -8213,6 +8685,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -8294,6 +8769,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -8384,8 +8862,22 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "rejected",
       "promotion_blockers": [
-        "enable-virtualization-research-only-raw-policy-system-value"
+        "promotion-disposition-intentional-hold-closed"
       ],
+      "rejection_closure": {
+        "status": "evidence-backed-rejected",
+        "kind": "intentional-hold-closed",
+        "reason": "Closed as rejected for app/research-provider promotion because the remaining evidence gap is intentional: current-build exact reads, safe trigger conditions, authoritative semantics, or boot-safe validation are still missing.",
+        "reviewed_utc": "2026-05-07T20:20:00Z",
+        "closure_blocker": "promotion-disposition-intentional-hold-closed",
+        "superseded_blockers": [
+          "enable-virtualization-research-only-raw-policy-system-value"
+        ],
+        "evidence_count": 13,
+        "confidence": "medium"
+      },
+      "closure_status": "evidence-backed-rejected",
+      "closure_kind": "intentional-hold-closed",
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
       "score_breakdown": {
@@ -8477,10 +8969,24 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "rejected",
       "promotion_blockers": [
-        "audio-execution-required-no-current-build-registry-seeding-path",
-        "audio-execution-required-no-primary-current-build-doc",
-        "intentional-hold"
+        "promotion-disposition-intentional-hold-closed"
       ],
+      "rejection_closure": {
+        "status": "evidence-backed-rejected",
+        "kind": "intentional-hold-closed",
+        "reason": "Closed as rejected for app/research-provider promotion because the remaining evidence gap is intentional: current-build exact reads, safe trigger conditions, authoritative semantics, or boot-safe validation are still missing.",
+        "reviewed_utc": "2026-05-07T20:20:00Z",
+        "closure_blocker": "promotion-disposition-intentional-hold-closed",
+        "superseded_blockers": [
+          "audio-execution-required-no-current-build-registry-seeding-path",
+          "audio-execution-required-no-primary-current-build-doc",
+          "intentional-hold"
+        ],
+        "evidence_count": 25,
+        "confidence": "low"
+      },
+      "closure_status": "evidence-backed-rejected",
+      "closure_kind": "intentional-hold-closed",
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
       "score_breakdown": {
@@ -8572,9 +9078,23 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "rejected",
       "promotion_blockers": [
-        "intentional-hold",
-        "system-execution-required-no-current-build-registry-seeding-path"
+        "promotion-disposition-intentional-hold-closed"
       ],
+      "rejection_closure": {
+        "status": "evidence-backed-rejected",
+        "kind": "intentional-hold-closed",
+        "reason": "Closed as rejected for app/research-provider promotion because the remaining evidence gap is intentional: current-build exact reads, safe trigger conditions, authoritative semantics, or boot-safe validation are still missing.",
+        "reviewed_utc": "2026-05-07T20:20:00Z",
+        "closure_blocker": "promotion-disposition-intentional-hold-closed",
+        "superseded_blockers": [
+          "intentional-hold",
+          "system-execution-required-no-current-build-registry-seeding-path"
+        ],
+        "evidence_count": 25,
+        "confidence": "low"
+      },
+      "closure_status": "evidence-backed-rejected",
+      "closure_kind": "intentional-hold-closed",
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
       "score_breakdown": {
@@ -8665,6 +9185,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": false,
       "score_breakdown": {
@@ -8754,8 +9277,22 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "rejected",
       "promotion_blockers": [
-        "hiber-file-size-percent-research-only-raw-power-manager-value"
+        "promotion-disposition-intentional-hold-closed"
       ],
+      "rejection_closure": {
+        "status": "evidence-backed-rejected",
+        "kind": "intentional-hold-closed",
+        "reason": "Closed as rejected for app/research-provider promotion because the remaining evidence gap is intentional: current-build exact reads, safe trigger conditions, authoritative semantics, or boot-safe validation are still missing.",
+        "reviewed_utc": "2026-05-07T20:20:00Z",
+        "closure_blocker": "promotion-disposition-intentional-hold-closed",
+        "superseded_blockers": [
+          "hiber-file-size-percent-research-only-raw-power-manager-value"
+        ],
+        "evidence_count": 10,
+        "confidence": "medium"
+      },
+      "closure_status": "evidence-backed-rejected",
+      "closure_kind": "intentional-hold-closed",
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
       "score_breakdown": {
@@ -8846,8 +9383,22 @@
       "tweak_origin": "research-derived",
       "promotion_state": "rejected",
       "promotion_blockers": [
-        "hibernate-enabled-default-hibernate-trigger-not-available-on-current-vm"
+        "promotion-disposition-intentional-hold-closed"
       ],
+      "rejection_closure": {
+        "status": "evidence-backed-rejected",
+        "kind": "intentional-hold-closed",
+        "reason": "Closed as rejected for app/research-provider promotion because the remaining evidence gap is intentional: current-build exact reads, safe trigger conditions, authoritative semantics, or boot-safe validation are still missing.",
+        "reviewed_utc": "2026-05-07T20:20:00Z",
+        "closure_blocker": "promotion-disposition-intentional-hold-closed",
+        "superseded_blockers": [
+          "hibernate-enabled-default-hibernate-trigger-not-available-on-current-vm"
+        ],
+        "evidence_count": 9,
+        "confidence": "medium"
+      },
+      "closure_status": "evidence-backed-rejected",
+      "closure_kind": "intentional-hold-closed",
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
       "score_breakdown": {
@@ -8935,6 +9486,9 @@
       "tweak_origin": "research-derived",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": false,
       "score_breakdown": {
@@ -9025,6 +9579,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": false,
       "score_breakdown": {
@@ -9115,6 +9672,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": false,
       "score_breakdown": {
@@ -9205,6 +9765,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": false,
       "score_breakdown": {
@@ -9295,10 +9858,24 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "rejected",
       "promotion_blockers": [
-        "intentional-hold",
-        "powerrequestoverride-static-context-adjacent-not-leaf-specific",
-        "powerrequestoverride-subtree-live-reader-binding-open-question"
+        "promotion-disposition-intentional-hold-closed"
       ],
+      "rejection_closure": {
+        "status": "evidence-backed-rejected",
+        "kind": "intentional-hold-closed",
+        "reason": "Closed as rejected for app/research-provider promotion because the remaining evidence gap is intentional: current-build exact reads, safe trigger conditions, authoritative semantics, or boot-safe validation are still missing.",
+        "reviewed_utc": "2026-05-07T20:20:00Z",
+        "closure_blocker": "promotion-disposition-intentional-hold-closed",
+        "superseded_blockers": [
+          "intentional-hold",
+          "powerrequestoverride-static-context-adjacent-not-leaf-specific",
+          "powerrequestoverride-subtree-live-reader-binding-open-question"
+        ],
+        "evidence_count": 9,
+        "confidence": "medium-high"
+      },
+      "closure_status": "evidence-backed-rejected",
+      "closure_kind": "intentional-hold-closed",
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
       "score_breakdown": {
@@ -9380,11 +9957,25 @@
       "tweak_origin": "research-derived",
       "promotion_state": "rejected",
       "promotion_blockers": [
-        "powerwatchdog-timeout-family-helper-query-only-single-member",
-        "powerwatchdog-timeout-family-intentional-hold-no-current-build-pivot",
-        "powerwatchdog-timeout-family-no-current-build-string-or-symbol-hit",
-        "powerwatchdog-timeout-family-no-primary-current-build-doc"
+        "promotion-disposition-intentional-hold-closed"
       ],
+      "rejection_closure": {
+        "status": "evidence-backed-rejected",
+        "kind": "intentional-hold-closed",
+        "reason": "Closed as rejected for app/research-provider promotion because the remaining evidence gap is intentional: current-build exact reads, safe trigger conditions, authoritative semantics, or boot-safe validation are still missing.",
+        "reviewed_utc": "2026-05-07T20:20:00Z",
+        "closure_blocker": "promotion-disposition-intentional-hold-closed",
+        "superseded_blockers": [
+          "powerwatchdog-timeout-family-helper-query-only-single-member",
+          "powerwatchdog-timeout-family-intentional-hold-no-current-build-pivot",
+          "powerwatchdog-timeout-family-no-current-build-string-or-symbol-hit",
+          "powerwatchdog-timeout-family-no-primary-current-build-doc"
+        ],
+        "evidence_count": 5,
+        "confidence": "low"
+      },
+      "closure_status": "evidence-backed-rejected",
+      "closure_kind": "intentional-hold-closed",
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
       "score_breakdown": {
@@ -9475,8 +10066,22 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "rejected",
       "promotion_blockers": [
-        "timer-rebase-threshold-drips-trigger-not-available-on-current-vm"
+        "promotion-disposition-intentional-hold-closed"
       ],
+      "rejection_closure": {
+        "status": "evidence-backed-rejected",
+        "kind": "intentional-hold-closed",
+        "reason": "Closed as rejected for app/research-provider promotion because the remaining evidence gap is intentional: current-build exact reads, safe trigger conditions, authoritative semantics, or boot-safe validation are still missing.",
+        "reviewed_utc": "2026-05-07T20:20:00Z",
+        "closure_blocker": "promotion-disposition-intentional-hold-closed",
+        "superseded_blockers": [
+          "timer-rebase-threshold-drips-trigger-not-available-on-current-vm"
+        ],
+        "evidence_count": 10,
+        "confidence": "medium"
+      },
+      "closure_status": "evidence-backed-rejected",
+      "closure_kind": "intentional-hold-closed",
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
       "score_breakdown": {
@@ -9564,11 +10169,25 @@
       "tweak_origin": "research-derived",
       "promotion_state": "rejected",
       "promotion_blockers": [
-        "ttmenabled-boot-unsafe-dedicated-boot-lane-required",
-        "ttmenabled-boot-unsafe-on-isolated-pilot-profile",
-        "ttmenabled-no-primary-current-build-doc",
-        "ttmenabled-reader-open-question"
+        "promotion-disposition-intentional-hold-closed"
       ],
+      "rejection_closure": {
+        "status": "evidence-backed-rejected",
+        "kind": "intentional-hold-closed",
+        "reason": "Closed as rejected for app/research-provider promotion because the remaining evidence gap is intentional: current-build exact reads, safe trigger conditions, authoritative semantics, or boot-safe validation are still missing.",
+        "reviewed_utc": "2026-05-07T20:20:00Z",
+        "closure_blocker": "promotion-disposition-intentional-hold-closed",
+        "superseded_blockers": [
+          "ttmenabled-boot-unsafe-dedicated-boot-lane-required",
+          "ttmenabled-boot-unsafe-on-isolated-pilot-profile",
+          "ttmenabled-no-primary-current-build-doc",
+          "ttmenabled-reader-open-question"
+        ],
+        "evidence_count": 7,
+        "confidence": "low"
+      },
+      "closure_status": "evidence-backed-rejected",
+      "closure_kind": "intentional-hold-closed",
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
       "score_breakdown": {
@@ -9655,11 +10274,25 @@
       "tweak_origin": "research-derived",
       "promotion_state": "rejected",
       "promotion_blockers": [
-        "win32k-callout-watchdog-helper-query-only-not-boot-consumer",
-        "win32k-callout-watchdog-intentional-hold-no-current-build-pivot",
-        "win32k-callout-watchdog-no-primary-current-build-doc",
-        "win32k-callout-watchdog-override-semantics-unproven"
+        "promotion-disposition-intentional-hold-closed"
       ],
+      "rejection_closure": {
+        "status": "evidence-backed-rejected",
+        "kind": "intentional-hold-closed",
+        "reason": "Closed as rejected for app/research-provider promotion because the remaining evidence gap is intentional: current-build exact reads, safe trigger conditions, authoritative semantics, or boot-safe validation are still missing.",
+        "reviewed_utc": "2026-05-07T20:20:00Z",
+        "closure_blocker": "promotion-disposition-intentional-hold-closed",
+        "superseded_blockers": [
+          "win32k-callout-watchdog-helper-query-only-not-boot-consumer",
+          "win32k-callout-watchdog-intentional-hold-no-current-build-pivot",
+          "win32k-callout-watchdog-no-primary-current-build-doc",
+          "win32k-callout-watchdog-override-semantics-unproven"
+        ],
+        "evidence_count": 10,
+        "confidence": "low"
+      },
+      "closure_status": "evidence-backed-rejected",
+      "closure_kind": "intentional-hold-closed",
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
       "score_breakdown": {
@@ -9753,6 +10386,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -9852,6 +10488,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -9938,6 +10577,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -10019,8 +10661,22 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "rejected",
       "promotion_blockers": [
-        "no-runtime-proof"
+        "promotion-disposition-environment-limited-validation-lane"
       ],
+      "rejection_closure": {
+        "status": "evidence-backed-rejected",
+        "kind": "environment-limited-validation-lane",
+        "reason": "Closed as rejected for research-provider promotion because the current VM firmware does not support hibernation; the app correctly reports NotApplicable, while direct mutation proof must wait for a hibernation-capable validation lane.",
+        "reviewed_utc": "2026-05-08T08:48:00Z",
+        "closure_blocker": "promotion-disposition-environment-limited-validation-lane",
+        "superseded_blockers": [
+          "no-runtime-proof"
+        ],
+        "evidence_count": 7,
+        "confidence": "high"
+      },
+      "closure_status": "evidence-backed-rejected",
+      "closure_kind": "environment-limited-validation-lane",
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
       "score_breakdown": {
@@ -10108,6 +10764,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -10195,6 +10854,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -10276,6 +10938,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -10357,6 +11022,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -10444,6 +11112,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -10531,6 +11202,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -10618,6 +11292,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -10705,6 +11382,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -10789,6 +11469,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -10873,6 +11556,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -10962,10 +11648,24 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "rejected",
       "promotion_blockers": [
-        "power-session-watchdog-timeouts-intentional-hold-validation-environment-limitation",
-        "power-session-watchdog-timeouts-no-current-build-registry-seeding-caller",
-        "power-session-watchdog-timeouts-sleep-side-exact-registry-read-missing"
+        "promotion-disposition-intentional-hold-closed"
       ],
+      "rejection_closure": {
+        "status": "evidence-backed-rejected",
+        "kind": "intentional-hold-closed",
+        "reason": "Closed as rejected for app/research-provider promotion because the remaining evidence gap is intentional: current-build exact reads, safe trigger conditions, authoritative semantics, or boot-safe validation are still missing.",
+        "reviewed_utc": "2026-05-07T20:20:00Z",
+        "closure_blocker": "promotion-disposition-intentional-hold-closed",
+        "superseded_blockers": [
+          "power-session-watchdog-timeouts-intentional-hold-validation-environment-limitation",
+          "power-session-watchdog-timeouts-no-current-build-registry-seeding-caller",
+          "power-session-watchdog-timeouts-sleep-side-exact-registry-read-missing"
+        ],
+        "evidence_count": 19,
+        "confidence": "medium"
+      },
+      "closure_status": "evidence-backed-rejected",
+      "closure_kind": "intentional-hold-closed",
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
       "score_breakdown": {
@@ -11059,11 +11759,25 @@
       "tweak_origin": "research-derived",
       "promotion_state": "rejected",
       "promotion_blockers": [
-        "win32-callout-watchdog-bugcheck-intentional-hold-adjacent-sibling-without-current-build-pivot",
-        "win32-callout-watchdog-bugcheck-no-primary-current-build-doc",
-        "win32-callout-watchdog-bugcheck-procmon-saveas-timeout-on-bounded-callout-lane",
-        "win32-callout-watchdog-bugcheck-semantics-unproven"
+        "promotion-disposition-intentional-hold-closed"
       ],
+      "rejection_closure": {
+        "status": "evidence-backed-rejected",
+        "kind": "intentional-hold-closed",
+        "reason": "Closed as rejected for app/research-provider promotion because the remaining evidence gap is intentional: current-build exact reads, safe trigger conditions, authoritative semantics, or boot-safe validation are still missing.",
+        "reviewed_utc": "2026-05-07T20:20:00Z",
+        "closure_blocker": "promotion-disposition-intentional-hold-closed",
+        "superseded_blockers": [
+          "win32-callout-watchdog-bugcheck-intentional-hold-adjacent-sibling-without-current-build-pivot",
+          "win32-callout-watchdog-bugcheck-no-primary-current-build-doc",
+          "win32-callout-watchdog-bugcheck-procmon-saveas-timeout-on-bounded-callout-lane",
+          "win32-callout-watchdog-bugcheck-semantics-unproven"
+        ],
+        "evidence_count": 10,
+        "confidence": "low"
+      },
+      "closure_status": "evidence-backed-rejected",
+      "closure_kind": "intentional-hold-closed",
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
       "score_breakdown": {
@@ -11148,6 +11862,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -11231,6 +11948,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -11314,6 +12034,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -11397,6 +12120,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -11480,6 +12206,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -11565,6 +12294,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -11649,6 +12381,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -11734,6 +12469,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -11819,6 +12557,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -11902,6 +12643,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -11985,6 +12729,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -12068,6 +12815,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -12151,6 +12901,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -12234,6 +12987,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -12317,6 +13073,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -12400,6 +13159,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -12483,6 +13245,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -12570,6 +13335,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -12659,6 +13427,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -12743,6 +13514,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -12828,6 +13602,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -12913,6 +13690,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -12998,6 +13778,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -13085,6 +13868,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -13168,6 +13954,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -13257,6 +14046,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -13342,6 +14134,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -13427,6 +14222,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -13510,6 +14308,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -13595,6 +14396,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -13678,6 +14482,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -13761,6 +14568,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -13844,6 +14654,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -13927,6 +14740,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -14012,6 +14828,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -14097,6 +14916,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -14180,6 +15002,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -14265,6 +15090,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -14350,6 +15178,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -14435,6 +15266,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -14520,6 +15354,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -14605,6 +15442,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -14690,6 +15530,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -14778,6 +15621,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -14861,6 +15707,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -14946,6 +15795,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -15033,6 +15885,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -15118,6 +15973,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -15207,6 +16065,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -15294,6 +16155,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -15379,6 +16243,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -15462,6 +16329,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -15547,6 +16417,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -15630,6 +16503,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -15715,6 +16591,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -15798,6 +16677,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -15881,6 +16763,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -15964,6 +16849,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -16047,6 +16935,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -16130,6 +17021,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -16213,6 +17107,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -16300,6 +17197,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -16383,6 +17283,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -16472,6 +17375,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -16557,6 +17463,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -16640,6 +17549,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -16723,6 +17635,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -16808,6 +17723,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -16891,6 +17809,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -16976,6 +17897,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -17061,6 +17985,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -17144,6 +18071,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -17227,6 +18157,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -17310,6 +18243,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -17393,6 +18329,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -17476,6 +18415,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -17559,6 +18501,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -17642,10 +18587,24 @@
       "tweak_origin": "research-derived",
       "promotion_state": "rejected",
       "promotion_blockers": [
-        "The action is high risk and reboot-sensitive, so it should not be promoted without stronger upstream provenance and runtime confidence.",
-        "Tweak provenance still marks security.disable-uac as category-fallback and review-only.",
-        "validation-proof"
+        "promotion-disposition-non-reversible-or-high-risk-action"
       ],
+      "rejection_closure": {
+        "status": "evidence-backed-rejected",
+        "kind": "non-reversible-or-high-risk-action",
+        "reason": "Closed as rejected for research-provider promotion because the live action is one-shot, destructive, high-risk, reboot-sensitive, or lacks a rollback story suitable for a validated tweak card.",
+        "reviewed_utc": "2026-05-07T20:20:00Z",
+        "closure_blocker": "promotion-disposition-non-reversible-or-high-risk-action",
+        "superseded_blockers": [
+          "The action is high risk and reboot-sensitive, so it should not be promoted without stronger upstream provenance and runtime confidence.",
+          "Tweak provenance still marks security.disable-uac as category-fallback and review-only.",
+          "validation-proof"
+        ],
+        "evidence_count": 5,
+        "confidence": "low"
+      },
+      "closure_status": "evidence-backed-rejected",
+      "closure_kind": "non-reversible-or-high-risk-action",
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
       "score_breakdown": {
@@ -17729,6 +18688,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -17812,6 +18774,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -17895,6 +18860,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -17983,6 +18951,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -18066,6 +19037,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -18153,6 +19127,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -18238,6 +19215,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -18321,6 +19301,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -18411,6 +19394,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -18497,6 +19483,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -18584,6 +19573,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -18667,6 +19659,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -18752,6 +19747,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -18839,6 +19837,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -18922,6 +19923,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -19006,6 +20010,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -19089,6 +20096,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -19172,6 +20182,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -19255,6 +20268,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -19342,6 +20358,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -19425,6 +20444,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -19513,6 +20535,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -19602,6 +20627,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -19685,6 +20713,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -19768,6 +20799,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -19851,6 +20885,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -19936,6 +20973,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -20053,6 +21093,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -20140,6 +21183,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -20223,6 +21269,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -20306,6 +21355,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -20389,6 +21441,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -20476,6 +21531,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -20563,6 +21621,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -20646,6 +21707,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -20734,6 +21798,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": false,
       "score_breakdown": {
@@ -20824,6 +21891,9 @@
       "tweak_origin": "research-derived",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": false,
       "score_breakdown": {
@@ -20907,6 +21977,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -20990,6 +22063,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -21073,6 +22149,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -21156,6 +22235,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -21239,6 +22321,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -21328,12 +22413,26 @@
       "tweak_origin": "research-derived",
       "promotion_state": "rejected",
       "promotion_blockers": [
-        "dpc-watchdog-control-intentional-hold-no-current-build-pivot",
-        "dpc-watchdog-control-live-zero-state-conflicts-with-repo-docs",
-        "dpc-watchdog-control-no-current-build-persisted-seeding-caller-or-exact-query-arm",
-        "dpc-watchdog-control-no-primary-current-build-doc",
-        "dpc-watchdog-control-wpr-boot-zero-exact-target-hits-current-build"
+        "promotion-disposition-intentional-hold-closed"
       ],
+      "rejection_closure": {
+        "status": "evidence-backed-rejected",
+        "kind": "intentional-hold-closed",
+        "reason": "Closed as rejected for app/research-provider promotion because the remaining evidence gap is intentional: current-build exact reads, safe trigger conditions, authoritative semantics, or boot-safe validation are still missing.",
+        "reviewed_utc": "2026-05-07T20:20:00Z",
+        "closure_blocker": "promotion-disposition-intentional-hold-closed",
+        "superseded_blockers": [
+          "dpc-watchdog-control-intentional-hold-no-current-build-pivot",
+          "dpc-watchdog-control-live-zero-state-conflicts-with-repo-docs",
+          "dpc-watchdog-control-no-current-build-persisted-seeding-caller-or-exact-query-arm",
+          "dpc-watchdog-control-no-primary-current-build-doc",
+          "dpc-watchdog-control-wpr-boot-zero-exact-target-hits-current-build"
+        ],
+        "evidence_count": 13,
+        "confidence": "low"
+      },
+      "closure_status": "evidence-backed-rejected",
+      "closure_kind": "intentional-hold-closed",
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
       "score_breakdown": {
@@ -21422,12 +22521,26 @@
       "tweak_origin": "research-derived",
       "promotion_state": "rejected",
       "promotion_blockers": [
-        "dpc-watchdog-profile-conditional-init-semantics-unproven",
-        "dpc-watchdog-profile-intentional-hold-mixed-live-state-without-current-build-pivot",
-        "dpc-watchdog-profile-mixed-current-build-state-conflicts-with-repo-docs",
-        "dpc-watchdog-profile-no-persisted-boot-consumer-proof",
-        "dpc-watchdog-profile-no-primary-current-build-doc"
+        "promotion-disposition-intentional-hold-closed"
       ],
+      "rejection_closure": {
+        "status": "evidence-backed-rejected",
+        "kind": "intentional-hold-closed",
+        "reason": "Closed as rejected for app/research-provider promotion because the remaining evidence gap is intentional: current-build exact reads, safe trigger conditions, authoritative semantics, or boot-safe validation are still missing.",
+        "reviewed_utc": "2026-05-07T20:20:00Z",
+        "closure_blocker": "promotion-disposition-intentional-hold-closed",
+        "superseded_blockers": [
+          "dpc-watchdog-profile-conditional-init-semantics-unproven",
+          "dpc-watchdog-profile-intentional-hold-mixed-live-state-without-current-build-pivot",
+          "dpc-watchdog-profile-mixed-current-build-state-conflicts-with-repo-docs",
+          "dpc-watchdog-profile-no-persisted-boot-consumer-proof",
+          "dpc-watchdog-profile-no-primary-current-build-doc"
+        ],
+        "evidence_count": 16,
+        "confidence": "low"
+      },
+      "closure_status": "evidence-backed-rejected",
+      "closure_kind": "intentional-hold-closed",
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
       "score_breakdown": {
@@ -21514,11 +22627,25 @@
       "tweak_origin": "research-derived",
       "promotion_state": "rejected",
       "promotion_blockers": [
-        "long-dpc-threshold-intentional-hold-no-current-build-pivot",
-        "long-dpc-threshold-no-primary-current-build-doc",
-        "long-dpc-threshold-procmon-saveas-timeout-on-dedicated-timer-dpc-stress-lane",
-        "long-dpc-threshold-wpr-boot-zero-exact-target-hits-current-build"
+        "promotion-disposition-intentional-hold-closed"
       ],
+      "rejection_closure": {
+        "status": "evidence-backed-rejected",
+        "kind": "intentional-hold-closed",
+        "reason": "Closed as rejected for app/research-provider promotion because the remaining evidence gap is intentional: current-build exact reads, safe trigger conditions, authoritative semantics, or boot-safe validation are still missing.",
+        "reviewed_utc": "2026-05-07T20:20:00Z",
+        "closure_blocker": "promotion-disposition-intentional-hold-closed",
+        "superseded_blockers": [
+          "long-dpc-threshold-intentional-hold-no-current-build-pivot",
+          "long-dpc-threshold-no-primary-current-build-doc",
+          "long-dpc-threshold-procmon-saveas-timeout-on-dedicated-timer-dpc-stress-lane",
+          "long-dpc-threshold-wpr-boot-zero-exact-target-hits-current-build"
+        ],
+        "evidence_count": 19,
+        "confidence": "low"
+      },
+      "closure_status": "evidence-backed-rejected",
+      "closure_kind": "intentional-hold-closed",
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
       "score_breakdown": {
@@ -21610,6 +22737,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -21699,6 +22829,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": false,
       "score_breakdown": {
@@ -21785,11 +22918,25 @@
       "tweak_origin": "research-derived",
       "promotion_state": "rejected",
       "promotion_blockers": [
-        "force-bugcheck-dpc-watchdog-intentional-hold-safety-sensitive-without-current-build-pivot",
-        "force-bugcheck-dpc-watchdog-no-primary-current-build-doc",
-        "force-bugcheck-dpc-watchdog-semantics-unproven",
-        "force-bugcheck-dpc-watchdog-wpr-boot-zero-exact-target-hits-current-build"
+        "promotion-disposition-intentional-hold-closed"
       ],
+      "rejection_closure": {
+        "status": "evidence-backed-rejected",
+        "kind": "intentional-hold-closed",
+        "reason": "Closed as rejected for app/research-provider promotion because the remaining evidence gap is intentional: current-build exact reads, safe trigger conditions, authoritative semantics, or boot-safe validation are still missing.",
+        "reviewed_utc": "2026-05-07T20:20:00Z",
+        "closure_blocker": "promotion-disposition-intentional-hold-closed",
+        "superseded_blockers": [
+          "force-bugcheck-dpc-watchdog-intentional-hold-safety-sensitive-without-current-build-pivot",
+          "force-bugcheck-dpc-watchdog-no-primary-current-build-doc",
+          "force-bugcheck-dpc-watchdog-semantics-unproven",
+          "force-bugcheck-dpc-watchdog-wpr-boot-zero-exact-target-hits-current-build"
+        ],
+        "evidence_count": 12,
+        "confidence": "low"
+      },
+      "closure_status": "evidence-backed-rejected",
+      "closure_kind": "intentional-hold-closed",
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
       "score_breakdown": {
@@ -21878,10 +23025,24 @@
       "tweak_origin": "research-derived",
       "promotion_state": "rejected",
       "promotion_blockers": [
-        "global-timer-resolution-clean-wpr-subtree-only-no-value-hit-current-build",
-        "global-timer-resolution-intentional-hold-no-current-build-pivot",
-        "global-timer-resolution-no-primary-current-build-doc"
+        "promotion-disposition-intentional-hold-closed"
       ],
+      "rejection_closure": {
+        "status": "evidence-backed-rejected",
+        "kind": "intentional-hold-closed",
+        "reason": "Closed as rejected for app/research-provider promotion because the remaining evidence gap is intentional: current-build exact reads, safe trigger conditions, authoritative semantics, or boot-safe validation are still missing.",
+        "reviewed_utc": "2026-05-07T20:20:00Z",
+        "closure_blocker": "promotion-disposition-intentional-hold-closed",
+        "superseded_blockers": [
+          "global-timer-resolution-clean-wpr-subtree-only-no-value-hit-current-build",
+          "global-timer-resolution-intentional-hold-no-current-build-pivot",
+          "global-timer-resolution-no-primary-current-build-doc"
+        ],
+        "evidence_count": 16,
+        "confidence": "low"
+      },
+      "closure_status": "evidence-backed-rejected",
+      "closure_kind": "intentional-hold-closed",
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
       "score_breakdown": {
@@ -21968,12 +23129,26 @@
       "tweak_origin": "research-derived",
       "promotion_state": "rejected",
       "promotion_blockers": [
-        "timer-check-flags-etw-stackwalk-helper-only-no-target-read",
-        "timer-check-flags-intentional-hold-no-current-build-pivot",
-        "timer-check-flags-modern-bit-semantics-unproven",
-        "timer-check-flags-no-primary-current-build-doc",
-        "timer-check-flags-wpr-boot-zero-exact-target-hits-current-build"
+        "promotion-disposition-intentional-hold-closed"
       ],
+      "rejection_closure": {
+        "status": "evidence-backed-rejected",
+        "kind": "intentional-hold-closed",
+        "reason": "Closed as rejected for app/research-provider promotion because the remaining evidence gap is intentional: current-build exact reads, safe trigger conditions, authoritative semantics, or boot-safe validation are still missing.",
+        "reviewed_utc": "2026-05-07T20:20:00Z",
+        "closure_blocker": "promotion-disposition-intentional-hold-closed",
+        "superseded_blockers": [
+          "timer-check-flags-etw-stackwalk-helper-only-no-target-read",
+          "timer-check-flags-intentional-hold-no-current-build-pivot",
+          "timer-check-flags-modern-bit-semantics-unproven",
+          "timer-check-flags-no-primary-current-build-doc",
+          "timer-check-flags-wpr-boot-zero-exact-target-hits-current-build"
+        ],
+        "evidence_count": 14,
+        "confidence": "low"
+      },
+      "closure_status": "evidence-backed-rejected",
+      "closure_kind": "intentional-hold-closed",
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
       "score_breakdown": {
@@ -22057,6 +23232,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -22140,6 +23318,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -22223,6 +23404,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -22310,6 +23494,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -22397,6 +23584,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -22481,6 +23671,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -22564,6 +23757,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -22651,6 +23847,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -22734,6 +23933,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -22817,6 +24019,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -22900,6 +24105,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -22991,6 +24199,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -23083,6 +24294,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -23166,6 +24380,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -23249,6 +24466,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -23332,6 +24552,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -23415,6 +24638,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -23498,6 +24724,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -23581,6 +24810,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -23670,6 +24902,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -23753,6 +24988,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -23839,6 +25077,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -23922,6 +25163,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -24009,6 +25253,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -24092,6 +25339,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -24175,6 +25425,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -24258,6 +25511,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -24341,6 +25597,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -24424,6 +25683,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -24507,6 +25769,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -24590,6 +25855,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -24673,6 +25941,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -24756,6 +26027,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -24839,6 +26113,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -24922,6 +26199,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -25005,6 +26285,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -25088,6 +26371,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -25171,6 +26457,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -25254,6 +26543,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -25337,6 +26629,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -25420,6 +26715,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -25507,6 +26805,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -25590,6 +26891,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -25675,6 +26979,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -25760,6 +27067,9 @@
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
       "promotion_blockers": [],
+      "rejection_closure": null,
+      "closure_status": null,
+      "closure_kind": null,
       "record_promotion_allowed": true,
       "tweak_ingest_allowed": true,
       "score_breakdown": {
@@ -25799,55 +27109,10 @@
     }
   ],
   "blocker_breakdown": {
-    "Clearing the event log has no rollback path.": 1,
-    "Deleting Windows.old has no rollback path through the app.": 1,
-    "The card has not yet been promoted into the research-provider surface.": 3,
-    "This is a destructive cleanup action without rollback.": 1,
-    "This is a maintenance action with no rollback support.": 8,
-    "This is a one-shot cleanup action without automatic rollback.": 1,
-    "This is a one-shot destructive cleanup action without rollback.": 1,
-    "This is a one-shot troubleshooting action without rollback.": 1,
-    "This is an on-demand maintenance action with no rollback support.": 1,
-    "audio-execution-required-no-current-build-registry-seeding-path": 1,
-    "conflicting-sources": 2,
-    "dpc-watchdog-control-intentional-hold-no-current-build-pivot": 1,
-    "dpc-watchdog-control-wpr-boot-zero-exact-target-hits-current-build": 1,
-    "dpc-watchdog-profile-conditional-init-semantics-unproven": 1,
-    "dpc-watchdog-profile-no-persisted-boot-consumer-proof": 1,
-    "enable-virtualization-research-only-raw-policy-system-value": 1,
-    "force-bugcheck-dpc-watchdog-semantics-unproven": 1,
-    "force-bugcheck-dpc-watchdog-wpr-boot-zero-exact-target-hits-current-build": 1,
-    "global-timer-resolution-clean-wpr-subtree-only-no-value-hit-current-build": 1,
-    "global-timer-resolution-intentional-hold-no-current-build-pivot": 1,
-    "hiber-file-size-percent-research-only-raw-power-manager-value": 1,
-    "hibernate-enabled-default-hibernate-trigger-not-available-on-current-vm": 1,
-    "intentional-hold": 3,
-    "long-dpc-threshold-intentional-hold-no-current-build-pivot": 1,
-    "long-dpc-threshold-wpr-boot-zero-exact-target-hits-current-build": 1,
-    "no-primary-current-build-doc": 11,
-    "no-runtime-proof": 4,
-    "power-session-watchdog-timeouts-no-current-build-registry-seeding-caller": 1,
-    "power-session-watchdog-timeouts-sleep-side-exact-registry-read-missing": 1,
-    "powerrequestoverride-static-context-adjacent-not-leaf-specific": 1,
-    "powerrequestoverride-subtree-live-reader-binding-open-question": 1,
-    "powerwatchdog-timeout-family-helper-query-only-single-member": 1,
-    "powerwatchdog-timeout-family-intentional-hold-no-current-build-pivot": 1,
-    "powerwatchdog-timeout-family-no-current-build-string-or-symbol-hit": 1,
-    "record-blocker": 21,
-    "system-execution-required-no-current-build-registry-seeding-path": 1,
-    "timer-check-flags-etw-stackwalk-helper-only-no-target-read": 1,
-    "timer-check-flags-intentional-hold-no-current-build-pivot": 1,
-    "timer-check-flags-modern-bit-semantics-unproven": 1,
-    "timer-check-flags-wpr-boot-zero-exact-target-hits-current-build": 1,
-    "timer-rebase-threshold-drips-trigger-not-available-on-current-vm": 1,
-    "ttmenabled-boot-unsafe-dedicated-boot-lane-required": 1,
-    "ttmenabled-boot-unsafe-on-isolated-pilot-profile": 1,
-    "ttmenabled-reader-open-question": 1,
-    "validation-proof": 17,
-    "win32-callout-watchdog-bugcheck-semantics-unproven": 1,
-    "win32k-callout-watchdog-helper-query-only-not-boot-consumer": 1,
-    "win32k-callout-watchdog-intentional-hold-no-current-build-pivot": 1,
-    "win32k-callout-watchdog-override-semantics-unproven": 1
+    "promotion-disposition-environment-limited-validation-lane": 1,
+    "promotion-disposition-intentional-hold-closed": 18,
+    "promotion-disposition-non-reversible-or-high-risk-action": 17,
+    "promotion-disposition-protected-acl-not-actionable": 1
   },
   "stale_records": [],
   "conflict_records": [],
