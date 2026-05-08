@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-08T09:13:44.827780Z",
+  "generated_utc": "2026-05-08T10:04:37.663190Z",
   "summary": {
     "total_records": 356,
     "validated": 271,
@@ -11,16 +11,16 @@
     "records_missing_validation_proof": 17,
     "deprecated_missing_validation_proof": 0,
     "class_counts": {
-      "A": 259,
+      "A": 262,
       "E": 55,
       "D": 17,
-      "B": 23,
+      "B": 20,
       "C": 2
     },
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-05-08T09:13:44.337282Z",
+      "generated_utc": "2026-05-08T10:04:37.159612Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -56089,15 +56089,15 @@
         "record_id": "power.control.class1-initial-unpark-count",
         "tweak_id": "power.control.class1-initial-unpark-count",
         "record_status": "validated",
-        "evidence_class": "B",
-        "class_label": "Class B",
-        "class_title": "Strong but Decision-Gated",
-        "class_description": "Cross-layer evidence is strong, but a policy/supportability gate or one missing lane still keeps the record below Class A.",
+        "evidence_class": "A",
+        "class_label": "Class A",
+        "class_title": "Cross-Layer Verified",
+        "class_description": "Key exists, primary values have trusted meanings, and the docs/static/runtime layers converge. App surfacing and one-click actionability are tracked separately.",
         "show_in_app": true,
-        "is_actionable": false,
+        "is_actionable": true,
         "is_archived": false,
-        "action_state": "research-gated",
-        "gating_reason": "This record is strong enough to show, but it still needs a tighter policy edge before it becomes Class A.",
+        "action_state": "actionable",
+        "gating_reason": "This record is cross-layer verified and also aligned with a shipped one-click surface.",
         "confidence": "high",
         "app_mapping_status": "matches-research",
         "restore_story_known": true,
@@ -56166,12 +56166,12 @@
       },
       "decision": {
         "confidence": "high",
-        "apply_allowed": false,
+        "apply_allowed": true,
         "recommended_for_general_users": false,
         "restore_default_supported": true,
         "restore_previous_supported": true,
         "needs_vm_validation": false,
-        "why": "Class1InitialUnparkCount now has converged cross-layer evidence on RegProbe-Baseline-ToolsHardened-20260330: phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, prior shell-safe Procmon lanes, and an exact runtime read captured by the tools-hardened lightweight ETW follow-up. App mapping is tracked separately and does not block evidence classification.",
+        "why": "Class1InitialUnparkCount now has converged cross-layer evidence on RegProbe-Baseline-ToolsHardened-20260330: phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, prior shell-safe Procmon lanes, and an exact runtime read captured by the tools-hardened lightweight ETW follow-up. The 2026-05-08 promotion review pack approves this app-mapped raw power card for conservative promotion with no universal performance-win claim.",
         "blocking_issues": []
       },
       "app_current_implementation": {
@@ -56196,7 +56196,7 @@
           "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
           "value_name": "Class1InitialUnparkCount",
           "value_type": "REG_DWORD",
-          "notes": "This candidate is tracked as a raw kernel-facing value, not as a published end-user tweak profile.",
+          "notes": "This candidate is promoted as a conservative research-card raw power value; do not claim a universal performance win.",
           "allowed_values": [
             {
               "state_kind": "value",
@@ -56237,8 +56237,8 @@
             "Power-manager documentation"
           ],
           "avoid_for": [
-            "General users",
-            "One-click apply surfaces"
+            "General users expecting a guaranteed performance gain",
+            "Systems where hardware-specific CPU parking behavior has not been reviewed"
           ],
           "states": [
             {
@@ -56248,13 +56248,13 @@
               "rationale": "Track the observed baseline value without turning it into a shipped preset."
             }
           ],
-          "good_when": "You want the repo to track the live baseline and current evidence for this raw power-manager value.",
-          "bad_when": "You want a supported end-user tweak or a documented Microsoft control surface.",
+          "good_when": "You want the app to preserve the observed Class1InitialUnparkCount baseline with a reversible raw power-card apply path.",
+          "bad_when": "You need a hardware-independent performance recommendation or a documented Microsoft end-user control surface.",
           "tradeoffs": [
             "Preserves the observed baseline value.",
-            "Keeps the candidate research-only and non-actionable."
+            "Ships only with a conservative claim boundary because CPU parking effects are hardware and power-plan dependent."
           ],
-          "apply_allowed": false,
+          "apply_allowed": true,
           "evidence_ids": [
             "vm-power-control-phase0-20260329",
             "ghidra-power-control-docs-first-20260329"
@@ -57416,15 +57416,15 @@
         "record_id": "power.control.lid-reliability-state",
         "tweak_id": "power.control.lid-reliability-state",
         "record_status": "validated",
-        "evidence_class": "B",
-        "class_label": "Class B",
-        "class_title": "Strong but Decision-Gated",
-        "class_description": "Cross-layer evidence is strong, but a policy/supportability gate or one missing lane still keeps the record below Class A.",
+        "evidence_class": "A",
+        "class_label": "Class A",
+        "class_title": "Cross-Layer Verified",
+        "class_description": "Key exists, primary values have trusted meanings, and the docs/static/runtime layers converge. App surfacing and one-click actionability are tracked separately.",
         "show_in_app": true,
-        "is_actionable": false,
+        "is_actionable": true,
         "is_archived": false,
-        "action_state": "research-gated",
-        "gating_reason": "This record is strong enough to show, but it still needs a tighter policy edge before it becomes Class A.",
+        "action_state": "actionable",
+        "gating_reason": "This record is cross-layer verified and also aligned with a shipped one-click surface.",
         "confidence": "high",
         "app_mapping_status": "matches-research",
         "restore_story_known": true,
@@ -57493,12 +57493,12 @@
       },
       "decision": {
         "confidence": "high",
-        "apply_allowed": false,
+        "apply_allowed": true,
         "recommended_for_general_users": false,
         "restore_default_supported": true,
         "restore_previous_supported": true,
         "needs_vm_validation": false,
-        "why": "LidReliabilityState now has converged cross-layer evidence on RegProbe-Baseline-Clean-20260329: phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, and an exact runtime read from System captured by the guest-processed stepwise Procmon boot log. App mapping is tracked separately and does not block evidence classification.",
+        "why": "LidReliabilityState now has converged cross-layer evidence on RegProbe-Baseline-Clean-20260329: phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, and an exact runtime read from System captured by the guest-processed stepwise Procmon boot log. The 2026-05-08 promotion review pack approves this app-mapped raw power card for conservative promotion with an ACPI lid/hardware applicability note.",
         "blocking_issues": []
       },
       "app_current_implementation": {
@@ -57523,7 +57523,7 @@
           "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
           "value_name": "LidReliabilityState",
           "value_type": "REG_DWORD",
-          "notes": "This candidate is tracked as a raw kernel-facing value, not as a published end-user tweak profile.",
+          "notes": "This candidate is promoted as a conservative research-card raw power value; systems without an ACPI lid device may treat it as inert.",
           "allowed_values": [
             {
               "state_kind": "value",
@@ -57564,8 +57564,8 @@
             "Power-manager documentation"
           ],
           "avoid_for": [
-            "General users",
-            "One-click apply surfaces"
+            "Desktop or VM systems where no ACPI lid device is present",
+            "Users expecting a visible behavior change on non-laptop hardware"
           ],
           "states": [
             {
@@ -57575,13 +57575,13 @@
               "rationale": "Track the observed baseline value without turning it into a shipped preset."
             }
           ],
-          "good_when": "You want the repo to track the live baseline and current evidence for this raw power-manager value.",
-          "bad_when": "You want a supported end-user tweak or a documented Microsoft control surface.",
+          "good_when": "You want the app to preserve the observed LidReliabilityState baseline with a reversible raw power-card apply path.",
+          "bad_when": "You need a hardware-independent guarantee that a lid-related value will affect a desktop, server, or VM.",
           "tradeoffs": [
             "Preserves the observed baseline value.",
-            "Keeps the candidate research-only and non-actionable."
+            "Ships with a hardware applicability note because lid reliability behavior depends on ACPI lid support."
           ],
-          "apply_allowed": false,
+          "apply_allowed": true,
           "evidence_ids": [
             "vm-power-control-phase0-20260329",
             "ghidra-power-control-docs-first-20260329"
@@ -57742,15 +57742,15 @@
         "record_id": "power.control.mf-buffering-threshold",
         "tweak_id": "power.control.mf-buffering-threshold",
         "record_status": "validated",
-        "evidence_class": "B",
-        "class_label": "Class B",
-        "class_title": "Strong but Decision-Gated",
-        "class_description": "Cross-layer evidence is strong, but a policy/supportability gate or one missing lane still keeps the record below Class A.",
+        "evidence_class": "A",
+        "class_label": "Class A",
+        "class_title": "Cross-Layer Verified",
+        "class_description": "Key exists, primary values have trusted meanings, and the docs/static/runtime layers converge. App surfacing and one-click actionability are tracked separately.",
         "show_in_app": true,
-        "is_actionable": false,
+        "is_actionable": true,
         "is_archived": false,
-        "action_state": "research-gated",
-        "gating_reason": "This record is strong enough to show, but it still needs a tighter policy edge before it becomes Class A.",
+        "action_state": "actionable",
+        "gating_reason": "This record is cross-layer verified and also aligned with a shipped one-click surface.",
         "confidence": "high",
         "app_mapping_status": "matches-research",
         "restore_story_known": true,
@@ -57819,12 +57819,12 @@
       },
       "decision": {
         "confidence": "high",
-        "apply_allowed": false,
+        "apply_allowed": true,
         "recommended_for_general_users": false,
         "restore_default_supported": true,
         "restore_previous_supported": true,
         "needs_vm_validation": false,
-        "why": "MfBufferingThreshold now has converged cross-layer evidence on RegProbe-Baseline-ToolsHardened-20260330: phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, prior shell-safe Procmon lanes, and an exact runtime read captured by the tools-hardened lightweight ETW I/O burst follow-up. App mapping is tracked separately and does not block evidence classification.",
+        "why": "MfBufferingThreshold now has converged cross-layer evidence on RegProbe-Baseline-ToolsHardened-20260330: phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, prior shell-safe Procmon lanes, and an exact runtime read captured by the tools-hardened lightweight ETW I/O burst follow-up. The 2026-05-08 promotion review pack approves this app-mapped raw power card for conservative promotion with workload-specific media buffering language.",
         "blocking_issues": []
       },
       "app_current_implementation": {
@@ -57849,7 +57849,7 @@
           "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
           "value_name": "MfBufferingThreshold",
           "value_type": "REG_DWORD",
-          "notes": "This candidate is tracked as a raw kernel-facing value, not as a published end-user tweak profile.",
+          "notes": "This candidate is promoted as a conservative research-card raw power value; media-stack impact remains workload-specific.",
           "allowed_values": [
             {
               "state_kind": "value",
@@ -57890,8 +57890,8 @@
             "Power-manager documentation"
           ],
           "avoid_for": [
-            "General users",
-            "One-click apply surfaces"
+            "Users expecting a guaranteed media playback improvement",
+            "Systems where media workload impact has not been reviewed"
           ],
           "states": [
             {
@@ -57901,13 +57901,13 @@
               "rationale": "Track the observed baseline value without turning it into a shipped preset."
             }
           ],
-          "good_when": "You want the repo to track the live baseline and current evidence for this raw power-manager value.",
-          "bad_when": "You want a supported end-user tweak or a documented Microsoft control surface.",
+          "good_when": "You want the app to preserve the observed MfBufferingThreshold baseline with a reversible raw power-card apply path.",
+          "bad_when": "You need a workload-independent media performance recommendation or a documented Microsoft end-user control surface.",
           "tradeoffs": [
             "Preserves the observed baseline value.",
-            "Keeps the candidate research-only and non-actionable."
+            "Ships only with a conservative claim boundary because media buffering effects depend on the active media stack."
           ],
-          "apply_allowed": false,
+          "apply_allowed": true,
           "evidence_ids": [
             "vm-power-control-phase0-20260329",
             "ghidra-power-control-docs-first-20260329"

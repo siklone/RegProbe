@@ -21,7 +21,7 @@ The checked-in v3.6 publishing, manifest, and metrics helpers live in the top-le
 
 | Metric | Value |
 |--------|-------|
-| Promoted | 257 |
+| Promoted | 260 |
 | Blocked | 0 |
 | Revalidation Pending | 0 |
 | Gate Health | 🟡 yellow |

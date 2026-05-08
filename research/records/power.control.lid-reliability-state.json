@@ -39,7 +39,7 @@
             ]
           }
         ],
-        "notes": "This candidate is tracked as a raw kernel-facing value, not as a published end-user tweak profile."
+        "notes": "This candidate is promoted as a conservative research-card raw power value; systems without an ACPI lid device may treat it as inert."
       }
     ]
   },
@@ -85,8 +85,8 @@
         "Power-manager documentation"
       ],
       "avoid_for": [
-        "General users",
-        "One-click apply surfaces"
+            "Desktop or VM systems where no ACPI lid device is present",
+            "Users expecting a visible behavior change on non-laptop hardware"
       ],
       "states": [
         {
@@ -96,13 +96,13 @@
           "rationale": "Track the observed baseline value without turning it into a shipped preset."
         }
       ],
-      "good_when": "You want the repo to track the live baseline and current evidence for this raw power-manager value.",
-      "bad_when": "You want a supported end-user tweak or a documented Microsoft control surface.",
+      "good_when": "You want the app to preserve the observed LidReliabilityState baseline with a reversible raw power-card apply path.",
+      "bad_when": "You need a hardware-independent guarantee that a lid-related value will affect a desktop, server, or VM.",
       "tradeoffs": [
         "Preserves the observed baseline value.",
-        "Keeps the candidate research-only and non-actionable."
+        "Ships with a hardware applicability note because lid reliability behavior depends on ACPI lid support."
       ],
-      "apply_allowed": false,
+      "apply_allowed": true,
       "evidence_ids": [
         "vm-power-control-phase0-20260329",
         "ghidra-power-control-docs-first-20260329"
@@ -208,12 +208,12 @@
   ],
   "decision": {
     "confidence": "high",
-    "apply_allowed": false,
+    "apply_allowed": true,
     "recommended_for_general_users": false,
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "LidReliabilityState now has converged cross-layer evidence on RegProbe-Baseline-Clean-20260329: phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, and an exact runtime read from System captured by the guest-processed stepwise Procmon boot log. App mapping is tracked separately and does not block evidence classification.",
+    "why": "LidReliabilityState now has converged cross-layer evidence on RegProbe-Baseline-Clean-20260329: phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, and an exact runtime read from System captured by the guest-processed stepwise Procmon boot log. The 2026-05-08 promotion review pack approves this app-mapped raw power card for conservative promotion with an ACPI lid/hardware applicability note.",
     "blocking_issues": []
   },
   "tested_on": [
@@ -236,7 +236,7 @@
       "notes": "The guest-processed stepwise Procmon boot log captured an exact runtime read for `LidReliabilityState` from `System`."
     }
   ],
-  "last_reviewed_utc": "2026-05-07T10:11:53.9122918Z",
+  "last_reviewed_utc": "2026-05-08T10:03:46Z",
   "version_stable": [
     "25H2"
   ],

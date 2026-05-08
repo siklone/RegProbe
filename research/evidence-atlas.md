@@ -15,8 +15,8 @@ Nohuto references only show upstream dump or naming links. Value semantics come 
 | Records without evidence | 0 |
 | Records missing validation proof | 17 |
 | Deprecated missing validation proof | 0 |
-| Class A | 259 |
-| Class B | 23 |
+| Class A | 262 |
+| Class B | 20 |
 | Class C | 2 |
 | Class D | 17 |
 | Class E | 55 |
@@ -9149,13 +9149,13 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class B` |
+| Evidence class | `Class A` |
 | Category | `Power` |
 | Area | `Raw Power Manager Registry` |
 | Scope | `device` |
 | Source file | [research/records/power.control.class1-initial-unpark-count.json](records/power.control.class1-initial-unpark-count.json) |
 | V3.1 evidence root | [evidence/records/power.control.class1-initial-unpark-count](../evidence/records/power.control.class1-initial-unpark-count) |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
@@ -9179,10 +9179,10 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Label | `Class B` |
-| Title | Strong but Decision-Gated |
-| Action state | `research-gated` |
-| Gating reason | This record is strong enough to show, but it still needs a tighter policy edge before it becomes Class A. |
+| Label | `Class A` |
+| Title | Cross-Layer Verified |
+| Action state | `actionable` |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -9206,7 +9206,7 @@ Current writes
 | Path | `HKLM\SYSTEM\CurrentControlSet\Control\Power` |
 | Value name | `Class1InitialUnparkCount` |
 | Value type | `REG_DWORD` |
-| Notes | This candidate is tracked as a raw kernel-facing value, not as a published end-user tweak profile. |
+| Notes | This candidate is promoted as a conservative research-card raw power value; do not claim a universal performance win. |
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
@@ -9222,7 +9222,7 @@ Current writes
 
 | Profile | Label | Intended for | Avoid for | Apply allowed |
 | --- | --- | --- | --- | --- |
-| `observed-baseline` | Observed baseline | ['Registry research tracking', 'Power-manager documentation'] | ['General users', 'One-click apply surfaces'] | `False` |
+| `observed-baseline` | Observed baseline | ['Registry research tracking', 'Power-manager documentation'] | ['General users expecting a guaranteed performance gain', 'Systems where hardware-specific CPU parking behavior has not been reviewed'] | `True` |
 
 **Evidence**
 
@@ -9251,12 +9251,12 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Recommended for general users | `False` |
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | Class1InitialUnparkCount now has converged cross-layer evidence on RegProbe-Baseline-ToolsHardened-20260330: phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, prior shell-safe Procmon lanes, and an exact runtime read captured by the tools-hardened lightweight ETW follow-up. App mapping is tracked separately and does not block evidence classification. |
+| Why | Class1InitialUnparkCount now has converged cross-layer evidence on RegProbe-Baseline-ToolsHardened-20260330: phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, prior shell-safe Procmon lanes, and an exact runtime read captured by the tools-hardened lightweight ETW follow-up. The 2026-05-08 promotion review pack approves this app-mapped raw power card for conservative promotion with no universal performance-win claim. |
 
 ---
 
@@ -9605,13 +9605,13 @@ Blocking issues:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class B` |
+| Evidence class | `Class A` |
 | Category | `Power` |
 | Area | `Raw Power Manager Registry` |
 | Scope | `device` |
 | Source file | [research/records/power.control.lid-reliability-state.json](records/power.control.lid-reliability-state.json) |
 | V3.1 evidence root | [evidence/records/power.control.lid-reliability-state](../evidence/records/power.control.lid-reliability-state) |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
@@ -9635,10 +9635,10 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Label | `Class B` |
-| Title | Strong but Decision-Gated |
-| Action state | `research-gated` |
-| Gating reason | This record is strong enough to show, but it still needs a tighter policy edge before it becomes Class A. |
+| Label | `Class A` |
+| Title | Cross-Layer Verified |
+| Action state | `actionable` |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -9662,7 +9662,7 @@ Current writes
 | Path | `HKLM\SYSTEM\CurrentControlSet\Control\Power` |
 | Value name | `LidReliabilityState` |
 | Value type | `REG_DWORD` |
-| Notes | This candidate is tracked as a raw kernel-facing value, not as a published end-user tweak profile. |
+| Notes | This candidate is promoted as a conservative research-card raw power value; systems without an ACPI lid device may treat it as inert. |
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
@@ -9678,7 +9678,7 @@ Current writes
 
 | Profile | Label | Intended for | Avoid for | Apply allowed |
 | --- | --- | --- | --- | --- |
-| `observed-baseline` | Observed baseline | ['Registry research tracking', 'Power-manager documentation'] | ['General users', 'One-click apply surfaces'] | `False` |
+| `observed-baseline` | Observed baseline | ['Registry research tracking', 'Power-manager documentation'] | ['Desktop or VM systems where no ACPI lid device is present', 'Users expecting a visible behavior change on non-laptop hardware'] | `True` |
 
 **Evidence**
 
@@ -9705,12 +9705,12 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Recommended for general users | `False` |
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | LidReliabilityState now has converged cross-layer evidence on RegProbe-Baseline-Clean-20260329: phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, and an exact runtime read from System captured by the guest-processed stepwise Procmon boot log. App mapping is tracked separately and does not block evidence classification. |
+| Why | LidReliabilityState now has converged cross-layer evidence on RegProbe-Baseline-Clean-20260329: phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, and an exact runtime read from System captured by the guest-processed stepwise Procmon boot log. The 2026-05-08 promotion review pack approves this app-mapped raw power card for conservative promotion with an ACPI lid/hardware applicability note. |
 
 ---
 
@@ -9719,13 +9719,13 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class B` |
+| Evidence class | `Class A` |
 | Category | `Power` |
 | Area | `Raw Power Manager Registry` |
 | Scope | `device` |
 | Source file | [research/records/power.control.mf-buffering-threshold.json](records/power.control.mf-buffering-threshold.json) |
 | V3.1 evidence root | [evidence/records/power.control.mf-buffering-threshold](../evidence/records/power.control.mf-buffering-threshold) |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
@@ -9749,10 +9749,10 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Label | `Class B` |
-| Title | Strong but Decision-Gated |
-| Action state | `research-gated` |
-| Gating reason | This record is strong enough to show, but it still needs a tighter policy edge before it becomes Class A. |
+| Label | `Class A` |
+| Title | Cross-Layer Verified |
+| Action state | `actionable` |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -9776,7 +9776,7 @@ Current writes
 | Path | `HKLM\SYSTEM\CurrentControlSet\Control\Power` |
 | Value name | `MfBufferingThreshold` |
 | Value type | `REG_DWORD` |
-| Notes | This candidate is tracked as a raw kernel-facing value, not as a published end-user tweak profile. |
+| Notes | This candidate is promoted as a conservative research-card raw power value; media-stack impact remains workload-specific. |
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
@@ -9792,7 +9792,7 @@ Current writes
 
 | Profile | Label | Intended for | Avoid for | Apply allowed |
 | --- | --- | --- | --- | --- |
-| `observed-baseline` | Observed baseline | ['Registry research tracking', 'Power-manager documentation'] | ['General users', 'One-click apply surfaces'] | `False` |
+| `observed-baseline` | Observed baseline | ['Registry research tracking', 'Power-manager documentation'] | ['Users expecting a guaranteed media playback improvement', 'Systems where media workload impact has not been reviewed'] | `True` |
 
 **Evidence**
 
@@ -9821,12 +9821,12 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Recommended for general users | `False` |
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | MfBufferingThreshold now has converged cross-layer evidence on RegProbe-Baseline-ToolsHardened-20260330: phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, prior shell-safe Procmon lanes, and an exact runtime read captured by the tools-hardened lightweight ETW I/O burst follow-up. App mapping is tracked separately and does not block evidence classification. |
+| Why | MfBufferingThreshold now has converged cross-layer evidence on RegProbe-Baseline-ToolsHardened-20260330: phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, prior shell-safe Procmon lanes, and an exact runtime read captured by the tools-hardened lightweight ETW I/O burst follow-up. The 2026-05-08 promotion review pack approves this app-mapped raw power card for conservative promotion with workload-specific media buffering language. |
 
 ---
 

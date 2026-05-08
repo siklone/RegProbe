@@ -15,8 +15,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Records without evidence | 0 |
 | Records missing validation proof | 17 |
 | Deprecated missing validation proof | 0 |
-| Class A | 259 |
-| Class B | 23 |
+| Class A | 262 |
+| Class B | 20 |
 | Class C | 2 |
 | Class D | 17 |
 | Class E | 55 |
@@ -197,12 +197,12 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `peripheral.mouse-disable-acceleration` | validated | Class A | `research/records/peripheral.mouse-disable-acceleration.review.json` | - | `8c20bde7651dd846e481ba9c0bf7c20b99086386e31cc514db82b121e58a7981` | `bd98172bca8ff36b8a50622aeb2c6f71eb7111c54eabe9b376e58ba1fa7ee56f` | 4 |
 | `peripheral.mouse-disable-throttle` | validated | Class A | `research/records/peripheral.mouse-disable-throttle.review.json` | - | `a01e2a458d3cd1568b67997fc89b0805f07dbe2e954b09ddd8583bea4f97106f` | `448f25a45f571abd238c715c2bf1f03a283a65aeaa2595b104796b6929f49ba7` | 4 |
 | `policy.system.enable-virtualization` | validated | Class B | `research/records/policy.system.enable-virtualization.json` | [evidence/records/policy.system.enable-virtualization](../evidence/records/policy.system.enable-virtualization) | `987e2ca5ab40dfbde45da5050a35844825288f7a6f6b173a62a4552ff06876db` | `5005cae27faa69e1133858c324a730e66ec750ae8fb5f1631ff815c6b1162047` | 13 |
-| `power.control.class1-initial-unpark-count` | validated | Class B | `research/records/power.control.class1-initial-unpark-count.json` | [evidence/records/power.control.class1-initial-unpark-count](../evidence/records/power.control.class1-initial-unpark-count) | `fa44f28403c225e95359a0c9a4799d5688265fb90b964d7b6d70236e0586a841` | `a72121d16b566cdba83dee54ae043cb54c3dc36de0f2c4a335bfaf7eb28ca910` | 9 |
+| `power.control.class1-initial-unpark-count` | validated | Class A | `research/records/power.control.class1-initial-unpark-count.json` | [evidence/records/power.control.class1-initial-unpark-count](../evidence/records/power.control.class1-initial-unpark-count) | `769c715904a0d441c291a0d4dfe795a3f9d05b985f5179f746608b64ff626ce4` | `a72121d16b566cdba83dee54ae043cb54c3dc36de0f2c4a335bfaf7eb28ca910` | 9 |
 | `power.control.hiber-file-size-percent` | validated | Class A | `research/records/power.control.hiber-file-size-percent.json` | [evidence/records/power.control.hiber-file-size-percent](../evidence/records/power.control.hiber-file-size-percent) | `88de85dc76bda18e8347a10d07a1e3b512dd76dd87e2768328c4a7bea6d3420f` | `02e2f41ef03b972170ad7896c7af8a703300def3f4724df7e83d8100e69f0ae4` | 10 |
 | `power.control.hibernate-enabled` | validated | Class A | `research/records/power.control.hibernate-enabled.json` | [evidence/records/power.control.hibernate-enabled](../evidence/records/power.control.hibernate-enabled) | `f62ceedb9e71c3d462a7240092217f1bbf3d9113d1bce700f1dc1f894f014b24` | `c3911d1326540d7f1276550075e7c7eb7c434a2dd287e02d644b739579800b5b` | 6 |
 | `power.control.hibernate-enabled-default` | validated | Class B | `research/records/power.control.hibernate-enabled-default.json` | [evidence/records/power.control.hibernate-enabled-default](../evidence/records/power.control.hibernate-enabled-default) | `29a701c0cb3a9440b7669e7f3810feec0275b25f739fe48fd27ee0fe9faf11a3` | `4b6b5426cee9abeb3f568710619525a4a70fbffa9d5d7082863c9ac7c8d90916` | 9 |
-| `power.control.lid-reliability-state` | validated | Class B | `research/records/power.control.lid-reliability-state.json` | [evidence/records/power.control.lid-reliability-state](../evidence/records/power.control.lid-reliability-state) | `abe773ecec342aff971793ceb9cbb4399540862b1033ab0af35d2efdb4245833` | `568cda6c5db740257e809b7d530fe6dbdf2fc7e4f10b9fc3182beec481c0be8e` | 7 |
-| `power.control.mf-buffering-threshold` | validated | Class B | `research/records/power.control.mf-buffering-threshold.json` | [evidence/records/power.control.mf-buffering-threshold](../evidence/records/power.control.mf-buffering-threshold) | `ae1194394e74b75673c3a5222ec2ca4fc43aa0297580affa06d6f5c981db988b` | `76b19ee2eb617fdf751f3fe4bc3482b147ae62e713c61c3ad07b0539bdbe5ce2` | 9 |
+| `power.control.lid-reliability-state` | validated | Class A | `research/records/power.control.lid-reliability-state.json` | [evidence/records/power.control.lid-reliability-state](../evidence/records/power.control.lid-reliability-state) | `408e7f238b1b6c1bd86db9b2d73669bb08ac8ab90f6bcdb153e3b7dbe60183aa` | `568cda6c5db740257e809b7d530fe6dbdf2fc7e4f10b9fc3182beec481c0be8e` | 7 |
+| `power.control.mf-buffering-threshold` | validated | Class A | `research/records/power.control.mf-buffering-threshold.json` | [evidence/records/power.control.mf-buffering-threshold](../evidence/records/power.control.mf-buffering-threshold) | `9ba5dfad998963d026b119a2b618c43dc2157a012a3c32a01e37ec01c4ab2c4b` | `76b19ee2eb617fdf751f3fe4bc3482b147ae62e713c61c3ad07b0539bdbe5ce2` | 9 |
 | `power.control.perf-calculate-actual-utilization` | validated | Class B | `research/records/power.control.perf-calculate-actual-utilization.json` | [evidence/records/power.control.perf-calculate-actual-utilization](../evidence/records/power.control.perf-calculate-actual-utilization) | `9530e576f47f22bc45ba4a7983464fbe9a092ca6ff4e2b364e0b3ae18c54b5c8` | `0b9db986096b363ddb7a503bdd24202f4363bfe219e159ed604e8ce68e2ab572` | 9 |
 | `power.control.timer-rebase-threshold-on-drips-exit` | validated | Class B | `research/records/power.control.timer-rebase-threshold-on-drips-exit.json` | [evidence/records/power.control.timer-rebase-threshold-on-drips-exit](../evidence/records/power.control.timer-rebase-threshold-on-drips-exit) | `e35cf973a70dbc1a578a37938e20a200ab69f0a8d20c4f2d5bf6b6a9b311bfa5` | `54f7d729b7c430c4d8fa52ccb91256651e35c189b6c788691161084ffad23095` | 10 |
 | `power.disable-cpu-idle-states` | validated | Class A | `research/records/power.disable-cpu-idle-states.json` | [evidence/records/power.disable-cpu-idle-states](../evidence/records/power.disable-cpu-idle-states) | `0c4938318a9b502144c0f1ab5ed5ad201155466ae668ab8c1c3b654dfb294bb0` | `1798640a1a75847caf8a5c8caa6949c387e8118510e6cf57d7b76f44ed6a5a3b` | 14 |
@@ -5361,10 +5361,10 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 ### `power.control.class1-initial-unpark-count`
 
 - Status: `validated`
-- Evidence class: `Class B`
+- Evidence class: `Class A`
 - Source file: `research/records/power.control.class1-initial-unpark-count.json`
 - Evidence root: [evidence/records/power.control.class1-initial-unpark-count](../evidence/records/power.control.class1-initial-unpark-count)
-- Source SHA256: `fa44f28403c225e95359a0c9a4799d5688265fb90b964d7b6d70236e0586a841`
+- Source SHA256: `769c715904a0d441c291a0d4dfe795a3f9d05b985f5179f746608b64ff626ce4`
 - Proof SHA256: `a72121d16b566cdba83dee54ae043cb54c3dc36de0f2c4a335bfaf7eb28ca910`
 
 **Summary:** Validated candidate package for Class1InitialUnparkCount under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The clean Win25H2Clean baseline confirmed the current default, the repo power notes carry an exact docs hit, the shared string batch found an exact current-build ntoskrnl.exe hit, the shared Ghidra batch produced reviewable xref artifacts, and the tools-hardened lightweight ETW follow-up on RegProbe-Baseline-ToolsHardened-20260330 captured an exact runtime read for Class1InitialUnparkCount. App surfacing remains a separate product decision from evidence classification.
@@ -5517,10 +5517,10 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 ### `power.control.lid-reliability-state`
 
 - Status: `validated`
-- Evidence class: `Class B`
+- Evidence class: `Class A`
 - Source file: `research/records/power.control.lid-reliability-state.json`
 - Evidence root: [evidence/records/power.control.lid-reliability-state](../evidence/records/power.control.lid-reliability-state)
-- Source SHA256: `abe773ecec342aff971793ceb9cbb4399540862b1033ab0af35d2efdb4245833`
+- Source SHA256: `408e7f238b1b6c1bd86db9b2d73669bb08ac8ab90f6bcdb153e3b7dbe60183aa`
 - Proof SHA256: `568cda6c5db740257e809b7d530fe6dbdf2fc7e4f10b9fc3182beec481c0be8e`
 
 **Summary:** Validated candidate package for LidReliabilityState under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The clean Win25H2Clean baseline confirmed the current default, the repo power notes carry an exact docs hit, the shared string batch found an exact current-build ntoskrnl.exe hit, the shared Ghidra batch produced reviewable xref artifacts, and the guest-processed stepwise Procmon boot log on RegProbe-Baseline-Clean-20260329 captured an exact runtime read for LidReliabilityState. App surfacing remains a separate product decision from evidence classification.
@@ -5559,10 +5559,10 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 ### `power.control.mf-buffering-threshold`
 
 - Status: `validated`
-- Evidence class: `Class B`
+- Evidence class: `Class A`
 - Source file: `research/records/power.control.mf-buffering-threshold.json`
 - Evidence root: [evidence/records/power.control.mf-buffering-threshold](../evidence/records/power.control.mf-buffering-threshold)
-- Source SHA256: `ae1194394e74b75673c3a5222ec2ca4fc43aa0297580affa06d6f5c981db988b`
+- Source SHA256: `9ba5dfad998963d026b119a2b618c43dc2157a012a3c32a01e37ec01c4ab2c4b`
 - Proof SHA256: `76b19ee2eb617fdf751f3fe4bc3482b147ae62e713c61c3ad07b0539bdbe5ce2`
 
 **Summary:** Validated candidate package for MfBufferingThreshold under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The clean Win25H2Clean baseline confirmed the current default, the repo power notes carry an exact docs hit, the shared string batch found an exact current-build ntoskrnl.exe hit, the shared Ghidra batch produced reviewable xref artifacts, and the tools-hardened lightweight ETW follow-up on RegProbe-Baseline-ToolsHardened-20260330 captured an exact runtime read for MfBufferingThreshold through the new disk I/O burst trigger. App surfacing remains a separate product decision from evidence classification.
