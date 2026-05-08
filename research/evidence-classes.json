@@ -1,19 +1,19 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-08T10:04:37.271093Z",
+  "generated_utc": "2026-05-08T10:12:33.890015Z",
   "summary": {
     "total_records": 356,
     "class_counts": {
-      "A": 262,
-      "B": 20,
+      "A": 263,
+      "B": 19,
       "C": 2,
       "D": 17,
       "E": 55
     },
     "action_state_counts": {
-      "actionable": 259,
+      "actionable": 260,
       "archived": 55,
-      "research-gated": 42
+      "research-gated": 41
     }
   },
   "classes": {
@@ -10336,9 +10336,11 @@
         "links": []
       },
       "tweak_origin": "research-derived",
-      "promotion_state": "promotion-eligible",
-      "promotion_blockers": [],
-      "record_promotion_allowed": true,
+      "promotion_state": "rejected",
+      "promotion_blockers": [
+        "promotion-disposition-environment-limited-validation-lane"
+      ],
+      "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
       "debug_override_allowed": true,
       "score_breakdown": {
@@ -10555,15 +10557,15 @@
       "record_id": "power.control.perf-calculate-actual-utilization",
       "tweak_id": "power.control.perf-calculate-actual-utilization",
       "record_status": "validated",
-      "evidence_class": "B",
-      "class_label": "Class B",
-      "class_title": "Strong but Decision-Gated",
-      "class_description": "Cross-layer evidence is strong, but a policy/supportability gate or one missing lane still keeps the record below Class A.",
+      "evidence_class": "A",
+      "class_label": "Class A",
+      "class_title": "Cross-Layer Verified",
+      "class_description": "Key exists, primary values have trusted meanings, and the docs/static/runtime layers converge. App surfacing and one-click actionability are tracked separately.",
       "show_in_app": true,
-      "is_actionable": false,
+      "is_actionable": true,
       "is_archived": false,
-      "action_state": "research-gated",
-      "gating_reason": "This record is strong enough to show, but it still needs a tighter policy edge before it becomes Class A.",
+      "action_state": "actionable",
+      "gating_reason": "This record is cross-layer verified and also aligned with a shipped one-click surface.",
       "confidence": "high",
       "app_mapping_status": "matches-research",
       "restore_story_known": true,
@@ -10630,22 +10632,22 @@
         "links": []
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "promotion-eligible",
+      "promotion_state": "promoted",
       "promotion_blockers": [],
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": false,
+      "tweak_ingest_allowed": true,
       "debug_override_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 4,
         "rollback_clarity": 5,
         "blast_radius": 2,
-        "tweak_suitability": 3,
+        "tweak_suitability": 5,
         "privilege_complexity": 3,
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.78,
+        "overall_score": 4.0,
         "next_missing_layer": "none"
       }
     },
@@ -24760,9 +24762,11 @@
         "links": []
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "promotion-eligible",
-      "promotion_blockers": [],
-      "record_promotion_allowed": true,
+      "promotion_state": "rejected",
+      "promotion_blockers": [
+        "promotion-disposition-intentional-hold-closed"
+      ],
+      "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
       "debug_override_allowed": false,
       "score_breakdown": {
@@ -27003,9 +27007,11 @@
         "links": []
       },
       "tweak_origin": "legacy-curated",
-      "promotion_state": "promotion-eligible",
-      "promotion_blockers": [],
-      "record_promotion_allowed": true,
+      "promotion_state": "rejected",
+      "promotion_blockers": [
+        "promotion-disposition-security-hold-closed"
+      ],
+      "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
       "debug_override_allowed": false,
       "score_breakdown": {

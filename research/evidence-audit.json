@@ -1,12 +1,12 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-08T10:04:36.654455Z",
+  "generated_utc": "2026-05-08T10:12:33.279020Z",
   "summary": {
     "total_active_records": 301,
     "class_counts": {
-      "A": 262,
+      "A": 263,
       "D": 17,
-      "B": 20,
+      "B": 19,
       "C": 2
     },
     "lane_counts": {
@@ -22,14 +22,14 @@
       "intentional-hold": 18
     },
     "promotion_state_counts": {
-      "promoted": 264,
-      "rejected": 37
+      "promoted": 261,
+      "rejected": 40
     },
     "re_audit_required_count": 38,
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-05-08T09:13:44.337282Z",
+      "generated_utc": "2026-05-08T10:04:37.159612Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -39,7 +39,7 @@
       "counts_by_promotion_state": {}
     },
     "total": 301,
-    "promoted": 264,
+    "promoted": 261,
     "blocked": 0,
     "revalidation_pending": 0,
     "stale": 0,
@@ -9484,12 +9484,23 @@
       "apply_allowed": false,
       "confidence": "high",
       "tweak_origin": "research-derived",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
-      "rejection_closure": null,
-      "closure_status": null,
-      "closure_kind": null,
-      "record_promotion_allowed": true,
+      "promotion_state": "rejected",
+      "promotion_blockers": [
+        "promotion-disposition-environment-limited-validation-lane"
+      ],
+      "rejection_closure": {
+        "status": "evidence-backed-rejected",
+        "kind": "environment-limited-validation-lane",
+        "reason": "Closed as evidence-backed rejected for product promotion because the current VM firmware does not support hibernation; the raw HibernateEnabled value remains valid evidence, but app-level mutation requires a hibernation-capable platform preflight lane.",
+        "reviewed_utc": "2026-05-08T10:03:46Z",
+        "closure_blocker": "promotion-disposition-environment-limited-validation-lane",
+        "superseded_blockers": [],
+        "evidence_count": 7,
+        "confidence": "high"
+      },
+      "closure_status": "evidence-backed-rejected",
+      "closure_kind": "environment-limited-validation-lane",
+      "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 3,
@@ -9516,7 +9527,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100.1.amd64fre.ge_release.240331-1435",
         "current_build": "26100",
-        "last_verified_at": "2026-05-05T13:08:51.8557437Z"
+        "last_verified_at": "2026-05-08T10:03:46Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -9715,9 +9726,9 @@
     {
       "record_id": "power.control.perf-calculate-actual-utilization",
       "tweak_id": "power.control.perf-calculate-actual-utilization",
-      "evidence_class": "B",
+      "evidence_class": "A",
       "lane": "early-boot",
-      "class_ready_basis": "pending",
+      "class_ready_basis": "converged-vm",
       "official": false,
       "official_doc_exists": false,
       "procmon": true,
@@ -9753,14 +9764,14 @@
       },
       "re_audit_required": true,
       "re_audit_priority": 1,
-      "re_audit_reason": "current_blocker",
-      "original_class": "B",
+      "re_audit_reason": "non_official_v31_reaudit",
+      "original_class": "A",
       "original_pipeline_version": "pre-v3.1",
       "new_pipeline_version": "v3.2",
       "artifact_refs": [],
       "app_mapping_status": "matches-research",
       "restore_story_known": true,
-      "apply_allowed": false,
+      "apply_allowed": true,
       "confidence": "high",
       "tweak_origin": "legacy-curated",
       "promotion_state": "promoted",
@@ -9769,18 +9780,18 @@
       "closure_status": null,
       "closure_kind": null,
       "record_promotion_allowed": true,
-      "tweak_ingest_allowed": false,
+      "tweak_ingest_allowed": true,
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 4,
         "rollback_clarity": 5,
         "blast_radius": 2,
-        "tweak_suitability": 3,
+        "tweak_suitability": 5,
         "privilege_complexity": 3,
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 5,
-        "overall_score": 3.78,
+        "overall_score": 4.0,
         "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
@@ -9795,7 +9806,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100.1.amd64fre.ge_release.240331-1435",
         "current_build": "26100",
-        "last_verified_at": "2026-05-07T10:14:53.5537858Z"
+        "last_verified_at": "2026-05-08T10:03:46Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -21796,12 +21807,23 @@
       "apply_allowed": false,
       "confidence": "high",
       "tweak_origin": "legacy-curated",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
-      "rejection_closure": null,
-      "closure_status": null,
-      "closure_kind": null,
-      "record_promotion_allowed": true,
+      "promotion_state": "rejected",
+      "promotion_blockers": [
+        "promotion-disposition-intentional-hold-closed"
+      ],
+      "rejection_closure": {
+        "status": "evidence-backed-rejected",
+        "kind": "intentional-hold-closed",
+        "reason": "Closed as intentional hold because NT auto-calculates executive worker-thread sizing from the machine profile, while non-default overrides require per-machine profiling and can regress context-switch behavior on low-core or low-vCPU systems.",
+        "reviewed_utc": "2026-05-08T10:03:46Z",
+        "closure_blocker": "promotion-disposition-intentional-hold-closed",
+        "superseded_blockers": [],
+        "evidence_count": 14,
+        "confidence": "high"
+      },
+      "closure_status": "evidence-backed-rejected",
+      "closure_kind": "intentional-hold-closed",
+      "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 4,
@@ -21828,7 +21850,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-04-28T11:11:34Z"
+        "last_verified_at": "2026-05-08T10:03:46Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -22827,12 +22849,23 @@
       "apply_allowed": false,
       "confidence": "high",
       "tweak_origin": "legacy-curated",
-      "promotion_state": "promoted",
-      "promotion_blockers": [],
-      "rejection_closure": null,
-      "closure_status": null,
-      "closure_kind": null,
-      "record_promotion_allowed": true,
+      "promotion_state": "rejected",
+      "promotion_blockers": [
+        "promotion-disposition-security-hold-closed"
+      ],
+      "rejection_closure": {
+        "status": "evidence-backed-rejected",
+        "kind": "security-hold-closed",
+        "reason": "Closed as security hold because DisableExceptionChainValidation is a security mitigation override that can increase exploit surface; it is suitable only for isolated lab or debugging contexts and must never be default-enabled.",
+        "reviewed_utc": "2026-05-08T10:03:46Z",
+        "closure_blocker": "promotion-disposition-security-hold-closed",
+        "superseded_blockers": [],
+        "evidence_count": 5,
+        "confidence": "high"
+      },
+      "closure_status": "evidence-backed-rejected",
+      "closure_kind": "security-hold-closed",
+      "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
       "score_breakdown": {
         "static_evidence_strength": 3,
@@ -22859,7 +22892,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-04-28T11:11:34Z"
+        "last_verified_at": "2026-05-08T10:03:46Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -27109,10 +27142,11 @@
     }
   ],
   "blocker_breakdown": {
-    "promotion-disposition-environment-limited-validation-lane": 1,
-    "promotion-disposition-intentional-hold-closed": 18,
+    "promotion-disposition-environment-limited-validation-lane": 2,
+    "promotion-disposition-intentional-hold-closed": 19,
     "promotion-disposition-non-reversible-or-high-risk-action": 17,
-    "promotion-disposition-protected-acl-not-actionable": 1
+    "promotion-disposition-protected-acl-not-actionable": 1,
+    "promotion-disposition-security-hold-closed": 1
   },
   "stale_records": [],
   "conflict_records": [],

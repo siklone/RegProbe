@@ -15,8 +15,8 @@ Nohuto references only show upstream dump or naming links. Value semantics come 
 | Records without evidence | 0 |
 | Records missing validation proof | 17 |
 | Deprecated missing validation proof | 0 |
-| Class A | 262 |
-| Class B | 20 |
+| Class A | 263 |
+| Class B | 19 |
 | Class C | 2 |
 | Class D | 17 |
 | Class E | 55 |
@@ -9464,6 +9464,7 @@ Blocking issues:
 | `ghidra-power-control-docs-first-20260329` | `decompilation` | `Our Ghidra decompilation` | Shared Ghidra xref batch for docs-first power-control values | [evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md](../evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md) and [evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json](../evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json) and [research/notes/power-control-docs-first-ghidra-review-20260329.md](notes/power-control-docs-first-ghidra-review-20260329.md) | `high` | path, value, behavior, version-scope |
 | `vm-power-control-runtime-batch-20260329` | `procmon-trace` | `VM Procmon trace` | Shared clean-baseline guest-processed stepwise Procmon boot log for docs-first power-control values | [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/results.json](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/results.json) and [research/notes/power-control-docs-first-stepwise-runtime-capture-20260329.md](notes/power-control-docs-first-stepwise-runtime-capture-20260329.md) and [evidence/files/vm/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv](../evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv) | `high` | behavior, risk, version-scope |
 | `kvm-machine-scope-revalidation-batch-20260505` | `runtime-read` | `unspecified` | KVM machine-scope current-state revalidation batch | [registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json) | `medium` | path, value, runtime-read, version-scope |
+| `related-power-disable-hibernation-firmware-limit-20260508` | `related-record` | `unspecified` | Sibling hibernation app card firmware-limit closure | [research/records/power.disable-hibernation.review.json](records/power.disable-hibernation.review.json) and [evidence/captures/power-disable-hibernation-app-qa-not-applicable-20260508.json](../evidence/captures/power-disable-hibernation-app-qa-not-applicable-20260508.json) | `high` | behavior, risk, platform-limit, ui-mapping |
 
 **Validation proof**
 
@@ -9483,7 +9484,7 @@ Blocking issues:
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | HibernateEnabled now has converged cross-layer evidence on RegProbe-Baseline-Clean-20260329: phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, and an exact runtime read from smss.exe captured by the guest-processed stepwise Procmon boot log. App mapping is tracked separately and does not block evidence classification. |
+| Why | HibernateEnabled now has converged cross-layer evidence on RegProbe-Baseline-Clean-20260329: phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, and an exact runtime read from smss.exe captured by the guest-processed stepwise Procmon boot log. The 2026-05-08 promotion review pack keeps the raw value out of the product apply path because the sibling hibernation app card proves the current VM lane is firmware-limited and requires a hibernation-capable validation profile before any conditional promote. |
 
 ---
 
@@ -9835,13 +9836,13 @@ Current writes
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class B` |
+| Evidence class | `Class A` |
 | Category | `Power` |
 | Area | `Raw Power Manager Registry` |
 | Scope | `device` |
 | Source file | [research/records/power.control.perf-calculate-actual-utilization.json](records/power.control.perf-calculate-actual-utilization.json) |
 | V3.1 evidence root | [evidence/records/power.control.perf-calculate-actual-utilization](../evidence/records/power.control.perf-calculate-actual-utilization) |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
@@ -9865,10 +9866,10 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Label | `Class B` |
-| Title | Strong but Decision-Gated |
-| Action state | `research-gated` |
-| Gating reason | This record is strong enough to show, but it still needs a tighter policy edge before it becomes Class A. |
+| Label | `Class A` |
+| Title | Cross-Layer Verified |
+| Action state | `actionable` |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -9892,7 +9893,7 @@ Current writes
 | Path | `HKLM\SYSTEM\CurrentControlSet\Control\Power` |
 | Value name | `PerfCalculateActualUtilization` |
 | Value type | `REG_DWORD` |
-| Notes | This candidate is tracked as a raw kernel-facing value, not as a published end-user tweak profile. |
+| Notes | This candidate is promoted as a warning-gated research-card raw power value; CPU-utilization behavior can be host and hardware dependent. |
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
@@ -9908,7 +9909,7 @@ Current writes
 
 | Profile | Label | Intended for | Avoid for | Apply allowed |
 | --- | --- | --- | --- | --- |
-| `observed-baseline` | Observed baseline | ['Registry research tracking', 'Power-manager documentation'] | ['General users', 'One-click apply surfaces'] | `False` |
+| `observed-baseline` | Observed baseline | ['Registry research tracking', 'Power-manager documentation'] | ['Generic enterprise golden images', 'VMs where host/guest CPU-utilization reporting must remain unchanged'] | `True` |
 
 **Evidence**
 
@@ -9937,12 +9938,12 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Apply allowed | `False` |
+| Apply allowed | `True` |
 | Recommended for general users | `False` |
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | PerfCalculateActualUtilization now has converged cross-layer evidence on RegProbe-Baseline-ToolsHardened-20260330: phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, prior shell-safe Procmon lanes, and an exact runtime read captured by the tools-hardened lightweight ETW follow-up. App mapping is tracked separately and does not block evidence classification. |
+| Why | PerfCalculateActualUtilization now has converged cross-layer evidence on RegProbe-Baseline-ToolsHardened-20260330: phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, prior shell-safe Procmon lanes, and an exact runtime read captured by the tools-hardened lightweight ETW follow-up. The 2026-05-08 promotion review pack approves this app-mapped raw power card as promoted-with-warnings because VM CPU-utilization reporting and bare-metal power behavior can diverge. |
 
 ---
 
@@ -26106,7 +26107,7 @@ Current writes
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | The Executive worker-thread pair now has a clean baseline export, a bounded boot-time ETL extract that proves early Session Manager\Executive activity from System (PID 4), exact current-build ntoskrnl string hits, current-build Ghidra fallback artifacts, a supporting live KVM local-KD symbol query for the exact `ExpAdditional*` data names, a matching live KVM value dump that still shows the pair at `0 / 0`, and a tools-hardened lightweight ETW follow-up that produced exact RegQueryValue hits for both AdditionalCriticalWorkerThreads and AdditionalDelayedWorkerThreads under a concurrent burst trigger. That is enough for Class A within this project even though the lane remains research-only and not app-actionable. |
+| Why | The Executive worker-thread pair now has a clean baseline export, a bounded boot-time ETL extract that proves early Session Manager\Executive activity from System (PID 4), exact current-build ntoskrnl string hits, current-build Ghidra fallback artifacts, a supporting live KVM local-KD symbol query for the exact `ExpAdditional*` data names, a matching live KVM value dump that still shows the pair at `0 / 0`, and a tools-hardened lightweight ETW follow-up that produced exact RegQueryValue hits for both AdditionalCriticalWorkerThreads and AdditionalDelayedWorkerThreads under a concurrent burst trigger. That is enough for Class A within this project, but the 2026-05-08 promotion review pack closes the product decision as intentional hold because manual worker-thread overrides require per-machine profiling and can regress context-switch behavior on low-vCPU systems. |
 
 ---
 
@@ -27001,7 +27002,7 @@ Current writes
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | DisableExceptionChainValidation now has converged project evidence on the tools-hardened baseline: broad phase-0 existence, repo system notes, a current-build ntoskrnl static hit, and an exact early-boot runtime read from the single-reboot Session Manager Kernel ETW batch. The value remains research-only and not app-mapped, but that no longer blocks Class A. |
+| Why | DisableExceptionChainValidation now has converged project evidence on the tools-hardened baseline: broad phase-0 existence, repo system notes, a current-build ntoskrnl static hit, and an exact early-boot runtime read from the single-reboot Session Manager Kernel ETW batch. The 2026-05-08 promotion review pack closes the product decision as security hold because disabling exception-chain validation is a mitigation-bypass surface and must never become a default end-user apply path. |
 
 ---
 

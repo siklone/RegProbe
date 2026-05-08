@@ -193,8 +193,20 @@
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "DisableExceptionChainValidation now has converged project evidence on the tools-hardened baseline: broad phase-0 existence, repo system notes, a current-build ntoskrnl static hit, and an exact early-boot runtime read from the single-reboot Session Manager Kernel ETW batch. The value remains research-only and not app-mapped, but that no longer blocks Class A.",
-    "blocking_issues": []
+    "why": "DisableExceptionChainValidation now has converged project evidence on the tools-hardened baseline: broad phase-0 existence, repo system notes, a current-build ntoskrnl static hit, and an exact early-boot runtime read from the single-reboot Session Manager Kernel ETW batch. The 2026-05-08 promotion review pack closes the product decision as security hold because disabling exception-chain validation is a mitigation-bypass surface and must never become a default end-user apply path.",
+    "manual_review_required": false,
+    "blocking_issues": [],
+    "hold_status": "security-hold-closed",
+    "hold_reason": "disables_exception_chain_validation_mitigation_rop_exploit_surface_increase_never_default_enabled",
+    "allowed_contexts": [
+      "isolated_malware_analysis_vm",
+      "kernel_debugging_session_only"
+    ],
+    "never_default_apply": true,
+    "promotion_disposition": "rejected",
+    "promotion_disposition_kind": "security-hold-closed",
+    "promotion_disposition_reason": "Closed as security hold because DisableExceptionChainValidation is a security mitigation override that can increase exploit surface; it is suitable only for isolated lab or debugging contexts and must never be default-enabled.",
+    "promotion_disposition_reviewed_utc": "2026-05-08T10:03:46Z"
   },
   "open_questions": [
     "Does the value accept a broader semantic range than the temporary probe value used in the runtime lane?",
@@ -209,7 +221,7 @@
       "notes": "The canonical runtime lane ran on RegProbe-Baseline-ToolsHardened-20260330 with a single reboot, guest-side tracerpt parsing, and compact summary copy-back."
     }
   ],
-  "last_reviewed_utc": "2026-04-28T11:11:34Z",
+  "last_reviewed_utc": "2026-05-08T10:03:46Z",
   "key_path": "HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\Kernel",
   "value_focus": "DisableExceptionChainValidation",
   "source_enrichment": {

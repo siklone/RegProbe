@@ -1,13 +1,13 @@
 # Rejected Closure Ledger
 
-Generated: `2026-05-08T10:04:36.981006Z`
+Generated: `2026-05-08T10:12:33.602187Z`
 
 Rejected records are not treated as active evidence gaps here. Each row records the closure lane that explains why the tweak is not promoted.
 
 | Metric | Value |
 |---|---:|
-| Total rejected | 92 |
-| Evidence-backed rejected | 37 |
+| Total rejected | 95 |
+| Evidence-backed rejected | 40 |
 | Deprecated records | 55 |
 | Unclassified rejected | 0 |
 
@@ -16,7 +16,7 @@ Rejected records are not treated as active evidence gaps here. Each row records 
 | Status | Count |
 |---|---:|
 | `deprecated-record` | 55 |
-| `evidence-backed-rejected` | 37 |
+| `evidence-backed-rejected` | 40 |
 
 ## Rejected Records
 
@@ -77,6 +77,7 @@ Rejected records are not treated as active evidence gaps here. Each row records 
 | `system.services.disable-sysmain` | `deprecated-record` / `deprecated-record` | 3 | `Official Microsoft guidance conflicts with the current disable recommendation.`, `archived`, `deprecated-record` | Deprecated record retained for audit/history; not an active evidence gap. |
 | `system.services.disable-wap-push-routing` | `deprecated-record` / `deprecated-record` | 3 | `Official Microsoft service guidance marks dmwappushservice as No guidance rather than OK to disable.`, `archived`, `deprecated-record` | Deprecated record retained for audit/history; not an active evidence gap. |
 | `system.services.disable-windows-error-reporting` | `deprecated-record` / `deprecated-record` | 3 | `Official Microsoft guidance conflicts with the current disable recommendation.`, `archived`, `deprecated-record` | Deprecated record retained for audit/history; not an active evidence gap. |
+| `power.control.hibernate-enabled` | `evidence-backed-rejected` / `environment-limited-validation-lane` | 7 | n/a | Closed as evidence-backed rejected for product promotion because the current VM firmware does not support hibernation; the raw HibernateEna... |
 | `power.disable-hibernation` | `evidence-backed-rejected` / `environment-limited-validation-lane` | 7 | `no-runtime-proof` | Closed as rejected for research-provider promotion because the current VM firmware does not support hibernation; the app correctly reports... |
 | `policy.system.enable-virtualization` | `evidence-backed-rejected` / `intentional-hold-closed` | 13 | `enable-virtualization-research-only-raw-policy-system-value` | Closed as rejected for app/research-provider promotion because the remaining evidence gap is intentional: current-build exact reads, safe t... |
 | `power.control.allow-audio-to-enable-execution-required-power-requests` | `evidence-backed-rejected` / `intentional-hold-closed` | 25 | `audio-execution-required-no-current-build-registry-seeding-path`, `audio-execution-required-no-primary-current-build-doc`, `intentional-hold` | Closed as rejected for app/research-provider promotion because the remaining evidence gap is intentional: current-build exact reads, safe t... |
@@ -90,6 +91,7 @@ Rejected records are not treated as active evidence gaps here. Each row records 
 | `power.control.win32k-callout-watchdog-timeout-seconds` | `evidence-backed-rejected` / `intentional-hold-closed` | 10 | `win32k-callout-watchdog-helper-query-only-not-boot-consumer`, `win32k-callout-watchdog-intentional-hold-no-current-build-pivot`, `win32k-callout-watchdog-no-primary-current-build-doc` | Closed as rejected for app/research-provider promotion because the remaining evidence gap is intentional: current-build exact reads, safe t... |
 | `power.session-watchdog-timeouts` | `evidence-backed-rejected` / `intentional-hold-closed` | 19 | `power-session-watchdog-timeouts-intentional-hold-validation-environment-limitation`, `power-session-watchdog-timeouts-no-current-build-registry-seeding-caller`, `power-session-watchdog-timeouts-sleep-side-exact-registry-read-missing` | Closed as rejected for app/research-provider promotion because the remaining evidence gap is intentional: current-build exact reads, safe t... |
 | `power.session-win32-callout-watchdog-bugcheck-enabled` | `evidence-backed-rejected` / `intentional-hold-closed` | 10 | `win32-callout-watchdog-bugcheck-intentional-hold-adjacent-sibling-without-current-build-pivot`, `win32-callout-watchdog-bugcheck-no-primary-current-build-doc`, `win32-callout-watchdog-bugcheck-procmon-saveas-timeout-on-bounded-callout-lane` | Closed as rejected for app/research-provider promotion because the remaining evidence gap is intentional: current-build exact reads, safe t... |
+| `system.executive-additional-worker-threads` | `evidence-backed-rejected` / `intentional-hold-closed` | 14 | n/a | Closed as intentional hold because NT auto-calculates executive worker-thread sizing from the machine profile, while non-default overrides... |
 | `system.kernel-dpc-watchdog-control-cluster` | `evidence-backed-rejected` / `intentional-hold-closed` | 13 | `dpc-watchdog-control-intentional-hold-no-current-build-pivot`, `dpc-watchdog-control-live-zero-state-conflicts-with-repo-docs`, `dpc-watchdog-control-no-current-build-persisted-seeding-caller-or-exact-query-arm` | Closed as rejected for app/research-provider promotion because the remaining evidence gap is intentional: current-build exact reads, safe t... |
 | `system.kernel-dpc-watchdog-profile-cluster` | `evidence-backed-rejected` / `intentional-hold-closed` | 16 | `dpc-watchdog-profile-conditional-init-semantics-unproven`, `dpc-watchdog-profile-intentional-hold-mixed-live-state-without-current-build-pivot`, `dpc-watchdog-profile-mixed-current-build-state-conflicts-with-repo-docs` | Closed as rejected for app/research-provider promotion because the remaining evidence gap is intentional: current-build exact reads, safe t... |
 | `system.kernel-long-dpc-threshold-cluster` | `evidence-backed-rejected` / `intentional-hold-closed` | 19 | `long-dpc-threshold-intentional-hold-no-current-build-pivot`, `long-dpc-threshold-no-primary-current-build-doc`, `long-dpc-threshold-procmon-saveas-timeout-on-dedicated-timer-dpc-stress-lane` | Closed as rejected for app/research-provider promotion because the remaining evidence gap is intentional: current-build exact reads, safe t... |
@@ -114,3 +116,4 @@ Rejected records are not treated as active evidence gaps here. Each row records 
 | `network.reset-winsock` | `evidence-backed-rejected` / `non-reversible-or-high-risk-action` | 5 | `The command is a repair action that usually expects reboot and does not support rollback.`, `Tweak provenance still marks network.reset-winsock as category-fallback and review-only.`, `validation-proof` | Closed as rejected for research-provider promotion because the live action is one-shot, destructive, high-risk, reboot-sensitive, or lacks... |
 | `security.disable-uac` | `evidence-backed-rejected` / `non-reversible-or-high-risk-action` | 5 | `The action is high risk and reboot-sensitive, so it should not be promoted without stronger upstream provenance and runtime confidence.`, `Tweak provenance still marks security.disable-uac as category-fallback and review-only.`, `validation-proof` | Closed as rejected for research-provider promotion because the live action is one-shot, destructive, high-risk, reboot-sensitive, or lacks... |
 | `peripheral.audio-disable-enhancements` | `evidence-backed-rejected` / `protected-acl-not-actionable` | 5 | `no-runtime-proof` | Closed as rejected for research-provider promotion because the documented MMDevices audio enhancement endpoint values are protected by Wind... |
+| `system.kernel.disable-exception-chain-validation` | `evidence-backed-rejected` / `security-hold-closed` | 5 | n/a | Closed as security hold because DisableExceptionChainValidation is a security mitigation override that can increase exploit surface; it is... |

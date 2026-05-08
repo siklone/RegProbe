@@ -1,21 +1,22 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-08T10:04:36.981006Z",
+  "generated_utc": "2026-05-08T10:12:33.602187Z",
   "summary": {
-    "total_rejected": 92,
-    "evidence_backed_rejected": 37,
+    "total_rejected": 95,
+    "evidence_backed_rejected": 40,
     "deprecated_records": 55,
     "unclassified_rejected": 0,
     "closure_status_counts": {
       "deprecated-record": 55,
-      "evidence-backed-rejected": 37
+      "evidence-backed-rejected": 40
     },
     "closure_kind_counts": {
       "deprecated-record": 55,
-      "environment-limited-validation-lane": 1,
-      "intentional-hold-closed": 18,
+      "environment-limited-validation-lane": 2,
+      "intentional-hold-closed": 19,
       "non-reversible-or-high-risk-action": 17,
-      "protected-acl-not-actionable": 1
+      "protected-acl-not-actionable": 1,
+      "security-hold-closed": 1
     },
     "all_rejected_have_closure": true
   },
@@ -2216,6 +2217,60 @@
       "source_file": "research/records/system.services.disable-windows-error-reporting.review.json"
     },
     {
+      "record_id": "power.control.hibernate-enabled",
+      "tweak_id": "power.control.hibernate-enabled",
+      "closure_status": "evidence-backed-rejected",
+      "closure_kind": "environment-limited-validation-lane",
+      "closure_reason": "Closed as evidence-backed rejected for product promotion because the current VM firmware does not support hibernation; the raw HibernateEnabled value remains valid evidence, but app-level mutation requires a hibernation-capable platform preflight lane.",
+      "closure_blocker": "promotion-disposition-environment-limited-validation-lane",
+      "promotion_disposition": "rejected",
+      "promotion_blockers": [
+        "promotion-disposition-environment-limited-validation-lane"
+      ],
+      "superseded_blockers": [],
+      "next_missing_layer": "none",
+      "confidence": "high",
+      "evidence_count": 7,
+      "evidence_refs": [
+        {
+          "evidence_id": "repo-power-doc",
+          "kind": "repo-doc",
+          "location": "Docs/power/power.md"
+        },
+        {
+          "evidence_id": "vm-power-control-phase0-20260329",
+          "kind": "registry-observation",
+          "location": "evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json"
+        },
+        {
+          "evidence_id": "static-power-control-string-20260329",
+          "kind": "repo-doc",
+          "location": "evidence/files/vm-tooling-staging/power-control-docs-first-string-20260329-102348/results.json and research/notes/power-control-docs-first-value-exists-static-triage-20260329.md"
+        },
+        {
+          "evidence_id": "ghidra-power-control-docs-first-20260329",
+          "kind": "decompilation",
+          "location": "evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md and evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json and research/notes/power-control-docs-first-ghidra-review-20260329.md"
+        },
+        {
+          "evidence_id": "vm-power-control-runtime-batch-20260329",
+          "kind": "procmon-trace",
+          "location": "evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json and evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/results.json and research/notes/power-control-docs-first-stepwise-runtime-capture-20260329.md and evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv"
+        },
+        {
+          "evidence_id": "kvm-machine-scope-revalidation-batch-20260505",
+          "kind": "runtime-read",
+          "location": "registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json"
+        },
+        {
+          "evidence_id": "related-power-disable-hibernation-firmware-limit-20260508",
+          "kind": "related-record",
+          "location": "research/records/power.disable-hibernation.review.json and evidence/captures/power-disable-hibernation-app-qa-not-applicable-20260508.json"
+        }
+      ],
+      "source_file": "research/records/power.control.hibernate-enabled.json"
+    },
+    {
       "record_id": "power.disable-hibernation",
       "tweak_id": "power.disable-hibernation",
       "closure_status": "evidence-backed-rejected",
@@ -3301,6 +3356,95 @@
         }
       ],
       "source_file": "research/records/power.session-win32-callout-watchdog-bugcheck-enabled.json"
+    },
+    {
+      "record_id": "system.executive-additional-worker-threads",
+      "tweak_id": "system.executive-additional-worker-threads",
+      "closure_status": "evidence-backed-rejected",
+      "closure_kind": "intentional-hold-closed",
+      "closure_reason": "Closed as intentional hold because NT auto-calculates executive worker-thread sizing from the machine profile, while non-default overrides require per-machine profiling and can regress context-switch behavior on low-core or low-vCPU systems.",
+      "closure_blocker": "promotion-disposition-intentional-hold-closed",
+      "promotion_disposition": "rejected",
+      "promotion_blockers": [
+        "promotion-disposition-intentional-hold-closed"
+      ],
+      "superseded_blockers": [],
+      "next_missing_layer": "none",
+      "confidence": "high",
+      "evidence_count": 14,
+      "evidence_refs": [
+        {
+          "evidence_id": "vm-executive-lightweight-runtime-20260330",
+          "kind": "etw-trace",
+          "location": "evidence/files/vm-tooling-staging/executive-worker-threads-lightweight-runtime-20260330-122422/summary.json and evidence/files/vm-tooling-staging/executive-worker-threads-lightweight-runtime-20260330-122422/system-executive-additional-worker-threads/summary.json and research/notes/system-executive-additional-worker-threads-lightweight-runtime-20260330.md"
+        },
+        {
+          "evidence_id": "vm-session-manager-executive-baseline-20260328",
+          "kind": "registry-observation",
+          "location": "evidence/files/vm-tooling-staging/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.reg and evidence/files/vm-tooling-staging/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.txt"
+        },
+        {
+          "evidence_id": "ghidra-executive-worker-threads-nextgate-ntoskrnl-20260328",
+          "kind": "decompilation",
+          "location": "evidence/raw/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md and evidence/raw/ghidra/kernel-power-nextgate-ntoskrnl/evidence.json"
+        },
+        {
+          "evidence_id": "kernel-power-existing-static-probe-20260328",
+          "kind": "inference",
+          "location": "registry-research-framework/audit/kernel-power-existing-static-probe-20260328.json and research/notes/kernel-power-existing-static-triage-20260328.md"
+        },
+        {
+          "evidence_id": "kernel-power-existing-next-gate-20260328",
+          "kind": "inference",
+          "location": "registry-research-framework/audit/kernel-power-existing-next-gate-20260328.json and research/notes/kernel-power-next-gate-ghidra-review-20260328.md"
+        },
+        {
+          "evidence_id": "vm-executive-etl-registry-review-20260328",
+          "kind": "etw-trace",
+          "location": "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/watchdog-timeouts-boot.etl.md and evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/registry-dump-session-manager-executive.txt and research/notes/system-executive-additional-worker-threads-etl-registry-review-20260328.md"
+        },
+        {
+          "evidence_id": "vm-executive-etw-keyword-review-20260328",
+          "kind": "etw-trace",
+          "location": "evidence/files/vm-tooling-staging/executive-etw-keyword-review-20260328-180226/summary.json and evidence/files/vm-tooling-staging/executive-etw-keyword-review-20260328-180226/executive-etw-keyword-review.txt and research/notes/system-executive-additional-worker-threads-follow-up-package-20260328.md"
+        },
+        {
+          "evidence_id": "vm-executive-procmon-bootlog-20260328",
+          "kind": "procmon-trace",
+          "location": "evidence/files/vm-tooling-staging/executive-worker-threads-procmon-bootlog-20260328-172645/summary.json and evidence/files/vm-tooling-staging/executive-worker-threads-procmon-bootlog-20260328-172645/summary-collect.json and research/notes/system-executive-additional-worker-threads-procmon-bootlog-20260328.md"
+        },
+        {
+          "evidence_id": "vm-executive-stress-trigger-20260328",
+          "kind": "procmon-trace",
+          "location": "evidence/files/vm-tooling-staging/executive-worker-threads-stress-20260328-184856/summary.json and evidence/files/vm-tooling-staging/executive-worker-threads-stress-20260328-184856/executive-worker-threads-stress.txt and research/notes/system-executive-additional-worker-threads-stress-trigger-20260328.md"
+        },
+        {
+          "evidence_id": "vm-executive-kvm-procmon-runtime-20260406",
+          "kind": "procmon-trace",
+          "location": "evidence/files/vm-tooling-staging/executive-worker-threads-procmon-kvm-20260406e/executive-worker-threads-procmon-kvm-20260406e-summary.json and evidence/files/vm-tooling-staging/executive-worker-threads-procmon-kvm-20260406e/host-review.json and research/notes/system-executive-additional-worker-threads-kvm-procmon-runtime-20260406.md"
+        },
+        {
+          "evidence_id": "vm-executive-kvm-procmon-hardened-20260407",
+          "kind": "procmon-trace",
+          "location": "evidence/files/vm-tooling-staging/executive-worker-threads-procmon-kvm-hardened-20260407a/executive-worker-threads-procmon-kvm-hardened-20260407a-summary.json and evidence/files/vm-tooling-staging/executive-worker-threads-procmon-kvm-hardened-20260407a/executive-worker-threads-procmon-kvm-hardened-20260407a.txt and evidence/files/vm-tooling-staging/executive-worker-threads-procmon-kvm-hardened-20260407a/host-review.json and research/notes/system-executive-additional-worker-threads-kvm-procmon-hardened-20260407.md"
+        },
+        {
+          "evidence_id": "vm-executive-worker-threads-kvm-local-kd-20260406",
+          "kind": "vm-test",
+          "location": "evidence/files/vm-tooling-staging/local-kd-executive-worker-wildcard-20260406a/local-kd-executive-worker-wildcard-20260406a-summary.json and evidence/files/vm-tooling-staging/local-kd-executive-worker-wildcard-20260406a/local-kd-executive-worker-wildcard-20260406a.log and research/notes/system-executive-additional-worker-threads-kvm-local-kd-symbol-follow-up-20260406.md"
+        },
+        {
+          "evidence_id": "vm-executive-worker-threads-kvm-local-kd-values-20260406",
+          "kind": "vm-test",
+          "location": "evidence/files/vm-tooling-staging/local-kd-executive-values-20260406a/local-kd-executive-values-20260406a-summary.json and evidence/files/vm-tooling-staging/local-kd-executive-values-20260406a/local-kd-executive-values-20260406a.log and research/notes/system-executive-additional-worker-threads-kvm-local-kd-value-follow-up-20260406.md"
+        },
+        {
+          "evidence_id": "reactos-executive-worker-threads-hypothesis-20260328",
+          "kind": "open-source-reference",
+          "location": "evidence/files/external/reactos/system.executive-additional-worker-threads/reactos-hypothesis-20260328.md and evidence/files/external/reactos/system.executive-additional-worker-threads/summary.json and research/notes/system-executive-additional-worker-threads-reactos-hypothesis-20260328.md"
+        }
+      ],
+      "source_file": "research/records/system.executive-additional-worker-threads.json"
     },
     {
       "record_id": "system.kernel-dpc-watchdog-control-cluster",
@@ -4684,6 +4828,50 @@
         }
       ],
       "source_file": "research/records/peripheral.audio-disable-enhancements.review.json"
+    },
+    {
+      "record_id": "system.kernel.disable-exception-chain-validation",
+      "tweak_id": "system.kernel.disable-exception-chain-validation",
+      "closure_status": "evidence-backed-rejected",
+      "closure_kind": "security-hold-closed",
+      "closure_reason": "Closed as security hold because DisableExceptionChainValidation is a security mitigation override that can increase exploit surface; it is suitable only for isolated lab or debugging contexts and must never be default-enabled.",
+      "closure_blocker": "promotion-disposition-security-hold-closed",
+      "promotion_disposition": "rejected",
+      "promotion_blockers": [
+        "promotion-disposition-security-hold-closed"
+      ],
+      "superseded_blockers": [],
+      "next_missing_layer": "none",
+      "confidence": "high",
+      "evidence_count": 5,
+      "evidence_refs": [
+        {
+          "evidence_id": "repo-session-manager-kernel-doc",
+          "kind": "repo-doc",
+          "location": "Docs/system/system.md"
+        },
+        {
+          "evidence_id": "vm-session-manager-kernel-phase0-20260329",
+          "kind": "registry-observation",
+          "location": "evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json"
+        },
+        {
+          "evidence_id": "static-session-manager-kernel-targeted-string-20260331",
+          "kind": "decompilation",
+          "location": "evidence/files/vm-tooling-staging/targeted-string-batch-primary-20260331-135356/results.json and research/notes/kernel-power-96-broad-targeted-string-follow-up-20260331.md"
+        },
+        {
+          "evidence_id": "vm-session-manager-kernel-lightweight-runtime-20260331",
+          "kind": "etw-trace",
+          "location": "evidence/files/vm-tooling-staging/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/summary.json and evidence/files/vm-tooling-staging/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/results.json and research/notes/session-manager-kernel-batch-lightweight-runtime-20260331.md"
+        },
+        {
+          "evidence_id": "source-enrichment-disable-exception-chain-validation-20260412",
+          "kind": "analysis-output",
+          "location": "registry-research-framework/audit/source-enrichment-systeminformer-follow-up-20260412.json and research/notes/source-enrichment-systeminformer-follow-up-20260412.md"
+        }
+      ],
+      "source_file": "research/records/system.kernel.disable-exception-chain-validation.json"
     }
   ]
 }

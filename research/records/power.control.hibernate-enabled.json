@@ -182,6 +182,20 @@
         "version-scope"
       ],
       "strength": "medium"
+    },
+    {
+      "evidence_id": "related-power-disable-hibernation-firmware-limit-20260508",
+      "kind": "related-record",
+      "title": "Sibling hibernation app card firmware-limit closure",
+      "location": "research/records/power.disable-hibernation.review.json and evidence/captures/power-disable-hibernation-app-qa-not-applicable-20260508.json",
+      "summary": "The sibling hibernation command card proves that the current validation VM reports hibernation as firmware-unsupported and that the app correctly returns NotApplicable instead of mutating. That platform limit also prevents promoting the raw HibernateEnabled value into a product apply path on this lane.",
+      "supports": [
+        "behavior",
+        "risk",
+        "platform-limit",
+        "ui-mapping"
+      ],
+      "strength": "high"
     }
   ],
   "decision": {
@@ -191,8 +205,13 @@
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "HibernateEnabled now has converged cross-layer evidence on RegProbe-Baseline-Clean-20260329: phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, and an exact runtime read from smss.exe captured by the guest-processed stepwise Procmon boot log. App mapping is tracked separately and does not block evidence classification.",
-    "blocking_issues": []
+    "why": "HibernateEnabled now has converged cross-layer evidence on RegProbe-Baseline-Clean-20260329: phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, and an exact runtime read from smss.exe captured by the guest-processed stepwise Procmon boot log. The 2026-05-08 promotion review pack keeps the raw value out of the product apply path because the sibling hibernation app card proves the current VM lane is firmware-limited and requires a hibernation-capable validation profile before any conditional promote.",
+    "manual_review_required": false,
+    "blocking_issues": [],
+    "promotion_disposition": "rejected",
+    "promotion_disposition_kind": "environment-limited-validation-lane",
+    "promotion_disposition_reason": "Closed as evidence-backed rejected for product promotion because the current VM firmware does not support hibernation; the raw HibernateEnabled value remains valid evidence, but app-level mutation requires a hibernation-capable platform preflight lane.",
+    "promotion_disposition_reviewed_utc": "2026-05-08T10:03:46Z"
   },
   "tested_on": [
     {
@@ -214,5 +233,5 @@
       "notes": "The guest-processed stepwise Procmon boot log captured an exact runtime read for `HibernateEnabled` from `smss.exe`."
     }
   ],
-  "last_reviewed_utc": "2026-05-05T13:08:51.8557437Z"
+  "last_reviewed_utc": "2026-05-08T10:03:46Z"
 }

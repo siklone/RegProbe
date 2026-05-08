@@ -39,7 +39,7 @@
             ]
           }
         ],
-        "notes": "This candidate is tracked as a raw kernel-facing value, not as a published end-user tweak profile."
+        "notes": "This candidate is promoted as a warning-gated research-card raw power value; CPU-utilization behavior can be host and hardware dependent."
       }
     ]
   },
@@ -85,8 +85,8 @@
         "Power-manager documentation"
       ],
       "avoid_for": [
-        "General users",
-        "One-click apply surfaces"
+            "Generic enterprise golden images",
+            "VMs where host/guest CPU-utilization reporting must remain unchanged"
       ],
       "states": [
         {
@@ -96,13 +96,18 @@
           "rationale": "Track the observed baseline value without turning it into a shipped preset."
         }
       ],
-      "good_when": "You want the repo to track the live baseline and current evidence for this raw power-manager value.",
-      "bad_when": "You want a supported end-user tweak or a documented Microsoft control surface.",
+      "good_when": "You want the app to preserve the observed PerfCalculateActualUtilization baseline with a reversible raw power-card apply path and explicit warnings.",
+      "bad_when": "You need a hardware-independent CPU-utilization recommendation or a documented Microsoft end-user control surface.",
       "tradeoffs": [
         "Preserves the observed baseline value.",
-        "Keeps the candidate research-only and non-actionable."
+        "Ships behind warning labels because VM host scheduling and guest CPU-utilization reporting can be misleading."
       ],
-      "apply_allowed": false,
+      "apply_allowed": true,
+      "warning_labels": [
+        "vm_cpu_util_inaccuracy",
+        "bare_metal_preferred"
+      ],
+      "requires_acknowledgment": true,
       "evidence_ids": [
         "vm-power-control-phase0-20260329",
         "ghidra-power-control-docs-first-20260329"
@@ -234,12 +239,24 @@
   ],
   "decision": {
     "confidence": "high",
-    "apply_allowed": false,
+    "apply_allowed": true,
     "recommended_for_general_users": false,
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "PerfCalculateActualUtilization now has converged cross-layer evidence on RegProbe-Baseline-ToolsHardened-20260330: phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, prior shell-safe Procmon lanes, and an exact runtime read captured by the tools-hardened lightweight ETW follow-up. App mapping is tracked separately and does not block evidence classification.",
+    "why": "PerfCalculateActualUtilization now has converged cross-layer evidence on RegProbe-Baseline-ToolsHardened-20260330: phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, prior shell-safe Procmon lanes, and an exact runtime read captured by the tools-hardened lightweight ETW follow-up. The 2026-05-08 promotion review pack approves this app-mapped raw power card as promoted-with-warnings because VM CPU-utilization reporting and bare-metal power behavior can diverge.",
+    "warning_labels": [
+      "vm_cpu_util_inaccuracy",
+      "bare_metal_preferred"
+    ],
+    "requires_acknowledgment": true,
+    "applicable_surfaces": [
+      "bare-metal-server-workstation",
+      "advanced-power-tuning-user"
+    ],
+    "not_recommended_for": [
+      "generic-enterprise-golden-image"
+    ],
     "blocking_issues": []
   },
   "tested_on": [
@@ -262,7 +279,7 @@
       "notes": "The tools-hardened lightweight ETW follow-up captured an exact runtime read for `PerfCalculateActualUtilization` while the guest stayed shell-healthy."
     }
   ],
-  "last_reviewed_utc": "2026-05-07T10:14:53.5537858Z",
+  "last_reviewed_utc": "2026-05-08T10:03:46Z",
   "version_stable": [
     "25H2"
   ],
