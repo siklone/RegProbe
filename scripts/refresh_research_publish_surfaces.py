@@ -40,6 +40,11 @@ def build_refresh_steps(repo_root: Path = REPO_ROOT) -> list[dict[str, object]]:
             "command": [sys.executable, str(framework_scripts_root / "generate_promotion_eligible_review_pack.py")],
         },
         {
+            "name": "v36-clean-state-report",
+            "script": str((framework_scripts_root / "generate_clean_state_report.py").relative_to(repo_root)).replace("\\", "/"),
+            "command": [sys.executable, str(framework_scripts_root / "generate_clean_state_report.py")],
+        },
+        {
             "name": "imported-candidate-backlog",
             "script": str((scripts_root / "generate_imported_candidate_backlog.py").relative_to(repo_root)).replace("\\", "/"),
             "command": [sys.executable, str(scripts_root / "generate_imported_candidate_backlog.py")],

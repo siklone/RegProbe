@@ -158,6 +158,10 @@ Rejected does not mean "missing evidence" by default. When a setting is unsafe, 
 
 Use [rejected-closure-ledger.md](registry-research-framework/audit/rejected-closure-ledger.md) to audit every rejected record. The gate contract keeps the old blocker context under `rejection_closure.superseded_blockers`, while `promotion_blockers` carries a compact `promotion-disposition-*` or `deprecated-record` closure label.
 
+## Research Clean State
+
+The current v3.6 research snapshot is zero-pending: no active blockers, no promotion-eligible limbo, no unclassified rejected records, and no invalid gate entries. Use [v36-clean-state-report.md](registry-research-framework/audit/v36-clean-state-report.md) for the combined audit contract and [app-retest-readiness-latest.md](registry-research-framework/audit/app-retest-readiness-latest.md) before manual Windows app retesting.
+
 ## Start Here
 
 - I want to use the app: [User guide](Docs/product/user-guide.md)

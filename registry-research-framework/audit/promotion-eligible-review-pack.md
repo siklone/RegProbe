@@ -1,6 +1,6 @@
 # Promotion-Eligible Review Pack
 
-Generated: `2026-05-08T10:12:33.718364Z`
+Generated: `2026-05-08T11:35:16.289980Z`
 
 This pack covers records that have no active evidence blocker but still need a final shipping decision.
 

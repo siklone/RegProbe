@@ -1,6 +1,6 @@
 # Rejected Closure Ledger
 
-Generated: `2026-05-08T10:12:33.602187Z`
+Generated: `2026-05-08T11:35:16.141346Z`
 
 Rejected records are not treated as active evidence gaps here. Each row records the closure lane that explains why the tweak is not promoted.
 
