@@ -264,6 +264,19 @@ The latest live retest also keeps two small operator artifacts:
 
 If a live card reports `already-applied`, that can be a valid pass: the app must still verify the desired value, keep the card/evidence contract intact, and skip standalone rollback only when no mutation was performed.
 
+## Registry Value Experiment Lane
+
+For pasted `reg add` batches or opaque power/kernel values, do not stop at "the key exists" or "the value is absent." Parse the batch into one-value experiments, then test present values with sensible alternates and send missing/opaque values through ETW, Procmon, or static-string evidence before closing them.
+
+```bash
+python3 scripts/registry/parse_reg_add_batch.py \
+  --input pasted-reg-adds.txt \
+  --json-output registry-research-framework/audit/registry-value-experiments/operator-batch.json \
+  --markdown-output registry-research-framework/audit/registry-value-experiments/operator-batch.md
+```
+
+Boot-sensitive apply/reboot lanes must use `--require-domain-snapshot` or a disposable qcow2 overlay. The `pilot-perf-calculate-actual-utilization-0` artifact in `registry-research-framework/audit/registry-value-experiments/` is the safety example: `PerfCalculateActualUtilization=0` caused a reboot regression on the available VM profile and the image was not recovered by offline registry restore, NTFS repair, SFC, DISM, System Restore, or update uninstall.
+
 ## Retest Readiness Check
 
 If you are about to retest the desktop app and want one quick truth pass first, use the `research readiness` check. The Python command below is the host-safe mirror for Linux; the .NET CLI command is equivalent when the Windows desktop runtime is available.

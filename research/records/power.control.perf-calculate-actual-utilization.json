@@ -4,12 +4,12 @@
   "record_id": "power.control.perf-calculate-actual-utilization",
   "tweak_id": "power.control.perf-calculate-actual-utilization",
   "record_status": "validated",
-  "summary": "Validated candidate package for PerfCalculateActualUtilization under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The clean Win25H2Clean baseline confirmed the current default, the repo power notes carry an exact docs hit, the shared string batch found an exact current-build ntoskrnl.exe hit, the shared Ghidra batch produced reviewable xref artifacts, and the tools-hardened lightweight ETW follow-up on RegProbe-Baseline-ToolsHardened-20260330 captured an exact runtime read for PerfCalculateActualUtilization. App surfacing remains a separate product decision from evidence classification.",
+  "summary": "Validated candidate package for PerfCalculateActualUtilization under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The clean Win25H2Clean baseline confirmed the current default, the repo power notes carry an exact docs hit, the shared string batch found an exact current-build ntoskrnl.exe hit, the shared Ghidra batch produced reviewable xref artifacts, and the tools-hardened lightweight ETW follow-up on RegProbe-Baseline-ToolsHardened-20260330 captured an exact runtime read for PerfCalculateActualUtilization. A later one-value reboot experiment observed a Startup Repair regression after setting the value to 0, so non-default values are advanced, snapshot-gated, and VM-profile-sensitive.",
   "validation_proof": {
     "source_url": "Docs/power/power.md",
     "exact_quote_or_path": "Docs/power/power.md:181 shows `PerfCalculateActualUtilization` with observed literal `1` in the repo power notes.",
     "key_found_on_page": true,
-    "notes": "The docs-first triage and phase-0 baseline agree on the current Win25H2Clean baseline value for PerfCalculateActualUtilization. App surfacing is tracked separately from evidence classification."
+    "notes": "The docs-first triage and phase-0 baseline agree on the current Win25H2Clean baseline value for PerfCalculateActualUtilization. The 2026-05-08 value experiment adds a negative reboot-health signal for 0 on the available VM profile."
   },
   "setting": {
     "name": "Perf Calculate Actual Utilization",
@@ -19,7 +19,7 @@
     "casual_explanation": "Perf Calculate Actual Utilization is a low-level power-manager registry value under the main Power key.",
     "why_people_change_it": "Researchers track this value when reviewing processor performance accounting and utilization heuristics.",
     "tradeoffs_overview": "Cross-layer evidence now converges for this raw power-manager value: docs, current-build static hits, Ghidra review, and an exact runtime read are all attached.",
-    "professional_notes": "Win25H2Clean phase-0 existence confirmed PerfCalculateActualUtilization on the live baseline with preview value 1. The docs-first triage then tied the value to exact repo documentation hits, led by Docs/power/power.md:181. A shared current-build string batch found an exact hit in C:\\Windows\\System32\\ntoskrnl.exe, and the shared Ghidra batch on the same binary preserved a reviewable xref/decompile artifact set for the docs-first power-control family. Earlier shell-safe Procmon lanes on RegProbe-Baseline-Clean-20260329 tightened the runtime story but did not capture an exact read. The tools-hardened lightweight ETW follow-up then reran the candidate on RegProbe-Baseline-ToolsHardened-20260330 and captured an exact runtime read on the short trigger ETW lane while the guest stayed shell-healthy.",
+    "professional_notes": "Win25H2Clean phase-0 existence confirmed PerfCalculateActualUtilization on the live baseline with preview value 1. The docs-first triage then tied the value to exact repo documentation hits, led by Docs/power/power.md:181. A shared current-build string batch found an exact hit in C:\\Windows\\System32\\ntoskrnl.exe, and the shared Ghidra batch on the same binary preserved a reviewable xref/decompile artifact set for the docs-first power-control family. Earlier shell-safe Procmon lanes on RegProbe-Baseline-Clean-20260329 tightened the runtime story but did not capture an exact read. The tools-hardened lightweight ETW follow-up then reran the candidate on RegProbe-Baseline-ToolsHardened-20260330 and captured an exact runtime read on the short trigger ETW lane while the guest stayed shell-healthy. A later one-value reboot experiment set the value to 0 and observed a Startup Repair regression that was not recovered by offline registry restore, NTFS repair, SFC, DISM, System Restore, or update uninstall, so non-default values require disposable overlay replay before broad use.",
     "targets": [
       {
         "target_id": "perfcalculateactualutilization",
@@ -39,14 +39,14 @@
             ]
           }
         ],
-        "notes": "This candidate is promoted as a warning-gated research-card raw power value; CPU-utilization behavior can be host and hardware dependent."
+        "notes": "This candidate is promoted as a warning-gated research-card raw power value; CPU-utilization behavior can be host and hardware dependent. PerfCalculateActualUtilization=0 produced a reboot regression on the available VM profile during the 2026-05-08 pilot and must not be treated as a safe default."
       }
     ]
   },
   "app_current_implementation": {
     "status": "matches-research",
     "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
-    "notes": "The app now surfaces PerfCalculateActualUtilization directly as a research-card registry value.",
+    "notes": "The app now surfaces PerfCalculateActualUtilization directly as a warning-gated research-card registry value. Non-default values require snapshot/overlay replay before reboot testing.",
     "writes": [
       {
         "target_id": "perfcalculateactualutilization",
@@ -86,7 +86,8 @@
       ],
       "avoid_for": [
             "Generic enterprise golden images",
-            "VMs where host/guest CPU-utilization reporting must remain unchanged"
+            "VMs where host/guest CPU-utilization reporting must remain unchanged",
+            "Unsnapshotted reboot experiments"
       ],
       "states": [
         {
@@ -100,12 +101,14 @@
       "bad_when": "You need a hardware-independent CPU-utilization recommendation or a documented Microsoft end-user control surface.",
       "tradeoffs": [
         "Preserves the observed baseline value.",
-        "Ships behind warning labels because VM host scheduling and guest CPU-utilization reporting can be misleading."
+        "Ships behind warning labels because VM host scheduling and guest CPU-utilization reporting can be misleading.",
+        "A pilot set to 0 caused a reboot regression on the available VM profile."
       ],
       "apply_allowed": true,
       "warning_labels": [
         "vm_cpu_util_inaccuracy",
-        "bare_metal_preferred"
+        "bare_metal_preferred",
+        "reboot_regression_observed_on_vm_profile"
       ],
       "requires_acknowledgment": true,
       "evidence_ids": [
@@ -235,6 +238,20 @@
         "version-scope"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "vm-power.control.perf-calculate-actual-utilization-value-experiment-20260508",
+      "kind": "vm-test",
+      "title": "One-value reboot experiment for PerfCalculateActualUtilization=0",
+      "location": "registry-research-framework/audit/registry-value-experiments/pilot-perf-calculate-actual-utilization-0.json and registry-research-framework/audit/registry-value-experiments/pilot-perf-calculate-actual-utilization-0-recovery.md",
+      "summary": "The one-value experiment observed a Startup Repair regression after applying PerfCalculateActualUtilization=0 and rebooting. Offline registry restore, NTFS repair, SFC, DISM, System Restore, quality update uninstall, and feature update uninstall did not recover the image. The lane is treated as a high-strength risk signal, not as proof of sole causality.",
+      "supports": [
+        "risk",
+        "rollback-limit",
+        "reboot-regression",
+        "vm-profile-scope"
+      ],
+      "strength": "high"
     }
   ],
   "decision": {
@@ -244,10 +261,11 @@
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "PerfCalculateActualUtilization now has converged cross-layer evidence on RegProbe-Baseline-ToolsHardened-20260330: phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, prior shell-safe Procmon lanes, and an exact runtime read captured by the tools-hardened lightweight ETW follow-up. The 2026-05-08 promotion review pack approves this app-mapped raw power card as promoted-with-warnings because VM CPU-utilization reporting and bare-metal power behavior can diverge.",
+    "why": "PerfCalculateActualUtilization now has converged cross-layer evidence on RegProbe-Baseline-ToolsHardened-20260330: phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, prior shell-safe Procmon lanes, and an exact runtime read captured by the tools-hardened lightweight ETW follow-up. The 2026-05-08 promotion review pack approves this app-mapped raw power card as promoted-with-warnings because VM CPU-utilization reporting and bare-metal power behavior can diverge. The later 2026-05-08 one-value experiment observed a reboot regression after applying 0, so non-default testing must stay snapshot-gated and advanced-user only.",
     "warning_labels": [
       "vm_cpu_util_inaccuracy",
-      "bare_metal_preferred"
+      "bare_metal_preferred",
+      "reboot_regression_observed_on_vm_profile"
     ],
     "requires_acknowledgment": true,
     "applicable_surfaces": [
@@ -255,7 +273,8 @@
       "advanced-power-tuning-user"
     ],
     "not_recommended_for": [
-      "generic-enterprise-golden-image"
+      "generic-enterprise-golden-image",
+      "unsnapshotted-vm-reboot-tests"
     ],
     "blocking_issues": []
   },
@@ -277,9 +296,15 @@
       "os": "Windows 11 25H2",
       "build": "26100",
       "notes": "The tools-hardened lightweight ETW follow-up captured an exact runtime read for `PerfCalculateActualUtilization` while the guest stayed shell-healthy."
+    },
+    {
+      "environment": "regprobe-win11-25h2-session one-value reboot experiment",
+      "os": "Windows 11 25H2",
+      "build": "26100",
+      "notes": "Applying `PerfCalculateActualUtilization=0` through the one-value experiment harness led to Startup Repair after reboot; recovery did not restore a bootable guest."
     }
   ],
-  "last_reviewed_utc": "2026-05-08T10:03:46Z",
+  "last_reviewed_utc": "2026-05-08T22:01:20Z",
   "version_stable": [
     "25H2"
   ],
@@ -309,8 +334,8 @@
       "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review still returns no candidate-specific WRK hit for `PerfCalculateActualUtilization`."
     },
-    "notes": "Shared docs-first static review already retains a current-build ntoskrnl string/xref batch for `PerfCalculateActualUtilization`, while the retained local source-mirror corpus still carries no candidate-specific ReactOS or WRK corroboration. A bounded 2026-04-24 KVM ETW stackwalk retry for PerfCalculateActualUtilization reached artifact-upload but still timed out before any ETL, XML, or normalized bundle returned to the host. The repo now retains summary and stage receipts only, so the ETW lane is reviewed but transport-blocked. A 2026-05-07 QGA-first ETW stackwalk rerun cleared the earlier ETW ingest/upload blocker and produced an exact helper-triggered `RegQueryValue` for `PerfCalculateActualUtilization` with caller-stack capture.",
-    "last_updated_utc": "2026-04-28T11:11:34Z",
+    "notes": "Shared docs-first static review already retains a current-build ntoskrnl string/xref batch for `PerfCalculateActualUtilization`, while the retained local source-mirror corpus still carries no candidate-specific ReactOS or WRK corroboration. A bounded 2026-04-24 KVM ETW stackwalk retry for PerfCalculateActualUtilization reached artifact-upload but still timed out before any ETL, XML, or normalized bundle returned to the host. The repo now retains summary and stage receipts only, so the ETW lane is reviewed but transport-blocked. A 2026-05-07 QGA-first ETW stackwalk rerun cleared the earlier ETW ingest/upload blocker and produced an exact helper-triggered `RegQueryValue` for `PerfCalculateActualUtilization` with caller-stack capture. A 2026-05-08 one-value reboot experiment adds a negative reboot-health signal for value 0 on the available VM profile.",
+    "last_updated_utc": "2026-05-08T22:01:20Z",
     "runtime_capture_reviewed": {
       "etw-stackwalk": true,
       "status": "qga_unblocked_ingest_ok"

@@ -9846,7 +9846,7 @@ Current writes
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
-**Summary:** Validated candidate package for PerfCalculateActualUtilization under HKLM\SYSTEM\CurrentControlSet\Control\Power. The clean Win25H2Clean baseline confirmed the current default, the repo power notes carry an exact docs hit, the shared string batch found an exact current-build ntoskrnl.exe hit, the shared Ghidra batch produced reviewable xref artifacts, and the tools-hardened lightweight ETW follow-up on RegProbe-Baseline-ToolsHardened-20260330 captured an exact runtime read for PerfCalculateActualUtilization. App surfacing remains a separate product decision from evidence classification.
+**Summary:** Validated candidate package for PerfCalculateActualUtilization under HKLM\SYSTEM\CurrentControlSet\Control\Power. The clean Win25H2Clean baseline confirmed the current default, the repo power notes carry an exact docs hit, the shared string batch found an exact current-build ntoskrnl.exe hit, the shared Ghidra batch produced reviewable xref artifacts, and the tools-hardened lightweight ETW follow-up on RegProbe-Baseline-ToolsHardened-20260330 captured an exact runtime read for PerfCalculateActualUtilization. A later one-value reboot experiment observed a Startup Repair regression after setting the value to `0`, so non-default values are treated as advanced, snapshot-gated, VM-profile-sensitive experiments rather than general-user tweaks.
 
 **Current implementation**
 
@@ -9854,7 +9854,7 @@ Current writes
 | --- | --- |
 | Status | `matches-research` |
 | Provider source | app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
-| Notes | The app now surfaces PerfCalculateActualUtilization directly as a research-card registry value. |
+| Notes | The app now surfaces PerfCalculateActualUtilization directly as a warning-gated research-card registry value. Non-default values require snapshot/overlay replay before reboot testing. |
 
 Current writes
 
@@ -9893,7 +9893,7 @@ Current writes
 | Path | `HKLM\SYSTEM\CurrentControlSet\Control\Power` |
 | Value name | `PerfCalculateActualUtilization` |
 | Value type | `REG_DWORD` |
-| Notes | This candidate is promoted as a warning-gated research-card raw power value; CPU-utilization behavior can be host and hardware dependent. |
+| Notes | This candidate is promoted as a warning-gated research-card raw power value; CPU-utilization behavior can be host and hardware dependent. `PerfCalculateActualUtilization=0` produced a reboot regression on the available VM profile during the 2026-05-08 pilot and must not be treated as a safe default. |
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
@@ -9924,6 +9924,7 @@ Current writes
 | `vm-power-control-lightweight-runtime-20260330` | `etw-trace` | `VM ETW trace` | Tools-hardened lightweight ETW follow-up for remaining docs-first power-control values | [evidence/files/vm/power-control-lightweight-runtime-20260330-024603/summary.json](../evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-024603/summary.json) and [evidence/files/vm/power-control-lightweight-runtime-20260330-024603/results.json](../evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-024603/results.json) and [research/notes/power-control-lightweight-runtime-follow-up-20260330.md](notes/power-control-lightweight-runtime-follow-up-20260330.md) | `high` | behavior, risk, version-scope |
 | `vm-power.control.perf-calculate-actual-utilization-etw-stackwalk-attempt-20260424i` | `etw-trace` | `VM ETW trace` | Bounded ETW stackwalk timeout receipt | [evidence/raw/etw-stackwalk/power.control.perf-calculate-actual-utilization-etw-20260424i/power.control.perf-calculate-actual-utilization-etw-20260424i-summary.json](../evidence/raw/etw-stackwalk/power.control.perf-calculate-actual-utilization-etw-20260424i/power.control.perf-calculate-actual-utilization-etw-20260424i-summary.json) and [evidence/raw/etw-stackwalk/power.control.perf-calculate-actual-utilization-etw-20260424i/power.control.perf-calculate-actual-utilization-etw-20260424i-stage.json](../evidence/raw/etw-stackwalk/power.control.perf-calculate-actual-utilization-etw-20260424i/power.control.perf-calculate-actual-utilization-etw-20260424i-stage.json) and [evidence/captures/power-control-perf-calculate-actual-utilization-etw-stackwalk-attempt-20260424.json](../evidence/captures/power-control-perf-calculate-actual-utilization-etw-stackwalk-attempt-20260424.json) | `medium` | runtime-lane-review, transport-blocker |
 | `vm-power.control.perf-calculate-actual-utilization-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk runtime receipt for PerfCalculateActualUtilization | [evidence/captures/power-control-perf-calculate-actual-utilization-etw-qga-unblock-20260507.json](../evidence/captures/power-control-perf-calculate-actual-utilization-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/power-control-perf-calculate-actual-utilization-etw-qga-unblock-20260507/power-control-perf-calculate-actual-utilization-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/power-control-perf-calculate-actual-utilization-etw-qga-unblock-20260507/power-control-perf-calculate-actual-utilization-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/power-control-perf-calculate-actual-utilization-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/power-control-perf-calculate-actual-utilization-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/power-control-perf-calculate-actual-utilization-etw-qga-unblock-20260507/power-control-perf-calculate-actual-utilization-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/power-control-perf-calculate-actual-utilization-etw-qga-unblock-20260507/power-control-perf-calculate-actual-utilization-etw-qga-unblock-20260507.etl) | `high` | runtime-observation, tooling-fix, path, value, version-scope |
+| `vm-power.control.perf-calculate-actual-utilization-value-experiment-20260508` | `vm-test` | `VM reboot experiment` | One-value reboot experiment for PerfCalculateActualUtilization=0 | [registry-value experiment](../registry-research-framework/audit/registry-value-experiments/pilot-perf-calculate-actual-utilization-0.json) and [recovery note](../registry-research-framework/audit/registry-value-experiments/pilot-perf-calculate-actual-utilization-0-recovery.md) | `high` | risk, rollback-limit, reboot-regression, vm-profile-scope |
 
 **Validation proof**
 
@@ -9932,7 +9933,7 @@ Current writes
 | Source | [Docs/power/power.md](../Docs/power/power.md) |
 | Exact quote / path | [Docs/power/power.md:181](../Docs/power/power.md:181) shows `PerfCalculateActualUtilization` with observed literal `1` in the repo power notes. |
 | Key found on page | `True` |
-| Notes | The docs-first triage and phase-0 baseline agree on the current Win25H2Clean baseline value for PerfCalculateActualUtilization. App surfacing is tracked separately from evidence classification. |
+| Notes | The docs-first triage and phase-0 baseline agree on the current Win25H2Clean baseline value for PerfCalculateActualUtilization. The 2026-05-08 value experiment adds a negative reboot-health signal for `0` on the available VM profile. |
 
 **Decision**
 
@@ -9943,7 +9944,7 @@ Current writes
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | PerfCalculateActualUtilization now has converged cross-layer evidence on RegProbe-Baseline-ToolsHardened-20260330: phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, prior shell-safe Procmon lanes, and an exact runtime read captured by the tools-hardened lightweight ETW follow-up. The 2026-05-08 promotion review pack approves this app-mapped raw power card as promoted-with-warnings because VM CPU-utilization reporting and bare-metal power behavior can diverge. |
+| Why | PerfCalculateActualUtilization now has converged cross-layer evidence on RegProbe-Baseline-ToolsHardened-20260330: phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, prior shell-safe Procmon lanes, and an exact runtime read captured by the tools-hardened lightweight ETW follow-up. The 2026-05-08 promotion review pack approves this app-mapped raw power card as promoted-with-warnings because VM CPU-utilization reporting and bare-metal power behavior can diverge. The later 2026-05-08 one-value experiment observed a reboot regression after applying `0`, so non-default testing must stay snapshot-gated and advanced-user only. |
 
 ---
 

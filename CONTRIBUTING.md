@@ -284,6 +284,17 @@ python3 registry-research-framework/scripts/check_single_tweak_app_qa.py SystemR
 
 An `already-applied` live result is acceptable only when the report still verifies the desired value, preserves the card/evidence drawer contract, and skips standalone rollback because no mutation happened.
 
+For raw registry batches, first turn the paste into a one-value experiment plan:
+
+```bash
+python3 scripts/registry/parse_reg_add_batch.py \
+  --input pasted-reg-adds.txt \
+  --json-output registry-research-framework/audit/registry-value-experiments/operator-batch.json \
+  --markdown-output registry-research-framework/audit/registry-value-experiments/operator-batch.md
+```
+
+Do not apply the whole batch at once. Missing or opaque values need ETW, Procmon, or static-string follow-up before being closed. Present boot-sensitive values need snapshot/overlay-gated apply, basic Windows smoke, reboot health, rollback, reboot, and final smoke. Use `scripts/vm-kvm/run-guest-registry-value-experiment.py --require-domain-snapshot` for libvirt-domain runs; the `pilot-perf-calculate-actual-utilization-0` artifact is the current cautionary example.
+
 ## Evidence Card Quality Bar
 
 Do not treat a card as complete just because it names a key and a value. A reviewer should be able to answer three questions without reading your mind:
