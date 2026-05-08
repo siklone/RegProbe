@@ -255,7 +255,14 @@ The latest batch file is only the newest run. If you want cumulative coverage ac
 - `registry-research-framework/audit/promoted-app-qa-coverage-latest.json`
 - `registry-research-framework/audit/promoted-app-qa-coverage-latest.md`
 
-Current audit snapshot: as of 2026-05-07, app retest readiness is passing with `265` app-surface entries, `0` app-only backlog items, `263` apply-allowed records with rollback story, and `3` evidence-backed blocked follow-ups. Re-run readiness and the batch checker after changing app providers, evidence promotion gates, rollback behavior, or card mapping.
+Current audit snapshot: as of 2026-05-08, app retest readiness is passing with `265` app-surface entries, `0` app-only backlog items, `261` apply-allowed records, and `0` missing rollback stories. Promoted app-QA coverage is `258/258` (`100.0%`) with no uncovered promoted app-QA candidates remaining. Re-run readiness and the batch checker after changing app providers, evidence promotion gates, rollback behavior, or card mapping.
+
+The latest live retest also keeps two small operator artifacts:
+
+- `registry-research-framework/audit/app-retest-vm-health-latest.json`
+- `registry-research-framework/audit/single-tweak-check-systemresponsiveness-latest.json`
+
+If a live card reports `already-applied`, that can be a valid pass: the app must still verify the desired value, keep the card/evidence contract intact, and skip standalone rollback only when no mutation was performed.
 
 ## Retest Readiness Check
 
@@ -322,7 +329,7 @@ Collection mode is explicit now. `evidence` is the safe default for research and
 
 VM secret handling was also tightened. Repo-tracked VM scripts no longer keep plaintext guest passwords. Credentials are resolved from explicit input first, then environment variables such as `REGPROBE_VM_GUEST_USER` and `REGPROBE_VM_GUEST_PASSWORD`, and finally from a DPAPI-protected CLIXML credential file referenced outside the repo. `vmrun` still consumes credentials at invocation time because that is a VMware CLI limitation, but the repo avoids storing or logging those secrets directly and the shared VM helper masks them in runner output.
 
-For hard runtime cases, the escalation path extends beyond "reboot and idle." The checked-in path moves from targeted `ETW` or runtime trace work, to the safe mega-trigger runtime lane, to `WinDbg` boot registry tracing when QGA allows it, and then to source-enrichment cross-reference through `ReactOS`, `WRK`, `System Informer`, `Sandboxie`, `Wine`, `ADMX`, and `WDK`. ETL discovery feeds the queue, feature-area enrichment and triage narrow the candidate set, VM safety bench results promote only the profiles that meet the retained bar, and hard blockers record the missing prerequisite instead of collapsing into generic review language. The active blocked worklist is currently three evidence-backed follow-ups: audio enhancements hit a real app-QA access-denied failure, hibernation needs a hibernation-capable VM or hardware lane, and SysMain needs a clean enabled/running baseline for full mutation proof.
+For hard runtime cases, the escalation path extends beyond "reboot and idle." The checked-in path moves from targeted `ETW` or runtime trace work, to the safe mega-trigger runtime lane, to `WinDbg` boot registry tracing when QGA allows it, and then to source-enrichment cross-reference through `ReactOS`, `WRK`, `System Informer`, `Sandboxie`, `Wine`, `ADMX`, and `WDK`. ETL discovery feeds the queue, feature-area enrichment and triage narrow the candidate set, VM safety bench results promote only the profiles that meet the retained bar, and hard blockers record the missing prerequisite instead of collapsing into generic review language. The v3.6 clean-state checkpoint has no active blocked worklist; rejected and held records are retained as classified audit history instead of active execution debt.
 
 For the full validation flow, start with the [VM workflow](Docs/research/vm-workflow.md), [Runtime escalation](Docs/research/runtime-escalation.md), and the historical [Pipeline v3.1](registry-research-framework/docs/pipeline-v3.1.md) reference when an older audit pack still points to it.
 

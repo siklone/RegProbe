@@ -191,7 +191,9 @@ If you are running several live batches over time, use the cumulative artifacts 
 - `registry-research-framework/audit/promoted-app-qa-coverage-latest.json`
 - `registry-research-framework/audit/promoted-app-qa-coverage-latest.md`
 
-Current audit snapshot: as of 2026-05-07, promoted app-QA coverage is `242/242` (`100.0%`) with no uncovered promoted app-QA candidates remaining. Treat that number as a living release gate: refresh it after app-provider, card-mapping, promotion-gate, evidence, or rollback changes.
+Current audit snapshot: as of 2026-05-08, promoted app-QA coverage is `258/258` (`100.0%`) with no uncovered promoted app-QA candidates remaining. Treat that number as a living release gate: refresh it after app-provider, card-mapping, promotion-gate, evidence, or rollback changes.
+
+An `already-applied` live result is still a valid retest pass when the report verifies the desired value, keeps the card snapshot contract green, and skips standalone rollback only because no mutation was performed.
 
 ## Retest Readiness
 
