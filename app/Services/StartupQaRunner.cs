@@ -82,12 +82,25 @@ internal static class StartupQaRunner
         }
 
         await tweak.RunApplyForQaAsync(CancellationToken.None, request.AllowGatedMutation);
-        stages.Add(QaRunStageReport.Create("apply", tweak));
+        var appliedStage = QaRunStageReport.Create("apply", tweak);
+        stages.Add(appliedStage);
 
         if (request.RollbackAfterApply)
         {
-            await tweak.RunRollbackForQaAsync(CancellationToken.None, request.AllowGatedMutation);
-            stages.Add(QaRunStageReport.Create("rollback", tweak));
+            if (ShouldSkipStandaloneRollbackAfterNoOpApply(appliedStage))
+            {
+                stages.Add(appliedStage with
+                {
+                    Stage = "rollback",
+                    OutcomeSummary = "Rollback - Skipped",
+                    StatusMessage = "No mutation was performed; standalone rollback was skipped."
+                });
+            }
+            else
+            {
+                await tweak.RunRollbackForQaAsync(CancellationToken.None, request.AllowGatedMutation);
+                stages.Add(QaRunStageReport.Create("rollback", tweak));
+            }
         }
 
         await tweak.RunDetectAsync(CancellationToken.None);
@@ -226,6 +239,11 @@ internal static class StartupQaRunner
         summary = "The tweak already matched the desired state; the app verified it and skipped rollback because no mutation was performed.";
         return true;
     }
+
+    internal static bool ShouldSkipStandaloneRollbackAfterNoOpApply(QaRunStageReport applyStage)
+        => HasStepStatus(applyStage, "Apply", "Skipped")
+           && HasStepStatus(applyStage, "Verify", "Verified")
+           && HasStepStatus(applyStage, "Rollback", "Skipped");
 
     private static bool HasStepStatus(QaRunStageReport stage, string action, params string[] statuses)
         => stage.Steps.Any(step =>

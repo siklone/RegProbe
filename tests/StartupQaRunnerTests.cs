@@ -220,4 +220,52 @@ public sealed class StartupQaRunnerTests
         Assert.True(result);
         Assert.Contains("already matched", summary);
     }
+
+    [Fact]
+    public void ShouldSkipStandaloneRollbackAfterNoOpApply_ReturnsTrue_WhenApplyMadeNoMutation()
+    {
+        var applyStage = new StartupQaRunner.QaRunStageReport(
+            "apply",
+            "Applied",
+            "Run completed.",
+            "Apply - Success",
+            "64 (0x40)",
+            "64 (0x40)",
+            false,
+            true,
+            true,
+            false,
+            [
+                new StartupQaRunner.QaRunStepReport("Detect", "Applied", "Current value is 64.", "10:24:23"),
+                new StartupQaRunner.QaRunStepReport("Apply", "Skipped", "Already in the desired state.", "10:24:23"),
+                new StartupQaRunner.QaRunStepReport("Verify", "Verified", "Verified desired value.", "10:24:23"),
+                new StartupQaRunner.QaRunStepReport("Rollback", "Skipped", "No changes were made.", "10:24:23"),
+            ]);
+
+        Assert.True(StartupQaRunner.ShouldSkipStandaloneRollbackAfterNoOpApply(applyStage));
+    }
+
+    [Fact]
+    public void ShouldSkipStandaloneRollbackAfterNoOpApply_ReturnsFalse_WhenApplyMutated()
+    {
+        var applyStage = new StartupQaRunner.QaRunStageReport(
+            "apply",
+            "Applied",
+            "Run completed.",
+            "Enabled",
+            "1",
+            "1",
+            false,
+            true,
+            true,
+            false,
+            [
+                new StartupQaRunner.QaRunStepReport("Detect", "Detected", "Current value is missing.", "10:24:23"),
+                new StartupQaRunner.QaRunStepReport("Apply", "Applied", "Updated value.", "10:24:23"),
+                new StartupQaRunner.QaRunStepReport("Verify", "Verified", "Verified desired value.", "10:24:23"),
+                new StartupQaRunner.QaRunStepReport("Rollback", "Not required", "Step not executed.", "10:24:23"),
+            ]);
+
+        Assert.False(StartupQaRunner.ShouldSkipStandaloneRollbackAfterNoOpApply(applyStage));
+    }
 }

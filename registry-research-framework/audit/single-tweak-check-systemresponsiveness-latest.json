@@ -1,0 +1,156 @@
+{
+  "query": "SystemResponsiveness",
+  "expected_values": [
+    "10",
+    "30000"
+  ],
+  "exact": false,
+  "limit": 2,
+  "status": "ok",
+  "inspect_status": "ok",
+  "inspect_match_count": 2,
+  "qa_candidate_count": 1,
+  "candidates": [
+    {
+      "candidate_id": "power.disable-network-power-saving.policy",
+      "record_id": "power.disable-network-power-saving.policy",
+      "tweak_id": "power.disable-network-power-saving.policy",
+      "qa_tweak_id": "power.disable-network-power-saving.policy",
+      "promotion_state": "promoted",
+      "record_status": "validated",
+      "apply_allowed": true,
+      "restore_default_supported": true,
+      "restore_previous_supported": true,
+      "app_mapping_status": "matches-research",
+      "card_expectations": {
+        "name": "Network Power and Multimedia Responsiveness",
+        "category": "Power",
+        "description": "These settings affect whether TCP/IP task offloads stay enabled and how MMCSS reserves CPU for multimedia work.",
+        "documentation": "research/records/power.disable-network-power-saving.policy.review.json"
+      },
+      "rollback_expectations": {
+        "restore_default_supported": true,
+        "restore_previous_supported": true
+      },
+      "value_expectations": [
+        "10 -> matched",
+        "30000 -> not found"
+      ],
+      "evidence_expectations": {
+        "linked_evidence_count": 4,
+        "runtime_read_signal_count": 1,
+        "linked_evidence_locations": [
+          "https://learn.microsoft.com/en-us/windows-hardware/drivers/network/using-registry-values-to-enable-and-disable-task-offloading",
+          "https://learn.microsoft.com/en-us/windows/win32/procthread/multimedia-class-scheduler-service",
+          "app/Services/TweakProviders/PowerTweakProvider.cs",
+          "evidence/captures/power-disable-network-power-saving-policy-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507.etl and evidence/raw/etw-stackwalk/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507.etl"
+        ]
+      },
+      "commands": {
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect SystemResponsiveness --expected-value 10 --expected-value 30000",
+        "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'power.disable-network-power-saving.policy' --qa-output 'C:\\Tools\\ValidationController\\smoke\\power.disable-network-power-saving.policy.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'power.disable-network-power-saving.policy' --qa-output 'C:\\Tools\\ValidationController\\smoke\\power.disable-network-power-saving.policy.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'power.disable-network-power-saving.policy' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\power.disable-network-power-saving.policy.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'power.disable-network-power-saving.policy' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\power.disable-network-power-saving.policy.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'power.disable-network-power-saving.policy'"
+      },
+      "qa_report_path": "C:\\Tools\\ValidationController\\smoke\\power.disable-network-power-saving.policy.qa.json",
+      "guest_user": "rai",
+      "expected_report": {
+        "success": true,
+        "status": "ok",
+        "rollback_requested": true,
+        "required_stages": [
+          "detect-before",
+          "apply",
+          "rollback",
+          "detect-after"
+        ],
+        "required_card_snapshot": {
+          "required_fields": [
+            "TweakId",
+            "Name",
+            "Category",
+            "EvidenceClass",
+            "ResearchStatus",
+            "RollbackSnapshotState",
+            "HasClaimBoundary",
+            "WhatWeKnowSummary",
+            "WhatWeDoNotClaimSummary",
+            "ProofLanes"
+          ],
+          "required_proof_lanes": [
+            "docs",
+            "runtime",
+            "source",
+            "rollback"
+          ],
+          "claim_boundary_required": true
+        },
+        "required_stage_assertions": [
+          "apply stage reports a successful apply story",
+          "rollback stage reports a successful rollback story",
+          "detect-after is present"
+        ]
+      },
+      "expected_report_skip_rollback": {
+        "success": true,
+        "status": "ok",
+        "rollback_requested": false,
+        "required_stages": [
+          "detect-before",
+          "apply",
+          "detect-after"
+        ],
+        "required_card_snapshot": {
+          "required_fields": [
+            "TweakId",
+            "Name",
+            "Category",
+            "EvidenceClass",
+            "ResearchStatus",
+            "RollbackSnapshotState",
+            "HasClaimBoundary",
+            "WhatWeKnowSummary",
+            "WhatWeDoNotClaimSummary",
+            "ProofLanes"
+          ],
+          "required_proof_lanes": [
+            "docs",
+            "runtime",
+            "source",
+            "rollback"
+          ],
+          "claim_boundary_required": true
+        },
+        "required_stage_assertions": [
+          "apply stage reports a successful apply story",
+          "detect-after is present"
+        ]
+      },
+      "operator_checklist": [
+        "Run the inspect command and confirm the expected values and tracked registry targets still match the record.",
+        "Run the readiness command before launching the desktop app so cards, evidence, rollback coverage, and KVM smoke status stay green.",
+        "Open the app card 'Network Power and Multimedia Responsiveness' and verify the title, category, and linked research record (research/records/power.disable-network-power-saving.policy.review.json) match this plan.",
+        "Run the direct app or guest VM QA command and keep the JSON report it writes.",
+        "Check the report fields Success, Status, RollbackRequested, and the stage list before trusting the result.",
+        "Check the report Card snapshot: title/category, evidence tier, proof lanes, rollback state, and claim-boundary text should match the visible card.",
+        "If the normal run fails only because you need to observe the post-apply state manually, rerun the skip-rollback variant and record that fact in your notes."
+      ]
+    }
+  ],
+  "sources": {
+    "promotion_gates": "research/promotion-gates.json",
+    "catalog_csv": "Docs/tweaks/tweak-catalog.csv",
+    "validated_surface": "Docs/research/app-surface/validated-registry-values.json",
+    "records_root": "research/records"
+  },
+  "summary": {
+    "apply_allowed_candidate_count": 1,
+    "blocked_candidate_count": 0,
+    "candidate_ids": [
+      "power.disable-network-power-saving.policy"
+    ]
+  }
+}
