@@ -15,8 +15,8 @@ Nohuto references only show upstream dump or naming links. Value semantics come 
 | Records without evidence | 0 |
 | Records missing validation proof | 17 |
 | Deprecated missing validation proof | 0 |
-| Class A | 258 |
-| Class B | 24 |
+| Class A | 259 |
+| Class B | 23 |
 | Class C | 2 |
 | Class D | 17 |
 | Class E | 55 |
@@ -8145,24 +8145,18 @@ Windows Internals references:
 | Source file | [research/records/peripheral.audio-disable-enhancements.review.json](records/peripheral.audio-disable-enhancements.review.json) |
 | V3.1 evidence root | - |
 | Apply allowed | `False` |
-| Confidence | `medium` |
-| Needs VM validation | `True` |
+| Confidence | `high` |
+| Needs VM validation | `False` |
 
-**Summary:** Review-required audit trail for the live Disable Audio Enhancements card. The app already ships the current audio enhancement flags action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
+**Summary:** Closed audit trail for the live Disable Audio Enhancements card. VM probes proved the documented MMDevices endpoint enhancement values are protected by Windows ACLs on the current build, so the app now reports this card as not applicable instead of attempting a misleading root-level or access-denied mutation.
 
 **Current implementation**
 
 | Field | Value |
 | --- | --- |
-| Status | `partially-matches` |
+| Status | `matches-research` |
 | Provider source | app/Services/TweakProviders/AudioTweakProvider.cs |
-| Notes | The provider and target mapping exist, but 2026-05-07 VM app QA proved the current HKLM MMDevices write path is not safely actionable because reg.exe returned access denied. |
-
-Current writes
-
-| Target | Path | Value | State | Kind | Notes |
-| --- | --- | --- | --- | --- | --- |
-| `audio-enhancement-bundle` | `HKCU\Software\Microsoft\Windows\CurrentVersion\Audio + HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Render` | `EnhancementBundle` | `CurrentAppProfile` | `value` | The current engine tweak writes one current-user flag and one machine-wide enhancement flag. |
+| Notes | The provider mapping exists, but the current implementation is a protected-ACL guard. It enumerates MMDevices endpoint enhancement targets and returns NotApplicable rather than writing protected device keys. |
 
 **Evidence class**
 
@@ -8171,7 +8165,7 @@ Current writes
 | Label | `Class B` |
 | Title | Strong but Decision-Gated |
 | Action state | `research-gated` |
-| Gating reason | Cross-layer evidence is strong, but an explicit policy or supportability gate still blocks promotion. |
+| Gating reason | This record is strong enough to show, but it still needs a tighter runtime-trace layer before it becomes Class A. |
 
 **Sources**
 
@@ -8208,12 +8202,12 @@ Windows Internals references:
 | Path | `HKCU\Software\Microsoft\Windows\CurrentVersion\Audio + HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Render` |
 | Value name | `EnhancementBundle` |
 | Value type | `registry value set` |
-| Notes | The current engine tweak writes one current-user flag and one machine-wide enhancement flag. |
+| Notes | The current engine tweak detects the protected MMDevices lane and returns NotApplicable instead of writing. |
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
 | `missing` | - | Windows or tool default | The setting stays at the existing or default state because this review record does not apply a value. | repo-tweak-provenance, engine-implementation |
-| `value` | `CurrentAppProfile` | Current audio enhancement bundle | Writes the checked-in DisableProtectedAudioDG and DisableEnhancements values. | repo-tweak-provenance, app-provider, engine-implementation |
+| `value` | `CurrentAppProfile` | Current audio enhancement bundle | Former write bundle kept for audit history only; the app no longer mutates these values because MMDevices endpoint keys are protected. | repo-tweak-provenance, app-provider, engine-implementation, vm-peripheral.audio-disable-enhancements-app-qa-protected-acl-20260508 |
 
 **Windows defaults**
 
@@ -8236,6 +8230,7 @@ Windows Internals references:
 | `app-provider` | `repo-code` | `Current repo code` | Live provider mapping | app/Services/TweakProviders/AudioTweakProvider.cs | `high` | ui-mapping |
 | `engine-implementation` | `repo-code` | `Current repo code` | Current engine implementation | engine/Tweaks/Peripheral/AudioTweaks.cs | `high` | path, value, behavior |
 | `vm-peripheral.audio-disable-enhancements-app-qa-20260507` | `vm-test` | `VM test / probe` | RegProbe app QA access-denied failure for peripheral.audio-disable-enhancements | [evidence/captures/peripheral-audio-disable-enhancements-app-qa-20260507.json](../evidence/captures/peripheral-audio-disable-enhancements-app-qa-20260507.json) | `high` | behavior, risk, side-effects, ui-mapping |
+| `vm-peripheral.audio-disable-enhancements-app-qa-protected-acl-20260508` | `vm-test` | `VM test / probe` | RegProbe app QA protected-ACL not-applicable proof for peripheral.audio-disable-enhancements | [evidence/captures/peripheral-audio-disable-enhancements-app-qa-protected-acl-20260508.json](../evidence/captures/peripheral-audio-disable-enhancements-app-qa-protected-acl-20260508.json) | `high` | behavior, risk, ui-mapping |
 
 **Validation proof**
 
@@ -8253,12 +8248,9 @@ Windows Internals references:
 | Apply allowed | `False` |
 | Recommended for general users | `False` |
 | Restore default supported | `False` |
-| Restore previous supported | `True` |
-| Needs VM validation | `True` |
-| Why | The current app mapping is documented, but VM app QA found a real implementation blocker: the HKLM MMDevices Audio Render write returns access denied. This card stays out of the apply lane until the audio implementation is redesigned and re-tested. |
-
-Blocking issues:
-- app-qa-access-denied
+| Restore previous supported | `False` |
+| Needs VM validation | `False` |
+| Why | The current app mapping, documentation, failed 2026-05-07 mutation attempt, explicit 2026-05-08 per-device write probe, and redesigned 2026-05-08 VM app QA now agree: the MMDevices endpoint enhancement values are protected and this card should fail closed as not applicable rather than mutate. |
 
 ---
 
@@ -10483,10 +10475,10 @@ Windows Internals references:
 | Source file | [research/records/power.disable-hibernation.review.json](records/power.disable-hibernation.review.json) |
 | V3.1 evidence root | - |
 | Apply allowed | `False` |
-| Confidence | `medium` |
-| Needs VM validation | `True` |
+| Confidence | `high` |
+| Needs VM validation | `False` |
 
-**Summary:** Review-required audit trail for the live hibernation card. The app already ships the powercfg-backed action and repo docs map the tweak id to that same flow, but the card still lives only in the first-party provider and has not yet been promoted into the validated research-provider surface.
+**Summary:** Closed environment-limited audit trail for the live hibernation card. The app ships the powercfg-backed action and correctly reports firmware-limited VMs as not applicable, but this command card is rejected for research-provider promotion until a hibernation-capable validation lane exists.
 
 **Current implementation**
 
@@ -10509,7 +10501,7 @@ Current writes
 | Label | `Class B` |
 | Title | Strong but Decision-Gated |
 | Action state | `research-gated` |
-| Gating reason | Cross-layer evidence is strong, but an explicit policy or supportability gate still blocks promotion. |
+| Gating reason | This record is strong enough to show, but it still needs a tighter runtime-trace layer before it becomes Class A. |
 
 **Sources**
 
@@ -10577,6 +10569,8 @@ Windows Internals references:
 | `app-power-provider` | `repo-code` | `Current repo code` | Live power provider mapping | app/Services/TweakProviders/PowerTweakProvider.cs | `high` | ui-mapping |
 | `engine-disable-hibernation-command` | `repo-code` | `Current repo code` | Current hibernation command implementation | engine/Tweaks/Commands/Power/DisableHibernationTweak.cs | `high` | path, value, behavior |
 | `vm-power.disable-hibernation-app-qa-20260507` | `vm-test` | `VM test / probe` | RegProbe app QA not-applicable observation for power.disable-hibernation | [evidence/captures/power-disable-hibernation-app-qa-20260507.json](../evidence/captures/power-disable-hibernation-app-qa-20260507.json) | `medium` | behavior, risk, ui-mapping |
+| `vm-power.disable-hibernation-app-qa-not-applicable-20260508` | `vm-test` | `VM test / probe` | RegProbe app QA current not-applicable observation for power.disable-hibernation | [evidence/captures/power-disable-hibernation-app-qa-not-applicable-20260508.json](../evidence/captures/power-disable-hibernation-app-qa-not-applicable-20260508.json) | `high` | behavior, risk, ui-mapping |
+| `related-power.control.hibernate-enabled-cross-layer` | `related-record` | `unspecified` | Sibling HibernateEnabled cross-layer evidence | [research/records/power.control.hibernate-enabled.json](records/power.control.hibernate-enabled.json) | `high` | path, value, behavior |
 
 **Validation proof**
 
@@ -10595,11 +10589,8 @@ Windows Internals references:
 | Recommended for general users | `False` |
 | Restore default supported | `False` |
 | Restore previous supported | `True` |
-| Needs VM validation | `True` |
-| Why | The app mapping is documented, but the available VM firmware does not support hibernation. The 2026-05-07 QA run now proves correct not-applicable handling rather than apply/rollback mutation behavior. |
-
-Blocking issues:
-- vm-firmware-hibernation-unsupported
+| Needs VM validation | `False` |
+| Why | The app mapping is documented, the sibling HibernateEnabled raw control has cross-layer evidence, and 2026-05-07 plus 2026-05-08 app QA prove correct firmware-limited not-applicable handling on the available VM. Direct apply/rollback mutation proof still requires a hibernation-capable VM or bare-metal lane, so this app card is closed as rejected for research-provider promotion rather than left as an active blocker. |
 
 ---
 
@@ -10875,17 +10866,17 @@ Windows Internals references:
 | Field | Value |
 | --- | --- |
 | Status | `validated` |
-| Evidence class | `Class B` |
+| Evidence class | `Class A` |
 | Category | `Power` |
 | Area | `SysMain Service Stop Command` |
 | Scope | `device` |
 | Source file | [research/records/power.disable-superfetch.review.json](records/power.disable-superfetch.review.json) |
 | V3.1 evidence root | - |
 | Apply allowed | `True` |
-| Confidence | `medium` |
-| Needs VM validation | `True` |
+| Confidence | `high` |
+| Needs VM validation | `False` |
 
-**Summary:** Review-required audit trail for the live Disable Superfetch (SysMain) card. The app already ships the current sysmain service stop command action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
+**Summary:** Validated audit trail for the live Disable Superfetch (SysMain) card. The app ships the current SysMain service stop command action through the first-party provider, and 2026-05-08 clean-baseline VM app QA now proves detect/apply/verify/rollback from a running SysMain baseline.
 
 **Current implementation**
 
@@ -10905,10 +10896,10 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Label | `Class B` |
-| Title | Strong but Decision-Gated |
-| Action state | `research-gated` |
-| Gating reason | Cross-layer evidence is strong, but an explicit policy or supportability gate still blocks promotion. |
+| Label | `Class A` |
+| Title | Cross-Layer Verified |
+| Action state | `actionable` |
+| Gating reason | This record is cross-layer verified and also aligned with a shipped one-click surface. |
 
 **Sources**
 
@@ -10945,12 +10936,12 @@ Windows Internals references:
 | Path | `sc.exe SysMain` |
 | Value name | `ServiceState` |
 | Value type | `enum` |
-| Notes | The current engine tweak detects with sc query SysMain, applies sc stop SysMain, and uses sc start SysMain for rollback when the previous state was running. |
+| Notes | The current engine tweak detects with sc query SysMain, applies sc stop SysMain, waits for the service transition to settle, and uses sc start SysMain for rollback when the previous state was running. |
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
 | `missing` | - | Windows or tool default | The current service state is observed at runtime rather than assumed by this review record. | repo-tweak-provenance, engine-implementation |
-| `value` | `Stopped` | Stop SysMain | Runs the checked-in sc stop SysMain action after querying the current service state. | repo-tweak-provenance, app-provider, engine-implementation |
+| `value` | `Stopped` | Stop SysMain | Runs the checked-in sc stop SysMain action after querying the current service state. | repo-tweak-provenance, app-provider, engine-implementation, vm-power.disable-superfetch-app-qa-clean-baseline-20260508 |
 
 **Windows defaults**
 
@@ -10973,6 +10964,7 @@ Windows Internals references:
 | `app-provider` | `repo-code` | `Current repo code` | Live provider mapping | app/Services/TweakProviders/PerformanceTweakProvider.cs | `high` | ui-mapping |
 | `engine-implementation` | `repo-code` | `Current repo code` | Current engine implementation | engine/Tweaks/Commands/Performance/DisableSuperfetchTweak.cs | `high` | path, value, behavior |
 | `vm-power.disable-superfetch-app-qa-20260507` | `vm-test` | `VM test / probe` | RegProbe app QA already-applied observation for power.disable-superfetch | [evidence/captures/power-disable-superfetch-app-qa-20260507.json](../evidence/captures/power-disable-superfetch-app-qa-20260507.json) | `medium` | value, behavior, ui-mapping |
+| `vm-power.disable-superfetch-app-qa-clean-baseline-20260508` | `vm-test` | `VM test / probe` | RegProbe app QA clean-baseline mutation proof for power.disable-superfetch | [evidence/captures/power-disable-superfetch-app-qa-clean-baseline-20260508.json](../evidence/captures/power-disable-superfetch-app-qa-clean-baseline-20260508.json) | `high` | value, behavior, rollback, ui-mapping |
 
 **Validation proof**
 
@@ -10991,11 +10983,8 @@ Windows Internals references:
 | Recommended for general users | `True` |
 | Restore default supported | `False` |
 | Restore previous supported | `True` |
-| Needs VM validation | `True` |
-| Why | Validation proof and app mapping align, and VM app QA verified the already-applied SysMain state. Full mutation proof remains open because the VM baseline had SysMain stopped/disabled, so apply and rollback were intentionally skipped. |
-
-Blocking issues:
-- app-qa-clean-baseline-needed
+| Needs VM validation | `False` |
+| Why | Validation proof, provider mapping, checked-in command implementation, and 2026-05-08 clean-baseline VM app QA now align. The QA run proved detect/apply/verify/rollback from a running SysMain baseline and restored the original running state. |
 
 ---
 

@@ -1,12 +1,12 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-07T23:25:43.677052Z",
+  "generated_utc": "2026-05-08T08:46:53.659314Z",
   "summary": {
     "total_active_records": 301,
     "class_counts": {
-      "A": 258,
+      "A": 259,
       "D": 17,
-      "B": 24,
+      "B": 23,
       "C": 2
     },
     "lane_counts": {
@@ -16,21 +16,20 @@
       "early-boot": 16
     },
     "next_missing_layer_counts": {
-      "none": 263,
+      "none": 264,
       "validation-proof": 17,
-      "runtime-trace": 3,
+      "runtime-trace": 2,
       "intentional-hold": 18
     },
     "promotion_state_counts": {
-      "promoted": 263,
-      "rejected": 35,
-      "blocked": 3
+      "promoted": 264,
+      "rejected": 37
     },
     "re_audit_required_count": 39,
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-05-07T20:06:08.471076Z",
+      "generated_utc": "2026-05-08T08:34:35.760748Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -40,8 +39,8 @@
       "counts_by_promotion_state": {}
     },
     "total": 301,
-    "promoted": 263,
-    "blocked": 3,
+    "promoted": 264,
+    "blocked": 0,
     "revalidation_pending": 0,
     "stale": 0,
     "gate_health": "yellow"
@@ -7712,14 +7711,14 @@
       "original_pipeline_version": "pre-v3.1",
       "new_pipeline_version": "v3.2",
       "artifact_refs": [],
-      "app_mapping_status": "partially-matches",
+      "app_mapping_status": "matches-research",
       "restore_story_known": true,
       "apply_allowed": false,
-      "confidence": "medium",
-      "tweak_origin": "research-derived",
-      "promotion_state": "blocked",
+      "confidence": "high",
+      "tweak_origin": "legacy-curated",
+      "promotion_state": "rejected",
       "promotion_blockers": [
-        "app-qa-access-denied"
+        "no-runtime-proof"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
@@ -7728,12 +7727,12 @@
         "runtime_evidence_strength": 1,
         "rollback_clarity": 5,
         "blast_radius": 3,
-        "tweak_suitability": 2,
+        "tweak_suitability": 3,
         "privilege_complexity": 4,
         "build_specificity": 5,
         "sibling_expansion_value": 4,
         "bench_priority": 3,
-        "overall_score": 3.33,
+        "overall_score": 3.44,
         "next_missing_layer": "runtime-trace"
       },
       "schema_compatibility_mode": "native",
@@ -7748,7 +7747,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-05-07T23:30:00Z"
+        "last_verified_at": "2026-05-08T08:45:00Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -10016,11 +10015,11 @@
       "app_mapping_status": "matches-research",
       "restore_story_known": true,
       "apply_allowed": false,
-      "confidence": "medium",
+      "confidence": "high",
       "tweak_origin": "legacy-curated",
-      "promotion_state": "blocked",
+      "promotion_state": "rejected",
       "promotion_blockers": [
-        "vm-firmware-hibernation-unsupported"
+        "no-runtime-proof"
       ],
       "record_promotion_allowed": false,
       "tweak_ingest_allowed": false,
@@ -10049,7 +10048,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-05-07T23:30:00Z"
+        "last_verified_at": "2026-05-08T08:48:00Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -10236,9 +10235,9 @@
     {
       "record_id": "power.disable-superfetch",
       "tweak_id": "power.disable-superfetch",
-      "evidence_class": "B",
+      "evidence_class": "A",
       "lane": "runtime",
-      "class_ready_basis": "pending",
+      "class_ready_basis": "converged-vm",
       "official": false,
       "official_doc_exists": false,
       "procmon": false,
@@ -10248,7 +10247,7 @@
       "benchmark": false,
       "reboot_tested": false,
       "incident_seen": false,
-      "next_missing_layer": "runtime-trace",
+      "next_missing_layer": "none",
       "cross_layer_satisfied": false,
       "layers_used": [
         "runtime_trace"
@@ -10264,23 +10263,21 @@
         "trigger_condition_tested": false
       },
       "re_audit_required": true,
-      "re_audit_priority": 1,
-      "re_audit_reason": "current_blocker; cross_layer_missing; etw_not_recorded; dead_flag_checks_incomplete",
-      "original_class": "B",
+      "re_audit_priority": 2,
+      "re_audit_reason": "non_official_v31_reaudit; cross_layer_missing; etw_not_recorded; dead_flag_checks_incomplete",
+      "original_class": "A",
       "original_pipeline_version": "pre-v3.1",
       "new_pipeline_version": "v3.2",
       "artifact_refs": [],
       "app_mapping_status": "matches-research",
       "restore_story_known": true,
       "apply_allowed": true,
-      "confidence": "medium",
+      "confidence": "high",
       "tweak_origin": "legacy-curated",
-      "promotion_state": "blocked",
-      "promotion_blockers": [
-        "app-qa-clean-baseline-needed"
-      ],
-      "record_promotion_allowed": false,
-      "tweak_ingest_allowed": false,
+      "promotion_state": "promoted",
+      "promotion_blockers": [],
+      "record_promotion_allowed": true,
+      "tweak_ingest_allowed": true,
       "score_breakdown": {
         "static_evidence_strength": 3,
         "runtime_evidence_strength": 1,
@@ -10292,7 +10289,7 @@
         "sibling_expansion_value": 2,
         "bench_priority": 5,
         "overall_score": 3.33,
-        "next_missing_layer": "runtime-trace"
+        "next_missing_layer": "none"
       },
       "schema_compatibility_mode": "native",
       "evaluator_version": "3.6.0",
@@ -10306,7 +10303,7 @@
         "backend_id": "rai-linux-vm",
         "tested_build": "26100",
         "current_build": "26100",
-        "last_verified_at": "2026-05-07T23:30:00Z"
+        "last_verified_at": "2026-05-08T08:40:00Z"
       },
       "os_build": "26100",
       "os_edition": "Professional",
@@ -25811,8 +25808,6 @@
     "This is a one-shot destructive cleanup action without rollback.": 1,
     "This is a one-shot troubleshooting action without rollback.": 1,
     "This is an on-demand maintenance action with no rollback support.": 1,
-    "app-qa-access-denied": 1,
-    "app-qa-clean-baseline-needed": 1,
     "audio-execution-required-no-current-build-registry-seeding-path": 1,
     "conflicting-sources": 2,
     "dpc-watchdog-control-intentional-hold-no-current-build-pivot": 1,
@@ -25830,7 +25825,7 @@
     "long-dpc-threshold-intentional-hold-no-current-build-pivot": 1,
     "long-dpc-threshold-wpr-boot-zero-exact-target-hits-current-build": 1,
     "no-primary-current-build-doc": 11,
-    "no-runtime-proof": 2,
+    "no-runtime-proof": 4,
     "power-session-watchdog-timeouts-no-current-build-registry-seeding-caller": 1,
     "power-session-watchdog-timeouts-sleep-side-exact-registry-read-missing": 1,
     "powerrequestoverride-static-context-adjacent-not-leaf-specific": 1,
@@ -25849,7 +25844,6 @@
     "ttmenabled-boot-unsafe-on-isolated-pilot-profile": 1,
     "ttmenabled-reader-open-question": 1,
     "validation-proof": 17,
-    "vm-firmware-hibernation-unsupported": 1,
     "win32-callout-watchdog-bugcheck-semantics-unproven": 1,
     "win32k-callout-watchdog-helper-query-only-not-boot-consumer": 1,
     "win32k-callout-watchdog-intentional-hold-no-current-build-pivot": 1,

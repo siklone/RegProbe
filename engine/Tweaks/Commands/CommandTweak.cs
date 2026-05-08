@@ -42,6 +42,10 @@ public abstract class CommandTweak : ITweak
     protected virtual TweakStatus GetDetectedStatus(CommandResult result, string detectedState)
         => VerifyApplied(result) ? TweakStatus.Applied : TweakStatus.Detected;
 
+    protected virtual TimeSpan ApplySettleDelay => TimeSpan.Zero;
+
+    protected virtual TimeSpan RollbackSettleDelay => TimeSpan.Zero;
+
     public async Task<TweakResult> DetectAsync(CancellationToken ct)
     {
         ct.ThrowIfCancellationRequested();
@@ -121,6 +125,8 @@ public abstract class CommandTweak : ITweak
                     $"Apply command failed with exit code {result.ExitCode}: {result.StandardError}",
                     DateTimeOffset.UtcNow);
             }
+
+            await WaitForSettleAsync(ApplySettleDelay, ct);
 
             return new TweakResult(
                 TweakStatus.Applied,
@@ -259,6 +265,8 @@ public abstract class CommandTweak : ITweak
                     DateTimeOffset.UtcNow);
             }
 
+            await WaitForSettleAsync(RollbackSettleDelay, ct);
+
             return new TweakResult(
                 TweakStatus.RolledBack,
                 "Successfully restored original state.",
@@ -277,4 +285,7 @@ public abstract class CommandTweak : ITweak
                 ex);
         }
     }
+
+    private static Task WaitForSettleAsync(TimeSpan delay, CancellationToken ct)
+        => delay > TimeSpan.Zero ? Task.Delay(delay, ct) : Task.CompletedTask;
 }

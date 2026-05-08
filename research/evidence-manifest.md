@@ -15,8 +15,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Records without evidence | 0 |
 | Records missing validation proof | 17 |
 | Deprecated missing validation proof | 0 |
-| Class A | 258 |
-| Class B | 24 |
+| Class A | 259 |
+| Class B | 23 |
 | Class C | 2 |
 | Class D | 17 |
 | Class E | 55 |
@@ -188,7 +188,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `performance.disable-menu-show-delay` | validated | Class A | `research/records/performance.disable-menu-show-delay.review.json` | - | `7029514581cbc9f2b66f123500036b8842927438b37fc5dd3cd433ba42f60c9c` | `863986a77cec7e5b52eb2feb934346bfd7a1133d797b5c13ab846338a68bbe6c` | 3 |
 | `performance.disable-taskbar-animations` | validated | Class A | `research/records/performance.disable-taskbar-animations.review.json` | [evidence/records/performance.disable-taskbar-animations](../evidence/records/performance.disable-taskbar-animations) | `72c394cea36c238a1b956bd28bbb59098fa1760f83adfe79209505daf4d3e622` | `6f61cb0855cb594e80ef1cc52a46e4fd172f4a3927c0fb0e2dbc612696719358` | 8 |
 | `peripheral.audio-disable-ducking` | validated | Class A | `research/records/peripheral.audio-disable-ducking.review.json` | - | `9c909cfc33584ca457a3e8993aa554177b29adf4983bab348435089d5620d35a` | `707576b673a28c8af68fdff4bd9c1e7ab4667b42a5f7b283dba18534e3f3ab79` | 5 |
-| `peripheral.audio-disable-enhancements` | validated | Class B | `research/records/peripheral.audio-disable-enhancements.review.json` | - | `b389692eaf4d6a44d728d8773fdaf840e1f24c31e720014c9c9f532d3c48be44` | `fa3839f29854be9a9c99d22ce3bc07232b7d274496e7413b90d252402744ae45` | 4 |
+| `peripheral.audio-disable-enhancements` | validated | Class B | `research/records/peripheral.audio-disable-enhancements.review.json` | - | `7ce792fdb9f117ccd2add38ad85f96d0ea81155dbc5b7a6b144c1889c707d1b4` | `fa3839f29854be9a9c99d22ce3bc07232b7d274496e7413b90d252402744ae45` | 5 |
 | `peripheral.autoplay-take-no-action` | validated | Class A | `research/records/peripheral.autoplay-take-no-action.review.json` | - | `35a27a8225f21f95c09f4ce819aa205965e99494f74f956051b31c76f602a188` | `65ce551667f3d9b5bd3f77c92fdfd5e00113e541223d3dafb91627206edf8e27` | 4 |
 | `peripheral.disable-autoplay` | validated | Class A | `research/records/peripheral.disable-autoplay.review.json` | - | `5ea35bd9e72bf3bc3eaa422117b7770c32ac8e13dc79fa4e34faa60dd0ca1db2` | `d3db858cacb57a9dc7dae6c3410f943cd99b67bfac0ffe3a2798ba560763d573` | 7 |
 | `peripheral.disable-sticky-keys-prompt` | validated | Class A | `research/records/peripheral.disable-sticky-keys-prompt.review.json` | - | `6028f35f2188d5c0c66aa1b53d9302d04918d9ab1d2447c92d195ab9b2d59a23` | `4c0b1549e97383602bb402a3e42cfe13dacfa7872433c4e07647353144ef8571` | 4 |
@@ -208,10 +208,10 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `power.disable-cpu-idle-states` | validated | Class A | `research/records/power.disable-cpu-idle-states.json` | [evidence/records/power.disable-cpu-idle-states](../evidence/records/power.disable-cpu-idle-states) | `0c4938318a9b502144c0f1ab5ed5ad201155466ae668ab8c1c3b654dfb294bb0` | `1798640a1a75847caf8a5c8caa6949c387e8118510e6cf57d7b76f44ed6a5a3b` | 14 |
 | `power.disable-cpu-parking` | validated | Class A | `research/records/power.disable-cpu-parking.review.json` | - | `d28533ca569b9bed1bfb608de5b9ace2541c32deba39a76c0162649aa2672ede` | `1e07982a5d49d800812250f38700512f25a454be1abcd9404d0d02d4850c24dc` | 5 |
 | `power.disable-fast-startup` | validated | Class A | `research/records/power.disable-fast-startup.review.json` | - | `5c6c3f5b3561a755cf0a46ca1ed0de6c44577464ad887e118bd5af655f0999bd` | `cf91e404c6ac19f5792f0a45c40cd8f2ed1504f0e633f6f09a2ec1cada0ec9b7` | 6 |
-| `power.disable-hibernation` | validated | Class B | `research/records/power.disable-hibernation.review.json` | - | `2778a9aed9bff093a1c65ed695f27c8209e72c42ad6f65ae0dd1ff659fd26864` | `f47dddbcd888f51e113c81e18191c39727d7cd39f015d93ab43fd90d2b39a180` | 5 |
+| `power.disable-hibernation` | validated | Class B | `research/records/power.disable-hibernation.review.json` | - | `6a13e929cbda87258638abc656ef46ba57881142844bbea3a710dbd6d5726f1a` | `f47dddbcd888f51e113c81e18191c39727d7cd39f015d93ab43fd90d2b39a180` | 7 |
 | `power.disable-network-power-saving.policy` | validated | Class A | `research/records/power.disable-network-power-saving.policy.review.json` | [evidence/records/power.disable-network-power-saving.policy](../evidence/records/power.disable-network-power-saving.policy) | `ad2354239542f7cf0b1ba220d201c15bec557ea601ab9956d9925a23290988af` | `232e318df18a2327ad504a0c942305bb7c01eb9de6d469b2158aa056e1ac6d6a` | 4 |
 | `power.disable-power-throttling` | validated | Class A | `research/records/power.disable-power-throttling.json` | - | `8a5f23aac7116900e33068e8b0c7ace86b5a17f1ab791020061f38551552ff3f` | `b78646de93a21d13b29902af3fba219292617267422db672a2be04241d37e94d` | 4 |
-| `power.disable-superfetch` | validated | Class B | `research/records/power.disable-superfetch.review.json` | - | `cbfb647816ff60ace2c4fd8cf4988a2837db3c6fa6d79d3f4a246254beb1f1cf` | `9fbaad016cabf25ae43a493b8e4f5de69015ae8a59e8d41c7408dcad867a3862` | 4 |
+| `power.disable-superfetch` | validated | Class A | `research/records/power.disable-superfetch.review.json` | - | `fce8c6452f71a65f76f1cfa7fc478db24baf5a5bb6effd7dd800e95584ef48de` | `9fbaad016cabf25ae43a493b8e4f5de69015ae8a59e8d41c7408dcad867a3862` | 5 |
 | `power.disable-usb-selective-suspend` | validated | Class A | `research/records/power.disable-usb-selective-suspend.review.json` | - | `859b84c4cf70cc6646c94fd9307a14ab731de1c1e27c171d037e1754e05f45d6` | `38ff009d8392af24227425ae676d45d2273541bd086b1eb54760c56d20ebeab3` | 5 |
 | `power.disable-windows-search` | validated | Class A | `research/records/power.disable-windows-search.json` | - | `8d98575ba6f85845533e0642e881181636be6de333fd2b2b40c04718ec40e7aa` | `c82e383ebc1d9ef49330c8ccf697c957423c7af93707b85c0c8ae4f84e9ee524` | 6 |
 | `power.hide-hibernate-option` | validated | Class A | `research/records/power.hide-hibernate-option.json` | - | `dc426788fdf83fd30fdb2abdc884707cf6d26f98dd8ff6d2198c2b755a200102` | `679ae02a4140c26f85c6c57787959e8ebd42c72e86e1c402ad95f6063698224d` | 6 |
@@ -5079,10 +5079,10 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class B`
 - Source file: `research/records/peripheral.audio-disable-enhancements.review.json`
-- Source SHA256: `b389692eaf4d6a44d728d8773fdaf840e1f24c31e720014c9c9f532d3c48be44`
+- Source SHA256: `7ce792fdb9f117ccd2add38ad85f96d0ea81155dbc5b7a6b144c1889c707d1b4`
 - Proof SHA256: `fa3839f29854be9a9c99d22ce3bc07232b7d274496e7413b90d252402744ae45`
 
-**Summary:** Review-required audit trail for the live Disable Audio Enhancements card. The app already ships the current audio enhancement flags action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
+**Summary:** Closed audit trail for the live Disable Audio Enhancements card. VM probes proved the documented MMDevices endpoint enhancement values are protected by Windows ACLs on the current build, so the app now reports this card as not applicable instead of attempting a misleading root-level or access-denied mutation.
 
 **Evidence**
 
@@ -5092,6 +5092,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `app-provider` | `repo-code` | Live provider mapping | app/Services/TweakProviders/AudioTweakProvider.cs |
 | `engine-implementation` | `repo-code` | Current engine implementation | engine/Tweaks/Peripheral/AudioTweaks.cs |
 | `vm-peripheral.audio-disable-enhancements-app-qa-20260507` | `vm-test` | RegProbe app QA access-denied failure for peripheral.audio-disable-enhancements | [evidence/captures/peripheral-audio-disable-enhancements-app-qa-20260507.json](../evidence/captures/peripheral-audio-disable-enhancements-app-qa-20260507.json) |
+| `vm-peripheral.audio-disable-enhancements-app-qa-protected-acl-20260508` | `vm-test` | RegProbe app QA protected-ACL not-applicable proof for peripheral.audio-disable-enhancements | [evidence/captures/peripheral-audio-disable-enhancements-app-qa-protected-acl-20260508.json](../evidence/captures/peripheral-audio-disable-enhancements-app-qa-protected-acl-20260508.json) |
 
 **Validation proof**
 
@@ -5785,10 +5786,10 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class B`
 - Source file: `research/records/power.disable-hibernation.review.json`
-- Source SHA256: `2778a9aed9bff093a1c65ed695f27c8209e72c42ad6f65ae0dd1ff659fd26864`
+- Source SHA256: `6a13e929cbda87258638abc656ef46ba57881142844bbea3a710dbd6d5726f1a`
 - Proof SHA256: `f47dddbcd888f51e113c81e18191c39727d7cd39f015d93ab43fd90d2b39a180`
 
-**Summary:** Review-required audit trail for the live hibernation card. The app already ships the powercfg-backed action and repo docs map the tweak id to that same flow, but the card still lives only in the first-party provider and has not yet been promoted into the validated research-provider surface.
+**Summary:** Closed environment-limited audit trail for the live hibernation card. The app ships the powercfg-backed action and correctly reports firmware-limited VMs as not applicable, but this command card is rejected for research-provider promotion until a hibernation-capable validation lane exists.
 
 **Evidence**
 
@@ -5799,6 +5800,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `app-power-provider` | `repo-code` | Live power provider mapping | app/Services/TweakProviders/PowerTweakProvider.cs |
 | `engine-disable-hibernation-command` | `repo-code` | Current hibernation command implementation | engine/Tweaks/Commands/Power/DisableHibernationTweak.cs |
 | `vm-power.disable-hibernation-app-qa-20260507` | `vm-test` | RegProbe app QA not-applicable observation for power.disable-hibernation | [evidence/captures/power-disable-hibernation-app-qa-20260507.json](../evidence/captures/power-disable-hibernation-app-qa-20260507.json) |
+| `vm-power.disable-hibernation-app-qa-not-applicable-20260508` | `vm-test` | RegProbe app QA current not-applicable observation for power.disable-hibernation | [evidence/captures/power-disable-hibernation-app-qa-not-applicable-20260508.json](../evidence/captures/power-disable-hibernation-app-qa-not-applicable-20260508.json) |
+| `related-power.control.hibernate-enabled-cross-layer` | `related-record` | Sibling HibernateEnabled cross-layer evidence | [research/records/power.control.hibernate-enabled.json](records/power.control.hibernate-enabled.json) |
 
 **Validation proof**
 
@@ -5872,12 +5875,12 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 ### `power.disable-superfetch`
 
 - Status: `validated`
-- Evidence class: `Class B`
+- Evidence class: `Class A`
 - Source file: `research/records/power.disable-superfetch.review.json`
-- Source SHA256: `cbfb647816ff60ace2c4fd8cf4988a2837db3c6fa6d79d3f4a246254beb1f1cf`
+- Source SHA256: `fce8c6452f71a65f76f1cfa7fc478db24baf5a5bb6effd7dd800e95584ef48de`
 - Proof SHA256: `9fbaad016cabf25ae43a493b8e4f5de69015ae8a59e8d41c7408dcad867a3862`
 
-**Summary:** Review-required audit trail for the live Disable Superfetch (SysMain) card. The app already ships the current sysmain service stop command action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.
+**Summary:** Validated audit trail for the live Disable Superfetch (SysMain) card. The app ships the current SysMain service stop command action through the first-party provider, and 2026-05-08 clean-baseline VM app QA now proves detect/apply/verify/rollback from a running SysMain baseline.
 
 **Evidence**
 
@@ -5887,6 +5890,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `app-provider` | `repo-code` | Live provider mapping | app/Services/TweakProviders/PerformanceTweakProvider.cs |
 | `engine-implementation` | `repo-code` | Current engine implementation | engine/Tweaks/Commands/Performance/DisableSuperfetchTweak.cs |
 | `vm-power.disable-superfetch-app-qa-20260507` | `vm-test` | RegProbe app QA already-applied observation for power.disable-superfetch | [evidence/captures/power-disable-superfetch-app-qa-20260507.json](../evidence/captures/power-disable-superfetch-app-qa-20260507.json) |
+| `vm-power.disable-superfetch-app-qa-clean-baseline-20260508` | `vm-test` | RegProbe app QA clean-baseline mutation proof for power.disable-superfetch | [evidence/captures/power-disable-superfetch-app-qa-clean-baseline-20260508.json](../evidence/captures/power-disable-superfetch-app-qa-clean-baseline-20260508.json) |
 
 **Validation proof**
 

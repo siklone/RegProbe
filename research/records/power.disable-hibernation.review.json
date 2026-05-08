@@ -4,7 +4,7 @@
   "record_id": "power.disable-hibernation",
   "tweak_id": "power.disable-hibernation",
   "record_status": "validated",
-  "summary": "Review-required audit trail for the live hibernation card. The app already ships the powercfg-backed action and repo docs map the tweak id to that same flow, but the card still lives only in the first-party provider and has not yet been promoted into the validated research-provider surface.",
+  "summary": "Closed environment-limited audit trail for the live hibernation card. The app ships the powercfg-backed action and correctly reports firmware-limited VMs as not applicable, but this command card is rejected for research-provider promotion until a hibernation-capable validation lane exists.",
   "setting": {
     "name": "Disable Hibernation",
     "category": "Power",
@@ -12,8 +12,8 @@
     "scope": "device",
     "casual_explanation": "This turns off Windows hibernation so the system stops using hiberfil.sys and frees that disk space.",
     "why_people_change_it": "People disable hibernation when they want to reclaim disk space or never use hibernate on that machine.",
-    "tradeoffs_overview": "Disabling hibernation frees space and removes the hibernate option. The live app already supports rollback, but the card itself has not yet gone through the research-provider promotion path.",
-    "professional_notes": "The current app models this card as a command tweak that detects with powercfg /availablesleepstates, applies powercfg /hibernate off, and restores the previous state with powercfg /hibernate on when rollback is appropriate. Repo power docs and tweak provenance both map the tweak id to that same action. This record stays review-required until the command-backed power surface is promoted into the validated research-provider lane.",
+    "tradeoffs_overview": "Disabling hibernation frees space and removes the hibernate option on systems that support S4 hibernation. The current KVM validation lane does not support hibernation, so the app must report not applicable there instead of attempting a fake mutation.",
+    "professional_notes": "The current app models this card as a command tweak that detects with powercfg /availablesleepstates, applies powercfg /hibernate off, and restores the previous state with powercfg /hibernate on when rollback is appropriate. Repo power docs and tweak provenance both map the tweak id to that same action, and the sibling power.control.hibernate-enabled record carries cross-layer evidence for the underlying HibernateEnabled control. This app card remains rejected for research-provider promotion until a hibernation-capable VM or bare-metal validation lane can prove mutation behavior directly.",
     "targets": [
       {
         "target_id": "hibernation-mode-command",
@@ -142,12 +142,14 @@
         "The card is still held outside the validated research-provider surface."
       ],
       "apply_allowed": false,
-      "notes": "2026-05-07 VM app QA confirmed the app reports firmware-unsupported hibernation as not-applicable; a hibernation-capable baseline is still needed for mutation proof.",
+      "notes": "2026-05-07 and 2026-05-08 VM app QA confirmed the app reports firmware-unsupported hibernation as not-applicable. This is correct for the current VM lane; direct mutation proof requires a hibernation-capable baseline and is intentionally outside this closed promotion decision.",
       "evidence_ids": [
         "repo-power-doc",
         "app-power-provider",
         "engine-disable-hibernation-command",
-        "vm-power.disable-hibernation-app-qa-20260507"
+        "vm-power.disable-hibernation-app-qa-20260507",
+        "vm-power.disable-hibernation-app-qa-not-applicable-20260508",
+        "related-power.control.hibernate-enabled-cross-layer"
       ]
     }
   ],
@@ -214,26 +216,54 @@
       ],
       "strength": "medium",
       "artifact_status": "present"
+    },
+    {
+      "evidence_id": "vm-power.disable-hibernation-app-qa-not-applicable-20260508",
+      "kind": "vm-test",
+      "title": "RegProbe app QA current not-applicable observation for power.disable-hibernation",
+      "location": "evidence/captures/power-disable-hibernation-app-qa-not-applicable-20260508.json",
+      "summary": "Status not-applicable: the current app again reported that system firmware does not support hibernation, skipped apply/verify/rollback, and passed the QA card snapshot contract.",
+      "supports": [
+        "behavior",
+        "risk",
+        "ui-mapping"
+      ],
+      "strength": "high",
+      "artifact_status": "present"
+    },
+    {
+      "evidence_id": "related-power.control.hibernate-enabled-cross-layer",
+      "kind": "related-record",
+      "title": "Sibling HibernateEnabled cross-layer evidence",
+      "location": "research/records/power.control.hibernate-enabled.json",
+      "summary": "The sibling raw control record for HibernateEnabled is Class A/promotion-eligible with registry observation, current-build string/Ghidra evidence, and exact Procmon runtime read evidence for the underlying HKLM power control.",
+      "supports": [
+        "path",
+        "value",
+        "behavior"
+      ],
+      "strength": "high"
     }
   ],
   "decision": {
-    "confidence": "medium",
+    "confidence": "high",
     "apply_allowed": false,
     "recommended_for_general_users": false,
     "restore_default_supported": false,
     "restore_previous_supported": true,
-    "needs_vm_validation": true,
-    "why": "The app mapping is documented, but the available VM firmware does not support hibernation. The 2026-05-07 QA run now proves correct not-applicable handling rather than apply/rollback mutation behavior.",
-    "manual_review_required": true,
-    "blocking_issues": [
-      "vm-firmware-hibernation-unsupported"
-    ]
+    "needs_vm_validation": false,
+    "why": "The app mapping is documented, the sibling HibernateEnabled raw control has cross-layer evidence, and 2026-05-07 plus 2026-05-08 app QA prove correct firmware-limited not-applicable handling on the available VM. Direct apply/rollback mutation proof still requires a hibernation-capable VM or bare-metal lane, so this app card is closed as rejected for research-provider promotion rather than left as an active blocker.",
+    "manual_review_required": false,
+    "blocking_issues": [],
+    "promotion_disposition": "rejected",
+    "promotion_disposition_kind": "environment-limited-validation-lane",
+    "promotion_disposition_reason": "Closed as rejected for research-provider promotion because the current VM firmware does not support hibernation; the app correctly reports NotApplicable, while direct mutation proof must wait for a hibernation-capable validation lane.",
+    "promotion_disposition_reviewed_utc": "2026-05-08T08:48:00Z"
   },
   "open_questions": [
-    "Should reversible command-backed power cards like disable-hibernation be prioritized for research-provider promotion ahead of other app-only commands?",
-    "Do we want guest-side QA evidence attached before promoting this power command into the validated lane?"
+    "Which hibernation-capable VM or bare-metal profile should be used if this command card is reopened for direct mutation proof?"
   ],
-  "last_reviewed_utc": "2026-05-07T23:30:00Z",
+  "last_reviewed_utc": "2026-05-08T08:48:00Z",
   "validation_proof": {
     "source_url": "Docs/power/power.md",
     "exact_quote_or_path": "Docs/power/power.md:339 documents Disable Hibernation; Docs/power/power.md:376 records that powercfg /hibernate off sets HibernateEnabled to 0.",
@@ -247,6 +277,13 @@
       "edition": "25H2 session",
       "build": "26100",
       "notes": "2026-05-07 RegProbe app QA status not-applicable; artifact evidence/captures/power-disable-hibernation-app-qa-20260507.json."
+    },
+    {
+      "environment": "KVM VM via QGA app QA",
+      "os": "Windows 11",
+      "edition": "25H2 session",
+      "build": "26100",
+      "notes": "2026-05-08 RegProbe app QA status not-applicable; artifacts evidence/captures/power-disable-hibernation-app-qa-not-applicable-20260508.json and evidence/captures/app-qa-hibernation-not-applicable-20260508.json."
     }
   ]
 }

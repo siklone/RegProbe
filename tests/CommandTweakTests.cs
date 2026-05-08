@@ -7,11 +7,13 @@ using Microsoft.Win32;
 using Moq;
 using RegProbe.Core;
 using RegProbe.Engine.Tweaks.Commands.Power;
+using RegProbe.Engine.Tweaks.Commands.Performance;
 using RegProbe.Engine.Tweaks.Commands.Cleanup;
 using RegProbe.Engine.Tweaks.Commands.Network;
 using RegProbe.Engine.Tweaks.Commands.Privacy;
 using RegProbe.Engine.Tweaks.Commands.RegistryOps;
 using RegProbe.Engine.Tweaks.Commands.Security;
+using RegProbe.Engine.Tweaks.Commands;
 using RegProbe.Core.Commands;
 using RegProbe.Core.Registry;
 using RegProbe.Engine.Tweaks;
@@ -21,6 +23,23 @@ namespace RegProbe.Tests;
 
 public sealed class CommandTweakTests
 {
+    [Fact]
+    public void DisableSuperfetchTweak_UsesServiceTransitionSettleDelay()
+    {
+        var mockRunner = new Mock<ICommandRunner>();
+        var tweak = new DisableSuperfetchTweak(mockRunner.Object);
+
+        var applyDelay = typeof(CommandTweak)
+            .GetProperty("ApplySettleDelay", BindingFlags.Instance | BindingFlags.NonPublic)!
+            .GetValue(tweak);
+        var rollbackDelay = typeof(CommandTweak)
+            .GetProperty("RollbackSettleDelay", BindingFlags.Instance | BindingFlags.NonPublic)!
+            .GetValue(tweak);
+
+        Assert.Equal(TimeSpan.FromSeconds(6), applyDelay);
+        Assert.Equal(TimeSpan.FromSeconds(6), rollbackDelay);
+    }
+
     [Fact]
     public async Task DisableSmbLeasingTweak_DetectAsync_WhenLeasingEnabled_ReturnsDetectedStatus()
     {

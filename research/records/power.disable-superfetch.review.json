@@ -4,7 +4,7 @@
   "record_id": "power.disable-superfetch",
   "tweak_id": "power.disable-superfetch",
   "record_status": "validated",
-  "summary": "Review-required audit trail for the live Disable Superfetch (SysMain) card. The app already ships the current sysmain service stop command action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.",
+  "summary": "Validated audit trail for the live Disable Superfetch (SysMain) card. The app ships the current SysMain service stop command action through the first-party provider, and 2026-05-08 clean-baseline VM app QA now proves detect/apply/verify/rollback from a running SysMain baseline.",
   "setting": {
     "name": "Disable Superfetch (SysMain)",
     "category": "Power",
@@ -40,11 +40,12 @@
             "evidence_ids": [
               "repo-tweak-provenance",
               "app-provider",
-              "engine-implementation"
+              "engine-implementation",
+              "vm-power.disable-superfetch-app-qa-clean-baseline-20260508"
             ]
           }
         ],
-        "notes": "The current engine tweak detects with sc query SysMain, applies sc stop SysMain, and uses sc start SysMain for rollback when the previous state was running."
+        "notes": "The current engine tweak detects with sc query SysMain, applies sc stop SysMain, waits for the service transition to settle, and uses sc start SysMain for rollback when the previous state was running."
       }
     ]
   },
@@ -138,15 +139,16 @@
       "bad_when": "You need a validated research-provider card.",
       "tradeoffs": [
         "The current app action is explicit.",
-        "The card still sits outside the validated research-provider surface."
+        "The app QA path mutates the SysMain service and then restores the running baseline through rollback."
       ],
       "apply_allowed": true,
-      "notes": "2026-05-07 VM app QA verified the already-applied SysMain state; a clean baseline is still needed for full apply/rollback mutation proof.",
+      "notes": "2026-05-08 VM app QA started from a manual/running SysMain baseline, applied the tweak, verified the stopped target state, rolled back, and detected the restored running state.",
       "evidence_ids": [
         "repo-tweak-provenance",
         "app-provider",
         "engine-implementation",
-        "vm-power.disable-superfetch-app-qa-20260507"
+        "vm-power.disable-superfetch-app-qa-20260507",
+        "vm-power.disable-superfetch-app-qa-clean-baseline-20260508"
       ]
     }
   ],
@@ -200,22 +202,35 @@
       ],
       "strength": "medium",
       "artifact_status": "present"
+    },
+    {
+      "evidence_id": "vm-power.disable-superfetch-app-qa-clean-baseline-20260508",
+      "kind": "vm-test",
+      "title": "RegProbe app QA clean-baseline mutation proof for power.disable-superfetch",
+      "location": "evidence/captures/power-disable-superfetch-app-qa-clean-baseline-20260508.json",
+      "summary": "Status ok-gated-override: QA-only gated mutation override used; apply/verify path completed and rollback restored the running SysMain baseline. The VM baseline started with SysMain running, the app detected the not-applied state, applied the stop command, verified the optimized target, rolled back with sc start SysMain, and detected the restored running state.",
+      "supports": [
+        "value",
+        "behavior",
+        "rollback",
+        "ui-mapping"
+      ],
+      "strength": "high",
+      "artifact_status": "present"
     }
   ],
   "decision": {
-    "confidence": "medium",
+    "confidence": "high",
     "apply_allowed": true,
     "recommended_for_general_users": true,
     "restore_default_supported": false,
     "restore_previous_supported": true,
-    "needs_vm_validation": true,
-    "why": "Validation proof and app mapping align, and VM app QA verified the already-applied SysMain state. Full mutation proof remains open because the VM baseline had SysMain stopped/disabled, so apply and rollback were intentionally skipped.",
+    "needs_vm_validation": false,
+    "why": "Validation proof, provider mapping, checked-in command implementation, and 2026-05-08 clean-baseline VM app QA now align. The QA run proved detect/apply/verify/rollback from a running SysMain baseline and restored the original running state.",
     "manual_review_required": false,
-    "blocking_issues": [
-      "app-qa-clean-baseline-needed"
-    ]
+    "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-05-07T23:30:00Z",
+  "last_reviewed_utc": "2026-05-08T08:40:00Z",
   "validation_proof": {
     "source_url": "Docs/SERVICES_DOCUMENTATION.md",
     "exact_quote_or_path": "Docs/SERVICES_DOCUMENTATION.md:19 lists SysMain as the service that prefetches application data; Docs/tweaks/tweak-catalog.md:57 maps power.disable-superfetch to the SysMain command implementation.",
@@ -229,6 +244,13 @@
       "edition": "25H2 session",
       "build": "26100",
       "notes": "2026-05-07 RegProbe app QA status already-applied; artifact evidence/captures/power-disable-superfetch-app-qa-20260507.json."
+    },
+    {
+      "environment": "KVM VM via QGA app QA",
+      "os": "Windows 11",
+      "edition": "25H2 session",
+      "build": "26100",
+      "notes": "2026-05-08 clean-baseline app QA proved detect/apply/verify/rollback from a running SysMain baseline; artifacts evidence/captures/power-disable-superfetch-app-qa-clean-baseline-20260508.json and evidence/captures/app-qa-superfetch-clean-baseline-20260508.json."
     }
   ]
 }

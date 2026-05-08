@@ -1,79 +1,12 @@
 {
-  "generated_at": "2026-05-07T23:27:59.972902Z",
-  "blocked_count": 3,
-  "lane_counts": {
-    "runtime-trace": 3
-  },
-  "actionability_counts": {
-    "active": 3
-  },
-  "ordered_lanes": [
-    "runtime-trace"
-  ],
-  "lane_suggested_commands": {
-    "runtime-trace": "winopt research list-blocked --worklist --lane runtime-trace --top 5"
-  },
-  "lane_focus": {
-    "runtime-trace": {
-      "candidate_id": "peripheral.audio-disable-enhancements",
-      "suggested_command": "winopt research show-blocked peripheral.audio-disable-enhancements --json",
-      "next_action_hint": "Redesign the current app mutation path before more evidence collection; audio enhancements likely need per-device or permission-aware handling, then rerun VM app QA."
-    }
-  },
-  "top_actionable_candidates": [
-    "peripheral.audio-disable-enhancements",
-    "power.disable-hibernation",
-    "power.disable-superfetch"
-  ],
+  "generated_at": "2026-05-08T08:47:03.412940Z",
+  "blocked_count": 0,
+  "lane_counts": {},
+  "actionability_counts": {},
+  "ordered_lanes": [],
+  "lane_suggested_commands": {},
+  "lane_focus": {},
+  "top_actionable_candidates": [],
   "top_hold_candidates": [],
-  "items": [
-    {
-      "candidate_id": "peripheral.audio-disable-enhancements",
-      "feature_area": "Audio Enhancement Flags",
-      "next_missing_layer": "runtime-trace",
-      "actionability": "active",
-      "priority_score": 29,
-      "blocker_count": 1,
-      "promotion_blockers": [
-        "app-qa-access-denied"
-      ],
-      "key_path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Audio + HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\MMDevices\\Audio\\Render",
-      "value_name": "EnhancementBundle",
-      "recent_audit_artifacts": [],
-      "suggested_command": "winopt research show-blocked peripheral.audio-disable-enhancements --json",
-      "next_action_hint": "Redesign the current app mutation path before more evidence collection; audio enhancements likely need per-device or permission-aware handling, then rerun VM app QA."
-    },
-    {
-      "candidate_id": "power.disable-hibernation",
-      "feature_area": "PowerCfg Hibernation",
-      "next_missing_layer": "runtime-trace",
-      "actionability": "active",
-      "priority_score": 29,
-      "blocker_count": 1,
-      "promotion_blockers": [
-        "vm-firmware-hibernation-unsupported"
-      ],
-      "key_path": "powercfg.exe /hibernate",
-      "value_name": "Mode",
-      "recent_audit_artifacts": [],
-      "suggested_command": "winopt research show-blocked power.disable-hibernation --json",
-      "next_action_hint": "Move this to a hibernation-capable VM or bare-metal validation lane; the current VM correctly proves not-applicable handling only."
-    },
-    {
-      "candidate_id": "power.disable-superfetch",
-      "feature_area": "SysMain Service Stop Command",
-      "next_missing_layer": "runtime-trace",
-      "actionability": "active",
-      "priority_score": 29,
-      "blocker_count": 1,
-      "promotion_blockers": [
-        "app-qa-clean-baseline-needed"
-      ],
-      "key_path": "sc.exe SysMain",
-      "value_name": "ServiceState",
-      "recent_audit_artifacts": [],
-      "suggested_command": "winopt research show-blocked power.disable-superfetch --json",
-      "next_action_hint": "Provision a clean baseline where the target service is enabled/running, then rerun VM app QA to prove apply and rollback mutation."
-    }
-  ]
+  "items": []
 }

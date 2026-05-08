@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-07T23:25:44.603067Z",
+  "generated_utc": "2026-05-08T08:46:54.642166Z",
   "source_index": "research/evidence-index.json",
   "summary": {
     "total_records": 356,
@@ -12,16 +12,16 @@
     "records_missing_validation_proof": 17,
     "deprecated_missing_validation_proof": 0,
     "class_counts": {
-      "A": 258,
+      "A": 259,
       "E": 55,
       "D": 17,
-      "B": 24,
+      "B": 23,
       "C": 2
     },
     "imported_candidate_backlog": {
       "path": "research/imported-candidate-backlog.json",
       "exists": true,
-      "generated_utc": "2026-05-07T23:25:43.953248Z",
+      "generated_utc": "2026-05-08T08:46:53.944063Z",
       "candidate_count": 0,
       "import_count": 0,
       "source_run_count": 0,
@@ -52582,9 +52582,9 @@
         "is_actionable": false,
         "is_archived": false,
         "action_state": "research-gated",
-        "gating_reason": "Cross-layer evidence is strong, but an explicit policy or supportability gate still blocks promotion.",
-        "confidence": "medium",
-        "app_mapping_status": "partially-matches",
+        "gating_reason": "This record is strong enough to show, but it still needs a tighter runtime-trace layer before it becomes Class A.",
+        "confidence": "high",
+        "app_mapping_status": "matches-research",
         "restore_story_known": true,
         "tested_build": "26100",
         "anticheat_risk": {
@@ -52619,7 +52619,7 @@
         },
         "runtime_proof": {
           "summary": "Status check-failed: The tweak flow completed, but at least one apply or rollback checkpoint did not come back clean. The app reached the current mutation path, but the HKLM MMDevices Audio Render write failed with access denied; the implementation needs a...",
-          "needs_vm_validation": true,
+          "needs_vm_validation": false,
           "has_runtime_evidence": true,
           "links": [
             {
@@ -52627,6 +52627,12 @@
               "url": "evidence/captures/peripheral-audio-disable-enhancements-app-qa-20260507.json",
               "kind": "vm-test",
               "summary": "Status check-failed: The tweak flow completed, but at least one apply or rollback checkpoint did not come back clean. The app reached the current mutation path, but the HKLM MMD..."
+            },
+            {
+              "title": "RegProbe app QA protected-ACL not-applicable proof for peripheral.audio-disable-enhancements",
+              "url": "evidence/captures/peripheral-audio-disable-enhancements-app-qa-protected-acl-20260508.json",
+              "kind": "vm-test",
+              "summary": "Status not-applicable: the app detected protected MMDevices audio endpoint enhancement keys, reported 6 protected device-scoped target values, skipped apply/verify/rollback, and..."
             }
           ]
         },
@@ -52654,40 +52660,28 @@
         }
       },
       "source_file": "research/records/peripheral.audio-disable-enhancements.review.json",
-      "source_file_sha256": "b389692eaf4d6a44d728d8773fdaf840e1f24c31e720014c9c9f532d3c48be44",
-      "source_file_size_bytes": 10401,
+      "source_file_sha256": "7ce792fdb9f117ccd2add38ad85f96d0ea81155dbc5b7a6b144c1889c707d1b4",
+      "source_file_size_bytes": 12110,
       "name": "Disable Audio Enhancements",
       "category": "Peripheral",
       "area": "Audio Enhancement Flags",
       "scope": "device",
-      "summary": "Review-required audit trail for the live Disable Audio Enhancements card. The app already ships the current audio enhancement flags action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.",
+      "summary": "Closed audit trail for the live Disable Audio Enhancements card. VM probes proved the documented MMDevices endpoint enhancement values are protected by Windows ACLs on the current build, so the app now reports this card as not applicable instead of attempting a misleading root-level or access-denied mutation.",
       "decision": {
-        "confidence": "medium",
+        "confidence": "high",
         "apply_allowed": false,
         "recommended_for_general_users": false,
         "restore_default_supported": false,
-        "restore_previous_supported": true,
-        "needs_vm_validation": true,
-        "why": "The current app mapping is documented, but VM app QA found a real implementation blocker: the HKLM MMDevices Audio Render write returns access denied. This card stays out of the apply lane until the audio implementation is redesigned and re-tested.",
-        "blocking_issues": [
-          "app-qa-access-denied"
-        ]
+        "restore_previous_supported": false,
+        "needs_vm_validation": false,
+        "why": "The current app mapping, documentation, failed 2026-05-07 mutation attempt, explicit 2026-05-08 per-device write probe, and redesigned 2026-05-08 VM app QA now agree: the MMDevices endpoint enhancement values are protected and this card should fail closed as not applicable rather than mutate.",
+        "blocking_issues": []
       },
       "app_current_implementation": {
-        "status": "partially-matches",
+        "status": "matches-research",
         "provider_source": "app/Services/TweakProviders/AudioTweakProvider.cs",
-        "notes": "The provider and target mapping exist, but 2026-05-07 VM app QA proved the current HKLM MMDevices write path is not safely actionable because reg.exe returned access denied.",
-        "writes": [
-          {
-            "target_id": "audio-enhancement-bundle",
-            "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Audio + HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\MMDevices\\Audio\\Render",
-            "value_name": "EnhancementBundle",
-            "value_type": "registry value set",
-            "state_kind": "value",
-            "value": "CurrentAppProfile",
-            "notes": "The current engine tweak writes one current-user flag and one machine-wide enhancement flag."
-          }
-        ]
+        "notes": "The provider mapping exists, but the current implementation is a protected-ACL guard. It enumerates MMDevices endpoint enhancement targets and returns NotApplicable rather than writing protected device keys.",
+        "writes": []
       },
       "targets": [
         {
@@ -52696,7 +52690,7 @@
           "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Audio + HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\MMDevices\\Audio\\Render",
           "value_name": "EnhancementBundle",
           "value_type": "registry value set",
-          "notes": "The current engine tweak writes one current-user flag and one machine-wide enhancement flag.",
+          "notes": "The current engine tweak detects the protected MMDevices lane and returns NotApplicable instead of writing.",
           "allowed_values": [
             {
               "state_kind": "missing",
@@ -52711,11 +52705,12 @@
               "state_kind": "value",
               "value": "CurrentAppProfile",
               "label": "Current audio enhancement bundle",
-              "meaning": "Writes the checked-in DisableProtectedAudioDG and DisableEnhancements values.",
+              "meaning": "Former write bundle kept for audit history only; the app no longer mutates these values because MMDevices endpoint keys are protected.",
               "evidence_ids": [
                 "repo-tweak-provenance",
                 "app-provider",
-                "engine-implementation"
+                "engine-implementation",
+                "vm-peripheral.audio-disable-enhancements-app-qa-protected-acl-20260508"
               ]
             }
           ]
@@ -52794,15 +52789,16 @@
           "bad_when": "You need a validated research-provider card.",
           "tradeoffs": [
             "The current app action is explicit.",
-            "The card still sits outside the validated research-provider surface."
+            "The card is closed as not actionable because the documented MMDevices values are protected on the current build."
           ],
           "apply_allowed": false,
-          "notes": "2026-05-07 VM app QA reached the mutation path but failed on HKLM MMDevices Audio Render with access denied; keep apply disabled until the implementation is redesigned.",
+          "notes": "2026-05-08 VM app QA confirmed the redesigned app guard reports protected MMDevices endpoint keys as not applicable and does not mutate registry values.",
           "evidence_ids": [
             "repo-tweak-provenance",
             "app-provider",
             "engine-implementation",
-            "vm-peripheral.audio-disable-enhancements-app-qa-20260507"
+            "vm-peripheral.audio-disable-enhancements-app-qa-20260507",
+            "vm-peripheral.audio-disable-enhancements-app-qa-protected-acl-20260508"
           ]
         }
       ],
@@ -52837,7 +52833,7 @@
           "kind": "repo-code",
           "title": "Current engine implementation",
           "location": "engine/Tweaks/Peripheral/AudioTweaks.cs",
-          "summary": "The current engine implementation defines the checked-in audio enhancement flags behavior for this card.",
+          "summary": "The current engine implementation routes this card to AudioEnhancementsTweak, which reports protected MMDevices endpoint enhancement keys as NotApplicable instead of writing.",
           "strength": "high",
           "supports": [
             "path",
@@ -52857,6 +52853,20 @@
             "behavior",
             "risk",
             "side-effects",
+            "ui-mapping"
+          ],
+          "origin": "VM test / probe"
+        },
+        {
+          "evidence_id": "vm-peripheral.audio-disable-enhancements-app-qa-protected-acl-20260508",
+          "kind": "vm-test",
+          "title": "RegProbe app QA protected-ACL not-applicable proof for peripheral.audio-disable-enhancements",
+          "location": "evidence/captures/peripheral-audio-disable-enhancements-app-qa-protected-acl-20260508.json",
+          "summary": "Status not-applicable: the app detected protected MMDevices audio endpoint enhancement keys, reported 6 protected device-scoped target values, skipped apply/verify/rollback, and did not write the HKCU DisableProtectedAudioDG value.",
+          "strength": "high",
+          "supports": [
+            "behavior",
+            "risk",
             "ui-mapping"
           ],
           "origin": "VM test / probe"
@@ -59917,8 +59927,8 @@
         "is_actionable": false,
         "is_archived": false,
         "action_state": "research-gated",
-        "gating_reason": "Cross-layer evidence is strong, but an explicit policy or supportability gate still blocks promotion.",
-        "confidence": "medium",
+        "gating_reason": "This record is strong enough to show, but it still needs a tighter runtime-trace layer before it becomes Class A.",
+        "confidence": "high",
         "app_mapping_status": "matches-research",
         "restore_story_known": true,
         "tested_build": "26100",
@@ -59954,7 +59964,7 @@
         },
         "runtime_proof": {
           "summary": "Status not-applicable: Current state: Hibernation unavailable: system firmware does not support hibernation. The app now reports the firmware-limited VM state as not applicable and skips apply/rollback instead of producing a false failure.",
-          "needs_vm_validation": true,
+          "needs_vm_validation": false,
           "has_runtime_evidence": true,
           "links": [
             {
@@ -59962,6 +59972,12 @@
               "url": "evidence/captures/power-disable-hibernation-app-qa-20260507.json",
               "kind": "vm-test",
               "summary": "Status not-applicable: Current state: Hibernation unavailable: system firmware does not support hibernation. The app now reports the firmware-limited VM state as not applicable..."
+            },
+            {
+              "title": "RegProbe app QA current not-applicable observation for power.disable-hibernation",
+              "url": "evidence/captures/power-disable-hibernation-app-qa-not-applicable-20260508.json",
+              "kind": "vm-test",
+              "summary": "Status not-applicable: the current app again reported that system firmware does not support hibernation, skipped apply/verify/rollback, and passed the QA card snapshot contract."
             }
           ]
         },
@@ -59995,24 +60011,22 @@
         }
       },
       "source_file": "research/records/power.disable-hibernation.review.json",
-      "source_file_sha256": "2778a9aed9bff093a1c65ed695f27c8209e72c42ad6f65ae0dd1ff659fd26864",
-      "source_file_size_bytes": 10787,
+      "source_file_sha256": "6a13e929cbda87258638abc656ef46ba57881142844bbea3a710dbd6d5726f1a",
+      "source_file_size_bytes": 13391,
       "name": "Disable Hibernation",
       "category": "Power",
       "area": "PowerCfg Hibernation",
       "scope": "device",
-      "summary": "Review-required audit trail for the live hibernation card. The app already ships the powercfg-backed action and repo docs map the tweak id to that same flow, but the card still lives only in the first-party provider and has not yet been promoted into the validated research-provider surface.",
+      "summary": "Closed environment-limited audit trail for the live hibernation card. The app ships the powercfg-backed action and correctly reports firmware-limited VMs as not applicable, but this command card is rejected for research-provider promotion until a hibernation-capable validation lane exists.",
       "decision": {
-        "confidence": "medium",
+        "confidence": "high",
         "apply_allowed": false,
         "recommended_for_general_users": false,
         "restore_default_supported": false,
         "restore_previous_supported": true,
-        "needs_vm_validation": true,
-        "why": "The app mapping is documented, but the available VM firmware does not support hibernation. The 2026-05-07 QA run now proves correct not-applicable handling rather than apply/rollback mutation behavior.",
-        "blocking_issues": [
-          "vm-firmware-hibernation-unsupported"
-        ]
+        "needs_vm_validation": false,
+        "why": "The app mapping is documented, the sibling HibernateEnabled raw control has cross-layer evidence, and 2026-05-07 plus 2026-05-08 app QA prove correct firmware-limited not-applicable handling on the available VM. Direct apply/rollback mutation proof still requires a hibernation-capable VM or bare-metal lane, so this app card is closed as rejected for research-provider promotion rather than left as an active blocker.",
+        "blocking_issues": []
       },
       "app_current_implementation": {
         "status": "matches-research",
@@ -60140,12 +60154,14 @@
             "The card is still held outside the validated research-provider surface."
           ],
           "apply_allowed": false,
-          "notes": "2026-05-07 VM app QA confirmed the app reports firmware-unsupported hibernation as not-applicable; a hibernation-capable baseline is still needed for mutation proof.",
+          "notes": "2026-05-07 and 2026-05-08 VM app QA confirmed the app reports firmware-unsupported hibernation as not-applicable. This is correct for the current VM lane; direct mutation proof requires a hibernation-capable baseline and is intentionally outside this closed promotion decision.",
           "evidence_ids": [
             "repo-power-doc",
             "app-power-provider",
             "engine-disable-hibernation-command",
-            "vm-power.disable-hibernation-app-qa-20260507"
+            "vm-power.disable-hibernation-app-qa-20260507",
+            "vm-power.disable-hibernation-app-qa-not-applicable-20260508",
+            "related-power.control.hibernate-enabled-cross-layer"
           ]
         }
       ],
@@ -60216,6 +60232,34 @@
             "ui-mapping"
           ],
           "origin": "VM test / probe"
+        },
+        {
+          "evidence_id": "vm-power.disable-hibernation-app-qa-not-applicable-20260508",
+          "kind": "vm-test",
+          "title": "RegProbe app QA current not-applicable observation for power.disable-hibernation",
+          "location": "evidence/captures/power-disable-hibernation-app-qa-not-applicable-20260508.json",
+          "summary": "Status not-applicable: the current app again reported that system firmware does not support hibernation, skipped apply/verify/rollback, and passed the QA card snapshot contract.",
+          "strength": "high",
+          "supports": [
+            "behavior",
+            "risk",
+            "ui-mapping"
+          ],
+          "origin": "VM test / probe"
+        },
+        {
+          "evidence_id": "related-power.control.hibernate-enabled-cross-layer",
+          "kind": "related-record",
+          "title": "Sibling HibernateEnabled cross-layer evidence",
+          "location": "research/records/power.control.hibernate-enabled.json",
+          "summary": "The sibling raw control record for HibernateEnabled is Class A/promotion-eligible with registry observation, current-build string/Ghidra evidence, and exact Procmon runtime read evidence for the underlying HKLM power control.",
+          "strength": "high",
+          "supports": [
+            "path",
+            "value",
+            "behavior"
+          ],
+          "origin": "unspecified"
         }
       ],
       "validation_proof": {
@@ -61028,16 +61072,16 @@
         "record_id": "power.disable-superfetch",
         "tweak_id": "power.disable-superfetch",
         "record_status": "validated",
-        "evidence_class": "B",
-        "class_label": "Class B",
-        "class_title": "Strong but Decision-Gated",
-        "class_description": "Cross-layer evidence is strong, but a policy/supportability gate or one missing lane still keeps the record below Class A.",
+        "evidence_class": "A",
+        "class_label": "Class A",
+        "class_title": "Cross-Layer Verified",
+        "class_description": "Key exists, primary values have trusted meanings, and the docs/static/runtime layers converge. App surfacing and one-click actionability are tracked separately.",
         "show_in_app": true,
-        "is_actionable": false,
+        "is_actionable": true,
         "is_archived": false,
-        "action_state": "research-gated",
-        "gating_reason": "Cross-layer evidence is strong, but an explicit policy or supportability gate still blocks promotion.",
-        "confidence": "medium",
+        "action_state": "actionable",
+        "gating_reason": "This record is cross-layer verified and also aligned with a shipped one-click surface.",
+        "confidence": "high",
         "app_mapping_status": "matches-research",
         "restore_story_known": true,
         "tested_build": "26100",
@@ -61073,7 +61117,7 @@
         },
         "runtime_proof": {
           "summary": "Status already-applied: The tweak already matched the desired state; the app verified it and skipped rollback because no mutation was performed. The VM baseline already matched the desired SysMain state, so the app verified the state and skipped rollback be...",
-          "needs_vm_validation": true,
+          "needs_vm_validation": false,
           "has_runtime_evidence": true,
           "links": [
             {
@@ -61081,6 +61125,12 @@
               "url": "evidence/captures/power-disable-superfetch-app-qa-20260507.json",
               "kind": "vm-test",
               "summary": "Status already-applied: The tweak already matched the desired state; the app verified it and skipped rollback because no mutation was performed. The VM baseline already matched..."
+            },
+            {
+              "title": "RegProbe app QA clean-baseline mutation proof for power.disable-superfetch",
+              "url": "evidence/captures/power-disable-superfetch-app-qa-clean-baseline-20260508.json",
+              "kind": "vm-test",
+              "summary": "Status ok-gated-override: QA-only gated mutation override used; apply/verify path completed and rollback restored the running SysMain baseline. The VM baseline started with SysM..."
             }
           ]
         },
@@ -61108,24 +61158,22 @@
         }
       },
       "source_file": "research/records/power.disable-superfetch.review.json",
-      "source_file_sha256": "cbfb647816ff60ace2c4fd8cf4988a2837db3c6fa6d79d3f4a246254beb1f1cf",
-      "source_file_size_bytes": 10027,
+      "source_file_sha256": "fce8c6452f71a65f76f1cfa7fc478db24baf5a5bb6effd7dd800e95584ef48de",
+      "source_file_size_bytes": 11550,
       "name": "Disable Superfetch (SysMain)",
       "category": "Power",
       "area": "SysMain Service Stop Command",
       "scope": "device",
-      "summary": "Review-required audit trail for the live Disable Superfetch (SysMain) card. The app already ships the current sysmain service stop command action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.",
+      "summary": "Validated audit trail for the live Disable Superfetch (SysMain) card. The app ships the current SysMain service stop command action through the first-party provider, and 2026-05-08 clean-baseline VM app QA now proves detect/apply/verify/rollback from a running SysMain baseline.",
       "decision": {
-        "confidence": "medium",
+        "confidence": "high",
         "apply_allowed": true,
         "recommended_for_general_users": true,
         "restore_default_supported": false,
         "restore_previous_supported": true,
-        "needs_vm_validation": true,
-        "why": "Validation proof and app mapping align, and VM app QA verified the already-applied SysMain state. Full mutation proof remains open because the VM baseline had SysMain stopped/disabled, so apply and rollback were intentionally skipped.",
-        "blocking_issues": [
-          "app-qa-clean-baseline-needed"
-        ]
+        "needs_vm_validation": false,
+        "why": "Validation proof, provider mapping, checked-in command implementation, and 2026-05-08 clean-baseline VM app QA now align. The QA run proved detect/apply/verify/rollback from a running SysMain baseline and restored the original running state.",
+        "blocking_issues": []
       },
       "app_current_implementation": {
         "status": "matches-research",
@@ -61150,7 +61198,7 @@
           "path": "sc.exe SysMain",
           "value_name": "ServiceState",
           "value_type": "enum",
-          "notes": "The current engine tweak detects with sc query SysMain, applies sc stop SysMain, and uses sc start SysMain for rollback when the previous state was running.",
+          "notes": "The current engine tweak detects with sc query SysMain, applies sc stop SysMain, waits for the service transition to settle, and uses sc start SysMain for rollback when the previous state was running.",
           "allowed_values": [
             {
               "state_kind": "missing",
@@ -61169,7 +61217,8 @@
               "evidence_ids": [
                 "repo-tweak-provenance",
                 "app-provider",
-                "engine-implementation"
+                "engine-implementation",
+                "vm-power.disable-superfetch-app-qa-clean-baseline-20260508"
               ]
             }
           ]
@@ -61248,15 +61297,16 @@
           "bad_when": "You need a validated research-provider card.",
           "tradeoffs": [
             "The current app action is explicit.",
-            "The card still sits outside the validated research-provider surface."
+            "The app QA path mutates the SysMain service and then restores the running baseline through rollback."
           ],
           "apply_allowed": true,
-          "notes": "2026-05-07 VM app QA verified the already-applied SysMain state; a clean baseline is still needed for full apply/rollback mutation proof.",
+          "notes": "2026-05-08 VM app QA started from a manual/running SysMain baseline, applied the tweak, verified the stopped target state, rolled back, and detected the restored running state.",
           "evidence_ids": [
             "repo-tweak-provenance",
             "app-provider",
             "engine-implementation",
-            "vm-power.disable-superfetch-app-qa-20260507"
+            "vm-power.disable-superfetch-app-qa-20260507",
+            "vm-power.disable-superfetch-app-qa-clean-baseline-20260508"
           ]
         }
       ],
@@ -61310,6 +61360,21 @@
           "supports": [
             "value",
             "behavior",
+            "ui-mapping"
+          ],
+          "origin": "VM test / probe"
+        },
+        {
+          "evidence_id": "vm-power.disable-superfetch-app-qa-clean-baseline-20260508",
+          "kind": "vm-test",
+          "title": "RegProbe app QA clean-baseline mutation proof for power.disable-superfetch",
+          "location": "evidence/captures/power-disable-superfetch-app-qa-clean-baseline-20260508.json",
+          "summary": "Status ok-gated-override: QA-only gated mutation override used; apply/verify path completed and rollback restored the running SysMain baseline. The VM baseline started with SysMain running, the app detected the not-applied state, applied the stop command, verified the optimized target, rolled back with sc start SysMain, and detected the restored running state.",
+          "strength": "high",
+          "supports": [
+            "value",
+            "behavior",
+            "rollback",
             "ui-mapping"
           ],
           "origin": "VM test / probe"

@@ -8,6 +8,7 @@ namespace RegProbe.Engine.Tweaks.Commands.Performance;
 public sealed class DisableSuperfetchTweak : CommandTweak
 {
     private const string ScExe = "sc.exe";
+    private static readonly TimeSpan ServiceTransitionSettleDelay = TimeSpan.FromSeconds(6);
 
     public DisableSuperfetchTweak(ICommandRunner commandRunner)
         : base(
@@ -18,6 +19,10 @@ public sealed class DisableSuperfetchTweak : CommandTweak
             commandRunner: commandRunner)
     {
     }
+
+    protected override TimeSpan ApplySettleDelay => ServiceTransitionSettleDelay;
+
+    protected override TimeSpan RollbackSettleDelay => ServiceTransitionSettleDelay;
 
     protected override CommandRequest GetDetectCommand()
     {

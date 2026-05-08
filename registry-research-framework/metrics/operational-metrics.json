@@ -2,9 +2,9 @@
   "total_discovered": 12402,
   "total_triaged": 3521,
   "total_discarded": 8881,
-  "total_blocked": 3,
-  "total_promoted": 256,
-  "total_rejected": 90,
+  "total_blocked": 0,
+  "total_promoted": 257,
+  "total_rejected": 92,
   "revalidation_pending": 0,
   "stale_count": 0,
   "blocker_breakdown": {
@@ -17,8 +17,6 @@
     "This is a one-shot destructive cleanup action without rollback.": 1,
     "This is a one-shot troubleshooting action without rollback.": 1,
     "This is an on-demand maintenance action with no rollback support.": 1,
-    "app-qa-access-denied": 1,
-    "app-qa-clean-baseline-needed": 1,
     "audio-execution-required-no-current-build-registry-seeding-path": 1,
     "conflicting-sources": 2,
     "dpc-watchdog-control-intentional-hold-no-current-build-pivot": 1,
@@ -36,7 +34,7 @@
     "long-dpc-threshold-intentional-hold-no-current-build-pivot": 1,
     "long-dpc-threshold-wpr-boot-zero-exact-target-hits-current-build": 1,
     "no-primary-current-build-doc": 11,
-    "no-runtime-proof": 2,
+    "no-runtime-proof": 4,
     "power-session-watchdog-timeouts-no-current-build-registry-seeding-caller": 1,
     "power-session-watchdog-timeouts-sleep-side-exact-registry-read-missing": 1,
     "powerrequestoverride-static-context-adjacent-not-leaf-specific": 1,
@@ -55,7 +53,6 @@
     "ttmenabled-boot-unsafe-on-isolated-pilot-profile": 1,
     "ttmenabled-reader-open-question": 1,
     "validation-proof": 17,
-    "vm-firmware-hibernation-unsupported": 1,
     "win32-callout-watchdog-bugcheck-semantics-unproven": 1,
     "win32k-callout-watchdog-helper-query-only-not-boot-consumer": 1,
     "win32k-callout-watchdog-intentional-hold-no-current-build-pivot": 1,
@@ -63,5 +60,5 @@
   },
   "bench_completion_rate": 1.0,
   "missing_docs_count": 17,
-  "generated_at": "2026-05-07T23:27:59.599183Z"
+  "generated_at": "2026-05-08T08:47:03.072528Z"
 }
