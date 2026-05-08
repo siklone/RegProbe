@@ -1,0 +1,1537 @@
+{
+  "schema_version": "1.0",
+  "metadata": {
+    "generated_utc": "2026-05-08T09:33:54.712972Z",
+    "campaign_id": "promotion-eligible-final-decision-wave-1",
+    "total_records": 7,
+    "source_gate": "research/promotion-gates.json",
+    "preconditions": {
+      "blocked_count": 0,
+      "unclassified_rejected": 0,
+      "all_records_confidence_high": true,
+      "all_records_next_missing_layer_none": true
+    }
+  },
+  "summary_stats": {
+    "promote_candidates": 3,
+    "promote_with_warnings_candidates": 1,
+    "conditional_promote_candidates": 1,
+    "hold_candidates": 2,
+    "reject_candidates": 0,
+    "verdict_counts": {
+      "CONDITIONAL-PROMOTE": 1,
+      "INTENTIONAL-HOLD-CLOSED": 2,
+      "PROMOTE": 3,
+      "PROMOTE-WITH-WARNINGS": 1
+    },
+    "risk_counts": {
+      "critical-security": 1,
+      "high": 1,
+      "low": 2,
+      "low-medium": 1,
+      "medium": 1,
+      "medium-high": 1
+    },
+    "requires_manual_vm_check": [
+      "power.control.hibernate-enabled",
+      "power.control.lid-reliability-state"
+    ],
+    "requires_app_mapping": [
+      "power.control.hibernate-enabled"
+    ]
+  },
+  "records": [
+    {
+      "record_id": "power.control.class1-initial-unpark-count",
+      "current_state": "promotion-eligible",
+      "source_file": "research/records/power.control.class1-initial-unpark-count.json",
+      "evidence_status": {
+        "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+        "value_name": "Class1InitialUnparkCount",
+        "value_type": "REG_DWORD",
+        "evidence_count": 9,
+        "has_etw_bundle": true,
+        "has_ghidra_xref": true,
+        "has_procmon_trace": true,
+        "has_reboot_evidence": true,
+        "official_doc_ref": "Docs/power/power.md",
+        "evidence_refs": [
+          {
+            "id": "repo-power-doc",
+            "kind": "repo-doc",
+            "title": "Repo power notes for docs-first power-control values",
+            "location": "Docs/power/power.md",
+            "strength": "high",
+            "supports": [
+              "path",
+              "value",
+              "behavior",
+              "version-scope"
+            ]
+          },
+          {
+            "id": "vm-power-control-phase0-20260329",
+            "kind": "registry-observation",
+            "title": "Win25H2Clean 96-key phase-0 existence batch",
+            "location": "evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json",
+            "strength": "high",
+            "supports": [
+              "path",
+              "value",
+              "default",
+              "version-scope"
+            ]
+          },
+          {
+            "id": "static-power-control-string-20260329",
+            "kind": "repo-doc",
+            "title": "Shared docs-first string triage for current-build ntoskrnl",
+            "location": "evidence/files/vm-tooling-staging/power-control-docs-first-string-20260329-102348/results.json and research/notes/power-control-docs-first-value-exists-static-triage-20260329.md",
+            "strength": "high",
+            "supports": [
+              "path",
+              "value",
+              "version-scope"
+            ]
+          },
+          {
+            "id": "ghidra-power-control-docs-first-20260329",
+            "kind": "decompilation",
+            "title": "Shared Ghidra xref batch for docs-first power-control values",
+            "location": "evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md and evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json and research/notes/power-control-docs-first-ghidra-review-20260329.md",
+            "strength": "high",
+            "supports": [
+              "path",
+              "value",
+              "behavior",
+              "version-scope"
+            ]
+          },
+          {
+            "id": "vm-power-control-runtime-batch-20260329",
+            "kind": "procmon-trace",
+            "title": "Shared clean-baseline guest-processed stepwise Procmon boot log for docs-first power-control values",
+            "location": "evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json and evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/results.json and research/notes/power-control-docs-first-stepwise-runtime-capture-20260329.md and evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv",
+            "strength": "medium",
+            "supports": [
+              "behavior",
+              "risk",
+              "version-scope"
+            ]
+          },
+          {
+            "id": "vm-power-control-postboot-trigger-20260329",
+            "kind": "procmon-trace",
+            "title": "Guest-processed post-boot Procmon trigger batch for remaining docs-first power-control values",
+            "location": "evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-class1-initial-unpark-count/summary.json and evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-class1-initial-unpark-count/power-control-class1-initial-unpark-count-postboot-trigger.hits.csv and research/notes/power-control-docs-first-postboot-trigger-capture-20260329.md",
+            "strength": "medium",
+            "supports": [
+              "behavior",
+              "risk",
+              "version-scope"
+            ]
+          },
+          {
+            "id": "vm-power-control-lightweight-runtime-20260330",
+            "kind": "etw-trace",
+            "title": "Tools-hardened lightweight ETW follow-up for remaining docs-first power-control values",
+            "location": "evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-024603/summary.json and evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-024603/results.json and research/notes/power-control-lightweight-runtime-follow-up-20260330.md",
+            "strength": "high",
+            "supports": [
+              "behavior",
+              "risk",
+              "version-scope"
+            ]
+          },
+          {
+            "id": "vm-power.control.class1-initial-unpark-count-etw-stackwalk-attempt-20260424i",
+            "kind": "etw-trace",
+            "title": "Bounded ETW stackwalk timeout receipt",
+            "location": "evidence/raw/etw-stackwalk/power.control.class1-initial-unpark-count-etw-20260424i/power.control.class1-initial-unpark-count-etw-20260424i-summary.json and evidence/raw/etw-stackwalk/power.control.class1-initial-unpark-count-etw-20260424i/power.control.class1-initial-unpark-count-etw-20260424i-stage.json and evidence/captures/power-control-class1-initial-unpark-count-etw-stackwalk-attempt-20260424.json",
+            "strength": "medium",
+            "supports": [
+              "runtime-lane-review",
+              "transport-blocker"
+            ]
+          },
+          {
+            "id": "vm-power.control.class1-initial-unpark-count-etw-qga-unblock-20260507",
+            "kind": "etw-trace",
+            "title": "QGA-first ETW stackwalk runtime receipt for Class1InitialUnparkCount",
+            "location": "evidence/captures/power-control-class1-initial-unpark-count-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/power-control-class1-initial-unpark-count-etw-qga-unblock-20260507/power-control-class1-initial-unpark-count-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/power-control-class1-initial-unpark-count-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/power-control-class1-initial-unpark-count-etw-qga-unblock-20260507/power-control-class1-initial-unpark-count-etw-qga-unblock-20260507.etl",
+            "strength": "high",
+            "supports": [
+              "runtime-observation",
+              "tooling-fix",
+              "path",
+              "value",
+              "version-scope"
+            ]
+          }
+        ]
+      },
+      "app_mapping": {
+        "status": "matches-research",
+        "tweak_origin": "legacy-curated",
+        "component": "Kernel Power Manager",
+        "affected_processes": [
+          "System",
+          "ntoskrnl.exe"
+        ],
+        "interaction_surface": "kernel power tuning; user-visible only through latency or power behavior"
+      },
+      "risk_assessment": {
+        "classification": "medium",
+        "reversibility": true,
+        "known_side_effects": [
+          "CPU parking behavior can be hardware and power-plan dependent."
+        ],
+        "vm_specific_considerations": "VM vCPU scheduling may hide or distort the real hardware effect.",
+        "security_flag": "standard",
+        "score_breakdown": {
+          "static_evidence_strength": 3,
+          "runtime_evidence_strength": 4,
+          "rollback_clarity": 5,
+          "blast_radius": 2,
+          "tweak_suitability": 3,
+          "privilege_complexity": 3,
+          "build_specificity": 5,
+          "sibling_expansion_value": 4,
+          "bench_priority": 5,
+          "overall_score": 3.78,
+          "next_missing_layer": "none"
+        }
+      },
+      "rollback_plan": {
+        "mechanism": "Restore `Class1InitialUnparkCount` under `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power` to `64`.",
+        "validation": "record-restore-story",
+        "rollback_value": {
+          "source": "windows_defaults",
+          "profile_id": "Observed Win25H2Clean baseline",
+          "label": "Observed Win25H2Clean baseline",
+          "applies_to": "Current RegProbe-Baseline-ToolsHardened-20260330 research baseline",
+          "state_kind": "value",
+          "value": 64,
+          "rationale": "Keep the currently observed baseline value (64) while this raw control stays in research packaging only.",
+          "evidence_ids": [
+            "vm-power-control-phase0-20260329"
+          ],
+          "rollback_strategy": "restore_default"
+        }
+      },
+      "decision_options": [
+        {
+          "verdict": "PROMOTE",
+          "apply_allowed": true,
+          "condition": "Use only if risk, app mapping, rollback, and claim-boundary checks remain acceptable."
+        },
+        {
+          "verdict": "PROMOTE-WITH-WARNINGS",
+          "apply_allowed": true,
+          "condition": "Use when evidence is complete but the card needs hardware, VM, security, or workload warnings."
+        },
+        {
+          "verdict": "CONDITIONAL-PROMOTE",
+          "apply_allowed": true,
+          "condition": "Use when runtime preflight or missing app mapping must gate the card."
+        },
+        {
+          "verdict": "INTENTIONAL-HOLD-CLOSED",
+          "apply_allowed": false,
+          "reason": "Use when the evidence is complete but the product should not expose the action yet."
+        },
+        {
+          "verdict": "EVIDENCE-BACKED-REJECTED",
+          "apply_allowed": false,
+          "reason": "Use when the correct evidence lane proves a platform limit, deprecation, or NotApplicable result."
+        },
+        {
+          "verdict": "RECOMMENDED",
+          "apply_allowed": true,
+          "condition": "Ship with a hardware-dependent claim boundary; do not claim a universal performance win.",
+          "reason": null,
+          "maps_to": "PROMOTE"
+        }
+      ],
+      "recommended_action": {
+        "verdict": "PROMOTE",
+        "apply_allowed": true,
+        "condition": "Ship with a hardware-dependent claim boundary; do not claim a universal performance win."
+      },
+      "requires_manual_vm_verification": false,
+      "requires_app_mapping": false,
+      "rationale": "Class A evidence, rollback story, app mapping, and a bounded power-tuning blast radius make this decision-ready for promotion with conservative wording."
+    },
+    {
+      "record_id": "power.control.hibernate-enabled",
+      "current_state": "promotion-eligible",
+      "source_file": "research/records/power.control.hibernate-enabled.json",
+      "evidence_status": {
+        "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+        "value_name": "HibernateEnabled",
+        "value_type": "REG_DWORD",
+        "evidence_count": 6,
+        "has_etw_bundle": false,
+        "has_ghidra_xref": true,
+        "has_procmon_trace": true,
+        "has_reboot_evidence": true,
+        "official_doc_ref": "Docs/power/power.md",
+        "evidence_refs": [
+          {
+            "id": "repo-power-doc",
+            "kind": "repo-doc",
+            "title": "Repo power notes for docs-first power-control values",
+            "location": "Docs/power/power.md",
+            "strength": "high",
+            "supports": [
+              "path",
+              "value",
+              "behavior",
+              "version-scope"
+            ]
+          },
+          {
+            "id": "vm-power-control-phase0-20260329",
+            "kind": "registry-observation",
+            "title": "Win25H2Clean 96-key phase-0 existence batch",
+            "location": "evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json",
+            "strength": "high",
+            "supports": [
+              "path",
+              "value",
+              "default",
+              "version-scope"
+            ]
+          },
+          {
+            "id": "static-power-control-string-20260329",
+            "kind": "repo-doc",
+            "title": "Shared docs-first string triage for current-build ntoskrnl",
+            "location": "evidence/files/vm-tooling-staging/power-control-docs-first-string-20260329-102348/results.json and research/notes/power-control-docs-first-value-exists-static-triage-20260329.md",
+            "strength": "high",
+            "supports": [
+              "path",
+              "value",
+              "version-scope"
+            ]
+          },
+          {
+            "id": "ghidra-power-control-docs-first-20260329",
+            "kind": "decompilation",
+            "title": "Shared Ghidra xref batch for docs-first power-control values",
+            "location": "evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md and evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json and research/notes/power-control-docs-first-ghidra-review-20260329.md",
+            "strength": "high",
+            "supports": [
+              "path",
+              "value",
+              "behavior",
+              "version-scope"
+            ]
+          },
+          {
+            "id": "vm-power-control-runtime-batch-20260329",
+            "kind": "procmon-trace",
+            "title": "Shared clean-baseline guest-processed stepwise Procmon boot log for docs-first power-control values",
+            "location": "evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json and evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/results.json and research/notes/power-control-docs-first-stepwise-runtime-capture-20260329.md and evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv",
+            "strength": "high",
+            "supports": [
+              "behavior",
+              "risk",
+              "version-scope"
+            ]
+          },
+          {
+            "id": "kvm-machine-scope-revalidation-batch-20260505",
+            "kind": "runtime-read",
+            "title": "KVM machine-scope current-state revalidation batch",
+            "location": "registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json",
+            "strength": "medium",
+            "supports": [
+              "path",
+              "value",
+              "runtime-read",
+              "version-scope"
+            ]
+          }
+        ]
+      },
+      "app_mapping": {
+        "status": "not-mapped",
+        "tweak_origin": "research-derived",
+        "component": "Power Manager / boot hibernation state",
+        "affected_processes": [
+          "smss.exe",
+          "System",
+          "powercfg.exe"
+        ],
+        "interaction_surface": "system sleep/hibernate availability and hiberfil.sys behavior"
+      },
+      "risk_assessment": {
+        "classification": "low",
+        "reversibility": true,
+        "known_side_effects": [
+          "No useful effect when firmware reports S4 unsupported."
+        ],
+        "vm_specific_considerations": "Current VM lanes may report hibernation unsupported; a preflight powercfg /a check is required.",
+        "security_flag": "standard",
+        "score_breakdown": {
+          "static_evidence_strength": 3,
+          "runtime_evidence_strength": 3,
+          "rollback_clarity": 5,
+          "blast_radius": 2,
+          "tweak_suitability": 2,
+          "privilege_complexity": 3,
+          "build_specificity": 5,
+          "sibling_expansion_value": 4,
+          "bench_priority": 5,
+          "overall_score": 3.56,
+          "next_missing_layer": "none"
+        }
+      },
+      "rollback_plan": {
+        "mechanism": "Restore `HibernateEnabled` under `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power` to `0`.",
+        "validation": "record-restore-story",
+        "rollback_value": {
+          "source": "windows_defaults",
+          "profile_id": "Observed Win25H2Clean baseline",
+          "label": "Observed Win25H2Clean baseline",
+          "applies_to": "Current RegProbe-Baseline-Clean-20260329 research baseline",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Keep the currently observed baseline value (0) while this raw control stays in research packaging only.",
+          "evidence_ids": [
+            "vm-power-control-phase0-20260329"
+          ],
+          "rollback_strategy": "restore_default"
+        }
+      },
+      "decision_options": [
+        {
+          "verdict": "PROMOTE",
+          "apply_allowed": true,
+          "condition": "Use only if risk, app mapping, rollback, and claim-boundary checks remain acceptable."
+        },
+        {
+          "verdict": "PROMOTE-WITH-WARNINGS",
+          "apply_allowed": true,
+          "condition": "Use when evidence is complete but the card needs hardware, VM, security, or workload warnings."
+        },
+        {
+          "verdict": "CONDITIONAL-PROMOTE",
+          "apply_allowed": true,
+          "condition": "Use when runtime preflight or missing app mapping must gate the card."
+        },
+        {
+          "verdict": "INTENTIONAL-HOLD-CLOSED",
+          "apply_allowed": false,
+          "reason": "Use when the evidence is complete but the product should not expose the action yet."
+        },
+        {
+          "verdict": "EVIDENCE-BACKED-REJECTED",
+          "apply_allowed": false,
+          "reason": "Use when the correct evidence lane proves a platform limit, deprecation, or NotApplicable result."
+        },
+        {
+          "verdict": "RECOMMENDED",
+          "apply_allowed": true,
+          "condition": "Requires app mapping plus a runtime pre-check that powercfg /availablesleepstates reports S4 support; otherwise show NotApplicable.",
+          "reason": null,
+          "maps_to": "CONDITIONAL-PROMOTE"
+        }
+      ],
+      "recommended_action": {
+        "verdict": "CONDITIONAL-PROMOTE",
+        "apply_allowed": true,
+        "condition": "Requires app mapping plus a runtime pre-check that powercfg /availablesleepstates reports S4 support; otherwise show NotApplicable."
+      },
+      "requires_manual_vm_verification": true,
+      "requires_app_mapping": true,
+      "rationale": "The raw value has evidence, but product promotion should be conditional because platform firmware support gates the real behavior."
+    },
+    {
+      "record_id": "power.control.lid-reliability-state",
+      "current_state": "promotion-eligible",
+      "source_file": "research/records/power.control.lid-reliability-state.json",
+      "evidence_status": {
+        "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+        "value_name": "LidReliabilityState",
+        "value_type": "REG_DWORD",
+        "evidence_count": 7,
+        "has_etw_bundle": true,
+        "has_ghidra_xref": true,
+        "has_procmon_trace": true,
+        "has_reboot_evidence": true,
+        "official_doc_ref": "Docs/power/power.md",
+        "evidence_refs": [
+          {
+            "id": "repo-power-doc",
+            "kind": "repo-doc",
+            "title": "Repo power notes for docs-first power-control values",
+            "location": "Docs/power/power.md",
+            "strength": "high",
+            "supports": [
+              "path",
+              "value",
+              "behavior",
+              "version-scope"
+            ]
+          },
+          {
+            "id": "vm-power-control-phase0-20260329",
+            "kind": "registry-observation",
+            "title": "Win25H2Clean 96-key phase-0 existence batch",
+            "location": "evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json",
+            "strength": "high",
+            "supports": [
+              "path",
+              "value",
+              "default",
+              "version-scope"
+            ]
+          },
+          {
+            "id": "static-power-control-string-20260329",
+            "kind": "repo-doc",
+            "title": "Shared docs-first string triage for current-build ntoskrnl",
+            "location": "evidence/files/vm-tooling-staging/power-control-docs-first-string-20260329-102348/results.json and research/notes/power-control-docs-first-value-exists-static-triage-20260329.md",
+            "strength": "high",
+            "supports": [
+              "path",
+              "value",
+              "version-scope"
+            ]
+          },
+          {
+            "id": "ghidra-power-control-docs-first-20260329",
+            "kind": "decompilation",
+            "title": "Shared Ghidra xref batch for docs-first power-control values",
+            "location": "evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md and evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json and research/notes/power-control-docs-first-ghidra-review-20260329.md",
+            "strength": "high",
+            "supports": [
+              "path",
+              "value",
+              "behavior",
+              "version-scope"
+            ]
+          },
+          {
+            "id": "vm-power-control-runtime-batch-20260329",
+            "kind": "procmon-trace",
+            "title": "Shared clean-baseline guest-processed stepwise Procmon boot log for docs-first power-control values",
+            "location": "evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json and evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/results.json and research/notes/power-control-docs-first-stepwise-runtime-capture-20260329.md and evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv",
+            "strength": "high",
+            "supports": [
+              "behavior",
+              "risk",
+              "version-scope"
+            ]
+          },
+          {
+            "id": "vm-power.control.lid-reliability-state-etw-stackwalk-attempt-20260424i",
+            "kind": "etw-trace",
+            "title": "Bounded ETW stackwalk timeout receipt",
+            "location": "evidence/raw/etw-stackwalk/power.control.lid-reliability-state-etw-20260424i/power.control.lid-reliability-state-etw-20260424i-summary.json and evidence/raw/etw-stackwalk/power.control.lid-reliability-state-etw-20260424i/power.control.lid-reliability-state-etw-20260424i-stage.json and evidence/captures/power-control-lid-reliability-state-etw-stackwalk-attempt-20260424.json",
+            "strength": "medium",
+            "supports": [
+              "runtime-lane-review",
+              "transport-blocker"
+            ]
+          },
+          {
+            "id": "vm-power.control.lid-reliability-state-etw-qga-unblock-20260507",
+            "kind": "etw-trace",
+            "title": "QGA-first ETW stackwalk runtime receipt for LidReliabilityState",
+            "location": "evidence/captures/power-control-lid-reliability-state-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/power-control-lid-reliability-state-etw-qga-unblock-20260507/power-control-lid-reliability-state-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/power-control-lid-reliability-state-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/power-control-lid-reliability-state-etw-qga-unblock-20260507/power-control-lid-reliability-state-etw-qga-unblock-20260507.etl",
+            "strength": "high",
+            "supports": [
+              "runtime-observation",
+              "tooling-fix",
+              "path",
+              "value",
+              "version-scope"
+            ]
+          }
+        ]
+      },
+      "app_mapping": {
+        "status": "matches-research",
+        "tweak_origin": "legacy-curated",
+        "component": "ACPI lid / Power Policy Manager",
+        "affected_processes": [
+          "System",
+          "ntoskrnl.exe"
+        ],
+        "interaction_surface": "lid-close reliability handling; hardware-dependent on laptops"
+      },
+      "risk_assessment": {
+        "classification": "low-medium",
+        "reversibility": true,
+        "known_side_effects": [
+          "Desktop and VM systems without an ACPI lid device may see no effect."
+        ],
+        "vm_specific_considerations": "VMs typically lack a lid device, so product wording must mark the setting hardware-dependent.",
+        "security_flag": "standard",
+        "score_breakdown": {
+          "static_evidence_strength": 3,
+          "runtime_evidence_strength": 4,
+          "rollback_clarity": 5,
+          "blast_radius": 2,
+          "tweak_suitability": 3,
+          "privilege_complexity": 3,
+          "build_specificity": 5,
+          "sibling_expansion_value": 4,
+          "bench_priority": 5,
+          "overall_score": 3.78,
+          "next_missing_layer": "none"
+        }
+      },
+      "rollback_plan": {
+        "mechanism": "Restore `LidReliabilityState` under `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power` to `1`.",
+        "validation": "record-restore-story",
+        "rollback_value": {
+          "source": "windows_defaults",
+          "profile_id": "Observed Win25H2Clean baseline",
+          "label": "Observed Win25H2Clean baseline",
+          "applies_to": "Current RegProbe-Baseline-Clean-20260329 research baseline",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "Keep the currently observed baseline value (1) while this raw control stays in research packaging only.",
+          "evidence_ids": [
+            "vm-power-control-phase0-20260329"
+          ],
+          "rollback_strategy": "restore_default"
+        }
+      },
+      "decision_options": [
+        {
+          "verdict": "PROMOTE",
+          "apply_allowed": true,
+          "condition": "Use only if risk, app mapping, rollback, and claim-boundary checks remain acceptable."
+        },
+        {
+          "verdict": "PROMOTE-WITH-WARNINGS",
+          "apply_allowed": true,
+          "condition": "Use when evidence is complete but the card needs hardware, VM, security, or workload warnings."
+        },
+        {
+          "verdict": "CONDITIONAL-PROMOTE",
+          "apply_allowed": true,
+          "condition": "Use when runtime preflight or missing app mapping must gate the card."
+        },
+        {
+          "verdict": "INTENTIONAL-HOLD-CLOSED",
+          "apply_allowed": false,
+          "reason": "Use when the evidence is complete but the product should not expose the action yet."
+        },
+        {
+          "verdict": "EVIDENCE-BACKED-REJECTED",
+          "apply_allowed": false,
+          "reason": "Use when the correct evidence lane proves a platform limit, deprecation, or NotApplicable result."
+        },
+        {
+          "verdict": "RECOMMENDED",
+          "apply_allowed": true,
+          "condition": "Ship with a hardware-dependent applicability note for laptop/ACPI lid devices.",
+          "reason": null,
+          "maps_to": "PROMOTE"
+        }
+      ],
+      "recommended_action": {
+        "verdict": "PROMOTE",
+        "apply_allowed": true,
+        "condition": "Ship with a hardware-dependent applicability note for laptop/ACPI lid devices."
+      },
+      "requires_manual_vm_verification": true,
+      "requires_app_mapping": false,
+      "rationale": "Evidence and rollback are clean, and inert behavior on non-lid systems can be handled as applicability rather than a blocker."
+    },
+    {
+      "record_id": "power.control.mf-buffering-threshold",
+      "current_state": "promotion-eligible",
+      "source_file": "research/records/power.control.mf-buffering-threshold.json",
+      "evidence_status": {
+        "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+        "value_name": "MfBufferingThreshold",
+        "value_type": "REG_DWORD",
+        "evidence_count": 9,
+        "has_etw_bundle": true,
+        "has_ghidra_xref": true,
+        "has_procmon_trace": true,
+        "has_reboot_evidence": true,
+        "official_doc_ref": "Docs/power/power.md",
+        "evidence_refs": [
+          {
+            "id": "repo-power-doc",
+            "kind": "repo-doc",
+            "title": "Repo power notes for docs-first power-control values",
+            "location": "Docs/power/power.md",
+            "strength": "high",
+            "supports": [
+              "path",
+              "value",
+              "behavior",
+              "version-scope"
+            ]
+          },
+          {
+            "id": "vm-power-control-phase0-20260329",
+            "kind": "registry-observation",
+            "title": "Win25H2Clean 96-key phase-0 existence batch",
+            "location": "evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json",
+            "strength": "high",
+            "supports": [
+              "path",
+              "value",
+              "default",
+              "version-scope"
+            ]
+          },
+          {
+            "id": "static-power-control-string-20260329",
+            "kind": "repo-doc",
+            "title": "Shared docs-first string triage for current-build ntoskrnl",
+            "location": "evidence/files/vm-tooling-staging/power-control-docs-first-string-20260329-102348/results.json and research/notes/power-control-docs-first-value-exists-static-triage-20260329.md",
+            "strength": "high",
+            "supports": [
+              "path",
+              "value",
+              "version-scope"
+            ]
+          },
+          {
+            "id": "ghidra-power-control-docs-first-20260329",
+            "kind": "decompilation",
+            "title": "Shared Ghidra xref batch for docs-first power-control values",
+            "location": "evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md and evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json and research/notes/power-control-docs-first-ghidra-review-20260329.md",
+            "strength": "high",
+            "supports": [
+              "path",
+              "value",
+              "behavior",
+              "version-scope"
+            ]
+          },
+          {
+            "id": "vm-power-control-runtime-batch-20260329",
+            "kind": "procmon-trace",
+            "title": "Shared clean-baseline guest-processed stepwise Procmon boot log for docs-first power-control values",
+            "location": "evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json and evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/results.json and research/notes/power-control-docs-first-stepwise-runtime-capture-20260329.md and evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv",
+            "strength": "medium",
+            "supports": [
+              "behavior",
+              "risk",
+              "version-scope"
+            ]
+          },
+          {
+            "id": "vm-power-control-postboot-trigger-20260329",
+            "kind": "procmon-trace",
+            "title": "Guest-processed post-boot Procmon trigger batch for remaining docs-first power-control values",
+            "location": "evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-mf-buffering-threshold/summary.json and evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-mf-buffering-threshold/power-control-mf-buffering-threshold-postboot-trigger.hits.csv and research/notes/power-control-docs-first-postboot-trigger-capture-20260329.md",
+            "strength": "medium",
+            "supports": [
+              "behavior",
+              "risk",
+              "version-scope"
+            ]
+          },
+          {
+            "id": "vm-power-control-lightweight-runtime-remaining-20260330",
+            "kind": "etw-trace",
+            "title": "Tools-hardened lightweight ETW I/O burst follow-up for remaining power-control values",
+            "location": "evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-033416/summary.json and evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-033416/results.json and research/notes/power-control-lightweight-runtime-remaining-two-20260330.md",
+            "strength": "high",
+            "supports": [
+              "behavior",
+              "risk",
+              "version-scope"
+            ]
+          },
+          {
+            "id": "vm-power.control.mf-buffering-threshold-etw-stackwalk-attempt-20260424i",
+            "kind": "etw-trace",
+            "title": "Bounded ETW stackwalk timeout receipt",
+            "location": "evidence/raw/etw-stackwalk/power.control.mf-buffering-threshold-etw-20260424i/power.control.mf-buffering-threshold-etw-20260424i-summary.json and evidence/raw/etw-stackwalk/power.control.mf-buffering-threshold-etw-20260424i/power.control.mf-buffering-threshold-etw-20260424i-stage.json and evidence/captures/power-control-mf-buffering-threshold-etw-stackwalk-attempt-20260424.json",
+            "strength": "medium",
+            "supports": [
+              "runtime-lane-review",
+              "transport-blocker"
+            ]
+          },
+          {
+            "id": "vm-power.control.mf-buffering-threshold-etw-qga-unblock-20260507",
+            "kind": "etw-trace",
+            "title": "QGA-first ETW stackwalk runtime receipt for MfBufferingThreshold",
+            "location": "evidence/captures/power-control-mf-buffering-threshold-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/power-control-mf-buffering-threshold-etw-qga-unblock-20260507/power-control-mf-buffering-threshold-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/power-control-mf-buffering-threshold-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/power-control-mf-buffering-threshold-etw-qga-unblock-20260507/power-control-mf-buffering-threshold-etw-qga-unblock-20260507.etl",
+            "strength": "high",
+            "supports": [
+              "runtime-observation",
+              "tooling-fix",
+              "path",
+              "value",
+              "version-scope"
+            ]
+          }
+        ]
+      },
+      "app_mapping": {
+        "status": "matches-research",
+        "tweak_origin": "legacy-curated",
+        "component": "Power Manager / Media Foundation-adjacent buffering",
+        "affected_processes": [
+          "System",
+          "media playback apps"
+        ],
+        "interaction_surface": "media playback buffering behavior"
+      },
+      "risk_assessment": {
+        "classification": "low",
+        "reversibility": true,
+        "known_side_effects": [
+          "Effect depends on the active media stack and workload."
+        ],
+        "vm_specific_considerations": "VM validation can prove read/write safety, but media playback benefit remains workload-specific.",
+        "security_flag": "standard",
+        "score_breakdown": {
+          "static_evidence_strength": 3,
+          "runtime_evidence_strength": 4,
+          "rollback_clarity": 5,
+          "blast_radius": 2,
+          "tweak_suitability": 3,
+          "privilege_complexity": 3,
+          "build_specificity": 5,
+          "sibling_expansion_value": 4,
+          "bench_priority": 5,
+          "overall_score": 3.78,
+          "next_missing_layer": "none"
+        }
+      },
+      "rollback_plan": {
+        "mechanism": "Restore `MfBufferingThreshold` under `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power` to `0`.",
+        "validation": "record-restore-story",
+        "rollback_value": {
+          "source": "windows_defaults",
+          "profile_id": "Observed Win25H2Clean baseline",
+          "label": "Observed Win25H2Clean baseline",
+          "applies_to": "Current RegProbe-Baseline-ToolsHardened-20260330 research baseline",
+          "state_kind": "value",
+          "value": 0,
+          "rationale": "Keep the currently observed baseline value (0) while this raw control stays in research packaging only.",
+          "evidence_ids": [
+            "vm-power-control-phase0-20260329"
+          ],
+          "rollback_strategy": "restore_default"
+        }
+      },
+      "decision_options": [
+        {
+          "verdict": "PROMOTE",
+          "apply_allowed": true,
+          "condition": "Use only if risk, app mapping, rollback, and claim-boundary checks remain acceptable."
+        },
+        {
+          "verdict": "PROMOTE-WITH-WARNINGS",
+          "apply_allowed": true,
+          "condition": "Use when evidence is complete but the card needs hardware, VM, security, or workload warnings."
+        },
+        {
+          "verdict": "CONDITIONAL-PROMOTE",
+          "apply_allowed": true,
+          "condition": "Use when runtime preflight or missing app mapping must gate the card."
+        },
+        {
+          "verdict": "INTENTIONAL-HOLD-CLOSED",
+          "apply_allowed": false,
+          "reason": "Use when the evidence is complete but the product should not expose the action yet."
+        },
+        {
+          "verdict": "EVIDENCE-BACKED-REJECTED",
+          "apply_allowed": false,
+          "reason": "Use when the correct evidence lane proves a platform limit, deprecation, or NotApplicable result."
+        },
+        {
+          "verdict": "RECOMMENDED",
+          "apply_allowed": true,
+          "condition": "Ship as reversible media/power tuning with no universal benchmark claim.",
+          "reason": null,
+          "maps_to": "PROMOTE"
+        }
+      ],
+      "recommended_action": {
+        "verdict": "PROMOTE",
+        "apply_allowed": true,
+        "condition": "Ship as reversible media/power tuning with no universal benchmark claim."
+      },
+      "requires_manual_vm_verification": false,
+      "requires_app_mapping": false,
+      "rationale": "Low blast radius, app mapping, rollback, and runtime evidence make this a straightforward conservative promotion candidate."
+    },
+    {
+      "record_id": "power.control.perf-calculate-actual-utilization",
+      "current_state": "promotion-eligible",
+      "source_file": "research/records/power.control.perf-calculate-actual-utilization.json",
+      "evidence_status": {
+        "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+        "value_name": "PerfCalculateActualUtilization",
+        "value_type": "REG_DWORD",
+        "evidence_count": 9,
+        "has_etw_bundle": true,
+        "has_ghidra_xref": true,
+        "has_procmon_trace": true,
+        "has_reboot_evidence": true,
+        "official_doc_ref": "Docs/power/power.md",
+        "evidence_refs": [
+          {
+            "id": "repo-power-doc",
+            "kind": "repo-doc",
+            "title": "Repo power notes for docs-first power-control values",
+            "location": "Docs/power/power.md",
+            "strength": "high",
+            "supports": [
+              "path",
+              "value",
+              "behavior",
+              "version-scope"
+            ]
+          },
+          {
+            "id": "vm-power-control-phase0-20260329",
+            "kind": "registry-observation",
+            "title": "Win25H2Clean 96-key phase-0 existence batch",
+            "location": "evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json",
+            "strength": "high",
+            "supports": [
+              "path",
+              "value",
+              "default",
+              "version-scope"
+            ]
+          },
+          {
+            "id": "static-power-control-string-20260329",
+            "kind": "repo-doc",
+            "title": "Shared docs-first string triage for current-build ntoskrnl",
+            "location": "evidence/files/vm-tooling-staging/power-control-docs-first-string-20260329-102348/results.json and research/notes/power-control-docs-first-value-exists-static-triage-20260329.md",
+            "strength": "high",
+            "supports": [
+              "path",
+              "value",
+              "version-scope"
+            ]
+          },
+          {
+            "id": "ghidra-power-control-docs-first-20260329",
+            "kind": "decompilation",
+            "title": "Shared Ghidra xref batch for docs-first power-control values",
+            "location": "evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/ghidra-matches.md and evidence/raw/ghidra/power-control-docs-first-ntoskrnl-20260329-134435/evidence.json and research/notes/power-control-docs-first-ghidra-review-20260329.md",
+            "strength": "high",
+            "supports": [
+              "path",
+              "value",
+              "behavior",
+              "version-scope"
+            ]
+          },
+          {
+            "id": "vm-power-control-runtime-batch-20260329",
+            "kind": "procmon-trace",
+            "title": "Shared clean-baseline guest-processed stepwise Procmon boot log for docs-first power-control values",
+            "location": "evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/summary.json and evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/results.json and research/notes/power-control-docs-first-stepwise-runtime-capture-20260329.md and evidence/files/vm-tooling-staging/power-control-docs-first-stepwise-runtime-20260329-143515/exact-hits.csv",
+            "strength": "medium",
+            "supports": [
+              "behavior",
+              "risk",
+              "version-scope"
+            ]
+          },
+          {
+            "id": "vm-power-control-postboot-trigger-20260329",
+            "kind": "procmon-trace",
+            "title": "Guest-processed post-boot Procmon trigger batch for remaining docs-first power-control values",
+            "location": "evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-perf-calculate-actual-utilization/summary.json and evidence/files/vm-tooling-staging/power-control-docs-first-postboot-trigger-20260329-161427/power-control-perf-calculate-actual-utilization/power-control-perf-calculate-actual-utilization-postboot-trigger.hits.csv and research/notes/power-control-docs-first-postboot-trigger-capture-20260329.md",
+            "strength": "medium",
+            "supports": [
+              "behavior",
+              "risk",
+              "version-scope"
+            ]
+          },
+          {
+            "id": "vm-power-control-lightweight-runtime-20260330",
+            "kind": "etw-trace",
+            "title": "Tools-hardened lightweight ETW follow-up for remaining docs-first power-control values",
+            "location": "evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-024603/summary.json and evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-024603/results.json and research/notes/power-control-lightweight-runtime-follow-up-20260330.md",
+            "strength": "high",
+            "supports": [
+              "behavior",
+              "risk",
+              "version-scope"
+            ]
+          },
+          {
+            "id": "vm-power.control.perf-calculate-actual-utilization-etw-stackwalk-attempt-20260424i",
+            "kind": "etw-trace",
+            "title": "Bounded ETW stackwalk timeout receipt",
+            "location": "evidence/raw/etw-stackwalk/power.control.perf-calculate-actual-utilization-etw-20260424i/power.control.perf-calculate-actual-utilization-etw-20260424i-summary.json and evidence/raw/etw-stackwalk/power.control.perf-calculate-actual-utilization-etw-20260424i/power.control.perf-calculate-actual-utilization-etw-20260424i-stage.json and evidence/captures/power-control-perf-calculate-actual-utilization-etw-stackwalk-attempt-20260424.json",
+            "strength": "medium",
+            "supports": [
+              "runtime-lane-review",
+              "transport-blocker"
+            ]
+          },
+          {
+            "id": "vm-power.control.perf-calculate-actual-utilization-etw-qga-unblock-20260507",
+            "kind": "etw-trace",
+            "title": "QGA-first ETW stackwalk runtime receipt for PerfCalculateActualUtilization",
+            "location": "evidence/captures/power-control-perf-calculate-actual-utilization-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/power-control-perf-calculate-actual-utilization-etw-qga-unblock-20260507/power-control-perf-calculate-actual-utilization-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/power-control-perf-calculate-actual-utilization-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/power-control-perf-calculate-actual-utilization-etw-qga-unblock-20260507/power-control-perf-calculate-actual-utilization-etw-qga-unblock-20260507.etl",
+            "strength": "high",
+            "supports": [
+              "runtime-observation",
+              "tooling-fix",
+              "path",
+              "value",
+              "version-scope"
+            ]
+          }
+        ]
+      },
+      "app_mapping": {
+        "status": "matches-research",
+        "tweak_origin": "legacy-curated",
+        "component": "Processor performance utilization calculation",
+        "affected_processes": [
+          "System",
+          "ntoskrnl.exe"
+        ],
+        "interaction_surface": "CPU utilization and processor performance-state calculation"
+      },
+      "risk_assessment": {
+        "classification": "medium-high",
+        "reversibility": true,
+        "known_side_effects": [
+          "Guest or physical CPU utilization reporting can shift after the override."
+        ],
+        "vm_specific_considerations": "Hypervisor CPU scheduling can make utilization effects misleading inside a VM.",
+        "security_flag": "standard",
+        "score_breakdown": {
+          "static_evidence_strength": 3,
+          "runtime_evidence_strength": 4,
+          "rollback_clarity": 5,
+          "blast_radius": 2,
+          "tweak_suitability": 3,
+          "privilege_complexity": 3,
+          "build_specificity": 5,
+          "sibling_expansion_value": 4,
+          "bench_priority": 5,
+          "overall_score": 3.78,
+          "next_missing_layer": "none"
+        }
+      },
+      "rollback_plan": {
+        "mechanism": "Restore `PerfCalculateActualUtilization` under `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power` to `1`.",
+        "validation": "record-restore-story",
+        "rollback_value": {
+          "source": "windows_defaults",
+          "profile_id": "Observed Win25H2Clean baseline",
+          "label": "Observed Win25H2Clean baseline",
+          "applies_to": "Current RegProbe-Baseline-ToolsHardened-20260330 research baseline",
+          "state_kind": "value",
+          "value": 1,
+          "rationale": "Keep the currently observed baseline value (1) while this raw control stays in research packaging only.",
+          "evidence_ids": [
+            "vm-power-control-phase0-20260329"
+          ],
+          "rollback_strategy": "restore_default"
+        }
+      },
+      "decision_options": [
+        {
+          "verdict": "PROMOTE",
+          "apply_allowed": true,
+          "condition": "Use only if risk, app mapping, rollback, and claim-boundary checks remain acceptable."
+        },
+        {
+          "verdict": "PROMOTE-WITH-WARNINGS",
+          "apply_allowed": true,
+          "condition": "Use when evidence is complete but the card needs hardware, VM, security, or workload warnings."
+        },
+        {
+          "verdict": "CONDITIONAL-PROMOTE",
+          "apply_allowed": true,
+          "condition": "Use when runtime preflight or missing app mapping must gate the card."
+        },
+        {
+          "verdict": "INTENTIONAL-HOLD-CLOSED",
+          "apply_allowed": false,
+          "reason": "Use when the evidence is complete but the product should not expose the action yet."
+        },
+        {
+          "verdict": "EVIDENCE-BACKED-REJECTED",
+          "apply_allowed": false,
+          "reason": "Use when the correct evidence lane proves a platform limit, deprecation, or NotApplicable result."
+        },
+        {
+          "verdict": "RECOMMENDED",
+          "apply_allowed": true,
+          "condition": "Ship only with a bare-metal-preferred warning and an explicit rollback path.",
+          "reason": null,
+          "maps_to": "PROMOTE-WITH-WARNINGS"
+        }
+      ],
+      "recommended_action": {
+        "verdict": "PROMOTE-WITH-WARNINGS",
+        "apply_allowed": true,
+        "condition": "Ship only with a bare-metal-preferred warning and an explicit rollback path."
+      },
+      "requires_manual_vm_verification": false,
+      "requires_app_mapping": false,
+      "rationale": "Evidence is strong and rollback is known, but CPU utilization semantics are broad enough to require warning labels."
+    },
+    {
+      "record_id": "system.executive-additional-worker-threads",
+      "current_state": "promotion-eligible",
+      "source_file": "research/records/system.executive-additional-worker-threads.json",
+      "evidence_status": {
+        "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+        "value_name": "AdditionalCriticalWorkerThreads / AdditionalDelayedWorkerThreads",
+        "value_type": "REG_DWORD pair",
+        "evidence_count": 14,
+        "has_etw_bundle": true,
+        "has_ghidra_xref": true,
+        "has_procmon_trace": true,
+        "has_reboot_evidence": false,
+        "official_doc_ref": "evidence/files/vm-tooling-staging/executive-worker-threads-lightweight-runtime-20260330-122422/summary.json and evidence/files/vm-tooling-staging/executive-worker-threads-lightweight-runtime-20260330-122422/system-executive-additional-worker-threads/summary.json and research/notes/system-executive-additional-worker-threads-lightweight-runtime-20260330.md",
+        "evidence_refs": [
+          {
+            "id": "vm-executive-lightweight-runtime-20260330",
+            "kind": "etw-trace",
+            "title": "Tools-hardened lightweight ETW runtime follow-up for the Executive worker-thread pair",
+            "location": "evidence/files/vm-tooling-staging/executive-worker-threads-lightweight-runtime-20260330-122422/summary.json and evidence/files/vm-tooling-staging/executive-worker-threads-lightweight-runtime-20260330-122422/system-executive-additional-worker-threads/summary.json and research/notes/system-executive-additional-worker-threads-lightweight-runtime-20260330.md",
+            "strength": "high",
+            "supports": [
+              "path",
+              "value",
+              "behavior",
+              "runtime-proof",
+              "version-scope"
+            ]
+          },
+          {
+            "id": "vm-session-manager-executive-baseline-20260328",
+            "kind": "registry-observation",
+            "title": "Win25H2Clean Session Manager Executive baseline export",
+            "location": "evidence/files/vm-tooling-staging/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.reg and evidence/files/vm-tooling-staging/session-manager-executive-baseline-20260328-095048/session-manager-executive-baseline.txt",
+            "strength": "high",
+            "supports": [
+              "path",
+              "value",
+              "default",
+              "version-scope"
+            ]
+          },
+          {
+            "id": "ghidra-executive-worker-threads-nextgate-ntoskrnl-20260328",
+            "kind": "decompilation",
+            "title": "Current-build ntoskrnl Ghidra fallback for the Executive worker-thread pair",
+            "location": "evidence/raw/ghidra/kernel-power-nextgate-ntoskrnl/ghidra-matches.md and evidence/raw/ghidra/kernel-power-nextgate-ntoskrnl/evidence.json",
+            "strength": "high",
+            "supports": [
+              "path",
+              "value",
+              "behavior",
+              "version-scope"
+            ]
+          },
+          {
+            "id": "kernel-power-existing-static-probe-20260328",
+            "kind": "inference",
+            "title": "Kernel power static probe summary for existing Session Manager candidates",
+            "location": "registry-research-framework/audit/kernel-power-existing-static-probe-20260328.json and research/notes/kernel-power-existing-static-triage-20260328.md",
+            "strength": "medium",
+            "supports": [
+              "path",
+              "version-scope"
+            ]
+          },
+          {
+            "id": "kernel-power-existing-next-gate-20260328",
+            "kind": "inference",
+            "title": "Kernel power next-gate intake summary",
+            "location": "registry-research-framework/audit/kernel-power-existing-next-gate-20260328.json and research/notes/kernel-power-next-gate-ghidra-review-20260328.md",
+            "strength": "medium",
+            "supports": [
+              "risk",
+              "version-scope"
+            ]
+          },
+          {
+            "id": "vm-executive-etl-registry-review-20260328",
+            "kind": "etw-trace",
+            "title": "Bounded host-side ETL review for Session Manager Executive",
+            "location": "evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/watchdog-timeouts-boot.etl.md and evidence/files/vm-tooling-staging/watchdog-timeouts-boottrace-20260328-090631/registry-dump-session-manager-executive.txt and research/notes/system-executive-additional-worker-threads-etl-registry-review-20260328.md",
+            "strength": "medium",
+            "supports": [
+              "path",
+              "behavior",
+              "version-scope"
+            ]
+          },
+          {
+            "id": "vm-executive-etw-keyword-review-20260328",
+            "kind": "etw-trace",
+            "title": "ETW-specific keyword review for the Executive worker-thread pair",
+            "location": "evidence/files/vm-tooling-staging/executive-etw-keyword-review-20260328-180226/summary.json and evidence/files/vm-tooling-staging/executive-etw-keyword-review-20260328-180226/executive-etw-keyword-review.txt and research/notes/system-executive-additional-worker-threads-follow-up-package-20260328.md",
+            "strength": "medium",
+            "supports": [
+              "path",
+              "behavior",
+              "version-scope"
+            ]
+          },
+          {
+            "id": "vm-executive-procmon-bootlog-20260328",
+            "kind": "procmon-trace",
+            "title": "Procmon boot-log review for the Executive worker-thread pair",
+            "location": "evidence/files/vm-tooling-staging/executive-worker-threads-procmon-bootlog-20260328-172645/summary.json and evidence/files/vm-tooling-staging/executive-worker-threads-procmon-bootlog-20260328-172645/summary-collect.json and research/notes/system-executive-additional-worker-threads-procmon-bootlog-20260328.md",
+            "strength": "medium",
+            "supports": [
+              "behavior",
+              "version-scope"
+            ]
+          },
+          {
+            "id": "vm-executive-stress-trigger-20260328",
+            "kind": "procmon-trace",
+            "title": "Shell-safe post-boot stress trigger for the Executive worker-thread pair",
+            "location": "evidence/files/vm-tooling-staging/executive-worker-threads-stress-20260328-184856/summary.json and evidence/files/vm-tooling-staging/executive-worker-threads-stress-20260328-184856/executive-worker-threads-stress.txt and research/notes/system-executive-additional-worker-threads-stress-trigger-20260328.md",
+            "strength": "medium",
+            "supports": [
+              "behavior",
+              "version-scope"
+            ]
+          },
+          {
+            "id": "vm-executive-kvm-procmon-runtime-20260406",
+            "kind": "procmon-trace",
+            "title": "Host-driven KVM Procmon replay for the Executive worker-thread pair",
+            "location": "evidence/files/vm-tooling-staging/executive-worker-threads-procmon-kvm-20260406e/executive-worker-threads-procmon-kvm-20260406e-summary.json and evidence/files/vm-tooling-staging/executive-worker-threads-procmon-kvm-20260406e/host-review.json and research/notes/system-executive-additional-worker-threads-kvm-procmon-runtime-20260406.md",
+            "strength": "medium",
+            "supports": [
+              "behavior",
+              "version-scope"
+            ]
+          },
+          {
+            "id": "vm-executive-kvm-procmon-hardened-20260407",
+            "kind": "procmon-trace",
+            "title": "Hardened-runner KVM Procmon replay for the Executive worker-thread pair",
+            "location": "evidence/files/vm-tooling-staging/executive-worker-threads-procmon-kvm-hardened-20260407a/executive-worker-threads-procmon-kvm-hardened-20260407a-summary.json and evidence/files/vm-tooling-staging/executive-worker-threads-procmon-kvm-hardened-20260407a/executive-worker-threads-procmon-kvm-hardened-20260407a.txt and evidence/files/vm-tooling-staging/executive-worker-threads-procmon-kvm-hardened-20260407a/host-review.json and research/notes/system-executive-additional-worker-threads-kvm-procmon-hardened-20260407.md",
+            "strength": "medium",
+            "supports": [
+              "behavior",
+              "version-scope"
+            ]
+          },
+          {
+            "id": "vm-executive-worker-threads-kvm-local-kd-20260406",
+            "kind": "vm-test",
+            "title": "Linux KVM local-KD wildcard for the Executive worker-thread pair",
+            "location": "evidence/files/vm-tooling-staging/local-kd-executive-worker-wildcard-20260406a/local-kd-executive-worker-wildcard-20260406a-summary.json and evidence/files/vm-tooling-staging/local-kd-executive-worker-wildcard-20260406a/local-kd-executive-worker-wildcard-20260406a.log and research/notes/system-executive-additional-worker-threads-kvm-local-kd-symbol-follow-up-20260406.md",
+            "strength": "medium",
+            "supports": [
+              "behavior",
+              "version-scope"
+            ]
+          },
+          {
+            "id": "vm-executive-worker-threads-kvm-local-kd-values-20260406",
+            "kind": "vm-test",
+            "title": "Linux KVM local-KD live value dump for the Executive worker-thread pair",
+            "location": "evidence/files/vm-tooling-staging/local-kd-executive-values-20260406a/local-kd-executive-values-20260406a-summary.json and evidence/files/vm-tooling-staging/local-kd-executive-values-20260406a/local-kd-executive-values-20260406a.log and research/notes/system-executive-additional-worker-threads-kvm-local-kd-value-follow-up-20260406.md",
+            "strength": "medium",
+            "supports": [
+              "value",
+              "version-scope"
+            ]
+          },
+          {
+            "id": "reactos-executive-worker-threads-hypothesis-20260328",
+            "kind": "open-source-reference",
+            "title": "ReactOS semantic hypothesis for the Executive worker-thread pair",
+            "location": "evidence/files/external/reactos/system.executive-additional-worker-threads/reactos-hypothesis-20260328.md and evidence/files/external/reactos/system.executive-additional-worker-threads/summary.json and research/notes/system-executive-additional-worker-threads-reactos-hypothesis-20260328.md",
+            "strength": "medium",
+            "supports": [
+              "behavior",
+              "version-scope"
+            ]
+          }
+        ]
+      },
+      "app_mapping": {
+        "status": "matches-research",
+        "tweak_origin": "legacy-curated",
+        "component": "NT Executive worker-thread pool",
+        "affected_processes": [
+          "System",
+          "ntoskrnl.exe"
+        ],
+        "interaction_surface": "kernel worker-thread pool sizing"
+      },
+      "risk_assessment": {
+        "classification": "high",
+        "reversibility": true,
+        "known_side_effects": [
+          "Manual worker-thread overrides can waste context-switch budget on low-core systems.",
+          "The default is calculated by Windows and may already fit the machine."
+        ],
+        "vm_specific_considerations": "VMs with limited vCPUs are especially likely to hide or invert any benefit.",
+        "security_flag": "standard",
+        "score_breakdown": {
+          "static_evidence_strength": 4,
+          "runtime_evidence_strength": 3,
+          "rollback_clarity": 5,
+          "blast_radius": 2,
+          "tweak_suitability": 3,
+          "privilege_complexity": 3,
+          "build_specificity": 5,
+          "sibling_expansion_value": 4,
+          "bench_priority": 5,
+          "overall_score": 3.78,
+          "next_missing_layer": "none"
+        }
+      },
+      "rollback_plan": {
+        "mechanism": "Restore `AdditionalCriticalWorkerThreads / AdditionalDelayedWorkerThreads` under `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive` to `AdditionalCriticalWorkerThreads=0;AdditionalDelayedWorkerThreads=0`.",
+        "validation": "record-restore-story",
+        "rollback_value": {
+          "source": "windows_defaults",
+          "profile_id": "Observed Win25H2Clean baseline",
+          "label": "Observed Win25H2Clean baseline",
+          "applies_to": "Current Win25H2Clean baseline with the Session Manager Executive key populated",
+          "state_kind": "value",
+          "value": "AdditionalCriticalWorkerThreads=0;AdditionalDelayedWorkerThreads=0",
+          "rationale": "Leave the currently observed Executive worker-thread pair unchanged until a stronger semantic map exists.",
+          "evidence_ids": [
+            "vm-session-manager-executive-baseline-20260328"
+          ],
+          "rollback_strategy": "restore_default"
+        }
+      },
+      "decision_options": [
+        {
+          "verdict": "PROMOTE",
+          "apply_allowed": true,
+          "condition": "Use only if risk, app mapping, rollback, and claim-boundary checks remain acceptable."
+        },
+        {
+          "verdict": "PROMOTE-WITH-WARNINGS",
+          "apply_allowed": true,
+          "condition": "Use when evidence is complete but the card needs hardware, VM, security, or workload warnings."
+        },
+        {
+          "verdict": "CONDITIONAL-PROMOTE",
+          "apply_allowed": true,
+          "condition": "Use when runtime preflight or missing app mapping must gate the card."
+        },
+        {
+          "verdict": "INTENTIONAL-HOLD-CLOSED",
+          "apply_allowed": false,
+          "reason": "Use when the evidence is complete but the product should not expose the action yet."
+        },
+        {
+          "verdict": "EVIDENCE-BACKED-REJECTED",
+          "apply_allowed": false,
+          "reason": "Use when the correct evidence lane proves a platform limit, deprecation, or NotApplicable result."
+        },
+        {
+          "verdict": "RECOMMENDED",
+          "apply_allowed": false,
+          "condition": null,
+          "reason": "Keep research-only until per-machine profiling proves a safe non-default profile.",
+          "maps_to": "INTENTIONAL-HOLD-CLOSED"
+        }
+      ],
+      "recommended_action": {
+        "verdict": "INTENTIONAL-HOLD-CLOSED",
+        "apply_allowed": false,
+        "reason": "Keep research-only until per-machine profiling proves a safe non-default profile."
+      },
+      "requires_manual_vm_verification": false,
+      "requires_app_mapping": false,
+      "rationale": "The value is evidence-full, but the shipping decision should stay closed because the safe preset is machine-dependent and high risk."
+    },
+    {
+      "record_id": "system.kernel.disable-exception-chain-validation",
+      "current_state": "promotion-eligible",
+      "source_file": "research/records/system.kernel.disable-exception-chain-validation.json",
+      "evidence_status": {
+        "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+        "value_name": "DisableExceptionChainValidation",
+        "value_type": "REG_DWORD",
+        "evidence_count": 5,
+        "has_etw_bundle": true,
+        "has_ghidra_xref": true,
+        "has_procmon_trace": false,
+        "has_reboot_evidence": true,
+        "official_doc_ref": "Docs/system/system.md",
+        "evidence_refs": [
+          {
+            "id": "repo-session-manager-kernel-doc",
+            "kind": "repo-doc",
+            "title": "Repo system notes for Session Manager Kernel values",
+            "location": "Docs/system/system.md",
+            "strength": "high",
+            "supports": [
+              "path",
+              "value",
+              "behavior"
+            ]
+          },
+          {
+            "id": "vm-session-manager-kernel-phase0-20260329",
+            "kind": "registry-observation",
+            "title": "Win25H2Clean 96-key phase-0 existence batch",
+            "location": "evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json",
+            "strength": "high",
+            "supports": [
+              "path",
+              "default",
+              "version-scope"
+            ]
+          },
+          {
+            "id": "static-session-manager-kernel-targeted-string-20260331",
+            "kind": "decompilation",
+            "title": "Broad targeted static triage for Session Manager Kernel candidates",
+            "location": "evidence/files/vm-tooling-staging/targeted-string-batch-primary-20260331-135356/results.json and research/notes/kernel-power-96-broad-targeted-string-follow-up-20260331.md",
+            "strength": "high",
+            "supports": [
+              "path",
+              "value",
+              "version-scope"
+            ]
+          },
+          {
+            "id": "vm-session-manager-kernel-lightweight-runtime-20260331",
+            "kind": "etw-trace",
+            "title": "Tools-hardened single-reboot ETW batch for Session Manager Kernel",
+            "location": "evidence/files/vm-tooling-staging/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/summary.json and evidence/files/vm-tooling-staging/session-manager-kernel-batch-lightweight-runtime-primary-20260331-171654/results.json and research/notes/session-manager-kernel-batch-lightweight-runtime-20260331.md",
+            "strength": "high",
+            "supports": [
+              "path",
+              "value",
+              "behavior",
+              "runtime-proof",
+              "version-scope"
+            ]
+          },
+          {
+            "id": "source-enrichment-disable-exception-chain-validation-20260412",
+            "kind": "analysis-output",
+            "title": "System Informer source-enrichment follow-up for DisableExceptionChainValidation",
+            "location": "registry-research-framework/audit/source-enrichment-systeminformer-follow-up-20260412.json and research/notes/source-enrichment-systeminformer-follow-up-20260412.md",
+            "strength": "medium",
+            "supports": [
+              "value",
+              "behavior",
+              "version-scope"
+            ]
+          }
+        ]
+      },
+      "app_mapping": {
+        "status": "matches-research",
+        "tweak_origin": "legacy-curated",
+        "component": "Session Manager Kernel exception-chain policy",
+        "affected_processes": [
+          "System",
+          "ntoskrnl.exe",
+          "user-mode process mitigation surface"
+        ],
+        "interaction_surface": "security mitigation policy; lab-only override surface"
+      },
+      "risk_assessment": {
+        "classification": "critical-security",
+        "reversibility": true,
+        "known_side_effects": [
+          "Disabling exception-chain validation weakens a security mitigation surface.",
+          "The runtime proof establishes the value is read, not that it is safe for users."
+        ],
+        "vm_specific_considerations": "VM proof is useful for read semantics but does not make this safe outside isolated labs.",
+        "security_flag": "security-sensitive",
+        "score_breakdown": {
+          "static_evidence_strength": 3,
+          "runtime_evidence_strength": 3,
+          "rollback_clarity": 5,
+          "blast_radius": 2,
+          "tweak_suitability": 3,
+          "privilege_complexity": 3,
+          "build_specificity": 5,
+          "sibling_expansion_value": 4,
+          "bench_priority": 5,
+          "overall_score": 3.67,
+          "next_missing_layer": "none"
+        }
+      },
+      "rollback_plan": {
+        "mechanism": "Delete `DisableExceptionChainValidation` under `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel`.",
+        "validation": "record-restore-story",
+        "rollback_value": {
+          "source": "windows_defaults",
+          "profile_id": "Observed Win25H2Clean baseline",
+          "label": "Observed Win25H2Clean baseline",
+          "applies_to": "Current RegProbe-Baseline-ToolsHardened-20260330 research baseline",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Keep the value unset while this lane remains documentation-only and non-actionable.",
+          "evidence_ids": [
+            "vm-session-manager-kernel-phase0-20260329"
+          ],
+          "rollback_strategy": "restore_default"
+        }
+      },
+      "decision_options": [
+        {
+          "verdict": "PROMOTE",
+          "apply_allowed": true,
+          "condition": "Use only if risk, app mapping, rollback, and claim-boundary checks remain acceptable."
+        },
+        {
+          "verdict": "PROMOTE-WITH-WARNINGS",
+          "apply_allowed": true,
+          "condition": "Use when evidence is complete but the card needs hardware, VM, security, or workload warnings."
+        },
+        {
+          "verdict": "CONDITIONAL-PROMOTE",
+          "apply_allowed": true,
+          "condition": "Use when runtime preflight or missing app mapping must gate the card."
+        },
+        {
+          "verdict": "INTENTIONAL-HOLD-CLOSED",
+          "apply_allowed": false,
+          "reason": "Use when the evidence is complete but the product should not expose the action yet."
+        },
+        {
+          "verdict": "EVIDENCE-BACKED-REJECTED",
+          "apply_allowed": false,
+          "reason": "Use when the correct evidence lane proves a platform limit, deprecation, or NotApplicable result."
+        },
+        {
+          "verdict": "RECOMMENDED",
+          "apply_allowed": false,
+          "condition": null,
+          "reason": "Security-sensitive mitigation override; never promote as a normal end-user tweak.",
+          "maps_to": "INTENTIONAL-HOLD-CLOSED"
+        }
+      ],
+      "recommended_action": {
+        "verdict": "INTENTIONAL-HOLD-CLOSED",
+        "apply_allowed": false,
+        "reason": "Security-sensitive mitigation override; never promote as a normal end-user tweak."
+      },
+      "requires_manual_vm_verification": false,
+      "requires_app_mapping": false,
+      "rationale": "This is evidence-full but intentionally non-actionable because it is a security mitigation bypass surface."
+    }
+  ]
+}

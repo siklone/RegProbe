@@ -52,6 +52,16 @@ python3 registry-research-framework/scripts/generate_rejected_closure_ledger.py
 
 Then inspect [rejected-closure-ledger.md](registry-research-framework/audit/rejected-closure-ledger.md). `promotion_blockers` should show the compact closure label, while `rejection_closure.superseded_blockers` preserves the old blocker context for auditors.
 
+## Promotion-Eligible Final Decisions
+
+When `promotion_state=promotion-eligible`, the evidence lane is no longer the blocker. Use the final decision pack to decide whether the record should become promoted, promoted-with-warnings, conditional, hold-closed, or evidence-backed rejected:
+
+```bash
+python3 registry-research-framework/scripts/generate_promotion_eligible_review_pack.py
+```
+
+Then inspect [promotion-eligible-review-pack.md](registry-research-framework/audit/promotion-eligible-review-pack.md). The pack is decision prep only; update the owning research record separately when you are ready to apply a verdict.
+
 ## Wave 2 Metadata
 
 New research output should preserve and reuse these surfaces instead of inventing local ad-hoc notes:
