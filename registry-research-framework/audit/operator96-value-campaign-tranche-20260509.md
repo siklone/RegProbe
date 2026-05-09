@@ -1,9 +1,9 @@
 # Operator 96 Registry Value Campaign
 
-- Generated UTC: `2026-05-09T21:08:15Z`
+- Generated UTC: `2026-05-09T22:09:04Z`
 - Status: **ok**
-- Planned experiments: `90`
-- Completed in this run: `90`
+- Planned experiments: `100`
+- Completed in this run: `100`
 
 ## Plan
 
@@ -99,6 +99,16 @@
 | 48 | `operator96-048-mfbufferingthreshold-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\MfBufferingThreshold` | `1` | `0` | `vm-observed` |
 | 49 | `operator96-049-perfcalculateactualutilization-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\PerfCalculateActualUtilization` | `0` | `1` | `vm-observed` |
 | 50 | `operator96-050-sourcesettingsversion-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\SourceSettingsVersion` | `0` | `4` | `vm-observed` |
+| 50 | `operator96-050-sourcesettingsversion-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\SourceSettingsVersion` | `1` | `4` | `vm-observed` |
+| 51 | `operator96-051-timerrebasethresholdondripsexit-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\TimerRebaseThresholdOnDripsExit` | `0` | `60` | `vm-observed` |
+| 51 | `operator96-051-timerrebasethresholdondripsexit-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\TimerRebaseThresholdOnDripsExit` | `1` | `60` | `vm-observed` |
+| 52 | `operator96-052-hibernateenableddefault-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\HibernateEnabledDefault` | `0` | `1` | `vm-observed` |
+| 53 | `operator96-053-eventprocessorenabled-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\EventProcessorEnabled` | `0` | `1` | `vm-observed` |
+| 54 | `operator96-054-lidreliabilitystate-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\LidReliabilityState` | `0` | `1` | `vm-observed` |
+| 55 | `operator96-055-hibernateenabled-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\HibernateEnabled` | `1` | `0` | `vm-observed` |
+| 56 | `operator96-056-disableinboxpepgeneratedconstraints-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\DisableInboxPepGeneratedConstraints` | `1` | `absent` | `vm-observed` |
+| 56 | `operator96-056-disableinboxpepgeneratedconstraints-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\DisableInboxPepGeneratedConstraints` | `0` | `absent` | `vm-observed` |
+| 57 | `operator96-057-disabledisplayburstonpowersourcechange-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\DisableDisplayBurstOnPowerSourceChange` | `1` | `absent` | `vm-observed` |
 
 ## Results
 
@@ -184,13 +194,23 @@
 | `operator96-041-win32calloutwatchdogbugcheckenabled-1` | `skipped-existing-ok` | `True` | `ok`/`0` | `-3.24` | `-7.71` | `17.89` | `registry-research-framework/audit/registry-value-experiments/operator96-041-win32calloutwatchdogbugcheckenabled-1.json` |
 | `operator96-042-idlescaninterval-0` | `skipped-existing-ok` | `True` | `ok`/`0` | `4.97` | `1.68` | `-81.83` | `registry-research-framework/audit/registry-value-experiments/operator96-042-idlescaninterval-0.json` |
 | `operator96-042-idlescaninterval-1` | `skipped-existing-ok` | `True` | `ok`/`0` | `0.79` | `44.72` | `10.27` | `registry-research-framework/audit/registry-value-experiments/operator96-042-idlescaninterval-1.json` |
-| `operator96-043-sleepstudydisabled-1` | `ok` | `True` | `ok`/`0` | `8.31` | `12.32` | `-1.84` | `registry-research-framework/audit/registry-value-experiments/operator96-043-sleepstudydisabled-1.json` |
-| `operator96-043-sleepstudydisabled-0` | `ok` | `True` | `ok`/`0` | `0.37` | `-33.22` | `2.17` | `registry-research-framework/audit/registry-value-experiments/operator96-043-sleepstudydisabled-0.json` |
-| `operator96-044-class1initialunparkcount-0` | `ok` | `True` | `ok`/`0` | `2.23` | `2.05` | `-1.12` | `registry-research-framework/audit/registry-value-experiments/operator96-044-class1initialunparkcount-0.json` |
-| `operator96-044-class1initialunparkcount-1` | `ok` | `True` | `ok`/`0` | `0.55` | `-6.23` | `337.13` | `registry-research-framework/audit/registry-value-experiments/operator96-044-class1initialunparkcount-1.json` |
-| `operator96-045-customizeduringsetup-0` | `ok` | `True` | `ok`/`0` | `21.04` | `7.04` | `1.08` | `registry-research-framework/audit/registry-value-experiments/operator96-045-customizeduringsetup-0.json` |
-| `operator96-046-energyestimationenabled-0` | `ok` | `True` | `ok`/`0` | `2.59` | `2.94` | `-3.84` | `registry-research-framework/audit/registry-value-experiments/operator96-046-energyestimationenabled-0.json` |
-| `operator96-047-hiberfilesizepercent-1` | `ok` | `True` | `ok`/`0` | `4.96` | `6.21` | `-26.59` | `registry-research-framework/audit/registry-value-experiments/operator96-047-hiberfilesizepercent-1.json` |
-| `operator96-048-mfbufferingthreshold-1` | `ok` | `True` | `ok`/`0` | `1.79` | `7.58` | `7.78` | `registry-research-framework/audit/registry-value-experiments/operator96-048-mfbufferingthreshold-1.json` |
-| `operator96-049-perfcalculateactualutilization-0` | `ok` | `True` | `ok`/`0` | `3.81` | `52.9` | `10.02` | `registry-research-framework/audit/registry-value-experiments/operator96-049-perfcalculateactualutilization-0.json` |
-| `operator96-050-sourcesettingsversion-0` | `ok` | `True` | `ok`/`0` | `-0.8` | `2.12` | `236.91` | `registry-research-framework/audit/registry-value-experiments/operator96-050-sourcesettingsversion-0.json` |
+| `operator96-043-sleepstudydisabled-1` | `skipped-existing-ok` | `True` | `ok`/`0` | `8.31` | `12.32` | `-1.84` | `registry-research-framework/audit/registry-value-experiments/operator96-043-sleepstudydisabled-1.json` |
+| `operator96-043-sleepstudydisabled-0` | `skipped-existing-ok` | `True` | `ok`/`0` | `0.37` | `-33.22` | `2.17` | `registry-research-framework/audit/registry-value-experiments/operator96-043-sleepstudydisabled-0.json` |
+| `operator96-044-class1initialunparkcount-0` | `skipped-existing-ok` | `True` | `ok`/`0` | `2.23` | `2.05` | `-1.12` | `registry-research-framework/audit/registry-value-experiments/operator96-044-class1initialunparkcount-0.json` |
+| `operator96-044-class1initialunparkcount-1` | `skipped-existing-ok` | `True` | `ok`/`0` | `0.55` | `-6.23` | `337.13` | `registry-research-framework/audit/registry-value-experiments/operator96-044-class1initialunparkcount-1.json` |
+| `operator96-045-customizeduringsetup-0` | `skipped-existing-ok` | `True` | `ok`/`0` | `21.04` | `7.04` | `1.08` | `registry-research-framework/audit/registry-value-experiments/operator96-045-customizeduringsetup-0.json` |
+| `operator96-046-energyestimationenabled-0` | `skipped-existing-ok` | `True` | `ok`/`0` | `2.59` | `2.94` | `-3.84` | `registry-research-framework/audit/registry-value-experiments/operator96-046-energyestimationenabled-0.json` |
+| `operator96-047-hiberfilesizepercent-1` | `skipped-existing-ok` | `True` | `ok`/`0` | `4.96` | `6.21` | `-26.59` | `registry-research-framework/audit/registry-value-experiments/operator96-047-hiberfilesizepercent-1.json` |
+| `operator96-048-mfbufferingthreshold-1` | `skipped-existing-ok` | `True` | `ok`/`0` | `1.79` | `7.58` | `7.78` | `registry-research-framework/audit/registry-value-experiments/operator96-048-mfbufferingthreshold-1.json` |
+| `operator96-049-perfcalculateactualutilization-0` | `skipped-existing-ok` | `True` | `ok`/`0` | `3.81` | `52.9` | `10.02` | `registry-research-framework/audit/registry-value-experiments/operator96-049-perfcalculateactualutilization-0.json` |
+| `operator96-050-sourcesettingsversion-0` | `skipped-existing-ok` | `True` | `ok`/`0` | `-0.8` | `2.12` | `236.91` | `registry-research-framework/audit/registry-value-experiments/operator96-050-sourcesettingsversion-0.json` |
+| `operator96-050-sourcesettingsversion-1` | `ok` | `True` | `ok`/`0` | `20.89` | `0.25` | `-15.9` | `registry-research-framework/audit/registry-value-experiments/operator96-050-sourcesettingsversion-1.json` |
+| `operator96-051-timerrebasethresholdondripsexit-0` | `ok` | `True` | `ok`/`0` | `2.07` | `15.76` | `-60.73` | `registry-research-framework/audit/registry-value-experiments/operator96-051-timerrebasethresholdondripsexit-0.json` |
+| `operator96-051-timerrebasethresholdondripsexit-1` | `ok` | `True` | `ok`/`0` | `0.16` | `10.75` | `-33.1` | `registry-research-framework/audit/registry-value-experiments/operator96-051-timerrebasethresholdondripsexit-1.json` |
+| `operator96-052-hibernateenableddefault-0` | `ok` | `True` | `ok`/`0` | `0.84` | `2.8` | `-1.31` | `registry-research-framework/audit/registry-value-experiments/operator96-052-hibernateenableddefault-0.json` |
+| `operator96-053-eventprocessorenabled-0` | `ok` | `True` | `ok`/`0` | `8.11` | `74.18` | `-61.15` | `registry-research-framework/audit/registry-value-experiments/operator96-053-eventprocessorenabled-0.json` |
+| `operator96-054-lidreliabilitystate-0` | `ok` | `True` | `ok`/`0` | `13.89` | `4.05` | `-11.86` | `registry-research-framework/audit/registry-value-experiments/operator96-054-lidreliabilitystate-0.json` |
+| `operator96-055-hibernateenabled-1` | `ok` | `True` | `ok`/`0` | `7.13` | `-1.5` | `55.63` | `registry-research-framework/audit/registry-value-experiments/operator96-055-hibernateenabled-1.json` |
+| `operator96-056-disableinboxpepgeneratedconstraints-1` | `ok` | `True` | `ok`/`0` | `3.82` | `-6.21` | `43.1` | `registry-research-framework/audit/registry-value-experiments/operator96-056-disableinboxpepgeneratedconstraints-1.json` |
+| `operator96-056-disableinboxpepgeneratedconstraints-0` | `ok` | `True` | `ok`/`0` | `18.07` | `-0.44` | `-6.42` | `registry-research-framework/audit/registry-value-experiments/operator96-056-disableinboxpepgeneratedconstraints-0.json` |
+| `operator96-057-disabledisplayburstonpowersourcechange-1` | `ok` | `True` | `ok`/`0` | `1.52` | `-2.43` | `27.23` | `registry-research-framework/audit/registry-value-experiments/operator96-057-disabledisplayburstonpowersourcechange-1.json` |
