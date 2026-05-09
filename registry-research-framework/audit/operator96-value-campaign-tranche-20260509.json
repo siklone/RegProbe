@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-05-09T09:26:27Z",
+  "generated_utc": "2026-05-09T09:42:41Z",
   "status": "ok",
   "report": "registry-research-framework/audit/operator-regadd-followup-source-default-report-20260509.json",
   "smoke_profile": "gui",
@@ -77,6 +77,82 @@
       "record_class": "value",
       "risk_flags": [
         "executive-worker-thread low-level profiling-required"
+      ],
+      "source_quality": "vm-observed"
+    },
+    {
+      "index": 4,
+      "experiment_id": "operator96-004-additionaldelayedworkerthreads-5",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+      "value_name": "AdditionalDelayedWorkerThreads",
+      "value_data": 5,
+      "requested_data": "5",
+      "default_kind": "observed-present",
+      "default_value": 0,
+      "vm_status": "value-present",
+      "record_class": "value",
+      "risk_flags": [
+        "executive-worker-thread low-level profiling-required"
+      ],
+      "source_quality": "vm-observed"
+    },
+    {
+      "index": 4,
+      "experiment_id": "operator96-004-additionaldelayedworkerthreads-1",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+      "value_name": "AdditionalDelayedWorkerThreads",
+      "value_data": 1,
+      "requested_data": "5",
+      "default_kind": "observed-present",
+      "default_value": 0,
+      "vm_status": "value-present",
+      "record_class": "value",
+      "risk_flags": [
+        "executive-worker-thread low-level profiling-required"
+      ],
+      "source_quality": "vm-observed"
+    },
+    {
+      "index": 5,
+      "experiment_id": "operator96-005-uuidsequencenumber-3322358",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+      "value_name": "UuidSequenceNumber",
+      "value_data": 3322358,
+      "requested_data": "3322358",
+      "default_kind": "observed-present",
+      "default_value": 2636877,
+      "vm_status": "value-present",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed"
+    },
+    {
+      "index": 5,
+      "experiment_id": "operator96-005-uuidsequencenumber-0",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+      "value_name": "UuidSequenceNumber",
+      "value_data": 0,
+      "requested_data": "3322358",
+      "default_kind": "observed-present",
+      "default_value": 2636877,
+      "vm_status": "value-present",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed"
+    },
+    {
+      "index": 6,
+      "experiment_id": "operator96-006-tickcountrolloverdelay-0",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+      "value_name": "TickcountRolloverDelay",
+      "value_data": 0,
+      "requested_data": "0",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [
+        "kernel-timing-sensitive"
       ],
       "source_quality": "vm-observed"
     }
@@ -214,16 +290,8 @@
       "record_class": "value",
       "risk_flags": [],
       "source_quality": "vm-observed",
-      "status": "ok",
-      "returncode": 0,
+      "status": "skipped-existing-ok",
       "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-001-enablelocallogonsid-1.json",
-      "stdout_payload": {
-        "status": "ok",
-        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-001-enablelocallogonsid-1.json",
-        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-001-enablelocallogonsid-1.md",
-        "error": null
-      },
-      "stderr": "",
       "observations": {
         "status": "ok",
         "smoke_hard_success": {
@@ -341,16 +409,8 @@
       "record_class": "value",
       "risk_flags": [],
       "source_quality": "vm-observed",
-      "status": "ok",
-      "returncode": 0,
+      "status": "skipped-existing-ok",
       "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-002-enablevirtualization-0.json",
-      "stdout_payload": {
-        "status": "ok",
-        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-002-enablevirtualization-0.json",
-        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-002-enablevirtualization-0.md",
-        "error": null
-      },
-      "stderr": "",
       "observations": {
         "status": "ok",
         "smoke_hard_success": {
@@ -470,16 +530,8 @@
         "executive-worker-thread low-level profiling-required"
       ],
       "source_quality": "vm-observed",
-      "status": "ok",
-      "returncode": 0,
+      "status": "skipped-existing-ok",
       "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-003-additionalcriticalworkerthreads-5.json",
-      "stdout_payload": {
-        "status": "ok",
-        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-003-additionalcriticalworkerthreads-5.json",
-        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-003-additionalcriticalworkerthreads-5.md",
-        "error": null
-      },
-      "stderr": "",
       "observations": {
         "status": "ok",
         "smoke_hard_success": {
@@ -599,16 +651,8 @@
         "executive-worker-thread low-level profiling-required"
       ],
       "source_quality": "vm-observed",
-      "status": "ok",
-      "returncode": 0,
+      "status": "skipped-existing-ok",
       "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-003-additionalcriticalworkerthreads-1.json",
-      "stdout_payload": {
-        "status": "ok",
-        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-003-additionalcriticalworkerthreads-1.json",
-        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-003-additionalcriticalworkerthreads-1.md",
-        "error": null
-      },
-      "stderr": "",
       "observations": {
         "status": "ok",
         "smoke_hard_success": {
@@ -709,6 +753,647 @@
             "cpu_single_seconds": 6.56,
             "cpu_multi_seconds": 0.3,
             "io_write_read_mib_per_second": -40.0
+          }
+        }
+      }
+    },
+    {
+      "index": 4,
+      "experiment_id": "operator96-004-additionaldelayedworkerthreads-5",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+      "value_name": "AdditionalDelayedWorkerThreads",
+      "value_data": 5,
+      "requested_data": "5",
+      "default_kind": "observed-present",
+      "default_value": 0,
+      "vm_status": "value-present",
+      "record_class": "value",
+      "risk_flags": [
+        "executive-worker-thread low-level profiling-required"
+      ],
+      "source_quality": "vm-observed",
+      "status": "ok",
+      "returncode": 0,
+      "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-004-additionaldelayedworkerthreads-5.json",
+      "stdout_payload": {
+        "status": "ok",
+        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-004-additionaldelayedworkerthreads-5.json",
+        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-004-additionaldelayedworkerthreads-5.md",
+        "error": null
+      },
+      "stderr": "",
+      "observations": {
+        "status": "ok",
+        "smoke_hard_success": {
+          "apply_smoke_hard_success": true,
+          "post_reboot_smoke_hard_success": true,
+          "post_rollback_smoke_hard_success": true
+        },
+        "apply": {
+          "original": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+            "value_name": "AdditionalDelayedWorkerThreads",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 0,
+            "value_kind": "System.Int32",
+            "value_hex": "0x0",
+            "status": "value-present",
+            "error": null
+          },
+          "after_apply": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+            "value_name": "AdditionalDelayedWorkerThreads",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 5,
+            "value_kind": "System.Int32",
+            "value_hex": "0x5",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_reboot": {
+          "after_reboot": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+            "value_name": "AdditionalDelayedWorkerThreads",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 5,
+            "value_kind": "System.Int32",
+            "value_hex": "0x5",
+            "status": "value-present",
+            "error": null
+          },
+          "restore_action": "restored-original-value",
+          "after_restore": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+            "value_name": "AdditionalDelayedWorkerThreads",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 0,
+            "value_kind": "System.Int32",
+            "value_hex": "0x0",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_rollback": {
+          "final": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+            "value_name": "AdditionalDelayedWorkerThreads",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 0,
+            "value_kind": "System.Int32",
+            "value_hex": "0x0",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "benchmark_delta_percent": {
+          "apply_vs_baseline": {
+            "cpu_single_seconds": -3.1,
+            "cpu_multi_seconds": 1.64,
+            "io_write_read_mib_per_second": -14.94
+          },
+          "post_reboot_vs_baseline": {
+            "cpu_single_seconds": -5.43,
+            "cpu_multi_seconds": -6.47,
+            "io_write_read_mib_per_second": -18.87
+          }
+        }
+      }
+    },
+    {
+      "index": 4,
+      "experiment_id": "operator96-004-additionaldelayedworkerthreads-1",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+      "value_name": "AdditionalDelayedWorkerThreads",
+      "value_data": 1,
+      "requested_data": "5",
+      "default_kind": "observed-present",
+      "default_value": 0,
+      "vm_status": "value-present",
+      "record_class": "value",
+      "risk_flags": [
+        "executive-worker-thread low-level profiling-required"
+      ],
+      "source_quality": "vm-observed",
+      "status": "ok",
+      "returncode": 0,
+      "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-004-additionaldelayedworkerthreads-1.json",
+      "stdout_payload": {
+        "status": "ok",
+        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-004-additionaldelayedworkerthreads-1.json",
+        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-004-additionaldelayedworkerthreads-1.md",
+        "error": null
+      },
+      "stderr": "",
+      "observations": {
+        "status": "ok",
+        "smoke_hard_success": {
+          "apply_smoke_hard_success": true,
+          "post_reboot_smoke_hard_success": true,
+          "post_rollback_smoke_hard_success": true
+        },
+        "apply": {
+          "original": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+            "value_name": "AdditionalDelayedWorkerThreads",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 0,
+            "value_kind": "System.Int32",
+            "value_hex": "0x0",
+            "status": "value-present",
+            "error": null
+          },
+          "after_apply": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+            "value_name": "AdditionalDelayedWorkerThreads",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 1,
+            "value_kind": "System.Int32",
+            "value_hex": "0x1",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_reboot": {
+          "after_reboot": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+            "value_name": "AdditionalDelayedWorkerThreads",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 1,
+            "value_kind": "System.Int32",
+            "value_hex": "0x1",
+            "status": "value-present",
+            "error": null
+          },
+          "restore_action": "restored-original-value",
+          "after_restore": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+            "value_name": "AdditionalDelayedWorkerThreads",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 0,
+            "value_kind": "System.Int32",
+            "value_hex": "0x0",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_rollback": {
+          "final": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+            "value_name": "AdditionalDelayedWorkerThreads",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 0,
+            "value_kind": "System.Int32",
+            "value_hex": "0x0",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "benchmark_delta_percent": {
+          "apply_vs_baseline": {
+            "cpu_single_seconds": -2.3,
+            "cpu_multi_seconds": -2.34,
+            "io_write_read_mib_per_second": -3.52
+          },
+          "post_reboot_vs_baseline": {
+            "cpu_single_seconds": -3.85,
+            "cpu_multi_seconds": 2.56,
+            "io_write_read_mib_per_second": 7.38
+          }
+        }
+      }
+    },
+    {
+      "index": 5,
+      "experiment_id": "operator96-005-uuidsequencenumber-3322358",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+      "value_name": "UuidSequenceNumber",
+      "value_data": 3322358,
+      "requested_data": "3322358",
+      "default_kind": "observed-present",
+      "default_value": 2636877,
+      "vm_status": "value-present",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed",
+      "status": "ok",
+      "returncode": 0,
+      "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-005-uuidsequencenumber-3322358.json",
+      "stdout_payload": {
+        "status": "ok",
+        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-005-uuidsequencenumber-3322358.json",
+        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-005-uuidsequencenumber-3322358.md",
+        "error": null
+      },
+      "stderr": "",
+      "observations": {
+        "status": "ok",
+        "smoke_hard_success": {
+          "apply_smoke_hard_success": true,
+          "post_reboot_smoke_hard_success": true,
+          "post_rollback_smoke_hard_success": true
+        },
+        "apply": {
+          "original": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+            "value_name": "UuidSequenceNumber",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 2636907,
+            "value_kind": "System.Int32",
+            "value_hex": "0x283c6b",
+            "status": "value-present",
+            "error": null
+          },
+          "after_apply": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+            "value_name": "UuidSequenceNumber",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 3322358,
+            "value_kind": "System.Int32",
+            "value_hex": "0x32b1f6",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_reboot": {
+          "after_reboot": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+            "value_name": "UuidSequenceNumber",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 3322359,
+            "value_kind": "System.Int32",
+            "value_hex": "0x32b1f7",
+            "status": "value-present",
+            "error": null
+          },
+          "restore_action": "restored-original-value",
+          "after_restore": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+            "value_name": "UuidSequenceNumber",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 2636907,
+            "value_kind": "System.Int32",
+            "value_hex": "0x283c6b",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_rollback": {
+          "final": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+            "value_name": "UuidSequenceNumber",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 2636908,
+            "value_kind": "System.Int32",
+            "value_hex": "0x283c6c",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "benchmark_delta_percent": {
+          "apply_vs_baseline": {
+            "cpu_single_seconds": 7.61,
+            "cpu_multi_seconds": 5.85,
+            "io_write_read_mib_per_second": 10.62
+          },
+          "post_reboot_vs_baseline": {
+            "cpu_single_seconds": 9.63,
+            "cpu_multi_seconds": 3.47,
+            "io_write_read_mib_per_second": -76.71
+          }
+        }
+      }
+    },
+    {
+      "index": 5,
+      "experiment_id": "operator96-005-uuidsequencenumber-0",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+      "value_name": "UuidSequenceNumber",
+      "value_data": 0,
+      "requested_data": "3322358",
+      "default_kind": "observed-present",
+      "default_value": 2636877,
+      "vm_status": "value-present",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed",
+      "status": "ok",
+      "returncode": 0,
+      "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-005-uuidsequencenumber-0.json",
+      "stdout_payload": {
+        "status": "ok",
+        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-005-uuidsequencenumber-0.json",
+        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-005-uuidsequencenumber-0.md",
+        "error": null
+      },
+      "stderr": "",
+      "observations": {
+        "status": "ok",
+        "smoke_hard_success": {
+          "apply_smoke_hard_success": true,
+          "post_reboot_smoke_hard_success": true,
+          "post_rollback_smoke_hard_success": true
+        },
+        "apply": {
+          "original": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+            "value_name": "UuidSequenceNumber",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 2636908,
+            "value_kind": "System.Int32",
+            "value_hex": "0x283c6c",
+            "status": "value-present",
+            "error": null
+          },
+          "after_apply": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+            "value_name": "UuidSequenceNumber",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 0,
+            "value_kind": "System.Int32",
+            "value_hex": "0x0",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_reboot": {
+          "after_reboot": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+            "value_name": "UuidSequenceNumber",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 1,
+            "value_kind": "System.Int32",
+            "value_hex": "0x1",
+            "status": "value-present",
+            "error": null
+          },
+          "restore_action": "restored-original-value",
+          "after_restore": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+            "value_name": "UuidSequenceNumber",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 2636908,
+            "value_kind": "System.Int32",
+            "value_hex": "0x283c6c",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_rollback": {
+          "final": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+            "value_name": "UuidSequenceNumber",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 2636909,
+            "value_kind": "System.Int32",
+            "value_hex": "0x283c6d",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "benchmark_delta_percent": {
+          "apply_vs_baseline": {
+            "cpu_single_seconds": 24.66,
+            "cpu_multi_seconds": -3.22,
+            "io_write_read_mib_per_second": 13.89
+          },
+          "post_reboot_vs_baseline": {
+            "cpu_single_seconds": 3.08,
+            "cpu_multi_seconds": -9.6,
+            "io_write_read_mib_per_second": 12.84
+          }
+        }
+      }
+    },
+    {
+      "index": 6,
+      "experiment_id": "operator96-006-tickcountrolloverdelay-0",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+      "value_name": "TickcountRolloverDelay",
+      "value_data": 0,
+      "requested_data": "0",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [
+        "kernel-timing-sensitive"
+      ],
+      "source_quality": "vm-observed",
+      "status": "ok",
+      "returncode": 0,
+      "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-006-tickcountrolloverdelay-0.json",
+      "stdout_payload": {
+        "status": "ok",
+        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-006-tickcountrolloverdelay-0.json",
+        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-006-tickcountrolloverdelay-0.md",
+        "error": null
+      },
+      "stderr": "",
+      "observations": {
+        "status": "ok",
+        "smoke_hard_success": {
+          "apply_smoke_hard_success": true,
+          "post_reboot_smoke_hard_success": true,
+          "post_rollback_smoke_hard_success": true
+        },
+        "apply": {
+          "original": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+            "value_name": "TickcountRolloverDelay",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "after_apply": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+            "value_name": "TickcountRolloverDelay",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 0,
+            "value_kind": "System.Int32",
+            "value_hex": "0x0",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_reboot": {
+          "after_reboot": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+            "value_name": "TickcountRolloverDelay",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 0,
+            "value_kind": "System.Int32",
+            "value_hex": "0x0",
+            "status": "value-present",
+            "error": null
+          },
+          "restore_action": "removed-created-value",
+          "after_restore": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+            "value_name": "TickcountRolloverDelay",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_rollback": {
+          "final": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+            "value_name": "TickcountRolloverDelay",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "benchmark_delta_percent": {
+          "apply_vs_baseline": {
+            "cpu_single_seconds": -0.2,
+            "cpu_multi_seconds": 4.59,
+            "io_write_read_mib_per_second": -8.62
+          },
+          "post_reboot_vs_baseline": {
+            "cpu_single_seconds": 7.52,
+            "cpu_multi_seconds": 1.84,
+            "io_write_read_mib_per_second": 5.47
           }
         }
       }
