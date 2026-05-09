@@ -103,6 +103,17 @@ class VmKvmRegistryValueExperimentTests(unittest.TestCase):
         self.assertIn("removed-created-key", script)
         self.assertIn("removed-created-value-key-retained", script)
 
+    def test_stage_script_records_micro_benchmarks_for_core_and_gui_smoke(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            script_path = Path(tmp) / "stage.ps1"
+            registry_value_experiment.write_guest_stage_script(script_path)
+            script = script_path.read_text(encoding="utf-8")
+
+        self.assertIn("function Invoke-MicroBenchmarks", script)
+        self.assertIn("RegProbeMicroBench", script)
+        self.assertIn("cpu_single_seconds", script)
+        self.assertIn("io_write_read_mib_per_second", script)
+
 
 if __name__ == "__main__":
     unittest.main()

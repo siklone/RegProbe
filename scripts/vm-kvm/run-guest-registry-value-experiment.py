@@ -299,6 +299,95 @@ function Invoke-ProcessSmoke {
         success = ($failed.Count -eq 0)
         failure_count = $failed.Count
         items = $items
+        benchmarks = Invoke-MicroBenchmarks -Profile $Profile
+    }
+}
+
+function Invoke-MicroBenchmarks {
+    param(
+        [Parameter(Mandatory = $true)]
+        [ValidateSet('none', 'core', 'gui')]
+        [string]$Profile
+    )
+
+    if ($Profile -eq 'none') {
+        return [pscustomobject]@{
+            status = 'skipped'
+            reason = 'smoke_profile=none'
+        }
+    }
+
+    try {
+        if (-not ('RegProbeMicroBench' -as [type])) {
+            Add-Type -TypeDefinition @'
+using System;
+using System.Diagnostics;
+using System.IO;
+using System.Threading.Tasks;
+
+public static class RegProbeMicroBench
+{
+    public static double CpuSeconds(int threads, int iterations)
+    {
+        threads = Math.Max(1, threads);
+        iterations = Math.Max(1, iterations);
+        var sw = Stopwatch.StartNew();
+        Parallel.For(0, threads, worker =>
+        {
+            double acc = 0;
+            for (int i = 1; i <= iterations; i++)
+            {
+                acc += Math.Sqrt(i + worker);
+            }
+            if (acc < 0) throw new InvalidOperationException("unreachable");
+        });
+        sw.Stop();
+        return sw.Elapsed.TotalSeconds;
+    }
+
+    public static double IoMegabytesPerSecond(string path, int megabytes)
+    {
+        megabytes = Math.Max(1, megabytes);
+        byte[] buffer = new byte[1024 * 1024];
+        new Random(1234).NextBytes(buffer);
+        var sw = Stopwatch.StartNew();
+        using (var stream = new FileStream(path, FileMode.Create, FileAccess.ReadWrite, FileShare.None, buffer.Length, FileOptions.WriteThrough))
+        {
+            for (int i = 0; i < megabytes; i++)
+            {
+                stream.Write(buffer, 0, buffer.Length);
+            }
+            stream.Flush(true);
+            stream.Position = 0;
+            while (stream.Read(buffer, 0, buffer.Length) > 0)
+            {
+            }
+        }
+        sw.Stop();
+        try { File.Delete(path); } catch { }
+        return megabytes / Math.Max(sw.Elapsed.TotalSeconds, 0.001);
+    }
+}
+'@
+        }
+
+        $processorCount = [Environment]::ProcessorCount
+        $benchRoot = 'C:\RegProbe-Diag\benchmarks'
+        New-Item -ItemType Directory -Path $benchRoot -Force | Out-Null
+        $ioPath = Join-Path $benchRoot ('io-' + [Guid]::NewGuid().ToString('N') + '.bin')
+        return [pscustomobject]@{
+            status = 'ok'
+            cpu_single_seconds = [Math]::Round([RegProbeMicroBench]::CpuSeconds(1, 200000000), 4)
+            cpu_multi_seconds = [Math]::Round([RegProbeMicroBench]::CpuSeconds($processorCount, 100000000), 4)
+            cpu_threads = $processorCount
+            io_write_read_mib_per_second = [Math]::Round([RegProbeMicroBench]::IoMegabytesPerSecond($ioPath, 128), 2)
+        }
+    }
+    catch {
+        return [pscustomobject]@{
+            status = 'error'
+            error = $_.Exception.Message
+        }
     }
 }
 
