@@ -1,9 +1,9 @@
 # Operator 96 Registry Value Campaign
 
-- Generated UTC: `2026-05-09T19:54:58Z`
+- Generated UTC: `2026-05-09T21:08:15Z`
 - Status: **ok**
-- Planned experiments: `80`
-- Completed in this run: `80`
+- Planned experiments: `90`
+- Completed in this run: `90`
 
 ## Plan
 
@@ -89,6 +89,16 @@
 | 41 | `operator96-041-win32calloutwatchdogbugcheckenabled-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power\Win32CalloutWatchdogBugcheckEnabled` | `1` | `absent` | `vm-observed` |
 | 42 | `operator96-042-idlescaninterval-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power\IdleScanInterval` | `0` | `absent` | `vm-observed` |
 | 42 | `operator96-042-idlescaninterval-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power\IdleScanInterval` | `1` | `absent` | `vm-observed` |
+| 43 | `operator96-043-sleepstudydisabled-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power\SleepStudyDisabled` | `1` | `absent` | `vm-observed` |
+| 43 | `operator96-043-sleepstudydisabled-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power\SleepStudyDisabled` | `0` | `absent` | `vm-observed` |
+| 44 | `operator96-044-class1initialunparkcount-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\Class1InitialUnparkCount` | `0` | `64` | `vm-observed` |
+| 44 | `operator96-044-class1initialunparkcount-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\Class1InitialUnparkCount` | `1` | `64` | `vm-observed` |
+| 45 | `operator96-045-customizeduringsetup-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\CustomizeDuringSetup` | `0` | `1` | `vm-observed` |
+| 46 | `operator96-046-energyestimationenabled-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\EnergyEstimationEnabled` | `0` | `1` | `vm-observed` |
+| 47 | `operator96-047-hiberfilesizepercent-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\HiberFileSizePercent` | `1` | `0` | `vm-observed` |
+| 48 | `operator96-048-mfbufferingthreshold-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\MfBufferingThreshold` | `1` | `0` | `vm-observed` |
+| 49 | `operator96-049-perfcalculateactualutilization-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\PerfCalculateActualUtilization` | `0` | `1` | `vm-observed` |
+| 50 | `operator96-050-sourcesettingsversion-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\SourceSettingsVersion` | `0` | `4` | `vm-observed` |
 
 ## Results
 
@@ -164,13 +174,23 @@
 | `operator96-035-maximumcooperativeidlesearchwidth-1` | `skipped-existing-ok` | `True` | `ok`/`0` | `23.5` | `7.21` | `-40.06` | `registry-research-framework/audit/registry-value-experiments/operator96-035-maximumcooperativeidlesearchwidth-1.json` |
 | `operator96-036-hiberbootenabled-0` | `skipped-existing-ok` | `True` | `ok`/`0` | `6.49` | `3.6` | `-73.85` | `registry-research-framework/audit/registry-value-experiments/operator96-036-hiberbootenabled-0.json` |
 | `operator96-037-powersettingprofile-1` | `skipped-existing-ok` | `True` | `ok`/`0` | `15.32` | `36.47` | `-62.08` | `registry-research-framework/audit/registry-value-experiments/operator96-037-powersettingprofile-1.json` |
-| `operator96-038-watchdogresumetimeout-0` | `ok` | `True` | `ok`/`0` | `17.52` | `5.06` | `-40.05` | `registry-research-framework/audit/registry-value-experiments/operator96-038-watchdogresumetimeout-0.json` |
-| `operator96-038-watchdogresumetimeout-1` | `ok` | `True` | `ok`/`0` | `2.89` | `27.22` | `6.68` | `registry-research-framework/audit/registry-value-experiments/operator96-038-watchdogresumetimeout-1.json` |
-| `operator96-039-watchdogsleeptimeout-0` | `ok` | `True` | `ok`/`0` | `34.63` | `2.16` | `42.25` | `registry-research-framework/audit/registry-value-experiments/operator96-039-watchdogsleeptimeout-0.json` |
-| `operator96-039-watchdogsleeptimeout-1` | `ok` | `True` | `ok`/`0` | `4.24` | `8.76` | `-15.51` | `registry-research-framework/audit/registry-value-experiments/operator96-039-watchdogsleeptimeout-1.json` |
-| `operator96-040-skiptickoverride-0` | `ok` | `True` | `ok`/`0` | `17.87` | `4.05` | `-35.88` | `registry-research-framework/audit/registry-value-experiments/operator96-040-skiptickoverride-0.json` |
-| `operator96-040-skiptickoverride-1` | `ok` | `True` | `ok`/`0` | `36.85` | `49.61` | `-75.22` | `registry-research-framework/audit/registry-value-experiments/operator96-040-skiptickoverride-1.json` |
-| `operator96-041-win32calloutwatchdogbugcheckenabled-0` | `ok` | `True` | `ok`/`0` | `1.67` | `0.17` | `-2.69` | `registry-research-framework/audit/registry-value-experiments/operator96-041-win32calloutwatchdogbugcheckenabled-0.json` |
-| `operator96-041-win32calloutwatchdogbugcheckenabled-1` | `ok` | `True` | `ok`/`0` | `-3.24` | `-7.71` | `17.89` | `registry-research-framework/audit/registry-value-experiments/operator96-041-win32calloutwatchdogbugcheckenabled-1.json` |
-| `operator96-042-idlescaninterval-0` | `ok` | `True` | `ok`/`0` | `4.97` | `1.68` | `-81.83` | `registry-research-framework/audit/registry-value-experiments/operator96-042-idlescaninterval-0.json` |
-| `operator96-042-idlescaninterval-1` | `ok` | `True` | `ok`/`0` | `0.79` | `44.72` | `10.27` | `registry-research-framework/audit/registry-value-experiments/operator96-042-idlescaninterval-1.json` |
+| `operator96-038-watchdogresumetimeout-0` | `skipped-existing-ok` | `True` | `ok`/`0` | `17.52` | `5.06` | `-40.05` | `registry-research-framework/audit/registry-value-experiments/operator96-038-watchdogresumetimeout-0.json` |
+| `operator96-038-watchdogresumetimeout-1` | `skipped-existing-ok` | `True` | `ok`/`0` | `2.89` | `27.22` | `6.68` | `registry-research-framework/audit/registry-value-experiments/operator96-038-watchdogresumetimeout-1.json` |
+| `operator96-039-watchdogsleeptimeout-0` | `skipped-existing-ok` | `True` | `ok`/`0` | `34.63` | `2.16` | `42.25` | `registry-research-framework/audit/registry-value-experiments/operator96-039-watchdogsleeptimeout-0.json` |
+| `operator96-039-watchdogsleeptimeout-1` | `skipped-existing-ok` | `True` | `ok`/`0` | `4.24` | `8.76` | `-15.51` | `registry-research-framework/audit/registry-value-experiments/operator96-039-watchdogsleeptimeout-1.json` |
+| `operator96-040-skiptickoverride-0` | `skipped-existing-ok` | `True` | `ok`/`0` | `17.87` | `4.05` | `-35.88` | `registry-research-framework/audit/registry-value-experiments/operator96-040-skiptickoverride-0.json` |
+| `operator96-040-skiptickoverride-1` | `skipped-existing-ok` | `True` | `ok`/`0` | `36.85` | `49.61` | `-75.22` | `registry-research-framework/audit/registry-value-experiments/operator96-040-skiptickoverride-1.json` |
+| `operator96-041-win32calloutwatchdogbugcheckenabled-0` | `skipped-existing-ok` | `True` | `ok`/`0` | `1.67` | `0.17` | `-2.69` | `registry-research-framework/audit/registry-value-experiments/operator96-041-win32calloutwatchdogbugcheckenabled-0.json` |
+| `operator96-041-win32calloutwatchdogbugcheckenabled-1` | `skipped-existing-ok` | `True` | `ok`/`0` | `-3.24` | `-7.71` | `17.89` | `registry-research-framework/audit/registry-value-experiments/operator96-041-win32calloutwatchdogbugcheckenabled-1.json` |
+| `operator96-042-idlescaninterval-0` | `skipped-existing-ok` | `True` | `ok`/`0` | `4.97` | `1.68` | `-81.83` | `registry-research-framework/audit/registry-value-experiments/operator96-042-idlescaninterval-0.json` |
+| `operator96-042-idlescaninterval-1` | `skipped-existing-ok` | `True` | `ok`/`0` | `0.79` | `44.72` | `10.27` | `registry-research-framework/audit/registry-value-experiments/operator96-042-idlescaninterval-1.json` |
+| `operator96-043-sleepstudydisabled-1` | `ok` | `True` | `ok`/`0` | `8.31` | `12.32` | `-1.84` | `registry-research-framework/audit/registry-value-experiments/operator96-043-sleepstudydisabled-1.json` |
+| `operator96-043-sleepstudydisabled-0` | `ok` | `True` | `ok`/`0` | `0.37` | `-33.22` | `2.17` | `registry-research-framework/audit/registry-value-experiments/operator96-043-sleepstudydisabled-0.json` |
+| `operator96-044-class1initialunparkcount-0` | `ok` | `True` | `ok`/`0` | `2.23` | `2.05` | `-1.12` | `registry-research-framework/audit/registry-value-experiments/operator96-044-class1initialunparkcount-0.json` |
+| `operator96-044-class1initialunparkcount-1` | `ok` | `True` | `ok`/`0` | `0.55` | `-6.23` | `337.13` | `registry-research-framework/audit/registry-value-experiments/operator96-044-class1initialunparkcount-1.json` |
+| `operator96-045-customizeduringsetup-0` | `ok` | `True` | `ok`/`0` | `21.04` | `7.04` | `1.08` | `registry-research-framework/audit/registry-value-experiments/operator96-045-customizeduringsetup-0.json` |
+| `operator96-046-energyestimationenabled-0` | `ok` | `True` | `ok`/`0` | `2.59` | `2.94` | `-3.84` | `registry-research-framework/audit/registry-value-experiments/operator96-046-energyestimationenabled-0.json` |
+| `operator96-047-hiberfilesizepercent-1` | `ok` | `True` | `ok`/`0` | `4.96` | `6.21` | `-26.59` | `registry-research-framework/audit/registry-value-experiments/operator96-047-hiberfilesizepercent-1.json` |
+| `operator96-048-mfbufferingthreshold-1` | `ok` | `True` | `ok`/`0` | `1.79` | `7.58` | `7.78` | `registry-research-framework/audit/registry-value-experiments/operator96-048-mfbufferingthreshold-1.json` |
+| `operator96-049-perfcalculateactualutilization-0` | `ok` | `True` | `ok`/`0` | `3.81` | `52.9` | `10.02` | `registry-research-framework/audit/registry-value-experiments/operator96-049-perfcalculateactualutilization-0.json` |
+| `operator96-050-sourcesettingsversion-0` | `ok` | `True` | `ok`/`0` | `-0.8` | `2.12` | `236.91` | `registry-research-framework/audit/registry-value-experiments/operator96-050-sourcesettingsversion-0.json` |
