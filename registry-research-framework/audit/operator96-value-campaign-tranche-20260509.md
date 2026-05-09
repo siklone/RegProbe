@@ -1,9 +1,9 @@
 # Operator 96 Registry Value Campaign
 
-- Generated UTC: `2026-05-09T17:57:42Z`
+- Generated UTC: `2026-05-09T18:52:22Z`
 - Status: **ok**
-- Planned experiments: `60`
-- Completed in this run: `60`
+- Planned experiments: `70`
+- Completed in this run: `70`
 
 ## Plan
 
@@ -69,6 +69,16 @@
 | 30 | `operator96-030-forceforegroundboostdecay-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel\ForceForegroundBoostDecay` | `1` | `absent` | `vm-observed` |
 | 31 | `operator96-031-rebalanceminpriority-16` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel\RebalanceMinPriority` | `16` | `absent` | `vm-observed` |
 | 31 | `operator96-031-rebalanceminpriority-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel\RebalanceMinPriority` | `0` | `absent` | `vm-observed` |
+| 32 | `operator96-032-interruptsteeringflags-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel\InterruptSteeringFlags` | `1` | `absent` | `vm-observed` |
+| 32 | `operator96-032-interruptsteeringflags-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel\InterruptSteeringFlags` | `0` | `absent` | `vm-observed` |
+| 33 | `operator96-033-alwaystrackioboosting-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel\AlwaysTrackIoBoosting` | `0` | `absent` | `vm-observed` |
+| 33 | `operator96-033-alwaystrackioboosting-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel\AlwaysTrackIoBoosting` | `1` | `absent` | `vm-observed` |
+| 34 | `operator96-034-disablecontrolflowguardexportsuppression-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel\DisableControlFlowGuardExportSuppression` | `1` | `absent` | `vm-observed` |
+| 34 | `operator96-034-disablecontrolflowguardexportsuppression-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel\DisableControlFlowGuardExportSuppression` | `0` | `absent` | `vm-observed` |
+| 35 | `operator96-035-maximumcooperativeidlesearchwidth-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel\MaximumCooperativeIdleSearchWidth` | `0` | `absent` | `vm-observed` |
+| 35 | `operator96-035-maximumcooperativeidlesearchwidth-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel\MaximumCooperativeIdleSearchWidth` | `1` | `absent` | `vm-observed` |
+| 36 | `operator96-036-hiberbootenabled-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power\HiberbootEnabled` | `0` | `1` | `vm-observed` |
+| 37 | `operator96-037-powersettingprofile-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power\PowerSettingProfile` | `1` | `0` | `vm-observed` |
 
 ## Results
 
@@ -130,7 +140,17 @@
 | `operator96-028-longdpcruntimethreshold-0` | `skipped-existing-ok` | `True` | `ok`/`0` | `4.27` | `-11.19` | `-13.22` | `registry-research-framework/audit/registry-value-experiments/operator96-028-longdpcruntimethreshold-0.json` |
 | `operator96-029-forcebugcheckfordpcwatchdog-0` | `skipped-existing-ok` | `True` | `ok`/`0` | `0.84` | `-16.1` | `-13.14` | `registry-research-framework/audit/registry-value-experiments/operator96-029-forcebugcheckfordpcwatchdog-0.json` |
 | `operator96-029-forcebugcheckfordpcwatchdog-1` | `skipped-existing-ok` | `True` | `ok`/`0` | `0.09` | `5.56` | `-80.55` | `registry-research-framework/audit/registry-value-experiments/operator96-029-forcebugcheckfordpcwatchdog-1.json` |
-| `operator96-030-forceforegroundboostdecay-0` | `ok` | `True` | `ok`/`0` | `8.41` | `-21.07` | `3.67` | `registry-research-framework/audit/registry-value-experiments/operator96-030-forceforegroundboostdecay-0.json` |
-| `operator96-030-forceforegroundboostdecay-1` | `ok` | `True` | `ok`/`0` | `18.1` | `-2.95` | `-69.61` | `registry-research-framework/audit/registry-value-experiments/operator96-030-forceforegroundboostdecay-1.json` |
-| `operator96-031-rebalanceminpriority-16` | `ok` | `True` | `ok`/`0` | `1.03` | `-42.02` | `-8.48` | `registry-research-framework/audit/registry-value-experiments/operator96-031-rebalanceminpriority-16.json` |
-| `operator96-031-rebalanceminpriority-0` | `ok` | `True` | `ok`/`0` | `1.13` | `1.3` | `1.01` | `registry-research-framework/audit/registry-value-experiments/operator96-031-rebalanceminpriority-0.json` |
+| `operator96-030-forceforegroundboostdecay-0` | `skipped-existing-ok` | `True` | `ok`/`0` | `8.41` | `-21.07` | `3.67` | `registry-research-framework/audit/registry-value-experiments/operator96-030-forceforegroundboostdecay-0.json` |
+| `operator96-030-forceforegroundboostdecay-1` | `skipped-existing-ok` | `True` | `ok`/`0` | `18.1` | `-2.95` | `-69.61` | `registry-research-framework/audit/registry-value-experiments/operator96-030-forceforegroundboostdecay-1.json` |
+| `operator96-031-rebalanceminpriority-16` | `skipped-existing-ok` | `True` | `ok`/`0` | `1.03` | `-42.02` | `-8.48` | `registry-research-framework/audit/registry-value-experiments/operator96-031-rebalanceminpriority-16.json` |
+| `operator96-031-rebalanceminpriority-0` | `skipped-existing-ok` | `True` | `ok`/`0` | `1.13` | `1.3` | `1.01` | `registry-research-framework/audit/registry-value-experiments/operator96-031-rebalanceminpriority-0.json` |
+| `operator96-032-interruptsteeringflags-1` | `ok` | `True` | `ok`/`0` | `34.58` | `74.0` | `-6.48` | `registry-research-framework/audit/registry-value-experiments/operator96-032-interruptsteeringflags-1.json` |
+| `operator96-032-interruptsteeringflags-0` | `ok` | `True` | `ok`/`0` | `7.35` | `-3.28` | `286.55` | `registry-research-framework/audit/registry-value-experiments/operator96-032-interruptsteeringflags-0.json` |
+| `operator96-033-alwaystrackioboosting-0` | `ok` | `True` | `ok`/`0` | `9.39` | `-40.92` | `349.21` | `registry-research-framework/audit/registry-value-experiments/operator96-033-alwaystrackioboosting-0.json` |
+| `operator96-033-alwaystrackioboosting-1` | `ok` | `True` | `ok`/`0` | `0.53` | `-12.52` | `12.83` | `registry-research-framework/audit/registry-value-experiments/operator96-033-alwaystrackioboosting-1.json` |
+| `operator96-034-disablecontrolflowguardexportsuppression-1` | `ok` | `True` | `ok`/`0` | `26.65` | `36.9` | `0.23` | `registry-research-framework/audit/registry-value-experiments/operator96-034-disablecontrolflowguardexportsuppression-1.json` |
+| `operator96-034-disablecontrolflowguardexportsuppression-0` | `ok` | `True` | `ok`/`0` | `34.17` | `11.05` | `-55.31` | `registry-research-framework/audit/registry-value-experiments/operator96-034-disablecontrolflowguardexportsuppression-0.json` |
+| `operator96-035-maximumcooperativeidlesearchwidth-0` | `ok` | `True` | `ok`/`0` | `24.33` | `12.33` | `-14.49` | `registry-research-framework/audit/registry-value-experiments/operator96-035-maximumcooperativeidlesearchwidth-0.json` |
+| `operator96-035-maximumcooperativeidlesearchwidth-1` | `ok` | `True` | `ok`/`0` | `23.5` | `7.21` | `-40.06` | `registry-research-framework/audit/registry-value-experiments/operator96-035-maximumcooperativeidlesearchwidth-1.json` |
+| `operator96-036-hiberbootenabled-0` | `ok` | `True` | `ok`/`0` | `6.49` | `3.6` | `-73.85` | `registry-research-framework/audit/registry-value-experiments/operator96-036-hiberbootenabled-0.json` |
+| `operator96-037-powersettingprofile-1` | `ok` | `True` | `ok`/`0` | `15.32` | `36.47` | `-62.08` | `registry-research-framework/audit/registry-value-experiments/operator96-037-powersettingprofile-1.json` |

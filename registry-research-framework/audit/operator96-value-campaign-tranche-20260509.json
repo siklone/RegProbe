@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-05-09T17:57:42Z",
+  "generated_utc": "2026-05-09T18:52:22Z",
   "status": "ok",
   "report": "registry-research-framework/audit/operator-regadd-followup-source-default-report-20260509.json",
   "smoke_profile": "gui",
@@ -902,6 +902,150 @@
       "default_kind": "observed-absent",
       "default_value": null,
       "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed"
+    },
+    {
+      "index": 32,
+      "experiment_id": "operator96-032-interruptsteeringflags-1",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "InterruptSteeringFlags",
+      "value_data": 1,
+      "requested_data": "1",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [
+        "kernel-timing-sensitive"
+      ],
+      "source_quality": "vm-observed"
+    },
+    {
+      "index": 32,
+      "experiment_id": "operator96-032-interruptsteeringflags-0",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "InterruptSteeringFlags",
+      "value_data": 0,
+      "requested_data": "1",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [
+        "kernel-timing-sensitive"
+      ],
+      "source_quality": "vm-observed"
+    },
+    {
+      "index": 33,
+      "experiment_id": "operator96-033-alwaystrackioboosting-0",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "AlwaysTrackIoBoosting",
+      "value_data": 0,
+      "requested_data": "0",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed"
+    },
+    {
+      "index": 33,
+      "experiment_id": "operator96-033-alwaystrackioboosting-1",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "AlwaysTrackIoBoosting",
+      "value_data": 1,
+      "requested_data": "0",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed"
+    },
+    {
+      "index": 34,
+      "experiment_id": "operator96-034-disablecontrolflowguardexportsuppression-1",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "DisableControlFlowGuardExportSuppression",
+      "value_data": 1,
+      "requested_data": "1",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed"
+    },
+    {
+      "index": 34,
+      "experiment_id": "operator96-034-disablecontrolflowguardexportsuppression-0",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "DisableControlFlowGuardExportSuppression",
+      "value_data": 0,
+      "requested_data": "1",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed"
+    },
+    {
+      "index": 35,
+      "experiment_id": "operator96-035-maximumcooperativeidlesearchwidth-0",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "MaximumCooperativeIdleSearchWidth",
+      "value_data": 0,
+      "requested_data": "0",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed"
+    },
+    {
+      "index": 35,
+      "experiment_id": "operator96-035-maximumcooperativeidlesearchwidth-1",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "MaximumCooperativeIdleSearchWidth",
+      "value_data": 1,
+      "requested_data": "0",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed"
+    },
+    {
+      "index": 36,
+      "experiment_id": "operator96-036-hiberbootenabled-0",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+      "value_name": "HiberbootEnabled",
+      "value_data": 0,
+      "requested_data": "0",
+      "default_kind": "observed-present",
+      "default_value": 1,
+      "vm_status": "value-present",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed"
+    },
+    {
+      "index": 37,
+      "experiment_id": "operator96-037-powersettingprofile-1",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+      "value_name": "PowerSettingProfile",
+      "value_data": 1,
+      "requested_data": "0",
+      "default_kind": "observed-present",
+      "default_value": 0,
+      "vm_status": "value-present",
       "record_class": "value",
       "risk_flags": [],
       "source_quality": "vm-observed"
@@ -7645,16 +7789,8 @@
       "record_class": "value",
       "risk_flags": [],
       "source_quality": "vm-observed",
-      "status": "ok",
-      "returncode": 0,
+      "status": "skipped-existing-ok",
       "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-030-forceforegroundboostdecay-0.json",
-      "stdout_payload": {
-        "status": "ok",
-        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-030-forceforegroundboostdecay-0.json",
-        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-030-forceforegroundboostdecay-0.md",
-        "error": null
-      },
-      "stderr": "",
       "observations": {
         "status": "ok",
         "smoke_hard_success": {
@@ -7772,16 +7908,8 @@
       "record_class": "value",
       "risk_flags": [],
       "source_quality": "vm-observed",
-      "status": "ok",
-      "returncode": 0,
+      "status": "skipped-existing-ok",
       "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-030-forceforegroundboostdecay-1.json",
-      "stdout_payload": {
-        "status": "ok",
-        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-030-forceforegroundboostdecay-1.json",
-        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-030-forceforegroundboostdecay-1.md",
-        "error": null
-      },
-      "stderr": "",
       "observations": {
         "status": "ok",
         "smoke_hard_success": {
@@ -7899,16 +8027,8 @@
       "record_class": "value",
       "risk_flags": [],
       "source_quality": "vm-observed",
-      "status": "ok",
-      "returncode": 0,
+      "status": "skipped-existing-ok",
       "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-031-rebalanceminpriority-16.json",
-      "stdout_payload": {
-        "status": "ok",
-        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-031-rebalanceminpriority-16.json",
-        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-031-rebalanceminpriority-16.md",
-        "error": null
-      },
-      "stderr": "",
       "observations": {
         "status": "ok",
         "smoke_hard_success": {
@@ -8026,16 +8146,8 @@
       "record_class": "value",
       "risk_flags": [],
       "source_quality": "vm-observed",
-      "status": "ok",
-      "returncode": 0,
+      "status": "skipped-existing-ok",
       "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-031-rebalanceminpriority-0.json",
-      "stdout_payload": {
-        "status": "ok",
-        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-031-rebalanceminpriority-0.json",
-        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-031-rebalanceminpriority-0.md",
-        "error": null
-      },
-      "stderr": "",
       "observations": {
         "status": "ok",
         "smoke_hard_success": {
@@ -8136,6 +8248,1280 @@
             "cpu_single_seconds": 1.13,
             "cpu_multi_seconds": 1.3,
             "io_write_read_mib_per_second": 1.01
+          }
+        }
+      }
+    },
+    {
+      "index": 32,
+      "experiment_id": "operator96-032-interruptsteeringflags-1",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "InterruptSteeringFlags",
+      "value_data": 1,
+      "requested_data": "1",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [
+        "kernel-timing-sensitive"
+      ],
+      "source_quality": "vm-observed",
+      "status": "ok",
+      "returncode": 0,
+      "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-032-interruptsteeringflags-1.json",
+      "stdout_payload": {
+        "status": "ok",
+        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-032-interruptsteeringflags-1.json",
+        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-032-interruptsteeringflags-1.md",
+        "error": null
+      },
+      "stderr": "",
+      "observations": {
+        "status": "ok",
+        "smoke_hard_success": {
+          "apply_smoke_hard_success": true,
+          "post_reboot_smoke_hard_success": true,
+          "post_rollback_smoke_hard_success": true
+        },
+        "apply": {
+          "original": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+            "value_name": "InterruptSteeringFlags",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "after_apply": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+            "value_name": "InterruptSteeringFlags",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 1,
+            "value_kind": "System.Int32",
+            "value_hex": "0x1",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_reboot": {
+          "after_reboot": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+            "value_name": "InterruptSteeringFlags",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 1,
+            "value_kind": "System.Int32",
+            "value_hex": "0x1",
+            "status": "value-present",
+            "error": null
+          },
+          "restore_action": "removed-created-value",
+          "after_restore": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+            "value_name": "InterruptSteeringFlags",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_rollback": {
+          "final": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+            "value_name": "InterruptSteeringFlags",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "benchmark_delta_percent": {
+          "apply_vs_baseline": {
+            "cpu_single_seconds": 1.39,
+            "cpu_multi_seconds": 1.51,
+            "io_write_read_mib_per_second": -5.46
+          },
+          "post_reboot_vs_baseline": {
+            "cpu_single_seconds": 34.58,
+            "cpu_multi_seconds": 74.0,
+            "io_write_read_mib_per_second": -6.48
+          }
+        }
+      }
+    },
+    {
+      "index": 32,
+      "experiment_id": "operator96-032-interruptsteeringflags-0",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "InterruptSteeringFlags",
+      "value_data": 0,
+      "requested_data": "1",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [
+        "kernel-timing-sensitive"
+      ],
+      "source_quality": "vm-observed",
+      "status": "ok",
+      "returncode": 0,
+      "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-032-interruptsteeringflags-0.json",
+      "stdout_payload": {
+        "status": "ok",
+        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-032-interruptsteeringflags-0.json",
+        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-032-interruptsteeringflags-0.md",
+        "error": null
+      },
+      "stderr": "",
+      "observations": {
+        "status": "ok",
+        "smoke_hard_success": {
+          "apply_smoke_hard_success": true,
+          "post_reboot_smoke_hard_success": true,
+          "post_rollback_smoke_hard_success": true
+        },
+        "apply": {
+          "original": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+            "value_name": "InterruptSteeringFlags",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "after_apply": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+            "value_name": "InterruptSteeringFlags",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 0,
+            "value_kind": "System.Int32",
+            "value_hex": "0x0",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_reboot": {
+          "after_reboot": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+            "value_name": "InterruptSteeringFlags",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 0,
+            "value_kind": "System.Int32",
+            "value_hex": "0x0",
+            "status": "value-present",
+            "error": null
+          },
+          "restore_action": "removed-created-value",
+          "after_restore": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+            "value_name": "InterruptSteeringFlags",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_rollback": {
+          "final": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+            "value_name": "InterruptSteeringFlags",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "benchmark_delta_percent": {
+          "apply_vs_baseline": {
+            "cpu_single_seconds": 0.87,
+            "cpu_multi_seconds": 2.43,
+            "io_write_read_mib_per_second": 371.63
+          },
+          "post_reboot_vs_baseline": {
+            "cpu_single_seconds": 7.35,
+            "cpu_multi_seconds": -3.28,
+            "io_write_read_mib_per_second": 286.55
+          }
+        }
+      }
+    },
+    {
+      "index": 33,
+      "experiment_id": "operator96-033-alwaystrackioboosting-0",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "AlwaysTrackIoBoosting",
+      "value_data": 0,
+      "requested_data": "0",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed",
+      "status": "ok",
+      "returncode": 0,
+      "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-033-alwaystrackioboosting-0.json",
+      "stdout_payload": {
+        "status": "ok",
+        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-033-alwaystrackioboosting-0.json",
+        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-033-alwaystrackioboosting-0.md",
+        "error": null
+      },
+      "stderr": "",
+      "observations": {
+        "status": "ok",
+        "smoke_hard_success": {
+          "apply_smoke_hard_success": true,
+          "post_reboot_smoke_hard_success": true,
+          "post_rollback_smoke_hard_success": true
+        },
+        "apply": {
+          "original": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+            "value_name": "AlwaysTrackIoBoosting",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "after_apply": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+            "value_name": "AlwaysTrackIoBoosting",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 0,
+            "value_kind": "System.Int32",
+            "value_hex": "0x0",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_reboot": {
+          "after_reboot": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+            "value_name": "AlwaysTrackIoBoosting",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 0,
+            "value_kind": "System.Int32",
+            "value_hex": "0x0",
+            "status": "value-present",
+            "error": null
+          },
+          "restore_action": "removed-created-value",
+          "after_restore": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+            "value_name": "AlwaysTrackIoBoosting",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_rollback": {
+          "final": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+            "value_name": "AlwaysTrackIoBoosting",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "benchmark_delta_percent": {
+          "apply_vs_baseline": {
+            "cpu_single_seconds": 0.24,
+            "cpu_multi_seconds": -38.17,
+            "io_write_read_mib_per_second": 473.36
+          },
+          "post_reboot_vs_baseline": {
+            "cpu_single_seconds": 9.39,
+            "cpu_multi_seconds": -40.92,
+            "io_write_read_mib_per_second": 349.21
+          }
+        }
+      }
+    },
+    {
+      "index": 33,
+      "experiment_id": "operator96-033-alwaystrackioboosting-1",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "AlwaysTrackIoBoosting",
+      "value_data": 1,
+      "requested_data": "0",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed",
+      "status": "ok",
+      "returncode": 0,
+      "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-033-alwaystrackioboosting-1.json",
+      "stdout_payload": {
+        "status": "ok",
+        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-033-alwaystrackioboosting-1.json",
+        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-033-alwaystrackioboosting-1.md",
+        "error": null
+      },
+      "stderr": "",
+      "observations": {
+        "status": "ok",
+        "smoke_hard_success": {
+          "apply_smoke_hard_success": true,
+          "post_reboot_smoke_hard_success": true,
+          "post_rollback_smoke_hard_success": true
+        },
+        "apply": {
+          "original": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+            "value_name": "AlwaysTrackIoBoosting",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "after_apply": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+            "value_name": "AlwaysTrackIoBoosting",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 1,
+            "value_kind": "System.Int32",
+            "value_hex": "0x1",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_reboot": {
+          "after_reboot": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+            "value_name": "AlwaysTrackIoBoosting",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 1,
+            "value_kind": "System.Int32",
+            "value_hex": "0x1",
+            "status": "value-present",
+            "error": null
+          },
+          "restore_action": "removed-created-value",
+          "after_restore": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+            "value_name": "AlwaysTrackIoBoosting",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_rollback": {
+          "final": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+            "value_name": "AlwaysTrackIoBoosting",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "benchmark_delta_percent": {
+          "apply_vs_baseline": {
+            "cpu_single_seconds": -1.64,
+            "cpu_multi_seconds": 41.29,
+            "io_write_read_mib_per_second": 15.66
+          },
+          "post_reboot_vs_baseline": {
+            "cpu_single_seconds": 0.53,
+            "cpu_multi_seconds": -12.52,
+            "io_write_read_mib_per_second": 12.83
+          }
+        }
+      }
+    },
+    {
+      "index": 34,
+      "experiment_id": "operator96-034-disablecontrolflowguardexportsuppression-1",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "DisableControlFlowGuardExportSuppression",
+      "value_data": 1,
+      "requested_data": "1",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed",
+      "status": "ok",
+      "returncode": 0,
+      "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-034-disablecontrolflowguardexportsuppression-1.json",
+      "stdout_payload": {
+        "status": "ok",
+        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-034-disablecontrolflowguardexportsuppression-1.json",
+        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-034-disablecontrolflowguardexportsuppression-1.md",
+        "error": null
+      },
+      "stderr": "",
+      "observations": {
+        "status": "ok",
+        "smoke_hard_success": {
+          "apply_smoke_hard_success": true,
+          "post_reboot_smoke_hard_success": true,
+          "post_rollback_smoke_hard_success": true
+        },
+        "apply": {
+          "original": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+            "value_name": "DisableControlFlowGuardExportSuppression",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "after_apply": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+            "value_name": "DisableControlFlowGuardExportSuppression",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 1,
+            "value_kind": "System.Int32",
+            "value_hex": "0x1",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_reboot": {
+          "after_reboot": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+            "value_name": "DisableControlFlowGuardExportSuppression",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 1,
+            "value_kind": "System.Int32",
+            "value_hex": "0x1",
+            "status": "value-present",
+            "error": null
+          },
+          "restore_action": "removed-created-value",
+          "after_restore": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+            "value_name": "DisableControlFlowGuardExportSuppression",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_rollback": {
+          "final": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+            "value_name": "DisableControlFlowGuardExportSuppression",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "benchmark_delta_percent": {
+          "apply_vs_baseline": {
+            "cpu_single_seconds": -8.95,
+            "cpu_multi_seconds": 2.72,
+            "io_write_read_mib_per_second": -78.75
+          },
+          "post_reboot_vs_baseline": {
+            "cpu_single_seconds": 26.65,
+            "cpu_multi_seconds": 36.9,
+            "io_write_read_mib_per_second": 0.23
+          }
+        }
+      }
+    },
+    {
+      "index": 34,
+      "experiment_id": "operator96-034-disablecontrolflowguardexportsuppression-0",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "DisableControlFlowGuardExportSuppression",
+      "value_data": 0,
+      "requested_data": "1",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed",
+      "status": "ok",
+      "returncode": 0,
+      "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-034-disablecontrolflowguardexportsuppression-0.json",
+      "stdout_payload": {
+        "status": "ok",
+        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-034-disablecontrolflowguardexportsuppression-0.json",
+        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-034-disablecontrolflowguardexportsuppression-0.md",
+        "error": null
+      },
+      "stderr": "",
+      "observations": {
+        "status": "ok",
+        "smoke_hard_success": {
+          "apply_smoke_hard_success": true,
+          "post_reboot_smoke_hard_success": true,
+          "post_rollback_smoke_hard_success": true
+        },
+        "apply": {
+          "original": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+            "value_name": "DisableControlFlowGuardExportSuppression",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "after_apply": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+            "value_name": "DisableControlFlowGuardExportSuppression",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 0,
+            "value_kind": "System.Int32",
+            "value_hex": "0x0",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_reboot": {
+          "after_reboot": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+            "value_name": "DisableControlFlowGuardExportSuppression",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 0,
+            "value_kind": "System.Int32",
+            "value_hex": "0x0",
+            "status": "value-present",
+            "error": null
+          },
+          "restore_action": "removed-created-value",
+          "after_restore": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+            "value_name": "DisableControlFlowGuardExportSuppression",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_rollback": {
+          "final": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+            "value_name": "DisableControlFlowGuardExportSuppression",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "benchmark_delta_percent": {
+          "apply_vs_baseline": {
+            "cpu_single_seconds": 5.38,
+            "cpu_multi_seconds": 56.16,
+            "io_write_read_mib_per_second": -78.25
+          },
+          "post_reboot_vs_baseline": {
+            "cpu_single_seconds": 34.17,
+            "cpu_multi_seconds": 11.05,
+            "io_write_read_mib_per_second": -55.31
+          }
+        }
+      }
+    },
+    {
+      "index": 35,
+      "experiment_id": "operator96-035-maximumcooperativeidlesearchwidth-0",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "MaximumCooperativeIdleSearchWidth",
+      "value_data": 0,
+      "requested_data": "0",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed",
+      "status": "ok",
+      "returncode": 0,
+      "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-035-maximumcooperativeidlesearchwidth-0.json",
+      "stdout_payload": {
+        "status": "ok",
+        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-035-maximumcooperativeidlesearchwidth-0.json",
+        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-035-maximumcooperativeidlesearchwidth-0.md",
+        "error": null
+      },
+      "stderr": "",
+      "observations": {
+        "status": "ok",
+        "smoke_hard_success": {
+          "apply_smoke_hard_success": true,
+          "post_reboot_smoke_hard_success": true,
+          "post_rollback_smoke_hard_success": true
+        },
+        "apply": {
+          "original": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+            "value_name": "MaximumCooperativeIdleSearchWidth",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "after_apply": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+            "value_name": "MaximumCooperativeIdleSearchWidth",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 0,
+            "value_kind": "System.Int32",
+            "value_hex": "0x0",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_reboot": {
+          "after_reboot": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+            "value_name": "MaximumCooperativeIdleSearchWidth",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 0,
+            "value_kind": "System.Int32",
+            "value_hex": "0x0",
+            "status": "value-present",
+            "error": null
+          },
+          "restore_action": "removed-created-value",
+          "after_restore": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+            "value_name": "MaximumCooperativeIdleSearchWidth",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_rollback": {
+          "final": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+            "value_name": "MaximumCooperativeIdleSearchWidth",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "benchmark_delta_percent": {
+          "apply_vs_baseline": {
+            "cpu_single_seconds": 0.99,
+            "cpu_multi_seconds": 1.95,
+            "io_write_read_mib_per_second": -7.41
+          },
+          "post_reboot_vs_baseline": {
+            "cpu_single_seconds": 24.33,
+            "cpu_multi_seconds": 12.33,
+            "io_write_read_mib_per_second": -14.49
+          }
+        }
+      }
+    },
+    {
+      "index": 35,
+      "experiment_id": "operator96-035-maximumcooperativeidlesearchwidth-1",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "MaximumCooperativeIdleSearchWidth",
+      "value_data": 1,
+      "requested_data": "0",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed",
+      "status": "ok",
+      "returncode": 0,
+      "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-035-maximumcooperativeidlesearchwidth-1.json",
+      "stdout_payload": {
+        "status": "ok",
+        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-035-maximumcooperativeidlesearchwidth-1.json",
+        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-035-maximumcooperativeidlesearchwidth-1.md",
+        "error": null
+      },
+      "stderr": "",
+      "observations": {
+        "status": "ok",
+        "smoke_hard_success": {
+          "apply_smoke_hard_success": true,
+          "post_reboot_smoke_hard_success": true,
+          "post_rollback_smoke_hard_success": true
+        },
+        "apply": {
+          "original": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+            "value_name": "MaximumCooperativeIdleSearchWidth",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "after_apply": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+            "value_name": "MaximumCooperativeIdleSearchWidth",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 1,
+            "value_kind": "System.Int32",
+            "value_hex": "0x1",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_reboot": {
+          "after_reboot": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+            "value_name": "MaximumCooperativeIdleSearchWidth",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 1,
+            "value_kind": "System.Int32",
+            "value_hex": "0x1",
+            "status": "value-present",
+            "error": null
+          },
+          "restore_action": "removed-created-value",
+          "after_restore": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+            "value_name": "MaximumCooperativeIdleSearchWidth",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_rollback": {
+          "final": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+            "value_name": "MaximumCooperativeIdleSearchWidth",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "benchmark_delta_percent": {
+          "apply_vs_baseline": {
+            "cpu_single_seconds": 1.9,
+            "cpu_multi_seconds": 1.32,
+            "io_write_read_mib_per_second": -0.61
+          },
+          "post_reboot_vs_baseline": {
+            "cpu_single_seconds": 23.5,
+            "cpu_multi_seconds": 7.21,
+            "io_write_read_mib_per_second": -40.06
+          }
+        }
+      }
+    },
+    {
+      "index": 36,
+      "experiment_id": "operator96-036-hiberbootenabled-0",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+      "value_name": "HiberbootEnabled",
+      "value_data": 0,
+      "requested_data": "0",
+      "default_kind": "observed-present",
+      "default_value": 1,
+      "vm_status": "value-present",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed",
+      "status": "ok",
+      "returncode": 0,
+      "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-036-hiberbootenabled-0.json",
+      "stdout_payload": {
+        "status": "ok",
+        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-036-hiberbootenabled-0.json",
+        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-036-hiberbootenabled-0.md",
+        "error": null
+      },
+      "stderr": "",
+      "observations": {
+        "status": "ok",
+        "smoke_hard_success": {
+          "apply_smoke_hard_success": true,
+          "post_reboot_smoke_hard_success": true,
+          "post_rollback_smoke_hard_success": true
+        },
+        "apply": {
+          "original": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+            "value_name": "HiberbootEnabled",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 1,
+            "value_kind": "System.Int32",
+            "value_hex": "0x1",
+            "status": "value-present",
+            "error": null
+          },
+          "after_apply": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+            "value_name": "HiberbootEnabled",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 0,
+            "value_kind": "System.Int32",
+            "value_hex": "0x0",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_reboot": {
+          "after_reboot": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+            "value_name": "HiberbootEnabled",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 0,
+            "value_kind": "System.Int32",
+            "value_hex": "0x0",
+            "status": "value-present",
+            "error": null
+          },
+          "restore_action": "restored-original-value",
+          "after_restore": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+            "value_name": "HiberbootEnabled",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 1,
+            "value_kind": "System.Int32",
+            "value_hex": "0x1",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_rollback": {
+          "final": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+            "value_name": "HiberbootEnabled",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 1,
+            "value_kind": "System.Int32",
+            "value_hex": "0x1",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "benchmark_delta_percent": {
+          "apply_vs_baseline": {
+            "cpu_single_seconds": 0.79,
+            "cpu_multi_seconds": 3.69,
+            "io_write_read_mib_per_second": -18.58
+          },
+          "post_reboot_vs_baseline": {
+            "cpu_single_seconds": 6.49,
+            "cpu_multi_seconds": 3.6,
+            "io_write_read_mib_per_second": -73.85
+          }
+        }
+      }
+    },
+    {
+      "index": 37,
+      "experiment_id": "operator96-037-powersettingprofile-1",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+      "value_name": "PowerSettingProfile",
+      "value_data": 1,
+      "requested_data": "0",
+      "default_kind": "observed-present",
+      "default_value": 0,
+      "vm_status": "value-present",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed",
+      "status": "ok",
+      "returncode": 0,
+      "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-037-powersettingprofile-1.json",
+      "stdout_payload": {
+        "status": "ok",
+        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-037-powersettingprofile-1.json",
+        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-037-powersettingprofile-1.md",
+        "error": null
+      },
+      "stderr": "",
+      "observations": {
+        "status": "ok",
+        "smoke_hard_success": {
+          "apply_smoke_hard_success": true,
+          "post_reboot_smoke_hard_success": true,
+          "post_rollback_smoke_hard_success": true
+        },
+        "apply": {
+          "original": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+            "value_name": "PowerSettingProfile",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 0,
+            "value_kind": "System.Int32",
+            "value_hex": "0x0",
+            "status": "value-present",
+            "error": null
+          },
+          "after_apply": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+            "value_name": "PowerSettingProfile",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 1,
+            "value_kind": "System.Int32",
+            "value_hex": "0x1",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_reboot": {
+          "after_reboot": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+            "value_name": "PowerSettingProfile",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 1,
+            "value_kind": "System.Int32",
+            "value_hex": "0x1",
+            "status": "value-present",
+            "error": null
+          },
+          "restore_action": "restored-original-value",
+          "after_restore": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+            "value_name": "PowerSettingProfile",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 0,
+            "value_kind": "System.Int32",
+            "value_hex": "0x0",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_rollback": {
+          "final": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+            "value_name": "PowerSettingProfile",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 0,
+            "value_kind": "System.Int32",
+            "value_hex": "0x0",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "benchmark_delta_percent": {
+          "apply_vs_baseline": {
+            "cpu_single_seconds": 8.0,
+            "cpu_multi_seconds": 1.77,
+            "io_write_read_mib_per_second": -20.82
+          },
+          "post_reboot_vs_baseline": {
+            "cpu_single_seconds": 15.32,
+            "cpu_multi_seconds": 36.47,
+            "io_write_read_mib_per_second": -62.08
           }
         }
       }
