@@ -1,9 +1,9 @@
 # Operator 96 Registry Value Campaign
 
-- Generated UTC: `2026-05-09T12:51:26Z`
+- Generated UTC: `2026-05-09T15:56:25Z`
 - Status: **ok**
-- Planned experiments: `40`
-- Completed in this run: `40`
+- Planned experiments: `50`
+- Completed in this run: `50`
 
 ## Plan
 
@@ -49,6 +49,16 @@
 | 20 | `operator96-020-forceidlegraceperiod-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel\ForceIdleGracePeriod` | `1` | `absent` | `vm-observed` |
 | 21 | `operator96-021-disableexceptionchainvalidation-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel\DisableExceptionChainValidation` | `1` | `absent` | `vm-observed` |
 | 21 | `operator96-021-disableexceptionchainvalidation-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel\DisableExceptionChainValidation` | `0` | `absent` | `vm-observed` |
+| 22 | `operator96-022-maxdynamictickduration-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel\MaxDynamicTickDuration` | `1` | `absent` | `vm-observed` |
+| 22 | `operator96-022-maxdynamictickduration-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel\MaxDynamicTickDuration` | `0` | `absent` | `vm-observed` |
+| 23 | `operator96-023-enabletickaccumulationfromaccountingperiods-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel\EnableTickAccumulationFromAccountingPeriods` | `1` | `absent` | `vm-observed` |
+| 23 | `operator96-023-enabletickaccumulationfromaccountingperiods-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel\EnableTickAccumulationFromAccountingPeriods` | `0` | `absent` | `vm-observed` |
+| 24 | `operator96-024-enablepercpuclocktickscheduling-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel\EnablePerCpuClockTickScheduling` | `1` | `absent` | `vm-observed` |
+| 24 | `operator96-024-enablepercpuclocktickscheduling-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel\EnablePerCpuClockTickScheduling` | `0` | `absent` | `vm-observed` |
+| 25 | `operator96-025-serializetimerexpiration-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel\SerializeTimerExpiration` | `0` | `absent` | `vm-observed` |
+| 25 | `operator96-025-serializetimerexpiration-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel\SerializeTimerExpiration` | `1` | `absent` | `vm-observed` |
+| 26 | `operator96-026-xstatecontextlookasideperprocmaxdepth-1024` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel\XStateContextLookasidePerProcMaxDepth` | `1024` | `absent` | `vm-observed` |
+| 26 | `operator96-026-xstatecontextlookasideperprocmaxdepth-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel\XStateContextLookasidePerProcMaxDepth` | `0` | `absent` | `vm-observed` |
 
 ## Results
 
@@ -84,13 +94,23 @@
 | `operator96-015-forceparkingrequested-1` | `skipped-existing-ok` | `True` | `ok`/`0` | `0.25` | `0.55` | `81.79` | `registry-research-framework/audit/registry-value-experiments/operator96-015-forceparkingrequested-1.json` |
 | `operator96-016-enableweruserreporting-0` | `skipped-existing-ok` | `True` | `ok`/`0` | `1.4` | `-0.92` | `-2.5` | `registry-research-framework/audit/registry-value-experiments/operator96-016-enableweruserreporting-0.json` |
 | `operator96-016-enableweruserreporting-1` | `skipped-existing-ok` | `True` | `ok`/`0` | `0.74` | `1.2` | `418.78` | `registry-research-framework/audit/registry-value-experiments/operator96-016-enableweruserreporting-1.json` |
-| `operator96-017-hyperstartdisabled-1` | `ok` | `True` | `ok`/`0` | `2.78` | `1.44` | `-37.56` | `registry-research-framework/audit/registry-value-experiments/operator96-017-hyperstartdisabled-1.json` |
-| `operator96-017-hyperstartdisabled-0` | `ok` | `True` | `ok`/`0` | `1.15` | `0.51` | `-64.85` | `registry-research-framework/audit/registry-value-experiments/operator96-017-hyperstartdisabled-0.json` |
-| `operator96-018-disablelightweightsuspend-0` | `ok` | `True` | `ok`/`0` | `-1.88` | `-5.12` | `81.82` | `registry-research-framework/audit/registry-value-experiments/operator96-018-disablelightweightsuspend-0.json` |
-| `operator96-018-disablelightweightsuspend-1` | `ok` | `True` | `ok`/`0` | `0.46` | `1.11` | `1.75` | `registry-research-framework/audit/registry-value-experiments/operator96-018-disablelightweightsuspend-1.json` |
-| `operator96-019-timercheckflags-0` | `ok` | `True` | `ok`/`0` | `5.29` | `2.29` | `-54.73` | `registry-research-framework/audit/registry-value-experiments/operator96-019-timercheckflags-0.json` |
-| `operator96-019-timercheckflags-1` | `ok` | `True` | `ok`/`0` | `0.94` | `-0.05` | `3.28` | `registry-research-framework/audit/registry-value-experiments/operator96-019-timercheckflags-1.json` |
-| `operator96-020-forceidlegraceperiod-0` | `ok` | `True` | `ok`/`0` | `2.34` | `-1.34` | `6.31` | `registry-research-framework/audit/registry-value-experiments/operator96-020-forceidlegraceperiod-0.json` |
-| `operator96-020-forceidlegraceperiod-1` | `ok` | `True` | `ok`/`0` | `2.1` | `1.2` | `-11.71` | `registry-research-framework/audit/registry-value-experiments/operator96-020-forceidlegraceperiod-1.json` |
-| `operator96-021-disableexceptionchainvalidation-1` | `ok` | `True` | `ok`/`0` | `-0.68` | `0.28` | `2.85` | `registry-research-framework/audit/registry-value-experiments/operator96-021-disableexceptionchainvalidation-1.json` |
-| `operator96-021-disableexceptionchainvalidation-0` | `ok` | `True` | `ok`/`0` | `1.47` | `-0.41` | `-0.0` | `registry-research-framework/audit/registry-value-experiments/operator96-021-disableexceptionchainvalidation-0.json` |
+| `operator96-017-hyperstartdisabled-1` | `skipped-existing-ok` | `True` | `ok`/`0` | `2.78` | `1.44` | `-37.56` | `registry-research-framework/audit/registry-value-experiments/operator96-017-hyperstartdisabled-1.json` |
+| `operator96-017-hyperstartdisabled-0` | `skipped-existing-ok` | `True` | `ok`/`0` | `1.15` | `0.51` | `-64.85` | `registry-research-framework/audit/registry-value-experiments/operator96-017-hyperstartdisabled-0.json` |
+| `operator96-018-disablelightweightsuspend-0` | `skipped-existing-ok` | `True` | `ok`/`0` | `-1.88` | `-5.12` | `81.82` | `registry-research-framework/audit/registry-value-experiments/operator96-018-disablelightweightsuspend-0.json` |
+| `operator96-018-disablelightweightsuspend-1` | `skipped-existing-ok` | `True` | `ok`/`0` | `0.46` | `1.11` | `1.75` | `registry-research-framework/audit/registry-value-experiments/operator96-018-disablelightweightsuspend-1.json` |
+| `operator96-019-timercheckflags-0` | `skipped-existing-ok` | `True` | `ok`/`0` | `5.29` | `2.29` | `-54.73` | `registry-research-framework/audit/registry-value-experiments/operator96-019-timercheckflags-0.json` |
+| `operator96-019-timercheckflags-1` | `skipped-existing-ok` | `True` | `ok`/`0` | `0.94` | `-0.05` | `3.28` | `registry-research-framework/audit/registry-value-experiments/operator96-019-timercheckflags-1.json` |
+| `operator96-020-forceidlegraceperiod-0` | `skipped-existing-ok` | `True` | `ok`/`0` | `2.34` | `-1.34` | `6.31` | `registry-research-framework/audit/registry-value-experiments/operator96-020-forceidlegraceperiod-0.json` |
+| `operator96-020-forceidlegraceperiod-1` | `skipped-existing-ok` | `True` | `ok`/`0` | `2.1` | `1.2` | `-11.71` | `registry-research-framework/audit/registry-value-experiments/operator96-020-forceidlegraceperiod-1.json` |
+| `operator96-021-disableexceptionchainvalidation-1` | `skipped-existing-ok` | `True` | `ok`/`0` | `-0.68` | `0.28` | `2.85` | `registry-research-framework/audit/registry-value-experiments/operator96-021-disableexceptionchainvalidation-1.json` |
+| `operator96-021-disableexceptionchainvalidation-0` | `skipped-existing-ok` | `True` | `ok`/`0` | `1.47` | `-0.41` | `-0.0` | `registry-research-framework/audit/registry-value-experiments/operator96-021-disableexceptionchainvalidation-0.json` |
+| `operator96-022-maxdynamictickduration-1` | `skipped-existing-ok` | `True` | `ok`/`0` | `15.01` | `-31.64` | `331.06` | `registry-research-framework/audit/registry-value-experiments/operator96-022-maxdynamictickduration-1.json` |
+| `operator96-022-maxdynamictickduration-0` | `ok` | `True` | `ok`/`0` | `-2.64` | `0.54` | `-68.25` | `registry-research-framework/audit/registry-value-experiments/operator96-022-maxdynamictickduration-0.json` |
+| `operator96-023-enabletickaccumulationfromaccountingperiods-1` | `ok` | `True` | `ok`/`0` | `1.09` | `-3.26` | `1.5` | `registry-research-framework/audit/registry-value-experiments/operator96-023-enabletickaccumulationfromaccountingperiods-1.json` |
+| `operator96-023-enabletickaccumulationfromaccountingperiods-0` | `ok` | `True` | `ok`/`0` | `7.73` | `7.09` | `-6.19` | `registry-research-framework/audit/registry-value-experiments/operator96-023-enabletickaccumulationfromaccountingperiods-0.json` |
+| `operator96-024-enablepercpuclocktickscheduling-1` | `ok` | `True` | `ok`/`0` | `8.56` | `13.74` | `-38.37` | `registry-research-framework/audit/registry-value-experiments/operator96-024-enablepercpuclocktickscheduling-1.json` |
+| `operator96-024-enablepercpuclocktickscheduling-0` | `ok` | `True` | `ok`/`0` | `25.14` | `41.69` | `-52.06` | `registry-research-framework/audit/registry-value-experiments/operator96-024-enablepercpuclocktickscheduling-0.json` |
+| `operator96-025-serializetimerexpiration-0` | `ok` | `True` | `ok`/`0` | `-0.36` | `-1.63` | `36.99` | `registry-research-framework/audit/registry-value-experiments/operator96-025-serializetimerexpiration-0.json` |
+| `operator96-025-serializetimerexpiration-1` | `ok` | `True` | `ok`/`0` | `0.5` | `25.84` | `3.31` | `registry-research-framework/audit/registry-value-experiments/operator96-025-serializetimerexpiration-1.json` |
+| `operator96-026-xstatecontextlookasideperprocmaxdepth-1024` | `ok` | `True` | `ok`/`0` | `0.04` | `-0.92` | `-20.96` | `registry-research-framework/audit/registry-value-experiments/operator96-026-xstatecontextlookasideperprocmaxdepth-1024.json` |
+| `operator96-026-xstatecontextlookasideperprocmaxdepth-0` | `ok` | `True` | `ok`/`0` | `19.36` | `12.77` | `46.96` | `registry-research-framework/audit/registry-value-experiments/operator96-026-xstatecontextlookasideperprocmaxdepth-0.json` |
