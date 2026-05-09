@@ -1,9 +1,9 @@
 # Operator 96 Registry Value Campaign
 
-- Generated UTC: `2026-05-09T12:10:23Z`
+- Generated UTC: `2026-05-09T12:51:26Z`
 - Status: **ok**
-- Planned experiments: `30`
-- Completed in this run: `30`
+- Planned experiments: `40`
+- Completed in this run: `40`
 
 ## Plan
 
@@ -39,6 +39,16 @@
 | 15 | `operator96-015-forceparkingrequested-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel\ForceParkingRequested` | `1` | `absent` | `vm-observed` |
 | 16 | `operator96-016-enableweruserreporting-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel\EnableWerUserReporting` | `0` | `absent` | `vm-observed` |
 | 16 | `operator96-016-enableweruserreporting-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel\EnableWerUserReporting` | `1` | `absent` | `vm-observed` |
+| 17 | `operator96-017-hyperstartdisabled-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel\HyperStartDisabled` | `1` | `absent` | `vm-observed` |
+| 17 | `operator96-017-hyperstartdisabled-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel\HyperStartDisabled` | `0` | `absent` | `vm-observed` |
+| 18 | `operator96-018-disablelightweightsuspend-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel\DisableLightWeightSuspend` | `0` | `absent` | `vm-observed` |
+| 18 | `operator96-018-disablelightweightsuspend-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel\DisableLightWeightSuspend` | `1` | `absent` | `vm-observed` |
+| 19 | `operator96-019-timercheckflags-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel\TimerCheckFlags` | `0` | `absent` | `vm-observed` |
+| 19 | `operator96-019-timercheckflags-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel\TimerCheckFlags` | `1` | `absent` | `vm-observed` |
+| 20 | `operator96-020-forceidlegraceperiod-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel\ForceIdleGracePeriod` | `0` | `absent` | `vm-observed` |
+| 20 | `operator96-020-forceidlegraceperiod-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel\ForceIdleGracePeriod` | `1` | `absent` | `vm-observed` |
+| 21 | `operator96-021-disableexceptionchainvalidation-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel\DisableExceptionChainValidation` | `1` | `absent` | `vm-observed` |
+| 21 | `operator96-021-disableexceptionchainvalidation-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel\DisableExceptionChainValidation` | `0` | `absent` | `vm-observed` |
 
 ## Results
 
@@ -64,13 +74,23 @@
 | `operator96-010-allowremotedasd-1` | `skipped-existing-ok` | `True` | `ok`/`0` | `-28.26` | `-54.84` | `-31.79` | `registry-research-framework/audit/registry-value-experiments/operator96-010-allowremotedasd-1.json` |
 | `operator96-011-disablediskcounters-1` | `skipped-existing-ok` | `True` | `ok`/`0` | `0.97` | `-0.12` | `-40.04` | `registry-research-framework/audit/registry-value-experiments/operator96-011-disablediskcounters-1.json` |
 | `operator96-011-disablediskcounters-0` | `skipped-existing-ok` | `True` | `ok`/`0` | `-1.83` | `-5.88` | `-23.18` | `registry-research-framework/audit/registry-value-experiments/operator96-011-disablediskcounters-0.json` |
-| `operator96-012-ioallowloadcrashdumpdriver-0` | `ok` | `True` | `ok`/`0` | `-14.21` | `-18.96` | `6.16` | `registry-research-framework/audit/registry-value-experiments/operator96-012-ioallowloadcrashdumpdriver-0.json` |
-| `operator96-012-ioallowloadcrashdumpdriver-1` | `ok` | `True` | `ok`/`0` | `-0.33` | `-1.03` | `-32.57` | `registry-research-framework/audit/registry-value-experiments/operator96-012-ioallowloadcrashdumpdriver-1.json` |
-| `operator96-013-ioenablesessionzeroaccesscheck-1` | `ok` | `True` | `ok`/`0` | `-2.63` | `2.54` | `82.82` | `registry-research-framework/audit/registry-value-experiments/operator96-013-ioenablesessionzeroaccesscheck-1.json` |
-| `operator96-013-ioenablesessionzeroaccesscheck-0` | `ok` | `True` | `ok`/`0` | `3.66` | `1.14` | `-2.67` | `registry-research-framework/audit/registry-value-experiments/operator96-013-ioenablesessionzeroaccesscheck-0.json` |
-| `operator96-014-globaltimerresolutionrequests-1` | `ok` | `True` | `ok`/`0` | `1.83` | `0.5` | `4.89` | `registry-research-framework/audit/registry-value-experiments/operator96-014-globaltimerresolutionrequests-1.json` |
-| `operator96-014-globaltimerresolutionrequests-0` | `ok` | `True` | `ok`/`0` | `3.17` | `26.82` | `4.04` | `registry-research-framework/audit/registry-value-experiments/operator96-014-globaltimerresolutionrequests-0.json` |
-| `operator96-015-forceparkingrequested-0` | `ok` | `True` | `ok`/`0` | `0.25` | `2.15` | `-3.26` | `registry-research-framework/audit/registry-value-experiments/operator96-015-forceparkingrequested-0.json` |
-| `operator96-015-forceparkingrequested-1` | `ok` | `True` | `ok`/`0` | `0.25` | `0.55` | `81.79` | `registry-research-framework/audit/registry-value-experiments/operator96-015-forceparkingrequested-1.json` |
-| `operator96-016-enableweruserreporting-0` | `ok` | `True` | `ok`/`0` | `1.4` | `-0.92` | `-2.5` | `registry-research-framework/audit/registry-value-experiments/operator96-016-enableweruserreporting-0.json` |
-| `operator96-016-enableweruserreporting-1` | `ok` | `True` | `ok`/`0` | `0.74` | `1.2` | `418.78` | `registry-research-framework/audit/registry-value-experiments/operator96-016-enableweruserreporting-1.json` |
+| `operator96-012-ioallowloadcrashdumpdriver-0` | `skipped-existing-ok` | `True` | `ok`/`0` | `-14.21` | `-18.96` | `6.16` | `registry-research-framework/audit/registry-value-experiments/operator96-012-ioallowloadcrashdumpdriver-0.json` |
+| `operator96-012-ioallowloadcrashdumpdriver-1` | `skipped-existing-ok` | `True` | `ok`/`0` | `-0.33` | `-1.03` | `-32.57` | `registry-research-framework/audit/registry-value-experiments/operator96-012-ioallowloadcrashdumpdriver-1.json` |
+| `operator96-013-ioenablesessionzeroaccesscheck-1` | `skipped-existing-ok` | `True` | `ok`/`0` | `-2.63` | `2.54` | `82.82` | `registry-research-framework/audit/registry-value-experiments/operator96-013-ioenablesessionzeroaccesscheck-1.json` |
+| `operator96-013-ioenablesessionzeroaccesscheck-0` | `skipped-existing-ok` | `True` | `ok`/`0` | `3.66` | `1.14` | `-2.67` | `registry-research-framework/audit/registry-value-experiments/operator96-013-ioenablesessionzeroaccesscheck-0.json` |
+| `operator96-014-globaltimerresolutionrequests-1` | `skipped-existing-ok` | `True` | `ok`/`0` | `1.83` | `0.5` | `4.89` | `registry-research-framework/audit/registry-value-experiments/operator96-014-globaltimerresolutionrequests-1.json` |
+| `operator96-014-globaltimerresolutionrequests-0` | `skipped-existing-ok` | `True` | `ok`/`0` | `3.17` | `26.82` | `4.04` | `registry-research-framework/audit/registry-value-experiments/operator96-014-globaltimerresolutionrequests-0.json` |
+| `operator96-015-forceparkingrequested-0` | `skipped-existing-ok` | `True` | `ok`/`0` | `0.25` | `2.15` | `-3.26` | `registry-research-framework/audit/registry-value-experiments/operator96-015-forceparkingrequested-0.json` |
+| `operator96-015-forceparkingrequested-1` | `skipped-existing-ok` | `True` | `ok`/`0` | `0.25` | `0.55` | `81.79` | `registry-research-framework/audit/registry-value-experiments/operator96-015-forceparkingrequested-1.json` |
+| `operator96-016-enableweruserreporting-0` | `skipped-existing-ok` | `True` | `ok`/`0` | `1.4` | `-0.92` | `-2.5` | `registry-research-framework/audit/registry-value-experiments/operator96-016-enableweruserreporting-0.json` |
+| `operator96-016-enableweruserreporting-1` | `skipped-existing-ok` | `True` | `ok`/`0` | `0.74` | `1.2` | `418.78` | `registry-research-framework/audit/registry-value-experiments/operator96-016-enableweruserreporting-1.json` |
+| `operator96-017-hyperstartdisabled-1` | `ok` | `True` | `ok`/`0` | `2.78` | `1.44` | `-37.56` | `registry-research-framework/audit/registry-value-experiments/operator96-017-hyperstartdisabled-1.json` |
+| `operator96-017-hyperstartdisabled-0` | `ok` | `True` | `ok`/`0` | `1.15` | `0.51` | `-64.85` | `registry-research-framework/audit/registry-value-experiments/operator96-017-hyperstartdisabled-0.json` |
+| `operator96-018-disablelightweightsuspend-0` | `ok` | `True` | `ok`/`0` | `-1.88` | `-5.12` | `81.82` | `registry-research-framework/audit/registry-value-experiments/operator96-018-disablelightweightsuspend-0.json` |
+| `operator96-018-disablelightweightsuspend-1` | `ok` | `True` | `ok`/`0` | `0.46` | `1.11` | `1.75` | `registry-research-framework/audit/registry-value-experiments/operator96-018-disablelightweightsuspend-1.json` |
+| `operator96-019-timercheckflags-0` | `ok` | `True` | `ok`/`0` | `5.29` | `2.29` | `-54.73` | `registry-research-framework/audit/registry-value-experiments/operator96-019-timercheckflags-0.json` |
+| `operator96-019-timercheckflags-1` | `ok` | `True` | `ok`/`0` | `0.94` | `-0.05` | `3.28` | `registry-research-framework/audit/registry-value-experiments/operator96-019-timercheckflags-1.json` |
+| `operator96-020-forceidlegraceperiod-0` | `ok` | `True` | `ok`/`0` | `2.34` | `-1.34` | `6.31` | `registry-research-framework/audit/registry-value-experiments/operator96-020-forceidlegraceperiod-0.json` |
+| `operator96-020-forceidlegraceperiod-1` | `ok` | `True` | `ok`/`0` | `2.1` | `1.2` | `-11.71` | `registry-research-framework/audit/registry-value-experiments/operator96-020-forceidlegraceperiod-1.json` |
+| `operator96-021-disableexceptionchainvalidation-1` | `ok` | `True` | `ok`/`0` | `-0.68` | `0.28` | `2.85` | `registry-research-framework/audit/registry-value-experiments/operator96-021-disableexceptionchainvalidation-1.json` |
+| `operator96-021-disableexceptionchainvalidation-0` | `ok` | `True` | `ok`/`0` | `1.47` | `-0.41` | `-0.0` | `registry-research-framework/audit/registry-value-experiments/operator96-021-disableexceptionchainvalidation-0.json` |
