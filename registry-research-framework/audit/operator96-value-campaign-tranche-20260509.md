@@ -1,9 +1,9 @@
 # Operator 96 Registry Value Campaign
 
-- Generated UTC: `2026-05-09T15:56:25Z`
+- Generated UTC: `2026-05-09T17:57:42Z`
 - Status: **ok**
-- Planned experiments: `50`
-- Completed in this run: `50`
+- Planned experiments: `60`
+- Completed in this run: `60`
 
 ## Plan
 
@@ -59,6 +59,16 @@
 | 25 | `operator96-025-serializetimerexpiration-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel\SerializeTimerExpiration` | `1` | `absent` | `vm-observed` |
 | 26 | `operator96-026-xstatecontextlookasideperprocmaxdepth-1024` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel\XStateContextLookasidePerProcMaxDepth` | `1024` | `absent` | `vm-observed` |
 | 26 | `operator96-026-xstatecontextlookasideperprocmaxdepth-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel\XStateContextLookasidePerProcMaxDepth` | `0` | `absent` | `vm-observed` |
+| 27 | `operator96-027-longdpcqueuethreshold-2` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel\LongDpcQueueThreshold` | `2` | `absent` | `vm-observed` |
+| 27 | `operator96-027-longdpcqueuethreshold-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel\LongDpcQueueThreshold` | `0` | `absent` | `vm-observed` |
+| 28 | `operator96-028-longdpcruntimethreshold-50` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel\LongDpcRuntimeThreshold` | `50` | `absent` | `vm-observed` |
+| 28 | `operator96-028-longdpcruntimethreshold-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel\LongDpcRuntimeThreshold` | `0` | `absent` | `vm-observed` |
+| 29 | `operator96-029-forcebugcheckfordpcwatchdog-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel\ForceBugcheckForDpcWatchdog` | `0` | `absent` | `vm-observed` |
+| 29 | `operator96-029-forcebugcheckfordpcwatchdog-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel\ForceBugcheckForDpcWatchdog` | `1` | `absent` | `vm-observed` |
+| 30 | `operator96-030-forceforegroundboostdecay-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel\ForceForegroundBoostDecay` | `0` | `absent` | `vm-observed` |
+| 30 | `operator96-030-forceforegroundboostdecay-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel\ForceForegroundBoostDecay` | `1` | `absent` | `vm-observed` |
+| 31 | `operator96-031-rebalanceminpriority-16` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel\RebalanceMinPriority` | `16` | `absent` | `vm-observed` |
+| 31 | `operator96-031-rebalanceminpriority-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel\RebalanceMinPriority` | `0` | `absent` | `vm-observed` |
 
 ## Results
 
@@ -105,12 +115,22 @@
 | `operator96-021-disableexceptionchainvalidation-1` | `skipped-existing-ok` | `True` | `ok`/`0` | `-0.68` | `0.28` | `2.85` | `registry-research-framework/audit/registry-value-experiments/operator96-021-disableexceptionchainvalidation-1.json` |
 | `operator96-021-disableexceptionchainvalidation-0` | `skipped-existing-ok` | `True` | `ok`/`0` | `1.47` | `-0.41` | `-0.0` | `registry-research-framework/audit/registry-value-experiments/operator96-021-disableexceptionchainvalidation-0.json` |
 | `operator96-022-maxdynamictickduration-1` | `skipped-existing-ok` | `True` | `ok`/`0` | `15.01` | `-31.64` | `331.06` | `registry-research-framework/audit/registry-value-experiments/operator96-022-maxdynamictickduration-1.json` |
-| `operator96-022-maxdynamictickduration-0` | `ok` | `True` | `ok`/`0` | `-2.64` | `0.54` | `-68.25` | `registry-research-framework/audit/registry-value-experiments/operator96-022-maxdynamictickduration-0.json` |
-| `operator96-023-enabletickaccumulationfromaccountingperiods-1` | `ok` | `True` | `ok`/`0` | `1.09` | `-3.26` | `1.5` | `registry-research-framework/audit/registry-value-experiments/operator96-023-enabletickaccumulationfromaccountingperiods-1.json` |
-| `operator96-023-enabletickaccumulationfromaccountingperiods-0` | `ok` | `True` | `ok`/`0` | `7.73` | `7.09` | `-6.19` | `registry-research-framework/audit/registry-value-experiments/operator96-023-enabletickaccumulationfromaccountingperiods-0.json` |
-| `operator96-024-enablepercpuclocktickscheduling-1` | `ok` | `True` | `ok`/`0` | `8.56` | `13.74` | `-38.37` | `registry-research-framework/audit/registry-value-experiments/operator96-024-enablepercpuclocktickscheduling-1.json` |
-| `operator96-024-enablepercpuclocktickscheduling-0` | `ok` | `True` | `ok`/`0` | `25.14` | `41.69` | `-52.06` | `registry-research-framework/audit/registry-value-experiments/operator96-024-enablepercpuclocktickscheduling-0.json` |
-| `operator96-025-serializetimerexpiration-0` | `ok` | `True` | `ok`/`0` | `-0.36` | `-1.63` | `36.99` | `registry-research-framework/audit/registry-value-experiments/operator96-025-serializetimerexpiration-0.json` |
-| `operator96-025-serializetimerexpiration-1` | `ok` | `True` | `ok`/`0` | `0.5` | `25.84` | `3.31` | `registry-research-framework/audit/registry-value-experiments/operator96-025-serializetimerexpiration-1.json` |
-| `operator96-026-xstatecontextlookasideperprocmaxdepth-1024` | `ok` | `True` | `ok`/`0` | `0.04` | `-0.92` | `-20.96` | `registry-research-framework/audit/registry-value-experiments/operator96-026-xstatecontextlookasideperprocmaxdepth-1024.json` |
-| `operator96-026-xstatecontextlookasideperprocmaxdepth-0` | `ok` | `True` | `ok`/`0` | `19.36` | `12.77` | `46.96` | `registry-research-framework/audit/registry-value-experiments/operator96-026-xstatecontextlookasideperprocmaxdepth-0.json` |
+| `operator96-022-maxdynamictickduration-0` | `skipped-existing-ok` | `True` | `ok`/`0` | `-2.64` | `0.54` | `-68.25` | `registry-research-framework/audit/registry-value-experiments/operator96-022-maxdynamictickduration-0.json` |
+| `operator96-023-enabletickaccumulationfromaccountingperiods-1` | `skipped-existing-ok` | `True` | `ok`/`0` | `1.09` | `-3.26` | `1.5` | `registry-research-framework/audit/registry-value-experiments/operator96-023-enabletickaccumulationfromaccountingperiods-1.json` |
+| `operator96-023-enabletickaccumulationfromaccountingperiods-0` | `skipped-existing-ok` | `True` | `ok`/`0` | `7.73` | `7.09` | `-6.19` | `registry-research-framework/audit/registry-value-experiments/operator96-023-enabletickaccumulationfromaccountingperiods-0.json` |
+| `operator96-024-enablepercpuclocktickscheduling-1` | `skipped-existing-ok` | `True` | `ok`/`0` | `8.56` | `13.74` | `-38.37` | `registry-research-framework/audit/registry-value-experiments/operator96-024-enablepercpuclocktickscheduling-1.json` |
+| `operator96-024-enablepercpuclocktickscheduling-0` | `skipped-existing-ok` | `True` | `ok`/`0` | `25.14` | `41.69` | `-52.06` | `registry-research-framework/audit/registry-value-experiments/operator96-024-enablepercpuclocktickscheduling-0.json` |
+| `operator96-025-serializetimerexpiration-0` | `skipped-existing-ok` | `True` | `ok`/`0` | `-0.36` | `-1.63` | `36.99` | `registry-research-framework/audit/registry-value-experiments/operator96-025-serializetimerexpiration-0.json` |
+| `operator96-025-serializetimerexpiration-1` | `skipped-existing-ok` | `True` | `ok`/`0` | `0.5` | `25.84` | `3.31` | `registry-research-framework/audit/registry-value-experiments/operator96-025-serializetimerexpiration-1.json` |
+| `operator96-026-xstatecontextlookasideperprocmaxdepth-1024` | `skipped-existing-ok` | `True` | `ok`/`0` | `0.04` | `-0.92` | `-20.96` | `registry-research-framework/audit/registry-value-experiments/operator96-026-xstatecontextlookasideperprocmaxdepth-1024.json` |
+| `operator96-026-xstatecontextlookasideperprocmaxdepth-0` | `skipped-existing-ok` | `True` | `ok`/`0` | `19.36` | `12.77` | `46.96` | `registry-research-framework/audit/registry-value-experiments/operator96-026-xstatecontextlookasideperprocmaxdepth-0.json` |
+| `operator96-027-longdpcqueuethreshold-2` | `skipped-existing-ok` | `True` | `ok`/`0` | `40.23` | `43.04` | `20.1` | `registry-research-framework/audit/registry-value-experiments/operator96-027-longdpcqueuethreshold-2.json` |
+| `operator96-027-longdpcqueuethreshold-0` | `skipped-existing-ok` | `True` | `ok`/`0` | `18.55` | `15.19` | `-1.12` | `registry-research-framework/audit/registry-value-experiments/operator96-027-longdpcqueuethreshold-0.json` |
+| `operator96-028-longdpcruntimethreshold-50` | `skipped-existing-ok` | `True` | `ok`/`0` | `14.83` | `-6.32` | `-58.11` | `registry-research-framework/audit/registry-value-experiments/operator96-028-longdpcruntimethreshold-50.json` |
+| `operator96-028-longdpcruntimethreshold-0` | `skipped-existing-ok` | `True` | `ok`/`0` | `4.27` | `-11.19` | `-13.22` | `registry-research-framework/audit/registry-value-experiments/operator96-028-longdpcruntimethreshold-0.json` |
+| `operator96-029-forcebugcheckfordpcwatchdog-0` | `skipped-existing-ok` | `True` | `ok`/`0` | `0.84` | `-16.1` | `-13.14` | `registry-research-framework/audit/registry-value-experiments/operator96-029-forcebugcheckfordpcwatchdog-0.json` |
+| `operator96-029-forcebugcheckfordpcwatchdog-1` | `skipped-existing-ok` | `True` | `ok`/`0` | `0.09` | `5.56` | `-80.55` | `registry-research-framework/audit/registry-value-experiments/operator96-029-forcebugcheckfordpcwatchdog-1.json` |
+| `operator96-030-forceforegroundboostdecay-0` | `ok` | `True` | `ok`/`0` | `8.41` | `-21.07` | `3.67` | `registry-research-framework/audit/registry-value-experiments/operator96-030-forceforegroundboostdecay-0.json` |
+| `operator96-030-forceforegroundboostdecay-1` | `ok` | `True` | `ok`/`0` | `18.1` | `-2.95` | `-69.61` | `registry-research-framework/audit/registry-value-experiments/operator96-030-forceforegroundboostdecay-1.json` |
+| `operator96-031-rebalanceminpriority-16` | `ok` | `True` | `ok`/`0` | `1.03` | `-42.02` | `-8.48` | `registry-research-framework/audit/registry-value-experiments/operator96-031-rebalanceminpriority-16.json` |
+| `operator96-031-rebalanceminpriority-0` | `ok` | `True` | `ok`/`0` | `1.13` | `1.3` | `1.01` | `registry-research-framework/audit/registry-value-experiments/operator96-031-rebalanceminpriority-0.json` |
