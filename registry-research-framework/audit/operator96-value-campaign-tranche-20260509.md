@@ -1,9 +1,9 @@
 # Operator 96 Registry Value Campaign
 
-- Generated UTC: `2026-05-09T09:42:41Z`
+- Generated UTC: `2026-05-09T11:34:33Z`
 - Status: **ok**
-- Planned experiments: `10`
-- Completed in this run: `10`
+- Planned experiments: `20`
+- Completed in this run: `20`
 
 ## Plan
 
@@ -19,6 +19,16 @@
 | 5 | `operator96-005-uuidsequencenumber-3322358` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Executive\UuidSequenceNumber` | `3322358` | `2636877` | `vm-observed` |
 | 5 | `operator96-005-uuidsequencenumber-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Executive\UuidSequenceNumber` | `0` | `2636877` | `vm-observed` |
 | 6 | `operator96-006-tickcountrolloverdelay-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Executive\TickcountRolloverDelay` | `0` | `absent` | `vm-observed` |
+| 6 | `operator96-006-tickcountrolloverdelay-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Executive\TickcountRolloverDelay` | `1` | `absent` | `vm-observed` |
+| 7 | `operator96-007-kernelworkertestflags-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Executive\KernelWorkerTestFlags` | `0` | `absent` | `vm-observed` |
+| 7 | `operator96-007-kernelworkertestflags-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Executive\KernelWorkerTestFlags` | `1` | `absent` | `vm-observed` |
+| 8 | `operator96-008-maximumkernelworkerthreads-25000` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Executive\MaximumKernelWorkerThreads` | `25000` | `absent` | `vm-observed` |
+| 8 | `operator96-008-maximumkernelworkerthreads-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Executive\MaximumKernelWorkerThreads` | `0` | `absent` | `vm-observed` |
+| 9 | `operator96-009-forceenablemutantautoboost-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Executive\ForceEnableMutantAutoboost` | `1` | `absent` | `vm-observed` |
+| 9 | `operator96-009-forceenablemutantautoboost-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Executive\ForceEnableMutantAutoboost` | `0` | `absent` | `vm-observed` |
+| 10 | `operator96-010-allowremotedasd-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\I/O System\AllowRemoteDASD` | `1` | `0` | `vm-observed` |
+| 11 | `operator96-011-disablediskcounters-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\I/O System\DisableDiskCounters` | `1` | `absent` | `vm-observed` |
+| 11 | `operator96-011-disablediskcounters-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\I/O System\DisableDiskCounters` | `0` | `absent` | `vm-observed` |
 
 ## Results
 
@@ -29,8 +39,18 @@
 | `operator96-002-enablevirtualization-0` | `skipped-existing-ok` | `True` | `ok`/`0` | `0.72` | `16.85` | `121.02` | `registry-research-framework/audit/registry-value-experiments/operator96-002-enablevirtualization-0.json` |
 | `operator96-003-additionalcriticalworkerthreads-5` | `skipped-existing-ok` | `True` | `ok`/`0` | `3.5` | `6.69` | `2.57` | `registry-research-framework/audit/registry-value-experiments/operator96-003-additionalcriticalworkerthreads-5.json` |
 | `operator96-003-additionalcriticalworkerthreads-1` | `skipped-existing-ok` | `True` | `ok`/`0` | `6.56` | `0.3` | `-40.0` | `registry-research-framework/audit/registry-value-experiments/operator96-003-additionalcriticalworkerthreads-1.json` |
-| `operator96-004-additionaldelayedworkerthreads-5` | `ok` | `True` | `ok`/`0` | `-5.43` | `-6.47` | `-18.87` | `registry-research-framework/audit/registry-value-experiments/operator96-004-additionaldelayedworkerthreads-5.json` |
-| `operator96-004-additionaldelayedworkerthreads-1` | `ok` | `True` | `ok`/`0` | `-3.85` | `2.56` | `7.38` | `registry-research-framework/audit/registry-value-experiments/operator96-004-additionaldelayedworkerthreads-1.json` |
-| `operator96-005-uuidsequencenumber-3322358` | `ok` | `True` | `ok`/`0` | `9.63` | `3.47` | `-76.71` | `registry-research-framework/audit/registry-value-experiments/operator96-005-uuidsequencenumber-3322358.json` |
-| `operator96-005-uuidsequencenumber-0` | `ok` | `True` | `ok`/`0` | `3.08` | `-9.6` | `12.84` | `registry-research-framework/audit/registry-value-experiments/operator96-005-uuidsequencenumber-0.json` |
-| `operator96-006-tickcountrolloverdelay-0` | `ok` | `True` | `ok`/`0` | `7.52` | `1.84` | `5.47` | `registry-research-framework/audit/registry-value-experiments/operator96-006-tickcountrolloverdelay-0.json` |
+| `operator96-004-additionaldelayedworkerthreads-5` | `skipped-existing-ok` | `True` | `ok`/`0` | `-5.43` | `-6.47` | `-18.87` | `registry-research-framework/audit/registry-value-experiments/operator96-004-additionaldelayedworkerthreads-5.json` |
+| `operator96-004-additionaldelayedworkerthreads-1` | `skipped-existing-ok` | `True` | `ok`/`0` | `-3.85` | `2.56` | `7.38` | `registry-research-framework/audit/registry-value-experiments/operator96-004-additionaldelayedworkerthreads-1.json` |
+| `operator96-005-uuidsequencenumber-3322358` | `skipped-existing-ok` | `True` | `ok`/`0` | `9.63` | `3.47` | `-76.71` | `registry-research-framework/audit/registry-value-experiments/operator96-005-uuidsequencenumber-3322358.json` |
+| `operator96-005-uuidsequencenumber-0` | `skipped-existing-ok` | `True` | `ok`/`0` | `3.08` | `-9.6` | `12.84` | `registry-research-framework/audit/registry-value-experiments/operator96-005-uuidsequencenumber-0.json` |
+| `operator96-006-tickcountrolloverdelay-0` | `skipped-existing-ok` | `True` | `ok`/`0` | `7.52` | `1.84` | `5.47` | `registry-research-framework/audit/registry-value-experiments/operator96-006-tickcountrolloverdelay-0.json` |
+| `operator96-006-tickcountrolloverdelay-1` | `skipped-existing-ok` | `True` | `ok`/`0` | `-14.33` | `-17.49` | `-75.12` | `registry-research-framework/audit/registry-value-experiments/operator96-006-tickcountrolloverdelay-1.json` |
+| `operator96-007-kernelworkertestflags-0` | `ok` | `True` | `ok`/`0` | `0.5` | `13.21` | `12.16` | `registry-research-framework/audit/registry-value-experiments/operator96-007-kernelworkertestflags-0.json` |
+| `operator96-007-kernelworkertestflags-1` | `ok` | `True` | `ok`/`0` | `3.48` | `11.32` | `197.74` | `registry-research-framework/audit/registry-value-experiments/operator96-007-kernelworkertestflags-1.json` |
+| `operator96-008-maximumkernelworkerthreads-25000` | `ok` | `True` | `ok`/`0` | `1.85` | `43.07` | `400.5` | `registry-research-framework/audit/registry-value-experiments/operator96-008-maximumkernelworkerthreads-25000.json` |
+| `operator96-008-maximumkernelworkerthreads-0` | `ok` | `True` | `ok`/`0` | `-4.75` | `-5.22` | `15.06` | `registry-research-framework/audit/registry-value-experiments/operator96-008-maximumkernelworkerthreads-0.json` |
+| `operator96-009-forceenablemutantautoboost-1` | `ok` | `True` | `ok`/`0` | `0.95` | `2.95` | `-14.09` | `registry-research-framework/audit/registry-value-experiments/operator96-009-forceenablemutantautoboost-1.json` |
+| `operator96-009-forceenablemutantautoboost-0` | `ok` | `True` | `ok`/`0` | `5.01` | `9.41` | `-40.86` | `registry-research-framework/audit/registry-value-experiments/operator96-009-forceenablemutantautoboost-0.json` |
+| `operator96-010-allowremotedasd-1` | `ok` | `True` | `ok`/`0` | `-28.26` | `-54.84` | `-31.79` | `registry-research-framework/audit/registry-value-experiments/operator96-010-allowremotedasd-1.json` |
+| `operator96-011-disablediskcounters-1` | `ok` | `True` | `ok`/`0` | `0.97` | `-0.12` | `-40.04` | `registry-research-framework/audit/registry-value-experiments/operator96-011-disablediskcounters-1.json` |
+| `operator96-011-disablediskcounters-0` | `ok` | `True` | `ok`/`0` | `-1.83` | `-5.88` | `-23.18` | `registry-research-framework/audit/registry-value-experiments/operator96-011-disablediskcounters-0.json` |

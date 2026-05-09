@@ -662,8 +662,22 @@ def wait_for_qga(domain: str, connect: str, timeout_seconds: int) -> dict[str, A
 
 
 def reboot_guest(domain: str, connect: str) -> dict[str, Any]:
-    completed = run(["virsh", "-c", connect, "reboot", domain], timeout=30)
+    try:
+        completed = run(["virsh", "-c", connect, "reboot", domain], timeout=30)
+    except subprocess.TimeoutExpired as error:
+        return {
+            "status": "timeout",
+            "error": "guest-reboot-command-timeout",
+            "timeout_seconds": error.timeout,
+            "stdout": (error.stdout or "").decode("utf-8", errors="replace")
+            if isinstance(error.stdout, bytes)
+            else (error.stdout or ""),
+            "stderr": (error.stderr or "").decode("utf-8", errors="replace")
+            if isinstance(error.stderr, bytes)
+            else (error.stderr or ""),
+        }
     return {
+        "status": "ok" if completed.returncode == 0 else "error",
         "returncode": completed.returncode,
         "stdout": completed.stdout,
         "stderr": completed.stderr,

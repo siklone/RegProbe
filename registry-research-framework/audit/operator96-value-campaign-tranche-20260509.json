@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-05-09T09:42:41Z",
+  "generated_utc": "2026-05-09T11:34:33Z",
   "status": "ok",
   "report": "registry-research-framework/audit/operator-regadd-followup-source-default-report-20260509.json",
   "smoke_profile": "gui",
@@ -154,6 +154,154 @@
       "risk_flags": [
         "kernel-timing-sensitive"
       ],
+      "source_quality": "vm-observed"
+    },
+    {
+      "index": 6,
+      "experiment_id": "operator96-006-tickcountrolloverdelay-1",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+      "value_name": "TickcountRolloverDelay",
+      "value_data": 1,
+      "requested_data": "0",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [
+        "kernel-timing-sensitive"
+      ],
+      "source_quality": "vm-observed"
+    },
+    {
+      "index": 7,
+      "experiment_id": "operator96-007-kernelworkertestflags-0",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+      "value_name": "KernelWorkerTestFlags",
+      "value_data": 0,
+      "requested_data": "0",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed"
+    },
+    {
+      "index": 7,
+      "experiment_id": "operator96-007-kernelworkertestflags-1",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+      "value_name": "KernelWorkerTestFlags",
+      "value_data": 1,
+      "requested_data": "0",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed"
+    },
+    {
+      "index": 8,
+      "experiment_id": "operator96-008-maximumkernelworkerthreads-25000",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+      "value_name": "MaximumKernelWorkerThreads",
+      "value_data": 25000,
+      "requested_data": "25000",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [
+        "executive-worker-thread low-level profiling-required"
+      ],
+      "source_quality": "vm-observed"
+    },
+    {
+      "index": 8,
+      "experiment_id": "operator96-008-maximumkernelworkerthreads-0",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+      "value_name": "MaximumKernelWorkerThreads",
+      "value_data": 0,
+      "requested_data": "25000",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [
+        "executive-worker-thread low-level profiling-required"
+      ],
+      "source_quality": "vm-observed"
+    },
+    {
+      "index": 9,
+      "experiment_id": "operator96-009-forceenablemutantautoboost-1",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+      "value_name": "ForceEnableMutantAutoboost",
+      "value_data": 1,
+      "requested_data": "1",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed"
+    },
+    {
+      "index": 9,
+      "experiment_id": "operator96-009-forceenablemutantautoboost-0",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+      "value_name": "ForceEnableMutantAutoboost",
+      "value_data": 0,
+      "requested_data": "1",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed"
+    },
+    {
+      "index": 10,
+      "experiment_id": "operator96-010-allowremotedasd-1",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System",
+      "value_name": "AllowRemoteDASD",
+      "value_data": 1,
+      "requested_data": "0",
+      "default_kind": "observed-present",
+      "default_value": 0,
+      "vm_status": "value-present",
+      "record_class": "value",
+      "risk_flags": [
+        "deprecated-path-collision removable-storage-policy-is-active-surface"
+      ],
+      "source_quality": "vm-observed"
+    },
+    {
+      "index": 11,
+      "experiment_id": "operator96-011-disablediskcounters-1",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System",
+      "value_name": "DisableDiskCounters",
+      "value_data": 1,
+      "requested_data": "1",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed"
+    },
+    {
+      "index": 11,
+      "experiment_id": "operator96-011-disablediskcounters-0",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System",
+      "value_name": "DisableDiskCounters",
+      "value_data": 0,
+      "requested_data": "1",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [],
       "source_quality": "vm-observed"
     }
   ],
@@ -772,16 +920,8 @@
         "executive-worker-thread low-level profiling-required"
       ],
       "source_quality": "vm-observed",
-      "status": "ok",
-      "returncode": 0,
+      "status": "skipped-existing-ok",
       "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-004-additionaldelayedworkerthreads-5.json",
-      "stdout_payload": {
-        "status": "ok",
-        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-004-additionaldelayedworkerthreads-5.json",
-        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-004-additionaldelayedworkerthreads-5.md",
-        "error": null
-      },
-      "stderr": "",
       "observations": {
         "status": "ok",
         "smoke_hard_success": {
@@ -901,16 +1041,8 @@
         "executive-worker-thread low-level profiling-required"
       ],
       "source_quality": "vm-observed",
-      "status": "ok",
-      "returncode": 0,
+      "status": "skipped-existing-ok",
       "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-004-additionaldelayedworkerthreads-1.json",
-      "stdout_payload": {
-        "status": "ok",
-        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-004-additionaldelayedworkerthreads-1.json",
-        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-004-additionaldelayedworkerthreads-1.md",
-        "error": null
-      },
-      "stderr": "",
       "observations": {
         "status": "ok",
         "smoke_hard_success": {
@@ -1028,16 +1160,8 @@
       "record_class": "value",
       "risk_flags": [],
       "source_quality": "vm-observed",
-      "status": "ok",
-      "returncode": 0,
+      "status": "skipped-existing-ok",
       "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-005-uuidsequencenumber-3322358.json",
-      "stdout_payload": {
-        "status": "ok",
-        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-005-uuidsequencenumber-3322358.json",
-        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-005-uuidsequencenumber-3322358.md",
-        "error": null
-      },
-      "stderr": "",
       "observations": {
         "status": "ok",
         "smoke_hard_success": {
@@ -1155,16 +1279,8 @@
       "record_class": "value",
       "risk_flags": [],
       "source_quality": "vm-observed",
-      "status": "ok",
-      "returncode": 0,
+      "status": "skipped-existing-ok",
       "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-005-uuidsequencenumber-0.json",
-      "stdout_payload": {
-        "status": "ok",
-        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-005-uuidsequencenumber-0.json",
-        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-005-uuidsequencenumber-0.md",
-        "error": null
-      },
-      "stderr": "",
       "observations": {
         "status": "ok",
         "smoke_hard_success": {
@@ -1284,16 +1400,8 @@
         "kernel-timing-sensitive"
       ],
       "source_quality": "vm-observed",
-      "status": "ok",
-      "returncode": 0,
+      "status": "skipped-existing-ok",
       "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-006-tickcountrolloverdelay-0.json",
-      "stdout_payload": {
-        "status": "ok",
-        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-006-tickcountrolloverdelay-0.json",
-        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-006-tickcountrolloverdelay-0.md",
-        "error": null
-      },
-      "stderr": "",
       "observations": {
         "status": "ok",
         "smoke_hard_success": {
@@ -1394,6 +1502,1276 @@
             "cpu_single_seconds": 7.52,
             "cpu_multi_seconds": 1.84,
             "io_write_read_mib_per_second": 5.47
+          }
+        }
+      }
+    },
+    {
+      "index": 6,
+      "experiment_id": "operator96-006-tickcountrolloverdelay-1",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+      "value_name": "TickcountRolloverDelay",
+      "value_data": 1,
+      "requested_data": "0",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [
+        "kernel-timing-sensitive"
+      ],
+      "source_quality": "vm-observed",
+      "status": "skipped-existing-ok",
+      "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-006-tickcountrolloverdelay-1.json",
+      "observations": {
+        "status": "ok",
+        "smoke_hard_success": {
+          "apply_smoke_hard_success": true,
+          "post_reboot_smoke_hard_success": true,
+          "post_rollback_smoke_hard_success": true
+        },
+        "apply": {
+          "original": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+            "value_name": "TickcountRolloverDelay",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "after_apply": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+            "value_name": "TickcountRolloverDelay",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 1,
+            "value_kind": "System.Int32",
+            "value_hex": "0x1",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_reboot": {
+          "after_reboot": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+            "value_name": "TickcountRolloverDelay",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 1,
+            "value_kind": "System.Int32",
+            "value_hex": "0x1",
+            "status": "value-present",
+            "error": null
+          },
+          "restore_action": "removed-created-value",
+          "after_restore": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+            "value_name": "TickcountRolloverDelay",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_rollback": {
+          "final": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+            "value_name": "TickcountRolloverDelay",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "benchmark_delta_percent": {
+          "apply_vs_baseline": {
+            "cpu_single_seconds": -8.43,
+            "cpu_multi_seconds": -15.37,
+            "io_write_read_mib_per_second": -9.57
+          },
+          "post_reboot_vs_baseline": {
+            "cpu_single_seconds": -14.33,
+            "cpu_multi_seconds": -17.49,
+            "io_write_read_mib_per_second": -75.12
+          }
+        }
+      }
+    },
+    {
+      "index": 7,
+      "experiment_id": "operator96-007-kernelworkertestflags-0",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+      "value_name": "KernelWorkerTestFlags",
+      "value_data": 0,
+      "requested_data": "0",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed",
+      "status": "ok",
+      "returncode": 0,
+      "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-007-kernelworkertestflags-0.json",
+      "stdout_payload": {
+        "status": "ok",
+        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-007-kernelworkertestflags-0.json",
+        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-007-kernelworkertestflags-0.md",
+        "error": null
+      },
+      "stderr": "",
+      "observations": {
+        "status": "ok",
+        "smoke_hard_success": {
+          "apply_smoke_hard_success": true,
+          "post_reboot_smoke_hard_success": true,
+          "post_rollback_smoke_hard_success": true
+        },
+        "apply": {
+          "original": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+            "value_name": "KernelWorkerTestFlags",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "after_apply": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+            "value_name": "KernelWorkerTestFlags",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 0,
+            "value_kind": "System.Int32",
+            "value_hex": "0x0",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_reboot": {
+          "after_reboot": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+            "value_name": "KernelWorkerTestFlags",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 0,
+            "value_kind": "System.Int32",
+            "value_hex": "0x0",
+            "status": "value-present",
+            "error": null
+          },
+          "restore_action": "removed-created-value",
+          "after_restore": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+            "value_name": "KernelWorkerTestFlags",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_rollback": {
+          "final": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+            "value_name": "KernelWorkerTestFlags",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "benchmark_delta_percent": {
+          "apply_vs_baseline": {
+            "cpu_single_seconds": -2.77,
+            "cpu_multi_seconds": 11.11,
+            "io_write_read_mib_per_second": -3.12
+          },
+          "post_reboot_vs_baseline": {
+            "cpu_single_seconds": 0.5,
+            "cpu_multi_seconds": 13.21,
+            "io_write_read_mib_per_second": 12.16
+          }
+        }
+      }
+    },
+    {
+      "index": 7,
+      "experiment_id": "operator96-007-kernelworkertestflags-1",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+      "value_name": "KernelWorkerTestFlags",
+      "value_data": 1,
+      "requested_data": "0",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed",
+      "status": "ok",
+      "returncode": 0,
+      "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-007-kernelworkertestflags-1.json",
+      "stdout_payload": {
+        "status": "ok",
+        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-007-kernelworkertestflags-1.json",
+        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-007-kernelworkertestflags-1.md",
+        "error": null
+      },
+      "stderr": "",
+      "observations": {
+        "status": "ok",
+        "smoke_hard_success": {
+          "apply_smoke_hard_success": true,
+          "post_reboot_smoke_hard_success": true,
+          "post_rollback_smoke_hard_success": true
+        },
+        "apply": {
+          "original": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+            "value_name": "KernelWorkerTestFlags",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "after_apply": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+            "value_name": "KernelWorkerTestFlags",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 1,
+            "value_kind": "System.Int32",
+            "value_hex": "0x1",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_reboot": {
+          "after_reboot": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+            "value_name": "KernelWorkerTestFlags",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 1,
+            "value_kind": "System.Int32",
+            "value_hex": "0x1",
+            "status": "value-present",
+            "error": null
+          },
+          "restore_action": "removed-created-value",
+          "after_restore": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+            "value_name": "KernelWorkerTestFlags",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_rollback": {
+          "final": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+            "value_name": "KernelWorkerTestFlags",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "benchmark_delta_percent": {
+          "apply_vs_baseline": {
+            "cpu_single_seconds": -4.8,
+            "cpu_multi_seconds": -4.65,
+            "io_write_read_mib_per_second": 177.78
+          },
+          "post_reboot_vs_baseline": {
+            "cpu_single_seconds": 3.48,
+            "cpu_multi_seconds": 11.32,
+            "io_write_read_mib_per_second": 197.74
+          }
+        }
+      }
+    },
+    {
+      "index": 8,
+      "experiment_id": "operator96-008-maximumkernelworkerthreads-25000",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+      "value_name": "MaximumKernelWorkerThreads",
+      "value_data": 25000,
+      "requested_data": "25000",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [
+        "executive-worker-thread low-level profiling-required"
+      ],
+      "source_quality": "vm-observed",
+      "status": "ok",
+      "returncode": 0,
+      "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-008-maximumkernelworkerthreads-25000.json",
+      "stdout_payload": {
+        "status": "ok",
+        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-008-maximumkernelworkerthreads-25000.json",
+        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-008-maximumkernelworkerthreads-25000.md",
+        "error": null
+      },
+      "stderr": "",
+      "observations": {
+        "status": "ok",
+        "smoke_hard_success": {
+          "apply_smoke_hard_success": true,
+          "post_reboot_smoke_hard_success": true,
+          "post_rollback_smoke_hard_success": true
+        },
+        "apply": {
+          "original": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+            "value_name": "MaximumKernelWorkerThreads",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "after_apply": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+            "value_name": "MaximumKernelWorkerThreads",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 25000,
+            "value_kind": "System.Int32",
+            "value_hex": "0x61a8",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_reboot": {
+          "after_reboot": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+            "value_name": "MaximumKernelWorkerThreads",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 25000,
+            "value_kind": "System.Int32",
+            "value_hex": "0x61a8",
+            "status": "value-present",
+            "error": null
+          },
+          "restore_action": "removed-created-value",
+          "after_restore": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+            "value_name": "MaximumKernelWorkerThreads",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_rollback": {
+          "final": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+            "value_name": "MaximumKernelWorkerThreads",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "benchmark_delta_percent": {
+          "apply_vs_baseline": {
+            "cpu_single_seconds": 42.03,
+            "cpu_multi_seconds": 85.35,
+            "io_write_read_mib_per_second": 572.43
+          },
+          "post_reboot_vs_baseline": {
+            "cpu_single_seconds": 1.85,
+            "cpu_multi_seconds": 43.07,
+            "io_write_read_mib_per_second": 400.5
+          }
+        }
+      }
+    },
+    {
+      "index": 8,
+      "experiment_id": "operator96-008-maximumkernelworkerthreads-0",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+      "value_name": "MaximumKernelWorkerThreads",
+      "value_data": 0,
+      "requested_data": "25000",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [
+        "executive-worker-thread low-level profiling-required"
+      ],
+      "source_quality": "vm-observed",
+      "status": "ok",
+      "returncode": 0,
+      "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-008-maximumkernelworkerthreads-0.json",
+      "stdout_payload": {
+        "status": "ok",
+        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-008-maximumkernelworkerthreads-0.json",
+        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-008-maximumkernelworkerthreads-0.md",
+        "error": null
+      },
+      "stderr": "",
+      "observations": {
+        "status": "ok",
+        "smoke_hard_success": {
+          "apply_smoke_hard_success": true,
+          "post_reboot_smoke_hard_success": true,
+          "post_rollback_smoke_hard_success": true
+        },
+        "apply": {
+          "original": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+            "value_name": "MaximumKernelWorkerThreads",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "after_apply": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+            "value_name": "MaximumKernelWorkerThreads",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 0,
+            "value_kind": "System.Int32",
+            "value_hex": "0x0",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_reboot": {
+          "after_reboot": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+            "value_name": "MaximumKernelWorkerThreads",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 0,
+            "value_kind": "System.Int32",
+            "value_hex": "0x0",
+            "status": "value-present",
+            "error": null
+          },
+          "restore_action": "removed-created-value",
+          "after_restore": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+            "value_name": "MaximumKernelWorkerThreads",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_rollback": {
+          "final": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+            "value_name": "MaximumKernelWorkerThreads",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "benchmark_delta_percent": {
+          "apply_vs_baseline": {
+            "cpu_single_seconds": -2.64,
+            "cpu_multi_seconds": 1.32,
+            "io_write_read_mib_per_second": 14.04
+          },
+          "post_reboot_vs_baseline": {
+            "cpu_single_seconds": -4.75,
+            "cpu_multi_seconds": -5.22,
+            "io_write_read_mib_per_second": 15.06
+          }
+        }
+      }
+    },
+    {
+      "index": 9,
+      "experiment_id": "operator96-009-forceenablemutantautoboost-1",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+      "value_name": "ForceEnableMutantAutoboost",
+      "value_data": 1,
+      "requested_data": "1",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed",
+      "status": "ok",
+      "returncode": 0,
+      "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-009-forceenablemutantautoboost-1.json",
+      "stdout_payload": {
+        "status": "ok",
+        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-009-forceenablemutantautoboost-1.json",
+        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-009-forceenablemutantautoboost-1.md",
+        "error": null
+      },
+      "stderr": "",
+      "observations": {
+        "status": "ok",
+        "smoke_hard_success": {
+          "apply_smoke_hard_success": true,
+          "post_reboot_smoke_hard_success": true,
+          "post_rollback_smoke_hard_success": true
+        },
+        "apply": {
+          "original": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+            "value_name": "ForceEnableMutantAutoboost",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "after_apply": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+            "value_name": "ForceEnableMutantAutoboost",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 1,
+            "value_kind": "System.Int32",
+            "value_hex": "0x1",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_reboot": {
+          "after_reboot": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+            "value_name": "ForceEnableMutantAutoboost",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 1,
+            "value_kind": "System.Int32",
+            "value_hex": "0x1",
+            "status": "value-present",
+            "error": null
+          },
+          "restore_action": "removed-created-value",
+          "after_restore": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+            "value_name": "ForceEnableMutantAutoboost",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_rollback": {
+          "final": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+            "value_name": "ForceEnableMutantAutoboost",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "benchmark_delta_percent": {
+          "apply_vs_baseline": {
+            "cpu_single_seconds": 2.17,
+            "cpu_multi_seconds": 6.62,
+            "io_write_read_mib_per_second": -20.56
+          },
+          "post_reboot_vs_baseline": {
+            "cpu_single_seconds": 0.95,
+            "cpu_multi_seconds": 2.95,
+            "io_write_read_mib_per_second": -14.09
+          }
+        }
+      }
+    },
+    {
+      "index": 9,
+      "experiment_id": "operator96-009-forceenablemutantautoboost-0",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+      "value_name": "ForceEnableMutantAutoboost",
+      "value_data": 0,
+      "requested_data": "1",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed",
+      "status": "ok",
+      "returncode": 0,
+      "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-009-forceenablemutantautoboost-0.json",
+      "stdout_payload": {
+        "status": "ok",
+        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-009-forceenablemutantautoboost-0.json",
+        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-009-forceenablemutantautoboost-0.md",
+        "error": null
+      },
+      "stderr": "",
+      "observations": {
+        "status": "ok",
+        "smoke_hard_success": {
+          "apply_smoke_hard_success": true,
+          "post_reboot_smoke_hard_success": true,
+          "post_rollback_smoke_hard_success": true
+        },
+        "apply": {
+          "original": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+            "value_name": "ForceEnableMutantAutoboost",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "after_apply": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+            "value_name": "ForceEnableMutantAutoboost",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 0,
+            "value_kind": "System.Int32",
+            "value_hex": "0x0",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_reboot": {
+          "after_reboot": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+            "value_name": "ForceEnableMutantAutoboost",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 0,
+            "value_kind": "System.Int32",
+            "value_hex": "0x0",
+            "status": "value-present",
+            "error": null
+          },
+          "restore_action": "removed-created-value",
+          "after_restore": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+            "value_name": "ForceEnableMutantAutoboost",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_rollback": {
+          "final": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+            "value_name": "ForceEnableMutantAutoboost",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "benchmark_delta_percent": {
+          "apply_vs_baseline": {
+            "cpu_single_seconds": -3.3,
+            "cpu_multi_seconds": 1.29,
+            "io_write_read_mib_per_second": -1.42
+          },
+          "post_reboot_vs_baseline": {
+            "cpu_single_seconds": 5.01,
+            "cpu_multi_seconds": 9.41,
+            "io_write_read_mib_per_second": -40.86
+          }
+        }
+      }
+    },
+    {
+      "index": 10,
+      "experiment_id": "operator96-010-allowremotedasd-1",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System",
+      "value_name": "AllowRemoteDASD",
+      "value_data": 1,
+      "requested_data": "0",
+      "default_kind": "observed-present",
+      "default_value": 0,
+      "vm_status": "value-present",
+      "record_class": "value",
+      "risk_flags": [
+        "deprecated-path-collision removable-storage-policy-is-active-surface"
+      ],
+      "source_quality": "vm-observed",
+      "status": "ok",
+      "returncode": 0,
+      "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-010-allowremotedasd-1.json",
+      "stdout_payload": {
+        "status": "ok",
+        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-010-allowremotedasd-1.json",
+        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-010-allowremotedasd-1.md",
+        "error": null
+      },
+      "stderr": "",
+      "observations": {
+        "status": "ok",
+        "smoke_hard_success": {
+          "apply_smoke_hard_success": true,
+          "post_reboot_smoke_hard_success": true,
+          "post_rollback_smoke_hard_success": true
+        },
+        "apply": {
+          "original": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System",
+            "value_name": "AllowRemoteDASD",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 0,
+            "value_kind": "System.Int32",
+            "value_hex": "0x0",
+            "status": "value-present",
+            "error": null
+          },
+          "after_apply": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System",
+            "value_name": "AllowRemoteDASD",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 1,
+            "value_kind": "System.Int32",
+            "value_hex": "0x1",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_reboot": {
+          "after_reboot": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System",
+            "value_name": "AllowRemoteDASD",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 1,
+            "value_kind": "System.Int32",
+            "value_hex": "0x1",
+            "status": "value-present",
+            "error": null
+          },
+          "restore_action": "restored-original-value",
+          "after_restore": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System",
+            "value_name": "AllowRemoteDASD",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 0,
+            "value_kind": "System.Int32",
+            "value_hex": "0x0",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_rollback": {
+          "final": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System",
+            "value_name": "AllowRemoteDASD",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 0,
+            "value_kind": "System.Int32",
+            "value_hex": "0x0",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "benchmark_delta_percent": {
+          "apply_vs_baseline": {
+            "cpu_single_seconds": 8.45,
+            "cpu_multi_seconds": -41.69,
+            "io_write_read_mib_per_second": -11.84
+          },
+          "post_reboot_vs_baseline": {
+            "cpu_single_seconds": -28.26,
+            "cpu_multi_seconds": -54.84,
+            "io_write_read_mib_per_second": -31.79
+          }
+        }
+      }
+    },
+    {
+      "index": 11,
+      "experiment_id": "operator96-011-disablediskcounters-1",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System",
+      "value_name": "DisableDiskCounters",
+      "value_data": 1,
+      "requested_data": "1",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed",
+      "status": "ok",
+      "returncode": 0,
+      "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-011-disablediskcounters-1.json",
+      "stdout_payload": {
+        "status": "ok",
+        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-011-disablediskcounters-1.json",
+        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-011-disablediskcounters-1.md",
+        "error": null
+      },
+      "stderr": "",
+      "observations": {
+        "status": "ok",
+        "smoke_hard_success": {
+          "apply_smoke_hard_success": true,
+          "post_reboot_smoke_hard_success": true,
+          "post_rollback_smoke_hard_success": true
+        },
+        "apply": {
+          "original": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System",
+            "value_name": "DisableDiskCounters",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "after_apply": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System",
+            "value_name": "DisableDiskCounters",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 1,
+            "value_kind": "System.Int32",
+            "value_hex": "0x1",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_reboot": {
+          "after_reboot": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System",
+            "value_name": "DisableDiskCounters",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 1,
+            "value_kind": "System.Int32",
+            "value_hex": "0x1",
+            "status": "value-present",
+            "error": null
+          },
+          "restore_action": "removed-created-value",
+          "after_restore": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System",
+            "value_name": "DisableDiskCounters",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_rollback": {
+          "final": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System",
+            "value_name": "DisableDiskCounters",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "benchmark_delta_percent": {
+          "apply_vs_baseline": {
+            "cpu_single_seconds": -0.63,
+            "cpu_multi_seconds": -1.89,
+            "io_write_read_mib_per_second": -1.22
+          },
+          "post_reboot_vs_baseline": {
+            "cpu_single_seconds": 0.97,
+            "cpu_multi_seconds": -0.12,
+            "io_write_read_mib_per_second": -40.04
+          }
+        }
+      }
+    },
+    {
+      "index": 11,
+      "experiment_id": "operator96-011-disablediskcounters-0",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System",
+      "value_name": "DisableDiskCounters",
+      "value_data": 0,
+      "requested_data": "1",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed",
+      "status": "ok",
+      "returncode": 0,
+      "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-011-disablediskcounters-0.json",
+      "stdout_payload": {
+        "status": "ok",
+        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-011-disablediskcounters-0.json",
+        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-011-disablediskcounters-0.md",
+        "error": null
+      },
+      "stderr": "",
+      "observations": {
+        "status": "ok",
+        "smoke_hard_success": {
+          "apply_smoke_hard_success": true,
+          "post_reboot_smoke_hard_success": true,
+          "post_rollback_smoke_hard_success": true
+        },
+        "apply": {
+          "original": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System",
+            "value_name": "DisableDiskCounters",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "after_apply": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System",
+            "value_name": "DisableDiskCounters",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 0,
+            "value_kind": "System.Int32",
+            "value_hex": "0x0",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_reboot": {
+          "after_reboot": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System",
+            "value_name": "DisableDiskCounters",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 0,
+            "value_kind": "System.Int32",
+            "value_hex": "0x0",
+            "status": "value-present",
+            "error": null
+          },
+          "restore_action": "removed-created-value",
+          "after_restore": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System",
+            "value_name": "DisableDiskCounters",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_rollback": {
+          "final": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System",
+            "value_name": "DisableDiskCounters",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "benchmark_delta_percent": {
+          "apply_vs_baseline": {
+            "cpu_single_seconds": 13.75,
+            "cpu_multi_seconds": -8.31,
+            "io_write_read_mib_per_second": 0.31
+          },
+          "post_reboot_vs_baseline": {
+            "cpu_single_seconds": -1.83,
+            "cpu_multi_seconds": -5.88,
+            "io_write_read_mib_per_second": -23.18
           }
         }
       }

@@ -127,6 +127,23 @@ class VmKvmRegistryValueExperimentTests(unittest.TestCase):
         self.assertIn("hard_failure_count", script)
         self.assertIn("best_effort_failure_count", script)
 
+    def test_reboot_guest_returns_timeout_contract(self) -> None:
+        timeout = subprocess.TimeoutExpired(
+            ["virsh", "-c", "qemu:///session", "reboot", "domain"],
+            timeout=30,
+            output=b"partial stdout",
+            stderr=b"partial stderr",
+        )
+
+        with mock.patch.object(registry_value_experiment, "run", side_effect=timeout):
+            result = registry_value_experiment.reboot_guest("domain", "qemu:///session")
+
+        self.assertEqual(result["status"], "timeout")
+        self.assertEqual(result["error"], "guest-reboot-command-timeout")
+        self.assertEqual(result["timeout_seconds"], 30)
+        self.assertEqual(result["stdout"], "partial stdout")
+        self.assertEqual(result["stderr"], "partial stderr")
+
 
 if __name__ == "__main__":
     unittest.main()
