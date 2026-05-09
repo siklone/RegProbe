@@ -1,9 +1,9 @@
 # Operator 96 Registry Value Campaign
 
-- Generated UTC: `2026-05-09T18:52:22Z`
+- Generated UTC: `2026-05-09T19:54:58Z`
 - Status: **ok**
-- Planned experiments: `70`
-- Completed in this run: `70`
+- Planned experiments: `80`
+- Completed in this run: `80`
 
 ## Plan
 
@@ -79,6 +79,16 @@
 | 35 | `operator96-035-maximumcooperativeidlesearchwidth-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel\MaximumCooperativeIdleSearchWidth` | `1` | `absent` | `vm-observed` |
 | 36 | `operator96-036-hiberbootenabled-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power\HiberbootEnabled` | `0` | `1` | `vm-observed` |
 | 37 | `operator96-037-powersettingprofile-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power\PowerSettingProfile` | `1` | `0` | `vm-observed` |
+| 38 | `operator96-038-watchdogresumetimeout-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power\WatchdogResumeTimeout` | `0` | `120` | `vm-observed` |
+| 38 | `operator96-038-watchdogresumetimeout-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power\WatchdogResumeTimeout` | `1` | `120` | `vm-observed` |
+| 39 | `operator96-039-watchdogsleeptimeout-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power\WatchdogSleepTimeout` | `0` | `300` | `vm-observed` |
+| 39 | `operator96-039-watchdogsleeptimeout-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power\WatchdogSleepTimeout` | `1` | `300` | `vm-observed` |
+| 40 | `operator96-040-skiptickoverride-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power\SkipTickOverride` | `0` | `absent` | `vm-observed` |
+| 40 | `operator96-040-skiptickoverride-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power\SkipTickOverride` | `1` | `absent` | `vm-observed` |
+| 41 | `operator96-041-win32calloutwatchdogbugcheckenabled-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power\Win32CalloutWatchdogBugcheckEnabled` | `0` | `absent` | `vm-observed` |
+| 41 | `operator96-041-win32calloutwatchdogbugcheckenabled-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power\Win32CalloutWatchdogBugcheckEnabled` | `1` | `absent` | `vm-observed` |
+| 42 | `operator96-042-idlescaninterval-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power\IdleScanInterval` | `0` | `absent` | `vm-observed` |
+| 42 | `operator96-042-idlescaninterval-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power\IdleScanInterval` | `1` | `absent` | `vm-observed` |
 
 ## Results
 
@@ -144,13 +154,23 @@
 | `operator96-030-forceforegroundboostdecay-1` | `skipped-existing-ok` | `True` | `ok`/`0` | `18.1` | `-2.95` | `-69.61` | `registry-research-framework/audit/registry-value-experiments/operator96-030-forceforegroundboostdecay-1.json` |
 | `operator96-031-rebalanceminpriority-16` | `skipped-existing-ok` | `True` | `ok`/`0` | `1.03` | `-42.02` | `-8.48` | `registry-research-framework/audit/registry-value-experiments/operator96-031-rebalanceminpriority-16.json` |
 | `operator96-031-rebalanceminpriority-0` | `skipped-existing-ok` | `True` | `ok`/`0` | `1.13` | `1.3` | `1.01` | `registry-research-framework/audit/registry-value-experiments/operator96-031-rebalanceminpriority-0.json` |
-| `operator96-032-interruptsteeringflags-1` | `ok` | `True` | `ok`/`0` | `34.58` | `74.0` | `-6.48` | `registry-research-framework/audit/registry-value-experiments/operator96-032-interruptsteeringflags-1.json` |
-| `operator96-032-interruptsteeringflags-0` | `ok` | `True` | `ok`/`0` | `7.35` | `-3.28` | `286.55` | `registry-research-framework/audit/registry-value-experiments/operator96-032-interruptsteeringflags-0.json` |
-| `operator96-033-alwaystrackioboosting-0` | `ok` | `True` | `ok`/`0` | `9.39` | `-40.92` | `349.21` | `registry-research-framework/audit/registry-value-experiments/operator96-033-alwaystrackioboosting-0.json` |
-| `operator96-033-alwaystrackioboosting-1` | `ok` | `True` | `ok`/`0` | `0.53` | `-12.52` | `12.83` | `registry-research-framework/audit/registry-value-experiments/operator96-033-alwaystrackioboosting-1.json` |
-| `operator96-034-disablecontrolflowguardexportsuppression-1` | `ok` | `True` | `ok`/`0` | `26.65` | `36.9` | `0.23` | `registry-research-framework/audit/registry-value-experiments/operator96-034-disablecontrolflowguardexportsuppression-1.json` |
-| `operator96-034-disablecontrolflowguardexportsuppression-0` | `ok` | `True` | `ok`/`0` | `34.17` | `11.05` | `-55.31` | `registry-research-framework/audit/registry-value-experiments/operator96-034-disablecontrolflowguardexportsuppression-0.json` |
-| `operator96-035-maximumcooperativeidlesearchwidth-0` | `ok` | `True` | `ok`/`0` | `24.33` | `12.33` | `-14.49` | `registry-research-framework/audit/registry-value-experiments/operator96-035-maximumcooperativeidlesearchwidth-0.json` |
-| `operator96-035-maximumcooperativeidlesearchwidth-1` | `ok` | `True` | `ok`/`0` | `23.5` | `7.21` | `-40.06` | `registry-research-framework/audit/registry-value-experiments/operator96-035-maximumcooperativeidlesearchwidth-1.json` |
-| `operator96-036-hiberbootenabled-0` | `ok` | `True` | `ok`/`0` | `6.49` | `3.6` | `-73.85` | `registry-research-framework/audit/registry-value-experiments/operator96-036-hiberbootenabled-0.json` |
-| `operator96-037-powersettingprofile-1` | `ok` | `True` | `ok`/`0` | `15.32` | `36.47` | `-62.08` | `registry-research-framework/audit/registry-value-experiments/operator96-037-powersettingprofile-1.json` |
+| `operator96-032-interruptsteeringflags-1` | `skipped-existing-ok` | `True` | `ok`/`0` | `34.58` | `74.0` | `-6.48` | `registry-research-framework/audit/registry-value-experiments/operator96-032-interruptsteeringflags-1.json` |
+| `operator96-032-interruptsteeringflags-0` | `skipped-existing-ok` | `True` | `ok`/`0` | `7.35` | `-3.28` | `286.55` | `registry-research-framework/audit/registry-value-experiments/operator96-032-interruptsteeringflags-0.json` |
+| `operator96-033-alwaystrackioboosting-0` | `skipped-existing-ok` | `True` | `ok`/`0` | `9.39` | `-40.92` | `349.21` | `registry-research-framework/audit/registry-value-experiments/operator96-033-alwaystrackioboosting-0.json` |
+| `operator96-033-alwaystrackioboosting-1` | `skipped-existing-ok` | `True` | `ok`/`0` | `0.53` | `-12.52` | `12.83` | `registry-research-framework/audit/registry-value-experiments/operator96-033-alwaystrackioboosting-1.json` |
+| `operator96-034-disablecontrolflowguardexportsuppression-1` | `skipped-existing-ok` | `True` | `ok`/`0` | `26.65` | `36.9` | `0.23` | `registry-research-framework/audit/registry-value-experiments/operator96-034-disablecontrolflowguardexportsuppression-1.json` |
+| `operator96-034-disablecontrolflowguardexportsuppression-0` | `skipped-existing-ok` | `True` | `ok`/`0` | `34.17` | `11.05` | `-55.31` | `registry-research-framework/audit/registry-value-experiments/operator96-034-disablecontrolflowguardexportsuppression-0.json` |
+| `operator96-035-maximumcooperativeidlesearchwidth-0` | `skipped-existing-ok` | `True` | `ok`/`0` | `24.33` | `12.33` | `-14.49` | `registry-research-framework/audit/registry-value-experiments/operator96-035-maximumcooperativeidlesearchwidth-0.json` |
+| `operator96-035-maximumcooperativeidlesearchwidth-1` | `skipped-existing-ok` | `True` | `ok`/`0` | `23.5` | `7.21` | `-40.06` | `registry-research-framework/audit/registry-value-experiments/operator96-035-maximumcooperativeidlesearchwidth-1.json` |
+| `operator96-036-hiberbootenabled-0` | `skipped-existing-ok` | `True` | `ok`/`0` | `6.49` | `3.6` | `-73.85` | `registry-research-framework/audit/registry-value-experiments/operator96-036-hiberbootenabled-0.json` |
+| `operator96-037-powersettingprofile-1` | `skipped-existing-ok` | `True` | `ok`/`0` | `15.32` | `36.47` | `-62.08` | `registry-research-framework/audit/registry-value-experiments/operator96-037-powersettingprofile-1.json` |
+| `operator96-038-watchdogresumetimeout-0` | `ok` | `True` | `ok`/`0` | `17.52` | `5.06` | `-40.05` | `registry-research-framework/audit/registry-value-experiments/operator96-038-watchdogresumetimeout-0.json` |
+| `operator96-038-watchdogresumetimeout-1` | `ok` | `True` | `ok`/`0` | `2.89` | `27.22` | `6.68` | `registry-research-framework/audit/registry-value-experiments/operator96-038-watchdogresumetimeout-1.json` |
+| `operator96-039-watchdogsleeptimeout-0` | `ok` | `True` | `ok`/`0` | `34.63` | `2.16` | `42.25` | `registry-research-framework/audit/registry-value-experiments/operator96-039-watchdogsleeptimeout-0.json` |
+| `operator96-039-watchdogsleeptimeout-1` | `ok` | `True` | `ok`/`0` | `4.24` | `8.76` | `-15.51` | `registry-research-framework/audit/registry-value-experiments/operator96-039-watchdogsleeptimeout-1.json` |
+| `operator96-040-skiptickoverride-0` | `ok` | `True` | `ok`/`0` | `17.87` | `4.05` | `-35.88` | `registry-research-framework/audit/registry-value-experiments/operator96-040-skiptickoverride-0.json` |
+| `operator96-040-skiptickoverride-1` | `ok` | `True` | `ok`/`0` | `36.85` | `49.61` | `-75.22` | `registry-research-framework/audit/registry-value-experiments/operator96-040-skiptickoverride-1.json` |
+| `operator96-041-win32calloutwatchdogbugcheckenabled-0` | `ok` | `True` | `ok`/`0` | `1.67` | `0.17` | `-2.69` | `registry-research-framework/audit/registry-value-experiments/operator96-041-win32calloutwatchdogbugcheckenabled-0.json` |
+| `operator96-041-win32calloutwatchdogbugcheckenabled-1` | `ok` | `True` | `ok`/`0` | `-3.24` | `-7.71` | `17.89` | `registry-research-framework/audit/registry-value-experiments/operator96-041-win32calloutwatchdogbugcheckenabled-1.json` |
+| `operator96-042-idlescaninterval-0` | `ok` | `True` | `ok`/`0` | `4.97` | `1.68` | `-81.83` | `registry-research-framework/audit/registry-value-experiments/operator96-042-idlescaninterval-0.json` |
+| `operator96-042-idlescaninterval-1` | `ok` | `True` | `ok`/`0` | `0.79` | `44.72` | `10.27` | `registry-research-framework/audit/registry-value-experiments/operator96-042-idlescaninterval-1.json` |
