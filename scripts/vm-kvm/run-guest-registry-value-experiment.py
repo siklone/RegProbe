@@ -168,8 +168,20 @@ function Restore-RegistryValue {
     if (-not $State.original.key_exists) {
         if (Test-Path -LiteralPath $psPath) {
             Remove-ItemProperty -Path $psPath -Name ([string]$State.value_name) -Force -ErrorAction SilentlyContinue
+            try {
+                $key = Get-Item -LiteralPath $psPath -ErrorAction Stop
+                $valueNames = @($key.GetValueNames())
+                $subKeyNames = @($key.GetSubKeyNames())
+                if ($valueNames.Count -eq 0 -and $subKeyNames.Count -eq 0) {
+                    Remove-Item -LiteralPath $psPath -Force -ErrorAction Stop
+                    return 'removed-created-key'
+                }
+            }
+            catch {
+                return "removed-created-value-key-cleanup-error: $($_.Exception.Message)"
+            }
         }
-        return 'removed-created-value-key-left-in-place'
+        return 'removed-created-value-key-retained'
     }
 
     return 'restore-noop'
@@ -585,6 +597,8 @@ def run_experiment(args: argparse.Namespace) -> dict[str, Any]:
         return result
 
     result["reboots"].append({"phase": "after-apply", **reboot_guest(args.domain, args.connect)})
+    if args.post_reboot_delay_seconds > 0:
+        time.sleep(args.post_reboot_delay_seconds)
     health = wait_for_qga(args.domain, args.connect, args.reboot_wait_timeout)
     result["health_checks"].append({"phase": "after-apply", "payload": health})
     if health.get("status") != "ok":
@@ -618,6 +632,8 @@ def run_experiment(args: argparse.Namespace) -> dict[str, Any]:
         return result
 
     result["reboots"].append({"phase": "after-rollback", **reboot_guest(args.domain, args.connect)})
+    if args.post_reboot_delay_seconds > 0:
+        time.sleep(args.post_reboot_delay_seconds)
     health = wait_for_qga(args.domain, args.connect, args.reboot_wait_timeout)
     result["health_checks"].append({"phase": "after-rollback", "payload": health})
     if health.get("status") != "ok":
@@ -734,6 +750,12 @@ def main() -> int:
         "--revert-snapshot-name",
         default=vm_snapshot("clean-25h2-qga"),
         help="Snapshot to use with --auto-revert-snapshot-on-boot-failure.",
+    )
+    parser.add_argument(
+        "--post-reboot-delay-seconds",
+        type=int,
+        default=20,
+        help="Wait this long after virsh reboot before accepting QGA health as a post-boot signal.",
     )
     args = parser.parse_args()
 

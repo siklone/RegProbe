@@ -1,0 +1,1165 @@
+{
+  "generated_utc": "2026-05-09T08:36:30Z",
+  "status": "ready",
+  "baseline": "registry-research-framework/audit/operator-regadd-vm-baseline-20260509T083542Z.json",
+  "tested_in_wave_1": 5,
+  "remaining": 91,
+  "lane_counts": {
+    "discovery-etw-procmon-first": 52,
+    "alternate-value-gui-smoke": 18,
+    "create-value-etw-procmon-plus-gui-smoke": 21
+  },
+  "records": [
+    {
+      "index": 1,
+      "path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\SYSTEM",
+      "value_name": "EnableLocalLogonSid",
+      "requested_data": "0",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 0,
+      "risk_flags": [],
+      "lane": "discovery-etw-procmon-first",
+      "reason": "key exists but value absent and repo lacks exact target; first prove reader/writer lane before promotion-style mutation"
+    },
+    {
+      "index": 2,
+      "path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\SYSTEM",
+      "value_name": "EnableVirtualization",
+      "requested_data": "0",
+      "current_status": "value-present",
+      "current_value": 1,
+      "repo_exact_target_match_count": 3,
+      "risk_flags": [],
+      "lane": "alternate-value-gui-smoke",
+      "reason": "value exists in clean 25H2; test requested/opposite sensible values with snapshot rollback"
+    },
+    {
+      "index": 3,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+      "value_name": "AdditionalCriticalWorkerThreads",
+      "requested_data": "5",
+      "current_status": "value-present",
+      "current_value": 0,
+      "repo_exact_target_match_count": 2,
+      "risk_flags": [
+        "executive-worker-thread low-level profiling-required"
+      ],
+      "lane": "alternate-value-gui-smoke",
+      "reason": "value exists in clean 25H2; test requested/opposite sensible values with snapshot rollback"
+    },
+    {
+      "index": 4,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+      "value_name": "AdditionalDelayedWorkerThreads",
+      "requested_data": "5",
+      "current_status": "value-present",
+      "current_value": 0,
+      "repo_exact_target_match_count": 2,
+      "risk_flags": [
+        "executive-worker-thread low-level profiling-required"
+      ],
+      "lane": "alternate-value-gui-smoke",
+      "reason": "value exists in clean 25H2; test requested/opposite sensible values with snapshot rollback"
+    },
+    {
+      "index": 5,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+      "value_name": "UuidSequenceNumber",
+      "requested_data": "3322358",
+      "current_status": "value-present",
+      "current_value": 2636887,
+      "repo_exact_target_match_count": 1,
+      "risk_flags": [],
+      "lane": "alternate-value-gui-smoke",
+      "reason": "value exists in clean 25H2; test requested/opposite sensible values with snapshot rollback"
+    },
+    {
+      "index": 6,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+      "value_name": "TickcountRolloverDelay",
+      "requested_data": "0",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 0,
+      "risk_flags": [
+        "kernel-timing-sensitive"
+      ],
+      "lane": "discovery-etw-procmon-first",
+      "reason": "key exists but value absent and repo lacks exact target; first prove reader/writer lane before promotion-style mutation"
+    },
+    {
+      "index": 7,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+      "value_name": "KernelWorkerTestFlags",
+      "requested_data": "0",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 0,
+      "risk_flags": [],
+      "lane": "discovery-etw-procmon-first",
+      "reason": "key exists but value absent and repo lacks exact target; first prove reader/writer lane before promotion-style mutation"
+    },
+    {
+      "index": 8,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+      "value_name": "MaximumKernelWorkerThreads",
+      "requested_data": "25000",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 0,
+      "risk_flags": [
+        "executive-worker-thread low-level profiling-required"
+      ],
+      "lane": "discovery-etw-procmon-first",
+      "reason": "key exists but value absent and repo lacks exact target; first prove reader/writer lane before promotion-style mutation"
+    },
+    {
+      "index": 9,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+      "value_name": "ForceEnableMutantAutoboost",
+      "requested_data": "1",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 0,
+      "risk_flags": [],
+      "lane": "discovery-etw-procmon-first",
+      "reason": "key exists but value absent and repo lacks exact target; first prove reader/writer lane before promotion-style mutation"
+    },
+    {
+      "index": 10,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System",
+      "value_name": "AllowRemoteDASD",
+      "requested_data": "0",
+      "current_status": "value-present",
+      "current_value": 0,
+      "repo_exact_target_match_count": 1,
+      "risk_flags": [
+        "deprecated-path-collision removable-storage-policy-is-active-surface"
+      ],
+      "lane": "alternate-value-gui-smoke",
+      "reason": "value exists in clean 25H2; test requested/opposite sensible values with snapshot rollback"
+    },
+    {
+      "index": 11,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System",
+      "value_name": "DisableDiskCounters",
+      "requested_data": "1",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 0,
+      "risk_flags": [],
+      "lane": "discovery-etw-procmon-first",
+      "reason": "key exists but value absent and repo lacks exact target; first prove reader/writer lane before promotion-style mutation"
+    },
+    {
+      "index": 12,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System",
+      "value_name": "IoAllowLoadCrashDumpDriver",
+      "requested_data": "0",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 0,
+      "risk_flags": [],
+      "lane": "discovery-etw-procmon-first",
+      "reason": "key exists but value absent and repo lacks exact target; first prove reader/writer lane before promotion-style mutation"
+    },
+    {
+      "index": 13,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System",
+      "value_name": "IoEnableSessionZeroAccessCheck",
+      "requested_data": "1",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 0,
+      "risk_flags": [],
+      "lane": "discovery-etw-procmon-first",
+      "reason": "key exists but value absent and repo lacks exact target; first prove reader/writer lane before promotion-style mutation"
+    },
+    {
+      "index": 14,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "GlobalTimerResolutionRequests",
+      "requested_data": "1",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 1,
+      "risk_flags": [
+        "kernel-timing-sensitive"
+      ],
+      "lane": "create-value-etw-procmon-plus-gui-smoke",
+      "reason": "key exists and repo has target match; add requested value, capture registry/runtime lane, then boot/app smoke"
+    },
+    {
+      "index": 15,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "ForceParkingRequested",
+      "requested_data": "0",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 0,
+      "risk_flags": [],
+      "lane": "discovery-etw-procmon-first",
+      "reason": "key exists but value absent and repo lacks exact target; first prove reader/writer lane before promotion-style mutation"
+    },
+    {
+      "index": 16,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "EnableWerUserReporting",
+      "requested_data": "0",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 0,
+      "risk_flags": [],
+      "lane": "discovery-etw-procmon-first",
+      "reason": "key exists but value absent and repo lacks exact target; first prove reader/writer lane before promotion-style mutation"
+    },
+    {
+      "index": 17,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "HyperStartDisabled",
+      "requested_data": "1",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 0,
+      "risk_flags": [],
+      "lane": "discovery-etw-procmon-first",
+      "reason": "key exists but value absent and repo lacks exact target; first prove reader/writer lane before promotion-style mutation"
+    },
+    {
+      "index": 18,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "DisableLightWeightSuspend",
+      "requested_data": "0",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 0,
+      "risk_flags": [],
+      "lane": "discovery-etw-procmon-first",
+      "reason": "key exists but value absent and repo lacks exact target; first prove reader/writer lane before promotion-style mutation"
+    },
+    {
+      "index": 19,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "TimerCheckFlags",
+      "requested_data": "0",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 1,
+      "risk_flags": [
+        "kernel-timing-sensitive"
+      ],
+      "lane": "create-value-etw-procmon-plus-gui-smoke",
+      "reason": "key exists and repo has target match; add requested value, capture registry/runtime lane, then boot/app smoke"
+    },
+    {
+      "index": 20,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "ForceIdleGracePeriod",
+      "requested_data": "0",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 0,
+      "risk_flags": [],
+      "lane": "discovery-etw-procmon-first",
+      "reason": "key exists but value absent and repo lacks exact target; first prove reader/writer lane before promotion-style mutation"
+    },
+    {
+      "index": 21,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "DisableExceptionChainValidation",
+      "requested_data": "1",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 2,
+      "risk_flags": [
+        "security-hold mitigation-bypass never-default-apply"
+      ],
+      "lane": "create-value-etw-procmon-plus-gui-smoke",
+      "reason": "key exists and repo has target match; add requested value, capture registry/runtime lane, then boot/app smoke"
+    },
+    {
+      "index": 22,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "MaxDynamicTickDuration",
+      "requested_data": "1",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 0,
+      "risk_flags": [
+        "kernel-timing-sensitive"
+      ],
+      "lane": "discovery-etw-procmon-first",
+      "reason": "key exists but value absent and repo lacks exact target; first prove reader/writer lane before promotion-style mutation"
+    },
+    {
+      "index": 23,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "EnableTickAccumulationFromAccountingPeriods",
+      "requested_data": "1",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 0,
+      "risk_flags": [
+        "kernel-timing-sensitive"
+      ],
+      "lane": "discovery-etw-procmon-first",
+      "reason": "key exists but value absent and repo lacks exact target; first prove reader/writer lane before promotion-style mutation"
+    },
+    {
+      "index": 24,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "EnablePerCpuClockTickScheduling",
+      "requested_data": "1",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 0,
+      "risk_flags": [
+        "kernel-timing-sensitive"
+      ],
+      "lane": "discovery-etw-procmon-first",
+      "reason": "key exists but value absent and repo lacks exact target; first prove reader/writer lane before promotion-style mutation"
+    },
+    {
+      "index": 25,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "SerializeTimerExpiration",
+      "requested_data": "0",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 2,
+      "risk_flags": [
+        "kernel-timing-sensitive"
+      ],
+      "lane": "create-value-etw-procmon-plus-gui-smoke",
+      "reason": "key exists and repo has target match; add requested value, capture registry/runtime lane, then boot/app smoke"
+    },
+    {
+      "index": 26,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "XStateContextLookasidePerProcMaxDepth",
+      "requested_data": "1024",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 0,
+      "risk_flags": [],
+      "lane": "discovery-etw-procmon-first",
+      "reason": "key exists but value absent and repo lacks exact target; first prove reader/writer lane before promotion-style mutation"
+    },
+    {
+      "index": 27,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "LongDpcQueueThreshold",
+      "requested_data": "2",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 1,
+      "risk_flags": [
+        "kernel-timing-sensitive"
+      ],
+      "lane": "create-value-etw-procmon-plus-gui-smoke",
+      "reason": "key exists and repo has target match; add requested value, capture registry/runtime lane, then boot/app smoke"
+    },
+    {
+      "index": 28,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "LongDpcRuntimeThreshold",
+      "requested_data": "50",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 1,
+      "risk_flags": [
+        "kernel-timing-sensitive"
+      ],
+      "lane": "create-value-etw-procmon-plus-gui-smoke",
+      "reason": "key exists and repo has target match; add requested value, capture registry/runtime lane, then boot/app smoke"
+    },
+    {
+      "index": 29,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "ForceBugcheckForDpcWatchdog",
+      "requested_data": "0",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 1,
+      "risk_flags": [
+        "watchdog/bugcheck-sensitive",
+        "kernel-timing-sensitive"
+      ],
+      "lane": "create-value-etw-procmon-plus-gui-smoke",
+      "reason": "key exists and repo has target match; add requested value, capture registry/runtime lane, then boot/app smoke"
+    },
+    {
+      "index": 30,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "ForceForegroundBoostDecay",
+      "requested_data": "0",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 0,
+      "risk_flags": [],
+      "lane": "discovery-etw-procmon-first",
+      "reason": "key exists but value absent and repo lacks exact target; first prove reader/writer lane before promotion-style mutation"
+    },
+    {
+      "index": 31,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "RebalanceMinPriority",
+      "requested_data": "16",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 0,
+      "risk_flags": [],
+      "lane": "discovery-etw-procmon-first",
+      "reason": "key exists but value absent and repo lacks exact target; first prove reader/writer lane before promotion-style mutation"
+    },
+    {
+      "index": 32,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "InterruptSteeringFlags",
+      "requested_data": "1",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 0,
+      "risk_flags": [
+        "kernel-timing-sensitive"
+      ],
+      "lane": "discovery-etw-procmon-first",
+      "reason": "key exists but value absent and repo lacks exact target; first prove reader/writer lane before promotion-style mutation"
+    },
+    {
+      "index": 33,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "AlwaysTrackIoBoosting",
+      "requested_data": "0",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 0,
+      "risk_flags": [],
+      "lane": "discovery-etw-procmon-first",
+      "reason": "key exists but value absent and repo lacks exact target; first prove reader/writer lane before promotion-style mutation"
+    },
+    {
+      "index": 34,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "DisableControlFlowGuardExportSuppression",
+      "requested_data": "1",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 0,
+      "risk_flags": [],
+      "lane": "discovery-etw-procmon-first",
+      "reason": "key exists but value absent and repo lacks exact target; first prove reader/writer lane before promotion-style mutation"
+    },
+    {
+      "index": 35,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "MaximumCooperativeIdleSearchWidth",
+      "requested_data": "0",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 0,
+      "risk_flags": [],
+      "lane": "discovery-etw-procmon-first",
+      "reason": "key exists but value absent and repo lacks exact target; first prove reader/writer lane before promotion-style mutation"
+    },
+    {
+      "index": 37,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+      "value_name": "PowerSettingProfile",
+      "requested_data": "0",
+      "current_status": "value-present",
+      "current_value": 0,
+      "repo_exact_target_match_count": 0,
+      "risk_flags": [],
+      "lane": "alternate-value-gui-smoke",
+      "reason": "value exists in clean 25H2; test requested/opposite sensible values with snapshot rollback"
+    },
+    {
+      "index": 38,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+      "value_name": "WatchdogResumeTimeout",
+      "requested_data": "0",
+      "current_status": "value-present",
+      "current_value": 120,
+      "repo_exact_target_match_count": 2,
+      "risk_flags": [
+        "watchdog/bugcheck-sensitive"
+      ],
+      "lane": "alternate-value-gui-smoke",
+      "reason": "value exists in clean 25H2; test requested/opposite sensible values with snapshot rollback"
+    },
+    {
+      "index": 39,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+      "value_name": "WatchdogSleepTimeout",
+      "requested_data": "0",
+      "current_status": "value-present",
+      "current_value": 300,
+      "repo_exact_target_match_count": 2,
+      "risk_flags": [
+        "watchdog/bugcheck-sensitive"
+      ],
+      "lane": "alternate-value-gui-smoke",
+      "reason": "value exists in clean 25H2; test requested/opposite sensible values with snapshot rollback"
+    },
+    {
+      "index": 40,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+      "value_name": "SkipTickOverride",
+      "requested_data": "0",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 0,
+      "risk_flags": [
+        "kernel-timing-sensitive"
+      ],
+      "lane": "discovery-etw-procmon-first",
+      "reason": "key exists but value absent and repo lacks exact target; first prove reader/writer lane before promotion-style mutation"
+    },
+    {
+      "index": 41,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+      "value_name": "Win32CalloutWatchdogBugcheckEnabled",
+      "requested_data": "0",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 1,
+      "risk_flags": [
+        "watchdog/bugcheck-sensitive"
+      ],
+      "lane": "create-value-etw-procmon-plus-gui-smoke",
+      "reason": "key exists and repo has target match; add requested value, capture registry/runtime lane, then boot/app smoke"
+    },
+    {
+      "index": 42,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+      "value_name": "IdleScanInterval",
+      "requested_data": "0",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 0,
+      "risk_flags": [],
+      "lane": "discovery-etw-procmon-first",
+      "reason": "key exists but value absent and repo lacks exact target; first prove reader/writer lane before promotion-style mutation"
+    },
+    {
+      "index": 43,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+      "value_name": "SleepStudyDisabled",
+      "requested_data": "1",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 0,
+      "risk_flags": [],
+      "lane": "discovery-etw-procmon-first",
+      "reason": "key exists but value absent and repo lacks exact target; first prove reader/writer lane before promotion-style mutation"
+    },
+    {
+      "index": 44,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "Class1InitialUnparkCount",
+      "requested_data": "64",
+      "current_status": "value-present",
+      "current_value": 64,
+      "repo_exact_target_match_count": 2,
+      "risk_flags": [],
+      "lane": "alternate-value-gui-smoke",
+      "reason": "value exists in clean 25H2; test requested/opposite sensible values with snapshot rollback"
+    },
+    {
+      "index": 45,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "CustomizeDuringSetup",
+      "requested_data": "1",
+      "current_status": "value-present",
+      "current_value": 1,
+      "repo_exact_target_match_count": 0,
+      "risk_flags": [],
+      "lane": "alternate-value-gui-smoke",
+      "reason": "value exists in clean 25H2; test requested/opposite sensible values with snapshot rollback"
+    },
+    {
+      "index": 47,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "HiberFileSizePercent",
+      "requested_data": "0",
+      "current_status": "value-present",
+      "current_value": 0,
+      "repo_exact_target_match_count": 2,
+      "risk_flags": [],
+      "lane": "alternate-value-gui-smoke",
+      "reason": "value exists in clean 25H2; test requested/opposite sensible values with snapshot rollback"
+    },
+    {
+      "index": 48,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "MfBufferingThreshold",
+      "requested_data": "0",
+      "current_status": "value-present",
+      "current_value": 0,
+      "repo_exact_target_match_count": 2,
+      "risk_flags": [],
+      "lane": "alternate-value-gui-smoke",
+      "reason": "value exists in clean 25H2; test requested/opposite sensible values with snapshot rollback"
+    },
+    {
+      "index": 50,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "SourceSettingsVersion",
+      "requested_data": "4",
+      "current_status": "value-present",
+      "current_value": 4,
+      "repo_exact_target_match_count": 0,
+      "risk_flags": [],
+      "lane": "alternate-value-gui-smoke",
+      "reason": "value exists in clean 25H2; test requested/opposite sensible values with snapshot rollback"
+    },
+    {
+      "index": 51,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "TimerRebaseThresholdOnDripsExit",
+      "requested_data": "60",
+      "current_status": "value-present",
+      "current_value": 60,
+      "repo_exact_target_match_count": 2,
+      "risk_flags": [
+        "kernel-timing-sensitive"
+      ],
+      "lane": "alternate-value-gui-smoke",
+      "reason": "value exists in clean 25H2; test requested/opposite sensible values with snapshot rollback"
+    },
+    {
+      "index": 52,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "HibernateEnabledDefault",
+      "requested_data": "0",
+      "current_status": "value-present",
+      "current_value": 1,
+      "repo_exact_target_match_count": 1,
+      "risk_flags": [],
+      "lane": "alternate-value-gui-smoke",
+      "reason": "value exists in clean 25H2; test requested/opposite sensible values with snapshot rollback"
+    },
+    {
+      "index": 53,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "EventProcessorEnabled",
+      "requested_data": "0",
+      "current_status": "value-present",
+      "current_value": 1,
+      "repo_exact_target_match_count": 2,
+      "risk_flags": [],
+      "lane": "alternate-value-gui-smoke",
+      "reason": "value exists in clean 25H2; test requested/opposite sensible values with snapshot rollback"
+    },
+    {
+      "index": 54,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "LidReliabilityState",
+      "requested_data": "1",
+      "current_status": "value-present",
+      "current_value": 1,
+      "repo_exact_target_match_count": 2,
+      "risk_flags": [],
+      "lane": "alternate-value-gui-smoke",
+      "reason": "value exists in clean 25H2; test requested/opposite sensible values with snapshot rollback"
+    },
+    {
+      "index": 55,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "HibernateEnabled",
+      "requested_data": "0",
+      "current_status": "value-present",
+      "current_value": 0,
+      "repo_exact_target_match_count": 2,
+      "risk_flags": [],
+      "lane": "alternate-value-gui-smoke",
+      "reason": "value exists in clean 25H2; test requested/opposite sensible values with snapshot rollback"
+    },
+    {
+      "index": 56,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "DisableInboxPepGeneratedConstraints",
+      "requested_data": "1",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 0,
+      "risk_flags": [],
+      "lane": "discovery-etw-procmon-first",
+      "reason": "key exists but value absent and repo lacks exact target; first prove reader/writer lane before promotion-style mutation"
+    },
+    {
+      "index": 57,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "DisableDisplayBurstOnPowerSourceChange",
+      "requested_data": "1",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 0,
+      "risk_flags": [],
+      "lane": "discovery-etw-procmon-first",
+      "reason": "key exists but value absent and repo lacks exact target; first prove reader/writer lane before promotion-style mutation"
+    },
+    {
+      "index": 58,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "IdleProcessorsRequireQosManagement",
+      "requested_data": "0",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 0,
+      "risk_flags": [],
+      "lane": "discovery-etw-procmon-first",
+      "reason": "key exists but value absent and repo lacks exact target; first prove reader/writer lane before promotion-style mutation"
+    },
+    {
+      "index": 59,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "TtmEnabled",
+      "requested_data": "0",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 1,
+      "risk_flags": [],
+      "lane": "create-value-etw-procmon-plus-gui-smoke",
+      "reason": "key exists and repo has target match; add requested value, capture registry/runtime lane, then boot/app smoke"
+    },
+    {
+      "index": 60,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "AllowAudioToEnableExecutionRequiredPowerRequests",
+      "requested_data": "0",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 2,
+      "risk_flags": [],
+      "lane": "create-value-etw-procmon-plus-gui-smoke",
+      "reason": "key exists and repo has target match; add requested value, capture registry/runtime lane, then boot/app smoke"
+    },
+    {
+      "index": 61,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "DeepIoCoalescingEnabled",
+      "requested_data": "0",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 2,
+      "risk_flags": [],
+      "lane": "create-value-etw-procmon-plus-gui-smoke",
+      "reason": "key exists and repo has target match; add requested value, capture registry/runtime lane, then boot/app smoke"
+    },
+    {
+      "index": 62,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "IgnoreCsComplianceCheck",
+      "requested_data": "1",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 0,
+      "risk_flags": [],
+      "lane": "discovery-etw-procmon-first",
+      "reason": "key exists but value absent and repo lacks exact target; first prove reader/writer lane before promotion-style mutation"
+    },
+    {
+      "index": 63,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "DripsSwHwDivergenceEnableLiveDump",
+      "requested_data": "0",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 0,
+      "risk_flags": [],
+      "lane": "discovery-etw-procmon-first",
+      "reason": "key exists but value absent and repo lacks exact target; first prove reader/writer lane before promotion-style mutation"
+    },
+    {
+      "index": 64,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "DisableVsyncLatencyUpdate",
+      "requested_data": "1",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 0,
+      "risk_flags": [],
+      "lane": "discovery-etw-procmon-first",
+      "reason": "key exists but value absent and repo lacks exact target; first prove reader/writer lane before promotion-style mutation"
+    },
+    {
+      "index": 65,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "SleepstudyAccountingEnabled",
+      "requested_data": "0",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 0,
+      "risk_flags": [],
+      "lane": "discovery-etw-procmon-first",
+      "reason": "key exists but value absent and repo lacks exact target; first prove reader/writer lane before promotion-style mutation"
+    },
+    {
+      "index": 66,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "EnableInputSuppression",
+      "requested_data": "1",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 0,
+      "risk_flags": [],
+      "lane": "discovery-etw-procmon-first",
+      "reason": "key exists but value absent and repo lacks exact target; first prove reader/writer lane before promotion-style mutation"
+    },
+    {
+      "index": 67,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "PerfCheckTimerImplementation",
+      "requested_data": "0",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 0,
+      "risk_flags": [
+        "kernel-timing-sensitive"
+      ],
+      "lane": "discovery-etw-procmon-first",
+      "reason": "key exists but value absent and repo lacks exact target; first prove reader/writer lane before promotion-style mutation"
+    },
+    {
+      "index": 68,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "StandbyConnectivityGracePeriod",
+      "requested_data": "0",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 0,
+      "risk_flags": [],
+      "lane": "discovery-etw-procmon-first",
+      "reason": "key exists but value absent and repo lacks exact target; first prove reader/writer lane before promotion-style mutation"
+    },
+    {
+      "index": 69,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "EnforceAusterityMode",
+      "requested_data": "0",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 0,
+      "risk_flags": [],
+      "lane": "discovery-etw-procmon-first",
+      "reason": "key exists but value absent and repo lacks exact target; first prove reader/writer lane before promotion-style mutation"
+    },
+    {
+      "index": 70,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "AlwaysComputeQosHints",
+      "requested_data": "0",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 0,
+      "risk_flags": [],
+      "lane": "discovery-etw-procmon-first",
+      "reason": "key exists but value absent and repo lacks exact target; first prove reader/writer lane before promotion-style mutation"
+    },
+    {
+      "index": 71,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "HeteroMultiCoreClassesEnabled",
+      "requested_data": "0",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 0,
+      "risk_flags": [],
+      "lane": "discovery-etw-procmon-first",
+      "reason": "key exists but value absent and repo lacks exact target; first prove reader/writer lane before promotion-style mutation"
+    },
+    {
+      "index": 72,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "HeteroMultiClassParkingEnabled",
+      "requested_data": "0",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 0,
+      "risk_flags": [],
+      "lane": "discovery-etw-procmon-first",
+      "reason": "key exists but value absent and repo lacks exact target; first prove reader/writer lane before promotion-style mutation"
+    },
+    {
+      "index": 73,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "DisableIdleStatesAtBoot",
+      "requested_data": "2",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 2,
+      "risk_flags": [],
+      "lane": "create-value-etw-procmon-plus-gui-smoke",
+      "reason": "key exists and repo has target match; add requested value, capture registry/runtime lane, then boot/app smoke"
+    },
+    {
+      "index": 74,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "PerfBoostAtGuaranteed",
+      "requested_data": "1",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 0,
+      "risk_flags": [],
+      "lane": "discovery-etw-procmon-first",
+      "reason": "key exists but value absent and repo lacks exact target; first prove reader/writer lane before promotion-style mutation"
+    },
+    {
+      "index": 75,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "MSDisabled",
+      "requested_data": "1",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 1,
+      "risk_flags": [],
+      "lane": "create-value-etw-procmon-plus-gui-smoke",
+      "reason": "key exists and repo has target match; add requested value, capture registry/runtime lane, then boot/app smoke"
+    },
+    {
+      "index": 76,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "FxAccountingTelemetryDisabled",
+      "requested_data": "1",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 0,
+      "risk_flags": [],
+      "lane": "discovery-etw-procmon-first",
+      "reason": "key exists but value absent and repo lacks exact target; first prove reader/writer lane before promotion-style mutation"
+    },
+    {
+      "index": 77,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "Win32kCalloutWatchdogTimeoutSeconds",
+      "requested_data": "0",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 1,
+      "risk_flags": [
+        "watchdog/bugcheck-sensitive"
+      ],
+      "lane": "create-value-etw-procmon-plus-gui-smoke",
+      "reason": "key exists and repo has target match; add requested value, capture registry/runtime lane, then boot/app smoke"
+    },
+    {
+      "index": 78,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "EnableMinimalHiberFile",
+      "requested_data": "0",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 0,
+      "risk_flags": [],
+      "lane": "discovery-etw-procmon-first",
+      "reason": "key exists but value absent and repo lacks exact target; first prove reader/writer lane before promotion-style mutation"
+    },
+    {
+      "index": 79,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "HiberbootEnabled",
+      "requested_data": "0",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 0,
+      "risk_flags": [],
+      "lane": "discovery-etw-procmon-first",
+      "reason": "key exists but value absent and repo lacks exact target; first prove reader/writer lane before promotion-style mutation"
+    },
+    {
+      "index": 80,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "MaximumFrequencyOverride",
+      "requested_data": "100",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 0,
+      "risk_flags": [],
+      "lane": "discovery-etw-procmon-first",
+      "reason": "key exists but value absent and repo lacks exact target; first prove reader/writer lane before promotion-style mutation"
+    },
+    {
+      "index": 81,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "PoFxSystemIrpWaitForReportDevicePowered",
+      "requested_data": "0",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 0,
+      "risk_flags": [],
+      "lane": "discovery-etw-procmon-first",
+      "reason": "key exists but value absent and repo lacks exact target; first prove reader/writer lane before promotion-style mutation"
+    },
+    {
+      "index": 82,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "AllowSystemRequiredPowerRequests",
+      "requested_data": "0",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 2,
+      "risk_flags": [],
+      "lane": "create-value-etw-procmon-plus-gui-smoke",
+      "reason": "key exists and repo has target match; add requested value, capture registry/runtime lane, then boot/app smoke"
+    },
+    {
+      "index": 83,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "CoalescingFlushInterval",
+      "requested_data": "0",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 0,
+      "risk_flags": [],
+      "lane": "discovery-etw-procmon-first",
+      "reason": "key exists but value absent and repo lacks exact target; first prove reader/writer lane before promotion-style mutation"
+    },
+    {
+      "index": 84,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "CoalescingTimerInterval",
+      "requested_data": "0",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 2,
+      "risk_flags": [
+        "kernel-timing-sensitive"
+      ],
+      "lane": "create-value-etw-procmon-plus-gui-smoke",
+      "reason": "key exists and repo has target match; add requested value, capture registry/runtime lane, then boot/app smoke"
+    },
+    {
+      "index": 85,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "HeteroHgsEePerfHintsIndependentEnabled",
+      "requested_data": "1",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 0,
+      "risk_flags": [],
+      "lane": "discovery-etw-procmon-first",
+      "reason": "key exists but value absent and repo lacks exact target; first prove reader/writer lane before promotion-style mutation"
+    },
+    {
+      "index": 86,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "HeteroHgsPlusDisabled",
+      "requested_data": "1",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 0,
+      "risk_flags": [],
+      "lane": "discovery-etw-procmon-first",
+      "reason": "key exists but value absent and repo lacks exact target; first prove reader/writer lane before promotion-style mutation"
+    },
+    {
+      "index": 87,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "IpiLastClockOwnerDisable",
+      "requested_data": "1",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 0,
+      "risk_flags": [],
+      "lane": "discovery-etw-procmon-first",
+      "reason": "key exists but value absent and repo lacks exact target; first prove reader/writer lane before promotion-style mutation"
+    },
+    {
+      "index": 88,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "PowerWatchdogRequestQueueTimeoutMsec",
+      "requested_data": "0",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 1,
+      "risk_flags": [
+        "watchdog/bugcheck-sensitive"
+      ],
+      "lane": "create-value-etw-procmon-plus-gui-smoke",
+      "reason": "key exists and repo has target match; add requested value, capture registry/runtime lane, then boot/app smoke"
+    },
+    {
+      "index": 89,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "PowerWatchdogPoCalloutTimeoutMsec",
+      "requested_data": "0",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 1,
+      "risk_flags": [
+        "watchdog/bugcheck-sensitive"
+      ],
+      "lane": "create-value-etw-procmon-plus-gui-smoke",
+      "reason": "key exists and repo has target match; add requested value, capture registry/runtime lane, then boot/app smoke"
+    },
+    {
+      "index": 90,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "PowerWatchdogPowerOnGdiTimeoutMsec",
+      "requested_data": "0",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 1,
+      "risk_flags": [
+        "watchdog/bugcheck-sensitive"
+      ],
+      "lane": "create-value-etw-procmon-plus-gui-smoke",
+      "reason": "key exists and repo has target match; add requested value, capture registry/runtime lane, then boot/app smoke"
+    },
+    {
+      "index": 91,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "PowerWatchdogDwmSyncFlushTimeoutMsec",
+      "requested_data": "0",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 1,
+      "risk_flags": [
+        "watchdog/bugcheck-sensitive"
+      ],
+      "lane": "create-value-etw-procmon-plus-gui-smoke",
+      "reason": "key exists and repo has target match; add requested value, capture registry/runtime lane, then boot/app smoke"
+    },
+    {
+      "index": 92,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "PowerWatchdogDrvSetMonitorTimeoutMsec",
+      "requested_data": "0",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 1,
+      "risk_flags": [
+        "watchdog/bugcheck-sensitive"
+      ],
+      "lane": "create-value-etw-procmon-plus-gui-smoke",
+      "reason": "key exists and repo has target match; add requested value, capture registry/runtime lane, then boot/app smoke"
+    },
+    {
+      "index": 94,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ModernSleep",
+      "value_name": "EnableDsNetRefresh",
+      "requested_data": "0",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 0,
+      "risk_flags": [],
+      "lane": "discovery-etw-procmon-first",
+      "reason": "key exists but value absent and repo lacks exact target; first prove reader/writer lane before promotion-style mutation"
+    },
+    {
+      "index": 95,
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ModernSleep",
+      "value_name": "EnabledActions",
+      "requested_data": "0",
+      "current_status": "value-missing",
+      "current_value": null,
+      "repo_exact_target_match_count": 0,
+      "risk_flags": [],
+      "lane": "discovery-etw-procmon-first",
+      "reason": "key exists but value absent and repo lacks exact target; first prove reader/writer lane before promotion-style mutation"
+    }
+  ]
+}

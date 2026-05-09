@@ -3,6 +3,7 @@ from __future__ import annotations
 import importlib.util
 import subprocess
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 from unittest import mock
@@ -91,6 +92,16 @@ class VmKvmRegistryValueExperimentTests(unittest.TestCase):
         self.assertEqual(recovery["error"], "snapshot-revert-failed")
         self.assertEqual(len(calls), 2)
         wait_for_qga.assert_not_called()
+
+    def test_stage_script_removes_empty_key_created_for_missing_original(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            script_path = Path(tmp) / "stage.ps1"
+            registry_value_experiment.write_guest_stage_script(script_path)
+            script = script_path.read_text(encoding="utf-8")
+
+        self.assertIn("GetSubKeyNames", script)
+        self.assertIn("removed-created-key", script)
+        self.assertIn("removed-created-value-key-retained", script)
 
 
 if __name__ == "__main__":

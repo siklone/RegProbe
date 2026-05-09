@@ -1,0 +1,45 @@
+﻿{
+    "schema_version":  "1.0",
+    "generated_utc":  "2026-05-09T08:37:52.2549629Z",
+    "run_id":  "operator-allowaudio-execpowerrequests-etw-20260509",
+    "capture_profile":  "kernel-registry-stackwalk-v1",
+    "status":  "error",
+    "error_kind":  "etw-stackwalk-capture-failed",
+    "error":  "xperf.exe not found. Install Windows Performance Toolkit.",
+    "registry_path":  "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+    "value_name":  "AllowAudioToEnableExecutionRequiredPowerRequests",
+    "duration_seconds":  5,
+    "kernel_flags":  [
+                         "PROC_THREAD",
+                         "LOADER",
+                         "REGISTRY"
+                     ],
+    "stackwalk_events":  [
+                             "RegCreateKey",
+                             "RegOpenKey",
+                             "RegQueryKey",
+                             "RegSetValue",
+                             "RegQueryValue",
+                             "RegDeleteValue",
+                             "RegCloseKey"
+                         ],
+    "stack_capture_expected":  true,
+    "registry_probe_attempted":  false,
+    "xperf_exists":  false,
+    "tracerpt_exists":  true,
+    "output_root":  "C:\\RegProbe-Diag\\etw-stackwalk\\operator-allowaudio-execpowerrequests-etw-20260509",
+    "raw_etl_path":  "C:\\RegProbe-Diag\\etw-stackwalk\\operator-allowaudio-execpowerrequests-etw-20260509\\operator-allowaudio-execpowerrequests-etw-20260509.raw.etl",
+    "etl_path":  "C:\\RegProbe-Diag\\etw-stackwalk\\operator-allowaudio-execpowerrequests-etw-20260509\\operator-allowaudio-execpowerrequests-etw-20260509.etl",
+    "xml_path":  "C:\\RegProbe-Diag\\etw-stackwalk\\operator-allowaudio-execpowerrequests-etw-20260509\\operator-allowaudio-execpowerrequests-etw-20260509.xml",
+    "etl_exists":  false,
+    "xml_exists":  false,
+    "stack_field_hit_count":  0,
+    "upload_base_url":  "http://10.0.2.2:8766",
+    "artifact_uploads":  {
+                             "xml":  null,
+                             "etl":  null
+                         },
+    "commands":  {
+
+                 }
+}
