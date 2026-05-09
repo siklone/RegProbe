@@ -211,6 +211,11 @@ function Invoke-ProcessSmoke {
             success = $true
             failure_count = 0
             items = $items
+            interactive_user_smoke = [pscustomobject]@{
+                status = 'skipped'
+                reason = 'smoke_profile=none'
+            }
+            benchmarks = Invoke-MicroBenchmarks -Profile $Profile
         }
     }
 
@@ -295,11 +300,128 @@ function Invoke-ProcessSmoke {
     }
 
     $failed = @($items | Where-Object { -not $_.success })
+    $hardFailed = @($items | Where-Object {
+        -not $_.success -and -not ([string]$_.name).EndsWith('-uri-launch')
+    })
     return [pscustomobject]@{
-        success = ($failed.Count -eq 0)
+        success = ($hardFailed.Count -eq 0)
         failure_count = $failed.Count
+        hard_failure_count = $hardFailed.Count
+        best_effort_failure_count = $failed.Count - $hardFailed.Count
         items = $items
+        interactive_user_smoke = Invoke-InteractiveUserSmoke -Profile $Profile
         benchmarks = Invoke-MicroBenchmarks -Profile $Profile
+    }
+}
+
+function Invoke-InteractiveUserSmoke {
+    param(
+        [Parameter(Mandatory = $true)]
+        [ValidateSet('none', 'core', 'gui')]
+        [string]$Profile
+    )
+
+    if ($Profile -ne 'gui') {
+        return [pscustomobject]@{
+            status = 'skipped'
+            reason = "smoke_profile=$Profile"
+        }
+    }
+
+    try {
+        $explorer = Get-Process explorer -IncludeUserName -ErrorAction SilentlyContinue | Select-Object -First 1
+        if ($null -eq $explorer -or [string]::IsNullOrWhiteSpace([string]$explorer.UserName)) {
+            return [pscustomobject]@{
+                status = 'skipped'
+                reason = 'no-interactive-explorer-user'
+            }
+        }
+
+        $taskId = [Guid]::NewGuid().ToString('N')
+        $taskName = "RegProbe-InteractiveSmoke-$taskId"
+        $scriptPath = Join-Path $stateRoot "interactive-smoke-$taskId.ps1"
+        $resultPath = Join-Path $stateRoot "interactive-smoke-$taskId.json"
+        $script = @"
+`$ErrorActionPreference = 'Continue'
+`$items = New-Object System.Collections.Generic.List[object]
+function Add-Item([string]`$Name, [bool]`$Success, [string]`$Detail) {
+    `$items.Add([pscustomobject]@{ name = `$Name; success = `$Success; detail = `$Detail }) | Out-Null
+}
+try { Start-Process 'ms-settings:' -ErrorAction Stop; Start-Sleep -Seconds 2; Add-Item 'interactive-settings-uri' `$true 'launch-command-succeeded' } catch { Add-Item 'interactive-settings-uri' `$false `$_.Exception.Message }
+try { Start-Process 'ms-windows-store:' -ErrorAction Stop; Start-Sleep -Seconds 4; Add-Item 'interactive-store-uri' `$true 'launch-command-succeeded' } catch { Add-Item 'interactive-store-uri' `$false `$_.Exception.Message }
+foreach (`$probe in @(
+    @{ name = 'interactive-notepad-x64'; file = "`$env:SystemRoot\System32\notepad.exe" },
+    @{ name = 'interactive-notepad-x86'; file = "`$env:SystemRoot\SysWOW64\notepad.exe" },
+    @{ name = 'interactive-calc'; file = "`$env:SystemRoot\System32\calc.exe" }
+)) {
+    try {
+        if (-not (Test-Path -LiteralPath `$probe.file)) { Add-Item `$probe.name `$false "missing: `$(`$probe.file)"; continue }
+        `$proc = Start-Process -FilePath `$probe.file -PassThru
+        Start-Sleep -Seconds 2
+        `$alive = [bool](Get-Process -Id `$proc.Id -ErrorAction SilentlyContinue)
+        Stop-Process -Id `$proc.Id -Force -ErrorAction SilentlyContinue
+        Add-Item `$probe.name `$true "started=true;alive_after_2s=`$alive"
+    } catch { Add-Item `$probe.name `$false `$_.Exception.Message }
+}
+`$failed = @(`$items | Where-Object { -not `$_.success })
+[pscustomobject]@{
+    status = 'ok'
+    user = [Environment]::UserName
+    failure_count = `$failed.Count
+    items = `$items
+} | ConvertTo-Json -Depth 8 | Set-Content -Path '$resultPath' -Encoding UTF8
+"@
+        $script | Set-Content -Path $scriptPath -Encoding UTF8
+
+        $start = (Get-Date).AddMinutes(1).ToString('HH:mm')
+        $taskCommand = "powershell.exe -NoProfile -ExecutionPolicy Bypass -File `"$scriptPath`""
+        $createOutput = & "$env:SystemRoot\System32\schtasks.exe" /Create /TN $taskName /TR $taskCommand /SC ONCE /ST $start /F /RL LIMITED /IT /RU ([string]$explorer.UserName) 2>&1
+        $createExitCode = $LASTEXITCODE
+        if ($createExitCode -ne 0) {
+            return [pscustomobject]@{
+                status = 'error'
+                stage = 'create-scheduled-task'
+                exit_code = $createExitCode
+                user = [string]$explorer.UserName
+                output = [string]::Join("`n", @($createOutput | ForEach-Object { [string]$_ }))
+            }
+        }
+
+        $runOutput = & "$env:SystemRoot\System32\schtasks.exe" /Run /TN $taskName 2>&1
+        $runExitCode = $LASTEXITCODE
+        if ($runExitCode -ne 0) {
+            schtasks.exe /Delete /TN $taskName /F | Out-Null
+            return [pscustomobject]@{
+                status = 'error'
+                stage = 'run-scheduled-task'
+                exit_code = $runExitCode
+                user = [string]$explorer.UserName
+                output = [string]::Join("`n", @($runOutput | ForEach-Object { [string]$_ }))
+            }
+        }
+
+        $deadline = (Get-Date).AddSeconds(45)
+        while ((Get-Date) -lt $deadline) {
+            if (Test-Path -LiteralPath $resultPath) {
+                $payload = Get-Content -LiteralPath $resultPath -Raw | ConvertFrom-Json
+                schtasks.exe /Delete /TN $taskName /F | Out-Null
+                return $payload
+            }
+            Start-Sleep -Seconds 2
+        }
+
+        schtasks.exe /Delete /TN $taskName /F | Out-Null
+        return [pscustomobject]@{
+            status = 'timeout'
+            user = [string]$explorer.UserName
+            timeout_seconds = 45
+        }
+    }
+    catch {
+        return [pscustomobject]@{
+            status = 'error'
+            error = $_.Exception.Message
+        }
     }
 }
 
@@ -406,6 +528,7 @@ $result = [ordered]@{
 try {
     if ($Stage -eq 'apply') {
         $original = Read-RegistryValue -Path $RegistryPath -Name $ValueName
+        $result.baseline_smoke = Invoke-ProcessSmoke -Profile $SmokeProfile
         $state = [ordered]@{
             generated_utc = [DateTime]::UtcNow.ToString('yyyy-MM-ddTHH:mm:ssZ')
             experiment_id = $ExperimentId
@@ -801,9 +924,38 @@ def write_markdown(summary: dict[str, Any], path: Path) -> None:
         smoke = result.get("smoke")
         if isinstance(smoke, dict):
             lines.append(f"- `smoke.failure_count`: `{smoke.get('failure_count')}`")
+            lines.append(f"- `smoke.hard_failure_count`: `{smoke.get('hard_failure_count')}`")
+            lines.append(f"- `smoke.best_effort_failure_count`: `{smoke.get('best_effort_failure_count')}`")
             for item in smoke.get("items", []):
                 if isinstance(item, dict):
                     lines.append(f"- `{item.get('name')}`: `{item.get('success')}` - {item.get('detail')}")
+            interactive = smoke.get("interactive_user_smoke")
+            if isinstance(interactive, dict):
+                lines.append(
+                    f"- `interactive_user_smoke`: status=`{interactive.get('status')}`, "
+                    f"failure_count=`{interactive.get('failure_count')}`"
+                )
+            benchmarks = smoke.get("benchmarks")
+            if isinstance(benchmarks, dict):
+                lines.append(
+                    f"- `benchmarks`: status=`{benchmarks.get('status')}`, "
+                    f"cpu_single_seconds=`{benchmarks.get('cpu_single_seconds')}`, "
+                    f"cpu_multi_seconds=`{benchmarks.get('cpu_multi_seconds')}`, "
+                    f"io_mib_s=`{benchmarks.get('io_write_read_mib_per_second')}`"
+                )
+        baseline_smoke = result.get("baseline_smoke")
+        if isinstance(baseline_smoke, dict):
+            lines.append(f"- `baseline_smoke.failure_count`: `{baseline_smoke.get('failure_count')}`")
+            lines.append(f"- `baseline_smoke.hard_failure_count`: `{baseline_smoke.get('hard_failure_count')}`")
+            lines.append(f"- `baseline_smoke.best_effort_failure_count`: `{baseline_smoke.get('best_effort_failure_count')}`")
+            benchmarks = baseline_smoke.get("benchmarks")
+            if isinstance(benchmarks, dict):
+                lines.append(
+                    f"- `baseline_benchmarks`: status=`{benchmarks.get('status')}`, "
+                    f"cpu_single_seconds=`{benchmarks.get('cpu_single_seconds')}`, "
+                    f"cpu_multi_seconds=`{benchmarks.get('cpu_multi_seconds')}`, "
+                    f"io_mib_s=`{benchmarks.get('io_write_read_mib_per_second')}`"
+                )
 
     path.write_text("\n".join(lines) + "\n", encoding="utf-8")
 

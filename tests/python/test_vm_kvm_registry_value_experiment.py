@@ -114,6 +114,19 @@ class VmKvmRegistryValueExperimentTests(unittest.TestCase):
         self.assertIn("cpu_single_seconds", script)
         self.assertIn("io_write_read_mib_per_second", script)
 
+    def test_stage_script_records_baseline_and_interactive_smoke(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            script_path = Path(tmp) / "stage.ps1"
+            registry_value_experiment.write_guest_stage_script(script_path)
+            script = script_path.read_text(encoding="utf-8")
+
+        self.assertIn("baseline_smoke", script)
+        self.assertIn("function Invoke-InteractiveUserSmoke", script)
+        self.assertIn("interactive-store-uri", script)
+        self.assertIn("schtasks.exe", script)
+        self.assertIn("hard_failure_count", script)
+        self.assertIn("best_effort_failure_count", script)
+
 
 if __name__ == "__main__":
     unittest.main()
