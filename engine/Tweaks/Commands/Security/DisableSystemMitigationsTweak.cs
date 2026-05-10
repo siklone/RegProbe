@@ -40,7 +40,11 @@ public sealed class DisableSystemMitigationsTweak : CommandTweak
             risk: TweakRiskLevel.Risky,
             commandRunner: commandRunner)
     {
-        _workspaceDirectory = Path.Combine(Path.GetTempPath(), "RegProbe", "ExploitProtection");
+        _workspaceDirectory = Path.Combine(
+            Path.GetTempPath(),
+            "RegProbe",
+            "ExploitProtection",
+            Guid.NewGuid().ToString("N"));
         _desiredPolicyPath = Path.Combine(_workspaceDirectory, "security-disable-system-mitigations.xml");
         EnsureDesiredPolicyFile();
     }
