@@ -1,16 +1,17 @@
 # Registry Value Experiment Analysis
 
-- Generated UTC: `2026-05-10T00:50:06Z`
+- Generated UTC: `2026-05-10T02:09:05Z`
 - Input: `registry-research-framework/audit/registry-value-experiments`
 - Pattern: `operator96-*.json`
-- Artifacts analyzed: `110`
+- Artifacts analyzed: `120`
 - Errors: `0`
 
 ## Verdict Counts
 
+- `app_breakage`: `1`
 - `boot_failure`: `1`
-- `harmful`: `89`
-- `low_confidence`: `18`
+- `harmful`: `95`
+- `low_confidence`: `21`
 - `rollback_failure`: `2`
 
 ## Results
@@ -126,4 +127,14 @@
 | `operator96-060-allowaudiotoenableexecutionrequiredpowerrequests-1` | `harmful` | `low` | `ok` | `-73.752` | apply io_write_mib_per_second changed by -73.75% | `registry-research-framework/audit/registry-value-experiments/operator96-060-allowaudiotoenableexecutionrequiredpowerrequests-1.json` |
 | `operator96-061-deepiocoalescingenabled-0` | `harmful` | `low` | `ok` | `-19.120` | apply io_read_mib_per_second changed by -19.12% | `registry-research-framework/audit/registry-value-experiments/operator96-061-deepiocoalescingenabled-0.json` |
 | `operator96-061-deepiocoalescingenabled-1` | `harmful` | `low` | `ok` | `-41.937` | post_reboot io_read_mib_per_second changed by -41.94% | `registry-research-framework/audit/registry-value-experiments/operator96-061-deepiocoalescingenabled-1.json` |
+| `operator96-062-ignorecscompliancecheck-0` | `harmful` | `low` | `ok` | `-32.127` | apply io_write_read_mib_per_second changed by -32.13% | `registry-research-framework/audit/registry-value-experiments/operator96-062-ignorecscompliancecheck-0.json` |
 | `operator96-062-ignorecscompliancecheck-1` | `harmful` | `high` | `ok` | `-8.363` | apply cpu_multi_iterations_per_second changed by -8.36% | `registry-research-framework/audit/registry-value-experiments/operator96-062-ignorecscompliancecheck-1.json` |
+| `operator96-063-dripsswhwdivergenceenablelivedump-0` | `harmful` | `low` | `ok` | `-17.886` | post_reboot io_write_mib_per_second changed by -17.89% | `registry-research-framework/audit/registry-value-experiments/operator96-063-dripsswhwdivergenceenablelivedump-0.json` |
+| `operator96-063-dripsswhwdivergenceenablelivedump-1` | `harmful` | `high` | `ok` | `-7.178` | apply cpu_multi_iterations_per_second changed by -7.18% | `registry-research-framework/audit/registry-value-experiments/operator96-063-dripsswhwdivergenceenablelivedump-1.json` |
+| `operator96-064-disablevsynclatencyupdate-0` | `low_confidence` | `low` | `ok` | `68.723` | apply io_read_mib_per_second changed by +68.72% | `registry-research-framework/audit/registry-value-experiments/operator96-064-disablevsynclatencyupdate-0.json` |
+| `operator96-064-disablevsynclatencyupdate-1` | `harmful` | `low` | `ok` | `-45.152` | apply cpu_multi_iterations_per_second changed by -45.15% | `registry-research-framework/audit/registry-value-experiments/operator96-064-disablevsynclatencyupdate-1.json` |
+| `operator96-065-sleepstudyaccountingenabled-0` | `app_breakage` | `medium` | `ok` | `` | post_reboot_rollback interactive smoke failures increased from 0 to 1 | `registry-research-framework/audit/registry-value-experiments/operator96-065-sleepstudyaccountingenabled-0.json` |
+| `operator96-065-sleepstudyaccountingenabled-1` | `harmful` | `high` | `ok` | `-7.421` | apply cpu_multi_iterations_per_second changed by -7.42% | `registry-research-framework/audit/registry-value-experiments/operator96-065-sleepstudyaccountingenabled-1.json` |
+| `operator96-066-enableinputsuppression-0` | `low_confidence` | `low` | `ok` | `82.951` | apply io_read_mib_per_second changed by +82.95% | `registry-research-framework/audit/registry-value-experiments/operator96-066-enableinputsuppression-0.json` |
+| `operator96-066-enableinputsuppression-1` | `low_confidence` | `low` | `ok` | `67.583` | apply io_read_mib_per_second changed by +67.58% | `registry-research-framework/audit/registry-value-experiments/operator96-066-enableinputsuppression-1.json` |
+| `operator96-067-perfchecktimerimplementation-0` | `harmful` | `low` | `ok` | `-10.395` | post_reboot io_write_mib_per_second changed by -10.39% | `registry-research-framework/audit/registry-value-experiments/operator96-067-perfchecktimerimplementation-0.json` |

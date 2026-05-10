@@ -1,9 +1,9 @@
 # Operator 96 Registry Value Campaign
 
-- Generated UTC: `2026-05-09T23:07:29Z`
+- Generated UTC: `2026-05-10T00:51:50Z`
 - Status: **ok**
-- Planned experiments: `110`
-- Completed in this run: `110`
+- Planned experiments: `120`
+- Completed in this run: `120`
 
 ## Plan
 
@@ -119,6 +119,16 @@
 | 61 | `operator96-061-deepiocoalescingenabled-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\DeepIoCoalescingEnabled` | `0` | `absent` | `vm-observed` |
 | 61 | `operator96-061-deepiocoalescingenabled-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\DeepIoCoalescingEnabled` | `1` | `absent` | `vm-observed` |
 | 62 | `operator96-062-ignorecscompliancecheck-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\IgnoreCsComplianceCheck` | `1` | `absent` | `vm-observed` |
+| 62 | `operator96-062-ignorecscompliancecheck-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\IgnoreCsComplianceCheck` | `0` | `absent` | `vm-observed` |
+| 63 | `operator96-063-dripsswhwdivergenceenablelivedump-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\DripsSwHwDivergenceEnableLiveDump` | `0` | `absent` | `vm-observed` |
+| 63 | `operator96-063-dripsswhwdivergenceenablelivedump-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\DripsSwHwDivergenceEnableLiveDump` | `1` | `absent` | `vm-observed` |
+| 64 | `operator96-064-disablevsynclatencyupdate-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\DisableVsyncLatencyUpdate` | `1` | `absent` | `vm-observed` |
+| 64 | `operator96-064-disablevsynclatencyupdate-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\DisableVsyncLatencyUpdate` | `0` | `absent` | `vm-observed` |
+| 65 | `operator96-065-sleepstudyaccountingenabled-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\SleepstudyAccountingEnabled` | `0` | `absent` | `vm-observed` |
+| 65 | `operator96-065-sleepstudyaccountingenabled-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\SleepstudyAccountingEnabled` | `1` | `absent` | `vm-observed` |
+| 66 | `operator96-066-enableinputsuppression-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\EnableInputSuppression` | `1` | `absent` | `vm-observed` |
+| 66 | `operator96-066-enableinputsuppression-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\EnableInputSuppression` | `0` | `absent` | `vm-observed` |
+| 67 | `operator96-067-perfchecktimerimplementation-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\PerfCheckTimerImplementation` | `0` | `absent` | `vm-observed` |
 
 ## Results
 
@@ -224,13 +234,23 @@
 | `operator96-056-disableinboxpepgeneratedconstraints-1` | `low_confidence` | `low` | `unknown` | `skipped-existing-ok` | `True` | `ok`/`0` | `75.751` | `43.1` | `registry-research-framework/audit/registry-value-experiments/operator96-056-disableinboxpepgeneratedconstraints-1.json` |
 | `operator96-056-disableinboxpepgeneratedconstraints-0` | `harmful` | `low` | `unknown` | `skipped-existing-ok` | `True` | `ok`/`0` | `-18.075` | `-6.42` | `registry-research-framework/audit/registry-value-experiments/operator96-056-disableinboxpepgeneratedconstraints-0.json` |
 | `operator96-057-disabledisplayburstonpowersourcechange-1` | `low_confidence` | `low` | `unknown` | `skipped-existing-ok` | `True` | `ok`/`0` | `27.226` | `27.23` | `registry-research-framework/audit/registry-value-experiments/operator96-057-disabledisplayburstonpowersourcechange-1.json` |
-| `operator96-057-disabledisplayburstonpowersourcechange-0` | `harmful` | `low` | `unknown` | `ok` | `True` | `ok`/`0` | `-61.689` | `243.32` | `registry-research-framework/audit/registry-value-experiments/operator96-057-disabledisplayburstonpowersourcechange-0.json` |
-| `operator96-058-idleprocessorsrequireqosmanagement-0` | `low_confidence` | `low` | `unknown` | `ok` | `True` | `ok`/`0` | `40.837` | `34.41` | `registry-research-framework/audit/registry-value-experiments/operator96-058-idleprocessorsrequireqosmanagement-0.json` |
-| `operator96-058-idleprocessorsrequireqosmanagement-1` | `low_confidence` | `low` | `unknown` | `ok` | `True` | `ok`/`0` | `66.745` | `8.28` | `registry-research-framework/audit/registry-value-experiments/operator96-058-idleprocessorsrequireqosmanagement-1.json` |
-| `operator96-059-ttmenabled-0` | `low_confidence` | `low` | `ok` | `ok` | `True` | `ok`/`0` | `86.33` | `1.0` | `registry-research-framework/audit/registry-value-experiments/operator96-059-ttmenabled-0.json` |
-| `operator96-059-ttmenabled-1` | `boot_failure` | `high` | `unknown` | `ok` | `False` | `missing`/`None` | `None` | `None` | `registry-research-framework/audit/registry-value-experiments/operator96-059-ttmenabled-1.json` |
-| `operator96-060-allowaudiotoenableexecutionrequiredpowerrequests-0` | `harmful` | `low` | `ok` | `ok` | `True` | `ok`/`0` | `-31.054` | `-25.98` | `registry-research-framework/audit/registry-value-experiments/operator96-060-allowaudiotoenableexecutionrequiredpowerrequests-0.json` |
-| `operator96-060-allowaudiotoenableexecutionrequiredpowerrequests-1` | `harmful` | `low` | `ok` | `ok` | `True` | `ok`/`0` | `-73.752` | `27.15` | `registry-research-framework/audit/registry-value-experiments/operator96-060-allowaudiotoenableexecutionrequiredpowerrequests-1.json` |
-| `operator96-061-deepiocoalescingenabled-0` | `harmful` | `low` | `ok` | `ok` | `True` | `ok`/`0` | `-19.12` | `20.52` | `registry-research-framework/audit/registry-value-experiments/operator96-061-deepiocoalescingenabled-0.json` |
-| `operator96-061-deepiocoalescingenabled-1` | `harmful` | `low` | `ok` | `ok` | `True` | `ok`/`0` | `-41.937` | `-36.65` | `registry-research-framework/audit/registry-value-experiments/operator96-061-deepiocoalescingenabled-1.json` |
-| `operator96-062-ignorecscompliancecheck-1` | `harmful` | `high` | `ok` | `ok` | `True` | `ok`/`0` | `-8.363` | `8.1` | `registry-research-framework/audit/registry-value-experiments/operator96-062-ignorecscompliancecheck-1.json` |
+| `operator96-057-disabledisplayburstonpowersourcechange-0` | `harmful` | `low` | `unknown` | `skipped-existing-ok` | `True` | `ok`/`0` | `-61.689` | `243.32` | `registry-research-framework/audit/registry-value-experiments/operator96-057-disabledisplayburstonpowersourcechange-0.json` |
+| `operator96-058-idleprocessorsrequireqosmanagement-0` | `low_confidence` | `low` | `unknown` | `skipped-existing-ok` | `True` | `ok`/`0` | `40.837` | `34.41` | `registry-research-framework/audit/registry-value-experiments/operator96-058-idleprocessorsrequireqosmanagement-0.json` |
+| `operator96-058-idleprocessorsrequireqosmanagement-1` | `low_confidence` | `low` | `unknown` | `skipped-existing-ok` | `True` | `ok`/`0` | `66.745` | `8.28` | `registry-research-framework/audit/registry-value-experiments/operator96-058-idleprocessorsrequireqosmanagement-1.json` |
+| `operator96-059-ttmenabled-0` | `low_confidence` | `low` | `ok` | `skipped-existing-ok` | `True` | `ok`/`0` | `86.33` | `1.0` | `registry-research-framework/audit/registry-value-experiments/operator96-059-ttmenabled-0.json` |
+| `operator96-059-ttmenabled-1` | `boot_failure` | `high` | `unknown` | `skipped-existing-ok` | `False` | `missing`/`None` | `None` | `None` | `registry-research-framework/audit/registry-value-experiments/operator96-059-ttmenabled-1.json` |
+| `operator96-060-allowaudiotoenableexecutionrequiredpowerrequests-0` | `harmful` | `low` | `ok` | `skipped-existing-ok` | `True` | `ok`/`0` | `-31.054` | `-25.98` | `registry-research-framework/audit/registry-value-experiments/operator96-060-allowaudiotoenableexecutionrequiredpowerrequests-0.json` |
+| `operator96-060-allowaudiotoenableexecutionrequiredpowerrequests-1` | `harmful` | `low` | `ok` | `skipped-existing-ok` | `True` | `ok`/`0` | `-73.752` | `27.15` | `registry-research-framework/audit/registry-value-experiments/operator96-060-allowaudiotoenableexecutionrequiredpowerrequests-1.json` |
+| `operator96-061-deepiocoalescingenabled-0` | `harmful` | `low` | `ok` | `skipped-existing-ok` | `True` | `ok`/`0` | `-19.12` | `20.52` | `registry-research-framework/audit/registry-value-experiments/operator96-061-deepiocoalescingenabled-0.json` |
+| `operator96-061-deepiocoalescingenabled-1` | `harmful` | `low` | `ok` | `skipped-existing-ok` | `True` | `ok`/`0` | `-41.937` | `-36.65` | `registry-research-framework/audit/registry-value-experiments/operator96-061-deepiocoalescingenabled-1.json` |
+| `operator96-062-ignorecscompliancecheck-1` | `harmful` | `high` | `ok` | `skipped-existing-ok` | `True` | `ok`/`0` | `-8.363` | `8.1` | `registry-research-framework/audit/registry-value-experiments/operator96-062-ignorecscompliancecheck-1.json` |
+| `operator96-062-ignorecscompliancecheck-0` | `harmful` | `low` | `ok` | `ok` | `True` | `ok`/`0` | `-32.127` | `-12.92` | `registry-research-framework/audit/registry-value-experiments/operator96-062-ignorecscompliancecheck-0.json` |
+| `operator96-063-dripsswhwdivergenceenablelivedump-0` | `harmful` | `low` | `ok` | `ok` | `True` | `ok`/`0` | `-17.886` | `-6.43` | `registry-research-framework/audit/registry-value-experiments/operator96-063-dripsswhwdivergenceenablelivedump-0.json` |
+| `operator96-063-dripsswhwdivergenceenablelivedump-1` | `harmful` | `high` | `ok` | `ok` | `True` | `ok`/`0` | `-7.178` | `1.1` | `registry-research-framework/audit/registry-value-experiments/operator96-063-dripsswhwdivergenceenablelivedump-1.json` |
+| `operator96-064-disablevsynclatencyupdate-1` | `harmful` | `low` | `ok` | `ok` | `True` | `ok`/`0` | `-45.152` | `1.57` | `registry-research-framework/audit/registry-value-experiments/operator96-064-disablevsynclatencyupdate-1.json` |
+| `operator96-064-disablevsynclatencyupdate-0` | `low_confidence` | `low` | `ok` | `ok` | `True` | `ok`/`0` | `68.723` | `9.55` | `registry-research-framework/audit/registry-value-experiments/operator96-064-disablevsynclatencyupdate-0.json` |
+| `operator96-065-sleepstudyaccountingenabled-0` | `app_breakage` | `medium` | `ok` | `ok` | `True` | `ok`/`1` | `None` | `-6.8` | `registry-research-framework/audit/registry-value-experiments/operator96-065-sleepstudyaccountingenabled-0.json` |
+| `operator96-065-sleepstudyaccountingenabled-1` | `harmful` | `high` | `ok` | `ok` | `True` | `ok`/`0` | `-7.421` | `4.32` | `registry-research-framework/audit/registry-value-experiments/operator96-065-sleepstudyaccountingenabled-1.json` |
+| `operator96-066-enableinputsuppression-1` | `low_confidence` | `low` | `ok` | `ok` | `True` | `ok`/`0` | `67.583` | `8.43` | `registry-research-framework/audit/registry-value-experiments/operator96-066-enableinputsuppression-1.json` |
+| `operator96-066-enableinputsuppression-0` | `low_confidence` | `low` | `ok` | `ok` | `True` | `ok`/`0` | `82.951` | `2.47` | `registry-research-framework/audit/registry-value-experiments/operator96-066-enableinputsuppression-0.json` |
+| `operator96-067-perfchecktimerimplementation-0` | `harmful` | `low` | `ok` | `ok` | `True` | `ok`/`0` | `-10.395` | `8.04` | `registry-research-framework/audit/registry-value-experiments/operator96-067-perfchecktimerimplementation-0.json` |
