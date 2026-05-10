@@ -6,6 +6,7 @@ import sys
 import tempfile
 import unittest
 from pathlib import Path
+from types import SimpleNamespace
 from unittest import mock
 
 
@@ -111,8 +112,31 @@ class VmKvmRegistryValueExperimentTests(unittest.TestCase):
 
         self.assertIn("function Invoke-MicroBenchmarks", script)
         self.assertIn("RegProbeMicroBench", script)
-        self.assertIn("cpu_single_seconds", script)
+        self.assertIn("cpu_single_iterations_per_second", script)
+        self.assertIn("sample_count", script)
+        self.assertIn("spread_pct", script)
         self.assertIn("io_write_read_mib_per_second", script)
+
+    def test_host_noise_gate_reports_quiet_host_from_proc_snapshots(self) -> None:
+        reads = {
+            "/proc/stat": [
+                "cpu  100 0 100 800 0 0 0 0 0 0\n",
+                "cpu  110 0 110 980 0 0 0 0 0 0\n",
+            ],
+            "/proc/loadavg": ["0.10 0.20 0.30 1/100 1\n"],
+            "/proc/cpuinfo": ["processor\t: 0\nprocessor\t: 1\n"],
+        }
+
+        def fake_read_text(self: Path, encoding: str = "utf-8") -> str:
+            values = reads[str(self)]
+            return values.pop(0) if len(values) > 1 else values[0]
+
+        with mock.patch.object(registry_value_experiment.time, "sleep"), mock.patch.object(Path, "read_text", fake_read_text):
+            result = registry_value_experiment.wait_for_quiet_host(max_retries=0, sample_interval_seconds=0.01)
+
+        self.assertEqual(result["noise_status"], "ok")
+        self.assertEqual(result["host_cpu_count"], 2)
+        self.assertLess(result["host_cpu_busy_pct"], 20)
 
     def test_stage_script_records_baseline_and_interactive_smoke(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
@@ -143,6 +167,68 @@ class VmKvmRegistryValueExperimentTests(unittest.TestCase):
         self.assertEqual(result["timeout_seconds"], 30)
         self.assertEqual(result["stdout"], "partial stdout")
         self.assertEqual(result["stderr"], "partial stderr")
+
+    def test_run_experiment_marks_recovered_apply_boot_failure_as_controlled_result(self) -> None:
+        args = SimpleNamespace(
+            output_name="operator96-059-ttmenabled-1",
+            value_name="TtmEnabled",
+            value_data=1,
+            registry_path="HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            domain="regprobe-win11-25h2-session",
+            connect="qemu:///session",
+            smoke_profile="gui",
+            auto_revert_snapshot_on_boot_failure=True,
+            revert_snapshot_name="clean-25h2-qga",
+            reboot_wait_timeout=420,
+            stage_wait_timeout=420,
+            post_reboot_delay_seconds=90,
+            no_host_noise_gate=False,
+            host_noise_max_retries=0,
+            host_noise_retry_interval_seconds=0,
+            host_noise_busy_threshold_pct=100,
+            host_noise_load1_per_cpu_threshold=100,
+            host_noise_sample_interval_seconds=0,
+        )
+        stage_payload = {"status": "ok", "smoke": {"items": []}}
+
+        with mock.patch.object(
+            registry_value_experiment,
+            "list_domain_snapshots",
+            return_value={"snapshots": ["clean-25h2-qga"], "returncode": 0, "stderr": ""},
+        ), mock.patch.object(
+            registry_value_experiment, "write_guest_stage_script"
+        ), mock.patch.object(
+            registry_value_experiment,
+            "wait_for_quiet_host",
+            return_value={"noise_status": "ok"},
+        ), mock.patch.object(
+            registry_value_experiment,
+            "run_guest_stage",
+            return_value=(0, {"status": "ok"}, stage_payload),
+        ), mock.patch.object(
+            registry_value_experiment,
+            "reboot_guest",
+            return_value={"status": "ok"},
+        ), mock.patch.object(
+            registry_value_experiment.time,
+            "sleep",
+        ), mock.patch.object(
+            registry_value_experiment,
+            "wait_for_qga",
+            return_value={"status": "error", "error_kind": "qga-preflight-failed"},
+        ), mock.patch.object(
+            registry_value_experiment,
+            "recover_from_snapshot",
+            return_value={"status": "ok", "snapshot": "clean-25h2-qga"},
+        ):
+            result = registry_value_experiment.run_experiment(args)
+
+        self.assertEqual(result["status"], "ok")
+        self.assertEqual(result["outcome"], "boot-failure-recovered")
+        self.assertTrue(result["controlled_failure"])
+        self.assertEqual(result["error"], "guest-did-not-return-after-apply-reboot")
+        self.assertEqual(result["recovery"]["status"], "ok")
+        self.assertFalse(result["smoke"]["post_reboot_smoke_hard_success"])
 
 
 if __name__ == "__main__":

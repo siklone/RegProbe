@@ -13,6 +13,11 @@ from vm_env import vm_connect, vm_domain, vm_snapshot
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
+FRAMEWORK_SCRIPTS = REPO_ROOT / "registry-research-framework" / "scripts"
+if str(FRAMEWORK_SCRIPTS) not in sys.path:
+    sys.path.insert(0, str(FRAMEWORK_SCRIPTS))
+
+from registry_value_verdict import compute_registry_value_verdict  # noqa: E402
 
 
 def now_utc() -> str:
@@ -208,9 +213,17 @@ def read_artifact_observations(path: Path) -> dict[str, Any]:
     baseline_bench = benchmarks_from(apply, "baseline_smoke")
     apply_bench = benchmarks_from(apply)
     post_reboot_bench = benchmarks_from(post_reboot)
+    verdict = compute_registry_value_verdict(payload)
 
     return {
         "status": payload.get("status"),
+        "verdict": verdict.get("overall"),
+        "confidence": verdict.get("confidence"),
+        "host_noise": verdict.get("host_noise"),
+        "primary_delta_pct": verdict.get("delta_pct"),
+        "verdict_reason": verdict.get("reason"),
+        "metrics_used": verdict.get("metrics_used") or [],
+        "safety_findings": verdict.get("safety_findings") or [],
         "smoke_hard_success": payload.get("smoke"),
         "apply": {
             "original": apply.get("original"),
@@ -329,8 +342,8 @@ def write_plan_markdown(payload: dict[str, Any], path: Path) -> None:
                 "",
                 "## Results",
                 "",
-                "| Experiment | Status | Hard smoke | Interactive | Post-reboot CPU single Δ% | Post-reboot CPU multi Δ% | Post-reboot IO Δ% | Artifact |",
-                "|---|---|---|---|---:|---:|---:|---|",
+                "| Experiment | Verdict | Confidence | Host noise | Status | Hard smoke | Interactive | Primary Δ% | Post-reboot IO Δ% | Artifact |",
+                "|---|---|---|---|---|---|---|---:|---:|---|",
             ]
         )
         for item in payload["results"]:
@@ -341,11 +354,12 @@ def write_plan_markdown(payload: dict[str, Any], path: Path) -> None:
             deltas = observations.get("benchmark_delta_percent") if isinstance(observations.get("benchmark_delta_percent"), dict) else {}
             post_reboot_delta = deltas.get("post_reboot_vs_baseline") if isinstance(deltas.get("post_reboot_vs_baseline"), dict) else {}
             lines.append(
-                f"| `{item.get('experiment_id')}` | `{item.get('status')}` | "
+                f"| `{item.get('experiment_id')}` | `{observations.get('verdict')}` | "
+                f"`{observations.get('confidence')}` | `{observations.get('host_noise')}` | "
+                f"`{item.get('status')}` | "
                 f"`{smoke.get('post_reboot_smoke_hard_success')}` | "
                 f"`{interactive.get('status')}`/`{interactive.get('failure_count')}` | "
-                f"`{post_reboot_delta.get('cpu_single_seconds')}` | "
-                f"`{post_reboot_delta.get('cpu_multi_seconds')}` | "
+                f"`{observations.get('primary_delta_pct')}` | "
                 f"`{post_reboot_delta.get('io_write_read_mib_per_second')}` | "
                 f"`{item.get('artifact_json')}` |"
             )

@@ -29,6 +29,117 @@ def now_utc() -> str:
     return datetime.now(UTC).replace(microsecond=0).isoformat().replace("+00:00", "Z")
 
 
+def _read_proc_stat_cpu(path: Path = Path("/proc/stat")) -> tuple[int, int]:
+    for line in path.read_text(encoding="utf-8").splitlines():
+        if line.startswith("cpu "):
+            fields = [int(value) for value in line.split()[1:]]
+            idle = fields[3] + (fields[4] if len(fields) > 4 else 0)
+            return idle, sum(fields)
+    raise RuntimeError(f"{path}: aggregate cpu line not found")
+
+
+def _host_cpu_busy_pct(sample_interval_seconds: float) -> float:
+    idle0, total0 = _read_proc_stat_cpu()
+    time.sleep(sample_interval_seconds)
+    idle1, total1 = _read_proc_stat_cpu()
+    total_delta = total1 - total0
+    idle_delta = idle1 - idle0
+    if total_delta <= 0:
+        return 0.0
+    return round((1.0 - (idle_delta / total_delta)) * 100.0, 2)
+
+
+def _read_loadavg(path: Path = Path("/proc/loadavg")) -> tuple[float, float, float]:
+    parts = path.read_text(encoding="utf-8").split()
+    return float(parts[0]), float(parts[1]), float(parts[2])
+
+
+def _host_cpu_count() -> int:
+    count = 0
+    try:
+        for line in Path("/proc/cpuinfo").read_text(encoding="utf-8").splitlines():
+            if line.startswith("processor"):
+                count += 1
+    except OSError:
+        count = 0
+    return max(count, 1)
+
+
+def wait_for_quiet_host(
+    *,
+    enabled: bool = True,
+    max_retries: int = 5,
+    interval_seconds: float = 5.0,
+    busy_threshold_pct: float = 20.0,
+    load1_per_cpu_threshold: float = 0.75,
+    sample_interval_seconds: float = 0.5,
+) -> dict[str, Any]:
+    started = now_utc()
+    if not enabled:
+        return {
+            "noise_status": "skipped",
+            "noise_reason": "host-noise-gate-disabled",
+            "sample_started_utc": started,
+            "sample_finished_utc": now_utc(),
+        }
+
+    try:
+        cpu_count = _host_cpu_count()
+        load1_threshold = load1_per_cpu_threshold * cpu_count
+        last_busy = 0.0
+        last_load1 = 0.0
+        last_load5 = 0.0
+        for attempt in range(max_retries + 1):
+            last_busy = _host_cpu_busy_pct(sample_interval_seconds)
+            last_load1, last_load5, _ = _read_loadavg()
+            busy_ok = last_busy <= busy_threshold_pct
+            load_ok = last_load1 <= load1_threshold
+            if busy_ok and load_ok:
+                return {
+                    "noise_status": "ok",
+                    "noise_reason": None,
+                    "host_cpu_busy_pct": last_busy,
+                    "load1": last_load1,
+                    "load5": last_load5,
+                    "host_cpu_count": cpu_count,
+                    "retry_count": attempt,
+                    "max_retries": max_retries,
+                    "busy_threshold_pct": busy_threshold_pct,
+                    "load1_per_cpu_threshold": load1_per_cpu_threshold,
+                    "sample_started_utc": started,
+                    "sample_finished_utc": now_utc(),
+                }
+            if attempt < max_retries:
+                time.sleep(interval_seconds)
+
+        reasons: list[str] = []
+        if last_busy > busy_threshold_pct:
+            reasons.append(f"cpu_busy={last_busy}% > threshold={busy_threshold_pct}%")
+        if last_load1 > load1_threshold:
+            reasons.append(f"load1={last_load1} > threshold={load1_threshold:.2f}")
+        return {
+            "noise_status": "noisy",
+            "noise_reason": "; ".join(reasons) or "quiet-host-threshold-not-met",
+            "host_cpu_busy_pct": last_busy,
+            "load1": last_load1,
+            "load5": last_load5,
+            "host_cpu_count": cpu_count,
+            "retry_count": max_retries,
+            "max_retries": max_retries,
+            "busy_threshold_pct": busy_threshold_pct,
+            "load1_per_cpu_threshold": load1_per_cpu_threshold,
+            "sample_started_utc": started,
+            "sample_finished_utc": now_utc(),
+        }
+    except (OSError, RuntimeError, ValueError) as error:
+        return {
+            "noise_status": "unknown",
+            "noise_reason": str(error),
+            "sample_started_utc": started,
+            "sample_finished_utc": now_utc(),
+        }
+
+
 def write_guest_stage_script(path: Path) -> None:
     path.write_text(
         r'''
@@ -449,6 +560,37 @@ using System.Threading.Tasks;
 
 public static class RegProbeMicroBench
 {
+    public static double CpuIterationsPerSecond(int threads, int milliseconds)
+    {
+        threads = Math.Max(1, threads);
+        milliseconds = Math.Max(250, milliseconds);
+        long total = 0;
+        var sw = Stopwatch.StartNew();
+        long deadline = Stopwatch.GetTimestamp() + (long)((milliseconds / 1000.0) * Stopwatch.Frequency);
+        Parallel.For<long>(
+            0,
+            threads,
+            () => 0L,
+            (worker, state, local) =>
+            {
+                double acc = worker + 1.0000001;
+                while (Stopwatch.GetTimestamp() < deadline)
+                {
+                    acc = (acc * 1.0000001) + 0.000001;
+                    local++;
+                    if ((local & 65535L) == 0)
+                    {
+                        acc = Math.Sqrt(acc * acc);
+                    }
+                }
+                if (acc < 0) throw new InvalidOperationException("unreachable");
+                return local;
+            },
+            local => System.Threading.Interlocked.Add(ref total, local));
+        sw.Stop();
+        return total / Math.Max(sw.Elapsed.TotalSeconds, 0.001);
+    }
+
     public static double CpuSeconds(int threads, int iterations)
     {
         threads = Math.Max(1, threads);
@@ -467,42 +609,128 @@ public static class RegProbeMicroBench
         return sw.Elapsed.TotalSeconds;
     }
 
-    public static double IoMegabytesPerSecond(string path, int megabytes)
+    public static double[] IoMegabytesPerSecond(string path, int megabytes)
     {
         megabytes = Math.Max(1, megabytes);
-        byte[] buffer = new byte[1024 * 1024];
+        byte[] buffer = new byte[megabytes * 1024 * 1024];
         new Random(1234).NextBytes(buffer);
-        var sw = Stopwatch.StartNew();
-        using (var stream = new FileStream(path, FileMode.Create, FileAccess.ReadWrite, FileShare.None, buffer.Length, FileOptions.WriteThrough))
+        var writeSw = Stopwatch.StartNew();
+        using (var stream = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.None, 1024 * 1024, FileOptions.WriteThrough))
         {
-            for (int i = 0; i < megabytes; i++)
-            {
-                stream.Write(buffer, 0, buffer.Length);
-            }
+            stream.Write(buffer, 0, buffer.Length);
             stream.Flush(true);
-            stream.Position = 0;
+        }
+        writeSw.Stop();
+
+        byte[] readBuffer = new byte[1024 * 1024];
+        var readSw = Stopwatch.StartNew();
+        using (var stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read, readBuffer.Length, FileOptions.SequentialScan))
+        {
             while (stream.Read(buffer, 0, buffer.Length) > 0)
             {
             }
         }
-        sw.Stop();
+        readSw.Stop();
         try { File.Delete(path); } catch { }
-        return megabytes / Math.Max(sw.Elapsed.TotalSeconds, 0.001);
+        return new double[] {
+            megabytes / Math.Max(writeSw.Elapsed.TotalSeconds, 0.001),
+            megabytes / Math.Max(readSw.Elapsed.TotalSeconds, 0.001)
+        };
     }
 }
 '@
         }
 
+        function Get-Median {
+            param([double[]]$Values)
+            $sorted = @($Values | Sort-Object)
+            if ($sorted.Count -eq 0) {
+                return $null
+            }
+            if (($sorted.Count % 2) -eq 1) {
+                return [double]$sorted[[int](($sorted.Count - 1) / 2)]
+            }
+            return ([double]$sorted[[int]($sorted.Count / 2 - 1)] + [double]$sorted[[int]($sorted.Count / 2)]) / 2.0
+        }
+
+        function Get-BenchStats {
+            param([double[]]$Values)
+            $valuesArray = @($Values)
+            $median = Get-Median -Values $valuesArray
+            if ($null -eq $median) {
+                return [pscustomobject]@{
+                    median = $null
+                    min = $null
+                    max = $null
+                    spread_pct = $null
+                    samples = @()
+                }
+            }
+            $min = ($valuesArray | Measure-Object -Minimum).Minimum
+            $max = ($valuesArray | Measure-Object -Maximum).Maximum
+            $spread = if ([double]$median -eq 0) { 0.0 } else { (([double]$max - [double]$min) / [Math]::Abs([double]$median)) * 100.0 }
+            return [pscustomobject]@{
+                median = [Math]::Round([double]$median, 4)
+                min = [Math]::Round([double]$min, 4)
+                max = [Math]::Round([double]$max, 4)
+                spread_pct = [Math]::Round([double]$spread, 2)
+                samples = @($valuesArray | ForEach-Object { [Math]::Round([double]$_, 4) })
+            }
+        }
+
         $processorCount = [Environment]::ProcessorCount
         $benchRoot = 'C:\RegProbe-Diag\benchmarks'
         New-Item -ItemType Directory -Path $benchRoot -Force | Out-Null
-        $ioPath = Join-Path $benchRoot ('io-' + [Guid]::NewGuid().ToString('N') + '.bin')
+        $sampleCount = 5
+        $cpuDurationMs = 3000
+        $ioSizeMiB = 16
+        $cpuSingle = New-Object System.Collections.Generic.List[double]
+        $cpuMulti = New-Object System.Collections.Generic.List[double]
+        $ioWrite = New-Object System.Collections.Generic.List[double]
+        $ioRead = New-Object System.Collections.Generic.List[double]
+        for ($sampleIndex = 0; $sampleIndex -lt $sampleCount; $sampleIndex++) {
+            $cpuSingle.Add([RegProbeMicroBench]::CpuIterationsPerSecond(1, $cpuDurationMs)) | Out-Null
+            $cpuMulti.Add([RegProbeMicroBench]::CpuIterationsPerSecond($processorCount, $cpuDurationMs)) | Out-Null
+            $ioPath = Join-Path $benchRoot ('io-' + [Guid]::NewGuid().ToString('N') + '.bin')
+            $ioPair = [RegProbeMicroBench]::IoMegabytesPerSecond($ioPath, $ioSizeMiB)
+            $ioWrite.Add([double]$ioPair[0]) | Out-Null
+            $ioRead.Add([double]$ioPair[1]) | Out-Null
+        }
+        $singleStats = Get-BenchStats -Values $cpuSingle.ToArray()
+        $multiStats = Get-BenchStats -Values $cpuMulti.ToArray()
+        $writeStats = Get-BenchStats -Values $ioWrite.ToArray()
+        $readStats = Get-BenchStats -Values $ioRead.ToArray()
+        $combinedIo = @()
+        for ($i = 0; $i -lt $ioWrite.Count; $i++) {
+            $combinedIo += (($ioWrite[$i] + $ioRead[$i]) / 2.0)
+        }
+        $combinedIoStats = Get-BenchStats -Values ([double[]]$combinedIo)
         return [pscustomobject]@{
             status = 'ok'
-            cpu_single_seconds = [Math]::Round([RegProbeMicroBench]::CpuSeconds(1, 200000000), 4)
-            cpu_multi_seconds = [Math]::Round([RegProbeMicroBench]::CpuSeconds($processorCount, 100000000), 4)
+            version = 2
+            sample_count = $sampleCount
+            cpu_duration_seconds = [Math]::Round(($cpuDurationMs / 1000.0), 3)
             cpu_threads = $processorCount
-            io_write_read_mib_per_second = [Math]::Round([RegProbeMicroBench]::IoMegabytesPerSecond($ioPath, 128), 2)
+            io_size_mib = $ioSizeMiB
+            cpu_single_iterations_per_second = $singleStats.median
+            cpu_multi_iterations_per_second = $multiStats.median
+            io_write_mib_per_second = $writeStats.median
+            io_read_mib_per_second = $readStats.median
+            io_write_read_mib_per_second = $combinedIoStats.median
+            spreads = [pscustomobject]@{
+                cpu_single_iterations_per_second = $singleStats.spread_pct
+                cpu_multi_iterations_per_second = $multiStats.spread_pct
+                io_write_mib_per_second = $writeStats.spread_pct
+                io_read_mib_per_second = $readStats.spread_pct
+                io_write_read_mib_per_second = $combinedIoStats.spread_pct
+            }
+            samples = [pscustomobject]@{
+                cpu_single_iterations_per_second = $singleStats.samples
+                cpu_multi_iterations_per_second = $multiStats.samples
+                io_write_mib_per_second = $writeStats.samples
+                io_read_mib_per_second = $readStats.samples
+                io_write_read_mib_per_second = $combinedIoStats.samples
+            }
         }
     }
     catch {
@@ -769,6 +997,22 @@ def smoke_success(stage_payload: dict[str, Any] | None) -> bool:
     return all(bool(item.get("success")) for item in hard_items)
 
 
+def mark_recovered_boot_failure(result: dict[str, Any], error: str, recovery: dict[str, Any] | None) -> bool:
+    if not isinstance(recovery, dict) or recovery.get("status") != "ok":
+        return False
+    result["status"] = "ok"
+    result["error"] = error
+    result["outcome"] = "boot-failure-recovered"
+    result["controlled_failure"] = True
+    result["recovery"] = recovery
+    result["smoke"] = {
+        "apply_smoke_hard_success": smoke_success(result["stages"].get("apply", {}).get("result")),
+        "post_reboot_smoke_hard_success": False,
+        "post_rollback_smoke_hard_success": False,
+    }
+    return True
+
+
 def run_experiment(args: argparse.Namespace) -> dict[str, Any]:
     experiment_id = args.output_name or f"{slug(args.value_name)}-{args.value_data}-{datetime.now(UTC).strftime('%Y%m%d%H%M%S')}"
     generated_dir = REPO_ROOT / "dist" / "kvm-generated"
@@ -804,6 +1048,14 @@ def run_experiment(args: argparse.Namespace) -> dict[str, Any]:
             result["error"] = "missing-required-domain-snapshot"
             return result
 
+    apply_noise = wait_for_quiet_host(
+        enabled=not args.no_host_noise_gate,
+        max_retries=args.host_noise_max_retries,
+        interval_seconds=args.host_noise_retry_interval_seconds,
+        busy_threshold_pct=args.host_noise_busy_threshold_pct,
+        load1_per_cpu_threshold=args.host_noise_load1_per_cpu_threshold,
+        sample_interval_seconds=args.host_noise_sample_interval_seconds,
+    )
     rc, payload, stage_payload = run_guest_stage(
         script=stage_script,
         stage="apply",
@@ -816,7 +1068,7 @@ def run_experiment(args: argparse.Namespace) -> dict[str, Any]:
         connect=args.connect,
         wait_timeout=args.stage_wait_timeout,
     )
-    result["stages"]["apply"] = {"returncode": rc, "qga": payload, "result": stage_payload}
+    result["stages"]["apply"] = {"returncode": rc, "qga": payload, "result": stage_payload, "host_noise_meta": apply_noise}
     if rc != 0 or not isinstance(stage_payload, dict) or stage_payload.get("status") != "ok":
         result["status"] = "error"
         result["error"] = "apply-stage-failed"
@@ -828,17 +1080,29 @@ def run_experiment(args: argparse.Namespace) -> dict[str, Any]:
     health = wait_for_qga(args.domain, args.connect, args.reboot_wait_timeout)
     result["health_checks"].append({"phase": "after-apply", "payload": health})
     if health.get("status") != "ok":
+        error = "guest-did-not-return-after-apply-reboot"
         result["status"] = "error"
-        result["error"] = "guest-did-not-return-after-apply-reboot"
+        result["error"] = error
         if args.auto_revert_snapshot_on_boot_failure:
-            result["recovery"] = recover_from_snapshot(
+            recovery = recover_from_snapshot(
                 domain=args.domain,
                 connect=args.connect,
                 snapshot_name=args.revert_snapshot_name,
                 wait_timeout=args.reboot_wait_timeout,
             )
+            if mark_recovered_boot_failure(result, error, recovery):
+                return result
+            result["recovery"] = recovery
         return result
 
+    post_reboot_noise = wait_for_quiet_host(
+        enabled=not args.no_host_noise_gate,
+        max_retries=args.host_noise_max_retries,
+        interval_seconds=args.host_noise_retry_interval_seconds,
+        busy_threshold_pct=args.host_noise_busy_threshold_pct,
+        load1_per_cpu_threshold=args.host_noise_load1_per_cpu_threshold,
+        sample_interval_seconds=args.host_noise_sample_interval_seconds,
+    )
     rc, payload, stage_payload = run_guest_stage(
         script=stage_script,
         stage="post-reboot-rollback",
@@ -851,7 +1115,12 @@ def run_experiment(args: argparse.Namespace) -> dict[str, Any]:
         connect=args.connect,
         wait_timeout=args.stage_wait_timeout,
     )
-    result["stages"]["post_reboot_rollback"] = {"returncode": rc, "qga": payload, "result": stage_payload}
+    result["stages"]["post_reboot_rollback"] = {
+        "returncode": rc,
+        "qga": payload,
+        "result": stage_payload,
+        "host_noise_meta": post_reboot_noise,
+    }
     if rc != 0 or not isinstance(stage_payload, dict) or stage_payload.get("status") != "ok":
         result["status"] = "error"
         result["error"] = "post-reboot-rollback-stage-failed"
@@ -863,17 +1132,29 @@ def run_experiment(args: argparse.Namespace) -> dict[str, Any]:
     health = wait_for_qga(args.domain, args.connect, args.reboot_wait_timeout)
     result["health_checks"].append({"phase": "after-rollback", "payload": health})
     if health.get("status") != "ok":
+        error = "guest-did-not-return-after-rollback-reboot"
         result["status"] = "error"
-        result["error"] = "guest-did-not-return-after-rollback-reboot"
+        result["error"] = error
         if args.auto_revert_snapshot_on_boot_failure:
-            result["recovery"] = recover_from_snapshot(
+            recovery = recover_from_snapshot(
                 domain=args.domain,
                 connect=args.connect,
                 snapshot_name=args.revert_snapshot_name,
                 wait_timeout=args.reboot_wait_timeout,
             )
+            if mark_recovered_boot_failure(result, error, recovery):
+                return result
+            result["recovery"] = recovery
         return result
 
+    post_rollback_noise = wait_for_quiet_host(
+        enabled=not args.no_host_noise_gate,
+        max_retries=args.host_noise_max_retries,
+        interval_seconds=args.host_noise_retry_interval_seconds,
+        busy_threshold_pct=args.host_noise_busy_threshold_pct,
+        load1_per_cpu_threshold=args.host_noise_load1_per_cpu_threshold,
+        sample_interval_seconds=args.host_noise_sample_interval_seconds,
+    )
     rc, payload, stage_payload = run_guest_stage(
         script=stage_script,
         stage="post-rollback",
@@ -886,7 +1167,12 @@ def run_experiment(args: argparse.Namespace) -> dict[str, Any]:
         connect=args.connect,
         wait_timeout=args.stage_wait_timeout,
     )
-    result["stages"]["post_rollback"] = {"returncode": rc, "qga": payload, "result": stage_payload}
+    result["stages"]["post_rollback"] = {
+        "returncode": rc,
+        "qga": payload,
+        "result": stage_payload,
+        "host_noise_meta": post_rollback_noise,
+    }
     if rc != 0 or not isinstance(stage_payload, dict) or stage_payload.get("status") != "ok":
         result["status"] = "error"
         result["error"] = "post-rollback-stage-failed"
@@ -909,13 +1195,19 @@ def write_markdown(summary: dict[str, Any], path: Path) -> None:
         f"- Generated UTC: `{summary.get('generated_utc')}`",
         f"- Target: `{summary.get('registry_path')}\\{summary.get('value_name')}`",
         f"- Test value: `{summary.get('value_data')}`",
+        f"- Outcome: `{summary.get('outcome') or 'completed'}`",
         "",
         "## Result",
         "",
     ]
-    if summary.get("status") != "ok":
+    if summary.get("error"):
         lines.append(f"- Error: `{summary.get('error')}`")
-    else:
+    if summary.get("controlled_failure"):
+        lines.append("- Controlled failure: `true`")
+    recovery = summary.get("recovery")
+    if isinstance(recovery, dict):
+        lines.append(f"- Snapshot recovery: `{recovery.get('status')}`")
+    if summary.get("status") == "ok":
         smoke = summary.get("smoke") or {}
         for key, value in smoke.items():
             lines.append(f"- `{key}`: `{value}`")
@@ -1012,6 +1304,12 @@ def main() -> int:
         default=20,
         help="Wait this long after virsh reboot before accepting QGA health as a post-boot signal.",
     )
+    parser.add_argument("--no-host-noise-gate", action="store_true", help="Skip host CPU/load preflight and mark stage noise metadata as skipped.")
+    parser.add_argument("--host-noise-max-retries", type=int, default=5)
+    parser.add_argument("--host-noise-retry-interval-seconds", type=float, default=5.0)
+    parser.add_argument("--host-noise-busy-threshold-pct", type=float, default=20.0)
+    parser.add_argument("--host-noise-load1-per-cpu-threshold", type=float, default=0.75)
+    parser.add_argument("--host-noise-sample-interval-seconds", type=float, default=0.5)
     args = parser.parse_args()
 
     summary = run_experiment(args)
