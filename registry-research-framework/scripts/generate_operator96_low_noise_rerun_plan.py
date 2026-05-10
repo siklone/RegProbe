@@ -87,9 +87,19 @@ def build_campaign_command(
     return cmd
 
 
-def build_plan(review_path: Path = DEFAULT_REVIEW, *, tranche_size: int = 5) -> dict[str, Any]:
+def build_plan(
+    review_path: Path = DEFAULT_REVIEW,
+    *,
+    tranche_size: int = 5,
+    start_offset: int = 0,
+    output_dir: str = DEFAULT_OUTPUT_DIR,
+    campaign_output: str = DEFAULT_CAMPAIGN_OUTPUT,
+    campaign_markdown_output: str = DEFAULT_MARKDOWN_OUTPUT,
+) -> dict[str, Any]:
     review = json.loads(review_path.read_text(encoding="utf-8"))
     records = low_noise_records(review)
+    tranche = records[start_offset : start_offset + tranche_size]
+    tranche_indexes = [int(record.get("index") or 0) for record in tranche]
     first_tranche = records[:tranche_size]
     first_indexes = [int(record.get("index") or 0) for record in first_tranche]
     return {
@@ -100,12 +110,16 @@ def build_plan(review_path: Path = DEFAULT_REVIEW, *, tranche_size: int = 5) -> 
         "status": "PASS",
         "summary": {
             "candidate_record_count": len(records),
+            "start_offset": start_offset,
+            "tranche_record_count": len(tranche),
+            "tranche_expected_experiment_count": len(tranche) * 2,
+            "tranche_indexes": tranche_indexes,
             "first_tranche_record_count": len(first_tranche),
             "first_tranche_expected_experiment_count": len(first_tranche) * 2,
             "first_tranche_indexes": first_indexes,
         },
         "low_noise_policy": {
-            "output_dir": DEFAULT_OUTPUT_DIR,
+            "output_dir": output_dir,
             "max_values_per_record": 2,
             "host_noise_max_retries": 18,
             "host_noise_retry_interval_seconds": 10.0,
@@ -116,9 +130,22 @@ def build_plan(review_path: Path = DEFAULT_REVIEW, *, tranche_size: int = 5) -> 
             "claim_rule": "Rerun results may support app-card copy only if host_noise=ok and confidence is not low.",
         },
         "first_tranche": first_tranche,
+        "tranche": tranche,
         "commands": {
-            "plan_only": build_campaign_command(first_indexes, run=False),
-            "run": build_campaign_command(first_indexes, run=True),
+            "plan_only": build_campaign_command(
+                tranche_indexes,
+                run=False,
+                output_dir=output_dir,
+                campaign_output=campaign_output,
+                markdown_output=campaign_markdown_output,
+            ),
+            "run": build_campaign_command(
+                tranche_indexes,
+                run=True,
+                output_dir=output_dir,
+                campaign_output=campaign_output,
+                markdown_output=campaign_markdown_output,
+            ),
         },
         "records": records,
     }
@@ -133,9 +160,10 @@ def render_markdown(plan: dict[str, Any]) -> str:
         f"- Generated UTC: `{plan.get('generated_utc')}`",
         f"- Review: `{plan.get('review')}`",
         f"- Candidate records: `{summary.get('candidate_record_count')}`",
-        f"- First tranche records: `{summary.get('first_tranche_record_count')}`",
-        f"- First tranche expected experiments: `{summary.get('first_tranche_expected_experiment_count')}`",
-        f"- First tranche indexes: `{', '.join(str(item) for item in summary.get('first_tranche_indexes') or [])}`",
+        f"- Start offset: `{summary.get('start_offset')}`",
+        f"- Tranche records: `{summary.get('tranche_record_count')}`",
+        f"- Tranche expected experiments: `{summary.get('tranche_expected_experiment_count')}`",
+        f"- Tranche indexes: `{', '.join(str(item) for item in summary.get('tranche_indexes') or [])}`",
         "",
         "## Commands",
         "",
@@ -150,10 +178,10 @@ def render_markdown(plan: dict[str, Any]) -> str:
     for key, value in (plan.get("low_noise_policy") or {}).items():
         lines.append(f"- `{key}`: `{value}`")
 
-    lines.extend(["", "## First Tranche", ""])
+    lines.extend(["", "## Tranche", ""])
     lines.append("| # | Value | Reason | Action |")
     lines.append("|---:|---|---|---|")
-    for record in plan.get("first_tranche") or []:
+    for record in plan.get("tranche") or []:
         reasons = ", ".join(record.get("reasons") or [])
         lines.append(
             f"| {record.get('index')} | `{record.get('value_name')}` | {reasons} | {record.get('recommended_action')} |"
@@ -172,6 +200,10 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="Generate the next Operator96 low-noise rerun tranche plan.")
     parser.add_argument("--review", default=str(DEFAULT_REVIEW))
     parser.add_argument("--tranche-size", type=int, default=5)
+    parser.add_argument("--start-offset", type=int, default=0)
+    parser.add_argument("--experiment-output-dir", default=DEFAULT_OUTPUT_DIR)
+    parser.add_argument("--campaign-output", default=DEFAULT_CAMPAIGN_OUTPUT)
+    parser.add_argument("--campaign-markdown-output", default=DEFAULT_MARKDOWN_OUTPUT)
     parser.add_argument("--output", default=str(JSON_OUTPUT))
     parser.add_argument("--markdown-output", default=str(MARKDOWN_OUTPUT))
     parser.add_argument("--json", action="store_true")
@@ -182,7 +214,16 @@ def main() -> int:
     args = parse_args()
     if args.tranche_size <= 0:
         raise SystemExit("--tranche-size must be greater than 0")
-    plan = build_plan(Path(args.review).resolve(), tranche_size=args.tranche_size)
+    if args.start_offset < 0:
+        raise SystemExit("--start-offset must be greater than or equal to 0")
+    plan = build_plan(
+        Path(args.review).resolve(),
+        tranche_size=args.tranche_size,
+        start_offset=args.start_offset,
+        output_dir=args.experiment_output_dir,
+        campaign_output=args.campaign_output,
+        campaign_markdown_output=args.campaign_markdown_output,
+    )
     write_outputs(plan, Path(args.output).resolve(), Path(args.markdown_output).resolve())
     if args.json:
         print(json.dumps(plan, indent=2))
