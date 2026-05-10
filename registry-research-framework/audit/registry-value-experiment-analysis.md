@@ -1,18 +1,18 @@
 # Registry Value Experiment Analysis
 
-- Generated UTC: `2026-05-10T10:41:44Z`
+- Generated UTC: `2026-05-10T12:13:10Z`
 - Input: `registry-research-framework/audit/registry-value-experiments`
 - Pattern: `operator96-*.json`
-- Artifacts analyzed: `140`
+- Artifacts analyzed: `150`
 - Errors: `0`
 
 ## Verdict Counts
 
 - `app_breakage`: `1`
 - `boot_failure`: `1`
-- `harmful`: `110`
+- `harmful`: `114`
 - `low_confidence`: `23`
-- `noisy`: `3`
+- `noisy`: `9`
 - `rollback_failure`: `2`
 
 ## Results
@@ -159,3 +159,13 @@
 | `operator96-076-fxaccountingtelemetrydisabled-0` | `harmful` | `low` | `ok` | `-13.856` | post_reboot io_read_mib_per_second changed by -13.86% | `registry-research-framework/audit/registry-value-experiments/operator96-076-fxaccountingtelemetrydisabled-0.json` |
 | `operator96-076-fxaccountingtelemetrydisabled-1` | `harmful` | `low` | `ok` | `-84.513` | apply io_write_mib_per_second changed by -84.51% | `registry-research-framework/audit/registry-value-experiments/operator96-076-fxaccountingtelemetrydisabled-1.json` |
 | `operator96-077-win32kcalloutwatchdogtimeoutseconds-0` | `harmful` | `low` | `ok` | `-16.757` | post_reboot io_write_mib_per_second changed by -16.76% | `registry-research-framework/audit/registry-value-experiments/operator96-077-win32kcalloutwatchdogtimeoutseconds-0.json` |
+| `operator96-077-win32kcalloutwatchdogtimeoutseconds-1` | `noisy` | `low` | `noisy` | `` | host preflight marked one or more stages noisy | `registry-research-framework/audit/registry-value-experiments/operator96-077-win32kcalloutwatchdogtimeoutseconds-1.json` |
+| `operator96-078-enableminimalhiberfile-0` | `noisy` | `low` | `noisy` | `` | host preflight marked one or more stages noisy | `registry-research-framework/audit/registry-value-experiments/operator96-078-enableminimalhiberfile-0.json` |
+| `operator96-078-enableminimalhiberfile-1` | `noisy` | `low` | `noisy` | `` | host preflight marked one or more stages noisy | `registry-research-framework/audit/registry-value-experiments/operator96-078-enableminimalhiberfile-1.json` |
+| `operator96-079-hiberbootenabled-0` | `noisy` | `low` | `noisy` | `` | host preflight marked one or more stages noisy | `registry-research-framework/audit/registry-value-experiments/operator96-079-hiberbootenabled-0.json` |
+| `operator96-079-hiberbootenabled-1` | `harmful` | `low` | `ok` | `-21.152` | post_reboot io_write_mib_per_second changed by -21.15% | `registry-research-framework/audit/registry-value-experiments/operator96-079-hiberbootenabled-1.json` |
+| `operator96-080-maximumfrequencyoverride-0` | `harmful` | `low` | `ok` | `-23.360` | post_reboot io_write_mib_per_second changed by -23.36% | `registry-research-framework/audit/registry-value-experiments/operator96-080-maximumfrequencyoverride-0.json` |
+| `operator96-080-maximumfrequencyoverride-100` | `harmful` | `low` | `ok` | `-70.587` | post_reboot io_write_mib_per_second changed by -70.59% | `registry-research-framework/audit/registry-value-experiments/operator96-080-maximumfrequencyoverride-100.json` |
+| `operator96-081-pofxsystemirpwaitforreportdevicepowered-0` | `noisy` | `low` | `noisy` | `` | host preflight marked one or more stages noisy | `registry-research-framework/audit/registry-value-experiments/operator96-081-pofxsystemirpwaitforreportdevicepowered-0.json` |
+| `operator96-081-pofxsystemirpwaitforreportdevicepowered-1` | `noisy` | `low` | `noisy` | `` | host preflight marked one or more stages noisy | `registry-research-framework/audit/registry-value-experiments/operator96-081-pofxsystemirpwaitforreportdevicepowered-1.json` |
+| `operator96-082-allowsystemrequiredpowerrequests-0` | `harmful` | `low` | `ok` | `-7.501` | post_reboot io_read_mib_per_second changed by -7.50% | `registry-research-framework/audit/registry-value-experiments/operator96-082-allowsystemrequiredpowerrequests-0.json` |

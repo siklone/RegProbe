@@ -1,9 +1,9 @@
 # Operator 96 Registry Value Campaign
 
-- Generated UTC: `2026-05-10T07:50:02Z`
+- Generated UTC: `2026-05-10T10:44:06Z`
 - Status: **ok**
-- Planned experiments: `140`
-- Completed in this run: `140`
+- Planned experiments: `150`
+- Completed in this run: `150`
 
 ## Plan
 
@@ -149,6 +149,16 @@
 | 76 | `operator96-076-fxaccountingtelemetrydisabled-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\FxAccountingTelemetryDisabled` | `1` | `absent` | `vm-observed` |
 | 76 | `operator96-076-fxaccountingtelemetrydisabled-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\FxAccountingTelemetryDisabled` | `0` | `absent` | `vm-observed` |
 | 77 | `operator96-077-win32kcalloutwatchdogtimeoutseconds-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\Win32kCalloutWatchdogTimeoutSeconds` | `0` | `absent` | `vm-observed` |
+| 77 | `operator96-077-win32kcalloutwatchdogtimeoutseconds-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\Win32kCalloutWatchdogTimeoutSeconds` | `1` | `absent` | `vm-observed` |
+| 78 | `operator96-078-enableminimalhiberfile-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\EnableMinimalHiberFile` | `0` | `absent` | `vm-observed` |
+| 78 | `operator96-078-enableminimalhiberfile-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\EnableMinimalHiberFile` | `1` | `absent` | `vm-observed` |
+| 79 | `operator96-079-hiberbootenabled-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\HiberbootEnabled` | `0` | `absent` | `vm-observed` |
+| 79 | `operator96-079-hiberbootenabled-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\HiberbootEnabled` | `1` | `absent` | `vm-observed` |
+| 80 | `operator96-080-maximumfrequencyoverride-100` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\MaximumFrequencyOverride` | `100` | `absent` | `vm-observed` |
+| 80 | `operator96-080-maximumfrequencyoverride-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\MaximumFrequencyOverride` | `0` | `absent` | `vm-observed` |
+| 81 | `operator96-081-pofxsystemirpwaitforreportdevicepowered-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\PoFxSystemIrpWaitForReportDevicePowered` | `0` | `absent` | `vm-observed` |
+| 81 | `operator96-081-pofxsystemirpwaitforreportdevicepowered-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\PoFxSystemIrpWaitForReportDevicePowered` | `1` | `absent` | `vm-observed` |
+| 82 | `operator96-082-allowsystemrequiredpowerrequests-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\AllowSystemRequiredPowerRequests` | `0` | `absent` | `vm-observed` |
 
 ## Results
 
@@ -294,3 +304,13 @@
 | `operator96-076-fxaccountingtelemetrydisabled-1` | `harmful` | `low` | `ok` | `ok` | `True` | `ok`/`0` | `-84.513` | `-14.37` | `registry-research-framework/audit/registry-value-experiments/operator96-076-fxaccountingtelemetrydisabled-1.json` |
 | `operator96-076-fxaccountingtelemetrydisabled-0` | `harmful` | `low` | `ok` | `ok` | `True` | `ok`/`0` | `-13.856` | `-11.85` | `registry-research-framework/audit/registry-value-experiments/operator96-076-fxaccountingtelemetrydisabled-0.json` |
 | `operator96-077-win32kcalloutwatchdogtimeoutseconds-0` | `harmful` | `low` | `ok` | `ok` | `True` | `ok`/`0` | `-16.757` | `-0.43` | `registry-research-framework/audit/registry-value-experiments/operator96-077-win32kcalloutwatchdogtimeoutseconds-0.json` |
+| `operator96-077-win32kcalloutwatchdogtimeoutseconds-1` | `noisy` | `low` | `noisy` | `ok` | `True` | `ok`/`0` | `None` | `-7.9` | `registry-research-framework/audit/registry-value-experiments/operator96-077-win32kcalloutwatchdogtimeoutseconds-1.json` |
+| `operator96-078-enableminimalhiberfile-0` | `noisy` | `low` | `noisy` | `ok` | `True` | `timeout`/`None` | `None` | `-47.26` | `registry-research-framework/audit/registry-value-experiments/operator96-078-enableminimalhiberfile-0.json` |
+| `operator96-078-enableminimalhiberfile-1` | `noisy` | `low` | `noisy` | `ok` | `True` | `ok`/`0` | `None` | `32.28` | `registry-research-framework/audit/registry-value-experiments/operator96-078-enableminimalhiberfile-1.json` |
+| `operator96-079-hiberbootenabled-0` | `noisy` | `low` | `noisy` | `ok` | `True` | `ok`/`0` | `None` | `-29.33` | `registry-research-framework/audit/registry-value-experiments/operator96-079-hiberbootenabled-0.json` |
+| `operator96-079-hiberbootenabled-1` | `harmful` | `low` | `ok` | `ok` | `True` | `ok`/`0` | `-21.152` | `-0.68` | `registry-research-framework/audit/registry-value-experiments/operator96-079-hiberbootenabled-1.json` |
+| `operator96-080-maximumfrequencyoverride-100` | `harmful` | `low` | `ok` | `ok` | `True` | `ok`/`0` | `-70.587` | `-3.59` | `registry-research-framework/audit/registry-value-experiments/operator96-080-maximumfrequencyoverride-100.json` |
+| `operator96-080-maximumfrequencyoverride-0` | `harmful` | `low` | `ok` | `ok` | `True` | `ok`/`0` | `-23.36` | `1.85` | `registry-research-framework/audit/registry-value-experiments/operator96-080-maximumfrequencyoverride-0.json` |
+| `operator96-081-pofxsystemirpwaitforreportdevicepowered-0` | `noisy` | `low` | `noisy` | `ok` | `True` | `ok`/`0` | `None` | `-3.5` | `registry-research-framework/audit/registry-value-experiments/operator96-081-pofxsystemirpwaitforreportdevicepowered-0.json` |
+| `operator96-081-pofxsystemirpwaitforreportdevicepowered-1` | `noisy` | `low` | `noisy` | `ok` | `True` | `ok`/`0` | `None` | `12.76` | `registry-research-framework/audit/registry-value-experiments/operator96-081-pofxsystemirpwaitforreportdevicepowered-1.json` |
+| `operator96-082-allowsystemrequiredpowerrequests-0` | `harmful` | `low` | `ok` | `ok` | `True` | `ok`/`0` | `-7.501` | `3.28` | `registry-research-framework/audit/registry-value-experiments/operator96-082-allowsystemrequiredpowerrequests-0.json` |
