@@ -30,10 +30,28 @@ class Operator96LowNoiseRerunPlanTests(unittest.TestCase):
 
         self.assertEqual(plan["status"], "PASS")
         self.assertEqual(plan["summary"]["candidate_record_count"], 85)
+        self.assertEqual(plan["summary"]["start_offset"], 0)
+        self.assertEqual(plan["summary"]["tranche_indexes"], [1, 2, 6, 9, 10])
         self.assertEqual(plan["summary"]["first_tranche_indexes"], [1, 2, 6, 9, 10])
         self.assertIn("--host-noise-max-retries", plan["commands"]["run"])
         self.assertIn("--run", plan["commands"]["run"])
         self.assertNotIn("--run", plan["commands"]["plan_only"])
+
+    def test_real_repo_second_tranche_can_start_after_first_five_records(self):
+        plan = self.module.build_plan(
+            tranche_size=5,
+            start_offset=5,
+            output_dir="audit/low-noise-02",
+            campaign_output="audit/tranche-02.json",
+            campaign_markdown_output="audit/tranche-02.md",
+        )
+
+        self.assertEqual(plan["summary"]["start_offset"], 5)
+        self.assertEqual(plan["summary"]["tranche_record_count"], 5)
+        self.assertEqual(plan["summary"]["tranche_indexes"], [11, 12, 13, 14, 15])
+        self.assertIn("audit/low-noise-02", plan["commands"]["run"])
+        self.assertIn("audit/tranche-02.json", plan["commands"]["run"])
+        self.assertIn("audit/tranche-02.md", plan["commands"]["run"])
 
     def test_build_campaign_command_uses_separate_output_dir_and_indexes(self):
         command = self.module.build_campaign_command([1, 2], run=True)
@@ -62,6 +80,7 @@ class Operator96LowNoiseRerunPlanTests(unittest.TestCase):
             plan = self.module.build_plan(review_path, tranche_size=2)
 
         self.assertEqual(plan["summary"]["candidate_record_count"], 1)
+        self.assertEqual(plan["summary"]["tranche_indexes"], [1])
         self.assertEqual(plan["summary"]["first_tranche_indexes"], [1])
 
 
