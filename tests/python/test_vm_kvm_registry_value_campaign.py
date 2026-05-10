@@ -1,4 +1,5 @@
 import importlib.util
+import sys
 import tempfile
 import unittest
 from pathlib import Path
@@ -10,6 +11,10 @@ SCRIPT_PATH = (
     / "vm-kvm"
     / "run-guest-registry-value-campaign.py"
 )
+VM_KVM_ROOT = SCRIPT_PATH.parent
+
+if str(VM_KVM_ROOT) not in sys.path:
+    sys.path.insert(0, str(VM_KVM_ROOT))
 
 
 def load_module():
@@ -182,6 +187,56 @@ class RegistryValueCampaignTests(unittest.TestCase):
         self.assertEqual(observations["benchmark_delta_percent"]["apply_vs_baseline"]["cpu_single_seconds"], 10.0)
         self.assertEqual(observations["benchmark_delta_percent"]["apply_vs_baseline"]["cpu_multi_seconds"], -10.0)
         self.assertEqual(observations["benchmark_delta_percent"]["post_reboot_vs_baseline"]["io_write_read_mib_per_second"], -10.0)
+
+    def test_run_experiment_forwards_host_noise_gate_options(self):
+        captured = {}
+
+        def fake_run(cmd, *, timeout=None):
+            captured["cmd"] = cmd
+            captured["timeout"] = timeout
+
+            class Completed:
+                returncode = 0
+                stdout = '{"status":"ok"}'
+                stderr = ""
+
+            return Completed()
+
+        original_run = self.module.run
+        self.module.run = fake_run
+        try:
+            result = self.module.run_experiment(
+                {
+                    "registry_path": r"HKLM\\Software\\RegProbe",
+                    "value_name": "EnableThing",
+                    "value_data": 1,
+                    "experiment_id": "operator96-001-enablething-1",
+                },
+                domain="vm",
+                connect="qemu:///session",
+                snapshot_name="clean",
+                smoke_profile="gui",
+                output_dir=Path("out"),
+                stage_wait_timeout=10,
+                reboot_wait_timeout=20,
+                post_reboot_delay_seconds=30,
+                host_noise_max_retries=18,
+                host_noise_retry_interval_seconds=10.0,
+                host_noise_busy_threshold_pct=12.5,
+                host_noise_load1_per_cpu_threshold=0.5,
+                host_noise_sample_interval_seconds=1.0,
+            )
+        finally:
+            self.module.run = original_run
+
+        self.assertEqual(result["returncode"], 0)
+        command = captured["cmd"]
+        self.assertIn("--host-noise-max-retries", command)
+        self.assertIn("18", command)
+        self.assertIn("--host-noise-busy-threshold-pct", command)
+        self.assertIn("12.5", command)
+        self.assertIn("--host-noise-load1-per-cpu-threshold", command)
+        self.assertIn("0.5", command)
 
 
 if __name__ == "__main__":
