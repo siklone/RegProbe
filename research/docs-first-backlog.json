@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-06T23:42:53Z",
+  "generated_utc": "2026-05-07T15:30:09Z",
   "backlog_type": "docs-first",
   "priority_order": [
     "rename",
@@ -8,6 +8,542 @@
     "split-needed",
     "docs-first"
   ],
-  "entry_count": 0,
-  "entries": []
+  "entry_count": 33,
+  "entries": [
+    {
+      "record_id": "cleanup.component-store",
+      "current_state": "unknown | DISM Component Store Cleanup",
+      "notes": "Evidence first. Prioritize: Procmon or VM toggle-diff validation. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "technical_area": "DISM Component Store Cleanup",
+      "implementation_status": "unknown",
+      "source_file": "research/records/cleanup.component-store.review.json",
+      "suggested_evidence_tracks": [
+        {
+          "track": "Procmon or VM toggle-diff validation",
+          "why_not_validated": "Validated or published records under the proof-gated workflow must include validation_proof before they can stay out of docs-first.",
+          "next_source": "Procmon plus a clean-VM toggle diff that captures the exact registry or file changes"
+        }
+      ]
+    },
+    {
+      "record_id": "cleanup.directx-shader-cache",
+      "current_state": "unknown | Shader Cache Cleanup",
+      "notes": "Evidence first. Prioritize: Procmon or VM toggle-diff validation. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "technical_area": "Shader Cache Cleanup",
+      "implementation_status": "unknown",
+      "source_file": "research/records/cleanup.directx-shader-cache.review.json",
+      "suggested_evidence_tracks": [
+        {
+          "track": "Procmon or VM toggle-diff validation",
+          "why_not_validated": "Validated or published records under the proof-gated workflow must include validation_proof before they can stay out of docs-first.",
+          "next_source": "Procmon plus a clean-VM toggle diff that captures the exact registry or file changes"
+        }
+      ]
+    },
+    {
+      "record_id": "cleanup.eventlog-system",
+      "current_state": "unknown | System Event Log Cleanup",
+      "notes": "Evidence first. Prioritize: Procmon or VM toggle-diff validation. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "technical_area": "System Event Log Cleanup",
+      "implementation_status": "unknown",
+      "source_file": "research/records/cleanup.eventlog-system.review.json",
+      "suggested_evidence_tracks": [
+        {
+          "track": "Procmon or VM toggle-diff validation",
+          "why_not_validated": "Validated or published records under the proof-gated workflow must include validation_proof before they can stay out of docs-first.",
+          "next_source": "Procmon plus a clean-VM toggle diff that captures the exact registry or file changes"
+        }
+      ]
+    },
+    {
+      "record_id": "cleanup.font-cache",
+      "current_state": "unknown | Font Cache Cleanup",
+      "notes": "Evidence first. Prioritize: Service or scheduled-task baseline diff. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "technical_area": "Font Cache Cleanup",
+      "implementation_status": "unknown",
+      "source_file": "research/records/cleanup.font-cache.review.json",
+      "suggested_evidence_tracks": [
+        {
+          "track": "Service or scheduled-task baseline diff",
+          "why_not_validated": "Validated or published records under the proof-gated workflow must include validation_proof before they can stay out of docs-first.",
+          "next_source": "services.msc / sc qc / schtasks output captured before and after the matching Windows feature toggle"
+        }
+      ]
+    },
+    {
+      "record_id": "cleanup.memory-dumps",
+      "current_state": "unknown | Crash Dump Cleanup",
+      "notes": "Evidence first. Prioritize: Procmon or VM toggle-diff validation. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "technical_area": "Crash Dump Cleanup",
+      "implementation_status": "unknown",
+      "source_file": "research/records/cleanup.memory-dumps.review.json",
+      "suggested_evidence_tracks": [
+        {
+          "track": "Procmon or VM toggle-diff validation",
+          "why_not_validated": "Validated or published records under the proof-gated workflow must include validation_proof before they can stay out of docs-first.",
+          "next_source": "Procmon plus a clean-VM toggle diff that captures the exact registry or file changes"
+        }
+      ]
+    },
+    {
+      "record_id": "cleanup.prefetch-files",
+      "current_state": "unknown | Prefetch Cleanup",
+      "notes": "Evidence first. Prioritize: Procmon or VM toggle-diff validation. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "technical_area": "Prefetch Cleanup",
+      "implementation_status": "unknown",
+      "source_file": "research/records/cleanup.prefetch-files.review.json",
+      "suggested_evidence_tracks": [
+        {
+          "track": "Procmon or VM toggle-diff validation",
+          "why_not_validated": "Validated or published records under the proof-gated workflow must include validation_proof before they can stay out of docs-first.",
+          "next_source": "Procmon plus a clean-VM toggle diff that captures the exact registry or file changes"
+        }
+      ]
+    },
+    {
+      "record_id": "cleanup.product-key",
+      "current_state": "unknown | slmgr Product Key Cleanup",
+      "notes": "Evidence first. Prioritize: Procmon or VM toggle-diff validation. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "technical_area": "slmgr Product Key Cleanup",
+      "implementation_status": "unknown",
+      "source_file": "research/records/cleanup.product-key.review.json",
+      "suggested_evidence_tracks": [
+        {
+          "track": "Procmon or VM toggle-diff validation",
+          "why_not_validated": "Validated or published records under the proof-gated workflow must include validation_proof before they can stay out of docs-first.",
+          "next_source": "Procmon plus a clean-VM toggle diff that captures the exact registry or file changes"
+        }
+      ]
+    },
+    {
+      "record_id": "cleanup.recycle-bin",
+      "current_state": "unknown | Recycle Bin Cleanup",
+      "notes": "Evidence first. Prioritize: Procmon or VM toggle-diff validation. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "technical_area": "Recycle Bin Cleanup",
+      "implementation_status": "unknown",
+      "source_file": "research/records/cleanup.recycle-bin.review.json",
+      "suggested_evidence_tracks": [
+        {
+          "track": "Procmon or VM toggle-diff validation",
+          "why_not_validated": "Validated or published records under the proof-gated workflow must include validation_proof before they can stay out of docs-first.",
+          "next_source": "Procmon plus a clean-VM toggle diff that captures the exact registry or file changes"
+        }
+      ]
+    },
+    {
+      "record_id": "cleanup.shadow-copies",
+      "current_state": "unknown | Volume Shadow Copy Cleanup",
+      "notes": "Evidence first. Prioritize: Procmon or VM toggle-diff validation. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "technical_area": "Volume Shadow Copy Cleanup",
+      "implementation_status": "unknown",
+      "source_file": "research/records/cleanup.shadow-copies.review.json",
+      "suggested_evidence_tracks": [
+        {
+          "track": "Procmon or VM toggle-diff validation",
+          "why_not_validated": "Validated or published records under the proof-gated workflow must include validation_proof before they can stay out of docs-first.",
+          "next_source": "Procmon plus a clean-VM toggle diff that captures the exact registry or file changes"
+        }
+      ]
+    },
+    {
+      "record_id": "cleanup.temp-files",
+      "current_state": "unknown | Temporary File Cleanup",
+      "notes": "Evidence first. Prioritize: Procmon or VM toggle-diff validation. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "technical_area": "Temporary File Cleanup",
+      "implementation_status": "unknown",
+      "source_file": "research/records/cleanup.temp-files.review.json",
+      "suggested_evidence_tracks": [
+        {
+          "track": "Procmon or VM toggle-diff validation",
+          "why_not_validated": "Validated or published records under the proof-gated workflow must include validation_proof before they can stay out of docs-first.",
+          "next_source": "Procmon plus a clean-VM toggle diff that captures the exact registry or file changes"
+        }
+      ]
+    },
+    {
+      "record_id": "cleanup.thumbnail-cache",
+      "current_state": "unknown | Explorer Thumbnail Cache Cleanup",
+      "notes": "Evidence first. Prioritize: Procmon or VM toggle-diff validation. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "technical_area": "Explorer Thumbnail Cache Cleanup",
+      "implementation_status": "unknown",
+      "source_file": "research/records/cleanup.thumbnail-cache.review.json",
+      "suggested_evidence_tracks": [
+        {
+          "track": "Procmon or VM toggle-diff validation",
+          "why_not_validated": "Validated or published records under the proof-gated workflow must include validation_proof before they can stay out of docs-first.",
+          "next_source": "Procmon plus a clean-VM toggle diff that captures the exact registry or file changes"
+        }
+      ]
+    },
+    {
+      "record_id": "cleanup.wer-files",
+      "current_state": "unknown | Windows Error Reporting Cleanup",
+      "notes": "Evidence first. Prioritize: Procmon or VM toggle-diff validation. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "technical_area": "Windows Error Reporting Cleanup",
+      "implementation_status": "unknown",
+      "source_file": "research/records/cleanup.wer-files.review.json",
+      "suggested_evidence_tracks": [
+        {
+          "track": "Procmon or VM toggle-diff validation",
+          "why_not_validated": "Validated or published records under the proof-gated workflow must include validation_proof before they can stay out of docs-first.",
+          "next_source": "Procmon plus a clean-VM toggle diff that captures the exact registry or file changes"
+        }
+      ]
+    },
+    {
+      "record_id": "cleanup.windows-old",
+      "current_state": "unknown | Windows.old Cleanup",
+      "notes": "Evidence first. Prioritize: Procmon or VM toggle-diff validation. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "technical_area": "Windows.old Cleanup",
+      "implementation_status": "unknown",
+      "source_file": "research/records/cleanup.windows-old.review.json",
+      "suggested_evidence_tracks": [
+        {
+          "track": "Procmon or VM toggle-diff validation",
+          "why_not_validated": "Validated or published records under the proof-gated workflow must include validation_proof before they can stay out of docs-first.",
+          "next_source": "Procmon plus a clean-VM toggle diff that captures the exact registry or file changes"
+        }
+      ]
+    },
+    {
+      "record_id": "cleanup.windows-update-cache",
+      "current_state": "unknown | Windows Update Cache Cleanup",
+      "notes": "Evidence first. Prioritize: Procmon or VM toggle-diff validation. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "technical_area": "Windows Update Cache Cleanup",
+      "implementation_status": "unknown",
+      "source_file": "research/records/cleanup.windows-update-cache.review.json",
+      "suggested_evidence_tracks": [
+        {
+          "track": "Procmon or VM toggle-diff validation",
+          "why_not_validated": "Validated or published records under the proof-gated workflow must include validation_proof before they can stay out of docs-first.",
+          "next_source": "Procmon plus a clean-VM toggle diff that captures the exact registry or file changes"
+        }
+      ]
+    },
+    {
+      "record_id": "misc.disable-edge-features",
+      "current_state": "unknown | Microsoft Edge Policy Bundle",
+      "notes": "Evidence first. Prioritize: ADMX / Policy CSP mapping, Service or scheduled-task baseline diff. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "technical_area": "Microsoft Edge Policy Bundle",
+      "implementation_status": "unknown",
+      "source_file": "research/records/misc.disable-edge-features.review.json",
+      "suggested_evidence_tracks": [
+        {
+          "track": "ADMX / Policy CSP mapping",
+          "why_not_validated": "Validated or published records under the proof-gated workflow must include validation_proof before they can stay out of docs-first.",
+          "next_source": "Local ADMX/ADML under C:\\Windows\\PolicyDefinitions plus the matching Microsoft Learn policy or CSP page"
+        },
+        {
+          "track": "Service or scheduled-task baseline diff",
+          "why_not_validated": "Validated or published records under the proof-gated workflow must include validation_proof before they can stay out of docs-first.",
+          "next_source": "services.msc / sc qc / schtasks output captured before and after the matching Windows feature toggle"
+        }
+      ]
+    },
+    {
+      "record_id": "misc.disable-office-telemetry",
+      "current_state": "unknown | Microsoft Office Telemetry Policy Bundle",
+      "notes": "Evidence first. Prioritize: ADMX / Policy CSP mapping, Service or scheduled-task baseline diff. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "technical_area": "Microsoft Office Telemetry Policy Bundle",
+      "implementation_status": "unknown",
+      "source_file": "research/records/misc.disable-office-telemetry.review.json",
+      "suggested_evidence_tracks": [
+        {
+          "track": "ADMX / Policy CSP mapping",
+          "why_not_validated": "Validated or published records under the proof-gated workflow must include validation_proof before they can stay out of docs-first.",
+          "next_source": "Local ADMX/ADML under C:\\Windows\\PolicyDefinitions plus the matching Microsoft Learn policy or CSP page"
+        },
+        {
+          "track": "Service or scheduled-task baseline diff",
+          "why_not_validated": "Validated or published records under the proof-gated workflow must include validation_proof before they can stay out of docs-first.",
+          "next_source": "services.msc / sc qc / schtasks output captured before and after the matching Windows feature toggle"
+        }
+      ]
+    },
+    {
+      "record_id": "misc.disable-onedrive",
+      "current_state": "unknown | OneDrive Policy and Explorer Bundle",
+      "notes": "Evidence first. Prioritize: ADMX / Policy CSP mapping, Service or scheduled-task baseline diff. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "technical_area": "OneDrive Policy and Explorer Bundle",
+      "implementation_status": "unknown",
+      "source_file": "research/records/misc.disable-onedrive.review.json",
+      "suggested_evidence_tracks": [
+        {
+          "track": "ADMX / Policy CSP mapping",
+          "why_not_validated": "Validated or published records under the proof-gated workflow must include validation_proof before they can stay out of docs-first.",
+          "next_source": "Local ADMX/ADML under C:\\Windows\\PolicyDefinitions plus the matching Microsoft Learn policy or CSP page"
+        },
+        {
+          "track": "Service or scheduled-task baseline diff",
+          "why_not_validated": "Validated or published records under the proof-gated workflow must include validation_proof before they can stay out of docs-first.",
+          "next_source": "services.msc / sc qc / schtasks output captured before and after the matching Windows feature toggle"
+        }
+      ]
+    },
+    {
+      "record_id": "misc.disable-visual-studio-telemetry",
+      "current_state": "unknown | Visual Studio Telemetry Policy Bundle",
+      "notes": "Evidence first. Prioritize: ADMX / Policy CSP mapping, Vendor docs or product settings schema, Service or scheduled-task baseline diff. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "technical_area": "Visual Studio Telemetry Policy Bundle",
+      "implementation_status": "unknown",
+      "source_file": "research/records/misc.disable-visual-studio-telemetry.review.json",
+      "suggested_evidence_tracks": [
+        {
+          "track": "ADMX / Policy CSP mapping",
+          "why_not_validated": "Validated or published records under the proof-gated workflow must include validation_proof before they can stay out of docs-first.",
+          "next_source": "Local ADMX/ADML under C:\\Windows\\PolicyDefinitions plus the matching Microsoft Learn policy or CSP page"
+        },
+        {
+          "track": "Vendor docs or product settings schema",
+          "why_not_validated": "Validated or published records under the proof-gated workflow must include validation_proof before they can stay out of docs-first.",
+          "next_source": "The product's official settings reference or vendor documentation for the exact setting surface"
+        },
+        {
+          "track": "Service or scheduled-task baseline diff",
+          "why_not_validated": "Validated or published records under the proof-gated workflow must include validation_proof before they can stay out of docs-first.",
+          "next_source": "services.msc / sc qc / schtasks output captured before and after the matching Windows feature toggle"
+        }
+      ]
+    },
+    {
+      "record_id": "misc.disable-vscode-telemetry",
+      "current_state": "unknown | VS Code User Settings Profile",
+      "notes": "Evidence first. Prioritize: Vendor docs or product settings schema, Service or scheduled-task baseline diff. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "technical_area": "VS Code User Settings Profile",
+      "implementation_status": "unknown",
+      "source_file": "research/records/misc.disable-vscode-telemetry.review.json",
+      "suggested_evidence_tracks": [
+        {
+          "track": "Vendor docs or product settings schema",
+          "why_not_validated": "Validated or published records under the proof-gated workflow must include validation_proof before they can stay out of docs-first.",
+          "next_source": "The product's official settings reference or vendor documentation for the exact setting surface"
+        },
+        {
+          "track": "Service or scheduled-task baseline diff",
+          "why_not_validated": "Validated or published records under the proof-gated workflow must include validation_proof before they can stay out of docs-first.",
+          "next_source": "services.msc / sc qc / schtasks output captured before and after the matching Windows feature toggle"
+        }
+      ]
+    },
+    {
+      "record_id": "misc.optimize-7zip-settings",
+      "current_state": "unknown | 7-Zip User Options",
+      "notes": "Evidence first. Prioritize: Service or scheduled-task baseline diff. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "technical_area": "7-Zip User Options",
+      "implementation_status": "unknown",
+      "source_file": "research/records/misc.optimize-7zip-settings.review.json",
+      "suggested_evidence_tracks": [
+        {
+          "track": "Service or scheduled-task baseline diff",
+          "why_not_validated": "Validated or published records under the proof-gated workflow must include validation_proof before they can stay out of docs-first.",
+          "next_source": "services.msc / sc qc / schtasks output captured before and after the matching Windows feature toggle"
+        }
+      ]
+    },
+    {
+      "record_id": "network.flush-dns-cache",
+      "current_state": "unknown | DNS Resolver Cache",
+      "notes": "Evidence first. Prioritize: Procmon or VM toggle-diff validation. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "technical_area": "DNS Resolver Cache",
+      "implementation_status": "unknown",
+      "source_file": "research/records/network.flush-dns-cache.review.json",
+      "suggested_evidence_tracks": [
+        {
+          "track": "Procmon or VM toggle-diff validation",
+          "why_not_validated": "Validated or published records under the proof-gated workflow must include validation_proof before they can stay out of docs-first.",
+          "next_source": "Procmon plus a clean-VM toggle diff that captures the exact registry or file changes"
+        }
+      ]
+    },
+    {
+      "record_id": "network.reset-winsock",
+      "current_state": "unknown | Winsock Catalog Reset",
+      "notes": "Evidence first. Prioritize: Procmon or VM toggle-diff validation. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "technical_area": "Winsock Catalog Reset",
+      "implementation_status": "unknown",
+      "source_file": "research/records/network.reset-winsock.review.json",
+      "suggested_evidence_tracks": [
+        {
+          "track": "Procmon or VM toggle-diff validation",
+          "why_not_validated": "Validated or published records under the proof-gated workflow must include validation_proof before they can stay out of docs-first.",
+          "next_source": "Procmon plus a clean-VM toggle diff that captures the exact registry or file changes"
+        }
+      ]
+    },
+    {
+      "record_id": "peripheral.audio-disable-ducking",
+      "current_state": "unknown | Audio Communications Preference",
+      "notes": "Evidence first. Prioritize: Procmon or settings-diff capture, Service or scheduled-task baseline diff. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "technical_area": "Audio Communications Preference",
+      "implementation_status": "unknown",
+      "source_file": "research/records/peripheral.audio-disable-ducking.review.json",
+      "suggested_evidence_tracks": [
+        {
+          "track": "Procmon or settings-diff capture",
+          "why_not_validated": "Validated or published records under the proof-gated workflow must include validation_proof before they can stay out of docs-first.",
+          "next_source": "Procmon trace plus a before/after UI toggle diff on a clean Windows VM"
+        },
+        {
+          "track": "Service or scheduled-task baseline diff",
+          "why_not_validated": "Validated or published records under the proof-gated workflow must include validation_proof before they can stay out of docs-first.",
+          "next_source": "services.msc / sc qc / schtasks output captured before and after the matching Windows feature toggle"
+        }
+      ]
+    },
+    {
+      "record_id": "peripheral.audio-disable-enhancements",
+      "current_state": "unknown | Audio Enhancement Flags",
+      "notes": "Evidence first. Prioritize: Procmon or settings-diff capture, Service or scheduled-task baseline diff. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "technical_area": "Audio Enhancement Flags",
+      "implementation_status": "unknown",
+      "source_file": "research/records/peripheral.audio-disable-enhancements.review.json",
+      "suggested_evidence_tracks": [
+        {
+          "track": "Procmon or settings-diff capture",
+          "why_not_validated": "Validated or published records under the proof-gated workflow must include validation_proof before they can stay out of docs-first.",
+          "next_source": "Procmon trace plus a before/after UI toggle diff on a clean Windows VM"
+        },
+        {
+          "track": "Service or scheduled-task baseline diff",
+          "why_not_validated": "Validated or published records under the proof-gated workflow must include validation_proof before they can stay out of docs-first.",
+          "next_source": "services.msc / sc qc / schtasks output captured before and after the matching Windows feature toggle"
+        }
+      ]
+    },
+    {
+      "record_id": "peripheral.keyboard-disable-language-hotkey",
+      "current_state": "unknown | Keyboard Layout Toggle Bundle",
+      "notes": "Evidence first. Prioritize: Service or scheduled-task baseline diff. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "technical_area": "Keyboard Layout Toggle Bundle",
+      "implementation_status": "unknown",
+      "source_file": "research/records/peripheral.keyboard-disable-language-hotkey.review.json",
+      "suggested_evidence_tracks": [
+        {
+          "track": "Service or scheduled-task baseline diff",
+          "why_not_validated": "Validated or published records under the proof-gated workflow must include validation_proof before they can stay out of docs-first.",
+          "next_source": "services.msc / sc qc / schtasks output captured before and after the matching Windows feature toggle"
+        }
+      ]
+    },
+    {
+      "record_id": "peripheral.keyboard-optimize-repeat",
+      "current_state": "unknown | Keyboard Repeat Profile",
+      "notes": "Evidence first. Prioritize: Service or scheduled-task baseline diff. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "technical_area": "Keyboard Repeat Profile",
+      "implementation_status": "unknown",
+      "source_file": "research/records/peripheral.keyboard-optimize-repeat.review.json",
+      "suggested_evidence_tracks": [
+        {
+          "track": "Service or scheduled-task baseline diff",
+          "why_not_validated": "Validated or published records under the proof-gated workflow must include validation_proof before they can stay out of docs-first.",
+          "next_source": "services.msc / sc qc / schtasks output captured before and after the matching Windows feature toggle"
+        }
+      ]
+    },
+    {
+      "record_id": "peripheral.mouse-disable-acceleration",
+      "current_state": "unknown | Mouse Acceleration Profile",
+      "notes": "Evidence first. Prioritize: Service or scheduled-task baseline diff. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "technical_area": "Mouse Acceleration Profile",
+      "implementation_status": "unknown",
+      "source_file": "research/records/peripheral.mouse-disable-acceleration.review.json",
+      "suggested_evidence_tracks": [
+        {
+          "track": "Service or scheduled-task baseline diff",
+          "why_not_validated": "Validated or published records under the proof-gated workflow must include validation_proof before they can stay out of docs-first.",
+          "next_source": "services.msc / sc qc / schtasks output captured before and after the matching Windows feature toggle"
+        }
+      ]
+    },
+    {
+      "record_id": "peripheral.mouse-disable-throttle",
+      "current_state": "unknown | Raw Mouse Throttle Bundle",
+      "notes": "Evidence first. Prioritize: Service or scheduled-task baseline diff. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "technical_area": "Raw Mouse Throttle Bundle",
+      "implementation_status": "unknown",
+      "source_file": "research/records/peripheral.mouse-disable-throttle.review.json",
+      "suggested_evidence_tracks": [
+        {
+          "track": "Service or scheduled-task baseline diff",
+          "why_not_validated": "Validated or published records under the proof-gated workflow must include validation_proof before they can stay out of docs-first.",
+          "next_source": "services.msc / sc qc / schtasks output captured before and after the matching Windows feature toggle"
+        }
+      ]
+    },
+    {
+      "record_id": "power.disable-cpu-parking",
+      "current_state": "unknown | PowerCfg Core Parking",
+      "notes": "Evidence first. Prioritize: Procmon or VM toggle-diff validation. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "technical_area": "PowerCfg Core Parking",
+      "implementation_status": "unknown",
+      "source_file": "research/records/power.disable-cpu-parking.review.json",
+      "suggested_evidence_tracks": [
+        {
+          "track": "Procmon or VM toggle-diff validation",
+          "why_not_validated": "Validated or published records under the proof-gated workflow must include validation_proof before they can stay out of docs-first.",
+          "next_source": "Procmon plus a clean-VM toggle diff that captures the exact registry or file changes"
+        }
+      ]
+    },
+    {
+      "record_id": "power.disable-hibernation",
+      "current_state": "unknown | PowerCfg Hibernation",
+      "notes": "Evidence first. Prioritize: Procmon or VM toggle-diff validation. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "technical_area": "PowerCfg Hibernation",
+      "implementation_status": "unknown",
+      "source_file": "research/records/power.disable-hibernation.review.json",
+      "suggested_evidence_tracks": [
+        {
+          "track": "Procmon or VM toggle-diff validation",
+          "why_not_validated": "Validated or published records under the proof-gated workflow must include validation_proof before they can stay out of docs-first.",
+          "next_source": "Procmon plus a clean-VM toggle diff that captures the exact registry or file changes"
+        }
+      ]
+    },
+    {
+      "record_id": "power.disable-superfetch",
+      "current_state": "unknown | SysMain Service Stop Command",
+      "notes": "Evidence first. Prioritize: Service or scheduled-task baseline diff. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "technical_area": "SysMain Service Stop Command",
+      "implementation_status": "unknown",
+      "source_file": "research/records/power.disable-superfetch.review.json",
+      "suggested_evidence_tracks": [
+        {
+          "track": "Service or scheduled-task baseline diff",
+          "why_not_validated": "Validated or published records under the proof-gated workflow must include validation_proof before they can stay out of docs-first.",
+          "next_source": "services.msc / sc qc / schtasks output captured before and after the matching Windows feature toggle"
+        }
+      ]
+    },
+    {
+      "record_id": "power.disable-usb-selective-suspend",
+      "current_state": "unknown | PowerCfg USB Selective Suspend",
+      "notes": "Evidence first. Prioritize: Procmon or VM toggle-diff validation. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "technical_area": "PowerCfg USB Selective Suspend",
+      "implementation_status": "unknown",
+      "source_file": "research/records/power.disable-usb-selective-suspend.review.json",
+      "suggested_evidence_tracks": [
+        {
+          "track": "Procmon or VM toggle-diff validation",
+          "why_not_validated": "Validated or published records under the proof-gated workflow must include validation_proof before they can stay out of docs-first.",
+          "next_source": "Procmon plus a clean-VM toggle diff that captures the exact registry or file changes"
+        }
+      ]
+    },
+    {
+      "record_id": "security.disable-uac",
+      "current_state": "unknown | User Account Control / EnableLUA",
+      "notes": "Evidence first. Prioritize: Procmon or settings-diff capture. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "technical_area": "User Account Control / EnableLUA",
+      "implementation_status": "unknown",
+      "source_file": "research/records/security.disable-uac.review.json",
+      "suggested_evidence_tracks": [
+        {
+          "track": "Procmon or settings-diff capture",
+          "why_not_validated": "Validated or published records under the proof-gated workflow must include validation_proof before they can stay out of docs-first.",
+          "next_source": "Procmon trace plus a before/after UI toggle diff on a clean Windows VM"
+        }
+      ]
+    }
+  ]
 }

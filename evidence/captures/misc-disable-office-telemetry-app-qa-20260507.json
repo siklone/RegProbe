@@ -1,0 +1,230 @@
+{
+  "TweakId": "misc.disable-office-telemetry",
+  "TweakName": "Disable Microsoft Office Telemetry",
+  "Success": true,
+  "Status": "ok-gated-override",
+  "Summary": "QA-only gated mutation override used; apply/verify path completed and rollback restored the tweak.",
+  "RollbackRequested": true,
+  "GatedMutationOverrideRequested": true,
+  "GatedMutationOverrideUsed": true,
+  "Card": {
+    "TweakId": "misc.disable-office-telemetry",
+    "Name": "Disable Microsoft Office Telemetry",
+    "Category": "Misc",
+    "Description": "Disables Office telemetry logging, data collection, CEIP opt-in, feedback collection, and telemetry agent tasks for all Office applications.",
+    "FriendlyDescription": "Disables Office telemetry logging, data collection, CEIP opt-in, feedback collection, and telemetry agent tasks for all Office applications.",
+    "RegistryPath": "",
+    "EvidenceClass": "B",
+    "EvidenceClassTitle": "Strong but Decision-Gated",
+    "ResearchStatus": "INTENTIONAL HOLD",
+    "IsMutationAllowed": false,
+    "RollbackSnapshotState": "ready",
+    "RollbackStoryText": "Rollback: Verified via record-restore-story.",
+    "HasClaimBoundary": true,
+    "WhatWeKnowSummary": "Claim: Disables Office telemetry logging, data collection, CEIP opt-in, feedback collection, and telemetry agent tasks for all Office applications. Evidence: The misc documentation names the Office telemetry policy paths, values, and data meanings used by the current Office telemetry card. Rollback: Rollback: Verified via record-restore-story.",
+    "WhatWeDoNotClaimSummary": "Apply gate: Evidence pending Source boundary: Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+    "ProofLanes": [
+      {
+        "Key": "docs",
+        "Label": "DOCS",
+        "State": "ready",
+        "Summary": "The misc documentation names the Office telemetry policy paths, values, and data meanings used by the current Office telemetry card.",
+        "Source": "Validation proof source: C:\\Tools\\AppSmoke\\Docs\\misc\\misc.md"
+      },
+      {
+        "Key": "runtime",
+        "Label": "RUNTIME",
+        "State": "ready",
+        "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "Source": ""
+      },
+      {
+        "Key": "source",
+        "Label": "SOURCE",
+        "State": "ready",
+        "Summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+        "Source": "win-config / misc/desc.md#disable-ms-office-telemetry: https://github.com/nohuto/win-config/blob/main/misc/desc.md#disable-ms-office-telemetry"
+      },
+      {
+        "Key": "rollback",
+        "Label": "ROLLBACK",
+        "State": "ready",
+        "Summary": "Rollback: Verified via record-restore-story.",
+        "Source": "record-restore-story"
+      }
+    ],
+    "ReferenceLinks": [
+      {
+        "Title": "Manage the privacy of data monitored by Telemetry in Office",
+        "Url": "https://learn.microsoft.com/en-us/office/compatibility/manage-the-privacy-of-data-monitored-by-telemetry-in-office",
+        "Kind": "Docs"
+      },
+      {
+        "Title": "Docs: Details",
+        "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html#misc.disable-office-telemetry",
+        "Kind": "Details"
+      },
+      {
+        "Title": "Docs: Misc",
+        "Url": "C:\\Tools\\AppSmoke\\Docs\\misc\\misc.md#misc.disable-office-telemetry",
+        "Kind": "Docs"
+      }
+    ]
+  },
+  "Stages": [
+    {
+      "Stage": "detect-before",
+      "AppliedStatus": "NotApplied",
+      "StatusMessage": "Detected 0 of 18 values (matches: 0, missing: 18).",
+      "OutcomeSummary": "Detect - Success",
+      "CurrentValue": "Unknown",
+      "TargetValue": "Multiple values",
+      "WasRolledBack": false,
+      "IsMutationAllowed": false,
+      "HasSuccessfulApplyStory": false,
+      "HasSuccessfulRollbackStory": false,
+      "Steps": [
+        {
+          "Action": "Detect",
+          "StatusText": "Detected",
+          "Message": "Detected 0 of 18 values (matches: 0, missing: 18).\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\Common\\QMEnable: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\Common\\Feedback\\Enabled: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\EnableLogging: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\EnableUpload: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedapplications\\accesssolution: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedapplications\\olksolution: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedapplications\\onenotesolution: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedapplications\\pptsolution: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedapplications\\projectsolution: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedapplications\\publishersolution: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedapplications\\visiosolution: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedapplications\\wdsolution: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedapplications\\xlsolution: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedsolutiontypes\\agave: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedsolutiontypes\\appaddins: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedsolutiontypes\\comaddins: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedsolutiontypes\\documentfiles: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedsolutiontypes\\templatefiles: missing",
+          "TimestampText": "16:07:35"
+        },
+        {
+          "Action": "Apply",
+          "StatusText": "Pending",
+          "Message": "",
+          "TimestampText": "-"
+        },
+        {
+          "Action": "Verify",
+          "StatusText": "Pending",
+          "Message": "",
+          "TimestampText": "-"
+        },
+        {
+          "Action": "Rollback",
+          "StatusText": "Pending",
+          "Message": "",
+          "TimestampText": "-"
+        }
+      ]
+    },
+    {
+      "Stage": "apply",
+      "AppliedStatus": "Applied",
+      "StatusMessage": "Run completed.",
+      "OutcomeSummary": "Apply - Success",
+      "CurrentValue": "Multiple values",
+      "TargetValue": "Multiple values",
+      "WasRolledBack": false,
+      "IsMutationAllowed": false,
+      "HasSuccessfulApplyStory": true,
+      "HasSuccessfulRollbackStory": false,
+      "Steps": [
+        {
+          "Action": "Detect",
+          "StatusText": "Detected",
+          "Message": "Detected 0 of 18 values (matches: 0, missing: 18).\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\Common\\QMEnable: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\Common\\Feedback\\Enabled: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\EnableLogging: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\EnableUpload: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedapplications\\accesssolution: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedapplications\\olksolution: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedapplications\\onenotesolution: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedapplications\\pptsolution: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedapplications\\projectsolution: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedapplications\\publishersolution: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedapplications\\visiosolution: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedapplications\\wdsolution: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedapplications\\xlsolution: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedsolutiontypes\\agave: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedsolutiontypes\\appaddins: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedsolutiontypes\\comaddins: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedsolutiontypes\\documentfiles: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedsolutiontypes\\templatefiles: missing",
+          "TimestampText": "16:07:35"
+        },
+        {
+          "Action": "Apply",
+          "StatusText": "Applied",
+          "Message": "Updated 18 values.",
+          "TimestampText": "16:07:35"
+        },
+        {
+          "Action": "Verify",
+          "StatusText": "Verified",
+          "Message": "Verified desired values.",
+          "TimestampText": "16:07:35"
+        },
+        {
+          "Action": "Rollback",
+          "StatusText": "Not required",
+          "Message": "Step not executed.",
+          "TimestampText": "-"
+        }
+      ]
+    },
+    {
+      "Stage": "rollback",
+      "AppliedStatus": "NotApplied",
+      "StatusMessage": "Rolled back registry values.",
+      "OutcomeSummary": "Rollback - Rolled Back",
+      "CurrentValue": "Multiple values",
+      "TargetValue": "Multiple values",
+      "WasRolledBack": true,
+      "IsMutationAllowed": false,
+      "HasSuccessfulApplyStory": true,
+      "HasSuccessfulRollbackStory": true,
+      "Steps": [
+        {
+          "Action": "Detect",
+          "StatusText": "Detected",
+          "Message": "Detected 0 of 18 values (matches: 0, missing: 18).\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\Common\\QMEnable: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\Common\\Feedback\\Enabled: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\EnableLogging: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\EnableUpload: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedapplications\\accesssolution: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedapplications\\olksolution: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedapplications\\onenotesolution: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedapplications\\pptsolution: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedapplications\\projectsolution: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedapplications\\publishersolution: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedapplications\\visiosolution: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedapplications\\wdsolution: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedapplications\\xlsolution: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedsolutiontypes\\agave: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedsolutiontypes\\appaddins: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedsolutiontypes\\comaddins: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedsolutiontypes\\documentfiles: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedsolutiontypes\\templatefiles: missing",
+          "TimestampText": "16:07:35"
+        },
+        {
+          "Action": "Apply",
+          "StatusText": "Applied",
+          "Message": "Updated 18 values.",
+          "TimestampText": "16:07:35"
+        },
+        {
+          "Action": "Verify",
+          "StatusText": "Verified",
+          "Message": "Verified desired values.",
+          "TimestampText": "16:07:35"
+        },
+        {
+          "Action": "Rollback",
+          "StatusText": "Rolled back",
+          "Message": "Rolled back registry values.",
+          "TimestampText": "16:07:35"
+        }
+      ]
+    },
+    {
+      "Stage": "detect-after",
+      "AppliedStatus": "NotApplied",
+      "StatusMessage": "Detected 0 of 18 values (matches: 0, missing: 18).",
+      "OutcomeSummary": "Detect - Success",
+      "CurrentValue": "Multiple values",
+      "TargetValue": "Multiple values",
+      "WasRolledBack": true,
+      "IsMutationAllowed": false,
+      "HasSuccessfulApplyStory": true,
+      "HasSuccessfulRollbackStory": true,
+      "Steps": [
+        {
+          "Action": "Detect",
+          "StatusText": "Detected",
+          "Message": "Detected 0 of 18 values (matches: 0, missing: 18).\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\Common\\QMEnable: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\Common\\Feedback\\Enabled: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\EnableLogging: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\EnableUpload: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedapplications\\accesssolution: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedapplications\\olksolution: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedapplications\\onenotesolution: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedapplications\\pptsolution: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedapplications\\projectsolution: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedapplications\\publishersolution: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedapplications\\visiosolution: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedapplications\\wdsolution: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedapplications\\xlsolution: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedsolutiontypes\\agave: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedsolutiontypes\\appaddins: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedsolutiontypes\\comaddins: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedsolutiontypes\\documentfiles: missing\n- HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM\\preventedsolutiontypes\\templatefiles: missing",
+          "TimestampText": "16:07:36"
+        },
+        {
+          "Action": "Apply",
+          "StatusText": "Applied",
+          "Message": "Updated 18 values.",
+          "TimestampText": "16:07:35"
+        },
+        {
+          "Action": "Verify",
+          "StatusText": "Verified",
+          "Message": "Verified desired values.",
+          "TimestampText": "16:07:35"
+        },
+        {
+          "Action": "Rollback",
+          "StatusText": "Rolled back",
+          "Message": "Rolled back registry values.",
+          "TimestampText": "16:07:35"
+        }
+      ]
+    }
+  ],
+  "StartedAtUtc": "2026-05-07T23:07:35.735799+00:00",
+  "CompletedAtUtc": "2026-05-07T23:07:36.0580313+00:00"
+}

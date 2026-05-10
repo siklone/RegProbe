@@ -98,14 +98,18 @@ public sealed class CommandAllowlistSecurityTests
         var allowlist = CommandAllowlist.CreateDefault();
         var historyRequest = CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\System", "/v", "AllowClipboardHistory", "/t", "REG_DWORD", "/d", "0", "/f");
         var crossDeviceRequest = CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\System", "/v", "AllowCrossDeviceClipboard", "/t", "REG_DWORD", "/d", "0", "/f");
+        var rdpClipboardRequest = CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services", "/v", "fDisableClip", "/t", "REG_DWORD", "/d", "1", "/f");
 
         var historyAllowed = allowlist.IsAllowed(historyRequest, out var historyReason);
         var crossDeviceAllowed = allowlist.IsAllowed(crossDeviceRequest, out var crossDeviceReason);
+        var rdpClipboardAllowed = allowlist.IsAllowed(rdpClipboardRequest, out var rdpClipboardReason);
 
         Assert.True(historyAllowed);
         Assert.Null(historyReason);
         Assert.True(crossDeviceAllowed);
         Assert.Null(crossDeviceReason);
+        Assert.True(rdpClipboardAllowed);
+        Assert.Null(rdpClipboardReason);
     }
 
     [Fact]
@@ -135,15 +139,29 @@ public sealed class CommandAllowlistSecurityTests
             CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection", "/v", "DisableDiagnosticDataViewer", "/t", "REG_DWORD", "/d", "1", "/f"),
             CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection", "/v", "DoNotShowFeedbackNotifications", "/t", "REG_DWORD", "/d", "1", "/f"),
             CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection", "/v", "DisableOneSettingsDownloads", "/t", "REG_DWORD", "/d", "1", "/f"),
+            CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection", "/v", "DisableTelemetryOptInChangeNotification", "/t", "REG_DWORD", "/d", "1", "/f"),
+            CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection", "/v", "DisableTelemetryOptInSettingsUx", "/t", "REG_DWORD", "/d", "1", "/f"),
             CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection", "/v", "LimitDiagnosticLogCollection", "/t", "REG_DWORD", "/d", "1", "/f"),
             CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection", "/v", "LimitDumpCollection", "/t", "REG_DWORD", "/d", "1", "/f"),
+            CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\DataCollection", "/v", "AllowTelemetry", "/t", "REG_DWORD", "/d", "0", "/f"),
+            CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows Defender", "/v", "HideExclusionsFromLocalAdmins", "/t", "REG_DWORD", "/d", "1", "/f"),
+            CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows Defender", "/v", "ThreatFileHashLogging", "/t", "REG_DWORD", "/d", "1", "/f"),
+            CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet", "/v", "SpyNetReporting", "/t", "REG_DWORD", "/d", "2", "/f"),
             CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\CloudContent", "/v", "DisableSoftLanding", "/t", "REG_DWORD", "/d", "1", "/f"),
+            CreateRegRequest("add", @"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "/v", "ConsentPromptBehaviorAdmin", "/t", "REG_DWORD", "/d", "0", "/f"),
+            CreateRegRequest("add", @"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "/v", "PromptOnSecureDesktop", "/t", "REG_DWORD", "/d", "0", "/f"),
             CreateRegRequest("add", @"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "/v", "VerboseStatus", "/t", "REG_DWORD", "/d", "1", "/f"),
             CreateRegRequest("add", @"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location", "/v", "Value", "/t", "REG_SZ", "/d", "Deny", "/f"),
             CreateRegRequest("add", @"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock", "/v", "AllowDevelopmentWithoutDevLicense", "/t", "REG_DWORD", "/d", "1", "/f"),
+            CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\System", "/v", "EnableActivityFeed", "/t", "REG_DWORD", "/d", "0", "/f"),
             CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\System", "/v", "EnableFontProviders", "/t", "REG_DWORD", "/d", "0", "/f"),
             CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\System", "/v", "EnableMmx", "/t", "REG_DWORD", "/d", "0", "/f"),
             CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\System", "/v", "NoLocalPasswordResetQuestions", "/t", "REG_DWORD", "/d", "1", "/f"),
+            CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\System", "/v", "PublishUserActivities", "/t", "REG_DWORD", "/d", "0", "/f"),
+            CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\System", "/v", "UploadUserActivities", "/t", "REG_DWORD", "/d", "0", "/f"),
+            CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\SettingSync", "/v", "DisableSettingSync", "/t", "REG_DWORD", "/d", "2", "/f"),
+            CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\SettingSync", "/v", "DisableSettingSyncUserOverride", "/t", "REG_DWORD", "/d", "0", "/f"),
+            CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\SettingSync", "/v", "DisableSyncOnPaidNetwork", "/t", "REG_DWORD", "/d", "1", "/f"),
             CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Dsh", "/v", "AllowNewsAndInterests", "/t", "REG_DWORD", "/d", "0", "/f"),
             CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\DWM", "/v", "DisallowAnimations", "/t", "REG_DWORD", "/d", "1", "/f"),
             CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\Appx", "/v", "AllowAutomaticAppArchiving", "/t", "REG_DWORD", "/d", "0", "/f"),
@@ -159,6 +177,8 @@ public sealed class CommandAllowlistSecurityTests
             CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\StorageSense", "/v", "AllowStorageSenseGlobal", "/t", "REG_DWORD", "/d", "0", "/f"),
             CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\StorageSense", "/v", "AllowStorageSenseTemporaryFilesCleanup", "/t", "REG_DWORD", "/d", "0", "/f"),
             CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\CredUI", "/v", "DisablePasswordReveal", "/t", "REG_DWORD", "/d", "1", "/f"),
+            CreateRegRequest("add", @"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\CredUI", "/v", "EnableSecureCredentialPrompting", "/t", "REG_DWORD", "/d", "1", "/f"),
+            CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Camera", "/v", "AllowCamera", "/t", "REG_DWORD", "/d", "0", "/f"),
             CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy", "/v", "LetAppsAccessAccountInfo", "/t", "REG_DWORD", "/d", "2", "/f"),
             CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy", "/v", "LetAppsAccessBackgroundSpatialPerception", "/t", "REG_DWORD", "/d", "2", "/f"),
             CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy", "/v", "LetAppsAccessCalendar", "/t", "REG_DWORD", "/d", "2", "/f"),
@@ -184,15 +204,31 @@ public sealed class CommandAllowlistSecurityTests
             CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy", "/v", "LetAppsRunInBackground", "/t", "REG_DWORD", "/d", "2", "/f"),
             CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy", "/v", "LetAppsSyncWithDevices", "/t", "REG_DWORD", "/d", "2", "/f"),
             CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\FileHistory", "/v", "Disabled", "/t", "REG_DWORD", "/d", "1", "/f"),
+            CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows NT\SystemRestore", "/v", "DisableSR", "/t", "REG_DWORD", "/d", "1", "/f"),
+            CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\WindowsFirewall\DomainProfile", "/v", "EnableFirewall", "/t", "REG_DWORD", "/d", "0", "/f"),
+            CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\WindowsFirewall\StandardProfile", "/v", "EnableFirewall", "/t", "REG_DWORD", "/d", "0", "/f"),
             CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\AppCompat", "/v", "DisablePCA", "/t", "REG_DWORD", "/d", "1", "/f"),
+            CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Biometrics", "/v", "Enabled", "/t", "REG_DWORD", "/d", "0", "/f"),
+            CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Biometrics\Credential Provider", "/v", "Enabled", "/t", "REG_DWORD", "/d", "0", "/f"),
+            CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Biometrics\Credential Provider", "/v", "Domain Accounts", "/t", "REG_DWORD", "/d", "0", "/f"),
             CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors", "/v", "DisableLocation", "/t", "REG_DWORD", "/d", "1", "/f"),
             CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors", "/v", "DisableLocationScripting", "/t", "REG_DWORD", "/d", "1", "/f"),
             CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors", "/v", "DisableSensors", "/t", "REG_DWORD", "/d", "1", "/f"),
             CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\LocationAndSensors", "/v", "DisableWindowsLocationProvider", "/t", "REG_DWORD", "/d", "1", "/f"),
             CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\Messaging", "/v", "AllowMessageSync", "/t", "REG_DWORD", "/d", "0", "/f"),
+            CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\DriverSearching", "/v", "DontSearchWindowsUpdate", "/t", "REG_DWORD", "/d", "1", "/f"),
+            CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\DriverSearching", "/v", "SearchOrderConfig", "/t", "REG_DWORD", "/d", "0", "/f"),
+            CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate", "/v", "ExcludeWUDriversInQualityUpdate", "/t", "REG_DWORD", "/d", "1", "/f"),
+            CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate", "/v", "DisableWindowsUpdateAccess", "/t", "REG_DWORD", "/d", "1", "/f"),
+            CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU", "/v", "NoAutoUpdate", "/t", "REG_DWORD", "/d", "1", "/f"),
+            CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\Sudo", "/v", "Enabled", "/t", "REG_DWORD", "/d", "3", "/f"),
             CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\CurrentVersion\MDM", "/v", "DisableRegistration", "/t", "REG_DWORD", "/d", "1", "/f"),
+            CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\PassportForWork\DynamicLock", "/v", "DynamicLock", "/t", "REG_DWORD", "/d", "1", "/f"),
             CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\NetworkConnectivityStatusIndicator", "/v", "NoActiveProbe", "/t", "REG_DWORD", "/d", "1", "/f"),
+            CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows NT\DNSClient", "/v", "DisableSmartNameResolution", "/t", "REG_DWORD", "/d", "1", "/f"),
             CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows NT\DNSClient", "/v", "EnableMDNS", "/t", "REG_DWORD", "/d", "0", "/f"),
+            CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows NT\DNSClient", "/v", "EnableNetbios", "/t", "REG_DWORD", "/d", "0", "/f"),
+            CreateRegRequest("add", @"HKLM\SOFTWARE\Microsoft\wcmsvc\wifinetworkmanager\config", "/v", "AutoConnectAllowedOEM", "/t", "REG_DWORD", "/d", "0", "/f"),
             CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\LLTD", "/v", "EnableLLTDIO", "/t", "REG_DWORD", "/d", "0", "/f"),
             CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\LLTD", "/v", "EnableRspndr", "/t", "REG_DWORD", "/d", "0", "/f"),
             CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\System", "/v", "DisableAcrylicBackgroundOnLogon", "/t", "REG_DWORD", "/d", "1", "/f"),
@@ -213,11 +249,16 @@ public sealed class CommandAllowlistSecurityTests
             CreateRegRequest("add", @"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games", "/v", "Scheduling Category", "/t", "REG_SZ", "/d", "High", "/f"),
             CreateRegRequest("add", @"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games", "/v", "SFIO Priority", "/t", "REG_SZ", "/d", "High", "/f"),
             CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerThrottling", "/v", "PowerThrottlingOff", "/t", "REG_DWORD", "/d", "1", "/f"),
+            CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Control", "/v", "WaitToKillServiceTimeout", "/t", "REG_SZ", "/d", "2500", "/f"),
+            CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Control", "/v", "WaitToKillServiceTimeout", "/t", "REG_SZ", "/d", "5000", "/f"),
             CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Control\CrashControl", "/v", "AutoReboot", "/t", "REG_DWORD", "/d", "0", "/f"),
             CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Control\CrashControl", "/v", "DisplayParameters", "/t", "REG_DWORD", "/d", "1", "/f"),
             CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power", "/v", "HiberbootEnabled", "/t", "REG_DWORD", "/d", "0", "/f"),
             CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters", "/v", "DisableTaskOffload", "/t", "REG_DWORD", "/d", "0", "/f"),
+            CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Control\Lsa\MSV1_0", "/v", "NTLMMinClientSec", "/t", "REG_DWORD", "/d", "537395200", "/f"),
+            CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Control\Lsa\MSV1_0", "/v", "NTLMMinClientSec", "/t", "REG_DWORD", "/d", "536870912", "/f"),
             CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services", "/v", "fAllowToGetHelp", "/t", "REG_DWORD", "/d", "0", "/f"),
+            CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows NT\Terminal Services", "/v", "fDisableClip", "/t", "REG_DWORD", "/d", "1", "/f"),
             CreateRegRequest("add", @"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "/v", "DisableBkGndGroupPolicy", "/t", "REG_DWORD", "/d", "1", "/f"),
             CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search", "/v", "ConnectedSearchUseWeb", "/t", "REG_DWORD", "/d", "0", "/f"),
             CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search", "/v", "AllowIndexingEncryptedStoresOrItems", "/t", "REG_DWORD", "/d", "1", "/f"),
@@ -241,6 +282,8 @@ public sealed class CommandAllowlistSecurityTests
             CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\LanmanWorkstation", "/v", "MaxSmb2Dialect", "/t", "REG_DWORD", "/d", "785", "/f"),
             CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\LanmanServer", "/v", "MinSmb2Dialect", "/t", "REG_DWORD", "/d", "785", "/f"),
             CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\LanmanServer", "/v", "MaxSmb2Dialect", "/t", "REG_DWORD", "/d", "785", "/f"),
+            CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\LanmanWorkstation", "/v", "CipherSuiteOrder", "/t", "REG_MULTI_SZ", "/d", @"AES_256_GCM\0AES_256_CCM", "/f"),
+            CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\LanmanServer", "/v", "CipherSuiteOrder", "/t", "REG_MULTI_SZ", "/d", @"AES_256_GCM\0AES_256_CCM", "/f"),
             CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\System", "/v", "EnableCdp", "/t", "REG_DWORD", "/d", "0", "/f"),
             CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\System", "/v", "BlockDomainPicturePassword", "/t", "REG_DWORD", "/d", "1", "/f"),
             CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows NT\CurrentVersion\Software Protection Platform", "/v", "NoGenTicket", "/t", "REG_DWORD", "/d", "1", "/f"),
@@ -248,6 +291,7 @@ public sealed class CommandAllowlistSecurityTests
             CreateRegRequest("add", @"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Icons", "/v", "29", "/t", "REG_SZ", "/d", @"%windir%\System32\shell32.dll,-50", "/f"),
             CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment", "/v", "NODE_OPTIONS", "/t", "REG_SZ", "/d", "--max-old-space-size=8192", "/f"),
             CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\PowerShell", "/v", "ExecutionPolicy", "/t", "REG_SZ", "/d", "RemoteSigned", "/f"),
+            CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\PowerShell", "/v", "EnableScripts", "/t", "REG_DWORD", "/d", "1", "/f"),
             CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters", "/v", "AutoShareServer", "/t", "REG_DWORD", "/d", "0", "/f"),
             CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters", "/v", "AutoShareWks", "/t", "REG_DWORD", "/d", "0", "/f"),
             CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters", "/v", "SMB1", "/t", "REG_DWORD", "/d", "0", "/f"),
@@ -255,18 +299,25 @@ public sealed class CommandAllowlistSecurityTests
             CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters", "/v", "EnablePlainTextPassword", "/t", "REG_DWORD", "/d", "0", "/f"),
             CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters", "/v", "EnableSecuritySignature", "/t", "REG_DWORD", "/d", "1", "/f"),
             CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters", "/v", "RequireSecuritySignature", "/t", "REG_DWORD", "/d", "1", "/f"),
+            CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters", "/v", "DisableLargeMtu", "/t", "REG_DWORD", "/d", "0", "/f"),
             CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters", "/v", "DirectoryCacheEntriesMax", "/t", "REG_DWORD", "/d", "4096", "/f"),
             CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters", "/v", "FileInfoCacheEntriesMax", "/t", "REG_DWORD", "/d", "32768", "/f"),
             CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters", "/v", "FileNotFoundCacheEntriesMax", "/t", "REG_DWORD", "/d", "32768", "/f"),
             CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters", "/v", "MaxCmds", "/t", "REG_DWORD", "/d", "32768", "/f"),
             CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters", "/v", "EnableSecuritySignature", "/t", "REG_DWORD", "/d", "1", "/f"),
             CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters", "/v", "RequireSecuritySignature", "/t", "REG_DWORD", "/d", "1", "/f"),
+            CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters", "/v", "EncryptData", "/t", "REG_DWORD", "/d", "1", "/f"),
+            CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters", "/v", "RejectUnencryptedAccess", "/t", "REG_DWORD", "/d", "1", "/f"),
             CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers", "/v", "HwSchMode", "/t", "REG_DWORD", "/d", "2", "/f"),
             CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers", "/v", "TdrDdiDelay", "/t", "REG_DWORD", "/d", "5", "/f"),
             CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers", "/v", "TdrDelay", "/t", "REG_DWORD", "/d", "2", "/f"),
             CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers", "/v", "TdrLevel", "/t", "REG_DWORD", "/d", "3", "/f"),
             CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers", "/v", "TdrLimitCount", "/t", "REG_DWORD", "/d", "5", "/f"),
             CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers", "/v", "TdrLimitTime", "/t", "REG_DWORD", "/d", "60", "/f"),
+            CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel", "/v", "ThreadDpcEnable", "/t", "REG_DWORD", "/d", "1", "/f"),
+            CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Control\PriorityControl", "/v", "Win32PrioritySeparation", "/t", "REG_DWORD", "/d", "38", "/f"),
+            CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows NT\Reliability", "/v", "TimeStampEnabled", "/t", "REG_DWORD", "/d", "1", "/f"),
+            CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows NT\Reliability", "/v", "TimeStampInterval", "/t", "REG_DWORD", "/d", "86400", "/f"),
             CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management", "/v", "ClearPageFileAtShutdown", "/t", "REG_DWORD", "/d", "1", "/f"),
             CreateRegRequest("add", @"HKLM\SOFTWARE\Microsoft\Windows\Dwm", "/v", "OverlayMinFPS", "/t", "REG_DWORD", "/d", "0", "/f"),
             CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Control", "/v", "RegistrySizeLimit", "/t", "REG_DWORD", "/d", "0", "/f"),
@@ -304,6 +355,118 @@ public sealed class CommandAllowlistSecurityTests
                 "-Value",
                 "$null"
             });
+
+        var allowed = allowlist.IsAllowed(request, out var reason);
+
+        Assert.True(allowed);
+        Assert.Null(reason);
+    }
+
+    [Fact]
+    public void DefenderSampleSubmissionAndIpv6OverrideMutations_AreAllowlisted()
+    {
+        var allowlist = CommandAllowlist.CreateDefault();
+        var requests = new[]
+        {
+            CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet", "/v", "SubmitSamplesConsent", "/t", "REG_DWORD", "/d", "2", "/f"),
+            CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Services\Tcpip6\Parameters", "/v", "DisabledComponents", "/t", "REG_DWORD", "/d", "255", "/f"),
+            CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Services\Tcpip6\Parameters", "/v", "DisabledComponents", "/t", "REG_DWORD", "/d", "32", "/f")
+        };
+
+        foreach (var request in requests)
+        {
+            var allowed = allowlist.IsAllowed(request, out var reason);
+
+            Assert.True(allowed);
+            Assert.Null(reason);
+        }
+    }
+
+    [Fact]
+    public void SecurityPolicyMutations_AreAllowlisted()
+    {
+        var allowlist = CommandAllowlist.CreateDefault();
+        var requests = new[]
+        {
+            CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Notifications", "/v", "DisableEnhancedNotifications", "/t", "REG_DWORD", "/d", "1", "/f"),
+            CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Notifications", "/v", "DisableEnhancedNotifications", "/t", "REG_DWORD", "/d", "0", "/f"),
+            CreateRegRequest("delete", @"HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Notifications", "/v", "DisableEnhancedNotifications", "/f"),
+            CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Policies", "/v", "NtfsDisableEncryption", "/t", "REG_DWORD", "/d", "1", "/f"),
+            CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Policies", "/v", "NtfsDisableEncryption", "/t", "REG_DWORD", "/d", "0", "/f"),
+            CreateRegRequest("delete", @"HKLM\SYSTEM\CurrentControlSet\Policies", "/v", "NtfsDisableEncryption", "/f"),
+            CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization", "/v", "DODownloadMode", "/t", "REG_DWORD", "/d", "0", "/f"),
+            CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization", "/v", "DODownloadMode", "/t", "REG_DWORD", "/d", "100", "/f"),
+            CreateRegRequest("delete", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization", "/v", "DODownloadMode", "/f")
+        };
+
+        foreach (var request in requests)
+        {
+            var allowed = allowlist.IsAllowed(request, out var reason);
+
+            Assert.True(allowed);
+            Assert.Null(reason);
+        }
+    }
+
+    [Fact]
+    public void CpuIdleStatesRegistryMutations_AreAllowlisted()
+    {
+        var allowlist = CommandAllowlist.CreateDefault();
+        var requests = new[]
+        {
+            CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Control\Power", "/v", "DisableIdleStatesAtBoot", "/t", "REG_DWORD", "/d", "1", "/f"),
+            CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Control\Power", "/v", "ExitLatencyCheckEnabled", "/t", "REG_DWORD", "/d", "1", "/f"),
+            CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Control\Power", "/v", "IdleStateTimeout", "/t", "REG_DWORD", "/d", "0", "/f"),
+            CreateRegRequest("add", @"HKLM\SYSTEM\CurrentControlSet\Control\Power", "/v", "IdleStateTimeout", "/t", "REG_DWORD", "/d", "500", "/f"),
+            CreateRegRequest("delete", @"HKLM\SYSTEM\CurrentControlSet\Control\Power", "/v", "DisableIdleStatesAtBoot", "/f"),
+            CreateRegRequest("delete", @"HKLM\SYSTEM\CurrentControlSet\Control\Power", "/v", "ExitLatencyCheckEnabled", "/f"),
+            CreateRegRequest("delete", @"HKLM\SYSTEM\CurrentControlSet\Control\Power", "/v", "IdleStateTimeout", "/f")
+        };
+
+        foreach (var request in requests)
+        {
+            var allowed = allowlist.IsAllowed(request, out var reason);
+
+            Assert.True(allowed);
+            Assert.Null(reason);
+        }
+    }
+
+    [Fact]
+    public void DnsClientEnableMulticastMutation_IsAllowlisted()
+    {
+        var allowlist = CommandAllowlist.CreateDefault();
+        var request = CreateRegRequest(
+            "add",
+            @"HKLM\SOFTWARE\Policies\Microsoft\Windows NT\DNSClient",
+            "/v",
+            "EnableMulticast",
+            "/t",
+            "REG_DWORD",
+            "/d",
+            "0",
+            "/f");
+
+        var allowed = allowlist.IsAllowed(request, out var reason);
+
+        Assert.True(allowed);
+        Assert.Null(reason);
+    }
+
+    [Fact]
+    public void WindowsChatChatIconMutation_IsAllowlisted()
+    {
+        var allowlist = CommandAllowlist.CreateDefault();
+        var request = CreateRegRequest(
+            "add",
+            @"HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Chat",
+            "/v",
+            "ChatIcon",
+            "/t",
+            "REG_DWORD",
+            "/d",
+            "2",
+            "/f");
 
         var allowed = allowlist.IsAllowed(request, out var reason);
 
@@ -381,6 +544,62 @@ public sealed class CommandAllowlistSecurityTests
         Assert.Null(setActiveReason);
         Assert.False(combinedAllowed);
         Assert.Contains("not allowlisted", combinedReason, StringComparison.OrdinalIgnoreCase);
+    }
+
+    [Fact]
+    public void ResearchAppRegistryMutations_AreAllowlisted()
+    {
+        var allowlist = CommandAllowlist.CreateDefault();
+        var requests = new[]
+        {
+            CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\OneDrive", "/v", "DisableFileSyncNGSC", "/t", "REG_DWORD", "/d", "1", "/f"),
+            CreateRegRequest("delete", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\OneDrive", "/v", "DisableFileSyncNGSC", "/f"),
+            CreateRegRequest("add", @"HKLM\SOFTWARE\Microsoft\OneDrive", "/v", "PreventNetworkTrafficPreUserSignIn", "/t", "REG_DWORD", "/d", "1", "/f"),
+            CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Edge", "/v", "AutoImportAtFirstRun", "/t", "REG_DWORD", "/d", "4", "/f"),
+            CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\Windows\EdgeUI", "/v", "DisableRecentApps", "/t", "REG_DWORD", "/d", "1", "/f"),
+            CreateRegRequest("add", @"HKCU\SOFTWARE\Policies\Microsoft\Office\16.0\OSM\preventedapplications", "/v", "xlsolution", "/t", "REG_DWORD", "/d", "1", "/f"),
+            CreateRegRequest("add", @"HKLM\SOFTWARE\Policies\Microsoft\VisualStudio\Feedback", "/v", "DisableFeedbackDialog", "/t", "REG_DWORD", "/d", "1", "/f"),
+            CreateRegRequest("add", @"HKLM\SOFTWARE\Microsoft\VSCommon\17.0\SQM", "/v", "OptIn", "/t", "REG_DWORD", "/d", "0", "/f"),
+            CreateRegRequest("add", @"HKCU\SOFTWARE\7-Zip\Options", "/v", "WriteZoneIdExtract", "/t", "REG_DWORD", "/d", "2", "/f"),
+            CreateRegRequest("add", @"HKCU\Control Panel\Keyboard", "/v", "KeyboardSpeed", "/t", "REG_SZ", "/d", "31", "/f"),
+            CreateRegRequest("add", @"HKCU\Keyboard Layout\Toggle", "/v", "Language Hotkey", "/t", "REG_SZ", "/d", "3", "/f"),
+            CreateRegRequest("add", @"HKCU\Control Panel\Mouse", "/v", "MouseSensitivity", "/t", "REG_SZ", "/d", "10", "/f"),
+            CreateRegRequest("add", @"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Render", "/v", "DisableEnhancements", "/t", "REG_DWORD", "/d", "1", "/f")
+        };
+
+        foreach (var request in requests)
+        {
+            var allowed = allowlist.IsAllowed(request, out var reason);
+
+            Assert.True(allowed);
+            Assert.Null(reason);
+        }
+    }
+
+    [Fact]
+    public void CoreParkingAndUsbPowerCfgCommands_AreAllowlisted()
+    {
+        var allowlist = CommandAllowlist.CreateDefault();
+        var executable = Path.Combine(Environment.SystemDirectory, "powercfg.exe");
+        var usbSubgroupGuid = "2a737441-1930-4402-8d77-b2bebba308a3";
+        var usbSelectiveSuspendGuid = "48e6b7a6-50f5-4782-a5d4-53bb8f07e226";
+        var requests = new[]
+        {
+            new CommandRequest(executable, new[] { "/qh", "SCHEME_CURRENT", "SUB_PROCESSOR", "CPMINCORES" }),
+            new CommandRequest(executable, new[] { "/setdcvalueindex", "SCHEME_CURRENT", "SUB_PROCESSOR", "CPMINCORES", "10" }),
+            new CommandRequest(executable, new[] { "/setacvalueindex", "SCHEME_CURRENT", "SUB_PROCESSOR", "CPMAXCORES", "100" }),
+            new CommandRequest(executable, new[] { "/query", "SCHEME_CURRENT", usbSubgroupGuid, usbSelectiveSuspendGuid }),
+            new CommandRequest(executable, new[] { "/setacvalueindex", "SCHEME_CURRENT", usbSubgroupGuid, usbSelectiveSuspendGuid, "0" }),
+            new CommandRequest(executable, new[] { "/setdcvalueindex", "SCHEME_CURRENT", usbSubgroupGuid, usbSelectiveSuspendGuid, "1" })
+        };
+
+        foreach (var request in requests)
+        {
+            var allowed = allowlist.IsAllowed(request, out var reason);
+
+            Assert.True(allowed);
+            Assert.Null(reason);
+        }
     }
 
     [Fact]

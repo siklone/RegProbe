@@ -1297,7 +1297,8 @@ public sealed class JsonTweakLoader : IDisposable
 
         if (element.ValueKind == JsonValueKind.String)
         {
-            return new[] { element.GetString() ?? string.Empty };
+            return (element.GetString() ?? string.Empty)
+                .Split('|', StringSplitOptions.TrimEntries | StringSplitOptions.RemoveEmptyEntries);
         }
 
         throw new InvalidDataException($"Could not normalize multi-string registry value from JSON kind '{element.ValueKind}'.");

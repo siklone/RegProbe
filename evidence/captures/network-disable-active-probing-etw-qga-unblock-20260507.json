@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-07T09:55:21.6444595Z",
+  "record_id": "network.disable-active-probing",
+  "run_id": "network-disable-active-probing-etw-qga-unblock-20260507",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "registry_path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\NetworkConnectivityStatusIndicator",
+  "value_name": "NoActiveProbe",
+  "attempt_status": "qga_unblocked_ingest_ok",
+  "assessment": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and a normalized bundle with 4445 registry events and 525 caller-stack events. The bundle contains an exact RegQueryValue event for HKLM\\Software\\Policies\\Microsoft\\Windows\\NetworkConnectivityStatusIndicator / NoActiveProbe from the helper probe, returning 0xC0000034 on the clean baseline.",
+  "target_observation": {
+    "exact_value_query": true,
+    "operation": "RegQueryValue",
+    "representative_status": "0xC0000034",
+    "event_count": 4445,
+    "caller_stack_event_count": 525,
+    "target_key_event_count": 8,
+    "target_value_event_count": 1,
+    "target_command_event_count": 2,
+    "launch_transport": "qga"
+  },
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/network-disable-active-probing-etw-qga-unblock-20260507/network-disable-active-probing-etw-qga-unblock-20260507-summary.json",
+      "sha256": "6b63084588114e63a19d9a6b71429fc2ae0a8bbd68ba65feaa0d0e5993e9387c",
+      "size": 7747,
+      "collected_utc": "2026-05-07T09:55:21.6444595Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/network-disable-active-probing-etw-qga-unblock-20260507/normalized-registry-bundle.json",
+      "sha256": "932df2831c963d85f3ad82c1cb294ef8c4136ca7947c7a252658c5eee1ccec77",
+      "size": 5466548,
+      "collected_utc": "2026-05-07T09:55:21.6444595Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/network-disable-active-probing-etw-qga-unblock-20260507/network-disable-active-probing-etw-qga-unblock-20260507.etl",
+      "sha256": "89a6c47e0bff9cf95915e3eddd9020a2bf43094f757580dbc0e03a2f06fb14b2",
+      "size": 12582912,
+      "collected_utc": "2026-05-07T09:55:21.6444595Z"
+    }
+  ]
+}

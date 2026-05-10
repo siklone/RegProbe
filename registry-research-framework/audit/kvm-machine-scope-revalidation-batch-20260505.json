@@ -1,0 +1,129 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-05T13:08:51.8557437Z",
+  "wrapper": "scripts/vm-kvm/qga-run-powershell.py",
+  "guest_script_kind": "ad-hoc-machine-scope-current-state-batch",
+  "domain": "regprobe-win11-25h2-session",
+  "guest_dir": "C:\\RegProbe-Diag\\revalidation",
+  "execution_exitcode": 0,
+  "machine": {
+    "computer_name": "DESKTOP-AHPV0FV",
+    "current_build": "26200",
+    "ubr": 8246,
+    "build_lab_ex": "26100.1.amd64fre.ge_release.240331-1435",
+    "product_name": "Windows 10 Pro"
+  },
+  "records": {
+    "system.services.disable-connected-user-experiences": {
+      "kind": "service",
+      "name_pattern": "DiagTrack",
+      "match_count": 1,
+      "matches": [
+        {
+          "name": "DiagTrack",
+          "display_name": "Connected User Experiences and Telemetry",
+          "start_mode": "Auto",
+          "state": "Running",
+          "status": "OK"
+        }
+      ]
+    },
+    "system.services.disable-print-notifications": {
+      "kind": "service",
+      "name_pattern": "PrintNotify",
+      "match_count": 1,
+      "matches": [
+        {
+          "name": "PrintNotify",
+          "display_name": "Printer Extensions and Notifications",
+          "start_mode": "Manual",
+          "state": "Stopped",
+          "status": "OK"
+        }
+      ]
+    },
+    "system.services.disable-print-spooler": {
+      "kind": "service",
+      "name_pattern": "Spooler",
+      "match_count": 1,
+      "matches": [
+        {
+          "name": "Spooler",
+          "display_name": "Print Spooler",
+          "start_mode": "Auto",
+          "state": "Running",
+          "status": "OK"
+        }
+      ]
+    },
+    "system.services.disable-bluetooth-support": {
+      "kind": "service",
+      "name_pattern": "bthserv",
+      "match_count": 1,
+      "matches": [
+        {
+          "name": "bthserv",
+          "display_name": "Bluetooth Support Service",
+          "start_mode": "Manual",
+          "state": "Stopped",
+          "status": "OK"
+        }
+      ]
+    },
+    "system.services.disable-bluetooth-user-service": {
+      "kind": "service",
+      "name_pattern": "BluetoothUserService_*",
+      "match_count": 1,
+      "matches": [
+        {
+          "name": "BluetoothUserService_410af",
+          "display_name": "BluetoothUserService_410af",
+          "start_mode": "Manual",
+          "state": "Stopped",
+          "status": "OK"
+        }
+      ]
+    },
+    "system.services.disable-bluetooth-audio-gateway": {
+      "kind": "service",
+      "name_pattern": "BTAGService",
+      "match_count": 1,
+      "matches": [
+        {
+          "name": "BTAGService",
+          "display_name": "Bluetooth Audio Gateway Service",
+          "start_mode": "Manual",
+          "state": "Stopped",
+          "status": "OK"
+        }
+      ]
+    },
+    "system.wait-to-kill-service-timeout": {
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control",
+      "value_name": "WaitToKillServiceTimeout",
+      "path_exists": true,
+      "value_exists": true,
+      "value": "5000",
+      "kind": "registry",
+      "error": null
+    },
+    "system.priority-control": {
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\PriorityControl",
+      "value_name": "Win32PrioritySeparation",
+      "path_exists": true,
+      "value_exists": true,
+      "value": 2,
+      "kind": "registry",
+      "error": null
+    },
+    "power.control.hibernate-enabled": {
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "HibernateEnabled",
+      "path_exists": true,
+      "value_exists": true,
+      "value": 0,
+      "kind": "registry",
+      "error": null
+    }
+  }
+}

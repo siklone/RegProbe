@@ -1,0 +1,401 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-06T00:27:35.2558263Z",
+  "wrapper": "qga-run-powershell.py",
+  "guest_script_kind": "kvm-user-scope-revalidation-batch",
+  "domain": "regprobe-win11-25h2-session",
+  "guest_dir": "C:\\Tools\\Codex",
+  "execution_exitcode": 0,
+  "machine": {
+    "computer_name": "DESKTOP-AHPV0FV",
+    "current_build": "26200",
+    "ubr": 8246,
+    "build_lab_ex": "26100.1.amd64fre.ge_release.240331-1435",
+    "product_name": "Windows 10 Pro"
+  },
+  "user_context": {
+    "user_name": "DESKTOP-AHPV0FV\\rai",
+    "sid": "S-1-5-21-88678196-3999695453-342703815-1001",
+    "hive_root": "Registry::HKEY_USERS\\S-1-5-21-88678196-3999695453-342703815-1001"
+  },
+  "records": {
+    "peripheral.autoplay-take-no-action": [
+      {
+        "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\StorageOnArrival",
+        "resolved_path": "Registry::HKEY_USERS\\S-1-5-21-88678196-3999695453-342703815-1001\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\StorageOnArrival",
+        "value_name": "(Default)",
+        "path_exists": true,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": "Property (Default) does not exist at path HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\StorageOnArrival."
+      },
+      {
+        "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\StorageOnArrival",
+        "resolved_path": "Registry::HKEY_USERS\\S-1-5-21-88678196-3999695453-342703815-1001\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\StorageOnArrival",
+        "value_name": "(Default)",
+        "path_exists": true,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": "Property (Default) does not exist at path HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\StorageOnArrival."
+      },
+      {
+        "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\CameraAlternate\\ShowPicturesOnArrival",
+        "resolved_path": "Registry::HKEY_USERS\\S-1-5-21-88678196-3999695453-342703815-1001\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\CameraAlternate\\ShowPicturesOnArrival",
+        "value_name": "(Default)",
+        "path_exists": true,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": "Property (Default) does not exist at path HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\CameraAlternate\\ShowPicturesOnArrival."
+      },
+      {
+        "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\CameraAlternate\\ShowPicturesOnArrival",
+        "resolved_path": "Registry::HKEY_USERS\\S-1-5-21-88678196-3999695453-342703815-1001\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\CameraAlternate\\ShowPicturesOnArrival",
+        "value_name": "(Default)",
+        "path_exists": true,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": "Property (Default) does not exist at path HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\CameraAlternate\\ShowPicturesOnArrival."
+      },
+      {
+        "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayDVDMovieOnArrival",
+        "resolved_path": "Registry::HKEY_USERS\\S-1-5-21-88678196-3999695453-342703815-1001\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayDVDMovieOnArrival",
+        "value_name": "(Default)",
+        "path_exists": true,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": "Property (Default) does not exist at path HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayDVDMovieOnArrival."
+      },
+      {
+        "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayDVDMovieOnArrival",
+        "resolved_path": "Registry::HKEY_USERS\\S-1-5-21-88678196-3999695453-342703815-1001\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayDVDMovieOnArrival",
+        "value_name": "(Default)",
+        "path_exists": true,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": "Property (Default) does not exist at path HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayDVDMovieOnArrival."
+      },
+      {
+        "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayEnhancedDVDOnArrival",
+        "resolved_path": "Registry::HKEY_USERS\\S-1-5-21-88678196-3999695453-342703815-1001\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayEnhancedDVDOnArrival",
+        "value_name": "(Default)",
+        "path_exists": true,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": "Property (Default) does not exist at path HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayEnhancedDVDOnArrival."
+      },
+      {
+        "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayEnhancedDVDOnArrival",
+        "resolved_path": "Registry::HKEY_USERS\\S-1-5-21-88678196-3999695453-342703815-1001\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayEnhancedDVDOnArrival",
+        "value_name": "(Default)",
+        "path_exists": true,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": "Property (Default) does not exist at path HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayEnhancedDVDOnArrival."
+      },
+      {
+        "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\HandleDVDBurningOnArrival",
+        "resolved_path": "Registry::HKEY_USERS\\S-1-5-21-88678196-3999695453-342703815-1001\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\HandleDVDBurningOnArrival",
+        "value_name": "(Default)",
+        "path_exists": true,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": "Property (Default) does not exist at path HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\HandleDVDBurningOnArrival."
+      },
+      {
+        "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\HandleDVDBurningOnArrival",
+        "resolved_path": "Registry::HKEY_USERS\\S-1-5-21-88678196-3999695453-342703815-1001\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\HandleDVDBurningOnArrival",
+        "value_name": "(Default)",
+        "path_exists": true,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": "Property (Default) does not exist at path HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\HandleDVDBurningOnArrival."
+      },
+      {
+        "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayDVDAudioOnArrival",
+        "resolved_path": "Registry::HKEY_USERS\\S-1-5-21-88678196-3999695453-342703815-1001\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayDVDAudioOnArrival",
+        "value_name": "(Default)",
+        "path_exists": true,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": "Property (Default) does not exist at path HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayDVDAudioOnArrival."
+      },
+      {
+        "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayDVDAudioOnArrival",
+        "resolved_path": "Registry::HKEY_USERS\\S-1-5-21-88678196-3999695453-342703815-1001\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayDVDAudioOnArrival",
+        "value_name": "(Default)",
+        "path_exists": true,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": "Property (Default) does not exist at path HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayDVDAudioOnArrival."
+      },
+      {
+        "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayBluRayOnArrival",
+        "resolved_path": "Registry::HKEY_USERS\\S-1-5-21-88678196-3999695453-342703815-1001\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayBluRayOnArrival",
+        "value_name": "(Default)",
+        "path_exists": true,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": "Property (Default) does not exist at path HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayBluRayOnArrival."
+      },
+      {
+        "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayBluRayOnArrival",
+        "resolved_path": "Registry::HKEY_USERS\\S-1-5-21-88678196-3999695453-342703815-1001\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayBluRayOnArrival",
+        "value_name": "(Default)",
+        "path_exists": true,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": "Property (Default) does not exist at path HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayBluRayOnArrival."
+      },
+      {
+        "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\HandleBDBurningOnArrival",
+        "resolved_path": "Registry::HKEY_USERS\\S-1-5-21-88678196-3999695453-342703815-1001\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\HandleBDBurningOnArrival",
+        "value_name": "(Default)",
+        "path_exists": true,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": "Property (Default) does not exist at path HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\HandleBDBurningOnArrival."
+      },
+      {
+        "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\HandleBDBurningOnArrival",
+        "resolved_path": "Registry::HKEY_USERS\\S-1-5-21-88678196-3999695453-342703815-1001\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\HandleBDBurningOnArrival",
+        "value_name": "(Default)",
+        "path_exists": true,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": "Property (Default) does not exist at path HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\HandleBDBurningOnArrival."
+      },
+      {
+        "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayCDAudioOnArrival",
+        "resolved_path": "Registry::HKEY_USERS\\S-1-5-21-88678196-3999695453-342703815-1001\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayCDAudioOnArrival",
+        "value_name": "(Default)",
+        "path_exists": true,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": "Property (Default) does not exist at path HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayCDAudioOnArrival."
+      },
+      {
+        "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayCDAudioOnArrival",
+        "resolved_path": "Registry::HKEY_USERS\\S-1-5-21-88678196-3999695453-342703815-1001\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayCDAudioOnArrival",
+        "value_name": "(Default)",
+        "path_exists": true,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": "Property (Default) does not exist at path HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayCDAudioOnArrival."
+      },
+      {
+        "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayEnhancedCDOnArrival",
+        "resolved_path": "Registry::HKEY_USERS\\S-1-5-21-88678196-3999695453-342703815-1001\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayEnhancedCDOnArrival",
+        "value_name": "(Default)",
+        "path_exists": true,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": "Property (Default) does not exist at path HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayEnhancedCDOnArrival."
+      },
+      {
+        "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayEnhancedCDOnArrival",
+        "resolved_path": "Registry::HKEY_USERS\\S-1-5-21-88678196-3999695453-342703815-1001\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayEnhancedCDOnArrival",
+        "value_name": "(Default)",
+        "path_exists": true,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": "Property (Default) does not exist at path HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayEnhancedCDOnArrival."
+      },
+      {
+        "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\HandleCDBurningOnArrival",
+        "resolved_path": "Registry::HKEY_USERS\\S-1-5-21-88678196-3999695453-342703815-1001\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\HandleCDBurningOnArrival",
+        "value_name": "(Default)",
+        "path_exists": true,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": "Property (Default) does not exist at path HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\HandleCDBurningOnArrival."
+      },
+      {
+        "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\HandleCDBurningOnArrival",
+        "resolved_path": "Registry::HKEY_USERS\\S-1-5-21-88678196-3999695453-342703815-1001\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\HandleCDBurningOnArrival",
+        "value_name": "(Default)",
+        "path_exists": true,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": "Property (Default) does not exist at path HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\HandleCDBurningOnArrival."
+      },
+      {
+        "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayVideoCDMovieOnArrival",
+        "resolved_path": "Registry::HKEY_USERS\\S-1-5-21-88678196-3999695453-342703815-1001\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayVideoCDMovieOnArrival",
+        "value_name": "(Default)",
+        "path_exists": true,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": "Property (Default) does not exist at path HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlayVideoCDMovieOnArrival."
+      },
+      {
+        "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayVideoCDMovieOnArrival",
+        "resolved_path": "Registry::HKEY_USERS\\S-1-5-21-88678196-3999695453-342703815-1001\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayVideoCDMovieOnArrival",
+        "value_name": "(Default)",
+        "path_exists": true,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": "Property (Default) does not exist at path HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlayVideoCDMovieOnArrival."
+      },
+      {
+        "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlaySuperVideoCDMovieOnArrival",
+        "resolved_path": "Registry::HKEY_USERS\\S-1-5-21-88678196-3999695453-342703815-1001\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlaySuperVideoCDMovieOnArrival",
+        "value_name": "(Default)",
+        "path_exists": true,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": "Property (Default) does not exist at path HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\PlaySuperVideoCDMovieOnArrival."
+      },
+      {
+        "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlaySuperVideoCDMovieOnArrival",
+        "resolved_path": "Registry::HKEY_USERS\\S-1-5-21-88678196-3999695453-342703815-1001\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlaySuperVideoCDMovieOnArrival",
+        "value_name": "(Default)",
+        "path_exists": true,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": "Property (Default) does not exist at path HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\PlaySuperVideoCDMovieOnArrival."
+      },
+      {
+        "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\AutorunINFLegacyArrival",
+        "resolved_path": "Registry::HKEY_USERS\\S-1-5-21-88678196-3999695453-342703815-1001\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\AutorunINFLegacyArrival",
+        "value_name": "(Default)",
+        "path_exists": true,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": "Property (Default) does not exist at path HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\UserChosenExecuteHandlers\\AutorunINFLegacyArrival."
+      },
+      {
+        "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\AutorunINFLegacyArrival",
+        "resolved_path": "Registry::HKEY_USERS\\S-1-5-21-88678196-3999695453-342703815-1001\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\AutorunINFLegacyArrival",
+        "value_name": "(Default)",
+        "path_exists": true,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": "Property (Default) does not exist at path HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\AutoplayHandlers\\EventHandlersDefaultSelection\\AutorunINFLegacyArrival."
+      }
+    ],
+    "power.optimize-cpu-boost": [
+      {
+        "path": "powercfg.exe /qh SCHEME_CURRENT SUB_PROCESSOR PERFBOOSTMODE",
+        "value_name": "PERFBOOSTMODE",
+        "path_exists": true,
+        "value_exists": true,
+        "value": {
+          "ac": 2,
+          "dc": 2
+        },
+        "kind": "command",
+        "error": null
+      }
+    ],
+    "privacy.disable-cli-telemetry": [
+      {
+        "path": "HKCU\\Environment",
+        "resolved_path": "Registry::HKEY_USERS\\S-1-5-21-88678196-3999695453-342703815-1001\\Environment",
+        "value_name": "POWERSHELL_TELEMETRY_OPTOUT",
+        "path_exists": true,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": "Property POWERSHELL_TELEMETRY_OPTOUT does not exist at path HKCU\\Environment."
+      },
+      {
+        "path": "HKCU\\Environment",
+        "resolved_path": "Registry::HKEY_USERS\\S-1-5-21-88678196-3999695453-342703815-1001\\Environment",
+        "value_name": "DOTNET_CLI_TELEMETRY_OPTOUT",
+        "path_exists": true,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": "Property DOTNET_CLI_TELEMETRY_OPTOUT does not exist at path HKCU\\Environment."
+      }
+    ],
+    "system.disable-jpeg-reduction": [
+      {
+        "path": "HKCU\\Control Panel\\Desktop",
+        "resolved_path": "Registry::HKEY_USERS\\S-1-5-21-88678196-3999695453-342703815-1001\\Control Panel\\Desktop",
+        "value_name": "JPEGImportQuality",
+        "path_exists": true,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": "Property JPEGImportQuality does not exist at path HKCU\\Control Panel\\Desktop."
+      }
+    ],
+    "system.disable-startup-delay": [
+      {
+        "path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Serialize",
+        "resolved_path": "Registry::HKEY_USERS\\S-1-5-21-88678196-3999695453-342703815-1001\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Serialize",
+        "value_name": "StartupDelayInMSec",
+        "path_exists": true,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": "Property StartupDelayInMSec does not exist at path HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Serialize."
+      }
+    ],
+    "system.enable-game-mode": [
+      {
+        "path": "HKCU\\Software\\Microsoft\\GameBar",
+        "resolved_path": "Registry::HKEY_USERS\\S-1-5-21-88678196-3999695453-342703815-1001\\Software\\Microsoft\\GameBar",
+        "value_name": "AutoGameModeEnabled",
+        "path_exists": true,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": "Property AutoGameModeEnabled does not exist at path HKCU\\Software\\Microsoft\\GameBar."
+      }
+    ],
+    "visibility.hide-language-bar": [
+      {
+        "path": "HKCU\\Software\\Microsoft\\CTF\\LangBar",
+        "resolved_path": "Registry::HKEY_USERS\\S-1-5-21-88678196-3999695453-342703815-1001\\Software\\Microsoft\\CTF\\LangBar",
+        "value_name": "ShowStatus",
+        "path_exists": true,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": "Property ShowStatus does not exist at path HKCU\\Software\\Microsoft\\CTF\\LangBar."
+      }
+    ],
+    "visibility.restore-classic-context-menu": [
+      {
+        "path": "HKCU\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\\InprocServer32",
+        "resolved_path": "Registry::HKEY_USERS\\S-1-5-21-88678196-3999695453-342703815-1001\\Software\\Classes\\CLSID\\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\\InprocServer32",
+        "value_name": "",
+        "path_exists": false,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": null
+      }
+    ]
+  }
+}

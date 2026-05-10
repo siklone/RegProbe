@@ -1,0 +1,120 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-07T14:43:50.544726Z",
+  "record_id": "security.threat-file-hash-logging",
+  "run_id": "security-threat-file-hash-logging-etw-qga-unblock-20260507",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "attempt_status": "qga_unblocked_ingest_ok",
+  "assessment": "A 2026-05-07 QGA-first ETW stackwalk rerun produced host-ingested ETL/XML artifacts and normalized bundles for 3 target value(s): `ThreatFileHashLogging`, `EnableFileHashComputation`, `EnableFileHashComputation`. The QGA-launched `reg.exe query` probe produced exact target RegQueryValue events for 2/3 target(s), clearing the earlier tracerpt/artifact-upload blocker. This receipt proves the ETW/QGA probe can observe the documented registry surface, but it is probe-read evidence rather than independent Windows component consumption proof.",
+  "aggregate_observation": {
+    "target_count": 3,
+    "exact_probe_value_query_count": 2,
+    "all_artifacts_ingested": true,
+    "launch_transport": "qga",
+    "probe_read_not_product_consumer_proof": true
+  },
+  "target_observations": [
+    {
+      "run_id": "security-threat-file-hash-logging-threatfilehashlogging-etw-qga-unblock-20260507",
+      "registry_path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender",
+      "value_name": "ThreatFileHashLogging",
+      "exact_probe_value_query": true,
+      "operation": "RegQueryValue",
+      "representative_status": "0xC0000034",
+      "event_count": 4460,
+      "caller_stack_event_count": 530,
+      "target_key_event_count": 8,
+      "target_value_event_count": 1,
+      "exact_target_value_event_count": 1,
+      "target_command_event_count": 2,
+      "launch_transport": "qga"
+    },
+    {
+      "run_id": "security-threat-file-hash-logging-policy-manager-enablefilehashcomputation-etw-qga-unblock-20260507",
+      "registry_path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Policy Manager",
+      "value_name": "EnableFileHashComputation",
+      "exact_probe_value_query": true,
+      "operation": "RegQueryValue",
+      "representative_status": "0xC0000034",
+      "event_count": 4460,
+      "caller_stack_event_count": 525,
+      "target_key_event_count": 7,
+      "target_value_event_count": 1,
+      "exact_target_value_event_count": 1,
+      "target_command_event_count": 2,
+      "launch_transport": "qga"
+    },
+    {
+      "run_id": "security-threat-file-hash-logging-mpengine-enablefilehashcomputation-etw-qga-unblock-20260507",
+      "registry_path": "HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\MpEngine",
+      "value_name": "EnableFileHashComputation",
+      "exact_probe_value_query": false,
+      "operation": "RegQueryValue",
+      "representative_status": null,
+      "event_count": 4463,
+      "caller_stack_event_count": 524,
+      "target_key_event_count": 6,
+      "target_value_event_count": 0,
+      "exact_target_value_event_count": 0,
+      "target_command_event_count": 2,
+      "launch_transport": "qga"
+    }
+  ],
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/security-threat-file-hash-logging-threatfilehashlogging-etw-qga-unblock-20260507/security-threat-file-hash-logging-threatfilehashlogging-etw-qga-unblock-20260507-summary.json",
+      "sha256": "a6892d4f8ee29b29a99914c9d360c6a25748935958d2d4830d7557a4b8cb011b",
+      "size": 8459,
+      "collected_utc": "2026-05-07T14:17:16.2429923Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/security-threat-file-hash-logging-threatfilehashlogging-etw-qga-unblock-20260507/normalized-registry-bundle.json",
+      "sha256": "0330e37fe1e8c2237eafaff07cbf70d157f45bbbf1a238d1abee4c972cbb077b",
+      "size": 6027254,
+      "collected_utc": "2026-05-07T14:17:16.2429923Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/security-threat-file-hash-logging-threatfilehashlogging-etw-qga-unblock-20260507/security-threat-file-hash-logging-threatfilehashlogging-etw-qga-unblock-20260507.etl",
+      "sha256": "64dc6935507e8c39ff2e86dfddb11483e9c1644c037e071781c973fde6279d6d",
+      "size": 12582912,
+      "collected_utc": "2026-05-07T14:17:16.2429923Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/security-threat-file-hash-logging-policy-manager-enablefilehashcomputation-etw-qga-unblock-20260507/security-threat-file-hash-logging-policy-manager-enablefilehashcomputation-etw-qga-unblock-20260507-summary.json",
+      "sha256": "18aa8a2ad562db29f6d2c1652e34ddda0582e4b76676498f4b4984bb839ef920",
+      "size": 9069,
+      "collected_utc": "2026-05-07T14:19:16.6447889Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/security-threat-file-hash-logging-policy-manager-enablefilehashcomputation-etw-qga-unblock-20260507/normalized-registry-bundle.json",
+      "sha256": "90a9c924e5796f062cef55fc177ede6127651a3fb62a3a502c593f39c36bca2c",
+      "size": 6446370,
+      "collected_utc": "2026-05-07T14:19:16.6447889Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/security-threat-file-hash-logging-policy-manager-enablefilehashcomputation-etw-qga-unblock-20260507/security-threat-file-hash-logging-policy-manager-enablefilehashcomputation-etw-qga-unblock-20260507.etl",
+      "sha256": "8f639316df433f709720dcc9cae11b13be88b6bdc7a4ebaaec95dfae9f43ec27",
+      "size": 12582912,
+      "collected_utc": "2026-05-07T14:19:16.6447889Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/security-threat-file-hash-logging-mpengine-enablefilehashcomputation-etw-qga-unblock-20260507/security-threat-file-hash-logging-mpengine-enablefilehashcomputation-etw-qga-unblock-20260507-summary.json",
+      "sha256": "2759be51cb364c47bea0f7b462923279bcee3c44e50218055ff294b1aca33979",
+      "size": 8871,
+      "collected_utc": "2026-05-07T14:21:06.5904898Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/security-threat-file-hash-logging-mpengine-enablefilehashcomputation-etw-qga-unblock-20260507/normalized-registry-bundle.json",
+      "sha256": "3c68f7033f97fbba9519a401b4f6b988ecd5847b266bdb31bc9667cf4a550bfe",
+      "size": 6315757,
+      "collected_utc": "2026-05-07T14:21:06.5904898Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/security-threat-file-hash-logging-mpengine-enablefilehashcomputation-etw-qga-unblock-20260507/security-threat-file-hash-logging-mpengine-enablefilehashcomputation-etw-qga-unblock-20260507.etl",
+      "sha256": "aad3c9a0aa8188bbca3e3e61d92cf6c0ed0f20a2dd9ce966dfaf3d66be3e4a65",
+      "size": 12320768,
+      "collected_utc": "2026-05-07T14:21:06.5904898Z"
+    }
+  ]
+}

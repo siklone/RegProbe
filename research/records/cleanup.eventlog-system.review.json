@@ -1,0 +1,222 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "cleanup.eventlog-system",
+  "tweak_id": "cleanup.eventlog-system",
+  "record_status": "review-required",
+  "summary": "Review-required audit trail for the live System event-log cleanup card. The app already ships the wevtutil-backed action and the repo cleanup docs describe the same log-clear flow, but the card has not yet been promoted into the validated research-provider surface.",
+  "setting": {
+    "name": "Clear System Event Log",
+    "category": "Cleanup",
+    "area": "System Event Log Cleanup",
+    "scope": "device",
+    "casual_explanation": "This clears the Windows System event log so existing System log entries are removed.",
+    "why_people_change_it": "People clear event logs when they are resetting a troubleshooting surface or intentionally removing accumulated log history after exporting it elsewhere.",
+    "tradeoffs_overview": "Clearing the log removes existing records and they cannot be restored by the app.",
+    "professional_notes": "The current app uses wevtutil gli System for detection and wevtutil cl System for apply. Repo cleanup docs describe the same event-log clear action and warn that the logs cannot be recovered afterward.",
+    "targets": [
+      {
+        "target_id": "system-event-log-command",
+        "location_kind": "command",
+        "path": "%SystemRoot%\\System32\\wevtutil.exe",
+        "value_name": "SystemLogAction",
+        "value_type": "enum",
+        "allowed_values": [
+          {
+            "state_kind": "value",
+            "value": "Analyzed",
+            "label": "Analyze System log",
+            "meaning": "Reads current System log metadata without clearing the log.",
+            "evidence_ids": [
+              "repo-cleanup-doc",
+              "engine-system-event-log-command"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": "Cleared",
+            "label": "Clear System log",
+            "meaning": "Runs wevtutil cl System to remove System log entries.",
+            "evidence_ids": [
+              "repo-cleanup-doc",
+              "repo-cleanup-provenance",
+              "app-system-provider",
+              "engine-system-event-log-command"
+            ]
+          }
+        ],
+        "notes": "There is no rollback command for a cleared event log."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "unknown",
+    "provider_source": "app/Services/TweakProviders/SystemTweakProvider.cs",
+    "notes": "The live app still ships this as a first-party system cleanup card instead of through the research-provider surface.",
+    "writes": [
+      {
+        "target_id": "system-event-log-command",
+        "path": "%SystemRoot%\\System32\\wevtutil.exe",
+        "value_name": "SystemLogAction",
+        "value_type": "enum",
+        "state_kind": "value",
+        "value": "Cleared"
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows event-log baseline",
+      "applies_to": "Systems where the System event log remains available until an operator clears it",
+      "states": [
+        {
+          "target_id": "system-event-log-command",
+          "state_kind": "unknown",
+          "value": null,
+          "rationale": "This card represents an operator-triggered maintenance action, not a persistent default state."
+        }
+      ],
+      "notes": "Use detection and operator intent rather than assuming a log-clear baseline.",
+      "evidence_ids": [
+        "repo-cleanup-doc",
+        "engine-system-event-log-command"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "hold-for-research",
+      "label": "Hold for research",
+      "intended_for": [
+        "Research tracking only",
+        "Cleanup command backlog reduction"
+      ],
+      "avoid_for": [
+        "Published presets",
+        "General users"
+      ],
+      "states": [
+        {
+          "target_id": "system-event-log-command",
+          "state_kind": "unknown",
+          "value": null,
+          "rationale": "Keep the live event-log cleanup card documented without publishing it as a validated research-provider preset yet."
+        }
+      ],
+      "good_when": "You want the shipped cleanup action represented honestly in the corpus.",
+      "bad_when": "You need a validated research-provider cleanup card.",
+      "tradeoffs": [
+        "The live app behavior is documented.",
+        "The card remains outside the validated research-provider surface."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "repo-cleanup-doc",
+        "repo-cleanup-provenance"
+      ]
+    },
+    {
+      "profile_id": "current-app-action",
+      "label": "Current app action",
+      "intended_for": [
+        "Research comparison only"
+      ],
+      "avoid_for": [
+        "Published presets",
+        "General users"
+      ],
+      "states": [
+        {
+          "target_id": "system-event-log-command",
+          "state_kind": "value",
+          "value": "Cleared",
+          "rationale": "Capture the exact event-log clear action that the live app currently performs."
+        }
+      ],
+      "good_when": "You are auditing the current System event-log cleanup card as shipped by the app.",
+      "bad_when": "You need a validated research-provider cleanup preset.",
+      "tradeoffs": [
+        "The current app behavior is explicit.",
+        "The card is still held outside the validated research-provider surface."
+      ],
+      "apply_allowed": false,
+      "notes": "Blocked until this cleanup surface completes the normal validation path.",
+      "evidence_ids": [
+        "repo-cleanup-doc",
+        "app-system-provider",
+        "engine-system-event-log-command"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "repo-cleanup-doc",
+      "kind": "repo-doc",
+      "title": "Repo cleanup catalog entry",
+      "location": "Docs/cleanup/cleanup.md",
+      "summary": "The cleanup documentation describes the event-log clear flow and links the operator to wevtutil-based inspection and clearing.",
+      "supports": [
+        "path",
+        "behavior",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "repo-cleanup-provenance",
+      "kind": "repo-doc",
+      "title": "Repo tweak provenance for cleanup.eventlog-system",
+      "location": "Docs/tweaks/tweak-provenance.md",
+      "summary": "The tweak provenance table keeps cleanup.eventlog-system tied to the checked-in cleanup source set.",
+      "supports": [
+        "behavior",
+        "risk"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "app-system-provider",
+      "kind": "repo-code",
+      "title": "Live system provider mapping",
+      "location": "app/Services/TweakProviders/SystemTweakProvider.cs",
+      "summary": "The live app yields ClearEventLogsTweak for the System log directly from the first-party system provider.",
+      "supports": [
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "engine-system-event-log-command",
+      "kind": "repo-code",
+      "title": "Current System event-log cleanup implementation",
+      "location": "engine/Tweaks/Commands/Cleanup/ClearEventLogsTweak.cs",
+      "summary": "The engine tweak detects with wevtutil gli System and applies with wevtutil cl System without rollback support.",
+      "supports": [
+        "path",
+        "value",
+        "behavior"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "medium",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": false,
+    "restore_previous_supported": false,
+    "needs_vm_validation": true,
+    "why": "The live event-log clear behavior is clear and repo-backed, but this one-shot cleanup card still lives only in the first-party provider.",
+    "manual_review_required": true,
+    "blocking_issues": [
+      "The card has not yet been promoted from the first-party system provider into the research-provider surface.",
+      "Clearing the event log has no rollback path."
+    ],
+    "promotion_disposition": "rejected",
+    "promotion_disposition_kind": "non-reversible-or-high-risk-action",
+    "promotion_disposition_reason": "Closed as rejected for research-provider promotion because the live action is one-shot, destructive, high-risk, reboot-sensitive, or lacks a rollback story suitable for a validated tweak card.",
+    "promotion_reopen_criteria": "Reopen only if the app gains a verified rollback/snapshot contract and dedicated validation proof for the exact action.",
+    "promotion_disposition_reviewed_utc": "2026-05-07T20:20:00Z"
+  },
+  "last_reviewed_utc": "2026-05-07T20:20:00Z"
+}

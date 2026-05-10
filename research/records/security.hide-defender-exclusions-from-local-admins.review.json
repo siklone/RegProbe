@@ -259,6 +259,20 @@
         "ui-mapping"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "kvm-policy-revalidation-batch-20260505",
+      "kind": "runtime-read",
+      "title": "KVM machine-scope policy revalidation batch",
+      "location": "registry-research-framework/audit/kvm-policy-revalidation-batch-20260505.json",
+      "summary": "A KVM guest batch on build 26200 re-read selected machine-scope policy targets without changing guest configuration. The root Windows Defender policy path still exists on the live guest and HideExclusionsFromLocalAdmins remains absent in the current baseline state.",
+      "supports": [
+        "path",
+        "value",
+        "runtime-read",
+        "version-scope"
+      ],
+      "strength": "medium"
     }
   ],
   "decision": {
@@ -278,7 +292,7 @@
   "version_stable": [
     "25H2"
   ],
-  "last_reviewed_utc": "2026-03-25T09:05:00Z",
+  "last_reviewed_utc": "2026-05-05T13:13:57.1735609Z",
   "validation_proof": {
     "source_url": "evidence/files/vm-tooling-staging/hideexclusions-admins-root-1-20260325-002348/hideexclusions-admins-root-1.txt",
     "exact_quote_or_path": "wmiprvse.exe | RegQueryValue | HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\HideExclusionsFromLocalAdmins | SUCCESS | Type: REG_DWORD, Length: 4, Data: 1",

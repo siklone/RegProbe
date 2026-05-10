@@ -288,6 +288,20 @@
         "ui-mapping"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "kvm-user-scope-revalidation-batch-20260505",
+      "kind": "runtime-read",
+      "title": "KVM user-scope current-state revalidation batch",
+      "location": "registry-research-framework/audit/kvm-user-scope-revalidation-batch-20260505.json",
+      "supports": [
+        "path",
+        "runtime-read",
+        "default",
+        "version-scope"
+      ],
+      "strength": "medium",
+      "summary": "A KVM guest batch on build 26200 re-read the current interactive user environment without changing guest configuration. The live guest still shows the tracked CLI telemetry opt-out variables unset in the current user hive."
     }
   ],
   "decision": {
@@ -300,7 +314,7 @@
     "why": "Microsoft directly documents POWERSHELL_TELEMETRY_OPTOUT and DOTNET_CLI_TELEMETRY_OPTOUT as supported opt-out environment variables, and documents that persistent user environment variables are stored under HKEY_USERS\\<user>\\Environment, which corresponds to HKCU\\Environment for the current user. The app writes the documented opt-out value 1 for both variables on that exact user environment surface.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-24T19:15:00Z",
+  "last_reviewed_utc": "2026-05-06T00:27:35.2558263Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_environment_variables?view=powershell-7.5",
     "exact_quote_or_path": "PowerShell: `POWERSHELL_TELEMETRY_OPTOUT` and `To opt-out of telemetry, set the environment variable to true, yes, or 1.`; .NET CLI telemetry: `set the DOTNET_CLI_TELEMETRY_OPTOUT environment variable to 1 or true`; Win32_Environment: `HKEY_USERS\\<user>\\Environment`.",

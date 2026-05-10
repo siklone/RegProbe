@@ -56,7 +56,7 @@ Quick links: [Tweak Details](tweak-details.html) | [Tweak Catalog](tweak-catalog
 | `power.disable-cpu-parking` | `Docs/power/power.md` | yes | yes | yes | yes |
 | `power.disable-fast-startup` | `Docs/power/power.md` | yes | yes | yes | yes |
 | `power.disable-hibernation` | `Docs/power/power.md` | yes | yes | yes | yes |
-| `power.disable-network-power-saving` | `Docs/power/power.md` | yes | yes | yes | yes |
+| `power.disable-network-power-saving.policy` | `Docs/power/power.md` | yes | yes | yes | yes |
 | `power.disable-power-throttling` | `Docs/power/power.md` | yes | yes | yes | yes |
 | `power.disable-superfetch` | `Docs/power/power.md` | yes | yes | yes | yes |
 | `power.disable-windows-search` | `Docs/power/power.md` | yes | yes | yes | yes |

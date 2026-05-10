@@ -346,7 +346,12 @@
       "global-timer-resolution-intentional-hold-no-current-build-pivot",
       "global-timer-resolution-clean-wpr-subtree-only-no-value-hit-current-build",
       "global-timer-resolution-no-primary-current-build-doc"
-    ]
+    ],
+    "promotion_disposition": "rejected",
+    "promotion_disposition_kind": "intentional-hold-closed",
+    "promotion_disposition_reason": "Closed as rejected for app/research-provider promotion because the remaining evidence gap is intentional: current-build exact reads, safe trigger conditions, authoritative semantics, or boot-safe validation are still missing.",
+    "promotion_reopen_criteria": "Reopen only with a safer current-build lane that proves exact target consumption and resolves the listed intentional-hold blockers.",
+    "promotion_disposition_reviewed_utc": "2026-05-07T20:20:00Z"
   },
   "open_questions": [
     "Does the live current-build `KiGlobalTimerResolutionRequests = 0` state represent an unconditional built-in default, or a state that can still be overridden from `Session Manager\\\\Kernel` during boot or power-request activity?",
@@ -405,7 +410,7 @@
       "notes": "The 2026-04-23 quoted helper rerun captured an exact GlobalTimerResolutionRequests RegQueryValue event and stack, returning absent-value status on the clean baseline."
     }
   ],
-  "last_reviewed_utc": "2026-04-28T18:15:27Z",
+  "last_reviewed_utc": "2026-05-07T20:20:00Z",
   "no_hit_reason": "candidate-specific-absent: retained ReactOS and WRK source mirrors still carry no direct `GlobalTimerResolutionRequests` hit, and the record still lacks a non-helper runtime read plus Microsoft publication of the internal seed.",
   "source_enrichment": {
     "ghidra": true,

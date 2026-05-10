@@ -212,11 +212,16 @@
     "blocking_issues": [
       "The card still lives only in the first-party cleanup provider and has not been promoted into the research-provider surface.",
       "This is an on-demand maintenance action with no rollback support."
-    ]
+    ],
+    "promotion_disposition": "rejected",
+    "promotion_disposition_kind": "non-reversible-or-high-risk-action",
+    "promotion_disposition_reason": "Closed as rejected for research-provider promotion because the live action is one-shot, destructive, high-risk, reboot-sensitive, or lacks a rollback story suitable for a validated tweak card.",
+    "promotion_reopen_criteria": "Reopen only if the app gains a verified rollback/snapshot contract and dedicated validation proof for the exact action.",
+    "promotion_disposition_reviewed_utc": "2026-05-07T20:20:00Z"
   },
   "open_questions": [
     "Do we want a validated cleanup-command promotion lane that can surface one-shot DISM maintenance actions through the research provider?",
     "Should this card stay operator-only even after it has a checked-in research record?"
   ],
-  "last_reviewed_utc": "2026-05-02T20:32:36Z"
+  "last_reviewed_utc": "2026-05-07T20:20:00Z"
 }

@@ -193,6 +193,20 @@
         "transport-blocker"
       ],
       "strength": "medium"
+    },
+    {
+      "evidence_id": "vm-explorer.enable-explorer-compact-mode-etw-qga-unblock-20260507",
+      "kind": "etw-trace",
+      "title": "QGA-first ETW stackwalk runtime receipt for UseCompactMode",
+      "location": "evidence/captures/explorer-enable-explorer-compact-mode-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/explorer-enable-explorer-compact-mode-etw-qga-unblock-20260507/explorer-enable-explorer-compact-mode-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/explorer-enable-explorer-compact-mode-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/explorer-enable-explorer-compact-mode-etw-qga-unblock-20260507/explorer-enable-explorer-compact-mode-etw-qga-unblock-20260507.etl",
+      "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4484 registry events with 529 caller-stack events. The QGA-launched helper targeted `HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced` / `UseCompactMode` and the bundle contains target command/subkey activity, but no exact current-user HKCU `UseCompactMode` RegQueryValue event was observed under the SYSTEM QGA context.",
+      "supports": [
+        "runtime-observation",
+        "tooling-fix",
+        "path",
+        "version-scope"
+      ],
+      "strength": "medium"
     }
   ],
   "decision": {
@@ -205,7 +219,7 @@
     "why": "UseCompactMode is validated as a live Explorer runtime preference because Explorer.EXE queried both 1 and 0 on shell restart in reversible Procmon captures on this build, ExplorerFrame.dll decompiled to direct RegGetValueW reads for the same value under Explorer\\Advanced, the app writes the same enabled state, and the 25H2 raw registry dump corroborates that the value family is still present on current builds.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-29T19:20:00Z",
+  "last_reviewed_utc": "2026-05-07T13:32:29.7532101Z",
   "version_stable": [
     "25H2"
   ],
@@ -219,7 +233,7 @@
     "ghidra": true,
     "ghidra_status": "ui_component_handler_decompilation_retained",
     "ghidra_artifact": "evidence/raw/ghidra/explorer.enable-explorer-compact-mode/explorerframe-usecompactmode-ghidra.md",
-    "notes": "Retained ExplorerFrame decompilation plus reversible Procmon reads already close the Windows-side handler for UseCompactMode, while the retained ReactOS/WRK corpus adds no candidate-specific corroboration. A bounded 2026-04-24 KVM ETW stackwalk retry for UseCompactMode advanced to artifact-upload but still timed out before any ETL, XML, or normalized bundle reached the host. The repo now retains summary and stage receipts only, so the ETW lane is reviewed but transport-blocked.",
+    "notes": "Retained ExplorerFrame decompilation plus reversible Procmon reads already close the Windows-side handler for UseCompactMode, while the retained ReactOS/WRK corpus adds no candidate-specific corroboration. A bounded 2026-04-24 KVM ETW stackwalk retry for UseCompactMode advanced to artifact-upload but still timed out before any ETL, XML, or normalized bundle reached the host. The repo now retains summary and stage receipts only, so the ETW lane is reviewed but transport-blocked. A 2026-05-07 QGA-first ETW stackwalk rerun cleared the earlier ETW ingest/upload blocker and produced host-ingested artifacts for `UseCompactMode`, but no exact current-user HKCU value query was observed under the SYSTEM QGA context.",
     "last_updated_utc": "2026-04-28T11:11:34Z",
     "source_mirror_reviewed": {
       "reactos": true,
@@ -243,10 +257,10 @@
     },
     "runtime_capture_reviewed": {
       "etw-stackwalk": true,
-      "status": "artifact_upload_timeout"
+      "status": "qga_unblocked_ingest_ok"
     },
     "etw_stackwalk_reviewed": true,
-    "etw_stackwalk_review_status": "artifact_upload_timeout",
-    "etw_stackwalk_review_artifact": "evidence/captures/explorer-enable-explorer-compact-mode-etw-stackwalk-attempt-20260424.json"
+    "etw_stackwalk_review_status": "qga_unblocked_ingest_ok",
+    "etw_stackwalk_review_artifact": "evidence/captures/explorer-enable-explorer-compact-mode-etw-qga-unblock-20260507.json"
   }
 }

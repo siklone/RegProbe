@@ -212,11 +212,16 @@
     "blocking_issues": [
       "The card still ships only as a first-party network utility and has not been promoted into the research-provider surface.",
       "This is a one-shot troubleshooting action without rollback."
-    ]
+    ],
+    "promotion_disposition": "rejected",
+    "promotion_disposition_kind": "non-reversible-or-high-risk-action",
+    "promotion_disposition_reason": "Closed as rejected for research-provider promotion because the live action is one-shot, destructive, high-risk, reboot-sensitive, or lacks a rollback story suitable for a validated tweak card.",
+    "promotion_reopen_criteria": "Reopen only if the app gains a verified rollback/snapshot contract and dedicated validation proof for the exact action.",
+    "promotion_disposition_reviewed_utc": "2026-05-07T20:20:00Z"
   },
   "open_questions": [
     "Do we want one-shot repair actions like DNS cache flush to live in the long-term research corpus, or should they stay app-only by policy?",
     "If promoted later, should these command utilities live in a dedicated repair/maintenance surface instead of the normal research card lane?"
   ],
-  "last_reviewed_utc": "2026-05-02T20:32:36Z"
+  "last_reviewed_utc": "2026-05-07T20:20:00Z"
 }

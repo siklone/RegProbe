@@ -262,6 +262,20 @@
         "investigation-open-question"
       ],
       "strength": "medium"
+    },
+    {
+      "evidence_id": "vm-system.reliability-timestamp-enabled-etw-qga-unblock-20260507",
+      "kind": "etw-trace",
+      "title": "QGA-first ETW stackwalk runtime receipt for TimeStampEnabled",
+      "location": "evidence/captures/system-reliability-timestamp-enabled-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/system-reliability-timestamp-enabled-etw-qga-unblock-20260507/system-reliability-timestamp-enabled-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/system-reliability-timestamp-enabled-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/system-reliability-timestamp-enabled-etw-qga-unblock-20260507/system-reliability-timestamp-enabled-etw-qga-unblock-20260507.etl",
+      "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4441 registry events with 524 caller-stack events. The QGA-launched helper targeted `HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Reliability` / `TimeStampEnabled` and the bundle contains target-key activity, but no exact `TimeStampEnabled` RegQueryValue event was observed on the clean baseline.",
+      "supports": [
+        "runtime-observation",
+        "tooling-fix",
+        "path",
+        "version-scope"
+      ],
+      "strength": "medium"
     }
   ],
   "decision": {
@@ -280,7 +294,7 @@
     "Which live reliability or WER code path on 25H2 still issues the runtime reads seen in the decompiled function?",
     "Is the 25H2 live path limited to adjacent DiagTrack Reliability branches while TimeStampEnabled stays historical or dormant?"
   ],
-  "last_reviewed_utc": "2026-04-28T06:11:02Z",
+  "last_reviewed_utc": "2026-05-07T10:17:56.6291565Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-admx-reliability",
     "exact_quote_or_path": "EE_EnablePersistentTimeStamp -> Registry Key Name Software\\\\Policies\\\\Microsoft\\\\Windows NT\\\\Reliability, Registry Value Name TimeStampEnabled. If you enable this policy setting, you are able to specify how often the Persistent System Timestamp is refreshed and subsequently written to the disk. You can specify the Timestamp Interval in seconds.",
@@ -314,9 +328,13 @@
       "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "No candidate-specific WRK source mirror hit is retained for `TimeStampEnabled` or `TimeStampInterval`; this record stays official-doc and retained diagtrack-analysis backed."
     },
-    "notes": "This record is now explicit about its retained Ghidra lane and its ReactOS/WRK zero-exact-target-hits status. The strongest proof still comes from the Microsoft ADMX_Reliability contract plus retained Procmon and DiagTrack-focused analysis. A bounded 2026-04-24 ETW stackwalk rerun retained a physical ETL/XML bundle for the target path, but no exact value-touch event was recovered; this remains a runtime review artifact.",
+    "notes": "This record is now explicit about its retained Ghidra lane and its ReactOS/WRK zero-exact-target-hits status. The strongest proof still comes from the Microsoft ADMX_Reliability contract plus retained Procmon and DiagTrack-focused analysis. A bounded 2026-04-24 ETW stackwalk rerun retained a physical ETL/XML bundle for the target path, but no exact value-touch event was recovered; this remains a runtime review artifact. A 2026-05-07 QGA-first ETW stackwalk rerun cleared the earlier ETW blocker and produced target-key runtime activity, but no exact `TimeStampEnabled` value query was observed in the normalized bundle.",
     "etw_stackwalk_reviewed": true,
-    "etw_stackwalk_review_status": "no_exact_target_hit",
-    "etw_stackwalk_review_artifact": "evidence/captures/system-reliability-timestamp-enabled-etw-stackwalk-20260424.json"
+    "etw_stackwalk_review_status": "qga_unblocked_ingest_ok",
+    "etw_stackwalk_review_artifact": "evidence/captures/system-reliability-timestamp-enabled-etw-qga-unblock-20260507.json",
+    "runtime_capture_reviewed": {
+      "etw-stackwalk": true,
+      "status": "qga_unblocked_ingest_ok"
+    }
   }
 }

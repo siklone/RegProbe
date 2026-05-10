@@ -57,4 +57,4 @@ Within this repo, that is enough to close the old `runtime_no_read` blocker. The
 
 ## Retained audit artifact
 
-- [system-executive-uuid-sequence-number-wpr-qga-runtime-read-20260413.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/system-executive-uuid-sequence-number-wpr-qga-runtime-read-20260413.json)
+- [system-executive-uuid-sequence-number-wpr-qga-runtime-read-20260413.json](../../registry-research-framework/audit/system-executive-uuid-sequence-number-wpr-qga-runtime-read-20260413.json)

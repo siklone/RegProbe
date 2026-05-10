@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-07T09:18:27.7900259Z",
+  "record_id": "privacy.disable-resume",
+  "run_id": "privacy-disable-resume-etw-qga-unblock-20260507",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "registry_path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CrossDeviceResume\\Configuration",
+  "value_name": "IsResumeAllowed",
+  "attempt_status": "qga_unblocked_ingest_ok",
+  "assessment": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and a normalized bundle with 4475 registry events and 524 caller-stack events. The QGA-launched helper targeted HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CrossDeviceResume\\Configuration / IsResumeAllowed and the bundle contains target-key activity, but no exact RegQueryValue event for IsResumeAllowed was observed on the clean baseline.",
+  "target_observation": {
+    "exact_value_query": false,
+    "operation": "RegOpenKey",
+    "representative_status": "0xC0000034",
+    "event_count": 4475,
+    "caller_stack_event_count": 524,
+    "target_key_event_count": 6,
+    "target_value_event_count": 0,
+    "target_command_event_count": 1,
+    "launch_transport": "qga"
+  },
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/privacy-disable-resume-etw-qga-unblock-20260507/privacy-disable-resume-etw-qga-unblock-20260507-summary.json",
+      "sha256": "dea5c986d9c2ffac618b431908da8c3c96ab5890ffe1e1884b98e544e872de51",
+      "size": 7519,
+      "collected_utc": "2026-05-07T09:18:27.7900259Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/privacy-disable-resume-etw-qga-unblock-20260507/normalized-registry-bundle.json",
+      "sha256": "67b400c33b4ab6196161322a70476d702c146ceaeebc15662392b37b388fcff3",
+      "size": 5318529,
+      "collected_utc": "2026-05-07T09:18:27.7900259Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/privacy-disable-resume-etw-qga-unblock-20260507/privacy-disable-resume-etw-qga-unblock-20260507.etl",
+      "sha256": "08982f7fbff97ccc57c3955b9022258ab7ad89f7c1cc28d3e7027bd9e90c0147",
+      "size": 12582912,
+      "collected_utc": "2026-05-07T09:18:27.7900259Z"
+    }
+  ]
+}

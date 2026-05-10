@@ -350,8 +350,17 @@
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "The Executive worker-thread pair now has a clean baseline export, a bounded boot-time ETL extract that proves early Session Manager\\Executive activity from System (PID 4), exact current-build ntoskrnl string hits, current-build Ghidra fallback artifacts, a supporting live KVM local-KD symbol query for the exact `ExpAdditional*` data names, a matching live KVM value dump that still shows the pair at `0 / 0`, and a tools-hardened lightweight ETW follow-up that produced exact RegQueryValue hits for both AdditionalCriticalWorkerThreads and AdditionalDelayedWorkerThreads under a concurrent burst trigger. That is enough for Class A within this project even though the lane remains research-only and not app-actionable.",
-    "blocking_issues": []
+    "why": "The Executive worker-thread pair now has a clean baseline export, a bounded boot-time ETL extract that proves early Session Manager\\Executive activity from System (PID 4), exact current-build ntoskrnl string hits, current-build Ghidra fallback artifacts, a supporting live KVM local-KD symbol query for the exact `ExpAdditional*` data names, a matching live KVM value dump that still shows the pair at `0 / 0`, and a tools-hardened lightweight ETW follow-up that produced exact RegQueryValue hits for both AdditionalCriticalWorkerThreads and AdditionalDelayedWorkerThreads under a concurrent burst trigger. That is enough for Class A within this project, but the 2026-05-08 promotion review pack closes the product decision as intentional hold because manual worker-thread overrides require per-machine profiling and can regress context-switch behavior on low-vCPU systems.",
+    "manual_review_required": false,
+    "blocking_issues": [],
+    "hold_status": "intentional-hold-closed",
+    "hold_reason": "nt_auto_calculates_based_on_core_count_manual_override_requires_per_machine_profiling_risk_of_context_switch_regression_on_low_vcpu_systems",
+    "safe_default": "absent_or_auto",
+    "future_condition": "when_empirical_benchmarking_data_exists_for_target_hardware_profile",
+    "promotion_disposition": "rejected",
+    "promotion_disposition_kind": "intentional-hold-closed",
+    "promotion_disposition_reason": "Closed as intentional hold because NT auto-calculates executive worker-thread sizing from the machine profile, while non-default overrides require per-machine profiling and can regress context-switch behavior on low-core or low-vCPU systems.",
+    "promotion_disposition_reviewed_utc": "2026-05-08T10:03:46Z"
   },
   "open_questions": [
     "Can a cleaner symbol or binary target produce a higher-confidence semantic map than the current forced-boundary ntoskrnl fallback blocks?",
@@ -402,7 +411,7 @@
     "etw_stackwalk_status": "exact_helper_query_capture_pair",
     "etw_stackwalk_artifact": "evidence/files/vm-tooling-staging/executive-worker-threads-lightweight-runtime-20260330-122422/system-executive-additional-worker-threads/summary.json"
   },
-  "last_reviewed_utc": "2026-04-28T11:11:34Z",
+  "last_reviewed_utc": "2026-05-08T10:03:46Z",
   "version_stable": [
     "25H2"
   ]

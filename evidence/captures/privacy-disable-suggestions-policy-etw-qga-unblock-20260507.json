@@ -1,0 +1,128 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-07T15:07:22.697871Z",
+  "record_id": "privacy.disable-suggestions.policy",
+  "run_id": "privacy-disable-suggestions-policy-etw-qga-unblock-20260507",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "attempt_status": "qga_unblocked_ingest_ok",
+  "assessment": "A 2026-05-07 QGA-first ETW stackwalk rerun produced host-ingested ETL/XML artifacts and normalized bundles for 3 HKCU-oriented target value(s): `DisableThirdPartySuggestions`, `DisableWindowsSpotlightOnSettings`, `DisableWindowsSpotlightWindowsWelcomeExperience`. Because the QGA helper runs as SYSTEM, the bundles contain target `reg.exe query` command activity but 0/3 exact current-user HKCU value-query events. This clears the earlier tracerpt/artifact-upload/ingest blocker for the probe pipeline, but it is not current-user product-consumer proof.",
+  "aggregate_observation": {
+    "target_count": 3,
+    "exact_probe_value_query_count": 0,
+    "current_user_hkcu_value_query_count": 0,
+    "all_artifacts_ingested": true,
+    "launch_transport": "qga",
+    "probe_read_not_product_consumer_proof": true,
+    "system_qga_context": true
+  },
+  "target_observations": [
+    {
+      "run_id": "privacy-disable-suggestions-policy-disablethirdpartysuggestions-etw-qga-unblock-20260507",
+      "registry_path": "HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent",
+      "value_name": "DisableThirdPartySuggestions",
+      "exact_probe_value_query": false,
+      "current_user_hkcu_value_query": false,
+      "operation": "RegQueryValue",
+      "representative_status": null,
+      "event_count": 4444,
+      "caller_stack_event_count": 524,
+      "target_key_event_count": 0,
+      "target_value_event_count": 0,
+      "exact_target_value_event_count": 0,
+      "current_user_hkcu_value_event_count": 0,
+      "target_command_event_count": 2,
+      "launch_transport": "qga"
+    },
+    {
+      "run_id": "privacy-disable-suggestions-policy-disablewindowsspotlightonsettings-etw-qga-unblock-20260507",
+      "registry_path": "HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent",
+      "value_name": "DisableWindowsSpotlightOnSettings",
+      "exact_probe_value_query": false,
+      "current_user_hkcu_value_query": false,
+      "operation": "RegQueryValue",
+      "representative_status": null,
+      "event_count": 4449,
+      "caller_stack_event_count": 527,
+      "target_key_event_count": 0,
+      "target_value_event_count": 0,
+      "exact_target_value_event_count": 0,
+      "current_user_hkcu_value_event_count": 0,
+      "target_command_event_count": 2,
+      "launch_transport": "qga"
+    },
+    {
+      "run_id": "privacy-disable-suggestions-policy-disablewindowsspotlightwindowswelcomeexperience-etw-qga-unblock-20260507",
+      "registry_path": "HKCU\\Software\\Policies\\Microsoft\\Windows\\CloudContent",
+      "value_name": "DisableWindowsSpotlightWindowsWelcomeExperience",
+      "exact_probe_value_query": false,
+      "current_user_hkcu_value_query": false,
+      "operation": "RegQueryValue",
+      "representative_status": null,
+      "event_count": 4675,
+      "caller_stack_event_count": 684,
+      "target_key_event_count": 0,
+      "target_value_event_count": 0,
+      "exact_target_value_event_count": 0,
+      "current_user_hkcu_value_event_count": 0,
+      "target_command_event_count": 2,
+      "launch_transport": "qga"
+    }
+  ],
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/privacy-disable-suggestions-policy-disablethirdpartysuggestions-etw-qga-unblock-20260507/privacy-disable-suggestions-policy-disablethirdpartysuggestions-etw-qga-unblock-20260507-summary.json",
+      "sha256": "c24f0115173c073ebc81d0a6bb90328c7441e57038f5b18c0ecc887378e7df7c",
+      "size": 8723,
+      "collected_utc": "2026-05-07T14:48:35.2569818Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/privacy-disable-suggestions-policy-disablethirdpartysuggestions-etw-qga-unblock-20260507/normalized-registry-bundle.json",
+      "sha256": "5bef28f55c7aa75013277790fd2576181ad6f638984d01988972605d1137235c",
+      "size": 6193263,
+      "collected_utc": "2026-05-07T14:48:35.2569818Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/privacy-disable-suggestions-policy-disablethirdpartysuggestions-etw-qga-unblock-20260507/privacy-disable-suggestions-policy-disablethirdpartysuggestions-etw-qga-unblock-20260507.etl",
+      "sha256": "7c9f366e14bc95f145337bf421329744ecd9e9338e4107571288630b413769bc",
+      "size": 12582912,
+      "collected_utc": "2026-05-07T14:48:35.2569818Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/privacy-disable-suggestions-policy-disablewindowsspotlightonsettings-etw-qga-unblock-20260507/privacy-disable-suggestions-policy-disablewindowsspotlightonsettings-etw-qga-unblock-20260507-summary.json",
+      "sha256": "d15ec6757ac1fed90aa1544d70a4f00920c9d6ea2cbb952b1c7cc5d4d5673c87",
+      "size": 8883,
+      "collected_utc": "2026-05-07T14:50:08.6199398Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/privacy-disable-suggestions-policy-disablewindowsspotlightonsettings-etw-qga-unblock-20260507/normalized-registry-bundle.json",
+      "sha256": "1d44223eea0291529e9a7925bae8b57240a1485cff3dd4a4b3b7aad0b666810d",
+      "size": 6312608,
+      "collected_utc": "2026-05-07T14:50:08.6199398Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/privacy-disable-suggestions-policy-disablewindowsspotlightonsettings-etw-qga-unblock-20260507/privacy-disable-suggestions-policy-disablewindowsspotlightonsettings-etw-qga-unblock-20260507.etl",
+      "sha256": "81104f534ed284230e48690358c92354aa08e00e469a3def8bde83e3d2b6241a",
+      "size": 12582912,
+      "collected_utc": "2026-05-07T14:50:08.6199398Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/privacy-disable-suggestions-policy-disablewindowsspotlightwindowswelcomeexperience-etw-qga-unblock-20260507/privacy-disable-suggestions-policy-disablewindowsspotlightwindowswelcomeexperience-etw-qga-unblock-20260507-summary.json",
+      "sha256": "9f19c953fed2e22f61b7fc03dcc807b1c57b4514c2ad97fa4ad7e05a80de2d80",
+      "size": 9331,
+      "collected_utc": "2026-05-07T14:51:40.1682904Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/privacy-disable-suggestions-policy-disablewindowsspotlightwindowswelcomeexperience-etw-qga-unblock-20260507/normalized-registry-bundle.json",
+      "sha256": "50d4d4779f1ffb58cce990aec18dabc66732180c27f6a3df4cfa23466cb6766e",
+      "size": 7048169,
+      "collected_utc": "2026-05-07T14:51:40.1682904Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/privacy-disable-suggestions-policy-disablewindowsspotlightwindowswelcomeexperience-etw-qga-unblock-20260507/privacy-disable-suggestions-policy-disablewindowsspotlightwindowswelcomeexperience-etw-qga-unblock-20260507.etl",
+      "sha256": "d546798767270558916d6a6121427a2ea237741dcf47ca2a347f112768920db9",
+      "size": 12845056,
+      "collected_utc": "2026-05-07T14:51:40.1682904Z"
+    }
+  ]
+}

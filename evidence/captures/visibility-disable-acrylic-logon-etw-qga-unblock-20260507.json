@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-07T09:41:24.3749056Z",
+  "record_id": "visibility.disable-acrylic-logon",
+  "run_id": "visibility-disable-acrylic-logon-etw-qga-unblock-20260507",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "registry_path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\System",
+  "value_name": "DisableAcrylicBackgroundOnLogon",
+  "attempt_status": "qga_unblocked_ingest_ok",
+  "assessment": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and a normalized bundle with 4620 registry events and 636 caller-stack events. The bundle contains an exact RegQueryValue event for HKLM\\Software\\Policies\\Microsoft\\Windows\\System / DisableAcrylicBackgroundOnLogon from the helper probe, returning 0xC0000034 on the clean baseline.",
+  "target_observation": {
+    "exact_value_query": true,
+    "operation": "RegQueryValue",
+    "representative_status": "0xC0000034",
+    "event_count": 4620,
+    "caller_stack_event_count": 636,
+    "target_key_event_count": 59,
+    "target_value_event_count": 1,
+    "target_command_event_count": 2,
+    "launch_transport": "qga"
+  },
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/visibility-disable-acrylic-logon-etw-qga-unblock-20260507/visibility-disable-acrylic-logon-etw-qga-unblock-20260507-summary.json",
+      "sha256": "e2094fc3c382b2e8414814019ef5eb3eb20d07d7038758e3c437e7c46e9240c5",
+      "size": 7787,
+      "collected_utc": "2026-05-07T09:41:24.3749056Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/visibility-disable-acrylic-logon-etw-qga-unblock-20260507/normalized-registry-bundle.json",
+      "sha256": "1c022aa016dea722238faa0cdea0a3c60e366ff2b85b289a25ced6a591d8a8e5",
+      "size": 5746445,
+      "collected_utc": "2026-05-07T09:41:24.3749056Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/visibility-disable-acrylic-logon-etw-qga-unblock-20260507/visibility-disable-acrylic-logon-etw-qga-unblock-20260507.etl",
+      "sha256": "bbb014eabd30738833247d8a62a4c0429603fa9d0b8c48cfca869b8f05ea0436",
+      "size": 12845056,
+      "collected_utc": "2026-05-07T09:41:24.3749056Z"
+    }
+  ]
+}

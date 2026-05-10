@@ -1,0 +1,256 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "power.disable-superfetch",
+  "tweak_id": "power.disable-superfetch",
+  "record_status": "validated",
+  "summary": "Validated audit trail for the live Disable Superfetch (SysMain) card. The app ships the current SysMain service stop command action through the first-party provider, and 2026-05-08 clean-baseline VM app QA now proves detect/apply/verify/rollback from a running SysMain baseline.",
+  "setting": {
+    "name": "Disable Superfetch (SysMain)",
+    "category": "Power",
+    "area": "SysMain Service Stop Command",
+    "scope": "device",
+    "casual_explanation": "This runs the current app command that stops the SysMain service if it is running.",
+    "why_people_change_it": "People use it when they want to test the current app's SysMain stop action without changing the longer-term research-backed service records.",
+    "tradeoffs_overview": "The command is explicit and the app can start the service again during rollback, but this card still lives only in the first-party provider and is not a validated research-provider preset.",
+    "professional_notes": "The current app still exposes this tweak through app/Services/TweakProviders/PerformanceTweakProvider.cs and engine/Tweaks/Commands/Performance/DisableSuperfetchTweak.cs. The current engine tweak detects with sc query SysMain, applies sc stop SysMain, and uses sc start SysMain for rollback when the previous state was running. This record keeps the live behavior documented without publishing it as a validated research-provider card yet.",
+    "targets": [
+      {
+        "target_id": "sysmain-service-command",
+        "location_kind": "command",
+        "path": "sc.exe SysMain",
+        "value_name": "ServiceState",
+        "value_type": "enum",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Windows or tool default",
+            "meaning": "The current service state is observed at runtime rather than assumed by this review record.",
+            "evidence_ids": [
+              "repo-tweak-provenance",
+              "engine-implementation"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": "Stopped",
+            "label": "Stop SysMain",
+            "meaning": "Runs the checked-in sc stop SysMain action after querying the current service state.",
+            "evidence_ids": [
+              "repo-tweak-provenance",
+              "app-provider",
+              "engine-implementation",
+              "vm-power.disable-superfetch-app-qa-clean-baseline-20260508"
+            ]
+          }
+        ],
+        "notes": "The current engine tweak detects with sc query SysMain, applies sc stop SysMain, waits for the service transition to settle, and uses sc start SysMain for rollback when the previous state was running."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/PerformanceTweakProvider.cs",
+    "notes": "The live app ships this first-party card outside the validated research-provider surface. Promotion gate now treats this checked-in implementation as matching the research record.",
+    "writes": [
+      {
+        "target_id": "sysmain-service-command",
+        "path": "sc.exe SysMain",
+        "value_name": "ServiceState",
+        "value_type": "enum",
+        "state_kind": "value",
+        "value": "Stopped",
+        "notes": "The current engine tweak detects with sc query SysMain, applies sc stop SysMain, and uses sc start SysMain for rollback when the previous state was running."
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Hold current or default state",
+      "applies_to": "Research tracking and backlog reduction only",
+      "states": [
+        {
+          "target_id": "sysmain-service-command",
+          "state_kind": "feature-dependent",
+          "value": null,
+          "rationale": "Keep the current or default state until this first-party card completes the research-provider promotion path."
+        }
+      ],
+      "notes": "This review record documents the live card without promoting it into the validated research-provider surface.",
+      "evidence_ids": [
+        "repo-tweak-provenance",
+        "engine-implementation"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "hold-for-research",
+      "label": "Windows/default hold",
+      "intended_for": [
+        "Research tracking only",
+        "Backlog reduction"
+      ],
+      "avoid_for": [
+        "Published presets",
+        "General users"
+      ],
+      "states": [
+        {
+          "target_id": "sysmain-service-command",
+          "state_kind": "feature-dependent",
+          "value": null,
+          "rationale": "Keep the current or default state until this first-party card completes the research-provider promotion path."
+        }
+      ],
+      "good_when": "You want to leave the system at the existing/default state.",
+      "bad_when": "You want to apply the current RegProbe app profile.",
+      "tradeoffs": [
+        "The live app behavior is represented in the corpus.",
+        "The card remains held outside the validated research-provider surface."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "repo-tweak-provenance",
+        "app-provider"
+      ]
+    },
+    {
+      "profile_id": "current-app-profile",
+      "label": "Current app profile",
+      "intended_for": [
+        "Current app behavior",
+        "VM app QA",
+        "Research comparison"
+      ],
+      "avoid_for": [
+        "Systems where the listed tradeoffs are unacceptable"
+      ],
+      "states": [
+        {
+          "target_id": "sysmain-service-command",
+          "state_kind": "value",
+          "value": "Stopped",
+          "rationale": "Capture the exact state or profile that the current app card writes."
+        }
+      ],
+      "good_when": "You are auditing the exact state or profile that the current app currently writes.",
+      "bad_when": "You need a validated research-provider card.",
+      "tradeoffs": [
+        "The current app action is explicit.",
+        "The app QA path mutates the SysMain service and then restores the running baseline through rollback."
+      ],
+      "apply_allowed": true,
+      "notes": "2026-05-08 VM app QA started from a manual/running SysMain baseline, applied the tweak, verified the stopped target state, rolled back, and detected the restored running state.",
+      "evidence_ids": [
+        "repo-tweak-provenance",
+        "app-provider",
+        "engine-implementation",
+        "vm-power.disable-superfetch-app-qa-20260507",
+        "vm-power.disable-superfetch-app-qa-clean-baseline-20260508"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "repo-tweak-provenance",
+      "kind": "repo-doc",
+      "title": "Repo tweak provenance for power.disable-superfetch",
+      "location": "Docs/tweaks/tweak-provenance.md",
+      "summary": "The checked-in tweak provenance tables map power.disable-superfetch to the current repo implementation.",
+      "supports": [
+        "ui-mapping",
+        "behavior"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "app-provider",
+      "kind": "repo-code",
+      "title": "Live provider mapping",
+      "location": "app/Services/TweakProviders/PerformanceTweakProvider.cs",
+      "summary": "The live app still surfaces power.disable-superfetch through the first-party provider.",
+      "supports": [
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "engine-implementation",
+      "kind": "repo-code",
+      "title": "Current engine implementation",
+      "location": "engine/Tweaks/Commands/Performance/DisableSuperfetchTweak.cs",
+      "summary": "The current engine implementation defines the checked-in sysmain service stop command behavior for this card.",
+      "supports": [
+        "path",
+        "value",
+        "behavior"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "vm-power.disable-superfetch-app-qa-20260507",
+      "kind": "vm-test",
+      "title": "RegProbe app QA already-applied observation for power.disable-superfetch",
+      "location": "evidence/captures/power-disable-superfetch-app-qa-20260507.json",
+      "summary": "Status already-applied: The tweak already matched the desired state; the app verified it and skipped rollback because no mutation was performed. The VM baseline already matched the desired SysMain state, so the app verified the state and skipped rollback because no mutation was performed.",
+      "supports": [
+        "value",
+        "behavior",
+        "ui-mapping"
+      ],
+      "strength": "medium",
+      "artifact_status": "present"
+    },
+    {
+      "evidence_id": "vm-power.disable-superfetch-app-qa-clean-baseline-20260508",
+      "kind": "vm-test",
+      "title": "RegProbe app QA clean-baseline mutation proof for power.disable-superfetch",
+      "location": "evidence/captures/power-disable-superfetch-app-qa-clean-baseline-20260508.json",
+      "summary": "Status ok-gated-override: QA-only gated mutation override used; apply/verify path completed and rollback restored the running SysMain baseline. The VM baseline started with SysMain running, the app detected the not-applied state, applied the stop command, verified the optimized target, rolled back with sc start SysMain, and detected the restored running state.",
+      "supports": [
+        "value",
+        "behavior",
+        "rollback",
+        "ui-mapping"
+      ],
+      "strength": "high",
+      "artifact_status": "present"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": true,
+    "restore_default_supported": false,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Validation proof, provider mapping, checked-in command implementation, and 2026-05-08 clean-baseline VM app QA now align. The QA run proved detect/apply/verify/rollback from a running SysMain baseline and restored the original running state.",
+    "manual_review_required": false,
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-05-08T08:40:00Z",
+  "validation_proof": {
+    "source_url": "Docs/SERVICES_DOCUMENTATION.md",
+    "exact_quote_or_path": "Docs/SERVICES_DOCUMENTATION.md:19 lists SysMain as the service that prefetches application data; Docs/tweaks/tweak-catalog.md:57 maps power.disable-superfetch to the SysMain command implementation.",
+    "notes": "The service documentation identifies SysMain/Superfetch behavior, and the tweak catalog maps the shipped card to the checked-in command implementation.",
+    "key_found_on_page": true
+  },
+  "tested_on": [
+    {
+      "environment": "KVM VM via QGA app QA",
+      "os": "Windows 11",
+      "edition": "25H2 session",
+      "build": "26100",
+      "notes": "2026-05-07 RegProbe app QA status already-applied; artifact evidence/captures/power-disable-superfetch-app-qa-20260507.json."
+    },
+    {
+      "environment": "KVM VM via QGA app QA",
+      "os": "Windows 11",
+      "edition": "25H2 session",
+      "build": "26100",
+      "notes": "2026-05-08 clean-baseline app QA proved detect/apply/verify/rollback from a running SysMain baseline; artifacts evidence/captures/power-disable-superfetch-app-qa-clean-baseline-20260508.json and evidence/captures/app-qa-superfetch-clean-baseline-20260508.json."
+    }
+  ]
+}

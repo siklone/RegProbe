@@ -212,11 +212,16 @@
     "blocking_issues": [
       "The card has not yet been promoted into the research-provider surface.",
       "This is a one-shot destructive cleanup action without rollback."
-    ]
+    ],
+    "promotion_disposition": "rejected",
+    "promotion_disposition_kind": "non-reversible-or-high-risk-action",
+    "promotion_disposition_reason": "Closed as rejected for research-provider promotion because the live action is one-shot, destructive, high-risk, reboot-sensitive, or lacks a rollback story suitable for a validated tweak card.",
+    "promotion_reopen_criteria": "Reopen only if the app gains a verified rollback/snapshot contract and dedicated validation proof for the exact action.",
+    "promotion_disposition_reviewed_utc": "2026-05-07T20:20:00Z"
   },
   "open_questions": [
     "Should destructive cleanup actions like empty-recycle-bin stay outside the research-provider lane even after they have corpus coverage?",
     "Do we want guest-side QA for destructive cleanup cards before any future promotion?"
   ],
-  "last_reviewed_utc": "2026-05-02T20:32:36Z"
+  "last_reviewed_utc": "2026-05-07T20:20:00Z"
 }

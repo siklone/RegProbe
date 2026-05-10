@@ -1,0 +1,533 @@
+[
+  {
+    "tweak_id": "power.disable-superfetch",
+    "host_exit": 0,
+    "execution_exit": 0,
+    "payload_status": "completed",
+    "report_source": "stdout",
+    "report_parse_error": null,
+    "report_fetch_status": null,
+    "report_app_success": true,
+    "report_success": true,
+    "report_status": "already-applied",
+    "report_summary": "The tweak already matched the desired state; the app verified it and skipped rollback because no mutation was performed.",
+    "report_contract_status": "ok",
+    "report_contract_summary": "QA card snapshot contract passed.",
+    "report_contract_failures": [],
+    "report_card_present": true,
+    "report_card_has_claim_boundary": true,
+    "report_card_present_fields": [
+      "TweakId",
+      "Name",
+      "Category",
+      "EvidenceClass",
+      "ResearchStatus",
+      "RollbackSnapshotState",
+      "HasClaimBoundary",
+      "WhatWeKnowSummary",
+      "WhatWeDoNotClaimSummary",
+      "ProofLanes"
+    ],
+    "report_card_missing_fields": [],
+    "report_card_proof_lanes": [
+      "docs",
+      "runtime",
+      "source",
+      "rollback"
+    ],
+    "report_card_missing_proof_lanes": [],
+    "report": {
+      "TweakId": "power.disable-superfetch",
+      "TweakName": "Disable Superfetch (SysMain)",
+      "Success": true,
+      "Status": "already-applied",
+      "Summary": "The tweak already matched the desired state; the app verified it and skipped rollback because no mutation was performed.",
+      "RollbackRequested": true,
+      "GatedMutationOverrideRequested": true,
+      "GatedMutationOverrideUsed": true,
+      "Card": {
+        "TweakId": "power.disable-superfetch",
+        "Name": "Disable Superfetch (SysMain)",
+        "Category": "Power",
+        "Description": "Disables the SysMain service that preloads frequently used applications and maintains usage heuristics.",
+        "FriendlyDescription": "Disables the SysMain service that preloads frequently used applications and maintains usage heuristics.",
+        "RegistryPath": "",
+        "EvidenceClass": "B",
+        "EvidenceClassTitle": "Strong but Decision-Gated",
+        "ResearchStatus": "INTENTIONAL HOLD",
+        "IsMutationAllowed": false,
+        "RollbackSnapshotState": "ready",
+        "RollbackStoryText": "Rollback: Verified via record-restore-story.",
+        "HasClaimBoundary": true,
+        "WhatWeKnowSummary": "Claim: Disables the SysMain service that preloads frequently used applications and maintains usage heuristics. Evidence: The service documentation identifies SysMain/Superfetch behavior, and the tweak catalog maps the shipped card to the checked-in command implementation. Rollback: Rollback: Verified via record-restore-story.",
+        "WhatWeDoNotClaimSummary": "Apply gate: Evidence pending Source boundary: Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+        "ProofLanes": [
+          {
+            "Key": "docs",
+            "Label": "DOCS",
+            "State": "ready",
+            "Summary": "The service documentation identifies SysMain/Superfetch behavior, and the tweak catalog maps the shipped card to the checked-in command implementation.",
+            "Source": "Validation proof source: Docs/SERVICES_DOCUMENTATION.md"
+          },
+          {
+            "Key": "runtime",
+            "Label": "RUNTIME",
+            "State": "ready",
+            "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+            "Source": ""
+          },
+          {
+            "Key": "source",
+            "Label": "SOURCE",
+            "State": "ready",
+            "Summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+            "Source": "decompiled-pseudocode / mmcss: https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss"
+          },
+          {
+            "Key": "rollback",
+            "Label": "ROLLBACK",
+            "State": "ready",
+            "Summary": "Rollback: Verified via record-restore-story.",
+            "Source": "record-restore-story"
+          }
+        ],
+        "ReferenceLinks": [
+          {
+            "Title": "Windows Internals resource page",
+            "Url": "https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals",
+            "Kind": "Docs"
+          },
+          {
+            "Title": "Docs: Details",
+            "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html#power.disable-superfetch",
+            "Kind": "Details"
+          },
+          {
+            "Title": "Docs: Power",
+            "Url": "C:\\Tools\\AppSmoke\\Docs\\power\\power.md#power.disable-superfetch",
+            "Kind": "Docs"
+          }
+        ]
+      },
+      "Stages": [
+        {
+          "Stage": "detect-before",
+          "AppliedStatus": "Applied",
+          "StatusMessage": "Current state: Superfetch is stopped",
+          "OutcomeSummary": "Detect - Success",
+          "CurrentValue": "Superfetch is stopped",
+          "TargetValue": "Optimized",
+          "WasRolledBack": false,
+          "IsMutationAllowed": false,
+          "HasSuccessfulApplyStory": false,
+          "HasSuccessfulRollbackStory": false,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Applied",
+              "Message": "Current state: Superfetch is stopped",
+              "TimestampText": "16:13:45"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Pending",
+              "Message": "",
+              "TimestampText": "-"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Pending",
+              "Message": "",
+              "TimestampText": "-"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Pending",
+              "Message": "",
+              "TimestampText": "-"
+            }
+          ]
+        },
+        {
+          "Stage": "apply",
+          "AppliedStatus": "Applied",
+          "StatusMessage": "Run completed.",
+          "OutcomeSummary": "Apply - Success",
+          "CurrentValue": "Optimized",
+          "TargetValue": "Optimized",
+          "WasRolledBack": false,
+          "IsMutationAllowed": false,
+          "HasSuccessfulApplyStory": true,
+          "HasSuccessfulRollbackStory": false,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Applied",
+              "Message": "Current state: Superfetch is stopped",
+              "TimestampText": "16:13:45"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Skipped",
+              "Message": "Already in the desired state.",
+              "TimestampText": "16:13:45"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Verified",
+              "Message": "Changes verified successfully.",
+              "TimestampText": "16:13:45"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Skipped",
+              "Message": "No changes were made.",
+              "TimestampText": "16:13:45"
+            }
+          ]
+        },
+        {
+          "Stage": "rollback",
+          "AppliedStatus": "Applied",
+          "StatusMessage": "Rollback not supported for this tweak.",
+          "OutcomeSummary": "Rollback - Skipped",
+          "CurrentValue": "Optimized",
+          "TargetValue": "Optimized",
+          "WasRolledBack": false,
+          "IsMutationAllowed": false,
+          "HasSuccessfulApplyStory": true,
+          "HasSuccessfulRollbackStory": false,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Applied",
+              "Message": "Current state: Superfetch is stopped",
+              "TimestampText": "16:13:45"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Skipped",
+              "Message": "Already in the desired state.",
+              "TimestampText": "16:13:45"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Verified",
+              "Message": "Changes verified successfully.",
+              "TimestampText": "16:13:45"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Not applicable",
+              "Message": "Rollback not supported for this tweak.",
+              "TimestampText": "16:13:45"
+            }
+          ]
+        },
+        {
+          "Stage": "detect-after",
+          "AppliedStatus": "Applied",
+          "StatusMessage": "Current state: Superfetch is stopped",
+          "OutcomeSummary": "Detect - Success",
+          "CurrentValue": "Superfetch is stopped",
+          "TargetValue": "Optimized",
+          "WasRolledBack": false,
+          "IsMutationAllowed": false,
+          "HasSuccessfulApplyStory": true,
+          "HasSuccessfulRollbackStory": false,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Applied",
+              "Message": "Current state: Superfetch is stopped",
+              "TimestampText": "16:13:45"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Skipped",
+              "Message": "Already in the desired state.",
+              "TimestampText": "16:13:45"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Verified",
+              "Message": "Changes verified successfully.",
+              "TimestampText": "16:13:45"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Not applicable",
+              "Message": "Rollback not supported for this tweak.",
+              "TimestampText": "16:13:45"
+            }
+          ]
+        }
+      ],
+      "StartedAtUtc": "2026-05-07T23:13:42.1894264+00:00",
+      "CompletedAtUtc": "2026-05-07T23:13:45.5255346+00:00"
+    }
+  },
+  {
+    "tweak_id": "power.disable-hibernation",
+    "host_exit": 0,
+    "execution_exit": 2,
+    "payload_status": "completed",
+    "report_source": "stdout",
+    "report_parse_error": null,
+    "report_fetch_status": null,
+    "report_app_success": false,
+    "report_success": false,
+    "report_status": "check-failed",
+    "report_summary": "The tweak flow completed, but at least one apply or rollback checkpoint did not come back clean.",
+    "report_contract_status": "ok",
+    "report_contract_summary": "QA card snapshot contract passed.",
+    "report_contract_failures": [],
+    "report_card_present": true,
+    "report_card_has_claim_boundary": true,
+    "report_card_present_fields": [
+      "TweakId",
+      "Name",
+      "Category",
+      "EvidenceClass",
+      "ResearchStatus",
+      "RollbackSnapshotState",
+      "HasClaimBoundary",
+      "WhatWeKnowSummary",
+      "WhatWeDoNotClaimSummary",
+      "ProofLanes"
+    ],
+    "report_card_missing_fields": [],
+    "report_card_proof_lanes": [
+      "docs",
+      "runtime",
+      "source",
+      "rollback"
+    ],
+    "report_card_missing_proof_lanes": [],
+    "report": {
+      "TweakId": "power.disable-hibernation",
+      "TweakName": "Disable Hibernation",
+      "Success": false,
+      "Status": "check-failed",
+      "Summary": "The tweak flow completed, but at least one apply or rollback checkpoint did not come back clean.",
+      "RollbackRequested": true,
+      "GatedMutationOverrideRequested": true,
+      "GatedMutationOverrideUsed": true,
+      "Card": {
+        "TweakId": "power.disable-hibernation",
+        "Name": "Disable Hibernation",
+        "Category": "Power",
+        "Description": "Runs powercfg /hibernate off. This disables hibernation and removes hiberfil.sys.",
+        "FriendlyDescription": "Runs powercfg /hibernate off. This disables hibernation and removes hiberfil.sys.",
+        "RegistryPath": "",
+        "EvidenceClass": "B",
+        "EvidenceClassTitle": "Strong but Decision-Gated",
+        "ResearchStatus": "INTENTIONAL HOLD",
+        "IsMutationAllowed": false,
+        "RollbackSnapshotState": "ready",
+        "RollbackStoryText": "Rollback: Verified via record-restore-story.",
+        "HasClaimBoundary": true,
+        "WhatWeKnowSummary": "Claim: Runs powercfg /hibernate off. This disables hibernation and removes hiberfil.sys. Evidence: The power documentation explains S4 hibernation behavior and maps the app command to the powercfg /hibernate off registry effect. Rollback: Rollback: Verified via record-restore-story.",
+        "WhatWeDoNotClaimSummary": "Apply gate: Evidence pending Source boundary: Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+        "ProofLanes": [
+          {
+            "Key": "docs",
+            "Label": "DOCS",
+            "State": "ready",
+            "Summary": "The power documentation explains S4 hibernation behavior and maps the app command to the powercfg /hibernate off registry effect.",
+            "Source": "Validation proof source: C:\\Tools\\AppSmoke\\Docs\\power\\power.md"
+          },
+          {
+            "Key": "runtime",
+            "Label": "RUNTIME",
+            "State": "ready",
+            "Summary": "No runtime proof is attached yet. This record still needs VM validation.",
+            "Source": ""
+          },
+          {
+            "Key": "source",
+            "Label": "SOURCE",
+            "State": "ready",
+            "Summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+            "Source": "win-config / power/desc.md: https://github.com/nohuto/win-config/blob/main/power/desc.md"
+          },
+          {
+            "Key": "rollback",
+            "Label": "ROLLBACK",
+            "State": "ready",
+            "Summary": "Rollback: Verified via record-restore-story.",
+            "Source": "record-restore-story"
+          }
+        ],
+        "ReferenceLinks": [
+          {
+            "Title": "Docs: Details",
+            "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html#power.disable-hibernation",
+            "Kind": "Details"
+          },
+          {
+            "Title": "Docs: Power",
+            "Url": "C:\\Tools\\AppSmoke\\Docs\\power\\power.md#power.disable-hibernation",
+            "Kind": "Docs"
+          }
+        ]
+      },
+      "Stages": [
+        {
+          "Stage": "detect-before",
+          "AppliedStatus": "NotApplied",
+          "StatusMessage": "Current state: Hibernation unavailable: system firmware does not support hibernation",
+          "OutcomeSummary": "Detect - Skipped",
+          "CurrentValue": "Hibernation unavailable: system firmware does not support hibernation",
+          "TargetValue": "Optimized",
+          "WasRolledBack": false,
+          "IsMutationAllowed": false,
+          "HasSuccessfulApplyStory": false,
+          "HasSuccessfulRollbackStory": false,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Not applicable",
+              "Message": "Current state: Hibernation unavailable: system firmware does not support hibernation",
+              "TimestampText": "16:13:53"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Pending",
+              "Message": "",
+              "TimestampText": "-"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Pending",
+              "Message": "",
+              "TimestampText": "-"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Pending",
+              "Message": "",
+              "TimestampText": "-"
+            }
+          ]
+        },
+        {
+          "Stage": "apply",
+          "AppliedStatus": "NotApplied",
+          "StatusMessage": "Run completed.",
+          "OutcomeSummary": "Apply - Success",
+          "CurrentValue": "Hibernation unavailable: system firmware does not support hibernation",
+          "TargetValue": "Optimized",
+          "WasRolledBack": false,
+          "IsMutationAllowed": false,
+          "HasSuccessfulApplyStory": false,
+          "HasSuccessfulRollbackStory": false,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Not applicable",
+              "Message": "Current state: Hibernation unavailable: system firmware does not support hibernation",
+              "TimestampText": "16:13:53"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Skipped",
+              "Message": "Detect returned NotApplicable.",
+              "TimestampText": "16:13:53"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Skipped",
+              "Message": "Detect returned NotApplicable.",
+              "TimestampText": "16:13:53"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Skipped",
+              "Message": "Detect returned NotApplicable.",
+              "TimestampText": "16:13:53"
+            }
+          ]
+        },
+        {
+          "Stage": "rollback",
+          "AppliedStatus": "Error",
+          "StatusMessage": "Rollback command failed with exit code 1: Hibernation failed with the following error: The request is not supported.\r\r\n\r\nThe following items are preventing hibernation on this system.\r\n\tThe system firmware does not support hibernation.",
+          "OutcomeSummary": "Rollback - Failed",
+          "CurrentValue": "Hibernation unavailable: system firmware does not support hibernation",
+          "TargetValue": "Optimized",
+          "WasRolledBack": false,
+          "IsMutationAllowed": false,
+          "HasSuccessfulApplyStory": false,
+          "HasSuccessfulRollbackStory": false,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Not applicable",
+              "Message": "Current state: Hibernation unavailable: system firmware does not support hibernation",
+              "TimestampText": "16:13:53"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Skipped",
+              "Message": "Detect returned NotApplicable.",
+              "TimestampText": "16:13:53"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Skipped",
+              "Message": "Detect returned NotApplicable.",
+              "TimestampText": "16:13:53"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Failed",
+              "Message": "Rollback command failed with exit code 1: Hibernation failed with the following error: The request is not supported.\r\r\n\r\nThe following items are preventing hibernation on this system.\r\n\tThe system firmware does not support hibernation.\r\n",
+              "TimestampText": "16:13:53"
+            }
+          ]
+        },
+        {
+          "Stage": "detect-after",
+          "AppliedStatus": "NotApplied",
+          "StatusMessage": "Current state: Hibernation unavailable: system firmware does not support hibernation",
+          "OutcomeSummary": "Detect - Skipped",
+          "CurrentValue": "Hibernation unavailable: system firmware does not support hibernation",
+          "TargetValue": "Optimized",
+          "WasRolledBack": false,
+          "IsMutationAllowed": false,
+          "HasSuccessfulApplyStory": false,
+          "HasSuccessfulRollbackStory": false,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Not applicable",
+              "Message": "Current state: Hibernation unavailable: system firmware does not support hibernation",
+              "TimestampText": "16:13:53"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Skipped",
+              "Message": "Detect returned NotApplicable.",
+              "TimestampText": "16:13:53"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Skipped",
+              "Message": "Detect returned NotApplicable.",
+              "TimestampText": "16:13:53"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Failed",
+              "Message": "Rollback command failed with exit code 1: Hibernation failed with the following error: The request is not supported.\r\r\n\r\nThe following items are preventing hibernation on this system.\r\n\tThe system firmware does not support hibernation.\r\n",
+              "TimestampText": "16:13:53"
+            }
+          ]
+        }
+      ],
+      "StartedAtUtc": "2026-05-07T23:13:50.5236318+00:00",
+      "CompletedAtUtc": "2026-05-07T23:13:53.7012018+00:00"
+    }
+  }
+]

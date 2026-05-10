@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-07T13:32:29.7532101Z",
+  "record_id": "explorer.enable-explorer-compact-mode",
+  "run_id": "explorer-enable-explorer-compact-mode-etw-qga-unblock-20260507",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "registry_path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+  "value_name": "UseCompactMode",
+  "attempt_status": "qga_unblocked_ingest_ok",
+  "assessment": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and a normalized bundle with 4484 registry events and 529 caller-stack events. The QGA-launched helper targeted HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced / UseCompactMode; the bundle contains target command/subkey activity, but no exact current-user HKCU RegQueryValue event for UseCompactMode was observed under the SYSTEM QGA context.",
+  "target_observation": {
+    "exact_value_query": false,
+    "operation": "RegOpenKey",
+    "representative_status": "0xC0000034",
+    "event_count": 4484,
+    "caller_stack_event_count": 529,
+    "target_key_event_count": 9,
+    "target_value_event_count": 0,
+    "current_user_hkcu_value_event_count": 0,
+    "target_command_event_count": 1,
+    "launch_transport": "qga"
+  },
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/explorer-enable-explorer-compact-mode-etw-qga-unblock-20260507/explorer-enable-explorer-compact-mode-etw-qga-unblock-20260507-summary.json",
+      "sha256": "714bc2dccfa1d39413b599335cfdc29dd42ba663f0d46ed3778f351e73f8471a",
+      "size": 7939,
+      "collected_utc": "2026-05-07T13:32:29.7532101Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/explorer-enable-explorer-compact-mode-etw-qga-unblock-20260507/normalized-registry-bundle.json",
+      "sha256": "1c41db6b9ee6b2bce9f4e7ec6ce8932b2e51ef81bc110dcb878cddc364c95a5f",
+      "size": 5663454,
+      "collected_utc": "2026-05-07T13:32:29.7532101Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/explorer-enable-explorer-compact-mode-etw-qga-unblock-20260507/explorer-enable-explorer-compact-mode-etw-qga-unblock-20260507.etl",
+      "sha256": "e38622f1ffdf775a26b2f2f07163807633ce1e6f2a223e5279e87f1fa0f37a93",
+      "size": 12582912,
+      "collected_utc": "2026-05-07T13:32:29.7532101Z"
+    }
+  ]
+}

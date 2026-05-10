@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-07T08:44:53Z",
+  "record_id": "privacy.disable-copilot",
+  "run_id": "privacy-disable-copilot-etw-qga-unblock-20260507c",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "registry_path": "HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsCopilot",
+  "value_name": "TurnOffWindowsCopilot",
+  "attempt_status": "qga_unblocked_ingest_ok",
+  "assessment": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and a normalized bundle with 5534 registry events and 1349 caller-stack events. The guest-side probe command queried HKCU\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsCopilot /v TurnOffWindowsCopilot; the clean baseline did not produce an exact TurnOffWindowsCopilot value event, but the bundle retained WindowsCopilot policy key open/query activity with absent-status evidence, proving the old QGA/ensure-admin-shell blocker is gone and the parser/runtime lane is live.",
+  "target_observation": {
+    "exact_value_query": false,
+    "target_command_visible": true,
+    "target_key_activity_visible": true,
+    "representative_status": "0xC0000034",
+    "event_count": 5534,
+    "caller_stack_event_count": 1349,
+    "launch_transport": "qga"
+  },
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/privacy-disable-copilot-etw-qga-unblock-20260507c/privacy-disable-copilot-etw-qga-unblock-20260507c-summary.json",
+      "sha256": "e598414c7e9a09d2bdb50eac3b3685047b37150c27a7f63ccad0609bf5eedbfa",
+      "size": 7652,
+      "collected_utc": "2026-05-07T08:44:53Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/privacy-disable-copilot-etw-qga-unblock-20260507c/normalized-registry-bundle.json",
+      "sha256": "2e009061892f80e62055e9a3249edca606ca3cac0cd01253b5a92aa98b2faed6",
+      "size": 7117755,
+      "collected_utc": "2026-05-07T08:44:53Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/privacy-disable-copilot-etw-qga-unblock-20260507c/privacy-disable-copilot-etw-qga-unblock-20260507c.etl",
+      "sha256": "1bc2281546b59568f80760ecbc1d3b92e42cbe85b9f8f514ac736a38fe1ea03e",
+      "size": 13107200,
+      "collected_utc": "2026-05-07T08:44:53Z"
+    }
+  ]
+}

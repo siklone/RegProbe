@@ -39,7 +39,7 @@
             ]
           }
         ],
-        "notes": "This candidate is tracked as a raw kernel-facing value, not as a published end-user tweak profile."
+        "notes": "This candidate is promoted as a conservative research-card raw power value; do not claim a universal performance win."
       }
     ]
   },
@@ -85,8 +85,8 @@
         "Power-manager documentation"
       ],
       "avoid_for": [
-        "General users",
-        "One-click apply surfaces"
+            "General users expecting a guaranteed performance gain",
+            "Systems where hardware-specific CPU parking behavior has not been reviewed"
       ],
       "states": [
         {
@@ -96,13 +96,13 @@
           "rationale": "Track the observed baseline value without turning it into a shipped preset."
         }
       ],
-      "good_when": "You want the repo to track the live baseline and current evidence for this raw power-manager value.",
-      "bad_when": "You want a supported end-user tweak or a documented Microsoft control surface.",
+      "good_when": "You want the app to preserve the observed Class1InitialUnparkCount baseline with a reversible raw power-card apply path.",
+      "bad_when": "You need a hardware-independent performance recommendation or a documented Microsoft end-user control surface.",
       "tradeoffs": [
         "Preserves the observed baseline value.",
-        "Keeps the candidate research-only and non-actionable."
+        "Ships only with a conservative claim boundary because CPU parking effects are hardware and power-plan dependent."
       ],
-      "apply_allowed": false,
+      "apply_allowed": true,
       "evidence_ids": [
         "vm-power-control-phase0-20260329",
         "ghidra-power-control-docs-first-20260329"
@@ -215,16 +215,31 @@
         "transport-blocker"
       ],
       "strength": "medium"
+    },
+    {
+      "evidence_id": "vm-power.control.class1-initial-unpark-count-etw-qga-unblock-20260507",
+      "kind": "etw-trace",
+      "title": "QGA-first ETW stackwalk runtime receipt for Class1InitialUnparkCount",
+      "location": "evidence/captures/power-control-class1-initial-unpark-count-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/power-control-class1-initial-unpark-count-etw-qga-unblock-20260507/power-control-class1-initial-unpark-count-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/power-control-class1-initial-unpark-count-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/power-control-class1-initial-unpark-count-etw-qga-unblock-20260507/power-control-class1-initial-unpark-count-etw-qga-unblock-20260507.etl",
+      "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4442 registry events with 527 caller-stack events. The bundle contains an exact helper-triggered `RegQueryValue` for `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power` / `Class1InitialUnparkCount`, returning `0x80000005` on the clean baseline.",
+      "supports": [
+        "runtime-observation",
+        "tooling-fix",
+        "path",
+        "value",
+        "version-scope"
+      ],
+      "strength": "high"
     }
   ],
   "decision": {
     "confidence": "high",
-    "apply_allowed": false,
+    "apply_allowed": true,
     "recommended_for_general_users": false,
     "restore_default_supported": true,
     "restore_previous_supported": true,
     "needs_vm_validation": false,
-    "why": "Class1InitialUnparkCount now has converged cross-layer evidence on RegProbe-Baseline-ToolsHardened-20260330: phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, prior shell-safe Procmon lanes, and an exact runtime read captured by the tools-hardened lightweight ETW follow-up. App mapping is tracked separately and does not block evidence classification.",
+    "why": "Class1InitialUnparkCount now has converged cross-layer evidence on RegProbe-Baseline-ToolsHardened-20260330: phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, prior shell-safe Procmon lanes, and an exact runtime read captured by the tools-hardened lightweight ETW follow-up. The 2026-05-08 promotion review pack approves this app-mapped raw power card for conservative promotion with no universal performance-win claim.",
     "blocking_issues": []
   },
   "tested_on": [
@@ -247,20 +262,20 @@
       "notes": "The tools-hardened lightweight ETW follow-up captured an exact runtime read for `Class1InitialUnparkCount` while the guest stayed shell-healthy."
     }
   ],
-  "last_reviewed_utc": "2026-04-28T11:02:09Z",
+  "last_reviewed_utc": "2026-05-08T10:03:46Z",
   "version_stable": [
     "25H2"
   ],
   "source_enrichment": {
     "runtime_capture_reviewed": {
       "etw-stackwalk": true,
-      "status": "artifact_upload_timeout"
+      "status": "qga_unblocked_ingest_ok"
     },
     "etw_stackwalk_reviewed": true,
-    "etw_stackwalk_review_status": "artifact_upload_timeout",
-    "etw_stackwalk_review_artifact": "evidence/captures/power-control-class1-initial-unpark-count-etw-stackwalk-attempt-20260424.json",
+    "etw_stackwalk_review_status": "qga_unblocked_ingest_ok",
+    "etw_stackwalk_review_artifact": "evidence/captures/power-control-class1-initial-unpark-count-etw-qga-unblock-20260507.json",
     "last_updated_utc": "2026-04-28T11:02:09Z",
-    "notes": "A bounded 2026-04-24 KVM ETW stackwalk retry for Class1InitialUnparkCount reached artifact-upload but still timed out before any ETL, XML, or normalized bundle returned to the host. The repo now retains summary and stage receipts only, so the ETW lane is reviewed but transport-blocked. The shared current-build ntoskrnl string and Ghidra batch already retain reviewable `Class1InitialUnparkCount` artifacts on disk, while the local ReactOS and WRK corpus still add no candidate-specific corroboration.",
+    "notes": "A bounded 2026-04-24 KVM ETW stackwalk retry for Class1InitialUnparkCount reached artifact-upload but still timed out before any ETL, XML, or normalized bundle returned to the host. The repo now retains summary and stage receipts only, so the ETW lane is reviewed but transport-blocked. The shared current-build ntoskrnl string and Ghidra batch already retain reviewable `Class1InitialUnparkCount` artifacts on disk, while the local ReactOS and WRK corpus still add no candidate-specific corroboration. A 2026-05-07 QGA-first ETW stackwalk rerun cleared the earlier ETW ingest/upload blocker and produced an exact helper-triggered `RegQueryValue` for `Class1InitialUnparkCount` with caller-stack capture.",
     "source_mirror_reviewed": {
       "reactos": true,
       "wrk": true

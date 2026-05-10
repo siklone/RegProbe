@@ -1,0 +1,230 @@
+{
+  "TweakId": "power.disable-superfetch",
+  "TweakName": "Disable Superfetch (SysMain)",
+  "Success": true,
+  "Status": "already-applied",
+  "Summary": "The tweak already matched the desired state; the app verified it and skipped rollback because no mutation was performed.",
+  "RollbackRequested": true,
+  "GatedMutationOverrideRequested": true,
+  "GatedMutationOverrideUsed": true,
+  "Card": {
+    "TweakId": "power.disable-superfetch",
+    "Name": "Disable Superfetch (SysMain)",
+    "Category": "Power",
+    "Description": "Disables the SysMain service that preloads frequently used applications and maintains usage heuristics.",
+    "FriendlyDescription": "Disables the SysMain service that preloads frequently used applications and maintains usage heuristics.",
+    "RegistryPath": "",
+    "EvidenceClass": "B",
+    "EvidenceClassTitle": "Strong but Decision-Gated",
+    "ResearchStatus": "INTENTIONAL HOLD",
+    "IsMutationAllowed": false,
+    "RollbackSnapshotState": "ready",
+    "RollbackStoryText": "Rollback: Verified via record-restore-story.",
+    "HasClaimBoundary": true,
+    "WhatWeKnowSummary": "Claim: Disables the SysMain service that preloads frequently used applications and maintains usage heuristics. Evidence: The service documentation identifies SysMain/Superfetch behavior, and the tweak catalog maps the shipped card to the checked-in command implementation. Rollback: Rollback: Verified via record-restore-story.",
+    "WhatWeDoNotClaimSummary": "Apply gate: Evidence pending Source boundary: Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+    "ProofLanes": [
+      {
+        "Key": "docs",
+        "Label": "DOCS",
+        "State": "ready",
+        "Summary": "The service documentation identifies SysMain/Superfetch behavior, and the tweak catalog maps the shipped card to the checked-in command implementation.",
+        "Source": "Validation proof source: Docs/SERVICES_DOCUMENTATION.md"
+      },
+      {
+        "Key": "runtime",
+        "Label": "RUNTIME",
+        "State": "ready",
+        "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "Source": ""
+      },
+      {
+        "Key": "source",
+        "Label": "SOURCE",
+        "State": "ready",
+        "Summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+        "Source": "decompiled-pseudocode / mmcss: https://github.com/nohuto/decompiled-pseudocode/tree/main/mmcss"
+      },
+      {
+        "Key": "rollback",
+        "Label": "ROLLBACK",
+        "State": "ready",
+        "Summary": "Rollback: Verified via record-restore-story.",
+        "Source": "record-restore-story"
+      }
+    ],
+    "ReferenceLinks": [
+      {
+        "Title": "Windows Internals resource page",
+        "Url": "https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals",
+        "Kind": "Docs"
+      },
+      {
+        "Title": "Docs: Details",
+        "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html#power.disable-superfetch",
+        "Kind": "Details"
+      },
+      {
+        "Title": "Docs: Power",
+        "Url": "C:\\Tools\\AppSmoke\\Docs\\power\\power.md#power.disable-superfetch",
+        "Kind": "Docs"
+      }
+    ]
+  },
+  "Stages": [
+    {
+      "Stage": "detect-before",
+      "AppliedStatus": "Applied",
+      "StatusMessage": "Current state: Superfetch is stopped",
+      "OutcomeSummary": "Detect - Success",
+      "CurrentValue": "Superfetch is stopped",
+      "TargetValue": "Optimized",
+      "WasRolledBack": false,
+      "IsMutationAllowed": false,
+      "HasSuccessfulApplyStory": false,
+      "HasSuccessfulRollbackStory": false,
+      "Steps": [
+        {
+          "Action": "Detect",
+          "StatusText": "Applied",
+          "Message": "Current state: Superfetch is stopped",
+          "TimestampText": "16:13:45"
+        },
+        {
+          "Action": "Apply",
+          "StatusText": "Pending",
+          "Message": "",
+          "TimestampText": "-"
+        },
+        {
+          "Action": "Verify",
+          "StatusText": "Pending",
+          "Message": "",
+          "TimestampText": "-"
+        },
+        {
+          "Action": "Rollback",
+          "StatusText": "Pending",
+          "Message": "",
+          "TimestampText": "-"
+        }
+      ]
+    },
+    {
+      "Stage": "apply",
+      "AppliedStatus": "Applied",
+      "StatusMessage": "Run completed.",
+      "OutcomeSummary": "Apply - Success",
+      "CurrentValue": "Optimized",
+      "TargetValue": "Optimized",
+      "WasRolledBack": false,
+      "IsMutationAllowed": false,
+      "HasSuccessfulApplyStory": true,
+      "HasSuccessfulRollbackStory": false,
+      "Steps": [
+        {
+          "Action": "Detect",
+          "StatusText": "Applied",
+          "Message": "Current state: Superfetch is stopped",
+          "TimestampText": "16:13:45"
+        },
+        {
+          "Action": "Apply",
+          "StatusText": "Skipped",
+          "Message": "Already in the desired state.",
+          "TimestampText": "16:13:45"
+        },
+        {
+          "Action": "Verify",
+          "StatusText": "Verified",
+          "Message": "Changes verified successfully.",
+          "TimestampText": "16:13:45"
+        },
+        {
+          "Action": "Rollback",
+          "StatusText": "Skipped",
+          "Message": "No changes were made.",
+          "TimestampText": "16:13:45"
+        }
+      ]
+    },
+    {
+      "Stage": "rollback",
+      "AppliedStatus": "Applied",
+      "StatusMessage": "Rollback not supported for this tweak.",
+      "OutcomeSummary": "Rollback - Skipped",
+      "CurrentValue": "Optimized",
+      "TargetValue": "Optimized",
+      "WasRolledBack": false,
+      "IsMutationAllowed": false,
+      "HasSuccessfulApplyStory": true,
+      "HasSuccessfulRollbackStory": false,
+      "Steps": [
+        {
+          "Action": "Detect",
+          "StatusText": "Applied",
+          "Message": "Current state: Superfetch is stopped",
+          "TimestampText": "16:13:45"
+        },
+        {
+          "Action": "Apply",
+          "StatusText": "Skipped",
+          "Message": "Already in the desired state.",
+          "TimestampText": "16:13:45"
+        },
+        {
+          "Action": "Verify",
+          "StatusText": "Verified",
+          "Message": "Changes verified successfully.",
+          "TimestampText": "16:13:45"
+        },
+        {
+          "Action": "Rollback",
+          "StatusText": "Not applicable",
+          "Message": "Rollback not supported for this tweak.",
+          "TimestampText": "16:13:45"
+        }
+      ]
+    },
+    {
+      "Stage": "detect-after",
+      "AppliedStatus": "Applied",
+      "StatusMessage": "Current state: Superfetch is stopped",
+      "OutcomeSummary": "Detect - Success",
+      "CurrentValue": "Superfetch is stopped",
+      "TargetValue": "Optimized",
+      "WasRolledBack": false,
+      "IsMutationAllowed": false,
+      "HasSuccessfulApplyStory": true,
+      "HasSuccessfulRollbackStory": false,
+      "Steps": [
+        {
+          "Action": "Detect",
+          "StatusText": "Applied",
+          "Message": "Current state: Superfetch is stopped",
+          "TimestampText": "16:13:45"
+        },
+        {
+          "Action": "Apply",
+          "StatusText": "Skipped",
+          "Message": "Already in the desired state.",
+          "TimestampText": "16:13:45"
+        },
+        {
+          "Action": "Verify",
+          "StatusText": "Verified",
+          "Message": "Changes verified successfully.",
+          "TimestampText": "16:13:45"
+        },
+        {
+          "Action": "Rollback",
+          "StatusText": "Not applicable",
+          "Message": "Rollback not supported for this tweak.",
+          "TimestampText": "16:13:45"
+        }
+      ]
+    }
+  ],
+  "StartedAtUtc": "2026-05-07T23:13:42.1894264+00:00",
+  "CompletedAtUtc": "2026-05-07T23:13:45.5255346+00:00"
+}

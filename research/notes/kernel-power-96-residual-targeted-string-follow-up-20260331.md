@@ -80,4 +80,4 @@ Keep them out of the immediate queue until either:
 
 ## Audit artifact
 
-- [kernel-power-96-residual-targeted-string-follow-up-20260331.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/kernel-power-96-residual-targeted-string-follow-up-20260331.json)
+- [kernel-power-96-residual-targeted-string-follow-up-20260331.json](../../registry-research-framework/audit/kernel-power-96-residual-targeted-string-follow-up-20260331.json)

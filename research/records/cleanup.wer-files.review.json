@@ -1,0 +1,222 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "cleanup.wer-files",
+  "tweak_id": "cleanup.wer-files",
+  "record_status": "review-required",
+  "summary": "Review-required audit trail for the live Windows Error Reporting cleanup card. The app already ships this file-backed cleanup action and the repo cleanup docs describe the same WER directories, but the card has not yet been promoted into the validated research-provider surface.",
+  "setting": {
+    "name": "Clear Windows Error Reporting Files",
+    "category": "Cleanup",
+    "area": "Windows Error Reporting Cleanup",
+    "scope": "device",
+    "casual_explanation": "This deletes Windows Error Reporting crash dumps and report metadata from the tracked WER folders.",
+    "why_people_change_it": "People clear WER files when they want to reclaim disk space or remove queued crash-report artifacts after collecting what they need.",
+    "tradeoffs_overview": "Clearing WER files reclaims space, but it also removes pending crash-report artifacts and report metadata.",
+    "professional_notes": "The current app deletes WER content under %PROGRAMDATA%\\Microsoft\\Windows\\WER, %LOCALAPPDATA%\\Microsoft\\Windows\\WER, and %TEMP%\\WER. Repo cleanup docs identify the same Windows Error Reporting cleanup surface.",
+    "targets": [
+      {
+        "target_id": "wer-files",
+        "location_kind": "file",
+        "path": "%PROGRAMDATA%\\Microsoft\\Windows\\WER; %LOCALAPPDATA%\\Microsoft\\Windows\\WER; %TEMP%\\WER",
+        "value_name": "CleanupAction",
+        "value_type": "file cleanup action",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "No cleanup action",
+            "meaning": "WER files remain until the operator or Windows removes them.",
+            "evidence_ids": [
+              "repo-cleanup-doc",
+              "engine-wer-cleanup"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": "Cleared",
+            "label": "Clear WER files",
+            "meaning": "Deletes the WER crash dumps and report metadata tracked by the current app.",
+            "evidence_ids": [
+              "repo-cleanup-doc",
+              "repo-cleanup-provenance",
+              "app-misc-provider",
+              "engine-wer-cleanup"
+            ]
+          }
+        ],
+        "notes": "This is a one-shot cleanup action rather than a persistent WER policy setting."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "unknown",
+    "provider_source": "app/Services/TweakProviders/MiscTweakProvider.cs",
+    "notes": "The live app still ships this as a first-party cleanup card instead of through the research-provider surface.",
+    "writes": [
+      {
+        "target_id": "wer-files",
+        "path": "%PROGRAMDATA%\\Microsoft\\Windows\\WER; %LOCALAPPDATA%\\Microsoft\\Windows\\WER; %TEMP%\\WER",
+        "value_name": "CleanupAction",
+        "value_type": "file cleanup action",
+        "state_kind": "value",
+        "value": "Cleared"
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Windows-managed WER baseline",
+      "applies_to": "Systems where WER files remain available until they are manually cleared or rotated away",
+      "states": [
+        {
+          "target_id": "wer-files",
+          "state_kind": "unknown",
+          "value": null,
+          "rationale": "This card represents an operator-triggered cleanup action, not a persistent default state."
+        }
+      ],
+      "notes": "Use detection and operator intent rather than assuming a fixed baseline.",
+      "evidence_ids": [
+        "repo-cleanup-doc",
+        "engine-wer-cleanup"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "hold-for-research",
+      "label": "Hold for research",
+      "intended_for": [
+        "Research tracking only",
+        "Cleanup command backlog reduction"
+      ],
+      "avoid_for": [
+        "Published presets",
+        "General users"
+      ],
+      "states": [
+        {
+          "target_id": "wer-files",
+          "state_kind": "unknown",
+          "value": null,
+          "rationale": "Keep the live cleanup card documented without publishing it as a validated research-provider preset yet."
+        }
+      ],
+      "good_when": "You want the shipped cleanup action represented honestly in the corpus.",
+      "bad_when": "You need a validated research-provider cleanup card.",
+      "tradeoffs": [
+        "The live app behavior is documented.",
+        "The card remains outside the validated research-provider surface."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "repo-cleanup-doc",
+        "repo-cleanup-provenance"
+      ]
+    },
+    {
+      "profile_id": "current-app-action",
+      "label": "Current app action",
+      "intended_for": [
+        "Research comparison only"
+      ],
+      "avoid_for": [
+        "Published presets",
+        "General users"
+      ],
+      "states": [
+        {
+          "target_id": "wer-files",
+          "state_kind": "value",
+          "value": "Cleared",
+          "rationale": "Capture the exact WER cleanup action that the live app currently performs."
+        }
+      ],
+      "good_when": "You are auditing the current WER cleanup card as shipped by the app.",
+      "bad_when": "You need a validated research-provider cleanup preset.",
+      "tradeoffs": [
+        "The current app behavior is explicit.",
+        "The card is still held outside the validated research-provider surface."
+      ],
+      "apply_allowed": false,
+      "notes": "Blocked until this cleanup surface completes the normal validation path.",
+      "evidence_ids": [
+        "repo-cleanup-doc",
+        "app-misc-provider",
+        "engine-wer-cleanup"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "repo-cleanup-doc",
+      "kind": "repo-doc",
+      "title": "Repo cleanup catalog entry",
+      "location": "Docs/cleanup/cleanup.md",
+      "summary": "The cleanup documentation identifies the system and user WER directories as the current Windows Error Reporting cleanup surface.",
+      "supports": [
+        "path",
+        "behavior",
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "repo-cleanup-provenance",
+      "kind": "repo-doc",
+      "title": "Repo tweak provenance for cleanup.wer-files",
+      "location": "Docs/tweaks/tweak-provenance.md",
+      "summary": "The tweak provenance table keeps cleanup.wer-files tied to the checked-in cleanup source set.",
+      "supports": [
+        "behavior",
+        "risk"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "app-misc-provider",
+      "kind": "repo-code",
+      "title": "Live cleanup provider mapping",
+      "location": "app/Services/TweakProviders/MiscTweakProvider.cs",
+      "summary": "The live app yields ClearWERFilesTweak directly from the first-party cleanup provider.",
+      "supports": [
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "engine-wer-cleanup",
+      "kind": "repo-code",
+      "title": "Current WER cleanup implementation",
+      "location": "engine/Tweaks/Commands/Cleanup/ClearWERFilesTweak.cs",
+      "summary": "The engine tweak deletes WER content from the system, user, and temp folders tracked by the current app.",
+      "supports": [
+        "path",
+        "value",
+        "behavior"
+      ],
+      "strength": "high"
+    }
+  ],
+  "decision": {
+    "confidence": "medium",
+    "apply_allowed": false,
+    "recommended_for_general_users": false,
+    "restore_default_supported": false,
+    "restore_previous_supported": false,
+    "needs_vm_validation": true,
+    "why": "The live cleanup behavior and repo-backed file targets are clear, but this one-shot cleanup card still lives only in the first-party provider.",
+    "manual_review_required": true,
+    "blocking_issues": [
+      "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
+      "This is a maintenance action with no rollback support."
+    ],
+    "promotion_disposition": "rejected",
+    "promotion_disposition_kind": "non-reversible-or-high-risk-action",
+    "promotion_disposition_reason": "Closed as rejected for research-provider promotion because the live action is one-shot, destructive, high-risk, reboot-sensitive, or lacks a rollback story suitable for a validated tweak card.",
+    "promotion_reopen_criteria": "Reopen only if the app gains a verified rollback/snapshot contract and dedicated validation proof for the exact action.",
+    "promotion_disposition_reviewed_utc": "2026-05-07T20:20:00Z"
+  },
+  "last_reviewed_utc": "2026-05-07T20:20:00Z"
+}

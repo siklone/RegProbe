@@ -46,7 +46,7 @@ These three produced no exact string hit in the chosen primary binaries on the t
 
 ## Audit artifacts
 
-- [kernel-power-96-residual-value-exists-static-triage-20260330.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/kernel-power-96-residual-value-exists-static-triage-20260330.json)
-- [kernel-power-96-path-aware-follow-up-20260330.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/kernel-power-96-path-aware-follow-up-20260330.json)
-- [power-session-power-setting-profile-broadened-string-probe-20260331.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/power-session-power-setting-profile-broadened-string-probe-20260331.json)
-- [power-session-power-setting-profile-narrow-string-probe-20260331.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/power-session-power-setting-profile-narrow-string-probe-20260331.json)
+- [kernel-power-96-residual-value-exists-static-triage-20260330.json](../../registry-research-framework/audit/kernel-power-96-residual-value-exists-static-triage-20260330.json)
+- [kernel-power-96-path-aware-follow-up-20260330.json](../../registry-research-framework/audit/kernel-power-96-path-aware-follow-up-20260330.json)
+- [power-session-power-setting-profile-broadened-string-probe-20260331.json](../../registry-research-framework/audit/power-session-power-setting-profile-broadened-string-probe-20260331.json)
+- [power-session-power-setting-profile-narrow-string-probe-20260331.json](../../registry-research-framework/audit/power-session-power-setting-profile-narrow-string-probe-20260331.json)

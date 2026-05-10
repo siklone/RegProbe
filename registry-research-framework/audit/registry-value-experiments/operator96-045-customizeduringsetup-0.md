@@ -1,0 +1,76 @@
+# Registry Value Experiment - operator96-045-customizeduringsetup-0
+
+- Status: **ok**
+- Generated UTC: `2026-05-09T21:31:39Z`
+- Target: `HKLM\SYSTEM\CurrentControlSet\Control\Power\CustomizeDuringSetup`
+- Test value: `0`
+
+## Result
+
+- `apply_smoke_hard_success`: `True`
+- `post_reboot_smoke_hard_success`: `True`
+- `post_rollback_smoke_hard_success`: `True`
+
+## Stage: apply
+
+- `status`: `ok`
+- `error`: `None`
+- `original`: status=`value-present`, value_exists=`True`, value=`1`
+- `after_apply`: status=`value-present`, value_exists=`True`, value=`0`
+- `smoke.failure_count`: `1`
+- `smoke.hard_failure_count`: `0`
+- `smoke.best_effort_failure_count`: `1`
+- `shell-process-presence`: `True` - explorer=True;SearchHost=True;ShellExperienceHost=False;sihost=True;StartMenuExperienceHost=True
+- `cmd-ver`: `True` - exit=0
+- `powershell-version`: `True` - exit=0
+- `notepad-x64-launch`: `True` - started=True;alive_after_2s=True
+- `notepad-x86-launch`: `True` - started=True;alive_after_2s=True
+- `calc-launch`: `True` - started=True;alive_after_2s=False
+- `settings-uri-launch`: `True` - launch-command-succeeded
+- `store-uri-launch`: `False` - This command cannot be run due to the error: The operation attempted is not supported.
+- `interactive_user_smoke`: status=`ok`, failure_count=`0`
+- `benchmarks`: status=`ok`, cpu_single_seconds=`0.4396`, cpu_multi_seconds=`0.2479`, io_mib_s=`380.22`
+- `baseline_smoke.failure_count`: `1`
+- `baseline_smoke.hard_failure_count`: `0`
+- `baseline_smoke.best_effort_failure_count`: `1`
+- `baseline_benchmarks`: status=`ok`, cpu_single_seconds=`0.4444`, cpu_multi_seconds=`0.2428`, io_mib_s=`360.45`
+
+## Stage: post_reboot_rollback
+
+- `status`: `ok`
+- `error`: `None`
+- `restore_action`: `restored-original-value`
+- `after_reboot`: status=`value-present`, value_exists=`True`, value=`0`
+- `after_restore`: status=`value-present`, value_exists=`True`, value=`1`
+- `smoke.failure_count`: `1`
+- `smoke.hard_failure_count`: `0`
+- `smoke.best_effort_failure_count`: `1`
+- `shell-process-presence`: `True` - explorer=True;SearchHost=True;ShellExperienceHost=False;sihost=True;StartMenuExperienceHost=True
+- `cmd-ver`: `True` - exit=0
+- `powershell-version`: `True` - exit=0
+- `notepad-x64-launch`: `True` - started=True;alive_after_2s=True
+- `notepad-x86-launch`: `True` - started=True;alive_after_2s=True
+- `calc-launch`: `True` - started=True;alive_after_2s=False
+- `settings-uri-launch`: `True` - launch-command-succeeded
+- `store-uri-launch`: `False` - This command cannot be run due to the error: The operation attempted is not supported.
+- `interactive_user_smoke`: status=`ok`, failure_count=`0`
+- `benchmarks`: status=`ok`, cpu_single_seconds=`0.5379`, cpu_multi_seconds=`0.2599`, io_mib_s=`364.34`
+
+## Stage: post_rollback
+
+- `status`: `ok`
+- `error`: `None`
+- `final`: status=`value-present`, value_exists=`True`, value=`1`
+- `smoke.failure_count`: `1`
+- `smoke.hard_failure_count`: `0`
+- `smoke.best_effort_failure_count`: `1`
+- `shell-process-presence`: `True` - explorer=True;SearchHost=True;ShellExperienceHost=False;sihost=True;StartMenuExperienceHost=True
+- `cmd-ver`: `True` - exit=0
+- `powershell-version`: `True` - exit=0
+- `notepad-x64-launch`: `True` - started=True;alive_after_2s=True
+- `notepad-x86-launch`: `True` - started=True;alive_after_2s=True
+- `calc-launch`: `True` - started=True;alive_after_2s=False
+- `settings-uri-launch`: `True` - launch-command-succeeded
+- `store-uri-launch`: `False` - This command cannot be run due to the error: The operation attempted is not supported.
+- `interactive_user_smoke`: status=`ok`, failure_count=`0`
+- `benchmarks`: status=`ok`, cpu_single_seconds=`0.5034`, cpu_multi_seconds=`0.2456`, io_mib_s=`349.93`

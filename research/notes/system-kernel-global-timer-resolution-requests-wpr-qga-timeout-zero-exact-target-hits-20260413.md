@@ -25,7 +25,7 @@ The next step is either a longer timeout budget for the same WPR boot-registry l
 
 ## Artifact Set
 
-- [global-timer-resolution-requests-wpr-qga-20260413a-summary-arm.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/evidence/files/vm-tooling-staging/global-timer-resolution-requests-wpr-qga-timeout-no-hit-20260413/global-timer-resolution-requests-wpr-qga-20260413a-summary-arm.json)
-- [global-timer-resolution-requests-wpr-qga-20260413a-summary.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/evidence/files/vm-tooling-staging/global-timer-resolution-requests-wpr-qga-timeout-no-hit-20260413/global-timer-resolution-requests-wpr-qga-20260413a-summary.json)
-- [global-timer-resolution-requests-wpr-qga-20260413a.hits.csv](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/evidence/files/vm-tooling-staging/global-timer-resolution-requests-wpr-qga-timeout-no-hit-20260413/global-timer-resolution-requests-wpr-qga-20260413a.hits.csv)
-- [global-timer-resolution-requests-wpr-qga-20260413a.normalized.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/evidence/files/vm-tooling-staging/global-timer-resolution-requests-wpr-qga-timeout-no-hit-20260413/global-timer-resolution-requests-wpr-qga-20260413a.normalized.json)
+- [global-timer-resolution-requests-wpr-qga-20260413a-summary-arm.json](../../evidence/files/vm-tooling-staging/global-timer-resolution-requests-wpr-qga-timeout-no-hit-20260413/global-timer-resolution-requests-wpr-qga-20260413a-summary-arm.json)
+- [global-timer-resolution-requests-wpr-qga-20260413a-summary.json](../../evidence/files/vm-tooling-staging/global-timer-resolution-requests-wpr-qga-timeout-no-hit-20260413/global-timer-resolution-requests-wpr-qga-20260413a-summary.json)
+- [global-timer-resolution-requests-wpr-qga-20260413a.hits.csv](../../evidence/files/vm-tooling-staging/global-timer-resolution-requests-wpr-qga-timeout-no-hit-20260413/global-timer-resolution-requests-wpr-qga-20260413a.hits.csv)
+- [global-timer-resolution-requests-wpr-qga-20260413a.normalized.json](../../evidence/files/vm-tooling-staging/global-timer-resolution-requests-wpr-qga-timeout-no-hit-20260413/global-timer-resolution-requests-wpr-qga-20260413a.normalized.json)

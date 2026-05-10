@@ -404,11 +404,11 @@ public sealed class RegistryValuePresetBatchTweak : ITweak, IChoiceTweak
         {
             if (!snapshots.TryGetValue(entry.Reference, out var snapshot) || !snapshot.Exists || snapshot.Value is null)
             {
-                lines.Add($"- {FormatReference(entry.Reference)}: missing â†’ {FormatValue(entry.TargetValue)}");
+                lines.Add($"- {FormatReference(entry.Reference)}: missing -> {FormatValue(entry.TargetValue)}");
                 continue;
             }
 
-            lines.Add($"- {FormatReference(entry.Reference)}: {FormatValue(snapshot.Value.ToObject())} â†’ {FormatValue(entry.TargetValue)}");
+            lines.Add($"- {FormatReference(entry.Reference)}: {FormatValue(snapshot.Value.ToObject())} -> {FormatValue(entry.TargetValue)}");
         }
 
         return lines.Count == 0 ? string.Empty : string.Join("\n", lines);

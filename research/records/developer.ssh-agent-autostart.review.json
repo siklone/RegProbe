@@ -173,6 +173,20 @@
       "strength": "low"
     },
     {
+      "evidence_id": "vm-developer.ssh-agent-autostart-etw-qga-unblock-20260507",
+      "kind": "etw-trace",
+      "title": "QGA-first ETW stackwalk runtime receipt for SSH Agent",
+      "location": "evidence/captures/developer-ssh-agent-autostart-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/developer-ssh-agent-autostart-etw-qga-unblock-20260507/developer-ssh-agent-autostart-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/developer-ssh-agent-autostart-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/developer-ssh-agent-autostart-etw-qga-unblock-20260507/developer-ssh-agent-autostart-etw-qga-unblock-20260507.etl",
+      "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4390 registry events with 524 caller-stack events. The QGA-launched helper targeted `HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run` / `SSH Agent` and the bundle contains target command/subkey activity, but no exact current-user HKCU `SSH Agent` RegQueryValue event was observed under the SYSTEM QGA context.",
+      "supports": [
+        "runtime-observation",
+        "tooling-fix",
+        "path",
+        "version-scope"
+      ],
+      "strength": "medium"
+    },
+    {
       "evidence_id": "vm-developer.ssh-agent-autostart-ghidra-launch-receipt-20260424",
       "kind": "vm-test",
       "title": "Guest Ghidra launch receipt for SSH Agent",
@@ -194,7 +208,7 @@
     "why": "Microsoft documents the Run key as a supported logon autostart surface, and the current app writes ssh-agent.exe into that surface for the current user. That is enough to validate the mapping as a documented Windows startup control.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-28T11:11:34Z",
+  "last_reviewed_utc": "2026-05-07T13:29:23.0490154Z",
   "source_enrichment": {
     "last_updated_utc": "2026-04-28T11:11:34Z",
     "source_mirror_reviewed": {
@@ -221,11 +235,11 @@
     },
     "runtime_capture_reviewed": {
       "etw-stackwalk": true,
-      "status": "ingest_missing_etl"
+      "status": "qga_unblocked_ingest_ok"
     },
     "etw_stackwalk_reviewed": true,
-    "etw_stackwalk_review_status": "ingest_missing_etl",
-    "etw_stackwalk_review_artifact": "evidence/captures/developer-ssh-agent-autostart-etw-stackwalk-attempt-20260424.json",
+    "etw_stackwalk_review_status": "qga_unblocked_ingest_ok",
+    "etw_stackwalk_review_artifact": "evidence/captures/developer-ssh-agent-autostart-etw-qga-unblock-20260507.json",
     "static_reviewed": {
       "ghidra": true,
       "status": "launch_blocked"
@@ -233,6 +247,6 @@
     "ghidra": true,
     "ghidra_status": "launch_blocked",
     "ghidra_artifact": "evidence/raw/ghidra/ghidra-developer-ssh-agent-autostart-20260424-batch3/summary.json",
-    "notes": "A bounded 2026-04-24 ETW retry for `HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run` / `SSH Agent` published host-visible summary and stage receipts, but ETL upload never completed so ingest failed before any normalized bundle reached the repo. A same-day guest Ghidra retry for `SSH Agent` failed in `ensure-admin-shell` before any xref bundle reached the host."
+    "notes": "A bounded 2026-04-24 ETW retry for `HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run` / `SSH Agent` published host-visible summary and stage receipts, but ETL upload never completed so ingest failed before any normalized bundle reached the repo. A same-day guest Ghidra retry for `SSH Agent` failed in `ensure-admin-shell` before any xref bundle reached the host. A 2026-05-07 QGA-first ETW stackwalk rerun cleared the earlier ETW ingest/upload blocker and produced host-ingested artifacts for `SSH Agent`, but no exact current-user HKCU value query was observed under the SYSTEM QGA context."
   }
 }

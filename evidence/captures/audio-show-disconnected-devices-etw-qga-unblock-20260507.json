@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-07T13:21:26.4676415Z",
+  "record_id": "audio.show-disconnected-devices",
+  "run_id": "audio-show-disconnected-devices-etw-qga-unblock-20260507",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "registry_path": "HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl",
+  "value_name": "ShowDisconnectedDevices",
+  "attempt_status": "qga_unblocked_ingest_ok",
+  "assessment": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and a normalized bundle with 5621 registry events and 1364 caller-stack events. The QGA-launched helper targeted HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl / ShowDisconnectedDevices; the bundle contains target command/subkey activity, but no exact current-user HKCU RegQueryValue event for ShowDisconnectedDevices was observed under the SYSTEM QGA context.",
+  "target_observation": {
+    "exact_value_query": false,
+    "operation": "RegOpenKey",
+    "representative_status": "0xC0000034",
+    "event_count": 5621,
+    "caller_stack_event_count": 1364,
+    "target_key_event_count": 6,
+    "target_value_event_count": 0,
+    "current_user_hkcu_value_event_count": 0,
+    "target_command_event_count": 1,
+    "launch_transport": "qga"
+  },
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/audio-show-disconnected-devices-etw-qga-unblock-20260507/audio-show-disconnected-devices-etw-qga-unblock-20260507-summary.json",
+      "sha256": "fa2884cc66b8aa214457a2a7eee4203c88ec32068ea21bf372ad3af738e8c47c",
+      "size": 7747,
+      "collected_utc": "2026-05-07T13:21:26.4676415Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/audio-show-disconnected-devices-etw-qga-unblock-20260507/normalized-registry-bundle.json",
+      "sha256": "eb97760718b06914e2648a2a0da91d57ae2b69b3b78e00de771f69251e89eb68",
+      "size": 7350129,
+      "collected_utc": "2026-05-07T13:21:26.4676415Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/audio-show-disconnected-devices-etw-qga-unblock-20260507/audio-show-disconnected-devices-etw-qga-unblock-20260507.etl",
+      "sha256": "81978510fecf524d8f5f2f9e86ea609295510da12451c33b4b6b6e8a42c21f12",
+      "size": 12845056,
+      "collected_utc": "2026-05-07T13:21:26.4676415Z"
+    }
+  ]
+}

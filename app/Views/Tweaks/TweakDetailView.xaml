@@ -392,6 +392,61 @@
                             </Border>
 
                             <Border Style="{StaticResource SectionDividerStyle}"
+                                    Visibility="{Binding SelectedTweakPane.SelectedTweak.HasClaimBoundary, Converter={StaticResource BoolToVisibility}}">
+                                <StackPanel>
+                                    <TextBlock Text="CLAIM BOUNDARY"
+                                               Style="{StaticResource SectionTitleStyle}"/>
+                                    <Grid Margin="0,6,0,0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="10"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <Border Grid.Column="0"
+                                                Background="#10161D"
+                                                BorderBrush="#243140"
+                                                BorderThickness="1"
+                                                CornerRadius="10"
+                                                Padding="10,8">
+                                            <StackPanel>
+                                                <TextBlock Text="WHAT WE KNOW"
+                                                           Foreground="{DynamicResource ResearchTextMutedBrush}"
+                                                           FontSize="8"
+                                                           FontWeight="Bold"
+                                                           FontFamily="{DynamicResource FontFamilyMono}"/>
+                                                <TextBlock Text="{Binding SelectedTweakPane.SelectedTweak.WhatWeKnowSummary}"
+                                                           Margin="0,5,0,0"
+                                                           Foreground="{DynamicResource ResearchTextPrimaryBrush}"
+                                                           FontSize="11"
+                                                           TextWrapping="Wrap"/>
+                                            </StackPanel>
+                                        </Border>
+
+                                        <Border Grid.Column="2"
+                                                Background="#11100D"
+                                                BorderBrush="#2D271C"
+                                                BorderThickness="1"
+                                                CornerRadius="10"
+                                                Padding="10,8">
+                                            <StackPanel>
+                                                <TextBlock Text="WHAT WE DO NOT CLAIM"
+                                                           Foreground="{DynamicResource ResearchTextMutedBrush}"
+                                                           FontSize="8"
+                                                           FontWeight="Bold"
+                                                           FontFamily="{DynamicResource FontFamilyMono}"/>
+                                                <TextBlock Text="{Binding SelectedTweakPane.SelectedTweak.WhatWeDoNotClaimSummary}"
+                                                           Margin="0,5,0,0"
+                                                           Foreground="{DynamicResource ResearchTextSecondaryBrush}"
+                                                           FontSize="11"
+                                                           TextWrapping="Wrap"/>
+                                            </StackPanel>
+                                        </Border>
+                                    </Grid>
+                                </StackPanel>
+                            </Border>
+
+                            <Border Style="{StaticResource SectionDividerStyle}"
                                     Visibility="{Binding SelectedTweakPane.SelectedTweak.HasResearchHoldMessage, Converter={StaticResource BoolToVisibility}}">
                                 <StackPanel>
                                     <TextBlock Text="RESEARCH HOLD"

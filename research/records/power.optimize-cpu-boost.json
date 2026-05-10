@@ -200,6 +200,20 @@
         "version-scope"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "kvm-user-scope-revalidation-batch-20260505",
+      "kind": "runtime-read",
+      "title": "KVM user-scope current-state revalidation batch",
+      "location": "registry-research-framework/audit/kvm-user-scope-revalidation-batch-20260505.json",
+      "supports": [
+        "path",
+        "value",
+        "runtime-read",
+        "version-scope"
+      ],
+      "strength": "medium",
+      "summary": "A KVM guest batch on build 26200 re-read the documented PERFBOOSTMODE surface through `powercfg /qh` without changing guest configuration. The live guest still reports PERFBOOSTMODE AC=2 and DC=2 on the current active scheme."
     }
   ],
   "decision": {
@@ -232,7 +246,7 @@
       "notes": "The app provider and engine tweak now use the documented `powercfg` surface instead of the older raw registry bundle."
     }
   ],
-  "last_reviewed_utc": "2026-03-20T00:00:00Z",
+  "last_reviewed_utc": "2026-05-06T00:27:35.2558263Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/windows-hardware/customize/power-settings/options-for-perf-state-engine-perfboostmode",
     "exact_quote_or_path": "PowerCfg alias: PERFBOOSTMODE. Index 2 = Aggressive.",

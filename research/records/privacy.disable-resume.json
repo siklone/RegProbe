@@ -213,6 +213,20 @@
       "strength": "low"
     },
     {
+      "evidence_id": "vm-privacy.disable-resume-etw-qga-unblock-20260507",
+      "kind": "etw-trace",
+      "title": "QGA-first ETW stackwalk runtime receipt for IsResumeAllowed",
+      "location": "evidence/captures/privacy-disable-resume-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/privacy-disable-resume-etw-qga-unblock-20260507/privacy-disable-resume-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/privacy-disable-resume-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/privacy-disable-resume-etw-qga-unblock-20260507/privacy-disable-resume-etw-qga-unblock-20260507.etl",
+      "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 4475 registry events with 524 caller-stack events. The QGA-launched helper targeted `HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\CrossDeviceResume\\Configuration` / `IsResumeAllowed` and the bundle contains target-key activity, but no exact `IsResumeAllowed` RegQueryValue event was observed on the clean baseline.",
+      "supports": [
+        "runtime-observation",
+        "tooling-fix",
+        "path",
+        "version-scope"
+      ],
+      "strength": "medium"
+    },
+    {
       "evidence_id": "vm-privacy.disable-resume-ghidra-launch-receipt-20260427",
       "kind": "vm-test",
       "title": "Guest Ghidra launch receipt for IsResumeAllowed",
@@ -234,7 +248,7 @@
     "why": "Repo notes and local registry observations confirm the current-user Resume setting, and the app now matches that observed surface directly.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-30T18:15:00Z",
+  "last_reviewed_utc": "2026-05-07T09:18:27.7900259Z",
   "validation_proof": {
     "source_url": "Docs/privacy/privacy.md",
     "exact_quote_or_path": "Settings > Apps > Resume writing IsResumeAllowed = 0 when Resume is off and IsResumeAllowed = 1 when Resume is on.",
@@ -267,11 +281,11 @@
     },
     "runtime_capture_reviewed": {
       "etw-stackwalk": true,
-      "status": "ensure_admin_shell_timeout_after_qga_fallback"
+      "status": "qga_unblocked_ingest_ok"
     },
     "etw_stackwalk_reviewed": true,
-    "etw_stackwalk_review_status": "ensure_admin_shell_timeout_after_qga_fallback",
-    "etw_stackwalk_review_artifact": "evidence/captures/privacy-disable-resume-etw-stackwalk-attempt-20260427.json",
+    "etw_stackwalk_review_status": "qga_unblocked_ingest_ok",
+    "etw_stackwalk_review_artifact": "evidence/captures/privacy-disable-resume-etw-qga-unblock-20260507.json",
     "static_reviewed": {
       "ghidra": true,
       "status": "ensure_admin_shell_timeout"
@@ -279,6 +293,6 @@
     "ghidra": true,
     "ghidra_status": "ensure_admin_shell_timeout",
     "ghidra_artifact": "evidence/raw/ghidra/ghidra-privacy-disable-resume-20260427a/summary.json",
-    "notes": "A bounded 2026-04-27 ETW retry for `IsResumeAllowed` never reached trace collection. QGA guest-exec failed during guest-dir setup, the runner fell back to send-key launch, and the fallback still timed out in `ensure-admin-shell` before any ETW artifact reached the host. A same-day fast guest Ghidra retry for `IsResumeAllowed` failed in `ensure-admin-shell` with a bounded timeout, so no xref bundle reached the host."
+    "notes": "A bounded 2026-04-27 ETW retry for `IsResumeAllowed` never reached trace collection. QGA guest-exec failed during guest-dir setup, the runner fell back to send-key launch, and the fallback still timed out in `ensure-admin-shell` before any ETW artifact reached the host. A same-day fast guest Ghidra retry for `IsResumeAllowed` failed in `ensure-admin-shell` with a bounded timeout, so no xref bundle reached the host. A 2026-05-07 QGA-first ETW stackwalk rerun cleared the earlier QGA/send-key blocker and produced target-key runtime activity, but no exact `IsResumeAllowed` value query was observed in the normalized bundle."
   }
 }

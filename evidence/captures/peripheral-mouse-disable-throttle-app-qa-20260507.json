@@ -1,0 +1,230 @@
+{
+  "TweakId": "peripheral.mouse-disable-throttle",
+  "TweakName": "Disable Mouse Throttling for Background Windows",
+  "Success": true,
+  "Status": "ok-gated-override",
+  "Summary": "QA-only gated mutation override used; apply/verify path completed and rollback restored the tweak.",
+  "RollbackRequested": true,
+  "GatedMutationOverrideRequested": true,
+  "GatedMutationOverrideUsed": true,
+  "Card": {
+    "TweakId": "peripheral.mouse-disable-throttle",
+    "Name": "Disable Mouse Throttling for Background Windows",
+    "Category": "Peripheral",
+    "Description": "Disables raw mouse input throttling for background windows and sets the associated throttle duration and leeway values.",
+    "FriendlyDescription": "Disables raw mouse input throttling for background windows and sets the associated throttle duration and leeway values.",
+    "RegistryPath": "",
+    "EvidenceClass": "B",
+    "EvidenceClassTitle": "Strong but Decision-Gated",
+    "ResearchStatus": "INTENTIONAL HOLD",
+    "IsMutationAllowed": false,
+    "RollbackSnapshotState": "ready",
+    "RollbackStoryText": "Rollback: Verified via record-restore-story.",
+    "HasClaimBoundary": true,
+    "WhatWeKnowSummary": "Claim: Disables raw mouse input throttling for background windows and sets the associated throttle duration and leeway values. Evidence: The peripheral documentation includes retained source notes for raw mouse throttling values and the duration/leeway thresholds used by this card. Rollback: Rollback: Verified via record-restore-story.",
+    "WhatWeDoNotClaimSummary": "Apply gate: Evidence pending Source boundary: Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+    "ProofLanes": [
+      {
+        "Key": "docs",
+        "Label": "DOCS",
+        "State": "ready",
+        "Summary": "The peripheral documentation includes retained source notes for raw mouse throttling values and the duration/leeway thresholds used by this card.",
+        "Source": "Validation proof source: C:\\Tools\\AppSmoke\\Docs\\peripheral\\peripheral.md"
+      },
+      {
+        "Key": "runtime",
+        "Label": "RUNTIME",
+        "State": "ready",
+        "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "Source": ""
+      },
+      {
+        "Key": "source",
+        "Label": "SOURCE",
+        "State": "ready",
+        "Summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+        "Source": "decompiled-pseudocode / USBHUB3: https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3"
+      },
+      {
+        "Key": "rollback",
+        "Label": "ROLLBACK",
+        "State": "ready",
+        "Summary": "Rollback: Verified via record-restore-story.",
+        "Source": "record-restore-story"
+      }
+    ],
+    "ReferenceLinks": [
+      {
+        "Title": "Windows Internals resource page",
+        "Url": "https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals",
+        "Kind": "Docs"
+      },
+      {
+        "Title": "Docs: Details",
+        "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html#peripheral.mouse-disable-throttle",
+        "Kind": "Details"
+      },
+      {
+        "Title": "Docs: Peripheral",
+        "Url": "C:\\Tools\\AppSmoke\\Docs\\peripheral\\peripheral.md#peripheral.mouse-disable-throttle",
+        "Kind": "Docs"
+      }
+    ]
+  },
+  "Stages": [
+    {
+      "Stage": "detect-before",
+      "AppliedStatus": "NotApplied",
+      "StatusMessage": "Detected 0 of 3 values (matches: 0, missing: 3).",
+      "OutcomeSummary": "Detect - Success",
+      "CurrentValue": "Unknown",
+      "TargetValue": "Multiple values",
+      "WasRolledBack": false,
+      "IsMutationAllowed": false,
+      "HasSuccessfulApplyStory": false,
+      "HasSuccessfulRollbackStory": false,
+      "Steps": [
+        {
+          "Action": "Detect",
+          "StatusText": "Detected",
+          "Message": "Detected 0 of 3 values (matches: 0, missing: 3).\nEntries:\n- HKCU\\Control Panel\\Mouse\\RawMouseThrottleDuration: missing\n- HKCU\\Control Panel\\Mouse\\RawMouseThrottleEnabled: missing\n- HKCU\\Control Panel\\Mouse\\RawMouseThrottleLeeway: missing",
+          "TimestampText": "16:08:45"
+        },
+        {
+          "Action": "Apply",
+          "StatusText": "Pending",
+          "Message": "",
+          "TimestampText": "-"
+        },
+        {
+          "Action": "Verify",
+          "StatusText": "Pending",
+          "Message": "",
+          "TimestampText": "-"
+        },
+        {
+          "Action": "Rollback",
+          "StatusText": "Pending",
+          "Message": "",
+          "TimestampText": "-"
+        }
+      ]
+    },
+    {
+      "Stage": "apply",
+      "AppliedStatus": "Applied",
+      "StatusMessage": "Run completed.",
+      "OutcomeSummary": "Apply - Success",
+      "CurrentValue": "Multiple values",
+      "TargetValue": "Multiple values",
+      "WasRolledBack": false,
+      "IsMutationAllowed": false,
+      "HasSuccessfulApplyStory": true,
+      "HasSuccessfulRollbackStory": false,
+      "Steps": [
+        {
+          "Action": "Detect",
+          "StatusText": "Detected",
+          "Message": "Detected 0 of 3 values (matches: 0, missing: 3).\nEntries:\n- HKCU\\Control Panel\\Mouse\\RawMouseThrottleDuration: missing\n- HKCU\\Control Panel\\Mouse\\RawMouseThrottleEnabled: missing\n- HKCU\\Control Panel\\Mouse\\RawMouseThrottleLeeway: missing",
+          "TimestampText": "16:08:45"
+        },
+        {
+          "Action": "Apply",
+          "StatusText": "Applied",
+          "Message": "Updated 3 values.",
+          "TimestampText": "16:08:45"
+        },
+        {
+          "Action": "Verify",
+          "StatusText": "Verified",
+          "Message": "Verified desired values.",
+          "TimestampText": "16:08:45"
+        },
+        {
+          "Action": "Rollback",
+          "StatusText": "Not required",
+          "Message": "Step not executed.",
+          "TimestampText": "-"
+        }
+      ]
+    },
+    {
+      "Stage": "rollback",
+      "AppliedStatus": "NotApplied",
+      "StatusMessage": "Rolled back registry values.",
+      "OutcomeSummary": "Rollback - Rolled Back",
+      "CurrentValue": "Multiple values",
+      "TargetValue": "Multiple values",
+      "WasRolledBack": true,
+      "IsMutationAllowed": false,
+      "HasSuccessfulApplyStory": true,
+      "HasSuccessfulRollbackStory": true,
+      "Steps": [
+        {
+          "Action": "Detect",
+          "StatusText": "Detected",
+          "Message": "Detected 0 of 3 values (matches: 0, missing: 3).\nEntries:\n- HKCU\\Control Panel\\Mouse\\RawMouseThrottleDuration: missing\n- HKCU\\Control Panel\\Mouse\\RawMouseThrottleEnabled: missing\n- HKCU\\Control Panel\\Mouse\\RawMouseThrottleLeeway: missing",
+          "TimestampText": "16:08:45"
+        },
+        {
+          "Action": "Apply",
+          "StatusText": "Applied",
+          "Message": "Updated 3 values.",
+          "TimestampText": "16:08:45"
+        },
+        {
+          "Action": "Verify",
+          "StatusText": "Verified",
+          "Message": "Verified desired values.",
+          "TimestampText": "16:08:45"
+        },
+        {
+          "Action": "Rollback",
+          "StatusText": "Rolled back",
+          "Message": "Rolled back registry values.",
+          "TimestampText": "16:08:45"
+        }
+      ]
+    },
+    {
+      "Stage": "detect-after",
+      "AppliedStatus": "NotApplied",
+      "StatusMessage": "Detected 0 of 3 values (matches: 0, missing: 3).",
+      "OutcomeSummary": "Detect - Success",
+      "CurrentValue": "Multiple values",
+      "TargetValue": "Multiple values",
+      "WasRolledBack": true,
+      "IsMutationAllowed": false,
+      "HasSuccessfulApplyStory": true,
+      "HasSuccessfulRollbackStory": true,
+      "Steps": [
+        {
+          "Action": "Detect",
+          "StatusText": "Detected",
+          "Message": "Detected 0 of 3 values (matches: 0, missing: 3).\nEntries:\n- HKCU\\Control Panel\\Mouse\\RawMouseThrottleDuration: missing\n- HKCU\\Control Panel\\Mouse\\RawMouseThrottleEnabled: missing\n- HKCU\\Control Panel\\Mouse\\RawMouseThrottleLeeway: missing",
+          "TimestampText": "16:08:45"
+        },
+        {
+          "Action": "Apply",
+          "StatusText": "Applied",
+          "Message": "Updated 3 values.",
+          "TimestampText": "16:08:45"
+        },
+        {
+          "Action": "Verify",
+          "StatusText": "Verified",
+          "Message": "Verified desired values.",
+          "TimestampText": "16:08:45"
+        },
+        {
+          "Action": "Rollback",
+          "StatusText": "Rolled back",
+          "Message": "Rolled back registry values.",
+          "TimestampText": "16:08:45"
+        }
+      ]
+    }
+  ],
+  "StartedAtUtc": "2026-05-07T23:08:45.0893973+00:00",
+  "CompletedAtUtc": "2026-05-07T23:08:45.348714+00:00"
+}

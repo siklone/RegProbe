@@ -34,4 +34,4 @@ Do not split them or treat them as an end-user tweak yet.
 
 ## Retained audit artifact
 
-- [power-session-watchdog-timeouts-candidate-package-20260328.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/power-session-watchdog-timeouts-candidate-package-20260328.json)
+- [power-session-watchdog-timeouts-candidate-package-20260328.json](../../registry-research-framework/audit/power-session-watchdog-timeouts-candidate-package-20260328.json)

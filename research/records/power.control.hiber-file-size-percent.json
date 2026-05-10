@@ -255,7 +255,12 @@
     "why": "HiberFileSizePercent now has a real docs/static/runtime package on RegProbe-Baseline-ToolsHardened-20260330 plus a KVM local-KD follow-up that confirms the live current-build `Control\\Power` path and a running `PopHiberFileSizePercent = 0` state. Repeated KVM Procmon replays also captured real adjacent `Control\\Power` activity, and a host-driven KVM reboot observation proves that the value persists at `0` across a real guest reboot while hibernation remains unavailable. A QGA-launched WPR boot trace now adds the missing exact runtime read by normalizing a `Registry / QueryValue / HiberFileSizePercent` event. The record remains intentionally held because this is a raw power-manager value, not a mapped or supported end-user tweak surface.",
     "blocking_issues": [
       "hiber-file-size-percent-research-only-raw-power-manager-value"
-    ]
+    ],
+    "promotion_disposition": "rejected",
+    "promotion_disposition_kind": "intentional-hold-closed",
+    "promotion_disposition_reason": "Closed as rejected for app/research-provider promotion because the remaining evidence gap is intentional: current-build exact reads, safe trigger conditions, authoritative semantics, or boot-safe validation are still missing.",
+    "promotion_reopen_criteria": "Reopen only with a safer current-build lane that proves exact target consumption and resolves the listed intentional-hold blockers.",
+    "promotion_disposition_reviewed_utc": "2026-05-07T20:20:00Z"
   },
   "tested_on": [
     {
@@ -277,7 +282,7 @@
       "notes": "A QGA-launched WPR boot trace produced an exact normalized `Registry / QueryValue / HiberFileSizePercent` event under `HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power`."
     }
   ],
-  "last_reviewed_utc": "2026-04-28T11:02:09Z",
+  "last_reviewed_utc": "2026-05-07T20:20:00Z",
   "version_stable": [
     "25H2"
   ],

@@ -183,7 +183,7 @@ public sealed class NohutoCoverageTweakProviderTests
     }
 
     [Fact]
-    public void PowerProvider_Still_Exposes_Legacy_Power_Batches()
+    public void PowerProvider_Exposes_RecordBacked_Power_Batches()
     {
         var provider = new PowerTweakProvider();
         var tweaks = provider.CreateTweaks(default!, BuildContext(), false).ToList();
@@ -191,7 +191,7 @@ public sealed class NohutoCoverageTweakProviderTests
         var commandBackedIds = new[]
         {
             "power.optimize-performance",
-            "power.disable-network-power-saving",
+            "power.disable-network-power-saving.policy",
         };
 
         foreach (var id in commandBackedIds)

@@ -32,6 +32,8 @@ public sealed class ServiceStartModeBatchTweakTests
 
         var detect = await tweak.DetectAsync(CancellationToken.None);
         Assert.Equal(TweakStatus.Detected, detect.Status);
+        Assert.Contains("->", detect.Message);
+        Assert.DoesNotContain("â†’", detect.Message);
 
         var apply = await tweak.ApplyAsync(CancellationToken.None);
         Assert.Equal(TweakStatus.Applied, apply.Status);

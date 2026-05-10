@@ -192,6 +192,21 @@
       "strength": "low"
     },
     {
+      "evidence_id": "vm-network.smb-encrypt-data-etw-qga-unblock-20260507",
+      "kind": "etw-trace",
+      "title": "QGA-first ETW stackwalk runtime receipt for EncryptData",
+      "location": "evidence/captures/network-smb-encrypt-data-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/network-smb-encrypt-data-etw-qga-unblock-20260507/network-smb-encrypt-data-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/network-smb-encrypt-data-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/network-smb-encrypt-data-etw-qga-unblock-20260507/network-smb-encrypt-data-etw-qga-unblock-20260507.etl",
+      "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 5130 registry events with 1190 caller-stack events. The bundle contains an exact helper-triggered `RegQueryValue` for `HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters` / `EncryptData`, returning `0xC0000034` on the clean baseline.",
+      "supports": [
+        "runtime-observation",
+        "tooling-fix",
+        "path",
+        "value",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
       "evidence_id": "vm-network.smb-encrypt-data-ghidra-launch-receipt-20260427",
       "kind": "vm-test",
       "title": "Guest Ghidra launch receipt for EncryptData",
@@ -219,7 +234,7 @@
     "key_found_on_page": true,
     "notes": "Guest-side reversible probe on Win25H2Clean confirmed the SMB server EncryptData state transitions and restored the machine back to the baseline False state."
   },
-  "last_reviewed_utc": "2026-04-30T18:44:44Z",
+  "last_reviewed_utc": "2026-05-07T09:15:18.2495192Z",
   "source_enrichment": {
     "last_updated_utc": "2026-04-28T16:59:41Z",
     "source_mirror_reviewed": {
@@ -246,11 +261,11 @@
     },
     "runtime_capture_reviewed": {
       "etw-stackwalk": true,
-      "status": "ensure_admin_shell_timeout_after_qga_fallback"
+      "status": "qga_unblocked_ingest_ok"
     },
     "etw_stackwalk_reviewed": true,
-    "etw_stackwalk_review_status": "ensure_admin_shell_timeout_after_qga_fallback",
-    "etw_stackwalk_review_artifact": "evidence/captures/network-smb-encrypt-data-etw-stackwalk-attempt-20260427.json",
+    "etw_stackwalk_review_status": "qga_unblocked_ingest_ok",
+    "etw_stackwalk_review_artifact": "evidence/captures/network-smb-encrypt-data-etw-qga-unblock-20260507.json",
     "static_reviewed": {
       "ghidra": true,
       "status": "ensure_admin_shell_timeout"
@@ -258,6 +273,6 @@
     "ghidra": true,
     "ghidra_status": "ensure_admin_shell_timeout",
     "ghidra_artifact": "evidence/raw/ghidra/ghidra-network-smb-encrypt-data-20260427a/summary.json",
-    "notes": "A bounded 2026-04-27 ETW retry for `EncryptData` never reached trace collection. QGA guest-exec failed during guest-dir setup, the runner fell back to send-key launch, and the fallback still timed out in `ensure-admin-shell` before any ETW artifact reached the host. A same-day fast guest Ghidra retry for `EncryptData` failed in `ensure-admin-shell` with a bounded timeout, so no xref bundle reached the host."
+    "notes": "A bounded 2026-04-27 ETW retry for `EncryptData` never reached trace collection. QGA guest-exec failed during guest-dir setup, the runner fell back to send-key launch, and the fallback still timed out in `ensure-admin-shell` before any ETW artifact reached the host. A same-day fast guest Ghidra retry for `EncryptData` failed in `ensure-admin-shell` with a bounded timeout, so no xref bundle reached the host. A 2026-05-07 QGA-first ETW stackwalk rerun cleared the earlier QGA/send-key blocker and produced an exact helper-triggered `RegQueryValue` for `EncryptData` with caller-stack capture."
   }
 }

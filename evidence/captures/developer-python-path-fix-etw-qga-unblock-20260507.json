@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-07T09:49:22.7370600Z",
+  "record_id": "developer.python-path-fix",
+  "run_id": "developer-enable-windows-long-paths-etw-qga-unblock-20260507",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem",
+  "value_name": "LongPathsEnabled",
+  "attempt_status": "qga_unblocked_ingest_ok",
+  "assessment": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and a normalized bundle with 4442 registry events and 527 caller-stack events. The bundle contains an exact RegQueryValue event for HKLM\\SYSTEM\\CurrentControlSet\\Control\\FileSystem / LongPathsEnabled from the helper probe, returning 0x00000000 on the clean baseline.",
+  "target_observation": {
+    "exact_value_query": true,
+    "operation": "RegQueryValue",
+    "representative_status": "0x00000000",
+    "event_count": 4442,
+    "caller_stack_event_count": 527,
+    "target_key_event_count": 13,
+    "target_value_event_count": 3,
+    "target_command_event_count": 4,
+    "launch_transport": "qga"
+  },
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/developer-enable-windows-long-paths-etw-qga-unblock-20260507/developer-enable-windows-long-paths-etw-qga-unblock-20260507-summary.json",
+      "sha256": "cebc7b7be35908356a10d0a629ed9c326ab54db200dd993ce2ed52f1a0624bce",
+      "size": 7884,
+      "collected_utc": "2026-05-07T09:49:22.7370600Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/developer-enable-windows-long-paths-etw-qga-unblock-20260507/normalized-registry-bundle.json",
+      "sha256": "9b9c3e9ce05c898eb38a88b1b29e698c1d927f88c5e02461697cb6e2866f7fc1",
+      "size": 5570372,
+      "collected_utc": "2026-05-07T09:49:22.7370600Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/developer-enable-windows-long-paths-etw-qga-unblock-20260507/developer-enable-windows-long-paths-etw-qga-unblock-20260507.etl",
+      "sha256": "24367e851e70b48d29d02267e0bb4d6cf87d4aade36384aee587c1d22c713775",
+      "size": 12582912,
+      "collected_utc": "2026-05-07T09:49:22.7370600Z"
+    }
+  ]
+}

@@ -1,0 +1,162 @@
+{
+  "generated_utc": "2026-05-09T08:35:42Z",
+  "status": "ok",
+  "scope": "operator-regadd-first-vm-wave",
+  "baseline_before": "registry-research-framework/audit/operator-regadd-vm-baseline-20260509T081911Z.json",
+  "baseline_after": "registry-research-framework/audit/operator-regadd-vm-baseline-20260509T083542Z.json",
+  "baseline_before_counts": {
+    "total_entries": 96,
+    "key_present_count": 94,
+    "key_missing_count": 2,
+    "value_present_count": 21,
+    "value_missing_count": 73,
+    "error_count": 0
+  },
+  "baseline_after_counts": {
+    "total_entries": 96,
+    "key_present_count": 94,
+    "key_missing_count": 2,
+    "value_present_count": 21,
+    "value_missing_count": 73,
+    "error_count": 0
+  },
+  "tested_records": 5,
+  "all_experiments_ok": true,
+  "all_hard_smoke_ok": true,
+  "records": [
+    {
+      "label": "power.disable-power-throttling/key-missing-create",
+      "artifact_json": "registry-research-framework/audit/registry-value-experiments/win11-25h2-powerthrottlingoff-1-gui-smoke-clean-rollback.json",
+      "artifact_markdown": "registry-research-framework/audit/registry-value-experiments/win11-25h2-powerthrottlingoff-1-gui-smoke-clean-rollback.md",
+      "status": "ok",
+      "target": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerThrottling\\PowerThrottlingOff",
+      "tested_value": 1,
+      "original_status": "key-missing",
+      "original_value": null,
+      "after_reboot_status": "value-present",
+      "after_reboot_value": 1,
+      "restore_action": "removed-created-key",
+      "final_status": "key-missing",
+      "final_value": null,
+      "hard_smoke": {
+        "apply_smoke_hard_success": true,
+        "post_reboot_smoke_hard_success": true,
+        "post_rollback_smoke_hard_success": true
+      }
+    },
+    {
+      "label": "session-manager-power.hiberbootenabled/existing-toggle",
+      "artifact_json": "registry-research-framework/audit/registry-value-experiments/win11-25h2-sessionmanager-hiberbootenabled-0-gui-smoke.json",
+      "artifact_markdown": "registry-research-framework/audit/registry-value-experiments/win11-25h2-sessionmanager-hiberbootenabled-0-gui-smoke.md",
+      "status": "ok",
+      "target": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power\\HiberbootEnabled",
+      "tested_value": 0,
+      "original_status": "value-present",
+      "original_value": 1,
+      "after_reboot_status": "value-present",
+      "after_reboot_value": 0,
+      "restore_action": "restored-original-value",
+      "final_status": "value-present",
+      "final_value": 1,
+      "hard_smoke": {
+        "apply_smoke_hard_success": true,
+        "post_reboot_smoke_hard_success": true,
+        "post_rollback_smoke_hard_success": true
+      }
+    },
+    {
+      "label": "power.energy-estimation-enabled/existing-toggle",
+      "artifact_json": "registry-research-framework/audit/registry-value-experiments/win11-25h2-energyestimationenabled-0-gui-smoke.json",
+      "artifact_markdown": "registry-research-framework/audit/registry-value-experiments/win11-25h2-energyestimationenabled-0-gui-smoke.md",
+      "status": "ok",
+      "target": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\EnergyEstimationEnabled",
+      "tested_value": 0,
+      "original_status": "value-present",
+      "original_value": 1,
+      "after_reboot_status": "value-present",
+      "after_reboot_value": 0,
+      "restore_action": "restored-original-value",
+      "final_status": "value-present",
+      "final_value": 1,
+      "hard_smoke": {
+        "apply_smoke_hard_success": true,
+        "post_reboot_smoke_hard_success": true,
+        "post_rollback_smoke_hard_success": true
+      }
+    },
+    {
+      "label": "power.perf-calculate-actual-utilization/existing-toggle",
+      "artifact_json": "registry-research-framework/audit/registry-value-experiments/win11-25h2-perfcalculateactualutilization-0-gui-smoke.json",
+      "artifact_markdown": "registry-research-framework/audit/registry-value-experiments/win11-25h2-perfcalculateactualutilization-0-gui-smoke.md",
+      "status": "ok",
+      "target": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PerfCalculateActualUtilization",
+      "tested_value": 0,
+      "original_status": "value-present",
+      "original_value": 1,
+      "after_reboot_status": "value-present",
+      "after_reboot_value": 0,
+      "restore_action": "restored-original-value",
+      "final_status": "value-present",
+      "final_value": 1,
+      "hard_smoke": {
+        "apply_smoke_hard_success": true,
+        "post_reboot_smoke_hard_success": true,
+        "post_rollback_smoke_hard_success": true
+      }
+    },
+    {
+      "label": "power.force-hibernate-disabled-policy/key-missing-create",
+      "artifact_json": "registry-research-framework/audit/registry-value-experiments/win11-25h2-forcehibernatedisabled-policy-1-gui-smoke.json",
+      "artifact_markdown": "registry-research-framework/audit/registry-value-experiments/win11-25h2-forcehibernatedisabled-policy-1-gui-smoke.md",
+      "status": "ok",
+      "target": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ForceHibernateDisabled\\Policy",
+      "tested_value": 1,
+      "original_status": "key-missing",
+      "original_value": null,
+      "after_reboot_status": "value-present",
+      "after_reboot_value": 1,
+      "restore_action": "removed-created-key",
+      "final_status": "key-missing",
+      "final_value": null,
+      "hard_smoke": {
+        "apply_smoke_hard_success": true,
+        "post_reboot_smoke_hard_success": true,
+        "post_rollback_smoke_hard_success": true
+      }
+    }
+  ],
+  "superseded_artifacts": [
+    {
+      "artifact_json": "registry-research-framework/audit/registry-value-experiments/win11-25h2-powerthrottlingoff-1-gui-smoke.json",
+      "reason": "First run exposed rollback bug: value removed but empty created key was retained. Superseded by clean-rollback run after runner fix."
+    }
+  ],
+  "notes": [
+    "Store URI launch fails from QGA/SYSTEM with operation-not-supported in all stages; treated as soft/user-session smoke gap, not value-specific regression.",
+    "Post-wave baseline matches pre-wave counts: rollback returned inventory to original key/value presence profile.",
+    "Next waves should split missing existing-key values into ETW/Procmon/WPR lanes and high-risk kernel values into smaller snapshot-protected batches.",
+    "Lane probe for AllowAudioToEnableExecutionRequiredPowerRequests showed dependency/tooling gaps: clean 25H2 VM lacks WPT/xperf, and Procmon bootlog runner still needs QGA-first hardening."
+  ],
+  "lane_probe_attempts": [
+    {
+      "record": "power.control.allow-audio-to-enable-execution-required-power-requests",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "AllowAudioToEnableExecutionRequiredPowerRequests",
+      "lane": "etw-stackwalk",
+      "status": "error",
+      "error_kind": "etw-stackwalk-capture-failed",
+      "error": "xperf.exe not found. Install Windows Performance Toolkit.",
+      "artifact": "registry-research-framework/audit/operator-allowaudio-execpowerrequests-etw-20260509-summary.json"
+    },
+    {
+      "record": "power.control.allow-audio-to-enable-execution-required-power-requests",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "AllowAudioToEnableExecutionRequiredPowerRequests",
+      "lane": "procmon-bootlog",
+      "status": "error",
+      "error_kind": "procmon-host-step-error",
+      "error": "Procmon runner still arms through ensure-admin-shell/send-key path and timed out despite QGA being healthy.",
+      "artifact": "registry-research-framework/audit/operator-allowaudio-execpowerrequests-procmon-20260509-summary.json"
+    }
+  ]
+}

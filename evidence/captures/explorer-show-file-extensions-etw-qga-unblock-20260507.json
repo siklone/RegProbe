@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-07T13:43:56.0170381Z",
+  "record_id": "explorer.show-file-extensions",
+  "run_id": "explorer-show-file-extensions-etw-qga-unblock-20260507",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "registry_path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced",
+  "value_name": "HideFileExt",
+  "attempt_status": "qga_unblocked_ingest_ok",
+  "assessment": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and a normalized bundle with 4566 registry events and 569 caller-stack events. The QGA-launched helper targeted HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced / HideFileExt; the bundle contains target command/subkey activity (0 target value events), but no exact current-user HKCU RegQueryValue event for HideFileExt was observed under the SYSTEM QGA context.",
+  "target_observation": {
+    "exact_value_query": false,
+    "operation": "RegQueryValue",
+    "representative_status": null,
+    "event_count": 4566,
+    "caller_stack_event_count": 569,
+    "target_key_event_count": 9,
+    "target_value_event_count": 0,
+    "current_user_hkcu_value_event_count": 0,
+    "target_command_event_count": 2,
+    "launch_transport": "qga"
+  },
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/explorer-show-file-extensions-etw-qga-unblock-20260507/explorer-show-file-extensions-etw-qga-unblock-20260507-summary.json",
+      "sha256": "dd2b365244ad0146293566632f532a0e67fcb017100c139bb6d112bcd9009a6c",
+      "size": 7693,
+      "collected_utc": "2026-05-07T13:43:56.0170381Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/explorer-show-file-extensions-etw-qga-unblock-20260507/normalized-registry-bundle.json",
+      "sha256": "75c299a3df6aefcb1ec8b95561e650a2d380ca0d5b182685f1de9585d30327fc",
+      "size": 5616105,
+      "collected_utc": "2026-05-07T13:43:56.0170381Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/explorer-show-file-extensions-etw-qga-unblock-20260507/explorer-show-file-extensions-etw-qga-unblock-20260507.etl",
+      "sha256": "5bed7aa0bff9eefd6906a7e013871a093abf840be06cd8c30dc0896f0e3af028",
+      "size": 12582912,
+      "collected_utc": "2026-05-07T13:43:56.0170381Z"
+    }
+  ]
+}

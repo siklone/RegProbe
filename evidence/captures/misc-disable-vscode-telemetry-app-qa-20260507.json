@@ -1,0 +1,235 @@
+{
+  "TweakId": "misc.disable-vscode-telemetry",
+  "TweakName": "VS Code Telemetry \u0026 Online Features",
+  "Success": true,
+  "Status": "ok-gated-override",
+  "Summary": "QA-only gated mutation override used; apply/verify path completed and rollback restored the tweak.",
+  "RollbackRequested": true,
+  "GatedMutationOverrideRequested": true,
+  "GatedMutationOverrideUsed": true,
+  "Card": {
+    "TweakId": "misc.disable-vscode-telemetry",
+    "Name": "VS Code Telemetry \u0026 Online Features",
+    "Category": "Misc",
+    "Description": "Choose which VS Code user-settings keys this tweak writes for telemetry, experiments, updates, recommendations, autofetch, and npm package lookups.",
+    "FriendlyDescription": "This only changes your VS Code user settings file. It does not touch Windows services or block network traffic system-wide.",
+    "RegistryPath": "",
+    "EvidenceClass": "B",
+    "EvidenceClassTitle": "Strong but Decision-Gated",
+    "ResearchStatus": "INTENTIONAL HOLD",
+    "IsMutationAllowed": false,
+    "RollbackSnapshotState": "ready",
+    "RollbackStoryText": "Rollback: Verified via record-restore-story.",
+    "HasClaimBoundary": true,
+    "WhatWeKnowSummary": "Claim: This only changes your VS Code user settings file. It does not touch Windows services or block network traffic system-wide. Evidence: The misc documentation maps the VS Code settings profile to telemetry level, update mode, online experiments, git/npm online fetches, and recommendation controls. Rollback: Rollback: Verified via record-restore-story.",
+    "WhatWeDoNotClaimSummary": "Apply gate: Evidence pending",
+    "ProofLanes": [
+      {
+        "Key": "docs",
+        "Label": "DOCS",
+        "State": "ready",
+        "Summary": "The misc documentation maps the VS Code settings profile to telemetry level, update mode, online experiments, git/npm online fetches, and recommendation controls.",
+        "Source": "Validation proof source: C:\\Tools\\AppSmoke\\Docs\\misc\\misc.md"
+      },
+      {
+        "Key": "runtime",
+        "Label": "RUNTIME",
+        "State": "ready",
+        "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "Source": ""
+      },
+      {
+        "Key": "source",
+        "Label": "SOURCE",
+        "State": "ready",
+        "Summary": "No upstream nohuto source link is attached to this record.",
+        "Source": ""
+      },
+      {
+        "Key": "rollback",
+        "Label": "ROLLBACK",
+        "State": "ready",
+        "Summary": "Rollback: Verified via record-restore-story.",
+        "Source": "record-restore-story"
+      }
+    ],
+    "ReferenceLinks": [
+      {
+        "Title": "Docs: Details (missing)",
+        "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html",
+        "Kind": "Details"
+      },
+      {
+        "Title": "Docs: Misc (section missing)",
+        "Url": "C:\\Tools\\AppSmoke\\Docs\\misc\\misc.md",
+        "Kind": "Docs"
+      },
+      {
+        "Title": "VS Code telemetry docs",
+        "Url": "https://code.visualstudio.com/docs/getstarted/telemetry",
+        "Kind": "Docs"
+      },
+      {
+        "Title": "VS Code update behavior",
+        "Url": "https://code.visualstudio.com/docs/setup/setup-overview#_updates",
+        "Kind": "Docs"
+      }
+    ]
+  },
+  "Stages": [
+    {
+      "Stage": "detect-before",
+      "AppliedStatus": "NotApplied",
+      "StatusMessage": "Current profile is \u0027VS Code default\u0027. Selected profile is \u0027Privacy-focused\u0027.\nManaged settings: extensions.autoCheckUpdates, extensions.autoUpdate, extensions.ignoreRecommendations, git.autofetch, npm.fetchOnlinePackageInfo, telemetry.telemetryLevel, update.mode, update.showReleaseNotes, workbench.enableExperiments.",
+      "OutcomeSummary": "Detect - Success",
+      "CurrentValue": "VS Code default",
+      "TargetValue": "Privacy-focused",
+      "WasRolledBack": false,
+      "IsMutationAllowed": false,
+      "HasSuccessfulApplyStory": false,
+      "HasSuccessfulRollbackStory": false,
+      "Steps": [
+        {
+          "Action": "Detect",
+          "StatusText": "Detected",
+          "Message": "Current profile is \u0027VS Code default\u0027. Selected profile is \u0027Privacy-focused\u0027.\nManaged settings: extensions.autoCheckUpdates, extensions.autoUpdate, extensions.ignoreRecommendations, git.autofetch, npm.fetchOnlinePackageInfo, telemetry.telemetryLevel, update.mode, update.showReleaseNotes, workbench.enableExperiments.",
+          "TimestampText": "16:08:02"
+        },
+        {
+          "Action": "Apply",
+          "StatusText": "Pending",
+          "Message": "",
+          "TimestampText": "-"
+        },
+        {
+          "Action": "Verify",
+          "StatusText": "Pending",
+          "Message": "",
+          "TimestampText": "-"
+        },
+        {
+          "Action": "Rollback",
+          "StatusText": "Pending",
+          "Message": "",
+          "TimestampText": "-"
+        }
+      ]
+    },
+    {
+      "Stage": "apply",
+      "AppliedStatus": "Applied",
+      "StatusMessage": "Run completed.",
+      "OutcomeSummary": "Apply - Success",
+      "CurrentValue": "Privacy-focused",
+      "TargetValue": "Privacy-focused",
+      "WasRolledBack": false,
+      "IsMutationAllowed": false,
+      "HasSuccessfulApplyStory": true,
+      "HasSuccessfulRollbackStory": false,
+      "Steps": [
+        {
+          "Action": "Detect",
+          "StatusText": "Detected",
+          "Message": "Current profile is \u0027VS Code default\u0027. Selected profile is \u0027Privacy-focused\u0027.\nManaged settings: extensions.autoCheckUpdates, extensions.autoUpdate, extensions.ignoreRecommendations, git.autofetch, npm.fetchOnlinePackageInfo, telemetry.telemetryLevel, update.mode, update.showReleaseNotes, workbench.enableExperiments.",
+          "TimestampText": "16:08:03"
+        },
+        {
+          "Action": "Apply",
+          "StatusText": "Applied",
+          "Message": "Applied profile \u0027Privacy-focused\u0027.",
+          "TimestampText": "16:08:03"
+        },
+        {
+          "Action": "Verify",
+          "StatusText": "Verified",
+          "Message": "Verified profile \u0027Privacy-focused\u0027.",
+          "TimestampText": "16:08:03"
+        },
+        {
+          "Action": "Rollback",
+          "StatusText": "Not required",
+          "Message": "Step not executed.",
+          "TimestampText": "-"
+        }
+      ]
+    },
+    {
+      "Stage": "rollback",
+      "AppliedStatus": "NotApplied",
+      "StatusMessage": "Removed settings.json to restore the pre-tweak state.",
+      "OutcomeSummary": "Rollback - Rolled Back",
+      "CurrentValue": "VS Code default",
+      "TargetValue": "Privacy-focused",
+      "WasRolledBack": true,
+      "IsMutationAllowed": false,
+      "HasSuccessfulApplyStory": true,
+      "HasSuccessfulRollbackStory": true,
+      "Steps": [
+        {
+          "Action": "Detect",
+          "StatusText": "Detected",
+          "Message": "Current profile is \u0027VS Code default\u0027. Selected profile is \u0027Privacy-focused\u0027.\nManaged settings: extensions.autoCheckUpdates, extensions.autoUpdate, extensions.ignoreRecommendations, git.autofetch, npm.fetchOnlinePackageInfo, telemetry.telemetryLevel, update.mode, update.showReleaseNotes, workbench.enableExperiments.",
+          "TimestampText": "16:08:03"
+        },
+        {
+          "Action": "Apply",
+          "StatusText": "Applied",
+          "Message": "Applied profile \u0027Privacy-focused\u0027.",
+          "TimestampText": "16:08:03"
+        },
+        {
+          "Action": "Verify",
+          "StatusText": "Verified",
+          "Message": "Verified profile \u0027Privacy-focused\u0027.",
+          "TimestampText": "16:08:03"
+        },
+        {
+          "Action": "Rollback",
+          "StatusText": "Rolled back",
+          "Message": "Removed settings.json to restore the pre-tweak state.",
+          "TimestampText": "16:08:03"
+        }
+      ]
+    },
+    {
+      "Stage": "detect-after",
+      "AppliedStatus": "NotApplied",
+      "StatusMessage": "Current profile is \u0027VS Code default\u0027. Selected profile is \u0027Privacy-focused\u0027.\nManaged settings: extensions.autoCheckUpdates, extensions.autoUpdate, extensions.ignoreRecommendations, git.autofetch, npm.fetchOnlinePackageInfo, telemetry.telemetryLevel, update.mode, update.showReleaseNotes, workbench.enableExperiments.",
+      "OutcomeSummary": "Detect - Success",
+      "CurrentValue": "VS Code default",
+      "TargetValue": "Privacy-focused",
+      "WasRolledBack": true,
+      "IsMutationAllowed": false,
+      "HasSuccessfulApplyStory": true,
+      "HasSuccessfulRollbackStory": true,
+      "Steps": [
+        {
+          "Action": "Detect",
+          "StatusText": "Detected",
+          "Message": "Current profile is \u0027VS Code default\u0027. Selected profile is \u0027Privacy-focused\u0027.\nManaged settings: extensions.autoCheckUpdates, extensions.autoUpdate, extensions.ignoreRecommendations, git.autofetch, npm.fetchOnlinePackageInfo, telemetry.telemetryLevel, update.mode, update.showReleaseNotes, workbench.enableExperiments.",
+          "TimestampText": "16:08:03"
+        },
+        {
+          "Action": "Apply",
+          "StatusText": "Applied",
+          "Message": "Applied profile \u0027Privacy-focused\u0027.",
+          "TimestampText": "16:08:03"
+        },
+        {
+          "Action": "Verify",
+          "StatusText": "Verified",
+          "Message": "Verified profile \u0027Privacy-focused\u0027.",
+          "TimestampText": "16:08:03"
+        },
+        {
+          "Action": "Rollback",
+          "StatusText": "Rolled back",
+          "Message": "Removed settings.json to restore the pre-tweak state.",
+          "TimestampText": "16:08:03"
+        }
+      ]
+    }
+  ],
+  "StartedAtUtc": "2026-05-07T23:08:02.9545911+00:00",
+  "CompletedAtUtc": "2026-05-07T23:08:03.3873734+00:00"
+}

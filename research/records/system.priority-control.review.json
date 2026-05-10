@@ -425,6 +425,20 @@
         "performance"
       ],
       "strength": "medium"
+    },
+    {
+      "evidence_id": "kvm-machine-scope-revalidation-batch-20260505",
+      "kind": "runtime-read",
+      "title": "KVM machine-scope current-state revalidation batch",
+      "location": "registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json",
+      "summary": "A KVM guest batch on build 26200 re-read selected machine-scope service and registry targets without changing guest configuration. The current guest still reports Win32PrioritySeparation = 2 at HKLM\\SYSTEM\\CurrentControlSet\\Control\\PriorityControl.",
+      "supports": [
+        "path",
+        "value",
+        "runtime-read",
+        "version-scope"
+      ],
+      "strength": "medium"
     }
   ],
   "decision": {
@@ -441,7 +455,7 @@
     "Can a future IDA parity pass confirm the same bounded GetNTInfo and PutInstance branch mapping once a Pro/headless toolchain is available?",
     "Can a modern Microsoft primary source for the exact raw Win32PrioritySeparation bitmask semantics be captured?"
   ],
-  "last_reviewed_utc": "2026-04-01T00:00:00Z",
+  "last_reviewed_utc": "2026-05-05T13:08:51.8557437Z",
   "validation_proof": {
     "source_url": "research/notes/priority-control-procmon-validation-20260326.md",
     "exact_quote_or_path": "prioritycontrol-state-2.txt: wmiprvse.exe RegQueryValue ... Win32PrioritySeparation Data: 2. prioritycontrol-state-38.txt: wmiprvse.exe RegQueryValue ... Win32PrioritySeparation Data: 38. priority-control-20260324-201011/summary.json: baseline=2, candidate=38, restore=2 with bounded CPU and memory runs.",

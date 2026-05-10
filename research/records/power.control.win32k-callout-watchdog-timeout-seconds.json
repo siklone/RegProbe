@@ -255,7 +255,12 @@
       "win32k-callout-watchdog-helper-query-only-not-boot-consumer",
       "win32k-callout-watchdog-no-primary-current-build-doc",
       "win32k-callout-watchdog-override-semantics-unproven"
-    ]
+    ],
+    "promotion_disposition": "rejected",
+    "promotion_disposition_kind": "intentional-hold-closed",
+    "promotion_disposition_reason": "Closed as rejected for app/research-provider promotion because the remaining evidence gap is intentional: current-build exact reads, safe trigger conditions, authoritative semantics, or boot-safe validation are still missing.",
+    "promotion_reopen_criteria": "Reopen only with a safer current-build lane that proves exact target consumption and resolves the listed intentional-hold blockers.",
+    "promotion_disposition_reviewed_utc": "2026-05-07T20:20:00Z"
   },
   "open_questions": [
     "Does a present `REG_DWORD` override the built-in 30-second current-build default for the global?",
@@ -289,7 +294,7 @@
       "notes": "The 2026-04-23 capture retained the physical ETL, backfilled a guest-side tracerpt XML sidecar after host parser fallback, and normalized one exact `RegQueryValue` event for `Win32kCalloutWatchdogTimeoutSeconds`; status `0xC0000034` confirms the value remains absent on the clean baseline."
     }
   ],
-  "last_reviewed_utc": "2026-04-28T06:11:02Z",
+  "last_reviewed_utc": "2026-05-07T20:20:00Z",
   "source_enrichment": {
     "ghidra": true,
     "ghidra_status": "static_context_only",

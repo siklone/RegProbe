@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-07T13:29:23.0490154Z",
+  "record_id": "developer.ssh-agent-autostart",
+  "run_id": "developer-ssh-agent-autostart-etw-qga-unblock-20260507",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "registry_path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run",
+  "value_name": "SSH Agent",
+  "attempt_status": "qga_unblocked_ingest_ok",
+  "assessment": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and a normalized bundle with 4390 registry events and 524 caller-stack events. The QGA-launched helper targeted HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run / SSH Agent; the bundle contains target command/subkey activity, but no exact current-user HKCU RegQueryValue event for SSH Agent was observed under the SYSTEM QGA context.",
+  "target_observation": {
+    "exact_value_query": false,
+    "operation": "RegOpenKey",
+    "representative_status": "0xC0000034",
+    "event_count": 4390,
+    "caller_stack_event_count": 524,
+    "target_key_event_count": 10,
+    "target_value_event_count": 0,
+    "current_user_hkcu_value_event_count": 0,
+    "target_command_event_count": 1,
+    "launch_transport": "qga"
+  },
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/developer-ssh-agent-autostart-etw-qga-unblock-20260507/developer-ssh-agent-autostart-etw-qga-unblock-20260507-summary.json",
+      "sha256": "5a55db90d5a5ccce48211e330e97821120c37f6688f34a7847a0a1a8d34c4c8c",
+      "size": 7659,
+      "collected_utc": "2026-05-07T13:29:23.0490154Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/developer-ssh-agent-autostart-etw-qga-unblock-20260507/normalized-registry-bundle.json",
+      "sha256": "a32e420d8d050a3fea6e1abb78137a9a936440bae0d14fd3aa78ef4d441826d7",
+      "size": 5393755,
+      "collected_utc": "2026-05-07T13:29:23.0490154Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/developer-ssh-agent-autostart-etw-qga-unblock-20260507/developer-ssh-agent-autostart-etw-qga-unblock-20260507.etl",
+      "sha256": "9af55f97f50b033fcc387bca269a2843efba086dac9e997c511d958e657e3be8",
+      "size": 12582912,
+      "collected_utc": "2026-05-07T13:29:23.0490154Z"
+    }
+  ]
+}

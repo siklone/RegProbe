@@ -18,4 +18,4 @@ These two values remain out of the generic residual string-first queue until the
 
 ## Audit artifact
 
-- [kernel-power-96-path-aware-follow-up-20260330.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/kernel-power-96-path-aware-follow-up-20260330.json)
+- [kernel-power-96-path-aware-follow-up-20260330.json](../../registry-research-framework/audit/kernel-power-96-path-aware-follow-up-20260330.json)

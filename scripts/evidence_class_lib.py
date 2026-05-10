@@ -48,6 +48,8 @@ RUNTIME_EVIDENCE_KINDS = {
     "runtime-trace",
     "vm-test",
     "registry-observation",
+    "wpr-trace",
+    "etw-trace",
 }
 
 OFFICIAL_EVIDENCE_KINDS = {
@@ -101,6 +103,23 @@ BENCHMARK_EVIDENCE_KINDS = {
 INCIDENT_EVIDENCE_KINDS = {
     "vm-incident",
 }
+
+APP_QA_EVIDENCE_KINDS = {
+    "vm-test",
+}
+
+APP_QA_SUCCESS_HINTS = (
+    "ok-gated-override",
+    "qa-only gated mutation override used",
+)
+
+APP_QA_FAILURE_HINTS = (
+    "check-failed",
+    "access is denied",
+    "not-applicable",
+    "already-applied",
+    "skipped rollback because no mutation was performed",
+)
 
 SEMANTICS_EVIDENCE_KINDS = {
     "official-doc",
@@ -380,9 +399,7 @@ def has_official_evidence(record: dict[str, Any]) -> bool:
 
 
 def has_procmon_evidence(record: dict[str, Any]) -> bool:
-    if evidence_kinds(record) & PROCMON_EVIDENCE_KINDS:
-        return True
-    return "procmon" in record_text_blob(record)
+    return bool(evidence_kinds(record) & PROCMON_EVIDENCE_KINDS)
 
 
 def has_ghidra_evidence(record: dict[str, Any]) -> bool:
@@ -404,10 +421,61 @@ def has_ida_evidence(record: dict[str, Any]) -> bool:
 
 
 def has_wpr_evidence(record: dict[str, Any]) -> bool:
-    if evidence_kinds(record) & WPR_EVIDENCE_KINDS:
+    return bool(evidence_kinds(record) & WPR_EVIDENCE_KINDS)
+
+
+def has_trace_evidence(record: dict[str, Any]) -> bool:
+    if has_procmon_evidence(record) or has_wpr_evidence(record):
         return True
-    blob = record_text_blob(record)
-    return any(keyword in blob for keyword in ("wpr", ".etl", "etl exists", "boot trace"))
+    return "runtime-trace" in evidence_kinds(record)
+
+
+def evidence_text(item: dict[str, Any]) -> str:
+    return " ".join(
+        str(item.get(field) or "")
+        for field in ("evidence_id", "title", "summary", "location", "Title", "Summary", "Location")
+    ).lower()
+
+
+def is_app_qa_evidence(item: dict[str, Any]) -> bool:
+    if evidence_kind(item) not in APP_QA_EVIDENCE_KINDS:
+        return False
+    text = evidence_text(item)
+    return "app-qa" in text or "qa-only gated mutation" in text or "qa card snapshot" in text
+
+
+def has_successful_app_qa_evidence(record: dict[str, Any]) -> bool:
+    for item in evidence_items(record):
+        if not is_app_qa_evidence(item):
+            continue
+        text = evidence_text(item)
+        if any(hint in text for hint in APP_QA_FAILURE_HINTS):
+            continue
+        if not any(hint in text for hint in APP_QA_SUCCESS_HINTS):
+            continue
+        if "apply/verify" in text and "rollback restored" in text:
+            return True
+        if all(word in text for word in ("apply", "verify", "rollback", "restored")):
+            return True
+    return False
+
+
+def has_repo_code_mapping(record: dict[str, Any]) -> bool:
+    return any(evidence_kind(item) == "repo-code" for item in evidence_items(record))
+
+
+def has_app_backed_runtime_contract(record: dict[str, Any]) -> bool:
+    decision = record.get("decision") or {}
+    return (
+        extract_app_status(record) == "matches-research"
+        and bool_value(decision.get("apply_allowed"))
+        and not bool_value(decision.get("needs_vm_validation"))
+        and not bool(decision.get("blocking_issues"))
+        and bool(validation_proof(record))
+        and restore_story_known(record)
+        and has_repo_code_mapping(record)
+        and has_successful_app_qa_evidence(record)
+    )
 
 
 def has_exact_runtime_read(record: dict[str, Any]) -> bool:
@@ -468,6 +536,8 @@ def classification_layers(record: dict[str, Any]) -> list[str]:
     layers: list[str] = []
     if has_procmon_evidence(record):
         layers.append("runtime_procmon")
+    elif has_runtime_evidence(record):
+        layers.append("runtime_trace")
     if has_ghidra_evidence(record):
         layers.append("static_ghidra")
     if has_ida_evidence(record):
@@ -513,13 +583,16 @@ def determine_evidence_lane(record: dict[str, Any]) -> str:
 
 
 def has_converged_vm_evidence(record: dict[str, Any]) -> bool:
+    if has_app_backed_runtime_contract(record):
+        return True
+
     lane = determine_evidence_lane(record)
     if lane == "early-boot":
         runtime_signal = has_wpr_evidence(record) or has_exact_runtime_read(record)
         signals = [has_ghidra_evidence(record), has_reboot_evidence(record), runtime_signal]
         return all(signals)
 
-    if not has_procmon_evidence(record):
+    if not has_trace_evidence(record):
         return False
     if not has_ghidra_evidence(record):
         return False
@@ -667,6 +740,8 @@ def next_missing_layer(record: dict[str, Any], incident_seen: bool = False) -> s
         return "restore-story"
     if incident_seen and not has_incident_review(record):
         return "incident-review"
+    if has_app_backed_runtime_contract(record):
+        return "none"
 
     lane = determine_evidence_lane(record)
     if lane == "official-policy":
@@ -687,8 +762,8 @@ def next_missing_layer(record: dict[str, Any], incident_seen: bool = False) -> s
             return "decision-gate"
         return "none"
 
-    if not has_procmon_evidence(record):
-        return "procmon"
+    if not has_trace_evidence(record):
+        return "runtime-trace"
     if not has_ghidra_evidence(record):
         return "ghidra"
     if lane == "system" and not (has_wpr_evidence(record) or has_benchmark_evidence(record)):
@@ -707,6 +782,13 @@ def build_gating_reason(class_id: str, record: dict[str, Any]) -> str:
         return "This record is cross-layer verified. App surfacing and one-click actionability are tracked separately."
     if class_id == "B":
         missing = next_missing_layer(record)
+        if (
+            app_status == "matches-research"
+            and bool_value(decision.get("apply_allowed"))
+            and missing == "none"
+            and not bool(decision.get("blocking_issues"))
+        ):
+            return "This record stays below Class A because supportability or confidence is still mixed, but the current promoted decision allows app apply and rollback."
         if bool(decision.get("blocking_issues")):
             return "Cross-layer evidence is strong, but an explicit policy or supportability gate still blocks promotion."
         if not restore_story_known(record):
@@ -780,7 +862,18 @@ def build_class_entry(
     definition = CLASS_DEFINITIONS[class_id]
     decision = record.get("decision") or {}
     app_status = extract_app_status(record)
-    actionable = class_id == "A" and app_status == "matches-research" and bool_value(decision.get("apply_allowed"))
+    actionable = (
+        app_status == "matches-research"
+        and bool_value(decision.get("apply_allowed"))
+        and (
+            class_id == "A"
+            or (
+                class_id == "B"
+                and next_missing_layer(record) == "none"
+                and not bool(decision.get("blocking_issues"))
+            )
+        )
+    )
     show_in_app = class_id != "E"
 
     gating_reason = truncate_text(build_gating_reason(class_id, record), 220)

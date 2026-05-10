@@ -1,0 +1,106 @@
+{
+    "schema_version":  "1.0",
+    "generated_utc":  "2026-05-07T14:33:42.2461023Z",
+    "run_id":  "network-disable-default-shares-autoshareserver-etw-qga-unblock-20260507",
+    "capture_profile":  "kernel-registry-stackwalk-v1",
+    "status":  "ok",
+    "error_kind":  null,
+    "error":  null,
+    "registry_path":  "HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters",
+    "value_name":  "AutoShareServer",
+    "duration_seconds":  3,
+    "kernel_flags":  [
+                         "PROC_THREAD",
+                         "LOADER",
+                         "REGISTRY"
+                     ],
+    "stackwalk_events":  [
+                             "RegQueryValue"
+                         ],
+    "stack_capture_expected":  true,
+    "registry_probe_attempted":  true,
+    "xperf_exists":  true,
+    "tracerpt_exists":  true,
+    "output_root":  "C:\\RegProbe-Diag\\etw-stackwalk\\network-disable-default-shares-autoshareserver-etw-qga-unblock-20260507",
+    "raw_etl_path":  "C:\\RegProbe-Diag\\etw-stackwalk\\network-disable-default-shares-autoshareserver-etw-qga-unblock-20260507\\network-disable-default-shares-autoshareserver-etw-qga-unblock-20260507.raw.etl",
+    "etl_path":  "C:\\RegProbe-Diag\\etw-stackwalk\\network-disable-default-shares-autoshareserver-etw-qga-unblock-20260507\\network-disable-default-shares-autoshareserver-etw-qga-unblock-20260507.etl",
+    "xml_path":  "C:\\RegProbe-Diag\\etw-stackwalk\\network-disable-default-shares-autoshareserver-etw-qga-unblock-20260507\\network-disable-default-shares-autoshareserver-etw-qga-unblock-20260507.xml",
+    "etl_exists":  true,
+    "xml_exists":  true,
+    "stack_field_hit_count":  108006,
+    "upload_base_url":  "http://10.0.2.2:8766",
+    "artifact_uploads":  {
+                             "xml":  {
+                                         "path":  "C:\\RegProbe-Diag\\etw-stackwalk\\network-disable-default-shares-autoshareserver-etw-qga-unblock-20260507\\network-disable-default-shares-autoshareserver-etw-qga-unblock-20260507.xml",
+                                         "uri":  "http://10.0.2.2:8766/network-disable-default-shares-autoshareserver-etw-qga-unblock-20260507.xml",
+                                         "attempts":  1
+                                     },
+                             "etl":  {
+                                         "path":  "C:\\RegProbe-Diag\\etw-stackwalk\\network-disable-default-shares-autoshareserver-etw-qga-unblock-20260507\\network-disable-default-shares-autoshareserver-etw-qga-unblock-20260507.etl",
+                                         "uri":  "http://10.0.2.2:8766/network-disable-default-shares-autoshareserver-etw-qga-unblock-20260507.etl",
+                                         "attempts":  1
+                                     }
+                         },
+    "commands":  {
+                     "stop_existing":  {
+                                           "exit_code":  0,
+                                           "stdout":  "",
+                                           "stderr":  "xperf: error: NT Kernel Logger: The instance name passed was not recognized as valid by a WMI data provider. (0x1069)."
+                                       },
+                     "start_args":  [
+                                        "-on",
+                                        "PROC_THREAD+LOADER+REGISTRY",
+                                        "-stackwalk",
+                                        "RegQueryValue",
+                                        "-BufferSize",
+                                        "256",
+                                        "-MinBuffers",
+                                        "16",
+                                        "-MaxBuffers",
+                                        "64",
+                                        "-f",
+                                        "C:\\RegProbe-Diag\\etw-stackwalk\\network-disable-default-shares-autoshareserver-etw-qga-unblock-20260507\\network-disable-default-shares-autoshareserver-etw-qga-unblock-20260507.raw.etl"
+                                    ],
+                     "start":  {
+                                   "exit_code":  0,
+                                   "stdout":  "",
+                                   "stderr":  ""
+                               },
+                     "registry_probe":  {
+                                            "file_path":  "C:\\Windows\\System32\\reg.exe",
+                                            "argument_list":  [
+                                                                  "query",
+                                                                  "HKLM\\System\\CurrentControlSet\\Services\\LanmanServer\\Parameters",
+                                                                  "/v",
+                                                                  "AutoShareServer"
+                                                              ],
+                                            "result":  {
+                                                           "exit_code":  0,
+                                                           "stdout":  "",
+                                                           "stderr":  "ERROR: The system was unable to find the specified registry key or value."
+                                                       }
+                                        },
+                     "stop_args":  [
+                                       "-d",
+                                       "C:\\RegProbe-Diag\\etw-stackwalk\\network-disable-default-shares-autoshareserver-etw-qga-unblock-20260507\\network-disable-default-shares-autoshareserver-etw-qga-unblock-20260507.etl"
+                                   ],
+                     "stop":  {
+                                  "exit_code":  0,
+                                  "stdout":  "Merged Etl: C:\\RegProbe-Diag\\etw-stackwalk\\network-disable-default-shares-autoshareserver-etw-qga-unblock-20260507\\network-disable-default-shares-autoshareserver-etw-qga-unblock-20260507.etl\r\nThe trace you have just captured \"C:\\RegProbe-Diag\\etw-stackwalk\\network-disable-default-shares-autoshareserver-etw-qga-unblock-20260507\\network-disable-default-shares-autoshareserver-etw-qga-unblock-20260507.etl\" may contain personally identifiable information, including but not necessarily limited to paths to files accessed, paths to registry accessed and process names. Exact information depends on the events that were logged. Please be aware of this when sharing out this trace with other people.",
+                                  "stderr":  ""
+                              },
+                     "tracerpt_args":  [
+                                           "C:\\RegProbe-Diag\\etw-stackwalk\\network-disable-default-shares-autoshareserver-etw-qga-unblock-20260507\\network-disable-default-shares-autoshareserver-etw-qga-unblock-20260507.etl",
+                                           "-o",
+                                           "C:\\RegProbe-Diag\\etw-stackwalk\\network-disable-default-shares-autoshareserver-etw-qga-unblock-20260507\\network-disable-default-shares-autoshareserver-etw-qga-unblock-20260507.xml",
+                                           "-of",
+                                           "XML",
+                                           "-lr"
+                                       ],
+                     "tracerpt":  {
+                                      "exit_code":  0,
+                                      "stdout":  "Input\r\n----------------\r\nFile(s):\r\n     C:\\RegProbe-Diag\\etw-stackwalk\\network-disable-default-shares-autoshareserver-etw-qga-unblock-20260507\\network-disable-default-shares-autoshareserver-etw-qga-unblock-20260507.etl\r\n\n0.00%32.65%65.31%97.96%100.00%\n\r\nOutput\r\n----------------\r\nDumpFile:           C:\\RegProbe-Diag\\etw-stackwalk\\network-disable-default-shares-autoshareserver-etw-qga-unblock-20260507\\network-disable-default-shares-autoshareserver-etw-qga-unblock-20260507.xml\r\n\nThe command completed successfully.",
+                                      "stderr":  ""
+                                  }
+                 }
+}

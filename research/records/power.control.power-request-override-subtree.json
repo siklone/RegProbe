@@ -299,7 +299,12 @@
       "powerrequestoverride-subtree-live-reader-binding-open-question",
       "powerrequestoverride-static-context-adjacent-not-leaf-specific",
       "intentional-hold"
-    ]
+    ],
+    "promotion_disposition": "rejected",
+    "promotion_disposition_kind": "intentional-hold-closed",
+    "promotion_disposition_reason": "Closed as rejected for app/research-provider promotion because the remaining evidence gap is intentional: current-build exact reads, safe trigger conditions, authoritative semantics, or boot-safe validation are still missing.",
+    "promotion_reopen_criteria": "Reopen only with a safer current-build lane that proves exact target consumption and resolves the listed intentional-hold blockers.",
+    "promotion_disposition_reviewed_utc": "2026-05-07T20:20:00Z"
   },
   "open_questions": [
     "Does `PopPowerRequestHandleRequestOverrideQueryResponse` or an adjacent response handler bind the live PowerRequestOverride payload to per-request state on the current build?",
@@ -343,7 +348,7 @@
       "notes": "The 2026-04-23 QGA xperf stackwalk capture retained exact PowerRequestOverride key-path call stacks for reg.exe, including RuleCount, DISABLED, and ENABLED RegQueryValue events resolved to ntoskrnl.exe and ntdll.dll module offsets."
     }
   ],
-  "last_reviewed_utc": "2026-04-28T06:23:50Z",
+  "last_reviewed_utc": "2026-05-07T20:20:00Z",
   "version_stable": [
     "25H2"
   ]

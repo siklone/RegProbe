@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-07T09:20:07.1228797Z",
+  "record_id": "privacy.disable-steps-recorder",
+  "run_id": "privacy-disable-steps-recorder-etw-qga-unblock-20260507",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "registry_path": "HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat",
+  "value_name": "DisableUAR",
+  "attempt_status": "qga_unblocked_ingest_ok",
+  "assessment": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and a normalized bundle with 4468 registry events and 526 caller-stack events. The bundle contains an exact RegQueryValue event for HKLM\\Software\\Policies\\Microsoft\\Windows\\AppCompat / DisableUAR from the helper probe, returning 0xC0000034 on the clean baseline.",
+  "target_observation": {
+    "exact_value_query": true,
+    "operation": "RegQueryValue",
+    "representative_status": "0xC0000034",
+    "event_count": 4468,
+    "caller_stack_event_count": 526,
+    "target_key_event_count": 51,
+    "target_value_event_count": 1,
+    "target_command_event_count": 2,
+    "launch_transport": "qga"
+  },
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/privacy-disable-steps-recorder-etw-qga-unblock-20260507/privacy-disable-steps-recorder-etw-qga-unblock-20260507-summary.json",
+      "sha256": "3ffdf5759ce0a86ac0399f06decc8d6a0016cded3c293c26e20d56fd978f0b1e",
+      "size": 7691,
+      "collected_utc": "2026-05-07T09:20:07.1228797Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/privacy-disable-steps-recorder-etw-qga-unblock-20260507/normalized-registry-bundle.json",
+      "sha256": "2d0010976225472dcff1317946fb919d57aa92d10ada556391833e55f2fa38a7",
+      "size": 5491053,
+      "collected_utc": "2026-05-07T09:20:07.1228797Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/privacy-disable-steps-recorder-etw-qga-unblock-20260507/privacy-disable-steps-recorder-etw-qga-unblock-20260507.etl",
+      "sha256": "0ad1b31135e57a7e90d5e2f3afacbea91b04bc5c2e3b6d71cc092465f312311a",
+      "size": 12582912,
+      "collected_utc": "2026-05-07T09:20:07.1228797Z"
+    }
+  ]
+}

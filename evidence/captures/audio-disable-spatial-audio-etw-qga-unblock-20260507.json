@@ -1,0 +1,54 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-07T14:43:50.544726Z",
+  "record_id": "audio.disable-spatial-audio",
+  "run_id": "audio-disable-spatial-audio-etw-qga-unblock-20260507",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "attempt_status": "qga_unblocked_ingest_ok",
+  "assessment": "A 2026-05-07 QGA-first ETW stackwalk rerun produced host-ingested ETL/XML artifacts and normalized bundles for 1 target value(s): `DisableSpatialOnLowLatency`. The QGA-launched `reg.exe query` probe produced exact target RegQueryValue events for 1/1 target(s), clearing the earlier tracerpt/artifact-upload blocker. This receipt proves the ETW/QGA probe can observe the documented registry surface, but it is probe-read evidence rather than independent Windows component consumption proof.",
+  "aggregate_observation": {
+    "target_count": 1,
+    "exact_probe_value_query_count": 1,
+    "all_artifacts_ingested": true,
+    "launch_transport": "qga",
+    "probe_read_not_product_consumer_proof": true
+  },
+  "target_observations": [
+    {
+      "run_id": "audio-disable-spatial-audio-disablespatialonlowlatency-etw-qga-unblock-20260507",
+      "registry_path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Audio",
+      "value_name": "DisableSpatialOnLowLatency",
+      "exact_probe_value_query": true,
+      "operation": "RegQueryValue",
+      "representative_status": "0xC0000034",
+      "event_count": 4414,
+      "caller_stack_event_count": 525,
+      "target_key_event_count": 7,
+      "target_value_event_count": 1,
+      "exact_target_value_event_count": 1,
+      "target_command_event_count": 2,
+      "launch_transport": "qga"
+    }
+  ],
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/audio-disable-spatial-audio-disablespatialonlowlatency-etw-qga-unblock-20260507/audio-disable-spatial-audio-disablespatialonlowlatency-etw-qga-unblock-20260507-summary.json",
+      "sha256": "03cc7b5c2cf82d2c11c96ba673f6a0a60aa20fc18ba8a9ed6c3653bc39b8aa00",
+      "size": 8447,
+      "collected_utc": "2026-05-07T14:39:45.4877196Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/audio-disable-spatial-audio-disablespatialonlowlatency-etw-qga-unblock-20260507/normalized-registry-bundle.json",
+      "sha256": "ea73b7158b457b5336b9184c00c89caf3cd47f3bfd6e3042529e3e9cf22beaa5",
+      "size": 5964970,
+      "collected_utc": "2026-05-07T14:39:45.4877196Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/audio-disable-spatial-audio-disablespatialonlowlatency-etw-qga-unblock-20260507/audio-disable-spatial-audio-disablespatialonlowlatency-etw-qga-unblock-20260507.etl",
+      "sha256": "06bb8f2848c158056a3d5be55dcaf3b2fad97d1755e965bc11e123fc28cb2209",
+      "size": 12582912,
+      "collected_utc": "2026-05-07T14:39:45.4877196Z"
+    }
+  ]
+}

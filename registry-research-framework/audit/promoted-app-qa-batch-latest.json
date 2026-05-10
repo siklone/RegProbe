@@ -1,0 +1,690 @@
+{
+  "generated_utc": "2026-05-10T17:18:01Z",
+  "status": "PASS",
+  "selection": {
+    "requested_ids": [],
+    "requested_categories": [
+      "Power",
+      "Explorer"
+    ],
+    "limit_per_category": 1,
+    "total_limit": 4,
+    "run_kvm": true,
+    "wait_timeout": 900
+  },
+  "sources": {
+    "promotion_gates": "research/promotion-gates.json",
+    "catalog_csv": "Docs/tweaks/tweak-catalog.csv",
+    "single_tweak_app_qa": "registry-research-framework/scripts/check_single_tweak_app_qa.py",
+    "kvm_batch_runner": "scripts/vm-kvm/run-guest-app-tweak-qa-batch.py"
+  },
+  "catalog_candidate_count": 258,
+  "selected_candidate_count": 2,
+  "errors": [],
+  "candidates": [
+    {
+      "tweak_id": "explorer.always-show-icons-never-thumbnails",
+      "qa_tweak_id": "explorer.always-show-icons-never-thumbnails",
+      "candidate_id": "explorer.always-show-icons-never-thumbnails",
+      "record_id": "explorer.always-show-icons-never-thumbnails",
+      "category": "Explorer",
+      "name": "Always Show Icons, Never Thumbnails",
+      "documentation": "research/records/explorer.always-show-icons-never-thumbnails.review.json",
+      "promotion_state": "promoted",
+      "apply_allowed": true,
+      "restore_default_supported": true,
+      "restore_previous_supported": true,
+      "commands": {
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect explorer.always-show-icons-never-thumbnails",
+        "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'explorer.always-show-icons-never-thumbnails' --qa-output 'C:\\Tools\\ValidationController\\smoke\\explorer.always-show-icons-never-thumbnails.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'explorer.always-show-icons-never-thumbnails' --qa-output 'C:\\Tools\\ValidationController\\smoke\\explorer.always-show-icons-never-thumbnails.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'explorer.always-show-icons-never-thumbnails' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\explorer.always-show-icons-never-thumbnails.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'explorer.always-show-icons-never-thumbnails' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\explorer.always-show-icons-never-thumbnails.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'explorer.always-show-icons-never-thumbnails'"
+      },
+      "expected_report": {
+        "success": true,
+        "status": "ok",
+        "rollback_requested": true,
+        "required_stages": [
+          "detect-before",
+          "apply",
+          "rollback",
+          "detect-after"
+        ],
+        "required_card_snapshot": {
+          "required_fields": [
+            "TweakId",
+            "Name",
+            "Category",
+            "EvidenceClass",
+            "ResearchStatus",
+            "RollbackSnapshotState",
+            "HasClaimBoundary",
+            "WhatWeKnowSummary",
+            "WhatWeDoNotClaimSummary",
+            "ProofLanes"
+          ],
+          "required_proof_lanes": [
+            "docs",
+            "runtime",
+            "source",
+            "rollback"
+          ],
+          "claim_boundary_required": true
+        },
+        "required_stage_assertions": [
+          "apply stage reports a successful apply story",
+          "rollback stage reports a successful rollback story",
+          "detect-after is present"
+        ]
+      }
+    },
+    {
+      "tweak_id": "power.control.class1-initial-unpark-count",
+      "qa_tweak_id": "power.control.class1-initial-unpark-count",
+      "candidate_id": "power.control.class1-initial-unpark-count",
+      "record_id": "power.control.class1-initial-unpark-count",
+      "category": "Power",
+      "name": "Class1 Initial Unpark Count",
+      "documentation": "research/records/power.control.class1-initial-unpark-count.json",
+      "promotion_state": "promoted",
+      "apply_allowed": true,
+      "restore_default_supported": true,
+      "restore_previous_supported": true,
+      "commands": {
+        "inspect": "dotnet run --project cli/cli.csproj -- research inspect power.control.class1-initial-unpark-count",
+        "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
+        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'power.control.class1-initial-unpark-count' --qa-output 'C:\\Tools\\ValidationController\\smoke\\power.control.class1-initial-unpark-count.qa.json' --qa-shutdown",
+        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'power.control.class1-initial-unpark-count' --qa-output 'C:\\Tools\\ValidationController\\smoke\\power.control.class1-initial-unpark-count.qa.json' --qa-shutdown --qa-skip-rollback",
+        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'power.control.class1-initial-unpark-count' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\power.control.class1-initial-unpark-count.qa.json'",
+        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'power.control.class1-initial-unpark-count' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\power.control.class1-initial-unpark-count.qa.json' -SkipRollback",
+        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'power.control.class1-initial-unpark-count'"
+      },
+      "expected_report": {
+        "success": true,
+        "status": "ok",
+        "rollback_requested": true,
+        "required_stages": [
+          "detect-before",
+          "apply",
+          "rollback",
+          "detect-after"
+        ],
+        "required_card_snapshot": {
+          "required_fields": [
+            "TweakId",
+            "Name",
+            "Category",
+            "EvidenceClass",
+            "ResearchStatus",
+            "RollbackSnapshotState",
+            "HasClaimBoundary",
+            "WhatWeKnowSummary",
+            "WhatWeDoNotClaimSummary",
+            "ProofLanes"
+          ],
+          "required_proof_lanes": [
+            "docs",
+            "runtime",
+            "source",
+            "rollback"
+          ],
+          "claim_boundary_required": true
+        },
+        "required_stage_assertions": [
+          "apply stage reports a successful apply story",
+          "rollback stage reports a successful rollback story",
+          "detect-after is present"
+        ]
+      }
+    }
+  ],
+  "run_results": [
+    {
+      "tweak_id": "explorer.always-show-icons-never-thumbnails",
+      "host_exit": 0,
+      "execution_exit": 0,
+      "payload_status": "completed",
+      "report_source": "stdout",
+      "report_parse_error": null,
+      "report_fetch_status": null,
+      "report_app_success": true,
+      "report_success": true,
+      "report_status": "ok",
+      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
+      "report_contract_status": "ok",
+      "report_contract_summary": "QA card snapshot contract passed.",
+      "report_contract_failures": [],
+      "report_card_present": true,
+      "report_card_has_claim_boundary": true,
+      "report_card_present_fields": [
+        "TweakId",
+        "Name",
+        "Category",
+        "EvidenceClass",
+        "ResearchStatus",
+        "RollbackSnapshotState",
+        "HasClaimBoundary",
+        "WhatWeKnowSummary",
+        "WhatWeDoNotClaimSummary",
+        "ProofLanes"
+      ],
+      "report_card_missing_fields": [],
+      "report_card_proof_lanes": [
+        "docs",
+        "runtime",
+        "source",
+        "rollback"
+      ],
+      "report_card_missing_proof_lanes": [],
+      "report": {
+        "TweakId": "explorer.always-show-icons-never-thumbnails",
+        "TweakName": "Always Show Icons, Never Thumbnails",
+        "Success": true,
+        "Status": "ok",
+        "Summary": "Apply/verify path completed and rollback restored the tweak.",
+        "RollbackRequested": true,
+        "GatedMutationOverrideRequested": false,
+        "GatedMutationOverrideUsed": false,
+        "Card": {
+          "TweakId": "explorer.always-show-icons-never-thumbnails",
+          "Name": "Always Show Icons, Never Thumbnails",
+          "Category": "Explorer",
+          "Description": "Explorer can show file icons instead of generating thumbnails.",
+          "FriendlyDescription": "Explorer can show file icons instead of generating thumbnails.",
+          "RegistryPath": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\IconsOnly",
+          "EvidenceClass": "A",
+          "EvidenceClassTitle": "Cross-Layer Verified",
+          "ResearchStatus": "PROMOTED",
+          "IsMutationAllowed": true,
+          "RollbackSnapshotState": "ready",
+          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
+          "HasClaimBoundary": true,
+          "WhatWeKnowSummary": "Claim: Explorer can show file icons instead of generating thumbnails. Evidence: The guest-local result file was copied back to the host scratch area during validation. The VM user baseline was 1 and was restored after the probe. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
+          "ProofLanes": [
+            {
+              "Key": "docs",
+              "Label": "DOCS",
+              "State": "ready",
+              "Summary": "The guest-local result file was copied back to the host scratch area during validation. The VM user baseline was 1 and was restored after the probe.",
+              "Source": "Validation proof source: evidence/files/vm-tooling-staging/iconsonly-result.txt"
+            },
+            {
+              "Key": "runtime",
+              "Label": "RUNTIME",
+              "State": "ready",
+              "Summary": "A reversible Win25H2Clean Procmon capture on 2026-03-24 wrote IconsOnly = 0 and IconsOnly = 1, restarted Explorer after each write, and captured Explorer.EXE querying HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\IconsOnly with matching D...",
+              "Source": "Procmon capture - Explorer IconsOnly runtime surface: evidence/raw/procmon/explorer.always-show-icons-never-thumbnails/iconsonly-result.txt"
+            },
+            {
+              "Key": "source",
+              "Label": "SOURCE",
+              "State": "ready",
+              "Summary": "No upstream nohuto source link is attached to this record.",
+              "Source": ""
+            },
+            {
+              "Key": "rollback",
+              "Label": "ROLLBACK",
+              "State": "ready",
+              "Summary": "Rollback: Verified via record-restore-story.",
+              "Source": "record-restore-story"
+            }
+          ],
+          "ReferenceLinks": [
+            {
+              "Title": "Docs: Details",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html#explorer.always-show-icons-never-thumbnails",
+              "Kind": "Details"
+            },
+            {
+              "Title": "Docs: Explorer",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\visibility\\visibility.md#explorer.always-show-icons-never-thumbnails",
+              "Kind": "Docs"
+            }
+          ]
+        },
+        "Stages": [
+          {
+            "Stage": "detect-before",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Current option is 'Allow thumbnails'. Selected option is 'Always show icons, never thumbnails'.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Allow thumbnails",
+            "TargetValue": "Always show icons, never thumbnails",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": false,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current option is 'Allow thumbnails'. Selected option is 'Always show icons, never thumbnails'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\IconsOnly: 0 -> 1",
+                "TimestampText": "20:17:15"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "apply",
+            "AppliedStatus": "Applied",
+            "StatusMessage": "Run completed.",
+            "OutcomeSummary": "Apply - Success",
+            "CurrentValue": "Always show icons, never thumbnails",
+            "TargetValue": "Always show icons, never thumbnails",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current option is 'Allow thumbnails'. Selected option is 'Always show icons, never thumbnails'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\IconsOnly: 0 -> 1",
+                "TimestampText": "20:17:15"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Always show icons, never thumbnails'.",
+                "TimestampText": "20:17:15"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Always show icons, never thumbnails'.",
+                "TimestampText": "20:17:15"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Not required",
+                "Message": "Step not executed.",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "rollback",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Rolled back registry values.",
+            "OutcomeSummary": "Rollback - Rolled Back",
+            "CurrentValue": "Allow thumbnails",
+            "TargetValue": "Always show icons, never thumbnails",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current option is 'Allow thumbnails'. Selected option is 'Always show icons, never thumbnails'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\IconsOnly: 0 -> 1",
+                "TimestampText": "20:17:15"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Always show icons, never thumbnails'.",
+                "TimestampText": "20:17:15"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Always show icons, never thumbnails'.",
+                "TimestampText": "20:17:15"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "20:17:15"
+              }
+            ]
+          },
+          {
+            "Stage": "detect-after",
+            "AppliedStatus": "NotApplied",
+            "StatusMessage": "Current option is 'Allow thumbnails'. Selected option is 'Always show icons, never thumbnails'.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "Allow thumbnails",
+            "TargetValue": "Always show icons, never thumbnails",
+            "WasRolledBack": true,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": true,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Detected",
+                "Message": "Current option is 'Allow thumbnails'. Selected option is 'Always show icons, never thumbnails'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\IconsOnly: 0 -> 1",
+                "TimestampText": "20:17:16"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Applied",
+                "Message": "Applied preset 'Always show icons, never thumbnails'.",
+                "TimestampText": "20:17:15"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified preset 'Always show icons, never thumbnails'.",
+                "TimestampText": "20:17:15"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Rolled back",
+                "Message": "Rolled back registry values.",
+                "TimestampText": "20:17:15"
+              }
+            ]
+          }
+        ],
+        "StartedAtUtc": "2026-05-10T17:17:15.6014483+00:00",
+        "CompletedAtUtc": "2026-05-10T17:17:16.0413604+00:00"
+      },
+      "qa_tweak_id": "explorer.always-show-icons-never-thumbnails",
+      "candidate_id": "explorer.always-show-icons-never-thumbnails",
+      "card_name": "Always Show Icons, Never Thumbnails",
+      "documentation": "research/records/explorer.always-show-icons-never-thumbnails.review.json"
+    },
+    {
+      "tweak_id": "power.control.class1-initial-unpark-count",
+      "host_exit": 0,
+      "execution_exit": 0,
+      "payload_status": "completed",
+      "report_source": "stdout",
+      "report_parse_error": null,
+      "report_fetch_status": null,
+      "report_app_success": true,
+      "report_success": true,
+      "report_status": "already-applied",
+      "report_summary": "The tweak already matched the desired state; the app verified it and skipped rollback because no mutation was performed.",
+      "report_contract_status": "ok",
+      "report_contract_summary": "QA card snapshot contract passed.",
+      "report_contract_failures": [],
+      "report_card_present": true,
+      "report_card_has_claim_boundary": true,
+      "report_card_present_fields": [
+        "TweakId",
+        "Name",
+        "Category",
+        "EvidenceClass",
+        "ResearchStatus",
+        "RollbackSnapshotState",
+        "HasClaimBoundary",
+        "WhatWeKnowSummary",
+        "WhatWeDoNotClaimSummary",
+        "ProofLanes"
+      ],
+      "report_card_missing_fields": [],
+      "report_card_proof_lanes": [
+        "docs",
+        "runtime",
+        "source",
+        "rollback"
+      ],
+      "report_card_missing_proof_lanes": [],
+      "report": {
+        "TweakId": "power.control.class1-initial-unpark-count",
+        "TweakName": "Class1 Initial Unpark Count",
+        "Success": true,
+        "Status": "already-applied",
+        "Summary": "The tweak already matched the desired state; the app verified it and skipped rollback because no mutation was performed.",
+        "RollbackRequested": true,
+        "GatedMutationOverrideRequested": false,
+        "GatedMutationOverrideUsed": false,
+        "Card": {
+          "TweakId": "power.control.class1-initial-unpark-count",
+          "Name": "Class1 Initial Unpark Count",
+          "Category": "Power",
+          "Description": "Class1 Initial Unpark Count is a low-level power-manager registry value under the main Power key.",
+          "FriendlyDescription": "Class1 Initial Unpark Count is a low-level power-manager registry value under the main Power key.",
+          "RegistryPath": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\Class1InitialUnparkCount",
+          "EvidenceClass": "A",
+          "EvidenceClassTitle": "Cross-Layer Verified",
+          "ResearchStatus": "PROMOTED",
+          "IsMutationAllowed": true,
+          "RollbackSnapshotState": "ready",
+          "RollbackStoryText": "Rollback: Verified via record-restore-story.",
+          "HasClaimBoundary": true,
+          "WhatWeKnowSummary": "Claim: Class1 Initial Unpark Count is a low-level power-manager registry value under the main Power key. Evidence: The docs-first triage and phase-0 baseline agree on the current Win25H2Clean baseline value for Class1InitialUnparkCount. App surfacing is tracked separately from evidence classification. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
+          "ProofLanes": [
+            {
+              "Key": "docs",
+              "Label": "DOCS",
+              "State": "ready",
+              "Summary": "The docs-first triage and phase-0 baseline agree on the current Win25H2Clean baseline value for Class1InitialUnparkCount. App surfacing is tracked separately from evidence classification.",
+              "Source": "Validation proof source: C:\\Tools\\AppSmoke\\Docs\\power\\power.md"
+            },
+            {
+              "Key": "runtime",
+              "Label": "RUNTIME",
+              "State": "ready",
+              "Summary": "The 96-key existence batch confirmed Class1InitialUnparkCount exists on the clean baseline with observed value 64.",
+              "Source": "Win25H2Clean 96-key phase-0 existence batch: evidence/files/vm-tooling-staging/registry-batch-existence-96-live-20260329-100629/results.json"
+            },
+            {
+              "Key": "source",
+              "Label": "SOURCE",
+              "State": "ready",
+              "Summary": "No upstream nohuto source link is attached to this record.",
+              "Source": ""
+            },
+            {
+              "Key": "rollback",
+              "Label": "ROLLBACK",
+              "State": "ready",
+              "Summary": "Rollback: Verified via record-restore-story.",
+              "Source": "record-restore-story"
+            }
+          ],
+          "ReferenceLinks": [
+            {
+              "Title": "Docs: Details",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html#power.control.class1-initial-unpark-count",
+              "Kind": "Details"
+            },
+            {
+              "Title": "Docs: Power",
+              "Url": "C:\\Tools\\AppSmoke\\Docs\\power\\power.md#power.control.class1-initial-unpark-count",
+              "Kind": "Docs"
+            }
+          ]
+        },
+        "Stages": [
+          {
+            "Stage": "detect-before",
+            "AppliedStatus": "Applied",
+            "StatusMessage": "Current value is 64.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "64",
+            "TargetValue": "64 (0x40)",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": false,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Applied",
+                "Message": "Current value is 64.",
+                "TimestampText": "20:17:22"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Pending",
+                "Message": "",
+                "TimestampText": "-"
+              }
+            ]
+          },
+          {
+            "Stage": "apply",
+            "AppliedStatus": "Applied",
+            "StatusMessage": "Run completed.",
+            "OutcomeSummary": "Apply - Success",
+            "CurrentValue": "64 (0x40)",
+            "TargetValue": "64 (0x40)",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Applied",
+                "Message": "Current value is 64.",
+                "TimestampText": "20:17:23"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Skipped",
+                "Message": "Already in the desired state.",
+                "TimestampText": "20:17:23"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified desired value.",
+                "TimestampText": "20:17:23"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Skipped",
+                "Message": "No changes were made.",
+                "TimestampText": "20:17:23"
+              }
+            ]
+          },
+          {
+            "Stage": "rollback",
+            "AppliedStatus": "Applied",
+            "StatusMessage": "No mutation was performed; standalone rollback was skipped.",
+            "OutcomeSummary": "Rollback - Skipped",
+            "CurrentValue": "64 (0x40)",
+            "TargetValue": "64 (0x40)",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Applied",
+                "Message": "Current value is 64.",
+                "TimestampText": "20:17:23"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Skipped",
+                "Message": "Already in the desired state.",
+                "TimestampText": "20:17:23"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified desired value.",
+                "TimestampText": "20:17:23"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Skipped",
+                "Message": "No changes were made.",
+                "TimestampText": "20:17:23"
+              }
+            ]
+          },
+          {
+            "Stage": "detect-after",
+            "AppliedStatus": "Applied",
+            "StatusMessage": "Current value is 64.",
+            "OutcomeSummary": "Detect - Success",
+            "CurrentValue": "64",
+            "TargetValue": "64 (0x40)",
+            "WasRolledBack": false,
+            "IsMutationAllowed": true,
+            "HasSuccessfulApplyStory": true,
+            "HasSuccessfulRollbackStory": false,
+            "Steps": [
+              {
+                "Action": "Detect",
+                "StatusText": "Applied",
+                "Message": "Current value is 64.",
+                "TimestampText": "20:17:23"
+              },
+              {
+                "Action": "Apply",
+                "StatusText": "Skipped",
+                "Message": "Already in the desired state.",
+                "TimestampText": "20:17:23"
+              },
+              {
+                "Action": "Verify",
+                "StatusText": "Verified",
+                "Message": "Verified desired value.",
+                "TimestampText": "20:17:23"
+              },
+              {
+                "Action": "Rollback",
+                "StatusText": "Skipped",
+                "Message": "No changes were made.",
+                "TimestampText": "20:17:23"
+              }
+            ]
+          }
+        ],
+        "StartedAtUtc": "2026-05-10T17:17:22.8686742+00:00",
+        "CompletedAtUtc": "2026-05-10T17:17:23.1068858+00:00"
+      },
+      "qa_tweak_id": "power.control.class1-initial-unpark-count",
+      "candidate_id": "power.control.class1-initial-unpark-count",
+      "card_name": "Class1 Initial Unpark Count",
+      "documentation": "research/records/power.control.class1-initial-unpark-count.json"
+    }
+  ],
+  "summary": {
+    "planned_count": 2,
+    "planned_apply_allowed_count": 2,
+    "live_success_count": 2,
+    "live_failure_count": 0,
+    "categories": [
+      "Explorer",
+      "Power"
+    ]
+  }
+}

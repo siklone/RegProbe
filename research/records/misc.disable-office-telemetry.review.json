@@ -1,0 +1,235 @@
+{
+  "$schema": "../setting-research.schema.json",
+  "schema_version": "1.1",
+  "record_id": "misc.disable-office-telemetry",
+  "tweak_id": "misc.disable-office-telemetry",
+  "record_status": "validated",
+  "summary": "Review-required audit trail for the live Disable Microsoft Office Telemetry card. The app already ships the current microsoft office telemetry policy bundle action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.",
+  "setting": {
+    "name": "Disable Microsoft Office Telemetry",
+    "category": "Privacy",
+    "area": "Microsoft Office Telemetry Policy Bundle",
+    "scope": "user",
+    "casual_explanation": "This writes Office policy values that turn off logging, uploads, feedback, and several telemetry reporting buckets.",
+    "why_people_change_it": "People change it when they want Office to send less telemetry and feedback data from the current user profile.",
+    "tradeoffs_overview": "The bundle is explicit and reversible, but it still ships only through the first-party provider and is not yet a validated research-provider card.",
+    "professional_notes": "The current app still exposes this tweak through app/Services/TweakProviders/PrivacyTweakProvider.cs and engine/Tweaks/Misc/DisableOfficeTelemetryTweak.cs. The current engine tweak writes coordinated HKCU policy values under Office\\16.0\\OSM and related common feedback paths. This record keeps the live behavior documented without publishing it as a validated research-provider card yet.",
+    "targets": [
+      {
+        "target_id": "office-telemetry-bundle",
+        "location_kind": "registry",
+        "path": "HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM + related Office policy paths",
+        "value_name": "PolicyBundle",
+        "value_type": "registry value set",
+        "allowed_values": [
+          {
+            "state_kind": "missing",
+            "value": null,
+            "label": "Windows or tool default",
+            "meaning": "The setting stays at the existing or default state because this review record does not apply a value.",
+            "evidence_ids": [
+              "repo-tweak-provenance",
+              "engine-implementation"
+            ]
+          },
+          {
+            "state_kind": "value",
+            "value": "CurrentAppProfile",
+            "label": "Current Office telemetry bundle",
+            "meaning": "Writes the checked-in Office telemetry, feedback, prevented application, and prevented solution-type values.",
+            "evidence_ids": [
+              "repo-tweak-provenance",
+              "app-provider",
+              "engine-implementation",
+              "vm-misc.disable-office-telemetry-app-qa-20260507"
+            ]
+          }
+        ],
+        "notes": "The current engine tweak writes coordinated HKCU policy values under Office\\16.0\\OSM and related common feedback paths."
+      }
+    ]
+  },
+  "app_current_implementation": {
+    "status": "matches-research",
+    "provider_source": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+    "notes": "The live app ships this first-party card outside the validated research-provider surface. Promotion gate now treats this checked-in implementation as matching the research record.",
+    "writes": [
+      {
+        "target_id": "office-telemetry-bundle",
+        "path": "HKCU\\Software\\Policies\\Microsoft\\Office\\16.0\\OSM + related Office policy paths",
+        "value_name": "PolicyBundle",
+        "value_type": "registry value set",
+        "state_kind": "value",
+        "value": "CurrentAppProfile",
+        "notes": "The current engine tweak writes coordinated HKCU policy values under Office\\16.0\\OSM and related common feedback paths."
+      }
+    ]
+  },
+  "windows_defaults": [
+    {
+      "label": "Hold current or default state",
+      "applies_to": "Research tracking and backlog reduction only",
+      "states": [
+        {
+          "target_id": "office-telemetry-bundle",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Keep the current or default state until this first-party card completes the research-provider promotion path."
+        }
+      ],
+      "notes": "This review record documents the live card without promoting it into the validated research-provider surface.",
+      "evidence_ids": [
+        "repo-tweak-provenance",
+        "engine-implementation"
+      ]
+    }
+  ],
+  "recommended_profiles": [
+    {
+      "profile_id": "hold-for-research",
+      "label": "Windows/default hold",
+      "intended_for": [
+        "Research tracking only",
+        "Backlog reduction"
+      ],
+      "avoid_for": [
+        "Published presets",
+        "General users"
+      ],
+      "states": [
+        {
+          "target_id": "office-telemetry-bundle",
+          "state_kind": "missing",
+          "value": null,
+          "rationale": "Keep the current or default state until this first-party card completes the research-provider promotion path."
+        }
+      ],
+      "good_when": "You want to leave the system at the existing/default state.",
+      "bad_when": "You want to apply the current RegProbe app profile.",
+      "tradeoffs": [
+        "The live app behavior is represented in the corpus.",
+        "The card remains held outside the validated research-provider surface."
+      ],
+      "apply_allowed": false,
+      "evidence_ids": [
+        "repo-tweak-provenance",
+        "app-provider"
+      ]
+    },
+    {
+      "profile_id": "current-app-profile",
+      "label": "Current app profile",
+      "intended_for": [
+        "Current app behavior",
+        "VM app QA",
+        "Research comparison"
+      ],
+      "avoid_for": [
+        "Systems where the listed tradeoffs are unacceptable"
+      ],
+      "states": [
+        {
+          "target_id": "office-telemetry-bundle",
+          "state_kind": "value",
+          "value": "CurrentAppProfile",
+          "rationale": "Capture the exact state or profile that the current app card writes."
+        }
+      ],
+      "good_when": "You are auditing the exact state or profile that the current app currently writes.",
+      "bad_when": "You need a validated research-provider card.",
+      "tradeoffs": [
+        "The current app action is explicit.",
+        "The card still sits outside the validated research-provider surface."
+      ],
+      "apply_allowed": true,
+      "notes": "Validated by 2026-05-07 VM app QA: detect/apply/verify completed and rollback restored the previous state under the QA-only gated mutation override.",
+      "evidence_ids": [
+        "repo-tweak-provenance",
+        "app-provider",
+        "engine-implementation",
+        "vm-misc.disable-office-telemetry-app-qa-20260507"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "repo-tweak-provenance",
+      "kind": "repo-doc",
+      "title": "Repo tweak provenance for misc.disable-office-telemetry",
+      "location": "Docs/tweaks/tweak-provenance.md",
+      "summary": "The checked-in tweak provenance tables map misc.disable-office-telemetry to the current repo implementation.",
+      "supports": [
+        "ui-mapping",
+        "behavior"
+      ],
+      "strength": "medium"
+    },
+    {
+      "evidence_id": "app-provider",
+      "kind": "repo-code",
+      "title": "Live provider mapping",
+      "location": "app/Services/TweakProviders/PrivacyTweakProvider.cs",
+      "summary": "The live app still surfaces misc.disable-office-telemetry through the first-party provider.",
+      "supports": [
+        "ui-mapping"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "engine-implementation",
+      "kind": "repo-code",
+      "title": "Current engine implementation",
+      "location": "engine/Tweaks/Misc/DisableOfficeTelemetryTweak.cs",
+      "summary": "The current engine implementation defines the checked-in microsoft office telemetry policy bundle behavior for this card.",
+      "supports": [
+        "path",
+        "value",
+        "behavior"
+      ],
+      "strength": "high"
+    },
+    {
+      "evidence_id": "vm-misc.disable-office-telemetry-app-qa-20260507",
+      "kind": "vm-test",
+      "title": "RegProbe app QA apply/rollback proof for misc.disable-office-telemetry",
+      "location": "evidence/captures/misc-disable-office-telemetry-app-qa-20260507.json",
+      "summary": "Status ok-gated-override: QA-only gated mutation override used; apply/verify path completed and rollback restored the tweak. The VM run used the QA-only gated mutation override and confirmed the card snapshot contract, detect/apply/verify flow, and rollback restoration path.",
+      "supports": [
+        "path",
+        "value",
+        "behavior",
+        "side-effects",
+        "ui-mapping"
+      ],
+      "strength": "high",
+      "artifact_status": "present"
+    }
+  ],
+  "decision": {
+    "confidence": "high",
+    "apply_allowed": true,
+    "recommended_for_general_users": true,
+    "restore_default_supported": false,
+    "restore_previous_supported": true,
+    "needs_vm_validation": false,
+    "why": "Validation proof, checked-in provider/engine mapping, and 2026-05-07 VM app QA now converge: the app detected, applied, verified, and rolled back this card successfully under the QA-only gated mutation override.",
+    "manual_review_required": false,
+    "blocking_issues": []
+  },
+  "last_reviewed_utc": "2026-05-07T23:30:00Z",
+  "validation_proof": {
+    "source_url": "Docs/misc/misc.md",
+    "exact_quote_or_path": "Docs/misc/misc.md:404 documents Disable MS Office Telemetry; Docs/misc/misc.md:428-456 lists the Office OSM preventedapplications and preventedsolutiontypes policy values.",
+    "notes": "The misc documentation names the Office telemetry policy paths, values, and data meanings used by the current Office telemetry card.",
+    "key_found_on_page": true
+  },
+  "tested_on": [
+    {
+      "environment": "KVM VM via QGA app QA",
+      "os": "Windows 11",
+      "edition": "25H2 session",
+      "build": "26100",
+      "notes": "2026-05-07 RegProbe app QA status ok-gated-override; artifact evidence/captures/misc-disable-office-telemetry-app-qa-20260507.json."
+    }
+  ]
+}

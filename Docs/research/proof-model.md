@@ -44,9 +44,9 @@ Use this to show which kinds of proof are present for a record:
 Not every setting needs every rung. What matters is that the missing rungs are visible, not hidden.
 
 Cross-format registry captures can create large text diffs even when the underlying values are unchanged. The retained semantic-diff regression pair
-[semantic-sideeffect-regression-20260408.md](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/semantic-sideeffect-regression-20260408.md)
+[semantic-sideeffect-regression-20260408.md](../../registry-research-framework/audit/semantic-sideeffect-regression-20260408.md)
 and
-[semantic-sideeffect-regression-20260408.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/semantic-sideeffect-regression-20260408.json)
+[semantic-sideeffect-regression-20260408.json](../../registry-research-framework/audit/semantic-sideeffect-regression-20260408.json)
 exist to prove that this repo treats semantic registry equality as more important than naive line churn.
 
 ## Status Colors

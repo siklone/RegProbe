@@ -1,0 +1,69 @@
+{
+  "generated_utc": "2026-05-08T23:05:00Z",
+  "status": "recovered-via-snapshot",
+  "experiment_id": "win11-25h2-mf-buffering-threshold-0-smoke",
+  "domain": "regprobe-win11-25h2-session",
+  "connect": "qemu:///session",
+  "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+  "value_name": "MfBufferingThreshold",
+  "value_data": 0,
+  "observation": {
+    "phase": "after-apply-reboot",
+    "boot_result": "automatic-repair",
+    "qga_result": "not-connected",
+    "screenshot": "registry-research-framework/audit/registry-value-experiments/screenshots/win11-25h2-mf-buffering-threshold-0-automatic-repair.png"
+  },
+  "recovery": {
+    "snapshot": "clean-25h2-qga",
+    "steps": [
+      "captured automatic repair screenshot",
+      "stopped the registry value experiment runner",
+      "destroyed the broken VM runtime",
+      "reverted libvirt snapshot clean-25h2-qga",
+      "started the VM",
+      "verified vm-health-check returned status=ok"
+    ],
+    "post_recovery_guest_health": "stable",
+    "post_recovery_transport_blocker": "none"
+  },
+  "control": {
+    "type": "post-recovery-no-op-reboot",
+    "result": "qga-returned",
+    "guest_health": "stable",
+    "transport_blocker": "none",
+    "note": "A plain reboot from the recovered clean snapshot returned to QGA successfully, so the failure is not explained by a generally non-bootable fresh VM."
+  },
+  "repeat": {
+    "artifact": "registry-research-framework/audit/registry-value-experiments/win11-25h2-mf-buffering-threshold-0-repeat.json",
+    "status": "error",
+    "error": "guest-did-not-return-after-apply-reboot",
+    "original_value": 0,
+    "after_apply_value": 0,
+    "value_change_observed": false,
+    "runner_auto_recovery": "ok",
+    "runner_recovery_snapshot": "clean-25h2-qga",
+    "runner_recovery_health": "ok"
+  },
+  "isolation": {
+    "manual_qga_set_property_then_reboot": {
+      "value": 0,
+      "result": "qga-returned",
+      "guest_health": "stable"
+    },
+    "registry_only_runner_before_helper_fix": {
+      "artifact": "registry-research-framework/audit/registry-value-experiments/win11-25h2-mf-buffering-threshold-0-registry-only.json",
+      "result": "automatic-repair",
+      "recovery": "ok"
+    },
+    "registry_only_runner_after_helper_fix": {
+      "artifact": "registry-research-framework/audit/registry-value-experiments/win11-25h2-mf-buffering-threshold-0-registry-only-after-helper-fix.json",
+      "result": "ok",
+      "guest_health_after_run": "stable"
+    }
+  },
+  "interpretation": {
+    "verdict": "runner-helper-bug-fixed",
+    "confidence": "high",
+    "caution": "The repeat and isolation runs showed MfBufferingThreshold was already 0 before apply and remained 0 after apply, so this evidence must not classify the registry value as unsafe. The observed repair path was caused by the old runner helper using New-Item -Force on an existing critical key; after changing the helper to Set-ItemProperty for existing values, the registry-only experiment passed."
+  }
+}

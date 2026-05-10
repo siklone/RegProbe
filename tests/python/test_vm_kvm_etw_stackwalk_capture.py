@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import importlib.util
+import argparse
 import io
 import json
 import subprocess
@@ -109,6 +110,7 @@ class VmKvmEtwStackwalkCaptureTests(unittest.TestCase):
             etl_path.write_bytes(b"etl")
 
             bundle_invocations: list[int] = []
+            backfill_timeouts: list[int] = []
 
             def fake_run_bundle_generation(*, target_bundle: Path, **kwargs):  # noqa: ANN003
                 bundle_invocations.append(1)
@@ -140,7 +142,8 @@ class VmKvmEtwStackwalkCaptureTests(unittest.TestCase):
                 )
                 return subprocess.CompletedProcess(["bundle"], 0, '{"status":"ok"}', "")
 
-            def fake_try_guest_xml_backfill(*, target_xml: Path, **kwargs):  # noqa: ANN003
+            def fake_try_guest_xml_backfill(*, target_xml: Path, artifact_upload_timeout_seconds: int, **kwargs):  # noqa: ANN003
+                backfill_timeouts.append(artifact_upload_timeout_seconds)
                 target_xml.write_text("<Events />\n", encoding="utf-8")
                 return {
                     "status": "ok",
@@ -176,9 +179,74 @@ class VmKvmEtwStackwalkCaptureTests(unittest.TestCase):
 
         self.assertEqual(payload["status"], "ok")
         self.assertEqual(len(bundle_invocations), 2)
+        self.assertEqual(backfill_timeouts, [300])
         self.assertEqual((payload.get("xml_backfill") or {}).get("status"), "ok")
         self.assertTrue(payload["xml_path"])
         self.assertEqual(payload.get("bundle_error_kind"), None)
+
+    def test_ingest_capture_artifacts_passes_artifact_upload_timeout_override(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
+            temp_dir = Path(temp_root)
+            summary_path = temp_dir / "summary.json"
+            summary_path.write_text(
+                json.dumps(
+                    {
+                        "status": "ok",
+                        "tracerpt_exists": True,
+                        "etl_path": r"C:\RegProbe-Diag\etw-stackwalk\stackwalk-test\stackwalk-test.etl",
+                        "xml_path": r"C:\RegProbe-Diag\etw-stackwalk\stackwalk-test\stackwalk-test.xml",
+                        "upload_base_url": "http://10.0.2.2:8766",
+                    }
+                )
+                + "\n",
+                encoding="utf-8",
+            )
+            etl_path = temp_dir / "stackwalk-test.etl"
+            etl_path.write_bytes(b"etl")
+            seen_timeouts: list[int] = []
+
+            def fake_run_bundle_generation(*, target_bundle: Path, **kwargs):  # noqa: ANN003
+                target_bundle.write_text(
+                    json.dumps({"status": "error", "error_kind": "parser-unavailable"})
+                    + "\n",
+                    encoding="utf-8",
+                )
+                return subprocess.CompletedProcess(["bundle"], 1, "", "")
+
+            def fake_try_guest_xml_backfill(*, artifact_upload_timeout_seconds: int, **kwargs):  # noqa: ANN003
+                seen_timeouts.append(artifact_upload_timeout_seconds)
+                return {"status": "error", "reason": "uploaded-xml-missing"}
+
+            with mock.patch.object(
+                etw_stackwalk_capture,
+                "run_bundle_generation",
+                side_effect=fake_run_bundle_generation,
+            ), mock.patch.object(
+                etw_stackwalk_capture,
+                "try_guest_xml_backfill",
+                side_effect=fake_try_guest_xml_backfill,
+            ):
+                payload = etw_stackwalk_capture.ingest_capture_artifacts(
+                    repo_root=REPO_ROOT,
+                    run_id="stackwalk-test",
+                    summary_path=summary_path,
+                    xml_path=None,
+                    etl_path=etl_path,
+                    ingest_root=temp_dir / "ingest",
+                    refresh_ghidra=False,
+                    artifact_upload_timeout_seconds=42,
+                    guest_launch_context={
+                        "domain": "regprobe-win11-25h2-session",
+                        "connect": "qemu:///session",
+                        "bridge_base_url": "http://10.0.2.2:8766",
+                        "guest_scripts_root": r"C:\RegProbe-Diag\bootstrap",
+                        "upload_dir": str(temp_dir / "uploads"),
+                        "qga_wait_timeout": 300,
+                    },
+                )
+
+        self.assertEqual(payload["status"], "error")
+        self.assertEqual(seen_timeouts, [42])
 
     def test_timeout_summary_uses_contract_fields(self) -> None:
         with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
@@ -191,6 +259,8 @@ class VmKvmEtwStackwalkCaptureTests(unittest.TestCase):
                 "default",
                 "--run-id",
                 "stackwalk-test",
+                "--timeout-seconds",
+                "180",
                 "--first-artifact-timeout-seconds",
                 "999",
             ]
@@ -534,6 +604,85 @@ class VmKvmEtwStackwalkCaptureTests(unittest.TestCase):
         self.assertEqual(payload["launch_transport"], "auto")
         self.assertEqual(payload["host_step"], "qga-launch")
         self.assertEqual(payload["exit_code"], 9)
+
+    def test_qga_preflight_failure_reports_fail_fast_contract(self) -> None:
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
+            upload_dir = Path(temp_root) / "upload"
+            argv = [
+                "run-guest-etw-stackwalk-capture.py",
+                "--upload-dir",
+                str(upload_dir),
+                "--profile-id",
+                "default",
+                "--run-id",
+                "stackwalk-test",
+            ]
+            preflight = {
+                "status": "error",
+                "summary_source": "qga-preflight",
+                "failed_checks": ["guest_ping"],
+                "error": "QGA preflight failed before guest launch.",
+            }
+            with mock.patch.object(sys, "argv", argv), mock.patch.object(
+                etw_stackwalk_capture,
+                "load_profile_config",
+                return_value={"profiles": []},
+            ), mock.patch.object(
+                etw_stackwalk_capture,
+                "resolve_effective_capture_settings",
+                return_value=self.effective_capture_settings(),
+            ), mock.patch.object(
+                etw_stackwalk_capture,
+                "ensure_guest_bridge",
+                return_value=None,
+            ), mock.patch.object(
+                etw_stackwalk_capture,
+                "launch_generated_script",
+                side_effect=etw_stackwalk_capture.QgaPreflightError(preflight),
+            ), mock.patch("sys.stdout", new_callable=io.StringIO) as stdout:
+                exit_code = etw_stackwalk_capture.main()
+
+        payload = json.loads(stdout.getvalue())
+        self.assertEqual(exit_code, 1)
+        self.assertEqual(payload["status"], "error")
+        self.assertEqual(payload["summary_source"], "qga-preflight")
+        self.assertEqual(payload["error_kind"], "qga-preflight-failed")
+        self.assertEqual(payload["transport_blocker"], "qga-agent-command")
+        self.assertEqual(payload["recovery_action"], "repair-qga-or-run-vm-health-check")
+        self.assertEqual(payload["launch_transport"], "auto")
+
+    def test_auto_launch_qga_failure_does_not_fall_back_to_send_key(self) -> None:
+        args = argparse.Namespace(
+            launch_transport="auto",
+            preflight="off",
+            domain="vm",
+            connect="qemu:///session",
+            qga_retry_seconds=0,
+            qga_retry_interval_seconds=1,
+            bridge_base_url="http://10.0.2.2:8766",
+            upload_dir="/tmp/regprobe-bridge",
+            delay_ms="18",
+            wake_key="KEY_ENTER",
+        )
+        qga_failure = subprocess.CompletedProcess(["qga"], 1, "qga stdout", "qga stderr")
+
+        with mock.patch.object(
+            etw_stackwalk_capture.subprocess,
+            "run",
+            return_value=qga_failure,
+        ), mock.patch.object(etw_stackwalk_capture, "run") as send_key_run:
+            with self.assertRaises(subprocess.CalledProcessError) as raised:
+                etw_stackwalk_capture.launch_generated_script(
+                    repo_root=REPO_ROOT,
+                    generated_path=REPO_ROOT / "dist" / "kvm-generated" / "guest.ps1",
+                    guest_launcher="Write-Host launch",
+                    guest_scripts_root=r"C:\RegProbe-Diag\bootstrap",
+                    marker_name="ready",
+                    args=args,
+                )
+
+        self.assertEqual(getattr(raised.exception, "stage"), "qga-launch")
+        send_key_run.assert_not_called()
 
 
 if __name__ == "__main__":

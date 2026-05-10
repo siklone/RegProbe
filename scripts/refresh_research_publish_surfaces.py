@@ -12,6 +12,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 
 def build_refresh_steps(repo_root: Path = REPO_ROOT) -> list[dict[str, object]]:
     scripts_root = repo_root / "scripts"
+    framework_scripts_root = repo_root / "registry-research-framework" / "scripts"
     return [
         {
             "name": "app-surface-manifest",
@@ -19,14 +20,29 @@ def build_refresh_steps(repo_root: Path = REPO_ROOT) -> list[dict[str, object]]:
             "command": [sys.executable, str(scripts_root / "research" / "generate_app_surface_manifest.py"), "--write"],
         },
         {
+            "name": "evidence-audit",
+            "script": str((scripts_root / "generate_evidence_audit.py").relative_to(repo_root)).replace("\\", "/"),
+            "command": [sys.executable, str(scripts_root / "generate_evidence_audit.py")],
+        },
+        {
             "name": "promotion-gates",
             "script": str((scripts_root / "generate_promotion_gates.py").relative_to(repo_root)).replace("\\", "/"),
             "command": [sys.executable, str(scripts_root / "generate_promotion_gates.py")],
         },
         {
-            "name": "evidence-classes",
-            "script": str((scripts_root / "generate_evidence_classes.py").relative_to(repo_root)).replace("\\", "/"),
-            "command": [sys.executable, str(scripts_root / "generate_evidence_classes.py")],
+            "name": "rejected-closure-ledger",
+            "script": str((framework_scripts_root / "generate_rejected_closure_ledger.py").relative_to(repo_root)).replace("\\", "/"),
+            "command": [sys.executable, str(framework_scripts_root / "generate_rejected_closure_ledger.py")],
+        },
+        {
+            "name": "promotion-eligible-review-pack",
+            "script": str((framework_scripts_root / "generate_promotion_eligible_review_pack.py").relative_to(repo_root)).replace("\\", "/"),
+            "command": [sys.executable, str(framework_scripts_root / "generate_promotion_eligible_review_pack.py")],
+        },
+        {
+            "name": "v36-clean-state-report",
+            "script": str((framework_scripts_root / "generate_clean_state_report.py").relative_to(repo_root)).replace("\\", "/"),
+            "command": [sys.executable, str(framework_scripts_root / "generate_clean_state_report.py")],
         },
         {
             "name": "imported-candidate-backlog",
@@ -34,14 +50,14 @@ def build_refresh_steps(repo_root: Path = REPO_ROOT) -> list[dict[str, object]]:
             "command": [sys.executable, str(scripts_root / "generate_imported_candidate_backlog.py")],
         },
         {
+            "name": "evidence-classes",
+            "script": str((scripts_root / "generate_evidence_classes.py").relative_to(repo_root)).replace("\\", "/"),
+            "command": [sys.executable, str(scripts_root / "generate_evidence_classes.py")],
+        },
+        {
             "name": "evidence-index",
             "script": str((scripts_root / "generate_evidence_index.py").relative_to(repo_root)).replace("\\", "/"),
             "command": [sys.executable, str(scripts_root / "generate_evidence_index.py")],
-        },
-        {
-            "name": "evidence-audit",
-            "script": str((scripts_root / "generate_evidence_audit.py").relative_to(repo_root)).replace("\\", "/"),
-            "command": [sys.executable, str(scripts_root / "generate_evidence_audit.py")],
         },
         {
             "name": "evidence-manifest",

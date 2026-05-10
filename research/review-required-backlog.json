@@ -1,8 +1,10 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-06T23:42:53Z",
-  "source_record_statuses": [],
-  "source_record_count": 0,
+  "generated_utc": "2026-05-07T15:30:09Z",
+  "source_record_statuses": [
+    "review-required"
+  ],
+  "source_record_count": 33,
   "label_explanations": {
     "implementation-mismatch": "The shipped tweak writes the wrong path, value, or surface for the researched behavior and should be realigned before publish/apply.",
     "rename": "The current UX name or scope over-promises, under-scopes, or points in the wrong direction even if part of the implementation is real.",
@@ -13,8 +15,658 @@
     "implementation-mismatch": 0,
     "rename": 0,
     "split-needed": 0,
-    "docs-first": 0
+    "docs-first": 33
   },
-  "counts_by_method": {},
-  "entries": []
+  "counts_by_method": {
+    "proof-gate": 33
+  },
+  "entries": [
+    {
+      "record_id": "cleanup.component-store",
+      "tweak_id": "cleanup.component-store",
+      "source_record_status": "review-required",
+      "label": "docs-first",
+      "classification_method": "proof-gate",
+      "classification_reason": "The card still lives only in the first-party cleanup provider and has not been promoted into the research-provider surface.",
+      "suggested_action": "Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "category": "Cleanup",
+      "technical_area": "DISM Component Store Cleanup",
+      "implementation_status": "unknown",
+      "apply_allowed": false,
+      "source_file": "research/records/cleanup.component-store.review.json",
+      "summary": "Review-required audit trail for the DISM-based component-store cleanup card. The live app already surfaces cleanup.component-store as a first-party command tweak, and repo docs point to the exact DISM cleanup flow, but this card has not yet been promoted into the validated research-provider surface.",
+      "decision_why": "The live app behavior and repo-backed DISM mapping are clear, but this command-backed cleanup card has not yet completed the research-surface validation path.",
+      "blocking_issues": [
+        "The card still lives only in the first-party cleanup provider and has not been promoted into the research-provider surface.",
+        "This is an on-demand maintenance action with no rollback support."
+      ]
+    },
+    {
+      "record_id": "cleanup.directx-shader-cache",
+      "tweak_id": "cleanup.directx-shader-cache",
+      "source_record_status": "review-required",
+      "label": "docs-first",
+      "classification_method": "proof-gate",
+      "classification_reason": "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
+      "suggested_action": "Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "category": "Cleanup",
+      "technical_area": "Shader Cache Cleanup",
+      "implementation_status": "unknown",
+      "apply_allowed": false,
+      "source_file": "research/records/cleanup.directx-shader-cache.review.json",
+      "summary": "Review-required audit trail for the live DirectX shader-cache cleanup card. The app already ships this file-backed cleanup action from the first-party provider and the repo cleanup docs describe the same cache directories, but the card has not yet been promoted into the validated research-provider surface.",
+      "decision_why": "The live cleanup behavior and repo-backed file targets are clear, but this one-shot cleanup card still lives only in the first-party provider.",
+      "blocking_issues": [
+        "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
+        "This is a maintenance action with no rollback support."
+      ]
+    },
+    {
+      "record_id": "cleanup.eventlog-system",
+      "tweak_id": "cleanup.eventlog-system",
+      "source_record_status": "review-required",
+      "label": "docs-first",
+      "classification_method": "proof-gate",
+      "classification_reason": "The card has not yet been promoted from the first-party system provider into the research-provider surface.",
+      "suggested_action": "Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "category": "Cleanup",
+      "technical_area": "System Event Log Cleanup",
+      "implementation_status": "unknown",
+      "apply_allowed": false,
+      "source_file": "research/records/cleanup.eventlog-system.review.json",
+      "summary": "Review-required audit trail for the live System event-log cleanup card. The app already ships the wevtutil-backed action and the repo cleanup docs describe the same log-clear flow, but the card has not yet been promoted into the validated research-provider surface.",
+      "decision_why": "The live event-log clear behavior is clear and repo-backed, but this one-shot cleanup card still lives only in the first-party provider.",
+      "blocking_issues": [
+        "The card has not yet been promoted from the first-party system provider into the research-provider surface.",
+        "Clearing the event log has no rollback path."
+      ]
+    },
+    {
+      "record_id": "cleanup.font-cache",
+      "tweak_id": "cleanup.font-cache",
+      "source_record_status": "review-required",
+      "label": "docs-first",
+      "classification_method": "proof-gate",
+      "classification_reason": "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
+      "suggested_action": "Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "category": "Cleanup",
+      "technical_area": "Font Cache Cleanup",
+      "implementation_status": "unknown",
+      "apply_allowed": false,
+      "source_file": "research/records/cleanup.font-cache.review.json",
+      "summary": "Review-required audit trail for the live font-cache cleanup card. The app already ships this file-backed cleanup action and repo cleanup docs describe the same cache files and service handling, but the card has not yet been promoted into the validated research-provider surface.",
+      "decision_why": "The live cleanup behavior and repo-backed file targets are clear, but this one-shot cleanup card still lives only in the first-party provider.",
+      "blocking_issues": [
+        "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
+        "This is a maintenance action with no rollback support."
+      ]
+    },
+    {
+      "record_id": "cleanup.memory-dumps",
+      "tweak_id": "cleanup.memory-dumps",
+      "source_record_status": "review-required",
+      "label": "docs-first",
+      "classification_method": "proof-gate",
+      "classification_reason": "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
+      "suggested_action": "Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "category": "Cleanup",
+      "technical_area": "Crash Dump Cleanup",
+      "implementation_status": "unknown",
+      "apply_allowed": false,
+      "source_file": "research/records/cleanup.memory-dumps.review.json",
+      "summary": "Review-required audit trail for the live memory-dump cleanup card. The app already ships this file-backed cleanup action and the repo cleanup docs describe the same dump paths, but the card has not yet been promoted into the validated research-provider surface.",
+      "decision_why": "The live cleanup behavior and repo-backed file targets are clear, but this one-shot cleanup card still lives only in the first-party provider.",
+      "blocking_issues": [
+        "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
+        "This is a maintenance action with no rollback support."
+      ]
+    },
+    {
+      "record_id": "cleanup.prefetch-files",
+      "tweak_id": "cleanup.prefetch-files",
+      "source_record_status": "review-required",
+      "label": "docs-first",
+      "classification_method": "proof-gate",
+      "classification_reason": "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
+      "suggested_action": "Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "category": "Cleanup",
+      "technical_area": "Prefetch Cleanup",
+      "implementation_status": "unknown",
+      "apply_allowed": false,
+      "source_file": "research/records/cleanup.prefetch-files.review.json",
+      "summary": "Review-required audit trail for the live Prefetch cleanup card. The app already ships this file-backed cleanup action and the repo cleanup docs describe the same Prefetch directory, but the card has not yet been promoted into the validated research-provider surface.",
+      "decision_why": "The live cleanup behavior and repo-backed file targets are clear, but this one-shot cleanup card still lives only in the first-party provider.",
+      "blocking_issues": [
+        "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
+        "This is a maintenance action with no rollback support."
+      ]
+    },
+    {
+      "record_id": "cleanup.product-key",
+      "tweak_id": "cleanup.product-key",
+      "source_record_status": "review-required",
+      "label": "docs-first",
+      "classification_method": "proof-gate",
+      "classification_reason": "The card has not yet been promoted into the research-provider surface.",
+      "suggested_action": "Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "category": "Cleanup",
+      "technical_area": "slmgr Product Key Cleanup",
+      "implementation_status": "unknown",
+      "apply_allowed": false,
+      "source_file": "research/records/cleanup.product-key.review.json",
+      "summary": "Review-required audit trail for the live product-key cleanup card. The app already exposes the slmgr-backed action and repo docs map the tweak id to the same cleanup flow, but the card still lives only in the first-party provider and has not yet been promoted into the validated research-provider surface.",
+      "decision_why": "The live slmgr cleanup action is clear and repo-backed, but it still lives only in the first-party provider and does not support rollback.",
+      "blocking_issues": [
+        "The card has not yet been promoted into the research-provider surface.",
+        "This is a one-shot cleanup action without automatic rollback."
+      ]
+    },
+    {
+      "record_id": "cleanup.recycle-bin",
+      "tweak_id": "cleanup.recycle-bin",
+      "source_record_status": "review-required",
+      "label": "docs-first",
+      "classification_method": "proof-gate",
+      "classification_reason": "The card has not yet been promoted into the research-provider surface.",
+      "suggested_action": "Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "category": "Cleanup",
+      "technical_area": "Recycle Bin Cleanup",
+      "implementation_status": "unknown",
+      "apply_allowed": false,
+      "source_file": "research/records/cleanup.recycle-bin.review.json",
+      "summary": "Review-required audit trail for the live recycle-bin cleanup card. The app already surfaces the PowerShell-based action and repo docs map the tweak id to the same clear flow, but the card has not yet been promoted into the validated research-provider surface.",
+      "decision_why": "The live recycle-bin cleanup behavior is clear and repo-backed, but it still ships only from the first-party provider and has no rollback.",
+      "blocking_issues": [
+        "The card has not yet been promoted into the research-provider surface.",
+        "This is a one-shot destructive cleanup action without rollback."
+      ]
+    },
+    {
+      "record_id": "cleanup.shadow-copies",
+      "tweak_id": "cleanup.shadow-copies",
+      "source_record_status": "review-required",
+      "label": "docs-first",
+      "classification_method": "proof-gate",
+      "classification_reason": "The card has not yet been promoted into the research-provider surface.",
+      "suggested_action": "Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "category": "Cleanup",
+      "technical_area": "Volume Shadow Copy Cleanup",
+      "implementation_status": "unknown",
+      "apply_allowed": false,
+      "source_file": "research/records/cleanup.shadow-copies.review.json",
+      "summary": "Review-required audit trail for the live shadow-copy cleanup card. The app already surfaces the vssadmin-based action and repo docs map the tweak id to the same delete flow, but the card still lives only in the first-party provider and has not yet been promoted into the validated research-provider surface.",
+      "decision_why": "The live VSS cleanup behavior is clear and repo-backed, but it still ships only from the first-party provider and is inherently destructive.",
+      "blocking_issues": [
+        "The card has not yet been promoted into the research-provider surface.",
+        "This is a destructive cleanup action without rollback."
+      ]
+    },
+    {
+      "record_id": "cleanup.temp-files",
+      "tweak_id": "cleanup.temp-files",
+      "source_record_status": "review-required",
+      "label": "docs-first",
+      "classification_method": "proof-gate",
+      "classification_reason": "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
+      "suggested_action": "Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "category": "Cleanup",
+      "technical_area": "Temporary File Cleanup",
+      "implementation_status": "unknown",
+      "apply_allowed": false,
+      "source_file": "research/records/cleanup.temp-files.review.json",
+      "summary": "Review-required audit trail for the live temporary-file cleanup card. The app already ships this file-backed cleanup action and the repo cleanup docs describe the same temp directories, but the card has not yet been promoted into the validated research-provider surface.",
+      "decision_why": "The live cleanup behavior and repo-backed file targets are clear, but this one-shot cleanup card still lives only in the first-party provider.",
+      "blocking_issues": [
+        "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
+        "This is a maintenance action with no rollback support."
+      ]
+    },
+    {
+      "record_id": "cleanup.thumbnail-cache",
+      "tweak_id": "cleanup.thumbnail-cache",
+      "source_record_status": "review-required",
+      "label": "docs-first",
+      "classification_method": "proof-gate",
+      "classification_reason": "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
+      "suggested_action": "Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "category": "Cleanup",
+      "technical_area": "Explorer Thumbnail Cache Cleanup",
+      "implementation_status": "unknown",
+      "apply_allowed": false,
+      "source_file": "research/records/cleanup.thumbnail-cache.review.json",
+      "summary": "Review-required audit trail for the live thumbnail-cache cleanup card. The app already ships this file-backed cleanup action and the repo cleanup docs describe the Explorer thumbnail-cache files, but the card has not yet been promoted into the validated research-provider surface.",
+      "decision_why": "The live cleanup behavior and repo-backed file targets are clear, but this one-shot cleanup card still lives only in the first-party provider.",
+      "blocking_issues": [
+        "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
+        "This is a maintenance action with no rollback support."
+      ]
+    },
+    {
+      "record_id": "cleanup.wer-files",
+      "tweak_id": "cleanup.wer-files",
+      "source_record_status": "review-required",
+      "label": "docs-first",
+      "classification_method": "proof-gate",
+      "classification_reason": "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
+      "suggested_action": "Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "category": "Cleanup",
+      "technical_area": "Windows Error Reporting Cleanup",
+      "implementation_status": "unknown",
+      "apply_allowed": false,
+      "source_file": "research/records/cleanup.wer-files.review.json",
+      "summary": "Review-required audit trail for the live Windows Error Reporting cleanup card. The app already ships this file-backed cleanup action and the repo cleanup docs describe the same WER directories, but the card has not yet been promoted into the validated research-provider surface.",
+      "decision_why": "The live cleanup behavior and repo-backed file targets are clear, but this one-shot cleanup card still lives only in the first-party provider.",
+      "blocking_issues": [
+        "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
+        "This is a maintenance action with no rollback support."
+      ]
+    },
+    {
+      "record_id": "cleanup.windows-old",
+      "tweak_id": "cleanup.windows-old",
+      "source_record_status": "review-required",
+      "label": "docs-first",
+      "classification_method": "proof-gate",
+      "classification_reason": "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
+      "suggested_action": "Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "category": "Cleanup",
+      "technical_area": "Windows.old Cleanup",
+      "implementation_status": "unknown",
+      "apply_allowed": false,
+      "source_file": "research/records/cleanup.windows-old.review.json",
+      "summary": "Review-required audit trail for the live Windows.old cleanup card. The app already ships this file-backed cleanup action and the repo cleanup docs describe the same rollback-sensitive folder, but the card has not yet been promoted into the validated research-provider surface.",
+      "decision_why": "The live cleanup behavior and repo-backed folder target are clear, but this one-shot cleanup card still lives only in the first-party provider.",
+      "blocking_issues": [
+        "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
+        "Deleting Windows.old has no rollback path through the app."
+      ]
+    },
+    {
+      "record_id": "cleanup.windows-update-cache",
+      "tweak_id": "cleanup.windows-update-cache",
+      "source_record_status": "review-required",
+      "label": "docs-first",
+      "classification_method": "proof-gate",
+      "classification_reason": "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
+      "suggested_action": "Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "category": "Cleanup",
+      "technical_area": "Windows Update Cache Cleanup",
+      "implementation_status": "unknown",
+      "apply_allowed": false,
+      "source_file": "research/records/cleanup.windows-update-cache.review.json",
+      "summary": "Review-required audit trail for the live Windows Update cache cleanup card. The app already ships this file-backed cleanup action and the repo cleanup docs describe the same update-cache directories, but the card has not yet been promoted into the validated research-provider surface.",
+      "decision_why": "The live cleanup behavior and repo-backed file targets are clear, but this one-shot cleanup card still lives only in the first-party provider.",
+      "blocking_issues": [
+        "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
+        "This is a maintenance action with no rollback support."
+      ]
+    },
+    {
+      "record_id": "misc.disable-edge-features",
+      "tweak_id": "misc.disable-edge-features",
+      "source_record_status": "review-required",
+      "label": "docs-first",
+      "classification_method": "proof-gate",
+      "classification_reason": "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
+      "suggested_action": "Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "category": "Privacy",
+      "technical_area": "Microsoft Edge Policy Bundle",
+      "implementation_status": "unknown",
+      "apply_allowed": false,
+      "source_file": "research/records/misc.disable-edge-features.review.json",
+      "summary": "Review-required audit trail for the live Disable Microsoft Edge Features card. The app already ships the current microsoft edge policy bundle action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.",
+      "decision_why": "The control surface is documented in the checked-in provider and engine code, but this live first-party card has not yet been promoted into the validated research-provider surface.",
+      "blocking_issues": [
+        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface."
+      ]
+    },
+    {
+      "record_id": "misc.disable-office-telemetry",
+      "tweak_id": "misc.disable-office-telemetry",
+      "source_record_status": "review-required",
+      "label": "docs-first",
+      "classification_method": "proof-gate",
+      "classification_reason": "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
+      "suggested_action": "Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "category": "Privacy",
+      "technical_area": "Microsoft Office Telemetry Policy Bundle",
+      "implementation_status": "unknown",
+      "apply_allowed": false,
+      "source_file": "research/records/misc.disable-office-telemetry.review.json",
+      "summary": "Review-required audit trail for the live Disable Microsoft Office Telemetry card. The app already ships the current microsoft office telemetry policy bundle action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.",
+      "decision_why": "The control surface is documented in the checked-in provider and engine code, but this live first-party card has not yet been promoted into the validated research-provider surface.",
+      "blocking_issues": [
+        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface."
+      ]
+    },
+    {
+      "record_id": "misc.disable-onedrive",
+      "tweak_id": "misc.disable-onedrive",
+      "source_record_status": "review-required",
+      "label": "docs-first",
+      "classification_method": "proof-gate",
+      "classification_reason": "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
+      "suggested_action": "Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "category": "Privacy",
+      "technical_area": "OneDrive Policy and Explorer Bundle",
+      "implementation_status": "unknown",
+      "apply_allowed": false,
+      "source_file": "research/records/misc.disable-onedrive.review.json",
+      "summary": "Review-required audit trail for the live Disable OneDrive card. The app already ships the current onedrive policy and explorer bundle action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.",
+      "decision_why": "The control surface is documented in the checked-in provider and engine code, but this live first-party card has not yet been promoted into the validated research-provider surface.",
+      "blocking_issues": [
+        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface."
+      ]
+    },
+    {
+      "record_id": "misc.disable-visual-studio-telemetry",
+      "tweak_id": "misc.disable-visual-studio-telemetry",
+      "source_record_status": "review-required",
+      "label": "docs-first",
+      "classification_method": "proof-gate",
+      "classification_reason": "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
+      "suggested_action": "Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "category": "Privacy",
+      "technical_area": "Visual Studio Telemetry Policy Bundle",
+      "implementation_status": "unknown",
+      "apply_allowed": false,
+      "source_file": "research/records/misc.disable-visual-studio-telemetry.review.json",
+      "summary": "Review-required audit trail for the live Disable Visual Studio Telemetry card. The app already ships the current visual studio telemetry policy bundle action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.",
+      "decision_why": "The control surface is documented in the checked-in provider and engine code, but this live first-party card has not yet been promoted into the validated research-provider surface.",
+      "blocking_issues": [
+        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface."
+      ]
+    },
+    {
+      "record_id": "misc.disable-vscode-telemetry",
+      "tweak_id": "misc.disable-vscode-telemetry",
+      "source_record_status": "review-required",
+      "label": "docs-first",
+      "classification_method": "proof-gate",
+      "classification_reason": "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
+      "suggested_action": "Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "category": "Privacy",
+      "technical_area": "VS Code User Settings Profile",
+      "implementation_status": "unknown",
+      "apply_allowed": false,
+      "source_file": "research/records/misc.disable-vscode-telemetry.review.json",
+      "summary": "Review-required audit trail for the live VS Code Telemetry & Online Features card. The app already ships the current vs code user settings profile action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.",
+      "decision_why": "The control surface is documented in the checked-in provider and engine code, but this live first-party card has not yet been promoted into the validated research-provider surface.",
+      "blocking_issues": [
+        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface."
+      ]
+    },
+    {
+      "record_id": "misc.optimize-7zip-settings",
+      "tweak_id": "misc.optimize-7zip-settings",
+      "source_record_status": "review-required",
+      "label": "docs-first",
+      "classification_method": "proof-gate",
+      "classification_reason": "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
+      "suggested_action": "Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "category": "Misc",
+      "technical_area": "7-Zip User Options",
+      "implementation_status": "unknown",
+      "apply_allowed": false,
+      "source_file": "research/records/misc.optimize-7zip-settings.review.json",
+      "summary": "Review-required audit trail for the live Configure 7-Zip Context Menu Settings card. The app already ships the current 7-zip user options action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.",
+      "decision_why": "The control surface is documented in the checked-in provider and engine code, but this live first-party card has not yet been promoted into the validated research-provider surface.",
+      "blocking_issues": [
+        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface."
+      ]
+    },
+    {
+      "record_id": "network.flush-dns-cache",
+      "tweak_id": "network.flush-dns-cache",
+      "source_record_status": "review-required",
+      "label": "docs-first",
+      "classification_method": "proof-gate",
+      "classification_reason": "The card still ships only as a first-party network utility and has not been promoted into the research-provider surface.",
+      "suggested_action": "Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "category": "Network",
+      "technical_area": "DNS Resolver Cache",
+      "implementation_status": "unknown",
+      "apply_allowed": false,
+      "source_file": "research/records/network.flush-dns-cache.review.json",
+      "summary": "Review-required audit trail for the live DNS cache flush card. The app already exposes the command-backed action and repo docs point to the same ipconfig flow, but the card has not yet been promoted through the validated research-provider pipeline.",
+      "decision_why": "The current ipconfig-based action is clear and documented in repo sources, but the card still lives outside the validated research-provider surface and has no rollback state.",
+      "blocking_issues": [
+        "The card still ships only as a first-party network utility and has not been promoted into the research-provider surface.",
+        "This is a one-shot troubleshooting action without rollback."
+      ]
+    },
+    {
+      "record_id": "network.reset-winsock",
+      "tweak_id": "network.reset-winsock",
+      "source_record_status": "review-required",
+      "label": "docs-first",
+      "classification_method": "proof-gate",
+      "classification_reason": "Tweak provenance still marks network.reset-winsock as category-fallback and review-only.",
+      "suggested_action": "Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "category": "Network",
+      "technical_area": "Winsock Catalog Reset",
+      "implementation_status": "unknown",
+      "apply_allowed": false,
+      "source_file": "research/records/network.reset-winsock.review.json",
+      "summary": "Review-required audit trail for the live Winsock reset card. The app already exposes the netsh-based action and repo docs describe the same reset flow, but provenance still marks it as category-fallback and review-only until a stronger upstream match is captured.",
+      "decision_why": "The live app action is clear, but provenance still explicitly treats reset-winsock as review-only category-fallback work that needs a stronger upstream match.",
+      "blocking_issues": [
+        "Tweak provenance still marks network.reset-winsock as category-fallback and review-only.",
+        "The command is a repair action that usually expects reboot and does not support rollback."
+      ]
+    },
+    {
+      "record_id": "peripheral.audio-disable-ducking",
+      "tweak_id": "peripheral.audio-disable-ducking",
+      "source_record_status": "review-required",
+      "label": "docs-first",
+      "classification_method": "proof-gate",
+      "classification_reason": "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
+      "suggested_action": "Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "category": "Peripheral",
+      "technical_area": "Audio Communications Preference",
+      "implementation_status": "unknown",
+      "apply_allowed": false,
+      "source_file": "research/records/peripheral.audio-disable-ducking.review.json",
+      "summary": "Review-required audit trail for the live Disable Audio Ducking card. The app already ships the current audio communications preference action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.",
+      "decision_why": "The control surface is documented in the checked-in provider and engine code, but this live first-party card has not yet been promoted into the validated research-provider surface.",
+      "blocking_issues": [
+        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface."
+      ]
+    },
+    {
+      "record_id": "peripheral.audio-disable-enhancements",
+      "tweak_id": "peripheral.audio-disable-enhancements",
+      "source_record_status": "review-required",
+      "label": "docs-first",
+      "classification_method": "proof-gate",
+      "classification_reason": "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
+      "suggested_action": "Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "category": "Peripheral",
+      "technical_area": "Audio Enhancement Flags",
+      "implementation_status": "unknown",
+      "apply_allowed": false,
+      "source_file": "research/records/peripheral.audio-disable-enhancements.review.json",
+      "summary": "Review-required audit trail for the live Disable Audio Enhancements card. The app already ships the current audio enhancement flags action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.",
+      "decision_why": "The control surface is documented in the checked-in provider and engine code, but this live first-party card has not yet been promoted into the validated research-provider surface.",
+      "blocking_issues": [
+        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface."
+      ]
+    },
+    {
+      "record_id": "peripheral.keyboard-disable-language-hotkey",
+      "tweak_id": "peripheral.keyboard-disable-language-hotkey",
+      "source_record_status": "review-required",
+      "label": "docs-first",
+      "classification_method": "proof-gate",
+      "classification_reason": "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
+      "suggested_action": "Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "category": "Peripheral",
+      "technical_area": "Keyboard Layout Toggle Bundle",
+      "implementation_status": "unknown",
+      "apply_allowed": false,
+      "source_file": "research/records/peripheral.keyboard-disable-language-hotkey.review.json",
+      "summary": "Review-required audit trail for the live Disable Language Switch Hotkey card. The app already ships the current keyboard layout toggle bundle action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.",
+      "decision_why": "The control surface is documented in the checked-in provider and engine code, but this live first-party card has not yet been promoted into the validated research-provider surface.",
+      "blocking_issues": [
+        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface."
+      ]
+    },
+    {
+      "record_id": "peripheral.keyboard-optimize-repeat",
+      "tweak_id": "peripheral.keyboard-optimize-repeat",
+      "source_record_status": "review-required",
+      "label": "docs-first",
+      "classification_method": "proof-gate",
+      "classification_reason": "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
+      "suggested_action": "Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "category": "Peripheral",
+      "technical_area": "Keyboard Repeat Profile",
+      "implementation_status": "unknown",
+      "apply_allowed": false,
+      "source_file": "research/records/peripheral.keyboard-optimize-repeat.review.json",
+      "summary": "Review-required audit trail for the live Set Keyboard Repeat and Cursor Blink Values card. The app already ships the current keyboard repeat profile action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.",
+      "decision_why": "The control surface is documented in the checked-in provider and engine code, but this live first-party card has not yet been promoted into the validated research-provider surface.",
+      "blocking_issues": [
+        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface."
+      ]
+    },
+    {
+      "record_id": "peripheral.mouse-disable-acceleration",
+      "tweak_id": "peripheral.mouse-disable-acceleration",
+      "source_record_status": "review-required",
+      "label": "docs-first",
+      "classification_method": "proof-gate",
+      "classification_reason": "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
+      "suggested_action": "Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "category": "Peripheral",
+      "technical_area": "Mouse Acceleration Profile",
+      "implementation_status": "unknown",
+      "apply_allowed": false,
+      "source_file": "research/records/peripheral.mouse-disable-acceleration.review.json",
+      "summary": "Review-required audit trail for the live Disable Enhanced Pointer Precision (Mouse Acceleration) card. The app already ships the current mouse acceleration profile action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.",
+      "decision_why": "The control surface is documented in the checked-in provider and engine code, but this live first-party card has not yet been promoted into the validated research-provider surface.",
+      "blocking_issues": [
+        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface."
+      ]
+    },
+    {
+      "record_id": "peripheral.mouse-disable-throttle",
+      "tweak_id": "peripheral.mouse-disable-throttle",
+      "source_record_status": "review-required",
+      "label": "docs-first",
+      "classification_method": "proof-gate",
+      "classification_reason": "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
+      "suggested_action": "Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "category": "Peripheral",
+      "technical_area": "Raw Mouse Throttle Bundle",
+      "implementation_status": "unknown",
+      "apply_allowed": false,
+      "source_file": "research/records/peripheral.mouse-disable-throttle.review.json",
+      "summary": "Review-required audit trail for the live Disable Mouse Throttling for Background Windows card. The app already ships the current raw mouse throttle bundle action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.",
+      "decision_why": "The control surface is documented in the checked-in provider and engine code, but this live first-party card has not yet been promoted into the validated research-provider surface.",
+      "blocking_issues": [
+        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface."
+      ]
+    },
+    {
+      "record_id": "power.disable-cpu-parking",
+      "tweak_id": "power.disable-cpu-parking",
+      "source_record_status": "review-required",
+      "label": "docs-first",
+      "classification_method": "proof-gate",
+      "classification_reason": "The card has not yet been promoted from the first-party power provider into the research-provider surface.",
+      "suggested_action": "Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "category": "Power",
+      "technical_area": "PowerCfg Core Parking",
+      "implementation_status": "unknown",
+      "apply_allowed": false,
+      "source_file": "research/records/power.disable-cpu-parking.review.json",
+      "summary": "Review-required audit trail for the live CPU core parking card. The app already exposes a command-backed powercfg implementation, and repo docs map the tweak id to core-parking research, but the card still lives only in the first-party provider and has not yet been promoted into the validated research-provider surface.",
+      "decision_why": "The live powercfg behavior is clear and reversible, but the card still lives only in the first-party power provider and has not yet been promoted into the research-provider surface.",
+      "blocking_issues": [
+        "The card has not yet been promoted from the first-party power provider into the research-provider surface.",
+        "This review pass documents the behavior but does not yet publish it as a validated research card."
+      ]
+    },
+    {
+      "record_id": "power.disable-hibernation",
+      "tweak_id": "power.disable-hibernation",
+      "source_record_status": "review-required",
+      "label": "docs-first",
+      "classification_method": "proof-gate",
+      "classification_reason": "The card has not yet been promoted from the first-party power provider into the research-provider surface.",
+      "suggested_action": "Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "category": "Power",
+      "technical_area": "PowerCfg Hibernation",
+      "implementation_status": "unknown",
+      "apply_allowed": false,
+      "source_file": "research/records/power.disable-hibernation.review.json",
+      "summary": "Review-required audit trail for the live hibernation card. The app already ships the powercfg-backed action and repo docs map the tweak id to that same flow, but the card still lives only in the first-party provider and has not yet been promoted into the validated research-provider surface.",
+      "decision_why": "The live powercfg behavior is clear and reversible, but the card still lives only in the first-party power provider and has not yet been promoted into the research-provider surface.",
+      "blocking_issues": [
+        "The card has not yet been promoted from the first-party power provider into the research-provider surface.",
+        "This review pass documents the behavior but does not yet publish it as a validated research card."
+      ]
+    },
+    {
+      "record_id": "power.disable-superfetch",
+      "tweak_id": "power.disable-superfetch",
+      "source_record_status": "review-required",
+      "label": "docs-first",
+      "classification_method": "proof-gate",
+      "classification_reason": "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
+      "suggested_action": "Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "category": "Power",
+      "technical_area": "SysMain Service Stop Command",
+      "implementation_status": "unknown",
+      "apply_allowed": false,
+      "source_file": "research/records/power.disable-superfetch.review.json",
+      "summary": "Review-required audit trail for the live Disable Superfetch (SysMain) card. The app already ships the current sysmain service stop command action through the first-party provider, but this card has not yet been promoted into the validated research-provider surface.",
+      "decision_why": "The control surface is documented in the checked-in provider and engine code, but this live first-party card has not yet been promoted into the validated research-provider surface.",
+      "blocking_issues": [
+        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface."
+      ]
+    },
+    {
+      "record_id": "power.disable-usb-selective-suspend",
+      "tweak_id": "power.disable-usb-selective-suspend",
+      "source_record_status": "review-required",
+      "label": "docs-first",
+      "classification_method": "proof-gate",
+      "classification_reason": "The card has not yet been promoted from the first-party power provider into the research-provider surface.",
+      "suggested_action": "Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "category": "Power",
+      "technical_area": "PowerCfg USB Selective Suspend",
+      "implementation_status": "unknown",
+      "apply_allowed": false,
+      "source_file": "research/records/power.disable-usb-selective-suspend.review.json",
+      "summary": "Review-required audit trail for the live USB selective suspend card. The app already exposes a command-backed powercfg implementation, and repo docs plus provenance overrides map the tweak id to USB power-management research, but the card still lives only in the first-party provider and has not yet been promoted into the validated research-provider surface.",
+      "decision_why": "The live powercfg behavior is clear and reversible, but the card still lives only in the first-party power provider and has not yet been promoted into the research-provider surface.",
+      "blocking_issues": [
+        "The card has not yet been promoted from the first-party power provider into the research-provider surface.",
+        "This review pass documents the behavior but does not yet publish it as a validated research card."
+      ]
+    },
+    {
+      "record_id": "security.disable-uac",
+      "tweak_id": "security.disable-uac",
+      "source_record_status": "review-required",
+      "label": "docs-first",
+      "classification_method": "proof-gate",
+      "classification_reason": "Tweak provenance still marks security.disable-uac as category-fallback and review-only.",
+      "suggested_action": "Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "category": "Security",
+      "technical_area": "User Account Control / EnableLUA",
+      "implementation_status": "unknown",
+      "apply_allowed": false,
+      "source_file": "research/records/security.disable-uac.review.json",
+      "summary": "Review-required audit trail for the live full-UAC-disable card. The app already writes EnableLUA = 0 through a command-backed registry tweak, and repo docs describe that same action, but provenance still marks the card as category-fallback until a stronger tweak-specific upstream match is captured.",
+      "decision_why": "The live app behavior is clear, but provenance still treats this high-risk security card as category-fallback review-only work rather than a fully curated research preset.",
+      "blocking_issues": [
+        "Tweak provenance still marks security.disable-uac as category-fallback and review-only.",
+        "The action is high risk and reboot-sensitive, so it should not be promoted without stronger upstream provenance and runtime confidence."
+      ]
+    }
+  ]
 }

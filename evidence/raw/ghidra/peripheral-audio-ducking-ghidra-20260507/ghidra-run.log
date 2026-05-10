@@ -1,0 +1,326 @@
+﻿INFO  Using log config file: jar:file:/C:/Tools/Ghidra/ghidra_12.0.4_PUBLIC/Ghidra/Framework/Generic/lib/Generic.jar!/generic.log4j.xml (LoggingInitialization)
+INFO  Using log file: C:\WINDOWS\system32\config\systemprofile\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\application.log (LoggingInitialization)
+INFO  Loading user preferences: C:\WINDOWS\system32\config\systemprofile\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\preferences (Preferences)
+INFO  Searching for classes... (ClassSearcher)
+INFO  Class search complete (1053 ms) (ClassSearcher)
+INFO  Initializing SSL Context (DefaultSSLContextInitializer)
+INFO  Initializing Random Number Generator... (SecureRandomFactory)
+INFO  Random Number Generator initialization complete: SHA1PRNG (SecureRandomFactory)
+INFO  Trust manager disabled, cacerts have not been set (DefaultTrustManagerFactory)
+INFO  Headless startup complete (3356 ms) (AnalyzeHeadless)
+INFO  Class searcher loaded 58 extension points (18 false positives) (ClassSearcher)
+INFO  HEADLESS Script Paths:
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Processors\Atmel\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Debug\Debugger-rmi-trace\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\GnuDemangler\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\VersionTracking\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\BytePatterns\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\Base\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\Decompiler\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Processors\PIC\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Processors\DATA\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Processors\8051\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\PyGhidra\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\FunctionID\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\BSim\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\DecompilerDependent\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\MicrosoftCodeAnalyzer\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Processors\JVM\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\SystemEmulation\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\WildcardAssembler\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Debug\Debugger\ghidra_scripts
+    C:\RegProbe-Diag\bootstrap\ghidra
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\PDB\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\SwiftDemangler\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\Jython\ghidra_scripts
+    C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\FileFormats\ghidra_scripts (HeadlessAnalyzer)
+INFO  HEADLESS: execution starts (HeadlessAnalyzer)
+INFO  Creating temporary project: C:\Tools\GhidraProjects\Probe_peripheral_audio_ducking_ghidra_20260507 (HeadlessAnalyzer)
+INFO  Creating project: C:\Tools\GhidraProjects\Probe_peripheral_audio_ducking_ghidra_20260507 (DefaultProject)
+INFO  REPORT: Processing input files:  (HeadlessAnalyzer)
+INFO       project: C:\Tools\GhidraProjects\Probe_peripheral_audio_ducking_ghidra_20260507 (HeadlessAnalyzer)
+INFO  IMPORTING: file:///C:/Windows/System32/mmsys.cpl (HeadlessAnalyzer)
+INFO  Using Loader: Portable Executable (PE) (ProgramLoader)
+INFO  Using Language/Compiler: x86:LE:64:default:windows (ProgramLoader)
+INFO  Using Library Search Path: [., C:\WINDOWS\SysWOW64, C:\Tools\Java\jdk-21.0.10+7\bin, C:\WINDOWS\Sun\Java\bin, C:\WINDOWS\system32, C:\WINDOWS, C:\WINDOWS\System32\Wbem, C:\WINDOWS\System32\WindowsPowerShell\v1.0\, C:\WINDOWS\System32\OpenSSH\, C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit\, C:\Tools\Scripts, C:\Tools\Sysinternals, C:\Program Files (x86)\Windows Kits\10\Windows Performance Toolkit, C:\Tools\Java\jdk-21.0.10+7, C:\Tools\DotNetSDK\8.0.416, C:\Tools\Perf, C:\Program Files (x86)\Windows Kits\10\Debuggers\x64, C:\Program Files\dotnet\, C:\WINDOWS\system32\config\systemprofile\AppData\Local\Microsoft\WindowsApps, C:\WINDOWS\system32\config\systemprofile\.dotnet\tools] (ProgramLoader)
+INFO  TLS callbacks at 180048060 (TLSDirectory)
+WARN  Invalid or missing function at 180098100 (ExportDataDirectory)
+INFO  TLS callbacks at 1800bd398 (TLSDirectory)
+INFO  TLS callbacks at 1800e2880 (TLSDirectory)
+INFO  TLS callbacks at 1800ae9c8 (TLSDirectory)
+WARN  Invalid or missing function at 1800c24a8 (ExportDataDirectory)
+INFO  TLS callbacks at 18060b050 (TLSDirectory)
+WARN  Invalid or missing function at 1806ec618 (ExportDataDirectory)
+INFO  TLS callbacks at 18003ee60 (TLSDirectory)
+WARN  Invalid or missing function at 1800be228 (ExportDataDirectory)
+INFO  TLS callbacks at 1800898d0 (TLSDirectory)
+INFO  Additional info:
+Loading file:///C:/Windows/System32/mmsys.cpl?MD5=46896000ad3fc5b1c6e043e9837d7104...
+------------------------------------------------
+
+Searching 18 paths for library ADVAPI32.DLL...
+Loading file:///C:/Windows/System32/advapi32.dll?MD5=71fba6094ecad516eec1dde140d37be7...
+Created exports file: C:\WINDOWS\system32\config\systemprofile\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\advapi32.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 18 paths for library API-MS-WIN-CORE-FILE-L1-2-3.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 18 paths for library API-MS-WIN-CORE-LARGEINTEGER-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 18 paths for library API-MS-WIN-CORE-LIBRARYLOADER-L1-2-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 18 paths for library API-MS-WIN-CORE-LOCALIZATION-L1-2-0.DLL...
+Loading file:///C:/Tools/Java/jdk-21.0.10+7/bin/api-ms-win-core-localization-l1-2-0.dll?MD5=5241df2e95e31e73ccfd6357ad309df0...
+Using existing exports file: C:\WINDOWS\system32\config\systemprofile\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\api-ms-win-core-localization-l1-2-0.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 18 paths for library API-MS-WIN-CORE-REGISTRY-L1-1-1.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 18 paths for library API-MS-WIN-CORE-SHLWAPI-OBSOLETE-L1-1-0.DLL...
+Library not found.
+------------------------------------------------
+
+Searching 18 paths for library API-MS-WIN-CORE-SYSINFO-L1-1-0.DLL...
+Loading file:///C:/Tools/Java/jdk-21.0.10+7/bin/api-ms-win-core-sysinfo-l1-1-0.dll?MD5=b65bf5ef316880fd8d21e1b34eb5c8a9...
+Using existing exports file: C:\WINDOWS\system32\config\systemprofile\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\api-ms-win-core-sysinfo-l1-1-0.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 18 paths for library API-MS-WIN-CRT-PRIVATE-L1-1-0.DLL...
+Loading file:///C:/Tools/Java/jdk-21.0.10+7/bin/api-ms-win-crt-private-l1-1-0.dll?MD5=c830c6447e6de3d6a611702c591831e3...
+Using existing exports file: C:\WINDOWS\system32\config\systemprofile\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\api-ms-win-crt-private-l1-1-0.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 18 paths for library API-MS-WIN-CRT-RUNTIME-L1-1-0.DLL...
+Loading file:///C:/Tools/Java/jdk-21.0.10+7/bin/api-ms-win-crt-runtime-l1-1-0.dll?MD5=bbaa58e9e1abdf7d8c4c69652d29d789...
+Using existing exports file: C:\WINDOWS\system32\config\systemprofile\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\api-ms-win-crt-runtime-l1-1-0.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 18 paths for library API-MS-WIN-CRT-STRING-L1-1-0.DLL...
+Loading file:///C:/Tools/Java/jdk-21.0.10+7/bin/api-ms-win-crt-string-l1-1-0.dll?MD5=639b1fb35cb61ba633eb1791b750631f...
+Using existing exports file: C:\WINDOWS\system32\config\systemprofile\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\api-ms-win-crt-string-l1-1-0.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 18 paths for library COMCTL32.DLL...
+Loading file:///C:/Windows/System32/comctl32.dll?MD5=8288ef22780ef408433e43810d7bc256...
+Created exports file: C:\WINDOWS\system32\config\systemprofile\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\comctl32.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 18 paths for library COMDLG32.DLL...
+Loading file:///C:/Windows/System32/comdlg32.dll?MD5=4f5be7ae10b96e366252f36fd3027ebf...
+Created exports file: C:\WINDOWS\system32\config\systemprofile\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\comdlg32.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 18 paths for library GDI32.DLL...
+Loading file:///C:/Windows/System32/gdi32.dll?MD5=f84f3ab11af1c95970d2f6d007a62332...
+Created exports file: C:\WINDOWS\system32\config\systemprofile\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\gdi32.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 18 paths for library GDIPLUS.DLL...
+Loading file:///C:/Windows/System32/GdiPlus.dll?MD5=66a2abccabcace388b223265036b0eba...
+Created exports file: C:\WINDOWS\system32\config\systemprofile\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\gdiplus.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 18 paths for library KERNEL32.DLL...
+Loading file:///C:/Windows/System32/kernel32.dll?MD5=14075bbb6e0f41ab535a36fc34cbabfd...
+Created exports file: C:\WINDOWS\system32\config\systemprofile\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\kernel32.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 18 paths for library MSVCP_WIN.DLL...
+Loading file:///C:/Windows/System32/msvcp_win.dll?MD5=bc127f7392bd82f2937ec7d4eed0c5af...
+Created exports file: C:\WINDOWS\system32\config\systemprofile\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\msvcp_win.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 18 paths for library NTDLL.DLL...
+Loading file:///C:/Windows/System32/ntdll.dll?MD5=c893ed66c17867314e2f37a4203ca996...
+Using existing exports file: C:\WINDOWS\system32\config\systemprofile\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\ntdll.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 18 paths for library OLE32.DLL...
+Loading file:///C:/Windows/System32/ole32.dll?MD5=631e0f3cb5134b68f1dbfdc6f0d15a92...
+[ole32.dll]: failed to create WEVTResource at 180181740: Failed to resolve data length for WEVTResource
+Created exports file: C:\WINDOWS\system32\config\systemprofile\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\ole32.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 18 paths for library OLEAUT32.DLL...
+Loading file:///C:/Windows/System32/oleaut32.dll?MD5=e145d3f8e2433d0772401094444ba55b...
+Created exports file: C:\WINDOWS\system32\config\systemprofile\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\oleaut32.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 18 paths for library RPCRT4.DLL...
+Loading file:///C:/Windows/System32/rpcrt4.dll?MD5=f441bbfcfea6f87f4b0268147e69b04d...
+Index 10 out of bounds for length 10
+Created exports file: C:\WINDOWS\system32\config\systemprofile\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\rpcrt4.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 18 paths for library SHELL32.DLL...
+Loading file:///C:/Windows/System32/shell32.dll?MD5=473c485211e7e301ae71159d31d84351...
+Created exports file: C:\WINDOWS\system32\config\systemprofile\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\shell32.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 18 paths for library SHLWAPI.DLL...
+Loading file:///C:/Windows/System32/shlwapi.dll?MD5=21094c149b715d58b710e0c793259732...
+Created exports file: C:\WINDOWS\system32\config\systemprofile\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\shlwapi.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 18 paths for library USER32.DLL...
+Loading file:///C:/Windows/System32/user32.dll?MD5=6228cb1ebb6dbebe657b427fe475c57c...
+[user32.dll]: failed to create WEVTResource at 1800dda70: Failed to resolve data length for WEVTResource
+Created exports file: C:\WINDOWS\system32\config\systemprofile\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\user32.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 18 paths for library UXTHEME.DLL...
+Loading file:///C:/Windows/System32/uxtheme.dll?MD5=32f30f43da679dca5153c2d8dd3b6bbc...
+Created exports file: C:\WINDOWS\system32\config\systemprofile\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\uxtheme.exports
+Library not saved to project.
+------------------------------------------------
+
+Searching 18 paths for library WINMM.DLL...
+Loading file:///C:/Windows/System32/winmm.dll?MD5=93215a632e026339bc92702685062379...
+[winmm.dll]: failed to create WEVTResource at 180030310: Failed to resolve data length for WEVTResource
+Created exports file: C:\WINDOWS\system32\config\systemprofile\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\winmm.exports
+Library not saved to project.
+------------------------------------------------
+
+Applying C:\WINDOWS\system32\config\systemprofile\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\msvcp_win.exports
+Applying C:\WINDOWS\system32\config\systemprofile\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\api-ms-win-crt-string-l1-1-0.exports
+Applying C:\WINDOWS\system32\config\systemprofile\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\api-ms-win-crt-runtime-l1-1-0.exports
+Applying C:\WINDOWS\system32\config\systemprofile\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\api-ms-win-crt-private-l1-1-0.exports
+Applying C:\WINDOWS\system32\config\systemprofile\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\advapi32.exports
+Applying cached symbols from NTDLL.DLL
+Applying C:\WINDOWS\system32\config\systemprofile\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\kernel32.exports
+Applying C:\WINDOWS\system32\config\systemprofile\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\gdi32.exports
+Applying C:\WINDOWS\system32\config\systemprofile\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\user32.exports
+Applying C:\WINDOWS\system32\config\systemprofile\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\comctl32.exports
+Unable to locate symbol [Ordinal_381] in [C:\WINDOWS\system32\config\systemprofile\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\comctl32.exports]. Please verify the version is correct.
+Applying C:\WINDOWS\system32\config\systemprofile\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\comdlg32.exports
+Applying C:\WINDOWS\system32\config\systemprofile\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\shell32.exports
+Applying C:\WINDOWS\system32\config\systemprofile\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\shlwapi.exports
+Applying C:\WINDOWS\system32\config\systemprofile\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\ole32.exports
+Applying C:\WINDOWS\system32\config\systemprofile\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\oleaut32.exports
+Applying C:\WINDOWS\system32\config\systemprofile\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\winmm.exports
+Applying C:\WINDOWS\system32\config\systemprofile\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\gdiplus.exports
+Applying C:\WINDOWS\system32\config\systemprofile\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\uxtheme.exports
+Applying C:\WINDOWS\system32\config\systemprofile\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\api-ms-win-core-localization-l1-2-0.exports
+Applying C:\WINDOWS\system32\config\systemprofile\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\api-ms-win-core-sysinfo-l1-1-0.exports
+Applying C:\WINDOWS\system32\config\systemprofile\AppData\Roaming\ghidra\ghidra_12.0.4_PUBLIC\symbols\win64\rpcrt4.exports
+Linking the External Programs of 'mmsys.cpl' to imported libraries...
+  [MSVCP_WIN.DLL] -> not found in project
+  [API-MS-WIN-CRT-STRING-L1-1-0.DLL] -> not found in project
+  [API-MS-WIN-CRT-RUNTIME-L1-1-0.DLL] -> not found in project
+  [API-MS-WIN-CRT-PRIVATE-L1-1-0.DLL] -> not found in project
+  [ADVAPI32.DLL] -> not found in project
+  [NTDLL.DLL] -> not found in project
+  [KERNEL32.DLL] -> not found in project
+  [GDI32.DLL] -> not found in project
+  [USER32.DLL] -> not found in project
+  [COMCTL32.DLL] -> not found in project
+  [COMDLG32.DLL] -> not found in project
+  [SHELL32.DLL] -> not found in project
+  [SHLWAPI.DLL] -> not found in project
+  [OLE32.DLL] -> not found in project
+  [OLEAUT32.DLL] -> not found in project
+  [WINMM.DLL] -> not found in project
+  [GDIPLUS.DLL] -> not found in project
+  [UXTHEME.DLL] -> not found in project
+  [API-MS-WIN-CORE-LOCALIZATION-L1-2-0.DLL] -> not found in project
+  [API-MS-WIN-CORE-SYSINFO-L1-1-0.DLL] -> not found in project
+  [API-MS-WIN-CORE-SHLWAPI-OBSOLETE-L1-1-0.DLL] -> not found in project
+  [API-MS-WIN-CORE-LIBRARYLOADER-L1-2-0.DLL] -> not found in project
+  [API-MS-WIN-CORE-LARGEINTEGER-L1-1-0.DLL] -> not found in project
+  [API-MS-WIN-CORE-REGISTRY-L1-1-1.DLL] -> not found in project
+  [API-MS-WIN-CORE-FILE-L1-2-3.DLL] -> not found in project
+  [RPCRT4.DLL] -> not found in project
+------------------------------------------------
+
+ (ProgramLoader)
+INFO  IMPORTING: Loaded 0 additional files (HeadlessAnalyzer)
+INFO  REPORT: Execute script: SetPdbSymbolRepository.java 'C:\Tools\Symbols\peripheral-audio-ducking-ghidra-20260507'  (HeadlessAnalyzer)
+INFO  SCRIPT: C:\RegProbe-Diag\bootstrap\ghidra\SetPdbSymbolRepository.java (HeadlessAnalyzer)
+ERROR PDB.Symbol Repository Path could not be found for this program. (SetPdbSymbolRepository)
+ERROR SetPdbSymbolRepository.java> No PDB file was found under C:\Tools\Symbols\peripheral-audio-ducking-ghidra-20260507 (GhidraScript)
+INFO  SetPdbSymbolRepository.java> Configured PDB.Symbol Repository Path = C:\Tools\Symbols\peripheral-audio-ducking-ghidra-20260507 (GhidraScript)
+INFO  ANALYZING all memory and code: file:///C:/Windows/System32/mmsys.cpl (HeadlessAnalyzer)
+WARN  Ignoring leading '_' chars on no-return name '___raise_securityfailure' specified in file: C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\Base\data\PEFunctionsThatDoNotReturn (NoReturnFunctionAnalyzer)
+WARN  Ignoring leading '_' chars on no-return name '___report_rangecheckfailure' specified in file: C:\Tools\Ghidra\ghidra_12.0.4_PUBLIC\Ghidra\Features\Base\data\PEFunctionsThatDoNotReturn (NoReturnFunctionAnalyzer)
+INFO  Skipping PDB processing: failed to locate PDB file in configured locations (PdbUniversalAnalyzer)
+INFO  Use a script to set the PDB file location. I.e.,
+    PdbAnalyzer.setPdbFileOption(currentProgram, new File("/path/to/pdb/file.pdb")); or
+    PdbUniversalAnalyzer.setPdbFileOption(currentProgram, new File("/path/to/pdb/file.pdb"));
+Or set the symbol server search configuration using:    PdbPlugin.saveSymbolServerServiceConfig(...);
+ This must be done using a pre-script (prior to analysis). (PdbUniversalAnalyzer)
+INFO  hit non-returning function, restarting decompiler switch analyzer later (DecompilerSwitchAnalyzer)
+INFO  Packed database cache: C:\WINDOWS\system32\config\systemprofile\AppData\Local\ghidra\packed-db-cache (PackedDatabaseCache)
+INFO  Applied data type archive: windows_vs12_64 (ApplyDataArchiveAnalyzer)
+INFO  -----------------------------------------------------
+    ASCII Strings                              0.427 secs
+    Apply Data Archives                        0.335 secs
+    Call Convention ID                         0.021 secs
+    Call-Fixup Installer                       0.013 secs
+    Create Address Tables                      0.065 secs
+    Create Address Tables - One Time           0.235 secs
+    Create Function                            0.074 secs
+    Data Reference                             0.109 secs
+    Decompiler Parameter ID                    8.151 secs
+    Decompiler Switch Analysis                 1.352 secs
+    Decompiler Switch Analysis - One Time      4.460 secs
+    Demangler Microsoft                        0.055 secs
+    Disassemble Entry Points                   2.351 secs
+    Embedded Media                             0.010 secs
+    External Entry References                  0.000 secs
+    Function ID                                1.351 secs
+    Function Start Search                      0.041 secs
+    Non-Returning Functions - Discovered       0.521 secs
+    Non-Returning Functions - Known            0.013 secs
+    PDB Universal                              0.026 secs
+    Reference                                  0.321 secs
+    Scalar Operand References                  0.719 secs
+    Shared Return Calls                        0.114 secs
+    Stack                                      3.150 secs
+    Subroutine References                      0.080 secs
+    Subroutine References - One Time           0.036 secs
+    Windows x86 PE Exception Handling          0.013 secs
+    Windows x86 PE RTTI Analyzer               1.678 secs
+    Windows x86 Thread Environment Block (TEB) Analyzer     0.029 secs
+    WindowsResourceReference                   5.997 secs
+    x86 Constant Reference Analyzer            3.324 secs
+-----------------------------------------------------
+     Total Time   35 secs
+-----------------------------------------------------
+ (AutoAnalysisManager)
+INFO  REPORT: Analysis succeeded for file: file:///C:/Windows/System32/mmsys.cpl (HeadlessAnalyzer)
+INFO  REPORT: Execute script: ExportStringXrefs.java 'C:\RegProbe-Diag\ghidra\peripheral-audio-ducking-ghidra-20260507\ghidra-matches.md' 'C:\RegProbe-Diag\ghidra\peripheral-audio-ducking-ghidra-20260507\evidence.json' 'peripheral-audio-ducking-ghidra-20260507' 'UserDuckingPreference'  (HeadlessAnalyzer)
+INFO  SCRIPT: C:\RegProbe-Diag\bootstrap\ghidra\ExportStringXrefs.java (HeadlessAnalyzer)
+INFO  ExportStringXrefs.java> MATCH 18001d89c in FUN_18001d874 (GhidraScript)
+INFO  ExportStringXrefs.java> MATCH 18001db21 in FUN_18001dafc (GhidraScript)
+INFO  ANALYZING changes made by post scripts: file:///C:/Windows/System32/mmsys.cpl (HeadlessAnalyzer)
+INFO  REPORT: Post-analysis succeeded for file: file:///C:/Windows/System32/mmsys.cpl (HeadlessAnalyzer)
+INFO  /mmsys.cpl: file created (DESKTOP-AHPV0FV$) (LocalFileSystem)
+INFO  REPORT: Save succeeded for: /mmsys.cpl (Probe_peripheral_audio_ducking_ghidra_20260507:/mmsys.cpl) (HeadlessAnalyzer)
+INFO  REPORT: Import succeeded (HeadlessAnalyzer)

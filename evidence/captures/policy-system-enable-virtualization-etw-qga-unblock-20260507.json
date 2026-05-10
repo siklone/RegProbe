@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-07T10:08:51.5651586Z",
+  "record_id": "policy.system.enable-virtualization",
+  "run_id": "policy-system-enable-virtualization-etw-qga-unblock-20260507",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "registry_path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+  "value_name": "EnableVirtualization",
+  "attempt_status": "qga_unblocked_ingest_ok",
+  "assessment": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and a normalized bundle with 4441 registry events and 527 caller-stack events. The bundle contains an exact RegQueryValue event for HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System / EnableVirtualization from the helper probe, returning 0x80000005 on the clean baseline.",
+  "target_observation": {
+    "exact_value_query": true,
+    "operation": "RegQueryValue",
+    "representative_status": "0x80000005",
+    "event_count": 4441,
+    "caller_stack_event_count": 527,
+    "target_key_event_count": 12,
+    "target_value_event_count": 1,
+    "target_command_event_count": 2,
+    "launch_transport": "qga"
+  },
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/policy-system-enable-virtualization-etw-qga-unblock-20260507/policy-system-enable-virtualization-etw-qga-unblock-20260507-summary.json",
+      "sha256": "781f4e8557813b7d0da0441f6af44b455f01bad23354d8cf6c014eba6cb0cf7c",
+      "size": 7944,
+      "collected_utc": "2026-05-07T10:08:51.5651586Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/policy-system-enable-virtualization-etw-qga-unblock-20260507/normalized-registry-bundle.json",
+      "sha256": "8b54b19155b380de0b66855ccfe746ce00c420181f113ca36c0ce64585b2ea52",
+      "size": 5574860,
+      "collected_utc": "2026-05-07T10:08:51.5651586Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/policy-system-enable-virtualization-etw-qga-unblock-20260507/policy-system-enable-virtualization-etw-qga-unblock-20260507.etl",
+      "sha256": "5c66d711097877b07d78a4d6ca854b64b885d2cb227a5986916de7a66bfab608",
+      "size": 12845056,
+      "collected_utc": "2026-05-07T10:08:51.5651586Z"
+    }
+  ]
+}

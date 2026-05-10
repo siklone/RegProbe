@@ -10,7 +10,7 @@
     "category": "Audio",
     "area": "Sound Control Panel DeviceCpl Flags",
     "scope": "user",
-    "casual_explanation": "This makes disconnected audio devices appear in the classic Sound control panel. It is mainly useful for troubleshooting, advanced audio setup, or cleaning up stale devices.",
+    "casual_explanation": "This makes disconnected audio devices appear in the classic Sound control panel. The evidence only proves the DeviceCpl preference is read by mmsys.cpl and can be toggled reversibly.",
     "why_people_change_it": "People enable it when they need to inspect endpoints that are currently unplugged or otherwise not active.",
     "tradeoffs_overview": "Showing disconnected devices can help debugging, but it can also expose stale or confusing entries that most users never need to see. This is a runtime-observed control-panel preference rather than a Microsoft-documented policy surface.",
     "professional_notes": "The app writes ShowDisconnectedDevices = 1 under HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl. On 2026-03-14, Procmon captures of rundll32.exe launching shell32.dll,Control_RunDLL mmsys.cpl,,0 showed RegQueryValue reads for ShowDisconnectedDevices with Data:1 and Data:0 when the value was toggled and restored. On 2026-03-26, a Ghidra headless pass against mmsys.cpl decompiled the DeviceCpl flag handlers and showed SHGetValueW and SHSetValueW calls for ShowDisconnectedDevices and the same DeviceCpl branch. On 2026-03-27, the mapped v3.1 runtime runner re-ran the missing -> 1 -> missing cycle in Win25H2Clean, launched the classic Sound control panel, captured a WPR GeneralProfile placeholder trace, and preserved healthy shell state. That tightens the reversible-cycle and VM-safe-runner coverage, but the class-driving consumer proof still comes from the Procmon reads and the code-side proof still comes from the Ghidra pass. No primary Microsoft Learn or ADMX source for the DeviceCpl contract was captured in this pass, so the record remains a runtime-observed preference rather than a fully documented Microsoft contract.",
@@ -180,6 +180,20 @@
         "transport-blocker"
       ],
       "strength": "medium"
+    },
+    {
+      "evidence_id": "vm-audio.show-disconnected-devices-etw-qga-unblock-20260507",
+      "kind": "etw-trace",
+      "title": "QGA-first ETW stackwalk runtime receipt for ShowDisconnectedDevices",
+      "location": "evidence/captures/audio-show-disconnected-devices-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/audio-show-disconnected-devices-etw-qga-unblock-20260507/audio-show-disconnected-devices-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/audio-show-disconnected-devices-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/audio-show-disconnected-devices-etw-qga-unblock-20260507/audio-show-disconnected-devices-etw-qga-unblock-20260507.etl",
+      "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 5621 registry events with 1364 caller-stack events. The QGA-launched helper targeted `HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl` / `ShowDisconnectedDevices` and the bundle contains target command/subkey activity, but no exact current-user HKCU `ShowDisconnectedDevices` RegQueryValue event was observed under the SYSTEM QGA context.",
+      "supports": [
+        "runtime-observation",
+        "tooling-fix",
+        "path",
+        "version-scope"
+      ],
+      "strength": "medium"
     }
   ],
   "decision": {
@@ -192,7 +206,7 @@
     "why": "The registry path is validated as a live runtime preference because the classic Sound control panel queried ShowDisconnectedDevices with both 1 and 0 in reversible Procmon captures on this build, Ghidra decompiled the mmsys.cpl handlers that read and write the same DeviceCpl flag, and the app writes the same show-disconnected state with a clean restore story. The 2026-03-27 v3.1 runtime lane adds an explicit missing -> 1 -> missing VM cycle with a control-panel launch, WPR placeholder trace, and healthy shell recovery, but the class basis still rests on the Procmon plus Ghidra convergence rather than on the runtime lane alone.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-29T18:35:00Z",
+  "last_reviewed_utc": "2026-05-07T13:21:26.4676415Z",
   "version_stable": [
     "25H2"
   ],
@@ -206,7 +220,7 @@
     "ghidra": true,
     "ghidra_status": "ui_component_handler_decompilation_retained",
     "ghidra_artifact": "evidence/raw/ghidra/audio.show-disconnected-devices/audio-devicecpl-ghidra.md",
-    "notes": "Retained mmsys.cpl decompilation and Procmon evidence keep the Windows UI handler closed, while the retained ReactOS/WRK corpus adds no candidate-specific corroboration for ShowDisconnectedDevices. A bounded 2026-04-24 KVM ETW stackwalk retry for ShowDisconnectedDevices advanced to artifact-upload but still timed out before any ETL, XML, or normalized bundle reached the host. The repo now retains summary and stage receipts only, so the ETW lane is reviewed but still transport-blocked.",
+    "notes": "Retained mmsys.cpl decompilation and Procmon evidence keep the Windows UI handler closed, while the retained ReactOS/WRK corpus adds no candidate-specific corroboration for ShowDisconnectedDevices. A bounded 2026-04-24 KVM ETW stackwalk retry for ShowDisconnectedDevices advanced to artifact-upload but still timed out before any ETL, XML, or normalized bundle reached the host. The repo now retains summary and stage receipts only, so the ETW lane is reviewed but still transport-blocked. A 2026-05-07 QGA-first ETW stackwalk rerun cleared the earlier ETW ingest/upload blocker and produced host-ingested artifacts for `ShowDisconnectedDevices`, but no exact current-user HKCU value query was observed under the SYSTEM QGA context.",
     "last_updated_utc": "2026-04-28T11:11:34Z",
     "source_mirror_reviewed": {
       "reactos": true,
@@ -230,10 +244,10 @@
     },
     "runtime_capture_reviewed": {
       "etw-stackwalk": true,
-      "status": "artifact_upload_timeout"
+      "status": "qga_unblocked_ingest_ok"
     },
     "etw_stackwalk_reviewed": true,
-    "etw_stackwalk_review_status": "artifact_upload_timeout",
-    "etw_stackwalk_review_artifact": "evidence/captures/audio-show-disconnected-devices-etw-stackwalk-attempt-20260424.json"
+    "etw_stackwalk_review_status": "qga_unblocked_ingest_ok",
+    "etw_stackwalk_review_artifact": "evidence/captures/audio-show-disconnected-devices-etw-qga-unblock-20260507.json"
   }
 }

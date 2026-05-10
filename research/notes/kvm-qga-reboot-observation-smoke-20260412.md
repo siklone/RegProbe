@@ -3,7 +3,7 @@
 Date: 2026-04-12
 Domain: `regprobe-win11-25h2-session`
 
-We migrated [scripts/vm-kvm/run-guest-reboot-observation.py](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/scripts/vm-kvm/run-guest-reboot-observation.py) to the QGA no-wait launch model used by the other KVM wrappers. This wrapper is slightly trickier because it launches one guest script before reboot and a second guest script after reboot, which means the post-reboot transport has to wait for qemu guest agent readiness instead of assuming it is immediately available.
+We migrated [scripts/vm-kvm/run-guest-reboot-observation.py](../../scripts/vm-kvm/run-guest-reboot-observation.py) to the QGA no-wait launch model used by the other KVM wrappers. This wrapper is slightly trickier because it launches one guest script before reboot and a second guest script after reboot, which means the post-reboot transport has to wait for qemu guest agent readiness instead of assuming it is immediately available.
 
 Smoke command:
 
@@ -46,4 +46,4 @@ This closes another fragile operator assumption. Reboot-backed KVM observation n
 
 ## Audit artifact
 
-- [kvm-qga-reboot-observation-smoke-20260412.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/kvm-qga-reboot-observation-smoke-20260412.json)
+- [kvm-qga-reboot-observation-smoke-20260412.json](../../registry-research-framework/audit/kvm-qga-reboot-observation-smoke-20260412.json)

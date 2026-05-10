@@ -182,6 +182,21 @@
       "strength": "low"
     },
     {
+      "evidence_id": "vm-system.bsod-display-parameters-etw-qga-unblock-20260507",
+      "kind": "etw-trace",
+      "title": "QGA-first ETW stackwalk runtime receipt for DisplayParameters",
+      "location": "evidence/captures/system-bsod-display-parameters-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/system-bsod-display-parameters-etw-qga-unblock-20260507/system-bsod-display-parameters-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/system-bsod-display-parameters-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/system-bsod-display-parameters-etw-qga-unblock-20260507/system-bsod-display-parameters-etw-qga-unblock-20260507.etl",
+      "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and normalized 5139 registry events with 1181 caller-stack events. The bundle contains an exact helper-triggered `RegQueryValue` for `HKLM\\SYSTEM\\CurrentControlSet\\Control\\CrashControl` / `DisplayParameters`, returning `0xC0000034` on the clean baseline.",
+      "supports": [
+        "runtime-observation",
+        "tooling-fix",
+        "path",
+        "value",
+        "version-scope"
+      ],
+      "strength": "high"
+    },
+    {
       "evidence_id": "vm-system.bsod-display-parameters-ghidra-launch-receipt-20260427",
       "kind": "vm-test",
       "title": "Guest Ghidra launch receipt for DisplayParameters",
@@ -203,7 +218,7 @@
     "why": "Microsoft Support documents DisplayParameters directly on CrashControl with explicit 0/1 semantics, and the app writes the documented display state.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-04-30T19:26:12Z",
+  "last_reviewed_utc": "2026-05-07T09:32:20.8032541Z",
   "validation_proof": {
     "source_url": "https://support.microsoft.com/en-us/topic/stop-error-information-isn-t-displayed-on-the-blue-screen-in-windows-216528fb-94fd-11a2-2675-398ecf5cc237",
     "exact_quote_or_path": "HKEY_LOCAL_MACHINE\\System\\CurrentControlSet\\Control\\CrashControl; \"0 - Do not display the Stop error information\"; \"1 - Display the Stop error information\".",
@@ -236,11 +251,11 @@
     },
     "runtime_capture_reviewed": {
       "etw-stackwalk": true,
-      "status": "ensure_admin_shell_timeout_after_qga_fallback"
+      "status": "qga_unblocked_ingest_ok"
     },
     "etw_stackwalk_reviewed": true,
-    "etw_stackwalk_review_status": "ensure_admin_shell_timeout_after_qga_fallback",
-    "etw_stackwalk_review_artifact": "evidence/captures/system-bsod-display-parameters-etw-stackwalk-attempt-20260427.json",
+    "etw_stackwalk_review_status": "qga_unblocked_ingest_ok",
+    "etw_stackwalk_review_artifact": "evidence/captures/system-bsod-display-parameters-etw-qga-unblock-20260507.json",
     "static_reviewed": {
       "ghidra": true,
       "status": "ensure_admin_shell_timeout"
@@ -248,6 +263,6 @@
     "ghidra": true,
     "ghidra_status": "ensure_admin_shell_timeout",
     "ghidra_artifact": "evidence/raw/ghidra/ghidra-system-bsod-display-parameters-20260427a/summary.json",
-    "notes": "A bounded 2026-04-27 ETW retry for `DisplayParameters` never reached trace collection. QGA guest-exec failed during guest-dir setup, the runner fell back to send-key launch, and the fallback still timed out in `ensure-admin-shell` before any ETW artifact reached the host. A same-day fast guest Ghidra retry for `DisplayParameters` failed in `ensure-admin-shell` with a bounded timeout, so no xref bundle reached the host."
+    "notes": "A bounded 2026-04-27 ETW retry for `DisplayParameters` never reached trace collection. QGA guest-exec failed during guest-dir setup, the runner fell back to send-key launch, and the fallback still timed out in `ensure-admin-shell` before any ETW artifact reached the host. A same-day fast guest Ghidra retry for `DisplayParameters` failed in `ensure-admin-shell` with a bounded timeout, so no xref bundle reached the host. A 2026-05-07 QGA-first ETW stackwalk rerun cleared the earlier QGA/send-key blocker and produced an exact helper-triggered `RegQueryValue` for `DisplayParameters` with caller-stack capture."
   }
 }

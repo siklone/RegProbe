@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-07T09:33:51.9951836Z",
+  "record_id": "system.disable-restartable-apps",
+  "run_id": "system-disable-restartable-apps-etw-qga-unblock-20260507",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "registry_path": "HKCU\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon",
+  "value_name": "RestartApps",
+  "attempt_status": "qga_unblocked_ingest_ok",
+  "assessment": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and a normalized bundle with 4490 registry events and 524 caller-stack events. The QGA-launched helper targeted HKCU\\Software\\Microsoft\\Windows NT\\CurrentVersion\\Winlogon / RestartApps and the bundle contains target-key activity, but no exact RegQueryValue event for RestartApps was observed on the clean baseline.",
+  "target_observation": {
+    "exact_value_query": false,
+    "operation": "RegOpenKey",
+    "representative_status": "0xC0000034",
+    "event_count": 4490,
+    "caller_stack_event_count": 524,
+    "target_key_event_count": 8,
+    "target_value_event_count": 0,
+    "target_command_event_count": 1,
+    "launch_transport": "qga"
+  },
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/system-disable-restartable-apps-etw-qga-unblock-20260507/system-disable-restartable-apps-etw-qga-unblock-20260507-summary.json",
+      "sha256": "8a489d434b2fb67d9d65448924515e33ddf80e329958b9c5e04a5bf1aae4b1dd",
+      "size": 7739,
+      "collected_utc": "2026-05-07T09:33:51.9951836Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/system-disable-restartable-apps-etw-qga-unblock-20260507/normalized-registry-bundle.json",
+      "sha256": "e4b769604f094bf037084bcf50632f425cf3bcf3a1d9d5cf6aff195c6e6f228c",
+      "size": 5530109,
+      "collected_utc": "2026-05-07T09:33:51.9951836Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/system-disable-restartable-apps-etw-qga-unblock-20260507/system-disable-restartable-apps-etw-qga-unblock-20260507.etl",
+      "sha256": "43156dccf26d1dcc586178f6468aff9ea6cfa599a05d5dabf930835a4809b60a",
+      "size": 12582912,
+      "collected_utc": "2026-05-07T09:33:51.9951836Z"
+    }
+  ]
+}

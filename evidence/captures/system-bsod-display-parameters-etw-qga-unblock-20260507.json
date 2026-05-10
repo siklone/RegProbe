@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-07T09:32:20.8032541Z",
+  "record_id": "system.bsod-display-parameters",
+  "run_id": "system-bsod-display-parameters-etw-qga-unblock-20260507",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\CrashControl",
+  "value_name": "DisplayParameters",
+  "attempt_status": "qga_unblocked_ingest_ok",
+  "assessment": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and a normalized bundle with 5139 registry events and 1181 caller-stack events. The bundle contains an exact RegQueryValue event for HKLM\\SYSTEM\\CurrentControlSet\\Control\\CrashControl / DisplayParameters from the helper probe, returning 0xC0000034 on the clean baseline.",
+  "target_observation": {
+    "exact_value_query": true,
+    "operation": "RegQueryValue",
+    "representative_status": "0xC0000034",
+    "event_count": 5139,
+    "caller_stack_event_count": 1181,
+    "target_key_event_count": 8,
+    "target_value_event_count": 1,
+    "target_command_event_count": 2,
+    "launch_transport": "qga"
+  },
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/system-bsod-display-parameters-etw-qga-unblock-20260507/system-bsod-display-parameters-etw-qga-unblock-20260507-summary.json",
+      "sha256": "84f9f61332eaf9e800b48ae681f39bf0f94eb8dccf5ea6bf0acec60fd3ca8312",
+      "size": 7703,
+      "collected_utc": "2026-05-07T09:32:20.8032541Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/system-bsod-display-parameters-etw-qga-unblock-20260507/normalized-registry-bundle.json",
+      "sha256": "7c6fff95cde3046c002eaffcdadb8e39911c7036178efabd696334b5453ca025",
+      "size": 6664727,
+      "collected_utc": "2026-05-07T09:32:20.8032541Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/system-bsod-display-parameters-etw-qga-unblock-20260507/system-bsod-display-parameters-etw-qga-unblock-20260507.etl",
+      "sha256": "637521a6112b0b9abad45826fb11aec871a15d8d985d521e93121dffc7bb705c",
+      "size": 12845056,
+      "collected_utc": "2026-05-07T09:32:20.8032541Z"
+    }
+  ]
+}

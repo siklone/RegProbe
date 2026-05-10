@@ -222,6 +222,20 @@
         "ui-mapping"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "kvm-user-scope-revalidation-batch-20260505",
+      "kind": "runtime-read",
+      "title": "KVM user-scope current-state revalidation batch",
+      "location": "registry-research-framework/audit/kvm-user-scope-revalidation-batch-20260505.json",
+      "supports": [
+        "path",
+        "runtime-read",
+        "default",
+        "version-scope"
+      ],
+      "strength": "medium",
+      "summary": "A KVM guest batch on build 26200 re-read the current interactive user GameBar branch without changing guest configuration. The live guest still shows AutoGameModeEnabled unset in the current user snapshot."
     }
   ],
   "decision": {
@@ -234,5 +248,5 @@
     "why": "Game Mode is an official Windows feature, guest-side Procmon proved that SystemSettings.exe reads AutoGameModeEnabled as a live toggle on this build, and the repo decompiled handler references the same value. The app write, observed 0/1 states, and restore path all line up.",
     "blocking_issues": []
   },
-  "last_reviewed_utc": "2026-03-23T00:00:00Z"
+  "last_reviewed_utc": "2026-05-06T00:27:35.2558263Z"
 }

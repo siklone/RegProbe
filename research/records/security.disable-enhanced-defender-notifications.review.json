@@ -236,6 +236,20 @@
         "value"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "kvm-machine-policy-revalidation-batch-20260505",
+      "kind": "runtime-read",
+      "title": "KVM machine/policy current-state revalidation batch",
+      "location": "registry-research-framework/audit/kvm-machine-policy-revalidation-batch-20260505.json",
+      "summary": "A KVM guest batch on build 26200 re-read the Security Center notifications policy path without changing guest configuration. The live guest still reports the DisableEnhancedNotifications path as absent in the current baseline snapshot.",
+      "supports": [
+        "path",
+        "runtime-read",
+        "default",
+        "version-scope"
+      ],
+      "strength": "medium"
     }
   ],
   "decision": {
@@ -252,7 +266,7 @@
     "Should the Reporting policy alias be modeled as a separate audit record or folded into this one as a parallel documented path?",
     "Should the app ever write both documented paths, or should it stay on the Security Center path only?"
   ],
-  "last_reviewed_utc": "2026-03-25T08:55:00Z",
+  "last_reviewed_utc": "2026-05-06T00:20:41.9332318Z",
   "validation_proof": {
     "source_url": "evidence/files/vm-tooling-staging/defender-enhanced-notifications-securitycenter-1-20260324-213118/defender-disable-enhanced-securitycenter-1.txt",
     "exact_quote_or_path": "SecurityHealthService.exe | RegQueryValue | HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender Security Center\\Notifications\\DisableEnhancedNotifications | SUCCESS | Type: REG_DWORD, Length: 4, Data: 1; baseline run shows the same value as NAME NOT FOUND before the write.",

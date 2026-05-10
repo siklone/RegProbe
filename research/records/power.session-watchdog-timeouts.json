@@ -430,7 +430,12 @@
       "power-session-watchdog-timeouts-intentional-hold-validation-environment-limitation",
       "power-session-watchdog-timeouts-sleep-side-exact-registry-read-missing",
       "power-session-watchdog-timeouts-no-current-build-registry-seeding-caller"
-    ]
+    ],
+    "promotion_disposition": "rejected",
+    "promotion_disposition_kind": "intentional-hold-closed",
+    "promotion_disposition_reason": "Closed as rejected for app/research-provider promotion because the remaining evidence gap is intentional: current-build exact reads, safe trigger conditions, authoritative semantics, or boot-safe validation are still missing.",
+    "promotion_reopen_criteria": "Reopen only with a safer current-build lane that proves exact target consumption and resolves the listed intentional-hold blockers.",
+    "promotion_disposition_reviewed_utc": "2026-05-07T20:20:00Z"
   },
   "open_questions": [
     "Can the exact watchdog pair be captured in a different validation environment with a more reliable sleep/resume path than the current S1-only VMware baseline?",
@@ -458,7 +463,7 @@
       "notes": "The 2026-04-23 capture retained the physical ETL, backfilled a guest-side tracerpt XML sidecar after host parser fallback, and normalized one exact `RegQueryValue` event for `WatchdogResumeTimeout`; the helper registry probe returned `REG_DWORD 0x78`, matching the retained baseline and KD value of 120."
     }
   ],
-  "last_reviewed_utc": "2026-04-28T05:49:48Z",
+  "last_reviewed_utc": "2026-05-07T20:20:00Z",
   "no_hit_reason": "candidate-specific-absent: retained ReactOS and WRK source mirrors still carry no direct `WatchdogResumeTimeout` or `WatchdogSleepTimeout` hit. The resume-side helper ETW query is confirmed, but the sleep-side exact read and the named watchdog caller into the generic registry helper remain open.",
   "source_enrichment": {
     "last_updated_utc": "2026-04-28T05:49:48Z",

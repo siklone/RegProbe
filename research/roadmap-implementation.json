@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-04-06T23:42:53Z",
+  "generated_utc": "2026-05-07T15:30:09Z",
   "sprint_order": [
     {
       "sprint_number": 1,
@@ -19,5 +19,488 @@
       "category": "docs-first"
     }
   ],
-  "items": []
+  "items": [
+    {
+      "sprint_number": 4,
+      "priority_index": 1,
+      "record_id": "cleanup.component-store",
+      "category": "docs-first",
+      "estimated_effort": "small",
+      "blocking_issues": [
+        "The card still lives only in the first-party cleanup provider and has not been promoted into the research-provider surface.",
+        "This is an on-demand maintenance action with no rollback support."
+      ],
+      "depends_on": [],
+      "current_state": "unknown | DISM Component Store Cleanup",
+      "notes": "Evidence first. Prioritize: Procmon or VM toggle-diff validation. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "research/records/cleanup.component-store.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 2,
+      "record_id": "cleanup.directx-shader-cache",
+      "category": "docs-first",
+      "estimated_effort": "small",
+      "blocking_issues": [
+        "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
+        "This is a maintenance action with no rollback support."
+      ],
+      "depends_on": [],
+      "current_state": "unknown | Shader Cache Cleanup",
+      "notes": "Evidence first. Prioritize: Procmon or VM toggle-diff validation. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "research/records/cleanup.directx-shader-cache.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 3,
+      "record_id": "cleanup.eventlog-system",
+      "category": "docs-first",
+      "estimated_effort": "small",
+      "blocking_issues": [
+        "The card has not yet been promoted from the first-party system provider into the research-provider surface.",
+        "Clearing the event log has no rollback path."
+      ],
+      "depends_on": [],
+      "current_state": "unknown | System Event Log Cleanup",
+      "notes": "Evidence first. Prioritize: Procmon or VM toggle-diff validation. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "research/records/cleanup.eventlog-system.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 4,
+      "record_id": "cleanup.memory-dumps",
+      "category": "docs-first",
+      "estimated_effort": "small",
+      "blocking_issues": [
+        "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
+        "This is a maintenance action with no rollback support."
+      ],
+      "depends_on": [],
+      "current_state": "unknown | Crash Dump Cleanup",
+      "notes": "Evidence first. Prioritize: Procmon or VM toggle-diff validation. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "research/records/cleanup.memory-dumps.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 5,
+      "record_id": "cleanup.prefetch-files",
+      "category": "docs-first",
+      "estimated_effort": "small",
+      "blocking_issues": [
+        "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
+        "This is a maintenance action with no rollback support."
+      ],
+      "depends_on": [],
+      "current_state": "unknown | Prefetch Cleanup",
+      "notes": "Evidence first. Prioritize: Procmon or VM toggle-diff validation. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "research/records/cleanup.prefetch-files.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 6,
+      "record_id": "cleanup.product-key",
+      "category": "docs-first",
+      "estimated_effort": "small",
+      "blocking_issues": [
+        "The card has not yet been promoted into the research-provider surface.",
+        "This is a one-shot cleanup action without automatic rollback."
+      ],
+      "depends_on": [],
+      "current_state": "unknown | slmgr Product Key Cleanup",
+      "notes": "Evidence first. Prioritize: Procmon or VM toggle-diff validation. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "research/records/cleanup.product-key.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 7,
+      "record_id": "cleanup.recycle-bin",
+      "category": "docs-first",
+      "estimated_effort": "small",
+      "blocking_issues": [
+        "The card has not yet been promoted into the research-provider surface.",
+        "This is a one-shot destructive cleanup action without rollback."
+      ],
+      "depends_on": [],
+      "current_state": "unknown | Recycle Bin Cleanup",
+      "notes": "Evidence first. Prioritize: Procmon or VM toggle-diff validation. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "research/records/cleanup.recycle-bin.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 8,
+      "record_id": "cleanup.shadow-copies",
+      "category": "docs-first",
+      "estimated_effort": "small",
+      "blocking_issues": [
+        "The card has not yet been promoted into the research-provider surface.",
+        "This is a destructive cleanup action without rollback."
+      ],
+      "depends_on": [],
+      "current_state": "unknown | Volume Shadow Copy Cleanup",
+      "notes": "Evidence first. Prioritize: Procmon or VM toggle-diff validation. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "research/records/cleanup.shadow-copies.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 9,
+      "record_id": "cleanup.temp-files",
+      "category": "docs-first",
+      "estimated_effort": "small",
+      "blocking_issues": [
+        "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
+        "This is a maintenance action with no rollback support."
+      ],
+      "depends_on": [],
+      "current_state": "unknown | Temporary File Cleanup",
+      "notes": "Evidence first. Prioritize: Procmon or VM toggle-diff validation. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "research/records/cleanup.temp-files.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 10,
+      "record_id": "cleanup.thumbnail-cache",
+      "category": "docs-first",
+      "estimated_effort": "small",
+      "blocking_issues": [
+        "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
+        "This is a maintenance action with no rollback support."
+      ],
+      "depends_on": [],
+      "current_state": "unknown | Explorer Thumbnail Cache Cleanup",
+      "notes": "Evidence first. Prioritize: Procmon or VM toggle-diff validation. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "research/records/cleanup.thumbnail-cache.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 11,
+      "record_id": "cleanup.wer-files",
+      "category": "docs-first",
+      "estimated_effort": "small",
+      "blocking_issues": [
+        "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
+        "This is a maintenance action with no rollback support."
+      ],
+      "depends_on": [],
+      "current_state": "unknown | Windows Error Reporting Cleanup",
+      "notes": "Evidence first. Prioritize: Procmon or VM toggle-diff validation. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "research/records/cleanup.wer-files.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 12,
+      "record_id": "cleanup.windows-old",
+      "category": "docs-first",
+      "estimated_effort": "small",
+      "blocking_issues": [
+        "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
+        "Deleting Windows.old has no rollback path through the app."
+      ],
+      "depends_on": [],
+      "current_state": "unknown | Windows.old Cleanup",
+      "notes": "Evidence first. Prioritize: Procmon or VM toggle-diff validation. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "research/records/cleanup.windows-old.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 13,
+      "record_id": "cleanup.windows-update-cache",
+      "category": "docs-first",
+      "estimated_effort": "small",
+      "blocking_issues": [
+        "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
+        "This is a maintenance action with no rollback support."
+      ],
+      "depends_on": [],
+      "current_state": "unknown | Windows Update Cache Cleanup",
+      "notes": "Evidence first. Prioritize: Procmon or VM toggle-diff validation. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "research/records/cleanup.windows-update-cache.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 14,
+      "record_id": "network.flush-dns-cache",
+      "category": "docs-first",
+      "estimated_effort": "small",
+      "blocking_issues": [
+        "The card still ships only as a first-party network utility and has not been promoted into the research-provider surface.",
+        "This is a one-shot troubleshooting action without rollback."
+      ],
+      "depends_on": [],
+      "current_state": "unknown | DNS Resolver Cache",
+      "notes": "Evidence first. Prioritize: Procmon or VM toggle-diff validation. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "research/records/network.flush-dns-cache.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 15,
+      "record_id": "network.reset-winsock",
+      "category": "docs-first",
+      "estimated_effort": "small",
+      "blocking_issues": [
+        "Tweak provenance still marks network.reset-winsock as category-fallback and review-only.",
+        "The command is a repair action that usually expects reboot and does not support rollback."
+      ],
+      "depends_on": [],
+      "current_state": "unknown | Winsock Catalog Reset",
+      "notes": "Evidence first. Prioritize: Procmon or VM toggle-diff validation. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "research/records/network.reset-winsock.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 16,
+      "record_id": "power.disable-cpu-parking",
+      "category": "docs-first",
+      "estimated_effort": "small",
+      "blocking_issues": [
+        "The card has not yet been promoted from the first-party power provider into the research-provider surface.",
+        "This review pass documents the behavior but does not yet publish it as a validated research card."
+      ],
+      "depends_on": [],
+      "current_state": "unknown | PowerCfg Core Parking",
+      "notes": "Evidence first. Prioritize: Procmon or VM toggle-diff validation. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "research/records/power.disable-cpu-parking.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 17,
+      "record_id": "power.disable-hibernation",
+      "category": "docs-first",
+      "estimated_effort": "small",
+      "blocking_issues": [
+        "The card has not yet been promoted from the first-party power provider into the research-provider surface.",
+        "This review pass documents the behavior but does not yet publish it as a validated research card."
+      ],
+      "depends_on": [],
+      "current_state": "unknown | PowerCfg Hibernation",
+      "notes": "Evidence first. Prioritize: Procmon or VM toggle-diff validation. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "research/records/power.disable-hibernation.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 18,
+      "record_id": "power.disable-usb-selective-suspend",
+      "category": "docs-first",
+      "estimated_effort": "small",
+      "blocking_issues": [
+        "The card has not yet been promoted from the first-party power provider into the research-provider surface.",
+        "This review pass documents the behavior but does not yet publish it as a validated research card."
+      ],
+      "depends_on": [],
+      "current_state": "unknown | PowerCfg USB Selective Suspend",
+      "notes": "Evidence first. Prioritize: Procmon or VM toggle-diff validation. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "research/records/power.disable-usb-selective-suspend.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 19,
+      "record_id": "security.disable-uac",
+      "category": "docs-first",
+      "estimated_effort": "small",
+      "blocking_issues": [
+        "Tweak provenance still marks security.disable-uac as category-fallback and review-only.",
+        "The action is high risk and reboot-sensitive, so it should not be promoted without stronger upstream provenance and runtime confidence."
+      ],
+      "depends_on": [],
+      "current_state": "unknown | User Account Control / EnableLUA",
+      "notes": "Evidence first. Prioritize: Procmon or settings-diff capture. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "research/records/security.disable-uac.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 20,
+      "record_id": "misc.disable-edge-features",
+      "category": "docs-first",
+      "estimated_effort": "medium",
+      "blocking_issues": [
+        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface."
+      ],
+      "depends_on": [],
+      "current_state": "unknown | Microsoft Edge Policy Bundle",
+      "notes": "Evidence first. Prioritize: ADMX / Policy CSP mapping, Service or scheduled-task baseline diff. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "research/records/misc.disable-edge-features.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 21,
+      "record_id": "misc.disable-office-telemetry",
+      "category": "docs-first",
+      "estimated_effort": "medium",
+      "blocking_issues": [
+        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface."
+      ],
+      "depends_on": [],
+      "current_state": "unknown | Microsoft Office Telemetry Policy Bundle",
+      "notes": "Evidence first. Prioritize: ADMX / Policy CSP mapping, Service or scheduled-task baseline diff. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "research/records/misc.disable-office-telemetry.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 22,
+      "record_id": "misc.disable-onedrive",
+      "category": "docs-first",
+      "estimated_effort": "medium",
+      "blocking_issues": [
+        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface."
+      ],
+      "depends_on": [],
+      "current_state": "unknown | OneDrive Policy and Explorer Bundle",
+      "notes": "Evidence first. Prioritize: ADMX / Policy CSP mapping, Service or scheduled-task baseline diff. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "research/records/misc.disable-onedrive.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 23,
+      "record_id": "peripheral.audio-disable-ducking",
+      "category": "docs-first",
+      "estimated_effort": "medium",
+      "blocking_issues": [
+        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface."
+      ],
+      "depends_on": [],
+      "current_state": "unknown | Audio Communications Preference",
+      "notes": "Evidence first. Prioritize: Procmon or settings-diff capture, Service or scheduled-task baseline diff. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "research/records/peripheral.audio-disable-ducking.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 24,
+      "record_id": "peripheral.audio-disable-enhancements",
+      "category": "docs-first",
+      "estimated_effort": "medium",
+      "blocking_issues": [
+        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface."
+      ],
+      "depends_on": [],
+      "current_state": "unknown | Audio Enhancement Flags",
+      "notes": "Evidence first. Prioritize: Procmon or settings-diff capture, Service or scheduled-task baseline diff. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "research/records/peripheral.audio-disable-enhancements.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 25,
+      "record_id": "misc.disable-visual-studio-telemetry",
+      "category": "docs-first",
+      "estimated_effort": "medium",
+      "blocking_issues": [
+        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface."
+      ],
+      "depends_on": [],
+      "current_state": "unknown | Visual Studio Telemetry Policy Bundle",
+      "notes": "Evidence first. Prioritize: ADMX / Policy CSP mapping, Vendor docs or product settings schema, Service or scheduled-task baseline diff. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "research/records/misc.disable-visual-studio-telemetry.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 26,
+      "record_id": "cleanup.font-cache",
+      "category": "docs-first",
+      "estimated_effort": "small",
+      "blocking_issues": [
+        "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
+        "This is a maintenance action with no rollback support."
+      ],
+      "depends_on": [],
+      "current_state": "unknown | Font Cache Cleanup",
+      "notes": "Evidence first. Prioritize: Service or scheduled-task baseline diff. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "research/records/cleanup.font-cache.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 27,
+      "record_id": "misc.optimize-7zip-settings",
+      "category": "docs-first",
+      "estimated_effort": "small",
+      "blocking_issues": [
+        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface."
+      ],
+      "depends_on": [],
+      "current_state": "unknown | 7-Zip User Options",
+      "notes": "Evidence first. Prioritize: Service or scheduled-task baseline diff. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "research/records/misc.optimize-7zip-settings.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 28,
+      "record_id": "peripheral.keyboard-disable-language-hotkey",
+      "category": "docs-first",
+      "estimated_effort": "small",
+      "blocking_issues": [
+        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface."
+      ],
+      "depends_on": [],
+      "current_state": "unknown | Keyboard Layout Toggle Bundle",
+      "notes": "Evidence first. Prioritize: Service or scheduled-task baseline diff. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "research/records/peripheral.keyboard-disable-language-hotkey.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 29,
+      "record_id": "peripheral.keyboard-optimize-repeat",
+      "category": "docs-first",
+      "estimated_effort": "small",
+      "blocking_issues": [
+        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface."
+      ],
+      "depends_on": [],
+      "current_state": "unknown | Keyboard Repeat Profile",
+      "notes": "Evidence first. Prioritize: Service or scheduled-task baseline diff. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "research/records/peripheral.keyboard-optimize-repeat.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 30,
+      "record_id": "peripheral.mouse-disable-acceleration",
+      "category": "docs-first",
+      "estimated_effort": "small",
+      "blocking_issues": [
+        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface."
+      ],
+      "depends_on": [],
+      "current_state": "unknown | Mouse Acceleration Profile",
+      "notes": "Evidence first. Prioritize: Service or scheduled-task baseline diff. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "research/records/peripheral.mouse-disable-acceleration.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 31,
+      "record_id": "peripheral.mouse-disable-throttle",
+      "category": "docs-first",
+      "estimated_effort": "small",
+      "blocking_issues": [
+        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface."
+      ],
+      "depends_on": [],
+      "current_state": "unknown | Raw Mouse Throttle Bundle",
+      "notes": "Evidence first. Prioritize: Service or scheduled-task baseline diff. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "research/records/peripheral.mouse-disable-throttle.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 32,
+      "record_id": "power.disable-superfetch",
+      "category": "docs-first",
+      "estimated_effort": "small",
+      "blocking_issues": [
+        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface."
+      ],
+      "depends_on": [],
+      "current_state": "unknown | SysMain Service Stop Command",
+      "notes": "Evidence first. Prioritize: Service or scheduled-task baseline diff. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "research/records/power.disable-superfetch.review.json"
+    },
+    {
+      "sprint_number": 4,
+      "priority_index": 33,
+      "record_id": "misc.disable-vscode-telemetry",
+      "category": "docs-first",
+      "estimated_effort": "medium",
+      "blocking_issues": [
+        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface."
+      ],
+      "depends_on": [],
+      "current_state": "unknown | VS Code User Settings Profile",
+      "notes": "Evidence first. Prioritize: Vendor docs or product settings schema, Service or scheduled-task baseline diff. Keep this as research/reference-only until a stronger primary source or supported control surface is captured.",
+      "source_file": "research/records/misc.disable-vscode-telemetry.review.json"
+    }
+  ]
 }

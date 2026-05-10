@@ -1,0 +1,387 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-06T00:20:41.9332318Z",
+  "wrapper": "qga-run-powershell.py",
+  "guest_script_kind": "kvm-machine-policy-revalidation-batch",
+  "domain": "regprobe-win11-25h2-session",
+  "guest_dir": "C:\\Tools\\Codex",
+  "execution_exitcode": 0,
+  "machine": {
+    "computer_name": "DESKTOP-AHPV0FV",
+    "current_build": "26200",
+    "ubr": 8246,
+    "build_lab_ex": "26100.1.amd64fre.ge_release.240331-1435",
+    "product_name": "Windows 10 Pro"
+  },
+  "records": {
+    "power.optimize-gaming-network": [
+      {
+        "path": "HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games",
+        "value_name": "Priority",
+        "path_exists": true,
+        "value_exists": true,
+        "value": 2,
+        "kind": "registry",
+        "error": null
+      },
+      {
+        "path": "HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games",
+        "value_name": "Scheduling Category",
+        "path_exists": true,
+        "value_exists": true,
+        "value": "Medium",
+        "kind": "registry",
+        "error": null
+      },
+      {
+        "path": "HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games",
+        "value_name": "SFIO Priority",
+        "path_exists": true,
+        "value_exists": true,
+        "value": "Normal",
+        "kind": "registry",
+        "error": null
+      },
+      {
+        "path": "HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games",
+        "value_name": "GPU Priority",
+        "path_exists": true,
+        "value_exists": true,
+        "value": 8,
+        "kind": "registry",
+        "error": null
+      },
+      {
+        "path": "HKLM:\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\Tasks\\Games",
+        "value_name": "Affinity",
+        "path_exists": true,
+        "value_exists": true,
+        "value": 0,
+        "kind": "registry",
+        "error": null
+      }
+    ],
+    "privacy.deny-app-access.policy": [
+      {
+        "path": "HKLM:\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy",
+        "value_name": "LetAppsAccessAccountInfo",
+        "path_exists": true,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": "Property LetAppsAccessAccountInfo does not exist at path HKLM:\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy."
+      },
+      {
+        "path": "HKLM:\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy",
+        "value_name": "LetAppsAccessCalendar",
+        "path_exists": true,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": "Property LetAppsAccessCalendar does not exist at path HKLM:\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy."
+      },
+      {
+        "path": "HKLM:\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy",
+        "value_name": "LetAppsAccessCallHistory",
+        "path_exists": true,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": "Property LetAppsAccessCallHistory does not exist at path HKLM:\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy."
+      },
+      {
+        "path": "HKLM:\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy",
+        "value_name": "LetAppsAccessCamera",
+        "path_exists": true,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": "Property LetAppsAccessCamera does not exist at path HKLM:\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy."
+      },
+      {
+        "path": "HKLM:\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy",
+        "value_name": "LetAppsAccessContacts",
+        "path_exists": true,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": "Property LetAppsAccessContacts does not exist at path HKLM:\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy."
+      },
+      {
+        "path": "HKLM:\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy",
+        "value_name": "LetAppsAccessEmail",
+        "path_exists": true,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": "Property LetAppsAccessEmail does not exist at path HKLM:\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy."
+      },
+      {
+        "path": "HKLM:\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy",
+        "value_name": "LetAppsAccessGraphicsCaptureProgrammatic",
+        "path_exists": true,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": "Property LetAppsAccessGraphicsCaptureProgrammatic does not exist at path HKLM:\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy."
+      },
+      {
+        "path": "HKLM:\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy",
+        "value_name": "LetAppsAccessGraphicsCaptureWithoutBorder",
+        "path_exists": true,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": "Property LetAppsAccessGraphicsCaptureWithoutBorder does not exist at path HKLM:\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy."
+      },
+      {
+        "path": "HKLM:\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy",
+        "value_name": "LetAppsAccessHumanPresence",
+        "path_exists": true,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": "Property LetAppsAccessHumanPresence does not exist at path HKLM:\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy."
+      },
+      {
+        "path": "HKLM:\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy",
+        "value_name": "LetAppsAccessLocation",
+        "path_exists": true,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": "Property LetAppsAccessLocation does not exist at path HKLM:\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy."
+      },
+      {
+        "path": "HKLM:\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy",
+        "value_name": "LetAppsAccessMessaging",
+        "path_exists": true,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": "Property LetAppsAccessMessaging does not exist at path HKLM:\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy."
+      },
+      {
+        "path": "HKLM:\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy",
+        "value_name": "LetAppsAccessMicrophone",
+        "path_exists": true,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": "Property LetAppsAccessMicrophone does not exist at path HKLM:\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy."
+      },
+      {
+        "path": "HKLM:\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy",
+        "value_name": "LetAppsAccessMotion",
+        "path_exists": true,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": "Property LetAppsAccessMotion does not exist at path HKLM:\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy."
+      },
+      {
+        "path": "HKLM:\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy",
+        "value_name": "LetAppsAccessNotifications",
+        "path_exists": true,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": "Property LetAppsAccessNotifications does not exist at path HKLM:\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy."
+      },
+      {
+        "path": "HKLM:\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy",
+        "value_name": "LetAppsAccessPhone",
+        "path_exists": true,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": "Property LetAppsAccessPhone does not exist at path HKLM:\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy."
+      },
+      {
+        "path": "HKLM:\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy",
+        "value_name": "LetAppsAccessRadios",
+        "path_exists": true,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": "Property LetAppsAccessRadios does not exist at path HKLM:\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy."
+      },
+      {
+        "path": "HKLM:\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy",
+        "value_name": "LetAppsSyncWithDevices",
+        "path_exists": true,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": "Property LetAppsSyncWithDevices does not exist at path HKLM:\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy."
+      },
+      {
+        "path": "HKLM:\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy",
+        "value_name": "LetAppsAccessTasks",
+        "path_exists": true,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": "Property LetAppsAccessTasks does not exist at path HKLM:\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy."
+      },
+      {
+        "path": "HKLM:\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy",
+        "value_name": "LetAppsAccessTrustedDevices",
+        "path_exists": true,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": "Property LetAppsAccessTrustedDevices does not exist at path HKLM:\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy."
+      },
+      {
+        "path": "HKLM:\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy",
+        "value_name": "LetAppsRunInBackground",
+        "path_exists": true,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": "Property LetAppsRunInBackground does not exist at path HKLM:\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy."
+      },
+      {
+        "path": "HKLM:\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy",
+        "value_name": "LetAppsGetDiagnosticInfo",
+        "path_exists": true,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": "Property LetAppsGetDiagnosticInfo does not exist at path HKLM:\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy."
+      },
+      {
+        "path": "HKLM:\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy",
+        "value_name": "LetAppsAccessGazeInput",
+        "path_exists": true,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": "Property LetAppsAccessGazeInput does not exist at path HKLM:\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy."
+      },
+      {
+        "path": "HKLM:\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy",
+        "value_name": "LetAppsActivateWithVoice",
+        "path_exists": true,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": "Property LetAppsActivateWithVoice does not exist at path HKLM:\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy."
+      },
+      {
+        "path": "HKLM:\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy",
+        "value_name": "LetAppsActivateWithVoiceAboveLock",
+        "path_exists": true,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": "Property LetAppsActivateWithVoiceAboveLock does not exist at path HKLM:\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy."
+      },
+      {
+        "path": "HKLM:\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy",
+        "value_name": "LetAppsAccessBackgroundSpatialPerception",
+        "path_exists": true,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": "Property LetAppsAccessBackgroundSpatialPerception does not exist at path HKLM:\\Software\\Policies\\Microsoft\\Windows\\AppPrivacy."
+      }
+    ],
+    "security.disable-defender-sample-submission": [
+      {
+        "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet",
+        "value_name": "SubmitSamplesConsent",
+        "path_exists": false,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": null
+      }
+    ],
+    "security.disable-enhanced-defender-notifications": [
+      {
+        "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows Defender Security Center\\Notifications",
+        "value_name": "DisableEnhancedNotifications",
+        "path_exists": false,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": null
+      }
+    ],
+    "security.disable-system-mitigations": [
+      {
+        "path": "HKLM:\\Software\\Policies\\Microsoft\\Windows Defender ExploitGuard\\Exploit Protection",
+        "value_name": "ExploitProtectionSettings",
+        "path_exists": false,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": null
+      }
+    ],
+    "security.disable-system-restore": [
+      {
+        "path": "HKLM:\\Software\\Policies\\Microsoft\\Windows NT\\SystemRestore",
+        "value_name": "DisableSR",
+        "path_exists": false,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": null
+      }
+    ],
+    "security.disable-windows-firewall": [
+      {
+        "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\WindowsFirewall\\DomainProfile",
+        "value_name": "EnableFirewall",
+        "path_exists": false,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": null
+      },
+      {
+        "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\WindowsFirewall\\StandardProfile",
+        "value_name": "EnableFirewall",
+        "path_exists": false,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": null
+      }
+    ],
+    "security.disable-windows-update.policy": [
+      {
+        "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate",
+        "value_name": "DisableWindowsUpdateAccess",
+        "path_exists": false,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": null
+      },
+      {
+        "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate\\AU",
+        "value_name": "NoAutoUpdate",
+        "path_exists": false,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": null
+      }
+    ],
+    "security.enable-dynamic-lock": [
+      {
+        "path": "HKLM:\\SOFTWARE\\Policies\\Microsoft\\PassportForWork\\DynamicLock",
+        "value_name": "DynamicLock",
+        "path_exists": false,
+        "value_exists": false,
+        "value": null,
+        "kind": "registry",
+        "error": null
+      }
+    ]
+  }
+}

@@ -299,4 +299,4 @@ That means future analysis should critique the repo that exists now, not the PoC
 
 ## Retained audit artifact
 
-- [regprobe-legacy-monitor-report-reconciliation-20260419.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/regprobe-legacy-monitor-report-reconciliation-20260419.json)
+- [regprobe-legacy-monitor-report-reconciliation-20260419.json](../../registry-research-framework/audit/regprobe-legacy-monitor-report-reconciliation-20260419.json)

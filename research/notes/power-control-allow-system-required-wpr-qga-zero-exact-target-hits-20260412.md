@@ -38,7 +38,7 @@ There are zero exact `AllowSystemRequiredPowerRequests` lines. This is a target-
 
 Tooling note:
 
-[scripts/vm-kvm/qga-get-file.py](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/scripts/vm-kvm/qga-get-file.py) was added during this pass. It downloads guest files through QGA `guest-file-read`, which let us salvage the tiny hit CSV even when PowerShell output capture was unreliable under guest I/O pressure.
+[scripts/vm-kvm/qga-get-file.py](../../scripts/vm-kvm/qga-get-file.py) was added during this pass. It downloads guest files through QGA `guest-file-read`, which let us salvage the tiny hit CSV even when PowerShell output capture was unreliable under guest I/O pressure.
 
 Cleanup:
 
@@ -46,4 +46,4 @@ The temporary WPR/QGA trace directories were removed from `C:\RegProbe-Diag\wpr-
 
 ## Retained audit artifact
 
-- [power-control-allow-system-required-wpr-qga-zero-exact-target-hits-20260412.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/power-control-allow-system-required-wpr-qga-zero-exact-target-hits-20260412.json)
+- [power-control-allow-system-required-wpr-qga-zero-exact-target-hits-20260412.json](../../registry-research-framework/audit/power-control-allow-system-required-wpr-qga-zero-exact-target-hits-20260412.json)

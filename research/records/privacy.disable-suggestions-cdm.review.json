@@ -422,6 +422,18 @@
         "behavior"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "vm-privacy.disable-suggestions-cdm-etw-qga-unblock-20260507",
+      "kind": "etw-trace",
+      "title": "QGA-first ETW stackwalk HKCU probe receipt",
+      "location": "evidence/captures/privacy-disable-suggestions-cdm-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/privacy-disable-suggestions-policy-disablethirdpartysuggestions-etw-qga-unblock-20260507/privacy-disable-suggestions-policy-disablethirdpartysuggestions-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/privacy-disable-suggestions-policy-disablethirdpartysuggestions-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/privacy-disable-suggestions-policy-disablethirdpartysuggestions-etw-qga-unblock-20260507/privacy-disable-suggestions-policy-disablethirdpartysuggestions-etw-qga-unblock-20260507.etl and evidence/raw/etw-stackwalk/privacy-disable-suggestions-policy-disablewindowsspotlightonsettings-etw-qga-unblock-20260507/privacy-disable-suggestions-policy-disablewindowsspotlightonsettings-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/privacy-disable-suggestions-policy-disablewindowsspotlightonsettings-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/privacy-disable-suggestions-policy-disablewindowsspotlightonsettings-etw-qga-unblock-20260507/privacy-disable-suggestions-policy-disablewindowsspotlightonsettings-etw-qga-unblock-20260507.etl and 15 additional raw artifact refs listed in the receipt",
+      "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced host-ingested ETL/XML artifacts and normalized bundles for 7 HKCU-oriented target value(s): `DisableThirdPartySuggestions`, `DisableWindowsSpotlightOnSettings`, `DisableWindowsSpotlightWindowsWelcomeExperience`, `SubscribedContent-310093Enabled`, `SubscribedContent-338393Enabled`, `SubscribedContent-353694Enabled`, `SubscribedContent-353696Enabled`. Because the QGA helper runs as SYSTEM, the bundles contain target `reg.exe query` command activity but 0/7 exact current-user HKCU value-query events. This clears the earlier tracerpt/artifact-upload/ingest blocker for the probe pipeline, but it is not current-user product-consumer proof.",
+      "supports": [
+        "path",
+        "version-scope"
+      ],
+      "strength": "low"
     }
   ],
   "decision": {
@@ -448,7 +460,7 @@
     },
     "runtime_capture_reviewed": {
       "etw-stackwalk": true,
-      "status": "host-timeout-at-tracerpt"
+      "status": "qga_unblocked_ingest_ok"
     },
     "static_reviewed": {
       "ghidra": true,
@@ -474,9 +486,12 @@
       "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review still returns no candidate-specific WRK hit for `DisableThirdPartySuggestions` in the mixed SubscribedContent lane."
     },
-    "notes": "The CDM suggestions bundle remains a repo-doc and official-policy interpretation lane. Retained local enrichment artifacts do not add candidate-specific ReactOS or WRK corroboration for the mixed SubscribedContent bundle, and exact 2026-04-24 ReactOS doxygen searches for `DisableThirdPartySuggestions` also returned no direct match. A bounded 2026-04-24 ETW stackwalk retry for `DisableThirdPartySuggestions` reached `stage = tracerpt` before the hard 90 second timeout fired without uploading a repo-visible bundle, and a same-day guest Ghidra string-xref retry failed in `ensure-admin-shell` before any wrapper stage could start."
+    "notes": "The CDM suggestions bundle remains a repo-doc and official-policy interpretation lane. Retained local enrichment artifacts do not add candidate-specific ReactOS or WRK corroboration for the mixed SubscribedContent bundle, and exact 2026-04-24 ReactOS doxygen searches for `DisableThirdPartySuggestions` also returned no direct match. A bounded 2026-04-24 ETW stackwalk retry for `DisableThirdPartySuggestions` reached `stage = tracerpt` before the hard 90 second timeout fired without uploading a repo-visible bundle, and a same-day guest Ghidra string-xref retry failed in `ensure-admin-shell` before any wrapper stage could start. A 2026-05-07 QGA-first ETW stackwalk rerun cleared the earlier timeout/upload/ingest blocker for 7 HKCU-oriented probe target(s) and produced host-ingested raw ETL/XML plus normalized bundles; under SYSTEM QGA context, no exact current-user HKCU value query was observed, so this remains pipeline proof rather than user-profile product-consumer proof.",
+    "etw_stackwalk_reviewed": true,
+    "etw_stackwalk_review_status": "qga_unblocked_ingest_ok",
+    "etw_stackwalk_review_artifact": "evidence/captures/privacy-disable-suggestions-cdm-etw-qga-unblock-20260507.json"
   },
-  "last_reviewed_utc": "2026-04-28T10:50:56Z",
+  "last_reviewed_utc": "2026-05-07T15:07:22.697871Z",
   "validation_proof": {
     "source_url": "Docs/privacy/privacy-verified.md",
     "exact_quote_or_path": "Repo privacy docs for Content Delivery Manager suggestions: the named CloudContent policies and the observed SubscribedContent IDs are explicitly listed in the privacy-verified docs.",

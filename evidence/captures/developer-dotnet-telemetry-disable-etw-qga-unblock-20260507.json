@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-07T13:27:41.3228900Z",
+  "record_id": "developer.dotnet-telemetry-disable",
+  "run_id": "developer-dotnet-telemetry-disable-etw-qga-unblock-20260507",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "registry_path": "HKCU\\Environment",
+  "value_name": "DOTNET_CLI_TELEMETRY_OPTOUT",
+  "attempt_status": "qga_unblocked_ingest_ok",
+  "assessment": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and a normalized bundle with 5025 registry events and 1181 caller-stack events. The QGA-launched helper targeted HKCU\\Environment / DOTNET_CLI_TELEMETRY_OPTOUT; the bundle contains target command/subkey activity, but no exact current-user HKCU RegQueryValue event for DOTNET_CLI_TELEMETRY_OPTOUT was observed under the SYSTEM QGA context.",
+  "target_observation": {
+    "exact_value_query": false,
+    "operation": "RegQueryValue",
+    "representative_status": "0xC0000034",
+    "event_count": 5025,
+    "caller_stack_event_count": 1181,
+    "target_key_event_count": 6,
+    "target_value_event_count": 1,
+    "current_user_hkcu_value_event_count": 0,
+    "target_command_event_count": 2,
+    "launch_transport": "qga"
+  },
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/developer-dotnet-telemetry-disable-etw-qga-unblock-20260507/developer-dotnet-telemetry-disable-etw-qga-unblock-20260507-summary.json",
+      "sha256": "7a371fa7a0db98449d1a58287647e7d01d0ceed9371cef367d954841dc017dcf",
+      "size": 7769,
+      "collected_utc": "2026-05-07T13:27:41.3228900Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/developer-dotnet-telemetry-disable-etw-qga-unblock-20260507/normalized-registry-bundle.json",
+      "sha256": "2e58759a2fb3d65ff00b88e8972b73a10c488be324ba74a0052849eeeac505aa",
+      "size": 6663188,
+      "collected_utc": "2026-05-07T13:27:41.3228900Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/developer-dotnet-telemetry-disable-etw-qga-unblock-20260507/developer-dotnet-telemetry-disable-etw-qga-unblock-20260507.etl",
+      "sha256": "685bcf26d37b99f5e2021dfd05c79bf07d4a915edecb9644b41b77595035be91",
+      "size": 12582912,
+      "collected_utc": "2026-05-07T13:27:41.3228900Z"
+    }
+  ]
+}

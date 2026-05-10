@@ -1,0 +1,3939 @@
+{
+  "generated_utc": "2026-05-08T19:49:47Z",
+  "status": "ok",
+  "input": "registry-research-framework/audit/operator-regadd-inventory-20260508-normalized.json",
+  "entry_count": 96,
+  "exact_target_match_count": 40,
+  "text_hit_only_count": 5,
+  "no_repo_text_hit_count": 51,
+  "app_surface_text_hit_count": 19,
+  "risk_flagged_count": 29,
+  "entries": [
+    {
+      "index": 1,
+      "raw_command": "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\SYSTEM\" /v \"EnableLocalLogonSid\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\SYSTEM",
+      "value_name": "EnableLocalLogonSid",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 0,
+      "repo_text_hit_count": 0,
+      "source_hit_file_count_sampled": 2,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [],
+      "repo_text_hits": [],
+      "source_hit_files_sample": [
+        "research/notes/kernel-power-net-new-existence-probe-20260328.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md"
+      ],
+      "risk_flags": []
+    },
+    {
+      "index": 2,
+      "raw_command": "reg add \"HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\SYSTEM\" /v \"EnableVirtualization\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\SYSTEM",
+      "value_name": "EnableVirtualization",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 3,
+      "repo_text_hit_count": 3,
+      "source_hit_file_count_sampled": 12,
+      "app_surface_text_hit": true,
+      "repo_exact_target_matches": [
+        {
+          "record_id": "policy.system.enable-virtualization",
+          "tweak_id": "policy.system.enable-virtualization",
+          "record_status": "validated",
+          "promotion_state": "rejected",
+          "apply_allowed": null,
+          "promotion_blockers": [
+            "promotion-disposition-intentional-hold-closed"
+          ],
+          "source": "setting.targets",
+          "record_path": "research/records/policy.system.enable-virtualization.json",
+          "target_path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+          "target_value_name": "EnableVirtualization",
+          "target_value": null
+        },
+        {
+          "record_id": "policy.system.enable-virtualization",
+          "tweak_id": "policy.system.enable-virtualization",
+          "record_status": "validated",
+          "promotion_state": "rejected",
+          "apply_allowed": null,
+          "promotion_blockers": [
+            "promotion-disposition-intentional-hold-closed"
+          ],
+          "source": "app_current_implementation.writes",
+          "record_path": "research/records/policy.system.enable-virtualization.json",
+          "target_path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+          "target_value_name": "EnableVirtualization",
+          "target_value": 0
+        },
+        {
+          "record_id": "policy.system.enable-virtualization",
+          "tweak_id": "policy.system.enable-virtualization",
+          "record_status": "validated",
+          "promotion_state": "rejected",
+          "apply_allowed": null,
+          "promotion_blockers": [
+            "promotion-disposition-intentional-hold-closed"
+          ],
+          "source": "app_current_implementation.writes",
+          "record_path": "research/records/policy.system.enable-virtualization.json",
+          "target_path": "HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System",
+          "target_value_name": "EnableVirtualization",
+          "target_value": 1
+        }
+      ],
+      "repo_text_hits": [
+        {
+          "record_id": "policy.system.enable-virtualization",
+          "tweak_id": "policy.system.enable-virtualization",
+          "record_status": "validated",
+          "promotion_state": "rejected",
+          "source": "research/records/policy.system.enable-virtualization.json"
+        },
+        {
+          "record_id": "security.disable-vbs",
+          "tweak_id": "security.disable-vbs",
+          "record_status": "deprecated",
+          "promotion_state": "rejected",
+          "source": "research/records/security.disable-vbs.json"
+        },
+        {
+          "record_id": "security.uac-never-notify",
+          "tweak_id": "security.uac-never-notify",
+          "record_status": "validated",
+          "promotion_state": "promoted",
+          "source": "research/records/security.uac-never-notify.json"
+        }
+      ],
+      "source_hit_files_sample": [
+        "Docs/security/use-case-guide.md",
+        "Docs/security/security-verified.md",
+        "Docs/security/security.md",
+        "Docs/research/app-surface/validated-registry-values.json",
+        "research/records/security.disable-vbs.json",
+        "research/records/policy.system.enable-virtualization.json",
+        "research/records/security.uac-never-notify.json",
+        "research/notes/policy-system-enable-virtualization-audit-gate-follow-up-20260408.md",
+        "research/notes/policy-system-enable-virtualization-path-aware-follow-up-20260330.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md",
+        "research/notes/windows-11-settings-and-privacy-leads.md",
+        "research/notes/policy-system-enable-virtualization-kvm-local-kd-disasm-follow-up-20260406.md"
+      ],
+      "risk_flags": []
+    },
+    {
+      "index": 3,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive\" /v \"AdditionalCriticalWorkerThreads\" /t REG_DWORD /d \"5\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+      "value_name": "AdditionalCriticalWorkerThreads",
+      "type": "REG_DWORD",
+      "requested_data": "5",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 2,
+      "repo_text_hit_count": 2,
+      "source_hit_file_count_sampled": 12,
+      "app_surface_text_hit": true,
+      "repo_exact_target_matches": [
+        {
+          "record_id": "system.executive-additional-worker-threads",
+          "tweak_id": "system.executive-additional-worker-threads",
+          "record_status": "validated",
+          "promotion_state": "rejected",
+          "apply_allowed": null,
+          "promotion_blockers": [
+            "promotion-disposition-intentional-hold-closed"
+          ],
+          "source": "setting.targets",
+          "record_path": "research/records/system.executive-additional-worker-threads.json",
+          "target_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+          "target_value_name": "AdditionalCriticalWorkerThreads / AdditionalDelayedWorkerThreads",
+          "target_value": null
+        },
+        {
+          "record_id": "system.executive-additional-worker-threads",
+          "tweak_id": "system.executive-additional-worker-threads",
+          "record_status": "validated",
+          "promotion_state": "rejected",
+          "apply_allowed": null,
+          "promotion_blockers": [
+            "promotion-disposition-intentional-hold-closed"
+          ],
+          "source": "app_current_implementation.writes",
+          "record_path": "research/records/system.executive-additional-worker-threads.json",
+          "target_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+          "target_value_name": "AdditionalCriticalWorkerThreads",
+          "target_value": 0
+        }
+      ],
+      "repo_text_hits": [
+        {
+          "record_id": "system.executive-additional-worker-threads",
+          "tweak_id": "system.executive-additional-worker-threads",
+          "record_status": "validated",
+          "promotion_state": "rejected",
+          "source": "research/records/system.executive-additional-worker-threads.json"
+        },
+        {
+          "record_id": "system.executive-uuid-sequence-number",
+          "tweak_id": "system.executive-uuid-sequence-number",
+          "record_status": "validated",
+          "promotion_state": "promoted",
+          "source": "research/records/system.executive-uuid-sequence-number.json"
+        }
+      ],
+      "source_hit_files_sample": [
+        "Docs/research/app-surface/validated-registry-values.json",
+        "research/records/system.executive-additional-worker-threads.json",
+        "research/records/system.executive-uuid-sequence-number.json",
+        "research/notes/kernel-power-net-new-existence-probe-20260328.md",
+        "research/notes/system-executive-additional-worker-threads-procmon-bootlog-20260328.md",
+        "research/notes/system-executive-additional-worker-threads-stress-trigger-20260328.md",
+        "research/notes/system-executive-additional-worker-threads-reactos-hypothesis-20260328.md",
+        "research/notes/system-executive-additional-worker-threads-follow-up-package-20260328.md",
+        "research/notes/system-executive-uuid-sequence-number-kvm-procmon-hardened-20260407.md",
+        "research/notes/system-executive-additional-worker-threads-kvm-procmon-hardened-20260407.md",
+        "research/notes/system-executive-additional-worker-threads-lightweight-runtime-20260330.md",
+        "research/notes/system-executive-additional-worker-threads-kvm-local-kd-value-follow-up-20260406.md"
+      ],
+      "risk_flags": [
+        "executive-worker-thread low-level profiling-required"
+      ]
+    },
+    {
+      "index": 4,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive\" /v \"AdditionalDelayedWorkerThreads\" /t REG_DWORD /d \"5\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+      "value_name": "AdditionalDelayedWorkerThreads",
+      "type": "REG_DWORD",
+      "requested_data": "5",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 2,
+      "repo_text_hit_count": 2,
+      "source_hit_file_count_sampled": 12,
+      "app_surface_text_hit": true,
+      "repo_exact_target_matches": [
+        {
+          "record_id": "system.executive-additional-worker-threads",
+          "tweak_id": "system.executive-additional-worker-threads",
+          "record_status": "validated",
+          "promotion_state": "rejected",
+          "apply_allowed": null,
+          "promotion_blockers": [
+            "promotion-disposition-intentional-hold-closed"
+          ],
+          "source": "setting.targets",
+          "record_path": "research/records/system.executive-additional-worker-threads.json",
+          "target_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+          "target_value_name": "AdditionalCriticalWorkerThreads / AdditionalDelayedWorkerThreads",
+          "target_value": null
+        },
+        {
+          "record_id": "system.executive-additional-worker-threads",
+          "tweak_id": "system.executive-additional-worker-threads",
+          "record_status": "validated",
+          "promotion_state": "rejected",
+          "apply_allowed": null,
+          "promotion_blockers": [
+            "promotion-disposition-intentional-hold-closed"
+          ],
+          "source": "app_current_implementation.writes",
+          "record_path": "research/records/system.executive-additional-worker-threads.json",
+          "target_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+          "target_value_name": "AdditionalDelayedWorkerThreads",
+          "target_value": 0
+        }
+      ],
+      "repo_text_hits": [
+        {
+          "record_id": "system.executive-additional-worker-threads",
+          "tweak_id": "system.executive-additional-worker-threads",
+          "record_status": "validated",
+          "promotion_state": "rejected",
+          "source": "research/records/system.executive-additional-worker-threads.json"
+        },
+        {
+          "record_id": "system.executive-uuid-sequence-number",
+          "tweak_id": "system.executive-uuid-sequence-number",
+          "record_status": "validated",
+          "promotion_state": "promoted",
+          "source": "research/records/system.executive-uuid-sequence-number.json"
+        }
+      ],
+      "source_hit_files_sample": [
+        "Docs/research/app-surface/validated-registry-values.json",
+        "research/records/system.executive-additional-worker-threads.json",
+        "research/records/system.executive-uuid-sequence-number.json",
+        "research/notes/kernel-power-net-new-existence-probe-20260328.md",
+        "research/notes/system-executive-additional-worker-threads-procmon-bootlog-20260328.md",
+        "research/notes/system-executive-additional-worker-threads-stress-trigger-20260328.md",
+        "research/notes/system-executive-additional-worker-threads-reactos-hypothesis-20260328.md",
+        "research/notes/system-executive-additional-worker-threads-follow-up-package-20260328.md",
+        "research/notes/system-executive-uuid-sequence-number-kvm-procmon-hardened-20260407.md",
+        "research/notes/system-executive-additional-worker-threads-kvm-procmon-hardened-20260407.md",
+        "research/notes/system-executive-additional-worker-threads-lightweight-runtime-20260330.md",
+        "research/notes/system-executive-additional-worker-threads-kvm-local-kd-value-follow-up-20260406.md"
+      ],
+      "risk_flags": [
+        "executive-worker-thread low-level profiling-required"
+      ]
+    },
+    {
+      "index": 5,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive\" /v \"UuidSequenceNumber\" /t REG_DWORD /d \"3322358\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+      "value_name": "UuidSequenceNumber",
+      "type": "REG_DWORD",
+      "requested_data": "3322358",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 1,
+      "repo_text_hit_count": 2,
+      "source_hit_file_count_sampled": 12,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [
+        {
+          "record_id": "system.executive-uuid-sequence-number",
+          "tweak_id": "system.executive-uuid-sequence-number",
+          "record_status": "validated",
+          "promotion_state": "promoted",
+          "apply_allowed": null,
+          "promotion_blockers": [],
+          "source": "setting.targets",
+          "record_path": "research/records/system.executive-uuid-sequence-number.json",
+          "target_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+          "target_value_name": "UuidSequenceNumber",
+          "target_value": null
+        }
+      ],
+      "repo_text_hits": [
+        {
+          "record_id": "system.executive-additional-worker-threads",
+          "tweak_id": "system.executive-additional-worker-threads",
+          "record_status": "validated",
+          "promotion_state": "rejected",
+          "source": "research/records/system.executive-additional-worker-threads.json"
+        },
+        {
+          "record_id": "system.executive-uuid-sequence-number",
+          "tweak_id": "system.executive-uuid-sequence-number",
+          "record_status": "validated",
+          "promotion_state": "promoted",
+          "source": "research/records/system.executive-uuid-sequence-number.json"
+        }
+      ],
+      "source_hit_files_sample": [
+        "Docs/research/app-surface/intentional-not-mapped-records.json",
+        "research/records/system.executive-additional-worker-threads.json",
+        "research/records/system.executive-uuid-sequence-number.json",
+        "research/notes/kernel-power-net-new-existence-probe-20260328.md",
+        "research/notes/system-executive-additional-worker-threads-procmon-bootlog-20260328.md",
+        "research/notes/system-executive-uuid-sequence-number-kvm-local-kd-symbol-follow-up-20260406.md",
+        "research/notes/system-executive-uuid-sequence-number-kvm-local-kd-value-follow-up-20260406.md",
+        "research/notes/system-executive-additional-worker-threads-stress-trigger-20260328.md",
+        "research/notes/system-executive-additional-worker-threads-reactos-hypothesis-20260328.md",
+        "research/notes/system-executive-additional-worker-threads-follow-up-package-20260328.md",
+        "research/notes/system-executive-uuid-sequence-number-kvm-procmon-hardened-20260407.md",
+        "research/notes/system-executive-additional-worker-threads-kvm-procmon-hardened-20260407.md"
+      ],
+      "risk_flags": []
+    },
+    {
+      "index": 6,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive\" /v \"TickcountRolloverDelay\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+      "value_name": "TickcountRolloverDelay",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 0,
+      "repo_text_hit_count": 0,
+      "source_hit_file_count_sampled": 2,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [],
+      "repo_text_hits": [],
+      "source_hit_files_sample": [
+        "research/notes/kernel-power-net-new-existence-probe-20260328.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md"
+      ],
+      "risk_flags": [
+        "kernel-timing-sensitive"
+      ]
+    },
+    {
+      "index": 7,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive\" /v \"KernelWorkerTestFlags\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+      "value_name": "KernelWorkerTestFlags",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 0,
+      "repo_text_hit_count": 0,
+      "source_hit_file_count_sampled": 2,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [],
+      "repo_text_hits": [],
+      "source_hit_files_sample": [
+        "research/notes/kernel-power-net-new-existence-probe-20260328.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md"
+      ],
+      "risk_flags": []
+    },
+    {
+      "index": 8,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive\" /v \"MaximumKernelWorkerThreads\" /t REG_DWORD /d \"25000\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+      "value_name": "MaximumKernelWorkerThreads",
+      "type": "REG_DWORD",
+      "requested_data": "25000",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 0,
+      "repo_text_hit_count": 0,
+      "source_hit_file_count_sampled": 2,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [],
+      "repo_text_hits": [],
+      "source_hit_files_sample": [
+        "research/notes/kernel-power-net-new-existence-probe-20260328.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md"
+      ],
+      "risk_flags": [
+        "executive-worker-thread low-level profiling-required"
+      ]
+    },
+    {
+      "index": 9,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive\" /v \"ForceEnableMutantAutoboost\" /t REG_DWORD /d \"1\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Executive",
+      "value_name": "ForceEnableMutantAutoboost",
+      "type": "REG_DWORD",
+      "requested_data": "1",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 0,
+      "repo_text_hit_count": 0,
+      "source_hit_file_count_sampled": 2,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [],
+      "repo_text_hits": [],
+      "source_hit_files_sample": [
+        "research/notes/kernel-power-net-new-existence-probe-20260328.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md"
+      ],
+      "risk_flags": []
+    },
+    {
+      "index": 10,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System\" /v \"AllowRemoteDASD\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System",
+      "value_name": "AllowRemoteDASD",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 1,
+      "repo_text_hit_count": 1,
+      "source_hit_file_count_sampled": 12,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [
+        {
+          "record_id": "system.io-allow-remote-dasd",
+          "tweak_id": "system.io-allow-remote-dasd",
+          "record_status": "deprecated",
+          "promotion_state": "rejected",
+          "apply_allowed": null,
+          "promotion_blockers": [
+            "deprecated-record"
+          ],
+          "source": "setting.targets",
+          "record_path": "research/records/system.io-allow-remote-dasd.json",
+          "target_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System",
+          "target_value_name": "AllowRemoteDASD",
+          "target_value": null
+        }
+      ],
+      "repo_text_hits": [
+        {
+          "record_id": "system.io-allow-remote-dasd",
+          "tweak_id": "system.io-allow-remote-dasd",
+          "record_status": "deprecated",
+          "promotion_state": "rejected",
+          "source": "research/records/system.io-allow-remote-dasd.json"
+        }
+      ],
+      "source_hit_files_sample": [
+        "Docs/research/vm-workflow.md",
+        "Docs/research/app-surface/intentional-not-mapped-records.json",
+        "research/records/system.io-allow-remote-dasd.json",
+        "research/notes/kernel-power-net-new-existence-probe-20260328.md",
+        "research/notes/kvm-qga-registry-policy-probe-smoke-20260412.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md",
+        "research/notes/system-io-allow-remote-dasd-audit-gate-follow-up-20260408.md",
+        "research/notes/kernel-power-96-remaining-groups-20260330.md",
+        "research/notes/kvm-research-lane-health-20260406.md",
+        "research/notes/system-io-allow-remote-dasd-official-policy-follow-up-20260407.md",
+        "research/notes/system-io-allow-remote-dasd-kvm-procmon-recovery-20260407.md",
+        "research/notes/kernel-power-96-path-aware-follow-up-20260330.md"
+      ],
+      "risk_flags": [
+        "deprecated-path-collision removable-storage-policy-is-active-surface"
+      ]
+    },
+    {
+      "index": 11,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System\" /v \"DisableDiskCounters\" /t REG_DWORD /d \"1\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System",
+      "value_name": "DisableDiskCounters",
+      "type": "REG_DWORD",
+      "requested_data": "1",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 0,
+      "repo_text_hit_count": 0,
+      "source_hit_file_count_sampled": 2,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [],
+      "repo_text_hits": [],
+      "source_hit_files_sample": [
+        "research/notes/kernel-power-net-new-existence-probe-20260328.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md"
+      ],
+      "risk_flags": []
+    },
+    {
+      "index": 12,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System\" /v \"IoAllowLoadCrashDumpDriver\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System",
+      "value_name": "IoAllowLoadCrashDumpDriver",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 0,
+      "repo_text_hit_count": 0,
+      "source_hit_file_count_sampled": 2,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [],
+      "repo_text_hits": [],
+      "source_hit_files_sample": [
+        "research/notes/kernel-power-net-new-existence-probe-20260328.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md"
+      ],
+      "risk_flags": []
+    },
+    {
+      "index": 13,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System\" /v \"IoEnableSessionZeroAccessCheck\" /t REG_DWORD /d \"1\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System",
+      "value_name": "IoEnableSessionZeroAccessCheck",
+      "type": "REG_DWORD",
+      "requested_data": "1",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 0,
+      "repo_text_hit_count": 0,
+      "source_hit_file_count_sampled": 2,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [],
+      "repo_text_hits": [],
+      "source_hit_files_sample": [
+        "research/notes/kernel-power-net-new-existence-probe-20260328.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md"
+      ],
+      "risk_flags": []
+    },
+    {
+      "index": 14,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel\" /v \"GlobalTimerResolutionRequests\" /t REG_DWORD /d \"1\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "GlobalTimerResolutionRequests",
+      "type": "REG_DWORD",
+      "requested_data": "1",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 1,
+      "repo_text_hit_count": 1,
+      "source_hit_file_count_sampled": 12,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [
+        {
+          "record_id": "system.kernel.global-timer-resolution-requests",
+          "tweak_id": "system.kernel.global-timer-resolution-requests",
+          "record_status": "draft",
+          "promotion_state": "rejected",
+          "apply_allowed": null,
+          "promotion_blockers": [
+            "promotion-disposition-intentional-hold-closed"
+          ],
+          "source": "setting.targets",
+          "record_path": "research/records/system.kernel.global-timer-resolution-requests.json",
+          "target_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+          "target_value_name": "GlobalTimerResolutionRequests",
+          "target_value": null
+        }
+      ],
+      "repo_text_hits": [
+        {
+          "record_id": "system.kernel.global-timer-resolution-requests",
+          "tweak_id": "system.kernel.global-timer-resolution-requests",
+          "record_status": "draft",
+          "promotion_state": "rejected",
+          "source": "research/records/system.kernel.global-timer-resolution-requests.json"
+        }
+      ],
+      "source_hit_files_sample": [
+        "Docs/system/system.md",
+        "research/records/system.kernel.global-timer-resolution-requests.json",
+        "research/notes/system-kernel-global-timer-resolution-requests-wpr-qga-timeout-no-hit-20260413.md",
+        "research/notes/power-kernel-trial-matrix-20260422.md",
+        "research/notes/system-kernel-global-timer-resolution-requests-triage-20260408.md",
+        "research/notes/system-kernel-global-timer-resolution-requests-wpr-qga-timeout-zero-exact-target-hits-20260413.md",
+        "research/notes/power-kernel-symbol-hunt-targets-20260422.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md",
+        "research/notes/system-kernel-global-timer-resolution-requests-exact-lane-card-20260422.md",
+        "research/notes/system-kernel-global-timer-resolution-requests-runtime-sprint-20260418.md",
+        "research/notes/power-kernel-exact-experiment-sheet-20260422.md",
+        "research/notes/power-kernel-research-execution-slate-20260422.md"
+      ],
+      "risk_flags": [
+        "kernel-timing-sensitive"
+      ]
+    },
+    {
+      "index": 15,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel\" /v \"ForceParkingRequested\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "ForceParkingRequested",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 0,
+      "repo_text_hit_count": 0,
+      "source_hit_file_count_sampled": 2,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [],
+      "repo_text_hits": [],
+      "source_hit_files_sample": [
+        "Docs/system/system.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md"
+      ],
+      "risk_flags": []
+    },
+    {
+      "index": 16,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel\" /v \"EnableWerUserReporting\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "EnableWerUserReporting",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 0,
+      "repo_text_hit_count": 0,
+      "source_hit_file_count_sampled": 3,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [],
+      "repo_text_hits": [],
+      "source_hit_files_sample": [
+        "Docs/system/system.md",
+        "Docs/privacy/privacy.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md"
+      ],
+      "risk_flags": []
+    },
+    {
+      "index": 17,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel\" /v \"HyperStartDisabled\" /t REG_DWORD /d \"1\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "HyperStartDisabled",
+      "type": "REG_DWORD",
+      "requested_data": "1",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 0,
+      "repo_text_hit_count": 0,
+      "source_hit_file_count_sampled": 2,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [],
+      "repo_text_hits": [],
+      "source_hit_files_sample": [
+        "Docs/system/system.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md"
+      ],
+      "risk_flags": []
+    },
+    {
+      "index": 18,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel\" /v \"DisableLightWeightSuspend\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "DisableLightWeightSuspend",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 0,
+      "repo_text_hit_count": 0,
+      "source_hit_file_count_sampled": 2,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [],
+      "repo_text_hits": [],
+      "source_hit_files_sample": [
+        "Docs/system/system.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md"
+      ],
+      "risk_flags": []
+    },
+    {
+      "index": 19,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel\" /v \"TimerCheckFlags\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "TimerCheckFlags",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 1,
+      "repo_text_hit_count": 2,
+      "source_hit_file_count_sampled": 10,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [
+        {
+          "record_id": "system.kernel.timer-check-flags",
+          "tweak_id": "system.kernel.timer-check-flags",
+          "record_status": "draft",
+          "promotion_state": "rejected",
+          "apply_allowed": null,
+          "promotion_blockers": [
+            "promotion-disposition-intentional-hold-closed"
+          ],
+          "source": "setting.targets",
+          "record_path": "research/records/system.kernel.timer-check-flags.json",
+          "target_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+          "target_value_name": "TimerCheckFlags",
+          "target_value": null
+        }
+      ],
+      "repo_text_hits": [
+        {
+          "record_id": "power.disable-cpu-idle-states",
+          "tweak_id": "power.disable-cpu-idle-states",
+          "record_status": "validated",
+          "promotion_state": "promoted",
+          "source": "research/records/power.disable-cpu-idle-states.json"
+        },
+        {
+          "record_id": "system.kernel.timer-check-flags",
+          "tweak_id": "system.kernel.timer-check-flags",
+          "record_status": "draft",
+          "promotion_state": "rejected",
+          "source": "research/records/system.kernel.timer-check-flags.json"
+        }
+      ],
+      "source_hit_files_sample": [
+        "Docs/system/system.md",
+        "research/records/power.disable-cpu-idle-states.json",
+        "research/records/system.kernel.timer-check-flags.json",
+        "research/notes/system-kernel-timer-check-flags-wpr-qga-zero-exact-target-hits-20260413.md",
+        "research/notes/dpc-timer-etw-trace-transport-blocker-20260412.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md",
+        "research/notes/system-kernel-timer-check-flags-etw-stackwalk-20260418.md",
+        "research/notes/timer-check-flags-init-descriptor-static-follow-up-20260412.md",
+        "research/notes/system-kernel-timer-check-flags-triage-20260408.md",
+        "research/notes/system-kernel-timer-check-flags-wpr-qga-no-hit-20260413.md"
+      ],
+      "risk_flags": [
+        "kernel-timing-sensitive"
+      ]
+    },
+    {
+      "index": 20,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel\" /v \"ForceIdleGracePeriod\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "ForceIdleGracePeriod",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 0,
+      "repo_text_hit_count": 0,
+      "source_hit_file_count_sampled": 2,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [],
+      "repo_text_hits": [],
+      "source_hit_files_sample": [
+        "Docs/system/system.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md"
+      ],
+      "risk_flags": []
+    },
+    {
+      "index": 21,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel\" /v \"DisableExceptionChainValidation\" /t REG_DWORD /d \"1\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "DisableExceptionChainValidation",
+      "type": "REG_DWORD",
+      "requested_data": "1",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 2,
+      "repo_text_hit_count": 1,
+      "source_hit_file_count_sampled": 5,
+      "app_surface_text_hit": true,
+      "repo_exact_target_matches": [
+        {
+          "record_id": "system.kernel.disable-exception-chain-validation",
+          "tweak_id": "system.kernel.disable-exception-chain-validation",
+          "record_status": "validated",
+          "promotion_state": "rejected",
+          "apply_allowed": null,
+          "promotion_blockers": [
+            "promotion-disposition-security-hold-closed"
+          ],
+          "source": "setting.targets",
+          "record_path": "research/records/system.kernel.disable-exception-chain-validation.json",
+          "target_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+          "target_value_name": "DisableExceptionChainValidation",
+          "target_value": null
+        },
+        {
+          "record_id": "system.kernel.disable-exception-chain-validation",
+          "tweak_id": "system.kernel.disable-exception-chain-validation",
+          "record_status": "validated",
+          "promotion_state": "rejected",
+          "apply_allowed": null,
+          "promotion_blockers": [
+            "promotion-disposition-security-hold-closed"
+          ],
+          "source": "app_current_implementation.writes",
+          "record_path": "research/records/system.kernel.disable-exception-chain-validation.json",
+          "target_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+          "target_value_name": "DisableExceptionChainValidation",
+          "target_value": 1
+        }
+      ],
+      "repo_text_hits": [
+        {
+          "record_id": "system.kernel.disable-exception-chain-validation",
+          "tweak_id": "system.kernel.disable-exception-chain-validation",
+          "record_status": "validated",
+          "promotion_state": "rejected",
+          "source": "research/records/system.kernel.disable-exception-chain-validation.json"
+        }
+      ],
+      "source_hit_files_sample": [
+        "Docs/system/system.md",
+        "Docs/research/app-surface/validated-registry-values.json",
+        "research/records/system.kernel.disable-exception-chain-validation.json",
+        "research/notes/source-enrichment-systeminformer-follow-up-20260412.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md"
+      ],
+      "risk_flags": [
+        "security-hold mitigation-bypass never-default-apply"
+      ]
+    },
+    {
+      "index": 22,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel\" /v \"MaxDynamicTickDuration\" /t REG_DWORD /d \"1\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "MaxDynamicTickDuration",
+      "type": "REG_DWORD",
+      "requested_data": "1",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 0,
+      "repo_text_hit_count": 0,
+      "source_hit_file_count_sampled": 2,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [],
+      "repo_text_hits": [],
+      "source_hit_files_sample": [
+        "Docs/system/system.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md"
+      ],
+      "risk_flags": [
+        "kernel-timing-sensitive"
+      ]
+    },
+    {
+      "index": 23,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel\" /v \"EnableTickAccumulationFromAccountingPeriods\" /t REG_DWORD /d \"1\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "EnableTickAccumulationFromAccountingPeriods",
+      "type": "REG_DWORD",
+      "requested_data": "1",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 0,
+      "repo_text_hit_count": 0,
+      "source_hit_file_count_sampled": 2,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [],
+      "repo_text_hits": [],
+      "source_hit_files_sample": [
+        "Docs/system/system.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md"
+      ],
+      "risk_flags": [
+        "kernel-timing-sensitive"
+      ]
+    },
+    {
+      "index": 24,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel\" /v \"EnablePerCpuClockTickScheduling\" /t REG_DWORD /d \"1\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "EnablePerCpuClockTickScheduling",
+      "type": "REG_DWORD",
+      "requested_data": "1",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 0,
+      "repo_text_hit_count": 0,
+      "source_hit_file_count_sampled": 2,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [],
+      "repo_text_hits": [],
+      "source_hit_files_sample": [
+        "Docs/system/system.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md"
+      ],
+      "risk_flags": [
+        "kernel-timing-sensitive"
+      ]
+    },
+    {
+      "index": 25,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel\" /v \"SerializeTimerExpiration\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "SerializeTimerExpiration",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 2,
+      "repo_text_hit_count": 1,
+      "source_hit_file_count_sampled": 10,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [
+        {
+          "record_id": "system.kernel-serialize-timer-expiration",
+          "tweak_id": "system.kernel-serialize-timer-expiration",
+          "record_status": "deprecated",
+          "promotion_state": "rejected",
+          "apply_allowed": null,
+          "promotion_blockers": [
+            "deprecated-record"
+          ],
+          "source": "setting.targets",
+          "record_path": "research/records/system.kernel-serialize-timer-expiration.review.json",
+          "target_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+          "target_value_name": "SerializeTimerExpiration",
+          "target_value": null
+        },
+        {
+          "record_id": "system.kernel-serialize-timer-expiration",
+          "tweak_id": "system.kernel-serialize-timer-expiration",
+          "record_status": "deprecated",
+          "promotion_state": "rejected",
+          "apply_allowed": null,
+          "promotion_blockers": [
+            "deprecated-record"
+          ],
+          "source": "app_current_implementation.writes",
+          "record_path": "research/records/system.kernel-serialize-timer-expiration.review.json",
+          "target_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+          "target_value_name": "SerializeTimerExpiration",
+          "target_value": 1
+        }
+      ],
+      "repo_text_hits": [
+        {
+          "record_id": "system.kernel-serialize-timer-expiration",
+          "tweak_id": "system.kernel-serialize-timer-expiration",
+          "record_status": "deprecated",
+          "promotion_state": "rejected",
+          "source": "research/records/system.kernel-serialize-timer-expiration.review.json"
+        }
+      ],
+      "source_hit_files_sample": [
+        "app/Services/TweakProviders/SystemRegistryTweakProvider.cs",
+        "Docs/UPSTREAM_TRANCHE_EVALUATION_2026-03-09.md",
+        "Docs/system/system.md",
+        "Docs/tweaks/tweak-provenance.csv",
+        "Docs/tweaks/tweak-provenance.json",
+        "Docs/tweaks/tweak-source-audit.csv",
+        "Docs/tweaks/win-config/batch-01.json",
+        "Docs/tweaks/win-config/batch-01.md",
+        "research/records/system.kernel-serialize-timer-expiration.review.json",
+        "research/notes/kernel-power-96-key-routing-20260327.md"
+      ],
+      "risk_flags": [
+        "kernel-timing-sensitive"
+      ]
+    },
+    {
+      "index": 26,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel\" /v \"XStateContextLookasidePerProcMaxDepth\" /t REG_DWORD /d \"1024\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "XStateContextLookasidePerProcMaxDepth",
+      "type": "REG_DWORD",
+      "requested_data": "1024",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 0,
+      "repo_text_hit_count": 0,
+      "source_hit_file_count_sampled": 2,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [],
+      "repo_text_hits": [],
+      "source_hit_files_sample": [
+        "Docs/system/system.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md"
+      ],
+      "risk_flags": []
+    },
+    {
+      "index": 27,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel\" /v \"LongDpcQueueThreshold\" /t REG_DWORD /d \"2\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "LongDpcQueueThreshold",
+      "type": "REG_DWORD",
+      "requested_data": "2",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 1,
+      "repo_text_hit_count": 1,
+      "source_hit_file_count_sampled": 9,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [
+        {
+          "record_id": "system.kernel-long-dpc-threshold-cluster",
+          "tweak_id": "system.kernel-long-dpc-threshold-cluster",
+          "record_status": "draft",
+          "promotion_state": "rejected",
+          "apply_allowed": null,
+          "promotion_blockers": [
+            "promotion-disposition-intentional-hold-closed"
+          ],
+          "source": "setting.targets",
+          "record_path": "research/records/system.kernel-long-dpc-threshold-cluster.json",
+          "target_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+          "target_value_name": "LongDpcQueueThreshold",
+          "target_value": null
+        }
+      ],
+      "repo_text_hits": [
+        {
+          "record_id": "system.kernel-long-dpc-threshold-cluster",
+          "tweak_id": "system.kernel-long-dpc-threshold-cluster",
+          "record_status": "draft",
+          "promotion_state": "rejected",
+          "source": "research/records/system.kernel-long-dpc-threshold-cluster.json"
+        }
+      ],
+      "source_hit_files_sample": [
+        "Docs/system/system.md",
+        "research/records/system.kernel-long-dpc-threshold-cluster.json",
+        "research/notes/system-kernel-long-dpc-threshold-cluster-kvm-ghidra-xref-follow-up-20260408.md",
+        "research/notes/system-kernel-long-dpc-threshold-cluster-triage-20260408.md",
+        "research/notes/system-kernel-long-dpc-threshold-cluster-wpr-qga-raw-collector-zero-exact-target-hits-20260413.md",
+        "research/notes/system-kernel-long-dpc-threshold-cluster-kvm-local-kd-consumer-follow-up-20260408.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md",
+        "research/notes/system-kernel-long-dpc-threshold-cluster-kvm-local-kd-follow-up-20260408.md",
+        "research/notes/system-kernel-long-dpc-threshold-cluster-trigger-follow-up-20260408.md"
+      ],
+      "risk_flags": [
+        "kernel-timing-sensitive"
+      ]
+    },
+    {
+      "index": 28,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel\" /v \"LongDpcRuntimeThreshold\" /t REG_DWORD /d \"50\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "LongDpcRuntimeThreshold",
+      "type": "REG_DWORD",
+      "requested_data": "50",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 1,
+      "repo_text_hit_count": 1,
+      "source_hit_file_count_sampled": 10,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [
+        {
+          "record_id": "system.kernel-long-dpc-threshold-cluster",
+          "tweak_id": "system.kernel-long-dpc-threshold-cluster",
+          "record_status": "draft",
+          "promotion_state": "rejected",
+          "apply_allowed": null,
+          "promotion_blockers": [
+            "promotion-disposition-intentional-hold-closed"
+          ],
+          "source": "setting.targets",
+          "record_path": "research/records/system.kernel-long-dpc-threshold-cluster.json",
+          "target_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+          "target_value_name": "LongDpcRuntimeThreshold",
+          "target_value": null
+        }
+      ],
+      "repo_text_hits": [
+        {
+          "record_id": "system.kernel-long-dpc-threshold-cluster",
+          "tweak_id": "system.kernel-long-dpc-threshold-cluster",
+          "record_status": "draft",
+          "promotion_state": "rejected",
+          "source": "research/records/system.kernel-long-dpc-threshold-cluster.json"
+        }
+      ],
+      "source_hit_files_sample": [
+        "Docs/system/system.md",
+        "research/records/system.kernel-long-dpc-threshold-cluster.json",
+        "research/notes/system-kernel-long-dpc-threshold-cluster-kvm-ghidra-xref-follow-up-20260408.md",
+        "research/notes/system-kernel-long-dpc-threshold-cluster-triage-20260408.md",
+        "research/notes/system-kernel-long-dpc-threshold-cluster-wpr-qga-raw-collector-zero-exact-target-hits-20260413.md",
+        "research/notes/system-kernel-long-dpc-threshold-cluster-kvm-local-kd-consumer-follow-up-20260408.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md",
+        "research/notes/system-kernel-long-dpc-threshold-cluster-kvm-procmon-timerdpc-follow-up-20260408.md",
+        "research/notes/system-kernel-long-dpc-threshold-cluster-kvm-local-kd-follow-up-20260408.md",
+        "research/notes/system-kernel-long-dpc-threshold-cluster-trigger-follow-up-20260408.md"
+      ],
+      "risk_flags": [
+        "kernel-timing-sensitive"
+      ]
+    },
+    {
+      "index": 29,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel\" /v \"ForceBugcheckForDpcWatchdog\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "ForceBugcheckForDpcWatchdog",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 1,
+      "repo_text_hit_count": 1,
+      "source_hit_file_count_sampled": 7,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [
+        {
+          "record_id": "system.kernel.force-bugcheck-for-dpc-watchdog",
+          "tweak_id": "system.kernel.force-bugcheck-for-dpc-watchdog",
+          "record_status": "draft",
+          "promotion_state": "rejected",
+          "apply_allowed": null,
+          "promotion_blockers": [
+            "promotion-disposition-intentional-hold-closed"
+          ],
+          "source": "setting.targets",
+          "record_path": "research/records/system.kernel.force-bugcheck-for-dpc-watchdog.json",
+          "target_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Kernel",
+          "target_value_name": "ForceBugcheckForDpcWatchdog",
+          "target_value": null
+        }
+      ],
+      "repo_text_hits": [
+        {
+          "record_id": "system.kernel.force-bugcheck-for-dpc-watchdog",
+          "tweak_id": "system.kernel.force-bugcheck-for-dpc-watchdog",
+          "record_status": "draft",
+          "promotion_state": "rejected",
+          "source": "research/records/system.kernel.force-bugcheck-for-dpc-watchdog.json"
+        }
+      ],
+      "source_hit_files_sample": [
+        "Docs/system/system.md",
+        "research/records/system.kernel.force-bugcheck-for-dpc-watchdog.json",
+        "research/notes/system-kernel-force-bugcheck-for-dpc-watchdog-triage-20260407.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md",
+        "research/notes/system-kernel-force-bugcheck-for-dpc-watchdog-wpr-qga-raw-salvage-zero-exact-target-hits-20260413.md",
+        "research/notes/system-kernel-force-bugcheck-for-dpc-watchdog-decision-gate-review-20260412.md",
+        "research/notes/system-kernel-force-bugcheck-for-dpc-watchdog-wpr-qga-raw-salvage-no-hit-20260413.md"
+      ],
+      "risk_flags": [
+        "watchdog/bugcheck-sensitive",
+        "kernel-timing-sensitive"
+      ]
+    },
+    {
+      "index": 30,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel\" /v \"ForceForegroundBoostDecay\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "ForceForegroundBoostDecay",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 0,
+      "repo_text_hit_count": 0,
+      "source_hit_file_count_sampled": 2,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [],
+      "repo_text_hits": [],
+      "source_hit_files_sample": [
+        "Docs/system/system.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md"
+      ],
+      "risk_flags": []
+    },
+    {
+      "index": 31,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel\" /v \"RebalanceMinPriority\" /t REG_DWORD /d \"16\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "RebalanceMinPriority",
+      "type": "REG_DWORD",
+      "requested_data": "16",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 0,
+      "repo_text_hit_count": 0,
+      "source_hit_file_count_sampled": 2,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [],
+      "repo_text_hits": [],
+      "source_hit_files_sample": [
+        "Docs/system/system.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md"
+      ],
+      "risk_flags": []
+    },
+    {
+      "index": 32,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel\" /v \"InterruptSteeringFlags\" /t REG_DWORD /d \"1\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "InterruptSteeringFlags",
+      "type": "REG_DWORD",
+      "requested_data": "1",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 0,
+      "repo_text_hit_count": 0,
+      "source_hit_file_count_sampled": 2,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [],
+      "repo_text_hits": [],
+      "source_hit_files_sample": [
+        "Docs/system/system.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md"
+      ],
+      "risk_flags": [
+        "kernel-timing-sensitive"
+      ]
+    },
+    {
+      "index": 33,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel\" /v \"AlwaysTrackIoBoosting\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "AlwaysTrackIoBoosting",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 0,
+      "repo_text_hit_count": 0,
+      "source_hit_file_count_sampled": 2,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [],
+      "repo_text_hits": [],
+      "source_hit_files_sample": [
+        "Docs/system/system.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md"
+      ],
+      "risk_flags": []
+    },
+    {
+      "index": 34,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel\" /v \"DisableControlFlowGuardExportSuppression\" /t REG_DWORD /d \"1\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "DisableControlFlowGuardExportSuppression",
+      "type": "REG_DWORD",
+      "requested_data": "1",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 0,
+      "repo_text_hit_count": 0,
+      "source_hit_file_count_sampled": 2,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [],
+      "repo_text_hits": [],
+      "source_hit_files_sample": [
+        "Docs/system/system.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md"
+      ],
+      "risk_flags": []
+    },
+    {
+      "index": 35,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel\" /v \"MaximumCooperativeIdleSearchWidth\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "MaximumCooperativeIdleSearchWidth",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 0,
+      "repo_text_hit_count": 0,
+      "source_hit_file_count_sampled": 2,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [],
+      "repo_text_hits": [],
+      "source_hit_files_sample": [
+        "Docs/system/system.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md"
+      ],
+      "risk_flags": []
+    },
+    {
+      "index": 36,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power\" /v \"HiberbootEnabled\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+      "value_name": "HiberbootEnabled",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 2,
+      "repo_text_hit_count": 2,
+      "source_hit_file_count_sampled": 12,
+      "app_surface_text_hit": true,
+      "repo_exact_target_matches": [
+        {
+          "record_id": "power.disable-fast-startup",
+          "tweak_id": "power.disable-fast-startup",
+          "record_status": "validated",
+          "promotion_state": "promoted",
+          "apply_allowed": null,
+          "promotion_blockers": [],
+          "source": "setting.targets",
+          "record_path": "research/records/power.disable-fast-startup.review.json",
+          "target_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+          "target_value_name": "HiberbootEnabled",
+          "target_value": null
+        },
+        {
+          "record_id": "power.disable-fast-startup",
+          "tweak_id": "power.disable-fast-startup",
+          "record_status": "validated",
+          "promotion_state": "promoted",
+          "apply_allowed": null,
+          "promotion_blockers": [],
+          "source": "app_current_implementation.writes",
+          "record_path": "research/records/power.disable-fast-startup.review.json",
+          "target_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+          "target_value_name": "HiberbootEnabled",
+          "target_value": 0
+        }
+      ],
+      "repo_text_hits": [
+        {
+          "record_id": "power.control.ttm-enabled",
+          "tweak_id": "power.control.ttm-enabled",
+          "record_status": "draft",
+          "promotion_state": "rejected",
+          "source": "research/records/power.control.ttm-enabled.json"
+        },
+        {
+          "record_id": "power.disable-fast-startup",
+          "tweak_id": "power.disable-fast-startup",
+          "record_status": "validated",
+          "promotion_state": "promoted",
+          "source": "research/records/power.disable-fast-startup.review.json"
+        }
+      ],
+      "source_hit_files_sample": [
+        "engine/Tweaks/Power/PowerSettingsTweaks.cs",
+        "infrastructure/Commands/CommandAllowlist.cs",
+        "Docs/UPSTREAM_TRANCHE_EVALUATION_2026-03-09.md",
+        "Docs/power/power.md",
+        "Docs/research/app-surface/validated-registry-values.json",
+        "Docs/power/assets/hiberboot-PopReadHiberbootGroupPolicy.c",
+        "research/records/power.disable-fast-startup.review.json",
+        "research/records/power.control.ttm-enabled.json",
+        "research/notes/source-enrichment-systeminformer-follow-up-20260412.md",
+        "research/notes/source-enrichment-record-mapping-follow-up-20260412.md",
+        "research/notes/power-control-mega-trigger-v2-status-20260402.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md"
+      ],
+      "risk_flags": []
+    },
+    {
+      "index": 37,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power\" /v \"PowerSettingProfile\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+      "value_name": "PowerSettingProfile",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 0,
+      "repo_text_hit_count": 1,
+      "source_hit_file_count_sampled": 10,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [],
+      "repo_text_hits": [
+        {
+          "record_id": "power.session-watchdog-timeouts",
+          "tweak_id": "power.session-watchdog-timeouts",
+          "record_status": "validated",
+          "promotion_state": "rejected",
+          "source": "research/records/power.session-watchdog-timeouts.json"
+        }
+      ],
+      "source_hit_files_sample": [
+        "research/records/power.session-watchdog-timeouts.json",
+        "research/notes/kernel-power-net-new-existence-probe-20260328.md",
+        "research/notes/power-session-watchdog-timeouts-boot-trace-20260328.md",
+        "research/notes/power-session-watchdog-timeouts-dcomlaunch-power-trigger-20260328.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md",
+        "research/notes/power-session-watchdog-timeouts-runtime-prep-20260328.md",
+        "research/notes/kernel-power-96-residual-targeted-string-follow-up-20260331.md",
+        "research/notes/kernel-power-existing-static-triage-20260328.md",
+        "research/notes/power-session-watchdog-timeouts-procmon-bootlog-20260328.md",
+        "research/notes/power-session-watchdog-timeouts-kvm-procmon-power-burst-20260407.md"
+      ],
+      "risk_flags": []
+    },
+    {
+      "index": 38,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power\" /v \"WatchdogResumeTimeout\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+      "value_name": "WatchdogResumeTimeout",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 2,
+      "repo_text_hit_count": 2,
+      "source_hit_file_count_sampled": 12,
+      "app_surface_text_hit": true,
+      "repo_exact_target_matches": [
+        {
+          "record_id": "power.session-watchdog-timeouts",
+          "tweak_id": "power.session-watchdog-timeouts",
+          "record_status": "validated",
+          "promotion_state": "rejected",
+          "apply_allowed": null,
+          "promotion_blockers": [
+            "promotion-disposition-intentional-hold-closed"
+          ],
+          "source": "setting.targets",
+          "record_path": "research/records/power.session-watchdog-timeouts.json",
+          "target_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+          "target_value_name": "WatchdogResumeTimeout / WatchdogSleepTimeout",
+          "target_value": null
+        },
+        {
+          "record_id": "power.session-watchdog-timeouts",
+          "tweak_id": "power.session-watchdog-timeouts",
+          "record_status": "validated",
+          "promotion_state": "rejected",
+          "apply_allowed": null,
+          "promotion_blockers": [
+            "promotion-disposition-intentional-hold-closed"
+          ],
+          "source": "app_current_implementation.writes",
+          "record_path": "research/records/power.session-watchdog-timeouts.json",
+          "target_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+          "target_value_name": "WatchdogResumeTimeout",
+          "target_value": 120
+        }
+      ],
+      "repo_text_hits": [
+        {
+          "record_id": "power.session-watchdog-timeouts",
+          "tweak_id": "power.session-watchdog-timeouts",
+          "record_status": "validated",
+          "promotion_state": "rejected",
+          "source": "research/records/power.session-watchdog-timeouts.json"
+        },
+        {
+          "record_id": "power.session-win32-callout-watchdog-bugcheck-enabled",
+          "tweak_id": "power.session-win32-callout-watchdog-bugcheck-enabled",
+          "record_status": "draft",
+          "promotion_state": "rejected",
+          "source": "research/records/power.session-win32-callout-watchdog-bugcheck-enabled.json"
+        }
+      ],
+      "source_hit_files_sample": [
+        "Docs/privacy/assets/sleepstudy-PoFxInitPowerManagement.c",
+        "Docs/research/app-surface/validated-registry-values.json",
+        "research/records/power.session-watchdog-timeouts.json",
+        "research/records/power.session-win32-callout-watchdog-bugcheck-enabled.json",
+        "research/notes/kernel-power-net-new-existence-probe-20260328.md",
+        "research/notes/power-session-watchdog-timeouts-s1-scheduled-procmon-follow-up-20260328.md",
+        "research/notes/power-session-watchdog-timeouts-kvm-local-kd-follow-up-20260407.md",
+        "research/notes/power-session-watchdog-timeouts-candidate-package-20260328.md",
+        "research/notes/power-session-watchdog-timeouts-boot-trace-20260328.md",
+        "research/notes/power-session-win32-callout-watchdog-bugcheck-enabled-kvm-local-kd-seed-follow-up-20260407.md",
+        "research/notes/power-session-watchdog-timeouts-dcomlaunch-power-trigger-20260328.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md"
+      ],
+      "risk_flags": [
+        "watchdog/bugcheck-sensitive"
+      ]
+    },
+    {
+      "index": 39,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power\" /v \"WatchdogSleepTimeout\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+      "value_name": "WatchdogSleepTimeout",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 2,
+      "repo_text_hit_count": 2,
+      "source_hit_file_count_sampled": 12,
+      "app_surface_text_hit": true,
+      "repo_exact_target_matches": [
+        {
+          "record_id": "power.session-watchdog-timeouts",
+          "tweak_id": "power.session-watchdog-timeouts",
+          "record_status": "validated",
+          "promotion_state": "rejected",
+          "apply_allowed": null,
+          "promotion_blockers": [
+            "promotion-disposition-intentional-hold-closed"
+          ],
+          "source": "setting.targets",
+          "record_path": "research/records/power.session-watchdog-timeouts.json",
+          "target_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+          "target_value_name": "WatchdogResumeTimeout / WatchdogSleepTimeout",
+          "target_value": null
+        },
+        {
+          "record_id": "power.session-watchdog-timeouts",
+          "tweak_id": "power.session-watchdog-timeouts",
+          "record_status": "validated",
+          "promotion_state": "rejected",
+          "apply_allowed": null,
+          "promotion_blockers": [
+            "promotion-disposition-intentional-hold-closed"
+          ],
+          "source": "app_current_implementation.writes",
+          "record_path": "research/records/power.session-watchdog-timeouts.json",
+          "target_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+          "target_value_name": "WatchdogSleepTimeout",
+          "target_value": 300
+        }
+      ],
+      "repo_text_hits": [
+        {
+          "record_id": "power.session-watchdog-timeouts",
+          "tweak_id": "power.session-watchdog-timeouts",
+          "record_status": "validated",
+          "promotion_state": "rejected",
+          "source": "research/records/power.session-watchdog-timeouts.json"
+        },
+        {
+          "record_id": "power.session-win32-callout-watchdog-bugcheck-enabled",
+          "tweak_id": "power.session-win32-callout-watchdog-bugcheck-enabled",
+          "record_status": "draft",
+          "promotion_state": "rejected",
+          "source": "research/records/power.session-win32-callout-watchdog-bugcheck-enabled.json"
+        }
+      ],
+      "source_hit_files_sample": [
+        "Docs/privacy/assets/sleepstudy-PoFxInitPowerManagement.c",
+        "Docs/research/app-surface/validated-registry-values.json",
+        "research/records/power.session-watchdog-timeouts.json",
+        "research/records/power.session-win32-callout-watchdog-bugcheck-enabled.json",
+        "research/notes/kernel-power-net-new-existence-probe-20260328.md",
+        "research/notes/power-session-watchdog-timeouts-s1-scheduled-procmon-follow-up-20260328.md",
+        "research/notes/power-session-watchdog-timeouts-kvm-local-kd-follow-up-20260407.md",
+        "research/notes/power-session-watchdog-timeouts-candidate-package-20260328.md",
+        "research/notes/power-session-watchdog-timeouts-boot-trace-20260328.md",
+        "research/notes/power-session-win32-callout-watchdog-bugcheck-enabled-kvm-local-kd-seed-follow-up-20260407.md",
+        "research/notes/power-session-watchdog-timeouts-dcomlaunch-power-trigger-20260328.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md"
+      ],
+      "risk_flags": [
+        "watchdog/bugcheck-sensitive"
+      ]
+    },
+    {
+      "index": 40,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power\" /v \"SkipTickOverride\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+      "value_name": "SkipTickOverride",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 0,
+      "repo_text_hit_count": 0,
+      "source_hit_file_count_sampled": 2,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [],
+      "repo_text_hits": [],
+      "source_hit_files_sample": [
+        "research/notes/kernel-power-net-new-existence-probe-20260328.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md"
+      ],
+      "risk_flags": [
+        "kernel-timing-sensitive"
+      ]
+    },
+    {
+      "index": 41,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power\" /v \"Win32CalloutWatchdogBugcheckEnabled\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+      "value_name": "Win32CalloutWatchdogBugcheckEnabled",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 1,
+      "repo_text_hit_count": 1,
+      "source_hit_file_count_sampled": 9,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [
+        {
+          "record_id": "power.session-win32-callout-watchdog-bugcheck-enabled",
+          "tweak_id": "power.session-win32-callout-watchdog-bugcheck-enabled",
+          "record_status": "draft",
+          "promotion_state": "rejected",
+          "apply_allowed": null,
+          "promotion_blockers": [
+            "promotion-disposition-intentional-hold-closed"
+          ],
+          "source": "setting.targets",
+          "record_path": "research/records/power.session-win32-callout-watchdog-bugcheck-enabled.json",
+          "target_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+          "target_value_name": "Win32CalloutWatchdogBugcheckEnabled",
+          "target_value": null
+        }
+      ],
+      "repo_text_hits": [
+        {
+          "record_id": "power.session-win32-callout-watchdog-bugcheck-enabled",
+          "tweak_id": "power.session-win32-callout-watchdog-bugcheck-enabled",
+          "record_status": "draft",
+          "promotion_state": "rejected",
+          "source": "research/records/power.session-win32-callout-watchdog-bugcheck-enabled.json"
+        }
+      ],
+      "source_hit_files_sample": [
+        "research/records/power.session-win32-callout-watchdog-bugcheck-enabled.json",
+        "research/notes/kernel-power-net-new-existence-probe-20260328.md",
+        "research/notes/power-session-win32-callout-watchdog-bugcheck-enabled-kvm-local-kd-follow-up-20260407.md",
+        "research/notes/power-session-win32-callout-watchdog-bugcheck-enabled-kvm-procmon-saveas-follow-up-20260412.md",
+        "research/notes/power-session-win32-callout-watchdog-bugcheck-enabled-kvm-local-kd-seed-follow-up-20260407.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md",
+        "research/notes/power-session-win32-callout-watchdog-bugcheck-enabled-vm-neutral-perf-bench-20260412.md",
+        "research/notes/power-session-win32-callout-watchdog-bugcheck-enabled-kvm-ghidra-symbol-follow-up-20260407.md",
+        "research/notes/power-session-win32-callout-watchdog-bugcheck-enabled-triage-20260407.md"
+      ],
+      "risk_flags": [
+        "watchdog/bugcheck-sensitive"
+      ]
+    },
+    {
+      "index": 42,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power\" /v \"IdleScanInterval\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+      "value_name": "IdleScanInterval",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 0,
+      "repo_text_hit_count": 0,
+      "source_hit_file_count_sampled": 2,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [],
+      "repo_text_hits": [],
+      "source_hit_files_sample": [
+        "research/notes/kernel-power-net-new-existence-probe-20260328.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md"
+      ],
+      "risk_flags": []
+    },
+    {
+      "index": 43,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power\" /v \"SleepStudyDisabled\" /t REG_DWORD /d \"1\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+      "value_name": "SleepStudyDisabled",
+      "type": "REG_DWORD",
+      "requested_data": "1",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 0,
+      "repo_text_hit_count": 1,
+      "source_hit_file_count_sampled": 5,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [],
+      "repo_text_hits": [
+        {
+          "record_id": "privacy.disable-sleep-study-diagnostics",
+          "tweak_id": "privacy.disable-sleep-study-diagnostics",
+          "record_status": "deprecated",
+          "promotion_state": "rejected",
+          "source": "research/records/privacy.disable-sleep-study-diagnostics.review.json"
+        }
+      ],
+      "source_hit_files_sample": [
+        "Docs/privacy/privacy.md",
+        "Docs/privacy/assets/sleepstudy-PoFxInitPowerManagement.c",
+        "Docs/privacy/assets/sleepstudy-FxLibraryGlobalsQueryRegistrySettings.c",
+        "research/records/privacy.disable-sleep-study-diagnostics.review.json",
+        "research/notes/kernel-power-96-key-routing-20260327.md"
+      ],
+      "risk_flags": []
+    },
+    {
+      "index": 44,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"Class1InitialUnparkCount\" /t REG_DWORD /d \"64\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "Class1InitialUnparkCount",
+      "type": "REG_DWORD",
+      "requested_data": "64",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 2,
+      "repo_text_hit_count": 1,
+      "source_hit_file_count_sampled": 12,
+      "app_surface_text_hit": true,
+      "repo_exact_target_matches": [
+        {
+          "record_id": "power.control.class1-initial-unpark-count",
+          "tweak_id": "power.control.class1-initial-unpark-count",
+          "record_status": "validated",
+          "promotion_state": "promoted",
+          "apply_allowed": null,
+          "promotion_blockers": [],
+          "source": "setting.targets",
+          "record_path": "research/records/power.control.class1-initial-unpark-count.json",
+          "target_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+          "target_value_name": "Class1InitialUnparkCount",
+          "target_value": null
+        },
+        {
+          "record_id": "power.control.class1-initial-unpark-count",
+          "tweak_id": "power.control.class1-initial-unpark-count",
+          "record_status": "validated",
+          "promotion_state": "promoted",
+          "apply_allowed": null,
+          "promotion_blockers": [],
+          "source": "app_current_implementation.writes",
+          "record_path": "research/records/power.control.class1-initial-unpark-count.json",
+          "target_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+          "target_value_name": "Class1InitialUnparkCount",
+          "target_value": 64
+        }
+      ],
+      "repo_text_hits": [
+        {
+          "record_id": "power.control.class1-initial-unpark-count",
+          "tweak_id": "power.control.class1-initial-unpark-count",
+          "record_status": "validated",
+          "promotion_state": "promoted",
+          "source": "research/records/power.control.class1-initial-unpark-count.json"
+        }
+      ],
+      "source_hit_files_sample": [
+        "engine/Tweaks/Power/CPUPowerTweaks.cs",
+        "Docs/power/power.md",
+        "Docs/tweaks/tweak-provenance-overrides.json",
+        "Docs/tweaks/tweak-provenance.csv",
+        "Docs/tweaks/tweak-details.html",
+        "Docs/tweaks/tweak-catalog.csv",
+        "Docs/tweaks/tweak-provenance.json",
+        "Docs/tweaks/tweak-provenance.md",
+        "Docs/tweaks/tweak-source-audit.csv",
+        "Docs/research/app-surface/validated-registry-values.json",
+        "research/records/power.control.class1-initial-unpark-count.json",
+        "research/notes/kernel-power-96-key-routing-20260327.md"
+      ],
+      "risk_flags": []
+    },
+    {
+      "index": 45,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"CustomizeDuringSetup\" /t REG_DWORD /d \"1\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "CustomizeDuringSetup",
+      "type": "REG_DWORD",
+      "requested_data": "1",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 0,
+      "repo_text_hit_count": 0,
+      "source_hit_file_count_sampled": 4,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [],
+      "repo_text_hits": [],
+      "source_hit_files_sample": [
+        "research/notes/kernel-power-net-new-existence-probe-20260328.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md",
+        "research/notes/kernel-power-96-residual-targeted-string-follow-up-20260331.md",
+        "research/notes/kernel-power-existing-static-triage-20260328.md"
+      ],
+      "risk_flags": []
+    },
+    {
+      "index": 46,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"EnergyEstimationEnabled\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "EnergyEstimationEnabled",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 2,
+      "repo_text_hit_count": 1,
+      "source_hit_file_count_sampled": 9,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [
+        {
+          "record_id": "power.optimize-performance",
+          "tweak_id": "power.optimize-performance",
+          "record_status": "deprecated",
+          "promotion_state": "rejected",
+          "apply_allowed": null,
+          "promotion_blockers": [
+            "deprecated-record"
+          ],
+          "source": "setting.targets",
+          "record_path": "research/records/power.optimize-performance.review.json",
+          "target_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+          "target_value_name": "CoalescingTimerInterval + DeepIoCoalescingEnabled + EventProcessorEnabled + LatencyToleranceParked + LatencyToleranceSoftParked + EnergyEstimationEnabled",
+          "target_value": null
+        },
+        {
+          "record_id": "power.optimize-performance",
+          "tweak_id": "power.optimize-performance",
+          "record_status": "deprecated",
+          "promotion_state": "rejected",
+          "apply_allowed": null,
+          "promotion_blockers": [
+            "deprecated-record"
+          ],
+          "source": "app_current_implementation.writes",
+          "record_path": "research/records/power.optimize-performance.review.json",
+          "target_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+          "target_value_name": "CoalescingTimerInterval + DeepIoCoalescingEnabled + EventProcessorEnabled + LatencyToleranceParked + LatencyToleranceSoftParked + EnergyEstimationEnabled",
+          "target_value": "CoalescingTimerInterval=0;DeepIoCoalescingEnabled=0;EventProcessorEnabled=1;LatencyToleranceParked=0;LatencyToleranceSoftParked=0;EnergyEstimationEnabled=0"
+        }
+      ],
+      "repo_text_hits": [
+        {
+          "record_id": "power.optimize-performance",
+          "tweak_id": "power.optimize-performance",
+          "record_status": "deprecated",
+          "promotion_state": "rejected",
+          "source": "research/records/power.optimize-performance.review.json"
+        }
+      ],
+      "source_hit_files_sample": [
+        "app/Services/TweakProviders/PowerTweakProvider.cs",
+        "engine/Tweaks/Power/PowerSettingsTweaks.cs",
+        "Docs/power/power.md",
+        "Docs/tweaks/tweak-provenance-overrides.json",
+        "Docs/tweaks/tweak-provenance.csv",
+        "Docs/tweaks/tweak-provenance.json",
+        "Docs/tweaks/tweak-source-audit.csv",
+        "research/records/power.optimize-performance.review.json",
+        "research/notes/kernel-power-96-key-routing-20260327.md"
+      ],
+      "risk_flags": []
+    },
+    {
+      "index": 47,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"HiberFileSizePercent\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "HiberFileSizePercent",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 2,
+      "repo_text_hit_count": 2,
+      "source_hit_file_count_sampled": 12,
+      "app_surface_text_hit": true,
+      "repo_exact_target_matches": [
+        {
+          "record_id": "power.control.hiber-file-size-percent",
+          "tweak_id": "power.control.hiber-file-size-percent",
+          "record_status": "validated",
+          "promotion_state": "rejected",
+          "apply_allowed": null,
+          "promotion_blockers": [
+            "promotion-disposition-intentional-hold-closed"
+          ],
+          "source": "setting.targets",
+          "record_path": "research/records/power.control.hiber-file-size-percent.json",
+          "target_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+          "target_value_name": "HiberFileSizePercent",
+          "target_value": null
+        },
+        {
+          "record_id": "power.control.hiber-file-size-percent",
+          "tweak_id": "power.control.hiber-file-size-percent",
+          "record_status": "validated",
+          "promotion_state": "rejected",
+          "apply_allowed": null,
+          "promotion_blockers": [
+            "promotion-disposition-intentional-hold-closed"
+          ],
+          "source": "app_current_implementation.writes",
+          "record_path": "research/records/power.control.hiber-file-size-percent.json",
+          "target_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+          "target_value_name": "HiberFileSizePercent",
+          "target_value": 0
+        }
+      ],
+      "repo_text_hits": [
+        {
+          "record_id": "power.control.hiber-file-size-percent",
+          "tweak_id": "power.control.hiber-file-size-percent",
+          "record_status": "validated",
+          "promotion_state": "rejected",
+          "source": "research/records/power.control.hiber-file-size-percent.json"
+        },
+        {
+          "record_id": "power.hide-hibernate-option",
+          "tweak_id": "power.hide-hibernate-option",
+          "record_status": "validated",
+          "promotion_state": "promoted",
+          "source": "research/records/power.hide-hibernate-option.json"
+        }
+      ],
+      "source_hit_files_sample": [
+        "Docs/power/power.md",
+        "Docs/research/app-surface/validated-registry-values.json",
+        "research/records/power.hide-hibernate-option.json",
+        "research/records/power.control.hiber-file-size-percent.json",
+        "research/notes/kvm-qga-wpr-boot-registry-smoke-20260412.md",
+        "research/notes/power-control-hiber-file-size-percent-kvm-local-kd-follow-up-20260406.md",
+        "research/notes/power-control-allow-system-required-wpr-qga-zero-exact-target-hits-20260412.md",
+        "research/notes/power-control-hiber-file-size-percent-kvm-procmon-recovery-20260407.md",
+        "research/notes/power-control-hiber-file-size-percent-kvm-reboot-follow-up-20260407.md",
+        "research/notes/power-control-hiber-file-size-percent-decision-gate-review-20260412.md",
+        "research/notes/power-kernel-trial-matrix-20260422.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md"
+      ],
+      "risk_flags": []
+    },
+    {
+      "index": 48,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"MfBufferingThreshold\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "MfBufferingThreshold",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 2,
+      "repo_text_hit_count": 1,
+      "source_hit_file_count_sampled": 9,
+      "app_surface_text_hit": true,
+      "repo_exact_target_matches": [
+        {
+          "record_id": "power.control.mf-buffering-threshold",
+          "tweak_id": "power.control.mf-buffering-threshold",
+          "record_status": "validated",
+          "promotion_state": "promoted",
+          "apply_allowed": null,
+          "promotion_blockers": [],
+          "source": "setting.targets",
+          "record_path": "research/records/power.control.mf-buffering-threshold.json",
+          "target_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+          "target_value_name": "MfBufferingThreshold",
+          "target_value": null
+        },
+        {
+          "record_id": "power.control.mf-buffering-threshold",
+          "tweak_id": "power.control.mf-buffering-threshold",
+          "record_status": "validated",
+          "promotion_state": "promoted",
+          "apply_allowed": null,
+          "promotion_blockers": [],
+          "source": "app_current_implementation.writes",
+          "record_path": "research/records/power.control.mf-buffering-threshold.json",
+          "target_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+          "target_value_name": "MfBufferingThreshold",
+          "target_value": 0
+        }
+      ],
+      "repo_text_hits": [
+        {
+          "record_id": "power.control.mf-buffering-threshold",
+          "tweak_id": "power.control.mf-buffering-threshold",
+          "record_status": "validated",
+          "promotion_state": "promoted",
+          "source": "research/records/power.control.mf-buffering-threshold.json"
+        }
+      ],
+      "source_hit_files_sample": [
+        "Docs/power/power.md",
+        "Docs/research/app-surface/validated-registry-values.json",
+        "research/records/power.control.mf-buffering-threshold.json",
+        "research/notes/kernel-power-96-key-routing-20260327.md",
+        "research/notes/power-control-docs-first-postboot-trigger-capture-20260329.md",
+        "research/notes/power-control-docs-first-stepwise-runtime-capture-20260329.md",
+        "research/notes/power-control-lightweight-runtime-remaining-two-20260330.md",
+        "research/notes/power-control-docs-first-trigger-etw-follow-up-20260329.md",
+        "research/notes/power-control-docs-first-trigger-etw-guestvar-follow-up-20260329.md"
+      ],
+      "risk_flags": []
+    },
+    {
+      "index": 49,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"PerfCalculateActualUtilization\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "PerfCalculateActualUtilization",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 2,
+      "repo_text_hit_count": 1,
+      "source_hit_file_count_sampled": 12,
+      "app_surface_text_hit": true,
+      "repo_exact_target_matches": [
+        {
+          "record_id": "power.control.perf-calculate-actual-utilization",
+          "tweak_id": "power.control.perf-calculate-actual-utilization",
+          "record_status": "validated",
+          "promotion_state": "promoted",
+          "apply_allowed": null,
+          "promotion_blockers": [],
+          "source": "setting.targets",
+          "record_path": "research/records/power.control.perf-calculate-actual-utilization.json",
+          "target_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+          "target_value_name": "PerfCalculateActualUtilization",
+          "target_value": null
+        },
+        {
+          "record_id": "power.control.perf-calculate-actual-utilization",
+          "tweak_id": "power.control.perf-calculate-actual-utilization",
+          "record_status": "validated",
+          "promotion_state": "promoted",
+          "apply_allowed": null,
+          "promotion_blockers": [],
+          "source": "app_current_implementation.writes",
+          "record_path": "research/records/power.control.perf-calculate-actual-utilization.json",
+          "target_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+          "target_value_name": "PerfCalculateActualUtilization",
+          "target_value": 1
+        }
+      ],
+      "repo_text_hits": [
+        {
+          "record_id": "power.control.perf-calculate-actual-utilization",
+          "tweak_id": "power.control.perf-calculate-actual-utilization",
+          "record_status": "validated",
+          "promotion_state": "promoted",
+          "source": "research/records/power.control.perf-calculate-actual-utilization.json"
+        }
+      ],
+      "source_hit_files_sample": [
+        "engine/Tweaks/Power/CPUPowerTweaks.cs",
+        "Docs/power/power.md",
+        "Docs/tweaks/tweak-provenance-overrides.json",
+        "Docs/tweaks/tweak-catalog.md",
+        "Docs/tweaks/tweak-provenance.csv",
+        "Docs/tweaks/tweak-catalog.html",
+        "Docs/tweaks/tweak-details.html",
+        "Docs/tweaks/tweak-catalog.csv",
+        "Docs/tweaks/tweak-provenance.json",
+        "Docs/tweaks/tweak-source-audit.csv",
+        "Docs/research/app-surface/validated-registry-values.json",
+        "research/records/power.control.perf-calculate-actual-utilization.json"
+      ],
+      "risk_flags": []
+    },
+    {
+      "index": 50,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"SourceSettingsVersion\" /t REG_DWORD /d \"4\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "SourceSettingsVersion",
+      "type": "REG_DWORD",
+      "requested_data": "4",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 0,
+      "repo_text_hit_count": 0,
+      "source_hit_file_count_sampled": 4,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [],
+      "repo_text_hits": [],
+      "source_hit_files_sample": [
+        "research/notes/kernel-power-net-new-existence-probe-20260328.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md",
+        "research/notes/kernel-power-96-residual-targeted-string-follow-up-20260331.md",
+        "research/notes/kernel-power-existing-static-triage-20260328.md"
+      ],
+      "risk_flags": []
+    },
+    {
+      "index": 51,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"TimerRebaseThresholdOnDripsExit\" /t REG_DWORD /d \"60\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "TimerRebaseThresholdOnDripsExit",
+      "type": "REG_DWORD",
+      "requested_data": "60",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 2,
+      "repo_text_hit_count": 1,
+      "source_hit_file_count_sampled": 10,
+      "app_surface_text_hit": true,
+      "repo_exact_target_matches": [
+        {
+          "record_id": "power.control.timer-rebase-threshold-on-drips-exit",
+          "tweak_id": "power.control.timer-rebase-threshold-on-drips-exit",
+          "record_status": "validated",
+          "promotion_state": "rejected",
+          "apply_allowed": null,
+          "promotion_blockers": [
+            "promotion-disposition-intentional-hold-closed"
+          ],
+          "source": "setting.targets",
+          "record_path": "research/records/power.control.timer-rebase-threshold-on-drips-exit.json",
+          "target_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+          "target_value_name": "TimerRebaseThresholdOnDripsExit",
+          "target_value": null
+        },
+        {
+          "record_id": "power.control.timer-rebase-threshold-on-drips-exit",
+          "tweak_id": "power.control.timer-rebase-threshold-on-drips-exit",
+          "record_status": "validated",
+          "promotion_state": "rejected",
+          "apply_allowed": null,
+          "promotion_blockers": [
+            "promotion-disposition-intentional-hold-closed"
+          ],
+          "source": "app_current_implementation.writes",
+          "record_path": "research/records/power.control.timer-rebase-threshold-on-drips-exit.json",
+          "target_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+          "target_value_name": "TimerRebaseThresholdOnDripsExit",
+          "target_value": 60
+        }
+      ],
+      "repo_text_hits": [
+        {
+          "record_id": "power.control.timer-rebase-threshold-on-drips-exit",
+          "tweak_id": "power.control.timer-rebase-threshold-on-drips-exit",
+          "record_status": "validated",
+          "promotion_state": "rejected",
+          "source": "research/records/power.control.timer-rebase-threshold-on-drips-exit.json"
+        }
+      ],
+      "source_hit_files_sample": [
+        "Docs/power/power.md",
+        "Docs/research/app-surface/validated-registry-values.json",
+        "research/records/power.control.timer-rebase-threshold-on-drips-exit.json",
+        "research/notes/kernel-power-96-key-routing-20260327.md",
+        "research/notes/power-control-docs-first-postboot-trigger-capture-20260329.md",
+        "research/notes/power-control-docs-first-stepwise-runtime-capture-20260329.md",
+        "research/notes/power-control-lightweight-runtime-remaining-two-20260330.md",
+        "research/notes/power-control-docs-first-trigger-etw-follow-up-20260329.md",
+        "research/notes/power-control-timer-rebase-threshold-on-drips-exit-kvm-reboot-follow-up-20260407.md",
+        "research/notes/power-control-docs-first-trigger-etw-guestvar-follow-up-20260329.md"
+      ],
+      "risk_flags": [
+        "kernel-timing-sensitive"
+      ]
+    },
+    {
+      "index": 52,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"HibernateEnabledDefault\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "HibernateEnabledDefault",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 1,
+      "repo_text_hit_count": 1,
+      "source_hit_file_count_sampled": 9,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [
+        {
+          "record_id": "power.control.hibernate-enabled-default",
+          "tweak_id": "power.control.hibernate-enabled-default",
+          "record_status": "validated",
+          "promotion_state": "rejected",
+          "apply_allowed": null,
+          "promotion_blockers": [
+            "promotion-disposition-intentional-hold-closed"
+          ],
+          "source": "setting.targets",
+          "record_path": "research/records/power.control.hibernate-enabled-default.json",
+          "target_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+          "target_value_name": "HibernateEnabledDefault",
+          "target_value": null
+        }
+      ],
+      "repo_text_hits": [
+        {
+          "record_id": "power.control.hibernate-enabled-default",
+          "tweak_id": "power.control.hibernate-enabled-default",
+          "record_status": "validated",
+          "promotion_state": "rejected",
+          "source": "research/records/power.control.hibernate-enabled-default.json"
+        }
+      ],
+      "source_hit_files_sample": [
+        "Docs/power/power.md",
+        "Docs/research/app-surface/intentional-not-mapped-records.json",
+        "research/records/power.control.hibernate-enabled-default.json",
+        "research/notes/kernel-power-96-key-routing-20260327.md",
+        "research/notes/power-control-docs-first-postboot-trigger-capture-20260329.md",
+        "research/notes/power-control-docs-first-stepwise-runtime-capture-20260329.md",
+        "research/notes/power-control-docs-first-trigger-etw-follow-up-20260329.md",
+        "research/notes/power-control-hibernate-enabled-default-kvm-reboot-follow-up-20260407.md",
+        "research/notes/power-control-docs-first-trigger-etw-guestvar-follow-up-20260329.md"
+      ],
+      "risk_flags": []
+    },
+    {
+      "index": 53,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"EventProcessorEnabled\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "EventProcessorEnabled",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 2,
+      "repo_text_hit_count": 1,
+      "source_hit_file_count_sampled": 8,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [
+        {
+          "record_id": "power.optimize-performance",
+          "tweak_id": "power.optimize-performance",
+          "record_status": "deprecated",
+          "promotion_state": "rejected",
+          "apply_allowed": null,
+          "promotion_blockers": [
+            "deprecated-record"
+          ],
+          "source": "setting.targets",
+          "record_path": "research/records/power.optimize-performance.review.json",
+          "target_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+          "target_value_name": "CoalescingTimerInterval + DeepIoCoalescingEnabled + EventProcessorEnabled + LatencyToleranceParked + LatencyToleranceSoftParked + EnergyEstimationEnabled",
+          "target_value": null
+        },
+        {
+          "record_id": "power.optimize-performance",
+          "tweak_id": "power.optimize-performance",
+          "record_status": "deprecated",
+          "promotion_state": "rejected",
+          "apply_allowed": null,
+          "promotion_blockers": [
+            "deprecated-record"
+          ],
+          "source": "app_current_implementation.writes",
+          "record_path": "research/records/power.optimize-performance.review.json",
+          "target_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+          "target_value_name": "CoalescingTimerInterval + DeepIoCoalescingEnabled + EventProcessorEnabled + LatencyToleranceParked + LatencyToleranceSoftParked + EnergyEstimationEnabled",
+          "target_value": "CoalescingTimerInterval=0;DeepIoCoalescingEnabled=0;EventProcessorEnabled=1;LatencyToleranceParked=0;LatencyToleranceSoftParked=0;EnergyEstimationEnabled=0"
+        }
+      ],
+      "repo_text_hits": [
+        {
+          "record_id": "power.optimize-performance",
+          "tweak_id": "power.optimize-performance",
+          "record_status": "deprecated",
+          "promotion_state": "rejected",
+          "source": "research/records/power.optimize-performance.review.json"
+        }
+      ],
+      "source_hit_files_sample": [
+        "app/Services/TweakProviders/PowerTweakProvider.cs",
+        "engine/Tweaks/Power/PowerSettingsTweaks.cs",
+        "Docs/power/power.md",
+        "Docs/tweaks/tweak-provenance.csv",
+        "Docs/tweaks/tweak-provenance.json",
+        "Docs/tweaks/tweak-source-audit.csv",
+        "research/records/power.optimize-performance.review.json",
+        "research/notes/kernel-power-96-key-routing-20260327.md"
+      ],
+      "risk_flags": []
+    },
+    {
+      "index": 54,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"LidReliabilityState\" /t REG_DWORD /d \"1\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "LidReliabilityState",
+      "type": "REG_DWORD",
+      "requested_data": "1",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 2,
+      "repo_text_hit_count": 1,
+      "source_hit_file_count_sampled": 7,
+      "app_surface_text_hit": true,
+      "repo_exact_target_matches": [
+        {
+          "record_id": "power.control.lid-reliability-state",
+          "tweak_id": "power.control.lid-reliability-state",
+          "record_status": "validated",
+          "promotion_state": "promoted",
+          "apply_allowed": null,
+          "promotion_blockers": [],
+          "source": "setting.targets",
+          "record_path": "research/records/power.control.lid-reliability-state.json",
+          "target_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+          "target_value_name": "LidReliabilityState",
+          "target_value": null
+        },
+        {
+          "record_id": "power.control.lid-reliability-state",
+          "tweak_id": "power.control.lid-reliability-state",
+          "record_status": "validated",
+          "promotion_state": "promoted",
+          "apply_allowed": null,
+          "promotion_blockers": [],
+          "source": "app_current_implementation.writes",
+          "record_path": "research/records/power.control.lid-reliability-state.json",
+          "target_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+          "target_value_name": "LidReliabilityState",
+          "target_value": 1
+        }
+      ],
+      "repo_text_hits": [
+        {
+          "record_id": "power.control.lid-reliability-state",
+          "tweak_id": "power.control.lid-reliability-state",
+          "record_status": "validated",
+          "promotion_state": "promoted",
+          "source": "research/records/power.control.lid-reliability-state.json"
+        }
+      ],
+      "source_hit_files_sample": [
+        "Docs/power/power.md",
+        "Docs/research/app-surface/validated-registry-values.json",
+        "research/records/power.control.lid-reliability-state.json",
+        "research/notes/kernel-power-96-key-routing-20260327.md",
+        "research/notes/power-control-hiber-file-size-percent-stepwise-follow-up-20260408.md",
+        "research/notes/power-control-docs-first-stepwise-runtime-capture-20260329.md",
+        "research/notes/power-control-docs-first-ghidra-review-20260329.md"
+      ],
+      "risk_flags": []
+    },
+    {
+      "index": 55,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"HibernateEnabled\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "HibernateEnabled",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 2,
+      "repo_text_hit_count": 3,
+      "source_hit_file_count_sampled": 12,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [
+        {
+          "record_id": "power.control.hibernate-enabled-default",
+          "tweak_id": "power.control.hibernate-enabled-default",
+          "record_status": "validated",
+          "promotion_state": "rejected",
+          "apply_allowed": null,
+          "promotion_blockers": [
+            "promotion-disposition-intentional-hold-closed"
+          ],
+          "source": "setting.targets",
+          "record_path": "research/records/power.control.hibernate-enabled-default.json",
+          "target_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+          "target_value_name": "HibernateEnabledDefault",
+          "target_value": null
+        },
+        {
+          "record_id": "power.control.hibernate-enabled",
+          "tweak_id": "power.control.hibernate-enabled",
+          "record_status": "validated",
+          "promotion_state": "rejected",
+          "apply_allowed": null,
+          "promotion_blockers": [
+            "promotion-disposition-environment-limited-validation-lane"
+          ],
+          "source": "setting.targets",
+          "record_path": "research/records/power.control.hibernate-enabled.json",
+          "target_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+          "target_value_name": "HibernateEnabled",
+          "target_value": null
+        }
+      ],
+      "repo_text_hits": [
+        {
+          "record_id": "power.control.hibernate-enabled-default",
+          "tweak_id": "power.control.hibernate-enabled-default",
+          "record_status": "validated",
+          "promotion_state": "rejected",
+          "source": "research/records/power.control.hibernate-enabled-default.json"
+        },
+        {
+          "record_id": "power.control.hibernate-enabled",
+          "tweak_id": "power.control.hibernate-enabled",
+          "record_status": "validated",
+          "promotion_state": "rejected",
+          "source": "research/records/power.control.hibernate-enabled.json"
+        },
+        {
+          "record_id": "power.disable-hibernation",
+          "tweak_id": "power.disable-hibernation",
+          "record_status": "validated",
+          "promotion_state": "rejected",
+          "source": "research/records/power.disable-hibernation.review.json"
+        }
+      ],
+      "source_hit_files_sample": [
+        "Docs/power/power.md",
+        "Docs/research/app-surface/intentional-not-mapped-records.json",
+        "research/records/power.control.hibernate-enabled-default.json",
+        "research/records/power.disable-hibernation.review.json",
+        "research/records/power.control.hibernate-enabled.json",
+        "research/notes/power-control-hiber-file-size-percent-kvm-procmon-recovery-20260407.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md",
+        "research/notes/power-control-hiber-file-size-percent-stepwise-follow-up-20260408.md",
+        "research/notes/power-control-docs-first-postboot-trigger-capture-20260329.md",
+        "research/notes/windows-11-settings-and-privacy-leads.md",
+        "research/notes/power-control-docs-first-stepwise-runtime-capture-20260329.md",
+        "research/notes/power-control-hiber-file-size-percent-kvm-procmon-runtime-20260407.md"
+      ],
+      "risk_flags": []
+    },
+    {
+      "index": 56,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"DisableInboxPepGeneratedConstraints\" /t REG_DWORD /d \"1\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "DisableInboxPepGeneratedConstraints",
+      "type": "REG_DWORD",
+      "requested_data": "1",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 0,
+      "repo_text_hit_count": 0,
+      "source_hit_file_count_sampled": 2,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [],
+      "repo_text_hits": [],
+      "source_hit_files_sample": [
+        "Docs/power/power.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md"
+      ],
+      "risk_flags": []
+    },
+    {
+      "index": 57,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"DisableDisplayBurstOnPowerSourceChange\" /t REG_DWORD /d \"1\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "DisableDisplayBurstOnPowerSourceChange",
+      "type": "REG_DWORD",
+      "requested_data": "1",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 0,
+      "repo_text_hit_count": 0,
+      "source_hit_file_count_sampled": 2,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [],
+      "repo_text_hits": [],
+      "source_hit_files_sample": [
+        "Docs/power/power.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md"
+      ],
+      "risk_flags": []
+    },
+    {
+      "index": 58,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"IdleProcessorsRequireQosManagement\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "IdleProcessorsRequireQosManagement",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 0,
+      "repo_text_hit_count": 0,
+      "source_hit_file_count_sampled": 3,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [],
+      "repo_text_hits": [],
+      "source_hit_files_sample": [
+        "Docs/power/power.md",
+        "Docs/research/runtime-escalation.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md"
+      ],
+      "risk_flags": []
+    },
+    {
+      "index": 59,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"TtmEnabled\" /t REG_DWORD /d \"0\" /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "TtmEnabled",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 1,
+      "repo_text_hit_count": 1,
+      "source_hit_file_count_sampled": 7,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [
+        {
+          "record_id": "power.control.ttm-enabled",
+          "tweak_id": "power.control.ttm-enabled",
+          "record_status": "draft",
+          "promotion_state": "rejected",
+          "apply_allowed": null,
+          "promotion_blockers": [
+            "promotion-disposition-intentional-hold-closed"
+          ],
+          "source": "setting.targets",
+          "record_path": "research/records/power.control.ttm-enabled.json",
+          "target_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+          "target_value_name": "TtmEnabled",
+          "target_value": null
+        }
+      ],
+      "repo_text_hits": [
+        {
+          "record_id": "power.control.ttm-enabled",
+          "tweak_id": "power.control.ttm-enabled",
+          "record_status": "draft",
+          "promotion_state": "rejected",
+          "source": "research/records/power.control.ttm-enabled.json"
+        }
+      ],
+      "source_hit_files_sample": [
+        "Docs/power/power.md",
+        "Docs/research/app-surface/intentional-not-mapped-records.json",
+        "research/records/power.control.ttm-enabled.json",
+        "research/notes/source-enrichment-systeminformer-follow-up-20260412.md",
+        "research/notes/power-control-mega-trigger-v2-status-20260402.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md",
+        "research/notes/power-control-execution-required-init-table-static-follow-up-20260411.md"
+      ],
+      "risk_flags": []
+    },
+    {
+      "index": 60,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"AllowAudioToEnableExecutionRequiredPowerRequests\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "AllowAudioToEnableExecutionRequiredPowerRequests",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 2,
+      "repo_text_hit_count": 1,
+      "source_hit_file_count_sampled": 12,
+      "app_surface_text_hit": true,
+      "repo_exact_target_matches": [
+        {
+          "record_id": "power.control.allow-audio-to-enable-execution-required-power-requests",
+          "tweak_id": "power.control.allow-audio-to-enable-execution-required-power-requests",
+          "record_status": "draft",
+          "promotion_state": "rejected",
+          "apply_allowed": null,
+          "promotion_blockers": [
+            "promotion-disposition-intentional-hold-closed"
+          ],
+          "source": "setting.targets",
+          "record_path": "research/records/power.control.allow-audio-to-enable-execution-required-power-requests.json",
+          "target_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+          "target_value_name": "AllowAudioToEnableExecutionRequiredPowerRequests",
+          "target_value": null
+        },
+        {
+          "record_id": "power.control.allow-audio-to-enable-execution-required-power-requests",
+          "tweak_id": "power.control.allow-audio-to-enable-execution-required-power-requests",
+          "record_status": "draft",
+          "promotion_state": "rejected",
+          "apply_allowed": null,
+          "promotion_blockers": [
+            "promotion-disposition-intentional-hold-closed"
+          ],
+          "source": "app_current_implementation.writes",
+          "record_path": "research/records/power.control.allow-audio-to-enable-execution-required-power-requests.json",
+          "target_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+          "target_value_name": "AllowAudioToEnableExecutionRequiredPowerRequests",
+          "target_value": 1
+        }
+      ],
+      "repo_text_hits": [
+        {
+          "record_id": "power.control.allow-audio-to-enable-execution-required-power-requests",
+          "tweak_id": "power.control.allow-audio-to-enable-execution-required-power-requests",
+          "record_status": "draft",
+          "promotion_state": "rejected",
+          "source": "research/records/power.control.allow-audio-to-enable-execution-required-power-requests.json"
+        }
+      ],
+      "source_hit_files_sample": [
+        "Docs/power/power.md",
+        "Docs/research/runtime-escalation.md",
+        "Docs/research/app-surface/validated-registry-values.json",
+        "research/records/power.control.allow-audio-to-enable-execution-required-power-requests.json",
+        "research/notes/power-control-execution-required-decision-gate-review-20260412.md",
+        "research/notes/power-control-execution-required-runtime-retry-follow-up-20260408.md",
+        "research/notes/power-control-allow-audio-wave4-stackwalk-follow-up-20260414.md",
+        "research/notes/power-control-execution-required-kvm-guest-control-gap-follow-up-20260408.md",
+        "research/notes/power-control-execution-required-kvm-qga-service-state-follow-up-20260409.md",
+        "research/notes/power-kernel-trial-matrix-20260422.md",
+        "research/notes/power-kernel-symbol-hunt-targets-20260422.md",
+        "research/notes/power-control-execution-required-powersetting-trace-callback-follow-up-20260408.md"
+      ],
+      "risk_flags": []
+    },
+    {
+      "index": 61,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"DeepIoCoalescingEnabled\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "DeepIoCoalescingEnabled",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 2,
+      "repo_text_hit_count": 1,
+      "source_hit_file_count_sampled": 10,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [
+        {
+          "record_id": "power.optimize-performance",
+          "tweak_id": "power.optimize-performance",
+          "record_status": "deprecated",
+          "promotion_state": "rejected",
+          "apply_allowed": null,
+          "promotion_blockers": [
+            "deprecated-record"
+          ],
+          "source": "setting.targets",
+          "record_path": "research/records/power.optimize-performance.review.json",
+          "target_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+          "target_value_name": "CoalescingTimerInterval + DeepIoCoalescingEnabled + EventProcessorEnabled + LatencyToleranceParked + LatencyToleranceSoftParked + EnergyEstimationEnabled",
+          "target_value": null
+        },
+        {
+          "record_id": "power.optimize-performance",
+          "tweak_id": "power.optimize-performance",
+          "record_status": "deprecated",
+          "promotion_state": "rejected",
+          "apply_allowed": null,
+          "promotion_blockers": [
+            "deprecated-record"
+          ],
+          "source": "app_current_implementation.writes",
+          "record_path": "research/records/power.optimize-performance.review.json",
+          "target_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+          "target_value_name": "CoalescingTimerInterval + DeepIoCoalescingEnabled + EventProcessorEnabled + LatencyToleranceParked + LatencyToleranceSoftParked + EnergyEstimationEnabled",
+          "target_value": "CoalescingTimerInterval=0;DeepIoCoalescingEnabled=0;EventProcessorEnabled=1;LatencyToleranceParked=0;LatencyToleranceSoftParked=0;EnergyEstimationEnabled=0"
+        }
+      ],
+      "repo_text_hits": [
+        {
+          "record_id": "power.optimize-performance",
+          "tweak_id": "power.optimize-performance",
+          "record_status": "deprecated",
+          "promotion_state": "rejected",
+          "source": "research/records/power.optimize-performance.review.json"
+        }
+      ],
+      "source_hit_files_sample": [
+        "app/Services/TweakProviders/PowerTweakProvider.cs",
+        "engine/Tweaks/Power/PowerSettingsTweaks.cs",
+        "Docs/power/power.md",
+        "Docs/tweaks/tweak-provenance-overrides.json",
+        "Docs/tweaks/tweak-provenance.csv",
+        "Docs/tweaks/tweak-provenance.json",
+        "Docs/tweaks/tweak-source-audit.csv",
+        "research/records/power.optimize-performance.review.json",
+        "research/notes/kernel-power-96-key-routing-20260327.md",
+        "research/notes/power-control-execution-required-init-table-static-follow-up-20260411.md"
+      ],
+      "risk_flags": []
+    },
+    {
+      "index": 62,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"IgnoreCsComplianceCheck\" /t REG_DWORD /d \"1\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "IgnoreCsComplianceCheck",
+      "type": "REG_DWORD",
+      "requested_data": "1",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 0,
+      "repo_text_hit_count": 0,
+      "source_hit_file_count_sampled": 2,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [],
+      "repo_text_hits": [],
+      "source_hit_files_sample": [
+        "Docs/power/power.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md"
+      ],
+      "risk_flags": []
+    },
+    {
+      "index": 63,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"DripsSwHwDivergenceEnableLiveDump\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "DripsSwHwDivergenceEnableLiveDump",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 0,
+      "repo_text_hit_count": 0,
+      "source_hit_file_count_sampled": 2,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [],
+      "repo_text_hits": [],
+      "source_hit_files_sample": [
+        "Docs/power/power.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md"
+      ],
+      "risk_flags": []
+    },
+    {
+      "index": 64,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"DisableVsyncLatencyUpdate\" /t REG_DWORD /d \"1\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "DisableVsyncLatencyUpdate",
+      "type": "REG_DWORD",
+      "requested_data": "1",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 0,
+      "repo_text_hit_count": 0,
+      "source_hit_file_count_sampled": 2,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [],
+      "repo_text_hits": [],
+      "source_hit_files_sample": [
+        "Docs/power/power.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md"
+      ],
+      "risk_flags": []
+    },
+    {
+      "index": 65,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"SleepstudyAccountingEnabled\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "SleepstudyAccountingEnabled",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 0,
+      "repo_text_hit_count": 0,
+      "source_hit_file_count_sampled": 3,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [],
+      "repo_text_hits": [],
+      "source_hit_files_sample": [
+        "Docs/power/power.md",
+        "Docs/privacy/privacy.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md"
+      ],
+      "risk_flags": []
+    },
+    {
+      "index": 66,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"EnableInputSuppression\" /t REG_DWORD /d \"1\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "EnableInputSuppression",
+      "type": "REG_DWORD",
+      "requested_data": "1",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 0,
+      "repo_text_hit_count": 0,
+      "source_hit_file_count_sampled": 2,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [],
+      "repo_text_hits": [],
+      "source_hit_files_sample": [
+        "Docs/power/power.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md"
+      ],
+      "risk_flags": []
+    },
+    {
+      "index": 67,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"PerfCheckTimerImplementation\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "PerfCheckTimerImplementation",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 0,
+      "repo_text_hit_count": 0,
+      "source_hit_file_count_sampled": 2,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [],
+      "repo_text_hits": [],
+      "source_hit_files_sample": [
+        "Docs/power/power.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md"
+      ],
+      "risk_flags": [
+        "kernel-timing-sensitive"
+      ]
+    },
+    {
+      "index": 68,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"StandbyConnectivityGracePeriod\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "StandbyConnectivityGracePeriod",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 0,
+      "repo_text_hit_count": 0,
+      "source_hit_file_count_sampled": 2,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [],
+      "repo_text_hits": [],
+      "source_hit_files_sample": [
+        "Docs/power/power.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md"
+      ],
+      "risk_flags": []
+    },
+    {
+      "index": 69,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"EnforceAusterityMode\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "EnforceAusterityMode",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 0,
+      "repo_text_hit_count": 0,
+      "source_hit_file_count_sampled": 2,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [],
+      "repo_text_hits": [],
+      "source_hit_files_sample": [
+        "Docs/power/power.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md"
+      ],
+      "risk_flags": []
+    },
+    {
+      "index": 70,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"AlwaysComputeQosHints\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "AlwaysComputeQosHints",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 0,
+      "repo_text_hit_count": 0,
+      "source_hit_file_count_sampled": 3,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [],
+      "repo_text_hits": [],
+      "source_hit_files_sample": [
+        "Docs/power/power.md",
+        "Docs/research/runtime-escalation.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md"
+      ],
+      "risk_flags": []
+    },
+    {
+      "index": 71,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"HeteroMultiCoreClassesEnabled\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "HeteroMultiCoreClassesEnabled",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 0,
+      "repo_text_hit_count": 0,
+      "source_hit_file_count_sampled": 2,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [],
+      "repo_text_hits": [],
+      "source_hit_files_sample": [
+        "Docs/power/power.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md"
+      ],
+      "risk_flags": []
+    },
+    {
+      "index": 72,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"HeteroMultiClassParkingEnabled\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "HeteroMultiClassParkingEnabled",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 0,
+      "repo_text_hit_count": 0,
+      "source_hit_file_count_sampled": 2,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [],
+      "repo_text_hits": [],
+      "source_hit_files_sample": [
+        "Docs/power/power.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md"
+      ],
+      "risk_flags": []
+    },
+    {
+      "index": 73,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"DisableIdleStatesAtBoot\" /t REG_DWORD /d \"2\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "DisableIdleStatesAtBoot",
+      "type": "REG_DWORD",
+      "requested_data": "2",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 2,
+      "repo_text_hit_count": 1,
+      "source_hit_file_count_sampled": 10,
+      "app_surface_text_hit": true,
+      "repo_exact_target_matches": [
+        {
+          "record_id": "power.disable-cpu-idle-states",
+          "tweak_id": "power.disable-cpu-idle-states",
+          "record_status": "validated",
+          "promotion_state": "promoted",
+          "apply_allowed": null,
+          "promotion_blockers": [],
+          "source": "setting.targets",
+          "record_path": "research/records/power.disable-cpu-idle-states.json",
+          "target_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+          "target_value_name": "DisableIdleStatesAtBoot + IdleStateTimeout + ExitLatencyCheckEnabled",
+          "target_value": null
+        },
+        {
+          "record_id": "power.disable-cpu-idle-states",
+          "tweak_id": "power.disable-cpu-idle-states",
+          "record_status": "validated",
+          "promotion_state": "promoted",
+          "apply_allowed": null,
+          "promotion_blockers": [],
+          "source": "app_current_implementation.writes",
+          "record_path": "research/records/power.disable-cpu-idle-states.json",
+          "target_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+          "target_value_name": "DisableIdleStatesAtBoot + IdleStateTimeout + ExitLatencyCheckEnabled",
+          "target_value": "DisableIdleStatesAtBoot=1;IdleStateTimeout=0;ExitLatencyCheckEnabled=1"
+        }
+      ],
+      "repo_text_hits": [
+        {
+          "record_id": "power.disable-cpu-idle-states",
+          "tweak_id": "power.disable-cpu-idle-states",
+          "record_status": "validated",
+          "promotion_state": "promoted",
+          "source": "research/records/power.disable-cpu-idle-states.json"
+        }
+      ],
+      "source_hit_files_sample": [
+        "engine/Tweaks/Power/CPUPowerTweaks.cs",
+        "infrastructure/Commands/CommandAllowlist.cs",
+        "Docs/ARTIFACT_INTEGRITY.md",
+        "Docs/power/power.md",
+        "Docs/research/app-surface/validated-registry-values.json",
+        "research/records/power.disable-cpu-idle-states.json",
+        "research/notes/kernel-power-96-key-routing-20260327.md",
+        "research/notes/cpu-idle-states-follow-up-20260327.md",
+        "research/notes/power-disable-cpu-idle-states-stepwise-orchestration-20260329.md",
+        "research/notes/power-disable-cpu-idle-states-stepwise-orchestration-20260328.md"
+      ],
+      "risk_flags": []
+    },
+    {
+      "index": 74,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"PerfBoostAtGuaranteed\" /t REG_DWORD /d \"1\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "PerfBoostAtGuaranteed",
+      "type": "REG_DWORD",
+      "requested_data": "1",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 0,
+      "repo_text_hit_count": 0,
+      "source_hit_file_count_sampled": 12,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [],
+      "repo_text_hits": [],
+      "source_hit_files_sample": [
+        "engine/Tweaks/Power/CPUPowerTweaks.cs",
+        "Docs/power/power.md",
+        "Docs/tweaks/tweak-provenance-overrides.json",
+        "Docs/tweaks/tweak-catalog.md",
+        "Docs/tweaks/tweak-provenance.csv",
+        "Docs/tweaks/tweak-catalog.html",
+        "Docs/tweaks/tweak-details.html",
+        "Docs/tweaks/tweak-catalog.csv",
+        "Docs/tweaks/tweak-provenance.json",
+        "Docs/tweaks/tweak-provenance.md",
+        "Docs/tweaks/tweak-source-audit.csv",
+        "research/notes/kernel-power-96-key-routing-20260327.md"
+      ],
+      "risk_flags": []
+    },
+    {
+      "index": 75,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"MSDisabled\" /t REG_DWORD /d \"1\" /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "MSDisabled",
+      "type": "REG_DWORD",
+      "requested_data": "1",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 1,
+      "repo_text_hit_count": 2,
+      "source_hit_file_count_sampled": 6,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [
+        {
+          "record_id": "power.disable-modern-standby",
+          "tweak_id": "power.disable-modern-standby",
+          "record_status": "deprecated",
+          "promotion_state": "rejected",
+          "apply_allowed": null,
+          "promotion_blockers": [
+            "deprecated-record"
+          ],
+          "source": "setting.targets",
+          "record_path": "research/records/power.disable-modern-standby.json",
+          "target_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+          "target_value_name": "MSDisabled + ModernSleep\\EnabledActions",
+          "target_value": null
+        }
+      ],
+      "repo_text_hits": [
+        {
+          "record_id": "power.control.ttm-enabled",
+          "tweak_id": "power.control.ttm-enabled",
+          "record_status": "draft",
+          "promotion_state": "rejected",
+          "source": "research/records/power.control.ttm-enabled.json"
+        },
+        {
+          "record_id": "power.disable-modern-standby",
+          "tweak_id": "power.disable-modern-standby",
+          "record_status": "deprecated",
+          "promotion_state": "rejected",
+          "source": "research/records/power.disable-modern-standby.json"
+        }
+      ],
+      "source_hit_files_sample": [
+        "Docs/power/power.md",
+        "research/records/power.disable-modern-standby.json",
+        "research/records/power.control.ttm-enabled.json",
+        "research/notes/power-control-mega-trigger-v2-status-20260402.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md",
+        "research/notes/source-enrichment-20260403-192135.md"
+      ],
+      "risk_flags": []
+    },
+    {
+      "index": 76,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"FxAccountingTelemetryDisabled\" /t REG_DWORD /d \"1\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "FxAccountingTelemetryDisabled",
+      "type": "REG_DWORD",
+      "requested_data": "1",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 0,
+      "repo_text_hit_count": 0,
+      "source_hit_file_count_sampled": 2,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [],
+      "repo_text_hits": [],
+      "source_hit_files_sample": [
+        "Docs/power/power.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md"
+      ],
+      "risk_flags": []
+    },
+    {
+      "index": 77,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"Win32kCalloutWatchdogTimeoutSeconds\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "Win32kCalloutWatchdogTimeoutSeconds",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 1,
+      "repo_text_hit_count": 2,
+      "source_hit_file_count_sampled": 12,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [
+        {
+          "record_id": "power.control.win32k-callout-watchdog-timeout-seconds",
+          "tweak_id": "power.control.win32k-callout-watchdog-timeout-seconds",
+          "record_status": "draft",
+          "promotion_state": "rejected",
+          "apply_allowed": null,
+          "promotion_blockers": [
+            "promotion-disposition-intentional-hold-closed"
+          ],
+          "source": "setting.targets",
+          "record_path": "research/records/power.control.win32k-callout-watchdog-timeout-seconds.json",
+          "target_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+          "target_value_name": "Win32kCalloutWatchdogTimeoutSeconds",
+          "target_value": null
+        }
+      ],
+      "repo_text_hits": [
+        {
+          "record_id": "power.control.win32k-callout-watchdog-timeout-seconds",
+          "tweak_id": "power.control.win32k-callout-watchdog-timeout-seconds",
+          "record_status": "draft",
+          "promotion_state": "rejected",
+          "source": "research/records/power.control.win32k-callout-watchdog-timeout-seconds.json"
+        },
+        {
+          "record_id": "power.session-win32-callout-watchdog-bugcheck-enabled",
+          "tweak_id": "power.session-win32-callout-watchdog-bugcheck-enabled",
+          "record_status": "draft",
+          "promotion_state": "rejected",
+          "source": "research/records/power.session-win32-callout-watchdog-bugcheck-enabled.json"
+        }
+      ],
+      "source_hit_files_sample": [
+        "Docs/power/power.md",
+        "research/records/power.control.win32k-callout-watchdog-timeout-seconds.json",
+        "research/records/power.session-win32-callout-watchdog-bugcheck-enabled.json",
+        "research/notes/power-control-win32k-callout-watchdog-timeout-seconds-kvm-local-kd-follow-up-20260407.md",
+        "research/notes/power-control-power-watchdog-timeout-cluster-triage-20260407.md",
+        "research/notes/power-session-win32-callout-watchdog-bugcheck-enabled-kvm-local-kd-follow-up-20260407.md",
+        "research/notes/power-session-win32-callout-watchdog-bugcheck-enabled-kvm-local-kd-seed-follow-up-20260407.md",
+        "research/notes/power-control-win32k-callout-watchdog-timeout-seconds-kvm-reboot-follow-up-20260412.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md",
+        "research/notes/power-watchdog-timeout-cluster-pivot-gates-20260422.md",
+        "research/notes/power-session-win32-callout-watchdog-bugcheck-enabled-triage-20260407.md",
+        "research/notes/power-control-win32k-callout-watchdog-timeout-seconds-kvm-s1-procmon-follow-up-20260412.md"
+      ],
+      "risk_flags": [
+        "watchdog/bugcheck-sensitive"
+      ]
+    },
+    {
+      "index": 78,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"EnableMinimalHiberFile\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "EnableMinimalHiberFile",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 0,
+      "repo_text_hit_count": 0,
+      "source_hit_file_count_sampled": 2,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [],
+      "repo_text_hits": [],
+      "source_hit_files_sample": [
+        "Docs/power/power.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md"
+      ],
+      "risk_flags": []
+    },
+    {
+      "index": 79,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"HiberbootEnabled\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "HiberbootEnabled",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 0,
+      "repo_text_hit_count": 2,
+      "source_hit_file_count_sampled": 12,
+      "app_surface_text_hit": true,
+      "repo_exact_target_matches": [],
+      "repo_text_hits": [
+        {
+          "record_id": "power.control.ttm-enabled",
+          "tweak_id": "power.control.ttm-enabled",
+          "record_status": "draft",
+          "promotion_state": "rejected",
+          "source": "research/records/power.control.ttm-enabled.json"
+        },
+        {
+          "record_id": "power.disable-fast-startup",
+          "tweak_id": "power.disable-fast-startup",
+          "record_status": "validated",
+          "promotion_state": "promoted",
+          "source": "research/records/power.disable-fast-startup.review.json"
+        }
+      ],
+      "source_hit_files_sample": [
+        "engine/Tweaks/Power/PowerSettingsTweaks.cs",
+        "infrastructure/Commands/CommandAllowlist.cs",
+        "Docs/UPSTREAM_TRANCHE_EVALUATION_2026-03-09.md",
+        "Docs/power/power.md",
+        "Docs/research/app-surface/validated-registry-values.json",
+        "Docs/power/assets/hiberboot-PopReadHiberbootGroupPolicy.c",
+        "research/records/power.disable-fast-startup.review.json",
+        "research/records/power.control.ttm-enabled.json",
+        "research/notes/source-enrichment-systeminformer-follow-up-20260412.md",
+        "research/notes/source-enrichment-record-mapping-follow-up-20260412.md",
+        "research/notes/power-control-mega-trigger-v2-status-20260402.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md"
+      ],
+      "risk_flags": []
+    },
+    {
+      "index": 80,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"MaximumFrequencyOverride\" /t REG_DWORD /d \"100\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "MaximumFrequencyOverride",
+      "type": "REG_DWORD",
+      "requested_data": "100",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 0,
+      "repo_text_hit_count": 0,
+      "source_hit_file_count_sampled": 2,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [],
+      "repo_text_hits": [],
+      "source_hit_files_sample": [
+        "Docs/power/power.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md"
+      ],
+      "risk_flags": []
+    },
+    {
+      "index": 81,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"PoFxSystemIrpWaitForReportDevicePowered\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "PoFxSystemIrpWaitForReportDevicePowered",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 0,
+      "repo_text_hit_count": 0,
+      "source_hit_file_count_sampled": 2,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [],
+      "repo_text_hits": [],
+      "source_hit_files_sample": [
+        "Docs/power/power.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md"
+      ],
+      "risk_flags": []
+    },
+    {
+      "index": 82,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"AllowSystemRequiredPowerRequests\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "AllowSystemRequiredPowerRequests",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 2,
+      "repo_text_hit_count": 1,
+      "source_hit_file_count_sampled": 12,
+      "app_surface_text_hit": true,
+      "repo_exact_target_matches": [
+        {
+          "record_id": "power.control.allow-system-required-power-requests",
+          "tweak_id": "power.control.allow-system-required-power-requests",
+          "record_status": "draft",
+          "promotion_state": "rejected",
+          "apply_allowed": null,
+          "promotion_blockers": [
+            "promotion-disposition-intentional-hold-closed"
+          ],
+          "source": "setting.targets",
+          "record_path": "research/records/power.control.allow-system-required-power-requests.json",
+          "target_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+          "target_value_name": "AllowSystemRequiredPowerRequests",
+          "target_value": null
+        },
+        {
+          "record_id": "power.control.allow-system-required-power-requests",
+          "tweak_id": "power.control.allow-system-required-power-requests",
+          "record_status": "draft",
+          "promotion_state": "rejected",
+          "apply_allowed": null,
+          "promotion_blockers": [
+            "promotion-disposition-intentional-hold-closed"
+          ],
+          "source": "app_current_implementation.writes",
+          "record_path": "research/records/power.control.allow-system-required-power-requests.json",
+          "target_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+          "target_value_name": "AllowSystemRequiredPowerRequests",
+          "target_value": 1
+        }
+      ],
+      "repo_text_hits": [
+        {
+          "record_id": "power.control.allow-system-required-power-requests",
+          "tweak_id": "power.control.allow-system-required-power-requests",
+          "record_status": "draft",
+          "promotion_state": "rejected",
+          "source": "research/records/power.control.allow-system-required-power-requests.json"
+        }
+      ],
+      "source_hit_files_sample": [
+        "Docs/power/power.md",
+        "Docs/research/runtime-escalation.md",
+        "Docs/research/app-surface/validated-registry-values.json",
+        "research/records/power.control.allow-system-required-power-requests.json",
+        "research/notes/power-control-execution-required-decision-gate-review-20260412.md",
+        "research/notes/power-control-allow-system-required-wpr-qga-zero-exact-target-hits-20260412.md",
+        "research/notes/power-control-execution-required-runtime-retry-follow-up-20260408.md",
+        "research/notes/power-control-execution-required-kvm-guest-control-gap-follow-up-20260408.md",
+        "research/notes/power-control-execution-required-kvm-qga-service-state-follow-up-20260409.md",
+        "research/notes/power-control-allow-system-required-power-requests-decision-gate-review-20260412.md",
+        "research/notes/power-kernel-trial-matrix-20260422.md",
+        "research/notes/power-control-allow-system-required-power-requests-triage-20260408.md"
+      ],
+      "risk_flags": []
+    },
+    {
+      "index": 83,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"CoalescingFlushInterval\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "CoalescingFlushInterval",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 0,
+      "repo_text_hit_count": 0,
+      "source_hit_file_count_sampled": 3,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [],
+      "repo_text_hits": [],
+      "source_hit_files_sample": [
+        "Docs/power/power.md",
+        "Docs/research/runtime-escalation.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md"
+      ],
+      "risk_flags": []
+    },
+    {
+      "index": 84,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"CoalescingTimerInterval\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "CoalescingTimerInterval",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 2,
+      "repo_text_hit_count": 1,
+      "source_hit_file_count_sampled": 9,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [
+        {
+          "record_id": "power.optimize-performance",
+          "tweak_id": "power.optimize-performance",
+          "record_status": "deprecated",
+          "promotion_state": "rejected",
+          "apply_allowed": null,
+          "promotion_blockers": [
+            "deprecated-record"
+          ],
+          "source": "setting.targets",
+          "record_path": "research/records/power.optimize-performance.review.json",
+          "target_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+          "target_value_name": "CoalescingTimerInterval + DeepIoCoalescingEnabled + EventProcessorEnabled + LatencyToleranceParked + LatencyToleranceSoftParked + EnergyEstimationEnabled",
+          "target_value": null
+        },
+        {
+          "record_id": "power.optimize-performance",
+          "tweak_id": "power.optimize-performance",
+          "record_status": "deprecated",
+          "promotion_state": "rejected",
+          "apply_allowed": null,
+          "promotion_blockers": [
+            "deprecated-record"
+          ],
+          "source": "app_current_implementation.writes",
+          "record_path": "research/records/power.optimize-performance.review.json",
+          "target_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+          "target_value_name": "CoalescingTimerInterval + DeepIoCoalescingEnabled + EventProcessorEnabled + LatencyToleranceParked + LatencyToleranceSoftParked + EnergyEstimationEnabled",
+          "target_value": "CoalescingTimerInterval=0;DeepIoCoalescingEnabled=0;EventProcessorEnabled=1;LatencyToleranceParked=0;LatencyToleranceSoftParked=0;EnergyEstimationEnabled=0"
+        }
+      ],
+      "repo_text_hits": [
+        {
+          "record_id": "power.optimize-performance",
+          "tweak_id": "power.optimize-performance",
+          "record_status": "deprecated",
+          "promotion_state": "rejected",
+          "source": "research/records/power.optimize-performance.review.json"
+        }
+      ],
+      "source_hit_files_sample": [
+        "app/Services/TweakProviders/PowerTweakProvider.cs",
+        "engine/Tweaks/Power/PowerSettingsTweaks.cs",
+        "Docs/power/power.md",
+        "Docs/tweaks/tweak-provenance-overrides.json",
+        "Docs/tweaks/tweak-provenance.csv",
+        "Docs/tweaks/tweak-provenance.json",
+        "Docs/tweaks/tweak-source-audit.csv",
+        "research/records/power.optimize-performance.review.json",
+        "research/notes/kernel-power-96-key-routing-20260327.md"
+      ],
+      "risk_flags": [
+        "kernel-timing-sensitive"
+      ]
+    },
+    {
+      "index": 85,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"HeteroHgsEePerfHintsIndependentEnabled\" /t REG_DWORD /d \"1\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "HeteroHgsEePerfHintsIndependentEnabled",
+      "type": "REG_DWORD",
+      "requested_data": "1",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 0,
+      "repo_text_hit_count": 0,
+      "source_hit_file_count_sampled": 2,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [],
+      "repo_text_hits": [],
+      "source_hit_files_sample": [
+        "Docs/power/power.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md"
+      ],
+      "risk_flags": []
+    },
+    {
+      "index": 86,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"HeteroHgsPlusDisabled\" /t REG_DWORD /d \"1\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "HeteroHgsPlusDisabled",
+      "type": "REG_DWORD",
+      "requested_data": "1",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 0,
+      "repo_text_hit_count": 0,
+      "source_hit_file_count_sampled": 2,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [],
+      "repo_text_hits": [],
+      "source_hit_files_sample": [
+        "Docs/power/power.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md"
+      ],
+      "risk_flags": []
+    },
+    {
+      "index": 87,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"IpiLastClockOwnerDisable\" /t REG_DWORD /d \"1\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "IpiLastClockOwnerDisable",
+      "type": "REG_DWORD",
+      "requested_data": "1",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 0,
+      "repo_text_hit_count": 0,
+      "source_hit_file_count_sampled": 2,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [],
+      "repo_text_hits": [],
+      "source_hit_files_sample": [
+        "Docs/power/power.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md"
+      ],
+      "risk_flags": []
+    },
+    {
+      "index": 88,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"PowerWatchdogRequestQueueTimeoutMsec\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "PowerWatchdogRequestQueueTimeoutMsec",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 1,
+      "repo_text_hit_count": 1,
+      "source_hit_file_count_sampled": 7,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [
+        {
+          "record_id": "power.control.power-watchdog-timeout-cluster",
+          "tweak_id": "power.control.power-watchdog-timeout-cluster",
+          "record_status": "draft",
+          "promotion_state": "rejected",
+          "apply_allowed": null,
+          "promotion_blockers": [
+            "promotion-disposition-intentional-hold-closed"
+          ],
+          "source": "setting.targets",
+          "record_path": "research/records/power.control.power-watchdog-timeout-cluster.json",
+          "target_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+          "target_value_name": "PowerWatchdogRequestQueueTimeoutMsec",
+          "target_value": null
+        }
+      ],
+      "repo_text_hits": [
+        {
+          "record_id": "power.control.power-watchdog-timeout-cluster",
+          "tweak_id": "power.control.power-watchdog-timeout-cluster",
+          "record_status": "draft",
+          "promotion_state": "rejected",
+          "source": "research/records/power.control.power-watchdog-timeout-cluster.json"
+        }
+      ],
+      "source_hit_files_sample": [
+        "Docs/power/power.md",
+        "research/records/power.control.power-watchdog-timeout-cluster.json",
+        "research/notes/power-control-power-watchdog-timeout-cluster-triage-20260407.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md",
+        "research/notes/power-watchdog-timeout-cluster-pivot-gates-20260422.md",
+        "research/notes/power-kernel-exact-experiment-sheet-20260422.md",
+        "research/notes/power-kernel-hold-lanes-board-20260422.md"
+      ],
+      "risk_flags": [
+        "watchdog/bugcheck-sensitive"
+      ]
+    },
+    {
+      "index": 89,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"PowerWatchdogPoCalloutTimeoutMsec\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "PowerWatchdogPoCalloutTimeoutMsec",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 1,
+      "repo_text_hit_count": 1,
+      "source_hit_file_count_sampled": 7,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [
+        {
+          "record_id": "power.control.power-watchdog-timeout-cluster",
+          "tweak_id": "power.control.power-watchdog-timeout-cluster",
+          "record_status": "draft",
+          "promotion_state": "rejected",
+          "apply_allowed": null,
+          "promotion_blockers": [
+            "promotion-disposition-intentional-hold-closed"
+          ],
+          "source": "setting.targets",
+          "record_path": "research/records/power.control.power-watchdog-timeout-cluster.json",
+          "target_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+          "target_value_name": "PowerWatchdogPoCalloutTimeoutMsec",
+          "target_value": null
+        }
+      ],
+      "repo_text_hits": [
+        {
+          "record_id": "power.control.power-watchdog-timeout-cluster",
+          "tweak_id": "power.control.power-watchdog-timeout-cluster",
+          "record_status": "draft",
+          "promotion_state": "rejected",
+          "source": "research/records/power.control.power-watchdog-timeout-cluster.json"
+        }
+      ],
+      "source_hit_files_sample": [
+        "Docs/power/power.md",
+        "research/records/power.control.power-watchdog-timeout-cluster.json",
+        "research/notes/power-control-power-watchdog-timeout-cluster-triage-20260407.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md",
+        "research/notes/power-watchdog-timeout-cluster-pivot-gates-20260422.md",
+        "research/notes/power-kernel-exact-experiment-sheet-20260422.md",
+        "research/notes/power-kernel-hold-lanes-board-20260422.md"
+      ],
+      "risk_flags": [
+        "watchdog/bugcheck-sensitive"
+      ]
+    },
+    {
+      "index": 90,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"PowerWatchdogPowerOnGdiTimeoutMsec\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "PowerWatchdogPowerOnGdiTimeoutMsec",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 1,
+      "repo_text_hit_count": 1,
+      "source_hit_file_count_sampled": 7,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [
+        {
+          "record_id": "power.control.power-watchdog-timeout-cluster",
+          "tweak_id": "power.control.power-watchdog-timeout-cluster",
+          "record_status": "draft",
+          "promotion_state": "rejected",
+          "apply_allowed": null,
+          "promotion_blockers": [
+            "promotion-disposition-intentional-hold-closed"
+          ],
+          "source": "setting.targets",
+          "record_path": "research/records/power.control.power-watchdog-timeout-cluster.json",
+          "target_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+          "target_value_name": "PowerWatchdogPowerOnGdiTimeoutMsec",
+          "target_value": null
+        }
+      ],
+      "repo_text_hits": [
+        {
+          "record_id": "power.control.power-watchdog-timeout-cluster",
+          "tweak_id": "power.control.power-watchdog-timeout-cluster",
+          "record_status": "draft",
+          "promotion_state": "rejected",
+          "source": "research/records/power.control.power-watchdog-timeout-cluster.json"
+        }
+      ],
+      "source_hit_files_sample": [
+        "Docs/power/power.md",
+        "research/records/power.control.power-watchdog-timeout-cluster.json",
+        "research/notes/power-control-power-watchdog-timeout-cluster-triage-20260407.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md",
+        "research/notes/power-watchdog-timeout-cluster-pivot-gates-20260422.md",
+        "research/notes/power-kernel-exact-experiment-sheet-20260422.md",
+        "research/notes/power-kernel-hold-lanes-board-20260422.md"
+      ],
+      "risk_flags": [
+        "watchdog/bugcheck-sensitive"
+      ]
+    },
+    {
+      "index": 91,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"PowerWatchdogDwmSyncFlushTimeoutMsec\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "PowerWatchdogDwmSyncFlushTimeoutMsec",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 1,
+      "repo_text_hit_count": 1,
+      "source_hit_file_count_sampled": 7,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [
+        {
+          "record_id": "power.control.power-watchdog-timeout-cluster",
+          "tweak_id": "power.control.power-watchdog-timeout-cluster",
+          "record_status": "draft",
+          "promotion_state": "rejected",
+          "apply_allowed": null,
+          "promotion_blockers": [
+            "promotion-disposition-intentional-hold-closed"
+          ],
+          "source": "setting.targets",
+          "record_path": "research/records/power.control.power-watchdog-timeout-cluster.json",
+          "target_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+          "target_value_name": "PowerWatchdogDwmSyncFlushTimeoutMsec",
+          "target_value": null
+        }
+      ],
+      "repo_text_hits": [
+        {
+          "record_id": "power.control.power-watchdog-timeout-cluster",
+          "tweak_id": "power.control.power-watchdog-timeout-cluster",
+          "record_status": "draft",
+          "promotion_state": "rejected",
+          "source": "research/records/power.control.power-watchdog-timeout-cluster.json"
+        }
+      ],
+      "source_hit_files_sample": [
+        "Docs/power/power.md",
+        "research/records/power.control.power-watchdog-timeout-cluster.json",
+        "research/notes/power-control-power-watchdog-timeout-cluster-triage-20260407.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md",
+        "research/notes/power-watchdog-timeout-cluster-pivot-gates-20260422.md",
+        "research/notes/power-kernel-exact-experiment-sheet-20260422.md",
+        "research/notes/power-kernel-hold-lanes-board-20260422.md"
+      ],
+      "risk_flags": [
+        "watchdog/bugcheck-sensitive"
+      ]
+    },
+    {
+      "index": 92,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\" /v \"PowerWatchdogDrvSetMonitorTimeoutMsec\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "PowerWatchdogDrvSetMonitorTimeoutMsec",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 1,
+      "repo_text_hit_count": 1,
+      "source_hit_file_count_sampled": 10,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [
+        {
+          "record_id": "power.control.power-watchdog-timeout-cluster",
+          "tweak_id": "power.control.power-watchdog-timeout-cluster",
+          "record_status": "draft",
+          "promotion_state": "rejected",
+          "apply_allowed": null,
+          "promotion_blockers": [
+            "promotion-disposition-intentional-hold-closed"
+          ],
+          "source": "setting.targets",
+          "record_path": "research/records/power.control.power-watchdog-timeout-cluster.json",
+          "target_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+          "target_value_name": "PowerWatchdogDrvSetMonitorTimeoutMsec",
+          "target_value": null
+        }
+      ],
+      "repo_text_hits": [
+        {
+          "record_id": "power.control.power-watchdog-timeout-cluster",
+          "tweak_id": "power.control.power-watchdog-timeout-cluster",
+          "record_status": "draft",
+          "promotion_state": "rejected",
+          "source": "research/records/power.control.power-watchdog-timeout-cluster.json"
+        }
+      ],
+      "source_hit_files_sample": [
+        "Docs/power/power.md",
+        "research/records/power.control.power-watchdog-timeout-cluster.json",
+        "research/notes/power-control-power-watchdog-timeout-cluster-triage-20260407.md",
+        "research/notes/power-kernel-trial-matrix-20260422.md",
+        "research/notes/power-kernel-symbol-hunt-targets-20260422.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md",
+        "research/notes/power-watchdog-timeout-cluster-pivot-gates-20260422.md",
+        "research/notes/power-kernel-exact-experiment-sheet-20260422.md",
+        "research/notes/power-kernel-research-execution-slate-20260422.md",
+        "research/notes/power-kernel-hold-lanes-board-20260422.md"
+      ],
+      "risk_flags": [
+        "watchdog/bugcheck-sensitive"
+      ]
+    },
+    {
+      "index": 93,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ForceHibernateDisabled\" /v \"Policy\" /t REG_DWORD /d \"1\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ForceHibernateDisabled",
+      "value_name": "Policy",
+      "type": "REG_DWORD",
+      "requested_data": "1",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 0,
+      "repo_text_hit_count": 222,
+      "source_hit_file_count_sampled": 12,
+      "app_surface_text_hit": true,
+      "repo_exact_target_matches": [],
+      "repo_text_hits": [
+        {
+          "record_id": "audio.show-disconnected-devices",
+          "tweak_id": "audio.show-disconnected-devices",
+          "record_status": "validated",
+          "promotion_state": "promoted",
+          "source": "research/records/audio.show-disconnected-devices.review.json"
+        },
+        {
+          "record_id": "audio.show-hidden-devices",
+          "tweak_id": "audio.show-hidden-devices",
+          "record_status": "validated",
+          "promotion_state": "promoted",
+          "source": "research/records/audio.show-hidden-devices.review.json"
+        },
+        {
+          "record_id": "cleanup.memory-dumps",
+          "tweak_id": "cleanup.memory-dumps",
+          "record_status": "review-required",
+          "promotion_state": "rejected",
+          "source": "research/records/cleanup.memory-dumps.review.json"
+        },
+        {
+          "record_id": "cleanup.prefetch-files",
+          "tweak_id": "cleanup.prefetch-files",
+          "record_status": "review-required",
+          "promotion_state": "rejected",
+          "source": "research/records/cleanup.prefetch-files.review.json"
+        },
+        {
+          "record_id": "cleanup.shadow-copies",
+          "tweak_id": "cleanup.shadow-copies",
+          "record_status": "review-required",
+          "promotion_state": "rejected",
+          "source": "research/records/cleanup.shadow-copies.review.json"
+        },
+        {
+          "record_id": "cleanup.temp-files",
+          "tweak_id": "cleanup.temp-files",
+          "record_status": "review-required",
+          "promotion_state": "rejected",
+          "source": "research/records/cleanup.temp-files.review.json"
+        },
+        {
+          "record_id": "cleanup.wer-files",
+          "tweak_id": "cleanup.wer-files",
+          "record_status": "review-required",
+          "promotion_state": "rejected",
+          "source": "research/records/cleanup.wer-files.review.json"
+        },
+        {
+          "record_id": "cleanup.windows-old",
+          "tweak_id": "cleanup.windows-old",
+          "record_status": "review-required",
+          "promotion_state": "rejected",
+          "source": "research/records/cleanup.windows-old.review.json"
+        }
+      ],
+      "source_hit_files_sample": [
+        "app/ViewModels/TweakCategoryPresentation.cs",
+        "app/ViewModels/WinConfigCatalogCategoryViewModel.cs",
+        "app/ViewModels/TweakResearchPresentation.cs",
+        "app/ViewModels/WinConfigCategoryCoverageMapper.cs",
+        "app/ViewModels/WinConfigCatalogPanelViewModel.cs",
+        "app/ViewModels/WorkspaceTweakMetadataApplier.cs",
+        "app/Services/NohutoRepositoryCategoryResolver.cs",
+        "app/Services/TweakInsightFormatter.cs",
+        "app/Services/TweakPromotionGateCatalogLoader.cs",
+        "app/Services/NohutoKeywordCategoryResolver.cs",
+        "app/Services/TweakEvidenceClassCatalogStore.cs",
+        "app/Services/TweakPromotionGateAuditLogWriter.cs"
+      ],
+      "risk_flags": []
+    },
+    {
+      "index": 94,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ModernSleep\" /v \"EnableDsNetRefresh\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ModernSleep",
+      "value_name": "EnableDsNetRefresh",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 0,
+      "repo_text_hit_count": 0,
+      "source_hit_file_count_sampled": 2,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [],
+      "repo_text_hits": [],
+      "source_hit_files_sample": [
+        "Docs/power/power.md",
+        "research/notes/kernel-power-96-key-routing-20260327.md"
+      ],
+      "risk_flags": []
+    },
+    {
+      "index": 95,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ModernSleep\" /v \"EnabledActions\" /t REG_DWORD /d \"0\" / /f",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ModernSleep",
+      "value_name": "EnabledActions",
+      "type": "REG_DWORD",
+      "requested_data": "0",
+      "force_flag_present": true,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 0,
+      "repo_text_hit_count": 1,
+      "source_hit_file_count_sampled": 3,
+      "app_surface_text_hit": false,
+      "repo_exact_target_matches": [],
+      "repo_text_hits": [
+        {
+          "record_id": "power.disable-modern-standby",
+          "tweak_id": "power.disable-modern-standby",
+          "record_status": "deprecated",
+          "promotion_state": "rejected",
+          "source": "research/records/power.disable-modern-standby.json"
+        }
+      ],
+      "source_hit_files_sample": [
+        "Docs/power/power.md",
+        "research/records/power.disable-modern-standby.json",
+        "research/notes/kernel-power-96-key-routing-20260327.md"
+      ],
+      "risk_flags": []
+    },
+    {
+      "index": 96,
+      "raw_command": "reg add \"HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerThrottling\" /v \"PowerThrottlingOff\" /t REG_DWORD /d \"1\"",
+      "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerThrottling",
+      "value_name": "PowerThrottlingOff",
+      "type": "REG_DWORD",
+      "requested_data": "1",
+      "force_flag_present": false,
+      "parse_status": "ok",
+      "repo_exact_target_match_count": 2,
+      "repo_text_hit_count": 1,
+      "source_hit_file_count_sampled": 12,
+      "app_surface_text_hit": true,
+      "repo_exact_target_matches": [
+        {
+          "record_id": "power.disable-power-throttling",
+          "tweak_id": "power.disable-power-throttling",
+          "record_status": "validated",
+          "promotion_state": "promoted",
+          "apply_allowed": null,
+          "promotion_blockers": [],
+          "source": "setting.targets",
+          "record_path": "research/records/power.disable-power-throttling.json",
+          "target_path": "HKLM\\System\\CurrentControlSet\\Control\\Power\\PowerThrottling",
+          "target_value_name": "PowerThrottlingOff",
+          "target_value": null
+        },
+        {
+          "record_id": "power.disable-power-throttling",
+          "tweak_id": "power.disable-power-throttling",
+          "record_status": "validated",
+          "promotion_state": "promoted",
+          "apply_allowed": null,
+          "promotion_blockers": [],
+          "source": "app_current_implementation.writes",
+          "record_path": "research/records/power.disable-power-throttling.json",
+          "target_path": "HKLM\\System\\CurrentControlSet\\Control\\Power\\PowerThrottling",
+          "target_value_name": "PowerThrottlingOff",
+          "target_value": 1
+        }
+      ],
+      "repo_text_hits": [
+        {
+          "record_id": "power.disable-power-throttling",
+          "tweak_id": "power.disable-power-throttling",
+          "record_status": "validated",
+          "promotion_state": "promoted",
+          "source": "research/records/power.disable-power-throttling.json"
+        }
+      ],
+      "source_hit_files_sample": [
+        "engine/Tweaks/Power/PowerSettingsTweaks.cs",
+        "infrastructure/Commands/CommandAllowlist.cs",
+        "Docs/UPSTREAM_TRANCHE_EVALUATION_2026-03-09.md",
+        "Docs/power/power.md",
+        "Docs/tweaks/tweak-provenance-overrides.json",
+        "Docs/tweaks/tweak-provenance.csv",
+        "Docs/tweaks/tweak-provenance.json",
+        "Docs/tweaks/tweak-provenance.md",
+        "Docs/performance/performance.md",
+        "Docs/research/app-surface/validated-registry-values.json",
+        "research/records/power.disable-power-throttling.json",
+        "research/notes/kernel-power-96-key-routing-20260327.md"
+      ],
+      "risk_flags": []
+    }
+  ]
+}

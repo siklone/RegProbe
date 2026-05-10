@@ -10,7 +10,7 @@
     "category": "Developer",
     "area": "Docker Desktop / WSL Integration",
     "scope": "user",
-    "casual_explanation": "Docker Desktop can use the WSL 2 backend on Windows. That usually improves compatibility and developer experience for container workflows.",
+    "casual_explanation": "Docker Desktop can use the WSL 2 backend on Windows. The app writes Docker's documented settings-file field and does not claim a measured performance change.",
     "why_people_change_it": "People enable it to use Docker Desktop with WSL-based development environments.",
     "tradeoffs_overview": "Docker documents the WSL engine as a settings-file field. The app now writes that documented file-backed surface, which is reversible and keeps the backend choice explicit rather than hidden in the registry.",
     "professional_notes": "Docker documents the WSL engine as the modern Windows backend for Docker Desktop. The app now writes wslEngineEnabled under %APPDATA%\\Docker\\settings-store.json instead of the old HKCU\\Software\\Docker Inc.\\Docker Desktop\\UseWSL2 registry value.",

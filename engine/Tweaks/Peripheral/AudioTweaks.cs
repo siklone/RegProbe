@@ -32,28 +32,8 @@ public static class AudioTweaks
     }
 
     /// <summary>
-    /// Disables audio enhancements for all audio devices
-    /// Note: This requires elevation as it modifies HKLM audio device settings
+    /// Checks audio enhancement endpoint flags without blindly mutating protected MMDevices keys.
     /// </summary>
-    public static RegistryValueBatchTweak CreateDisableAudioEnhancementsTweak(IRegistryAccessor registryAccessor)
-    {
-        var entries = new List<RegistryValueBatchEntry>
-        {
-            // Disable exclusive mode for all devices (pattern-based, would need custom implementation)
-            // For now, add common audio enhancement disable keys
-            new RegistryValueBatchEntry(RegistryHive.CurrentUser, @"Software\Microsoft\Windows\CurrentVersion\Audio", "DisableProtectedAudioDG", RegistryValueKind.DWord, 1, RegistryView.Default),
-
-            // Disable audio enhancements globally
-            new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Render", "DisableEnhancements", RegistryValueKind.DWord, 1, RegistryView.Default)
-        };
-
-        return new RegistryValueBatchTweak(
-            id: "peripheral.audio-disable-enhancements",
-            name: "Disable Audio Enhancements",
-            description: "Disables the audio-enhancement flags and exclusive-mode setting touched by this tweak.",
-            risk: TweakRiskLevel.Safe,
-            entries: entries,
-            registryAccessor: registryAccessor,
-            requiresElevation: true);
-    }
+    public static AudioEnhancementsTweak CreateDisableAudioEnhancementsTweak(IRegistryAccessor registryAccessor)
+        => new(registryAccessor);
 }

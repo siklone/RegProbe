@@ -1,0 +1,704 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-07T20:20:00Z",
+  "source_worklist": "registry-research-framework/audit/blocked-worklist.json",
+  "closed_count": 50,
+  "disposition_counts": {
+    "intentional-hold-closed": 18,
+    "non-reversible-or-high-risk-action": 17,
+    "validation-proof-campaign-required": 15
+  },
+  "items": [
+    {
+      "candidate_id": "policy.system.enable-virtualization",
+      "source_file": "research/records/policy.system.enable-virtualization.json",
+      "previous_next_missing_layer": "intentional-hold",
+      "previous_promotion_blockers": [
+        "enable-virtualization-research-only-raw-policy-system-value"
+      ],
+      "promotion_disposition": "rejected",
+      "promotion_disposition_kind": "intentional-hold-closed",
+      "promotion_disposition_reason": "Closed as rejected for app/research-provider promotion because the remaining evidence gap is intentional: current-build exact reads, safe trigger conditions, authoritative semantics, or boot-safe validation are still missing.",
+      "promotion_reopen_criteria": "Reopen only with a safer current-build lane that proves exact target consumption and resolves the listed intentional-hold blockers."
+    },
+    {
+      "candidate_id": "power.control.hiber-file-size-percent",
+      "source_file": "research/records/power.control.hiber-file-size-percent.json",
+      "previous_next_missing_layer": "intentional-hold",
+      "previous_promotion_blockers": [
+        "hiber-file-size-percent-research-only-raw-power-manager-value"
+      ],
+      "promotion_disposition": "rejected",
+      "promotion_disposition_kind": "intentional-hold-closed",
+      "promotion_disposition_reason": "Closed as rejected for app/research-provider promotion because the remaining evidence gap is intentional: current-build exact reads, safe trigger conditions, authoritative semantics, or boot-safe validation are still missing.",
+      "promotion_reopen_criteria": "Reopen only with a safer current-build lane that proves exact target consumption and resolves the listed intentional-hold blockers."
+    },
+    {
+      "candidate_id": "power.control.hibernate-enabled-default",
+      "source_file": "research/records/power.control.hibernate-enabled-default.json",
+      "previous_next_missing_layer": "intentional-hold",
+      "previous_promotion_blockers": [
+        "hibernate-enabled-default-hibernate-trigger-not-available-on-current-vm"
+      ],
+      "promotion_disposition": "rejected",
+      "promotion_disposition_kind": "intentional-hold-closed",
+      "promotion_disposition_reason": "Closed as rejected for app/research-provider promotion because the remaining evidence gap is intentional: current-build exact reads, safe trigger conditions, authoritative semantics, or boot-safe validation are still missing.",
+      "promotion_reopen_criteria": "Reopen only with a safer current-build lane that proves exact target consumption and resolves the listed intentional-hold blockers."
+    },
+    {
+      "candidate_id": "power.control.timer-rebase-threshold-on-drips-exit",
+      "source_file": "research/records/power.control.timer-rebase-threshold-on-drips-exit.json",
+      "previous_next_missing_layer": "intentional-hold",
+      "previous_promotion_blockers": [
+        "timer-rebase-threshold-drips-trigger-not-available-on-current-vm"
+      ],
+      "promotion_disposition": "rejected",
+      "promotion_disposition_kind": "intentional-hold-closed",
+      "promotion_disposition_reason": "Closed as rejected for app/research-provider promotion because the remaining evidence gap is intentional: current-build exact reads, safe trigger conditions, authoritative semantics, or boot-safe validation are still missing.",
+      "promotion_reopen_criteria": "Reopen only with a safer current-build lane that proves exact target consumption and resolves the listed intentional-hold blockers."
+    },
+    {
+      "candidate_id": "power.control.allow-system-required-power-requests",
+      "source_file": "research/records/power.control.allow-system-required-power-requests.json",
+      "previous_next_missing_layer": "intentional-hold",
+      "previous_promotion_blockers": [
+        "intentional-hold",
+        "system-execution-required-no-current-build-registry-seeding-path"
+      ],
+      "promotion_disposition": "rejected",
+      "promotion_disposition_kind": "intentional-hold-closed",
+      "promotion_disposition_reason": "Closed as rejected for app/research-provider promotion because the remaining evidence gap is intentional: current-build exact reads, safe trigger conditions, authoritative semantics, or boot-safe validation are still missing.",
+      "promotion_reopen_criteria": "Reopen only with a safer current-build lane that proves exact target consumption and resolves the listed intentional-hold blockers."
+    },
+    {
+      "candidate_id": "power.control.allow-audio-to-enable-execution-required-power-requests",
+      "source_file": "research/records/power.control.allow-audio-to-enable-execution-required-power-requests.json",
+      "previous_next_missing_layer": "intentional-hold",
+      "previous_promotion_blockers": [
+        "audio-execution-required-no-current-build-registry-seeding-path",
+        "audio-execution-required-no-primary-current-build-doc",
+        "intentional-hold"
+      ],
+      "promotion_disposition": "rejected",
+      "promotion_disposition_kind": "intentional-hold-closed",
+      "promotion_disposition_reason": "Closed as rejected for app/research-provider promotion because the remaining evidence gap is intentional: current-build exact reads, safe trigger conditions, authoritative semantics, or boot-safe validation are still missing.",
+      "promotion_reopen_criteria": "Reopen only with a safer current-build lane that proves exact target consumption and resolves the listed intentional-hold blockers."
+    },
+    {
+      "candidate_id": "power.control.power-request-override-subtree",
+      "source_file": "research/records/power.control.power-request-override-subtree.json",
+      "previous_next_missing_layer": "intentional-hold",
+      "previous_promotion_blockers": [
+        "intentional-hold",
+        "powerrequestoverride-static-context-adjacent-not-leaf-specific",
+        "powerrequestoverride-subtree-live-reader-binding-open-question"
+      ],
+      "promotion_disposition": "rejected",
+      "promotion_disposition_kind": "intentional-hold-closed",
+      "promotion_disposition_reason": "Closed as rejected for app/research-provider promotion because the remaining evidence gap is intentional: current-build exact reads, safe trigger conditions, authoritative semantics, or boot-safe validation are still missing.",
+      "promotion_reopen_criteria": "Reopen only with a safer current-build lane that proves exact target consumption and resolves the listed intentional-hold blockers."
+    },
+    {
+      "candidate_id": "power.session-watchdog-timeouts",
+      "source_file": "research/records/power.session-watchdog-timeouts.json",
+      "previous_next_missing_layer": "intentional-hold",
+      "previous_promotion_blockers": [
+        "power-session-watchdog-timeouts-intentional-hold-validation-environment-limitation",
+        "power-session-watchdog-timeouts-no-current-build-registry-seeding-caller",
+        "power-session-watchdog-timeouts-sleep-side-exact-registry-read-missing"
+      ],
+      "promotion_disposition": "rejected",
+      "promotion_disposition_kind": "intentional-hold-closed",
+      "promotion_disposition_reason": "Closed as rejected for app/research-provider promotion because the remaining evidence gap is intentional: current-build exact reads, safe trigger conditions, authoritative semantics, or boot-safe validation are still missing.",
+      "promotion_reopen_criteria": "Reopen only with a safer current-build lane that proves exact target consumption and resolves the listed intentional-hold blockers."
+    },
+    {
+      "candidate_id": "system.kernel.global-timer-resolution-requests",
+      "source_file": "research/records/system.kernel.global-timer-resolution-requests.json",
+      "previous_next_missing_layer": "intentional-hold",
+      "previous_promotion_blockers": [
+        "global-timer-resolution-clean-wpr-subtree-only-no-value-hit-current-build",
+        "global-timer-resolution-intentional-hold-no-current-build-pivot",
+        "global-timer-resolution-no-primary-current-build-doc"
+      ],
+      "promotion_disposition": "rejected",
+      "promotion_disposition_kind": "intentional-hold-closed",
+      "promotion_disposition_reason": "Closed as rejected for app/research-provider promotion because the remaining evidence gap is intentional: current-build exact reads, safe trigger conditions, authoritative semantics, or boot-safe validation are still missing.",
+      "promotion_reopen_criteria": "Reopen only with a safer current-build lane that proves exact target consumption and resolves the listed intentional-hold blockers."
+    },
+    {
+      "candidate_id": "power.control.power-watchdog-timeout-cluster",
+      "source_file": "research/records/power.control.power-watchdog-timeout-cluster.json",
+      "previous_next_missing_layer": "intentional-hold",
+      "previous_promotion_blockers": [
+        "powerwatchdog-timeout-family-helper-query-only-single-member",
+        "powerwatchdog-timeout-family-intentional-hold-no-current-build-pivot",
+        "powerwatchdog-timeout-family-no-current-build-string-or-symbol-hit",
+        "powerwatchdog-timeout-family-no-primary-current-build-doc"
+      ],
+      "promotion_disposition": "rejected",
+      "promotion_disposition_kind": "intentional-hold-closed",
+      "promotion_disposition_reason": "Closed as rejected for app/research-provider promotion because the remaining evidence gap is intentional: current-build exact reads, safe trigger conditions, authoritative semantics, or boot-safe validation are still missing.",
+      "promotion_reopen_criteria": "Reopen only with a safer current-build lane that proves exact target consumption and resolves the listed intentional-hold blockers."
+    },
+    {
+      "candidate_id": "power.control.ttm-enabled",
+      "source_file": "research/records/power.control.ttm-enabled.json",
+      "previous_next_missing_layer": "intentional-hold",
+      "previous_promotion_blockers": [
+        "ttmenabled-boot-unsafe-dedicated-boot-lane-required",
+        "ttmenabled-boot-unsafe-on-isolated-pilot-profile",
+        "ttmenabled-no-primary-current-build-doc",
+        "ttmenabled-reader-open-question"
+      ],
+      "promotion_disposition": "rejected",
+      "promotion_disposition_kind": "intentional-hold-closed",
+      "promotion_disposition_reason": "Closed as rejected for app/research-provider promotion because the remaining evidence gap is intentional: current-build exact reads, safe trigger conditions, authoritative semantics, or boot-safe validation are still missing.",
+      "promotion_reopen_criteria": "Reopen only with a safer current-build lane that proves exact target consumption and resolves the listed intentional-hold blockers."
+    },
+    {
+      "candidate_id": "power.control.win32k-callout-watchdog-timeout-seconds",
+      "source_file": "research/records/power.control.win32k-callout-watchdog-timeout-seconds.json",
+      "previous_next_missing_layer": "intentional-hold",
+      "previous_promotion_blockers": [
+        "win32k-callout-watchdog-helper-query-only-not-boot-consumer",
+        "win32k-callout-watchdog-intentional-hold-no-current-build-pivot",
+        "win32k-callout-watchdog-no-primary-current-build-doc",
+        "win32k-callout-watchdog-override-semantics-unproven"
+      ],
+      "promotion_disposition": "rejected",
+      "promotion_disposition_kind": "intentional-hold-closed",
+      "promotion_disposition_reason": "Closed as rejected for app/research-provider promotion because the remaining evidence gap is intentional: current-build exact reads, safe trigger conditions, authoritative semantics, or boot-safe validation are still missing.",
+      "promotion_reopen_criteria": "Reopen only with a safer current-build lane that proves exact target consumption and resolves the listed intentional-hold blockers."
+    },
+    {
+      "candidate_id": "power.session-win32-callout-watchdog-bugcheck-enabled",
+      "source_file": "research/records/power.session-win32-callout-watchdog-bugcheck-enabled.json",
+      "previous_next_missing_layer": "intentional-hold",
+      "previous_promotion_blockers": [
+        "win32-callout-watchdog-bugcheck-intentional-hold-adjacent-sibling-without-current-build-pivot",
+        "win32-callout-watchdog-bugcheck-no-primary-current-build-doc",
+        "win32-callout-watchdog-bugcheck-procmon-saveas-timeout-on-bounded-callout-lane",
+        "win32-callout-watchdog-bugcheck-semantics-unproven"
+      ],
+      "promotion_disposition": "rejected",
+      "promotion_disposition_kind": "intentional-hold-closed",
+      "promotion_disposition_reason": "Closed as rejected for app/research-provider promotion because the remaining evidence gap is intentional: current-build exact reads, safe trigger conditions, authoritative semantics, or boot-safe validation are still missing.",
+      "promotion_reopen_criteria": "Reopen only with a safer current-build lane that proves exact target consumption and resolves the listed intentional-hold blockers."
+    },
+    {
+      "candidate_id": "system.kernel-long-dpc-threshold-cluster",
+      "source_file": "research/records/system.kernel-long-dpc-threshold-cluster.json",
+      "previous_next_missing_layer": "intentional-hold",
+      "previous_promotion_blockers": [
+        "long-dpc-threshold-intentional-hold-no-current-build-pivot",
+        "long-dpc-threshold-no-primary-current-build-doc",
+        "long-dpc-threshold-procmon-saveas-timeout-on-dedicated-timer-dpc-stress-lane",
+        "long-dpc-threshold-wpr-boot-zero-exact-target-hits-current-build"
+      ],
+      "promotion_disposition": "rejected",
+      "promotion_disposition_kind": "intentional-hold-closed",
+      "promotion_disposition_reason": "Closed as rejected for app/research-provider promotion because the remaining evidence gap is intentional: current-build exact reads, safe trigger conditions, authoritative semantics, or boot-safe validation are still missing.",
+      "promotion_reopen_criteria": "Reopen only with a safer current-build lane that proves exact target consumption and resolves the listed intentional-hold blockers."
+    },
+    {
+      "candidate_id": "system.kernel.force-bugcheck-for-dpc-watchdog",
+      "source_file": "research/records/system.kernel.force-bugcheck-for-dpc-watchdog.json",
+      "previous_next_missing_layer": "intentional-hold",
+      "previous_promotion_blockers": [
+        "force-bugcheck-dpc-watchdog-intentional-hold-safety-sensitive-without-current-build-pivot",
+        "force-bugcheck-dpc-watchdog-no-primary-current-build-doc",
+        "force-bugcheck-dpc-watchdog-semantics-unproven",
+        "force-bugcheck-dpc-watchdog-wpr-boot-zero-exact-target-hits-current-build"
+      ],
+      "promotion_disposition": "rejected",
+      "promotion_disposition_kind": "intentional-hold-closed",
+      "promotion_disposition_reason": "Closed as rejected for app/research-provider promotion because the remaining evidence gap is intentional: current-build exact reads, safe trigger conditions, authoritative semantics, or boot-safe validation are still missing.",
+      "promotion_reopen_criteria": "Reopen only with a safer current-build lane that proves exact target consumption and resolves the listed intentional-hold blockers."
+    },
+    {
+      "candidate_id": "system.kernel-dpc-watchdog-control-cluster",
+      "source_file": "research/records/system.kernel-dpc-watchdog-control-cluster.json",
+      "previous_next_missing_layer": "intentional-hold",
+      "previous_promotion_blockers": [
+        "dpc-watchdog-control-intentional-hold-no-current-build-pivot",
+        "dpc-watchdog-control-live-zero-state-conflicts-with-repo-docs",
+        "dpc-watchdog-control-no-current-build-persisted-seeding-caller-or-exact-query-arm",
+        "dpc-watchdog-control-no-primary-current-build-doc",
+        "dpc-watchdog-control-wpr-boot-zero-exact-target-hits-current-build"
+      ],
+      "promotion_disposition": "rejected",
+      "promotion_disposition_kind": "intentional-hold-closed",
+      "promotion_disposition_reason": "Closed as rejected for app/research-provider promotion because the remaining evidence gap is intentional: current-build exact reads, safe trigger conditions, authoritative semantics, or boot-safe validation are still missing.",
+      "promotion_reopen_criteria": "Reopen only with a safer current-build lane that proves exact target consumption and resolves the listed intentional-hold blockers."
+    },
+    {
+      "candidate_id": "system.kernel-dpc-watchdog-profile-cluster",
+      "source_file": "research/records/system.kernel-dpc-watchdog-profile-cluster.json",
+      "previous_next_missing_layer": "intentional-hold",
+      "previous_promotion_blockers": [
+        "dpc-watchdog-profile-conditional-init-semantics-unproven",
+        "dpc-watchdog-profile-intentional-hold-mixed-live-state-without-current-build-pivot",
+        "dpc-watchdog-profile-mixed-current-build-state-conflicts-with-repo-docs",
+        "dpc-watchdog-profile-no-persisted-boot-consumer-proof",
+        "dpc-watchdog-profile-no-primary-current-build-doc"
+      ],
+      "promotion_disposition": "rejected",
+      "promotion_disposition_kind": "intentional-hold-closed",
+      "promotion_disposition_reason": "Closed as rejected for app/research-provider promotion because the remaining evidence gap is intentional: current-build exact reads, safe trigger conditions, authoritative semantics, or boot-safe validation are still missing.",
+      "promotion_reopen_criteria": "Reopen only with a safer current-build lane that proves exact target consumption and resolves the listed intentional-hold blockers."
+    },
+    {
+      "candidate_id": "system.kernel.timer-check-flags",
+      "source_file": "research/records/system.kernel.timer-check-flags.json",
+      "previous_next_missing_layer": "intentional-hold",
+      "previous_promotion_blockers": [
+        "timer-check-flags-etw-stackwalk-helper-only-no-target-read",
+        "timer-check-flags-intentional-hold-no-current-build-pivot",
+        "timer-check-flags-modern-bit-semantics-unproven",
+        "timer-check-flags-no-primary-current-build-doc",
+        "timer-check-flags-wpr-boot-zero-exact-target-hits-current-build"
+      ],
+      "promotion_disposition": "rejected",
+      "promotion_disposition_kind": "intentional-hold-closed",
+      "promotion_disposition_reason": "Closed as rejected for app/research-provider promotion because the remaining evidence gap is intentional: current-build exact reads, safe trigger conditions, authoritative semantics, or boot-safe validation are still missing.",
+      "promotion_reopen_criteria": "Reopen only with a safer current-build lane that proves exact target consumption and resolves the listed intentional-hold blockers."
+    },
+    {
+      "candidate_id": "misc.disable-edge-features",
+      "source_file": "research/records/misc.disable-edge-features.review.json",
+      "previous_next_missing_layer": "validation-proof",
+      "previous_promotion_blockers": [
+        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
+        "validation-proof"
+      ],
+      "promotion_disposition": "rejected",
+      "promotion_disposition_kind": "validation-proof-campaign-required",
+      "promotion_disposition_reason": "Closed as rejected from the active promotion blocker queue because the first-party/live card still lacks the required validation proof and cross-layer runtime/static evidence for research-provider promotion.",
+      "promotion_reopen_criteria": "Reopen with a dedicated evidence campaign that adds validation_proof, real runtime trace evidence, static/source evidence, and a verified rollback story before promotion."
+    },
+    {
+      "candidate_id": "misc.disable-office-telemetry",
+      "source_file": "research/records/misc.disable-office-telemetry.review.json",
+      "previous_next_missing_layer": "validation-proof",
+      "previous_promotion_blockers": [
+        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
+        "validation-proof"
+      ],
+      "promotion_disposition": "rejected",
+      "promotion_disposition_kind": "validation-proof-campaign-required",
+      "promotion_disposition_reason": "Closed as rejected from the active promotion blocker queue because the first-party/live card still lacks the required validation proof and cross-layer runtime/static evidence for research-provider promotion.",
+      "promotion_reopen_criteria": "Reopen with a dedicated evidence campaign that adds validation_proof, real runtime trace evidence, static/source evidence, and a verified rollback story before promotion."
+    },
+    {
+      "candidate_id": "misc.disable-onedrive",
+      "source_file": "research/records/misc.disable-onedrive.review.json",
+      "previous_next_missing_layer": "validation-proof",
+      "previous_promotion_blockers": [
+        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
+        "validation-proof"
+      ],
+      "promotion_disposition": "rejected",
+      "promotion_disposition_kind": "validation-proof-campaign-required",
+      "promotion_disposition_reason": "Closed as rejected from the active promotion blocker queue because the first-party/live card still lacks the required validation proof and cross-layer runtime/static evidence for research-provider promotion.",
+      "promotion_reopen_criteria": "Reopen with a dedicated evidence campaign that adds validation_proof, real runtime trace evidence, static/source evidence, and a verified rollback story before promotion."
+    },
+    {
+      "candidate_id": "misc.disable-visual-studio-telemetry",
+      "source_file": "research/records/misc.disable-visual-studio-telemetry.review.json",
+      "previous_next_missing_layer": "validation-proof",
+      "previous_promotion_blockers": [
+        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
+        "validation-proof"
+      ],
+      "promotion_disposition": "rejected",
+      "promotion_disposition_kind": "validation-proof-campaign-required",
+      "promotion_disposition_reason": "Closed as rejected from the active promotion blocker queue because the first-party/live card still lacks the required validation proof and cross-layer runtime/static evidence for research-provider promotion.",
+      "promotion_reopen_criteria": "Reopen with a dedicated evidence campaign that adds validation_proof, real runtime trace evidence, static/source evidence, and a verified rollback story before promotion."
+    },
+    {
+      "candidate_id": "misc.disable-vscode-telemetry",
+      "source_file": "research/records/misc.disable-vscode-telemetry.review.json",
+      "previous_next_missing_layer": "validation-proof",
+      "previous_promotion_blockers": [
+        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
+        "validation-proof"
+      ],
+      "promotion_disposition": "rejected",
+      "promotion_disposition_kind": "validation-proof-campaign-required",
+      "promotion_disposition_reason": "Closed as rejected from the active promotion blocker queue because the first-party/live card still lacks the required validation proof and cross-layer runtime/static evidence for research-provider promotion.",
+      "promotion_reopen_criteria": "Reopen with a dedicated evidence campaign that adds validation_proof, real runtime trace evidence, static/source evidence, and a verified rollback story before promotion."
+    },
+    {
+      "candidate_id": "misc.optimize-7zip-settings",
+      "source_file": "research/records/misc.optimize-7zip-settings.review.json",
+      "previous_next_missing_layer": "validation-proof",
+      "previous_promotion_blockers": [
+        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
+        "validation-proof"
+      ],
+      "promotion_disposition": "rejected",
+      "promotion_disposition_kind": "validation-proof-campaign-required",
+      "promotion_disposition_reason": "Closed as rejected from the active promotion blocker queue because the first-party/live card still lacks the required validation proof and cross-layer runtime/static evidence for research-provider promotion.",
+      "promotion_reopen_criteria": "Reopen with a dedicated evidence campaign that adds validation_proof, real runtime trace evidence, static/source evidence, and a verified rollback story before promotion."
+    },
+    {
+      "candidate_id": "peripheral.audio-disable-enhancements",
+      "source_file": "research/records/peripheral.audio-disable-enhancements.review.json",
+      "previous_next_missing_layer": "validation-proof",
+      "previous_promotion_blockers": [
+        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
+        "validation-proof"
+      ],
+      "promotion_disposition": "rejected",
+      "promotion_disposition_kind": "validation-proof-campaign-required",
+      "promotion_disposition_reason": "Closed as rejected from the active promotion blocker queue because the first-party/live card still lacks the required validation proof and cross-layer runtime/static evidence for research-provider promotion.",
+      "promotion_reopen_criteria": "Reopen with a dedicated evidence campaign that adds validation_proof, real runtime trace evidence, static/source evidence, and a verified rollback story before promotion."
+    },
+    {
+      "candidate_id": "peripheral.keyboard-disable-language-hotkey",
+      "source_file": "research/records/peripheral.keyboard-disable-language-hotkey.review.json",
+      "previous_next_missing_layer": "validation-proof",
+      "previous_promotion_blockers": [
+        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
+        "validation-proof"
+      ],
+      "promotion_disposition": "rejected",
+      "promotion_disposition_kind": "validation-proof-campaign-required",
+      "promotion_disposition_reason": "Closed as rejected from the active promotion blocker queue because the first-party/live card still lacks the required validation proof and cross-layer runtime/static evidence for research-provider promotion.",
+      "promotion_reopen_criteria": "Reopen with a dedicated evidence campaign that adds validation_proof, real runtime trace evidence, static/source evidence, and a verified rollback story before promotion."
+    },
+    {
+      "candidate_id": "peripheral.keyboard-optimize-repeat",
+      "source_file": "research/records/peripheral.keyboard-optimize-repeat.review.json",
+      "previous_next_missing_layer": "validation-proof",
+      "previous_promotion_blockers": [
+        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
+        "validation-proof"
+      ],
+      "promotion_disposition": "rejected",
+      "promotion_disposition_kind": "validation-proof-campaign-required",
+      "promotion_disposition_reason": "Closed as rejected from the active promotion blocker queue because the first-party/live card still lacks the required validation proof and cross-layer runtime/static evidence for research-provider promotion.",
+      "promotion_reopen_criteria": "Reopen with a dedicated evidence campaign that adds validation_proof, real runtime trace evidence, static/source evidence, and a verified rollback story before promotion."
+    },
+    {
+      "candidate_id": "peripheral.mouse-disable-acceleration",
+      "source_file": "research/records/peripheral.mouse-disable-acceleration.review.json",
+      "previous_next_missing_layer": "validation-proof",
+      "previous_promotion_blockers": [
+        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
+        "validation-proof"
+      ],
+      "promotion_disposition": "rejected",
+      "promotion_disposition_kind": "validation-proof-campaign-required",
+      "promotion_disposition_reason": "Closed as rejected from the active promotion blocker queue because the first-party/live card still lacks the required validation proof and cross-layer runtime/static evidence for research-provider promotion.",
+      "promotion_reopen_criteria": "Reopen with a dedicated evidence campaign that adds validation_proof, real runtime trace evidence, static/source evidence, and a verified rollback story before promotion."
+    },
+    {
+      "candidate_id": "peripheral.mouse-disable-throttle",
+      "source_file": "research/records/peripheral.mouse-disable-throttle.review.json",
+      "previous_next_missing_layer": "validation-proof",
+      "previous_promotion_blockers": [
+        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
+        "validation-proof"
+      ],
+      "promotion_disposition": "rejected",
+      "promotion_disposition_kind": "validation-proof-campaign-required",
+      "promotion_disposition_reason": "Closed as rejected from the active promotion blocker queue because the first-party/live card still lacks the required validation proof and cross-layer runtime/static evidence for research-provider promotion.",
+      "promotion_reopen_criteria": "Reopen with a dedicated evidence campaign that adds validation_proof, real runtime trace evidence, static/source evidence, and a verified rollback story before promotion."
+    },
+    {
+      "candidate_id": "power.disable-superfetch",
+      "source_file": "research/records/power.disable-superfetch.review.json",
+      "previous_next_missing_layer": "validation-proof",
+      "previous_promotion_blockers": [
+        "The card still lives only in the first-party provider and has not been promoted into the research-provider surface.",
+        "validation-proof"
+      ],
+      "promotion_disposition": "rejected",
+      "promotion_disposition_kind": "validation-proof-campaign-required",
+      "promotion_disposition_reason": "Closed as rejected from the active promotion blocker queue because the first-party/live card still lacks the required validation proof and cross-layer runtime/static evidence for research-provider promotion.",
+      "promotion_reopen_criteria": "Reopen with a dedicated evidence campaign that adds validation_proof, real runtime trace evidence, static/source evidence, and a verified rollback story before promotion."
+    },
+    {
+      "candidate_id": "cleanup.component-store",
+      "source_file": "research/records/cleanup.component-store.review.json",
+      "previous_next_missing_layer": "validation-proof",
+      "previous_promotion_blockers": [
+        "The card still lives only in the first-party cleanup provider and has not been promoted into the research-provider surface.",
+        "This is an on-demand maintenance action with no rollback support.",
+        "validation-proof"
+      ],
+      "promotion_disposition": "rejected",
+      "promotion_disposition_kind": "non-reversible-or-high-risk-action",
+      "promotion_disposition_reason": "Closed as rejected for research-provider promotion because the live action is one-shot, destructive, high-risk, reboot-sensitive, or lacks a rollback story suitable for a validated tweak card.",
+      "promotion_reopen_criteria": "Reopen only if the app gains a verified rollback/snapshot contract and dedicated validation proof for the exact action."
+    },
+    {
+      "candidate_id": "cleanup.directx-shader-cache",
+      "source_file": "research/records/cleanup.directx-shader-cache.review.json",
+      "previous_next_missing_layer": "validation-proof",
+      "previous_promotion_blockers": [
+        "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
+        "This is a maintenance action with no rollback support.",
+        "validation-proof"
+      ],
+      "promotion_disposition": "rejected",
+      "promotion_disposition_kind": "non-reversible-or-high-risk-action",
+      "promotion_disposition_reason": "Closed as rejected for research-provider promotion because the live action is one-shot, destructive, high-risk, reboot-sensitive, or lacks a rollback story suitable for a validated tweak card.",
+      "promotion_reopen_criteria": "Reopen only if the app gains a verified rollback/snapshot contract and dedicated validation proof for the exact action."
+    },
+    {
+      "candidate_id": "cleanup.eventlog-system",
+      "source_file": "research/records/cleanup.eventlog-system.review.json",
+      "previous_next_missing_layer": "validation-proof",
+      "previous_promotion_blockers": [
+        "Clearing the event log has no rollback path.",
+        "The card has not yet been promoted from the first-party system provider into the research-provider surface.",
+        "validation-proof"
+      ],
+      "promotion_disposition": "rejected",
+      "promotion_disposition_kind": "non-reversible-or-high-risk-action",
+      "promotion_disposition_reason": "Closed as rejected for research-provider promotion because the live action is one-shot, destructive, high-risk, reboot-sensitive, or lacks a rollback story suitable for a validated tweak card.",
+      "promotion_reopen_criteria": "Reopen only if the app gains a verified rollback/snapshot contract and dedicated validation proof for the exact action."
+    },
+    {
+      "candidate_id": "cleanup.font-cache",
+      "source_file": "research/records/cleanup.font-cache.review.json",
+      "previous_next_missing_layer": "validation-proof",
+      "previous_promotion_blockers": [
+        "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
+        "This is a maintenance action with no rollback support.",
+        "validation-proof"
+      ],
+      "promotion_disposition": "rejected",
+      "promotion_disposition_kind": "non-reversible-or-high-risk-action",
+      "promotion_disposition_reason": "Closed as rejected for research-provider promotion because the live action is one-shot, destructive, high-risk, reboot-sensitive, or lacks a rollback story suitable for a validated tweak card.",
+      "promotion_reopen_criteria": "Reopen only if the app gains a verified rollback/snapshot contract and dedicated validation proof for the exact action."
+    },
+    {
+      "candidate_id": "cleanup.memory-dumps",
+      "source_file": "research/records/cleanup.memory-dumps.review.json",
+      "previous_next_missing_layer": "validation-proof",
+      "previous_promotion_blockers": [
+        "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
+        "This is a maintenance action with no rollback support.",
+        "validation-proof"
+      ],
+      "promotion_disposition": "rejected",
+      "promotion_disposition_kind": "non-reversible-or-high-risk-action",
+      "promotion_disposition_reason": "Closed as rejected for research-provider promotion because the live action is one-shot, destructive, high-risk, reboot-sensitive, or lacks a rollback story suitable for a validated tweak card.",
+      "promotion_reopen_criteria": "Reopen only if the app gains a verified rollback/snapshot contract and dedicated validation proof for the exact action."
+    },
+    {
+      "candidate_id": "cleanup.prefetch-files",
+      "source_file": "research/records/cleanup.prefetch-files.review.json",
+      "previous_next_missing_layer": "validation-proof",
+      "previous_promotion_blockers": [
+        "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
+        "This is a maintenance action with no rollback support.",
+        "validation-proof"
+      ],
+      "promotion_disposition": "rejected",
+      "promotion_disposition_kind": "non-reversible-or-high-risk-action",
+      "promotion_disposition_reason": "Closed as rejected for research-provider promotion because the live action is one-shot, destructive, high-risk, reboot-sensitive, or lacks a rollback story suitable for a validated tweak card.",
+      "promotion_reopen_criteria": "Reopen only if the app gains a verified rollback/snapshot contract and dedicated validation proof for the exact action."
+    },
+    {
+      "candidate_id": "cleanup.product-key",
+      "source_file": "research/records/cleanup.product-key.review.json",
+      "previous_next_missing_layer": "validation-proof",
+      "previous_promotion_blockers": [
+        "The card has not yet been promoted into the research-provider surface.",
+        "This is a one-shot cleanup action without automatic rollback.",
+        "validation-proof"
+      ],
+      "promotion_disposition": "rejected",
+      "promotion_disposition_kind": "non-reversible-or-high-risk-action",
+      "promotion_disposition_reason": "Closed as rejected for research-provider promotion because the live action is one-shot, destructive, high-risk, reboot-sensitive, or lacks a rollback story suitable for a validated tweak card.",
+      "promotion_reopen_criteria": "Reopen only if the app gains a verified rollback/snapshot contract and dedicated validation proof for the exact action."
+    },
+    {
+      "candidate_id": "cleanup.recycle-bin",
+      "source_file": "research/records/cleanup.recycle-bin.review.json",
+      "previous_next_missing_layer": "validation-proof",
+      "previous_promotion_blockers": [
+        "The card has not yet been promoted into the research-provider surface.",
+        "This is a one-shot destructive cleanup action without rollback.",
+        "validation-proof"
+      ],
+      "promotion_disposition": "rejected",
+      "promotion_disposition_kind": "non-reversible-or-high-risk-action",
+      "promotion_disposition_reason": "Closed as rejected for research-provider promotion because the live action is one-shot, destructive, high-risk, reboot-sensitive, or lacks a rollback story suitable for a validated tweak card.",
+      "promotion_reopen_criteria": "Reopen only if the app gains a verified rollback/snapshot contract and dedicated validation proof for the exact action."
+    },
+    {
+      "candidate_id": "cleanup.shadow-copies",
+      "source_file": "research/records/cleanup.shadow-copies.review.json",
+      "previous_next_missing_layer": "validation-proof",
+      "previous_promotion_blockers": [
+        "The card has not yet been promoted into the research-provider surface.",
+        "This is a destructive cleanup action without rollback.",
+        "validation-proof"
+      ],
+      "promotion_disposition": "rejected",
+      "promotion_disposition_kind": "non-reversible-or-high-risk-action",
+      "promotion_disposition_reason": "Closed as rejected for research-provider promotion because the live action is one-shot, destructive, high-risk, reboot-sensitive, or lacks a rollback story suitable for a validated tweak card.",
+      "promotion_reopen_criteria": "Reopen only if the app gains a verified rollback/snapshot contract and dedicated validation proof for the exact action."
+    },
+    {
+      "candidate_id": "cleanup.temp-files",
+      "source_file": "research/records/cleanup.temp-files.review.json",
+      "previous_next_missing_layer": "validation-proof",
+      "previous_promotion_blockers": [
+        "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
+        "This is a maintenance action with no rollback support.",
+        "validation-proof"
+      ],
+      "promotion_disposition": "rejected",
+      "promotion_disposition_kind": "non-reversible-or-high-risk-action",
+      "promotion_disposition_reason": "Closed as rejected for research-provider promotion because the live action is one-shot, destructive, high-risk, reboot-sensitive, or lacks a rollback story suitable for a validated tweak card.",
+      "promotion_reopen_criteria": "Reopen only if the app gains a verified rollback/snapshot contract and dedicated validation proof for the exact action."
+    },
+    {
+      "candidate_id": "cleanup.thumbnail-cache",
+      "source_file": "research/records/cleanup.thumbnail-cache.review.json",
+      "previous_next_missing_layer": "validation-proof",
+      "previous_promotion_blockers": [
+        "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
+        "This is a maintenance action with no rollback support.",
+        "validation-proof"
+      ],
+      "promotion_disposition": "rejected",
+      "promotion_disposition_kind": "non-reversible-or-high-risk-action",
+      "promotion_disposition_reason": "Closed as rejected for research-provider promotion because the live action is one-shot, destructive, high-risk, reboot-sensitive, or lacks a rollback story suitable for a validated tweak card.",
+      "promotion_reopen_criteria": "Reopen only if the app gains a verified rollback/snapshot contract and dedicated validation proof for the exact action."
+    },
+    {
+      "candidate_id": "cleanup.wer-files",
+      "source_file": "research/records/cleanup.wer-files.review.json",
+      "previous_next_missing_layer": "validation-proof",
+      "previous_promotion_blockers": [
+        "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
+        "This is a maintenance action with no rollback support.",
+        "validation-proof"
+      ],
+      "promotion_disposition": "rejected",
+      "promotion_disposition_kind": "non-reversible-or-high-risk-action",
+      "promotion_disposition_reason": "Closed as rejected for research-provider promotion because the live action is one-shot, destructive, high-risk, reboot-sensitive, or lacks a rollback story suitable for a validated tweak card.",
+      "promotion_reopen_criteria": "Reopen only if the app gains a verified rollback/snapshot contract and dedicated validation proof for the exact action."
+    },
+    {
+      "candidate_id": "cleanup.windows-old",
+      "source_file": "research/records/cleanup.windows-old.review.json",
+      "previous_next_missing_layer": "validation-proof",
+      "previous_promotion_blockers": [
+        "Deleting Windows.old has no rollback path through the app.",
+        "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
+        "validation-proof"
+      ],
+      "promotion_disposition": "rejected",
+      "promotion_disposition_kind": "non-reversible-or-high-risk-action",
+      "promotion_disposition_reason": "Closed as rejected for research-provider promotion because the live action is one-shot, destructive, high-risk, reboot-sensitive, or lacks a rollback story suitable for a validated tweak card.",
+      "promotion_reopen_criteria": "Reopen only if the app gains a verified rollback/snapshot contract and dedicated validation proof for the exact action."
+    },
+    {
+      "candidate_id": "cleanup.windows-update-cache",
+      "source_file": "research/records/cleanup.windows-update-cache.review.json",
+      "previous_next_missing_layer": "validation-proof",
+      "previous_promotion_blockers": [
+        "The card has not yet been promoted from the first-party cleanup provider into the research-provider surface.",
+        "This is a maintenance action with no rollback support.",
+        "validation-proof"
+      ],
+      "promotion_disposition": "rejected",
+      "promotion_disposition_kind": "non-reversible-or-high-risk-action",
+      "promotion_disposition_reason": "Closed as rejected for research-provider promotion because the live action is one-shot, destructive, high-risk, reboot-sensitive, or lacks a rollback story suitable for a validated tweak card.",
+      "promotion_reopen_criteria": "Reopen only if the app gains a verified rollback/snapshot contract and dedicated validation proof for the exact action."
+    },
+    {
+      "candidate_id": "network.flush-dns-cache",
+      "source_file": "research/records/network.flush-dns-cache.review.json",
+      "previous_next_missing_layer": "validation-proof",
+      "previous_promotion_blockers": [
+        "The card still ships only as a first-party network utility and has not been promoted into the research-provider surface.",
+        "This is a one-shot troubleshooting action without rollback.",
+        "validation-proof"
+      ],
+      "promotion_disposition": "rejected",
+      "promotion_disposition_kind": "non-reversible-or-high-risk-action",
+      "promotion_disposition_reason": "Closed as rejected for research-provider promotion because the live action is one-shot, destructive, high-risk, reboot-sensitive, or lacks a rollback story suitable for a validated tweak card.",
+      "promotion_reopen_criteria": "Reopen only if the app gains a verified rollback/snapshot contract and dedicated validation proof for the exact action."
+    },
+    {
+      "candidate_id": "network.reset-winsock",
+      "source_file": "research/records/network.reset-winsock.review.json",
+      "previous_next_missing_layer": "validation-proof",
+      "previous_promotion_blockers": [
+        "The command is a repair action that usually expects reboot and does not support rollback.",
+        "Tweak provenance still marks network.reset-winsock as category-fallback and review-only.",
+        "validation-proof"
+      ],
+      "promotion_disposition": "rejected",
+      "promotion_disposition_kind": "non-reversible-or-high-risk-action",
+      "promotion_disposition_reason": "Closed as rejected for research-provider promotion because the live action is one-shot, destructive, high-risk, reboot-sensitive, or lacks a rollback story suitable for a validated tweak card.",
+      "promotion_reopen_criteria": "Reopen only if the app gains a verified rollback/snapshot contract and dedicated validation proof for the exact action."
+    },
+    {
+      "candidate_id": "power.disable-cpu-parking",
+      "source_file": "research/records/power.disable-cpu-parking.review.json",
+      "previous_next_missing_layer": "validation-proof",
+      "previous_promotion_blockers": [
+        "The card has not yet been promoted from the first-party power provider into the research-provider surface.",
+        "This review pass documents the behavior but does not yet publish it as a validated research card.",
+        "validation-proof"
+      ],
+      "promotion_disposition": "rejected",
+      "promotion_disposition_kind": "validation-proof-campaign-required",
+      "promotion_disposition_reason": "Closed as rejected from the active promotion blocker queue because the first-party/live card still lacks the required validation proof and cross-layer runtime/static evidence for research-provider promotion.",
+      "promotion_reopen_criteria": "Reopen with a dedicated evidence campaign that adds validation_proof, real runtime trace evidence, static/source evidence, and a verified rollback story before promotion."
+    },
+    {
+      "candidate_id": "power.disable-hibernation",
+      "source_file": "research/records/power.disable-hibernation.review.json",
+      "previous_next_missing_layer": "validation-proof",
+      "previous_promotion_blockers": [
+        "The card has not yet been promoted from the first-party power provider into the research-provider surface.",
+        "This review pass documents the behavior but does not yet publish it as a validated research card.",
+        "validation-proof"
+      ],
+      "promotion_disposition": "rejected",
+      "promotion_disposition_kind": "validation-proof-campaign-required",
+      "promotion_disposition_reason": "Closed as rejected from the active promotion blocker queue because the first-party/live card still lacks the required validation proof and cross-layer runtime/static evidence for research-provider promotion.",
+      "promotion_reopen_criteria": "Reopen with a dedicated evidence campaign that adds validation_proof, real runtime trace evidence, static/source evidence, and a verified rollback story before promotion."
+    },
+    {
+      "candidate_id": "power.disable-usb-selective-suspend",
+      "source_file": "research/records/power.disable-usb-selective-suspend.review.json",
+      "previous_next_missing_layer": "validation-proof",
+      "previous_promotion_blockers": [
+        "The card has not yet been promoted from the first-party power provider into the research-provider surface.",
+        "This review pass documents the behavior but does not yet publish it as a validated research card.",
+        "validation-proof"
+      ],
+      "promotion_disposition": "rejected",
+      "promotion_disposition_kind": "validation-proof-campaign-required",
+      "promotion_disposition_reason": "Closed as rejected from the active promotion blocker queue because the first-party/live card still lacks the required validation proof and cross-layer runtime/static evidence for research-provider promotion.",
+      "promotion_reopen_criteria": "Reopen with a dedicated evidence campaign that adds validation_proof, real runtime trace evidence, static/source evidence, and a verified rollback story before promotion."
+    },
+    {
+      "candidate_id": "security.disable-uac",
+      "source_file": "research/records/security.disable-uac.review.json",
+      "previous_next_missing_layer": "validation-proof",
+      "previous_promotion_blockers": [
+        "The action is high risk and reboot-sensitive, so it should not be promoted without stronger upstream provenance and runtime confidence.",
+        "Tweak provenance still marks security.disable-uac as category-fallback and review-only.",
+        "validation-proof"
+      ],
+      "promotion_disposition": "rejected",
+      "promotion_disposition_kind": "non-reversible-or-high-risk-action",
+      "promotion_disposition_reason": "Closed as rejected for research-provider promotion because the live action is one-shot, destructive, high-risk, reboot-sensitive, or lacks a rollback story suitable for a validated tweak card.",
+      "promotion_reopen_criteria": "Reopen only if the app gains a verified rollback/snapshot contract and dedicated validation proof for the exact action."
+    }
+  ]
+}

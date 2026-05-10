@@ -66,7 +66,7 @@ Runner coverage enforcement is config-driven.
 
 Current policy file:
 
-- [runner-coverage-policy.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/config/runner-coverage-policy.json)
+- [runner-coverage-policy.json](../config/runner-coverage-policy.json)
 
 Default rule:
 
@@ -74,7 +74,7 @@ Default rule:
 - if `boot_phase_relevant = true`, require the same even when the layer label is incomplete
 - `user-mode` records may remain optional or staged
 
-Enforcement lives in [v31_pipeline.py](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/pipeline/v31_pipeline.py). Resolver scripts stay advisory.
+Enforcement lives in [v31_pipeline.py](../pipeline/v31_pipeline.py). Resolver scripts stay advisory.
 
 ## Collection Modes
 
@@ -106,7 +106,7 @@ If rollback happens later for an evidence run, preserve the trail:
 
 All repo-tracked VMware scripts should resolve credentials through:
 
-- [scripts/vm/_vmrun-common.ps1](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/scripts/vm/_vmrun-common.ps1)
+- [scripts/vm/_vmrun-common.ps1](../../scripts/vm/_vmrun-common.ps1)
 
 Resolution order:
 
@@ -126,11 +126,11 @@ Public artifact sanitization is config-driven.
 
 Script:
 
-- [sanitize_public_artifacts.ps1](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/scripts/sanitize_public_artifacts.ps1)
+- [sanitize_public_artifacts.ps1](../../scripts/sanitize_public_artifacts.ps1)
 
 Config:
 
-- [artifact-sanitization-rules.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/config/artifact-sanitization-rules.json)
+- [artifact-sanitization-rules.json](../config/artifact-sanitization-rules.json)
 
 Supported rule types:
 
@@ -179,8 +179,8 @@ The pipeline now also publishes second-order research metadata instead of keepin
 
 Generated surfaces:
 
-- [regression-history.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/research/regression-history.json)
-- [evidence-not-found/index.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/research/evidence-not-found/index.json)
+- [regression-history.json](../../research/regression-history.json)
+- [evidence-not-found/index.json](../../research/evidence-not-found/index.json)
 
 Behavior lanes can now distinguish:
 

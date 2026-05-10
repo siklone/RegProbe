@@ -68,6 +68,16 @@ public sealed class CommandAllowlist
             allowlist.Add(new[] { "delete", keyPath, "/v", valueName, "/f" });
         }
 
+        static void AddRegMultiSzRule(List<string[]> allowlist, string keyPath, string valueName, params string[] values)
+        {
+            foreach (var value in values)
+            {
+                allowlist.Add(new[] { "add", keyPath, "/v", valueName, "/t", "REG_MULTI_SZ", "/d", value, "/f" });
+            }
+
+            allowlist.Add(new[] { "delete", keyPath, "/v", valueName, "/f" });
+        }
+
         AddRegDwordRule(regAllowlist, @"HKCU\Software\Policies\Microsoft\Windows\Explorer", "DisableSearchHistory", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKCU\Software\Policies\Microsoft\Windows\Explorer", "DisableSearchBoxSuggestions", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKCU\Software\Policies\Microsoft\Windows\Explorer", "HideRecommendedSection", "0", "1", "2");
@@ -90,16 +100,29 @@ public sealed class CommandAllowlist
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\DataCollection", "DisableDiagnosticDataViewer", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\DataCollection", "DoNotShowFeedbackNotifications", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\DataCollection", "DisableOneSettingsDownloads", "0", "1", "2");
+        AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\DataCollection", "DisableTelemetryOptInChangeNotification", "0", "1");
+        AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\DataCollection", "DisableTelemetryOptInSettingsUx", "0", "1");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\DataCollection", "LimitDiagnosticLogCollection", "0", "1");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\DataCollection", "LimitDumpCollection", "0", "1");
+        AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\DataCollection", "AllowTelemetry", "0", "1", "3");
+        AddRegDwordRule(regAllowlist, @"HKLM\SOFTWARE\Policies\Microsoft\Windows Defender", "HideExclusionsFromLocalAdmins", "0", "1");
+        AddRegDwordRule(regAllowlist, @"HKLM\SOFTWARE\Policies\Microsoft\Windows Defender", "ThreatFileHashLogging", "0", "1");
+        AddRegDwordRule(regAllowlist, @"HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet", "SpyNetReporting", "0", "1", "2");
+        AddRegDwordRule(regAllowlist, @"HKLM\SOFTWARE\Policies\Microsoft\Windows Defender\Spynet", "SubmitSamplesConsent", "0", "1", "2", "3");
+        AddRegDwordRule(regAllowlist, @"HKLM\SOFTWARE\Policies\Microsoft\Windows Defender Security Center\Notifications", "DisableEnhancedNotifications", "0", "1");
+        AddRegDwordRule(regAllowlist, @"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "ConsentPromptBehaviorAdmin", "0", "1", "2", "3", "4", "5");
+        AddRegDwordRule(regAllowlist, @"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "PromptOnSecureDesktop", "0", "1");
         AddRegDwordRule(regAllowlist, @"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "VerboseStatus", "0", "1", "2");
         AddRegSzRule(regAllowlist, @"HKLM\Software\Microsoft\Windows\CurrentVersion\CapabilityAccessManager\ConsentStore\location", "Value", "Allow", "Deny");
         AddRegDwordRule(regAllowlist, @"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\AppModelUnlock", "AllowDevelopmentWithoutDevLicense", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\System", "AllowClipboardHistory", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\System", "AllowCrossDeviceClipboard", "0", "1", "2");
+        AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\System", "EnableActivityFeed", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\System", "EnableFontProviders", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\System", "EnableMmx", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\System", "NoLocalPasswordResetQuestions", "0", "1", "2");
+        AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\System", "PublishUserActivities", "0", "1", "2");
+        AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\System", "UploadUserActivities", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\NetCache", "Enabled", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\DWM", "DisallowAnimations", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\Appx", "AllowAutomaticAppArchiving", "0", "1", "2");
@@ -113,10 +136,40 @@ public sealed class CommandAllowlist
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\AppCompat", "DisableApplicationFootprint", "0", "1");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\AppCompat", "DisableInstallTracing", "0", "1");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\AppCompat", "DisableWin32AppBackup", "0", "1");
+        AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Biometrics", "Enabled", "0", "1");
+        AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Biometrics\Credential Provider", "Enabled", "0", "1");
+        AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Biometrics\Credential Provider", "Domain Accounts", "0", "1");
         AddRegDwordRule(regAllowlist, @"HKLM\SOFTWARE\Policies\Microsoft\Dsh", "AllowNewsAndInterests", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\StorageSense", "AllowStorageSenseGlobal", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\StorageSense", "AllowStorageSenseTemporaryFilesCleanup", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\CredUI", "DisablePasswordReveal", "0", "1", "2");
+        AddRegDwordRule(regAllowlist, @"HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\CredUI", "EnableSecureCredentialPrompting", "1");
+        foreach (var valueName in new[]
+                 {
+                     "DisableSettingSync",
+                     "DisableAppSyncSettingSync",
+                     "DisableApplicationSettingSync",
+                     "DisableCredentialsSettingSync",
+                     "DisablePersonalizationSettingSync",
+                     "DisableDesktopThemeSettingSync",
+                     "DisableStartLayoutSettingSync",
+                     "DisableWebBrowserSettingSync",
+                     "DisableWindowsSettingSync",
+                     "DisableSettingSyncUserOverride",
+                     "DisableAppSyncSettingSyncUserOverride",
+                     "DisableApplicationSettingSyncUserOverride",
+                     "DisableCredentialsSettingSyncUserOverride",
+                     "DisablePersonalizationSettingSyncUserOverride",
+                     "DisableDesktopThemeSettingSyncUserOverride",
+                     "DisableStartLayoutSettingSyncUserOverride",
+                     "DisableWebBrowserSettingSyncUserOverride",
+                     "DisableWindowsSettingSyncUserOverride",
+                     "DisableSyncOnPaidNetwork"
+                 })
+        {
+            AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\SettingSync", valueName, "0", "1", "2");
+        }
+        AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Camera", "AllowCamera", "0", "1");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\AppPrivacy", "LetAppsAccessAccountInfo", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\AppPrivacy", "LetAppsAccessBackgroundSpatialPerception", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\AppPrivacy", "LetAppsAccessCalendar", "0", "1", "2");
@@ -142,16 +195,31 @@ public sealed class CommandAllowlist
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\AppPrivacy", "LetAppsRunInBackground", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\AppPrivacy", "LetAppsSyncWithDevices", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\FileHistory", "Disabled", "0", "1");
+        AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows NT\SystemRestore", "DisableSR", "0", "1");
+        AddRegDwordRule(regAllowlist, @"HKLM\SOFTWARE\Policies\Microsoft\WindowsFirewall\DomainProfile", "EnableFirewall", "0", "1");
+        AddRegDwordRule(regAllowlist, @"HKLM\SOFTWARE\Policies\Microsoft\WindowsFirewall\StandardProfile", "EnableFirewall", "0", "1");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\LocationAndSensors", "DisableLocation", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\LocationAndSensors", "DisableLocationScripting", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\LocationAndSensors", "DisableSensors", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\LocationAndSensors", "DisableWindowsLocationProvider", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\Messaging", "AllowMessageSync", "0", "1", "2");
+        AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\DriverSearching", "DontSearchWindowsUpdate", "0", "1");
+        AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\DriverSearching", "SearchOrderConfig", "0", "1", "2");
+        AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate", "ExcludeWUDriversInQualityUpdate", "0", "1");
+        AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate", "DisableWindowsUpdateAccess", "0", "1");
+        AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\WindowsUpdate\AU", "NoAutoUpdate", "0", "1");
+        AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\Sudo", "Enabled", "0", "1", "2", "3");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\CurrentVersion\MDM", "DisableRegistration", "0", "1", "2");
+        AddRegDwordRule(regAllowlist, @"HKLM\SOFTWARE\Policies\Microsoft\PassportForWork\DynamicLock", "DynamicLock", "0", "1");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\NetworkConnectivityStatusIndicator", "NoActiveProbe", "0", "1", "2");
+        AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows NT\DNSClient", "DisableSmartNameResolution", "0", "1");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows NT\DNSClient", "EnableMDNS", "0", "1", "2");
+        AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows NT\DNSClient", "EnableMulticast", "0", "1", "2");
+        AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows NT\DNSClient", "EnableNetbios", "0", "1", "2", "3");
+        AddRegDwordRule(regAllowlist, @"HKLM\Software\Microsoft\wcmsvc\wifinetworkmanager\config", "AutoConnectAllowedOEM", "0", "1");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\LLTD", "EnableLLTDIO", "0", "1");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\LLTD", "EnableRspndr", "0", "1");
+        AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\Windows Chat", "ChatIcon", "0", "1", "2", "3");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\System", "DisableAcrylicBackgroundOnLogon", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\System", "RSoPLogging", "0", "1");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System", "EnableFirstLogonAnimation", "0", "1", "2");
@@ -170,11 +238,18 @@ public sealed class CommandAllowlist
         AddRegSzRule(regAllowlist, @"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games", "Scheduling Category", "High", "Medium", "Normal");
         AddRegSzRule(regAllowlist, @"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games", "SFIO Priority", "High", "Normal");
         AddRegDwordRule(regAllowlist, @"HKLM\System\CurrentControlSet\Control\Power\PowerThrottling", "PowerThrottlingOff", "0", "1", "2");
+        AddRegSzRule(regAllowlist, @"HKLM\SYSTEM\CurrentControlSet\Control", "WaitToKillServiceTimeout", "2500", "5000");
         AddRegDwordRule(regAllowlist, @"HKLM\SYSTEM\CurrentControlSet\Control\CrashControl", "AutoReboot", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\SYSTEM\CurrentControlSet\Control\CrashControl", "DisplayParameters", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Power", "HiberbootEnabled", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters", "DisableTaskOffload", "0", "1", "2");
+        AddRegDwordRule(regAllowlist, @"HKLM\SYSTEM\CurrentControlSet\Control\Power", "DisableIdleStatesAtBoot", "0", "1");
+        AddRegDwordRule(regAllowlist, @"HKLM\SYSTEM\CurrentControlSet\Control\Power", "ExitLatencyCheckEnabled", "0", "1");
+        AddRegDwordRule(regAllowlist, @"HKLM\SYSTEM\CurrentControlSet\Control\Power", "IdleStateTimeout", "0", "500");
+        AddRegDwordRule(regAllowlist, @"HKLM\System\CurrentControlSet\Control\Lsa\MSV1_0", "NTLMMinClientSec", "0", "524288", "536870912", "537395200");
+        AddRegDwordRule(regAllowlist, @"HKLM\SYSTEM\CurrentControlSet\Services\Tcpip6\Parameters", "DisabledComponents", "0", "32", "255");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows NT\Terminal Services", "fAllowToGetHelp", "0", "1", "2");
+        AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows NT\Terminal Services", "fDisableClip", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\System", "DisableBkGndGroupPolicy", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search", "DoNotUseWebResults", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\SOFTWARE\Policies\Microsoft\Windows\Windows Search", "ConnectedSearchUseWeb", "0", "1", "2");
@@ -185,6 +260,134 @@ public sealed class CommandAllowlist
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Edge", "SearchSuggestEnabled", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Edge", "LocalProvidersEnabled", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\MicrosoftEdge\SearchScopes", "ShowSearchSuggestionsGlobal", "0", "1", "2");
+        foreach (var valueName in new[]
+                 {
+                     "DefaultBrowserSettingEnabled",
+                     "EdgeCollectionsEnabled",
+                     "EdgeFollowEnabled",
+                     "EdgeShoppingAssistantEnabled",
+                     "HubsSidebarEnabled",
+                     "ImplicitSignInEnabled",
+                     "LocalProvidersEnabled",
+                     "NewTabPageContentEnabled",
+                     "NewTabPageQuickLinksEnabled",
+                     "PersonalizationReportingEnabled",
+                     "PinBrowserEssentialsToolbarButton",
+                     "QuickSearchShowMiniMenu",
+                     "SearchbarAllowed",
+                     "ShowMicrosoftRewards",
+                     "ShowRecommendationsEnabled",
+                     "SplitScreenEnabled",
+                     "StandaloneHubsSidebarEnabled",
+                     "StartupBoostEnabled",
+                     "SyncDisabled",
+                     "TabServicesEnabled",
+                     "TextPredictionEnabled",
+                     "UserFeedbackAllowed"
+                 })
+        {
+            AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Edge", valueName, "0", "1", "2");
+        }
+
+        foreach (var valueName in new[]
+                 {
+                     "AutoImportAtFirstRun",
+                     "DefaultSensorsSetting",
+                     "HideFirstRunExperience",
+                     "HideRestoreDialogEnabled",
+                     "NewTabPageAllowedBackgroundTypes",
+                     "NewTabPageHideDefaultTopSites",
+                     "TrackingPrevention"
+                 })
+        {
+            AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Edge", valueName, "0", "1", "2", "3", "4");
+        }
+
+        foreach (var valueName in new[]
+                 {
+                     "AllowEdgeSwipe",
+                     "DisableCharms",
+                     "DisableHelpSticker",
+                     "DisableMFUTracking",
+                     "DisableRecentApps",
+                     "TurnOffBackstack"
+                 })
+        {
+            AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\EdgeUI", valueName, "0", "1", "2");
+            AddRegDwordRule(regAllowlist, @"HKCU\Software\Policies\Microsoft\Windows\EdgeUI", valueName, "0", "1", "2");
+        }
+
+        foreach (var valueName in new[]
+                 {
+                     "DisableFileSync",
+                     "DisableFileSyncNGSC",
+                     "DisableLibrariesDefaultSaveToOneDrive",
+                     "DisableMeteredNetworkFileSync"
+                 })
+        {
+            AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\OneDrive", valueName, "0", "1", "2");
+        }
+
+        AddRegDwordRule(regAllowlist, @"HKLM\SOFTWARE\Microsoft\OneDrive", "PreventNetworkTrafficPreUserSignIn", "0", "1", "2");
+        AddRegDwordRule(regAllowlist, @"HKCU\Software\Classes\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}", "System.IsPinnedToNameSpaceTree", "0", "1");
+        AddRegDwordRule(regAllowlist, @"HKCU\Software\Classes\Wow6432Node\CLSID\{018D5C66-4533-4307-9B53-224DE2ED1FE6}", "System.IsPinnedToNameSpaceTree", "0", "1");
+
+        AddRegDwordRule(regAllowlist, @"HKCU\Software\Policies\Microsoft\Office\16.0\OSM", "EnableLogging", "0", "1");
+        AddRegDwordRule(regAllowlist, @"HKCU\Software\Policies\Microsoft\Office\16.0\OSM", "EnableUpload", "0", "1");
+        AddRegDwordRule(regAllowlist, @"HKCU\Software\Policies\Microsoft\Office\16.0\Common", "QMEnable", "0", "1");
+        AddRegDwordRule(regAllowlist, @"HKCU\Software\Policies\Microsoft\Office\16.0\Common\Feedback", "Enabled", "0", "1");
+        foreach (var valueName in new[]
+                 {
+                     "accesssolution",
+                     "olksolution",
+                     "onenotesolution",
+                     "pptsolution",
+                     "projectsolution",
+                     "publishersolution",
+                     "visiosolution",
+                     "wdsolution",
+                     "xlsolution"
+                 })
+        {
+            AddRegDwordRule(regAllowlist, @"HKCU\Software\Policies\Microsoft\Office\16.0\OSM\preventedapplications", valueName, "0", "1");
+        }
+
+        foreach (var valueName in new[] { "agave", "appaddins", "comaddins", "documentfiles", "templatefiles" })
+        {
+            AddRegDwordRule(regAllowlist, @"HKCU\Software\Policies\Microsoft\Office\16.0\OSM\preventedsolutiontypes", valueName, "0", "1");
+        }
+
+        AddRegDwordRule(regAllowlist, @"HKLM\SOFTWARE\Policies\Microsoft\VisualStudio\SQM", "OptIn", "0", "1");
+        AddRegDwordRule(regAllowlist, @"HKLM\SOFTWARE\Policies\Microsoft\VisualStudio\Feedback", "DisableEmailInput", "0", "1");
+        AddRegDwordRule(regAllowlist, @"HKLM\SOFTWARE\Policies\Microsoft\VisualStudio\Feedback", "DisableFeedbackDialog", "0", "1");
+        AddRegDwordRule(regAllowlist, @"HKLM\SOFTWARE\Policies\Microsoft\VisualStudio\Feedback", "DisableScreenshotCapture", "0", "1");
+        foreach (var version in new[] { "14.0", "15.0", "16.0", "17.0" })
+        {
+            AddRegDwordRule(regAllowlist, $@"HKLM\SOFTWARE\Microsoft\VSCommon\{version}\SQM", "OptIn", "0", "1");
+        }
+
+        AddRegDwordRule(regAllowlist, @"HKCU\Software\7-Zip\Options", "CascadedMenu", "0", "1");
+        AddRegDwordRule(regAllowlist, @"HKCU\Software\7-Zip\Options", "ElimDupExtract", "0", "1");
+        AddRegDwordRule(regAllowlist, @"HKCU\Software\7-Zip\Options", "MenuIcons", "0", "1");
+        AddRegDwordRule(regAllowlist, @"HKCU\Software\7-Zip\Options", "WriteZoneIdExtract", "0", "1", "2");
+
+        AddRegDwordRule(regAllowlist, @"HKCU\Software\Microsoft\Windows\CurrentVersion\Audio", "DisableProtectedAudioDG", "0", "1");
+        AddRegDwordRule(regAllowlist, @"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\MMDevices\Audio\Render", "DisableEnhancements", "0", "1");
+
+        AddRegSzRule(regAllowlist, @"HKCU\Control Panel\Keyboard", "KeyboardDelay", "0", "1", "2", "3");
+        AddRegSzRule(regAllowlist, @"HKCU\Control Panel\Keyboard", "KeyboardSpeed", "0", "10", "20", "31");
+        AddRegSzRule(regAllowlist, @"HKCU\Control Panel\Desktop", "CursorBlinkRate", "200", "500", "900", "1200");
+        AddRegSzRule(regAllowlist, @"HKCU\Keyboard Layout\Toggle", "Language Hotkey", "1", "2", "3", "4");
+        AddRegSzRule(regAllowlist, @"HKCU\Keyboard Layout\Toggle", "Hotkey", "1", "2", "3", "4");
+        AddRegSzRule(regAllowlist, @"HKCU\Keyboard Layout\Toggle", "Layout Hotkey", "1", "2", "3", "4");
+
+        AddRegDwordRule(regAllowlist, @"HKCU\Control Panel\Mouse", "RawMouseThrottleEnabled", "0", "1");
+        AddRegDwordRule(regAllowlist, @"HKCU\Control Panel\Mouse", "RawMouseThrottleDuration", "0", "1", "2", "10");
+        AddRegDwordRule(regAllowlist, @"HKCU\Control Panel\Mouse", "RawMouseThrottleLeeway", "0", "1", "2", "10");
+        AddRegSzRule(regAllowlist, @"HKCU\Control Panel\Mouse", "MouseSpeed", "0", "1", "2");
+        AddRegSzRule(regAllowlist, @"HKCU\Control Panel\Mouse", "MouseThreshold1", "0", "1", "2", "6");
+        AddRegSzRule(regAllowlist, @"HKCU\Control Panel\Mouse", "MouseThreshold2", "0", "1", "2", "10");
+        AddRegSzRule(regAllowlist, @"HKCU\Control Panel\Mouse", "MouseSensitivity", "1", "6", "10", "15", "20");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer", "NoLowDiskSpaceChecks", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer", "UseDefaultTile", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer", "AllowOnlineTips", "0", "1", "2");
@@ -202,13 +405,17 @@ public sealed class CommandAllowlist
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\LanmanWorkstation", "MaxSmb2Dialect", "514", "528", "768", "770", "785");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\LanmanServer", "MinSmb2Dialect", "514", "528", "768", "770", "785");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\LanmanServer", "MaxSmb2Dialect", "514", "528", "768", "770", "785");
+        AddRegMultiSzRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\LanmanWorkstation", "CipherSuiteOrder", @"AES_256_GCM\0AES_256_CCM");
+        AddRegMultiSzRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\LanmanServer", "CipherSuiteOrder", @"AES_256_GCM\0AES_256_CCM");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\System", "BlockDomainPicturePassword", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows\System", "EnableCdp", "0", "1");
+        AddRegDwordRule(regAllowlist, @"HKLM\SOFTWARE\Policies\Microsoft\Windows\DeliveryOptimization", "DODownloadMode", "0", "1", "2", "3", "99", "100");
         AddRegDwordRule(regAllowlist, @"HKLM\Software\Policies\Microsoft\Windows NT\CurrentVersion\Software Protection Platform", "NoGenTicket", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\SYSTEM\CurrentControlSet\Services\Beep", "Start", "1", "4");
         AddRegSzRule(regAllowlist, @"HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Shell Icons", "29", @"%windir%\System32\shell32.dll,-50");
         AddRegSzRule(regAllowlist, @"HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Environment", "NODE_OPTIONS", "--max-old-space-size=8192");
         AddRegSzRule(regAllowlist, @"HKLM\SOFTWARE\Policies\Microsoft\Windows\PowerShell", "ExecutionPolicy", "RemoteSigned", "AllSigned", "Unrestricted");
+        AddRegDwordRule(regAllowlist, @"HKLM\SOFTWARE\Policies\Microsoft\Windows\PowerShell", "EnableScripts", "0", "1");
         AddRegDwordRule(regAllowlist, @"HKLM\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters", "AutoShareServer", "0", "1");
         AddRegDwordRule(regAllowlist, @"HKLM\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters", "AutoShareWks", "0", "1");
         AddRegDwordRule(regAllowlist, @"HKLM\SYSTEM\CurrentControlSet\Services\LanmanServer\Parameters", "SMB1", "0", "1");
@@ -216,22 +423,30 @@ public sealed class CommandAllowlist
         AddRegDwordRule(regAllowlist, @"HKLM\System\CurrentControlSet\Services\LanmanWorkstation\Parameters", "EnableSecuritySignature", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\System\CurrentControlSet\Services\LanmanWorkstation\Parameters", "EnablePlainTextPassword", "0", "1");
         AddRegDwordRule(regAllowlist, @"HKLM\System\CurrentControlSet\Services\LanmanWorkstation\Parameters", "RequireSecuritySignature", "0", "1", "2");
+        AddRegDwordRule(regAllowlist, @"HKLM\System\CurrentControlSet\Services\LanmanWorkstation\Parameters", "DisableLargeMtu", "0", "1");
         AddRegDwordRule(regAllowlist, @"HKLM\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters", "DirectoryCacheEntriesMax", "16", "128", "4096");
         AddRegDwordRule(regAllowlist, @"HKLM\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters", "FileInfoCacheEntriesMax", "64", "128", "32768");
         AddRegDwordRule(regAllowlist, @"HKLM\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters", "FileNotFoundCacheEntriesMax", "128", "32768");
         AddRegDwordRule(regAllowlist, @"HKLM\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameters", "MaxCmds", "15", "64", "32768");
         AddRegDwordRule(regAllowlist, @"HKLM\System\CurrentControlSet\Services\LanmanServer\Parameters", "EnableSecuritySignature", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\System\CurrentControlSet\Services\LanmanServer\Parameters", "RequireSecuritySignature", "0", "1", "2");
+        AddRegDwordRule(regAllowlist, @"HKLM\System\CurrentControlSet\Services\LanmanServer\Parameters", "EncryptData", "0", "1");
+        AddRegDwordRule(regAllowlist, @"HKLM\System\CurrentControlSet\Services\LanmanServer\Parameters", "RejectUnencryptedAccess", "0", "1");
         AddRegDwordRule(regAllowlist, @"HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers", "HwSchMode", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers", "TdrDdiDelay", "5");
         AddRegDwordRule(regAllowlist, @"HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers", "TdrDelay", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers", "TdrLevel", "0", "1", "2", "3");
         AddRegDwordRule(regAllowlist, @"HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers", "TdrLimitCount", "5");
         AddRegDwordRule(regAllowlist, @"HKLM\SYSTEM\CurrentControlSet\Control\GraphicsDrivers", "TdrLimitTime", "60");
+        AddRegDwordRule(regAllowlist, @"HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Kernel", "ThreadDpcEnable", "0", "1");
+        AddRegDwordRule(regAllowlist, @"HKLM\SYSTEM\CurrentControlSet\Control\PriorityControl", "Win32PrioritySeparation", "2", "38");
+        AddRegDwordRule(regAllowlist, @"HKLM\SOFTWARE\Policies\Microsoft\Windows NT\Reliability", "TimeStampEnabled", "0", "1");
+        AddRegDwordRule(regAllowlist, @"HKLM\SOFTWARE\Policies\Microsoft\Windows NT\Reliability", "TimeStampInterval", "86400");
         AddRegDwordRule(regAllowlist, @"HKLM\SOFTWARE\Microsoft\Windows\Dwm", "OverlayMinFPS", "0");
         AddRegDwordRule(regAllowlist, @"HKLM\System\CurrentControlSet\Control", "RegistrySizeLimit", "0");
         AddRegDwordRule(regAllowlist, @"HKLM\SYSTEM\CurrentControlSet\Control\FileSystem", "NtfsDisable8dot3NameCreation", "0", "1", "2", "3");
         AddRegDwordRule(regAllowlist, @"HKLM\SYSTEM\CurrentControlSet\Control\FileSystem", "NtfsDisableLastAccessUpdate", "0", "1", "2", "3", "-2147483646", "2147483650");
+        AddRegDwordRule(regAllowlist, @"HKLM\SYSTEM\CurrentControlSet\Policies", "NtfsDisableEncryption", "0", "1");
         AddRegDwordRule(regAllowlist, @"HKLM\SYSTEM\CurrentControlSet\Control\FileSystem", "NtfsMftZoneReservation", "0", "1", "2", "3", "4");
         AddRegDwordRule(regAllowlist, @"HKLM\SYSTEM\CurrentControlSet\Control\FileSystem", "NtfsMemoryUsage", "0", "1", "2");
         AddRegDwordRule(regAllowlist, @"HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Memory Management", "ClearPageFileAtShutdown", "0", "1", "2");
@@ -628,11 +843,35 @@ public sealed class CommandAllowlist
 
     private static bool IsKnownPowerCfgCommandAllowed(IReadOnlyList<string> arguments, out string? reason)
     {
+        const string usbSubgroupGuid = "2a737441-1930-4402-8d77-b2bebba308a3";
+        const string usbSelectiveSuspendGuid = "48e6b7a6-50f5-4782-a5d4-53bb8f07e226";
+
         if (arguments.Count == 4
             && arguments[0].Equals("/qh", StringComparison.OrdinalIgnoreCase)
             && arguments[1].Equals("SCHEME_CURRENT", StringComparison.OrdinalIgnoreCase)
             && arguments[2].Equals("SUB_PROCESSOR", StringComparison.OrdinalIgnoreCase)
             && arguments[3].Equals("PERFBOOSTMODE", StringComparison.OrdinalIgnoreCase))
+        {
+            reason = null;
+            return true;
+        }
+
+        if (arguments.Count == 4
+            && arguments[0].Equals("/qh", StringComparison.OrdinalIgnoreCase)
+            && arguments[1].Equals("SCHEME_CURRENT", StringComparison.OrdinalIgnoreCase)
+            && arguments[2].Equals("SUB_PROCESSOR", StringComparison.OrdinalIgnoreCase)
+            && (arguments[3].Equals("CPMINCORES", StringComparison.OrdinalIgnoreCase)
+                || arguments[3].Equals("CPMAXCORES", StringComparison.OrdinalIgnoreCase)))
+        {
+            reason = null;
+            return true;
+        }
+
+        if (arguments.Count == 4
+            && arguments[0].Equals("/query", StringComparison.OrdinalIgnoreCase)
+            && arguments[1].Equals("SCHEME_CURRENT", StringComparison.OrdinalIgnoreCase)
+            && arguments[2].Equals(usbSubgroupGuid, StringComparison.OrdinalIgnoreCase)
+            && arguments[3].Equals(usbSelectiveSuspendGuid, StringComparison.OrdinalIgnoreCase))
         {
             reason = null;
             return true;
@@ -663,6 +902,33 @@ public sealed class CommandAllowlist
             && arguments[2].Equals("SUB_PROCESSOR", StringComparison.OrdinalIgnoreCase)
             && arguments[3].Equals("PERFBOOSTMODE", StringComparison.OrdinalIgnoreCase)
             && int.TryParse(arguments[4], out _))
+        {
+            reason = null;
+            return true;
+        }
+
+        if (arguments.Count == 5
+            && (arguments[0].Equals("/setacvalueindex", StringComparison.OrdinalIgnoreCase)
+                || arguments[0].Equals("/setdcvalueindex", StringComparison.OrdinalIgnoreCase))
+            && arguments[1].Equals("SCHEME_CURRENT", StringComparison.OrdinalIgnoreCase)
+            && arguments[2].Equals("SUB_PROCESSOR", StringComparison.OrdinalIgnoreCase)
+            && (arguments[3].Equals("CPMINCORES", StringComparison.OrdinalIgnoreCase)
+                || arguments[3].Equals("CPMAXCORES", StringComparison.OrdinalIgnoreCase))
+            && int.TryParse(arguments[4], out var coreParkingValue)
+            && coreParkingValue is >= 0 and <= 100)
+        {
+            reason = null;
+            return true;
+        }
+
+        if (arguments.Count == 5
+            && (arguments[0].Equals("/setacvalueindex", StringComparison.OrdinalIgnoreCase)
+                || arguments[0].Equals("/setdcvalueindex", StringComparison.OrdinalIgnoreCase))
+            && arguments[1].Equals("SCHEME_CURRENT", StringComparison.OrdinalIgnoreCase)
+            && arguments[2].Equals(usbSubgroupGuid, StringComparison.OrdinalIgnoreCase)
+            && arguments[3].Equals(usbSelectiveSuspendGuid, StringComparison.OrdinalIgnoreCase)
+            && (arguments[4].Equals("0", StringComparison.OrdinalIgnoreCase)
+                || arguments[4].Equals("1", StringComparison.OrdinalIgnoreCase)))
         {
             reason = null;
             return true;

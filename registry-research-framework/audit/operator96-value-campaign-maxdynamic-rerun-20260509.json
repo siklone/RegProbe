@@ -1,0 +1,157 @@
+{
+  "generated_utc": "2026-05-09T15:50:03Z",
+  "status": "ok",
+  "report": "registry-research-framework/audit/operator-regadd-followup-source-default-report-20260509.json",
+  "smoke_profile": "gui",
+  "max_values_per_record": 1,
+  "include_default_tests": false,
+  "plan": [
+    {
+      "index": 22,
+      "experiment_id": "operator96-022-maxdynamictickduration-1",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "MaxDynamicTickDuration",
+      "value_data": 1,
+      "requested_data": "1",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [
+        "kernel-timing-sensitive"
+      ],
+      "source_quality": "vm-observed"
+    }
+  ],
+  "results": [
+    {
+      "index": 22,
+      "experiment_id": "operator96-022-maxdynamictickduration-1",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "MaxDynamicTickDuration",
+      "value_data": 1,
+      "requested_data": "1",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [
+        "kernel-timing-sensitive"
+      ],
+      "source_quality": "vm-observed",
+      "status": "ok",
+      "returncode": 0,
+      "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-022-maxdynamictickduration-1.json",
+      "stdout_payload": {
+        "status": "ok",
+        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-022-maxdynamictickduration-1.json",
+        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-022-maxdynamictickduration-1.md",
+        "error": null
+      },
+      "stderr": "",
+      "observations": {
+        "status": "ok",
+        "smoke_hard_success": {
+          "apply_smoke_hard_success": true,
+          "post_reboot_smoke_hard_success": true,
+          "post_rollback_smoke_hard_success": true
+        },
+        "apply": {
+          "original": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+            "value_name": "MaxDynamicTickDuration",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "after_apply": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+            "value_name": "MaxDynamicTickDuration",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 1,
+            "value_kind": "System.Int32",
+            "value_hex": "0x1",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_reboot": {
+          "after_reboot": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+            "value_name": "MaxDynamicTickDuration",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 1,
+            "value_kind": "System.Int32",
+            "value_hex": "0x1",
+            "status": "value-present",
+            "error": null
+          },
+          "restore_action": "removed-created-value",
+          "after_restore": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+            "value_name": "MaxDynamicTickDuration",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_rollback": {
+          "final": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+            "value_name": "MaxDynamicTickDuration",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "benchmark_delta_percent": {
+          "apply_vs_baseline": {
+            "cpu_single_seconds": -0.68,
+            "cpu_multi_seconds": -25.03,
+            "io_write_read_mib_per_second": 498.72
+          },
+          "post_reboot_vs_baseline": {
+            "cpu_single_seconds": 15.01,
+            "cpu_multi_seconds": -31.64,
+            "io_write_read_mib_per_second": 331.06
+          }
+        }
+      }
+    }
+  ]
+}

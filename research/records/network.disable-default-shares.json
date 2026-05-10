@@ -274,6 +274,19 @@
         "ui-mapping"
       ],
       "strength": "high"
+    },
+    {
+      "evidence_id": "vm-network.disable-default-shares-etw-qga-unblock-20260507",
+      "kind": "etw-trace",
+      "title": "QGA-first ETW stackwalk probe receipt",
+      "location": "evidence/captures/network-disable-default-shares-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/network-disable-default-shares-autoshareserver-etw-qga-unblock-20260507/network-disable-default-shares-autoshareserver-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/network-disable-default-shares-autoshareserver-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/network-disable-default-shares-autoshareserver-etw-qga-unblock-20260507/network-disable-default-shares-autoshareserver-etw-qga-unblock-20260507.etl and evidence/raw/etw-stackwalk/network-disable-default-shares-autosharewks-etw-qga-unblock-20260507/network-disable-default-shares-autosharewks-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/network-disable-default-shares-autosharewks-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/network-disable-default-shares-autosharewks-etw-qga-unblock-20260507/network-disable-default-shares-autosharewks-etw-qga-unblock-20260507.etl",
+      "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced host-ingested ETL/XML artifacts and normalized bundles for 2 target value(s): `AutoShareServer`, `AutoShareWks`. The QGA-launched `reg.exe query` probe produced exact target RegQueryValue events for 2/2 target(s), clearing the earlier tracerpt/artifact-upload blocker. This receipt proves the ETW/QGA probe can observe the documented registry surface, but it is probe-read evidence rather than independent Windows component consumption proof.",
+      "supports": [
+        "path",
+        "value",
+        "version-scope"
+      ],
+      "strength": "medium"
     }
   ],
   "decision": {
@@ -294,7 +307,7 @@
     },
     "runtime_capture_reviewed": {
       "etw-stackwalk": true,
-      "status": "host-timeout-at-tracerpt"
+      "status": "qga_unblocked_ingest_ok"
     },
     "static_reviewed": {
       "ghidra": true,
@@ -320,9 +333,12 @@
       "missing_reason": "candidate-specific-absent-in-retained-local-corpus",
       "notes": "Retained local corpus review still returns no candidate-specific WRK hit for `AutoShareServer` or `AutoShareWks`."
     },
-    "notes": "Local enrichment artifacts and retained source-index outputs still do not carry candidate-specific ReactOS or WRK hits for `AutoShareServer` / `AutoShareWks`, and exact 2026-04-24 ReactOS doxygen searches also returned no direct match. This record remains grounded in Microsoft documentation and exact app-path alignment instead of source-mirror corroboration. A bounded 2026-04-24 ETW stackwalk retry for `AutoShareServer` reached `stage = tracerpt` before the hard 90 second timeout fired without uploading a repo-visible bundle, and a same-day guest Ghidra string-xref retry failed in `ensure-admin-shell` before any wrapper stage could start."
+    "notes": "Local enrichment artifacts and retained source-index outputs still do not carry candidate-specific ReactOS or WRK hits for `AutoShareServer` / `AutoShareWks`, and exact 2026-04-24 ReactOS doxygen searches also returned no direct match. This record remains grounded in Microsoft documentation and exact app-path alignment instead of source-mirror corroboration. A bounded 2026-04-24 ETW stackwalk retry for `AutoShareServer` reached `stage = tracerpt` before the hard 90 second timeout fired without uploading a repo-visible bundle, and a same-day guest Ghidra string-xref retry failed in `ensure-admin-shell` before any wrapper stage could start. A 2026-05-07 QGA-first ETW stackwalk rerun cleared the earlier timeout/upload blocker for 2/2 target probe(s) and produced host-ingested raw ETL/XML plus normalized bundles; the captured value reads are QGA-launched probe reads, not independent product-consumer proof.",
+    "etw_stackwalk_reviewed": true,
+    "etw_stackwalk_review_status": "qga_unblocked_ingest_ok",
+    "etw_stackwalk_review_artifact": "evidence/captures/network-disable-default-shares-etw-qga-unblock-20260507.json"
   },
-  "last_reviewed_utc": "2026-04-28T06:36:37Z",
+  "last_reviewed_utc": "2026-05-07T14:43:50.544726Z",
   "validation_proof": {
     "source_url": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/remove-administrative-shares",
     "exact_quote_or_path": "`HKEY_LOCAL_MACHINE\\SYSTEM\\CurrentControlSet\\Services\\LanmanServer\\Parameters\\AutoShareServer` ... `0`; `AutoShareWks`; `If the AutoShareServer (server) or AutoShareWks (workstation) registry entry is set to 0, Windows won't automatically create administrative shares.`",

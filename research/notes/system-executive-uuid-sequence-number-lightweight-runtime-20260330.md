@@ -34,4 +34,4 @@ Project decision:
 
 ## Retained audit artifact
 
-- [system-executive-uuid-sequence-number-lightweight-runtime-20260330.json](/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/system-executive-uuid-sequence-number-lightweight-runtime-20260330.json)
+- [system-executive-uuid-sequence-number-lightweight-runtime-20260330.json](../../registry-research-framework/audit/system-executive-uuid-sequence-number-lightweight-runtime-20260330.json)

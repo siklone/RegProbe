@@ -1,0 +1,44 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-07T13:51:39.8034482Z",
+  "record_id": "explorer.show-recent-items",
+  "run_id": "explorer-show-recent-items-etw-qga-unblock-20260507",
+  "capture_profile": "kernel-registry-stackwalk-v1",
+  "vm": "regprobe-win11-25h2-session",
+  "registry_path": "HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer",
+  "value_name": "ShowRecent",
+  "attempt_status": "qga_unblocked_ingest_ok",
+  "assessment": "A 2026-05-07 QGA-first ETW stackwalk rerun produced ETL/XML artifacts and a normalized bundle with 4740 registry events and 676 caller-stack events. The QGA-launched helper targeted HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer / ShowRecent; the bundle contains target command/subkey activity (1 target value event), but no exact current-user HKCU RegQueryValue event for ShowRecent was observed under the SYSTEM QGA context.",
+  "target_observation": {
+    "exact_value_query": false,
+    "operation": "RegQueryValue",
+    "representative_status": "0xC0000034",
+    "event_count": 4740,
+    "caller_stack_event_count": 676,
+    "target_key_event_count": 161,
+    "target_value_event_count": 1,
+    "current_user_hkcu_value_event_count": 0,
+    "target_command_event_count": 2,
+    "launch_transport": "qga"
+  },
+  "artifact_refs": [
+    {
+      "path": "evidence/raw/etw-stackwalk/explorer-show-recent-items-etw-qga-unblock-20260507/explorer-show-recent-items-etw-qga-unblock-20260507-summary.json",
+      "sha256": "4e868a477376dd02652d87ed7edb25133421df2143b704eb531dc3f24a3e45d7",
+      "size": 7581,
+      "collected_utc": "2026-05-07T13:51:39.8034482Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/explorer-show-recent-items-etw-qga-unblock-20260507/normalized-registry-bundle.json",
+      "sha256": "379e49cfcf340aae6f4f85523619cc098c55789a85af78c304fd499dbc2ce42c",
+      "size": 5807481,
+      "collected_utc": "2026-05-07T13:51:39.8034482Z"
+    },
+    {
+      "path": "evidence/raw/etw-stackwalk/explorer-show-recent-items-etw-qga-unblock-20260507/explorer-show-recent-items-etw-qga-unblock-20260507.etl",
+      "sha256": "f6dfa53b1d2427ea46e953a4a2c962217a9c12665e0a71e3dc02e8127be22fe2",
+      "size": 12845056,
+      "collected_utc": "2026-05-07T13:51:39.8034482Z"
+    }
+  ]
+}

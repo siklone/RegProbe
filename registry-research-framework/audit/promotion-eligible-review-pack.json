@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0",
+  "metadata": {
+    "generated_utc": "2026-05-08T11:35:16.289980Z",
+    "campaign_id": "promotion-eligible-final-decision-wave-1",
+    "total_records": 0,
+    "source_gate": "research/promotion-gates.json",
+    "preconditions": {
+      "blocked_count": 0,
+      "unclassified_rejected": 0,
+      "all_records_confidence_high": true,
+      "all_records_next_missing_layer_none": true
+    }
+  },
+  "summary_stats": {
+    "promote_candidates": 0,
+    "promote_with_warnings_candidates": 0,
+    "conditional_promote_candidates": 0,
+    "hold_candidates": 0,
+    "reject_candidates": 0,
+    "verdict_counts": {},
+    "risk_counts": {},
+    "requires_manual_vm_check": [],
+    "requires_app_mapping": []
+  },
+  "records": []
+}

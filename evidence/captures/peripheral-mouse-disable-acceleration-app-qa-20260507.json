@@ -1,0 +1,230 @@
+{
+  "TweakId": "peripheral.mouse-disable-acceleration",
+  "TweakName": "Disable Enhanced Pointer Precision (Mouse Acceleration)",
+  "Success": true,
+  "Status": "ok-gated-override",
+  "Summary": "QA-only gated mutation override used; apply/verify path completed and rollback restored the tweak.",
+  "RollbackRequested": true,
+  "GatedMutationOverrideRequested": true,
+  "GatedMutationOverrideUsed": true,
+  "Card": {
+    "TweakId": "peripheral.mouse-disable-acceleration",
+    "Name": "Disable Enhanced Pointer Precision (Mouse Acceleration)",
+    "Category": "Peripheral",
+    "Description": "Disables Enhanced Pointer Precision by setting mouse speed and threshold values to their non-accelerated configuration.",
+    "FriendlyDescription": "Disables Enhanced Pointer Precision by setting mouse speed and threshold values to their non-accelerated configuration.",
+    "RegistryPath": "",
+    "EvidenceClass": "B",
+    "EvidenceClassTitle": "Strong but Decision-Gated",
+    "ResearchStatus": "INTENTIONAL HOLD",
+    "IsMutationAllowed": false,
+    "RollbackSnapshotState": "ready",
+    "RollbackStoryText": "Rollback: Verified via record-restore-story.",
+    "HasClaimBoundary": true,
+    "WhatWeKnowSummary": "Claim: Disables Enhanced Pointer Precision by setting mouse speed and threshold values to their non-accelerated configuration. Evidence: The peripheral documentation names the HKCU Control Panel Mouse values for enabled and disabled pointer-precision states. Rollback: Rollback: Verified via record-restore-story.",
+    "WhatWeDoNotClaimSummary": "Apply gate: Evidence pending Source boundary: Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+    "ProofLanes": [
+      {
+        "Key": "docs",
+        "Label": "DOCS",
+        "State": "ready",
+        "Summary": "The peripheral documentation names the HKCU Control Panel Mouse values for enabled and disabled pointer-precision states.",
+        "Source": "Validation proof source: C:\\Tools\\AppSmoke\\Docs\\peripheral\\peripheral.md"
+      },
+      {
+        "Key": "runtime",
+        "Label": "RUNTIME",
+        "State": "ready",
+        "Summary": "No dedicated runtime capture is attached. This record currently relies on documented semantics and app-mapping evidence.",
+        "Source": ""
+      },
+      {
+        "Key": "source",
+        "Label": "SOURCE",
+        "State": "ready",
+        "Summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+        "Source": "decompiled-pseudocode / USBHUB3: https://github.com/nohuto/decompiled-pseudocode/tree/main/USBHUB3"
+      },
+      {
+        "Key": "rollback",
+        "Label": "ROLLBACK",
+        "State": "ready",
+        "Summary": "Rollback: Verified via record-restore-story.",
+        "Source": "record-restore-story"
+      }
+    ],
+    "ReferenceLinks": [
+      {
+        "Title": "Windows Internals resource page",
+        "Url": "https://learn.microsoft.com/en-us/sysinternals/resources/windows-internals",
+        "Kind": "Docs"
+      },
+      {
+        "Title": "Docs: Details",
+        "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html#peripheral.mouse-disable-acceleration",
+        "Kind": "Details"
+      },
+      {
+        "Title": "Docs: Peripheral",
+        "Url": "C:\\Tools\\AppSmoke\\Docs\\peripheral\\peripheral.md#peripheral.mouse-disable-acceleration",
+        "Kind": "Docs"
+      }
+    ]
+  },
+  "Stages": [
+    {
+      "Stage": "detect-before",
+      "AppliedStatus": "NotApplied",
+      "StatusMessage": "Detected 4 of 4 values (matches: 1, missing: 0).",
+      "OutcomeSummary": "Detect - Success",
+      "CurrentValue": "Unknown",
+      "TargetValue": "Multiple values",
+      "WasRolledBack": false,
+      "IsMutationAllowed": false,
+      "HasSuccessfulApplyStory": false,
+      "HasSuccessfulRollbackStory": false,
+      "Steps": [
+        {
+          "Action": "Detect",
+          "StatusText": "Detected",
+          "Message": "Detected 4 of 4 values (matches: 1, missing: 0).\nEntries:\n- HKCU\\Control Panel\\Mouse\\MouseSensitivity: 10 -\u003E 10\n- HKCU\\Control Panel\\Mouse\\MouseSpeed: 1 -\u003E 0\n- HKCU\\Control Panel\\Mouse\\MouseThreshold1: 6 -\u003E 0\n- HKCU\\Control Panel\\Mouse\\MouseThreshold2: 10 -\u003E 0",
+          "TimestampText": "16:08:38"
+        },
+        {
+          "Action": "Apply",
+          "StatusText": "Pending",
+          "Message": "",
+          "TimestampText": "-"
+        },
+        {
+          "Action": "Verify",
+          "StatusText": "Pending",
+          "Message": "",
+          "TimestampText": "-"
+        },
+        {
+          "Action": "Rollback",
+          "StatusText": "Pending",
+          "Message": "",
+          "TimestampText": "-"
+        }
+      ]
+    },
+    {
+      "Stage": "apply",
+      "AppliedStatus": "Applied",
+      "StatusMessage": "Run completed.",
+      "OutcomeSummary": "Apply - Success",
+      "CurrentValue": "Multiple values",
+      "TargetValue": "Multiple values",
+      "WasRolledBack": false,
+      "IsMutationAllowed": false,
+      "HasSuccessfulApplyStory": true,
+      "HasSuccessfulRollbackStory": false,
+      "Steps": [
+        {
+          "Action": "Detect",
+          "StatusText": "Detected",
+          "Message": "Detected 4 of 4 values (matches: 1, missing: 0).\nEntries:\n- HKCU\\Control Panel\\Mouse\\MouseSensitivity: 10 -\u003E 10\n- HKCU\\Control Panel\\Mouse\\MouseSpeed: 1 -\u003E 0\n- HKCU\\Control Panel\\Mouse\\MouseThreshold1: 6 -\u003E 0\n- HKCU\\Control Panel\\Mouse\\MouseThreshold2: 10 -\u003E 0",
+          "TimestampText": "16:08:38"
+        },
+        {
+          "Action": "Apply",
+          "StatusText": "Applied",
+          "Message": "Updated 4 values.",
+          "TimestampText": "16:08:38"
+        },
+        {
+          "Action": "Verify",
+          "StatusText": "Verified",
+          "Message": "Verified desired values.",
+          "TimestampText": "16:08:38"
+        },
+        {
+          "Action": "Rollback",
+          "StatusText": "Not required",
+          "Message": "Step not executed.",
+          "TimestampText": "-"
+        }
+      ]
+    },
+    {
+      "Stage": "rollback",
+      "AppliedStatus": "NotApplied",
+      "StatusMessage": "Rolled back registry values.",
+      "OutcomeSummary": "Rollback - Rolled Back",
+      "CurrentValue": "Multiple values",
+      "TargetValue": "Multiple values",
+      "WasRolledBack": true,
+      "IsMutationAllowed": false,
+      "HasSuccessfulApplyStory": true,
+      "HasSuccessfulRollbackStory": true,
+      "Steps": [
+        {
+          "Action": "Detect",
+          "StatusText": "Detected",
+          "Message": "Detected 4 of 4 values (matches: 1, missing: 0).\nEntries:\n- HKCU\\Control Panel\\Mouse\\MouseSensitivity: 10 -\u003E 10\n- HKCU\\Control Panel\\Mouse\\MouseSpeed: 1 -\u003E 0\n- HKCU\\Control Panel\\Mouse\\MouseThreshold1: 6 -\u003E 0\n- HKCU\\Control Panel\\Mouse\\MouseThreshold2: 10 -\u003E 0",
+          "TimestampText": "16:08:38"
+        },
+        {
+          "Action": "Apply",
+          "StatusText": "Applied",
+          "Message": "Updated 4 values.",
+          "TimestampText": "16:08:38"
+        },
+        {
+          "Action": "Verify",
+          "StatusText": "Verified",
+          "Message": "Verified desired values.",
+          "TimestampText": "16:08:38"
+        },
+        {
+          "Action": "Rollback",
+          "StatusText": "Rolled back",
+          "Message": "Rolled back registry values.",
+          "TimestampText": "16:08:38"
+        }
+      ]
+    },
+    {
+      "Stage": "detect-after",
+      "AppliedStatus": "NotApplied",
+      "StatusMessage": "Detected 4 of 4 values (matches: 1, missing: 0).",
+      "OutcomeSummary": "Detect - Success",
+      "CurrentValue": "Multiple values",
+      "TargetValue": "Multiple values",
+      "WasRolledBack": true,
+      "IsMutationAllowed": false,
+      "HasSuccessfulApplyStory": true,
+      "HasSuccessfulRollbackStory": true,
+      "Steps": [
+        {
+          "Action": "Detect",
+          "StatusText": "Detected",
+          "Message": "Detected 4 of 4 values (matches: 1, missing: 0).\nEntries:\n- HKCU\\Control Panel\\Mouse\\MouseSensitivity: 10 -\u003E 10\n- HKCU\\Control Panel\\Mouse\\MouseSpeed: 1 -\u003E 0\n- HKCU\\Control Panel\\Mouse\\MouseThreshold1: 6 -\u003E 0\n- HKCU\\Control Panel\\Mouse\\MouseThreshold2: 10 -\u003E 0",
+          "TimestampText": "16:08:39"
+        },
+        {
+          "Action": "Apply",
+          "StatusText": "Applied",
+          "Message": "Updated 4 values.",
+          "TimestampText": "16:08:38"
+        },
+        {
+          "Action": "Verify",
+          "StatusText": "Verified",
+          "Message": "Verified desired values.",
+          "TimestampText": "16:08:38"
+        },
+        {
+          "Action": "Rollback",
+          "StatusText": "Rolled back",
+          "Message": "Rolled back registry values.",
+          "TimestampText": "16:08:38"
+        }
+      ]
+    }
+  ],
+  "StartedAtUtc": "2026-05-07T23:08:38.7192716+00:00",
+  "CompletedAtUtc": "2026-05-07T23:08:39.0294185+00:00"
+}
