@@ -84,6 +84,13 @@ public sealed class TweakExecutionPipeline
         await SaveRollbackStateAsync(tweak, ct);
 
         var applyStep = await RunStepAsync(tweak, TweakAction.Apply, tweak.ApplyAsync, steps, progress, ct);
+        if (applyStep.Result.Status == TweakStatus.NotApplicable)
+        {
+            await AppendSkippedStepAsync(tweak, TweakAction.Verify, steps, progress, "Apply returned NotApplicable.", ct);
+            await AppendSkippedStepAsync(tweak, TweakAction.Rollback, steps, progress, "Apply returned NotApplicable.", ct);
+            return BuildReport(tweak, options, steps, startedAt);
+        }
+
         if (applyStep.Result.Status == TweakStatus.Failed)
         {
             if (options.RollbackOnFailure)

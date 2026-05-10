@@ -54,6 +54,34 @@ public sealed class TweakExecutionPipelineTests
     }
 
     [Fact]
+    public async Task ApplyNotApplicable_SkipsVerifyAndRollbackWithoutFailingReport()
+    {
+        var logger = new RecordingLogger();
+        var pipeline = new TweakExecutionPipeline(logger);
+        var tweak = new RecordingTweak
+        {
+            ApplyStatus = TweakStatus.NotApplicable
+        };
+
+        var options = new TweakExecutionOptions
+        {
+            DryRun = false,
+            VerifyAfterApply = true,
+            RollbackOnFailure = true
+        };
+
+        var report = await pipeline.ExecuteAsync(tweak, options);
+
+        Assert.Equal(1, tweak.ApplyCalls);
+        Assert.Equal(0, tweak.VerifyCalls);
+        Assert.Equal(0, tweak.RollbackCalls);
+        Assert.True(report.Succeeded);
+        Assert.Contains(report.Steps, step => step.Action == TweakAction.Apply && step.Result.Status == TweakStatus.NotApplicable);
+        Assert.Contains(report.Steps, step => step.Action == TweakAction.Verify && step.Result.Status == TweakStatus.Skipped);
+        Assert.Contains(report.Steps, step => step.Action == TweakAction.Rollback && step.Result.Status == TweakStatus.Skipped);
+    }
+
+    [Fact]
     public async Task DetectAlreadyApplied_SkipsApplyAndStillVerifies()
     {
         var logger = new RecordingLogger();

@@ -9,6 +9,7 @@ namespace RegProbe.Engine.Tweaks.Commands.Cleanup;
 public sealed class DisableReservedStorageTweak : CommandTweak
 {
     private const string System32DismExe = "dism.exe";
+    private const int ReservedStorageInUseExitCode = unchecked((int)0x800F0978);
 
     public DisableReservedStorageTweak(
         ICommandRunner commandRunner,
@@ -74,5 +75,20 @@ public sealed class DisableReservedStorageTweak : CommandTweak
     protected override bool VerifyApplied(CommandResult result)
     {
         return result.StandardOutput.Contains("Disabled", StringComparison.OrdinalIgnoreCase);
+    }
+
+    protected override TweakResult? CreateApplyFailureResult(CommandResult result)
+    {
+        var output = $"{result.StandardOutput}\n{result.StandardError}";
+        if (result.ExitCode == ReservedStorageInUseExitCode
+            || output.Contains("reserved storage is in use", StringComparison.OrdinalIgnoreCase))
+        {
+            return new TweakResult(
+                TweakStatus.NotApplicable,
+                "Reserved Storage is currently in use by Windows servicing. Wait for servicing operations to complete and try again later.",
+                DateTimeOffset.UtcNow);
+        }
+
+        return null;
     }
 }

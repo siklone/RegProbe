@@ -430,6 +430,27 @@ public sealed class CommandTweakTests
     }
 
     [Fact]
+    public async Task DisableReservedStorageTweak_ApplyAsync_WhenReservedStorageInUse_ReturnsNotApplicable()
+    {
+        var mockRunner = new Mock<ICommandRunner>();
+        mockRunner
+            .Setup(r => r.RunAsync(It.IsAny<CommandRequest>(), It.IsAny<CancellationToken>()))
+            .ReturnsAsync(new CommandResult(
+                ExitCode: unchecked((int)0x800F0978),
+                StandardOutput: "Error: 0x800f0978\nThis operation is not supported when reserved storage is in use.",
+                StandardError: "",
+                TimedOut: false,
+                Duration: TimeSpan.FromMilliseconds(300)));
+
+        var tweak = new DisableReservedStorageTweak(mockRunner.Object);
+
+        var result = await tweak.ApplyAsync(CancellationToken.None);
+
+        Assert.Equal(TweakStatus.NotApplicable, result.Status);
+        Assert.Contains("servicing", result.Message, StringComparison.OrdinalIgnoreCase);
+    }
+
+    [Fact]
     public async Task DisableUsbSelectiveSuspendTweak_DetectAsync_WhenDisabled_ReturnsAppliedStatus()
     {
         // Arrange
