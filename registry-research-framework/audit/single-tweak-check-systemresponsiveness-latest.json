@@ -5,138 +5,639 @@
     "30000"
   ],
   "exact": false,
-  "limit": 3,
+  "limit": 5,
   "status": "ok",
-  "inspect_status": "ok",
-  "inspect_match_count": 2,
-  "qa_candidate_count": 1,
-  "candidates": [
+  "match_count": 2,
+  "matches": [
     {
       "candidate_id": "power.disable-network-power-saving.policy",
       "record_id": "power.disable-network-power-saving.policy",
       "tweak_id": "power.disable-network-power-saving.policy",
-      "qa_tweak_id": "power.disable-network-power-saving.policy",
-      "promotion_state": "promoted",
+      "record_file": "research/records/power.disable-network-power-saving.policy.review.json",
       "record_status": "validated",
+      "promotion_state": "promoted",
       "apply_allowed": true,
       "restore_default_supported": true,
       "restore_previous_supported": true,
       "app_mapping_status": "matches-research",
-      "card_expectations": {
+      "catalog_entry": {
+        "id": "power.disable-network-power-saving.policy",
         "name": "Network Power and Multimedia Responsiveness",
+        "description": "Writes the documented DisableTaskOffload and MMCSS SystemResponsiveness values while excluding the archived opaque NetworkThrottlingIndex write.",
+        "risk": "Safe",
         "category": "Power",
+        "area": "Registry",
+        "source": "app/Services/TweakProviders/PowerTweakProvider.cs#L42",
+        "docs": "Docs/power/power.md"
+      },
+      "app_surface_entry": {
+        "present": true,
+        "category": "Power",
+        "name": "Network Power and Multimedia Responsiveness",
         "description": "These settings affect whether TCP/IP task offloads stay enabled and how MMCSS reserves CPU for multimedia work.",
         "documentation": "research/records/power.disable-network-power-saving.policy.review.json"
       },
-      "rollback_expectations": {
-        "restore_default_supported": true,
-        "restore_previous_supported": true
-      },
-      "value_expectations": [
-        "10 -> matched",
-        "30000 -> not found"
+      "record_summary": "This child record keeps only the documented DisableTaskOffload and SystemResponsiveness values. SystemResponsiveness is supported here for path plus rounding/clamping behavior; the opaque NetworkThrottlingIndex write remains outside this child in the deprecated parent audit trail.",
+      "record_targets": [
+        {
+          "target_id": "disable-task-offload",
+          "location_kind": "registry",
+          "path": "HKLM\\System\\CurrentControlSet\\Services\\TCPIP\\Parameters",
+          "value_name": "DisableTaskOffload",
+          "value_type": "REG_DWORD",
+          "allowed_values": [
+            {
+              "state_kind": "value",
+              "value": 0,
+              "label": "Task offload enabled",
+              "meaning": "Microsoft documents that setting DisableTaskOffload to 0 enables task offloads.",
+              "evidence_ids": [
+                "ms-task-offload",
+                "app-power-provider"
+              ]
+            },
+            {
+              "state_kind": "value",
+              "value": 1,
+              "label": "Task offload disabled",
+              "meaning": "Microsoft documents that setting DisableTaskOffload to 1 disables all task offloads from the TCP/IP transport.",
+              "evidence_ids": [
+                "ms-task-offload"
+              ]
+            }
+          ],
+          "_source": "setting.targets"
+        },
+        {
+          "target_id": "system-responsiveness",
+          "location_kind": "registry",
+          "path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile",
+          "value_name": "SystemResponsiveness",
+          "value_type": "REG_DWORD",
+          "allowed_values": [
+            {
+              "state_kind": "value",
+              "value": 10,
+              "label": "Current app child value",
+              "meaning": "Microsoft documents SystemResponsiveness as the percentage of CPU resources guaranteed to low-priority tasks and documents the rounding/clamping rules. The current app uses 10, which is an in-range documented child value rather than a claim about every stock Windows baseline.",
+              "evidence_ids": [
+                "ms-mmcss",
+                "app-power-provider"
+              ]
+            }
+          ],
+          "_source": "setting.targets"
+        }
       ],
-      "evidence_expectations": {
-        "linked_evidence_count": 4,
-        "runtime_read_signal_count": 1,
-        "linked_evidence_locations": [
-          "https://learn.microsoft.com/en-us/windows-hardware/drivers/network/using-registry-values-to-enable-and-disable-task-offloading",
-          "https://learn.microsoft.com/en-us/windows/win32/procthread/multimedia-class-scheduler-service",
-          "app/Services/TweakProviders/PowerTweakProvider.cs",
-          "evidence/captures/power-disable-network-power-saving-policy-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507.etl and evidence/raw/etw-stackwalk/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507.etl"
-        ]
-      },
-      "commands": {
-        "inspect": "dotnet run --project cli/cli.csproj -- research inspect SystemResponsiveness --expected-value 10 --expected-value 30000",
-        "readiness": "dotnet run --project cli/cli.csproj -- research readiness",
-        "direct_app": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'power.disable-network-power-saving.policy' --qa-output 'C:\\Tools\\ValidationController\\smoke\\power.disable-network-power-saving.policy.qa.json' --qa-shutdown",
-        "direct_app_skip_rollback": "& 'C:\\Tools\\AppSmoke\\RegProbe.App.exe' --tweaks --qa-run-tweak 'power.disable-network-power-saving.policy' --qa-output 'C:\\Tools\\ValidationController\\smoke\\power.disable-network-power-saving.policy.qa.json' --qa-shutdown --qa-skip-rollback",
-        "guest_vm": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'power.disable-network-power-saving.policy' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\power.disable-network-power-saving.policy.qa.json'",
-        "guest_vm_skip_rollback": "powershell -ExecutionPolicy Bypass -File '.\\scripts\\vm\\guest-app-tweak-qa.ps1' -TweakId 'power.disable-network-power-saving.policy' -OutputPath 'C:\\Tools\\ValidationController\\smoke\\power.disable-network-power-saving.policy.qa.json' -SkipRollback",
-        "kvm_batch": "python3 'scripts/vm-kvm/run-guest-app-tweak-qa-batch.py' --id 'power.disable-network-power-saving.policy'"
-      },
-      "qa_report_path": "C:\\Tools\\ValidationController\\smoke\\power.disable-network-power-saving.policy.qa.json",
-      "guest_user": "rai",
-      "expected_report": {
-        "success": true,
-        "status": "ok",
-        "rollback_requested": true,
-        "required_stages": [
-          "detect-before",
-          "apply",
-          "rollback",
-          "detect-after"
-        ],
-        "required_card_snapshot": {
-          "required_fields": [
-            "TweakId",
-            "Name",
-            "Category",
-            "EvidenceClass",
-            "ResearchStatus",
-            "RollbackSnapshotState",
-            "HasClaimBoundary",
-            "WhatWeKnowSummary",
-            "WhatWeDoNotClaimSummary",
-            "ProofLanes"
-          ],
-          "required_proof_lanes": [
-            "docs",
-            "runtime",
-            "source",
-            "rollback"
-          ],
-          "claim_boundary_required": true
+      "app_write_targets": [
+        {
+          "target_id": "disable-task-offload",
+          "path": "HKLM\\System\\CurrentControlSet\\Services\\TCPIP\\Parameters",
+          "value_name": "DisableTaskOffload",
+          "value_type": "REG_DWORD",
+          "state_kind": "value",
+          "value": 0,
+          "_source": "app_current_implementation.writes"
         },
-        "required_stage_assertions": [
-          "apply stage reports a successful apply story",
-          "rollback stage reports a successful rollback story",
-          "detect-after is present"
-        ]
-      },
-      "expected_report_skip_rollback": {
-        "success": true,
-        "status": "ok",
-        "rollback_requested": false,
-        "required_stages": [
-          "detect-before",
-          "apply",
-          "detect-after"
-        ],
-        "required_card_snapshot": {
-          "required_fields": [
-            "TweakId",
-            "Name",
-            "Category",
-            "EvidenceClass",
-            "ResearchStatus",
-            "RollbackSnapshotState",
-            "HasClaimBoundary",
-            "WhatWeKnowSummary",
-            "WhatWeDoNotClaimSummary",
-            "ProofLanes"
-          ],
-          "required_proof_lanes": [
-            "docs",
-            "runtime",
-            "source",
-            "rollback"
-          ],
-          "claim_boundary_required": true
+        {
+          "target_id": "system-responsiveness",
+          "path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile",
+          "value_name": "SystemResponsiveness",
+          "value_type": "REG_DWORD",
+          "state_kind": "value",
+          "value": 10,
+          "_source": "app_current_implementation.writes"
+        }
+      ],
+      "surface_targets": [
+        {
+          "path": "HKLM\\System\\CurrentControlSet\\Services\\TCPIP\\Parameters",
+          "value_name": "DisableTaskOffload",
+          "type": "REG_DWORD",
+          "target_value": 0,
+          "_source": "validated-surface.batch_entries"
         },
-        "required_stage_assertions": [
-          "apply stage reports a successful apply story",
-          "detect-after is present"
-        ]
+        {
+          "path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile",
+          "value_name": "SystemResponsiveness",
+          "type": "REG_DWORD",
+          "target_value": 10,
+          "_source": "validated-surface.batch_entries"
+        }
+      ],
+      "windows_and_recommended_profiles": [
+        {
+          "profile_type": "windows-default",
+          "profile_id": "Documented offload baseline and MMCSS rules",
+          "label": "Documented offload baseline and MMCSS rules",
+          "states": [
+            {
+              "target_id": "disable-task-offload",
+              "state_kind": "value",
+              "value": 0,
+              "rationale": "Microsoft lists 0 as the enabled baseline."
+            },
+            {
+              "target_id": "system-responsiveness",
+              "state_kind": "unknown",
+              "value": null,
+              "rationale": "Microsoft documents the SystemResponsiveness path plus rounding/clamping behavior, but this child record does not treat that page as proof of one universal stock default."
+            }
+          ]
+        },
+        {
+          "profile_type": "recommended-profile",
+          "profile_id": "windows-default",
+          "label": "Windows default",
+          "apply_allowed": true,
+          "states": [
+            {
+              "target_id": "disable-task-offload",
+              "state_kind": "value",
+              "value": 0,
+              "rationale": "Keep the documented task-offload enabled baseline."
+            },
+            {
+              "target_id": "system-responsiveness",
+              "state_kind": "value",
+              "value": 10,
+              "rationale": "Use the current app's documented child value while keeping the claim narrower than a universal stock-default statement."
+            }
+          ]
+        }
+      ],
+      "validation_proof": {
+        "source_url": "https://learn.microsoft.com/en-us/windows/win32/procthread/multimedia-class-scheduler-service",
+        "exact_quote_or_path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\SystemResponsiveness; values not divisible by 10 are rounded down to the nearest multiple of 10.",
+        "key_found_on_page": true,
+        "notes": "DisableTaskOffload remains covered by the separate Microsoft task-offload page. This validation proof focuses on the narrower MMCSS claim for SystemResponsiveness: path plus rounding/clamping behavior. The opaque NetworkThrottlingIndex write remains only in the deprecated parent audit trail."
       },
-      "operator_checklist": [
-        "Run the inspect command and confirm the expected values and tracked registry targets still match the record.",
-        "Run the readiness command before launching the desktop app so cards, evidence, rollback coverage, and KVM smoke status stay green.",
-        "Open the app card 'Network Power and Multimedia Responsiveness' and verify the title, category, and linked research record (research/records/power.disable-network-power-saving.policy.review.json) match this plan.",
-        "Run the direct app or guest VM QA command and keep the JSON report it writes.",
-        "Check the report fields Success, Status, RollbackRequested, and the stage list before trusting the result.",
-        "Check the report Card snapshot: title/category, evidence tier, proof lanes, rollback state, and claim-boundary text should match the visible card.",
-        "If the normal run fails only because you need to observe the post-apply state manually, rerun the skip-rollback variant and record that fact in your notes."
+      "decision_notes": {
+        "why": "DisableTaskOffload and the narrowed SystemResponsiveness claim are documented and machine-checkable. This record now treats the MMCSS page as proof of path plus rounding/clamping behavior, not as proof of the opaque NetworkThrottlingIndex value."
+      },
+      "app_implementation_notes": "The app writes the documented values for DisableTaskOffload and SystemResponsiveness. The opaque NetworkThrottlingIndex write remains in the deprecated parent audit trail.",
+      "runtime_read_signals": [
+        {
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk probe receipt",
+          "location": "evidence/captures/power-disable-network-power-saving-policy-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507.etl and evidence/raw/etw-stackwalk/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507.etl",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced host-ingested ETL/XML artifacts and normalized bundles for 2 target value(s): `DisableTaskOffload`, `SystemResponsiveness`. The QGA-launched `reg.exe query` probe produced exact target RegQueryValue events for 2/2 target(s), clearing the earlier tracerpt/artifact-upload blocker. This receipt proves the ETW/QGA probe can observe the documented registry surface, but it is probe-read evidence rather than independent Windows component consumption proof."
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_id": "ms-task-offload",
+          "kind": "official-doc",
+          "title": "Microsoft Learn: Using Registry Values to Enable and Disable Task Offloading",
+          "location": "https://learn.microsoft.com/en-us/windows-hardware/drivers/network/using-registry-values-to-enable-and-disable-task-offloading",
+          "summary": "Microsoft documents DisableTaskOffload under HKLM\\System\\CurrentControlSet\\Services\\TCPIP\\Parameters, with 1 disabling task offloads and 0 enabling them.",
+          "supports": [
+            "path",
+            "value",
+            "allowed-values",
+            "behavior"
+          ],
+          "strength": "high"
+        },
+        {
+          "evidence_id": "ms-mmcss",
+          "kind": "official-doc",
+          "title": "Microsoft Learn: Multimedia Class Scheduler Service",
+          "location": "https://learn.microsoft.com/en-us/windows/win32/procthread/multimedia-class-scheduler-service",
+          "summary": "Microsoft documents SystemResponsiveness under the SystemProfile key and explains the rounding/clamping behavior. This record uses that page for the path and value-handling rules, not as proof of NetworkThrottlingIndex semantics.",
+          "supports": [
+            "path",
+            "value",
+            "behavior",
+            "allowed-values"
+          ],
+          "strength": "high"
+        },
+        {
+          "evidence_id": "app-power-provider",
+          "kind": "repo-code",
+          "title": "Current app implementation",
+          "location": "app/Services/TweakProviders/PowerTweakProvider.cs",
+          "summary": "The provider writes DisableTaskOffload = 0 and SystemResponsiveness = 10. The opaque NetworkThrottlingIndex write remains in the deprecated parent audit trail.",
+          "supports": [
+            "path",
+            "value",
+            "ui-mapping"
+          ],
+          "strength": "high"
+        },
+        {
+          "evidence_id": "vm-power.disable-network-power-saving.policy-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk probe receipt",
+          "location": "evidence/captures/power-disable-network-power-saving-policy-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507.etl and evidence/raw/etw-stackwalk/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507.etl",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced host-ingested ETL/XML artifacts and normalized bundles for 2 target value(s): `DisableTaskOffload`, `SystemResponsiveness`. The QGA-launched `reg.exe query` probe produced exact target RegQueryValue events for 2/2 target(s), clearing the earlier tracerpt/artifact-upload blocker. This receipt proves the ETW/QGA probe can observe the documented registry surface, but it is probe-read evidence rather than independent Windows component consumption proof.",
+          "supports": [
+            "path",
+            "value",
+            "version-scope"
+          ],
+          "strength": "medium"
+        }
+      ],
+      "expected_value_checks": [
+        {
+          "expected_value": "10",
+          "matched_in_allowed_values": [
+            {
+              "target_id": "system-responsiveness",
+              "path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile",
+              "value_name": "SystemResponsiveness",
+              "value": 10,
+              "label": "Current app child value"
+            }
+          ],
+          "matched_in_app_writes": [
+            {
+              "target_id": "system-responsiveness",
+              "path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile",
+              "value_name": "SystemResponsiveness",
+              "value": 10
+            }
+          ],
+          "matched_in_surface_targets": [
+            {
+              "path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile",
+              "value_name": "SystemResponsiveness",
+              "value": 10,
+              "source": "validated-surface.batch_entries"
+            }
+          ],
+          "matched_in_profiles": [
+            {
+              "profile_type": "recommended-profile",
+              "profile_id": "windows-default",
+              "label": "Windows default",
+              "target_id": "system-responsiveness",
+              "value": 10
+            }
+          ],
+          "matched_in_validation_proof_text": true,
+          "found_any": true
+        },
+        {
+          "expected_value": "30000",
+          "matched_in_allowed_values": [],
+          "matched_in_app_writes": [],
+          "matched_in_surface_targets": [],
+          "matched_in_profiles": [],
+          "matched_in_validation_proof_text": false,
+          "found_any": false
+        }
+      ],
+      "match_reasons": [
+        "promotion state weight: promoted",
+        "query matched descriptive text",
+        "query matched value name SystemResponsiveness"
+      ],
+      "score": 160,
+      "code_hits": [
+        {
+          "file": "app/Services/TweakProviders/PowerTweakProvider.cs",
+          "line": 0,
+          "text": "",
+          "source": "declared-location"
+        },
+        {
+          "file": "app/Services/TweakProviders/PowerTweakProvider.cs",
+          "line": 42,
+          "text": "yield return CreateRegistryValueBatchTweak(",
+          "source": "declared-location"
+        },
+        {
+          "file": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
+          "line": 0,
+          "text": "",
+          "source": "declared-location"
+        },
+        {
+          "file": "app/Services/TweakProviders/PowerTweakProvider.cs",
+          "line": 46,
+          "text": "\"Writes the documented DisableTaskOffload and MMCSS SystemResponsiveness values while excluding the archived opaque NetworkThrottlingIndex write.\",",
+          "source": "source-scan"
+        },
+        {
+          "file": "app/Services/TweakProviders/PowerTweakProvider.cs",
+          "line": 51,
+          "text": "new RegistryValueBatchEntry(RegistryHive.LocalMachine, @\"SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\", \"SystemResponsiveness\", RegistryValueKind.DWord, 10, RegistryView.Default)",
+          "source": "source-scan"
+        },
+        {
+          "file": "engine/Tweaks/Power/NetworkAdapterPowerTweaks.cs",
+          "line": 18,
+          "text": "new RegistryValueBatchEntry(RegistryHive.LocalMachine, @\"SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\", \"SystemResponsiveness\", RegistryValueKind.DWord, 10, RegistryView.Default)",
+          "source": "source-scan"
+        },
+        {
+          "file": "engine/Tweaks/Power/NetworkAdapterPowerTweaks.cs",
+          "line": 24,
+          "text": "description: \"Writes the documented DisableTaskOffload and MMCSS SystemResponsiveness values while excluding the archived opaque NetworkThrottlingIndex write.\",",
+          "source": "source-scan"
+        },
+        {
+          "file": "infrastructure/Commands/CommandAllowlist.cs",
+          "line": 234,
+          "text": "AddRegDwordRule(regAllowlist, @\"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\", \"SystemResponsiveness\", \"10\", \"20\", \"30\", \"40\", \"50\", \"60\", \"70\", \"80\", \"90\", \"100\");",
+          "source": "source-scan"
+        }
+      ]
+    },
+    {
+      "candidate_id": "power.disable-network-power-saving",
+      "record_id": "power.disable-network-power-saving",
+      "tweak_id": "power.disable-network-power-saving",
+      "record_file": "research/records/power.disable-network-power-saving.review.json",
+      "record_status": "deprecated",
+      "promotion_state": "rejected",
+      "apply_allowed": false,
+      "restore_default_supported": false,
+      "restore_previous_supported": true,
+      "app_mapping_status": "not-mapped",
+      "catalog_entry": {},
+      "app_surface_entry": {
+        "present": false,
+        "category": "",
+        "name": "",
+        "description": "",
+        "documentation": ""
+      },
+      "record_summary": "Deprecated audit trail for the mixed network power-saving bundle. The official TCP/IP offload and MMCSS values are split into a child record; the opaque NetworkThrottlingIndex value remains tracked only here.",
+      "record_targets": [
+        {
+          "target_id": "disable-task-offload",
+          "location_kind": "registry",
+          "path": "HKLM\\System\\CurrentControlSet\\Services\\TCPIP\\Parameters",
+          "value_name": "DisableTaskOffload",
+          "value_type": "REG_DWORD",
+          "allowed_values": [
+            {
+              "state_kind": "value",
+              "value": 0,
+              "label": "Task offload enabled",
+              "meaning": "Microsoft documents that setting DisableTaskOffload to 0 enables task offloads.",
+              "evidence_ids": [
+                "ms-task-offload",
+                "app-power-provider"
+              ]
+            },
+            {
+              "state_kind": "value",
+              "value": 1,
+              "label": "Task offload disabled",
+              "meaning": "Microsoft documents that setting DisableTaskOffload to 1 disables all task offloads from the TCP/IP transport.",
+              "evidence_ids": [
+                "ms-task-offload"
+              ]
+            }
+          ],
+          "_source": "setting.targets"
+        },
+        {
+          "target_id": "system-responsiveness",
+          "location_kind": "registry",
+          "path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile",
+          "value_name": "SystemResponsiveness",
+          "value_type": "REG_DWORD",
+          "allowed_values": [
+            {
+              "state_kind": "value",
+              "value": 10,
+              "label": "App responsiveness value",
+              "meaning": "Microsoft documents SystemResponsiveness as the percentage of CPU resources guaranteed to low-priority tasks. Values not divisible by 10 are rounded down to the nearest multiple of 10.",
+              "evidence_ids": [
+                "ms-mmcss",
+                "app-power-provider"
+              ]
+            }
+          ],
+          "_source": "setting.targets"
+        },
+        {
+          "target_id": "network-throttling-index",
+          "location_kind": "registry",
+          "path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile",
+          "value_name": "NetworkThrottlingIndex",
+          "value_type": "REG_DWORD",
+          "allowed_values": [
+            {
+              "state_kind": "unknown",
+              "value": null,
+              "label": "Primary-source mapping not yet confirmed",
+              "meaning": "This review did not find a primary Microsoft source documenting the exact NetworkThrottlingIndex registry value.",
+              "evidence_ids": [
+                "app-power-provider",
+                "repo-power-doc"
+              ]
+            }
+          ],
+          "_source": "setting.targets"
+        }
+      ],
+      "app_write_targets": [],
+      "surface_targets": [],
+      "windows_and_recommended_profiles": [
+        {
+          "profile_type": "windows-default",
+          "profile_id": "Mixed Windows baseline",
+          "label": "Mixed Windows baseline",
+          "states": [
+            {
+              "target_id": "disable-task-offload",
+              "state_kind": "value",
+              "value": 0,
+              "rationale": "Microsoft documents that 0 enables task offloads."
+            },
+            {
+              "target_id": "system-responsiveness",
+              "state_kind": "unknown",
+              "value": null,
+              "rationale": "Microsoft documents how SystemResponsiveness behaves, but this record does not publish one stock cross-version default value."
+            },
+            {
+              "target_id": "network-throttling-index",
+              "state_kind": "unknown",
+              "value": null,
+              "rationale": "Primary Microsoft documentation for this exact value name has not been confirmed in this review."
+            }
+          ]
+        },
+        {
+          "profile_type": "recommended-profile",
+          "profile_id": "windows-default",
+          "label": "Windows default",
+          "apply_allowed": false,
+          "states": [
+            {
+              "target_id": "disable-task-offload",
+              "state_kind": "value",
+              "value": 0,
+              "rationale": "Keep the documented task-offload enabled baseline while the rest of the bundle remains under review."
+            }
+          ]
+        }
+      ],
+      "validation_proof": {
+        "source_url": "research/_source-mirrors/win-config/network/desc.md",
+        "exact_quote_or_path": "RegSetValue HKLM\\System\\CurrentControlSet\\Services\\LanmanWorkstation\\Parameters\\DisableBandwidthThrottling Type: REG_DWORD, Length: 4, Data: 1. Task offloading has to be enabled, or RSS won't work (DisableTaskOffload). *RssOrVmqPreference = 0; // range 0-1; 0 Report RSS capabilities - 1 Report VMQ capabilities.",
+        "key_found_on_page": true,
+        "notes": "The bundle spans network adapter power and offload surfaces; this mirror line is the strongest source for the current write shape."
+      },
+      "decision_notes": {
+        "why": "This tweak mixes separate control surfaces and one of the written values still lacks a primary Microsoft source in this review, so the bundle should stay in review rather than in the validated set."
+      },
+      "app_implementation_notes": "The checked-in app no longer exposes this mixed parent bundle. It now surfaces the child power.disable-network-power-saving.policy record with DisableTaskOffload = 0 and SystemResponsiveness = 10; the opaque NetworkThrottlingIndex write is retained here only as historical audit context.",
+      "runtime_read_signals": [
+        {
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk probe receipt",
+          "location": "evidence/captures/power-disable-network-power-saving-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507.etl and evidence/raw/etw-stackwalk/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507.etl and 3 additional raw artifact refs listed in the receipt",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced host-ingested ETL/XML artifacts and normalized bundles for 3 target value(s): `DisableTaskOffload`, `SystemResponsiveness`, `NetworkThrottlingIndex`. The QGA-launched `reg.exe query` probe produced exact target RegQueryValue events for 3/3 target(s), clearing the earlier tracerpt/artifact-upload blocker. This receipt proves the ETW/QGA probe can observe the documented registry surface, but it is probe-read evidence rather than independent Windows component consumption proof."
+        }
+      ],
+      "evidence": [
+        {
+          "evidence_id": "ms-task-offload",
+          "kind": "official-doc",
+          "title": "Microsoft Learn: Using Registry Values to Enable and Disable Task Offloading",
+          "location": "https://learn.microsoft.com/en-us/windows-hardware/drivers/network/using-registry-values-to-enable-and-disable-task-offloading",
+          "summary": "Microsoft documents DisableTaskOffload under HKLM\\System\\CurrentControlSet\\Services\\TCPIP\\Parameters, with 1 disabling task offloads and 0 enabling them.",
+          "supports": [
+            "path",
+            "value",
+            "allowed-values",
+            "behavior"
+          ],
+          "strength": "high"
+        },
+        {
+          "evidence_id": "ms-mmcss",
+          "kind": "official-doc",
+          "title": "Microsoft Learn: Multimedia Class Scheduler Service",
+          "location": "https://learn.microsoft.com/en-us/windows/win32/procthread/multimedia-class-scheduler-service",
+          "summary": "Microsoft documents SystemResponsiveness under the SystemProfile key and explains how the value is rounded and clamped.",
+          "supports": [
+            "path",
+            "value",
+            "behavior",
+            "allowed-values"
+          ],
+          "strength": "high"
+        },
+        {
+          "evidence_id": "app-power-provider",
+          "kind": "repo-code",
+          "title": "Historical app implementation before the policy split",
+          "location": "app/Services/TweakProviders/PowerTweakProvider.cs",
+          "summary": "The previous mixed bundle wrote DisableTaskOffload = 0, NetworkThrottlingIndex = 0xFFFFFFFF, and SystemResponsiveness = 10. The checked-in app surface now uses the narrowed child record and excludes NetworkThrottlingIndex.",
+          "supports": [
+            "path",
+            "value",
+            "ui-mapping",
+            "app-mismatch"
+          ],
+          "strength": "high"
+        },
+        {
+          "evidence_id": "repo-power-doc",
+          "kind": "repo-doc",
+          "title": "Repo power notes",
+          "location": "Docs/power/power.md",
+          "summary": "The repo tracks these values as power and network tuning observations, but this review did not elevate NetworkThrottlingIndex to a primary-source-backed Windows control.",
+          "supports": [
+            "ui-mapping",
+            "app-mismatch"
+          ],
+          "strength": "medium"
+        },
+        {
+          "evidence_id": "vm-power.disable-network-power-saving-etw-qga-unblock-20260507",
+          "kind": "etw-trace",
+          "title": "QGA-first ETW stackwalk probe receipt",
+          "location": "evidence/captures/power-disable-network-power-saving-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507.etl and evidence/raw/etw-stackwalk/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507.etl and 3 additional raw artifact refs listed in the receipt",
+          "summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced host-ingested ETL/XML artifacts and normalized bundles for 3 target value(s): `DisableTaskOffload`, `SystemResponsiveness`, `NetworkThrottlingIndex`. The QGA-launched `reg.exe query` probe produced exact target RegQueryValue events for 3/3 target(s), clearing the earlier tracerpt/artifact-upload blocker. This receipt proves the ETW/QGA probe can observe the documented registry surface, but it is probe-read evidence rather than independent Windows component consumption proof.",
+          "supports": [
+            "path",
+            "value",
+            "version-scope"
+          ],
+          "strength": "medium"
+        }
+      ],
+      "expected_value_checks": [
+        {
+          "expected_value": "10",
+          "matched_in_allowed_values": [
+            {
+              "target_id": "system-responsiveness",
+              "path": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile",
+              "value_name": "SystemResponsiveness",
+              "value": 10,
+              "label": "App responsiveness value"
+            }
+          ],
+          "matched_in_app_writes": [],
+          "matched_in_surface_targets": [],
+          "matched_in_profiles": [],
+          "matched_in_validation_proof_text": false,
+          "found_any": true
+        },
+        {
+          "expected_value": "30000",
+          "matched_in_allowed_values": [],
+          "matched_in_app_writes": [],
+          "matched_in_surface_targets": [],
+          "matched_in_profiles": [],
+          "matched_in_validation_proof_text": false,
+          "found_any": false
+        }
+      ],
+      "match_reasons": [
+        "promotion state weight: rejected",
+        "query matched value name SystemResponsiveness"
+      ],
+      "score": 100,
+      "code_hits": [
+        {
+          "file": "app/Services/TweakProviders/PowerTweakProvider.cs",
+          "line": 0,
+          "text": "",
+          "source": "declared-location"
+        },
+        {
+          "file": "app/Services/TweakProviders/PowerTweakProvider.cs",
+          "line": 46,
+          "text": "\"Writes the documented DisableTaskOffload and MMCSS SystemResponsiveness values while excluding the archived opaque NetworkThrottlingIndex write.\",",
+          "source": "source-scan"
+        },
+        {
+          "file": "app/Services/TweakProviders/PowerTweakProvider.cs",
+          "line": 51,
+          "text": "new RegistryValueBatchEntry(RegistryHive.LocalMachine, @\"SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\", \"SystemResponsiveness\", RegistryValueKind.DWord, 10, RegistryView.Default)",
+          "source": "source-scan"
+        },
+        {
+          "file": "engine/Tweaks/Power/NetworkAdapterPowerTweaks.cs",
+          "line": 18,
+          "text": "new RegistryValueBatchEntry(RegistryHive.LocalMachine, @\"SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\", \"SystemResponsiveness\", RegistryValueKind.DWord, 10, RegistryView.Default)",
+          "source": "source-scan"
+        },
+        {
+          "file": "engine/Tweaks/Power/NetworkAdapterPowerTweaks.cs",
+          "line": 24,
+          "text": "description: \"Writes the documented DisableTaskOffload and MMCSS SystemResponsiveness values while excluding the archived opaque NetworkThrottlingIndex write.\",",
+          "source": "source-scan"
+        },
+        {
+          "file": "infrastructure/Commands/CommandAllowlist.cs",
+          "line": 234,
+          "text": "AddRegDwordRule(regAllowlist, @\"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\", \"SystemResponsiveness\", \"10\", \"20\", \"30\", \"40\", \"50\", \"60\", \"70\", \"80\", \"90\", \"100\");",
+          "source": "source-scan"
+        }
       ]
     }
   ],
@@ -145,12 +646,5 @@
     "catalog_csv": "Docs/tweaks/tweak-catalog.csv",
     "validated_surface": "Docs/research/app-surface/validated-registry-values.json",
     "records_root": "research/records"
-  },
-  "summary": {
-    "apply_allowed_candidate_count": 1,
-    "blocked_candidate_count": 0,
-    "candidate_ids": [
-      "power.disable-network-power-saving.policy"
-    ]
   }
 }

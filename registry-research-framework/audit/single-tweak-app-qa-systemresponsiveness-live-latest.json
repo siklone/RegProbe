@@ -1,0 +1,265 @@
+[
+  {
+    "tweak_id": "power.disable-network-power-saving.policy",
+    "host_exit": 0,
+    "execution_exit": 0,
+    "payload_status": "completed",
+    "report_source": "stdout",
+    "report_parse_error": null,
+    "report_fetch_status": null,
+    "report_app_success": true,
+    "report_success": true,
+    "report_status": "ok",
+    "report_summary": "Apply/verify path completed and rollback restored the tweak.",
+    "report_contract_status": "ok",
+    "report_contract_summary": "QA card snapshot contract passed.",
+    "report_contract_failures": [],
+    "report_card_present": true,
+    "report_card_has_claim_boundary": true,
+    "report_card_present_fields": [
+      "TweakId",
+      "Name",
+      "Category",
+      "EvidenceClass",
+      "ResearchStatus",
+      "RollbackSnapshotState",
+      "HasClaimBoundary",
+      "WhatWeKnowSummary",
+      "WhatWeDoNotClaimSummary",
+      "ProofLanes"
+    ],
+    "report_card_missing_fields": [],
+    "report_card_proof_lanes": [
+      "docs",
+      "runtime",
+      "source",
+      "rollback"
+    ],
+    "report_card_missing_proof_lanes": [],
+    "report": {
+      "TweakId": "power.disable-network-power-saving.policy",
+      "TweakName": "Network Power and Multimedia Responsiveness",
+      "Success": true,
+      "Status": "ok",
+      "Summary": "Apply/verify path completed and rollback restored the tweak.",
+      "RollbackRequested": true,
+      "GatedMutationOverrideRequested": false,
+      "GatedMutationOverrideUsed": false,
+      "Card": {
+        "TweakId": "power.disable-network-power-saving.policy",
+        "Name": "Network Power and Multimedia Responsiveness",
+        "Category": "Power",
+        "Description": "These settings affect whether TCP/IP task offloads stay enabled and how MMCSS reserves CPU for multimedia work.",
+        "FriendlyDescription": "These settings affect whether TCP/IP task offloads stay enabled and how MMCSS reserves CPU for multimedia work.",
+        "RegistryPath": "",
+        "EvidenceClass": "A",
+        "EvidenceClassTitle": "Cross-Layer Verified",
+        "ResearchStatus": "PROMOTED",
+        "IsMutationAllowed": true,
+        "RollbackSnapshotState": "ready",
+        "RollbackStoryText": "Rollback: Verified via record-restore-story.",
+        "HasClaimBoundary": true,
+        "WhatWeKnowSummary": "Claim: These settings affect whether TCP/IP task offloads stay enabled and how MMCSS reserves CPU for multimedia work. Evidence: DisableTaskOffload remains covered by the separate Microsoft task-offload page. This validation proof focuses on the narrower MMCSS claim for SystemResponsiveness: path plus rounding/clamping behavior. The opaque NetworkThrottlingIndex write remains only in... Rollback: Rollback: Verified via record-restore-story.",
+        "WhatWeDoNotClaimSummary": "Source boundary: Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+        "ProofLanes": [
+          {
+            "Key": "docs",
+            "Label": "DOCS",
+            "State": "ready",
+            "Summary": "DisableTaskOffload remains covered by the separate Microsoft task-offload page. This validation proof focuses on the narrower MMCSS claim for SystemResponsiveness: path plus rounding/clamping behavior. The opaque NetworkThrottlingIndex write remains only in...",
+            "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows/win32/procthread/multimedia-class-scheduler-service"
+          },
+          {
+            "Key": "runtime",
+            "Label": "RUNTIME",
+            "State": "ready",
+            "Summary": "A 2026-05-07 QGA-first ETW stackwalk rerun produced host-ingested ETL/XML artifacts and normalized bundles for 2 target value(s): `DisableTaskOffload`, `SystemResponsiveness`. The QGA-launched `reg.exe query` probe produced exact target RegQueryValue events...",
+            "Source": "QGA-first ETW stackwalk probe receipt: evidence/captures/power-disable-network-power-saving-policy-etw-qga-unblock-20260507.json and evidence/raw/etw-stackwalk/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507/power-disable-network-power-saving-disabletaskoffload-etw-qga-unblock-20260507.etl and evidence/raw/etw-stackwalk/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507-summary.json and evidence/raw/etw-stackwalk/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507/normalized-registry-bundle.json and evidence/raw/etw-stackwalk/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507/power-disable-network-power-saving-systemresponsiveness-etw-qga-unblock-20260507.etl"
+          },
+          {
+            "Key": "source",
+            "Label": "SOURCE",
+            "State": "ready",
+            "Summary": "Upstream dump / pseudocode links are attached to this record. They show discovery and naming only, not value semantics.",
+            "Source": "win-config / system/desc.md: https://github.com/nohuto/win-config/blob/main/system/desc.md"
+          },
+          {
+            "Key": "rollback",
+            "Label": "ROLLBACK",
+            "State": "ready",
+            "Summary": "Rollback: Verified via record-restore-story.",
+            "Source": "record-restore-story"
+          }
+        ],
+        "ReferenceLinks": [
+          {
+            "Title": "Docs: Details",
+            "Url": "C:\\Tools\\AppSmoke\\Docs\\tweaks\\tweak-details.html#power.disable-network-power-saving.policy",
+            "Kind": "Details"
+          },
+          {
+            "Title": "Docs: Power",
+            "Url": "C:\\Tools\\AppSmoke\\Docs\\power\\power.md#power.disable-network-power-saving.policy",
+            "Kind": "Docs"
+          }
+        ]
+      },
+      "Stages": [
+        {
+          "Stage": "detect-before",
+          "AppliedStatus": "NotApplied",
+          "StatusMessage": "Detected 1 of 2 values (matches: 0, missing: 1).",
+          "OutcomeSummary": "Detect - Success",
+          "CurrentValue": "Unknown",
+          "TargetValue": "Multiple values",
+          "WasRolledBack": false,
+          "IsMutationAllowed": true,
+          "HasSuccessfulApplyStory": false,
+          "HasSuccessfulRollbackStory": false,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Detected",
+              "Message": "Detected 1 of 2 values (matches: 0, missing: 1).\nEntries:\n- HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\SystemResponsiveness: 20 -> 10\n- HKLM\\System\\CurrentControlSet\\Services\\TCPIP\\Parameters\\DisableTaskOffload: missing",
+              "TimestampText": "21:30:19"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Pending",
+              "Message": "",
+              "TimestampText": "-"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Pending",
+              "Message": "",
+              "TimestampText": "-"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Pending",
+              "Message": "",
+              "TimestampText": "-"
+            }
+          ]
+        },
+        {
+          "Stage": "apply",
+          "AppliedStatus": "Applied",
+          "StatusMessage": "Run completed.",
+          "OutcomeSummary": "Apply - Success",
+          "CurrentValue": "Multiple values",
+          "TargetValue": "Multiple values",
+          "WasRolledBack": false,
+          "IsMutationAllowed": true,
+          "HasSuccessfulApplyStory": true,
+          "HasSuccessfulRollbackStory": false,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Detected",
+              "Message": "Detected 1 of 2 values (matches: 0, missing: 1).\nEntries:\n- HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\SystemResponsiveness: 20 -> 10\n- HKLM\\System\\CurrentControlSet\\Services\\TCPIP\\Parameters\\DisableTaskOffload: missing",
+              "TimestampText": "21:30:19"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Applied",
+              "Message": "Updated 2 values.",
+              "TimestampText": "21:30:22"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Verified",
+              "Message": "Verified desired values.",
+              "TimestampText": "21:30:22"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Not required",
+              "Message": "Step not executed.",
+              "TimestampText": "-"
+            }
+          ]
+        },
+        {
+          "Stage": "rollback",
+          "AppliedStatus": "NotApplied",
+          "StatusMessage": "Rolled back registry values.",
+          "OutcomeSummary": "Rollback - Rolled Back",
+          "CurrentValue": "Multiple values",
+          "TargetValue": "Multiple values",
+          "WasRolledBack": true,
+          "IsMutationAllowed": true,
+          "HasSuccessfulApplyStory": true,
+          "HasSuccessfulRollbackStory": true,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Detected",
+              "Message": "Detected 1 of 2 values (matches: 0, missing: 1).\nEntries:\n- HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\SystemResponsiveness: 20 -> 10\n- HKLM\\System\\CurrentControlSet\\Services\\TCPIP\\Parameters\\DisableTaskOffload: missing",
+              "TimestampText": "21:30:19"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Applied",
+              "Message": "Updated 2 values.",
+              "TimestampText": "21:30:22"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Verified",
+              "Message": "Verified desired values.",
+              "TimestampText": "21:30:22"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Rolled back",
+              "Message": "Rolled back registry values.",
+              "TimestampText": "21:30:23"
+            }
+          ]
+        },
+        {
+          "Stage": "detect-after",
+          "AppliedStatus": "NotApplied",
+          "StatusMessage": "Detected 1 of 2 values (matches: 0, missing: 1).",
+          "OutcomeSummary": "Detect - Success",
+          "CurrentValue": "Multiple values",
+          "TargetValue": "Multiple values",
+          "WasRolledBack": true,
+          "IsMutationAllowed": true,
+          "HasSuccessfulApplyStory": true,
+          "HasSuccessfulRollbackStory": true,
+          "Steps": [
+            {
+              "Action": "Detect",
+              "StatusText": "Detected",
+              "Message": "Detected 1 of 2 values (matches: 0, missing: 1).\nEntries:\n- HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\\SystemResponsiveness: 20 -> 10\n- HKLM\\System\\CurrentControlSet\\Services\\TCPIP\\Parameters\\DisableTaskOffload: missing",
+              "TimestampText": "21:30:23"
+            },
+            {
+              "Action": "Apply",
+              "StatusText": "Applied",
+              "Message": "Updated 2 values.",
+              "TimestampText": "21:30:22"
+            },
+            {
+              "Action": "Verify",
+              "StatusText": "Verified",
+              "Message": "Verified desired values.",
+              "TimestampText": "21:30:22"
+            },
+            {
+              "Action": "Rollback",
+              "StatusText": "Rolled back",
+              "Message": "Rolled back registry values.",
+              "TimestampText": "21:30:23"
+            }
+          ]
+        }
+      ],
+      "StartedAtUtc": "2026-05-10T18:30:19.880887+00:00",
+      "CompletedAtUtc": "2026-05-10T18:30:23.3145516+00:00"
+    }
+  }
+]
