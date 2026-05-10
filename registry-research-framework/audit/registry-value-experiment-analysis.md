@@ -1,17 +1,17 @@
 # Registry Value Experiment Analysis
 
-- Generated UTC: `2026-05-10T02:09:05Z`
+- Generated UTC: `2026-05-10T03:31:22Z`
 - Input: `registry-research-framework/audit/registry-value-experiments`
 - Pattern: `operator96-*.json`
-- Artifacts analyzed: `120`
+- Artifacts analyzed: `130`
 - Errors: `0`
 
 ## Verdict Counts
 
 - `app_breakage`: `1`
 - `boot_failure`: `1`
-- `harmful`: `95`
-- `low_confidence`: `21`
+- `harmful`: `103`
+- `low_confidence`: `23`
 - `rollback_failure`: `2`
 
 ## Results
@@ -138,3 +138,13 @@
 | `operator96-066-enableinputsuppression-0` | `low_confidence` | `low` | `ok` | `82.951` | apply io_read_mib_per_second changed by +82.95% | `registry-research-framework/audit/registry-value-experiments/operator96-066-enableinputsuppression-0.json` |
 | `operator96-066-enableinputsuppression-1` | `low_confidence` | `low` | `ok` | `67.583` | apply io_read_mib_per_second changed by +67.58% | `registry-research-framework/audit/registry-value-experiments/operator96-066-enableinputsuppression-1.json` |
 | `operator96-067-perfchecktimerimplementation-0` | `harmful` | `low` | `ok` | `-10.395` | post_reboot io_write_mib_per_second changed by -10.39% | `registry-research-framework/audit/registry-value-experiments/operator96-067-perfchecktimerimplementation-0.json` |
+| `operator96-067-perfchecktimerimplementation-1` | `low_confidence` | `low` | `ok` | `141.934` | apply io_read_mib_per_second changed by +141.93% | `registry-research-framework/audit/registry-value-experiments/operator96-067-perfchecktimerimplementation-1.json` |
+| `operator96-068-standbyconnectivitygraceperiod-0` | `harmful` | `low` | `ok` | `-20.922` | post_reboot io_write_mib_per_second changed by -20.92% | `registry-research-framework/audit/registry-value-experiments/operator96-068-standbyconnectivitygraceperiod-0.json` |
+| `operator96-068-standbyconnectivitygraceperiod-1` | `harmful` | `low` | `ok` | `-9.525` | post_reboot io_write_mib_per_second changed by -9.53% | `registry-research-framework/audit/registry-value-experiments/operator96-068-standbyconnectivitygraceperiod-1.json` |
+| `operator96-069-enforceausteritymode-0` | `harmful` | `low` | `ok` | `-16.572` | post_reboot io_write_mib_per_second changed by -16.57% | `registry-research-framework/audit/registry-value-experiments/operator96-069-enforceausteritymode-0.json` |
+| `operator96-069-enforceausteritymode-1` | `harmful` | `low` | `ok` | `-22.153` | post_reboot io_write_mib_per_second changed by -22.15% | `registry-research-framework/audit/registry-value-experiments/operator96-069-enforceausteritymode-1.json` |
+| `operator96-070-alwayscomputeqoshints-0` | `harmful` | `low` | `ok` | `-15.507` | post_reboot io_write_mib_per_second changed by -15.51% | `registry-research-framework/audit/registry-value-experiments/operator96-070-alwayscomputeqoshints-0.json` |
+| `operator96-070-alwayscomputeqoshints-1` | `harmful` | `low` | `ok` | `-31.211` | apply io_read_mib_per_second changed by -31.21% | `registry-research-framework/audit/registry-value-experiments/operator96-070-alwayscomputeqoshints-1.json` |
+| `operator96-071-heteromulticoreclassesenabled-0` | `harmful` | `low` | `ok` | `-15.753` | post_reboot io_write_mib_per_second changed by -15.75% | `registry-research-framework/audit/registry-value-experiments/operator96-071-heteromulticoreclassesenabled-0.json` |
+| `operator96-071-heteromulticoreclassesenabled-1` | `low_confidence` | `low` | `ok` | `75.425` | apply io_read_mib_per_second changed by +75.42% | `registry-research-framework/audit/registry-value-experiments/operator96-071-heteromulticoreclassesenabled-1.json` |
+| `operator96-072-heteromulticlassparkingenabled-0` | `harmful` | `low` | `ok` | `-25.273` | post_reboot io_write_mib_per_second changed by -25.27% | `registry-research-framework/audit/registry-value-experiments/operator96-072-heteromulticlassparkingenabled-0.json` |

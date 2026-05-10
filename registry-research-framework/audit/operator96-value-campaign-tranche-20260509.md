@@ -1,9 +1,9 @@
 # Operator 96 Registry Value Campaign
 
-- Generated UTC: `2026-05-10T00:51:50Z`
+- Generated UTC: `2026-05-10T02:10:30Z`
 - Status: **ok**
-- Planned experiments: `120`
-- Completed in this run: `120`
+- Planned experiments: `130`
+- Completed in this run: `130`
 
 ## Plan
 
@@ -129,6 +129,16 @@
 | 66 | `operator96-066-enableinputsuppression-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\EnableInputSuppression` | `1` | `absent` | `vm-observed` |
 | 66 | `operator96-066-enableinputsuppression-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\EnableInputSuppression` | `0` | `absent` | `vm-observed` |
 | 67 | `operator96-067-perfchecktimerimplementation-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\PerfCheckTimerImplementation` | `0` | `absent` | `vm-observed` |
+| 67 | `operator96-067-perfchecktimerimplementation-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\PerfCheckTimerImplementation` | `1` | `absent` | `vm-observed` |
+| 68 | `operator96-068-standbyconnectivitygraceperiod-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\StandbyConnectivityGracePeriod` | `0` | `absent` | `vm-observed` |
+| 68 | `operator96-068-standbyconnectivitygraceperiod-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\StandbyConnectivityGracePeriod` | `1` | `absent` | `vm-observed` |
+| 69 | `operator96-069-enforceausteritymode-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\EnforceAusterityMode` | `0` | `absent` | `vm-observed` |
+| 69 | `operator96-069-enforceausteritymode-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\EnforceAusterityMode` | `1` | `absent` | `vm-observed` |
+| 70 | `operator96-070-alwayscomputeqoshints-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\AlwaysComputeQosHints` | `0` | `absent` | `vm-observed` |
+| 70 | `operator96-070-alwayscomputeqoshints-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\AlwaysComputeQosHints` | `1` | `absent` | `vm-observed` |
+| 71 | `operator96-071-heteromulticoreclassesenabled-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\HeteroMultiCoreClassesEnabled` | `0` | `absent` | `vm-observed` |
+| 71 | `operator96-071-heteromulticoreclassesenabled-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\HeteroMultiCoreClassesEnabled` | `1` | `absent` | `vm-observed` |
+| 72 | `operator96-072-heteromulticlassparkingenabled-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\HeteroMultiClassParkingEnabled` | `0` | `absent` | `vm-observed` |
 
 ## Results
 
@@ -244,13 +254,23 @@
 | `operator96-061-deepiocoalescingenabled-0` | `harmful` | `low` | `ok` | `skipped-existing-ok` | `True` | `ok`/`0` | `-19.12` | `20.52` | `registry-research-framework/audit/registry-value-experiments/operator96-061-deepiocoalescingenabled-0.json` |
 | `operator96-061-deepiocoalescingenabled-1` | `harmful` | `low` | `ok` | `skipped-existing-ok` | `True` | `ok`/`0` | `-41.937` | `-36.65` | `registry-research-framework/audit/registry-value-experiments/operator96-061-deepiocoalescingenabled-1.json` |
 | `operator96-062-ignorecscompliancecheck-1` | `harmful` | `high` | `ok` | `skipped-existing-ok` | `True` | `ok`/`0` | `-8.363` | `8.1` | `registry-research-framework/audit/registry-value-experiments/operator96-062-ignorecscompliancecheck-1.json` |
-| `operator96-062-ignorecscompliancecheck-0` | `harmful` | `low` | `ok` | `ok` | `True` | `ok`/`0` | `-32.127` | `-12.92` | `registry-research-framework/audit/registry-value-experiments/operator96-062-ignorecscompliancecheck-0.json` |
-| `operator96-063-dripsswhwdivergenceenablelivedump-0` | `harmful` | `low` | `ok` | `ok` | `True` | `ok`/`0` | `-17.886` | `-6.43` | `registry-research-framework/audit/registry-value-experiments/operator96-063-dripsswhwdivergenceenablelivedump-0.json` |
-| `operator96-063-dripsswhwdivergenceenablelivedump-1` | `harmful` | `high` | `ok` | `ok` | `True` | `ok`/`0` | `-7.178` | `1.1` | `registry-research-framework/audit/registry-value-experiments/operator96-063-dripsswhwdivergenceenablelivedump-1.json` |
-| `operator96-064-disablevsynclatencyupdate-1` | `harmful` | `low` | `ok` | `ok` | `True` | `ok`/`0` | `-45.152` | `1.57` | `registry-research-framework/audit/registry-value-experiments/operator96-064-disablevsynclatencyupdate-1.json` |
-| `operator96-064-disablevsynclatencyupdate-0` | `low_confidence` | `low` | `ok` | `ok` | `True` | `ok`/`0` | `68.723` | `9.55` | `registry-research-framework/audit/registry-value-experiments/operator96-064-disablevsynclatencyupdate-0.json` |
-| `operator96-065-sleepstudyaccountingenabled-0` | `app_breakage` | `medium` | `ok` | `ok` | `True` | `ok`/`1` | `None` | `-6.8` | `registry-research-framework/audit/registry-value-experiments/operator96-065-sleepstudyaccountingenabled-0.json` |
-| `operator96-065-sleepstudyaccountingenabled-1` | `harmful` | `high` | `ok` | `ok` | `True` | `ok`/`0` | `-7.421` | `4.32` | `registry-research-framework/audit/registry-value-experiments/operator96-065-sleepstudyaccountingenabled-1.json` |
-| `operator96-066-enableinputsuppression-1` | `low_confidence` | `low` | `ok` | `ok` | `True` | `ok`/`0` | `67.583` | `8.43` | `registry-research-framework/audit/registry-value-experiments/operator96-066-enableinputsuppression-1.json` |
-| `operator96-066-enableinputsuppression-0` | `low_confidence` | `low` | `ok` | `ok` | `True` | `ok`/`0` | `82.951` | `2.47` | `registry-research-framework/audit/registry-value-experiments/operator96-066-enableinputsuppression-0.json` |
-| `operator96-067-perfchecktimerimplementation-0` | `harmful` | `low` | `ok` | `ok` | `True` | `ok`/`0` | `-10.395` | `8.04` | `registry-research-framework/audit/registry-value-experiments/operator96-067-perfchecktimerimplementation-0.json` |
+| `operator96-062-ignorecscompliancecheck-0` | `harmful` | `low` | `ok` | `skipped-existing-ok` | `True` | `ok`/`0` | `-32.127` | `-12.92` | `registry-research-framework/audit/registry-value-experiments/operator96-062-ignorecscompliancecheck-0.json` |
+| `operator96-063-dripsswhwdivergenceenablelivedump-0` | `harmful` | `low` | `ok` | `skipped-existing-ok` | `True` | `ok`/`0` | `-17.886` | `-6.43` | `registry-research-framework/audit/registry-value-experiments/operator96-063-dripsswhwdivergenceenablelivedump-0.json` |
+| `operator96-063-dripsswhwdivergenceenablelivedump-1` | `harmful` | `high` | `ok` | `skipped-existing-ok` | `True` | `ok`/`0` | `-7.178` | `1.1` | `registry-research-framework/audit/registry-value-experiments/operator96-063-dripsswhwdivergenceenablelivedump-1.json` |
+| `operator96-064-disablevsynclatencyupdate-1` | `harmful` | `low` | `ok` | `skipped-existing-ok` | `True` | `ok`/`0` | `-45.152` | `1.57` | `registry-research-framework/audit/registry-value-experiments/operator96-064-disablevsynclatencyupdate-1.json` |
+| `operator96-064-disablevsynclatencyupdate-0` | `low_confidence` | `low` | `ok` | `skipped-existing-ok` | `True` | `ok`/`0` | `68.723` | `9.55` | `registry-research-framework/audit/registry-value-experiments/operator96-064-disablevsynclatencyupdate-0.json` |
+| `operator96-065-sleepstudyaccountingenabled-0` | `app_breakage` | `medium` | `ok` | `skipped-existing-ok` | `True` | `ok`/`1` | `None` | `-6.8` | `registry-research-framework/audit/registry-value-experiments/operator96-065-sleepstudyaccountingenabled-0.json` |
+| `operator96-065-sleepstudyaccountingenabled-1` | `harmful` | `high` | `ok` | `skipped-existing-ok` | `True` | `ok`/`0` | `-7.421` | `4.32` | `registry-research-framework/audit/registry-value-experiments/operator96-065-sleepstudyaccountingenabled-1.json` |
+| `operator96-066-enableinputsuppression-1` | `low_confidence` | `low` | `ok` | `skipped-existing-ok` | `True` | `ok`/`0` | `67.583` | `8.43` | `registry-research-framework/audit/registry-value-experiments/operator96-066-enableinputsuppression-1.json` |
+| `operator96-066-enableinputsuppression-0` | `low_confidence` | `low` | `ok` | `skipped-existing-ok` | `True` | `ok`/`0` | `82.951` | `2.47` | `registry-research-framework/audit/registry-value-experiments/operator96-066-enableinputsuppression-0.json` |
+| `operator96-067-perfchecktimerimplementation-0` | `harmful` | `low` | `ok` | `skipped-existing-ok` | `True` | `ok`/`0` | `-10.395` | `8.04` | `registry-research-framework/audit/registry-value-experiments/operator96-067-perfchecktimerimplementation-0.json` |
+| `operator96-067-perfchecktimerimplementation-1` | `low_confidence` | `low` | `ok` | `ok` | `True` | `ok`/`0` | `141.934` | `26.64` | `registry-research-framework/audit/registry-value-experiments/operator96-067-perfchecktimerimplementation-1.json` |
+| `operator96-068-standbyconnectivitygraceperiod-0` | `harmful` | `low` | `ok` | `ok` | `True` | `ok`/`0` | `-20.922` | `-3.71` | `registry-research-framework/audit/registry-value-experiments/operator96-068-standbyconnectivitygraceperiod-0.json` |
+| `operator96-068-standbyconnectivitygraceperiod-1` | `harmful` | `low` | `ok` | `ok` | `True` | `ok`/`0` | `-9.525` | `0.93` | `registry-research-framework/audit/registry-value-experiments/operator96-068-standbyconnectivitygraceperiod-1.json` |
+| `operator96-069-enforceausteritymode-0` | `harmful` | `low` | `ok` | `ok` | `True` | `ok`/`0` | `-16.572` | `-3.56` | `registry-research-framework/audit/registry-value-experiments/operator96-069-enforceausteritymode-0.json` |
+| `operator96-069-enforceausteritymode-1` | `harmful` | `low` | `ok` | `ok` | `True` | `ok`/`0` | `-22.153` | `6.57` | `registry-research-framework/audit/registry-value-experiments/operator96-069-enforceausteritymode-1.json` |
+| `operator96-070-alwayscomputeqoshints-0` | `harmful` | `low` | `ok` | `ok` | `True` | `ok`/`0` | `-15.507` | `-4.41` | `registry-research-framework/audit/registry-value-experiments/operator96-070-alwayscomputeqoshints-0.json` |
+| `operator96-070-alwayscomputeqoshints-1` | `harmful` | `low` | `ok` | `ok` | `True` | `ok`/`0` | `-31.211` | `112.61` | `registry-research-framework/audit/registry-value-experiments/operator96-070-alwayscomputeqoshints-1.json` |
+| `operator96-071-heteromulticoreclassesenabled-0` | `harmful` | `low` | `ok` | `ok` | `True` | `ok`/`0` | `-15.753` | `-0.74` | `registry-research-framework/audit/registry-value-experiments/operator96-071-heteromulticoreclassesenabled-0.json` |
+| `operator96-071-heteromulticoreclassesenabled-1` | `low_confidence` | `low` | `ok` | `ok` | `True` | `ok`/`0` | `75.425` | `11.72` | `registry-research-framework/audit/registry-value-experiments/operator96-071-heteromulticoreclassesenabled-1.json` |
+| `operator96-072-heteromulticlassparkingenabled-0` | `harmful` | `low` | `ok` | `ok` | `True` | `ok`/`0` | `-25.273` | `-2.37` | `registry-research-framework/audit/registry-value-experiments/operator96-072-heteromulticlassparkingenabled-0.json` |

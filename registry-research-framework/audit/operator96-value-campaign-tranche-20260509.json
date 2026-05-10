@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-05-10T00:51:50Z",
+  "generated_utc": "2026-05-10T02:10:30Z",
   "status": "ok",
   "report": "registry-research-framework/audit/operator-regadd-followup-source-default-report-20260509.json",
   "smoke_profile": "gui",
@@ -1770,6 +1770,148 @@
       "risk_flags": [
         "kernel-timing-sensitive"
       ],
+      "source_quality": "vm-observed"
+    },
+    {
+      "index": 67,
+      "experiment_id": "operator96-067-perfchecktimerimplementation-1",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "PerfCheckTimerImplementation",
+      "value_data": 1,
+      "requested_data": "0",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [
+        "kernel-timing-sensitive"
+      ],
+      "source_quality": "vm-observed"
+    },
+    {
+      "index": 68,
+      "experiment_id": "operator96-068-standbyconnectivitygraceperiod-0",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "StandbyConnectivityGracePeriod",
+      "value_data": 0,
+      "requested_data": "0",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed"
+    },
+    {
+      "index": 68,
+      "experiment_id": "operator96-068-standbyconnectivitygraceperiod-1",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "StandbyConnectivityGracePeriod",
+      "value_data": 1,
+      "requested_data": "0",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed"
+    },
+    {
+      "index": 69,
+      "experiment_id": "operator96-069-enforceausteritymode-0",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "EnforceAusterityMode",
+      "value_data": 0,
+      "requested_data": "0",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed"
+    },
+    {
+      "index": 69,
+      "experiment_id": "operator96-069-enforceausteritymode-1",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "EnforceAusterityMode",
+      "value_data": 1,
+      "requested_data": "0",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed"
+    },
+    {
+      "index": 70,
+      "experiment_id": "operator96-070-alwayscomputeqoshints-0",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "AlwaysComputeQosHints",
+      "value_data": 0,
+      "requested_data": "0",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed"
+    },
+    {
+      "index": 70,
+      "experiment_id": "operator96-070-alwayscomputeqoshints-1",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "AlwaysComputeQosHints",
+      "value_data": 1,
+      "requested_data": "0",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed"
+    },
+    {
+      "index": 71,
+      "experiment_id": "operator96-071-heteromulticoreclassesenabled-0",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "HeteroMultiCoreClassesEnabled",
+      "value_data": 0,
+      "requested_data": "0",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed"
+    },
+    {
+      "index": 71,
+      "experiment_id": "operator96-071-heteromulticoreclassesenabled-1",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "HeteroMultiCoreClassesEnabled",
+      "value_data": 1,
+      "requested_data": "0",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed"
+    },
+    {
+      "index": 72,
+      "experiment_id": "operator96-072-heteromulticlassparkingenabled-0",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "HeteroMultiClassParkingEnabled",
+      "value_data": 0,
+      "requested_data": "0",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [],
       "source_quality": "vm-observed"
     }
   ],
@@ -15950,16 +16092,8 @@
       "record_class": "value",
       "risk_flags": [],
       "source_quality": "vm-observed",
-      "status": "ok",
-      "returncode": 0,
+      "status": "skipped-existing-ok",
       "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-062-ignorecscompliancecheck-0.json",
-      "stdout_payload": {
-        "status": "ok",
-        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-062-ignorecscompliancecheck-0.json",
-        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-062-ignorecscompliancecheck-0.md",
-        "error": null
-      },
-      "stderr": "",
       "observations": {
         "status": "ok",
         "verdict": "harmful",
@@ -16086,16 +16220,8 @@
       "record_class": "value",
       "risk_flags": [],
       "source_quality": "vm-observed",
-      "status": "ok",
-      "returncode": 0,
+      "status": "skipped-existing-ok",
       "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-063-dripsswhwdivergenceenablelivedump-0.json",
-      "stdout_payload": {
-        "status": "ok",
-        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-063-dripsswhwdivergenceenablelivedump-0.json",
-        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-063-dripsswhwdivergenceenablelivedump-0.md",
-        "error": null
-      },
-      "stderr": "",
       "observations": {
         "status": "ok",
         "verdict": "harmful",
@@ -16222,16 +16348,8 @@
       "record_class": "value",
       "risk_flags": [],
       "source_quality": "vm-observed",
-      "status": "ok",
-      "returncode": 0,
+      "status": "skipped-existing-ok",
       "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-063-dripsswhwdivergenceenablelivedump-1.json",
-      "stdout_payload": {
-        "status": "ok",
-        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-063-dripsswhwdivergenceenablelivedump-1.json",
-        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-063-dripsswhwdivergenceenablelivedump-1.md",
-        "error": null
-      },
-      "stderr": "",
       "observations": {
         "status": "ok",
         "verdict": "harmful",
@@ -16358,16 +16476,8 @@
       "record_class": "value",
       "risk_flags": [],
       "source_quality": "vm-observed",
-      "status": "ok",
-      "returncode": 0,
+      "status": "skipped-existing-ok",
       "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-064-disablevsynclatencyupdate-1.json",
-      "stdout_payload": {
-        "status": "ok",
-        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-064-disablevsynclatencyupdate-1.json",
-        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-064-disablevsynclatencyupdate-1.md",
-        "error": null
-      },
-      "stderr": "",
       "observations": {
         "status": "ok",
         "verdict": "harmful",
@@ -16494,16 +16604,8 @@
       "record_class": "value",
       "risk_flags": [],
       "source_quality": "vm-observed",
-      "status": "ok",
-      "returncode": 0,
+      "status": "skipped-existing-ok",
       "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-064-disablevsynclatencyupdate-0.json",
-      "stdout_payload": {
-        "status": "ok",
-        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-064-disablevsynclatencyupdate-0.json",
-        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-064-disablevsynclatencyupdate-0.md",
-        "error": null
-      },
-      "stderr": "",
       "observations": {
         "status": "ok",
         "verdict": "low_confidence",
@@ -16630,16 +16732,8 @@
       "record_class": "value",
       "risk_flags": [],
       "source_quality": "vm-observed",
-      "status": "ok",
-      "returncode": 0,
+      "status": "skipped-existing-ok",
       "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-065-sleepstudyaccountingenabled-0.json",
-      "stdout_payload": {
-        "status": "ok",
-        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-065-sleepstudyaccountingenabled-0.json",
-        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-065-sleepstudyaccountingenabled-0.md",
-        "error": null
-      },
-      "stderr": "",
       "observations": {
         "status": "ok",
         "verdict": "app_breakage",
@@ -16775,16 +16869,8 @@
       "record_class": "value",
       "risk_flags": [],
       "source_quality": "vm-observed",
-      "status": "ok",
-      "returncode": 0,
+      "status": "skipped-existing-ok",
       "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-065-sleepstudyaccountingenabled-1.json",
-      "stdout_payload": {
-        "status": "ok",
-        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-065-sleepstudyaccountingenabled-1.json",
-        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-065-sleepstudyaccountingenabled-1.md",
-        "error": null
-      },
-      "stderr": "",
       "observations": {
         "status": "ok",
         "verdict": "harmful",
@@ -16911,16 +16997,8 @@
       "record_class": "value",
       "risk_flags": [],
       "source_quality": "vm-observed",
-      "status": "ok",
-      "returncode": 0,
+      "status": "skipped-existing-ok",
       "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-066-enableinputsuppression-1.json",
-      "stdout_payload": {
-        "status": "ok",
-        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-066-enableinputsuppression-1.json",
-        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-066-enableinputsuppression-1.md",
-        "error": null
-      },
-      "stderr": "",
       "observations": {
         "status": "ok",
         "verdict": "low_confidence",
@@ -17047,16 +17125,8 @@
       "record_class": "value",
       "risk_flags": [],
       "source_quality": "vm-observed",
-      "status": "ok",
-      "returncode": 0,
+      "status": "skipped-existing-ok",
       "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-066-enableinputsuppression-0.json",
-      "stdout_payload": {
-        "status": "ok",
-        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-066-enableinputsuppression-0.json",
-        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-066-enableinputsuppression-0.md",
-        "error": null
-      },
-      "stderr": "",
       "observations": {
         "status": "ok",
         "verdict": "low_confidence",
@@ -17185,16 +17255,8 @@
         "kernel-timing-sensitive"
       ],
       "source_quality": "vm-observed",
-      "status": "ok",
-      "returncode": 0,
+      "status": "skipped-existing-ok",
       "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-067-perfchecktimerimplementation-0.json",
-      "stdout_payload": {
-        "status": "ok",
-        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-067-perfchecktimerimplementation-0.json",
-        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-067-perfchecktimerimplementation-0.md",
-        "error": null
-      },
-      "stderr": "",
       "observations": {
         "status": "ok",
         "verdict": "harmful",
@@ -17304,6 +17366,1368 @@
             "cpu_single_seconds": null,
             "cpu_multi_seconds": null,
             "io_write_read_mib_per_second": 8.04
+          }
+        }
+      }
+    },
+    {
+      "index": 67,
+      "experiment_id": "operator96-067-perfchecktimerimplementation-1",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "PerfCheckTimerImplementation",
+      "value_data": 1,
+      "requested_data": "0",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [
+        "kernel-timing-sensitive"
+      ],
+      "source_quality": "vm-observed",
+      "status": "ok",
+      "returncode": 0,
+      "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-067-perfchecktimerimplementation-1.json",
+      "stdout_payload": {
+        "status": "ok",
+        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-067-perfchecktimerimplementation-1.json",
+        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-067-perfchecktimerimplementation-1.md",
+        "error": null
+      },
+      "stderr": "",
+      "observations": {
+        "status": "ok",
+        "verdict": "low_confidence",
+        "confidence": "low",
+        "host_noise": "ok",
+        "primary_delta_pct": 141.934,
+        "verdict_reason": "apply io_read_mib_per_second changed by +141.93%",
+        "metrics_used": [
+          "io_read_mib_per_second"
+        ],
+        "safety_findings": [],
+        "smoke_hard_success": {
+          "apply_smoke_hard_success": true,
+          "post_reboot_smoke_hard_success": true,
+          "post_rollback_smoke_hard_success": true
+        },
+        "apply": {
+          "original": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "PerfCheckTimerImplementation",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "after_apply": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "PerfCheckTimerImplementation",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 1,
+            "value_kind": "System.Int32",
+            "value_hex": "0x1",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_reboot": {
+          "after_reboot": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "PerfCheckTimerImplementation",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 1,
+            "value_kind": "System.Int32",
+            "value_hex": "0x1",
+            "status": "value-present",
+            "error": null
+          },
+          "restore_action": "removed-created-value",
+          "after_restore": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "PerfCheckTimerImplementation",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_rollback": {
+          "final": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "PerfCheckTimerImplementation",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "benchmark_delta_percent": {
+          "apply_vs_baseline": {
+            "cpu_single_seconds": null,
+            "cpu_multi_seconds": null,
+            "io_write_read_mib_per_second": 103.84
+          },
+          "post_reboot_vs_baseline": {
+            "cpu_single_seconds": null,
+            "cpu_multi_seconds": null,
+            "io_write_read_mib_per_second": 26.64
+          }
+        }
+      }
+    },
+    {
+      "index": 68,
+      "experiment_id": "operator96-068-standbyconnectivitygraceperiod-0",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "StandbyConnectivityGracePeriod",
+      "value_data": 0,
+      "requested_data": "0",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed",
+      "status": "ok",
+      "returncode": 0,
+      "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-068-standbyconnectivitygraceperiod-0.json",
+      "stdout_payload": {
+        "status": "ok",
+        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-068-standbyconnectivitygraceperiod-0.json",
+        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-068-standbyconnectivitygraceperiod-0.md",
+        "error": null
+      },
+      "stderr": "",
+      "observations": {
+        "status": "ok",
+        "verdict": "harmful",
+        "confidence": "low",
+        "host_noise": "ok",
+        "primary_delta_pct": -20.922,
+        "verdict_reason": "post_reboot io_write_mib_per_second changed by -20.92%",
+        "metrics_used": [
+          "io_write_mib_per_second"
+        ],
+        "safety_findings": [],
+        "smoke_hard_success": {
+          "apply_smoke_hard_success": true,
+          "post_reboot_smoke_hard_success": true,
+          "post_rollback_smoke_hard_success": true
+        },
+        "apply": {
+          "original": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "StandbyConnectivityGracePeriod",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "after_apply": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "StandbyConnectivityGracePeriod",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 0,
+            "value_kind": "System.Int32",
+            "value_hex": "0x0",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_reboot": {
+          "after_reboot": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "StandbyConnectivityGracePeriod",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 0,
+            "value_kind": "System.Int32",
+            "value_hex": "0x0",
+            "status": "value-present",
+            "error": null
+          },
+          "restore_action": "removed-created-value",
+          "after_restore": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "StandbyConnectivityGracePeriod",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_rollback": {
+          "final": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "StandbyConnectivityGracePeriod",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "benchmark_delta_percent": {
+          "apply_vs_baseline": {
+            "cpu_single_seconds": null,
+            "cpu_multi_seconds": null,
+            "io_write_read_mib_per_second": 49.37
+          },
+          "post_reboot_vs_baseline": {
+            "cpu_single_seconds": null,
+            "cpu_multi_seconds": null,
+            "io_write_read_mib_per_second": -3.71
+          }
+        }
+      }
+    },
+    {
+      "index": 68,
+      "experiment_id": "operator96-068-standbyconnectivitygraceperiod-1",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "StandbyConnectivityGracePeriod",
+      "value_data": 1,
+      "requested_data": "0",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed",
+      "status": "ok",
+      "returncode": 0,
+      "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-068-standbyconnectivitygraceperiod-1.json",
+      "stdout_payload": {
+        "status": "ok",
+        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-068-standbyconnectivitygraceperiod-1.json",
+        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-068-standbyconnectivitygraceperiod-1.md",
+        "error": null
+      },
+      "stderr": "",
+      "observations": {
+        "status": "ok",
+        "verdict": "harmful",
+        "confidence": "low",
+        "host_noise": "ok",
+        "primary_delta_pct": -9.525,
+        "verdict_reason": "post_reboot io_write_mib_per_second changed by -9.53%",
+        "metrics_used": [
+          "io_write_mib_per_second"
+        ],
+        "safety_findings": [],
+        "smoke_hard_success": {
+          "apply_smoke_hard_success": true,
+          "post_reboot_smoke_hard_success": true,
+          "post_rollback_smoke_hard_success": true
+        },
+        "apply": {
+          "original": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "StandbyConnectivityGracePeriod",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "after_apply": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "StandbyConnectivityGracePeriod",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 1,
+            "value_kind": "System.Int32",
+            "value_hex": "0x1",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_reboot": {
+          "after_reboot": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "StandbyConnectivityGracePeriod",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 1,
+            "value_kind": "System.Int32",
+            "value_hex": "0x1",
+            "status": "value-present",
+            "error": null
+          },
+          "restore_action": "removed-created-value",
+          "after_restore": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "StandbyConnectivityGracePeriod",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_rollback": {
+          "final": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "StandbyConnectivityGracePeriod",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "benchmark_delta_percent": {
+          "apply_vs_baseline": {
+            "cpu_single_seconds": null,
+            "cpu_multi_seconds": null,
+            "io_write_read_mib_per_second": 50.36
+          },
+          "post_reboot_vs_baseline": {
+            "cpu_single_seconds": null,
+            "cpu_multi_seconds": null,
+            "io_write_read_mib_per_second": 0.93
+          }
+        }
+      }
+    },
+    {
+      "index": 69,
+      "experiment_id": "operator96-069-enforceausteritymode-0",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "EnforceAusterityMode",
+      "value_data": 0,
+      "requested_data": "0",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed",
+      "status": "ok",
+      "returncode": 0,
+      "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-069-enforceausteritymode-0.json",
+      "stdout_payload": {
+        "status": "ok",
+        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-069-enforceausteritymode-0.json",
+        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-069-enforceausteritymode-0.md",
+        "error": null
+      },
+      "stderr": "",
+      "observations": {
+        "status": "ok",
+        "verdict": "harmful",
+        "confidence": "low",
+        "host_noise": "ok",
+        "primary_delta_pct": -16.572,
+        "verdict_reason": "post_reboot io_write_mib_per_second changed by -16.57%",
+        "metrics_used": [
+          "io_write_mib_per_second"
+        ],
+        "safety_findings": [],
+        "smoke_hard_success": {
+          "apply_smoke_hard_success": true,
+          "post_reboot_smoke_hard_success": true,
+          "post_rollback_smoke_hard_success": true
+        },
+        "apply": {
+          "original": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "EnforceAusterityMode",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "after_apply": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "EnforceAusterityMode",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 0,
+            "value_kind": "System.Int32",
+            "value_hex": "0x0",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_reboot": {
+          "after_reboot": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "EnforceAusterityMode",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 0,
+            "value_kind": "System.Int32",
+            "value_hex": "0x0",
+            "status": "value-present",
+            "error": null
+          },
+          "restore_action": "removed-created-value",
+          "after_restore": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "EnforceAusterityMode",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_rollback": {
+          "final": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "EnforceAusterityMode",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "benchmark_delta_percent": {
+          "apply_vs_baseline": {
+            "cpu_single_seconds": null,
+            "cpu_multi_seconds": null,
+            "io_write_read_mib_per_second": 52.22
+          },
+          "post_reboot_vs_baseline": {
+            "cpu_single_seconds": null,
+            "cpu_multi_seconds": null,
+            "io_write_read_mib_per_second": -3.56
+          }
+        }
+      }
+    },
+    {
+      "index": 69,
+      "experiment_id": "operator96-069-enforceausteritymode-1",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "EnforceAusterityMode",
+      "value_data": 1,
+      "requested_data": "0",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed",
+      "status": "ok",
+      "returncode": 0,
+      "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-069-enforceausteritymode-1.json",
+      "stdout_payload": {
+        "status": "ok",
+        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-069-enforceausteritymode-1.json",
+        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-069-enforceausteritymode-1.md",
+        "error": null
+      },
+      "stderr": "",
+      "observations": {
+        "status": "ok",
+        "verdict": "harmful",
+        "confidence": "low",
+        "host_noise": "ok",
+        "primary_delta_pct": -22.153,
+        "verdict_reason": "post_reboot io_write_mib_per_second changed by -22.15%",
+        "metrics_used": [
+          "io_write_mib_per_second"
+        ],
+        "safety_findings": [],
+        "smoke_hard_success": {
+          "apply_smoke_hard_success": true,
+          "post_reboot_smoke_hard_success": true,
+          "post_rollback_smoke_hard_success": true
+        },
+        "apply": {
+          "original": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "EnforceAusterityMode",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "after_apply": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "EnforceAusterityMode",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 1,
+            "value_kind": "System.Int32",
+            "value_hex": "0x1",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_reboot": {
+          "after_reboot": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "EnforceAusterityMode",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 1,
+            "value_kind": "System.Int32",
+            "value_hex": "0x1",
+            "status": "value-present",
+            "error": null
+          },
+          "restore_action": "removed-created-value",
+          "after_restore": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "EnforceAusterityMode",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_rollback": {
+          "final": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "EnforceAusterityMode",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "benchmark_delta_percent": {
+          "apply_vs_baseline": {
+            "cpu_single_seconds": null,
+            "cpu_multi_seconds": null,
+            "io_write_read_mib_per_second": 67.74
+          },
+          "post_reboot_vs_baseline": {
+            "cpu_single_seconds": null,
+            "cpu_multi_seconds": null,
+            "io_write_read_mib_per_second": 6.57
+          }
+        }
+      }
+    },
+    {
+      "index": 70,
+      "experiment_id": "operator96-070-alwayscomputeqoshints-0",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "AlwaysComputeQosHints",
+      "value_data": 0,
+      "requested_data": "0",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed",
+      "status": "ok",
+      "returncode": 0,
+      "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-070-alwayscomputeqoshints-0.json",
+      "stdout_payload": {
+        "status": "ok",
+        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-070-alwayscomputeqoshints-0.json",
+        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-070-alwayscomputeqoshints-0.md",
+        "error": null
+      },
+      "stderr": "",
+      "observations": {
+        "status": "ok",
+        "verdict": "harmful",
+        "confidence": "low",
+        "host_noise": "ok",
+        "primary_delta_pct": -15.507,
+        "verdict_reason": "post_reboot io_write_mib_per_second changed by -15.51%",
+        "metrics_used": [
+          "io_write_mib_per_second"
+        ],
+        "safety_findings": [],
+        "smoke_hard_success": {
+          "apply_smoke_hard_success": true,
+          "post_reboot_smoke_hard_success": true,
+          "post_rollback_smoke_hard_success": true
+        },
+        "apply": {
+          "original": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "AlwaysComputeQosHints",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "after_apply": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "AlwaysComputeQosHints",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 0,
+            "value_kind": "System.Int32",
+            "value_hex": "0x0",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_reboot": {
+          "after_reboot": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "AlwaysComputeQosHints",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 0,
+            "value_kind": "System.Int32",
+            "value_hex": "0x0",
+            "status": "value-present",
+            "error": null
+          },
+          "restore_action": "removed-created-value",
+          "after_restore": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "AlwaysComputeQosHints",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_rollback": {
+          "final": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "AlwaysComputeQosHints",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "benchmark_delta_percent": {
+          "apply_vs_baseline": {
+            "cpu_single_seconds": null,
+            "cpu_multi_seconds": null,
+            "io_write_read_mib_per_second": -10.94
+          },
+          "post_reboot_vs_baseline": {
+            "cpu_single_seconds": null,
+            "cpu_multi_seconds": null,
+            "io_write_read_mib_per_second": -4.41
+          }
+        }
+      }
+    },
+    {
+      "index": 70,
+      "experiment_id": "operator96-070-alwayscomputeqoshints-1",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "AlwaysComputeQosHints",
+      "value_data": 1,
+      "requested_data": "0",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed",
+      "status": "ok",
+      "returncode": 0,
+      "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-070-alwayscomputeqoshints-1.json",
+      "stdout_payload": {
+        "status": "ok",
+        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-070-alwayscomputeqoshints-1.json",
+        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-070-alwayscomputeqoshints-1.md",
+        "error": null
+      },
+      "stderr": "",
+      "observations": {
+        "status": "ok",
+        "verdict": "harmful",
+        "confidence": "low",
+        "host_noise": "ok",
+        "primary_delta_pct": -31.211,
+        "verdict_reason": "apply io_read_mib_per_second changed by -31.21%",
+        "metrics_used": [
+          "io_read_mib_per_second"
+        ],
+        "safety_findings": [],
+        "smoke_hard_success": {
+          "apply_smoke_hard_success": true,
+          "post_reboot_smoke_hard_success": true,
+          "post_rollback_smoke_hard_success": true
+        },
+        "apply": {
+          "original": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "AlwaysComputeQosHints",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "after_apply": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "AlwaysComputeQosHints",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 1,
+            "value_kind": "System.Int32",
+            "value_hex": "0x1",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_reboot": {
+          "after_reboot": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "AlwaysComputeQosHints",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 1,
+            "value_kind": "System.Int32",
+            "value_hex": "0x1",
+            "status": "value-present",
+            "error": null
+          },
+          "restore_action": "removed-created-value",
+          "after_restore": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "AlwaysComputeQosHints",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_rollback": {
+          "final": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "AlwaysComputeQosHints",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "benchmark_delta_percent": {
+          "apply_vs_baseline": {
+            "cpu_single_seconds": null,
+            "cpu_multi_seconds": null,
+            "io_write_read_mib_per_second": -26.62
+          },
+          "post_reboot_vs_baseline": {
+            "cpu_single_seconds": null,
+            "cpu_multi_seconds": null,
+            "io_write_read_mib_per_second": 112.61
+          }
+        }
+      }
+    },
+    {
+      "index": 71,
+      "experiment_id": "operator96-071-heteromulticoreclassesenabled-0",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "HeteroMultiCoreClassesEnabled",
+      "value_data": 0,
+      "requested_data": "0",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed",
+      "status": "ok",
+      "returncode": 0,
+      "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-071-heteromulticoreclassesenabled-0.json",
+      "stdout_payload": {
+        "status": "ok",
+        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-071-heteromulticoreclassesenabled-0.json",
+        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-071-heteromulticoreclassesenabled-0.md",
+        "error": null
+      },
+      "stderr": "",
+      "observations": {
+        "status": "ok",
+        "verdict": "harmful",
+        "confidence": "low",
+        "host_noise": "ok",
+        "primary_delta_pct": -15.753,
+        "verdict_reason": "post_reboot io_write_mib_per_second changed by -15.75%",
+        "metrics_used": [
+          "io_write_mib_per_second"
+        ],
+        "safety_findings": [],
+        "smoke_hard_success": {
+          "apply_smoke_hard_success": true,
+          "post_reboot_smoke_hard_success": true,
+          "post_rollback_smoke_hard_success": true
+        },
+        "apply": {
+          "original": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "HeteroMultiCoreClassesEnabled",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "after_apply": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "HeteroMultiCoreClassesEnabled",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 0,
+            "value_kind": "System.Int32",
+            "value_hex": "0x0",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_reboot": {
+          "after_reboot": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "HeteroMultiCoreClassesEnabled",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 0,
+            "value_kind": "System.Int32",
+            "value_hex": "0x0",
+            "status": "value-present",
+            "error": null
+          },
+          "restore_action": "removed-created-value",
+          "after_restore": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "HeteroMultiCoreClassesEnabled",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_rollback": {
+          "final": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "HeteroMultiCoreClassesEnabled",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "benchmark_delta_percent": {
+          "apply_vs_baseline": {
+            "cpu_single_seconds": null,
+            "cpu_multi_seconds": null,
+            "io_write_read_mib_per_second": 82.64
+          },
+          "post_reboot_vs_baseline": {
+            "cpu_single_seconds": null,
+            "cpu_multi_seconds": null,
+            "io_write_read_mib_per_second": -0.74
+          }
+        }
+      }
+    },
+    {
+      "index": 71,
+      "experiment_id": "operator96-071-heteromulticoreclassesenabled-1",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "HeteroMultiCoreClassesEnabled",
+      "value_data": 1,
+      "requested_data": "0",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed",
+      "status": "ok",
+      "returncode": 0,
+      "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-071-heteromulticoreclassesenabled-1.json",
+      "stdout_payload": {
+        "status": "ok",
+        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-071-heteromulticoreclassesenabled-1.json",
+        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-071-heteromulticoreclassesenabled-1.md",
+        "error": null
+      },
+      "stderr": "",
+      "observations": {
+        "status": "ok",
+        "verdict": "low_confidence",
+        "confidence": "low",
+        "host_noise": "ok",
+        "primary_delta_pct": 75.425,
+        "verdict_reason": "apply io_read_mib_per_second changed by +75.42%",
+        "metrics_used": [
+          "io_read_mib_per_second"
+        ],
+        "safety_findings": [],
+        "smoke_hard_success": {
+          "apply_smoke_hard_success": true,
+          "post_reboot_smoke_hard_success": true,
+          "post_rollback_smoke_hard_success": true
+        },
+        "apply": {
+          "original": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "HeteroMultiCoreClassesEnabled",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "after_apply": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "HeteroMultiCoreClassesEnabled",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 1,
+            "value_kind": "System.Int32",
+            "value_hex": "0x1",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_reboot": {
+          "after_reboot": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "HeteroMultiCoreClassesEnabled",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 1,
+            "value_kind": "System.Int32",
+            "value_hex": "0x1",
+            "status": "value-present",
+            "error": null
+          },
+          "restore_action": "removed-created-value",
+          "after_restore": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "HeteroMultiCoreClassesEnabled",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_rollback": {
+          "final": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "HeteroMultiCoreClassesEnabled",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "benchmark_delta_percent": {
+          "apply_vs_baseline": {
+            "cpu_single_seconds": null,
+            "cpu_multi_seconds": null,
+            "io_write_read_mib_per_second": 66.86
+          },
+          "post_reboot_vs_baseline": {
+            "cpu_single_seconds": null,
+            "cpu_multi_seconds": null,
+            "io_write_read_mib_per_second": 11.72
+          }
+        }
+      }
+    },
+    {
+      "index": 72,
+      "experiment_id": "operator96-072-heteromulticlassparkingenabled-0",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "HeteroMultiClassParkingEnabled",
+      "value_data": 0,
+      "requested_data": "0",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed",
+      "status": "ok",
+      "returncode": 0,
+      "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-072-heteromulticlassparkingenabled-0.json",
+      "stdout_payload": {
+        "status": "ok",
+        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-072-heteromulticlassparkingenabled-0.json",
+        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-072-heteromulticlassparkingenabled-0.md",
+        "error": null
+      },
+      "stderr": "",
+      "observations": {
+        "status": "ok",
+        "verdict": "harmful",
+        "confidence": "low",
+        "host_noise": "ok",
+        "primary_delta_pct": -25.273,
+        "verdict_reason": "post_reboot io_write_mib_per_second changed by -25.27%",
+        "metrics_used": [
+          "io_write_mib_per_second"
+        ],
+        "safety_findings": [],
+        "smoke_hard_success": {
+          "apply_smoke_hard_success": true,
+          "post_reboot_smoke_hard_success": true,
+          "post_rollback_smoke_hard_success": true
+        },
+        "apply": {
+          "original": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "HeteroMultiClassParkingEnabled",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "after_apply": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "HeteroMultiClassParkingEnabled",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 0,
+            "value_kind": "System.Int32",
+            "value_hex": "0x0",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_reboot": {
+          "after_reboot": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "HeteroMultiClassParkingEnabled",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 0,
+            "value_kind": "System.Int32",
+            "value_hex": "0x0",
+            "status": "value-present",
+            "error": null
+          },
+          "restore_action": "removed-created-value",
+          "after_restore": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "HeteroMultiClassParkingEnabled",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_rollback": {
+          "final": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "HeteroMultiClassParkingEnabled",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "benchmark_delta_percent": {
+          "apply_vs_baseline": {
+            "cpu_single_seconds": null,
+            "cpu_multi_seconds": null,
+            "io_write_read_mib_per_second": 77.49
+          },
+          "post_reboot_vs_baseline": {
+            "cpu_single_seconds": null,
+            "cpu_multi_seconds": null,
+            "io_write_read_mib_per_second": -2.37
           }
         }
       }
