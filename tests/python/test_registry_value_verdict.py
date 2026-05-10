@@ -116,6 +116,38 @@ class RegistryValueVerdictTests(unittest.TestCase):
 
         self.assertEqual(verdict["overall"], "rollback_failure")
 
+    def test_recovered_rollback_stage_failure_is_rollback_failure(self):
+        payload = artifact_with_bench(
+            {"status": "ok", "io_write_read_mib_per_second": 100.0},
+            {"status": "ok", "io_write_read_mib_per_second": 100.0},
+        )
+        payload["status"] = "ok"
+        payload["error"] = "post-reboot-rollback-stage-failed"
+        payload["outcome"] = "rollback-stage-failure-recovered"
+        payload["controlled_failure"] = True
+        payload["recovery"] = {"status": "ok", "snapshot": "clean-25h2-qga"}
+
+        verdict = self.module.compute_registry_value_verdict(payload)
+
+        self.assertEqual(verdict["overall"], "rollback_failure")
+        self.assertEqual(verdict["confidence"], "high")
+
+    def test_recovered_apply_stage_failure_is_app_breakage(self):
+        payload = artifact_with_bench(
+            {"status": "ok", "io_write_read_mib_per_second": 100.0},
+            {"status": "ok", "io_write_read_mib_per_second": 100.0},
+        )
+        payload["status"] = "ok"
+        payload["error"] = "apply-stage-failed"
+        payload["outcome"] = "apply-stage-failure-recovered"
+        payload["controlled_failure"] = True
+        payload["recovery"] = {"status": "ok", "snapshot": "clean-25h2-qga"}
+
+        verdict = self.module.compute_registry_value_verdict(payload)
+
+        self.assertEqual(verdict["overall"], "app_breakage")
+        self.assertEqual(verdict["confidence"], "high")
+
 
 if __name__ == "__main__":
     unittest.main()

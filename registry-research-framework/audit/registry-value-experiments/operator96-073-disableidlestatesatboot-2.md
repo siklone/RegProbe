@@ -1,9 +1,9 @@
-# Registry Value Experiment - operator96-072-heteromulticlassparkingenabled-0
+# Registry Value Experiment - operator96-073-disableidlestatesatboot-2
 
 - Status: **ok**
-- Generated UTC: `2026-05-10T09:03:12Z`
-- Target: `HKLM\SYSTEM\CurrentControlSet\Control\Power\HeteroMultiClassParkingEnabled`
-- Test value: `0`
+- Generated UTC: `2026-05-10T09:18:43Z`
+- Target: `HKLM\SYSTEM\CurrentControlSet\Control\Power\DisableIdleStatesAtBoot`
+- Test value: `2`
 - Outcome: `completed`
 
 ## Result
@@ -17,7 +17,7 @@
 - `status`: `ok`
 - `error`: `None`
 - `original`: status=`value-missing`, value_exists=`False`, value=`None`
-- `after_apply`: status=`value-present`, value_exists=`True`, value=`0`
+- `after_apply`: status=`value-present`, value_exists=`True`, value=`2`
 - `smoke.failure_count`: `1`
 - `smoke.hard_failure_count`: `0`
 - `smoke.best_effort_failure_count`: `1`
@@ -30,18 +30,18 @@
 - `settings-uri-launch`: `True` - launch-command-succeeded
 - `store-uri-launch`: `False` - This command cannot be run due to the error: The operation attempted is not supported.
 - `interactive_user_smoke`: status=`ok`, failure_count=`0`
-- `benchmarks`: status=`ok`, cpu_single_seconds=`None`, cpu_multi_seconds=`None`, io_mib_s=`1190.8477`
+- `benchmarks`: status=`ok`, cpu_single_seconds=`None`, cpu_multi_seconds=`None`, io_mib_s=`796.4036`
 - `baseline_smoke.failure_count`: `1`
 - `baseline_smoke.hard_failure_count`: `0`
 - `baseline_smoke.best_effort_failure_count`: `1`
-- `baseline_benchmarks`: status=`ok`, cpu_single_seconds=`None`, cpu_multi_seconds=`None`, io_mib_s=`1209.9171`
+- `baseline_benchmarks`: status=`ok`, cpu_single_seconds=`None`, cpu_multi_seconds=`None`, io_mib_s=`691.4531`
 
 ## Stage: post_reboot_rollback
 
 - `status`: `ok`
 - `error`: `None`
 - `restore_action`: `removed-created-value`
-- `after_reboot`: status=`value-present`, value_exists=`True`, value=`0`
+- `after_reboot`: status=`value-present`, value_exists=`True`, value=`2`
 - `after_restore`: status=`value-missing`, value_exists=`False`, value=`None`
 - `smoke.failure_count`: `1`
 - `smoke.hard_failure_count`: `0`
@@ -55,7 +55,7 @@
 - `settings-uri-launch`: `True` - launch-command-succeeded
 - `store-uri-launch`: `False` - This command cannot be run due to the error: The operation attempted is not supported.
 - `interactive_user_smoke`: status=`ok`, failure_count=`0`
-- `benchmarks`: status=`ok`, cpu_single_seconds=`None`, cpu_multi_seconds=`None`, io_mib_s=`1027.9911`
+- `benchmarks`: status=`ok`, cpu_single_seconds=`None`, cpu_multi_seconds=`None`, io_mib_s=`946.1673`
 
 ## Stage: post_rollback
 
@@ -74,4 +74,4 @@
 - `settings-uri-launch`: `True` - launch-command-succeeded
 - `store-uri-launch`: `False` - This command cannot be run due to the error: The operation attempted is not supported.
 - `interactive_user_smoke`: status=`ok`, failure_count=`0`
-- `benchmarks`: status=`ok`, cpu_single_seconds=`None`, cpu_multi_seconds=`None`, io_mib_s=`1183.5804`
+- `benchmarks`: status=`ok`, cpu_single_seconds=`None`, cpu_multi_seconds=`None`, io_mib_s=`1035.9274`

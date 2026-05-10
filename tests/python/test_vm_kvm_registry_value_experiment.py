@@ -230,6 +230,70 @@ class VmKvmRegistryValueExperimentTests(unittest.TestCase):
         self.assertEqual(result["recovery"]["status"], "ok")
         self.assertFalse(result["smoke"]["post_reboot_smoke_hard_success"])
 
+    def test_run_experiment_recovers_post_reboot_rollback_stage_failure(self) -> None:
+        args = SimpleNamespace(
+            output_name="operator96-072-heteromulticlassparkingenabled-1",
+            value_name="HeteroMultiClassParkingEnabled",
+            value_data=1,
+            registry_path="HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            domain="regprobe-win11-25h2-session",
+            connect="qemu:///session",
+            smoke_profile="gui",
+            auto_revert_snapshot_on_boot_failure=True,
+            revert_snapshot_name="clean-25h2-qga",
+            reboot_wait_timeout=420,
+            stage_wait_timeout=420,
+            post_reboot_delay_seconds=90,
+            no_host_noise_gate=False,
+            host_noise_max_retries=0,
+            host_noise_retry_interval_seconds=0,
+            host_noise_busy_threshold_pct=100,
+            host_noise_load1_per_cpu_threshold=100,
+            host_noise_sample_interval_seconds=0,
+        )
+        apply_payload = {"status": "ok", "smoke": {"items": []}}
+
+        with mock.patch.object(
+            registry_value_experiment,
+            "list_domain_snapshots",
+            return_value={"snapshots": ["clean-25h2-qga"], "returncode": 0, "stderr": ""},
+        ), mock.patch.object(
+            registry_value_experiment, "write_guest_stage_script"
+        ), mock.patch.object(
+            registry_value_experiment,
+            "wait_for_quiet_host",
+            return_value={"noise_status": "ok"},
+        ), mock.patch.object(
+            registry_value_experiment,
+            "run_guest_stage",
+            side_effect=[
+                (0, {"status": "ok"}, apply_payload),
+                (1, {"status": "error"}, {"status": "error", "error": "qga-stage-failed"}),
+            ],
+        ), mock.patch.object(
+            registry_value_experiment,
+            "reboot_guest",
+            return_value={"status": "ok"},
+        ), mock.patch.object(
+            registry_value_experiment.time,
+            "sleep",
+        ), mock.patch.object(
+            registry_value_experiment,
+            "wait_for_qga",
+            return_value={"status": "ok"},
+        ), mock.patch.object(
+            registry_value_experiment,
+            "recover_from_snapshot",
+            return_value={"status": "ok", "snapshot": "clean-25h2-qga"},
+        ):
+            result = registry_value_experiment.run_experiment(args)
+
+        self.assertEqual(result["status"], "ok")
+        self.assertEqual(result["outcome"], "rollback-stage-failure-recovered")
+        self.assertTrue(result["controlled_failure"])
+        self.assertEqual(result["error"], "post-reboot-rollback-stage-failed")
+        self.assertEqual(result["recovery"]["status"], "ok")
+
 
 if __name__ == "__main__":
     unittest.main()

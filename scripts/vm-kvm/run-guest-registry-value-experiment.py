@@ -997,12 +997,12 @@ def smoke_success(stage_payload: dict[str, Any] | None) -> bool:
     return all(bool(item.get("success")) for item in hard_items)
 
 
-def mark_recovered_boot_failure(result: dict[str, Any], error: str, recovery: dict[str, Any] | None) -> bool:
+def mark_controlled_recovery(result: dict[str, Any], *, error: str, outcome: str, recovery: dict[str, Any] | None) -> bool:
     if not isinstance(recovery, dict) or recovery.get("status") != "ok":
         return False
     result["status"] = "ok"
     result["error"] = error
-    result["outcome"] = "boot-failure-recovered"
+    result["outcome"] = outcome
     result["controlled_failure"] = True
     result["recovery"] = recovery
     result["smoke"] = {
@@ -1011,6 +1011,31 @@ def mark_recovered_boot_failure(result: dict[str, Any], error: str, recovery: di
         "post_rollback_smoke_hard_success": False,
     }
     return True
+
+
+def mark_recovered_boot_failure(result: dict[str, Any], error: str, recovery: dict[str, Any] | None) -> bool:
+    return mark_controlled_recovery(result, error=error, outcome="boot-failure-recovered", recovery=recovery)
+
+
+def recover_stage_failure(
+    result: dict[str, Any],
+    *,
+    error: str,
+    outcome: str,
+    args: argparse.Namespace,
+) -> bool:
+    if not args.auto_revert_snapshot_on_boot_failure:
+        return False
+    recovery = recover_from_snapshot(
+        domain=args.domain,
+        connect=args.connect,
+        snapshot_name=args.revert_snapshot_name,
+        wait_timeout=args.reboot_wait_timeout,
+    )
+    if mark_controlled_recovery(result, error=error, outcome=outcome, recovery=recovery):
+        return True
+    result["recovery"] = recovery
+    return False
 
 
 def run_experiment(args: argparse.Namespace) -> dict[str, Any]:
@@ -1070,8 +1095,11 @@ def run_experiment(args: argparse.Namespace) -> dict[str, Any]:
     )
     result["stages"]["apply"] = {"returncode": rc, "qga": payload, "result": stage_payload, "host_noise_meta": apply_noise}
     if rc != 0 or not isinstance(stage_payload, dict) or stage_payload.get("status") != "ok":
+        error = "apply-stage-failed"
         result["status"] = "error"
-        result["error"] = "apply-stage-failed"
+        result["error"] = error
+        if recover_stage_failure(result, error=error, outcome="apply-stage-failure-recovered", args=args):
+            return result
         return result
 
     result["reboots"].append({"phase": "after-apply", **reboot_guest(args.domain, args.connect)})
@@ -1122,8 +1150,11 @@ def run_experiment(args: argparse.Namespace) -> dict[str, Any]:
         "host_noise_meta": post_reboot_noise,
     }
     if rc != 0 or not isinstance(stage_payload, dict) or stage_payload.get("status") != "ok":
+        error = "post-reboot-rollback-stage-failed"
         result["status"] = "error"
-        result["error"] = "post-reboot-rollback-stage-failed"
+        result["error"] = error
+        if recover_stage_failure(result, error=error, outcome="rollback-stage-failure-recovered", args=args):
+            return result
         return result
 
     result["reboots"].append({"phase": "after-rollback", **reboot_guest(args.domain, args.connect)})
@@ -1174,8 +1205,11 @@ def run_experiment(args: argparse.Namespace) -> dict[str, Any]:
         "host_noise_meta": post_rollback_noise,
     }
     if rc != 0 or not isinstance(stage_payload, dict) or stage_payload.get("status") != "ok":
+        error = "post-rollback-stage-failed"
         result["status"] = "error"
-        result["error"] = "post-rollback-stage-failed"
+        result["error"] = error
+        if recover_stage_failure(result, error=error, outcome="post-rollback-stage-failure-recovered", args=args):
+            return result
         return result
 
     result["status"] = "ok"

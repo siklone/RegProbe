@@ -195,14 +195,33 @@ def _safety_findings(payload: dict[str, Any]) -> list[dict[str, Any]]:
     findings: list[dict[str, Any]] = []
     status = str(payload.get("status") or "")
     error = str(payload.get("error") or "")
+    outcome = str(payload.get("outcome") or "")
 
-    if error.startswith("guest-did-not-return") or payload.get("recovery"):
+    if error.startswith("guest-did-not-return") or outcome == "boot-failure-recovered":
         findings.append(
             {
                 "verdict": "boot_failure",
                 "confidence": "high",
                 "reason": error or "guest required snapshot recovery after reboot",
                 "metrics_used": ["health_checks", "recovery"],
+            }
+        )
+    elif "rollback" in error or "rollback" in outcome:
+        findings.append(
+            {
+                "verdict": "rollback_failure",
+                "confidence": "high",
+                "reason": error or "rollback stage required snapshot recovery",
+                "metrics_used": ["stages", "recovery"],
+            }
+        )
+    elif payload.get("recovery"):
+        findings.append(
+            {
+                "verdict": "app_breakage",
+                "confidence": "high",
+                "reason": error or "stage failure required snapshot recovery",
+                "metrics_used": ["stages", "recovery"],
             }
         )
     elif status not in {"ok", "running", ""}:

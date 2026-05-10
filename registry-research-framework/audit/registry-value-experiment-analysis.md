@@ -1,17 +1,18 @@
 # Registry Value Experiment Analysis
 
-- Generated UTC: `2026-05-10T03:31:22Z`
+- Generated UTC: `2026-05-10T10:41:44Z`
 - Input: `registry-research-framework/audit/registry-value-experiments`
 - Pattern: `operator96-*.json`
-- Artifacts analyzed: `130`
+- Artifacts analyzed: `140`
 - Errors: `0`
 
 ## Verdict Counts
 
 - `app_breakage`: `1`
 - `boot_failure`: `1`
-- `harmful`: `103`
+- `harmful`: `110`
 - `low_confidence`: `23`
+- `noisy`: `3`
 - `rollback_failure`: `2`
 
 ## Results
@@ -147,4 +148,14 @@
 | `operator96-070-alwayscomputeqoshints-1` | `harmful` | `low` | `ok` | `-31.211` | apply io_read_mib_per_second changed by -31.21% | `registry-research-framework/audit/registry-value-experiments/operator96-070-alwayscomputeqoshints-1.json` |
 | `operator96-071-heteromulticoreclassesenabled-0` | `harmful` | `low` | `ok` | `-15.753` | post_reboot io_write_mib_per_second changed by -15.75% | `registry-research-framework/audit/registry-value-experiments/operator96-071-heteromulticoreclassesenabled-0.json` |
 | `operator96-071-heteromulticoreclassesenabled-1` | `low_confidence` | `low` | `ok` | `75.425` | apply io_read_mib_per_second changed by +75.42% | `registry-research-framework/audit/registry-value-experiments/operator96-071-heteromulticoreclassesenabled-1.json` |
-| `operator96-072-heteromulticlassparkingenabled-0` | `harmful` | `low` | `ok` | `-25.273` | post_reboot io_write_mib_per_second changed by -25.27% | `registry-research-framework/audit/registry-value-experiments/operator96-072-heteromulticlassparkingenabled-0.json` |
+| `operator96-072-heteromulticlassparkingenabled-0` | `harmful` | `low` | `ok` | `-26.067` | post_reboot io_read_mib_per_second changed by -26.07% | `registry-research-framework/audit/registry-value-experiments/operator96-072-heteromulticlassparkingenabled-0.json` |
+| `operator96-072-heteromulticlassparkingenabled-1` | `harmful` | `low` | `ok` | `-56.508` | apply io_write_mib_per_second changed by -56.51% | `registry-research-framework/audit/registry-value-experiments/operator96-072-heteromulticlassparkingenabled-1.json` |
+| `operator96-073-disableidlestatesatboot-0` | `noisy` | `low` | `noisy` | `` | host preflight marked one or more stages noisy | `registry-research-framework/audit/registry-value-experiments/operator96-073-disableidlestatesatboot-0.json` |
+| `operator96-073-disableidlestatesatboot-2` | `noisy` | `low` | `noisy` | `` | host preflight marked one or more stages noisy | `registry-research-framework/audit/registry-value-experiments/operator96-073-disableidlestatesatboot-2.json` |
+| `operator96-074-perfboostatguaranteed-0` | `harmful` | `low` | `ok` | `-10.147` | post_reboot io_write_mib_per_second changed by -10.15% | `registry-research-framework/audit/registry-value-experiments/operator96-074-perfboostatguaranteed-0.json` |
+| `operator96-074-perfboostatguaranteed-1` | `noisy` | `low` | `noisy` | `` | host preflight marked one or more stages noisy | `registry-research-framework/audit/registry-value-experiments/operator96-074-perfboostatguaranteed-1.json` |
+| `operator96-075-msdisabled-0` | `harmful` | `high` | `ok` | `-7.083` | apply cpu_multi_iterations_per_second changed by -7.08% | `registry-research-framework/audit/registry-value-experiments/operator96-075-msdisabled-0.json` |
+| `operator96-075-msdisabled-1` | `harmful` | `low` | `ok` | `-18.195` | post_reboot io_write_mib_per_second changed by -18.20% | `registry-research-framework/audit/registry-value-experiments/operator96-075-msdisabled-1.json` |
+| `operator96-076-fxaccountingtelemetrydisabled-0` | `harmful` | `low` | `ok` | `-13.856` | post_reboot io_read_mib_per_second changed by -13.86% | `registry-research-framework/audit/registry-value-experiments/operator96-076-fxaccountingtelemetrydisabled-0.json` |
+| `operator96-076-fxaccountingtelemetrydisabled-1` | `harmful` | `low` | `ok` | `-84.513` | apply io_write_mib_per_second changed by -84.51% | `registry-research-framework/audit/registry-value-experiments/operator96-076-fxaccountingtelemetrydisabled-1.json` |
+| `operator96-077-win32kcalloutwatchdogtimeoutseconds-0` | `harmful` | `low` | `ok` | `-16.757` | post_reboot io_write_mib_per_second changed by -16.76% | `registry-research-framework/audit/registry-value-experiments/operator96-077-win32kcalloutwatchdogtimeoutseconds-0.json` |

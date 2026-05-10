@@ -1,8 +1,8 @@
-# Registry Value Experiment - operator96-072-heteromulticlassparkingenabled-0
+# Registry Value Experiment - operator96-077-win32kcalloutwatchdogtimeoutseconds-0
 
 - Status: **ok**
-- Generated UTC: `2026-05-10T09:03:12Z`
-- Target: `HKLM\SYSTEM\CurrentControlSet\Control\Power\HeteroMultiClassParkingEnabled`
+- Generated UTC: `2026-05-10T10:24:44Z`
+- Target: `HKLM\SYSTEM\CurrentControlSet\Control\Power\Win32kCalloutWatchdogTimeoutSeconds`
 - Test value: `0`
 - Outcome: `completed`
 
@@ -30,11 +30,11 @@
 - `settings-uri-launch`: `True` - launch-command-succeeded
 - `store-uri-launch`: `False` - This command cannot be run due to the error: The operation attempted is not supported.
 - `interactive_user_smoke`: status=`ok`, failure_count=`0`
-- `benchmarks`: status=`ok`, cpu_single_seconds=`None`, cpu_multi_seconds=`None`, io_mib_s=`1190.8477`
+- `benchmarks`: status=`ok`, cpu_single_seconds=`None`, cpu_multi_seconds=`None`, io_mib_s=`1878.4702`
 - `baseline_smoke.failure_count`: `1`
 - `baseline_smoke.hard_failure_count`: `0`
 - `baseline_smoke.best_effort_failure_count`: `1`
-- `baseline_benchmarks`: status=`ok`, cpu_single_seconds=`None`, cpu_multi_seconds=`None`, io_mib_s=`1209.9171`
+- `baseline_benchmarks`: status=`ok`, cpu_single_seconds=`None`, cpu_multi_seconds=`None`, io_mib_s=`1098.9908`
 
 ## Stage: post_reboot_rollback
 
@@ -55,7 +55,7 @@
 - `settings-uri-launch`: `True` - launch-command-succeeded
 - `store-uri-launch`: `False` - This command cannot be run due to the error: The operation attempted is not supported.
 - `interactive_user_smoke`: status=`ok`, failure_count=`0`
-- `benchmarks`: status=`ok`, cpu_single_seconds=`None`, cpu_multi_seconds=`None`, io_mib_s=`1027.9911`
+- `benchmarks`: status=`ok`, cpu_single_seconds=`None`, cpu_multi_seconds=`None`, io_mib_s=`1094.2784`
 
 ## Stage: post_rollback
 
@@ -74,4 +74,4 @@
 - `settings-uri-launch`: `True` - launch-command-succeeded
 - `store-uri-launch`: `False` - This command cannot be run due to the error: The operation attempted is not supported.
 - `interactive_user_smoke`: status=`ok`, failure_count=`0`
-- `benchmarks`: status=`ok`, cpu_single_seconds=`None`, cpu_multi_seconds=`None`, io_mib_s=`1183.5804`
+- `benchmarks`: status=`ok`, cpu_single_seconds=`None`, cpu_multi_seconds=`None`, io_mib_s=`683.9039`
