@@ -272,6 +272,11 @@ def run_experiment(
     stage_wait_timeout: int,
     reboot_wait_timeout: int,
     post_reboot_delay_seconds: int,
+    host_noise_max_retries: int,
+    host_noise_retry_interval_seconds: float,
+    host_noise_busy_threshold_pct: float,
+    host_noise_load1_per_cpu_threshold: float,
+    host_noise_sample_interval_seconds: float,
 ) -> dict[str, Any]:
     cmd = [
         sys.executable,
@@ -302,6 +307,16 @@ def run_experiment(
         str(reboot_wait_timeout),
         "--post-reboot-delay-seconds",
         str(post_reboot_delay_seconds),
+        "--host-noise-max-retries",
+        str(host_noise_max_retries),
+        "--host-noise-retry-interval-seconds",
+        str(host_noise_retry_interval_seconds),
+        "--host-noise-busy-threshold-pct",
+        str(host_noise_busy_threshold_pct),
+        "--host-noise-load1-per-cpu-threshold",
+        str(host_noise_load1_per_cpu_threshold),
+        "--host-noise-sample-interval-seconds",
+        str(host_noise_sample_interval_seconds),
     ]
     completed = run(cmd, timeout=(stage_wait_timeout * 4) + (reboot_wait_timeout * 2) + 300)
     try:
@@ -391,6 +406,11 @@ def main() -> int:
     parser.add_argument("--stage-wait-timeout", type=int, default=420)
     parser.add_argument("--reboot-wait-timeout", type=int, default=420)
     parser.add_argument("--post-reboot-delay-seconds", type=int, default=25)
+    parser.add_argument("--host-noise-max-retries", type=int, default=5)
+    parser.add_argument("--host-noise-retry-interval-seconds", type=float, default=5.0)
+    parser.add_argument("--host-noise-busy-threshold-pct", type=float, default=20.0)
+    parser.add_argument("--host-noise-load1-per-cpu-threshold", type=float, default=0.75)
+    parser.add_argument("--host-noise-sample-interval-seconds", type=float, default=0.5)
     args = parser.parse_args()
 
     report_path = Path(args.report).resolve()
@@ -446,6 +466,11 @@ def main() -> int:
                 stage_wait_timeout=args.stage_wait_timeout,
                 reboot_wait_timeout=args.reboot_wait_timeout,
                 post_reboot_delay_seconds=args.post_reboot_delay_seconds,
+                host_noise_max_retries=args.host_noise_max_retries,
+                host_noise_retry_interval_seconds=args.host_noise_retry_interval_seconds,
+                host_noise_busy_threshold_pct=args.host_noise_busy_threshold_pct,
+                host_noise_load1_per_cpu_threshold=args.host_noise_load1_per_cpu_threshold,
+                host_noise_sample_interval_seconds=args.host_noise_sample_interval_seconds,
             )
             stdout_payload = execution.get("stdout_payload") if isinstance(execution, dict) else {}
             result_status = str((stdout_payload or {}).get("status") or ("error" if execution.get("returncode") else "unknown"))
