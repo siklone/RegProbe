@@ -37,6 +37,7 @@ def run_dotnet_publish(
     project_path: Path,
     configuration: str,
     runtime: str,
+    self_contained: bool,
     publish_dir: Path,
 ) -> tuple[int, dict[str, Any]]:
     cmd = [
@@ -48,7 +49,7 @@ def run_dotnet_publish(
         "-r",
         runtime,
         "--self-contained",
-        "false",
+        "true" if self_contained else "false",
         "-p:EnableWindowsTargeting=true",
         "-o",
         str(publish_dir),
@@ -58,6 +59,7 @@ def run_dotnet_publish(
         "cmd": cmd,
         "project_path": str(project_path),
         "publish_dir": str(publish_dir),
+        "self_contained": self_contained,
         "stdout": completed.stdout.strip(),
         "stderr": completed.stderr.strip(),
     }
@@ -175,6 +177,7 @@ def build_dry_run_payload(
     guest_app_root: str,
     guest_app_exe: str,
     artifact_retention: str,
+    self_contained: bool,
 ) -> dict[str, Any]:
     publish_cmd = [
         dotnet_path,
@@ -185,7 +188,7 @@ def build_dry_run_payload(
         "-r",
         runtime,
         "--self-contained",
-        "false",
+        "true" if self_contained else "false",
         "-p:EnableWindowsTargeting=true",
         "-o",
         str(publish_dir),
@@ -209,6 +212,7 @@ def build_dry_run_payload(
             "project_path": str(project_path),
             "configuration": configuration,
             "runtime": runtime,
+            "self_contained": self_contained,
             "dotnet_path": dotnet_path,
             "work_root": str(work_root),
             "publish_dir": str(publish_dir),
@@ -248,6 +252,7 @@ def build_verify_only_payload(
     guest_app_root: str,
     guest_app_exe: str,
     artifact_retention: str,
+    self_contained: bool,
 ) -> dict[str, Any]:
     blockers: list[str] = []
     if not repo_root.exists():
@@ -282,6 +287,7 @@ def build_verify_only_payload(
         guest_app_root=guest_app_root,
         guest_app_exe=guest_app_exe,
         artifact_retention=artifact_retention,
+        self_contained=self_contained,
     )
     recommended_execute_command = [
         sys.executable,
@@ -291,6 +297,8 @@ def build_verify_only_payload(
     ]
     if leave_running:
         recommended_execute_command.append("--leave-running")
+    if self_contained:
+        recommended_execute_command.append("--self-contained")
     if artifact_retention == "kept":
         recommended_execute_command.append("--keep-artifacts")
     operator_checklist = [
@@ -322,6 +330,11 @@ def main() -> int:
     parser.add_argument("--project-path", default="app/app.csproj")
     parser.add_argument("--configuration", default="Release")
     parser.add_argument("--runtime", default="win-x64")
+    parser.add_argument(
+        "--self-contained",
+        action="store_true",
+        help="Publish with the Windows runtime included. Use this for VMs without dotnet/Microsoft.WindowsDesktop.App installed.",
+    )
     parser.add_argument("--dotnet-path")
     parser.add_argument("--work-root")
     parser.add_argument("--keep-artifacts", action="store_true")
@@ -360,6 +373,7 @@ def main() -> int:
         "project_path": str(project_path),
         "configuration": args.configuration,
         "runtime": args.runtime,
+        "self_contained": args.self_contained,
         "dotnet_path": dotnet_path,
         "work_root": str(work_root),
         "publish_dir": str(publish_dir),
@@ -387,6 +401,7 @@ def main() -> int:
                 guest_app_root=args.guest_app_root,
                 guest_app_exe=args.guest_app_exe,
                 artifact_retention=summary["artifact_retention"],
+                self_contained=args.self_contained,
             )
             print(json.dumps(payload, indent=2))
             return 0
@@ -408,6 +423,7 @@ def main() -> int:
                 guest_app_root=args.guest_app_root,
                 guest_app_exe=args.guest_app_exe,
                 artifact_retention=summary["artifact_retention"],
+                self_contained=args.self_contained,
             )
             print(json.dumps(payload, indent=2))
             return 0
@@ -418,6 +434,7 @@ def main() -> int:
             project_path=project_path,
             configuration=args.configuration,
             runtime=args.runtime,
+            self_contained=args.self_contained,
             publish_dir=publish_dir,
         )
         summary["publish_returncode"] = publish_returncode

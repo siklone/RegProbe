@@ -1,7 +1,7 @@
 # Promoted App QA Coverage
 
-- Generated UTC: 2026-05-08T16:36:14Z
-- History entries: 95
+- Generated UTC: 2026-05-10T17:18:01Z
+- History entries: 99
 - Promoted app-QA candidates: 258
 - Covered: 258
 - Uncovered: 0

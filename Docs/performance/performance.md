@@ -39,7 +39,7 @@ Do not edit manually.
 
 | ID | Name | Changes | Risk | Source |
 | --- | --- | --- | --- | --- |
-| <a id="performance.disable-animations"></a> `performance.disable-animations` | Disable Window Animations | Disables window animations to reduce motion and make transitions appear more immediate. Reference: Microsoft PC Performance Guidelines | Safe | `app\Services\TweakProviders\PerformanceTweakProvider.cs#L27` |
-| <a id="performance.disable-menu-show-delay"></a> `performance.disable-menu-show-delay` | Remove Menu Show Delay | Reduces the built-in delay before some menus appear. | Safe | `app\Services\TweakProviders\PerformanceTweakProvider.cs#L40` |
-| <a id="performance.disable-taskbar-animations"></a> `performance.disable-taskbar-animations` | Disable Taskbar Animations | Disables taskbar animations to reduce shell motion. | Safe | `app\Services\TweakProviders\PerformanceTweakProvider.cs#L53` |
+| <a id="performance.disable-animations"></a> `performance.disable-animations` | Disable Window Animations | Windows can animate windows when they open, close, minimize, or restore. Turning that off reduces motion and makes transitions appear mor... | Medium | `research/records/performance.disable-animations.review.json` |
+| <a id="performance.disable-menu-show-delay"></a> `performance.disable-menu-show-delay` | Remove Menu Show Delay | Windows can wait a short moment before showing some menus. Setting the delay lower makes menus appear sooner after the pointer reaches them. | Medium | `research/records/performance.disable-menu-show-delay.review.json` |
+| <a id="performance.disable-taskbar-animations"></a> `performance.disable-taskbar-animations` | Taskbar Animations | This controls whether Windows animates taskbar transitions. People turn it off when they want a less animated desktop. | Medium | `research/records/performance.disable-taskbar-animations.review.json` |
 <!-- TWEAK INDEX END -->

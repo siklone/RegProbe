@@ -198,12 +198,36 @@ class VmKvmAppPublishDeploySmokeTests(unittest.TestCase):
                     project_path=REPO_ROOT / "app" / "app.csproj",
                     configuration="Release",
                     runtime="win-x64",
+                    self_contained=False,
                     publish_dir=publish_dir,
                 )
 
         self.assertEqual(exit_code, 0)
         cmd = run_mock.call_args.args[0]
         self.assertIn("-p:EnableWindowsTargeting=true", cmd)
+        self.assertEqual(cmd[cmd.index("--self-contained") + 1], "false")
+
+    def test_run_dotnet_publish_can_include_runtime_for_guest_without_dotnet(self) -> None:
+        completed = mock.Mock(returncode=0, stdout="publish ok", stderr="")
+        with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
+            publish_dir = Path(temp_root) / "publish"
+            publish_dir.mkdir()
+            (publish_dir / "RegProbe.App.exe").write_text("exe", encoding="utf-8")
+            with mock.patch.object(app_publish_deploy_smoke.subprocess, "run", return_value=completed) as run_mock:
+                exit_code, payload = app_publish_deploy_smoke.run_dotnet_publish(
+                    REPO_ROOT,
+                    dotnet_path="/tmp/dotnet",
+                    project_path=REPO_ROOT / "app" / "app.csproj",
+                    configuration="Release",
+                    runtime="win-x64",
+                    self_contained=True,
+                    publish_dir=publish_dir,
+                )
+
+        self.assertEqual(exit_code, 0)
+        self.assertTrue(payload["self_contained"])
+        cmd = run_mock.call_args.args[0]
+        self.assertEqual(cmd[cmd.index("--self-contained") + 1], "true")
 
     def test_create_publish_zip_archives_publish_contents_without_parent_prefix(self) -> None:
         with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:

@@ -49,7 +49,7 @@
         {
           "id": "audio.show-disconnected-devices",
           "name": "Show Disconnected Audio Devices",
-          "description": "This makes disconnected audio devices appear in the classic Sound control panel. It is mainly useful for troubleshooting, advanced audio setup, or cleaning up stale devices.",
+          "description": "This makes disconnected audio devices appear in the classic Sound control panel. The evidence only proves the DeviceCpl preference is read by mmsys.cpl and can be toggled reversibly.",
           "documentation": "research/records/audio.show-disconnected-devices.review.json",
           "verified": true,
           "default_preset_key": "value-1",
@@ -85,7 +85,7 @@
         {
           "id": "audio.show-hidden-devices",
           "name": "Show Hidden Audio Devices",
-          "description": "This makes hidden audio devices appear in the classic Sound control panel. It is mainly useful for troubleshooting, advanced audio setup, or driver cleanup.",
+          "description": "This makes hidden audio devices appear in the classic Sound control panel. The evidence only proves the DeviceCpl preference is read by mmsys.cpl and can be toggled reversibly.",
           "documentation": "research/records/audio.show-hidden-devices.review.json",
           "verified": true,
           "default_preset_key": "value-1",
@@ -146,7 +146,7 @@
         {
           "id": "developer.docker-performance",
           "name": "Docker Desktop WSL 2 Backend",
-          "description": "Docker Desktop can use the WSL 2 backend on Windows. That usually improves compatibility and developer experience for container workflows.",
+          "description": "Docker Desktop can use the WSL 2 backend on Windows. The app writes Docker's documented settings-file field and does not claim a measured performance change.",
           "documentation": "research/records/developer.docker-performance.review.json",
           "verified": true,
           "path": "%APPDATA%\\Docker\\settings-store.json",
@@ -7538,7 +7538,7 @@
         {
           "id": "system.services.disable-sysmain",
           "name": "SysMain Service",
-          "description": "SysMain helps Windows improve responsiveness over time by learning usage patterns and managing performance-related preloading behavior.",
+          "description": "SysMain is Microsoft's documented background service for usage-pattern and preloading behavior. The record is deprecated because Microsoft guidance says not to disable it.",
           "documentation": "research/records/system.services.disable-sysmain.review.json",
           "verified": false,
           "path": "SysMain",
