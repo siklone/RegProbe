@@ -1,9 +1,9 @@
 # Operator 96 Registry Value Campaign
 
-- Generated UTC: `2026-05-10T10:44:06Z`
+- Generated UTC: `2026-05-10T12:14:31Z`
 - Status: **ok**
-- Planned experiments: `150`
-- Completed in this run: `150`
+- Planned experiments: `160`
+- Completed in this run: `160`
 
 ## Plan
 
@@ -159,6 +159,16 @@
 | 81 | `operator96-081-pofxsystemirpwaitforreportdevicepowered-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\PoFxSystemIrpWaitForReportDevicePowered` | `0` | `absent` | `vm-observed` |
 | 81 | `operator96-081-pofxsystemirpwaitforreportdevicepowered-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\PoFxSystemIrpWaitForReportDevicePowered` | `1` | `absent` | `vm-observed` |
 | 82 | `operator96-082-allowsystemrequiredpowerrequests-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\AllowSystemRequiredPowerRequests` | `0` | `absent` | `vm-observed` |
+| 82 | `operator96-082-allowsystemrequiredpowerrequests-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\AllowSystemRequiredPowerRequests` | `1` | `absent` | `vm-observed` |
+| 83 | `operator96-083-coalescingflushinterval-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\CoalescingFlushInterval` | `0` | `absent` | `vm-observed` |
+| 83 | `operator96-083-coalescingflushinterval-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\CoalescingFlushInterval` | `1` | `absent` | `vm-observed` |
+| 84 | `operator96-084-coalescingtimerinterval-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\CoalescingTimerInterval` | `0` | `absent` | `vm-observed` |
+| 84 | `operator96-084-coalescingtimerinterval-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\CoalescingTimerInterval` | `1` | `absent` | `vm-observed` |
+| 85 | `operator96-085-heterohgseeperfhintsindependentenabled-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\HeteroHgsEePerfHintsIndependentEnabled` | `1` | `absent` | `vm-observed` |
+| 85 | `operator96-085-heterohgseeperfhintsindependentenabled-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\HeteroHgsEePerfHintsIndependentEnabled` | `0` | `absent` | `vm-observed` |
+| 86 | `operator96-086-heterohgsplusdisabled-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\HeteroHgsPlusDisabled` | `1` | `absent` | `vm-observed` |
+| 86 | `operator96-086-heterohgsplusdisabled-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\HeteroHgsPlusDisabled` | `0` | `absent` | `vm-observed` |
+| 87 | `operator96-087-ipilastclockownerdisable-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\IpiLastClockOwnerDisable` | `1` | `absent` | `vm-observed` |
 
 ## Results
 
@@ -314,3 +324,13 @@
 | `operator96-081-pofxsystemirpwaitforreportdevicepowered-0` | `noisy` | `low` | `noisy` | `ok` | `True` | `ok`/`0` | `None` | `-3.5` | `registry-research-framework/audit/registry-value-experiments/operator96-081-pofxsystemirpwaitforreportdevicepowered-0.json` |
 | `operator96-081-pofxsystemirpwaitforreportdevicepowered-1` | `noisy` | `low` | `noisy` | `ok` | `True` | `ok`/`0` | `None` | `12.76` | `registry-research-framework/audit/registry-value-experiments/operator96-081-pofxsystemirpwaitforreportdevicepowered-1.json` |
 | `operator96-082-allowsystemrequiredpowerrequests-0` | `harmful` | `low` | `ok` | `ok` | `True` | `ok`/`0` | `-7.501` | `3.28` | `registry-research-framework/audit/registry-value-experiments/operator96-082-allowsystemrequiredpowerrequests-0.json` |
+| `operator96-082-allowsystemrequiredpowerrequests-1` | `low_confidence` | `low` | `ok` | `ok` | `True` | `ok`/`0` | `68.858` | `9.11` | `registry-research-framework/audit/registry-value-experiments/operator96-082-allowsystemrequiredpowerrequests-1.json` |
+| `operator96-083-coalescingflushinterval-0` | `harmful` | `low` | `ok` | `ok` | `True` | `ok`/`0` | `-18.189` | `47.35` | `registry-research-framework/audit/registry-value-experiments/operator96-083-coalescingflushinterval-0.json` |
+| `operator96-083-coalescingflushinterval-1` | `harmful` | `low` | `ok` | `ok` | `True` | `ok`/`0` | `-36.938` | `-31.39` | `registry-research-framework/audit/registry-value-experiments/operator96-083-coalescingflushinterval-1.json` |
+| `operator96-084-coalescingtimerinterval-0` | `harmful` | `low` | `ok` | `ok` | `True` | `ok`/`0` | `-12.507` | `-7.59` | `registry-research-framework/audit/registry-value-experiments/operator96-084-coalescingtimerinterval-0.json` |
+| `operator96-084-coalescingtimerinterval-1` | `harmful` | `low` | `ok` | `ok` | `True` | `ok`/`0` | `-24.047` | `-6.68` | `registry-research-framework/audit/registry-value-experiments/operator96-084-coalescingtimerinterval-1.json` |
+| `operator96-085-heterohgseeperfhintsindependentenabled-1` | `harmful` | `low` | `ok` | `ok` | `True` | `ok`/`0` | `-25.761` | `-14.86` | `registry-research-framework/audit/registry-value-experiments/operator96-085-heterohgseeperfhintsindependentenabled-1.json` |
+| `operator96-085-heterohgseeperfhintsindependentenabled-0` | `harmful` | `low` | `ok` | `ok` | `True` | `ok`/`0` | `-29.629` | `-4.35` | `registry-research-framework/audit/registry-value-experiments/operator96-085-heterohgseeperfhintsindependentenabled-0.json` |
+| `operator96-086-heterohgsplusdisabled-1` | `harmful` | `low` | `ok` | `ok` | `True` | `ok`/`0` | `-29.761` | `-5.68` | `registry-research-framework/audit/registry-value-experiments/operator96-086-heterohgsplusdisabled-1.json` |
+| `operator96-086-heterohgsplusdisabled-0` | `harmful` | `low` | `ok` | `ok` | `True` | `ok`/`0` | `-27.272` | `-3.5` | `registry-research-framework/audit/registry-value-experiments/operator96-086-heterohgsplusdisabled-0.json` |
+| `operator96-087-ipilastclockownerdisable-1` | `harmful` | `low` | `ok` | `ok` | `True` | `ok`/`0` | `-9.916` | `-9.92` | `registry-research-framework/audit/registry-value-experiments/operator96-087-ipilastclockownerdisable-1.json` |

@@ -1,17 +1,17 @@
 # Registry Value Experiment Analysis
 
-- Generated UTC: `2026-05-10T12:13:10Z`
+- Generated UTC: `2026-05-10T13:35:18Z`
 - Input: `registry-research-framework/audit/registry-value-experiments`
 - Pattern: `operator96-*.json`
-- Artifacts analyzed: `150`
+- Artifacts analyzed: `160`
 - Errors: `0`
 
 ## Verdict Counts
 
 - `app_breakage`: `1`
 - `boot_failure`: `1`
-- `harmful`: `114`
-- `low_confidence`: `23`
+- `harmful`: `123`
+- `low_confidence`: `24`
 - `noisy`: `9`
 - `rollback_failure`: `2`
 
@@ -169,3 +169,13 @@
 | `operator96-081-pofxsystemirpwaitforreportdevicepowered-0` | `noisy` | `low` | `noisy` | `` | host preflight marked one or more stages noisy | `registry-research-framework/audit/registry-value-experiments/operator96-081-pofxsystemirpwaitforreportdevicepowered-0.json` |
 | `operator96-081-pofxsystemirpwaitforreportdevicepowered-1` | `noisy` | `low` | `noisy` | `` | host preflight marked one or more stages noisy | `registry-research-framework/audit/registry-value-experiments/operator96-081-pofxsystemirpwaitforreportdevicepowered-1.json` |
 | `operator96-082-allowsystemrequiredpowerrequests-0` | `harmful` | `low` | `ok` | `-7.501` | post_reboot io_read_mib_per_second changed by -7.50% | `registry-research-framework/audit/registry-value-experiments/operator96-082-allowsystemrequiredpowerrequests-0.json` |
+| `operator96-082-allowsystemrequiredpowerrequests-1` | `low_confidence` | `low` | `ok` | `68.858` | apply io_read_mib_per_second changed by +68.86% | `registry-research-framework/audit/registry-value-experiments/operator96-082-allowsystemrequiredpowerrequests-1.json` |
+| `operator96-083-coalescingflushinterval-0` | `harmful` | `low` | `ok` | `-18.189` | apply io_write_mib_per_second changed by -18.19% | `registry-research-framework/audit/registry-value-experiments/operator96-083-coalescingflushinterval-0.json` |
+| `operator96-083-coalescingflushinterval-1` | `harmful` | `low` | `ok` | `-36.938` | post_reboot io_write_mib_per_second changed by -36.94% | `registry-research-framework/audit/registry-value-experiments/operator96-083-coalescingflushinterval-1.json` |
+| `operator96-084-coalescingtimerinterval-0` | `harmful` | `low` | `ok` | `-12.507` | post_reboot io_write_mib_per_second changed by -12.51% | `registry-research-framework/audit/registry-value-experiments/operator96-084-coalescingtimerinterval-0.json` |
+| `operator96-084-coalescingtimerinterval-1` | `harmful` | `low` | `ok` | `-24.047` | post_reboot io_write_mib_per_second changed by -24.05% | `registry-research-framework/audit/registry-value-experiments/operator96-084-coalescingtimerinterval-1.json` |
+| `operator96-085-heterohgseeperfhintsindependentenabled-0` | `harmful` | `low` | `ok` | `-29.629` | post_reboot io_write_mib_per_second changed by -29.63% | `registry-research-framework/audit/registry-value-experiments/operator96-085-heterohgseeperfhintsindependentenabled-0.json` |
+| `operator96-085-heterohgseeperfhintsindependentenabled-1` | `harmful` | `low` | `ok` | `-25.761` | post_reboot io_write_mib_per_second changed by -25.76% | `registry-research-framework/audit/registry-value-experiments/operator96-085-heterohgseeperfhintsindependentenabled-1.json` |
+| `operator96-086-heterohgsplusdisabled-0` | `harmful` | `low` | `ok` | `-27.272` | apply io_write_mib_per_second changed by -27.27% | `registry-research-framework/audit/registry-value-experiments/operator96-086-heterohgsplusdisabled-0.json` |
+| `operator96-086-heterohgsplusdisabled-1` | `harmful` | `low` | `ok` | `-29.761` | post_reboot io_write_mib_per_second changed by -29.76% | `registry-research-framework/audit/registry-value-experiments/operator96-086-heterohgsplusdisabled-1.json` |
+| `operator96-087-ipilastclockownerdisable-1` | `harmful` | `low` | `ok` | `-9.916` | post_reboot io_write_read_mib_per_second changed by -9.92% | `registry-research-framework/audit/registry-value-experiments/operator96-087-ipilastclockownerdisable-1.json` |
