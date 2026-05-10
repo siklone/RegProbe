@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-05-10T13:36:32Z",
+  "generated_utc": "2026-05-10T15:14:17Z",
   "status": "ok",
   "report": "registry-research-framework/audit/operator-regadd-followup-source-default-report-20260509.json",
   "smoke_profile": "gui",
@@ -2499,6 +2499,134 @@
         "watchdog/bugcheck-sensitive"
       ],
       "source_quality": "vm-observed"
+    },
+    {
+      "index": 92,
+      "experiment_id": "operator96-092-powerwatchdogdrvsetmonitortimeoutmsec-1",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "PowerWatchdogDrvSetMonitorTimeoutMsec",
+      "value_data": 1,
+      "requested_data": "0",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [
+        "watchdog/bugcheck-sensitive"
+      ],
+      "source_quality": "vm-observed"
+    },
+    {
+      "index": 93,
+      "experiment_id": "operator96-093-policy-1",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ForceHibernateDisabled",
+      "value_name": "Policy",
+      "value_data": 1,
+      "requested_data": "1",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "key-missing",
+      "record_class": "key-missing",
+      "risk_flags": [],
+      "source_quality": "no-authoritative-evidence-for-25h2"
+    },
+    {
+      "index": 93,
+      "experiment_id": "operator96-093-policy-0",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ForceHibernateDisabled",
+      "value_name": "Policy",
+      "value_data": 0,
+      "requested_data": "1",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "key-missing",
+      "record_class": "key-missing",
+      "risk_flags": [],
+      "source_quality": "no-authoritative-evidence-for-25h2"
+    },
+    {
+      "index": 94,
+      "experiment_id": "operator96-094-enabledsnetrefresh-0",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ModernSleep",
+      "value_name": "EnableDsNetRefresh",
+      "value_data": 0,
+      "requested_data": "0",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed"
+    },
+    {
+      "index": 94,
+      "experiment_id": "operator96-094-enabledsnetrefresh-1",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ModernSleep",
+      "value_name": "EnableDsNetRefresh",
+      "value_data": 1,
+      "requested_data": "0",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed"
+    },
+    {
+      "index": 95,
+      "experiment_id": "operator96-095-enabledactions-0",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ModernSleep",
+      "value_name": "EnabledActions",
+      "value_data": 0,
+      "requested_data": "0",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed"
+    },
+    {
+      "index": 95,
+      "experiment_id": "operator96-095-enabledactions-1",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ModernSleep",
+      "value_name": "EnabledActions",
+      "value_data": 1,
+      "requested_data": "0",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed"
+    },
+    {
+      "index": 96,
+      "experiment_id": "operator96-096-powerthrottlingoff-1",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerThrottling",
+      "value_name": "PowerThrottlingOff",
+      "value_data": 1,
+      "requested_data": "1",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "key-missing",
+      "record_class": "key-missing",
+      "risk_flags": [],
+      "source_quality": "source-backed-policy-default-absent"
+    },
+    {
+      "index": 96,
+      "experiment_id": "operator96-096-powerthrottlingoff-0",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerThrottling",
+      "value_name": "PowerThrottlingOff",
+      "value_data": 0,
+      "requested_data": "1",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "key-missing",
+      "record_class": "key-missing",
+      "risk_flags": [],
+      "source_quality": "source-backed-policy-default-absent"
     }
   ],
   "results": [
@@ -24380,16 +24508,7 @@
       "risk_flags": [],
       "source_quality": "vm-observed",
       "status": "ok",
-      "returncode": 0,
       "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-087-ipilastclockownerdisable-0.json",
-      "stdout_payload": {
-        "status": "ok",
-        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-087-ipilastclockownerdisable-0.json",
-        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-087-ipilastclockownerdisable-0.md",
-        "error": null,
-        "outcome": null
-      },
-      "stderr": "",
       "observations": {
         "status": "ok",
         "verdict": "noisy",
@@ -24501,6 +24620,14 @@
             "io_write_read_mib_per_second": 18.61
           }
         }
+      },
+      "returncode": 0,
+      "stdout_payload": {
+        "status": "ok",
+        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-087-ipilastclockownerdisable-0.json",
+        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-087-ipilastclockownerdisable-0.md",
+        "error": null,
+        "outcome": null
       }
     },
     {
@@ -24519,16 +24646,7 @@
       ],
       "source_quality": "vm-observed",
       "status": "ok",
-      "returncode": 0,
       "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-088-powerwatchdogrequestqueuetimeoutmsec-0.json",
-      "stdout_payload": {
-        "status": "ok",
-        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-088-powerwatchdogrequestqueuetimeoutmsec-0.json",
-        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-088-powerwatchdogrequestqueuetimeoutmsec-0.md",
-        "error": null,
-        "outcome": null
-      },
-      "stderr": "",
       "observations": {
         "status": "ok",
         "verdict": "noisy",
@@ -24640,6 +24758,14 @@
             "io_write_read_mib_per_second": 14.71
           }
         }
+      },
+      "returncode": 0,
+      "stdout_payload": {
+        "status": "ok",
+        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-088-powerwatchdogrequestqueuetimeoutmsec-0.json",
+        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-088-powerwatchdogrequestqueuetimeoutmsec-0.md",
+        "error": null,
+        "outcome": null
       }
     },
     {
@@ -24658,16 +24784,7 @@
       ],
       "source_quality": "vm-observed",
       "status": "ok",
-      "returncode": 0,
       "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-088-powerwatchdogrequestqueuetimeoutmsec-1.json",
-      "stdout_payload": {
-        "status": "ok",
-        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-088-powerwatchdogrequestqueuetimeoutmsec-1.json",
-        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-088-powerwatchdogrequestqueuetimeoutmsec-1.md",
-        "error": null,
-        "outcome": null
-      },
-      "stderr": "",
       "observations": {
         "status": "ok",
         "verdict": "noisy",
@@ -24779,6 +24896,14 @@
             "io_write_read_mib_per_second": -1.2
           }
         }
+      },
+      "returncode": 0,
+      "stdout_payload": {
+        "status": "ok",
+        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-088-powerwatchdogrequestqueuetimeoutmsec-1.json",
+        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-088-powerwatchdogrequestqueuetimeoutmsec-1.md",
+        "error": null,
+        "outcome": null
       }
     },
     {
@@ -24797,16 +24922,7 @@
       ],
       "source_quality": "vm-observed",
       "status": "ok",
-      "returncode": 0,
       "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-089-powerwatchdogpocallouttimeoutmsec-0.json",
-      "stdout_payload": {
-        "status": "ok",
-        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-089-powerwatchdogpocallouttimeoutmsec-0.json",
-        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-089-powerwatchdogpocallouttimeoutmsec-0.md",
-        "error": null,
-        "outcome": null
-      },
-      "stderr": "",
       "observations": {
         "status": "ok",
         "verdict": "noisy",
@@ -24918,6 +25034,14 @@
             "io_write_read_mib_per_second": 7.67
           }
         }
+      },
+      "returncode": 0,
+      "stdout_payload": {
+        "status": "ok",
+        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-089-powerwatchdogpocallouttimeoutmsec-0.json",
+        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-089-powerwatchdogpocallouttimeoutmsec-0.md",
+        "error": null,
+        "outcome": null
       }
     },
     {
@@ -24936,16 +25060,7 @@
       ],
       "source_quality": "vm-observed",
       "status": "ok",
-      "returncode": 0,
       "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-089-powerwatchdogpocallouttimeoutmsec-1.json",
-      "stdout_payload": {
-        "status": "ok",
-        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-089-powerwatchdogpocallouttimeoutmsec-1.json",
-        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-089-powerwatchdogpocallouttimeoutmsec-1.md",
-        "error": null,
-        "outcome": null
-      },
-      "stderr": "",
       "observations": {
         "status": "ok",
         "verdict": "noisy",
@@ -25057,6 +25172,14 @@
             "io_write_read_mib_per_second": -17.74
           }
         }
+      },
+      "returncode": 0,
+      "stdout_payload": {
+        "status": "ok",
+        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-089-powerwatchdogpocallouttimeoutmsec-1.json",
+        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-089-powerwatchdogpocallouttimeoutmsec-1.md",
+        "error": null,
+        "outcome": null
       }
     },
     {
@@ -25075,16 +25198,7 @@
       ],
       "source_quality": "vm-observed",
       "status": "ok",
-      "returncode": 0,
       "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-090-powerwatchdogpowerongditimeoutmsec-0.json",
-      "stdout_payload": {
-        "status": "ok",
-        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-090-powerwatchdogpowerongditimeoutmsec-0.json",
-        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-090-powerwatchdogpowerongditimeoutmsec-0.md",
-        "error": null,
-        "outcome": null
-      },
-      "stderr": "",
       "observations": {
         "status": "ok",
         "verdict": "noisy",
@@ -25196,6 +25310,14 @@
             "io_write_read_mib_per_second": -7.28
           }
         }
+      },
+      "returncode": 0,
+      "stdout_payload": {
+        "status": "ok",
+        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-090-powerwatchdogpowerongditimeoutmsec-0.json",
+        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-090-powerwatchdogpowerongditimeoutmsec-0.md",
+        "error": null,
+        "outcome": null
       }
     },
     {
@@ -25214,16 +25336,7 @@
       ],
       "source_quality": "vm-observed",
       "status": "ok",
-      "returncode": 0,
       "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-090-powerwatchdogpowerongditimeoutmsec-1.json",
-      "stdout_payload": {
-        "status": "ok",
-        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-090-powerwatchdogpowerongditimeoutmsec-1.json",
-        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-090-powerwatchdogpowerongditimeoutmsec-1.md",
-        "error": null,
-        "outcome": null
-      },
-      "stderr": "",
       "observations": {
         "status": "ok",
         "verdict": "noisy",
@@ -25335,6 +25448,14 @@
             "io_write_read_mib_per_second": -29.84
           }
         }
+      },
+      "returncode": 0,
+      "stdout_payload": {
+        "status": "ok",
+        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-090-powerwatchdogpowerongditimeoutmsec-1.json",
+        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-090-powerwatchdogpowerongditimeoutmsec-1.md",
+        "error": null,
+        "outcome": null
       }
     },
     {
@@ -25353,16 +25474,7 @@
       ],
       "source_quality": "vm-observed",
       "status": "ok",
-      "returncode": 0,
       "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-091-powerwatchdogdwmsyncflushtimeoutmsec-0.json",
-      "stdout_payload": {
-        "status": "ok",
-        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-091-powerwatchdogdwmsyncflushtimeoutmsec-0.json",
-        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-091-powerwatchdogdwmsyncflushtimeoutmsec-0.md",
-        "error": null,
-        "outcome": null
-      },
-      "stderr": "",
       "observations": {
         "status": "ok",
         "verdict": "noisy",
@@ -25474,6 +25586,14 @@
             "io_write_read_mib_per_second": -22.83
           }
         }
+      },
+      "returncode": 0,
+      "stdout_payload": {
+        "status": "ok",
+        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-091-powerwatchdogdwmsyncflushtimeoutmsec-0.json",
+        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-091-powerwatchdogdwmsyncflushtimeoutmsec-0.md",
+        "error": null,
+        "outcome": null
       }
     },
     {
@@ -25492,16 +25612,7 @@
       ],
       "source_quality": "vm-observed",
       "status": "ok",
-      "returncode": 0,
       "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-091-powerwatchdogdwmsyncflushtimeoutmsec-1.json",
-      "stdout_payload": {
-        "status": "ok",
-        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-091-powerwatchdogdwmsyncflushtimeoutmsec-1.json",
-        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-091-powerwatchdogdwmsyncflushtimeoutmsec-1.md",
-        "error": null,
-        "outcome": null
-      },
-      "stderr": "",
       "observations": {
         "status": "ok",
         "verdict": "noisy",
@@ -25613,6 +25724,14 @@
             "io_write_read_mib_per_second": -6.69
           }
         }
+      },
+      "returncode": 0,
+      "stdout_payload": {
+        "status": "ok",
+        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-091-powerwatchdogdwmsyncflushtimeoutmsec-1.json",
+        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-091-powerwatchdogdwmsyncflushtimeoutmsec-1.md",
+        "error": null,
+        "outcome": null
       }
     },
     {
@@ -25631,16 +25750,7 @@
       ],
       "source_quality": "vm-observed",
       "status": "ok",
-      "returncode": 0,
       "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-092-powerwatchdogdrvsetmonitortimeoutmsec-0.json",
-      "stdout_payload": {
-        "status": "ok",
-        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-092-powerwatchdogdrvsetmonitortimeoutmsec-0.json",
-        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-092-powerwatchdogdrvsetmonitortimeoutmsec-0.md",
-        "error": null,
-        "outcome": null
-      },
-      "stderr": "",
       "observations": {
         "status": "ok",
         "verdict": "noisy",
@@ -25750,6 +25860,1249 @@
             "cpu_single_seconds": null,
             "cpu_multi_seconds": null,
             "io_write_read_mib_per_second": -17.36
+          }
+        }
+      },
+      "returncode": 0,
+      "stdout_payload": {
+        "status": "ok",
+        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-092-powerwatchdogdrvsetmonitortimeoutmsec-0.json",
+        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-092-powerwatchdogdrvsetmonitortimeoutmsec-0.md",
+        "error": null,
+        "outcome": null
+      }
+    },
+    {
+      "index": 92,
+      "experiment_id": "operator96-092-powerwatchdogdrvsetmonitortimeoutmsec-1",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "PowerWatchdogDrvSetMonitorTimeoutMsec",
+      "value_data": 1,
+      "requested_data": "0",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [
+        "watchdog/bugcheck-sensitive"
+      ],
+      "source_quality": "vm-observed",
+      "status": "ok",
+      "returncode": 0,
+      "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-092-powerwatchdogdrvsetmonitortimeoutmsec-1.json",
+      "stdout_payload": {
+        "status": "ok",
+        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-092-powerwatchdogdrvsetmonitortimeoutmsec-1.json",
+        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-092-powerwatchdogdrvsetmonitortimeoutmsec-1.md",
+        "error": null,
+        "outcome": null
+      },
+      "stderr": "",
+      "observations": {
+        "status": "ok",
+        "verdict": "noisy",
+        "confidence": "low",
+        "host_noise": "noisy",
+        "primary_delta_pct": null,
+        "verdict_reason": "host preflight marked one or more stages noisy",
+        "metrics_used": [
+          "host_noise_meta"
+        ],
+        "safety_findings": [],
+        "smoke_hard_success": {
+          "apply_smoke_hard_success": true,
+          "post_reboot_smoke_hard_success": true,
+          "post_rollback_smoke_hard_success": true
+        },
+        "apply": {
+          "original": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "PowerWatchdogDrvSetMonitorTimeoutMsec",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "after_apply": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "PowerWatchdogDrvSetMonitorTimeoutMsec",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 1,
+            "value_kind": "System.Int32",
+            "value_hex": "0x1",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_reboot": {
+          "after_reboot": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "PowerWatchdogDrvSetMonitorTimeoutMsec",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 1,
+            "value_kind": "System.Int32",
+            "value_hex": "0x1",
+            "status": "value-present",
+            "error": null
+          },
+          "restore_action": "removed-created-value",
+          "after_restore": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "PowerWatchdogDrvSetMonitorTimeoutMsec",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "timeout",
+            "failure_count": null,
+            "user": "REGPROBE25H2\\rai"
+          }
+        },
+        "post_rollback": {
+          "final": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "PowerWatchdogDrvSetMonitorTimeoutMsec",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "timeout",
+            "failure_count": null,
+            "user": "REGPROBE25H2\\rai"
+          }
+        },
+        "benchmark_delta_percent": {
+          "apply_vs_baseline": {
+            "cpu_single_seconds": null,
+            "cpu_multi_seconds": null,
+            "io_write_read_mib_per_second": 90.31
+          },
+          "post_reboot_vs_baseline": {
+            "cpu_single_seconds": null,
+            "cpu_multi_seconds": null,
+            "io_write_read_mib_per_second": 5.32
+          }
+        }
+      }
+    },
+    {
+      "index": 93,
+      "experiment_id": "operator96-093-policy-1",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ForceHibernateDisabled",
+      "value_name": "Policy",
+      "value_data": 1,
+      "requested_data": "1",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "key-missing",
+      "record_class": "key-missing",
+      "risk_flags": [],
+      "source_quality": "no-authoritative-evidence-for-25h2",
+      "status": "ok",
+      "returncode": 0,
+      "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-093-policy-1.json",
+      "stdout_payload": {
+        "status": "ok",
+        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-093-policy-1.json",
+        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-093-policy-1.md",
+        "error": null,
+        "outcome": null
+      },
+      "stderr": "",
+      "observations": {
+        "status": "ok",
+        "verdict": "noisy",
+        "confidence": "low",
+        "host_noise": "noisy",
+        "primary_delta_pct": null,
+        "verdict_reason": "host preflight marked one or more stages noisy",
+        "metrics_used": [
+          "host_noise_meta"
+        ],
+        "safety_findings": [],
+        "smoke_hard_success": {
+          "apply_smoke_hard_success": true,
+          "post_reboot_smoke_hard_success": true,
+          "post_rollback_smoke_hard_success": true
+        },
+        "apply": {
+          "original": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ForceHibernateDisabled",
+            "value_name": "Policy",
+            "key_exists": false,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "key-missing",
+            "error": null
+          },
+          "after_apply": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ForceHibernateDisabled",
+            "value_name": "Policy",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 1,
+            "value_kind": "System.Int32",
+            "value_hex": "0x1",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_reboot": {
+          "after_reboot": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ForceHibernateDisabled",
+            "value_name": "Policy",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 1,
+            "value_kind": "System.Int32",
+            "value_hex": "0x1",
+            "status": "value-present",
+            "error": null
+          },
+          "restore_action": "removed-created-key",
+          "after_restore": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ForceHibernateDisabled",
+            "value_name": "Policy",
+            "key_exists": false,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "key-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "timeout",
+            "failure_count": null,
+            "user": "REGPROBE25H2\\rai"
+          }
+        },
+        "post_rollback": {
+          "final": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ForceHibernateDisabled",
+            "value_name": "Policy",
+            "key_exists": false,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "key-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "timeout",
+            "failure_count": null,
+            "user": "REGPROBE25H2\\rai"
+          }
+        },
+        "benchmark_delta_percent": {
+          "apply_vs_baseline": {
+            "cpu_single_seconds": null,
+            "cpu_multi_seconds": null,
+            "io_write_read_mib_per_second": 19.94
+          },
+          "post_reboot_vs_baseline": {
+            "cpu_single_seconds": null,
+            "cpu_multi_seconds": null,
+            "io_write_read_mib_per_second": 34.15
+          }
+        }
+      }
+    },
+    {
+      "index": 93,
+      "experiment_id": "operator96-093-policy-0",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ForceHibernateDisabled",
+      "value_name": "Policy",
+      "value_data": 0,
+      "requested_data": "1",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "key-missing",
+      "record_class": "key-missing",
+      "risk_flags": [],
+      "source_quality": "no-authoritative-evidence-for-25h2",
+      "status": "ok",
+      "returncode": 0,
+      "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-093-policy-0.json",
+      "stdout_payload": {
+        "status": "ok",
+        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-093-policy-0.json",
+        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-093-policy-0.md",
+        "error": null,
+        "outcome": null
+      },
+      "stderr": "",
+      "observations": {
+        "status": "ok",
+        "verdict": "noisy",
+        "confidence": "low",
+        "host_noise": "noisy",
+        "primary_delta_pct": null,
+        "verdict_reason": "host preflight marked one or more stages noisy",
+        "metrics_used": [
+          "host_noise_meta"
+        ],
+        "safety_findings": [],
+        "smoke_hard_success": {
+          "apply_smoke_hard_success": true,
+          "post_reboot_smoke_hard_success": true,
+          "post_rollback_smoke_hard_success": true
+        },
+        "apply": {
+          "original": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ForceHibernateDisabled",
+            "value_name": "Policy",
+            "key_exists": false,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "key-missing",
+            "error": null
+          },
+          "after_apply": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ForceHibernateDisabled",
+            "value_name": "Policy",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 0,
+            "value_kind": "System.Int32",
+            "value_hex": "0x0",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_reboot": {
+          "after_reboot": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ForceHibernateDisabled",
+            "value_name": "Policy",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 0,
+            "value_kind": "System.Int32",
+            "value_hex": "0x0",
+            "status": "value-present",
+            "error": null
+          },
+          "restore_action": "removed-created-key",
+          "after_restore": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ForceHibernateDisabled",
+            "value_name": "Policy",
+            "key_exists": false,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "key-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_rollback": {
+          "final": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ForceHibernateDisabled",
+            "value_name": "Policy",
+            "key_exists": false,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "key-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "timeout",
+            "failure_count": null,
+            "user": "REGPROBE25H2\\rai"
+          }
+        },
+        "benchmark_delta_percent": {
+          "apply_vs_baseline": {
+            "cpu_single_seconds": null,
+            "cpu_multi_seconds": null,
+            "io_write_read_mib_per_second": -13.68
+          },
+          "post_reboot_vs_baseline": {
+            "cpu_single_seconds": null,
+            "cpu_multi_seconds": null,
+            "io_write_read_mib_per_second": -31.91
+          }
+        }
+      }
+    },
+    {
+      "index": 94,
+      "experiment_id": "operator96-094-enabledsnetrefresh-0",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ModernSleep",
+      "value_name": "EnableDsNetRefresh",
+      "value_data": 0,
+      "requested_data": "0",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed",
+      "status": "ok",
+      "returncode": 0,
+      "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-094-enabledsnetrefresh-0.json",
+      "stdout_payload": {
+        "status": "ok",
+        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-094-enabledsnetrefresh-0.json",
+        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-094-enabledsnetrefresh-0.md",
+        "error": null,
+        "outcome": null
+      },
+      "stderr": "",
+      "observations": {
+        "status": "ok",
+        "verdict": "harmful",
+        "confidence": "low",
+        "host_noise": "ok",
+        "primary_delta_pct": -26.883,
+        "verdict_reason": "apply io_write_mib_per_second changed by -26.88%",
+        "metrics_used": [
+          "io_write_mib_per_second"
+        ],
+        "safety_findings": [],
+        "smoke_hard_success": {
+          "apply_smoke_hard_success": true,
+          "post_reboot_smoke_hard_success": true,
+          "post_rollback_smoke_hard_success": true
+        },
+        "apply": {
+          "original": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ModernSleep",
+            "value_name": "EnableDsNetRefresh",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "after_apply": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ModernSleep",
+            "value_name": "EnableDsNetRefresh",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 0,
+            "value_kind": "System.Int32",
+            "value_hex": "0x0",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_reboot": {
+          "after_reboot": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ModernSleep",
+            "value_name": "EnableDsNetRefresh",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 0,
+            "value_kind": "System.Int32",
+            "value_hex": "0x0",
+            "status": "value-present",
+            "error": null
+          },
+          "restore_action": "removed-created-value",
+          "after_restore": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ModernSleep",
+            "value_name": "EnableDsNetRefresh",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_rollback": {
+          "final": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ModernSleep",
+            "value_name": "EnableDsNetRefresh",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "benchmark_delta_percent": {
+          "apply_vs_baseline": {
+            "cpu_single_seconds": null,
+            "cpu_multi_seconds": null,
+            "io_write_read_mib_per_second": 56.04
+          },
+          "post_reboot_vs_baseline": {
+            "cpu_single_seconds": null,
+            "cpu_multi_seconds": null,
+            "io_write_read_mib_per_second": 43.53
+          }
+        }
+      }
+    },
+    {
+      "index": 94,
+      "experiment_id": "operator96-094-enabledsnetrefresh-1",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ModernSleep",
+      "value_name": "EnableDsNetRefresh",
+      "value_data": 1,
+      "requested_data": "0",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed",
+      "status": "ok",
+      "returncode": 0,
+      "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-094-enabledsnetrefresh-1.json",
+      "stdout_payload": {
+        "status": "ok",
+        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-094-enabledsnetrefresh-1.json",
+        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-094-enabledsnetrefresh-1.md",
+        "error": null,
+        "outcome": null
+      },
+      "stderr": "",
+      "observations": {
+        "status": "ok",
+        "verdict": "harmful",
+        "confidence": "low",
+        "host_noise": "ok",
+        "primary_delta_pct": -27.592,
+        "verdict_reason": "post_reboot io_write_mib_per_second changed by -27.59%",
+        "metrics_used": [
+          "io_write_mib_per_second"
+        ],
+        "safety_findings": [],
+        "smoke_hard_success": {
+          "apply_smoke_hard_success": true,
+          "post_reboot_smoke_hard_success": true,
+          "post_rollback_smoke_hard_success": true
+        },
+        "apply": {
+          "original": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ModernSleep",
+            "value_name": "EnableDsNetRefresh",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "after_apply": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ModernSleep",
+            "value_name": "EnableDsNetRefresh",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 1,
+            "value_kind": "System.Int32",
+            "value_hex": "0x1",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_reboot": {
+          "after_reboot": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ModernSleep",
+            "value_name": "EnableDsNetRefresh",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 1,
+            "value_kind": "System.Int32",
+            "value_hex": "0x1",
+            "status": "value-present",
+            "error": null
+          },
+          "restore_action": "removed-created-value",
+          "after_restore": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ModernSleep",
+            "value_name": "EnableDsNetRefresh",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_rollback": {
+          "final": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ModernSleep",
+            "value_name": "EnableDsNetRefresh",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "benchmark_delta_percent": {
+          "apply_vs_baseline": {
+            "cpu_single_seconds": null,
+            "cpu_multi_seconds": null,
+            "io_write_read_mib_per_second": 60.15
+          },
+          "post_reboot_vs_baseline": {
+            "cpu_single_seconds": null,
+            "cpu_multi_seconds": null,
+            "io_write_read_mib_per_second": -11.58
+          }
+        }
+      }
+    },
+    {
+      "index": 95,
+      "experiment_id": "operator96-095-enabledactions-0",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ModernSleep",
+      "value_name": "EnabledActions",
+      "value_data": 0,
+      "requested_data": "0",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed",
+      "status": "ok",
+      "returncode": 0,
+      "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-095-enabledactions-0.json",
+      "stdout_payload": {
+        "status": "ok",
+        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-095-enabledactions-0.json",
+        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-095-enabledactions-0.md",
+        "error": null,
+        "outcome": null
+      },
+      "stderr": "",
+      "observations": {
+        "status": "ok",
+        "verdict": "noisy",
+        "confidence": "low",
+        "host_noise": "noisy",
+        "primary_delta_pct": null,
+        "verdict_reason": "host preflight marked one or more stages noisy",
+        "metrics_used": [
+          "host_noise_meta"
+        ],
+        "safety_findings": [],
+        "smoke_hard_success": {
+          "apply_smoke_hard_success": true,
+          "post_reboot_smoke_hard_success": true,
+          "post_rollback_smoke_hard_success": true
+        },
+        "apply": {
+          "original": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ModernSleep",
+            "value_name": "EnabledActions",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "after_apply": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ModernSleep",
+            "value_name": "EnabledActions",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 0,
+            "value_kind": "System.Int32",
+            "value_hex": "0x0",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_reboot": {
+          "after_reboot": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ModernSleep",
+            "value_name": "EnabledActions",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 0,
+            "value_kind": "System.Int32",
+            "value_hex": "0x0",
+            "status": "value-present",
+            "error": null
+          },
+          "restore_action": "removed-created-value",
+          "after_restore": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ModernSleep",
+            "value_name": "EnabledActions",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_rollback": {
+          "final": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ModernSleep",
+            "value_name": "EnabledActions",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "benchmark_delta_percent": {
+          "apply_vs_baseline": {
+            "cpu_single_seconds": null,
+            "cpu_multi_seconds": null,
+            "io_write_read_mib_per_second": 49.95
+          },
+          "post_reboot_vs_baseline": {
+            "cpu_single_seconds": null,
+            "cpu_multi_seconds": null,
+            "io_write_read_mib_per_second": -4.87
+          }
+        }
+      }
+    },
+    {
+      "index": 95,
+      "experiment_id": "operator96-095-enabledactions-1",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ModernSleep",
+      "value_name": "EnabledActions",
+      "value_data": 1,
+      "requested_data": "0",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed",
+      "status": "ok",
+      "returncode": 0,
+      "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-095-enabledactions-1.json",
+      "stdout_payload": {
+        "status": "ok",
+        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-095-enabledactions-1.json",
+        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-095-enabledactions-1.md",
+        "error": null,
+        "outcome": null
+      },
+      "stderr": "",
+      "observations": {
+        "status": "ok",
+        "verdict": "noisy",
+        "confidence": "low",
+        "host_noise": "noisy",
+        "primary_delta_pct": null,
+        "verdict_reason": "host preflight marked one or more stages noisy",
+        "metrics_used": [
+          "host_noise_meta"
+        ],
+        "safety_findings": [],
+        "smoke_hard_success": {
+          "apply_smoke_hard_success": true,
+          "post_reboot_smoke_hard_success": true,
+          "post_rollback_smoke_hard_success": true
+        },
+        "apply": {
+          "original": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ModernSleep",
+            "value_name": "EnabledActions",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "after_apply": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ModernSleep",
+            "value_name": "EnabledActions",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 1,
+            "value_kind": "System.Int32",
+            "value_hex": "0x1",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_reboot": {
+          "after_reboot": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ModernSleep",
+            "value_name": "EnabledActions",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 1,
+            "value_kind": "System.Int32",
+            "value_hex": "0x1",
+            "status": "value-present",
+            "error": null
+          },
+          "restore_action": "removed-created-value",
+          "after_restore": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ModernSleep",
+            "value_name": "EnabledActions",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_rollback": {
+          "final": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ModernSleep",
+            "value_name": "EnabledActions",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "benchmark_delta_percent": {
+          "apply_vs_baseline": {
+            "cpu_single_seconds": null,
+            "cpu_multi_seconds": null,
+            "io_write_read_mib_per_second": 51.16
+          },
+          "post_reboot_vs_baseline": {
+            "cpu_single_seconds": null,
+            "cpu_multi_seconds": null,
+            "io_write_read_mib_per_second": -4.56
+          }
+        }
+      }
+    },
+    {
+      "index": 96,
+      "experiment_id": "operator96-096-powerthrottlingoff-1",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerThrottling",
+      "value_name": "PowerThrottlingOff",
+      "value_data": 1,
+      "requested_data": "1",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "key-missing",
+      "record_class": "key-missing",
+      "risk_flags": [],
+      "source_quality": "source-backed-policy-default-absent",
+      "status": "ok",
+      "returncode": 0,
+      "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-096-powerthrottlingoff-1.json",
+      "stdout_payload": {
+        "status": "ok",
+        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-096-powerthrottlingoff-1.json",
+        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-096-powerthrottlingoff-1.md",
+        "error": null,
+        "outcome": null
+      },
+      "stderr": "",
+      "observations": {
+        "status": "ok",
+        "verdict": "noisy",
+        "confidence": "low",
+        "host_noise": "noisy",
+        "primary_delta_pct": null,
+        "verdict_reason": "host preflight marked one or more stages noisy",
+        "metrics_used": [
+          "host_noise_meta"
+        ],
+        "safety_findings": [],
+        "smoke_hard_success": {
+          "apply_smoke_hard_success": true,
+          "post_reboot_smoke_hard_success": true,
+          "post_rollback_smoke_hard_success": true
+        },
+        "apply": {
+          "original": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerThrottling",
+            "value_name": "PowerThrottlingOff",
+            "key_exists": false,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "key-missing",
+            "error": null
+          },
+          "after_apply": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerThrottling",
+            "value_name": "PowerThrottlingOff",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 1,
+            "value_kind": "System.Int32",
+            "value_hex": "0x1",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_reboot": {
+          "after_reboot": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerThrottling",
+            "value_name": "PowerThrottlingOff",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 1,
+            "value_kind": "System.Int32",
+            "value_hex": "0x1",
+            "status": "value-present",
+            "error": null
+          },
+          "restore_action": "removed-created-key",
+          "after_restore": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerThrottling",
+            "value_name": "PowerThrottlingOff",
+            "key_exists": false,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "key-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_rollback": {
+          "final": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerThrottling",
+            "value_name": "PowerThrottlingOff",
+            "key_exists": false,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "key-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "benchmark_delta_percent": {
+          "apply_vs_baseline": {
+            "cpu_single_seconds": null,
+            "cpu_multi_seconds": null,
+            "io_write_read_mib_per_second": 68.72
+          },
+          "post_reboot_vs_baseline": {
+            "cpu_single_seconds": null,
+            "cpu_multi_seconds": null,
+            "io_write_read_mib_per_second": 7.86
+          }
+        }
+      }
+    },
+    {
+      "index": 96,
+      "experiment_id": "operator96-096-powerthrottlingoff-0",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerThrottling",
+      "value_name": "PowerThrottlingOff",
+      "value_data": 0,
+      "requested_data": "1",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "key-missing",
+      "record_class": "key-missing",
+      "risk_flags": [],
+      "source_quality": "source-backed-policy-default-absent",
+      "status": "ok",
+      "returncode": 0,
+      "artifact_json": "registry-research-framework/audit/registry-value-experiments/operator96-096-powerthrottlingoff-0.json",
+      "stdout_payload": {
+        "status": "ok",
+        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-096-powerthrottlingoff-0.json",
+        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments/operator96-096-powerthrottlingoff-0.md",
+        "error": null,
+        "outcome": null
+      },
+      "stderr": "",
+      "observations": {
+        "status": "ok",
+        "verdict": "noisy",
+        "confidence": "low",
+        "host_noise": "noisy",
+        "primary_delta_pct": null,
+        "verdict_reason": "host preflight marked one or more stages noisy",
+        "metrics_used": [
+          "host_noise_meta"
+        ],
+        "safety_findings": [],
+        "smoke_hard_success": {
+          "apply_smoke_hard_success": true,
+          "post_reboot_smoke_hard_success": true,
+          "post_rollback_smoke_hard_success": true
+        },
+        "apply": {
+          "original": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerThrottling",
+            "value_name": "PowerThrottlingOff",
+            "key_exists": false,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "key-missing",
+            "error": null
+          },
+          "after_apply": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerThrottling",
+            "value_name": "PowerThrottlingOff",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 0,
+            "value_kind": "System.Int32",
+            "value_hex": "0x0",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_reboot": {
+          "after_reboot": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerThrottling",
+            "value_name": "PowerThrottlingOff",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 0,
+            "value_kind": "System.Int32",
+            "value_hex": "0x0",
+            "status": "value-present",
+            "error": null
+          },
+          "restore_action": "removed-created-key",
+          "after_restore": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerThrottling",
+            "value_name": "PowerThrottlingOff",
+            "key_exists": false,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "key-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_rollback": {
+          "final": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerThrottling",
+            "value_name": "PowerThrottlingOff",
+            "key_exists": false,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "key-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "benchmark_delta_percent": {
+          "apply_vs_baseline": {
+            "cpu_single_seconds": null,
+            "cpu_multi_seconds": null,
+            "io_write_read_mib_per_second": 44.77
+          },
+          "post_reboot_vs_baseline": {
+            "cpu_single_seconds": null,
+            "cpu_multi_seconds": null,
+            "io_write_read_mib_per_second": -17.07
           }
         }
       }

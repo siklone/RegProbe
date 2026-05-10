@@ -1,18 +1,18 @@
 # Registry Value Experiment Analysis
 
-- Generated UTC: `2026-05-10T15:12:35Z`
+- Generated UTC: `2026-05-10T16:41:06Z`
 - Input: `registry-research-framework/audit/registry-value-experiments`
 - Pattern: `operator96-*.json`
-- Artifacts analyzed: `170`
+- Artifacts analyzed: `179`
 - Errors: `0`
 
 ## Verdict Counts
 
 - `app_breakage`: `1`
 - `boot_failure`: `1`
-- `harmful`: `123`
+- `harmful`: `125`
 - `low_confidence`: `24`
-- `noisy`: `19`
+- `noisy`: `26`
 - `rollback_failure`: `2`
 
 ## Results
@@ -189,3 +189,12 @@
 | `operator96-091-powerwatchdogdwmsyncflushtimeoutmsec-0` | `noisy` | `low` | `noisy` | `` | host preflight marked one or more stages noisy | `registry-research-framework/audit/registry-value-experiments/operator96-091-powerwatchdogdwmsyncflushtimeoutmsec-0.json` |
 | `operator96-091-powerwatchdogdwmsyncflushtimeoutmsec-1` | `noisy` | `low` | `noisy` | `` | host preflight marked one or more stages noisy | `registry-research-framework/audit/registry-value-experiments/operator96-091-powerwatchdogdwmsyncflushtimeoutmsec-1.json` |
 | `operator96-092-powerwatchdogdrvsetmonitortimeoutmsec-0` | `noisy` | `low` | `noisy` | `` | host preflight marked one or more stages noisy | `registry-research-framework/audit/registry-value-experiments/operator96-092-powerwatchdogdrvsetmonitortimeoutmsec-0.json` |
+| `operator96-092-powerwatchdogdrvsetmonitortimeoutmsec-1` | `noisy` | `low` | `noisy` | `` | host preflight marked one or more stages noisy | `registry-research-framework/audit/registry-value-experiments/operator96-092-powerwatchdogdrvsetmonitortimeoutmsec-1.json` |
+| `operator96-093-policy-0` | `noisy` | `low` | `noisy` | `` | host preflight marked one or more stages noisy | `registry-research-framework/audit/registry-value-experiments/operator96-093-policy-0.json` |
+| `operator96-093-policy-1` | `noisy` | `low` | `noisy` | `` | host preflight marked one or more stages noisy | `registry-research-framework/audit/registry-value-experiments/operator96-093-policy-1.json` |
+| `operator96-094-enabledsnetrefresh-0` | `harmful` | `low` | `ok` | `-26.883` | apply io_write_mib_per_second changed by -26.88% | `registry-research-framework/audit/registry-value-experiments/operator96-094-enabledsnetrefresh-0.json` |
+| `operator96-094-enabledsnetrefresh-1` | `harmful` | `low` | `ok` | `-27.592` | post_reboot io_write_mib_per_second changed by -27.59% | `registry-research-framework/audit/registry-value-experiments/operator96-094-enabledsnetrefresh-1.json` |
+| `operator96-095-enabledactions-0` | `noisy` | `low` | `noisy` | `` | host preflight marked one or more stages noisy | `registry-research-framework/audit/registry-value-experiments/operator96-095-enabledactions-0.json` |
+| `operator96-095-enabledactions-1` | `noisy` | `low` | `noisy` | `` | host preflight marked one or more stages noisy | `registry-research-framework/audit/registry-value-experiments/operator96-095-enabledactions-1.json` |
+| `operator96-096-powerthrottlingoff-0` | `noisy` | `low` | `noisy` | `` | host preflight marked one or more stages noisy | `registry-research-framework/audit/registry-value-experiments/operator96-096-powerthrottlingoff-0.json` |
+| `operator96-096-powerthrottlingoff-1` | `noisy` | `low` | `noisy` | `` | host preflight marked one or more stages noisy | `registry-research-framework/audit/registry-value-experiments/operator96-096-powerthrottlingoff-1.json` |

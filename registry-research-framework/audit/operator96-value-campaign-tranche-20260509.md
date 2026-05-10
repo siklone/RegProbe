@@ -1,9 +1,9 @@
 # Operator 96 Registry Value Campaign
 
-- Generated UTC: `2026-05-10T13:36:32Z`
+- Generated UTC: `2026-05-10T15:14:17Z`
 - Status: **ok**
-- Planned experiments: `170`
-- Completed in this run: `170`
+- Planned experiments: `179`
+- Completed in this run: `179`
 
 ## Plan
 
@@ -179,6 +179,15 @@
 | 91 | `operator96-091-powerwatchdogdwmsyncflushtimeoutmsec-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerWatchdogDwmSyncFlushTimeoutMsec` | `0` | `absent` | `vm-observed` |
 | 91 | `operator96-091-powerwatchdogdwmsyncflushtimeoutmsec-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerWatchdogDwmSyncFlushTimeoutMsec` | `1` | `absent` | `vm-observed` |
 | 92 | `operator96-092-powerwatchdogdrvsetmonitortimeoutmsec-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerWatchdogDrvSetMonitorTimeoutMsec` | `0` | `absent` | `vm-observed` |
+| 92 | `operator96-092-powerwatchdogdrvsetmonitortimeoutmsec-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerWatchdogDrvSetMonitorTimeoutMsec` | `1` | `absent` | `vm-observed` |
+| 93 | `operator96-093-policy-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\ForceHibernateDisabled\Policy` | `1` | `absent` | `no-authoritative-evidence-for-25h2` |
+| 93 | `operator96-093-policy-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\ForceHibernateDisabled\Policy` | `0` | `absent` | `no-authoritative-evidence-for-25h2` |
+| 94 | `operator96-094-enabledsnetrefresh-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\ModernSleep\EnableDsNetRefresh` | `0` | `absent` | `vm-observed` |
+| 94 | `operator96-094-enabledsnetrefresh-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\ModernSleep\EnableDsNetRefresh` | `1` | `absent` | `vm-observed` |
+| 95 | `operator96-095-enabledactions-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\ModernSleep\EnabledActions` | `0` | `absent` | `vm-observed` |
+| 95 | `operator96-095-enabledactions-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\ModernSleep\EnabledActions` | `1` | `absent` | `vm-observed` |
+| 96 | `operator96-096-powerthrottlingoff-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerThrottling\PowerThrottlingOff` | `1` | `absent` | `source-backed-policy-default-absent` |
+| 96 | `operator96-096-powerthrottlingoff-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerThrottling\PowerThrottlingOff` | `0` | `absent` | `source-backed-policy-default-absent` |
 
 ## Results
 
@@ -354,3 +363,12 @@
 | `operator96-091-powerwatchdogdwmsyncflushtimeoutmsec-0` | `noisy` | `low` | `noisy` | `ok` | `True` | `timeout`/`None` | `None` | `-22.83` | `registry-research-framework/audit/registry-value-experiments/operator96-091-powerwatchdogdwmsyncflushtimeoutmsec-0.json` |
 | `operator96-091-powerwatchdogdwmsyncflushtimeoutmsec-1` | `noisy` | `low` | `noisy` | `ok` | `True` | `timeout`/`None` | `None` | `-6.69` | `registry-research-framework/audit/registry-value-experiments/operator96-091-powerwatchdogdwmsyncflushtimeoutmsec-1.json` |
 | `operator96-092-powerwatchdogdrvsetmonitortimeoutmsec-0` | `noisy` | `low` | `noisy` | `ok` | `True` | `timeout`/`None` | `None` | `-17.36` | `registry-research-framework/audit/registry-value-experiments/operator96-092-powerwatchdogdrvsetmonitortimeoutmsec-0.json` |
+| `operator96-092-powerwatchdogdrvsetmonitortimeoutmsec-1` | `noisy` | `low` | `noisy` | `ok` | `True` | `timeout`/`None` | `None` | `5.32` | `registry-research-framework/audit/registry-value-experiments/operator96-092-powerwatchdogdrvsetmonitortimeoutmsec-1.json` |
+| `operator96-093-policy-1` | `noisy` | `low` | `noisy` | `ok` | `True` | `timeout`/`None` | `None` | `34.15` | `registry-research-framework/audit/registry-value-experiments/operator96-093-policy-1.json` |
+| `operator96-093-policy-0` | `noisy` | `low` | `noisy` | `ok` | `True` | `ok`/`0` | `None` | `-31.91` | `registry-research-framework/audit/registry-value-experiments/operator96-093-policy-0.json` |
+| `operator96-094-enabledsnetrefresh-0` | `harmful` | `low` | `ok` | `ok` | `True` | `ok`/`0` | `-26.883` | `43.53` | `registry-research-framework/audit/registry-value-experiments/operator96-094-enabledsnetrefresh-0.json` |
+| `operator96-094-enabledsnetrefresh-1` | `harmful` | `low` | `ok` | `ok` | `True` | `ok`/`0` | `-27.592` | `-11.58` | `registry-research-framework/audit/registry-value-experiments/operator96-094-enabledsnetrefresh-1.json` |
+| `operator96-095-enabledactions-0` | `noisy` | `low` | `noisy` | `ok` | `True` | `ok`/`0` | `None` | `-4.87` | `registry-research-framework/audit/registry-value-experiments/operator96-095-enabledactions-0.json` |
+| `operator96-095-enabledactions-1` | `noisy` | `low` | `noisy` | `ok` | `True` | `ok`/`0` | `None` | `-4.56` | `registry-research-framework/audit/registry-value-experiments/operator96-095-enabledactions-1.json` |
+| `operator96-096-powerthrottlingoff-1` | `noisy` | `low` | `noisy` | `ok` | `True` | `ok`/`0` | `None` | `7.86` | `registry-research-framework/audit/registry-value-experiments/operator96-096-powerthrottlingoff-1.json` |
+| `operator96-096-powerthrottlingoff-0` | `noisy` | `low` | `noisy` | `ok` | `True` | `ok`/`0` | `None` | `-17.07` | `registry-research-framework/audit/registry-value-experiments/operator96-096-powerthrottlingoff-0.json` |
