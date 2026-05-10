@@ -182,6 +182,30 @@ internal static class StartupQaRunner
             return false;
         }
 
+        if (HasStepStatus(applyStage, "Apply", "Not applicable")
+            && HasStepStatus(applyStage, "Verify", "Skipped")
+            && HasStepStatus(applyStage, "Rollback", "Skipped"))
+        {
+            if (rollbackRequested
+                && rollbackStage is not null
+                && !HasStepStatus(rollbackStage, "Rollback", "Not applicable", "Skipped", "Rolled back"))
+            {
+                return false;
+            }
+
+            var applyNotApplicableMessage = applyStage.Steps
+                .FirstOrDefault(step =>
+                    string.Equals(step.Action, "Apply", StringComparison.OrdinalIgnoreCase)
+                    && string.Equals(step.StatusText, "Not applicable", StringComparison.OrdinalIgnoreCase))
+                ?.Message;
+            summary = !string.IsNullOrWhiteSpace(applyNotApplicableMessage)
+                ? applyNotApplicableMessage
+                : string.IsNullOrWhiteSpace(applyStage.StatusMessage)
+                    ? "The app loaded the tweak, but the current system state made the apply step not applicable."
+                    : applyStage.StatusMessage;
+            return true;
+        }
+
         if (!HasStepStatus(detectBefore, "Detect", "Not applicable")
             || !HasStepStatus(applyStage, "Apply", "Skipped")
             || !HasStepStatus(applyStage, "Verify", "Skipped")

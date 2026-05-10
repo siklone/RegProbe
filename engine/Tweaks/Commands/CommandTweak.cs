@@ -46,6 +46,8 @@ public abstract class CommandTweak : ITweak
 
     protected virtual TimeSpan RollbackSettleDelay => TimeSpan.Zero;
 
+    protected virtual TweakResult? CreateApplyFailureResult(CommandResult result) => null;
+
     public async Task<TweakResult> DetectAsync(CancellationToken ct)
     {
         ct.ThrowIfCancellationRequested();
@@ -120,6 +122,12 @@ public abstract class CommandTweak : ITweak
 
             if (result.ExitCode != 0)
             {
+                var customFailure = CreateApplyFailureResult(result);
+                if (customFailure is not null)
+                {
+                    return customFailure;
+                }
+
                 return new TweakResult(
                     TweakStatus.Failed,
                     $"Apply command failed with exit code {result.ExitCode}: {result.StandardError}",

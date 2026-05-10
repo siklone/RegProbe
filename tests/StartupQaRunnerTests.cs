@@ -141,6 +141,81 @@ public sealed class StartupQaRunnerTests
     }
 
     [Fact]
+    public void TryBuildTruthfulNotApplicableSummary_ReturnsTrue_WhenApplyIsEnvironmentBlocked()
+    {
+        var stages = new[]
+        {
+            new StartupQaRunner.QaRunStageReport(
+                "detect-before",
+                "NotApplied",
+                "Current state: Reserved Storage: Enabled",
+                "Detect - Success",
+                "Reserved Storage: Enabled",
+                "Optimized",
+                false,
+                true,
+                false,
+                false,
+                [
+                    new StartupQaRunner.QaRunStepReport("Detect", "Detected", "Current state: Reserved Storage: Enabled", "10:24:23"),
+                    new StartupQaRunner.QaRunStepReport("Apply", "Pending", string.Empty, "-"),
+                    new StartupQaRunner.QaRunStepReport("Verify", "Pending", string.Empty, "-"),
+                    new StartupQaRunner.QaRunStepReport("Rollback", "Pending", string.Empty, "-"),
+                ]),
+            new StartupQaRunner.QaRunStageReport(
+                "apply",
+                "NotApplied",
+                "Reserved Storage is currently in use by Windows servicing. Wait for servicing operations to complete and try again later.",
+                "Apply - Skipped",
+                "Reserved Storage: Enabled",
+                "Optimized",
+                false,
+                true,
+                false,
+                false,
+                [
+                    new StartupQaRunner.QaRunStepReport("Detect", "Detected", "Current state: Reserved Storage: Enabled", "10:24:23"),
+                    new StartupQaRunner.QaRunStepReport("Apply", "Not applicable", "Reserved Storage is currently in use by Windows servicing.", "10:24:23"),
+                    new StartupQaRunner.QaRunStepReport("Verify", "Skipped", "Apply returned NotApplicable.", "10:24:23"),
+                    new StartupQaRunner.QaRunStepReport("Rollback", "Skipped", "Apply returned NotApplicable.", "10:24:23"),
+                ]),
+            new StartupQaRunner.QaRunStageReport(
+                "rollback",
+                "NotApplied",
+                "Successfully restored original state.",
+                "Rollback - Rolled Back",
+                "Reserved Storage: Enabled",
+                "Optimized",
+                true,
+                true,
+                false,
+                true,
+                [
+                    new StartupQaRunner.QaRunStepReport("Rollback", "Rolled back", "Successfully restored original state.", "10:24:23"),
+                ]),
+            new StartupQaRunner.QaRunStageReport(
+                "detect-after",
+                "NotApplied",
+                "Current state: Reserved Storage: Enabled",
+                "Detect - Success",
+                "Reserved Storage: Enabled",
+                "Optimized",
+                true,
+                true,
+                false,
+                true,
+                [
+                    new StartupQaRunner.QaRunStepReport("Detect", "Detected", "Current state: Reserved Storage: Enabled", "10:24:23"),
+                ]),
+        };
+
+        var result = StartupQaRunner.TryBuildTruthfulNotApplicableSummary(stages, rollbackRequested: true, out var summary);
+
+        Assert.True(result);
+        Assert.Contains("Windows servicing", summary);
+    }
+
+    [Fact]
     public void TryBuildAlreadyAppliedSummary_ReturnsTrue_WhenNoMutationWasNeeded()
     {
         var stages = new[]
