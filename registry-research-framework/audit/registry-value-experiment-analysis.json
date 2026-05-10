@@ -1,9 +1,9 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-10T13:35:18Z",
+  "generated_utc": "2026-05-10T15:12:35Z",
   "input_dir": "registry-research-framework/audit/registry-value-experiments",
   "pattern": "operator96-*.json",
-  "artifact_count": 160,
+  "artifact_count": 170,
   "error_count": 0,
   "counts": {
     "by_verdict": {
@@ -11,16 +11,16 @@
       "boot_failure": 1,
       "harmful": 123,
       "low_confidence": 24,
-      "noisy": 9,
+      "noisy": 19,
       "rollback_failure": 2
     },
     "by_confidence": {
       "high": 7,
-      "low": 152,
+      "low": 162,
       "medium": 1
     },
     "by_host_noise": {
-      "noisy": 9,
+      "noisy": 19,
       "ok": 47,
       "unknown": 104
     }
@@ -16971,6 +16971,40 @@
       "restore_action": "removed-created-value"
     },
     {
+      "artifact": "registry-research-framework/audit/registry-value-experiments/operator96-087-ipilastclockownerdisable-0.json",
+      "experiment_id": "operator96-087-ipilastclockownerdisable-0",
+      "status": "ok",
+      "target": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\IpiLastClockOwnerDisable",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "IpiLastClockOwnerDisable",
+      "value_data": 0,
+      "verdict": "noisy",
+      "confidence": "low",
+      "host_noise": "noisy",
+      "delta_pct": null,
+      "reason": "host preflight marked one or more stages noisy",
+      "metrics_used": [
+        "host_noise_meta"
+      ],
+      "safety_findings": [],
+      "performance_findings": [
+        {
+          "verdict": "noisy",
+          "confidence": "low",
+          "delta_pct": null,
+          "reason": "host preflight marked one or more stages noisy",
+          "metrics_used": [
+            "host_noise_meta"
+          ],
+          "stage": null
+        }
+      ],
+      "apply_hard_failures": 0,
+      "post_reboot_hard_failures": 0,
+      "post_rollback_hard_failures": 0,
+      "restore_action": "removed-created-value"
+    },
+    {
       "artifact": "registry-research-framework/audit/registry-value-experiments/operator96-087-ipilastclockownerdisable-1.json",
       "experiment_id": "operator96-087-ipilastclockownerdisable-1",
       "status": "ok",
@@ -17107,6 +17141,312 @@
           "stage": "post_reboot",
           "baseline": 1791.1918,
           "applied": 1618.0575
+        }
+      ],
+      "apply_hard_failures": 0,
+      "post_reboot_hard_failures": 0,
+      "post_rollback_hard_failures": 0,
+      "restore_action": "removed-created-value"
+    },
+    {
+      "artifact": "registry-research-framework/audit/registry-value-experiments/operator96-088-powerwatchdogrequestqueuetimeoutmsec-0.json",
+      "experiment_id": "operator96-088-powerwatchdogrequestqueuetimeoutmsec-0",
+      "status": "ok",
+      "target": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerWatchdogRequestQueueTimeoutMsec",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "PowerWatchdogRequestQueueTimeoutMsec",
+      "value_data": 0,
+      "verdict": "noisy",
+      "confidence": "low",
+      "host_noise": "noisy",
+      "delta_pct": null,
+      "reason": "host preflight marked one or more stages noisy",
+      "metrics_used": [
+        "host_noise_meta"
+      ],
+      "safety_findings": [],
+      "performance_findings": [
+        {
+          "verdict": "noisy",
+          "confidence": "low",
+          "delta_pct": null,
+          "reason": "host preflight marked one or more stages noisy",
+          "metrics_used": [
+            "host_noise_meta"
+          ],
+          "stage": null
+        }
+      ],
+      "apply_hard_failures": 0,
+      "post_reboot_hard_failures": 0,
+      "post_rollback_hard_failures": 0,
+      "restore_action": "removed-created-value"
+    },
+    {
+      "artifact": "registry-research-framework/audit/registry-value-experiments/operator96-088-powerwatchdogrequestqueuetimeoutmsec-1.json",
+      "experiment_id": "operator96-088-powerwatchdogrequestqueuetimeoutmsec-1",
+      "status": "ok",
+      "target": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerWatchdogRequestQueueTimeoutMsec",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "PowerWatchdogRequestQueueTimeoutMsec",
+      "value_data": 1,
+      "verdict": "noisy",
+      "confidence": "low",
+      "host_noise": "noisy",
+      "delta_pct": null,
+      "reason": "host preflight marked one or more stages noisy",
+      "metrics_used": [
+        "host_noise_meta"
+      ],
+      "safety_findings": [],
+      "performance_findings": [
+        {
+          "verdict": "noisy",
+          "confidence": "low",
+          "delta_pct": null,
+          "reason": "host preflight marked one or more stages noisy",
+          "metrics_used": [
+            "host_noise_meta"
+          ],
+          "stage": null
+        }
+      ],
+      "apply_hard_failures": 0,
+      "post_reboot_hard_failures": 0,
+      "post_rollback_hard_failures": 0,
+      "restore_action": "removed-created-value"
+    },
+    {
+      "artifact": "registry-research-framework/audit/registry-value-experiments/operator96-089-powerwatchdogpocallouttimeoutmsec-0.json",
+      "experiment_id": "operator96-089-powerwatchdogpocallouttimeoutmsec-0",
+      "status": "ok",
+      "target": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerWatchdogPoCalloutTimeoutMsec",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "PowerWatchdogPoCalloutTimeoutMsec",
+      "value_data": 0,
+      "verdict": "noisy",
+      "confidence": "low",
+      "host_noise": "noisy",
+      "delta_pct": null,
+      "reason": "host preflight marked one or more stages noisy",
+      "metrics_used": [
+        "host_noise_meta"
+      ],
+      "safety_findings": [],
+      "performance_findings": [
+        {
+          "verdict": "noisy",
+          "confidence": "low",
+          "delta_pct": null,
+          "reason": "host preflight marked one or more stages noisy",
+          "metrics_used": [
+            "host_noise_meta"
+          ],
+          "stage": null
+        }
+      ],
+      "apply_hard_failures": 0,
+      "post_reboot_hard_failures": 0,
+      "post_rollback_hard_failures": 0,
+      "restore_action": "removed-created-value"
+    },
+    {
+      "artifact": "registry-research-framework/audit/registry-value-experiments/operator96-089-powerwatchdogpocallouttimeoutmsec-1.json",
+      "experiment_id": "operator96-089-powerwatchdogpocallouttimeoutmsec-1",
+      "status": "ok",
+      "target": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerWatchdogPoCalloutTimeoutMsec",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "PowerWatchdogPoCalloutTimeoutMsec",
+      "value_data": 1,
+      "verdict": "noisy",
+      "confidence": "low",
+      "host_noise": "noisy",
+      "delta_pct": null,
+      "reason": "host preflight marked one or more stages noisy",
+      "metrics_used": [
+        "host_noise_meta"
+      ],
+      "safety_findings": [],
+      "performance_findings": [
+        {
+          "verdict": "noisy",
+          "confidence": "low",
+          "delta_pct": null,
+          "reason": "host preflight marked one or more stages noisy",
+          "metrics_used": [
+            "host_noise_meta"
+          ],
+          "stage": null
+        }
+      ],
+      "apply_hard_failures": 0,
+      "post_reboot_hard_failures": 0,
+      "post_rollback_hard_failures": 0,
+      "restore_action": "removed-created-value"
+    },
+    {
+      "artifact": "registry-research-framework/audit/registry-value-experiments/operator96-090-powerwatchdogpowerongditimeoutmsec-0.json",
+      "experiment_id": "operator96-090-powerwatchdogpowerongditimeoutmsec-0",
+      "status": "ok",
+      "target": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerWatchdogPowerOnGdiTimeoutMsec",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "PowerWatchdogPowerOnGdiTimeoutMsec",
+      "value_data": 0,
+      "verdict": "noisy",
+      "confidence": "low",
+      "host_noise": "noisy",
+      "delta_pct": null,
+      "reason": "host preflight marked one or more stages noisy",
+      "metrics_used": [
+        "host_noise_meta"
+      ],
+      "safety_findings": [],
+      "performance_findings": [
+        {
+          "verdict": "noisy",
+          "confidence": "low",
+          "delta_pct": null,
+          "reason": "host preflight marked one or more stages noisy",
+          "metrics_used": [
+            "host_noise_meta"
+          ],
+          "stage": null
+        }
+      ],
+      "apply_hard_failures": 0,
+      "post_reboot_hard_failures": 0,
+      "post_rollback_hard_failures": 0,
+      "restore_action": "removed-created-value"
+    },
+    {
+      "artifact": "registry-research-framework/audit/registry-value-experiments/operator96-090-powerwatchdogpowerongditimeoutmsec-1.json",
+      "experiment_id": "operator96-090-powerwatchdogpowerongditimeoutmsec-1",
+      "status": "ok",
+      "target": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerWatchdogPowerOnGdiTimeoutMsec",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "PowerWatchdogPowerOnGdiTimeoutMsec",
+      "value_data": 1,
+      "verdict": "noisy",
+      "confidence": "low",
+      "host_noise": "noisy",
+      "delta_pct": null,
+      "reason": "host preflight marked one or more stages noisy",
+      "metrics_used": [
+        "host_noise_meta"
+      ],
+      "safety_findings": [],
+      "performance_findings": [
+        {
+          "verdict": "noisy",
+          "confidence": "low",
+          "delta_pct": null,
+          "reason": "host preflight marked one or more stages noisy",
+          "metrics_used": [
+            "host_noise_meta"
+          ],
+          "stage": null
+        }
+      ],
+      "apply_hard_failures": 0,
+      "post_reboot_hard_failures": 0,
+      "post_rollback_hard_failures": 0,
+      "restore_action": "removed-created-value"
+    },
+    {
+      "artifact": "registry-research-framework/audit/registry-value-experiments/operator96-091-powerwatchdogdwmsyncflushtimeoutmsec-0.json",
+      "experiment_id": "operator96-091-powerwatchdogdwmsyncflushtimeoutmsec-0",
+      "status": "ok",
+      "target": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerWatchdogDwmSyncFlushTimeoutMsec",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "PowerWatchdogDwmSyncFlushTimeoutMsec",
+      "value_data": 0,
+      "verdict": "noisy",
+      "confidence": "low",
+      "host_noise": "noisy",
+      "delta_pct": null,
+      "reason": "host preflight marked one or more stages noisy",
+      "metrics_used": [
+        "host_noise_meta"
+      ],
+      "safety_findings": [],
+      "performance_findings": [
+        {
+          "verdict": "noisy",
+          "confidence": "low",
+          "delta_pct": null,
+          "reason": "host preflight marked one or more stages noisy",
+          "metrics_used": [
+            "host_noise_meta"
+          ],
+          "stage": null
+        }
+      ],
+      "apply_hard_failures": 0,
+      "post_reboot_hard_failures": 0,
+      "post_rollback_hard_failures": 0,
+      "restore_action": "removed-created-value"
+    },
+    {
+      "artifact": "registry-research-framework/audit/registry-value-experiments/operator96-091-powerwatchdogdwmsyncflushtimeoutmsec-1.json",
+      "experiment_id": "operator96-091-powerwatchdogdwmsyncflushtimeoutmsec-1",
+      "status": "ok",
+      "target": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerWatchdogDwmSyncFlushTimeoutMsec",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "PowerWatchdogDwmSyncFlushTimeoutMsec",
+      "value_data": 1,
+      "verdict": "noisy",
+      "confidence": "low",
+      "host_noise": "noisy",
+      "delta_pct": null,
+      "reason": "host preflight marked one or more stages noisy",
+      "metrics_used": [
+        "host_noise_meta"
+      ],
+      "safety_findings": [],
+      "performance_findings": [
+        {
+          "verdict": "noisy",
+          "confidence": "low",
+          "delta_pct": null,
+          "reason": "host preflight marked one or more stages noisy",
+          "metrics_used": [
+            "host_noise_meta"
+          ],
+          "stage": null
+        }
+      ],
+      "apply_hard_failures": 0,
+      "post_reboot_hard_failures": 0,
+      "post_rollback_hard_failures": 0,
+      "restore_action": "removed-created-value"
+    },
+    {
+      "artifact": "registry-research-framework/audit/registry-value-experiments/operator96-092-powerwatchdogdrvsetmonitortimeoutmsec-0.json",
+      "experiment_id": "operator96-092-powerwatchdogdrvsetmonitortimeoutmsec-0",
+      "status": "ok",
+      "target": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\PowerWatchdogDrvSetMonitorTimeoutMsec",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "PowerWatchdogDrvSetMonitorTimeoutMsec",
+      "value_data": 0,
+      "verdict": "noisy",
+      "confidence": "low",
+      "host_noise": "noisy",
+      "delta_pct": null,
+      "reason": "host preflight marked one or more stages noisy",
+      "metrics_used": [
+        "host_noise_meta"
+      ],
+      "safety_findings": [],
+      "performance_findings": [
+        {
+          "verdict": "noisy",
+          "confidence": "low",
+          "delta_pct": null,
+          "reason": "host preflight marked one or more stages noisy",
+          "metrics_used": [
+            "host_noise_meta"
+          ],
+          "stage": null
         }
       ],
       "apply_hard_failures": 0,

@@ -1,9 +1,9 @@
 # Registry Value Experiment Analysis
 
-- Generated UTC: `2026-05-10T13:35:18Z`
+- Generated UTC: `2026-05-10T15:12:35Z`
 - Input: `registry-research-framework/audit/registry-value-experiments`
 - Pattern: `operator96-*.json`
-- Artifacts analyzed: `160`
+- Artifacts analyzed: `170`
 - Errors: `0`
 
 ## Verdict Counts
@@ -12,7 +12,7 @@
 - `boot_failure`: `1`
 - `harmful`: `123`
 - `low_confidence`: `24`
-- `noisy`: `9`
+- `noisy`: `19`
 - `rollback_failure`: `2`
 
 ## Results
@@ -178,4 +178,14 @@
 | `operator96-085-heterohgseeperfhintsindependentenabled-1` | `harmful` | `low` | `ok` | `-25.761` | post_reboot io_write_mib_per_second changed by -25.76% | `registry-research-framework/audit/registry-value-experiments/operator96-085-heterohgseeperfhintsindependentenabled-1.json` |
 | `operator96-086-heterohgsplusdisabled-0` | `harmful` | `low` | `ok` | `-27.272` | apply io_write_mib_per_second changed by -27.27% | `registry-research-framework/audit/registry-value-experiments/operator96-086-heterohgsplusdisabled-0.json` |
 | `operator96-086-heterohgsplusdisabled-1` | `harmful` | `low` | `ok` | `-29.761` | post_reboot io_write_mib_per_second changed by -29.76% | `registry-research-framework/audit/registry-value-experiments/operator96-086-heterohgsplusdisabled-1.json` |
+| `operator96-087-ipilastclockownerdisable-0` | `noisy` | `low` | `noisy` | `` | host preflight marked one or more stages noisy | `registry-research-framework/audit/registry-value-experiments/operator96-087-ipilastclockownerdisable-0.json` |
 | `operator96-087-ipilastclockownerdisable-1` | `harmful` | `low` | `ok` | `-9.916` | post_reboot io_write_read_mib_per_second changed by -9.92% | `registry-research-framework/audit/registry-value-experiments/operator96-087-ipilastclockownerdisable-1.json` |
+| `operator96-088-powerwatchdogrequestqueuetimeoutmsec-0` | `noisy` | `low` | `noisy` | `` | host preflight marked one or more stages noisy | `registry-research-framework/audit/registry-value-experiments/operator96-088-powerwatchdogrequestqueuetimeoutmsec-0.json` |
+| `operator96-088-powerwatchdogrequestqueuetimeoutmsec-1` | `noisy` | `low` | `noisy` | `` | host preflight marked one or more stages noisy | `registry-research-framework/audit/registry-value-experiments/operator96-088-powerwatchdogrequestqueuetimeoutmsec-1.json` |
+| `operator96-089-powerwatchdogpocallouttimeoutmsec-0` | `noisy` | `low` | `noisy` | `` | host preflight marked one or more stages noisy | `registry-research-framework/audit/registry-value-experiments/operator96-089-powerwatchdogpocallouttimeoutmsec-0.json` |
+| `operator96-089-powerwatchdogpocallouttimeoutmsec-1` | `noisy` | `low` | `noisy` | `` | host preflight marked one or more stages noisy | `registry-research-framework/audit/registry-value-experiments/operator96-089-powerwatchdogpocallouttimeoutmsec-1.json` |
+| `operator96-090-powerwatchdogpowerongditimeoutmsec-0` | `noisy` | `low` | `noisy` | `` | host preflight marked one or more stages noisy | `registry-research-framework/audit/registry-value-experiments/operator96-090-powerwatchdogpowerongditimeoutmsec-0.json` |
+| `operator96-090-powerwatchdogpowerongditimeoutmsec-1` | `noisy` | `low` | `noisy` | `` | host preflight marked one or more stages noisy | `registry-research-framework/audit/registry-value-experiments/operator96-090-powerwatchdogpowerongditimeoutmsec-1.json` |
+| `operator96-091-powerwatchdogdwmsyncflushtimeoutmsec-0` | `noisy` | `low` | `noisy` | `` | host preflight marked one or more stages noisy | `registry-research-framework/audit/registry-value-experiments/operator96-091-powerwatchdogdwmsyncflushtimeoutmsec-0.json` |
+| `operator96-091-powerwatchdogdwmsyncflushtimeoutmsec-1` | `noisy` | `low` | `noisy` | `` | host preflight marked one or more stages noisy | `registry-research-framework/audit/registry-value-experiments/operator96-091-powerwatchdogdwmsyncflushtimeoutmsec-1.json` |
+| `operator96-092-powerwatchdogdrvsetmonitortimeoutmsec-0` | `noisy` | `low` | `noisy` | `` | host preflight marked one or more stages noisy | `registry-research-framework/audit/registry-value-experiments/operator96-092-powerwatchdogdrvsetmonitortimeoutmsec-0.json` |

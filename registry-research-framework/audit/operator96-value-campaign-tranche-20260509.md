@@ -1,9 +1,9 @@
 # Operator 96 Registry Value Campaign
 
-- Generated UTC: `2026-05-10T12:14:31Z`
+- Generated UTC: `2026-05-10T13:36:32Z`
 - Status: **ok**
-- Planned experiments: `160`
-- Completed in this run: `160`
+- Planned experiments: `170`
+- Completed in this run: `170`
 
 ## Plan
 
@@ -169,6 +169,16 @@
 | 86 | `operator96-086-heterohgsplusdisabled-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\HeteroHgsPlusDisabled` | `1` | `absent` | `vm-observed` |
 | 86 | `operator96-086-heterohgsplusdisabled-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\HeteroHgsPlusDisabled` | `0` | `absent` | `vm-observed` |
 | 87 | `operator96-087-ipilastclockownerdisable-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\IpiLastClockOwnerDisable` | `1` | `absent` | `vm-observed` |
+| 87 | `operator96-087-ipilastclockownerdisable-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\IpiLastClockOwnerDisable` | `0` | `absent` | `vm-observed` |
+| 88 | `operator96-088-powerwatchdogrequestqueuetimeoutmsec-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerWatchdogRequestQueueTimeoutMsec` | `0` | `absent` | `vm-observed` |
+| 88 | `operator96-088-powerwatchdogrequestqueuetimeoutmsec-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerWatchdogRequestQueueTimeoutMsec` | `1` | `absent` | `vm-observed` |
+| 89 | `operator96-089-powerwatchdogpocallouttimeoutmsec-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerWatchdogPoCalloutTimeoutMsec` | `0` | `absent` | `vm-observed` |
+| 89 | `operator96-089-powerwatchdogpocallouttimeoutmsec-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerWatchdogPoCalloutTimeoutMsec` | `1` | `absent` | `vm-observed` |
+| 90 | `operator96-090-powerwatchdogpowerongditimeoutmsec-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerWatchdogPowerOnGdiTimeoutMsec` | `0` | `absent` | `vm-observed` |
+| 90 | `operator96-090-powerwatchdogpowerongditimeoutmsec-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerWatchdogPowerOnGdiTimeoutMsec` | `1` | `absent` | `vm-observed` |
+| 91 | `operator96-091-powerwatchdogdwmsyncflushtimeoutmsec-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerWatchdogDwmSyncFlushTimeoutMsec` | `0` | `absent` | `vm-observed` |
+| 91 | `operator96-091-powerwatchdogdwmsyncflushtimeoutmsec-1` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerWatchdogDwmSyncFlushTimeoutMsec` | `1` | `absent` | `vm-observed` |
+| 92 | `operator96-092-powerwatchdogdrvsetmonitortimeoutmsec-0` | `HKLM\SYSTEM\CurrentControlSet\Control\Power\PowerWatchdogDrvSetMonitorTimeoutMsec` | `0` | `absent` | `vm-observed` |
 
 ## Results
 
@@ -334,3 +344,13 @@
 | `operator96-086-heterohgsplusdisabled-1` | `harmful` | `low` | `ok` | `ok` | `True` | `ok`/`0` | `-29.761` | `-5.68` | `registry-research-framework/audit/registry-value-experiments/operator96-086-heterohgsplusdisabled-1.json` |
 | `operator96-086-heterohgsplusdisabled-0` | `harmful` | `low` | `ok` | `ok` | `True` | `ok`/`0` | `-27.272` | `-3.5` | `registry-research-framework/audit/registry-value-experiments/operator96-086-heterohgsplusdisabled-0.json` |
 | `operator96-087-ipilastclockownerdisable-1` | `harmful` | `low` | `ok` | `ok` | `True` | `ok`/`0` | `-9.916` | `-9.92` | `registry-research-framework/audit/registry-value-experiments/operator96-087-ipilastclockownerdisable-1.json` |
+| `operator96-087-ipilastclockownerdisable-0` | `noisy` | `low` | `noisy` | `ok` | `True` | `ok`/`0` | `None` | `18.61` | `registry-research-framework/audit/registry-value-experiments/operator96-087-ipilastclockownerdisable-0.json` |
+| `operator96-088-powerwatchdogrequestqueuetimeoutmsec-0` | `noisy` | `low` | `noisy` | `ok` | `True` | `ok`/`0` | `None` | `14.71` | `registry-research-framework/audit/registry-value-experiments/operator96-088-powerwatchdogrequestqueuetimeoutmsec-0.json` |
+| `operator96-088-powerwatchdogrequestqueuetimeoutmsec-1` | `noisy` | `low` | `noisy` | `ok` | `True` | `timeout`/`None` | `None` | `-1.2` | `registry-research-framework/audit/registry-value-experiments/operator96-088-powerwatchdogrequestqueuetimeoutmsec-1.json` |
+| `operator96-089-powerwatchdogpocallouttimeoutmsec-0` | `noisy` | `low` | `noisy` | `ok` | `True` | `timeout`/`None` | `None` | `7.67` | `registry-research-framework/audit/registry-value-experiments/operator96-089-powerwatchdogpocallouttimeoutmsec-0.json` |
+| `operator96-089-powerwatchdogpocallouttimeoutmsec-1` | `noisy` | `low` | `noisy` | `ok` | `True` | `ok`/`0` | `None` | `-17.74` | `registry-research-framework/audit/registry-value-experiments/operator96-089-powerwatchdogpocallouttimeoutmsec-1.json` |
+| `operator96-090-powerwatchdogpowerongditimeoutmsec-0` | `noisy` | `low` | `noisy` | `ok` | `True` | `timeout`/`None` | `None` | `-7.28` | `registry-research-framework/audit/registry-value-experiments/operator96-090-powerwatchdogpowerongditimeoutmsec-0.json` |
+| `operator96-090-powerwatchdogpowerongditimeoutmsec-1` | `noisy` | `low` | `noisy` | `ok` | `True` | `timeout`/`None` | `None` | `-29.84` | `registry-research-framework/audit/registry-value-experiments/operator96-090-powerwatchdogpowerongditimeoutmsec-1.json` |
+| `operator96-091-powerwatchdogdwmsyncflushtimeoutmsec-0` | `noisy` | `low` | `noisy` | `ok` | `True` | `timeout`/`None` | `None` | `-22.83` | `registry-research-framework/audit/registry-value-experiments/operator96-091-powerwatchdogdwmsyncflushtimeoutmsec-0.json` |
+| `operator96-091-powerwatchdogdwmsyncflushtimeoutmsec-1` | `noisy` | `low` | `noisy` | `ok` | `True` | `timeout`/`None` | `None` | `-6.69` | `registry-research-framework/audit/registry-value-experiments/operator96-091-powerwatchdogdwmsyncflushtimeoutmsec-1.json` |
+| `operator96-092-powerwatchdogdrvsetmonitortimeoutmsec-0` | `noisy` | `low` | `noisy` | `ok` | `True` | `timeout`/`None` | `None` | `-17.36` | `registry-research-framework/audit/registry-value-experiments/operator96-092-powerwatchdogdrvsetmonitortimeoutmsec-0.json` |
