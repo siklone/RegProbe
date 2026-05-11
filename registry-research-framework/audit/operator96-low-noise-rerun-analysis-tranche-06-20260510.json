@@ -1,0 +1,1177 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-11T05:02:40Z",
+  "input_dir": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-06",
+  "pattern": "operator96-*.json",
+  "artifact_count": 8,
+  "error_count": 0,
+  "counts": {
+    "by_verdict": {
+      "harmful": 7,
+      "low_confidence": 1
+    },
+    "by_confidence": {
+      "high": 2,
+      "low": 5,
+      "medium": 1
+    },
+    "by_host_noise": {
+      "ok": 8
+    }
+  },
+  "results": [
+    {
+      "artifact": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-06/operator96-032-interruptsteeringflags-0.json",
+      "experiment_id": "operator96-032-interruptsteeringflags-0",
+      "status": "ok",
+      "target": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel\\InterruptSteeringFlags",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "InterruptSteeringFlags",
+      "value_data": 0,
+      "verdict": "harmful",
+      "confidence": "low",
+      "host_noise": "ok",
+      "delta_pct": -15.778,
+      "reason": "post_reboot io_write_mib_per_second changed by -15.78%",
+      "metrics_used": [
+        "io_write_mib_per_second"
+      ],
+      "safety_findings": [],
+      "performance_findings": [
+        {
+          "verdict": "no_effect",
+          "confidence": "high",
+          "delta_pct": -0.066,
+          "reason": "apply cpu_single_iterations_per_second changed by -0.07%",
+          "metrics_used": [
+            "cpu_single_iterations_per_second"
+          ],
+          "stage": "apply",
+          "baseline": 38701898.7621,
+          "applied": 38676186.1873
+        },
+        {
+          "verdict": "no_effect",
+          "confidence": "high",
+          "delta_pct": -2.108,
+          "reason": "apply cpu_multi_iterations_per_second changed by -2.11%",
+          "metrics_used": [
+            "cpu_multi_iterations_per_second"
+          ],
+          "stage": "apply",
+          "baseline": 75561346.9785,
+          "applied": 73968348.922
+        },
+        {
+          "verdict": "low_confidence",
+          "confidence": "low",
+          "delta_pct": 134.109,
+          "reason": "apply io_write_read_mib_per_second changed by +134.11%",
+          "metrics_used": [
+            "io_write_read_mib_per_second"
+          ],
+          "stage": "apply",
+          "baseline": 1142.097,
+          "applied": 2673.7546
+        },
+        {
+          "verdict": "no_effect",
+          "confidence": "low",
+          "delta_pct": 2.229,
+          "reason": "apply io_write_mib_per_second changed by +2.23%",
+          "metrics_used": [
+            "io_write_mib_per_second"
+          ],
+          "stage": "apply",
+          "baseline": 382.9684,
+          "applied": 391.5044
+        },
+        {
+          "verdict": "low_confidence",
+          "confidence": "low",
+          "delta_pct": 175.153,
+          "reason": "apply io_read_mib_per_second changed by +175.15%",
+          "metrics_used": [
+            "io_read_mib_per_second"
+          ],
+          "stage": "apply",
+          "baseline": 1789.489,
+          "applied": 4923.8344
+        },
+        {
+          "verdict": "no_effect",
+          "confidence": "high",
+          "delta_pct": 0.037,
+          "reason": "post_reboot cpu_single_iterations_per_second changed by +0.04%",
+          "metrics_used": [
+            "cpu_single_iterations_per_second"
+          ],
+          "stage": "post_reboot",
+          "baseline": 38701898.7621,
+          "applied": 38716306.5605
+        },
+        {
+          "verdict": "no_effect",
+          "confidence": "medium",
+          "delta_pct": -0.161,
+          "reason": "post_reboot cpu_multi_iterations_per_second changed by -0.16%",
+          "metrics_used": [
+            "cpu_multi_iterations_per_second"
+          ],
+          "stage": "post_reboot",
+          "baseline": 75561346.9785,
+          "applied": 75439446.508
+        },
+        {
+          "verdict": "no_effect",
+          "confidence": "low",
+          "delta_pct": -1.045,
+          "reason": "post_reboot io_write_read_mib_per_second changed by -1.04%",
+          "metrics_used": [
+            "io_write_read_mib_per_second"
+          ],
+          "stage": "post_reboot",
+          "baseline": 1142.097,
+          "applied": 1130.1589
+        },
+        {
+          "verdict": "harmful",
+          "confidence": "low",
+          "delta_pct": -15.778,
+          "reason": "post_reboot io_write_mib_per_second changed by -15.78%",
+          "metrics_used": [
+            "io_write_mib_per_second"
+          ],
+          "stage": "post_reboot",
+          "baseline": 382.9684,
+          "applied": 322.5436
+        },
+        {
+          "verdict": "no_effect",
+          "confidence": "low",
+          "delta_pct": 0.991,
+          "reason": "post_reboot io_read_mib_per_second changed by +0.99%",
+          "metrics_used": [
+            "io_read_mib_per_second"
+          ],
+          "stage": "post_reboot",
+          "baseline": 1789.489,
+          "applied": 1807.2153
+        }
+      ],
+      "apply_hard_failures": 0,
+      "post_reboot_hard_failures": 0,
+      "post_rollback_hard_failures": 0,
+      "restore_action": "removed-created-value"
+    },
+    {
+      "artifact": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-06/operator96-032-interruptsteeringflags-1.json",
+      "experiment_id": "operator96-032-interruptsteeringflags-1",
+      "status": "ok",
+      "target": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel\\InterruptSteeringFlags",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "InterruptSteeringFlags",
+      "value_data": 1,
+      "verdict": "harmful",
+      "confidence": "low",
+      "host_noise": "ok",
+      "delta_pct": -8.008,
+      "reason": "apply io_write_mib_per_second changed by -8.01%",
+      "metrics_used": [
+        "io_write_mib_per_second"
+      ],
+      "safety_findings": [],
+      "performance_findings": [
+        {
+          "verdict": "no_effect",
+          "confidence": "high",
+          "delta_pct": -0.091,
+          "reason": "apply cpu_single_iterations_per_second changed by -0.09%",
+          "metrics_used": [
+            "cpu_single_iterations_per_second"
+          ],
+          "stage": "apply",
+          "baseline": 39311838.5125,
+          "applied": 39276081.4372
+        },
+        {
+          "verdict": "no_effect",
+          "confidence": "medium",
+          "delta_pct": -0.267,
+          "reason": "apply cpu_multi_iterations_per_second changed by -0.27%",
+          "metrics_used": [
+            "cpu_multi_iterations_per_second"
+          ],
+          "stage": "apply",
+          "baseline": 77933788.4639,
+          "applied": 77726064.5558
+        },
+        {
+          "verdict": "low_confidence",
+          "confidence": "low",
+          "delta_pct": 64.26,
+          "reason": "apply io_write_read_mib_per_second changed by +64.26%",
+          "metrics_used": [
+            "io_write_read_mib_per_second"
+          ],
+          "stage": "apply",
+          "baseline": 1150.1185,
+          "applied": 1889.1877
+        },
+        {
+          "verdict": "harmful",
+          "confidence": "low",
+          "delta_pct": -8.008,
+          "reason": "apply io_write_mib_per_second changed by -8.01%",
+          "metrics_used": [
+            "io_write_mib_per_second"
+          ],
+          "stage": "apply",
+          "baseline": 379.1298,
+          "applied": 348.7678
+        },
+        {
+          "verdict": "low_confidence",
+          "confidence": "low",
+          "delta_pct": 84.001,
+          "reason": "apply io_read_mib_per_second changed by +84.00%",
+          "metrics_used": [
+            "io_read_mib_per_second"
+          ],
+          "stage": "apply",
+          "baseline": 1819.0914,
+          "applied": 3347.1403
+        },
+        {
+          "verdict": "no_effect",
+          "confidence": "high",
+          "delta_pct": -1.341,
+          "reason": "post_reboot cpu_single_iterations_per_second changed by -1.34%",
+          "metrics_used": [
+            "cpu_single_iterations_per_second"
+          ],
+          "stage": "post_reboot",
+          "baseline": 39311838.5125,
+          "applied": 38784701.0695
+        },
+        {
+          "verdict": "low_confidence",
+          "confidence": "medium",
+          "delta_pct": -3.467,
+          "reason": "post_reboot cpu_multi_iterations_per_second changed by -3.47%",
+          "metrics_used": [
+            "cpu_multi_iterations_per_second"
+          ],
+          "stage": "post_reboot",
+          "baseline": 77933788.4639,
+          "applied": 75231462.6873
+        },
+        {
+          "verdict": "no_effect",
+          "confidence": "low",
+          "delta_pct": -2.393,
+          "reason": "post_reboot io_write_read_mib_per_second changed by -2.39%",
+          "metrics_used": [
+            "io_write_read_mib_per_second"
+          ],
+          "stage": "post_reboot",
+          "baseline": 1150.1185,
+          "applied": 1122.5915
+        },
+        {
+          "verdict": "low_confidence",
+          "confidence": "low",
+          "delta_pct": -4.929,
+          "reason": "post_reboot io_write_mib_per_second changed by -4.93%",
+          "metrics_used": [
+            "io_write_mib_per_second"
+          ],
+          "stage": "post_reboot",
+          "baseline": 379.1298,
+          "applied": 360.4424
+        },
+        {
+          "verdict": "no_effect",
+          "confidence": "low",
+          "delta_pct": 1.233,
+          "reason": "post_reboot io_read_mib_per_second changed by +1.23%",
+          "metrics_used": [
+            "io_read_mib_per_second"
+          ],
+          "stage": "post_reboot",
+          "baseline": 1819.0914,
+          "applied": 1841.5146
+        }
+      ],
+      "apply_hard_failures": 0,
+      "post_reboot_hard_failures": 0,
+      "post_rollback_hard_failures": 0,
+      "restore_action": "removed-created-value"
+    },
+    {
+      "artifact": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-06/operator96-033-alwaystrackioboosting-0.json",
+      "experiment_id": "operator96-033-alwaystrackioboosting-0",
+      "status": "ok",
+      "target": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel\\AlwaysTrackIoBoosting",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "AlwaysTrackIoBoosting",
+      "value_data": 0,
+      "verdict": "harmful",
+      "confidence": "medium",
+      "host_noise": "ok",
+      "delta_pct": -8.402,
+      "reason": "apply cpu_multi_iterations_per_second changed by -8.40%",
+      "metrics_used": [
+        "cpu_multi_iterations_per_second"
+      ],
+      "safety_findings": [],
+      "performance_findings": [
+        {
+          "verdict": "no_effect",
+          "confidence": "high",
+          "delta_pct": -0.25,
+          "reason": "apply cpu_single_iterations_per_second changed by -0.25%",
+          "metrics_used": [
+            "cpu_single_iterations_per_second"
+          ],
+          "stage": "apply",
+          "baseline": 38838052.4471,
+          "applied": 38740851.0268
+        },
+        {
+          "verdict": "harmful",
+          "confidence": "medium",
+          "delta_pct": -8.402,
+          "reason": "apply cpu_multi_iterations_per_second changed by -8.40%",
+          "metrics_used": [
+            "cpu_multi_iterations_per_second"
+          ],
+          "stage": "apply",
+          "baseline": 74234130.2135,
+          "applied": 67997004.7171
+        },
+        {
+          "verdict": "low_confidence",
+          "confidence": "low",
+          "delta_pct": 84.499,
+          "reason": "apply io_write_read_mib_per_second changed by +84.50%",
+          "metrics_used": [
+            "io_write_read_mib_per_second"
+          ],
+          "stage": "apply",
+          "baseline": 1162.6128,
+          "applied": 2145.0087
+        },
+        {
+          "verdict": "low_confidence",
+          "confidence": "low",
+          "delta_pct": 22.5,
+          "reason": "apply io_write_mib_per_second changed by +22.50%",
+          "metrics_used": [
+            "io_write_mib_per_second"
+          ],
+          "stage": "apply",
+          "baseline": 375.4802,
+          "applied": 459.9631
+        },
+        {
+          "verdict": "low_confidence",
+          "confidence": "low",
+          "delta_pct": 95.242,
+          "reason": "apply io_read_mib_per_second changed by +95.24%",
+          "metrics_used": [
+            "io_read_mib_per_second"
+          ],
+          "stage": "apply",
+          "baseline": 1949.7453,
+          "applied": 3806.7141
+        },
+        {
+          "verdict": "no_effect",
+          "confidence": "high",
+          "delta_pct": -1.076,
+          "reason": "post_reboot cpu_single_iterations_per_second changed by -1.08%",
+          "metrics_used": [
+            "cpu_single_iterations_per_second"
+          ],
+          "stage": "post_reboot",
+          "baseline": 38838052.4471,
+          "applied": 38419988.7047
+        },
+        {
+          "verdict": "no_effect",
+          "confidence": "medium",
+          "delta_pct": -2.208,
+          "reason": "post_reboot cpu_multi_iterations_per_second changed by -2.21%",
+          "metrics_used": [
+            "cpu_multi_iterations_per_second"
+          ],
+          "stage": "post_reboot",
+          "baseline": 74234130.2135,
+          "applied": 72594764.9987
+        },
+        {
+          "verdict": "low_confidence",
+          "confidence": "low",
+          "delta_pct": -4.938,
+          "reason": "post_reboot io_write_read_mib_per_second changed by -4.94%",
+          "metrics_used": [
+            "io_write_read_mib_per_second"
+          ],
+          "stage": "post_reboot",
+          "baseline": 1162.6128,
+          "applied": 1105.2004
+        },
+        {
+          "verdict": "no_effect",
+          "confidence": "low",
+          "delta_pct": 1.069,
+          "reason": "post_reboot io_write_mib_per_second changed by +1.07%",
+          "metrics_used": [
+            "io_write_mib_per_second"
+          ],
+          "stage": "post_reboot",
+          "baseline": 375.4802,
+          "applied": 379.4931
+        },
+        {
+          "verdict": "harmful",
+          "confidence": "low",
+          "delta_pct": -7.178,
+          "reason": "post_reboot io_read_mib_per_second changed by -7.18%",
+          "metrics_used": [
+            "io_read_mib_per_second"
+          ],
+          "stage": "post_reboot",
+          "baseline": 1949.7453,
+          "applied": 1809.791
+        }
+      ],
+      "apply_hard_failures": 0,
+      "post_reboot_hard_failures": 0,
+      "post_rollback_hard_failures": 0,
+      "restore_action": "removed-created-value"
+    },
+    {
+      "artifact": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-06/operator96-033-alwaystrackioboosting-1.json",
+      "experiment_id": "operator96-033-alwaystrackioboosting-1",
+      "status": "ok",
+      "target": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel\\AlwaysTrackIoBoosting",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "AlwaysTrackIoBoosting",
+      "value_data": 1,
+      "verdict": "harmful",
+      "confidence": "high",
+      "host_noise": "ok",
+      "delta_pct": -7.474,
+      "reason": "apply cpu_multi_iterations_per_second changed by -7.47%",
+      "metrics_used": [
+        "cpu_multi_iterations_per_second"
+      ],
+      "safety_findings": [],
+      "performance_findings": [
+        {
+          "verdict": "no_effect",
+          "confidence": "high",
+          "delta_pct": -0.363,
+          "reason": "apply cpu_single_iterations_per_second changed by -0.36%",
+          "metrics_used": [
+            "cpu_single_iterations_per_second"
+          ],
+          "stage": "apply",
+          "baseline": 38836930.3729,
+          "applied": 38695765.8692
+        },
+        {
+          "verdict": "harmful",
+          "confidence": "high",
+          "delta_pct": -7.474,
+          "reason": "apply cpu_multi_iterations_per_second changed by -7.47%",
+          "metrics_used": [
+            "cpu_multi_iterations_per_second"
+          ],
+          "stage": "apply",
+          "baseline": 75361615.9464,
+          "applied": 69729438.7586
+        },
+        {
+          "verdict": "low_confidence",
+          "confidence": "low",
+          "delta_pct": 82.338,
+          "reason": "apply io_write_read_mib_per_second changed by +82.34%",
+          "metrics_used": [
+            "io_write_read_mib_per_second"
+          ],
+          "stage": "apply",
+          "baseline": 1125.2544,
+          "applied": 2051.7631
+        },
+        {
+          "verdict": "low_confidence",
+          "confidence": "low",
+          "delta_pct": 6.545,
+          "reason": "apply io_write_mib_per_second changed by +6.54%",
+          "metrics_used": [
+            "io_write_mib_per_second"
+          ],
+          "stage": "apply",
+          "baseline": 391.3971,
+          "applied": 417.0153
+        },
+        {
+          "verdict": "low_confidence",
+          "confidence": "low",
+          "delta_pct": 109.037,
+          "reason": "apply io_read_mib_per_second changed by +109.04%",
+          "metrics_used": [
+            "io_read_mib_per_second"
+          ],
+          "stage": "apply",
+          "baseline": 1793.2998,
+          "applied": 3748.6528
+        },
+        {
+          "verdict": "no_effect",
+          "confidence": "low",
+          "delta_pct": -1.045,
+          "reason": "post_reboot cpu_single_iterations_per_second changed by -1.04%",
+          "metrics_used": [
+            "cpu_single_iterations_per_second"
+          ],
+          "stage": "post_reboot",
+          "baseline": 38836930.3729,
+          "applied": 38431209.6737
+        },
+        {
+          "verdict": "no_effect",
+          "confidence": "medium",
+          "delta_pct": 0.709,
+          "reason": "post_reboot cpu_multi_iterations_per_second changed by +0.71%",
+          "metrics_used": [
+            "cpu_multi_iterations_per_second"
+          ],
+          "stage": "post_reboot",
+          "baseline": 75361615.9464,
+          "applied": 75896255.1673
+        },
+        {
+          "verdict": "no_effect",
+          "confidence": "low",
+          "delta_pct": -0.035,
+          "reason": "post_reboot io_write_read_mib_per_second changed by -0.04%",
+          "metrics_used": [
+            "io_write_read_mib_per_second"
+          ],
+          "stage": "post_reboot",
+          "baseline": 1125.2544,
+          "applied": 1124.8593
+        },
+        {
+          "verdict": "low_confidence",
+          "confidence": "low",
+          "delta_pct": -5.555,
+          "reason": "post_reboot io_write_mib_per_second changed by -5.55%",
+          "metrics_used": [
+            "io_write_mib_per_second"
+          ],
+          "stage": "post_reboot",
+          "baseline": 391.3971,
+          "applied": 369.6533
+        },
+        {
+          "verdict": "low_confidence",
+          "confidence": "low",
+          "delta_pct": 6.343,
+          "reason": "post_reboot io_read_mib_per_second changed by +6.34%",
+          "metrics_used": [
+            "io_read_mib_per_second"
+          ],
+          "stage": "post_reboot",
+          "baseline": 1793.2998,
+          "applied": 1907.0549
+        }
+      ],
+      "apply_hard_failures": 0,
+      "post_reboot_hard_failures": 0,
+      "post_rollback_hard_failures": 0,
+      "restore_action": "removed-created-value"
+    },
+    {
+      "artifact": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-06/operator96-035-maximumcooperativeidlesearchwidth-0.json",
+      "experiment_id": "operator96-035-maximumcooperativeidlesearchwidth-0",
+      "status": "ok",
+      "target": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel\\MaximumCooperativeIdleSearchWidth",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "MaximumCooperativeIdleSearchWidth",
+      "value_data": 0,
+      "verdict": "harmful",
+      "confidence": "high",
+      "host_noise": "ok",
+      "delta_pct": -8.016,
+      "reason": "apply cpu_multi_iterations_per_second changed by -8.02%",
+      "metrics_used": [
+        "cpu_multi_iterations_per_second"
+      ],
+      "safety_findings": [],
+      "performance_findings": [
+        {
+          "verdict": "no_effect",
+          "confidence": "high",
+          "delta_pct": 0.766,
+          "reason": "apply cpu_single_iterations_per_second changed by +0.77%",
+          "metrics_used": [
+            "cpu_single_iterations_per_second"
+          ],
+          "stage": "apply",
+          "baseline": 38119828.8311,
+          "applied": 38411761.2412
+        },
+        {
+          "verdict": "harmful",
+          "confidence": "high",
+          "delta_pct": -8.016,
+          "reason": "apply cpu_multi_iterations_per_second changed by -8.02%",
+          "metrics_used": [
+            "cpu_multi_iterations_per_second"
+          ],
+          "stage": "apply",
+          "baseline": 74179013.7043,
+          "applied": 68233175.2604
+        },
+        {
+          "verdict": "low_confidence",
+          "confidence": "low",
+          "delta_pct": 71.167,
+          "reason": "apply io_write_read_mib_per_second changed by +71.17%",
+          "metrics_used": [
+            "io_write_read_mib_per_second"
+          ],
+          "stage": "apply",
+          "baseline": 1071.3764,
+          "applied": 1833.8448
+        },
+        {
+          "verdict": "no_effect",
+          "confidence": "low",
+          "delta_pct": -2.21,
+          "reason": "apply io_write_mib_per_second changed by -2.21%",
+          "metrics_used": [
+            "io_write_mib_per_second"
+          ],
+          "stage": "apply",
+          "baseline": 403.5044,
+          "applied": 394.5882
+        },
+        {
+          "verdict": "low_confidence",
+          "confidence": "low",
+          "delta_pct": 82.309,
+          "reason": "apply io_read_mib_per_second changed by +82.31%",
+          "metrics_used": [
+            "io_read_mib_per_second"
+          ],
+          "stage": "apply",
+          "baseline": 1839.1227,
+          "applied": 3352.8919
+        },
+        {
+          "verdict": "no_effect",
+          "confidence": "high",
+          "delta_pct": 0.894,
+          "reason": "post_reboot cpu_single_iterations_per_second changed by +0.89%",
+          "metrics_used": [
+            "cpu_single_iterations_per_second"
+          ],
+          "stage": "post_reboot",
+          "baseline": 38119828.8311,
+          "applied": 38460520.5671
+        },
+        {
+          "verdict": "no_effect",
+          "confidence": "high",
+          "delta_pct": 2.208,
+          "reason": "post_reboot cpu_multi_iterations_per_second changed by +2.21%",
+          "metrics_used": [
+            "cpu_multi_iterations_per_second"
+          ],
+          "stage": "post_reboot",
+          "baseline": 74179013.7043,
+          "applied": 75817114.6616
+        },
+        {
+          "verdict": "low_confidence",
+          "confidence": "low",
+          "delta_pct": 7.151,
+          "reason": "post_reboot io_write_read_mib_per_second changed by +7.15%",
+          "metrics_used": [
+            "io_write_read_mib_per_second"
+          ],
+          "stage": "post_reboot",
+          "baseline": 1071.3764,
+          "applied": 1147.989
+        },
+        {
+          "verdict": "low_confidence",
+          "confidence": "low",
+          "delta_pct": -6.809,
+          "reason": "post_reboot io_write_mib_per_second changed by -6.81%",
+          "metrics_used": [
+            "io_write_mib_per_second"
+          ],
+          "stage": "post_reboot",
+          "baseline": 403.5044,
+          "applied": 376.0309
+        },
+        {
+          "verdict": "no_effect",
+          "confidence": "low",
+          "delta_pct": 0.918,
+          "reason": "post_reboot io_read_mib_per_second changed by +0.92%",
+          "metrics_used": [
+            "io_read_mib_per_second"
+          ],
+          "stage": "post_reboot",
+          "baseline": 1839.1227,
+          "applied": 1855.9978
+        }
+      ],
+      "apply_hard_failures": 0,
+      "post_reboot_hard_failures": 0,
+      "post_rollback_hard_failures": 0,
+      "restore_action": "removed-created-value"
+    },
+    {
+      "artifact": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-06/operator96-035-maximumcooperativeidlesearchwidth-1.json",
+      "experiment_id": "operator96-035-maximumcooperativeidlesearchwidth-1",
+      "status": "ok",
+      "target": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel\\MaximumCooperativeIdleSearchWidth",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+      "value_name": "MaximumCooperativeIdleSearchWidth",
+      "value_data": 1,
+      "verdict": "harmful",
+      "confidence": "low",
+      "host_noise": "ok",
+      "delta_pct": -20.44,
+      "reason": "post_reboot io_write_mib_per_second changed by -20.44%",
+      "metrics_used": [
+        "io_write_mib_per_second"
+      ],
+      "safety_findings": [],
+      "performance_findings": [
+        {
+          "verdict": "no_effect",
+          "confidence": "high",
+          "delta_pct": -0.613,
+          "reason": "apply cpu_single_iterations_per_second changed by -0.61%",
+          "metrics_used": [
+            "cpu_single_iterations_per_second"
+          ],
+          "stage": "apply",
+          "baseline": 38892862.7286,
+          "applied": 38654488.1905
+        },
+        {
+          "verdict": "low_confidence",
+          "confidence": "medium",
+          "delta_pct": -6.229,
+          "reason": "apply cpu_multi_iterations_per_second changed by -6.23%",
+          "metrics_used": [
+            "cpu_multi_iterations_per_second"
+          ],
+          "stage": "apply",
+          "baseline": 74153659.2326,
+          "applied": 69534476.114
+        },
+        {
+          "verdict": "low_confidence",
+          "confidence": "low",
+          "delta_pct": 76.05,
+          "reason": "apply io_write_read_mib_per_second changed by +76.05%",
+          "metrics_used": [
+            "io_write_read_mib_per_second"
+          ],
+          "stage": "apply",
+          "baseline": 1136.7949,
+          "applied": 2001.3289
+        },
+        {
+          "verdict": "harmful",
+          "confidence": "low",
+          "delta_pct": -14.101,
+          "reason": "apply io_write_mib_per_second changed by -14.10%",
+          "metrics_used": [
+            "io_write_mib_per_second"
+          ],
+          "stage": "apply",
+          "baseline": 433.7231,
+          "applied": 372.5644
+        },
+        {
+          "verdict": "low_confidence",
+          "confidence": "low",
+          "delta_pct": 97.361,
+          "reason": "apply io_read_mib_per_second changed by +97.36%",
+          "metrics_used": [
+            "io_read_mib_per_second"
+          ],
+          "stage": "apply",
+          "baseline": 1839.313,
+          "applied": 3630.0935
+        },
+        {
+          "verdict": "no_effect",
+          "confidence": "low",
+          "delta_pct": -2.336,
+          "reason": "post_reboot cpu_single_iterations_per_second changed by -2.34%",
+          "metrics_used": [
+            "cpu_single_iterations_per_second"
+          ],
+          "stage": "post_reboot",
+          "baseline": 38892862.7286,
+          "applied": 37984402.5171
+        },
+        {
+          "verdict": "low_confidence",
+          "confidence": "medium",
+          "delta_pct": -3.674,
+          "reason": "post_reboot cpu_multi_iterations_per_second changed by -3.67%",
+          "metrics_used": [
+            "cpu_multi_iterations_per_second"
+          ],
+          "stage": "post_reboot",
+          "baseline": 74153659.2326,
+          "applied": 71429530.9192
+        },
+        {
+          "verdict": "low_confidence",
+          "confidence": "low",
+          "delta_pct": -6.008,
+          "reason": "post_reboot io_write_read_mib_per_second changed by -6.01%",
+          "metrics_used": [
+            "io_write_read_mib_per_second"
+          ],
+          "stage": "post_reboot",
+          "baseline": 1136.7949,
+          "applied": 1068.4942
+        },
+        {
+          "verdict": "harmful",
+          "confidence": "low",
+          "delta_pct": -20.44,
+          "reason": "post_reboot io_write_mib_per_second changed by -20.44%",
+          "metrics_used": [
+            "io_write_mib_per_second"
+          ],
+          "stage": "post_reboot",
+          "baseline": 433.7231,
+          "applied": 345.0685
+        },
+        {
+          "verdict": "no_effect",
+          "confidence": "low",
+          "delta_pct": -0.148,
+          "reason": "post_reboot io_read_mib_per_second changed by -0.15%",
+          "metrics_used": [
+            "io_read_mib_per_second"
+          ],
+          "stage": "post_reboot",
+          "baseline": 1839.313,
+          "applied": 1836.5895
+        }
+      ],
+      "apply_hard_failures": 0,
+      "post_reboot_hard_failures": 0,
+      "post_rollback_hard_failures": 0,
+      "restore_action": "removed-created-value"
+    },
+    {
+      "artifact": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-06/operator96-036-hiberbootenabled-0.json",
+      "experiment_id": "operator96-036-hiberbootenabled-0",
+      "status": "ok",
+      "target": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power\\HiberbootEnabled",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+      "value_name": "HiberbootEnabled",
+      "value_data": 0,
+      "verdict": "harmful",
+      "confidence": "low",
+      "host_noise": "ok",
+      "delta_pct": -30.536,
+      "reason": "post_reboot io_write_mib_per_second changed by -30.54%",
+      "metrics_used": [
+        "io_write_mib_per_second"
+      ],
+      "safety_findings": [],
+      "performance_findings": [
+        {
+          "verdict": "no_effect",
+          "confidence": "high",
+          "delta_pct": 0.284,
+          "reason": "apply cpu_single_iterations_per_second changed by +0.28%",
+          "metrics_used": [
+            "cpu_single_iterations_per_second"
+          ],
+          "stage": "apply",
+          "baseline": 38640469.2813,
+          "applied": 38750353.9573
+        },
+        {
+          "verdict": "low_confidence",
+          "confidence": "medium",
+          "delta_pct": -5.763,
+          "reason": "apply cpu_multi_iterations_per_second changed by -5.76%",
+          "metrics_used": [
+            "cpu_multi_iterations_per_second"
+          ],
+          "stage": "apply",
+          "baseline": 75039608.2144,
+          "applied": 70714959.7149
+        },
+        {
+          "verdict": "low_confidence",
+          "confidence": "low",
+          "delta_pct": 99.987,
+          "reason": "apply io_write_read_mib_per_second changed by +99.99%",
+          "metrics_used": [
+            "io_write_read_mib_per_second"
+          ],
+          "stage": "apply",
+          "baseline": 1189.8554,
+          "applied": 2379.5546
+        },
+        {
+          "verdict": "harmful",
+          "confidence": "low",
+          "delta_pct": -26.175,
+          "reason": "apply io_write_mib_per_second changed by -26.18%",
+          "metrics_used": [
+            "io_write_mib_per_second"
+          ],
+          "stage": "apply",
+          "baseline": 534.7987,
+          "applied": 394.8131
+        },
+        {
+          "verdict": "low_confidence",
+          "confidence": "low",
+          "delta_pct": 134.31,
+          "reason": "apply io_read_mib_per_second changed by +134.31%",
+          "metrics_used": [
+            "io_read_mib_per_second"
+          ],
+          "stage": "apply",
+          "baseline": 1844.9121,
+          "applied": 4322.8055
+        },
+        {
+          "verdict": "no_effect",
+          "confidence": "high",
+          "delta_pct": -0.875,
+          "reason": "post_reboot cpu_single_iterations_per_second changed by -0.88%",
+          "metrics_used": [
+            "cpu_single_iterations_per_second"
+          ],
+          "stage": "post_reboot",
+          "baseline": 38640469.2813,
+          "applied": 38302243.4204
+        },
+        {
+          "verdict": "no_effect",
+          "confidence": "high",
+          "delta_pct": 0.547,
+          "reason": "post_reboot cpu_multi_iterations_per_second changed by +0.55%",
+          "metrics_used": [
+            "cpu_multi_iterations_per_second"
+          ],
+          "stage": "post_reboot",
+          "baseline": 75039608.2144,
+          "applied": 75450006.6015
+        },
+        {
+          "verdict": "harmful",
+          "confidence": "low",
+          "delta_pct": -8.171,
+          "reason": "post_reboot io_write_read_mib_per_second changed by -8.17%",
+          "metrics_used": [
+            "io_write_read_mib_per_second"
+          ],
+          "stage": "post_reboot",
+          "baseline": 1189.8554,
+          "applied": 1092.628
+        },
+        {
+          "verdict": "harmful",
+          "confidence": "low",
+          "delta_pct": -30.536,
+          "reason": "post_reboot io_write_mib_per_second changed by -30.54%",
+          "metrics_used": [
+            "io_write_mib_per_second"
+          ],
+          "stage": "post_reboot",
+          "baseline": 534.7987,
+          "applied": 371.4909
+        },
+        {
+          "verdict": "no_effect",
+          "confidence": "low",
+          "delta_pct": -2.995,
+          "reason": "post_reboot io_read_mib_per_second changed by -3.00%",
+          "metrics_used": [
+            "io_read_mib_per_second"
+          ],
+          "stage": "post_reboot",
+          "baseline": 1844.9121,
+          "applied": 1789.6491
+        }
+      ],
+      "apply_hard_failures": 0,
+      "post_reboot_hard_failures": 0,
+      "post_rollback_hard_failures": 0,
+      "restore_action": "restored-original-value"
+    },
+    {
+      "artifact": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-06/operator96-037-powersettingprofile-1.json",
+      "experiment_id": "operator96-037-powersettingprofile-1",
+      "status": "ok",
+      "target": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power\\PowerSettingProfile",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
+      "value_name": "PowerSettingProfile",
+      "value_data": 1,
+      "verdict": "low_confidence",
+      "confidence": "low",
+      "host_noise": "ok",
+      "delta_pct": 113.242,
+      "reason": "apply io_read_mib_per_second changed by +113.24%",
+      "metrics_used": [
+        "io_read_mib_per_second"
+      ],
+      "safety_findings": [],
+      "performance_findings": [
+        {
+          "verdict": "no_effect",
+          "confidence": "high",
+          "delta_pct": 0.209,
+          "reason": "apply cpu_single_iterations_per_second changed by +0.21%",
+          "metrics_used": [
+            "cpu_single_iterations_per_second"
+          ],
+          "stage": "apply",
+          "baseline": 38421500.2793,
+          "applied": 38501751.5447
+        },
+        {
+          "verdict": "low_confidence",
+          "confidence": "high",
+          "delta_pct": -5.88,
+          "reason": "apply cpu_multi_iterations_per_second changed by -5.88%",
+          "metrics_used": [
+            "cpu_multi_iterations_per_second"
+          ],
+          "stage": "apply",
+          "baseline": 74424744.3696,
+          "applied": 70048788.803
+        },
+        {
+          "verdict": "low_confidence",
+          "confidence": "low",
+          "delta_pct": 97.567,
+          "reason": "apply io_write_read_mib_per_second changed by +97.57%",
+          "metrics_used": [
+            "io_write_read_mib_per_second"
+          ],
+          "stage": "apply",
+          "baseline": 1048.6502,
+          "applied": 2071.7913
+        },
+        {
+          "verdict": "low_confidence",
+          "confidence": "low",
+          "delta_pct": 13.373,
+          "reason": "apply io_write_mib_per_second changed by +13.37%",
+          "metrics_used": [
+            "io_write_mib_per_second"
+          ],
+          "stage": "apply",
+          "baseline": 344.3119,
+          "applied": 390.3572
+        },
+        {
+          "verdict": "low_confidence",
+          "confidence": "low",
+          "delta_pct": 113.242,
+          "reason": "apply io_read_mib_per_second changed by +113.24%",
+          "metrics_used": [
+            "io_read_mib_per_second"
+          ],
+          "stage": "apply",
+          "baseline": 1760.0792,
+          "applied": 3753.2254
+        },
+        {
+          "verdict": "no_effect",
+          "confidence": "high",
+          "delta_pct": -0.068,
+          "reason": "post_reboot cpu_single_iterations_per_second changed by -0.07%",
+          "metrics_used": [
+            "cpu_single_iterations_per_second"
+          ],
+          "stage": "post_reboot",
+          "baseline": 38421500.2793,
+          "applied": 38395382.0402
+        },
+        {
+          "verdict": "no_effect",
+          "confidence": "high",
+          "delta_pct": -0.005,
+          "reason": "post_reboot cpu_multi_iterations_per_second changed by -0.01%",
+          "metrics_used": [
+            "cpu_multi_iterations_per_second"
+          ],
+          "stage": "post_reboot",
+          "baseline": 74424744.3696,
+          "applied": 74421217.3415
+        },
+        {
+          "verdict": "low_confidence",
+          "confidence": "low",
+          "delta_pct": 7.426,
+          "reason": "post_reboot io_write_read_mib_per_second changed by +7.43%",
+          "metrics_used": [
+            "io_write_read_mib_per_second"
+          ],
+          "stage": "post_reboot",
+          "baseline": 1048.6502,
+          "applied": 1126.519
+        },
+        {
+          "verdict": "low_confidence",
+          "confidence": "low",
+          "delta_pct": 13.872,
+          "reason": "post_reboot io_write_mib_per_second changed by +13.87%",
+          "metrics_used": [
+            "io_write_mib_per_second"
+          ],
+          "stage": "post_reboot",
+          "baseline": 344.3119,
+          "applied": 392.0752
+        },
+        {
+          "verdict": "low_confidence",
+          "confidence": "low",
+          "delta_pct": 5.732,
+          "reason": "post_reboot io_read_mib_per_second changed by +5.73%",
+          "metrics_used": [
+            "io_read_mib_per_second"
+          ],
+          "stage": "post_reboot",
+          "baseline": 1760.0792,
+          "applied": 1860.9628
+        }
+      ],
+      "apply_hard_failures": 0,
+      "post_reboot_hard_failures": 0,
+      "post_rollback_hard_failures": 0,
+      "restore_action": "restored-original-value"
+    }
+  ],
+  "errors": []
+}
