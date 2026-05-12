@@ -1,0 +1,1536 @@
+{
+  "generated_utc": "2026-05-11T23:24:13Z",
+  "status": "ok",
+  "report": "registry-research-framework/audit/operator-regadd-followup-source-default-report-20260509.json",
+  "smoke_profile": "gui",
+  "max_values_per_record": 2,
+  "include_default_tests": false,
+  "plan": [
+    {
+      "index": 90,
+      "experiment_id": "operator96-090-powerwatchdogpowerongditimeoutmsec-0",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "PowerWatchdogPowerOnGdiTimeoutMsec",
+      "value_data": 0,
+      "requested_data": "0",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [
+        "watchdog/bugcheck-sensitive"
+      ],
+      "source_quality": "vm-observed"
+    },
+    {
+      "index": 90,
+      "experiment_id": "operator96-090-powerwatchdogpowerongditimeoutmsec-1",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "PowerWatchdogPowerOnGdiTimeoutMsec",
+      "value_data": 1,
+      "requested_data": "0",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [
+        "watchdog/bugcheck-sensitive"
+      ],
+      "source_quality": "vm-observed"
+    },
+    {
+      "index": 91,
+      "experiment_id": "operator96-091-powerwatchdogdwmsyncflushtimeoutmsec-0",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "PowerWatchdogDwmSyncFlushTimeoutMsec",
+      "value_data": 0,
+      "requested_data": "0",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [
+        "watchdog/bugcheck-sensitive"
+      ],
+      "source_quality": "vm-observed"
+    },
+    {
+      "index": 91,
+      "experiment_id": "operator96-091-powerwatchdogdwmsyncflushtimeoutmsec-1",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "PowerWatchdogDwmSyncFlushTimeoutMsec",
+      "value_data": 1,
+      "requested_data": "0",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [
+        "watchdog/bugcheck-sensitive"
+      ],
+      "source_quality": "vm-observed"
+    },
+    {
+      "index": 92,
+      "experiment_id": "operator96-092-powerwatchdogdrvsetmonitortimeoutmsec-0",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "PowerWatchdogDrvSetMonitorTimeoutMsec",
+      "value_data": 0,
+      "requested_data": "0",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [
+        "watchdog/bugcheck-sensitive"
+      ],
+      "source_quality": "vm-observed"
+    },
+    {
+      "index": 92,
+      "experiment_id": "operator96-092-powerwatchdogdrvsetmonitortimeoutmsec-1",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "PowerWatchdogDrvSetMonitorTimeoutMsec",
+      "value_data": 1,
+      "requested_data": "0",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [
+        "watchdog/bugcheck-sensitive"
+      ],
+      "source_quality": "vm-observed"
+    },
+    {
+      "index": 94,
+      "experiment_id": "operator96-094-enabledsnetrefresh-0",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ModernSleep",
+      "value_name": "EnableDsNetRefresh",
+      "value_data": 0,
+      "requested_data": "0",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed"
+    },
+    {
+      "index": 94,
+      "experiment_id": "operator96-094-enabledsnetrefresh-1",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ModernSleep",
+      "value_name": "EnableDsNetRefresh",
+      "value_data": 1,
+      "requested_data": "0",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed"
+    },
+    {
+      "index": 95,
+      "experiment_id": "operator96-095-enabledactions-0",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ModernSleep",
+      "value_name": "EnabledActions",
+      "value_data": 0,
+      "requested_data": "0",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed"
+    },
+    {
+      "index": 95,
+      "experiment_id": "operator96-095-enabledactions-1",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ModernSleep",
+      "value_name": "EnabledActions",
+      "value_data": 1,
+      "requested_data": "0",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed"
+    }
+  ],
+  "results": [
+    {
+      "index": 90,
+      "experiment_id": "operator96-090-powerwatchdogpowerongditimeoutmsec-0",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "PowerWatchdogPowerOnGdiTimeoutMsec",
+      "value_data": 0,
+      "requested_data": "0",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [
+        "watchdog/bugcheck-sensitive"
+      ],
+      "source_quality": "vm-observed",
+      "status": "ok",
+      "returncode": 0,
+      "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-17/operator96-090-powerwatchdogpowerongditimeoutmsec-0.json",
+      "stdout_payload": {
+        "status": "ok",
+        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-17/operator96-090-powerwatchdogpowerongditimeoutmsec-0.json",
+        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-17/operator96-090-powerwatchdogpowerongditimeoutmsec-0.md",
+        "error": null
+      },
+      "stderr": "",
+      "observations": {
+        "status": "ok",
+        "verdict": "noisy",
+        "confidence": "low",
+        "host_noise": "noisy",
+        "primary_delta_pct": null,
+        "verdict_reason": "host preflight marked one or more stages noisy",
+        "metrics_used": [
+          "host_noise_meta"
+        ],
+        "safety_findings": [],
+        "smoke_hard_success": {
+          "apply_smoke_hard_success": true,
+          "post_reboot_smoke_hard_success": true,
+          "post_rollback_smoke_hard_success": true
+        },
+        "apply": {
+          "original": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "PowerWatchdogPowerOnGdiTimeoutMsec",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "after_apply": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "PowerWatchdogPowerOnGdiTimeoutMsec",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 0,
+            "value_kind": "System.Int32",
+            "value_hex": "0x0",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_reboot": {
+          "after_reboot": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "PowerWatchdogPowerOnGdiTimeoutMsec",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 0,
+            "value_kind": "System.Int32",
+            "value_hex": "0x0",
+            "status": "value-present",
+            "error": null
+          },
+          "restore_action": "removed-created-value",
+          "after_restore": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "PowerWatchdogPowerOnGdiTimeoutMsec",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_rollback": {
+          "final": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "PowerWatchdogPowerOnGdiTimeoutMsec",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "benchmark_delta_percent": {
+          "apply_vs_baseline": {
+            "cpu_single_seconds": null,
+            "cpu_multi_seconds": null,
+            "io_write_read_mib_per_second": 193.1
+          },
+          "post_reboot_vs_baseline": {
+            "cpu_single_seconds": null,
+            "cpu_multi_seconds": null,
+            "io_write_read_mib_per_second": 38.48
+          }
+        }
+      }
+    },
+    {
+      "index": 90,
+      "experiment_id": "operator96-090-powerwatchdogpowerongditimeoutmsec-1",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "PowerWatchdogPowerOnGdiTimeoutMsec",
+      "value_data": 1,
+      "requested_data": "0",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [
+        "watchdog/bugcheck-sensitive"
+      ],
+      "source_quality": "vm-observed",
+      "status": "ok",
+      "returncode": 0,
+      "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-17/operator96-090-powerwatchdogpowerongditimeoutmsec-1.json",
+      "stdout_payload": {
+        "status": "ok",
+        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-17/operator96-090-powerwatchdogpowerongditimeoutmsec-1.json",
+        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-17/operator96-090-powerwatchdogpowerongditimeoutmsec-1.md",
+        "error": null
+      },
+      "stderr": "",
+      "observations": {
+        "status": "ok",
+        "verdict": "harmful",
+        "confidence": "low",
+        "host_noise": "ok",
+        "primary_delta_pct": -7.671,
+        "verdict_reason": "post_reboot io_write_mib_per_second changed by -7.67%",
+        "metrics_used": [
+          "io_write_mib_per_second"
+        ],
+        "safety_findings": [],
+        "smoke_hard_success": {
+          "apply_smoke_hard_success": true,
+          "post_reboot_smoke_hard_success": true,
+          "post_rollback_smoke_hard_success": true
+        },
+        "apply": {
+          "original": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "PowerWatchdogPowerOnGdiTimeoutMsec",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "after_apply": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "PowerWatchdogPowerOnGdiTimeoutMsec",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 1,
+            "value_kind": "System.Int32",
+            "value_hex": "0x1",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_reboot": {
+          "after_reboot": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "PowerWatchdogPowerOnGdiTimeoutMsec",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 1,
+            "value_kind": "System.Int32",
+            "value_hex": "0x1",
+            "status": "value-present",
+            "error": null
+          },
+          "restore_action": "removed-created-value",
+          "after_restore": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "PowerWatchdogPowerOnGdiTimeoutMsec",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_rollback": {
+          "final": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "PowerWatchdogPowerOnGdiTimeoutMsec",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "benchmark_delta_percent": {
+          "apply_vs_baseline": {
+            "cpu_single_seconds": null,
+            "cpu_multi_seconds": null,
+            "io_write_read_mib_per_second": 98.56
+          },
+          "post_reboot_vs_baseline": {
+            "cpu_single_seconds": null,
+            "cpu_multi_seconds": null,
+            "io_write_read_mib_per_second": 5.11
+          }
+        }
+      }
+    },
+    {
+      "index": 91,
+      "experiment_id": "operator96-091-powerwatchdogdwmsyncflushtimeoutmsec-0",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "PowerWatchdogDwmSyncFlushTimeoutMsec",
+      "value_data": 0,
+      "requested_data": "0",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [
+        "watchdog/bugcheck-sensitive"
+      ],
+      "source_quality": "vm-observed",
+      "status": "ok",
+      "returncode": 0,
+      "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-17/operator96-091-powerwatchdogdwmsyncflushtimeoutmsec-0.json",
+      "stdout_payload": {
+        "status": "ok",
+        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-17/operator96-091-powerwatchdogdwmsyncflushtimeoutmsec-0.json",
+        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-17/operator96-091-powerwatchdogdwmsyncflushtimeoutmsec-0.md",
+        "error": null
+      },
+      "stderr": "",
+      "observations": {
+        "status": "ok",
+        "verdict": "harmful",
+        "confidence": "low",
+        "host_noise": "ok",
+        "primary_delta_pct": -32.312,
+        "verdict_reason": "apply io_write_mib_per_second changed by -32.31%",
+        "metrics_used": [
+          "io_write_mib_per_second"
+        ],
+        "safety_findings": [],
+        "smoke_hard_success": {
+          "apply_smoke_hard_success": true,
+          "post_reboot_smoke_hard_success": true,
+          "post_rollback_smoke_hard_success": true
+        },
+        "apply": {
+          "original": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "PowerWatchdogDwmSyncFlushTimeoutMsec",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "after_apply": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "PowerWatchdogDwmSyncFlushTimeoutMsec",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 0,
+            "value_kind": "System.Int32",
+            "value_hex": "0x0",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_reboot": {
+          "after_reboot": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "PowerWatchdogDwmSyncFlushTimeoutMsec",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 0,
+            "value_kind": "System.Int32",
+            "value_hex": "0x0",
+            "status": "value-present",
+            "error": null
+          },
+          "restore_action": "removed-created-value",
+          "after_restore": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "PowerWatchdogDwmSyncFlushTimeoutMsec",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_rollback": {
+          "final": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "PowerWatchdogDwmSyncFlushTimeoutMsec",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "benchmark_delta_percent": {
+          "apply_vs_baseline": {
+            "cpu_single_seconds": null,
+            "cpu_multi_seconds": null,
+            "io_write_read_mib_per_second": 67.56
+          },
+          "post_reboot_vs_baseline": {
+            "cpu_single_seconds": null,
+            "cpu_multi_seconds": null,
+            "io_write_read_mib_per_second": 4.4
+          }
+        }
+      }
+    },
+    {
+      "index": 91,
+      "experiment_id": "operator96-091-powerwatchdogdwmsyncflushtimeoutmsec-1",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "PowerWatchdogDwmSyncFlushTimeoutMsec",
+      "value_data": 1,
+      "requested_data": "0",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [
+        "watchdog/bugcheck-sensitive"
+      ],
+      "source_quality": "vm-observed",
+      "status": "ok",
+      "returncode": 0,
+      "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-17/operator96-091-powerwatchdogdwmsyncflushtimeoutmsec-1.json",
+      "stdout_payload": {
+        "status": "ok",
+        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-17/operator96-091-powerwatchdogdwmsyncflushtimeoutmsec-1.json",
+        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-17/operator96-091-powerwatchdogdwmsyncflushtimeoutmsec-1.md",
+        "error": null
+      },
+      "stderr": "",
+      "observations": {
+        "status": "ok",
+        "verdict": "low_confidence",
+        "confidence": "low",
+        "host_noise": "ok",
+        "primary_delta_pct": 96.485,
+        "verdict_reason": "apply io_write_read_mib_per_second changed by +96.48%",
+        "metrics_used": [
+          "io_write_read_mib_per_second"
+        ],
+        "safety_findings": [],
+        "smoke_hard_success": {
+          "apply_smoke_hard_success": true,
+          "post_reboot_smoke_hard_success": true,
+          "post_rollback_smoke_hard_success": true
+        },
+        "apply": {
+          "original": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "PowerWatchdogDwmSyncFlushTimeoutMsec",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "after_apply": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "PowerWatchdogDwmSyncFlushTimeoutMsec",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 1,
+            "value_kind": "System.Int32",
+            "value_hex": "0x1",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_reboot": {
+          "after_reboot": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "PowerWatchdogDwmSyncFlushTimeoutMsec",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 1,
+            "value_kind": "System.Int32",
+            "value_hex": "0x1",
+            "status": "value-present",
+            "error": null
+          },
+          "restore_action": "removed-created-value",
+          "after_restore": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "PowerWatchdogDwmSyncFlushTimeoutMsec",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_rollback": {
+          "final": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "PowerWatchdogDwmSyncFlushTimeoutMsec",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "benchmark_delta_percent": {
+          "apply_vs_baseline": {
+            "cpu_single_seconds": null,
+            "cpu_multi_seconds": null,
+            "io_write_read_mib_per_second": 96.48
+          },
+          "post_reboot_vs_baseline": {
+            "cpu_single_seconds": null,
+            "cpu_multi_seconds": null,
+            "io_write_read_mib_per_second": 17.14
+          }
+        }
+      }
+    },
+    {
+      "index": 92,
+      "experiment_id": "operator96-092-powerwatchdogdrvsetmonitortimeoutmsec-0",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "PowerWatchdogDrvSetMonitorTimeoutMsec",
+      "value_data": 0,
+      "requested_data": "0",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [
+        "watchdog/bugcheck-sensitive"
+      ],
+      "source_quality": "vm-observed",
+      "status": "ok",
+      "returncode": 0,
+      "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-17/operator96-092-powerwatchdogdrvsetmonitortimeoutmsec-0.json",
+      "stdout_payload": {
+        "status": "ok",
+        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-17/operator96-092-powerwatchdogdrvsetmonitortimeoutmsec-0.json",
+        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-17/operator96-092-powerwatchdogdrvsetmonitortimeoutmsec-0.md",
+        "error": null
+      },
+      "stderr": "",
+      "observations": {
+        "status": "ok",
+        "verdict": "low_confidence",
+        "confidence": "low",
+        "host_noise": "ok",
+        "primary_delta_pct": 552.73,
+        "verdict_reason": "post_reboot io_write_mib_per_second changed by +552.73%",
+        "metrics_used": [
+          "io_write_mib_per_second"
+        ],
+        "safety_findings": [],
+        "smoke_hard_success": {
+          "apply_smoke_hard_success": true,
+          "post_reboot_smoke_hard_success": true,
+          "post_rollback_smoke_hard_success": true
+        },
+        "apply": {
+          "original": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "PowerWatchdogDrvSetMonitorTimeoutMsec",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "after_apply": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "PowerWatchdogDrvSetMonitorTimeoutMsec",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 0,
+            "value_kind": "System.Int32",
+            "value_hex": "0x0",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_reboot": {
+          "after_reboot": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "PowerWatchdogDrvSetMonitorTimeoutMsec",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 0,
+            "value_kind": "System.Int32",
+            "value_hex": "0x0",
+            "status": "value-present",
+            "error": null
+          },
+          "restore_action": "removed-created-value",
+          "after_restore": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "PowerWatchdogDrvSetMonitorTimeoutMsec",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_rollback": {
+          "final": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "PowerWatchdogDrvSetMonitorTimeoutMsec",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "benchmark_delta_percent": {
+          "apply_vs_baseline": {
+            "cpu_single_seconds": null,
+            "cpu_multi_seconds": null,
+            "io_write_read_mib_per_second": 151.98
+          },
+          "post_reboot_vs_baseline": {
+            "cpu_single_seconds": null,
+            "cpu_multi_seconds": null,
+            "io_write_read_mib_per_second": 25.68
+          }
+        }
+      }
+    },
+    {
+      "index": 92,
+      "experiment_id": "operator96-092-powerwatchdogdrvsetmonitortimeoutmsec-1",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "PowerWatchdogDrvSetMonitorTimeoutMsec",
+      "value_data": 1,
+      "requested_data": "0",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [
+        "watchdog/bugcheck-sensitive"
+      ],
+      "source_quality": "vm-observed",
+      "status": "ok",
+      "returncode": 0,
+      "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-17/operator96-092-powerwatchdogdrvsetmonitortimeoutmsec-1.json",
+      "stdout_payload": {
+        "status": "ok",
+        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-17/operator96-092-powerwatchdogdrvsetmonitortimeoutmsec-1.json",
+        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-17/operator96-092-powerwatchdogdrvsetmonitortimeoutmsec-1.md",
+        "error": null
+      },
+      "stderr": "",
+      "observations": {
+        "status": "ok",
+        "verdict": "harmful",
+        "confidence": "low",
+        "host_noise": "ok",
+        "primary_delta_pct": -15.388,
+        "verdict_reason": "apply io_write_mib_per_second changed by -15.39%",
+        "metrics_used": [
+          "io_write_mib_per_second"
+        ],
+        "safety_findings": [],
+        "smoke_hard_success": {
+          "apply_smoke_hard_success": true,
+          "post_reboot_smoke_hard_success": true,
+          "post_rollback_smoke_hard_success": true
+        },
+        "apply": {
+          "original": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "PowerWatchdogDrvSetMonitorTimeoutMsec",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "after_apply": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "PowerWatchdogDrvSetMonitorTimeoutMsec",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 1,
+            "value_kind": "System.Int32",
+            "value_hex": "0x1",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_reboot": {
+          "after_reboot": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "PowerWatchdogDrvSetMonitorTimeoutMsec",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 1,
+            "value_kind": "System.Int32",
+            "value_hex": "0x1",
+            "status": "value-present",
+            "error": null
+          },
+          "restore_action": "removed-created-value",
+          "after_restore": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "PowerWatchdogDrvSetMonitorTimeoutMsec",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_rollback": {
+          "final": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "PowerWatchdogDrvSetMonitorTimeoutMsec",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "benchmark_delta_percent": {
+          "apply_vs_baseline": {
+            "cpu_single_seconds": null,
+            "cpu_multi_seconds": null,
+            "io_write_read_mib_per_second": 65.87
+          },
+          "post_reboot_vs_baseline": {
+            "cpu_single_seconds": null,
+            "cpu_multi_seconds": null,
+            "io_write_read_mib_per_second": -0.36
+          }
+        }
+      }
+    },
+    {
+      "index": 94,
+      "experiment_id": "operator96-094-enabledsnetrefresh-0",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ModernSleep",
+      "value_name": "EnableDsNetRefresh",
+      "value_data": 0,
+      "requested_data": "0",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed",
+      "status": "ok",
+      "returncode": 0,
+      "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-17/operator96-094-enabledsnetrefresh-0.json",
+      "stdout_payload": {
+        "status": "ok",
+        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-17/operator96-094-enabledsnetrefresh-0.json",
+        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-17/operator96-094-enabledsnetrefresh-0.md",
+        "error": null
+      },
+      "stderr": "",
+      "observations": {
+        "status": "ok",
+        "verdict": "harmful",
+        "confidence": "low",
+        "host_noise": "ok",
+        "primary_delta_pct": -25.516,
+        "verdict_reason": "apply io_write_mib_per_second changed by -25.52%",
+        "metrics_used": [
+          "io_write_mib_per_second"
+        ],
+        "safety_findings": [],
+        "smoke_hard_success": {
+          "apply_smoke_hard_success": true,
+          "post_reboot_smoke_hard_success": true,
+          "post_rollback_smoke_hard_success": true
+        },
+        "apply": {
+          "original": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ModernSleep",
+            "value_name": "EnableDsNetRefresh",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "after_apply": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ModernSleep",
+            "value_name": "EnableDsNetRefresh",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 0,
+            "value_kind": "System.Int32",
+            "value_hex": "0x0",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_reboot": {
+          "after_reboot": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ModernSleep",
+            "value_name": "EnableDsNetRefresh",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 0,
+            "value_kind": "System.Int32",
+            "value_hex": "0x0",
+            "status": "value-present",
+            "error": null
+          },
+          "restore_action": "removed-created-value",
+          "after_restore": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ModernSleep",
+            "value_name": "EnableDsNetRefresh",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_rollback": {
+          "final": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ModernSleep",
+            "value_name": "EnableDsNetRefresh",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "benchmark_delta_percent": {
+          "apply_vs_baseline": {
+            "cpu_single_seconds": null,
+            "cpu_multi_seconds": null,
+            "io_write_read_mib_per_second": 74.59
+          },
+          "post_reboot_vs_baseline": {
+            "cpu_single_seconds": null,
+            "cpu_multi_seconds": null,
+            "io_write_read_mib_per_second": -2.83
+          }
+        }
+      }
+    },
+    {
+      "index": 94,
+      "experiment_id": "operator96-094-enabledsnetrefresh-1",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ModernSleep",
+      "value_name": "EnableDsNetRefresh",
+      "value_data": 1,
+      "requested_data": "0",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed",
+      "status": "ok",
+      "returncode": 0,
+      "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-17/operator96-094-enabledsnetrefresh-1.json",
+      "stdout_payload": {
+        "status": "ok",
+        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-17/operator96-094-enabledsnetrefresh-1.json",
+        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-17/operator96-094-enabledsnetrefresh-1.md",
+        "error": null
+      },
+      "stderr": "",
+      "observations": {
+        "status": "ok",
+        "verdict": "low_confidence",
+        "confidence": "low",
+        "host_noise": "ok",
+        "primary_delta_pct": 88.855,
+        "verdict_reason": "apply io_read_mib_per_second changed by +88.86%",
+        "metrics_used": [
+          "io_read_mib_per_second"
+        ],
+        "safety_findings": [],
+        "smoke_hard_success": {
+          "apply_smoke_hard_success": true,
+          "post_reboot_smoke_hard_success": true,
+          "post_rollback_smoke_hard_success": true
+        },
+        "apply": {
+          "original": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ModernSleep",
+            "value_name": "EnableDsNetRefresh",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "after_apply": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ModernSleep",
+            "value_name": "EnableDsNetRefresh",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 1,
+            "value_kind": "System.Int32",
+            "value_hex": "0x1",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_reboot": {
+          "after_reboot": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ModernSleep",
+            "value_name": "EnableDsNetRefresh",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 1,
+            "value_kind": "System.Int32",
+            "value_hex": "0x1",
+            "status": "value-present",
+            "error": null
+          },
+          "restore_action": "removed-created-value",
+          "after_restore": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ModernSleep",
+            "value_name": "EnableDsNetRefresh",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_rollback": {
+          "final": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ModernSleep",
+            "value_name": "EnableDsNetRefresh",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "benchmark_delta_percent": {
+          "apply_vs_baseline": {
+            "cpu_single_seconds": null,
+            "cpu_multi_seconds": null,
+            "io_write_read_mib_per_second": 61.36
+          },
+          "post_reboot_vs_baseline": {
+            "cpu_single_seconds": null,
+            "cpu_multi_seconds": null,
+            "io_write_read_mib_per_second": -1.69
+          }
+        }
+      }
+    },
+    {
+      "index": 95,
+      "experiment_id": "operator96-095-enabledactions-0",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ModernSleep",
+      "value_name": "EnabledActions",
+      "value_data": 0,
+      "requested_data": "0",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed",
+      "status": "ok",
+      "returncode": 0,
+      "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-17/operator96-095-enabledactions-0.json",
+      "stdout_payload": {
+        "status": "ok",
+        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-17/operator96-095-enabledactions-0.json",
+        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-17/operator96-095-enabledactions-0.md",
+        "error": null
+      },
+      "stderr": "",
+      "observations": {
+        "status": "ok",
+        "verdict": "low_confidence",
+        "confidence": "low",
+        "host_noise": "ok",
+        "primary_delta_pct": 96.495,
+        "verdict_reason": "apply io_read_mib_per_second changed by +96.50%",
+        "metrics_used": [
+          "io_read_mib_per_second"
+        ],
+        "safety_findings": [],
+        "smoke_hard_success": {
+          "apply_smoke_hard_success": true,
+          "post_reboot_smoke_hard_success": true,
+          "post_rollback_smoke_hard_success": true
+        },
+        "apply": {
+          "original": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ModernSleep",
+            "value_name": "EnabledActions",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "after_apply": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ModernSleep",
+            "value_name": "EnabledActions",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 0,
+            "value_kind": "System.Int32",
+            "value_hex": "0x0",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_reboot": {
+          "after_reboot": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ModernSleep",
+            "value_name": "EnabledActions",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 0,
+            "value_kind": "System.Int32",
+            "value_hex": "0x0",
+            "status": "value-present",
+            "error": null
+          },
+          "restore_action": "removed-created-value",
+          "after_restore": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ModernSleep",
+            "value_name": "EnabledActions",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_rollback": {
+          "final": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ModernSleep",
+            "value_name": "EnabledActions",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "benchmark_delta_percent": {
+          "apply_vs_baseline": {
+            "cpu_single_seconds": null,
+            "cpu_multi_seconds": null,
+            "io_write_read_mib_per_second": 75.79
+          },
+          "post_reboot_vs_baseline": {
+            "cpu_single_seconds": null,
+            "cpu_multi_seconds": null,
+            "io_write_read_mib_per_second": -1.09
+          }
+        }
+      }
+    },
+    {
+      "index": 95,
+      "experiment_id": "operator96-095-enabledactions-1",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ModernSleep",
+      "value_name": "EnabledActions",
+      "value_data": 1,
+      "requested_data": "0",
+      "default_kind": "observed-absent",
+      "default_value": null,
+      "vm_status": "value-missing",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed",
+      "status": "ok",
+      "returncode": 0,
+      "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-17/operator96-095-enabledactions-1.json",
+      "stdout_payload": {
+        "status": "ok",
+        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-17/operator96-095-enabledactions-1.json",
+        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-17/operator96-095-enabledactions-1.md",
+        "error": null
+      },
+      "stderr": "",
+      "observations": {
+        "status": "ok",
+        "verdict": "low_confidence",
+        "confidence": "low",
+        "host_noise": "ok",
+        "primary_delta_pct": 95.063,
+        "verdict_reason": "apply io_read_mib_per_second changed by +95.06%",
+        "metrics_used": [
+          "io_read_mib_per_second"
+        ],
+        "safety_findings": [],
+        "smoke_hard_success": {
+          "apply_smoke_hard_success": true,
+          "post_reboot_smoke_hard_success": true,
+          "post_rollback_smoke_hard_success": true
+        },
+        "apply": {
+          "original": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ModernSleep",
+            "value_name": "EnabledActions",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "after_apply": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ModernSleep",
+            "value_name": "EnabledActions",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 1,
+            "value_kind": "System.Int32",
+            "value_hex": "0x1",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_reboot": {
+          "after_reboot": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ModernSleep",
+            "value_name": "EnabledActions",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 1,
+            "value_kind": "System.Int32",
+            "value_hex": "0x1",
+            "status": "value-present",
+            "error": null
+          },
+          "restore_action": "removed-created-value",
+          "after_restore": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ModernSleep",
+            "value_name": "EnabledActions",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_rollback": {
+          "final": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ModernSleep",
+            "value_name": "EnabledActions",
+            "key_exists": true,
+            "value_exists": false,
+            "value": null,
+            "value_kind": null,
+            "value_hex": null,
+            "status": "value-missing",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "benchmark_delta_percent": {
+          "apply_vs_baseline": {
+            "cpu_single_seconds": null,
+            "cpu_multi_seconds": null,
+            "io_write_read_mib_per_second": 79.1
+          },
+          "post_reboot_vs_baseline": {
+            "cpu_single_seconds": null,
+            "cpu_multi_seconds": null,
+            "io_write_read_mib_per_second": 4.27
+          }
+        }
+      }
+    }
+  ]
+}
