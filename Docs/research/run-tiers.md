@@ -24,6 +24,8 @@ A certified run must satisfy all of these requirements:
 - VM transport is healthy before the run. For KVM this means
   `scripts/vm-kvm/vm-health-check.py --json` returns QGA health `ok`.
 - Tight host-noise gate is enabled and reports `ok`.
+- Certified/low-noise reruns should pass `--abort-on-noisy-host` so a noisy
+  host fails before any registry apply stage mutates the guest.
 - Campaign summary has `non_ok=[]` or equivalent zero-failure contract.
 - Artifacts are complete and referenced by JSON paths that can be checked in or
   traced to a checked-in receipt.
@@ -125,4 +127,7 @@ advanced technical evidence surface.
 - Treat forum or community-sourced values as `community-hint` until a VM or
   local runtime lane validates them.
 - Do not lower the noise gate to make a result pass.
-- If the host is noisy, keep the artifact and generate a low-noise rerun plan.
+- If the host is noisy during exploratory work, keep the artifact and generate
+  a low-noise rerun plan.
+- If the host is noisy during a certified rerun, use `--abort-on-noisy-host`;
+  do not produce a new reference artifact from that window.

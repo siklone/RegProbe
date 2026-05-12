@@ -41,7 +41,7 @@ These scripts are active entry points for day-to-day contributor work.
 | `scripts/vm-kvm/vm-health-check.py` | canonical | Non-mutating KVM/QGA health check before ETW, Procmon, Ghidra, or app-QA lanes. |
 | `scripts/vm-kvm/run-guest-app-tweak-qa-batch.py` | canonical | Host-driven KVM batch runner for shipped app-card QA. |
 | `scripts/vm-kvm/run-guest-registry-value-campaign.py` | canonical | Snapshot-safe registry value campaign runner for Operator96-style experiments. |
-| `scripts/vm-kvm/run-guest-registry-value-experiment.py` | canonical | One-value VM experiment runner with host noise gate and reboot/rollback checks. |
+| `scripts/vm-kvm/run-guest-registry-value-experiment.py` | canonical | One-value VM experiment runner with host noise gate, optional `--abort-on-noisy-host`, and reboot/rollback checks. |
 | `registry-research-framework/scripts/analyze_registry_value_experiments.py` | canonical | Retro-analyze registry value experiment artifacts and produce verdict summaries. |
 | `registry-research-framework/scripts/generate_operator96_enriched_value_matrix.py` | canonical | Generate enriched candidate values with source boundaries and community-hint tags. |
 | `registry-research-framework/scripts/generate_operator96_app_surface_review.py` | canonical | Review enriched Operator96 records for app-surface eligibility. |
@@ -100,7 +100,9 @@ Agentic AI contributors should follow this loop:
 3. If app retest is needed, run `check_app_retest_readiness.py --json`.
 4. If VM evidence is needed, run `scripts/vm-kvm/vm-health-check.py --json`
    before any guest runner.
-5. Call the narrow Python runner for the task and preserve JSON artifacts.
+5. Call the narrow Python runner for the task and preserve JSON artifacts. For
+   certified low-noise registry reruns, include `--abort-on-noisy-host` so host
+   load cannot silently downgrade a reference campaign.
 6. Update records, app surfaces, docs, and tests.
 7. Open a PR with the commands run and artifact paths.
 
