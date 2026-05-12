@@ -1,6 +1,6 @@
 # Cleanup Quarantine Ledger
 
-Generated: `2026-05-10T16:58:45Z`
+Generated: `2026-05-12T01:41:09Z`
 
 Quarantine ledger for cleanup candidates. This ledger does not delete files.
 
@@ -44,7 +44,7 @@ Quarantine ledger for cleanup candidates. This ledger does not delete files.
 | `evidence/files/vm-tooling-staging/thread-dpc-enable-0-mem2.etl.md` | `vm-tooling-staging-oldest-sample` | 8 | `False` | `keep-pending-review` | staging diagnostic bundle; verify no record/evidence-index dependency before deletion |
 | `evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json..md` | `vm-tooling-staging-oldest-sample` | 8 | `False` | `keep-pending-review` | staging diagnostic bundle; verify no record/evidence-index dependency before deletion |
 | `evidence/files/vm-tooling-staging/ghidra-probes` | `vm-tooling-staging-oldest-sample` | 2 | `False` | `keep-pending-review` | staging diagnostic bundle; verify no record/evidence-index dependency before deletion |
-| `evidence/files/vm-tooling-staging/beep_start_toggle_out.txt` | `vm-tooling-staging-oldest-sample` | 6 | `False` | `keep-pending-review` | staging diagnostic bundle; verify no record/evidence-index dependency before deletion |
+| `evidence/files/vm-tooling-staging/beep_start_toggle_out.txt` | `vm-tooling-staging-oldest-sample` | 7 | `False` | `keep-pending-review` | staging diagnostic bundle; verify no record/evidence-index dependency before deletion |
 | `evidence/files/vm-tooling-staging/crossdevice_resume_probe.csv` | `vm-tooling-staging-oldest-sample` | 11 | `False` | `keep-pending-review` | staging diagnostic bundle; verify no record/evidence-index dependency before deletion |
 | `evidence/files/vm-tooling-staging/defender-enhanced-notifications-baseline-1-20260324-214343` | `vm-tooling-staging-oldest-sample` | 0 | `False` | `keep-pending-review` | staging diagnostic bundle; verify no record/evidence-index dependency before deletion |
 | `evidence/files/vm-tooling-staging/defender-enhanced-notifications-reporting-1-20260324-213700` | `vm-tooling-staging-oldest-sample` | 0 | `False` | `keep-pending-review` | staging diagnostic bundle; verify no record/evidence-index dependency before deletion |
