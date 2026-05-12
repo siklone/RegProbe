@@ -1,18 +1,18 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-10T19:03:20Z",
+  "generated_utc": "2026-05-12T00:53:19Z",
   "matrix": "registry-research-framework/audit/operator96-enriched-value-matrix-20260510.json",
   "campaign_id": "operator96-app-surface-review-20260510",
   "status": "PASS",
   "summary": {
     "record_count": 96,
     "ready_for_bounded_app_card": 0,
-    "needs_low_noise_rerun": 85,
-    "blocked_by_gate": 11,
+    "needs_low_noise_rerun": 84,
+    "blocked_by_gate": 12,
     "blocked_by_safety": 0,
     "bucket_counts": {
-      "blocked_by_gate": 11,
-      "needs_low_noise_rerun": 85
+      "blocked_by_gate": 12,
+      "needs_low_noise_rerun": 84
     }
   },
   "policy": {
@@ -47,7 +47,7 @@
         "harmful": 2
       },
       "proof_host_noise_counts": {
-        "unknown": 2
+        "ok": 2
       },
       "proof_confidence_counts": {
         "low": 2
@@ -81,7 +81,7 @@
         "harmful": 1
       },
       "proof_host_noise_counts": {
-        "unknown": 1
+        "ok": 1
       },
       "proof_confidence_counts": {
         "low": 1
@@ -98,12 +98,13 @@
       "app_surface_bucket": "blocked_by_gate",
       "app_surface_ready": false,
       "reasons": [
+        "rollback-not-tested",
         "kernel-worker-thread-override"
       ],
       "gate": {
         "eligible_for_app_card": false,
         "default_status": "known-present",
-        "rollback_tested": true,
+        "rollback_tested": false,
         "app_write_explicit": true,
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [
@@ -111,20 +112,15 @@
           "kernel-worker-thread-override"
         ],
         "blockers": [
+          "rollback-not-tested",
           "kernel-worker-thread-override"
         ]
       },
       "candidate_value_count": 3,
-      "vm_validated_value_count": 2,
-      "proof_verdict_counts": {
-        "harmful": 2
-      },
-      "proof_host_noise_counts": {
-        "unknown": 2
-      },
-      "proof_confidence_counts": {
-        "low": 2
-      },
+      "vm_validated_value_count": 0,
+      "proof_verdict_counts": {},
+      "proof_host_noise_counts": {},
+      "proof_confidence_counts": {},
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
       "recommended_action": "do-not-surface-unless-blocker-is-researched-away"
     },
@@ -137,12 +133,13 @@
       "app_surface_bucket": "blocked_by_gate",
       "app_surface_ready": false,
       "reasons": [
+        "rollback-not-tested",
         "kernel-worker-thread-override"
       ],
       "gate": {
         "eligible_for_app_card": false,
         "default_status": "known-present",
-        "rollback_tested": true,
+        "rollback_tested": false,
         "app_write_explicit": true,
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [
@@ -150,21 +147,15 @@
           "kernel-worker-thread-override"
         ],
         "blockers": [
+          "rollback-not-tested",
           "kernel-worker-thread-override"
         ]
       },
       "candidate_value_count": 3,
-      "vm_validated_value_count": 2,
-      "proof_verdict_counts": {
-        "harmful": 1,
-        "low_confidence": 1
-      },
-      "proof_host_noise_counts": {
-        "unknown": 2
-      },
-      "proof_confidence_counts": {
-        "low": 2
-      },
+      "vm_validated_value_count": 0,
+      "proof_verdict_counts": {},
+      "proof_host_noise_counts": {},
+      "proof_confidence_counts": {},
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
       "recommended_action": "do-not-surface-unless-blocker-is-researched-away"
     },
@@ -177,30 +168,24 @@
       "app_surface_bucket": "blocked_by_gate",
       "app_surface_ready": false,
       "reasons": [
-        "safety-finding-present"
+        "rollback-not-tested"
       ],
       "gate": {
         "eligible_for_app_card": false,
         "default_status": "known-present",
-        "rollback_tested": true,
+        "rollback_tested": false,
         "app_write_explicit": true,
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [],
         "blockers": [
-          "safety-finding-present"
+          "rollback-not-tested"
         ]
       },
-      "candidate_value_count": 3,
-      "vm_validated_value_count": 2,
-      "proof_verdict_counts": {
-        "rollback_failure": 2
-      },
-      "proof_host_noise_counts": {
-        "unknown": 2
-      },
-      "proof_confidence_counts": {
-        "high": 2
-      },
+      "candidate_value_count": 2,
+      "vm_validated_value_count": 0,
+      "proof_verdict_counts": {},
+      "proof_host_noise_counts": {},
+      "proof_confidence_counts": {},
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
       "recommended_action": "do-not-surface-unless-blocker-is-researched-away"
     },
@@ -229,10 +214,11 @@
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
       "proof_verdict_counts": {
-        "harmful": 2
+        "harmful": 1,
+        "low_confidence": 1
       },
       "proof_host_noise_counts": {
-        "unknown": 2
+        "ok": 2
       },
       "proof_confidence_counts": {
         "low": 2
@@ -249,32 +235,28 @@
       "app_surface_bucket": "blocked_by_gate",
       "app_surface_ready": false,
       "reasons": [
+        "rollback-not-tested",
         "kernel-worker-thread-override"
       ],
       "gate": {
         "eligible_for_app_card": false,
         "default_status": "known-absent",
-        "rollback_tested": true,
+        "rollback_tested": false,
         "app_write_explicit": true,
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [
           "kernel-worker-thread-override"
         ],
         "blockers": [
+          "rollback-not-tested",
           "kernel-worker-thread-override"
         ]
       },
-      "candidate_value_count": 2,
-      "vm_validated_value_count": 2,
-      "proof_verdict_counts": {
-        "harmful": 2
-      },
-      "proof_host_noise_counts": {
-        "unknown": 2
-      },
-      "proof_confidence_counts": {
-        "low": 2
-      },
+      "candidate_value_count": 1,
+      "vm_validated_value_count": 0,
+      "proof_verdict_counts": {},
+      "proof_host_noise_counts": {},
+      "proof_confidence_counts": {},
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
       "recommended_action": "do-not-surface-unless-blocker-is-researched-away"
     },
@@ -287,12 +269,13 @@
       "app_surface_bucket": "blocked_by_gate",
       "app_surface_ready": false,
       "reasons": [
+        "rollback-not-tested",
         "kernel-worker-thread-override"
       ],
       "gate": {
         "eligible_for_app_card": false,
         "default_status": "known-absent",
-        "rollback_tested": true,
+        "rollback_tested": false,
         "app_write_explicit": true,
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [
@@ -300,21 +283,15 @@
           "kernel-worker-thread-override"
         ],
         "blockers": [
+          "rollback-not-tested",
           "kernel-worker-thread-override"
         ]
       },
       "candidate_value_count": 3,
-      "vm_validated_value_count": 2,
-      "proof_verdict_counts": {
-        "harmful": 1,
-        "low_confidence": 1
-      },
-      "proof_host_noise_counts": {
-        "unknown": 2
-      },
-      "proof_confidence_counts": {
-        "low": 2
-      },
+      "vm_validated_value_count": 0,
+      "proof_verdict_counts": {},
+      "proof_host_noise_counts": {},
+      "proof_confidence_counts": {},
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
       "recommended_action": "do-not-surface-unless-blocker-is-researched-away"
     },
@@ -344,7 +321,7 @@
         "harmful": 2
       },
       "proof_host_noise_counts": {
-        "unknown": 2
+        "ok": 2
       },
       "proof_confidence_counts": {
         "low": 2
@@ -377,10 +354,10 @@
       "candidate_value_count": 2,
       "vm_validated_value_count": 1,
       "proof_verdict_counts": {
-        "harmful": 1
+        "noisy": 1
       },
       "proof_host_noise_counts": {
-        "unknown": 1
+        "noisy": 1
       },
       "proof_confidence_counts": {
         "low": 1
@@ -411,10 +388,10 @@
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
       "proof_verdict_counts": {
-        "harmful": 2
+        "noisy": 2
       },
       "proof_host_noise_counts": {
-        "unknown": 2
+        "noisy": 2
       },
       "proof_confidence_counts": {
         "low": 2
@@ -445,10 +422,10 @@
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
       "proof_verdict_counts": {
-        "harmful": 2
+        "noisy": 2
       },
       "proof_host_noise_counts": {
-        "unknown": 2
+        "noisy": 2
       },
       "proof_confidence_counts": {
         "low": 2
@@ -482,7 +459,7 @@
         "harmful": 2
       },
       "proof_host_noise_counts": {
-        "unknown": 2
+        "ok": 2
       },
       "proof_confidence_counts": {
         "low": 2
@@ -515,10 +492,10 @@
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
       "proof_verdict_counts": {
-        "harmful": 2
+        "low_confidence": 2
       },
       "proof_host_noise_counts": {
-        "unknown": 2
+        "ok": 2
       },
       "proof_confidence_counts": {
         "low": 2
@@ -553,7 +530,7 @@
         "low_confidence": 1
       },
       "proof_host_noise_counts": {
-        "unknown": 2
+        "ok": 2
       },
       "proof_confidence_counts": {
         "low": 2
@@ -584,11 +561,10 @@
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
       "proof_verdict_counts": {
-        "harmful": 1,
-        "low_confidence": 1
+        "noisy": 2
       },
       "proof_host_noise_counts": {
-        "unknown": 2
+        "noisy": 2
       },
       "proof_confidence_counts": {
         "low": 2
@@ -619,13 +595,15 @@
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
       "proof_verdict_counts": {
-        "harmful": 2
+        "harmful": 1,
+        "low_confidence": 1
       },
       "proof_host_noise_counts": {
-        "unknown": 2
+        "ok": 2
       },
       "proof_confidence_counts": {
-        "low": 2
+        "low": 1,
+        "medium": 1
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
       "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
@@ -656,10 +634,11 @@
         "harmful": 2
       },
       "proof_host_noise_counts": {
-        "unknown": 2
+        "ok": 2
       },
       "proof_confidence_counts": {
-        "low": 2
+        "low": 1,
+        "medium": 1
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
       "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
@@ -693,7 +672,7 @@
         "low_confidence": 1
       },
       "proof_host_noise_counts": {
-        "unknown": 2
+        "ok": 2
       },
       "proof_confidence_counts": {
         "low": 2
@@ -728,7 +707,7 @@
         "low_confidence": 1
       },
       "proof_host_noise_counts": {
-        "unknown": 2
+        "ok": 2
       },
       "proof_confidence_counts": {
         "low": 2
@@ -745,12 +724,13 @@
       "app_surface_bucket": "blocked_by_gate",
       "app_surface_ready": false,
       "reasons": [
+        "rollback-not-tested",
         "security-mitigation-override"
       ],
       "gate": {
         "eligible_for_app_card": false,
         "default_status": "known-absent",
-        "rollback_tested": true,
+        "rollback_tested": false,
         "app_write_explicit": true,
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [
@@ -758,20 +738,15 @@
           "security-mitigation-override"
         ],
         "blockers": [
+          "rollback-not-tested",
           "security-mitigation-override"
         ]
       },
       "candidate_value_count": 2,
-      "vm_validated_value_count": 2,
-      "proof_verdict_counts": {
-        "harmful": 2
-      },
-      "proof_host_noise_counts": {
-        "unknown": 2
-      },
-      "proof_confidence_counts": {
-        "low": 2
-      },
+      "vm_validated_value_count": 0,
+      "proof_verdict_counts": {},
+      "proof_host_noise_counts": {},
+      "proof_confidence_counts": {},
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
       "recommended_action": "do-not-surface-unless-blocker-is-researched-away"
     },
@@ -800,10 +775,11 @@
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
       "proof_verdict_counts": {
-        "harmful": 2
+        "harmful": 1,
+        "low_confidence": 1
       },
       "proof_host_noise_counts": {
-        "unknown": 2
+        "ok": 2
       },
       "proof_confidence_counts": {
         "low": 2
@@ -836,10 +812,11 @@
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
       "proof_verdict_counts": {
-        "harmful": 2
+        "harmful": 1,
+        "low_confidence": 1
       },
       "proof_host_noise_counts": {
-        "unknown": 2
+        "ok": 2
       },
       "proof_confidence_counts": {
         "low": 2
@@ -875,7 +852,7 @@
         "harmful": 2
       },
       "proof_host_noise_counts": {
-        "unknown": 2
+        "ok": 2
       },
       "proof_confidence_counts": {
         "low": 2
@@ -908,13 +885,15 @@
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
       "proof_verdict_counts": {
-        "harmful": 2
+        "harmful": 1,
+        "low_confidence": 1
       },
       "proof_host_noise_counts": {
-        "unknown": 2
+        "ok": 2
       },
       "proof_confidence_counts": {
-        "low": 2
+        "high": 1,
+        "low": 1
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
       "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
@@ -942,10 +921,11 @@
       "candidate_value_count": 3,
       "vm_validated_value_count": 2,
       "proof_verdict_counts": {
-        "harmful": 2
+        "harmful": 1,
+        "low_confidence": 1
       },
       "proof_host_noise_counts": {
-        "unknown": 2
+        "ok": 2
       },
       "proof_confidence_counts": {
         "low": 2
@@ -981,7 +961,7 @@
         "harmful": 2
       },
       "proof_host_noise_counts": {
-        "unknown": 2
+        "ok": 2
       },
       "proof_confidence_counts": {
         "low": 2
@@ -1014,10 +994,11 @@
       "candidate_value_count": 3,
       "vm_validated_value_count": 2,
       "proof_verdict_counts": {
-        "harmful": 2
+        "harmful": 1,
+        "low_confidence": 1
       },
       "proof_host_noise_counts": {
-        "unknown": 2
+        "ok": 2
       },
       "proof_confidence_counts": {
         "low": 2
@@ -1055,7 +1036,7 @@
         "harmful": 2
       },
       "proof_host_noise_counts": {
-        "unknown": 2
+        "ok": 2
       },
       "proof_confidence_counts": {
         "low": 2
@@ -1089,10 +1070,11 @@
         "harmful": 2
       },
       "proof_host_noise_counts": {
-        "unknown": 2
+        "ok": 2
       },
       "proof_confidence_counts": {
-        "low": 2
+        "high": 1,
+        "low": 1
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
       "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
@@ -1120,11 +1102,10 @@
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
       "proof_verdict_counts": {
-        "harmful": 1,
-        "low_confidence": 1
+        "harmful": 2
       },
       "proof_host_noise_counts": {
-        "unknown": 2
+        "ok": 2
       },
       "proof_confidence_counts": {
         "low": 2
@@ -1160,7 +1141,7 @@
         "harmful": 2
       },
       "proof_host_noise_counts": {
-        "unknown": 2
+        "ok": 2
       },
       "proof_confidence_counts": {
         "low": 2
@@ -1194,10 +1175,11 @@
         "harmful": 2
       },
       "proof_host_noise_counts": {
-        "unknown": 2
+        "ok": 2
       },
       "proof_confidence_counts": {
-        "low": 2
+        "high": 1,
+        "medium": 1
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
       "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
@@ -1211,32 +1193,28 @@
       "app_surface_bucket": "blocked_by_gate",
       "app_surface_ready": false,
       "reasons": [
+        "rollback-not-tested",
         "security-mitigation-override"
       ],
       "gate": {
         "eligible_for_app_card": false,
         "default_status": "known-absent",
-        "rollback_tested": true,
+        "rollback_tested": false,
         "app_write_explicit": true,
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [
           "security-mitigation-override"
         ],
         "blockers": [
+          "rollback-not-tested",
           "security-mitigation-override"
         ]
       },
       "candidate_value_count": 2,
-      "vm_validated_value_count": 2,
-      "proof_verdict_counts": {
-        "harmful": 2
-      },
-      "proof_host_noise_counts": {
-        "unknown": 2
-      },
-      "proof_confidence_counts": {
-        "low": 2
-      },
+      "vm_validated_value_count": 0,
+      "proof_verdict_counts": {},
+      "proof_host_noise_counts": {},
+      "proof_confidence_counts": {},
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
       "recommended_action": "do-not-surface-unless-blocker-is-researched-away"
     },
@@ -1266,10 +1244,11 @@
         "harmful": 2
       },
       "proof_host_noise_counts": {
-        "unknown": 2
+        "ok": 2
       },
       "proof_confidence_counts": {
-        "low": 2
+        "high": 1,
+        "low": 1
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
       "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
@@ -1300,7 +1279,7 @@
         "harmful": 1
       },
       "proof_host_noise_counts": {
-        "unknown": 1
+        "ok": 1
       },
       "proof_confidence_counts": {
         "low": 1
@@ -1331,10 +1310,10 @@
       "candidate_value_count": 2,
       "vm_validated_value_count": 1,
       "proof_verdict_counts": {
-        "harmful": 1
+        "low_confidence": 1
       },
       "proof_host_noise_counts": {
-        "unknown": 1
+        "ok": 1
       },
       "proof_confidence_counts": {
         "low": 1
@@ -1368,10 +1347,10 @@
       "candidate_value_count": 3,
       "vm_validated_value_count": 2,
       "proof_verdict_counts": {
-        "harmful": 2
+        "low_confidence": 2
       },
       "proof_host_noise_counts": {
-        "unknown": 2
+        "ok": 2
       },
       "proof_confidence_counts": {
         "low": 2
@@ -1408,10 +1387,11 @@
         "harmful": 2
       },
       "proof_host_noise_counts": {
-        "unknown": 2
+        "ok": 2
       },
       "proof_confidence_counts": {
-        "low": 2
+        "high": 1,
+        "low": 1
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
       "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
@@ -1444,7 +1424,7 @@
         "harmful": 2
       },
       "proof_host_noise_counts": {
-        "unknown": 2
+        "ok": 2
       },
       "proof_confidence_counts": {
         "low": 2
@@ -1478,11 +1458,10 @@
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
       "proof_verdict_counts": {
-        "harmful": 1,
-        "low_confidence": 1
+        "harmful": 2
       },
       "proof_host_noise_counts": {
-        "unknown": 2
+        "ok": 2
       },
       "proof_confidence_counts": {
         "low": 2
@@ -1516,7 +1495,7 @@
         "harmful": 2
       },
       "proof_host_noise_counts": {
-        "unknown": 2
+        "ok": 2
       },
       "proof_confidence_counts": {
         "low": 2
@@ -1551,7 +1530,7 @@
         "low_confidence": 1
       },
       "proof_host_noise_counts": {
-        "unknown": 2
+        "ok": 2
       },
       "proof_confidence_counts": {
         "low": 2
@@ -1586,7 +1565,7 @@
         "low_confidence": 1
       },
       "proof_host_noise_counts": {
-        "unknown": 2
+        "ok": 2
       },
       "proof_confidence_counts": {
         "low": 2
@@ -1620,7 +1599,7 @@
         "harmful": 1
       },
       "proof_host_noise_counts": {
-        "unknown": 1
+        "ok": 1
       },
       "proof_confidence_counts": {
         "low": 1
@@ -1651,10 +1630,10 @@
       "candidate_value_count": 2,
       "vm_validated_value_count": 1,
       "proof_verdict_counts": {
-        "low_confidence": 1
+        "harmful": 1
       },
       "proof_host_noise_counts": {
-        "unknown": 1
+        "ok": 1
       },
       "proof_confidence_counts": {
         "low": 1
@@ -1688,7 +1667,7 @@
         "harmful": 1
       },
       "proof_host_noise_counts": {
-        "unknown": 1
+        "ok": 1
       },
       "proof_confidence_counts": {
         "low": 1
@@ -1719,10 +1698,10 @@
       "candidate_value_count": 2,
       "vm_validated_value_count": 1,
       "proof_verdict_counts": {
-        "harmful": 1
+        "low_confidence": 1
       },
       "proof_host_noise_counts": {
-        "unknown": 1
+        "ok": 1
       },
       "proof_confidence_counts": {
         "low": 1
@@ -1756,7 +1735,7 @@
         "harmful": 1
       },
       "proof_host_noise_counts": {
-        "unknown": 1
+        "ok": 1
       },
       "proof_confidence_counts": {
         "low": 1
@@ -1787,14 +1766,14 @@
       "candidate_value_count": 3,
       "vm_validated_value_count": 2,
       "proof_verdict_counts": {
-        "harmful": 1,
-        "low_confidence": 1
+        "harmful": 2
       },
       "proof_host_noise_counts": {
-        "unknown": 2
+        "ok": 2
       },
       "proof_confidence_counts": {
-        "low": 2
+        "high": 1,
+        "low": 1
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
       "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
@@ -1827,7 +1806,7 @@
         "harmful": 2
       },
       "proof_host_noise_counts": {
-        "unknown": 2
+        "ok": 2
       },
       "proof_confidence_counts": {
         "low": 2
@@ -1858,10 +1837,10 @@
       "candidate_value_count": 2,
       "vm_validated_value_count": 1,
       "proof_verdict_counts": {
-        "low_confidence": 1
+        "harmful": 1
       },
       "proof_host_noise_counts": {
-        "unknown": 1
+        "ok": 1
       },
       "proof_confidence_counts": {
         "low": 1
@@ -1895,7 +1874,7 @@
         "harmful": 1
       },
       "proof_host_noise_counts": {
-        "unknown": 1
+        "ok": 1
       },
       "proof_confidence_counts": {
         "low": 1
@@ -1929,10 +1908,10 @@
         "harmful": 1
       },
       "proof_host_noise_counts": {
-        "unknown": 1
+        "ok": 1
       },
       "proof_confidence_counts": {
-        "low": 1
+        "high": 1
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
       "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
@@ -1960,10 +1939,10 @@
       "candidate_value_count": 2,
       "vm_validated_value_count": 1,
       "proof_verdict_counts": {
-        "harmful": 1
+        "low_confidence": 1
       },
       "proof_host_noise_counts": {
-        "unknown": 1
+        "ok": 1
       },
       "proof_confidence_counts": {
         "low": 1
@@ -1994,14 +1973,14 @@
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
       "proof_verdict_counts": {
-        "harmful": 1,
-        "low_confidence": 1
+        "harmful": 2
       },
       "proof_host_noise_counts": {
-        "unknown": 2
+        "ok": 2
       },
       "proof_confidence_counts": {
-        "low": 2
+        "low": 1,
+        "medium": 1
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
       "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
@@ -2029,14 +2008,15 @@
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
       "proof_verdict_counts": {
-        "harmful": 1,
+        "cpu_gain": 1,
         "low_confidence": 1
       },
       "proof_host_noise_counts": {
-        "unknown": 2
+        "ok": 2
       },
       "proof_confidence_counts": {
-        "low": 2
+        "low": 1,
+        "medium": 1
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
       "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
@@ -2064,10 +2044,10 @@
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
       "proof_verdict_counts": {
-        "low_confidence": 2
+        "noisy": 2
       },
       "proof_host_noise_counts": {
-        "unknown": 2
+        "noisy": 2
       },
       "proof_confidence_counts": {
         "low": 2
@@ -2084,33 +2064,24 @@
       "app_surface_bucket": "blocked_by_gate",
       "app_surface_ready": false,
       "reasons": [
-        "safety-finding-present"
+        "rollback-not-tested"
       ],
       "gate": {
         "eligible_for_app_card": false,
         "default_status": "known-absent",
-        "rollback_tested": true,
+        "rollback_tested": false,
         "app_write_explicit": true,
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [],
         "blockers": [
-          "safety-finding-present"
+          "rollback-not-tested"
         ]
       },
       "candidate_value_count": 2,
-      "vm_validated_value_count": 2,
-      "proof_verdict_counts": {
-        "boot_failure": 1,
-        "low_confidence": 1
-      },
-      "proof_host_noise_counts": {
-        "ok": 1,
-        "unknown": 1
-      },
-      "proof_confidence_counts": {
-        "high": 1,
-        "low": 1
-      },
+      "vm_validated_value_count": 0,
+      "proof_verdict_counts": {},
+      "proof_host_noise_counts": {},
+      "proof_confidence_counts": {},
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
       "recommended_action": "do-not-surface-unless-blocker-is-researched-away"
     },
@@ -2137,10 +2108,10 @@
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
       "proof_verdict_counts": {
-        "harmful": 2
+        "noisy": 2
       },
       "proof_host_noise_counts": {
-        "ok": 2
+        "noisy": 2
       },
       "proof_confidence_counts": {
         "low": 2
@@ -2205,14 +2176,13 @@
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
       "proof_verdict_counts": {
-        "harmful": 2
+        "low_confidence": 2
       },
       "proof_host_noise_counts": {
         "ok": 2
       },
       "proof_confidence_counts": {
-        "high": 1,
-        "low": 1
+        "low": 2
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
       "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
@@ -2275,11 +2245,10 @@
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
       "proof_verdict_counts": {
-        "harmful": 1,
-        "low_confidence": 1
+        "noisy": 2
       },
       "proof_host_noise_counts": {
-        "ok": 2
+        "noisy": 2
       },
       "proof_confidence_counts": {
         "low": 2
@@ -2296,32 +2265,24 @@
       "app_surface_bucket": "blocked_by_gate",
       "app_surface_ready": false,
       "reasons": [
-        "safety-finding-present"
+        "rollback-not-tested"
       ],
       "gate": {
         "eligible_for_app_card": false,
         "default_status": "known-absent",
-        "rollback_tested": true,
+        "rollback_tested": false,
         "app_write_explicit": true,
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [],
         "blockers": [
-          "safety-finding-present"
+          "rollback-not-tested"
         ]
       },
       "candidate_value_count": 2,
-      "vm_validated_value_count": 2,
-      "proof_verdict_counts": {
-        "app_breakage": 1,
-        "harmful": 1
-      },
-      "proof_host_noise_counts": {
-        "ok": 2
-      },
-      "proof_confidence_counts": {
-        "high": 1,
-        "medium": 1
-      },
+      "vm_validated_value_count": 0,
+      "proof_verdict_counts": {},
+      "proof_host_noise_counts": {},
+      "proof_confidence_counts": {},
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
       "recommended_action": "do-not-surface-unless-blocker-is-researched-away"
     },
@@ -2348,10 +2309,10 @@
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
       "proof_verdict_counts": {
-        "low_confidence": 2
+        "noisy": 2
       },
       "proof_host_noise_counts": {
-        "ok": 2
+        "noisy": 2
       },
       "proof_confidence_counts": {
         "low": 2
@@ -2384,11 +2345,10 @@
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
       "proof_verdict_counts": {
-        "harmful": 1,
-        "low_confidence": 1
+        "noisy": 2
       },
       "proof_host_noise_counts": {
-        "ok": 2
+        "noisy": 2
       },
       "proof_confidence_counts": {
         "low": 2
@@ -2419,10 +2379,10 @@
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
       "proof_verdict_counts": {
-        "harmful": 2
+        "noisy": 2
       },
       "proof_host_noise_counts": {
-        "ok": 2
+        "noisy": 2
       },
       "proof_confidence_counts": {
         "low": 2
@@ -2453,10 +2413,10 @@
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
       "proof_verdict_counts": {
-        "harmful": 2
+        "noisy": 2
       },
       "proof_host_noise_counts": {
-        "ok": 2
+        "noisy": 2
       },
       "proof_confidence_counts": {
         "low": 2
@@ -2487,10 +2447,10 @@
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
       "proof_verdict_counts": {
-        "harmful": 2
+        "noisy": 2
       },
       "proof_host_noise_counts": {
-        "ok": 2
+        "noisy": 2
       },
       "proof_confidence_counts": {
         "low": 2
@@ -2521,11 +2481,10 @@
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
       "proof_verdict_counts": {
-        "harmful": 1,
-        "low_confidence": 1
+        "noisy": 2
       },
       "proof_host_noise_counts": {
-        "ok": 2
+        "noisy": 2
       },
       "proof_confidence_counts": {
         "low": 2
@@ -2556,10 +2515,10 @@
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
       "proof_verdict_counts": {
-        "harmful": 2
+        "noisy": 2
       },
       "proof_host_noise_counts": {
-        "ok": 2
+        "noisy": 2
       },
       "proof_confidence_counts": {
         "low": 2
@@ -2624,12 +2583,10 @@
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
       "proof_verdict_counts": {
-        "harmful": 1,
-        "noisy": 1
+        "harmful": 2
       },
       "proof_host_noise_counts": {
-        "noisy": 1,
-        "ok": 1
+        "ok": 2
       },
       "proof_confidence_counts": {
         "low": 2
@@ -2660,14 +2617,13 @@
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
       "proof_verdict_counts": {
-        "harmful": 2
+        "noisy": 2
       },
       "proof_host_noise_counts": {
-        "ok": 2
+        "noisy": 2
       },
       "proof_confidence_counts": {
-        "high": 1,
-        "low": 1
+        "low": 2
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
       "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
@@ -2695,13 +2651,16 @@
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
       "proof_verdict_counts": {
-        "harmful": 2
+        "harmful": 1,
+        "noisy": 1
       },
       "proof_host_noise_counts": {
-        "ok": 2
+        "noisy": 1,
+        "ok": 1
       },
       "proof_confidence_counts": {
-        "low": 2
+        "high": 1,
+        "low": 1
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
       "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
@@ -2732,12 +2691,10 @@
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
       "proof_verdict_counts": {
-        "harmful": 1,
-        "noisy": 1
+        "harmful": 2
       },
       "proof_host_noise_counts": {
-        "noisy": 1,
-        "ok": 1
+        "ok": 2
       },
       "proof_confidence_counts": {
         "low": 2
@@ -2768,10 +2725,12 @@
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
       "proof_verdict_counts": {
-        "noisy": 2
+        "harmful": 1,
+        "noisy": 1
       },
       "proof_host_noise_counts": {
-        "noisy": 2
+        "noisy": 1,
+        "ok": 1
       },
       "proof_confidence_counts": {
         "low": 2
@@ -2802,12 +2761,10 @@
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
       "proof_verdict_counts": {
-        "harmful": 1,
-        "noisy": 1
+        "noisy": 2
       },
       "proof_host_noise_counts": {
-        "noisy": 1,
-        "ok": 1
+        "noisy": 2
       },
       "proof_confidence_counts": {
         "low": 2
@@ -2838,10 +2795,10 @@
       "candidate_value_count": 4,
       "vm_validated_value_count": 2,
       "proof_verdict_counts": {
-        "harmful": 2
+        "noisy": 2
       },
       "proof_host_noise_counts": {
-        "ok": 2
+        "noisy": 2
       },
       "proof_confidence_counts": {
         "low": 2
@@ -2872,10 +2829,10 @@
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
       "proof_verdict_counts": {
-        "noisy": 2
+        "harmful": 2
       },
       "proof_host_noise_counts": {
-        "noisy": 2
+        "ok": 2
       },
       "proof_confidence_counts": {
         "low": 2
@@ -2906,8 +2863,7 @@
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
       "proof_verdict_counts": {
-        "harmful": 1,
-        "low_confidence": 1
+        "harmful": 2
       },
       "proof_host_noise_counts": {
         "ok": 2
@@ -2941,13 +2897,15 @@
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
       "proof_verdict_counts": {
-        "harmful": 2
+        "harmful": 1,
+        "low_confidence": 1
       },
       "proof_host_noise_counts": {
         "ok": 2
       },
       "proof_confidence_counts": {
-        "low": 2
+        "high": 1,
+        "low": 1
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
       "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
@@ -2983,7 +2941,7 @@
         "ok": 2
       },
       "proof_confidence_counts": {
-        "low": 2
+        "high": 2
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
       "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
@@ -3011,7 +2969,8 @@
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
       "proof_verdict_counts": {
-        "harmful": 2
+        "harmful": 1,
+        "low_confidence": 1
       },
       "proof_host_noise_counts": {
         "ok": 2
@@ -3045,7 +3004,8 @@
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
       "proof_verdict_counts": {
-        "harmful": 2
+        "harmful": 1,
+        "low_confidence": 1
       },
       "proof_host_noise_counts": {
         "ok": 2
@@ -3080,11 +3040,10 @@
       "vm_validated_value_count": 2,
       "proof_verdict_counts": {
         "harmful": 1,
-        "noisy": 1
+        "low_confidence": 1
       },
       "proof_host_noise_counts": {
-        "noisy": 1,
-        "ok": 1
+        "ok": 2
       },
       "proof_confidence_counts": {
         "low": 2
@@ -3118,13 +3077,15 @@
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
       "proof_verdict_counts": {
-        "noisy": 2
+        "cpu_gain": 1,
+        "low_confidence": 1
       },
       "proof_host_noise_counts": {
-        "noisy": 2
+        "ok": 2
       },
       "proof_confidence_counts": {
-        "low": 2
+        "low": 1,
+        "medium": 1
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
       "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
@@ -3135,13 +3096,13 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
       "default_status": "known-absent",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "blocked_by_gate",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "safety-finding-present"
       ],
       "gate": {
-        "eligible_for_app_card": true,
+        "eligible_for_app_card": false,
         "default_status": "known-absent",
         "rollback_tested": true,
         "app_write_explicit": true,
@@ -3150,21 +3111,26 @@
           "watchdog-timeout-sensitive",
           "watchdog/bugcheck-sensitive"
         ],
-        "blockers": []
+        "blockers": [
+          "safety-finding-present"
+        ]
       },
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
       "proof_verdict_counts": {
-        "noisy": 2
+        "app_breakage": 1,
+        "rollback_failure": 1
       },
       "proof_host_noise_counts": {
-        "noisy": 2
+        "noisy": 1,
+        "ok": 1
       },
       "proof_confidence_counts": {
-        "low": 2
+        "high": 1,
+        "medium": 1
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "do-not-surface-unless-blocker-is-researched-away"
     },
     {
       "index": 90,
@@ -3192,10 +3158,12 @@
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
       "proof_verdict_counts": {
-        "noisy": 2
+        "harmful": 1,
+        "noisy": 1
       },
       "proof_host_noise_counts": {
-        "noisy": 2
+        "noisy": 1,
+        "ok": 1
       },
       "proof_confidence_counts": {
         "low": 2
@@ -3229,10 +3197,11 @@
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
       "proof_verdict_counts": {
-        "noisy": 2
+        "harmful": 1,
+        "low_confidence": 1
       },
       "proof_host_noise_counts": {
-        "noisy": 2
+        "ok": 2
       },
       "proof_confidence_counts": {
         "low": 2
@@ -3266,10 +3235,11 @@
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
       "proof_verdict_counts": {
-        "noisy": 2
+        "harmful": 1,
+        "low_confidence": 1
       },
       "proof_host_noise_counts": {
-        "noisy": 2
+        "ok": 2
       },
       "proof_confidence_counts": {
         "low": 2
@@ -3286,30 +3256,26 @@
       "app_surface_bucket": "blocked_by_gate",
       "app_surface_ready": false,
       "reasons": [
-        "key-missing-in-target-vm"
+        "key-missing-in-target-vm",
+        "rollback-not-tested"
       ],
       "gate": {
         "eligible_for_app_card": false,
         "default_status": "known-absent",
-        "rollback_tested": true,
+        "rollback_tested": false,
         "app_write_explicit": true,
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [],
         "blockers": [
-          "key-missing-in-target-vm"
+          "key-missing-in-target-vm",
+          "rollback-not-tested"
         ]
       },
-      "candidate_value_count": 2,
-      "vm_validated_value_count": 2,
-      "proof_verdict_counts": {
-        "noisy": 2
-      },
-      "proof_host_noise_counts": {
-        "noisy": 2
-      },
-      "proof_confidence_counts": {
-        "low": 2
-      },
+      "candidate_value_count": 1,
+      "vm_validated_value_count": 0,
+      "proof_verdict_counts": {},
+      "proof_host_noise_counts": {},
+      "proof_confidence_counts": {},
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
       "recommended_action": "do-not-surface-unless-blocker-is-researched-away"
     },
@@ -3336,7 +3302,8 @@
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
       "proof_verdict_counts": {
-        "harmful": 2
+        "harmful": 1,
+        "low_confidence": 1
       },
       "proof_host_noise_counts": {
         "ok": 2
@@ -3370,10 +3337,10 @@
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
       "proof_verdict_counts": {
-        "noisy": 2
+        "low_confidence": 2
       },
       "proof_host_noise_counts": {
-        "noisy": 2
+        "ok": 2
       },
       "proof_confidence_counts": {
         "low": 2
@@ -3390,30 +3357,26 @@
       "app_surface_bucket": "blocked_by_gate",
       "app_surface_ready": false,
       "reasons": [
-        "key-missing-in-target-vm"
+        "key-missing-in-target-vm",
+        "rollback-not-tested"
       ],
       "gate": {
         "eligible_for_app_card": false,
         "default_status": "known-absent",
-        "rollback_tested": true,
+        "rollback_tested": false,
         "app_write_explicit": true,
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [],
         "blockers": [
-          "key-missing-in-target-vm"
+          "key-missing-in-target-vm",
+          "rollback-not-tested"
         ]
       },
       "candidate_value_count": 2,
-      "vm_validated_value_count": 2,
-      "proof_verdict_counts": {
-        "noisy": 2
-      },
-      "proof_host_noise_counts": {
-        "noisy": 2
-      },
-      "proof_confidence_counts": {
-        "low": 2
-      },
+      "vm_validated_value_count": 0,
+      "proof_verdict_counts": {},
+      "proof_host_noise_counts": {},
+      "proof_confidence_counts": {},
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
       "recommended_action": "do-not-surface-unless-blocker-is-researched-away"
     }

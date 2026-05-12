@@ -29,7 +29,7 @@ class Operator96LowNoiseRerunPlanTests(unittest.TestCase):
         plan = self.module.build_plan(tranche_size=5)
 
         self.assertEqual(plan["status"], "PASS")
-        self.assertEqual(plan["summary"]["candidate_record_count"], 85)
+        self.assertEqual(plan["summary"]["candidate_record_count"], 84)
         self.assertEqual(plan["summary"]["start_offset"], 0)
         self.assertEqual(plan["summary"]["tranche_indexes"], [1, 2, 6, 9, 10])
         self.assertEqual(plan["summary"]["first_tranche_indexes"], [1, 2, 6, 9, 10])

@@ -1,11 +1,11 @@
 # Operator96 App Surface Review
 
-- Generated UTC: `2026-05-10T19:03:20Z`
+- Generated UTC: `2026-05-12T00:53:19Z`
 - Matrix: `registry-research-framework/audit/operator96-enriched-value-matrix-20260510.json`
 - Records: `96`
 - Ready for bounded app card: `0`
-- Needs low-noise rerun: `85`
-- Blocked by gate: `11`
+- Needs low-noise rerun: `84`
+- Blocked by gate: `12`
 - Blocked by safety: `0`
 
 ## Policy
@@ -16,8 +16,8 @@
 
 ## Buckets
 
-- `blocked_by_gate`: `11`
-- `needs_low_noise_rerun`: `85`
+- `blocked_by_gate`: `12`
+- `needs_low_noise_rerun`: `84`
 
 ## Records
 
@@ -25,12 +25,12 @@
 |---:|---|---|---|---|
 | 1 | `EnableLocalLogonSid` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
 | 2 | `EnableVirtualization` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 3 | `AdditionalCriticalWorkerThreads` | `blocked_by_gate` | kernel-worker-thread-override | do-not-surface-unless-blocker-is-researched-away |
-| 4 | `AdditionalDelayedWorkerThreads` | `blocked_by_gate` | kernel-worker-thread-override | do-not-surface-unless-blocker-is-researched-away |
-| 5 | `UuidSequenceNumber` | `blocked_by_gate` | safety-finding-present | do-not-surface-unless-blocker-is-researched-away |
+| 3 | `AdditionalCriticalWorkerThreads` | `blocked_by_gate` | rollback-not-tested, kernel-worker-thread-override | do-not-surface-unless-blocker-is-researched-away |
+| 4 | `AdditionalDelayedWorkerThreads` | `blocked_by_gate` | rollback-not-tested, kernel-worker-thread-override | do-not-surface-unless-blocker-is-researched-away |
+| 5 | `UuidSequenceNumber` | `blocked_by_gate` | rollback-not-tested | do-not-surface-unless-blocker-is-researched-away |
 | 6 | `TickcountRolloverDelay` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 7 | `KernelWorkerTestFlags` | `blocked_by_gate` | kernel-worker-thread-override | do-not-surface-unless-blocker-is-researched-away |
-| 8 | `MaximumKernelWorkerThreads` | `blocked_by_gate` | kernel-worker-thread-override | do-not-surface-unless-blocker-is-researched-away |
+| 7 | `KernelWorkerTestFlags` | `blocked_by_gate` | rollback-not-tested, kernel-worker-thread-override | do-not-surface-unless-blocker-is-researched-away |
+| 8 | `MaximumKernelWorkerThreads` | `blocked_by_gate` | rollback-not-tested, kernel-worker-thread-override | do-not-surface-unless-blocker-is-researched-away |
 | 9 | `ForceEnableMutantAutoboost` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
 | 10 | `AllowRemoteDASD` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
 | 11 | `DisableDiskCounters` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
@@ -43,7 +43,7 @@
 | 18 | `DisableLightWeightSuspend` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
 | 19 | `TimerCheckFlags` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
 | 20 | `ForceIdleGracePeriod` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 21 | `DisableExceptionChainValidation` | `blocked_by_gate` | security-mitigation-override | do-not-surface-unless-blocker-is-researched-away |
+| 21 | `DisableExceptionChainValidation` | `blocked_by_gate` | rollback-not-tested, security-mitigation-override | do-not-surface-unless-blocker-is-researched-away |
 | 22 | `MaxDynamicTickDuration` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
 | 23 | `EnableTickAccumulationFromAccountingPeriods` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
 | 24 | `EnablePerCpuClockTickScheduling` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
@@ -56,7 +56,7 @@
 | 31 | `RebalanceMinPriority` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
 | 32 | `InterruptSteeringFlags` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
 | 33 | `AlwaysTrackIoBoosting` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 34 | `DisableControlFlowGuardExportSuppression` | `blocked_by_gate` | security-mitigation-override | do-not-surface-unless-blocker-is-researched-away |
+| 34 | `DisableControlFlowGuardExportSuppression` | `blocked_by_gate` | rollback-not-tested, security-mitigation-override | do-not-surface-unless-blocker-is-researched-away |
 | 35 | `MaximumCooperativeIdleSearchWidth` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
 | 36 | `HiberbootEnabled` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
 | 37 | `PowerSettingProfile` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
@@ -81,13 +81,13 @@
 | 56 | `DisableInboxPepGeneratedConstraints` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
 | 57 | `DisableDisplayBurstOnPowerSourceChange` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
 | 58 | `IdleProcessorsRequireQosManagement` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 59 | `TtmEnabled` | `blocked_by_gate` | safety-finding-present | do-not-surface-unless-blocker-is-researched-away |
+| 59 | `TtmEnabled` | `blocked_by_gate` | rollback-not-tested | do-not-surface-unless-blocker-is-researched-away |
 | 60 | `AllowAudioToEnableExecutionRequiredPowerRequests` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
 | 61 | `DeepIoCoalescingEnabled` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
 | 62 | `IgnoreCsComplianceCheck` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
 | 63 | `DripsSwHwDivergenceEnableLiveDump` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
 | 64 | `DisableVsyncLatencyUpdate` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 65 | `SleepstudyAccountingEnabled` | `blocked_by_gate` | safety-finding-present | do-not-surface-unless-blocker-is-researched-away |
+| 65 | `SleepstudyAccountingEnabled` | `blocked_by_gate` | rollback-not-tested | do-not-surface-unless-blocker-is-researched-away |
 | 66 | `EnableInputSuppression` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
 | 67 | `PerfCheckTimerImplementation` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
 | 68 | `StandbyConnectivityGracePeriod` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
@@ -111,11 +111,11 @@
 | 86 | `HeteroHgsPlusDisabled` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
 | 87 | `IpiLastClockOwnerDisable` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
 | 88 | `PowerWatchdogRequestQueueTimeoutMsec` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 89 | `PowerWatchdogPoCalloutTimeoutMsec` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
+| 89 | `PowerWatchdogPoCalloutTimeoutMsec` | `blocked_by_gate` | safety-finding-present | do-not-surface-unless-blocker-is-researched-away |
 | 90 | `PowerWatchdogPowerOnGdiTimeoutMsec` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
 | 91 | `PowerWatchdogDwmSyncFlushTimeoutMsec` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
 | 92 | `PowerWatchdogDrvSetMonitorTimeoutMsec` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 93 | `Policy` | `blocked_by_gate` | key-missing-in-target-vm | do-not-surface-unless-blocker-is-researched-away |
+| 93 | `Policy` | `blocked_by_gate` | key-missing-in-target-vm, rollback-not-tested | do-not-surface-unless-blocker-is-researched-away |
 | 94 | `EnableDsNetRefresh` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
 | 95 | `EnabledActions` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 96 | `PowerThrottlingOff` | `blocked_by_gate` | key-missing-in-target-vm | do-not-surface-unless-blocker-is-researched-away |
+| 96 | `PowerThrottlingOff` | `blocked_by_gate` | key-missing-in-target-vm, rollback-not-tested | do-not-surface-unless-blocker-is-researched-away |

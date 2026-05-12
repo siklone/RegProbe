@@ -58,8 +58,16 @@ class Operator96AppSurfaceReviewTests(unittest.TestCase):
         self.assertEqual(review["status"], "PASS")
         self.assertEqual(review["summary"]["record_count"], 96)
         self.assertEqual(review["summary"]["ready_for_bounded_app_card"], 0)
-        self.assertEqual(review["summary"]["needs_low_noise_rerun"], 85)
-        self.assertEqual(review["summary"]["blocked_by_gate"], 11)
+        self.assertEqual(review["summary"]["needs_low_noise_rerun"], 84)
+        self.assertEqual(review["summary"]["blocked_by_gate"], 12)
+
+        watchdog = next(
+            record
+            for record in review["records"]
+            if record["value_name"] == "PowerWatchdogPoCalloutTimeoutMsec"
+        )
+        self.assertEqual(watchdog["app_surface_bucket"], "blocked_by_gate")
+        self.assertIn("safety-finding-present", watchdog["reasons"])
 
     def test_gate_blocked_record_stays_out_of_app_surface(self):
         result = self.module.classify_record(
