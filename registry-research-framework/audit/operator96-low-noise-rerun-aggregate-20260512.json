@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-12T16:56:59Z",
+  "generated_utc": "2026-05-12T17:00:19Z",
   "campaign_id": "operator96-low-noise-rerun-aggregate-20260510",
   "status": "ok",
   "source_campaigns": [
@@ -44,7 +44,24 @@
       "low": 19,
       "medium": 1
     },
-    "hard_smoke_all": true
+    "hard_smoke_all": true,
+    "noisy_result_count": 2,
+    "noisy_results": [
+      {
+        "experiment_id": "operator96-020-forceidlegraceperiod-0",
+        "value_name": "ForceIdleGracePeriod",
+        "verdict": "noisy",
+        "host_noise": "noisy",
+        "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-020-forceidlegraceperiod-0.json"
+      },
+      {
+        "experiment_id": "operator96-020-forceidlegraceperiod-1",
+        "value_name": "ForceIdleGracePeriod",
+        "verdict": "noisy",
+        "host_noise": "noisy",
+        "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-020-forceidlegraceperiod-1.json"
+      }
+    ]
   },
   "plan": [
     {

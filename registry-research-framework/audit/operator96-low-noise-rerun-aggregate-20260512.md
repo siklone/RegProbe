@@ -1,12 +1,13 @@
 # Operator96 Low-Noise Rerun Aggregate
 
-- Generated UTC: `2026-05-12T16:56:59Z`
+- Generated UTC: `2026-05-12T17:00:19Z`
 - Status: `ok`
 - Source campaigns: `2`
 - Plan entries: `20`
 - Results: `20`
 - Non-ok: `0`
 - Hard smoke all: `True`
+- Noisy results: `2`
 
 ## Counts
 
@@ -20,3 +21,10 @@
 |---|---|---:|---:|---:|
 | `registry-research-framework/audit/operator96-low-noise-rerun-tranche-20260512-02.json` | `ok` | 10 | 10 | 0 |
 | `registry-research-framework/audit/operator96-low-noise-rerun-tranche-20260512-03.json` | `ok` | 10 | 10 | 0 |
+
+## Noisy Results
+
+| Experiment | Value | Verdict | Host noise | Artifact |
+|---|---|---|---|---|
+| `operator96-020-forceidlegraceperiod-0` | `ForceIdleGracePeriod` | `noisy` | `noisy` | `registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-020-forceidlegraceperiod-0.json` |
+| `operator96-020-forceidlegraceperiod-1` | `ForceIdleGracePeriod` | `noisy` | `noisy` | `registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-020-forceidlegraceperiod-1.json` |
