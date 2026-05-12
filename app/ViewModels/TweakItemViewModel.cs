@@ -906,6 +906,7 @@ public sealed partial class TweakItemViewModel : ViewModelBase
         OnPropertyChanged(nameof(RollbackSnapshotText));
         OnPropertyChanged(nameof(RiskSnapshotText));
         OnPropertyChanged(nameof(RollbackStoryText));
+        OnPropertyChanged(nameof(ValueSummaryRows));
         OnPropertyChanged(nameof(ProofLanes));
         OnPropertyChanged(nameof(ProofBars));
         OnPropertyChanged(nameof(WhatWeKnowSummary));

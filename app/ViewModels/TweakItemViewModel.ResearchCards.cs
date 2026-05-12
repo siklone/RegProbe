@@ -190,7 +190,15 @@ public sealed partial class TweakItemViewModel
             var defaultValue = string.IsNullOrWhiteSpace(DefaultChoiceLabel)
                 ? "Restore default available"
                 : DefaultChoiceLabel;
-            rows.Add(new TweakValueSummaryRowViewModel("DEFAULT", defaultValue, DefaultVsPreviousSummary));
+            rows.Add(new TweakValueSummaryRowViewModel("KNOWN DEFAULT", defaultValue, DefaultVsPreviousSummary));
+        }
+
+        if (!string.IsNullOrWhiteSpace(RollbackStoryText))
+        {
+            rows.Add(new TweakValueSummaryRowViewModel(
+                "ROLLBACK",
+                RollbackStoryText,
+                "Restore previous state"));
         }
 
         if (!string.IsNullOrWhiteSpace(ConfigurationCompactInfoLine))

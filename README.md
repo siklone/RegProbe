@@ -165,15 +165,25 @@ The current v3.6 research snapshot is zero-pending: no active blockers, no promo
 ## Start Here
 
 - I want to use the app: [User guide](Docs/product/user-guide.md)
+- I want to sanity-check the app with a fresh user: [10-minute user test](Docs/product/10-minute-user-test.md)
 - I want the public support story: [Support matrix](Docs/product/support-matrix.md)
 - I want to build the app: [Build and run](#build-and-run)
 - I want to contribute research: [Contributing](CONTRIBUTING.md)
+- I want the contributor tooling map: [Research tooling map](Docs/research/tooling-map.md)
+- I want to understand certified vs community runs: [Run tiers](Docs/research/run-tiers.md)
 
 The docs are now split the same way the repo is meant to feel from the outside: [Docs/product](Docs/product/README.md) for public-facing usage and trust signals, [Docs/research](Docs/research/README.md) for contributor and validation depth.
 
+Audience boundary: the WPF app is the end-user product. Python scripts and JSON
+artifacts are the canonical contributor API for research, VM campaigns, app QA,
+and agentic AI workflows. The .NET research CLI remains a compatibility surface;
+prefer Python mirrors for new research work, especially on Linux hosts without
+the Windows desktop runtime. The `tweak list/apply/revert` CLI path is retained
+for advanced Windows/headless workflows, not for normal app users.
+
 ## Single Setting Check
 
-If you want to sanity-check one tweak, one registry value, or one path before opening the app, use the single-setting inspector. On a Linux host without `Microsoft.WindowsDesktop.App`, prefer the Python mirror; run the .NET CLI version inside the Windows VM or on a host with the desktop runtime installed.
+If you want to sanity-check one tweak, one registry value, or one path before opening the app, use the single-setting inspector. The Python mirror is the canonical contributor path; run the .NET CLI version only as a compatibility route inside the Windows VM or on a host with the desktop runtime installed.
 
 ```bash
 # Host-safe inspector; does not require the Windows desktop runtime

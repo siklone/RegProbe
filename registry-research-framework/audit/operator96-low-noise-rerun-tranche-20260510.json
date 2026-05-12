@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-05-10T19:47:59Z",
+  "generated_utc": "2026-05-12T11:07:44Z",
   "status": "ok",
   "report": "registry-research-framework/audit/operator-regadd-followup-source-default-report-20260509.json",
   "smoke_profile": "gui",
@@ -151,13 +151,13 @@
       "stderr": "",
       "observations": {
         "status": "ok",
-        "verdict": "harmful",
+        "verdict": "noisy",
         "confidence": "low",
-        "host_noise": "ok",
-        "primary_delta_pct": -81.014,
-        "verdict_reason": "post_reboot io_write_mib_per_second changed by -81.01%",
+        "host_noise": "noisy",
+        "primary_delta_pct": null,
+        "verdict_reason": "host preflight marked one or more stages noisy",
         "metrics_used": [
-          "io_write_mib_per_second"
+          "host_noise_meta"
         ],
         "safety_findings": [],
         "smoke_hard_success": {
@@ -252,12 +252,12 @@
           "apply_vs_baseline": {
             "cpu_single_seconds": null,
             "cpu_multi_seconds": null,
-            "io_write_read_mib_per_second": 78.69
+            "io_write_read_mib_per_second": -26.51
           },
           "post_reboot_vs_baseline": {
             "cpu_single_seconds": null,
             "cpu_multi_seconds": null,
-            "io_write_read_mib_per_second": -23.16
+            "io_write_read_mib_per_second": 14.48
           }
         }
       }
@@ -287,11 +287,11 @@
       "stderr": "",
       "observations": {
         "status": "ok",
-        "verdict": "harmful",
+        "verdict": "low_confidence",
         "confidence": "low",
         "host_noise": "ok",
-        "primary_delta_pct": -21.701,
-        "verdict_reason": "post_reboot io_write_mib_per_second changed by -21.70%",
+        "primary_delta_pct": 840.52,
+        "verdict_reason": "apply io_write_mib_per_second changed by +840.52%",
         "metrics_used": [
           "io_write_mib_per_second"
         ],
@@ -388,12 +388,12 @@
           "apply_vs_baseline": {
             "cpu_single_seconds": null,
             "cpu_multi_seconds": null,
-            "io_write_read_mib_per_second": 129.44
+            "io_write_read_mib_per_second": 133.88
           },
           "post_reboot_vs_baseline": {
             "cpu_single_seconds": null,
             "cpu_multi_seconds": null,
-            "io_write_read_mib_per_second": 9.93
+            "io_write_read_mib_per_second": 30.23
           }
         }
       }
@@ -423,13 +423,13 @@
       "stderr": "",
       "observations": {
         "status": "ok",
-        "verdict": "harmful",
+        "verdict": "low_confidence",
         "confidence": "low",
         "host_noise": "ok",
-        "primary_delta_pct": -30.428,
-        "verdict_reason": "post_reboot io_write_mib_per_second changed by -30.43%",
+        "primary_delta_pct": 104.124,
+        "verdict_reason": "apply io_read_mib_per_second changed by +104.12%",
         "metrics_used": [
-          "io_write_mib_per_second"
+          "io_read_mib_per_second"
         ],
         "safety_findings": [],
         "smoke_hard_success": {
@@ -524,12 +524,12 @@
           "apply_vs_baseline": {
             "cpu_single_seconds": null,
             "cpu_multi_seconds": null,
-            "io_write_read_mib_per_second": 96.64
+            "io_write_read_mib_per_second": 94.89
           },
           "post_reboot_vs_baseline": {
             "cpu_single_seconds": null,
             "cpu_multi_seconds": null,
-            "io_write_read_mib_per_second": -21.91
+            "io_write_read_mib_per_second": 14.33
           }
         }
       }
@@ -561,13 +561,13 @@
       "stderr": "",
       "observations": {
         "status": "ok",
-        "verdict": "low_confidence",
+        "verdict": "harmful",
         "confidence": "low",
         "host_noise": "ok",
-        "primary_delta_pct": 83.936,
-        "verdict_reason": "apply io_read_mib_per_second changed by +83.94%",
+        "primary_delta_pct": -13.65,
+        "verdict_reason": "post_reboot io_write_mib_per_second changed by -13.65%",
         "metrics_used": [
-          "io_read_mib_per_second"
+          "io_write_mib_per_second"
         ],
         "safety_findings": [],
         "smoke_hard_success": {
@@ -662,12 +662,12 @@
           "apply_vs_baseline": {
             "cpu_single_seconds": null,
             "cpu_multi_seconds": null,
-            "io_write_read_mib_per_second": 64.21
+            "io_write_read_mib_per_second": 52.25
           },
           "post_reboot_vs_baseline": {
             "cpu_single_seconds": null,
             "cpu_multi_seconds": null,
-            "io_write_read_mib_per_second": -3.1
+            "io_write_read_mib_per_second": 2.02
           }
         }
       }
@@ -702,10 +702,10 @@
         "verdict": "harmful",
         "confidence": "low",
         "host_noise": "ok",
-        "primary_delta_pct": -18.155,
-        "verdict_reason": "post_reboot io_write_mib_per_second changed by -18.16%",
+        "primary_delta_pct": -31.872,
+        "verdict_reason": "post_reboot io_read_mib_per_second changed by -31.87%",
         "metrics_used": [
-          "io_write_mib_per_second"
+          "io_read_mib_per_second"
         ],
         "safety_findings": [],
         "smoke_hard_success": {
@@ -800,12 +800,12 @@
           "apply_vs_baseline": {
             "cpu_single_seconds": null,
             "cpu_multi_seconds": null,
-            "io_write_read_mib_per_second": 92.71
+            "io_write_read_mib_per_second": 61.45
           },
           "post_reboot_vs_baseline": {
             "cpu_single_seconds": null,
             "cpu_multi_seconds": null,
-            "io_write_read_mib_per_second": 14.49
+            "io_write_read_mib_per_second": -22.1
           }
         }
       }
@@ -835,13 +835,13 @@
       "stderr": "",
       "observations": {
         "status": "ok",
-        "verdict": "harmful",
+        "verdict": "low_confidence",
         "confidence": "low",
         "host_noise": "ok",
-        "primary_delta_pct": -11.535,
-        "verdict_reason": "post_reboot io_write_mib_per_second changed by -11.54%",
+        "primary_delta_pct": 92.613,
+        "verdict_reason": "apply io_read_mib_per_second changed by +92.61%",
         "metrics_used": [
-          "io_write_mib_per_second"
+          "io_read_mib_per_second"
         ],
         "safety_findings": [],
         "smoke_hard_success": {
@@ -936,12 +936,12 @@
           "apply_vs_baseline": {
             "cpu_single_seconds": null,
             "cpu_multi_seconds": null,
-            "io_write_read_mib_per_second": 77.68
+            "io_write_read_mib_per_second": 70.33
           },
           "post_reboot_vs_baseline": {
             "cpu_single_seconds": null,
             "cpu_multi_seconds": null,
-            "io_write_read_mib_per_second": -3.78
+            "io_write_read_mib_per_second": -1.35
           }
         }
       }
@@ -971,13 +971,13 @@
       "stderr": "",
       "observations": {
         "status": "ok",
-        "verdict": "harmful",
+        "verdict": "noisy",
         "confidence": "low",
-        "host_noise": "ok",
-        "primary_delta_pct": -32.108,
-        "verdict_reason": "post_reboot io_write_mib_per_second changed by -32.11%",
+        "host_noise": "noisy",
+        "primary_delta_pct": null,
+        "verdict_reason": "host preflight marked one or more stages noisy",
         "metrics_used": [
-          "io_write_mib_per_second"
+          "host_noise_meta"
         ],
         "safety_findings": [],
         "smoke_hard_success": {
@@ -1072,12 +1072,12 @@
           "apply_vs_baseline": {
             "cpu_single_seconds": null,
             "cpu_multi_seconds": null,
-            "io_write_read_mib_per_second": 66.7
+            "io_write_read_mib_per_second": 42.23
           },
           "post_reboot_vs_baseline": {
             "cpu_single_seconds": null,
             "cpu_multi_seconds": null,
-            "io_write_read_mib_per_second": 3.46
+            "io_write_read_mib_per_second": -21.83
           }
         }
       }
@@ -1210,12 +1210,12 @@
           "apply_vs_baseline": {
             "cpu_single_seconds": null,
             "cpu_multi_seconds": null,
-            "io_write_read_mib_per_second": 95.2
+            "io_write_read_mib_per_second": 241.0
           },
           "post_reboot_vs_baseline": {
             "cpu_single_seconds": null,
             "cpu_multi_seconds": null,
-            "io_write_read_mib_per_second": -3.57
+            "io_write_read_mib_per_second": 53.95
           }
         }
       }

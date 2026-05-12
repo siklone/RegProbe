@@ -1,6 +1,6 @@
 # Operator 96 Registry Value Campaign
 
-- Generated UTC: `2026-05-10T19:47:59Z`
+- Generated UTC: `2026-05-12T11:07:44Z`
 - Status: **ok**
 - Planned experiments: `8`
 - Completed in this run: `8`
@@ -22,11 +22,11 @@
 
 | Experiment | Verdict | Confidence | Host noise | Status | Hard smoke | Interactive | Primary Δ% | Post-reboot IO Δ% | Artifact |
 |---|---|---|---|---|---|---|---:|---:|---|
-| `operator96-001-enablelocallogonsid-0` | `harmful` | `low` | `ok` | `ok` | `True` | `ok`/`0` | `-81.014` | `-23.16` | `registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-001-enablelocallogonsid-0.json` |
-| `operator96-001-enablelocallogonsid-1` | `harmful` | `low` | `ok` | `ok` | `True` | `ok`/`0` | `-21.701` | `9.93` | `registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-001-enablelocallogonsid-1.json` |
-| `operator96-002-enablevirtualization-0` | `harmful` | `low` | `ok` | `ok` | `True` | `ok`/`0` | `-30.428` | `-21.91` | `registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-002-enablevirtualization-0.json` |
-| `operator96-006-tickcountrolloverdelay-0` | `low_confidence` | `low` | `ok` | `ok` | `True` | `ok`/`0` | `83.936` | `-3.1` | `registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-006-tickcountrolloverdelay-0.json` |
-| `operator96-006-tickcountrolloverdelay-1` | `harmful` | `low` | `ok` | `ok` | `True` | `ok`/`0` | `-18.155` | `14.49` | `registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-006-tickcountrolloverdelay-1.json` |
-| `operator96-009-forceenablemutantautoboost-1` | `harmful` | `low` | `ok` | `ok` | `True` | `ok`/`0` | `-11.535` | `-3.78` | `registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-009-forceenablemutantautoboost-1.json` |
-| `operator96-009-forceenablemutantautoboost-0` | `harmful` | `low` | `ok` | `ok` | `True` | `ok`/`0` | `-32.108` | `3.46` | `registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-009-forceenablemutantautoboost-0.json` |
-| `operator96-010-allowremotedasd-1` | `noisy` | `low` | `noisy` | `ok` | `True` | `ok`/`0` | `None` | `-3.57` | `registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-010-allowremotedasd-1.json` |
+| `operator96-001-enablelocallogonsid-0` | `noisy` | `low` | `noisy` | `ok` | `True` | `ok`/`0` | `None` | `14.48` | `registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-001-enablelocallogonsid-0.json` |
+| `operator96-001-enablelocallogonsid-1` | `low_confidence` | `low` | `ok` | `ok` | `True` | `ok`/`0` | `840.52` | `30.23` | `registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-001-enablelocallogonsid-1.json` |
+| `operator96-002-enablevirtualization-0` | `low_confidence` | `low` | `ok` | `ok` | `True` | `ok`/`0` | `104.124` | `14.33` | `registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-002-enablevirtualization-0.json` |
+| `operator96-006-tickcountrolloverdelay-0` | `harmful` | `low` | `ok` | `ok` | `True` | `ok`/`0` | `-13.65` | `2.02` | `registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-006-tickcountrolloverdelay-0.json` |
+| `operator96-006-tickcountrolloverdelay-1` | `harmful` | `low` | `ok` | `ok` | `True` | `ok`/`0` | `-31.872` | `-22.1` | `registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-006-tickcountrolloverdelay-1.json` |
+| `operator96-009-forceenablemutantautoboost-1` | `low_confidence` | `low` | `ok` | `ok` | `True` | `ok`/`0` | `92.613` | `-1.35` | `registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-009-forceenablemutantautoboost-1.json` |
+| `operator96-009-forceenablemutantautoboost-0` | `noisy` | `low` | `noisy` | `ok` | `True` | `ok`/`0` | `None` | `-21.83` | `registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-009-forceenablemutantautoboost-0.json` |
+| `operator96-010-allowremotedasd-1` | `noisy` | `low` | `noisy` | `ok` | `True` | `ok`/`0` | `None` | `53.95` | `registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-010-allowremotedasd-1.json` |

@@ -77,7 +77,7 @@ public sealed class SelectedTweakPaneViewModel : ViewModelBase, IDisposable
     public string DrawerTitle => IsExecutionMode
         ? "Execution log"
         : HasSelectedTweak
-            ? "Plan preview"
+            ? "Apply review"
             : "Plan";
 
     public string DrawerSummary

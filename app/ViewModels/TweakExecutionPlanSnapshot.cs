@@ -36,29 +36,28 @@ public sealed class TweakExecutionPlanSnapshot
         var lines = new List<string>();
         var targetValue = string.IsNullOrWhiteSpace(tweak.TargetValue) ? "preferred state" : tweak.TargetValue;
         var currentValue = string.IsNullOrWhiteSpace(tweak.CurrentValue) ? "Unknown" : tweak.CurrentValue;
+        var defaultValue = BuildDefaultValueLine(tweak);
 
-        if (tweak.HasRegistryPath)
-        {
-            lines.Add($"Set registry target: {tweak.RegistryPath} => {targetValue}");
-        }
-        else
-        {
-            lines.Add($"Apply target state: {tweak.Name} => {targetValue}");
-        }
+        lines.Add($"Current system value: {currentValue}");
+        lines.Add($"Known/default value: {defaultValue}");
+        lines.Add($"Target value RegProbe will apply: {targetValue}");
+        lines.Add(tweak.HasRegistryPath
+            ? $"Write target: {tweak.RegistryPath} => {targetValue}"
+            : $"Apply target state: {tweak.Name} => {targetValue}");
 
         lines.Add(tweak.RequiresElevation
             ? "Validate elevated host isolation and request administrator approval."
             : "Validate current shell context before applying the change.");
 
-        lines.Add($"Verify result: {currentValue} -> {targetValue}");
+        lines.Add($"Verify result after apply: current value should become {targetValue}.");
 
         var rollbackLine = tweak.RollbackSnapshotState switch
         {
-            "ready" => "Rollback story: verified and ready to restore.",
-            "partial" => "Rollback story: declared, but full verification is still pending.",
-            _ => "Rollback story: missing or still needs stronger proof."
+            "ready" => BuildRollbackLine(tweak, "verified and ready"),
+            "partial" => BuildRollbackLine(tweak, "declared, but full verification is still pending"),
+            _ => BuildRollbackLine(tweak, "missing or still needs stronger proof")
         };
-        lines.Add(rollbackLine);
+        lines.Add($"Rollback behavior: {rollbackLine}");
 
         var rollbackSummary = tweak.RollbackSnapshotState switch
         {
@@ -76,7 +75,29 @@ public sealed class TweakExecutionPlanSnapshot
         var exportText = string.Join(Environment.NewLine, numberedLines);
         return new TweakExecutionPlanSnapshot(
             numberedLines,
-            $"Plan ({numberedLines.Count} steps) • {rollbackSummary}",
+            $"Apply review ({numberedLines.Count} checks) • {rollbackSummary}",
             exportText);
+    }
+
+    private static string BuildDefaultValueLine(TweakItemViewModel tweak)
+    {
+        if (tweak.HasDefaultChoice)
+        {
+            return string.IsNullOrWhiteSpace(tweak.DefaultChoiceLabel)
+                ? "Built-in default option is available."
+                : tweak.DefaultChoiceLabel;
+        }
+
+        return "No known/default value is published on this card; restore uses the captured previous state.";
+    }
+
+    private static string BuildRollbackLine(TweakItemViewModel tweak, string state)
+    {
+        if (!string.IsNullOrWhiteSpace(tweak.RollbackStoryText))
+        {
+            return $"{state}. {tweak.RollbackStoryText}";
+        }
+
+        return state;
     }
 }

@@ -1,11 +1,12 @@
 # Operator96 Low-Noise Rerun Plan
 
-- Generated UTC: `2026-05-10T19:44:27Z`
+- Generated UTC: `2026-05-12T11:04:28Z`
 - Review: `registry-research-framework/audit/operator96-app-surface-review-20260510.json`
-- Candidate records: `85`
-- First tranche records: `5`
-- First tranche expected experiments: `10`
-- First tranche indexes: `1, 2, 6, 9, 10`
+- Candidate records: `84`
+- Start offset: `0`
+- Tranche records: `5`
+- Tranche expected experiments: `10`
+- Tranche indexes: `1, 2, 6, 9, 10`
 
 ## Commands
 
@@ -26,7 +27,7 @@
 - `post_reboot_delay_seconds`: `90`
 - `claim_rule`: `Rerun results may support app-card copy only if host_noise=ok and confidence is not low.`
 
-## First Tranche
+## Tranche
 
 | # | Value | Reason | Action |
 |---:|---|---|---|
