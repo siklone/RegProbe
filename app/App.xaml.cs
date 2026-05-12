@@ -17,7 +17,7 @@ public partial class App : WpfApplication
 
     protected override async void OnStartup(StartupEventArgs e)
     {
-        _singleInstance = new SingleInstanceManager();
+        _singleInstance = new SingleInstanceManager(e.Args);
         if (!_singleInstance.TryAcquire())
         {
             Shutdown(0);
@@ -132,6 +132,28 @@ public partial class App : WpfApplication
                 AppDiagnostics.Log("[App] Navigating to Diagnostics via arg");
                 mainViewModel.ShowAboutCommand.Execute(null);
             }
+        }
+
+        var navigationRequest = StartupNavigationRequest.TryParse(args);
+        if (navigationRequest is null)
+        {
+            return;
+        }
+
+        if (!string.IsNullOrWhiteSpace(navigationRequest.OpenTweakId))
+        {
+            mainViewModel.ShowConfigurationCommand.Execute(null);
+            var focused = StartupNavigationCoordinator.FocusTweakById(
+                mainViewModel.WorkspaceViewModel,
+                navigationRequest.OpenTweakId,
+                navigationRequest.ExpandPlanDrawer);
+            AppDiagnostics.Log(focused
+                ? $"[App] Focused tweak via startup arg: {navigationRequest.OpenTweakId}"
+                : $"[App] Startup requested unknown or hidden tweak: {navigationRequest.OpenTweakId}");
+        }
+        else if (navigationRequest.ExpandPlanDrawer)
+        {
+            mainViewModel.WorkspaceViewModel.SelectedTweakPane.IsPlanDrawerExpanded = true;
         }
     }
 

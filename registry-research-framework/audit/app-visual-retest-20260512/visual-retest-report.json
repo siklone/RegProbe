@@ -1,0 +1,85 @@
+{
+  "summary_source": "app-visual-retest",
+  "generated_utc": "2026-05-12T02:07:02Z",
+  "status": "ok",
+  "domain": "regprobe-win11-25h2-session",
+  "connect": "qemu:///session",
+  "app_exe": "C:\\Tools\\AppSmoke\\RegProbe.App.exe",
+  "tweak_id": "power.disable-network-power-saving.policy",
+  "startup_args": [
+    "--tweaks",
+    "--open-tweak",
+    "power.disable-network-power-saving.policy",
+    "--expand-plan"
+  ],
+  "launch": {
+    "status": "ok",
+    "summary_source": "app-visual-retest-launch",
+    "explorer_user": "REGPROBE25H2\\rai",
+    "process_detected": true,
+    "process": {
+      "id": 1956,
+      "process_name": "RegProbe.App",
+      "session_id": 1,
+      "path": "C:\\Tools\\AppSmoke\\RegProbe.App.exe"
+    }
+  },
+  "visual_checks": {
+    "selected_card": "Network Power and Multimedia Responsiveness",
+    "expected_badges_visible": [
+      "PROMOTED",
+      "A",
+      "Verified"
+    ],
+    "claim_boundary_visible": true,
+    "plan_drawer_visible": true,
+    "rollback_story_visible": true,
+    "proof_lane_pills_visible": [
+      "DOCS",
+      "RUNTIME",
+      "SOURCE",
+      "ROLLBACK"
+    ],
+    "apply_button_visible": true,
+    "more_menu_visible": true,
+    "qa_isolated_instance_verified": true
+  },
+  "live_qa_after_visual_window": {
+    "status": "ok",
+    "report_status": "ok",
+    "report_summary": "Apply/verify path completed and rollback restored the tweak.",
+    "report_contract_status": "ok",
+    "visual_window_left_open": true,
+    "isolation_reason": "--qa-run-tweak uses a per-process isolated single-instance key so an already-open visual/manual retest window cannot steal QA arguments."
+  },
+  "screenshots": [
+    {
+      "path": "registry-research-framework/audit/app-visual-retest-20260512/systemresponsiveness-open-tweak-awake.png",
+      "sha256": "a48ff6f68448994c333e2cf987dc2a4e7a9d0aeea831b7ac741526962189cc88",
+      "size_bytes": 71123,
+      "notes": "Initial awake capture after startup navigation opened the target tweak and plan drawer."
+    },
+    {
+      "path": "registry-research-framework/audit/app-visual-retest-20260512/systemresponsiveness-card-plan-clean.png",
+      "sha256": "fca32196b99371fc320432487cc2e0881e1bd42da187c61b666e83dbb9a6c11d",
+      "size_bytes": 74710,
+      "notes": "Clean card/plan capture after closing foreground smoke-test Notepad noise."
+    },
+    {
+      "path": "registry-research-framework/audit/app-visual-retest-20260512/systemresponsiveness-card-plan-isolated-qa.png",
+      "sha256": "56750ab5808beeec497a31f08a1012ee98b7f65833673a25a30ae1c1abefb9fb",
+      "size_bytes": 74754,
+      "notes": "Capture from the refactored current build after a live QA apply/verify/rollback pass completed while the visual retest window remained open."
+    }
+  ],
+  "linked_qa_artifacts": [
+    "registry-research-framework/audit/single-tweak-app-qa-systemresponsiveness-live-latest.json",
+    "registry-research-framework/audit/promoted-app-qa-batch-latest.json",
+    "registry-research-framework/audit/promoted-app-qa-coverage-latest.json",
+    "registry-research-framework/audit/app-retest-readiness-latest.json"
+  ],
+  "boundaries": [
+    "This is a visual/manual retest artifact; apply/verify/rollback truth remains in the linked JSON QA reports.",
+    "The screenshot proves startup navigation, visible card state, claim-boundary copy, proof-lane pills, and the plan/rollback drawer for the selected card."
+  ]
+}
