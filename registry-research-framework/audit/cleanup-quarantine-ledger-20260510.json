@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-12T01:41:09Z",
+  "generated_utc": "2026-05-12T01:48:57Z",
   "purpose": "Quarantine ledger for cleanup candidates. This ledger does not delete files.",
   "deletion_policy": [
     "No file is deleted by this generator.",
@@ -9,13 +9,13 @@
     "Manual review is required for raw ETL/PML and vm-tooling-staging bundles."
   ],
   "summary": {
-    "total_items": 55,
-    "delete_eligible_count": 1,
+    "total_items": 54,
+    "delete_eligible_count": 0,
     "referenced_count": 52,
-    "total_size_bytes": 678633457,
+    "total_size_bytes": 678629475,
     "categories": {
       "large-raw-trace-sample": 25,
-      "operator96-superseded-pilot": 5,
+      "operator96-superseded-pilot": 4,
       "vm-tooling-staging-oldest-sample": 25
     }
   },
@@ -121,27 +121,6 @@
       ],
       "delete_eligible": false,
       "recommended_action": "keep-referenced"
-    },
-    {
-      "path": "registry-research-framework/audit/operator-regadd-value-missing-bench-pilot-20260509.json",
-      "kind": "file",
-      "category": "operator96-superseded-pilot",
-      "size_bytes": 3982,
-      "stale_reason": "early operator value pilot superseded by full 179/179 matrix and enriched matrix",
-      "replacement_artifacts": [
-        "registry-research-framework/audit/operator96-value-campaign-tranche-20260509.json",
-        "registry-research-framework/audit/registry-value-experiment-analysis.json",
-        "registry-research-framework/audit/operator96-enriched-value-matrix-20260510.json"
-      ],
-      "reference_terms": [
-        "operator-regadd-value-missing-bench-pilot-20260509",
-        "operator-regadd-value-missing-bench-pilot-20260509.json",
-        "registry-research-framework/audit/operator-regadd-value-missing-bench-pilot-20260509.json"
-      ],
-      "live_reference_count": 0,
-      "references_sample": [],
-      "delete_eligible": true,
-      "recommended_action": "delete-after-review"
     },
     {
       "path": "evidence/files/vm-tooling-staging/defender-cloud-demo-extracted",

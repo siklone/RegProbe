@@ -1,6 +1,6 @@
 # Cleanup Quarantine Ledger
 
-Generated: `2026-05-12T01:41:09Z`
+Generated: `2026-05-12T01:48:57Z`
 
 Quarantine ledger for cleanup candidates. This ledger does not delete files.
 
@@ -15,17 +15,17 @@ Quarantine ledger for cleanup candidates. This ledger does not delete files.
 
 | Metric | Value |
 |---|---:|
-| Total items | 55 |
+| Total items | 54 |
 | Referenced items | 52 |
-| Delete eligible after review | 1 |
-| Total sampled size bytes | 678633457 |
+| Delete eligible after review | 0 |
+| Total sampled size bytes | 678629475 |
 
 ## Categories
 
 | Category | Count |
 |---|---:|
 | `large-raw-trace-sample` | 25 |
-| `operator96-superseded-pilot` | 5 |
+| `operator96-superseded-pilot` | 4 |
 | `vm-tooling-staging-oldest-sample` | 25 |
 
 ## Candidates
@@ -36,7 +36,6 @@ Quarantine ledger for cleanup candidates. This ledger does not delete files.
 | `registry-research-framework/audit/registry-value-experiments/pilot-perf-calculate-actual-utilization-0-recovery.md` | `operator96-superseded-pilot` | 2 | `False` | `keep-referenced` | pilot artifact superseded by full operator96 baseline, but referenced as safety example |
 | `registry-research-framework/audit/registry-value-experiments/pilot-perf-calculate-actual-utilization-0.json` | `operator96-superseded-pilot` | 5 | `False` | `keep-referenced` | pilot artifact superseded by full operator96 baseline, but referenced as safety example |
 | `registry-research-framework/audit/registry-value-experiments/pilot-perf-calculate-actual-utilization-0.md` | `operator96-superseded-pilot` | 5 | `False` | `keep-referenced` | pilot artifact superseded by full operator96 baseline, but referenced as safety example |
-| `registry-research-framework/audit/operator-regadd-value-missing-bench-pilot-20260509.json` | `operator96-superseded-pilot` | 0 | `True` | `delete-after-review` | early operator value pilot superseded by full 179/179 matrix and enriched matrix |
 | `evidence/files/vm-tooling-staging/defender-cloud-demo-extracted` | `vm-tooling-staging-oldest-sample` | 1 | `False` | `keep-pending-review` | staging diagnostic bundle; verify no record/evidence-index dependency before deletion |
 | `evidence/files/vm-tooling-staging/showinfotip-1-hits.csv..md` | `vm-tooling-staging-oldest-sample` | 6 | `False` | `keep-pending-review` | staging diagnostic bundle; verify no record/evidence-index dependency before deletion |
 | `evidence/files/vm-tooling-staging/showsuperhidden-1-hits.csv..md` | `vm-tooling-staging-oldest-sample` | 6 | `False` | `keep-pending-review` | staging diagnostic bundle; verify no record/evidence-index dependency before deletion |
