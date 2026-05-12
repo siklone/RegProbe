@@ -138,6 +138,52 @@ class VmKvmRegistryValueExperimentTests(unittest.TestCase):
         self.assertEqual(result["host_cpu_count"], 2)
         self.assertLess(result["host_cpu_busy_pct"], 20)
 
+    def test_run_experiment_aborts_before_apply_when_host_stays_noisy(self) -> None:
+        args = SimpleNamespace(
+            output_name="operator96-027-longdpcqueuethreshold-2",
+            value_name="LongDpcQueueThreshold",
+            value_data=2,
+            registry_path="HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
+            domain="regprobe-win11-25h2-session",
+            connect="qemu:///session",
+            smoke_profile="gui",
+            auto_revert_snapshot_on_boot_failure=True,
+            revert_snapshot_name="clean-25h2-qga",
+            reboot_wait_timeout=420,
+            stage_wait_timeout=420,
+            post_reboot_delay_seconds=90,
+            no_host_noise_gate=False,
+            host_noise_max_retries=0,
+            host_noise_retry_interval_seconds=0,
+            host_noise_busy_threshold_pct=12.5,
+            host_noise_load1_per_cpu_threshold=0.5,
+            host_noise_sample_interval_seconds=0,
+            abort_on_noisy_host=True,
+        )
+
+        with mock.patch.object(
+            registry_value_experiment,
+            "list_domain_snapshots",
+            return_value={"snapshots": ["clean-25h2-qga"], "returncode": 0, "stderr": ""},
+        ), mock.patch.object(
+            registry_value_experiment, "write_guest_stage_script"
+        ), mock.patch.object(
+            registry_value_experiment,
+            "wait_for_quiet_host",
+            return_value={"noise_status": "noisy", "noise_reason": "cpu_busy"},
+        ), mock.patch.object(
+            registry_value_experiment,
+            "run_guest_stage",
+        ) as run_guest_stage:
+            result = registry_value_experiment.run_experiment(args)
+
+        self.assertEqual(result["status"], "error")
+        self.assertEqual(result["error"], "host-noise-preflight-failed")
+        self.assertEqual(result["outcome"], "aborted-before-apply")
+        self.assertFalse(result["safety"]["mutation_started"])
+        self.assertEqual(result["preflight"]["host_noise_meta"]["noise_status"], "noisy")
+        run_guest_stage.assert_not_called()
+
     def test_stage_script_records_baseline_and_interactive_smoke(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             script_path = Path(tmp) / "stage.ps1"

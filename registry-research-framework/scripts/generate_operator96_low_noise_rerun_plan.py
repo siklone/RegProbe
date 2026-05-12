@@ -48,6 +48,7 @@ def build_campaign_command(
     host_noise_busy_threshold_pct: float = 12.5,
     host_noise_load1_per_cpu_threshold: float = 0.5,
     host_noise_sample_interval_seconds: float = 1.0,
+    abort_on_noisy_host: bool = True,
 ) -> list[str]:
     cmd = [
         "python3",
@@ -80,6 +81,8 @@ def build_campaign_command(
         str(host_noise_sample_interval_seconds),
         "--rerun",
     ]
+    if abort_on_noisy_host:
+        cmd.append("--abort-on-noisy-host")
     for index in indexes:
         cmd.extend(["--only-index", str(index)])
     if run:

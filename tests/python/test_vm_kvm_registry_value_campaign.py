@@ -225,6 +225,7 @@ class RegistryValueCampaignTests(unittest.TestCase):
                 host_noise_busy_threshold_pct=12.5,
                 host_noise_load1_per_cpu_threshold=0.5,
                 host_noise_sample_interval_seconds=1.0,
+                abort_on_noisy_host=True,
             )
         finally:
             self.module.run = original_run
@@ -237,6 +238,7 @@ class RegistryValueCampaignTests(unittest.TestCase):
         self.assertIn("12.5", command)
         self.assertIn("--host-noise-load1-per-cpu-threshold", command)
         self.assertIn("0.5", command)
+        self.assertIn("--abort-on-noisy-host", command)
 
 
 if __name__ == "__main__":

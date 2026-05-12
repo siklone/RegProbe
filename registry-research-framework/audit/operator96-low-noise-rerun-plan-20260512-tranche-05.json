@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-12T18:27:02Z",
+  "generated_utc": "2026-05-12T19:00:33Z",
   "review": "registry-research-framework/audit/operator96-app-surface-review-20260510.json",
   "campaign_id": "operator96-low-noise-rerun-20260510",
   "status": "PASS",
@@ -427,6 +427,7 @@
       "--host-noise-sample-interval-seconds",
       "1.0",
       "--rerun",
+      "--abort-on-noisy-host",
       "--only-index",
       "27",
       "--only-index",
@@ -468,6 +469,7 @@
       "--host-noise-sample-interval-seconds",
       "1.0",
       "--rerun",
+      "--abort-on-noisy-host",
       "--only-index",
       "27",
       "--only-index",

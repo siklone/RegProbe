@@ -34,6 +34,7 @@ class Operator96LowNoiseRerunPlanTests(unittest.TestCase):
         self.assertEqual(plan["summary"]["tranche_indexes"], [1, 2, 6, 9, 10])
         self.assertEqual(plan["summary"]["first_tranche_indexes"], [1, 2, 6, 9, 10])
         self.assertIn("--host-noise-max-retries", plan["commands"]["run"])
+        self.assertIn("--abort-on-noisy-host", plan["commands"]["run"])
         self.assertIn("--run", plan["commands"]["run"])
         self.assertNotIn("--run", plan["commands"]["plan_only"])
 
@@ -60,6 +61,7 @@ class Operator96LowNoiseRerunPlanTests(unittest.TestCase):
         self.assertIn("registry-research-framework/audit/registry-value-experiments-low-noise-20260510", command)
         self.assertEqual(command.count("--only-index"), 2)
         self.assertIn("--rerun", command)
+        self.assertIn("--abort-on-noisy-host", command)
 
     def test_custom_review_filters_only_low_noise_records(self):
         with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:

@@ -1081,6 +1081,13 @@ def run_experiment(args: argparse.Namespace) -> dict[str, Any]:
         load1_per_cpu_threshold=args.host_noise_load1_per_cpu_threshold,
         sample_interval_seconds=args.host_noise_sample_interval_seconds,
     )
+    if getattr(args, "abort_on_noisy_host", False) and apply_noise.get("noise_status") in {"noisy", "unknown"}:
+        result["status"] = "error"
+        result["error"] = "host-noise-preflight-failed"
+        result["outcome"] = "aborted-before-apply"
+        result["preflight"] = {"host_noise_meta": apply_noise}
+        result["safety"]["mutation_started"] = False
+        return result
     rc, payload, stage_payload = run_guest_stage(
         script=stage_script,
         stage="apply",
@@ -1344,6 +1351,11 @@ def main() -> int:
     parser.add_argument("--host-noise-busy-threshold-pct", type=float, default=20.0)
     parser.add_argument("--host-noise-load1-per-cpu-threshold", type=float, default=0.75)
     parser.add_argument("--host-noise-sample-interval-seconds", type=float, default=0.5)
+    parser.add_argument(
+        "--abort-on-noisy-host",
+        action="store_true",
+        help="Fail before registry apply if the host noise gate remains noisy or unknown after retries.",
+    )
     args = parser.parse_args()
 
     summary = run_experiment(args)

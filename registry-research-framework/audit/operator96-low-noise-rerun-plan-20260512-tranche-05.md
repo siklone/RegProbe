@@ -1,6 +1,6 @@
 # Operator96 Low-Noise Rerun Plan
 
-- Generated UTC: `2026-05-12T18:27:02Z`
+- Generated UTC: `2026-05-12T19:00:33Z`
 - Review: `registry-research-framework/audit/operator96-app-surface-review-20260510.json`
 - Candidate records: `84`
 - Start offset: `20`
@@ -11,9 +11,9 @@
 ## Commands
 
 - Plan only:
-  `python3 scripts/vm-kvm/run-guest-registry-value-campaign.py --output-dir registry-research-framework/audit/registry-value-experiments-low-noise-20260510 --campaign-output registry-research-framework/audit/operator96-low-noise-rerun-tranche-20260512-05.json --markdown-output registry-research-framework/audit/operator96-low-noise-rerun-tranche-20260512-05.md --max-values-per-record 2 --smoke-profile gui --stage-wait-timeout 420 --reboot-wait-timeout 420 --post-reboot-delay-seconds 90 --host-noise-max-retries 18 --host-noise-retry-interval-seconds 10.0 --host-noise-busy-threshold-pct 12.5 --host-noise-load1-per-cpu-threshold 0.5 --host-noise-sample-interval-seconds 1.0 --rerun --only-index 27 --only-index 28 --only-index 29 --only-index 30 --only-index 31`
+  `python3 scripts/vm-kvm/run-guest-registry-value-campaign.py --output-dir registry-research-framework/audit/registry-value-experiments-low-noise-20260510 --campaign-output registry-research-framework/audit/operator96-low-noise-rerun-tranche-20260512-05.json --markdown-output registry-research-framework/audit/operator96-low-noise-rerun-tranche-20260512-05.md --max-values-per-record 2 --smoke-profile gui --stage-wait-timeout 420 --reboot-wait-timeout 420 --post-reboot-delay-seconds 90 --host-noise-max-retries 18 --host-noise-retry-interval-seconds 10.0 --host-noise-busy-threshold-pct 12.5 --host-noise-load1-per-cpu-threshold 0.5 --host-noise-sample-interval-seconds 1.0 --rerun --abort-on-noisy-host --only-index 27 --only-index 28 --only-index 29 --only-index 30 --only-index 31`
 - Run:
-  `python3 scripts/vm-kvm/run-guest-registry-value-campaign.py --output-dir registry-research-framework/audit/registry-value-experiments-low-noise-20260510 --campaign-output registry-research-framework/audit/operator96-low-noise-rerun-tranche-20260512-05.json --markdown-output registry-research-framework/audit/operator96-low-noise-rerun-tranche-20260512-05.md --max-values-per-record 2 --smoke-profile gui --stage-wait-timeout 420 --reboot-wait-timeout 420 --post-reboot-delay-seconds 90 --host-noise-max-retries 18 --host-noise-retry-interval-seconds 10.0 --host-noise-busy-threshold-pct 12.5 --host-noise-load1-per-cpu-threshold 0.5 --host-noise-sample-interval-seconds 1.0 --rerun --only-index 27 --only-index 28 --only-index 29 --only-index 30 --only-index 31 --run`
+  `python3 scripts/vm-kvm/run-guest-registry-value-campaign.py --output-dir registry-research-framework/audit/registry-value-experiments-low-noise-20260510 --campaign-output registry-research-framework/audit/operator96-low-noise-rerun-tranche-20260512-05.json --markdown-output registry-research-framework/audit/operator96-low-noise-rerun-tranche-20260512-05.md --max-values-per-record 2 --smoke-profile gui --stage-wait-timeout 420 --reboot-wait-timeout 420 --post-reboot-delay-seconds 90 --host-noise-max-retries 18 --host-noise-retry-interval-seconds 10.0 --host-noise-busy-threshold-pct 12.5 --host-noise-load1-per-cpu-threshold 0.5 --host-noise-sample-interval-seconds 1.0 --rerun --abort-on-noisy-host --only-index 27 --only-index 28 --only-index 29 --only-index 30 --only-index 31 --run`
 
 ## Policy
 
