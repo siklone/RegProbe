@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -22,13 +23,21 @@ public sealed class SingleInstanceManager : IDisposable
     private bool _isFirstInstance;
     private bool _disposed;
 
-    public SingleInstanceManager()
+    public SingleInstanceManager(string[]? startupArgs = null)
     {
         var key = SingleInstanceKeyProvider.GetInstanceKey();
+        if (UsesIsolatedQaInstance(startupArgs))
+        {
+            key = $"{key}_qa_{Environment.ProcessId}";
+        }
+
         _mutexName = $"{MutexPrefix}_{key}";
         _pipeName = $"{PipePrefix}_{key}";
         _ipcClient = new SingleInstanceIpcClient(_pipeName, PipeConnectTimeoutMs, MaxRetries);
     }
+
+    internal static bool UsesIsolatedQaInstance(string[]? startupArgs)
+        => startupArgs?.Any(arg => arg.Equals("--qa-run-tweak", StringComparison.OrdinalIgnoreCase)) == true;
 
     public bool IsFirstInstance => _isFirstInstance;
 

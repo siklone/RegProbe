@@ -255,12 +255,13 @@ The latest batch file is only the newest run. If you want cumulative coverage ac
 - `registry-research-framework/audit/promoted-app-qa-coverage-latest.json`
 - `registry-research-framework/audit/promoted-app-qa-coverage-latest.md`
 
-Current audit snapshot: as of 2026-05-08, app retest readiness is passing with `265` app-surface entries, `0` app-only backlog items, `261` apply-allowed records, and `0` missing rollback stories. Promoted app-QA coverage is `258/258` (`100.0%`) with no uncovered promoted app-QA candidates remaining. Re-run readiness and the batch checker after changing app providers, evidence promotion gates, rollback behavior, or card mapping.
+Current audit snapshot: as of 2026-05-12, app retest readiness is passing with `265` app-surface entries, `0` app-only backlog items, `261` apply-allowed records, and `0` missing rollback stories. Promoted app-QA coverage is `258/258` (`100.0%`) with no uncovered promoted app-QA candidates remaining. Re-run readiness and the batch checker after changing app providers, evidence promotion gates, rollback behavior, or card mapping.
 
 The latest live retest also keeps two small operator artifacts:
 
 - `registry-research-framework/audit/app-retest-vm-health-latest.json`
 - `registry-research-framework/audit/single-tweak-check-systemresponsiveness-latest.json`
+- `registry-research-framework/audit/app-visual-retest-20260512/visual-retest-report.md`
 
 If a live card reports `already-applied`, that can be a valid pass: the app must still verify the desired value, keep the card/evidence contract intact, and skip standalone rollback only when no mutation was performed.
 

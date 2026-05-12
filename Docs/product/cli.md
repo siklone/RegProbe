@@ -195,6 +195,23 @@ Current audit snapshot: as of 2026-05-08, promoted app-QA coverage is `258/258` 
 
 An `already-applied` live result is still a valid retest pass when the report verifies the desired value, keeps the card snapshot contract green, and skips standalone rollback only because no mutation was performed.
 
+## Visual App Retest
+
+The desktop app accepts startup navigation flags for manual/visual retest passes:
+
+```powershell
+& 'C:\Tools\AppSmoke\RegProbe.App.exe' --tweaks --open-tweak 'power.disable-network-power-saving.policy' --expand-plan
+```
+
+Use this after the JSON QA pass when you want to screenshot or manually inspect the visible card, proof lanes, claim-boundary copy, and plan/rollback drawer for the same tweak that was exercised by `research qa-plan`.
+
+QA aliases are also accepted for scripts:
+
+- `--qa-open-tweak <id>`
+- `--qa-expand-plan`
+
+`--qa-run-tweak` launches with an isolated single-instance key. That keeps a visual/manual retest window from stealing QA arguments when the live apply/verify/rollback harness starts a separate scheduled-task instance.
+
 ## Retest Readiness
 
 `research readiness` is the fast preflight check to run before a manual desktop-app retest. The host-safe Python equivalent is `registry-research-framework/scripts/check_app_retest_readiness.py`.
