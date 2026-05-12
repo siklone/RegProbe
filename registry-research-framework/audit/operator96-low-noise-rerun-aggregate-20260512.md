@@ -1,19 +1,19 @@
 # Operator96 Low-Noise Rerun Aggregate
 
-- Generated UTC: `2026-05-12T17:00:19Z`
+- Generated UTC: `2026-05-12T18:24:58Z`
 - Status: `ok`
-- Source campaigns: `2`
-- Plan entries: `20`
-- Results: `20`
+- Source campaigns: `3`
+- Plan entries: `30`
+- Results: `30`
 - Non-ok: `0`
 - Hard smoke all: `True`
 - Noisy results: `2`
 
 ## Counts
 
-- Verdicts: `{'cpu_gain': 1, 'harmful': 14, 'low_confidence': 3, 'noisy': 2}`
-- Host noise: `{'noisy': 2, 'ok': 18}`
-- Confidence: `{'low': 19, 'medium': 1}`
+- Verdicts: `{'cpu_gain': 1, 'harmful': 22, 'low_confidence': 5, 'noisy': 2}`
+- Host noise: `{'noisy': 2, 'ok': 28}`
+- Confidence: `{'low': 29, 'medium': 1}`
 
 ## Source Campaigns
 
@@ -21,6 +21,7 @@
 |---|---|---:|---:|---:|
 | `registry-research-framework/audit/operator96-low-noise-rerun-tranche-20260512-02.json` | `ok` | 10 | 10 | 0 |
 | `registry-research-framework/audit/operator96-low-noise-rerun-tranche-20260512-03.json` | `ok` | 10 | 10 | 0 |
+| `registry-research-framework/audit/operator96-low-noise-rerun-tranche-20260512-04.json` | `ok` | 10 | 10 | 0 |
 
 ## Noisy Results
 
