@@ -1,19 +1,19 @@
 # Operator96 Low-Noise Rerun Aggregate
 
-- Generated UTC: `2026-05-12T18:24:58Z`
+- Generated UTC: `2026-05-13T00:03:07Z`
 - Status: `ok`
-- Source campaigns: `3`
-- Plan entries: `30`
-- Results: `30`
+- Source campaigns: `4`
+- Plan entries: `40`
+- Results: `40`
 - Non-ok: `0`
 - Hard smoke all: `True`
-- Noisy results: `2`
+- Noisy results: `0`
 
 ## Counts
 
-- Verdicts: `{'cpu_gain': 1, 'harmful': 22, 'low_confidence': 5, 'noisy': 2}`
-- Host noise: `{'noisy': 2, 'ok': 28}`
-- Confidence: `{'low': 29, 'medium': 1}`
+- Verdicts: `{'cpu_gain': 1, 'harmful': 32, 'low_confidence': 7}`
+- Host noise: `{'ok': 40}`
+- Confidence: `{'low': 38, 'medium': 2}`
 
 ## Source Campaigns
 
@@ -22,10 +22,4 @@
 | `registry-research-framework/audit/operator96-low-noise-rerun-tranche-20260512-02.json` | `ok` | 10 | 10 | 0 |
 | `registry-research-framework/audit/operator96-low-noise-rerun-tranche-20260512-03.json` | `ok` | 10 | 10 | 0 |
 | `registry-research-framework/audit/operator96-low-noise-rerun-tranche-20260512-04.json` | `ok` | 10 | 10 | 0 |
-
-## Noisy Results
-
-| Experiment | Value | Verdict | Host noise | Artifact |
-|---|---|---|---|---|
-| `operator96-020-forceidlegraceperiod-0` | `ForceIdleGracePeriod` | `noisy` | `noisy` | `registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-020-forceidlegraceperiod-0.json` |
-| `operator96-020-forceidlegraceperiod-1` | `ForceIdleGracePeriod` | `noisy` | `noisy` | `registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-020-forceidlegraceperiod-1.json` |
+| `registry-research-framework/audit/operator96-low-noise-rerun-tranche-20260512-05.json` | `ok` | 10 | 10 | 0 |

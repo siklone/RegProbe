@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-05-12T16:20:14Z",
+  "generated_utc": "2026-05-12T23:46:57Z",
   "status": "ok",
   "experiment_id": "operator96-020-forceidlegraceperiod-0",
   "domain": "regprobe-win11-25h2-session",
@@ -25,7 +25,7 @@
         },
         "execution": {
           "status": "exited",
-          "pid": 5792,
+          "pid": 10760,
           "path": "powershell.exe",
           "arg": [
             "-NoProfile",
@@ -47,13 +47,13 @@
             "gui"
           ],
           "exitcode": 0,
-          "stdout": "{\r\n    \"generated_utc\":  \"2026-05-12T16:19:52Z\",\r\n    \"stage\":  \"apply\",\r\n    \"experiment_id\":  \"operator96-020-forceidlegraceperiod-0\",\r\n    \"registry_path\":  \"HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\kernel\",\r\n    \"value_name\":  \"ForceIdleGracePeriod\",\r\n    \"value_data\":  \"0\",\r\n    \"smoke_profile\":  \"gui\",\r\n    \"status\":  \"ok\",\r\n    \"error\":  null,\r\n    \"baseline_smoke\":  {\r\n                           \"success\":  true,\r\n                           \"failure_count\":  1,\r\n                           \"hard_failure_count\":  0,\r\n                           \"best_effort_failure_count\":  1,\r\n                           \"items\":  [\r\n                                         {\r\n                                             \"name\":  \"shell-process-presence\",\r\n                                             \"success\":  true,\r\n                                             \"detail\":  \"explorer=True;SearchHost=True;ShellExperienceHost=False;sihost=True;StartMenuExperienceHost=True\"\r\n                                         },\r\n                                         {\r\n                                             \"name\":  \"cmd-ver\",\r\n                                             \"success\":  true,\r\n                                             \"detail\":  \"exit=0\"\r\n                                         },\r\n                                         {\r\n                                             \"name\":  \"powershell-version\",\r\n                                             \"success\":  true,\r\n                                             \"detail\":  \"exit=0\"\r\n                                         },\r\n                                         {\r\n                                             \"name\":  \"notepad-x64-launch\",\r\n                                             \"success\":  true,\r\n                                             \"detail\":  \"started=True;alive_after_2s=True\"\r\n                                         },\r\n                                         {\r\n                                             \"name\":  \"notepad-x86-launch\",\r\n                                             \"success\":  true,\r\n                                             \"detail\":  \"started=True;alive_after_2s=True\"\r\n                                         },\r\n                                         {\r\n                                             \"name\":  \"calc-launch\",\r\n                                             \"success\":  true,\r\n                                             \"detail\":  \"started=True;alive_after_2s=False\"\r\n                                         },\r\n                                         {\r\n                                             \"name\":  \"settings-uri-launch\",\r\n                                             \"success\":  true,\r\n                                             \"detail\":  \"launch-command-succeeded\"\r\n                                         },\r\n                                         {\r\n                                             \"name\":  \"store-uri-launch\",\r\n                                             \"success\":  false,\r\n                                             \"detail\":  \"This command cannot be run due to the error: The operation attempted is not supported.\"\r\n                                         }\r\n                                     ],\r\n                           \"interactive_user_smoke\":  {\r\n                                                          \"status\":  \"ok\",\r\n                                                          \"user\":  \"rai\",\r\n                                                          \"failure_count\":  0,\r\n                                                          \"items\":  [\r\n                                                                        {\r\n                                                                            \"name\":  \"interactive-settings-uri\",\r\n                                                                            \"success\":  true,\r\n                                                                            \"detail\":  \"launch-command-succeeded\"\r\n                                                                        },\r\n                                                                        {\r\n                                                                            \"name\":  \"interactive-store-uri\",\r\n                                                                            \"success\":  true,\r\n                                                                            \"detail\":  \"launch-command-succeeded\"\r\n                                                                        },\r\n                                                                        {\r\n                                                                            \"name\":  \"interactive-notepad-x64\",\r\n                                                                            \"success\":  true,\r\n                                                                            \"detail\":  \"started=true;alive_after_2s=True\"\r\n                                                                        },\r\n                                                                        {\r\n                                                                            \"name\":  \"interactive-notepad-x86\",\r\n                                                                            \"success\":  true,\r\n                                                                            \"detail\":  \"started=true;alive_after_2s=True\"\r\n                                                                        },\r\n                                                                        {\r\n                                                                            \"name\":  \"interactive-calc\",\r\n                                                                            \"success\":  true,\r\n                                                                            \"detail\":  \"started=true;alive_after_2s=False\"\r\n                                                                        }\r\n                                                                    ]\r\n                                                      },\r\n                           \"benchmarks\":  {\r\n                                              \"status\":  \"ok\",\r\n                                              \"version\":  2,\r\n                                              \"sample_count\":  5,\r\n                                              \"cpu_duration_seconds\":  3,\r\n                                              \"cpu_threads\":  2,\r\n                                              \"io_size_mib\":  16,\r\n                                              \"cpu_single_iterations_per_second\":  38296443.7551,\r\n                                              \"cpu_multi_iterations_per_second\":  74913977.0015,\r\n                                              \"io_write_mib_per_second\":  461.9818,\r\n                                              \"io_read_mib_per_second\":  1752.023,\r\n                                              \"io_write_read_mib_per_second\":  1107.0024,\r\n                                              \"spreads\":  {\r\n                                                              \"cpu_single_iterations_per_second\":  1.9,\r\n                                                              \"cpu_multi_iterations_per_second\":  5.42,\r\n                                                              \"io_write_mib_per_second\":  41.71,\r\n                                                              \"io_read_mib_per_second\":  162.05,\r\n                                                              \"io_write_read_mib_per_second\":  129.03\r\n                                                          },\r\n                                              \"samples\":  {\r\n                                                              \"cpu_single_iterations_per_second\":  [\r\n                                                                                                       38296443.7551,\r\n                                                                                                       38180479.6099,\r\n                                                                                                       38565889.0142,\r\n                                                                                                       37837495.0017,\r\n                                                                                                       38427242.8943\r\n                                                                                                   ],\r\n                                                              \"cpu_multi_iterations_per_second\":  [\r\n                                                                                                      75382510.6977,\r\n                                                                                                      74618020.4134,\r\n                                                                                                      71516763.9227,\r\n                                                                                                      74913977.0015,\r\n                                                                                                      75574216.2842\r\n                                                                                                  ],\r\n                                                              \"io_write_mib_per_second\":  [\r\n                                                                                              427.5217,\r\n                                                                                              409.9148,\r\n                                                                                              540.3233,\r\n                                                                                              461.9818,\r\n                                                                                              602.5889\r\n                                                                                          ],\r\n                                                              \"io_read_mib_per_second\":  [\r\n                                                                                             4238.2983,\r\n                                                                                             1399.1762,\r\n                                                                                             1670.0067,\r\n                                                                                             1752.023,\r\n                                                                                             2797.643\r\n                                                                                         ],\r\n                                                              \"io_write_read_mib_per_second\":  [\r\n                                                                                                   2332.91,\r\n                                                                                                   904.5455,\r\n                                                                                                   1105.165,\r\n                                                                                                   1107.0024,\r\n                                                                                                   1700.1159\r\n                                                                                               ]\r\n                                                          }\r\n                                          }\r\n                       },\r\n    \"original\":  {\r\n                     \"path\":  \"HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\kernel\",\r\n                     \"value_name\":  \"ForceIdleGracePeriod\",\r\n                     \"key_exists\":  true,\r\n                     \"value_exists\":  false,\r\n                     \"value\":  null,\r\n                     \"value_kind\":  null,\r\n                     \"value_hex\":  null,\r\n                     \"status\":  \"value-missing\",\r\n                     \"error\":  null\r\n                 },\r\n    \"after_apply\":  {\r\n                        \"path\":  \"HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\kernel\",\r\n                        \"value_name\":  \"ForceIdleGracePeriod\",\r\n                        \"key_exists\":  true,\r\n                        \"value_exists\":  true,\r\n                        \"value\":  0,\r\n                        \"value_kind\":  \"System.Int32\",\r\n                        \"value_hex\":  \"0x0\",\r\n                        \"status\":  \"value-present\",\r\n                        \"error\":  null\r\n                    },\r\n    \"smoke\":  {\r\n                  \"success\":  true,\r\n                  \"failure_count\":  1,\r\n                  \"hard_failure_count\":  0,\r\n                  \"best_effort_failure_count\":  1,\r\n                  \"items\":  [\r\n                                {\r\n                                    \"name\":  \"shell-process-presence\",\r\n                                    \"success\":  true,\r\n                                    \"detail\":  \"explorer=True;SearchHost=True;ShellExperienceHost=False;sihost=True;StartMenuExperienceHost=True\"\r\n                                },\r\n                                {\r\n                                    \"name\":  \"cmd-ver\",\r\n                                    \"success\":  true,\r\n                                    \"detail\":  \"exit=0\"\r\n                                },\r\n                                {\r\n                                    \"name\":  \"powershell-version\",\r\n                                    \"success\":  true,\r\n                                    \"detail\":  \"exit=0\"\r\n                                },\r\n                                {\r\n                                    \"name\":  \"notepad-x64-launch\",\r\n                                    \"success\":  true,\r\n                                    \"detail\":  \"started=True;alive_after_2s=True\"\r\n                                },\r\n                                {\r\n                                    \"name\":  \"notepad-x86-launch\",\r\n                                    \"success\":  true,\r\n                                    \"detail\":  \"started=True;alive_after_2s=True\"\r\n                                },\r\n                                {\r\n                                    \"name\":  \"calc-launch\",\r\n                                    \"success\":  true,\r\n                                    \"detail\":  \"started=True;alive_after_2s=False\"\r\n                                },\r\n                                {\r\n                                    \"name\":  \"settings-uri-launch\",\r\n                                    \"success\":  true,\r\n                                    \"detail\":  \"launch-command-succeeded\"\r\n                                },\r\n                                {\r\n                                    \"name\":  \"store-uri-launch\",\r\n                                    \"success\":  false,\r\n                                    \"detail\":  \"This command cannot be run due to the error: The operation attempted is not supported.\"\r\n                                }\r\n                            ],\r\n                  \"interactive_user_smoke\":  {\r\n                                                 \"status\":  \"ok\",\r\n                                                 \"user\":  \"rai\",\r\n                                                 \"failure_count\":  0,\r\n                                                 \"items\":  [\r\n                                                               {\r\n                                                                   \"name\":  \"interactive-settings-uri\",\r\n                                                                   \"success\":  true,\r\n                                                                   \"detail\":  \"launch-command-succeeded\"\r\n                                                               },\r\n                                                               {\r\n                                                                   \"name\":  \"interactive-store-uri\",\r\n                                                                   \"success\":  true,\r\n                                                                   \"detail\":  \"launch-command-succeeded\"\r\n                                                               },\r\n                                                               {\r\n                                                                   \"name\":  \"interactive-notepad-x64\",\r\n                                                                   \"success\":  true,\r\n                                                                   \"detail\":  \"started=true;alive_after_2s=True\"\r\n                                                               },\r\n                                                               {\r\n                                                                   \"name\":  \"interactive-notepad-x86\",\r\n                                                                   \"success\":  true,\r\n                                                                   \"detail\":  \"started=true;alive_after_2s=True\"\r\n                                                               },\r\n                                                               {\r\n                                                                   \"name\":  \"interactive-calc\",\r\n                                                                   \"success\":  true,\r\n                                                                   \"detail\":  \"started=true;alive_after_2s=False\"\r\n                                                               }\r\n                                                           ]\r\n                                             },\r\n                  \"benchmarks\":  {\r\n                                     \"status\":  \"ok\",\r\n                                     \"version\":  2,\r\n                                     \"sample_count\":  5,\r\n                                     \"cpu_duration_seconds\":  3,\r\n                                     \"cpu_threads\":  2,\r\n                                     \"io_size_mib\":  16,\r\n                                     \"cpu_single_iterations_per_second\":  38158839.3045,\r\n                                     \"cpu_multi_iterations_per_second\":  72542495.0888,\r\n                                     \"io_write_mib_per_second\":  543.6075,\r\n                                     \"io_read_mib_per_second\":  4121.056,\r\n                                     \"io_write_read_mib_per_second\":  2346.0893,\r\n                                     \"spreads\":  {\r\n                                                     \"cpu_single_iterations_per_second\":  3.46,\r\n                                                     \"cpu_multi_iterations_per_second\":  3.86,\r\n                                                     \"io_write_mib_per_second\":  48.55,\r\n                                                     \"io_read_mib_per_second\":  56.44,\r\n                                                     \"io_write_read_mib_per_second\":  47.16\r\n                                                 },\r\n                                     \"samples\":  {\r\n                                                     \"cpu_single_iterations_per_second\":  [\r\n                                                                                              38158839.3045,\r\n                                                                                              38198608.2841,\r\n                                                                                              37321806.8143,\r\n                                                                                              38174975.0809,\r\n                                                                                              36877318.6184\r\n                                                                                          ],\r\n                                                     \"cpu_multi_iterations_per_second\":  [\r\n                                                                                             73224231.4253,\r\n                                                                                             72690058.2593,\r\n                                                                                             72542495.0888,\r\n                                                                                             72027015.1806,\r\n                                                                                             70424113.5339\r\n                                                                                         ],\r\n                                                     \"io_write_mib_per_second\":  [\r\n                                                                                     371.3193,\r\n                                                                                     571.1226,\r\n                                                                                     635.266,\r\n                                                                                     543.6075,\r\n                                                                                     521.8185\r\n                                                                                 ],\r\n                                                     \"io_read_mib_per_second\":  [\r\n                                                                                    4800.192,\r\n                                                                                    4121.056,\r\n                                                                                    3275.5338,\r\n                                                                                    3727.6052,\r\n                                                                                    5601.6525\r\n                                                                                ],\r\n                                                     \"io_write_read_mib_per_second\":  [\r\n                                                                                          2585.7557,\r\n                                                                                          2346.0893,\r\n                                                                                          1955.3999,\r\n                                                                                          2135.6064,\r\n                                                                                          3061.7355\r\n                                                                                      ]\r\n                                                 }\r\n                                 }\r\n              }\r\n}\r\n",
+          "stdout": "{\r\n    \"generated_utc\":  \"2026-05-12T23:46:05Z\",\r\n    \"stage\":  \"apply\",\r\n    \"experiment_id\":  \"operator96-020-forceidlegraceperiod-0\",\r\n    \"registry_path\":  \"HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\kernel\",\r\n    \"value_name\":  \"ForceIdleGracePeriod\",\r\n    \"value_data\":  \"0\",\r\n    \"smoke_profile\":  \"gui\",\r\n    \"status\":  \"ok\",\r\n    \"error\":  null,\r\n    \"baseline_smoke\":  {\r\n                           \"success\":  true,\r\n                           \"failure_count\":  1,\r\n                           \"hard_failure_count\":  0,\r\n                           \"best_effort_failure_count\":  1,\r\n                           \"items\":  [\r\n                                         {\r\n                                             \"name\":  \"shell-process-presence\",\r\n                                             \"success\":  true,\r\n                                             \"detail\":  \"explorer=True;SearchHost=True;ShellExperienceHost=True;sihost=True;StartMenuExperienceHost=True\"\r\n                                         },\r\n                                         {\r\n                                             \"name\":  \"cmd-ver\",\r\n                                             \"success\":  true,\r\n                                             \"detail\":  \"exit=0\"\r\n                                         },\r\n                                         {\r\n                                             \"name\":  \"powershell-version\",\r\n                                             \"success\":  true,\r\n                                             \"detail\":  \"exit=0\"\r\n                                         },\r\n                                         {\r\n                                             \"name\":  \"notepad-x64-launch\",\r\n                                             \"success\":  true,\r\n                                             \"detail\":  \"started=True;alive_after_2s=True\"\r\n                                         },\r\n                                         {\r\n                                             \"name\":  \"notepad-x86-launch\",\r\n                                             \"success\":  true,\r\n                                             \"detail\":  \"started=True;alive_after_2s=True\"\r\n                                         },\r\n                                         {\r\n                                             \"name\":  \"calc-launch\",\r\n                                             \"success\":  true,\r\n                                             \"detail\":  \"started=True;alive_after_2s=False\"\r\n                                         },\r\n                                         {\r\n                                             \"name\":  \"settings-uri-launch\",\r\n                                             \"success\":  true,\r\n                                             \"detail\":  \"launch-command-succeeded\"\r\n                                         },\r\n                                         {\r\n                                             \"name\":  \"store-uri-launch\",\r\n                                             \"success\":  false,\r\n                                             \"detail\":  \"This command cannot be run due to the error: The operation attempted is not supported.\"\r\n                                         }\r\n                                     ],\r\n                           \"interactive_user_smoke\":  {\r\n                                                          \"status\":  \"ok\",\r\n                                                          \"user\":  \"rai\",\r\n                                                          \"failure_count\":  0,\r\n                                                          \"items\":  [\r\n                                                                        {\r\n                                                                            \"name\":  \"interactive-settings-uri\",\r\n                                                                            \"success\":  true,\r\n                                                                            \"detail\":  \"launch-command-succeeded\"\r\n                                                                        },\r\n                                                                        {\r\n                                                                            \"name\":  \"interactive-store-uri\",\r\n                                                                            \"success\":  true,\r\n                                                                            \"detail\":  \"launch-command-succeeded\"\r\n                                                                        },\r\n                                                                        {\r\n                                                                            \"name\":  \"interactive-notepad-x64\",\r\n                                                                            \"success\":  true,\r\n                                                                            \"detail\":  \"started=true;alive_after_2s=True\"\r\n                                                                        },\r\n                                                                        {\r\n                                                                            \"name\":  \"interactive-notepad-x86\",\r\n                                                                            \"success\":  true,\r\n                                                                            \"detail\":  \"started=true;alive_after_2s=True\"\r\n                                                                        },\r\n                                                                        {\r\n                                                                            \"name\":  \"interactive-calc\",\r\n                                                                            \"success\":  true,\r\n                                                                            \"detail\":  \"started=true;alive_after_2s=False\"\r\n                                                                        }\r\n                                                                    ]\r\n                                                      },\r\n                           \"benchmarks\":  {\r\n                                              \"status\":  \"ok\",\r\n                                              \"version\":  2,\r\n                                              \"sample_count\":  5,\r\n                                              \"cpu_duration_seconds\":  3,\r\n                                              \"cpu_threads\":  2,\r\n                                              \"io_size_mib\":  16,\r\n                                              \"cpu_single_iterations_per_second\":  38562074.7909,\r\n                                              \"cpu_multi_iterations_per_second\":  76290256.3192,\r\n                                              \"io_write_mib_per_second\":  436.8541,\r\n                                              \"io_read_mib_per_second\":  1859.6434,\r\n                                              \"io_write_read_mib_per_second\":  1184.7116,\r\n                                              \"spreads\":  {\r\n                                                              \"cpu_single_iterations_per_second\":  3.01,\r\n                                                              \"cpu_multi_iterations_per_second\":  0.79,\r\n                                                              \"io_write_mib_per_second\":  46.77,\r\n                                                              \"io_read_mib_per_second\":  210.6,\r\n                                                              \"io_write_read_mib_per_second\":  167.19\r\n                                                          },\r\n                                              \"samples\":  {\r\n                                                              \"cpu_single_iterations_per_second\":  [\r\n                                                                                                       37824213.4817,\r\n                                                                                                       38984005.6576,\r\n                                                                                                       38222004.1785,\r\n                                                                                                       38562074.7909,\r\n                                                                                                       38612083.1638\r\n                                                                                                   ],\r\n                                                              \"cpu_multi_iterations_per_second\":  [\r\n                                                                                                      76043612.9336,\r\n                                                                                                      76649641.6129,\r\n                                                                                                      76434814.6514,\r\n                                                                                                      76242435.6785,\r\n                                                                                                      76290256.3192\r\n                                                                                                  ],\r\n                                                              \"io_write_mib_per_second\":  [\r\n                                                                                              414.4552,\r\n                                                                                              305.4712,\r\n                                                                                              509.7798,\r\n                                                                                              436.8541,\r\n                                                                                              506.5776\r\n                                                                                          ],\r\n                                                              \"io_read_mib_per_second\":  [\r\n                                                                                             5685.8564,\r\n                                                                                             1833.3066,\r\n                                                                                             1859.6434,\r\n                                                                                             1769.383,\r\n                                                                                             3284.0722\r\n                                                                                         ],\r\n                                                              \"io_write_read_mib_per_second\":  [\r\n                                                                                                   3050.1558,\r\n                                                                                                   1069.3889,\r\n                                                                                                   1184.7116,\r\n                                                                                                   1103.1186,\r\n                                                                                                   1895.3249\r\n                                                                                               ]\r\n                                                          }\r\n                                          }\r\n                       },\r\n    \"original\":  {\r\n                     \"path\":  \"HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\kernel\",\r\n                     \"value_name\":  \"ForceIdleGracePeriod\",\r\n                     \"key_exists\":  true,\r\n                     \"value_exists\":  false,\r\n                     \"value\":  null,\r\n                     \"value_kind\":  null,\r\n                     \"value_hex\":  null,\r\n                     \"status\":  \"value-missing\",\r\n                     \"error\":  null\r\n                 },\r\n    \"after_apply\":  {\r\n                        \"path\":  \"HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\kernel\",\r\n                        \"value_name\":  \"ForceIdleGracePeriod\",\r\n                        \"key_exists\":  true,\r\n                        \"value_exists\":  true,\r\n                        \"value\":  0,\r\n                        \"value_kind\":  \"System.Int32\",\r\n                        \"value_hex\":  \"0x0\",\r\n                        \"status\":  \"value-present\",\r\n                        \"error\":  null\r\n                    },\r\n    \"smoke\":  {\r\n                  \"success\":  true,\r\n                  \"failure_count\":  1,\r\n                  \"hard_failure_count\":  0,\r\n                  \"best_effort_failure_count\":  1,\r\n                  \"items\":  [\r\n                                {\r\n                                    \"name\":  \"shell-process-presence\",\r\n                                    \"success\":  true,\r\n                                    \"detail\":  \"explorer=True;SearchHost=True;ShellExperienceHost=True;sihost=True;StartMenuExperienceHost=True\"\r\n                                },\r\n                                {\r\n                                    \"name\":  \"cmd-ver\",\r\n                                    \"success\":  true,\r\n                                    \"detail\":  \"exit=0\"\r\n                                },\r\n                                {\r\n                                    \"name\":  \"powershell-version\",\r\n                                    \"success\":  true,\r\n                                    \"detail\":  \"exit=0\"\r\n                                },\r\n                                {\r\n                                    \"name\":  \"notepad-x64-launch\",\r\n                                    \"success\":  true,\r\n                                    \"detail\":  \"started=True;alive_after_2s=True\"\r\n                                },\r\n                                {\r\n                                    \"name\":  \"notepad-x86-launch\",\r\n                                    \"success\":  true,\r\n                                    \"detail\":  \"started=True;alive_after_2s=True\"\r\n                                },\r\n                                {\r\n                                    \"name\":  \"calc-launch\",\r\n                                    \"success\":  true,\r\n                                    \"detail\":  \"started=True;alive_after_2s=False\"\r\n                                },\r\n                                {\r\n                                    \"name\":  \"settings-uri-launch\",\r\n                                    \"success\":  true,\r\n                                    \"detail\":  \"launch-command-succeeded\"\r\n                                },\r\n                                {\r\n                                    \"name\":  \"store-uri-launch\",\r\n                                    \"success\":  false,\r\n                                    \"detail\":  \"This command cannot be run due to the error: The operation attempted is not supported.\"\r\n                                }\r\n                            ],\r\n                  \"interactive_user_smoke\":  {\r\n                                                 \"status\":  \"ok\",\r\n                                                 \"user\":  \"rai\",\r\n                                                 \"failure_count\":  0,\r\n                                                 \"items\":  [\r\n                                                               {\r\n                                                                   \"name\":  \"interactive-settings-uri\",\r\n                                                                   \"success\":  true,\r\n                                                                   \"detail\":  \"launch-command-succeeded\"\r\n                                                               },\r\n                                                               {\r\n                                                                   \"name\":  \"interactive-store-uri\",\r\n                                                                   \"success\":  true,\r\n                                                                   \"detail\":  \"launch-command-succeeded\"\r\n                                                               },\r\n                                                               {\r\n                                                                   \"name\":  \"interactive-notepad-x64\",\r\n                                                                   \"success\":  true,\r\n                                                                   \"detail\":  \"started=true;alive_after_2s=True\"\r\n                                                               },\r\n                                                               {\r\n                                                                   \"name\":  \"interactive-notepad-x86\",\r\n                                                                   \"success\":  true,\r\n                                                                   \"detail\":  \"started=true;alive_after_2s=True\"\r\n                                                               },\r\n                                                               {\r\n                                                                   \"name\":  \"interactive-calc\",\r\n                                                                   \"success\":  true,\r\n                                                                   \"detail\":  \"started=true;alive_after_2s=False\"\r\n                                                               }\r\n                                                           ]\r\n                                             },\r\n                  \"benchmarks\":  {\r\n                                     \"status\":  \"ok\",\r\n                                     \"version\":  2,\r\n                                     \"sample_count\":  5,\r\n                                     \"cpu_duration_seconds\":  3,\r\n                                     \"cpu_threads\":  2,\r\n                                     \"io_size_mib\":  16,\r\n                                     \"cpu_single_iterations_per_second\":  38523664.2433,\r\n                                     \"cpu_multi_iterations_per_second\":  75711494.9333,\r\n                                     \"io_write_mib_per_second\":  495.5969,\r\n                                     \"io_read_mib_per_second\":  3479.0928,\r\n                                     \"io_write_read_mib_per_second\":  1987.3449,\r\n                                     \"spreads\":  {\r\n                                                     \"cpu_single_iterations_per_second\":  1.69,\r\n                                                     \"cpu_multi_iterations_per_second\":  2.16,\r\n                                                     \"io_write_mib_per_second\":  107.69,\r\n                                                     \"io_read_mib_per_second\":  100.44,\r\n                                                     \"io_write_read_mib_per_second\":  96.5\r\n                                                 },\r\n                                     \"samples\":  {\r\n                                                     \"cpu_single_iterations_per_second\":  [\r\n                                                                                              38168443.7999,\r\n                                                                                              38198925.4238,\r\n                                                                                              38523664.2433,\r\n                                                                                              38819423.1505,\r\n                                                                                              38636913.6651\r\n                                                                                          ],\r\n                                                     \"cpu_multi_iterations_per_second\":  [\r\n                                                                                             76063800.1109,\r\n                                                                                             75950778.3424,\r\n                                                                                             75711494.9333,\r\n                                                                                             74553481.3194,\r\n                                                                                             74425544.052\r\n                                                                                         ],\r\n                                                     \"io_write_mib_per_second\":  [\r\n                                                                                     603.6346,\r\n                                                                                     69.9484,\r\n                                                                                     453.0345,\r\n                                                                                     495.5969,\r\n                                                                                     505.7146\r\n                                                                                 ],\r\n                                                     \"io_read_mib_per_second\":  [\r\n                                                                                    4025.1572,\r\n                                                                                    3277.2111,\r\n                                                                                    3182.4963,\r\n                                                                                    3479.0928,\r\n                                                                                    6676.9603\r\n                                                                                ],\r\n                                                     \"io_write_read_mib_per_second\":  [\r\n                                                                                          2314.3959,\r\n                                                                                          1673.5798,\r\n                                                                                          1817.7654,\r\n                                                                                          1987.3449,\r\n                                                                                          3591.3374\r\n                                                                                      ]\r\n                                                 }\r\n                                 }\r\n              }\r\n}\r\n",
           "stderr": ""
         },
         "cleanup": null
       },
       "result": {
-        "generated_utc": "2026-05-12T16:19:52Z",
+        "generated_utc": "2026-05-12T23:46:05Z",
         "stage": "apply",
         "experiment_id": "operator96-020-forceidlegraceperiod-0",
         "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
@@ -71,7 +71,7 @@
             {
               "name": "shell-process-presence",
               "success": true,
-              "detail": "explorer=True;SearchHost=True;ShellExperienceHost=False;sihost=True;StartMenuExperienceHost=True"
+              "detail": "explorer=True;SearchHost=True;ShellExperienceHost=True;sihost=True;StartMenuExperienceHost=True"
             },
             {
               "name": "cmd-ver",
@@ -148,53 +148,53 @@
             "cpu_duration_seconds": 3,
             "cpu_threads": 2,
             "io_size_mib": 16,
-            "cpu_single_iterations_per_second": 38296443.7551,
-            "cpu_multi_iterations_per_second": 74913977.0015,
-            "io_write_mib_per_second": 461.9818,
-            "io_read_mib_per_second": 1752.023,
-            "io_write_read_mib_per_second": 1107.0024,
+            "cpu_single_iterations_per_second": 38562074.7909,
+            "cpu_multi_iterations_per_second": 76290256.3192,
+            "io_write_mib_per_second": 436.8541,
+            "io_read_mib_per_second": 1859.6434,
+            "io_write_read_mib_per_second": 1184.7116,
             "spreads": {
-              "cpu_single_iterations_per_second": 1.9,
-              "cpu_multi_iterations_per_second": 5.42,
-              "io_write_mib_per_second": 41.71,
-              "io_read_mib_per_second": 162.05,
-              "io_write_read_mib_per_second": 129.03
+              "cpu_single_iterations_per_second": 3.01,
+              "cpu_multi_iterations_per_second": 0.79,
+              "io_write_mib_per_second": 46.77,
+              "io_read_mib_per_second": 210.6,
+              "io_write_read_mib_per_second": 167.19
             },
             "samples": {
               "cpu_single_iterations_per_second": [
-                38296443.7551,
-                38180479.6099,
-                38565889.0142,
-                37837495.0017,
-                38427242.8943
+                37824213.4817,
+                38984005.6576,
+                38222004.1785,
+                38562074.7909,
+                38612083.1638
               ],
               "cpu_multi_iterations_per_second": [
-                75382510.6977,
-                74618020.4134,
-                71516763.9227,
-                74913977.0015,
-                75574216.2842
+                76043612.9336,
+                76649641.6129,
+                76434814.6514,
+                76242435.6785,
+                76290256.3192
               ],
               "io_write_mib_per_second": [
-                427.5217,
-                409.9148,
-                540.3233,
-                461.9818,
-                602.5889
+                414.4552,
+                305.4712,
+                509.7798,
+                436.8541,
+                506.5776
               ],
               "io_read_mib_per_second": [
-                4238.2983,
-                1399.1762,
-                1670.0067,
-                1752.023,
-                2797.643
+                5685.8564,
+                1833.3066,
+                1859.6434,
+                1769.383,
+                3284.0722
               ],
               "io_write_read_mib_per_second": [
-                2332.91,
-                904.5455,
-                1105.165,
-                1107.0024,
-                1700.1159
+                3050.1558,
+                1069.3889,
+                1184.7116,
+                1103.1186,
+                1895.3249
               ]
             }
           }
@@ -230,7 +230,7 @@
             {
               "name": "shell-process-presence",
               "success": true,
-              "detail": "explorer=True;SearchHost=True;ShellExperienceHost=False;sihost=True;StartMenuExperienceHost=True"
+              "detail": "explorer=True;SearchHost=True;ShellExperienceHost=True;sihost=True;StartMenuExperienceHost=True"
             },
             {
               "name": "cmd-ver",
@@ -307,53 +307,53 @@
             "cpu_duration_seconds": 3,
             "cpu_threads": 2,
             "io_size_mib": 16,
-            "cpu_single_iterations_per_second": 38158839.3045,
-            "cpu_multi_iterations_per_second": 72542495.0888,
-            "io_write_mib_per_second": 543.6075,
-            "io_read_mib_per_second": 4121.056,
-            "io_write_read_mib_per_second": 2346.0893,
+            "cpu_single_iterations_per_second": 38523664.2433,
+            "cpu_multi_iterations_per_second": 75711494.9333,
+            "io_write_mib_per_second": 495.5969,
+            "io_read_mib_per_second": 3479.0928,
+            "io_write_read_mib_per_second": 1987.3449,
             "spreads": {
-              "cpu_single_iterations_per_second": 3.46,
-              "cpu_multi_iterations_per_second": 3.86,
-              "io_write_mib_per_second": 48.55,
-              "io_read_mib_per_second": 56.44,
-              "io_write_read_mib_per_second": 47.16
+              "cpu_single_iterations_per_second": 1.69,
+              "cpu_multi_iterations_per_second": 2.16,
+              "io_write_mib_per_second": 107.69,
+              "io_read_mib_per_second": 100.44,
+              "io_write_read_mib_per_second": 96.5
             },
             "samples": {
               "cpu_single_iterations_per_second": [
-                38158839.3045,
-                38198608.2841,
-                37321806.8143,
-                38174975.0809,
-                36877318.6184
+                38168443.7999,
+                38198925.4238,
+                38523664.2433,
+                38819423.1505,
+                38636913.6651
               ],
               "cpu_multi_iterations_per_second": [
-                73224231.4253,
-                72690058.2593,
-                72542495.0888,
-                72027015.1806,
-                70424113.5339
+                76063800.1109,
+                75950778.3424,
+                75711494.9333,
+                74553481.3194,
+                74425544.052
               ],
               "io_write_mib_per_second": [
-                371.3193,
-                571.1226,
-                635.266,
-                543.6075,
-                521.8185
+                603.6346,
+                69.9484,
+                453.0345,
+                495.5969,
+                505.7146
               ],
               "io_read_mib_per_second": [
-                4800.192,
-                4121.056,
-                3275.5338,
-                3727.6052,
-                5601.6525
+                4025.1572,
+                3277.2111,
+                3182.4963,
+                3479.0928,
+                6676.9603
               ],
               "io_write_read_mib_per_second": [
-                2585.7557,
-                2346.0893,
-                1955.3999,
-                2135.6064,
-                3061.7355
+                2314.3959,
+                1673.5798,
+                1817.7654,
+                1987.3449,
+                3591.3374
               ]
             }
           }
@@ -362,16 +362,16 @@
       "host_noise_meta": {
         "noise_status": "ok",
         "noise_reason": null,
-        "host_cpu_busy_pct": 4.53,
-        "load1": 1.89,
-        "load5": 1.71,
+        "host_cpu_busy_pct": 6.87,
+        "load1": 1.35,
+        "load5": 2.02,
         "host_cpu_count": 16,
         "retry_count": 0,
         "max_retries": 18,
         "busy_threshold_pct": 12.5,
         "load1_per_cpu_threshold": 0.5,
-        "sample_started_utc": "2026-05-12T16:20:14Z",
-        "sample_finished_utc": "2026-05-12T16:20:15Z"
+        "sample_started_utc": "2026-05-12T23:46:57Z",
+        "sample_finished_utc": "2026-05-12T23:46:58Z"
       }
     },
     "post_reboot_rollback": {
@@ -390,7 +390,7 @@
         },
         "execution": {
           "status": "exited",
-          "pid": 5600,
+          "pid": 7312,
           "path": "powershell.exe",
           "arg": [
             "-NoProfile",
@@ -412,13 +412,13 @@
             "gui"
           ],
           "exitcode": 0,
-          "stdout": "{\r\n    \"generated_utc\":  \"2026-05-12T16:26:42Z\",\r\n    \"stage\":  \"post-reboot-rollback\",\r\n    \"experiment_id\":  \"operator96-020-forceidlegraceperiod-0\",\r\n    \"registry_path\":  \"HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\kernel\",\r\n    \"value_name\":  \"ForceIdleGracePeriod\",\r\n    \"value_data\":  \"0\",\r\n    \"smoke_profile\":  \"gui\",\r\n    \"status\":  \"ok\",\r\n    \"error\":  null,\r\n    \"after_reboot\":  {\r\n                         \"path\":  \"HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\kernel\",\r\n                         \"value_name\":  \"ForceIdleGracePeriod\",\r\n                         \"key_exists\":  true,\r\n                         \"value_exists\":  true,\r\n                         \"value\":  0,\r\n                         \"value_kind\":  \"System.Int32\",\r\n                         \"value_hex\":  \"0x0\",\r\n                         \"status\":  \"value-present\",\r\n                         \"error\":  null\r\n                     },\r\n    \"smoke\":  {\r\n                  \"success\":  true,\r\n                  \"failure_count\":  1,\r\n                  \"hard_failure_count\":  0,\r\n                  \"best_effort_failure_count\":  1,\r\n                  \"items\":  [\r\n                                {\r\n                                    \"name\":  \"shell-process-presence\",\r\n                                    \"success\":  true,\r\n                                    \"detail\":  \"explorer=True;SearchHost=True;ShellExperienceHost=False;sihost=True;StartMenuExperienceHost=True\"\r\n                                },\r\n                                {\r\n                                    \"name\":  \"cmd-ver\",\r\n                                    \"success\":  true,\r\n                                    \"detail\":  \"exit=0\"\r\n                                },\r\n                                {\r\n                                    \"name\":  \"powershell-version\",\r\n                                    \"success\":  true,\r\n                                    \"detail\":  \"exit=0\"\r\n                                },\r\n                                {\r\n                                    \"name\":  \"notepad-x64-launch\",\r\n                                    \"success\":  true,\r\n                                    \"detail\":  \"started=True;alive_after_2s=True\"\r\n                                },\r\n                                {\r\n                                    \"name\":  \"notepad-x86-launch\",\r\n                                    \"success\":  true,\r\n                                    \"detail\":  \"started=True;alive_after_2s=True\"\r\n                                },\r\n                                {\r\n                                    \"name\":  \"calc-launch\",\r\n                                    \"success\":  true,\r\n                                    \"detail\":  \"started=True;alive_after_2s=False\"\r\n                                },\r\n                                {\r\n                                    \"name\":  \"settings-uri-launch\",\r\n                                    \"success\":  true,\r\n                                    \"detail\":  \"launch-command-succeeded\"\r\n                                },\r\n                                {\r\n                                    \"name\":  \"store-uri-launch\",\r\n                                    \"success\":  false,\r\n                                    \"detail\":  \"This command cannot be run due to the error: The operation attempted is not supported.\"\r\n                                }\r\n                            ],\r\n                  \"interactive_user_smoke\":  {\r\n                                                 \"status\":  \"ok\",\r\n                                                 \"user\":  \"rai\",\r\n                                                 \"failure_count\":  0,\r\n                                                 \"items\":  [\r\n                                                               {\r\n                                                                   \"name\":  \"interactive-settings-uri\",\r\n                                                                   \"success\":  true,\r\n                                                                   \"detail\":  \"launch-command-succeeded\"\r\n                                                               },\r\n                                                               {\r\n                                                                   \"name\":  \"interactive-store-uri\",\r\n                                                                   \"success\":  true,\r\n                                                                   \"detail\":  \"launch-command-succeeded\"\r\n                                                               },\r\n                                                               {\r\n                                                                   \"name\":  \"interactive-notepad-x64\",\r\n                                                                   \"success\":  true,\r\n                                                                   \"detail\":  \"started=true;alive_after_2s=False\"\r\n                                                               },\r\n                                                               {\r\n                                                                   \"name\":  \"interactive-notepad-x86\",\r\n                                                                   \"success\":  true,\r\n                                                                   \"detail\":  \"started=true;alive_after_2s=True\"\r\n                                                               },\r\n                                                               {\r\n                                                                   \"name\":  \"interactive-calc\",\r\n                                                                   \"success\":  true,\r\n                                                                   \"detail\":  \"started=true;alive_after_2s=True\"\r\n                                                               }\r\n                                                           ]\r\n                                             },\r\n                  \"benchmarks\":  {\r\n                                     \"status\":  \"ok\",\r\n                                     \"version\":  2,\r\n                                     \"sample_count\":  5,\r\n                                     \"cpu_duration_seconds\":  3,\r\n                                     \"cpu_threads\":  2,\r\n                                     \"io_size_mib\":  16,\r\n                                     \"cpu_single_iterations_per_second\":  37226871.0225,\r\n                                     \"cpu_multi_iterations_per_second\":  68408725.0888,\r\n                                     \"io_write_mib_per_second\":  434.0678,\r\n                                     \"io_read_mib_per_second\":  1605.2814,\r\n                                     \"io_write_read_mib_per_second\":  1075.0776,\r\n                                     \"spreads\":  {\r\n                                                     \"cpu_single_iterations_per_second\":  3.19,\r\n                                                     \"cpu_multi_iterations_per_second\":  6.33,\r\n                                                     \"io_write_mib_per_second\":  42.75,\r\n                                                     \"io_read_mib_per_second\":  244.83,\r\n                                                     \"io_write_read_mib_per_second\":  179.31\r\n                                                 },\r\n                                     \"samples\":  {\r\n                                                     \"cpu_single_iterations_per_second\":  [\r\n                                                                                              37342837.6924,\r\n                                                                                              37481554.7257,\r\n                                                                                              36750869.313,\r\n                                                                                              36294910.005,\r\n                                                                                              37226871.0225\r\n                                                                                          ],\r\n                                                     \"cpu_multi_iterations_per_second\":  [\r\n                                                                                             68293927.5886,\r\n                                                                                             68408725.0888,\r\n                                                                                             68164226.6071,\r\n                                                                                             71038521.5172,\r\n                                                                                             72494705.6041\r\n                                                                                         ],\r\n                                                     \"io_write_mib_per_second\":  [\r\n                                                                                     359.3132,\r\n                                                                                     395.132,\r\n                                                                                     544.8738,\r\n                                                                                     434.0678,\r\n                                                                                     527.414\r\n                                                                                 ],\r\n                                                     \"io_read_mib_per_second\":  [\r\n                                                                                    5420.6051,\r\n                                                                                    1530.0609,\r\n                                                                                    1605.2814,\r\n                                                                                    1490.3407,\r\n                                                                                    2375.6143\r\n                                                                                ],\r\n                                                     \"io_write_read_mib_per_second\":  [\r\n                                                                                          2889.9591,\r\n                                                                                          962.5964,\r\n                                                                                          1075.0776,\r\n                                                                                          962.2043,\r\n                                                                                          1451.5142\r\n                                                                                      ]\r\n                                                 }\r\n                                 }\r\n              },\r\n    \"restore_action\":  \"removed-created-value\",\r\n    \"after_restore\":  {\r\n                          \"path\":  \"HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\kernel\",\r\n                          \"value_name\":  \"ForceIdleGracePeriod\",\r\n                          \"key_exists\":  true,\r\n                          \"value_exists\":  false,\r\n                          \"value\":  null,\r\n                          \"value_kind\":  null,\r\n                          \"value_hex\":  null,\r\n                          \"status\":  \"value-missing\",\r\n                          \"error\":  null\r\n                      }\r\n}\r\n",
+          "stdout": "{\r\n    \"generated_utc\":  \"2026-05-12T23:49:38Z\",\r\n    \"stage\":  \"post-reboot-rollback\",\r\n    \"experiment_id\":  \"operator96-020-forceidlegraceperiod-0\",\r\n    \"registry_path\":  \"HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\kernel\",\r\n    \"value_name\":  \"ForceIdleGracePeriod\",\r\n    \"value_data\":  \"0\",\r\n    \"smoke_profile\":  \"gui\",\r\n    \"status\":  \"ok\",\r\n    \"error\":  null,\r\n    \"after_reboot\":  {\r\n                         \"path\":  \"HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\kernel\",\r\n                         \"value_name\":  \"ForceIdleGracePeriod\",\r\n                         \"key_exists\":  true,\r\n                         \"value_exists\":  true,\r\n                         \"value\":  0,\r\n                         \"value_kind\":  \"System.Int32\",\r\n                         \"value_hex\":  \"0x0\",\r\n                         \"status\":  \"value-present\",\r\n                         \"error\":  null\r\n                     },\r\n    \"smoke\":  {\r\n                  \"success\":  true,\r\n                  \"failure_count\":  1,\r\n                  \"hard_failure_count\":  0,\r\n                  \"best_effort_failure_count\":  1,\r\n                  \"items\":  [\r\n                                {\r\n                                    \"name\":  \"shell-process-presence\",\r\n                                    \"success\":  true,\r\n                                    \"detail\":  \"explorer=True;SearchHost=True;ShellExperienceHost=False;sihost=True;StartMenuExperienceHost=True\"\r\n                                },\r\n                                {\r\n                                    \"name\":  \"cmd-ver\",\r\n                                    \"success\":  true,\r\n                                    \"detail\":  \"exit=0\"\r\n                                },\r\n                                {\r\n                                    \"name\":  \"powershell-version\",\r\n                                    \"success\":  true,\r\n                                    \"detail\":  \"exit=0\"\r\n                                },\r\n                                {\r\n                                    \"name\":  \"notepad-x64-launch\",\r\n                                    \"success\":  true,\r\n                                    \"detail\":  \"started=True;alive_after_2s=True\"\r\n                                },\r\n                                {\r\n                                    \"name\":  \"notepad-x86-launch\",\r\n                                    \"success\":  true,\r\n                                    \"detail\":  \"started=True;alive_after_2s=True\"\r\n                                },\r\n                                {\r\n                                    \"name\":  \"calc-launch\",\r\n                                    \"success\":  true,\r\n                                    \"detail\":  \"started=True;alive_after_2s=False\"\r\n                                },\r\n                                {\r\n                                    \"name\":  \"settings-uri-launch\",\r\n                                    \"success\":  true,\r\n                                    \"detail\":  \"launch-command-succeeded\"\r\n                                },\r\n                                {\r\n                                    \"name\":  \"store-uri-launch\",\r\n                                    \"success\":  false,\r\n                                    \"detail\":  \"This command cannot be run due to the error: The operation attempted is not supported.\"\r\n                                }\r\n                            ],\r\n                  \"interactive_user_smoke\":  {\r\n                                                 \"status\":  \"ok\",\r\n                                                 \"user\":  \"rai\",\r\n                                                 \"failure_count\":  0,\r\n                                                 \"items\":  [\r\n                                                               {\r\n                                                                   \"name\":  \"interactive-settings-uri\",\r\n                                                                   \"success\":  true,\r\n                                                                   \"detail\":  \"launch-command-succeeded\"\r\n                                                               },\r\n                                                               {\r\n                                                                   \"name\":  \"interactive-store-uri\",\r\n                                                                   \"success\":  true,\r\n                                                                   \"detail\":  \"launch-command-succeeded\"\r\n                                                               },\r\n                                                               {\r\n                                                                   \"name\":  \"interactive-notepad-x64\",\r\n                                                                   \"success\":  true,\r\n                                                                   \"detail\":  \"started=true;alive_after_2s=False\"\r\n                                                               },\r\n                                                               {\r\n                                                                   \"name\":  \"interactive-notepad-x86\",\r\n                                                                   \"success\":  true,\r\n                                                                   \"detail\":  \"started=true;alive_after_2s=True\"\r\n                                                               },\r\n                                                               {\r\n                                                                   \"name\":  \"interactive-calc\",\r\n                                                                   \"success\":  true,\r\n                                                                   \"detail\":  \"started=true;alive_after_2s=False\"\r\n                                                               }\r\n                                                           ]\r\n                                             },\r\n                  \"benchmarks\":  {\r\n                                     \"status\":  \"ok\",\r\n                                     \"version\":  2,\r\n                                     \"sample_count\":  5,\r\n                                     \"cpu_duration_seconds\":  3,\r\n                                     \"cpu_threads\":  2,\r\n                                     \"io_size_mib\":  16,\r\n                                     \"cpu_single_iterations_per_second\":  37842555.4004,\r\n                                     \"cpu_multi_iterations_per_second\":  73925278.3719,\r\n                                     \"io_write_mib_per_second\":  349.7092,\r\n                                     \"io_read_mib_per_second\":  1833.1386,\r\n                                     \"io_write_read_mib_per_second\":  1152.6592,\r\n                                     \"spreads\":  {\r\n                                                     \"cpu_single_iterations_per_second\":  2.85,\r\n                                                     \"cpu_multi_iterations_per_second\":  13.01,\r\n                                                     \"io_write_mib_per_second\":  48.64,\r\n                                                     \"io_read_mib_per_second\":  235.52,\r\n                                                     \"io_write_read_mib_per_second\":  185.5\r\n                                                 },\r\n                                     \"samples\":  {\r\n                                                     \"cpu_single_iterations_per_second\":  [\r\n                                                                                              36881656.3521,\r\n                                                                                              37960364.3843,\r\n                                                                                              37652373.7299,\r\n                                                                                              37842555.4004,\r\n                                                                                              37872236.6953\r\n                                                                                          ],\r\n                                                     \"cpu_multi_iterations_per_second\":  [\r\n                                                                                             69941116.4764,\r\n                                                                                             73957384.8893,\r\n                                                                                             74734659.1941,\r\n                                                                                             73925278.3719,\r\n                                                                                             65117749.9911\r\n                                                                                         ],\r\n                                                     \"io_write_mib_per_second\":  [\r\n                                                                                     313.8418,\r\n                                                                                     349.7092,\r\n                                                                                     472.1798,\r\n                                                                                     483.9393,\r\n                                                                                     336.1662\r\n                                                                                 ],\r\n                                                     \"io_read_mib_per_second\":  [\r\n                                                                                    6095.2381,\r\n                                                                                    1783.0675,\r\n                                                                                    1833.1386,\r\n                                                                                    1777.8963,\r\n                                                                                    4858.9389\r\n                                                                                ],\r\n                                                     \"io_write_read_mib_per_second\":  [\r\n                                                                                          3204.5399,\r\n                                                                                          1066.3884,\r\n                                                                                          1152.6592,\r\n                                                                                          1130.9178,\r\n                                                                                          2597.5526\r\n                                                                                      ]\r\n                                                 }\r\n                                 }\r\n              },\r\n    \"restore_action\":  \"removed-created-value\",\r\n    \"after_restore\":  {\r\n                          \"path\":  \"HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\kernel\",\r\n                          \"value_name\":  \"ForceIdleGracePeriod\",\r\n                          \"key_exists\":  true,\r\n                          \"value_exists\":  false,\r\n                          \"value\":  null,\r\n                          \"value_kind\":  null,\r\n                          \"value_hex\":  null,\r\n                          \"status\":  \"value-missing\",\r\n                          \"error\":  null\r\n                      }\r\n}\r\n",
           "stderr": ""
         },
         "cleanup": null
       },
       "result": {
-        "generated_utc": "2026-05-12T16:26:42Z",
+        "generated_utc": "2026-05-12T23:49:38Z",
         "stage": "post-reboot-rollback",
         "experiment_id": "operator96-020-forceidlegraceperiod-0",
         "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
@@ -513,7 +513,7 @@
               {
                 "name": "interactive-calc",
                 "success": true,
-                "detail": "started=true;alive_after_2s=True"
+                "detail": "started=true;alive_after_2s=False"
               }
             ]
           },
@@ -524,53 +524,53 @@
             "cpu_duration_seconds": 3,
             "cpu_threads": 2,
             "io_size_mib": 16,
-            "cpu_single_iterations_per_second": 37226871.0225,
-            "cpu_multi_iterations_per_second": 68408725.0888,
-            "io_write_mib_per_second": 434.0678,
-            "io_read_mib_per_second": 1605.2814,
-            "io_write_read_mib_per_second": 1075.0776,
+            "cpu_single_iterations_per_second": 37842555.4004,
+            "cpu_multi_iterations_per_second": 73925278.3719,
+            "io_write_mib_per_second": 349.7092,
+            "io_read_mib_per_second": 1833.1386,
+            "io_write_read_mib_per_second": 1152.6592,
             "spreads": {
-              "cpu_single_iterations_per_second": 3.19,
-              "cpu_multi_iterations_per_second": 6.33,
-              "io_write_mib_per_second": 42.75,
-              "io_read_mib_per_second": 244.83,
-              "io_write_read_mib_per_second": 179.31
+              "cpu_single_iterations_per_second": 2.85,
+              "cpu_multi_iterations_per_second": 13.01,
+              "io_write_mib_per_second": 48.64,
+              "io_read_mib_per_second": 235.52,
+              "io_write_read_mib_per_second": 185.5
             },
             "samples": {
               "cpu_single_iterations_per_second": [
-                37342837.6924,
-                37481554.7257,
-                36750869.313,
-                36294910.005,
-                37226871.0225
+                36881656.3521,
+                37960364.3843,
+                37652373.7299,
+                37842555.4004,
+                37872236.6953
               ],
               "cpu_multi_iterations_per_second": [
-                68293927.5886,
-                68408725.0888,
-                68164226.6071,
-                71038521.5172,
-                72494705.6041
+                69941116.4764,
+                73957384.8893,
+                74734659.1941,
+                73925278.3719,
+                65117749.9911
               ],
               "io_write_mib_per_second": [
-                359.3132,
-                395.132,
-                544.8738,
-                434.0678,
-                527.414
+                313.8418,
+                349.7092,
+                472.1798,
+                483.9393,
+                336.1662
               ],
               "io_read_mib_per_second": [
-                5420.6051,
-                1530.0609,
-                1605.2814,
-                1490.3407,
-                2375.6143
+                6095.2381,
+                1783.0675,
+                1833.1386,
+                1777.8963,
+                4858.9389
               ],
               "io_write_read_mib_per_second": [
-                2889.9591,
-                962.5964,
-                1075.0776,
-                962.2043,
-                1451.5142
+                3204.5399,
+                1066.3884,
+                1152.6592,
+                1130.9178,
+                2597.5526
               ]
             }
           }
@@ -589,18 +589,18 @@
         }
       },
       "host_noise_meta": {
-        "noise_status": "noisy",
-        "noise_reason": "cpu_busy=32.68% > threshold=12.5%",
-        "host_cpu_busy_pct": 32.68,
-        "load1": 4.86,
-        "load5": 3.71,
+        "noise_status": "ok",
+        "noise_reason": null,
+        "host_cpu_busy_pct": 7.77,
+        "load1": 3.17,
+        "load5": 2.52,
         "host_cpu_count": 16,
-        "retry_count": 18,
+        "retry_count": 0,
         "max_retries": 18,
         "busy_threshold_pct": 12.5,
         "load1_per_cpu_threshold": 0.5,
-        "sample_started_utc": "2026-05-12T16:23:45Z",
-        "sample_finished_utc": "2026-05-12T16:27:04Z"
+        "sample_started_utc": "2026-05-12T23:50:30Z",
+        "sample_finished_utc": "2026-05-12T23:50:31Z"
       }
     },
     "post_rollback": {
@@ -619,7 +619,7 @@
         },
         "execution": {
           "status": "exited",
-          "pid": 4448,
+          "pid": 5048,
           "path": "powershell.exe",
           "arg": [
             "-NoProfile",
@@ -641,13 +641,13 @@
             "gui"
           ],
           "exitcode": 0,
-          "stdout": "{\r\n    \"generated_utc\":  \"2026-05-12T16:32:59Z\",\r\n    \"stage\":  \"post-rollback\",\r\n    \"experiment_id\":  \"operator96-020-forceidlegraceperiod-0\",\r\n    \"registry_path\":  \"HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\kernel\",\r\n    \"value_name\":  \"ForceIdleGracePeriod\",\r\n    \"value_data\":  \"0\",\r\n    \"smoke_profile\":  \"gui\",\r\n    \"status\":  \"ok\",\r\n    \"error\":  null,\r\n    \"final\":  {\r\n                  \"path\":  \"HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\kernel\",\r\n                  \"value_name\":  \"ForceIdleGracePeriod\",\r\n                  \"key_exists\":  true,\r\n                  \"value_exists\":  false,\r\n                  \"value\":  null,\r\n                  \"value_kind\":  null,\r\n                  \"value_hex\":  null,\r\n                  \"status\":  \"value-missing\",\r\n                  \"error\":  null\r\n              },\r\n    \"smoke\":  {\r\n                  \"success\":  true,\r\n                  \"failure_count\":  1,\r\n                  \"hard_failure_count\":  0,\r\n                  \"best_effort_failure_count\":  1,\r\n                  \"items\":  [\r\n                                {\r\n                                    \"name\":  \"shell-process-presence\",\r\n                                    \"success\":  true,\r\n                                    \"detail\":  \"explorer=True;SearchHost=True;ShellExperienceHost=False;sihost=True;StartMenuExperienceHost=True\"\r\n                                },\r\n                                {\r\n                                    \"name\":  \"cmd-ver\",\r\n                                    \"success\":  true,\r\n                                    \"detail\":  \"exit=0\"\r\n                                },\r\n                                {\r\n                                    \"name\":  \"powershell-version\",\r\n                                    \"success\":  true,\r\n                                    \"detail\":  \"exit=0\"\r\n                                },\r\n                                {\r\n                                    \"name\":  \"notepad-x64-launch\",\r\n                                    \"success\":  true,\r\n                                    \"detail\":  \"started=True;alive_after_2s=True\"\r\n                                },\r\n                                {\r\n                                    \"name\":  \"notepad-x86-launch\",\r\n                                    \"success\":  true,\r\n                                    \"detail\":  \"started=True;alive_after_2s=True\"\r\n                                },\r\n                                {\r\n                                    \"name\":  \"calc-launch\",\r\n                                    \"success\":  true,\r\n                                    \"detail\":  \"started=True;alive_after_2s=False\"\r\n                                },\r\n                                {\r\n                                    \"name\":  \"settings-uri-launch\",\r\n                                    \"success\":  true,\r\n                                    \"detail\":  \"launch-command-succeeded\"\r\n                                },\r\n                                {\r\n                                    \"name\":  \"store-uri-launch\",\r\n                                    \"success\":  false,\r\n                                    \"detail\":  \"This command cannot be run due to the error: The operation attempted is not supported.\"\r\n                                }\r\n                            ],\r\n                  \"interactive_user_smoke\":  {\r\n                                                 \"status\":  \"ok\",\r\n                                                 \"user\":  \"rai\",\r\n                                                 \"failure_count\":  0,\r\n                                                 \"items\":  [\r\n                                                               {\r\n                                                                   \"name\":  \"interactive-settings-uri\",\r\n                                                                   \"success\":  true,\r\n                                                                   \"detail\":  \"launch-command-succeeded\"\r\n                                                               },\r\n                                                               {\r\n                                                                   \"name\":  \"interactive-store-uri\",\r\n                                                                   \"success\":  true,\r\n                                                                   \"detail\":  \"launch-command-succeeded\"\r\n                                                               },\r\n                                                               {\r\n                                                                   \"name\":  \"interactive-notepad-x64\",\r\n                                                                   \"success\":  true,\r\n                                                                   \"detail\":  \"started=true;alive_after_2s=False\"\r\n                                                               },\r\n                                                               {\r\n                                                                   \"name\":  \"interactive-notepad-x86\",\r\n                                                                   \"success\":  true,\r\n                                                                   \"detail\":  \"started=true;alive_after_2s=True\"\r\n                                                               },\r\n                                                               {\r\n                                                                   \"name\":  \"interactive-calc\",\r\n                                                                   \"success\":  true,\r\n                                                                   \"detail\":  \"started=true;alive_after_2s=True\"\r\n                                                               }\r\n                                                           ]\r\n                                             },\r\n                  \"benchmarks\":  {\r\n                                     \"status\":  \"ok\",\r\n                                     \"version\":  2,\r\n                                     \"sample_count\":  5,\r\n                                     \"cpu_duration_seconds\":  3,\r\n                                     \"cpu_threads\":  2,\r\n                                     \"io_size_mib\":  16,\r\n                                     \"cpu_single_iterations_per_second\":  37363462.6642,\r\n                                     \"cpu_multi_iterations_per_second\":  71429250.6475,\r\n                                     \"io_write_mib_per_second\":  429.9376,\r\n                                     \"io_read_mib_per_second\":  1678.1691,\r\n                                     \"io_write_read_mib_per_second\":  1070.4449,\r\n                                     \"spreads\":  {\r\n                                                     \"cpu_single_iterations_per_second\":  1.81,\r\n                                                     \"cpu_multi_iterations_per_second\":  3.21,\r\n                                                     \"io_write_mib_per_second\":  32.11,\r\n                                                     \"io_read_mib_per_second\":  180.49,\r\n                                                     \"io_write_read_mib_per_second\":  136.83\r\n                                                 },\r\n                                     \"samples\":  {\r\n                                                     \"cpu_single_iterations_per_second\":  [\r\n                                                                                              37370566.3028,\r\n                                                                                              37371822.9187,\r\n                                                                                              36694658.4697,\r\n                                                                                              37363462.6642,\r\n                                                                                              36941297.6114\r\n                                                                                          ],\r\n                                                     \"cpu_multi_iterations_per_second\":  [\r\n                                                                                             72838379.2059,\r\n                                                                                             72338854.2408,\r\n                                                                                             71189505.0548,\r\n                                                                                             71429250.6475,\r\n                                                                                             70544288.5966\r\n                                                                                         ],\r\n                                                     \"io_write_mib_per_second\":  [\r\n                                                                                     380.5383,\r\n                                                                                     424.0837,\r\n                                                                                     429.9376,\r\n                                                                                     518.5831,\r\n                                                                                     509.5687\r\n                                                                                 ],\r\n                                                     \"io_read_mib_per_second\":  [\r\n                                                                                    4651.1628,\r\n                                                                                    1678.1691,\r\n                                                                                    1676.2001,\r\n                                                                                    1622.3067,\r\n                                                                                    2808.1014\r\n                                                                                ],\r\n                                                     \"io_write_read_mib_per_second\":  [\r\n                                                                                          2515.8506,\r\n                                                                                          1051.1264,\r\n                                                                                          1053.0688,\r\n                                                                                          1070.4449,\r\n                                                                                          1658.8351\r\n                                                                                      ]\r\n                                                 }\r\n                                 }\r\n              }\r\n}\r\n",
+          "stdout": "{\r\n    \"generated_utc\":  \"2026-05-12T23:52:36Z\",\r\n    \"stage\":  \"post-rollback\",\r\n    \"experiment_id\":  \"operator96-020-forceidlegraceperiod-0\",\r\n    \"registry_path\":  \"HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\kernel\",\r\n    \"value_name\":  \"ForceIdleGracePeriod\",\r\n    \"value_data\":  \"0\",\r\n    \"smoke_profile\":  \"gui\",\r\n    \"status\":  \"ok\",\r\n    \"error\":  null,\r\n    \"final\":  {\r\n                  \"path\":  \"HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Session Manager\\\\kernel\",\r\n                  \"value_name\":  \"ForceIdleGracePeriod\",\r\n                  \"key_exists\":  true,\r\n                  \"value_exists\":  false,\r\n                  \"value\":  null,\r\n                  \"value_kind\":  null,\r\n                  \"value_hex\":  null,\r\n                  \"status\":  \"value-missing\",\r\n                  \"error\":  null\r\n              },\r\n    \"smoke\":  {\r\n                  \"success\":  true,\r\n                  \"failure_count\":  1,\r\n                  \"hard_failure_count\":  0,\r\n                  \"best_effort_failure_count\":  1,\r\n                  \"items\":  [\r\n                                {\r\n                                    \"name\":  \"shell-process-presence\",\r\n                                    \"success\":  true,\r\n                                    \"detail\":  \"explorer=True;SearchHost=True;ShellExperienceHost=False;sihost=True;StartMenuExperienceHost=True\"\r\n                                },\r\n                                {\r\n                                    \"name\":  \"cmd-ver\",\r\n                                    \"success\":  true,\r\n                                    \"detail\":  \"exit=0\"\r\n                                },\r\n                                {\r\n                                    \"name\":  \"powershell-version\",\r\n                                    \"success\":  true,\r\n                                    \"detail\":  \"exit=0\"\r\n                                },\r\n                                {\r\n                                    \"name\":  \"notepad-x64-launch\",\r\n                                    \"success\":  true,\r\n                                    \"detail\":  \"started=True;alive_after_2s=True\"\r\n                                },\r\n                                {\r\n                                    \"name\":  \"notepad-x86-launch\",\r\n                                    \"success\":  true,\r\n                                    \"detail\":  \"started=True;alive_after_2s=True\"\r\n                                },\r\n                                {\r\n                                    \"name\":  \"calc-launch\",\r\n                                    \"success\":  true,\r\n                                    \"detail\":  \"started=True;alive_after_2s=False\"\r\n                                },\r\n                                {\r\n                                    \"name\":  \"settings-uri-launch\",\r\n                                    \"success\":  true,\r\n                                    \"detail\":  \"launch-command-succeeded\"\r\n                                },\r\n                                {\r\n                                    \"name\":  \"store-uri-launch\",\r\n                                    \"success\":  false,\r\n                                    \"detail\":  \"This command cannot be run due to the error: The operation attempted is not supported.\"\r\n                                }\r\n                            ],\r\n                  \"interactive_user_smoke\":  {\r\n                                                 \"status\":  \"ok\",\r\n                                                 \"user\":  \"rai\",\r\n                                                 \"failure_count\":  0,\r\n                                                 \"items\":  [\r\n                                                               {\r\n                                                                   \"name\":  \"interactive-settings-uri\",\r\n                                                                   \"success\":  true,\r\n                                                                   \"detail\":  \"launch-command-succeeded\"\r\n                                                               },\r\n                                                               {\r\n                                                                   \"name\":  \"interactive-store-uri\",\r\n                                                                   \"success\":  true,\r\n                                                                   \"detail\":  \"launch-command-succeeded\"\r\n                                                               },\r\n                                                               {\r\n                                                                   \"name\":  \"interactive-notepad-x64\",\r\n                                                                   \"success\":  true,\r\n                                                                   \"detail\":  \"started=true;alive_after_2s=False\"\r\n                                                               },\r\n                                                               {\r\n                                                                   \"name\":  \"interactive-notepad-x86\",\r\n                                                                   \"success\":  true,\r\n                                                                   \"detail\":  \"started=true;alive_after_2s=True\"\r\n                                                               },\r\n                                                               {\r\n                                                                   \"name\":  \"interactive-calc\",\r\n                                                                   \"success\":  true,\r\n                                                                   \"detail\":  \"started=true;alive_after_2s=False\"\r\n                                                               }\r\n                                                           ]\r\n                                             },\r\n                  \"benchmarks\":  {\r\n                                     \"status\":  \"ok\",\r\n                                     \"version\":  2,\r\n                                     \"sample_count\":  5,\r\n                                     \"cpu_duration_seconds\":  3,\r\n                                     \"cpu_threads\":  2,\r\n                                     \"io_size_mib\":  16,\r\n                                     \"cpu_single_iterations_per_second\":  37919695.9635,\r\n                                     \"cpu_multi_iterations_per_second\":  73354974.63,\r\n                                     \"io_write_mib_per_second\":  400.8096,\r\n                                     \"io_read_mib_per_second\":  1801.0716,\r\n                                     \"io_write_read_mib_per_second\":  1136.9557,\r\n                                     \"spreads\":  {\r\n                                                     \"cpu_single_iterations_per_second\":  1.61,\r\n                                                     \"cpu_multi_iterations_per_second\":  13.51,\r\n                                                     \"io_write_mib_per_second\":  42.83,\r\n                                                     \"io_read_mib_per_second\":  214.84,\r\n                                                     \"io_write_read_mib_per_second\":  169.44\r\n                                                 },\r\n                                     \"samples\":  {\r\n                                                     \"cpu_single_iterations_per_second\":  [\r\n                                                                                              37531798.2328,\r\n                                                                                              37938330.9788,\r\n                                                                                              38140941.7246,\r\n                                                                                              37919695.9635,\r\n                                                                                              37660471.3733\r\n                                                                                          ],\r\n                                                     \"cpu_multi_iterations_per_second\":  [\r\n                                                                                             68247405.4061,\r\n                                                                                             73354974.63,\r\n                                                                                             74599420.1845,\r\n                                                                                             74471117.2273,\r\n                                                                                             64690911.9539\r\n                                                                                         ],\r\n                                                     \"io_write_mib_per_second\":  [\r\n                                                                                     327.973,\r\n                                                                                     344.4683,\r\n                                                                                     472.8398,\r\n                                                                                     499.6502,\r\n                                                                                     400.8096\r\n                                                                                 ],\r\n                                                     \"io_read_mib_per_second\":  [\r\n                                                                                    5551.1224,\r\n                                                                                    1681.6968,\r\n                                                                                    1801.0716,\r\n                                                                                    1721.8557,\r\n                                                                                    4215.7405\r\n                                                                                ],\r\n                                                     \"io_write_read_mib_per_second\":  [\r\n                                                                                          2939.5477,\r\n                                                                                          1013.0826,\r\n                                                                                          1136.9557,\r\n                                                                                          1110.753,\r\n                                                                                          2308.2751\r\n                                                                                      ]\r\n                                                 }\r\n                                 }\r\n              }\r\n}\r\n",
           "stderr": ""
         },
         "cleanup": null
       },
       "result": {
-        "generated_utc": "2026-05-12T16:32:59Z",
+        "generated_utc": "2026-05-12T23:52:36Z",
         "stage": "post-rollback",
         "experiment_id": "operator96-020-forceidlegraceperiod-0",
         "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
@@ -742,7 +742,7 @@
               {
                 "name": "interactive-calc",
                 "success": true,
-                "detail": "started=true;alive_after_2s=True"
+                "detail": "started=true;alive_after_2s=False"
               }
             ]
           },
@@ -753,71 +753,71 @@
             "cpu_duration_seconds": 3,
             "cpu_threads": 2,
             "io_size_mib": 16,
-            "cpu_single_iterations_per_second": 37363462.6642,
-            "cpu_multi_iterations_per_second": 71429250.6475,
-            "io_write_mib_per_second": 429.9376,
-            "io_read_mib_per_second": 1678.1691,
-            "io_write_read_mib_per_second": 1070.4449,
+            "cpu_single_iterations_per_second": 37919695.9635,
+            "cpu_multi_iterations_per_second": 73354974.63,
+            "io_write_mib_per_second": 400.8096,
+            "io_read_mib_per_second": 1801.0716,
+            "io_write_read_mib_per_second": 1136.9557,
             "spreads": {
-              "cpu_single_iterations_per_second": 1.81,
-              "cpu_multi_iterations_per_second": 3.21,
-              "io_write_mib_per_second": 32.11,
-              "io_read_mib_per_second": 180.49,
-              "io_write_read_mib_per_second": 136.83
+              "cpu_single_iterations_per_second": 1.61,
+              "cpu_multi_iterations_per_second": 13.51,
+              "io_write_mib_per_second": 42.83,
+              "io_read_mib_per_second": 214.84,
+              "io_write_read_mib_per_second": 169.44
             },
             "samples": {
               "cpu_single_iterations_per_second": [
-                37370566.3028,
-                37371822.9187,
-                36694658.4697,
-                37363462.6642,
-                36941297.6114
+                37531798.2328,
+                37938330.9788,
+                38140941.7246,
+                37919695.9635,
+                37660471.3733
               ],
               "cpu_multi_iterations_per_second": [
-                72838379.2059,
-                72338854.2408,
-                71189505.0548,
-                71429250.6475,
-                70544288.5966
+                68247405.4061,
+                73354974.63,
+                74599420.1845,
+                74471117.2273,
+                64690911.9539
               ],
               "io_write_mib_per_second": [
-                380.5383,
-                424.0837,
-                429.9376,
-                518.5831,
-                509.5687
+                327.973,
+                344.4683,
+                472.8398,
+                499.6502,
+                400.8096
               ],
               "io_read_mib_per_second": [
-                4651.1628,
-                1678.1691,
-                1676.2001,
-                1622.3067,
-                2808.1014
+                5551.1224,
+                1681.6968,
+                1801.0716,
+                1721.8557,
+                4215.7405
               ],
               "io_write_read_mib_per_second": [
-                2515.8506,
-                1051.1264,
-                1053.0688,
-                1070.4449,
-                1658.8351
+                2939.5477,
+                1013.0826,
+                1136.9557,
+                1110.753,
+                2308.2751
               ]
             }
           }
         }
       },
       "host_noise_meta": {
-        "noise_status": "noisy",
-        "noise_reason": "cpu_busy=32.81% > threshold=12.5%",
-        "host_cpu_busy_pct": 32.81,
-        "load1": 4.96,
-        "load5": 4.6,
+        "noise_status": "ok",
+        "noise_reason": null,
+        "host_cpu_busy_pct": 6.81,
+        "load1": 2.06,
+        "load5": 2.41,
         "host_cpu_count": 16,
-        "retry_count": 18,
+        "retry_count": 0,
         "max_retries": 18,
         "busy_threshold_pct": 12.5,
         "load1_per_cpu_threshold": 0.5,
-        "sample_started_utc": "2026-05-12T16:30:03Z",
-        "sample_finished_utc": "2026-05-12T16:33:22Z"
+        "sample_started_utc": "2026-05-12T23:53:28Z",
+        "sample_finished_utc": "2026-05-12T23:53:29Z"
       }
     }
   },
@@ -1082,7 +1082,7 @@
               "qemu:///session",
               "qemu-agent-command",
               "regprobe-win11-25h2-session",
-              "{\"execute\":\"guest-exec-status\",\"arguments\":{\"pid\":2880}}"
+              "{\"execute\":\"guest-exec-status\",\"arguments\":{\"pid\":4216}}"
             ],
             "returncode": 0,
             "stdout": "{\"return\":{\"exitcode\":0,\"out-data\":\"bnQgYXV0aG9yaXR5XHN5c3RlbQ0K\",\"exited\":true}}",
@@ -1093,7 +1093,7 @@
               "exited": true
             },
             "phase": "guest-exec-status",
-            "pid": 2880,
+            "pid": 4216,
             "exitcode": 0,
             "out_data": "nt authority\\system\r\n",
             "err_data": ""
@@ -1350,7 +1350,7 @@
               "qemu:///session",
               "qemu-agent-command",
               "regprobe-win11-25h2-session",
-              "{\"execute\":\"guest-exec-status\",\"arguments\":{\"pid\":6440}}"
+              "{\"execute\":\"guest-exec-status\",\"arguments\":{\"pid\":8448}}"
             ],
             "returncode": 0,
             "stdout": "{\"return\":{\"exitcode\":0,\"out-data\":\"bnQgYXV0aG9yaXR5XHN5c3RlbQ0K\",\"exited\":true}}",
@@ -1361,7 +1361,7 @@
               "exited": true
             },
             "phase": "guest-exec-status",
-            "pid": 6440,
+            "pid": 8448,
             "exitcode": 0,
             "out_data": "nt authority\\system\r\n",
             "err_data": ""
