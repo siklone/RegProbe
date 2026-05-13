@@ -1,11 +1,11 @@
 # Operator96 App Surface Review
 
-- Generated UTC: `2026-05-12T00:53:19Z`
+- Generated UTC: `2026-05-13T22:40:23Z`
 - Matrix: `registry-research-framework/audit/operator96-enriched-value-matrix-20260510.json`
 - Records: `96`
 - Ready for bounded app card: `0`
-- Needs low-noise rerun: `84`
-- Blocked by gate: `12`
+- Needs low-noise rerun: `79`
+- Blocked by gate: `17`
 - Blocked by safety: `0`
 
 ## Policy
@@ -16,23 +16,23 @@
 
 ## Buckets
 
-- `blocked_by_gate`: `12`
-- `needs_low_noise_rerun`: `84`
+- `blocked_by_gate`: `17`
+- `needs_low_noise_rerun`: `79`
 
 ## Records
 
 | # | Value | Bucket | Reason | Action |
 |---:|---|---|---|---|
-| 1 | `EnableLocalLogonSid` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 2 | `EnableVirtualization` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
+| 1 | `EnableLocalLogonSid` | `blocked_by_gate` | rollback-not-tested | do-not-surface-unless-blocker-is-researched-away |
+| 2 | `EnableVirtualization` | `blocked_by_gate` | rollback-not-tested | do-not-surface-unless-blocker-is-researched-away |
 | 3 | `AdditionalCriticalWorkerThreads` | `blocked_by_gate` | rollback-not-tested, kernel-worker-thread-override | do-not-surface-unless-blocker-is-researched-away |
 | 4 | `AdditionalDelayedWorkerThreads` | `blocked_by_gate` | rollback-not-tested, kernel-worker-thread-override | do-not-surface-unless-blocker-is-researched-away |
 | 5 | `UuidSequenceNumber` | `blocked_by_gate` | rollback-not-tested | do-not-surface-unless-blocker-is-researched-away |
-| 6 | `TickcountRolloverDelay` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
+| 6 | `TickcountRolloverDelay` | `blocked_by_gate` | rollback-not-tested | do-not-surface-unless-blocker-is-researched-away |
 | 7 | `KernelWorkerTestFlags` | `blocked_by_gate` | rollback-not-tested, kernel-worker-thread-override | do-not-surface-unless-blocker-is-researched-away |
 | 8 | `MaximumKernelWorkerThreads` | `blocked_by_gate` | rollback-not-tested, kernel-worker-thread-override | do-not-surface-unless-blocker-is-researched-away |
-| 9 | `ForceEnableMutantAutoboost` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 10 | `AllowRemoteDASD` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
+| 9 | `ForceEnableMutantAutoboost` | `blocked_by_gate` | rollback-not-tested | do-not-surface-unless-blocker-is-researched-away |
+| 10 | `AllowRemoteDASD` | `blocked_by_gate` | rollback-not-tested | do-not-surface-unless-blocker-is-researched-away |
 | 11 | `DisableDiskCounters` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
 | 12 | `IoAllowLoadCrashDumpDriver` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
 | 13 | `IoEnableSessionZeroAccessCheck` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
@@ -111,7 +111,7 @@
 | 86 | `HeteroHgsPlusDisabled` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
 | 87 | `IpiLastClockOwnerDisable` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
 | 88 | `PowerWatchdogRequestQueueTimeoutMsec` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 89 | `PowerWatchdogPoCalloutTimeoutMsec` | `blocked_by_gate` | safety-finding-present | do-not-surface-unless-blocker-is-researched-away |
+| 89 | `PowerWatchdogPoCalloutTimeoutMsec` | `blocked_by_gate` | rollback-not-tested | do-not-surface-unless-blocker-is-researched-away |
 | 90 | `PowerWatchdogPowerOnGdiTimeoutMsec` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
 | 91 | `PowerWatchdogDwmSyncFlushTimeoutMsec` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
 | 92 | `PowerWatchdogDrvSetMonitorTimeoutMsec` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |

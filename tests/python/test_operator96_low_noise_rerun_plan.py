@@ -29,10 +29,10 @@ class Operator96LowNoiseRerunPlanTests(unittest.TestCase):
         plan = self.module.build_plan(tranche_size=5)
 
         self.assertEqual(plan["status"], "PASS")
-        self.assertEqual(plan["summary"]["candidate_record_count"], 84)
+        self.assertEqual(plan["summary"]["candidate_record_count"], 79)
         self.assertEqual(plan["summary"]["start_offset"], 0)
-        self.assertEqual(plan["summary"]["tranche_indexes"], [1, 2, 6, 9, 10])
-        self.assertEqual(plan["summary"]["first_tranche_indexes"], [1, 2, 6, 9, 10])
+        self.assertEqual(plan["summary"]["tranche_indexes"], [11, 12, 13, 14, 15])
+        self.assertEqual(plan["summary"]["first_tranche_indexes"], [11, 12, 13, 14, 15])
         self.assertIn("--host-noise-max-retries", plan["commands"]["run"])
         self.assertIn("--abort-on-noisy-host", plan["commands"]["run"])
         self.assertIn("--run", plan["commands"]["run"])
@@ -49,7 +49,7 @@ class Operator96LowNoiseRerunPlanTests(unittest.TestCase):
 
         self.assertEqual(plan["summary"]["start_offset"], 5)
         self.assertEqual(plan["summary"]["tranche_record_count"], 5)
-        self.assertEqual(plan["summary"]["tranche_indexes"], [11, 12, 13, 14, 15])
+        self.assertEqual(plan["summary"]["tranche_indexes"], [16, 17, 18, 19, 20])
         self.assertIn("audit/low-noise-02", plan["commands"]["run"])
         self.assertIn("audit/tranche-02.json", plan["commands"]["run"])
         self.assertIn("audit/tranche-02.md", plan["commands"]["run"])

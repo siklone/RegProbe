@@ -52,14 +52,14 @@ class Operator96AppSurfaceReviewTests(unittest.TestCase):
     def setUp(self):
         self.module = load_module()
 
-    def test_real_repo_requires_low_noise_rerun_before_app_cards(self):
+    def test_real_repo_keeps_low_confidence_records_out_of_app_cards(self):
         review = self.module.build_review()
 
         self.assertEqual(review["status"], "PASS")
         self.assertEqual(review["summary"]["record_count"], 96)
         self.assertEqual(review["summary"]["ready_for_bounded_app_card"], 0)
-        self.assertEqual(review["summary"]["needs_low_noise_rerun"], 84)
-        self.assertEqual(review["summary"]["blocked_by_gate"], 12)
+        self.assertEqual(review["summary"]["needs_low_noise_rerun"], 79)
+        self.assertEqual(review["summary"]["blocked_by_gate"], 17)
 
         watchdog = next(
             record
@@ -67,7 +67,7 @@ class Operator96AppSurfaceReviewTests(unittest.TestCase):
             if record["value_name"] == "PowerWatchdogPoCalloutTimeoutMsec"
         )
         self.assertEqual(watchdog["app_surface_bucket"], "blocked_by_gate")
-        self.assertIn("safety-finding-present", watchdog["reasons"])
+        self.assertIn("rollback-not-tested", watchdog["reasons"])
 
     def test_gate_blocked_record_stays_out_of_app_surface(self):
         result = self.module.classify_record(

@@ -1,12 +1,12 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-12T00:53:14Z",
+  "generated_utc": "2026-05-13T22:35:34Z",
   "campaign_id": "operator96-enriched-values-20260510",
   "inputs": {
     "plan_records": 96,
-    "campaign_results": 157,
+    "campaign_results": 147,
     "plan": "registry-research-framework/audit/operator96-value-campaign-20260509.json",
-    "campaign": "registry-research-framework/audit/operator96-low-noise-rerun-aggregate-20260510.json",
+    "campaign": "registry-research-framework/audit/operator96-low-noise-rerun-aggregate-20260512.json",
     "source_hints": null
   },
   "reference_catalog": [
@@ -90,8 +90,8 @@
   },
   "summary": {
     "records": 96,
-    "candidate_values": 206,
-    "app_card_eligible_records": 84,
+    "candidate_values": 205,
+    "app_card_eligible_records": 79,
     "community_only_candidates": 0
   },
   "records": [
@@ -140,11 +140,6 @@
           "value": 0,
           "sources": [
             {
-              "source_kind": "vm-validated",
-              "source_label": "operator96-001-enablelocallogonsid-0",
-              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
-            },
-            {
               "source_kind": "source-backed",
               "source_label": "requested-script-value",
               "reason": "value requested by operator input"
@@ -155,59 +150,38 @@
               "reason": "enable/disable/off/on naming convention"
             }
           ],
-          "already_tested": true,
-          "vm_validated": true,
-          "requires_vm_validation": false,
+          "already_tested": false,
+          "vm_validated": false,
+          "requires_vm_validation": true,
           "community_only": false,
-          "baseline_proof": {
-            "experiment_id": "operator96-001-enablelocallogonsid-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-001-enablelocallogonsid-0.json",
-            "status": "ok",
-            "verdict": "harmful",
-            "confidence": "low",
-            "host_noise": "ok",
-            "restore_action": "removed-created-value"
-          },
-          "primary_source_kind": "vm-validated"
+          "primary_source_kind": "source-backed"
         },
         {
           "value": 1,
           "sources": [
-            {
-              "source_kind": "vm-validated",
-              "source_label": "operator96-001-enablelocallogonsid-1",
-              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
-            },
             {
               "source_kind": "name-rule",
               "source_label": "boolean-toggle",
               "reason": "enable/disable/off/on naming convention"
             }
           ],
-          "already_tested": true,
-          "vm_validated": true,
-          "requires_vm_validation": false,
+          "already_tested": false,
+          "vm_validated": false,
+          "requires_vm_validation": true,
           "community_only": false,
-          "baseline_proof": {
-            "experiment_id": "operator96-001-enablelocallogonsid-1",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-001-enablelocallogonsid-1.json",
-            "status": "ok",
-            "verdict": "harmful",
-            "confidence": "low",
-            "host_noise": "ok",
-            "restore_action": "removed-created-value"
-          },
-          "primary_source_kind": "vm-validated"
+          "primary_source_kind": "name-rule"
         }
       ],
       "app_surface_gate": {
-        "eligible_for_app_card": true,
+        "eligible_for_app_card": false,
         "default_status": "known-absent",
-        "rollback_tested": true,
+        "rollback_tested": false,
         "app_write_explicit": true,
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [],
-        "blockers": []
+        "blockers": [
+          "rollback-not-tested"
+        ]
       }
     },
     {
@@ -252,40 +226,6 @@
       },
       "candidates": [
         {
-          "value": 0,
-          "sources": [
-            {
-              "source_kind": "vm-validated",
-              "source_label": "operator96-002-enablevirtualization-0",
-              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
-            },
-            {
-              "source_kind": "source-backed",
-              "source_label": "requested-script-value",
-              "reason": "value requested by operator input"
-            },
-            {
-              "source_kind": "name-rule",
-              "source_label": "boolean-toggle",
-              "reason": "enable/disable/off/on naming convention"
-            }
-          ],
-          "already_tested": true,
-          "vm_validated": true,
-          "requires_vm_validation": false,
-          "community_only": false,
-          "baseline_proof": {
-            "experiment_id": "operator96-002-enablevirtualization-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-002-enablevirtualization-0.json",
-            "status": "ok",
-            "verdict": "harmful",
-            "confidence": "low",
-            "host_noise": "ok",
-            "restore_action": "restored-original-value"
-          },
-          "primary_source_kind": "vm-validated"
-        },
-        {
           "value": 1,
           "sources": [
             {
@@ -304,16 +244,38 @@
           "requires_vm_validation": true,
           "community_only": false,
           "primary_source_kind": "local-default"
+        },
+        {
+          "value": 0,
+          "sources": [
+            {
+              "source_kind": "source-backed",
+              "source_label": "requested-script-value",
+              "reason": "value requested by operator input"
+            },
+            {
+              "source_kind": "name-rule",
+              "source_label": "boolean-toggle",
+              "reason": "enable/disable/off/on naming convention"
+            }
+          ],
+          "already_tested": false,
+          "vm_validated": false,
+          "requires_vm_validation": true,
+          "community_only": false,
+          "primary_source_kind": "source-backed"
         }
       ],
       "app_surface_gate": {
-        "eligible_for_app_card": true,
+        "eligible_for_app_card": false,
         "default_status": "known-present",
-        "rollback_tested": true,
+        "rollback_tested": false,
         "app_write_explicit": true,
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [],
-        "blockers": []
+        "blockers": [
+          "rollback-not-tested"
+        ]
       }
     },
     {
@@ -679,11 +641,6 @@
           "value": 0,
           "sources": [
             {
-              "source_kind": "vm-validated",
-              "source_label": "operator96-006-tickcountrolloverdelay-0",
-              "reason": "operator96 baseline VM experiment status=ok verdict=low_confidence"
-            },
-            {
               "source_kind": "source-backed",
               "source_label": "requested-script-value",
               "reason": "value requested by operator input"
@@ -694,61 +651,40 @@
               "reason": "boundary candidate for count/timeout/threshold-style value"
             }
           ],
-          "already_tested": true,
-          "vm_validated": true,
-          "requires_vm_validation": false,
+          "already_tested": false,
+          "vm_validated": false,
+          "requires_vm_validation": true,
           "community_only": false,
-          "baseline_proof": {
-            "experiment_id": "operator96-006-tickcountrolloverdelay-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-006-tickcountrolloverdelay-0.json",
-            "status": "ok",
-            "verdict": "low_confidence",
-            "confidence": "low",
-            "host_noise": "ok",
-            "restore_action": "removed-created-value"
-          },
-          "primary_source_kind": "vm-validated"
+          "primary_source_kind": "source-backed"
         },
         {
           "value": 1,
           "sources": [
-            {
-              "source_kind": "vm-validated",
-              "source_label": "operator96-006-tickcountrolloverdelay-1",
-              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
-            },
             {
               "source_kind": "name-rule",
               "source_label": "count-boundary,threshold-boundary",
               "reason": "boundary candidate for count/timeout/threshold-style value"
             }
           ],
-          "already_tested": true,
-          "vm_validated": true,
-          "requires_vm_validation": false,
+          "already_tested": false,
+          "vm_validated": false,
+          "requires_vm_validation": true,
           "community_only": false,
-          "baseline_proof": {
-            "experiment_id": "operator96-006-tickcountrolloverdelay-1",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-006-tickcountrolloverdelay-1.json",
-            "status": "ok",
-            "verdict": "harmful",
-            "confidence": "low",
-            "host_noise": "ok",
-            "restore_action": "removed-created-value"
-          },
-          "primary_source_kind": "vm-validated"
+          "primary_source_kind": "name-rule"
         }
       ],
       "app_surface_gate": {
-        "eligible_for_app_card": true,
+        "eligible_for_app_card": false,
         "default_status": "known-absent",
-        "rollback_tested": true,
+        "rollback_tested": false,
         "app_write_explicit": true,
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [
           "kernel-timing-sensitive"
         ],
-        "blockers": []
+        "blockers": [
+          "rollback-not-tested"
+        ]
       }
     },
     {
@@ -976,42 +912,8 @@
       },
       "candidates": [
         {
-          "value": 0,
-          "sources": [
-            {
-              "source_kind": "vm-validated",
-              "source_label": "operator96-009-forceenablemutantautoboost-0",
-              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
-            },
-            {
-              "source_kind": "name-rule",
-              "source_label": "boolean-toggle",
-              "reason": "enable/disable/off/on naming convention"
-            }
-          ],
-          "already_tested": true,
-          "vm_validated": true,
-          "requires_vm_validation": false,
-          "community_only": false,
-          "baseline_proof": {
-            "experiment_id": "operator96-009-forceenablemutantautoboost-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-009-forceenablemutantautoboost-0.json",
-            "status": "ok",
-            "verdict": "harmful",
-            "confidence": "low",
-            "host_noise": "ok",
-            "restore_action": "removed-created-value"
-          },
-          "primary_source_kind": "vm-validated"
-        },
-        {
           "value": 1,
           "sources": [
-            {
-              "source_kind": "vm-validated",
-              "source_label": "operator96-009-forceenablemutantautoboost-1",
-              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
-            },
             {
               "source_kind": "source-backed",
               "source_label": "requested-script-value",
@@ -1023,30 +925,38 @@
               "reason": "enable/disable/off/on naming convention"
             }
           ],
-          "already_tested": true,
-          "vm_validated": true,
-          "requires_vm_validation": false,
+          "already_tested": false,
+          "vm_validated": false,
+          "requires_vm_validation": true,
           "community_only": false,
-          "baseline_proof": {
-            "experiment_id": "operator96-009-forceenablemutantautoboost-1",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-009-forceenablemutantautoboost-1.json",
-            "status": "ok",
-            "verdict": "harmful",
-            "confidence": "low",
-            "host_noise": "ok",
-            "restore_action": "removed-created-value"
-          },
-          "primary_source_kind": "vm-validated"
+          "primary_source_kind": "source-backed"
+        },
+        {
+          "value": 0,
+          "sources": [
+            {
+              "source_kind": "name-rule",
+              "source_label": "boolean-toggle",
+              "reason": "enable/disable/off/on naming convention"
+            }
+          ],
+          "already_tested": false,
+          "vm_validated": false,
+          "requires_vm_validation": true,
+          "community_only": false,
+          "primary_source_kind": "name-rule"
         }
       ],
       "app_surface_gate": {
-        "eligible_for_app_card": true,
+        "eligible_for_app_card": false,
         "default_status": "known-absent",
-        "rollback_tested": true,
+        "rollback_tested": false,
         "app_write_explicit": true,
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [],
-        "blockers": []
+        "blockers": [
+          "rollback-not-tested"
+        ]
       }
     },
     {
@@ -1091,30 +1001,6 @@
       },
       "candidates": [
         {
-          "value": 1,
-          "sources": [
-            {
-              "source_kind": "vm-validated",
-              "source_label": "operator96-010-allowremotedasd-1",
-              "reason": "operator96 baseline VM experiment status=ok verdict=noisy"
-            }
-          ],
-          "already_tested": true,
-          "vm_validated": true,
-          "requires_vm_validation": false,
-          "community_only": false,
-          "baseline_proof": {
-            "experiment_id": "operator96-010-allowremotedasd-1",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-010-allowremotedasd-1.json",
-            "status": "ok",
-            "verdict": "noisy",
-            "confidence": "low",
-            "host_noise": "noisy",
-            "restore_action": "restored-original-value"
-          },
-          "primary_source_kind": "vm-validated"
-        },
-        {
           "value": 0,
           "sources": [
             {
@@ -1136,15 +1022,17 @@
         }
       ],
       "app_surface_gate": {
-        "eligible_for_app_card": true,
+        "eligible_for_app_card": false,
         "default_status": "known-present",
-        "rollback_tested": true,
+        "rollback_tested": false,
         "app_write_explicit": true,
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [
           "deprecated-path-collision removable-storage-policy-is-active-surface"
         ],
-        "blockers": []
+        "blockers": [
+          "rollback-not-tested"
+        ]
       }
     },
     {
@@ -1195,7 +1083,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-011-disablediskcounters-0",
-              "reason": "operator96 baseline VM experiment status=ok verdict=noisy"
+              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
             },
             {
               "source_kind": "name-rule",
@@ -1214,11 +1102,11 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-011-disablediskcounters-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-02/operator96-011-disablediskcounters-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-011-disablediskcounters-0.json",
             "status": "ok",
-            "verdict": "noisy",
+            "verdict": "harmful",
             "confidence": "low",
-            "host_noise": "noisy",
+            "host_noise": "ok",
             "restore_action": "removed-created-value"
           },
           "primary_source_kind": "vm-validated"
@@ -1229,7 +1117,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-011-disablediskcounters-1",
-              "reason": "operator96 baseline VM experiment status=ok verdict=noisy"
+              "reason": "operator96 baseline VM experiment status=ok verdict=low_confidence"
             },
             {
               "source_kind": "source-backed",
@@ -1253,11 +1141,11 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-011-disablediskcounters-1",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-02/operator96-011-disablediskcounters-1.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-011-disablediskcounters-1.json",
             "status": "ok",
-            "verdict": "noisy",
+            "verdict": "low_confidence",
             "confidence": "low",
-            "host_noise": "noisy",
+            "host_noise": "ok",
             "restore_action": "removed-created-value"
           },
           "primary_source_kind": "vm-validated"
@@ -1318,7 +1206,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-012-ioallowloadcrashdumpdriver-0",
-              "reason": "operator96 baseline VM experiment status=ok verdict=noisy"
+              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
             },
             {
               "source_kind": "source-backed",
@@ -1332,11 +1220,11 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-012-ioallowloadcrashdumpdriver-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-02/operator96-012-ioallowloadcrashdumpdriver-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-012-ioallowloadcrashdumpdriver-0.json",
             "status": "ok",
-            "verdict": "noisy",
+            "verdict": "harmful",
             "confidence": "low",
-            "host_noise": "noisy",
+            "host_noise": "ok",
             "restore_action": "removed-created-value"
           },
           "primary_source_kind": "vm-validated"
@@ -1347,7 +1235,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-012-ioallowloadcrashdumpdriver-1",
-              "reason": "operator96 baseline VM experiment status=ok verdict=noisy"
+              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
             }
           ],
           "already_tested": true,
@@ -1356,11 +1244,11 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-012-ioallowloadcrashdumpdriver-1",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-02/operator96-012-ioallowloadcrashdumpdriver-1.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-012-ioallowloadcrashdumpdriver-1.json",
             "status": "ok",
-            "verdict": "noisy",
+            "verdict": "harmful",
             "confidence": "low",
-            "host_noise": "noisy",
+            "host_noise": "ok",
             "restore_action": "removed-created-value"
           },
           "primary_source_kind": "vm-validated"
@@ -1423,7 +1311,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-013-ioenablesessionzeroaccesscheck-0",
-              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
+              "reason": "operator96 baseline VM experiment status=ok verdict=low_confidence"
             },
             {
               "source_kind": "name-rule",
@@ -1437,9 +1325,9 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-013-ioenablesessionzeroaccesscheck-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-02/operator96-013-ioenablesessionzeroaccesscheck-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-013-ioenablesessionzeroaccesscheck-0.json",
             "status": "ok",
-            "verdict": "harmful",
+            "verdict": "low_confidence",
             "confidence": "low",
             "host_noise": "ok",
             "restore_action": "removed-created-value"
@@ -1471,7 +1359,7 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-013-ioenablesessionzeroaccesscheck-1",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-02/operator96-013-ioenablesessionzeroaccesscheck-1.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-013-ioenablesessionzeroaccesscheck-1.json",
             "status": "ok",
             "verdict": "harmful",
             "confidence": "low",
@@ -1538,7 +1426,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-014-globaltimerresolutionrequests-0",
-              "reason": "operator96 baseline VM experiment status=ok verdict=low_confidence"
+              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
             }
           ],
           "already_tested": true,
@@ -1547,9 +1435,9 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-014-globaltimerresolutionrequests-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-02/operator96-014-globaltimerresolutionrequests-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-014-globaltimerresolutionrequests-0.json",
             "status": "ok",
-            "verdict": "low_confidence",
+            "verdict": "harmful",
             "confidence": "low",
             "host_noise": "ok",
             "restore_action": "removed-created-value"
@@ -1562,7 +1450,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-014-globaltimerresolutionrequests-1",
-              "reason": "operator96 baseline VM experiment status=ok verdict=low_confidence"
+              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
             },
             {
               "source_kind": "source-backed",
@@ -1576,9 +1464,9 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-014-globaltimerresolutionrequests-1",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-02/operator96-014-globaltimerresolutionrequests-1.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-014-globaltimerresolutionrequests-1.json",
             "status": "ok",
-            "verdict": "low_confidence",
+            "verdict": "harmful",
             "confidence": "low",
             "host_noise": "ok",
             "restore_action": "removed-created-value"
@@ -1643,7 +1531,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-015-forceparkingrequested-0",
-              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
+              "reason": "operator96 baseline VM experiment status=ok verdict=cpu_gain"
             },
             {
               "source_kind": "source-backed",
@@ -1657,10 +1545,10 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-015-forceparkingrequested-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-02/operator96-015-forceparkingrequested-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-015-forceparkingrequested-0.json",
             "status": "ok",
-            "verdict": "harmful",
-            "confidence": "low",
+            "verdict": "cpu_gain",
+            "confidence": "medium",
             "host_noise": "ok",
             "restore_action": "removed-created-value"
           },
@@ -1681,7 +1569,7 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-015-forceparkingrequested-1",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-02/operator96-015-forceparkingrequested-1.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-015-forceparkingrequested-1.json",
             "status": "ok",
             "verdict": "low_confidence",
             "confidence": "low",
@@ -1748,7 +1636,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-016-enableweruserreporting-0",
-              "reason": "operator96 baseline VM experiment status=ok verdict=noisy"
+              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
             },
             {
               "source_kind": "source-backed",
@@ -1767,11 +1655,11 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-016-enableweruserreporting-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-03/operator96-016-enableweruserreporting-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-016-enableweruserreporting-0.json",
             "status": "ok",
-            "verdict": "noisy",
+            "verdict": "harmful",
             "confidence": "low",
-            "host_noise": "noisy",
+            "host_noise": "ok",
             "restore_action": "removed-created-value"
           },
           "primary_source_kind": "vm-validated"
@@ -1782,7 +1670,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-016-enableweruserreporting-1",
-              "reason": "operator96 baseline VM experiment status=ok verdict=noisy"
+              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
             },
             {
               "source_kind": "name-rule",
@@ -1796,11 +1684,11 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-016-enableweruserreporting-1",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-03/operator96-016-enableweruserreporting-1.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-016-enableweruserreporting-1.json",
             "status": "ok",
-            "verdict": "noisy",
+            "verdict": "harmful",
             "confidence": "low",
-            "host_noise": "noisy",
+            "host_noise": "ok",
             "restore_action": "removed-created-value"
           },
           "primary_source_kind": "vm-validated"
@@ -1877,10 +1765,10 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-017-hyperstartdisabled-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-03/operator96-017-hyperstartdisabled-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-017-hyperstartdisabled-0.json",
             "status": "ok",
             "verdict": "harmful",
-            "confidence": "medium",
+            "confidence": "low",
             "host_noise": "ok",
             "restore_action": "removed-created-value"
           },
@@ -1892,7 +1780,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-017-hyperstartdisabled-1",
-              "reason": "operator96 baseline VM experiment status=ok verdict=low_confidence"
+              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
             },
             {
               "source_kind": "source-backed",
@@ -1911,9 +1799,9 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-017-hyperstartdisabled-1",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-03/operator96-017-hyperstartdisabled-1.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-017-hyperstartdisabled-1.json",
             "status": "ok",
-            "verdict": "low_confidence",
+            "verdict": "harmful",
             "confidence": "low",
             "host_noise": "ok",
             "restore_action": "removed-created-value"
@@ -1997,7 +1885,7 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-018-disablelightweightsuspend-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-03/operator96-018-disablelightweightsuspend-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-018-disablelightweightsuspend-0.json",
             "status": "ok",
             "verdict": "harmful",
             "confidence": "low",
@@ -2026,10 +1914,10 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-018-disablelightweightsuspend-1",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-03/operator96-018-disablelightweightsuspend-1.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-018-disablelightweightsuspend-1.json",
             "status": "ok",
             "verdict": "harmful",
-            "confidence": "medium",
+            "confidence": "low",
             "host_noise": "ok",
             "restore_action": "removed-created-value"
           },
@@ -2107,7 +1995,7 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-019-timercheckflags-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-03/operator96-019-timercheckflags-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-019-timercheckflags-0.json",
             "status": "ok",
             "verdict": "harmful",
             "confidence": "low",
@@ -2122,7 +2010,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-019-timercheckflags-1",
-              "reason": "operator96 baseline VM experiment status=ok verdict=low_confidence"
+              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
             }
           ],
           "already_tested": true,
@@ -2131,9 +2019,9 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-019-timercheckflags-1",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-03/operator96-019-timercheckflags-1.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-019-timercheckflags-1.json",
             "status": "ok",
-            "verdict": "low_confidence",
+            "verdict": "harmful",
             "confidence": "low",
             "host_noise": "ok",
             "restore_action": "removed-created-value"
@@ -2200,7 +2088,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-020-forceidlegraceperiod-0",
-              "reason": "operator96 baseline VM experiment status=ok verdict=low_confidence"
+              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
             },
             {
               "source_kind": "source-backed",
@@ -2219,9 +2107,9 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-020-forceidlegraceperiod-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-03/operator96-020-forceidlegraceperiod-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-020-forceidlegraceperiod-0.json",
             "status": "ok",
-            "verdict": "low_confidence",
+            "verdict": "harmful",
             "confidence": "low",
             "host_noise": "ok",
             "restore_action": "removed-created-value"
@@ -2248,7 +2136,7 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-020-forceidlegraceperiod-1",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-03/operator96-020-forceidlegraceperiod-1.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-020-forceidlegraceperiod-1.json",
             "status": "ok",
             "verdict": "harmful",
             "confidence": "low",
@@ -2427,7 +2315,7 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-022-maxdynamictickduration-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-04/operator96-022-maxdynamictickduration-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-022-maxdynamictickduration-0.json",
             "status": "ok",
             "verdict": "harmful",
             "confidence": "low",
@@ -2442,7 +2330,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-022-maxdynamictickduration-1",
-              "reason": "operator96 baseline VM experiment status=ok verdict=low_confidence"
+              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
             },
             {
               "source_kind": "source-backed",
@@ -2461,9 +2349,9 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-022-maxdynamictickduration-1",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-04/operator96-022-maxdynamictickduration-1.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-022-maxdynamictickduration-1.json",
             "status": "ok",
-            "verdict": "low_confidence",
+            "verdict": "harmful",
             "confidence": "low",
             "host_noise": "ok",
             "restore_action": "removed-created-value"
@@ -2552,7 +2440,7 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-023-enabletickaccumulationfromaccountingperiods-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-04/operator96-023-enabletickaccumulationfromaccountingperiods-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-023-enabletickaccumulationfromaccountingperiods-0.json",
             "status": "ok",
             "verdict": "low_confidence",
             "confidence": "low",
@@ -2591,7 +2479,7 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-023-enabletickaccumulationfromaccountingperiods-1",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-04/operator96-023-enabletickaccumulationfromaccountingperiods-1.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-023-enabletickaccumulationfromaccountingperiods-1.json",
             "status": "ok",
             "verdict": "harmful",
             "confidence": "low",
@@ -2676,7 +2564,7 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-024-enablepercpuclocktickscheduling-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-04/operator96-024-enablepercpuclocktickscheduling-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-024-enablepercpuclocktickscheduling-0.json",
             "status": "ok",
             "verdict": "harmful",
             "confidence": "low",
@@ -2710,7 +2598,7 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-024-enablepercpuclocktickscheduling-1",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-04/operator96-024-enablepercpuclocktickscheduling-1.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-024-enablepercpuclocktickscheduling-1.json",
             "status": "ok",
             "verdict": "harmful",
             "confidence": "low",
@@ -2800,7 +2688,7 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-025-serializetimerexpiration-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-04/operator96-025-serializetimerexpiration-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-025-serializetimerexpiration-0.json",
             "status": "ok",
             "verdict": "low_confidence",
             "confidence": "low",
@@ -2829,10 +2717,10 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-025-serializetimerexpiration-1",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-04/operator96-025-serializetimerexpiration-1.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-025-serializetimerexpiration-1.json",
             "status": "ok",
             "verdict": "harmful",
-            "confidence": "high",
+            "confidence": "low",
             "host_noise": "ok",
             "restore_action": "removed-created-value"
           },
@@ -2912,7 +2800,7 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-026-xstatecontextlookasideperprocmaxdepth-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-04/operator96-026-xstatecontextlookasideperprocmaxdepth-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-026-xstatecontextlookasideperprocmaxdepth-0.json",
             "status": "ok",
             "verdict": "harmful",
             "confidence": "low",
@@ -2927,7 +2815,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-026-xstatecontextlookasideperprocmaxdepth-1024",
-              "reason": "operator96 baseline VM experiment status=ok verdict=low_confidence"
+              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
             },
             {
               "source_kind": "source-backed",
@@ -2946,9 +2834,9 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-026-xstatecontextlookasideperprocmaxdepth-1024",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-04/operator96-026-xstatecontextlookasideperprocmaxdepth-1024.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-026-xstatecontextlookasideperprocmaxdepth-1024.json",
             "status": "ok",
-            "verdict": "low_confidence",
+            "verdict": "harmful",
             "confidence": "low",
             "host_noise": "ok",
             "restore_action": "removed-created-value"
@@ -3030,7 +2918,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-027-longdpcqueuethreshold-0",
-              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
+              "reason": "operator96 baseline VM experiment status=ok verdict=low_confidence"
             },
             {
               "source_kind": "name-rule",
@@ -3044,9 +2932,9 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-027-longdpcqueuethreshold-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-05/operator96-027-longdpcqueuethreshold-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-027-longdpcqueuethreshold-0.json",
             "status": "ok",
-            "verdict": "harmful",
+            "verdict": "low_confidence",
             "confidence": "low",
             "host_noise": "ok",
             "restore_action": "removed-created-value"
@@ -3078,7 +2966,7 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-027-longdpcqueuethreshold-2",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-05/operator96-027-longdpcqueuethreshold-2.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-027-longdpcqueuethreshold-2.json",
             "status": "ok",
             "verdict": "harmful",
             "confidence": "low",
@@ -3178,7 +3066,7 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-028-longdpcruntimethreshold-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-05/operator96-028-longdpcruntimethreshold-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-028-longdpcruntimethreshold-0.json",
             "status": "ok",
             "verdict": "low_confidence",
             "confidence": "low",
@@ -3212,7 +3100,7 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-028-longdpcruntimethreshold-50",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-05/operator96-028-longdpcruntimethreshold-50.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-028-longdpcruntimethreshold-50.json",
             "status": "ok",
             "verdict": "harmful",
             "confidence": "low",
@@ -3319,7 +3207,7 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-029-forcebugcheckfordpcwatchdog-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-05/operator96-029-forcebugcheckfordpcwatchdog-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-029-forcebugcheckfordpcwatchdog-0.json",
             "status": "ok",
             "verdict": "harmful",
             "confidence": "low",
@@ -3348,7 +3236,7 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-029-forcebugcheckfordpcwatchdog-1",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-05/operator96-029-forcebugcheckfordpcwatchdog-1.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-029-forcebugcheckfordpcwatchdog-1.json",
             "status": "ok",
             "verdict": "harmful",
             "confidence": "low",
@@ -3431,10 +3319,10 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-030-forceforegroundboostdecay-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-05/operator96-030-forceforegroundboostdecay-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-030-forceforegroundboostdecay-0.json",
             "status": "ok",
             "verdict": "harmful",
-            "confidence": "high",
+            "confidence": "low",
             "host_noise": "ok",
             "restore_action": "removed-created-value"
           },
@@ -3455,7 +3343,7 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-030-forceforegroundboostdecay-1",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-05/operator96-030-forceforegroundboostdecay-1.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-030-forceforegroundboostdecay-1.json",
             "status": "ok",
             "verdict": "harmful",
             "confidence": "low",
@@ -3529,7 +3417,7 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-031-rebalanceminpriority-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-05/operator96-031-rebalanceminpriority-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-031-rebalanceminpriority-0.json",
             "status": "ok",
             "verdict": "harmful",
             "confidence": "low",
@@ -3558,10 +3446,10 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-031-rebalanceminpriority-16",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-05/operator96-031-rebalanceminpriority-16.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-031-rebalanceminpriority-16.json",
             "status": "ok",
             "verdict": "harmful",
-            "confidence": "low",
+            "confidence": "medium",
             "host_noise": "ok",
             "restore_action": "removed-created-value"
           },
@@ -3625,7 +3513,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-032-interruptsteeringflags-0",
-              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
+              "reason": "operator96 baseline VM experiment status=ok verdict=low_confidence"
             }
           ],
           "already_tested": true,
@@ -3634,9 +3522,9 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-032-interruptsteeringflags-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-06/operator96-032-interruptsteeringflags-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-032-interruptsteeringflags-0.json",
             "status": "ok",
-            "verdict": "harmful",
+            "verdict": "low_confidence",
             "confidence": "low",
             "host_noise": "ok",
             "restore_action": "removed-created-value"
@@ -3663,7 +3551,7 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-032-interruptsteeringflags-1",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-06/operator96-032-interruptsteeringflags-1.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-032-interruptsteeringflags-1.json",
             "status": "ok",
             "verdict": "harmful",
             "confidence": "low",
@@ -3744,10 +3632,10 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-033-alwaystrackioboosting-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-06/operator96-033-alwaystrackioboosting-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-033-alwaystrackioboosting-0.json",
             "status": "ok",
             "verdict": "harmful",
-            "confidence": "medium",
+            "confidence": "low",
             "host_noise": "ok",
             "restore_action": "removed-created-value"
           },
@@ -3768,10 +3656,10 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-033-alwaystrackioboosting-1",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-06/operator96-033-alwaystrackioboosting-1.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-033-alwaystrackioboosting-1.json",
             "status": "ok",
             "verdict": "harmful",
-            "confidence": "high",
+            "confidence": "low",
             "host_noise": "ok",
             "restore_action": "removed-created-value"
           },
@@ -3948,10 +3836,10 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-035-maximumcooperativeidlesearchwidth-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-06/operator96-035-maximumcooperativeidlesearchwidth-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-035-maximumcooperativeidlesearchwidth-0.json",
             "status": "ok",
             "verdict": "harmful",
-            "confidence": "high",
+            "confidence": "low",
             "host_noise": "ok",
             "restore_action": "removed-created-value"
           },
@@ -3977,7 +3865,7 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-035-maximumcooperativeidlesearchwidth-1",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-06/operator96-035-maximumcooperativeidlesearchwidth-1.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-035-maximumcooperativeidlesearchwidth-1.json",
             "status": "ok",
             "verdict": "harmful",
             "confidence": "low",
@@ -4044,7 +3932,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-036-hiberbootenabled-0",
-              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
+              "reason": "operator96 baseline VM experiment status=ok verdict=low_confidence"
             },
             {
               "source_kind": "source-backed",
@@ -4063,9 +3951,9 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-036-hiberbootenabled-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-06/operator96-036-hiberbootenabled-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-036-hiberbootenabled-0.json",
             "status": "ok",
-            "verdict": "harmful",
+            "verdict": "low_confidence",
             "confidence": "low",
             "host_noise": "ok",
             "restore_action": "restored-original-value"
@@ -4148,7 +4036,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-037-powersettingprofile-1",
-              "reason": "operator96 baseline VM experiment status=ok verdict=low_confidence"
+              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
             }
           ],
           "already_tested": true,
@@ -4157,9 +4045,9 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-037-powersettingprofile-1",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-06/operator96-037-powersettingprofile-1.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-037-powersettingprofile-1.json",
             "status": "ok",
-            "verdict": "low_confidence",
+            "verdict": "harmful",
             "confidence": "low",
             "host_noise": "ok",
             "restore_action": "restored-original-value"
@@ -4247,7 +4135,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-038-watchdogresumetimeout-0",
-              "reason": "operator96 baseline VM experiment status=ok verdict=low_confidence"
+              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
             },
             {
               "source_kind": "source-backed",
@@ -4266,9 +4154,9 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-038-watchdogresumetimeout-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-07/operator96-038-watchdogresumetimeout-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-038-watchdogresumetimeout-0.json",
             "status": "ok",
-            "verdict": "low_confidence",
+            "verdict": "harmful",
             "confidence": "low",
             "host_noise": "ok",
             "restore_action": "restored-original-value"
@@ -4281,7 +4169,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-038-watchdogresumetimeout-1",
-              "reason": "operator96 baseline VM experiment status=ok verdict=low_confidence"
+              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
             },
             {
               "source_kind": "name-rule",
@@ -4295,9 +4183,9 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-038-watchdogresumetimeout-1",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-07/operator96-038-watchdogresumetimeout-1.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-038-watchdogresumetimeout-1.json",
             "status": "ok",
-            "verdict": "low_confidence",
+            "verdict": "harmful",
             "confidence": "low",
             "host_noise": "ok",
             "restore_action": "restored-original-value"
@@ -4407,7 +4295,7 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-039-watchdogsleeptimeout-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-07/operator96-039-watchdogsleeptimeout-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-039-watchdogsleeptimeout-0.json",
             "status": "ok",
             "verdict": "harmful",
             "confidence": "low",
@@ -4422,7 +4310,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-039-watchdogsleeptimeout-1",
-              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
+              "reason": "operator96 baseline VM experiment status=ok verdict=low_confidence"
             },
             {
               "source_kind": "name-rule",
@@ -4436,10 +4324,10 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-039-watchdogsleeptimeout-1",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-07/operator96-039-watchdogsleeptimeout-1.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-039-watchdogsleeptimeout-1.json",
             "status": "ok",
-            "verdict": "harmful",
-            "confidence": "high",
+            "verdict": "low_confidence",
+            "confidence": "low",
             "host_noise": "ok",
             "restore_action": "restored-original-value"
           },
@@ -4526,7 +4414,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-040-skiptickoverride-0",
-              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
+              "reason": "operator96 baseline VM experiment status=ok verdict=low_confidence"
             },
             {
               "source_kind": "source-backed",
@@ -4540,9 +4428,9 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-040-skiptickoverride-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-07/operator96-040-skiptickoverride-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-040-skiptickoverride-0.json",
             "status": "ok",
-            "verdict": "harmful",
+            "verdict": "low_confidence",
             "confidence": "low",
             "host_noise": "ok",
             "restore_action": "removed-created-value"
@@ -4555,7 +4443,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-040-skiptickoverride-1",
-              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
+              "reason": "operator96 baseline VM experiment status=ok verdict=cpu_gain"
             }
           ],
           "already_tested": true,
@@ -4564,10 +4452,10 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-040-skiptickoverride-1",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-07/operator96-040-skiptickoverride-1.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-040-skiptickoverride-1.json",
             "status": "ok",
-            "verdict": "harmful",
-            "confidence": "low",
+            "verdict": "cpu_gain",
+            "confidence": "medium",
             "host_noise": "ok",
             "restore_action": "removed-created-value"
           },
@@ -4661,7 +4549,7 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-041-win32calloutwatchdogbugcheckenabled-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-07/operator96-041-win32calloutwatchdogbugcheckenabled-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-041-win32calloutwatchdogbugcheckenabled-0.json",
             "status": "ok",
             "verdict": "harmful",
             "confidence": "low",
@@ -4676,7 +4564,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-041-win32calloutwatchdogbugcheckenabled-1",
-              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
+              "reason": "operator96 baseline VM experiment status=ok verdict=low_confidence"
             },
             {
               "source_kind": "name-rule",
@@ -4695,9 +4583,9 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-041-win32calloutwatchdogbugcheckenabled-1",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-07/operator96-041-win32calloutwatchdogbugcheckenabled-1.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-041-win32calloutwatchdogbugcheckenabled-1.json",
             "status": "ok",
-            "verdict": "harmful",
+            "verdict": "low_confidence",
             "confidence": "low",
             "host_noise": "ok",
             "restore_action": "removed-created-value"
@@ -4784,7 +4672,7 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-042-idlescaninterval-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-07/operator96-042-idlescaninterval-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-042-idlescaninterval-0.json",
             "status": "ok",
             "verdict": "harmful",
             "confidence": "low",
@@ -4813,7 +4701,7 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-042-idlescaninterval-1",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-07/operator96-042-idlescaninterval-1.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-042-idlescaninterval-1.json",
             "status": "ok",
             "verdict": "harmful",
             "confidence": "low",
@@ -4894,7 +4782,7 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-043-sleepstudydisabled-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-08/operator96-043-sleepstudydisabled-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-043-sleepstudydisabled-0.json",
             "status": "ok",
             "verdict": "harmful",
             "confidence": "low",
@@ -4909,7 +4797,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-043-sleepstudydisabled-1",
-              "reason": "operator96 baseline VM experiment status=ok verdict=low_confidence"
+              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
             },
             {
               "source_kind": "source-backed",
@@ -4928,9 +4816,9 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-043-sleepstudydisabled-1",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-08/operator96-043-sleepstudydisabled-1.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-043-sleepstudydisabled-1.json",
             "status": "ok",
-            "verdict": "low_confidence",
+            "verdict": "harmful",
             "confidence": "low",
             "host_noise": "ok",
             "restore_action": "removed-created-value"
@@ -5009,7 +4897,7 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-044-class1initialunparkcount-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-08/operator96-044-class1initialunparkcount-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-044-class1initialunparkcount-0.json",
             "status": "ok",
             "verdict": "low_confidence",
             "confidence": "low",
@@ -5038,7 +4926,7 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-044-class1initialunparkcount-1",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-08/operator96-044-class1initialunparkcount-1.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-044-class1initialunparkcount-1.json",
             "status": "ok",
             "verdict": "harmful",
             "confidence": "low",
@@ -5137,10 +5025,10 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-045-customizeduringsetup-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-08/operator96-045-customizeduringsetup-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-045-customizeduringsetup-0.json",
             "status": "ok",
             "verdict": "harmful",
-            "confidence": "low",
+            "confidence": "medium",
             "host_noise": "ok",
             "restore_action": "restored-original-value"
           },
@@ -5243,7 +5131,7 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-046-energyestimationenabled-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-08/operator96-046-energyestimationenabled-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-046-energyestimationenabled-0.json",
             "status": "ok",
             "verdict": "harmful",
             "confidence": "low",
@@ -5330,7 +5218,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-047-hiberfilesizepercent-1",
-              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
+              "reason": "operator96 baseline VM experiment status=ok verdict=low_confidence"
             },
             {
               "source_kind": "name-rule",
@@ -5344,9 +5232,9 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-047-hiberfilesizepercent-1",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-08/operator96-047-hiberfilesizepercent-1.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-047-hiberfilesizepercent-1.json",
             "status": "ok",
-            "verdict": "harmful",
+            "verdict": "low_confidence",
             "confidence": "low",
             "host_noise": "ok",
             "restore_action": "restored-original-value"
@@ -5466,7 +5354,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-048-mfbufferingthreshold-1",
-              "reason": "operator96 baseline VM experiment status=ok verdict=low_confidence"
+              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
             },
             {
               "source_kind": "name-rule",
@@ -5480,9 +5368,9 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-048-mfbufferingthreshold-1",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-09/operator96-048-mfbufferingthreshold-1.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-048-mfbufferingthreshold-1.json",
             "status": "ok",
-            "verdict": "low_confidence",
+            "verdict": "harmful",
             "confidence": "low",
             "host_noise": "ok",
             "restore_action": "restored-original-value"
@@ -5572,7 +5460,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-049-perfcalculateactualutilization-0",
-              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
+              "reason": "operator96 baseline VM experiment status=ok verdict=low_confidence"
             },
             {
               "source_kind": "source-backed",
@@ -5591,9 +5479,9 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-049-perfcalculateactualutilization-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-09/operator96-049-perfcalculateactualutilization-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-049-perfcalculateactualutilization-0.json",
             "status": "ok",
-            "verdict": "harmful",
+            "verdict": "low_confidence",
             "confidence": "low",
             "host_noise": "ok",
             "restore_action": "restored-original-value"
@@ -5692,10 +5580,10 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-050-sourcesettingsversion-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-09/operator96-050-sourcesettingsversion-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-050-sourcesettingsversion-0.json",
             "status": "ok",
             "verdict": "harmful",
-            "confidence": "high",
+            "confidence": "low",
             "host_noise": "ok",
             "restore_action": "restored-original-value"
           },
@@ -5721,7 +5609,7 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-050-sourcesettingsversion-1",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-09/operator96-050-sourcesettingsversion-1.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-050-sourcesettingsversion-1.json",
             "status": "ok",
             "verdict": "harmful",
             "confidence": "low",
@@ -5824,7 +5712,7 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-051-timerrebasethresholdondripsexit-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-09/operator96-051-timerrebasethresholdondripsexit-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-051-timerrebasethresholdondripsexit-0.json",
             "status": "ok",
             "verdict": "harmful",
             "confidence": "low",
@@ -5853,7 +5741,7 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-051-timerrebasethresholdondripsexit-1",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-09/operator96-051-timerrebasethresholdondripsexit-1.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-051-timerrebasethresholdondripsexit-1.json",
             "status": "ok",
             "verdict": "harmful",
             "confidence": "low",
@@ -5966,7 +5854,7 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-052-hibernateenableddefault-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-09/operator96-052-hibernateenableddefault-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-052-hibernateenableddefault-0.json",
             "status": "ok",
             "verdict": "harmful",
             "confidence": "low",
@@ -6072,7 +5960,7 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-053-eventprocessorenabled-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-10/operator96-053-eventprocessorenabled-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-053-eventprocessorenabled-0.json",
             "status": "ok",
             "verdict": "harmful",
             "confidence": "low",
@@ -6166,10 +6054,10 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-054-lidreliabilitystate-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-10/operator96-054-lidreliabilitystate-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-054-lidreliabilitystate-0.json",
             "status": "ok",
             "verdict": "harmful",
-            "confidence": "high",
+            "confidence": "low",
             "host_noise": "ok",
             "restore_action": "restored-original-value"
           },
@@ -6253,7 +6141,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-055-hibernateenabled-1",
-              "reason": "operator96 baseline VM experiment status=ok verdict=low_confidence"
+              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
             },
             {
               "source_kind": "name-rule",
@@ -6267,9 +6155,9 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-055-hibernateenabled-1",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-10/operator96-055-hibernateenabled-1.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-055-hibernateenabled-1.json",
             "status": "ok",
-            "verdict": "low_confidence",
+            "verdict": "harmful",
             "confidence": "low",
             "host_noise": "ok",
             "restore_action": "restored-original-value"
@@ -6359,7 +6247,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-056-disableinboxpepgeneratedconstraints-0",
-              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
+              "reason": "operator96 baseline VM experiment status=ok verdict=low_confidence"
             },
             {
               "source_kind": "name-rule",
@@ -6373,9 +6261,9 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-056-disableinboxpepgeneratedconstraints-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-10/operator96-056-disableinboxpepgeneratedconstraints-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-056-disableinboxpepgeneratedconstraints-0.json",
             "status": "ok",
-            "verdict": "harmful",
+            "verdict": "low_confidence",
             "confidence": "low",
             "host_noise": "ok",
             "restore_action": "removed-created-value"
@@ -6388,7 +6276,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-056-disableinboxpepgeneratedconstraints-1",
-              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
+              "reason": "operator96 baseline VM experiment status=ok verdict=low_confidence"
             },
             {
               "source_kind": "source-backed",
@@ -6407,10 +6295,10 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-056-disableinboxpepgeneratedconstraints-1",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-10/operator96-056-disableinboxpepgeneratedconstraints-1.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-056-disableinboxpepgeneratedconstraints-1.json",
             "status": "ok",
-            "verdict": "harmful",
-            "confidence": "medium",
+            "verdict": "low_confidence",
+            "confidence": "low",
             "host_noise": "ok",
             "restore_action": "removed-created-value"
           },
@@ -6474,7 +6362,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-057-disabledisplayburstonpowersourcechange-0",
-              "reason": "operator96 baseline VM experiment status=ok verdict=cpu_gain"
+              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
             },
             {
               "source_kind": "name-rule",
@@ -6488,10 +6376,10 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-057-disabledisplayburstonpowersourcechange-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-10/operator96-057-disabledisplayburstonpowersourcechange-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-057-disabledisplayburstonpowersourcechange-0.json",
             "status": "ok",
-            "verdict": "cpu_gain",
-            "confidence": "medium",
+            "verdict": "harmful",
+            "confidence": "low",
             "host_noise": "ok",
             "restore_action": "removed-created-value"
           },
@@ -6503,7 +6391,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-057-disabledisplayburstonpowersourcechange-1",
-              "reason": "operator96 baseline VM experiment status=ok verdict=low_confidence"
+              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
             },
             {
               "source_kind": "source-backed",
@@ -6522,9 +6410,9 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-057-disabledisplayburstonpowersourcechange-1",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-10/operator96-057-disabledisplayburstonpowersourcechange-1.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-057-disabledisplayburstonpowersourcechange-1.json",
             "status": "ok",
-            "verdict": "low_confidence",
+            "verdict": "harmful",
             "confidence": "low",
             "host_noise": "ok",
             "restore_action": "removed-created-value"
@@ -6587,7 +6475,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-058-idleprocessorsrequireqosmanagement-0",
-              "reason": "operator96 baseline VM experiment status=ok verdict=noisy"
+              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
             },
             {
               "source_kind": "source-backed",
@@ -6601,11 +6489,11 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-058-idleprocessorsrequireqosmanagement-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-11/operator96-058-idleprocessorsrequireqosmanagement-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-058-idleprocessorsrequireqosmanagement-0.json",
             "status": "ok",
-            "verdict": "noisy",
+            "verdict": "harmful",
             "confidence": "low",
-            "host_noise": "noisy",
+            "host_noise": "ok",
             "restore_action": "removed-created-value"
           },
           "primary_source_kind": "vm-validated"
@@ -6616,7 +6504,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-058-idleprocessorsrequireqosmanagement-1",
-              "reason": "operator96 baseline VM experiment status=ok verdict=noisy"
+              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
             }
           ],
           "already_tested": true,
@@ -6625,11 +6513,11 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-058-idleprocessorsrequireqosmanagement-1",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-11/operator96-058-idleprocessorsrequireqosmanagement-1.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-058-idleprocessorsrequireqosmanagement-1.json",
             "status": "ok",
-            "verdict": "noisy",
+            "verdict": "harmful",
             "confidence": "low",
-            "host_noise": "noisy",
+            "host_noise": "ok",
             "restore_action": "removed-created-value"
           },
           "primary_source_kind": "vm-validated"
@@ -6781,7 +6669,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-060-allowaudiotoenableexecutionrequiredpowerrequests-0",
-              "reason": "operator96 baseline VM experiment status=ok verdict=noisy"
+              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
             },
             {
               "source_kind": "source-backed",
@@ -6800,11 +6688,11 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-060-allowaudiotoenableexecutionrequiredpowerrequests-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-11/operator96-060-allowaudiotoenableexecutionrequiredpowerrequests-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-060-allowaudiotoenableexecutionrequiredpowerrequests-0.json",
             "status": "ok",
-            "verdict": "noisy",
+            "verdict": "harmful",
             "confidence": "low",
-            "host_noise": "noisy",
+            "host_noise": "ok",
             "restore_action": "removed-created-value"
           },
           "primary_source_kind": "vm-validated"
@@ -6815,7 +6703,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-060-allowaudiotoenableexecutionrequiredpowerrequests-1",
-              "reason": "operator96 baseline VM experiment status=ok verdict=noisy"
+              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
             },
             {
               "source_kind": "name-rule",
@@ -6829,11 +6717,11 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-060-allowaudiotoenableexecutionrequiredpowerrequests-1",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-11/operator96-060-allowaudiotoenableexecutionrequiredpowerrequests-1.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-060-allowaudiotoenableexecutionrequiredpowerrequests-1.json",
             "status": "ok",
-            "verdict": "noisy",
+            "verdict": "harmful",
             "confidence": "low",
-            "host_noise": "noisy",
+            "host_noise": "ok",
             "restore_action": "removed-created-value"
           },
           "primary_source_kind": "vm-validated"
@@ -6896,7 +6784,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-061-deepiocoalescingenabled-0",
-              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
+              "reason": "operator96 baseline VM experiment status=ok verdict=low_confidence"
             },
             {
               "source_kind": "source-backed",
@@ -6915,9 +6803,9 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-061-deepiocoalescingenabled-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-11/operator96-061-deepiocoalescingenabled-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-061-deepiocoalescingenabled-0.json",
             "status": "ok",
-            "verdict": "harmful",
+            "verdict": "low_confidence",
             "confidence": "low",
             "host_noise": "ok",
             "restore_action": "removed-created-value"
@@ -6930,7 +6818,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-061-deepiocoalescingenabled-1",
-              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
+              "reason": "operator96 baseline VM experiment status=ok verdict=low_confidence"
             },
             {
               "source_kind": "name-rule",
@@ -6944,9 +6832,9 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-061-deepiocoalescingenabled-1",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-11/operator96-061-deepiocoalescingenabled-1.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-061-deepiocoalescingenabled-1.json",
             "status": "ok",
-            "verdict": "harmful",
+            "verdict": "low_confidence",
             "confidence": "low",
             "host_noise": "ok",
             "restore_action": "removed-created-value"
@@ -7009,7 +6897,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-062-ignorecscompliancecheck-0",
-              "reason": "operator96 baseline VM experiment status=ok verdict=low_confidence"
+              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
             }
           ],
           "already_tested": true,
@@ -7018,9 +6906,9 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-062-ignorecscompliancecheck-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-11/operator96-062-ignorecscompliancecheck-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-062-ignorecscompliancecheck-0.json",
             "status": "ok",
-            "verdict": "low_confidence",
+            "verdict": "harmful",
             "confidence": "low",
             "host_noise": "ok",
             "restore_action": "removed-created-value"
@@ -7033,7 +6921,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-062-ignorecscompliancecheck-1",
-              "reason": "operator96 baseline VM experiment status=ok verdict=low_confidence"
+              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
             },
             {
               "source_kind": "source-backed",
@@ -7047,9 +6935,9 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-062-ignorecscompliancecheck-1",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-11/operator96-062-ignorecscompliancecheck-1.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-062-ignorecscompliancecheck-1.json",
             "status": "ok",
-            "verdict": "low_confidence",
+            "verdict": "harmful",
             "confidence": "low",
             "host_noise": "ok",
             "restore_action": "removed-created-value"
@@ -7133,10 +7021,10 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-063-dripsswhwdivergenceenablelivedump-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-11/operator96-063-dripsswhwdivergenceenablelivedump-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-063-dripsswhwdivergenceenablelivedump-0.json",
             "status": "ok",
             "verdict": "harmful",
-            "confidence": "high",
+            "confidence": "low",
             "host_noise": "ok",
             "restore_action": "removed-created-value"
           },
@@ -7162,7 +7050,7 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-063-dripsswhwdivergenceenablelivedump-1",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-11/operator96-063-dripsswhwdivergenceenablelivedump-1.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-063-dripsswhwdivergenceenablelivedump-1.json",
             "status": "ok",
             "verdict": "harmful",
             "confidence": "low",
@@ -7229,7 +7117,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-064-disablevsynclatencyupdate-0",
-              "reason": "operator96 baseline VM experiment status=ok verdict=noisy"
+              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
             },
             {
               "source_kind": "name-rule",
@@ -7243,11 +7131,11 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-064-disablevsynclatencyupdate-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-12/operator96-064-disablevsynclatencyupdate-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-064-disablevsynclatencyupdate-0.json",
             "status": "ok",
-            "verdict": "noisy",
+            "verdict": "harmful",
             "confidence": "low",
-            "host_noise": "noisy",
+            "host_noise": "ok",
             "restore_action": "removed-created-value"
           },
           "primary_source_kind": "vm-validated"
@@ -7258,7 +7146,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-064-disablevsynclatencyupdate-1",
-              "reason": "operator96 baseline VM experiment status=ok verdict=noisy"
+              "reason": "operator96 baseline VM experiment status=ok verdict=low_confidence"
             },
             {
               "source_kind": "source-backed",
@@ -7277,11 +7165,11 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-064-disablevsynclatencyupdate-1",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-12/operator96-064-disablevsynclatencyupdate-1.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-064-disablevsynclatencyupdate-1.json",
             "status": "ok",
-            "verdict": "noisy",
+            "verdict": "low_confidence",
             "confidence": "low",
-            "host_noise": "noisy",
+            "host_noise": "ok",
             "restore_action": "removed-created-value"
           },
           "primary_source_kind": "vm-validated"
@@ -7444,7 +7332,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-066-enableinputsuppression-0",
-              "reason": "operator96 baseline VM experiment status=ok verdict=noisy"
+              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
             },
             {
               "source_kind": "name-rule",
@@ -7458,11 +7346,11 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-066-enableinputsuppression-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-12/operator96-066-enableinputsuppression-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-066-enableinputsuppression-0.json",
             "status": "ok",
-            "verdict": "noisy",
+            "verdict": "harmful",
             "confidence": "low",
-            "host_noise": "noisy",
+            "host_noise": "ok",
             "restore_action": "removed-created-value"
           },
           "primary_source_kind": "vm-validated"
@@ -7473,7 +7361,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-066-enableinputsuppression-1",
-              "reason": "operator96 baseline VM experiment status=ok verdict=noisy"
+              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
             },
             {
               "source_kind": "source-backed",
@@ -7492,11 +7380,11 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-066-enableinputsuppression-1",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-12/operator96-066-enableinputsuppression-1.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-066-enableinputsuppression-1.json",
             "status": "ok",
-            "verdict": "noisy",
+            "verdict": "harmful",
             "confidence": "low",
-            "host_noise": "noisy",
+            "host_noise": "ok",
             "restore_action": "removed-created-value"
           },
           "primary_source_kind": "vm-validated"
@@ -7561,7 +7449,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-067-perfchecktimerimplementation-0",
-              "reason": "operator96 baseline VM experiment status=ok verdict=noisy"
+              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
             },
             {
               "source_kind": "source-backed",
@@ -7580,11 +7468,11 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-067-perfchecktimerimplementation-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-12/operator96-067-perfchecktimerimplementation-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-067-perfchecktimerimplementation-0.json",
             "status": "ok",
-            "verdict": "noisy",
+            "verdict": "harmful",
             "confidence": "low",
-            "host_noise": "noisy",
+            "host_noise": "ok",
             "restore_action": "removed-created-value"
           },
           "primary_source_kind": "vm-validated"
@@ -7595,7 +7483,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-067-perfchecktimerimplementation-1",
-              "reason": "operator96 baseline VM experiment status=ok verdict=noisy"
+              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
             },
             {
               "source_kind": "name-rule",
@@ -7609,11 +7497,11 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-067-perfchecktimerimplementation-1",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-12/operator96-067-perfchecktimerimplementation-1.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-067-perfchecktimerimplementation-1.json",
             "status": "ok",
-            "verdict": "noisy",
+            "verdict": "harmful",
             "confidence": "low",
-            "host_noise": "noisy",
+            "host_noise": "ok",
             "restore_action": "removed-created-value"
           },
           "primary_source_kind": "vm-validated"
@@ -7678,7 +7566,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-068-standbyconnectivitygraceperiod-0",
-              "reason": "operator96 baseline VM experiment status=ok verdict=noisy"
+              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
             },
             {
               "source_kind": "source-backed",
@@ -7697,11 +7585,11 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-068-standbyconnectivitygraceperiod-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-12/operator96-068-standbyconnectivitygraceperiod-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-068-standbyconnectivitygraceperiod-0.json",
             "status": "ok",
-            "verdict": "noisy",
+            "verdict": "harmful",
             "confidence": "low",
-            "host_noise": "noisy",
+            "host_noise": "ok",
             "restore_action": "removed-created-value"
           },
           "primary_source_kind": "vm-validated"
@@ -7712,7 +7600,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-068-standbyconnectivitygraceperiod-1",
-              "reason": "operator96 baseline VM experiment status=ok verdict=noisy"
+              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
             },
             {
               "source_kind": "name-rule",
@@ -7726,11 +7614,11 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-068-standbyconnectivitygraceperiod-1",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-12/operator96-068-standbyconnectivitygraceperiod-1.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-068-standbyconnectivitygraceperiod-1.json",
             "status": "ok",
-            "verdict": "noisy",
+            "verdict": "harmful",
             "confidence": "low",
-            "host_noise": "noisy",
+            "host_noise": "ok",
             "restore_action": "removed-created-value"
           },
           "primary_source_kind": "vm-validated"
@@ -7791,7 +7679,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-069-enforceausteritymode-0",
-              "reason": "operator96 baseline VM experiment status=ok verdict=noisy"
+              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
             },
             {
               "source_kind": "source-backed",
@@ -7805,11 +7693,11 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-069-enforceausteritymode-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-12/operator96-069-enforceausteritymode-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-069-enforceausteritymode-0.json",
             "status": "ok",
-            "verdict": "noisy",
+            "verdict": "harmful",
             "confidence": "low",
-            "host_noise": "noisy",
+            "host_noise": "ok",
             "restore_action": "removed-created-value"
           },
           "primary_source_kind": "vm-validated"
@@ -7820,7 +7708,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-069-enforceausteritymode-1",
-              "reason": "operator96 baseline VM experiment status=ok verdict=noisy"
+              "reason": "operator96 baseline VM experiment status=ok verdict=low_confidence"
             }
           ],
           "already_tested": true,
@@ -7829,11 +7717,11 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-069-enforceausteritymode-1",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-12/operator96-069-enforceausteritymode-1.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-069-enforceausteritymode-1.json",
             "status": "ok",
-            "verdict": "noisy",
+            "verdict": "low_confidence",
             "confidence": "low",
-            "host_noise": "noisy",
+            "host_noise": "ok",
             "restore_action": "removed-created-value"
           },
           "primary_source_kind": "vm-validated"
@@ -7894,7 +7782,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-070-alwayscomputeqoshints-0",
-              "reason": "operator96 baseline VM experiment status=ok verdict=noisy"
+              "reason": "operator96 baseline VM experiment status=ok verdict=low_confidence"
             },
             {
               "source_kind": "source-backed",
@@ -7908,11 +7796,11 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-070-alwayscomputeqoshints-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-13/operator96-070-alwayscomputeqoshints-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-070-alwayscomputeqoshints-0.json",
             "status": "ok",
-            "verdict": "noisy",
+            "verdict": "low_confidence",
             "confidence": "low",
-            "host_noise": "noisy",
+            "host_noise": "ok",
             "restore_action": "removed-created-value"
           },
           "primary_source_kind": "vm-validated"
@@ -7923,7 +7811,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-070-alwayscomputeqoshints-1",
-              "reason": "operator96 baseline VM experiment status=ok verdict=noisy"
+              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
             }
           ],
           "already_tested": true,
@@ -7932,11 +7820,11 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-070-alwayscomputeqoshints-1",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-13/operator96-070-alwayscomputeqoshints-1.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-070-alwayscomputeqoshints-1.json",
             "status": "ok",
-            "verdict": "noisy",
+            "verdict": "harmful",
             "confidence": "low",
-            "host_noise": "noisy",
+            "host_noise": "ok",
             "restore_action": "removed-created-value"
           },
           "primary_source_kind": "vm-validated"
@@ -8000,7 +7888,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-071-heteromulticoreclassesenabled-0",
-              "reason": "operator96 baseline VM experiment status=ok verdict=noisy"
+              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
             },
             {
               "source_kind": "source-backed",
@@ -8024,11 +7912,11 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-071-heteromulticoreclassesenabled-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-13/operator96-071-heteromulticoreclassesenabled-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-071-heteromulticoreclassesenabled-0.json",
             "status": "ok",
-            "verdict": "noisy",
+            "verdict": "harmful",
             "confidence": "low",
-            "host_noise": "noisy",
+            "host_noise": "ok",
             "restore_action": "removed-created-value"
           },
           "primary_source_kind": "vm-validated"
@@ -8039,7 +7927,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-071-heteromulticoreclassesenabled-1",
-              "reason": "operator96 baseline VM experiment status=ok verdict=noisy"
+              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
             },
             {
               "source_kind": "name-rule",
@@ -8058,11 +7946,11 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-071-heteromulticoreclassesenabled-1",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-13/operator96-071-heteromulticoreclassesenabled-1.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-071-heteromulticoreclassesenabled-1.json",
             "status": "ok",
-            "verdict": "noisy",
+            "verdict": "harmful",
             "confidence": "low",
-            "host_noise": "noisy",
+            "host_noise": "ok",
             "restore_action": "removed-created-value"
           },
           "primary_source_kind": "vm-validated"
@@ -8125,7 +8013,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-072-heteromulticlassparkingenabled-0",
-              "reason": "operator96 baseline VM experiment status=ok verdict=noisy"
+              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
             },
             {
               "source_kind": "source-backed",
@@ -8144,11 +8032,11 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-072-heteromulticlassparkingenabled-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-13/operator96-072-heteromulticlassparkingenabled-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-072-heteromulticlassparkingenabled-0.json",
             "status": "ok",
-            "verdict": "noisy",
+            "verdict": "harmful",
             "confidence": "low",
-            "host_noise": "noisy",
+            "host_noise": "ok",
             "restore_action": "removed-created-value"
           },
           "primary_source_kind": "vm-validated"
@@ -8159,7 +8047,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-072-heteromulticlassparkingenabled-1",
-              "reason": "operator96 baseline VM experiment status=ok verdict=noisy"
+              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
             },
             {
               "source_kind": "name-rule",
@@ -8173,11 +8061,11 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-072-heteromulticlassparkingenabled-1",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-13/operator96-072-heteromulticlassparkingenabled-1.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-072-heteromulticlassparkingenabled-1.json",
             "status": "ok",
-            "verdict": "noisy",
+            "verdict": "harmful",
             "confidence": "low",
-            "host_noise": "noisy",
+            "host_noise": "ok",
             "restore_action": "removed-created-value"
           },
           "primary_source_kind": "vm-validated"
@@ -8240,7 +8128,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-073-disableidlestatesatboot-0",
-              "reason": "operator96 baseline VM experiment status=ok verdict=noisy"
+              "reason": "operator96 baseline VM experiment status=ok verdict=low_confidence"
             },
             {
               "source_kind": "name-rule",
@@ -8254,11 +8142,11 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-073-disableidlestatesatboot-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-13/operator96-073-disableidlestatesatboot-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-073-disableidlestatesatboot-0.json",
             "status": "ok",
-            "verdict": "noisy",
+            "verdict": "low_confidence",
             "confidence": "low",
-            "host_noise": "noisy",
+            "host_noise": "ok",
             "restore_action": "removed-created-value"
           },
           "primary_source_kind": "vm-validated"
@@ -8269,7 +8157,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-073-disableidlestatesatboot-2",
-              "reason": "operator96 baseline VM experiment status=ok verdict=noisy"
+              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
             },
             {
               "source_kind": "source-backed",
@@ -8283,11 +8171,11 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-073-disableidlestatesatboot-2",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-13/operator96-073-disableidlestatesatboot-2.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-073-disableidlestatesatboot-2.json",
             "status": "ok",
-            "verdict": "noisy",
+            "verdict": "harmful",
             "confidence": "low",
-            "host_noise": "noisy",
+            "host_noise": "ok",
             "restore_action": "removed-created-value"
           },
           "primary_source_kind": "vm-validated"
@@ -8363,7 +8251,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-074-perfboostatguaranteed-0",
-              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
+              "reason": "operator96 baseline VM experiment status=ok verdict=low_confidence"
             }
           ],
           "already_tested": true,
@@ -8372,9 +8260,9 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-074-perfboostatguaranteed-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-13/operator96-074-perfboostatguaranteed-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-074-perfboostatguaranteed-0.json",
             "status": "ok",
-            "verdict": "harmful",
+            "verdict": "low_confidence",
             "confidence": "low",
             "host_noise": "ok",
             "restore_action": "removed-created-value"
@@ -8401,7 +8289,7 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-074-perfboostatguaranteed-1",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-13/operator96-074-perfboostatguaranteed-1.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-074-perfboostatguaranteed-1.json",
             "status": "ok",
             "verdict": "harmful",
             "confidence": "low",
@@ -8468,7 +8356,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-075-msdisabled-0",
-              "reason": "operator96 baseline VM experiment status=ok verdict=noisy"
+              "reason": "operator96 baseline VM experiment status=ok verdict=low_confidence"
             },
             {
               "source_kind": "name-rule",
@@ -8482,11 +8370,11 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-075-msdisabled-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-14/operator96-075-msdisabled-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-075-msdisabled-0.json",
             "status": "ok",
-            "verdict": "noisy",
+            "verdict": "low_confidence",
             "confidence": "low",
-            "host_noise": "noisy",
+            "host_noise": "ok",
             "restore_action": "removed-created-value"
           },
           "primary_source_kind": "vm-validated"
@@ -8497,7 +8385,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-075-msdisabled-1",
-              "reason": "operator96 baseline VM experiment status=ok verdict=noisy"
+              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
             },
             {
               "source_kind": "source-backed",
@@ -8516,11 +8404,11 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-075-msdisabled-1",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-14/operator96-075-msdisabled-1.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-075-msdisabled-1.json",
             "status": "ok",
-            "verdict": "noisy",
+            "verdict": "harmful",
             "confidence": "low",
-            "host_noise": "noisy",
+            "host_noise": "ok",
             "restore_action": "removed-created-value"
           },
           "primary_source_kind": "vm-validated"
@@ -8603,10 +8491,10 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-076-fxaccountingtelemetrydisabled-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-14/operator96-076-fxaccountingtelemetrydisabled-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-076-fxaccountingtelemetrydisabled-0.json",
             "status": "ok",
             "verdict": "harmful",
-            "confidence": "high",
+            "confidence": "low",
             "host_noise": "ok",
             "restore_action": "removed-created-value"
           },
@@ -8618,7 +8506,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-076-fxaccountingtelemetrydisabled-1",
-              "reason": "operator96 baseline VM experiment status=ok verdict=noisy"
+              "reason": "operator96 baseline VM experiment status=ok verdict=low_confidence"
             },
             {
               "source_kind": "source-backed",
@@ -8642,11 +8530,11 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-076-fxaccountingtelemetrydisabled-1",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-14/operator96-076-fxaccountingtelemetrydisabled-1.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-076-fxaccountingtelemetrydisabled-1.json",
             "status": "ok",
-            "verdict": "noisy",
+            "verdict": "low_confidence",
             "confidence": "low",
-            "host_noise": "noisy",
+            "host_noise": "ok",
             "restore_action": "removed-created-value"
           },
           "primary_source_kind": "vm-validated"
@@ -8731,7 +8619,7 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-077-win32kcalloutwatchdogtimeoutseconds-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-14/operator96-077-win32kcalloutwatchdogtimeoutseconds-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-077-win32kcalloutwatchdogtimeoutseconds-0.json",
             "status": "ok",
             "verdict": "harmful",
             "confidence": "low",
@@ -8760,7 +8648,7 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-077-win32kcalloutwatchdogtimeoutseconds-1",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-14/operator96-077-win32kcalloutwatchdogtimeoutseconds-1.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-077-win32kcalloutwatchdogtimeoutseconds-1.json",
             "status": "ok",
             "verdict": "harmful",
             "confidence": "low",
@@ -8830,7 +8718,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-078-enableminimalhiberfile-0",
-              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
+              "reason": "operator96 baseline VM experiment status=ok verdict=low_confidence"
             },
             {
               "source_kind": "source-backed",
@@ -8849,9 +8737,9 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-078-enableminimalhiberfile-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-14/operator96-078-enableminimalhiberfile-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-078-enableminimalhiberfile-0.json",
             "status": "ok",
-            "verdict": "harmful",
+            "verdict": "low_confidence",
             "confidence": "low",
             "host_noise": "ok",
             "restore_action": "removed-created-value"
@@ -8864,7 +8752,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-078-enableminimalhiberfile-1",
-              "reason": "operator96 baseline VM experiment status=ok verdict=noisy"
+              "reason": "operator96 baseline VM experiment status=ok verdict=low_confidence"
             },
             {
               "source_kind": "name-rule",
@@ -8878,11 +8766,11 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-078-enableminimalhiberfile-1",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-14/operator96-078-enableminimalhiberfile-1.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-078-enableminimalhiberfile-1.json",
             "status": "ok",
-            "verdict": "noisy",
+            "verdict": "low_confidence",
             "confidence": "low",
-            "host_noise": "noisy",
+            "host_noise": "ok",
             "restore_action": "removed-created-value"
           },
           "primary_source_kind": "vm-validated"
@@ -8945,7 +8833,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-079-hiberbootenabled-0",
-              "reason": "operator96 baseline VM experiment status=ok verdict=noisy"
+              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
             },
             {
               "source_kind": "source-backed",
@@ -8964,11 +8852,11 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-079-hiberbootenabled-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-14/operator96-079-hiberbootenabled-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-079-hiberbootenabled-0.json",
             "status": "ok",
-            "verdict": "noisy",
+            "verdict": "harmful",
             "confidence": "low",
-            "host_noise": "noisy",
+            "host_noise": "ok",
             "restore_action": "removed-created-value"
           },
           "primary_source_kind": "vm-validated"
@@ -8979,7 +8867,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-079-hiberbootenabled-1",
-              "reason": "operator96 baseline VM experiment status=ok verdict=noisy"
+              "reason": "operator96 baseline VM experiment status=ok verdict=low_confidence"
             },
             {
               "source_kind": "name-rule",
@@ -8993,11 +8881,11 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-079-hiberbootenabled-1",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-14/operator96-079-hiberbootenabled-1.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-079-hiberbootenabled-1.json",
             "status": "ok",
-            "verdict": "noisy",
+            "verdict": "low_confidence",
             "confidence": "low",
-            "host_noise": "noisy",
+            "host_noise": "ok",
             "restore_action": "removed-created-value"
           },
           "primary_source_kind": "vm-validated"
@@ -9060,7 +8948,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-080-maximumfrequencyoverride-0",
-              "reason": "operator96 baseline VM experiment status=ok verdict=noisy"
+              "reason": "operator96 baseline VM experiment status=ok verdict=low_confidence"
             },
             {
               "source_kind": "name-rule",
@@ -9074,11 +8962,11 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-080-maximumfrequencyoverride-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-15/operator96-080-maximumfrequencyoverride-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-080-maximumfrequencyoverride-0.json",
             "status": "ok",
-            "verdict": "noisy",
+            "verdict": "low_confidence",
             "confidence": "low",
-            "host_noise": "noisy",
+            "host_noise": "ok",
             "restore_action": "removed-created-value"
           },
           "primary_source_kind": "vm-validated"
@@ -9089,7 +8977,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-080-maximumfrequencyoverride-100",
-              "reason": "operator96 baseline VM experiment status=ok verdict=noisy"
+              "reason": "operator96 baseline VM experiment status=ok verdict=low_confidence"
             },
             {
               "source_kind": "source-backed",
@@ -9108,11 +8996,11 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-080-maximumfrequencyoverride-100",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-15/operator96-080-maximumfrequencyoverride-100.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-080-maximumfrequencyoverride-100.json",
             "status": "ok",
-            "verdict": "noisy",
+            "verdict": "low_confidence",
             "confidence": "low",
-            "host_noise": "noisy",
+            "host_noise": "ok",
             "restore_action": "removed-created-value"
           },
           "primary_source_kind": "vm-validated"
@@ -9217,7 +9105,7 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-081-pofxsystemirpwaitforreportdevicepowered-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-15/operator96-081-pofxsystemirpwaitforreportdevicepowered-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-081-pofxsystemirpwaitforreportdevicepowered-0.json",
             "status": "ok",
             "verdict": "harmful",
             "confidence": "low",
@@ -9232,7 +9120,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-081-pofxsystemirpwaitforreportdevicepowered-1",
-              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
+              "reason": "operator96 baseline VM experiment status=ok verdict=low_confidence"
             }
           ],
           "already_tested": true,
@@ -9241,9 +9129,9 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-081-pofxsystemirpwaitforreportdevicepowered-1",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-15/operator96-081-pofxsystemirpwaitforreportdevicepowered-1.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-081-pofxsystemirpwaitforreportdevicepowered-1.json",
             "status": "ok",
-            "verdict": "harmful",
+            "verdict": "low_confidence",
             "confidence": "low",
             "host_noise": "ok",
             "restore_action": "removed-created-value"
@@ -9320,7 +9208,7 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-082-allowsystemrequiredpowerrequests-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-15/operator96-082-allowsystemrequiredpowerrequests-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-082-allowsystemrequiredpowerrequests-0.json",
             "status": "ok",
             "verdict": "harmful",
             "confidence": "low",
@@ -9344,7 +9232,7 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-082-allowsystemrequiredpowerrequests-1",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-15/operator96-082-allowsystemrequiredpowerrequests-1.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-082-allowsystemrequiredpowerrequests-1.json",
             "status": "ok",
             "verdict": "harmful",
             "confidence": "low",
@@ -9411,7 +9299,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-083-coalescingflushinterval-0",
-              "reason": "operator96 baseline VM experiment status=ok verdict=low_confidence"
+              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
             },
             {
               "source_kind": "source-backed",
@@ -9430,10 +9318,10 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-083-coalescingflushinterval-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-15/operator96-083-coalescingflushinterval-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-083-coalescingflushinterval-0.json",
             "status": "ok",
-            "verdict": "low_confidence",
-            "confidence": "low",
+            "verdict": "harmful",
+            "confidence": "high",
             "host_noise": "ok",
             "restore_action": "removed-created-value"
           },
@@ -9459,10 +9347,10 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-083-coalescingflushinterval-1",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-15/operator96-083-coalescingflushinterval-1.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-083-coalescingflushinterval-1.json",
             "status": "ok",
             "verdict": "harmful",
-            "confidence": "high",
+            "confidence": "low",
             "host_noise": "ok",
             "restore_action": "removed-created-value"
           },
@@ -9528,7 +9416,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-084-coalescingtimerinterval-0",
-              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
+              "reason": "operator96 baseline VM experiment status=ok verdict=low_confidence"
             },
             {
               "source_kind": "source-backed",
@@ -9547,10 +9435,10 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-084-coalescingtimerinterval-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-15/operator96-084-coalescingtimerinterval-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-084-coalescingtimerinterval-0.json",
             "status": "ok",
-            "verdict": "harmful",
-            "confidence": "high",
+            "verdict": "low_confidence",
+            "confidence": "low",
             "host_noise": "ok",
             "restore_action": "removed-created-value"
           },
@@ -9576,10 +9464,10 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-084-coalescingtimerinterval-1",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-15/operator96-084-coalescingtimerinterval-1.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-084-coalescingtimerinterval-1.json",
             "status": "ok",
             "verdict": "harmful",
-            "confidence": "high",
+            "confidence": "low",
             "host_noise": "ok",
             "restore_action": "removed-created-value"
           },
@@ -9645,7 +9533,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-085-heterohgseeperfhintsindependentenabled-0",
-              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
+              "reason": "operator96 baseline VM experiment status=ok verdict=low_confidence"
             },
             {
               "source_kind": "name-rule",
@@ -9659,9 +9547,9 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-085-heterohgseeperfhintsindependentenabled-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-16/operator96-085-heterohgseeperfhintsindependentenabled-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-085-heterohgseeperfhintsindependentenabled-0.json",
             "status": "ok",
-            "verdict": "harmful",
+            "verdict": "low_confidence",
             "confidence": "low",
             "host_noise": "ok",
             "restore_action": "removed-created-value"
@@ -9674,7 +9562,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-085-heterohgseeperfhintsindependentenabled-1",
-              "reason": "operator96 baseline VM experiment status=ok verdict=low_confidence"
+              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
             },
             {
               "source_kind": "source-backed",
@@ -9693,9 +9581,9 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-085-heterohgseeperfhintsindependentenabled-1",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-16/operator96-085-heterohgseeperfhintsindependentenabled-1.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-085-heterohgseeperfhintsindependentenabled-1.json",
             "status": "ok",
-            "verdict": "low_confidence",
+            "verdict": "harmful",
             "confidence": "low",
             "host_noise": "ok",
             "restore_action": "removed-created-value"
@@ -9760,7 +9648,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-086-heterohgsplusdisabled-0",
-              "reason": "operator96 baseline VM experiment status=ok verdict=low_confidence"
+              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
             },
             {
               "source_kind": "name-rule",
@@ -9774,9 +9662,9 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-086-heterohgsplusdisabled-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-16/operator96-086-heterohgsplusdisabled-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-086-heterohgsplusdisabled-0.json",
             "status": "ok",
-            "verdict": "low_confidence",
+            "verdict": "harmful",
             "confidence": "low",
             "host_noise": "ok",
             "restore_action": "removed-created-value"
@@ -9808,7 +9696,7 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-086-heterohgsplusdisabled-1",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-16/operator96-086-heterohgsplusdisabled-1.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-086-heterohgsplusdisabled-1.json",
             "status": "ok",
             "verdict": "harmful",
             "confidence": "low",
@@ -9875,7 +9763,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-087-ipilastclockownerdisable-0",
-              "reason": "operator96 baseline VM experiment status=ok verdict=low_confidence"
+              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
             },
             {
               "source_kind": "name-rule",
@@ -9889,9 +9777,9 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-087-ipilastclockownerdisable-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-16/operator96-087-ipilastclockownerdisable-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-087-ipilastclockownerdisable-0.json",
             "status": "ok",
-            "verdict": "low_confidence",
+            "verdict": "harmful",
             "confidence": "low",
             "host_noise": "ok",
             "restore_action": "removed-created-value"
@@ -9923,7 +9811,7 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-087-ipilastclockownerdisable-1",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-16/operator96-087-ipilastclockownerdisable-1.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-087-ipilastclockownerdisable-1.json",
             "status": "ok",
             "verdict": "harmful",
             "confidence": "low",
@@ -9993,7 +9881,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-088-powerwatchdogrequestqueuetimeoutmsec-0",
-              "reason": "operator96 baseline VM experiment status=ok verdict=cpu_gain"
+              "reason": "operator96 baseline VM experiment status=ok verdict=low_confidence"
             },
             {
               "source_kind": "source-backed",
@@ -10012,10 +9900,10 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-088-powerwatchdogrequestqueuetimeoutmsec-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-16/operator96-088-powerwatchdogrequestqueuetimeoutmsec-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-088-powerwatchdogrequestqueuetimeoutmsec-0.json",
             "status": "ok",
-            "verdict": "cpu_gain",
-            "confidence": "medium",
+            "verdict": "low_confidence",
+            "confidence": "low",
             "host_noise": "ok",
             "restore_action": "removed-created-value"
           },
@@ -10027,7 +9915,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-088-powerwatchdogrequestqueuetimeoutmsec-1",
-              "reason": "operator96 baseline VM experiment status=ok verdict=low_confidence"
+              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
             },
             {
               "source_kind": "name-rule",
@@ -10041,9 +9929,9 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-088-powerwatchdogrequestqueuetimeoutmsec-1",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-16/operator96-088-powerwatchdogrequestqueuetimeoutmsec-1.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-088-powerwatchdogrequestqueuetimeoutmsec-1.json",
             "status": "ok",
-            "verdict": "low_confidence",
+            "verdict": "harmful",
             "confidence": "low",
             "host_noise": "ok",
             "restore_action": "removed-created-value"
@@ -10112,11 +10000,6 @@
           "value": 0,
           "sources": [
             {
-              "source_kind": "vm-validated",
-              "source_label": "operator96-089-powerwatchdogpocallouttimeoutmsec-0",
-              "reason": "operator96 baseline VM experiment status=ok verdict=rollback_failure"
-            },
-            {
               "source_kind": "source-backed",
               "source_label": "requested-script-value",
               "reason": "value requested by operator input"
@@ -10127,55 +10010,32 @@
               "reason": "boundary candidate for count/timeout/threshold-style value"
             }
           ],
-          "already_tested": true,
-          "vm_validated": true,
-          "requires_vm_validation": false,
+          "already_tested": false,
+          "vm_validated": false,
+          "requires_vm_validation": true,
           "community_only": false,
-          "baseline_proof": {
-            "experiment_id": "operator96-089-powerwatchdogpocallouttimeoutmsec-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-16/operator96-089-powerwatchdogpocallouttimeoutmsec-0.json",
-            "status": "ok",
-            "verdict": "rollback_failure",
-            "confidence": "high",
-            "host_noise": "ok",
-            "restore_action": "removed-created-value"
-          },
-          "primary_source_kind": "vm-validated"
+          "primary_source_kind": "source-backed"
         },
         {
           "value": 1,
           "sources": [
-            {
-              "source_kind": "vm-validated",
-              "source_label": "operator96-089-powerwatchdogpocallouttimeoutmsec-1",
-              "reason": "operator96 baseline VM experiment status=ok verdict=app_breakage"
-            },
             {
               "source_kind": "name-rule",
               "source_label": "timeout-boundary",
               "reason": "boundary candidate for count/timeout/threshold-style value"
             }
           ],
-          "already_tested": true,
-          "vm_validated": true,
-          "requires_vm_validation": false,
+          "already_tested": false,
+          "vm_validated": false,
+          "requires_vm_validation": true,
           "community_only": false,
-          "baseline_proof": {
-            "experiment_id": "operator96-089-powerwatchdogpocallouttimeoutmsec-1",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-16/operator96-089-powerwatchdogpocallouttimeoutmsec-1.json",
-            "status": "ok",
-            "verdict": "app_breakage",
-            "confidence": "medium",
-            "host_noise": "noisy",
-            "restore_action": "removed-created-value"
-          },
-          "primary_source_kind": "vm-validated"
+          "primary_source_kind": "name-rule"
         }
       ],
       "app_surface_gate": {
         "eligible_for_app_card": false,
         "default_status": "known-absent",
-        "rollback_tested": true,
+        "rollback_tested": false,
         "app_write_explicit": true,
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [
@@ -10183,7 +10043,7 @@
           "watchdog/bugcheck-sensitive"
         ],
         "blockers": [
-          "safety-finding-present"
+          "rollback-not-tested"
         ]
       }
     },
@@ -10237,7 +10097,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-090-powerwatchdogpowerongditimeoutmsec-0",
-              "reason": "operator96 baseline VM experiment status=ok verdict=noisy"
+              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
             },
             {
               "source_kind": "source-backed",
@@ -10256,11 +10116,11 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-090-powerwatchdogpowerongditimeoutmsec-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-17/operator96-090-powerwatchdogpowerongditimeoutmsec-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-090-powerwatchdogpowerongditimeoutmsec-0.json",
             "status": "ok",
-            "verdict": "noisy",
+            "verdict": "harmful",
             "confidence": "low",
-            "host_noise": "noisy",
+            "host_noise": "ok",
             "restore_action": "removed-created-value"
           },
           "primary_source_kind": "vm-validated"
@@ -10285,7 +10145,7 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-090-powerwatchdogpowerongditimeoutmsec-1",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-17/operator96-090-powerwatchdogpowerongditimeoutmsec-1.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-090-powerwatchdogpowerongditimeoutmsec-1.json",
             "status": "ok",
             "verdict": "harmful",
             "confidence": "low",
@@ -10358,7 +10218,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-091-powerwatchdogdwmsyncflushtimeoutmsec-0",
-              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
+              "reason": "operator96 baseline VM experiment status=ok verdict=low_confidence"
             },
             {
               "source_kind": "source-backed",
@@ -10377,9 +10237,9 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-091-powerwatchdogdwmsyncflushtimeoutmsec-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-17/operator96-091-powerwatchdogdwmsyncflushtimeoutmsec-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-091-powerwatchdogdwmsyncflushtimeoutmsec-0.json",
             "status": "ok",
-            "verdict": "harmful",
+            "verdict": "low_confidence",
             "confidence": "low",
             "host_noise": "ok",
             "restore_action": "removed-created-value"
@@ -10392,7 +10252,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-091-powerwatchdogdwmsyncflushtimeoutmsec-1",
-              "reason": "operator96 baseline VM experiment status=ok verdict=low_confidence"
+              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
             },
             {
               "source_kind": "name-rule",
@@ -10406,9 +10266,9 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-091-powerwatchdogdwmsyncflushtimeoutmsec-1",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-17/operator96-091-powerwatchdogdwmsyncflushtimeoutmsec-1.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-091-powerwatchdogdwmsyncflushtimeoutmsec-1.json",
             "status": "ok",
-            "verdict": "low_confidence",
+            "verdict": "harmful",
             "confidence": "low",
             "host_noise": "ok",
             "restore_action": "removed-created-value"
@@ -10479,7 +10339,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-092-powerwatchdogdrvsetmonitortimeoutmsec-0",
-              "reason": "operator96 baseline VM experiment status=ok verdict=low_confidence"
+              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
             },
             {
               "source_kind": "source-backed",
@@ -10498,9 +10358,9 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-092-powerwatchdogdrvsetmonitortimeoutmsec-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-17/operator96-092-powerwatchdogdrvsetmonitortimeoutmsec-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-092-powerwatchdogdrvsetmonitortimeoutmsec-0.json",
             "status": "ok",
-            "verdict": "low_confidence",
+            "verdict": "harmful",
             "confidence": "low",
             "host_noise": "ok",
             "restore_action": "removed-created-value"
@@ -10513,7 +10373,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-092-powerwatchdogdrvsetmonitortimeoutmsec-1",
-              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
+              "reason": "operator96 baseline VM experiment status=ok verdict=low_confidence"
             },
             {
               "source_kind": "name-rule",
@@ -10527,9 +10387,9 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-092-powerwatchdogdrvsetmonitortimeoutmsec-1",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-17/operator96-092-powerwatchdogdrvsetmonitortimeoutmsec-1.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-092-powerwatchdogdrvsetmonitortimeoutmsec-1.json",
             "status": "ok",
-            "verdict": "harmful",
+            "verdict": "low_confidence",
             "confidence": "low",
             "host_noise": "ok",
             "restore_action": "removed-created-value"
@@ -10684,7 +10544,7 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-094-enabledsnetrefresh-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-17/operator96-094-enabledsnetrefresh-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-094-enabledsnetrefresh-0.json",
             "status": "ok",
             "verdict": "harmful",
             "confidence": "low",
@@ -10699,7 +10559,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-094-enabledsnetrefresh-1",
-              "reason": "operator96 baseline VM experiment status=ok verdict=low_confidence"
+              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
             },
             {
               "source_kind": "name-rule",
@@ -10713,9 +10573,9 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-094-enabledsnetrefresh-1",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-17/operator96-094-enabledsnetrefresh-1.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-094-enabledsnetrefresh-1.json",
             "status": "ok",
-            "verdict": "low_confidence",
+            "verdict": "harmful",
             "confidence": "low",
             "host_noise": "ok",
             "restore_action": "removed-created-value"
@@ -10799,7 +10659,7 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-095-enabledactions-0",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-17/operator96-095-enabledactions-0.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-095-enabledactions-0.json",
             "status": "ok",
             "verdict": "low_confidence",
             "confidence": "low",
@@ -10814,7 +10674,7 @@
             {
               "source_kind": "vm-validated",
               "source_label": "operator96-095-enabledactions-1",
-              "reason": "operator96 baseline VM experiment status=ok verdict=low_confidence"
+              "reason": "operator96 baseline VM experiment status=ok verdict=harmful"
             },
             {
               "source_kind": "name-rule",
@@ -10828,9 +10688,9 @@
           "community_only": false,
           "baseline_proof": {
             "experiment_id": "operator96-095-enabledactions-1",
-            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-17/operator96-095-enabledactions-1.json",
+            "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-095-enabledactions-1.json",
             "status": "ok",
-            "verdict": "low_confidence",
+            "verdict": "harmful",
             "confidence": "low",
             "host_noise": "ok",
             "restore_action": "removed-created-value"
