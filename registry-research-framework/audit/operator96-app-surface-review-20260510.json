@@ -1,24 +1,25 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-13T22:40:23Z",
+  "generated_utc": "2026-05-13T23:50:12Z",
   "matrix": "registry-research-framework/audit/operator96-enriched-value-matrix-20260510.json",
   "campaign_id": "operator96-app-surface-review-20260510",
   "status": "PASS",
   "summary": {
     "record_count": 96,
     "ready_for_bounded_app_card": 0,
-    "needs_low_noise_rerun": 79,
+    "needs_low_noise_rerun": 0,
+    "not_app_surface_ready": 79,
     "blocked_by_gate": 17,
     "blocked_by_safety": 0,
     "bucket_counts": {
       "blocked_by_gate": 17,
-      "needs_low_noise_rerun": 79
+      "not_app_surface_ready": 79
     }
   },
   "policy": {
     "ship_rule": "Only ready_for_bounded_app_card may enter the app surface without another VM campaign.",
-    "no_performance_claim_rule": "Low-confidence, noisy, or host-noise-unknown experiments are observations only.",
-    "rerun_rule": "needs_low_noise_rerun records require repeated low-noise VM runs before card copy or performance claims."
+    "no_performance_claim_rule": "Low-confidence, harmful, noisy, or host-noise-unknown experiments are observations only.",
+    "rerun_rule": "needs_low_noise_rerun means host noise was not clean; not_app_surface_ready means the run was clean enough to store but not positive/bounded enough to ship."
   },
   "records": [
     {
@@ -350,10 +351,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System",
       "default_status": "known-absent",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -377,7 +378,7 @@
         "low": 2
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 12,
@@ -385,10 +386,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System",
       "default_status": "known-absent",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -411,7 +412,7 @@
         "low": 2
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 13,
@@ -419,10 +420,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\I/O System",
       "default_status": "known-absent",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -446,7 +447,7 @@
         "low": 2
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 14,
@@ -454,10 +455,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
       "default_status": "known-absent",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -482,7 +483,7 @@
         "low": 2
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 15,
@@ -490,10 +491,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
       "default_status": "known-absent",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -518,7 +519,7 @@
         "medium": 1
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 16,
@@ -526,10 +527,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
       "default_status": "known-absent",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -552,7 +553,7 @@
         "low": 2
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 17,
@@ -560,10 +561,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
       "default_status": "known-absent",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -586,7 +587,7 @@
         "low": 2
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 18,
@@ -594,10 +595,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
       "default_status": "known-absent",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -620,7 +621,7 @@
         "low": 2
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 19,
@@ -628,10 +629,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
       "default_status": "known-absent",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -656,7 +657,7 @@
         "low": 2
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 20,
@@ -664,10 +665,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
       "default_status": "known-absent",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -690,7 +691,7 @@
         "low": 2
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 21,
@@ -733,10 +734,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
       "default_status": "known-absent",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -761,7 +762,7 @@
         "low": 2
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 23,
@@ -769,10 +770,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
       "default_status": "known-absent",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -798,7 +799,7 @@
         "low": 2
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 24,
@@ -806,10 +807,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
       "default_status": "known-absent",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -834,7 +835,7 @@
         "low": 2
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 25,
@@ -842,10 +843,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
       "default_status": "known-absent",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -871,7 +872,7 @@
         "low": 2
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 26,
@@ -879,10 +880,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
       "default_status": "known-absent",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -905,7 +906,7 @@
         "low": 2
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 27,
@@ -913,10 +914,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
       "default_status": "known-absent",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -942,7 +943,7 @@
         "low": 2
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 28,
@@ -950,10 +951,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
       "default_status": "known-absent",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -979,7 +980,7 @@
         "low": 2
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 29,
@@ -987,10 +988,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
       "default_status": "known-absent",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -1017,7 +1018,7 @@
         "low": 2
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 30,
@@ -1025,10 +1026,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
       "default_status": "known-absent",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -1051,7 +1052,7 @@
         "low": 2
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 31,
@@ -1059,10 +1060,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
       "default_status": "known-absent",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -1086,7 +1087,7 @@
         "medium": 1
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 32,
@@ -1094,10 +1095,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
       "default_status": "known-absent",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -1123,7 +1124,7 @@
         "low": 2
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 33,
@@ -1131,10 +1132,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
       "default_status": "known-absent",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -1157,7 +1158,7 @@
         "low": 2
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 34,
@@ -1199,10 +1200,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\kernel",
       "default_status": "known-absent",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -1225,7 +1226,7 @@
         "low": 2
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 36,
@@ -1233,10 +1234,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
       "default_status": "known-present",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -1259,7 +1260,7 @@
         "low": 1
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 37,
@@ -1267,10 +1268,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
       "default_status": "known-present",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -1293,7 +1294,7 @@
         "low": 1
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 38,
@@ -1301,10 +1302,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
       "default_status": "known-present",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -1330,7 +1331,7 @@
         "low": 2
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 39,
@@ -1338,10 +1339,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
       "default_status": "known-present",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -1368,7 +1369,7 @@
         "low": 2
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 40,
@@ -1376,10 +1377,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
       "default_status": "known-absent",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -1406,7 +1407,7 @@
         "medium": 1
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 41,
@@ -1414,10 +1415,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
       "default_status": "known-absent",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -1444,7 +1445,7 @@
         "low": 2
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 42,
@@ -1452,10 +1453,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
       "default_status": "known-absent",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -1478,7 +1479,7 @@
         "low": 2
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 43,
@@ -1486,10 +1487,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Power",
       "default_status": "known-absent",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -1512,7 +1513,7 @@
         "low": 2
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 44,
@@ -1520,10 +1521,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
       "default_status": "known-present",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -1547,7 +1548,7 @@
         "low": 2
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 45,
@@ -1555,10 +1556,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
       "default_status": "known-present",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -1581,7 +1582,7 @@
         "medium": 1
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 46,
@@ -1589,10 +1590,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
       "default_status": "known-present",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -1615,7 +1616,7 @@
         "low": 1
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 47,
@@ -1623,10 +1624,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
       "default_status": "known-present",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -1649,7 +1650,7 @@
         "low": 1
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 48,
@@ -1657,10 +1658,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
       "default_status": "known-present",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -1683,7 +1684,7 @@
         "low": 1
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 49,
@@ -1691,10 +1692,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
       "default_status": "known-present",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -1717,7 +1718,7 @@
         "low": 1
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 50,
@@ -1725,10 +1726,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
       "default_status": "known-present",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -1751,7 +1752,7 @@
         "low": 2
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 51,
@@ -1759,10 +1760,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
       "default_status": "known-present",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -1787,7 +1788,7 @@
         "low": 2
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 52,
@@ -1795,10 +1796,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
       "default_status": "known-present",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -1821,7 +1822,7 @@
         "low": 1
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 53,
@@ -1829,10 +1830,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
       "default_status": "known-present",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -1855,7 +1856,7 @@
         "low": 1
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 54,
@@ -1863,10 +1864,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
       "default_status": "known-present",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -1889,7 +1890,7 @@
         "low": 1
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 55,
@@ -1897,10 +1898,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
       "default_status": "known-present",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -1923,7 +1924,7 @@
         "low": 1
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 56,
@@ -1931,10 +1932,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
       "default_status": "known-absent",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -1957,7 +1958,7 @@
         "low": 2
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 57,
@@ -1965,10 +1966,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
       "default_status": "known-absent",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -1991,7 +1992,7 @@
         "low": 2
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 58,
@@ -1999,10 +2000,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
       "default_status": "known-absent",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -2025,7 +2026,7 @@
         "low": 2
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 59,
@@ -2063,10 +2064,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
       "default_status": "known-absent",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -2089,7 +2090,7 @@
         "low": 2
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 61,
@@ -2097,10 +2098,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
       "default_status": "known-absent",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -2123,7 +2124,7 @@
         "low": 2
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 62,
@@ -2131,10 +2132,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
       "default_status": "known-absent",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -2157,7 +2158,7 @@
         "low": 2
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 63,
@@ -2165,10 +2166,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
       "default_status": "known-absent",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -2191,7 +2192,7 @@
         "low": 2
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 64,
@@ -2199,10 +2200,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
       "default_status": "known-absent",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -2226,7 +2227,7 @@
         "low": 2
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 65,
@@ -2264,10 +2265,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
       "default_status": "known-absent",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -2290,7 +2291,7 @@
         "low": 2
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 67,
@@ -2298,10 +2299,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
       "default_status": "known-absent",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -2326,7 +2327,7 @@
         "low": 2
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 68,
@@ -2334,10 +2335,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
       "default_status": "known-absent",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -2360,7 +2361,7 @@
         "low": 2
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 69,
@@ -2368,10 +2369,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
       "default_status": "known-absent",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -2395,7 +2396,7 @@
         "low": 2
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 70,
@@ -2403,10 +2404,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
       "default_status": "known-absent",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -2430,7 +2431,7 @@
         "low": 2
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 71,
@@ -2438,10 +2439,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
       "default_status": "known-absent",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -2464,7 +2465,7 @@
         "low": 2
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 72,
@@ -2472,10 +2473,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
       "default_status": "known-absent",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -2498,7 +2499,7 @@
         "low": 2
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 73,
@@ -2506,10 +2507,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
       "default_status": "known-absent",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -2533,7 +2534,7 @@
         "low": 2
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 74,
@@ -2541,10 +2542,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
       "default_status": "known-absent",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -2568,7 +2569,7 @@
         "low": 2
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 75,
@@ -2576,10 +2577,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
       "default_status": "known-absent",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -2603,7 +2604,7 @@
         "low": 2
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 76,
@@ -2611,10 +2612,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
       "default_status": "known-absent",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -2638,7 +2639,7 @@
         "low": 2
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 77,
@@ -2646,10 +2647,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
       "default_status": "known-absent",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -2675,7 +2676,7 @@
         "low": 2
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 78,
@@ -2683,10 +2684,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
       "default_status": "known-absent",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -2709,7 +2710,7 @@
         "low": 2
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 79,
@@ -2717,10 +2718,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
       "default_status": "known-absent",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -2744,7 +2745,7 @@
         "low": 2
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 80,
@@ -2752,10 +2753,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
       "default_status": "known-absent",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -2778,7 +2779,7 @@
         "low": 2
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 81,
@@ -2786,10 +2787,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
       "default_status": "known-absent",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -2813,7 +2814,7 @@
         "low": 2
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 82,
@@ -2821,10 +2822,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
       "default_status": "known-absent",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -2847,7 +2848,7 @@
         "low": 2
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 83,
@@ -2855,10 +2856,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
       "default_status": "known-absent",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -2882,7 +2883,7 @@
         "low": 1
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 84,
@@ -2890,10 +2891,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
       "default_status": "known-absent",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -2919,7 +2920,7 @@
         "low": 2
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 85,
@@ -2927,10 +2928,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
       "default_status": "known-absent",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -2954,7 +2955,7 @@
         "low": 2
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 86,
@@ -2962,10 +2963,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
       "default_status": "known-absent",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -2988,7 +2989,7 @@
         "low": 2
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 87,
@@ -2996,10 +2997,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
       "default_status": "known-absent",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -3022,7 +3023,7 @@
         "low": 2
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 88,
@@ -3030,10 +3031,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
       "default_status": "known-absent",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -3060,7 +3061,7 @@
         "low": 2
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 89,
@@ -3101,10 +3102,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
       "default_status": "known-absent",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -3130,7 +3131,7 @@
         "low": 2
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 91,
@@ -3138,10 +3139,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
       "default_status": "known-absent",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -3168,7 +3169,7 @@
         "low": 2
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 92,
@@ -3176,10 +3177,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
       "default_status": "known-absent",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -3206,7 +3207,7 @@
         "low": 2
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 93,
@@ -3246,10 +3247,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ModernSleep",
       "default_status": "known-absent",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -3272,7 +3273,7 @@
         "low": 2
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 95,
@@ -3280,10 +3281,10 @@
       "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power\\ModernSleep",
       "default_status": "known-absent",
       "source_quality": "vm-observed",
-      "app_surface_bucket": "needs_low_noise_rerun",
+      "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
       "reasons": [
-        "low-noise-repeat-required-before-app-card"
+        "insufficient-positive-bounded-evidence-for-app-card"
       ],
       "gate": {
         "eligible_for_app_card": true,
@@ -3307,7 +3308,7 @@
         "low": 2
       },
       "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
-      "recommended_action": "rerun-low-noise-before-any-app-card-or-performance-claim"
+      "recommended_action": "keep-as-research-observation-and-do-not-surface-as-app-card"
     },
     {
       "index": 96,

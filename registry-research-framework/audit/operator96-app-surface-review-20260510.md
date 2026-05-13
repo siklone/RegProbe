@@ -1,23 +1,24 @@
 # Operator96 App Surface Review
 
-- Generated UTC: `2026-05-13T22:40:23Z`
+- Generated UTC: `2026-05-13T23:50:12Z`
 - Matrix: `registry-research-framework/audit/operator96-enriched-value-matrix-20260510.json`
 - Records: `96`
 - Ready for bounded app card: `0`
-- Needs low-noise rerun: `79`
+- Needs low-noise rerun: `0`
+- Not app-surface ready: `79`
 - Blocked by gate: `17`
 - Blocked by safety: `0`
 
 ## Policy
 
 - Only ready_for_bounded_app_card may enter the app surface without another VM campaign.
-- Low-confidence, noisy, or host-noise-unknown experiments are observations only.
-- needs_low_noise_rerun records require repeated low-noise VM runs before card copy or performance claims.
+- Low-confidence, harmful, noisy, or host-noise-unknown experiments are observations only.
+- needs_low_noise_rerun means host noise was not clean; not_app_surface_ready means the run was clean enough to store but not positive/bounded enough to ship.
 
 ## Buckets
 
 - `blocked_by_gate`: `17`
-- `needs_low_noise_rerun`: `79`
+- `not_app_surface_ready`: `79`
 
 ## Records
 
@@ -33,89 +34,89 @@
 | 8 | `MaximumKernelWorkerThreads` | `blocked_by_gate` | rollback-not-tested, kernel-worker-thread-override | do-not-surface-unless-blocker-is-researched-away |
 | 9 | `ForceEnableMutantAutoboost` | `blocked_by_gate` | rollback-not-tested | do-not-surface-unless-blocker-is-researched-away |
 | 10 | `AllowRemoteDASD` | `blocked_by_gate` | rollback-not-tested | do-not-surface-unless-blocker-is-researched-away |
-| 11 | `DisableDiskCounters` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 12 | `IoAllowLoadCrashDumpDriver` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 13 | `IoEnableSessionZeroAccessCheck` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 14 | `GlobalTimerResolutionRequests` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 15 | `ForceParkingRequested` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 16 | `EnableWerUserReporting` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 17 | `HyperStartDisabled` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 18 | `DisableLightWeightSuspend` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 19 | `TimerCheckFlags` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 20 | `ForceIdleGracePeriod` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
+| 11 | `DisableDiskCounters` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
+| 12 | `IoAllowLoadCrashDumpDriver` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
+| 13 | `IoEnableSessionZeroAccessCheck` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
+| 14 | `GlobalTimerResolutionRequests` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
+| 15 | `ForceParkingRequested` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
+| 16 | `EnableWerUserReporting` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
+| 17 | `HyperStartDisabled` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
+| 18 | `DisableLightWeightSuspend` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
+| 19 | `TimerCheckFlags` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
+| 20 | `ForceIdleGracePeriod` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
 | 21 | `DisableExceptionChainValidation` | `blocked_by_gate` | rollback-not-tested, security-mitigation-override | do-not-surface-unless-blocker-is-researched-away |
-| 22 | `MaxDynamicTickDuration` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 23 | `EnableTickAccumulationFromAccountingPeriods` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 24 | `EnablePerCpuClockTickScheduling` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 25 | `SerializeTimerExpiration` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 26 | `XStateContextLookasidePerProcMaxDepth` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 27 | `LongDpcQueueThreshold` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 28 | `LongDpcRuntimeThreshold` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 29 | `ForceBugcheckForDpcWatchdog` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 30 | `ForceForegroundBoostDecay` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 31 | `RebalanceMinPriority` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 32 | `InterruptSteeringFlags` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 33 | `AlwaysTrackIoBoosting` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
+| 22 | `MaxDynamicTickDuration` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
+| 23 | `EnableTickAccumulationFromAccountingPeriods` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
+| 24 | `EnablePerCpuClockTickScheduling` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
+| 25 | `SerializeTimerExpiration` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
+| 26 | `XStateContextLookasidePerProcMaxDepth` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
+| 27 | `LongDpcQueueThreshold` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
+| 28 | `LongDpcRuntimeThreshold` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
+| 29 | `ForceBugcheckForDpcWatchdog` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
+| 30 | `ForceForegroundBoostDecay` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
+| 31 | `RebalanceMinPriority` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
+| 32 | `InterruptSteeringFlags` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
+| 33 | `AlwaysTrackIoBoosting` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
 | 34 | `DisableControlFlowGuardExportSuppression` | `blocked_by_gate` | rollback-not-tested, security-mitigation-override | do-not-surface-unless-blocker-is-researched-away |
-| 35 | `MaximumCooperativeIdleSearchWidth` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 36 | `HiberbootEnabled` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 37 | `PowerSettingProfile` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 38 | `WatchdogResumeTimeout` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 39 | `WatchdogSleepTimeout` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 40 | `SkipTickOverride` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 41 | `Win32CalloutWatchdogBugcheckEnabled` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 42 | `IdleScanInterval` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 43 | `SleepStudyDisabled` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 44 | `Class1InitialUnparkCount` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 45 | `CustomizeDuringSetup` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 46 | `EnergyEstimationEnabled` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 47 | `HiberFileSizePercent` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 48 | `MfBufferingThreshold` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 49 | `PerfCalculateActualUtilization` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 50 | `SourceSettingsVersion` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 51 | `TimerRebaseThresholdOnDripsExit` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 52 | `HibernateEnabledDefault` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 53 | `EventProcessorEnabled` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 54 | `LidReliabilityState` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 55 | `HibernateEnabled` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 56 | `DisableInboxPepGeneratedConstraints` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 57 | `DisableDisplayBurstOnPowerSourceChange` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 58 | `IdleProcessorsRequireQosManagement` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
+| 35 | `MaximumCooperativeIdleSearchWidth` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
+| 36 | `HiberbootEnabled` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
+| 37 | `PowerSettingProfile` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
+| 38 | `WatchdogResumeTimeout` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
+| 39 | `WatchdogSleepTimeout` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
+| 40 | `SkipTickOverride` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
+| 41 | `Win32CalloutWatchdogBugcheckEnabled` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
+| 42 | `IdleScanInterval` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
+| 43 | `SleepStudyDisabled` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
+| 44 | `Class1InitialUnparkCount` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
+| 45 | `CustomizeDuringSetup` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
+| 46 | `EnergyEstimationEnabled` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
+| 47 | `HiberFileSizePercent` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
+| 48 | `MfBufferingThreshold` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
+| 49 | `PerfCalculateActualUtilization` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
+| 50 | `SourceSettingsVersion` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
+| 51 | `TimerRebaseThresholdOnDripsExit` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
+| 52 | `HibernateEnabledDefault` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
+| 53 | `EventProcessorEnabled` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
+| 54 | `LidReliabilityState` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
+| 55 | `HibernateEnabled` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
+| 56 | `DisableInboxPepGeneratedConstraints` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
+| 57 | `DisableDisplayBurstOnPowerSourceChange` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
+| 58 | `IdleProcessorsRequireQosManagement` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
 | 59 | `TtmEnabled` | `blocked_by_gate` | rollback-not-tested | do-not-surface-unless-blocker-is-researched-away |
-| 60 | `AllowAudioToEnableExecutionRequiredPowerRequests` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 61 | `DeepIoCoalescingEnabled` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 62 | `IgnoreCsComplianceCheck` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 63 | `DripsSwHwDivergenceEnableLiveDump` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 64 | `DisableVsyncLatencyUpdate` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
+| 60 | `AllowAudioToEnableExecutionRequiredPowerRequests` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
+| 61 | `DeepIoCoalescingEnabled` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
+| 62 | `IgnoreCsComplianceCheck` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
+| 63 | `DripsSwHwDivergenceEnableLiveDump` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
+| 64 | `DisableVsyncLatencyUpdate` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
 | 65 | `SleepstudyAccountingEnabled` | `blocked_by_gate` | rollback-not-tested | do-not-surface-unless-blocker-is-researched-away |
-| 66 | `EnableInputSuppression` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 67 | `PerfCheckTimerImplementation` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 68 | `StandbyConnectivityGracePeriod` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 69 | `EnforceAusterityMode` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 70 | `AlwaysComputeQosHints` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 71 | `HeteroMultiCoreClassesEnabled` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 72 | `HeteroMultiClassParkingEnabled` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 73 | `DisableIdleStatesAtBoot` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 74 | `PerfBoostAtGuaranteed` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 75 | `MSDisabled` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 76 | `FxAccountingTelemetryDisabled` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 77 | `Win32kCalloutWatchdogTimeoutSeconds` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 78 | `EnableMinimalHiberFile` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 79 | `HiberbootEnabled` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 80 | `MaximumFrequencyOverride` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 81 | `PoFxSystemIrpWaitForReportDevicePowered` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 82 | `AllowSystemRequiredPowerRequests` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 83 | `CoalescingFlushInterval` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 84 | `CoalescingTimerInterval` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 85 | `HeteroHgsEePerfHintsIndependentEnabled` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 86 | `HeteroHgsPlusDisabled` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 87 | `IpiLastClockOwnerDisable` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 88 | `PowerWatchdogRequestQueueTimeoutMsec` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
+| 66 | `EnableInputSuppression` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
+| 67 | `PerfCheckTimerImplementation` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
+| 68 | `StandbyConnectivityGracePeriod` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
+| 69 | `EnforceAusterityMode` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
+| 70 | `AlwaysComputeQosHints` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
+| 71 | `HeteroMultiCoreClassesEnabled` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
+| 72 | `HeteroMultiClassParkingEnabled` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
+| 73 | `DisableIdleStatesAtBoot` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
+| 74 | `PerfBoostAtGuaranteed` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
+| 75 | `MSDisabled` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
+| 76 | `FxAccountingTelemetryDisabled` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
+| 77 | `Win32kCalloutWatchdogTimeoutSeconds` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
+| 78 | `EnableMinimalHiberFile` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
+| 79 | `HiberbootEnabled` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
+| 80 | `MaximumFrequencyOverride` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
+| 81 | `PoFxSystemIrpWaitForReportDevicePowered` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
+| 82 | `AllowSystemRequiredPowerRequests` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
+| 83 | `CoalescingFlushInterval` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
+| 84 | `CoalescingTimerInterval` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
+| 85 | `HeteroHgsEePerfHintsIndependentEnabled` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
+| 86 | `HeteroHgsPlusDisabled` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
+| 87 | `IpiLastClockOwnerDisable` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
+| 88 | `PowerWatchdogRequestQueueTimeoutMsec` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
 | 89 | `PowerWatchdogPoCalloutTimeoutMsec` | `blocked_by_gate` | rollback-not-tested | do-not-surface-unless-blocker-is-researched-away |
-| 90 | `PowerWatchdogPowerOnGdiTimeoutMsec` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 91 | `PowerWatchdogDwmSyncFlushTimeoutMsec` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 92 | `PowerWatchdogDrvSetMonitorTimeoutMsec` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
+| 90 | `PowerWatchdogPowerOnGdiTimeoutMsec` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
+| 91 | `PowerWatchdogDwmSyncFlushTimeoutMsec` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
+| 92 | `PowerWatchdogDrvSetMonitorTimeoutMsec` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
 | 93 | `Policy` | `blocked_by_gate` | key-missing-in-target-vm, rollback-not-tested | do-not-surface-unless-blocker-is-researched-away |
-| 94 | `EnableDsNetRefresh` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
-| 95 | `EnabledActions` | `needs_low_noise_rerun` | low-noise-repeat-required-before-app-card | rerun-low-noise-before-any-app-card-or-performance-claim |
+| 94 | `EnableDsNetRefresh` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
+| 95 | `EnabledActions` | `not_app_surface_ready` | insufficient-positive-bounded-evidence-for-app-card | keep-as-research-observation-and-do-not-surface-as-app-card |
 | 96 | `PowerThrottlingOff` | `blocked_by_gate` | key-missing-in-target-vm, rollback-not-tested | do-not-surface-unless-blocker-is-researched-away |

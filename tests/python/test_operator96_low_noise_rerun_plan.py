@@ -25,20 +25,20 @@ class Operator96LowNoiseRerunPlanTests(unittest.TestCase):
     def setUp(self):
         self.module = load_module()
 
-    def test_real_repo_first_tranche_uses_first_five_low_noise_records(self):
+    def test_real_repo_has_no_remaining_low_noise_rerun_records(self):
         plan = self.module.build_plan(tranche_size=5)
 
         self.assertEqual(plan["status"], "PASS")
-        self.assertEqual(plan["summary"]["candidate_record_count"], 79)
+        self.assertEqual(plan["summary"]["candidate_record_count"], 0)
         self.assertEqual(plan["summary"]["start_offset"], 0)
-        self.assertEqual(plan["summary"]["tranche_indexes"], [11, 12, 13, 14, 15])
-        self.assertEqual(plan["summary"]["first_tranche_indexes"], [11, 12, 13, 14, 15])
+        self.assertEqual(plan["summary"]["tranche_indexes"], [])
+        self.assertEqual(plan["summary"]["first_tranche_indexes"], [])
         self.assertIn("--host-noise-max-retries", plan["commands"]["run"])
         self.assertIn("--abort-on-noisy-host", plan["commands"]["run"])
         self.assertIn("--run", plan["commands"]["run"])
         self.assertNotIn("--run", plan["commands"]["plan_only"])
 
-    def test_real_repo_second_tranche_can_start_after_first_five_records(self):
+    def test_real_repo_second_tranche_is_empty_when_no_low_noise_records_remain(self):
         plan = self.module.build_plan(
             tranche_size=5,
             start_offset=5,
@@ -48,8 +48,8 @@ class Operator96LowNoiseRerunPlanTests(unittest.TestCase):
         )
 
         self.assertEqual(plan["summary"]["start_offset"], 5)
-        self.assertEqual(plan["summary"]["tranche_record_count"], 5)
-        self.assertEqual(plan["summary"]["tranche_indexes"], [16, 17, 18, 19, 20])
+        self.assertEqual(plan["summary"]["tranche_record_count"], 0)
+        self.assertEqual(plan["summary"]["tranche_indexes"], [])
         self.assertIn("audit/low-noise-02", plan["commands"]["run"])
         self.assertIn("audit/tranche-02.json", plan["commands"]["run"])
         self.assertIn("audit/tranche-02.md", plan["commands"]["run"])

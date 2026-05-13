@@ -16,7 +16,8 @@ JSON_OUTPUT = AUDIT_DIR / "operator96-app-surface-review-20260510.json"
 MARKDOWN_OUTPUT = AUDIT_DIR / "operator96-app-surface-review-20260510.md"
 
 SAFETY_VERDICTS = {"boot_failure", "rollback_failure", "app_breakage"}
-NOISY_OR_LOW_CONFIDENCE_VERDICTS = {"harmful", "low_confidence", "noisy"}
+NOISY_VERDICTS = {"noisy"}
+NOT_APP_SURFACE_READY_VERDICTS = {"harmful", "low_confidence"}
 
 
 def normalize_text(value: Any) -> str:
@@ -48,12 +49,18 @@ def classify_record(record: dict[str, Any]) -> dict[str, Any]:
         bucket = "blocked_by_safety"
     elif any(
         normalize_text(proof.get("host_noise")).lower() in {"unknown", "noisy"}
-        or normalize_text(proof.get("confidence")).lower() == "low"
-        or normalize_text(proof.get("verdict")).lower() in NOISY_OR_LOW_CONFIDENCE_VERDICTS
+        or normalize_text(proof.get("verdict")).lower() in NOISY_VERDICTS
         for proof in proofs
     ):
-        reasons.append("low-noise-repeat-required-before-app-card")
+        reasons.append("host-noise-repeat-required-before-app-card")
         bucket = "needs_low_noise_rerun"
+    elif any(
+        normalize_text(proof.get("confidence")).lower() == "low"
+        or normalize_text(proof.get("verdict")).lower() in NOT_APP_SURFACE_READY_VERDICTS
+        for proof in proofs
+    ):
+        reasons.append("insufficient-positive-bounded-evidence-for-app-card")
+        bucket = "not_app_surface_ready"
     else:
         reasons.append("bounded-card-ready")
         bucket = "ready_for_bounded_app_card"
@@ -82,6 +89,7 @@ def classify_record(record: dict[str, Any]) -> dict[str, Any]:
             "blocked_by_gate": "do-not-surface-unless-blocker-is-researched-away",
             "blocked_by_safety": "keep-out-of-app-surface-and-open-targeted-safety-review",
             "needs_low_noise_rerun": "rerun-low-noise-before-any-app-card-or-performance-claim",
+            "not_app_surface_ready": "keep-as-research-observation-and-do-not-surface-as-app-card",
             "ready_for_bounded_app_card": "eligible-for-bounded-card-copy-review",
         }[bucket],
     }
@@ -101,14 +109,15 @@ def build_review(matrix_path: Path = DEFAULT_MATRIX) -> dict[str, Any]:
             "record_count": len(records),
             "ready_for_bounded_app_card": bucket_counts.get("ready_for_bounded_app_card", 0),
             "needs_low_noise_rerun": bucket_counts.get("needs_low_noise_rerun", 0),
+            "not_app_surface_ready": bucket_counts.get("not_app_surface_ready", 0),
             "blocked_by_gate": bucket_counts.get("blocked_by_gate", 0),
             "blocked_by_safety": bucket_counts.get("blocked_by_safety", 0),
             "bucket_counts": dict(sorted(bucket_counts.items())),
         },
         "policy": {
             "ship_rule": "Only ready_for_bounded_app_card may enter the app surface without another VM campaign.",
-            "no_performance_claim_rule": "Low-confidence, noisy, or host-noise-unknown experiments are observations only.",
-            "rerun_rule": "needs_low_noise_rerun records require repeated low-noise VM runs before card copy or performance claims.",
+            "no_performance_claim_rule": "Low-confidence, harmful, noisy, or host-noise-unknown experiments are observations only.",
+            "rerun_rule": "needs_low_noise_rerun means host noise was not clean; not_app_surface_ready means the run was clean enough to store but not positive/bounded enough to ship.",
         },
         "records": records,
     }
@@ -124,6 +133,7 @@ def render_markdown(review: dict[str, Any]) -> str:
         f"- Records: `{summary.get('record_count')}`",
         f"- Ready for bounded app card: `{summary.get('ready_for_bounded_app_card')}`",
         f"- Needs low-noise rerun: `{summary.get('needs_low_noise_rerun')}`",
+        f"- Not app-surface ready: `{summary.get('not_app_surface_ready')}`",
         f"- Blocked by gate: `{summary.get('blocked_by_gate')}`",
         f"- Blocked by safety: `{summary.get('blocked_by_safety')}`",
         "",
