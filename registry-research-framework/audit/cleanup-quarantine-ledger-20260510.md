@@ -1,6 +1,6 @@
 # Cleanup Quarantine Ledger
 
-Generated: `2026-05-12T11:02:39Z`
+Generated: `2026-05-13T23:48:21Z`
 
 Quarantine ledger for cleanup candidates. This ledger does not delete files.
 
@@ -45,7 +45,7 @@ Quarantine ledger for cleanup candidates. This ledger does not delete files.
 | `evidence/files/vm-tooling-staging/thread-dpc-enable-0-mem2.etl.md` | `vm-tooling-staging-oldest-sample` | 8 | `False` | `keep-pending-review` | staging diagnostic bundle; verify no record/evidence-index dependency before deletion |
 | `evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json..md` | `vm-tooling-staging-oldest-sample` | 8 | `False` | `keep-pending-review` | staging diagnostic bundle; verify no record/evidence-index dependency before deletion |
 | `evidence/files/vm-tooling-staging/ghidra-probes` | `vm-tooling-staging-oldest-sample` | 2 | `False` | `keep-pending-review` | staging diagnostic bundle; verify no record/evidence-index dependency before deletion |
-| `evidence/files/vm-tooling-staging/beep_start_toggle_out.txt` | `vm-tooling-staging-oldest-sample` | 7 | `False` | `keep-pending-review` | staging diagnostic bundle; verify no record/evidence-index dependency before deletion |
+| `evidence/files/vm-tooling-staging/beep_start_toggle_out.txt` | `vm-tooling-staging-oldest-sample` | 9 | `False` | `keep-pending-review` | staging diagnostic bundle; verify no record/evidence-index dependency before deletion |
 | `evidence/files/vm-tooling-staging/crossdevice_resume_probe.csv` | `vm-tooling-staging-oldest-sample` | 11 | `False` | `delete-after-review` | staging diagnostic bundle duplicated by canonical evidence/raw artifact |
 | `evidence/files/vm-tooling-staging/defender-enhanced-notifications-securitycenter-1-20260324-213118` | `vm-tooling-staging-oldest-sample` | 7 | `False` | `delete-after-review` | staging diagnostic bundle duplicated by canonical evidence/raw artifact |
 | `evidence/files/vm-tooling-staging/defender-threat-file-hash-legacyroot-1-20260325-011845` | `vm-tooling-staging-oldest-sample` | 8 | `False` | `delete-after-review` | staging diagnostic bundle duplicated by canonical evidence/raw artifact |

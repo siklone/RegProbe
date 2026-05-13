@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-12T11:02:39Z",
+  "generated_utc": "2026-05-13T23:48:21Z",
   "purpose": "Quarantine ledger for cleanup candidates. This ledger does not delete files.",
   "deletion_policy": [
     "No file is deleted by this generator.",
@@ -299,15 +299,16 @@
         "beep_start_toggle_out.txt",
         "evidence/files/vm-tooling-staging/beep_start_toggle_out.txt"
       ],
-      "live_reference_count": 7,
+      "live_reference_count": 9,
       "references_sample": [
+        "registry-research-framework/audit/promoted-app-qa-batch-20260512-live-14.json",
+        "registry-research-framework/audit/promoted-app-qa-batch-20260512-live-5.json",
         "registry-research-framework/audit/promoted-app-qa-batch-latest.json",
         "research/evidence-atlas.md",
         "research/evidence-classes.json",
         "research/evidence-index.json",
         "research/evidence-manifest.json",
-        "research/evidence-manifest.md",
-        "research/records/audio.disable-beep.review.json"
+        "research/evidence-manifest.md"
       ],
       "delete_eligible": false,
       "recommended_action": "keep-pending-review"
