@@ -1,0 +1,1397 @@
+{
+  "generated_utc": "2026-05-13T08:03:27Z",
+  "status": "ok",
+  "experiment_id": "operator96-063-dripsswhwdivergenceenablelivedump-1",
+  "domain": "regprobe-win11-25h2-session",
+  "connect": "qemu:///session",
+  "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+  "value_name": "DripsSwHwDivergenceEnableLiveDump",
+  "value_data": 1,
+  "smoke_profile": "gui",
+  "stages": {
+    "apply": {
+      "returncode": 0,
+      "qga": {
+        "status": "completed",
+        "domain": "regprobe-win11-25h2-session",
+        "guest_dir": "C:\\RegProbe-Diag\\registry-value-experiments\\operator96-063-dripsswhwdivergenceenablelivedump-1",
+        "guest_script_path": "C:\\RegProbe-Diag\\registry-value-experiments\\operator96-063-dripsswhwdivergenceenablelivedump-1\\registry-value-experiment-operator96-063-dripsswhwdivergenceenablelivedump-1.ps1",
+        "upload": {
+          "source": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/dist/kvm-generated/registry-value-experiment-operator96-063-dripsswhwdivergenceenablelivedump-1.ps1",
+          "destination": "C:\\RegProbe-Diag\\registry-value-experiments\\operator96-063-dripsswhwdivergenceenablelivedump-1\\registry-value-experiment-operator96-063-dripsswhwdivergenceenablelivedump-1.ps1",
+          "size_bytes": 25726,
+          "written_bytes": 25726,
+          "sha256": "3d5038b6671f6ba643681c50599dcff3194274dbb06bfcd79c26d28c9b4613e8"
+        },
+        "execution": {
+          "status": "exited",
+          "pid": 7288,
+          "path": "powershell.exe",
+          "arg": [
+            "-NoProfile",
+            "-ExecutionPolicy",
+            "Bypass",
+            "-File",
+            "C:\\RegProbe-Diag\\registry-value-experiments\\operator96-063-dripsswhwdivergenceenablelivedump-1\\registry-value-experiment-operator96-063-dripsswhwdivergenceenablelivedump-1.ps1",
+            "-Stage",
+            "apply",
+            "-RegistryPath",
+            "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "-ValueName",
+            "DripsSwHwDivergenceEnableLiveDump",
+            "-ValueData",
+            "1",
+            "-ExperimentId",
+            "operator96-063-dripsswhwdivergenceenablelivedump-1",
+            "-SmokeProfile",
+            "gui"
+          ],
+          "exitcode": 0,
+          "stdout": "{\r\n    \"generated_utc\":  \"2026-05-13T08:01:51Z\",\r\n    \"stage\":  \"apply\",\r\n    \"experiment_id\":  \"operator96-063-dripsswhwdivergenceenablelivedump-1\",\r\n    \"registry_path\":  \"HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Power\",\r\n    \"value_name\":  \"DripsSwHwDivergenceEnableLiveDump\",\r\n    \"value_data\":  \"1\",\r\n    \"smoke_profile\":  \"gui\",\r\n    \"status\":  \"ok\",\r\n    \"error\":  null,\r\n    \"baseline_smoke\":  {\r\n                           \"success\":  true,\r\n                           \"failure_count\":  1,\r\n                           \"hard_failure_count\":  0,\r\n                           \"best_effort_failure_count\":  1,\r\n                           \"items\":  [\r\n                                         {\r\n                                             \"name\":  \"shell-process-presence\",\r\n                                             \"success\":  true,\r\n                                             \"detail\":  \"explorer=True;SearchHost=True;ShellExperienceHost=False;sihost=True;StartMenuExperienceHost=True\"\r\n                                         },\r\n                                         {\r\n                                             \"name\":  \"cmd-ver\",\r\n                                             \"success\":  true,\r\n                                             \"detail\":  \"exit=0\"\r\n                                         },\r\n                                         {\r\n                                             \"name\":  \"powershell-version\",\r\n                                             \"success\":  true,\r\n                                             \"detail\":  \"exit=0\"\r\n                                         },\r\n                                         {\r\n                                             \"name\":  \"notepad-x64-launch\",\r\n                                             \"success\":  true,\r\n                                             \"detail\":  \"started=True;alive_after_2s=True\"\r\n                                         },\r\n                                         {\r\n                                             \"name\":  \"notepad-x86-launch\",\r\n                                             \"success\":  true,\r\n                                             \"detail\":  \"started=True;alive_after_2s=True\"\r\n                                         },\r\n                                         {\r\n                                             \"name\":  \"calc-launch\",\r\n                                             \"success\":  true,\r\n                                             \"detail\":  \"started=True;alive_after_2s=False\"\r\n                                         },\r\n                                         {\r\n                                             \"name\":  \"settings-uri-launch\",\r\n                                             \"success\":  true,\r\n                                             \"detail\":  \"launch-command-succeeded\"\r\n                                         },\r\n                                         {\r\n                                             \"name\":  \"store-uri-launch\",\r\n                                             \"success\":  false,\r\n                                             \"detail\":  \"This command cannot be run due to the error: The operation attempted is not supported.\"\r\n                                         }\r\n                                     ],\r\n                           \"interactive_user_smoke\":  {\r\n                                                          \"status\":  \"ok\",\r\n                                                          \"user\":  \"rai\",\r\n                                                          \"failure_count\":  0,\r\n                                                          \"items\":  [\r\n                                                                        {\r\n                                                                            \"name\":  \"interactive-settings-uri\",\r\n                                                                            \"success\":  true,\r\n                                                                            \"detail\":  \"launch-command-succeeded\"\r\n                                                                        },\r\n                                                                        {\r\n                                                                            \"name\":  \"interactive-store-uri\",\r\n                                                                            \"success\":  true,\r\n                                                                            \"detail\":  \"launch-command-succeeded\"\r\n                                                                        },\r\n                                                                        {\r\n                                                                            \"name\":  \"interactive-notepad-x64\",\r\n                                                                            \"success\":  true,\r\n                                                                            \"detail\":  \"started=true;alive_after_2s=True\"\r\n                                                                        },\r\n                                                                        {\r\n                                                                            \"name\":  \"interactive-notepad-x86\",\r\n                                                                            \"success\":  true,\r\n                                                                            \"detail\":  \"started=true;alive_after_2s=True\"\r\n                                                                        },\r\n                                                                        {\r\n                                                                            \"name\":  \"interactive-calc\",\r\n                                                                            \"success\":  true,\r\n                                                                            \"detail\":  \"started=true;alive_after_2s=False\"\r\n                                                                        }\r\n                                                                    ]\r\n                                                      },\r\n                           \"benchmarks\":  {\r\n                                              \"status\":  \"ok\",\r\n                                              \"version\":  2,\r\n                                              \"sample_count\":  5,\r\n                                              \"cpu_duration_seconds\":  3,\r\n                                              \"cpu_threads\":  2,\r\n                                              \"io_size_mib\":  16,\r\n                                              \"cpu_single_iterations_per_second\":  38008561.2413,\r\n                                              \"cpu_multi_iterations_per_second\":  72278969.1535,\r\n                                              \"io_write_mib_per_second\":  455.8599,\r\n                                              \"io_read_mib_per_second\":  1805.9098,\r\n                                              \"io_write_read_mib_per_second\":  1131.8671,\r\n                                              \"spreads\":  {\r\n                                                              \"cpu_single_iterations_per_second\":  1.65,\r\n                                                              \"cpu_multi_iterations_per_second\":  4.71,\r\n                                                              \"io_write_mib_per_second\":  65.37,\r\n                                                              \"io_read_mib_per_second\":  224.04,\r\n                                                              \"io_write_read_mib_per_second\":  187.83\r\n                                                          },\r\n                                              \"samples\":  {\r\n                                                              \"cpu_single_iterations_per_second\":  [\r\n                                                                                                       37674432.2236,\r\n                                                                                                       38008561.2413,\r\n                                                                                                       37763120.7106,\r\n                                                                                                       38108100.4054,\r\n                                                                                                       38300386.6588\r\n                                                                                                   ],\r\n                                                              \"cpu_multi_iterations_per_second\":  [\r\n                                                                                                      74368457.3654,\r\n                                                                                                      73925402.6612,\r\n                                                                                                      72091006.446,\r\n                                                                                                      72278969.1535,\r\n                                                                                                      70961850.454\r\n                                                                                                  ],\r\n                                                              \"io_write_mib_per_second\":  [\r\n                                                                                              455.8599,\r\n                                                                                              249.9383,\r\n                                                                                              506.9018,\r\n                                                                                              433.7677,\r\n                                                                                              547.9452\r\n                                                                                          ],\r\n                                                              \"io_read_mib_per_second\":  [\r\n                                                                                             5714.6939,\r\n                                                                                             1668.7352,\r\n                                                                                             1756.8324,\r\n                                                                                             1805.9098,\r\n                                                                                             3835.5508\r\n                                                                                         ],\r\n                                                              \"io_write_read_mib_per_second\":  [\r\n                                                                                                   3085.2769,\r\n                                                                                                   959.3367,\r\n                                                                                                   1131.8671,\r\n                                                                                                   1119.8388,\r\n                                                                                                   2191.748\r\n                                                                                               ]\r\n                                                          }\r\n                                          }\r\n                       },\r\n    \"original\":  {\r\n                     \"path\":  \"HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Power\",\r\n                     \"value_name\":  \"DripsSwHwDivergenceEnableLiveDump\",\r\n                     \"key_exists\":  true,\r\n                     \"value_exists\":  false,\r\n                     \"value\":  null,\r\n                     \"value_kind\":  null,\r\n                     \"value_hex\":  null,\r\n                     \"status\":  \"value-missing\",\r\n                     \"error\":  null\r\n                 },\r\n    \"after_apply\":  {\r\n                        \"path\":  \"HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Power\",\r\n                        \"value_name\":  \"DripsSwHwDivergenceEnableLiveDump\",\r\n                        \"key_exists\":  true,\r\n                        \"value_exists\":  true,\r\n                        \"value\":  1,\r\n                        \"value_kind\":  \"System.Int32\",\r\n                        \"value_hex\":  \"0x1\",\r\n                        \"status\":  \"value-present\",\r\n                        \"error\":  null\r\n                    },\r\n    \"smoke\":  {\r\n                  \"success\":  true,\r\n                  \"failure_count\":  1,\r\n                  \"hard_failure_count\":  0,\r\n                  \"best_effort_failure_count\":  1,\r\n                  \"items\":  [\r\n                                {\r\n                                    \"name\":  \"shell-process-presence\",\r\n                                    \"success\":  true,\r\n                                    \"detail\":  \"explorer=True;SearchHost=True;ShellExperienceHost=False;sihost=True;StartMenuExperienceHost=True\"\r\n                                },\r\n                                {\r\n                                    \"name\":  \"cmd-ver\",\r\n                                    \"success\":  true,\r\n                                    \"detail\":  \"exit=0\"\r\n                                },\r\n                                {\r\n                                    \"name\":  \"powershell-version\",\r\n                                    \"success\":  true,\r\n                                    \"detail\":  \"exit=0\"\r\n                                },\r\n                                {\r\n                                    \"name\":  \"notepad-x64-launch\",\r\n                                    \"success\":  true,\r\n                                    \"detail\":  \"started=True;alive_after_2s=True\"\r\n                                },\r\n                                {\r\n                                    \"name\":  \"notepad-x86-launch\",\r\n                                    \"success\":  true,\r\n                                    \"detail\":  \"started=True;alive_after_2s=True\"\r\n                                },\r\n                                {\r\n                                    \"name\":  \"calc-launch\",\r\n                                    \"success\":  true,\r\n                                    \"detail\":  \"started=True;alive_after_2s=False\"\r\n                                },\r\n                                {\r\n                                    \"name\":  \"settings-uri-launch\",\r\n                                    \"success\":  true,\r\n                                    \"detail\":  \"launch-command-succeeded\"\r\n                                },\r\n                                {\r\n                                    \"name\":  \"store-uri-launch\",\r\n                                    \"success\":  false,\r\n                                    \"detail\":  \"This command cannot be run due to the error: The operation attempted is not supported.\"\r\n                                }\r\n                            ],\r\n                  \"interactive_user_smoke\":  {\r\n                                                 \"status\":  \"ok\",\r\n                                                 \"user\":  \"rai\",\r\n                                                 \"failure_count\":  0,\r\n                                                 \"items\":  [\r\n                                                               {\r\n                                                                   \"name\":  \"interactive-settings-uri\",\r\n                                                                   \"success\":  true,\r\n                                                                   \"detail\":  \"launch-command-succeeded\"\r\n                                                               },\r\n                                                               {\r\n                                                                   \"name\":  \"interactive-store-uri\",\r\n                                                                   \"success\":  true,\r\n                                                                   \"detail\":  \"launch-command-succeeded\"\r\n                                                               },\r\n                                                               {\r\n                                                                   \"name\":  \"interactive-notepad-x64\",\r\n                                                                   \"success\":  true,\r\n                                                                   \"detail\":  \"started=true;alive_after_2s=True\"\r\n                                                               },\r\n                                                               {\r\n                                                                   \"name\":  \"interactive-notepad-x86\",\r\n                                                                   \"success\":  true,\r\n                                                                   \"detail\":  \"started=true;alive_after_2s=True\"\r\n                                                               },\r\n                                                               {\r\n                                                                   \"name\":  \"interactive-calc\",\r\n                                                                   \"success\":  true,\r\n                                                                   \"detail\":  \"started=true;alive_after_2s=False\"\r\n                                                               }\r\n                                                           ]\r\n                                             },\r\n                  \"benchmarks\":  {\r\n                                     \"status\":  \"ok\",\r\n                                     \"version\":  2,\r\n                                     \"sample_count\":  5,\r\n                                     \"cpu_duration_seconds\":  3,\r\n                                     \"cpu_threads\":  2,\r\n                                     \"io_size_mib\":  16,\r\n                                     \"cpu_single_iterations_per_second\":  37918760.9104,\r\n                                     \"cpu_multi_iterations_per_second\":  74679471.2804,\r\n                                     \"io_write_mib_per_second\":  408.8788,\r\n                                     \"io_read_mib_per_second\":  3303.4645,\r\n                                     \"io_write_read_mib_per_second\":  1811.4279,\r\n                                     \"spreads\":  {\r\n                                                     \"cpu_single_iterations_per_second\":  2.59,\r\n                                                     \"cpu_multi_iterations_per_second\":  2.41,\r\n                                                     \"io_write_mib_per_second\":  44.76,\r\n                                                     \"io_read_mib_per_second\":  108.46,\r\n                                                     \"io_write_read_mib_per_second\":  98.63\r\n                                                 },\r\n                                     \"samples\":  {\r\n                                                     \"cpu_single_iterations_per_second\":  [\r\n                                                                                              37334581.3987,\r\n                                                                                              37485709.2953,\r\n                                                                                              37918760.9104,\r\n                                                                                              38239068.8509,\r\n                                                                                              38318328.8238\r\n                                                                                          ],\r\n                                                     \"cpu_multi_iterations_per_second\":  [\r\n                                                                                             73322471.315,\r\n                                                                                             73310916.2395,\r\n                                                                                             75108111.6891,\r\n                                                                                             74946231.2332,\r\n                                                                                             74679471.2804\r\n                                                                                         ],\r\n                                                     \"io_write_mib_per_second\":  [\r\n                                                                                     327.1428,\r\n                                                                                     502.3958,\r\n                                                                                     319.3912,\r\n                                                                                     408.8788,\r\n                                                                                     418.4527\r\n                                                                                 ],\r\n                                                     \"io_read_mib_per_second\":  [\r\n                                                                                    6141.3273,\r\n                                                                                    2945.7793,\r\n                                                                                    3303.4645,\r\n                                                                                    6317.1194,\r\n                                                                                    2734.3416\r\n                                                                                ],\r\n                                                     \"io_write_read_mib_per_second\":  [\r\n                                                                                          3234.2351,\r\n                                                                                          1724.0875,\r\n                                                                                          1811.4279,\r\n                                                                                          3362.9991,\r\n                                                                                          1576.3972\r\n                                                                                      ]\r\n                                                 }\r\n                                 }\r\n              }\r\n}\r\n",
+          "stderr": ""
+        },
+        "cleanup": null
+      },
+      "result": {
+        "generated_utc": "2026-05-13T08:01:51Z",
+        "stage": "apply",
+        "experiment_id": "operator96-063-dripsswhwdivergenceenablelivedump-1",
+        "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+        "value_name": "DripsSwHwDivergenceEnableLiveDump",
+        "value_data": "1",
+        "smoke_profile": "gui",
+        "status": "ok",
+        "error": null,
+        "baseline_smoke": {
+          "success": true,
+          "failure_count": 1,
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "items": [
+            {
+              "name": "shell-process-presence",
+              "success": true,
+              "detail": "explorer=True;SearchHost=True;ShellExperienceHost=False;sihost=True;StartMenuExperienceHost=True"
+            },
+            {
+              "name": "cmd-ver",
+              "success": true,
+              "detail": "exit=0"
+            },
+            {
+              "name": "powershell-version",
+              "success": true,
+              "detail": "exit=0"
+            },
+            {
+              "name": "notepad-x64-launch",
+              "success": true,
+              "detail": "started=True;alive_after_2s=True"
+            },
+            {
+              "name": "notepad-x86-launch",
+              "success": true,
+              "detail": "started=True;alive_after_2s=True"
+            },
+            {
+              "name": "calc-launch",
+              "success": true,
+              "detail": "started=True;alive_after_2s=False"
+            },
+            {
+              "name": "settings-uri-launch",
+              "success": true,
+              "detail": "launch-command-succeeded"
+            },
+            {
+              "name": "store-uri-launch",
+              "success": false,
+              "detail": "This command cannot be run due to the error: The operation attempted is not supported."
+            }
+          ],
+          "interactive_user_smoke": {
+            "status": "ok",
+            "user": "rai",
+            "failure_count": 0,
+            "items": [
+              {
+                "name": "interactive-settings-uri",
+                "success": true,
+                "detail": "launch-command-succeeded"
+              },
+              {
+                "name": "interactive-store-uri",
+                "success": true,
+                "detail": "launch-command-succeeded"
+              },
+              {
+                "name": "interactive-notepad-x64",
+                "success": true,
+                "detail": "started=true;alive_after_2s=True"
+              },
+              {
+                "name": "interactive-notepad-x86",
+                "success": true,
+                "detail": "started=true;alive_after_2s=True"
+              },
+              {
+                "name": "interactive-calc",
+                "success": true,
+                "detail": "started=true;alive_after_2s=False"
+              }
+            ]
+          },
+          "benchmarks": {
+            "status": "ok",
+            "version": 2,
+            "sample_count": 5,
+            "cpu_duration_seconds": 3,
+            "cpu_threads": 2,
+            "io_size_mib": 16,
+            "cpu_single_iterations_per_second": 38008561.2413,
+            "cpu_multi_iterations_per_second": 72278969.1535,
+            "io_write_mib_per_second": 455.8599,
+            "io_read_mib_per_second": 1805.9098,
+            "io_write_read_mib_per_second": 1131.8671,
+            "spreads": {
+              "cpu_single_iterations_per_second": 1.65,
+              "cpu_multi_iterations_per_second": 4.71,
+              "io_write_mib_per_second": 65.37,
+              "io_read_mib_per_second": 224.04,
+              "io_write_read_mib_per_second": 187.83
+            },
+            "samples": {
+              "cpu_single_iterations_per_second": [
+                37674432.2236,
+                38008561.2413,
+                37763120.7106,
+                38108100.4054,
+                38300386.6588
+              ],
+              "cpu_multi_iterations_per_second": [
+                74368457.3654,
+                73925402.6612,
+                72091006.446,
+                72278969.1535,
+                70961850.454
+              ],
+              "io_write_mib_per_second": [
+                455.8599,
+                249.9383,
+                506.9018,
+                433.7677,
+                547.9452
+              ],
+              "io_read_mib_per_second": [
+                5714.6939,
+                1668.7352,
+                1756.8324,
+                1805.9098,
+                3835.5508
+              ],
+              "io_write_read_mib_per_second": [
+                3085.2769,
+                959.3367,
+                1131.8671,
+                1119.8388,
+                2191.748
+              ]
+            }
+          }
+        },
+        "original": {
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+          "value_name": "DripsSwHwDivergenceEnableLiveDump",
+          "key_exists": true,
+          "value_exists": false,
+          "value": null,
+          "value_kind": null,
+          "value_hex": null,
+          "status": "value-missing",
+          "error": null
+        },
+        "after_apply": {
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+          "value_name": "DripsSwHwDivergenceEnableLiveDump",
+          "key_exists": true,
+          "value_exists": true,
+          "value": 1,
+          "value_kind": "System.Int32",
+          "value_hex": "0x1",
+          "status": "value-present",
+          "error": null
+        },
+        "smoke": {
+          "success": true,
+          "failure_count": 1,
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "items": [
+            {
+              "name": "shell-process-presence",
+              "success": true,
+              "detail": "explorer=True;SearchHost=True;ShellExperienceHost=False;sihost=True;StartMenuExperienceHost=True"
+            },
+            {
+              "name": "cmd-ver",
+              "success": true,
+              "detail": "exit=0"
+            },
+            {
+              "name": "powershell-version",
+              "success": true,
+              "detail": "exit=0"
+            },
+            {
+              "name": "notepad-x64-launch",
+              "success": true,
+              "detail": "started=True;alive_after_2s=True"
+            },
+            {
+              "name": "notepad-x86-launch",
+              "success": true,
+              "detail": "started=True;alive_after_2s=True"
+            },
+            {
+              "name": "calc-launch",
+              "success": true,
+              "detail": "started=True;alive_after_2s=False"
+            },
+            {
+              "name": "settings-uri-launch",
+              "success": true,
+              "detail": "launch-command-succeeded"
+            },
+            {
+              "name": "store-uri-launch",
+              "success": false,
+              "detail": "This command cannot be run due to the error: The operation attempted is not supported."
+            }
+          ],
+          "interactive_user_smoke": {
+            "status": "ok",
+            "user": "rai",
+            "failure_count": 0,
+            "items": [
+              {
+                "name": "interactive-settings-uri",
+                "success": true,
+                "detail": "launch-command-succeeded"
+              },
+              {
+                "name": "interactive-store-uri",
+                "success": true,
+                "detail": "launch-command-succeeded"
+              },
+              {
+                "name": "interactive-notepad-x64",
+                "success": true,
+                "detail": "started=true;alive_after_2s=True"
+              },
+              {
+                "name": "interactive-notepad-x86",
+                "success": true,
+                "detail": "started=true;alive_after_2s=True"
+              },
+              {
+                "name": "interactive-calc",
+                "success": true,
+                "detail": "started=true;alive_after_2s=False"
+              }
+            ]
+          },
+          "benchmarks": {
+            "status": "ok",
+            "version": 2,
+            "sample_count": 5,
+            "cpu_duration_seconds": 3,
+            "cpu_threads": 2,
+            "io_size_mib": 16,
+            "cpu_single_iterations_per_second": 37918760.9104,
+            "cpu_multi_iterations_per_second": 74679471.2804,
+            "io_write_mib_per_second": 408.8788,
+            "io_read_mib_per_second": 3303.4645,
+            "io_write_read_mib_per_second": 1811.4279,
+            "spreads": {
+              "cpu_single_iterations_per_second": 2.59,
+              "cpu_multi_iterations_per_second": 2.41,
+              "io_write_mib_per_second": 44.76,
+              "io_read_mib_per_second": 108.46,
+              "io_write_read_mib_per_second": 98.63
+            },
+            "samples": {
+              "cpu_single_iterations_per_second": [
+                37334581.3987,
+                37485709.2953,
+                37918760.9104,
+                38239068.8509,
+                38318328.8238
+              ],
+              "cpu_multi_iterations_per_second": [
+                73322471.315,
+                73310916.2395,
+                75108111.6891,
+                74946231.2332,
+                74679471.2804
+              ],
+              "io_write_mib_per_second": [
+                327.1428,
+                502.3958,
+                319.3912,
+                408.8788,
+                418.4527
+              ],
+              "io_read_mib_per_second": [
+                6141.3273,
+                2945.7793,
+                3303.4645,
+                6317.1194,
+                2734.3416
+              ],
+              "io_write_read_mib_per_second": [
+                3234.2351,
+                1724.0875,
+                1811.4279,
+                3362.9991,
+                1576.3972
+              ]
+            }
+          }
+        }
+      },
+      "host_noise_meta": {
+        "noise_status": "ok",
+        "noise_reason": null,
+        "host_cpu_busy_pct": 10.07,
+        "load1": 2.66,
+        "load5": 2.82,
+        "host_cpu_count": 16,
+        "retry_count": 0,
+        "max_retries": 18,
+        "busy_threshold_pct": 12.5,
+        "load1_per_cpu_threshold": 0.5,
+        "sample_started_utc": "2026-05-13T08:03:27Z",
+        "sample_finished_utc": "2026-05-13T08:03:28Z"
+      }
+    },
+    "post_reboot_rollback": {
+      "returncode": 0,
+      "qga": {
+        "status": "completed",
+        "domain": "regprobe-win11-25h2-session",
+        "guest_dir": "C:\\RegProbe-Diag\\registry-value-experiments\\operator96-063-dripsswhwdivergenceenablelivedump-1",
+        "guest_script_path": "C:\\RegProbe-Diag\\registry-value-experiments\\operator96-063-dripsswhwdivergenceenablelivedump-1\\registry-value-experiment-operator96-063-dripsswhwdivergenceenablelivedump-1.ps1",
+        "upload": {
+          "source": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/dist/kvm-generated/registry-value-experiment-operator96-063-dripsswhwdivergenceenablelivedump-1.ps1",
+          "destination": "C:\\RegProbe-Diag\\registry-value-experiments\\operator96-063-dripsswhwdivergenceenablelivedump-1\\registry-value-experiment-operator96-063-dripsswhwdivergenceenablelivedump-1.ps1",
+          "size_bytes": 25726,
+          "written_bytes": 25726,
+          "sha256": "3d5038b6671f6ba643681c50599dcff3194274dbb06bfcd79c26d28c9b4613e8"
+        },
+        "execution": {
+          "status": "exited",
+          "pid": 1076,
+          "path": "powershell.exe",
+          "arg": [
+            "-NoProfile",
+            "-ExecutionPolicy",
+            "Bypass",
+            "-File",
+            "C:\\RegProbe-Diag\\registry-value-experiments\\operator96-063-dripsswhwdivergenceenablelivedump-1\\registry-value-experiment-operator96-063-dripsswhwdivergenceenablelivedump-1.ps1",
+            "-Stage",
+            "post-reboot-rollback",
+            "-RegistryPath",
+            "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "-ValueName",
+            "DripsSwHwDivergenceEnableLiveDump",
+            "-ValueData",
+            "1",
+            "-ExperimentId",
+            "operator96-063-dripsswhwdivergenceenablelivedump-1",
+            "-SmokeProfile",
+            "gui"
+          ],
+          "exitcode": 0,
+          "stdout": "{\r\n    \"generated_utc\":  \"2026-05-13T08:05:26Z\",\r\n    \"stage\":  \"post-reboot-rollback\",\r\n    \"experiment_id\":  \"operator96-063-dripsswhwdivergenceenablelivedump-1\",\r\n    \"registry_path\":  \"HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Power\",\r\n    \"value_name\":  \"DripsSwHwDivergenceEnableLiveDump\",\r\n    \"value_data\":  \"1\",\r\n    \"smoke_profile\":  \"gui\",\r\n    \"status\":  \"ok\",\r\n    \"error\":  null,\r\n    \"after_reboot\":  {\r\n                         \"path\":  \"HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Power\",\r\n                         \"value_name\":  \"DripsSwHwDivergenceEnableLiveDump\",\r\n                         \"key_exists\":  true,\r\n                         \"value_exists\":  true,\r\n                         \"value\":  1,\r\n                         \"value_kind\":  \"System.Int32\",\r\n                         \"value_hex\":  \"0x1\",\r\n                         \"status\":  \"value-present\",\r\n                         \"error\":  null\r\n                     },\r\n    \"smoke\":  {\r\n                  \"success\":  true,\r\n                  \"failure_count\":  1,\r\n                  \"hard_failure_count\":  0,\r\n                  \"best_effort_failure_count\":  1,\r\n                  \"items\":  [\r\n                                {\r\n                                    \"name\":  \"shell-process-presence\",\r\n                                    \"success\":  true,\r\n                                    \"detail\":  \"explorer=True;SearchHost=True;ShellExperienceHost=False;sihost=True;StartMenuExperienceHost=True\"\r\n                                },\r\n                                {\r\n                                    \"name\":  \"cmd-ver\",\r\n                                    \"success\":  true,\r\n                                    \"detail\":  \"exit=0\"\r\n                                },\r\n                                {\r\n                                    \"name\":  \"powershell-version\",\r\n                                    \"success\":  true,\r\n                                    \"detail\":  \"exit=0\"\r\n                                },\r\n                                {\r\n                                    \"name\":  \"notepad-x64-launch\",\r\n                                    \"success\":  true,\r\n                                    \"detail\":  \"started=True;alive_after_2s=True\"\r\n                                },\r\n                                {\r\n                                    \"name\":  \"notepad-x86-launch\",\r\n                                    \"success\":  true,\r\n                                    \"detail\":  \"started=True;alive_after_2s=True\"\r\n                                },\r\n                                {\r\n                                    \"name\":  \"calc-launch\",\r\n                                    \"success\":  true,\r\n                                    \"detail\":  \"started=True;alive_after_2s=False\"\r\n                                },\r\n                                {\r\n                                    \"name\":  \"settings-uri-launch\",\r\n                                    \"success\":  true,\r\n                                    \"detail\":  \"launch-command-succeeded\"\r\n                                },\r\n                                {\r\n                                    \"name\":  \"store-uri-launch\",\r\n                                    \"success\":  false,\r\n                                    \"detail\":  \"This command cannot be run due to the error: The operation attempted is not supported.\"\r\n                                }\r\n                            ],\r\n                  \"interactive_user_smoke\":  {\r\n                                                 \"status\":  \"ok\",\r\n                                                 \"user\":  \"rai\",\r\n                                                 \"failure_count\":  0,\r\n                                                 \"items\":  [\r\n                                                               {\r\n                                                                   \"name\":  \"interactive-settings-uri\",\r\n                                                                   \"success\":  true,\r\n                                                                   \"detail\":  \"launch-command-succeeded\"\r\n                                                               },\r\n                                                               {\r\n                                                                   \"name\":  \"interactive-store-uri\",\r\n                                                                   \"success\":  true,\r\n                                                                   \"detail\":  \"launch-command-succeeded\"\r\n                                                               },\r\n                                                               {\r\n                                                                   \"name\":  \"interactive-notepad-x64\",\r\n                                                                   \"success\":  true,\r\n                                                                   \"detail\":  \"started=true;alive_after_2s=False\"\r\n                                                               },\r\n                                                               {\r\n                                                                   \"name\":  \"interactive-notepad-x86\",\r\n                                                                   \"success\":  true,\r\n                                                                   \"detail\":  \"started=true;alive_after_2s=True\"\r\n                                                               },\r\n                                                               {\r\n                                                                   \"name\":  \"interactive-calc\",\r\n                                                                   \"success\":  true,\r\n                                                                   \"detail\":  \"started=true;alive_after_2s=False\"\r\n                                                               }\r\n                                                           ]\r\n                                             },\r\n                  \"benchmarks\":  {\r\n                                     \"status\":  \"ok\",\r\n                                     \"version\":  2,\r\n                                     \"sample_count\":  5,\r\n                                     \"cpu_duration_seconds\":  3,\r\n                                     \"cpu_threads\":  2,\r\n                                     \"io_size_mib\":  16,\r\n                                     \"cpu_single_iterations_per_second\":  38170323.3103,\r\n                                     \"cpu_multi_iterations_per_second\":  74440329.3097,\r\n                                     \"io_write_mib_per_second\":  414.3843,\r\n                                     \"io_read_mib_per_second\":  1808.1139,\r\n                                     \"io_write_read_mib_per_second\":  1138.9462,\r\n                                     \"spreads\":  {\r\n                                                     \"cpu_single_iterations_per_second\":  2.41,\r\n                                                     \"cpu_multi_iterations_per_second\":  13.55,\r\n                                                     \"io_write_mib_per_second\":  37.42,\r\n                                                     \"io_read_mib_per_second\":  243.36,\r\n                                                     \"io_write_read_mib_per_second\":  194.91\r\n                                                 },\r\n                                     \"samples\":  {\r\n                                                     \"cpu_single_iterations_per_second\":  [\r\n                                                                                              37695833.2029,\r\n                                                                                              38617521.9631,\r\n                                                                                              38278625.6122,\r\n                                                                                              37895948.5226,\r\n                                                                                              38170323.3103\r\n                                                                                          ],\r\n                                                     \"cpu_multi_iterations_per_second\":  [\r\n                                                                                             66323700.7414,\r\n                                                                                             75076861.0373,\r\n                                                                                             75982773.6708,\r\n                                                                                             74440329.3097,\r\n                                                                                             65898447.5882\r\n                                                                                         ],\r\n                                                     \"io_write_mib_per_second\":  [\r\n                                                                                     420.9684,\r\n                                                                                     314.7029,\r\n                                                                                     469.7786,\r\n                                                                                     414.3843,\r\n                                                                                     344.7986\r\n                                                                                 ],\r\n                                                     \"io_read_mib_per_second\":  [\r\n                                                                                    6037.7358,\r\n                                                                                    1704.0855,\r\n                                                                                    1808.1139,\r\n                                                                                    1637.4652,\r\n                                                                                    3462.2292\r\n                                                                                ],\r\n                                                     \"io_write_read_mib_per_second\":  [\r\n                                                                                          3229.3521,\r\n                                                                                          1009.3942,\r\n                                                                                          1138.9462,\r\n                                                                                          1025.9248,\r\n                                                                                          1903.5139\r\n                                                                                      ]\r\n                                                 }\r\n                                 }\r\n              },\r\n    \"restore_action\":  \"removed-created-value\",\r\n    \"after_restore\":  {\r\n                          \"path\":  \"HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Power\",\r\n                          \"value_name\":  \"DripsSwHwDivergenceEnableLiveDump\",\r\n                          \"key_exists\":  true,\r\n                          \"value_exists\":  false,\r\n                          \"value\":  null,\r\n                          \"value_kind\":  null,\r\n                          \"value_hex\":  null,\r\n                          \"status\":  \"value-missing\",\r\n                          \"error\":  null\r\n                      }\r\n}\r\n",
+          "stderr": ""
+        },
+        "cleanup": null
+      },
+      "result": {
+        "generated_utc": "2026-05-13T08:05:26Z",
+        "stage": "post-reboot-rollback",
+        "experiment_id": "operator96-063-dripsswhwdivergenceenablelivedump-1",
+        "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+        "value_name": "DripsSwHwDivergenceEnableLiveDump",
+        "value_data": "1",
+        "smoke_profile": "gui",
+        "status": "ok",
+        "error": null,
+        "after_reboot": {
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+          "value_name": "DripsSwHwDivergenceEnableLiveDump",
+          "key_exists": true,
+          "value_exists": true,
+          "value": 1,
+          "value_kind": "System.Int32",
+          "value_hex": "0x1",
+          "status": "value-present",
+          "error": null
+        },
+        "smoke": {
+          "success": true,
+          "failure_count": 1,
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "items": [
+            {
+              "name": "shell-process-presence",
+              "success": true,
+              "detail": "explorer=True;SearchHost=True;ShellExperienceHost=False;sihost=True;StartMenuExperienceHost=True"
+            },
+            {
+              "name": "cmd-ver",
+              "success": true,
+              "detail": "exit=0"
+            },
+            {
+              "name": "powershell-version",
+              "success": true,
+              "detail": "exit=0"
+            },
+            {
+              "name": "notepad-x64-launch",
+              "success": true,
+              "detail": "started=True;alive_after_2s=True"
+            },
+            {
+              "name": "notepad-x86-launch",
+              "success": true,
+              "detail": "started=True;alive_after_2s=True"
+            },
+            {
+              "name": "calc-launch",
+              "success": true,
+              "detail": "started=True;alive_after_2s=False"
+            },
+            {
+              "name": "settings-uri-launch",
+              "success": true,
+              "detail": "launch-command-succeeded"
+            },
+            {
+              "name": "store-uri-launch",
+              "success": false,
+              "detail": "This command cannot be run due to the error: The operation attempted is not supported."
+            }
+          ],
+          "interactive_user_smoke": {
+            "status": "ok",
+            "user": "rai",
+            "failure_count": 0,
+            "items": [
+              {
+                "name": "interactive-settings-uri",
+                "success": true,
+                "detail": "launch-command-succeeded"
+              },
+              {
+                "name": "interactive-store-uri",
+                "success": true,
+                "detail": "launch-command-succeeded"
+              },
+              {
+                "name": "interactive-notepad-x64",
+                "success": true,
+                "detail": "started=true;alive_after_2s=False"
+              },
+              {
+                "name": "interactive-notepad-x86",
+                "success": true,
+                "detail": "started=true;alive_after_2s=True"
+              },
+              {
+                "name": "interactive-calc",
+                "success": true,
+                "detail": "started=true;alive_after_2s=False"
+              }
+            ]
+          },
+          "benchmarks": {
+            "status": "ok",
+            "version": 2,
+            "sample_count": 5,
+            "cpu_duration_seconds": 3,
+            "cpu_threads": 2,
+            "io_size_mib": 16,
+            "cpu_single_iterations_per_second": 38170323.3103,
+            "cpu_multi_iterations_per_second": 74440329.3097,
+            "io_write_mib_per_second": 414.3843,
+            "io_read_mib_per_second": 1808.1139,
+            "io_write_read_mib_per_second": 1138.9462,
+            "spreads": {
+              "cpu_single_iterations_per_second": 2.41,
+              "cpu_multi_iterations_per_second": 13.55,
+              "io_write_mib_per_second": 37.42,
+              "io_read_mib_per_second": 243.36,
+              "io_write_read_mib_per_second": 194.91
+            },
+            "samples": {
+              "cpu_single_iterations_per_second": [
+                37695833.2029,
+                38617521.9631,
+                38278625.6122,
+                37895948.5226,
+                38170323.3103
+              ],
+              "cpu_multi_iterations_per_second": [
+                66323700.7414,
+                75076861.0373,
+                75982773.6708,
+                74440329.3097,
+                65898447.5882
+              ],
+              "io_write_mib_per_second": [
+                420.9684,
+                314.7029,
+                469.7786,
+                414.3843,
+                344.7986
+              ],
+              "io_read_mib_per_second": [
+                6037.7358,
+                1704.0855,
+                1808.1139,
+                1637.4652,
+                3462.2292
+              ],
+              "io_write_read_mib_per_second": [
+                3229.3521,
+                1009.3942,
+                1138.9462,
+                1025.9248,
+                1903.5139
+              ]
+            }
+          }
+        },
+        "restore_action": "removed-created-value",
+        "after_restore": {
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+          "value_name": "DripsSwHwDivergenceEnableLiveDump",
+          "key_exists": true,
+          "value_exists": false,
+          "value": null,
+          "value_kind": null,
+          "value_hex": null,
+          "status": "value-missing",
+          "error": null
+        }
+      },
+      "host_noise_meta": {
+        "noise_status": "ok",
+        "noise_reason": null,
+        "host_cpu_busy_pct": 9.39,
+        "load1": 1.81,
+        "load5": 2.43,
+        "host_cpu_count": 16,
+        "retry_count": 0,
+        "max_retries": 18,
+        "busy_threshold_pct": 12.5,
+        "load1_per_cpu_threshold": 0.5,
+        "sample_started_utc": "2026-05-13T08:07:01Z",
+        "sample_finished_utc": "2026-05-13T08:07:02Z"
+      }
+    },
+    "post_rollback": {
+      "returncode": 0,
+      "qga": {
+        "status": "completed",
+        "domain": "regprobe-win11-25h2-session",
+        "guest_dir": "C:\\RegProbe-Diag\\registry-value-experiments\\operator96-063-dripsswhwdivergenceenablelivedump-1",
+        "guest_script_path": "C:\\RegProbe-Diag\\registry-value-experiments\\operator96-063-dripsswhwdivergenceenablelivedump-1\\registry-value-experiment-operator96-063-dripsswhwdivergenceenablelivedump-1.ps1",
+        "upload": {
+          "source": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/dist/kvm-generated/registry-value-experiment-operator96-063-dripsswhwdivergenceenablelivedump-1.ps1",
+          "destination": "C:\\RegProbe-Diag\\registry-value-experiments\\operator96-063-dripsswhwdivergenceenablelivedump-1\\registry-value-experiment-operator96-063-dripsswhwdivergenceenablelivedump-1.ps1",
+          "size_bytes": 25726,
+          "written_bytes": 25726,
+          "sha256": "3d5038b6671f6ba643681c50599dcff3194274dbb06bfcd79c26d28c9b4613e8"
+        },
+        "execution": {
+          "status": "exited",
+          "pid": 8644,
+          "path": "powershell.exe",
+          "arg": [
+            "-NoProfile",
+            "-ExecutionPolicy",
+            "Bypass",
+            "-File",
+            "C:\\RegProbe-Diag\\registry-value-experiments\\operator96-063-dripsswhwdivergenceenablelivedump-1\\registry-value-experiment-operator96-063-dripsswhwdivergenceenablelivedump-1.ps1",
+            "-Stage",
+            "post-rollback",
+            "-RegistryPath",
+            "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "-ValueName",
+            "DripsSwHwDivergenceEnableLiveDump",
+            "-ValueData",
+            "1",
+            "-ExperimentId",
+            "operator96-063-dripsswhwdivergenceenablelivedump-1",
+            "-SmokeProfile",
+            "gui"
+          ],
+          "exitcode": 0,
+          "stdout": "{\r\n    \"generated_utc\":  \"2026-05-13T08:08:21Z\",\r\n    \"stage\":  \"post-rollback\",\r\n    \"experiment_id\":  \"operator96-063-dripsswhwdivergenceenablelivedump-1\",\r\n    \"registry_path\":  \"HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Power\",\r\n    \"value_name\":  \"DripsSwHwDivergenceEnableLiveDump\",\r\n    \"value_data\":  \"1\",\r\n    \"smoke_profile\":  \"gui\",\r\n    \"status\":  \"ok\",\r\n    \"error\":  null,\r\n    \"final\":  {\r\n                  \"path\":  \"HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Power\",\r\n                  \"value_name\":  \"DripsSwHwDivergenceEnableLiveDump\",\r\n                  \"key_exists\":  true,\r\n                  \"value_exists\":  false,\r\n                  \"value\":  null,\r\n                  \"value_kind\":  null,\r\n                  \"value_hex\":  null,\r\n                  \"status\":  \"value-missing\",\r\n                  \"error\":  null\r\n              },\r\n    \"smoke\":  {\r\n                  \"success\":  true,\r\n                  \"failure_count\":  1,\r\n                  \"hard_failure_count\":  0,\r\n                  \"best_effort_failure_count\":  1,\r\n                  \"items\":  [\r\n                                {\r\n                                    \"name\":  \"shell-process-presence\",\r\n                                    \"success\":  true,\r\n                                    \"detail\":  \"explorer=True;SearchHost=True;ShellExperienceHost=False;sihost=True;StartMenuExperienceHost=True\"\r\n                                },\r\n                                {\r\n                                    \"name\":  \"cmd-ver\",\r\n                                    \"success\":  true,\r\n                                    \"detail\":  \"exit=0\"\r\n                                },\r\n                                {\r\n                                    \"name\":  \"powershell-version\",\r\n                                    \"success\":  true,\r\n                                    \"detail\":  \"exit=0\"\r\n                                },\r\n                                {\r\n                                    \"name\":  \"notepad-x64-launch\",\r\n                                    \"success\":  true,\r\n                                    \"detail\":  \"started=True;alive_after_2s=True\"\r\n                                },\r\n                                {\r\n                                    \"name\":  \"notepad-x86-launch\",\r\n                                    \"success\":  true,\r\n                                    \"detail\":  \"started=True;alive_after_2s=True\"\r\n                                },\r\n                                {\r\n                                    \"name\":  \"calc-launch\",\r\n                                    \"success\":  true,\r\n                                    \"detail\":  \"started=True;alive_after_2s=False\"\r\n                                },\r\n                                {\r\n                                    \"name\":  \"settings-uri-launch\",\r\n                                    \"success\":  true,\r\n                                    \"detail\":  \"launch-command-succeeded\"\r\n                                },\r\n                                {\r\n                                    \"name\":  \"store-uri-launch\",\r\n                                    \"success\":  false,\r\n                                    \"detail\":  \"This command cannot be run due to the error: The operation attempted is not supported.\"\r\n                                }\r\n                            ],\r\n                  \"interactive_user_smoke\":  {\r\n                                                 \"status\":  \"ok\",\r\n                                                 \"user\":  \"rai\",\r\n                                                 \"failure_count\":  0,\r\n                                                 \"items\":  [\r\n                                                               {\r\n                                                                   \"name\":  \"interactive-settings-uri\",\r\n                                                                   \"success\":  true,\r\n                                                                   \"detail\":  \"launch-command-succeeded\"\r\n                                                               },\r\n                                                               {\r\n                                                                   \"name\":  \"interactive-store-uri\",\r\n                                                                   \"success\":  true,\r\n                                                                   \"detail\":  \"launch-command-succeeded\"\r\n                                                               },\r\n                                                               {\r\n                                                                   \"name\":  \"interactive-notepad-x64\",\r\n                                                                   \"success\":  true,\r\n                                                                   \"detail\":  \"started=true;alive_after_2s=False\"\r\n                                                               },\r\n                                                               {\r\n                                                                   \"name\":  \"interactive-notepad-x86\",\r\n                                                                   \"success\":  true,\r\n                                                                   \"detail\":  \"started=true;alive_after_2s=True\"\r\n                                                               },\r\n                                                               {\r\n                                                                   \"name\":  \"interactive-calc\",\r\n                                                                   \"success\":  true,\r\n                                                                   \"detail\":  \"started=true;alive_after_2s=False\"\r\n                                                               }\r\n                                                           ]\r\n                                             },\r\n                  \"benchmarks\":  {\r\n                                     \"status\":  \"ok\",\r\n                                     \"version\":  2,\r\n                                     \"sample_count\":  5,\r\n                                     \"cpu_duration_seconds\":  3,\r\n                                     \"cpu_threads\":  2,\r\n                                     \"io_size_mib\":  16,\r\n                                     \"cpu_single_iterations_per_second\":  38153735.4773,\r\n                                     \"cpu_multi_iterations_per_second\":  73697370.6982,\r\n                                     \"io_write_mib_per_second\":  373.6423,\r\n                                     \"io_read_mib_per_second\":  1766.4138,\r\n                                     \"io_write_read_mib_per_second\":  1085.7674,\r\n                                     \"spreads\":  {\r\n                                                     \"cpu_single_iterations_per_second\":  2.04,\r\n                                                     \"cpu_multi_iterations_per_second\":  13.36,\r\n                                                     \"io_write_mib_per_second\":  53.88,\r\n                                                     \"io_read_mib_per_second\":  258.94,\r\n                                                     \"io_write_read_mib_per_second\":  203.39\r\n                                                 },\r\n                                     \"samples\":  {\r\n                                                     \"cpu_single_iterations_per_second\":  [\r\n                                                                                              37471653.0451,\r\n                                                                                              38153735.4773,\r\n                                                                                              38251180.7202,\r\n                                                                                              38249374.6851,\r\n                                                                                              37965438.5855\r\n                                                                                          ],\r\n                                                     \"cpu_multi_iterations_per_second\":  [\r\n                                                                                             67805311.6578,\r\n                                                                                             74888400.2342,\r\n                                                                                             73697370.6982,\r\n                                                                                             73769076.5484,\r\n                                                                                             65045530.1513\r\n                                                                                         ],\r\n                                                     \"io_write_mib_per_second\":  [\r\n                                                                                     333.0738,\r\n                                                                                     373.6423,\r\n                                                                                     397.6341,\r\n                                                                                     534.3879,\r\n                                                                                     362.0008\r\n                                                                                 ],\r\n                                                     \"io_read_mib_per_second\":  [\r\n                                                                                    6211.1801,\r\n                                                                                    1753.9436,\r\n                                                                                    1766.4138,\r\n                                                                                    1637.1469,\r\n                                                                                    4195.2908\r\n                                                                                ],\r\n                                                     \"io_write_read_mib_per_second\":  [\r\n                                                                                          3272.127,\r\n                                                                                          1063.793,\r\n                                                                                          1082.024,\r\n                                                                                          1085.7674,\r\n                                                                                          2278.6458\r\n                                                                                      ]\r\n                                                 }\r\n                                 }\r\n              }\r\n}\r\n",
+          "stderr": ""
+        },
+        "cleanup": null
+      },
+      "result": {
+        "generated_utc": "2026-05-13T08:08:21Z",
+        "stage": "post-rollback",
+        "experiment_id": "operator96-063-dripsswhwdivergenceenablelivedump-1",
+        "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+        "value_name": "DripsSwHwDivergenceEnableLiveDump",
+        "value_data": "1",
+        "smoke_profile": "gui",
+        "status": "ok",
+        "error": null,
+        "final": {
+          "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+          "value_name": "DripsSwHwDivergenceEnableLiveDump",
+          "key_exists": true,
+          "value_exists": false,
+          "value": null,
+          "value_kind": null,
+          "value_hex": null,
+          "status": "value-missing",
+          "error": null
+        },
+        "smoke": {
+          "success": true,
+          "failure_count": 1,
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "items": [
+            {
+              "name": "shell-process-presence",
+              "success": true,
+              "detail": "explorer=True;SearchHost=True;ShellExperienceHost=False;sihost=True;StartMenuExperienceHost=True"
+            },
+            {
+              "name": "cmd-ver",
+              "success": true,
+              "detail": "exit=0"
+            },
+            {
+              "name": "powershell-version",
+              "success": true,
+              "detail": "exit=0"
+            },
+            {
+              "name": "notepad-x64-launch",
+              "success": true,
+              "detail": "started=True;alive_after_2s=True"
+            },
+            {
+              "name": "notepad-x86-launch",
+              "success": true,
+              "detail": "started=True;alive_after_2s=True"
+            },
+            {
+              "name": "calc-launch",
+              "success": true,
+              "detail": "started=True;alive_after_2s=False"
+            },
+            {
+              "name": "settings-uri-launch",
+              "success": true,
+              "detail": "launch-command-succeeded"
+            },
+            {
+              "name": "store-uri-launch",
+              "success": false,
+              "detail": "This command cannot be run due to the error: The operation attempted is not supported."
+            }
+          ],
+          "interactive_user_smoke": {
+            "status": "ok",
+            "user": "rai",
+            "failure_count": 0,
+            "items": [
+              {
+                "name": "interactive-settings-uri",
+                "success": true,
+                "detail": "launch-command-succeeded"
+              },
+              {
+                "name": "interactive-store-uri",
+                "success": true,
+                "detail": "launch-command-succeeded"
+              },
+              {
+                "name": "interactive-notepad-x64",
+                "success": true,
+                "detail": "started=true;alive_after_2s=False"
+              },
+              {
+                "name": "interactive-notepad-x86",
+                "success": true,
+                "detail": "started=true;alive_after_2s=True"
+              },
+              {
+                "name": "interactive-calc",
+                "success": true,
+                "detail": "started=true;alive_after_2s=False"
+              }
+            ]
+          },
+          "benchmarks": {
+            "status": "ok",
+            "version": 2,
+            "sample_count": 5,
+            "cpu_duration_seconds": 3,
+            "cpu_threads": 2,
+            "io_size_mib": 16,
+            "cpu_single_iterations_per_second": 38153735.4773,
+            "cpu_multi_iterations_per_second": 73697370.6982,
+            "io_write_mib_per_second": 373.6423,
+            "io_read_mib_per_second": 1766.4138,
+            "io_write_read_mib_per_second": 1085.7674,
+            "spreads": {
+              "cpu_single_iterations_per_second": 2.04,
+              "cpu_multi_iterations_per_second": 13.36,
+              "io_write_mib_per_second": 53.88,
+              "io_read_mib_per_second": 258.94,
+              "io_write_read_mib_per_second": 203.39
+            },
+            "samples": {
+              "cpu_single_iterations_per_second": [
+                37471653.0451,
+                38153735.4773,
+                38251180.7202,
+                38249374.6851,
+                37965438.5855
+              ],
+              "cpu_multi_iterations_per_second": [
+                67805311.6578,
+                74888400.2342,
+                73697370.6982,
+                73769076.5484,
+                65045530.1513
+              ],
+              "io_write_mib_per_second": [
+                333.0738,
+                373.6423,
+                397.6341,
+                534.3879,
+                362.0008
+              ],
+              "io_read_mib_per_second": [
+                6211.1801,
+                1753.9436,
+                1766.4138,
+                1637.1469,
+                4195.2908
+              ],
+              "io_write_read_mib_per_second": [
+                3272.127,
+                1063.793,
+                1082.024,
+                1085.7674,
+                2278.6458
+              ]
+            }
+          }
+        }
+      },
+      "host_noise_meta": {
+        "noise_status": "ok",
+        "noise_reason": null,
+        "host_cpu_busy_pct": 8.3,
+        "load1": 2.14,
+        "load5": 2.74,
+        "host_cpu_count": 16,
+        "retry_count": 0,
+        "max_retries": 18,
+        "busy_threshold_pct": 12.5,
+        "load1_per_cpu_threshold": 0.5,
+        "sample_started_utc": "2026-05-13T08:09:57Z",
+        "sample_finished_utc": "2026-05-13T08:09:58Z"
+      }
+    }
+  },
+  "reboots": [
+    {
+      "phase": "after-apply",
+      "status": "ok",
+      "returncode": 0,
+      "stdout": "Domain 'regprobe-win11-25h2-session' is being rebooted\n\n",
+      "stderr": ""
+    },
+    {
+      "phase": "after-rollback",
+      "status": "ok",
+      "returncode": 0,
+      "stdout": "Domain 'regprobe-win11-25h2-session' is being rebooted\n\n",
+      "stderr": ""
+    }
+  ],
+  "health_checks": [
+    {
+      "phase": "after-apply",
+      "payload": {
+        "status": "ok",
+        "summary_source": "qga-preflight",
+        "domain": "regprobe-win11-25h2-session",
+        "connect": "qemu:///session",
+        "checks": {
+          "domstate": {
+            "status": "ok",
+            "command": [
+              "virsh",
+              "-c",
+              "qemu:///session",
+              "domstate",
+              "regprobe-win11-25h2-session"
+            ],
+            "returncode": 0,
+            "state": "running",
+            "stdout": "running",
+            "stderr": ""
+          },
+          "guest_ping": {
+            "status": "ok",
+            "command": [
+              "virsh",
+              "-c",
+              "qemu:///session",
+              "qemu-agent-command",
+              "regprobe-win11-25h2-session",
+              "{\"execute\":\"guest-ping\"}"
+            ],
+            "returncode": 0,
+            "stdout": "{\"return\":{}}",
+            "stderr": "",
+            "return": {}
+          },
+          "guest_info": {
+            "status": "ok",
+            "command": [
+              "virsh",
+              "-c",
+              "qemu:///session",
+              "qemu-agent-command",
+              "regprobe-win11-25h2-session",
+              "{\"execute\":\"guest-info\"}"
+            ],
+            "returncode": 0,
+            "stdout": "{\"return\":{\"version\":\"110.0.2\",\"supported_commands\":[{\"enabled\":true,\"name\":\"guest-get-load\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-ssh-remove-authorized-keys\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-ssh-add-authorized-keys\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-ssh-get-authorized-keys\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-get-devices\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-get-osinfo\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-get-timezone\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-get-users\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-get-host-name\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-exec\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-exec-status\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-set-user-password\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-get-fsinfo\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-get-disks\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-get-vcpus\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-network-get-interfaces\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-suspend-ram\",\"success-response\":false},{\"enabled\":true,\"name\":\"guest-suspend-disk\",\"success-response\":false},{\"enabled\":true,\"name\":\"guest-fstrim\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-fsfreeze-thaw\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-fsfreeze-freeze-list\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-fsfreeze-freeze\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-fsfreeze-status\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-file-flush\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-file-seek\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-file-write\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-file-read\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-file-close\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-file-open\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-shutdown\",\"success-response\":false},{\"enabled\":true,\"name\":\"guest-info\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-set-time\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-get-time\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-ping\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-sync\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-sync-delimited\",\"success-response\":true}]}}",
+            "stderr": "",
+            "return": {
+              "version": "110.0.2",
+              "supported_commands": [
+                {
+                  "enabled": true,
+                  "name": "guest-get-load",
+                  "success-response": true
+                },
+                {
+                  "enabled": true,
+                  "name": "guest-ssh-remove-authorized-keys",
+                  "success-response": true
+                },
+                {
+                  "enabled": true,
+                  "name": "guest-ssh-add-authorized-keys",
+                  "success-response": true
+                },
+                {
+                  "enabled": true,
+                  "name": "guest-ssh-get-authorized-keys",
+                  "success-response": true
+                },
+                {
+                  "enabled": true,
+                  "name": "guest-get-devices",
+                  "success-response": true
+                },
+                {
+                  "enabled": true,
+                  "name": "guest-get-osinfo",
+                  "success-response": true
+                },
+                {
+                  "enabled": true,
+                  "name": "guest-get-timezone",
+                  "success-response": true
+                },
+                {
+                  "enabled": true,
+                  "name": "guest-get-users",
+                  "success-response": true
+                },
+                {
+                  "enabled": true,
+                  "name": "guest-get-host-name",
+                  "success-response": true
+                },
+                {
+                  "enabled": true,
+                  "name": "guest-exec",
+                  "success-response": true
+                },
+                {
+                  "enabled": true,
+                  "name": "guest-exec-status",
+                  "success-response": true
+                },
+                {
+                  "enabled": true,
+                  "name": "guest-set-user-password",
+                  "success-response": true
+                },
+                {
+                  "enabled": true,
+                  "name": "guest-get-fsinfo",
+                  "success-response": true
+                },
+                {
+                  "enabled": true,
+                  "name": "guest-get-disks",
+                  "success-response": true
+                },
+                {
+                  "enabled": true,
+                  "name": "guest-get-vcpus",
+                  "success-response": true
+                },
+                {
+                  "enabled": true,
+                  "name": "guest-network-get-interfaces",
+                  "success-response": true
+                },
+                {
+                  "enabled": true,
+                  "name": "guest-suspend-ram",
+                  "success-response": false
+                },
+                {
+                  "enabled": true,
+                  "name": "guest-suspend-disk",
+                  "success-response": false
+                },
+                {
+                  "enabled": true,
+                  "name": "guest-fstrim",
+                  "success-response": true
+                },
+                {
+                  "enabled": true,
+                  "name": "guest-fsfreeze-thaw",
+                  "success-response": true
+                },
+                {
+                  "enabled": true,
+                  "name": "guest-fsfreeze-freeze-list",
+                  "success-response": true
+                },
+                {
+                  "enabled": true,
+                  "name": "guest-fsfreeze-freeze",
+                  "success-response": true
+                },
+                {
+                  "enabled": true,
+                  "name": "guest-fsfreeze-status",
+                  "success-response": true
+                },
+                {
+                  "enabled": true,
+                  "name": "guest-file-flush",
+                  "success-response": true
+                },
+                {
+                  "enabled": true,
+                  "name": "guest-file-seek",
+                  "success-response": true
+                },
+                {
+                  "enabled": true,
+                  "name": "guest-file-write",
+                  "success-response": true
+                },
+                {
+                  "enabled": true,
+                  "name": "guest-file-read",
+                  "success-response": true
+                },
+                {
+                  "enabled": true,
+                  "name": "guest-file-close",
+                  "success-response": true
+                },
+                {
+                  "enabled": true,
+                  "name": "guest-file-open",
+                  "success-response": true
+                },
+                {
+                  "enabled": true,
+                  "name": "guest-shutdown",
+                  "success-response": false
+                },
+                {
+                  "enabled": true,
+                  "name": "guest-info",
+                  "success-response": true
+                },
+                {
+                  "enabled": true,
+                  "name": "guest-set-time",
+                  "success-response": true
+                },
+                {
+                  "enabled": true,
+                  "name": "guest-get-time",
+                  "success-response": true
+                },
+                {
+                  "enabled": true,
+                  "name": "guest-ping",
+                  "success-response": true
+                },
+                {
+                  "enabled": true,
+                  "name": "guest-sync",
+                  "success-response": true
+                },
+                {
+                  "enabled": true,
+                  "name": "guest-sync-delimited",
+                  "success-response": true
+                }
+              ]
+            }
+          },
+          "guest_exec": {
+            "status": "ok",
+            "command": [
+              "virsh",
+              "-c",
+              "qemu:///session",
+              "qemu-agent-command",
+              "regprobe-win11-25h2-session",
+              "{\"execute\":\"guest-exec-status\",\"arguments\":{\"pid\":4144}}"
+            ],
+            "returncode": 0,
+            "stdout": "{\"return\":{\"exitcode\":0,\"out-data\":\"bnQgYXV0aG9yaXR5XHN5c3RlbQ0K\",\"exited\":true}}",
+            "stderr": "",
+            "return": {
+              "exitcode": 0,
+              "out-data": "bnQgYXV0aG9yaXR5XHN5c3RlbQ0K",
+              "exited": true
+            },
+            "phase": "guest-exec-status",
+            "pid": 4144,
+            "exitcode": 0,
+            "out_data": "nt authority\\system\r\n",
+            "err_data": ""
+          }
+        },
+        "failed_checks": [],
+        "error_kind": null,
+        "recovery_action": "none",
+        "transport_blocker": "none",
+        "guest_health": "stable"
+      }
+    },
+    {
+      "phase": "after-rollback",
+      "payload": {
+        "status": "ok",
+        "summary_source": "qga-preflight",
+        "domain": "regprobe-win11-25h2-session",
+        "connect": "qemu:///session",
+        "checks": {
+          "domstate": {
+            "status": "ok",
+            "command": [
+              "virsh",
+              "-c",
+              "qemu:///session",
+              "domstate",
+              "regprobe-win11-25h2-session"
+            ],
+            "returncode": 0,
+            "state": "running",
+            "stdout": "running",
+            "stderr": ""
+          },
+          "guest_ping": {
+            "status": "ok",
+            "command": [
+              "virsh",
+              "-c",
+              "qemu:///session",
+              "qemu-agent-command",
+              "regprobe-win11-25h2-session",
+              "{\"execute\":\"guest-ping\"}"
+            ],
+            "returncode": 0,
+            "stdout": "{\"return\":{}}",
+            "stderr": "",
+            "return": {}
+          },
+          "guest_info": {
+            "status": "ok",
+            "command": [
+              "virsh",
+              "-c",
+              "qemu:///session",
+              "qemu-agent-command",
+              "regprobe-win11-25h2-session",
+              "{\"execute\":\"guest-info\"}"
+            ],
+            "returncode": 0,
+            "stdout": "{\"return\":{\"version\":\"110.0.2\",\"supported_commands\":[{\"enabled\":true,\"name\":\"guest-get-load\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-ssh-remove-authorized-keys\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-ssh-add-authorized-keys\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-ssh-get-authorized-keys\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-get-devices\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-get-osinfo\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-get-timezone\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-get-users\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-get-host-name\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-exec\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-exec-status\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-set-user-password\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-get-fsinfo\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-get-disks\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-get-vcpus\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-network-get-interfaces\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-suspend-ram\",\"success-response\":false},{\"enabled\":true,\"name\":\"guest-suspend-disk\",\"success-response\":false},{\"enabled\":true,\"name\":\"guest-fstrim\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-fsfreeze-thaw\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-fsfreeze-freeze-list\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-fsfreeze-freeze\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-fsfreeze-status\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-file-flush\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-file-seek\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-file-write\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-file-read\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-file-close\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-file-open\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-shutdown\",\"success-response\":false},{\"enabled\":true,\"name\":\"guest-info\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-set-time\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-get-time\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-ping\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-sync\",\"success-response\":true},{\"enabled\":true,\"name\":\"guest-sync-delimited\",\"success-response\":true}]}}",
+            "stderr": "",
+            "return": {
+              "version": "110.0.2",
+              "supported_commands": [
+                {
+                  "enabled": true,
+                  "name": "guest-get-load",
+                  "success-response": true
+                },
+                {
+                  "enabled": true,
+                  "name": "guest-ssh-remove-authorized-keys",
+                  "success-response": true
+                },
+                {
+                  "enabled": true,
+                  "name": "guest-ssh-add-authorized-keys",
+                  "success-response": true
+                },
+                {
+                  "enabled": true,
+                  "name": "guest-ssh-get-authorized-keys",
+                  "success-response": true
+                },
+                {
+                  "enabled": true,
+                  "name": "guest-get-devices",
+                  "success-response": true
+                },
+                {
+                  "enabled": true,
+                  "name": "guest-get-osinfo",
+                  "success-response": true
+                },
+                {
+                  "enabled": true,
+                  "name": "guest-get-timezone",
+                  "success-response": true
+                },
+                {
+                  "enabled": true,
+                  "name": "guest-get-users",
+                  "success-response": true
+                },
+                {
+                  "enabled": true,
+                  "name": "guest-get-host-name",
+                  "success-response": true
+                },
+                {
+                  "enabled": true,
+                  "name": "guest-exec",
+                  "success-response": true
+                },
+                {
+                  "enabled": true,
+                  "name": "guest-exec-status",
+                  "success-response": true
+                },
+                {
+                  "enabled": true,
+                  "name": "guest-set-user-password",
+                  "success-response": true
+                },
+                {
+                  "enabled": true,
+                  "name": "guest-get-fsinfo",
+                  "success-response": true
+                },
+                {
+                  "enabled": true,
+                  "name": "guest-get-disks",
+                  "success-response": true
+                },
+                {
+                  "enabled": true,
+                  "name": "guest-get-vcpus",
+                  "success-response": true
+                },
+                {
+                  "enabled": true,
+                  "name": "guest-network-get-interfaces",
+                  "success-response": true
+                },
+                {
+                  "enabled": true,
+                  "name": "guest-suspend-ram",
+                  "success-response": false
+                },
+                {
+                  "enabled": true,
+                  "name": "guest-suspend-disk",
+                  "success-response": false
+                },
+                {
+                  "enabled": true,
+                  "name": "guest-fstrim",
+                  "success-response": true
+                },
+                {
+                  "enabled": true,
+                  "name": "guest-fsfreeze-thaw",
+                  "success-response": true
+                },
+                {
+                  "enabled": true,
+                  "name": "guest-fsfreeze-freeze-list",
+                  "success-response": true
+                },
+                {
+                  "enabled": true,
+                  "name": "guest-fsfreeze-freeze",
+                  "success-response": true
+                },
+                {
+                  "enabled": true,
+                  "name": "guest-fsfreeze-status",
+                  "success-response": true
+                },
+                {
+                  "enabled": true,
+                  "name": "guest-file-flush",
+                  "success-response": true
+                },
+                {
+                  "enabled": true,
+                  "name": "guest-file-seek",
+                  "success-response": true
+                },
+                {
+                  "enabled": true,
+                  "name": "guest-file-write",
+                  "success-response": true
+                },
+                {
+                  "enabled": true,
+                  "name": "guest-file-read",
+                  "success-response": true
+                },
+                {
+                  "enabled": true,
+                  "name": "guest-file-close",
+                  "success-response": true
+                },
+                {
+                  "enabled": true,
+                  "name": "guest-file-open",
+                  "success-response": true
+                },
+                {
+                  "enabled": true,
+                  "name": "guest-shutdown",
+                  "success-response": false
+                },
+                {
+                  "enabled": true,
+                  "name": "guest-info",
+                  "success-response": true
+                },
+                {
+                  "enabled": true,
+                  "name": "guest-set-time",
+                  "success-response": true
+                },
+                {
+                  "enabled": true,
+                  "name": "guest-get-time",
+                  "success-response": true
+                },
+                {
+                  "enabled": true,
+                  "name": "guest-ping",
+                  "success-response": true
+                },
+                {
+                  "enabled": true,
+                  "name": "guest-sync",
+                  "success-response": true
+                },
+                {
+                  "enabled": true,
+                  "name": "guest-sync-delimited",
+                  "success-response": true
+                }
+              ]
+            }
+          },
+          "guest_exec": {
+            "status": "ok",
+            "command": [
+              "virsh",
+              "-c",
+              "qemu:///session",
+              "qemu-agent-command",
+              "regprobe-win11-25h2-session",
+              "{\"execute\":\"guest-exec-status\",\"arguments\":{\"pid\":1652}}"
+            ],
+            "returncode": 0,
+            "stdout": "{\"return\":{\"exitcode\":0,\"out-data\":\"bnQgYXV0aG9yaXR5XHN5c3RlbQ0K\",\"exited\":true}}",
+            "stderr": "",
+            "return": {
+              "exitcode": 0,
+              "out-data": "bnQgYXV0aG9yaXR5XHN5c3RlbQ0K",
+              "exited": true
+            },
+            "phase": "guest-exec-status",
+            "pid": 1652,
+            "exitcode": 0,
+            "out_data": "nt authority\\system\r\n",
+            "err_data": ""
+          }
+        },
+        "failed_checks": [],
+        "error_kind": null,
+        "recovery_action": "none",
+        "transport_blocker": "none",
+        "guest_health": "stable"
+      }
+    }
+  ],
+  "safety": {
+    "domain_snapshot_count": 1,
+    "domain_snapshots": [
+      "clean-25h2-qga"
+    ],
+    "snapshot_check": {
+      "returncode": 0,
+      "snapshots": [
+        "clean-25h2-qga"
+      ],
+      "stderr": ""
+    },
+    "warning": null
+  },
+  "smoke": {
+    "apply_smoke_hard_success": true,
+    "post_reboot_smoke_hard_success": true,
+    "post_rollback_smoke_hard_success": true
+  }
+}
