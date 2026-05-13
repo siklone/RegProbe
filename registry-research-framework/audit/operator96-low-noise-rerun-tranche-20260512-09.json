@@ -1,0 +1,1070 @@
+{
+  "generated_utc": "2026-05-13T03:42:00Z",
+  "status": "ok",
+  "report": "registry-research-framework/audit/operator-regadd-followup-source-default-report-20260509.json",
+  "smoke_profile": "gui",
+  "max_values_per_record": 2,
+  "include_default_tests": false,
+  "plan": [
+    {
+      "index": 48,
+      "experiment_id": "operator96-048-mfbufferingthreshold-1",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "MfBufferingThreshold",
+      "value_data": 1,
+      "requested_data": "0",
+      "default_kind": "observed-present",
+      "default_value": 0,
+      "vm_status": "value-present",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed"
+    },
+    {
+      "index": 49,
+      "experiment_id": "operator96-049-perfcalculateactualutilization-0",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "PerfCalculateActualUtilization",
+      "value_data": 0,
+      "requested_data": "0",
+      "default_kind": "observed-present",
+      "default_value": 1,
+      "vm_status": "value-present",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed"
+    },
+    {
+      "index": 50,
+      "experiment_id": "operator96-050-sourcesettingsversion-0",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "SourceSettingsVersion",
+      "value_data": 0,
+      "requested_data": "4",
+      "default_kind": "observed-present",
+      "default_value": 4,
+      "vm_status": "value-present",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed"
+    },
+    {
+      "index": 50,
+      "experiment_id": "operator96-050-sourcesettingsversion-1",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "SourceSettingsVersion",
+      "value_data": 1,
+      "requested_data": "4",
+      "default_kind": "observed-present",
+      "default_value": 4,
+      "vm_status": "value-present",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed"
+    },
+    {
+      "index": 51,
+      "experiment_id": "operator96-051-timerrebasethresholdondripsexit-0",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "TimerRebaseThresholdOnDripsExit",
+      "value_data": 0,
+      "requested_data": "60",
+      "default_kind": "observed-present",
+      "default_value": 60,
+      "vm_status": "value-present",
+      "record_class": "value",
+      "risk_flags": [
+        "kernel-timing-sensitive"
+      ],
+      "source_quality": "vm-observed"
+    },
+    {
+      "index": 51,
+      "experiment_id": "operator96-051-timerrebasethresholdondripsexit-1",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "TimerRebaseThresholdOnDripsExit",
+      "value_data": 1,
+      "requested_data": "60",
+      "default_kind": "observed-present",
+      "default_value": 60,
+      "vm_status": "value-present",
+      "record_class": "value",
+      "risk_flags": [
+        "kernel-timing-sensitive"
+      ],
+      "source_quality": "vm-observed"
+    },
+    {
+      "index": 52,
+      "experiment_id": "operator96-052-hibernateenableddefault-0",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "HibernateEnabledDefault",
+      "value_data": 0,
+      "requested_data": "0",
+      "default_kind": "observed-present",
+      "default_value": 1,
+      "vm_status": "value-present",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed"
+    }
+  ],
+  "results": [
+    {
+      "index": 48,
+      "experiment_id": "operator96-048-mfbufferingthreshold-1",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "MfBufferingThreshold",
+      "value_data": 1,
+      "requested_data": "0",
+      "default_kind": "observed-present",
+      "default_value": 0,
+      "vm_status": "value-present",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed",
+      "status": "ok",
+      "returncode": 0,
+      "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-048-mfbufferingthreshold-1.json",
+      "stdout_payload": {
+        "status": "ok",
+        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-048-mfbufferingthreshold-1.json",
+        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-048-mfbufferingthreshold-1.md",
+        "error": null
+      },
+      "stderr": "",
+      "observations": {
+        "status": "ok",
+        "verdict": "harmful",
+        "confidence": "low",
+        "host_noise": "ok",
+        "primary_delta_pct": -26.407,
+        "verdict_reason": "post_reboot io_write_mib_per_second changed by -26.41%",
+        "metrics_used": [
+          "io_write_mib_per_second"
+        ],
+        "safety_findings": [],
+        "smoke_hard_success": {
+          "apply_smoke_hard_success": true,
+          "post_reboot_smoke_hard_success": true,
+          "post_rollback_smoke_hard_success": true
+        },
+        "apply": {
+          "original": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "MfBufferingThreshold",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 0,
+            "value_kind": "System.Int32",
+            "value_hex": "0x0",
+            "status": "value-present",
+            "error": null
+          },
+          "after_apply": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "MfBufferingThreshold",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 1,
+            "value_kind": "System.Int32",
+            "value_hex": "0x1",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_reboot": {
+          "after_reboot": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "MfBufferingThreshold",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 1,
+            "value_kind": "System.Int32",
+            "value_hex": "0x1",
+            "status": "value-present",
+            "error": null
+          },
+          "restore_action": "restored-original-value",
+          "after_restore": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "MfBufferingThreshold",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 0,
+            "value_kind": "System.Int32",
+            "value_hex": "0x0",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_rollback": {
+          "final": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "MfBufferingThreshold",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 0,
+            "value_kind": "System.Int32",
+            "value_hex": "0x0",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "benchmark_delta_percent": {
+          "apply_vs_baseline": {
+            "cpu_single_seconds": null,
+            "cpu_multi_seconds": null,
+            "io_write_read_mib_per_second": 97.56
+          },
+          "post_reboot_vs_baseline": {
+            "cpu_single_seconds": null,
+            "cpu_multi_seconds": null,
+            "io_write_read_mib_per_second": -5.76
+          }
+        }
+      }
+    },
+    {
+      "index": 49,
+      "experiment_id": "operator96-049-perfcalculateactualutilization-0",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "PerfCalculateActualUtilization",
+      "value_data": 0,
+      "requested_data": "0",
+      "default_kind": "observed-present",
+      "default_value": 1,
+      "vm_status": "value-present",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed",
+      "status": "ok",
+      "returncode": 0,
+      "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-049-perfcalculateactualutilization-0.json",
+      "stdout_payload": {
+        "status": "ok",
+        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-049-perfcalculateactualutilization-0.json",
+        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-049-perfcalculateactualutilization-0.md",
+        "error": null
+      },
+      "stderr": "",
+      "observations": {
+        "status": "ok",
+        "verdict": "low_confidence",
+        "confidence": "low",
+        "host_noise": "ok",
+        "primary_delta_pct": 123.617,
+        "verdict_reason": "apply io_read_mib_per_second changed by +123.62%",
+        "metrics_used": [
+          "io_read_mib_per_second"
+        ],
+        "safety_findings": [],
+        "smoke_hard_success": {
+          "apply_smoke_hard_success": true,
+          "post_reboot_smoke_hard_success": true,
+          "post_rollback_smoke_hard_success": true
+        },
+        "apply": {
+          "original": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "PerfCalculateActualUtilization",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 1,
+            "value_kind": "System.Int32",
+            "value_hex": "0x1",
+            "status": "value-present",
+            "error": null
+          },
+          "after_apply": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "PerfCalculateActualUtilization",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 0,
+            "value_kind": "System.Int32",
+            "value_hex": "0x0",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_reboot": {
+          "after_reboot": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "PerfCalculateActualUtilization",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 0,
+            "value_kind": "System.Int32",
+            "value_hex": "0x0",
+            "status": "value-present",
+            "error": null
+          },
+          "restore_action": "restored-original-value",
+          "after_restore": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "PerfCalculateActualUtilization",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 1,
+            "value_kind": "System.Int32",
+            "value_hex": "0x1",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_rollback": {
+          "final": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "PerfCalculateActualUtilization",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 1,
+            "value_kind": "System.Int32",
+            "value_hex": "0x1",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "benchmark_delta_percent": {
+          "apply_vs_baseline": {
+            "cpu_single_seconds": null,
+            "cpu_multi_seconds": null,
+            "io_write_read_mib_per_second": 95.74
+          },
+          "post_reboot_vs_baseline": {
+            "cpu_single_seconds": null,
+            "cpu_multi_seconds": null,
+            "io_write_read_mib_per_second": -2.84
+          }
+        }
+      }
+    },
+    {
+      "index": 50,
+      "experiment_id": "operator96-050-sourcesettingsversion-0",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "SourceSettingsVersion",
+      "value_data": 0,
+      "requested_data": "4",
+      "default_kind": "observed-present",
+      "default_value": 4,
+      "vm_status": "value-present",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed",
+      "status": "ok",
+      "returncode": 0,
+      "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-050-sourcesettingsversion-0.json",
+      "stdout_payload": {
+        "status": "ok",
+        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-050-sourcesettingsversion-0.json",
+        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-050-sourcesettingsversion-0.md",
+        "error": null
+      },
+      "stderr": "",
+      "observations": {
+        "status": "ok",
+        "verdict": "harmful",
+        "confidence": "low",
+        "host_noise": "ok",
+        "primary_delta_pct": -33.321,
+        "verdict_reason": "post_reboot io_write_mib_per_second changed by -33.32%",
+        "metrics_used": [
+          "io_write_mib_per_second"
+        ],
+        "safety_findings": [],
+        "smoke_hard_success": {
+          "apply_smoke_hard_success": true,
+          "post_reboot_smoke_hard_success": true,
+          "post_rollback_smoke_hard_success": true
+        },
+        "apply": {
+          "original": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "SourceSettingsVersion",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 4,
+            "value_kind": "System.Int32",
+            "value_hex": "0x4",
+            "status": "value-present",
+            "error": null
+          },
+          "after_apply": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "SourceSettingsVersion",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 0,
+            "value_kind": "System.Int32",
+            "value_hex": "0x0",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_reboot": {
+          "after_reboot": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "SourceSettingsVersion",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 0,
+            "value_kind": "System.Int32",
+            "value_hex": "0x0",
+            "status": "value-present",
+            "error": null
+          },
+          "restore_action": "restored-original-value",
+          "after_restore": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "SourceSettingsVersion",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 4,
+            "value_kind": "System.Int32",
+            "value_hex": "0x4",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_rollback": {
+          "final": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "SourceSettingsVersion",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 4,
+            "value_kind": "System.Int32",
+            "value_hex": "0x4",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "benchmark_delta_percent": {
+          "apply_vs_baseline": {
+            "cpu_single_seconds": null,
+            "cpu_multi_seconds": null,
+            "io_write_read_mib_per_second": 58.56
+          },
+          "post_reboot_vs_baseline": {
+            "cpu_single_seconds": null,
+            "cpu_multi_seconds": null,
+            "io_write_read_mib_per_second": 1.86
+          }
+        }
+      }
+    },
+    {
+      "index": 50,
+      "experiment_id": "operator96-050-sourcesettingsversion-1",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "SourceSettingsVersion",
+      "value_data": 1,
+      "requested_data": "4",
+      "default_kind": "observed-present",
+      "default_value": 4,
+      "vm_status": "value-present",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed",
+      "status": "ok",
+      "returncode": 0,
+      "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-050-sourcesettingsversion-1.json",
+      "stdout_payload": {
+        "status": "ok",
+        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-050-sourcesettingsversion-1.json",
+        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-050-sourcesettingsversion-1.md",
+        "error": null
+      },
+      "stderr": "",
+      "observations": {
+        "status": "ok",
+        "verdict": "harmful",
+        "confidence": "low",
+        "host_noise": "ok",
+        "primary_delta_pct": -10.15,
+        "verdict_reason": "post_reboot io_write_mib_per_second changed by -10.15%",
+        "metrics_used": [
+          "io_write_mib_per_second"
+        ],
+        "safety_findings": [],
+        "smoke_hard_success": {
+          "apply_smoke_hard_success": true,
+          "post_reboot_smoke_hard_success": true,
+          "post_rollback_smoke_hard_success": true
+        },
+        "apply": {
+          "original": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "SourceSettingsVersion",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 4,
+            "value_kind": "System.Int32",
+            "value_hex": "0x4",
+            "status": "value-present",
+            "error": null
+          },
+          "after_apply": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "SourceSettingsVersion",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 1,
+            "value_kind": "System.Int32",
+            "value_hex": "0x1",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_reboot": {
+          "after_reboot": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "SourceSettingsVersion",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 1,
+            "value_kind": "System.Int32",
+            "value_hex": "0x1",
+            "status": "value-present",
+            "error": null
+          },
+          "restore_action": "restored-original-value",
+          "after_restore": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "SourceSettingsVersion",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 4,
+            "value_kind": "System.Int32",
+            "value_hex": "0x4",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_rollback": {
+          "final": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "SourceSettingsVersion",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 4,
+            "value_kind": "System.Int32",
+            "value_hex": "0x4",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "benchmark_delta_percent": {
+          "apply_vs_baseline": {
+            "cpu_single_seconds": null,
+            "cpu_multi_seconds": null,
+            "io_write_read_mib_per_second": 85.73
+          },
+          "post_reboot_vs_baseline": {
+            "cpu_single_seconds": null,
+            "cpu_multi_seconds": null,
+            "io_write_read_mib_per_second": 1.03
+          }
+        }
+      }
+    },
+    {
+      "index": 51,
+      "experiment_id": "operator96-051-timerrebasethresholdondripsexit-0",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "TimerRebaseThresholdOnDripsExit",
+      "value_data": 0,
+      "requested_data": "60",
+      "default_kind": "observed-present",
+      "default_value": 60,
+      "vm_status": "value-present",
+      "record_class": "value",
+      "risk_flags": [
+        "kernel-timing-sensitive"
+      ],
+      "source_quality": "vm-observed",
+      "status": "ok",
+      "returncode": 0,
+      "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-051-timerrebasethresholdondripsexit-0.json",
+      "stdout_payload": {
+        "status": "ok",
+        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-051-timerrebasethresholdondripsexit-0.json",
+        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-051-timerrebasethresholdondripsexit-0.md",
+        "error": null
+      },
+      "stderr": "",
+      "observations": {
+        "status": "ok",
+        "verdict": "harmful",
+        "confidence": "low",
+        "host_noise": "ok",
+        "primary_delta_pct": -18.638,
+        "verdict_reason": "apply io_write_mib_per_second changed by -18.64%",
+        "metrics_used": [
+          "io_write_mib_per_second"
+        ],
+        "safety_findings": [],
+        "smoke_hard_success": {
+          "apply_smoke_hard_success": true,
+          "post_reboot_smoke_hard_success": true,
+          "post_rollback_smoke_hard_success": true
+        },
+        "apply": {
+          "original": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "TimerRebaseThresholdOnDripsExit",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 60,
+            "value_kind": "System.Int32",
+            "value_hex": "0x3c",
+            "status": "value-present",
+            "error": null
+          },
+          "after_apply": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "TimerRebaseThresholdOnDripsExit",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 0,
+            "value_kind": "System.Int32",
+            "value_hex": "0x0",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_reboot": {
+          "after_reboot": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "TimerRebaseThresholdOnDripsExit",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 0,
+            "value_kind": "System.Int32",
+            "value_hex": "0x0",
+            "status": "value-present",
+            "error": null
+          },
+          "restore_action": "restored-original-value",
+          "after_restore": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "TimerRebaseThresholdOnDripsExit",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 60,
+            "value_kind": "System.Int32",
+            "value_hex": "0x3c",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_rollback": {
+          "final": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "TimerRebaseThresholdOnDripsExit",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 60,
+            "value_kind": "System.Int32",
+            "value_hex": "0x3c",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "benchmark_delta_percent": {
+          "apply_vs_baseline": {
+            "cpu_single_seconds": null,
+            "cpu_multi_seconds": null,
+            "io_write_read_mib_per_second": 82.0
+          },
+          "post_reboot_vs_baseline": {
+            "cpu_single_seconds": null,
+            "cpu_multi_seconds": null,
+            "io_write_read_mib_per_second": 6.36
+          }
+        }
+      }
+    },
+    {
+      "index": 51,
+      "experiment_id": "operator96-051-timerrebasethresholdondripsexit-1",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "TimerRebaseThresholdOnDripsExit",
+      "value_data": 1,
+      "requested_data": "60",
+      "default_kind": "observed-present",
+      "default_value": 60,
+      "vm_status": "value-present",
+      "record_class": "value",
+      "risk_flags": [
+        "kernel-timing-sensitive"
+      ],
+      "source_quality": "vm-observed",
+      "status": "ok",
+      "returncode": 0,
+      "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-051-timerrebasethresholdondripsexit-1.json",
+      "stdout_payload": {
+        "status": "ok",
+        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-051-timerrebasethresholdondripsexit-1.json",
+        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-051-timerrebasethresholdondripsexit-1.md",
+        "error": null
+      },
+      "stderr": "",
+      "observations": {
+        "status": "ok",
+        "verdict": "harmful",
+        "confidence": "low",
+        "host_noise": "ok",
+        "primary_delta_pct": -21.359,
+        "verdict_reason": "post_reboot io_write_mib_per_second changed by -21.36%",
+        "metrics_used": [
+          "io_write_mib_per_second"
+        ],
+        "safety_findings": [],
+        "smoke_hard_success": {
+          "apply_smoke_hard_success": true,
+          "post_reboot_smoke_hard_success": true,
+          "post_rollback_smoke_hard_success": true
+        },
+        "apply": {
+          "original": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "TimerRebaseThresholdOnDripsExit",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 60,
+            "value_kind": "System.Int32",
+            "value_hex": "0x3c",
+            "status": "value-present",
+            "error": null
+          },
+          "after_apply": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "TimerRebaseThresholdOnDripsExit",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 1,
+            "value_kind": "System.Int32",
+            "value_hex": "0x1",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_reboot": {
+          "after_reboot": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "TimerRebaseThresholdOnDripsExit",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 1,
+            "value_kind": "System.Int32",
+            "value_hex": "0x1",
+            "status": "value-present",
+            "error": null
+          },
+          "restore_action": "restored-original-value",
+          "after_restore": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "TimerRebaseThresholdOnDripsExit",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 60,
+            "value_kind": "System.Int32",
+            "value_hex": "0x3c",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_rollback": {
+          "final": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "TimerRebaseThresholdOnDripsExit",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 60,
+            "value_kind": "System.Int32",
+            "value_hex": "0x3c",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "benchmark_delta_percent": {
+          "apply_vs_baseline": {
+            "cpu_single_seconds": null,
+            "cpu_multi_seconds": null,
+            "io_write_read_mib_per_second": 92.13
+          },
+          "post_reboot_vs_baseline": {
+            "cpu_single_seconds": null,
+            "cpu_multi_seconds": null,
+            "io_write_read_mib_per_second": 4.03
+          }
+        }
+      }
+    },
+    {
+      "index": 52,
+      "experiment_id": "operator96-052-hibernateenableddefault-0",
+      "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+      "value_name": "HibernateEnabledDefault",
+      "value_data": 0,
+      "requested_data": "0",
+      "default_kind": "observed-present",
+      "default_value": 1,
+      "vm_status": "value-present",
+      "record_class": "value",
+      "risk_flags": [],
+      "source_quality": "vm-observed",
+      "status": "ok",
+      "returncode": 0,
+      "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-052-hibernateenableddefault-0.json",
+      "stdout_payload": {
+        "status": "ok",
+        "json": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-052-hibernateenableddefault-0.json",
+        "markdown": "/run/media/rai/535fc4a5-7434-4467-8561-a9411c215537/Dev/RegProbe-latest/registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-052-hibernateenableddefault-0.md",
+        "error": null
+      },
+      "stderr": "",
+      "observations": {
+        "status": "ok",
+        "verdict": "harmful",
+        "confidence": "low",
+        "host_noise": "ok",
+        "primary_delta_pct": -9.568,
+        "verdict_reason": "post_reboot io_write_mib_per_second changed by -9.57%",
+        "metrics_used": [
+          "io_write_mib_per_second"
+        ],
+        "safety_findings": [],
+        "smoke_hard_success": {
+          "apply_smoke_hard_success": true,
+          "post_reboot_smoke_hard_success": true,
+          "post_rollback_smoke_hard_success": true
+        },
+        "apply": {
+          "original": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "HibernateEnabledDefault",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 1,
+            "value_kind": "System.Int32",
+            "value_hex": "0x1",
+            "status": "value-present",
+            "error": null
+          },
+          "after_apply": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "HibernateEnabledDefault",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 0,
+            "value_kind": "System.Int32",
+            "value_hex": "0x0",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_reboot": {
+          "after_reboot": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "HibernateEnabledDefault",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 0,
+            "value_kind": "System.Int32",
+            "value_hex": "0x0",
+            "status": "value-present",
+            "error": null
+          },
+          "restore_action": "restored-original-value",
+          "after_restore": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "HibernateEnabledDefault",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 1,
+            "value_kind": "System.Int32",
+            "value_hex": "0x1",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "post_rollback": {
+          "final": {
+            "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
+            "value_name": "HibernateEnabledDefault",
+            "key_exists": true,
+            "value_exists": true,
+            "value": 1,
+            "value_kind": "System.Int32",
+            "value_hex": "0x1",
+            "status": "value-present",
+            "error": null
+          },
+          "hard_failure_count": 0,
+          "best_effort_failure_count": 1,
+          "interactive_user_smoke": {
+            "status": "ok",
+            "failure_count": 0,
+            "user": "rai"
+          }
+        },
+        "benchmark_delta_percent": {
+          "apply_vs_baseline": {
+            "cpu_single_seconds": null,
+            "cpu_multi_seconds": null,
+            "io_write_read_mib_per_second": 95.61
+          },
+          "post_reboot_vs_baseline": {
+            "cpu_single_seconds": null,
+            "cpu_multi_seconds": null,
+            "io_write_read_mib_per_second": -5.53
+          }
+        }
+      }
+    }
+  ]
+}
