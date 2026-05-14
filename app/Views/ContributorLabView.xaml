@@ -244,7 +244,16 @@
                                     <TextBlock Text="{Binding Operator96ReadyForAppCard, StringFormat={}Ready for app card: {0}}"
                                                Margin="0,0,18,0"
                                                Style="{StaticResource ContributorMonoTextStyle}"/>
+                                    <TextBlock Text="{Binding Operator96ResearchOnlyCount, StringFormat={}Research-only: {0}}"
+                                               Margin="0,0,18,0"
+                                               Style="{StaticResource ContributorMonoTextStyle}"/>
                                     <TextBlock Text="{Binding Operator96NeedsLowNoiseRerun, StringFormat={}Needs low-noise rerun: {0}}"
+                                               Margin="0,0,18,0"
+                                               Style="{StaticResource ContributorMonoTextStyle}"/>
+                                    <TextBlock Text="{Binding Operator96NoisyResultCount, StringFormat={}Noisy: {0}}"
+                                               Margin="0,0,18,0"
+                                               Style="{StaticResource ContributorMonoTextStyle}"/>
+                                    <TextBlock Text="{Binding Operator96NonOkCount, StringFormat={}Non-ok: {0}}"
                                                Style="{StaticResource ContributorMonoTextStyle}"/>
                                 </WrapPanel>
                             </StackPanel>

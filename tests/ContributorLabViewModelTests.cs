@@ -76,6 +76,18 @@ public sealed class ContributorLabViewModelTests : IDisposable
     }
 
     [Fact]
+    public void Operator96ResearchOnlyCount_SubtractsReadyCardsFromResearchRecords()
+    {
+        var viewModel = new ContributorLabViewModel(CreateSnapshot() with
+        {
+            Operator96RecordCount = 96,
+            Operator96ReadyForAppCard = 4
+        });
+
+        Assert.Equal(92, viewModel.Operator96ResearchOnlyCount);
+    }
+
+    [Fact]
     public void Load_MapsOperator96ObservationsWithoutPromotingThemToAppCards()
     {
         WriteArtifact(ContributorLabCatalog.Operator96AggregatePath, """
@@ -171,6 +183,7 @@ public sealed class ContributorLabViewModelTests : IDisposable
         Assert.Equal("clean-25h2-qga", snapshot.VmSnapshotName);
         Assert.Contains(snapshot.ReadinessItems, item => item.Label == "VM snapshot receipt" && item.Status == "Ready");
         Assert.Equal(0, snapshot.Operator96ReadyForAppCard);
+        Assert.Equal(1, new ContributorLabViewModel(snapshot).Operator96ResearchOnlyCount);
         var observation = Assert.Single(snapshot.Observations);
         Assert.Equal("not_app_surface_ready", observation.Bucket);
         Assert.Equal("0, 1", observation.CandidateValues);
