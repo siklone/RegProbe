@@ -40,9 +40,9 @@ Matches: 2
     - app/Services/TweakProviders/PowerTweakProvider.cs
     - app/Services/TweakProviders/PowerTweakProvider.cs:42 -> yield return CreateRegistryValueBatchTweak(
     - app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs
-    - app/Services/TweakProviders/PowerTweakProvider.cs:46 -> "Writes the documented DisableTaskOffload and MMCSS SystemResponsiveness values while excluding the archived opaque NetworkThrottlingIndex write.",
-    - app/Services/TweakProviders/PowerTweakProvider.cs:51 -> new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile", "SystemResponsiveness", RegistryValueKind.DWord, 10, RegistryView.Default)
-    - engine/Tweaks/Power/NetworkAdapterPowerTweaks.cs:18 -> new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile", "SystemResponsiveness", RegistryValueKind.DWord, 10, RegistryView.Default)
+    - app/Services/ContributorLabCatalog.cs:194 -> "python3 registry-research-framework/scripts/check_single_tweak.py SystemResponsiveness --expected-value 10 --expected-value 30000 --json",
+    - app/Services/ContributorLabCatalog.cs:201 -> "python3 registry-research-framework/scripts/check_single_tweak_app_qa.py SystemResponsiveness --expected-value 10 --json",
+    - app/Services/ContributorLabCatalog.cs:229 -> "python3 scripts/vm-kvm/run-guest-registry-value-experiment.py --domain regprobe-win11-25h2-session --connect qemu:///session --registry-path \"HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Power\" --value-name SystemResponsiveness --value-data 10 --smoke-profile gui --stage-wait-timeout 420 --reboot-wait-timeout 420 --post-reboot-delay-seconds 90 --require-domain-snapshot --auto-revert-snapshot-on-boot-failure --revert-snapshot-name clean-25h2-qga --abort-on-noisy-host",
 
 [2] power.disable-network-power-saving
   promotion: rejected | record: deprecated | apply_allowed: false
@@ -70,8 +70,8 @@ Matches: 2
   expected_value 30000: not found
   code_hits:
     - app/Services/TweakProviders/PowerTweakProvider.cs
+    - app/Services/ContributorLabCatalog.cs:194 -> "python3 registry-research-framework/scripts/check_single_tweak.py SystemResponsiveness --expected-value 10 --expected-value 30000 --json",
+    - app/Services/ContributorLabCatalog.cs:201 -> "python3 registry-research-framework/scripts/check_single_tweak_app_qa.py SystemResponsiveness --expected-value 10 --json",
+    - app/Services/ContributorLabCatalog.cs:229 -> "python3 scripts/vm-kvm/run-guest-registry-value-experiment.py --domain regprobe-win11-25h2-session --connect qemu:///session --registry-path \"HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Power\" --value-name SystemResponsiveness --value-data 10 --smoke-profile gui --stage-wait-timeout 420 --reboot-wait-timeout 420 --post-reboot-delay-seconds 90 --require-domain-snapshot --auto-revert-snapshot-on-boot-failure --revert-snapshot-name clean-25h2-qga --abort-on-noisy-host",
     - app/Services/TweakProviders/PowerTweakProvider.cs:46 -> "Writes the documented DisableTaskOffload and MMCSS SystemResponsiveness values while excluding the archived opaque NetworkThrottlingIndex write.",
     - app/Services/TweakProviders/PowerTweakProvider.cs:51 -> new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile", "SystemResponsiveness", RegistryValueKind.DWord, 10, RegistryView.Default)
-    - engine/Tweaks/Power/NetworkAdapterPowerTweaks.cs:18 -> new RegistryValueBatchEntry(RegistryHive.LocalMachine, @"SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile", "SystemResponsiveness", RegistryValueKind.DWord, 10, RegistryView.Default)
-    - engine/Tweaks/Power/NetworkAdapterPowerTweaks.cs:24 -> description: "Writes the documented DisableTaskOffload and MMCSS SystemResponsiveness values while excluding the archived opaque NetworkThrottlingIndex write.",
-    - infrastructure/Commands/CommandAllowlist.cs:234 -> AddRegDwordRule(regAllowlist, @"HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile", "SystemResponsiveness", "10", "20", "30", "40", "50", "60", "70", "80", "90", "100");

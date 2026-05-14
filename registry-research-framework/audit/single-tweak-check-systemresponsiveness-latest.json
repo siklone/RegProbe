@@ -316,6 +316,24 @@
           "source": "declared-location"
         },
         {
+          "file": "app/Services/ContributorLabCatalog.cs",
+          "line": 194,
+          "text": "\"python3 registry-research-framework/scripts/check_single_tweak.py SystemResponsiveness --expected-value 10 --expected-value 30000 --json\",",
+          "source": "source-scan"
+        },
+        {
+          "file": "app/Services/ContributorLabCatalog.cs",
+          "line": 201,
+          "text": "\"python3 registry-research-framework/scripts/check_single_tweak_app_qa.py SystemResponsiveness --expected-value 10 --json\",",
+          "source": "source-scan"
+        },
+        {
+          "file": "app/Services/ContributorLabCatalog.cs",
+          "line": 229,
+          "text": "\"python3 scripts/vm-kvm/run-guest-registry-value-experiment.py --domain regprobe-win11-25h2-session --connect qemu:///session --registry-path \\\"HKLM\\\\\\\\SYSTEM\\\\\\\\CurrentControlSet\\\\\\\\Control\\\\\\\\Power\\\" --value-name SystemResponsiveness --value-data 10 --smoke-profile gui --stage-wait-timeout 420 --reboot-wait-timeout 420 --post-reboot-delay-seconds 90 --require-domain-snapshot --auto-revert-snapshot-on-boot-failure --revert-snapshot-name clean-25h2-qga --abort-on-noisy-host\",",
+          "source": "source-scan"
+        },
+        {
           "file": "app/Services/TweakProviders/PowerTweakProvider.cs",
           "line": 46,
           "text": "\"Writes the documented DisableTaskOffload and MMCSS SystemResponsiveness values while excluding the archived opaque NetworkThrottlingIndex write.\",",
@@ -325,24 +343,6 @@
           "file": "app/Services/TweakProviders/PowerTweakProvider.cs",
           "line": 51,
           "text": "new RegistryValueBatchEntry(RegistryHive.LocalMachine, @\"SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\", \"SystemResponsiveness\", RegistryValueKind.DWord, 10, RegistryView.Default)",
-          "source": "source-scan"
-        },
-        {
-          "file": "engine/Tweaks/Power/NetworkAdapterPowerTweaks.cs",
-          "line": 18,
-          "text": "new RegistryValueBatchEntry(RegistryHive.LocalMachine, @\"SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\", \"SystemResponsiveness\", RegistryValueKind.DWord, 10, RegistryView.Default)",
-          "source": "source-scan"
-        },
-        {
-          "file": "engine/Tweaks/Power/NetworkAdapterPowerTweaks.cs",
-          "line": 24,
-          "text": "description: \"Writes the documented DisableTaskOffload and MMCSS SystemResponsiveness values while excluding the archived opaque NetworkThrottlingIndex write.\",",
-          "source": "source-scan"
-        },
-        {
-          "file": "infrastructure/Commands/CommandAllowlist.cs",
-          "line": 234,
-          "text": "AddRegDwordRule(regAllowlist, @\"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\", \"SystemResponsiveness\", \"10\", \"20\", \"30\", \"40\", \"50\", \"60\", \"70\", \"80\", \"90\", \"100\");",
           "source": "source-scan"
         }
       ]
@@ -609,6 +609,24 @@
           "source": "declared-location"
         },
         {
+          "file": "app/Services/ContributorLabCatalog.cs",
+          "line": 194,
+          "text": "\"python3 registry-research-framework/scripts/check_single_tweak.py SystemResponsiveness --expected-value 10 --expected-value 30000 --json\",",
+          "source": "source-scan"
+        },
+        {
+          "file": "app/Services/ContributorLabCatalog.cs",
+          "line": 201,
+          "text": "\"python3 registry-research-framework/scripts/check_single_tweak_app_qa.py SystemResponsiveness --expected-value 10 --json\",",
+          "source": "source-scan"
+        },
+        {
+          "file": "app/Services/ContributorLabCatalog.cs",
+          "line": 229,
+          "text": "\"python3 scripts/vm-kvm/run-guest-registry-value-experiment.py --domain regprobe-win11-25h2-session --connect qemu:///session --registry-path \\\"HKLM\\\\\\\\SYSTEM\\\\\\\\CurrentControlSet\\\\\\\\Control\\\\\\\\Power\\\" --value-name SystemResponsiveness --value-data 10 --smoke-profile gui --stage-wait-timeout 420 --reboot-wait-timeout 420 --post-reboot-delay-seconds 90 --require-domain-snapshot --auto-revert-snapshot-on-boot-failure --revert-snapshot-name clean-25h2-qga --abort-on-noisy-host\",",
+          "source": "source-scan"
+        },
+        {
           "file": "app/Services/TweakProviders/PowerTweakProvider.cs",
           "line": 46,
           "text": "\"Writes the documented DisableTaskOffload and MMCSS SystemResponsiveness values while excluding the archived opaque NetworkThrottlingIndex write.\",",
@@ -630,12 +648,6 @@
           "file": "engine/Tweaks/Power/NetworkAdapterPowerTweaks.cs",
           "line": 24,
           "text": "description: \"Writes the documented DisableTaskOffload and MMCSS SystemResponsiveness values while excluding the archived opaque NetworkThrottlingIndex write.\",",
-          "source": "source-scan"
-        },
-        {
-          "file": "infrastructure/Commands/CommandAllowlist.cs",
-          "line": 234,
-          "text": "AddRegDwordRule(regAllowlist, @\"HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Multimedia\\SystemProfile\", \"SystemResponsiveness\", \"10\", \"20\", \"30\", \"40\", \"50\", \"60\", \"70\", \"80\", \"90\", \"100\");",
           "source": "source-scan"
         }
       ]

@@ -1,7 +1,7 @@
 # Promoted App QA Batch
 
 - Status: PASS
-- Generated UTC: 2026-05-14T08:33:06Z
+- Generated UTC: 2026-05-14T10:17:26Z
 - Catalog candidates: 258
 - Selected candidates: 14
 - Planned apply-allowed candidates: 14
