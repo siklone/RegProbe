@@ -28396,7 +28396,7 @@
           "gaming_safe": null
         },
         "validated_semantics": {
-          "summary": "Guest reversible probe at evidence/files/vm-tooling-staging/beep_start_toggle_out.txt confirmed BASELINE=1, AFTER_4=4, AFTER_1=1, RESTORED=1.",
+          "summary": "Guest reversible probe at evidence/raw/runtime-diff/audio.disable-beep/beep-start-toggle-20260327.json confirmed BASELINE=1, AFTER_4=4, AFTER_1=1, RESTORED=1.",
           "has_validation_proof": true,
           "has_semantics_evidence": true,
           "links": [
@@ -28427,7 +28427,7 @@
           "links": [
             {
               "title": "Guest reversible probe - Beep driver start mode",
-              "url": "evidence/files/vm-tooling-staging/beep_start_toggle_out.txt",
+              "url": "evidence/raw/runtime-diff/audio.disable-beep/beep-start-toggle-20260327.json",
               "kind": "runtime-diff",
               "summary": "Guest reversible probe on Win25H2Clean confirmed Start transitions through 1 and 4 before restoring to 1."
             },
@@ -28614,7 +28614,7 @@
           "evidence_id": "runtime-beep-registry-diff",
           "kind": "runtime-diff",
           "title": "Guest reversible probe - Beep driver start mode",
-          "location": "evidence/files/vm-tooling-staging/beep_start_toggle_out.txt",
+          "location": "evidence/raw/runtime-diff/audio.disable-beep/beep-start-toggle-20260327.json",
           "summary": "Guest reversible probe on Win25H2Clean confirmed Start transitions through 1 and 4 before restoring to 1.",
           "strength": "high",
           "supports": [
@@ -28698,7 +28698,7 @@
         "source_url": "https://learn.microsoft.com/en-us/windows-hardware/drivers/install/hklm-system-currentcontrolset-services-registry-tree",
         "exact_quote_or_path": "lines 52-58: The `Start` value specifies when the service should be started. `0x4` (Disabled): The service is disabled and will not be loaded.",
         "key_found_on_page": true,
-        "notes": "Guest reversible probe at evidence/files/vm-tooling-staging/beep_start_toggle_out.txt confirmed BASELINE=1, AFTER_4=4, AFTER_1=1, RESTORED=1."
+        "notes": "Guest reversible probe at evidence/raw/runtime-diff/audio.disable-beep/beep-start-toggle-20260327.json confirmed BASELINE=1, AFTER_4=4, AFTER_1=1, RESTORED=1."
       },
       "validation_proof_sha256": "5b2fdb894230a9968ae5988951da38e4ed60333b008effa58bdae351929538b0",
       "provenance": null,
@@ -100337,9 +100337,9 @@
           "links": [
             {
               "title": "Validation proof source",
-              "url": "evidence/files/vm-tooling-staging/hags_toggle_out.txt",
+              "url": "evidence/raw/runtime-diff/system.enable-hags/hags-toggle-20260327.json",
               "kind": "validation-proof",
-              "summary": "hags_toggle_out.txt: BEFORE=MISSING. AFTER_2=2. AFTER_1=1. RESTORED=MISSING."
+              "summary": "hags-toggle-20260327.json: BEFORE=MISSING. AFTER_2=2. AFTER_1=1. RESTORED=MISSING."
             },
             {
               "title": "DirectX Developer Blog: Hardware Accelerated GPU Scheduling",
@@ -100362,7 +100362,7 @@
           "links": [
             {
               "title": "Guest reversible probe for HwSchMode",
-              "url": "evidence/files/vm-tooling-staging/hags_toggle_out.txt",
+              "url": "evidence/raw/runtime-diff/system.enable-hags/hags-toggle-20260327.json",
               "kind": "runtime-diff",
               "summary": "Guest-side reversible probe on Win25H2Clean confirmed HwSchMode transitions through missing, 2, and 1, then restores to missing on this build."
             },
@@ -100593,7 +100593,7 @@
           "evidence_id": "runtime-hags-registry-diff",
           "kind": "runtime-diff",
           "title": "Guest reversible probe for HwSchMode",
-          "location": "evidence/files/vm-tooling-staging/hags_toggle_out.txt",
+          "location": "evidence/raw/runtime-diff/system.enable-hags/hags-toggle-20260327.json",
           "summary": "Guest-side reversible probe on Win25H2Clean confirmed HwSchMode transitions through missing, 2, and 1, then restores to missing on this build.",
           "strength": "high",
           "supports": [
@@ -100647,8 +100647,8 @@
         }
       ],
       "validation_proof": {
-        "source_url": "evidence/files/vm-tooling-staging/hags_toggle_out.txt",
-        "exact_quote_or_path": "hags_toggle_out.txt: BEFORE=MISSING. AFTER_2=2. AFTER_1=1. RESTORED=MISSING.",
+        "source_url": "evidence/raw/runtime-diff/system.enable-hags/hags-toggle-20260327.json",
+        "exact_quote_or_path": "hags-toggle-20260327.json: BEFORE=MISSING. AFTER_2=2. AFTER_1=1. RESTORED=MISSING.",
         "key_found_on_page": true,
         "notes": "Guest-side reversible probe on Win25H2Clean confirmed the baseline missing state and the 2 / 1 toggle sequence, then restored the machine back to missing. Normalized for the consolidated evidence report."
       },

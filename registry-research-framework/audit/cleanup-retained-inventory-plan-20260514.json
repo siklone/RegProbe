@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-14T15:39:03Z",
+  "generated_utc": "2026-05-14T16:08:18Z",
   "ledger": "registry-research-framework/audit/cleanup-quarantine-ledger-20260514.json",
   "purpose": "Action plan for cleanup retained inventory. It does not delete files and it does not redefine delete eligibility.",
   "rules": {
@@ -12,38 +12,38 @@
     "item_count": 89,
     "delete_ready_count": 0,
     "reference_migration_needed_count": 0,
-    "audit_only_retained_count": 17,
+    "audit_only_retained_count": 19,
     "intentional_reference_keep_count": 4,
-    "needs_replacement_or_retention_decision_count": 68,
-    "retention_decision_queue_count": 68,
+    "needs_replacement_or_retention_decision_count": 66,
+    "retention_decision_queue_count": 66,
     "retained_pending_review_count": 0,
     "release_state_counts": {
-      "audit-only-retained": 17,
+      "audit-only-retained": 19,
       "intentional-reference-keep": 4,
-      "needs-replacement-or-retention-decision": 68
+      "needs-replacement-or-retention-decision": 66
     },
     "decision_track_counts": {
       "archive-history-anchor": 10,
-      "audit-trail-retained": 17,
+      "audit-trail-retained": 19,
       "historical-audit-output": 25,
       "intentional-reference-keep": 4,
       "raw-trace-source-of-record": 25,
-      "staging-bundle-canonicalization": 8
+      "staging-bundle-canonicalization": 6
     },
     "decision_status_counts": {
       "explicitly-retained": 4,
-      "needs-canonical-evidence-or-retention-note": 8,
+      "needs-canonical-evidence-or-retention-note": 6,
       "retain-history-anchor": 10,
       "retain-until-derived-parse-reviewed": 25,
       "retain-until-supersession-is-explicit": 25,
-      "retained-for-history-only": 17
+      "retained-for-history-only": 19
     },
     "staging_canonicalization_state_counts": {
       "active-tool-output-root": 1,
-      "canonical-raw-replacement-known": 2,
+      "canonical-raw-replacement-known": 4,
       "partial-derived-replacement-known": 2,
       "rerun-needed": 1,
-      "staging-source-of-record": 4
+      "staging-source-of-record": 2
     },
     "category_counts": {
       "audit-archive-named-sample": 10,
@@ -53,31 +53,31 @@
       "vm-tooling-staging-oldest-sample": 25
     },
     "blocking_reference_class_counts": {
-      "audit-cross-reference": 90,
+      "audit-cross-reference": 87,
       "discovery-index-reference": 2,
       "evidence-tree-reference": 61,
-      "other-reference": 70,
+      "other-reference": 68,
       "public-doc-reference": 4,
-      "research-index-reference": 176,
+      "research-index-reference": 166,
       "research-note-reference": 24,
-      "research-record-reference": 32
+      "research-record-reference": 31
     },
     "top_blocking_reference_paths": [
       {
         "path": "research/evidence-index.json",
-        "count": 45
+        "count": 43
       },
       {
         "path": "research/evidence-manifest.json",
-        "count": 42
+        "count": 40
       },
       {
         "path": "research/evidence-atlas.md",
-        "count": 37
+        "count": 35
       },
       {
         "path": "research/evidence-manifest.md",
-        "count": 36
+        "count": 34
       },
       {
         "path": "registry-research-framework/audit/rejected-closure-ledger.json",
@@ -85,7 +85,7 @@
       },
       {
         "path": "research/evidence-classes.json",
-        "count": 16
+        "count": 14
       },
       {
         "path": "registry-research-framework/audit/operator-regadd-inventory-20260508-repo.json",
@@ -108,10 +108,6 @@
         "count": 4
       },
       {
-        "path": "registry-research-framework/enrichment/enrichment-cache.jsonl",
-        "count": 3
-      },
-      {
         "path": "registry-research-framework/audit/etw-stackwalk-reopen-baseline-archive/README.md",
         "count": 3
       },
@@ -121,6 +117,10 @@
       },
       {
         "path": "registry-research-framework/audit/etw-stackwalk-reopen-history-archive/CHECKSUMS.json",
+        "count": 3
+      },
+      {
+        "path": "registry-research-framework/audit/etw-stackwalk-reopen-history-archive/README.md",
         "count": 3
       }
     ]
@@ -379,62 +379,6 @@
       "next_canonicalization_step": "Move script defaults only if a broader tooling-path cleanup is planned; do not delete as evidence cleanup."
     },
     {
-      "path": "evidence/files/vm-tooling-staging/beep_start_toggle_out.txt",
-      "category": "vm-tooling-staging-oldest-sample",
-      "cleanup_status": "retained-live-reference",
-      "release_state": "needs-replacement-or-retention-decision",
-      "delete_candidate_state": "not-a-delete-candidate",
-      "decision_track": "staging-bundle-canonicalization",
-      "decision_status": "needs-canonical-evidence-or-retention-note",
-      "evidence_role": "legacy staging output that may still be the only referenced proof for a record",
-      "retention_owner": "evidence",
-      "exit_criteria": "Find a canonical evidence/raw replacement or add an explicit keep rationale naming the owning record/note.",
-      "app_surface_policy": "technical-evidence-only until canonicalized",
-      "can_become_delete_candidate": false,
-      "blocking_reference_count": 9,
-      "audit_reference_count": 4,
-      "blocking_reference_classes": {
-        "audit-cross-reference": 3,
-        "research-index-reference": 5
-      },
-      "blocking_references_sample": [
-        "registry-research-framework/audit/promoted-app-qa-batch-20260512-live-14.json",
-        "registry-research-framework/audit/promoted-app-qa-batch-20260512-live-5.json",
-        "registry-research-framework/audit/promoted-app-qa-batch-latest.json",
-        "research/evidence-atlas.md",
-        "research/evidence-classes.json",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json",
-        "research/evidence-manifest.md"
-      ],
-      "replacement_artifacts": [],
-      "recommended_action": "keep-pending-review",
-      "next_action": "Decide whether this staging bundle has a canonical evidence/raw replacement before attempting deletion.",
-      "stale_reason": "staging diagnostic bundle; verify no record/evidence-index dependency before deletion",
-      "staging_canonicalization": {
-        "canonicalization_state": "staging-source-of-record",
-        "owning_records": [
-          "audio.disable-beep"
-        ],
-        "canonical_replacement_candidates": [
-          "evidence/raw/etw-stackwalk/audio-disable-beep-etw-qga-unblock-20260507/audio-disable-beep-etw-qga-unblock-20260507-summary.json",
-          "evidence/raw/ghidra/ghidra-audio-disable-beep-20260424-batch2"
-        ],
-        "retention_rationale": "Raw ETW/Ghidra adjuncts exist, but this text file is still the concise reversible value proof used by shipped app QA evidence.",
-        "next_canonicalization_step": "Create a canonical evidence/raw runtime-diff JSON for the beep value proof before migrating app QA and index references."
-      },
-      "canonicalization_state": "staging-source-of-record",
-      "owning_records": [
-        "audio.disable-beep"
-      ],
-      "canonical_replacement_candidates": [
-        "evidence/raw/etw-stackwalk/audio-disable-beep-etw-qga-unblock-20260507/audio-disable-beep-etw-qga-unblock-20260507-summary.json",
-        "evidence/raw/ghidra/ghidra-audio-disable-beep-20260424-batch2"
-      ],
-      "retention_rationale": "Raw ETW/Ghidra adjuncts exist, but this text file is still the concise reversible value proof used by shipped app QA evidence.",
-      "next_canonicalization_step": "Create a canonical evidence/raw runtime-diff JSON for the beep value proof before migrating app QA and index references."
-    },
-    {
       "path": "evidence/files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-20260325-100039",
       "category": "vm-tooling-staging-oldest-sample",
       "cleanup_status": "retained-live-reference",
@@ -488,63 +432,6 @@
       ],
       "retention_rationale": "Adjacent raw Procmon probes exist, but this MPENGINE reboot no-read sample remains a distinct validation lane.",
       "next_canonicalization_step": "Regenerate or copy the MPENGINE no-read proof into evidence/raw before migrating the note/record references."
-    },
-    {
-      "path": "evidence/files/vm-tooling-staging/hags_toggle_out.txt",
-      "category": "vm-tooling-staging-oldest-sample",
-      "cleanup_status": "retained-live-reference",
-      "release_state": "needs-replacement-or-retention-decision",
-      "delete_candidate_state": "not-a-delete-candidate",
-      "decision_track": "staging-bundle-canonicalization",
-      "decision_status": "needs-canonical-evidence-or-retention-note",
-      "evidence_role": "legacy staging output that may still be the only referenced proof for a record",
-      "retention_owner": "evidence",
-      "exit_criteria": "Find a canonical evidence/raw replacement or add an explicit keep rationale naming the owning record/note.",
-      "app_surface_policy": "technical-evidence-only until canonicalized",
-      "can_become_delete_candidate": false,
-      "blocking_reference_count": 8,
-      "audit_reference_count": 4,
-      "blocking_reference_classes": {
-        "other-reference": 2,
-        "research-index-reference": 5,
-        "research-record-reference": 1
-      },
-      "blocking_references_sample": [
-        "registry-research-framework/enrichment/enrichment-cache.jsonl",
-        "registry-research-framework/queue/research-queue.json",
-        "research/evidence-atlas.md",
-        "research/evidence-classes.json",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json",
-        "research/evidence-manifest.md",
-        "research/records/system.enable-hags.review.json"
-      ],
-      "replacement_artifacts": [],
-      "recommended_action": "keep-pending-review",
-      "next_action": "Decide whether this staging bundle has a canonical evidence/raw replacement before attempting deletion.",
-      "stale_reason": "staging diagnostic bundle; verify no record/evidence-index dependency before deletion",
-      "staging_canonicalization": {
-        "canonicalization_state": "staging-source-of-record",
-        "owning_records": [
-          "system.enable-hags"
-        ],
-        "canonical_replacement_candidates": [
-          "evidence/raw/etw-stackwalk/system-enable-hags-etw-qga-unblock-20260507/system-enable-hags-etw-qga-unblock-20260507-summary.json",
-          "evidence/raw/ghidra/ghidra-system-enable-hags-20260427b"
-        ],
-        "retention_rationale": "Raw ETW/Ghidra adjuncts exist, but this text file is still the concise reversible value proof for HwSchMode.",
-        "next_canonicalization_step": "Create a canonical evidence/raw runtime-diff JSON for the HAGS value proof before migrating record/index references."
-      },
-      "canonicalization_state": "staging-source-of-record",
-      "owning_records": [
-        "system.enable-hags"
-      ],
-      "canonical_replacement_candidates": [
-        "evidence/raw/etw-stackwalk/system-enable-hags-etw-qga-unblock-20260507/system-enable-hags-etw-qga-unblock-20260507-summary.json",
-        "evidence/raw/ghidra/ghidra-system-enable-hags-20260427b"
-      ],
-      "retention_rationale": "Raw ETW/Ghidra adjuncts exist, but this text file is still the concise reversible value proof for HwSchMode.",
-      "next_canonicalization_step": "Create a canonical evidence/raw runtime-diff JSON for the HAGS value proof before migrating record/index references."
     },
     {
       "path": "evidence/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml",
@@ -3042,58 +2929,46 @@
     {
       "path": "evidence/files/vm-tooling-staging/beep_start_toggle_out.txt",
       "category": "vm-tooling-staging-oldest-sample",
-      "cleanup_status": "retained-live-reference",
-      "release_state": "needs-replacement-or-retention-decision",
+      "cleanup_status": "retained-audit-trail-reference",
+      "release_state": "audit-only-retained",
       "delete_candidate_state": "not-a-delete-candidate",
-      "decision_track": "staging-bundle-canonicalization",
-      "decision_status": "needs-canonical-evidence-or-retention-note",
-      "evidence_role": "legacy staging output that may still be the only referenced proof for a record",
-      "retention_owner": "evidence",
-      "exit_criteria": "Find a canonical evidence/raw replacement or add an explicit keep rationale naming the owning record/note.",
-      "app_surface_policy": "technical-evidence-only until canonicalized",
+      "decision_track": "audit-trail-retained",
+      "decision_status": "retained-for-history-only",
+      "evidence_role": "historical cleanup/audit trail reference",
+      "retention_owner": "audit",
+      "exit_criteria": "Keep unless a future cleanup PR explicitly chooses to drop audit-history references.",
+      "app_surface_policy": "not-app-surface",
       "can_become_delete_candidate": false,
-      "blocking_reference_count": 9,
+      "blocking_reference_count": 0,
       "audit_reference_count": 4,
-      "blocking_reference_classes": {
-        "audit-cross-reference": 3,
-        "research-index-reference": 5
-      },
-      "blocking_references_sample": [
-        "registry-research-framework/audit/promoted-app-qa-batch-20260512-live-14.json",
-        "registry-research-framework/audit/promoted-app-qa-batch-20260512-live-5.json",
-        "registry-research-framework/audit/promoted-app-qa-batch-latest.json",
-        "research/evidence-atlas.md",
-        "research/evidence-classes.json",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json",
-        "research/evidence-manifest.md"
+      "blocking_reference_classes": {},
+      "blocking_references_sample": [],
+      "replacement_artifacts": [
+        "evidence/raw/runtime-diff/audio.disable-beep/beep-start-toggle-20260327.json"
       ],
-      "replacement_artifacts": [],
-      "recommended_action": "keep-pending-review",
-      "next_action": "Decide whether this staging bundle has a canonical evidence/raw replacement before attempting deletion.",
-      "stale_reason": "staging diagnostic bundle; verify no record/evidence-index dependency before deletion",
+      "recommended_action": "delete-after-review",
+      "next_action": "No live blocking references remain; keep for audit trail or handle in a dedicated deletion PR that explicitly accepts audit-only history references.",
+      "stale_reason": "staging diagnostic bundle duplicated by canonical evidence/raw artifact",
       "staging_canonicalization": {
-        "canonicalization_state": "staging-source-of-record",
+        "canonicalization_state": "canonical-raw-replacement-known",
         "owning_records": [
           "audio.disable-beep"
         ],
         "canonical_replacement_candidates": [
-          "evidence/raw/etw-stackwalk/audio-disable-beep-etw-qga-unblock-20260507/audio-disable-beep-etw-qga-unblock-20260507-summary.json",
-          "evidence/raw/ghidra/ghidra-audio-disable-beep-20260424-batch2"
+          "evidence/raw/runtime-diff/audio.disable-beep/beep-start-toggle-20260327.json"
         ],
-        "retention_rationale": "Raw ETW/Ghidra adjuncts exist, but this text file is still the concise reversible value proof used by shipped app QA evidence.",
-        "next_canonicalization_step": "Create a canonical evidence/raw runtime-diff JSON for the beep value proof before migrating app QA and index references."
+        "retention_rationale": "A canonical evidence/raw runtime-diff JSON now carries the reversible Beep value proof.",
+        "next_canonicalization_step": "Keep live record/index references on the evidence/raw runtime-diff JSON; leave the staging TXT only as audit history."
       },
-      "canonicalization_state": "staging-source-of-record",
+      "canonicalization_state": "canonical-raw-replacement-known",
       "owning_records": [
         "audio.disable-beep"
       ],
       "canonical_replacement_candidates": [
-        "evidence/raw/etw-stackwalk/audio-disable-beep-etw-qga-unblock-20260507/audio-disable-beep-etw-qga-unblock-20260507-summary.json",
-        "evidence/raw/ghidra/ghidra-audio-disable-beep-20260424-batch2"
+        "evidence/raw/runtime-diff/audio.disable-beep/beep-start-toggle-20260327.json"
       ],
-      "retention_rationale": "Raw ETW/Ghidra adjuncts exist, but this text file is still the concise reversible value proof used by shipped app QA evidence.",
-      "next_canonicalization_step": "Create a canonical evidence/raw runtime-diff JSON for the beep value proof before migrating app QA and index references."
+      "retention_rationale": "A canonical evidence/raw runtime-diff JSON now carries the reversible Beep value proof.",
+      "next_canonicalization_step": "Keep live record/index references on the evidence/raw runtime-diff JSON; leave the staging TXT only as audit history."
     },
     {
       "path": "evidence/files/vm-tooling-staging/crossdevice_resume_probe.csv",
@@ -3417,59 +3292,46 @@
     {
       "path": "evidence/files/vm-tooling-staging/hags_toggle_out.txt",
       "category": "vm-tooling-staging-oldest-sample",
-      "cleanup_status": "retained-live-reference",
-      "release_state": "needs-replacement-or-retention-decision",
+      "cleanup_status": "retained-audit-trail-reference",
+      "release_state": "audit-only-retained",
       "delete_candidate_state": "not-a-delete-candidate",
-      "decision_track": "staging-bundle-canonicalization",
-      "decision_status": "needs-canonical-evidence-or-retention-note",
-      "evidence_role": "legacy staging output that may still be the only referenced proof for a record",
-      "retention_owner": "evidence",
-      "exit_criteria": "Find a canonical evidence/raw replacement or add an explicit keep rationale naming the owning record/note.",
-      "app_surface_policy": "technical-evidence-only until canonicalized",
+      "decision_track": "audit-trail-retained",
+      "decision_status": "retained-for-history-only",
+      "evidence_role": "historical cleanup/audit trail reference",
+      "retention_owner": "audit",
+      "exit_criteria": "Keep unless a future cleanup PR explicitly chooses to drop audit-history references.",
+      "app_surface_policy": "not-app-surface",
       "can_become_delete_candidate": false,
-      "blocking_reference_count": 8,
+      "blocking_reference_count": 0,
       "audit_reference_count": 4,
-      "blocking_reference_classes": {
-        "other-reference": 2,
-        "research-index-reference": 5,
-        "research-record-reference": 1
-      },
-      "blocking_references_sample": [
-        "registry-research-framework/enrichment/enrichment-cache.jsonl",
-        "registry-research-framework/queue/research-queue.json",
-        "research/evidence-atlas.md",
-        "research/evidence-classes.json",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json",
-        "research/evidence-manifest.md",
-        "research/records/system.enable-hags.review.json"
+      "blocking_reference_classes": {},
+      "blocking_references_sample": [],
+      "replacement_artifacts": [
+        "evidence/raw/runtime-diff/system.enable-hags/hags-toggle-20260327.json"
       ],
-      "replacement_artifacts": [],
-      "recommended_action": "keep-pending-review",
-      "next_action": "Decide whether this staging bundle has a canonical evidence/raw replacement before attempting deletion.",
-      "stale_reason": "staging diagnostic bundle; verify no record/evidence-index dependency before deletion",
+      "recommended_action": "delete-after-review",
+      "next_action": "No live blocking references remain; keep for audit trail or handle in a dedicated deletion PR that explicitly accepts audit-only history references.",
+      "stale_reason": "staging diagnostic bundle duplicated by canonical evidence/raw artifact",
       "staging_canonicalization": {
-        "canonicalization_state": "staging-source-of-record",
+        "canonicalization_state": "canonical-raw-replacement-known",
         "owning_records": [
           "system.enable-hags"
         ],
         "canonical_replacement_candidates": [
-          "evidence/raw/etw-stackwalk/system-enable-hags-etw-qga-unblock-20260507/system-enable-hags-etw-qga-unblock-20260507-summary.json",
-          "evidence/raw/ghidra/ghidra-system-enable-hags-20260427b"
+          "evidence/raw/runtime-diff/system.enable-hags/hags-toggle-20260327.json"
         ],
-        "retention_rationale": "Raw ETW/Ghidra adjuncts exist, but this text file is still the concise reversible value proof for HwSchMode.",
-        "next_canonicalization_step": "Create a canonical evidence/raw runtime-diff JSON for the HAGS value proof before migrating record/index references."
+        "retention_rationale": "A canonical evidence/raw runtime-diff JSON now carries the reversible HwSchMode value proof.",
+        "next_canonicalization_step": "Keep live record/index references on the evidence/raw runtime-diff JSON; leave the staging TXT only as audit history."
       },
-      "canonicalization_state": "staging-source-of-record",
+      "canonicalization_state": "canonical-raw-replacement-known",
       "owning_records": [
         "system.enable-hags"
       ],
       "canonical_replacement_candidates": [
-        "evidence/raw/etw-stackwalk/system-enable-hags-etw-qga-unblock-20260507/system-enable-hags-etw-qga-unblock-20260507-summary.json",
-        "evidence/raw/ghidra/ghidra-system-enable-hags-20260427b"
+        "evidence/raw/runtime-diff/system.enable-hags/hags-toggle-20260327.json"
       ],
-      "retention_rationale": "Raw ETW/Ghidra adjuncts exist, but this text file is still the concise reversible value proof for HwSchMode.",
-      "next_canonicalization_step": "Create a canonical evidence/raw runtime-diff JSON for the HAGS value proof before migrating record/index references."
+      "retention_rationale": "A canonical evidence/raw runtime-diff JSON now carries the reversible HwSchMode value proof.",
+      "next_canonicalization_step": "Keep live record/index references on the evidence/raw runtime-diff JSON; leave the staging TXT only as audit history."
     },
     {
       "path": "evidence/files/vm-tooling-staging/hideemptydrives-0-hits.csv",

@@ -228,14 +228,13 @@ STAGING_CANONICALIZATION_DECISIONS: dict[str, dict[str, Any]] = {
         "next_canonicalization_step": "Move script defaults only if a broader tooling-path cleanup is planned; do not delete as evidence cleanup.",
     },
     "evidence/files/vm-tooling-staging/beep_start_toggle_out.txt": {
-        "canonicalization_state": "staging-source-of-record",
+        "canonicalization_state": "canonical-raw-replacement-known",
         "owning_records": ["audio.disable-beep"],
         "canonical_replacement_candidates": [
-            "evidence/raw/etw-stackwalk/audio-disable-beep-etw-qga-unblock-20260507/audio-disable-beep-etw-qga-unblock-20260507-summary.json",
-            "evidence/raw/ghidra/ghidra-audio-disable-beep-20260424-batch2",
+            "evidence/raw/runtime-diff/audio.disable-beep/beep-start-toggle-20260327.json",
         ],
-        "retention_rationale": "Raw ETW/Ghidra adjuncts exist, but this text file is still the concise reversible value proof used by shipped app QA evidence.",
-        "next_canonicalization_step": "Create a canonical evidence/raw runtime-diff JSON for the beep value proof before migrating app QA and index references.",
+        "retention_rationale": "A canonical evidence/raw runtime-diff JSON now carries the reversible Beep value proof.",
+        "next_canonicalization_step": "Keep live record/index references on the evidence/raw runtime-diff JSON; leave the staging TXT only as audit history.",
     },
     "evidence/files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-20260325-100039": {
         "canonicalization_state": "staging-source-of-record",
@@ -248,14 +247,13 @@ STAGING_CANONICALIZATION_DECISIONS: dict[str, dict[str, Any]] = {
         "next_canonicalization_step": "Regenerate or copy the MPENGINE no-read proof into evidence/raw before migrating the note/record references.",
     },
     "evidence/files/vm-tooling-staging/hags_toggle_out.txt": {
-        "canonicalization_state": "staging-source-of-record",
+        "canonicalization_state": "canonical-raw-replacement-known",
         "owning_records": ["system.enable-hags"],
         "canonical_replacement_candidates": [
-            "evidence/raw/etw-stackwalk/system-enable-hags-etw-qga-unblock-20260507/system-enable-hags-etw-qga-unblock-20260507-summary.json",
-            "evidence/raw/ghidra/ghidra-system-enable-hags-20260427b",
+            "evidence/raw/runtime-diff/system.enable-hags/hags-toggle-20260327.json",
         ],
-        "retention_rationale": "Raw ETW/Ghidra adjuncts exist, but this text file is still the concise reversible value proof for HwSchMode.",
-        "next_canonicalization_step": "Create a canonical evidence/raw runtime-diff JSON for the HAGS value proof before migrating record/index references.",
+        "retention_rationale": "A canonical evidence/raw runtime-diff JSON now carries the reversible HwSchMode value proof.",
+        "next_canonicalization_step": "Keep live record/index references on the evidence/raw runtime-diff JSON; leave the staging TXT only as audit history.",
     },
 }
 

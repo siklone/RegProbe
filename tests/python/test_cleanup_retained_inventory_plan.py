@@ -142,12 +142,12 @@ class CleanupRetainedInventoryPlanTests(unittest.TestCase):
             plan = self.module.build_plan(ledger)
             item = plan["retained_inventory"][0]
 
-            self.assertEqual(item["canonicalization_state"], "staging-source-of-record")
+            self.assertEqual(item["canonicalization_state"], "canonical-raw-replacement-known")
             self.assertEqual(item["owning_records"], ["system.enable-hags"])
             self.assertIn("runtime-diff JSON", item["next_canonicalization_step"])
             self.assertEqual(
                 plan["summary"]["staging_canonicalization_state_counts"],
-                {"staging-source-of-record": 1},
+                {"canonical-raw-replacement-known": 1},
             )
 
     def test_audit_only_references_have_explicit_release_state(self):

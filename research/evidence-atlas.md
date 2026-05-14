@@ -131,7 +131,7 @@ Current writes
 | Evidence ID | Kind | Origin | Title | Location | Strength | Supports |
 | --- | --- | --- | --- | --- | --- | --- |
 | `ms-services-registry-tree` | `official-doc` | `Microsoft official doc` | HKLM\SYSTEM\CurrentControlSet\Services Registry Tree | [https://learn.microsoft.com/en-us/windows-hardware/drivers/install/hklm-system-currentcontrolset-services-registry-tree](https://learn.microsoft.com/en-us/windows-hardware/drivers/install/hklm-system-currentcontrolset-services-registry-tree) | `high` | path, value, allowed-values, version-scope |
-| `runtime-beep-registry-diff` | `runtime-diff` | `VM runtime diff` | Guest reversible probe - Beep driver start mode | [evidence/files/vm/beep_start_toggle_out.txt](../evidence/files/vm-tooling-staging/beep_start_toggle_out.txt) | `high` | value, behavior, version-scope |
+| `runtime-beep-registry-diff` | `runtime-diff` | `VM runtime diff` | Guest reversible probe - Beep driver start mode | [evidence/raw/runtime-diff/audio.disable-beep/beep-start-toggle-20260327.json](../evidence/raw/runtime-diff/audio.disable-beep/beep-start-toggle-20260327.json) | `high` | value, behavior, version-scope |
 | `app-audio-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `repo-provenance-audio-disable-beep` | `repo-doc` | `Current repo docs` | Repo source note for audio.disable-beep | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) | `medium` | path, value, ui-mapping |
 | `vm-audio.disable-beep-etw-stackwalk-attempt-20260424` | `etw-trace` | `VM ETW trace` | KVM ETW summary receipt for Start | [evidence/captures/audio-disable-beep-etw-stackwalk-attempt-20260424.json](../evidence/captures/audio-disable-beep-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/audio-disable-beep-etw-20260424-batch2/audio-disable-beep-etw-20260424-batch2-summary.json](../evidence/raw/etw-stackwalk/audio-disable-beep-etw-20260424-batch2/audio-disable-beep-etw-20260424-batch2-summary.json) and [evidence/raw/etw-stackwalk/audio-disable-beep-etw-20260424-batch2/audio-disable-beep-etw-20260424-batch2-stage.json](../evidence/raw/etw-stackwalk/audio-disable-beep-etw-20260424-batch2/audio-disable-beep-etw-20260424-batch2-stage.json) | `low` | behavior, version-scope |
@@ -145,7 +145,7 @@ Current writes
 | Source | [https://learn.microsoft.com/en-us/windows-hardware/drivers/install/hklm-system-currentcontrolset-services-registry-tree](https://learn.microsoft.com/en-us/windows-hardware/drivers/install/hklm-system-currentcontrolset-services-registry-tree) |
 | Exact quote / path | lines 52-58: The `Start` value specifies when the service should be started. `0x4` (Disabled): The service is disabled and will not be loaded. |
 | Key found on page | `True` |
-| Notes | Guest reversible probe at [evidence/files/vm/beep_start_toggle_out.txt](../evidence/files/vm-tooling-staging/beep_start_toggle_out.txt) confirmed BASELINE=1, AFTER_4=4, AFTER_1=1, RESTORED=1. |
+| Notes | Guest reversible probe at [evidence/raw/runtime-diff/audio.disable-beep/beep-start-toggle-20260327.json](../evidence/raw/runtime-diff/audio.disable-beep/beep-start-toggle-20260327.json) confirmed BASELINE=1, AFTER_4=4, AFTER_1=1, RESTORED=1. |
 
 **Decision**
 
@@ -25849,7 +25849,7 @@ Current writes
 | `ms-hags-feature` | `official-doc` | `Microsoft official doc` | DirectX Developer Blog: Hardware Accelerated GPU Scheduling | [https://devblogs.microsoft.com/directx/hardware-accelerated-gpu-scheduling/](https://devblogs.microsoft.com/directx/hardware-accelerated-gpu-scheduling/) | `high` | behavior, side-effects, version-scope |
 | `repo-system-doc-hags` | `repo-doc` | `Current repo docs` | Repo system research notes for HAGS | [Docs/system/system.md](../Docs/system/system.md) | `medium` | path, value, ui-mapping, app-mismatch |
 | `app-system-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs | `high` | path, value, ui-mapping |
-| `runtime-hags-registry-diff` | `runtime-diff` | `VM runtime diff` | Guest reversible probe for HwSchMode | [evidence/files/vm/hags_toggle_out.txt](../evidence/files/vm-tooling-staging/hags_toggle_out.txt) | `high` | path, value, behavior, version-scope |
+| `runtime-hags-registry-diff` | `runtime-diff` | `VM runtime diff` | Guest reversible probe for HwSchMode | [evidence/raw/runtime-diff/system.enable-hags/hags-toggle-20260327.json](../evidence/raw/runtime-diff/system.enable-hags/hags-toggle-20260327.json) | `high` | path, value, behavior, version-scope |
 | `vm-system.enable-hags-etw-stackwalk-attempt-20260427` | `etw-trace` | `VM ETW trace` | KVM ETW summary receipt for HwSchMode | [evidence/captures/system-enable-hags-etw-stackwalk-attempt-20260427.json](../evidence/captures/system-enable-hags-etw-stackwalk-attempt-20260427.json) and [evidence/raw/etw-stackwalk/system-enable-hags-etw-20260427b/system-enable-hags-etw-20260427b-summary.json](../evidence/raw/etw-stackwalk/system-enable-hags-etw-20260427b/system-enable-hags-etw-20260427b-summary.json) | `low` | behavior, version-scope |
 | `vm-system.enable-hags-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk runtime receipt for HwSchMode | [evidence/captures/system-enable-hags-etw-qga-unblock-20260507.json](../evidence/captures/system-enable-hags-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/system-enable-hags-etw-qga-unblock-20260507/system-enable-hags-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/system-enable-hags-etw-qga-unblock-20260507/system-enable-hags-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/system-enable-hags-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/system-enable-hags-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/system-enable-hags-etw-qga-unblock-20260507/system-enable-hags-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/system-enable-hags-etw-qga-unblock-20260507/system-enable-hags-etw-qga-unblock-20260507.etl) | `high` | runtime-observation, tooling-fix, path, value, version-scope |
 | `vm-system.enable-hags-ghidra-launch-receipt-20260427` | `vm-test` | `VM test / probe` | Guest Ghidra launch receipt for HwSchMode | [evidence/raw/ghidra/ghidra-system-enable-hags-20260427b/summary.json](../evidence/raw/ghidra/ghidra-system-enable-hags-20260427b/summary.json) | `low` | version-scope |
@@ -25858,8 +25858,8 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Source | [evidence/files/vm/hags_toggle_out.txt](../evidence/files/vm-tooling-staging/hags_toggle_out.txt) |
-| Exact quote / path | hags_toggle_out.txt: BEFORE=MISSING. AFTER_2=2. AFTER_1=1. RESTORED=MISSING. |
+| Source | [evidence/raw/runtime-diff/system.enable-hags/hags-toggle-20260327.json](../evidence/raw/runtime-diff/system.enable-hags/hags-toggle-20260327.json) |
+| Exact quote / path | hags-toggle-20260327.json: BEFORE=MISSING. AFTER_2=2. AFTER_1=1. RESTORED=MISSING. |
 | Key found on page | `True` |
 | Notes | Guest-side reversible probe on Win25H2Clean confirmed the baseline missing state and the 2 / 1 toggle sequence, then restored the machine back to missing. Normalized for the consolidated evidence report. |
 

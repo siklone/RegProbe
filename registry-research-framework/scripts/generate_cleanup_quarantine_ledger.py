@@ -34,6 +34,12 @@ STAGING_CANONICAL_REPLACEMENTS: dict[str, list[str]] = {
     "evidence/files/vm-tooling-staging/showsuperhidden-1-hits.csv..md": [
         "evidence/raw/procmon/explorer-show-protected-operating-system-files-validation-20260324/showsuperhidden-1-hits.csv"
     ],
+    "evidence/files/vm-tooling-staging/beep_start_toggle_out.txt": [
+        "evidence/raw/runtime-diff/audio.disable-beep/beep-start-toggle-20260327.json"
+    ],
+    "evidence/files/vm-tooling-staging/hags_toggle_out.txt": [
+        "evidence/raw/runtime-diff/system.enable-hags/hags-toggle-20260327.json"
+    ],
 }
 
 CLEANUP_TOOL_REFERENCE_PATHS = {

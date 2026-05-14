@@ -67,7 +67,7 @@
         "gaming_safe": null
       },
       "validated_semantics": {
-        "summary": "Guest reversible probe at evidence/files/vm-tooling-staging/beep_start_toggle_out.txt confirmed BASELINE=1, AFTER_4=4, AFTER_1=1, RESTORED=1.",
+        "summary": "Guest reversible probe at evidence/raw/runtime-diff/audio.disable-beep/beep-start-toggle-20260327.json confirmed BASELINE=1, AFTER_4=4, AFTER_1=1, RESTORED=1.",
         "has_validation_proof": true,
         "has_semantics_evidence": true,
         "links": [
@@ -98,7 +98,7 @@
         "links": [
           {
             "title": "Guest reversible probe - Beep driver start mode",
-            "url": "evidence/files/vm-tooling-staging/beep_start_toggle_out.txt",
+            "url": "evidence/raw/runtime-diff/audio.disable-beep/beep-start-toggle-20260327.json",
             "kind": "runtime-diff",
             "summary": "Guest reversible probe on Win25H2Clean confirmed Start transitions through 1 and 4 before restoring to 1."
           },
@@ -24541,9 +24541,9 @@
         "links": [
           {
             "title": "Validation proof source",
-            "url": "evidence/files/vm-tooling-staging/hags_toggle_out.txt",
+            "url": "evidence/raw/runtime-diff/system.enable-hags/hags-toggle-20260327.json",
             "kind": "validation-proof",
-            "summary": "hags_toggle_out.txt: BEFORE=MISSING. AFTER_2=2. AFTER_1=1. RESTORED=MISSING."
+            "summary": "hags-toggle-20260327.json: BEFORE=MISSING. AFTER_2=2. AFTER_1=1. RESTORED=MISSING."
           },
           {
             "title": "DirectX Developer Blog: Hardware Accelerated GPU Scheduling",
@@ -24566,7 +24566,7 @@
         "links": [
           {
             "title": "Guest reversible probe for HwSchMode",
-            "url": "evidence/files/vm-tooling-staging/hags_toggle_out.txt",
+            "url": "evidence/raw/runtime-diff/system.enable-hags/hags-toggle-20260327.json",
             "kind": "runtime-diff",
             "summary": "Guest-side reversible probe on Win25H2Clean confirmed HwSchMode transitions through missing, 2, and 1, then restores to missing on this build."
           },
