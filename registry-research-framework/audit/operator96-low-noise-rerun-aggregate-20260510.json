@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-12T00:53:07Z",
+  "generated_utc": "2026-05-14T23:42:42Z",
   "campaign_id": "operator96-low-noise-rerun-aggregate-20260510",
   "status": "ok",
   "source_campaigns": [
@@ -139,35 +139,453 @@
       "result_count": 10,
       "non_ok_count": 0,
       "non_ok": []
+    },
+    {
+      "path": "registry-research-framework/audit/operator96-low-noise-rerun-tranche-20260512-02.json",
+      "status": "ok",
+      "plan_count": 10,
+      "result_count": 10,
+      "non_ok_count": 0,
+      "non_ok": []
+    },
+    {
+      "path": "registry-research-framework/audit/operator96-low-noise-rerun-tranche-20260512-03.json",
+      "status": "ok",
+      "plan_count": 10,
+      "result_count": 10,
+      "non_ok_count": 0,
+      "non_ok": []
+    },
+    {
+      "path": "registry-research-framework/audit/operator96-low-noise-rerun-tranche-20260512-04.json",
+      "status": "ok",
+      "plan_count": 10,
+      "result_count": 10,
+      "non_ok_count": 0,
+      "non_ok": []
+    },
+    {
+      "path": "registry-research-framework/audit/operator96-low-noise-rerun-tranche-20260512-05.json",
+      "status": "ok",
+      "plan_count": 10,
+      "result_count": 10,
+      "non_ok_count": 0,
+      "non_ok": []
+    },
+    {
+      "path": "registry-research-framework/audit/operator96-low-noise-rerun-tranche-20260512-06.json",
+      "status": "ok",
+      "plan_count": 8,
+      "result_count": 8,
+      "non_ok_count": 0,
+      "non_ok": []
+    },
+    {
+      "path": "registry-research-framework/audit/operator96-low-noise-rerun-tranche-20260512-07.json",
+      "status": "ok",
+      "plan_count": 10,
+      "result_count": 10,
+      "non_ok_count": 0,
+      "non_ok": []
+    },
+    {
+      "path": "registry-research-framework/audit/operator96-low-noise-rerun-tranche-20260512-08.json",
+      "status": "ok",
+      "plan_count": 7,
+      "result_count": 7,
+      "non_ok_count": 0,
+      "non_ok": []
+    },
+    {
+      "path": "registry-research-framework/audit/operator96-low-noise-rerun-tranche-20260512-09.json",
+      "status": "ok",
+      "plan_count": 7,
+      "result_count": 7,
+      "non_ok_count": 0,
+      "non_ok": []
+    },
+    {
+      "path": "registry-research-framework/audit/operator96-low-noise-rerun-tranche-20260512-10.json",
+      "status": "ok",
+      "plan_count": 7,
+      "result_count": 7,
+      "non_ok_count": 0,
+      "non_ok": []
+    },
+    {
+      "path": "registry-research-framework/audit/operator96-low-noise-rerun-tranche-20260512-11.json",
+      "status": "ok",
+      "plan_count": 10,
+      "result_count": 10,
+      "non_ok_count": 0,
+      "non_ok": []
+    },
+    {
+      "path": "registry-research-framework/audit/operator96-low-noise-rerun-tranche-20260512-12.json",
+      "status": "ok",
+      "plan_count": 10,
+      "result_count": 10,
+      "non_ok_count": 0,
+      "non_ok": []
+    },
+    {
+      "path": "registry-research-framework/audit/operator96-low-noise-rerun-tranche-20260512-13.json",
+      "status": "ok",
+      "plan_count": 10,
+      "result_count": 10,
+      "non_ok_count": 0,
+      "non_ok": []
+    },
+    {
+      "path": "registry-research-framework/audit/operator96-low-noise-rerun-tranche-20260512-14.json",
+      "status": "ok",
+      "plan_count": 10,
+      "result_count": 10,
+      "non_ok_count": 0,
+      "non_ok": []
+    },
+    {
+      "path": "registry-research-framework/audit/operator96-low-noise-rerun-tranche-20260512-15.json",
+      "status": "ok",
+      "plan_count": 10,
+      "result_count": 10,
+      "non_ok_count": 0,
+      "non_ok": []
+    },
+    {
+      "path": "registry-research-framework/audit/operator96-low-noise-rerun-tranche-20260512-16.json",
+      "status": "ok",
+      "plan_count": 10,
+      "result_count": 10,
+      "non_ok_count": 0,
+      "non_ok": []
+    },
+    {
+      "path": "registry-research-framework/audit/operator96-low-noise-rerun-tranche-20260512-17.json",
+      "status": "ok",
+      "plan_count": 8,
+      "result_count": 8,
+      "non_ok_count": 0,
+      "non_ok": []
     }
   ],
   "summary": {
-    "source_campaign_count": 17,
+    "source_campaign_count": 33,
     "plan_count": 157,
     "result_count": 157,
-    "duplicate_plan_count": 0,
-    "duplicate_result_count": 0,
+    "duplicate_plan_count": 147,
+    "duplicate_result_count": 147,
     "non_ok_count": 0,
     "non_ok": [],
     "source_failures": [],
     "verdict_counts": {
       "app_breakage": 1,
       "cpu_gain": 2,
-      "harmful": 83,
-      "low_confidence": 32,
-      "noisy": 38,
+      "harmful": 79,
+      "low_confidence": 34,
+      "noisy": 40,
       "rollback_failure": 1
     },
     "host_noise_counts": {
-      "noisy": 39,
-      "ok": 118
+      "noisy": 41,
+      "ok": 116
     },
     "confidence_counts": {
       "high": 13,
       "low": 137,
       "medium": 7
     },
-    "hard_smoke_all": false
+    "hard_smoke_all": false,
+    "noisy_result_count": 41,
+    "noisy_results": [
+      {
+        "experiment_id": "operator96-001-enablelocallogonsid-0",
+        "value_name": "EnableLocalLogonSid",
+        "verdict": "noisy",
+        "host_noise": "noisy",
+        "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-001-enablelocallogonsid-0.json"
+      },
+      {
+        "experiment_id": "operator96-009-forceenablemutantautoboost-0",
+        "value_name": "ForceEnableMutantAutoboost",
+        "verdict": "noisy",
+        "host_noise": "noisy",
+        "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-009-forceenablemutantautoboost-0.json"
+      },
+      {
+        "experiment_id": "operator96-010-allowremotedasd-1",
+        "value_name": "AllowRemoteDASD",
+        "verdict": "noisy",
+        "host_noise": "noisy",
+        "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510/operator96-010-allowremotedasd-1.json"
+      },
+      {
+        "experiment_id": "operator96-011-disablediskcounters-1",
+        "value_name": "DisableDiskCounters",
+        "verdict": "noisy",
+        "host_noise": "noisy",
+        "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-02/operator96-011-disablediskcounters-1.json"
+      },
+      {
+        "experiment_id": "operator96-011-disablediskcounters-0",
+        "value_name": "DisableDiskCounters",
+        "verdict": "noisy",
+        "host_noise": "noisy",
+        "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-02/operator96-011-disablediskcounters-0.json"
+      },
+      {
+        "experiment_id": "operator96-012-ioallowloadcrashdumpdriver-0",
+        "value_name": "IoAllowLoadCrashDumpDriver",
+        "verdict": "noisy",
+        "host_noise": "noisy",
+        "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-02/operator96-012-ioallowloadcrashdumpdriver-0.json"
+      },
+      {
+        "experiment_id": "operator96-012-ioallowloadcrashdumpdriver-1",
+        "value_name": "IoAllowLoadCrashDumpDriver",
+        "verdict": "noisy",
+        "host_noise": "noisy",
+        "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-02/operator96-012-ioallowloadcrashdumpdriver-1.json"
+      },
+      {
+        "experiment_id": "operator96-016-enableweruserreporting-0",
+        "value_name": "EnableWerUserReporting",
+        "verdict": "noisy",
+        "host_noise": "noisy",
+        "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-03/operator96-016-enableweruserreporting-0.json"
+      },
+      {
+        "experiment_id": "operator96-016-enableweruserreporting-1",
+        "value_name": "EnableWerUserReporting",
+        "verdict": "noisy",
+        "host_noise": "noisy",
+        "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-03/operator96-016-enableweruserreporting-1.json"
+      },
+      {
+        "experiment_id": "operator96-058-idleprocessorsrequireqosmanagement-0",
+        "value_name": "IdleProcessorsRequireQosManagement",
+        "verdict": "noisy",
+        "host_noise": "noisy",
+        "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-11/operator96-058-idleprocessorsrequireqosmanagement-0.json"
+      },
+      {
+        "experiment_id": "operator96-058-idleprocessorsrequireqosmanagement-1",
+        "value_name": "IdleProcessorsRequireQosManagement",
+        "verdict": "noisy",
+        "host_noise": "noisy",
+        "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-11/operator96-058-idleprocessorsrequireqosmanagement-1.json"
+      },
+      {
+        "experiment_id": "operator96-060-allowaudiotoenableexecutionrequiredpowerrequests-0",
+        "value_name": "AllowAudioToEnableExecutionRequiredPowerRequests",
+        "verdict": "noisy",
+        "host_noise": "noisy",
+        "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-11/operator96-060-allowaudiotoenableexecutionrequiredpowerrequests-0.json"
+      },
+      {
+        "experiment_id": "operator96-060-allowaudiotoenableexecutionrequiredpowerrequests-1",
+        "value_name": "AllowAudioToEnableExecutionRequiredPowerRequests",
+        "verdict": "noisy",
+        "host_noise": "noisy",
+        "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-11/operator96-060-allowaudiotoenableexecutionrequiredpowerrequests-1.json"
+      },
+      {
+        "experiment_id": "operator96-064-disablevsynclatencyupdate-1",
+        "value_name": "DisableVsyncLatencyUpdate",
+        "verdict": "noisy",
+        "host_noise": "noisy",
+        "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-12/operator96-064-disablevsynclatencyupdate-1.json"
+      },
+      {
+        "experiment_id": "operator96-064-disablevsynclatencyupdate-0",
+        "value_name": "DisableVsyncLatencyUpdate",
+        "verdict": "noisy",
+        "host_noise": "noisy",
+        "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-12/operator96-064-disablevsynclatencyupdate-0.json"
+      },
+      {
+        "experiment_id": "operator96-066-enableinputsuppression-1",
+        "value_name": "EnableInputSuppression",
+        "verdict": "noisy",
+        "host_noise": "noisy",
+        "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-12/operator96-066-enableinputsuppression-1.json"
+      },
+      {
+        "experiment_id": "operator96-066-enableinputsuppression-0",
+        "value_name": "EnableInputSuppression",
+        "verdict": "noisy",
+        "host_noise": "noisy",
+        "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-12/operator96-066-enableinputsuppression-0.json"
+      },
+      {
+        "experiment_id": "operator96-067-perfchecktimerimplementation-0",
+        "value_name": "PerfCheckTimerImplementation",
+        "verdict": "noisy",
+        "host_noise": "noisy",
+        "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-12/operator96-067-perfchecktimerimplementation-0.json"
+      },
+      {
+        "experiment_id": "operator96-067-perfchecktimerimplementation-1",
+        "value_name": "PerfCheckTimerImplementation",
+        "verdict": "noisy",
+        "host_noise": "noisy",
+        "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-12/operator96-067-perfchecktimerimplementation-1.json"
+      },
+      {
+        "experiment_id": "operator96-068-standbyconnectivitygraceperiod-0",
+        "value_name": "StandbyConnectivityGracePeriod",
+        "verdict": "noisy",
+        "host_noise": "noisy",
+        "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-12/operator96-068-standbyconnectivitygraceperiod-0.json"
+      },
+      {
+        "experiment_id": "operator96-068-standbyconnectivitygraceperiod-1",
+        "value_name": "StandbyConnectivityGracePeriod",
+        "verdict": "noisy",
+        "host_noise": "noisy",
+        "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-12/operator96-068-standbyconnectivitygraceperiod-1.json"
+      },
+      {
+        "experiment_id": "operator96-069-enforceausteritymode-0",
+        "value_name": "EnforceAusterityMode",
+        "verdict": "noisy",
+        "host_noise": "noisy",
+        "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-12/operator96-069-enforceausteritymode-0.json"
+      },
+      {
+        "experiment_id": "operator96-069-enforceausteritymode-1",
+        "value_name": "EnforceAusterityMode",
+        "verdict": "noisy",
+        "host_noise": "noisy",
+        "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-12/operator96-069-enforceausteritymode-1.json"
+      },
+      {
+        "experiment_id": "operator96-070-alwayscomputeqoshints-0",
+        "value_name": "AlwaysComputeQosHints",
+        "verdict": "noisy",
+        "host_noise": "noisy",
+        "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-13/operator96-070-alwayscomputeqoshints-0.json"
+      },
+      {
+        "experiment_id": "operator96-070-alwayscomputeqoshints-1",
+        "value_name": "AlwaysComputeQosHints",
+        "verdict": "noisy",
+        "host_noise": "noisy",
+        "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-13/operator96-070-alwayscomputeqoshints-1.json"
+      },
+      {
+        "experiment_id": "operator96-071-heteromulticoreclassesenabled-0",
+        "value_name": "HeteroMultiCoreClassesEnabled",
+        "verdict": "noisy",
+        "host_noise": "noisy",
+        "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-13/operator96-071-heteromulticoreclassesenabled-0.json"
+      },
+      {
+        "experiment_id": "operator96-071-heteromulticoreclassesenabled-1",
+        "value_name": "HeteroMultiCoreClassesEnabled",
+        "verdict": "noisy",
+        "host_noise": "noisy",
+        "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-13/operator96-071-heteromulticoreclassesenabled-1.json"
+      },
+      {
+        "experiment_id": "operator96-072-heteromulticlassparkingenabled-0",
+        "value_name": "HeteroMultiClassParkingEnabled",
+        "verdict": "noisy",
+        "host_noise": "noisy",
+        "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-13/operator96-072-heteromulticlassparkingenabled-0.json"
+      },
+      {
+        "experiment_id": "operator96-072-heteromulticlassparkingenabled-1",
+        "value_name": "HeteroMultiClassParkingEnabled",
+        "verdict": "noisy",
+        "host_noise": "noisy",
+        "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-13/operator96-072-heteromulticlassparkingenabled-1.json"
+      },
+      {
+        "experiment_id": "operator96-073-disableidlestatesatboot-2",
+        "value_name": "DisableIdleStatesAtBoot",
+        "verdict": "noisy",
+        "host_noise": "noisy",
+        "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-13/operator96-073-disableidlestatesatboot-2.json"
+      },
+      {
+        "experiment_id": "operator96-073-disableidlestatesatboot-0",
+        "value_name": "DisableIdleStatesAtBoot",
+        "verdict": "noisy",
+        "host_noise": "noisy",
+        "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-13/operator96-073-disableidlestatesatboot-0.json"
+      },
+      {
+        "experiment_id": "operator96-075-msdisabled-1",
+        "value_name": "MSDisabled",
+        "verdict": "noisy",
+        "host_noise": "noisy",
+        "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-14/operator96-075-msdisabled-1.json"
+      },
+      {
+        "experiment_id": "operator96-075-msdisabled-0",
+        "value_name": "MSDisabled",
+        "verdict": "noisy",
+        "host_noise": "noisy",
+        "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-14/operator96-075-msdisabled-0.json"
+      },
+      {
+        "experiment_id": "operator96-076-fxaccountingtelemetrydisabled-1",
+        "value_name": "FxAccountingTelemetryDisabled",
+        "verdict": "noisy",
+        "host_noise": "noisy",
+        "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-14/operator96-076-fxaccountingtelemetrydisabled-1.json"
+      },
+      {
+        "experiment_id": "operator96-078-enableminimalhiberfile-1",
+        "value_name": "EnableMinimalHiberFile",
+        "verdict": "noisy",
+        "host_noise": "noisy",
+        "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-14/operator96-078-enableminimalhiberfile-1.json"
+      },
+      {
+        "experiment_id": "operator96-079-hiberbootenabled-0",
+        "value_name": "HiberbootEnabled",
+        "verdict": "noisy",
+        "host_noise": "noisy",
+        "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-14/operator96-079-hiberbootenabled-0.json"
+      },
+      {
+        "experiment_id": "operator96-079-hiberbootenabled-1",
+        "value_name": "HiberbootEnabled",
+        "verdict": "noisy",
+        "host_noise": "noisy",
+        "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-14/operator96-079-hiberbootenabled-1.json"
+      },
+      {
+        "experiment_id": "operator96-080-maximumfrequencyoverride-100",
+        "value_name": "MaximumFrequencyOverride",
+        "verdict": "noisy",
+        "host_noise": "noisy",
+        "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-15/operator96-080-maximumfrequencyoverride-100.json"
+      },
+      {
+        "experiment_id": "operator96-080-maximumfrequencyoverride-0",
+        "value_name": "MaximumFrequencyOverride",
+        "verdict": "noisy",
+        "host_noise": "noisy",
+        "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-15/operator96-080-maximumfrequencyoverride-0.json"
+      },
+      {
+        "experiment_id": "operator96-089-powerwatchdogpocallouttimeoutmsec-1",
+        "value_name": "PowerWatchdogPoCalloutTimeoutMsec",
+        "verdict": "app_breakage",
+        "host_noise": "noisy",
+        "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-16/operator96-089-powerwatchdogpocallouttimeoutmsec-1.json"
+      },
+      {
+        "experiment_id": "operator96-090-powerwatchdogpowerongditimeoutmsec-0",
+        "value_name": "PowerWatchdogPowerOnGdiTimeoutMsec",
+        "verdict": "noisy",
+        "host_noise": "noisy",
+        "artifact_json": "registry-research-framework/audit/registry-value-experiments-low-noise-20260510-tranche-17/operator96-090-powerwatchdogpowerongditimeoutmsec-0.json"
+      }
+    ]
   },
   "plan": [
     {
@@ -2495,13 +2913,13 @@
       "stderr": "",
       "observations": {
         "status": "ok",
-        "verdict": "harmful",
+        "verdict": "noisy",
         "confidence": "low",
-        "host_noise": "ok",
-        "primary_delta_pct": -81.014,
-        "verdict_reason": "post_reboot io_write_mib_per_second changed by -81.01%",
+        "host_noise": "noisy",
+        "primary_delta_pct": null,
+        "verdict_reason": "host preflight marked one or more stages noisy",
         "metrics_used": [
-          "io_write_mib_per_second"
+          "host_noise_meta"
         ],
         "safety_findings": [],
         "smoke_hard_success": {
@@ -2596,12 +3014,12 @@
           "apply_vs_baseline": {
             "cpu_single_seconds": null,
             "cpu_multi_seconds": null,
-            "io_write_read_mib_per_second": 78.69
+            "io_write_read_mib_per_second": -26.51
           },
           "post_reboot_vs_baseline": {
             "cpu_single_seconds": null,
             "cpu_multi_seconds": null,
-            "io_write_read_mib_per_second": -23.16
+            "io_write_read_mib_per_second": 14.48
           }
         }
       }
@@ -2631,11 +3049,11 @@
       "stderr": "",
       "observations": {
         "status": "ok",
-        "verdict": "harmful",
+        "verdict": "low_confidence",
         "confidence": "low",
         "host_noise": "ok",
-        "primary_delta_pct": -21.701,
-        "verdict_reason": "post_reboot io_write_mib_per_second changed by -21.70%",
+        "primary_delta_pct": 840.52,
+        "verdict_reason": "apply io_write_mib_per_second changed by +840.52%",
         "metrics_used": [
           "io_write_mib_per_second"
         ],
@@ -2732,12 +3150,12 @@
           "apply_vs_baseline": {
             "cpu_single_seconds": null,
             "cpu_multi_seconds": null,
-            "io_write_read_mib_per_second": 129.44
+            "io_write_read_mib_per_second": 133.88
           },
           "post_reboot_vs_baseline": {
             "cpu_single_seconds": null,
             "cpu_multi_seconds": null,
-            "io_write_read_mib_per_second": 9.93
+            "io_write_read_mib_per_second": 30.23
           }
         }
       }
@@ -2767,13 +3185,13 @@
       "stderr": "",
       "observations": {
         "status": "ok",
-        "verdict": "harmful",
+        "verdict": "low_confidence",
         "confidence": "low",
         "host_noise": "ok",
-        "primary_delta_pct": -30.428,
-        "verdict_reason": "post_reboot io_write_mib_per_second changed by -30.43%",
+        "primary_delta_pct": 104.124,
+        "verdict_reason": "apply io_read_mib_per_second changed by +104.12%",
         "metrics_used": [
-          "io_write_mib_per_second"
+          "io_read_mib_per_second"
         ],
         "safety_findings": [],
         "smoke_hard_success": {
@@ -2868,12 +3286,12 @@
           "apply_vs_baseline": {
             "cpu_single_seconds": null,
             "cpu_multi_seconds": null,
-            "io_write_read_mib_per_second": 96.64
+            "io_write_read_mib_per_second": 94.89
           },
           "post_reboot_vs_baseline": {
             "cpu_single_seconds": null,
             "cpu_multi_seconds": null,
-            "io_write_read_mib_per_second": -21.91
+            "io_write_read_mib_per_second": 14.33
           }
         }
       }
@@ -2905,13 +3323,13 @@
       "stderr": "",
       "observations": {
         "status": "ok",
-        "verdict": "low_confidence",
+        "verdict": "harmful",
         "confidence": "low",
         "host_noise": "ok",
-        "primary_delta_pct": 83.936,
-        "verdict_reason": "apply io_read_mib_per_second changed by +83.94%",
+        "primary_delta_pct": -13.65,
+        "verdict_reason": "post_reboot io_write_mib_per_second changed by -13.65%",
         "metrics_used": [
-          "io_read_mib_per_second"
+          "io_write_mib_per_second"
         ],
         "safety_findings": [],
         "smoke_hard_success": {
@@ -3006,12 +3424,12 @@
           "apply_vs_baseline": {
             "cpu_single_seconds": null,
             "cpu_multi_seconds": null,
-            "io_write_read_mib_per_second": 64.21
+            "io_write_read_mib_per_second": 52.25
           },
           "post_reboot_vs_baseline": {
             "cpu_single_seconds": null,
             "cpu_multi_seconds": null,
-            "io_write_read_mib_per_second": -3.1
+            "io_write_read_mib_per_second": 2.02
           }
         }
       }
@@ -3046,10 +3464,10 @@
         "verdict": "harmful",
         "confidence": "low",
         "host_noise": "ok",
-        "primary_delta_pct": -18.155,
-        "verdict_reason": "post_reboot io_write_mib_per_second changed by -18.16%",
+        "primary_delta_pct": -31.872,
+        "verdict_reason": "post_reboot io_read_mib_per_second changed by -31.87%",
         "metrics_used": [
-          "io_write_mib_per_second"
+          "io_read_mib_per_second"
         ],
         "safety_findings": [],
         "smoke_hard_success": {
@@ -3144,12 +3562,12 @@
           "apply_vs_baseline": {
             "cpu_single_seconds": null,
             "cpu_multi_seconds": null,
-            "io_write_read_mib_per_second": 92.71
+            "io_write_read_mib_per_second": 61.45
           },
           "post_reboot_vs_baseline": {
             "cpu_single_seconds": null,
             "cpu_multi_seconds": null,
-            "io_write_read_mib_per_second": 14.49
+            "io_write_read_mib_per_second": -22.1
           }
         }
       }
@@ -3179,13 +3597,13 @@
       "stderr": "",
       "observations": {
         "status": "ok",
-        "verdict": "harmful",
+        "verdict": "low_confidence",
         "confidence": "low",
         "host_noise": "ok",
-        "primary_delta_pct": -11.535,
-        "verdict_reason": "post_reboot io_write_mib_per_second changed by -11.54%",
+        "primary_delta_pct": 92.613,
+        "verdict_reason": "apply io_read_mib_per_second changed by +92.61%",
         "metrics_used": [
-          "io_write_mib_per_second"
+          "io_read_mib_per_second"
         ],
         "safety_findings": [],
         "smoke_hard_success": {
@@ -3280,12 +3698,12 @@
           "apply_vs_baseline": {
             "cpu_single_seconds": null,
             "cpu_multi_seconds": null,
-            "io_write_read_mib_per_second": 77.68
+            "io_write_read_mib_per_second": 70.33
           },
           "post_reboot_vs_baseline": {
             "cpu_single_seconds": null,
             "cpu_multi_seconds": null,
-            "io_write_read_mib_per_second": -3.78
+            "io_write_read_mib_per_second": -1.35
           }
         }
       }
@@ -3315,13 +3733,13 @@
       "stderr": "",
       "observations": {
         "status": "ok",
-        "verdict": "harmful",
+        "verdict": "noisy",
         "confidence": "low",
-        "host_noise": "ok",
-        "primary_delta_pct": -32.108,
-        "verdict_reason": "post_reboot io_write_mib_per_second changed by -32.11%",
+        "host_noise": "noisy",
+        "primary_delta_pct": null,
+        "verdict_reason": "host preflight marked one or more stages noisy",
         "metrics_used": [
-          "io_write_mib_per_second"
+          "host_noise_meta"
         ],
         "safety_findings": [],
         "smoke_hard_success": {
@@ -3416,12 +3834,12 @@
           "apply_vs_baseline": {
             "cpu_single_seconds": null,
             "cpu_multi_seconds": null,
-            "io_write_read_mib_per_second": 66.7
+            "io_write_read_mib_per_second": 42.23
           },
           "post_reboot_vs_baseline": {
             "cpu_single_seconds": null,
             "cpu_multi_seconds": null,
-            "io_write_read_mib_per_second": 3.46
+            "io_write_read_mib_per_second": -21.83
           }
         }
       }
@@ -3554,12 +3972,12 @@
           "apply_vs_baseline": {
             "cpu_single_seconds": null,
             "cpu_multi_seconds": null,
-            "io_write_read_mib_per_second": 95.2
+            "io_write_read_mib_per_second": 241.0
           },
           "post_reboot_vs_baseline": {
             "cpu_single_seconds": null,
             "cpu_multi_seconds": null,
-            "io_write_read_mib_per_second": -3.57
+            "io_write_read_mib_per_second": 53.95
           }
         }
       }

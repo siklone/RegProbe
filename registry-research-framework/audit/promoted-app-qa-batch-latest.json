@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-05-14T10:17:26Z",
+  "generated_utc": "2026-05-14T23:30:55Z",
   "status": "PASS",
   "selection": {
     "requested_ids": [],
@@ -7,7 +7,7 @@
     "limit_per_category": 1,
     "total_limit": 14,
     "run_kvm": true,
-    "wait_timeout": 900
+    "wait_timeout": 1200
   },
   "sources": {
     "promotion_gates": "research/promotion-gates.json",
@@ -907,14 +907,14 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: This affects the old system beep behavior driven by the Beep driver. Most people will never notice it unless they are cleaning up legacy system sounds or debugging old compatibility behavior. Evidence: Guest reversible probe at evidence/raw/runtime-diff/audio.disable-beep/beep-start-toggle-20260327.json confirmed BASELINE=1, AFTER_4=4, AFTER_1=1, RESTORED=1. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: This affects the old system beep behavior driven by the Beep driver. Most people will never notice it unless they are cleaning up legacy system sounds or debugging old compatibility behavior. Evidence: Guest reversible probe at evidence/files/vm-tooling-staging/beep_start_toggle_out.txt confirmed BASELINE=1, AFTER_4=4, AFTER_1=1, RESTORED=1. Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "Guest reversible probe at evidence/raw/runtime-diff/audio.disable-beep/beep-start-toggle-20260327.json confirmed BASELINE=1, AFTER_4=4, AFTER_1=1, RESTORED=1.",
+              "Summary": "Guest reversible probe at evidence/files/vm-tooling-staging/beep_start_toggle_out.txt confirmed BASELINE=1, AFTER_4=4, AFTER_1=1, RESTORED=1.",
               "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows-hardware/drivers/install/hklm-system-currentcontrolset-services-registry-tree"
             },
             {
@@ -922,7 +922,7 @@
               "Label": "RUNTIME",
               "State": "ready",
               "Summary": "Guest reversible probe on Win25H2Clean confirmed Start transitions through 1 and 4 before restoring to 1.",
-              "Source": "Guest reversible probe - Beep driver start mode: evidence/raw/runtime-diff/audio.disable-beep/beep-start-toggle-20260327.json"
+              "Source": "Guest reversible probe - Beep driver start mode: evidence/files/vm-tooling-staging/beep_start_toggle_out.txt"
             },
             {
               "Key": "source",
@@ -969,7 +969,7 @@
                 "Action": "Detect",
                 "StatusText": "Detected",
                 "Message": "Current option is 'System start (observed baseline)'. Selected option is 'Disabled'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Services\\Beep\\Start: 1 -> 4",
-                "TimestampText": "13:17:23"
+                "TimestampText": "02:31:01"
               },
               {
                 "Action": "Apply",
@@ -1007,19 +1007,19 @@
                 "Action": "Detect",
                 "StatusText": "Detected",
                 "Message": "Current option is 'System start (observed baseline)'. Selected option is 'Disabled'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Services\\Beep\\Start: 1 -> 4",
-                "TimestampText": "13:17:23"
+                "TimestampText": "02:31:01"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
                 "Message": "Applied preset 'Disabled'.",
-                "TimestampText": "13:17:30"
+                "TimestampText": "02:31:04"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
                 "Message": "Verified preset 'Disabled'.",
-                "TimestampText": "13:17:30"
+                "TimestampText": "02:31:04"
               },
               {
                 "Action": "Rollback",
@@ -1045,25 +1045,25 @@
                 "Action": "Detect",
                 "StatusText": "Detected",
                 "Message": "Current option is 'System start (observed baseline)'. Selected option is 'Disabled'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Services\\Beep\\Start: 1 -> 4",
-                "TimestampText": "13:17:23"
+                "TimestampText": "02:31:01"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
                 "Message": "Applied preset 'Disabled'.",
-                "TimestampText": "13:17:30"
+                "TimestampText": "02:31:04"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
                 "Message": "Verified preset 'Disabled'.",
-                "TimestampText": "13:17:30"
+                "TimestampText": "02:31:04"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "13:17:30"
+                "TimestampText": "02:31:04"
               }
             ]
           },
@@ -1083,31 +1083,31 @@
                 "Action": "Detect",
                 "StatusText": "Detected",
                 "Message": "Current option is 'System start (observed baseline)'. Selected option is 'Disabled'.\nEntries:\n- HKLM\\SYSTEM\\CurrentControlSet\\Services\\Beep\\Start: 1 -> 4",
-                "TimestampText": "13:17:30"
+                "TimestampText": "02:31:04"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
                 "Message": "Applied preset 'Disabled'.",
-                "TimestampText": "13:17:30"
+                "TimestampText": "02:31:04"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
                 "Message": "Verified preset 'Disabled'.",
-                "TimestampText": "13:17:30"
+                "TimestampText": "02:31:04"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "13:17:30"
+                "TimestampText": "02:31:04"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-14T10:17:23.6195586+00:00",
-        "CompletedAtUtc": "2026-05-14T10:17:30.3419835+00:00"
+        "StartedAtUtc": "2026-05-14T23:31:01.650945+00:00",
+        "CompletedAtUtc": "2026-05-14T23:31:04.8841414+00:00"
       },
       "qa_tweak_id": "audio.disable-beep",
       "candidate_id": "audio.disable-beep",
@@ -1124,8 +1124,8 @@
       "report_fetch_status": null,
       "report_app_success": true,
       "report_success": true,
-      "report_status": "not-applicable",
-      "report_summary": "Reserved Storage is currently in use by Windows servicing. Wait for servicing operations to complete and try again later.",
+      "report_status": "ok",
+      "report_summary": "Apply/verify path completed and rollback restored the tweak.",
       "report_contract_status": "ok",
       "report_contract_summary": "QA card snapshot contract passed.",
       "report_contract_failures": [],
@@ -1155,8 +1155,8 @@
         "TweakId": "cleanup.disable-reserved-storage",
         "TweakName": "Disable Reserved Storage",
         "Success": true,
-        "Status": "not-applicable",
-        "Summary": "Reserved Storage is currently in use by Windows servicing. Wait for servicing operations to complete and try again later.",
+        "Status": "ok",
+        "Summary": "Apply/verify path completed and rollback restored the tweak.",
         "RollbackRequested": true,
         "GatedMutationOverrideRequested": false,
         "GatedMutationOverrideUsed": false,
@@ -1236,7 +1236,7 @@
                 "Action": "Detect",
                 "StatusText": "Detected",
                 "Message": "Current state: Reserved Storage: Enabled",
-                "TimestampText": "13:17:43"
+                "TimestampText": "02:31:16"
               },
               {
                 "Action": "Apply",
@@ -1260,39 +1260,39 @@
           },
           {
             "Stage": "apply",
-            "AppliedStatus": "NotApplied",
+            "AppliedStatus": "Applied",
             "StatusMessage": "Run completed.",
             "OutcomeSummary": "Apply - Success",
-            "CurrentValue": "Reserved Storage: Enabled",
+            "CurrentValue": "Optimized",
             "TargetValue": "Optimized",
             "WasRolledBack": false,
             "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": false,
+            "HasSuccessfulApplyStory": true,
             "HasSuccessfulRollbackStory": false,
             "Steps": [
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
                 "Message": "Current state: Reserved Storage: Enabled",
-                "TimestampText": "13:17:44"
+                "TimestampText": "02:31:16"
               },
               {
                 "Action": "Apply",
-                "StatusText": "Not applicable",
-                "Message": "Reserved Storage is currently in use by Windows servicing. Wait for servicing operations to complete and try again later.",
-                "TimestampText": "13:17:44"
+                "StatusText": "Applied",
+                "Message": "Successfully applied changes.",
+                "TimestampText": "02:31:17"
               },
               {
                 "Action": "Verify",
-                "StatusText": "Skipped",
-                "Message": "Apply returned NotApplicable.",
-                "TimestampText": "13:17:44"
+                "StatusText": "Verified",
+                "Message": "Changes verified successfully.",
+                "TimestampText": "02:31:17"
               },
               {
                 "Action": "Rollback",
-                "StatusText": "Skipped",
-                "Message": "Apply returned NotApplicable.",
-                "TimestampText": "13:17:44"
+                "StatusText": "Not required",
+                "Message": "Step not executed.",
+                "TimestampText": "-"
               }
             ]
           },
@@ -1301,36 +1301,36 @@
             "AppliedStatus": "NotApplied",
             "StatusMessage": "Successfully restored original state.",
             "OutcomeSummary": "Rollback - Rolled Back",
-            "CurrentValue": "Reserved Storage: Enabled",
+            "CurrentValue": "Optimized",
             "TargetValue": "Optimized",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": false,
+            "HasSuccessfulApplyStory": true,
             "HasSuccessfulRollbackStory": true,
             "Steps": [
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
                 "Message": "Current state: Reserved Storage: Enabled",
-                "TimestampText": "13:17:44"
+                "TimestampText": "02:31:16"
               },
               {
                 "Action": "Apply",
-                "StatusText": "Not applicable",
-                "Message": "Reserved Storage is currently in use by Windows servicing. Wait for servicing operations to complete and try again later.",
-                "TimestampText": "13:17:44"
+                "StatusText": "Applied",
+                "Message": "Successfully applied changes.",
+                "TimestampText": "02:31:17"
               },
               {
                 "Action": "Verify",
-                "StatusText": "Skipped",
-                "Message": "Apply returned NotApplicable.",
-                "TimestampText": "13:17:44"
+                "StatusText": "Verified",
+                "Message": "Changes verified successfully.",
+                "TimestampText": "02:31:17"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Successfully restored original state.",
-                "TimestampText": "13:17:44"
+                "TimestampText": "02:31:18"
               }
             ]
           },
@@ -1343,38 +1343,38 @@
             "TargetValue": "Optimized",
             "WasRolledBack": true,
             "IsMutationAllowed": true,
-            "HasSuccessfulApplyStory": false,
+            "HasSuccessfulApplyStory": true,
             "HasSuccessfulRollbackStory": true,
             "Steps": [
               {
                 "Action": "Detect",
                 "StatusText": "Detected",
                 "Message": "Current state: Reserved Storage: Enabled",
-                "TimestampText": "13:17:44"
+                "TimestampText": "02:31:18"
               },
               {
                 "Action": "Apply",
-                "StatusText": "Not applicable",
-                "Message": "Reserved Storage is currently in use by Windows servicing. Wait for servicing operations to complete and try again later.",
-                "TimestampText": "13:17:44"
+                "StatusText": "Applied",
+                "Message": "Successfully applied changes.",
+                "TimestampText": "02:31:17"
               },
               {
                 "Action": "Verify",
-                "StatusText": "Skipped",
-                "Message": "Apply returned NotApplicable.",
-                "TimestampText": "13:17:44"
+                "StatusText": "Verified",
+                "Message": "Changes verified successfully.",
+                "TimestampText": "02:31:17"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Successfully restored original state.",
-                "TimestampText": "13:17:44"
+                "TimestampText": "02:31:18"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-14T10:17:40.6660711+00:00",
-        "CompletedAtUtc": "2026-05-14T10:17:44.7663695+00:00"
+        "StartedAtUtc": "2026-05-14T23:31:12.9510291+00:00",
+        "CompletedAtUtc": "2026-05-14T23:31:18.5052625+00:00"
       },
       "qa_tweak_id": "cleanup.disable-reserved-storage",
       "candidate_id": "cleanup.disable-reserved-storage",
@@ -1503,7 +1503,7 @@
                 "Action": "Detect",
                 "StatusText": "Detected",
                 "Message": "Docker Desktop WSL 2 backend is disabled or not configured.",
-                "TimestampText": "13:17:55"
+                "TimestampText": "02:31:26"
               },
               {
                 "Action": "Apply",
@@ -1541,19 +1541,19 @@
                 "Action": "Detect",
                 "StatusText": "Detected",
                 "Message": "Docker Desktop WSL 2 backend is disabled or not configured.",
-                "TimestampText": "13:17:55"
+                "TimestampText": "02:31:26"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
                 "Message": "Enabled Docker Desktop WSL 2 backend.",
-                "TimestampText": "13:17:55"
+                "TimestampText": "02:31:26"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
                 "Message": "Verified Docker Desktop WSL 2 backend is enabled.",
-                "TimestampText": "13:17:55"
+                "TimestampText": "02:31:26"
               },
               {
                 "Action": "Rollback",
@@ -1579,25 +1579,25 @@
                 "Action": "Detect",
                 "StatusText": "Detected",
                 "Message": "Docker Desktop WSL 2 backend is disabled or not configured.",
-                "TimestampText": "13:17:55"
+                "TimestampText": "02:31:26"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
                 "Message": "Enabled Docker Desktop WSL 2 backend.",
-                "TimestampText": "13:17:55"
+                "TimestampText": "02:31:26"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
                 "Message": "Verified Docker Desktop WSL 2 backend is enabled.",
-                "TimestampText": "13:17:55"
+                "TimestampText": "02:31:26"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Removed Docker settings file created by the tweak.",
-                "TimestampText": "13:17:55"
+                "TimestampText": "02:31:26"
               }
             ]
           },
@@ -1617,31 +1617,31 @@
                 "Action": "Detect",
                 "StatusText": "Detected",
                 "Message": "Docker Desktop WSL 2 backend is disabled or not configured.",
-                "TimestampText": "13:17:55"
+                "TimestampText": "02:31:27"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
                 "Message": "Enabled Docker Desktop WSL 2 backend.",
-                "TimestampText": "13:17:55"
+                "TimestampText": "02:31:26"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
                 "Message": "Verified Docker Desktop WSL 2 backend is enabled.",
-                "TimestampText": "13:17:55"
+                "TimestampText": "02:31:26"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Removed Docker settings file created by the tweak.",
-                "TimestampText": "13:17:55"
+                "TimestampText": "02:31:26"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-14T10:17:55.2980418+00:00",
-        "CompletedAtUtc": "2026-05-14T10:17:55.7550499+00:00"
+        "StartedAtUtc": "2026-05-14T23:31:26.6519721+00:00",
+        "CompletedAtUtc": "2026-05-14T23:31:27.0942952+00:00"
       },
       "qa_tweak_id": "developer.docker-performance",
       "candidate_id": "developer.docker-performance",
@@ -1770,7 +1770,7 @@
                 "Action": "Detect",
                 "StatusText": "Detected",
                 "Message": "Current option is 'Allow thumbnails'. Selected option is 'Always show icons, never thumbnails'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\IconsOnly: 0 -> 1",
-                "TimestampText": "13:18:06"
+                "TimestampText": "02:31:34"
               },
               {
                 "Action": "Apply",
@@ -1808,19 +1808,19 @@
                 "Action": "Detect",
                 "StatusText": "Detected",
                 "Message": "Current option is 'Allow thumbnails'. Selected option is 'Always show icons, never thumbnails'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\IconsOnly: 0 -> 1",
-                "TimestampText": "13:18:06"
+                "TimestampText": "02:31:35"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
                 "Message": "Applied preset 'Always show icons, never thumbnails'.",
-                "TimestampText": "13:18:06"
+                "TimestampText": "02:31:35"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
                 "Message": "Verified preset 'Always show icons, never thumbnails'.",
-                "TimestampText": "13:18:06"
+                "TimestampText": "02:31:35"
               },
               {
                 "Action": "Rollback",
@@ -1846,25 +1846,25 @@
                 "Action": "Detect",
                 "StatusText": "Detected",
                 "Message": "Current option is 'Allow thumbnails'. Selected option is 'Always show icons, never thumbnails'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\IconsOnly: 0 -> 1",
-                "TimestampText": "13:18:06"
+                "TimestampText": "02:31:35"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
                 "Message": "Applied preset 'Always show icons, never thumbnails'.",
-                "TimestampText": "13:18:06"
+                "TimestampText": "02:31:35"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
                 "Message": "Verified preset 'Always show icons, never thumbnails'.",
-                "TimestampText": "13:18:06"
+                "TimestampText": "02:31:35"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "13:18:06"
+                "TimestampText": "02:31:35"
               }
             ]
           },
@@ -1884,31 +1884,31 @@
                 "Action": "Detect",
                 "StatusText": "Detected",
                 "Message": "Current option is 'Allow thumbnails'. Selected option is 'Always show icons, never thumbnails'.\nEntries:\n- HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\IconsOnly: 0 -> 1",
-                "TimestampText": "13:18:07"
+                "TimestampText": "02:31:35"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
                 "Message": "Applied preset 'Always show icons, never thumbnails'.",
-                "TimestampText": "13:18:06"
+                "TimestampText": "02:31:35"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
                 "Message": "Verified preset 'Always show icons, never thumbnails'.",
-                "TimestampText": "13:18:06"
+                "TimestampText": "02:31:35"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "13:18:06"
+                "TimestampText": "02:31:35"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-14T10:18:06.7207641+00:00",
-        "CompletedAtUtc": "2026-05-14T10:18:07.1546883+00:00"
+        "StartedAtUtc": "2026-05-14T23:31:34.9425409+00:00",
+        "CompletedAtUtc": "2026-05-14T23:31:35.3736544+00:00"
       },
       "qa_tweak_id": "explorer.always-show-icons-never-thumbnails",
       "candidate_id": "explorer.always-show-icons-never-thumbnails",
@@ -2037,7 +2037,7 @@
                 "Action": "Detect",
                 "StatusText": "Detected",
                 "Message": "Detected 0 of 40 values (matches: 0, missing: 40).\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\AutoImportAtFirstRun: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\DefaultBrowserSettingEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\DefaultSensorsSetting: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\EdgeCollectionsEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\EdgeFollowEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\EdgeShoppingAssistantEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\HideFirstRunExperience: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\HideRestoreDialogEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\HubsSidebarEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\ImplicitSignInEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\NewTabPageAllowedBackgroundTypes: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\NewTabPageContentEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\NewTabPageHideDefaultTopSites: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\NewTabPageQuickLinksEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\PersonalizationReportingEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\PinBrowserEssentialsToolbarButton: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\QuickSearchShowMiniMenu: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\SearchbarAllowed: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\ShowMicrosoftRewards: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\ShowRecommendationsEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\SplitScreenEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\StandaloneHubsSidebarEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\StartupBoostEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\SyncDisabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\TabServicesEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\TextPredictionEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\TrackingPrevention: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\UserFeedbackAllowed: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\AllowEdgeSwipe: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\AllowEdgeSwipe: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableCharms: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableCharms: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableHelpSticker: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableHelpSticker: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableMFUTracking: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableMFUTracking: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableRecentApps: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableRecentApps: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\TurnOffBackstack: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\TurnOffBackstack: missing",
-                "TimestampText": "13:18:18"
+                "TimestampText": "02:31:43"
               },
               {
                 "Action": "Apply",
@@ -2075,19 +2075,19 @@
                 "Action": "Detect",
                 "StatusText": "Detected",
                 "Message": "Detected 0 of 40 values (matches: 0, missing: 40).\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\AutoImportAtFirstRun: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\DefaultBrowserSettingEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\DefaultSensorsSetting: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\EdgeCollectionsEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\EdgeFollowEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\EdgeShoppingAssistantEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\HideFirstRunExperience: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\HideRestoreDialogEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\HubsSidebarEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\ImplicitSignInEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\NewTabPageAllowedBackgroundTypes: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\NewTabPageContentEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\NewTabPageHideDefaultTopSites: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\NewTabPageQuickLinksEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\PersonalizationReportingEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\PinBrowserEssentialsToolbarButton: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\QuickSearchShowMiniMenu: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\SearchbarAllowed: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\ShowMicrosoftRewards: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\ShowRecommendationsEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\SplitScreenEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\StandaloneHubsSidebarEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\StartupBoostEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\SyncDisabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\TabServicesEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\TextPredictionEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\TrackingPrevention: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\UserFeedbackAllowed: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\AllowEdgeSwipe: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\AllowEdgeSwipe: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableCharms: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableCharms: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableHelpSticker: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableHelpSticker: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableMFUTracking: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableMFUTracking: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableRecentApps: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableRecentApps: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\TurnOffBackstack: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\TurnOffBackstack: missing",
-                "TimestampText": "13:18:18"
+                "TimestampText": "02:31:43"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
                 "Message": "Updated 40 values.",
-                "TimestampText": "13:18:22"
+                "TimestampText": "02:31:47"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
                 "Message": "Verified desired values.",
-                "TimestampText": "13:18:22"
+                "TimestampText": "02:31:47"
               },
               {
                 "Action": "Rollback",
@@ -2113,25 +2113,25 @@
                 "Action": "Detect",
                 "StatusText": "Detected",
                 "Message": "Detected 0 of 40 values (matches: 0, missing: 40).\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\AutoImportAtFirstRun: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\DefaultBrowserSettingEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\DefaultSensorsSetting: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\EdgeCollectionsEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\EdgeFollowEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\EdgeShoppingAssistantEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\HideFirstRunExperience: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\HideRestoreDialogEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\HubsSidebarEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\ImplicitSignInEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\NewTabPageAllowedBackgroundTypes: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\NewTabPageContentEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\NewTabPageHideDefaultTopSites: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\NewTabPageQuickLinksEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\PersonalizationReportingEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\PinBrowserEssentialsToolbarButton: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\QuickSearchShowMiniMenu: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\SearchbarAllowed: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\ShowMicrosoftRewards: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\ShowRecommendationsEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\SplitScreenEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\StandaloneHubsSidebarEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\StartupBoostEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\SyncDisabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\TabServicesEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\TextPredictionEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\TrackingPrevention: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\UserFeedbackAllowed: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\AllowEdgeSwipe: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\AllowEdgeSwipe: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableCharms: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableCharms: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableHelpSticker: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableHelpSticker: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableMFUTracking: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableMFUTracking: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableRecentApps: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableRecentApps: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\TurnOffBackstack: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\TurnOffBackstack: missing",
-                "TimestampText": "13:18:18"
+                "TimestampText": "02:31:43"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
                 "Message": "Updated 40 values.",
-                "TimestampText": "13:18:22"
+                "TimestampText": "02:31:47"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
                 "Message": "Verified desired values.",
-                "TimestampText": "13:18:22"
+                "TimestampText": "02:31:47"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "13:18:23"
+                "TimestampText": "02:31:48"
               }
             ]
           },
@@ -2151,31 +2151,31 @@
                 "Action": "Detect",
                 "StatusText": "Detected",
                 "Message": "Detected 0 of 40 values (matches: 0, missing: 40).\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\AutoImportAtFirstRun: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\DefaultBrowserSettingEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\DefaultSensorsSetting: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\EdgeCollectionsEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\EdgeFollowEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\EdgeShoppingAssistantEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\HideFirstRunExperience: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\HideRestoreDialogEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\HubsSidebarEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\ImplicitSignInEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\NewTabPageAllowedBackgroundTypes: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\NewTabPageContentEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\NewTabPageHideDefaultTopSites: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\NewTabPageQuickLinksEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\PersonalizationReportingEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\PinBrowserEssentialsToolbarButton: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\QuickSearchShowMiniMenu: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\SearchbarAllowed: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\ShowMicrosoftRewards: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\ShowRecommendationsEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\SplitScreenEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\StandaloneHubsSidebarEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\StartupBoostEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\SyncDisabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\TabServicesEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\TextPredictionEnabled: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\TrackingPrevention: missing\n- HKLM\\Software\\Policies\\Microsoft\\Edge\\UserFeedbackAllowed: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\AllowEdgeSwipe: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\AllowEdgeSwipe: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableCharms: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableCharms: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableHelpSticker: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableHelpSticker: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableMFUTracking: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableMFUTracking: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableRecentApps: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\DisableRecentApps: missing\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\TurnOffBackstack: missing\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\EdgeUI\\TurnOffBackstack: missing",
-                "TimestampText": "13:18:23"
+                "TimestampText": "02:31:48"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
                 "Message": "Updated 40 values.",
-                "TimestampText": "13:18:22"
+                "TimestampText": "02:31:47"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
                 "Message": "Verified desired values.",
-                "TimestampText": "13:18:22"
+                "TimestampText": "02:31:47"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "13:18:23"
+                "TimestampText": "02:31:48"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-14T10:18:18.2585316+00:00",
-        "CompletedAtUtc": "2026-05-14T10:18:23.9288174+00:00"
+        "StartedAtUtc": "2026-05-14T23:31:43.3199809+00:00",
+        "CompletedAtUtc": "2026-05-14T23:31:48.554237+00:00"
       },
       "qa_tweak_id": "misc.disable-edge-features",
       "candidate_id": "misc.disable-edge-features",
@@ -2304,7 +2304,7 @@
                 "Action": "Detect",
                 "StatusText": "Detected",
                 "Message": "Current values do not match a named option. Selected option is 'Disable active probing'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\NetworkConnectivityStatusIndicator\\NoActiveProbe: missing -> 1",
-                "TimestampText": "13:18:34"
+                "TimestampText": "02:31:56"
               },
               {
                 "Action": "Apply",
@@ -2342,19 +2342,19 @@
                 "Action": "Detect",
                 "StatusText": "Detected",
                 "Message": "Current values do not match a named option. Selected option is 'Disable active probing'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\NetworkConnectivityStatusIndicator\\NoActiveProbe: missing -> 1",
-                "TimestampText": "13:18:34"
+                "TimestampText": "02:31:56"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
                 "Message": "Applied preset 'Disable active probing'.",
-                "TimestampText": "13:18:37"
+                "TimestampText": "02:31:59"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
                 "Message": "Verified preset 'Disable active probing'.",
-                "TimestampText": "13:18:37"
+                "TimestampText": "02:31:59"
               },
               {
                 "Action": "Rollback",
@@ -2380,25 +2380,25 @@
                 "Action": "Detect",
                 "StatusText": "Detected",
                 "Message": "Current values do not match a named option. Selected option is 'Disable active probing'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\NetworkConnectivityStatusIndicator\\NoActiveProbe: missing -> 1",
-                "TimestampText": "13:18:34"
+                "TimestampText": "02:31:56"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
                 "Message": "Applied preset 'Disable active probing'.",
-                "TimestampText": "13:18:37"
+                "TimestampText": "02:31:59"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
                 "Message": "Verified preset 'Disable active probing'.",
-                "TimestampText": "13:18:37"
+                "TimestampText": "02:31:59"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "13:18:37"
+                "TimestampText": "02:31:59"
               }
             ]
           },
@@ -2418,31 +2418,31 @@
                 "Action": "Detect",
                 "StatusText": "Detected",
                 "Message": "Current values do not match a named option. Selected option is 'Disable active probing'.\nEntries:\n- HKLM\\Software\\Policies\\Microsoft\\Windows\\NetworkConnectivityStatusIndicator\\NoActiveProbe: missing -> 1",
-                "TimestampText": "13:18:38"
+                "TimestampText": "02:32:00"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
                 "Message": "Applied preset 'Disable active probing'.",
-                "TimestampText": "13:18:37"
+                "TimestampText": "02:31:59"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
                 "Message": "Verified preset 'Disable active probing'.",
-                "TimestampText": "13:18:37"
+                "TimestampText": "02:31:59"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "13:18:37"
+                "TimestampText": "02:31:59"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-14T10:18:34.8527224+00:00",
-        "CompletedAtUtc": "2026-05-14T10:18:38.0880445+00:00"
+        "StartedAtUtc": "2026-05-14T23:31:56.7776945+00:00",
+        "CompletedAtUtc": "2026-05-14T23:32:00.0738739+00:00"
       },
       "qa_tweak_id": "network.disable-active-probing",
       "candidate_id": "network.disable-active-probing",
@@ -2571,7 +2571,7 @@
                 "Action": "Detect",
                 "StatusText": "Detected",
                 "Message": "Value not set.",
-                "TimestampText": "13:18:49"
+                "TimestampText": "02:32:08"
               },
               {
                 "Action": "Apply",
@@ -2609,19 +2609,19 @@
                 "Action": "Detect",
                 "StatusText": "Detected",
                 "Message": "Value not set.",
-                "TimestampText": "13:18:49"
+                "TimestampText": "02:32:08"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
                 "Message": "Set value to 0.",
-                "TimestampText": "13:18:49"
+                "TimestampText": "02:32:08"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
                 "Message": "Verified desired value.",
-                "TimestampText": "13:18:49"
+                "TimestampText": "02:32:08"
               },
               {
                 "Action": "Rollback",
@@ -2647,25 +2647,25 @@
                 "Action": "Detect",
                 "StatusText": "Detected",
                 "Message": "Value not set.",
-                "TimestampText": "13:18:49"
+                "TimestampText": "02:32:08"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
                 "Message": "Set value to 0.",
-                "TimestampText": "13:18:49"
+                "TimestampText": "02:32:08"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
                 "Message": "Verified desired value.",
-                "TimestampText": "13:18:49"
+                "TimestampText": "02:32:08"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Removed value to restore default.",
-                "TimestampText": "13:18:49"
+                "TimestampText": "02:32:08"
               }
             ]
           },
@@ -2685,31 +2685,31 @@
                 "Action": "Detect",
                 "StatusText": "Detected",
                 "Message": "Value not set.",
-                "TimestampText": "13:18:49"
+                "TimestampText": "02:32:08"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
                 "Message": "Set value to 0.",
-                "TimestampText": "13:18:49"
+                "TimestampText": "02:32:08"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
                 "Message": "Verified desired value.",
-                "TimestampText": "13:18:49"
+                "TimestampText": "02:32:08"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Removed value to restore default.",
-                "TimestampText": "13:18:49"
+                "TimestampText": "02:32:08"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-14T10:18:49.3036747+00:00",
-        "CompletedAtUtc": "2026-05-14T10:18:49.6811107+00:00"
+        "StartedAtUtc": "2026-05-14T23:32:08.3686658+00:00",
+        "CompletedAtUtc": "2026-05-14T23:32:08.7369679+00:00"
       },
       "qa_tweak_id": "notifications.disable-feedback-frequency",
       "candidate_id": "notifications.disable-feedback-frequency",
@@ -2838,7 +2838,7 @@
                 "Action": "Detect",
                 "StatusText": "Detected",
                 "Message": "Current option is 'Window animations enabled'. Selected option is 'Window animations disabled'.\nEntries:\n- HKCU\\Control Panel\\Desktop\\WindowMetrics\\MinAnimate: 1 -> 0",
-                "TimestampText": "13:19:00"
+                "TimestampText": "02:32:16"
               },
               {
                 "Action": "Apply",
@@ -2876,19 +2876,19 @@
                 "Action": "Detect",
                 "StatusText": "Detected",
                 "Message": "Current option is 'Window animations enabled'. Selected option is 'Window animations disabled'.\nEntries:\n- HKCU\\Control Panel\\Desktop\\WindowMetrics\\MinAnimate: 1 -> 0",
-                "TimestampText": "13:19:00"
+                "TimestampText": "02:32:16"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
                 "Message": "Applied preset 'Window animations disabled'.",
-                "TimestampText": "13:19:00"
+                "TimestampText": "02:32:16"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
                 "Message": "Verified preset 'Window animations disabled'.",
-                "TimestampText": "13:19:00"
+                "TimestampText": "02:32:16"
               },
               {
                 "Action": "Rollback",
@@ -2914,25 +2914,25 @@
                 "Action": "Detect",
                 "StatusText": "Detected",
                 "Message": "Current option is 'Window animations enabled'. Selected option is 'Window animations disabled'.\nEntries:\n- HKCU\\Control Panel\\Desktop\\WindowMetrics\\MinAnimate: 1 -> 0",
-                "TimestampText": "13:19:00"
+                "TimestampText": "02:32:16"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
                 "Message": "Applied preset 'Window animations disabled'.",
-                "TimestampText": "13:19:00"
+                "TimestampText": "02:32:16"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
                 "Message": "Verified preset 'Window animations disabled'.",
-                "TimestampText": "13:19:00"
+                "TimestampText": "02:32:16"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "13:19:01"
+                "TimestampText": "02:32:16"
               }
             ]
           },
@@ -2952,31 +2952,31 @@
                 "Action": "Detect",
                 "StatusText": "Detected",
                 "Message": "Current option is 'Window animations enabled'. Selected option is 'Window animations disabled'.\nEntries:\n- HKCU\\Control Panel\\Desktop\\WindowMetrics\\MinAnimate: 1 -> 0",
-                "TimestampText": "13:19:01"
+                "TimestampText": "02:32:17"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
                 "Message": "Applied preset 'Window animations disabled'.",
-                "TimestampText": "13:19:00"
+                "TimestampText": "02:32:16"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
                 "Message": "Verified preset 'Window animations disabled'.",
-                "TimestampText": "13:19:00"
+                "TimestampText": "02:32:16"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "13:19:01"
+                "TimestampText": "02:32:16"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-14T10:19:00.8348553+00:00",
-        "CompletedAtUtc": "2026-05-14T10:19:01.1914909+00:00"
+        "StartedAtUtc": "2026-05-14T23:32:16.702206+00:00",
+        "CompletedAtUtc": "2026-05-14T23:32:17.1318323+00:00"
       },
       "qa_tweak_id": "performance.disable-animations",
       "candidate_id": "performance.disable-animations",
@@ -3110,7 +3110,7 @@
                 "Action": "Detect",
                 "StatusText": "Detected",
                 "Message": "Value not set.",
-                "TimestampText": "13:19:12"
+                "TimestampText": "02:32:25"
               },
               {
                 "Action": "Apply",
@@ -3148,19 +3148,19 @@
                 "Action": "Detect",
                 "StatusText": "Detected",
                 "Message": "Value not set.",
-                "TimestampText": "13:19:12"
+                "TimestampText": "02:32:25"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
                 "Message": "Set value to 3.",
-                "TimestampText": "13:19:12"
+                "TimestampText": "02:32:25"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
                 "Message": "Verified desired value.",
-                "TimestampText": "13:19:12"
+                "TimestampText": "02:32:25"
               },
               {
                 "Action": "Rollback",
@@ -3186,25 +3186,25 @@
                 "Action": "Detect",
                 "StatusText": "Detected",
                 "Message": "Value not set.",
-                "TimestampText": "13:19:12"
+                "TimestampText": "02:32:25"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
                 "Message": "Set value to 3.",
-                "TimestampText": "13:19:12"
+                "TimestampText": "02:32:25"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
                 "Message": "Verified desired value.",
-                "TimestampText": "13:19:12"
+                "TimestampText": "02:32:25"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Removed value to restore default.",
-                "TimestampText": "13:19:12"
+                "TimestampText": "02:32:25"
               }
             ]
           },
@@ -3224,31 +3224,31 @@
                 "Action": "Detect",
                 "StatusText": "Detected",
                 "Message": "Value not set.",
-                "TimestampText": "13:19:12"
+                "TimestampText": "02:32:25"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
                 "Message": "Set value to 3.",
-                "TimestampText": "13:19:12"
+                "TimestampText": "02:32:25"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
                 "Message": "Verified desired value.",
-                "TimestampText": "13:19:12"
+                "TimestampText": "02:32:25"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Removed value to restore default.",
-                "TimestampText": "13:19:12"
+                "TimestampText": "02:32:25"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-14T10:19:12.4174832+00:00",
-        "CompletedAtUtc": "2026-05-14T10:19:12.8554371+00:00"
+        "StartedAtUtc": "2026-05-14T23:32:25.1553018+00:00",
+        "CompletedAtUtc": "2026-05-14T23:32:25.5858571+00:00"
       },
       "qa_tweak_id": "peripheral.audio-disable-ducking",
       "candidate_id": "peripheral.audio-disable-ducking",
@@ -3377,7 +3377,7 @@
                 "Action": "Detect",
                 "StatusText": "Applied",
                 "Message": "Current value is 64.",
-                "TimestampText": "13:19:23"
+                "TimestampText": "02:32:33"
               },
               {
                 "Action": "Apply",
@@ -3415,25 +3415,25 @@
                 "Action": "Detect",
                 "StatusText": "Applied",
                 "Message": "Current value is 64.",
-                "TimestampText": "13:19:23"
+                "TimestampText": "02:32:33"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Skipped",
                 "Message": "Already in the desired state.",
-                "TimestampText": "13:19:23"
+                "TimestampText": "02:32:33"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
                 "Message": "Verified desired value.",
-                "TimestampText": "13:19:23"
+                "TimestampText": "02:32:33"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Skipped",
                 "Message": "No changes were made.",
-                "TimestampText": "13:19:23"
+                "TimestampText": "02:32:33"
               }
             ]
           },
@@ -3453,25 +3453,25 @@
                 "Action": "Detect",
                 "StatusText": "Applied",
                 "Message": "Current value is 64.",
-                "TimestampText": "13:19:23"
+                "TimestampText": "02:32:33"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Skipped",
                 "Message": "Already in the desired state.",
-                "TimestampText": "13:19:23"
+                "TimestampText": "02:32:33"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
                 "Message": "Verified desired value.",
-                "TimestampText": "13:19:23"
+                "TimestampText": "02:32:33"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Skipped",
                 "Message": "No changes were made.",
-                "TimestampText": "13:19:23"
+                "TimestampText": "02:32:33"
               }
             ]
           },
@@ -3491,31 +3491,31 @@
                 "Action": "Detect",
                 "StatusText": "Applied",
                 "Message": "Current value is 64.",
-                "TimestampText": "13:19:24"
+                "TimestampText": "02:32:33"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Skipped",
                 "Message": "Already in the desired state.",
-                "TimestampText": "13:19:23"
+                "TimestampText": "02:32:33"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
                 "Message": "Verified desired value.",
-                "TimestampText": "13:19:23"
+                "TimestampText": "02:32:33"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Skipped",
                 "Message": "No changes were made.",
-                "TimestampText": "13:19:23"
+                "TimestampText": "02:32:33"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-14T10:19:23.7951341+00:00",
-        "CompletedAtUtc": "2026-05-14T10:19:24.0745543+00:00"
+        "StartedAtUtc": "2026-05-14T23:32:33.5776566+00:00",
+        "CompletedAtUtc": "2026-05-14T23:32:33.805903+00:00"
       },
       "qa_tweak_id": "power.control.class1-initial-unpark-count",
       "candidate_id": "power.control.class1-initial-unpark-count",
@@ -3644,7 +3644,7 @@
                 "Action": "Detect",
                 "StatusText": "Detected",
                 "Message": "Current values do not match a named option. Selected option is 'Block adding and signing in with Microsoft accounts'.\nEntries:\n- HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\NoConnectedUser: missing -> 3",
-                "TimestampText": "13:19:35"
+                "TimestampText": "02:32:42"
               },
               {
                 "Action": "Apply",
@@ -3682,19 +3682,19 @@
                 "Action": "Detect",
                 "StatusText": "Detected",
                 "Message": "Current values do not match a named option. Selected option is 'Block adding and signing in with Microsoft accounts'.\nEntries:\n- HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\NoConnectedUser: missing -> 3",
-                "TimestampText": "13:19:35"
+                "TimestampText": "02:32:42"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
                 "Message": "Applied preset 'Block adding and signing in with Microsoft accounts'.",
-                "TimestampText": "13:19:38"
+                "TimestampText": "02:32:44"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
                 "Message": "Verified preset 'Block adding and signing in with Microsoft accounts'.",
-                "TimestampText": "13:19:38"
+                "TimestampText": "02:32:44"
               },
               {
                 "Action": "Rollback",
@@ -3720,25 +3720,25 @@
                 "Action": "Detect",
                 "StatusText": "Detected",
                 "Message": "Current values do not match a named option. Selected option is 'Block adding and signing in with Microsoft accounts'.\nEntries:\n- HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\NoConnectedUser: missing -> 3",
-                "TimestampText": "13:19:35"
+                "TimestampText": "02:32:42"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
                 "Message": "Applied preset 'Block adding and signing in with Microsoft accounts'.",
-                "TimestampText": "13:19:38"
+                "TimestampText": "02:32:44"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
                 "Message": "Verified preset 'Block adding and signing in with Microsoft accounts'.",
-                "TimestampText": "13:19:38"
+                "TimestampText": "02:32:44"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "13:19:38"
+                "TimestampText": "02:32:45"
               }
             ]
           },
@@ -3758,31 +3758,31 @@
                 "Action": "Detect",
                 "StatusText": "Detected",
                 "Message": "Current values do not match a named option. Selected option is 'Block adding and signing in with Microsoft accounts'.\nEntries:\n- HKLM\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Policies\\System\\NoConnectedUser: missing -> 3",
-                "TimestampText": "13:19:38"
+                "TimestampText": "02:32:45"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
                 "Message": "Applied preset 'Block adding and signing in with Microsoft accounts'.",
-                "TimestampText": "13:19:38"
+                "TimestampText": "02:32:44"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
                 "Message": "Verified preset 'Block adding and signing in with Microsoft accounts'.",
-                "TimestampText": "13:19:38"
+                "TimestampText": "02:32:44"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "13:19:38"
+                "TimestampText": "02:32:45"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-14T10:19:35.3592478+00:00",
-        "CompletedAtUtc": "2026-05-14T10:19:38.7132477+00:00"
+        "StartedAtUtc": "2026-05-14T23:32:42.0233295+00:00",
+        "CompletedAtUtc": "2026-05-14T23:32:45.3018038+00:00"
       },
       "qa_tweak_id": "privacy.block-microsoft-accounts",
       "candidate_id": "privacy.block-microsoft-accounts",
@@ -3911,7 +3911,7 @@
                 "Action": "Detect",
                 "StatusText": "Detected",
                 "Message": "Current values do not match a named option. Selected option is 'Never send'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet\\SubmitSamplesConsent: missing -> 2",
-                "TimestampText": "13:19:50"
+                "TimestampText": "02:32:53"
               },
               {
                 "Action": "Apply",
@@ -3949,19 +3949,19 @@
                 "Action": "Detect",
                 "StatusText": "Detected",
                 "Message": "Current values do not match a named option. Selected option is 'Never send'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet\\SubmitSamplesConsent: missing -> 2",
-                "TimestampText": "13:19:50"
+                "TimestampText": "02:32:53"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
                 "Message": "Applied preset 'Never send'.",
-                "TimestampText": "13:19:53"
+                "TimestampText": "02:32:56"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
                 "Message": "Verified preset 'Never send'.",
-                "TimestampText": "13:19:53"
+                "TimestampText": "02:32:56"
               },
               {
                 "Action": "Rollback",
@@ -3987,25 +3987,25 @@
                 "Action": "Detect",
                 "StatusText": "Detected",
                 "Message": "Current values do not match a named option. Selected option is 'Never send'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet\\SubmitSamplesConsent: missing -> 2",
-                "TimestampText": "13:19:50"
+                "TimestampText": "02:32:53"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
                 "Message": "Applied preset 'Never send'.",
-                "TimestampText": "13:19:53"
+                "TimestampText": "02:32:56"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
                 "Message": "Verified preset 'Never send'.",
-                "TimestampText": "13:19:53"
+                "TimestampText": "02:32:56"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "13:19:53"
+                "TimestampText": "02:32:56"
               }
             ]
           },
@@ -4025,31 +4025,31 @@
                 "Action": "Detect",
                 "StatusText": "Detected",
                 "Message": "Current values do not match a named option. Selected option is 'Never send'.\nEntries:\n- HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\Spynet\\SubmitSamplesConsent: missing -> 2",
-                "TimestampText": "13:19:53"
+                "TimestampText": "02:32:56"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
                 "Message": "Applied preset 'Never send'.",
-                "TimestampText": "13:19:53"
+                "TimestampText": "02:32:56"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
                 "Message": "Verified preset 'Never send'.",
-                "TimestampText": "13:19:53"
+                "TimestampText": "02:32:56"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "13:19:53"
+                "TimestampText": "02:32:56"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-14T10:19:50.3470759+00:00",
-        "CompletedAtUtc": "2026-05-14T10:19:53.6913922+00:00"
+        "StartedAtUtc": "2026-05-14T23:32:53.3400036+00:00",
+        "CompletedAtUtc": "2026-05-14T23:32:56.6136976+00:00"
       },
       "qa_tweak_id": "security.disable-defender-sample-submission",
       "candidate_id": "security.disable-defender-sample-submission",
@@ -4188,7 +4188,7 @@
                 "Action": "Detect",
                 "StatusText": "Detected",
                 "Message": "Current values do not match a named option. Selected option is 'Aero Shake blocked'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer\\NoWindowMinimizingShortcuts: missing -> 1",
-                "TimestampText": "13:20:05"
+                "TimestampText": "02:33:04"
               },
               {
                 "Action": "Apply",
@@ -4226,19 +4226,19 @@
                 "Action": "Detect",
                 "StatusText": "Detected",
                 "Message": "Current values do not match a named option. Selected option is 'Aero Shake blocked'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer\\NoWindowMinimizingShortcuts: missing -> 1",
-                "TimestampText": "13:20:05"
+                "TimestampText": "02:33:04"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
                 "Message": "Applied preset 'Aero Shake blocked'.",
-                "TimestampText": "13:20:05"
+                "TimestampText": "02:33:04"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
                 "Message": "Verified preset 'Aero Shake blocked'.",
-                "TimestampText": "13:20:05"
+                "TimestampText": "02:33:04"
               },
               {
                 "Action": "Rollback",
@@ -4264,25 +4264,25 @@
                 "Action": "Detect",
                 "StatusText": "Detected",
                 "Message": "Current values do not match a named option. Selected option is 'Aero Shake blocked'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer\\NoWindowMinimizingShortcuts: missing -> 1",
-                "TimestampText": "13:20:05"
+                "TimestampText": "02:33:04"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
                 "Message": "Applied preset 'Aero Shake blocked'.",
-                "TimestampText": "13:20:05"
+                "TimestampText": "02:33:04"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
                 "Message": "Verified preset 'Aero Shake blocked'.",
-                "TimestampText": "13:20:05"
+                "TimestampText": "02:33:04"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "13:20:05"
+                "TimestampText": "02:33:05"
               }
             ]
           },
@@ -4302,31 +4302,31 @@
                 "Action": "Detect",
                 "StatusText": "Detected",
                 "Message": "Current values do not match a named option. Selected option is 'Aero Shake blocked'.\nEntries:\n- HKCU\\Software\\Policies\\Microsoft\\Windows\\Explorer\\NoWindowMinimizingShortcuts: missing -> 1",
-                "TimestampText": "13:20:05"
+                "TimestampText": "02:33:05"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
                 "Message": "Applied preset 'Aero Shake blocked'.",
-                "TimestampText": "13:20:05"
+                "TimestampText": "02:33:04"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
                 "Message": "Verified preset 'Aero Shake blocked'.",
-                "TimestampText": "13:20:05"
+                "TimestampText": "02:33:04"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Rolled back registry values.",
-                "TimestampText": "13:20:05"
+                "TimestampText": "02:33:05"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-14T10:20:05.1431093+00:00",
-        "CompletedAtUtc": "2026-05-14T10:20:05.5571008+00:00"
+        "StartedAtUtc": "2026-05-14T23:33:04.7868443+00:00",
+        "CompletedAtUtc": "2026-05-14T23:33:05.2021223+00:00"
       },
       "qa_tweak_id": "system.aero-shake",
       "candidate_id": "system.aero-shake",
@@ -4455,7 +4455,7 @@
                 "Action": "Detect",
                 "StatusText": "Detected",
                 "Message": "Value not set.",
-                "TimestampText": "13:20:17"
+                "TimestampText": "02:33:13"
               },
               {
                 "Action": "Apply",
@@ -4493,19 +4493,19 @@
                 "Action": "Detect",
                 "StatusText": "Detected",
                 "Message": "Value not set.",
-                "TimestampText": "13:20:17"
+                "TimestampText": "02:33:13"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
                 "Message": "Set value to 1.",
-                "TimestampText": "13:20:20"
+                "TimestampText": "02:33:16"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
                 "Message": "Verified desired value.",
-                "TimestampText": "13:20:20"
+                "TimestampText": "02:33:16"
               },
               {
                 "Action": "Rollback",
@@ -4531,25 +4531,25 @@
                 "Action": "Detect",
                 "StatusText": "Detected",
                 "Message": "Value not set.",
-                "TimestampText": "13:20:17"
+                "TimestampText": "02:33:13"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
                 "Message": "Set value to 1.",
-                "TimestampText": "13:20:20"
+                "TimestampText": "02:33:16"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
                 "Message": "Verified desired value.",
-                "TimestampText": "13:20:20"
+                "TimestampText": "02:33:16"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Removed value to restore default.",
-                "TimestampText": "13:20:20"
+                "TimestampText": "02:33:16"
               }
             ]
           },
@@ -4569,31 +4569,31 @@
                 "Action": "Detect",
                 "StatusText": "Detected",
                 "Message": "Value not set.",
-                "TimestampText": "13:20:20"
+                "TimestampText": "02:33:16"
               },
               {
                 "Action": "Apply",
                 "StatusText": "Applied",
                 "Message": "Set value to 1.",
-                "TimestampText": "13:20:20"
+                "TimestampText": "02:33:16"
               },
               {
                 "Action": "Verify",
                 "StatusText": "Verified",
                 "Message": "Verified desired value.",
-                "TimestampText": "13:20:20"
+                "TimestampText": "02:33:16"
               },
               {
                 "Action": "Rollback",
                 "StatusText": "Rolled back",
                 "Message": "Removed value to restore default.",
-                "TimestampText": "13:20:20"
+                "TimestampText": "02:33:16"
               }
             ]
           }
         ],
-        "StartedAtUtc": "2026-05-14T10:20:17.1240427+00:00",
-        "CompletedAtUtc": "2026-05-14T10:20:20.6357745+00:00"
+        "StartedAtUtc": "2026-05-14T23:33:13.1508305+00:00",
+        "CompletedAtUtc": "2026-05-14T23:33:16.4329333+00:00"
       },
       "qa_tweak_id": "visibility.default-account-picture",
       "candidate_id": "visibility.default-account-picture",
