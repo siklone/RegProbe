@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-14T17:04:58Z",
+  "generated_utc": "2026-05-14T17:37:55Z",
   "summary": {
     "artifact_count": 15,
     "attention_count": 0,
@@ -11,8 +11,8 @@
     "cleanup_delete_eligible_count": 0,
     "cleanup_retained_inventory_count": 89,
     "cleanup_reference_migration_needed_count": 0,
-    "cleanup_retention_decision_queue_count": 64,
-    "cleanup_audit_only_retained_count": 20,
+    "cleanup_retention_decision_queue_count": 63,
+    "cleanup_audit_only_retained_count": 21,
     "app_card_contract_pass_count": 258,
     "app_card_contract_fail_count": 0,
     "promoted_app_qa_live_success_count": 14,
@@ -183,8 +183,8 @@
         "delete_candidate_count": 0,
         "retained_inventory_count": 89,
         "referenced_count": 89,
-        "blocking_referenced_count": 69,
-        "audit_only_referenced_count": 20,
+        "blocking_referenced_count": 68,
+        "audit_only_referenced_count": 21,
         "delete_eligible_count": 0,
         "total_size_bytes": 678702358
       }
@@ -203,24 +203,25 @@
         "item_count": 89,
         "delete_ready_count": 0,
         "reference_migration_needed_count": 0,
-        "retention_decision_queue_count": 64,
-        "audit_only_retained_count": 20,
+        "retention_decision_queue_count": 63,
+        "audit_only_retained_count": 21,
         "intentional_reference_keep_count": 5,
-        "needs_replacement_or_retention_decision_count": 64,
+        "needs_replacement_or_retention_decision_count": 63,
         "retained_pending_review_count": 0,
         "release_state_counts": {
-          "audit-only-retained": 20,
+          "audit-only-retained": 21,
           "intentional-reference-keep": 5,
-          "needs-replacement-or-retention-decision": 64
+          "needs-replacement-or-retention-decision": 63
         },
         "decision_track_counts": {
           "archive-history-anchor": 10,
-          "audit-trail-retained": 20,
+          "audit-trail-retained": 21,
           "historical-audit-output": 25,
           "intentional-reference-keep": 4,
+          "partial-derived-needs-raw-trace": 2,
           "raw-trace-source-of-record": 25,
-          "staging-bundle-canonicalization": 4,
-          "tooling-output-root": 1
+          "tooling-output-root": 1,
+          "vm-rerun-required": 1
         }
       }
     },

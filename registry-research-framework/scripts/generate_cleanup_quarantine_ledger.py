@@ -43,6 +43,9 @@ STAGING_CANONICAL_REPLACEMENTS: dict[str, list[str]] = {
     "evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json..md": [
         "evidence/raw/runtime-diff/vm-batch-probe-20260320/vm-batch-probe-20260320.json"
     ],
+    "evidence/files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-20260325-100039": [
+        "evidence/raw/procmon/security.threat-file-hash-logging/defender-threat-file-hash-mpengine-reboot-no-read-20260325.txt"
+    ],
 }
 
 CLEANUP_TOOL_REFERENCE_PATHS = {
