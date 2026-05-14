@@ -173,6 +173,7 @@ The current v3.6 research snapshot is zero-pending: no active blockers, no promo
 - I want the contributor tooling map: [Research tooling map](Docs/research/tooling-map.md)
 - I want the current artifact map instead of raw audit folders: [Research artifact map](Docs/research/artifact-map.md)
 - I want to understand certified vs community runs: [Run tiers](Docs/research/run-tiers.md)
+- I want to know what belongs in git vs local-only: [Public repo boundary](Docs/research/repo-boundary.md)
 
 The docs are now split the same way the repo is meant to feel from the outside: [Docs/product](Docs/product/README.md) for public-facing usage and trust signals, [Docs/research](Docs/research/README.md) for contributor and validation depth.
 
@@ -185,9 +186,11 @@ for advanced Windows/headless workflows, not for normal app users.
 
 Contributor Lab is the app-side companion for that boundary. It appears only in
 contributor/dev contexts and starts behind an acknowledgement gate. It shows
-Windows/VM readiness, safe command packs, and research observations such as
-Operator96 without promoting them to normal end-user cards. Its command packs
-are copyable contributor templates, not arbitrary command execution.
+Windows/VM readiness, safe command packs, and custom registry value experiment
+observations without promoting them to normal end-user cards. The current
+legacy artifact ID for the first seed batch is `operator96`; it is not product
+branding. Its command packs are copyable contributor templates, not arbitrary
+command execution.
 
 ## Single Setting Check
 
@@ -273,7 +276,7 @@ The latest batch file is only the newest run. If you want cumulative coverage ac
 - `registry-research-framework/audit/promoted-app-qa-coverage-latest.json`
 - `registry-research-framework/audit/promoted-app-qa-coverage-latest.md`
 
-Current audit snapshot: as of 2026-05-14, app retest readiness is passing with `265` app-surface entries, `0` app-only backlog items, `261` apply-allowed records, and `0` missing rollback stories. App-card contracts are `258/258 PASS`, promoted app-QA coverage is `258/258` (`100.0%`), and the latest live promoted app-QA batch is `14/14 PASS`. Operator96 low-noise reruns have `non_ok=0` and `noisy_result_count=0`, but remain Contributor Lab observations because `ready_for_bounded_app_card=0`. Re-run readiness, app-card contracts, artifact map, and the promoted batch checker after changing app providers, evidence promotion gates, rollback behavior, or card mapping.
+Current audit snapshot: as of 2026-05-14, app retest readiness is passing with `265` app-surface entries, `0` app-only backlog items, `261` apply-allowed records, and `0` missing rollback stories. App-card contracts are `258/258 PASS`, promoted app-QA coverage is `258/258` (`100.0%`), and the latest live promoted app-QA batch is `14/14 PASS`. Custom registry value experiment reruns have `non_ok=0` and `noisy_result_count=0`, but remain Contributor Lab observations because `ready_for_bounded_app_card=0`; the underlying legacy artifact ID is `operator96`. Re-run readiness, app-card contracts, artifact map, and the promoted batch checker after changing app providers, evidence promotion gates, rollback behavior, or card mapping.
 
 The latest live retest also keeps two small operator artifacts:
 

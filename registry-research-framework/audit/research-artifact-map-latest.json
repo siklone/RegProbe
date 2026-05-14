@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-14T18:54:11Z",
+  "generated_utc": "2026-05-14T21:15:03Z",
   "summary": {
     "artifact_count": 15,
     "attention_count": 0,
@@ -22,7 +22,7 @@
   },
   "rules": {
     "end_user_surface": "Normal users start from the WPF app and validated app-surface records, not raw audit folders.",
-    "operator96_surface": "Operator96 remains Contributor Lab / research observation unless ready_for_bounded_app_card is positive and all gates stay clean.",
+    "operator96_surface": "Custom registry value experiments remain Contributor Lab / research observations unless ready_for_bounded_app_card is positive and all gates stay clean. operator96 is a legacy artifact ID, not product branding.",
     "cleanup": "Do not delete archived/raw evidence unless the cleanup quarantine ledger reports live_reference_count=0 and a replacement or explicit obsolete reason exists. Use the retained inventory plan to reduce references before deletion.",
     "performance_claims": "No benchmark/performance claim ships from a single noisy, low-confidence, or community-only observation."
   },
@@ -40,7 +40,7 @@
       "tier": "canonical",
       "purpose": "Source of shipped app-card registry surfaces.",
       "use_when": "You need to know which cards normal users may see.",
-      "avoid_when": "You are evaluating unshipped Operator96 or raw experiment records.",
+      "avoid_when": "You are evaluating unshipped custom registry value experiments or raw experiment records.",
       "status": "reference",
       "details": {}
     },
@@ -124,7 +124,7 @@
       "path": "registry-research-framework/audit/operator96-low-noise-rerun-aggregate-20260512.json",
       "audience": "contributor, research",
       "tier": "canonical-research",
-      "purpose": "Low-noise aggregate for Operator96 registry value experiments.",
+      "purpose": "Low-noise aggregate for custom registry value experiments. The legacy artifact ID is operator96.",
       "use_when": "You need to know whether noisy/non-ok reruns remain.",
       "avoid_when": "You are building normal end-user app cards.",
       "status": "ok",
@@ -153,8 +153,8 @@
       "path": "registry-research-framework/audit/operator96-app-surface-review-20260510.json",
       "audience": "contributor, research",
       "tier": "canonical-research",
-      "purpose": "Explains why Operator96 records remain Contributor Lab observations instead of normal cards.",
-      "use_when": "You need to decide whether any Operator96 record may enter app cards.",
+      "purpose": "Explains why custom registry value experiment records remain Contributor Lab observations instead of normal cards.",
+      "use_when": "You need to decide whether any user-supplied key/value experiment may enter app cards.",
       "avoid_when": "You want an optimization claim; this review blocks unbounded claims.",
       "status": "research-only-ok",
       "details": {

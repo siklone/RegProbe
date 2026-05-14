@@ -178,7 +178,7 @@ def build_aggregate(paths: list[Path]) -> dict[str, Any]:
 def render_markdown(payload: dict[str, Any]) -> str:
     summary = payload.get("summary") or {}
     lines = [
-        "# Operator96 Low-Noise Rerun Aggregate",
+        "# Custom Registry Value Low-Noise Rerun Aggregate",
         "",
         f"- Generated UTC: `{payload.get('generated_utc')}`",
         f"- Status: `{payload.get('status')}`",
@@ -225,7 +225,9 @@ def render_markdown(payload: dict[str, Any]) -> str:
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Aggregate Operator96 low-noise rerun tranche campaign outputs.")
+    parser = argparse.ArgumentParser(
+        description="Aggregate custom registry value low-noise rerun tranche campaign outputs."
+    )
     parser.add_argument("--audit-dir", default=str(AUDIT_DIR))
     parser.add_argument("--pattern", default=DEFAULT_GLOB)
     parser.add_argument("--output", default=str(DEFAULT_OUTPUT))

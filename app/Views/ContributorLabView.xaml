@@ -231,7 +231,7 @@
                                 <TextBlock Text="{Binding AppSurfacePolicySummary}"
                                            Margin="0,6,0,8"
                                            Style="{StaticResource UtilitySectionBodyTextStyle}"/>
-                                <TextBlock Text="{Binding Operator96GateBreakdown, StringFormat={}Operator96 gate: {0}}"
+                                <TextBlock Text="{Binding Operator96GateBreakdown, StringFormat={}Custom value gate: {0}}"
                                            Margin="0,0,0,5"
                                            Style="{StaticResource ContributorMonoTextStyle}"/>
                                 <TextBlock Text="{Binding Operator96NextActionSummary}"
@@ -244,7 +244,7 @@
                                     <TextBlock Text="{Binding AppCardCandidateCount, StringFormat={}Candidates: {0}}"
                                                Margin="0,0,18,0"
                                                Style="{StaticResource ContributorMonoTextStyle}"/>
-                                    <TextBlock Text="{Binding Operator96RecordCount, StringFormat={}Operator96 records: {0}}"
+                                    <TextBlock Text="{Binding Operator96RecordCount, StringFormat={}Custom value records: {0}}"
                                                Margin="0,0,18,0"
                                                Style="{StaticResource ContributorMonoTextStyle}"/>
                                     <TextBlock Text="{Binding Operator96ReadyForAppCard, StringFormat={}Ready for app card: {0}}"
@@ -288,9 +288,9 @@
 
                         <Border Style="{StaticResource ContributorCardStyle}">
                             <StackPanel>
-                                <TextBlock Text="Operator96 research observations"
+                                <TextBlock Text="Custom registry value experiments"
                                            Style="{StaticResource UtilitySectionTitleTextStyle}"/>
-                                <TextBlock Text="These records are intentionally carried as Contributor Lab research observations. They can be inspected, rerun, and used for PR review, but they do not enter normal user cards until the promotion gate for each record is complete."
+                                <TextBlock Text="These are user-supplied key/path/value experiments seeded by a historical 96-record batch. They can be inspected, rerun, and used for PR review, but they do not enter normal user cards until the promotion gate for each record is complete."
                                            Margin="0,6,0,10"
                                            Style="{StaticResource UtilitySectionBodyTextStyle}"/>
                                 <ItemsControl ItemsSource="{Binding Observations}"

@@ -224,6 +224,13 @@ registry-research-framework/audit/power-kernel-symbol-hunt-result-ledger-autofil
 # Local-only VM validation helper; not part of the tracked validation workflow.
 /scripts/validate-in-vm.ps1
 
+# Local-only research scratch. Promote sanitized, reviewed summaries through
+# evidence/raw or registry-research-framework/audit before committing them.
+.regprobe-local/
+local-artifacts/
+registry-research-framework/audit/local-only/
+evidence/local-only/
+
 # Microsoft Azure Web App publish settings. Comment the next line if you want to
 # checkin your Azure Web App publish settings, but sensitive information contained
 # in these scripts will be unencrypted

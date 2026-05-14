@@ -177,10 +177,10 @@ def build_review(matrix_path: Path = DEFAULT_MATRIX, aggregate_path: Path | None
         },
         "policy": {
             "ship_rule": "Only ready_for_bounded_app_card may enter the app surface without another VM campaign.",
-            "contributor_lab_rule": "Clean Operator96 records that are not ready_for_bounded_app_card are Contributor Lab research observations, not end-user optimization cards.",
+            "contributor_lab_rule": "Clean custom registry value experiment records that are not ready_for_bounded_app_card are Contributor Lab research observations, not end-user optimization cards. operator96 is the legacy artifact ID for the current seed batch.",
             "no_performance_claim_rule": "Low-confidence, harmful, noisy, or host-noise-unknown experiments are observations only.",
             "rerun_rule": "needs_low_noise_rerun means host noise was not clean; not_app_surface_ready means the run was clean enough to store but not positive/bounded enough to ship.",
-            "aggregate_block_rule": "Aggregate non_ok or noisy_result_count greater than zero blocks all Operator96 app surfacing until a clean rerun exists.",
+            "aggregate_block_rule": "Aggregate non_ok or noisy_result_count greater than zero blocks all custom value app surfacing until a clean rerun exists.",
         },
         "records": records,
     }
@@ -189,7 +189,7 @@ def build_review(matrix_path: Path = DEFAULT_MATRIX, aggregate_path: Path | None
 def render_markdown(review: dict[str, Any]) -> str:
     summary = review.get("summary") or {}
     lines = [
-        "# Operator96 App Surface Review",
+        "# Custom Registry Value App Surface Review",
         "",
         f"- Generated UTC: `{review.get('generated_utc')}`",
         f"- Matrix: `{review.get('matrix')}`",
@@ -233,7 +233,9 @@ def write_outputs(review: dict[str, Any], json_output: Path, markdown_output: Pa
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Review Operator96 enriched records for app-surface eligibility.")
+    parser = argparse.ArgumentParser(
+        description="Review custom registry value experiment records for app-surface eligibility."
+    )
     parser.add_argument("--matrix", default=str(DEFAULT_MATRIX))
     parser.add_argument("--aggregate", default=str(DEFAULT_AGGREGATE))
     parser.add_argument("--output", default=str(JSON_OUTPUT))

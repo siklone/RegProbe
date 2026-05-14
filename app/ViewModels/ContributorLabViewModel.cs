@@ -73,17 +73,17 @@ public sealed class ContributorLabViewModel : ViewModelBase
 
     public string AppSurfacePolicySummary =>
         Operator96NonOkCount > 0 || Operator96NoisyResultCount > 0 || Operator96NeedsLowNoiseRerun > 0
-            ? "Operator96 records are blocked from app cards until non_ok, noisy, and low-noise rerun counts are all zero."
+            ? "Custom registry value experiments are blocked from app cards until non_ok, noisy, and low-noise rerun counts are all zero."
             : Operator96ReadyForAppCard == 0
-                ? "Operator96 records are clean Contributor Lab research observations. They are not normal optimization cards until each record has a known default/current value story, tested rollback, explicit app-write, clean low-noise proof, and bounded claims."
+                ? "Custom registry value experiments are clean Contributor Lab research observations. They are not normal optimization cards until each record has a known default/current value story, tested rollback, explicit app-write, clean low-noise proof, and bounded claims."
                 : "Only ready_for_bounded_app_card records with known defaults, rollback proof, explicit app writes, and bounded claims may move into normal app cards.";
 
     public string Operator96GateBreakdown =>
-        $"ready={Operator96ReadyForAppCard}; blocked_by_gate={Operator96BlockedByGate}; not_app_surface_ready={Operator96NotAppSurfaceReady}; safety={Operator96BlockedBySafety}; aggregate_blocked={Operator96AggregateSurfaceBlocked.ToString().ToLowerInvariant()}";
+        $"ready={Operator96ReadyForAppCard}; blocked_by_gate={Operator96BlockedByGate}; not_app_surface_ready={Operator96NotAppSurfaceReady}; safety={Operator96BlockedBySafety}; aggregate_blocked={Operator96AggregateSurfaceBlocked.ToString().ToLowerInvariant()}; legacy_campaign_id=operator96";
 
     public string Operator96NextActionSummary =>
         Operator96AggregateSurfaceBlocked
-            ? "Stop promotion: aggregate blockers must be cleared before any Operator96 app-card review."
+            ? "Stop promotion: aggregate blockers must be cleared before any custom value experiment app-card review."
             : Operator96ReadyForAppCard > 0
                 ? "Review only ready_for_bounded_app_card records; keep all others in Contributor Lab."
                 : "Do not create end-user cards yet. Continue per-record rollback/default/app-write proof, then rerun the app-surface review.";
