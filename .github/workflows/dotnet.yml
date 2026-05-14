@@ -325,7 +325,7 @@ jobs:
     name: Publish Application
     needs: [unit-tests, integration-tests, code-quality]
     runs-on: windows-latest
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: github.event_name == 'pull_request' || github.event_name == 'workflow_dispatch' || (github.event_name == 'push' && github.ref == 'refs/heads/main')
     steps:
       - name: Enable long paths for checkout
         run: git config --global core.longpaths true
@@ -360,7 +360,8 @@ jobs:
       - name: Copy documentation
         run: |
           if (Test-Path "Docs") {
-            Copy-Item -Path "Docs" -Destination "publish/Docs" -Recurse -Force
+            New-Item -ItemType Directory -Path "publish/Docs" -Force | Out-Null
+            Copy-Item -Path "Docs/*" -Destination "publish/Docs" -Recurse -Force
           }
 
           if (Test-Path "Docs/product/cli.md") {
@@ -489,7 +490,8 @@ jobs:
       - name: Copy documentation
         run: |
           if (Test-Path "Docs") {
-            Copy-Item -Path "Docs" -Destination "release/Docs" -Recurse -Force
+            New-Item -ItemType Directory -Path "release/Docs" -Force | Out-Null
+            Copy-Item -Path "Docs/*" -Destination "release/Docs" -Recurse -Force
           }
 
           if (Test-Path "Docs/product/cli.md") {

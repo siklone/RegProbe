@@ -95,12 +95,18 @@ public sealed class ContributorLabViewModelTests : IDisposable
             "ready_for_bounded_app_card": 0,
             "needs_low_noise_rerun": 0
           },
-          "records": [
+            "records": [
             {
               "index": 1,
               "value_name": "EnableThing",
               "registry_path": "HKLM\\Software\\Example",
               "app_surface_bucket": "not_app_surface_ready",
+              "normal_app_card_allowed": false,
+              "surface_destination": "contributor-lab-research-only",
+              "claim_boundary": "VM smoke only; no performance claim",
+              "promotion_checklist": {
+                "missing": ["rollback_tested", "bounded_claims"]
+              },
               "reasons": ["insufficient-positive-bounded-evidence-for-app-card"],
               "proof_confidence_counts": {"low": 1},
               "proof_host_noise_counts": {"ok": 1}
@@ -169,6 +175,9 @@ public sealed class ContributorLabViewModelTests : IDisposable
         Assert.Equal("not_app_surface_ready", observation.Bucket);
         Assert.Equal("0, 1", observation.CandidateValues);
         Assert.Equal("0", observation.ValidatedValues);
+        Assert.Equal("contributor-lab-research-only", observation.SurfaceDestination);
+        Assert.Contains("rollback_tested", observation.PromotionChecklist, StringComparison.Ordinal);
+        Assert.Contains("VM smoke only", observation.ClaimBoundary, StringComparison.Ordinal);
     }
 
     public void Dispose()

@@ -37,6 +37,16 @@ def is_audit_trail_reference(path: str) -> bool:
     )
 
 
+def cleanup_status(*, delete_eligible: bool, blocking_reference_count: int, audit_reference_count: int) -> str:
+    if delete_eligible:
+        return "delete-candidate"
+    if blocking_reference_count > 0:
+        return "retained-live-reference"
+    if audit_reference_count > 0:
+        return "retained-audit-trail-reference"
+    return "retained-pending-review"
+
+
 def now_utc() -> str:
     return datetime.now(UTC).replace(microsecond=0).isoformat().replace("+00:00", "Z")
 
@@ -174,9 +184,15 @@ def item_for(
         and bool(stale_reason)
         and bool(replacement_artifacts)
     )
+    status = cleanup_status(
+        delete_eligible=can_delete,
+        blocking_reference_count=len(blocking_refs),
+        audit_reference_count=len(audit_refs),
+    )
     return {
         "path": relative(path, repo_root),
         "kind": "directory" if path.is_dir() else "file",
+        "cleanup_status": status,
         "category": category,
         "size_bytes": path_size(path),
         "stale_reason": stale_reason,
@@ -221,6 +237,11 @@ def refresh_item_references(
         and len(refs) == 0
         and bool(item.get("stale_reason"))
         and bool(item.get("replacement_artifacts"))
+    )
+    item["cleanup_status"] = cleanup_status(
+        delete_eligible=bool(item["delete_eligible"]),
+        blocking_reference_count=len(blocking_refs),
+        audit_reference_count=len(audit_refs),
     )
 
 
@@ -447,18 +468,23 @@ def build_ledger(
         )
 
     category_counts = Counter(str(item.get("category")) for item in items)
+    status_counts = Counter(str(item.get("cleanup_status")) for item in items)
+    delete_candidate_count = status_counts.get("delete-candidate", 0)
     return {
         "schema_version": "1.0",
         "generated_utc": generated_utc or now_utc(),
-        "purpose": "Quarantine ledger for cleanup candidates. This ledger does not delete files.",
+        "purpose": "Quarantine ledger for cleanup review inventory. Only delete-candidate rows are cleanup candidates; retained rows are not deletion candidates.",
         "deletion_policy": [
             "No file is deleted by this generator.",
             "Delete only when live_reference_count is 0.",
             "Delete only when a replacement artifact or explicit obsolete reason is recorded.",
             "Manual review is required for raw ETL/PML and vm-tooling-staging bundles.",
+            "Rows with cleanup_status other than delete-candidate are retained inventory, not deletion candidates.",
         ],
         "summary": {
             "total_items": len(items),
+            "delete_candidate_count": delete_candidate_count,
+            "retained_inventory_count": len(items) - delete_candidate_count,
             "delete_eligible_count": sum(1 for item in items if item.get("delete_eligible")),
             "referenced_count": sum(1 for item in items if int(item.get("live_reference_count") or 0) > 0),
             "blocking_referenced_count": sum(1 for item in items if int(item.get("blocking_reference_count") or 0) > 0),
@@ -470,6 +496,7 @@ def build_ledger(
             ),
             "total_size_bytes": sum(int(item.get("size_bytes") or 0) for item in items),
             "categories": dict(sorted(category_counts.items())),
+            "cleanup_status_counts": dict(sorted(status_counts.items())),
         },
         "items": items,
     }
@@ -496,7 +523,9 @@ def render_markdown(payload: dict[str, Any]) -> str:
             "",
             "| Metric | Value |",
             "|---|---:|",
-            f"| Total items | {int(summary.get('total_items') or 0)} |",
+            f"| Review inventory items | {int(summary.get('total_items') or 0)} |",
+            f"| Delete candidates | {int(summary.get('delete_candidate_count') or 0)} |",
+            f"| Retained inventory items | {int(summary.get('retained_inventory_count') or 0)} |",
             f"| Referenced items | {int(summary.get('referenced_count') or 0)} |",
             f"| Blocking referenced items | {int(summary.get('blocking_referenced_count') or 0)} |",
             f"| Audit-only referenced items | {int(summary.get('audit_only_referenced_count') or 0)} |",
@@ -511,16 +540,45 @@ def render_markdown(payload: dict[str, Any]) -> str:
     )
     for category, count in (summary.get("categories") or {}).items():
         lines.append(f"| `{markdown_cell(category)}` | {count} |")
+
     lines.extend(
         [
             "",
-            "## Candidates",
+            "## Cleanup Statuses",
             "",
-            "| Path | Category | Live refs | Blocking refs | Audit refs | Delete eligible | Action | Reason |",
-            "|---|---|---:|---:|---:|---:|---|---|",
+            "| Status | Count | Meaning |",
+            "|---|---:|---|",
         ]
     )
-    for item in payload.get("items") or []:
+    status_meanings = {
+        "delete-candidate": "Eligible for deletion review because live references are zero and replacement/obsolete rationale exists.",
+        "retained-live-reference": "Not a deletion candidate; real blocking references still point at it.",
+        "retained-audit-trail-reference": "Not a deletion candidate yet; only audit/history references point at it.",
+        "retained-pending-review": "Not a deletion candidate; more replacement or obsolete proof is required.",
+    }
+    for status, count in (summary.get("cleanup_status_counts") or {}).items():
+        lines.append(f"| `{markdown_cell(status)}` | {count} | {markdown_cell(status_meanings.get(status, ''))} |")
+
+    delete_items = [item for item in payload.get("items") or [] if item.get("cleanup_status") == "delete-candidate"]
+    retained_items = [item for item in payload.get("items") or [] if item.get("cleanup_status") != "delete-candidate"]
+
+    lines.extend(
+        [
+            "",
+            "## Delete Candidates",
+            "",
+            "Only rows in this section are deletion candidates.",
+            "",
+        ]
+    )
+    if not delete_items:
+        lines.append("_No delete candidates in this ledger._")
+    else:
+        lines.extend([
+            "| Path | Category | Live refs | Blocking refs | Audit refs | Action | Reason |",
+            "|---|---|---:|---:|---:|---|---|",
+        ])
+    for item in delete_items:
         lines.append(
             "| "
             f"`{markdown_cell(item.get('path'))}` | "
@@ -528,7 +586,30 @@ def render_markdown(payload: dict[str, Any]) -> str:
             f"{int(item.get('live_reference_count') or 0)} | "
             f"{int(item.get('blocking_reference_count') or 0)} | "
             f"{int(item.get('audit_reference_count') or 0)} | "
-            f"`{bool(item.get('delete_eligible'))}` | "
+            f"`{markdown_cell(item.get('recommended_action'))}` | "
+            f"{markdown_cell(first_sentence(str(item.get('stale_reason') or '')))} |"
+        )
+
+    lines.extend(
+        [
+            "",
+            "## Retained Inventory",
+            "",
+            "Rows here were inspected by the cleanup scanner but are not deletion candidates.",
+            "",
+            "| Path | Status | Category | Live refs | Blocking refs | Audit refs | Action | Reason |",
+            "|---|---|---|---:|---:|---:|---|---|",
+        ]
+    )
+    for item in retained_items:
+        lines.append(
+            "| "
+            f"`{markdown_cell(item.get('path'))}` | "
+            f"`{markdown_cell(item.get('cleanup_status'))}` | "
+            f"`{markdown_cell(item.get('category'))}` | "
+            f"{int(item.get('live_reference_count') or 0)} | "
+            f"{int(item.get('blocking_reference_count') or 0)} | "
+            f"{int(item.get('audit_reference_count') or 0)} | "
             f"`{markdown_cell(item.get('recommended_action'))}` | "
             f"{markdown_cell(first_sentence(str(item.get('stale_reason') or '')))} |"
         )

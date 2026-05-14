@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-14T00:44:04Z",
+  "generated_utc": "2026-05-14T12:52:30Z",
   "matrix": "registry-research-framework/audit/operator96-enriched-value-matrix-20260510.json",
   "aggregate": "registry-research-framework/audit/operator96-low-noise-rerun-aggregate-20260512.json",
   "campaign_id": "operator96-app-surface-review-20260510",
@@ -21,6 +21,7 @@
   },
   "policy": {
     "ship_rule": "Only ready_for_bounded_app_card may enter the app surface without another VM campaign.",
+    "contributor_lab_rule": "Clean Operator96 records that are not ready_for_bounded_app_card are Contributor Lab research observations, not end-user optimization cards.",
     "no_performance_claim_rule": "Low-confidence, harmful, noisy, or host-noise-unknown experiments are observations only.",
     "rerun_rule": "needs_low_noise_rerun means host noise was not clean; not_app_surface_ready means the run was clean enough to store but not positive/bounded enough to ship.",
     "aggregate_block_rule": "Aggregate non_ok or noisy_result_count greater than zero blocks all Operator96 app surfacing until a clean rerun exists."
@@ -34,6 +35,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "blocked_by_gate",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "rollback-not-tested"
       ],
@@ -46,6 +50,20 @@
         "risk_flags": [],
         "blockers": [
           "rollback-not-tested"
+        ]
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": false,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": false,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "rollback_tested",
+          "clean_low_noise_vm_proofs",
+          "positive_bounded_evidence"
         ]
       },
       "candidate_value_count": 2,
@@ -64,6 +82,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "blocked_by_gate",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "rollback-not-tested"
       ],
@@ -76,6 +97,20 @@
         "risk_flags": [],
         "blockers": [
           "rollback-not-tested"
+        ]
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": false,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": false,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "rollback_tested",
+          "clean_low_noise_vm_proofs",
+          "positive_bounded_evidence"
         ]
       },
       "candidate_value_count": 2,
@@ -94,6 +129,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "blocked_by_gate",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "rollback-not-tested",
         "kernel-worker-thread-override"
@@ -111,6 +149,20 @@
         "blockers": [
           "rollback-not-tested",
           "kernel-worker-thread-override"
+        ]
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": false,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": false,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "rollback_tested",
+          "clean_low_noise_vm_proofs",
+          "positive_bounded_evidence"
         ]
       },
       "candidate_value_count": 3,
@@ -129,6 +181,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "blocked_by_gate",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "rollback-not-tested",
         "kernel-worker-thread-override"
@@ -146,6 +201,20 @@
         "blockers": [
           "rollback-not-tested",
           "kernel-worker-thread-override"
+        ]
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": false,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": false,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "rollback_tested",
+          "clean_low_noise_vm_proofs",
+          "positive_bounded_evidence"
         ]
       },
       "candidate_value_count": 3,
@@ -164,6 +233,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "blocked_by_gate",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "rollback-not-tested"
       ],
@@ -176,6 +248,20 @@
         "risk_flags": [],
         "blockers": [
           "rollback-not-tested"
+        ]
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": false,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": false,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "rollback_tested",
+          "clean_low_noise_vm_proofs",
+          "positive_bounded_evidence"
         ]
       },
       "candidate_value_count": 2,
@@ -194,6 +280,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "blocked_by_gate",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "rollback-not-tested"
       ],
@@ -208,6 +297,20 @@
         ],
         "blockers": [
           "rollback-not-tested"
+        ]
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": false,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": false,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "rollback_tested",
+          "clean_low_noise_vm_proofs",
+          "positive_bounded_evidence"
         ]
       },
       "candidate_value_count": 2,
@@ -226,6 +329,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "blocked_by_gate",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "rollback-not-tested",
         "kernel-worker-thread-override"
@@ -244,6 +350,20 @@
           "kernel-worker-thread-override"
         ]
       },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": false,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": false,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "rollback_tested",
+          "clean_low_noise_vm_proofs",
+          "positive_bounded_evidence"
+        ]
+      },
       "candidate_value_count": 1,
       "vm_validated_value_count": 0,
       "proof_verdict_counts": {},
@@ -260,6 +380,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "blocked_by_gate",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "rollback-not-tested",
         "kernel-worker-thread-override"
@@ -279,6 +402,20 @@
           "kernel-worker-thread-override"
         ]
       },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": false,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": false,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "rollback_tested",
+          "clean_low_noise_vm_proofs",
+          "positive_bounded_evidence"
+        ]
+      },
       "candidate_value_count": 3,
       "vm_validated_value_count": 0,
       "proof_verdict_counts": {},
@@ -295,6 +432,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "blocked_by_gate",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "rollback-not-tested"
       ],
@@ -307,6 +447,20 @@
         "risk_flags": [],
         "blockers": [
           "rollback-not-tested"
+        ]
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": false,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": false,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "rollback_tested",
+          "clean_low_noise_vm_proofs",
+          "positive_bounded_evidence"
         ]
       },
       "candidate_value_count": 2,
@@ -325,6 +479,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "blocked_by_gate",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "rollback-not-tested"
       ],
@@ -339,6 +496,20 @@
         ],
         "blockers": [
           "rollback-not-tested"
+        ]
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": false,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": false,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "rollback_tested",
+          "clean_low_noise_vm_proofs",
+          "positive_bounded_evidence"
         ]
       },
       "candidate_value_count": 1,
@@ -357,6 +528,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -368,6 +542,18 @@
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
@@ -392,6 +578,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -403,6 +592,18 @@
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
@@ -426,6 +627,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -437,6 +641,18 @@
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
@@ -461,6 +677,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -474,6 +693,18 @@
           "kernel-timing-sensitive"
         ],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
@@ -497,6 +728,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -508,6 +742,18 @@
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
@@ -533,6 +779,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -544,6 +793,18 @@
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
@@ -567,6 +828,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -578,6 +842,18 @@
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
@@ -601,6 +877,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -612,6 +891,18 @@
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
@@ -635,6 +926,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -648,6 +942,18 @@
           "kernel-timing-sensitive"
         ],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
@@ -671,6 +977,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -682,6 +991,18 @@
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
@@ -705,6 +1026,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "blocked_by_gate",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "rollback-not-tested",
         "security-mitigation-override"
@@ -724,6 +1048,20 @@
           "security-mitigation-override"
         ]
       },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": false,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": false,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "rollback_tested",
+          "clean_low_noise_vm_proofs",
+          "positive_bounded_evidence"
+        ]
+      },
       "candidate_value_count": 2,
       "vm_validated_value_count": 0,
       "proof_verdict_counts": {},
@@ -740,6 +1078,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -753,6 +1094,18 @@
           "kernel-timing-sensitive"
         ],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
@@ -776,6 +1129,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -789,6 +1145,18 @@
           "kernel-timing-sensitive"
         ],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
@@ -813,6 +1181,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -826,6 +1197,18 @@
           "kernel-timing-sensitive"
         ],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
@@ -849,6 +1232,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -862,6 +1248,18 @@
           "kernel-timing-sensitive"
         ],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
@@ -886,6 +1284,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -897,6 +1298,18 @@
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 3,
       "vm_validated_value_count": 2,
@@ -920,6 +1333,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -933,6 +1349,18 @@
           "kernel-timing-sensitive"
         ],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 3,
       "vm_validated_value_count": 2,
@@ -957,6 +1385,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -970,6 +1401,18 @@
           "kernel-timing-sensitive"
         ],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 3,
       "vm_validated_value_count": 2,
@@ -994,6 +1437,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -1009,6 +1455,18 @@
           "watchdog/bugcheck-sensitive"
         ],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
@@ -1032,6 +1490,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -1043,6 +1504,18 @@
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
@@ -1066,6 +1539,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -1077,6 +1553,18 @@
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
@@ -1101,6 +1589,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -1114,6 +1605,18 @@
           "kernel-timing-sensitive"
         ],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
@@ -1138,6 +1641,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -1149,6 +1655,18 @@
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
@@ -1172,6 +1690,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "blocked_by_gate",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "rollback-not-tested",
         "security-mitigation-override"
@@ -1190,6 +1711,20 @@
           "security-mitigation-override"
         ]
       },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": false,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": false,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "rollback_tested",
+          "clean_low_noise_vm_proofs",
+          "positive_bounded_evidence"
+        ]
+      },
       "candidate_value_count": 2,
       "vm_validated_value_count": 0,
       "proof_verdict_counts": {},
@@ -1206,6 +1741,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -1217,6 +1755,18 @@
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
@@ -1240,6 +1790,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -1251,6 +1804,18 @@
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 2,
       "vm_validated_value_count": 1,
@@ -1274,6 +1839,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -1285,6 +1853,18 @@
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 2,
       "vm_validated_value_count": 1,
@@ -1308,6 +1888,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -1322,6 +1905,18 @@
           "watchdog/bugcheck-sensitive"
         ],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 3,
       "vm_validated_value_count": 2,
@@ -1345,6 +1940,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -1359,6 +1957,18 @@
           "watchdog/bugcheck-sensitive"
         ],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 3,
       "vm_validated_value_count": 2,
@@ -1383,6 +1993,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -1396,6 +2009,18 @@
           "kernel-timing-sensitive"
         ],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
@@ -1421,6 +2046,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -1435,6 +2063,18 @@
           "watchdog/bugcheck-sensitive"
         ],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
@@ -1459,6 +2099,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -1470,6 +2113,18 @@
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
@@ -1493,6 +2148,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -1504,6 +2162,18 @@
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
@@ -1527,6 +2197,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -1538,6 +2211,18 @@
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 3,
       "vm_validated_value_count": 2,
@@ -1562,6 +2247,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -1573,6 +2261,18 @@
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 2,
       "vm_validated_value_count": 1,
@@ -1596,6 +2296,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -1607,6 +2310,18 @@
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 2,
       "vm_validated_value_count": 1,
@@ -1630,6 +2345,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -1641,6 +2359,18 @@
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 4,
       "vm_validated_value_count": 1,
@@ -1664,6 +2394,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -1675,6 +2408,18 @@
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 2,
       "vm_validated_value_count": 1,
@@ -1698,6 +2443,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -1709,6 +2457,18 @@
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 2,
       "vm_validated_value_count": 1,
@@ -1732,6 +2492,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -1743,6 +2506,18 @@
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 3,
       "vm_validated_value_count": 2,
@@ -1766,6 +2541,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -1779,6 +2557,18 @@
           "kernel-timing-sensitive"
         ],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 3,
       "vm_validated_value_count": 2,
@@ -1802,6 +2592,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -1813,6 +2606,18 @@
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 2,
       "vm_validated_value_count": 1,
@@ -1836,6 +2641,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -1847,6 +2655,18 @@
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 2,
       "vm_validated_value_count": 1,
@@ -1870,6 +2690,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -1881,6 +2704,18 @@
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 2,
       "vm_validated_value_count": 1,
@@ -1904,6 +2739,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -1915,6 +2753,18 @@
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 2,
       "vm_validated_value_count": 1,
@@ -1938,6 +2788,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -1949,6 +2802,18 @@
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
@@ -1972,6 +2837,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -1983,6 +2851,18 @@
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
@@ -2006,6 +2886,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -2017,6 +2900,18 @@
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
@@ -2040,6 +2935,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "blocked_by_gate",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "rollback-not-tested"
       ],
@@ -2052,6 +2950,20 @@
         "risk_flags": [],
         "blockers": [
           "rollback-not-tested"
+        ]
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": false,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": false,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "rollback_tested",
+          "clean_low_noise_vm_proofs",
+          "positive_bounded_evidence"
         ]
       },
       "candidate_value_count": 2,
@@ -2070,6 +2982,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -2081,6 +2996,18 @@
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
@@ -2104,6 +3031,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -2115,6 +3045,18 @@
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
@@ -2138,6 +3080,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -2149,6 +3094,18 @@
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
@@ -2172,6 +3129,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -2183,6 +3143,18 @@
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
@@ -2206,6 +3178,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -2217,6 +3192,18 @@
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
@@ -2241,6 +3228,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "blocked_by_gate",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "rollback-not-tested"
       ],
@@ -2253,6 +3243,20 @@
         "risk_flags": [],
         "blockers": [
           "rollback-not-tested"
+        ]
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": false,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": false,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "rollback_tested",
+          "clean_low_noise_vm_proofs",
+          "positive_bounded_evidence"
         ]
       },
       "candidate_value_count": 2,
@@ -2271,6 +3275,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -2282,6 +3289,18 @@
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
@@ -2305,6 +3324,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -2318,6 +3340,18 @@
           "kernel-timing-sensitive"
         ],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
@@ -2341,6 +3375,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -2352,6 +3389,18 @@
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
@@ -2375,6 +3424,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -2386,6 +3438,18 @@
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
@@ -2410,6 +3474,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -2421,6 +3488,18 @@
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
@@ -2445,6 +3524,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -2456,6 +3538,18 @@
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
@@ -2479,6 +3573,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -2490,6 +3587,18 @@
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
@@ -2513,6 +3622,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -2524,6 +3636,18 @@
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 3,
       "vm_validated_value_count": 2,
@@ -2548,6 +3672,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -2559,6 +3686,18 @@
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
@@ -2583,6 +3722,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -2594,6 +3736,18 @@
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
@@ -2618,6 +3772,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -2629,6 +3786,18 @@
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
@@ -2653,6 +3822,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -2667,6 +3839,18 @@
           "watchdog/bugcheck-sensitive"
         ],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
@@ -2690,6 +3874,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -2701,6 +3888,18 @@
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
@@ -2724,6 +3923,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -2735,6 +3937,18 @@
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
@@ -2759,6 +3973,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -2770,6 +3987,18 @@
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 4,
       "vm_validated_value_count": 2,
@@ -2793,6 +4022,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -2804,6 +4036,18 @@
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
@@ -2828,6 +4072,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -2839,6 +4086,18 @@
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
@@ -2862,6 +4121,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -2873,6 +4135,18 @@
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
@@ -2897,6 +4171,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -2910,6 +4187,18 @@
           "kernel-timing-sensitive"
         ],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
@@ -2934,6 +4223,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -2945,6 +4237,18 @@
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
@@ -2969,6 +4273,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -2980,6 +4287,18 @@
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
@@ -3003,6 +4322,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -3014,6 +4336,18 @@
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
@@ -3037,6 +4371,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -3051,6 +4388,18 @@
           "watchdog/bugcheck-sensitive"
         ],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
@@ -3075,6 +4424,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "blocked_by_gate",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "rollback-not-tested"
       ],
@@ -3090,6 +4442,20 @@
         ],
         "blockers": [
           "rollback-not-tested"
+        ]
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": false,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": false,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "rollback_tested",
+          "clean_low_noise_vm_proofs",
+          "positive_bounded_evidence"
         ]
       },
       "candidate_value_count": 2,
@@ -3108,6 +4474,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -3122,6 +4491,18 @@
           "watchdog/bugcheck-sensitive"
         ],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
@@ -3145,6 +4526,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -3159,6 +4543,18 @@
           "watchdog/bugcheck-sensitive"
         ],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
@@ -3183,6 +4579,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -3197,6 +4596,18 @@
           "watchdog/bugcheck-sensitive"
         ],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
@@ -3221,6 +4632,9 @@
       "source_quality": "no-authoritative-evidence-for-25h2",
       "app_surface_bucket": "blocked_by_gate",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "key-missing-in-target-vm",
         "rollback-not-tested"
@@ -3235,6 +4649,20 @@
         "blockers": [
           "key-missing-in-target-vm",
           "rollback-not-tested"
+        ]
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": false,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": false,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "rollback_tested",
+          "clean_low_noise_vm_proofs",
+          "positive_bounded_evidence"
         ]
       },
       "candidate_value_count": 1,
@@ -3253,6 +4681,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -3264,6 +4695,18 @@
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
@@ -3287,6 +4730,9 @@
       "source_quality": "vm-observed",
       "app_surface_bucket": "not_app_surface_ready",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "insufficient-positive-bounded-evidence-for-app-card"
       ],
@@ -3298,6 +4744,18 @@
         "claim_boundary": "VM smoke/default/rollback evidence only; no performance claim without repeated low-noise runs",
         "risk_flags": [],
         "blockers": []
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": true,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": true,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "positive_bounded_evidence"
+        ]
       },
       "candidate_value_count": 2,
       "vm_validated_value_count": 2,
@@ -3322,6 +4780,9 @@
       "source_quality": "source-backed-policy-default-absent",
       "app_surface_bucket": "blocked_by_gate",
       "app_surface_ready": false,
+      "normal_app_card_allowed": false,
+      "contributor_lab_surface": "research-observation",
+      "surface_destination": "contributor-lab-research-only",
       "reasons": [
         "key-missing-in-target-vm",
         "rollback-not-tested"
@@ -3336,6 +4797,20 @@
         "blockers": [
           "key-missing-in-target-vm",
           "rollback-not-tested"
+        ]
+      },
+      "promotion_checklist": {
+        "known_default": true,
+        "rollback_tested": false,
+        "app_write_explicit": true,
+        "bounded_claims": true,
+        "clean_low_noise_vm_proofs": false,
+        "positive_bounded_evidence": false,
+        "normal_app_card_allowed": false,
+        "missing": [
+          "rollback_tested",
+          "clean_low_noise_vm_proofs",
+          "positive_bounded_evidence"
         ]
       },
       "candidate_value_count": 2,

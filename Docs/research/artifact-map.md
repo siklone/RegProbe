@@ -1,6 +1,6 @@
 # Research Artifact Map
 
-Generated: `2026-05-14T11:25:42Z`
+Generated: `2026-05-14T12:52:30Z`
 
 This is the contributor entrypoint for current research artifacts. Use it
 instead of browsing raw audit folders first.

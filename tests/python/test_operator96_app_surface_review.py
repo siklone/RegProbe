@@ -84,7 +84,11 @@ class Operator96AppSurfaceReviewTests(unittest.TestCase):
 
         self.assertEqual(result["app_surface_bucket"], "blocked_by_gate")
         self.assertFalse(result["app_surface_ready"])
+        self.assertFalse(result["normal_app_card_allowed"])
+        self.assertEqual(result["surface_destination"], "contributor-lab-research-only")
+        self.assertEqual(result["contributor_lab_surface"], "research-observation")
         self.assertIn("security-mitigation-override", result["reasons"])
+        self.assertIn("rollback_tested", result["promotion_checklist"]["missing"])
 
     def test_unknown_noise_requires_low_noise_rerun(self):
         result = self.module.classify_record(
@@ -156,6 +160,9 @@ class Operator96AppSurfaceReviewTests(unittest.TestCase):
 
         self.assertEqual(result["app_surface_bucket"], "ready_for_bounded_app_card")
         self.assertTrue(result["app_surface_ready"])
+        self.assertTrue(result["normal_app_card_allowed"])
+        self.assertEqual(result["surface_destination"], "normal-app-card-review")
+        self.assertEqual(result["contributor_lab_surface"], "bounded-card-review-candidate")
 
     def test_aggregate_noisy_results_block_surface_review(self):
         with tempfile.TemporaryDirectory() as tmp:

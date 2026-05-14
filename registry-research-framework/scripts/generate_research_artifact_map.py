@@ -134,6 +134,8 @@ def summarize_cleanup_ledger(repo_root: Path) -> tuple[str, dict[str, Any]]:
     return status_from_bool(ok, ok_label="no-delete-eligible", fail_label="review-delete-eligible"), {
         "ledger_path": rel(path, repo_root) if path.exists() else rel(path, repo_root),
         "total_items": summary.get("total_items"),
+        "delete_candidate_count": summary.get("delete_candidate_count"),
+        "retained_inventory_count": summary.get("retained_inventory_count"),
         "referenced_count": summary.get("referenced_count"),
         "blocking_referenced_count": summary.get("blocking_referenced_count"),
         "audit_only_referenced_count": summary.get("audit_only_referenced_count"),
