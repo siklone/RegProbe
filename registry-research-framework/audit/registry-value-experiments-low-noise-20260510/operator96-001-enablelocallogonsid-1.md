@@ -1,7 +1,7 @@
 # Registry Value Experiment - operator96-001-enablelocallogonsid-1
 
 - Status: **ok**
-- Generated UTC: `2026-05-10T19:58:12Z`
+- Generated UTC: `2026-05-12T11:21:42Z`
 - Target: `HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\SYSTEM\EnableLocalLogonSid`
 - Test value: `1`
 - Outcome: `completed`
@@ -30,11 +30,11 @@
 - `settings-uri-launch`: `True` - launch-command-succeeded
 - `store-uri-launch`: `False` - This command cannot be run due to the error: The operation attempted is not supported.
 - `interactive_user_smoke`: status=`ok`, failure_count=`0`
-- `benchmarks`: status=`ok`, cpu_single_seconds=`None`, cpu_multi_seconds=`None`, io_mib_s=`2352.2721`
+- `benchmarks`: status=`ok`, cpu_single_seconds=`None`, cpu_multi_seconds=`None`, io_mib_s=`2105.1678`
 - `baseline_smoke.failure_count`: `1`
 - `baseline_smoke.hard_failure_count`: `0`
 - `baseline_smoke.best_effort_failure_count`: `1`
-- `baseline_benchmarks`: status=`ok`, cpu_single_seconds=`None`, cpu_multi_seconds=`None`, io_mib_s=`1025.2277`
+- `baseline_benchmarks`: status=`ok`, cpu_single_seconds=`None`, cpu_multi_seconds=`None`, io_mib_s=`900.11`
 
 ## Stage: post_reboot_rollback
 
@@ -55,7 +55,7 @@
 - `settings-uri-launch`: `True` - launch-command-succeeded
 - `store-uri-launch`: `False` - This command cannot be run due to the error: The operation attempted is not supported.
 - `interactive_user_smoke`: status=`ok`, failure_count=`0`
-- `benchmarks`: status=`ok`, cpu_single_seconds=`None`, cpu_multi_seconds=`None`, io_mib_s=`1127.069`
+- `benchmarks`: status=`ok`, cpu_single_seconds=`None`, cpu_multi_seconds=`None`, io_mib_s=`1172.184`
 
 ## Stage: post_rollback
 
@@ -74,4 +74,4 @@
 - `settings-uri-launch`: `True` - launch-command-succeeded
 - `store-uri-launch`: `False` - This command cannot be run due to the error: The operation attempted is not supported.
 - `interactive_user_smoke`: status=`ok`, failure_count=`0`
-- `benchmarks`: status=`ok`, cpu_single_seconds=`None`, cpu_multi_seconds=`None`, io_mib_s=`1113.8585`
+- `benchmarks`: status=`ok`, cpu_single_seconds=`None`, cpu_multi_seconds=`None`, io_mib_s=`1019.1561`

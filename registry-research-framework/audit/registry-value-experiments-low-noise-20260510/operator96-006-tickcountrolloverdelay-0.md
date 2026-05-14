@@ -1,7 +1,7 @@
 # Registry Value Experiment - operator96-006-tickcountrolloverdelay-0
 
 - Status: **ok**
-- Generated UTC: `2026-05-10T20:13:49Z`
+- Generated UTC: `2026-05-12T11:36:32Z`
 - Target: `HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Executive\TickcountRolloverDelay`
 - Test value: `0`
 - Outcome: `completed`
@@ -30,11 +30,11 @@
 - `settings-uri-launch`: `True` - launch-command-succeeded
 - `store-uri-launch`: `False` - This command cannot be run due to the error: The operation attempted is not supported.
 - `interactive_user_smoke`: status=`ok`, failure_count=`0`
-- `benchmarks`: status=`ok`, cpu_single_seconds=`None`, cpu_multi_seconds=`None`, io_mib_s=`1894.6892`
+- `benchmarks`: status=`ok`, cpu_single_seconds=`None`, cpu_multi_seconds=`None`, io_mib_s=`1733.8338`
 - `baseline_smoke.failure_count`: `1`
 - `baseline_smoke.hard_failure_count`: `0`
 - `baseline_smoke.best_effort_failure_count`: `1`
-- `baseline_benchmarks`: status=`ok`, cpu_single_seconds=`None`, cpu_multi_seconds=`None`, io_mib_s=`1153.7932`
+- `baseline_benchmarks`: status=`ok`, cpu_single_seconds=`None`, cpu_multi_seconds=`None`, io_mib_s=`1138.7892`
 
 ## Stage: post_reboot_rollback
 
@@ -55,7 +55,7 @@
 - `settings-uri-launch`: `True` - launch-command-succeeded
 - `store-uri-launch`: `False` - This command cannot be run due to the error: The operation attempted is not supported.
 - `interactive_user_smoke`: status=`ok`, failure_count=`0`
-- `benchmarks`: status=`ok`, cpu_single_seconds=`None`, cpu_multi_seconds=`None`, io_mib_s=`1118.0085`
+- `benchmarks`: status=`ok`, cpu_single_seconds=`None`, cpu_multi_seconds=`None`, io_mib_s=`1161.815`
 
 ## Stage: post_rollback
 
@@ -74,4 +74,4 @@
 - `settings-uri-launch`: `True` - launch-command-succeeded
 - `store-uri-launch`: `False` - This command cannot be run due to the error: The operation attempted is not supported.
 - `interactive_user_smoke`: status=`ok`, failure_count=`0`
-- `benchmarks`: status=`ok`, cpu_single_seconds=`None`, cpu_multi_seconds=`None`, io_mib_s=`1041.0547`
+- `benchmarks`: status=`ok`, cpu_single_seconds=`None`, cpu_multi_seconds=`None`, io_mib_s=`1124.1142`

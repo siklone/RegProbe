@@ -52,14 +52,15 @@ class Operator96AppSurfaceReviewTests(unittest.TestCase):
     def setUp(self):
         self.module = load_module()
 
-    def test_real_repo_requires_low_noise_rerun_before_app_cards(self):
+    def test_real_repo_keeps_low_confidence_records_out_of_app_cards(self):
         review = self.module.build_review()
 
         self.assertEqual(review["status"], "PASS")
         self.assertEqual(review["summary"]["record_count"], 96)
         self.assertEqual(review["summary"]["ready_for_bounded_app_card"], 0)
-        self.assertEqual(review["summary"]["needs_low_noise_rerun"], 84)
-        self.assertEqual(review["summary"]["blocked_by_gate"], 12)
+        self.assertEqual(review["summary"]["needs_low_noise_rerun"], 0)
+        self.assertEqual(review["summary"]["not_app_surface_ready"], 79)
+        self.assertEqual(review["summary"]["blocked_by_gate"], 17)
 
         watchdog = next(
             record
@@ -67,7 +68,7 @@ class Operator96AppSurfaceReviewTests(unittest.TestCase):
             if record["value_name"] == "PowerWatchdogPoCalloutTimeoutMsec"
         )
         self.assertEqual(watchdog["app_surface_bucket"], "blocked_by_gate")
-        self.assertIn("safety-finding-present", watchdog["reasons"])
+        self.assertIn("rollback-not-tested", watchdog["reasons"])
 
     def test_gate_blocked_record_stays_out_of_app_surface(self):
         result = self.module.classify_record(
@@ -83,7 +84,7 @@ class Operator96AppSurfaceReviewTests(unittest.TestCase):
         self.assertFalse(result["app_surface_ready"])
         self.assertIn("security-mitigation-override", result["reasons"])
 
-    def test_low_confidence_or_unknown_noise_requires_rerun(self):
+    def test_unknown_noise_requires_low_noise_rerun(self):
         result = self.module.classify_record(
             record(
                 candidates=[
@@ -103,6 +104,30 @@ class Operator96AppSurfaceReviewTests(unittest.TestCase):
 
         self.assertEqual(result["app_surface_bucket"], "needs_low_noise_rerun")
         self.assertEqual(result["recommended_action"], "rerun-low-noise-before-any-app-card-or-performance-claim")
+
+    def test_low_confidence_clean_run_stays_out_without_noisy_rerun_label(self):
+        result = self.module.classify_record(
+            record(
+                candidates=[
+                    {
+                        "value": 1,
+                        "vm_validated": True,
+                        "baseline_proof": {
+                            "status": "ok",
+                            "verdict": "harmful",
+                            "confidence": "low",
+                            "host_noise": "ok",
+                        },
+                    }
+                ]
+            )
+        )
+
+        self.assertEqual(result["app_surface_bucket"], "not_app_surface_ready")
+        self.assertEqual(
+            result["recommended_action"],
+            "keep-as-research-observation-and-do-not-surface-as-app-card",
+        )
 
     def test_safety_verdict_blocks_app_surface(self):
         result = self.module.classify_record(

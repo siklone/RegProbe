@@ -277,6 +277,7 @@ def run_experiment(
     host_noise_busy_threshold_pct: float,
     host_noise_load1_per_cpu_threshold: float,
     host_noise_sample_interval_seconds: float,
+    abort_on_noisy_host: bool,
 ) -> dict[str, Any]:
     cmd = [
         sys.executable,
@@ -318,6 +319,8 @@ def run_experiment(
         "--host-noise-sample-interval-seconds",
         str(host_noise_sample_interval_seconds),
     ]
+    if abort_on_noisy_host:
+        cmd.append("--abort-on-noisy-host")
     completed = run(cmd, timeout=(stage_wait_timeout * 4) + (reboot_wait_timeout * 2) + 300)
     try:
         stdout_payload = json.loads(completed.stdout)
@@ -411,6 +414,11 @@ def main() -> int:
     parser.add_argument("--host-noise-busy-threshold-pct", type=float, default=20.0)
     parser.add_argument("--host-noise-load1-per-cpu-threshold", type=float, default=0.75)
     parser.add_argument("--host-noise-sample-interval-seconds", type=float, default=0.5)
+    parser.add_argument(
+        "--abort-on-noisy-host",
+        action="store_true",
+        help="Forward fail-fast host-noise preflight to each experiment so low-noise campaigns do not mutate the guest under noisy host conditions.",
+    )
     args = parser.parse_args()
 
     report_path = Path(args.report).resolve()
@@ -471,6 +479,7 @@ def main() -> int:
                 host_noise_busy_threshold_pct=args.host_noise_busy_threshold_pct,
                 host_noise_load1_per_cpu_threshold=args.host_noise_load1_per_cpu_threshold,
                 host_noise_sample_interval_seconds=args.host_noise_sample_interval_seconds,
+                abort_on_noisy_host=args.abort_on_noisy_host,
             )
             stdout_payload = execution.get("stdout_payload") if isinstance(execution, dict) else {}
             result_status = str((stdout_payload or {}).get("status") or ("error" if execution.get("returncode") else "unknown"))

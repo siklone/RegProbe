@@ -7,6 +7,13 @@ RegProbe is both a desktop tweak app and a registry research workspace. The most
 - adding or updating a shipped tweak/provider
 - improving the v3.2 research pipeline, audit flow, or VM tooling
 
+Audience boundary: end users should use the WPF app, not contributor tooling.
+Contributors and agentic AI should treat Python scripts plus JSON artifacts as
+the canonical research API. The .NET research CLI is a compatibility layer; keep
+`tweak list/apply/revert` for advanced Windows/headless usage, but prefer the
+Python mirrors for research inspection, app QA planning, readiness checks, and
+VM campaign automation.
+
 ## Core Rules
 
 - runtime validation happens in the `Win25H2Clean` VM, not on the host
@@ -211,6 +218,8 @@ Read these first:
 - [research/README.md](research/README.md)
 - [research/evidence-atlas.md](research/evidence-atlas.md)
 - [research/evidence-audit.json](research/evidence-audit.json)
+- [Docs/research/tooling-map.md](Docs/research/tooling-map.md)
+- [Docs/research/run-tiers.md](Docs/research/run-tiers.md)
 - [Docs/research/vm-workflow.md](Docs/research/vm-workflow.md)
 - [Docs/research/runtime-escalation.md](Docs/research/runtime-escalation.md)
 - [Docs/research/script-catalog.md](Docs/research/script-catalog.md)
@@ -222,23 +231,27 @@ Read these first:
 If you do not know the repo yet, use this order:
 
 1. Build and test the repo once so you know the baseline is green.
-2. Run a single-setting inspection before editing anything. On Linux hosts
+2. Read the [research tooling map](Docs/research/tooling-map.md) and
+   [run tiers](Docs/research/run-tiers.md) so you know which scripts are
+   canonical and which run artifacts are reference-eligible.
+3. Run a single-setting inspection before editing anything. On Linux hosts
    without `Microsoft.WindowsDesktop.App`, use the Python mirror; use the .NET
-   CLI in the Windows VM or on a desktop-runtime host.
+   CLI in the Windows VM or on a desktop-runtime host only when you explicitly
+   need CLI compatibility.
 
 ```bash
 python3 registry-research-framework/scripts/check_single_tweak.py SystemResponsiveness
 python3 registry-research-framework/scripts/check_single_tweak.py SystemResponsiveness --expected-value 10 --expected-value 30000
 ```
 
-3. Run the app-retest readiness check if you are about to verify cards, evidence, rollback, or KVM smoke:
+4. Run the app-retest readiness check if you are about to verify cards, evidence, rollback, or KVM smoke:
 
 ```bash
 python3 registry-research-framework/scripts/check_app_retest_readiness.py
 python3 registry-research-framework/scripts/check_app_retest_readiness.py --json
 ```
 
-4. Generate the single-card app QA plan before touching the desktop app:
+5. Generate the single-card app QA plan before touching the desktop app:
 
 ```bash
 python3 registry-research-framework/scripts/check_single_tweak_app_qa.py SystemResponsiveness
@@ -252,7 +265,7 @@ dotnet run --project cli/cli.csproj -- research inspect SystemResponsiveness --e
 dotnet run --project cli/cli.csproj -- research qa-plan SystemResponsiveness --expected-value 10 --expected-value 30000 --json
 ```
 
-5. If you are about to retest several shipped cards, plan or run a promoted batch:
+6. If you are about to retest several shipped cards, plan or run a promoted batch:
 
 ```bash
 python3 registry-research-framework/scripts/check_promoted_tweak_app_qa_batch.py --category Power --category Explorer --total-limit 4

@@ -1,10 +1,10 @@
 # Operator96 Enriched Value Matrix
 
-- Generated UTC: `2026-05-12T00:53:14Z`
+- Generated UTC: `2026-05-13T22:35:34Z`
 - Campaign: `operator96-enriched-values-20260510`
 - Records: `96`
-- Candidate values: `206`
-- App-card eligible records: `84`
+- Candidate values: `205`
+- App-card eligible records: `79`
 
 ## Reference Catalog
 
@@ -20,16 +20,16 @@
 
 | # | Value | Default | Rules | Candidates | App gate | Notes |
 |---:|---|---|---|---|---|---|
-| 1 | `EnableLocalLogonSid` | `known-absent` | `boolean-toggle` | `0`:vm-validated, `1`:vm-validated | `eligible=True` none | evidence-lanes-open-or-covered |
-| 2 | `EnableVirtualization` | `known-present` | `boolean-toggle` | `0`:vm-validated, `1`:local-default | `eligible=True` none | evidence-lanes-open-or-covered |
+| 1 | `EnableLocalLogonSid` | `known-absent` | `boolean-toggle` | `0`:source-backed, `1`:name-rule | `eligible=False` `rollback-not-tested` | evidence-lanes-open-or-covered |
+| 2 | `EnableVirtualization` | `known-present` | `boolean-toggle` | `1`:local-default, `0`:source-backed | `eligible=False` `rollback-not-tested` | evidence-lanes-open-or-covered |
 | 3 | `AdditionalCriticalWorkerThreads` | `known-present` | `count-boundary` | `0`:local-default, `5`:source-backed, `1`:name-rule | `eligible=False` `rollback-not-tested`, `kernel-worker-thread-override` | evidence-lanes-open-or-covered |
 | 4 | `AdditionalDelayedWorkerThreads` | `known-present` | `count-boundary`, `threshold-boundary` | `0`:local-default, `5`:source-backed, `1`:name-rule | `eligible=False` `rollback-not-tested`, `kernel-worker-thread-override` | evidence-lanes-open-or-covered |
 | 5 | `UuidSequenceNumber` | `known-present` | - | `2636877`:local-default, `3322358`:source-backed | `eligible=False` `rollback-not-tested` | evidence-lanes-open-or-covered |
-| 6 | `TickcountRolloverDelay` | `known-absent` | `count-boundary`, `threshold-boundary` | `0`:vm-validated, `1`:vm-validated | `eligible=True` none | evidence-lanes-open-or-covered |
+| 6 | `TickcountRolloverDelay` | `known-absent` | `count-boundary`, `threshold-boundary` | `0`:source-backed, `1`:name-rule | `eligible=False` `rollback-not-tested` | evidence-lanes-open-or-covered |
 | 7 | `KernelWorkerTestFlags` | `known-absent` | - | `0`:source-backed | `eligible=False` `rollback-not-tested`, `kernel-worker-thread-override` | evidence-lanes-open-or-covered |
 | 8 | `MaximumKernelWorkerThreads` | `known-absent` | `count-boundary` | `25000`:source-backed, `0`:name-rule, `1`:name-rule | `eligible=False` `rollback-not-tested`, `kernel-worker-thread-override` | evidence-lanes-open-or-covered |
-| 9 | `ForceEnableMutantAutoboost` | `known-absent` | `boolean-toggle` | `0`:vm-validated, `1`:vm-validated | `eligible=True` none | evidence-lanes-open-or-covered |
-| 10 | `AllowRemoteDASD` | `known-present` | - | `1`:vm-validated, `0`:local-default | `eligible=True` none | evidence-lanes-open-or-covered |
+| 9 | `ForceEnableMutantAutoboost` | `known-absent` | `boolean-toggle` | `1`:source-backed, `0`:name-rule | `eligible=False` `rollback-not-tested` | evidence-lanes-open-or-covered |
+| 10 | `AllowRemoteDASD` | `known-present` | - | `0`:local-default | `eligible=False` `rollback-not-tested` | evidence-lanes-open-or-covered |
 | 11 | `DisableDiskCounters` | `known-absent` | `boolean-toggle`, `count-boundary` | `0`:vm-validated, `1`:vm-validated | `eligible=True` none | evidence-lanes-open-or-covered |
 | 12 | `IoAllowLoadCrashDumpDriver` | `known-absent` | - | `0`:vm-validated, `1`:vm-validated | `eligible=True` none | evidence-lanes-open-or-covered |
 | 13 | `IoEnableSessionZeroAccessCheck` | `known-absent` | `boolean-toggle` | `0`:vm-validated, `1`:vm-validated | `eligible=True` none | evidence-lanes-open-or-covered |
@@ -108,7 +108,7 @@
 | 86 | `HeteroHgsPlusDisabled` | `known-absent` | `boolean-toggle` | `0`:vm-validated, `1`:vm-validated | `eligible=True` none | evidence-lanes-open-or-covered |
 | 87 | `IpiLastClockOwnerDisable` | `known-absent` | `boolean-toggle` | `0`:vm-validated, `1`:vm-validated | `eligible=True` none | evidence-lanes-open-or-covered |
 | 88 | `PowerWatchdogRequestQueueTimeoutMsec` | `known-absent` | `timeout-boundary` | `0`:vm-validated, `1`:vm-validated | `eligible=True` none | evidence-lanes-open-or-covered |
-| 89 | `PowerWatchdogPoCalloutTimeoutMsec` | `known-absent` | `timeout-boundary` | `0`:vm-validated, `1`:vm-validated | `eligible=False` `safety-finding-present` | evidence-lanes-open-or-covered |
+| 89 | `PowerWatchdogPoCalloutTimeoutMsec` | `known-absent` | `timeout-boundary` | `0`:source-backed, `1`:name-rule | `eligible=False` `rollback-not-tested` | evidence-lanes-open-or-covered |
 | 90 | `PowerWatchdogPowerOnGdiTimeoutMsec` | `known-absent` | `timeout-boundary` | `0`:vm-validated, `1`:vm-validated | `eligible=True` none | evidence-lanes-open-or-covered |
 | 91 | `PowerWatchdogDwmSyncFlushTimeoutMsec` | `known-absent` | `timeout-boundary` | `0`:vm-validated, `1`:vm-validated | `eligible=True` none | evidence-lanes-open-or-covered |
 | 92 | `PowerWatchdogDrvSetMonitorTimeoutMsec` | `known-absent` | `timeout-boundary` | `0`:vm-validated, `1`:vm-validated | `eligible=True` none | evidence-lanes-open-or-covered |

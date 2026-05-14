@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import subprocess
 from collections import Counter
@@ -51,6 +52,14 @@ def path_size(path: Path) -> int:
             except OSError:
                 continue
     return total
+
+
+def file_sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as handle:
+        for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
 
 
 def markdown_cell(value: Any) -> str:
@@ -236,18 +245,53 @@ def oldest_staging_items(
     if not staging.exists():
         return []
     paths = sorted((path for path in staging.iterdir()), key=lambda path: (path.stat().st_mtime, path.name))[:limit]
-    return [
-        item_for(
+    items: list[dict[str, Any]] = []
+    for path in paths:
+        duplicate_replacements = duplicate_raw_replacements(path, repo_root=repo_root)
+        is_duplicate = bool(duplicate_replacements)
+        items.append(item_for(
             path,
             category="vm-tooling-staging-oldest-sample",
-            stale_reason="staging diagnostic bundle; verify no record/evidence-index dependency before deletion",
-            replacement_artifacts=[],
-            recommended_action="keep-pending-review",
+            stale_reason=(
+                "staging diagnostic bundle duplicated by canonical evidence/raw artifact"
+                if is_duplicate
+                else "staging diagnostic bundle; verify no record/evidence-index dependency before deletion"
+            ),
+            replacement_artifacts=duplicate_replacements,
+            recommended_action="delete-after-review" if is_duplicate else "keep-pending-review",
             repo_root=repo_root,
             output_paths=output_paths,
-        )
-        for path in paths
-    ]
+        ))
+    return items
+
+
+def duplicate_raw_replacements(path: Path, *, repo_root: Path = REPO_ROOT) -> list[str]:
+    raw_root = repo_root / "evidence" / "raw"
+    if not raw_root.exists():
+        return []
+    files = [path] if path.is_file() else [child for child in path.rglob("*") if child.is_file()]
+    if not files:
+        return []
+    replacements: list[str] = []
+    for source in files:
+        try:
+            source_hash = file_sha256(source)
+        except OSError:
+            return []
+        replacement = None
+        for candidate in raw_root.rglob(source.name):
+            if not candidate.is_file():
+                continue
+            try:
+                if file_sha256(candidate) == source_hash:
+                    replacement = relative(candidate, repo_root)
+                    break
+            except OSError:
+                continue
+        if replacement is None:
+            return []
+        replacements.append(replacement)
+    return sorted(replacements)
 
 
 def largest_raw_trace_items(
@@ -277,12 +321,77 @@ def largest_raw_trace_items(
     ]
 
 
+def audit_archive_named_items(
+    repo_root: Path = REPO_ROOT,
+    *,
+    limit: int = 25,
+    output_paths: set[str] | None = None,
+) -> list[dict[str, Any]]:
+    audit_dir = repo_root / "registry-research-framework" / "audit"
+    if not audit_dir.exists():
+        return []
+    markers = ("archive", "obsolete", "superseded", "stale")
+    paths = [
+        path
+        for path in audit_dir.iterdir()
+        if path.is_file()
+        and relative(path, repo_root) not in (output_paths or set())
+        and any(marker in path.name.lower() for marker in markers)
+    ]
+    selected = sorted(paths, key=lambda path: path.name)[:limit]
+    return [
+        item_for(
+            path,
+            category="audit-archive-named-sample",
+            stale_reason="audit artifact name marks it as archived, superseded, obsolete, or stale; keep until live references and replacement surfaces are reviewed",
+            replacement_artifacts=[],
+            recommended_action="keep-pending-review",
+            repo_root=repo_root,
+            output_paths=output_paths,
+        )
+        for path in selected
+    ]
+
+
+def old_dated_audit_items(
+    repo_root: Path = REPO_ROOT,
+    *,
+    limit: int = 25,
+    output_paths: set[str] | None = None,
+) -> list[dict[str, Any]]:
+    audit_dir = repo_root / "registry-research-framework" / "audit"
+    if not audit_dir.exists():
+        return []
+    paths = [
+        path
+        for path in audit_dir.iterdir()
+        if path.is_file()
+        and relative(path, repo_root) not in (output_paths or set())
+        and any(token in path.name for token in ("202601", "202602", "202603", "202604"))
+    ]
+    selected = sorted(paths, key=lambda path: (path.stat().st_mtime, path.name))[:limit]
+    return [
+        item_for(
+            path,
+            category="old-dated-audit-output-sample",
+            stale_reason="older dated audit output; keep until a current index, report, or historical replacement is confirmed",
+            replacement_artifacts=[],
+            recommended_action="keep-pending-review",
+            repo_root=repo_root,
+            output_paths=output_paths,
+        )
+        for path in selected
+    ]
+
+
 def build_ledger(
     *,
     repo_root: Path = REPO_ROOT,
     generated_utc: str | None = None,
     staging_limit: int = 25,
     raw_trace_limit: int = 25,
+    audit_archive_limit: int = 25,
+    old_audit_limit: int = 25,
     output_paths: set[str] | None = None,
 ) -> dict[str, Any]:
     output_paths = output_paths or set(LEDGER_OUTPUT_GLOBS)
@@ -290,6 +399,18 @@ def build_ledger(
     items.extend(pilot_items(repo_root, output_paths=output_paths))
     items.extend(oldest_staging_items(repo_root, limit=staging_limit, output_paths=output_paths))
     items.extend(largest_raw_trace_items(repo_root, limit=raw_trace_limit, output_paths=output_paths))
+    items.extend(audit_archive_named_items(repo_root, limit=audit_archive_limit, output_paths=output_paths))
+    items.extend(old_dated_audit_items(repo_root, limit=old_audit_limit, output_paths=output_paths))
+
+    deduped_items: list[dict[str, Any]] = []
+    seen_paths: set[str] = set()
+    for item in items:
+        path = str(item.get("path") or "")
+        if not path or path in seen_paths:
+            continue
+        seen_paths.add(path)
+        deduped_items.append(item)
+    items = deduped_items
 
     ignore_reference_paths = {
         relative(Path(__file__), repo_root),
@@ -396,6 +517,8 @@ def main() -> int:
     parser.add_argument("--markdown-output", type=Path, default=DEFAULT_MARKDOWN_OUTPUT)
     parser.add_argument("--staging-limit", type=int, default=25)
     parser.add_argument("--raw-trace-limit", type=int, default=25)
+    parser.add_argument("--audit-archive-limit", type=int, default=25)
+    parser.add_argument("--old-audit-limit", type=int, default=25)
     parser.add_argument("--emit-json", action="store_true", help="Print summary JSON.")
     args = parser.parse_args()
 
@@ -403,6 +526,8 @@ def main() -> int:
     payload = build_ledger(
         staging_limit=args.staging_limit,
         raw_trace_limit=args.raw_trace_limit,
+        audit_archive_limit=args.audit_archive_limit,
+        old_audit_limit=args.old_audit_limit,
         output_paths=output_paths,
     )
     write_outputs(payload, args.json_output, args.markdown_output)

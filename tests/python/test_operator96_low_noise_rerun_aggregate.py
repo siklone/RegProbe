@@ -35,6 +35,7 @@ class Operator96LowNoiseRerunAggregateTests(unittest.TestCase):
                 "operator96-low-noise-rerun-tranche-10-20260510.json",
                 "operator96-low-noise-rerun-tranche-20260510.json",
                 "operator96-low-noise-rerun-tranche-02-20260510.json",
+                "operator96-low-noise-rerun-tranche-20260512-03.json",
             ):
                 write_json(root / name, "{}")
 
@@ -44,6 +45,7 @@ class Operator96LowNoiseRerunAggregateTests(unittest.TestCase):
             "operator96-low-noise-rerun-tranche-20260510.json",
             "operator96-low-noise-rerun-tranche-02-20260510.json",
             "operator96-low-noise-rerun-tranche-10-20260510.json",
+            "operator96-low-noise-rerun-tranche-20260512-03.json",
         ])
 
     def test_aggregate_deduplicates_results_and_counts_verdicts(self):
@@ -103,6 +105,8 @@ class Operator96LowNoiseRerunAggregateTests(unittest.TestCase):
         self.assertEqual(aggregate["summary"]["duplicate_result_count"], 1)
         self.assertEqual(aggregate["summary"]["verdict_counts"], {"harmful": 1, "noisy": 1})
         self.assertEqual(aggregate["summary"]["host_noise_counts"], {"noisy": 1, "ok": 1})
+        self.assertEqual(aggregate["summary"]["noisy_result_count"], 1)
+        self.assertEqual(aggregate["summary"]["noisy_results"][0]["experiment_id"], "exp-2")
 
     def test_non_ok_source_marks_aggregate_for_review(self):
         payload = {
