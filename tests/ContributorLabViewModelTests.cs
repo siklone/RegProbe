@@ -81,10 +81,15 @@ public sealed class ContributorLabViewModelTests : IDisposable
         var viewModel = new ContributorLabViewModel(CreateSnapshot() with
         {
             Operator96RecordCount = 96,
-            Operator96ReadyForAppCard = 4
+            Operator96ReadyForAppCard = 4,
+            Operator96BlockedByGate = 17,
+            Operator96NotAppSurfaceReady = 75
         });
 
         Assert.Equal(92, viewModel.Operator96ResearchOnlyCount);
+        Assert.Contains("blocked_by_gate=17", viewModel.Operator96GateBreakdown, StringComparison.Ordinal);
+        Assert.Contains("not_app_surface_ready=75", viewModel.Operator96GateBreakdown, StringComparison.Ordinal);
+        Assert.Contains("Review only ready_for_bounded_app_card", viewModel.Operator96NextActionSummary, StringComparison.Ordinal);
     }
 
     [Fact]
@@ -105,6 +110,10 @@ public sealed class ContributorLabViewModelTests : IDisposable
           "summary": {
             "record_count": 1,
             "ready_for_bounded_app_card": 0,
+            "blocked_by_gate": 1,
+            "not_app_surface_ready": 0,
+            "blocked_by_safety": 0,
+            "aggregate_surface_blocked": false,
             "needs_low_noise_rerun": 0
           },
             "records": [
@@ -183,7 +192,13 @@ public sealed class ContributorLabViewModelTests : IDisposable
         Assert.Equal("clean-25h2-qga", snapshot.VmSnapshotName);
         Assert.Contains(snapshot.ReadinessItems, item => item.Label == "VM snapshot receipt" && item.Status == "Ready");
         Assert.Equal(0, snapshot.Operator96ReadyForAppCard);
-        Assert.Equal(1, new ContributorLabViewModel(snapshot).Operator96ResearchOnlyCount);
+        Assert.Equal(1, snapshot.Operator96BlockedByGate);
+        Assert.Equal(0, snapshot.Operator96NotAppSurfaceReady);
+        Assert.False(snapshot.Operator96AggregateSurfaceBlocked);
+        var viewModel = new ContributorLabViewModel(snapshot);
+        Assert.Equal(1, viewModel.Operator96ResearchOnlyCount);
+        Assert.Contains("Do not create end-user cards yet", viewModel.Operator96NextActionSummary, StringComparison.Ordinal);
+        Assert.Contains(snapshot.ReadinessItems, item => item.Label == "Operator96 aggregate gate" && item.Status == "Ready");
         var observation = Assert.Single(snapshot.Observations);
         Assert.Equal("not_app_surface_ready", observation.Bucket);
         Assert.Equal("0, 1", observation.CandidateValues);
@@ -230,6 +245,10 @@ public sealed class ContributorLabViewModelTests : IDisposable
             VmSnapshotName: "clean-25h2-qga",
             Operator96RecordCount: 96,
             Operator96ReadyForAppCard: 0,
+            Operator96BlockedByGate: 17,
+            Operator96NotAppSurfaceReady: 79,
+            Operator96BlockedBySafety: 0,
+            Operator96AggregateSurfaceBlocked: false,
             Operator96NeedsLowNoiseRerun: 0,
             Operator96NoisyResultCount: 0,
             Operator96NonOkCount: 0,
