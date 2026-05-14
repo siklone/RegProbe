@@ -56,6 +56,8 @@ public sealed class ContributorLabViewModelTests : IDisposable
         Assert.Contains(packs, pack => pack.Title == "Representative promoted app QA batch" && pack.MutatesGuest && pack.RequiresCertifiedVm);
         Assert.Contains(packs, pack => pack.Title == "Operator96 app-surface review" && !pack.MutatesGuest && !pack.RequiresCertifiedVm);
         Assert.Contains(packs, pack => pack.Title == "Operator96 tranche rerun" && pack.MutatesGuest && pack.RequiresCertifiedVm);
+        Assert.Contains(packs, pack => pack.Title == "Certified VM health"
+                                      && pack.Command.Contains("--snapshot-name clean-25h2-qga", StringComparison.Ordinal));
         Assert.Contains(packs, pack => pack.Title == "Single value VM experiment"
                                       && pack.Command.Contains("--value-name MfBufferingThreshold", StringComparison.Ordinal)
                                       && !pack.Command.Contains("--value-name SystemResponsiveness", StringComparison.Ordinal));
@@ -140,12 +142,28 @@ public sealed class ContributorLabViewModelTests : IDisposable
           }
         }
         """);
+        WriteArtifact(ContributorLabCatalog.VmHealthPath, """
+        {
+          "status": "ok",
+          "checks": {
+            "snapshot": {
+              "status": "ok",
+              "exists": true,
+              "snapshot_name": "clean-25h2-qga"
+            }
+          }
+        }
+        """);
 
         var snapshot = ContributorLabCatalog.Load(_root);
 
         Assert.True(snapshot.RepoRootFound);
         Assert.Equal("certified", snapshot.RunTier);
         Assert.True(snapshot.ReferenceEligible);
+        Assert.True(snapshot.VmSnapshotKnown);
+        Assert.True(snapshot.VmSnapshotOk);
+        Assert.Equal("clean-25h2-qga", snapshot.VmSnapshotName);
+        Assert.Contains(snapshot.ReadinessItems, item => item.Label == "VM snapshot receipt" && item.Status == "Ready");
         Assert.Equal(0, snapshot.Operator96ReadyForAppCard);
         var observation = Assert.Single(snapshot.Observations);
         Assert.Equal("not_app_surface_ready", observation.Bucket);
@@ -185,6 +203,9 @@ public sealed class ContributorLabViewModelTests : IDisposable
             Operator96SurfaceReviewOk: true,
             VmHealthKnown: true,
             VmHealthOk: true,
+            VmSnapshotKnown: true,
+            VmSnapshotOk: true,
+            VmSnapshotName: "clean-25h2-qga",
             Operator96RecordCount: 96,
             Operator96ReadyForAppCard: 0,
             Operator96NeedsLowNoiseRerun: 0,

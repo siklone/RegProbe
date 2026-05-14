@@ -22,7 +22,8 @@ A certified run must satisfy all of these requirements:
 
 - Windows 11 25H2 guest based on the standard RegProbe clean snapshot.
 - VM transport is healthy before the run. For KVM this means
-  `scripts/vm-kvm/vm-health-check.py --json` returns QGA health `ok`.
+  `scripts/vm-kvm/vm-health-check.py --snapshot-name clean-25h2-qga --json`
+  returns QGA health `ok` and confirms the configured rollback snapshot exists.
 - Tight host-noise gate is enabled and reports `ok`.
 - Certified/low-noise reruns should pass `--abort-on-noisy-host` so a noisy
   host fails before any registry apply stage mutates the guest.

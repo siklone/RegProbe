@@ -240,7 +240,7 @@
         "qemu:///session",
         "qemu-agent-command",
         "regprobe-win11-25h2-session",
-        "{\"execute\":\"guest-exec-status\",\"arguments\":{\"pid\":11104}}"
+        "{\"execute\":\"guest-exec-status\",\"arguments\":{\"pid\":10232}}"
       ],
       "returncode": 0,
       "stdout": "{\"return\":{\"exitcode\":0,\"out-data\":\"bnQgYXV0aG9yaXR5XHN5c3RlbQ0K\",\"exited\":true}}",
@@ -251,10 +251,37 @@
         "exited": true
       },
       "phase": "guest-exec-status",
-      "pid": 11104,
+      "pid": 10232,
       "exitcode": 0,
       "out_data": "nt authority\\system\r\n",
       "err_data": ""
+    },
+    "snapshot": {
+      "status": "ok",
+      "command": [
+        "virsh",
+        "-c",
+        "qemu:///session",
+        "snapshot-info",
+        "regprobe-win11-25h2-session",
+        "clean-25h2-qga"
+      ],
+      "returncode": 0,
+      "snapshot_name": "clean-25h2-qga",
+      "exists": true,
+      "stdout": "Name:           clean-25h2-qga\nDomain:         regprobe-win11-25h2-session\nCurrent:        yes\nState:          shutoff\nLocation:       internal\nParent:         -\nChildren:       0\nDescendants:    0\nMetadata:       yes",
+      "stderr": "",
+      "info": {
+        "name": "clean-25h2-qga",
+        "domain": "regprobe-win11-25h2-session",
+        "current": "yes",
+        "state": "shutoff",
+        "location": "internal",
+        "parent": "-",
+        "children": "0",
+        "descendants": "0",
+        "metadata": "yes"
+      }
     }
   },
   "failed_checks": [],
