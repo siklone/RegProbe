@@ -248,7 +248,7 @@
       "evidence_id": "vm-batch-probe-20260320-disable-fullscreen-optimizations",
       "kind": "runtime-diff",
       "title": "Win25H2Clean reversible probe - Fullscreen optimizations override bundle",
-      "location": "evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json",
+      "location": "evidence/raw/runtime-diff/vm-batch-probe-20260320/vm-batch-probe-20260320.json",
       "summary": "Guest reversible probe toggled the GameConfigStore fullscreen-optimization bundle values and restored the original missing state, confirming the current app write set on Win25H2Clean.",
       "supports": [
         "path",

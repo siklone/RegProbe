@@ -210,15 +210,17 @@ STAGING_CANONICALIZATION_DECISIONS: dict[str, dict[str, Any]] = {
         "next_canonicalization_step": "Retain until a new raw ETL/summary pair or explicit source-of-record decision replaces this placeholder.",
     },
     "evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json..md": {
-        "canonicalization_state": "staging-source-of-record",
+        "canonicalization_state": "canonical-raw-replacement-known",
         "owning_records": [
             "security.trusted-path-credential-prompting",
             "system.disable-auto-maintenance",
             "system.memory-large-system-cache-client",
         ],
-        "canonical_replacement_candidates": ["evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json"],
-        "retention_rationale": "This placeholder points at a multi-record VM batch proof that still acts as historical source-of-record for several records.",
-        "next_canonicalization_step": "Copy or regenerate the batch proof into evidence/raw, then migrate record/index references in one dedicated PR.",
+        "canonical_replacement_candidates": [
+            "evidence/raw/runtime-diff/vm-batch-probe-20260320/vm-batch-probe-20260320.json"
+        ],
+        "retention_rationale": "A canonical evidence/raw runtime-diff JSON now carries the multi-record VM batch apply/rollback proof.",
+        "next_canonicalization_step": "Keep live record/index references on the evidence/raw runtime-diff JSON; leave the staging placeholder only as audit history.",
     },
     "evidence/files/vm-tooling-staging/ghidra-probes": {
         "canonicalization_state": "active-tool-output-root",

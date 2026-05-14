@@ -41,7 +41,7 @@ Artifacts:
 
 Related supporting artifacts:
 
-- [vm-batch-probe-20260320.json](../../evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json)
+- [vm-batch-probe-20260320.json](../../evidence/raw/runtime-diff/vm-batch-probe-20260320/vm-batch-probe-20260320.json)
 - [procmon-startup-delay.pml.md](../../evidence/raw/procmon/system.disable-startup-delay/procmon-startup-delay.pml.md)
 - [ghidra_explorer_serialize.txt](../../evidence/raw/ghidra/system.disable-startup-delay/ghidra_explorer_serialize.txt)
 

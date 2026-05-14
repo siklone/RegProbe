@@ -233,7 +233,7 @@
       "evidence_id": "vm-batch-probe-20260320-disable-jpeg-reduction",
       "kind": "runtime-diff",
       "title": "Win25H2Clean reversible probe - Wallpaper JPEG import quality",
-      "location": "evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json",
+      "location": "evidence/raw/runtime-diff/vm-batch-probe-20260320/vm-batch-probe-20260320.json",
       "summary": "Guest reversible probe toggled JPEGImportQuality to 100 and restored the missing baseline on HKCU\\Control Panel\\Desktop, confirming the current app write and rollback cycle.",
       "supports": [
         "path",

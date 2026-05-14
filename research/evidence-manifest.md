@@ -8769,15 +8769,15 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `local-credui-adml` | `official-doc` | Local Microsoft CredUI.adml help text | [evidence/files/external/c/PolicyDefinitions/en-US/CredUI.adml](../evidence/files/external/c/PolicyDefinitions/en-US/CredUI.adml) |
 | `app-security-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SecurityTweakProvider.cs |
 | `nohuto-enablesecurecredentialprompting-admx` | `decompilation` | Nohuto's and our Ghidra decompilation - nohuto win-config mirror - EnableSecureCredentialPrompting policy | [research/_source-mirrors/win-config/security/desc.md](_source-mirrors/win-config/security/desc.md) |
-| `vm-batch-probe-20260320-trusted-path-credential-prompting` | `runtime-diff` | Win25H2Clean reversible probe - Trusted path credential prompting | [evidence/files/vm/vm-batch-probe-20260320.json](../evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json) |
+| `vm-batch-probe-20260320-trusted-path-credential-prompting` | `runtime-diff` | Win25H2Clean reversible probe - Trusted path credential prompting | [evidence/raw/runtime-diff/vm-batch-probe-20260320/vm-batch-probe-20260320.json](../evidence/raw/runtime-diff/vm-batch-probe-20260320/vm-batch-probe-20260320.json) |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [evidence/files/vm/vm-batch-probe-20260320.json](../evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json) |
+| Source | [evidence/raw/runtime-diff/vm-batch-probe-20260320/vm-batch-probe-20260320.json](../evidence/raw/runtime-diff/vm-batch-probe-20260320/vm-batch-probe-20260320.json) |
 | Exact quote / path | HKLM/Software/Microsoft/Windows/CurrentVersion/Policies/CredUI/EnableSecureCredentialPrompting: before=__MISSING__, after_apply=1, after_restore=__MISSING__ |
-| Notes | Guest-side reversible probe on Win25H2Clean; see the batch probe output in [evidence/files/vm/vm-batch-probe-20260320.json..md](../evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json..md) Added nohuto mirror corroboration via nohuto-enablesecurecredentialprompting-admx. |
+| Notes | Guest-side reversible probe on Win25H2Clean; see the batch probe output in [evidence/raw/runtime-diff/vm-batch-probe-20260320/vm-batch-probe-20260320.json](../evidence/raw/runtime-diff/vm-batch-probe-20260320/vm-batch-probe-20260320.json) Added nohuto mirror corroboration via nohuto-enablesecurecredentialprompting-admx. |
 
 ---
 
@@ -8945,16 +8945,16 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `ms-automatic-maintenance-overview` | `official-doc` | Microsoft Automatic Maintenance overview | [https://learn.microsoft.com/en-us/windows/compatibility/automatic-maintenance](https://learn.microsoft.com/en-us/windows/compatibility/automatic-maintenance) |
 | `ms-uwf-maintenance-disabled` | `official-doc` | Microsoft Unified Write Filter guidance referencing MaintenanceDisabled | [https://learn.microsoft.com/en-us/windows/configuration/unified-write-filter/uwf-filterenable](https://learn.microsoft.com/en-us/windows/configuration/unified-write-filter/uwf-filterenable) |
 | `app-system-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs |
-| `vm-batch-probe-20260320-disable-auto-maintenance` | `runtime-diff` | Win25H2Clean reversible probe - Automatic maintenance override | [evidence/files/vm/vm-batch-probe-20260320.json](../evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json) |
+| `vm-batch-probe-20260320-disable-auto-maintenance` | `runtime-diff` | Win25H2Clean reversible probe - Automatic maintenance override | [evidence/raw/runtime-diff/vm-batch-probe-20260320/vm-batch-probe-20260320.json](../evidence/raw/runtime-diff/vm-batch-probe-20260320/vm-batch-probe-20260320.json) |
 | `nohuto-maintenance-mirror` | `registry-observation` | nohuto mirror - Automatic Maintenance registry evidence | [research/_source-mirrors/win-config/privacy/desc.md](_source-mirrors/win-config/privacy/desc.md) and [research/_source-mirrors/win-registry/records/25H2.txt](_source-mirrors/win-registry/records/25H2.txt) |
 
 **Validation proof**
 
 | Field | Value |
 | --- | --- |
-| Source | [evidence/files/vm/vm-batch-probe-20260320.json](../evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json) |
+| Source | [evidence/raw/runtime-diff/vm-batch-probe-20260320/vm-batch-probe-20260320.json](../evidence/raw/runtime-diff/vm-batch-probe-20260320/vm-batch-probe-20260320.json) |
 | Exact quote / path | HKLM/SOFTWARE/Microsoft/Windows NT/CurrentVersion/Schedule/Maintenance/MaintenanceDisabled: before=__MISSING__, after_apply=1, after_restore=__MISSING__ |
-| Notes | Guest-side reversible probe on Win25H2Clean; see the batch probe output in [evidence/files/vm/vm-batch-probe-20260320.json..md](../evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json..md) The local nohuto mirror also shows the same MaintenanceDisabled registry path. |
+| Notes | Guest-side reversible probe on Win25H2Clean; see the batch probe output in [evidence/raw/runtime-diff/vm-batch-probe-20260320/vm-batch-probe-20260320.json](../evidence/raw/runtime-diff/vm-batch-probe-20260320/vm-batch-probe-20260320.json) The local nohuto mirror also shows the same MaintenanceDisabled registry path. |
 
 ---
 
@@ -9065,7 +9065,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `procmon-fullscreen-gameconfigstore-read` | `procmon-trace` | Procmon capture - svchost.exe GameConfigStore fullscreen tuple read | [evidence/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-diag.txt](../evidence/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-diag.txt) and [evidence/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-diag.hits.csv](../evidence/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-diag.hits.csv) |
 | `ghidra-resourcepolicysrv-fullscreen` | `ghidra-headless` | Our Ghidra decompilation - ResourcePolicyServer GameConfigStore path | [evidence/raw/ghidra/system.disable-fullscreen-optimizations/ghidra-matches.md](../evidence/raw/ghidra/system.disable-fullscreen-optimizations/ghidra-matches.md) and [evidence/raw/ghidra/system.disable-fullscreen-optimizations/evidence.json](../evidence/raw/ghidra/system.disable-fullscreen-optimizations/evidence.json) |
 | `app-system-registry-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
-| `vm-batch-probe-20260320-disable-fullscreen-optimizations` | `runtime-diff` | Win25H2Clean reversible probe - Fullscreen optimizations override bundle | [evidence/files/vm/vm-batch-probe-20260320.json](../evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json) |
+| `vm-batch-probe-20260320-disable-fullscreen-optimizations` | `runtime-diff` | Win25H2Clean reversible probe - Fullscreen optimizations override bundle | [evidence/raw/runtime-diff/vm-batch-probe-20260320/vm-batch-probe-20260320.json](../evidence/raw/runtime-diff/vm-batch-probe-20260320/vm-batch-probe-20260320.json) |
 | `vm-fullscreen-automated-probe-20260326` | `vm-test` | Win25H2Clean automated fullscreen follow-up | [evidence/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.txt](../evidence/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.txt) and [evidence/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.json](../evidence/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.json) and [evidence/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.hits.csv](../evidence/raw/procmon/system.disable-fullscreen-optimizations/fullscreen-optimizations-probe.hits.csv) |
 
 **Validation proof**
@@ -9127,7 +9127,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `procmon-jpegimportquality-explorer-read` | `procmon-trace` | Procmon capture - Explorer JPEGImportQuality runtime read | [evidence/raw/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.txt](../evidence/raw/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.txt) and [evidence/raw/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.hits.csv](../evidence/raw/procmon/jpeg-import-quality-validation-20260326/jpegimportquality-state-100.hits.csv) |
 | `ghidra-shell32-jpegimportquality` | `ghidra-headless` | Our Ghidra decompilation - shell32 JPEGImportQuality transcode path | [evidence/raw/ghidra/system.disable-jpeg-reduction/shell32-jpegimportquality-ghidra.md](../evidence/raw/ghidra/system.disable-jpeg-reduction/shell32-jpegimportquality-ghidra.md) |
 | `app-system-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs |
-| `vm-batch-probe-20260320-disable-jpeg-reduction` | `runtime-diff` | Win25H2Clean reversible probe - Wallpaper JPEG import quality | [evidence/files/vm/vm-batch-probe-20260320.json](../evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json) |
+| `vm-batch-probe-20260320-disable-jpeg-reduction` | `runtime-diff` | Win25H2Clean reversible probe - Wallpaper JPEG import quality | [evidence/raw/runtime-diff/vm-batch-probe-20260320/vm-batch-probe-20260320.json](../evidence/raw/runtime-diff/vm-batch-probe-20260320/vm-batch-probe-20260320.json) |
 | `runtime-jpegimportquality-v31-20260327` | `etw-trace` | Win25H2Clean v3.1 runtime lane - JPEG wallpaper apply | [evidence/files/vm/jpeg-import-quality-runtime-20260327-124349/summary.json](../evidence/files/vm-tooling-staging/jpeg-import-quality-runtime-20260327-124349/summary.json) and [evidence/files/vm/jpeg-import-quality-runtime-20260327-124349/jpeg-import-quality-runtime.etl.md](../evidence/files/vm-tooling-staging/jpeg-import-quality-runtime-20260327-124349/jpeg-import-quality-runtime.etl.md) |
 | `kvm-user-scope-revalidation-batch-20260505` | `runtime-read` | KVM user-scope current-state revalidation batch | [registry-research-framework/audit/kvm-user-scope-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-user-scope-revalidation-batch-20260505.json) |
 
@@ -9313,7 +9313,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `repo-system-doc-startup-delay` | `repo-doc` | Repo system research notes for startup delay | [Docs/system/system.md](../Docs/system/system.md) |
 | `app-system-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs |
 | `ghidra-explorer-serialize-search` | `ghidra-headless` | Our Ghidra headless string search on explorer.exe for Serialize | [evidence/raw/ghidra/system.disable-startup-delay/ghidra_explorer_serialize.txt](../evidence/raw/ghidra/system.disable-startup-delay/ghidra_explorer_serialize.txt) |
-| `vm-batch-probe-20260320-disable-startup-delay` | `runtime-diff` | Win25H2Clean reversible probe - Explorer startup delay | [evidence/files/vm/vm-batch-probe-20260320.json](../evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json) |
+| `vm-batch-probe-20260320-disable-startup-delay` | `runtime-diff` | Win25H2Clean reversible probe - Explorer startup delay | [evidence/raw/runtime-diff/vm-batch-probe-20260320/vm-batch-probe-20260320.json](../evidence/raw/runtime-diff/vm-batch-probe-20260320/vm-batch-probe-20260320.json) |
 | `procmon-startup-delay-shell-restart` | `procmon-trace` | VM Procmon trace - Explorer shell restart reads StartupDelayInMSec | [evidence/raw/procmon/system.disable-startup-delay/procmon-startup-delay.pml.md](../evidence/raw/procmon/system.disable-startup-delay/procmon-startup-delay.pml.md) |
 | `wpr-startup-delay-shell-restart` | `wpr-trace` | Win25H2Clean WPR trace - Explorer shell restart with StartupDelayInMSec missing and 0 | [research/notes/startup-delay-wpr-trace-20260326.md](notes/startup-delay-wpr-trace-20260326.md) |
 | `kvm-user-scope-revalidation-batch-20260505` | `runtime-read` | KVM user-scope current-state revalidation batch | [registry-research-framework/audit/kvm-user-scope-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-user-scope-revalidation-batch-20260505.json) |
@@ -9322,7 +9322,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 
 | Field | Value |
 | --- | --- |
-| Source | [evidence/files/vm/vm-batch-probe-20260320.json](../evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json) |
+| Source | [evidence/raw/runtime-diff/vm-batch-probe-20260320/vm-batch-probe-20260320.json](../evidence/raw/runtime-diff/vm-batch-probe-20260320/vm-batch-probe-20260320.json) |
 | Exact quote / path | vm-batch-probe-20260320.json: system.disable-startup-delay before=__MISSING__, after_apply=0, after_restore=__MISSING__; startup-delay-0.summary.json: before missing, applied 0, restored missing, shell_after explorer/sihost/ShellHost/ctfmon true |
 | Notes | Retroactive v3.1 pass relies on the checked-in reversible probe, the startup-delay WPR summaries for both missing and 0, the explorer.exe Ghidra string-search output, and the repo-friendly Procmon placeholder note for the original shell-restart capture. Microsoft still does not publish StartupDelayInMSec as a primary registry contract. |
 
@@ -9330,7 +9330,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 
 | ID | Tool | Filename | SHA256 | Release URL |
 | --- | --- | --- | --- | --- |
-| `vm-batch-probe-20260320.json` | `` | evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json |  |  |
+| `vm-batch-probe-20260320.json` | `` | evidence/raw/runtime-diff/vm-batch-probe-20260320/vm-batch-probe-20260320.json |  |  |
 | `procmon-startup-delay.pml.md` | `` | evidence/raw/procmon/system.disable-startup-delay/procmon-startup-delay.pml.md |  |  |
 | `ghidra_explorer_serialize.txt` | `` | evidence/raw/ghidra/system.disable-startup-delay/ghidra_explorer_serialize.txt |  |  |
 | `startup-delay-wpr-summary.json` | `` | evidence/files/vm-tooling-staging/startup-delay-wpr-20260326-024701/startup-delay-wpr-summary.json |  |  |
@@ -9946,9 +9946,9 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 
 | Field | Value |
 | --- | --- |
-| Source | [evidence/files/vm/vm-batch-probe-20260320.json](../evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json) |
+| Source | [evidence/raw/runtime-diff/vm-batch-probe-20260320/vm-batch-probe-20260320.json](../evidence/raw/runtime-diff/vm-batch-probe-20260320/vm-batch-probe-20260320.json) |
 | Exact quote / path | HKLM/SYSTEM/CurrentControlSet/Control/Session Manager/Memory Management/LargeSystemCache: before=0, after_apply=0, after_restore=0 |
-| Notes | Guest-side reversible probe on Win25H2Clean; see the batch probe output in [evidence/files/vm/vm-batch-probe-20260320.json..md](../evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json..md) |
+| Notes | Guest-side reversible probe on Win25H2Clean; see the batch probe output in [evidence/raw/runtime-diff/vm-batch-probe-20260320/vm-batch-probe-20260320.json](../evidence/raw/runtime-diff/vm-batch-probe-20260320/vm-batch-probe-20260320.json) |
 
 ---
 
@@ -10210,7 +10210,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `ghidra-symbolized-prioritycontrol-20260401` | `decompilation` | PDB-backed bounded Ghidra branch audit - cimwin32.dll | [evidence/raw/ghidra-v32/system-priority-control-ghidra-v32-20260401-112136](../evidence/raw/ghidra-v32/system-priority-control-ghidra-v32-20260401-112136) |
 | `procmon-priority-control-wmi-read` | `procmon-trace` | Procmon capture - wmiprvse.exe Win32PrioritySeparation reads | [evidence/raw/procmon/system.priority-control/prioritycontrol-state-2.txt](../evidence/raw/procmon/system.priority-control/prioritycontrol-state-2.txt) and [evidence/raw/procmon/system.priority-control/prioritycontrol-state-2.hits.csv](../evidence/raw/procmon/system.priority-control/prioritycontrol-state-2.hits.csv) and [evidence/raw/procmon/system.priority-control/prioritycontrol-state-38.txt](../evidence/raw/procmon/system.priority-control/prioritycontrol-state-38.txt) and [evidence/raw/procmon/system.priority-control/prioritycontrol-state-38.hits.csv](../evidence/raw/procmon/system.priority-control/prioritycontrol-state-38.hits.csv) |
 | `app-system-registry-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SystemRegistryTweakProvider.cs |
-| `vm-batch-probe-20260320-priority-control` | `runtime-diff` | Win25H2Clean reversible probe - Win32PrioritySeparation tuning | [evidence/files/vm/vm-batch-probe-20260320.json](../evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json) |
+| `vm-batch-probe-20260320-priority-control` | `runtime-diff` | Win25H2Clean reversible probe - Win32PrioritySeparation tuning | [evidence/raw/runtime-diff/vm-batch-probe-20260320/vm-batch-probe-20260320.json](../evidence/raw/runtime-diff/vm-batch-probe-20260320/vm-batch-probe-20260320.json) |
 | `vm-manual-benchmark-20260324-priority-control` | `vm-test` | Win25H2Clean manual benchmark pass - Win32PrioritySeparation | [evidence/files/vm/priority-control-20260324-201011/summary.json](../evidence/files/vm-tooling-staging/priority-control-20260324-201011/summary.json) |
 | `kvm-machine-scope-revalidation-batch-20260505` | `runtime-read` | KVM machine-scope current-state revalidation batch | [registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json](../registry-research-framework/audit/kvm-machine-scope-revalidation-batch-20260505.json) |
 

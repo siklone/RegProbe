@@ -402,7 +402,7 @@
       "evidence_id": "vm-batch-probe-20260320-priority-control",
       "kind": "runtime-diff",
       "title": "Win25H2Clean reversible probe - Win32PrioritySeparation tuning",
-      "location": "evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json",
+      "location": "evidence/raw/runtime-diff/vm-batch-probe-20260320/vm-batch-probe-20260320.json",
       "summary": "Guest reversible probe changed Win32PrioritySeparation from 2 to 38 and restored 2, confirming the tuning value transitions on the PriorityControl path.",
       "supports": [
         "path",

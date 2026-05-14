@@ -40,6 +40,9 @@ STAGING_CANONICAL_REPLACEMENTS: dict[str, list[str]] = {
     "evidence/files/vm-tooling-staging/hags_toggle_out.txt": [
         "evidence/raw/runtime-diff/system.enable-hags/hags-toggle-20260327.json"
     ],
+    "evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json..md": [
+        "evidence/raw/runtime-diff/vm-batch-probe-20260320/vm-batch-probe-20260320.json"
+    ],
 }
 
 CLEANUP_TOOL_REFERENCE_PATHS = {

@@ -199,7 +199,7 @@
       "evidence_id": "vm-batch-probe-20260320-disable-startup-delay",
       "kind": "runtime-diff",
       "title": "Win25H2Clean reversible probe - Explorer startup delay",
-      "location": "evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json",
+      "location": "evidence/raw/runtime-diff/vm-batch-probe-20260320/vm-batch-probe-20260320.json",
       "summary": "Guest reversible probe toggled StartupDelayInMSec to 0 and restored the missing baseline under Explorer\\Serialize, confirming the current app write and restore cycle.",
       "supports": [
         "path",
@@ -267,7 +267,7 @@
   ],
   "last_reviewed_utc": "2026-05-06T00:27:35.2558263Z",
   "validation_proof": {
-    "source_url": "evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json",
+    "source_url": "evidence/raw/runtime-diff/vm-batch-probe-20260320/vm-batch-probe-20260320.json",
     "exact_quote_or_path": "vm-batch-probe-20260320.json: system.disable-startup-delay before=__MISSING__, after_apply=0, after_restore=__MISSING__; startup-delay-0.summary.json: before missing, applied 0, restored missing, shell_after explorer/sihost/ShellHost/ctfmon true",
     "key_found_on_page": true,
     "notes": "Retroactive v3.1 pass relies on the checked-in reversible probe, the startup-delay WPR summaries for both missing and 0, the explorer.exe Ghidra string-search output, and the repo-friendly Procmon placeholder note for the original shell-restart capture. Microsoft still does not publish StartupDelayInMSec as a primary registry contract."
