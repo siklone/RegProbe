@@ -23,4 +23,4 @@ Archived audit trail only. Keep this out of the normal tweak surface.
 - `official-doc` Local Microsoft GroupPolicy.adml EnableCDP help text -> evidence/files/external/c/PolicyDefinitions/en-US/GroupPolicy.adml
 - `repo-code` Current app implementation -> app/Services/TweakProviders/PrivacyTweakProvider.cs
 - `decompiled-pseudocode` Decompiled Shared Experiences singleton -> Docs/privacy/assets/crossdev-SharedExperiencesSingleton.c
-- `vm-test` Guest launch of CrossDeviceResume -> evidence/files/vm-tooling-staging/crossdevice_resume_probe.csv
+- `vm-test` Guest launch of CrossDeviceResume -> evidence/raw/procmon/privacy.disable-resume/crossdevice_resume_probe.csv

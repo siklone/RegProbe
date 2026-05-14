@@ -27,7 +27,7 @@ research/_source-mirrors/win-registry/records/25H2.txt
 
 ```text
 Source file:
-research/evidence-files/procmon/explorer-hide-empty-drives-validation-20260324/hideemptydrives-result.txt
+evidence/raw/procmon/explorer.hide-empty-drives/hideemptydrives-result.txt
 
 State 0:
 Explorer.EXE RegQueryValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/HideDrivesWithNoMedia
@@ -44,8 +44,8 @@ RESTORED_EXISTS=False
 ## Raw Hit Files
 
 ```text
-research/evidence-files/procmon/explorer-hide-empty-drives-validation-20260324/hideemptydrives-0-hits.csv
-research/evidence-files/procmon/explorer-hide-empty-drives-validation-20260324/hideemptydrives-1-hits.csv
+evidence/raw/procmon/explorer-hide-empty-drives-validation-20260324/hideemptydrives-0-hits.csv
+evidence/raw/procmon/explorer-hide-empty-drives-validation-20260324/hideemptydrives-1-hits.csv
 ```
 
 ## Notes
@@ -53,4 +53,3 @@ research/evidence-files/procmon/explorer-hide-empty-drives-validation-20260324/h
 - Explorer was restarted into `This PC` after each state change.
 - The probe confirmed live Explorer consumption for both 0 and 1 on Win25H2Clean.
 - The baseline value was absent and was restored to the absent state after the probe.
-

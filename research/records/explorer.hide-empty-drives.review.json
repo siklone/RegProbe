@@ -252,7 +252,7 @@
     "25H2"
   ],
   "validation_proof": {
-    "source_url": "evidence/files/vm-tooling-staging/hideemptydrives-result.txt",
+    "source_url": "evidence/raw/procmon/explorer.hide-empty-drives/hideemptydrives-result.txt",
     "exact_quote_or_path": "STATE=0 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\HideDrivesWithNoMedia ... Data: 0; STATE=1 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\HideDrivesWithNoMedia ... Data: 1; RESTORED_EXISTS=False",
     "key_found_on_page": true,
     "notes": "The guest-local result file was copied back to the host scratch area during validation. The baseline value was absent and was restored to the absent state after the probe."

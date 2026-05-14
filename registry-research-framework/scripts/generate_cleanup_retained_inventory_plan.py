@@ -70,6 +70,8 @@ def classify_reference(path: str) -> str:
 def release_state(item: dict[str, Any]) -> str:
     if item.get("cleanup_status") == "delete-candidate" or item.get("delete_eligible"):
         return "delete-ready"
+    if item.get("cleanup_status") == "retained-audit-trail-reference":
+        return "audit-only-retained"
     if (
         item.get("recommended_action") == "delete-after-review"
         and item.get("replacement_artifacts")
@@ -89,6 +91,8 @@ def next_action_for(item: dict[str, Any], state: str) -> str:
         return "Review the replacement/obsolete reason, then delete in a dedicated cleanup PR."
     if state == "reference-migration-needed":
         return "Move blocking docs/records to the listed replacement artifacts, rerun the ledger, then promote to delete-candidate if live refs reach zero."
+    if state == "audit-only-retained":
+        return "No live blocking references remain; keep for audit trail or handle in a dedicated deletion PR that explicitly accepts audit-only history references."
     if state == "intentional-reference-keep":
         return "Keep as a historical example unless a maintainer explicitly rewrites the current docs/record to the replacement artifacts."
     if category == "large-raw-trace-sample":
@@ -146,6 +150,7 @@ def build_plan(ledger_path: Path = DEFAULT_LEDGER) -> dict[str, Any]:
             "item_count": len(items),
             "delete_ready_count": release_state_counts.get("delete-ready", 0),
             "reference_migration_needed_count": release_state_counts.get("reference-migration-needed", 0),
+            "audit_only_retained_count": release_state_counts.get("audit-only-retained", 0),
             "intentional_reference_keep_count": release_state_counts.get("intentional-reference-keep", 0),
             "needs_replacement_or_retention_decision_count": release_state_counts.get("needs-replacement-or-retention-decision", 0),
             "retained_pending_review_count": release_state_counts.get("retained-pending-review", 0),
@@ -190,6 +195,7 @@ def render_markdown(plan: dict[str, Any]) -> str:
             f"| Retained inventory items | {int(summary.get('item_count') or 0)} |",
             f"| Delete-ready rows | {int(summary.get('delete_ready_count') or 0)} |",
             f"| Reference migration needed | {int(summary.get('reference_migration_needed_count') or 0)} |",
+            f"| Audit-only retained | {int(summary.get('audit_only_retained_count') or 0)} |",
             f"| Intentional reference keep | {int(summary.get('intentional_reference_keep_count') or 0)} |",
             f"| Needs replacement/retention decision | {int(summary.get('needs_replacement_or_retention_decision_count') or 0)} |",
             f"| Retained pending review | {int(summary.get('retained_pending_review_count') or 0)} |",

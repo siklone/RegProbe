@@ -116,6 +116,33 @@ class CleanupRetainedInventoryPlanTests(unittest.TestCase):
             self.assertEqual(item["release_state"], "needs-replacement-or-retention-decision")
             self.assertFalse(item["can_become_delete_candidate"])
 
+    def test_audit_only_references_have_explicit_release_state(self):
+        with tempfile.TemporaryDirectory() as temp:
+            ledger = Path(temp) / "cleanup-quarantine-ledger.json"
+            write_ledger(
+                ledger,
+                [
+                    {
+                        "path": "evidence/files/vm-tooling-staging/sample.txt",
+                        "category": "vm-tooling-staging-oldest-sample",
+                        "cleanup_status": "retained-audit-trail-reference",
+                        "recommended_action": "delete-after-review",
+                        "replacement_artifacts": ["evidence/raw/procmon/sample/sample.txt"],
+                        "blocking_reference_count": 0,
+                        "audit_reference_count": 2,
+                        "blocking_references_sample": [],
+                    }
+                ],
+            )
+
+            plan = self.module.build_plan(ledger)
+            item = plan["retained_inventory"][0]
+
+            self.assertEqual(plan["summary"]["audit_only_retained_count"], 1)
+            self.assertEqual(item["release_state"], "audit-only-retained")
+            self.assertFalse(item["can_become_delete_candidate"])
+            self.assertIn("audit trail", item["next_action"])
+
     def test_markdown_separates_reference_migration_from_retained_worklist(self):
         plan = {
             "generated_utc": "2026-05-14T00:00:00Z",
@@ -126,6 +153,7 @@ class CleanupRetainedInventoryPlanTests(unittest.TestCase):
                 "item_count": 1,
                 "delete_ready_count": 0,
                 "reference_migration_needed_count": 1,
+                "audit_only_retained_count": 0,
                 "intentional_reference_keep_count": 0,
                 "needs_replacement_or_retention_decision_count": 0,
                 "retained_pending_review_count": 0,

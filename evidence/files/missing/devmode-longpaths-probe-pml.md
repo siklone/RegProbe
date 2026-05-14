@@ -4,6 +4,8 @@ Title: Captured evidence
 
 File: `devmode_longpaths_probe.pml`
 
+Canonical derived evidence: `evidence/raw/procmon/developer.enable-windows-long-paths/devmode_longpaths_probe.csv`
+
 The local capture is not present in this workspace anymore.
 
 This placeholder keeps the evidence trail repo-friendly without leaking host-local paths.

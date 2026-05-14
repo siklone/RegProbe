@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-14T12:51:44Z",
+  "generated_utc": "2026-05-14T14:13:15Z",
   "purpose": "Quarantine ledger for cleanup review inventory. Only delete-candidate rows are cleanup candidates; retained rows are not deletion candidates.",
   "deletion_policy": [
     "No file is deleted by this generator.",
@@ -15,8 +15,8 @@
     "retained_inventory_count": 89,
     "delete_eligible_count": 0,
     "referenced_count": 89,
-    "blocking_referenced_count": 89,
-    "audit_only_referenced_count": 0,
+    "blocking_referenced_count": 74,
+    "audit_only_referenced_count": 15,
     "total_size_bytes": 678702358,
     "categories": {
       "audit-archive-named-sample": 10,
@@ -26,7 +26,8 @@
       "vm-tooling-staging-oldest-sample": 25
     },
     "cleanup_status_counts": {
-      "retained-live-reference": 89
+      "retained-audit-trail-reference": 15,
+      "retained-live-reference": 74
     }
   },
   "items": [
@@ -47,23 +48,29 @@
         "pilot-perf-calculate-actual-utilization-0-recovery.json",
         "registry-research-framework/audit/registry-value-experiments/pilot-perf-calculate-actual-utilization-0-recovery.json"
       ],
-      "live_reference_count": 4,
-      "audit_reference_count": 2,
+      "live_reference_count": 6,
+      "audit_reference_count": 4,
       "blocking_reference_count": 2,
       "references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md",
         "research/evidence-atlas.md",
         "research/records/power.control.perf-calculate-actual-utilization.json"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "research/evidence-atlas.md",
         "research/records/power.control.perf-calculate-actual-utilization.json"
       ],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "keep-referenced"
     },
@@ -84,23 +91,29 @@
         "pilot-perf-calculate-actual-utilization-0-recovery.md",
         "registry-research-framework/audit/registry-value-experiments/pilot-perf-calculate-actual-utilization-0-recovery.md"
       ],
-      "live_reference_count": 4,
-      "audit_reference_count": 2,
+      "live_reference_count": 6,
+      "audit_reference_count": 4,
       "blocking_reference_count": 2,
       "references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md",
         "research/evidence-atlas.md",
         "research/records/power.control.perf-calculate-actual-utilization.json"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "research/evidence-atlas.md",
         "research/records/power.control.perf-calculate-actual-utilization.json"
       ],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "keep-referenced"
     },
@@ -121,28 +134,34 @@
         "pilot-perf-calculate-actual-utilization-0.json",
         "registry-research-framework/audit/registry-value-experiments/pilot-perf-calculate-actual-utilization-0.json"
       ],
-      "live_reference_count": 7,
-      "audit_reference_count": 2,
-      "blocking_reference_count": 5,
+      "live_reference_count": 8,
+      "audit_reference_count": 4,
+      "blocking_reference_count": 4,
       "references_sample": [
         "CONTRIBUTING.md",
         "README.md",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
-        "registry-research-framework/audit/registry-value-experiments/README.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md",
         "research/evidence-atlas.md",
         "research/records/power.control.perf-calculate-actual-utilization.json"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "CONTRIBUTING.md",
         "README.md",
-        "registry-research-framework/audit/registry-value-experiments/README.md",
         "research/evidence-atlas.md",
         "research/records/power.control.perf-calculate-actual-utilization.json"
+      ],
+      "replacement_resolved_reference_count": 1,
+      "replacement_resolved_references_sample": [
+        "registry-research-framework/audit/registry-value-experiments/README.md"
       ],
       "delete_eligible": false,
       "recommended_action": "keep-referenced"
@@ -164,28 +183,34 @@
         "pilot-perf-calculate-actual-utilization-0.md",
         "registry-research-framework/audit/registry-value-experiments/pilot-perf-calculate-actual-utilization-0.md"
       ],
-      "live_reference_count": 7,
-      "audit_reference_count": 2,
-      "blocking_reference_count": 5,
+      "live_reference_count": 8,
+      "audit_reference_count": 4,
+      "blocking_reference_count": 4,
       "references_sample": [
         "CONTRIBUTING.md",
         "README.md",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
-        "registry-research-framework/audit/registry-value-experiments/README.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md",
         "research/evidence-atlas.md",
         "research/records/power.control.perf-calculate-actual-utilization.json"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "CONTRIBUTING.md",
         "README.md",
-        "registry-research-framework/audit/registry-value-experiments/README.md",
         "research/evidence-atlas.md",
         "research/records/power.control.perf-calculate-actual-utilization.json"
+      ],
+      "replacement_resolved_reference_count": 1,
+      "replacement_resolved_references_sample": [
+        "registry-research-framework/audit/registry-value-experiments/README.md"
       ],
       "delete_eligible": false,
       "recommended_action": "keep-referenced"
@@ -202,21 +227,27 @@
         "defender-cloud-demo-extracted",
         "evidence/files/vm-tooling-staging/defender-cloud-demo-extracted"
       ],
-      "live_reference_count": 3,
-      "audit_reference_count": 2,
+      "live_reference_count": 5,
+      "audit_reference_count": 4,
       "blocking_reference_count": 1,
       "references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md",
         "research/notes/security-threat-file-hash-logging-validation-20260325.md"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "research/notes/security-threat-file-hash-logging-validation-20260325.md"
       ],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "keep-pending-review"
     },
@@ -233,22 +264,24 @@
         "showinfotip-1-hits.csv.",
         "showinfotip-1-hits.csv..md"
       ],
-      "live_reference_count": 8,
-      "audit_reference_count": 2,
+      "live_reference_count": 10,
+      "audit_reference_count": 4,
       "blocking_reference_count": 6,
       "references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md",
         "research/evidence-atlas.md",
         "research/evidence-classes.json",
         "research/evidence-index.json",
-        "research/evidence-manifest.json",
-        "research/evidence-manifest.md",
-        "research/records/explorer.show-info-tips.review.json"
+        "research/evidence-manifest.json"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "research/evidence-atlas.md",
@@ -258,6 +291,8 @@
         "research/evidence-manifest.md",
         "research/records/explorer.show-info-tips.review.json"
       ],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "keep-pending-review"
     },
@@ -274,22 +309,24 @@
         "showsuperhidden-1-hits.csv.",
         "showsuperhidden-1-hits.csv..md"
       ],
-      "live_reference_count": 8,
-      "audit_reference_count": 2,
+      "live_reference_count": 10,
+      "audit_reference_count": 4,
       "blocking_reference_count": 6,
       "references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md",
         "research/evidence-atlas.md",
         "research/evidence-classes.json",
         "research/evidence-index.json",
-        "research/evidence-manifest.json",
-        "research/evidence-manifest.md",
-        "research/records/explorer.show-protected-operating-system-files.review.json"
+        "research/evidence-manifest.json"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "research/evidence-atlas.md",
@@ -299,6 +336,8 @@
         "research/evidence-manifest.md",
         "research/records/explorer.show-protected-operating-system-files.review.json"
       ],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "keep-pending-review"
     },
@@ -315,22 +354,24 @@
         "thread-dpc-enable-0-cpu3.etl",
         "thread-dpc-enable-0-cpu3.etl.md"
       ],
-      "live_reference_count": 10,
-      "audit_reference_count": 2,
+      "live_reference_count": 12,
+      "audit_reference_count": 4,
       "blocking_reference_count": 8,
       "references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md",
         "registry-research-framework/discovery/etl-corpus-inventory.json",
         "research/evidence-atlas.md",
         "research/evidence-classes.json",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json",
-        "research/evidence-manifest.md"
+        "research/evidence-index.json"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "registry-research-framework/discovery/etl-corpus-inventory.json",
@@ -342,6 +383,8 @@
         "research/notes/thread-dpc-enable-vm-suite-20260324.md",
         "research/records/system.kernel-thread-dpc-enable.json"
       ],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "keep-pending-review"
     },
@@ -358,22 +401,24 @@
         "thread-dpc-enable-0-mem2.etl",
         "thread-dpc-enable-0-mem2.etl.md"
       ],
-      "live_reference_count": 10,
-      "audit_reference_count": 2,
+      "live_reference_count": 12,
+      "audit_reference_count": 4,
       "blocking_reference_count": 8,
       "references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md",
         "registry-research-framework/discovery/etl-corpus-inventory.json",
         "research/evidence-atlas.md",
         "research/evidence-classes.json",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json",
-        "research/evidence-manifest.md"
+        "research/evidence-index.json"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "registry-research-framework/discovery/etl-corpus-inventory.json",
@@ -385,6 +430,8 @@
         "research/notes/thread-dpc-enable-vm-suite-20260324.md",
         "research/records/system.kernel-thread-dpc-enable.json"
       ],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "keep-pending-review"
     },
@@ -401,22 +448,24 @@
         "vm-batch-probe-20260320.json.",
         "vm-batch-probe-20260320.json..md"
       ],
-      "live_reference_count": 10,
-      "audit_reference_count": 2,
+      "live_reference_count": 12,
+      "audit_reference_count": 4,
       "blocking_reference_count": 8,
       "references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md",
         "research/evidence-atlas.md",
         "research/evidence-classes.json",
         "research/evidence-index.json",
-        "research/evidence-manifest.json",
-        "research/evidence-manifest.md",
-        "research/records/security.trusted-path-credential-prompting.review.json"
+        "research/evidence-manifest.json"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "research/evidence-atlas.md",
@@ -428,6 +477,8 @@
         "research/records/system.disable-auto-maintenance.review.json",
         "research/records/system.memory-large-system-cache-client.review.json"
       ],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "keep-pending-review"
     },
@@ -443,23 +494,29 @@
         "evidence/files/vm-tooling-staging/ghidra-probes",
         "ghidra-probes"
       ],
-      "live_reference_count": 4,
-      "audit_reference_count": 2,
+      "live_reference_count": 6,
+      "audit_reference_count": 4,
       "blocking_reference_count": 2,
       "references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md",
         "registry-research-framework/tools/run-path-aware-static-probe.ps1",
         "scripts/vm/run-ghidra-string-xref-probe.ps1"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "registry-research-framework/tools/run-path-aware-static-probe.ps1",
         "scripts/vm/run-ghidra-string-xref-probe.ps1"
       ],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "keep-pending-review"
     },
@@ -476,22 +533,24 @@
         "beep_start_toggle_out.txt",
         "evidence/files/vm-tooling-staging/beep_start_toggle_out.txt"
       ],
-      "live_reference_count": 11,
-      "audit_reference_count": 2,
+      "live_reference_count": 13,
+      "audit_reference_count": 4,
       "blocking_reference_count": 9,
       "references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md",
         "registry-research-framework/audit/promoted-app-qa-batch-20260512-live-14.json",
         "registry-research-framework/audit/promoted-app-qa-batch-20260512-live-5.json",
         "registry-research-framework/audit/promoted-app-qa-batch-latest.json",
-        "research/evidence-atlas.md",
-        "research/evidence-classes.json",
-        "research/evidence-index.json"
+        "research/evidence-atlas.md"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "registry-research-framework/audit/promoted-app-qa-batch-20260512-live-14.json",
@@ -503,13 +562,15 @@
         "research/evidence-manifest.json",
         "research/evidence-manifest.md"
       ],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "keep-pending-review"
     },
     {
       "path": "evidence/files/vm-tooling-staging/crossdevice_resume_probe.csv",
       "kind": "file",
-      "cleanup_status": "retained-live-reference",
+      "cleanup_status": "retained-audit-trail-reference",
       "category": "vm-tooling-staging-oldest-sample",
       "size_bytes": 44894268,
       "stale_reason": "staging diagnostic bundle duplicated by canonical evidence/raw artifact",
@@ -521,24 +582,24 @@
         "crossdevice_resume_probe.csv",
         "evidence/files/vm-tooling-staging/crossdevice_resume_probe.csv"
       ],
-      "live_reference_count": 13,
-      "audit_reference_count": 2,
-      "blocking_reference_count": 11,
+      "live_reference_count": 4,
+      "audit_reference_count": 4,
+      "blocking_reference_count": 0,
       "references_sample": [
-        "evidence/raw/procmon/privacy.disable-resume/crossdevice_resume_probe.csv",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
-        "registry-research-framework/audit/rejected-closure-ledger.json",
-        "research/evidence-atlas.md",
-        "research/evidence-classes.json",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json"
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
-      "blocking_references_sample": [
+      "blocking_references_sample": [],
+      "replacement_resolved_reference_count": 11,
+      "replacement_resolved_references_sample": [
         "evidence/raw/procmon/privacy.disable-resume/crossdevice_resume_probe.csv",
         "registry-research-framework/audit/rejected-closure-ledger.json",
         "research/evidence-atlas.md",
@@ -554,7 +615,7 @@
     {
       "path": "evidence/files/vm-tooling-staging/defender-enhanced-notifications-securitycenter-1-20260324-213118",
       "kind": "directory",
-      "cleanup_status": "retained-live-reference",
+      "cleanup_status": "retained-audit-trail-reference",
       "category": "vm-tooling-staging-oldest-sample",
       "size_bytes": 2502,
       "stale_reason": "staging diagnostic bundle duplicated by canonical evidence/raw artifact",
@@ -565,31 +626,26 @@
         "defender-enhanced-notifications-securitycenter-1-20260324-213118",
         "evidence/files/vm-tooling-staging/defender-enhanced-notifications-securitycenter-1-20260324-213118"
       ],
-      "live_reference_count": 9,
-      "audit_reference_count": 2,
-      "blocking_reference_count": 7,
+      "live_reference_count": 4,
+      "audit_reference_count": 4,
+      "blocking_reference_count": 0,
       "references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
-        "registry-research-framework/enrichment/enrichment-cache.jsonl",
-        "research/evidence-atlas.md",
-        "research/evidence-classes.json",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json",
-        "research/evidence-manifest.md"
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
-      "blocking_references_sample": [
-        "registry-research-framework/enrichment/enrichment-cache.jsonl",
+      "blocking_references_sample": [],
+      "replacement_resolved_reference_count": 2,
+      "replacement_resolved_references_sample": [
         "research/evidence-atlas.md",
-        "research/evidence-classes.json",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json",
-        "research/evidence-manifest.md",
-        "research/records/security.disable-enhanced-defender-notifications.review.json"
+        "research/evidence-manifest.md"
       ],
       "delete_eligible": false,
       "recommended_action": "delete-after-review"
@@ -597,7 +653,7 @@
     {
       "path": "evidence/files/vm-tooling-staging/defender-threat-file-hash-legacyroot-1-20260325-011845",
       "kind": "directory",
-      "cleanup_status": "retained-live-reference",
+      "cleanup_status": "retained-audit-trail-reference",
       "category": "vm-tooling-staging-oldest-sample",
       "size_bytes": 12140,
       "stale_reason": "staging diagnostic bundle duplicated by canonical evidence/raw artifact",
@@ -608,32 +664,26 @@
         "defender-threat-file-hash-legacyroot-1-20260325-011845",
         "evidence/files/vm-tooling-staging/defender-threat-file-hash-legacyroot-1-20260325-011845"
       ],
-      "live_reference_count": 10,
-      "audit_reference_count": 2,
-      "blocking_reference_count": 8,
+      "live_reference_count": 4,
+      "audit_reference_count": 4,
+      "blocking_reference_count": 0,
       "references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
-        "registry-research-framework/enrichment/enrichment-cache.jsonl",
-        "research/evidence-atlas.md",
-        "research/evidence-classes.json",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json",
-        "research/evidence-manifest.md"
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
-      "blocking_references_sample": [
-        "registry-research-framework/enrichment/enrichment-cache.jsonl",
+      "blocking_references_sample": [],
+      "replacement_resolved_reference_count": 2,
+      "replacement_resolved_references_sample": [
         "research/evidence-atlas.md",
-        "research/evidence-classes.json",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json",
-        "research/evidence-manifest.md",
-        "research/notes/security-threat-file-hash-logging-validation-20260325.md",
-        "research/records/security.threat-file-hash-logging.review.json"
+        "research/evidence-manifest.md"
       ],
       "delete_eligible": false,
       "recommended_action": "delete-after-review"
@@ -650,22 +700,24 @@
         "defender-threat-file-hash-mpengine-1-20260325-100039",
         "evidence/files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-20260325-100039"
       ],
-      "live_reference_count": 8,
-      "audit_reference_count": 2,
+      "live_reference_count": 10,
+      "audit_reference_count": 4,
       "blocking_reference_count": 6,
       "references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md",
         "research/evidence-atlas.md",
         "research/evidence-index.json",
         "research/evidence-manifest.json",
-        "research/evidence-manifest.md",
-        "research/notes/security-threat-file-hash-logging-validation-20260325.md",
-        "research/records/security.threat-file-hash-logging.review.json"
+        "research/evidence-manifest.md"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "research/evidence-atlas.md",
@@ -675,13 +727,15 @@
         "research/notes/security-threat-file-hash-logging-validation-20260325.md",
         "research/records/security.threat-file-hash-logging.review.json"
       ],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "keep-pending-review"
     },
     {
       "path": "evidence/files/vm-tooling-staging/defender-threat-file-hash-policymanager-1-20260325-012333",
       "kind": "directory",
-      "cleanup_status": "retained-live-reference",
+      "cleanup_status": "retained-audit-trail-reference",
       "category": "vm-tooling-staging-oldest-sample",
       "size_bytes": 13011,
       "stale_reason": "staging diagnostic bundle duplicated by canonical evidence/raw artifact",
@@ -692,28 +746,31 @@
         "defender-threat-file-hash-policymanager-1-20260325-012333",
         "evidence/files/vm-tooling-staging/defender-threat-file-hash-policymanager-1-20260325-012333"
       ],
-      "live_reference_count": 3,
-      "audit_reference_count": 2,
-      "blocking_reference_count": 1,
+      "live_reference_count": 4,
+      "audit_reference_count": 4,
+      "blocking_reference_count": 0,
       "references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
-        "research/notes/security-threat-file-hash-logging-validation-20260325.md"
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
-      "blocking_references_sample": [
-        "research/notes/security-threat-file-hash-logging-validation-20260325.md"
-      ],
+      "blocking_references_sample": [],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "delete-after-review"
     },
     {
       "path": "evidence/files/vm-tooling-staging/devmode_longpaths_probe.csv",
       "kind": "file",
-      "cleanup_status": "retained-live-reference",
+      "cleanup_status": "retained-audit-trail-reference",
       "category": "vm-tooling-staging-oldest-sample",
       "size_bytes": 713282,
       "stale_reason": "staging diagnostic bundle duplicated by canonical evidence/raw artifact",
@@ -725,24 +782,24 @@
         "devmode_longpaths_probe.csv",
         "evidence/files/vm-tooling-staging/devmode_longpaths_probe.csv"
       ],
-      "live_reference_count": 11,
-      "audit_reference_count": 2,
-      "blocking_reference_count": 9,
+      "live_reference_count": 4,
+      "audit_reference_count": 4,
+      "blocking_reference_count": 0,
       "references_sample": [
-        "evidence/files/missing/devmode-longpaths-probe-pml.md",
-        "evidence/raw/procmon/developer.enable-windows-long-paths/devmode-longpaths-probe-pml.md",
-        "evidence/raw/procmon/developer.enable-windows-long-paths/devmode_longpaths_probe.csv",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
-        "research/evidence-atlas.md",
-        "research/evidence-classes.json",
-        "research/evidence-index.json"
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
-      "blocking_references_sample": [
+      "blocking_references_sample": [],
+      "replacement_resolved_reference_count": 9,
+      "replacement_resolved_references_sample": [
         "evidence/files/missing/devmode-longpaths-probe-pml.md",
         "evidence/raw/procmon/developer.enable-windows-long-paths/devmode-longpaths-probe-pml.md",
         "evidence/raw/procmon/developer.enable-windows-long-paths/devmode_longpaths_probe.csv",
@@ -758,7 +815,7 @@
     {
       "path": "evidence/files/vm-tooling-staging/devmode_probe2.csv",
       "kind": "file",
-      "cleanup_status": "retained-live-reference",
+      "cleanup_status": "retained-audit-trail-reference",
       "category": "vm-tooling-staging-oldest-sample",
       "size_bytes": 1463100,
       "stale_reason": "staging diagnostic bundle duplicated by canonical evidence/raw artifact",
@@ -770,24 +827,24 @@
         "devmode_probe2.csv",
         "evidence/files/vm-tooling-staging/devmode_probe2.csv"
       ],
-      "live_reference_count": 12,
-      "audit_reference_count": 2,
-      "blocking_reference_count": 10,
+      "live_reference_count": 4,
+      "audit_reference_count": 4,
+      "blocking_reference_count": 0,
       "references_sample": [
-        "evidence/raw/procmon/developer.windows-dev-mode/devmode_probe2.csv",
-        "evidence/raw/procmon/developer.windows-dev-mode/devmode_probe2.txt",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
-        "research/evidence-atlas.md",
-        "research/evidence-classes.json",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json"
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
-      "blocking_references_sample": [
+      "blocking_references_sample": [],
+      "replacement_resolved_reference_count": 10,
+      "replacement_resolved_references_sample": [
         "evidence/raw/procmon/developer.windows-dev-mode/devmode_probe2.csv",
         "evidence/raw/procmon/developer.windows-dev-mode/devmode_probe2.txt",
         "research/evidence-atlas.md",
@@ -803,7 +860,7 @@
     {
       "path": "evidence/files/vm-tooling-staging/devmode_probe2.txt",
       "kind": "file",
-      "cleanup_status": "retained-live-reference",
+      "cleanup_status": "retained-audit-trail-reference",
       "category": "vm-tooling-staging-oldest-sample",
       "size_bytes": 765,
       "stale_reason": "staging diagnostic bundle duplicated by canonical evidence/raw artifact",
@@ -815,24 +872,24 @@
         "devmode_probe2.txt",
         "evidence/files/vm-tooling-staging/devmode_probe2.txt"
       ],
-      "live_reference_count": 12,
-      "audit_reference_count": 2,
-      "blocking_reference_count": 10,
+      "live_reference_count": 4,
+      "audit_reference_count": 4,
+      "blocking_reference_count": 0,
       "references_sample": [
-        "evidence/raw/procmon/developer.windows-dev-mode/devmode_probe2.csv",
-        "evidence/raw/procmon/developer.windows-dev-mode/devmode_probe2.txt",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
-        "research/evidence-atlas.md",
-        "research/evidence-classes.json",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json"
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
-      "blocking_references_sample": [
+      "blocking_references_sample": [],
+      "replacement_resolved_reference_count": 10,
+      "replacement_resolved_references_sample": [
         "evidence/raw/procmon/developer.windows-dev-mode/devmode_probe2.csv",
         "evidence/raw/procmon/developer.windows-dev-mode/devmode_probe2.txt",
         "research/evidence-atlas.md",
@@ -848,7 +905,7 @@
     {
       "path": "evidence/files/vm-tooling-staging/feedback_notifications_probe.txt",
       "kind": "file",
-      "cleanup_status": "retained-live-reference",
+      "cleanup_status": "retained-audit-trail-reference",
       "category": "vm-tooling-staging-oldest-sample",
       "size_bytes": 862,
       "stale_reason": "staging diagnostic bundle duplicated by canonical evidence/raw artifact",
@@ -860,24 +917,24 @@
         "feedback_notifications_probe",
         "feedback_notifications_probe.txt"
       ],
-      "live_reference_count": 8,
-      "audit_reference_count": 2,
-      "blocking_reference_count": 6,
+      "live_reference_count": 4,
+      "audit_reference_count": 4,
+      "blocking_reference_count": 0,
       "references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
-        "research/evidence-atlas.md",
-        "research/evidence-classes.json",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json",
-        "research/evidence-manifest.md",
-        "research/records/privacy.disable-feedback-notifications.json"
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
-      "blocking_references_sample": [
+      "blocking_references_sample": [],
+      "replacement_resolved_reference_count": 6,
+      "replacement_resolved_references_sample": [
         "research/evidence-atlas.md",
         "research/evidence-classes.json",
         "research/evidence-index.json",
@@ -891,7 +948,7 @@
     {
       "path": "evidence/files/vm-tooling-staging/gamemode_admin_probe.txt",
       "kind": "file",
-      "cleanup_status": "retained-live-reference",
+      "cleanup_status": "retained-audit-trail-reference",
       "category": "vm-tooling-staging-oldest-sample",
       "size_bytes": 454,
       "stale_reason": "staging diagnostic bundle duplicated by canonical evidence/raw artifact",
@@ -903,24 +960,24 @@
         "gamemode_admin_probe",
         "gamemode_admin_probe.txt"
       ],
-      "live_reference_count": 10,
-      "audit_reference_count": 2,
-      "blocking_reference_count": 8,
+      "live_reference_count": 4,
+      "audit_reference_count": 4,
+      "blocking_reference_count": 0,
       "references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
-        "registry-research-framework/enrichment/enrichment-cache.jsonl",
-        "registry-research-framework/queue/research-queue.json",
-        "research/evidence-atlas.md",
-        "research/evidence-classes.json",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json"
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
-      "blocking_references_sample": [
+      "blocking_references_sample": [],
+      "replacement_resolved_reference_count": 8,
+      "replacement_resolved_references_sample": [
         "registry-research-framework/enrichment/enrichment-cache.jsonl",
         "registry-research-framework/queue/research-queue.json",
         "research/evidence-atlas.md",
@@ -936,7 +993,7 @@
     {
       "path": "evidence/files/vm-tooling-staging/gamemode_admin_zero_probe.txt",
       "kind": "file",
-      "cleanup_status": "retained-live-reference",
+      "cleanup_status": "retained-audit-trail-reference",
       "category": "vm-tooling-staging-oldest-sample",
       "size_bytes": 454,
       "stale_reason": "staging diagnostic bundle duplicated by canonical evidence/raw artifact",
@@ -948,24 +1005,24 @@
         "gamemode_admin_zero_probe",
         "gamemode_admin_zero_probe.txt"
       ],
-      "live_reference_count": 9,
-      "audit_reference_count": 2,
-      "blocking_reference_count": 7,
+      "live_reference_count": 4,
+      "audit_reference_count": 4,
+      "blocking_reference_count": 0,
       "references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
-        "registry-research-framework/queue/research-queue.json",
-        "research/evidence-atlas.md",
-        "research/evidence-classes.json",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json",
-        "research/evidence-manifest.md"
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
-      "blocking_references_sample": [
+      "blocking_references_sample": [],
+      "replacement_resolved_reference_count": 7,
+      "replacement_resolved_references_sample": [
         "registry-research-framework/queue/research-queue.json",
         "research/evidence-atlas.md",
         "research/evidence-classes.json",
@@ -980,7 +1037,7 @@
     {
       "path": "evidence/files/vm-tooling-staging/ghidra_explorer_serialize.txt",
       "kind": "file",
-      "cleanup_status": "retained-live-reference",
+      "cleanup_status": "retained-audit-trail-reference",
       "category": "vm-tooling-staging-oldest-sample",
       "size_bytes": 40815,
       "stale_reason": "staging diagnostic bundle duplicated by canonical evidence/raw artifact",
@@ -992,24 +1049,24 @@
         "ghidra_explorer_serialize",
         "ghidra_explorer_serialize.txt"
       ],
-      "live_reference_count": 13,
-      "audit_reference_count": 2,
-      "blocking_reference_count": 11,
+      "live_reference_count": 4,
+      "audit_reference_count": 4,
+      "blocking_reference_count": 0,
       "references_sample": [
-        "evidence/records/system.disable-startup-delay/full-evidence.json",
-        "evidence/records/system.disable-startup-delay/static.json",
-        "evidence/records/system.disable-startup-delay/verdict.md",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
-        "registry-research-framework/enrichment/enrichment-cache.jsonl",
-        "research/evidence-atlas.md",
-        "research/evidence-audit.json"
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
-      "blocking_references_sample": [
+      "blocking_references_sample": [],
+      "replacement_resolved_reference_count": 11,
+      "replacement_resolved_references_sample": [
         "evidence/records/system.disable-startup-delay/full-evidence.json",
         "evidence/records/system.disable-startup-delay/static.json",
         "evidence/records/system.disable-startup-delay/verdict.md",
@@ -1035,22 +1092,24 @@
         "hags_toggle_out",
         "hags_toggle_out.txt"
       ],
-      "live_reference_count": 10,
-      "audit_reference_count": 2,
+      "live_reference_count": 12,
+      "audit_reference_count": 4,
       "blocking_reference_count": 8,
       "references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md",
         "registry-research-framework/enrichment/enrichment-cache.jsonl",
         "registry-research-framework/queue/research-queue.json",
         "research/evidence-atlas.md",
-        "research/evidence-classes.json",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json"
+        "research/evidence-classes.json"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "registry-research-framework/enrichment/enrichment-cache.jsonl",
@@ -1062,13 +1121,15 @@
         "research/evidence-manifest.md",
         "research/records/system.enable-hags.review.json"
       ],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "keep-pending-review"
     },
     {
       "path": "evidence/files/vm-tooling-staging/hideemptydrives-0-hits.csv",
       "kind": "file",
-      "cleanup_status": "retained-live-reference",
+      "cleanup_status": "retained-audit-trail-reference",
       "category": "vm-tooling-staging-oldest-sample",
       "size_bytes": 467,
       "stale_reason": "staging diagnostic bundle duplicated by canonical evidence/raw artifact",
@@ -1080,19 +1141,24 @@
         "hideemptydrives-0-hits",
         "hideemptydrives-0-hits.csv"
       ],
-      "live_reference_count": 3,
-      "audit_reference_count": 2,
-      "blocking_reference_count": 1,
+      "live_reference_count": 4,
+      "audit_reference_count": 4,
+      "blocking_reference_count": 0,
       "references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
-        "research/notes/explorer-hide-empty-drives-validation-20260324.md"
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
-      "blocking_references_sample": [
+      "blocking_references_sample": [],
+      "replacement_resolved_reference_count": 1,
+      "replacement_resolved_references_sample": [
         "research/notes/explorer-hide-empty-drives-validation-20260324.md"
       ],
       "delete_eligible": false,
@@ -1101,7 +1167,7 @@
     {
       "path": "evidence/files/vm-tooling-staging/hideemptydrives-1-hits.csv",
       "kind": "file",
-      "cleanup_status": "retained-live-reference",
+      "cleanup_status": "retained-audit-trail-reference",
       "category": "vm-tooling-staging-oldest-sample",
       "size_bytes": 467,
       "stale_reason": "staging diagnostic bundle duplicated by canonical evidence/raw artifact",
@@ -1113,19 +1179,24 @@
         "hideemptydrives-1-hits",
         "hideemptydrives-1-hits.csv"
       ],
-      "live_reference_count": 3,
-      "audit_reference_count": 2,
-      "blocking_reference_count": 1,
+      "live_reference_count": 4,
+      "audit_reference_count": 4,
+      "blocking_reference_count": 0,
       "references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
-        "research/notes/explorer-hide-empty-drives-validation-20260324.md"
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
-      "blocking_references_sample": [
+      "blocking_references_sample": [],
+      "replacement_resolved_reference_count": 1,
+      "replacement_resolved_references_sample": [
         "research/notes/explorer-hide-empty-drives-validation-20260324.md"
       ],
       "delete_eligible": false,
@@ -1134,7 +1205,7 @@
     {
       "path": "evidence/files/vm-tooling-staging/hideemptydrives-result.txt",
       "kind": "file",
-      "cleanup_status": "retained-live-reference",
+      "cleanup_status": "retained-audit-trail-reference",
       "category": "vm-tooling-staging-oldest-sample",
       "size_bytes": 933,
       "stale_reason": "staging diagnostic bundle duplicated by canonical evidence/raw artifact",
@@ -1146,24 +1217,24 @@
         "hideemptydrives-result",
         "hideemptydrives-result.txt"
       ],
-      "live_reference_count": 10,
-      "audit_reference_count": 2,
-      "blocking_reference_count": 8,
+      "live_reference_count": 4,
+      "audit_reference_count": 4,
+      "blocking_reference_count": 0,
       "references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
-        "registry-research-framework/enrichment/enrichment-cache.jsonl",
-        "research/evidence-atlas.md",
-        "research/evidence-classes.json",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json",
-        "research/evidence-manifest.md"
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
-      "blocking_references_sample": [
+      "blocking_references_sample": [],
+      "replacement_resolved_reference_count": 8,
+      "replacement_resolved_references_sample": [
         "registry-research-framework/enrichment/enrichment-cache.jsonl",
         "research/evidence-atlas.md",
         "research/evidence-classes.json",
@@ -1179,7 +1250,7 @@
     {
       "path": "evidence/files/vm-tooling-staging/iconsonly-0-hits.csv",
       "kind": "file",
-      "cleanup_status": "retained-live-reference",
+      "cleanup_status": "retained-audit-trail-reference",
       "category": "vm-tooling-staging-oldest-sample",
       "size_bytes": 811,
       "stale_reason": "staging diagnostic bundle duplicated by canonical evidence/raw artifact",
@@ -1191,19 +1262,24 @@
         "iconsonly-0-hits",
         "iconsonly-0-hits.csv"
       ],
-      "live_reference_count": 3,
-      "audit_reference_count": 2,
-      "blocking_reference_count": 1,
+      "live_reference_count": 4,
+      "audit_reference_count": 4,
+      "blocking_reference_count": 0,
       "references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
-        "research/notes/explorer-always-show-icons-never-thumbnails-validation-20260324.md"
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
-      "blocking_references_sample": [
+      "blocking_references_sample": [],
+      "replacement_resolved_reference_count": 1,
+      "replacement_resolved_references_sample": [
         "research/notes/explorer-always-show-icons-never-thumbnails-validation-20260324.md"
       ],
       "delete_eligible": false,
@@ -1222,22 +1298,24 @@
         "appcompat-policy-bundle-procmon.pml",
         "evidence/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml"
       ],
-      "live_reference_count": 11,
-      "audit_reference_count": 2,
+      "live_reference_count": 13,
+      "audit_reference_count": 4,
       "blocking_reference_count": 9,
       "references_sample": [
         "evidence/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.csv",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md",
         "research/evidence-atlas.md",
         "research/evidence-classes.json",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json",
-        "research/evidence-manifest.md"
+        "research/evidence-index.json"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "evidence/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.csv",
@@ -1249,6 +1327,8 @@
         "research/records/privacy.disable-appcompat-engine.policy.review.json",
         "research/records/privacy.disable-switchback.policy.review.json"
       ],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "keep-pending-review"
     },
@@ -1265,8 +1345,8 @@
         "appdeviceinventory-policy-procmon.pml",
         "evidence/raw/procmon/privacy.disable-appdeviceinventory.policy/appdeviceinventory-policy-procmon.pml"
       ],
-      "live_reference_count": 12,
-      "audit_reference_count": 2,
+      "live_reference_count": 14,
+      "audit_reference_count": 4,
       "blocking_reference_count": 10,
       "references_sample": [
         "evidence/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.csv",
@@ -1274,13 +1354,15 @@
         "evidence/raw/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.csv",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
-        "research/evidence-atlas.md",
-        "research/evidence-classes.json",
-        "research/evidence-index.json"
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md",
+        "research/evidence-atlas.md"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "evidence/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.csv",
@@ -1292,6 +1374,8 @@
         "research/evidence-manifest.json",
         "research/evidence-manifest.md"
       ],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "keep-pending-review"
     },
@@ -1308,22 +1392,24 @@
         "disable-pca-policy-procmon.pml",
         "evidence/raw/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.pml"
       ],
-      "live_reference_count": 11,
-      "audit_reference_count": 2,
+      "live_reference_count": 13,
+      "audit_reference_count": 4,
       "blocking_reference_count": 9,
       "references_sample": [
         "evidence/raw/procmon/privacy.disable-appdeviceinventory.policy/appdeviceinventory-policy-procmon.csv",
         "evidence/raw/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.csv",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md",
         "research/evidence-atlas.md",
-        "research/evidence-classes.json",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json"
+        "research/evidence-classes.json"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "evidence/raw/procmon/privacy.disable-appdeviceinventory.policy/appdeviceinventory-policy-procmon.csv",
@@ -1335,6 +1421,8 @@
         "research/evidence-manifest.md",
         "research/records/privacy.disable-program-compatibility-assistant.review.json"
       ],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "keep-pending-review"
     },
@@ -1351,8 +1439,8 @@
         "system.reliability-timestamp-enabled-etw-20260424e",
         "system.reliability-timestamp-enabled-etw-20260424e.etl"
       ],
-      "live_reference_count": 12,
-      "audit_reference_count": 2,
+      "live_reference_count": 14,
+      "audit_reference_count": 4,
       "blocking_reference_count": 10,
       "references_sample": [
         "evidence/captures/system-reliability-timestamp-enabled-etw-stackwalk-20260424.json",
@@ -1361,12 +1449,14 @@
         "evidence/raw/etw-stackwalk/system.reliability-timestamp-enabled-etw-20260424e/system.reliability-timestamp-enabled-etw-20260424e-summary.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
-        "research/evidence-atlas.md",
-        "research/evidence-classes.json"
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "evidence/captures/system-reliability-timestamp-enabled-etw-stackwalk-20260424.json",
@@ -1378,6 +1468,8 @@
         "research/evidence-index.json",
         "research/evidence-manifest.json"
       ],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "keep-pending-review"
     },
@@ -1394,8 +1486,8 @@
         "system-io-allow-remote-dasd-etw-20260424",
         "system-io-allow-remote-dasd-etw-20260424.etl"
       ],
-      "live_reference_count": 12,
-      "audit_reference_count": 2,
+      "live_reference_count": 14,
+      "audit_reference_count": 4,
       "blocking_reference_count": 10,
       "references_sample": [
         "evidence/captures/system-io-allow-remote-dasd-etw-stackwalk-20260424.json",
@@ -1404,12 +1496,14 @@
         "evidence/raw/etw-stackwalk/system-kernel-dpc-watchdog-period-etw-20260424/system-kernel-dpc-watchdog-period-etw-20260424-summary.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
-        "registry-research-framework/audit/rejected-closure-ledger.json",
-        "research/evidence-atlas.md"
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "evidence/captures/system-io-allow-remote-dasd-etw-stackwalk-20260424.json",
@@ -1421,6 +1515,8 @@
         "research/evidence-index.json",
         "research/evidence-manifest.json"
       ],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "keep-pending-review"
     },
@@ -1437,8 +1533,8 @@
         "power-watchdog-po-callout-timeout-msec-etw-stackwalk-skiptracerpt-20260423",
         "power-watchdog-po-callout-timeout-msec-etw-stackwalk-skiptracerpt-20260423.etl"
       ],
-      "live_reference_count": 11,
-      "audit_reference_count": 2,
+      "live_reference_count": 13,
+      "audit_reference_count": 4,
       "blocking_reference_count": 9,
       "references_sample": [
         "evidence/captures/power-watchdog-po-callout-timeout-msec-etw-stackwalk-20260423.json",
@@ -1446,13 +1542,15 @@
         "evidence/raw/etw-stackwalk/power-watchdog-po-callout-timeout-msec-etw-stackwalk-skiptracerpt-20260423/power-watchdog-po-callout-timeout-msec-etw-stackwalk-skiptracerpt-20260423-summary.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
-        "registry-research-framework/audit/rejected-closure-ledger.json",
-        "research/evidence-classes.json",
-        "research/evidence-index.json"
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md",
+        "registry-research-framework/audit/rejected-closure-ledger.json"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "evidence/captures/power-watchdog-po-callout-timeout-msec-etw-stackwalk-20260423.json",
@@ -1464,6 +1562,8 @@
         "research/evidence-manifest.json",
         "research/evidence-manifest.md"
       ],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "keep-pending-review"
     },
@@ -1480,8 +1580,8 @@
         "timer-check-flags-etw-stackwalk-quoted-20260423",
         "timer-check-flags-etw-stackwalk-quoted-20260423.etl"
       ],
-      "live_reference_count": 10,
-      "audit_reference_count": 2,
+      "live_reference_count": 12,
+      "audit_reference_count": 4,
       "blocking_reference_count": 8,
       "references_sample": [
         "evidence/captures/timer-check-flags-etw-stackwalk-20260423.json",
@@ -1489,13 +1589,15 @@
         "evidence/raw/etw-stackwalk/timer-check-flags-etw-stackwalk-quoted-20260423/timer-check-flags-etw-stackwalk-quoted-20260423-summary.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
-        "registry-research-framework/audit/rejected-closure-ledger.json",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json"
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md",
+        "registry-research-framework/audit/rejected-closure-ledger.json"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "evidence/captures/timer-check-flags-etw-stackwalk-20260423.json",
@@ -1507,6 +1609,8 @@
         "research/evidence-manifest.md",
         "research/records/system.kernel.timer-check-flags.json"
       ],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "keep-pending-review"
     },
@@ -1523,22 +1627,24 @@
         "wave4-allow-audio-e2e",
         "wave4-allow-audio-e2e.etl"
       ],
-      "live_reference_count": 53,
-      "audit_reference_count": 2,
+      "live_reference_count": 55,
+      "audit_reference_count": 4,
       "blocking_reference_count": 51,
       "references_sample": [
         "evidence/raw/etw-stackwalk/wave4-allow-audio-e2e/normalized-registry-bundle.json",
         "evidence/raw/etw-stackwalk/wave4-allow-audio-e2e/wave4-allow-audio-e2e-summary.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md",
         "registry-research-framework/audit/etw-stackwalk-dispatch-batch.json",
-        "registry-research-framework/audit/etw-stackwalk-dispatch-batch.md",
-        "registry-research-framework/audit/etw-stackwalk-execution-manifest.json",
-        "registry-research-framework/audit/etw-stackwalk-execution-manifest.md"
+        "registry-research-framework/audit/etw-stackwalk-dispatch-batch.md"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "evidence/raw/etw-stackwalk/wave4-allow-audio-e2e/normalized-registry-bundle.json",
@@ -1550,6 +1656,8 @@
         "registry-research-framework/audit/etw-stackwalk-execution-pack.json",
         "registry-research-framework/audit/etw-stackwalk-execution-pack/manifests/etw-stackwalk-dispatch-batch.json"
       ],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "keep-pending-review"
     },
@@ -1566,8 +1674,8 @@
         "system.executive-uuid-sequence-number-etw-20260424e",
         "system.executive-uuid-sequence-number-etw-20260424e.etl"
       ],
-      "live_reference_count": 11,
-      "audit_reference_count": 2,
+      "live_reference_count": 13,
+      "audit_reference_count": 4,
       "blocking_reference_count": 9,
       "references_sample": [
         "evidence/captures/system-executive-uuid-sequence-number-etw-stackwalk-20260424.json",
@@ -1576,12 +1684,14 @@
         "evidence/raw/etw-stackwalk/system.executive-uuid-sequence-number-etw-20260424e/system.executive-uuid-sequence-number-etw-20260424e-summary.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
-        "research/evidence-atlas.md",
-        "research/evidence-index.json"
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "evidence/captures/system-executive-uuid-sequence-number-etw-stackwalk-20260424.json",
@@ -1593,6 +1703,8 @@
         "research/evidence-manifest.json",
         "research/evidence-manifest.md"
       ],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "keep-pending-review"
     },
@@ -1609,8 +1721,8 @@
         "dpc-watchdog-profile-single-dpc-threshold-etw-stackwalk-quoted-20260423.etl",
         "evidence/raw/etw-stackwalk/dpc-watchdog-profile-single-dpc-threshold-etw-stackwalk-quoted-20260423/dpc-watchdog-profile-single-dpc-threshold-etw-stackwalk-quoted-20260423.etl"
       ],
-      "live_reference_count": 10,
-      "audit_reference_count": 2,
+      "live_reference_count": 12,
+      "audit_reference_count": 4,
       "blocking_reference_count": 8,
       "references_sample": [
         "evidence/captures/dpc-watchdog-profile-single-dpc-threshold-etw-stackwalk-20260423.json",
@@ -1618,13 +1730,15 @@
         "evidence/raw/etw-stackwalk/dpc-watchdog-profile-single-dpc-threshold-etw-stackwalk-quoted-20260423/normalized-registry-bundle.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
-        "registry-research-framework/audit/rejected-closure-ledger.json",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json"
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md",
+        "registry-research-framework/audit/rejected-closure-ledger.json"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "evidence/captures/dpc-watchdog-profile-single-dpc-threshold-etw-stackwalk-20260423.json",
@@ -1636,6 +1750,8 @@
         "research/evidence-manifest.md",
         "research/records/system.kernel-dpc-watchdog-profile-cluster.json"
       ],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "keep-pending-review"
     },
@@ -1652,8 +1768,8 @@
         "long-dpc-queue-threshold-etw-stackwalk-quoted-20260423",
         "long-dpc-queue-threshold-etw-stackwalk-quoted-20260423.etl"
       ],
-      "live_reference_count": 10,
-      "audit_reference_count": 2,
+      "live_reference_count": 12,
+      "audit_reference_count": 4,
       "blocking_reference_count": 8,
       "references_sample": [
         "evidence/captures/long-dpc-queue-threshold-etw-stackwalk-20260423.json",
@@ -1661,13 +1777,15 @@
         "evidence/raw/etw-stackwalk/long-dpc-queue-threshold-etw-stackwalk-quoted-20260423/normalized-registry-bundle.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
-        "registry-research-framework/audit/rejected-closure-ledger.json",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json"
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md",
+        "registry-research-framework/audit/rejected-closure-ledger.json"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "evidence/captures/long-dpc-queue-threshold-etw-stackwalk-20260423.json",
@@ -1679,6 +1797,8 @@
         "research/evidence-manifest.md",
         "research/records/system.kernel-long-dpc-threshold-cluster.json"
       ],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "keep-pending-review"
     },
@@ -1695,8 +1815,8 @@
         "win32k-callout-watchdog-timeout-seconds-etw-stackwalk-skiptracerpt-20260423",
         "win32k-callout-watchdog-timeout-seconds-etw-stackwalk-skiptracerpt-20260423.etl"
       ],
-      "live_reference_count": 10,
-      "audit_reference_count": 2,
+      "live_reference_count": 12,
+      "audit_reference_count": 4,
       "blocking_reference_count": 8,
       "references_sample": [
         "evidence/captures/win32k-callout-watchdog-timeout-seconds-etw-stackwalk-20260423.json",
@@ -1704,13 +1824,15 @@
         "evidence/raw/etw-stackwalk/win32k-callout-watchdog-timeout-seconds-etw-stackwalk-skiptracerpt-20260423/win32k-callout-watchdog-timeout-seconds-etw-stackwalk-skiptracerpt-20260423-summary.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
-        "registry-research-framework/audit/rejected-closure-ledger.json",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json"
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md",
+        "registry-research-framework/audit/rejected-closure-ledger.json"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "evidence/captures/win32k-callout-watchdog-timeout-seconds-etw-stackwalk-20260423.json",
@@ -1722,6 +1844,8 @@
         "research/evidence-manifest.md",
         "research/records/power.control.win32k-callout-watchdog-timeout-seconds.json"
       ],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "keep-pending-review"
     },
@@ -1738,8 +1862,8 @@
         "watchdog-resume-timeout-etw-stackwalk-skiptracerpt-20260423",
         "watchdog-resume-timeout-etw-stackwalk-skiptracerpt-20260423.etl"
       ],
-      "live_reference_count": 11,
-      "audit_reference_count": 2,
+      "live_reference_count": 13,
+      "audit_reference_count": 4,
       "blocking_reference_count": 9,
       "references_sample": [
         "evidence/captures/watchdog-resume-timeout-etw-stackwalk-20260423.json",
@@ -1747,13 +1871,15 @@
         "evidence/raw/etw-stackwalk/watchdog-resume-timeout-etw-stackwalk-skiptracerpt-20260423/watchdog-resume-timeout-etw-stackwalk-skiptracerpt-20260423-summary.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
-        "registry-research-framework/audit/rejected-closure-ledger.json",
-        "research/evidence-atlas.md",
-        "research/evidence-index.json"
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md",
+        "registry-research-framework/audit/rejected-closure-ledger.json"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "evidence/captures/watchdog-resume-timeout-etw-stackwalk-20260423.json",
@@ -1765,6 +1891,8 @@
         "research/evidence-manifest.json",
         "research/evidence-manifest.md"
       ],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "keep-pending-review"
     },
@@ -1781,8 +1909,8 @@
         "long-dpc-runtime-threshold-etw-stackwalk-quoted-20260423",
         "long-dpc-runtime-threshold-etw-stackwalk-quoted-20260423.etl"
       ],
-      "live_reference_count": 10,
-      "audit_reference_count": 2,
+      "live_reference_count": 12,
+      "audit_reference_count": 4,
       "blocking_reference_count": 8,
       "references_sample": [
         "evidence/captures/long-dpc-runtime-threshold-etw-stackwalk-20260423.json",
@@ -1790,13 +1918,15 @@
         "evidence/raw/etw-stackwalk/long-dpc-runtime-threshold-etw-stackwalk-quoted-20260423/normalized-registry-bundle.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
-        "registry-research-framework/audit/rejected-closure-ledger.json",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json"
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md",
+        "registry-research-framework/audit/rejected-closure-ledger.json"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "evidence/captures/long-dpc-runtime-threshold-etw-stackwalk-20260423.json",
@@ -1808,6 +1938,8 @@
         "research/evidence-manifest.md",
         "research/records/system.kernel-long-dpc-threshold-cluster.json"
       ],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "keep-pending-review"
     },
@@ -1824,8 +1956,8 @@
         "global-timer-resolution-requests-etw-stackwalk-quoted-20260423",
         "global-timer-resolution-requests-etw-stackwalk-quoted-20260423.etl"
       ],
-      "live_reference_count": 10,
-      "audit_reference_count": 2,
+      "live_reference_count": 12,
+      "audit_reference_count": 4,
       "blocking_reference_count": 8,
       "references_sample": [
         "evidence/captures/global-timer-resolution-requests-etw-stackwalk-20260423.json",
@@ -1833,13 +1965,15 @@
         "evidence/raw/etw-stackwalk/global-timer-resolution-requests-etw-stackwalk-quoted-20260423/normalized-registry-bundle.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
-        "registry-research-framework/audit/rejected-closure-ledger.json",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json"
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md",
+        "registry-research-framework/audit/rejected-closure-ledger.json"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "evidence/captures/global-timer-resolution-requests-etw-stackwalk-20260423.json",
@@ -1851,6 +1985,8 @@
         "research/evidence-manifest.md",
         "research/records/system.kernel.global-timer-resolution-requests.json"
       ],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "keep-pending-review"
     },
@@ -1867,8 +2003,8 @@
         "force-bugcheck-dpc-watchdog-etw-stackwalk-quoted-20260423",
         "force-bugcheck-dpc-watchdog-etw-stackwalk-quoted-20260423.etl"
       ],
-      "live_reference_count": 10,
-      "audit_reference_count": 2,
+      "live_reference_count": 12,
+      "audit_reference_count": 4,
       "blocking_reference_count": 8,
       "references_sample": [
         "evidence/captures/force-bugcheck-dpc-watchdog-etw-stackwalk-20260423.json",
@@ -1876,13 +2012,15 @@
         "evidence/raw/etw-stackwalk/force-bugcheck-dpc-watchdog-etw-stackwalk-quoted-20260423/normalized-registry-bundle.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
-        "registry-research-framework/audit/rejected-closure-ledger.json",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json"
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md",
+        "registry-research-framework/audit/rejected-closure-ledger.json"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "evidence/captures/force-bugcheck-dpc-watchdog-etw-stackwalk-20260423.json",
@@ -1894,6 +2032,8 @@
         "research/evidence-manifest.md",
         "research/records/system.kernel.force-bugcheck-for-dpc-watchdog.json"
       ],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "keep-pending-review"
     },
@@ -1910,8 +2050,8 @@
         "dpc-watchdog-profile-offset-etw-stackwalk-quoted-20260423.etl",
         "evidence/raw/etw-stackwalk/dpc-watchdog-profile-offset-etw-stackwalk-quoted-20260423/dpc-watchdog-profile-offset-etw-stackwalk-quoted-20260423.etl"
       ],
-      "live_reference_count": 10,
-      "audit_reference_count": 2,
+      "live_reference_count": 12,
+      "audit_reference_count": 4,
       "blocking_reference_count": 8,
       "references_sample": [
         "evidence/captures/dpc-watchdog-profile-offset-etw-stackwalk-20260423.json",
@@ -1919,13 +2059,15 @@
         "evidence/raw/etw-stackwalk/dpc-watchdog-profile-offset-etw-stackwalk-quoted-20260423/normalized-registry-bundle.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
-        "registry-research-framework/audit/rejected-closure-ledger.json",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json"
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md",
+        "registry-research-framework/audit/rejected-closure-ledger.json"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "evidence/captures/dpc-watchdog-profile-offset-etw-stackwalk-20260423.json",
@@ -1937,6 +2079,8 @@
         "research/evidence-manifest.md",
         "research/records/system.kernel-dpc-watchdog-profile-cluster.json"
       ],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "keep-pending-review"
     },
@@ -1953,25 +2097,31 @@
         "wave4-timercheckflags-e2e",
         "wave4-timercheckflags-e2e.etl"
       ],
-      "live_reference_count": 5,
-      "audit_reference_count": 2,
+      "live_reference_count": 7,
+      "audit_reference_count": 4,
       "blocking_reference_count": 3,
       "references_sample": [
         "evidence/raw/etw-stackwalk/wave4-timercheckflags-e2e/normalized-registry-bundle.json",
         "evidence/raw/etw-stackwalk/wave4-timercheckflags-e2e/wave4-timercheckflags-e2e-summary.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md",
         "registry-research-framework/queue/ghidra-autotrigger-inputs.json"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "evidence/raw/etw-stackwalk/wave4-timercheckflags-e2e/normalized-registry-bundle.json",
         "evidence/raw/etw-stackwalk/wave4-timercheckflags-e2e/wave4-timercheckflags-e2e-summary.json",
         "registry-research-framework/queue/ghidra-autotrigger-inputs.json"
       ],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "keep-pending-review"
     },
@@ -1988,8 +2138,8 @@
         "system.kernel-serialize-timer-expiration-etw-20260424e",
         "system.kernel-serialize-timer-expiration-etw-20260424e.etl"
       ],
-      "live_reference_count": 15,
-      "audit_reference_count": 2,
+      "live_reference_count": 17,
+      "audit_reference_count": 4,
       "blocking_reference_count": 13,
       "references_sample": [
         "evidence/captures/system-kernel-serialize-timer-expiration-etw-stackwalk-20260424.json",
@@ -1998,12 +2148,14 @@
         "evidence/raw/etw-stackwalk/system.kernel-serialize-timer-expiration-etw-20260424e/system.kernel-serialize-timer-expiration-etw-20260424e-summary.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
-        "registry-research-framework/audit/rejected-closure-ledger.json",
-        "research/evidence-atlas.md"
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "evidence/captures/system-kernel-serialize-timer-expiration-etw-stackwalk-20260424.json",
@@ -2015,6 +2167,8 @@
         "research/evidence-classes.json",
         "research/evidence-index.json"
       ],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "keep-pending-review"
     },
@@ -2031,8 +2185,8 @@
         "power.control.ttm-enabled-etw-20260424e",
         "power.control.ttm-enabled-etw-20260424e.etl"
       ],
-      "live_reference_count": 12,
-      "audit_reference_count": 2,
+      "live_reference_count": 14,
+      "audit_reference_count": 4,
       "blocking_reference_count": 10,
       "references_sample": [
         "evidence/captures/power-control-ttm-enabled-etw-stackwalk-20260424.json",
@@ -2041,12 +2195,14 @@
         "evidence/raw/etw-stackwalk/power.control.ttm-enabled-etw-20260424e/power.control.ttm-enabled-etw-20260424e-summary.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
-        "registry-research-framework/audit/rejected-closure-ledger.json",
-        "research/evidence-classes.json"
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "evidence/captures/power-control-ttm-enabled-etw-stackwalk-20260424.json",
@@ -2058,6 +2214,8 @@
         "research/evidence-index.json",
         "research/evidence-manifest.json"
       ],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "keep-pending-review"
     },
@@ -2074,8 +2232,8 @@
         "power-request-override-callstack-20260423",
         "power-request-override-callstack-20260423.etl"
       ],
-      "live_reference_count": 10,
-      "audit_reference_count": 2,
+      "live_reference_count": 12,
+      "audit_reference_count": 4,
       "blocking_reference_count": 8,
       "references_sample": [
         "evidence/captures/power-request-override-callstack-20260423.json",
@@ -2083,13 +2241,15 @@
         "evidence/raw/etw-stackwalk/power-request-override-callstack-20260423/power-request-override-callstack-20260423-summary.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
-        "registry-research-framework/audit/rejected-closure-ledger.json",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json"
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md",
+        "registry-research-framework/audit/rejected-closure-ledger.json"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "evidence/captures/power-request-override-callstack-20260423.json",
@@ -2101,6 +2261,8 @@
         "research/evidence-manifest.md",
         "research/records/power.control.power-request-override-subtree.json"
       ],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "keep-pending-review"
     },
@@ -2117,8 +2279,8 @@
         "power-disable-cpu-idle-states-etw-20260424-main",
         "power-disable-cpu-idle-states-etw-20260424-main.etl"
       ],
-      "live_reference_count": 11,
-      "audit_reference_count": 2,
+      "live_reference_count": 13,
+      "audit_reference_count": 4,
       "blocking_reference_count": 9,
       "references_sample": [
         "evidence/captures/power-disable-cpu-idle-states-etw-events-20260424.json",
@@ -2127,12 +2289,14 @@
         "evidence/raw/etw-stackwalk/power-disable-cpu-idle-states-etw-20260424-main/power-disable-cpu-idle-states-etw-20260424-main-summary.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
-        "research/evidence-atlas.md",
-        "research/evidence-index.json"
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "evidence/captures/power-disable-cpu-idle-states-etw-events-20260424.json",
@@ -2144,6 +2308,8 @@
         "research/evidence-manifest.json",
         "research/evidence-manifest.md"
       ],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "keep-pending-review"
     },
@@ -2160,8 +2326,8 @@
         "audio.show-hidden-devices-etw-20260424e.etl",
         "evidence/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/audio.show-hidden-devices-etw-20260424e.etl"
       ],
-      "live_reference_count": 12,
-      "audit_reference_count": 2,
+      "live_reference_count": 14,
+      "audit_reference_count": 4,
       "blocking_reference_count": 10,
       "references_sample": [
         "evidence/captures/audio-show-hidden-devices-etw-stackwalk-20260424.json",
@@ -2170,12 +2336,14 @@
         "evidence/raw/etw-stackwalk/audio.show-hidden-devices-etw-20260424e/normalized-registry-bundle.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
-        "research/evidence-atlas.md",
-        "research/evidence-classes.json"
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "evidence/captures/audio-show-hidden-devices-etw-stackwalk-20260424.json",
@@ -2187,6 +2355,8 @@
         "research/evidence-index.json",
         "research/evidence-manifest.json"
       ],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "keep-pending-review"
     },
@@ -2203,22 +2373,24 @@
         "wave4-allow-system-required-e2e",
         "wave4-allow-system-required-e2e.etl"
       ],
-      "live_reference_count": 55,
-      "audit_reference_count": 2,
+      "live_reference_count": 57,
+      "audit_reference_count": 4,
       "blocking_reference_count": 53,
       "references_sample": [
         "evidence/raw/etw-stackwalk/wave4-allow-system-required-e2e/normalized-registry-bundle.json",
         "evidence/raw/etw-stackwalk/wave4-allow-system-required-e2e/wave4-allow-system-required-e2e-summary.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md",
         "registry-research-framework/audit/etw-stackwalk-capture-plan-check.json",
-        "registry-research-framework/audit/etw-stackwalk-capture-plan-check.md",
-        "registry-research-framework/audit/etw-stackwalk-capture-plan.json",
-        "registry-research-framework/audit/etw-stackwalk-capture-plan.md"
+        "registry-research-framework/audit/etw-stackwalk-capture-plan-check.md"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "evidence/raw/etw-stackwalk/wave4-allow-system-required-e2e/normalized-registry-bundle.json",
@@ -2230,6 +2402,8 @@
         "registry-research-framework/audit/etw-stackwalk-dispatch-batch.json",
         "registry-research-framework/audit/etw-stackwalk-dispatch-batch.md"
       ],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "keep-pending-review"
     },
@@ -2246,22 +2420,24 @@
         "timer-check-flags-etw-stackwalk-20260418",
         "timer-check-flags-etw-stackwalk-20260418.etl"
       ],
-      "live_reference_count": 12,
-      "audit_reference_count": 2,
+      "live_reference_count": 14,
+      "audit_reference_count": 4,
       "blocking_reference_count": 10,
       "references_sample": [
         "evidence/raw/etw-stackwalk/timer-check-flags-etw-stackwalk-20260418/normalized-registry-bundle.json",
         "evidence/raw/etw-stackwalk/timer-check-flags-etw-stackwalk-20260418/timer-check-flags-etw-stackwalk-20260418-summary.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md",
         "registry-research-framework/audit/operator-regadd-inventory-20260508-repo.json",
-        "registry-research-framework/audit/rejected-closure-ledger.json",
-        "registry-research-framework/audit/system-kernel-timer-check-flags-etw-stackwalk-20260418.json",
-        "research/evidence-index.json"
+        "registry-research-framework/audit/rejected-closure-ledger.json"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "evidence/raw/etw-stackwalk/timer-check-flags-etw-stackwalk-20260418/normalized-registry-bundle.json",
@@ -2273,6 +2449,8 @@
         "research/evidence-manifest.json",
         "research/evidence-manifest.md"
       ],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "keep-pending-review"
     },
@@ -2289,21 +2467,27 @@
         "etw-stackwalk-reopen-baseline-archive-check.json",
         "registry-research-framework/audit/etw-stackwalk-reopen-baseline-archive-check.json"
       ],
-      "live_reference_count": 3,
-      "audit_reference_count": 2,
+      "live_reference_count": 5,
+      "audit_reference_count": 4,
       "blocking_reference_count": 1,
       "references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md",
         "registry-research-framework/scripts/check_etw_stackwalk_reopen_baseline_archive.py"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "registry-research-framework/scripts/check_etw_stackwalk_reopen_baseline_archive.py"
       ],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "keep-pending-review"
     },
@@ -2320,21 +2504,27 @@
         "etw-stackwalk-reopen-baseline-archive-check.md",
         "registry-research-framework/audit/etw-stackwalk-reopen-baseline-archive-check.md"
       ],
-      "live_reference_count": 3,
-      "audit_reference_count": 2,
+      "live_reference_count": 5,
+      "audit_reference_count": 4,
       "blocking_reference_count": 1,
       "references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md",
         "registry-research-framework/scripts/check_etw_stackwalk_reopen_baseline_archive.py"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "registry-research-framework/scripts/check_etw_stackwalk_reopen_baseline_archive.py"
       ],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "keep-pending-review"
     },
@@ -2351,22 +2541,24 @@
         "etw-stackwalk-reopen-baseline-archive.json",
         "registry-research-framework/audit/etw-stackwalk-reopen-baseline-archive.json"
       ],
-      "live_reference_count": 20,
-      "audit_reference_count": 2,
+      "live_reference_count": 22,
+      "audit_reference_count": 4,
       "blocking_reference_count": 18,
       "references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md",
         "registry-research-framework/audit/etw-stackwalk-reopen-baseline-archive/README.md",
         "registry-research-framework/audit/etw-stackwalk-reopen-baseline-archive/commands/01-promote-previous-snapshot.txt",
         "registry-research-framework/audit/etw-stackwalk-reopen-history-archive/CHECKSUMS.json",
-        "registry-research-framework/audit/etw-stackwalk-reopen-history-archive/README.md",
-        "registry-research-framework/audit/etw-stackwalk-reopen-history-archive/commands/01-seed-previous-snapshot.txt",
-        "registry-research-framework/audit/etw-stackwalk-reopen-history-archive/manifests/baseline/etw-stackwalk-reopen-baseline-archive.json"
+        "registry-research-framework/audit/etw-stackwalk-reopen-history-archive/README.md"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "registry-research-framework/audit/etw-stackwalk-reopen-baseline-archive/README.md",
@@ -2378,6 +2570,8 @@
         "registry-research-framework/audit/etw-stackwalk-reopen-history-archive/manifests/baseline/etw-stackwalk-reopen-baseline-archive.md",
         "registry-research-framework/audit/etw-stackwalk-reopen-rotation-ledger.json"
       ],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "keep-pending-review"
     },
@@ -2394,22 +2588,24 @@
         "etw-stackwalk-reopen-baseline-archive.md",
         "registry-research-framework/audit/etw-stackwalk-reopen-baseline-archive.md"
       ],
-      "live_reference_count": 20,
-      "audit_reference_count": 2,
+      "live_reference_count": 22,
+      "audit_reference_count": 4,
       "blocking_reference_count": 18,
       "references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md",
         "registry-research-framework/audit/etw-stackwalk-reopen-baseline-archive/README.md",
         "registry-research-framework/audit/etw-stackwalk-reopen-baseline-archive/commands/01-promote-previous-snapshot.txt",
         "registry-research-framework/audit/etw-stackwalk-reopen-history-archive/CHECKSUMS.json",
-        "registry-research-framework/audit/etw-stackwalk-reopen-history-archive/README.md",
-        "registry-research-framework/audit/etw-stackwalk-reopen-history-archive/commands/01-seed-previous-snapshot.txt",
-        "registry-research-framework/audit/etw-stackwalk-reopen-history-archive/manifests/baseline/etw-stackwalk-reopen-baseline-archive.json"
+        "registry-research-framework/audit/etw-stackwalk-reopen-history-archive/README.md"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "registry-research-framework/audit/etw-stackwalk-reopen-baseline-archive/README.md",
@@ -2421,6 +2617,8 @@
         "registry-research-framework/audit/etw-stackwalk-reopen-history-archive/manifests/baseline/etw-stackwalk-reopen-baseline-archive.md",
         "registry-research-framework/audit/etw-stackwalk-reopen-rotation-ledger.json"
       ],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "keep-pending-review"
     },
@@ -2437,22 +2635,24 @@
         "etw-stackwalk-reopen-baseline-archive.zip",
         "registry-research-framework/audit/etw-stackwalk-reopen-baseline-archive.zip"
       ],
-      "live_reference_count": 20,
-      "audit_reference_count": 2,
+      "live_reference_count": 22,
+      "audit_reference_count": 4,
       "blocking_reference_count": 18,
       "references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md",
         "registry-research-framework/audit/etw-stackwalk-reopen-baseline-archive/README.md",
         "registry-research-framework/audit/etw-stackwalk-reopen-baseline-archive/commands/01-promote-previous-snapshot.txt",
         "registry-research-framework/audit/etw-stackwalk-reopen-history-archive/CHECKSUMS.json",
-        "registry-research-framework/audit/etw-stackwalk-reopen-history-archive/README.md",
-        "registry-research-framework/audit/etw-stackwalk-reopen-history-archive/commands/01-seed-previous-snapshot.txt",
-        "registry-research-framework/audit/etw-stackwalk-reopen-history-archive/manifests/baseline/etw-stackwalk-reopen-baseline-archive.json"
+        "registry-research-framework/audit/etw-stackwalk-reopen-history-archive/README.md"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "registry-research-framework/audit/etw-stackwalk-reopen-baseline-archive/README.md",
@@ -2464,6 +2664,8 @@
         "registry-research-framework/audit/etw-stackwalk-reopen-history-archive/manifests/baseline/etw-stackwalk-reopen-baseline-archive.md",
         "registry-research-framework/audit/etw-stackwalk-reopen-rotation-ledger.json"
       ],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "keep-pending-review"
     },
@@ -2480,21 +2682,27 @@
         "etw-stackwalk-reopen-history-archive-check.json",
         "registry-research-framework/audit/etw-stackwalk-reopen-history-archive-check.json"
       ],
-      "live_reference_count": 3,
-      "audit_reference_count": 2,
+      "live_reference_count": 5,
+      "audit_reference_count": 4,
       "blocking_reference_count": 1,
       "references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md",
         "registry-research-framework/scripts/check_etw_stackwalk_reopen_history_archive.py"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "registry-research-framework/scripts/check_etw_stackwalk_reopen_history_archive.py"
       ],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "keep-pending-review"
     },
@@ -2511,21 +2719,27 @@
         "etw-stackwalk-reopen-history-archive-check.md",
         "registry-research-framework/audit/etw-stackwalk-reopen-history-archive-check.md"
       ],
-      "live_reference_count": 3,
-      "audit_reference_count": 2,
+      "live_reference_count": 5,
+      "audit_reference_count": 4,
       "blocking_reference_count": 1,
       "references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md",
         "registry-research-framework/scripts/check_etw_stackwalk_reopen_history_archive.py"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "registry-research-framework/scripts/check_etw_stackwalk_reopen_history_archive.py"
       ],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "keep-pending-review"
     },
@@ -2542,22 +2756,24 @@
         "etw-stackwalk-reopen-history-archive.json",
         "registry-research-framework/audit/etw-stackwalk-reopen-history-archive.json"
       ],
-      "live_reference_count": 12,
-      "audit_reference_count": 2,
+      "live_reference_count": 14,
+      "audit_reference_count": 4,
       "blocking_reference_count": 10,
       "references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md",
         "registry-research-framework/audit/etw-stackwalk-reopen-rotation-ledger.json",
         "registry-research-framework/audit/etw-stackwalk-reopen-seed-receipt.json",
         "registry-research-framework/scripts/check_etw_stackwalk_reopen_history_archive.py",
-        "registry-research-framework/scripts/check_etw_stackwalk_reopen_rotation_ledger.py",
-        "registry-research-framework/scripts/check_etw_stackwalk_reopen_seed_receipt.py",
-        "registry-research-framework/scripts/generate_etw_stackwalk_reopen_rotation_ledger.py"
+        "registry-research-framework/scripts/check_etw_stackwalk_reopen_rotation_ledger.py"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "registry-research-framework/audit/etw-stackwalk-reopen-rotation-ledger.json",
@@ -2569,6 +2785,8 @@
         "registry-research-framework/scripts/generate_etw_stackwalk_reopen_seed_receipt.py",
         "registry-research-framework/scripts/materialize_etw_stackwalk_reopen_history_archive.py"
       ],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "keep-pending-review"
     },
@@ -2585,22 +2803,24 @@
         "etw-stackwalk-reopen-history-archive.md",
         "registry-research-framework/audit/etw-stackwalk-reopen-history-archive.md"
       ],
-      "live_reference_count": 12,
-      "audit_reference_count": 2,
+      "live_reference_count": 14,
+      "audit_reference_count": 4,
       "blocking_reference_count": 10,
       "references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md",
         "registry-research-framework/audit/etw-stackwalk-reopen-rotation-ledger.json",
         "registry-research-framework/audit/etw-stackwalk-reopen-seed-receipt.json",
         "registry-research-framework/scripts/check_etw_stackwalk_reopen_history_archive.py",
-        "registry-research-framework/scripts/check_etw_stackwalk_reopen_rotation_ledger.py",
-        "registry-research-framework/scripts/check_etw_stackwalk_reopen_seed_receipt.py",
-        "registry-research-framework/scripts/generate_etw_stackwalk_reopen_rotation_ledger.py"
+        "registry-research-framework/scripts/check_etw_stackwalk_reopen_rotation_ledger.py"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "registry-research-framework/audit/etw-stackwalk-reopen-rotation-ledger.json",
@@ -2612,6 +2832,8 @@
         "registry-research-framework/scripts/generate_etw_stackwalk_reopen_seed_receipt.py",
         "registry-research-framework/scripts/materialize_etw_stackwalk_reopen_history_archive.py"
       ],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "keep-pending-review"
     },
@@ -2628,22 +2850,24 @@
         "etw-stackwalk-reopen-history-archive.zip",
         "registry-research-framework/audit/etw-stackwalk-reopen-history-archive.zip"
       ],
-      "live_reference_count": 12,
-      "audit_reference_count": 2,
+      "live_reference_count": 14,
+      "audit_reference_count": 4,
       "blocking_reference_count": 10,
       "references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md",
         "registry-research-framework/audit/etw-stackwalk-reopen-rotation-ledger.json",
         "registry-research-framework/audit/etw-stackwalk-reopen-seed-receipt.json",
         "registry-research-framework/scripts/check_etw_stackwalk_reopen_history_archive.py",
-        "registry-research-framework/scripts/check_etw_stackwalk_reopen_rotation_ledger.py",
-        "registry-research-framework/scripts/check_etw_stackwalk_reopen_seed_receipt.py",
-        "registry-research-framework/scripts/generate_etw_stackwalk_reopen_rotation_ledger.py"
+        "registry-research-framework/scripts/check_etw_stackwalk_reopen_rotation_ledger.py"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "registry-research-framework/audit/etw-stackwalk-reopen-rotation-ledger.json",
@@ -2655,6 +2879,8 @@
         "registry-research-framework/scripts/generate_etw_stackwalk_reopen_seed_receipt.py",
         "registry-research-framework/scripts/materialize_etw_stackwalk_reopen_history_archive.py"
       ],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "keep-pending-review"
     },
@@ -2671,23 +2897,29 @@
         "kernel-power-net-new-candidates-20260328.json",
         "registry-research-framework/audit/kernel-power-net-new-candidates-20260328.json"
       ],
-      "live_reference_count": 4,
-      "audit_reference_count": 2,
+      "live_reference_count": 6,
+      "audit_reference_count": 4,
       "blocking_reference_count": 2,
       "references_sample": [
         "evidence/files/vm-tooling-staging/registry-batch-existence-20260328-000828/summary.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md",
         "research/notes/kernel-power-net-new-existence-probe-20260328.md"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "evidence/files/vm-tooling-staging/registry-batch-existence-20260328-000828/summary.json",
         "research/notes/kernel-power-net-new-existence-probe-20260328.md"
       ],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "keep-pending-review"
     },
@@ -2704,25 +2936,31 @@
         "kernel-power-net-new-follow-up-20260328.json",
         "registry-research-framework/audit/kernel-power-net-new-follow-up-20260328.json"
       ],
-      "live_reference_count": 5,
-      "audit_reference_count": 2,
+      "live_reference_count": 7,
+      "audit_reference_count": 4,
       "blocking_reference_count": 3,
       "references_sample": [
         "evidence/files/vm-tooling-staging/registry-batch-string-20260328-003236/manifest.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md",
         "research/notes/kernel-power-existing-static-triage-20260328.md",
         "research/notes/kernel-power-net-new-existence-probe-20260328.md"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "evidence/files/vm-tooling-staging/registry-batch-string-20260328-003236/manifest.json",
         "research/notes/kernel-power-existing-static-triage-20260328.md",
         "research/notes/kernel-power-net-new-existence-probe-20260328.md"
       ],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "keep-pending-review"
     },
@@ -2739,22 +2977,24 @@
         "kernel-power-existing-static-probe-20260328.json",
         "registry-research-framework/audit/kernel-power-existing-static-probe-20260328.json"
       ],
-      "live_reference_count": 12,
-      "audit_reference_count": 2,
+      "live_reference_count": 14,
+      "audit_reference_count": 4,
       "blocking_reference_count": 10,
       "references_sample": [
         "evidence/files/vm-tooling-staging/registry-batch-string-20260328-003236/summary.json",
         "evidence/records/system.executive-additional-worker-threads/full-evidence.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md",
         "registry-research-framework/audit/rejected-closure-ledger.json",
-        "registry-research-framework/enrichment/enrichment-cache.jsonl",
-        "research/evidence-atlas.md",
-        "research/evidence-index.json"
+        "registry-research-framework/enrichment/enrichment-cache.jsonl"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "evidence/files/vm-tooling-staging/registry-batch-string-20260328-003236/summary.json",
@@ -2766,6 +3006,8 @@
         "research/evidence-manifest.json",
         "research/evidence-manifest.md"
       ],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "keep-pending-review"
     },
@@ -2782,8 +3024,8 @@
         "power-session-watchdog-timeouts-boot-trace-20260328.json",
         "registry-research-framework/audit/power-session-watchdog-timeouts-boot-trace-20260328.json"
       ],
-      "live_reference_count": 14,
-      "audit_reference_count": 2,
+      "live_reference_count": 16,
+      "audit_reference_count": 4,
       "blocking_reference_count": 12,
       "references_sample": [
         "evidence/records/power.session-watchdog-timeouts/behavior.json",
@@ -2791,13 +3033,15 @@
         "evidence/records/power.session-watchdog-timeouts/runtime.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
-        "registry-research-framework/audit/operator-regadd-inventory-20260508-repo.json",
-        "registry-research-framework/audit/rejected-closure-ledger.json",
-        "research/evidence-atlas.md"
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md",
+        "registry-research-framework/audit/operator-regadd-inventory-20260508-repo.json"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "evidence/records/power.session-watchdog-timeouts/behavior.json",
@@ -2809,6 +3053,8 @@
         "research/evidence-classes.json",
         "research/evidence-index.json"
       ],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "keep-pending-review"
     },
@@ -2825,21 +3071,27 @@
         "system-executive-additional-worker-threads-candidate-package-20260328",
         "system-executive-additional-worker-threads-candidate-package-20260328.json"
       ],
-      "live_reference_count": 3,
-      "audit_reference_count": 2,
+      "live_reference_count": 5,
+      "audit_reference_count": 4,
       "blocking_reference_count": 1,
       "references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md",
         "research/notes/system-executive-additional-worker-threads-candidate-package-20260328.md"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "research/notes/system-executive-additional-worker-threads-candidate-package-20260328.md"
       ],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "keep-pending-review"
     },
@@ -2856,22 +3108,24 @@
         "power-session-watchdog-timeouts-etl-registry-review-20260328.json",
         "registry-research-framework/audit/power-session-watchdog-timeouts-etl-registry-review-20260328.json"
       ],
-      "live_reference_count": 10,
-      "audit_reference_count": 2,
+      "live_reference_count": 12,
+      "audit_reference_count": 4,
       "blocking_reference_count": 8,
       "references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md",
         "registry-research-framework/audit/rejected-closure-ledger.json",
         "research/evidence-atlas.md",
         "research/evidence-classes.json",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json",
-        "research/evidence-manifest.md"
+        "research/evidence-index.json"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "registry-research-framework/audit/rejected-closure-ledger.json",
@@ -2883,6 +3137,8 @@
         "research/notes/power-session-watchdog-timeouts-etl-registry-review-20260328.md",
         "research/records/power.session-watchdog-timeouts.json"
       ],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "keep-pending-review"
     },
@@ -2899,23 +3155,29 @@
         "power-session-watchdog-timeouts-candidate-package-20260328.json",
         "registry-research-framework/audit/power-session-watchdog-timeouts-candidate-package-20260328.json"
       ],
-      "live_reference_count": 4,
-      "audit_reference_count": 2,
+      "live_reference_count": 6,
+      "audit_reference_count": 4,
       "blocking_reference_count": 2,
       "references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md",
         "registry-research-framework/audit/operator-regadd-inventory-20260508-repo.json",
         "research/notes/power-session-watchdog-timeouts-candidate-package-20260328.md"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "registry-research-framework/audit/operator-regadd-inventory-20260508-repo.json",
         "research/notes/power-session-watchdog-timeouts-candidate-package-20260328.md"
       ],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "keep-pending-review"
     },
@@ -2932,22 +3194,24 @@
         "power-session-watchdog-timeouts-sleep-capability-20260328.json",
         "registry-research-framework/audit/power-session-watchdog-timeouts-sleep-capability-20260328.json"
       ],
-      "live_reference_count": 9,
-      "audit_reference_count": 2,
+      "live_reference_count": 11,
+      "audit_reference_count": 4,
       "blocking_reference_count": 7,
       "references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md",
         "registry-research-framework/audit/rejected-closure-ledger.json",
         "research/evidence-atlas.md",
         "research/evidence-index.json",
-        "research/evidence-manifest.json",
-        "research/evidence-manifest.md",
-        "research/notes/power-session-watchdog-timeouts-sleep-capability-20260328.md"
+        "research/evidence-manifest.json"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "registry-research-framework/audit/rejected-closure-ledger.json",
@@ -2958,6 +3222,8 @@
         "research/notes/power-session-watchdog-timeouts-sleep-capability-20260328.md",
         "research/records/power.session-watchdog-timeouts.json"
       ],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "keep-pending-review"
     },
@@ -2974,22 +3240,24 @@
         "power-session-watchdog-timeouts-procmon-bootlog-20260328.json",
         "registry-research-framework/audit/power-session-watchdog-timeouts-procmon-bootlog-20260328.json"
       ],
-      "live_reference_count": 10,
-      "audit_reference_count": 2,
+      "live_reference_count": 12,
+      "audit_reference_count": 4,
       "blocking_reference_count": 8,
       "references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md",
         "registry-research-framework/audit/operator-regadd-inventory-20260508-repo.json",
         "registry-research-framework/audit/rejected-closure-ledger.json",
         "research/evidence-atlas.md",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json",
-        "research/evidence-manifest.md"
+        "research/evidence-index.json"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "registry-research-framework/audit/operator-regadd-inventory-20260508-repo.json",
@@ -3001,6 +3269,8 @@
         "research/notes/power-session-watchdog-timeouts-procmon-bootlog-20260328.md",
         "research/records/power.session-watchdog-timeouts.json"
       ],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "keep-pending-review"
     },
@@ -3017,22 +3287,24 @@
         "power-session-watchdog-timeouts-dcomlaunch-power-trigger-20260328.json",
         "registry-research-framework/audit/power-session-watchdog-timeouts-dcomlaunch-power-trigger-20260328.json"
       ],
-      "live_reference_count": 10,
-      "audit_reference_count": 2,
+      "live_reference_count": 12,
+      "audit_reference_count": 4,
       "blocking_reference_count": 8,
       "references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md",
         "registry-research-framework/audit/operator-regadd-inventory-20260508-repo.json",
         "registry-research-framework/audit/rejected-closure-ledger.json",
         "research/evidence-atlas.md",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json",
-        "research/evidence-manifest.md"
+        "research/evidence-index.json"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "registry-research-framework/audit/operator-regadd-inventory-20260508-repo.json",
@@ -3044,6 +3316,8 @@
         "research/notes/power-session-watchdog-timeouts-dcomlaunch-power-trigger-20260328.md",
         "research/records/power.session-watchdog-timeouts.json"
       ],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "keep-pending-review"
     },
@@ -3060,22 +3334,24 @@
         "power-session-watchdog-timeouts-s1-procmon-follow-up-20260328.json",
         "registry-research-framework/audit/power-session-watchdog-timeouts-s1-procmon-follow-up-20260328.json"
       ],
-      "live_reference_count": 11,
-      "audit_reference_count": 2,
+      "live_reference_count": 13,
+      "audit_reference_count": 4,
       "blocking_reference_count": 9,
       "references_sample": [
         "evidence/files/vm-tooling-staging/watchdog-session-timeouts-incident-review-20260412/host-review.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md",
         "registry-research-framework/audit/rejected-closure-ledger.json",
         "research/evidence-atlas.md",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json",
-        "research/evidence-manifest.md"
+        "research/evidence-index.json"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "evidence/files/vm-tooling-staging/watchdog-session-timeouts-incident-review-20260412/host-review.json",
@@ -3087,6 +3363,8 @@
         "research/notes/power-session-watchdog-timeouts-incident-review-20260412.md",
         "research/notes/power-session-watchdog-timeouts-s1-procmon-follow-up-20260328.md"
       ],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "keep-pending-review"
     },
@@ -3103,22 +3381,24 @@
         "power-session-watchdog-timeouts-s1-scheduled-procmon-follow-up-20260328.json",
         "registry-research-framework/audit/power-session-watchdog-timeouts-s1-scheduled-procmon-follow-up-20260328.json"
       ],
-      "live_reference_count": 12,
-      "audit_reference_count": 2,
+      "live_reference_count": 14,
+      "audit_reference_count": 4,
       "blocking_reference_count": 10,
       "references_sample": [
         "evidence/files/vm-tooling-staging/watchdog-session-timeouts-incident-review-20260412/host-review.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md",
         "registry-research-framework/audit/operator-regadd-inventory-20260508-repo.json",
         "registry-research-framework/audit/rejected-closure-ledger.json",
-        "research/evidence-atlas.md",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json"
+        "research/evidence-atlas.md"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "evidence/files/vm-tooling-staging/watchdog-session-timeouts-incident-review-20260412/host-review.json",
@@ -3130,6 +3410,8 @@
         "research/evidence-manifest.md",
         "research/notes/power-session-watchdog-timeouts-incident-review-20260412.md"
       ],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "keep-pending-review"
     },
@@ -3146,8 +3428,8 @@
         "system-executive-additional-worker-threads-etl-registry-review-20260328",
         "system-executive-additional-worker-threads-etl-registry-review-20260328.json"
       ],
-      "live_reference_count": 15,
-      "audit_reference_count": 2,
+      "live_reference_count": 17,
+      "audit_reference_count": 4,
       "blocking_reference_count": 13,
       "references_sample": [
         "evidence/records/system.executive-uuid-sequence-number/behavior.json",
@@ -3155,13 +3437,15 @@
         "evidence/records/system.executive-uuid-sequence-number/runtime.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
-        "registry-research-framework/audit/rejected-closure-ledger.json",
-        "registry-research-framework/audit/system-executive-uuid-sequence-number-candidate-package-20260331.json",
-        "research/evidence-atlas.md"
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md",
+        "registry-research-framework/audit/rejected-closure-ledger.json"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "evidence/records/system.executive-uuid-sequence-number/behavior.json",
@@ -3173,6 +3457,8 @@
         "research/evidence-classes.json",
         "research/evidence-index.json"
       ],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "keep-pending-review"
     },
@@ -3189,22 +3475,24 @@
         "system-executive-additional-worker-threads-procmon-bootlog-20260328",
         "system-executive-additional-worker-threads-procmon-bootlog-20260328.json"
       ],
-      "live_reference_count": 13,
-      "audit_reference_count": 2,
+      "live_reference_count": 15,
+      "audit_reference_count": 4,
       "blocking_reference_count": 11,
       "references_sample": [
         "evidence/records/system.executive-additional-worker-threads/full-evidence.json",
         "evidence/records/system.executive-additional-worker-threads/runtime.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md",
         "registry-research-framework/audit/operator-regadd-inventory-20260508-repo.json",
-        "registry-research-framework/audit/rejected-closure-ledger.json",
-        "research/evidence-atlas.md",
-        "research/evidence-index.json"
+        "registry-research-framework/audit/rejected-closure-ledger.json"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "evidence/records/system.executive-additional-worker-threads/full-evidence.json",
@@ -3216,6 +3504,8 @@
         "research/evidence-manifest.json",
         "research/evidence-manifest.md"
       ],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "keep-pending-review"
     },
@@ -3232,22 +3522,24 @@
         "system-executive-additional-worker-threads-follow-up-package-20260328",
         "system-executive-additional-worker-threads-follow-up-package-20260328.json"
       ],
-      "live_reference_count": 10,
-      "audit_reference_count": 2,
+      "live_reference_count": 12,
+      "audit_reference_count": 4,
       "blocking_reference_count": 8,
       "references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md",
         "registry-research-framework/audit/operator-regadd-inventory-20260508-repo.json",
         "registry-research-framework/audit/rejected-closure-ledger.json",
         "research/evidence-atlas.md",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json",
-        "research/evidence-manifest.md"
+        "research/evidence-index.json"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "registry-research-framework/audit/operator-regadd-inventory-20260508-repo.json",
@@ -3259,6 +3551,8 @@
         "research/notes/system-executive-additional-worker-threads-follow-up-package-20260328.md",
         "research/records/system.executive-additional-worker-threads.json"
       ],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "keep-pending-review"
     },
@@ -3275,22 +3569,24 @@
         "system-executive-additional-worker-threads-reactos-hypothesis-20260328",
         "system-executive-additional-worker-threads-reactos-hypothesis-20260328.json"
       ],
-      "live_reference_count": 14,
-      "audit_reference_count": 2,
+      "live_reference_count": 16,
+      "audit_reference_count": 4,
       "blocking_reference_count": 12,
       "references_sample": [
         "evidence/records/system.executive-additional-worker-threads/full-evidence.json",
         "evidence/records/system.executive-uuid-sequence-number/full-evidence.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md",
         "registry-research-framework/audit/operator-regadd-inventory-20260508-repo.json",
-        "registry-research-framework/audit/rejected-closure-ledger.json",
-        "registry-research-framework/enrichment/enrichment-cache.jsonl",
-        "research/evidence-atlas.md"
+        "registry-research-framework/audit/rejected-closure-ledger.json"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "evidence/records/system.executive-additional-worker-threads/full-evidence.json",
@@ -3302,6 +3598,8 @@
         "research/evidence-index.json",
         "research/evidence-manifest.json"
       ],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "keep-pending-review"
     },
@@ -3318,22 +3616,24 @@
         "system-executive-additional-worker-threads-stress-trigger-20260328",
         "system-executive-additional-worker-threads-stress-trigger-20260328.json"
       ],
-      "live_reference_count": 10,
-      "audit_reference_count": 2,
+      "live_reference_count": 12,
+      "audit_reference_count": 4,
       "blocking_reference_count": 8,
       "references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md",
         "registry-research-framework/audit/operator-regadd-inventory-20260508-repo.json",
         "registry-research-framework/audit/rejected-closure-ledger.json",
         "research/evidence-atlas.md",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json",
-        "research/evidence-manifest.md"
+        "research/evidence-index.json"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "registry-research-framework/audit/operator-regadd-inventory-20260508-repo.json",
@@ -3345,6 +3645,8 @@
         "research/notes/system-executive-additional-worker-threads-stress-trigger-20260328.md",
         "research/records/system.executive-additional-worker-threads.json"
       ],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "keep-pending-review"
     },
@@ -3361,22 +3663,24 @@
         "power-disable-cpu-idle-states-write-diagnostics-20260328.json",
         "registry-research-framework/audit/power-disable-cpu-idle-states-write-diagnostics-20260328.json"
       ],
-      "live_reference_count": 8,
-      "audit_reference_count": 2,
+      "live_reference_count": 10,
+      "audit_reference_count": 4,
       "blocking_reference_count": 6,
       "references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md",
         "research/evidence-atlas.md",
         "research/evidence-index.json",
         "research/evidence-manifest.json",
-        "research/evidence-manifest.md",
-        "research/notes/power-disable-cpu-idle-states-write-diagnostics-20260328.md",
-        "research/records/power.disable-cpu-idle-states.json"
+        "research/evidence-manifest.md"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "research/evidence-atlas.md",
@@ -3386,6 +3690,8 @@
         "research/notes/power-disable-cpu-idle-states-write-diagnostics-20260328.md",
         "research/records/power.disable-cpu-idle-states.json"
       ],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "keep-pending-review"
     },
@@ -3402,22 +3708,24 @@
         "power-disable-cpu-idle-states-tooling-chain-review-20260328.json",
         "registry-research-framework/audit/power-disable-cpu-idle-states-tooling-chain-review-20260328.json"
       ],
-      "live_reference_count": 8,
-      "audit_reference_count": 2,
+      "live_reference_count": 10,
+      "audit_reference_count": 4,
       "blocking_reference_count": 6,
       "references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md",
         "research/evidence-atlas.md",
         "research/evidence-index.json",
         "research/evidence-manifest.json",
-        "research/evidence-manifest.md",
-        "research/notes/power-disable-cpu-idle-states-tooling-chain-review-20260328.md",
-        "research/records/power.disable-cpu-idle-states.json"
+        "research/evidence-manifest.md"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "research/evidence-atlas.md",
@@ -3427,6 +3735,8 @@
         "research/notes/power-disable-cpu-idle-states-tooling-chain-review-20260328.md",
         "research/records/power.disable-cpu-idle-states.json"
       ],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "keep-pending-review"
     },
@@ -3443,23 +3753,29 @@
         "power-disable-cpu-idle-states-stepwise-orchestration-20260328.json",
         "registry-research-framework/audit/power-disable-cpu-idle-states-stepwise-orchestration-20260328.json"
       ],
-      "live_reference_count": 4,
-      "audit_reference_count": 2,
+      "live_reference_count": 6,
+      "audit_reference_count": 4,
       "blocking_reference_count": 2,
       "references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md",
         "registry-research-framework/audit/operator-regadd-inventory-20260508-repo.json",
         "research/notes/power-disable-cpu-idle-states-stepwise-orchestration-20260328.md"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "registry-research-framework/audit/operator-regadd-inventory-20260508-repo.json",
         "research/notes/power-disable-cpu-idle-states-stepwise-orchestration-20260328.md"
       ],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "keep-pending-review"
     },
@@ -3476,21 +3792,27 @@
         "power-session-watchdog-timeouts-stepwise-boot-trace-20260329.json",
         "registry-research-framework/audit/power-session-watchdog-timeouts-stepwise-boot-trace-20260329.json"
       ],
-      "live_reference_count": 3,
-      "audit_reference_count": 2,
+      "live_reference_count": 5,
+      "audit_reference_count": 4,
       "blocking_reference_count": 1,
       "references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md",
         "research/notes/power-session-watchdog-timeouts-stepwise-boot-trace-20260329.md"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "research/notes/power-session-watchdog-timeouts-stepwise-boot-trace-20260329.md"
       ],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "keep-pending-review"
     },
@@ -3507,21 +3829,27 @@
         "power-control-docs-first-runtime-capture-20260329.json",
         "registry-research-framework/audit/power-control-docs-first-runtime-capture-20260329.json"
       ],
-      "live_reference_count": 3,
-      "audit_reference_count": 2,
+      "live_reference_count": 5,
+      "audit_reference_count": 4,
       "blocking_reference_count": 1,
       "references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md",
         "research/notes/power-control-docs-first-runtime-capture-20260329.md"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "research/notes/power-control-docs-first-runtime-capture-20260329.md"
       ],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "keep-pending-review"
     },
@@ -3538,8 +3866,8 @@
         "power-control-docs-first-stepwise-runtime-capture-20260329.json",
         "registry-research-framework/audit/power-control-docs-first-stepwise-runtime-capture-20260329.json"
       ],
-      "live_reference_count": 41,
-      "audit_reference_count": 2,
+      "live_reference_count": 43,
+      "audit_reference_count": 4,
       "blocking_reference_count": 39,
       "references_sample": [
         "evidence/records/power.control.class1-initial-unpark-count/full-evidence.json",
@@ -3553,7 +3881,9 @@
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "evidence/records/power.control.class1-initial-unpark-count/full-evidence.json",
@@ -3565,6 +3895,8 @@
         "evidence/records/power.control.lid-reliability-state/full-evidence.json",
         "evidence/records/power.control.lid-reliability-state/runtime.json"
       ],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "keep-pending-review"
     },
@@ -3581,8 +3913,8 @@
         "power-control-docs-first-trigger-etw-follow-up-20260329.json",
         "registry-research-framework/audit/power-control-docs-first-trigger-etw-follow-up-20260329.json"
       ],
-      "live_reference_count": 13,
-      "audit_reference_count": 2,
+      "live_reference_count": 15,
+      "audit_reference_count": 4,
       "blocking_reference_count": 11,
       "references_sample": [
         "evidence/records/power.control.hibernate-enabled-default/behavior.json",
@@ -3590,13 +3922,15 @@
         "evidence/records/power.control.hibernate-enabled-default/runtime.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
-        "registry-research-framework/audit/operator-regadd-inventory-20260508-repo.json",
-        "registry-research-framework/audit/rejected-closure-ledger.json",
-        "research/evidence-atlas.md"
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md",
+        "registry-research-framework/audit/operator-regadd-inventory-20260508-repo.json"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "evidence/records/power.control.hibernate-enabled-default/behavior.json",
@@ -3608,6 +3942,8 @@
         "research/evidence-index.json",
         "research/evidence-manifest.json"
       ],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "keep-pending-review"
     },
@@ -3624,22 +3960,24 @@
         "power-control-docs-first-trigger-etw-guestvar-follow-up-20260329.json",
         "registry-research-framework/audit/power-control-docs-first-trigger-etw-guestvar-follow-up-20260329.json"
       ],
-      "live_reference_count": 10,
-      "audit_reference_count": 2,
+      "live_reference_count": 12,
+      "audit_reference_count": 4,
       "blocking_reference_count": 8,
       "references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md",
         "registry-research-framework/audit/operator-regadd-inventory-20260508-repo.json",
         "registry-research-framework/audit/rejected-closure-ledger.json",
         "research/evidence-atlas.md",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json",
-        "research/evidence-manifest.md"
+        "research/evidence-index.json"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
-        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"
+        "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "blocking_references_sample": [
         "registry-research-framework/audit/operator-regadd-inventory-20260508-repo.json",
@@ -3651,6 +3989,8 @@
         "research/notes/power-control-docs-first-trigger-etw-guestvar-follow-up-20260329.md",
         "research/records/power.control.hibernate-enabled-default.json"
       ],
+      "replacement_resolved_reference_count": 0,
+      "replacement_resolved_references_sample": [],
       "delete_eligible": false,
       "recommended_action": "keep-pending-review"
     }

@@ -51,7 +51,7 @@
     },
     {
       "title": "Guest launch of CrossDeviceResume",
-      "url": "evidence/files/vm-tooling-staging/crossdevice_resume_probe.csv",
+      "url": "evidence/raw/procmon/privacy.disable-resume/crossdevice_resume_probe.csv",
       "kind": "vm-test",
       "summary": "Win25H2Clean guest Procmon capture shows CrossDeviceResume.exe launching from the MicrosoftWindows.Client.CBS app tile, confirming the runtime surface is present. This trigger did not surface the expected policy value names in the captured run, so it remains supporting evidence rather than a direct key-read proof."
     }
