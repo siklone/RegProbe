@@ -46,8 +46,8 @@ RESTORED_EXISTS=True RESTORED_VALUE=1
 ## Raw Hit Files
 
 ```text
-research/evidence-files/procmon/explorer-always-show-icons-never-thumbnails-validation-20260324/iconsonly-0-hits.csv
-research/evidence-files/procmon/explorer-always-show-icons-never-thumbnails-validation-20260324/iconsonly-1-hits.csv
+evidence/raw/procmon/explorer-always-show-icons-never-thumbnails-validation-20260324/iconsonly-0-hits.csv
+evidence/raw/procmon/explorer-always-show-icons-never-thumbnails-validation-20260324/iconsonly-1-hits.csv
 ```
 
 ## Notes
@@ -55,4 +55,3 @@ research/evidence-files/procmon/explorer-always-show-icons-never-thumbnails-vali
 - Explorer was restarted after each state change.
 - The probe confirmed live Explorer consumption for both 0 and 1 on Win25H2Clean.
 - The validated VM user baseline was `1`, while the 25H2 default-user hive still shows `0`.
-

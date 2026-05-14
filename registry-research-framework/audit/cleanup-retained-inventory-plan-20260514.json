@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-14T13:28:06Z",
+  "generated_utc": "2026-05-14T14:14:17Z",
   "ledger": "registry-research-framework/audit/cleanup-quarantine-ledger-20260514.json",
   "purpose": "Action plan for cleanup retained inventory. It does not delete files and it does not redefine delete eligibility.",
   "rules": {
@@ -11,14 +11,15 @@
   "summary": {
     "item_count": 89,
     "delete_ready_count": 0,
-    "reference_migration_needed_count": 15,
+    "reference_migration_needed_count": 0,
+    "audit_only_retained_count": 15,
     "intentional_reference_keep_count": 4,
     "needs_replacement_or_retention_decision_count": 70,
     "retained_pending_review_count": 0,
     "release_state_counts": {
+      "audit-only-retained": 15,
       "intentional-reference-keep": 4,
-      "needs-replacement-or-retention-decision": 70,
-      "reference-migration-needed": 15
+      "needs-replacement-or-retention-decision": 70
     },
     "category_counts": {
       "audit-archive-named-sample": 10,
@@ -28,47 +29,43 @@
       "vm-tooling-staging-oldest-sample": 25
     },
     "blocking_reference_class_counts": {
-      "audit-cross-reference": 93,
+      "audit-cross-reference": 90,
       "discovery-index-reference": 2,
-      "evidence-tree-reference": 69,
-      "other-reference": 84,
+      "evidence-tree-reference": 61,
+      "other-reference": 70,
       "public-doc-reference": 4,
-      "research-index-reference": 239,
-      "research-note-reference": 30,
-      "research-record-reference": 40
+      "research-index-reference": 186,
+      "research-note-reference": 24,
+      "research-record-reference": 34
     },
     "top_blocking_reference_paths": [
       {
         "path": "research/evidence-index.json",
-        "count": 58
+        "count": 47
       },
       {
         "path": "research/evidence-manifest.json",
-        "count": 55
+        "count": 44
       },
       {
         "path": "research/evidence-atlas.md",
-        "count": 50
+        "count": 39
       },
       {
         "path": "research/evidence-manifest.md",
-        "count": 48
+        "count": 38
       },
       {
         "path": "registry-research-framework/audit/rejected-closure-ledger.json",
-        "count": 31
+        "count": 30
       },
       {
         "path": "research/evidence-classes.json",
-        "count": 28
+        "count": 18
       },
       {
         "path": "registry-research-framework/audit/operator-regadd-inventory-20260508-repo.json",
         "count": 13
-      },
-      {
-        "path": "registry-research-framework/enrichment/enrichment-cache.jsonl",
-        "count": 8
       },
       {
         "path": "registry-research-framework/audit/etw-stackwalk-reopen-rotation-ledger.json",
@@ -83,435 +80,28 @@
         "count": 4
       },
       {
-        "path": "research/notes/security-threat-file-hash-logging-validation-20260325.md",
-        "count": 4
-      },
-      {
         "path": "research/records/power.session-watchdog-timeouts.json",
         "count": 4
       },
       {
-        "path": "registry-research-framework/queue/research-queue.json",
+        "path": "registry-research-framework/enrichment/enrichment-cache.jsonl",
         "count": 3
       },
       {
-        "path": "research/notes/explorer-hide-empty-drives-validation-20260324.md",
+        "path": "registry-research-framework/audit/etw-stackwalk-reopen-baseline-archive/README.md",
+        "count": 3
+      },
+      {
+        "path": "registry-research-framework/audit/etw-stackwalk-reopen-baseline-archive/commands/01-promote-previous-snapshot.txt",
+        "count": 3
+      },
+      {
+        "path": "registry-research-framework/audit/etw-stackwalk-reopen-history-archive/CHECKSUMS.json",
         "count": 3
       }
     ]
   },
-  "reference_migration_queue": [
-    {
-      "path": "evidence/files/vm-tooling-staging/crossdevice_resume_probe.csv",
-      "category": "vm-tooling-staging-oldest-sample",
-      "cleanup_status": "retained-live-reference",
-      "release_state": "reference-migration-needed",
-      "can_become_delete_candidate": true,
-      "blocking_reference_count": 11,
-      "audit_reference_count": 2,
-      "blocking_reference_classes": {
-        "audit-cross-reference": 1,
-        "evidence-tree-reference": 1,
-        "other-reference": 1,
-        "research-index-reference": 5
-      },
-      "blocking_references_sample": [
-        "evidence/raw/procmon/privacy.disable-resume/crossdevice_resume_probe.csv",
-        "registry-research-framework/audit/rejected-closure-ledger.json",
-        "research/evidence-atlas.md",
-        "research/evidence-classes.json",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json",
-        "research/evidence-manifest.md",
-        "research/evidence-not-found/privacy.disable-cross-device-experiences.json"
-      ],
-      "replacement_artifacts": [
-        "evidence/raw/procmon/privacy.disable-resume/crossdevice_resume_probe.csv"
-      ],
-      "recommended_action": "delete-after-review",
-      "next_action": "Move blocking docs/records to the listed replacement artifacts, rerun the ledger, then promote to delete-candidate if live refs reach zero.",
-      "stale_reason": "staging diagnostic bundle duplicated by canonical evidence/raw artifact"
-    },
-    {
-      "path": "evidence/files/vm-tooling-staging/defender-enhanced-notifications-securitycenter-1-20260324-213118",
-      "category": "vm-tooling-staging-oldest-sample",
-      "cleanup_status": "retained-live-reference",
-      "release_state": "reference-migration-needed",
-      "can_become_delete_candidate": true,
-      "blocking_reference_count": 7,
-      "audit_reference_count": 2,
-      "blocking_reference_classes": {
-        "other-reference": 1,
-        "research-index-reference": 5,
-        "research-record-reference": 1
-      },
-      "blocking_references_sample": [
-        "registry-research-framework/enrichment/enrichment-cache.jsonl",
-        "research/evidence-atlas.md",
-        "research/evidence-classes.json",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json",
-        "research/evidence-manifest.md",
-        "research/records/security.disable-enhanced-defender-notifications.review.json"
-      ],
-      "replacement_artifacts": [
-        "evidence/raw/procmon/security-disable-enhanced-defender-notifications-validation-20260324/defender-disable-enhanced-securitycenter-1.txt"
-      ],
-      "recommended_action": "delete-after-review",
-      "next_action": "Move blocking docs/records to the listed replacement artifacts, rerun the ledger, then promote to delete-candidate if live refs reach zero.",
-      "stale_reason": "staging diagnostic bundle duplicated by canonical evidence/raw artifact"
-    },
-    {
-      "path": "evidence/files/vm-tooling-staging/defender-threat-file-hash-legacyroot-1-20260325-011845",
-      "category": "vm-tooling-staging-oldest-sample",
-      "cleanup_status": "retained-live-reference",
-      "release_state": "reference-migration-needed",
-      "can_become_delete_candidate": true,
-      "blocking_reference_count": 8,
-      "audit_reference_count": 2,
-      "blocking_reference_classes": {
-        "other-reference": 1,
-        "research-index-reference": 5,
-        "research-note-reference": 1,
-        "research-record-reference": 1
-      },
-      "blocking_references_sample": [
-        "registry-research-framework/enrichment/enrichment-cache.jsonl",
-        "research/evidence-atlas.md",
-        "research/evidence-classes.json",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json",
-        "research/evidence-manifest.md",
-        "research/notes/security-threat-file-hash-logging-validation-20260325.md",
-        "research/records/security.threat-file-hash-logging.review.json"
-      ],
-      "replacement_artifacts": [
-        "evidence/raw/procmon/security.threat-file-hash-logging/defender-threat-file-hash-legacyroot-1.txt"
-      ],
-      "recommended_action": "delete-after-review",
-      "next_action": "Move blocking docs/records to the listed replacement artifacts, rerun the ledger, then promote to delete-candidate if live refs reach zero.",
-      "stale_reason": "staging diagnostic bundle duplicated by canonical evidence/raw artifact"
-    },
-    {
-      "path": "evidence/files/vm-tooling-staging/defender-threat-file-hash-policymanager-1-20260325-012333",
-      "category": "vm-tooling-staging-oldest-sample",
-      "cleanup_status": "retained-live-reference",
-      "release_state": "reference-migration-needed",
-      "can_become_delete_candidate": true,
-      "blocking_reference_count": 1,
-      "audit_reference_count": 2,
-      "blocking_reference_classes": {
-        "research-note-reference": 1
-      },
-      "blocking_references_sample": [
-        "research/notes/security-threat-file-hash-logging-validation-20260325.md"
-      ],
-      "replacement_artifacts": [
-        "evidence/raw/procmon/security.threat-file-hash-logging/defender-threat-file-hash-policymanager-1.txt"
-      ],
-      "recommended_action": "delete-after-review",
-      "next_action": "Move blocking docs/records to the listed replacement artifacts, rerun the ledger, then promote to delete-candidate if live refs reach zero.",
-      "stale_reason": "staging diagnostic bundle duplicated by canonical evidence/raw artifact"
-    },
-    {
-      "path": "evidence/files/vm-tooling-staging/devmode_longpaths_probe.csv",
-      "category": "vm-tooling-staging-oldest-sample",
-      "cleanup_status": "retained-live-reference",
-      "release_state": "reference-migration-needed",
-      "can_become_delete_candidate": true,
-      "blocking_reference_count": 9,
-      "audit_reference_count": 2,
-      "blocking_reference_classes": {
-        "evidence-tree-reference": 3,
-        "research-index-reference": 5
-      },
-      "blocking_references_sample": [
-        "evidence/files/missing/devmode-longpaths-probe-pml.md",
-        "evidence/raw/procmon/developer.enable-windows-long-paths/devmode-longpaths-probe-pml.md",
-        "evidence/raw/procmon/developer.enable-windows-long-paths/devmode_longpaths_probe.csv",
-        "research/evidence-atlas.md",
-        "research/evidence-classes.json",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json",
-        "research/evidence-manifest.md"
-      ],
-      "replacement_artifacts": [
-        "evidence/raw/procmon/developer.enable-windows-long-paths/devmode_longpaths_probe.csv"
-      ],
-      "recommended_action": "delete-after-review",
-      "next_action": "Move blocking docs/records to the listed replacement artifacts, rerun the ledger, then promote to delete-candidate if live refs reach zero.",
-      "stale_reason": "staging diagnostic bundle duplicated by canonical evidence/raw artifact"
-    },
-    {
-      "path": "evidence/files/vm-tooling-staging/devmode_probe2.csv",
-      "category": "vm-tooling-staging-oldest-sample",
-      "cleanup_status": "retained-live-reference",
-      "release_state": "reference-migration-needed",
-      "can_become_delete_candidate": true,
-      "blocking_reference_count": 10,
-      "audit_reference_count": 2,
-      "blocking_reference_classes": {
-        "evidence-tree-reference": 2,
-        "other-reference": 1,
-        "research-index-reference": 5
-      },
-      "blocking_references_sample": [
-        "evidence/raw/procmon/developer.windows-dev-mode/devmode_probe2.csv",
-        "evidence/raw/procmon/developer.windows-dev-mode/devmode_probe2.txt",
-        "research/evidence-atlas.md",
-        "research/evidence-classes.json",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json",
-        "research/evidence-manifest.md",
-        "research/evidence-not-found/developer.windows-dev-mode.json"
-      ],
-      "replacement_artifacts": [
-        "evidence/raw/procmon/developer.windows-dev-mode/devmode_probe2.csv"
-      ],
-      "recommended_action": "delete-after-review",
-      "next_action": "Move blocking docs/records to the listed replacement artifacts, rerun the ledger, then promote to delete-candidate if live refs reach zero.",
-      "stale_reason": "staging diagnostic bundle duplicated by canonical evidence/raw artifact"
-    },
-    {
-      "path": "evidence/files/vm-tooling-staging/devmode_probe2.txt",
-      "category": "vm-tooling-staging-oldest-sample",
-      "cleanup_status": "retained-live-reference",
-      "release_state": "reference-migration-needed",
-      "can_become_delete_candidate": true,
-      "blocking_reference_count": 10,
-      "audit_reference_count": 2,
-      "blocking_reference_classes": {
-        "evidence-tree-reference": 2,
-        "other-reference": 1,
-        "research-index-reference": 5
-      },
-      "blocking_references_sample": [
-        "evidence/raw/procmon/developer.windows-dev-mode/devmode_probe2.csv",
-        "evidence/raw/procmon/developer.windows-dev-mode/devmode_probe2.txt",
-        "research/evidence-atlas.md",
-        "research/evidence-classes.json",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json",
-        "research/evidence-manifest.md",
-        "research/evidence-not-found/developer.windows-dev-mode.json"
-      ],
-      "replacement_artifacts": [
-        "evidence/raw/procmon/developer.windows-dev-mode/devmode_probe2.txt"
-      ],
-      "recommended_action": "delete-after-review",
-      "next_action": "Move blocking docs/records to the listed replacement artifacts, rerun the ledger, then promote to delete-candidate if live refs reach zero.",
-      "stale_reason": "staging diagnostic bundle duplicated by canonical evidence/raw artifact"
-    },
-    {
-      "path": "evidence/files/vm-tooling-staging/feedback_notifications_probe.txt",
-      "category": "vm-tooling-staging-oldest-sample",
-      "cleanup_status": "retained-live-reference",
-      "release_state": "reference-migration-needed",
-      "can_become_delete_candidate": true,
-      "blocking_reference_count": 6,
-      "audit_reference_count": 2,
-      "blocking_reference_classes": {
-        "research-index-reference": 5,
-        "research-record-reference": 1
-      },
-      "blocking_references_sample": [
-        "research/evidence-atlas.md",
-        "research/evidence-classes.json",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json",
-        "research/evidence-manifest.md",
-        "research/records/privacy.disable-feedback-notifications.json"
-      ],
-      "replacement_artifacts": [
-        "evidence/raw/procmon/privacy.disable-feedback-notifications/feedback_notifications_probe.txt"
-      ],
-      "recommended_action": "delete-after-review",
-      "next_action": "Move blocking docs/records to the listed replacement artifacts, rerun the ledger, then promote to delete-candidate if live refs reach zero.",
-      "stale_reason": "staging diagnostic bundle duplicated by canonical evidence/raw artifact"
-    },
-    {
-      "path": "evidence/files/vm-tooling-staging/gamemode_admin_probe.txt",
-      "category": "vm-tooling-staging-oldest-sample",
-      "cleanup_status": "retained-live-reference",
-      "release_state": "reference-migration-needed",
-      "can_become_delete_candidate": true,
-      "blocking_reference_count": 8,
-      "audit_reference_count": 2,
-      "blocking_reference_classes": {
-        "other-reference": 2,
-        "research-index-reference": 5,
-        "research-record-reference": 1
-      },
-      "blocking_references_sample": [
-        "registry-research-framework/enrichment/enrichment-cache.jsonl",
-        "registry-research-framework/queue/research-queue.json",
-        "research/evidence-atlas.md",
-        "research/evidence-classes.json",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json",
-        "research/evidence-manifest.md",
-        "research/records/system.enable-game-mode.review.json"
-      ],
-      "replacement_artifacts": [
-        "evidence/raw/procmon/system.enable-game-mode/gamemode_admin_probe.txt"
-      ],
-      "recommended_action": "delete-after-review",
-      "next_action": "Move blocking docs/records to the listed replacement artifacts, rerun the ledger, then promote to delete-candidate if live refs reach zero.",
-      "stale_reason": "staging diagnostic bundle duplicated by canonical evidence/raw artifact"
-    },
-    {
-      "path": "evidence/files/vm-tooling-staging/gamemode_admin_zero_probe.txt",
-      "category": "vm-tooling-staging-oldest-sample",
-      "cleanup_status": "retained-live-reference",
-      "release_state": "reference-migration-needed",
-      "can_become_delete_candidate": true,
-      "blocking_reference_count": 7,
-      "audit_reference_count": 2,
-      "blocking_reference_classes": {
-        "other-reference": 1,
-        "research-index-reference": 5,
-        "research-record-reference": 1
-      },
-      "blocking_references_sample": [
-        "registry-research-framework/queue/research-queue.json",
-        "research/evidence-atlas.md",
-        "research/evidence-classes.json",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json",
-        "research/evidence-manifest.md",
-        "research/records/system.enable-game-mode.review.json"
-      ],
-      "replacement_artifacts": [
-        "evidence/raw/procmon/system.enable-game-mode/gamemode_admin_zero_probe.txt"
-      ],
-      "recommended_action": "delete-after-review",
-      "next_action": "Move blocking docs/records to the listed replacement artifacts, rerun the ledger, then promote to delete-candidate if live refs reach zero.",
-      "stale_reason": "staging diagnostic bundle duplicated by canonical evidence/raw artifact"
-    },
-    {
-      "path": "evidence/files/vm-tooling-staging/ghidra_explorer_serialize.txt",
-      "category": "vm-tooling-staging-oldest-sample",
-      "cleanup_status": "retained-live-reference",
-      "release_state": "reference-migration-needed",
-      "can_become_delete_candidate": true,
-      "blocking_reference_count": 11,
-      "audit_reference_count": 2,
-      "blocking_reference_classes": {
-        "other-reference": 5,
-        "research-index-reference": 3
-      },
-      "blocking_references_sample": [
-        "evidence/records/system.disable-startup-delay/full-evidence.json",
-        "evidence/records/system.disable-startup-delay/static.json",
-        "evidence/records/system.disable-startup-delay/verdict.md",
-        "registry-research-framework/enrichment/enrichment-cache.jsonl",
-        "research/evidence-atlas.md",
-        "research/evidence-audit.json",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json"
-      ],
-      "replacement_artifacts": [
-        "evidence/raw/ghidra/system.disable-startup-delay/ghidra_explorer_serialize.txt"
-      ],
-      "recommended_action": "delete-after-review",
-      "next_action": "Move blocking docs/records to the listed replacement artifacts, rerun the ledger, then promote to delete-candidate if live refs reach zero.",
-      "stale_reason": "staging diagnostic bundle duplicated by canonical evidence/raw artifact"
-    },
-    {
-      "path": "evidence/files/vm-tooling-staging/hideemptydrives-0-hits.csv",
-      "category": "vm-tooling-staging-oldest-sample",
-      "cleanup_status": "retained-live-reference",
-      "release_state": "reference-migration-needed",
-      "can_become_delete_candidate": true,
-      "blocking_reference_count": 1,
-      "audit_reference_count": 2,
-      "blocking_reference_classes": {
-        "research-note-reference": 1
-      },
-      "blocking_references_sample": [
-        "research/notes/explorer-hide-empty-drives-validation-20260324.md"
-      ],
-      "replacement_artifacts": [
-        "evidence/raw/procmon/explorer-hide-empty-drives-validation-20260324/hideemptydrives-0-hits.csv"
-      ],
-      "recommended_action": "delete-after-review",
-      "next_action": "Move blocking docs/records to the listed replacement artifacts, rerun the ledger, then promote to delete-candidate if live refs reach zero.",
-      "stale_reason": "staging diagnostic bundle duplicated by canonical evidence/raw artifact"
-    },
-    {
-      "path": "evidence/files/vm-tooling-staging/hideemptydrives-1-hits.csv",
-      "category": "vm-tooling-staging-oldest-sample",
-      "cleanup_status": "retained-live-reference",
-      "release_state": "reference-migration-needed",
-      "can_become_delete_candidate": true,
-      "blocking_reference_count": 1,
-      "audit_reference_count": 2,
-      "blocking_reference_classes": {
-        "research-note-reference": 1
-      },
-      "blocking_references_sample": [
-        "research/notes/explorer-hide-empty-drives-validation-20260324.md"
-      ],
-      "replacement_artifacts": [
-        "evidence/raw/procmon/explorer-hide-empty-drives-validation-20260324/hideemptydrives-1-hits.csv"
-      ],
-      "recommended_action": "delete-after-review",
-      "next_action": "Move blocking docs/records to the listed replacement artifacts, rerun the ledger, then promote to delete-candidate if live refs reach zero.",
-      "stale_reason": "staging diagnostic bundle duplicated by canonical evidence/raw artifact"
-    },
-    {
-      "path": "evidence/files/vm-tooling-staging/hideemptydrives-result.txt",
-      "category": "vm-tooling-staging-oldest-sample",
-      "cleanup_status": "retained-live-reference",
-      "release_state": "reference-migration-needed",
-      "can_become_delete_candidate": true,
-      "blocking_reference_count": 8,
-      "audit_reference_count": 2,
-      "blocking_reference_classes": {
-        "other-reference": 1,
-        "research-index-reference": 5,
-        "research-note-reference": 1,
-        "research-record-reference": 1
-      },
-      "blocking_references_sample": [
-        "registry-research-framework/enrichment/enrichment-cache.jsonl",
-        "research/evidence-atlas.md",
-        "research/evidence-classes.json",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json",
-        "research/evidence-manifest.md",
-        "research/notes/explorer-hide-empty-drives-validation-20260324.md",
-        "research/records/explorer.hide-empty-drives.review.json"
-      ],
-      "replacement_artifacts": [
-        "evidence/raw/procmon/explorer.hide-empty-drives/hideemptydrives-result.txt"
-      ],
-      "recommended_action": "delete-after-review",
-      "next_action": "Move blocking docs/records to the listed replacement artifacts, rerun the ledger, then promote to delete-candidate if live refs reach zero.",
-      "stale_reason": "staging diagnostic bundle duplicated by canonical evidence/raw artifact"
-    },
-    {
-      "path": "evidence/files/vm-tooling-staging/iconsonly-0-hits.csv",
-      "category": "vm-tooling-staging-oldest-sample",
-      "cleanup_status": "retained-live-reference",
-      "release_state": "reference-migration-needed",
-      "can_become_delete_candidate": true,
-      "blocking_reference_count": 1,
-      "audit_reference_count": 2,
-      "blocking_reference_classes": {
-        "research-note-reference": 1
-      },
-      "blocking_references_sample": [
-        "research/notes/explorer-always-show-icons-never-thumbnails-validation-20260324.md"
-      ],
-      "replacement_artifacts": [
-        "evidence/raw/procmon/explorer-always-show-icons-never-thumbnails-validation-20260324/iconsonly-0-hits.csv"
-      ],
-      "recommended_action": "delete-after-review",
-      "next_action": "Move blocking docs/records to the listed replacement artifacts, rerun the ledger, then promote to delete-candidate if live refs reach zero.",
-      "stale_reason": "staging diagnostic bundle duplicated by canonical evidence/raw artifact"
-    }
-  ],
+  "reference_migration_queue": [],
   "retained_inventory": [
     {
       "path": "registry-research-framework/audit/registry-value-experiments/pilot-perf-calculate-actual-utilization-0-recovery.json",
@@ -520,7 +110,7 @@
       "release_state": "intentional-reference-keep",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 2,
-      "audit_reference_count": 2,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
         "research-index-reference": 1,
         "research-record-reference": 1
@@ -545,7 +135,7 @@
       "release_state": "intentional-reference-keep",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 2,
-      "audit_reference_count": 2,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
         "research-index-reference": 1,
         "research-record-reference": 1
@@ -569,10 +159,9 @@
       "cleanup_status": "retained-live-reference",
       "release_state": "intentional-reference-keep",
       "can_become_delete_candidate": false,
-      "blocking_reference_count": 5,
-      "audit_reference_count": 2,
+      "blocking_reference_count": 4,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
-        "audit-cross-reference": 1,
         "public-doc-reference": 2,
         "research-index-reference": 1,
         "research-record-reference": 1
@@ -580,7 +169,6 @@
       "blocking_references_sample": [
         "CONTRIBUTING.md",
         "README.md",
-        "registry-research-framework/audit/registry-value-experiments/README.md",
         "research/evidence-atlas.md",
         "research/records/power.control.perf-calculate-actual-utilization.json"
       ],
@@ -599,10 +187,9 @@
       "cleanup_status": "retained-live-reference",
       "release_state": "intentional-reference-keep",
       "can_become_delete_candidate": false,
-      "blocking_reference_count": 5,
-      "audit_reference_count": 2,
+      "blocking_reference_count": 4,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
-        "audit-cross-reference": 1,
         "public-doc-reference": 2,
         "research-index-reference": 1,
         "research-record-reference": 1
@@ -610,7 +197,6 @@
       "blocking_references_sample": [
         "CONTRIBUTING.md",
         "README.md",
-        "registry-research-framework/audit/registry-value-experiments/README.md",
         "research/evidence-atlas.md",
         "research/records/power.control.perf-calculate-actual-utilization.json"
       ],
@@ -630,7 +216,7 @@
       "release_state": "needs-replacement-or-retention-decision",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 1,
-      "audit_reference_count": 2,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
         "research-note-reference": 1
       },
@@ -649,7 +235,7 @@
       "release_state": "needs-replacement-or-retention-decision",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 6,
-      "audit_reference_count": 2,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
         "research-index-reference": 5,
         "research-record-reference": 1
@@ -674,7 +260,7 @@
       "release_state": "needs-replacement-or-retention-decision",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 6,
-      "audit_reference_count": 2,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
         "research-index-reference": 5,
         "research-record-reference": 1
@@ -699,7 +285,7 @@
       "release_state": "needs-replacement-or-retention-decision",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 8,
-      "audit_reference_count": 2,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
         "discovery-index-reference": 1,
         "research-index-reference": 5,
@@ -728,7 +314,7 @@
       "release_state": "needs-replacement-or-retention-decision",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 8,
-      "audit_reference_count": 2,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
         "discovery-index-reference": 1,
         "research-index-reference": 5,
@@ -757,7 +343,7 @@
       "release_state": "needs-replacement-or-retention-decision",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 8,
-      "audit_reference_count": 2,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
         "research-index-reference": 5,
         "research-record-reference": 3
@@ -784,7 +370,7 @@
       "release_state": "needs-replacement-or-retention-decision",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 2,
-      "audit_reference_count": 2,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
         "other-reference": 2
       },
@@ -804,7 +390,7 @@
       "release_state": "needs-replacement-or-retention-decision",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 9,
-      "audit_reference_count": 2,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
         "audit-cross-reference": 3,
         "research-index-reference": 5
@@ -827,92 +413,52 @@
     {
       "path": "evidence/files/vm-tooling-staging/crossdevice_resume_probe.csv",
       "category": "vm-tooling-staging-oldest-sample",
-      "cleanup_status": "retained-live-reference",
-      "release_state": "reference-migration-needed",
-      "can_become_delete_candidate": true,
-      "blocking_reference_count": 11,
-      "audit_reference_count": 2,
-      "blocking_reference_classes": {
-        "audit-cross-reference": 1,
-        "evidence-tree-reference": 1,
-        "other-reference": 1,
-        "research-index-reference": 5
-      },
-      "blocking_references_sample": [
-        "evidence/raw/procmon/privacy.disable-resume/crossdevice_resume_probe.csv",
-        "registry-research-framework/audit/rejected-closure-ledger.json",
-        "research/evidence-atlas.md",
-        "research/evidence-classes.json",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json",
-        "research/evidence-manifest.md",
-        "research/evidence-not-found/privacy.disable-cross-device-experiences.json"
-      ],
+      "cleanup_status": "retained-audit-trail-reference",
+      "release_state": "audit-only-retained",
+      "can_become_delete_candidate": false,
+      "blocking_reference_count": 0,
+      "audit_reference_count": 4,
+      "blocking_reference_classes": {},
+      "blocking_references_sample": [],
       "replacement_artifacts": [
         "evidence/raw/procmon/privacy.disable-resume/crossdevice_resume_probe.csv"
       ],
       "recommended_action": "delete-after-review",
-      "next_action": "Move blocking docs/records to the listed replacement artifacts, rerun the ledger, then promote to delete-candidate if live refs reach zero.",
+      "next_action": "No live blocking references remain; keep for audit trail or handle in a dedicated deletion PR that explicitly accepts audit-only history references.",
       "stale_reason": "staging diagnostic bundle duplicated by canonical evidence/raw artifact"
     },
     {
       "path": "evidence/files/vm-tooling-staging/defender-enhanced-notifications-securitycenter-1-20260324-213118",
       "category": "vm-tooling-staging-oldest-sample",
-      "cleanup_status": "retained-live-reference",
-      "release_state": "reference-migration-needed",
-      "can_become_delete_candidate": true,
-      "blocking_reference_count": 7,
-      "audit_reference_count": 2,
-      "blocking_reference_classes": {
-        "other-reference": 1,
-        "research-index-reference": 5,
-        "research-record-reference": 1
-      },
-      "blocking_references_sample": [
-        "registry-research-framework/enrichment/enrichment-cache.jsonl",
-        "research/evidence-atlas.md",
-        "research/evidence-classes.json",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json",
-        "research/evidence-manifest.md",
-        "research/records/security.disable-enhanced-defender-notifications.review.json"
-      ],
+      "cleanup_status": "retained-audit-trail-reference",
+      "release_state": "audit-only-retained",
+      "can_become_delete_candidate": false,
+      "blocking_reference_count": 0,
+      "audit_reference_count": 4,
+      "blocking_reference_classes": {},
+      "blocking_references_sample": [],
       "replacement_artifacts": [
         "evidence/raw/procmon/security-disable-enhanced-defender-notifications-validation-20260324/defender-disable-enhanced-securitycenter-1.txt"
       ],
       "recommended_action": "delete-after-review",
-      "next_action": "Move blocking docs/records to the listed replacement artifacts, rerun the ledger, then promote to delete-candidate if live refs reach zero.",
+      "next_action": "No live blocking references remain; keep for audit trail or handle in a dedicated deletion PR that explicitly accepts audit-only history references.",
       "stale_reason": "staging diagnostic bundle duplicated by canonical evidence/raw artifact"
     },
     {
       "path": "evidence/files/vm-tooling-staging/defender-threat-file-hash-legacyroot-1-20260325-011845",
       "category": "vm-tooling-staging-oldest-sample",
-      "cleanup_status": "retained-live-reference",
-      "release_state": "reference-migration-needed",
-      "can_become_delete_candidate": true,
-      "blocking_reference_count": 8,
-      "audit_reference_count": 2,
-      "blocking_reference_classes": {
-        "other-reference": 1,
-        "research-index-reference": 5,
-        "research-note-reference": 1,
-        "research-record-reference": 1
-      },
-      "blocking_references_sample": [
-        "registry-research-framework/enrichment/enrichment-cache.jsonl",
-        "research/evidence-atlas.md",
-        "research/evidence-classes.json",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json",
-        "research/evidence-manifest.md",
-        "research/notes/security-threat-file-hash-logging-validation-20260325.md",
-        "research/records/security.threat-file-hash-logging.review.json"
-      ],
+      "cleanup_status": "retained-audit-trail-reference",
+      "release_state": "audit-only-retained",
+      "can_become_delete_candidate": false,
+      "blocking_reference_count": 0,
+      "audit_reference_count": 4,
+      "blocking_reference_classes": {},
+      "blocking_references_sample": [],
       "replacement_artifacts": [
         "evidence/raw/procmon/security.threat-file-hash-logging/defender-threat-file-hash-legacyroot-1.txt"
       ],
       "recommended_action": "delete-after-review",
-      "next_action": "Move blocking docs/records to the listed replacement artifacts, rerun the ledger, then promote to delete-candidate if live refs reach zero.",
+      "next_action": "No live blocking references remain; keep for audit trail or handle in a dedicated deletion PR that explicitly accepts audit-only history references.",
       "stale_reason": "staging diagnostic bundle duplicated by canonical evidence/raw artifact"
     },
     {
@@ -922,7 +468,7 @@
       "release_state": "needs-replacement-or-retention-decision",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 6,
-      "audit_reference_count": 2,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
         "research-index-reference": 4,
         "research-note-reference": 1,
@@ -944,226 +490,137 @@
     {
       "path": "evidence/files/vm-tooling-staging/defender-threat-file-hash-policymanager-1-20260325-012333",
       "category": "vm-tooling-staging-oldest-sample",
-      "cleanup_status": "retained-live-reference",
-      "release_state": "reference-migration-needed",
-      "can_become_delete_candidate": true,
-      "blocking_reference_count": 1,
-      "audit_reference_count": 2,
-      "blocking_reference_classes": {
-        "research-note-reference": 1
-      },
-      "blocking_references_sample": [
-        "research/notes/security-threat-file-hash-logging-validation-20260325.md"
-      ],
+      "cleanup_status": "retained-audit-trail-reference",
+      "release_state": "audit-only-retained",
+      "can_become_delete_candidate": false,
+      "blocking_reference_count": 0,
+      "audit_reference_count": 4,
+      "blocking_reference_classes": {},
+      "blocking_references_sample": [],
       "replacement_artifacts": [
         "evidence/raw/procmon/security.threat-file-hash-logging/defender-threat-file-hash-policymanager-1.txt"
       ],
       "recommended_action": "delete-after-review",
-      "next_action": "Move blocking docs/records to the listed replacement artifacts, rerun the ledger, then promote to delete-candidate if live refs reach zero.",
+      "next_action": "No live blocking references remain; keep for audit trail or handle in a dedicated deletion PR that explicitly accepts audit-only history references.",
       "stale_reason": "staging diagnostic bundle duplicated by canonical evidence/raw artifact"
     },
     {
       "path": "evidence/files/vm-tooling-staging/devmode_longpaths_probe.csv",
       "category": "vm-tooling-staging-oldest-sample",
-      "cleanup_status": "retained-live-reference",
-      "release_state": "reference-migration-needed",
-      "can_become_delete_candidate": true,
-      "blocking_reference_count": 9,
-      "audit_reference_count": 2,
-      "blocking_reference_classes": {
-        "evidence-tree-reference": 3,
-        "research-index-reference": 5
-      },
-      "blocking_references_sample": [
-        "evidence/files/missing/devmode-longpaths-probe-pml.md",
-        "evidence/raw/procmon/developer.enable-windows-long-paths/devmode-longpaths-probe-pml.md",
-        "evidence/raw/procmon/developer.enable-windows-long-paths/devmode_longpaths_probe.csv",
-        "research/evidence-atlas.md",
-        "research/evidence-classes.json",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json",
-        "research/evidence-manifest.md"
-      ],
+      "cleanup_status": "retained-audit-trail-reference",
+      "release_state": "audit-only-retained",
+      "can_become_delete_candidate": false,
+      "blocking_reference_count": 0,
+      "audit_reference_count": 4,
+      "blocking_reference_classes": {},
+      "blocking_references_sample": [],
       "replacement_artifacts": [
         "evidence/raw/procmon/developer.enable-windows-long-paths/devmode_longpaths_probe.csv"
       ],
       "recommended_action": "delete-after-review",
-      "next_action": "Move blocking docs/records to the listed replacement artifacts, rerun the ledger, then promote to delete-candidate if live refs reach zero.",
+      "next_action": "No live blocking references remain; keep for audit trail or handle in a dedicated deletion PR that explicitly accepts audit-only history references.",
       "stale_reason": "staging diagnostic bundle duplicated by canonical evidence/raw artifact"
     },
     {
       "path": "evidence/files/vm-tooling-staging/devmode_probe2.csv",
       "category": "vm-tooling-staging-oldest-sample",
-      "cleanup_status": "retained-live-reference",
-      "release_state": "reference-migration-needed",
-      "can_become_delete_candidate": true,
-      "blocking_reference_count": 10,
-      "audit_reference_count": 2,
-      "blocking_reference_classes": {
-        "evidence-tree-reference": 2,
-        "other-reference": 1,
-        "research-index-reference": 5
-      },
-      "blocking_references_sample": [
-        "evidence/raw/procmon/developer.windows-dev-mode/devmode_probe2.csv",
-        "evidence/raw/procmon/developer.windows-dev-mode/devmode_probe2.txt",
-        "research/evidence-atlas.md",
-        "research/evidence-classes.json",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json",
-        "research/evidence-manifest.md",
-        "research/evidence-not-found/developer.windows-dev-mode.json"
-      ],
+      "cleanup_status": "retained-audit-trail-reference",
+      "release_state": "audit-only-retained",
+      "can_become_delete_candidate": false,
+      "blocking_reference_count": 0,
+      "audit_reference_count": 4,
+      "blocking_reference_classes": {},
+      "blocking_references_sample": [],
       "replacement_artifacts": [
         "evidence/raw/procmon/developer.windows-dev-mode/devmode_probe2.csv"
       ],
       "recommended_action": "delete-after-review",
-      "next_action": "Move blocking docs/records to the listed replacement artifacts, rerun the ledger, then promote to delete-candidate if live refs reach zero.",
+      "next_action": "No live blocking references remain; keep for audit trail or handle in a dedicated deletion PR that explicitly accepts audit-only history references.",
       "stale_reason": "staging diagnostic bundle duplicated by canonical evidence/raw artifact"
     },
     {
       "path": "evidence/files/vm-tooling-staging/devmode_probe2.txt",
       "category": "vm-tooling-staging-oldest-sample",
-      "cleanup_status": "retained-live-reference",
-      "release_state": "reference-migration-needed",
-      "can_become_delete_candidate": true,
-      "blocking_reference_count": 10,
-      "audit_reference_count": 2,
-      "blocking_reference_classes": {
-        "evidence-tree-reference": 2,
-        "other-reference": 1,
-        "research-index-reference": 5
-      },
-      "blocking_references_sample": [
-        "evidence/raw/procmon/developer.windows-dev-mode/devmode_probe2.csv",
-        "evidence/raw/procmon/developer.windows-dev-mode/devmode_probe2.txt",
-        "research/evidence-atlas.md",
-        "research/evidence-classes.json",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json",
-        "research/evidence-manifest.md",
-        "research/evidence-not-found/developer.windows-dev-mode.json"
-      ],
+      "cleanup_status": "retained-audit-trail-reference",
+      "release_state": "audit-only-retained",
+      "can_become_delete_candidate": false,
+      "blocking_reference_count": 0,
+      "audit_reference_count": 4,
+      "blocking_reference_classes": {},
+      "blocking_references_sample": [],
       "replacement_artifacts": [
         "evidence/raw/procmon/developer.windows-dev-mode/devmode_probe2.txt"
       ],
       "recommended_action": "delete-after-review",
-      "next_action": "Move blocking docs/records to the listed replacement artifacts, rerun the ledger, then promote to delete-candidate if live refs reach zero.",
+      "next_action": "No live blocking references remain; keep for audit trail or handle in a dedicated deletion PR that explicitly accepts audit-only history references.",
       "stale_reason": "staging diagnostic bundle duplicated by canonical evidence/raw artifact"
     },
     {
       "path": "evidence/files/vm-tooling-staging/feedback_notifications_probe.txt",
       "category": "vm-tooling-staging-oldest-sample",
-      "cleanup_status": "retained-live-reference",
-      "release_state": "reference-migration-needed",
-      "can_become_delete_candidate": true,
-      "blocking_reference_count": 6,
-      "audit_reference_count": 2,
-      "blocking_reference_classes": {
-        "research-index-reference": 5,
-        "research-record-reference": 1
-      },
-      "blocking_references_sample": [
-        "research/evidence-atlas.md",
-        "research/evidence-classes.json",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json",
-        "research/evidence-manifest.md",
-        "research/records/privacy.disable-feedback-notifications.json"
-      ],
+      "cleanup_status": "retained-audit-trail-reference",
+      "release_state": "audit-only-retained",
+      "can_become_delete_candidate": false,
+      "blocking_reference_count": 0,
+      "audit_reference_count": 4,
+      "blocking_reference_classes": {},
+      "blocking_references_sample": [],
       "replacement_artifacts": [
         "evidence/raw/procmon/privacy.disable-feedback-notifications/feedback_notifications_probe.txt"
       ],
       "recommended_action": "delete-after-review",
-      "next_action": "Move blocking docs/records to the listed replacement artifacts, rerun the ledger, then promote to delete-candidate if live refs reach zero.",
+      "next_action": "No live blocking references remain; keep for audit trail or handle in a dedicated deletion PR that explicitly accepts audit-only history references.",
       "stale_reason": "staging diagnostic bundle duplicated by canonical evidence/raw artifact"
     },
     {
       "path": "evidence/files/vm-tooling-staging/gamemode_admin_probe.txt",
       "category": "vm-tooling-staging-oldest-sample",
-      "cleanup_status": "retained-live-reference",
-      "release_state": "reference-migration-needed",
-      "can_become_delete_candidate": true,
-      "blocking_reference_count": 8,
-      "audit_reference_count": 2,
-      "blocking_reference_classes": {
-        "other-reference": 2,
-        "research-index-reference": 5,
-        "research-record-reference": 1
-      },
-      "blocking_references_sample": [
-        "registry-research-framework/enrichment/enrichment-cache.jsonl",
-        "registry-research-framework/queue/research-queue.json",
-        "research/evidence-atlas.md",
-        "research/evidence-classes.json",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json",
-        "research/evidence-manifest.md",
-        "research/records/system.enable-game-mode.review.json"
-      ],
+      "cleanup_status": "retained-audit-trail-reference",
+      "release_state": "audit-only-retained",
+      "can_become_delete_candidate": false,
+      "blocking_reference_count": 0,
+      "audit_reference_count": 4,
+      "blocking_reference_classes": {},
+      "blocking_references_sample": [],
       "replacement_artifacts": [
         "evidence/raw/procmon/system.enable-game-mode/gamemode_admin_probe.txt"
       ],
       "recommended_action": "delete-after-review",
-      "next_action": "Move blocking docs/records to the listed replacement artifacts, rerun the ledger, then promote to delete-candidate if live refs reach zero.",
+      "next_action": "No live blocking references remain; keep for audit trail or handle in a dedicated deletion PR that explicitly accepts audit-only history references.",
       "stale_reason": "staging diagnostic bundle duplicated by canonical evidence/raw artifact"
     },
     {
       "path": "evidence/files/vm-tooling-staging/gamemode_admin_zero_probe.txt",
       "category": "vm-tooling-staging-oldest-sample",
-      "cleanup_status": "retained-live-reference",
-      "release_state": "reference-migration-needed",
-      "can_become_delete_candidate": true,
-      "blocking_reference_count": 7,
-      "audit_reference_count": 2,
-      "blocking_reference_classes": {
-        "other-reference": 1,
-        "research-index-reference": 5,
-        "research-record-reference": 1
-      },
-      "blocking_references_sample": [
-        "registry-research-framework/queue/research-queue.json",
-        "research/evidence-atlas.md",
-        "research/evidence-classes.json",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json",
-        "research/evidence-manifest.md",
-        "research/records/system.enable-game-mode.review.json"
-      ],
+      "cleanup_status": "retained-audit-trail-reference",
+      "release_state": "audit-only-retained",
+      "can_become_delete_candidate": false,
+      "blocking_reference_count": 0,
+      "audit_reference_count": 4,
+      "blocking_reference_classes": {},
+      "blocking_references_sample": [],
       "replacement_artifacts": [
         "evidence/raw/procmon/system.enable-game-mode/gamemode_admin_zero_probe.txt"
       ],
       "recommended_action": "delete-after-review",
-      "next_action": "Move blocking docs/records to the listed replacement artifacts, rerun the ledger, then promote to delete-candidate if live refs reach zero.",
+      "next_action": "No live blocking references remain; keep for audit trail or handle in a dedicated deletion PR that explicitly accepts audit-only history references.",
       "stale_reason": "staging diagnostic bundle duplicated by canonical evidence/raw artifact"
     },
     {
       "path": "evidence/files/vm-tooling-staging/ghidra_explorer_serialize.txt",
       "category": "vm-tooling-staging-oldest-sample",
-      "cleanup_status": "retained-live-reference",
-      "release_state": "reference-migration-needed",
-      "can_become_delete_candidate": true,
-      "blocking_reference_count": 11,
-      "audit_reference_count": 2,
-      "blocking_reference_classes": {
-        "other-reference": 5,
-        "research-index-reference": 3
-      },
-      "blocking_references_sample": [
-        "evidence/records/system.disable-startup-delay/full-evidence.json",
-        "evidence/records/system.disable-startup-delay/static.json",
-        "evidence/records/system.disable-startup-delay/verdict.md",
-        "registry-research-framework/enrichment/enrichment-cache.jsonl",
-        "research/evidence-atlas.md",
-        "research/evidence-audit.json",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json"
-      ],
+      "cleanup_status": "retained-audit-trail-reference",
+      "release_state": "audit-only-retained",
+      "can_become_delete_candidate": false,
+      "blocking_reference_count": 0,
+      "audit_reference_count": 4,
+      "blocking_reference_classes": {},
+      "blocking_references_sample": [],
       "replacement_artifacts": [
         "evidence/raw/ghidra/system.disable-startup-delay/ghidra_explorer_serialize.txt"
       ],
       "recommended_action": "delete-after-review",
-      "next_action": "Move blocking docs/records to the listed replacement artifacts, rerun the ledger, then promote to delete-candidate if live refs reach zero.",
+      "next_action": "No live blocking references remain; keep for audit trail or handle in a dedicated deletion PR that explicitly accepts audit-only history references.",
       "stale_reason": "staging diagnostic bundle duplicated by canonical evidence/raw artifact"
     },
     {
@@ -1173,7 +630,7 @@
       "release_state": "needs-replacement-or-retention-decision",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 8,
-      "audit_reference_count": 2,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
         "other-reference": 2,
         "research-index-reference": 5,
@@ -1197,95 +654,69 @@
     {
       "path": "evidence/files/vm-tooling-staging/hideemptydrives-0-hits.csv",
       "category": "vm-tooling-staging-oldest-sample",
-      "cleanup_status": "retained-live-reference",
-      "release_state": "reference-migration-needed",
-      "can_become_delete_candidate": true,
-      "blocking_reference_count": 1,
-      "audit_reference_count": 2,
-      "blocking_reference_classes": {
-        "research-note-reference": 1
-      },
-      "blocking_references_sample": [
-        "research/notes/explorer-hide-empty-drives-validation-20260324.md"
-      ],
+      "cleanup_status": "retained-audit-trail-reference",
+      "release_state": "audit-only-retained",
+      "can_become_delete_candidate": false,
+      "blocking_reference_count": 0,
+      "audit_reference_count": 4,
+      "blocking_reference_classes": {},
+      "blocking_references_sample": [],
       "replacement_artifacts": [
         "evidence/raw/procmon/explorer-hide-empty-drives-validation-20260324/hideemptydrives-0-hits.csv"
       ],
       "recommended_action": "delete-after-review",
-      "next_action": "Move blocking docs/records to the listed replacement artifacts, rerun the ledger, then promote to delete-candidate if live refs reach zero.",
+      "next_action": "No live blocking references remain; keep for audit trail or handle in a dedicated deletion PR that explicitly accepts audit-only history references.",
       "stale_reason": "staging diagnostic bundle duplicated by canonical evidence/raw artifact"
     },
     {
       "path": "evidence/files/vm-tooling-staging/hideemptydrives-1-hits.csv",
       "category": "vm-tooling-staging-oldest-sample",
-      "cleanup_status": "retained-live-reference",
-      "release_state": "reference-migration-needed",
-      "can_become_delete_candidate": true,
-      "blocking_reference_count": 1,
-      "audit_reference_count": 2,
-      "blocking_reference_classes": {
-        "research-note-reference": 1
-      },
-      "blocking_references_sample": [
-        "research/notes/explorer-hide-empty-drives-validation-20260324.md"
-      ],
+      "cleanup_status": "retained-audit-trail-reference",
+      "release_state": "audit-only-retained",
+      "can_become_delete_candidate": false,
+      "blocking_reference_count": 0,
+      "audit_reference_count": 4,
+      "blocking_reference_classes": {},
+      "blocking_references_sample": [],
       "replacement_artifacts": [
         "evidence/raw/procmon/explorer-hide-empty-drives-validation-20260324/hideemptydrives-1-hits.csv"
       ],
       "recommended_action": "delete-after-review",
-      "next_action": "Move blocking docs/records to the listed replacement artifacts, rerun the ledger, then promote to delete-candidate if live refs reach zero.",
+      "next_action": "No live blocking references remain; keep for audit trail or handle in a dedicated deletion PR that explicitly accepts audit-only history references.",
       "stale_reason": "staging diagnostic bundle duplicated by canonical evidence/raw artifact"
     },
     {
       "path": "evidence/files/vm-tooling-staging/hideemptydrives-result.txt",
       "category": "vm-tooling-staging-oldest-sample",
-      "cleanup_status": "retained-live-reference",
-      "release_state": "reference-migration-needed",
-      "can_become_delete_candidate": true,
-      "blocking_reference_count": 8,
-      "audit_reference_count": 2,
-      "blocking_reference_classes": {
-        "other-reference": 1,
-        "research-index-reference": 5,
-        "research-note-reference": 1,
-        "research-record-reference": 1
-      },
-      "blocking_references_sample": [
-        "registry-research-framework/enrichment/enrichment-cache.jsonl",
-        "research/evidence-atlas.md",
-        "research/evidence-classes.json",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json",
-        "research/evidence-manifest.md",
-        "research/notes/explorer-hide-empty-drives-validation-20260324.md",
-        "research/records/explorer.hide-empty-drives.review.json"
-      ],
+      "cleanup_status": "retained-audit-trail-reference",
+      "release_state": "audit-only-retained",
+      "can_become_delete_candidate": false,
+      "blocking_reference_count": 0,
+      "audit_reference_count": 4,
+      "blocking_reference_classes": {},
+      "blocking_references_sample": [],
       "replacement_artifacts": [
         "evidence/raw/procmon/explorer.hide-empty-drives/hideemptydrives-result.txt"
       ],
       "recommended_action": "delete-after-review",
-      "next_action": "Move blocking docs/records to the listed replacement artifacts, rerun the ledger, then promote to delete-candidate if live refs reach zero.",
+      "next_action": "No live blocking references remain; keep for audit trail or handle in a dedicated deletion PR that explicitly accepts audit-only history references.",
       "stale_reason": "staging diagnostic bundle duplicated by canonical evidence/raw artifact"
     },
     {
       "path": "evidence/files/vm-tooling-staging/iconsonly-0-hits.csv",
       "category": "vm-tooling-staging-oldest-sample",
-      "cleanup_status": "retained-live-reference",
-      "release_state": "reference-migration-needed",
-      "can_become_delete_candidate": true,
-      "blocking_reference_count": 1,
-      "audit_reference_count": 2,
-      "blocking_reference_classes": {
-        "research-note-reference": 1
-      },
-      "blocking_references_sample": [
-        "research/notes/explorer-always-show-icons-never-thumbnails-validation-20260324.md"
-      ],
+      "cleanup_status": "retained-audit-trail-reference",
+      "release_state": "audit-only-retained",
+      "can_become_delete_candidate": false,
+      "blocking_reference_count": 0,
+      "audit_reference_count": 4,
+      "blocking_reference_classes": {},
+      "blocking_references_sample": [],
       "replacement_artifacts": [
         "evidence/raw/procmon/explorer-always-show-icons-never-thumbnails-validation-20260324/iconsonly-0-hits.csv"
       ],
       "recommended_action": "delete-after-review",
-      "next_action": "Move blocking docs/records to the listed replacement artifacts, rerun the ledger, then promote to delete-candidate if live refs reach zero.",
+      "next_action": "No live blocking references remain; keep for audit trail or handle in a dedicated deletion PR that explicitly accepts audit-only history references.",
       "stale_reason": "staging diagnostic bundle duplicated by canonical evidence/raw artifact"
     },
     {
@@ -1295,7 +726,7 @@
       "release_state": "needs-replacement-or-retention-decision",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 9,
-      "audit_reference_count": 2,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
         "evidence-tree-reference": 1,
         "research-index-reference": 5,
@@ -1323,7 +754,7 @@
       "release_state": "needs-replacement-or-retention-decision",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 10,
-      "audit_reference_count": 2,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
         "evidence-tree-reference": 3,
         "research-index-reference": 5
@@ -1350,7 +781,7 @@
       "release_state": "needs-replacement-or-retention-decision",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 9,
-      "audit_reference_count": 2,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
         "evidence-tree-reference": 2,
         "research-index-reference": 5,
@@ -1378,7 +809,7 @@
       "release_state": "needs-replacement-or-retention-decision",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 10,
-      "audit_reference_count": 2,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
         "evidence-tree-reference": 3,
         "other-reference": 1,
@@ -1406,7 +837,7 @@
       "release_state": "needs-replacement-or-retention-decision",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 10,
-      "audit_reference_count": 2,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
         "audit-cross-reference": 1,
         "evidence-tree-reference": 3,
@@ -1435,7 +866,7 @@
       "release_state": "needs-replacement-or-retention-decision",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 9,
-      "audit_reference_count": 2,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
         "audit-cross-reference": 1,
         "evidence-tree-reference": 2,
@@ -1464,7 +895,7 @@
       "release_state": "needs-replacement-or-retention-decision",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 8,
-      "audit_reference_count": 2,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
         "audit-cross-reference": 1,
         "evidence-tree-reference": 2,
@@ -1494,7 +925,7 @@
       "release_state": "needs-replacement-or-retention-decision",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 51,
-      "audit_reference_count": 2,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
         "audit-cross-reference": 6,
         "evidence-tree-reference": 2
@@ -1521,7 +952,7 @@
       "release_state": "needs-replacement-or-retention-decision",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 9,
-      "audit_reference_count": 2,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
         "evidence-tree-reference": 3,
         "other-reference": 1,
@@ -1549,7 +980,7 @@
       "release_state": "needs-replacement-or-retention-decision",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 8,
-      "audit_reference_count": 2,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
         "audit-cross-reference": 1,
         "evidence-tree-reference": 2,
@@ -1579,7 +1010,7 @@
       "release_state": "needs-replacement-or-retention-decision",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 8,
-      "audit_reference_count": 2,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
         "audit-cross-reference": 1,
         "evidence-tree-reference": 2,
@@ -1609,7 +1040,7 @@
       "release_state": "needs-replacement-or-retention-decision",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 8,
-      "audit_reference_count": 2,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
         "audit-cross-reference": 1,
         "evidence-tree-reference": 2,
@@ -1639,7 +1070,7 @@
       "release_state": "needs-replacement-or-retention-decision",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 9,
-      "audit_reference_count": 2,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
         "audit-cross-reference": 1,
         "evidence-tree-reference": 2,
@@ -1668,7 +1099,7 @@
       "release_state": "needs-replacement-or-retention-decision",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 8,
-      "audit_reference_count": 2,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
         "audit-cross-reference": 1,
         "evidence-tree-reference": 2,
@@ -1698,7 +1129,7 @@
       "release_state": "needs-replacement-or-retention-decision",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 8,
-      "audit_reference_count": 2,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
         "audit-cross-reference": 1,
         "evidence-tree-reference": 2,
@@ -1728,7 +1159,7 @@
       "release_state": "needs-replacement-or-retention-decision",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 8,
-      "audit_reference_count": 2,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
         "audit-cross-reference": 1,
         "evidence-tree-reference": 2,
@@ -1758,7 +1189,7 @@
       "release_state": "needs-replacement-or-retention-decision",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 8,
-      "audit_reference_count": 2,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
         "audit-cross-reference": 1,
         "evidence-tree-reference": 2,
@@ -1788,7 +1219,7 @@
       "release_state": "needs-replacement-or-retention-decision",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 3,
-      "audit_reference_count": 2,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
         "evidence-tree-reference": 2,
         "other-reference": 1
@@ -1810,7 +1241,7 @@
       "release_state": "needs-replacement-or-retention-decision",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 13,
-      "audit_reference_count": 2,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
         "audit-cross-reference": 1,
         "evidence-tree-reference": 3,
@@ -1839,7 +1270,7 @@
       "release_state": "needs-replacement-or-retention-decision",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 10,
-      "audit_reference_count": 2,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
         "audit-cross-reference": 1,
         "evidence-tree-reference": 3,
@@ -1868,7 +1299,7 @@
       "release_state": "needs-replacement-or-retention-decision",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 8,
-      "audit_reference_count": 2,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
         "audit-cross-reference": 1,
         "evidence-tree-reference": 2,
@@ -1898,7 +1329,7 @@
       "release_state": "needs-replacement-or-retention-decision",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 9,
-      "audit_reference_count": 2,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
         "evidence-tree-reference": 2,
         "other-reference": 2,
@@ -1926,7 +1357,7 @@
       "release_state": "needs-replacement-or-retention-decision",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 10,
-      "audit_reference_count": 2,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
         "evidence-tree-reference": 3,
         "other-reference": 1,
@@ -1954,7 +1385,7 @@
       "release_state": "needs-replacement-or-retention-decision",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 53,
-      "audit_reference_count": 2,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
         "audit-cross-reference": 6,
         "evidence-tree-reference": 2
@@ -1981,7 +1412,7 @@
       "release_state": "needs-replacement-or-retention-decision",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 10,
-      "audit_reference_count": 2,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
         "audit-cross-reference": 3,
         "evidence-tree-reference": 2,
@@ -2009,7 +1440,7 @@
       "release_state": "needs-replacement-or-retention-decision",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 1,
-      "audit_reference_count": 2,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
         "other-reference": 1
       },
@@ -2028,7 +1459,7 @@
       "release_state": "needs-replacement-or-retention-decision",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 1,
-      "audit_reference_count": 2,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
         "other-reference": 1
       },
@@ -2047,7 +1478,7 @@
       "release_state": "needs-replacement-or-retention-decision",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 18,
-      "audit_reference_count": 2,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
         "audit-cross-reference": 8
       },
@@ -2073,7 +1504,7 @@
       "release_state": "needs-replacement-or-retention-decision",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 18,
-      "audit_reference_count": 2,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
         "audit-cross-reference": 8
       },
@@ -2099,7 +1530,7 @@
       "release_state": "needs-replacement-or-retention-decision",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 18,
-      "audit_reference_count": 2,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
         "audit-cross-reference": 8
       },
@@ -2125,7 +1556,7 @@
       "release_state": "needs-replacement-or-retention-decision",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 1,
-      "audit_reference_count": 2,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
         "other-reference": 1
       },
@@ -2144,7 +1575,7 @@
       "release_state": "needs-replacement-or-retention-decision",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 1,
-      "audit_reference_count": 2,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
         "other-reference": 1
       },
@@ -2163,7 +1594,7 @@
       "release_state": "needs-replacement-or-retention-decision",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 10,
-      "audit_reference_count": 2,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
         "audit-cross-reference": 2,
         "other-reference": 6
@@ -2190,7 +1621,7 @@
       "release_state": "needs-replacement-or-retention-decision",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 10,
-      "audit_reference_count": 2,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
         "audit-cross-reference": 2,
         "other-reference": 6
@@ -2217,7 +1648,7 @@
       "release_state": "needs-replacement-or-retention-decision",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 10,
-      "audit_reference_count": 2,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
         "audit-cross-reference": 2,
         "other-reference": 6
@@ -2244,7 +1675,7 @@
       "release_state": "needs-replacement-or-retention-decision",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 2,
-      "audit_reference_count": 2,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
         "evidence-tree-reference": 1,
         "research-note-reference": 1
@@ -2265,7 +1696,7 @@
       "release_state": "needs-replacement-or-retention-decision",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 3,
-      "audit_reference_count": 2,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
         "evidence-tree-reference": 1,
         "research-note-reference": 2
@@ -2287,7 +1718,7 @@
       "release_state": "needs-replacement-or-retention-decision",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 10,
-      "audit_reference_count": 2,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
         "audit-cross-reference": 1,
         "evidence-tree-reference": 1,
@@ -2316,7 +1747,7 @@
       "release_state": "needs-replacement-or-retention-decision",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 12,
-      "audit_reference_count": 2,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
         "audit-cross-reference": 2,
         "other-reference": 3,
@@ -2344,7 +1775,7 @@
       "release_state": "needs-replacement-or-retention-decision",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 1,
-      "audit_reference_count": 2,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
         "research-note-reference": 1
       },
@@ -2363,7 +1794,7 @@
       "release_state": "needs-replacement-or-retention-decision",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 8,
-      "audit_reference_count": 2,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
         "audit-cross-reference": 1,
         "research-index-reference": 5,
@@ -2392,7 +1823,7 @@
       "release_state": "needs-replacement-or-retention-decision",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 2,
-      "audit_reference_count": 2,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
         "audit-cross-reference": 1,
         "research-note-reference": 1
@@ -2413,7 +1844,7 @@
       "release_state": "needs-replacement-or-retention-decision",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 7,
-      "audit_reference_count": 2,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
         "audit-cross-reference": 1,
         "research-index-reference": 4,
@@ -2441,7 +1872,7 @@
       "release_state": "needs-replacement-or-retention-decision",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 8,
-      "audit_reference_count": 2,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
         "audit-cross-reference": 2,
         "research-index-reference": 4,
@@ -2470,7 +1901,7 @@
       "release_state": "needs-replacement-or-retention-decision",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 8,
-      "audit_reference_count": 2,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
         "audit-cross-reference": 2,
         "research-index-reference": 4,
@@ -2499,7 +1930,7 @@
       "release_state": "needs-replacement-or-retention-decision",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 9,
-      "audit_reference_count": 2,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
         "audit-cross-reference": 1,
         "evidence-tree-reference": 1,
@@ -2528,7 +1959,7 @@
       "release_state": "needs-replacement-or-retention-decision",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 10,
-      "audit_reference_count": 2,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
         "audit-cross-reference": 2,
         "evidence-tree-reference": 1,
@@ -2557,7 +1988,7 @@
       "release_state": "needs-replacement-or-retention-decision",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 13,
-      "audit_reference_count": 2,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
         "audit-cross-reference": 2,
         "other-reference": 3,
@@ -2585,7 +2016,7 @@
       "release_state": "needs-replacement-or-retention-decision",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 11,
-      "audit_reference_count": 2,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
         "audit-cross-reference": 2,
         "other-reference": 2,
@@ -2613,7 +2044,7 @@
       "release_state": "needs-replacement-or-retention-decision",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 8,
-      "audit_reference_count": 2,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
         "audit-cross-reference": 2,
         "research-index-reference": 4,
@@ -2642,7 +2073,7 @@
       "release_state": "needs-replacement-or-retention-decision",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 12,
-      "audit_reference_count": 2,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
         "audit-cross-reference": 2,
         "other-reference": 3,
@@ -2670,7 +2101,7 @@
       "release_state": "needs-replacement-or-retention-decision",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 8,
-      "audit_reference_count": 2,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
         "audit-cross-reference": 2,
         "research-index-reference": 4,
@@ -2699,7 +2130,7 @@
       "release_state": "needs-replacement-or-retention-decision",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 6,
-      "audit_reference_count": 2,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
         "research-index-reference": 4,
         "research-note-reference": 1,
@@ -2725,7 +2156,7 @@
       "release_state": "needs-replacement-or-retention-decision",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 6,
-      "audit_reference_count": 2,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
         "research-index-reference": 4,
         "research-note-reference": 1,
@@ -2751,7 +2182,7 @@
       "release_state": "needs-replacement-or-retention-decision",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 2,
-      "audit_reference_count": 2,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
         "audit-cross-reference": 1,
         "research-note-reference": 1
@@ -2772,7 +2203,7 @@
       "release_state": "needs-replacement-or-retention-decision",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 1,
-      "audit_reference_count": 2,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
         "research-note-reference": 1
       },
@@ -2791,7 +2222,7 @@
       "release_state": "needs-replacement-or-retention-decision",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 1,
-      "audit_reference_count": 2,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
         "research-note-reference": 1
       },
@@ -2810,7 +2241,7 @@
       "release_state": "needs-replacement-or-retention-decision",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 39,
-      "audit_reference_count": 2,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
         "other-reference": 8
       },
@@ -2836,7 +2267,7 @@
       "release_state": "needs-replacement-or-retention-decision",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 11,
-      "audit_reference_count": 2,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
         "audit-cross-reference": 2,
         "other-reference": 3,
@@ -2864,7 +2295,7 @@
       "release_state": "needs-replacement-or-retention-decision",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 8,
-      "audit_reference_count": 2,
+      "audit_reference_count": 4,
       "blocking_reference_classes": {
         "audit-cross-reference": 2,
         "research-index-reference": 4,

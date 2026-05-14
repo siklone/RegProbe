@@ -3603,7 +3603,7 @@
         "links": [
           {
             "title": "Validation proof source",
-            "url": "evidence/files/vm-tooling-staging/hideemptydrives-result.txt",
+            "url": "evidence/raw/procmon/explorer.hide-empty-drives/hideemptydrives-result.txt",
             "kind": "validation-proof",
             "summary": "STATE=0 ... Explorer.EXE RegQueryValue HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\HideDrivesWithNoMedia ... Data: 0; STATE=1 ... Explorer.EXE RegQueryValue..."
           },
@@ -15121,7 +15121,7 @@
         "links": [
           {
             "title": "Guest launch of CrossDeviceResume",
-            "url": "evidence/files/vm-tooling-staging/crossdevice_resume_probe.csv",
+            "url": "evidence/raw/procmon/privacy.disable-resume/crossdevice_resume_probe.csv",
             "kind": "vm-test",
             "summary": "Win25H2Clean guest Procmon capture shows CrossDeviceResume.exe launching from the MicrosoftWindows.Client.CBS app tile, confirming the runtime surface is present. This trigger d..."
           },
@@ -20290,7 +20290,7 @@
         "links": [
           {
             "title": "Validation proof source",
-            "url": "evidence/files/vm-tooling-staging/defender-enhanced-notifications-securitycenter-1-20260324-213118/defender-disable-enhanced-securitycenter-1.txt",
+            "url": "evidence/raw/procmon/security-disable-enhanced-defender-notifications-validation-20260324/defender-disable-enhanced-securitycenter-1.txt/defender-disable-enhanced-securitycenter-1.txt",
             "kind": "validation-proof",
             "summary": "SecurityHealthService.exe | RegQueryValue | HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender Security Center\\Notifications\\DisableEnhancedNotifications | SUCCESS | Type: REG_DW..."
           },
@@ -21980,7 +21980,7 @@
         "links": [
           {
             "title": "Validation proof source",
-            "url": "evidence/files/vm-tooling-staging/defender-threat-file-hash-legacyroot-1-20260325-011845/defender-threat-file-hash-legacyroot-1.txt",
+            "url": "evidence/raw/procmon/security.threat-file-hash-logging/defender-threat-file-hash-legacyroot-1.txt/defender-threat-file-hash-legacyroot-1.txt",
             "kind": "validation-proof",
             "summary": "MsMpEng.exe | RegQueryValue | HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender\\ThreatFileHashLogging | SUCCESS | Type: REG_DWORD, Length: 4, Data: 1"
           },
@@ -24455,7 +24455,7 @@
         "links": [
           {
             "title": "Validation proof source",
-            "url": "evidence/files/vm-tooling-staging/gamemode_admin_probe.txt",
+            "url": "evidence/raw/procmon/system.enable-game-mode/gamemode_admin_probe.txt",
             "kind": "validation-proof",
             "summary": "gamemode_admin_probe.txt: \"7:52:45.6879293 PM\",\"SystemSettings.exe\",\"5512\",\"RegQueryValue\",\"HKU\\S-1-5-21-3538642439-2106388720-149684979-500\\Software\\Microsoft\\GameBar\\AutoGameM..."
           },

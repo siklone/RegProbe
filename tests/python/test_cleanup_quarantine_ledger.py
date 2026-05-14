@@ -104,6 +104,96 @@ class CleanupQuarantineLedgerTests(unittest.TestCase):
             self.assertFalse(item["delete_eligible"])
             self.assertEqual(item["cleanup_status"], "retained-audit-trail-reference")
 
+    def test_retained_inventory_plan_is_audit_trail_not_blocking_reference(self):
+        with tempfile.TemporaryDirectory() as temp:
+            repo = Path(temp)
+            target_dir = repo / "registry-research-framework" / "audit"
+            target_dir.mkdir(parents=True)
+            target = target_dir / "obsolete-staging.txt"
+            target.write_text("old data\n", encoding="utf-8")
+
+            retained_plan = target_dir / "cleanup-retained-inventory-plan-20260514.md"
+            retained_plan.write_text("obsolete-staging is tracked here\n", encoding="utf-8")
+
+            item = self.module.item_for(
+                target,
+                category="test",
+                stale_reason="superseded by test fixture",
+                replacement_artifacts=["replacement.txt"],
+                recommended_action="delete-after-review",
+                repo_root=repo,
+                output_paths=set(),
+            )
+
+            self.assertEqual(item["live_reference_count"], 1)
+            self.assertEqual(item["audit_reference_count"], 1)
+            self.assertEqual(item["blocking_reference_count"], 0)
+            self.assertEqual(
+                item["audit_references_sample"],
+                ["registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"],
+            )
+            self.assertFalse(item["delete_eligible"])
+            self.assertEqual(item["cleanup_status"], "retained-audit-trail-reference")
+
+    def test_replacement_resolved_references_do_not_block_old_artifact_cleanup(self):
+        with tempfile.TemporaryDirectory() as temp:
+            repo = Path(temp)
+            staging = repo / "evidence" / "files" / "vm-tooling-staging"
+            replacement_dir = repo / "evidence" / "raw" / "procmon" / "sample"
+            docs = repo / "research"
+            staging.mkdir(parents=True)
+            replacement_dir.mkdir(parents=True)
+            docs.mkdir(parents=True)
+            target = staging / "sample_probe.csv"
+            replacement = replacement_dir / "sample_probe.csv"
+            target.write_text("old data\n", encoding="utf-8")
+            replacement.write_text("C:\\Tools\\Perf\\Procmon\\sample_probe.pml\n", encoding="utf-8")
+            (docs / "evidence-index.json").write_text(
+                '{"url":"evidence/raw/procmon/sample/sample_probe.csv"}\n',
+                encoding="utf-8",
+            )
+
+            item = self.module.item_for(
+                target,
+                category="test",
+                stale_reason="superseded by canonical raw evidence",
+                replacement_artifacts=["evidence/raw/procmon/sample/sample_probe.csv"],
+                recommended_action="delete-after-review",
+                repo_root=repo,
+                output_paths=set(),
+            )
+
+            self.assertEqual(item["live_reference_count"], 0)
+            self.assertEqual(item["replacement_resolved_reference_count"], 2)
+            self.assertTrue(item["delete_eligible"])
+            self.assertEqual(item["cleanup_status"], "delete-candidate")
+
+    def test_basename_only_reference_still_blocks_cleanup(self):
+        with tempfile.TemporaryDirectory() as temp:
+            repo = Path(temp)
+            staging = repo / "evidence" / "files" / "vm-tooling-staging"
+            docs = repo / "research"
+            staging.mkdir(parents=True)
+            docs.mkdir(parents=True)
+            target = staging / "sample_probe.csv"
+            target.write_text("old data\n", encoding="utf-8")
+            (docs / "notes.md").write_text("See sample_probe.csv for the original probe.\n", encoding="utf-8")
+
+            item = self.module.item_for(
+                target,
+                category="test",
+                stale_reason="superseded by canonical raw evidence",
+                replacement_artifacts=["evidence/raw/procmon/sample/sample_probe.csv"],
+                recommended_action="delete-after-review",
+                repo_root=repo,
+                output_paths=set(),
+            )
+
+            self.assertEqual(item["live_reference_count"], 1)
+            self.assertEqual(item["blocking_reference_count"], 1)
+            self.assertFalse(item["delete_eligible"])
+            self.assertEqual(item["cleanup_status"], "retained-live-reference")
+
     def test_markdown_separates_delete_candidates_from_retained_inventory(self):
         payload = {
             "generated_utc": "2026-05-14T00:00:00Z",

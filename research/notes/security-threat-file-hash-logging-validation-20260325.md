@@ -75,9 +75,9 @@ Artifacts:
 - documented MpEngine path:
   - [`defender-threat-file-hash-mpengine-1-events.json`](../../evidence/files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-20260325-011519/defender-threat-file-hash-mpengine-1-events.json)
 - legacy root path:
-  - [`defender-threat-file-hash-legacyroot-1.txt`](../../evidence/files/vm-tooling-staging/defender-threat-file-hash-legacyroot-1-20260325-011845/defender-threat-file-hash-legacyroot-1.txt)
+  - [`defender-threat-file-hash-legacyroot-1.txt`](../../evidence/raw/procmon/security.threat-file-hash-logging/defender-threat-file-hash-legacyroot-1.txt/defender-threat-file-hash-legacyroot-1.txt)
 - Policy Manager alias:
-  - [`defender-threat-file-hash-policymanager-1.txt`](../../evidence/files/vm-tooling-staging/defender-threat-file-hash-policymanager-1-20260325-012333/defender-threat-file-hash-policymanager-1.txt)
+  - [`defender-threat-file-hash-policymanager-1.txt`](../../evidence/raw/procmon/security.threat-file-hash-logging/defender-threat-file-hash-policymanager-1.txt/defender-threat-file-hash-policymanager-1.txt)
 - service-restart follow-up:
   - [`defender-threat-file-hash-mpengine-1-events.json`](../../evidence/files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-20260325-095038/defender-threat-file-hash-mpengine-1-events.json)
 - rebooted documented MpEngine path:

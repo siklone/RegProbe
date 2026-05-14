@@ -268,7 +268,7 @@
   ],
   "last_reviewed_utc": "2026-05-06T00:20:41.9332318Z",
   "validation_proof": {
-    "source_url": "evidence/files/vm-tooling-staging/defender-enhanced-notifications-securitycenter-1-20260324-213118/defender-disable-enhanced-securitycenter-1.txt",
+    "source_url": "evidence/raw/procmon/security-disable-enhanced-defender-notifications-validation-20260324/defender-disable-enhanced-securitycenter-1.txt/defender-disable-enhanced-securitycenter-1.txt",
     "exact_quote_or_path": "SecurityHealthService.exe | RegQueryValue | HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender Security Center\\Notifications\\DisableEnhancedNotifications | SUCCESS | Type: REG_DWORD, Length: 4, Data: 1; baseline run shows the same value as NAME NOT FOUND before the write.",
     "key_found_on_page": true,
     "notes": "The clean snapshot baseline and the enabled-state VM probe both hit the same Security Center Notifications policy path. A separate alias check with only the Reporting path set still showed SecurityHealthService.exe reading the Security Center path. The baseline also showed DisableNotifications = 1 on that branch, but that sibling policy does not change which path this value is read from."

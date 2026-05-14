@@ -1,6 +1,6 @@
 # Cleanup Retained Inventory Plan
 
-Generated: `2026-05-14T13:28:06Z`
+Generated: `2026-05-14T14:14:17Z`
 Ledger: `registry-research-framework/audit/cleanup-quarantine-ledger-20260514.json`
 
 Action plan for cleanup retained inventory. It does not delete files and it does not redefine delete eligibility.
@@ -17,7 +17,8 @@ Action plan for cleanup retained inventory. It does not delete files and it does
 |---|---:|
 | Retained inventory items | 89 |
 | Delete-ready rows | 0 |
-| Reference migration needed | 15 |
+| Reference migration needed | 0 |
+| Audit-only retained | 15 |
 | Intentional reference keep | 4 |
 | Needs replacement/retention decision | 70 |
 | Retained pending review | 0 |
@@ -26,51 +27,35 @@ Action plan for cleanup retained inventory. It does not delete files and it does
 
 | State | Count |
 |---|---:|
+| `audit-only-retained` | 15 |
 | `intentional-reference-keep` | 4 |
 | `needs-replacement-or-retention-decision` | 70 |
-| `reference-migration-needed` | 15 |
 
 ## Top Blocking Reference Paths
 
 | Path | Count |
 |---|---:|
-| `research/evidence-index.json` | 58 |
-| `research/evidence-manifest.json` | 55 |
-| `research/evidence-atlas.md` | 50 |
-| `research/evidence-manifest.md` | 48 |
-| `registry-research-framework/audit/rejected-closure-ledger.json` | 31 |
-| `research/evidence-classes.json` | 28 |
+| `research/evidence-index.json` | 47 |
+| `research/evidence-manifest.json` | 44 |
+| `research/evidence-atlas.md` | 39 |
+| `research/evidence-manifest.md` | 38 |
+| `registry-research-framework/audit/rejected-closure-ledger.json` | 30 |
+| `research/evidence-classes.json` | 18 |
 | `registry-research-framework/audit/operator-regadd-inventory-20260508-repo.json` | 13 |
-| `registry-research-framework/enrichment/enrichment-cache.jsonl` | 8 |
 | `registry-research-framework/audit/etw-stackwalk-reopen-rotation-ledger.json` | 6 |
 | `registry-research-framework/scripts/check_etw_stackwalk_reopen_history_archive.py` | 5 |
 | `research/records/power.control.perf-calculate-actual-utilization.json` | 4 |
-| `research/notes/security-threat-file-hash-logging-validation-20260325.md` | 4 |
 | `research/records/power.session-watchdog-timeouts.json` | 4 |
-| `registry-research-framework/queue/research-queue.json` | 3 |
-| `research/notes/explorer-hide-empty-drives-validation-20260324.md` | 3 |
+| `registry-research-framework/enrichment/enrichment-cache.jsonl` | 3 |
+| `registry-research-framework/audit/etw-stackwalk-reopen-baseline-archive/README.md` | 3 |
+| `registry-research-framework/audit/etw-stackwalk-reopen-baseline-archive/commands/01-promote-previous-snapshot.txt` | 3 |
+| `registry-research-framework/audit/etw-stackwalk-reopen-history-archive/CHECKSUMS.json` | 3 |
 
 ## Reference Migration Queue
 
 These rows are the only retained items that already have replacement artifacts and can plausibly become delete-candidates after references are migrated.
 
-| Path | Category | Blocking refs | Replacement artifacts | Next action |
-|---|---|---:|---|---|
-| `evidence/files/vm-tooling-staging/crossdevice_resume_probe.csv` | `vm-tooling-staging-oldest-sample` | 11 | `evidence/raw/procmon/privacy.disable-resume/crossdevice_resume_probe.csv` | Move blocking docs/records to the listed replacement artifacts, rerun the ledger, then promote to delete-candidate if live refs reach zero. |
-| `evidence/files/vm-tooling-staging/defender-enhanced-notifications-securitycenter-1-20260324-213118` | `vm-tooling-staging-oldest-sample` | 7 | `evidence/raw/procmon/security-disable-enhanced-defender-notifications-validation-20260324/defender-disable-enhanced-securitycenter-1.txt` | Move blocking docs/records to the listed replacement artifacts, rerun the ledger, then promote to delete-candidate if live refs reach zero. |
-| `evidence/files/vm-tooling-staging/defender-threat-file-hash-legacyroot-1-20260325-011845` | `vm-tooling-staging-oldest-sample` | 8 | `evidence/raw/procmon/security.threat-file-hash-logging/defender-threat-file-hash-legacyroot-1.txt` | Move blocking docs/records to the listed replacement artifacts, rerun the ledger, then promote to delete-candidate if live refs reach zero. |
-| `evidence/files/vm-tooling-staging/defender-threat-file-hash-policymanager-1-20260325-012333` | `vm-tooling-staging-oldest-sample` | 1 | `evidence/raw/procmon/security.threat-file-hash-logging/defender-threat-file-hash-policymanager-1.txt` | Move blocking docs/records to the listed replacement artifacts, rerun the ledger, then promote to delete-candidate if live refs reach zero. |
-| `evidence/files/vm-tooling-staging/devmode_longpaths_probe.csv` | `vm-tooling-staging-oldest-sample` | 9 | `evidence/raw/procmon/developer.enable-windows-long-paths/devmode_longpaths_probe.csv` | Move blocking docs/records to the listed replacement artifacts, rerun the ledger, then promote to delete-candidate if live refs reach zero. |
-| `evidence/files/vm-tooling-staging/devmode_probe2.csv` | `vm-tooling-staging-oldest-sample` | 10 | `evidence/raw/procmon/developer.windows-dev-mode/devmode_probe2.csv` | Move blocking docs/records to the listed replacement artifacts, rerun the ledger, then promote to delete-candidate if live refs reach zero. |
-| `evidence/files/vm-tooling-staging/devmode_probe2.txt` | `vm-tooling-staging-oldest-sample` | 10 | `evidence/raw/procmon/developer.windows-dev-mode/devmode_probe2.txt` | Move blocking docs/records to the listed replacement artifacts, rerun the ledger, then promote to delete-candidate if live refs reach zero. |
-| `evidence/files/vm-tooling-staging/feedback_notifications_probe.txt` | `vm-tooling-staging-oldest-sample` | 6 | `evidence/raw/procmon/privacy.disable-feedback-notifications/feedback_notifications_probe.txt` | Move blocking docs/records to the listed replacement artifacts, rerun the ledger, then promote to delete-candidate if live refs reach zero. |
-| `evidence/files/vm-tooling-staging/gamemode_admin_probe.txt` | `vm-tooling-staging-oldest-sample` | 8 | `evidence/raw/procmon/system.enable-game-mode/gamemode_admin_probe.txt` | Move blocking docs/records to the listed replacement artifacts, rerun the ledger, then promote to delete-candidate if live refs reach zero. |
-| `evidence/files/vm-tooling-staging/gamemode_admin_zero_probe.txt` | `vm-tooling-staging-oldest-sample` | 7 | `evidence/raw/procmon/system.enable-game-mode/gamemode_admin_zero_probe.txt` | Move blocking docs/records to the listed replacement artifacts, rerun the ledger, then promote to delete-candidate if live refs reach zero. |
-| `evidence/files/vm-tooling-staging/ghidra_explorer_serialize.txt` | `vm-tooling-staging-oldest-sample` | 11 | `evidence/raw/ghidra/system.disable-startup-delay/ghidra_explorer_serialize.txt` | Move blocking docs/records to the listed replacement artifacts, rerun the ledger, then promote to delete-candidate if live refs reach zero. |
-| `evidence/files/vm-tooling-staging/hideemptydrives-0-hits.csv` | `vm-tooling-staging-oldest-sample` | 1 | `evidence/raw/procmon/explorer-hide-empty-drives-validation-20260324/hideemptydrives-0-hits.csv` | Move blocking docs/records to the listed replacement artifacts, rerun the ledger, then promote to delete-candidate if live refs reach zero. |
-| `evidence/files/vm-tooling-staging/hideemptydrives-1-hits.csv` | `vm-tooling-staging-oldest-sample` | 1 | `evidence/raw/procmon/explorer-hide-empty-drives-validation-20260324/hideemptydrives-1-hits.csv` | Move blocking docs/records to the listed replacement artifacts, rerun the ledger, then promote to delete-candidate if live refs reach zero. |
-| `evidence/files/vm-tooling-staging/hideemptydrives-result.txt` | `vm-tooling-staging-oldest-sample` | 8 | `evidence/raw/procmon/explorer.hide-empty-drives/hideemptydrives-result.txt` | Move blocking docs/records to the listed replacement artifacts, rerun the ledger, then promote to delete-candidate if live refs reach zero. |
-| `evidence/files/vm-tooling-staging/iconsonly-0-hits.csv` | `vm-tooling-staging-oldest-sample` | 1 | `evidence/raw/procmon/explorer-always-show-icons-never-thumbnails-validation-20260324/iconsonly-0-hits.csv` | Move blocking docs/records to the listed replacement artifacts, rerun the ledger, then promote to delete-candidate if live refs reach zero. |
+_No reference migration rows currently exist._
 
 ## Retained Inventory Worklist
 
@@ -78,8 +63,8 @@ These rows are the only retained items that already have replacement artifacts a
 |---|---|---|---:|---|
 | `registry-research-framework/audit/registry-value-experiments/pilot-perf-calculate-actual-utilization-0-recovery.json` | `intentional-reference-keep` | `operator96-superseded-pilot` | 2 | Keep as a historical example unless a maintainer explicitly rewrites the current docs/record to the replacement artifacts. |
 | `registry-research-framework/audit/registry-value-experiments/pilot-perf-calculate-actual-utilization-0-recovery.md` | `intentional-reference-keep` | `operator96-superseded-pilot` | 2 | Keep as a historical example unless a maintainer explicitly rewrites the current docs/record to the replacement artifacts. |
-| `registry-research-framework/audit/registry-value-experiments/pilot-perf-calculate-actual-utilization-0.json` | `intentional-reference-keep` | `operator96-superseded-pilot` | 5 | Keep as a historical example unless a maintainer explicitly rewrites the current docs/record to the replacement artifacts. |
-| `registry-research-framework/audit/registry-value-experiments/pilot-perf-calculate-actual-utilization-0.md` | `intentional-reference-keep` | `operator96-superseded-pilot` | 5 | Keep as a historical example unless a maintainer explicitly rewrites the current docs/record to the replacement artifacts. |
+| `registry-research-framework/audit/registry-value-experiments/pilot-perf-calculate-actual-utilization-0.json` | `intentional-reference-keep` | `operator96-superseded-pilot` | 4 | Keep as a historical example unless a maintainer explicitly rewrites the current docs/record to the replacement artifacts. |
+| `registry-research-framework/audit/registry-value-experiments/pilot-perf-calculate-actual-utilization-0.md` | `intentional-reference-keep` | `operator96-superseded-pilot` | 4 | Keep as a historical example unless a maintainer explicitly rewrites the current docs/record to the replacement artifacts. |
 | `evidence/files/vm-tooling-staging/defender-cloud-demo-extracted` | `needs-replacement-or-retention-decision` | `vm-tooling-staging-oldest-sample` | 1 | Decide whether this staging bundle has a canonical evidence/raw replacement before attempting deletion. |
 | `evidence/files/vm-tooling-staging/showinfotip-1-hits.csv..md` | `needs-replacement-or-retention-decision` | `vm-tooling-staging-oldest-sample` | 6 | Decide whether this staging bundle has a canonical evidence/raw replacement before attempting deletion. |
 | `evidence/files/vm-tooling-staging/showsuperhidden-1-hits.csv..md` | `needs-replacement-or-retention-decision` | `vm-tooling-staging-oldest-sample` | 6 | Decide whether this staging bundle has a canonical evidence/raw replacement before attempting deletion. |
@@ -88,23 +73,23 @@ These rows are the only retained items that already have replacement artifacts a
 | `evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json..md` | `needs-replacement-or-retention-decision` | `vm-tooling-staging-oldest-sample` | 8 | Decide whether this staging bundle has a canonical evidence/raw replacement before attempting deletion. |
 | `evidence/files/vm-tooling-staging/ghidra-probes` | `needs-replacement-or-retention-decision` | `vm-tooling-staging-oldest-sample` | 2 | Decide whether this staging bundle has a canonical evidence/raw replacement before attempting deletion. |
 | `evidence/files/vm-tooling-staging/beep_start_toggle_out.txt` | `needs-replacement-or-retention-decision` | `vm-tooling-staging-oldest-sample` | 9 | Decide whether this staging bundle has a canonical evidence/raw replacement before attempting deletion. |
-| `evidence/files/vm-tooling-staging/crossdevice_resume_probe.csv` | `reference-migration-needed` | `vm-tooling-staging-oldest-sample` | 11 | Move blocking docs/records to the listed replacement artifacts, rerun the ledger, then promote to delete-candidate if live refs reach zero. |
-| `evidence/files/vm-tooling-staging/defender-enhanced-notifications-securitycenter-1-20260324-213118` | `reference-migration-needed` | `vm-tooling-staging-oldest-sample` | 7 | Move blocking docs/records to the listed replacement artifacts, rerun the ledger, then promote to delete-candidate if live refs reach zero. |
-| `evidence/files/vm-tooling-staging/defender-threat-file-hash-legacyroot-1-20260325-011845` | `reference-migration-needed` | `vm-tooling-staging-oldest-sample` | 8 | Move blocking docs/records to the listed replacement artifacts, rerun the ledger, then promote to delete-candidate if live refs reach zero. |
+| `evidence/files/vm-tooling-staging/crossdevice_resume_probe.csv` | `audit-only-retained` | `vm-tooling-staging-oldest-sample` | 0 | No live blocking references remain; keep for audit trail or handle in a dedicated deletion PR that explicitly accepts audit-only history references. |
+| `evidence/files/vm-tooling-staging/defender-enhanced-notifications-securitycenter-1-20260324-213118` | `audit-only-retained` | `vm-tooling-staging-oldest-sample` | 0 | No live blocking references remain; keep for audit trail or handle in a dedicated deletion PR that explicitly accepts audit-only history references. |
+| `evidence/files/vm-tooling-staging/defender-threat-file-hash-legacyroot-1-20260325-011845` | `audit-only-retained` | `vm-tooling-staging-oldest-sample` | 0 | No live blocking references remain; keep for audit trail or handle in a dedicated deletion PR that explicitly accepts audit-only history references. |
 | `evidence/files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-20260325-100039` | `needs-replacement-or-retention-decision` | `vm-tooling-staging-oldest-sample` | 6 | Decide whether this staging bundle has a canonical evidence/raw replacement before attempting deletion. |
-| `evidence/files/vm-tooling-staging/defender-threat-file-hash-policymanager-1-20260325-012333` | `reference-migration-needed` | `vm-tooling-staging-oldest-sample` | 1 | Move blocking docs/records to the listed replacement artifacts, rerun the ledger, then promote to delete-candidate if live refs reach zero. |
-| `evidence/files/vm-tooling-staging/devmode_longpaths_probe.csv` | `reference-migration-needed` | `vm-tooling-staging-oldest-sample` | 9 | Move blocking docs/records to the listed replacement artifacts, rerun the ledger, then promote to delete-candidate if live refs reach zero. |
-| `evidence/files/vm-tooling-staging/devmode_probe2.csv` | `reference-migration-needed` | `vm-tooling-staging-oldest-sample` | 10 | Move blocking docs/records to the listed replacement artifacts, rerun the ledger, then promote to delete-candidate if live refs reach zero. |
-| `evidence/files/vm-tooling-staging/devmode_probe2.txt` | `reference-migration-needed` | `vm-tooling-staging-oldest-sample` | 10 | Move blocking docs/records to the listed replacement artifacts, rerun the ledger, then promote to delete-candidate if live refs reach zero. |
-| `evidence/files/vm-tooling-staging/feedback_notifications_probe.txt` | `reference-migration-needed` | `vm-tooling-staging-oldest-sample` | 6 | Move blocking docs/records to the listed replacement artifacts, rerun the ledger, then promote to delete-candidate if live refs reach zero. |
-| `evidence/files/vm-tooling-staging/gamemode_admin_probe.txt` | `reference-migration-needed` | `vm-tooling-staging-oldest-sample` | 8 | Move blocking docs/records to the listed replacement artifacts, rerun the ledger, then promote to delete-candidate if live refs reach zero. |
-| `evidence/files/vm-tooling-staging/gamemode_admin_zero_probe.txt` | `reference-migration-needed` | `vm-tooling-staging-oldest-sample` | 7 | Move blocking docs/records to the listed replacement artifacts, rerun the ledger, then promote to delete-candidate if live refs reach zero. |
-| `evidence/files/vm-tooling-staging/ghidra_explorer_serialize.txt` | `reference-migration-needed` | `vm-tooling-staging-oldest-sample` | 11 | Move blocking docs/records to the listed replacement artifacts, rerun the ledger, then promote to delete-candidate if live refs reach zero. |
+| `evidence/files/vm-tooling-staging/defender-threat-file-hash-policymanager-1-20260325-012333` | `audit-only-retained` | `vm-tooling-staging-oldest-sample` | 0 | No live blocking references remain; keep for audit trail or handle in a dedicated deletion PR that explicitly accepts audit-only history references. |
+| `evidence/files/vm-tooling-staging/devmode_longpaths_probe.csv` | `audit-only-retained` | `vm-tooling-staging-oldest-sample` | 0 | No live blocking references remain; keep for audit trail or handle in a dedicated deletion PR that explicitly accepts audit-only history references. |
+| `evidence/files/vm-tooling-staging/devmode_probe2.csv` | `audit-only-retained` | `vm-tooling-staging-oldest-sample` | 0 | No live blocking references remain; keep for audit trail or handle in a dedicated deletion PR that explicitly accepts audit-only history references. |
+| `evidence/files/vm-tooling-staging/devmode_probe2.txt` | `audit-only-retained` | `vm-tooling-staging-oldest-sample` | 0 | No live blocking references remain; keep for audit trail or handle in a dedicated deletion PR that explicitly accepts audit-only history references. |
+| `evidence/files/vm-tooling-staging/feedback_notifications_probe.txt` | `audit-only-retained` | `vm-tooling-staging-oldest-sample` | 0 | No live blocking references remain; keep for audit trail or handle in a dedicated deletion PR that explicitly accepts audit-only history references. |
+| `evidence/files/vm-tooling-staging/gamemode_admin_probe.txt` | `audit-only-retained` | `vm-tooling-staging-oldest-sample` | 0 | No live blocking references remain; keep for audit trail or handle in a dedicated deletion PR that explicitly accepts audit-only history references. |
+| `evidence/files/vm-tooling-staging/gamemode_admin_zero_probe.txt` | `audit-only-retained` | `vm-tooling-staging-oldest-sample` | 0 | No live blocking references remain; keep for audit trail or handle in a dedicated deletion PR that explicitly accepts audit-only history references. |
+| `evidence/files/vm-tooling-staging/ghidra_explorer_serialize.txt` | `audit-only-retained` | `vm-tooling-staging-oldest-sample` | 0 | No live blocking references remain; keep for audit trail or handle in a dedicated deletion PR that explicitly accepts audit-only history references. |
 | `evidence/files/vm-tooling-staging/hags_toggle_out.txt` | `needs-replacement-or-retention-decision` | `vm-tooling-staging-oldest-sample` | 8 | Decide whether this staging bundle has a canonical evidence/raw replacement before attempting deletion. |
-| `evidence/files/vm-tooling-staging/hideemptydrives-0-hits.csv` | `reference-migration-needed` | `vm-tooling-staging-oldest-sample` | 1 | Move blocking docs/records to the listed replacement artifacts, rerun the ledger, then promote to delete-candidate if live refs reach zero. |
-| `evidence/files/vm-tooling-staging/hideemptydrives-1-hits.csv` | `reference-migration-needed` | `vm-tooling-staging-oldest-sample` | 1 | Move blocking docs/records to the listed replacement artifacts, rerun the ledger, then promote to delete-candidate if live refs reach zero. |
-| `evidence/files/vm-tooling-staging/hideemptydrives-result.txt` | `reference-migration-needed` | `vm-tooling-staging-oldest-sample` | 8 | Move blocking docs/records to the listed replacement artifacts, rerun the ledger, then promote to delete-candidate if live refs reach zero. |
-| `evidence/files/vm-tooling-staging/iconsonly-0-hits.csv` | `reference-migration-needed` | `vm-tooling-staging-oldest-sample` | 1 | Move blocking docs/records to the listed replacement artifacts, rerun the ledger, then promote to delete-candidate if live refs reach zero. |
+| `evidence/files/vm-tooling-staging/hideemptydrives-0-hits.csv` | `audit-only-retained` | `vm-tooling-staging-oldest-sample` | 0 | No live blocking references remain; keep for audit trail or handle in a dedicated deletion PR that explicitly accepts audit-only history references. |
+| `evidence/files/vm-tooling-staging/hideemptydrives-1-hits.csv` | `audit-only-retained` | `vm-tooling-staging-oldest-sample` | 0 | No live blocking references remain; keep for audit trail or handle in a dedicated deletion PR that explicitly accepts audit-only history references. |
+| `evidence/files/vm-tooling-staging/hideemptydrives-result.txt` | `audit-only-retained` | `vm-tooling-staging-oldest-sample` | 0 | No live blocking references remain; keep for audit trail or handle in a dedicated deletion PR that explicitly accepts audit-only history references. |
+| `evidence/files/vm-tooling-staging/iconsonly-0-hits.csv` | `audit-only-retained` | `vm-tooling-staging-oldest-sample` | 0 | No live blocking references remain; keep for audit trail or handle in a dedicated deletion PR that explicitly accepts audit-only history references. |
 | `evidence/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml` | `needs-replacement-or-retention-decision` | `large-raw-trace-sample` | 9 | Keep until a derived parse or current index replaces the raw ETL/PML reference. |
 | `evidence/raw/procmon/privacy.disable-appdeviceinventory.policy/appdeviceinventory-policy-procmon.pml` | `needs-replacement-or-retention-decision` | `large-raw-trace-sample` | 10 | Keep until a derived parse or current index replaces the raw ETL/PML reference. |
 | `evidence/raw/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.pml` | `needs-replacement-or-retention-decision` | `large-raw-trace-sample` | 9 | Keep until a derived parse or current index replaces the raw ETL/PML reference. |

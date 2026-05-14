@@ -32,6 +32,7 @@ def is_audit_trail_reference(path: str) -> bool:
     name = Path(path).name
     return (
         path.startswith("registry-research-framework/audit/cleanup-quarantine-ledger-")
+        or path.startswith("registry-research-framework/audit/cleanup-retained-inventory-plan-")
         or path.startswith("registry-research-framework/audit/branch-cleanup-ledger-")
         or name in {"research-artifact-map-latest.json", "artifact-map.md"}
     )
@@ -157,6 +158,56 @@ def live_references(
     return sorted(refs)
 
 
+def is_replacement_resolved_reference(
+    ref: str,
+    *,
+    target_rel: str,
+    replacement_artifacts: list[str],
+    repo_root: Path = REPO_ROOT,
+) -> bool:
+    if not replacement_artifacts:
+        return False
+    if ref in replacement_artifacts:
+        return True
+
+    replacement_dirs = {str(Path(replacement).parent).replace("\\", "/") for replacement in replacement_artifacts}
+    if any(ref.startswith(f"{directory}/") for directory in replacement_dirs if directory and directory != "."):
+        ref_path = repo_root / ref
+        try:
+            text = ref_path.read_text(encoding="utf-8-sig")
+        except (OSError, UnicodeDecodeError):
+            return False
+        return target_rel not in text
+
+    ref_path = repo_root / ref
+    try:
+        text = ref_path.read_text(encoding="utf-8-sig")
+    except (OSError, UnicodeDecodeError):
+        return False
+    return target_rel not in text and any(replacement in text for replacement in replacement_artifacts)
+
+
+def filter_replacement_resolved_references(
+    refs: list[str],
+    *,
+    target_rel: str,
+    replacement_artifacts: list[str],
+    repo_root: Path = REPO_ROOT,
+) -> tuple[list[str], list[str]]:
+    resolved = [
+        ref
+        for ref in refs
+        if is_replacement_resolved_reference(
+            ref,
+            target_rel=target_rel,
+            replacement_artifacts=replacement_artifacts,
+            repo_root=repo_root,
+        )
+    ]
+    resolved_set = set(resolved)
+    return [ref for ref in refs if ref not in resolved_set], resolved
+
+
 def item_for(
     path: Path,
     *,
@@ -175,6 +226,12 @@ def item_for(
         repo_root=repo_root,
         output_paths=output_paths,
         ignore_reference_paths=ignore_reference_paths,
+    )
+    refs, replacement_resolved_refs = filter_replacement_resolved_references(
+        refs,
+        target_rel=relative(path, repo_root),
+        replacement_artifacts=replacement_artifacts or [],
+        repo_root=repo_root,
     )
     audit_refs = [ref for ref in refs if is_audit_trail_reference(ref)]
     blocking_refs = [ref for ref in refs if ref not in audit_refs]
@@ -204,6 +261,8 @@ def item_for(
         "references_sample": refs[:8],
         "audit_references_sample": audit_refs[:8],
         "blocking_references_sample": blocking_refs[:8],
+        "replacement_resolved_reference_count": len(replacement_resolved_refs),
+        "replacement_resolved_references_sample": replacement_resolved_refs[:8],
         "delete_eligible": can_delete,
         "recommended_action": recommended_action,
     }
@@ -224,6 +283,12 @@ def refresh_item_references(
         output_paths=output_paths,
         ignore_reference_paths=ignore_reference_paths,
     )
+    refs, replacement_resolved_refs = filter_replacement_resolved_references(
+        refs,
+        target_rel=str(item.get("path") or ""),
+        replacement_artifacts=list(item.get("replacement_artifacts") or []),
+        repo_root=repo_root,
+    )
     audit_refs = [ref for ref in refs if is_audit_trail_reference(ref)]
     blocking_refs = [ref for ref in refs if ref not in audit_refs]
     item["live_reference_count"] = len(refs)
@@ -232,6 +297,8 @@ def refresh_item_references(
     item["references_sample"] = refs[:8]
     item["audit_references_sample"] = audit_refs[:8]
     item["blocking_references_sample"] = blocking_refs[:8]
+    item["replacement_resolved_reference_count"] = len(replacement_resolved_refs)
+    item["replacement_resolved_references_sample"] = replacement_resolved_refs[:8]
     item["delete_eligible"] = (
         item.get("recommended_action") == "delete-after-review"
         and len(refs) == 0

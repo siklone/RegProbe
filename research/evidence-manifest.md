@@ -854,7 +854,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `local-grouppolicy-adml-enablecdp` | `official-doc` | Local Microsoft GroupPolicy.adml EnableCDP help text | [evidence/files/external/c/PolicyDefinitions/en-US/GroupPolicy.adml](../evidence/files/external/c/PolicyDefinitions/en-US/GroupPolicy.adml) |
 | `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
 | `ghidra-sharedexperiences-singleton` | `decompiled-pseudocode` | Decompiled Shared Experiences singleton | [Docs/privacy/assets/crossdev-SharedExperiencesSingleton.c](../Docs/privacy/assets/crossdev-SharedExperiencesSingleton.c) |
-| `guest-crossdevice-launch` | `vm-test` | Guest launch of CrossDeviceResume | [evidence/files/vm/crossdevice_resume_probe.csv](../evidence/files/vm-tooling-staging/crossdevice_resume_probe.csv) |
+| `guest-crossdevice-launch` | `vm-test` | Guest launch of CrossDeviceResume | [evidence/files/vm/crossdevice_resume_probe.csv](../evidence/raw/procmon/privacy.disable-resume/crossdevice_resume_probe.csv) |
 | `vm-privacy.disable-cross-device-experiences-etw-qga-unblock-20260507` | `etw-trace` | QGA-first ETW stackwalk probe receipt | [evidence/captures/privacy-disable-cross-device-experiences-etw-qga-unblock-20260507.json](../evidence/captures/privacy-disable-cross-device-experiences-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507.etl) |
 
 **Validation proof**
@@ -3412,7 +3412,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 
 | Field | Value |
 | --- | --- |
-| Source | [evidence/files/vm/hideemptydrives-result.txt](../evidence/files/vm-tooling-staging/hideemptydrives-result.txt) |
+| Source | [evidence/files/vm/hideemptydrives-result.txt](../evidence/raw/procmon/explorer.hide-empty-drives/hideemptydrives-result.txt) |
 | Exact quote / path | STATE=0 ... Explorer.EXE RegQueryValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/HideDrivesWithNoMedia ... Data: 0; STATE=1 ... Explorer.EXE RegQueryValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/HideDrivesWithNoMedia ... Data: 1; RESTORED_EXISTS=False |
 | Notes | The guest-local result file was copied back to the host scratch area during validation. The baseline value was absent and was restored to the absent state after the probe. |
 
@@ -6871,7 +6871,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- |
 | Source | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#donotshowfeedbacknotifications](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#donotshowfeedbacknotifications) |
 | Exact quote / path | Registry Key Name Software/Policies/Microsoft/Windows/DataCollection; Registry Value Name DoNotShowFeedbackNotifications; 0 (Default) Feedback notifications aren't disabled ... 1 Feedback notifications are disabled. |
-| Notes | The Experience Policy CSP page explicitly names the exact machine policy path and value name the app writes and defines the 0/1 semantics. Added nohuto mirror corroboration via nohuto-donotshowfeedbacknotifications-admx. Win25H2Clean reversible probe at [evidence/files/vm/feedback_notifications_probe.txt](../evidence/files/vm-tooling-staging/feedback_notifications_probe.txt) confirmed writes for 0 and 1, live registry queries after each write, feedback settings surface opens in both states, and restoration to the original state. |
+| Notes | The Experience Policy CSP page explicitly names the exact machine policy path and value name the app writes and defines the 0/1 semantics. Added nohuto mirror corroboration via nohuto-donotshowfeedbacknotifications-admx. Win25H2Clean reversible probe at [evidence/files/vm/feedback_notifications_probe.txt](../evidence/raw/procmon/privacy.disable-feedback-notifications/feedback_notifications_probe.txt) confirmed writes for 0 and 1, live registry queries after each write, feedback settings surface opens in both states, and restoration to the original state. |
 
 ---
 
@@ -8254,7 +8254,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 
 | Field | Value |
 | --- | --- |
-| Source | [evidence/files/vm/defender-enhanced-notifications-securitycenter-1-20260324-213118/defender-disable-enhanced-securitycenter-1.txt](../evidence/files/vm-tooling-staging/defender-enhanced-notifications-securitycenter-1-20260324-213118/defender-disable-enhanced-securitycenter-1.txt) |
+| Source | [evidence/files/vm/defender-enhanced-notifications-securitycenter-1-20260324-213118/defender-disable-enhanced-securitycenter-1.txt](../evidence/raw/procmon/security-disable-enhanced-defender-notifications-validation-20260324/defender-disable-enhanced-securitycenter-1.txt/defender-disable-enhanced-securitycenter-1.txt) |
 | Exact quote / path | SecurityHealthService.exe \| RegQueryValue \| HKLM/SOFTWARE/Policies/Microsoft/Windows Defender Security Center/Notifications/DisableEnhancedNotifications \| SUCCESS \| Type: REG_DWORD, Length: 4, Data: 1; baseline run shows the same value as NAME NOT FOUND before the write. |
 | Notes | The clean snapshot baseline and the enabled-state VM probe both hit the same Security Center Notifications policy path. A separate alias check with only the Reporting path set still showed SecurityHealthService.exe reading the Security Center path. The baseline also showed DisableNotifications = 1 on that branch, but that sibling policy does not change which path this value is read from. |
 
@@ -8745,7 +8745,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 
 | Field | Value |
 | --- | --- |
-| Source | [evidence/files/vm/defender-threat-file-hash-legacyroot-1-20260325-011845/defender-threat-file-hash-legacyroot-1.txt](../evidence/files/vm-tooling-staging/defender-threat-file-hash-legacyroot-1-20260325-011845/defender-threat-file-hash-legacyroot-1.txt) |
+| Source | [evidence/files/vm/defender-threat-file-hash-legacyroot-1-20260325-011845/defender-threat-file-hash-legacyroot-1.txt](../evidence/raw/procmon/security.threat-file-hash-logging/defender-threat-file-hash-legacyroot-1.txt/defender-threat-file-hash-legacyroot-1.txt) |
 | Exact quote / path | MsMpEng.exe \| RegQueryValue \| HKLM/SOFTWARE/Policies/Microsoft/Windows Defender/ThreatFileHashLogging \| SUCCESS \| Type: REG_DWORD, Length: 4, Data: 1 |
 | Notes | The Defender-on 25H2 VM produced a clean baseline event 1116 with no event 1120. Earlier text-file passes showed MsMpEng.exe reading the root ThreatFileHashLogging value directly and reading the Policy Manager EnableFileHashComputation alias directly in a separate pass. The app now stays on the documented root policy path. The later official Microsoft PE sample follow-up still produced event 1116 with no event 1120, so the hash-event behavior remains an open current-build question rather than part of the app contract. |
 
@@ -9487,7 +9487,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 
 | Field | Value |
 | --- | --- |
-| Source | [evidence/files/vm/gamemode_admin_probe.txt](../evidence/files/vm-tooling-staging/gamemode_admin_probe.txt) |
+| Source | [evidence/files/vm/gamemode_admin_probe.txt](../evidence/raw/procmon/system.enable-game-mode/gamemode_admin_probe.txt) |
 | Exact quote / path | gamemode_admin_probe.txt: "7:52:45.6879293 PM","SystemSettings.exe","5512","RegQueryValue","HKU/S-1-5-21-3538642439-2106388720-149684979-500/Software/Microsoft/GameBar/AutoGameModeEnabled","SUCCESS","Type: REG_DWORD, Length: 4, Data: 1". gamemode_admin_zero_probe.txt: "7:54:41.9130012 PM","SystemSettings.exe","5512","RegQueryValue","HKU/S-1-5-21-3538642439-2106388720-149684979-500/Software/Microsoft/GameBar/AutoGameModeEnabled","SUCCESS","Type: REG_DWORD, Length: 4, Data: 0". |
 | Notes | The interactive Administrator profile was probed through the guest. The value was set to 1 and then to 0 in separate reversible captures, and SystemSettings.exe read both states. The value was restored to 1 after the 0-state probe. Normalized for the consolidated evidence report. |
 
