@@ -2931,7 +2931,7 @@ Current writes
 | Source | [evidence/files/vm/showinfotip-result.txt](../evidence/files/vm-tooling-staging/showinfotip-result.txt) |
 | Exact quote / path | STATE=0 ... Explorer.EXE RegQueryValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/ShowInfoTip ... Data: 0; STATE=1 ... Explorer.EXE RegQueryValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/ShowInfoTip ... Data: 1; RESTORED_VALUE=1 |
 | Key found on page | `True` |
-| Notes | Raw hit exports were also copied to [evidence/files/vm/showinfotip-0-hits.csv](../evidence/files/vm-tooling-staging/showinfotip-0-hits.csv) and [evidence/files/vm/showinfotip-1-hits.csv..md](../evidence/files/vm-tooling-staging/showinfotip-1-hits.csv..md) |
+| Notes | Raw hit exports were also copied to [evidence/files/vm/showinfotip-0-hits.csv](../evidence/files/vm-tooling-staging/showinfotip-0-hits.csv) and [evidence/raw/procmon/explorer-show-info-tips-validation-20260324/showinfotip-1-hits.csv](../evidence/raw/procmon/explorer-show-info-tips-validation-20260324/showinfotip-1-hits.csv) |
 
 **Decision**
 
@@ -3047,7 +3047,7 @@ Current writes
 | Source | [evidence/files/vm/showsuperhidden-result.txt](../evidence/files/vm-tooling-staging/showsuperhidden-result.txt) |
 | Exact quote / path | STATE=0 ... Explorer.EXE RegQueryValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/ShowSuperHidden ... Data: 0; STATE=1 ... Explorer.EXE RegQueryValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/ShowSuperHidden ... Data: 1; RESTORED_SHOWSUPERHIDDEN_VALUE=1 |
 | Key found on page | `True` |
-| Notes | Raw hit exports were also copied to [evidence/files/vm/showsuperhidden-0-hits.csv](../evidence/files/vm-tooling-staging/showsuperhidden-0-hits.csv) and [evidence/files/vm/showsuperhidden-1-hits.csv..md](../evidence/files/vm-tooling-staging/showsuperhidden-1-hits.csv..md) |
+| Notes | Raw hit exports were also copied to [evidence/files/vm/showsuperhidden-0-hits.csv](../evidence/files/vm-tooling-staging/showsuperhidden-0-hits.csv) and [evidence/raw/procmon/explorer-show-protected-operating-system-files-validation-20260324/showsuperhidden-1-hits.csv](../evidence/raw/procmon/explorer-show-protected-operating-system-files-validation-20260324/showsuperhidden-1-hits.csv) |
 
 **Decision**
 

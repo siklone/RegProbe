@@ -165,6 +165,101 @@ NEEDS_DECISION_TRACKS: dict[str, dict[str, str]] = {
 }
 
 
+STAGING_CANONICALIZATION_DECISIONS: dict[str, dict[str, Any]] = {
+    "evidence/files/vm-tooling-staging/defender-cloud-demo-extracted": {
+        "canonicalization_state": "rerun-needed",
+        "owning_records": ["security.threat-file-hash-logging"],
+        "canonical_replacement_candidates": [],
+        "retention_rationale": "Only a Defender cloud demo extraction note currently remains; no canonical evidence/raw replacement was found in this repo.",
+        "next_canonicalization_step": "Rerun or replace the Defender cloud validation under evidence/raw before migrating the note reference.",
+    },
+    "evidence/files/vm-tooling-staging/showinfotip-1-hits.csv..md": {
+        "canonicalization_state": "canonical-raw-replacement-known",
+        "owning_records": ["explorer.show-info-tips"],
+        "canonical_replacement_candidates": [
+            "evidence/raw/procmon/explorer-show-info-tips-validation-20260324/showinfotip-1-hits.csv"
+        ],
+        "retention_rationale": "The repo now has the checked-in Procmon CSV under evidence/raw; the staging placeholder is only a legacy pointer.",
+        "next_canonicalization_step": "Keep live record/index references on the evidence/raw CSV; leave the staging placeholder only as audit history.",
+    },
+    "evidence/files/vm-tooling-staging/showsuperhidden-1-hits.csv..md": {
+        "canonicalization_state": "canonical-raw-replacement-known",
+        "owning_records": ["explorer.show-protected-operating-system-files"],
+        "canonical_replacement_candidates": [
+            "evidence/raw/procmon/explorer-show-protected-operating-system-files-validation-20260324/showsuperhidden-1-hits.csv"
+        ],
+        "retention_rationale": "The repo now has the checked-in Procmon CSV under evidence/raw; the staging placeholder is only a legacy pointer.",
+        "next_canonicalization_step": "Keep live record/index references on the evidence/raw CSV; leave the staging placeholder only as audit history.",
+    },
+    "evidence/files/vm-tooling-staging/thread-dpc-enable-0-cpu3.etl.md": {
+        "canonicalization_state": "partial-derived-replacement-known",
+        "owning_records": ["system.kernel-thread-dpc-enable"],
+        "canonical_replacement_candidates": [
+            "evidence/raw/procmon/thread-dpc-enable-vm-suite-20260324/thread-dpc-enable-0-cpu3.perf.csv"
+        ],
+        "retention_rationale": "A derived perf CSV exists, but it is not a byte-for-byte replacement for the original ETL placeholder.",
+        "next_canonicalization_step": "Retain until a new raw ETL/summary pair or explicit source-of-record decision replaces this placeholder.",
+    },
+    "evidence/files/vm-tooling-staging/thread-dpc-enable-0-mem2.etl.md": {
+        "canonicalization_state": "partial-derived-replacement-known",
+        "owning_records": ["system.kernel-thread-dpc-enable"],
+        "canonical_replacement_candidates": [
+            "evidence/raw/procmon/thread-dpc-enable-vm-suite-20260324/thread-dpc-enable-0-mem2.perf.csv"
+        ],
+        "retention_rationale": "A derived perf CSV exists, but it is not a byte-for-byte replacement for the original ETL placeholder.",
+        "next_canonicalization_step": "Retain until a new raw ETL/summary pair or explicit source-of-record decision replaces this placeholder.",
+    },
+    "evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json..md": {
+        "canonicalization_state": "staging-source-of-record",
+        "owning_records": [
+            "security.trusted-path-credential-prompting",
+            "system.disable-auto-maintenance",
+            "system.memory-large-system-cache-client",
+        ],
+        "canonical_replacement_candidates": ["evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json"],
+        "retention_rationale": "This placeholder points at a multi-record VM batch proof that still acts as historical source-of-record for several records.",
+        "next_canonicalization_step": "Copy or regenerate the batch proof into evidence/raw, then migrate record/index references in one dedicated PR.",
+    },
+    "evidence/files/vm-tooling-staging/ghidra-probes": {
+        "canonicalization_state": "active-tool-output-root",
+        "owning_records": [],
+        "canonical_replacement_candidates": [],
+        "retention_rationale": "Current static-probe scripts still name this path as the host output root, so it is not a stale evidence bundle.",
+        "next_canonicalization_step": "Move script defaults only if a broader tooling-path cleanup is planned; do not delete as evidence cleanup.",
+    },
+    "evidence/files/vm-tooling-staging/beep_start_toggle_out.txt": {
+        "canonicalization_state": "staging-source-of-record",
+        "owning_records": ["audio.disable-beep"],
+        "canonical_replacement_candidates": [
+            "evidence/raw/etw-stackwalk/audio-disable-beep-etw-qga-unblock-20260507/audio-disable-beep-etw-qga-unblock-20260507-summary.json",
+            "evidence/raw/ghidra/ghidra-audio-disable-beep-20260424-batch2",
+        ],
+        "retention_rationale": "Raw ETW/Ghidra adjuncts exist, but this text file is still the concise reversible value proof used by shipped app QA evidence.",
+        "next_canonicalization_step": "Create a canonical evidence/raw runtime-diff JSON for the beep value proof before migrating app QA and index references.",
+    },
+    "evidence/files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-20260325-100039": {
+        "canonicalization_state": "staging-source-of-record",
+        "owning_records": ["security.threat-file-hash-logging"],
+        "canonical_replacement_candidates": [
+            "evidence/raw/procmon/security.threat-file-hash-logging/defender-threat-file-hash-legacyroot-1.txt",
+            "evidence/raw/procmon/security.threat-file-hash-logging/defender-threat-file-hash-policymanager-1.txt",
+        ],
+        "retention_rationale": "Adjacent raw Procmon probes exist, but this MPENGINE reboot no-read sample remains a distinct validation lane.",
+        "next_canonicalization_step": "Regenerate or copy the MPENGINE no-read proof into evidence/raw before migrating the note/record references.",
+    },
+    "evidence/files/vm-tooling-staging/hags_toggle_out.txt": {
+        "canonicalization_state": "staging-source-of-record",
+        "owning_records": ["system.enable-hags"],
+        "canonical_replacement_candidates": [
+            "evidence/raw/etw-stackwalk/system-enable-hags-etw-qga-unblock-20260507/system-enable-hags-etw-qga-unblock-20260507-summary.json",
+            "evidence/raw/ghidra/ghidra-system-enable-hags-20260427b",
+        ],
+        "retention_rationale": "Raw ETW/Ghidra adjuncts exist, but this text file is still the concise reversible value proof for HwSchMode.",
+        "next_canonicalization_step": "Create a canonical evidence/raw runtime-diff JSON for the HAGS value proof before migrating record/index references.",
+    },
+}
+
+
 def decision_track_for(item: dict[str, Any], state: str) -> dict[str, str]:
     if state == "needs-replacement-or-retention-decision":
         category = str(item.get("category") or "")
@@ -208,7 +303,7 @@ def planned_item(item: dict[str, Any]) -> dict[str, Any]:
     classes = Counter(classify_reference(ref) for ref in refs)
     state = release_state(item)
     decision = decision_track_for(item, state)
-    return {
+    planned = {
         "path": item.get("path"),
         "category": item.get("category"),
         "cleanup_status": item.get("cleanup_status"),
@@ -230,6 +325,15 @@ def planned_item(item: dict[str, Any]) -> dict[str, Any]:
         "next_action": next_action_for(item, state),
         "stale_reason": item.get("stale_reason"),
     }
+    staging_decision = STAGING_CANONICALIZATION_DECISIONS.get(str(item.get("path") or ""))
+    if staging_decision:
+        planned["staging_canonicalization"] = staging_decision
+        planned["canonicalization_state"] = staging_decision["canonicalization_state"]
+        planned["owning_records"] = staging_decision["owning_records"]
+        planned["canonical_replacement_candidates"] = staging_decision["canonical_replacement_candidates"]
+        planned["retention_rationale"] = staging_decision["retention_rationale"]
+        planned["next_canonicalization_step"] = staging_decision["next_canonicalization_step"]
+    return planned
 
 
 def build_plan(ledger_path: Path = DEFAULT_LEDGER) -> dict[str, Any]:
@@ -238,6 +342,11 @@ def build_plan(ledger_path: Path = DEFAULT_LEDGER) -> dict[str, Any]:
     release_state_counts = Counter(str(item.get("release_state")) for item in items)
     decision_track_counts = Counter(str(item.get("decision_track")) for item in items)
     decision_status_counts = Counter(str(item.get("decision_status")) for item in items)
+    canonicalization_state_counts = Counter(
+        str(item.get("canonicalization_state"))
+        for item in items
+        if item.get("canonicalization_state")
+    )
     category_counts = Counter(str(item.get("category")) for item in items)
     blocker_counts: Counter[str] = Counter()
     blocker_path_counts: Counter[str] = Counter()
@@ -267,6 +376,7 @@ def build_plan(ledger_path: Path = DEFAULT_LEDGER) -> dict[str, Any]:
             "release_state_counts": dict(sorted(release_state_counts.items())),
             "decision_track_counts": dict(sorted(decision_track_counts.items())),
             "decision_status_counts": dict(sorted(decision_status_counts.items())),
+            "staging_canonicalization_state_counts": dict(sorted(canonicalization_state_counts.items())),
             "category_counts": dict(sorted(category_counts.items())),
             "blocking_reference_class_counts": dict(sorted(blocker_counts.items())),
             "top_blocking_reference_paths": [
@@ -329,6 +439,14 @@ def render_markdown(plan: dict[str, Any]) -> str:
     for track, count in (summary.get("decision_track_counts") or {}).items():
         lines.append(f"| `{markdown_cell(track)}` | {count} |")
 
+    lines.extend(["", "## Staging Canonicalization States", "", "| State | Count |", "|---|---:|"])
+    staging_counts = summary.get("staging_canonicalization_state_counts") or {}
+    if not staging_counts:
+        lines.append("| `_none_` | 0 |")
+    else:
+        for state, count in staging_counts.items():
+            lines.append(f"| `{markdown_cell(state)}` | {count} |")
+
     lines.extend(["", "## Top Blocking Reference Paths", "", "| Path | Count |", "|---|---:|"])
     for item in summary.get("top_blocking_reference_paths") or []:
         lines.append(f"| `{markdown_cell(item.get('path'))}` | {int(item.get('count') or 0)} |")
@@ -378,19 +496,23 @@ def render_markdown(plan: dict[str, Any]) -> str:
     else:
         lines.extend(
             [
-                "| Path | Decision track | Category | Blocking refs | Evidence role | Exit criteria |",
-                "|---|---|---|---:|---|---|",
+                "| Path | Decision track | Category | Blocking refs | Canonicalization | Owner records | Next step |",
+                "|---|---|---|---:|---|---|---|",
             ]
         )
     for item in retention_queue:
+        owners = ", ".join(f"`{markdown_cell(owner)}`" for owner in item.get("owning_records") or [])
+        canonicalization = item.get("canonicalization_state") or item.get("evidence_role")
+        next_step = item.get("next_canonicalization_step") or item.get("exit_criteria")
         lines.append(
             "| "
             f"`{markdown_cell(item.get('path'))}` | "
             f"`{markdown_cell(item.get('decision_track'))}` | "
             f"`{markdown_cell(item.get('category'))}` | "
             f"{int(item.get('blocking_reference_count') or 0)} | "
-            f"{markdown_cell(first_sentence(str(item.get('evidence_role') or ''), 110))} | "
-            f"{markdown_cell(first_sentence(str(item.get('exit_criteria') or ''), 130))} |"
+            f"`{markdown_cell(canonicalization)}` | "
+            f"{owners or '_none_'} | "
+            f"{markdown_cell(first_sentence(str(next_step or ''), 150))} |"
         )
 
     lines.extend(
