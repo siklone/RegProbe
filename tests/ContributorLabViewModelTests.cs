@@ -54,8 +54,8 @@ public sealed class ContributorLabViewModelTests : IDisposable
         var packs = ContributorLabCatalog.BuildCommandPacks(_root, certifiedReady: true);
 
         Assert.Contains(packs, pack => pack.Title == "Representative promoted app QA batch" && pack.MutatesGuest && pack.RequiresCertifiedVm);
-        Assert.Contains(packs, pack => pack.Title == "Operator96 app-surface review" && !pack.MutatesGuest && !pack.RequiresCertifiedVm);
-        Assert.Contains(packs, pack => pack.Title == "Operator96 tranche rerun" && pack.MutatesGuest && pack.RequiresCertifiedVm);
+        Assert.Contains(packs, pack => pack.Title == "Custom value app-surface review" && !pack.MutatesGuest && !pack.RequiresCertifiedVm);
+        Assert.Contains(packs, pack => pack.Title == "Custom value tranche rerun" && pack.MutatesGuest && pack.RequiresCertifiedVm);
         Assert.Contains(packs, pack => pack.Title == "Certified VM health"
                                       && pack.Command.Contains("--snapshot-name clean-25h2-qga", StringComparison.Ordinal));
         Assert.Contains(packs, pack => pack.Title == "Single value VM experiment"
@@ -89,6 +89,7 @@ public sealed class ContributorLabViewModelTests : IDisposable
         Assert.Equal(92, viewModel.Operator96ResearchOnlyCount);
         Assert.Contains("blocked_by_gate=17", viewModel.Operator96GateBreakdown, StringComparison.Ordinal);
         Assert.Contains("not_app_surface_ready=75", viewModel.Operator96GateBreakdown, StringComparison.Ordinal);
+        Assert.Contains("legacy_campaign_id=operator96", viewModel.Operator96GateBreakdown, StringComparison.Ordinal);
         Assert.Contains("Review only ready_for_bounded_app_card", viewModel.Operator96NextActionSummary, StringComparison.Ordinal);
     }
 
@@ -198,7 +199,7 @@ public sealed class ContributorLabViewModelTests : IDisposable
         var viewModel = new ContributorLabViewModel(snapshot);
         Assert.Equal(1, viewModel.Operator96ResearchOnlyCount);
         Assert.Contains("Do not create end-user cards yet", viewModel.Operator96NextActionSummary, StringComparison.Ordinal);
-        Assert.Contains(snapshot.ReadinessItems, item => item.Label == "Operator96 aggregate gate" && item.Status == "Ready");
+        Assert.Contains(snapshot.ReadinessItems, item => item.Label == "Custom value aggregate gate" && item.Status == "Ready");
         var observation = Assert.Single(snapshot.Observations);
         Assert.Equal("not_app_surface_ready", observation.Bucket);
         Assert.Equal("0, 1", observation.CandidateValues);

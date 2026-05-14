@@ -54,7 +54,7 @@ REFERENCE_CATALOG = [
     {
         "id": "runtime-evidence",
         "source_kind": "local-runtime",
-        "title": "ETW/Procmon/Ghidra/operator96 VM artifacts",
+        "title": "ETW/Procmon/Ghidra custom-value VM artifacts",
         "url": "",
         "use_for": ["runtime validation", "static/runtime hints"],
     },
@@ -428,7 +428,7 @@ def build_matrix(plan_payload: dict[str, Any], campaign_payload: dict[str, Any],
 
 def render_markdown(payload: dict[str, Any]) -> str:
     lines = [
-        "# Operator96 Enriched Value Matrix",
+        "# Custom Registry Value Enriched Matrix",
         "",
         f"- Generated UTC: `{payload.get('generated_utc')}`",
         f"- Campaign: `{payload.get('campaign_id')}`",
@@ -467,7 +467,9 @@ def render_markdown(payload: dict[str, Any]) -> str:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Generate enriched Operator96 value candidates with proof boundaries.")
+    parser = argparse.ArgumentParser(
+        description="Generate enriched custom registry value candidates with proof boundaries."
+    )
     parser.add_argument("--plan", default=str(DEFAULT_PLAN))
     parser.add_argument("--campaign", default=str(DEFAULT_CAMPAIGN))
     parser.add_argument("--source-hints", default="")

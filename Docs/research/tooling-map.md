@@ -40,12 +40,12 @@ These scripts are active entry points for day-to-day contributor work.
 | `registry-research-framework/scripts/check_app_retest_readiness.py` | canonical | Verify app-surface readiness before manual or VM app retesting. |
 | `scripts/vm-kvm/vm-health-check.py` | canonical | Non-mutating KVM/QGA and optional `--snapshot-name` health check before ETW, Procmon, Ghidra, app-QA, or value-experiment lanes. |
 | `scripts/vm-kvm/run-guest-app-tweak-qa-batch.py` | canonical | Host-driven KVM batch runner for shipped app-card QA. |
-| `scripts/vm-kvm/run-guest-registry-value-campaign.py` | canonical | Snapshot-safe registry value campaign runner for Operator96-style experiments. |
+| `scripts/vm-kvm/run-guest-registry-value-campaign.py` | canonical | Snapshot-safe registry value campaign runner for user-supplied key/path/value experiments. |
 | `scripts/vm-kvm/run-guest-registry-value-experiment.py` | canonical | One-value VM experiment runner with host noise gate, optional `--abort-on-noisy-host`, and reboot/rollback checks. |
 | `registry-research-framework/scripts/analyze_registry_value_experiments.py` | canonical | Retro-analyze registry value experiment artifacts and produce verdict summaries. |
 | `registry-research-framework/scripts/generate_research_artifact_map.py` | canonical | Generate the current artifact map so contributors start from canonical outputs instead of raw parse folders. |
-| `registry-research-framework/scripts/generate_operator96_enriched_value_matrix.py` | canonical | Generate enriched candidate values with source boundaries and community-hint tags. |
-| `registry-research-framework/scripts/generate_operator96_app_surface_review.py` | canonical | Review enriched Operator96 records for app-surface eligibility. |
+| `registry-research-framework/scripts/generate_operator96_enriched_value_matrix.py` | canonical | Generate enriched candidate values with source boundaries and community-hint tags for the current custom-value seed batch. |
+| `registry-research-framework/scripts/generate_operator96_app_surface_review.py` | canonical | Review enriched custom registry value experiments for app-surface eligibility. |
 | `registry-research-framework/scripts/generate_operator96_low_noise_rerun_plan.py` | canonical | Plan low-noise reruns for records whose prior observations are not reference quality. |
 | `registry-research-framework/scripts/aggregate_operator96_low_noise_rerun_campaign.py` | canonical | Aggregate low-noise tranche outputs into one campaign summary. |
 | `scripts/refresh_research_publish_surfaces.py` | canonical | Refresh generated research publish surfaces after record or gate changes. |
@@ -88,15 +88,16 @@ users and should not be presented as the primary research path.
 Repo/dev builds expose a gated Contributor Lab in the desktop app. It is a
 Windows-first companion for contributors, not an end-user optimization screen.
 Use it to check local readiness, copy canonical Python command packs, and review
-research observations such as Operator96 records without promoting them to
-normal app cards.
+custom registry value experiment observations without promoting them to normal
+app cards. `operator96` is only the legacy artifact/campaign ID for the first
+96-record seed batch; do not use it as product or public feature branding.
 
 Contributor Lab v1 does not execute arbitrary commands. Certified mutation still
 belongs to the VM scripts listed above, with a clean snapshot, healthy QGA, and
 tight host-noise gate. The v1 command packs cover single-tweak lookup, app QA
-planning, app readiness/contracts, Operator96 app-surface review, representative
-promoted app-QA batches, single-value VM experiments, and small Operator96
-tranche reruns.
+planning, app readiness/contracts, custom value app-surface review,
+representative promoted app-QA batches, single-value VM experiments, and small
+custom-value tranche reruns.
 
 ## Legacy And Historical Tooling
 
@@ -113,7 +114,8 @@ Agentic AI contributors should follow this loop:
 1. Read `README.md`, `CONTRIBUTING.md`, this tooling map, and
    `Docs/research/run-tiers.md`.
 2. Open `Docs/research/artifact-map.md` to find the current app QA, VM health,
-   Operator96, and cleanup-ledger surfaces before browsing raw audit folders.
+   custom registry value experiment, and cleanup-ledger surfaces before
+   browsing raw audit folders.
 3. Inspect one setting with `check_single_tweak.py --json`.
 4. If app retest is needed, run `check_app_retest_readiness.py --json`.
 5. If VM evidence is needed, run `scripts/vm-kvm/vm-health-check.py --json`

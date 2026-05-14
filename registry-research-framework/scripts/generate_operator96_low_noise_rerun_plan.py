@@ -158,7 +158,7 @@ def render_markdown(plan: dict[str, Any]) -> str:
     summary = plan.get("summary") or {}
     commands = plan.get("commands") or {}
     lines = [
-        "# Operator96 Low-Noise Rerun Plan",
+        "# Custom Registry Value Low-Noise Rerun Plan",
         "",
         f"- Generated UTC: `{plan.get('generated_utc')}`",
         f"- Review: `{plan.get('review')}`",
@@ -200,7 +200,9 @@ def write_outputs(plan: dict[str, Any], json_output: Path, markdown_output: Path
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Generate the next Operator96 low-noise rerun tranche plan.")
+    parser = argparse.ArgumentParser(
+        description="Generate the next custom registry value low-noise rerun tranche plan."
+    )
     parser.add_argument("--review", default=str(DEFAULT_REVIEW))
     parser.add_argument("--tranche-size", type=int, default=5)
     parser.add_argument("--start-offset", type=int, default=0)

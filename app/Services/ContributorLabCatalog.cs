@@ -252,8 +252,8 @@ public static class ContributorLabCatalog
                 RequiresCertifiedVm: true,
                 MutatesGuest: true),
             new(
-                "Operator96 app-surface review",
-                "Recompute why Operator96 observations stay research-only or become eligible for bounded app-card review.",
+                "Custom value app-surface review",
+                "Recompute why user-supplied registry value observations stay research-only or become eligible for bounded app-card review. Uses the legacy operator96 artifact set as the current seed fixture.",
                 "python3 registry-research-framework/scripts/generate_operator96_app_surface_review.py --json",
                 "community-safe",
                 RequiresCertifiedVm: false,
@@ -273,7 +273,7 @@ public static class ContributorLabCatalog
                 RequiresCertifiedVm: true,
                 MutatesGuest: true),
             new(
-                "Operator96 tranche rerun",
+                "Custom value tranche rerun",
                 "Continue or rerun the value matrix in small snapshot-safe checkpoints; results remain research observations until app-surface gates pass.",
                 "python3 scripts/vm-kvm/run-guest-registry-value-campaign.py --run --limit-experiments 10 --max-values-per-record 2 --smoke-profile gui --stage-wait-timeout 420 --reboot-wait-timeout 420 --post-reboot-delay-seconds 90",
                 certifiedReady ? "certified-ready" : "certified-required",
@@ -293,16 +293,16 @@ public static class ContributorLabCatalog
             Ready("Repo root", snapshot.RepoRootFound, snapshot.RepoRootFound ? snapshot.RepoRoot : "Set REGPROBE_REPO_ROOT or launch from the repo checkout."),
             Ready("App readiness", snapshot.AppReadinessOk, "Cards, rollback coverage, KVM lane health, and app smoke receipts."),
             Ready("App-card contracts", snapshot.AppCardsOk, $"{snapshot.AppCardPassCount}/{snapshot.AppCardCandidateCount} shipped cards pass."),
-            Ready("Operator96 low-noise", snapshot.Operator96AggregateOk, $"non_ok={snapshot.Operator96NonOkCount}, noisy={snapshot.Operator96NoisyResultCount}."),
+            Ready("Custom value low-noise", snapshot.Operator96AggregateOk, $"non_ok={snapshot.Operator96NonOkCount}, noisy={snapshot.Operator96NoisyResultCount}; legacy campaign id: operator96."),
             Ready(
-                "Operator96 app-surface gate",
+                "Custom value app-surface gate",
                 snapshot.Operator96SurfaceReviewOk,
                 $"ready={snapshot.Operator96ReadyForAppCard}, blocked_by_gate={snapshot.Operator96BlockedByGate}, not_ready={snapshot.Operator96NotAppSurfaceReady}, safety={snapshot.Operator96BlockedBySafety}, needs_rerun={snapshot.Operator96NeedsLowNoiseRerun}."),
             Ready(
-                "Operator96 aggregate gate",
+                "Custom value aggregate gate",
                 !snapshot.Operator96AggregateSurfaceBlocked,
                 snapshot.Operator96AggregateSurfaceBlocked
-                    ? "Aggregate blockers are present; Operator96 cannot support app-card promotion."
+                    ? "Aggregate blockers are present; custom value experiments cannot support app-card promotion."
                     : "Aggregate blockers are clear; per-record app-card gates still decide promotion."),
             new(
                 "VM/QGA latest receipt",

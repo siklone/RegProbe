@@ -14,6 +14,11 @@ the canonical research API. The .NET research CLI is a compatibility layer; keep
 Python mirrors for research inspection, app QA planning, readiness checks, and
 VM campaign automation.
 
+Before adding or deleting generated data, read
+[Docs/research/repo-boundary.md](Docs/research/repo-boundary.md). Public tests,
+canonical scripts, and sanitized audit fixtures belong in git; credentials,
+personal VM state, raw noisy dumps, and machine-local scratch output do not.
+
 Windows contributors can also use the WPF Contributor Lab from a repo/dev build.
 It is gated by an explicit acknowledgement and is intentionally conservative:
 readiness checks, command packs, and research observations are visible there,
@@ -245,9 +250,10 @@ If you do not know the repo yet, use this order:
    reference-eligible.
 3. If you are on Windows, open Contributor Lab from the app to check local
    readiness and copy the safe command pack for the task. The lab exposes
-   read-only single-tweak, readiness, app-card contract, and Operator96
-   app-surface review commands; VM mutation packs stay snapshot/certified
-   gated and should be treated as command templates to run from a repo shell.
+   read-only single-tweak, readiness, app-card contract, and custom registry
+   value experiment app-surface review commands. VM mutation packs stay
+   snapshot/certified gated and should be treated as command templates to run
+   from a repo shell.
 4. Run a single-setting inspection before editing anything. On Linux hosts
    without `Microsoft.WindowsDesktop.App`, use the Python mirror; use the .NET
    CLI in the Windows VM or on a desktop-runtime host only when you explicitly
@@ -301,7 +307,7 @@ If you are validating the desktop app itself, `research qa-plan` is the next hop
 
 When you run several live promoted batches, treat `registry-research-framework/audit/promoted-app-qa-batch-latest.json` as the newest snapshot only. The cumulative view lives in `registry-research-framework/audit/promoted-app-qa-batch-history.jsonl` plus the paired coverage files `promoted-app-qa-coverage-latest.json` and `promoted-app-qa-coverage-latest.md`.
 
-Current audit snapshot: as of 2026-05-14, app retest readiness is passing with `265` app-surface entries, `0` app-only backlog items, `261` apply-allowed records, and `0` missing rollback stories. App-card contracts are `258/258 PASS`, promoted app-QA coverage is `258/258` (`100.0%`), and the latest live promoted app-QA batch is `14/14 PASS`. Operator96 low-noise reruns have `non_ok=0` and `noisy_result_count=0`, but remain Contributor Lab observations because `ready_for_bounded_app_card=0`. If you change shipped providers, card mapping, promotion gates, evidence links, or rollback behavior, refresh the artifact map, readiness, app-card contracts, and promoted app-QA batch coverage before handing the repo back.
+Current audit snapshot: as of 2026-05-14, app retest readiness is passing with `265` app-surface entries, `0` app-only backlog items, `261` apply-allowed records, and `0` missing rollback stories. App-card contracts are `258/258 PASS`, promoted app-QA coverage is `258/258` (`100.0%`), and the latest live promoted app-QA batch is `14/14 PASS`. Custom registry value experiment reruns have `non_ok=0` and `noisy_result_count=0`, but remain Contributor Lab observations because `ready_for_bounded_app_card=0`; `operator96` is only the legacy artifact ID for the current seed batch. If you change shipped providers, card mapping, promotion gates, evidence links, or rollback behavior, refresh the artifact map, readiness, app-card contracts, and promoted app-QA batch coverage before handing the repo back.
 
 For a single-card retest, keep a JSON artifact when the result will be needed later:
 
