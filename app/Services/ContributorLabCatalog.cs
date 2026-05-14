@@ -224,6 +224,13 @@ public static class ContributorLabCatalog
                 RequiresCertifiedVm: false,
                 MutatesGuest: false),
             new(
+                "Custom key/value lookup template",
+                "Start a user-supplied registry value investigation without mutation. Replace the value name and expected values, then inspect matching records, app mappings, and evidence.",
+                "python3 registry-research-framework/scripts/check_single_tweak.py REPLACE_VALUE_NAME --expected-value 0 --expected-value 1 --json",
+                "community-safe",
+                RequiresCertifiedVm: false,
+                MutatesGuest: false),
+            new(
                 "Single tweak app QA plan",
                 "Create the Windows app QA launch plan for one card before VM execution.",
                 "python3 registry-research-framework/scripts/check_single_tweak_app_qa.py SystemResponsiveness --expected-value 10 --json",
@@ -269,6 +276,13 @@ public static class ContributorLabCatalog
                 "Single value VM experiment",
                 "Apply one value in the disposable VM, reboot-smoke it, rollback, and abort before mutation if host noise is not clean.",
                 "python3 scripts/vm-kvm/run-guest-registry-value-experiment.py --domain regprobe-win11-25h2-session --connect qemu:///session --registry-path \"HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Power\" --value-name MfBufferingThreshold --value-data 0 --smoke-profile gui --stage-wait-timeout 420 --reboot-wait-timeout 420 --post-reboot-delay-seconds 90 --require-domain-snapshot --auto-revert-snapshot-on-boot-failure --revert-snapshot-name clean-25h2-qga --abort-on-noisy-host",
+                certifiedReady ? "certified-ready" : "certified-required",
+                RequiresCertifiedVm: true,
+                MutatesGuest: true),
+            new(
+                "Custom key/value VM experiment template",
+                "Edit the registry path, value name, and DWORD value for one user-supplied experiment. Use one value per run so boot failure, app smoke, benchmark deltas, and rollback stay attributable.",
+                "python3 scripts/vm-kvm/run-guest-registry-value-experiment.py --domain regprobe-win11-25h2-session --connect qemu:///session --registry-path \"HKLM\\\\REPLACE\\\\KEY\\\\PATH\" --value-name REPLACE_VALUE_NAME --value-data REPLACE_DWORD_VALUE --output-name custom-value-REPLACE_VALUE_NAME-REPLACE_DWORD_VALUE --smoke-profile gui --stage-wait-timeout 420 --reboot-wait-timeout 420 --post-reboot-delay-seconds 90 --require-domain-snapshot --auto-revert-snapshot-on-boot-failure --revert-snapshot-name clean-25h2-qga --abort-on-noisy-host",
                 certifiedReady ? "certified-ready" : "certified-required",
                 RequiresCertifiedVm: true,
                 MutatesGuest: true),

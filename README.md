@@ -190,7 +190,9 @@ Windows/VM readiness, safe command packs, and custom registry value experiment
 observations without promoting them to normal end-user cards. The current
 legacy artifact ID for the first seed batch is `operator96`; it is not product
 branding. Its command packs are copyable contributor templates, not arbitrary
-command execution.
+command execution. For user-supplied key/value work, start with the lookup
+template, then run one value at a time in a certified disposable VM so boot,
+GUI smoke, benchmark observation, and rollback results stay attributable.
 
 ## Single Setting Check
 

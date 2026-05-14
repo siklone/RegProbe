@@ -385,7 +385,7 @@ def write_plan_markdown(payload: dict[str, Any], path: Path) -> None:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description="Run a resumable registry value experiment campaign from the operator 96 follow-up report.")
+    parser = argparse.ArgumentParser(description="Run a resumable custom registry value experiment campaign from a follow-up report.")
     parser.add_argument("--domain", default=vm_domain("regprobe-win11-25h2-session"))
     parser.add_argument("--connect", default=vm_connect("qemu:///session"))
     parser.add_argument("--snapshot-name", default=vm_snapshot("clean-25h2-qga"))

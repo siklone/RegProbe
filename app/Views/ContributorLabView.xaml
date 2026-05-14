@@ -276,6 +276,21 @@
 
                         <Border Style="{StaticResource ContributorCardStyle}">
                             <StackPanel>
+                                <TextBlock Text="Custom value workflow"
+                                           Style="{StaticResource UtilitySectionTitleTextStyle}"/>
+                                <TextBlock Text="{Binding CustomValueWorkflowSummary}"
+                                           Margin="0,6,0,8"
+                                           Style="{StaticResource UtilitySectionBodyTextStyle}"/>
+                                <TextBlock Text="{Binding CertifiedMutationGuardSummary}"
+                                           Margin="0,0,0,8"
+                                           Style="{StaticResource UtilitySectionBodyTextStyle}"/>
+                                <TextBlock Text="Minimum evidence before app-card review: known current/default/target value, clean host-noise metadata, boot and GUI smoke result, rollback result, and bounded claim text."
+                                           Style="{StaticResource ContributorMonoTextStyle}"/>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Style="{StaticResource ContributorCardStyle}">
+                            <StackPanel>
                                 <TextBlock Text="Command packs"
                                            Style="{StaticResource UtilitySectionTitleTextStyle}"/>
                                 <TextBlock Text="These are allowlisted command templates. The WPF app does not execute arbitrary contributor commands in v1."

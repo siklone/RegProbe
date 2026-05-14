@@ -78,6 +78,14 @@ public sealed class ContributorLabViewModel : ViewModelBase
                 ? "Custom registry value experiments are clean Contributor Lab research observations. They are not normal optimization cards until each record has a known default/current value story, tested rollback, explicit app-write, clean low-noise proof, and bounded claims."
                 : "Only ready_for_bounded_app_card records with known defaults, rollback proof, explicit app writes, and bounded claims may move into normal app cards.";
 
+    public string CustomValueWorkflowSummary =>
+        "For a user-supplied key/value, start with repository lookup, then run one value at a time in a certified disposable VM. Record current/default/target, boot result, app smoke, benchmark deltas as observations only, and rollback proof before any app-card review.";
+
+    public string CertifiedMutationGuardSummary =>
+        ReferenceEligible
+            ? "Certified mutation templates are available, but still require per-run confirmation and a snapshot rollback plan."
+            : "Mutation templates are copy-only until VM/QGA/snapshot and noise gates are certified; non-certified results are community/debug observations, never reference proof.";
+
     public string Operator96GateBreakdown =>
         $"ready={Operator96ReadyForAppCard}; blocked_by_gate={Operator96BlockedByGate}; not_app_surface_ready={Operator96NotAppSurfaceReady}; safety={Operator96BlockedBySafety}; aggregate_blocked={Operator96AggregateSurfaceBlocked.ToString().ToLowerInvariant()}; legacy_campaign_id=operator96";
 
