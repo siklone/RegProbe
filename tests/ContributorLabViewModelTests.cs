@@ -44,6 +44,33 @@ public sealed class ContributorLabViewModelTests : IDisposable
         Assert.False(ContributorLabCatalog.IsAllowlistedCommand("cmd.exe /c del C:\\important"));
         Assert.False(ContributorLabCatalog.IsAllowlistedCommand(
             "python3 registry-research-framework/scripts/check_single_tweak.py Foo --json; del C:\\important"));
+        Assert.False(ContributorLabCatalog.IsAllowlistedCommand(
+            "python3 registry-research-framework/scripts/check_single_tweak.py Foo --json\ncmd.exe /c del C:\\important"));
+    }
+
+    [Fact]
+    public void BuildCommandPacks_IncludesResearchReviewAndCertifiedMutationPacks()
+    {
+        var packs = ContributorLabCatalog.BuildCommandPacks(_root, certifiedReady: true);
+
+        Assert.Contains(packs, pack => pack.Title == "Representative promoted app QA batch" && pack.MutatesGuest && pack.RequiresCertifiedVm);
+        Assert.Contains(packs, pack => pack.Title == "Operator96 app-surface review" && !pack.MutatesGuest && !pack.RequiresCertifiedVm);
+        Assert.Contains(packs, pack => pack.Title == "Operator96 tranche rerun" && pack.MutatesGuest && pack.RequiresCertifiedVm);
+        Assert.Contains(packs, pack => pack.Title == "Single value VM experiment"
+                                      && pack.Command.Contains("--value-name MfBufferingThreshold", StringComparison.Ordinal)
+                                      && !pack.Command.Contains("--value-name SystemResponsiveness", StringComparison.Ordinal));
+    }
+
+    [Fact]
+    public void AppSurfacePolicySummary_BlocksCardsWhenOperator96HasNoisyOrNonOkCounts()
+    {
+        var viewModel = new ContributorLabViewModel(CreateSnapshot() with
+        {
+            Operator96ReadyForAppCard = 3,
+            Operator96NoisyResultCount = 1
+        });
+
+        Assert.Contains("blocked from app cards", viewModel.AppSurfacePolicySummary, StringComparison.OrdinalIgnoreCase);
     }
 
     [Fact]

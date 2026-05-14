@@ -186,7 +186,8 @@ for advanced Windows/headless workflows, not for normal app users.
 Contributor Lab is the app-side companion for that boundary. It appears only in
 contributor/dev contexts and starts behind an acknowledgement gate. It shows
 Windows/VM readiness, safe command packs, and research observations such as
-Operator96 without promoting them to normal end-user cards.
+Operator96 without promoting them to normal end-user cards. Its command packs
+are copyable contributor templates, not arbitrary command execution.
 
 ## Single Setting Check
 
@@ -272,7 +273,7 @@ The latest batch file is only the newest run. If you want cumulative coverage ac
 - `registry-research-framework/audit/promoted-app-qa-coverage-latest.json`
 - `registry-research-framework/audit/promoted-app-qa-coverage-latest.md`
 
-Current audit snapshot: as of 2026-05-12, app retest readiness is passing with `265` app-surface entries, `0` app-only backlog items, `261` apply-allowed records, and `0` missing rollback stories. Promoted app-QA coverage is `258/258` (`100.0%`) with no uncovered promoted app-QA candidates remaining. Re-run readiness and the batch checker after changing app providers, evidence promotion gates, rollback behavior, or card mapping.
+Current audit snapshot: as of 2026-05-14, app retest readiness is passing with `265` app-surface entries, `0` app-only backlog items, `261` apply-allowed records, and `0` missing rollback stories. App-card contracts are `258/258 PASS`, promoted app-QA coverage is `258/258` (`100.0%`), and the latest live promoted app-QA batch is `14/14 PASS`. Operator96 low-noise reruns have `non_ok=0` and `noisy_result_count=0`, but remain Contributor Lab observations because `ready_for_bounded_app_card=0`. Re-run readiness, app-card contracts, artifact map, and the promoted batch checker after changing app providers, evidence promotion gates, rollback behavior, or card mapping.
 
 The latest live retest also keeps two small operator artifacts:
 
