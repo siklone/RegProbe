@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-14T09:08:48Z",
+  "generated_utc": "2026-05-14T09:35:01Z",
   "summary": {
-    "artifact_count": 13,
+    "artifact_count": 14,
     "attention_count": 0,
     "normal_app_cards_source": "Docs/research/app-surface/validated-registry-values.json",
     "operator96_normal_app_card_ready": 0,
@@ -12,7 +12,8 @@
     "app_card_contract_pass_count": 258,
     "app_card_contract_fail_count": 0,
     "promoted_app_qa_live_success_count": 14,
-    "promoted_app_qa_live_failure_count": 0
+    "promoted_app_qa_live_failure_count": 0,
+    "contributor_lab_smoke_status": "ok"
   },
   "rules": {
     "end_user_surface": "Normal users start from the WPF app and validated app-surface records, not raw audit folders.",
@@ -210,6 +211,25 @@
         "self_contained": true,
         "publish_returncode": 0,
         "deploy_smoke_returncode": 0,
+        "guest_health": "stable"
+      }
+    },
+    {
+      "id": "kvm-contributor-lab-smoke",
+      "path": "registry-research-framework/audit/kvm-app-contributor-lab-smoke-latest.json",
+      "audience": "contributor, release QA",
+      "tier": "canonical-latest",
+      "purpose": "Latest self-contained VM launch smoke for the gated Contributor Lab startup path.",
+      "use_when": "After Contributor Lab, startup navigation, or contributor readiness UI changes.",
+      "avoid_when": "You need normal end-user card apply/rollback evidence.",
+      "status": "ok",
+      "details": {
+        "status": "ok",
+        "app_args": [
+          "--contributor-lab"
+        ],
+        "smoke_status": "ok",
+        "new_crash_log_detected": false,
         "guest_health": "stable"
       }
     },

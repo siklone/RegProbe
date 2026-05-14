@@ -71,12 +71,25 @@ def stop_regprobe_app(repo_root: Path) -> None:
     run_qga_exec(repo_root, path="powershell.exe", args=["-NoProfile", "-Command", ps], wait_timeout=10)
 
 
-def launch_app_process(repo_root: Path, *, app_exe: str, wait_timeout: int) -> tuple[int, dict[str, Any]]:
+def quote_ps_array(values: list[str]) -> str:
+    return "@(" + ", ".join(quote_ps(value) for value in values) + ")"
+
+
+def launch_app_process(
+    repo_root: Path,
+    *,
+    app_exe: str,
+    app_args: list[str],
+    wait_timeout: int,
+) -> tuple[int, dict[str, Any]]:
     ps = (
         f"$exe={quote_ps(app_exe)}; "
+        f"$arguments={quote_ps_array(app_args)}; "
         "if(-not (Test-Path -LiteralPath $exe)){ throw \"Missing app executable: $exe\" }; "
-        "$proc=Start-Process -FilePath $exe -PassThru; "
-        "[pscustomobject]@{Pid=$proc.Id; ProcessName=$proc.ProcessName} | ConvertTo-Json -Compress"
+        "$startInfo=@{FilePath=$exe; PassThru=$true}; "
+        "if($arguments.Count -gt 0){ $startInfo.ArgumentList=$arguments }; "
+        "$proc=Start-Process @startInfo; "
+        "[pscustomobject]@{Pid=$proc.Id; ProcessName=$proc.ProcessName; Args=$arguments} | ConvertTo-Json -Compress"
     )
     return run_qga_exec(
         repo_root,
@@ -148,6 +161,12 @@ def main() -> int:
     parser.add_argument("--launch-wait-timeout", type=int, default=20)
     parser.add_argument("--linger-seconds", type=int, default=5)
     parser.add_argument("--leave-running", action="store_true")
+    parser.add_argument(
+        "--app-arg",
+        action="append",
+        default=[],
+        help="Argument to pass to RegProbe.App.exe. Use --app-arg=--contributor-lab for dash-prefixed app args.",
+    )
     args = parser.parse_args()
 
     repo_root = Path(args.repo_root).resolve()
@@ -157,6 +176,7 @@ def main() -> int:
     launch_returncode, launch_payload = launch_app_process(
         repo_root,
         app_exe=args.app_exe,
+        app_args=args.app_arg,
         wait_timeout=args.launch_wait_timeout,
     )
 
@@ -188,6 +208,7 @@ def main() -> int:
     summary: dict[str, Any] = {
         "summary_source": "guest-app-launch-smoke",
         "app_exe": args.app_exe,
+        "app_args": args.app_arg,
         "crash_log_dir": args.crash_log_dir,
         "launch_wait_timeout": args.launch_wait_timeout,
         "linger_seconds": args.linger_seconds,

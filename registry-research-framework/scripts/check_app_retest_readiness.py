@@ -22,6 +22,7 @@ RECORDS_ROOT = REPO_ROOT / "research" / "records"
 VALIDATED_APP_SURFACE_PATH = REPO_ROOT / "Docs" / "research" / "app-surface" / "validated-registry-values.json"
 APP_ONLY_SURFACE_PATH = REPO_ROOT / "Docs" / "research" / "app-surface" / "app-only-catalog-tweaks.json"
 KVM_APP_SMOKE_PATH = AUDIT_DIR / "kvm-app-publish-deploy-smoke-latest.json"
+KVM_CONTRIBUTOR_LAB_SMOKE_PATH = AUDIT_DIR / "kvm-app-contributor-lab-smoke-latest.json"
 KVM_LANE_HEALTH_PATH = AUDIT_DIR / "kvm-research-lane-health-latest.json"
 PUBLIC_HYGIENE_SCRIPT_PATH = REPO_ROOT / "registry-research-framework" / "scripts" / "check_public_repo_hygiene.py"
 TWEAK_TRUTH_SCRIPT_PATH = REPO_ROOT / "scripts" / "check_tweak_catalog_truth.py"
@@ -344,18 +345,44 @@ def evaluate_evidence_surfaces(
     }
 
 
-def evaluate_kvm_statuses(kvm_app_smoke: dict[str, Any], kvm_lane_health: dict[str, Any]) -> dict[str, Any]:
+def evaluate_kvm_statuses(
+    kvm_app_smoke: dict[str, Any],
+    kvm_contributor_lab_smoke: dict[str, Any],
+    kvm_lane_health: dict[str, Any],
+) -> dict[str, Any]:
     app_smoke_status = str(kvm_app_smoke.get("status") or "").strip()
+    contributor_smoke_status = str(kvm_contributor_lab_smoke.get("status") or "").strip()
+    contributor_app_args = kvm_contributor_lab_smoke.get("app_args")
+    contributor_deploy_payload = (
+        kvm_contributor_lab_smoke.get("deploy_smoke_payload")
+        if isinstance(kvm_contributor_lab_smoke.get("deploy_smoke_payload"), dict)
+        else {}
+    )
+    contributor_launch_payload = (
+        contributor_deploy_payload.get("smoke_payload")
+        if isinstance(contributor_deploy_payload.get("smoke_payload"), dict)
+        else {}
+    )
+    contributor_launch_ok = (
+        contributor_smoke_status == "ok"
+        and str(contributor_launch_payload.get("status") or "").strip() == "ok"
+        and isinstance(contributor_app_args, list)
+        and "--contributor-lab" in contributor_app_args
+        and not contributor_launch_payload.get("new_crash_log_detected")
+    )
     lane_health_status = str(kvm_lane_health.get("status") or "").strip()
 
     checks = {
         "kvm_app_publish_deploy_smoke_ok": app_smoke_status == "ok",
+        "kvm_contributor_lab_smoke_ok": contributor_launch_ok,
         "kvm_research_lane_health_ok": lane_health_status == "ok",
     }
 
     errors: list[str] = []
     if app_smoke_status != "ok":
         errors.append(f"KVM app publish/deploy smoke is {app_smoke_status or 'missing-status'}.")
+    if not contributor_launch_ok:
+        errors.append(f"KVM Contributor Lab smoke is {contributor_smoke_status or 'missing-status'}.")
     if lane_health_status != "ok":
         errors.append(f"KVM research lane health is {lane_health_status or 'missing-status'}.")
 
@@ -364,6 +391,8 @@ def evaluate_kvm_statuses(kvm_app_smoke: dict[str, Any], kvm_lane_health: dict[s
         "checks": checks,
         "summary": {
             "app_smoke_status": app_smoke_status,
+            "contributor_lab_smoke_status": contributor_smoke_status,
+            "contributor_lab_app_args": contributor_app_args if isinstance(contributor_app_args, list) else [],
             "lane_health_status": lane_health_status,
             "lane_health_generated_utc": str(kvm_lane_health.get("generated_utc") or ""),
         },
@@ -417,6 +446,7 @@ def build_app_retest_readiness_report(repo_root: Path | None = None) -> dict[str
     evidence_manifest = load_json(root / "research" / "evidence-manifest.json")
     evidence_audit = load_json(root / "research" / "evidence-audit.json")
     kvm_app_smoke = load_json(root / "registry-research-framework" / "audit" / "kvm-app-publish-deploy-smoke-latest.json")
+    kvm_contributor_lab_smoke = load_json(root / "registry-research-framework" / "audit" / "kvm-app-contributor-lab-smoke-latest.json")
     kvm_lane_health = load_json(root / "registry-research-framework" / "audit" / "kvm-research-lane-health-latest.json")
 
     record_by_id, record_file_by_id = build_record_index(root / "research" / "records")
@@ -436,7 +466,7 @@ def build_app_retest_readiness_report(repo_root: Path | None = None) -> dict[str
         len(list((root / "research" / "records").glob("*.json"))),
     )
     rollback_report = evaluate_rollback_coverage(promotion_entries)
-    kvm_report = evaluate_kvm_statuses(kvm_app_smoke, kvm_lane_health)
+    kvm_report = evaluate_kvm_statuses(kvm_app_smoke, kvm_contributor_lab_smoke, kvm_lane_health)
 
     checks = {
         "public_repo_hygiene_pass": public_hygiene_report.get("check_status") == "PASS",
@@ -468,6 +498,7 @@ def build_app_retest_readiness_report(repo_root: Path | None = None) -> dict[str
             "apply_allowed_record_count": rollback_report["summary"]["apply_allowed_record_count"],
             "missing_rollback_story_count": rollback_report["summary"]["missing_rollback_story_count"],
             "kvm_app_smoke_status": kvm_report["summary"]["app_smoke_status"],
+            "kvm_contributor_lab_smoke_status": kvm_report["summary"]["contributor_lab_smoke_status"],
             "kvm_lane_health_status": kvm_report["summary"]["lane_health_status"],
         },
         "reports": {
@@ -535,6 +566,7 @@ def render_console_report(report: dict[str, Any]) -> str:
     lines.append(
         "  KVM: "
         f"app smoke={summary.get('kvm_app_smoke_status')} | "
+        f"contributor lab={summary.get('kvm_contributor_lab_smoke_status')} | "
         f"lane health={summary.get('kvm_lane_health_status')}"
     )
     lines.append(

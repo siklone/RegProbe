@@ -100,6 +100,7 @@ def run_app_deploy_smoke(
     repo_root: Path,
     *,
     publish_zip_path: Path,
+    app_args: list[str],
     launch_wait_timeout: int,
     linger_seconds: int,
     leave_running: bool,
@@ -123,6 +124,8 @@ def run_app_deploy_smoke(
         "--guest-app-exe",
         guest_app_exe,
     ]
+    for app_arg in app_args:
+        cmd.append(f"--app-arg={app_arg}")
     if leave_running:
         cmd.append("--leave-running")
     return run_json_command(cmd, cwd=repo_root)
@@ -132,6 +135,7 @@ def build_deploy_smoke_command(
     repo_root: Path,
     *,
     publish_zip_path: Path,
+    app_args: list[str],
     launch_wait_timeout: int,
     linger_seconds: int,
     leave_running: bool,
@@ -155,6 +159,8 @@ def build_deploy_smoke_command(
         "--guest-app-exe",
         guest_app_exe,
     ]
+    for app_arg in app_args:
+        cmd.append(f"--app-arg={app_arg}")
     if leave_running:
         cmd.append("--leave-running")
     return cmd
@@ -173,6 +179,7 @@ def build_dry_run_payload(
     launch_wait_timeout: int,
     linger_seconds: int,
     leave_running: bool,
+    app_args: list[str],
     guest_publish_zip_path: str,
     guest_app_root: str,
     guest_app_exe: str,
@@ -196,6 +203,7 @@ def build_dry_run_payload(
     deploy_smoke_cmd = build_deploy_smoke_command(
         repo_root,
         publish_zip_path=publish_zip_path,
+        app_args=app_args,
         launch_wait_timeout=launch_wait_timeout,
         linger_seconds=linger_seconds,
         leave_running=leave_running,
@@ -219,6 +227,7 @@ def build_dry_run_payload(
             "publish_zip_path": str(publish_zip_path),
             "launch_wait_timeout": launch_wait_timeout,
             "linger_seconds": linger_seconds,
+            "app_args": app_args,
             "artifact_retention": artifact_retention,
             "publish_command": publish_cmd,
             "zip_preview": {
@@ -248,6 +257,7 @@ def build_verify_only_payload(
     launch_wait_timeout: int,
     linger_seconds: int,
     leave_running: bool,
+    app_args: list[str],
     guest_publish_zip_path: str,
     guest_app_root: str,
     guest_app_exe: str,
@@ -283,6 +293,7 @@ def build_verify_only_payload(
         launch_wait_timeout=launch_wait_timeout,
         linger_seconds=linger_seconds,
         leave_running=leave_running,
+        app_args=app_args,
         guest_publish_zip_path=guest_publish_zip_path,
         guest_app_root=guest_app_root,
         guest_app_exe=guest_app_exe,
@@ -297,6 +308,8 @@ def build_verify_only_payload(
     ]
     if leave_running:
         recommended_execute_command.append("--leave-running")
+    for app_arg in app_args:
+        recommended_execute_command.append(f"--app-arg={app_arg}")
     if self_contained:
         recommended_execute_command.append("--self-contained")
     if artifact_retention == "kept":
@@ -343,6 +356,12 @@ def main() -> int:
     parser.add_argument("--launch-wait-timeout", type=int, default=20)
     parser.add_argument("--linger-seconds", type=int, default=5)
     parser.add_argument("--leave-running", action="store_true")
+    parser.add_argument(
+        "--app-arg",
+        action="append",
+        default=[],
+        help="Argument to pass to RegProbe.App.exe during the guest launch smoke.",
+    )
     parser.add_argument("--guest-publish-zip-path", default=r"C:\Tools\Inbound\app-publish-current-branch.zip")
     parser.add_argument("--guest-app-root", default=r"C:\Tools\AppSmoke")
     parser.add_argument("--guest-app-exe", default=r"C:\Tools\AppSmoke\RegProbe.App.exe")
@@ -380,6 +399,7 @@ def main() -> int:
         "publish_zip_path": str(publish_zip_path),
         "launch_wait_timeout": args.launch_wait_timeout,
         "linger_seconds": args.linger_seconds,
+        "app_args": args.app_arg,
         "artifact_retention": "kept" if args.keep_artifacts or args.work_root else "ephemeral",
     }
 
@@ -397,6 +417,7 @@ def main() -> int:
                 launch_wait_timeout=args.launch_wait_timeout,
                 linger_seconds=args.linger_seconds,
                 leave_running=args.leave_running,
+                app_args=args.app_arg,
                 guest_publish_zip_path=args.guest_publish_zip_path,
                 guest_app_root=args.guest_app_root,
                 guest_app_exe=args.guest_app_exe,
@@ -419,6 +440,7 @@ def main() -> int:
                 launch_wait_timeout=args.launch_wait_timeout,
                 linger_seconds=args.linger_seconds,
                 leave_running=args.leave_running,
+                app_args=args.app_arg,
                 guest_publish_zip_path=args.guest_publish_zip_path,
                 guest_app_root=args.guest_app_root,
                 guest_app_exe=args.guest_app_exe,
@@ -484,6 +506,7 @@ def main() -> int:
         deploy_smoke_returncode, deploy_smoke_payload = run_app_deploy_smoke(
             repo_root,
             publish_zip_path=publish_zip_path,
+            app_args=args.app_arg,
             launch_wait_timeout=args.launch_wait_timeout,
             linger_seconds=args.linger_seconds,
             leave_running=args.leave_running,

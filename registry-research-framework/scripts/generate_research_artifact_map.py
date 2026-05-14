@@ -165,6 +165,27 @@ def summarize_kvm_smoke(repo_root: Path) -> tuple[str, dict[str, Any]]:
     }
 
 
+def summarize_contributor_lab_smoke(repo_root: Path) -> tuple[str, dict[str, Any]]:
+    path = repo_root / "registry-research-framework" / "audit" / "kvm-app-contributor-lab-smoke-latest.json"
+    payload = load_json(path)
+    deploy_payload = payload.get("deploy_smoke_payload") if isinstance(payload.get("deploy_smoke_payload"), dict) else {}
+    smoke_payload = deploy_payload.get("smoke_payload") if isinstance(deploy_payload.get("smoke_payload"), dict) else {}
+    app_args = payload.get("app_args") if isinstance(payload.get("app_args"), list) else []
+    ok = (
+        str(payload.get("status") or "").lower() == "ok"
+        and str(smoke_payload.get("status") or "").lower() == "ok"
+        and "--contributor-lab" in app_args
+        and not smoke_payload.get("new_crash_log_detected")
+    )
+    return status_from_bool(ok), {
+        "status": payload.get("status"),
+        "app_args": app_args,
+        "smoke_status": smoke_payload.get("status"),
+        "new_crash_log_detected": smoke_payload.get("new_crash_log_detected"),
+        "guest_health": payload.get("guest_health"),
+    }
+
+
 def static_artifact(
     *,
     artifact_id: str,
@@ -200,6 +221,7 @@ def build_artifact_map(repo_root: Path = REPO_ROOT) -> dict[str, Any]:
     cleanup_status, cleanup = summarize_cleanup_ledger(repo_root)
     vm_status, vm_health = summarize_vm_health(repo_root)
     kvm_status, kvm_smoke = summarize_kvm_smoke(repo_root)
+    contributor_smoke_status, contributor_smoke = summarize_contributor_lab_smoke(repo_root)
 
     artifacts = [
         static_artifact(
@@ -322,6 +344,17 @@ def build_artifact_map(repo_root: Path = REPO_ROOT) -> dict[str, Any]:
             details=kvm_smoke,
         ),
         static_artifact(
+            artifact_id="kvm-contributor-lab-smoke",
+            path="registry-research-framework/audit/kvm-app-contributor-lab-smoke-latest.json",
+            audience="contributor, release QA",
+            tier="canonical-latest",
+            purpose="Latest self-contained VM launch smoke for the gated Contributor Lab startup path.",
+            use_when="After Contributor Lab, startup navigation, or contributor readiness UI changes.",
+            avoid_when="You need normal end-user card apply/rollback evidence.",
+            status=contributor_smoke_status,
+            details=contributor_smoke,
+        ),
+        static_artifact(
             artifact_id="rejected-closure-ledger",
             path="registry-research-framework/audit/rejected-closure-ledger.md",
             audience="contributor, audit",
@@ -357,6 +390,7 @@ def build_artifact_map(repo_root: Path = REPO_ROOT) -> dict[str, Any]:
         "app_card_contract_fail_count": card_contracts.get("fail_count"),
         "promoted_app_qa_live_success_count": promoted_qa.get("live_success_count"),
         "promoted_app_qa_live_failure_count": promoted_qa.get("live_failure_count"),
+        "contributor_lab_smoke_status": contributor_smoke.get("status"),
     }
 
     return {
@@ -397,6 +431,7 @@ def render_markdown(payload: dict[str, Any]) -> str:
         "",
         f"- App-card contracts: `{summary.get('app_card_contract_pass_count')}` pass, `{summary.get('app_card_contract_fail_count')}` fail.",
         f"- Promoted app QA latest: `{summary.get('promoted_app_qa_live_success_count')}` live success, `{summary.get('promoted_app_qa_live_failure_count')}` live failure.",
+        f"- Contributor Lab VM smoke: `{summary.get('contributor_lab_smoke_status')}`.",
         f"- Operator96 app-card ready: `{summary.get('operator96_normal_app_card_ready')}`.",
         f"- Operator96 noisy results: `{summary.get('operator96_noisy_result_count')}`; non-ok results: `{summary.get('operator96_non_ok_count')}`.",
         f"- Cleanup delete-eligible items: `{summary.get('cleanup_delete_eligible_count')}`.",

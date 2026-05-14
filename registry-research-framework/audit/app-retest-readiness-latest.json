@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-05-14T08:37:06Z",
+  "generated_utc": "2026-05-14T09:34:53Z",
   "check_status": "PASS",
   "checks": {
     "public_repo_hygiene_pass": true,
@@ -18,6 +18,7 @@
     "evidence_atlas_category_counts_match_json": true,
     "apply_allowed_records_have_rollback_story": true,
     "kvm_app_publish_deploy_smoke_ok": true,
+    "kvm_contributor_lab_smoke_ok": true,
     "kvm_research_lane_health_ok": true
   },
   "summary": {
@@ -28,6 +29,7 @@
     "apply_allowed_record_count": 261,
     "missing_rollback_story_count": 0,
     "kvm_app_smoke_status": "ok",
+    "kvm_contributor_lab_smoke_status": "ok",
     "kvm_lane_health_status": "ok"
   },
   "reports": {
@@ -99,10 +101,15 @@
       "status": "PASS",
       "checks": {
         "kvm_app_publish_deploy_smoke_ok": true,
+        "kvm_contributor_lab_smoke_ok": true,
         "kvm_research_lane_health_ok": true
       },
       "summary": {
         "app_smoke_status": "ok",
+        "contributor_lab_smoke_status": "ok",
+        "contributor_lab_app_args": [
+          "--contributor-lab"
+        ],
         "lane_health_status": "ok",
         "lane_health_generated_utc": "2026-05-05T15:39:41Z"
       },

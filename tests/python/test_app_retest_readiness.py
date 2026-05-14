@@ -34,6 +34,8 @@ class AppRetestReadinessTests(unittest.TestCase):
 
         self.assertEqual(report["check_status"], "PASS")
         self.assertEqual(report["reports"]["kvm"]["summary"]["app_smoke_status"], "ok")
+        self.assertEqual(report["reports"]["kvm"]["summary"]["contributor_lab_smoke_status"], "ok")
+        self.assertIn("--contributor-lab", report["reports"]["kvm"]["summary"]["contributor_lab_app_args"])
         self.assertEqual(report["reports"]["kvm"]["summary"]["lane_health_status"], "ok")
         self.assertEqual(report["summary"]["app_only_tweak_count"], 0)
         self.assertEqual(report["summary"]["missing_rollback_story_count"], 0)
