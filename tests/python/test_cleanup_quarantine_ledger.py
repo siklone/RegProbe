@@ -74,6 +74,33 @@ class CleanupQuarantineLedgerTests(unittest.TestCase):
             self.assertEqual(item["live_reference_count"], 0)
             self.assertTrue(item["delete_eligible"])
 
+    def test_audit_trail_references_are_counted_separately_from_blocking_references(self):
+        with tempfile.TemporaryDirectory() as temp:
+            repo = Path(temp)
+            target_dir = repo / "registry-research-framework" / "audit"
+            target_dir.mkdir(parents=True)
+            target = target_dir / "obsolete-pilot.json"
+            target.write_text("{}\n", encoding="utf-8")
+
+            old_ledger = target_dir / "cleanup-quarantine-ledger-20260510.md"
+            old_ledger.write_text("obsolete-pilot is tracked here\n", encoding="utf-8")
+
+            item = self.module.item_for(
+                target,
+                category="test",
+                stale_reason="superseded by test fixture",
+                replacement_artifacts=["replacement.json"],
+                recommended_action="delete-after-review",
+                repo_root=repo,
+                output_paths={"registry-research-framework/audit/cleanup-quarantine-ledger-20260514.md"},
+            )
+
+            self.assertEqual(item["live_reference_count"], 1)
+            self.assertEqual(item["audit_reference_count"], 1)
+            self.assertEqual(item["blocking_reference_count"], 0)
+            self.assertEqual(item["audit_references_sample"], ["registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"])
+            self.assertFalse(item["delete_eligible"])
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -88,7 +88,15 @@ def seed_clean_artifacts(repo: Path):
     write_json(
         repo,
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260514.json",
-        {"summary": {"total_items": 1, "referenced_count": 1, "delete_eligible_count": 0}},
+        {
+            "summary": {
+                "total_items": 1,
+                "referenced_count": 1,
+                "blocking_referenced_count": 1,
+                "audit_only_referenced_count": 0,
+                "delete_eligible_count": 0,
+            }
+        },
     )
     write_json(
         repo,
@@ -141,6 +149,7 @@ class ResearchArtifactMapTests(unittest.TestCase):
             self.assertEqual(by_id["operator96-low-noise-aggregate"]["status"], "ok")
             self.assertEqual(by_id["operator96-app-surface-review"]["status"], "research-only-ok")
             self.assertEqual(by_id["cleanup-quarantine-ledger"]["status"], "no-delete-eligible")
+            self.assertEqual(by_id["cleanup-quarantine-ledger"]["details"]["blocking_referenced_count"], 1)
             self.assertEqual(by_id["kvm-contributor-lab-smoke"]["status"], "ok")
             self.assertIn("evidence/raw/**", payload["raw_parse_do_not_start_here"])
 
