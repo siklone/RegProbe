@@ -1,6 +1,6 @@
 # Single Tweak App QA: SystemResponsiveness
 
-- Generated UTC: `2026-05-13T23:45:32.1434214+00:00`
+- Generated UTC: `2026-05-14T10:20:44.9203191+00:00`
 - Tweak: `power.disable-network-power-saving.policy`
 - Status: `ok`
 - Success: `True`
@@ -9,6 +9,12 @@
 - Claim boundary: `True`
 - Proof lanes: `docs, runtime, source, rollback`
 - Contract: `ok` - QA card snapshot contract passed.
+
+## Value Story
+
+- `HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\SystemResponsiveness`: current `20`, target `10`, verified after apply.
+- `HKLM\System\CurrentControlSet\Services\TCPIP\Parameters\DisableTaskOffload`: current `missing`, target set by the card, verified after apply.
+- Rollback restored the previous registry state after verification.
 
 ## Stages
 
