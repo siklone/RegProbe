@@ -327,6 +327,18 @@ def planned_item(item: dict[str, Any]) -> dict[str, Any]:
     }
     staging_decision = STAGING_CANONICALIZATION_DECISIONS.get(str(item.get("path") or ""))
     if staging_decision:
+        if staging_decision["canonicalization_state"] == "active-tool-output-root":
+            planned["release_state"] = "intentional-reference-keep"
+            planned["decision_track"] = "tooling-output-root"
+            planned["decision_status"] = "active-tool-output-root"
+            planned["evidence_role"] = "active static-analysis output root used by current scripts"
+            planned["retention_owner"] = "tooling"
+            planned["exit_criteria"] = (
+                "Keep until a broader tooling-path migration changes script defaults and migrates any generated outputs."
+            )
+            planned["next_action"] = (
+                "Keep as an active tooling output root; do not treat as evidence cleanup or delete-candidate work."
+            )
         planned["staging_canonicalization"] = staging_decision
         planned["canonicalization_state"] = staging_decision["canonicalization_state"]
         planned["owning_records"] = staging_decision["owning_records"]
