@@ -1,7 +1,7 @@
 # App Retest Readiness
 
 - Status: **PASS**
-- Generated UTC: `2026-05-14T08:37:06Z`
+- Generated UTC: `2026-05-14T09:34:53Z`
 
 ## Summary
 - `record_count`: `356`
@@ -11,6 +11,7 @@
 - `apply_allowed_record_count`: `261`
 - `missing_rollback_story_count`: `0`
 - `kvm_app_smoke_status`: `ok`
+- `kvm_contributor_lab_smoke_status`: `ok`
 - `kvm_lane_health_status`: `ok`
 
 ## Checks
@@ -30,4 +31,5 @@
 - `evidence_atlas_category_counts_match_json`: `True`
 - `apply_allowed_records_have_rollback_story`: `True`
 - `kvm_app_publish_deploy_smoke_ok`: `True`
+- `kvm_contributor_lab_smoke_ok`: `True`
 - `kvm_research_lane_health_ok`: `True`

@@ -106,6 +106,21 @@ def seed_clean_artifacts(repo: Path):
             "guest_health": "stable",
         },
     )
+    write_json(
+        repo,
+        "registry-research-framework/audit/kvm-app-contributor-lab-smoke-latest.json",
+        {
+            "status": "ok",
+            "app_args": ["--contributor-lab"],
+            "deploy_smoke_payload": {
+                "smoke_payload": {
+                    "status": "ok",
+                    "new_crash_log_detected": False,
+                }
+            },
+            "guest_health": "stable",
+        },
+    )
 
 
 class ResearchArtifactMapTests(unittest.TestCase):
@@ -126,6 +141,7 @@ class ResearchArtifactMapTests(unittest.TestCase):
             self.assertEqual(by_id["operator96-low-noise-aggregate"]["status"], "ok")
             self.assertEqual(by_id["operator96-app-surface-review"]["status"], "research-only-ok")
             self.assertEqual(by_id["cleanup-quarantine-ledger"]["status"], "no-delete-eligible")
+            self.assertEqual(by_id["kvm-contributor-lab-smoke"]["status"], "ok")
             self.assertIn("evidence/raw/**", payload["raw_parse_do_not_start_here"])
 
     def test_cleanup_delete_eligible_requires_attention(self):

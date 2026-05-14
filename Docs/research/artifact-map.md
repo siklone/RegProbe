@@ -1,6 +1,6 @@
 # Research Artifact Map
 
-Generated: `2026-05-14T09:08:48Z`
+Generated: `2026-05-14T09:35:01Z`
 
 This is the contributor entrypoint for current research artifacts. Use it
 instead of browsing raw audit folders first.
@@ -9,6 +9,7 @@ instead of browsing raw audit folders first.
 
 - App-card contracts: `258` pass, `0` fail.
 - Promoted app QA latest: `14` live success, `0` live failure.
+- Contributor Lab VM smoke: `ok`.
 - Operator96 app-card ready: `0`.
 - Operator96 noisy results: `0`; non-ok results: `0`.
 - Cleanup delete-eligible items: `0`.
@@ -35,6 +36,7 @@ instead of browsing raw audit folders first.
 | `cleanup-quarantine-ledger` | `canonical-safety-ledger` | `no-delete-eligible` | maintainer, contributor | `registry-research-framework/audit/cleanup-quarantine-ledger-20260514.json` | Before deleting or moving any archived/raw evidence or historical parse artifact. | You are looking for shipped app state; use app-surface/readiness artifacts. |
 | `vm-health` | `canonical-latest` | `ok` | contributor, VM operator | `registry-research-framework/audit/vm-health-check-latest.json` | Before ETW, Ghidra, app deploy smoke, or registry mutation experiments. | You need historical VM incident context. |
 | `kvm-app-publish-deploy-smoke` | `canonical-latest` | `ok` | contributor, release QA | `registry-research-framework/audit/kvm-app-publish-deploy-smoke-latest.json` | After WPF/app-shell changes or before manual app retesting. | You need card-level apply/rollback evidence. |
+| `kvm-contributor-lab-smoke` | `canonical-latest` | `ok` | contributor, release QA | `registry-research-framework/audit/kvm-app-contributor-lab-smoke-latest.json` | After Contributor Lab, startup navigation, or contributor readiness UI changes. | You need normal end-user card apply/rollback evidence. |
 | `rejected-closure-ledger` | `historical-archive` | `archive` | contributor, audit | `registry-research-framework/audit/rejected-closure-ledger.md` | You need to understand why rejected does not mean evidence missing. | You are looking for active backlog. |
 | `v36-clean-state-report` | `historical-checkpoint` | `archive` | contributor, audit | `registry-research-framework/audit/v36-clean-state-report.md` | You need the historical clean-state audit snapshot. | You need today's app/VM retest state. |
 

@@ -80,6 +80,7 @@ class VmKvmAppDeploySmokeTests(unittest.TestCase):
             exit_code, payload = app_deploy_smoke.run_app_launch_smoke(
                 REPO_ROOT,
                 app_exe=r"C:\Tools\AppSmoke\RegProbe.App.exe",
+                app_args=[],
                 launch_wait_timeout=37,
                 linger_seconds=5,
                 leave_running=False,
@@ -91,11 +92,35 @@ class VmKvmAppDeploySmokeTests(unittest.TestCase):
         self.assertEqual(exit_code, 0)
         self.assertEqual(payload["status"], "ok")
 
+    def test_run_app_launch_smoke_passes_app_args(self) -> None:
+        completed = mock.Mock(returncode=0, stdout='{"status":"ok"}', stderr="")
+        with mock.patch.object(app_deploy_smoke.subprocess, "run", return_value=completed) as run_mock:
+            exit_code, payload = app_deploy_smoke.run_app_launch_smoke(
+                REPO_ROOT,
+                app_exe=r"C:\Tools\AppSmoke\RegProbe.App.exe",
+                app_args=["--contributor-lab"],
+                launch_wait_timeout=37,
+                linger_seconds=5,
+                leave_running=False,
+            )
+
+        cmd = run_mock.call_args.args[0]
+        self.assertIn("--app-arg=--contributor-lab", cmd)
+        self.assertEqual(exit_code, 0)
+        self.assertEqual(payload["status"], "ok")
+
     def test_main_returns_ok_when_upload_deploy_and_smoke_succeed(self) -> None:
         with tempfile.TemporaryDirectory(dir=REPO_ROOT) as temp_root:
             publish_zip = Path(temp_root) / "publish.zip"
             publish_zip.write_bytes(b"zip")
-            argv = ["run-guest-app-deploy-smoke.py", "--publish-zip", str(publish_zip), "--linger-seconds", "1"]
+            argv = [
+                "run-guest-app-deploy-smoke.py",
+                "--publish-zip",
+                str(publish_zip),
+                "--linger-seconds",
+                "1",
+                "--app-arg=--contributor-lab",
+            ]
 
             with mock.patch.object(sys, "argv", argv), mock.patch.object(
                 app_deploy_smoke,
@@ -119,6 +144,7 @@ class VmKvmAppDeploySmokeTests(unittest.TestCase):
         payload = json.loads(stdout.getvalue())
         self.assertEqual(exit_code, 0)
         self.assertEqual(payload["status"], "ok")
+        self.assertEqual(payload["app_args"], ["--contributor-lab"])
         self.assertEqual(payload["recovery_action"], "none")
 
     def test_main_returns_error_when_upload_fails(self) -> None:

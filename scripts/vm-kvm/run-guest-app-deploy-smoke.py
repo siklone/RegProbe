@@ -86,6 +86,7 @@ def run_app_launch_smoke(
     repo_root: Path,
     *,
     app_exe: str,
+    app_args: list[str],
     launch_wait_timeout: int,
     linger_seconds: int,
     leave_running: bool,
@@ -100,6 +101,8 @@ def run_app_launch_smoke(
         "--linger-seconds",
         str(linger_seconds),
     ]
+    for app_arg in app_args:
+        cmd.append(f"--app-arg={app_arg}")
     if leave_running:
         cmd.append("--leave-running")
     return run_json_command(cmd, cwd=repo_root)
@@ -146,6 +149,12 @@ def main() -> int:
     parser.add_argument("--launch-wait-timeout", type=int, default=20)
     parser.add_argument("--linger-seconds", type=int, default=5)
     parser.add_argument("--leave-running", action="store_true")
+    parser.add_argument(
+        "--app-arg",
+        action="append",
+        default=[],
+        help="Argument to pass to RegProbe.App.exe during launch smoke.",
+    )
     args = parser.parse_args()
 
     repo_root = Path(args.repo_root).resolve()
@@ -157,6 +166,7 @@ def main() -> int:
         "guest_publish_zip_path": args.guest_publish_zip_path,
         "guest_app_root": args.guest_app_root,
         "guest_app_exe": args.guest_app_exe,
+        "app_args": args.app_arg,
         "launch_wait_timeout": args.launch_wait_timeout,
         "linger_seconds": args.linger_seconds,
     }
@@ -257,6 +267,7 @@ def main() -> int:
     smoke_returncode, smoke_payload = run_app_launch_smoke(
         repo_root,
         app_exe=args.guest_app_exe,
+        app_args=args.app_arg,
         launch_wait_timeout=args.launch_wait_timeout,
         linger_seconds=args.linger_seconds,
         leave_running=args.leave_running,

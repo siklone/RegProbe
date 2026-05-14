@@ -49,6 +49,7 @@ class VmKvmAppPublishDeploySmokeTests(unittest.TestCase):
             exit_code, payload = app_publish_deploy_smoke.run_app_deploy_smoke(
                 REPO_ROOT,
                 publish_zip_path=Path("/tmp/publish.zip"),
+                app_args=[],
                 launch_wait_timeout=20,
                 linger_seconds=5,
                 leave_running=False,
@@ -68,6 +69,7 @@ class VmKvmAppPublishDeploySmokeTests(unittest.TestCase):
             exit_code, payload = app_publish_deploy_smoke.run_app_deploy_smoke(
                 REPO_ROOT,
                 publish_zip_path=Path("/tmp/publish.zip"),
+                app_args=[],
                 launch_wait_timeout=20,
                 linger_seconds=5,
                 leave_running=False,
@@ -86,6 +88,7 @@ class VmKvmAppPublishDeploySmokeTests(unittest.TestCase):
             exit_code, payload = app_publish_deploy_smoke.run_app_deploy_smoke(
                 REPO_ROOT,
                 publish_zip_path=Path("/tmp/publish.zip"),
+                app_args=[],
                 launch_wait_timeout=41,
                 linger_seconds=5,
                 leave_running=False,
@@ -97,6 +100,26 @@ class VmKvmAppPublishDeploySmokeTests(unittest.TestCase):
         cmd = run_mock.call_args.args[0]
         self.assertIn("--launch-wait-timeout", cmd)
         self.assertIn("41", cmd)
+        self.assertEqual(exit_code, 0)
+        self.assertEqual(payload["status"], "ok")
+
+    def test_run_app_deploy_smoke_passes_app_args(self) -> None:
+        completed = mock.Mock(returncode=0, stdout='{"status":"ok"}', stderr="")
+        with mock.patch.object(app_publish_deploy_smoke.subprocess, "run", return_value=completed) as run_mock:
+            exit_code, payload = app_publish_deploy_smoke.run_app_deploy_smoke(
+                REPO_ROOT,
+                publish_zip_path=Path("/tmp/publish.zip"),
+                app_args=["--contributor-lab"],
+                launch_wait_timeout=41,
+                linger_seconds=5,
+                leave_running=False,
+                guest_publish_zip_path=r"C:\Tools\Inbound\app-publish-current-branch.zip",
+                guest_app_root=r"C:\Tools\AppSmoke",
+                guest_app_exe=r"C:\Tools\AppSmoke\RegProbe.App.exe",
+            )
+
+        cmd = run_mock.call_args.args[0]
+        self.assertIn("--app-arg=--contributor-lab", cmd)
         self.assertEqual(exit_code, 0)
         self.assertEqual(payload["status"], "ok")
 
@@ -165,6 +188,7 @@ class VmKvmAppPublishDeploySmokeTests(unittest.TestCase):
                 "--linger-seconds",
                 "7",
                 "--leave-running",
+                "--app-arg=--contributor-lab",
             ]
 
             with mock.patch.object(sys, "argv", argv), mock.patch("sys.stdout", new_callable=io.StringIO) as stdout:
@@ -182,6 +206,8 @@ class VmKvmAppPublishDeploySmokeTests(unittest.TestCase):
         self.assertIn("run-guest-app-deploy-smoke.py", payload["deploy_smoke_command"][1])
         self.assertIn("--launch-wait-timeout", payload["deploy_smoke_command"])
         self.assertIn("--leave-running", payload["deploy_smoke_command"])
+        self.assertIn("--app-arg=--contributor-lab", payload["deploy_smoke_command"])
+        self.assertEqual(payload["app_args"], ["--contributor-lab"])
         self.assertEqual(payload["guest_paths"]["app_root"], r"C:\Tools\AppSmoke")
         self.assertEqual(payload["recovery_action"], "none")
 
