@@ -93,7 +93,10 @@ normal app cards.
 
 Contributor Lab v1 does not execute arbitrary commands. Certified mutation still
 belongs to the VM scripts listed above, with a clean snapshot, healthy QGA, and
-tight host-noise gate.
+tight host-noise gate. The v1 command packs cover single-tweak lookup, app QA
+planning, app readiness/contracts, Operator96 app-surface review, representative
+promoted app-QA batches, single-value VM experiments, and small Operator96
+tranche reruns.
 
 ## Legacy And Historical Tooling
 

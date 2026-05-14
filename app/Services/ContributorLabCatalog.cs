@@ -88,6 +88,7 @@ public static class ContributorLabCatalog
         "registry-research-framework/scripts/generate_operator96_app_surface_review.py",
         "scripts/vm-kvm/vm-health-check.py",
         "scripts/vm-kvm/run-guest-registry-value-experiment.py",
+        "scripts/vm-kvm/run-guest-registry-value-campaign.py",
     ];
 
     public static ContributorLabSnapshot Load(string? repoRootOverride = null)
@@ -172,7 +173,13 @@ public static class ContributorLabCatalog
             return false;
         }
 
-        if (trimmed.Contains(';') || trimmed.Contains('&') || trimmed.Contains('|') || trimmed.Contains('<') || trimmed.Contains('>'))
+        if (trimmed.Contains(';')
+            || trimmed.Contains('&')
+            || trimmed.Contains('|')
+            || trimmed.Contains('<')
+            || trimmed.Contains('>')
+            || trimmed.Contains('\n')
+            || trimmed.Contains('\r'))
         {
             return false;
         }
@@ -217,6 +224,20 @@ public static class ContributorLabCatalog
                 RequiresCertifiedVm: false,
                 MutatesGuest: false),
             new(
+                "Representative promoted app QA batch",
+                "Run a small category-balanced live VM batch for shipped cards; this applies, verifies, and rolls back inside the guest.",
+                "python3 registry-research-framework/scripts/check_promoted_tweak_app_qa_batch.py --limit-per-category 1 --total-limit 14 --run-kvm --wait-timeout 900 --json",
+                certifiedReady ? "certified-ready" : "certified-required",
+                RequiresCertifiedVm: true,
+                MutatesGuest: true),
+            new(
+                "Operator96 app-surface review",
+                "Recompute why Operator96 observations stay research-only or become eligible for bounded app-card review.",
+                "python3 registry-research-framework/scripts/generate_operator96_app_surface_review.py --json",
+                "community-safe",
+                RequiresCertifiedVm: false,
+                MutatesGuest: false),
+            new(
                 "Certified VM health",
                 "Non-mutating QGA/snapshot preflight before any certified value experiment.",
                 "python3 scripts/vm-kvm/vm-health-check.py --domain regprobe-win11-25h2-session --connect qemu:///session --json",
@@ -226,7 +247,14 @@ public static class ContributorLabCatalog
             new(
                 "Single value VM experiment",
                 "Apply one value in the disposable VM, reboot-smoke it, rollback, and abort before mutation if host noise is not clean.",
-                "python3 scripts/vm-kvm/run-guest-registry-value-experiment.py --domain regprobe-win11-25h2-session --connect qemu:///session --registry-path \"HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Power\" --value-name SystemResponsiveness --value-data 10 --smoke-profile gui --stage-wait-timeout 420 --reboot-wait-timeout 420 --post-reboot-delay-seconds 90 --require-domain-snapshot --auto-revert-snapshot-on-boot-failure --revert-snapshot-name clean-25h2-qga --abort-on-noisy-host",
+                "python3 scripts/vm-kvm/run-guest-registry-value-experiment.py --domain regprobe-win11-25h2-session --connect qemu:///session --registry-path \"HKLM\\\\SYSTEM\\\\CurrentControlSet\\\\Control\\\\Power\" --value-name MfBufferingThreshold --value-data 0 --smoke-profile gui --stage-wait-timeout 420 --reboot-wait-timeout 420 --post-reboot-delay-seconds 90 --require-domain-snapshot --auto-revert-snapshot-on-boot-failure --revert-snapshot-name clean-25h2-qga --abort-on-noisy-host",
+                certifiedReady ? "certified-ready" : "certified-required",
+                RequiresCertifiedVm: true,
+                MutatesGuest: true),
+            new(
+                "Operator96 tranche rerun",
+                "Continue or rerun the value matrix in small snapshot-safe checkpoints; results remain research observations until app-surface gates pass.",
+                "python3 scripts/vm-kvm/run-guest-registry-value-campaign.py --run --limit-experiments 10 --max-values-per-record 2 --smoke-profile gui --stage-wait-timeout 420 --reboot-wait-timeout 420 --post-reboot-delay-seconds 90",
                 certifiedReady ? "certified-ready" : "certified-required",
                 RequiresCertifiedVm: true,
                 MutatesGuest: true),

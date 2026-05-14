@@ -62,9 +62,11 @@ public sealed class ContributorLabViewModel : ViewModelBase
     public int AppCardPassCount => Snapshot.AppCardPassCount;
 
     public string AppSurfacePolicySummary =>
-        Operator96ReadyForAppCard == 0
-            ? "Operator96 records are clean observations, not shipped app cards yet."
-            : "Only ready_for_bounded_app_card records may move into normal app cards.";
+        Operator96NonOkCount > 0 || Operator96NoisyResultCount > 0 || Operator96NeedsLowNoiseRerun > 0
+            ? "Operator96 records are blocked from app cards until non_ok, noisy, and low-noise rerun counts are all zero."
+            : Operator96ReadyForAppCard == 0
+                ? "Operator96 records are clean observations, not shipped app cards yet."
+                : "Only ready_for_bounded_app_card records with known defaults, rollback proof, explicit app writes, and bounded claims may move into normal app cards.";
 
     public bool RiskAcknowledged
     {

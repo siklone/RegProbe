@@ -244,7 +244,10 @@ If you do not know the repo yet, use this order:
    canonical, which outputs are current, and which run artifacts are
    reference-eligible.
 3. If you are on Windows, open Contributor Lab from the app to check local
-   readiness and copy the safe command pack for the task.
+   readiness and copy the safe command pack for the task. The lab exposes
+   read-only single-tweak, readiness, app-card contract, and Operator96
+   app-surface review commands; VM mutation packs stay snapshot/certified
+   gated and should be treated as command templates to run from a repo shell.
 4. Run a single-setting inspection before editing anything. On Linux hosts
    without `Microsoft.WindowsDesktop.App`, use the Python mirror; use the .NET
    CLI in the Windows VM or on a desktop-runtime host only when you explicitly
