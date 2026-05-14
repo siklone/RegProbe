@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-14T17:37:55Z",
+  "generated_utc": "2026-05-14T18:10:55Z",
   "summary": {
     "artifact_count": 15,
     "attention_count": 0,
@@ -11,7 +11,8 @@
     "cleanup_delete_eligible_count": 0,
     "cleanup_retained_inventory_count": 89,
     "cleanup_reference_migration_needed_count": 0,
-    "cleanup_retention_decision_queue_count": 63,
+    "cleanup_active_action_count": 3,
+    "cleanup_retention_decision_queue_count": 3,
     "cleanup_audit_only_retained_count": 21,
     "app_card_contract_pass_count": 258,
     "app_card_contract_fail_count": 0,
@@ -203,15 +204,25 @@
         "item_count": 89,
         "delete_ready_count": 0,
         "reference_migration_needed_count": 0,
-        "retention_decision_queue_count": 63,
+        "active_cleanup_action_count": 3,
+        "retention_decision_queue_count": 3,
         "audit_only_retained_count": 21,
         "intentional_reference_keep_count": 5,
-        "needs_replacement_or_retention_decision_count": 63,
+        "source_of_record_retained_count": 25,
+        "historical_audit_retained_count": 25,
+        "archive_history_retained_count": 10,
+        "vm_rerun_required_count": 1,
+        "raw_trace_backfill_required_count": 2,
+        "needs_replacement_or_retention_decision_count": 0,
         "retained_pending_review_count": 0,
         "release_state_counts": {
+          "archive-history-retained": 10,
           "audit-only-retained": 21,
+          "historical-audit-retained": 25,
           "intentional-reference-keep": 5,
-          "needs-replacement-or-retention-decision": 63
+          "raw-trace-backfill-required": 2,
+          "source-of-record-retained": 25,
+          "vm-rerun-required": 1
         },
         "decision_track_counts": {
           "archive-history-anchor": 10,
