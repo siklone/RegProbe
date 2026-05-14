@@ -231,6 +231,12 @@
                                 <TextBlock Text="{Binding AppSurfacePolicySummary}"
                                            Margin="0,6,0,8"
                                            Style="{StaticResource UtilitySectionBodyTextStyle}"/>
+                                <TextBlock Text="{Binding Operator96GateBreakdown, StringFormat={}Operator96 gate: {0}}"
+                                           Margin="0,0,0,5"
+                                           Style="{StaticResource ContributorMonoTextStyle}"/>
+                                <TextBlock Text="{Binding Operator96NextActionSummary}"
+                                           Margin="0,0,0,8"
+                                           Style="{StaticResource UtilitySectionBodyTextStyle}"/>
                                 <WrapPanel>
                                     <TextBlock Text="{Binding AppCardPassCount, StringFormat={}App cards passing: {0}}"
                                                Margin="0,0,18,0"
@@ -245,6 +251,15 @@
                                                Margin="0,0,18,0"
                                                Style="{StaticResource ContributorMonoTextStyle}"/>
                                     <TextBlock Text="{Binding Operator96ResearchOnlyCount, StringFormat={}Research-only: {0}}"
+                                               Margin="0,0,18,0"
+                                               Style="{StaticResource ContributorMonoTextStyle}"/>
+                                    <TextBlock Text="{Binding Operator96BlockedByGate, StringFormat={}Blocked by gate: {0}}"
+                                               Margin="0,0,18,0"
+                                               Style="{StaticResource ContributorMonoTextStyle}"/>
+                                    <TextBlock Text="{Binding Operator96NotAppSurfaceReady, StringFormat={}Not app-ready: {0}}"
+                                               Margin="0,0,18,0"
+                                               Style="{StaticResource ContributorMonoTextStyle}"/>
+                                    <TextBlock Text="{Binding Operator96BlockedBySafety, StringFormat={}Safety blocked: {0}}"
                                                Margin="0,0,18,0"
                                                Style="{StaticResource ContributorMonoTextStyle}"/>
                                     <TextBlock Text="{Binding Operator96NeedsLowNoiseRerun, StringFormat={}Needs low-noise rerun: {0}}"

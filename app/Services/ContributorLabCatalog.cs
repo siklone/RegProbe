@@ -57,6 +57,10 @@ public sealed record ContributorLabSnapshot(
     string VmSnapshotName,
     int Operator96RecordCount,
     int Operator96ReadyForAppCard,
+    int Operator96BlockedByGate,
+    int Operator96NotAppSurfaceReady,
+    int Operator96BlockedBySafety,
+    bool Operator96AggregateSurfaceBlocked,
     int Operator96NeedsLowNoiseRerun,
     int Operator96NoisyResultCount,
     int Operator96NonOkCount,
@@ -164,6 +168,10 @@ public static class ContributorLabCatalog
             string.IsNullOrWhiteSpace(vmSnapshotName) ? "clean-25h2-qga" : vmSnapshotName,
             Int(reviewSummary, "record_count"),
             Int(reviewSummary, "ready_for_bounded_app_card"),
+            Int(reviewSummary, "blocked_by_gate"),
+            Int(reviewSummary, "not_app_surface_ready"),
+            Int(reviewSummary, "blocked_by_safety"),
+            Bool(reviewSummary, "aggregate_surface_blocked"),
             needsRerun,
             noisy,
             nonOk,
@@ -286,7 +294,16 @@ public static class ContributorLabCatalog
             Ready("App readiness", snapshot.AppReadinessOk, "Cards, rollback coverage, KVM lane health, and app smoke receipts."),
             Ready("App-card contracts", snapshot.AppCardsOk, $"{snapshot.AppCardPassCount}/{snapshot.AppCardCandidateCount} shipped cards pass."),
             Ready("Operator96 low-noise", snapshot.Operator96AggregateOk, $"non_ok={snapshot.Operator96NonOkCount}, noisy={snapshot.Operator96NoisyResultCount}."),
-            Ready("Operator96 app-surface gate", snapshot.Operator96SurfaceReviewOk, $"ready={snapshot.Operator96ReadyForAppCard}, needs_rerun={snapshot.Operator96NeedsLowNoiseRerun}."),
+            Ready(
+                "Operator96 app-surface gate",
+                snapshot.Operator96SurfaceReviewOk,
+                $"ready={snapshot.Operator96ReadyForAppCard}, blocked_by_gate={snapshot.Operator96BlockedByGate}, not_ready={snapshot.Operator96NotAppSurfaceReady}, safety={snapshot.Operator96BlockedBySafety}, needs_rerun={snapshot.Operator96NeedsLowNoiseRerun}."),
+            Ready(
+                "Operator96 aggregate gate",
+                !snapshot.Operator96AggregateSurfaceBlocked,
+                snapshot.Operator96AggregateSurfaceBlocked
+                    ? "Aggregate blockers are present; Operator96 cannot support app-card promotion."
+                    : "Aggregate blockers are clear; per-record app-card gates still decide promotion."),
             new(
                 "VM/QGA latest receipt",
                 snapshot.VmHealthKnown ? snapshot.VmHealthOk ? "Ready" : "Needs attention" : "Unknown",
