@@ -82,6 +82,18 @@ The `tweak list`, `tweak apply`, and `tweak revert` CLI commands remain useful
 for advanced Windows/headless workflows. They are not required for normal app
 users and should not be presented as the primary research path.
 
+## WPF Contributor Lab
+
+Repo/dev builds expose a gated Contributor Lab in the desktop app. It is a
+Windows-first companion for contributors, not an end-user optimization screen.
+Use it to check local readiness, copy canonical Python command packs, and review
+research observations such as Operator96 records without promoting them to
+normal app cards.
+
+Contributor Lab v1 does not execute arbitrary commands. Certified mutation still
+belongs to the VM scripts listed above, with a clean snapshot, healthy QGA, and
+tight host-noise gate.
+
 ## Legacy And Historical Tooling
 
 Some scripts under `registry-research-framework/scripts/`, `scripts/vm/`, and

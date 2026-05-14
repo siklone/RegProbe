@@ -169,6 +169,7 @@ The current v3.6 research snapshot is zero-pending: no active blockers, no promo
 - I want the public support story: [Support matrix](Docs/product/support-matrix.md)
 - I want to build the app: [Build and run](#build-and-run)
 - I want to contribute research: [Contributing](CONTRIBUTING.md)
+- I want contributor tools inside the app: open Contributor Lab from a repo/dev build
 - I want the contributor tooling map: [Research tooling map](Docs/research/tooling-map.md)
 - I want to understand certified vs community runs: [Run tiers](Docs/research/run-tiers.md)
 
@@ -180,6 +181,11 @@ and agentic AI workflows. The .NET research CLI remains a compatibility surface;
 prefer Python mirrors for new research work, especially on Linux hosts without
 the Windows desktop runtime. The `tweak list/apply/revert` CLI path is retained
 for advanced Windows/headless workflows, not for normal app users.
+
+Contributor Lab is the app-side companion for that boundary. It appears only in
+contributor/dev contexts and starts behind an acknowledgement gate. It shows
+Windows/VM readiness, safe command packs, and research observations such as
+Operator96 without promoting them to normal end-user cards.
 
 ## Single Setting Check
 

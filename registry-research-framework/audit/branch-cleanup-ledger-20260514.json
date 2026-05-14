@@ -1,0 +1,84 @@
+{
+  "schema_version": "1.0",
+  "generated_utc": "2026-05-14T00:45:00Z",
+  "purpose": "Record branch cleanup candidates before pruning stale local remote-tracking refs or deleting any remote branch.",
+  "policy": {
+    "delete_remote_branch_only_if": [
+      "no open pull request points at the branch",
+      "the branch was merged or superseded by a merged PR",
+      "the artifacts are present on main",
+      "the branch name is listed in this ledger"
+    ],
+    "do_not_delete": [
+      "dependabot/nuget/tests.integration/Microsoft.NET.Test.Sdk-18.5.1",
+      "any branch with an open pull request",
+      "any branch whose artifacts are not represented on main"
+    ]
+  },
+  "main_checkpoint": {
+    "commit": "7a8b89a91ee328e8adfe42f551f69387c569230c",
+    "source_pr": 325,
+    "merge_strategy": "squash"
+  },
+  "candidates": [
+    {
+      "branch": "codex/standardize-app-low-noise-20260512",
+      "status": "merged-and-delete-requested",
+      "replacement": "main@7a8b89a91ee328e8adfe42f551f69387c569230c",
+      "reason": "PR #325 merged by squash; source branch deletion was requested during merge."
+    },
+    {
+      "branch_glob": "codex/operator96-low-noise-rerun-tranche-*",
+      "status": "stale-remote-tracking-prune-candidate",
+      "replacement": "registry-research-framework/audit/operator96-low-noise-rerun-aggregate-20260512.json",
+      "reason": "Tranche artifacts are merged into main and summarized by the aggregate."
+    },
+    {
+      "branch": "codex/operator96-low-noise-rerun-plan",
+      "status": "stale-remote-tracking-prune-candidate",
+      "replacement": "registry-research-framework/audit/operator96-low-noise-rerun-plan-20260510.json",
+      "reason": "Planning artifacts are merged into main."
+    },
+    {
+      "branch": "codex/operator96-low-noise-aggregate-app-review",
+      "status": "stale-remote-tracking-prune-candidate",
+      "replacement": "registry-research-framework/audit/operator96-app-surface-review-20260510.json",
+      "reason": "Aggregate and app-surface review artifacts are merged into main."
+    },
+    {
+      "branch": "codex/operator96-app-surface-review",
+      "status": "stale-remote-tracking-prune-candidate",
+      "replacement": "registry-research-framework/audit/operator96-app-surface-review-20260510.json",
+      "reason": "Review artifacts are merged into main."
+    },
+    {
+      "branch": "codex/app-retest-vm-qa-20260512",
+      "status": "stale-remote-tracking-prune-candidate",
+      "replacement": "registry-research-framework/audit/promoted-app-qa-batch-latest.json",
+      "reason": "App QA artifacts are merged into main."
+    },
+    {
+      "branch": "codex/app-retest-card-contract-sweep",
+      "status": "stale-remote-tracking-prune-candidate",
+      "replacement": "registry-research-framework/audit/app-card-evidence-contracts-latest.json",
+      "reason": "Card contract artifacts are merged into main."
+    },
+    {
+      "branch": "codex/app-retest-single-tweak-systemresponsiveness",
+      "status": "stale-remote-tracking-prune-candidate",
+      "replacement": "registry-research-framework/audit/single-tweak-app-qa-systemresponsiveness-live-latest.json",
+      "reason": "Single tweak QA artifacts are merged into main."
+    },
+    {
+      "branch": "codex/cleanup-quarantine-ledger-refresh",
+      "status": "stale-remote-tracking-prune-candidate",
+      "replacement": "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
+      "reason": "Cleanup quarantine ledger is merged into main."
+    }
+  ],
+  "notes": [
+    "This ledger does not delete evidence, ETL/PML/XML files, or archived reports.",
+    "Use git remote prune origin only to remove local stale remote-tracking refs after this ledger is committed.",
+    "Dependabot PR #298 remains separate and must not be merged as part of this cleanup."
+  ]
+}

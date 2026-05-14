@@ -126,6 +126,14 @@ public partial class App : WpfApplication
                 continue;
             }
 
+            if (arg.Equals("--contributor", StringComparison.OrdinalIgnoreCase)
+                || arg.Equals("--contributor-lab", StringComparison.OrdinalIgnoreCase))
+            {
+                AppDiagnostics.Log("[App] Navigating to Contributor Lab via arg");
+                mainViewModel.ShowContributorCommand.Execute(null);
+                continue;
+            }
+
             if (arg.Equals("--diagnostics", StringComparison.OrdinalIgnoreCase)
                 || arg.Equals("--about", StringComparison.OrdinalIgnoreCase))
             {

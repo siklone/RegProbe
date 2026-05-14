@@ -1,7 +1,9 @@
 from __future__ import annotations
 
 import importlib.util
+import json
 import sys
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -154,6 +156,29 @@ class Operator96AppSurfaceReviewTests(unittest.TestCase):
 
         self.assertEqual(result["app_surface_bucket"], "ready_for_bounded_app_card")
         self.assertTrue(result["app_surface_ready"])
+
+    def test_aggregate_noisy_results_block_surface_review(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            matrix = tmp_path / "matrix.json"
+            aggregate = tmp_path / "aggregate.json"
+            matrix.write_text(json.dumps({"records": [record()]}), encoding="utf-8")
+            aggregate.write_text(
+                json.dumps({
+                    "status": "ok",
+                    "summary": {
+                        "non_ok_count": 0,
+                        "noisy_result_count": 1,
+                    },
+                }),
+                encoding="utf-8",
+            )
+
+            review = self.module.build_review(matrix, aggregate)
+
+        self.assertEqual(review["status"], "FAIL")
+        self.assertTrue(review["summary"]["aggregate_surface_blocked"])
+        self.assertIn("aggregate-noisy-results-present", review["summary"]["aggregate_blockers"])
 
 
 if __name__ == "__main__":

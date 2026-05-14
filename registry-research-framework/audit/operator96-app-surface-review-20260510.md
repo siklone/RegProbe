@@ -1,19 +1,22 @@
 # Operator96 App Surface Review
 
-- Generated UTC: `2026-05-13T23:50:12Z`
+- Generated UTC: `2026-05-14T00:44:04Z`
 - Matrix: `registry-research-framework/audit/operator96-enriched-value-matrix-20260510.json`
+- Aggregate: `registry-research-framework/audit/operator96-low-noise-rerun-aggregate-20260512.json`
 - Records: `96`
 - Ready for bounded app card: `0`
 - Needs low-noise rerun: `0`
 - Not app-surface ready: `79`
 - Blocked by gate: `17`
 - Blocked by safety: `0`
+- Aggregate surface blocked: `False`
 
 ## Policy
 
 - Only ready_for_bounded_app_card may enter the app surface without another VM campaign.
 - Low-confidence, harmful, noisy, or host-noise-unknown experiments are observations only.
 - needs_low_noise_rerun means host noise was not clean; not_app_surface_ready means the run was clean enough to store but not positive/bounded enough to ship.
+- Aggregate non_ok or noisy_result_count greater than zero blocks all Operator96 app surfacing until a clean rerun exists.
 
 ## Buckets
 

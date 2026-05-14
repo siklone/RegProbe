@@ -36,12 +36,14 @@ public sealed class MainCompositionCoordinator : IDisposable
         WorkspaceViewModel = new TweaksViewModel(providers, BusyService);
         var configurationViewModel = new ConfigurationShellViewModel(WorkspaceViewModel);
         var repairsViewModel = new RepairsShellViewModel(WorkspaceViewModel);
+        var contributorLabViewModel = new ContributorLabViewModel();
         var aboutViewModel = new AboutViewModel();
 
         RecoveryCoordinator = new MainRecoveryCoordinator(rollbackStore, WorkspaceViewModel, logToFile);
         ShellCoordinator = new MainShellCoordinator(
             configurationViewModel,
             repairsViewModel,
+            contributorLabViewModel,
             aboutViewModel,
             logToFile);
     }

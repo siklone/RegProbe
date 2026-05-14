@@ -14,6 +14,12 @@ the canonical research API. The .NET research CLI is a compatibility layer; keep
 Python mirrors for research inspection, app QA planning, readiness checks, and
 VM campaign automation.
 
+Windows contributors can also use the WPF Contributor Lab from a repo/dev build.
+It is gated by an explicit acknowledgement and is intentionally conservative:
+readiness checks, command packs, and research observations are visible there,
+but direct mutation still requires certified VM/snapshot readiness and the
+canonical Python/VM scripts.
+
 ## Core Rules
 
 - runtime validation happens in the `Win25H2Clean` VM, not on the host
@@ -234,7 +240,9 @@ If you do not know the repo yet, use this order:
 2. Read the [research tooling map](Docs/research/tooling-map.md) and
    [run tiers](Docs/research/run-tiers.md) so you know which scripts are
    canonical and which run artifacts are reference-eligible.
-3. Run a single-setting inspection before editing anything. On Linux hosts
+3. If you are on Windows, open Contributor Lab from the app to check local
+   readiness and copy the safe command pack for the task.
+4. Run a single-setting inspection before editing anything. On Linux hosts
    without `Microsoft.WindowsDesktop.App`, use the Python mirror; use the .NET
    CLI in the Windows VM or on a desktop-runtime host only when you explicitly
    need CLI compatibility.
