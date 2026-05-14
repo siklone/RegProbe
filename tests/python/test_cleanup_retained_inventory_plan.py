@@ -150,6 +150,35 @@ class CleanupRetainedInventoryPlanTests(unittest.TestCase):
                 {"canonical-raw-replacement-known": 1},
             )
 
+    def test_vm_batch_probe_placeholder_has_canonical_raw_replacement(self):
+        with tempfile.TemporaryDirectory() as temp:
+            ledger = Path(temp) / "cleanup-quarantine-ledger.json"
+            write_ledger(
+                ledger,
+                [
+                    {
+                        "path": "evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json..md",
+                        "category": "vm-tooling-staging-oldest-sample",
+                        "cleanup_status": "retained-audit-trail-reference",
+                        "recommended_action": "keep-pending-review",
+                        "blocking_reference_count": 0,
+                        "audit_reference_count": 1,
+                        "blocking_references_sample": [],
+                    }
+                ],
+            )
+
+            plan = self.module.build_plan(ledger)
+            item = plan["retained_inventory"][0]
+
+            self.assertEqual(item["release_state"], "audit-only-retained")
+            self.assertEqual(item["canonicalization_state"], "canonical-raw-replacement-known")
+            self.assertIn(
+                "evidence/raw/runtime-diff/vm-batch-probe-20260320/vm-batch-probe-20260320.json",
+                item["canonical_replacement_candidates"],
+            )
+            self.assertIn("multi-record VM batch", item["retention_rationale"])
+
     def test_audit_only_references_have_explicit_release_state(self):
         with tempfile.TemporaryDirectory() as temp:
             ledger = Path(temp) / "cleanup-quarantine-ledger.json"

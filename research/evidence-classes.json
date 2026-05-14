@@ -22072,13 +22072,13 @@
         "gaming_safe": null
       },
       "validated_semantics": {
-        "summary": "Guest-side reversible probe on Win25H2Clean; see the batch probe output in evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json..md Added nohuto mirror corroboration via nohuto-enablesecurecredentialprompting-admx.",
+        "summary": "Guest-side reversible probe on Win25H2Clean; see the batch probe output in evidence/raw/runtime-diff/vm-batch-probe-20260320/vm-batch-probe-20260320.json Added nohuto mirror corroboration via nohuto-enablesecurecredentialprompting-admx.",
         "has_validation_proof": true,
         "has_semantics_evidence": true,
         "links": [
           {
             "title": "Validation proof source",
-            "url": "evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json",
+            "url": "evidence/raw/runtime-diff/vm-batch-probe-20260320/vm-batch-probe-20260320.json",
             "kind": "validation-proof",
             "summary": "HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\CredUI\\EnableSecureCredentialPrompting: before=__MISSING__, after_apply=1, after_restore=__MISSING__"
           },
@@ -22103,7 +22103,7 @@
         "links": [
           {
             "title": "Win25H2Clean reversible probe - Trusted path credential prompting",
-            "url": "evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json",
+            "url": "evidence/raw/runtime-diff/vm-batch-probe-20260320/vm-batch-probe-20260320.json",
             "kind": "runtime-diff",
             "summary": "Guest reversible probe toggled EnableSecureCredentialPrompting through 1 and back to missing on the CredUI policy path, confirming the current app write and rollback behavior on..."
           }
@@ -22579,13 +22579,13 @@
         "gaming_safe": null
       },
       "validated_semantics": {
-        "summary": "Guest-side reversible probe on Win25H2Clean; see the batch probe output in evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json..md The local nohuto mirror also shows the same MaintenanceDisabled registry path.",
+        "summary": "Guest-side reversible probe on Win25H2Clean; see the batch probe output in evidence/raw/runtime-diff/vm-batch-probe-20260320/vm-batch-probe-20260320.json The local nohuto mirror also shows the same MaintenanceDisabled registry path.",
         "has_validation_proof": true,
         "has_semantics_evidence": true,
         "links": [
           {
             "title": "Validation proof source",
-            "url": "evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json",
+            "url": "evidence/raw/runtime-diff/vm-batch-probe-20260320/vm-batch-probe-20260320.json",
             "kind": "validation-proof",
             "summary": "HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Schedule\\Maintenance\\MaintenanceDisabled: before=__MISSING__, after_apply=1, after_restore=__MISSING__"
           },
@@ -22610,7 +22610,7 @@
         "links": [
           {
             "title": "Win25H2Clean reversible probe - Automatic maintenance override",
-            "url": "evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json",
+            "url": "evidence/raw/runtime-diff/vm-batch-probe-20260320/vm-batch-probe-20260320.json",
             "kind": "runtime-diff",
             "summary": "Guest reversible probe toggled MaintenanceDisabled through 1 and back to missing under the maintenance schedule policy path, matching the app behavior captured in the batch probe."
           },
@@ -22945,7 +22945,7 @@
           },
           {
             "title": "Win25H2Clean reversible probe - Fullscreen optimizations override bundle",
-            "url": "evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json",
+            "url": "evidence/raw/runtime-diff/vm-batch-probe-20260320/vm-batch-probe-20260320.json",
             "kind": "runtime-diff",
             "summary": "Guest reversible probe toggled the GameConfigStore fullscreen-optimization bundle values and restored the original missing state, confirming the current app write set on Win25H2..."
           },
@@ -23197,7 +23197,7 @@
           },
           {
             "title": "Win25H2Clean reversible probe - Wallpaper JPEG import quality",
-            "url": "evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json",
+            "url": "evidence/raw/runtime-diff/vm-batch-probe-20260320/vm-batch-probe-20260320.json",
             "kind": "runtime-diff",
             "summary": "Guest reversible probe toggled JPEGImportQuality to 100 and restored the missing baseline on HKCU\\Control Panel\\Desktop, confirming the current app write and rollback cycle."
           },
@@ -23944,7 +23944,7 @@
         "links": [
           {
             "title": "Validation proof source",
-            "url": "evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json",
+            "url": "evidence/raw/runtime-diff/vm-batch-probe-20260320/vm-batch-probe-20260320.json",
             "kind": "validation-proof",
             "summary": "vm-batch-probe-20260320.json: system.disable-startup-delay before=__MISSING__, after_apply=0, after_restore=__MISSING__; startup-delay-0.summary.json: before missing, applied 0,..."
           },
@@ -23969,7 +23969,7 @@
         "links": [
           {
             "title": "Win25H2Clean reversible probe - Explorer startup delay",
-            "url": "evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json",
+            "url": "evidence/raw/runtime-diff/vm-batch-probe-20260320/vm-batch-probe-20260320.json",
             "kind": "runtime-diff",
             "summary": "Guest reversible probe toggled StartupDelayInMSec to 0 and restored the missing baseline under Explorer\\Serialize, confirming the current app write and restore cycle."
           },
@@ -27509,13 +27509,13 @@
         "gaming_safe": null
       },
       "validated_semantics": {
-        "summary": "Guest-side reversible probe on Win25H2Clean; see the batch probe output in evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json..md",
+        "summary": "Guest-side reversible probe on Win25H2Clean; see the batch probe output in evidence/raw/runtime-diff/vm-batch-probe-20260320/vm-batch-probe-20260320.json",
         "has_validation_proof": true,
         "has_semantics_evidence": true,
         "links": [
           {
             "title": "Validation proof source",
-            "url": "evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json",
+            "url": "evidence/raw/runtime-diff/vm-batch-probe-20260320/vm-batch-probe-20260320.json",
             "kind": "validation-proof",
             "summary": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Session Manager\\Memory Management\\LargeSystemCache: before=0, after_apply=0, after_restore=0"
           },
@@ -28321,7 +28321,7 @@
           },
           {
             "title": "Win25H2Clean reversible probe - Win32PrioritySeparation tuning",
-            "url": "evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json",
+            "url": "evidence/raw/runtime-diff/vm-batch-probe-20260320/vm-batch-probe-20260320.json",
             "kind": "runtime-diff",
             "summary": "Guest reversible probe changed Win32PrioritySeparation from 2 to 38 and restored 2, confirming the tuning value transitions on the PriorityControl path."
           },

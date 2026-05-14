@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-14T16:08:18Z",
+  "generated_utc": "2026-05-14T16:38:26Z",
   "ledger": "registry-research-framework/audit/cleanup-quarantine-ledger-20260514.json",
   "purpose": "Action plan for cleanup retained inventory. It does not delete files and it does not redefine delete eligibility.",
   "rules": {
@@ -12,38 +12,38 @@
     "item_count": 89,
     "delete_ready_count": 0,
     "reference_migration_needed_count": 0,
-    "audit_only_retained_count": 19,
+    "audit_only_retained_count": 20,
     "intentional_reference_keep_count": 4,
-    "needs_replacement_or_retention_decision_count": 66,
-    "retention_decision_queue_count": 66,
+    "needs_replacement_or_retention_decision_count": 65,
+    "retention_decision_queue_count": 65,
     "retained_pending_review_count": 0,
     "release_state_counts": {
-      "audit-only-retained": 19,
+      "audit-only-retained": 20,
       "intentional-reference-keep": 4,
-      "needs-replacement-or-retention-decision": 66
+      "needs-replacement-or-retention-decision": 65
     },
     "decision_track_counts": {
       "archive-history-anchor": 10,
-      "audit-trail-retained": 19,
+      "audit-trail-retained": 20,
       "historical-audit-output": 25,
       "intentional-reference-keep": 4,
       "raw-trace-source-of-record": 25,
-      "staging-bundle-canonicalization": 6
+      "staging-bundle-canonicalization": 5
     },
     "decision_status_counts": {
       "explicitly-retained": 4,
-      "needs-canonical-evidence-or-retention-note": 6,
+      "needs-canonical-evidence-or-retention-note": 5,
       "retain-history-anchor": 10,
       "retain-until-derived-parse-reviewed": 25,
       "retain-until-supersession-is-explicit": 25,
-      "retained-for-history-only": 19
+      "retained-for-history-only": 20
     },
     "staging_canonicalization_state_counts": {
       "active-tool-output-root": 1,
-      "canonical-raw-replacement-known": 4,
+      "canonical-raw-replacement-known": 5,
       "partial-derived-replacement-known": 2,
       "rerun-needed": 1,
-      "staging-source-of-record": 2
+      "staging-source-of-record": 1
     },
     "category_counts": {
       "audit-archive-named-sample": 10,
@@ -58,26 +58,26 @@
       "evidence-tree-reference": 61,
       "other-reference": 68,
       "public-doc-reference": 4,
-      "research-index-reference": 166,
+      "research-index-reference": 161,
       "research-note-reference": 24,
-      "research-record-reference": 31
+      "research-record-reference": 28
     },
     "top_blocking_reference_paths": [
       {
         "path": "research/evidence-index.json",
-        "count": 43
+        "count": 42
       },
       {
         "path": "research/evidence-manifest.json",
-        "count": 40
+        "count": 39
       },
       {
         "path": "research/evidence-atlas.md",
-        "count": 35
+        "count": 34
       },
       {
         "path": "research/evidence-manifest.md",
-        "count": 34
+        "count": 33
       },
       {
         "path": "registry-research-framework/audit/rejected-closure-ledger.json",
@@ -85,7 +85,7 @@
       },
       {
         "path": "research/evidence-classes.json",
-        "count": 14
+        "count": 13
       },
       {
         "path": "registry-research-framework/audit/operator-regadd-inventory-20260508-repo.json",
@@ -280,64 +280,6 @@
       ],
       "retention_rationale": "A derived perf CSV exists, but it is not a byte-for-byte replacement for the original ETL placeholder.",
       "next_canonicalization_step": "Retain until a new raw ETL/summary pair or explicit source-of-record decision replaces this placeholder."
-    },
-    {
-      "path": "evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json..md",
-      "category": "vm-tooling-staging-oldest-sample",
-      "cleanup_status": "retained-live-reference",
-      "release_state": "needs-replacement-or-retention-decision",
-      "delete_candidate_state": "not-a-delete-candidate",
-      "decision_track": "staging-bundle-canonicalization",
-      "decision_status": "needs-canonical-evidence-or-retention-note",
-      "evidence_role": "legacy staging output that may still be the only referenced proof for a record",
-      "retention_owner": "evidence",
-      "exit_criteria": "Find a canonical evidence/raw replacement or add an explicit keep rationale naming the owning record/note.",
-      "app_surface_policy": "technical-evidence-only until canonicalized",
-      "can_become_delete_candidate": false,
-      "blocking_reference_count": 8,
-      "audit_reference_count": 4,
-      "blocking_reference_classes": {
-        "research-index-reference": 5,
-        "research-record-reference": 3
-      },
-      "blocking_references_sample": [
-        "research/evidence-atlas.md",
-        "research/evidence-classes.json",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json",
-        "research/evidence-manifest.md",
-        "research/records/security.trusted-path-credential-prompting.review.json",
-        "research/records/system.disable-auto-maintenance.review.json",
-        "research/records/system.memory-large-system-cache-client.review.json"
-      ],
-      "replacement_artifacts": [],
-      "recommended_action": "keep-pending-review",
-      "next_action": "Decide whether this staging bundle has a canonical evidence/raw replacement before attempting deletion.",
-      "stale_reason": "staging diagnostic bundle; verify no record/evidence-index dependency before deletion",
-      "staging_canonicalization": {
-        "canonicalization_state": "staging-source-of-record",
-        "owning_records": [
-          "security.trusted-path-credential-prompting",
-          "system.disable-auto-maintenance",
-          "system.memory-large-system-cache-client"
-        ],
-        "canonical_replacement_candidates": [
-          "evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json"
-        ],
-        "retention_rationale": "This placeholder points at a multi-record VM batch proof that still acts as historical source-of-record for several records.",
-        "next_canonicalization_step": "Copy or regenerate the batch proof into evidence/raw, then migrate record/index references in one dedicated PR."
-      },
-      "canonicalization_state": "staging-source-of-record",
-      "owning_records": [
-        "security.trusted-path-credential-prompting",
-        "system.disable-auto-maintenance",
-        "system.memory-large-system-cache-client"
-      ],
-      "canonical_replacement_candidates": [
-        "evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json"
-      ],
-      "retention_rationale": "This placeholder points at a multi-record VM batch proof that still acts as historical source-of-record for several records.",
-      "next_canonicalization_step": "Copy or regenerate the batch proof into evidence/raw, then migrate record/index references in one dedicated PR."
     },
     {
       "path": "evidence/files/vm-tooling-staging/ghidra-probes",
@@ -2832,60 +2774,50 @@
     {
       "path": "evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json..md",
       "category": "vm-tooling-staging-oldest-sample",
-      "cleanup_status": "retained-live-reference",
-      "release_state": "needs-replacement-or-retention-decision",
+      "cleanup_status": "retained-audit-trail-reference",
+      "release_state": "audit-only-retained",
       "delete_candidate_state": "not-a-delete-candidate",
-      "decision_track": "staging-bundle-canonicalization",
-      "decision_status": "needs-canonical-evidence-or-retention-note",
-      "evidence_role": "legacy staging output that may still be the only referenced proof for a record",
-      "retention_owner": "evidence",
-      "exit_criteria": "Find a canonical evidence/raw replacement or add an explicit keep rationale naming the owning record/note.",
-      "app_surface_policy": "technical-evidence-only until canonicalized",
+      "decision_track": "audit-trail-retained",
+      "decision_status": "retained-for-history-only",
+      "evidence_role": "historical cleanup/audit trail reference",
+      "retention_owner": "audit",
+      "exit_criteria": "Keep unless a future cleanup PR explicitly chooses to drop audit-history references.",
+      "app_surface_policy": "not-app-surface",
       "can_become_delete_candidate": false,
-      "blocking_reference_count": 8,
+      "blocking_reference_count": 0,
       "audit_reference_count": 4,
-      "blocking_reference_classes": {
-        "research-index-reference": 5,
-        "research-record-reference": 3
-      },
-      "blocking_references_sample": [
-        "research/evidence-atlas.md",
-        "research/evidence-classes.json",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json",
-        "research/evidence-manifest.md",
-        "research/records/security.trusted-path-credential-prompting.review.json",
-        "research/records/system.disable-auto-maintenance.review.json",
-        "research/records/system.memory-large-system-cache-client.review.json"
+      "blocking_reference_classes": {},
+      "blocking_references_sample": [],
+      "replacement_artifacts": [
+        "evidence/raw/runtime-diff/vm-batch-probe-20260320/vm-batch-probe-20260320.json"
       ],
-      "replacement_artifacts": [],
-      "recommended_action": "keep-pending-review",
-      "next_action": "Decide whether this staging bundle has a canonical evidence/raw replacement before attempting deletion.",
-      "stale_reason": "staging diagnostic bundle; verify no record/evidence-index dependency before deletion",
+      "recommended_action": "delete-after-review",
+      "next_action": "No live blocking references remain; keep for audit trail or handle in a dedicated deletion PR that explicitly accepts audit-only history references.",
+      "stale_reason": "staging diagnostic bundle duplicated by canonical evidence/raw artifact",
       "staging_canonicalization": {
-        "canonicalization_state": "staging-source-of-record",
+        "canonicalization_state": "canonical-raw-replacement-known",
         "owning_records": [
           "security.trusted-path-credential-prompting",
           "system.disable-auto-maintenance",
           "system.memory-large-system-cache-client"
         ],
         "canonical_replacement_candidates": [
-          "evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json"
+          "evidence/raw/runtime-diff/vm-batch-probe-20260320/vm-batch-probe-20260320.json"
         ],
-        "retention_rationale": "This placeholder points at a multi-record VM batch proof that still acts as historical source-of-record for several records.",
-        "next_canonicalization_step": "Copy or regenerate the batch proof into evidence/raw, then migrate record/index references in one dedicated PR."
+        "retention_rationale": "A canonical evidence/raw runtime-diff JSON now carries the multi-record VM batch apply/rollback proof.",
+        "next_canonicalization_step": "Keep live record/index references on the evidence/raw runtime-diff JSON; leave the staging placeholder only as audit history."
       },
-      "canonicalization_state": "staging-source-of-record",
+      "canonicalization_state": "canonical-raw-replacement-known",
       "owning_records": [
         "security.trusted-path-credential-prompting",
         "system.disable-auto-maintenance",
         "system.memory-large-system-cache-client"
       ],
       "canonical_replacement_candidates": [
-        "evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json"
+        "evidence/raw/runtime-diff/vm-batch-probe-20260320/vm-batch-probe-20260320.json"
       ],
-      "retention_rationale": "This placeholder points at a multi-record VM batch proof that still acts as historical source-of-record for several records.",
-      "next_canonicalization_step": "Copy or regenerate the batch proof into evidence/raw, then migrate record/index references in one dedicated PR."
+      "retention_rationale": "A canonical evidence/raw runtime-diff JSON now carries the multi-record VM batch apply/rollback proof.",
+      "next_canonicalization_step": "Keep live record/index references on the evidence/raw runtime-diff JSON; leave the staging placeholder only as audit history."
     },
     {
       "path": "evidence/files/vm-tooling-staging/ghidra-probes",

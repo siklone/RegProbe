@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-14T16:08:18Z",
+  "generated_utc": "2026-05-14T16:38:14Z",
   "purpose": "Quarantine ledger for cleanup review inventory. Only delete-candidate rows are cleanup candidates; retained rows are not deletion candidates.",
   "deletion_policy": [
     "No file is deleted by this generator.",
@@ -15,8 +15,8 @@
     "retained_inventory_count": 89,
     "delete_eligible_count": 0,
     "referenced_count": 89,
-    "blocking_referenced_count": 70,
-    "audit_only_referenced_count": 19,
+    "blocking_referenced_count": 69,
+    "audit_only_referenced_count": 20,
     "total_size_bytes": 678702358,
     "categories": {
       "audit-archive-named-sample": 10,
@@ -26,8 +26,8 @@
       "vm-tooling-staging-oldest-sample": 25
     },
     "cleanup_status_counts": {
-      "retained-audit-trail-reference": 19,
-      "retained-live-reference": 70
+      "retained-audit-trail-reference": 20,
+      "retained-live-reference": 69
     }
   },
   "items": [
@@ -420,28 +420,26 @@
     {
       "path": "evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json..md",
       "kind": "file",
-      "cleanup_status": "retained-live-reference",
+      "cleanup_status": "retained-audit-trail-reference",
       "category": "vm-tooling-staging-oldest-sample",
       "size_bytes": 312,
-      "stale_reason": "staging diagnostic bundle; verify no record/evidence-index dependency before deletion",
-      "replacement_artifacts": [],
+      "stale_reason": "staging diagnostic bundle duplicated by canonical evidence/raw artifact",
+      "replacement_artifacts": [
+        "evidence/raw/runtime-diff/vm-batch-probe-20260320/vm-batch-probe-20260320.json"
+      ],
       "reference_terms": [
         "evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json..md",
         "vm-batch-probe-20260320.json.",
         "vm-batch-probe-20260320.json..md"
       ],
-      "live_reference_count": 12,
+      "live_reference_count": 4,
       "audit_reference_count": 4,
-      "blocking_reference_count": 8,
+      "blocking_reference_count": 0,
       "references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md",
         "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
-        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md",
-        "research/evidence-atlas.md",
-        "research/evidence-classes.json",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json"
+        "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
       "audit_references_sample": [
         "registry-research-framework/audit/cleanup-quarantine-ledger-20260510.json",
@@ -449,20 +447,11 @@
         "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json",
         "registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.md"
       ],
-      "blocking_references_sample": [
-        "research/evidence-atlas.md",
-        "research/evidence-classes.json",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json",
-        "research/evidence-manifest.md",
-        "research/records/security.trusted-path-credential-prompting.review.json",
-        "research/records/system.disable-auto-maintenance.review.json",
-        "research/records/system.memory-large-system-cache-client.review.json"
-      ],
+      "blocking_references_sample": [],
       "replacement_resolved_reference_count": 0,
       "replacement_resolved_references_sample": [],
       "delete_eligible": false,
-      "recommended_action": "keep-pending-review"
+      "recommended_action": "delete-after-review"
     },
     {
       "path": "evidence/files/vm-tooling-staging/ghidra-probes",
