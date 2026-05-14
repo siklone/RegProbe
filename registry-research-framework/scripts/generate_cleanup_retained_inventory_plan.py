@@ -192,6 +192,23 @@ STAGING_ACTION_TRACKS: dict[str, dict[str, str]] = {
 }
 
 
+TRACK_RELEASE_STATE_OVERRIDES: dict[str, str] = {
+    "raw-trace-source-of-record": "source-of-record-retained",
+    "historical-audit-output": "historical-audit-retained",
+    "archive-history-anchor": "archive-history-retained",
+    "vm-rerun-required": "vm-rerun-required",
+    "partial-derived-needs-raw-trace": "raw-trace-backfill-required",
+    "staging-source-promote-to-raw": "staging-promote-to-raw",
+}
+
+ACTIVE_RETENTION_ACTION_STATES = {
+    "needs-replacement-or-retention-decision",
+    "vm-rerun-required",
+    "raw-trace-backfill-required",
+    "staging-promote-to-raw",
+}
+
+
 STAGING_CANONICALIZATION_DECISIONS: dict[str, dict[str, Any]] = {
     "evidence/files/vm-tooling-staging/defender-cloud-demo-extracted": {
         "canonicalization_state": "rerun-needed",
@@ -380,6 +397,11 @@ def planned_item(item: dict[str, Any]) -> dict[str, Any]:
         planned["canonical_replacement_candidates"] = staging_decision["canonical_replacement_candidates"]
         planned["retention_rationale"] = staging_decision["retention_rationale"]
         planned["next_canonicalization_step"] = staging_decision["next_canonicalization_step"]
+    release_state_override = TRACK_RELEASE_STATE_OVERRIDES.get(str(planned.get("decision_track") or ""))
+    if release_state_override:
+        planned["release_state"] = release_state_override
+        planned["delete_candidate_state"] = "not-a-delete-candidate"
+        planned["can_become_delete_candidate"] = False
     return planned
 
 
@@ -400,6 +422,9 @@ def build_plan(ledger_path: Path = DEFAULT_LEDGER) -> dict[str, Any]:
     for item in items:
         blocker_counts.update(item.get("blocking_reference_classes") or {})
         blocker_path_counts.update(item.get("blocking_references_sample") or [])
+    retention_decision_queue = [
+        item for item in items if item.get("release_state") in ACTIVE_RETENTION_ACTION_STATES
+    ]
 
     return {
         "schema_version": "1.0",
@@ -409,16 +434,23 @@ def build_plan(ledger_path: Path = DEFAULT_LEDGER) -> dict[str, Any]:
         "rules": {
             "delete_candidate_rule": "Only release_state=delete-ready rows may enter a deletion PR.",
             "retained_rule": "retained rows are not stale-delete candidates; they need reference migration, replacement proof, or an explicit retention decision.",
+            "active_queue_rule": "Only VM reruns, raw-trace backfills, staging promotion, or unresolved retention decisions are active cleanup queue items.",
             "operator_rule": "Use this plan to reduce blocking references before regenerating cleanup-quarantine-ledger.",
         },
         "summary": {
             "item_count": len(items),
             "delete_ready_count": release_state_counts.get("delete-ready", 0),
             "reference_migration_needed_count": release_state_counts.get("reference-migration-needed", 0),
+            "active_cleanup_action_count": len(retention_decision_queue) + release_state_counts.get("reference-migration-needed", 0),
             "audit_only_retained_count": release_state_counts.get("audit-only-retained", 0),
             "intentional_reference_keep_count": release_state_counts.get("intentional-reference-keep", 0),
+            "source_of_record_retained_count": release_state_counts.get("source-of-record-retained", 0),
+            "historical_audit_retained_count": release_state_counts.get("historical-audit-retained", 0),
+            "archive_history_retained_count": release_state_counts.get("archive-history-retained", 0),
+            "vm_rerun_required_count": release_state_counts.get("vm-rerun-required", 0),
+            "raw_trace_backfill_required_count": release_state_counts.get("raw-trace-backfill-required", 0),
             "needs_replacement_or_retention_decision_count": release_state_counts.get("needs-replacement-or-retention-decision", 0),
-            "retention_decision_queue_count": release_state_counts.get("needs-replacement-or-retention-decision", 0),
+            "retention_decision_queue_count": len(retention_decision_queue),
             "retained_pending_review_count": release_state_counts.get("retained-pending-review", 0),
             "release_state_counts": dict(sorted(release_state_counts.items())),
             "decision_track_counts": dict(sorted(decision_track_counts.items())),
@@ -435,7 +467,7 @@ def build_plan(ledger_path: Path = DEFAULT_LEDGER) -> dict[str, Any]:
             item for item in items if item.get("release_state") == "reference-migration-needed"
         ],
         "retention_decision_queue": [
-            item for item in items if item.get("release_state") == "needs-replacement-or-retention-decision"
+            *retention_decision_queue,
         ],
         "retained_inventory": items,
     }
@@ -467,8 +499,14 @@ def render_markdown(plan: dict[str, Any]) -> str:
             f"| Retained inventory items | {int(summary.get('item_count') or 0)} |",
             f"| Delete-ready rows | {int(summary.get('delete_ready_count') or 0)} |",
             f"| Reference migration needed | {int(summary.get('reference_migration_needed_count') or 0)} |",
+            f"| Active cleanup actions | {int(summary.get('active_cleanup_action_count') or 0)} |",
             f"| Audit-only retained | {int(summary.get('audit_only_retained_count') or 0)} |",
             f"| Intentional reference keep | {int(summary.get('intentional_reference_keep_count') or 0)} |",
+            f"| Source-of-record retained | {int(summary.get('source_of_record_retained_count') or 0)} |",
+            f"| Historical audit retained | {int(summary.get('historical_audit_retained_count') or 0)} |",
+            f"| Archive history retained | {int(summary.get('archive_history_retained_count') or 0)} |",
+            f"| VM rerun required | {int(summary.get('vm_rerun_required_count') or 0)} |",
+            f"| Raw trace backfill required | {int(summary.get('raw_trace_backfill_required_count') or 0)} |",
             f"| Needs replacement/retention decision | {int(summary.get('needs_replacement_or_retention_decision_count') or 0)} |",
             f"| Retention decision queue | {int(summary.get('retention_decision_queue_count') or 0)} |",
             f"| Retained pending review | {int(summary.get('retained_pending_review_count') or 0)} |",
@@ -533,7 +571,7 @@ def render_markdown(plan: dict[str, Any]) -> str:
             "",
             "## Retention Decision Queue",
             "",
-            "These rows are not delete candidates. They need a replacement artifact, an explicit retention rationale, or a source-of-record decision before any deletion work.",
+            "These rows are the active retained-inventory actions. Already-classified raw traces, history anchors, and audit outputs stay in the retained inventory worklist instead of this queue.",
             "",
         ]
     )
