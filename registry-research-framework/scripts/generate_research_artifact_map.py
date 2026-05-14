@@ -156,11 +156,13 @@ def summarize_cleanup_retained_plan(repo_root: Path) -> tuple[str, dict[str, Any
         "item_count": summary.get("item_count"),
         "delete_ready_count": delete_ready,
         "reference_migration_needed_count": migration_needed,
+        "retention_decision_queue_count": summary.get("retention_decision_queue_count"),
         "audit_only_retained_count": summary.get("audit_only_retained_count"),
         "intentional_reference_keep_count": summary.get("intentional_reference_keep_count"),
         "needs_replacement_or_retention_decision_count": summary.get("needs_replacement_or_retention_decision_count"),
         "retained_pending_review_count": summary.get("retained_pending_review_count"),
         "release_state_counts": summary.get("release_state_counts"),
+        "decision_track_counts": summary.get("decision_track_counts"),
     }
 
 
@@ -424,6 +426,7 @@ def build_artifact_map(repo_root: Path = REPO_ROOT) -> dict[str, Any]:
         "cleanup_delete_eligible_count": cleanup.get("delete_eligible_count"),
         "cleanup_retained_inventory_count": cleanup.get("retained_inventory_count"),
         "cleanup_reference_migration_needed_count": retained_plan.get("reference_migration_needed_count"),
+        "cleanup_retention_decision_queue_count": retained_plan.get("retention_decision_queue_count"),
         "cleanup_audit_only_retained_count": retained_plan.get("audit_only_retained_count"),
         "app_card_contract_pass_count": card_contracts.get("pass_count"),
         "app_card_contract_fail_count": card_contracts.get("fail_count"),
@@ -474,7 +477,7 @@ def render_markdown(payload: dict[str, Any]) -> str:
         f"- Operator96 app-card ready: `{summary.get('operator96_normal_app_card_ready')}`.",
         f"- Operator96 noisy results: `{summary.get('operator96_noisy_result_count')}`; non-ok results: `{summary.get('operator96_non_ok_count')}`.",
         f"- Cleanup delete-eligible items: `{summary.get('cleanup_delete_eligible_count')}`.",
-        f"- Cleanup retained inventory: `{summary.get('cleanup_retained_inventory_count')}`; reference migration needed: `{summary.get('cleanup_reference_migration_needed_count')}`; audit-only retained: `{summary.get('cleanup_audit_only_retained_count')}`.",
+        f"- Cleanup retained inventory: `{summary.get('cleanup_retained_inventory_count')}`; reference migration needed: `{summary.get('cleanup_reference_migration_needed_count')}`; retention decision queue: `{summary.get('cleanup_retention_decision_queue_count')}`; audit-only retained: `{summary.get('cleanup_audit_only_retained_count')}`.",
         "",
         "## Rules",
         "",

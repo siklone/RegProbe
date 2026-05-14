@@ -108,11 +108,13 @@ def seed_clean_artifacts(repo: Path):
                 "item_count": 1,
                 "delete_ready_count": 0,
                 "reference_migration_needed_count": 1,
+                "retention_decision_queue_count": 0,
                 "audit_only_retained_count": 0,
                 "intentional_reference_keep_count": 0,
                 "needs_replacement_or_retention_decision_count": 0,
                 "retained_pending_review_count": 0,
                 "release_state_counts": {"reference-migration-needed": 1},
+                "decision_track_counts": {"reference-migration": 1},
             }
         },
     )
@@ -176,7 +178,13 @@ class ResearchArtifactMapTests(unittest.TestCase):
                 by_id["cleanup-retained-inventory-plan"]["details"]["reference_migration_needed_count"], 1
             )
             self.assertEqual(by_id["cleanup-retained-inventory-plan"]["details"]["audit_only_retained_count"], 0)
+            self.assertEqual(by_id["cleanup-retained-inventory-plan"]["details"]["retention_decision_queue_count"], 0)
+            self.assertEqual(
+                by_id["cleanup-retained-inventory-plan"]["details"]["decision_track_counts"],
+                {"reference-migration": 1},
+            )
             self.assertEqual(payload["summary"]["cleanup_reference_migration_needed_count"], 1)
+            self.assertEqual(payload["summary"]["cleanup_retention_decision_queue_count"], 0)
             self.assertEqual(payload["summary"]["cleanup_audit_only_retained_count"], 0)
             self.assertEqual(by_id["kvm-contributor-lab-smoke"]["status"], "ok")
             self.assertIn("evidence/raw/**", payload["raw_parse_do_not_start_here"])

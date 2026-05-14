@@ -112,9 +112,15 @@ class CleanupRetainedInventoryPlanTests(unittest.TestCase):
             item = plan["retained_inventory"][0]
 
             self.assertEqual(plan["summary"]["needs_replacement_or_retention_decision_count"], 1)
+            self.assertEqual(plan["summary"]["retention_decision_queue_count"], 1)
+            self.assertEqual(plan["summary"]["decision_track_counts"], {"staging-bundle-canonicalization": 1})
             self.assertEqual(plan["summary"]["reference_migration_needed_count"], 0)
             self.assertEqual(item["release_state"], "needs-replacement-or-retention-decision")
+            self.assertEqual(item["delete_candidate_state"], "not-a-delete-candidate")
+            self.assertEqual(item["decision_track"], "staging-bundle-canonicalization")
+            self.assertIn("canonical evidence/raw replacement", item["exit_criteria"])
             self.assertFalse(item["can_become_delete_candidate"])
+            self.assertIn(item, plan["retention_decision_queue"])
 
     def test_audit_only_references_have_explicit_release_state(self):
         with tempfile.TemporaryDirectory() as temp:
@@ -157,7 +163,9 @@ class CleanupRetainedInventoryPlanTests(unittest.TestCase):
                 "intentional_reference_keep_count": 0,
                 "needs_replacement_or_retention_decision_count": 0,
                 "retained_pending_review_count": 0,
+                "retention_decision_queue_count": 0,
                 "release_state_counts": {"reference-migration-needed": 1},
+                "decision_track_counts": {"reference-migration": 1},
                 "top_blocking_reference_paths": [{"path": "README.md", "count": 1}],
             },
             "reference_migration_queue": [
@@ -169,10 +177,12 @@ class CleanupRetainedInventoryPlanTests(unittest.TestCase):
                     "next_action": "Move refs.",
                 }
             ],
+            "retention_decision_queue": [],
             "retained_inventory": [
                 {
                     "path": "old.json",
                     "release_state": "reference-migration-needed",
+                    "decision_track": "reference-migration",
                     "category": "old-dated-audit-output-sample",
                     "blocking_reference_count": 1,
                     "next_action": "Move refs.",
@@ -183,9 +193,40 @@ class CleanupRetainedInventoryPlanTests(unittest.TestCase):
         markdown = self.module.render_markdown(plan)
 
         self.assertIn("## Reference Migration Queue", markdown)
+        self.assertIn("## Retention Decision Queue", markdown)
+        self.assertIn("## Decision Tracks", markdown)
         self.assertIn("## Retained Inventory Worklist", markdown)
         self.assertIn("old.json", markdown)
         self.assertIn("new.json", markdown)
+
+    def test_raw_trace_needs_decision_gets_source_of_record_track(self):
+        with tempfile.TemporaryDirectory() as temp:
+            ledger = Path(temp) / "cleanup-quarantine-ledger.json"
+            write_ledger(
+                ledger,
+                [
+                    {
+                        "path": "evidence/raw/procmon/example/source.pml",
+                        "category": "large-raw-trace-sample",
+                        "cleanup_status": "retained-live-reference",
+                        "recommended_action": "keep-pending-review",
+                        "blocking_reference_count": 2,
+                        "blocking_references_sample": [
+                            "research/evidence-index.json",
+                            "research/records/example.json",
+                        ],
+                    }
+                ],
+            )
+
+            plan = self.module.build_plan(ledger)
+            item = plan["retained_inventory"][0]
+
+            self.assertEqual(item["release_state"], "needs-replacement-or-retention-decision")
+            self.assertEqual(item["decision_track"], "raw-trace-source-of-record")
+            self.assertEqual(item["retention_owner"], "evidence")
+            self.assertIn("technical-evidence-only", item["app_surface_policy"])
+            self.assertEqual(plan["summary"]["decision_track_counts"], {"raw-trace-source-of-record": 1})
 
 
 if __name__ == "__main__":

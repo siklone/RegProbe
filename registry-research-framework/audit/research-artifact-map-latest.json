@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-14T14:14:41Z",
+  "generated_utc": "2026-05-14T14:41:26Z",
   "summary": {
     "artifact_count": 15,
     "attention_count": 0,
@@ -11,6 +11,7 @@
     "cleanup_delete_eligible_count": 0,
     "cleanup_retained_inventory_count": 89,
     "cleanup_reference_migration_needed_count": 0,
+    "cleanup_retention_decision_queue_count": 70,
     "cleanup_audit_only_retained_count": 15,
     "app_card_contract_pass_count": 258,
     "app_card_contract_fail_count": 0,
@@ -202,6 +203,7 @@
         "item_count": 89,
         "delete_ready_count": 0,
         "reference_migration_needed_count": 0,
+        "retention_decision_queue_count": 70,
         "audit_only_retained_count": 15,
         "intentional_reference_keep_count": 4,
         "needs_replacement_or_retention_decision_count": 70,
@@ -210,6 +212,14 @@
           "audit-only-retained": 15,
           "intentional-reference-keep": 4,
           "needs-replacement-or-retention-decision": 70
+        },
+        "decision_track_counts": {
+          "archive-history-anchor": 10,
+          "audit-trail-retained": 15,
+          "historical-audit-output": 25,
+          "intentional-reference-keep": 4,
+          "raw-trace-source-of-record": 25,
+          "staging-bundle-canonicalization": 10
         }
       }
     },
