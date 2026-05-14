@@ -244,11 +244,15 @@ Host extraction proof:
 
 - zip source: `https://go.microsoft.com/fwlink/?linkid=2298135`
 - extracted file:
-  - `research/evidence-files/vm-tooling-staging/defender-cloud-demo-extracted/microsoft-defender-cloud-demo.exe.md`
+  - `evidence/raw/external/security.threat-file-hash-logging/defender-cloud-demo-sample-metadata-20260325.json`
+  - `evidence/raw/external/security.threat-file-hash-logging/defender-cloud-demo-sample-metadata-20260325.md`
 - file metadata:
   - `FileDescription = BaFS Sample`
   - `OriginalFilename = BaFS Sample.exe`
   - `SHA256 = 670b00e90a7c9eb7ac6674441551e7764a8364c26e44dcc92474a9abcfac4c04`
+  - `Size = 123904 bytes`
+
+The executable is not checked in directly. The `evidence/raw/external` metadata artifact is the canonical repo-safe replacement for the old staging placeholder.
 
 ### Official PE baseline
 

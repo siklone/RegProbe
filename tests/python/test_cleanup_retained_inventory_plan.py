@@ -209,7 +209,7 @@ class CleanupRetainedInventoryPlanTests(unittest.TestCase):
             self.assertEqual(item["canonicalization_state"], "active-tool-output-root")
             self.assertNotIn(item, plan["retention_decision_queue"])
 
-    def test_rerun_needed_staging_item_gets_vm_rerun_track(self):
+    def test_defender_cloud_staging_item_has_canonical_raw_metadata(self):
         with tempfile.TemporaryDirectory() as temp:
             ledger = Path(temp) / "cleanup-quarantine-ledger.json"
             write_ledger(
@@ -218,12 +218,15 @@ class CleanupRetainedInventoryPlanTests(unittest.TestCase):
                     {
                         "path": "evidence/files/vm-tooling-staging/defender-cloud-demo-extracted",
                         "category": "vm-tooling-staging-oldest-sample",
-                        "cleanup_status": "retained-live-reference",
-                        "recommended_action": "keep-pending-review",
-                        "blocking_reference_count": 1,
-                        "blocking_references_sample": [
-                            "research/notes/security-threat-file-hash-logging-validation-20260325.md"
+                        "cleanup_status": "retained-audit-trail-reference",
+                        "recommended_action": "delete-after-review",
+                        "replacement_artifacts": [
+                            "evidence/raw/external/security.threat-file-hash-logging/"
+                            "defender-cloud-demo-sample-metadata-20260325.json"
                         ],
+                        "blocking_reference_count": 0,
+                        "audit_reference_count": 1,
+                        "blocking_references_sample": [],
                     }
                 ],
             )
@@ -231,15 +234,18 @@ class CleanupRetainedInventoryPlanTests(unittest.TestCase):
             plan = self.module.build_plan(ledger)
             item = plan["retained_inventory"][0]
 
-            self.assertEqual(item["decision_track"], "vm-rerun-required")
-            self.assertEqual(item["release_state"], "vm-rerun-required")
-            self.assertEqual(item["decision_status"], "blocked-until-fresh-vm-evidence")
-            self.assertIn("fresh VM capture", item["exit_criteria"])
-            self.assertIn(item, plan["retention_decision_queue"])
-            self.assertEqual(plan["summary"]["active_cleanup_action_count"], 1)
-            self.assertEqual(plan["summary"]["vm_rerun_required_count"], 1)
+            self.assertEqual(item["canonicalization_state"], "canonical-raw-replacement-known")
+            self.assertIn(
+                "evidence/raw/external/security.threat-file-hash-logging/"
+                "defender-cloud-demo-sample-metadata-20260325.json",
+                item["canonical_replacement_candidates"],
+            )
+            self.assertIn("canonical evidence/raw metadata", item["retention_rationale"])
+            self.assertNotIn(item, plan["retention_decision_queue"])
+            self.assertEqual(plan["summary"]["active_cleanup_action_count"], 0)
+            self.assertEqual(plan["summary"]["vm_rerun_required_count"], 0)
 
-    def test_partial_derived_staging_item_gets_raw_trace_track(self):
+    def test_thread_dpc_staging_placeholder_has_runtime_summary_replacement(self):
         with tempfile.TemporaryDirectory() as temp:
             ledger = Path(temp) / "cleanup-quarantine-ledger.json"
             write_ledger(
@@ -248,10 +254,15 @@ class CleanupRetainedInventoryPlanTests(unittest.TestCase):
                     {
                         "path": "evidence/files/vm-tooling-staging/thread-dpc-enable-0-cpu3.etl.md",
                         "category": "vm-tooling-staging-oldest-sample",
-                        "cleanup_status": "retained-live-reference",
-                        "recommended_action": "keep-pending-review",
-                        "blocking_reference_count": 8,
-                        "blocking_references_sample": ["research/evidence-index.json"],
+                        "cleanup_status": "retained-audit-trail-reference",
+                        "recommended_action": "delete-after-review",
+                        "replacement_artifacts": [
+                            "evidence/raw/procmon/thread-dpc-enable-vm-suite-20260324/"
+                            "thread-dpc-enable-0-cpu3-runtime-summary.json"
+                        ],
+                        "blocking_reference_count": 0,
+                        "audit_reference_count": 1,
+                        "blocking_references_sample": [],
                     }
                 ],
             )
@@ -259,13 +270,16 @@ class CleanupRetainedInventoryPlanTests(unittest.TestCase):
             plan = self.module.build_plan(ledger)
             item = plan["retained_inventory"][0]
 
-            self.assertEqual(item["decision_track"], "partial-derived-needs-raw-trace")
-            self.assertEqual(item["release_state"], "raw-trace-backfill-required")
-            self.assertEqual(item["decision_status"], "derived-summary-exists-but-raw-trace-missing")
-            self.assertIn("canonical raw ETL/summary pair", item["exit_criteria"])
-            self.assertIn(item, plan["retention_decision_queue"])
-            self.assertEqual(plan["summary"]["active_cleanup_action_count"], 1)
-            self.assertEqual(plan["summary"]["raw_trace_backfill_required_count"], 1)
+            self.assertEqual(item["canonicalization_state"], "canonical-raw-replacement-known")
+            self.assertIn(
+                "evidence/raw/procmon/thread-dpc-enable-vm-suite-20260324/"
+                "thread-dpc-enable-0-cpu3-runtime-summary.json",
+                item["canonical_replacement_candidates"],
+            )
+            self.assertIn("external ETL placeholder", item["retention_rationale"])
+            self.assertNotIn(item, plan["retention_decision_queue"])
+            self.assertEqual(plan["summary"]["active_cleanup_action_count"], 0)
+            self.assertEqual(plan["summary"]["raw_trace_backfill_required_count"], 0)
 
     def test_mpengine_staging_sample_has_canonical_raw_replacement(self):
         with tempfile.TemporaryDirectory() as temp:

@@ -1,0 +1,53 @@
+{
+  "schema_version": "1.0",
+  "artifact_kind": "vm-runtime-summary",
+  "record_id": "system.kernel-thread-dpc-enable",
+  "test_id": "thread-dpc-enable-0-cpu3",
+  "generated_from": "research/notes/thread-dpc-enable-vm-suite-20260324.md",
+  "environment": {
+    "guest": "Win25H2Clean",
+    "candidate_value": 0,
+    "baseline_state": "missing"
+  },
+  "flow": [
+    "baseline missing",
+    "set ThreadDpcEnable=0",
+    "reboot",
+    "idle settle",
+    "WinSAT CPU bounded run",
+    "WPR capture attempted",
+    "restore missing baseline",
+    "reboot"
+  ],
+  "result": {
+    "status": "complete",
+    "restore_complete": true,
+    "benchmark_kind": "cpu",
+    "measured_duration_seconds": 30.31,
+    "idle_cpu_percent_before_benchmark": 2.72,
+    "idle_disk_transfers_per_second_before_benchmark": 0.0,
+    "cpu_percent_average": 7.29,
+    "cpu_percent_max": 22.65,
+    "disk_transfers_per_second_average": 135.07,
+    "disk_transfers_per_second_max": 610.11
+  },
+  "canonical_artifacts": {
+    "perf_csv": "evidence/raw/procmon/thread-dpc-enable-vm-suite-20260324/thread-dpc-enable-0-cpu3.perf.csv",
+    "note": "research/notes/thread-dpc-enable-vm-suite-20260324.md"
+  },
+  "legacy_supporting_artifacts": {
+    "watch_log": "evidence/files/vm-tooling-staging/thread-dpc-enable-0-cpu3.watch.txt",
+    "winsat_output": "evidence/files/vm-tooling-staging/thread-dpc-enable-0-cpu3.winsat.txt",
+    "retired_placeholder": "evidence/files/vm-tooling-staging/thread-dpc-enable-0-cpu3.etl.md"
+  },
+  "raw_etl_policy": {
+    "raw_etl_checked_in": false,
+    "reason": "The checked-in .etl.md was only a placeholder for an external ETL file. This runtime summary and the checked-in perf CSV are the canonical repo artifacts for the bounded CPU run.",
+    "app_surface_policy": "technical evidence only; not app-card performance proof"
+  },
+  "claim_boundaries": [
+    "Confirms ThreadDpcEnable=0 was exercisable and reversible in the VM.",
+    "Does not claim a performance improvement.",
+    "Does not provide a byte-for-byte raw ETL payload."
+  ]
+}

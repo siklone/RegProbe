@@ -24,9 +24,10 @@ Idle snapshot before benchmark: CPU 2.72, Disk 0.00
 Perf sample summary: CPU avg 7.29%, CPU max 22.65%, disk transfers/sec avg 135.07, max 610.11
 Artifacts:
 - research/evidence-files/vm-tooling-staging/thread-dpc-enable-0-cpu3.watch.txt
-- research/evidence-files/vm-tooling-staging/thread-dpc-enable-0-cpu3.etl.md
 - research/evidence-files/vm-tooling-staging/thread-dpc-enable-0-cpu3.winsat.txt
 - research/evidence-files/procmon/thread-dpc-enable-vm-suite-20260324/thread-dpc-enable-0-cpu3.perf.csv
+- evidence/raw/procmon/thread-dpc-enable-vm-suite-20260324/thread-dpc-enable-0-cpu3-runtime-summary.json
+- evidence/raw/procmon/thread-dpc-enable-vm-suite-20260324/thread-dpc-enable-0-cpu3-runtime-summary.md
 ```
 
 ```text
@@ -38,9 +39,10 @@ Idle snapshot before benchmark: CPU 2.39, Disk 0.07
 Perf sample summary: CPU avg 5.26%, CPU max 15.54%, disk transfers/sec avg 113.74, max 628.56
 Artifacts:
 - research/evidence-files/vm-tooling-staging/thread-dpc-enable-0-mem2.watch.txt
-- research/evidence-files/vm-tooling-staging/thread-dpc-enable-0-mem2.etl.md
 - research/evidence-files/vm-tooling-staging/thread-dpc-enable-0-mem2.winsat.txt
 - research/evidence-files/procmon/thread-dpc-enable-vm-suite-20260324/thread-dpc-enable-0-mem2.perf.csv
+- evidence/raw/procmon/thread-dpc-enable-vm-suite-20260324/thread-dpc-enable-0-mem2-runtime-summary.json
+- evidence/raw/procmon/thread-dpc-enable-vm-suite-20260324/thread-dpc-enable-0-mem2-runtime-summary.md
 ```
 
 ## Findings
@@ -49,3 +51,4 @@ Artifacts:
 - The guest returned to the original missing baseline after each run.
 - This suite confirms that the documented `0` state is exercisable and reversible in the VM.
 - This is not a claim that `ThreadDpcEnable = 0` improves performance; it is a bounded runtime corroboration pass for the documented disable state.
+- The old `.etl.md` files were external-capture placeholders, not checked-in raw ETL payloads. The live source-of-record is now the checked-in runtime summary plus the perf CSV for each bounded run.

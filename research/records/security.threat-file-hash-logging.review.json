@@ -305,6 +305,19 @@
       "strength": "high"
     },
     {
+      "evidence_id": "repo-defender-cloud-demo-sample-metadata",
+      "kind": "repo-doc",
+      "title": "Repo-safe metadata for the Defender cloud demo PE sample",
+      "location": "evidence/raw/external/security.threat-file-hash-logging/defender-cloud-demo-sample-metadata-20260325.json",
+      "summary": "Checked-in metadata for the Microsoft Defender BaFS Sample PE used by the VM follow-up. The executable is intentionally not stored in the repository; the metadata records the source URL, file description, original filename, SHA256, and size so the old staging placeholder is no longer a live evidence reference.",
+      "supports": [
+        "sample-identity",
+        "source-chain",
+        "version-scope"
+      ],
+      "strength": "medium"
+    },
+    {
       "evidence_id": "repo-defender-threat-file-hash-dumps",
       "kind": "repo-doc",
       "title": "Local Defender dumps and traces for ThreatFileHashLogging and EnableFileHashComputation",

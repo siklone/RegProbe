@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-14T18:09:41Z",
+  "generated_utc": "2026-05-14T18:54:10Z",
   "ledger": "registry-research-framework/audit/cleanup-quarantine-ledger-20260514.json",
   "purpose": "Action plan for cleanup retained inventory. It does not delete files and it does not redefine delete eligibility.",
   "rules": {
@@ -13,51 +13,43 @@
     "item_count": 89,
     "delete_ready_count": 0,
     "reference_migration_needed_count": 0,
-    "active_cleanup_action_count": 3,
-    "audit_only_retained_count": 21,
+    "active_cleanup_action_count": 0,
+    "audit_only_retained_count": 24,
     "intentional_reference_keep_count": 5,
     "source_of_record_retained_count": 25,
     "historical_audit_retained_count": 25,
     "archive_history_retained_count": 10,
-    "vm_rerun_required_count": 1,
-    "raw_trace_backfill_required_count": 2,
+    "vm_rerun_required_count": 0,
+    "raw_trace_backfill_required_count": 0,
     "needs_replacement_or_retention_decision_count": 0,
-    "retention_decision_queue_count": 3,
+    "retention_decision_queue_count": 0,
     "retained_pending_review_count": 0,
     "release_state_counts": {
       "archive-history-retained": 10,
-      "audit-only-retained": 21,
+      "audit-only-retained": 24,
       "historical-audit-retained": 25,
       "intentional-reference-keep": 5,
-      "raw-trace-backfill-required": 2,
-      "source-of-record-retained": 25,
-      "vm-rerun-required": 1
+      "source-of-record-retained": 25
     },
     "decision_track_counts": {
       "archive-history-anchor": 10,
-      "audit-trail-retained": 21,
+      "audit-trail-retained": 24,
       "historical-audit-output": 25,
       "intentional-reference-keep": 4,
-      "partial-derived-needs-raw-trace": 2,
       "raw-trace-source-of-record": 25,
-      "tooling-output-root": 1,
-      "vm-rerun-required": 1
+      "tooling-output-root": 1
     },
     "decision_status_counts": {
       "active-tool-output-root": 1,
-      "blocked-until-fresh-vm-evidence": 1,
-      "derived-summary-exists-but-raw-trace-missing": 2,
       "explicitly-retained": 4,
       "retain-history-anchor": 10,
       "retain-until-derived-parse-reviewed": 25,
       "retain-until-supersession-is-explicit": 25,
-      "retained-for-history-only": 21
+      "retained-for-history-only": 24
     },
     "staging_canonicalization_state_counts": {
       "active-tool-output-root": 1,
-      "canonical-raw-replacement-known": 6,
-      "partial-derived-replacement-known": 2,
-      "rerun-needed": 1
+      "canonical-raw-replacement-known": 9
     },
     "category_counts": {
       "audit-archive-named-sample": 10,
@@ -68,42 +60,41 @@
     },
     "blocking_reference_class_counts": {
       "audit-cross-reference": 87,
-      "discovery-index-reference": 2,
       "evidence-tree-reference": 61,
       "other-reference": 68,
       "public-doc-reference": 4,
-      "research-index-reference": 157,
-      "research-note-reference": 23,
-      "research-record-reference": 27
+      "research-index-reference": 159,
+      "research-note-reference": 20,
+      "research-record-reference": 25
     },
     "top_blocking_reference_paths": [
       {
         "path": "research/evidence-index.json",
-        "count": 41
+        "count": 43
       },
       {
         "path": "research/evidence-manifest.json",
-        "count": 38
-      },
-      {
-        "path": "research/evidence-atlas.md",
-        "count": 33
+        "count": 40
       },
       {
         "path": "research/evidence-manifest.md",
-        "count": 32
+        "count": 34
+      },
+      {
+        "path": "research/evidence-atlas.md",
+        "count": 31
       },
       {
         "path": "registry-research-framework/audit/rejected-closure-ledger.json",
         "count": 30
       },
       {
-        "path": "research/evidence-classes.json",
+        "path": "registry-research-framework/audit/operator-regadd-inventory-20260508-repo.json",
         "count": 13
       },
       {
-        "path": "registry-research-framework/audit/operator-regadd-inventory-20260508-repo.json",
-        "count": 13
+        "path": "research/evidence-classes.json",
+        "count": 11
       },
       {
         "path": "registry-research-framework/audit/etw-stackwalk-reopen-rotation-ledger.json",
@@ -140,162 +131,7 @@
     ]
   },
   "reference_migration_queue": [],
-  "retention_decision_queue": [
-    {
-      "path": "evidence/files/vm-tooling-staging/defender-cloud-demo-extracted",
-      "category": "vm-tooling-staging-oldest-sample",
-      "cleanup_status": "retained-live-reference",
-      "release_state": "vm-rerun-required",
-      "delete_candidate_state": "not-a-delete-candidate",
-      "decision_track": "vm-rerun-required",
-      "decision_status": "blocked-until-fresh-vm-evidence",
-      "evidence_role": "legacy staging pointer with no canonical raw replacement",
-      "retention_owner": "evidence",
-      "exit_criteria": "Run a fresh VM capture or replace with a checked-in evidence/raw artifact, then migrate live references.",
-      "app_surface_policy": "technical-evidence-only until rerun produces canonical artifacts",
-      "can_become_delete_candidate": false,
-      "blocking_reference_count": 1,
-      "audit_reference_count": 4,
-      "blocking_reference_classes": {
-        "research-note-reference": 1
-      },
-      "blocking_references_sample": [
-        "research/notes/security-threat-file-hash-logging-validation-20260325.md"
-      ],
-      "replacement_artifacts": [],
-      "recommended_action": "keep-pending-review",
-      "next_action": "Rerun or replace the Defender cloud validation under evidence/raw before migrating the note reference.",
-      "stale_reason": "staging diagnostic bundle; verify no record/evidence-index dependency before deletion",
-      "staging_canonicalization": {
-        "canonicalization_state": "rerun-needed",
-        "owning_records": [
-          "security.threat-file-hash-logging"
-        ],
-        "canonical_replacement_candidates": [],
-        "retention_rationale": "Only a Defender cloud demo extraction note currently remains; no canonical evidence/raw replacement was found in this repo.",
-        "next_canonicalization_step": "Rerun or replace the Defender cloud validation under evidence/raw before migrating the note reference."
-      },
-      "canonicalization_state": "rerun-needed",
-      "owning_records": [
-        "security.threat-file-hash-logging"
-      ],
-      "canonical_replacement_candidates": [],
-      "retention_rationale": "Only a Defender cloud demo extraction note currently remains; no canonical evidence/raw replacement was found in this repo.",
-      "next_canonicalization_step": "Rerun or replace the Defender cloud validation under evidence/raw before migrating the note reference."
-    },
-    {
-      "path": "evidence/files/vm-tooling-staging/thread-dpc-enable-0-cpu3.etl.md",
-      "category": "vm-tooling-staging-oldest-sample",
-      "cleanup_status": "retained-live-reference",
-      "release_state": "raw-trace-backfill-required",
-      "delete_candidate_state": "not-a-delete-candidate",
-      "decision_track": "partial-derived-needs-raw-trace",
-      "decision_status": "derived-summary-exists-but-raw-trace-missing",
-      "evidence_role": "placeholder for raw ETL where only derived perf evidence is checked in",
-      "retention_owner": "evidence",
-      "exit_criteria": "Capture or check in a canonical raw ETL/summary pair, or explicitly retire the ETL placeholder from live records.",
-      "app_surface_policy": "technical-evidence-only; do not surface as app-card proof",
-      "can_become_delete_candidate": false,
-      "blocking_reference_count": 8,
-      "audit_reference_count": 4,
-      "blocking_reference_classes": {
-        "discovery-index-reference": 1,
-        "research-index-reference": 5,
-        "research-note-reference": 1,
-        "research-record-reference": 1
-      },
-      "blocking_references_sample": [
-        "registry-research-framework/discovery/etl-corpus-inventory.json",
-        "research/evidence-atlas.md",
-        "research/evidence-classes.json",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json",
-        "research/evidence-manifest.md",
-        "research/notes/thread-dpc-enable-vm-suite-20260324.md",
-        "research/records/system.kernel-thread-dpc-enable.json"
-      ],
-      "replacement_artifacts": [],
-      "recommended_action": "keep-pending-review",
-      "next_action": "Retain until a new raw ETL/summary pair or explicit source-of-record decision replaces this placeholder.",
-      "stale_reason": "staging diagnostic bundle; verify no record/evidence-index dependency before deletion",
-      "staging_canonicalization": {
-        "canonicalization_state": "partial-derived-replacement-known",
-        "owning_records": [
-          "system.kernel-thread-dpc-enable"
-        ],
-        "canonical_replacement_candidates": [
-          "evidence/raw/procmon/thread-dpc-enable-vm-suite-20260324/thread-dpc-enable-0-cpu3.perf.csv"
-        ],
-        "retention_rationale": "A derived perf CSV exists, but it is not a byte-for-byte replacement for the original ETL placeholder.",
-        "next_canonicalization_step": "Retain until a new raw ETL/summary pair or explicit source-of-record decision replaces this placeholder."
-      },
-      "canonicalization_state": "partial-derived-replacement-known",
-      "owning_records": [
-        "system.kernel-thread-dpc-enable"
-      ],
-      "canonical_replacement_candidates": [
-        "evidence/raw/procmon/thread-dpc-enable-vm-suite-20260324/thread-dpc-enable-0-cpu3.perf.csv"
-      ],
-      "retention_rationale": "A derived perf CSV exists, but it is not a byte-for-byte replacement for the original ETL placeholder.",
-      "next_canonicalization_step": "Retain until a new raw ETL/summary pair or explicit source-of-record decision replaces this placeholder."
-    },
-    {
-      "path": "evidence/files/vm-tooling-staging/thread-dpc-enable-0-mem2.etl.md",
-      "category": "vm-tooling-staging-oldest-sample",
-      "cleanup_status": "retained-live-reference",
-      "release_state": "raw-trace-backfill-required",
-      "delete_candidate_state": "not-a-delete-candidate",
-      "decision_track": "partial-derived-needs-raw-trace",
-      "decision_status": "derived-summary-exists-but-raw-trace-missing",
-      "evidence_role": "placeholder for raw ETL where only derived perf evidence is checked in",
-      "retention_owner": "evidence",
-      "exit_criteria": "Capture or check in a canonical raw ETL/summary pair, or explicitly retire the ETL placeholder from live records.",
-      "app_surface_policy": "technical-evidence-only; do not surface as app-card proof",
-      "can_become_delete_candidate": false,
-      "blocking_reference_count": 8,
-      "audit_reference_count": 4,
-      "blocking_reference_classes": {
-        "discovery-index-reference": 1,
-        "research-index-reference": 5,
-        "research-note-reference": 1,
-        "research-record-reference": 1
-      },
-      "blocking_references_sample": [
-        "registry-research-framework/discovery/etl-corpus-inventory.json",
-        "research/evidence-atlas.md",
-        "research/evidence-classes.json",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json",
-        "research/evidence-manifest.md",
-        "research/notes/thread-dpc-enable-vm-suite-20260324.md",
-        "research/records/system.kernel-thread-dpc-enable.json"
-      ],
-      "replacement_artifacts": [],
-      "recommended_action": "keep-pending-review",
-      "next_action": "Retain until a new raw ETL/summary pair or explicit source-of-record decision replaces this placeholder.",
-      "stale_reason": "staging diagnostic bundle; verify no record/evidence-index dependency before deletion",
-      "staging_canonicalization": {
-        "canonicalization_state": "partial-derived-replacement-known",
-        "owning_records": [
-          "system.kernel-thread-dpc-enable"
-        ],
-        "canonical_replacement_candidates": [
-          "evidence/raw/procmon/thread-dpc-enable-vm-suite-20260324/thread-dpc-enable-0-mem2.perf.csv"
-        ],
-        "retention_rationale": "A derived perf CSV exists, but it is not a byte-for-byte replacement for the original ETL placeholder.",
-        "next_canonicalization_step": "Retain until a new raw ETL/summary pair or explicit source-of-record decision replaces this placeholder."
-      },
-      "canonicalization_state": "partial-derived-replacement-known",
-      "owning_records": [
-        "system.kernel-thread-dpc-enable"
-      ],
-      "canonical_replacement_candidates": [
-        "evidence/raw/procmon/thread-dpc-enable-vm-suite-20260324/thread-dpc-enable-0-mem2.perf.csv"
-      ],
-      "retention_rationale": "A derived perf CSV exists, but it is not a byte-for-byte replacement for the original ETL placeholder.",
-      "next_canonicalization_step": "Retain until a new raw ETL/summary pair or explicit source-of-record decision replaces this placeholder."
-    }
-  ],
+  "retention_decision_queue": [],
   "retained_inventory": [
     {
       "path": "registry-research-framework/audit/registry-value-experiments/pilot-perf-calculate-actual-utilization-0-recovery.json",
@@ -310,14 +146,17 @@
       "exit_criteria": "Keep until maintainers replace the current reference with a newer source-of-record artifact.",
       "app_surface_policy": "not-app-surface",
       "can_become_delete_candidate": false,
-      "blocking_reference_count": 2,
+      "blocking_reference_count": 5,
       "audit_reference_count": 4,
       "blocking_reference_classes": {
-        "research-index-reference": 1,
+        "research-index-reference": 4,
         "research-record-reference": 1
       },
       "blocking_references_sample": [
         "research/evidence-atlas.md",
+        "research/evidence-index.json",
+        "research/evidence-manifest.json",
+        "research/evidence-manifest.md",
         "research/records/power.control.perf-calculate-actual-utilization.json"
       ],
       "replacement_artifacts": [
@@ -342,14 +181,17 @@
       "exit_criteria": "Keep until maintainers replace the current reference with a newer source-of-record artifact.",
       "app_surface_policy": "not-app-surface",
       "can_become_delete_candidate": false,
-      "blocking_reference_count": 2,
+      "blocking_reference_count": 5,
       "audit_reference_count": 4,
       "blocking_reference_classes": {
-        "research-index-reference": 1,
+        "research-index-reference": 4,
         "research-record-reference": 1
       },
       "blocking_references_sample": [
         "research/evidence-atlas.md",
+        "research/evidence-index.json",
+        "research/evidence-manifest.json",
+        "research/evidence-manifest.md",
         "research/records/power.control.perf-calculate-actual-utilization.json"
       ],
       "replacement_artifacts": [
@@ -374,17 +216,20 @@
       "exit_criteria": "Keep until maintainers replace the current reference with a newer source-of-record artifact.",
       "app_surface_policy": "not-app-surface",
       "can_become_delete_candidate": false,
-      "blocking_reference_count": 4,
+      "blocking_reference_count": 7,
       "audit_reference_count": 4,
       "blocking_reference_classes": {
         "public-doc-reference": 2,
-        "research-index-reference": 1,
+        "research-index-reference": 4,
         "research-record-reference": 1
       },
       "blocking_references_sample": [
         "CONTRIBUTING.md",
         "README.md",
         "research/evidence-atlas.md",
+        "research/evidence-index.json",
+        "research/evidence-manifest.json",
+        "research/evidence-manifest.md",
         "research/records/power.control.perf-calculate-actual-utilization.json"
       ],
       "replacement_artifacts": [
@@ -409,17 +254,20 @@
       "exit_criteria": "Keep until maintainers replace the current reference with a newer source-of-record artifact.",
       "app_surface_policy": "not-app-surface",
       "can_become_delete_candidate": false,
-      "blocking_reference_count": 4,
+      "blocking_reference_count": 7,
       "audit_reference_count": 4,
       "blocking_reference_classes": {
         "public-doc-reference": 2,
-        "research-index-reference": 1,
+        "research-index-reference": 4,
         "research-record-reference": 1
       },
       "blocking_references_sample": [
         "CONTRIBUTING.md",
         "README.md",
         "research/evidence-atlas.md",
+        "research/evidence-index.json",
+        "research/evidence-manifest.json",
+        "research/evidence-manifest.md",
         "research/records/power.control.perf-calculate-actual-utilization.json"
       ],
       "replacement_artifacts": [
@@ -434,44 +282,46 @@
     {
       "path": "evidence/files/vm-tooling-staging/defender-cloud-demo-extracted",
       "category": "vm-tooling-staging-oldest-sample",
-      "cleanup_status": "retained-live-reference",
-      "release_state": "vm-rerun-required",
+      "cleanup_status": "retained-audit-trail-reference",
+      "release_state": "audit-only-retained",
       "delete_candidate_state": "not-a-delete-candidate",
-      "decision_track": "vm-rerun-required",
-      "decision_status": "blocked-until-fresh-vm-evidence",
-      "evidence_role": "legacy staging pointer with no canonical raw replacement",
-      "retention_owner": "evidence",
-      "exit_criteria": "Run a fresh VM capture or replace with a checked-in evidence/raw artifact, then migrate live references.",
-      "app_surface_policy": "technical-evidence-only until rerun produces canonical artifacts",
+      "decision_track": "audit-trail-retained",
+      "decision_status": "retained-for-history-only",
+      "evidence_role": "historical cleanup/audit trail reference",
+      "retention_owner": "audit",
+      "exit_criteria": "Keep unless a future cleanup PR explicitly chooses to drop audit-history references.",
+      "app_surface_policy": "not-app-surface",
       "can_become_delete_candidate": false,
-      "blocking_reference_count": 1,
+      "blocking_reference_count": 0,
       "audit_reference_count": 4,
-      "blocking_reference_classes": {
-        "research-note-reference": 1
-      },
-      "blocking_references_sample": [
-        "research/notes/security-threat-file-hash-logging-validation-20260325.md"
+      "blocking_reference_classes": {},
+      "blocking_references_sample": [],
+      "replacement_artifacts": [
+        "evidence/raw/external/security.threat-file-hash-logging/defender-cloud-demo-sample-metadata-20260325.json"
       ],
-      "replacement_artifacts": [],
-      "recommended_action": "keep-pending-review",
-      "next_action": "Rerun or replace the Defender cloud validation under evidence/raw before migrating the note reference.",
-      "stale_reason": "staging diagnostic bundle; verify no record/evidence-index dependency before deletion",
+      "recommended_action": "delete-after-review",
+      "next_action": "No live blocking references remain; keep for audit trail or handle in a dedicated deletion PR that explicitly accepts audit-only history references.",
+      "stale_reason": "staging diagnostic bundle duplicated by canonical evidence/raw artifact",
       "staging_canonicalization": {
-        "canonicalization_state": "rerun-needed",
+        "canonicalization_state": "canonical-raw-replacement-known",
         "owning_records": [
           "security.threat-file-hash-logging"
         ],
-        "canonical_replacement_candidates": [],
-        "retention_rationale": "Only a Defender cloud demo extraction note currently remains; no canonical evidence/raw replacement was found in this repo.",
-        "next_canonicalization_step": "Rerun or replace the Defender cloud validation under evidence/raw before migrating the note reference."
+        "canonical_replacement_candidates": [
+          "evidence/raw/external/security.threat-file-hash-logging/defender-cloud-demo-sample-metadata-20260325.json"
+        ],
+        "retention_rationale": "The repo now has a canonical evidence/raw metadata artifact for the Microsoft Defender cloud demo sample; the staging directory is only historical.",
+        "next_canonicalization_step": "Keep live references on the evidence/raw sample metadata; leave the staging directory only as audit history."
       },
-      "canonicalization_state": "rerun-needed",
+      "canonicalization_state": "canonical-raw-replacement-known",
       "owning_records": [
         "security.threat-file-hash-logging"
       ],
-      "canonical_replacement_candidates": [],
-      "retention_rationale": "Only a Defender cloud demo extraction note currently remains; no canonical evidence/raw replacement was found in this repo.",
-      "next_canonicalization_step": "Rerun or replace the Defender cloud validation under evidence/raw before migrating the note reference."
+      "canonical_replacement_candidates": [
+        "evidence/raw/external/security.threat-file-hash-logging/defender-cloud-demo-sample-metadata-20260325.json"
+      ],
+      "retention_rationale": "The repo now has a canonical evidence/raw metadata artifact for the Microsoft Defender cloud demo sample; the staging directory is only historical.",
+      "next_canonicalization_step": "Keep live references on the evidence/raw sample metadata; leave the staging directory only as audit history."
     },
     {
       "path": "evidence/files/vm-tooling-staging/showinfotip-1-hits.csv..md",
@@ -564,114 +414,94 @@
     {
       "path": "evidence/files/vm-tooling-staging/thread-dpc-enable-0-cpu3.etl.md",
       "category": "vm-tooling-staging-oldest-sample",
-      "cleanup_status": "retained-live-reference",
-      "release_state": "raw-trace-backfill-required",
+      "cleanup_status": "retained-audit-trail-reference",
+      "release_state": "audit-only-retained",
       "delete_candidate_state": "not-a-delete-candidate",
-      "decision_track": "partial-derived-needs-raw-trace",
-      "decision_status": "derived-summary-exists-but-raw-trace-missing",
-      "evidence_role": "placeholder for raw ETL where only derived perf evidence is checked in",
-      "retention_owner": "evidence",
-      "exit_criteria": "Capture or check in a canonical raw ETL/summary pair, or explicitly retire the ETL placeholder from live records.",
-      "app_surface_policy": "technical-evidence-only; do not surface as app-card proof",
+      "decision_track": "audit-trail-retained",
+      "decision_status": "retained-for-history-only",
+      "evidence_role": "historical cleanup/audit trail reference",
+      "retention_owner": "audit",
+      "exit_criteria": "Keep unless a future cleanup PR explicitly chooses to drop audit-history references.",
+      "app_surface_policy": "not-app-surface",
       "can_become_delete_candidate": false,
-      "blocking_reference_count": 8,
+      "blocking_reference_count": 0,
       "audit_reference_count": 4,
-      "blocking_reference_classes": {
-        "discovery-index-reference": 1,
-        "research-index-reference": 5,
-        "research-note-reference": 1,
-        "research-record-reference": 1
-      },
-      "blocking_references_sample": [
-        "registry-research-framework/discovery/etl-corpus-inventory.json",
-        "research/evidence-atlas.md",
-        "research/evidence-classes.json",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json",
-        "research/evidence-manifest.md",
-        "research/notes/thread-dpc-enable-vm-suite-20260324.md",
-        "research/records/system.kernel-thread-dpc-enable.json"
+      "blocking_reference_classes": {},
+      "blocking_references_sample": [],
+      "replacement_artifacts": [
+        "evidence/raw/procmon/thread-dpc-enable-vm-suite-20260324/thread-dpc-enable-0-cpu3-runtime-summary.json"
       ],
-      "replacement_artifacts": [],
-      "recommended_action": "keep-pending-review",
-      "next_action": "Retain until a new raw ETL/summary pair or explicit source-of-record decision replaces this placeholder.",
-      "stale_reason": "staging diagnostic bundle; verify no record/evidence-index dependency before deletion",
+      "recommended_action": "delete-after-review",
+      "next_action": "No live blocking references remain; keep for audit trail or handle in a dedicated deletion PR that explicitly accepts audit-only history references.",
+      "stale_reason": "staging diagnostic bundle duplicated by canonical evidence/raw artifact",
       "staging_canonicalization": {
-        "canonicalization_state": "partial-derived-replacement-known",
+        "canonicalization_state": "canonical-raw-replacement-known",
         "owning_records": [
           "system.kernel-thread-dpc-enable"
         ],
         "canonical_replacement_candidates": [
+          "evidence/raw/procmon/thread-dpc-enable-vm-suite-20260324/thread-dpc-enable-0-cpu3-runtime-summary.json",
           "evidence/raw/procmon/thread-dpc-enable-vm-suite-20260324/thread-dpc-enable-0-cpu3.perf.csv"
         ],
-        "retention_rationale": "A derived perf CSV exists, but it is not a byte-for-byte replacement for the original ETL placeholder.",
-        "next_canonicalization_step": "Retain until a new raw ETL/summary pair or explicit source-of-record decision replaces this placeholder."
+        "retention_rationale": "The original checked-in item was only an external ETL placeholder. The runtime summary plus perf CSV are now the canonical source-of-record for the bounded CPU run.",
+        "next_canonicalization_step": "Keep live references on the runtime summary and perf CSV; leave the ETL placeholder only as audit history."
       },
-      "canonicalization_state": "partial-derived-replacement-known",
+      "canonicalization_state": "canonical-raw-replacement-known",
       "owning_records": [
         "system.kernel-thread-dpc-enable"
       ],
       "canonical_replacement_candidates": [
+        "evidence/raw/procmon/thread-dpc-enable-vm-suite-20260324/thread-dpc-enable-0-cpu3-runtime-summary.json",
         "evidence/raw/procmon/thread-dpc-enable-vm-suite-20260324/thread-dpc-enable-0-cpu3.perf.csv"
       ],
-      "retention_rationale": "A derived perf CSV exists, but it is not a byte-for-byte replacement for the original ETL placeholder.",
-      "next_canonicalization_step": "Retain until a new raw ETL/summary pair or explicit source-of-record decision replaces this placeholder."
+      "retention_rationale": "The original checked-in item was only an external ETL placeholder. The runtime summary plus perf CSV are now the canonical source-of-record for the bounded CPU run.",
+      "next_canonicalization_step": "Keep live references on the runtime summary and perf CSV; leave the ETL placeholder only as audit history."
     },
     {
       "path": "evidence/files/vm-tooling-staging/thread-dpc-enable-0-mem2.etl.md",
       "category": "vm-tooling-staging-oldest-sample",
-      "cleanup_status": "retained-live-reference",
-      "release_state": "raw-trace-backfill-required",
+      "cleanup_status": "retained-audit-trail-reference",
+      "release_state": "audit-only-retained",
       "delete_candidate_state": "not-a-delete-candidate",
-      "decision_track": "partial-derived-needs-raw-trace",
-      "decision_status": "derived-summary-exists-but-raw-trace-missing",
-      "evidence_role": "placeholder for raw ETL where only derived perf evidence is checked in",
-      "retention_owner": "evidence",
-      "exit_criteria": "Capture or check in a canonical raw ETL/summary pair, or explicitly retire the ETL placeholder from live records.",
-      "app_surface_policy": "technical-evidence-only; do not surface as app-card proof",
+      "decision_track": "audit-trail-retained",
+      "decision_status": "retained-for-history-only",
+      "evidence_role": "historical cleanup/audit trail reference",
+      "retention_owner": "audit",
+      "exit_criteria": "Keep unless a future cleanup PR explicitly chooses to drop audit-history references.",
+      "app_surface_policy": "not-app-surface",
       "can_become_delete_candidate": false,
-      "blocking_reference_count": 8,
+      "blocking_reference_count": 0,
       "audit_reference_count": 4,
-      "blocking_reference_classes": {
-        "discovery-index-reference": 1,
-        "research-index-reference": 5,
-        "research-note-reference": 1,
-        "research-record-reference": 1
-      },
-      "blocking_references_sample": [
-        "registry-research-framework/discovery/etl-corpus-inventory.json",
-        "research/evidence-atlas.md",
-        "research/evidence-classes.json",
-        "research/evidence-index.json",
-        "research/evidence-manifest.json",
-        "research/evidence-manifest.md",
-        "research/notes/thread-dpc-enable-vm-suite-20260324.md",
-        "research/records/system.kernel-thread-dpc-enable.json"
+      "blocking_reference_classes": {},
+      "blocking_references_sample": [],
+      "replacement_artifacts": [
+        "evidence/raw/procmon/thread-dpc-enable-vm-suite-20260324/thread-dpc-enable-0-mem2-runtime-summary.json"
       ],
-      "replacement_artifacts": [],
-      "recommended_action": "keep-pending-review",
-      "next_action": "Retain until a new raw ETL/summary pair or explicit source-of-record decision replaces this placeholder.",
-      "stale_reason": "staging diagnostic bundle; verify no record/evidence-index dependency before deletion",
+      "recommended_action": "delete-after-review",
+      "next_action": "No live blocking references remain; keep for audit trail or handle in a dedicated deletion PR that explicitly accepts audit-only history references.",
+      "stale_reason": "staging diagnostic bundle duplicated by canonical evidence/raw artifact",
       "staging_canonicalization": {
-        "canonicalization_state": "partial-derived-replacement-known",
+        "canonicalization_state": "canonical-raw-replacement-known",
         "owning_records": [
           "system.kernel-thread-dpc-enable"
         ],
         "canonical_replacement_candidates": [
+          "evidence/raw/procmon/thread-dpc-enable-vm-suite-20260324/thread-dpc-enable-0-mem2-runtime-summary.json",
           "evidence/raw/procmon/thread-dpc-enable-vm-suite-20260324/thread-dpc-enable-0-mem2.perf.csv"
         ],
-        "retention_rationale": "A derived perf CSV exists, but it is not a byte-for-byte replacement for the original ETL placeholder.",
-        "next_canonicalization_step": "Retain until a new raw ETL/summary pair or explicit source-of-record decision replaces this placeholder."
+        "retention_rationale": "The original checked-in item was only an external ETL placeholder. The runtime summary plus perf CSV are now the canonical source-of-record for the bounded memory run.",
+        "next_canonicalization_step": "Keep live references on the runtime summary and perf CSV; leave the ETL placeholder only as audit history."
       },
-      "canonicalization_state": "partial-derived-replacement-known",
+      "canonicalization_state": "canonical-raw-replacement-known",
       "owning_records": [
         "system.kernel-thread-dpc-enable"
       ],
       "canonical_replacement_candidates": [
+        "evidence/raw/procmon/thread-dpc-enable-vm-suite-20260324/thread-dpc-enable-0-mem2-runtime-summary.json",
         "evidence/raw/procmon/thread-dpc-enable-vm-suite-20260324/thread-dpc-enable-0-mem2.perf.csv"
       ],
-      "retention_rationale": "A derived perf CSV exists, but it is not a byte-for-byte replacement for the original ETL placeholder.",
-      "next_canonicalization_step": "Retain until a new raw ETL/summary pair or explicit source-of-record decision replaces this placeholder."
+      "retention_rationale": "The original checked-in item was only an external ETL placeholder. The runtime summary plus perf CSV are now the canonical source-of-record for the bounded memory run.",
+      "next_canonicalization_step": "Keep live references on the runtime summary and perf CSV; leave the ETL placeholder only as audit history."
     },
     {
       "path": "evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json..md",

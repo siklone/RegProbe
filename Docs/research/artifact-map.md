@@ -1,6 +1,6 @@
 # Research Artifact Map
 
-Generated: `2026-05-14T18:10:55Z`
+Generated: `2026-05-14T18:54:11Z`
 
 This is the contributor entrypoint for current research artifacts. Use it
 instead of browsing raw audit folders first.
@@ -13,7 +13,7 @@ instead of browsing raw audit folders first.
 - Operator96 app-card ready: `0`.
 - Operator96 noisy results: `0`; non-ok results: `0`.
 - Cleanup delete-eligible items: `0`.
-- Cleanup retained inventory: `89`; active actions: `3`; reference migration needed: `0`; retention decision queue: `3`; audit-only retained: `21`.
+- Cleanup retained inventory: `89`; active actions: `0`; reference migration needed: `0`; retention decision queue: `0`; audit-only retained: `24`.
 
 ## Rules
 

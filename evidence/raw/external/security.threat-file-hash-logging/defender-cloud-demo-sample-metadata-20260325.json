@@ -1,0 +1,36 @@
+{
+  "schema_version": "1.0",
+  "artifact_kind": "external-sample-metadata",
+  "record_id": "security.threat-file-hash-logging",
+  "generated_utc": "2026-03-25T00:00:00Z",
+  "source": {
+    "name": "Microsoft Defender cloud-delivered protection demonstration sample",
+    "url": "https://go.microsoft.com/fwlink/?linkid=2298135",
+    "documented_by": "https://learn.microsoft.com/en-us/defender-endpoint/defender-endpoint-demonstration-cloud-delivered-protection"
+  },
+  "extracted_file": {
+    "file_name": "microsoft-defender-cloud-demo.exe",
+    "file_description": "BaFS Sample",
+    "original_file_name": "BaFS Sample.exe",
+    "sha256": "670b00e90a7c9eb7ac6674441551e7764a8364c26e44dcc92474a9abcfac4c04",
+    "size_bytes": 123904
+  },
+  "repository_policy": {
+    "binary_checked_in": false,
+    "reason": "The original artifact is a Microsoft malware-protection demonstration executable. The repository keeps deterministic metadata and VM detection outputs instead of the binary payload.",
+    "replacement_for": [
+      "evidence/files/vm-tooling-staging/defender-cloud-demo-extracted/microsoft-defender-cloud-demo.exe.md"
+    ]
+  },
+  "evidence_scope": {
+    "supports": [
+      "sample-identity",
+      "vm-test-reproducibility",
+      "source-chain"
+    ],
+    "does_not_support": [
+      "event-1120-presence",
+      "registry-consumption-proof"
+    ]
+  }
+}
