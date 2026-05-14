@@ -135,6 +135,8 @@ def summarize_cleanup_ledger(repo_root: Path) -> tuple[str, dict[str, Any]]:
         "ledger_path": rel(path, repo_root) if path.exists() else rel(path, repo_root),
         "total_items": summary.get("total_items"),
         "referenced_count": summary.get("referenced_count"),
+        "blocking_referenced_count": summary.get("blocking_referenced_count"),
+        "audit_only_referenced_count": summary.get("audit_only_referenced_count"),
         "delete_eligible_count": delete_eligible,
         "total_size_bytes": summary.get("total_size_bytes"),
     }

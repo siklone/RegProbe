@@ -28,6 +28,15 @@ LEDGER_OUTPUT_GLOBS = {
 }
 
 
+def is_audit_trail_reference(path: str) -> bool:
+    name = Path(path).name
+    return (
+        path.startswith("registry-research-framework/audit/cleanup-quarantine-ledger-")
+        or path.startswith("registry-research-framework/audit/branch-cleanup-ledger-")
+        or name in {"research-artifact-map-latest.json", "artifact-map.md"}
+    )
+
+
 def now_utc() -> str:
     return datetime.now(UTC).replace(microsecond=0).isoformat().replace("+00:00", "Z")
 
@@ -157,6 +166,8 @@ def item_for(
         output_paths=output_paths,
         ignore_reference_paths=ignore_reference_paths,
     )
+    audit_refs = [ref for ref in refs if is_audit_trail_reference(ref)]
+    blocking_refs = [ref for ref in refs if ref not in audit_refs]
     can_delete = (
         recommended_action == "delete-after-review"
         and len(refs) == 0
@@ -172,7 +183,11 @@ def item_for(
         "replacement_artifacts": replacement_artifacts or [],
         "reference_terms": reference_terms,
         "live_reference_count": len(refs),
+        "audit_reference_count": len(audit_refs),
+        "blocking_reference_count": len(blocking_refs),
         "references_sample": refs[:8],
+        "audit_references_sample": audit_refs[:8],
+        "blocking_references_sample": blocking_refs[:8],
         "delete_eligible": can_delete,
         "recommended_action": recommended_action,
     }
@@ -193,8 +208,14 @@ def refresh_item_references(
         output_paths=output_paths,
         ignore_reference_paths=ignore_reference_paths,
     )
+    audit_refs = [ref for ref in refs if is_audit_trail_reference(ref)]
+    blocking_refs = [ref for ref in refs if ref not in audit_refs]
     item["live_reference_count"] = len(refs)
+    item["audit_reference_count"] = len(audit_refs)
+    item["blocking_reference_count"] = len(blocking_refs)
     item["references_sample"] = refs[:8]
+    item["audit_references_sample"] = audit_refs[:8]
+    item["blocking_references_sample"] = blocking_refs[:8]
     item["delete_eligible"] = (
         item.get("recommended_action") == "delete-after-review"
         and len(refs) == 0
@@ -440,6 +461,13 @@ def build_ledger(
             "total_items": len(items),
             "delete_eligible_count": sum(1 for item in items if item.get("delete_eligible")),
             "referenced_count": sum(1 for item in items if int(item.get("live_reference_count") or 0) > 0),
+            "blocking_referenced_count": sum(1 for item in items if int(item.get("blocking_reference_count") or 0) > 0),
+            "audit_only_referenced_count": sum(
+                1
+                for item in items
+                if int(item.get("live_reference_count") or 0) > 0
+                and int(item.get("blocking_reference_count") or 0) == 0
+            ),
             "total_size_bytes": sum(int(item.get("size_bytes") or 0) for item in items),
             "categories": dict(sorted(category_counts.items())),
         },
@@ -470,6 +498,8 @@ def render_markdown(payload: dict[str, Any]) -> str:
             "|---|---:|",
             f"| Total items | {int(summary.get('total_items') or 0)} |",
             f"| Referenced items | {int(summary.get('referenced_count') or 0)} |",
+            f"| Blocking referenced items | {int(summary.get('blocking_referenced_count') or 0)} |",
+            f"| Audit-only referenced items | {int(summary.get('audit_only_referenced_count') or 0)} |",
             f"| Delete eligible after review | {int(summary.get('delete_eligible_count') or 0)} |",
             f"| Total sampled size bytes | {int(summary.get('total_size_bytes') or 0)} |",
             "",
@@ -486,8 +516,8 @@ def render_markdown(payload: dict[str, Any]) -> str:
             "",
             "## Candidates",
             "",
-            "| Path | Category | Live refs | Delete eligible | Action | Reason |",
-            "|---|---|---:|---:|---|---|",
+            "| Path | Category | Live refs | Blocking refs | Audit refs | Delete eligible | Action | Reason |",
+            "|---|---|---:|---:|---:|---:|---|---|",
         ]
     )
     for item in payload.get("items") or []:
@@ -496,6 +526,8 @@ def render_markdown(payload: dict[str, Any]) -> str:
             f"`{markdown_cell(item.get('path'))}` | "
             f"`{markdown_cell(item.get('category'))}` | "
             f"{int(item.get('live_reference_count') or 0)} | "
+            f"{int(item.get('blocking_reference_count') or 0)} | "
+            f"{int(item.get('audit_reference_count') or 0)} | "
             f"`{bool(item.get('delete_eligible'))}` | "
             f"`{markdown_cell(item.get('recommended_action'))}` | "
             f"{markdown_cell(first_sentence(str(item.get('stale_reason') or '')))} |"
