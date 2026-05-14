@@ -45,7 +45,8 @@ public sealed class TweakExecutionPlanSnapshotTests
 
         Assert.Equal("Apply review (7 checks) • Rollback ready", snapshot.CollapsedSummary);
         Assert.Contains(@"HKLM\Software\RegProbe\Feature", snapshot.ExportText, StringComparison.OrdinalIgnoreCase);
-        Assert.Contains("Rollback story: verified", snapshot.ExportText, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("Rollback behavior: verified and ready", snapshot.ExportText, StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("Rollback: Verified via vm-safety-bench.", snapshot.ExportText, StringComparison.OrdinalIgnoreCase);
     }
 
     [Fact]
