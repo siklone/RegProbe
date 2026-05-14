@@ -43,6 +43,7 @@ These scripts are active entry points for day-to-day contributor work.
 | `scripts/vm-kvm/run-guest-registry-value-campaign.py` | canonical | Snapshot-safe registry value campaign runner for Operator96-style experiments. |
 | `scripts/vm-kvm/run-guest-registry-value-experiment.py` | canonical | One-value VM experiment runner with host noise gate, optional `--abort-on-noisy-host`, and reboot/rollback checks. |
 | `registry-research-framework/scripts/analyze_registry_value_experiments.py` | canonical | Retro-analyze registry value experiment artifacts and produce verdict summaries. |
+| `registry-research-framework/scripts/generate_research_artifact_map.py` | canonical | Generate the current artifact map so contributors start from canonical outputs instead of raw parse folders. |
 | `registry-research-framework/scripts/generate_operator96_enriched_value_matrix.py` | canonical | Generate enriched candidate values with source boundaries and community-hint tags. |
 | `registry-research-framework/scripts/generate_operator96_app_surface_review.py` | canonical | Review enriched Operator96 records for app-surface eligibility. |
 | `registry-research-framework/scripts/generate_operator96_low_noise_rerun_plan.py` | canonical | Plan low-noise reruns for records whose prior observations are not reference quality. |
@@ -108,15 +109,17 @@ Agentic AI contributors should follow this loop:
 
 1. Read `README.md`, `CONTRIBUTING.md`, this tooling map, and
    `Docs/research/run-tiers.md`.
-2. Inspect one setting with `check_single_tweak.py --json`.
-3. If app retest is needed, run `check_app_retest_readiness.py --json`.
-4. If VM evidence is needed, run `scripts/vm-kvm/vm-health-check.py --json`
+2. Open `Docs/research/artifact-map.md` to find the current app QA, VM health,
+   Operator96, and cleanup-ledger surfaces before browsing raw audit folders.
+3. Inspect one setting with `check_single_tweak.py --json`.
+4. If app retest is needed, run `check_app_retest_readiness.py --json`.
+5. If VM evidence is needed, run `scripts/vm-kvm/vm-health-check.py --json`
    before any guest runner.
-5. Call the narrow Python runner for the task and preserve JSON artifacts. For
+6. Call the narrow Python runner for the task and preserve JSON artifacts. For
    certified low-noise registry reruns, include `--abort-on-noisy-host` so host
    load cannot silently downgrade a reference campaign.
-6. Update records, app surfaces, docs, and tests.
-7. Open a PR with the commands run and artifact paths.
+7. Update records, app surfaces, docs, and tests.
+8. Open a PR with the commands run and artifact paths.
 
 Do not invent a new wrapper path when an existing canonical Python script emits
 the needed JSON contract.
