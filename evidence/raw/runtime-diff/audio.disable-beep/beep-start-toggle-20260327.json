@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0",
+  "record_id": "audio.disable-beep",
+  "evidence_id": "runtime-beep-registry-diff",
+  "source_kind": "vm-runtime-diff",
+  "source_artifact": "evidence/files/vm-tooling-staging/beep_start_toggle_out.txt",
+  "captured_on": "Win25H2Clean",
+  "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Services\\Beep",
+  "value_name": "Start",
+  "value_type": "REG_DWORD",
+  "observations": {
+    "baseline": 1,
+    "after_value_4": 4,
+    "after_value_1": 1,
+    "restored": 1
+  },
+  "rollback_story": {
+    "mechanism": "restore-original-value",
+    "restores": 1,
+    "validated": true
+  },
+  "claim_boundary": "Confirms reversible registry write/read behavior for the Beep driver Start value on the captured Windows 11 25H2 VM. It does not claim user-visible audio impact on every machine.",
+  "raw_text": "BASELINE=1\nAFTER_4=4\nAFTER_1=1\nRESTORED=1"
+}

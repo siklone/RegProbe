@@ -2835,7 +2835,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | Evidence ID | Kind | Title | Location |
 | --- | --- | --- | --- |
 | `ms-services-registry-tree` | `official-doc` | HKLM\\SYSTEM\\CurrentControlSet\\Services Registry Tree | [https://learn.microsoft.com/en-us/windows-hardware/drivers/install/hklm-system-currentcontrolset-services-registry-tree](https://learn.microsoft.com/en-us/windows-hardware/drivers/install/hklm-system-currentcontrolset-services-registry-tree) |
-| `runtime-beep-registry-diff` | `runtime-diff` | Guest reversible probe - Beep driver start mode | [evidence/files/vm/beep_start_toggle_out.txt](../evidence/files/vm-tooling-staging/beep_start_toggle_out.txt) |
+| `runtime-beep-registry-diff` | `runtime-diff` | Guest reversible probe - Beep driver start mode | [evidence/raw/runtime-diff/audio.disable-beep/beep-start-toggle-20260327.json](../evidence/raw/runtime-diff/audio.disable-beep/beep-start-toggle-20260327.json) |
 | `app-audio-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | `repo-provenance-audio-disable-beep` | `repo-doc` | Repo source note for audio.disable-beep | [Docs/tweaks/tweak-provenance.json](../Docs/tweaks/tweak-provenance.json) |
 | `vm-audio.disable-beep-etw-stackwalk-attempt-20260424` | `etw-trace` | KVM ETW summary receipt for Start | [evidence/captures/audio-disable-beep-etw-stackwalk-attempt-20260424.json](../evidence/captures/audio-disable-beep-etw-stackwalk-attempt-20260424.json) and [evidence/raw/etw-stackwalk/audio-disable-beep-etw-20260424-batch2/audio-disable-beep-etw-20260424-batch2-summary.json](../evidence/raw/etw-stackwalk/audio-disable-beep-etw-20260424-batch2/audio-disable-beep-etw-20260424-batch2-summary.json) and [evidence/raw/etw-stackwalk/audio-disable-beep-etw-20260424-batch2/audio-disable-beep-etw-20260424-batch2-stage.json](../evidence/raw/etw-stackwalk/audio-disable-beep-etw-20260424-batch2/audio-disable-beep-etw-20260424-batch2-stage.json) |
@@ -2848,7 +2848,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- |
 | Source | [https://learn.microsoft.com/en-us/windows-hardware/drivers/install/hklm-system-currentcontrolset-services-registry-tree](https://learn.microsoft.com/en-us/windows-hardware/drivers/install/hklm-system-currentcontrolset-services-registry-tree) |
 | Exact quote / path | lines 52-58: The `Start` value specifies when the service should be started. `0x4` (Disabled): The service is disabled and will not be loaded. |
-| Notes | Guest reversible probe at [evidence/files/vm/beep_start_toggle_out.txt](../evidence/files/vm-tooling-staging/beep_start_toggle_out.txt) confirmed BASELINE=1, AFTER_4=4, AFTER_1=1, RESTORED=1. |
+| Notes | Guest reversible probe at [evidence/raw/runtime-diff/audio.disable-beep/beep-start-toggle-20260327.json](../evidence/raw/runtime-diff/audio.disable-beep/beep-start-toggle-20260327.json) confirmed BASELINE=1, AFTER_4=4, AFTER_1=1, RESTORED=1. |
 
 ---
 
@@ -9510,7 +9510,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `ms-hags-feature` | `official-doc` | DirectX Developer Blog: Hardware Accelerated GPU Scheduling | [https://devblogs.microsoft.com/directx/hardware-accelerated-gpu-scheduling/](https://devblogs.microsoft.com/directx/hardware-accelerated-gpu-scheduling/) |
 | `repo-system-doc-hags` | `repo-doc` | Repo system research notes for HAGS | [Docs/system/system.md](../Docs/system/system.md) |
 | `app-system-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/SystemTweakProvider.cs |
-| `runtime-hags-registry-diff` | `runtime-diff` | Guest reversible probe for HwSchMode | [evidence/files/vm/hags_toggle_out.txt](../evidence/files/vm-tooling-staging/hags_toggle_out.txt) |
+| `runtime-hags-registry-diff` | `runtime-diff` | Guest reversible probe for HwSchMode | [evidence/raw/runtime-diff/system.enable-hags/hags-toggle-20260327.json](../evidence/raw/runtime-diff/system.enable-hags/hags-toggle-20260327.json) |
 | `vm-system.enable-hags-etw-stackwalk-attempt-20260427` | `etw-trace` | KVM ETW summary receipt for HwSchMode | [evidence/captures/system-enable-hags-etw-stackwalk-attempt-20260427.json](../evidence/captures/system-enable-hags-etw-stackwalk-attempt-20260427.json) and [evidence/raw/etw-stackwalk/system-enable-hags-etw-20260427b/system-enable-hags-etw-20260427b-summary.json](../evidence/raw/etw-stackwalk/system-enable-hags-etw-20260427b/system-enable-hags-etw-20260427b-summary.json) |
 | `vm-system.enable-hags-etw-qga-unblock-20260507` | `etw-trace` | QGA-first ETW stackwalk runtime receipt for HwSchMode | [evidence/captures/system-enable-hags-etw-qga-unblock-20260507.json](../evidence/captures/system-enable-hags-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/system-enable-hags-etw-qga-unblock-20260507/system-enable-hags-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/system-enable-hags-etw-qga-unblock-20260507/system-enable-hags-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/system-enable-hags-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/system-enable-hags-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/system-enable-hags-etw-qga-unblock-20260507/system-enable-hags-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/system-enable-hags-etw-qga-unblock-20260507/system-enable-hags-etw-qga-unblock-20260507.etl) |
 | `vm-system.enable-hags-ghidra-launch-receipt-20260427` | `vm-test` | Guest Ghidra launch receipt for HwSchMode | [evidence/raw/ghidra/ghidra-system-enable-hags-20260427b/summary.json](../evidence/raw/ghidra/ghidra-system-enable-hags-20260427b/summary.json) |
@@ -9519,8 +9519,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 
 | Field | Value |
 | --- | --- |
-| Source | [evidence/files/vm/hags_toggle_out.txt](../evidence/files/vm-tooling-staging/hags_toggle_out.txt) |
-| Exact quote / path | hags_toggle_out.txt: BEFORE=MISSING. AFTER_2=2. AFTER_1=1. RESTORED=MISSING. |
+| Source | [evidence/raw/runtime-diff/system.enable-hags/hags-toggle-20260327.json](../evidence/raw/runtime-diff/system.enable-hags/hags-toggle-20260327.json) |
+| Exact quote / path | hags-toggle-20260327.json: BEFORE=MISSING. AFTER_2=2. AFTER_1=1. RESTORED=MISSING. |
 | Notes | Guest-side reversible probe on Win25H2Clean confirmed the baseline missing state and the 2 / 1 toggle sequence, then restored the machine back to missing. Normalized for the consolidated evidence report. |
 
 ---

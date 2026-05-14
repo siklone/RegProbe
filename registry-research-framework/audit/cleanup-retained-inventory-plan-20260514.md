@@ -1,6 +1,6 @@
 # Cleanup Retained Inventory Plan
 
-Generated: `2026-05-14T15:39:03Z`
+Generated: `2026-05-14T16:08:18Z`
 Ledger: `registry-research-framework/audit/cleanup-quarantine-ledger-20260514.json`
 
 Action plan for cleanup retained inventory. It does not delete files and it does not redefine delete eligibility.
@@ -18,60 +18,60 @@ Action plan for cleanup retained inventory. It does not delete files and it does
 | Retained inventory items | 89 |
 | Delete-ready rows | 0 |
 | Reference migration needed | 0 |
-| Audit-only retained | 17 |
+| Audit-only retained | 19 |
 | Intentional reference keep | 4 |
-| Needs replacement/retention decision | 68 |
-| Retention decision queue | 68 |
+| Needs replacement/retention decision | 66 |
+| Retention decision queue | 66 |
 | Retained pending review | 0 |
 
 ## Release States
 
 | State | Count |
 |---|---:|
-| `audit-only-retained` | 17 |
+| `audit-only-retained` | 19 |
 | `intentional-reference-keep` | 4 |
-| `needs-replacement-or-retention-decision` | 68 |
+| `needs-replacement-or-retention-decision` | 66 |
 
 ## Decision Tracks
 
 | Track | Count |
 |---|---:|
 | `archive-history-anchor` | 10 |
-| `audit-trail-retained` | 17 |
+| `audit-trail-retained` | 19 |
 | `historical-audit-output` | 25 |
 | `intentional-reference-keep` | 4 |
 | `raw-trace-source-of-record` | 25 |
-| `staging-bundle-canonicalization` | 8 |
+| `staging-bundle-canonicalization` | 6 |
 
 ## Staging Canonicalization States
 
 | State | Count |
 |---|---:|
 | `active-tool-output-root` | 1 |
-| `canonical-raw-replacement-known` | 2 |
+| `canonical-raw-replacement-known` | 4 |
 | `partial-derived-replacement-known` | 2 |
 | `rerun-needed` | 1 |
-| `staging-source-of-record` | 4 |
+| `staging-source-of-record` | 2 |
 
 ## Top Blocking Reference Paths
 
 | Path | Count |
 |---|---:|
-| `research/evidence-index.json` | 45 |
-| `research/evidence-manifest.json` | 42 |
-| `research/evidence-atlas.md` | 37 |
-| `research/evidence-manifest.md` | 36 |
+| `research/evidence-index.json` | 43 |
+| `research/evidence-manifest.json` | 40 |
+| `research/evidence-atlas.md` | 35 |
+| `research/evidence-manifest.md` | 34 |
 | `registry-research-framework/audit/rejected-closure-ledger.json` | 30 |
-| `research/evidence-classes.json` | 16 |
+| `research/evidence-classes.json` | 14 |
 | `registry-research-framework/audit/operator-regadd-inventory-20260508-repo.json` | 13 |
 | `registry-research-framework/audit/etw-stackwalk-reopen-rotation-ledger.json` | 6 |
 | `registry-research-framework/scripts/check_etw_stackwalk_reopen_history_archive.py` | 5 |
 | `research/records/power.control.perf-calculate-actual-utilization.json` | 4 |
 | `research/records/power.session-watchdog-timeouts.json` | 4 |
-| `registry-research-framework/enrichment/enrichment-cache.jsonl` | 3 |
 | `registry-research-framework/audit/etw-stackwalk-reopen-baseline-archive/README.md` | 3 |
 | `registry-research-framework/audit/etw-stackwalk-reopen-baseline-archive/commands/01-promote-previous-snapshot.txt` | 3 |
 | `registry-research-framework/audit/etw-stackwalk-reopen-history-archive/CHECKSUMS.json` | 3 |
+| `registry-research-framework/audit/etw-stackwalk-reopen-history-archive/README.md` | 3 |
 
 ## Reference Migration Queue
 
@@ -90,9 +90,7 @@ These rows are not delete candidates. They need a replacement artifact, an expli
 | `evidence/files/vm-tooling-staging/thread-dpc-enable-0-mem2.etl.md` | `staging-bundle-canonicalization` | `vm-tooling-staging-oldest-sample` | 8 | `partial-derived-replacement-known` | `system.kernel-thread-dpc-enable` | Retain until a new raw ETL/summary pair or explicit source-of-record decision replaces this placeholder. |
 | `evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json..md` | `staging-bundle-canonicalization` | `vm-tooling-staging-oldest-sample` | 8 | `staging-source-of-record` | `security.trusted-path-credential-prompting`, `system.disable-auto-maintenance`, `system.memory-large-system-cache-client` | Copy or regenerate the batch proof into evidence/raw, then migrate record/index references in one dedicated PR. |
 | `evidence/files/vm-tooling-staging/ghidra-probes` | `staging-bundle-canonicalization` | `vm-tooling-staging-oldest-sample` | 2 | `active-tool-output-root` | _none_ | Move script defaults only if a broader tooling-path cleanup is planned; do not delete as evidence cleanup. |
-| `evidence/files/vm-tooling-staging/beep_start_toggle_out.txt` | `staging-bundle-canonicalization` | `vm-tooling-staging-oldest-sample` | 9 | `staging-source-of-record` | `audio.disable-beep` | Create a canonical evidence/raw runtime-diff JSON for the beep value proof before migrating app QA and index references. |
 | `evidence/files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-20260325-100039` | `staging-bundle-canonicalization` | `vm-tooling-staging-oldest-sample` | 6 | `staging-source-of-record` | `security.threat-file-hash-logging` | Regenerate or copy the MPENGINE no-read proof into evidence/raw before migrating the note/record references. |
-| `evidence/files/vm-tooling-staging/hags_toggle_out.txt` | `staging-bundle-canonicalization` | `vm-tooling-staging-oldest-sample` | 8 | `staging-source-of-record` | `system.enable-hags` | Create a canonical evidence/raw runtime-diff JSON for the HAGS value proof before migrating record/index references. |
 | `evidence/raw/procmon/privacy.disable-appcompat-engine.policy/appcompat-policy-bundle-procmon.pml` | `raw-trace-source-of-record` | `large-raw-trace-sample` | 9 | `raw ETL/PML backing derived evidence, records, or evidence indexes` | _none_ | Create or verify a derived CSV/JSON/summary replacement, move live record/index references off the raw trace if appropriate, then rerun cleanup. |
 | `evidence/raw/procmon/privacy.disable-appdeviceinventory.policy/appdeviceinventory-policy-procmon.pml` | `raw-trace-source-of-record` | `large-raw-trace-sample` | 10 | `raw ETL/PML backing derived evidence, records, or evidence indexes` | _none_ | Create or verify a derived CSV/JSON/summary replacement, move live record/index references off the raw trace if appropriate, then rerun cleanup. |
 | `evidence/raw/procmon/privacy.disable-program-compatibility-assistant/disable-pca-policy-procmon.pml` | `raw-trace-source-of-record` | `large-raw-trace-sample` | 9 | `raw ETL/PML backing derived evidence, records, or evidence indexes` | _none_ | Create or verify a derived CSV/JSON/summary replacement, move live record/index references off the raw trace if appropriate, then rerun cleanup. |
@@ -169,7 +167,7 @@ These rows are not delete candidates. They need a replacement artifact, an expli
 | `evidence/files/vm-tooling-staging/thread-dpc-enable-0-mem2.etl.md` | `needs-replacement-or-retention-decision` | `staging-bundle-canonicalization` | `vm-tooling-staging-oldest-sample` | 8 | Decide whether this staging bundle has a canonical evidence/raw replacement before attempting deletion. |
 | `evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json..md` | `needs-replacement-or-retention-decision` | `staging-bundle-canonicalization` | `vm-tooling-staging-oldest-sample` | 8 | Decide whether this staging bundle has a canonical evidence/raw replacement before attempting deletion. |
 | `evidence/files/vm-tooling-staging/ghidra-probes` | `needs-replacement-or-retention-decision` | `staging-bundle-canonicalization` | `vm-tooling-staging-oldest-sample` | 2 | Decide whether this staging bundle has a canonical evidence/raw replacement before attempting deletion. |
-| `evidence/files/vm-tooling-staging/beep_start_toggle_out.txt` | `needs-replacement-or-retention-decision` | `staging-bundle-canonicalization` | `vm-tooling-staging-oldest-sample` | 9 | Decide whether this staging bundle has a canonical evidence/raw replacement before attempting deletion. |
+| `evidence/files/vm-tooling-staging/beep_start_toggle_out.txt` | `audit-only-retained` | `audit-trail-retained` | `vm-tooling-staging-oldest-sample` | 0 | No live blocking references remain; keep for audit trail or handle in a dedicated deletion PR that explicitly accepts audit-only history references. |
 | `evidence/files/vm-tooling-staging/crossdevice_resume_probe.csv` | `audit-only-retained` | `audit-trail-retained` | `vm-tooling-staging-oldest-sample` | 0 | No live blocking references remain; keep for audit trail or handle in a dedicated deletion PR that explicitly accepts audit-only history references. |
 | `evidence/files/vm-tooling-staging/defender-enhanced-notifications-securitycenter-1-20260324-213118` | `audit-only-retained` | `audit-trail-retained` | `vm-tooling-staging-oldest-sample` | 0 | No live blocking references remain; keep for audit trail or handle in a dedicated deletion PR that explicitly accepts audit-only history references. |
 | `evidence/files/vm-tooling-staging/defender-threat-file-hash-legacyroot-1-20260325-011845` | `audit-only-retained` | `audit-trail-retained` | `vm-tooling-staging-oldest-sample` | 0 | No live blocking references remain; keep for audit trail or handle in a dedicated deletion PR that explicitly accepts audit-only history references. |
@@ -182,7 +180,7 @@ These rows are not delete candidates. They need a replacement artifact, an expli
 | `evidence/files/vm-tooling-staging/gamemode_admin_probe.txt` | `audit-only-retained` | `audit-trail-retained` | `vm-tooling-staging-oldest-sample` | 0 | No live blocking references remain; keep for audit trail or handle in a dedicated deletion PR that explicitly accepts audit-only history references. |
 | `evidence/files/vm-tooling-staging/gamemode_admin_zero_probe.txt` | `audit-only-retained` | `audit-trail-retained` | `vm-tooling-staging-oldest-sample` | 0 | No live blocking references remain; keep for audit trail or handle in a dedicated deletion PR that explicitly accepts audit-only history references. |
 | `evidence/files/vm-tooling-staging/ghidra_explorer_serialize.txt` | `audit-only-retained` | `audit-trail-retained` | `vm-tooling-staging-oldest-sample` | 0 | No live blocking references remain; keep for audit trail or handle in a dedicated deletion PR that explicitly accepts audit-only history references. |
-| `evidence/files/vm-tooling-staging/hags_toggle_out.txt` | `needs-replacement-or-retention-decision` | `staging-bundle-canonicalization` | `vm-tooling-staging-oldest-sample` | 8 | Decide whether this staging bundle has a canonical evidence/raw replacement before attempting deletion. |
+| `evidence/files/vm-tooling-staging/hags_toggle_out.txt` | `audit-only-retained` | `audit-trail-retained` | `vm-tooling-staging-oldest-sample` | 0 | No live blocking references remain; keep for audit trail or handle in a dedicated deletion PR that explicitly accepts audit-only history references. |
 | `evidence/files/vm-tooling-staging/hideemptydrives-0-hits.csv` | `audit-only-retained` | `audit-trail-retained` | `vm-tooling-staging-oldest-sample` | 0 | No live blocking references remain; keep for audit trail or handle in a dedicated deletion PR that explicitly accepts audit-only history references. |
 | `evidence/files/vm-tooling-staging/hideemptydrives-1-hits.csv` | `audit-only-retained` | `audit-trail-retained` | `vm-tooling-staging-oldest-sample` | 0 | No live blocking references remain; keep for audit trail or handle in a dedicated deletion PR that explicitly accepts audit-only history references. |
 | `evidence/files/vm-tooling-staging/hideemptydrives-result.txt` | `audit-only-retained` | `audit-trail-retained` | `vm-tooling-staging-oldest-sample` | 0 | No live blocking references remain; keep for audit trail or handle in a dedicated deletion PR that explicitly accepts audit-only history references. |

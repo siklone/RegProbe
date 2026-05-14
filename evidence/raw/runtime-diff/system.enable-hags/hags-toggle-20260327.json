@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0",
+  "record_id": "system.enable-hags",
+  "evidence_id": "runtime-hags-registry-diff",
+  "source_kind": "vm-runtime-diff",
+  "source_artifact": "evidence/files/vm-tooling-staging/hags_toggle_out.txt",
+  "captured_on": "Win25H2Clean",
+  "registry_path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers",
+  "value_name": "HwSchMode",
+  "value_type": "REG_DWORD",
+  "observations": {
+    "before": "MISSING",
+    "after_value_2": 2,
+    "after_value_1": 1,
+    "restored": "MISSING"
+  },
+  "rollback_story": {
+    "mechanism": "delete-value-when-originally-missing",
+    "restores": "MISSING",
+    "validated": true
+  },
+  "claim_boundary": "Confirms reversible registry write/read behavior for HwSchMode on the captured Windows 11 25H2 VM. It does not claim GPU scheduling performance impact without hardware-specific validation.",
+  "raw_text": "BEFORE=MISSING\nAFTER_2=2\nAFTER_1=1\nRESTORED=MISSING"
+}

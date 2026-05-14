@@ -907,14 +907,14 @@
           "RollbackSnapshotState": "ready",
           "RollbackStoryText": "Rollback: Verified via record-restore-story.",
           "HasClaimBoundary": true,
-          "WhatWeKnowSummary": "Claim: This affects the old system beep behavior driven by the Beep driver. Most people will never notice it unless they are cleaning up legacy system sounds or debugging old compatibility behavior. Evidence: Guest reversible probe at evidence/files/vm-tooling-staging/beep_start_toggle_out.txt confirmed BASELINE=1, AFTER_4=4, AFTER_1=1, RESTORED=1. Rollback: Rollback: Verified via record-restore-story.",
+          "WhatWeKnowSummary": "Claim: This affects the old system beep behavior driven by the Beep driver. Most people will never notice it unless they are cleaning up legacy system sounds or debugging old compatibility behavior. Evidence: Guest reversible probe at evidence/raw/runtime-diff/audio.disable-beep/beep-start-toggle-20260327.json confirmed BASELINE=1, AFTER_4=4, AFTER_1=1, RESTORED=1. Rollback: Rollback: Verified via record-restore-story.",
           "WhatWeDoNotClaimSummary": "No performance or benchmark result is implied beyond the proof lanes shown below.",
           "ProofLanes": [
             {
               "Key": "docs",
               "Label": "DOCS",
               "State": "ready",
-              "Summary": "Guest reversible probe at evidence/files/vm-tooling-staging/beep_start_toggle_out.txt confirmed BASELINE=1, AFTER_4=4, AFTER_1=1, RESTORED=1.",
+              "Summary": "Guest reversible probe at evidence/raw/runtime-diff/audio.disable-beep/beep-start-toggle-20260327.json confirmed BASELINE=1, AFTER_4=4, AFTER_1=1, RESTORED=1.",
               "Source": "Validation proof source: https://learn.microsoft.com/en-us/windows-hardware/drivers/install/hklm-system-currentcontrolset-services-registry-tree"
             },
             {
@@ -922,7 +922,7 @@
               "Label": "RUNTIME",
               "State": "ready",
               "Summary": "Guest reversible probe on Win25H2Clean confirmed Start transitions through 1 and 4 before restoring to 1.",
-              "Source": "Guest reversible probe - Beep driver start mode: evidence/files/vm-tooling-staging/beep_start_toggle_out.txt"
+              "Source": "Guest reversible probe - Beep driver start mode: evidence/raw/runtime-diff/audio.disable-beep/beep-start-toggle-20260327.json"
             },
             {
               "Key": "source",
