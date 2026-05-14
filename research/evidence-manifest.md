@@ -46,7 +46,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `privacy.disable-application-compatibility.policy` | deprecated | Class E | `research/records/privacy.disable-application-compatibility.policy.review.json` | - | `055072f0520fda063bc707bec04019be71a67e0d2d35338d613a7cfb05b8298d` | `dac582a1c2c35e23e9f458eacfacb5b549acf3776833ab868957831ce11b68ad` | 1 |
 | `privacy.disable-application-compatibility.tasks` | deprecated | Class E | `research/records/privacy.disable-application-compatibility.tasks.review.json` | - | `a52853caf1ca3fd7cc94f7f43db63fa7c1134672aa081e3c8f47afb4304ae7c3` | `9f866bfd637d9c45bfeb3c0021fc4f922a6daea709f92a29a1bd5ca80fc395c1` | 1 |
 | `privacy.disable-ceip` | deprecated | Class E | `research/records/privacy.disable-ceip.review.json` | - | `9c07f1c248ab9d38008095f081644dfdf1d78a917dc08c2425f5ba8582e6ff74` | `bd454cdb57c0b623cd92cc224e855b261653e9ebed99a37997a9dddf8422fdb7` | 1 |
-| `privacy.disable-cross-device-experiences` | deprecated | Class E | `research/records/privacy.disable-cross-device-experiences.review.json` | - | `dc085c99a4fa1e7912af4c03ad0d4bf2c671421444fe18252383cdaee241129e` | `5812fc69743ede5e20a1e1bbc6821c9eced6705e7e1f4ab4b9b6f467d991fd62` | 7 |
+| `privacy.disable-cross-device-experiences` | deprecated | Class E | `research/records/privacy.disable-cross-device-experiences.review.json` | - | `6be9294e68371f9349ea3b7a1c9b31c7ac638ca94596bd7a71052d83b1394822` | `5812fc69743ede5e20a1e1bbc6821c9eced6705e7e1f4ab4b9b6f467d991fd62` | 7 |
 | `privacy.disable-f1-help` | deprecated | Class E | `research/records/privacy.disable-f1-help.review.json` | - | `dae65503c7b1474be103fe26b2bea6fe8fa2caafc3101c658709cb44463bf2c3` | `8b16aecb64c4674f5cea1708ba232ad3778db028dea84241ac369074f51c9454` | 1 |
 | `privacy.disable-inking-typing-personalization` | deprecated | Class E | `research/records/privacy.disable-inking-typing-personalization.review.json` | - | `305c8b4b1ccd3770ec729ade901069d19fd857ac0e25003deaa59f87fe43c14a` | `eeea7884e331d5b8d63e0d29c8bc7b2ef8ce1e3846d92b8816774336fceb96bc` | 2 |
 | `privacy.disable-offline-files` | deprecated | Class E | `research/records/privacy.disable-offline-files.review.json` | - | `9879674fba6e69376107e0ef59c591d4daf7b06ad6c296231bf89c5a36efd6e9` | `d4a4c8c1c3b10e7876fb13965dd3422d9c353458057432620ee0e50d31efa2e3` | 2 |
@@ -82,7 +82,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `system.services.disable-print-device-configuration` | deprecated | Class E | `research/records/system.services.disable-print-device-configuration.json` | - | `c4221315df8726547a1d4eed859c8aac2a9b79f64e1fb9fb66957dd9c472a04c` | `40eab482de030165df08442974d40d2264b7755bdc41e27c41d8b74c20b6659a` | 3 |
 | `system.services.disable-print-scan-broker` | deprecated | Class E | `research/records/system.services.disable-print-scan-broker.json` | - | `3fb0cfb7d58d1cb89ab4b4ce4fa5c55155832b3ca3898d62c5837049d743d0e5` | `c835c47c36da2a883d7539dcc3bbd1bf8a2c219ef59a66e0eba6bad6528f5551` | 3 |
 | `system.services.disable-print-workflow-user-service` | deprecated | Class E | `research/records/system.services.disable-print-workflow-user-service.json` | - | `d672e80bfbb82171ebb7c7fa6912f97d6f36d2b837fc63be424d8922746f9013` | `e541bc9c82b101e7db9fca939b233031021c3a3586a6eef2bac13015cd6616b3` | 3 |
-| `system.services.disable-sysmain` | deprecated | Class E | `research/records/system.services.disable-sysmain.review.json` | - | `47d465e6b8bbff7d213ac0922668c02130c8776d724fc0d57a50e561d04f4156` | `4de3a7df4980a70b5b8054c5affbe6d604891f9adbdb842e6380b5af6e15a71d` | 3 |
+| `system.services.disable-sysmain` | deprecated | Class E | `research/records/system.services.disable-sysmain.review.json` | - | `1cabbde1e7c157fa11ee10cbe95bef0b13acac2c82fa3336408978501992d6de` | `4de3a7df4980a70b5b8054c5affbe6d604891f9adbdb842e6380b5af6e15a71d` | 3 |
 | `system.services.disable-wap-push-routing` | deprecated | Class E | `research/records/system.services.disable-wap-push-routing.review.json` | - | `b4ec777b12a889c0a502849f5e8df5c7ad9f72d6abe9a6510c2419c61e5c2185` | `b8372215cd08f642042a2fb7470b401e5a30db993b1ab9486f449c2d13b5949f` | 3 |
 | `system.services.disable-windows-error-reporting` | deprecated | Class E | `research/records/system.services.disable-windows-error-reporting.review.json` | - | `fdce4fb14356388a798fcac29ee4901382fce0abf24d05ae4e88ba784cf16911` | `f17a1714cfd9fa49a10a99fa66df3b256ac008642f794eb8120fdeba92f52750` | 3 |
 | `power.control.allow-audio-to-enable-execution-required-power-requests` | draft | Class B | `research/records/power.control.allow-audio-to-enable-execution-required-power-requests.json` | - | `6d2c75a9c1bacf8812384bc1293ff345096dac9be541415026ed65de419d739e` | `2ffdec91585870e10eb4415ed384f541b5d6feb6862e5b8b7ff2475b5c347095` | 25 |
@@ -115,11 +115,11 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `network.flush-dns-cache` | review-required | Class D | `research/records/network.flush-dns-cache.review.json` | - | `633bb92fd5d2cbeb30fd2a2fe78d2aa6916cb35481bd4d60758f230d87a13d3c` |  | 4 |
 | `network.reset-winsock` | review-required | Class D | `research/records/network.reset-winsock.review.json` | - | `2803c02cbe7eb86855900d3ae1d3f332f946356255445b3b69141b92a461a352` |  | 5 |
 | `security.disable-uac` | review-required | Class D | `research/records/security.disable-uac.review.json` | - | `a59d0a3d09abe4be2127f12534e124f5c27cc4863b7837a4ed61f65f6a4b39e4` |  | 5 |
-| `audio.disable-beep` | validated | Class A | `research/records/audio.disable-beep.review.json` | - | `6d8ec1e66a7e07ee63b2ccc0de667b30146fab7fbf4358e3334d626090ef2380` | `5b2fdb894230a9968ae5988951da38e4ed60333b008effa58bdae351929538b0` | 7 |
-| `audio.show-disconnected-devices` | validated | Class A | `research/records/audio.show-disconnected-devices.review.json` | [evidence/records/audio.show-disconnected-devices](../evidence/records/audio.show-disconnected-devices) | `8b34ab3438a2b1eff11156ae9854724cbc8579c12ad348591b69ab145fc7edf7` | `2a472c00bb66514035d3bae1cb6dafc44f22d63d5726d8cbab2aeadf8c97cafa` | 6 |
-| `audio.show-hidden-devices` | validated | Class A | `research/records/audio.show-hidden-devices.review.json` | [evidence/records/audio.show-hidden-devices](../evidence/records/audio.show-hidden-devices) | `64560028dfaad3202ed014c19db77668614dd0b874f1feb790d093fb26339b3c` | `e72423c7fa0b7972a43fa0d15baad6b470cca0f7de053480c53fcaa8a01b4379` | 5 |
+| `audio.disable-beep` | validated | Class A | `research/records/audio.disable-beep.review.json` | - | `08615346ed20bfb8d3ebab72903df3f0b8798e90d191d4f102942ac22f0279db` | `14a92712c7818ff25606c2db321cc3e62745b0e18fa4f469230f93dd4a1c9fda` | 7 |
+| `audio.show-disconnected-devices` | validated | Class A | `research/records/audio.show-disconnected-devices.review.json` | [evidence/records/audio.show-disconnected-devices](../evidence/records/audio.show-disconnected-devices) | `b0a675d73f40682496c7cd9f0fc7109b54b82c4d58192c6a1b7b11695255ad27` | `2a472c00bb66514035d3bae1cb6dafc44f22d63d5726d8cbab2aeadf8c97cafa` | 6 |
+| `audio.show-hidden-devices` | validated | Class A | `research/records/audio.show-hidden-devices.review.json` | [evidence/records/audio.show-hidden-devices](../evidence/records/audio.show-hidden-devices) | `ffc9127c2bea6845724722f84c32535f023cb38969aed52c2b1a6d9d87c80ebd` | `e72423c7fa0b7972a43fa0d15baad6b470cca0f7de053480c53fcaa8a01b4379` | 5 |
 | `cleanup.disable-reserved-storage` | validated | Class A | `research/records/cleanup.disable-reserved-storage.review.json` | - | `b27b9ecea8124ff9cbc8e8d40498e989811b77b3c6735de8e9b1c56c9d4e49b5` | `38045da954cd3df152e636fb9f75ed51863a91128a616a8cdd11de5e808e94cc` | 5 |
-| `developer.docker-performance` | validated | Class A | `research/records/developer.docker-performance.review.json` | - | `3401b412d7d00b2c1fc485ef44b79b3387608b259dcf862d13a6d76e79e5a66f` | `4116db403251bcae2491263f180f63ea1e3322d6f7339a387bb312b4f52512e3` | 3 |
+| `developer.docker-performance` | validated | Class A | `research/records/developer.docker-performance.review.json` | - | `3cba81ca53b5e6fc221e45faecfa41fc0ec2e589e4cc5e0bb2f90475038ed52b` | `4116db403251bcae2491263f180f63ea1e3322d6f7339a387bb312b4f52512e3` | 3 |
 | `developer.dotnet-telemetry-disable` | validated | Class A | `research/records/developer.dotnet-telemetry-disable.json` | - | `e29123f96673fc0f4e4b303715ee95dcbf1695625da99c39db41f91227c64040` | `8cf161bf69c445951b3ac5542d837ffdcb6ddc650435e7a1e2cfc38262d290fa` | 6 |
 | `developer.enable-windows-long-paths` | validated | Class A | `research/records/developer.enable-windows-long-paths.review.json` | - | `b5976256625d522293340b22b02df40a2dbf06223e6edb4cbfe254909b113bae` | `2410806f637babee5d1c5772564e53e19775b84032fc82ed7dd54dd59cd1a04d` | 6 |
 | `developer.nodejs-performance` | validated | Class A | `research/records/developer.nodejs-performance.json` | - | `b973249a6c98ff23ed6d702a4fd6897340cec4051c403628ee12fee80874665b` | `af253cfdcd4dc39f454bcbd5e83bf02e9e24f247591367bf3c05f3627a59d2d4` | 7 |
@@ -132,15 +132,15 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `explorer.disable-low-disk-space-warning` | validated | Class A | `research/records/explorer.disable-low-disk-space-warning.json` | - | `8b3860d8b78a094a67a096822bd9b451eff2c958805cfdcc52972d8d319f1c81` | `1bf3b6457934385b202b41f209d35413cecd63880b3267370e3a2d78fc74851e` | 6 |
 | `explorer.disable-taskbar-chat` | validated | Class A | `research/records/explorer.disable-taskbar-chat.json` | - | `460a4238cf6a9d68fb77144b747a1dffe19fdb08b82a9ec0f4b61a9ffc5d9579` | `ed61439963864e6db81c6009f6c195b5d0b24c89637536b6bf1a58891909b375` | 7 |
 | `explorer.enable-explorer-compact-mode` | validated | Class A | `research/records/explorer.enable-explorer-compact-mode.review.json` | [evidence/records/explorer.enable-explorer-compact-mode](../evidence/records/explorer.enable-explorer-compact-mode) | `2d81ded8a2e7b0792113c2c6c056028f379f24003274fd4b9b63b1642f65217b` | `24e88dc1b3013118d45356b89cdc65f43796fabdeda810c803dadf748081aa14` | 7 |
-| `explorer.hide-empty-drives` | validated | Class A | `research/records/explorer.hide-empty-drives.review.json` | - | `e269508eda28ce0639bc7daa0c2d32684d9457591e1e788104d2d835013884b3` | `e79b104805dbb1108ba956f7f4d027298052bc0d6111696788d3f6a655211c8e` | 7 |
+| `explorer.hide-empty-drives` | validated | Class A | `research/records/explorer.hide-empty-drives.review.json` | - | `4d99ea362c824ec5ecac1221254981d107967141ad4f538377fe68616880ee44` | `d0906ab87710c1cbd2f3500d5a7b982e8d31ec3c6df55702157ba5f5d7153185` | 7 |
 | `explorer.launch-folder-windows-in-a-separate-process` | validated | Class A | `research/records/explorer.launch-folder-windows-in-a-separate-process.review.json` | - | `40cffc7666da2e533790141d708203ada2241a9a5d33bfd5ba62e90c5b71b7cb` | `859946a184d0123a416da470ec985fc6fdc0b5fa396c21b7397d8b3adcbe26a9` | 7 |
 | `explorer.show-compressed-and-encrypted-files-in-color` | validated | Class A | `research/records/explorer.show-compressed-and-encrypted-files-in-color.review.json` | - | `346ab6924b125c56894a71f98ceb9b2c1fa28c9b7edde916f25438ae02aad54a` | `c77356cf86f54a6860b1937eb2ae6810dea916350a203431210badeaf939dea9` | 7 |
 | `explorer.show-drive-letters-first` | validated | Class A | `research/records/explorer.show-drive-letters-first.review.json` | - | `99655fdb3d5e04188784bc7f340ef66bd34fda455be4c3f19b7c798c685f868b` | `baf2473e0898e833fc644186486a873fd54e0ba790c1a9d6d0c4274841b17205` | 7 |
 | `explorer.show-file-extensions` | validated | Class A | `research/records/explorer.show-file-extensions.review.json` | - | `140adbb0089a95c0aa24dc769b40551aea7c429cabc907affdb561f0d2d8defa` | `c0ab1df7ea86312db7583d987c675bd08e5e5060b09ee6f2c329580c21442fe1` | 7 |
 | `explorer.show-full-path` | validated | Class A | `research/records/explorer.show-full-path.review.json` | - | `32f2718fc442503bc202cc44c019600f55b509967b80b1d00706d5d63320affc` | `106fe757142a0c7cbff6aa5312969df858275f03d2ddae2b9c5c8f28e1bea860` | 7 |
 | `explorer.show-hidden-files` | validated | Class A | `research/records/explorer.show-hidden-files.review.json` | - | `74dc2d6636638c04f55a500cb98126fd8795b9a59c75d64c899f607602df9c62` | `fd23a3c986354f63443020e98f7962b870c93f9c37c4ec6ad85ae4841af73d7d` | 7 |
-| `explorer.show-info-tips` | validated | Class A | `research/records/explorer.show-info-tips.review.json` | - | `f1f2003ca5b6b105efb715a00789c02cc4e365839d47df9fb99d16862028da3c` | `753969c995f83f96cc8fa5b0bb20a2368c9a69ce4aafb0e129d88e3d8e65d677` | 7 |
-| `explorer.show-protected-operating-system-files` | validated | Class A | `research/records/explorer.show-protected-operating-system-files.review.json` | - | `1ee04e73705c620dd62a3f787d8fb19ad2a329ef33d0b5a6cfc4e911c8d628e9` | `31b3f5fdbffe3e26f331c0c797c31df76af16d312793d1da9ce42395165f88da` | 7 |
+| `explorer.show-info-tips` | validated | Class A | `research/records/explorer.show-info-tips.review.json` | - | `4bc260363e77a9311e6952af2d7fbd05022da5d4c3548a82d6b00f95ab7eaafa` | `7ad4d335485321a87e8d0b6acffd8615d2a9f5935dd3d00cc3cebe31316fec4c` | 7 |
+| `explorer.show-protected-operating-system-files` | validated | Class A | `research/records/explorer.show-protected-operating-system-files.review.json` | - | `f29409cf08c0d89c913dad31877da3e1476c7630855a3a2012ff5749d23bbc8e` | `cba707e8f0d4cc6c3376f37e108d33984d6c35ea6e4c9ebf688d420797a6a76c` | 7 |
 | `explorer.show-recent-items` | validated | Class A | `research/records/explorer.show-recent-items.review.json` | - | `9ca42a927ca33fffaf7055ae72486c7cd8e551f6622bdf40e32fee4d3a00c37f` | `c44407d4f3adb3f35449fd082f4ce2033ccd8d567f0b0a7f7be91b03b8191023` | 7 |
 | `explorer.show-status-bar` | validated | Class A | `research/records/explorer.show-status-bar.review.json` | - | `ae7cf26850b877d8108fe6d80751563136236b3b16f3d0f4066b90d271acc72a` | `d5ceb59cacb9577e1e94c743045a1887788da879a6ca9f1f66f8f6243a580fd7` | 7 |
 | `explorer.show-type-overlay` | validated | Class A | `research/records/explorer.show-type-overlay.review.json` | - | `94b4ceed507c0971cb6f06e5a94af3ed0d157f65a888c1a7a596c0e53ecb1d53` | `b1c96dcc8c6b59966c9aee8953269dddece83c0e96461b0766e386c3dad972a7` | 4 |
@@ -203,7 +203,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `power.control.hibernate-enabled-default` | validated | Class B | `research/records/power.control.hibernate-enabled-default.json` | [evidence/records/power.control.hibernate-enabled-default](../evidence/records/power.control.hibernate-enabled-default) | `29a701c0cb3a9440b7669e7f3810feec0275b25f739fe48fd27ee0fe9faf11a3` | `4b6b5426cee9abeb3f568710619525a4a70fbffa9d5d7082863c9ac7c8d90916` | 9 |
 | `power.control.lid-reliability-state` | validated | Class A | `research/records/power.control.lid-reliability-state.json` | [evidence/records/power.control.lid-reliability-state](../evidence/records/power.control.lid-reliability-state) | `408e7f238b1b6c1bd86db9b2d73669bb08ac8ab90f6bcdb153e3b7dbe60183aa` | `568cda6c5db740257e809b7d530fe6dbdf2fc7e4f10b9fc3182beec481c0be8e` | 7 |
 | `power.control.mf-buffering-threshold` | validated | Class A | `research/records/power.control.mf-buffering-threshold.json` | [evidence/records/power.control.mf-buffering-threshold](../evidence/records/power.control.mf-buffering-threshold) | `9ba5dfad998963d026b119a2b618c43dc2157a012a3c32a01e37ec01c4ab2c4b` | `76b19ee2eb617fdf751f3fe4bc3482b147ae62e713c61c3ad07b0539bdbe5ce2` | 9 |
-| `power.control.perf-calculate-actual-utilization` | validated | Class A | `research/records/power.control.perf-calculate-actual-utilization.json` | [evidence/records/power.control.perf-calculate-actual-utilization](../evidence/records/power.control.perf-calculate-actual-utilization) | `cb76602bd3b95b9ced8c8638be756bb74cc772715e01c9cb3d4a1ba3a31f119a` | `0b9db986096b363ddb7a503bdd24202f4363bfe219e159ed604e8ce68e2ab572` | 9 |
+| `power.control.perf-calculate-actual-utilization` | validated | Class A | `research/records/power.control.perf-calculate-actual-utilization.json` | [evidence/records/power.control.perf-calculate-actual-utilization](../evidence/records/power.control.perf-calculate-actual-utilization) | `df44f34aade574727b98ca466d9f7208405e53bc6491848b98fabd0676561374` | `0261860b496274ac68871fe163eb69dffd7049c3886ffd09894297a57e97e3d3` | 10 |
 | `power.control.timer-rebase-threshold-on-drips-exit` | validated | Class B | `research/records/power.control.timer-rebase-threshold-on-drips-exit.json` | [evidence/records/power.control.timer-rebase-threshold-on-drips-exit](../evidence/records/power.control.timer-rebase-threshold-on-drips-exit) | `e35cf973a70dbc1a578a37938e20a200ab69f0a8d20c4f2d5bf6b6a9b311bfa5` | `54f7d729b7c430c4d8fa52ccb91256651e35c189b6c788691161084ffad23095` | 10 |
 | `power.disable-cpu-idle-states` | validated | Class A | `research/records/power.disable-cpu-idle-states.json` | [evidence/records/power.disable-cpu-idle-states](../evidence/records/power.disable-cpu-idle-states) | `0c4938318a9b502144c0f1ab5ed5ad201155466ae668ab8c1c3b654dfb294bb0` | `1798640a1a75847caf8a5c8caa6949c387e8118510e6cf57d7b76f44ed6a5a3b` | 14 |
 | `power.disable-cpu-parking` | validated | Class A | `research/records/power.disable-cpu-parking.review.json` | - | `d28533ca569b9bed1bfb608de5b9ace2541c32deba39a76c0162649aa2672ede` | `1e07982a5d49d800812250f38700512f25a454be1abcd9404d0d02d4850c24dc` | 5 |
@@ -243,7 +243,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `privacy.disable-diagnostic-data-delete` | validated | Class A | `research/records/privacy.disable-diagnostic-data-delete.json` | - | `cfbd69551bc369d5d1a319254078b2121a207674be445e866a8cce004d7363cd` | `758ab6e31957909c0baecd80045c77f2c95499c36369dbaaaed7c287bba0d3ab` | 5 |
 | `privacy.disable-diagnostic-data-viewer` | validated | Class A | `research/records/privacy.disable-diagnostic-data-viewer.json` | - | `f26afa0f087707ab605e8118600f2320e323592869e34b0c27960a48720df042` | `96ac9b4f63622597541742c5b38ca6ceea02300ff0bd3e9b9abc6f5e098785cc` | 5 |
 | `privacy.disable-edge-search-suggestions` | validated | Class A | `research/records/privacy.disable-edge-search-suggestions.json` | - | `36cc8cbe4362bc804b20053cb89e12a9a6c3266f96c409bcf56e0b3a78377adf` | `6c1bb8a9343d5171bea46a5a7715ff1ccb6c3d46f59fdbc4fea9825a8f7a36f3` | 5 |
-| `privacy.disable-feedback-notifications` | validated | Class A | `research/records/privacy.disable-feedback-notifications.json` | - | `557d21375cbfd0fd18a2c24a8723e0834de555e77671ae8c48c5a700db2f6c27` | `65a1ebac483294594d33f9fdbdb2f3a0c7a7b570c3e8582b23ff0890c3678626` | 6 |
+| `privacy.disable-feedback-notifications` | validated | Class A | `research/records/privacy.disable-feedback-notifications.json` | - | `5685d2d2022513ff1cb81190bec8361ce7d195ad436732a06a2ff2617f578c13` | `a6c0ef84ef66179ce152ce37bce08d29c9b4e7940c76c42636e2754e66345627` | 6 |
 | `privacy.disable-file-history` | validated | Class A | `research/records/privacy.disable-file-history.json` | - | `2e1ab18bc1aec0f94d99fa403a9a8bcc4cbc60dca14da1c8983e1998b387a235` | `c69a8a8bf45705c92acd3c117a6c42ddc645f270581a258404a4df2064c2532c` | 4 |
 | `privacy.disable-find-my-device` | validated | Class A | `research/records/privacy.disable-find-my-device.json` | - | `08cecfffdc5124e8f52bf77fb6dc624f035a545d2453f3b49b9bd0ecd4642acc` | `197354cdf88e89d3fd2b65ab43a1d3db65be9188bb96ec25df5bbfa0a7a2bc16` | 9 |
 | `privacy.disable-font-providers` | validated | Class A | `research/records/privacy.disable-font-providers.json` | - | `048c0ee7cfd43d6419cde73faad8b0865302ed2ce86e13573492d6bceea919d3` | `8374e88d7457726cc2546b6539c7b5ffb1515b2bcd3d09ff58cbe0b25c320c97` | 5 |
@@ -289,7 +289,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `privacy.turn-off-sync-by-default-allow-user-override` | validated | Class A | `research/records/privacy.turn-off-sync-by-default-allow-user-override.review.json` | - | `21caafc64e8eaa874a0a9d9f6e26d7db8f8db48f04ea31de2b3fda54e1619c96` | `79be8fdabf680a85e5db709d3c97bd5dbc589c52990ff396e9bde9cea357da47` | 4 |
 | `security.disable-defender-sample-submission` | validated | Class A | `research/records/security.disable-defender-sample-submission.review.json` | - | `1c4f88f89ec57efe06f723b90b77f75813ed316485f62bbfb0006f13c407c48d` | `509ebb8c7c25ac261a2e72875d66174a7b6afc8dd5b794d55b6dd947f3975daf` | 8 |
 | `security.disable-downloads-blocking` | validated | Class A | `research/records/security.disable-downloads-blocking.json` | - | `c783695d572e63f99084b03a25dc1a7d3279e8555d3da0264fb2880758c2986c` | `ba0d365c30bf57640ee88702312ac7a59204ebd819b7bbf0fc3f26e296296cbd` | 3 |
-| `security.disable-enhanced-defender-notifications` | validated | Class A | `research/records/security.disable-enhanced-defender-notifications.review.json` | - | `920e701cb7c44b73c841a30c207655644270f386f1abc48342550621758814bb` | `fbc4863baa9ce3d49d4bb3f0fdbf319d98fe343d5abdc147792dd23887a67122` | 7 |
+| `security.disable-enhanced-defender-notifications` | validated | Class A | `research/records/security.disable-enhanced-defender-notifications.review.json` | - | `17ce24f5ecb40db9753ae3b1973e73757c6c796e823db85d8e7da167cab98f84` | `1ce63c05906dcf54d6c4b4dd3b77adb7e420317c47b65baec0e58b841aa05639` | 7 |
 | `security.disable-ntfs-encryption` | validated | Class A | `research/records/security.disable-ntfs-encryption.json` | - | `da2a953caf408567f71dead92b4a1c13d6e1c9ac4a1e071264e4fe230083bba1` | `cc6a733b27b1e5ec26c68b80a375bf3511f5f47559a359273c806c97d31703bf` | 4 |
 | `security.disable-p2p-updates` | validated | Class A | `research/records/security.disable-p2p-updates.review.json` | - | `c2b8e7cc97ae95f6b19424e962d2831e2fb0694606a6053f8e8206c317c9e5e2` | `8a8a50068b804b532c7b7560a7d75ec8e616505c2f8b24e6346e0d1e9e485460` | 3 |
 | `security.disable-password-reveal` | validated | Class A | `research/records/security.disable-password-reveal.json` | - | `7c827437f43d0ac89541dc34129438885e73155e018a1bf996969790af199370` | `380de269f686acdfdc3ab5702da3de397d95d9af1de279319f160b73448afa3e` | 4 |
@@ -305,32 +305,32 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `security.enable-sudo` | validated | Class A | `research/records/security.enable-sudo.json` | - | `5e9f8b6cc796091e7d02d1508a156b9534e510ca2328c37859e181e6398e7ae3` | `9e2e578c478ae13d3c0edaab30a7514b2002ea92457da6415d481a1fcda360cf` | 4 |
 | `security.hide-defender-exclusions-from-local-admins` | validated | Class A | `research/records/security.hide-defender-exclusions-from-local-admins.review.json` | - | `b4b0264f774dfbd764aba0f418f8c90c6e4d33a73178de953a8562a825408722` | `76801f1021c39491128b84eb6c3be7e44239b77a4f3a879b43e358f220b92f83` | 9 |
 | `security.powershell-unrestricted` | validated | Class A | `research/records/security.powershell-unrestricted.review.json` | - | `afa7fcb799097908a83160ec8fdce93d4b39e0fd5989eef38e78521883bb38ea` | `8e10e326d85ffe8d24c46fb9b03c91602d9e1903f415e058a378f3c7a823dabc` | 4 |
-| `security.threat-file-hash-logging` | validated | Class A | `research/records/security.threat-file-hash-logging.review.json` | - | `09a3e4a5617a49edbb6c4670561af0275f9a6497f1bd2209478be486ac2ba81a` | `788154f3727acf4d2fc6840748ec22f61281ba3fadabd723b643a915a143c388` | 18 |
-| `security.trusted-path-credential-prompting` | validated | Class A | `research/records/security.trusted-path-credential-prompting.review.json` | - | `3f0998078063b69bfbb08684a45cfb54bf7601c3b77a1ee5cbf77747b57f04a0` | `ae5e917510de732b46d4b1a01a5b07f3a1f4628836a965d8e4868beec2ef21b0` | 5 |
+| `security.threat-file-hash-logging` | validated | Class A | `research/records/security.threat-file-hash-logging.review.json` | - | `d1dc7aed785486a7c7c070cef866b9185240871be0f54f7fc20fd5275931d1d7` | `71a7fa70e80910be8723672f17386a8f5f834b9652385b835eb9ed4fa49267fb` | 19 |
+| `security.trusted-path-credential-prompting` | validated | Class A | `research/records/security.trusted-path-credential-prompting.review.json` | - | `6a586bd469d9a87f16ab0120f415f357fbce11def288eeb0e491343432d68646` | `0cdef2a2a5c5dfbbf2c690ddcc6b2dbd1f69abcd350569b81c836480e27a4767` | 5 |
 | `security.uac-never-notify` | validated | Class A | `research/records/security.uac-never-notify.json` | - | `de78416e7c440ab0dd0909015969a351dc87f4df77373a8abdc3a04cc3d9512b` | `366df240b3248cac81a2f142eaa2371b119439d10e85d9acb1b2119ec2e0942b` | 5 |
 | `system.aero-shake` | validated | Class A | `research/records/system.aero-shake.json` | - | `0756e3be0a820e5be228833439338e51634b34138deed6dcb383eb2303e9ce36` | `a807a38ae0c8a763913f15b2b8cbf30a5d214016dcd4f429a27d5e4b7f415c8f` | 4 |
 | `system.bsod-disable-auto-reboot` | validated | Class A | `research/records/system.bsod-disable-auto-reboot.json` | - | `caad063ad9e05af7024b6d17bb97022394c2476c83defad012e558fe0b9b6c25` | `f8609ba2373a830153a421a7285d217df2fe8f151056b230befa26313248974e` | 4 |
 | `system.bsod-display-parameters` | validated | Class A | `research/records/system.bsod-display-parameters.review.json` | - | `8e06bc36cc927b157ed8e23f32f128256ceb90bb6f5efffae37dc2c5d2a75635` | `b2ce7798364d31e9729d34349272bb3af96056e1c1f685c8976618575d395acb` | 5 |
 | `system.disable-app-archiving` | validated | Class A | `research/records/system.disable-app-archiving.json` | - | `99dc160c94f3a8224e4ec1abf6e8e7896adb0d1e7d38e53b9f5935437aa7e386` | `afdb4b877ffedafc99ba33c3920527d6e107739fd2b87bddc5db15141bcc15c1` | 4 |
-| `system.disable-auto-maintenance` | validated | Class A | `research/records/system.disable-auto-maintenance.review.json` | - | `6a0ca786ab932a9feb01208db0d0568b4b98a5d60fd009f84a076d5fca5c3652` | `dcad2e9b8ac4218d210773646aa8c9db5ef46c5d54732c37417810c6613bc623` | 5 |
+| `system.disable-auto-maintenance` | validated | Class A | `research/records/system.disable-auto-maintenance.review.json` | - | `7de94066ac81b8c9e9df94ccd1fc2e2ede69e25066fb83e142145734a7e4cff8` | `810a2c0b467e482cffe418f958f017361d555aad33e99f628c749e6bf1ad1bf6` | 5 |
 | `system.disable-background-gp-updates` | validated | Class A | `research/records/system.disable-background-gp-updates.json` | - | `8a7229ad39b124f9bc86111785ec4ffc208e990ab66d65ba282d60ec36322f0e` | `fa78a9e745e2b440cc53c15df34266c642f1399be2b8ad35e2ac74eef6bec02f` | 4 |
 | `system.disable-clipboard-history` | validated | Class A | `research/records/system.disable-clipboard-history.json` | - | `46119666fe4d3345abbb11ed6ccf0ee545f6eecdcbaa96e01e75aa37b5381713` | `3873dcaf3d97e6db1a8524d8fd37d2b3b7e5fdae1fbbe7c04bacd9aa62726e8e` | 5 |
 | `system.disable-clipboard-redirection` | validated | Class A | `research/records/system.disable-clipboard-redirection.json` | - | `09e38e617795a6d8713b5ad7d4343600019e55cfef2a62a88f71b7be433d0fb3` | `5f0a6893f778a04c34ad446c4eeaf6c0cf923c13d49a7de6d0995fa3027af6f2` | 4 |
-| `system.disable-fullscreen-optimizations` | validated | Class A | `research/records/system.disable-fullscreen-optimizations.review.json` | - | `73d45b60623aa214b6148aa8d112f5330fee2546cd4ae0637823d3c65c18d591` | `5959b250b0a250a283cec605a4d93bdd5e940bd9ca7336a851358de5bcb055a4` | 7 |
+| `system.disable-fullscreen-optimizations` | validated | Class A | `research/records/system.disable-fullscreen-optimizations.review.json` | - | `79bb869833b28cbd1869dfe8422abfbc995ca1dbcfd6dce787be7f0550c5d0a5` | `5959b250b0a250a283cec605a4d93bdd5e940bd9ca7336a851358de5bcb055a4` | 7 |
 | `system.disable-game-recording-broadcasting` | validated | Class A | `research/records/system.disable-game-recording-broadcasting.json` | - | `2e99c11d5b14e1b4e426b001be39e4fb5225e5bfc510030611295204eae16615` | `498bf5612127239da3ba465df46e2c63a1ea49b394ae4984d45d06bb873189af` | 4 |
-| `system.disable-jpeg-reduction` | validated | Class A | `research/records/system.disable-jpeg-reduction.review.json` | [evidence/records/system.disable-jpeg-reduction](../evidence/records/system.disable-jpeg-reduction) | `86c3255e7d8dac3bf29c41f7e5522473426dd4783eaaf0fe829218ff3e494539` | `0a72b0179f85d92fa1a47484c2e44a234a76699c5511c3af47efc0b3e41a4c69` | 8 |
+| `system.disable-jpeg-reduction` | validated | Class A | `research/records/system.disable-jpeg-reduction.review.json` | [evidence/records/system.disable-jpeg-reduction](../evidence/records/system.disable-jpeg-reduction) | `6afba0f5e9dafdc798d4327e62e817e525963a7d2560270548f5666be8290835` | `0a72b0179f85d92fa1a47484c2e44a234a76699c5511c3af47efc0b3e41a4c69` | 8 |
 | `system.disable-restartable-apps` | validated | Class A | `research/records/system.disable-restartable-apps.review.json` | - | `76a15abd732bab7e6b470ac61aecf388ea5c2f0799b647c6d11e7ea425c52a86` | `50472fbf27cbdd82fc08a85b4a746a72df24b1de28fffdce1b2df52a8a9ab5ee` | 6 |
 | `system.disable-search-highlights-policy` | validated | Class A | `research/records/system.disable-search-highlights-policy.json` | - | `b94e8d3895eba6275e2bfa8c7dcca6bf5cd9c21609e64fc3c67c5457eef1b3bc` | `10f0f43009d6e7cc1216911fe900a9731e433ce0457f6472c8ee77f498790601` | 4 |
 | `system.disable-search-remote-queries` | validated | Class A | `research/records/system.disable-search-remote-queries.json` | - | `b3d5be9597e2df42e03fa25908b184ef5d682091c200a7f54be957dd7dcd5e41` | `d9f0350c6921d8cdf511de9eaa07f4b2ff56dade9484a259711fed422c92c722` | 3 |
 | `system.disable-search-web-results` | validated | Class A | `research/records/system.disable-search-web-results.review.json` | - | `983e3e8a9ce46890ef1a0952638abae20334d5a8a0822254d39e7fabefbcc6d4` | `cd09ef942c530b36a4e9c68d082495c1dfca0656c73e7861aa232a56f0de9f1a` | 3 |
 | `system.disable-shortcut-arrow` | validated | Class A | `research/records/system.disable-shortcut-arrow.json` | - | `4c6f8280145091208f8acfe87b6f3c5e5457c896425301ae5c804f1be0415766` | `2373f3c7e08b1996d694cf6304d18a09d4928124fc979cee3f243cdf2cd826cc` | 4 |
-| `system.disable-startup-delay` | validated | Class A | `research/records/system.disable-startup-delay.review.json` | [evidence/records/system.disable-startup-delay](../evidence/records/system.disable-startup-delay) | `68142ff7d46241ffc238099a3f513c2d1617b3e07b0ffda2ace00b30a814c39c` | `b2559024b692e3f3cc51a4b974a1adc7af0fc929a91ee7ed9925367f6db654e6` | 7 |
+| `system.disable-startup-delay` | validated | Class A | `research/records/system.disable-startup-delay.review.json` | [evidence/records/system.disable-startup-delay](../evidence/records/system.disable-startup-delay) | `6bf2602d3774db2490e987044b8c33fd210d943c6eb666631e455d3352825f53` | `a04422def327c75e4a13a9eb66c754dd0ddcda21928004381204978a24bf7e30` | 7 |
 | `system.disable-storage-sense` | validated | Class A | `research/records/system.disable-storage-sense.json` | - | `d2c77f5c8053c8509081615178680e3548f49d915ddaa4a9a936f9a70313bab8` | `d21371525f833053848673f1f915449f31afb25da4b09d01a83baa3390591854` | 4 |
 | `system.disable-storage-sense-temp-cleanup` | validated | Class A | `research/records/system.disable-storage-sense-temp-cleanup.json` | - | `ab9c6562faf098a53554912bf4982dd503a6576c71397db47f6ddff78b3e8573` | `95bc2c67f3bf983b5dbaf1f0de19dacfedadf9bc70206a2aca48e18a6696a1fd` | 4 |
 | `system.disable-store-open-with` | validated | Class A | `research/records/system.disable-store-open-with.json` | - | `c73eb4a0eff7b4202246d52ed65cc4a3125dda73b2ffd45782f30ead134ba6e8` | `4704c33da1fc101e0da6e4e4b4207c437de7738c97f70e5fa40d0d83d96a1704` | 4 |
 | `system.dwm-disable-overlay-min-fps` | validated | Class A | `research/records/system.dwm-disable-overlay-min-fps.json` | - | `42cb0a5fc34a5c9a4614c657036d905cbceff52187345733e7cdd29d87d74e55` | `ebc882f045451192746490ec1a1465d56e05f7f996836dcfe4233115edbfca7f` | 2 |
-| `system.enable-game-mode` | validated | Class A | `research/records/system.enable-game-mode.review.json` | - | `4711f8eeed93763257ea422bb5c40ea2062487b6582c074980a6540d2feb06ac` | `d5ed6de3ca05c907ea31ce7a12f91495342c4032b4891e6ebd240a03895f6501` | 6 |
-| `system.enable-hags` | validated | Class A | `research/records/system.enable-hags.review.json` | - | `c81bd717404022adf5a025a0c8945b10b3afc8e5853100c7515ffc31917eb98e` | `6c285a06ea58dcdae870aff3fdb2721f76c5c71cae5ac30195ac31fad28559c5` | 7 |
+| `system.enable-game-mode` | validated | Class A | `research/records/system.enable-game-mode.review.json` | - | `56b97bd16620fff1d68f6be6f1947ca06b04ca55178fa4758092c411e0dca615` | `b9664a11e6ff99ba9e4b70001cfe63b942fc45e27036b5b2b637bb5fd346d7e2` | 6 |
+| `system.enable-hags` | validated | Class A | `research/records/system.enable-hags.review.json` | - | `6d32d68508ac0e623d588b20ac20f825dc660a6f8052f21576f2c8f788692cbf` | `b200b34aa082f71637ab80ef14845a3258b502f620cffe3c4b6e13f642afb5b0` | 7 |
 | `system.enable-indexing-encrypted-items` | validated | Class A | `research/records/system.enable-indexing-encrypted-items.json` | - | `afb436a90a5dd1e6f8b7279f1305d52b35fadf02f0cf741ae0d8aa0a27ae5123` | `2d8e2f73bef48f5c225b93406c5963cbf2d66c538cc9f6125fb87906a648f73d` | 3 |
 | `system.executive-additional-worker-threads` | validated | Class A | `research/records/system.executive-additional-worker-threads.json` | [evidence/records/system.executive-additional-worker-threads](../evidence/records/system.executive-additional-worker-threads) | `ae5c22a05e6ab0cfc0820e1e1f9c380e0580213556fc4cd375134335770f2182` | `016eaf359891f9e7c6c7b47b758b55531325023dd59bc744a94773d4f7a40490` | 14 |
 | `system.executive-uuid-sequence-number` | validated | Class B | `research/records/system.executive-uuid-sequence-number.json` | [evidence/records/system.executive-uuid-sequence-number](../evidence/records/system.executive-uuid-sequence-number) | `f3bfb3c37b4a45327c9a320ac5aa154ad7d3749ac62c3abeca5c5ba3ec7da8bf` | `4d0f3c830f388993c9206f2af6e744651e57ec2c3e1ef71e2db09a0e63f581ef` | 24 |
@@ -339,11 +339,11 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `system.graphics-tdr-level` | validated | Class A | `research/records/system.graphics-tdr-level.json` | - | `2bd59d830cbb6c5d01d0510ca9ffed07cc533c23c7bce3d511b76197325cc913` | `51ac3d035a9005a8668aba311d68be1aa3a5f3f45848950ccad2a10ce18ce893` | 2 |
 | `system.graphics-tdr-limit-count` | validated | Class A | `research/records/system.graphics-tdr-limit-count.json` | - | `39417aebfc11dbd570baec2958cde834d0e6190329d2201c326e99413ec8d748` | `2ee804bb7e64481a5a3773919722ff1ed630908069e4ca7331a0a4241447c3cb` | 2 |
 | `system.graphics-tdr-limit-time` | validated | Class A | `research/records/system.graphics-tdr-limit-time.json` | - | `e4c9434719346c95f2c149acceffc13d7b0f9a04d6541abb34fed9d7e031c9df` | `98cb2125e46af1775baf3f22861d238f5cc80bf0751096d96bcb21a6029cbcb2` | 2 |
-| `system.kernel-thread-dpc-enable` | validated | Class A | `research/records/system.kernel-thread-dpc-enable.json` | - | `82c8dec5ae028196b84cb079e31c8dbbbf80b80bfef9c48dacf086ae2a94c25b` | `88f1d508dd57862ee200a0c9b5980d3b1c4fff8cb505fb5fceddba38fcf71acf` | 5 |
+| `system.kernel-thread-dpc-enable` | validated | Class A | `research/records/system.kernel-thread-dpc-enable.json` | - | `520339fd9d7aadac6d0e9df3756f07bc64a9754e526b0423b319354137ffb248` | `88f1d508dd57862ee200a0c9b5980d3b1c4fff8cb505fb5fceddba38fcf71acf` | 5 |
 | `system.kernel.disable-exception-chain-validation` | validated | Class A | `research/records/system.kernel.disable-exception-chain-validation.json` | [evidence/records/system.kernel.disable-exception-chain-validation](../evidence/records/system.kernel.disable-exception-chain-validation) | `e97442ef25228a228ededf717585ab3fbcae1c0e71bb033d2e15c1f1b699ccbe` | `6e8d2adff13d710dbd8a0ef85e5fc8f02232ccbdeb53f0a7fb83a1f9a50b047c` | 5 |
 | `system.memory-clear-pagefile-at-shutdown` | validated | Class A | `research/records/system.memory-clear-pagefile-at-shutdown.json` | - | `4331d1e9ab7f670b73ec38c5f40e2c5d183d213046ffc5855fe3a43721669f38` | `c0619f3693f675de46f32461a8a30756fb8e7d543bb9e445fce8ea14cb3526e1` | 4 |
 | `system.memory-disable-paging-executive` | validated | Class A | `research/records/system.memory-disable-paging-executive.json` | - | `a2835218bbf2441ed4ab84424680bf75bd3a0cfbd3a39a5f0a7777e4f02b8f57` | `2d9f4ef5c03d53a84a052a54ee3ef9fed7eb35edd688ea0e832d0225afdfafd4` | 4 |
-| `system.memory-large-system-cache-client` | validated | Class A | `research/records/system.memory-large-system-cache-client.review.json` | - | `2c2773b8102b63e131d90ece74bc5e0d58828669e576cf804d7139989d1d0a1c` | `e6c7b375df3f43fb82890b956cf7740df58c08b3f10de5f7e783a227bdf5f24e` | 3 |
+| `system.memory-large-system-cache-client` | validated | Class A | `research/records/system.memory-large-system-cache-client.review.json` | - | `7383fce5882fb6c1eaa96b1a03034b40e8c0f05a33f233f3c671166b27cac904` | `ee34af9d0b85db65e4c29e81dee48df1c356024015796b4802722e5b7aedea8a` | 3 |
 | `system.memory-nonpaged-pool-dynamic` | validated | Class A | `research/records/system.memory-nonpaged-pool-dynamic.json` | - | `af5d882006ee3252bb4e5ea7950872c8ccb338eb59b75e2a495225c24a46e3c0` | `02b4f28bfae2e7c3e8c8b8e444b21582428ab9e6a5a5adf6b84400e5b39f77bc` | 6 |
 | `system.memory-paged-pool-dynamic` | validated | Class A | `research/records/system.memory-paged-pool-dynamic.json` | - | `cbdaf1cc30fcf49a4ec223904c78ec2e54e9bc2b719b8d1740a25c6daf35963f` | `c4d512cd38bd71f4e8779142cfbfee265551f8704570f3b068e299a3454fd9d9` | 6 |
 | `system.memory-registry-quota-default` | validated | Class A | `research/records/system.memory-registry-quota-default.review.json` | - | `529fd9c5c98ea7006bde8c44fe104f24d42984b42625c406da8be3eb1cc9dad0` | `166cb5b5e4cd4ce3f3131471609b9e9577d1fdd32a6d9f33fd32286a25753a72` | 5 |
@@ -352,7 +352,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `system.ntfs-enable-long-paths` | validated | Class A | `research/records/system.ntfs-enable-long-paths.json` | - | `89eaf4a8add4875c39d637389ac12e43524c460c00f9e82c8e48956b6a2eb724` | `af1b72b561e2e6eccc81d74d7898548f35bf09522ca689d570692c53b4be23b0` | 4 |
 | `system.ntfs-reset-memory-usage` | validated | Class A | `research/records/system.ntfs-reset-memory-usage.json` | - | `3897ca33e286aeabcfe482dbc69e11d4659828ac7225e1ee198d788c3c4259e7` | `e256b587fb1a79659e9f3f2202793b0b0e878e5274504d59392895bef146d035` | 2 |
 | `system.ntfs-reset-mft-zone` | validated | Class A | `research/records/system.ntfs-reset-mft-zone.json` | - | `ef935ff0a7cdbd7de8b006022595be43828a348da584a79e0c5a9b9ec83afd06` | `c2aa8534b98d21564376dcacb3c3e7ed4d3784855025a59ecbe03ec825674b09` | 3 |
-| `system.priority-control` | validated | Class A | `research/records/system.priority-control.review.json` | [evidence/records/system.priority-control](../evidence/records/system.priority-control) | `23b36a6e9c2eb376baac4a0fc7987048ed66040b277972bbe1666715bb9ae7f0` | `03ae9e19b499a2dfe4bc612b944160e051589db0f3f02296bdacd9e7fb89e345` | 9 |
+| `system.priority-control` | validated | Class A | `research/records/system.priority-control.review.json` | [evidence/records/system.priority-control](../evidence/records/system.priority-control) | `d2d20d7c1b2e2d05d809406efe7616703dccd6974b687e3b3132439614ee3d5d` | `03ae9e19b499a2dfe4bc612b944160e051589db0f3f02296bdacd9e7fb89e345` | 9 |
 | `system.reliability-timestamp-enabled` | validated | Class A | `research/records/system.reliability-timestamp-enabled.review.json` | [evidence/records/system.reliability-timestamp-enabled](../evidence/records/system.reliability-timestamp-enabled) | `0002a7a4e820734dad52bacdf2049fe9676080b06d90414374388124de1a337f` | `a87269c5f15ae317ecee3519b17286c0d411143b860e45e539a8f77264166f5f` | 8 |
 | `system.services.disable-bluetooth-audio-gateway` | validated | Class A | `research/records/system.services.disable-bluetooth-audio-gateway.json` | - | `df7acf607109ce63bab78822c1eb54d5d4b3939bc0c8e070b2437cfc0ede413a` | `6a510a0d0e11d3939a6f2f75990285e45ed34dfc295b4dcfe3bdbc6851968663` | 3 |
 | `system.services.disable-bluetooth-support` | validated | Class A | `research/records/system.services.disable-bluetooth-support.json` | - | `7e49d945b90e90b96678967a24e7875f90e7ba062d6ccc675609562246f077ca` | `2507ae7f0b9fa79ddcd7345acdaff02babc7cc0db6f0c664daa72185cd352a7e` | 3 |
@@ -840,7 +840,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `deprecated`
 - Evidence class: `Class E`
 - Source file: `research/records/privacy.disable-cross-device-experiences.review.json`
-- Source SHA256: `dc085c99a4fa1e7912af4c03ad0d4bf2c671421444fe18252383cdaee241129e`
+- Source SHA256: `6be9294e68371f9349ea3b7a1c9b31c7ac638ca94596bd7a71052d83b1394822`
 - Proof SHA256: `5812fc69743ede5e20a1e1bbc6821c9eced6705e7e1f4ab4b9b6f467d991fd62`
 
 **Summary:** Deprecated audit trail for the mixed cross-device preset model. The documented EnableCdp machine policy is split into a child record; the user-side CDP preset values remain opaque and are tracked only as implementation detail here.
@@ -854,7 +854,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `local-grouppolicy-adml-enablecdp` | `official-doc` | Local Microsoft GroupPolicy.adml EnableCDP help text | [evidence/files/external/c/PolicyDefinitions/en-US/GroupPolicy.adml](../evidence/files/external/c/PolicyDefinitions/en-US/GroupPolicy.adml) |
 | `app-privacy-provider` | `repo-code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs |
 | `ghidra-sharedexperiences-singleton` | `decompiled-pseudocode` | Decompiled Shared Experiences singleton | [Docs/privacy/assets/crossdev-SharedExperiencesSingleton.c](../Docs/privacy/assets/crossdev-SharedExperiencesSingleton.c) |
-| `guest-crossdevice-launch` | `vm-test` | Guest launch of CrossDeviceResume | [evidence/files/vm/crossdevice_resume_probe.csv](../evidence/raw/procmon/privacy.disable-resume/crossdevice_resume_probe.csv) |
+| `guest-crossdevice-launch` | `vm-test` | Guest launch of CrossDeviceResume | [evidence/raw/procmon/privacy.disable-resume/crossdevice_resume_probe.csv](../evidence/raw/procmon/privacy.disable-resume/crossdevice_resume_probe.csv) |
 | `vm-privacy.disable-cross-device-experiences-etw-qga-unblock-20260507` | `etw-trace` | QGA-first ETW stackwalk probe receipt | [evidence/captures/privacy-disable-cross-device-experiences-etw-qga-unblock-20260507.json](../evidence/captures/privacy-disable-cross-device-experiences-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507.etl) |
 
 **Validation proof**
@@ -1876,7 +1876,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `deprecated`
 - Evidence class: `Class E`
 - Source file: `research/records/system.services.disable-sysmain.review.json`
-- Source SHA256: `47d465e6b8bbff7d213ac0922668c02130c8776d724fc0d57a50e561d04f4156`
+- Source SHA256: `1cabbde1e7c157fa11ee10cbe95bef0b13acac2c82fa3336408978501992d6de`
 - Proof SHA256: `4de3a7df4980a70b5b8054c5affbe6d604891f9adbdb842e6380b5af6e15a71d`
 
 **Summary:** Deprecated audit trail for SysMain. Microsoft's Windows IoT Enterprise service guidance explicitly marks SysMain as `Don't disable`, so the current app's disable action is kept as reference only.
@@ -2825,8 +2825,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/audio.disable-beep.review.json`
-- Source SHA256: `6d8ec1e66a7e07ee63b2ccc0de667b30146fab7fbf4358e3334d626090ef2380`
-- Proof SHA256: `5b2fdb894230a9968ae5988951da38e4ed60333b008effa58bdae351929538b0`
+- Source SHA256: `08615346ed20bfb8d3ebab72903df3f0b8798e90d191d4f102942ac22f0279db`
+- Proof SHA256: `14a92712c7818ff25606c2db321cc3e62745b0e18fa4f469230f93dd4a1c9fda`
 
 **Summary:** Guest-side reversible probe on Win25H2Clean confirmed that HKLM\\SYSTEM\\CurrentControlSet\\Services\\Beep\\Start = 4 disables the Beep driver on this build. Microsoft service registry documentation defines Start = 4 as Disabled, so the app's write now has a machine-checkable contract.
 
@@ -2858,7 +2858,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Evidence class: `Class A`
 - Source file: `research/records/audio.show-disconnected-devices.review.json`
 - Evidence root: [evidence/records/audio.show-disconnected-devices](../evidence/records/audio.show-disconnected-devices)
-- Source SHA256: `8b34ab3438a2b1eff11156ae9854724cbc8579c12ad348591b69ab145fc7edf7`
+- Source SHA256: `b0a675d73f40682496c7cd9f0fc7109b54b82c4d58192c6a1b7b11695255ad27`
 - Proof SHA256: `2a472c00bb66514035d3bae1cb6dafc44f22d63d5726d8cbab2aeadf8c97cafa`
 
 **Summary:** The app writes HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowDisconnectedDevices = 1 to expose disconnected audio devices in the classic Sound control panel. Procmon captures on 2026-03-14 confirmed that rundll32.exe launching mmsys.cpl queries this exact value and reads both Data:1 and Data:0 when the value is toggled. A Ghidra headless pass on 2026-03-26 against mmsys.cpl also decompiled the handler that calls SHGetValueW and SHSetValueW for ShowDisconnectedDevices under the DeviceCpl branch. A focused v3.1 runtime lane on 2026-03-27 then re-ran the missing -> 1 -> missing cycle in Win25H2Clean, launched the classic Sound control panel, captured a WPR GeneralProfile placeholder trace, and ended with healthy shell state. That keeps the record aligned with the v3.1 contract without changing the underlying class basis: Procmon plus Ghidra remain the class-driving proof, and the runtime lane adds explicit rollback and VM-safe runner coverage.
@@ -2910,7 +2910,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Evidence class: `Class A`
 - Source file: `research/records/audio.show-hidden-devices.review.json`
 - Evidence root: [evidence/records/audio.show-hidden-devices](../evidence/records/audio.show-hidden-devices)
-- Source SHA256: `64560028dfaad3202ed014c19db77668614dd0b874f1feb790d093fb26339b3c`
+- Source SHA256: `ffc9127c2bea6845724722f84c32535f023cb38969aed52c2b1a6d9d87c80ebd`
 - Proof SHA256: `e72423c7fa0b7972a43fa0d15baad6b470cca0f7de053480c53fcaa8a01b4379`
 
 **Summary:** The app writes HKCU\\Software\\Microsoft\\Multimedia\\Audio\\DeviceCpl\\ShowHiddenDevices = 1 to expose hidden audio devices in the classic Sound control panel. The repo preserves a normalized Procmon summary from the 2026-03-14 capture showing rundll32.exe querying this exact value with both Data:1 and Data:0, while the checked-in Procmon markdown files are placeholders because the raw PML is off-git. A Ghidra headless pass on 2026-03-26 against mmsys.cpl decompiled the corresponding SHGetValueW and SHSetValueW handlers, and a v3.1 runtime lane on 2026-03-27 cleanly applied, launched the Sound control panel, and restored the value on Win25H2Clean. That keeps the record aligned with the retained v3.1 cross-layer contract even though no primary Microsoft documentation page for the DeviceCpl contract was captured.
@@ -2979,7 +2979,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/developer.docker-performance.review.json`
-- Source SHA256: `3401b412d7d00b2c1fc485ef44b79b3387608b259dcf862d13a6d76e79e5a66f`
+- Source SHA256: `3cba81ca53b5e6fc221e45faecfa41fc0ec2e589e4cc5e0bb2f90475038ed52b`
 - Proof SHA256: `4116db403251bcae2491263f180f63ea1e3322d6f7339a387bb312b4f52512e3`
 
 **Summary:** Docker officially documents the WSL engine setting for Docker Desktop on Windows in settings-store.json / admin-settings.json as wslEngineEnabled. The app now writes that documented settings-file surface instead of the old UseWSL2 registry value.
@@ -3391,8 +3391,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/explorer.hide-empty-drives.review.json`
-- Source SHA256: `e269508eda28ce0639bc7daa0c2d32684d9457591e1e788104d2d835013884b3`
-- Proof SHA256: `e79b104805dbb1108ba956f7f4d027298052bc0d6111696788d3f6a655211c8e`
+- Source SHA256: `4d99ea362c824ec5ecac1221254981d107967141ad4f538377fe68616880ee44`
+- Proof SHA256: `d0906ab87710c1cbd2f3500d5a7b982e8d31ec3c6df55702157ba5f5d7153185`
 
 **Summary:** Observed Explorer runtime setting for hiding empty drives. Microsoft Learn describes hideDrivesWithNoMedia as a File Explorer Classic advanced setting, the 25H2 raw registry dump lists HideDrivesWithNoMedia under the current-user Explorer\\Advanced branch, the app now writes the same current-user value through VisibilityTweakProvider, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\HideDrivesWithNoMedia with both Data: 0 and Data: 1 after Explorer restart.
 
@@ -3412,7 +3412,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 
 | Field | Value |
 | --- | --- |
-| Source | [evidence/files/vm/hideemptydrives-result.txt](../evidence/raw/procmon/explorer.hide-empty-drives/hideemptydrives-result.txt) |
+| Source | [evidence/raw/procmon/explorer.hide-empty-drives/hideemptydrives-result.txt](../evidence/raw/procmon/explorer.hide-empty-drives/hideemptydrives-result.txt) |
 | Exact quote / path | STATE=0 ... Explorer.EXE RegQueryValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/HideDrivesWithNoMedia ... Data: 0; STATE=1 ... Explorer.EXE RegQueryValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/HideDrivesWithNoMedia ... Data: 1; RESTORED_EXISTS=False |
 | Notes | The guest-local result file was copied back to the host scratch area during validation. The baseline value was absent and was restored to the absent state after the probe. |
 
@@ -3615,8 +3615,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/explorer.show-info-tips.review.json`
-- Source SHA256: `f1f2003ca5b6b105efb715a00789c02cc4e365839d47df9fb99d16862028da3c`
-- Proof SHA256: `753969c995f83f96cc8fa5b0bb20a2368c9a69ce4aafb0e129d88e3d8e65d677`
+- Source SHA256: `4bc260363e77a9311e6952af2d7fbd05022da5d4c3548a82d6b00f95ab7eaafa`
+- Proof SHA256: `7ad4d335485321a87e8d0b6acffd8615d2a9f5935dd3d00cc3cebe31316fec4c`
 
 **Summary:** Observed Explorer runtime setting for folder and desktop item info tips. Microsoft Open Specifications documents ShowInfoTip under Explorer\\Advanced with 1 = enable and 0 = disable, the 25H2 default hive exports the same value as 1, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowInfoTip with both Data:0 and Data:1 after Explorer restart.
 
@@ -3647,8 +3647,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/explorer.show-protected-operating-system-files.review.json`
-- Source SHA256: `1ee04e73705c620dd62a3f787d8fb19ad2a329ef33d0b5a6cfc4e911c8d628e9`
-- Proof SHA256: `31b3f5fdbffe3e26f331c0c797c31df76af16d312793d1da9ce42395165f88da`
+- Source SHA256: `f29409cf08c0d89c913dad31877da3e1476c7630855a3a2012ff5749d23bbc8e`
+- Proof SHA256: `cba707e8f0d4cc6c3376f37e108d33984d6c35ea6e4c9ebf688d420797a6a76c`
 
 **Summary:** Observed Explorer runtime setting for protected operating system file visibility. Microsoft Open Specifications documents ShowSuperHidden under Explorer\\Advanced with 1 = enable and 0 = disable, the 25H2 dump/default hive shows the same value on current builds, and a reversible Win25H2Clean Procmon capture on 2026-03-24 confirmed that Explorer.EXE queries HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Advanced\\ShowSuperHidden with both Data:0 and Data:1 after Explorer restart.
 
@@ -5607,10 +5607,10 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Evidence class: `Class A`
 - Source file: `research/records/power.control.perf-calculate-actual-utilization.json`
 - Evidence root: [evidence/records/power.control.perf-calculate-actual-utilization](../evidence/records/power.control.perf-calculate-actual-utilization)
-- Source SHA256: `cb76602bd3b95b9ced8c8638be756bb74cc772715e01c9cb3d4a1ba3a31f119a`
-- Proof SHA256: `0b9db986096b363ddb7a503bdd24202f4363bfe219e159ed604e8ce68e2ab572`
+- Source SHA256: `df44f34aade574727b98ca466d9f7208405e53bc6491848b98fabd0676561374`
+- Proof SHA256: `0261860b496274ac68871fe163eb69dffd7049c3886ffd09894297a57e97e3d3`
 
-**Summary:** Validated candidate package for PerfCalculateActualUtilization under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The clean Win25H2Clean baseline confirmed the current default, the repo power notes carry an exact docs hit, the shared string batch found an exact current-build ntoskrnl.exe hit, the shared Ghidra batch produced reviewable xref artifacts, and the tools-hardened lightweight ETW follow-up on RegProbe-Baseline-ToolsHardened-20260330 captured an exact runtime read for PerfCalculateActualUtilization. App surfacing remains a separate product decision from evidence classification.
+**Summary:** Validated candidate package for PerfCalculateActualUtilization under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The clean Win25H2Clean baseline confirmed the current default, the repo power notes carry an exact docs hit, the shared string batch found an exact current-build ntoskrnl.exe hit, the shared Ghidra batch produced reviewable xref artifacts, and the tools-hardened lightweight ETW follow-up on RegProbe-Baseline-ToolsHardened-20260330 captured an exact runtime read for PerfCalculateActualUtilization. A later one-value reboot experiment observed a Startup Repair regression after setting the value to 0, so non-default values are advanced, snapshot-gated, and VM-profile-sensitive.
 
 **Evidence**
 
@@ -5625,6 +5625,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `vm-power-control-lightweight-runtime-20260330` | `etw-trace` | Tools-hardened lightweight ETW follow-up for remaining docs-first power-control values | [evidence/files/vm/power-control-lightweight-runtime-20260330-024603/summary.json](../evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-024603/summary.json) and [evidence/files/vm/power-control-lightweight-runtime-20260330-024603/results.json](../evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-024603/results.json) and [research/notes/power-control-lightweight-runtime-follow-up-20260330.md](notes/power-control-lightweight-runtime-follow-up-20260330.md) |
 | `vm-power.control.perf-calculate-actual-utilization-etw-stackwalk-attempt-20260424i` | `etw-trace` | Bounded ETW stackwalk timeout receipt | [evidence/raw/etw-stackwalk/power.control.perf-calculate-actual-utilization-etw-20260424i/power.control.perf-calculate-actual-utilization-etw-20260424i-summary.json](../evidence/raw/etw-stackwalk/power.control.perf-calculate-actual-utilization-etw-20260424i/power.control.perf-calculate-actual-utilization-etw-20260424i-summary.json) and [evidence/raw/etw-stackwalk/power.control.perf-calculate-actual-utilization-etw-20260424i/power.control.perf-calculate-actual-utilization-etw-20260424i-stage.json](../evidence/raw/etw-stackwalk/power.control.perf-calculate-actual-utilization-etw-20260424i/power.control.perf-calculate-actual-utilization-etw-20260424i-stage.json) and [evidence/captures/power-control-perf-calculate-actual-utilization-etw-stackwalk-attempt-20260424.json](../evidence/captures/power-control-perf-calculate-actual-utilization-etw-stackwalk-attempt-20260424.json) |
 | `vm-power.control.perf-calculate-actual-utilization-etw-qga-unblock-20260507` | `etw-trace` | QGA-first ETW stackwalk runtime receipt for PerfCalculateActualUtilization | [evidence/captures/power-control-perf-calculate-actual-utilization-etw-qga-unblock-20260507.json](../evidence/captures/power-control-perf-calculate-actual-utilization-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/power-control-perf-calculate-actual-utilization-etw-qga-unblock-20260507/power-control-perf-calculate-actual-utilization-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/power-control-perf-calculate-actual-utilization-etw-qga-unblock-20260507/power-control-perf-calculate-actual-utilization-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/power-control-perf-calculate-actual-utilization-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/power-control-perf-calculate-actual-utilization-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/power-control-perf-calculate-actual-utilization-etw-qga-unblock-20260507/power-control-perf-calculate-actual-utilization-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/power-control-perf-calculate-actual-utilization-etw-qga-unblock-20260507/power-control-perf-calculate-actual-utilization-etw-qga-unblock-20260507.etl) |
+| `vm-power.control.perf-calculate-actual-utilization-value-experiment-20260508` | `vm-test` | One-value reboot experiment for PerfCalculateActualUtilization=0 | [registry-research-framework/audit/registry-value-experiments/pilot-perf-calculate-actual-utilization-0.json](../registry-research-framework/audit/registry-value-experiments/pilot-perf-calculate-actual-utilization-0.json) and [registry-research-framework/audit/registry-value-experiments/pilot-perf-calculate-actual-utilization-0-recovery.md](../registry-research-framework/audit/registry-value-experiments/pilot-perf-calculate-actual-utilization-0-recovery.md) |
 
 **Validation proof**
 
@@ -5632,7 +5633,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- |
 | Source | [Docs/power/power.md](../Docs/power/power.md) |
 | Exact quote / path | [Docs/power/power.md:181](../Docs/power/power.md:181) shows `PerfCalculateActualUtilization` with observed literal `1` in the repo power notes. |
-| Notes | The docs-first triage and phase-0 baseline agree on the current Win25H2Clean baseline value for PerfCalculateActualUtilization. App surfacing is tracked separately from evidence classification. |
+| Notes | The docs-first triage and phase-0 baseline agree on the current Win25H2Clean baseline value for PerfCalculateActualUtilization. The 2026-05-08 value experiment adds a negative reboot-health signal for 0 on the available VM profile. |
 
 ---
 
@@ -6849,8 +6850,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/privacy.disable-feedback-notifications.json`
-- Source SHA256: `557d21375cbfd0fd18a2c24a8723e0834de555e77671ae8c48c5a700db2f6c27`
-- Proof SHA256: `65a1ebac483294594d33f9fdbdb2f3a0c7a7b570c3e8582b23ff0890c3678626`
+- Source SHA256: `5685d2d2022513ff1cb81190bec8361ce7d195ad436732a06a2ff2617f578c13`
+- Proof SHA256: `a6c0ef84ef66179ce152ce37bce08d29c9b4e7940c76c42636e2754e66345627`
 
 **Summary:** Machine policy for Microsoft feedback prompts. Microsoft documents the same device policy path, value name, default, and numeric meanings that the app writes.
 
@@ -6871,7 +6872,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | --- | --- |
 | Source | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#donotshowfeedbacknotifications](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#donotshowfeedbacknotifications) |
 | Exact quote / path | Registry Key Name Software/Policies/Microsoft/Windows/DataCollection; Registry Value Name DoNotShowFeedbackNotifications; 0 (Default) Feedback notifications aren't disabled ... 1 Feedback notifications are disabled. |
-| Notes | The Experience Policy CSP page explicitly names the exact machine policy path and value name the app writes and defines the 0/1 semantics. Added nohuto mirror corroboration via nohuto-donotshowfeedbacknotifications-admx. Win25H2Clean reversible probe at [evidence/files/vm/feedback_notifications_probe.txt](../evidence/raw/procmon/privacy.disable-feedback-notifications/feedback_notifications_probe.txt) confirmed writes for 0 and 1, live registry queries after each write, feedback settings surface opens in both states, and restoration to the original state. |
+| Notes | The Experience Policy CSP page explicitly names the exact machine policy path and value name the app writes and defines the 0/1 semantics. Added nohuto mirror corroboration via nohuto-donotshowfeedbacknotifications-admx. Win25H2Clean reversible probe at [evidence/raw/procmon/privacy.disable-feedback-notifications/feedback_notifications_probe.txt](../evidence/raw/procmon/privacy.disable-feedback-notifications/feedback_notifications_probe.txt) confirmed writes for 0 and 1, live registry queries after each write, feedback settings surface opens in both states, and restoration to the original state. |
 
 ---
 
@@ -8233,8 +8234,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/security.disable-enhanced-defender-notifications.review.json`
-- Source SHA256: `920e701cb7c44b73c841a30c207655644270f386f1abc48342550621758814bb`
-- Proof SHA256: `fbc4863baa9ce3d49d4bb3f0fdbf319d98fe343d5abdc147792dd23887a67122`
+- Source SHA256: `17ce24f5ecb40db9753ae3b1973e73757c6c796e823db85d8e7da167cab98f84`
+- Proof SHA256: `1ce63c05906dcf54d6c4b4dd3b77adb7e420317c47b65baec0e58b841aa05639`
 
 **Summary:** Microsoft documents DisableEnhancedNotifications on two Defender policy paths. In a clean Win25H2Clean trace, SecurityHealthService.exe read the Security Center Notifications path and consumed DisableEnhancedNotifications = 1.
 
@@ -8254,7 +8255,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 
 | Field | Value |
 | --- | --- |
-| Source | [evidence/files/vm/defender-enhanced-notifications-securitycenter-1-20260324-213118/defender-disable-enhanced-securitycenter-1.txt](../evidence/raw/procmon/security-disable-enhanced-defender-notifications-validation-20260324/defender-disable-enhanced-securitycenter-1.txt/defender-disable-enhanced-securitycenter-1.txt) |
+| Source | [evidence/raw/procmon/security-disable-enhanced-defender-notifications-validation-20260324/defender-disable-enhanced-securitycenter-1.txt/defender-disable-enhanced-securitycenter-1.txt](../evidence/raw/procmon/security-disable-enhanced-defender-notifications-validation-20260324/defender-disable-enhanced-securitycenter-1.txt/defender-disable-enhanced-securitycenter-1.txt) |
 | Exact quote / path | SecurityHealthService.exe \| RegQueryValue \| HKLM/SOFTWARE/Policies/Microsoft/Windows Defender Security Center/Notifications/DisableEnhancedNotifications \| SUCCESS \| Type: REG_DWORD, Length: 4, Data: 1; baseline run shows the same value as NAME NOT FOUND before the write. |
 | Notes | The clean snapshot baseline and the enabled-state VM probe both hit the same Security Center Notifications policy path. A separate alias check with only the Reporting path set still showed SecurityHealthService.exe reading the Security Center path. The baseline also showed DisableNotifications = 1 on that branch, but that sibling policy does not change which path this value is read from. |
 
@@ -8713,8 +8714,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/security.threat-file-hash-logging.review.json`
-- Source SHA256: `09a3e4a5617a49edbb6c4670561af0275f9a6497f1bd2209478be486ac2ba81a`
-- Proof SHA256: `788154f3727acf4d2fc6840748ec22f61281ba3fadabd723b643a915a143c388`
+- Source SHA256: `d1dc7aed785486a7c7c070cef866b9185240871be0f54f7fc20fd5275931d1d7`
+- Proof SHA256: `71a7fa70e80910be8723672f17386a8f5f834b9652385b835eb9ed4fa49267fb`
 
 **Summary:** Microsoft Support publishes ThreatFileHashLogging = 1 under HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows Defender as the Windows Defender Antivirus root policy for file-hash logging, and the Defender-on 25H2 VM shows MsMpEng.exe reading that root value directly. The current build still has extra live aliases and the PE follow-up still did not surface event 1120, but the app can now stay on the documented root path instead of shipping a research batch.
 
@@ -8726,6 +8727,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `ms-defender-enable-file-hash-computation` | `official-doc` | Microsoft Learn: Create indicators for files | [https://learn.microsoft.com/en-us/defender-endpoint/indicator-file](https://learn.microsoft.com/en-us/defender-endpoint/indicator-file) |
 | `ms-defender-file-hash-event1120` | `official-doc` | Microsoft Support: March 2016 anti-malware platform update for Endpoint Protection clients | [https://support.microsoft.com/en-gb/topic/march-2016-anti-malware-platform-update-for-endpoint-protection-clients-d99f5dc9-b7a0-bdb2-5161-3efc43d889fa](https://support.microsoft.com/en-gb/topic/march-2016-anti-malware-platform-update-for-endpoint-protection-clients-d99f5dc9-b7a0-bdb2-5161-3efc43d889fa) |
 | `ms-defender-cloud-demo-sample` | `official-doc` | Microsoft Learn: Demonstrate cloud-delivered protection | [https://learn.microsoft.com/en-us/defender-endpoint/defender-endpoint-demonstration-cloud-delivered-protection](https://learn.microsoft.com/en-us/defender-endpoint/defender-endpoint-demonstration-cloud-delivered-protection) |
+| `repo-defender-cloud-demo-sample-metadata` | `repo-doc` | Repo-safe metadata for the Defender cloud demo PE sample | [evidence/raw/external/security.threat-file-hash-logging/defender-cloud-demo-sample-metadata-20260325.json](../evidence/raw/external/security.threat-file-hash-logging/defender-cloud-demo-sample-metadata-20260325.json) |
 | `repo-defender-threat-file-hash-dumps` | `repo-doc` | Local Defender dumps and traces for ThreatFileHashLogging and EnableFileHashComputation | [Docs/security/assets/Windows-Defender.txt](../Docs/security/assets/Windows-Defender.txt) |
 | `vm-defender-runtime-disabled-baseline` | `vm-test` | Original high-risk snapshot had Defender disabled | [evidence/files/vm/defender-runtime-repair.json](../evidence/files/vm-tooling-staging/defender-runtime-repair.json) |
 | `vm-defender-runtime-enabled-baseline` | `vm-test` | Defender-on 25H2 snapshot baseline | [evidence/files/vm/defender-runtime-repair.json](../evidence/files/vm-tooling-staging/defender-runtime-repair.json) |
@@ -8745,7 +8747,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 
 | Field | Value |
 | --- | --- |
-| Source | [evidence/files/vm/defender-threat-file-hash-legacyroot-1-20260325-011845/defender-threat-file-hash-legacyroot-1.txt](../evidence/raw/procmon/security.threat-file-hash-logging/defender-threat-file-hash-legacyroot-1.txt/defender-threat-file-hash-legacyroot-1.txt) |
+| Source | [evidence/raw/procmon/security.threat-file-hash-logging/defender-threat-file-hash-legacyroot-1.txt/defender-threat-file-hash-legacyroot-1.txt](../evidence/raw/procmon/security.threat-file-hash-logging/defender-threat-file-hash-legacyroot-1.txt/defender-threat-file-hash-legacyroot-1.txt) |
 | Exact quote / path | MsMpEng.exe \| RegQueryValue \| HKLM/SOFTWARE/Policies/Microsoft/Windows Defender/ThreatFileHashLogging \| SUCCESS \| Type: REG_DWORD, Length: 4, Data: 1 |
 | Notes | The Defender-on 25H2 VM produced a clean baseline event 1116 with no event 1120. Earlier text-file passes showed MsMpEng.exe reading the root ThreatFileHashLogging value directly and reading the Policy Manager EnableFileHashComputation alias directly in a separate pass. The app now stays on the documented root policy path. The later official Microsoft PE sample follow-up still produced event 1116 with no event 1120, so the hash-event behavior remains an open current-build question rather than part of the app contract. |
 
@@ -8756,8 +8758,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/security.trusted-path-credential-prompting.review.json`
-- Source SHA256: `3f0998078063b69bfbb08684a45cfb54bf7601c3b77a1ee5cbf77747b57f04a0`
-- Proof SHA256: `ae5e917510de732b46d4b1a01a5b07f3a1f4628836a965d8e4868beec2ef21b0`
+- Source SHA256: `6a586bd469d9a87f16ab0120f415f357fbce11def288eeb0e491343432d68646`
+- Proof SHA256: `0cdef2a2a5c5dfbbf2c690ddcc6b2dbd1f69abcd350569b81c836480e27a4767`
 
 **Summary:** CredUI.admx and CredUI.adml define the trusted-path credential policy on HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Policies\\CredUI. Win25H2Clean reversible proof confirmed the current app write of EnableSecureCredentialPrompting = 1 and restored the missing baseline cleanly.
 
@@ -8933,8 +8935,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.disable-auto-maintenance.review.json`
-- Source SHA256: `6a0ca786ab932a9feb01208db0d0568b4b98a5d60fd009f84a076d5fca5c3652`
-- Proof SHA256: `dcad2e9b8ac4218d210773646aa8c9db5ef46c5d54732c37417810c6613bc623`
+- Source SHA256: `7de94066ac81b8c9e9df94ccd1fc2e2ede69e25066fb83e142145734a7e4cff8`
+- Proof SHA256: `810a2c0b467e482cffe418f958f017361d555aad33e99f628c749e6bf1ad1bf6`
 
 **Summary:** Microsoft Learn now gives a direct operational meaning for MaintenanceDisabled on HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Schedule\\Maintenance: UWF turns Automatic Maintenance off by setting this value. Win25H2Clean reversible proof also confirmed missing -> 1 -> missing on the same path.
 
@@ -9051,7 +9053,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.disable-fullscreen-optimizations.review.json`
-- Source SHA256: `73d45b60623aa214b6148aa8d112f5330fee2546cd4ae0637823d3c65c18d591`
+- Source SHA256: `79bb869833b28cbd1869dfe8422abfbc995ca1dbcfd6dce787be7f0550c5d0a5`
 - Proof SHA256: `5959b250b0a250a283cec605a4d93bdd5e940bd9ca7336a851358de5bcb055a4`
 
 **Summary:** The current build evidence for the GameConfigStore fullscreen-optimization tuple now covers both the positive runtime read and the current VM baseline story: Microsoft documents the feature area, an earlier Win25H2Clean reversible probe confirmed the 2/2/1/1 tuple against a clean missing baseline, a targeted Procmon pass captured svchost.exe backed by resourcepolicyserver.dll querying GameDVR_DXGIHonorFSEWindowsCompatible live, a later hidden automation pass restored the current shell-stable snapshot baseline of missing/2/0/0, and our canonical Ghidra export tied the same build back to the GameConfigStore RPC server code path.
@@ -9113,7 +9115,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Evidence class: `Class A`
 - Source file: `research/records/system.disable-jpeg-reduction.review.json`
 - Evidence root: [evidence/records/system.disable-jpeg-reduction](../evidence/records/system.disable-jpeg-reduction)
-- Source SHA256: `86c3255e7d8dac3bf29c41f7e5522473426dd4783eaaf0fe829218ff3e494539`
+- Source SHA256: `6afba0f5e9dafdc798d4327e62e817e525963a7d2560270548f5666be8290835`
 - Proof SHA256: `0a72b0179f85d92fa1a47484c2e44a234a76699c5511c3af47efc0b3e41a4c69`
 
 **Summary:** The current build evidence for JPEGImportQuality now lines up across decomp, Procmon, and repeated Win25H2Clean runtime probes: shell32.dll carries the JPEGImportQuality transcode path, Explorer.EXE queried JPEGImportQuality = 100 during a shell-driven wallpaper apply, the v3.1 runtime lane re-applied a JPEG wallpaper with a fresh WPR capture and restored the original wallpaper, the missing baseline restores cleanly, and the current app writes the same 100 state.
@@ -9301,8 +9303,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Evidence class: `Class A`
 - Source file: `research/records/system.disable-startup-delay.review.json`
 - Evidence root: [evidence/records/system.disable-startup-delay](../evidence/records/system.disable-startup-delay)
-- Source SHA256: `68142ff7d46241ffc238099a3f513c2d1617b3e07b0ffda2ace00b30a814c39c`
-- Proof SHA256: `b2559024b692e3f3cc51a4b974a1adc7af0fc929a91ee7ed9925367f6db654e6`
+- Source SHA256: `6bf2602d3774db2490e987044b8c33fd210d943c6eb666631e455d3352825f53`
+- Proof SHA256: `a04422def327c75e4a13a9eb66c754dd0ddcda21928004381204978a24bf7e30`
 
 **Summary:** Win25H2Clean reversible proof still anchors the current-build story for StartupDelayInMSec: the observed baseline is missing, the app profile writes 0, the record retains Procmon shell-restart corroboration for Explorer\\Serialize, a bounded WPR lane exercised both `missing` and `0`, and the value restores back to missing cleanly.
 
@@ -9467,8 +9469,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.enable-game-mode.review.json`
-- Source SHA256: `4711f8eeed93763257ea422bb5c40ea2062487b6582c074980a6540d2feb06ac`
-- Proof SHA256: `d5ed6de3ca05c907ea31ce7a12f91495342c4032b4891e6ebd240a03895f6501`
+- Source SHA256: `56b97bd16620fff1d68f6be6f1947ca06b04ca55178fa4758092c411e0dca615`
+- Proof SHA256: `b9664a11e6ff99ba9e4b70001cfe63b942fc45e27036b5b2b637bb5fd346d7e2`
 
 **Summary:** The current app writes HKCU\\Software\\Microsoft\\GameBar\\AutoGameModeEnabled = 1. Guest-side Procmon captures on 2026-03-20 against the interactive Administrator profile confirmed SystemSettings.exe queries AutoGameModeEnabled with Data:1 and Data:0 in separate reversible captures. That validates the live Game Mode registry mapping on this build even though Microsoft's official Game Mode documentation here is feature-level rather than a raw registry contract.
 
@@ -9487,7 +9489,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 
 | Field | Value |
 | --- | --- |
-| Source | [evidence/files/vm/gamemode_admin_probe.txt](../evidence/raw/procmon/system.enable-game-mode/gamemode_admin_probe.txt) |
+| Source | [evidence/raw/procmon/system.enable-game-mode/gamemode_admin_probe.txt](../evidence/raw/procmon/system.enable-game-mode/gamemode_admin_probe.txt) |
 | Exact quote / path | gamemode_admin_probe.txt: "7:52:45.6879293 PM","SystemSettings.exe","5512","RegQueryValue","HKU/S-1-5-21-3538642439-2106388720-149684979-500/Software/Microsoft/GameBar/AutoGameModeEnabled","SUCCESS","Type: REG_DWORD, Length: 4, Data: 1". gamemode_admin_zero_probe.txt: "7:54:41.9130012 PM","SystemSettings.exe","5512","RegQueryValue","HKU/S-1-5-21-3538642439-2106388720-149684979-500/Software/Microsoft/GameBar/AutoGameModeEnabled","SUCCESS","Type: REG_DWORD, Length: 4, Data: 0". |
 | Notes | The interactive Administrator profile was probed through the guest. The value was set to 1 and then to 0 in separate reversible captures, and SystemSettings.exe read both states. The value was restored to 1 after the 0-state probe. Normalized for the consolidated evidence report. |
 
@@ -9498,8 +9500,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.enable-hags.review.json`
-- Source SHA256: `c81bd717404022adf5a025a0c8945b10b3afc8e5853100c7515ffc31917eb98e`
-- Proof SHA256: `6c285a06ea58dcdae870aff3fdb2721f76c5c71cae5ac30195ac31fad28559c5`
+- Source SHA256: `6d32d68508ac0e623d588b20ac20f825dc660a6f8052f21576f2c8f788692cbf`
+- Proof SHA256: `b200b34aa082f71637ab80ef14845a3258b502f620cffe3c4b6e13f642afb5b0`
 
 **Summary:** The current app writes HKLM\\SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers\\HwSchMode = 2 to enable Hardware-Accelerated GPU Scheduling (HAGS). A guest-side reversible probe on Win25H2Clean confirmed the guest baseline is missing and that HwSchMode transitions through 2 and 1 before restoring to missing, so the record is now runtime-validated even though the Microsoft feature documentation captured here does not publish the raw registry contract.
 
@@ -9801,7 +9803,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.kernel-thread-dpc-enable.json`
-- Source SHA256: `82c8dec5ae028196b84cb079e31c8dbbbf80b80bfef9c48dacf086ae2a94c25b`
+- Source SHA256: `520339fd9d7aadac6d0e9df3756f07bc64a9754e526b0423b319354137ffb248`
 - Proof SHA256: `88f1d508dd57862ee200a0c9b5980d3b1c4fff8cb505fb5fceddba38fcf71acf`
 
 **Summary:** Officially documented threaded-DPC control. Microsoft documents ThreadDpcEnable under HKLM\\System\\CurrentControlSet\\Control\\SessionManager\\Kernel, states that threaded DPCs are enabled by default, and says setting the value to 0 disables them. The app writes 1 on the documented path as an explicit enabled-state reset, and a bounded Win25H2Clean VM suite exercised the `0` state through real reboot, CPU and memory workloads, and restore back to the missing baseline.
@@ -9813,8 +9815,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 | `ms-threaded-dpcs` | `official-doc` | Microsoft Learn: Introduction to threaded DPCs | [https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/introduction-to-threaded-dpcs](https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/introduction-to-threaded-dpcs) |
 | `app-system-registry-provider` | `repo-code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs |
 | `vm-thread-dpc-enable-bounded-suite` | `vm-test` | Win25H2Clean bounded reboot suite for ThreadDpcEnable = 0 | [research/notes/thread-dpc-enable-vm-suite-20260324.md](notes/thread-dpc-enable-vm-suite-20260324.md) |
-| `etw-thread-dpc-enable-cpu3` | `etw-trace` | WPR trace for ThreadDpcEnable CPU bounded run | [evidence/files/vm/thread-dpc-enable-0-cpu3.etl.md](../evidence/files/vm-tooling-staging/thread-dpc-enable-0-cpu3.etl.md) |
-| `etw-thread-dpc-enable-mem2` | `etw-trace` | WPR trace for ThreadDpcEnable memory bounded run | [evidence/files/vm/thread-dpc-enable-0-mem2.etl.md](../evidence/files/vm-tooling-staging/thread-dpc-enable-0-mem2.etl.md) |
+| `vm-thread-dpc-enable-cpu-runtime-summary` | `vm-test` | Canonical runtime summary for ThreadDpcEnable CPU bounded run | [evidence/raw/procmon/thread-dpc-enable-vm-suite-20260324/thread-dpc-enable-0-cpu3-runtime-summary.json](../evidence/raw/procmon/thread-dpc-enable-vm-suite-20260324/thread-dpc-enable-0-cpu3-runtime-summary.json) |
+| `vm-thread-dpc-enable-memory-runtime-summary` | `vm-test` | Canonical runtime summary for ThreadDpcEnable memory bounded run | [evidence/raw/procmon/thread-dpc-enable-vm-suite-20260324/thread-dpc-enable-0-mem2-runtime-summary.json](../evidence/raw/procmon/thread-dpc-enable-vm-suite-20260324/thread-dpc-enable-0-mem2-runtime-summary.json) |
 
 **Validation proof**
 
@@ -9929,8 +9931,8 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Status: `validated`
 - Evidence class: `Class A`
 - Source file: `research/records/system.memory-large-system-cache-client.review.json`
-- Source SHA256: `2c2773b8102b63e131d90ece74bc5e0d58828669e576cf804d7139989d1d0a1c`
-- Proof SHA256: `e6c7b375df3f43fb82890b956cf7740df58c08b3f10de5f7e783a227bdf5f24e`
+- Source SHA256: `7383fce5882fb6c1eaa96b1a03034b40e8c0f05a33f233f3c671166b27cac904`
+- Proof SHA256: `ee34af9d0b85db65e4c29e81dee48df1c356024015796b4802722e5b7aedea8a`
 
 **Summary:** Validated legacy LargeSystemCache reset. Win25H2Clean reversible probe confirmed LargeSystemCache stayed at 0 under Memory Management and restored the baseline.
 
@@ -10195,7 +10197,7 @@ This file is the index-friendly companion to the atlas. It tracks source hashes,
 - Evidence class: `Class A`
 - Source file: `research/records/system.priority-control.review.json`
 - Evidence root: [evidence/records/system.priority-control](../evidence/records/system.priority-control)
-- Source SHA256: `23b36a6e9c2eb376baac4a0fc7987048ed66040b277972bbe1666715bb9ae7f0`
+- Source SHA256: `d2d20d7c1b2e2d05d809406efe7616703dccd6974b687e3b3132439614ee3d5d`
 - Proof SHA256: `03ae9e19b499a2dfe4bc612b944160e051589db0f3f02296bdacd9e7fb89e345`
 
 **Summary:** Win25H2Clean now has a strong current-build evidence chain for Win32PrioritySeparation as an observed registry surface: reversible 2 -> 38 -> 2 VM proof, live wmiprvse.exe Procmon reads for both states, bounded rebooted benchmark runs, and a bounded PDB-backed Ghidra pass on cimwin32.dll. The raw 0x26 bitmask semantics still remain repo interpretation rather than a modern Microsoft-published contract.

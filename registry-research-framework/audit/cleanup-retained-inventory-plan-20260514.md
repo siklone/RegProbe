@@ -1,6 +1,6 @@
 # Cleanup Retained Inventory Plan
 
-Generated: `2026-05-14T18:09:41Z`
+Generated: `2026-05-14T18:54:10Z`
 Ledger: `registry-research-framework/audit/cleanup-quarantine-ledger-20260514.json`
 
 Action plan for cleanup retained inventory. It does not delete files and it does not redefine delete eligibility.
@@ -19,16 +19,16 @@ Action plan for cleanup retained inventory. It does not delete files and it does
 | Retained inventory items | 89 |
 | Delete-ready rows | 0 |
 | Reference migration needed | 0 |
-| Active cleanup actions | 3 |
-| Audit-only retained | 21 |
+| Active cleanup actions | 0 |
+| Audit-only retained | 24 |
 | Intentional reference keep | 5 |
 | Source-of-record retained | 25 |
 | Historical audit retained | 25 |
 | Archive history retained | 10 |
-| VM rerun required | 1 |
-| Raw trace backfill required | 2 |
+| VM rerun required | 0 |
+| Raw trace backfill required | 0 |
 | Needs replacement/retention decision | 0 |
-| Retention decision queue | 3 |
+| Retention decision queue | 0 |
 | Retained pending review | 0 |
 
 ## Release States
@@ -36,46 +36,40 @@ Action plan for cleanup retained inventory. It does not delete files and it does
 | State | Count |
 |---|---:|
 | `archive-history-retained` | 10 |
-| `audit-only-retained` | 21 |
+| `audit-only-retained` | 24 |
 | `historical-audit-retained` | 25 |
 | `intentional-reference-keep` | 5 |
-| `raw-trace-backfill-required` | 2 |
 | `source-of-record-retained` | 25 |
-| `vm-rerun-required` | 1 |
 
 ## Decision Tracks
 
 | Track | Count |
 |---|---:|
 | `archive-history-anchor` | 10 |
-| `audit-trail-retained` | 21 |
+| `audit-trail-retained` | 24 |
 | `historical-audit-output` | 25 |
 | `intentional-reference-keep` | 4 |
-| `partial-derived-needs-raw-trace` | 2 |
 | `raw-trace-source-of-record` | 25 |
 | `tooling-output-root` | 1 |
-| `vm-rerun-required` | 1 |
 
 ## Staging Canonicalization States
 
 | State | Count |
 |---|---:|
 | `active-tool-output-root` | 1 |
-| `canonical-raw-replacement-known` | 6 |
-| `partial-derived-replacement-known` | 2 |
-| `rerun-needed` | 1 |
+| `canonical-raw-replacement-known` | 9 |
 
 ## Top Blocking Reference Paths
 
 | Path | Count |
 |---|---:|
-| `research/evidence-index.json` | 41 |
-| `research/evidence-manifest.json` | 38 |
-| `research/evidence-atlas.md` | 33 |
-| `research/evidence-manifest.md` | 32 |
+| `research/evidence-index.json` | 43 |
+| `research/evidence-manifest.json` | 40 |
+| `research/evidence-manifest.md` | 34 |
+| `research/evidence-atlas.md` | 31 |
 | `registry-research-framework/audit/rejected-closure-ledger.json` | 30 |
-| `research/evidence-classes.json` | 13 |
 | `registry-research-framework/audit/operator-regadd-inventory-20260508-repo.json` | 13 |
+| `research/evidence-classes.json` | 11 |
 | `registry-research-framework/audit/etw-stackwalk-reopen-rotation-ledger.json` | 6 |
 | `registry-research-framework/scripts/check_etw_stackwalk_reopen_history_archive.py` | 5 |
 | `research/records/power.control.perf-calculate-actual-utilization.json` | 4 |
@@ -95,25 +89,21 @@ _No reference migration rows currently exist._
 
 These rows are the active retained-inventory actions. Already-classified raw traces, history anchors, and audit outputs stay in the retained inventory worklist instead of this queue.
 
-| Path | Decision track | Category | Blocking refs | Canonicalization | Owner records | Next step |
-|---|---|---|---:|---|---|---|
-| `evidence/files/vm-tooling-staging/defender-cloud-demo-extracted` | `vm-rerun-required` | `vm-tooling-staging-oldest-sample` | 1 | `rerun-needed` | `security.threat-file-hash-logging` | Rerun or replace the Defender cloud validation under evidence/raw before migrating the note reference. |
-| `evidence/files/vm-tooling-staging/thread-dpc-enable-0-cpu3.etl.md` | `partial-derived-needs-raw-trace` | `vm-tooling-staging-oldest-sample` | 8 | `partial-derived-replacement-known` | `system.kernel-thread-dpc-enable` | Retain until a new raw ETL/summary pair or explicit source-of-record decision replaces this placeholder. |
-| `evidence/files/vm-tooling-staging/thread-dpc-enable-0-mem2.etl.md` | `partial-derived-needs-raw-trace` | `vm-tooling-staging-oldest-sample` | 8 | `partial-derived-replacement-known` | `system.kernel-thread-dpc-enable` | Retain until a new raw ETL/summary pair or explicit source-of-record decision replaces this placeholder. |
+_No retention decision rows currently exist._
 
 ## Retained Inventory Worklist
 
 | Path | Release state | Decision track | Category | Blocking refs | Next action |
 |---|---|---|---|---:|---|
-| `registry-research-framework/audit/registry-value-experiments/pilot-perf-calculate-actual-utilization-0-recovery.json` | `intentional-reference-keep` | `intentional-reference-keep` | `operator96-superseded-pilot` | 2 | Keep as a historical example unless a maintainer explicitly rewrites the current docs/record to the replacement artifacts. |
-| `registry-research-framework/audit/registry-value-experiments/pilot-perf-calculate-actual-utilization-0-recovery.md` | `intentional-reference-keep` | `intentional-reference-keep` | `operator96-superseded-pilot` | 2 | Keep as a historical example unless a maintainer explicitly rewrites the current docs/record to the replacement artifacts. |
-| `registry-research-framework/audit/registry-value-experiments/pilot-perf-calculate-actual-utilization-0.json` | `intentional-reference-keep` | `intentional-reference-keep` | `operator96-superseded-pilot` | 4 | Keep as a historical example unless a maintainer explicitly rewrites the current docs/record to the replacement artifacts. |
-| `registry-research-framework/audit/registry-value-experiments/pilot-perf-calculate-actual-utilization-0.md` | `intentional-reference-keep` | `intentional-reference-keep` | `operator96-superseded-pilot` | 4 | Keep as a historical example unless a maintainer explicitly rewrites the current docs/record to the replacement artifacts. |
-| `evidence/files/vm-tooling-staging/defender-cloud-demo-extracted` | `vm-rerun-required` | `vm-rerun-required` | `vm-tooling-staging-oldest-sample` | 1 | Rerun or replace the Defender cloud validation under evidence/raw before migrating the note reference. |
+| `registry-research-framework/audit/registry-value-experiments/pilot-perf-calculate-actual-utilization-0-recovery.json` | `intentional-reference-keep` | `intentional-reference-keep` | `operator96-superseded-pilot` | 5 | Keep as a historical example unless a maintainer explicitly rewrites the current docs/record to the replacement artifacts. |
+| `registry-research-framework/audit/registry-value-experiments/pilot-perf-calculate-actual-utilization-0-recovery.md` | `intentional-reference-keep` | `intentional-reference-keep` | `operator96-superseded-pilot` | 5 | Keep as a historical example unless a maintainer explicitly rewrites the current docs/record to the replacement artifacts. |
+| `registry-research-framework/audit/registry-value-experiments/pilot-perf-calculate-actual-utilization-0.json` | `intentional-reference-keep` | `intentional-reference-keep` | `operator96-superseded-pilot` | 7 | Keep as a historical example unless a maintainer explicitly rewrites the current docs/record to the replacement artifacts. |
+| `registry-research-framework/audit/registry-value-experiments/pilot-perf-calculate-actual-utilization-0.md` | `intentional-reference-keep` | `intentional-reference-keep` | `operator96-superseded-pilot` | 7 | Keep as a historical example unless a maintainer explicitly rewrites the current docs/record to the replacement artifacts. |
+| `evidence/files/vm-tooling-staging/defender-cloud-demo-extracted` | `audit-only-retained` | `audit-trail-retained` | `vm-tooling-staging-oldest-sample` | 0 | No live blocking references remain; keep for audit trail or handle in a dedicated deletion PR that explicitly accepts audit-only history references. |
 | `evidence/files/vm-tooling-staging/showinfotip-1-hits.csv..md` | `audit-only-retained` | `audit-trail-retained` | `vm-tooling-staging-oldest-sample` | 0 | No live blocking references remain; keep for audit trail or handle in a dedicated deletion PR that explicitly accepts audit-only history references. |
 | `evidence/files/vm-tooling-staging/showsuperhidden-1-hits.csv..md` | `audit-only-retained` | `audit-trail-retained` | `vm-tooling-staging-oldest-sample` | 0 | No live blocking references remain; keep for audit trail or handle in a dedicated deletion PR that explicitly accepts audit-only history references. |
-| `evidence/files/vm-tooling-staging/thread-dpc-enable-0-cpu3.etl.md` | `raw-trace-backfill-required` | `partial-derived-needs-raw-trace` | `vm-tooling-staging-oldest-sample` | 8 | Retain until a new raw ETL/summary pair or explicit source-of-record decision replaces this placeholder. |
-| `evidence/files/vm-tooling-staging/thread-dpc-enable-0-mem2.etl.md` | `raw-trace-backfill-required` | `partial-derived-needs-raw-trace` | `vm-tooling-staging-oldest-sample` | 8 | Retain until a new raw ETL/summary pair or explicit source-of-record decision replaces this placeholder. |
+| `evidence/files/vm-tooling-staging/thread-dpc-enable-0-cpu3.etl.md` | `audit-only-retained` | `audit-trail-retained` | `vm-tooling-staging-oldest-sample` | 0 | No live blocking references remain; keep for audit trail or handle in a dedicated deletion PR that explicitly accepts audit-only history references. |
+| `evidence/files/vm-tooling-staging/thread-dpc-enable-0-mem2.etl.md` | `audit-only-retained` | `audit-trail-retained` | `vm-tooling-staging-oldest-sample` | 0 | No live blocking references remain; keep for audit trail or handle in a dedicated deletion PR that explicitly accepts audit-only history references. |
 | `evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json..md` | `audit-only-retained` | `audit-trail-retained` | `vm-tooling-staging-oldest-sample` | 0 | No live blocking references remain; keep for audit trail or handle in a dedicated deletion PR that explicitly accepts audit-only history references. |
 | `evidence/files/vm-tooling-staging/ghidra-probes` | `intentional-reference-keep` | `tooling-output-root` | `vm-tooling-staging-oldest-sample` | 2 | Keep as an active tooling output root; do not treat as evidence cleanup or delete-candidate work. |
 | `evidence/files/vm-tooling-staging/beep_start_toggle_out.txt` | `audit-only-retained` | `audit-trail-retained` | `vm-tooling-staging-oldest-sample` | 0 | No live blocking references remain; keep for audit trail or handle in a dedicated deletion PR that explicitly accepts audit-only history references. |

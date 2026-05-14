@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-08T11:35:17.115237Z",
+  "generated_utc": "2026-05-14T18:53:44.795864Z",
   "summary": {
     "total_records": 356,
     "validated": 271,
@@ -58107,7 +58107,7 @@
       "category": "Power",
       "area": "Raw Power Manager Registry",
       "scope": "device",
-      "summary": "Validated candidate package for PerfCalculateActualUtilization under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The clean Win25H2Clean baseline confirmed the current default, the repo power notes carry an exact docs hit, the shared string batch found an exact current-build ntoskrnl.exe hit, the shared Ghidra batch produced reviewable xref artifacts, and the tools-hardened lightweight ETW follow-up on RegProbe-Baseline-ToolsHardened-20260330 captured an exact runtime read for PerfCalculateActualUtilization. App surfacing remains a separate product decision from evidence classification.",
+      "summary": "Validated candidate package for PerfCalculateActualUtilization under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The clean Win25H2Clean baseline confirmed the current default, the repo power notes carry an exact docs hit, the shared string batch found an exact current-build ntoskrnl.exe hit, the shared Ghidra batch produced reviewable xref artifacts, and the tools-hardened lightweight ETW follow-up on RegProbe-Baseline-ToolsHardened-20260330 captured an exact runtime read for PerfCalculateActualUtilization. A later one-value reboot experiment observed a Startup Repair regression after setting the value to 0, so non-default values are advanced, snapshot-gated, and VM-profile-sensitive.",
       "evidence_class": {
         "record_id": "power.control.perf-calculate-actual-utilization",
         "tweak_id": "power.control.perf-calculate-actual-utilization",
@@ -58131,7 +58131,7 @@
           "gaming_safe": null
         },
         "validated_semantics": {
-          "summary": "The docs-first triage and phase-0 baseline agree on the current Win25H2Clean baseline value for PerfCalculateActualUtilization. App surfacing is tracked separately from evidence classification.",
+          "summary": "The docs-first triage and phase-0 baseline agree on the current Win25H2Clean baseline value for PerfCalculateActualUtilization. The 2026-05-08 value experiment adds a negative reboot-health signal for 0 on the available VM profile.",
           "has_validation_proof": true,
           "has_semantics_evidence": true,
           "links": [
@@ -58194,13 +58194,13 @@
         "restore_default_supported": true,
         "restore_previous_supported": true,
         "needs_vm_validation": false,
-        "why": "PerfCalculateActualUtilization now has converged cross-layer evidence on RegProbe-Baseline-ToolsHardened-20260330: phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, prior shell-safe Procmon lanes, and an exact runtime read captured by the tools-hardened lightweight ETW follow-up. The 2026-05-08 promotion review pack approves this app-mapped raw power card as promoted-with-warnings because VM CPU-utilization reporting and bare-metal power behavior can diverge.",
+        "why": "PerfCalculateActualUtilization now has converged cross-layer evidence on RegProbe-Baseline-ToolsHardened-20260330: phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, prior shell-safe Procmon lanes, and an exact runtime read captured by the tools-hardened lightweight ETW follow-up. The 2026-05-08 promotion review pack approves this app-mapped raw power card as promoted-with-warnings because VM CPU-utilization reporting and bare-metal power behavior can diverge. The later 2026-05-08 one-value experiment observed a reboot regression after applying 0, so non-default testing must stay snapshot-gated and advanced-user only.",
         "blocking_issues": []
       },
       "app_current_implementation": {
         "status": "matches-research",
         "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
-        "notes": "The app now surfaces PerfCalculateActualUtilization directly as a research-card registry value.",
+        "notes": "The app now surfaces PerfCalculateActualUtilization directly as a warning-gated research-card registry value. Non-default values require snapshot/overlay replay before reboot testing.",
         "writes": [
           {
             "target_id": "perfcalculateactualutilization",
@@ -58219,7 +58219,7 @@
           "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
           "value_name": "PerfCalculateActualUtilization",
           "value_type": "REG_DWORD",
-          "notes": "This candidate is promoted as a warning-gated research-card raw power value; CPU-utilization behavior can be host and hardware dependent.",
+          "notes": "This candidate is promoted as a warning-gated research-card raw power value; CPU-utilization behavior can be host and hardware dependent. PerfCalculateActualUtilization=0 produced a reboot regression on the available VM profile during the 2026-05-08 pilot and must not be treated as a safe default.",
           "allowed_values": [
             {
               "state_kind": "value",
@@ -58261,7 +58261,8 @@
           ],
           "avoid_for": [
             "Generic enterprise golden images",
-            "VMs where host/guest CPU-utilization reporting must remain unchanged"
+            "VMs where host/guest CPU-utilization reporting must remain unchanged",
+            "Unsnapshotted reboot experiments"
           ],
           "states": [
             {
@@ -58275,7 +58276,8 @@
           "bad_when": "You need a hardware-independent CPU-utilization recommendation or a documented Microsoft end-user control surface.",
           "tradeoffs": [
             "Preserves the observed baseline value.",
-            "Ships behind warning labels because VM host scheduling and guest CPU-utilization reporting can be misleading."
+            "Ships behind warning labels because VM host scheduling and guest CPU-utilization reporting can be misleading.",
+            "A pilot set to 0 caused a reboot regression on the available VM profile."
           ],
           "apply_allowed": true,
           "evidence_ids": [
@@ -58414,13 +58416,28 @@
             "version-scope"
           ],
           "origin": "VM ETW trace"
+        },
+        {
+          "evidence_id": "vm-power.control.perf-calculate-actual-utilization-value-experiment-20260508",
+          "kind": "vm-test",
+          "title": "One-value reboot experiment for PerfCalculateActualUtilization=0",
+          "location": "registry-research-framework/audit/registry-value-experiments/pilot-perf-calculate-actual-utilization-0.json and registry-research-framework/audit/registry-value-experiments/pilot-perf-calculate-actual-utilization-0-recovery.md",
+          "summary": "The one-value experiment observed a Startup Repair regression after applying PerfCalculateActualUtilization=0 and rebooting. Offline registry restore, NTFS repair, SFC, DISM, System Restore, quality update uninstall, and feature update uninstall did not recover the image. The lane is treated as a high-strength risk signal, not as proof of sole causality.",
+          "strength": "high",
+          "supports": [
+            "risk",
+            "rollback-limit",
+            "reboot-regression",
+            "vm-profile-scope"
+          ],
+          "origin": "VM test / probe"
         }
       ],
       "validation_proof": {
         "source_url": "Docs/power/power.md",
         "exact_quote_or_path": "Docs/power/power.md:181 shows `PerfCalculateActualUtilization` with observed literal `1` in the repo power notes.",
         "key_found_on_page": true,
-        "notes": "The docs-first triage and phase-0 baseline agree on the current Win25H2Clean baseline value for PerfCalculateActualUtilization. App surfacing is tracked separately from evidence classification."
+        "notes": "The docs-first triage and phase-0 baseline agree on the current Win25H2Clean baseline value for PerfCalculateActualUtilization. The 2026-05-08 value experiment adds a negative reboot-health signal for 0 on the available VM profile."
       },
       "doc_source": null,
       "static_analysis": null,
@@ -92836,6 +92853,20 @@
           "origin": "Microsoft official doc"
         },
         {
+          "evidence_id": "repo-defender-cloud-demo-sample-metadata",
+          "kind": "repo-doc",
+          "title": "Repo-safe metadata for the Defender cloud demo PE sample",
+          "location": "evidence/raw/external/security.threat-file-hash-logging/defender-cloud-demo-sample-metadata-20260325.json",
+          "summary": "Checked-in metadata for the Microsoft Defender BaFS Sample PE used by the VM follow-up. The executable is intentionally not stored in the repository; the metadata records the source URL, file description, original filename, SHA256, and size so the old staging placeholder is no longer a live evidence reference.",
+          "strength": "medium",
+          "supports": [
+            "sample-identity",
+            "source-chain",
+            "version-scope"
+          ],
+          "origin": "Current repo docs"
+        },
+        {
           "evidence_id": "repo-defender-threat-file-hash-dumps",
           "kind": "repo-doc",
           "title": "Local Defender dumps and traces for ThreatFileHashLogging and EnableFileHashComputation",
@@ -103480,16 +103511,16 @@
               "summary": "A bounded VM suite applied ThreadDpcEnable = 0 from a missing baseline, completed WinSAT CPU and memory runs with real apply and restore reboots, and returned the guest to the o..."
             },
             {
-              "title": "WPR trace for ThreadDpcEnable CPU bounded run",
-              "url": "evidence/files/vm-tooling-staging/thread-dpc-enable-0-cpu3.etl.md",
-              "kind": "etw-trace",
-              "summary": "ETW trace captured during the bounded WinSAT CPU run for ThreadDpcEnable = 0 after a real reboot in Win25H2Clean."
+              "title": "Canonical runtime summary for ThreadDpcEnable CPU bounded run",
+              "url": "evidence/raw/procmon/thread-dpc-enable-vm-suite-20260324/thread-dpc-enable-0-cpu3-runtime-summary.json",
+              "kind": "vm-test",
+              "summary": "Checked-in runtime summary for the bounded CPU run. ThreadDpcEnable = 0 was applied from a missing baseline, the guest rebooted, WinSAT CPU completed, and the value was restored..."
             },
             {
-              "title": "WPR trace for ThreadDpcEnable memory bounded run",
-              "url": "evidence/files/vm-tooling-staging/thread-dpc-enable-0-mem2.etl.md",
-              "kind": "etw-trace",
-              "summary": "ETW trace captured during the bounded WinSAT memory run for ThreadDpcEnable = 0 after a real reboot in Win25H2Clean."
+              "title": "Canonical runtime summary for ThreadDpcEnable memory bounded run",
+              "url": "evidence/raw/procmon/thread-dpc-enable-vm-suite-20260324/thread-dpc-enable-0-mem2-runtime-summary.json",
+              "kind": "vm-test",
+              "summary": "Checked-in runtime summary for the bounded memory run. ThreadDpcEnable = 0 was applied from a missing baseline, the guest rebooted, WinSAT memory completed, and the value was re..."
             }
           ]
         },
@@ -103693,30 +103724,32 @@
           "origin": "VM test / probe"
         },
         {
-          "evidence_id": "etw-thread-dpc-enable-cpu3",
-          "kind": "etw-trace",
-          "title": "WPR trace for ThreadDpcEnable CPU bounded run",
-          "location": "evidence/files/vm-tooling-staging/thread-dpc-enable-0-cpu3.etl.md",
-          "summary": "ETW trace captured during the bounded WinSAT CPU run for ThreadDpcEnable = 0 after a real reboot in Win25H2Clean.",
+          "evidence_id": "vm-thread-dpc-enable-cpu-runtime-summary",
+          "kind": "vm-test",
+          "title": "Canonical runtime summary for ThreadDpcEnable CPU bounded run",
+          "location": "evidence/raw/procmon/thread-dpc-enable-vm-suite-20260324/thread-dpc-enable-0-cpu3-runtime-summary.json",
+          "summary": "Checked-in runtime summary for the bounded CPU run. ThreadDpcEnable = 0 was applied from a missing baseline, the guest rebooted, WinSAT CPU completed, and the value was restored to missing after a second reboot. The old .etl.md file was only an external-capture placeholder and is no longer a live evidence reference.",
           "strength": "medium",
           "supports": [
             "behavior",
+            "rollback",
             "version-scope"
           ],
-          "origin": "VM ETW trace"
+          "origin": "VM test / probe"
         },
         {
-          "evidence_id": "etw-thread-dpc-enable-mem2",
-          "kind": "etw-trace",
-          "title": "WPR trace for ThreadDpcEnable memory bounded run",
-          "location": "evidence/files/vm-tooling-staging/thread-dpc-enable-0-mem2.etl.md",
-          "summary": "ETW trace captured during the bounded WinSAT memory run for ThreadDpcEnable = 0 after a real reboot in Win25H2Clean.",
+          "evidence_id": "vm-thread-dpc-enable-memory-runtime-summary",
+          "kind": "vm-test",
+          "title": "Canonical runtime summary for ThreadDpcEnable memory bounded run",
+          "location": "evidence/raw/procmon/thread-dpc-enable-vm-suite-20260324/thread-dpc-enable-0-mem2-runtime-summary.json",
+          "summary": "Checked-in runtime summary for the bounded memory run. ThreadDpcEnable = 0 was applied from a missing baseline, the guest rebooted, WinSAT memory completed, and the value was restored to missing after a second reboot. The old .etl.md file was only an external-capture placeholder and is no longer a live evidence reference.",
           "strength": "medium",
           "supports": [
             "behavior",
+            "rollback",
             "version-scope"
           ],
-          "origin": "VM ETW trace"
+          "origin": "VM test / probe"
         }
       ],
       "validation_proof": {

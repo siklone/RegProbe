@@ -46,6 +46,15 @@ STAGING_CANONICAL_REPLACEMENTS: dict[str, list[str]] = {
     "evidence/files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-20260325-100039": [
         "evidence/raw/procmon/security.threat-file-hash-logging/defender-threat-file-hash-mpengine-reboot-no-read-20260325.txt"
     ],
+    "evidence/files/vm-tooling-staging/defender-cloud-demo-extracted": [
+        "evidence/raw/external/security.threat-file-hash-logging/defender-cloud-demo-sample-metadata-20260325.json"
+    ],
+    "evidence/files/vm-tooling-staging/thread-dpc-enable-0-cpu3.etl.md": [
+        "evidence/raw/procmon/thread-dpc-enable-vm-suite-20260324/thread-dpc-enable-0-cpu3-runtime-summary.json"
+    ],
+    "evidence/files/vm-tooling-staging/thread-dpc-enable-0-mem2.etl.md": [
+        "evidence/raw/procmon/thread-dpc-enable-vm-suite-20260324/thread-dpc-enable-0-mem2-runtime-summary.json"
+    ],
 }
 
 CLEANUP_TOOL_REFERENCE_PATHS = {

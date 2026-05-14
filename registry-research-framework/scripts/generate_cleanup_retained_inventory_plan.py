@@ -211,11 +211,13 @@ ACTIVE_RETENTION_ACTION_STATES = {
 
 STAGING_CANONICALIZATION_DECISIONS: dict[str, dict[str, Any]] = {
     "evidence/files/vm-tooling-staging/defender-cloud-demo-extracted": {
-        "canonicalization_state": "rerun-needed",
+        "canonicalization_state": "canonical-raw-replacement-known",
         "owning_records": ["security.threat-file-hash-logging"],
-        "canonical_replacement_candidates": [],
-        "retention_rationale": "Only a Defender cloud demo extraction note currently remains; no canonical evidence/raw replacement was found in this repo.",
-        "next_canonicalization_step": "Rerun or replace the Defender cloud validation under evidence/raw before migrating the note reference.",
+        "canonical_replacement_candidates": [
+            "evidence/raw/external/security.threat-file-hash-logging/defender-cloud-demo-sample-metadata-20260325.json",
+        ],
+        "retention_rationale": "The repo now has a canonical evidence/raw metadata artifact for the Microsoft Defender cloud demo sample; the staging directory is only historical.",
+        "next_canonicalization_step": "Keep live references on the evidence/raw sample metadata; leave the staging directory only as audit history.",
     },
     "evidence/files/vm-tooling-staging/showinfotip-1-hits.csv..md": {
         "canonicalization_state": "canonical-raw-replacement-known",
@@ -236,22 +238,24 @@ STAGING_CANONICALIZATION_DECISIONS: dict[str, dict[str, Any]] = {
         "next_canonicalization_step": "Keep live record/index references on the evidence/raw CSV; leave the staging placeholder only as audit history.",
     },
     "evidence/files/vm-tooling-staging/thread-dpc-enable-0-cpu3.etl.md": {
-        "canonicalization_state": "partial-derived-replacement-known",
+        "canonicalization_state": "canonical-raw-replacement-known",
         "owning_records": ["system.kernel-thread-dpc-enable"],
         "canonical_replacement_candidates": [
-            "evidence/raw/procmon/thread-dpc-enable-vm-suite-20260324/thread-dpc-enable-0-cpu3.perf.csv"
+            "evidence/raw/procmon/thread-dpc-enable-vm-suite-20260324/thread-dpc-enable-0-cpu3-runtime-summary.json",
+            "evidence/raw/procmon/thread-dpc-enable-vm-suite-20260324/thread-dpc-enable-0-cpu3.perf.csv",
         ],
-        "retention_rationale": "A derived perf CSV exists, but it is not a byte-for-byte replacement for the original ETL placeholder.",
-        "next_canonicalization_step": "Retain until a new raw ETL/summary pair or explicit source-of-record decision replaces this placeholder.",
+        "retention_rationale": "The original checked-in item was only an external ETL placeholder. The runtime summary plus perf CSV are now the canonical source-of-record for the bounded CPU run.",
+        "next_canonicalization_step": "Keep live references on the runtime summary and perf CSV; leave the ETL placeholder only as audit history.",
     },
     "evidence/files/vm-tooling-staging/thread-dpc-enable-0-mem2.etl.md": {
-        "canonicalization_state": "partial-derived-replacement-known",
+        "canonicalization_state": "canonical-raw-replacement-known",
         "owning_records": ["system.kernel-thread-dpc-enable"],
         "canonical_replacement_candidates": [
-            "evidence/raw/procmon/thread-dpc-enable-vm-suite-20260324/thread-dpc-enable-0-mem2.perf.csv"
+            "evidence/raw/procmon/thread-dpc-enable-vm-suite-20260324/thread-dpc-enable-0-mem2-runtime-summary.json",
+            "evidence/raw/procmon/thread-dpc-enable-vm-suite-20260324/thread-dpc-enable-0-mem2.perf.csv",
         ],
-        "retention_rationale": "A derived perf CSV exists, but it is not a byte-for-byte replacement for the original ETL placeholder.",
-        "next_canonicalization_step": "Retain until a new raw ETL/summary pair or explicit source-of-record decision replaces this placeholder.",
+        "retention_rationale": "The original checked-in item was only an external ETL placeholder. The runtime summary plus perf CSV are now the canonical source-of-record for the bounded memory run.",
+        "next_canonicalization_step": "Keep live references on the runtime summary and perf CSV; leave the ETL placeholder only as audit history.",
     },
     "evidence/files/vm-tooling-staging/vm-batch-probe-20260320.json..md": {
         "canonicalization_state": "canonical-raw-replacement-known",

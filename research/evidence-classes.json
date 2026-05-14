@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-08T11:35:16.647220Z",
+  "generated_utc": "2026-05-14T18:53:44.401934Z",
   "summary": {
     "total_records": 356,
     "class_counts": {
@@ -10576,7 +10576,7 @@
         "gaming_safe": null
       },
       "validated_semantics": {
-        "summary": "The docs-first triage and phase-0 baseline agree on the current Win25H2Clean baseline value for PerfCalculateActualUtilization. App surfacing is tracked separately from evidence classification.",
+        "summary": "The docs-first triage and phase-0 baseline agree on the current Win25H2Clean baseline value for PerfCalculateActualUtilization. The 2026-05-08 value experiment adds a negative reboot-health signal for 0 on the available VM profile.",
         "has_validation_proof": true,
         "has_semantics_evidence": true,
         "links": [
@@ -26895,16 +26895,16 @@
             "summary": "A bounded VM suite applied ThreadDpcEnable = 0 from a missing baseline, completed WinSAT CPU and memory runs with real apply and restore reboots, and returned the guest to the o..."
           },
           {
-            "title": "WPR trace for ThreadDpcEnable CPU bounded run",
-            "url": "evidence/files/vm-tooling-staging/thread-dpc-enable-0-cpu3.etl.md",
-            "kind": "etw-trace",
-            "summary": "ETW trace captured during the bounded WinSAT CPU run for ThreadDpcEnable = 0 after a real reboot in Win25H2Clean."
+            "title": "Canonical runtime summary for ThreadDpcEnable CPU bounded run",
+            "url": "evidence/raw/procmon/thread-dpc-enable-vm-suite-20260324/thread-dpc-enable-0-cpu3-runtime-summary.json",
+            "kind": "vm-test",
+            "summary": "Checked-in runtime summary for the bounded CPU run. ThreadDpcEnable = 0 was applied from a missing baseline, the guest rebooted, WinSAT CPU completed, and the value was restored..."
           },
           {
-            "title": "WPR trace for ThreadDpcEnable memory bounded run",
-            "url": "evidence/files/vm-tooling-staging/thread-dpc-enable-0-mem2.etl.md",
-            "kind": "etw-trace",
-            "summary": "ETW trace captured during the bounded WinSAT memory run for ThreadDpcEnable = 0 after a real reboot in Win25H2Clean."
+            "title": "Canonical runtime summary for ThreadDpcEnable memory bounded run",
+            "url": "evidence/raw/procmon/thread-dpc-enable-vm-suite-20260324/thread-dpc-enable-0-mem2-runtime-summary.json",
+            "kind": "vm-test",
+            "summary": "Checked-in runtime summary for the bounded memory run. ThreadDpcEnable = 0 was applied from a missing baseline, the guest rebooted, WinSAT memory completed, and the value was re..."
           }
         ]
       },

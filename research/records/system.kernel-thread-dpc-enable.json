@@ -197,25 +197,27 @@
       "strength": "medium"
     },
     {
-      "evidence_id": "etw-thread-dpc-enable-cpu3",
-      "kind": "etw-trace",
-      "title": "WPR trace for ThreadDpcEnable CPU bounded run",
-      "location": "evidence/files/vm-tooling-staging/thread-dpc-enable-0-cpu3.etl.md",
-      "summary": "ETW trace captured during the bounded WinSAT CPU run for ThreadDpcEnable = 0 after a real reboot in Win25H2Clean.",
+      "evidence_id": "vm-thread-dpc-enable-cpu-runtime-summary",
+      "kind": "vm-test",
+      "title": "Canonical runtime summary for ThreadDpcEnable CPU bounded run",
+      "location": "evidence/raw/procmon/thread-dpc-enable-vm-suite-20260324/thread-dpc-enable-0-cpu3-runtime-summary.json",
+      "summary": "Checked-in runtime summary for the bounded CPU run. ThreadDpcEnable = 0 was applied from a missing baseline, the guest rebooted, WinSAT CPU completed, and the value was restored to missing after a second reboot. The old .etl.md file was only an external-capture placeholder and is no longer a live evidence reference.",
       "supports": [
         "behavior",
+        "rollback",
         "version-scope"
       ],
       "strength": "medium"
     },
     {
-      "evidence_id": "etw-thread-dpc-enable-mem2",
-      "kind": "etw-trace",
-      "title": "WPR trace for ThreadDpcEnable memory bounded run",
-      "location": "evidence/files/vm-tooling-staging/thread-dpc-enable-0-mem2.etl.md",
-      "summary": "ETW trace captured during the bounded WinSAT memory run for ThreadDpcEnable = 0 after a real reboot in Win25H2Clean.",
+      "evidence_id": "vm-thread-dpc-enable-memory-runtime-summary",
+      "kind": "vm-test",
+      "title": "Canonical runtime summary for ThreadDpcEnable memory bounded run",
+      "location": "evidence/raw/procmon/thread-dpc-enable-vm-suite-20260324/thread-dpc-enable-0-mem2-runtime-summary.json",
+      "summary": "Checked-in runtime summary for the bounded memory run. ThreadDpcEnable = 0 was applied from a missing baseline, the guest rebooted, WinSAT memory completed, and the value was restored to missing after a second reboot. The old .etl.md file was only an external-capture placeholder and is no longer a live evidence reference.",
       "supports": [
         "behavior",
+        "rollback",
         "version-scope"
       ],
       "strength": "medium"

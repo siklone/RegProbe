@@ -2116,7 +2116,7 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Source | [evidence/files/vm/hideemptydrives-result.txt](../evidence/raw/procmon/explorer.hide-empty-drives/hideemptydrives-result.txt) |
+| Source | [evidence/raw/procmon/explorer.hide-empty-drives/hideemptydrives-result.txt](../evidence/raw/procmon/explorer.hide-empty-drives/hideemptydrives-result.txt) |
 | Exact quote / path | STATE=0 ... Explorer.EXE RegQueryValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/HideDrivesWithNoMedia ... Data: 0; STATE=1 ... Explorer.EXE RegQueryValue HKCU/Software/Microsoft/Windows/CurrentVersion/Explorer/Advanced/HideDrivesWithNoMedia ... Data: 1; RESTORED_EXISTS=False |
 | Key found on page | `True` |
 | Notes | The guest-local result file was copied back to the host scratch area during validation. The baseline value was absent and was restored to the absent state after the probe. |
@@ -9846,7 +9846,7 @@ Current writes
 | Confidence | `high` |
 | Needs VM validation | `False` |
 
-**Summary:** Validated candidate package for PerfCalculateActualUtilization under HKLM\SYSTEM\CurrentControlSet\Control\Power. The clean Win25H2Clean baseline confirmed the current default, the repo power notes carry an exact docs hit, the shared string batch found an exact current-build ntoskrnl.exe hit, the shared Ghidra batch produced reviewable xref artifacts, and the tools-hardened lightweight ETW follow-up on RegProbe-Baseline-ToolsHardened-20260330 captured an exact runtime read for PerfCalculateActualUtilization. A later one-value reboot experiment observed a Startup Repair regression after setting the value to `0`, so non-default values are treated as advanced, snapshot-gated, VM-profile-sensitive experiments rather than general-user tweaks.
+**Summary:** Validated candidate package for PerfCalculateActualUtilization under HKLM\SYSTEM\CurrentControlSet\Control\Power. The clean Win25H2Clean baseline confirmed the current default, the repo power notes carry an exact docs hit, the shared string batch found an exact current-build ntoskrnl.exe hit, the shared Ghidra batch produced reviewable xref artifacts, and the tools-hardened lightweight ETW follow-up on RegProbe-Baseline-ToolsHardened-20260330 captured an exact runtime read for PerfCalculateActualUtilization. A later one-value reboot experiment observed a Startup Repair regression after setting the value to 0, so non-default values are advanced, snapshot-gated, and VM-profile-sensitive.
 
 **Current implementation**
 
@@ -9893,7 +9893,7 @@ Current writes
 | Path | `HKLM\SYSTEM\CurrentControlSet\Control\Power` |
 | Value name | `PerfCalculateActualUtilization` |
 | Value type | `REG_DWORD` |
-| Notes | This candidate is promoted as a warning-gated research-card raw power value; CPU-utilization behavior can be host and hardware dependent. `PerfCalculateActualUtilization=0` produced a reboot regression on the available VM profile during the 2026-05-08 pilot and must not be treated as a safe default. |
+| Notes | This candidate is promoted as a warning-gated research-card raw power value; CPU-utilization behavior can be host and hardware dependent. PerfCalculateActualUtilization=0 produced a reboot regression on the available VM profile during the 2026-05-08 pilot and must not be treated as a safe default. |
 
 | State | Value | Label | Meaning | Evidence IDs |
 | --- | --- | --- | --- | --- |
@@ -9909,7 +9909,7 @@ Current writes
 
 | Profile | Label | Intended for | Avoid for | Apply allowed |
 | --- | --- | --- | --- | --- |
-| `observed-baseline` | Observed baseline | ['Registry research tracking', 'Power-manager documentation'] | ['Generic enterprise golden images', 'VMs where host/guest CPU-utilization reporting must remain unchanged'] | `True` |
+| `observed-baseline` | Observed baseline | ['Registry research tracking', 'Power-manager documentation'] | ['Generic enterprise golden images', 'VMs where host/guest CPU-utilization reporting must remain unchanged', 'Unsnapshotted reboot experiments'] | `True` |
 
 **Evidence**
 
@@ -9924,7 +9924,7 @@ Current writes
 | `vm-power-control-lightweight-runtime-20260330` | `etw-trace` | `VM ETW trace` | Tools-hardened lightweight ETW follow-up for remaining docs-first power-control values | [evidence/files/vm/power-control-lightweight-runtime-20260330-024603/summary.json](../evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-024603/summary.json) and [evidence/files/vm/power-control-lightweight-runtime-20260330-024603/results.json](../evidence/files/vm-tooling-staging/power-control-lightweight-runtime-20260330-024603/results.json) and [research/notes/power-control-lightweight-runtime-follow-up-20260330.md](notes/power-control-lightweight-runtime-follow-up-20260330.md) | `high` | behavior, risk, version-scope |
 | `vm-power.control.perf-calculate-actual-utilization-etw-stackwalk-attempt-20260424i` | `etw-trace` | `VM ETW trace` | Bounded ETW stackwalk timeout receipt | [evidence/raw/etw-stackwalk/power.control.perf-calculate-actual-utilization-etw-20260424i/power.control.perf-calculate-actual-utilization-etw-20260424i-summary.json](../evidence/raw/etw-stackwalk/power.control.perf-calculate-actual-utilization-etw-20260424i/power.control.perf-calculate-actual-utilization-etw-20260424i-summary.json) and [evidence/raw/etw-stackwalk/power.control.perf-calculate-actual-utilization-etw-20260424i/power.control.perf-calculate-actual-utilization-etw-20260424i-stage.json](../evidence/raw/etw-stackwalk/power.control.perf-calculate-actual-utilization-etw-20260424i/power.control.perf-calculate-actual-utilization-etw-20260424i-stage.json) and [evidence/captures/power-control-perf-calculate-actual-utilization-etw-stackwalk-attempt-20260424.json](../evidence/captures/power-control-perf-calculate-actual-utilization-etw-stackwalk-attempt-20260424.json) | `medium` | runtime-lane-review, transport-blocker |
 | `vm-power.control.perf-calculate-actual-utilization-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk runtime receipt for PerfCalculateActualUtilization | [evidence/captures/power-control-perf-calculate-actual-utilization-etw-qga-unblock-20260507.json](../evidence/captures/power-control-perf-calculate-actual-utilization-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/power-control-perf-calculate-actual-utilization-etw-qga-unblock-20260507/power-control-perf-calculate-actual-utilization-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/power-control-perf-calculate-actual-utilization-etw-qga-unblock-20260507/power-control-perf-calculate-actual-utilization-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/power-control-perf-calculate-actual-utilization-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/power-control-perf-calculate-actual-utilization-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/power-control-perf-calculate-actual-utilization-etw-qga-unblock-20260507/power-control-perf-calculate-actual-utilization-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/power-control-perf-calculate-actual-utilization-etw-qga-unblock-20260507/power-control-perf-calculate-actual-utilization-etw-qga-unblock-20260507.etl) | `high` | runtime-observation, tooling-fix, path, value, version-scope |
-| `vm-power.control.perf-calculate-actual-utilization-value-experiment-20260508` | `vm-test` | `VM reboot experiment` | One-value reboot experiment for PerfCalculateActualUtilization=0 | [registry-value experiment](../registry-research-framework/audit/registry-value-experiments/pilot-perf-calculate-actual-utilization-0.json) and [recovery note](../registry-research-framework/audit/registry-value-experiments/pilot-perf-calculate-actual-utilization-0-recovery.md) | `high` | risk, rollback-limit, reboot-regression, vm-profile-scope |
+| `vm-power.control.perf-calculate-actual-utilization-value-experiment-20260508` | `vm-test` | `VM test / probe` | One-value reboot experiment for PerfCalculateActualUtilization=0 | [registry-research-framework/audit/registry-value-experiments/pilot-perf-calculate-actual-utilization-0.json](../registry-research-framework/audit/registry-value-experiments/pilot-perf-calculate-actual-utilization-0.json) and [registry-research-framework/audit/registry-value-experiments/pilot-perf-calculate-actual-utilization-0-recovery.md](../registry-research-framework/audit/registry-value-experiments/pilot-perf-calculate-actual-utilization-0-recovery.md) | `high` | risk, rollback-limit, reboot-regression, vm-profile-scope |
 
 **Validation proof**
 
@@ -9933,7 +9933,7 @@ Current writes
 | Source | [Docs/power/power.md](../Docs/power/power.md) |
 | Exact quote / path | [Docs/power/power.md:181](../Docs/power/power.md:181) shows `PerfCalculateActualUtilization` with observed literal `1` in the repo power notes. |
 | Key found on page | `True` |
-| Notes | The docs-first triage and phase-0 baseline agree on the current Win25H2Clean baseline value for PerfCalculateActualUtilization. The 2026-05-08 value experiment adds a negative reboot-health signal for `0` on the available VM profile. |
+| Notes | The docs-first triage and phase-0 baseline agree on the current Win25H2Clean baseline value for PerfCalculateActualUtilization. The 2026-05-08 value experiment adds a negative reboot-health signal for 0 on the available VM profile. |
 
 **Decision**
 
@@ -9944,7 +9944,7 @@ Current writes
 | Restore default supported | `True` |
 | Restore previous supported | `True` |
 | Needs VM validation | `False` |
-| Why | PerfCalculateActualUtilization now has converged cross-layer evidence on RegProbe-Baseline-ToolsHardened-20260330: phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, prior shell-safe Procmon lanes, and an exact runtime read captured by the tools-hardened lightweight ETW follow-up. The 2026-05-08 promotion review pack approves this app-mapped raw power card as promoted-with-warnings because VM CPU-utilization reporting and bare-metal power behavior can diverge. The later 2026-05-08 one-value experiment observed a reboot regression after applying `0`, so non-default testing must stay snapshot-gated and advanced-user only. |
+| Why | PerfCalculateActualUtilization now has converged cross-layer evidence on RegProbe-Baseline-ToolsHardened-20260330: phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, prior shell-safe Procmon lanes, and an exact runtime read captured by the tools-hardened lightweight ETW follow-up. The 2026-05-08 promotion review pack approves this app-mapped raw power card as promoted-with-warnings because VM CPU-utilization reporting and bare-metal power behavior can diverge. The later 2026-05-08 one-value experiment observed a reboot regression after applying 0, so non-default testing must stay snapshot-gated and advanced-user only. |
 
 ---
 
@@ -15504,7 +15504,7 @@ Current writes
 | Source | [https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#donotshowfeedbacknotifications](https://learn.microsoft.com/en-us/windows/client-management/mdm/policy-csp-experience#donotshowfeedbacknotifications) |
 | Exact quote / path | Registry Key Name Software/Policies/Microsoft/Windows/DataCollection; Registry Value Name DoNotShowFeedbackNotifications; 0 (Default) Feedback notifications aren't disabled ... 1 Feedback notifications are disabled. |
 | Key found on page | `True` |
-| Notes | The Experience Policy CSP page explicitly names the exact machine policy path and value name the app writes and defines the 0/1 semantics. Added nohuto mirror corroboration via nohuto-donotshowfeedbacknotifications-admx. Win25H2Clean reversible probe at [evidence/files/vm/feedback_notifications_probe.txt](../evidence/raw/procmon/privacy.disable-feedback-notifications/feedback_notifications_probe.txt) confirmed writes for 0 and 1, live registry queries after each write, feedback settings surface opens in both states, and restoration to the original state. |
+| Notes | The Experience Policy CSP page explicitly names the exact machine policy path and value name the app writes and defines the 0/1 semantics. Added nohuto mirror corroboration via nohuto-donotshowfeedbacknotifications-admx. Win25H2Clean reversible probe at [evidence/raw/procmon/privacy.disable-feedback-notifications/feedback_notifications_probe.txt](../evidence/raw/procmon/privacy.disable-feedback-notifications/feedback_notifications_probe.txt) confirmed writes for 0 and 1, live registry queries after each write, feedback settings surface opens in both states, and restoration to the original state. |
 
 **Decision**
 
@@ -20987,7 +20987,7 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Source | [evidence/files/vm/defender-enhanced-notifications-securitycenter-1-20260324-213118/defender-disable-enhanced-securitycenter-1.txt](../evidence/raw/procmon/security-disable-enhanced-defender-notifications-validation-20260324/defender-disable-enhanced-securitycenter-1.txt/defender-disable-enhanced-securitycenter-1.txt) |
+| Source | [evidence/raw/procmon/security-disable-enhanced-defender-notifications-validation-20260324/defender-disable-enhanced-securitycenter-1.txt/defender-disable-enhanced-securitycenter-1.txt](../evidence/raw/procmon/security-disable-enhanced-defender-notifications-validation-20260324/defender-disable-enhanced-securitycenter-1.txt/defender-disable-enhanced-securitycenter-1.txt) |
 | Exact quote / path | SecurityHealthService.exe \| RegQueryValue \| HKLM/SOFTWARE/Policies/Microsoft/Windows Defender Security Center/Notifications/DisableEnhancedNotifications \| SUCCESS \| Type: REG_DWORD, Length: 4, Data: 1; baseline run shows the same value as NAME NOT FOUND before the write. |
 | Key found on page | `True` |
 | Notes | The clean snapshot baseline and the enabled-state VM probe both hit the same Security Center Notifications policy path. A separate alias check with only the Reporting path set still showed SecurityHealthService.exe reading the Security Center path. The baseline also showed DisableNotifications = 1 on that branch, but that sibling policy does not change which path this value is read from. |
@@ -22934,6 +22934,7 @@ Current writes
 | `ms-defender-enable-file-hash-computation` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Create indicators for files | [https://learn.microsoft.com/en-us/defender-endpoint/indicator-file](https://learn.microsoft.com/en-us/defender-endpoint/indicator-file) | `high` | path, value, behavior, tradeoff |
 | `ms-defender-file-hash-event1120` | `official-doc` | `Microsoft official doc` | Microsoft Support: March 2016 anti-malware platform update for Endpoint Protection clients | [https://support.microsoft.com/en-gb/topic/march-2016-anti-malware-platform-update-for-endpoint-protection-clients-d99f5dc9-b7a0-bdb2-5161-3efc43d889fa](https://support.microsoft.com/en-gb/topic/march-2016-anti-malware-platform-update-for-endpoint-protection-clients-d99f5dc9-b7a0-bdb2-5161-3efc43d889fa) | `high` | behavior, value |
 | `ms-defender-cloud-demo-sample` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Demonstrate cloud-delivered protection | [https://learn.microsoft.com/en-us/defender-endpoint/defender-endpoint-demonstration-cloud-delivered-protection](https://learn.microsoft.com/en-us/defender-endpoint/defender-endpoint-demonstration-cloud-delivered-protection) | `high` | behavior, path |
+| `repo-defender-cloud-demo-sample-metadata` | `repo-doc` | `Current repo docs` | Repo-safe metadata for the Defender cloud demo PE sample | [evidence/raw/external/security.threat-file-hash-logging/defender-cloud-demo-sample-metadata-20260325.json](../evidence/raw/external/security.threat-file-hash-logging/defender-cloud-demo-sample-metadata-20260325.json) | `medium` | sample-identity, source-chain, version-scope |
 | `repo-defender-threat-file-hash-dumps` | `repo-doc` | `Current repo docs` | Local Defender dumps and traces for ThreatFileHashLogging and EnableFileHashComputation | [Docs/security/assets/Windows-Defender.txt](../Docs/security/assets/Windows-Defender.txt) | `medium` | path, value |
 | `vm-defender-runtime-disabled-baseline` | `vm-test` | `VM test / probe` | Original high-risk snapshot had Defender disabled | [evidence/files/vm/defender-runtime-repair.json](../evidence/files/vm-tooling-staging/defender-runtime-repair.json) | `high` | default, behavior |
 | `vm-defender-runtime-enabled-baseline` | `vm-test` | `VM test / probe` | Defender-on 25H2 snapshot baseline | [evidence/files/vm/defender-runtime-repair.json](../evidence/files/vm-tooling-staging/defender-runtime-repair.json) | `high` | default, behavior |
@@ -22953,7 +22954,7 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Source | [evidence/files/vm/defender-threat-file-hash-legacyroot-1-20260325-011845/defender-threat-file-hash-legacyroot-1.txt](../evidence/raw/procmon/security.threat-file-hash-logging/defender-threat-file-hash-legacyroot-1.txt/defender-threat-file-hash-legacyroot-1.txt) |
+| Source | [evidence/raw/procmon/security.threat-file-hash-logging/defender-threat-file-hash-legacyroot-1.txt/defender-threat-file-hash-legacyroot-1.txt](../evidence/raw/procmon/security.threat-file-hash-logging/defender-threat-file-hash-legacyroot-1.txt/defender-threat-file-hash-legacyroot-1.txt) |
 | Exact quote / path | MsMpEng.exe \| RegQueryValue \| HKLM/SOFTWARE/Policies/Microsoft/Windows Defender/ThreatFileHashLogging \| SUCCESS \| Type: REG_DWORD, Length: 4, Data: 1 |
 | Key found on page | `True` |
 | Notes | The Defender-on 25H2 VM produced a clean baseline event 1116 with no event 1120. Earlier text-file passes showed MsMpEng.exe reading the root ThreatFileHashLogging value directly and reading the Policy Manager EnableFileHashComputation alias directly in a separate pass. The app now stays on the documented root policy path. The later official Microsoft PE sample follow-up still produced event 1116 with no event 1120, so the hash-event behavior remains an open current-build question rather than part of the app contract. |
@@ -25742,7 +25743,7 @@ Current writes
 
 | Field | Value |
 | --- | --- |
-| Source | [evidence/files/vm/gamemode_admin_probe.txt](../evidence/raw/procmon/system.enable-game-mode/gamemode_admin_probe.txt) |
+| Source | [evidence/raw/procmon/system.enable-game-mode/gamemode_admin_probe.txt](../evidence/raw/procmon/system.enable-game-mode/gamemode_admin_probe.txt) |
 | Exact quote / path | gamemode_admin_probe.txt: "7:52:45.6879293 PM","SystemSettings.exe","5512","RegQueryValue","HKU/S-1-5-21-3538642439-2106388720-149684979-500/Software/Microsoft/GameBar/AutoGameModeEnabled","SUCCESS","Type: REG_DWORD, Length: 4, Data: 1". gamemode_admin_zero_probe.txt: "7:54:41.9130012 PM","SystemSettings.exe","5512","RegQueryValue","HKU/S-1-5-21-3538642439-2106388720-149684979-500/Software/Microsoft/GameBar/AutoGameModeEnabled","SUCCESS","Type: REG_DWORD, Length: 4, Data: 0". |
 | Key found on page | `True` |
 | Notes | The interactive Administrator profile was probed through the guest. The value was set to 1 and then to 0 in separate reversible captures, and SystemSettings.exe read both states. The value was restored to 1 after the 0-state probe. Normalized for the consolidated evidence report. |
@@ -26869,8 +26870,8 @@ Current writes
 | `ms-threaded-dpcs` | `official-doc` | `Microsoft official doc` | Microsoft Learn: Introduction to threaded DPCs | [https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/introduction-to-threaded-dpcs](https://learn.microsoft.com/en-us/windows-hardware/drivers/kernel/introduction-to-threaded-dpcs) | `high` | path, value, default, behavior, side-effects, version-scope |
 | `app-system-registry-provider` | `repo-code` | `Current repo code` | Current app research-surface implementation | [research/app-surface/validated-registry-values.json](app-surface/validated-registry-values.json) and app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs | `high` | path, value, ui-mapping |
 | `vm-thread-dpc-enable-bounded-suite` | `vm-test` | `VM test / probe` | Win25H2Clean bounded reboot suite for ThreadDpcEnable = 0 | [research/notes/thread-dpc-enable-vm-suite-20260324.md](notes/thread-dpc-enable-vm-suite-20260324.md) | `medium` | value, default, behavior, version-scope |
-| `etw-thread-dpc-enable-cpu3` | `etw-trace` | `VM ETW trace` | WPR trace for ThreadDpcEnable CPU bounded run | [evidence/files/vm/thread-dpc-enable-0-cpu3.etl.md](../evidence/files/vm-tooling-staging/thread-dpc-enable-0-cpu3.etl.md) | `medium` | behavior, version-scope |
-| `etw-thread-dpc-enable-mem2` | `etw-trace` | `VM ETW trace` | WPR trace for ThreadDpcEnable memory bounded run | [evidence/files/vm/thread-dpc-enable-0-mem2.etl.md](../evidence/files/vm-tooling-staging/thread-dpc-enable-0-mem2.etl.md) | `medium` | behavior, version-scope |
+| `vm-thread-dpc-enable-cpu-runtime-summary` | `vm-test` | `VM test / probe` | Canonical runtime summary for ThreadDpcEnable CPU bounded run | [evidence/raw/procmon/thread-dpc-enable-vm-suite-20260324/thread-dpc-enable-0-cpu3-runtime-summary.json](../evidence/raw/procmon/thread-dpc-enable-vm-suite-20260324/thread-dpc-enable-0-cpu3-runtime-summary.json) | `medium` | behavior, rollback, version-scope |
+| `vm-thread-dpc-enable-memory-runtime-summary` | `vm-test` | `VM test / probe` | Canonical runtime summary for ThreadDpcEnable memory bounded run | [evidence/raw/procmon/thread-dpc-enable-vm-suite-20260324/thread-dpc-enable-0-mem2-runtime-summary.json](../evidence/raw/procmon/thread-dpc-enable-vm-suite-20260324/thread-dpc-enable-0-mem2-runtime-summary.json) | `medium` | behavior, rollback, version-scope |
 
 **Validation proof**
 
@@ -34211,7 +34212,7 @@ Nohuto lineage references:
 | `local-grouppolicy-adml-enablecdp` | `official-doc` | `Microsoft official doc` | Local Microsoft GroupPolicy.adml EnableCDP help text | [evidence/files/external/c/PolicyDefinitions/en-US/GroupPolicy.adml](../evidence/files/external/c/PolicyDefinitions/en-US/GroupPolicy.adml) | `high` | behavior, default, side-effects |
 | `app-privacy-provider` | `repo-code` | `Current repo code` | Current app implementation | app/Services/TweakProviders/PrivacyTweakProvider.cs | `high` | path, value, ui-mapping, app-mismatch |
 | `ghidra-sharedexperiences-singleton` | `decompiled-pseudocode` | `Nohuto upstream pseudocode` | Decompiled Shared Experiences singleton | [Docs/privacy/assets/crossdev-SharedExperiencesSingleton.c](../Docs/privacy/assets/crossdev-SharedExperiencesSingleton.c) | `medium` | path, value, behavior |
-| `guest-crossdevice-launch` | `vm-test` | `VM test / probe` | Guest launch of CrossDeviceResume | [evidence/files/vm/crossdevice_resume_probe.csv](../evidence/raw/procmon/privacy.disable-resume/crossdevice_resume_probe.csv) | `low` | behavior, version-scope |
+| `guest-crossdevice-launch` | `vm-test` | `VM test / probe` | Guest launch of CrossDeviceResume | [evidence/raw/procmon/privacy.disable-resume/crossdevice_resume_probe.csv](../evidence/raw/procmon/privacy.disable-resume/crossdevice_resume_probe.csv) | `low` | behavior, version-scope |
 | `vm-privacy.disable-cross-device-experiences-etw-qga-unblock-20260507` | `etw-trace` | `VM ETW trace` | QGA-first ETW stackwalk probe receipt | [evidence/captures/privacy-disable-cross-device-experiences-etw-qga-unblock-20260507.json](../evidence/captures/privacy-disable-cross-device-experiences-etw-qga-unblock-20260507.json) and [evidence/raw/etw-stackwalk/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507-summary.json](../evidence/raw/etw-stackwalk/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507-summary.json) and [evidence/raw/etw-stackwalk/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507/normalized-registry-bundle.json](../evidence/raw/etw-stackwalk/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507/normalized-registry-bundle.json) and [evidence/raw/etw-stackwalk/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507.etl](../evidence/raw/etw-stackwalk/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507/privacy-disable-cross-device-experiences-policy-enablecdp-etw-qga-unblock-20260507.etl) | `medium` | path, value, version-scope |
 
 **Validation proof**

@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-08T11:35:17.323184Z",
+  "generated_utc": "2026-05-14T18:53:44.962545Z",
   "source_index": "research/evidence-index.json",
   "summary": {
     "total_records": 356,
@@ -4971,8 +4971,8 @@
         }
       },
       "source_file": "research/records/privacy.disable-cross-device-experiences.review.json",
-      "source_file_sha256": "dc085c99a4fa1e7912af4c03ad0d4bf2c671421444fe18252383cdaee241129e",
-      "source_file_size_bytes": 18378,
+      "source_file_sha256": "6be9294e68371f9349ea3b7a1c9b31c7ac638ca94596bd7a71052d83b1394822",
+      "source_file_size_bytes": 18388,
       "name": "Cross-Device Experiences",
       "category": "Privacy",
       "area": "Mixed Registry Configuration",
@@ -16578,8 +16578,8 @@
         }
       },
       "source_file": "research/records/system.services.disable-sysmain.review.json",
-      "source_file_sha256": "47d465e6b8bbff7d213ac0922668c02130c8776d724fc0d57a50e561d04f4156",
-      "source_file_size_bytes": 8661,
+      "source_file_sha256": "1cabbde1e7c157fa11ee10cbe95bef0b13acac2c82fa3336408978501992d6de",
+      "source_file_size_bytes": 8697,
       "name": "SysMain Service",
       "category": "System",
       "area": "Service Start Mode",
@@ -28453,8 +28453,8 @@
         }
       },
       "source_file": "research/records/audio.disable-beep.review.json",
-      "source_file_sha256": "6d8ec1e66a7e07ee63b2ccc0de667b30146fab7fbf4358e3334d626090ef2380",
-      "source_file_size_bytes": 13553,
+      "source_file_sha256": "08615346ed20bfb8d3ebab72903df3f0b8798e90d191d4f102942ac22f0279db",
+      "source_file_size_bytes": 13587,
       "name": "System Beep Driver",
       "category": "Audio",
       "area": "Driver Start Mode",
@@ -28700,7 +28700,7 @@
         "key_found_on_page": true,
         "notes": "Guest reversible probe at evidence/raw/runtime-diff/audio.disable-beep/beep-start-toggle-20260327.json confirmed BASELINE=1, AFTER_4=4, AFTER_1=1, RESTORED=1."
       },
-      "validation_proof_sha256": "5b2fdb894230a9968ae5988951da38e4ed60333b008effa58bdae351929538b0",
+      "validation_proof_sha256": "14a92712c7818ff25606c2db321cc3e62745b0e18fa4f469230f93dd4a1c9fda",
       "provenance": null,
       "v31_evidence_root": null,
       "artifact_refs": [],
@@ -28784,8 +28784,8 @@
         }
       },
       "source_file": "research/records/audio.show-disconnected-devices.review.json",
-      "source_file_sha256": "8b34ab3438a2b1eff11156ae9854724cbc8579c12ad348591b69ab145fc7edf7",
-      "source_file_size_bytes": 17001,
+      "source_file_sha256": "b0a675d73f40682496c7cd9f0fc7109b54b82c4d58192c6a1b7b11695255ad27",
+      "source_file_size_bytes": 17010,
       "name": "Show Disconnected Audio Devices",
       "category": "Audio",
       "area": "Sound Control Panel DeviceCpl Flags",
@@ -29125,8 +29125,8 @@
         }
       },
       "source_file": "research/records/audio.show-hidden-devices.review.json",
-      "source_file_sha256": "64560028dfaad3202ed014c19db77668614dd0b874f1feb790d093fb26339b3c",
-      "source_file_size_bytes": 15112,
+      "source_file_sha256": "ffc9127c2bea6845724722f84c32535f023cb38969aed52c2b1a6d9d87c80ebd",
+      "source_file_size_bytes": 15132,
       "name": "Show Hidden Audio Devices",
       "category": "Audio",
       "area": "Sound Control Panel DeviceCpl Flags",
@@ -29743,8 +29743,8 @@
         }
       },
       "source_file": "research/records/developer.docker-performance.review.json",
-      "source_file_sha256": "3401b412d7d00b2c1fc485ef44b79b3387608b259dcf862d13a6d76e79e5a66f",
-      "source_file_size_bytes": 10476,
+      "source_file_sha256": "3cba81ca53b5e6fc221e45faecfa41fc0ec2e589e4cc5e0bb2f90475038ed52b",
+      "source_file_size_bytes": 10495,
       "name": "Docker Desktop WSL 2 Backend",
       "category": "Developer",
       "area": "Docker Desktop / WSL Integration",
@@ -33935,8 +33935,8 @@
         }
       },
       "source_file": "research/records/explorer.hide-empty-drives.review.json",
-      "source_file_sha256": "e269508eda28ce0639bc7daa0c2d32684d9457591e1e788104d2d835013884b3",
-      "source_file_size_bytes": 16740,
+      "source_file_sha256": "4d99ea362c824ec5ecac1221254981d107967141ad4f538377fe68616880ee44",
+      "source_file_size_bytes": 16754,
       "name": "Hide Empty Drives",
       "category": "Explorer",
       "area": "Observed Explorer Runtime Setting",
@@ -34184,7 +34184,7 @@
         "key_found_on_page": true,
         "notes": "The guest-local result file was copied back to the host scratch area during validation. The baseline value was absent and was restored to the absent state after the probe."
       },
-      "validation_proof_sha256": "e79b104805dbb1108ba956f7f4d027298052bc0d6111696788d3f6a655211c8e",
+      "validation_proof_sha256": "d0906ab87710c1cbd2f3500d5a7b982e8d31ec3c6df55702157ba5f5d7153185",
       "provenance": null,
       "v31_evidence_root": null,
       "artifact_refs": [],
@@ -36314,8 +36314,8 @@
         }
       },
       "source_file": "research/records/explorer.show-info-tips.review.json",
-      "source_file_sha256": "f1f2003ca5b6b105efb715a00789c02cc4e365839d47df9fb99d16862028da3c",
-      "source_file_size_bytes": 15948,
+      "source_file_sha256": "4bc260363e77a9311e6952af2d7fbd05022da5d4c3548a82d6b00f95ab7eaafa",
+      "source_file_size_bytes": 15975,
       "name": "Show Explorer Info Tips",
       "category": "Explorer",
       "area": "Observed Explorer Runtime Setting",
@@ -36563,7 +36563,7 @@
         "key_found_on_page": true,
         "notes": "Raw hit exports were also copied to evidence/files/vm-tooling-staging/showinfotip-0-hits.csv and evidence/raw/procmon/explorer-show-info-tips-validation-20260324/showinfotip-1-hits.csv"
       },
-      "validation_proof_sha256": "753969c995f83f96cc8fa5b0bb20a2368c9a69ce4aafb0e129d88e3d8e65d677",
+      "validation_proof_sha256": "7ad4d335485321a87e8d0b6acffd8615d2a9f5935dd3d00cc3cebe31316fec4c",
       "provenance": null,
       "v31_evidence_root": null,
       "artifact_refs": [],
@@ -36653,8 +36653,8 @@
         }
       },
       "source_file": "research/records/explorer.show-protected-operating-system-files.review.json",
-      "source_file_sha256": "1ee04e73705c620dd62a3f787d8fb19ad2a329ef33d0b5a6cfc4e911c8d628e9",
-      "source_file_size_bytes": 17446,
+      "source_file_sha256": "f29409cf08c0d89c913dad31877da3e1476c7630855a3a2012ff5749d23bbc8e",
+      "source_file_size_bytes": 17496,
       "name": "Show Protected Operating System Files",
       "category": "Explorer",
       "area": "Observed Explorer Runtime Setting",
@@ -36904,7 +36904,7 @@
         "key_found_on_page": true,
         "notes": "Raw hit exports were also copied to evidence/files/vm-tooling-staging/showsuperhidden-0-hits.csv and evidence/raw/procmon/explorer-show-protected-operating-system-files-validation-20260324/showsuperhidden-1-hits.csv"
       },
-      "validation_proof_sha256": "31b3f5fdbffe3e26f331c0c797c31df76af16d312793d1da9ce42395165f88da",
+      "validation_proof_sha256": "cba707e8f0d4cc6c3376f37e108d33984d6c35ea6e4c9ebf688d420797a6a76c",
       "provenance": null,
       "v31_evidence_root": null,
       "artifact_refs": [],
@@ -57940,7 +57940,7 @@
           "gaming_safe": null
         },
         "validated_semantics": {
-          "summary": "The docs-first triage and phase-0 baseline agree on the current Win25H2Clean baseline value for PerfCalculateActualUtilization. App surfacing is tracked separately from evidence classification.",
+          "summary": "The docs-first triage and phase-0 baseline agree on the current Win25H2Clean baseline value for PerfCalculateActualUtilization. The 2026-05-08 value experiment adds a negative reboot-health signal for 0 on the available VM profile.",
           "has_validation_proof": true,
           "has_semantics_evidence": true,
           "links": [
@@ -57997,13 +57997,13 @@
         }
       },
       "source_file": "research/records/power.control.perf-calculate-actual-utilization.json",
-      "source_file_sha256": "cb76602bd3b95b9ced8c8638be756bb74cc772715e01c9cb3d4a1ba3a31f119a",
-      "source_file_size_bytes": 18890,
+      "source_file_sha256": "df44f34aade574727b98ca466d9f7208405e53bc6491848b98fabd0676561374",
+      "source_file_size_bytes": 21442,
       "name": "Perf Calculate Actual Utilization",
       "category": "Power",
       "area": "Raw Power Manager Registry",
       "scope": "device",
-      "summary": "Validated candidate package for PerfCalculateActualUtilization under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The clean Win25H2Clean baseline confirmed the current default, the repo power notes carry an exact docs hit, the shared string batch found an exact current-build ntoskrnl.exe hit, the shared Ghidra batch produced reviewable xref artifacts, and the tools-hardened lightweight ETW follow-up on RegProbe-Baseline-ToolsHardened-20260330 captured an exact runtime read for PerfCalculateActualUtilization. App surfacing remains a separate product decision from evidence classification.",
+      "summary": "Validated candidate package for PerfCalculateActualUtilization under HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power. The clean Win25H2Clean baseline confirmed the current default, the repo power notes carry an exact docs hit, the shared string batch found an exact current-build ntoskrnl.exe hit, the shared Ghidra batch produced reviewable xref artifacts, and the tools-hardened lightweight ETW follow-up on RegProbe-Baseline-ToolsHardened-20260330 captured an exact runtime read for PerfCalculateActualUtilization. A later one-value reboot experiment observed a Startup Repair regression after setting the value to 0, so non-default values are advanced, snapshot-gated, and VM-profile-sensitive.",
       "decision": {
         "confidence": "high",
         "apply_allowed": true,
@@ -58011,13 +58011,13 @@
         "restore_default_supported": true,
         "restore_previous_supported": true,
         "needs_vm_validation": false,
-        "why": "PerfCalculateActualUtilization now has converged cross-layer evidence on RegProbe-Baseline-ToolsHardened-20260330: phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, prior shell-safe Procmon lanes, and an exact runtime read captured by the tools-hardened lightweight ETW follow-up. The 2026-05-08 promotion review pack approves this app-mapped raw power card as promoted-with-warnings because VM CPU-utilization reporting and bare-metal power behavior can diverge.",
+        "why": "PerfCalculateActualUtilization now has converged cross-layer evidence on RegProbe-Baseline-ToolsHardened-20260330: phase-0 baseline existence, exact repo-doc hits, current-build ntoskrnl string corroboration, reviewable Ghidra artifacts, prior shell-safe Procmon lanes, and an exact runtime read captured by the tools-hardened lightweight ETW follow-up. The 2026-05-08 promotion review pack approves this app-mapped raw power card as promoted-with-warnings because VM CPU-utilization reporting and bare-metal power behavior can diverge. The later 2026-05-08 one-value experiment observed a reboot regression after applying 0, so non-default testing must stay snapshot-gated and advanced-user only.",
         "blocking_issues": []
       },
       "app_current_implementation": {
         "status": "matches-research",
         "provider_source": "app/Services/TweakProviders/ResearchAppSurfaceTweakProvider.cs",
-        "notes": "The app now surfaces PerfCalculateActualUtilization directly as a research-card registry value.",
+        "notes": "The app now surfaces PerfCalculateActualUtilization directly as a warning-gated research-card registry value. Non-default values require snapshot/overlay replay before reboot testing.",
         "writes": [
           {
             "target_id": "perfcalculateactualutilization",
@@ -58036,7 +58036,7 @@
           "path": "HKLM\\SYSTEM\\CurrentControlSet\\Control\\Power",
           "value_name": "PerfCalculateActualUtilization",
           "value_type": "REG_DWORD",
-          "notes": "This candidate is promoted as a warning-gated research-card raw power value; CPU-utilization behavior can be host and hardware dependent.",
+          "notes": "This candidate is promoted as a warning-gated research-card raw power value; CPU-utilization behavior can be host and hardware dependent. PerfCalculateActualUtilization=0 produced a reboot regression on the available VM profile during the 2026-05-08 pilot and must not be treated as a safe default.",
           "allowed_values": [
             {
               "state_kind": "value",
@@ -58078,7 +58078,8 @@
           ],
           "avoid_for": [
             "Generic enterprise golden images",
-            "VMs where host/guest CPU-utilization reporting must remain unchanged"
+            "VMs where host/guest CPU-utilization reporting must remain unchanged",
+            "Unsnapshotted reboot experiments"
           ],
           "states": [
             {
@@ -58092,7 +58093,8 @@
           "bad_when": "You need a hardware-independent CPU-utilization recommendation or a documented Microsoft end-user control surface.",
           "tradeoffs": [
             "Preserves the observed baseline value.",
-            "Ships behind warning labels because VM host scheduling and guest CPU-utilization reporting can be misleading."
+            "Ships behind warning labels because VM host scheduling and guest CPU-utilization reporting can be misleading.",
+            "A pilot set to 0 caused a reboot regression on the available VM profile."
           ],
           "apply_allowed": true,
           "evidence_ids": [
@@ -58231,15 +58233,30 @@
             "version-scope"
           ],
           "origin": "VM ETW trace"
+        },
+        {
+          "evidence_id": "vm-power.control.perf-calculate-actual-utilization-value-experiment-20260508",
+          "kind": "vm-test",
+          "title": "One-value reboot experiment for PerfCalculateActualUtilization=0",
+          "location": "registry-research-framework/audit/registry-value-experiments/pilot-perf-calculate-actual-utilization-0.json and registry-research-framework/audit/registry-value-experiments/pilot-perf-calculate-actual-utilization-0-recovery.md",
+          "summary": "The one-value experiment observed a Startup Repair regression after applying PerfCalculateActualUtilization=0 and rebooting. Offline registry restore, NTFS repair, SFC, DISM, System Restore, quality update uninstall, and feature update uninstall did not recover the image. The lane is treated as a high-strength risk signal, not as proof of sole causality.",
+          "strength": "high",
+          "supports": [
+            "risk",
+            "rollback-limit",
+            "reboot-regression",
+            "vm-profile-scope"
+          ],
+          "origin": "VM test / probe"
         }
       ],
       "validation_proof": {
         "source_url": "Docs/power/power.md",
         "exact_quote_or_path": "Docs/power/power.md:181 shows `PerfCalculateActualUtilization` with observed literal `1` in the repo power notes.",
         "key_found_on_page": true,
-        "notes": "The docs-first triage and phase-0 baseline agree on the current Win25H2Clean baseline value for PerfCalculateActualUtilization. App surfacing is tracked separately from evidence classification."
+        "notes": "The docs-first triage and phase-0 baseline agree on the current Win25H2Clean baseline value for PerfCalculateActualUtilization. The 2026-05-08 value experiment adds a negative reboot-health signal for 0 on the available VM profile."
       },
-      "validation_proof_sha256": "0b9db986096b363ddb7a503bdd24202f4363bfe219e159ed604e8ce68e2ab572",
+      "validation_proof_sha256": "0261860b496274ac68871fe163eb69dffd7049c3886ffd09894297a57e97e3d3",
       "provenance": null,
       "v31_evidence_root": "evidence/records/power.control.perf-calculate-actual-utilization",
       "artifact_refs": [],
@@ -72222,8 +72239,8 @@
         }
       },
       "source_file": "research/records/privacy.disable-feedback-notifications.json",
-      "source_file_sha256": "557d21375cbfd0fd18a2c24a8723e0834de555e77671ae8c48c5a700db2f6c27",
-      "source_file_size_bytes": 11877,
+      "source_file_sha256": "5685d2d2022513ff1cb81190bec8361ce7d195ad436732a06a2ff2617f578c13",
+      "source_file_size_bytes": 11903,
       "name": "Microsoft Feedback Notifications",
       "category": "Privacy",
       "area": "Registry Policy",
@@ -72475,7 +72492,7 @@
         "key_found_on_page": true,
         "notes": "The Experience Policy CSP page explicitly names the exact machine policy path and value name the app writes and defines the 0/1 semantics. Added nohuto mirror corroboration via nohuto-donotshowfeedbacknotifications-admx. Win25H2Clean reversible probe at evidence/raw/procmon/privacy.disable-feedback-notifications/feedback_notifications_probe.txt confirmed writes for 0 and 1, live registry queries after each write, feedback settings surface opens in both states, and restoration to the original state."
       },
-      "validation_proof_sha256": "65a1ebac483294594d33f9fdbdb2f3a0c7a7b570c3e8582b23ff0890c3678626",
+      "validation_proof_sha256": "a6c0ef84ef66179ce152ce37bce08d29c9b4e7940c76c42636e2754e66345627",
       "provenance": null,
       "v31_evidence_root": null,
       "artifact_refs": [],
@@ -86928,8 +86945,8 @@
         }
       },
       "source_file": "research/records/security.disable-enhanced-defender-notifications.review.json",
-      "source_file_sha256": "920e701cb7c44b73c841a30c207655644270f386f1abc48342550621758814bb",
-      "source_file_size_bytes": 14376,
+      "source_file_sha256": "17ce24f5ecb40db9753ae3b1973e73757c6c796e823db85d8e7da167cab98f84",
+      "source_file_size_bytes": 14414,
       "name": "Windows Security Enhanced Notifications",
       "category": "Security",
       "area": "Windows Security notifications",
@@ -87191,7 +87208,7 @@
         "key_found_on_page": true,
         "notes": "The clean snapshot baseline and the enabled-state VM probe both hit the same Security Center Notifications policy path. A separate alias check with only the Reporting path set still showed SecurityHealthService.exe reading the Security Center path. The baseline also showed DisableNotifications = 1 on that branch, but that sibling policy does not change which path this value is read from."
       },
-      "validation_proof_sha256": "fbc4863baa9ce3d49d4bb3f0fdbf319d98fe343d5abdc147792dd23887a67122",
+      "validation_proof_sha256": "1ce63c05906dcf54d6c4b4dd3b77adb7e420317c47b65baec0e58b841aa05639",
       "provenance": null,
       "v31_evidence_root": null,
       "artifact_refs": [],
@@ -92205,8 +92222,8 @@
         }
       },
       "source_file": "research/records/security.threat-file-hash-logging.review.json",
-      "source_file_sha256": "09a3e4a5617a49edbb6c4670561af0275f9a6497f1bd2209478be486ac2ba81a",
-      "source_file_size_bytes": 30871,
+      "source_file_sha256": "d1dc7aed785486a7c7c070cef866b9185240871be0f54f7fc20fd5275931d1d7",
+      "source_file_size_bytes": 31639,
       "name": "Microsoft Defender Threat File Hash Logging",
       "category": "Security",
       "area": "Microsoft Defender file hash logging",
@@ -92513,6 +92530,20 @@
           "origin": "Microsoft official doc"
         },
         {
+          "evidence_id": "repo-defender-cloud-demo-sample-metadata",
+          "kind": "repo-doc",
+          "title": "Repo-safe metadata for the Defender cloud demo PE sample",
+          "location": "evidence/raw/external/security.threat-file-hash-logging/defender-cloud-demo-sample-metadata-20260325.json",
+          "summary": "Checked-in metadata for the Microsoft Defender BaFS Sample PE used by the VM follow-up. The executable is intentionally not stored in the repository; the metadata records the source URL, file description, original filename, SHA256, and size so the old staging placeholder is no longer a live evidence reference.",
+          "strength": "medium",
+          "supports": [
+            "sample-identity",
+            "source-chain",
+            "version-scope"
+          ],
+          "origin": "Current repo docs"
+        },
+        {
           "evidence_id": "repo-defender-threat-file-hash-dumps",
           "kind": "repo-doc",
           "title": "Local Defender dumps and traces for ThreatFileHashLogging and EnableFileHashComputation",
@@ -92706,7 +92737,7 @@
         "key_found_on_page": true,
         "notes": "The Defender-on 25H2 VM produced a clean baseline event 1116 with no event 1120. Earlier text-file passes showed MsMpEng.exe reading the root ThreatFileHashLogging value directly and reading the Policy Manager EnableFileHashComputation alias directly in a separate pass. The app now stays on the documented root policy path. The later official Microsoft PE sample follow-up still produced event 1116 with no event 1120, so the hash-event behavior remains an open current-build question rather than part of the app contract."
       },
-      "validation_proof_sha256": "788154f3727acf4d2fc6840748ec22f61281ba3fadabd723b643a915a143c388",
+      "validation_proof_sha256": "71a7fa70e80910be8723672f17386a8f5f834b9652385b835eb9ed4fa49267fb",
       "provenance": null,
       "v31_evidence_root": null,
       "artifact_refs": [],
@@ -92784,8 +92815,8 @@
         }
       },
       "source_file": "research/records/security.trusted-path-credential-prompting.review.json",
-      "source_file_sha256": "3f0998078063b69bfbb08684a45cfb54bf7601c3b77a1ee5cbf77747b57f04a0",
-      "source_file_size_bytes": 10992,
+      "source_file_sha256": "6a586bd469d9a87f16ab0120f415f357fbce11def288eeb0e491343432d68646",
+      "source_file_size_bytes": 11036,
       "name": "Trusted Path for Credential Entry",
       "category": "Security",
       "area": "Registry Policy",
@@ -93011,7 +93042,7 @@
         "key_found_on_page": true,
         "notes": "Guest-side reversible probe on Win25H2Clean; see the batch probe output in evidence/raw/runtime-diff/vm-batch-probe-20260320/vm-batch-probe-20260320.json Added nohuto mirror corroboration via nohuto-enablesecurecredentialprompting-admx."
       },
-      "validation_proof_sha256": "ae5e917510de732b46d4b1a01a5b07f3a1f4628836a965d8e4868beec2ef21b0",
+      "validation_proof_sha256": "0cdef2a2a5c5dfbbf2c690ddcc6b2dbd1f69abcd350569b81c836480e27a4767",
       "provenance": null,
       "v31_evidence_root": null,
       "artifact_refs": [],
@@ -94715,8 +94746,8 @@
         }
       },
       "source_file": "research/records/system.disable-auto-maintenance.review.json",
-      "source_file_sha256": "6a0ca786ab932a9feb01208db0d0568b4b98a5d60fd009f84a076d5fca5c3652",
-      "source_file_size_bytes": 10719,
+      "source_file_sha256": "7de94066ac81b8c9e9df94ccd1fc2e2ede69e25066fb83e142145734a7e4cff8",
+      "source_file_size_bytes": 10763,
       "name": "Automatic Maintenance",
       "category": "System",
       "area": "Observed Registry Setting",
@@ -94942,7 +94973,7 @@
         "key_found_on_page": true,
         "notes": "Guest-side reversible probe on Win25H2Clean; see the batch probe output in evidence/raw/runtime-diff/vm-batch-probe-20260320/vm-batch-probe-20260320.json The local nohuto mirror also shows the same MaintenanceDisabled registry path."
       },
-      "validation_proof_sha256": "dcad2e9b8ac4218d210773646aa8c9db5ef46c5d54732c37417810c6613bc623",
+      "validation_proof_sha256": "810a2c0b467e482cffe418f958f017361d555aad33e99f628c749e6bf1ad1bf6",
       "provenance": null,
       "v31_evidence_root": null,
       "artifact_refs": [],
@@ -96039,8 +96070,8 @@
         }
       },
       "source_file": "research/records/system.disable-fullscreen-optimizations.review.json",
-      "source_file_sha256": "73d45b60623aa214b6148aa8d112f5330fee2546cd4ae0637823d3c65c18d591",
-      "source_file_size_bytes": 16556,
+      "source_file_sha256": "79bb869833b28cbd1869dfe8422abfbc995ca1dbcfd6dce787be7f0550c5d0a5",
+      "source_file_size_bytes": 16572,
       "name": "Fullscreen Optimizations",
       "category": "System",
       "area": "GameConfigStore / Compatibility Preference",
@@ -96708,8 +96739,8 @@
         }
       },
       "source_file": "research/records/system.disable-jpeg-reduction.review.json",
-      "source_file_sha256": "86c3255e7d8dac3bf29c41f7e5522473426dd4783eaaf0fe829218ff3e494539",
-      "source_file_size_bytes": 15097,
+      "source_file_sha256": "6afba0f5e9dafdc798d4327e62e817e525963a7d2560270548f5666be8290835",
+      "source_file_size_bytes": 15113,
       "name": "Wallpaper JPEG Import Quality",
       "category": "System",
       "area": "Desktop Wallpaper Import Behavior",
@@ -98550,8 +98581,8 @@
         }
       },
       "source_file": "research/records/system.disable-startup-delay.review.json",
-      "source_file_sha256": "68142ff7d46241ffc238099a3f513c2d1617b3e07b0ffda2ace00b30a814c39c",
-      "source_file_size_bytes": 13600,
+      "source_file_sha256": "6bf2602d3774db2490e987044b8c33fd210d943c6eb666631e455d3352825f53",
+      "source_file_size_bytes": 13632,
       "name": "Startup Program Delay",
       "category": "System",
       "area": "Explorer Startup Behavior",
@@ -98811,7 +98842,7 @@
         "key_found_on_page": true,
         "notes": "Retroactive v3.1 pass relies on the checked-in reversible probe, the startup-delay WPR summaries for both missing and 0, the explorer.exe Ghidra string-search output, and the repo-friendly Procmon placeholder note for the original shell-restart capture. Microsoft still does not publish StartupDelayInMSec as a primary registry contract."
       },
-      "validation_proof_sha256": "b2559024b692e3f3cc51a4b974a1adc7af0fc929a91ee7ed9925367f6db654e6",
+      "validation_proof_sha256": "a04422def327c75e4a13a9eb66c754dd0ddcda21928004381204978a24bf7e30",
       "provenance": null,
       "v31_evidence_root": "evidence/records/system.disable-startup-delay",
       "artifact_refs": [
@@ -100056,8 +100087,8 @@
         }
       },
       "source_file": "research/records/system.enable-game-mode.review.json",
-      "source_file_sha256": "4711f8eeed93763257ea422bb5c40ea2062487b6582c074980a6540d2feb06ac",
-      "source_file_size_bytes": 11841,
+      "source_file_sha256": "56b97bd16620fff1d68f6be6f1947ca06b04ca55178fa4758092c411e0dca615",
+      "source_file_size_bytes": 11852,
       "name": "Game Mode",
       "category": "System",
       "area": "Gaming Feature / GameBar Preference",
@@ -100298,7 +100329,7 @@
         "key_found_on_page": true,
         "notes": "The interactive Administrator profile was probed through the guest. The value was set to 1 and then to 0 in separate reversible captures, and SystemSettings.exe read both states. The value was restored to 1 after the 0-state probe. Normalized for the consolidated evidence report."
       },
-      "validation_proof_sha256": "d5ed6de3ca05c907ea31ce7a12f91495342c4032b4891e6ebd240a03895f6501",
+      "validation_proof_sha256": "b9664a11e6ff99ba9e4b70001cfe63b942fc45e27036b5b2b637bb5fd346d7e2",
       "provenance": null,
       "v31_evidence_root": null,
       "artifact_refs": [],
@@ -100388,8 +100419,8 @@
         }
       },
       "source_file": "research/records/system.enable-hags.review.json",
-      "source_file_sha256": "c81bd717404022adf5a025a0c8945b10b3afc8e5853100c7515ffc31917eb98e",
-      "source_file_size_bytes": 14532,
+      "source_file_sha256": "6d32d68508ac0e623d588b20ac20f825dc660a6f8052f21576f2c8f788692cbf",
+      "source_file_size_bytes": 14572,
       "name": "Hardware-Accelerated GPU Scheduling",
       "category": "System",
       "area": "Graphics Drivers / Scheduling Feature",
@@ -100652,7 +100683,7 @@
         "key_found_on_page": true,
         "notes": "Guest-side reversible probe on Win25H2Clean confirmed the baseline missing state and the 2 / 1 toggle sequence, then restored the machine back to missing. Normalized for the consolidated evidence report."
       },
-      "validation_proof_sha256": "6c285a06ea58dcdae870aff3fdb2721f76c5c71cae5ac30195ac31fad28559c5",
+      "validation_proof_sha256": "b200b34aa082f71637ab80ef14845a3258b502f620cffe3c4b6e13f642afb5b0",
       "provenance": null,
       "v31_evidence_root": null,
       "artifact_refs": [],
@@ -103115,16 +103146,16 @@
               "summary": "A bounded VM suite applied ThreadDpcEnable = 0 from a missing baseline, completed WinSAT CPU and memory runs with real apply and restore reboots, and returned the guest to the o..."
             },
             {
-              "title": "WPR trace for ThreadDpcEnable CPU bounded run",
-              "url": "evidence/files/vm-tooling-staging/thread-dpc-enable-0-cpu3.etl.md",
-              "kind": "etw-trace",
-              "summary": "ETW trace captured during the bounded WinSAT CPU run for ThreadDpcEnable = 0 after a real reboot in Win25H2Clean."
+              "title": "Canonical runtime summary for ThreadDpcEnable CPU bounded run",
+              "url": "evidence/raw/procmon/thread-dpc-enable-vm-suite-20260324/thread-dpc-enable-0-cpu3-runtime-summary.json",
+              "kind": "vm-test",
+              "summary": "Checked-in runtime summary for the bounded CPU run. ThreadDpcEnable = 0 was applied from a missing baseline, the guest rebooted, WinSAT CPU completed, and the value was restored..."
             },
             {
-              "title": "WPR trace for ThreadDpcEnable memory bounded run",
-              "url": "evidence/files/vm-tooling-staging/thread-dpc-enable-0-mem2.etl.md",
-              "kind": "etw-trace",
-              "summary": "ETW trace captured during the bounded WinSAT memory run for ThreadDpcEnable = 0 after a real reboot in Win25H2Clean."
+              "title": "Canonical runtime summary for ThreadDpcEnable memory bounded run",
+              "url": "evidence/raw/procmon/thread-dpc-enable-vm-suite-20260324/thread-dpc-enable-0-mem2-runtime-summary.json",
+              "kind": "vm-test",
+              "summary": "Checked-in runtime summary for the bounded memory run. ThreadDpcEnable = 0 was applied from a missing baseline, the guest rebooted, WinSAT memory completed, and the value was re..."
             }
           ]
         },
@@ -103136,8 +103167,8 @@
         }
       },
       "source_file": "research/records/system.kernel-thread-dpc-enable.json",
-      "source_file_sha256": "82c8dec5ae028196b84cb079e31c8dbbbf80b80bfef9c48dacf086ae2a94c25b",
-      "source_file_size_bytes": 12356,
+      "source_file_sha256": "520339fd9d7aadac6d0e9df3756f07bc64a9754e526b0423b319354137ffb248",
+      "source_file_size_bytes": 12940,
       "name": "Threaded DPCs",
       "category": "System",
       "area": "Kernel / Deferred Procedure Calls",
@@ -103336,30 +103367,32 @@
           "origin": "VM test / probe"
         },
         {
-          "evidence_id": "etw-thread-dpc-enable-cpu3",
-          "kind": "etw-trace",
-          "title": "WPR trace for ThreadDpcEnable CPU bounded run",
-          "location": "evidence/files/vm-tooling-staging/thread-dpc-enable-0-cpu3.etl.md",
-          "summary": "ETW trace captured during the bounded WinSAT CPU run for ThreadDpcEnable = 0 after a real reboot in Win25H2Clean.",
+          "evidence_id": "vm-thread-dpc-enable-cpu-runtime-summary",
+          "kind": "vm-test",
+          "title": "Canonical runtime summary for ThreadDpcEnable CPU bounded run",
+          "location": "evidence/raw/procmon/thread-dpc-enable-vm-suite-20260324/thread-dpc-enable-0-cpu3-runtime-summary.json",
+          "summary": "Checked-in runtime summary for the bounded CPU run. ThreadDpcEnable = 0 was applied from a missing baseline, the guest rebooted, WinSAT CPU completed, and the value was restored to missing after a second reboot. The old .etl.md file was only an external-capture placeholder and is no longer a live evidence reference.",
           "strength": "medium",
           "supports": [
             "behavior",
+            "rollback",
             "version-scope"
           ],
-          "origin": "VM ETW trace"
+          "origin": "VM test / probe"
         },
         {
-          "evidence_id": "etw-thread-dpc-enable-mem2",
-          "kind": "etw-trace",
-          "title": "WPR trace for ThreadDpcEnable memory bounded run",
-          "location": "evidence/files/vm-tooling-staging/thread-dpc-enable-0-mem2.etl.md",
-          "summary": "ETW trace captured during the bounded WinSAT memory run for ThreadDpcEnable = 0 after a real reboot in Win25H2Clean.",
+          "evidence_id": "vm-thread-dpc-enable-memory-runtime-summary",
+          "kind": "vm-test",
+          "title": "Canonical runtime summary for ThreadDpcEnable memory bounded run",
+          "location": "evidence/raw/procmon/thread-dpc-enable-vm-suite-20260324/thread-dpc-enable-0-mem2-runtime-summary.json",
+          "summary": "Checked-in runtime summary for the bounded memory run. ThreadDpcEnable = 0 was applied from a missing baseline, the guest rebooted, WinSAT memory completed, and the value was restored to missing after a second reboot. The old .etl.md file was only an external-capture placeholder and is no longer a live evidence reference.",
           "strength": "medium",
           "supports": [
             "behavior",
+            "rollback",
             "version-scope"
           ],
-          "origin": "VM ETW trace"
+          "origin": "VM test / probe"
         }
       ],
       "validation_proof": {
@@ -104303,8 +104336,8 @@
         }
       },
       "source_file": "research/records/system.memory-large-system-cache-client.review.json",
-      "source_file_sha256": "2c2773b8102b63e131d90ece74bc5e0d58828669e576cf804d7139989d1d0a1c",
-      "source_file_size_bytes": 9320,
+      "source_file_sha256": "7383fce5882fb6c1eaa96b1a03034b40e8c0f05a33f233f3c671166b27cac904",
+      "source_file_size_bytes": 9348,
       "name": "Large System Cache",
       "category": "System",
       "area": "Memory Management / Cache Mode",
@@ -104496,7 +104529,7 @@
         "key_found_on_page": true,
         "notes": "Guest-side reversible probe on Win25H2Clean; see the batch probe output in evidence/raw/runtime-diff/vm-batch-probe-20260320/vm-batch-probe-20260320.json"
       },
-      "validation_proof_sha256": "e6c7b375df3f43fb82890b956cf7740df58c08b3f10de5f7e783a227bdf5f24e",
+      "validation_proof_sha256": "ee34af9d0b85db65e4c29e81dee48df1c356024015796b4802722e5b7aedea8a",
       "provenance": null,
       "v31_evidence_root": null,
       "artifact_refs": [],
@@ -106906,8 +106939,8 @@
         }
       },
       "source_file": "research/records/system.priority-control.review.json",
-      "source_file_sha256": "23b36a6e9c2eb376baac4a0fc7987048ed66040b277972bbe1666715bb9ae7f0",
-      "source_file_size_bytes": 23128,
+      "source_file_sha256": "d2d20d7c1b2e2d05d809406efe7616703dccd6974b687e3b3132439614ee3d5d",
+      "source_file_size_bytes": 23144,
       "name": "Foreground Scheduling Priority / Win32PrioritySeparation",
       "category": "System",
       "area": "Scheduler / Priority Control",
