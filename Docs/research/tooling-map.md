@@ -38,7 +38,7 @@ These scripts are active entry points for day-to-day contributor work.
 | `registry-research-framework/scripts/check_single_tweak_app_qa.py` | canonical | Generate the app QA plan for one card before opening the desktop app. |
 | `registry-research-framework/scripts/check_promoted_tweak_app_qa_batch.py` | canonical | Plan or run promoted app-QA batches, including optional KVM execution. |
 | `registry-research-framework/scripts/check_app_retest_readiness.py` | canonical | Verify app-surface readiness before manual or VM app retesting. |
-| `scripts/vm-kvm/vm-health-check.py` | canonical | Non-mutating KVM/QGA health check before ETW, Procmon, Ghidra, or app-QA lanes. |
+| `scripts/vm-kvm/vm-health-check.py` | canonical | Non-mutating KVM/QGA and optional `--snapshot-name` health check before ETW, Procmon, Ghidra, app-QA, or value-experiment lanes. |
 | `scripts/vm-kvm/run-guest-app-tweak-qa-batch.py` | canonical | Host-driven KVM batch runner for shipped app-card QA. |
 | `scripts/vm-kvm/run-guest-registry-value-campaign.py` | canonical | Snapshot-safe registry value campaign runner for Operator96-style experiments. |
 | `scripts/vm-kvm/run-guest-registry-value-experiment.py` | canonical | One-value VM experiment runner with host noise gate, optional `--abort-on-noisy-host`, and reboot/rollback checks. |

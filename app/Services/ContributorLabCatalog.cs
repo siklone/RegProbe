@@ -49,6 +49,9 @@ public sealed record ContributorLabSnapshot(
     bool Operator96SurfaceReviewOk,
     bool VmHealthKnown,
     bool VmHealthOk,
+    bool VmSnapshotKnown,
+    bool VmSnapshotOk,
+    string VmSnapshotName,
     int Operator96RecordCount,
     int Operator96ReadyForAppCard,
     int Operator96NeedsLowNoiseRerun,
@@ -120,6 +123,10 @@ public static class ContributorLabCatalog
         var vmHealthOk = Text(vmHealth, "status") == "ok"
                          || Text(Object(vmHealth, "summary"), "status") == "ok"
                          || Text(Object(vmHealth, "qga"), "status") == "ok";
+        var vmSnapshot = Object(Object(vmHealth, "checks"), "snapshot");
+        var vmSnapshotKnown = vmSnapshot.ValueKind == JsonValueKind.Object;
+        var vmSnapshotOk = Text(vmSnapshot, "status") == "ok" && Bool(vmSnapshot, "exists");
+        var vmSnapshotName = Text(vmSnapshot, "snapshot_name");
 
         var runTier = aggregateOk && surfaceOk && appReadinessOk && appCardsOk
             ? "certified"
@@ -149,6 +156,9 @@ public static class ContributorLabCatalog
             surfaceOk,
             vmHealthKnown,
             vmHealthKnown && vmHealthOk,
+            vmSnapshotKnown,
+            vmSnapshotKnown && vmSnapshotOk,
+            string.IsNullOrWhiteSpace(vmSnapshotName) ? "clean-25h2-qga" : vmSnapshotName,
             Int(reviewSummary, "record_count"),
             Int(reviewSummary, "ready_for_bounded_app_card"),
             needsRerun,
@@ -240,7 +250,7 @@ public static class ContributorLabCatalog
             new(
                 "Certified VM health",
                 "Non-mutating QGA/snapshot preflight before any certified value experiment.",
-                "python3 scripts/vm-kvm/vm-health-check.py --domain regprobe-win11-25h2-session --connect qemu:///session --json",
+                "python3 scripts/vm-kvm/vm-health-check.py --domain regprobe-win11-25h2-session --connect qemu:///session --snapshot-name clean-25h2-qga --json",
                 certifiedReady ? "certified-ready" : "certified-required",
                 RequiresCertifiedVm: true,
                 MutatesGuest: false),
@@ -279,6 +289,13 @@ public static class ContributorLabCatalog
                 snapshot.VmHealthKnown ? snapshot.VmHealthOk ? "Ready" : "Needs attention" : "Unknown",
                 snapshot.VmHealthKnown ? "Latest VM health artifact was found." : "Run vm-health-check before certified mutation.",
                 snapshot.VmHealthKnown ? snapshot.VmHealthOk ? "ok" : "warning" : "neutral"),
+            new(
+                "VM snapshot receipt",
+                snapshot.VmSnapshotKnown ? snapshot.VmSnapshotOk ? "Ready" : "Needs attention" : "Unknown",
+                snapshot.VmSnapshotKnown
+                    ? $"{snapshot.VmSnapshotName} snapshot check is present in latest health artifact."
+                    : "Run vm-health-check with --snapshot-name clean-25h2-qga before certified mutation.",
+                snapshot.VmSnapshotKnown ? snapshot.VmSnapshotOk ? "ok" : "warning" : "neutral"),
             new("Run tier", snapshot.VerificationBadge, $"Current aggregate tier: {snapshot.RunTier}.", snapshot.ReferenceEligible ? "ok" : "warning"),
         ];
     }

@@ -194,6 +194,49 @@ def skipped_check(reason: str) -> dict[str, Any]:
     }
 
 
+def check_snapshot_info(domain: str, connect: str, snapshot_name: str, *, timeout: int) -> dict[str, Any]:
+    command = virsh_command(connect, ["snapshot-info", domain, snapshot_name])
+    try:
+        result = run_virsh(connect, ["snapshot-info", domain, snapshot_name], timeout=timeout)
+    except subprocess.TimeoutExpired as exc:
+        return {
+            "status": "timeout",
+            "command": command,
+            "snapshot_name": snapshot_name,
+            "timeout_seconds": timeout,
+            "error": f"virsh snapshot-info timed out after {timeout}s",
+            "stdout": (exc.stdout or "").strip() if isinstance(exc.stdout, str) else "",
+            "stderr": (exc.stderr or "").strip() if isinstance(exc.stderr, str) else "",
+        }
+
+    stdout = (result.stdout or "").strip()
+    stderr = (result.stderr or "").strip()
+    payload: dict[str, Any] = {
+        "status": "ok" if result.returncode == 0 else "error",
+        "command": command,
+        "returncode": result.returncode,
+        "snapshot_name": snapshot_name,
+        "exists": result.returncode == 0,
+        "stdout": stdout,
+        "stderr": stderr,
+        "info": parse_snapshot_info(stdout),
+    }
+    if result.returncode != 0:
+        payload["error"] = stderr or stdout or f"virsh snapshot-info exited with {result.returncode}"
+    return payload
+
+
+def parse_snapshot_info(stdout: str) -> dict[str, str]:
+    info: dict[str, str] = {}
+    for line in stdout.splitlines():
+        if ":" not in line:
+            continue
+        key, value = line.split(":", 1)
+        normalized = key.strip().lower().replace(" ", "_")
+        info[normalized] = value.strip()
+    return info
+
+
 def run_qga_preflight(
     *,
     domain: str,
@@ -201,6 +244,7 @@ def run_qga_preflight(
     timeout: int = 10,
     wait_timeout: int = 30,
     poll_interval: float = 1.0,
+    snapshot_name: str | None = None,
 ) -> dict[str, Any]:
     checks: dict[str, Any] = {}
     checks["domstate"] = check_domstate(domain, connect, timeout=timeout)
@@ -208,6 +252,8 @@ def run_qga_preflight(
         checks["guest_ping"] = skipped_check("domstate-not-running")
         checks["guest_info"] = skipped_check("domstate-not-running")
         checks["guest_exec"] = skipped_check("domstate-not-running")
+        if snapshot_name:
+            checks["snapshot"] = skipped_check("domstate-not-running")
         return preflight_payload(domain=domain, connect=connect, checks=checks)
 
     guest_ping, _ = run_agent_command(domain, {"execute": "guest-ping"}, connect=connect, timeout=timeout)
@@ -225,6 +271,8 @@ def run_qga_preflight(
     else:
         checks["guest_info"] = skipped_check("guest-ping-failed")
         checks["guest_exec"] = skipped_check("guest-ping-failed")
+    if snapshot_name:
+        checks["snapshot"] = check_snapshot_info(domain, connect, snapshot_name, timeout=timeout)
     return preflight_payload(domain=domain, connect=connect, checks=checks)
 
 

@@ -132,22 +132,71 @@ class VmKvmQgaPreflightTests(unittest.TestCase):
         self.assertIn("domstate", payload["failed_checks"])
         self.assertEqual(payload["checks"]["guest_ping"]["status"], "skipped")
 
+    def test_snapshot_name_adds_non_mutating_snapshot_check(self) -> None:
+        with mock.patch.object(
+            qga_preflight.subprocess,
+            "run",
+            side_effect=[
+                cp(["virsh"], 0, "running\n"),
+                cp(["virsh"], 0, qga({})),
+                cp(["virsh"], 0, qga({"version": "qga-test"})),
+                cp(["virsh"], 0, qga({"pid": 42})),
+                cp(["virsh"], 0, qga({"exited": True, "exitcode": 0, "out-data": base64.b64encode(b"nt authority\\system").decode("ascii")})),
+                cp(["virsh"], 0, "Name:           clean-25h2-qga\nState:          running\n"),
+            ],
+        ), mock.patch.object(qga_preflight.time, "time", return_value=0.0):
+            payload = qga_preflight.run_qga_preflight(
+                domain="vm",
+                connect="qemu:///session",
+                snapshot_name="clean-25h2-qga",
+            )
+
+        self.assertEqual(payload["status"], "ok")
+        self.assertEqual(payload["checks"]["snapshot"]["status"], "ok")
+        self.assertTrue(payload["checks"]["snapshot"]["exists"])
+        self.assertEqual(payload["checks"]["snapshot"]["snapshot_name"], "clean-25h2-qga")
+        self.assertEqual(payload["checks"]["snapshot"]["info"]["name"], "clean-25h2-qga")
+
+    def test_missing_snapshot_fails_health_contract_when_requested(self) -> None:
+        with mock.patch.object(
+            qga_preflight.subprocess,
+            "run",
+            side_effect=[
+                cp(["virsh"], 0, "running\n"),
+                cp(["virsh"], 0, qga({})),
+                cp(["virsh"], 0, qga({"version": "qga-test"})),
+                cp(["virsh"], 0, qga({"pid": 42})),
+                cp(["virsh"], 0, qga({"exited": True, "exitcode": 0})),
+                cp(["virsh"], 1, "", "Domain snapshot not found"),
+            ],
+        ), mock.patch.object(qga_preflight.time, "time", return_value=0.0):
+            payload = qga_preflight.run_qga_preflight(
+                domain="vm",
+                connect="qemu:///session",
+                snapshot_name="clean-25h2-qga",
+            )
+
+        self.assertEqual(payload["status"], "error")
+        self.assertIn("snapshot", payload["failed_checks"])
+        self.assertFalse(payload["checks"]["snapshot"]["exists"])
+
     def test_vm_health_check_cli_prints_json_contract(self) -> None:
         with mock.patch.object(
             sys,
             "argv",
-            ["vm-health-check.py", "--domain", "vm", "--connect", "qemu:///session", "--json"],
+            ["vm-health-check.py", "--domain", "vm", "--connect", "qemu:///session", "--snapshot-name", "clean", "--json"],
         ), mock.patch.object(
             vm_health_check,
             "run_qga_preflight",
             return_value={"status": "ok", "summary_source": "qga-preflight", "checks": {}},
-        ), mock.patch("sys.stdout", new_callable=io.StringIO) as stdout:
+        ) as preflight_mock, mock.patch("sys.stdout", new_callable=io.StringIO) as stdout:
             exit_code = vm_health_check.main()
 
         payload = json.loads(stdout.getvalue())
         self.assertEqual(exit_code, 0)
         self.assertEqual(payload["status"], "ok")
         self.assertEqual(payload["summary_source"], "qga-preflight")
+        self.assertEqual(preflight_mock.call_args.kwargs["snapshot_name"], "clean")
 
 
 if __name__ == "__main__":
