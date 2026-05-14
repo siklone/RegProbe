@@ -1,6 +1,6 @@
 # Custom Registry Value App Surface Review
 
-- Generated UTC: `2026-05-14T21:15:19Z`
+- Generated UTC: `2026-05-14T23:42:13Z`
 - Matrix: `registry-research-framework/audit/operator96-enriched-value-matrix-20260510.json`
 - Aggregate: `registry-research-framework/audit/operator96-low-noise-rerun-aggregate-20260512.json`
 - Records: `96`

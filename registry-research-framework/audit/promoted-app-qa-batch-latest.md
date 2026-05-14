@@ -1,7 +1,7 @@
 # Promoted App QA Batch
 
 - Status: PASS
-- Generated UTC: 2026-05-14T10:17:26Z
+- Generated UTC: 2026-05-14T23:30:55Z
 - Catalog candidates: 258
 - Selected candidates: 14
 - Planned apply-allowed candidates: 14
@@ -72,8 +72,8 @@
 - `audio.disable-beep` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
   card contract: ok | claim_boundary=true | lanes=docs, runtime, source, rollback
-- `cleanup.disable-reserved-storage` | success=true | status=not-applicable
-  summary: Reserved Storage is currently in use by Windows servicing. Wait for servicing operations to complete and try again later.
+- `cleanup.disable-reserved-storage` | success=true | status=ok
+  summary: Apply/verify path completed and rollback restored the tweak.
   card contract: ok | claim_boundary=true | lanes=docs, runtime, source, rollback
 - `developer.docker-performance` | success=true | status=ok
   summary: Apply/verify path completed and rollback restored the tweak.
