@@ -58,6 +58,32 @@ def candidate_proofs(record: dict[str, Any]) -> list[dict[str, Any]]:
     ]
 
 
+def promotion_checklist(record: dict[str, Any], proofs: list[dict[str, Any]], bucket: str) -> dict[str, Any]:
+    gate = record.get("app_surface_gate") or {}
+    default_status = normalize_text(record.get("default_status"))
+    clean_noise = bool(proofs) and all(
+        normalize_text(proof.get("host_noise")).lower() == "ok"
+        and normalize_text(proof.get("status")).lower() == "ok"
+        for proof in proofs
+    )
+    bounded_claims = bool(normalize_text(gate.get("claim_boundary")))
+    checklist = {
+        "known_default": default_status.startswith("known-"),
+        "rollback_tested": bool(gate.get("rollback_tested")),
+        "app_write_explicit": bool(gate.get("app_write_explicit")),
+        "bounded_claims": bounded_claims,
+        "clean_low_noise_vm_proofs": clean_noise,
+        "positive_bounded_evidence": bucket == "ready_for_bounded_app_card",
+        "normal_app_card_allowed": bucket == "ready_for_bounded_app_card",
+    }
+    checklist["missing"] = [
+        name
+        for name, value in checklist.items()
+        if name not in {"missing", "normal_app_card_allowed"} and not bool(value)
+    ]
+    return checklist
+
+
 def classify_record(record: dict[str, Any]) -> dict[str, Any]:
     gate = record.get("app_surface_gate") or {}
     proofs = candidate_proofs(record)
@@ -94,6 +120,7 @@ def classify_record(record: dict[str, Any]) -> dict[str, Any]:
     proof_verdicts = Counter(normalize_text(proof.get("verdict")) or "unknown" for proof in proofs)
     proof_noise = Counter(normalize_text(proof.get("host_noise")) or "unknown" for proof in proofs)
     proof_confidence = Counter(normalize_text(proof.get("confidence")) or "unknown" for proof in proofs)
+    checklist = promotion_checklist(record, proofs, bucket)
 
     return {
         "index": record.get("index"),
@@ -103,8 +130,12 @@ def classify_record(record: dict[str, Any]) -> dict[str, Any]:
         "source_quality": normalize_text(record.get("source_quality")),
         "app_surface_bucket": bucket,
         "app_surface_ready": bucket == "ready_for_bounded_app_card",
+        "normal_app_card_allowed": bucket == "ready_for_bounded_app_card",
+        "contributor_lab_surface": "bounded-card-review-candidate" if bucket == "ready_for_bounded_app_card" else "research-observation",
+        "surface_destination": "normal-app-card-review" if bucket == "ready_for_bounded_app_card" else "contributor-lab-research-only",
         "reasons": reasons,
         "gate": gate,
+        "promotion_checklist": checklist,
         "candidate_value_count": len(record.get("candidates") or []),
         "vm_validated_value_count": sum(1 for candidate in record.get("candidates") or [] if bool(candidate.get("vm_validated"))),
         "proof_verdict_counts": dict(sorted(proof_verdicts.items())),
@@ -146,6 +177,7 @@ def build_review(matrix_path: Path = DEFAULT_MATRIX, aggregate_path: Path | None
         },
         "policy": {
             "ship_rule": "Only ready_for_bounded_app_card may enter the app surface without another VM campaign.",
+            "contributor_lab_rule": "Clean Operator96 records that are not ready_for_bounded_app_card are Contributor Lab research observations, not end-user optimization cards.",
             "no_performance_claim_rule": "Low-confidence, harmful, noisy, or host-noise-unknown experiments are observations only.",
             "rerun_rule": "needs_low_noise_rerun means host noise was not clean; not_app_surface_ready means the run was clean enough to store but not positive/bounded enough to ship.",
             "aggregate_block_rule": "Aggregate non_ok or noisy_result_count greater than zero blocks all Operator96 app surfacing until a clean rerun exists.",
@@ -181,13 +213,14 @@ def render_markdown(review: dict[str, Any]) -> str:
         lines.append(f"- `{bucket}`: `{count}`")
 
     lines.extend(["", "## Records", ""])
-    lines.append("| # | Value | Bucket | Reason | Action |")
-    lines.append("|---:|---|---|---|---|")
+    lines.append("| # | Value | Destination | Bucket | Missing for app card | Action |")
+    lines.append("|---:|---|---|---|---|---|")
     for record in review.get("records") or []:
-        reasons = ", ".join(record.get("reasons") or [])
+        missing = ", ".join((record.get("promotion_checklist") or {}).get("missing") or [])
         lines.append(
             f"| {record.get('index')} | `{record.get('value_name')}` | "
-            f"`{record.get('app_surface_bucket')}` | {reasons} | {record.get('recommended_action')} |"
+            f"`{record.get('surface_destination')}` | `{record.get('app_surface_bucket')}` | "
+            f"{missing or 'none'} | {record.get('recommended_action')} |"
         )
 
     return "\n".join(lines) + "\n"

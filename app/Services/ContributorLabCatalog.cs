@@ -34,6 +34,9 @@ public sealed record ContributorObservation(
     string ValidatedValues,
     string ConfidenceSummary,
     string NoiseSummary,
+    string SurfaceDestination,
+    string PromotionChecklist,
+    string ClaimBoundary,
     string CommandHint);
 
 public sealed record ContributorLabSnapshot(
@@ -330,6 +333,9 @@ public static class ContributorLabCatalog
                 string.IsNullOrWhiteSpace(validatedValues) ? "none certified yet" : validatedValues,
                 Counts(reviewRecord, "proof_confidence_counts"),
                 Counts(reviewRecord, "proof_host_noise_counts"),
+                SurfaceDestination(reviewRecord),
+                PromotionChecklist(reviewRecord),
+                ClaimBoundary(reviewRecord),
                 command));
         }
 
@@ -378,6 +384,39 @@ public static class ContributorLabCatalog
         }
 
         return string.Join(", ", item.EnumerateObject().Select(prop => $"{prop.Name}={prop.Value}"));
+    }
+
+    private static string SurfaceDestination(JsonElement record)
+    {
+        var destination = Text(record, "surface_destination");
+        if (!string.IsNullOrWhiteSpace(destination))
+        {
+            return destination;
+        }
+
+        return Bool(record, "app_surface_ready") ? "normal-app-card-review" : "contributor-lab-research-only";
+    }
+
+    private static string PromotionChecklist(JsonElement record)
+    {
+        var checklist = Object(record, "promotion_checklist");
+        var missing = Strings(checklist, "missing");
+        if (missing.Count > 0)
+        {
+            return "missing: " + string.Join(", ", missing);
+        }
+
+        return Bool(record, "normal_app_card_allowed") || Bool(record, "app_surface_ready")
+            ? "complete for bounded card review"
+            : "research-only until app-card gates pass";
+    }
+
+    private static string ClaimBoundary(JsonElement record)
+    {
+        var boundary = Text(record, "claim_boundary");
+        return string.IsNullOrWhiteSpace(boundary)
+            ? "No user-facing performance claim; inspect evidence before promotion."
+            : boundary;
     }
 
     private static JsonDocument? ReadJson(string repoRoot, string relativePath)

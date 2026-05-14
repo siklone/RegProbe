@@ -52,6 +52,7 @@ class CleanupQuarantineLedgerTests(unittest.TestCase):
             self.assertEqual(item["live_reference_count"], 1)
             self.assertEqual(item["references_sample"], ["README.md"])
             self.assertFalse(item["delete_eligible"])
+            self.assertEqual(item["cleanup_status"], "retained-live-reference")
 
     def test_unreferenced_replaced_file_is_delete_eligible_after_review(self):
         with tempfile.TemporaryDirectory() as temp:
@@ -73,6 +74,7 @@ class CleanupQuarantineLedgerTests(unittest.TestCase):
 
             self.assertEqual(item["live_reference_count"], 0)
             self.assertTrue(item["delete_eligible"])
+            self.assertEqual(item["cleanup_status"], "delete-candidate")
 
     def test_audit_trail_references_are_counted_separately_from_blocking_references(self):
         with tempfile.TemporaryDirectory() as temp:
@@ -100,6 +102,45 @@ class CleanupQuarantineLedgerTests(unittest.TestCase):
             self.assertEqual(item["blocking_reference_count"], 0)
             self.assertEqual(item["audit_references_sample"], ["registry-research-framework/audit/cleanup-quarantine-ledger-20260510.md"])
             self.assertFalse(item["delete_eligible"])
+            self.assertEqual(item["cleanup_status"], "retained-audit-trail-reference")
+
+    def test_markdown_separates_delete_candidates_from_retained_inventory(self):
+        payload = {
+            "generated_utc": "2026-05-14T00:00:00Z",
+            "purpose": "test",
+            "deletion_policy": [],
+            "summary": {
+                "total_items": 1,
+                "delete_candidate_count": 0,
+                "retained_inventory_count": 1,
+                "referenced_count": 1,
+                "blocking_referenced_count": 1,
+                "audit_only_referenced_count": 0,
+                "delete_eligible_count": 0,
+                "total_size_bytes": 4,
+                "categories": {"test": 1},
+                "cleanup_status_counts": {"retained-live-reference": 1},
+            },
+            "items": [
+                {
+                    "path": "audit/keep.json",
+                    "category": "test",
+                    "cleanup_status": "retained-live-reference",
+                    "live_reference_count": 1,
+                    "blocking_reference_count": 1,
+                    "audit_reference_count": 0,
+                    "recommended_action": "keep-pending-review",
+                    "stale_reason": "still referenced",
+                }
+            ],
+        }
+
+        markdown = self.module.render_markdown(payload)
+
+        self.assertIn("## Delete Candidates", markdown)
+        self.assertIn("_No delete candidates in this ledger._", markdown)
+        self.assertIn("## Retained Inventory", markdown)
+        self.assertIn("retained-live-reference", markdown)
 
 
 if __name__ == "__main__":
