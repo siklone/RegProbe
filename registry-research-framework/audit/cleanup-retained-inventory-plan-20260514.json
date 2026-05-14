@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-14T16:38:26Z",
+  "generated_utc": "2026-05-14T17:04:58Z",
   "ledger": "registry-research-framework/audit/cleanup-quarantine-ledger-20260514.json",
   "purpose": "Action plan for cleanup retained inventory. It does not delete files and it does not redefine delete eligibility.",
   "rules": {
@@ -13,14 +13,14 @@
     "delete_ready_count": 0,
     "reference_migration_needed_count": 0,
     "audit_only_retained_count": 20,
-    "intentional_reference_keep_count": 4,
-    "needs_replacement_or_retention_decision_count": 65,
-    "retention_decision_queue_count": 65,
+    "intentional_reference_keep_count": 5,
+    "needs_replacement_or_retention_decision_count": 64,
+    "retention_decision_queue_count": 64,
     "retained_pending_review_count": 0,
     "release_state_counts": {
       "audit-only-retained": 20,
-      "intentional-reference-keep": 4,
-      "needs-replacement-or-retention-decision": 65
+      "intentional-reference-keep": 5,
+      "needs-replacement-or-retention-decision": 64
     },
     "decision_track_counts": {
       "archive-history-anchor": 10,
@@ -28,11 +28,13 @@
       "historical-audit-output": 25,
       "intentional-reference-keep": 4,
       "raw-trace-source-of-record": 25,
-      "staging-bundle-canonicalization": 5
+      "staging-bundle-canonicalization": 4,
+      "tooling-output-root": 1
     },
     "decision_status_counts": {
+      "active-tool-output-root": 1,
       "explicitly-retained": 4,
-      "needs-canonical-evidence-or-retention-note": 5,
+      "needs-canonical-evidence-or-retention-note": 4,
       "retain-history-anchor": 10,
       "retain-until-derived-parse-reviewed": 25,
       "retain-until-supersession-is-explicit": 25,
@@ -280,45 +282,6 @@
       ],
       "retention_rationale": "A derived perf CSV exists, but it is not a byte-for-byte replacement for the original ETL placeholder.",
       "next_canonicalization_step": "Retain until a new raw ETL/summary pair or explicit source-of-record decision replaces this placeholder."
-    },
-    {
-      "path": "evidence/files/vm-tooling-staging/ghidra-probes",
-      "category": "vm-tooling-staging-oldest-sample",
-      "cleanup_status": "retained-live-reference",
-      "release_state": "needs-replacement-or-retention-decision",
-      "delete_candidate_state": "not-a-delete-candidate",
-      "decision_track": "staging-bundle-canonicalization",
-      "decision_status": "needs-canonical-evidence-or-retention-note",
-      "evidence_role": "legacy staging output that may still be the only referenced proof for a record",
-      "retention_owner": "evidence",
-      "exit_criteria": "Find a canonical evidence/raw replacement or add an explicit keep rationale naming the owning record/note.",
-      "app_surface_policy": "technical-evidence-only until canonicalized",
-      "can_become_delete_candidate": false,
-      "blocking_reference_count": 2,
-      "audit_reference_count": 4,
-      "blocking_reference_classes": {
-        "other-reference": 2
-      },
-      "blocking_references_sample": [
-        "registry-research-framework/tools/run-path-aware-static-probe.ps1",
-        "scripts/vm/run-ghidra-string-xref-probe.ps1"
-      ],
-      "replacement_artifacts": [],
-      "recommended_action": "keep-pending-review",
-      "next_action": "Decide whether this staging bundle has a canonical evidence/raw replacement before attempting deletion.",
-      "stale_reason": "staging diagnostic bundle; verify no record/evidence-index dependency before deletion",
-      "staging_canonicalization": {
-        "canonicalization_state": "active-tool-output-root",
-        "owning_records": [],
-        "canonical_replacement_candidates": [],
-        "retention_rationale": "Current static-probe scripts still name this path as the host output root, so it is not a stale evidence bundle.",
-        "next_canonicalization_step": "Move script defaults only if a broader tooling-path cleanup is planned; do not delete as evidence cleanup."
-      },
-      "canonicalization_state": "active-tool-output-root",
-      "owning_records": [],
-      "canonical_replacement_candidates": [],
-      "retention_rationale": "Current static-probe scripts still name this path as the host output root, so it is not a stale evidence bundle.",
-      "next_canonicalization_step": "Move script defaults only if a broader tooling-path cleanup is planned; do not delete as evidence cleanup."
     },
     {
       "path": "evidence/files/vm-tooling-staging/defender-threat-file-hash-mpengine-1-20260325-100039",
@@ -2823,13 +2786,13 @@
       "path": "evidence/files/vm-tooling-staging/ghidra-probes",
       "category": "vm-tooling-staging-oldest-sample",
       "cleanup_status": "retained-live-reference",
-      "release_state": "needs-replacement-or-retention-decision",
+      "release_state": "intentional-reference-keep",
       "delete_candidate_state": "not-a-delete-candidate",
-      "decision_track": "staging-bundle-canonicalization",
-      "decision_status": "needs-canonical-evidence-or-retention-note",
-      "evidence_role": "legacy staging output that may still be the only referenced proof for a record",
-      "retention_owner": "evidence",
-      "exit_criteria": "Find a canonical evidence/raw replacement or add an explicit keep rationale naming the owning record/note.",
+      "decision_track": "tooling-output-root",
+      "decision_status": "active-tool-output-root",
+      "evidence_role": "active static-analysis output root used by current scripts",
+      "retention_owner": "tooling",
+      "exit_criteria": "Keep until a broader tooling-path migration changes script defaults and migrates any generated outputs.",
       "app_surface_policy": "technical-evidence-only until canonicalized",
       "can_become_delete_candidate": false,
       "blocking_reference_count": 2,
@@ -2843,7 +2806,7 @@
       ],
       "replacement_artifacts": [],
       "recommended_action": "keep-pending-review",
-      "next_action": "Decide whether this staging bundle has a canonical evidence/raw replacement before attempting deletion.",
+      "next_action": "Keep as an active tooling output root; do not treat as evidence cleanup or delete-candidate work.",
       "stale_reason": "staging diagnostic bundle; verify no record/evidence-index dependency before deletion",
       "staging_canonicalization": {
         "canonicalization_state": "active-tool-output-root",

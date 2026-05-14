@@ -179,6 +179,36 @@ class CleanupRetainedInventoryPlanTests(unittest.TestCase):
             )
             self.assertIn("multi-record VM batch", item["retention_rationale"])
 
+    def test_active_tool_output_root_is_not_retention_decision_queue(self):
+        with tempfile.TemporaryDirectory() as temp:
+            ledger = Path(temp) / "cleanup-quarantine-ledger.json"
+            write_ledger(
+                ledger,
+                [
+                    {
+                        "path": "evidence/files/vm-tooling-staging/ghidra-probes",
+                        "category": "vm-tooling-staging-oldest-sample",
+                        "cleanup_status": "retained-live-reference",
+                        "recommended_action": "keep-pending-review",
+                        "blocking_reference_count": 2,
+                        "blocking_references_sample": [
+                            "scripts/vm-kvm/run-ghidra-string-probe.py",
+                            "scripts/vm-kvm/run-ghidra-symbolized-analysis.py",
+                        ],
+                    }
+                ],
+            )
+
+            plan = self.module.build_plan(ledger)
+            item = plan["retained_inventory"][0]
+
+            self.assertEqual(plan["summary"]["retention_decision_queue_count"], 0)
+            self.assertEqual(plan["summary"]["intentional_reference_keep_count"], 1)
+            self.assertEqual(item["release_state"], "intentional-reference-keep")
+            self.assertEqual(item["decision_track"], "tooling-output-root")
+            self.assertEqual(item["canonicalization_state"], "active-tool-output-root")
+            self.assertNotIn(item, plan["retention_decision_queue"])
+
     def test_audit_only_references_have_explicit_release_state(self):
         with tempfile.TemporaryDirectory() as temp:
             ledger = Path(temp) / "cleanup-quarantine-ledger.json"
