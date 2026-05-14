@@ -39,7 +39,11 @@ public sealed class ContributorLabViewModelTests : IDisposable
         Assert.True(ContributorLabCatalog.IsAllowlistedCommand(
             "python3 registry-research-framework/scripts/check_single_tweak.py SystemResponsiveness --json"));
         Assert.True(ContributorLabCatalog.IsAllowlistedCommand(
+            "python3 registry-research-framework/scripts/check_single_tweak.py REPLACE_VALUE_NAME --expected-value 0 --expected-value 1 --json"));
+        Assert.True(ContributorLabCatalog.IsAllowlistedCommand(
             "py -3 scripts/vm-kvm/vm-health-check.py --domain regprobe-win11-25h2-session --json"));
+        Assert.True(ContributorLabCatalog.IsAllowlistedCommand(
+            "python3 scripts/vm-kvm/run-guest-registry-value-experiment.py --registry-path \"HKLM\\REPLACE\\KEY\\PATH\" --value-name REPLACE_VALUE_NAME --value-data REPLACE_DWORD_VALUE"));
 
         Assert.False(ContributorLabCatalog.IsAllowlistedCommand("cmd.exe /c del C:\\important"));
         Assert.False(ContributorLabCatalog.IsAllowlistedCommand(
@@ -54,8 +58,14 @@ public sealed class ContributorLabViewModelTests : IDisposable
         var packs = ContributorLabCatalog.BuildCommandPacks(_root, certifiedReady: true);
 
         Assert.Contains(packs, pack => pack.Title == "Representative promoted app QA batch" && pack.MutatesGuest && pack.RequiresCertifiedVm);
+        Assert.Contains(packs, pack => pack.Title == "Custom key/value lookup template" && !pack.MutatesGuest && !pack.RequiresCertifiedVm);
         Assert.Contains(packs, pack => pack.Title == "Custom value app-surface review" && !pack.MutatesGuest && !pack.RequiresCertifiedVm);
         Assert.Contains(packs, pack => pack.Title == "Custom value tranche rerun" && pack.MutatesGuest && pack.RequiresCertifiedVm);
+        Assert.Contains(packs, pack => pack.Title == "Custom key/value VM experiment template"
+                                      && pack.MutatesGuest
+                                      && pack.RequiresCertifiedVm
+                                      && pack.Command.Contains("REPLACE_VALUE_NAME", StringComparison.Ordinal)
+                                      && pack.Command.Contains("--abort-on-noisy-host", StringComparison.Ordinal));
         Assert.Contains(packs, pack => pack.Title == "Certified VM health"
                                       && pack.Command.Contains("--snapshot-name clean-25h2-qga", StringComparison.Ordinal));
         Assert.Contains(packs, pack => pack.Title == "Single value VM experiment"
@@ -91,6 +101,8 @@ public sealed class ContributorLabViewModelTests : IDisposable
         Assert.Contains("not_app_surface_ready=75", viewModel.Operator96GateBreakdown, StringComparison.Ordinal);
         Assert.Contains("legacy_campaign_id=operator96", viewModel.Operator96GateBreakdown, StringComparison.Ordinal);
         Assert.Contains("Review only ready_for_bounded_app_card", viewModel.Operator96NextActionSummary, StringComparison.Ordinal);
+        Assert.Contains("user-supplied key/value", viewModel.CustomValueWorkflowSummary, StringComparison.Ordinal);
+        Assert.Contains("per-run confirmation", viewModel.CertifiedMutationGuardSummary, StringComparison.Ordinal);
     }
 
     [Fact]

@@ -253,7 +253,9 @@ If you do not know the repo yet, use this order:
    read-only single-tweak, readiness, app-card contract, and custom registry
    value experiment app-surface review commands. VM mutation packs stay
    snapshot/certified gated and should be treated as command templates to run
-   from a repo shell.
+   from a repo shell. For a user-supplied key/value, use the lookup template
+   first, then run one edited VM experiment command per value so boot, app
+   smoke, benchmark observation, and rollback proof remain attributable.
 4. Run a single-setting inspection before editing anything. On Linux hosts
    without `Microsoft.WindowsDesktop.App`, use the Python mirror; use the .NET
    CLI in the Windows VM or on a desktop-runtime host only when you explicitly

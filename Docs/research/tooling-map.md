@@ -97,7 +97,9 @@ belongs to the VM scripts listed above, with a clean snapshot, healthy QGA, and
 tight host-noise gate. The v1 command packs cover single-tweak lookup, app QA
 planning, app readiness/contracts, custom value app-surface review,
 representative promoted app-QA batches, single-value VM experiments, and small
-custom-value tranche reruns.
+custom-value tranche reruns. Custom key/value templates are intentionally
+copy/edit commands: contributors replace the key path, value name, and DWORD
+value in a repo shell, then run one value per snapshot-safe VM experiment.
 
 ## Legacy And Historical Tooling
 
