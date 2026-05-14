@@ -44,6 +44,8 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
 
     public RelayCommand ShowRepairsCommand => _shellCoordinator.ShowRepairsCommand;
 
+    public RelayCommand ShowContributorCommand => _shellCoordinator.ShowContributorCommand;
+
     public RelayCommand ShowConfigurationCommand => _shellCoordinator.ShowConfigurationCommand;
 
     public RelayCommand ShowAboutCommand => _shellCoordinator.ShowAboutCommand;
@@ -58,13 +60,17 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
 
     public bool IsRepairsViewActive => _shellCoordinator.IsRepairsViewActive;
 
+    public bool IsContributorViewActive => _shellCoordinator.IsContributorViewActive;
+
     public bool IsAboutViewActive => _shellCoordinator.IsAboutViewActive;
 
     public string HostContextLabel => _hostContextLabel;
 
     public bool CanUseStagingEnvironment => false;
 
-    public bool CanFocusSearch => !IsAboutViewActive;
+    public bool IsContributorEntryVisible => ContributorMode.IsEnabled;
+
+    public bool CanFocusSearch => IsConfigurationViewActive || IsRepairsViewActive;
 
     public string FocusSearchLabel => CanFocusSearch ? "Search" : "Search unavailable";
 
@@ -143,6 +149,15 @@ public sealed class MainViewModel : ViewModelBase, IDisposable
             _statusStripTokens.Add(new ShellStatusStripToken($"{_workspaceViewModel.MaintenanceWorkspaceCount} actions", "neutral"));
             _statusStripTokens.Add(new ShellStatusStripToken(_workspaceViewModel.InventoryStatusMessage, "info"));
             _statusStripTokens.Add(new ShellStatusStripToken(_workspaceViewModel.IsBulkRunning ? "Running now" : "Ready", _workspaceViewModel.IsBulkRunning ? "info" : "ok"));
+            return;
+        }
+
+        if (IsContributorViewActive)
+        {
+            _statusStripTokens.Add(new ShellStatusStripToken("Contributor Lab", "warning"));
+            _statusStripTokens.Add(new ShellStatusStripToken("VM-first", "info"));
+            _statusStripTokens.Add(new ShellStatusStripToken("No direct mutation", "ok"));
+            _statusStripTokens.Add(new ShellStatusStripToken("Research observations", "neutral"));
             return;
         }
 

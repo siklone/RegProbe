@@ -1,7 +1,8 @@
 {
   "schema_version": "1.0",
-  "generated_utc": "2026-05-13T23:50:12Z",
+  "generated_utc": "2026-05-14T00:44:04Z",
   "matrix": "registry-research-framework/audit/operator96-enriched-value-matrix-20260510.json",
+  "aggregate": "registry-research-framework/audit/operator96-low-noise-rerun-aggregate-20260512.json",
   "campaign_id": "operator96-app-surface-review-20260510",
   "status": "PASS",
   "summary": {
@@ -11,6 +12,8 @@
     "not_app_surface_ready": 79,
     "blocked_by_gate": 17,
     "blocked_by_safety": 0,
+    "aggregate_surface_blocked": false,
+    "aggregate_blockers": [],
     "bucket_counts": {
       "blocked_by_gate": 17,
       "not_app_surface_ready": 79
@@ -19,7 +22,8 @@
   "policy": {
     "ship_rule": "Only ready_for_bounded_app_card may enter the app surface without another VM campaign.",
     "no_performance_claim_rule": "Low-confidence, harmful, noisy, or host-noise-unknown experiments are observations only.",
-    "rerun_rule": "needs_low_noise_rerun means host noise was not clean; not_app_surface_ready means the run was clean enough to store but not positive/bounded enough to ship."
+    "rerun_rule": "needs_low_noise_rerun means host noise was not clean; not_app_surface_ready means the run was clean enough to store but not positive/bounded enough to ship.",
+    "aggregate_block_rule": "Aggregate non_ok or noisy_result_count greater than zero blocks all Operator96 app surfacing until a clean rerun exists."
   },
   "records": [
     {
