@@ -51,6 +51,8 @@ public sealed class ContributorLabViewModel : ViewModelBase
 
     public int Operator96ReadyForAppCard => Snapshot.Operator96ReadyForAppCard;
 
+    public int Operator96ResearchOnlyCount => System.Math.Max(0, Operator96RecordCount - Operator96ReadyForAppCard);
+
     public int Operator96NeedsLowNoiseRerun => Snapshot.Operator96NeedsLowNoiseRerun;
 
     public int Operator96NoisyResultCount => Snapshot.Operator96NoisyResultCount;
