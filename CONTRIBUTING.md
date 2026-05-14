@@ -225,6 +225,7 @@ Read these first:
 - [research/evidence-atlas.md](research/evidence-atlas.md)
 - [research/evidence-audit.json](research/evidence-audit.json)
 - [Docs/research/tooling-map.md](Docs/research/tooling-map.md)
+- [Docs/research/artifact-map.md](Docs/research/artifact-map.md)
 - [Docs/research/run-tiers.md](Docs/research/run-tiers.md)
 - [Docs/research/vm-workflow.md](Docs/research/vm-workflow.md)
 - [Docs/research/runtime-escalation.md](Docs/research/runtime-escalation.md)
@@ -238,8 +239,10 @@ If you do not know the repo yet, use this order:
 
 1. Build and test the repo once so you know the baseline is green.
 2. Read the [research tooling map](Docs/research/tooling-map.md) and
+   [artifact map](Docs/research/artifact-map.md), then read
    [run tiers](Docs/research/run-tiers.md) so you know which scripts are
-   canonical and which run artifacts are reference-eligible.
+   canonical, which outputs are current, and which run artifacts are
+   reference-eligible.
 3. If you are on Windows, open Contributor Lab from the app to check local
    readiness and copy the safe command pack for the task.
 4. Run a single-setting inspection before editing anything. On Linux hosts
@@ -295,7 +298,7 @@ If you are validating the desktop app itself, `research qa-plan` is the next hop
 
 When you run several live promoted batches, treat `registry-research-framework/audit/promoted-app-qa-batch-latest.json` as the newest snapshot only. The cumulative view lives in `registry-research-framework/audit/promoted-app-qa-batch-history.jsonl` plus the paired coverage files `promoted-app-qa-coverage-latest.json` and `promoted-app-qa-coverage-latest.md`.
 
-Current audit snapshot: as of 2026-05-08, app retest readiness is passing with `265` app-surface entries, `0` app-only backlog items, `261` apply-allowed records, and `0` missing rollback stories. Promoted app-QA coverage is `258/258` (`100.0%`) with no uncovered promoted app-QA candidates remaining. If you change shipped providers, card mapping, promotion gates, evidence links, or rollback behavior, refresh this readiness and the promoted app-QA batch coverage before handing the repo back.
+Current audit snapshot: as of 2026-05-14, app retest readiness is passing with `265` app-surface entries, `0` app-only backlog items, `261` apply-allowed records, and `0` missing rollback stories. App-card contracts are `258/258 PASS`, promoted app-QA coverage is `258/258` (`100.0%`), and the latest live promoted app-QA batch is `14/14 PASS`. Operator96 low-noise reruns have `non_ok=0` and `noisy_result_count=0`, but remain Contributor Lab observations because `ready_for_bounded_app_card=0`. If you change shipped providers, card mapping, promotion gates, evidence links, or rollback behavior, refresh the artifact map, readiness, app-card contracts, and promoted app-QA batch coverage before handing the repo back.
 
 For a single-card retest, keep a JSON artifact when the result will be needed later:
 

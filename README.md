@@ -171,6 +171,7 @@ The current v3.6 research snapshot is zero-pending: no active blockers, no promo
 - I want to contribute research: [Contributing](CONTRIBUTING.md)
 - I want contributor tools inside the app: open Contributor Lab from a repo/dev build
 - I want the contributor tooling map: [Research tooling map](Docs/research/tooling-map.md)
+- I want the current artifact map instead of raw audit folders: [Research artifact map](Docs/research/artifact-map.md)
 - I want to understand certified vs community runs: [Run tiers](Docs/research/run-tiers.md)
 
 The docs are now split the same way the repo is meant to feel from the outside: [Docs/product](Docs/product/README.md) for public-facing usage and trust signals, [Docs/research](Docs/research/README.md) for contributor and validation depth.
