@@ -1,6 +1,6 @@
 # Research Artifact Map
 
-Generated: `2026-05-14T12:52:30Z`
+Generated: `2026-05-14T13:29:09Z`
 
 This is the contributor entrypoint for current research artifacts. Use it
 instead of browsing raw audit folders first.
@@ -13,12 +13,13 @@ instead of browsing raw audit folders first.
 - Operator96 app-card ready: `0`.
 - Operator96 noisy results: `0`; non-ok results: `0`.
 - Cleanup delete-eligible items: `0`.
+- Cleanup retained inventory: `89`; reference migration needed: `15`.
 
 ## Rules
 
 - `end_user_surface`: Normal users start from the WPF app and validated app-surface records, not raw audit folders.
 - `operator96_surface`: Operator96 remains Contributor Lab / research observation unless ready_for_bounded_app_card is positive and all gates stay clean.
-- `cleanup`: Do not delete archived/raw evidence unless the cleanup quarantine ledger reports live_reference_count=0 and a replacement or explicit obsolete reason exists.
+- `cleanup`: Do not delete archived/raw evidence unless the cleanup quarantine ledger reports live_reference_count=0 and a replacement or explicit obsolete reason exists. Use the retained inventory plan to reduce references before deletion.
 - `performance_claims`: No benchmark/performance claim ships from a single noisy, low-confidence, or community-only observation.
 
 ## Canonical Artifacts
@@ -34,6 +35,7 @@ instead of browsing raw audit folders first.
 | `operator96-low-noise-aggregate` | `canonical-research` | `ok` | contributor, research | `registry-research-framework/audit/operator96-low-noise-rerun-aggregate-20260512.json` | You need to know whether noisy/non-ok reruns remain. | You are building normal end-user app cards. |
 | `operator96-app-surface-review` | `canonical-research` | `research-only-ok` | contributor, research | `registry-research-framework/audit/operator96-app-surface-review-20260510.json` | You need to decide whether any Operator96 record may enter app cards. | You want an optimization claim; this review blocks unbounded claims. |
 | `cleanup-quarantine-ledger` | `canonical-safety-ledger` | `no-delete-eligible` | maintainer, contributor | `registry-research-framework/audit/cleanup-quarantine-ledger-20260514.json` | Before deleting or moving any archived/raw evidence or historical parse artifact. | You are looking for shipped app state; use app-surface/readiness artifacts. |
+| `cleanup-retained-inventory-plan` | `canonical-action-plan` | `retained-plan-ready` | maintainer, contributor | `registry-research-framework/audit/cleanup-retained-inventory-plan-20260514.json` | After the quarantine ledger reports retained inventory and you need to reduce references or decide explicit retention. | You need the deletion safety contract itself; use cleanup-quarantine-ledger. |
 | `vm-health` | `canonical-latest` | `ok` | contributor, VM operator | `registry-research-framework/audit/vm-health-check-latest.json` | Before ETW, Ghidra, app deploy smoke, or registry mutation experiments. | You need historical VM incident context. |
 | `kvm-app-publish-deploy-smoke` | `canonical-latest` | `ok` | contributor, release QA | `registry-research-framework/audit/kvm-app-publish-deploy-smoke-latest.json` | After WPF/app-shell changes or before manual app retesting. | You need card-level apply/rollback evidence. |
 | `kvm-contributor-lab-smoke` | `canonical-latest` | `ok` | contributor, release QA | `registry-research-framework/audit/kvm-app-contributor-lab-smoke-latest.json` | After Contributor Lab, startup navigation, or contributor readiness UI changes. | You need normal end-user card apply/rollback evidence. |
